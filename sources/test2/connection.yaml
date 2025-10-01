@@ -2,7 +2,7 @@
 type: csv
 name: test2
 options:
-  options: decimal_separator=",",delim=";"
+  options: delim=";"
 # Advanced Options, you probably don't want to change this
 buildOptions:
   batchSize: 1000000
