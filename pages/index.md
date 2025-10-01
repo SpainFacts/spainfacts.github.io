@@ -13,7 +13,7 @@ SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objet
 Exploramos la composición demográfica de España, incluyendo datos sobre lugar de nacimiento y distribución poblacional.
 
 ```sql poblacion_por_nacionalidad
-  select "Lugar de nacimiento" as Nacionalidad, sum(Total) as Total
+  select "Lugar de nacimiento" as Nacionalidad, SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) AS Total
   from test2.poblacion
   group by "Lugar de nacimiento"
   order by Total desc
