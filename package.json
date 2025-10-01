@@ -2,13 +2,14 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
-    "build": "evidence build",
-    "build:strict": "evidence build:strict",
-    "dev": "evidence dev --open /",
-    "test": "evidence build",
-    "sources": "evidence sources",
-    "sources:strict": "evidence sources --strict",
-    "preview": "evidence preview"
+    "build": "EVIDENCE_BUILD_DIR=./build/spainfacts evidence build",
+    "build:strict": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence build:strict",
+    "dev": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence dev --open /",
+    "test": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence build",
+    "sources": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence sources",
+    "sources:strict": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence sources --strict",
+    "preview": "EVIDENCE_BUILD_DIR=./build/my-evidence-app evidence preview"
+    
   },
   "engines": {
     "npm": ">=7.0.0",
