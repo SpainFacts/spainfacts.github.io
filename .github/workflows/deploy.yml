@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Necesario para GitHub Pages
-          lfs: true   # Si usas Git LFS
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
