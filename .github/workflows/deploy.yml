@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Necesario para GitHub Pages
+          lfs: true   # Si usas Git LFS
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -21,6 +24,7 @@ jobs:
 
       - name: Build
         env:
+          NODE_OPTIONS: "--max-old-space-size=6144"  # ¡Clave! Aumenta memoria a 6 GB para CSV grandes
           BASE_PATH: '/'  # ¡Cambio clave! Raíz para repos <username>.github.io
           # Descomenta y agrega secrets si usas fuentes de datos
           # EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
