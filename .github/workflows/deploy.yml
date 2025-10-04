@@ -28,8 +28,8 @@ jobs:
           # Establece la ruta base para SvelteKit/Evidence.
           # Debe ser el nombre del repositorio, no el evento completo.
           # Por ejemplo, si el repo es 'spainfacts.github.io', el BASE_PATH es '/spainfacts.github.io'
-          BASE_PATH: '/${{ github.event.repository.name }}' 
-          # BASE_PATH: '/spainfacts.github.io' # Podrías usar esto si lo anterior falla
+          #BASE_PATH: '/${{ github.event.repository.name }}' 
+          BASE_PATH: '/spainfacts.github.io' # Podrías usar esto si lo anterior falla
           
           ## Añade y descomenta cualquier variable de entorno aquí
           ## EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
