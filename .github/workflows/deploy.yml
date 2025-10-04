@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main' # or whichever branch you want to deploy from
+    branches: 'main' # o la rama que uses
 
 jobs:
   build:
@@ -11,9 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Permite a Git LFS descargar los archivos grandes rastreados
-          lfs: true
-          
+          lfs: true  # Para archivos grandes si los tienes
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,25 +24,18 @@ jobs:
 
       - name: Build
         env:
-          # Establece la ruta base para SvelteKit/Evidence.
-          # Debe ser el nombre del repositorio, no el evento completo.
-          # Por ejemplo, si el repo es 'spainfacts.github.io', el BASE_PATH es '/spainfacts.github.io'
-          BASE_PATH: '/${{ github.event.repository.name }}' 
-          # BASE_PATH: '/spainfacts.github.io' # Podrías usar esto si lo anterior falla
-          
-          ## Añade y descomenta cualquier variable de entorno aquí
-          ## EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
-          ## EVIDENCE_SOURCE__my_source__private_key: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__PRIVATE_KEY }}
+          BASE_PATH: '/'  # ¡Cambio clave! Raíz para repos <username>.github.io
+          # Descomenta y agrega secrets si usas fuentes de datos
+          # EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
+          # EVIDENCE_SOURCE__my_source__private_key: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__PRIVATE_KEY }}
         run: |
           npm run sources
-          npm run build
+          npm run build  # Asegúrate de que salga a ./build (sin subcarpeta)
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          # SvelteKit/Evidence generalmente construye en 'build' o 'out'. 
-          # Usaremos 'build' y la ruta completa del repositorio para compatibilidad con BASE_PATH.
-          path: 'build' 
+          path: 'build'  # ¡Cambio clave! Sin subcarpeta del repo
 
   deploy:
     needs: build
