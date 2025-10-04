@@ -27,6 +27,7 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=6144"  # ¡Clave! Aumenta memoria a 6 GB para CSV grandes
           BASE_PATH: '/'  # ¡Cambio clave! Raíz para repos <username>.github.io
           # Descomenta y agrega secrets si usas fuentes de datos
+          EVIDENCE_SOURCE__mother__token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
           # EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
           # EVIDENCE_SOURCE__my_source__private_key: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__PRIVATE_KEY }}
         run: |

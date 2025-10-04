@@ -29,7 +29,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
   SELECT 
        RIGHT("Periodo",4) as Year, 
       SUM(CAST(REPLACE("Total", ',', '') AS BIGINT))/COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE 
       "Edad simple" = 'Todas las edades' 
       AND "Sexo" = 'Total' 
@@ -44,7 +44,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
    SELECT 
        RIGHT("Periodo",4) as Year, 
       SUM(CAST(REPLACE("Total", ',', '') AS BIGINT))/COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE 
       "Edad simple" = 'Todas las edades' 
       AND "Sexo" = 'Total' 
@@ -62,7 +62,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
 ```sql items
  SELECT 
        RIGHT("Periodo",4) as Year, 
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE 
       "Edad simple" = 'Todas las edades' 
       AND "Sexo" = 'Total' 
@@ -72,7 +72,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
 ```sql items
  SELECT 
        RIGHT("Periodo",4) as Year, 
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE 
       "Edad simple" = 'Todas las edades' 
       AND "Sexo" = 'Total' 
@@ -86,7 +86,7 @@ WITH Poblacion_Anual AS (
     SELECT 
         CAST(RIGHT("Periodo",4) AS INT) AS Year, 
         SUM(CAST(REPLACE("Total", ',', '') AS BIGINT)) / COUNT("Total") AS Poblacion_Actual
-    FROM test2.poblacion_provincias
+    FROM mother.poblacion_provincias
     WHERE 
         "Edad simple" = 'Todas las edades' 
         AND "Sexo" = 'Total' 
@@ -172,7 +172,7 @@ La poblacion de España ha crecido {fmt((((total_poblacion_year_fin[0].Total-tot
  SELECT 
        CAST(RIGHT("Periodo",4) AS INT) as Year, 
       SUM(CAST(REPLACE("Total", ',', '') AS BIGINT))/COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE 
       "Edad simple" = 'Todas las edades' 
       AND "Sexo" = 'Total' 
@@ -200,7 +200,7 @@ La distribución por sexo(número mujeres dividido entre número hombres) era  {
 
 ```sql poblacion_por_sexo
   SELECT RIGHT("Periodo",4) as Year, "Sexo", SUM(CAST(REPLACE(Total, ',', '') AS BIGINT))/COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE "Provincias" = 'Total Nacional' AND "Sexo" != 'Total' and "Edad simple" = 'Todas las edades' and (RIGHT("Periodo",4) =${inputs.año_inicio.value} OR RIGHT("Periodo",4) =${inputs.año_fin.value})
   GROUP BY  RIGHT("Periodo",4), "Sexo"
   ORDER BY Year DESC, Total DESC
@@ -276,7 +276,7 @@ Año {inputs.año_fin.value}
     CAST(RIGHT("Periodo", 4) AS INT) AS Year, 
     "Sexo", 
     SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) / COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE "Provincias" = 'Total Nacional' 
     AND "Sexo" != 'Total' 
     AND "Edad simple" = 'Todas las edades' 
@@ -290,7 +290,7 @@ mujeres AS (
     CAST(RIGHT("Periodo", 4) AS INT) AS Year, 
     "Sexo", 
     SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) / COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE "Provincias" = 'Total Nacional' 
     AND "Sexo" != 'Total' 
     AND "Edad simple" = 'Todas las edades' 
@@ -329,7 +329,7 @@ ORDER BY h.Year DESC;
 
 ```sql poblacion_por_sexo2
   SELECT "Edad simple",RIGHT("Periodo",4) as Year, "Sexo", SUM(CAST(REPLACE(Total, ',', '') AS BIGINT))/COUNT(Total) AS Total
-  FROM test2.poblacion_provincias
+  FROM mother.poblacion_provincias
   WHERE "Provincias" = 'Total Nacional' AND "Sexo" != 'Total' and "Edad simple" != 'Todas las edades' and RIGHT("Periodo",4) =${inputs.año_inicio.value} and Total IS NOT NULL
   GROUP BY  RIGHT("Periodo",4), "Sexo","Edad simple"
   ORDER BY Year DESC, Total DESC
@@ -358,7 +358,7 @@ WITH EdadesLimpias AS (
         END AS EdadNumerica,
         SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) / COUNT(Total) AS TotalPromedio
     FROM
-        test2.poblacion_provincias
+        mother.poblacion_provincias
     WHERE
         "Provincias" = 'Total Nacional'
         AND "Sexo" != 'Total'
@@ -482,13 +482,13 @@ La distribución geográfica de la población en España varía significativamen
 
 ```sql orders_by_state_inicio
   SELECT SUBSTRING("Provincias",1,2) as statecode,SUBSTRING("Provincias",3) as Provincias, SUM(CAST(REPLACE(Total, ',', '') AS BIGINT))/COUNT(Total) AS "Población"
-  FROM test2.poblacion_provincias 
+  FROM mother.poblacion_provincias 
   WHERE "Edad simple" = 'Todas las edades' AND "Sexo" = 'Total' AND RIGHT("Periodo",4) =${inputs.año_inicio.value} and "Provincias" != 'Total Nacional' and Total is not null
   GROUP BY "Provincias"
 ``` 
 ```sql orders_by_state_fin
   SELECT SUBSTRING("Provincias",1,2) as statecode,SUBSTRING("Provincias",3) as Provincias, SUM(CAST(REPLACE(Total, ',', '') AS BIGINT))/COUNT(Total) AS "Población"
-  FROM test2.poblacion_provincias 
+  FROM mother.poblacion_provincias 
   WHERE "Edad simple" = 'Todas las edades' AND "Sexo" = 'Total' AND RIGHT("Periodo",4) =${inputs.año_fin.value} and "Provincias" != 'Total Nacional' and Total is not null
   GROUP BY "Provincias"
 ``` 
@@ -499,7 +499,7 @@ La distribución geográfica de la población en España varía significativamen
         SUBSTRING("Provincias", 3) AS Provincias,
         SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) / COUNT(Total) AS Poblacion_Inicio
     FROM
-        test2.poblacion_provincias
+        mother.poblacion_provincias
     WHERE
         "Edad simple" = 'Todas las edades'
         AND "Sexo" = 'Total'
@@ -515,7 +515,7 @@ orders_by_state_fin AS (
         SUBSTRING("Provincias", 3) AS Provincias,
         SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) / COUNT(Total) AS Poblacion_Fin
     FROM
-        test2.poblacion_provincias
+        mother.poblacion_provincias
     WHERE
         "Edad simple" = 'Todas las edades'
         AND "Sexo" = 'Total'

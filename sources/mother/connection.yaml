@@ -1,0 +1,5 @@
+# This file was automatically generated
+name: mother
+type: motherduck
+options:
+  database: SpainFacts
