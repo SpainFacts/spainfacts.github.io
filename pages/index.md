@@ -469,7 +469,9 @@ La distribución geográfica de la población en España varía significativamen
     ]}  />
  
    <DataTable data={orders_by_state_inicio}/> 
+
     </Tab>
+
 
     <Tab label="Poblacion Total en {inputs.año_fin.value}">
            <AreaMap 
@@ -592,70 +594,6 @@ Para una pirámide poblacional, Evidence soporta visualizaciones avanzadas. Ejem
 - Desarrollar secciones sobre diversidad étnica y migración
 
 ## Recursos
-
-
-<ECharts config={{
-    tooltip: {
-        trigger: 'item',
-        formatter: function(params) {
-            if (params.value) {
-                return `<strong>${params.name}</strong><br/>
-                        <span style="color: grey;">Población:</span> 
-                        <span style="color: green;">${params.value.toLocaleString()}</span>`;
-            }
-            return params.name;
-        }
-    },
-    visualMap: {
-        min: 0,
-        max: Math.max(...orders_by_state_diff.map(d => d.value || 0)),
-        text: ['Alto', 'Bajo'],
-        realtime: false,
-        calculable: true,
-        inRange: {
-            color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695']
-        },
-        left: 'left',
-        top: 'bottom'
-    },
-    series: [
-        {
-            name: 'Población',
-            type: 'map',
-            map: 'Spain',
-            roam: true,
-            itemStyle: {
-                borderColor: '#404a59',
-                borderWidth: 0.5
-            },
-            emphasis: {
-                label: {
-                    show: true
-                },
-                itemStyle: {
-                    areaColor: '#ffd700',
-                    borderWidth: 1
-                }
-            },
-            select: {
-                label: {
-                    show: true
-                },
-                itemStyle: {
-                    areaColor: '#ffd700'
-                }
-            },
-            layoutCenter: ['50%', '50%'],
-            layoutSize: '100%',
-            data: orders_by_state_diff
-        }
-    ]
-}}
-registerMap={{
-    mapName: 'Spain',
-    geoJSON: '/spain-provinces.geojson'
-}}
-/>
 - [Instituto Nacional de Estadística (INE) - Población residente](https://www.ine.es/jaxiT3/Tabla.htm?t=56938)
 - [INE - Cifras de población](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176951)
 - [INE - Población por nacionalidad](https://www.ine.es/jaxiT3/Tabla.htm?t=59587)
