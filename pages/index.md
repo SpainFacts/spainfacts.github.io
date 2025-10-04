@@ -418,7 +418,67 @@ La población extranjera ha crecido notablemente, representando alrededor del 13
 
 ## ¿Dónde viven las personas en España? 
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
+<Tabs>
+ 
+    <Tab label="Poblacion Total en {inputs.año_inicio.value}">
+           <AreaMap 
+    data={orders_by_state_inicio} 
+    areaCol="statecode"
+    geoJsonUrl="./spain-provinces.geojson"
+    geoId="cod_prov"
+    value="Población"
+    tooltip={[
+    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+    {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+    ]}  />
+ 
+   <DataTable data={orders_by_state_inicio}/> 
 
+    </Tab>
+
+
+    <Tab label="Poblacion Total en {inputs.año_fin.value}">
+           <AreaMap 
+    data={orders_by_state_fin} 
+    areaCol="statecode"
+    geoJsonUrl="./spain-provinces.geojson"
+    geoId="cod_prov"
+    value="Población"
+    colorPalette={[ '#0f1a5d','#e4d7f7',]}
+    tooltip={[
+    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+    {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+]}  />
+    </Tab>
+        <Tab label="Cambio en #">
+           <AreaMap 
+    data={orders_by_state_diff} 
+    areaCol="statecode"
+    geoJsonUrl="./spain-provinces.geojson"
+    geoId="cod_prov"
+    value="Cambio_Absoluto"
+    colorPalette={['#bf6f2f', '#1c4738']}
+    tooltip={[
+    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+    {id: 'Cambio_Absoluto', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+]}  />
+    </Tab>
+    
+    
+            <Tab label="Cambio en %">
+           <AreaMap 
+    data={orders_by_state_diff} 
+    areaCol="statecode"
+    geoJsonUrl="./spain-provinces.geojson"
+    geoId="cod_prov"
+    value="Porcentaje_Cambio"
+    colorPalette={['#bf6f2f', '#1c4738']}
+    tooltip={[
+    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+    {id: 'Porcentaje_Cambio', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+]}  />
+    </Tab>
+</Tabs>
 
 ```sql orders_by_state_inicio
   SELECT SUBSTRING("Provincias",1,2) as statecode,SUBSTRING("Provincias",3) as Provincias, SUM(CAST(REPLACE(Total, ',', '') AS BIGINT))/COUNT(Total) AS "Población"
