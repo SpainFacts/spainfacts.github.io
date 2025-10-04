@@ -408,26 +408,6 @@ ORDER BY
     END) DESC;
  
 ```
-<Grid >
-<FunnelChart
-    data={poblacion_por_sexo_edad.where(`Sexo = 'Mujeres'`)}
-    nameCol="RangoEdad"
-    valueCol="TotalAgrupado"
-    funnelSort="ascending"
-    funnelAlign=right
-    legend=false
-    title="Mujeres"
-/>
-<FunnelChart
-    data={poblacion_por_sexo_edad.where(`Sexo = 'Hombres'`)}
-    nameCol="RangoEdad"
-    valueCol="TotalAgrupado"
-    funnelSort="ascending"
-    funnelAlign=left
-    legend=false
-    title="Hombres"
-/>
-</Grid>
 
 
 ## ¿Cómo ha cambiado la composición nacional en España?
