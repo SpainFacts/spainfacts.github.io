@@ -434,23 +434,7 @@ ORDER BY
 
 La población extranjera ha crecido notablemente, representando alrededor del 13-15% de la población total en años recientes. Asumiendo que tu tabla incluye un campo "Nacionalidad" (o ajusta según "Lugar de nacimiento": 'España' vs 'Extranjero'), aquí una visualización comparativa.
 
-```sql poblacion_por_nacionalidad
-  SELECT "Periodo" as Year, "Nacionalidad", SUM(CAST(REPLACE(Total, ',', '') AS BIGINT)) AS Total
-  FROM test2.poblacion
-  WHERE "Sexo" = 'Total' AND "Nacionalidad" IN ('Española', 'Extranjera')
-  GROUP BY "Periodo", "Nacionalidad"
-  ORDER BY Year ASC
-```
 
-<LineChart
-  data={poblacion_por_nacionalidad}
-  title="Población por nacionalidad (Española vs Extranjera)"
-  x="Year"
-  y="Total"
-  series="Nacionalidad"
-  yAxisTitle="Población"
-  curve="linear"
-/>
 
 ## ¿Dónde viven las personas en España? 
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
