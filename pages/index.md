@@ -272,31 +272,32 @@ La distribución geográfica de la población en España varía significativamen
 <Tabs>
 
     <Tab label="Poblacion Total en {inputs.año_inicio.value}">
-    <AreaMap
-    data={orders_by_state_inicio}
-    areaCol="statecode"
-    geoJsonUrl="./spain-provinces.geojson"
-    geoId="cod_prov"
-    value="Población"
-    tooltip={[
-    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-    {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-    ]} />
+        <AreaMap
+          data={orders_by_state_inicio}
+          areaCol="statecode"
+          geoJsonUrl="./spain-provinces.geojson"
+          geoId="cod_prov"
+          value="Población"
+          tooltip={[
+          {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+          {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+          ]} />
     </Tab>
     <Tab label="Poblacion Total en {inputs.año_fin.value}">
            <AreaMap 
-    data={orders_by_state_fin} 
-    areaCol="statecode"
-    geoJsonUrl="./spain-provinces.geojson"
-    geoId="cod_prov"
-    value="Población"
-    colorPalette={[ '#0f1a5d','#e4d7f7',]}
-    tooltip={[
-    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-    {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-]}  />
+        data={orders_by_state_fin} 
+        areaCol="statecode"
+        geoJsonUrl="./spain-provinces.geojson"
+        geoId="cod_prov"
+        value="Población"
+        colorPalette={[ '#0f1a5d','#e4d7f7',]}
+        tooltip={[
+        {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+          {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+        ]}  />
     </Tab>
-        <Tab label="Cambio en #">
+    
+    <Tab label="Cambio en #">
            <AreaMap 
     data={orders_by_state_diff} 
     areaCol="statecode"
