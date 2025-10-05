@@ -4,11 +4,11 @@
   "scripts": {
     "build": "./build/spainfacts build",
     "build:strict": "./build/spainfacts build:strict",
-    "dev": "./build/spainfacts dev --open /",
-    "test": "./build/spainfacts build",
-    "sources": "./build/spainfacts sources",
-    "sources:strict": "./build/spainfacts sources --strict",
-    "preview": "./build/spainfacts preview"
+    "dev": "evidence dev --open /",
+    "test": "evidence build",
+    "sources": "evidence sources",
+    "sources:strict": "evidence sources --strict",
+    "preview": "evidence preview"
   },
   "engines": {
     "npm": ">=7.0.0",
