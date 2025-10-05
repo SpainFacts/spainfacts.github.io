@@ -235,7 +235,7 @@ mujeres AS (
   WHERE Sexo = 'Mujeres'
 )
 SELECT 
-  h.Year, 
+  Cast(h.Year AS INTEGER) AS Year, 
   h.Total AS Hombres, 
   m.Total AS Mujeres, 
   CAST(m.Total AS DECIMAL) / CAST(h.Total AS DECIMAL) AS Ratio_Mujeres_Hombres
@@ -270,10 +270,10 @@ ORDER BY h.Year DESC;
 ## ¿Dónde viven las personas en España? 
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
 <Tabs>
- 
+
     <Tab label="Poblacion Total en {inputs.año_inicio.value}">
-    <AreaMap 
-    data={orders_by_state_inicio} 
+    <AreaMap
+    data={orders_by_state_inicio}
     areaCol="statecode"
     geoJsonUrl="./spain-provinces.geojson"
     geoId="cod_prov"
@@ -282,7 +282,6 @@ La distribución geográfica de la población en España varía significativamen
     {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
     {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
     ]} />
-   <DataTable data={orders_by_state_inicio}/> 
     </Tab>
     <Tab label="Poblacion Total en {inputs.año_fin.value}">
            <AreaMap 
@@ -326,6 +325,7 @@ La distribución geográfica de la población en España varía significativamen
 ]}  />
     </Tab>
 </Tabs>
+<DataTable data={orders_by_state_diff}/> 
 
 ```sql orders_by_state_inicio
   SELECT statecode, Provincias, Población
@@ -356,7 +356,31 @@ INNER JOIN
 ## ¿Cómo es la distribución de edades en España?
 
 España presenta una población envejecida, con un alto porcentaje de personas mayores de 65 años (alrededor del 20,91%). Para esta sección, considera cargar datos de edad desde INE (e.g., tabla con grupos quinquenales). Aquí un ejemplo asumiendo una tabla "poblacion_edad".
-
+```sql poblacion_por_sexo_edad_inicio
+  SELECT *
+  FROM mother.totalAnoSexoEdad
+  where Year = ${inputs.año_inicio.value}
+```
+<Grid >
+<FunnelChart
+    data={poblacion_por_sexo_edad_inicio.where(`Sexo = 'Mujeres'`)}
+    nameCol="RangoEdad"
+    valueCol="TotalAgrupado"
+    funnelSort="ascending"
+    funnelAlign=right
+    legend=false
+    title="Mujeres"
+/>
+<FunnelChart
+    data={poblacion_por_sexo_edad_inicio.where(`Sexo = 'Hombres'`)}
+    nameCol="RangoEdad"
+    valueCol="TotalAgrupado"
+    funnelSort="ascending"
+    funnelAlign=left
+    legend=false
+    title="Hombres"
+/>
+</Grid>
 
 ## Distribución por edad y sexo
 
