@@ -16,6 +16,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
     name=año_inicio
     data={items}
     value=Year
+    defaultValue="1971"
 />
 <Dropdown 
     name=año_fin
@@ -271,7 +272,7 @@ La distribución geográfica de la población en España varía significativamen
 <Tabs>
  
     <Tab label="Poblacion Total en {inputs.año_inicio.value}">
-           <AreaMap 
+    <AreaMap 
     data={orders_by_state_inicio} 
     areaCol="statecode"
     geoJsonUrl="./spain-provinces.geojson"
@@ -280,13 +281,9 @@ La distribución geográfica de la población en España varía significativamen
     tooltip={[
     {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
     {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-    ]}  />
- 
+    ]} />
    <DataTable data={orders_by_state_inicio}/> 
-
     </Tab>
-
-
     <Tab label="Poblacion Total en {inputs.año_fin.value}">
            <AreaMap 
     data={orders_by_state_fin} 
@@ -341,7 +338,6 @@ La distribución geográfica de la población en España varía significativamen
   WHERE Year=${inputs.año_fin.value}
 ``` 
 ```sql orders_by_state_diff
-
 SELECT
 i.statecode,
     i.Provincias,
