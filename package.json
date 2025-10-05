@@ -2,8 +2,8 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
-    "build": "/build/spainfacts build",
-    "build:strict": "/build/spainfacts build:strict",
+    "build": "/spainfacts build",
+    "build:strict": "/spainfacts build:strict",
     "dev": "evidence dev --open /",
     "test": "evidence build",
     "sources": "evidence sources",
