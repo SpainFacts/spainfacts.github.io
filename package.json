@@ -2,13 +2,13 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
-    "build": "evidence build",
-    "build:strict": "evidence build:strict",
-    "dev": "evidence dev --open /",
-    "test": "evidence build",
-    "sources": "evidence sources",
-    "sources:strict": "evidence sources --strict",
-    "preview": "evidence preview"
+    "build": "./build/spainfacts build",
+    "build:strict": "./build/spainfacts build:strict",
+    "dev": "./build/spainfacts dev --open /",
+    "test": "./build/spainfacts build",
+    "sources": "./build/spainfacts sources",
+    "sources:strict": "./build/spainfacts sources --strict",
+    "preview": "./build/spainfacts preview"
   },
   "engines": {
     "npm": ">=7.0.0",
