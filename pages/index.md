@@ -145,7 +145,6 @@ La poblacion de España ha crecido {fmt((((total_poblacion_year_fin[0].Total-tot
 
 ## Población por sexo
 
-La distribución por sexo(número mujeres dividido entre número hombres) era  {fmt((((poblacion_por_sexo[0].Total) / poblacion_por_sexo[1].Total) ), '#,##0.00%')} y es {fmt((((poblacion_por_sexo[2].Total) / poblacion_por_sexo[3].Total) ), '#,##0.00%')} en {fmt(inputs.año_inicio.value,)} y {inputs.año_fin.value} respectivamente.
 
 ```sql poblacion_por_sexo
   SELECT Year,Sexo, Total
@@ -261,17 +260,10 @@ ORDER BY h.Year DESC;
 />
 
 
-
 ```sql poblacion_por_sexo_edad
   SELECT *
   FROM mother.totalAnoSexoEdad
 ```
-
-
-## ¿Cómo ha cambiado la composición nacional en España?
-
-La población extranjera ha crecido notablemente, representando alrededor del 13-15% de la población total en años recientes. Asumiendo que tu tabla incluye un campo "Nacionalidad" (o ajusta según "Lugar de nacimiento": 'España' vs 'Extranjero'), aquí una visualización comparativa.
-
 
 
 ## ¿Dónde viven las personas en España? 
@@ -368,7 +360,6 @@ INNER JOIN
 ## ¿Cómo es la distribución de edades en España?
 
 España presenta una población envejecida, con un alto porcentaje de personas mayores de 65 años (alrededor del 20,91%). Para esta sección, considera cargar datos de edad desde INE (e.g., tabla con grupos quinquenales). Aquí un ejemplo asumiendo una tabla "poblacion_edad".
-
 
 
 ## Distribución por edad y sexo
