@@ -5,6 +5,6 @@
 	export let data;
 </script>
 
-<EvidenceDefaultLayout {data} hideSidebar=true logo="/logo16.svg">	
+<EvidenceDefaultLayout {data} logo="/logo16.svg">
 	<slot slot="content" />
 </EvidenceDefaultLayout>
