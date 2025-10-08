@@ -362,27 +362,271 @@ España presenta una población envejecida, con un alto porcentaje de personas m
   FROM mother.totalAnoSexoEdad
   where Year = ${inputs.año_inicio.value}
 ```
-<Grid >
-<FunnelChart
-    data={poblacion_por_sexo_edad_inicio.where(`Sexo = 'Mujeres'`)}
-    nameCol="RangoEdad"
-    valueCol="TotalAgrupado"
-    funnelSort="ascending"
-    funnelAlign=right
-    legend=false
-    title="Mujeres"
+```sql poblacion_por_sexo_edad_inicio_mujeres
+  SELECT *
+  FROM mother.totalAnoSexoEdad
+  where Year = ${inputs.año_inicio.value} and Sexo = 'Mujeres'
+```
+```sql poblacion_por_sexo_edad_inicio_hombres
+  SELECT *
+  FROM mother.totalAnoSexoEdad
+  where Year = ${inputs.año_inicio.value} and Sexo = 'Hombres'
+```
+```sql poblacion_por_sexo_edad_fin
+  SELECT *
+  FROM mother.totalAnoSexoEdad
+  where Year = ${inputs.año_fin.value}
+```
+<Grid cols=2>
+ <ECharts
+  config={{
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      formatter: function (params) {
+        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+      }
+    },
+    legend: {
+      top: '5%',
+      left: 'center',
+      data: ['Mujeres', 'Hombres']
+    },
+    grid: [
+      { // Left pyramid (Mujeres)
+        left: '5%',
+        width: '40%',
+        bottom: '3%',
+        containLabel: false
+      },
+      { // Right pyramid (Hombres)
+        left: '60 %', // Larger gap for labels
+        width: '40%',
+        bottom: '3%',
+        containLabel: false
+      }
+    ],
+    xAxis: [
+      {
+        type: 'value',
+        gridIndex: 0,
+        inverse: true,
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisLabel: { formatter: value => Math.abs(value) }
+      },
+      {
+        type: 'value',
+        gridIndex: 1,
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisLabel: { formatter: value => Math.abs(value) }
+      }
+    ],
+   yAxis: [
+      { // Left pyramid yAxis (shows labels in middle)
+        type: 'category',
+        gridIndex: 0,
+        position: 'right',
+        inverse: false, // Cambia a true si quieres el mayor al inicio
+        axisLabel: { show: true, inside: false, interval: 0 },
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        data: [...new Set(poblacion_por_sexo_edad_inicio_mujeres.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]); // Extrae el inicio del rango (ej. 61 de "61-65 años")
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Ascendente: de menor a mayor
+            // Para descendente, usa: return rangeB - rangeA;
+          })
+      },
+      { // Right pyramid yAxis (hidden labels)
+        type: 'category',
+        gridIndex: 1,
+        position: 'left',
+        inverse: false, // Coincide con el yAxis izquierdo
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        data: [...new Set(poblacion_por_sexo_edad_inicio_hombres.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Ascendente
+          })
+      }
+    ],
+    series: [
+      {
+        name: 'Mujeres',
+        type: 'bar',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
+        itemStyle: { color: '#6a1b9a' }, // Purple
+        label: { show: false },
+        emphasis: { focus: 'series' },
+        data: [...new Set(poblacion_por_sexo_edad_inicio_mujeres.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Coincide con yAxis
+          })
+          .map(rango => {
+            const row = poblacion_por_sexo_edad_inicio_mujeres.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
+            return row ? row.TotalAgrupado : 0;
+          })
+      },
+      {
+        name: 'Hombres',
+        type: 'bar',
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        itemStyle: { color: '#388e3c' }, // Green
+        label: { show: false },
+        emphasis: { focus: 'series' },
+        data: [...new Set(poblacion_por_sexo_edad_inicio_hombres.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Coincide con yAxis
+          })
+          .map(rango => {
+            const row = poblacion_por_sexo_edad_inicio_hombres.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
+            return row ? row.TotalAgrupado : 0;
+          })
+      }
+    ]
+  }}
 />
-<FunnelChart
-    data={poblacion_por_sexo_edad_inicio.where(`Sexo = 'Hombres'`)}
-    nameCol="RangoEdad"
-    valueCol="TotalAgrupado"
-    funnelSort="ascending"
-    funnelAlign=left
-    legend=false
-    title="Hombres"
+ <ECharts
+  config={{
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      formatter: function (params) {
+        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+      }
+    },
+    legend: {
+      top: '5%',
+      left: 'center',
+      data: ['Mujeres', 'Hombres']
+    },
+    grid: [
+      { // Left pyramid (Mujeres)
+        left: '5%',
+        width: '40%',
+        bottom: '3%',
+        containLabel: false
+      },
+      { // Right pyramid (Hombres)
+        left: '60%', // Larger gap for labels
+        width: '40%',
+        bottom: '3%',
+        containLabel: false
+      }
+    ],
+    xAxis: [
+      {
+        type: 'value',
+        gridIndex: 0,
+        inverse: true,
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisLabel: { formatter: value => Math.abs(value) }
+      },
+      {
+        type: 'value',
+        gridIndex: 1,
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisLabel: { formatter: value => Math.abs(value) }
+      }
+    ],
+   yAxis: [
+      { // Left pyramid yAxis (shows labels in middle)
+        type: 'category',
+        gridIndex: 0,
+        position: 'right',
+        inverse: false, // Cambia a true si quieres el mayor al inicio
+        axisLabel: { show: true, inside: false ,interval:0},
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]); // Extrae el inicio del rango (ej. 61 de "61-65 años")
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Ascendente: de menor a mayor
+            // Para descendente, usa: return rangeB - rangeA;
+          })
+      },
+      { // Right pyramid yAxis (hidden labels)
+        type: 'category',
+        gridIndex: 1,
+        position: 'left',
+        inverse: false, // Coincide con el yAxis izquierdo
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        axisLine: { show: false },
+        splitLine: { show: false },
+        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Ascendente
+          })
+      }
+    ],
+    series: [
+      {
+        name: 'Mujeres',
+        type: 'bar',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
+        itemStyle: { color: '#6a1b9a' }, // Purple
+        label: { show: false },
+        emphasis: { focus: 'series' },
+        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Coincide con yAxis
+          })
+          .map(rango => {
+            const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
+            return row ? row.TotalAgrupado : 0;
+          })
+      },
+      {
+        name: 'Hombres',
+        type: 'bar',
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        itemStyle: { color: '#388e3c' }, // Green
+        label: { show: false },
+        emphasis: { focus: 'series' },
+        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
+          .sort((a, b) => {
+            const rangeA = parseInt(a.split('-')[0]);
+            const rangeB = parseInt(b.split('-')[0]);
+            return rangeA - rangeB; // Coincide con yAxis
+          })
+          .map(rango => {
+            const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
+            return row ? row.TotalAgrupado : 0;
+          })
+      }
+    ]
+  }}
 />
 </Grid>
-
 ## Distribución por edad y sexo
 
 Para una pirámide poblacional, Evidence soporta visualizaciones avanzadas. Ejemplo con datos de 2024 (0-4 años: 1.726.528 total, etc.). Integra datos reales en tu DB para interactividad.
