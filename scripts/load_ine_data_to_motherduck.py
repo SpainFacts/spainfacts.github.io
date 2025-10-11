@@ -4,21 +4,18 @@ import duckdb
 import os
 
 # --- Configuration ---
-MOTHERDUCK_TOKEN = os.getenv('motherduck_token')
+MOTHERDUCK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmp1YW5qb3JAZ21haWwuY29tIiwic2Vzc2lvbiI6InNhbmp1YW5qb3IuZ21haWwuY29tIiwicGF0IjoidHRUbzJacVJVV0ZkNE1FU3hxanNydHpyY2FSbEg3N19TeTN0NGhvYnliOCIsInVzZXJJZCI6ImNlMjU1MTlmLTQ1NmQtNDBlMy04MzY2LWM5MzlkYTEzMDVmMyIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc1OTkyODM3NX0.m_0VatsTyy2Uw3I9kgIGIoWnFI69ZSCf9ZXb9k1VFNo"
 DATABASE_NAME = 'SpainFacts'
 BASE_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/"
-
-# Dictionary of indicators to fetch.
-# Keys are the table names we'll use in our database.
-# Values are their corresponding INE table identifiers.
+BASE_URL="https://www.ine.es/wstempus/csv_sc/es/DATOS_TABLA/"
 INDICATORS = {
     'ipc': '50902',          # Índice de Precios de Consumo (IPC)
-    'unemployment': '4920'   # Tasa de paro por sexo y grupo de edad
+    'unemployment': '65292'  # Tasa de paro por sexo y grupo de edad
 }
 
 def load_ine_data_to_motherduck():
     """
-    Connects to the INE API, downloads data, and loads it into MotherDuck.
+    Connects to the INE API, downloads data, and loads it into MotherDuck without renaming columns.
     """
     if not MOTHERDUCK_TOKEN:
         print("Error: motherduck_token environment variable not set.")
@@ -48,18 +45,35 @@ def load_ine_data_to_motherduck():
             latest_series = data[-1]['Data']
             df = pd.DataFrame(latest_series)
 
-            df = df.rename(columns={'Fecha': 'date', 'Valor': 'value'})
-            df['date'] = pd.to_datetime(df['date'], unit='ms')
-            df['value'] = pd.to_numeric(df['value'])
+            # Print available columns for debugging
+            print(f"Available columns in DataFrame for '{table_name}': {list(df.columns)}")
+
+            # Handle data types without renaming columns
+            if 'Fecha' in df.columns:
+                df['Fecha'] = pd.to_datetime(df['Fecha'], unit='ms')
+            if 'Valor' in df.columns:
+                df['Valor'] = pd.to_numeric(df['Valor'], errors='coerce')
+
+            # Convert other columns to string to ensure compatibility (modify as needed)
+            for col in df.columns:
+                if col not in ['Fecha', 'Valor']:
+                    df[col] = df[col].astype(str)
+
             print("Data transformed successfully.")
 
             # --- 3. Load data to MotherDuck ---
             print(f"Loading data into MotherDuck table: {table_name}...")
             # Use CREATE OR REPLACE TABLE to make the operation idempotent
-            # Use CREATE OR REPLACE TABLE to make the operation idempotent
             con.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM df")
             print(f"Successfully loaded data into '{table_name}'.")
 
+            # Verify table schema
+            schema = con.execute(f"DESCRIBE {table_name}").fetchall()
+            print(f"Schema for table '{table_name}':")
+            for col in schema:
+                print(f"- {col[0]} ({col[1]})")
+
+        # Verify all tables in the database
         print("\nVerifying all tables in the database...")
         all_tables = con.execute("SHOW TABLES").fetchall()
         print("Tables currently in database:")

@@ -1,5 +1,5 @@
 ---
-title: Inflación (IPC) en España
+title: Inflación (IPC)
 ---
 
 # Evolución de la Inflación (IPC)
