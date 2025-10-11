@@ -1,14 +1,14 @@
 
 
 ```sql orders_by_state_inicio
-  SELECT statecode, Provincias, Población
-  FROM mother.totalAnoProvincia 
-  WHERE Year=1971
+    SELECT statecode, Provincias, CAST(REPLACE(Población, ',', '') AS FLOAT) AS Población
+    FROM mother.totalAnoProvincia 
+    WHERE Year=1971
 ``` 
 ```sql orders_by_state_fin
-    SELECT statecode, Provincias, Población
-  FROM mother.totalAnoProvincia 
-  WHERE Year=2021
+    SELECT statecode, Provincias, CAST(REPLACE(Población, ',', '') AS FLOAT) AS Población
+    FROM mother.totalAnoProvincia 
+    WHERE Year=2021
 ``` 
 ```sql orders_by_state_diff
 SELECT
@@ -34,7 +34,23 @@ INNER JOIN
 </script>
 
 <FranceMap
-    data={orders_by_state_inicio} 
-    region=statecode
+    mapName="Spain"
+    nameProperty="code"
+    data={orders_by_state_inicio}
+    region="statecode"
     value="Población"
+    colorScale="bluegreen"
+    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
 />
+    <Tab label="Poblacion Total en {inputs.año_inicio.value}">
+        <AreaMap
+          data={orders_by_state_inicio}
+          areaCol="statecode"
+          geoJsonUrl="./spain-provinces.geojson"
+          geoId="cod_prov"
+          value="Población"
+          tooltip={[
+          {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
+          {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
+          ]} />
+    </Tab>

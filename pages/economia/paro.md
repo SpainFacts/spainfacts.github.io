@@ -1,7 +1,6 @@
 ---
-title: Tasa de Paro en España
+title: Tasa de Paro 
 ---
-
 # Evolución de la Tasa de Paro
 
 La tasa de paro es uno de los indicadores más importantes para medir la salud del mercado laboral de un país. Representa el porcentaje de la población activa que se encuentra desempleada.

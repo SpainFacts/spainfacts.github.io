@@ -1,5 +1,5 @@
 ---
-title: Datos Económicos de España
+title: Datos Económicos
 ---
 
 # Panel de Datos Económicos

@@ -165,55 +165,65 @@ where Year = ${inputs.año_fin.value}
 <Grid cols=2>
 <Group>
 Año {inputs.año_inicio.value}
-<ECharts config={
-    {
-        tooltip: {
-            formatter: '{b}: {c} ({d}%)'
-        },
-          legend: {
+<ECharts config={{
+  tooltip: {
+    formatter: ({ name, value, percent }) => {
+      const millones = value / 1e6;
+      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return `${name}: ${texto} M (${percent}%)`;
+    }
+  },
+  legend: {
     top: '5%',
     left: 'center'
   },
-      series: [
-        {
-          type: 'pie',
-               label: {
-        show: false,
-        position: 'center'
-      },
-          radius: ['40%', '70%'],
-          data: [...donut_data_inicio],
+  series: [
+    {
+      type: 'pie',
+      radius: ['40%', '70%'],
+      label: {
+        show: true,
+        position: 'inside',
+        formatter: ({ value }) => {
+          const millones = value / 1e6;
+          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
         }
-      ]
-      }
+      },
+      data: [...donut_data_inicio]
     }
-/>
+  ]
+}} />
 </Group>
 <Group>
 Año {inputs.año_fin.value}
-<ECharts config={
-    {
-        tooltip: {
-            formatter: '{b}: {c} ({d}%)'
-        },
-          legend: {
+<ECharts config={{
+  tooltip: {
+    formatter: ({ name, value, percent }) => {
+      const millones = value / 1e6;
+      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return `${name}: ${texto} M (${percent}%)`;
+    }
+  },
+  legend: {
     top: '5%',
     left: 'center'
   },
-      series: [
-        {
-          type: 'pie',
-               label: {
-        show: false,
-        position: 'center'
-      },
-          radius: ['40%', '70%'],
-          data: [...donut_data_fin],
+  series: [
+    {
+      type: 'pie',
+      radius: ['40%', '70%'],
+      label: {
+        show: true,
+        position: 'inside',
+        formatter: ({ value }) => {
+          const millones = value / 1e6;
+          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
         }
-      ]
-      }
+      },
+      data: [...donut_data_fin]
     }
-/>
+  ]
+}} />
 </Group>
 </Grid>
 
@@ -269,61 +279,62 @@ ORDER BY h.Year DESC;
 
 ## ¿Dónde viven las personas en España? 
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
+    <script>
+    // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
+    import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
+    import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
+</script>
 <Tabs>
-
     <Tab label="Poblacion Total en {inputs.año_inicio.value}">
-        <AreaMap
-          data={orders_by_state_inicio}
-          areaCol="statecode"
-          geoJsonUrl="./spain-provinces.geojson"
-          geoId="cod_prov"
-          value="Población"
-          tooltip={[
-          {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-          {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-          ]} />
-    </Tab>
+
+<FranceMap
+    mapName="Spain"
+    nameProperty="code"
+    data={orders_by_state_inicio}
+    region="statecode"
+    value="Población"
+    colorScale="bluegreen"
+    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+/>
+</Tab>
+
+
     <Tab label="Poblacion Total en {inputs.año_fin.value}">
-           <AreaMap 
-        data={orders_by_state_fin} 
-        areaCol="statecode"
-        geoJsonUrl="./spain-provinces.geojson"
-        geoId="cod_prov"
-        value="Población"
-        colorPalette={[ '#0f1a5d','#e4d7f7',]}
-        tooltip={[
-        {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-          {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-        ]}  />
+<FranceMap
+    mapName="Spain"
+    nameProperty="code"
+    data={orders_by_state_fin}
+    region="statecode"
+    value="Población"
+    colorScale="bluegreen"
+    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+/>
     </Tab>
     
     <Tab label="Cambio en #">
-           <AreaMap 
-    data={orders_by_state_diff} 
-    areaCol="statecode"
-    geoJsonUrl="./spain-provinces.geojson"
-    geoId="cod_prov"
+      <FranceMap
+    mapName="Spain"
+    nameProperty="code"
+    data={orders_by_state_diff}
+    region="statecode"
     value="Cambio_Absoluto"
+    colorScale="bluegreen"
     colorPalette={['#bf6f2f', '#1c4738']}
-    tooltip={[
-    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-    {id: 'Cambio_Absoluto', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-]}  />
+/>
+
     </Tab>
     
     
             <Tab label="Cambio en %">
-           <AreaMap 
-    data={orders_by_state_diff} 
-    areaCol="statecode"
-    geoJsonUrl="./spain-provinces.geojson"
-    geoId="cod_prov"
+       <FranceMap
+    mapName="Spain"
+    nameProperty="code"
+    data={orders_by_state_diff}
+    region="statecode"
     value="Porcentaje_Cambio"
+    colorScale="bluegreen"
     colorPalette={['#bf6f2f', '#1c4738']}
-    tooltip={[
-    {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
-    {id: 'Porcentaje_Cambio', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
-]}  />
+/>
     </Tab>
 </Tabs>
 <DataTable data={orders_by_state_diff}/> 
@@ -356,21 +367,10 @@ INNER JOIN
 ``` 
 ## ¿Cómo es la distribución de edades en España?
 
-España presenta una población envejecida, con un alto porcentaje de personas mayores de 65 años (alrededor del 20,91%). Para esta sección, considera cargar datos de edad desde INE (e.g., tabla con grupos quinquenales). Aquí un ejemplo asumiendo una tabla "poblacion_edad".
 ```sql poblacion_por_sexo_edad_inicio
   SELECT *
   FROM mother.totalAnoSexoEdad
   where Year = ${inputs.año_inicio.value}
-```
-```sql poblacion_por_sexo_edad_inicio_mujeres
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  where Year = ${inputs.año_inicio.value} and Sexo = 'Mujeres'
-```
-```sql poblacion_por_sexo_edad_inicio_hombres
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  where Year = ${inputs.año_inicio.value} and Sexo = 'Hombres'
 ```
 ```sql poblacion_por_sexo_edad_fin
   SELECT *
@@ -378,6 +378,8 @@ España presenta una población envejecida, con un alto porcentaje de personas m
   where Year = ${inputs.año_fin.value}
 ```
 <Grid cols=2>
+  <Group>
+  Año {inputs.año_inicio.value}
  <ECharts
   config={{
     tooltip: {
@@ -435,7 +437,7 @@ España presenta una población envejecida, con un alto porcentaje de personas m
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_inicio_mujeres.map(row => row.RangoEdad))]
+        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
           .sort((a, b) => {
             const rangeA = parseInt(a.split('-')[0]); // Extrae el inicio del rango (ej. 61 de "61-65 años")
             const rangeB = parseInt(b.split('-')[0]);
@@ -452,7 +454,7 @@ España presenta una población envejecida, con un alto porcentaje de personas m
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_inicio_hombres.map(row => row.RangoEdad))]
+        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
           .sort((a, b) => {
             const rangeA = parseInt(a.split('-')[0]);
             const rangeB = parseInt(b.split('-')[0]);
@@ -469,14 +471,14 @@ España presenta una población envejecida, con un alto porcentaje de personas m
         itemStyle: { color: '#6a1b9a' }, // Purple
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_inicio_mujeres.map(row => row.RangoEdad))]
+        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
           .sort((a, b) => {
             const rangeA = parseInt(a.split('-')[0]);
             const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Coincide con yAxis
+            return rangeA - rangeB; // Coincide con yAx
           })
           .map(rango => {
-            const row = poblacion_por_sexo_edad_inicio_mujeres.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
+            const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
           })
       },
@@ -488,20 +490,23 @@ España presenta una población envejecida, con un alto porcentaje de personas m
         itemStyle: { color: '#388e3c' }, // Green
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_inicio_hombres.map(row => row.RangoEdad))]
+        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
           .sort((a, b) => {
             const rangeA = parseInt(a.split('-')[0]);
             const rangeB = parseInt(b.split('-')[0]);
             return rangeA - rangeB; // Coincide con yAxis
           })
           .map(rango => {
-            const row = poblacion_por_sexo_edad_inicio_hombres.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
+            const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
           })
       }
     ]
   }}
 />
+</Group>
+  <Group>
+  Año {inputs.año_fin.value}
  <ECharts
   config={{
     tooltip: {
@@ -626,17 +631,9 @@ España presenta una población envejecida, con un alto porcentaje de personas m
     ]
   }}
 />
+</Group>
 </Grid>
-## Distribución por edad y sexo
 
-Para una pirámide poblacional, Evidence soporta visualizaciones avanzadas. Ejemplo con datos de 2024 (0-4 años: 1.726.528 total, etc.). Integra datos reales en tu DB para interactividad.
-
-## Próximos Pasos
-
-- Explorar más datos sobre inmigración detallada por país de origen
-- Integrar datos de edad y crear pirámides poblacionales interactivas
-- Conectar nuevas fuentes como series temporales completas de INE
-- Desarrollar secciones sobre diversidad étnica y migración
 
 ## Recursos
 - [Instituto Nacional de Estadística (INE) - Población residente](https://www.ine.es/jaxiT3/Tabla.htm?t=56938)

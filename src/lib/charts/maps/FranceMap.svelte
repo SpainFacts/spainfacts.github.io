@@ -28,6 +28,7 @@
 	export let link = undefined;
 
 	export let colorScale = undefined;
+    export let colorPalette = undefined;
 
 </script>
 
@@ -44,6 +45,7 @@
     {subtitle}
     {link}
     {colorScale}
+    {colorPalette}
     {nameProperty}
     {abbreviationProperty}
     {abbreviations}
