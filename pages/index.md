@@ -1,29 +1,37 @@
 ---
 title: SpainFacts 
 ---
-
+<script>
+    // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
+    import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
+    import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
+</script>
 # Nuestra Población Cambiante: España
 
 SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
 
 La población de España ha experimentado un crecimiento significativo en las últimas décadas, impulsado principalmente por la inmigración y un saldo vegetativo positivo en periodos recientes.
 
-| Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
-| -------- | -------- | -------- |
-|<Value data={total_poblacion_year_inicio} column=Total fmt='#,##0.00,,"M"'/>  |  <Value data={total_poblacion_year_fin} column=Total fmt='#,##0.00,,"M"'/>   | {fmt((((total_poblacion_year_fin[0].Total-total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) ), '#,##0.00%')}|
-
-<Dropdown 
+<div style="display:flex;justify-content:center;gap:1rem;align-items:center;">
+  <Dropdown 
     name=año_inicio
     data={items}
     value=Year
     defaultValue="1971"
-/>
-<Dropdown 
+  />
+  <Dropdown 
     name=año_fin
     data={items}
     value=Year
     defaultValue="2024"
-/>
+  />
+</div>
+
+| Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
+| -------- | -------- | -------- |
+| {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} |
+
+
 
 
 ```sql total_poblacion_year_inicio
@@ -130,7 +138,9 @@ ORDER BY Year ASC;
 />
 
 
-La poblacion de España ha crecido {fmt((((total_poblacion_year_fin[0].Total-total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) ), '#,##0.00%')} entre {inputs.año_inicio.value} y {inputs.año_fin.value}.Desde <Value data={total_poblacion_year_inicio} column=Total fmt='#.###0,00,,"M"'/> hasta <Value data={total_poblacion_year_fin} column=Total fmt='#,##0.00,,"M"'/>.
+La población de España ha crecido {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
+
+Desde {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M hasta {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M.
 
 
 
@@ -164,7 +174,8 @@ where Year = ${inputs.año_fin.value}
 ```
 <Grid cols=2>
 <Group>
-Año {inputs.año_inicio.value}
+
+<div style="text-align:center">Año {inputs.año_inicio.value}</div>
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
@@ -195,7 +206,7 @@ Año {inputs.año_inicio.value}
 }} />
 </Group>
 <Group>
-Año {inputs.año_fin.value}
+<div style="text-align:center">Año {inputs.año_fin.value}</div>
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
@@ -279,65 +290,61 @@ ORDER BY h.Year DESC;
 
 ## ¿Dónde viven las personas en España? 
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
-    <script>
-    // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
-    import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
-    import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
-</script>
-<Tabs>
-    <Tab label="Poblacion Total en {inputs.año_inicio.value}">
+<Accordion>
+  <AccordionItem title="Poblacion en {inputs.año_inicio.value}">
+    <FranceMap
+      mapName="Spain"
+      nameProperty="code"
+      data={orders_by_state_inicio}
+      region="statecode"
+      value="Población"
+      colorScale="bluegreen"
+      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+    />
+  </AccordionItem>
+  <AccordionItem title="Poblacion en {inputs.año_fin.value}">  
+    <FranceMap
+      mapName="Spain"
+      nameProperty="code"
+      data={orders_by_state_fin}
+      region="statecode"
+      value="Población"
+      colorScale="bluegreen"
+      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+    />  
+  </AccordionItem>
+  <AccordionItem title="Cambio en #">
+    <FranceMap
+      mapName="Spain"
+      nameProperty="code"
+      data={orders_by_state_diff}
+      region="statecode"
+      value="Cambio en #"
+      colorScale="bluegreen"
+      colorPalette={['#bf6f2f', '#1c4738']}
+    />
+  </AccordionItem>
+  <AccordionItem title="Cambio en %">
+    <FranceMap
+      mapName="Spain"
+      nameProperty="code"
+      data={orders_by_state_diff}
+      region="statecode"
+      value="Cambio en %"
+      colorScale="bluegreen"
+      colorPalette={['#bf6f2f', '#1c4738']}
+    />
+  </AccordionItem>
+</Accordion>
 
-<FranceMap
-    mapName="Spain"
-    nameProperty="code"
-    data={orders_by_state_inicio}
-    region="statecode"
-    value="Población"
-    colorScale="bluegreen"
-    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
-/>
-</Tab>
+<DataTable data={orders_by_state_diff}>
+  <Column title="Provincia" id="Provincia" />
+  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" />
+  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" />
+  <Column title="Cambio en #" id="Cambio en #" />
+  <Column title="Cambio en %" id="Cambio en %" />
+</DataTable>  
 
-
-    <Tab label="Poblacion Total en {inputs.año_fin.value}">
-<FranceMap
-    mapName="Spain"
-    nameProperty="code"
-    data={orders_by_state_fin}
-    region="statecode"
-    value="Población"
-    colorScale="bluegreen"
-    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
-/>
-    </Tab>
-    
-    <Tab label="Cambio en #">
-      <FranceMap
-    mapName="Spain"
-    nameProperty="code"
-    data={orders_by_state_diff}
-    region="statecode"
-    value="Cambio_Absoluto"
-    colorScale="bluegreen"
-    colorPalette={['#bf6f2f', '#1c4738']}
-/>
-
-    </Tab>
-    
-    
-            <Tab label="Cambio en %">
-       <FranceMap
-    mapName="Spain"
-    nameProperty="code"
-    data={orders_by_state_diff}
-    region="statecode"
-    value="Porcentaje_Cambio"
-    colorScale="bluegreen"
-    colorPalette={['#bf6f2f', '#1c4738']}
-/>
-    </Tab>
-</Tabs>
-<DataTable data={orders_by_state_diff}/> 
 
 ```sql orders_by_state_inicio
   SELECT statecode, Provincias, Población
@@ -352,14 +359,14 @@ La distribución geográfica de la población en España varía significativamen
 ```sql orders_by_state_diff
 SELECT
 i.statecode,
-    i.Provincias,
+    i.Provincias as Provincia,
     i.Población as Poblacion_Inicio,
     f.Población as Poblacion_Fin,
     -- Cálculo de la RESTA: Cambio absoluto
-    (f.Población - i.Población) AS Cambio_Absoluto,
+    (f.Población - i.Población) AS "Cambio en #",
     -- Cálculo del PORCENTAJE DE CAMBIO
     -- Usamos CAST(AS FLOAT) para asegurar una división decimal precisa.
-    (CAST((f.Población - i.Población) AS FLOAT) / i.Población) * 100 AS Porcentaje_Cambio
+    (CAST((f.Población - i.Población) AS FLOAT) / i.Población) * 100 AS "Cambio en %"
 FROM
     ${orders_by_state_inicio} i
 INNER JOIN
@@ -379,7 +386,7 @@ INNER JOIN
 ```
 <Grid cols=2>
   <Group>
-  Año {inputs.año_inicio.value}
+  <div style="text-align:center">Año {inputs.año_inicio.value}</div>
  <ECharts
   config={{
     tooltip: {
@@ -427,7 +434,7 @@ INNER JOIN
         axisLabel: { formatter: value => Math.abs(value) }
       }
     ],
-   yAxis: [
+        yAxis: [
       { // Left pyramid yAxis (shows labels in middle)
         type: 'category',
         gridIndex: 0,
@@ -437,13 +444,13 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]); // Extrae el inicio del rango (ej. 61 de "61-65 años")
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Ascendente: de menor a mayor
-            // Para descendente, usa: return rangeB - rangeA;
-          })
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])];
+          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+        })()
       },
       { // Right pyramid yAxis (hidden labels)
         type: 'category',
@@ -454,12 +461,13 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Ascendente
-          })
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])];
+          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+        })()
       }
     ],
     series: [
@@ -471,16 +479,16 @@ INNER JOIN
         itemStyle: { color: '#6a1b9a' }, // Purple
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Coincide con yAx
-          })
-          .map(rango => {
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+          return union.map(rango => {
             const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
-          })
+          });
+        })()
       },
       {
         name: 'Hombres',
@@ -490,23 +498,23 @@ INNER JOIN
         itemStyle: { color: '#388e3c' }, // Green
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_inicio.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Coincide con yAxis
-          })
-          .map(rango => {
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+          return union.map(rango => {
             const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
-          })
+          });
+        })()
       }
     ]
   }}
 />
 </Group>
   <Group>
-  Año {inputs.año_fin.value}
+  <div style="text-align:center">Año {inputs.año_fin.value}</div>
  <ECharts
   config={{
     tooltip: {
@@ -564,13 +572,13 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]); // Extrae el inicio del rango (ej. 61 de "61-65 años")
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Ascendente: de menor a mayor
-            // Para descendente, usa: return rangeB - rangeA;
-          })
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])];
+          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+        })()
       },
       { // Right pyramid yAxis (hidden labels)
         type: 'category',
@@ -581,12 +589,13 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Ascendente
-          })
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])];
+          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+        })()
       }
     ],
     series: [
@@ -598,16 +607,16 @@ INNER JOIN
         itemStyle: { color: '#6a1b9a' }, // Purple
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Coincide con yAxis
-          })
-          .map(rango => {
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+          return union.map(rango => {
             const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
-          })
+          });
+        })()
       },
       {
         name: 'Hombres',
@@ -617,16 +626,16 @@ INNER JOIN
         itemStyle: { color: '#388e3c' }, // Green
         label: { show: false },
         emphasis: { focus: 'series' },
-        data: [...new Set(poblacion_por_sexo_edad_fin.map(row => row.RangoEdad))]
-          .sort((a, b) => {
-            const rangeA = parseInt(a.split('-')[0]);
-            const rangeB = parseInt(b.split('-')[0]);
-            return rangeA - rangeB; // Coincide con yAxis
-          })
-          .map(rango => {
+        data: (() => {
+          const union = [...new Set([
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
+            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
+          return union.map(rango => {
             const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
             return row ? row.TotalAgrupado : 0;
-          })
+          });
+        })()
       }
     ]
   }}
