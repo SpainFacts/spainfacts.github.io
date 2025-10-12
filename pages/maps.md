@@ -27,22 +27,6 @@ INNER JOIN
     ${orders_by_state_fin} f ON i.statecode = f.statecode;
 ``` 
 # Maps
-<script>
-    // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
-    import FranceMap from "../../../../../src/lib/charts/maps/FranceMap.svelte";
-    import WorldMap from "../../../../../src/lib/charts/maps/WorldMap.svelte";
-</script>
-
-<FranceMap
-    mapName="Spain"
-    nameProperty="code"
-    data={orders_by_state_inicio}
-    region="statecode"
-    value="Población"
-    colorScale="bluegreen"
-    colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
-/>
-    <Tab label="Poblacion Total en {inputs.año_inicio.value}">
         <AreaMap
           data={orders_by_state_inicio}
           areaCol="statecode"
@@ -53,4 +37,3 @@ INNER JOIN
           {id: 'Provincias', fmt: 'id', showColumnName: false, valueClass: 'text-xl font-semibold'},
           {id: 'Población', fieldClass: 'text-[grey]', valueClass: 'text-[green]'}
           ]} />
-    </Tab>
