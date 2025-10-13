@@ -377,12 +377,12 @@ INNER JOIN
 ```sql poblacion_por_sexo_edad_inicio
   SELECT *
   FROM mother.totalAnoSexoEdad
-  where Year = ${inputs.año_inicio.value}
+  where Anio = ${inputs.año_inicio.value}
 ```
 ```sql poblacion_por_sexo_edad_fin
   SELECT *
   FROM mother.totalAnoSexoEdad
-  where Year = ${inputs.año_fin.value}
+  where Anio = ${inputs.año_fin.value}
 ```
 <Grid cols=2>
   <Group>
@@ -446,8 +446,7 @@ INNER JOIN
         splitLine: { show: false },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
           ])];
           return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
         })()
@@ -463,8 +462,7 @@ INNER JOIN
         splitLine: { show: false },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
           ])];
           return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
         })()
@@ -481,12 +479,11 @@ INNER JOIN
         emphasis: { focus: 'series' },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
           ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
           return union.map(rango => {
             const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
-            return row ? row.TotalAgrupado : 0;
+            return row ? row.Total : 0;
           });
         })()
       },
@@ -500,12 +497,11 @@ INNER JOIN
         emphasis: { focus: 'series' },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
+            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
           ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
           return union.map(rango => {
             const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
-            return row ? row.TotalAgrupado : 0;
+            return row ? row.Total : 0;
           });
         })()
       }
@@ -574,7 +570,6 @@ INNER JOIN
         splitLine: { show: false },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
             ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
           ])];
           return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
@@ -591,7 +586,6 @@ INNER JOIN
         splitLine: { show: false },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
             ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
           ])];
           return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
@@ -609,12 +603,11 @@ INNER JOIN
         emphasis: { focus: 'series' },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
             ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
           ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
           return union.map(rango => {
             const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
-            return row ? row.TotalAgrupado : 0;
+            return row ? row.Total : 0;
           });
         })()
       },
@@ -628,12 +621,11 @@ INNER JOIN
         emphasis: { focus: 'series' },
         data: (() => {
           const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad),
             ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
           ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
           return union.map(rango => {
             const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
-            return row ? row.TotalAgrupado : 0;
+            return row ? row.Total : 0;
           });
         })()
       }
