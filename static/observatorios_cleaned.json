@@ -1,0 +1,2660 @@
+[
+  {
+    "name": "Observatorio contra el Fraude y la Corrupci\u00f3n Sanitaria",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Salud de las Mujeres",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Provincial de la Agenda Urbana en Granada",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio del Ferrocarril en Espa\u00f1a",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatori Municipal de l'Habitatge d'Alcoi",
+    "creation_year": 2020,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de la Despoblaci\u00f3n de Guadalajara",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio Auton\u00f3mico dos R\u00edos de Galicia",
+    "creation_year": 2018,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio da Sociedade da Informaci\u00f3n e a Modernizaci\u00f3n de Galicia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio da Violencia no Contorno Laboral",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Territorial de Estudios y An\u00e1lisis de Granada (OTEA Granada)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Administraci\u00f3n Electr\u00f3nica (OBSAE)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Igualdad de Oportunidades entre Mujeres y Hombres",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Juventud en Espa\u00f1a",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Imagen de las Mujeres",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Cadena Alimentaria",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Ciencia Ciudadana",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Gesti\u00f3n Empresarial en Biodiversidad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Territorial de Cullera",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Infancia de Espa\u00f1a",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de la Infancia de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio Local de Empleo de Fuenlabrada",
+    "creation_year": 2015,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Infancia de Catalu\u00f1a / Observatori dels Drets dels Infants",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio de la Infancia y la Adolescencia de Asturias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "asturias"
+  },
+  {
+    "name": "Observatorio 2030",
+    "creation_year": 2018,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Infancia del Pa\u00eds Vasco",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio de Infancia de Cantabria",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "cantabria"
+  },
+  {
+    "name": "Observatorio de la Infancia y la Adolescencia de les Illes Balears",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "islas_baleares"
+  },
+  {
+    "name": "Observatorio de la Lectura y el Libro",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de las Ocupaciones del Servicio P\u00fablico de Empleo Estatal",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Museos de Espa\u00f1a",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Precios y Mercados de la Junta de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio de Salud P\u00fablica de Cantabria",
+    "creation_year": 2005,
+    "is_active": false,
+    "scope": "cantabria"
+  },
+  {
+    "name": "Observatorio de Salud y Cambio Clim\u00e1tico",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s de la Juventud",
+    "creation_year": 2015,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Iberifier",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del Transporte y la Log\u00edstica en Espa\u00f1a",
+    "creation_year": 2019,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio do Sector L\u00e1cteo de Galicia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de Precios y Cadena de Valor del Sector Agroalimentario de la Comunidad Aut\u00f3noma de Extremadura",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Igualdad de la Corporaci\u00f3n RTVE",
+    "creation_year": 2018,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del Cambio Clim\u00e1tico y la Energ\u00eda de Tenerife",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol contra la LGBTfobia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio del Paisaje de Catalu\u00f1a / Observatori del Paisatge de Catalunya",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol de Acuicultura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol de I+D+I (ICONO)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Salud y Medio Ambiente de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol de la Econom\u00eda Social",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol de las Drogas y las Adicciones",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol del Racismo y la Xenofobia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Estatal de Condiciones de Trabajo",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Familia de la Ciudad de Orihuela",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Estatal de Familias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Estatal de la Convivencia Escolar",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Inmigraci\u00f3n en Asturias (ODINA)",
+    "creation_year": 2000,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Estatal de la Dependencia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Estatal de la Discapacidad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Estatal de los Servicios Deportivos a las Administraciones P\u00fablicas",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Ambiental de Navarra - Nafarroako Ingurumen Behatokia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Socioecon\u00f3mico Provincial de la Diputaci\u00f3n de C\u00e1ceres",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de la Comunidad de Castilla y Le\u00f3n. Secci\u00f3n de G\u00e9nero",
+    "creation_year": 2014,
+    "is_active": true,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s de la Soledad",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Convivencia Escolar",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio TransfomAcci\u00f3n y ParticipAcci\u00f3n",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio Regional de la Sociedad de la Informaci\u00f3n de Castilla y Le\u00f3n (ORSI)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio de Agresiones",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio Galego Contra a Discriminaci\u00f3n por Orientaci\u00f3n Sexual e Identidade de X\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Galego da Biodiversidade",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Galego da Violencia de X\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Municipal de Vivienda en Alquiler de Alicante",
+    "creation_year": 2012,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Galego de Acci\u00f3n Voluntaria",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de Datos Culturales de Barcelona",
+    "creation_year": 2015,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la lengua espa\u00f1ola y las culturas hisp\u00e1nicas en los Estados Unidos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Galego de Convivencia Escolar",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Startup de la Comunidad Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Galego de Dinamizaci\u00f3n Demogr\u00e1fica",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Galego de Educaci\u00f3n Ambiental",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Nacional 5G",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Nacional contra el Despoblamiento",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Vasco de la Cultura",
+    "creation_year": 2006,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio I+D+i Universidad Polit\u00e9cnica de Madrid",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio para el An\u00e1lisis y Visibilidad de la Exclusi\u00f3n Social",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Andaluz de Cultivos Frutales Ex\u00f3ticos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de empleo de Gij\u00f3n",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Nacional de las Telecomunicaciones y de la Sociedad de la Informaci\u00f3n",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Nacional de Seguridad Vial",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Nacional de Sequ\u00edas e Inundaciones",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Profesional del Instituto Nacional de las Cualificaciones",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de la Calidad de los Servicios Municipales (Alicante)",
+    "creation_year": 2015,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Tecnol\u00f3gico",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Urbano de Sevilla",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Territorial de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio para la Cibersociedad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Mujeres, Ciencia e Innovaci\u00f3n",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Producci\u00f3n Cient\u00edfica de la UA",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Prospectiva Tecnol\u00f3gica Industrial",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de formaci\u00f3n en red Scopeo",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio da Mobilidade de Terras de Galicia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Galego da Xuventude",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de costes de transportes de mercanc\u00edas por carretera de Galicia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Gallego de la Familia y de la Infancia",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de la Vida Militar",
+    "creation_year": 2014,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio da Vivenda de Galicia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio da Lingua Galega",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Argos de la Junta de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio Territorial Alentejo Extremadura y Centro de Portugal (OTALEX)",
+    "creation_year": 2006,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Igualdad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio del Mercado de Trabajo del Instituto Aragon\u00e9s de Empleo",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Nacional de Tecnolog\u00eda y Sociedad",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del Mercado de Trabajo del Servicio P\u00fablico de Empleo del Principado de Asturias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "asturias"
+  },
+  {
+    "name": "Observatorio Social Barcelona",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Espacio de Observaci\u00f3n de Inteligencia Artificial (IA) en espa\u00f1ol",
+    "creation_year": 2023,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Empleo y Formaci\u00f3n del Servicio C\u00e1ntabro de Empleo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "cantabria"
+  },
+  {
+    "name": "Observatorio Espa\u00f1ol de la Econom\u00eda Social y del Trabajo Aut\u00f3nomo",
+    "creation_year": 2005,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Canario del Empleo (OBECAN)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Socioecon\u00f3mico de la Provincia de Badajoz",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Ocupacional y Empresarial de ILDEFE",
+    "creation_year": 2008,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio del Sector TIC en Extremadura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio Agrario",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio FIEX de las Familias y la Infancia de Extremadura",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio de Derechos Digitales",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio para la Convivencia Escolar de Extremadura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio de Prevenci\u00f3n de Riesgos Laborales de la Comunidad Aut\u00f3noma de la Regi\u00f3n de Murcia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de Turismo de Extremadura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio Extreme\u00f1o de la Cultura",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatori Ciutad\u00e0 de la Biodiversitat",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Responsabilidad Social de Extremadura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio sobre Drogas de la Regi\u00f3n de Murcia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatori Balear de la Societat de la Informaci\u00f3 (OBSI)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "islas_baleares"
+  },
+  {
+    "name": "Xarxa d'Observatoris del Desenvolupament Econ\u00f2mic Local (XODEL)",
+    "creation_year": 1994,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Competencias Digitales de la Comunidad de Madrid",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Urbano de A Coru\u00f1a",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio Municipal de Igualdade e Diversidade",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio E\u00f3lico de Galicia",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de A Coru\u00f1a",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Accesibilidad Web",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Innovaci\u00f3n de Navarra",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio de la Movilidad Metropolitana (OMM)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Global del Espa\u00f1ol",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Permanente de la Inmigraci\u00f3n (OPI)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Ib\u00e9rico Fluvial",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Estatal de Violencia sobre la Mujer",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Urbano de Alcal\u00e1 de Henares",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Violencia de G\u00e9nero de Alcal\u00e1",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Hallazgos-Propuestas Evaluaciones",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Sociodemogr\u00e1fico del Ayuntamiento de Alcal\u00e1 de Henares",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio Alcal\u00e1 en Cifras",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Comercio del Gobierno Vasco",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "OBSERVATORIO DE MEDIO AMBIENTE URBANO",
+    "creation_year": 2005,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Vasco del Emprendimiento",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Estatal de la Morosidad Privada",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Vasco de Vivienda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco del Juego",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio de Periodismo Machista",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco sobre Acoso y Discriminaci\u00f3n",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco de la Juventud",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "OBITen",
+    "creation_year": 2001,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Coyuntura Industrial",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco de Inmigraci\u00f3n (Ikuspegi)",
+    "creation_year": 2004,
+    "is_active": true,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de la Provincia de Sevilla",
+    "creation_year": 2008,
+    "is_active": false,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio para la Prevenci\u00f3n del Tabaquismo",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Tendencias de Mercamadrid",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio para la Innovaci\u00f3n y la Prospectiva del Mercado de Trabajo en Extremadura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Precios Agr\u00edcolas y Ganaderos de Castilla y Le\u00f3n",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Vasco LGTBI+",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio para la Convivencia Escolar de la Regi\u00f3n de Murcia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Regional de la Discapacidad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatori esportiu de Mallorca (observatorio deportivo de Mallorca)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Calidad de los Servicios de la Comunidad Aut\u00f3noma de la Regi\u00f3n de Murcia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de Igualdad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Regional contra la Discriminaci\u00f3n por Orientaci\u00f3n Sexual e Identidad de G\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Permanente Andaluz de las Migraciones (OPAM)",
+    "creation_year": 2007,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Municipal para la Transici\u00f3n hacia la Econom\u00eda Circular de Andaluc\u00eda",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatori Agroalimentari de Preus",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio contra la Violencia Dom\u00e9stica y de G\u00e9nero",
+    "creation_year": 2002,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Madrile\u00f1o contra la LGTBIfobia",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Permanente del Mercado de los Servicios Portuarios",
+    "creation_year": 2012,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Salud P\u00fablica de Galicia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de la Sostenibilidad del Regad\u00edo",
+    "creation_year": 2022,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Gobierno Abierto de la Diputaci\u00f3n Provincial de Alicante",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio Coru\u00f1\u00e9s contra a LGTBIfobia",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio del Flamenco",
+    "creation_year": 2007,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio de Vivienda y Suelo de Cantabria",
+    "creation_year": 2016,
+    "is_active": false,
+    "scope": "cantabria"
+  },
+  {
+    "name": "Observatorio Ocupacional de la Universidad Miguel Hern\u00e1ndez",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Tributario Andaluz",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Galego da Biomasa",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de Precios de Canarias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Desarrollo Rural y  Local (Universidad de Murcia)",
+    "creation_year": 2015,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Desigualdad de Arag\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de M\u00e1rgenes Empresariales",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Navarro de la Cultura",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio para la Convivencia Escolar en Andaluc\u00eda",
+    "creation_year": 2007,
+    "is_active": true,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatori del Sistema Penal i els Drets Humans (OSPDH)",
+    "creation_year": 2001,
+    "is_active": true,
+    "scope": "barcelona"
+  },
+  {
+    "name": "Observatorio espa\u00f1ol del mercado del vino",
+    "creation_year": 2008,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatori Social, Ambiental i de Salut",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Emancipaci\u00f3n",
+    "creation_year": 2013,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Canario de la Econom\u00eda Azul",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Canario del Cambio Clim\u00e1tico",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio de la Criminalidad Organizada Transnacional",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Industrial de Canarias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Canario de las Telecomunicaciones y de la Sociedad de la Informaci\u00f3n",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de Canarias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Canario de la Salud",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio de la Energ\u00eda de Canarias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio de la I+D+i de Canarias",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatori agroalimentari, rural i ambiental",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Municipal Galego",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Andaluz de la Publicidad no Sexista",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio do Solo Empresarial de Galicia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio do Comercio de Galicia",
+    "creation_year": 2010,
+    "is_active": false,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio del Agua",
+    "creation_year": 2017,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio da E\u00f3lica Mari\u00f1a de Galicia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio de Gesti\u00f3n de EUSKALIT",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatori del Programa Ajuntament+Sostenible",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio da Industria Aeroespacial",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio da Lusofon\u00eda Valent\u00edn Paz Andrade",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatori Catal\u00e0 de la Joventut",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatori Catal\u00e0 de l\u2019Esport",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio del Pluralismo Religioso en Espa\u00f1a",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Econ\u00f3mico de Melilla",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "melilla"
+  },
+  {
+    "name": "Observatorio de Precios Agrarios",
+    "creation_year": 2010,
+    "is_active": true,
+    "scope": "la_rioja"
+  },
+  {
+    "name": "Banda Ancha de Navarra",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de Navarra",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio Joven",
+    "creation_year": 2012,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio de Salud Publica de Navarra",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio Territorial de Navarra",
+    "creation_year": 2017,
+    "is_active": false,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio CIBIM",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Obervatorio de Contrataci\u00f3n P\u00fablica (OBCP)",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Comercial del Puerto de Alicante",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de la Infancia y Adolescencia de Andaluc\u00eda",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio Andaluz de Violencia de G\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatori de Salut i Impacte de Pol\u00edtiques",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio del Comercio de Castilla-La Mancha",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio de Digitalizaci\u00f3n en el Sector Agroalimentario",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Igualdad de Oportunidades entre Mujeres y Hombres de Asturias",
+    "creation_year": 1999,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatori de l'economia local de Sabadell",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de servicios sociales y dependencia de Castilla-La Mancha",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatori Catal\u00e0 de la Just\u00edcia en Viol\u00e8ncia Masclista",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Econ\u00f3mico de la Provincia de Ja\u00e9n",
+    "creation_year": 1998,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de la Emancipaci\u00f3n Juvenil en Espa\u00f1a",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatori Social d'Inclusi\u00f3 i Acci\u00f3 Comunit\u00e0ria de Tarragona",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de plagas y enfermedades agr\u00edcolas de Castilla y Le\u00f3n",
+    "creation_year": 2009,
+    "is_active": true,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatorio de la Vivienda Colaborativa de Castilla-La Mancha",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio Ib\u00e9rico de la Miner\u00eda",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Actividad F\u00edsica (OBAFI) de Castilla-La Mancha",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio sobre el Brexit de Castilla-La Mancha",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Municipal de Personas con Discapacidades",
+    "creation_year": 2009,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la ciudad",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Promoci\u00f3n Industrial de Castilla-La Mancha",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio regional de la convivencia escolar de Castilla-La Mancha",
+    "creation_year": 2008,
+    "is_active": false,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio por la Repoblaci\u00f3n Rural de Castilla y Le\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatori SmartCatalonia",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio del Cambio",
+    "creation_year": 2003,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio del Mercado de Trabajo de Castilla-La Mancha",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio de drogodependencias de Castilla-La Mancha",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "L\u2019Observatori \u2013 Centre d\u2019estudis del Vall\u00e8s Oriental",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatori del Sistema de Salut de Catalunya",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Transformaci\u00f3n y Participaci\u00f3n de Castilla y Le\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatori del Treball i Model Productiu",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio contra la LGTBIfobia de Castilla-La Mancha",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatori de Civisme i Valors",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio de la Muerte Digna y de las Comisiones de Mortalidad de las \u00c1reas de Salud.",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "asturias"
+  },
+  {
+    "name": "Observatorio del Cambio Clim\u00e1tico / Observatori del Canvi Clim\u00e0tic",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Contrataci\u00f3n P\u00fablica Responsable de Canarias",
+    "creation_year": 2023,
+    "is_active": false,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatori de l'Administraci\u00f3 Digital",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio de Precios de los Productos Agroalimetarios de la Comunitat Valenciana",
+    "creation_year": 2006,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de Sostenibilidad Urbana del Plan de Acci\u00f3n Local de la Agenda Urbana 2030 de Alcal\u00e1 de Guada\u00edra",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de precios de la Comunitat Valenciana / Observatori de Preus de la Comunitat Valenciana",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatori Socioambiental de Menorca",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "menorca"
+  },
+  {
+    "name": "Observatorio de la gesti\u00f3n del agua en Espa\u00f1a",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Movilidad Viaria de M\u00e1laga (MOVIMA)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Municipal de la Discapacidad",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio tur\u00edstico de M\u00e1laga",
+    "creation_year": 2008,
+    "is_active": true,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de la Movilidad de Catalu\u00f1a (OMC)",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio de la violencia de g\u00e9nero",
+    "creation_year": 2005,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Participaci\u00f3n Ciudadana en Navarra",
+    "creation_year": 2016,
+    "is_active": false,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatori de la Bretxa Digital",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Municipal para la Inclusi\u00f3n Social",
+    "creation_year": 2011,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de la Realidad Social de Navarra",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio de Accesibilidad de Euskadi",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio de seguridad y eficiencia de las operaciones a\u00e9reas",
+    "creation_year": 2019,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Regional de Mercado",
+    "creation_year": 2012,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Precios de la Cadena Agroalimentaria",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio de Precios en Consumo",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "castilla_la_mancha"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s de Dinamizaci\u00f3n Demogr\u00e1fica y Poblacional",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Regional de la Violencia de G\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s por la Convivencia y Contra el Acoso Escolar",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s del Arte en la Esfera P\u00fablica",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Europeo de Desiertos Rurales Alimentarios y de Ejercicio F\u00edsico (DESERT)",
+    "creation_year": 2024,
+    "is_active": false,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio Canario de la Juventud",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio de Residuos de Bizkaia",
+    "creation_year": 2011,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Canario de Empleo",
+    "creation_year": 1998,
+    "is_active": true,
+    "scope": "canarias"
+  },
+  {
+    "name": "Observatorio Desca",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Muerte / Observatori de la Mort",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio de Conducta \u00c9tica de la Guardia Civil",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Socioecon\u00f3mico de la Marina Alta",
+    "creation_year": 2018,
+    "is_active": true,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Igualdad y Empleo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Comunidad de Madrid de V\u00edctimas del Delito",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatorio de Resultados del Servicio Madrile\u00f1o de Salud",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatorio de la Bicicleta",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Ciudadano del Agua de la Comunidad Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de la Industria y de los Sectores Econ\u00f3micos Valencianos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de Normativa Electoral Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de la IA",
+    "creation_year": 2023,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Valenciano para la Igualdad de Trato, la No Discriminaci\u00f3n y la Prevenci\u00f3n de los Delitos de Odio",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio para la Convivencia Escolar de la Comunitat Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de Brecha Digital",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Valenciano de la Cultura",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Valenciano del Trabajo Decente",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio de la Escuela Rural de Arag\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio del H\u00e1bitat y Segregaci\u00f3n Urbana de la Comunitat Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Monta\u00f1a de Arag\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Fiscal de la Comunitat Valenciana",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s de la Sociedad de la Informaci\u00f3n (OASI)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio para la Innovaci\u00f3n de los Informativos en la Sociedad Digital",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio sobre Drogas y Adicci\u00f3n a las Bebidas Alcoh\u00f3licas del Principado de Asturias. (ODABAPA)",
+    "creation_year": 2001,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Cadena Alimentaria y de la Madera de Euskadi",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Valenciano de las familias",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Militar para la Igualdad entre Mujeres y Hombres en las Fuerzas Armadas",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Precios de los Alimentos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la muerte digna",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "navarra"
+  },
+  {
+    "name": "Observatorio de Uso de Medicamentos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Nutrici\u00f3n y de Estudio de la Obesidad (AESAN)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del comercio 4.0",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de agresiones a profesionales del sistema sanitario p\u00fablico",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  },
+  {
+    "name": "Observatorio Regional Contra la Discriminaci\u00f3n por Orientaci\u00f3n Sexual e Identidad de G\u00e9nero",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Virtual del Paisaje Mediterr\u00e1neo",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio ocupacional",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de Convivencia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de residuos",
+    "creation_year": 2015,
+    "is_active": true,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatori per a la igualtat",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "islas_baleares"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s de Familia",
+    "creation_year": 2004,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Salud en Asturias (OBSA)",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Calidad de Tenerife",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Publicidad e Informaci\u00f3n no Sexista del Principado de Asturias.",
+    "creation_year": 2013,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Asturiano de Servicios Sociales (OBSERVASS)",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Convivencia Escolar de Cantabria",
+    "creation_year": 2006,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la cuenca Saja-Besaya",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio ciudadano",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio ciutadano de la Sequ\u00eda",
+    "creation_year": 2020,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del Cambio Clim\u00e1tico en Arag\u00f3n",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio de Turismo Sostenible de Mallorca",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatori socioecon\u00f2mic d'Osona",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de igualdad de genero en el \u00e1mbito de la cultura",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatori de la Seguretat Vi\u00e0ria",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio del trabajo del Servicio de Ocupaci\u00f3n de las Islas Baleares",
+    "creation_year": 2005,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Finanzas Isl\u00e1micas en Espa\u00f1a SCIEF-Casa \u00c1rabe",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Agenda Provincia de C\u00e1ceres",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Buenas Pr\u00e1cticas Regulatorias",
+    "creation_year": 2022,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatori per al Desenvolupament Sostenible de la Garrotxa",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatori del Partits Pol\u00edtics de Catalunya",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de la Producci\u00f3n Audidovisual",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio tur\u00edstico de Alcoi",
+    "creation_year": 2014,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Social de las personas mayores",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Galego de Condici\u00f3ns de Traballo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Nacional del Software de Fuentes Abiertas (ONSFA)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la realidad de las personas j\u00f3venes",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Universitario de Becas, Ayudas al Estudio y Rendimiento Acad\u00e9mico",
+    "creation_year": 2010,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del edadismo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Ambiental Granadilla",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Sistemas de Salud y Salud P\u00fablica",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "El observatorio de Servicios Sociales",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Calidad del Sistema Espa\u00f1ol de Universidades",
+    "creation_year": 2001,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de costes del transporte de mercanc\u00edas (MINT)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Pr\u00e1cticas Innovadoras en el Manejo de Enfermedades Cr\u00f3nicas Complejas",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Europeo Multidisciplinar de los Fondos Marinos y de la Columna de Agua",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Municipal de Protecci\u00f3n Animal de Alcoi",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Politicas Ambientales",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio Valenciano contra la LGTBfobia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Hispano-Franc\u00e9s de Tr\u00e1fico en los Pirineos",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Personas Tituladas de la Universidade de Vigo",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio Andaluz de la Movilidad Sostenible y la Log\u00edstica",
+    "creation_year": 2014,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de empleo y actividad econ\u00f3mica",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Servicios Sociales de Araba",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatori Social de les Illes Balears",
+    "creation_year": 2008,
+    "is_active": true,
+    "scope": "islas_baleares"
+  },
+  {
+    "name": "Observatorio de Aut\u00f3nomos de Arag\u00f3n",
+    "creation_year": 2024,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Aragon\u00e9s del Consumo",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de Gipuzkoa",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "gipuzkoa"
+  },
+  {
+    "name": "Observatorio Social",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Juventud de las Illes Balears (OBJIB)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "islas_baleares"
+  },
+  {
+    "name": "Observatorio Vasco del Comercio",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco de los Servicios Sociales",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Vasco de la Cadena Alimentaria de Euskadi",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio Mujer Empresa",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio y Consejo Social para el Reto Demogr\u00e1fico",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "auton\u00f3mico"
+  },
+  {
+    "name": "Observatorio de Cooperaci\u00f3n para el Desarrollo y Educaci\u00f3n para la Ciudadan\u00eda Global en la Provincia de Zaragoza",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Competencias Digitales y Empleabilidad",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio de Transici\u00f3n Generacional",
+    "creation_year": 2023,
+    "is_active": false,
+    "scope": "cantabria"
+  },
+  {
+    "name": "Observatorio de tecnolog\u00eda educativa",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Vivienda Tur\u00edstica",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio ITE (Inspecci\u00f3n T\u00e9cnica de Edificios)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio del Emprendimiento (GEM)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio municipal del \u00e1rbol de Valencia - OMAV",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Transfronterizo Espa\u00f1a-Portugal",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de Ecodise\u00f1o",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de mercado de trabajo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "aragon"
+  },
+  {
+    "name": "Observatorio mercado de trabajo",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "asturias"
+  },
+  {
+    "name": "El Observatorio para la Innovaci\u00f3n y la Prospectiva del Mercado de Trabajo en Extremadura",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "extremadura"
+  },
+  {
+    "name": "Observatorio de Resultados del Servicio Murciano de Salud",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Regional del Cambio Clim\u00e1tico",
+    "creation_year": 2007,
+    "is_active": true,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de Igualdad de la Regi\u00f3n de Murcia",
+    "creation_year": 2020,
+    "is_active": true,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio Regional de Discapacidad",
+    "creation_year": 2003,
+    "is_active": false,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de la Familia de la Regi\u00f3n de Murcia",
+    "creation_year": 2009,
+    "is_active": true,
+    "scope": "region_de_murcia"
+  },
+  {
+    "name": "Observatorio de las Masculinidades",
+    "creation_year": 2013,
+    "is_active": false,
+    "scope": "Unknown"
+  },
+  {
+    "name": "Observatorio Municipal de Violencia contra las Mujeres (Ayuntamiento de Madrid)",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio Universitario de IA y Diversidad",
+    "creation_year": 2024,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Ciudad (Ayuntamiento de Madrid)",
+    "creation_year": 2019,
+    "is_active": true,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de la Ciudad de M\u00f3stoles (M\u00f3stoles Desarrollo)",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Gobierno Abierto de Getafe (Observatorio Estad\u00edstico Municipal)",
+    "creation_year": 2018,
+    "is_active": true,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Ciudad de Rivas Vaciamadrid (Observatorio Urbano RIVAS 2030)",
+    "creation_year": 2015,
+    "is_active": true,
+    "scope": "municipal"
+  },
+  {
+    "name": "Observatorio de Vivienda y Suelo",
+    "creation_year": 2012,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio de la Pobreza y Exclusi\u00f3n Social (OPEX)",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio para la Igualdad y la Diversidad",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio de Transici\u00f3n Justa de Asturias (OTJA)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "asturias"
+  },
+  {
+    "name": "Bizkaiko Behatokia",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "bizkaia"
+  },
+  {
+    "name": "Observatorio de Violencia Machista en Bizkaia",
+    "creation_year": 2003,
+    "is_active": true,
+    "scope": "bizkaia"
+  },
+  {
+    "name": "Observatorio de Competitividad de Bizkaia",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "bizkaia"
+  },
+  {
+    "name": "Observatorio Vasco del Turismo",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "pais_vasco"
+  },
+  {
+    "name": "Observatorio del sistema de salud de Castilla y Le\u00f3n",
+    "creation_year": 2018,
+    "is_active": true,
+    "scope": "castilla_y_leon"
+  },
+  {
+    "name": "Observatori del Patrimoni Natural i la Biodiversitat",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "cataluna"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico de la Comunidad de Madrid",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatorio Regional de Seguridad del Paciente",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatorio de Enfermedades Raras de la Comunidad de Madrid",
+    "creation_year": 2025,
+    "is_active": true,
+    "scope": "comunidad_de_madrid"
+  },
+  {
+    "name": "Observatori Valenci\u00e0 de Joventut (OVJ)",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatori Simbiosi Industrial de la Comunitat Valenciana (OSICV)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio del Sistema P\u00fablico Valenciano de Servicios Sociales",
+    "creation_year": 2023,
+    "is_active": true,
+    "scope": "comunidad_valenciana"
+  },
+  {
+    "name": "Observatorio Costeiro de la Xunta de Galicia",
+    "creation_year": 1990,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio forestal",
+    "creation_year": 2011,
+    "is_active": true,
+    "scope": "galicia"
+  },
+  {
+    "name": "Observatorio Permanente",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "provincial"
+  },
+  {
+    "name": "Observatorio econ\u00f3mico (Madrid)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Municipal contra la LGTBIfobia (Madrid)",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatori Metropolit\u00e0 de l\u2019Habitatge de Barcelona (O-HB)",
+    "creation_year": 2017,
+    "is_active": true,
+    "scope": "barcelona"
+  },
+  {
+    "name": "Observatori Social Barcelona",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "barcelona"
+  },
+  {
+    "name": "Bilbao Observatorio (Bilbao Ekintza)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio del Plan Estrat\u00e9gico de Sevilla 2030",
+    "creation_year": 2021,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatori del Canvi Clim\u00e0tic (Valencia)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Salud Urbana de Val\u00e8ncia",
+    "creation_year": 2022,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Tur\u00edstico (Valladolid)",
+    "creation_year": 2008,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Municipal de Inmigraci\u00f3n (Valladolid)",
+    "creation_year": 2006,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio Municipal de Estad\u00edstica (Zaragoza)",
+    "creation_year": null,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "C\u00e1tedra de Territorio, Sociedad y Visualizaci\u00f3n Geogr\u00e1fica (Zaragoza)",
+    "creation_year": 2016,
+    "is_active": true,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de Vivienda de Legan\u00e9s",
+    "creation_year": 2024,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio de la Movilidad de Rivas-Vaciamadrid",
+    "creation_year": 2023,
+    "is_active": false,
+    "scope": "local"
+  },
+  {
+    "name": "Observatorio del Impacto Social de los Algoritmos (OBISAL)",
+    "creation_year": 2022,
+    "is_active": false,
+    "scope": "estatal"
+  },
+  {
+    "name": "Observatorio para la sostenibilidad tur\u00edstica local (Andaluc\u00eda)",
+    "creation_year": null,
+    "is_active": false,
+    "scope": "andalucia"
+  }
+]
