@@ -9,6 +9,110 @@
 		maximumFractionDigits: 2
 	});
 
+	const DEFAULT_NEGATIVE_COLORS = [
+		'#67000d',
+		'#a50f15',
+		'#cb181d',
+		'#ef3b2c',
+		'#fb6a4a',
+		'#fc9272',
+		'#fcbba1',
+		'#fee0d2'
+	];
+
+	const DEFAULT_POSITIVE_COLORS = [
+		'#edf8fb',
+		'#ccece6',
+		'#99d8c9',
+		'#66c2a4',
+		'#41ae76',
+		'#238b45',
+		'#006d2c',
+		'#00441b'
+	];
+
+	const DEFAULT_ZERO_COLOR = '#ffffff';
+	const DIVERGING_STEPS = 32;
+
+	const normalizeHex = (input) => {
+		if (typeof input !== 'string') {
+			return null;
+		}
+		let hex = input.trim();
+		if (!hex) {
+			return null;
+		}
+		if (hex.startsWith('#')) {
+			hex = hex.slice(1);
+		}
+		if (hex.length === 3) {
+			hex = hex
+				.split('')
+				.map((char) => char + char)
+				.join('');
+		}
+		if (hex.length !== 6) {
+			return null;
+		}
+		if (!/^[0-9a-fA-F]{6}$/.test(hex)) {
+			return null;
+		}
+		return `#${hex.toLowerCase()}`;
+	};
+
+	const hexToRgb = (input) => {
+		const normalized = normalizeHex(input);
+		if (!normalized) {
+			return { r: 0, g: 0, b: 0 };
+		}
+		const value = parseInt(normalized.slice(1), 16);
+		return {
+			r: (value >> 16) & 255,
+			g: (value >> 8) & 255,
+			b: value & 255
+		};
+	};
+
+	const rgbToHex = ({ r, g, b }) => {
+		const toHex = (channel) => {
+			const clamped = Math.max(0, Math.min(255, Math.round(channel)));
+			return clamped.toString(16).padStart(2, '0');
+		};
+		return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+	};
+
+	const interpolatePalette = (palette, count) => {
+		if (!Array.isArray(palette) || palette.length === 0 || count <= 0) {
+			return [];
+		}
+		if (palette.length === 1) {
+			const color = normalizeHex(palette[0]) ?? '#000000';
+			return Array(count).fill(color);
+		}
+		const stops = palette.map((color) => hexToRgb(color));
+		const segments = stops.length - 1;
+		if (count === 1) {
+			return [rgbToHex(stops[stops.length - 1])];
+		}
+		const result = [];
+		for (let i = 0; i < count; i++) {
+			const t = i / (count - 1);
+			const scaled = t * segments;
+			const index = Math.min(Math.floor(scaled), segments - 1);
+			const localT = scaled - index;
+			const start = stops[index];
+			const end = stops[index + 1] ?? start;
+			result.push(
+				rgbToHex({
+					r: start.r + (end.r - start.r) * localT,
+					g: start.g + (end.g - start.g) * localT,
+					b: start.b + (end.b - start.b) * localT
+				})
+			);
+		}
+		return result;
+	};
+
 	export let mapName = undefined;
 	export let mapJson = undefined;
 
@@ -89,9 +193,15 @@
 		}
 	}
 
+export let diverging = false;
+export let negativeColorPalette = undefined;
+export let positiveColorPalette = undefined;
+export let zeroColor = DEFAULT_ZERO_COLOR;
+
 	export let abbreviations = false;
 	export let abbreviationProperty = undefined;
 	abbreviations = abbreviations === 'true' || abbreviations === true;
+diverging = diverging === 'true' || diverging === true;
 
 	export let nameProperty = abbreviations ? 'abbrev' : 'name';
 
@@ -157,6 +267,39 @@
 				.filter((v) => Number.isFinite(v));
 			let minValue = min ?? (numericValues.length ? Math.min(...numericValues) : 0);
 			let maxValue = max ?? (numericValues.length ? Math.max(...numericValues) : 0);
+			const negativeRange = minValue < 0 ? Math.abs(minValue) : 0;
+			const positiveRange = maxValue > 0 ? Math.abs(maxValue) : 0;
+			const shouldUseDiverging = diverging && negativeRange > 0 && positiveRange > 0;
+			const effectiveNegativePalette =
+				Array.isArray(negativeColorPalette) && negativeColorPalette.length > 0
+					? negativeColorPalette
+					: DEFAULT_NEGATIVE_COLORS;
+			const effectivePositivePalette =
+				Array.isArray(positiveColorPalette) && positiveColorPalette.length > 0
+					? positiveColorPalette
+					: DEFAULT_POSITIVE_COLORS;
+			const effectiveZeroColor = normalizeHex(zeroColor) ?? DEFAULT_ZERO_COLOR;
+			let visualMapColorArray = colorArray;
+			if (shouldUseDiverging) {
+				const totalRange = negativeRange + positiveRange;
+				const baseSteps = Math.max(2, DIVERGING_STEPS);
+				let negativeSteps = Math.round((baseSteps * negativeRange) / totalRange);
+				let positiveSteps = baseSteps - negativeSteps;
+				if (negativeSteps <= 0) {
+					negativeSteps = 1;
+				}
+				if (positiveSteps <= 0) {
+					positiveSteps = 1;
+					negativeSteps = Math.max(1, baseSteps - positiveSteps);
+				}
+				const adjustedTotal = negativeSteps + positiveSteps;
+				if (adjustedTotal !== baseSteps) {
+					positiveSteps += baseSteps - adjustedTotal;
+				}
+				const negativeGradient = interpolatePalette(effectiveNegativePalette, negativeSteps);
+				const positiveGradient = interpolatePalette(effectivePositivePalette, positiveSteps);
+				visualMapColorArray = [...negativeGradient, effectiveZeroColor, ...positiveGradient];
+			}
 
 			columnSummary = getColumnSummary(data);
 
@@ -232,7 +375,7 @@
 					show: true,
 					text: ['Alto', 'Bajo'],
 					inRange: {
-						color: colorArray
+						color: visualMapColorArray
 					},
 					calculable: true,
 					inverse: false,
