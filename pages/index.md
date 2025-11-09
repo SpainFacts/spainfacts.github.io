@@ -320,8 +320,10 @@ La distribución geográfica de la población en España varía significativamen
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en #"
-      colorScale="bluegreen"
-      colorPalette={['#bf6f2f', '#1c4738']}
+     diverging={true}
+negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+zeroColor="#a44456" 
     />
   </AccordionItem>
   <AccordionItem title="Cambio en %">
@@ -331,8 +333,10 @@ La distribución geográfica de la población en España varía significativamen
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en %"
-      colorScale="bluegreen"
-      colorPalette={['#bf6f2f', '#1c4738']}
+      diverging={true}
+negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+zeroColor="#a44456" 
     />
   </AccordionItem>
 </Accordion>
