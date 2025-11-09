@@ -30,6 +30,11 @@
 	export let colorScale = undefined;
     export let colorPalette = undefined;
 
+    export let diverging = false;
+    export let negativeColorPalette = undefined;
+    export let positiveColorPalette = undefined;
+    export let zeroColor = '#ffffff';
+
 </script>
 
 
@@ -46,6 +51,10 @@
     {link}
     {colorScale}
     {colorPalette}
+    {diverging}
+    {negativeColorPalette}
+    {positiveColorPalette}
+    {zeroColor}
     {nameProperty}
     {abbreviationProperty}
     {abbreviations}

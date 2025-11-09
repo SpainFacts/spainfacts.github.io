@@ -5,32 +5,39 @@ title: SpainFacts
     // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
     import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
     import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
+    
+    // Importar funciones de formato desde el layout
+    import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from './+layout.svelte';
 </script>
-# Nuestra Población Cambiante: España
 
-SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
+<div style="background-color: #6a1b9a; color: white; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
 
-La población de España ha experimentado un crecimiento significativo en las últimas décadas, impulsado principalmente por la inmigración y un saldo vegetativo positivo en periodos recientes.
+  <h1 style="color: white; margin: 0 0 1.5rem 0; font-size: 2.5rem; font-weight: bold;">Nuestra Población Cambiante: España</h1>
 
-<div style="display:flex;justify-content:center;gap:1rem;align-items:center;">
-  <Dropdown 
-    name=año_inicio
-    data={items}
-    value=Year
-    defaultValue="1971"
-  />
-  <Dropdown 
-    name=año_fin
-    data={items}
-    value=Year
-    defaultValue="2024"
-  />
-</div>
+  <p style="margin: 0 0 1rem 0;">Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
+  <p style="margin: 0 0 1.5rem 0;">Entiende los cambios con estos gráficos.</p>
+
+  <div class="dropdown-years" style="display:flex;justify-content:center;gap:1rem;align-items:center;">
+    <Dropdown 
+      name=año_inicio
+      data={items}
+      value=Year
+      defaultValue="1971"
+      class="text-xl"
+    />
+    <Dropdown 
+      name=año_fin
+      data={items}
+      value=Year
+      defaultValue="2024"
+    />
+  </div>
+
 
 | Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
 | -------- | -------- | -------- |
-| {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} |
-
+| {formatCompact(total_poblacion_year_inicio[0].Total, 2)} | {formatCompact(total_poblacion_year_fin[0].Total, 2)} | {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2) + '%'} |
+</div>
 
 
 
@@ -90,6 +97,8 @@ ORDER BY Year ASC;
   y="Variacion_Porcentual"
   y2="Variacion_Absoluta"
   yAxisTitle="Variación Porcentual (%)"
+  yFmt={(val) => formatNumber(val, 2) + '%'}
+  y2Fmt={(val) => formatCompact(val, 1)}
   curve="linear"
   yScale={true}
   echartsOptions={{
@@ -138,9 +147,9 @@ ORDER BY Year ASC;
 />
 
 
-La población de España ha crecido {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
+La población de España ha crecido {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2)}% entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
 
-Desde {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M hasta {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M.
+Desde {formatCompact(total_poblacion_year_inicio[0].Total, 2)} hasta {formatCompact(total_poblacion_year_fin[0].Total, 2)}.
 
 
 
@@ -150,6 +159,7 @@ Desde {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { mi
   x="Year"
   y="Poblacion_Actual"
   yAxisTitle="Población Total"
+  yFmt={(val) => formatCompact(val, 1)}
   curve="linear"
   yScale=true
 />
@@ -179,9 +189,7 @@ where Year = ${inputs.año_fin.value}
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
-      const millones = value / 1e6;
-      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return `${name}: ${texto} M (${percent}%)`;
+      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
     }
   },
   legend: {
@@ -196,8 +204,7 @@ where Year = ${inputs.año_fin.value}
         show: true,
         position: 'inside',
         formatter: ({ value }) => {
-          const millones = value / 1e6;
-          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
+          return formatCompact(value, 2);
         }
       },
       data: [...donut_data_inicio]
@@ -210,9 +217,7 @@ where Year = ${inputs.año_fin.value}
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
-      const millones = value / 1e6;
-      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return `${name}: ${texto} M (${percent}%)`;
+      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
     }
   },
   legend: {
@@ -227,8 +232,7 @@ where Year = ${inputs.año_fin.value}
         show: true,
         position: 'inside',
         formatter: ({ value }) => {
-          const millones = value / 1e6;
-          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
+          return formatCompact(value, 2);
         }
       },
       data: [...donut_data_fin]
@@ -277,6 +281,8 @@ ORDER BY h.Year DESC;
   y2="Ratio_Mujeres_Hombres"
   xAxisTitle="Año"
   yAxisTitle="Población"
+  yFmt={(val) => formatCompact(val, 1)}
+  y2Fmt={(val) => formatNumber(val, 3)}
   yScale=true
   y2Scale=true
 />
@@ -299,7 +305,7 @@ La distribución geográfica de la población en España varía significativamen
       region="statecode"
       value="Población"
       colorScale="bluegreen"
-      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
     />
   </AccordionItem>
   <AccordionItem title="Poblacion en {inputs.año_fin.value}">  
@@ -310,7 +316,7 @@ La distribución geográfica de la población en España varía significativamen
       region="statecode"
       value="Población"
       colorScale="bluegreen"
-      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
     />  
   </AccordionItem>
   <AccordionItem title="Cambio en #">
@@ -320,8 +326,10 @@ La distribución geográfica de la población en España varía significativamen
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en #"
-      colorScale="bluegreen"
-      colorPalette={['#bf6f2f', '#1c4738']}
+     diverging={true}
+negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+zeroColor="#a44456" 
     />
   </AccordionItem>
   <AccordionItem title="Cambio en %">
@@ -331,18 +339,20 @@ La distribución geográfica de la población en España varía significativamen
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en %"
-      colorScale="bluegreen"
-      colorPalette={['#bf6f2f', '#1c4738']}
+      diverging={true}
+negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+zeroColor="#a44456" 
     />
   </AccordionItem>
 </Accordion>
 
 <DataTable data={orders_by_state_diff}>
   <Column title="Provincia" id="Provincia" />
-  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" />
-  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" />
-  <Column title="Cambio en #" id="Cambio en #" />
-  <Column title="Cambio en %" id="Cambio en %" />
+  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Cambio en #" id="Cambio en #" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Cambio en %" id="Cambio en %" fmt={(val) => formatNumber(val, 2) + '%'} />
 </DataTable>  
 
 
@@ -393,7 +403,7 @@ INNER JOIN
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
       formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
       }
     },
     legend: {
@@ -423,7 +433,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       },
       {
         type: 'value',
@@ -431,7 +441,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       }
     ],
         yAxis: [
@@ -517,7 +527,7 @@ INNER JOIN
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
       formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
       }
     },
     legend: {
@@ -547,7 +557,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       },
       {
         type: 'value',
@@ -555,7 +565,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       }
     ],
    yAxis: [
@@ -641,3 +651,5 @@ INNER JOIN
 - [INE - Cifras de población](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176951)
 - [INE - Población por nacionalidad](https://www.ine.es/jaxiT3/Tabla.htm?t=59587)
 ---
+## Sobre SpainFacts
+SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
