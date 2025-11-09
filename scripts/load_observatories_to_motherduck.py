@@ -4,7 +4,7 @@ import os
 
 def load_data_to_motherduck():
     # Get the MotherDuck token from the environment variable
-    motherduck_token = os.getenv('motherduck_token')
+    motherduck_token ="***TOKEN-ELIMINADO***" #os.getenv('motherduck_token')
     if not motherduck_token:
         raise ValueError("motherduck_token environment variable not set")
 
@@ -12,7 +12,7 @@ def load_data_to_motherduck():
     con = duckdb.connect(f'md:SpainFacts?motherduck_token={motherduck_token}')
 
     # Load the cleaned data from the JSON file
-    with open('scripts/observatorios_cleaned.json', 'r') as f:
+    with open('./observatorios_cleaned.json', 'r') as f:
         data = json.load(f)
 
     # Create a table and insert the data
