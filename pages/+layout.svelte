@@ -5,6 +5,6 @@
 	export let data;
 </script>
 
-<EvidenceDefaultLayout {data} logo="/logo16.svg">
+<EvidenceDefaultLayout {data} logo="/logo16.svg" builtWithEvidence={false}>
 	<slot slot="content" />
 </EvidenceDefaultLayout>
