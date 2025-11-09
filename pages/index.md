@@ -5,6 +5,9 @@ title: SpainFacts
     // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
     import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
     import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
+    
+    // Importar funciones de formato desde el layout
+    import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from './+layout.svelte';
 </script>
 # Nuestra Población Cambiante: España
 
@@ -29,7 +32,7 @@ La población de España ha experimentado un crecimiento significativo en las ú
 
 | Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
 | -------- | -------- | -------- |
-| {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M'} | {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} |
+| {formatCompact(total_poblacion_year_inicio[0].Total, 2)} | {formatCompact(total_poblacion_year_fin[0].Total, 2)} | {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2) + '%'} |
 
 
 
@@ -90,6 +93,8 @@ ORDER BY Year ASC;
   y="Variacion_Porcentual"
   y2="Variacion_Absoluta"
   yAxisTitle="Variación Porcentual (%)"
+  yFmt={(val) => formatNumber(val, 2) + '%'}
+  y2Fmt={(val) => formatCompact(val, 1)}
   curve="linear"
   yScale={true}
   echartsOptions={{
@@ -138,9 +143,9 @@ ORDER BY Year ASC;
 />
 
 
-La población de España ha crecido {(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total)).toLocaleString('es-ES', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })} entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
+La población de España ha crecido {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2)}% entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
 
-Desde {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M hasta {(total_poblacion_year_fin[0].Total / 1e6).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M.
+Desde {formatCompact(total_poblacion_year_inicio[0].Total, 2)} hasta {formatCompact(total_poblacion_year_fin[0].Total, 2)}.
 
 
 
@@ -150,6 +155,7 @@ Desde {(total_poblacion_year_inicio[0].Total / 1e6).toLocaleString('es-ES', { mi
   x="Year"
   y="Poblacion_Actual"
   yAxisTitle="Población Total"
+  yFmt={(val) => formatCompact(val, 1)}
   curve="linear"
   yScale=true
 />
@@ -179,9 +185,7 @@ where Year = ${inputs.año_fin.value}
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
-      const millones = value / 1e6;
-      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return `${name}: ${texto} M (${percent}%)`;
+      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
     }
   },
   legend: {
@@ -196,8 +200,7 @@ where Year = ${inputs.año_fin.value}
         show: true,
         position: 'inside',
         formatter: ({ value }) => {
-          const millones = value / 1e6;
-          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
+          return formatCompact(value, 2);
         }
       },
       data: [...donut_data_inicio]
@@ -210,9 +213,7 @@ where Year = ${inputs.año_fin.value}
 <ECharts config={{
   tooltip: {
     formatter: ({ name, value, percent }) => {
-      const millones = value / 1e6;
-      const texto = millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return `${name}: ${texto} M (${percent}%)`;
+      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
     }
   },
   legend: {
@@ -227,8 +228,7 @@ where Year = ${inputs.año_fin.value}
         show: true,
         position: 'inside',
         formatter: ({ value }) => {
-          const millones = value / 1e6;
-          return `${millones.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} M`;
+          return formatCompact(value, 2);
         }
       },
       data: [...donut_data_fin]
@@ -277,6 +277,8 @@ ORDER BY h.Year DESC;
   y2="Ratio_Mujeres_Hombres"
   xAxisTitle="Año"
   yAxisTitle="Población"
+  yFmt={(val) => formatCompact(val, 1)}
+  y2Fmt={(val) => formatNumber(val, 3)}
   yScale=true
   y2Scale=true
 />
@@ -343,10 +345,10 @@ zeroColor="#a44456"
 
 <DataTable data={orders_by_state_diff}>
   <Column title="Provincia" id="Provincia" />
-  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" />
-  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" />
-  <Column title="Cambio en #" id="Cambio en #" />
-  <Column title="Cambio en %" id="Cambio en %" />
+  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Cambio en #" id="Cambio en #" fmt={(val) => formatCompact(val, 1)} />
+  <Column title="Cambio en %" id="Cambio en %" fmt={(val) => formatNumber(val, 2) + '%'} />
 </DataTable>  
 
 
@@ -397,7 +399,7 @@ INNER JOIN
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
       formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
       }
     },
     legend: {
@@ -427,7 +429,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       },
       {
         type: 'value',
@@ -435,7 +437,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       }
     ],
         yAxis: [
@@ -521,7 +523,7 @@ INNER JOIN
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
       formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${Math.abs(param.value)}`).join('<br>');
+        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
       }
     },
     legend: {
@@ -551,7 +553,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       },
       {
         type: 'value',
@@ -559,7 +561,7 @@ INNER JOIN
         axisTick: { show: false },
         axisLine: { show: false },
         splitLine: { show: false },
-        axisLabel: { formatter: value => Math.abs(value) }
+        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
       }
     ],
    yAxis: [
