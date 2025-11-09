@@ -9,31 +9,35 @@ title: SpainFacts
     // Importar funciones de formato desde el layout
     import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from './+layout.svelte';
 </script>
-# Nuestra Población Cambiante: España
 
-SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
+<div style="background-color: #6a1b9a; color: white; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
 
-La población de España ha experimentado un crecimiento significativo en las últimas décadas, impulsado principalmente por la inmigración y un saldo vegetativo positivo en periodos recientes.
+  <h1 style="color: white; margin: 0 0 1.5rem 0; font-size: 2.5rem; font-weight: bold;">Nuestra Población Cambiante: España</h1>
 
-<div style="display:flex;justify-content:center;gap:1rem;align-items:center;">
-  <Dropdown 
-    name=año_inicio
-    data={items}
-    value=Year
-    defaultValue="1971"
-  />
-  <Dropdown 
-    name=año_fin
-    data={items}
-    value=Year
-    defaultValue="2024"
-  />
-</div>
+  <p style="margin: 0 0 1rem 0;">Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
+  <p style="margin: 0 0 1.5rem 0;">Entiende los cambios con estos gráficos.</p>
+
+  <div class="dropdown-years" style="display:flex;justify-content:center;gap:1rem;align-items:center;">
+    <Dropdown 
+      name=año_inicio
+      data={items}
+      value=Year
+      defaultValue="1971"
+      class="text-xl"
+    />
+    <Dropdown 
+      name=año_fin
+      data={items}
+      value=Year
+      defaultValue="2024"
+    />
+  </div>
+
 
 | Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
 | -------- | -------- | -------- |
 | {formatCompact(total_poblacion_year_inicio[0].Total, 2)} | {formatCompact(total_poblacion_year_fin[0].Total, 2)} | {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2) + '%'} |
-
+</div>
 
 
 
@@ -301,7 +305,7 @@ La distribución geográfica de la población en España varía significativamen
       region="statecode"
       value="Población"
       colorScale="bluegreen"
-      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
     />
   </AccordionItem>
   <AccordionItem title="Poblacion en {inputs.año_fin.value}">  
@@ -312,7 +316,7 @@ La distribución geográfica de la población en España varía significativamen
       region="statecode"
       value="Población"
       colorScale="bluegreen"
-      colorPalette={["#f7fbff", "#b7e3ff", "#5dade2", "#2471a3", "#154360"]}
+      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
     />  
   </AccordionItem>
   <AccordionItem title="Cambio en #">
@@ -647,3 +651,5 @@ INNER JOIN
 - [INE - Cifras de población](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176951)
 - [INE - Población por nacionalidad](https://www.ine.es/jaxiT3/Tabla.htm?t=59587)
 ---
+## Sobre SpainFacts
+SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
