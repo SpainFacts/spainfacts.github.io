@@ -11,6 +11,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
 	*,
 	::after,
 	::before,
@@ -62,6 +63,7 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
 	}
+
 	.no-scrollbar {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
@@ -85,7 +87,7 @@
 	}
 
 	article.markdown a.markdown {
-		@apply text-primary underline decoration-transparent hover:decoration-primary  transition-all duration-200;
+		@apply text-primary underline decoration-transparent hover:decoration-primary transition-all duration-200;
 	}
 
 	p.markdown,
@@ -100,6 +102,7 @@
 	ol.markdown {
 		@apply list-decimal ps-6;
 	}
+
 	ul.markdown {
 		@apply list-disc ps-6;
 	}
@@ -107,10 +110,12 @@
 	/* 1st level list */
 	ul.markdown,
 	ol.markdown {
+
 		/* 2nd level unordered list */
 		& ul.markdown {
 			@apply list-circle;
 		}
+
 		/* 2nd level ordered list */
 		& ol.markdown {
 			@apply list-lower-alpha;
@@ -126,6 +131,7 @@
 			& ul.markdown {
 				@apply list-square;
 			}
+
 			/* 3rd level ordered list */
 			& ol.markdown {
 				@apply list-lower-roman;
@@ -136,7 +142,7 @@
 			@apply list-item;
 			text-align: -webkit-match-parent;
 
-			& + li.markdown {
+			&+li.markdown {
 				@apply mt-1;
 			}
 		}
@@ -174,7 +180,7 @@
 	}
 
 	h4.markdown {
-		@apply mt-1 text-sm  font-semibold;
+		@apply mt-1 text-sm font-semibold;
 	}
 
 	h5.markdown {
@@ -201,21 +207,22 @@
 		@apply bg-base-200 border-l-4 border-base-content-muted pl-3 my-8 py-2;
 	}
 
-	blockquote.markdown > blockquote.markdown {
+	blockquote.markdown>blockquote.markdown {
 		@apply m-0;
 	}
 
-	blockquote.markdown > :first-child {
+	blockquote.markdown> :first-child {
 		@apply mt-0;
 	}
 
-	blockquote.markdown > :last-child {
+	blockquote.markdown> :last-child {
 		@apply mb-0;
 	}
 
 	blockquote.markdown * {
 		@apply text-base-content-muted;
 	}
+
 	/* Ensure size and color are maintained for bold, italic, strikethrough */
 	strong.markdown {
 		@apply text-[1em] text-inherit;
@@ -234,7 +241,7 @@
 	}
 
 	table.markdown {
-		@apply min-w-full  border-collapse text-center mx-auto my-5;
+		@apply min-w-full border-collapse text-center mx-auto my-5;
 	}
 
 	th.markdown {
@@ -342,17 +349,47 @@
 		widows: 2;
 	}
 }
+
 /* En app.css - usa selectores específicos para no desconfigurarlo todo */
 
 /* Botón del dropdown */
 [data-popover-trigger],
 [data-melt-popover-trigger] {
-    font-size: 1.25rem !important; /* text-xl */
-    line-height: 1.75rem !important;
-    height: auto !important;}
+	font-size: 1.25rem !important;
+	/* text-xl */
+	line-height: 1.75rem !important;
+	height: auto !important;
+}
 
 /* También el icono para que se vea proporcionado */
 [data-popover-trigger] svg {
-    width: 1.25rem !important;
-    height: 1.25rem !important;
+	width: 1.25rem !important;
+	height: 1.25rem !important;
+}
+
+/* Custom Hero Card Styles */
+.hero-card {
+	background-color: #6a1b9a;
+	color: white;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	margin-bottom: 2rem;
+}
+
+.hero-card h1 {
+	color: white;
+	margin: 0 0 1.5rem 0;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.hero-card p {
+	margin: 0 0 1rem 0;
+}
+
+.hero-card .dropdown-container {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	align-items: center;
 }
