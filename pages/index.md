@@ -3,21 +3,22 @@ title: SpainFacts
 ---
 <script>
     // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
-    import FranceMap from "../../../../src/lib/charts/maps/FranceMap.svelte";
+    import SpainMap from "../../../../src/lib/charts/maps/SpainMap.svelte";
     import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
+    import PopulationPyramid from "../../../../src/lib/components/PopulationPyramid.svelte";
     
-    // Importar funciones de formato desde el layout
-    import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from './+layout.svelte';
+    // Importar funciones de formato desde utils
+    import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from '../../../../src/lib/utils.js';
 </script>
 
-<div style="background-color: #6a1b9a; color: white; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+<div class="hero-card">
 
-  <h1 style="color: white; margin: 0 0 1.5rem 0; font-size: 2.5rem; font-weight: bold;">Nuestra Población Cambiante: España</h1>
+  <h1>Nuestra Población Cambiante: España</h1>
 
-  <p style="margin: 0 0 1rem 0;">Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
-  <p style="margin: 0 0 1.5rem 0;">Entiende los cambios con estos gráficos.</p>
+  <p>Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
+  <p>Entiende los cambios con estos gráficos.</p>
 
-  <div class="dropdown-years" style="display:flex;justify-content:center;gap:1rem;align-items:center;">
+  <div class="dropdown-container">
     <Dropdown 
       name=año_inicio
       data={items}
@@ -298,7 +299,7 @@ ORDER BY h.Year DESC;
 La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
 <Accordion>
   <AccordionItem title="Poblacion en {inputs.año_inicio.value}">
-    <FranceMap
+    <SpainMap
       mapName="Spain"
       nameProperty="code"
       data={orders_by_state_inicio}
@@ -309,7 +310,7 @@ La distribución geográfica de la población en España varía significativamen
     />
   </AccordionItem>
   <AccordionItem title="Poblacion en {inputs.año_fin.value}">  
-    <FranceMap
+    <SpainMap
       mapName="Spain"
       nameProperty="code"
       data={orders_by_state_fin}
@@ -320,29 +321,29 @@ La distribución geográfica de la población en España varía significativamen
     />  
   </AccordionItem>
   <AccordionItem title="Cambio en #">
-    <FranceMap
+    <SpainMap
       mapName="Spain"
       nameProperty="code"
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en #"
-     diverging={true}
-negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
-positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-zeroColor="#a44456" 
+      diverging={true}
+      negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+      positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+      zeroColor="#a44456" 
     />
   </AccordionItem>
   <AccordionItem title="Cambio en %">
-    <FranceMap
+    <SpainMap
       mapName="Spain"
       nameProperty="code"
       data={orders_by_state_diff}
       region="statecode"
       value="Cambio en %"
       diverging={true}
-negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
-positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-zeroColor="#a44456" 
+      negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
+      positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
+      zeroColor="#a44456" 
     />
   </AccordionItem>
 </Accordion>
@@ -396,253 +397,17 @@ INNER JOIN
 ```
 <Grid cols=2>
   <Group>
-  <div style="text-align:center">Año {inputs.año_inicio.value}</div>
- <ECharts
-  config={{
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
-      }
-    },
-    legend: {
-      top: '5%',
-      left: 'center',
-      data: ['Mujeres', 'Hombres']
-    },
-    grid: [
-      { // Left pyramid (Mujeres)
-        left: '5%',
-        width: '40%',
-        bottom: '3%',
-        containLabel: false
-      },
-      { // Right pyramid (Hombres)
-        left: '60 %', // Larger gap for labels
-        width: '40%',
-        bottom: '3%',
-        containLabel: false
-      }
-    ],
-    xAxis: [
-      {
-        type: 'value',
-        gridIndex: 0,
-        inverse: true,
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
-      },
-      {
-        type: 'value',
-        gridIndex: 1,
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
-      }
-    ],
-        yAxis: [
-      { // Left pyramid yAxis (shows labels in middle)
-        type: 'category',
-        gridIndex: 0,
-        position: 'right',
-        inverse: false, // Cambia a true si quieres el mayor al inicio
-        axisLabel: { show: true, inside: false, interval: 0 },
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
-          ])];
-          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-        })()
-      },
-      { // Right pyramid yAxis (hidden labels)
-        type: 'category',
-        gridIndex: 1,
-        position: 'left',
-        inverse: false, // Coincide con el yAxis izquierdo
-        axisLabel: { show: false },
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
-          ])];
-          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-        })()
-      }
-    ],
-    series: [
-      {
-        name: 'Mujeres',
-        type: 'bar',
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        itemStyle: { color: '#6a1b9a' }, // Purple
-        label: { show: false },
-        emphasis: { focus: 'series' },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
-          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-          return union.map(rango => {
-            const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
-            return row ? row.Total : 0;
-          });
-        })()
-      },
-      {
-        name: 'Hombres',
-        type: 'bar',
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        itemStyle: { color: '#388e3c' }, // Green
-        label: { show: false },
-        emphasis: { focus: 'series' },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_inicio.map(r => r.RangoEdad)
-          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-          return union.map(rango => {
-            const row = poblacion_por_sexo_edad_inicio.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
-            return row ? row.Total : 0;
-          });
-        })()
-      }
-    ]
-  }}
-/>
-</Group>
+    <PopulationPyramid 
+      data={poblacion_por_sexo_edad_inicio} 
+      year={inputs.año_inicio.value} 
+    />
+  </Group>
   <Group>
-  <div style="text-align:center">Año {inputs.año_fin.value}</div>
- <ECharts
-  config={{
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      formatter: function (params) {
-        return params.map(param => `${param.seriesName}: ${formatCompact(Math.abs(param.value), 1)}`).join('<br>');
-      }
-    },
-    legend: {
-      top: '5%',
-      left: 'center',
-      data: ['Mujeres', 'Hombres']
-    },
-    grid: [
-      { // Left pyramid (Mujeres)
-        left: '5%',
-        width: '40%',
-        bottom: '3%',
-        containLabel: false
-      },
-      { // Right pyramid (Hombres)
-        left: '60%', // Larger gap for labels
-        width: '40%',
-        bottom: '3%',
-        containLabel: false
-      }
-    ],
-    xAxis: [
-      {
-        type: 'value',
-        gridIndex: 0,
-        inverse: true,
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
-      },
-      {
-        type: 'value',
-        gridIndex: 1,
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        axisLabel: { formatter: value => formatCompact(Math.abs(value), 0) }
-      }
-    ],
-   yAxis: [
-      { // Left pyramid yAxis (shows labels in middle)
-        type: 'category',
-        gridIndex: 0,
-        position: 'right',
-        inverse: false, // Cambia a true si quieres el mayor al inicio
-        axisLabel: { show: true, inside: false ,interval:0},
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
-          ])];
-          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-        })()
-      },
-      { // Right pyramid yAxis (hidden labels)
-        type: 'category',
-        gridIndex: 1,
-        position: 'left',
-        inverse: false, // Coincide con el yAxis izquierdo
-        axisLabel: { show: false },
-        axisTick: { show: false },
-        axisLine: { show: false },
-        splitLine: { show: false },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
-          ])];
-          return union.sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-        })()
-      }
-    ],
-    series: [
-      {
-        name: 'Mujeres',
-        type: 'bar',
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        itemStyle: { color: '#6a1b9a' }, // Purple
-        label: { show: false },
-        emphasis: { focus: 'series' },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
-          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-          return union.map(rango => {
-            const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Mujeres' && row.RangoEdad === rango);
-            return row ? row.Total : 0;
-          });
-        })()
-      },
-      {
-        name: 'Hombres',
-        type: 'bar',
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        itemStyle: { color: '#388e3c' }, // Green
-        label: { show: false },
-        emphasis: { focus: 'series' },
-        data: (() => {
-          const union = [...new Set([
-            ...poblacion_por_sexo_edad_fin.map(r => r.RangoEdad)
-          ])].sort((a, b) => parseInt(a.split('-')[0]) - parseInt(b.split('-')[0]));
-          return union.map(rango => {
-            const row = poblacion_por_sexo_edad_fin.find(row => row.Sexo === 'Hombres' && row.RangoEdad === rango);
-            return row ? row.Total : 0;
-          });
-        })()
-      }
-    ]
-  }}
-/>
-</Group>
+    <PopulationPyramid 
+      data={poblacion_por_sexo_edad_fin} 
+      year={inputs.año_fin.value} 
+    />
+  </Group>
 </Grid>
 
 

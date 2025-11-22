@@ -1,5 +1,8 @@
 # This file was automatically generated
-name: mother
 type: motherduck
+name: mother
 options:
   database: SpainFacts
+# Advanced Options, you probably don't want to change this
+buildOptions:
+  batchSize: 1000000
