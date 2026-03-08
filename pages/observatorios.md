@@ -1,7 +1,5 @@
 ---
 title: Observatorios Públicos
-sources:
-  - mother.observatorios
 ---
 
 # Observatorios Públicos en España

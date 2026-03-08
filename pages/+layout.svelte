@@ -19,9 +19,18 @@
     import "@evidence-dev/tailwind/fonts.css";
     import "../app.css";
     import { EvidenceDefaultLayout } from "@evidence-dev/core-components";
+    import Header from "../../../../src/lib/components/Header.svelte";
     export let data;
 </script>
 
-<EvidenceDefaultLayout {data} logo="/logo16.svg" builtWithEvidence={false}>
+<Header {data} />
+
+<EvidenceDefaultLayout
+    {data}
+    logo="/logo16.svg"
+    builtWithEvidence={false}
+    hideSidebar={true}
+    hideHeader={true}
+>
     <slot slot="content" />
 </EvidenceDefaultLayout>

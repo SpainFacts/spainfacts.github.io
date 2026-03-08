@@ -9,13 +9,17 @@ title: SpainFacts
     
     // Importar funciones de formato desde utils
     import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from '../../../../src/lib/utils.js';
+    import CustomBarChart from '../../../../src/lib/components/CustomBarChart.svelte';
+    import CustomLineChart from '../../../../src/lib/components/CustomLineChart.svelte';
+    import CustomTable from '../../../../src/lib/components/CustomTable.svelte';
+    import CustomDonutChart from '../../../../src/lib/components/CustomDonutChart.svelte';
 </script>
 
 <div class="hero-card">
 
   <h1>Nuestra Población Cambiante: España</h1>
 
-  <p>Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
+  <p> Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
   <p>Entiende los cambios con estos gráficos.</p>
 
   <div class="dropdown-container">
@@ -91,60 +95,14 @@ FROM Poblacion_Anual
 ORDER BY Year ASC;
 ```
 
-<BarChart
+<CustomBarChart
   data={poblacion_variacion_anual}
   title="Variación anual de la población en España"
   x="Year"
   y="Variacion_Porcentual"
   y2="Variacion_Absoluta"
   yAxisTitle="Variación Porcentual (%)"
-  yFmt={(val) => formatNumber(val, 2) + '%'}
-  y2Fmt={(val) => formatCompact(val, 1)}
-  curve="linear"
-  yScale={true}
-  echartsOptions={{
-    yAxis: [
-  {
-    // Primary y-axis
-    type: 'value'
-  },
-  {
-    // Secondary y-axis (y2)
-    type: 'value',
-    position: 'right',
-    axisLine: { show: false },
-    axisLabel: { show: false },
-    axisTick: { show: false },
-    splitLine: { show: false }
-  }
-]   ,
-    series: [
-      {
-        name: 'Variacion_Porcentual',
-        type: 'bar',
-        barWidth: '90%',
-        encode: {
-          x: 'Year',
-          y: 'Variacion_Porcentual'
-        }
-      },
-      {
-        name: 'Variacion_Absoluta',
-        type: 'bar',
-        yAxisIndex: 1,
-        encode: {
-          x: 'Year',
-          y: 'Variacion_Absoluta'
-        },
-        barWidth: '1%',
-        itemStyle: {
-          opacity: 0,
-          width: 0
-        },
-        show: true
-      }
-    ]
-  }}
+  locale="es-ES"
 />
 
 
@@ -154,15 +112,14 @@ Desde {formatCompact(total_poblacion_year_inicio[0].Total, 2)} hasta {formatComp
 
 
 
-<LineChart
+<CustomLineChart
   data={poblacion_variacion_anual}
   title="Evolución de la población total de España"
   x="Year"
   y="Poblacion_Actual"
   yAxisTitle="Población Total"
-  yFmt={(val) => formatCompact(val, 1)}
-  curve="linear"
-  yScale=true
+  locale="es-ES"
+  startingAtZero={false}
 />
 
 ## Población por sexo
@@ -185,63 +142,26 @@ where Year = ${inputs.año_fin.value}
 ```
 <Grid cols=2>
 <Group>
-
-<div style="text-align:center">Año {inputs.año_inicio.value}</div>
-<ECharts config={{
-  tooltip: {
-    formatter: ({ name, value, percent }) => {
-      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
-    }
-  },
-  legend: {
-    top: '5%',
-    left: 'center'
-  },
-  series: [
-    {
-      type: 'pie',
-      radius: ['40%', '70%'],
-      label: {
-        show: true,
-        position: 'inside',
-        formatter: ({ value }) => {
-          return formatCompact(value, 2);
-        }
-      },
-      data: [...donut_data_inicio]
-    }
-  ]
-}} />
+<CustomDonutChart 
+  data={donut_data_inicio} 
+  title="Año {inputs.año_inicio.value}"
+  name="name"
+  value="value"
+/>
 </Group>
 <Group>
-<div style="text-align:center">Año {inputs.año_fin.value}</div>
-<ECharts config={{
-  tooltip: {
-    formatter: ({ name, value, percent }) => {
-      return `${name}: ${formatCompact(value, 2)} (${percent}%)`;
-    }
-  },
-  legend: {
-    top: '5%',
-    left: 'center'
-  },
-  series: [
-    {
-      type: 'pie',
-      radius: ['40%', '70%'],
-      label: {
-        show: true,
-        position: 'inside',
-        formatter: ({ value }) => {
-          return formatCompact(value, 2);
-        }
-      },
-      data: [...donut_data_fin]
-    }
-  ]
-}} />
+<CustomDonutChart 
+  data={donut_data_fin} 
+  title="Año {inputs.año_fin.value}"
+  name="name"
+  value="value"
+/>
 </Group>
 </Grid>
+
+
+<div class="mb-8"></div>
+
 
 ```sql poblacion_por_sexo3
  WITH hombres AS (
@@ -267,14 +187,14 @@ SELECT
   CAST(m.Total AS DECIMAL) / CAST(h.Total AS DECIMAL) AS Ratio_Mujeres_Hombres
 FROM hombres h
 INNER JOIN mujeres m ON h.Year = m.Year
-ORDER BY h.Year DESC;
+ORDER BY h.Year ASC;
 
 
 ```
 
 
 
-<LineChart
+<CustomLineChart
   data={poblacion_por_sexo3}
   title="Población por sexo a lo largo del tiempo"
   x="Year"
@@ -282,10 +202,8 @@ ORDER BY h.Year DESC;
   y2="Ratio_Mujeres_Hombres"
   xAxisTitle="Año"
   yAxisTitle="Población"
-  yFmt={(val) => formatCompact(val, 1)}
-  y2Fmt={(val) => formatNumber(val, 3)}
-  yScale=true
-  y2Scale=true
+  locale="es-ES"
+  startingAtZero={false}
 />
 
 
@@ -348,13 +266,16 @@ La distribución geográfica de la población en España varía significativamen
   </AccordionItem>
 </Accordion>
 
-<DataTable data={orders_by_state_diff}>
-  <Column title="Provincia" id="Provincia" />
-  <Column title="Población {inputs.año_inicio.value}" id="Poblacion_Inicio" fmt={(val) => formatCompact(val, 1)} />
-  <Column title="Población {inputs.año_fin.value}" id="Poblacion_Fin" fmt={(val) => formatCompact(val, 1)} />
-  <Column title="Cambio en #" id="Cambio en #" fmt={(val) => formatCompact(val, 1)} />
-  <Column title="Cambio en %" id="Cambio en %" fmt={(val) => formatNumber(val, 2) + '%'} />
-</DataTable>  
+<CustomTable 
+  data={orders_by_state_diff}
+  columns={[
+    { title: "Provincia", accessor: "Provincia" },
+    { title: `Población ${inputs.año_inicio.value}`, accessor: "Poblacion_Inicio", fmt: (val) => formatCompact(val, 1), align: 'right' },
+    { title: `Población ${inputs.año_fin.value}`, accessor: "Poblacion_Fin", fmt: (val) => formatCompact(val, 1), align: 'right' },
+    { title: "Cambio en #", accessor: "Cambio en #", fmt: (val) => formatCompact(val, 1), align: 'right' },
+    { title: "Cambio en %", accessor: "Cambio en %", fmt: (val) => formatNumber(val, 2) + '%', align: 'right' }
+  ]}
+/>  
 
 
 ```sql orders_by_state_inicio
