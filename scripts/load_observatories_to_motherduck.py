@@ -4,7 +4,7 @@ import os
 
 def load_data_to_motherduck():
     # Get the MotherDuck token from the environment variable
-    motherduck_token ="***TOKEN-ELIMINADO***" #os.getenv('motherduck_token')
+    motherduck_token = os.getenv('motherduck_token')
     if not motherduck_token:
         raise ValueError("motherduck_token environment variable not set")
 

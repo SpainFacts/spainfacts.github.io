@@ -4,7 +4,7 @@ import duckdb
 import os
 
 # --- Configuration ---
-MOTHERDUCK_TOKEN = "***TOKEN-ELIMINADO***"
+MOTHERDUCK_TOKEN = os.getenv("motherduck_token")
 DATABASE_NAME = 'SpainFacts'
 BASE_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/"
 BASE_URL="https://www.ine.es/wstempus/csv_sc/es/DATOS_TABLA/"
