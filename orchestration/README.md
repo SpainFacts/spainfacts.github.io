@@ -30,10 +30,9 @@ Actualizar: `git pull && docker compose up -d --build`.
 ## En local (desarrollo)
 
 ```bash
-python -m venv .venv && .venv/Scripts/activate   # o source .venv/bin/activate
-pip install -r orchestration/requirements.txt
+uv venv && uv pip install -r orchestration/requirements.txt
 set MOTHERDUCK_TOKEN=...                          # o export en bash
-dagster dev -m orchestration.definitions          # desde la raíz del repo
+uv run dagster dev -m orchestration.definitions   # desde la raíz del repo
 ```
 
 `dagster dev` genera el manifest de dbt automáticamente; en Docker lo hace el
