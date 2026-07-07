@@ -1,0 +1,8 @@
+spainfacts:
+  target: prod
+  outputs:
+    prod:
+      type: duckdb
+      path: "md:SpainFacts?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      schema: main
+      threads: 4

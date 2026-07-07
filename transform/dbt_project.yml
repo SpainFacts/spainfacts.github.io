@@ -1,0 +1,21 @@
+name: spainfacts
+version: "1.0.0"
+profile: spainfacts
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  spainfacts:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      # Los marts se escriben en `main` con el mismo nombre de tabla que
+      # esperan las fuentes de Evidence (sources/mother/*.sql): cero cambios allí.
+      +materialized: table
+      +schema: main

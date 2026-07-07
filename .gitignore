@@ -9,3 +9,16 @@ static/data
 .env
 .evidence/meta
 sources/test2/poblacion.csvZone.Identifier
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# dbt
+transform/target/
+transform/dbt_packages/
+transform/logs/
+
+# Dagster local
+.dagster_home/

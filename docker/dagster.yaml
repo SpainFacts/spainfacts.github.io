@@ -1,0 +1,14 @@
+# Configuración de la instancia Dagster (historial de runs en Postgres)
+storage:
+  postgres:
+    postgres_db:
+      hostname: postgres
+      port: 5432
+      db_name: dagster
+      username: dagster
+      password:
+        env: DAGSTER_PG_PASSWORD
+
+run_retries:
+  enabled: true
+  max_retries: 2

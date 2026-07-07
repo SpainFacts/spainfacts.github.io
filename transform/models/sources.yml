@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Datos crudos cargados por dlt (ingestion/)"
+    schema: raw
+    tables:
+      - name: ine_ipc
+      - name: ine_paro
