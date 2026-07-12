@@ -1,48 +1,89 @@
-# Evidence Template Project
+# SpainFacts
 
-## Using Codespaces
+Dashboards de datos públicos de España ([spainfacts.org](https://spainfacts.org)), construidos con [Evidence](https://evidence.dev) sobre [MotherDuck](https://motherduck.com), con ingesta y transformación orquestadas por Dagster.
 
-If you are using this template in Codespaces, click the `Start Evidence` button in the bottom status bar. This will install dependencies and open a preview of your project in your browser - you should get a popup prompting you to open in browser.
+## Arquitectura
 
-Or you can use the following commands to get started:
+```
+Dagster (servidor, schedule diario 6:00 Europe/Madrid)
+  ├─ ingestion/  dlt: API del INE ──► MotherDuck (schema raw)
+  ├─ transform/  dbt: staging ──► marts (main.ipc, main.unemployment, ...)
+  └─ deploy_web: repository_dispatch ──► GitHub Actions ──► Evidence ──► GitHub Pages
+```
+
+| Carpeta          | Qué es                                                        |
+| ---------------- | ------------------------------------------------------------- |
+| `pages/`, `src/` | La web (Evidence: markdown + SQL + componentes Svelte)         |
+| `sources/`       | Consultas de Evidence contra MotherDuck                        |
+| `ingestion/`     | Pipelines de carga con [dlt](https://dlthub.com)               |
+| `transform/`     | Proyecto [dbt](https://getdbt.com) (adaptador dbt-duckdb)      |
+| `orchestration/` | Definiciones de [Dagster](https://dagster.io)                  |
+| `docker/`        | Imagen y configuración para desplegar Dagster en el servidor   |
+
+## Requisitos
+
+- Node.js ≥ 18 y npm (web)
+- [uv](https://docs.astral.sh/uv/) (stack de datos)
+- Un token de MotherDuck (Settings → Access Tokens)
+
+Copia `.env.example` a `.env` y rellena las variables. El `.env` **nunca** se versiona.
+
+## La web (Evidence) en local
 
 ```bash
 npm install
-npm run sources
-npm run dev -- --host 0.0.0.0
+npm run sources     # ejecuta las consultas contra MotherDuck (necesita EVIDENCE_SOURCE__mother__token)
+npm run dev         # abre http://localhost:3000
 ```
 
-See [the CLI docs](https://docs.evidence.dev/cli/) for more command information.
-
-**Note:** Codespaces is much faster on the Desktop app. After the Codespace has booted, select the hamburger menu → Open in VS Code Desktop.
-
-## Get Started from VS Code
-
-The easiest way to get started is using the [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=Evidence.evidence-vscode):
-
-
-
-1. Install the extension from the VS Code Marketplace
-2. Open the Command Palette (Ctrl/Cmd + Shift + P) and enter `Evidence: New Evidence Project`
-3. Click `Start Evidence` in the bottom status bar
-
-## Get Started using the CLI
+## El stack de datos (Dagster) en local
 
 ```bash
-npx degit evidence-dev/template my-project
-cd my-project 
-npm install 
-npm run sources
-npm run dev 
+uv venv
+uv pip install -r orchestration/requirements.txt
+
+# PowerShell:
+$env:MOTHERDUCK_TOKEN = "..."; $env:GITHUB_DISPATCH_TOKEN = "..."
+# bash:
+export MOTHERDUCK_TOKEN=... GITHUB_DISPATCH_TOKEN=...
+
+uv run dagster dev -m orchestration.definitions    # UI en http://localhost:3000
 ```
 
-Check out the docs for [alternative install methods](https://docs.evidence.dev/getting-started/install-evidence) including Docker, Github Codespaces, and alongside dbt.
+Desde la UI: **Catalog** lista los assets, **Lineage** muestra el grafo
+`dlt → staging → marts → deploy_web`, y en **Automation** está el schedule
+`actualizacion_diaria` (apagado por defecto; en local no hace falta encenderlo —
+puedes materializar assets a mano con *Materialize*).
 
+Solo el pipeline de dbt (sin Dagster):
 
+```bash
+uv run dbt build --project-dir transform --profiles-dir transform
+```
 
-## Learning More
+## Despliegue en el servidor
 
-- [Docs](https://docs.evidence.dev/)
-- [Github](https://github.com/evidence-dev/evidence)
-- [Slack Community](https://slack.evidence.dev/)
-- [Evidence Home Page](https://www.evidence.dev)
+```bash
+git clone https://github.com/SpainFacts/spainfacts.github.io.git && cd spainfacts.github.io
+cp .env.example .env    # rellenar MOTHERDUCK_TOKEN, GITHUB_DISPATCH_TOKEN, DAGSTER_PG_PASSWORD
+docker compose up -d --build
+```
+
+UI en `http://<servidor>:3000` — no la expongas a internet sin autenticación
+delante (Dagster OSS no trae login). Activa el schedule `actualizacion_diaria`
+en **Automation** la primera vez. Para actualizar: `git pull && docker compose up -d --build`.
+
+Más detalle en [orchestration/README.md](orchestration/README.md).
+
+## Variables de entorno
+
+| Variable                         | Dónde              | Para qué                                        |
+| -------------------------------- | ------------------ | ----------------------------------------------- |
+| `EVIDENCE_SOURCE__mother__token` | local + secret CI  | Evidence lee MotherDuck (basta read_only)       |
+| `MOTHERDUCK_TOKEN`               | local + servidor   | dlt y dbt escriben en MotherDuck (read_write)   |
+| `GITHUB_DISPATCH_TOKEN`          | servidor           | Dagster dispara el deploy (PAT scope Actions)   |
+| `DAGSTER_PG_PASSWORD`            | servidor           | Postgres interno de Dagster                     |
+
+El deploy de la web corre en GitHub Actions ([deploy.yml](.github/workflows/deploy.yml)):
+se dispara con cada push a `main` y con el `repository_dispatch` que envía
+Dagster al terminar la carga diaria.
