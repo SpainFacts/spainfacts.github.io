@@ -13,8 +13,10 @@ INE_BASE = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/"
 
 # nombre de tabla destino en raw -> id de tabla del INE
 TABLAS = {
-    "ine_ipc": "50902",   # IPC: índices y tasas de variación
-    "ine_paro": "65292",  # Tasa de paro por sexo y grupo de edad (EPA)
+    "ine_ipc": "50902",  # IPC: índices y tasas de variación (nacional, por grupo COICOP)
+    "ine_paro": "65219",  # EPA: tasas de paro por sexo y grupo de edad (nacional, 2002-hoy)
+    # Ojo: la 65292 que usaba el script antiguo son valores ABSOLUTOS por CCAA
+    # (no tiene tasas), y la 4086 está descatalogada (solo 2021-2023).
 }
 
 

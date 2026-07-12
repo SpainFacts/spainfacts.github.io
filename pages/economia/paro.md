@@ -29,10 +29,11 @@ Este gráfico muestra la fluctuación de la tasa de paro a lo largo del tiempo, 
 **Fuente:** [INE - Encuesta de Población Activa (EPA)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=ultiDatos&idp=1254735976595)
 
 ```sql unemployment_data
--- Fetches the complete time series for the unemployment rate from MotherDuck
+-- Tasa de paro total nacional (serie EPA423474 del INE, tabla 65219)
 SELECT
-    date,
-    value
-FROM mother.unemployment
-ORDER BY date ASC
+    periodo AS date,
+    valor AS value
+FROM mother.metricas
+WHERE metrica_id = 'tasa_paro'
+ORDER BY periodo ASC
 ```

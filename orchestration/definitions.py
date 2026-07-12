@@ -25,6 +25,7 @@ from dagster import (
 from dagster_dbt import DagsterDbtTranslator, DbtCliResource, DbtProject, dbt_assets
 from dagster_dlt import DagsterDltResource, dlt_assets
 
+from ingestion.eurostat import eurostat
 from ingestion.ine import ine
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -32,17 +33,29 @@ TRANSFORM_DIR = REPO_ROOT / "transform"
 
 # --- Ingesta: dlt --------------------------------------------------------
 
-dlt_pipeline = dlt.pipeline(
-    pipeline_name="ine",
-    destination=dlt.destinations.motherduck(
-        credentials=f"md:///SpainFacts?motherduck_token={os.environ.get('MOTHERDUCK_TOKEN', '')}"
-    ),
-    dataset_name="raw",
-)
+
+def _pipeline_motherduck(nombre: str) -> dlt.Pipeline:
+    return dlt.pipeline(
+        pipeline_name=nombre,
+        destination=dlt.destinations.motherduck(
+            credentials=f"md:///SpainFacts?motherduck_token={os.environ.get('MOTHERDUCK_TOKEN', '')}"
+        ),
+        dataset_name="raw",
+    )
 
 
-@dlt_assets(dlt_source=ine(), dlt_pipeline=dlt_pipeline, name="ine", group_name="ingesta")
+@dlt_assets(dlt_source=ine(), dlt_pipeline=_pipeline_motherduck("ine"), name="ine", group_name="ingesta")
 def ine_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(
+    dlt_source=eurostat(),
+    dlt_pipeline=_pipeline_motherduck("eurostat"),
+    name="eurostat",
+    group_name="ingesta",
+)
+def eurostat_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -54,10 +67,12 @@ dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo
 
 class _Translator(DagsterDbtTranslator):
     def get_asset_key(self, dbt_resource_props):
-        # Conecta las sources de dbt (raw.ine_*) con los assets dlt,
+        # Conecta las sources de dbt (raw.*) con los assets dlt,
         # cuyo key por defecto es dlt_<source>_<recurso>.
         if dbt_resource_props["resource_type"] == "source":
-            return AssetKey(f"dlt_ine_{dbt_resource_props['name']}")
+            nombre = dbt_resource_props["name"]
+            fuente = "ine" if nombre.startswith("ine_") else "eurostat"
+            return AssetKey(f"dlt_{fuente}_{nombre}")
         return super().get_asset_key(dbt_resource_props)
 
 
@@ -98,7 +113,7 @@ schedule_diario = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria],
     schedules=[schedule_diario],
     resources={

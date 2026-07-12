@@ -31,22 +31,24 @@ Esta sección presenta indicadores clave sobre la economía española, extraído
 Todos los datos se extraen y procesan automáticamente desde la API del [Instituto Nacional de Estadística (INE)](https://www.ine.es/) y se cargan en nuestra base de datos en MotherDuck.
 
 ```sql latest_unemployment
--- Fetches the most recent unemployment rate from MotherDuck
+-- Última tasa de paro (EPA, serie EPA423474)
 SELECT
-    value,
-    strftime(date, '%Y-%m') as period
-FROM mother.unemployment
-ORDER BY date DESC
+    valor AS value,
+    strftime(periodo, '%Y-%m') AS period
+FROM mother.metricas
+WHERE metrica_id = 'tasa_paro'
+ORDER BY periodo DESC
 LIMIT 1
 ```
 
 ```sql latest_ipc
--- Fetches the most recent Consumer Price Index (CPI) annual rate from MotherDuck
+-- Última variación anual del IPC (serie IPC251856)
 SELECT
-    value,
-    strftime(date, '%Y-%m') as period
-FROM mother.ipc
-ORDER BY date DESC
+    valor AS value,
+    strftime(periodo, '%Y-%m') AS period
+FROM mother.metricas
+WHERE metrica_id = 'ipc_variacion_anual'
+ORDER BY periodo DESC
 LIMIT 1
 ```
 
