@@ -1,0 +1,108 @@
+"""Definiciones Dagster: ingesta dlt -> dbt -> disparo del deploy de Evidence.
+
+Grafo de assets:
+  raw (dlt: INE) -> staging/marts (dbt) -> deploy_web (repository_dispatch)
+
+Variables de entorno necesarias (ver .env.example):
+  MOTHERDUCK_TOKEN        token read_write para dlt y dbt
+  GITHUB_DISPATCH_TOKEN   PAT fine-grained con permiso Actions sobre el repo
+"""
+
+import os
+from pathlib import Path
+
+import dlt
+import requests
+from dagster import (
+    AssetExecutionContext,
+    AssetKey,
+    AssetSelection,
+    Definitions,
+    ScheduleDefinition,
+    asset,
+    define_asset_job,
+)
+from dagster_dbt import DagsterDbtTranslator, DbtCliResource, DbtProject, dbt_assets
+from dagster_dlt import DagsterDltResource, dlt_assets
+
+from ingestion.ine import ine
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+TRANSFORM_DIR = REPO_ROOT / "transform"
+
+# --- Ingesta: dlt --------------------------------------------------------
+
+dlt_pipeline = dlt.pipeline(
+    pipeline_name="ine",
+    destination=dlt.destinations.motherduck(
+        credentials=f"md:///SpainFacts?motherduck_token={os.environ.get('MOTHERDUCK_TOKEN', '')}"
+    ),
+    dataset_name="raw",
+)
+
+
+@dlt_assets(dlt_source=ine(), dlt_pipeline=dlt_pipeline, name="ine", group_name="ingesta")
+def ine_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# --- Transformación: dbt --------------------------------------------------
+
+dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
+dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
+
+
+class _Translator(DagsterDbtTranslator):
+    def get_asset_key(self, dbt_resource_props):
+        # Conecta las sources de dbt (raw.ine_*) con los assets dlt,
+        # cuyo key por defecto es dlt_<source>_<recurso>.
+        if dbt_resource_props["resource_type"] == "source":
+            return AssetKey(f"dlt_ine_{dbt_resource_props['name']}")
+        return super().get_asset_key(dbt_resource_props)
+
+
+@dbt_assets(manifest=dbt_project.manifest_path, dagster_dbt_translator=_Translator())
+def transform_assets(context: AssetExecutionContext, dbt: DbtCliResource):
+    # `build` = run + test: si un test falla, el asset falla y no se publica la web
+    yield from dbt.cli(["build"], context=context).stream()
+
+
+# --- Publicación: disparar el deploy de Evidence en GitHub Actions --------
+
+@asset(deps=[transform_assets], group_name="publicacion")
+def deploy_web(context: AssetExecutionContext):
+    """Lanza el workflow deploy.yml vía repository_dispatch (event: data-updated)."""
+    respuesta = requests.post(
+        "https://api.github.com/repos/SpainFacts/spainfacts.github.io/dispatches",
+        headers={
+            "Authorization": f"Bearer {os.environ['GITHUB_DISPATCH_TOKEN']}",
+            "Accept": "application/vnd.github+json",
+        },
+        json={"event_type": "data-updated"},
+        timeout=30,
+    )
+    respuesta.raise_for_status()
+    context.log.info("Deploy de Evidence disparado en GitHub Actions.")
+
+
+# --- Job y schedule -------------------------------------------------------
+
+actualizacion_diaria = define_asset_job(
+    "actualizacion_diaria", selection=AssetSelection.all()
+)
+
+schedule_diario = ScheduleDefinition(
+    job=actualizacion_diaria,
+    cron_schedule="0 6 * * *",
+    execution_timezone="Europe/Madrid",
+)
+
+defs = Definitions(
+    assets=[ine_assets, transform_assets, deploy_web],
+    jobs=[actualizacion_diaria],
+    schedules=[schedule_diario],
+    resources={
+        "dlt_resource": DagsterDltResource(),
+        "dbt": DbtCliResource(project_dir=str(TRANSFORM_DIR), profiles_dir=str(TRANSFORM_DIR)),
+    },
+)

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: ipc
+    description: "IPC del INE (tabla 50902), todas las series"
+    columns:
+      - name: date
+        tests: [not_null]
+      - name: value
+        tests: [not_null]
+      - name: cod_serie
+        tests: [not_null]
+  - name: unemployment
+    description: "Tasa de paro EPA (tabla 65292), todas las series"
+    columns:
+      - name: date
+        tests: [not_null]
+      - name: value
+        tests: [not_null]
+      - name: cod_serie
+        tests: [not_null]

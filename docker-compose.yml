@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dagster
+      POSTGRES_PASSWORD: ${DAGSTER_PG_PASSWORD}
+      POSTGRES_DB: dagster
+    volumes:
+      - dagster-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dagster"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  webserver:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    command: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-w", "/opt/dagster/home/workspace.yaml"]
+    ports:
+      - "3000:3000"
+    env_file: .env
+    volumes:
+      - ./docker/dagster.yaml:/opt/dagster/home/dagster.yaml:ro
+      - ./docker/workspace.yaml:/opt/dagster/home/workspace.yaml:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  daemon:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    command: ["dagster-daemon", "run", "-w", "/opt/dagster/home/workspace.yaml"]
+    env_file: .env
+    volumes:
+      - ./docker/dagster.yaml:/opt/dagster/home/dagster.yaml:ro
+      - ./docker/workspace.yaml:/opt/dagster/home/workspace.yaml:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  dagster-pg:
