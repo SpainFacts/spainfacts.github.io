@@ -7,3 +7,4 @@ sources:
     tables:
       - name: ine_ipc
       - name: ine_paro
+      - name: eurostat_deuda

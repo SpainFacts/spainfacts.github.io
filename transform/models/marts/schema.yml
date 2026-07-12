@@ -1,6 +1,17 @@
 version: 2
 
 models:
+  - name: metricas
+    description: "Modelo largo de métricas: una fila por (metrica_id, periodo)"
+    columns:
+      - name: metrica_id
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: valor
+        tests: [not_null]
+      - name: url_fuente
+        tests: [not_null]
   - name: ipc
     description: "IPC del INE (tabla 50902), todas las series"
     columns:

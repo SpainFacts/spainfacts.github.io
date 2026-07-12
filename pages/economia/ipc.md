@@ -30,10 +30,11 @@ Este gráfico muestra cómo ha variado la inflación a lo largo de los años, lo
 **Fuente:** [INE - Índice de Precios de Consumo (IPC)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176802&menu=ultiDatos&idp=1254735976607)
 
 ```sql ipc_data
--- Fetches the complete time series for the Consumer Price Index (CPI) from MotherDuck
+-- Variación anual del índice general (serie IPC251856 del INE)
 SELECT
-    date,
-    value
-FROM mother.ipc
-ORDER BY date ASC
+    periodo AS date,
+    valor AS value
+FROM mother.metricas
+WHERE metrica_id = 'ipc_variacion_anual'
+ORDER BY periodo ASC
 ```

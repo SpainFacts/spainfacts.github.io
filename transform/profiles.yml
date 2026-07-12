@@ -6,3 +6,10 @@ spainfacts:
       path: "md:SpainFacts?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
       schema: main
       threads: 4
+    # Para desarrollo/pruebas sin tocar MotherDuck: un DuckDB local
+    #   dbt build --target dev --project-dir transform --profiles-dir transform
+    dev:
+      type: duckdb
+      path: "{{ env_var('SPAINFACTS_DUCKDB', 'dev.duckdb') }}"
+      schema: main
+      threads: 4

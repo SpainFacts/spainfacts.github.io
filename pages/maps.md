@@ -30,7 +30,7 @@ INNER JOIN
         <AreaMap
           data={orders_by_state_inicio}
           areaCol="statecode"
-          geoJsonUrl="./spain-provinces.geojson"
+          geoJsonUrl="/spain-provinces.geojson"
           geoId="cod_prov"
           value="Población"
           tooltip={[

@@ -22,3 +22,9 @@ transform/logs/
 
 # Dagster local
 .dagster_home/
+
+# Dagster dev y DuckDB locales
+.tmp_dagster_home_*/
+*.duckdb
+*.duckdb.wal
+.claude/

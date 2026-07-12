@@ -1,7 +1,7 @@
 select
     cod_serie,
     serie,
-    epoch_ms(fecha) as date,
+    cast(epoch_ms(fecha) + interval 12 hour as date) as date,
     anyo as year,
     valor as value
 from {{ source('raw', 'ine_paro') }}
