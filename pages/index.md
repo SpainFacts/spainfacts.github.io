@@ -1,341 +1,299 @@
 ---
-title: SpainFacts 
+title: SpainFacts · El Estado de España en Datos Oficiales
 ---
+
 <script>
-    // Due to the location that Evidence builds the site, we need to hop up many directories to get to root
-    import SpainMap from "../../../../src/lib/charts/maps/SpainMap.svelte";
-    import WorldMap from "../../../../src/lib/charts/maps/WorldMap.svelte";
-    import PopulationPyramid from "../../../../src/lib/components/PopulationPyramid.svelte";
-    
-    // Importar funciones de formato desde utils
-    import { formatNumber, formatCurrency, formatCompact, formatMillions, formatThousands } from '../../../../src/lib/utils.js';
-    import CustomBarChart from '../../../../src/lib/components/CustomBarChart.svelte';
-    import CustomLineChart from '../../../../src/lib/components/CustomLineChart.svelte';
-    import CustomTable from '../../../../src/lib/components/CustomTable.svelte';
-    import CustomDonutChart from '../../../../src/lib/components/CustomDonutChart.svelte';
+    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
+    import KpiCard from '../../../../src/lib/components/KpiCard.svelte';
 </script>
 
-<div class="hero-card">
+```sql kpi_poblacion
+SELECT 
+    Total AS valor,
+    CAST(Year AS VARCHAR) AS periodo_txt,
+    Year
+FROM mother.totalAno
+ORDER BY Year DESC
+LIMIT 2
+```
 
-  <h1>Nuestra Población Cambiante: España</h1>
+```sql kpi_paro
+SELECT 
+    valor,
+    strftime(periodo, '%Y') || '-T' || quarter(periodo) AS periodo_txt,
+    periodo
+FROM mother.metricas
+WHERE metrica_id = 'tasa_paro'
+ORDER BY periodo DESC
+LIMIT 2
+```
 
-  <p> Los cambios en la población de España reflejan tendencias demográficas, económicas y sociales que han moldeado el país a lo largo del tiempo.</p>
-  <p>Entiende los cambios con estos gráficos.</p>
+```sql kpi_ipc
+SELECT 
+    valor,
+    strftime(periodo, '%Y-%m') AS periodo_txt,
+    periodo
+FROM mother.metricas
+WHERE metrica_id = 'ipc_variacion_anual'
+ORDER BY periodo DESC
+LIMIT 2
+```
 
-  <div class="dropdown-container">
-    <Dropdown 
-      name=año_inicio
-      data={items}
-      value=Year
-      defaultValue="1971"
-      class="text-xl"
-    />
-    <Dropdown 
-      name=año_fin
-      data={items}
-      value=Year
-      defaultValue="2024"
-    />
-  </div>
+```sql kpi_deuda
+SELECT 
+    valor,
+    strftime(periodo, '%Y') || '-T' || quarter(periodo) AS periodo_txt,
+    periodo
+FROM mother.metricas
+WHERE metrica_id = 'deuda_publica_pib'
+ORDER BY periodo DESC
+LIMIT 2
+```
 
+```sql sparkline_poblacion
+SELECT Total AS valor
+FROM mother.totalAno
+WHERE Year >= 2000
+ORDER BY Year ASC
+```
 
-| Población en {inputs.año_inicio.value} | Población en {inputs.año_fin.value}   | Cambio de población |
-| -------- | -------- | -------- |
-| {formatCompact(total_poblacion_year_inicio[0].Total, 2)} | {formatCompact(total_poblacion_year_fin[0].Total, 2)} | {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2) + '%'} |
+```sql sparkline_paro
+SELECT valor
+FROM mother.metricas
+WHERE metrica_id = 'tasa_paro'
+ORDER BY periodo ASC
+```
+
+```sql sparkline_ipc
+SELECT valor
+FROM mother.metricas
+WHERE metrica_id = 'ipc_variacion_anual'
+ORDER BY periodo ASC
+```
+
+```sql sparkline_deuda
+SELECT valor
+FROM mother.metricas
+WHERE metrica_id = 'deuda_publica_pib'
+ORDER BY periodo ASC
+```
+
+<!-- Hero Principal USAFacts Style -->
+<div class="rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white p-8 md:p-12 mb-8 shadow-xl border border-slate-800">
+    <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-4">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Plataforma Cívica de Datos Abiertos
+        </span>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+            El retrato de España, <br class="hidden sm:inline"/>medido en <span class="text-blue-400">datos oficiales</span>.
+        </h1>
+        <p class="text-base md:text-lg text-slate-300 mb-6 leading-relaxed">
+            SpainFacts es una iniciativa independiente y no partidista que recopila, estandariza y visualiza los datos del gobierno y las instituciones públicas para que cualquier ciudadano conozca la realidad de nuestro país sin filtros.
+        </p>
+        <div class="flex flex-wrap gap-3">
+            <a href="/indicadores" class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow transition-all">
+                Explorar todos los indicadores →
+            </a>
+            <a href="/demografia" class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all">
+                Informe Demográfico
+            </a>
+        </div>
+    </div>
 </div>
 
+## España de un vistazo
 
+Principales métricas clave del país actualizadas automáticamente desde las series de los organismos oficiales.
 
-```sql total_poblacion_year_inicio
-  SELECT 
-      Year,Total
-  FROM mother.totalAno
-  WHERE 
-    Year= '${inputs.año_inicio.value}'
-```
-```sql total_poblacion_year_fin
- SELECT 
-      Year,Total
-  FROM mother.totalAno
-  WHERE 
-    Year= '${inputs.año_fin.value}'
-```
+<Grid cols=4>
+    <KpiCard
+        title="Población Total"
+        value={kpi_poblacion[0].valor}
+        formattedValue="{formatCompact(kpi_poblacion[0].valor, 2)}"
+        unit="hab."
+        period="{kpi_poblacion[0].periodo_txt}"
+        change={kpi_poblacion.length > 1 ? (((kpi_poblacion[0].valor - kpi_poblacion[1].valor) / kpi_poblacion[1].valor) * 100).toFixed(2) : null}
+        changeUnit="%"
+        changePeriod="interanual"
+        direction="positive-up"
+        source="INE"
+        href="/demografia"
+        sparklineData={sparkline_poblacion}
+    />
 
+    <KpiCard
+        title="Tasa de Paro"
+        value={kpi_paro[0].valor}
+        formattedValue="{formatNumber(kpi_paro[0].valor, 1)}%"
+        period="{kpi_paro[0].periodo_txt}"
+        change={kpi_paro.length > 1 ? (kpi_paro[0].valor - kpi_paro[1].valor).toFixed(1) : null}
+        changeUnit="pp"
+        changePeriod="vs trimestre ant."
+        direction="positive-down"
+        source="INE / EPA"
+        href="/economia/paro"
+        sparklineData={sparkline_paro}
+    />
 
-<LastRefreshed />
+    <KpiCard
+        title="Inflación (IPC)"
+        value={kpi_ipc[0].valor}
+        formattedValue="{formatNumber(kpi_ipc[0].valor, 1)}%"
+        period="{kpi_ipc[0].periodo_txt}"
+        change={kpi_ipc.length > 1 ? (kpi_ipc[0].valor - kpi_ipc[1].valor).toFixed(1) : null}
+        changeUnit="pp"
+        changePeriod="vs mes ant."
+        direction="positive-down"
+        source="INE"
+        href="/economia/ipc"
+        sparklineData={sparkline_ipc}
+    />
 
-## ¿Cómo ha cambiado la población en España?
-```sql items
- SELECT  Year
-  FROM mother.totalAno
-``` 
-
-
-```sql poblacion_variacion_anual  
-WITH Poblacion_Anual AS (
-    -- Paso 1: Tu consulta base para obtener el total de población por año
-    SELECT 
-        CAST(Year AS INT) AS Year,
-        Total AS Poblacion_Actual
-    FROM mother.totalAno
-    WHERE Year BETWEEN ${inputs.año_inicio.value} AND ${inputs.año_fin.value}
-)
-SELECT 
-    Year,
-    Poblacion_Actual,
-    -- Paso 2: Usar LAG() para obtener la población del año anterior
-    LAG(Poblacion_Actual, 1, NULL) OVER (ORDER BY Year ASC) AS Poblacion_Anterior,
-    
-    -- Paso 3: Calcular la Variación Absoluta (Población Actual - Población Anterior)
-    Poblacion_Actual - LAG(Poblacion_Actual, 1, NULL) OVER (ORDER BY Year ASC) AS Variacion_Absoluta,
-    
-    -- Paso 4: Calcular la Variación Porcentual Anual
-    (CAST(Poblacion_Actual AS DECIMAL) - LAG(Poblacion_Actual, 1, NULL) OVER (ORDER BY Year ASC)) * 100.0 / LAG(Poblacion_Actual, 1, NULL) OVER (ORDER BY Year ASC) AS Variacion_Porcentual
-FROM Poblacion_Anual
-ORDER BY Year ASC;
-```
-
-<CustomBarChart
-  data={poblacion_variacion_anual}
-  title="Variación anual de la población en España"
-  x="Year"
-  y="Variacion_Porcentual"
-  y2="Variacion_Absoluta"
-  yAxisTitle="Variación Porcentual (%)"
-  locale="es-ES"
-/>
-
-
-La población de España ha crecido {formatNumber(((total_poblacion_year_fin[0].Total - total_poblacion_year_inicio[0].Total) / total_poblacion_year_inicio[0].Total) * 100, 2)}% entre {inputs.año_inicio.value} y {inputs.año_fin.value}.
-
-Desde {formatCompact(total_poblacion_year_inicio[0].Total, 2)} hasta {formatCompact(total_poblacion_year_fin[0].Total, 2)}.
-
-
-
-<CustomLineChart
-  data={poblacion_variacion_anual}
-  title="Evolución de la población total de España"
-  x="Year"
-  y="Poblacion_Actual"
-  yAxisTitle="Población Total"
-  locale="es-ES"
-  startingAtZero={false}
-/>
-
-## Población por sexo
-
-
-```sql poblacion_por_sexo
-  SELECT Year,Sexo, Total
-  FROM mother.totalAnoSexo
-  WHERE Year between ${inputs.año_inicio.value} AND ${inputs.año_fin.value}
-```
-```sql donut_data_inicio
-select Sexo as name, Total as value
-from ${poblacion_por_sexo}
-where Year = ${inputs.año_inicio.value}
-```
-```sql donut_data_fin
-select Sexo as name, Total as value
-from ${poblacion_por_sexo}
-where Year = ${inputs.año_fin.value}
-```
-<Grid cols=2>
-<Group>
-<CustomDonutChart 
-  data={donut_data_inicio} 
-  title="Año {inputs.año_inicio.value}"
-  name="name"
-  value="value"
-/>
-</Group>
-<Group>
-<CustomDonutChart 
-  data={donut_data_fin} 
-  title="Año {inputs.año_fin.value}"
-  name="name"
-  value="value"
-/>
-</Group>
+    <KpiCard
+        title="Deuda Pública / PIB"
+        value={kpi_deuda[0].valor}
+        formattedValue="{formatNumber(kpi_deuda[0].valor, 1)}%"
+        period="{kpi_deuda[0].periodo_txt}"
+        change={kpi_deuda.length > 1 ? (kpi_deuda[0].valor - kpi_deuda[1].valor).toFixed(1) : null}
+        changeUnit="pp"
+        changePeriod="vs trimestre ant."
+        direction="positive-down"
+        source="Eurostat / BdE"
+        href="/cuentas-publicas"
+        sparklineData={sparkline_deuda}
+    />
 </Grid>
 
-
-<div class="mb-8"></div>
-
-
-```sql poblacion_por_sexo3
- WITH hombres AS (
-  SELECT 
-    Year, 
-    "Sexo", 
-    Total
-  FROM ${poblacion_por_sexo}
-  WHERE Sexo = 'Hombres' 
-),
-mujeres AS (
-  SELECT 
-    Year, 
-    "Sexo", 
-    Total
-  FROM ${poblacion_por_sexo}
-  WHERE Sexo = 'Mujeres'
-)
-SELECT 
-  Cast(h.Year AS INTEGER) AS Year, 
-  h.Total AS Hombres, 
-  m.Total AS Mujeres, 
-  CAST(m.Total AS DECIMAL) / CAST(h.Total AS DECIMAL) AS Ratio_Mujeres_Hombres
-FROM hombres h
-INNER JOIN mujeres m ON h.Year = m.Year
-ORDER BY h.Year ASC;
-
-
-```
-
-
-
-<CustomLineChart
-  data={poblacion_por_sexo3}
-  title="Población por sexo a lo largo del tiempo"
-  x="Year"
-  y={["Hombres", "Mujeres"]}
-  y2="Ratio_Mujeres_Hombres"
-  xAxisTitle="Año"
-  yAxisTitle="Población"
-  locale="es-ES"
-  startingAtZero={false}
-/>
-
-
-```sql poblacion_por_sexo_edad
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-```
-
-
-## ¿Dónde viven las personas en España? 
-La distribución geográfica de la población en España varía significativamente entre comunidades autónomas. A continuación, se muestra un mapa que ilustra la población por comunidad autónoma.
-<Accordion>
-  <AccordionItem title="Poblacion en {inputs.año_inicio.value}">
-    <SpainMap
-      mapName="Spain"
-      nameProperty="code"
-      data={orders_by_state_inicio}
-      region="statecode"
-      value="Población"
-      colorScale="bluegreen"
-      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-    />
-  </AccordionItem>
-  <AccordionItem title="Poblacion en {inputs.año_fin.value}">  
-    <SpainMap
-      mapName="Spain"
-      nameProperty="code"
-      data={orders_by_state_fin}
-      region="statecode"
-      value="Población"
-      colorScale="bluegreen"
-      colorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-    />  
-  </AccordionItem>
-  <AccordionItem title="Cambio en #">
-    <SpainMap
-      mapName="Spain"
-      nameProperty="code"
-      data={orders_by_state_diff}
-      region="statecode"
-      value="Cambio en #"
-      diverging={true}
-      negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
-      positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-      zeroColor="#a44456" 
-    />
-  </AccordionItem>
-  <AccordionItem title="Cambio en %">
-    <SpainMap
-      mapName="Spain"
-      nameProperty="code"
-      data={orders_by_state_diff}
-      region="statecode"
-      value="Cambio en %"
-      diverging={true}
-      negativeColorPalette={['#5c0000', '#821516', '#a42a2d', '#c14444']}
-      positiveColorPalette={['#805973', '#557396', '#398cb6', '#133e6c']}
-      zeroColor="#a44456" 
-    />
-  </AccordionItem>
-</Accordion>
-
-<CustomTable 
-  data={orders_by_state_diff}
-  columns={[
-    { title: "Provincia", accessor: "Provincia" },
-    { title: `Población ${inputs.año_inicio.value}`, accessor: "Poblacion_Inicio", fmt: (val) => formatCompact(val, 1), align: 'right' },
-    { title: `Población ${inputs.año_fin.value}`, accessor: "Poblacion_Fin", fmt: (val) => formatCompact(val, 1), align: 'right' },
-    { title: "Cambio en #", accessor: "Cambio en #", fmt: (val) => formatCompact(val, 1), align: 'right' },
-    { title: "Cambio en %", accessor: "Cambio en %", fmt: (val) => formatNumber(val, 2) + '%', align: 'right' }
-  ]}
-/>  
-
-
-```sql orders_by_state_inicio
-  SELECT statecode, Provincias, Población
-  FROM mother.totalAnoProvincia 
-  WHERE Year=${inputs.año_inicio.value}
-``` 
-```sql orders_by_state_fin
-    SELECT statecode, Provincias, Población
-  FROM mother.totalAnoProvincia 
-  WHERE Year=${inputs.año_fin.value}
-``` 
-```sql orders_by_state_diff
-SELECT
-i.statecode,
-    i.Provincias as Provincia,
-    i.Población as Poblacion_Inicio,
-    f.Población as Poblacion_Fin,
-    -- Cálculo de la RESTA: Cambio absoluto
-    (f.Población - i.Población) AS "Cambio en #",
-    -- Cálculo del PORCENTAJE DE CAMBIO
-    -- Usamos CAST(AS FLOAT) para asegurar una división decimal precisa.
-    (CAST((f.Población - i.Población) AS FLOAT) / i.Población) * 100 AS "Cambio en %"
-FROM
-    ${orders_by_state_inicio} i
-INNER JOIN
-    ${orders_by_state_fin} f ON i.statecode = f.statecode;
-``` 
-## ¿Cómo es la distribución de edades en España?
-
-```sql poblacion_por_sexo_edad_inicio
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  where Anio = ${inputs.año_inicio.value}
-```
-```sql poblacion_por_sexo_edad_fin
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  where Anio = ${inputs.año_fin.value}
-```
-<Grid cols=2>
-  <Group>
-    <PopulationPyramid 
-      data={poblacion_por_sexo_edad_inicio} 
-      year={inputs.año_inicio.value} 
-    />
-  </Group>
-  <Group>
-    <PopulationPyramid 
-      data={poblacion_por_sexo_edad_fin} 
-      year={inputs.año_fin.value} 
-    />
-  </Group>
-</Grid>
-
-
-## Recursos
-- [Instituto Nacional de Estadística (INE) - Población residente](https://www.ine.es/jaxiT3/Tabla.htm?t=56938)
-- [INE - Cifras de población](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176951)
-- [INE - Población por nacionalidad](https://www.ine.es/jaxiT3/Tabla.htm?t=59587)
 ---
-## Sobre SpainFacts
-SpainFacts es una iniciativa dedicada a proporcionar datos transparentes y objetivos sobre España. Inspirados en la visión de USAFacts, nuestro objetivo es ofrecer información precisa y accesible sobre la población, economía, salud y otros aspectos clave de la sociedad española, para fomentar una comprensión informada y basada en evidencia.
+
+## Áreas Temáticas Principales
+
+Explora los grandes pilares que componen la sociedad, la economía y la gestión pública en España:
+
+<Grid cols=3>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl mb-4">
+            👥
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Demografía y Sociedad</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Evolución del censo de población, pirámide demográfica, distribución por provincias y ratios por sexo desde 1971.
+        </p>
+    </div>
+    <a href="/demografia" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver informe demográfico →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl mb-4">
+            💼
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Economía y Empleo</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Tasa de desempleo de la Encuesta de Población Activa (EPA) y variación de precios con el IPC general e histórico.
+        </p>
+    </div>
+    <a href="/economia" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver datos económicos →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl mb-4">
+            🏛️
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Cuentas Públicas</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Evolución de la deuda pública consolidada de las Administraciones Públicas y porcentaje sobre el PIB según el PDE.
+        </p>
+    </div>
+    <a href="/cuentas-publicas" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver cuentas públicas →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-green-300 dark:hover:border-green-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-xl mb-4">
+            🌱
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Energía & Clima</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Mix de generación eléctrica, cuota renovable, emisiones de GEI por sector y potencia instalada eólica y solar fotovoltaica.
+        </p>
+    </div>
+    <a href="/energia-clima" class="text-sm font-semibold text-green-600 dark:text-green-400 hover:underline inline-flex items-center">
+        Ver energía y clima →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-xl mb-4">
+            🔍
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Observatorios Públicos</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Censo y estado de actividad de los observatorios e instituciones públicas creados en España a lo largo del tiempo.
+        </p>
+    </div>
+    <a href="/observatorios" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver observatorios →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-xl mb-4">
+            🗺️
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Mapas y Territorio</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Visualización cartográfica coroplética por comunidades autónomas y provincias para análisis territorial comparativo.
+        </p>
+    </div>
+    <a href="/maps" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver mapas territoriales →
+    </a>
+</div>
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl mb-4">
+            📊
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Catálogo de Indicadores</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Directorio completo con todas las métricas disponibles, ficha técnica individual, periodicidad y enlace a la fuente original.
+        </p>
+    </div>
+    <a href="/indicadores" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver todos los indicadores →
+    </a>
+</div>
+
+</Grid>
+
+---
+
+## Principios de Transparencia y Neutralidad
+
+Inspirados en el modelo de **[USAFacts](https://usafacts.org/)**, SpainFacts se rige por tres compromisos fundamentales:
+
+1. **Fuentes Primarias Oficiales:** Todos los datos provienen directamente de organismos estadísticos y de gobierno (INE, Banco de España, Eurostat, Ministerios).
+2. **Neutralidad Total:** No emitimos juicios de valor ni recomendaciones políticas. Proveemos el contexto histórico y la metodología para que el ciudadano forme su propio criterio.
+3. **Código y Datos Abiertos:** Los pipelines de ingesta y transformación son públicos, auditables y reproducibles.
+
+<div class="my-4">
+    <a href="/fuentes" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-700 transition-colors">
+        🔍 Consultar el directorio completo de trazabilidad y auditoría de fuentes →
+    </a>
+</div>
+
+<LastRefreshed prefix="Última sincronización de datos con fuentes oficiales" />

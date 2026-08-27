@@ -12,6 +12,15 @@ models:
         tests: [not_null]
       - name: url_fuente
         tests: [not_null]
+  - name: trazabilidad_fuentes
+    description: "Catálogo de trazabilidad y auditoría de fuentes oficiales en MotherDuck"
+    columns:
+      - name: fuente_id
+        tests: [not_null, unique]
+      - name: organismo
+        tests: [not_null]
+      - name: url_oficial
+        tests: [not_null]
   - name: ipc
     description: "IPC del INE (tabla 50902), todas las series"
     columns:

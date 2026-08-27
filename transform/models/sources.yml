@@ -8,3 +8,6 @@ sources:
       - name: ine_ipc
       - name: ine_paro
       - name: eurostat_deuda
+      - name: eurostat_cuentas_balance
+      - name: eurostat_cuentas_gastos
+      - name: eurostat_cuentas_ingresos

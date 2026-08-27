@@ -2,61 +2,119 @@
 title: Datos Económicos
 ---
 
-# Panel de Datos Económicos
+<script>
+    import { formatNumber } from '../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
+</script>
 
-Esta sección presenta indicadores clave sobre la economía española, extraídos de fuentes oficiales como el Instituto Nacional de Estadística (INE).
+# Panel de Economía y Empleo
 
-<Grid cols=2>
-
-<div class="card">
-    <h3>Tasa de Paro</h3>
-    <Value data={latest_unemployment} column=value fmt='0.0"%"' />
-    <p>Último dato disponible ({latest_unemployment[0].period}).</p>
-    <a href="/economia/paro">Ver evolución y detalles →</a>
-</div>
-
-<div class="card">
-    <h3>Inflación (IPC Anual)</h3>
-    <Value data={latest_ipc} column=value fmt='0.0"%"' />
-    <p>Último dato disponible ({latest_ipc[0].period}).</p>
-    <a href="/economia/ipc">Ver evolución y detalles →</a>
-</div>
-
-</Grid>
-
-<br/>
-
-### Fuentes de Datos
-
-Todos los datos se extraen y procesan automáticamente desde la API del [Instituto Nacional de Estadística (INE)](https://www.ine.es/) y se cargan en nuestra base de datos en MotherDuck.
+Principales indicadores macroeconómicos y del mercado laboral en España, obtenidos de las publicaciones oficiales del Instituto Nacional de Estadística (INE) y el Banco de España.
 
 ```sql latest_unemployment
--- Última tasa de paro (EPA, serie EPA423474)
 SELECT
-    valor AS value,
-    strftime(periodo, '%Y-%m') AS period
+    valor,
+    strftime(periodo, '%Y') || '-T' || quarter(periodo) AS periodo_txt,
+    periodo
 FROM mother.metricas
 WHERE metrica_id = 'tasa_paro'
 ORDER BY periodo DESC
-LIMIT 1
+LIMIT 2
 ```
 
 ```sql latest_ipc
--- Última variación anual del IPC (serie IPC251856)
 SELECT
-    valor AS value,
-    strftime(periodo, '%Y-%m') AS period
+    valor,
+    strftime(periodo, '%Y-%m') AS periodo_txt,
+    periodo
 FROM mother.metricas
 WHERE metrica_id = 'ipc_variacion_anual'
 ORDER BY periodo DESC
-LIMIT 1
+LIMIT 2
 ```
 
-<style>
-    .card {
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-</style>
+```sql serie_paro
+SELECT
+    periodo,
+    valor AS paro
+FROM mother.metricas
+WHERE metrica_id = 'tasa_paro'
+ORDER BY periodo ASC
+```
+
+```sql serie_ipc
+SELECT
+    periodo,
+    valor AS ipc
+FROM mother.metricas
+WHERE metrica_id = 'ipc_variacion_anual'
+ORDER BY periodo ASC
+```
+
+<Grid cols=2>
+    <KpiCard
+        title="Tasa de Paro (EPA)"
+        value={latest_unemployment[0].valor}
+        formattedValue="{formatNumber(latest_unemployment[0].valor, 1)}%"
+        period="{latest_unemployment[0].periodo_txt}"
+        change={latest_unemployment.length > 1 ? (latest_unemployment[0].valor - latest_unemployment[1].valor).toFixed(1) : null}
+        changeUnit="pp"
+        changePeriod="vs trimestre anterior"
+        direction="positive-down"
+        source="INE / EPA"
+        href="/economia/paro"
+    />
+
+    <KpiCard
+        title="Inflación (IPC Anual)"
+        value={latest_ipc[0].valor}
+        formattedValue="{formatNumber(latest_ipc[0].valor, 1)}%"
+        period="{latest_ipc[0].periodo_txt}"
+        change={latest_ipc.length > 1 ? (latest_ipc[0].valor - latest_ipc[1].valor).toFixed(1) : null}
+        changeUnit="pp"
+        changePeriod="vs mes anterior"
+        direction="positive-down"
+        source="INE / IPC"
+        href="/economia/ipc"
+    />
+</Grid>
+
+---
+
+## 1. Evolución de la Tasa de Paro (Encuesta de Población Activa)
+
+<LineChart
+    data={serie_paro}
+    x=periodo
+    y=paro
+    yAxisTitle="Tasa de Paro (%)"
+    title="Tasa de Paro en España (Histórico trimestral)"
+    startingAtZero={false}
+/>
+
+<a href="/economia/paro" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+    Ver informe completo y desglose de desempleo →
+</a>
+
+---
+
+## 2. Evolución de la Inflación (Variación Interanual del IPC)
+
+<LineChart
+    data={serie_ipc}
+    x=periodo
+    y=ipc
+    yAxisTitle="Variación anual (%)"
+    title="Índice de Precios de Consumo (Variación anual %)"
+    startingAtZero={false}
+/>
+
+<a href="/economia/ipc" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+    Ver informe detallado del IPC →
+</a>
+
+---
+
+## Fuentes Oficiales
+- **[INE - Encuesta de Población Activa (EPA)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918):** Serie trimestral EPA423474 (tabla 65219).
+- **[INE - Índice de Precios de Consumo (IPC)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176802):** Serie mensual IPC251856 (tabla 50902).

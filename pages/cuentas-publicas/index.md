@@ -1,0 +1,248 @@
+---
+title: Cuentas Públicas · El Informe Anual de España
+---
+
+<script>
+    import { formatNumber, formatCurrency, formatCompact } from '../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
+    import SankeyPresupuesto from '../../../../../src/lib/components/SankeyPresupuesto.svelte';
+</script>
+
+# El "10-K" de las Cuentas Públicas de España
+
+Inspirado en el informe anual que presentan las empresas cotizadas ante los mercados, este apartado presenta el **balance consolidado del Reino de España**: *¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?*
+
+```sql balance_reciente
+SELECT
+    año,
+    ingresos_totales_mrd,
+    gastos_totales_mrd,
+    saldo_deficit_mrd,
+    saldo_deficit_pib,
+    deuda_publica_mrd,
+    deuda_pib,
+    poblacion_m
+FROM cuentas.balance_anual
+ORDER BY año DESC
+LIMIT 2
+```
+
+```sql serie_balance_historico
+SELECT
+    año,
+    ingresos_totales_mrd AS "Ingresos Totales",
+    gastos_totales_mrd AS "Gastos Totales",
+    saldo_deficit_mrd AS "Déficit / Superávit"
+FROM cuentas.balance_anual
+ORDER BY año ASC
+```
+
+```sql serie_deficit_pib
+SELECT
+    año,
+    saldo_deficit_pib AS deficit_pib
+FROM cuentas.balance_anual
+ORDER BY año ASC
+```
+
+```sql serie_deuda_pib
+SELECT
+    año,
+    deuda_pib
+FROM cuentas.balance_anual
+ORDER BY año ASC
+```
+
+```sql ingresos_sankey
+SELECT
+    categoria,
+    millones_euros
+FROM cuentas.ingresos
+WHERE año = 2024
+ORDER BY millones_euros DESC
+```
+
+```sql gastos_sankey
+SELECT
+    funcion_cofog,
+    millones_euros
+FROM cuentas.gastos
+WHERE año = 2024
+ORDER BY millones_euros DESC
+```
+
+```sql subsectores_2024
+SELECT
+    subsector,
+    gasto_mrd,
+    ingreso_mrd,
+    saldo_deficit_mrd,
+    peso_gasto_pct
+FROM cuentas.subsectores
+WHERE año = 2024
+ORDER BY gasto_mrd DESC
+```
+
+<!-- KPI Ribbon: Resumen Anual del Estado -->
+<Grid cols=4>
+    <KpiCard
+        title="Ingresos Totales"
+        value={balance_reciente[0].ingresos_totales_mrd}
+        formattedValue="{formatNumber(balance_reciente[0].ingresos_totales_mrd, 1)} mil M€"
+        period="Ejercicio 2024"
+        change={(((balance_reciente[0].ingresos_totales_mrd - balance_reciente[1].ingresos_totales_mrd) / balance_reciente[1].ingresos_totales_mrd) * 100).toFixed(1)}
+        changeUnit="%"
+        changePeriod="interanual"
+        direction="positive-up"
+        source="IGAE / Eurostat"
+        href="/cuentas-publicas/ingresos"
+    />
+
+    <KpiCard
+        title="Gastos Totales"
+        value={balance_reciente[0].gastos_totales_mrd}
+        formattedValue="{formatNumber(balance_reciente[0].gastos_totales_mrd, 1)} mil M€"
+        period="Ejercicio 2024"
+        change={(((balance_reciente[0].gastos_totales_mrd - balance_reciente[1].gastos_totales_mrd) / balance_reciente[1].gastos_totales_mrd) * 100).toFixed(1)}
+        changeUnit="%"
+        changePeriod="interanual"
+        direction="neutral"
+        source="IGAE / Eurostat"
+        href="/cuentas-publicas/gastos"
+    />
+
+    <KpiCard
+        title="Déficit Fiscal Anual"
+        value={balance_reciente[0].saldo_deficit_pib}
+        formattedValue="{formatNumber(balance_reciente[0].saldo_deficit_pib, 1)}% PIB"
+        period="Ejercicio 2024"
+        change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
+        changeUnit="pp"
+        changePeriod="vs año anterior"
+        direction="positive-down"
+        source="IGAE / PDE"
+    />
+
+    <KpiCard
+        title="Deuda Pública / PIB"
+        value={balance_reciente[0].deuda_pib}
+        formattedValue="{formatNumber(balance_reciente[0].deuda_pib, 1)}%"
+        period="1.622 mil M€"
+        change={(balance_reciente[0].deuda_pib - balance_reciente[1].deuda_pib).toFixed(1)}
+        changeUnit="pp"
+        changePeriod="vs año anterior"
+        direction="positive-down"
+        source="Banco de España"
+        href="/indicadores/deuda_publica_pib"
+    />
+</Grid>
+
+---
+
+## 1. El Recorrido del Dinero Público (Flujo Presupuestario 2024)
+
+Este diagrama de flujo visualiza de dónde provienen los ingresos de las Administraciones Públicas y en qué partidas concretas se emplean:
+
+<SankeyPresupuesto
+    dataIngresos={ingresos_sankey}
+    dataGastos={gastos_sankey}
+    title="Flujo de Cuentas Públicas de España (2024)"
+    subtitle="De los impuestos y cotizaciones a las funciones de gasto del Estado (Millones de €)"
+    height="540px"
+/>
+
+<Grid cols=2>
+    <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
+        <h4 class="font-bold text-blue-900 dark:text-blue-300 mb-1">📥 ¿Quieres profundizar en los ingresos?</h4>
+        <p class="text-xs text-blue-700 dark:text-blue-400 mb-2">Consulta la recaudación por IRPF, IVA, Sociedades, Cotizaciones y tasas públicas.</p>
+        <a href="/cuentas-publicas/ingresos" class="text-xs font-bold text-blue-600 dark:text-blue-300 hover:underline">
+            Ver informe completo de Ingresos Públicos →
+        </a>
+    </div>
+
+    <div class="p-4 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
+        <h4 class="font-bold text-purple-900 dark:text-purple-300 mb-1">📤 ¿Quieres ver el detalle de los gastos?</h4>
+        <p class="text-xs text-purple-700 dark:text-purple-400 mb-2">Descubre cuánto gasta el Estado por habitante en Sanidad, Pensiones, Educación y Defensa.</p>
+        <a href="/cuentas-publicas/gastos" class="text-xs font-bold text-purple-600 dark:text-purple-300 hover:underline">
+            Ver informe completo de Gastos y Coste por Habitante →
+        </a>
+    </div>
+</Grid>
+
+---
+
+## 2. El Balance Histórico: Ingresos vs Gastos (2000 - 2024)
+
+La diferencia anual entre lo que ingresa el sector público y lo que desembolsa define el **saldo presupuestario** (superávit si es positivo, déficit si es negativo):
+
+<LineChart
+    data={serie_balance_historico}
+    x=año
+    y={["Ingresos Totales", "Gastos Totales"]}
+    yAxisTitle="Miles de Millones de Euros (Mrd €)"
+    title="Ingresos Públicos vs Gastos Públicos en España (2000-2024)"
+    startingAtZero={false}
+/>
+
+<BarChart
+    data={serie_deficit_pib}
+    x=año
+    y=deficit_pib
+    yAxisTitle="Déficit / Superávit (% del PIB)"
+    title="Capacidad (+) o Necesidad (-) de Financiación de las AAPP (% PIB)"
+/>
+
+---
+
+## 3. ¿Quién administra el gasto público en España?
+
+España es un estado descentralizado donde las competencias de gasto se distribuyen entre cuatro subsectores institucionales:
+
+<Grid cols=2>
+
+<DataTable data={subsectores_2024} title="Desglose por Nivel de Administración (2024)">
+    <Column id=subsector title="Subsector Institucional" />
+    <Column id=gasto_mrd title="Gasto (Mrd €)" fmt='#,##0.0 Mrd €' />
+    <Column id=peso_gasto_pct title="% del Gasto" fmt='0.0"%"' />
+    <Column id=saldo_deficit_mrd title="Saldo Fiscal" fmt='#,##0.0 Mrd €' />
+</DataTable>
+
+<div>
+    <BarChart
+        data={subsectores_2024}
+        x=subsector
+        y=gasto_mrd
+        yAxisTitle="Gasto (Miles de Millones €)"
+        title="Gasto por subsector administrativo (2024)"
+        swapXY={true}
+    />
+</div>
+
+</Grid>
+
+- **Administración Central (Estado):** Financia los ministerios, policía nacional, defensa, infraestructuras de interés general y la mayor parte del pago de intereses de la deuda.
+- **Comunidades Autónomas (CC.AA.):** Gestionan los dos pilares principales del bienestar ciudadano: la **Sanidad pública** y la **Educación**.
+- **Fondos de la Seguridad Social:** Entidad especializada en el pago de las pensiones y subsidios a trabajadores y jubilados.
+- **Corporaciones Locales (Ayuntamientos y Diputaciones):** Encargadas del urbanismo, recogida de residuos, transporte urbano y servicios municipales.
+
+---
+
+## 4. Evolución de la Deuda Pública sobre el PIB
+
+El déficit acumulado a lo largo de los años se financia mediante la emisión de **Deuda Pública** (letras, bonos y obligaciones del Tesoro):
+
+<LineChart
+    data={serie_deuda_pib}
+    x=año
+    y=deuda_pib
+    yAxisTitle="Deuda Pública (% del PIB)"
+    title="Evolución de la Deuda Pública de España (% PIB según el PDE)"
+    startingAtZero={false}
+/>
+
+---
+
+## Fuentes Oficiales y Trazabilidad
+- **[Intervención General de la Administración del Estado (IGAE)](https://www.igae.pap.hacienda.gob.es/):** Contabilidad Nacional del Sector Público de España.
+- **[Banco de España - Boletín Estadístico](https://www.bde.es/):** Series históricas de deuda pública y pasivos financieros de las AAPP.
+- **[Eurostat - Government Finance Statistics (gov_10a_main)](https://ec.europa.eu/eurostat/web/government-finance-statistics):** Cuentas consolidadas armonizadas según el Sistema Europeo de Cuentas (SEC 2010).

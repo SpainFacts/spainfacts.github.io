@@ -1,8 +1,6 @@
 -- Modelo largo de métricas: una fila por (metrica_id, periodo).
 -- Es la tabla que consumen las fichas de indicador de Evidence
--- (pages/indicadores/[metrica_id].md). Añadir una métrica nueva =
--- una fila en el seed metricas_catalogo + su rama aquí si viene de
--- una fuente nueva.
+-- (pages/indicadores/[metrica_id].md).
 
 with catalogo as (
     select * from {{ ref('metricas_catalogo') }}
@@ -24,6 +22,20 @@ deuda as (
         periodo,
         valor
     from {{ ref('stg_eurostat_deuda') }}
+),
+
+cuentas_balance as (
+    select
+        case concepto
+            when 'ingresos_totales' then 'ingreso_publico_total'
+            when 'gastos_totales' then 'gasto_publico_total'
+            when 'saldo_deficit' then 'saldo_deficit_publico'
+            else null
+        end as metrica_id,
+        periodo,
+        millones_euros as valor
+    from {{ ref('stg_eurostat_cuentas_balance') }}
+    where concepto in ('ingresos_totales', 'gastos_totales', 'saldo_deficit')
 )
 
 select
@@ -38,5 +50,7 @@ from (
     select * from ine
     union all
     select * from deuda
+    union all
+    select * from cuentas_balance
 ) m
 join catalogo c using (metrica_id)

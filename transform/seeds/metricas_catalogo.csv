@@ -4,3 +4,6 @@ ipc_indice,IPC — índice general (base 2021),índice,INE,https://www.ine.es/ja
 tasa_paro,Tasa de paro (EPA),%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=65219,EPA423474
 deuda_publica,Deuda pública (PDE),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,
 deuda_publica_pib,Deuda pública sobre PIB,% del PIB,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,
+gasto_publico_total,Gasto público total de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,
+ingreso_publico_total,Ingresos públicos totales de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,
+saldo_deficit_publico,Saldo presupuestario (Déficit / Superávit),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,

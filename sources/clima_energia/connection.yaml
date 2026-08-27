@@ -1,0 +1,3 @@
+# Evidence CSV connection for Clima y Energía
+type: csv
+name: clima_energia

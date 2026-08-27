@@ -1,0 +1,29 @@
+"año","tecnologia","tipo","potencia_mw","porcentaje_total"
+2018,"Eólica","Renovable",23484,22.4
+2018,"Solar Fotovoltaica","Renovable",4714,4.5
+2018,"Hidráulica","Renovable",17043,16.3
+2018,"Nuclear","No Renovable",7117,6.8
+2018,"Ciclos Combinados (Gas)","No Renovable",26284,25.1
+2018,"Carbón","No Renovable",10024,9.6
+2018,"Otras Tecnologías","Otras",16084,15.3
+2020,"Eólica","Renovable",27264,24.6
+2020,"Solar Fotovoltaica","Renovable",11714,10.6
+2020,"Hidráulica","Renovable",17094,15.4
+2020,"Nuclear","No Renovable",7117,6.4
+2020,"Ciclos Combinados (Gas)","No Renovable",26284,23.7
+2020,"Carbón","No Renovable",5744,5.2
+2020,"Otras Tecnologías","Otras",15623,14.1
+2022,"Eólica","Renovable",29813,25.1
+2022,"Solar Fotovoltaica","Renovable",20531,17.3
+2022,"Hidráulica","Renovable",17097,14.4
+2022,"Nuclear","No Renovable",7117,6.0
+2022,"Ciclos Combinados (Gas)","No Renovable",26250,22.1
+2022,"Carbón","No Renovable",3764,3.2
+2022,"Otras Tecnologías","Otras",14285,12.0
+2024,"Eólica","Renovable",31840,24.8
+2024,"Solar Fotovoltaica","Renovable",29420,22.9
+2024,"Hidráulica","Renovable",17097,13.3
+2024,"Nuclear","No Renovable",7117,5.5
+2024,"Ciclos Combinados (Gas)","No Renovable",26250,20.5
+2024,"Carbón","No Renovable",1140,0.9
+2024,"Otras Tecnologías","Otras",15500,12.1

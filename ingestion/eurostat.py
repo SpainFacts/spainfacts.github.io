@@ -1,42 +1,116 @@
-"""Fuente dlt para la API de diseminación de Eurostat (JSON-stat).
+"""Fuente dlt para la API de diseminación de Eurostat (JSON-stat 2.0).
 
-Deuda pública trimestral de España según el Protocolo de Déficit Excesivo
-(dataset gov_10q_ggdebt: sector S13 = AAPP consolidadas, na_item GD = deuda
-bruta total), en millones de euros y en % del PIB.
+Descarga series oficiales de finanzas y cuentas públicas para España (geo=ES, sector=S13):
+1. eurostat_deuda: Deuda pública trimestral según PDE (gov_10q_ggdebt).
+2. eurostat_cuentas_balance: Agregados anuales de ingresos, gastos, déficit y deuda (gov_10a_main).
+3. eurostat_cuentas_gastos: Gasto público anual por función COFOG (gov_10a_exp).
+4. eurostat_cuentas_ingresos: Ingresos públicos anuales por categoría tributaria (gov_10a_rev).
 """
 
 import dlt
 import requests
 
-URL = (
-    "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
-    "gov_10q_ggdebt?freq=Q&geo=ES&sector=S13&na_item=GD&unit={unit}&format=JSON&lang=EN"
-)
-UNIDADES = ["MIO_EUR", "PC_GDP"]
+
+def parse_json_stat_series(datos: dict):
+    """Decodifica cualquier dataset multidimensional JSON-stat 2.0 de Eurostat."""
+    dim_ids = datos.get("id", [])
+    dim_sizes = datos.get("size", [])
+    if not dim_ids or not dim_sizes:
+        return
+
+    # Construir la lista de códigos para cada dimensión
+    dim_codes = []
+    for dim_id in dim_ids:
+        dim_info = datos["dimension"][dim_id]["category"]
+        if "index" in dim_info and isinstance(dim_info["index"], dict):
+            inv_index = {v: k for k, v in dim_info["index"].items()}
+            codes = [inv_index[i] for i in range(len(inv_index))]
+        elif "index" in dim_info and isinstance(dim_info["index"], list):
+            codes = dim_info["index"]
+        else:
+            codes = list(dim_info["label"].keys())
+        dim_codes.append(codes)
+
+    # Decodificar cada posición plana
+    for flat_str, val in datos.get("value", {}).items():
+        flat_idx = int(flat_str)
+        coords = {}
+        temp = flat_idx
+        for k in reversed(range(len(dim_ids))):
+            dim_size = dim_sizes[k]
+            idx_in_dim = temp % dim_size
+            temp = temp // dim_size
+            coords[dim_ids[k]] = dim_codes[k][idx_in_dim]
+
+        yield coords, val
 
 
 @dlt.source(name="eurostat")
 def eurostat():
     @dlt.resource(name="eurostat_deuda", write_disposition="replace")
     def deuda():
-        for unidad in UNIDADES:
-            respuesta = requests.get(URL.format(unit=unidad), timeout=120)
-            respuesta.raise_for_status()
-            datos = respuesta.json()
-            # Con freq/geo/sector/na_item/unit fijados a un único valor, el
-            # índice plano de `value` coincide con el índice de la dimensión
-            # temporal. La aserción protege contra filtros no unívocos.
-            for dim in datos["id"]:
-                if dim != "time":
-                    assert datos["size"][datos["id"].index(dim)] == 1, (
-                        f"la dimensión {dim} tiene más de un valor; el filtro no es unívoco"
-                    )
-            periodos = {v: k for k, v in datos["dimension"]["time"]["category"]["index"].items()}
-            for indice, valor in datos["value"].items():
+        url = (
+            "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+            "gov_10q_ggdebt?freq=Q&geo=ES&sector=S13&na_item=GD&unit={unit}&format=JSON&lang=EN"
+        )
+        for unidad in ["MIO_EUR", "PC_GDP"]:
+            resp = requests.get(url.format(unit=unidad), timeout=120)
+            resp.raise_for_status()
+            for coords, valor in parse_json_stat_series(resp.json()):
                 yield {
-                    "periodo": periodos[int(indice)],  # p. ej. "2025-Q3"
+                    "periodo": coords.get("time"),
                     "unidad": unidad,
                     "valor": valor,
                 }
 
-    return [deuda]
+    @dlt.resource(name="eurostat_cuentas_balance", write_disposition="replace")
+    def balance():
+        url = (
+            "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+            "gov_10a_main?geo=ES&sector=S13&unit=MIO_EUR&format=JSON&lang=EN"
+        )
+        resp = requests.get(url, timeout=120)
+        resp.raise_for_status()
+        for coords, valor in parse_json_stat_series(resp.json()):
+            yield {
+                "periodo": coords.get("time"),
+                "na_item": coords.get("na_item"),
+                "unidad": coords.get("unit"),
+                "sector": coords.get("sector"),
+                "valor": valor,
+            }
+
+    @dlt.resource(name="eurostat_cuentas_gastos", write_disposition="replace")
+    def gastos():
+        url = (
+            "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+            "gov_10a_exp?geo=ES&sector=S13&unit=MIO_EUR&na_item=TE&format=JSON&lang=EN"
+        )
+        resp = requests.get(url, timeout=120)
+        resp.raise_for_status()
+        for coords, valor in parse_json_stat_series(resp.json()):
+            yield {
+                "periodo": coords.get("time"),
+                "cofog99": coords.get("cofog99"),
+                "na_item": coords.get("na_item"),
+                "unidad": coords.get("unit"),
+                "valor": valor,
+            }
+
+    @dlt.resource(name="eurostat_cuentas_ingresos", write_disposition="replace")
+    def ingresos():
+        url = (
+            "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+            "gov_10a_rev?geo=ES&sector=S13&unit=MIO_EUR&format=JSON&lang=EN"
+        )
+        resp = requests.get(url, timeout=120)
+        resp.raise_for_status()
+        for coords, valor in parse_json_stat_series(resp.json()):
+            yield {
+                "periodo": coords.get("time"),
+                "na_item": coords.get("na_item"),
+                "unidad": coords.get("unit"),
+                "valor": valor,
+            }
+
+    return [deuda, balance, gastos, ingresos]

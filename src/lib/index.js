@@ -1,5 +1,13 @@
 // Reexport your entry components here
-export { default as FranceMap } from './charts/maps/FranceMap.svelte';
+export { default as KpiCard } from './components/KpiCard.svelte';
+export { default as SankeyPresupuesto } from './components/SankeyPresupuesto.svelte';
+export { default as DownloadCsvButton } from './components/DownloadCsvButton.svelte';
+export { default as CustomBarChart } from './components/CustomBarChart.svelte';
+export { default as CustomLineChart } from './components/CustomLineChart.svelte';
+export { default as CustomDonutChart } from './components/CustomDonutChart.svelte';
+export { default as CustomTable } from './components/CustomTable.svelte';
+export { default as PopulationPyramid } from './components/PopulationPyramid.svelte';
+export { default as SpainMap } from './charts/maps/SpainMap.svelte';
 export { default as WorldMap } from './charts/maps/WorldMap.svelte';
 export { default as LeafletMap } from './charts/maps/LeafletMap.svelte';
 export { default as CohortAnalysis } from './charts/analysis/CohortAnalysis.svelte';
