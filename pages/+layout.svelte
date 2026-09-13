@@ -1,4 +1,6 @@
 <script context="module">
+    import { setFormatLocale } from "@evidence-dev/component-utilities/localeFormatting";
+    setFormatLocale("es-ES");
     import {
         formatNumber,
         formatCurrency,
