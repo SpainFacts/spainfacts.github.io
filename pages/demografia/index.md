@@ -4,8 +4,8 @@ description: Evolución, distribución y estructura de la población española s
 ---
 
 <script>
-    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
-    import KpiCard from '../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
 </script>
 
 ```sql total_poblacion

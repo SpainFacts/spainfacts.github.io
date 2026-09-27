@@ -15,7 +15,7 @@
         { href: "/cuentas-publicas", label: "Cuentas Públicas" },
         { href: "/energia-clima", label: "Energía & Clima" },
         { href: "/indicadores", label: "Indicadores" },
-        { href: "/observatorios", label: "Observatorios" },
+        { href: "/varios/observatorios", label: "Observatorios" },
         { href: "/fuentes", label: "Fuentes" },
     ];
 

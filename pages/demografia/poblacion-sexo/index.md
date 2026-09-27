@@ -4,9 +4,10 @@ description: Distribución y evolución comparada de mujeres y hombres en Españ
 ---
 
 <script>
-    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
-    import CustomDonutChart from '../../../../src/lib/components/CustomDonutChart.svelte';
-    import CustomLineChart from '../../../../src/lib/components/CustomLineChart.svelte';
+    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
+    import CustomDonutChart from '../../../../../../src/lib/components/CustomDonutChart.svelte';
+    import CustomLineChart from '../../../../../../src/lib/components/CustomLineChart.svelte';
 </script>
 
 # Población por Sexo en España
@@ -122,7 +123,7 @@ ORDER BY h.Year ASC;
 
 ## Datos Clave
 
-```sql datos_ultimo_año
+```sql datos_ultimo_anio
 SELECT 
   Year,
   SUM(CASE WHEN Sexo = 'Hombres' THEN Total ELSE 0 END) AS Hombres,
@@ -134,20 +135,20 @@ GROUP BY Year
 ```
 
 <Grid cols=3>
-<Value
-  value={datos_ultimo_año[0]?.Hombres}
+<KpiCard
   title="Hombres ({inputs.año_fin.value})"
-  fmt="compact"
+  value={datos_ultimo_anio[0]?.Hombres}
+  formattedValue={formatCompact(datos_ultimo_anio[0]?.Hombres, 2)}
 />
-<Value
-  value={datos_ultimo_año[0]?.Mujeres}
+<KpiCard
   title="Mujeres ({inputs.año_fin.value})"
-  fmt="compact"
+  value={datos_ultimo_anio[0]?.Mujeres}
+  formattedValue={formatCompact(datos_ultimo_anio[0]?.Mujeres, 2)}
 />
-<Value
-  value={datos_ultimo_año[0]?.Total}
+<KpiCard
   title="Total ({inputs.año_fin.value})"
-  fmt="compact"
+  value={datos_ultimo_anio[0]?.Total}
+  formattedValue={formatCompact(datos_ultimo_anio[0]?.Total, 2)}
 />
 </Grid>
 

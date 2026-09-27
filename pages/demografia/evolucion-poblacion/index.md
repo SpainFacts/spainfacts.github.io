@@ -4,9 +4,9 @@ description: Análisis de los cambios anuales en la población española desde 1
 ---
 
 <script>
-    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
-    import CustomBarChart from '../../../../src/lib/components/CustomBarChart.svelte';
-    import CustomLineChart from '../../../../src/lib/components/CustomLineChart.svelte';
+    import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
+    import CustomBarChart from '../../../../../../src/lib/components/CustomBarChart.svelte';
+    import CustomLineChart from '../../../../../../src/lib/components/CustomLineChart.svelte';
 </script>
 
 # Evolución de la Población en España

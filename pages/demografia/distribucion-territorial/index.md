@@ -4,9 +4,10 @@ description: Población por provincia y comunidades autónomas en España.
 ---
 
 <script>
-    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
-    import SpainMap from '../../../../src/lib/charts/maps/SpainMap.svelte';
-    import CustomTable from '../../../../src/lib/components/CustomTable.svelte';
+    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
+    import SpainMap from '../../../../../../src/lib/charts/maps/SpainMap.svelte';
+    import CustomTable from '../../../../../../src/lib/components/CustomTable.svelte';
 </script>
 
 # Distribución Territorial de la Población
@@ -155,15 +156,15 @@ FROM ${orders_by_state_fin}
 ```
 
 <Grid cols=2>
-<Value
-  value={resumen_inicio[0]?.Total}
+<KpiCard
   title="Población total ({inputs.año_inicio.value})"
-  fmt="compact"
+  value={resumen_inicio[0]?.Total}
+  formattedValue={formatCompact(resumen_inicio[0]?.Total, 2)}
 />
-<Value
-  value={resumen_fin[0]?.Total}
+<KpiCard
   title="Población total ({inputs.año_fin.value})"
-  fmt="compact"
+  value={resumen_fin[0]?.Total}
+  formattedValue={formatCompact(resumen_fin[0]?.Total, 2)}
 />
 </Grid>
 
