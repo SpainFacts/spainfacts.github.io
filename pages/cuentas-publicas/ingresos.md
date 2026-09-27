@@ -13,10 +13,11 @@ El sector público español se financia principalmente a través de tres grandes
 
 ```sql ultimos_ingresos_totales
 SELECT
+    año AS anio,
     sum(millones_euros) AS total_ingresos,
-    año
-FROM cuentas.ingresos
-WHERE año = 2024
+    sum(porcentaje_pib) AS total_pib
+FROM mother.cuentas_ingresos
+WHERE año = (SELECT max(año) FROM mother.cuentas_ingresos)
 GROUP BY año
 ```
 
@@ -26,21 +27,36 @@ SELECT
     sum(millones_euros) AS total_millones,
     sum(porcentaje_pib) AS pct_pib,
     sum(porcentaje_ingreso_total) AS pct_total
-FROM cuentas.ingresos
-WHERE año = 2024
+FROM mother.cuentas_ingresos
+WHERE año = (SELECT max(año) FROM mother.cuentas_ingresos)
 GROUP BY tipo_ingreso
 ORDER BY total_millones DESC
 ```
 
-```sql ingresos_por_categoria_2024
+```sql resumen_tipos
+SELECT
+    sum(CASE WHEN tipo_ingreso = 'Cotizaciones' THEN porcentaje_ingreso_total END) AS cot_pct,
+    sum(CASE WHEN tipo_ingreso = 'Impuestos Directos' THEN porcentaje_ingreso_total END) AS dir_pct,
+    sum(CASE WHEN tipo_ingreso = 'Impuestos Indirectos' THEN porcentaje_ingreso_total END) AS ind_pct,
+    sum(CASE WHEN tipo_ingreso = 'No Tributarios' THEN porcentaje_ingreso_total END) AS notrib_pct,
+    max(CASE WHEN categoria = 'Cotizaciones Sociales' THEN millones_euros END) AS cot_mio,
+    max(CASE WHEN categoria = 'IRPF y Patrimonio' THEN millones_euros END) AS irpf_mio,
+    max(CASE WHEN categoria = 'IRPF y Patrimonio' THEN porcentaje_ingreso_total END) AS irpf_pct,
+    max(CASE WHEN categoria = 'IVA' THEN millones_euros END) AS iva_mio,
+    max(CASE WHEN categoria = 'IVA' THEN porcentaje_ingreso_total END) AS iva_pct
+FROM mother.cuentas_ingresos
+WHERE año = (SELECT max(año) FROM mother.cuentas_ingresos)
+```
+
+```sql ingresos_por_categoria_ultimo
 SELECT
     categoria,
     tipo_ingreso,
     millones_euros,
     porcentaje_pib,
     porcentaje_ingreso_total
-FROM cuentas.ingresos
-WHERE año = 2024
+FROM mother.cuentas_ingresos
+WHERE año = (SELECT max(año) FROM mother.cuentas_ingresos)
 ORDER BY millones_euros DESC
 ```
 
@@ -49,7 +65,7 @@ SELECT
     año,
     categoria,
     millones_euros / 1000.0 AS miles_millones
-FROM cuentas.ingresos
+FROM mother.cuentas_ingresos
 ORDER BY año ASC, millones_euros DESC
 ```
 
@@ -58,7 +74,7 @@ SELECT
     año,
     tipo_ingreso,
     sum(millones_euros) / 1000.0 AS miles_millones
-FROM cuentas.ingresos
+FROM mother.cuentas_ingresos
 GROUP BY año, tipo_ingreso
 ORDER BY año ASC
 ```
@@ -66,51 +82,51 @@ ORDER BY año ASC
 <Grid cols=3>
     <KpiCard
         title="Cotizaciones Sociales"
-        value={211500}
-        formattedValue="211,5 mil M€"
-        unit="en 2024"
-        period="33,3% del total de ingresos"
+        value={resumen_tipos[0].cot_mio}
+        formattedValue="{formatNumber(resumen_tipos[0].cot_mio / 1000, 1)} mil M€"
+        unit="en {ultimos_ingresos_totales[0].anio}"
+        period="{formatNumber(resumen_tipos[0].cot_pct, 1)}% del total de ingresos"
         direction="neutral"
-        source="Seguridad Social / IGAE"
+        source="Eurostat (gov_10a_taxag)"
     />
 
     <KpiCard
         title="IRPF y Patrimonio"
-        value={144800}
-        formattedValue="144,8 mil M€"
-        unit="en 2024"
-        period="22,8% del total de ingresos"
+        value={resumen_tipos[0].irpf_mio}
+        formattedValue="{formatNumber(resumen_tipos[0].irpf_mio / 1000, 1)} mil M€"
+        unit="en {ultimos_ingresos_totales[0].anio}"
+        period="{formatNumber(resumen_tipos[0].irpf_pct, 1)}% del total de ingresos"
         direction="neutral"
-        source="AEAT / IGAE"
+        source="Eurostat (gov_10a_taxag)"
     />
 
     <KpiCard
         title="IVA (Consumo)"
-        value={104600}
-        formattedValue="104,6 mil M€"
-        unit="en 2024"
-        period="16,5% del total de ingresos"
+        value={resumen_tipos[0].iva_mio}
+        formattedValue="{formatNumber(resumen_tipos[0].iva_mio / 1000, 1)} mil M€"
+        unit="en {ultimos_ingresos_totales[0].anio}"
+        period="{formatNumber(resumen_tipos[0].iva_pct, 1)}% del total de ingresos"
         direction="neutral"
-        source="AEAT / IGAE"
+        source="Eurostat (gov_10a_taxag)"
     />
 </Grid>
 
 ---
 
-## 1. Composición de los Ingresos Públicos en España (2024)
+## 1. Composición de los Ingresos Públicos en España ({ultimos_ingresos_totales[0].anio})
 
-En 2024, los ingresos del conjunto de las Administraciones Públicas alcanzaron aproximadamente **635.800 millones de euros** (~41% del PIB).
+En {ultimos_ingresos_totales[0].anio}, los ingresos del conjunto de las Administraciones Públicas alcanzaron **{formatNumber(ultimos_ingresos_totales[0].total_ingresos / 1000, 1)} mil millones de euros** ({formatNumber(ultimos_ingresos_totales[0].total_pib, 1)}% del PIB).
 
 <BarChart
-    data={ingresos_por_categoria_2024}
+    data={ingresos_por_categoria_ultimo}
     x=categoria
     y=millones_euros
     yAxisTitle="Millones de Euros (€)"
-    title="Recaudación por categoría de ingreso (2024)"
+    title="Recaudación por categoría de ingreso ({ultimos_ingresos_totales[0].anio})"
     swapXY={true}
 />
 
-<DataTable data={ingresos_por_categoria_2024} title="Detalle de Ingresos (2024)">
+<DataTable data={ingresos_por_categoria_ultimo} title="Detalle de Ingresos ({ultimos_ingresos_totales[0].anio})">
     <Column id=categoria title="Categoría de Ingreso" />
     <Column id=tipo_ingreso title="Tipo de Tributo" />
     <Column id=millones_euros title="Recaudación (M€)" fmt='#,##0 M€' />
@@ -128,21 +144,24 @@ En 2024, los ingresos del conjunto de las Administraciones Públicas alcanzaron 
     y=miles_millones
     series=tipo_ingreso
     yAxisTitle="Miles de Millones de Euros (Mrd €)"
-    title="Evolución de los Ingresos Públicos por tipo de tributo (2019-2024)"
+    title="Evolución de los Ingresos Públicos por tipo de tributo"
 />
 
 ---
 
 ## 3. ¿Cómo se distribuye la carga fiscal?
 
-- **Cotizaciones a la Seguridad Social (33,3%):** La principal fuente de ingresos públicos, destinada a sostener las pensiones contributivas y las prestaciones por desempleo.
-- **Impuestos Directos (~29,5%):** Gravan directamente la renta de los ciudadanos (IRPF) y los beneficios declarados por las sociedades mercantiles.
-- **Impuestos Indirectos (~27,2%):** Gravan el consumo general (IVA) y productos específicos como carburantes, tabaco, alcohol y electricidad (Impuestos Especiales).
-- **Ingresos No Tributarios y Fondos UE (~10,2%):** Tasas administrativas, ingresos patrimoniales (dividendos públicos, loterías) y transferencias procedentes de los fondos europeos Next Generation EU.
+- **Cotizaciones a la Seguridad Social ({formatNumber(resumen_tipos[0].cot_pct, 1)}%):** La principal fuente de ingresos públicos, destinada a sostener las pensiones contributivas y las prestaciones por desempleo.
+- **Impuestos Directos ({formatNumber(resumen_tipos[0].dir_pct, 1)}%):** Gravan directamente la renta de los ciudadanos (IRPF), los beneficios declarados por las sociedades mercantiles, el patrimonio y las herencias.
+- **Impuestos Indirectos ({formatNumber(resumen_tipos[0].ind_pct, 1)}%):** Gravan el consumo general (IVA) y productos específicos como carburantes, tabaco, alcohol y electricidad (Impuestos Especiales), además de otros impuestos sobre la producción.
+- **Ingresos No Tributarios y Fondos UE ({formatNumber(resumen_tipos[0].notrib_pct, 1)}%):** Ventas y tasas de servicios públicos, rentas de la propiedad (intereses, dividendos) y transferencias recibidas, incluidos los fondos europeos Next Generation EU.
+
+<small>Metodología: los impuestos y cotizaciones proceden de Eurostat (gov_10a_taxag) y los ingresos totales de gov_10a_main. Las categorías «Otros impuestos» e «Ingresos No Tributarios y Fondos UE» se calculan por diferencia, de modo que la suma coincide con los ingresos totales oficiales.</small>
 
 ---
 
 ## Fuentes Oficiales
-- **[Intervención General de la Administración del Estado (IGAE)](https://www.igae.pap.hacienda.gob.es/):** Cuentas Económicas y Contabilidad Nacional del Sector Público.
+- **[Eurostat - Impuestos y cotizaciones sociales por figura (gov_10a_taxag)](https://ec.europa.eu/eurostat/databrowser/view/gov_10a_taxag):** Recaudación armonizada según el SEC 2010.
+- **[Eurostat - Cuentas de las AAPP (gov_10a_main)](https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main):** Ingresos totales de las Administraciones Públicas.
 - **[Agencia Estatal de Administración Tributaria (AEAT)](https://sede.agenciatributaria.gob.es/Sede/estadisticas/recaudacion-tributaria.html):** Informes Anuales y Mensuales de Recaudación.
-- **[Eurostat - Government Revenue (gov_10a_rev)](https://ec.europa.eu/eurostat/databrowser/view/gov_10a_rev):** Cuentas no financieras anuales armonizadas.
+- **[Intervención General de la Administración del Estado (IGAE)](https://www.igae.pap.hacienda.gob.es/):** Cuentas Económicas y Contabilidad Nacional del Sector Público.

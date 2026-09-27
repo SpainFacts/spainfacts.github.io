@@ -1,8 +1,15 @@
-# This file was automatically generated
-type: motherduck
+# Fuente principal de Evidence. Usa el conector DuckDB, que sirve tanto para
+# MotherDuck ("md:...") como para un fichero local, así las consultas
+# (mother.<tabla>) son las mismas en los dos modos.
+#
+#   MotherDuck (por defecto, CI y producción): filename md:SpainFacts; DuckDB
+#     toma el token de la variable de entorno motherduck_token.
+#   Local: EVIDENCE_SOURCE__mother__filename=../../data/spainfacts.duckdb
+#     (RELATIVA a esta carpeta: el conector siempre le antepone sources/mother)
+#     (ver docs/desarrollo-local.md)
+type: duckdb
 name: mother
 options:
-  database: SpainFacts
-# Advanced Options, you probably don't want to change this
+  filename: md:SpainFacts
 buildOptions:
   batchSize: 1000000

@@ -24,7 +24,8 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/'
-          EVIDENCE_SOURCE__mother__token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
+          # sources/mother usa el conector DuckDB con md:SpainFacts: DuckDB lee el token de aquí
+          motherduck_token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
           ## Add and uncomment any environment variables here
           ## EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
           ## EVIDENCE_SOURCE__my_source__private_key: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__PRIVATE_KEY }}

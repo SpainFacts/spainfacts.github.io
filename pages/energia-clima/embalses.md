@@ -104,6 +104,15 @@ SELECT
     dif_vs_anio_anterior,
     pct_media_10_anios / 100 AS media_10_anios,
     dif_vs_media_10_anios,
+    -- Criterio editorial: ±5 pp respecto a la media de 10 años es "normal";
+    -- además, por debajo del 40 % se avisa aunque la cuenca esté en su media.
+    CASE
+        WHEN dif_vs_media_10_anios <= -15 THEN 'Muy por debajo'
+        WHEN dif_vs_media_10_anios < -5 THEN 'Por debajo'
+        WHEN pct_llenado < 40 THEN 'Reservas bajas'
+        WHEN dif_vs_media_10_anios > 5 THEN 'Por encima'
+        ELSE 'Normal'
+    END AS situacion,
     n_embalses
 FROM mother.embalses_estado_actual
 WHERE nivel = 'cuenca'
@@ -118,6 +127,7 @@ ORDER BY pct_llenado DESC
     <Column id=dif_vs_anio_anterior title="Dif. (pp)" fmt=num1 contentType=delta />
     <Column id=media_10_anios title="Media 10 años" fmt=pct1 />
     <Column id=dif_vs_media_10_anios title="Dif. (pp)" fmt=num1 contentType=delta />
+    <Column id=situacion title="Situación" />
     <Column id=n_embalses title="Embalses" />
 </DataTable>
 

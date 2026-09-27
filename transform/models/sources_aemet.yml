@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_aemet
+    description: "Datos crudos de AEMET OpenData cargados por dlt (ingestion/aemet.py)"
+    schema: raw
+    tables:
+      - name: aemet_diario
+        description: "Climatología diaria de las estaciones de referencia (1991-hoy), clave (indicativo, fecha)"
+      - name: aemet_diario_todas
+        description: "Climatología diaria de todas las estaciones de AEMET desde AEMET_FECHA_INICIO_TODAS (2025-01-01)"
+      - name: aemet_estaciones
+        description: "Inventario de estaciones climatológicas de AEMET"

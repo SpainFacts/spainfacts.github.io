@@ -7,9 +7,13 @@ sources:
     tables:
       - name: ine_ipc
       - name: ine_paro
+      - name: ine_poblacion_provincias
+        description: "Población a 1 de enero por provincia, sexo y edad simple (INE 56945, ECP)"
       - name: eurostat_deuda
       - name: eurostat_cuentas_balance
       - name: eurostat_cuentas_gastos
       - name: eurostat_cuentas_ingresos
+      - name: observatorios_publicos
+        description: "Censo de observatorios públicos (observatoriospublicos.es), JSON sin limpiar"
       - name: miteco_embalses
         description: "Reserva hídrica semanal por embalse (MITECO, BD-Embalses 1988-hoy)"

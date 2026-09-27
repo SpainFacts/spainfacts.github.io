@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: incendios_areas_quemadas
+    description: "Un incendio por fila (EFFIS, Copernicus) en España desde 2000: fecha, provincia, superficie, cubierta y % en Red Natura 2000"
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: fecha
+        tests: [not_null]
+      - name: area_ha
+        tests: [not_null]
+      - name: cod_prov
+        description: "Código INE de provincia (2 dígitos), casa con static/spain-provinces.geojson"
+        tests: [not_null]
+      - name: latitud
+        tests: [not_null]
+      - name: longitud
+        tests: [not_null]
+  - name: incendios_anual
+    description: "Superficie quemada, número de incendios y % en Natura 2000 por año (EFFIS)"
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+      - name: ha_quemadas
+        tests: [not_null]
+      - name: pct_natura2000
+        tests: [not_null]
+  - name: incendios_provincia_anio
+    description: "Superficie quemada por provincia y año (EFFIS)"
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: cod_prov
+        tests: [not_null]
+  - name: incendios_focos_activos
+    description: "Focos de calor NASA FIRMS (VIIRS y MODIS) en España en los últimos 7 días"
+    columns:
+      - name: latitud
+        tests: [not_null]
+      - name: longitud
+        tests: [not_null]
+      - name: fecha_hora_utc
+        tests: [not_null]
+      - name: cod_prov
+        tests: [not_null]
+      - name: confianza
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['alta', 'media', 'baja']

@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_eurostat_extra
+    description: "Tablas Eurostat adicionales para las Cuentas Públicas (ingestion/eurostat.py)"
+    schema: raw
+    tables:
+      - name: eurostat_cuentas_subsectores
+        description: "gov_10a_main: TR, TE y B9 de S13 y subsectores S1311-S1314, en MIO_EUR y PC_GDP"
+      - name: eurostat_pib
+        description: "nama_10_gdp: PIB a precios corrientes (B1GQ, CP_MEUR)"
+      - name: eurostat_poblacion
+        description: "nama_10_pe: población media anual (POP_NC, miles de personas)"

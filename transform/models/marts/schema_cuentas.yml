@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: cuentas_balance_anual
+    description: "Balance anual consolidado de las AAPP (Eurostat gov_10a_main, gov_10q_ggdebt, nama_10_pe)"
+    columns:
+      - name: año
+        quote: true
+        tests: [not_null, unique]
+      - name: ingresos_totales_mrd
+        tests: [not_null]
+      - name: gastos_totales_mrd
+        tests: [not_null]
+      - name: saldo_deficit_mrd
+        tests: [not_null]
+
+  - name: cuentas_gastos
+    description: "Gasto público por función COFOG (Eurostat gov_10a_exp)"
+    tests:
+      - unique:
+          column_name: "(\"año\" || '|' || funcion_cofog)"
+    columns:
+      - name: año
+        quote: true
+        tests: [not_null]
+      - name: funcion_cofog
+        tests: [not_null]
+      - name: millones_euros
+        tests: [not_null]
+
+  - name: cuentas_ingresos
+    description: "Ingresos públicos por figura tributaria (Eurostat gov_10a_taxag + gov_10a_main)"
+    tests:
+      - unique:
+          column_name: "(\"año\" || '|' || categoria)"
+    columns:
+      - name: año
+        quote: true
+        tests: [not_null]
+      - name: categoria
+        tests: [not_null]
+      - name: millones_euros
+        tests: [not_null]
+
+  - name: cuentas_subsectores
+    description: "Ingresos, gastos y saldo por subsector de las AAPP (Eurostat gov_10a_main, no consolidado)"
+    tests:
+      - unique:
+          column_name: "(\"año\" || '|' || cod_sector)"
+    columns:
+      - name: año
+        quote: true
+        tests: [not_null]
+      - name: subsector
+        tests: [not_null]
+      - name: gasto_mrd
+        tests: [not_null]

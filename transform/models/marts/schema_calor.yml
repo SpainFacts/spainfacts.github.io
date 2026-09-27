@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: calor_normal_diaria
+    description: "Normal diaria 1991-2020 (ventana ±7 días) de la temperatura máxima por provincia (AEMET)"
+    tests:
+      - unique:
+          column_name: "cod_prov || '-' || dia_anio"
+    columns:
+      - name: cod_prov
+        tests: [not_null]
+      - name: dia_anio
+        tests: [not_null]
+      - name: tmax_media
+        tests: [not_null]
+  - name: calor_provincia_diario
+    description: "Temperaturas diarias por provincia (estación de referencia AEMET) frente a la normal 1991-2020"
+    tests:
+      - unique:
+          column_name: "cod_prov || '-' || fecha"
+    columns:
+      - name: fecha
+        tests: [not_null]
+      - name: cod_prov
+        tests: [not_null]
+  - name: calor_espana_diario
+    description: "Anomalía diaria media de las provincias españolas"
+    columns:
+      - name: fecha
+        tests: [not_null, unique]
+  - name: calor_ultimo_dia
+    description: "Situación de cada provincia en el último día con datos"
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+      - name: fecha
+        tests: [not_null]
+  - name: calor_anual
+    description: "Anomalía anual de la temperatura máxima en España (media de provincias)"
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+  - name: calor_records
+    description: "Los 20 días más calurosos de cada provincia desde 1991"
+    columns:
+      - name: cod_prov
+        tests: [not_null]
+      - name: tmax
+        tests: [not_null]
+  - name: calor_maxima_diaria
+    description: "Estación de AEMET con la temperatura máxima más alta de España cada día"
+    columns:
+      - name: fecha
+        tests: [not_null, unique]

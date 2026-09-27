@@ -1,0 +1,64 @@
+cod_prov,provincia,indicativo,prioridad,estacion
+01,Álava,9091O,1,Vitoria-Gasteiz (Foronda)
+01,Álava,9091R,2,Vitoria-Gasteiz Aeropuerto
+02,Albacete,8175,1,Albacete Base Aérea
+02,Albacete,8178D,2,Albacete
+03,Alicante,8019,1,Alicante-Elche Aeropuerto
+03,Alicante,8025,2,Alicante
+04,Almería,6325O,1,Almería Aeropuerto
+05,Ávila,2444,1,Ávila
+06,Badajoz,4452,1,Badajoz Aeropuerto
+07,Illes Balears,B278,1,Palma de Mallorca Aeropuerto
+08,Barcelona,0076,1,Barcelona Aeropuerto
+09,Burgos,2331,1,Burgos Aeropuerto
+10,Cáceres,3469A,1,Cáceres
+11,Cádiz,5973,1,Cádiz
+12,Castellón,8500A,1,Castelló - Almassora
+13,Ciudad Real,4121,1,Ciudad Real
+14,Córdoba,5402,1,Córdoba Aeropuerto
+15,A Coruña,1387,1,A Coruña
+15,A Coruña,1387E,2,A Coruña Aeropuerto
+16,Cuenca,8096,1,Cuenca
+17,Girona,0367,1,Girona Aeropuerto
+18,Granada,5530E,1,Granada Aeropuerto
+18,Granada,5514,2,Granada Base Aérea
+19,Guadalajara,3168D,1,Guadalajara
+19,Guadalajara,3168C,2,"Guadalajara, El Serranillo"
+20,Gipuzkoa,1024E,1,"Donostia/San Sebastián, Igeldo"
+20,Gipuzkoa,1014A,2,Donostia/San Sebastián Aeropuerto
+21,Huelva,4642E,1,"Huelva, Ronda Este"
+22,Huesca,9898,1,Huesca Aeropuerto
+23,Jaén,5270B,1,Jaén
+24,León,2661,1,"León, Virgen del Camino"
+25,Lleida,9771C,1,Lleida
+26,La Rioja,9170,1,Logroño Aeropuerto
+27,Lugo,1505,1,Lugo Aeropuerto
+28,Madrid,3195,1,"Madrid, Retiro"
+29,Málaga,6155A,1,Málaga Aeropuerto
+30,Murcia,7178I,1,Murcia
+30,Murcia,7228,2,Alcantarilla Base Aérea
+31,Navarra,9263D,1,Pamplona Aeropuerto
+32,Ourense,1690A,1,Ourense
+33,Asturias,1212E,1,Asturias Aeropuerto
+34,Palencia,2400E,1,Autilla del Pino
+34,Palencia,2401,2,"Palencia, Observatorio"
+35,Las Palmas,C649I,1,Gran Canaria Aeropuerto
+36,Pontevedra,1484C,1,Pontevedra
+37,Salamanca,2867,1,Salamanca Aeropuerto
+38,Santa Cruz de Tenerife,C449C,1,Santa Cruz de Tenerife
+39,Cantabria,1109X,1,Santander Aeropuerto
+39,Cantabria,1109,2,Santander Aeropuerto (serie antigua)
+40,Segovia,2465,1,Segovia
+41,Sevilla,5783,1,Sevilla Aeropuerto
+42,Soria,2030,1,Soria
+43,Tarragona,0016A,1,Reus Aeropuerto
+44,Teruel,8368U,1,Teruel
+45,Toledo,3260B,1,Toledo
+46,Valencia,8416,1,València
+46,Valencia,8416Y,2,"València, Viveros"
+47,Valladolid,2422,1,Valladolid
+48,Bizkaia,1082,1,Bilbao Aeropuerto
+49,Zamora,2614,1,Zamora
+50,Zaragoza,9434,1,Zaragoza Aeropuerto
+51,Ceuta,5000C,1,Ceuta
+52,Melilla,6000A,1,Melilla

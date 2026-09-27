@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_energia
+    description: "Datos crudos de energía y clima cargados por dlt (ingestion/ree.py, ingestion/emisiones.py)"
+    schema: raw
+    tables:
+      - name: ree_estructura_generacion
+        description: "REE REData generacion/estructura-generacion: generación anual nacional por tecnología (MWh). provisional=true para el año en curso."
+      - name: ree_demanda
+        description: "REE REData demanda/evolucion: demanda eléctrica anual nacional (MWh)"
+      - name: ree_potencia_instalada
+        description: "Potencia instalada anual (MW). fuente='ree' (generacion/potencia-instalada) o 'eurostat_nrg_inf_epc' (respaldo si la API de REE falla)."
+      - name: eurostat_gei
+        description: "Eurostat env_air_gge: emisiones GEI de España por categoría CRF (Mt CO2eq), inventario reportado a la CMNUCC"

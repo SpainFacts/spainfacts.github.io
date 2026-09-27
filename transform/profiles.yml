@@ -1,15 +1,16 @@
 spainfacts:
-  target: prod
+  # SPAINFACTS_DESTINO=local -> DuckDB local; cualquier otro valor -> MotherDuck
+  target: "{{ 'local' if env_var('SPAINFACTS_DESTINO', 'motherduck') == 'local' else 'prod' }}"
   outputs:
     prod:
       type: duckdb
       path: "md:SpainFacts?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
       schema: main
       threads: 4
-    # Para desarrollo/pruebas sin tocar MotherDuck: un DuckDB local
-    #   dbt build --target dev --project-dir transform --profiles-dir transform
-    dev:
+    # Desarrollo sin MotherDuck (ver docs/desarrollo-local.md). SPAINFACTS_DUCKDB
+    # debe ser una ruta ABSOLUTA: dbt resuelve las relativas desde el cwd.
+    local:
       type: duckdb
-      path: "{{ env_var('SPAINFACTS_DUCKDB', 'dev.duckdb') }}"
+      path: "{{ env_var('SPAINFACTS_DUCKDB', 'spainfacts.duckdb') }}"
       schema: main
       threads: 4

@@ -1,0 +1,15 @@
+version: 2
+
+seeds:
+  - name: aemet_estaciones_referencia
+    description: >
+      Estación de referencia de AEMET por provincia (capital o aeropuerto principal
+      con serie larga). Si hay varias filas por provincia, cada día se usa la de
+      menor `prioridad` que tenga dato: sirve para empalmar cambios de indicativo.
+    config:
+      column_types:
+        cod_prov: varchar
+        provincia: varchar
+        indicativo: varchar
+        prioridad: integer
+        estacion: varchar

@@ -14,7 +14,7 @@ Inspirado en el informe anual que presentan las empresas cotizadas ante los merc
 
 ```sql balance_reciente
 SELECT
-    año,
+    año AS anio,
     ingresos_totales_mrd,
     gastos_totales_mrd,
     saldo_deficit_mrd,
@@ -22,7 +22,7 @@ SELECT
     deuda_publica_mrd,
     deuda_pib,
     poblacion_m
-FROM cuentas.balance_anual
+FROM mother.cuentas_balance_anual
 ORDER BY año DESC
 LIMIT 2
 ```
@@ -33,7 +33,7 @@ SELECT
     ingresos_totales_mrd AS "Ingresos Totales",
     gastos_totales_mrd AS "Gastos Totales",
     saldo_deficit_mrd AS "Déficit / Superávit"
-FROM cuentas.balance_anual
+FROM mother.cuentas_balance_anual
 ORDER BY año ASC
 ```
 
@@ -41,7 +41,7 @@ ORDER BY año ASC
 SELECT
     año,
     saldo_deficit_pib AS deficit_pib
-FROM cuentas.balance_anual
+FROM mother.cuentas_balance_anual
 ORDER BY año ASC
 ```
 
@@ -49,16 +49,24 @@ ORDER BY año ASC
 SELECT
     año,
     deuda_pib
-FROM cuentas.balance_anual
+FROM mother.cuentas_balance_anual
 ORDER BY año ASC
+```
+
+```sql sankey_anio
+-- Último ejercicio con desglose publicado tanto de ingresos como de gastos
+SELECT least(
+    (SELECT max(año) FROM mother.cuentas_ingresos),
+    (SELECT max(año) FROM mother.cuentas_gastos)
+) AS anio
 ```
 
 ```sql ingresos_sankey
 SELECT
     categoria,
     millones_euros
-FROM cuentas.ingresos
-WHERE año = 2024
+FROM mother.cuentas_ingresos
+WHERE año = (SELECT least(max(i.año), (SELECT max(g.año) FROM mother.cuentas_gastos g)) FROM mother.cuentas_ingresos i)
 ORDER BY millones_euros DESC
 ```
 
@@ -66,21 +74,27 @@ ORDER BY millones_euros DESC
 SELECT
     funcion_cofog,
     millones_euros
-FROM cuentas.gastos
-WHERE año = 2024
+FROM mother.cuentas_gastos
+WHERE año = (SELECT least(max(g.año), (SELECT max(i.año) FROM mother.cuentas_ingresos i)) FROM mother.cuentas_gastos g)
 ORDER BY millones_euros DESC
 ```
 
-```sql subsectores_2024
+```sql subsectores_ultimo
 SELECT
+    año AS anio,
     subsector,
     gasto_mrd,
     ingreso_mrd,
     saldo_deficit_mrd,
     peso_gasto_pct
-FROM cuentas.subsectores
-WHERE año = 2024
+FROM mother.cuentas_subsectores
+WHERE año = (SELECT max(año) FROM mother.cuentas_subsectores)
 ORDER BY gasto_mrd DESC
+```
+
+```sql rango_historico
+SELECT min(año) AS desde, max(año) AS hasta
+FROM mother.cuentas_balance_anual
 ```
 
 <!-- KPI Ribbon: Resumen Anual del Estado -->
@@ -89,12 +103,12 @@ ORDER BY gasto_mrd DESC
         title="Ingresos Totales"
         value={balance_reciente[0].ingresos_totales_mrd}
         formattedValue="{formatNumber(balance_reciente[0].ingresos_totales_mrd, 1)} mil M€"
-        period="Ejercicio 2024"
+        period="Ejercicio {balance_reciente[0].anio}"
         change={(((balance_reciente[0].ingresos_totales_mrd - balance_reciente[1].ingresos_totales_mrd) / balance_reciente[1].ingresos_totales_mrd) * 100).toFixed(1)}
         changeUnit="%"
         changePeriod="interanual"
         direction="positive-up"
-        source="IGAE / Eurostat"
+        source="Eurostat (gov_10a_main)"
         href="/cuentas-publicas/ingresos"
     />
 
@@ -102,12 +116,12 @@ ORDER BY gasto_mrd DESC
         title="Gastos Totales"
         value={balance_reciente[0].gastos_totales_mrd}
         formattedValue="{formatNumber(balance_reciente[0].gastos_totales_mrd, 1)} mil M€"
-        period="Ejercicio 2024"
+        period="Ejercicio {balance_reciente[0].anio}"
         change={(((balance_reciente[0].gastos_totales_mrd - balance_reciente[1].gastos_totales_mrd) / balance_reciente[1].gastos_totales_mrd) * 100).toFixed(1)}
         changeUnit="%"
         changePeriod="interanual"
         direction="neutral"
-        source="IGAE / Eurostat"
+        source="Eurostat (gov_10a_main)"
         href="/cuentas-publicas/gastos"
     />
 
@@ -115,38 +129,38 @@ ORDER BY gasto_mrd DESC
         title="Déficit Fiscal Anual"
         value={balance_reciente[0].saldo_deficit_pib}
         formattedValue="{formatNumber(balance_reciente[0].saldo_deficit_pib, 1)}% PIB"
-        period="Ejercicio 2024"
+        period="Ejercicio {balance_reciente[0].anio}"
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="vs año anterior"
         direction="positive-down"
-        source="IGAE / PDE"
+        source="Eurostat (gov_10a_main)"
     />
 
     <KpiCard
         title="Deuda Pública / PIB"
         value={balance_reciente[0].deuda_pib}
         formattedValue="{formatNumber(balance_reciente[0].deuda_pib, 1)}%"
-        period="1.622 mil M€"
+        period="{formatNumber(balance_reciente[0].deuda_publica_mrd, 1)} mil M€ · {balance_reciente[0].anio}"
         change={(balance_reciente[0].deuda_pib - balance_reciente[1].deuda_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="vs año anterior"
         direction="positive-down"
-        source="Banco de España"
+        source="Eurostat (PDE)"
         href="/indicadores/deuda_publica_pib"
     />
 </Grid>
 
 ---
 
-## 1. El Recorrido del Dinero Público (Flujo Presupuestario 2024)
+## 1. El Recorrido del Dinero Público (Flujo Presupuestario {sankey_anio[0].anio})
 
-Este diagrama de flujo visualiza de dónde provienen los ingresos de las Administraciones Públicas y en qué partidas concretas se emplean:
+Este diagrama de flujo visualiza de dónde provienen los ingresos de las Administraciones Públicas y en qué partidas concretas se emplean (último ejercicio con desglose completo publicado por Eurostat). La diferencia entre ambos lados es el déficit del año, que se financia con deuda:
 
 <SankeyPresupuesto
     dataIngresos={ingresos_sankey}
     dataGastos={gastos_sankey}
-    title="Flujo de Cuentas Públicas de España (2024)"
+    title="Flujo de Cuentas Públicas de España ({sankey_anio[0].anio})"
     subtitle="De los impuestos y cotizaciones a las funciones de gasto del Estado (Millones de €)"
     height="540px"
 />
@@ -171,7 +185,7 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
 
 ---
 
-## 2. El Balance Histórico: Ingresos vs Gastos (2000 - 2024)
+## 2. El Balance Histórico: Ingresos vs Gastos ({rango_historico[0].desde} - {rango_historico[0].hasta})
 
 La diferencia anual entre lo que ingresa el sector público y lo que desembolsa define el **saldo presupuestario** (superávit si es positivo, déficit si es negativo):
 
@@ -180,7 +194,7 @@ La diferencia anual entre lo que ingresa el sector público y lo que desembolsa 
     x=año
     y={["Ingresos Totales", "Gastos Totales"]}
     yAxisTitle="Miles de Millones de Euros (Mrd €)"
-    title="Ingresos Públicos vs Gastos Públicos en España (2000-2024)"
+    title="Ingresos Públicos vs Gastos Públicos en España"
     startingAtZero={false}
 />
 
@@ -196,11 +210,11 @@ La diferencia anual entre lo que ingresa el sector público y lo que desembolsa 
 
 ## 3. ¿Quién administra el gasto público en España?
 
-España es un estado descentralizado donde las competencias de gasto se distribuyen entre cuatro subsectores institucionales:
+España es un estado descentralizado donde las competencias de gasto se distribuyen entre cuatro subsectores institucionales. Las cifras de cada subsector no están consolidadas entre sí (incluyen las transferencias entre administraciones), por lo que sus pesos sobre el gasto total suman más del 100%:
 
 <Grid cols=2>
 
-<DataTable data={subsectores_2024} title="Desglose por Nivel de Administración (2024)">
+<DataTable data={subsectores_ultimo} title="Desglose por Nivel de Administración ({subsectores_ultimo[0].anio})">
     <Column id=subsector title="Subsector Institucional" />
     <Column id=gasto_mrd title="Gasto (Mrd €)" fmt='#,##0.0 Mrd €' />
     <Column id=peso_gasto_pct title="% del Gasto" fmt='0.0"%"' />
@@ -209,11 +223,11 @@ España es un estado descentralizado donde las competencias de gasto se distribu
 
 <div>
     <BarChart
-        data={subsectores_2024}
+        data={subsectores_ultimo}
         x=subsector
         y=gasto_mrd
         yAxisTitle="Gasto (Miles de Millones €)"
-        title="Gasto por subsector administrativo (2024)"
+        title="Gasto por subsector administrativo ({subsectores_ultimo[0].anio})"
         swapXY={true}
     />
 </div>

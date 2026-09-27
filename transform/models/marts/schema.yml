@@ -61,3 +61,20 @@ models:
       - name: cod_demarcacion
         description: "Null si aparece un ámbito nuevo sin mapear en seeds/cuencas_demarcaciones.csv"
         tests: [not_null]
+  - name: poblacion_anual
+    description: "Población a 1 de enero por año, provincia (o total nacional) y sexo (INE ECP)"
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: poblacion
+        tests: [not_null]
+  - name: poblacion_piramide
+    description: "Población nacional por grupo quinquenal de edad y sexo (INE ECP)"
+    columns:
+      - name: rango_edad
+        tests: [not_null]
+  - name: observatorios
+    description: "Censo de observatorios públicos (observatoriospublicos.es)"
+    columns:
+      - name: name
+        tests: [not_null]

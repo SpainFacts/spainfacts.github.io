@@ -25,9 +25,16 @@ from dagster import (
 from dagster_dbt import DagsterDbtTranslator, DbtCliResource, DbtProject, dbt_assets
 from dagster_dlt import DagsterDltResource, dlt_assets
 
+from ingestion.aemet import aemet
+from ingestion.destino import es_local
+from ingestion.destino import pipeline as pipeline_destino
+from ingestion.emisiones import emisiones
 from ingestion.eurostat import eurostat
+from ingestion.incendios import incendios
 from ingestion.ine import ine
 from ingestion.miteco import miteco
+from ingestion.observatorios import observatorios
+from ingestion.ree import ree
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TRANSFORM_DIR = REPO_ROOT / "transform"
@@ -36,13 +43,9 @@ TRANSFORM_DIR = REPO_ROOT / "transform"
 
 
 def _pipeline_motherduck(nombre: str) -> dlt.Pipeline:
-    return dlt.pipeline(
-        pipeline_name=nombre,
-        destination=dlt.destinations.motherduck(
-            credentials=f"md:///SpainFacts?motherduck_token={os.environ.get('MOTHERDUCK_TOKEN', '')}"
-        ),
-        dataset_name="raw",
-    )
+    # El nombre se mantiene por compatibilidad: el destino real (MotherDuck o
+    # DuckDB local) lo decide SPAINFACTS_DESTINO, ver ingestion/destino.py.
+    return pipeline_destino(nombre)
 
 
 @dlt_assets(dlt_source=ine(), dlt_pipeline=_pipeline_motherduck("ine"), name="ine", group_name="ingesta")
@@ -62,6 +65,49 @@ def eurostat_assets(context: AssetExecutionContext, dlt_resource: DagsterDltReso
 
 @dlt_assets(dlt_source=miteco(), dlt_pipeline=_pipeline_motherduck("miteco"), name="miteco", group_name="ingesta")
 def miteco_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(
+    dlt_source=observatorios(),
+    dlt_pipeline=_pipeline_motherduck("observatorios"),
+    name="observatorios",
+    group_name="ingesta",
+)
+def observatorios_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(
+    dlt_source=incendios(),
+    dlt_pipeline=_pipeline_motherduck("incendios"),
+    name="incendios",
+    group_name="ingesta",
+)
+def incendios_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(dlt_source=ree(), dlt_pipeline=_pipeline_motherduck("ree"), name="ree", group_name="ingesta")
+def ree_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(
+    dlt_source=emisiones(),
+    dlt_pipeline=_pipeline_motherduck("emisiones"),
+    name="emisiones",
+    group_name="ingesta",
+)
+def emisiones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Incremental: dlt guarda en el destino la última fecha cargada y cada día
+# vuelve a pedir los 20 días anteriores. Un destino vacío (p. ej. un DuckDB
+# local nuevo) dispara el backfill desde 1991 (~1 h): ver docs/desarrollo-local.md.
+@dlt_assets(dlt_source=aemet(), dlt_pipeline=_pipeline_motherduck("aemet"), name="aemet", group_name="ingesta")
+def aemet_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -93,6 +139,9 @@ def transform_assets(context: AssetExecutionContext, dbt: DbtCliResource):
 @asset(deps=[transform_assets], group_name="publicacion")
 def deploy_web(context: AssetExecutionContext):
     """Lanza el workflow deploy.yml vía repository_dispatch (event: data-updated)."""
+    if es_local():
+        context.log.info("SPAINFACTS_DESTINO=local: no se dispara el deploy (la web publicada lee de MotherDuck).")
+        return
     respuesta = requests.post(
         "https://api.github.com/repos/SpainFacts/spainfacts.github.io/dispatches",
         headers={
@@ -119,7 +168,7 @@ schedule_diario = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria],
     schedules=[schedule_diario],
     resources={

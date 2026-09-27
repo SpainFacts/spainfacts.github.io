@@ -23,7 +23,7 @@ SELECT
     url_oficial,
     metodologia,
     estado_pipeline
-FROM cuentas.trazabilidad
+FROM mother.trazabilidad_fuentes
 ORDER BY organismo ASC, nombre_dataset ASC
 ```
 
@@ -31,7 +31,7 @@ ORDER BY organismo ASC, nombre_dataset ASC
 SELECT
     count(distinct organismo) AS total_organismos,
     count(*) AS total_datasets
-FROM cuentas.trazabilidad
+FROM mother.trazabilidad_fuentes
 ```
 
 <Grid cols=4>

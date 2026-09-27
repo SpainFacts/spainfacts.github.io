@@ -1,0 +1,18 @@
+version: 2
+
+seeds:
+  - name: provincias_codigos
+    description: >
+      Traducción del nombre de provincia NUTS3 que usa EFFIS (en las islas, el
+      nombre de la isla; "Oriente" es el oriente de Asturias) al código INE de
+      provincia (cod_prov) de static/spain-provinces.geojson y a un nombre en castellano.
+    config:
+      column_types:
+        nombre_effis: varchar
+        cod_prov: varchar
+        provincia: varchar
+    columns:
+      - name: nombre_effis
+        tests: [not_null, unique]
+      - name: cod_prov
+        tests: [not_null]

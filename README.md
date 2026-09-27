@@ -61,6 +61,14 @@ Solo el pipeline de dbt (sin Dagster):
 uv run dbt build --project-dir transform --profiles-dir transform
 ```
 
+### Sin MotherDuck: todo contra un DuckDB local
+
+Con `SPAINFACTS_DESTINO=local` en el `.env`, dlt, dbt y Evidence leen y escriben
+en `data/spainfacts.duckdb` en vez de MotherDuck, y `deploy_web` no dispara el
+deploy. Paso a paso (variables, cómo rellenar la base copiando MotherDuck en
+~30 s o cargando desde las fuentes oficiales, y problemas típicos):
+**[docs/desarrollo-local.md](docs/desarrollo-local.md)**.
+
 ## Despliegue en el servidor
 
 ```bash

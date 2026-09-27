@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_incendios
+    description: "Incendios forestales cargados por dlt (ingestion/incendios.py)"
+    schema: raw
+    tables:
+      - name: effis_areas_quemadas
+        description: "Perímetros quemados cartografiados por EFFIS (Copernicus) en España desde 2000, sin geometría: centroide, bbox, superficie, cubiertas y % en Natura 2000"
+      - name: firms_focos
+        description: "Focos de calor activos NASA FIRMS (VIIRS y MODIS) dentro de España; se acumulan día a día (merge)"

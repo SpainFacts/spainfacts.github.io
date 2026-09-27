@@ -10,13 +10,13 @@ description: Inventario oficial de emisiones de gases de efecto invernadero (GEI
 
 # 🏭 Emisiones de Gases de Efecto Invernadero en España
 
-España emitió en 2024 un total estimado de **258 Mt de CO₂ equivalente**. Aunque las emisiones han descendido respecto al pico de 2007, el ritmo de descarbonización sigue siendo insuficiente para cumplir los compromisos del Acuerdo de París y la Ley Europea del Clima (reducción del 55% en 2030 respecto a 1990).
+España emitió en {emisiones_total_anual[emisiones_total_anual.length - 1]?.año} un total de **{emisiones_total_anual[emisiones_total_anual.length - 1]?.total_mt?.toFixed(1)} Mt de CO₂ equivalente** (inventario oficial, sin contar el sector de usos del suelo, LULUCF). Aunque las emisiones han descendido respecto al pico de 2007, el ritmo de descarbonización sigue siendo insuficiente para cumplir los compromisos del Acuerdo de París y la Ley Europea del Clima (reducción del 55% en 2030 respecto a 1990).
 
 ```sql emisiones_total_anual
 SELECT
     año,
     sum(millones_toneladas_co2eq) AS total_mt
-FROM clima_energia.emisiones_gei
+FROM mother.energia_emisiones_gei
 GROUP BY año
 ORDER BY año ASC
 ```
@@ -26,7 +26,7 @@ SELECT
     año,
     sector,
     millones_toneladas_co2eq
-FROM clima_energia.emisiones_gei
+FROM mother.energia_emisiones_gei
 ORDER BY año ASC, sector ASC
 ```
 
@@ -38,7 +38,7 @@ ORDER BY año ASC, sector ASC
 SELECT
     año,
     sum(millones_toneladas_co2eq) AS "Emisiones Totales (Mt CO₂eq)"
-FROM clima_energia.emisiones_gei
+FROM mother.energia_emisiones_gei
 GROUP BY año
 ORDER BY año ASC
 ```
@@ -64,7 +64,7 @@ SELECT
     año,
     sector,
     millones_toneladas_co2eq
-FROM clima_energia.emisiones_gei
+FROM mother.energia_emisiones_gei
 ORDER BY año ASC, sector ASC
 ```
 
@@ -82,15 +82,27 @@ ORDER BY año ASC, sector ASC
 
 ## El Transporte: el Sector más Resistente
 
-El transporte concentra más de un **tercio** de las emisiones españolas en 2024, y apenas ha reducido su huella respecto a 2015. El auge de la electrificación del parque automovilístico será clave para revertir esta tendencia.
+```sql transporte_hitos
+SELECT
+    año,
+    max(millones_toneladas_co2eq) FILTER (WHERE sector = 'Transporte') AS mt_transporte,
+    round(max(porcentaje_total) FILTER (WHERE sector = 'Transporte'), 1) AS pct_transporte,
+    max(millones_toneladas_co2eq) FILTER (WHERE sector = 'Generación Eléctrica') AS mt_electrica
+FROM mother.energia_emisiones_gei
+WHERE año IN ((SELECT min(año) FROM mother.energia_emisiones_gei), (SELECT max(año) FROM mother.energia_emisiones_gei))
+GROUP BY año
+ORDER BY año ASC
+```
+
+El transporte concentra el **{transporte_hitos[1]?.pct_transporte}%** de las emisiones españolas en {transporte_hitos[1]?.año} y no ha logrado reducir su huella respecto a {transporte_hitos[0]?.año}. El auge de la electrificación del parque automovilístico será clave para revertir esta tendencia.
 
 ```sql transporte_vs_electrica
 SELECT
     e1.año,
     e1.millones_toneladas_co2eq AS "Transporte",
     e2.millones_toneladas_co2eq AS "Generación Eléctrica"
-FROM clima_energia.emisiones_gei e1
-JOIN clima_energia.emisiones_gei e2
+FROM mother.energia_emisiones_gei e1
+JOIN mother.energia_emisiones_gei e2
     ON e1.año = e2.año
 WHERE e1.sector = 'Transporte'
   AND e2.sector = 'Generación Eléctrica'
@@ -107,23 +119,25 @@ ORDER BY e1.año ASC
     labels=true
 />
 
-> **Lectura clave:** Mientras la generación eléctrica ha reducido sus emisiones un **70%** entre 2015 y 2024, el transporte solo las ha reducido un **10%**, y continúa siendo el principal emisor neto del país.
+> **Lectura clave:** Entre {transporte_hitos[0]?.año} y {transporte_hitos[1]?.año}, las emisiones de la generación eléctrica han variado un **{transporte_hitos.length > 1 ? ((transporte_hitos[1].mt_electrica / transporte_hitos[0].mt_electrica - 1) * 100).toFixed(0) : null}%**, mientras que las del transporte han variado un **{transporte_hitos.length > 1 ? ((transporte_hitos[1].mt_transporte / transporte_hitos[0].mt_transporte - 1) * 100).toFixed(0) : null}%**: el transporte continúa siendo el principal emisor del país.
 
 ---
 
-## Composición Sectorial en 2024
+## Composición Sectorial (último año disponible)
 
-```sql composicion_2024
+```sql composicion_ultimo
 SELECT
+    año,
     sector,
     millones_toneladas_co2eq,
-    porcentaje_total
-FROM clima_energia.emisiones_gei
-WHERE año = 2024
+    porcentaje_total / 100.0 AS porcentaje_total
+FROM mother.energia_emisiones_gei
+WHERE año = (SELECT max(año) FROM mother.energia_emisiones_gei)
 ORDER BY millones_toneladas_co2eq DESC
 ```
 
-<DataTable data={composicion_2024} search=false>
+<DataTable data={composicion_ultimo} search=false>
+    <Column id=año title="Año" />
     <Column id=sector title="Sector" />
     <Column id=millones_toneladas_co2eq title="Mt CO₂eq" fmt="num1" />
     <Column id=porcentaje_total title="% del Total" fmt="pct1" contentType=colorscale colorScale={['#fef3c7', '#dc2626']} />
@@ -148,5 +162,6 @@ ORDER BY millones_toneladas_co2eq DESC
 - Inventario Nacional de Emisiones GEI: [MITECO – Inventario](https://www.miteco.gob.es/es/calidad-y-evaluacion-ambiental/temas/sistema-espanol-de-inventario-sei-/inventario-gei.html)
 - Metodología: Directrices del IPCC 2006 para inventarios nacionales de GEI.
 - Reporte a la Convención Marco de Naciones Unidas sobre el Cambio Climático (CMNUCC).
+- Datos descargados de Eurostat [env_air_gge](https://ec.europa.eu/eurostat/databrowser/view/env_air_gge/default/table), que publica el inventario de España por categoría CRF. Agrupación en sectores: Generación Eléctrica = 1A1a; Transporte = 1A3 (nacional, sin búnkeres internacionales); Industria y Procesos = 1A1b-c + 1A2 + 1B + 2 (salvo 2F y 2G); Residencial y Comercial = 1A4a-b; Agricultura y Ganadería = 3 + 1A4c; Residuos = 5; Gases Fluorados y Otros = 2F + 2G + 1A5 + 6.
 
 <LastRefreshed prefix="Última sincronización de datos" />

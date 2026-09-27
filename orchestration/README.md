@@ -45,5 +45,7 @@ uv run dagster dev -m orchestration.definitions   # desde la raíz del repo
 - Para añadir una fuente nueva: recurso dlt en `ingestion/`, entrada en
   `transform/models/sources.yml`, modelos staging/mart, y listo — Dagster la
   recoge sola en el grafo.
-- Los scripts antiguos de `scripts/` (load_*.py) quedan obsoletos con este
-  stack; se mantienen solo como referencia hasta validar la migración.
+- Todas las tablas que lee la web salen ya de este stack (dlt + dbt), incluidas
+  la población por provincia (INE 56945) y los observatorios, que antes cargaban
+  los scripts de `scripts/`. Esos scripts ya no se usan.
+- Para trabajar sin MotherDuck (DuckDB local): [docs/desarrollo-local.md](../docs/desarrollo-local.md).
