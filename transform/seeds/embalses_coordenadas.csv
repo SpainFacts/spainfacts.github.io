@@ -1,0 +1,402 @@
+embalse,cuenca,lat,lon,fuente,confianza,nombre_fuente
+La Serena,Guadiana,38.87419,-5.19849,osm,exacta,Embalse de la Serena
+Alcántara,Tajo,39.76141,-6.43728,osm,exacta,Embalse de Alcántara
+Almendra,Duero,41.21595,-6.16470,osm,exacta,Embalse de Almendra
+Buendía,Tajo,40.38035,-2.69263,osm,exacta,Embalse de Buendía
+Mequinenza,Ebro,41.33995,0.06649,osm,exacta,Embalse de Mequinenza
+Cijara,Guadiana,39.30641,-4.84167,osm,exacta,Embalse de Cíjara
+Valdecañas,Tajo,39.82262,-5.43419,osm,exacta,Embalse de Valdecañas
+Ricobayo,Duero,41.68111,-5.95037,osm,exacta,Embalse de Ricobayo
+Alarcón,Júcar,39.68542,-2.20098,osm,exacta,Embalse de Alarcón
+Iznájar,Guadalquivir,37.26785,-4.29450,osm,exacta,Embalse de Iznájar
+Gabriel y Galán,Tajo,40.31096,-6.14514,osm,exacta,Embalse de Gabriel y Galán
+Entrepeñas,Tajo,40.57133,-2.70509,osm,exacta,Embalse de Entrepeñas
+Alange,Guadiana,38.71766,-6.24380,osm,exacta,Embalse de Alange
+Contreras,Júcar,39.60277,-1.52779,osm,exacta,Embalse de Contreras
+Orellana,Guadiana,39.06096,-5.36260,osm,exacta,Embalse de Orellana
+"Breña II, La",Guadalquivir,37.87962,-5.02149,osm,exacta,Embalse de la Breña
+Guadalcacín II,Guadalete-Barbate,36.64875,-5.70980,osm,exacta,Embalse de Guadalcacín
+Zújar,Guadiana,38.90791,-5.44242,osm,exacta,Embalse del Zújar
+Canelles,Ebro,42.03532,0.63198,osm,exacta,Pantà de Canelles / Embalse de Canelles
+Riaño,Duero,42.98383,-5.01118,osm,exacta,Embalse de Riaño
+Belesar,Miño - Sil,42.75151,-7.64600,osm,exacta,Encoro de Belesar
+Andévalo,Guadiana,37.63765,-7.38784,osm,exacta,Embalse del Andévalo
+Negratín,Guadalquivir,37.58683,-2.87505,osm,exacta,Embalse del Negratín
+García de Sola,Guadiana,39.25060,-5.11536,osm,exacta,Embalse Garcia Sola
+Ebro,Ebro,43.00874,-3.98707,osm,exacta,Embalse del Ebro
+"Portas, Las",Miño - Sil,42.09687,-7.26518,osm,exacta,Encoro das Portas
+Tranco de Beas,Guadalquivir,38.14456,-2.77402,osm,exacta,Embalse de Tranco de Beas
+Santa Teresa,Duero,40.59098,-5.58349,osm,exacta,Embalse de Santa Teresa
+Giribaile,Guadalquivir,38.10325,-3.42722,osm,exacta,Embalse del Giribaile
+Cenajo,Segura,38.38776,-1.85894,osm,exacta,Embalse del Cenajo
+Yesa,Ebro,42.60616,-1.10814,osm,exacta,Embalse de Yesa
+Mediano,Ebro,42.36165,0.18288,osm,exacta,Embalse de Mediano
+"Atazar, El",Tajo,40.91862,-3.51789,osm,exacta,Embalse del Atazar
+Itoiz,Ebro,42.84257,-1.34931,osm,exacta,Itoizko urtegia
+Rialb,Ebro,41.99955,1.24816,osm,exacta,Pantà de Rialb
+"Grado, El",Ebro,42.22717,0.22169,osm,exacta,Embalse de El Grado
+Chanza,Guadiana,37.62691,-7.46063,osm,exacta,Embalse del Chanza/Barragem do Chança
+Tous - La Ribera,Júcar,39.14556,-0.66000,wikidata,exacta,embalse de Tous
+Bembézar,Guadalquivir,37.95139,-5.27640,osm,exacta,Embalse del Bembézar
+Guadalmena,Guadalquivir,38.41579,-2.89769,osm,exacta,Embalse del Guadalmena
+Bárcena,Miño - Sil,42.62489,-6.53355,osm,exacta,Embalse de Bárcena
+Jándula,Guadalquivir,38.28841,-3.94452,osm,exacta,Embalse del Jandula
+Porma-(Juan Benet),Duero,42.95283,-5.28213,osm,exacta,Embalse del Porma
+Guadalhorce-Guadalteba,Cuenca Mediterránea Andaluza,36.97227,-4.81330,osm,exacta,Embalse del Guadalhorce-Guadalteba
+Barrios de Luna,Duero,42.88356,-5.90447,osm,exacta,Embalse de Los Barrios de Luna
+Portodemouros,Galicia Costa,42.84612,-8.13156,osm,exacta,Encoro de Portodemouros
+Puente Nuevo,Guadalquivir,38.13880,-4.97817,osm,exacta,Embalse de Puente Nuevo
+Salime,Cantábrico Occidental,43.15237,-6.88954,osm,exacta,Encoro de Salime / Embalse de Salime
+Cedillo,Tajo,39.67828,-7.21323,osm,exacta,Embalse de Cedillo
+Cernadilla,Duero,42.02129,-6.54497,osm,exacta,Embalse de Cernadilla
+Cuerda del Pozo,Duero,41.86585,-2.76397,osm,exacta,Embalse de la Cuerda del Pozo
+Aguilar,Duero,42.81596,-4.33151,osm,exacta,Embalse de Aguilar
+"Fernandina, La",Guadalquivir,38.22860,-3.54712,osm,exacta,Embalse de la Fernandina
+La Pedrera,Segura,38.01102,-0.86225,osm,exacta,Embalse de La Pedrera
+Bao,Miño - Sil,42.21803,-7.14012,wikidata,exacta,embalse de Bao
+Santa Ana,Ebro,41.92972,0.59509,osm,exacta,Pantà de Santa Anna
+Sierra Brava,Guadiana,39.23215,-5.63876,osm,exacta,Embalse de Sierra Brava
+Susqueda,Cuencas Internas de Cataluña,41.97835,2.49469,osm,exacta,Pantà de Susqueda
+Yeguas,Guadalquivir,38.09760,-4.21904,osm,exacta,Embalse de las Yeguas
+Barbate,Guadalete-Barbate,36.39432,-5.69500,osm,exacta,Embalse de Barbate
+Benagéber,Júcar,39.77425,-1.12204,osm,exacta,Embalse de Benagéber
+Tremp ó Talárn,Ebro,42.20195,0.94997,wikidata,exacta,Embalse de Sant Antoni
+Zahara-El Gastor,Guadalete-Barbate,36.84096,-5.37034,wikidata,exacta,Embalse de Zahara-el Gastor
+Burguillo - Puente Nuevo,Tajo,40.43427,-4.59921,osm,exacta,Embalse de El Burguillo
+"Pintado, El",Guadalquivir,38.00610,-5.95271,osm,exacta,Embalse de El Pintado
+San. Estevo,Miño - Sil,42.41474,-7.65024,osm,exacta,Encoro de Santo Estevo
+Fuensanta,Segura,38.37677,-2.25358,osm,exacta,Embalse de la Fuensanta
+Ribarroja,Ebro,41.32583,0.35389,osm,difusa,Pantà de Riba-roja
+Bornos,Guadalete-Barbate,36.81604,-5.71737,osm,exacta,Embalse de Bornos
+Sotonera,Ebro,42.12803,-0.67755,osm,exacta,Embalse de la Sotonera
+Torrejón (Tajo - Tietar),Tajo,39.83300,-5.98700,osm,manual,Presa de Torrejón-Tajo
+"Melonares, Los",Guadalquivir,37.77504,-5.89218,osm,exacta,Embalse de los Melonares
+Torre de Abrahán,Guadiana,39.39429,-4.24559,osm,difusa,Embalse Torre de Abraham
+"Peares, Os",Miño - Sil,42.53770,-7.70479,osm,exacta,Encoro dos Peares
+Saucelle,Duero,41.12668,-6.74633,osm,exacta,Embalse de Saucelle
+Alcorlo,Tajo,41.03678,-3.03200,osm,exacta,Embalse de Alcorlo
+Zufre,Guadalquivir,37.82952,-6.32177,osm,exacta,Embalse de Zufre
+"Viñuela, La",Cuenca Mediterránea Andaluza,36.88348,-4.17472,osm,exacta,Pantano de La Viñuela
+Sau,Cuencas Internas de Cataluña,41.98895,2.37562,osm,exacta,Pantà de Sau
+Valparaíso,Duero,41.96767,-6.34127,osm,exacta,Embalse de Valparaíso
+Cuevas de Almanzora,Cuenca Mediterránea Andaluza,37.34007,-1.91506,osm,exacta,Embalse de Cuevas del Almanzora
+Guadalén,Guadalquivir,38.19936,-3.46790,osm,exacta,Embalse del Guadalén
+Arenoso,Guadalquivir,38.06301,-4.41999,osm,exacta,Embalse Arenoso
+Camarasa,Ebro,41.96630,0.85899,osm,exacta,Pantà de Camarasa
+Vadomojón,Guadalquivir,37.61554,-4.19444,osm,exacta,Embalse de Vadomojón
+Guadalmellato,Guadalquivir,38.07199,-4.68837,osm,exacta,Embalse del Guadalmellato
+San Rafael de Navallana,Guadalquivir,37.99142,-4.64599,osm,exacta,Embalse de San Rafael de Navallana
+Escales,Ebro,42.36203,0.75055,osm,exacta,Embalse de Escales / Pantà d'Escales
+San Juan,Tajo,40.39430,-4.37847,osm,exacta,Embalse de San Juan
+Ullivarri,Ebro,42.92328,-2.56897,osm,difusa,Uribarriko urtegia
+Rumblar,Guadalquivir,38.19373,-3.77599,osm,exacta,Pantano del Rumblar
+Huesna,Guadalquivir,37.80366,-5.68802,osm,exacta,Embalse del Huesna
+Arenós,Júcar,40.08577,-0.54927,osm,exacta,Embalse de Arenós
+San Salvador,Ebro,41.78140,0.20833,osm,exacta,Embalse de San Salvador
+"Hurones, Los",Guadalete-Barbate,36.69361,-5.52403,osm,exacta,Embalse de Los Hurones
+Villar del Rey,Guadiana,39.20100,-6.84800,osm,manual,Embalse de la Peña del Águila
+Finisterre,Tajo,39.62856,-3.68494,osm,exacta,Embalse de Finisterre
+Aracena,Guadalquivir,37.93098,-6.47800,osm,exacta,Embalse de Aracena
+Valmayor,Tajo,40.55510,-4.06250,osm,exacta,Pantano de Valmayor
+Eume,Galicia Costa,43.37944,-7.95581,osm,exacta,Encoro do Eume
+Prada,Miño - Sil,42.27578,-7.03266,osm,exacta,Encoro de Prada
+San Clemente,Guadalquivir,37.86837,-2.64759,osm,exacta,Embalse de San Clemente
+Doiras,Cantábrico Occidental,43.33036,-6.84011,osm,exacta,Embalse de Doiras
+Cortes II,Júcar,39.26212,-0.91877,osm,exacta,Presa de Cortes II
+Aldeadávila,Duero,41.24954,-6.58210,osm,exacta,Embalse de Aldeadávila
+La Baells,Cuencas Internas de Cataluña,42.14930,1.89683,osm,exacta,Pantà de la Baells
+Azután,Tajo,39.82474,-5.00469,osm,exacta,Embalse de Azután
+José Torán,Guadalquivir,37.76574,-5.47135,osm,exacta,Embalse de José Torán
+Rules,Cuenca Mediterránea Andaluza,36.87462,-3.47649,osm,exacta,Embalse de Rules
+Irueña,Duero,40.44361,-6.58167,wikidata,exacta,embalse de Irueña
+Villalba de los Barros,Guadiana,38.58216,-6.50570,osm,exacta,Presa de Villalba de los Barros
+Montoro,Guadalquivir,38.54523,-4.12700,osm,exacta,Embalse de Montoro I
+Fervenza,Galicia Costa,43.00143,-8.96829,osm,exacta,Encoro da Fervenza
+Loteta (La),Ebro,41.81413,-1.33442,osm,exacta,La Loteta
+Bermejales,Guadalquivir,36.97419,-3.88084,osm,exacta,Embalse de los Bermejales
+"Breña, La",Guadalquivir,37.87962,-5.02149,osm,exacta,Embalse de la Breña
+Oliana,Ebro,42.13936,1.31192,osm,exacta,Pantà d'Oliana
+Escalona,Júcar,39.12877,-0.70824,osm,exacta,Embalse de Escalona
+Compuerto,Duero,42.87554,-4.78545,osm,exacta,Embalse de Compuerto
+Rosarito,Tajo,40.09946,-5.27222,osm,exacta,Embalse de Rosarito
+Barasona,Ebro,42.14818,0.32854,osm,exacta,Embalse de Barasona
+Albarellos,Miño - Sil,42.39098,-8.21318,osm,exacta,Encoro de Albarellos
+Santillana,Tajo,40.72378,-3.83454,osm,exacta,Embalse de Santillana
+Borbollon,Tajo,40.14123,-6.55422,osm,exacta,Embalse de Borbollón
+Guadarranque,Cuenca Mediterránea Andaluza,36.32167,-5.47353,osm,exacta,Embalse de Guadarranque
+Puebla de Cazalla,Guadalquivir,37.11701,-5.22078,osm,exacta,Embalse de la Puebla de Cazalla
+Salas,Miño - Sil,41.91986,-7.91205,osm,exacta,Encoro de Salas / Albufeira de Salas
+Alloz,Ebro,42.72498,-1.94480,osm,exacta,Allozko urtegia
+"Tranquera, La",Ebro,41.23847,-1.79614,osm,exacta,Pantano de la Tranquera
+Conde Guadalhorce,Cuenca Mediterránea Andaluza,36.91424,-4.81977,osm,exacta,Embalse del Conde del Guadalhorce
+Caspe,Ebro,41.12139,-0.02447,wikidata,exacta,Embalse de Caspe
+Cañón de Santolea,Ebro,40.77300,-0.31800,osm,manual,Presa de Santolea
+Charco Redondo,Cuenca Mediterránea Andaluza,36.24858,-5.55801,osm,exacta,Embalse de Charco Redondo
+"Conchas, Las",Miño - Sil,41.96874,-7.99083,osm,exacta,Encoro das Conchas
+La Llosa del Cavall,Cuencas Internas de Cataluña,42.11907,1.60893,osm,exacta,Pantà de la Llosa del Cavall
+Búrdalo,Guadiana,39.19700,-5.95800,osm,manual,(embalse sin nombre en OSM en el río Búrdalo)
+Úzquiza,Duero,42.29384,-3.34501,osm,exacta,Embalse de Úzquiza
+Loriguilla,Júcar,39.68204,-0.92404,osm,exacta,Embalse de Loriguilla
+Retortillo,Guadalquivir,37.85399,-5.36899,osm,exacta,Embalse del Retortillo
+Urrunaga,Ebro,42.99588,-2.66215,osm,exacta,Urrunagako urtegia
+Canales,Guadalquivir,37.15600,-3.45740,osm,exacta,Embalse de Canales
+Benínar,Cuenca Mediterránea Andaluza,36.88793,-3.02765,osm,exacta,Embalse de Beninar
+Camporredondo,Duero,42.91321,-4.72105,osm,exacta,Embalse de Camporredondo
+"Tajera, La",Tajo,40.85338,-2.59738,osm,exacta,Embalse de la Tajera
+Bellús,Júcar,38.92255,-0.46261,osm,exacta,Embassament de Bellús
+Mansilla,Ebro,42.14612,-2.94433,osm,exacta,Embalse de Mansilla
+Requejada,Duero,42.92304,-4.50286,osm,exacta,Embalse de la Requejada
+Torre del Águila,Guadalquivir,37.03791,-5.72828,osm,exacta,Embalse Torre del Águila
+Villalcampo,Duero,41.49096,-6.08568,osm,exacta,Presa de Villalcampo
+Matalavilla,Miño - Sil,42.83569,-6.42710,osm,exacta,Embalse de Matalavilla
+Santolea,Ebro,40.75437,-0.34722,osm,exacta,Embalse de Santolea
+Búbal,Ebro,42.70131,-0.31110,osm,exacta,Embalse de Búbal
+Boadella,Cuencas Internas de Cataluña,42.34084,2.83341,osm,exacta,Pantà de Boadella
+Concepción,Cuenca Mediterránea Andaluza,36.55760,-4.96244,osm,exacta,Embalse de la Concepcion
+Chandrexa,Miño - Sil,42.25872,-7.39938,wikidata,exacta,embalse de Chandreja
+Castrelo,Miño - Sil,42.31900,-8.04100,osm,manual,Encoro de Castrelo de Miño
+"Minilla, La",Guadalquivir,37.68031,-6.19755,osm,exacta,Embalse de la Minilla
+Piedras,"Tinto, Odiel y Piedras",37.38866,-7.26178,osm,exacta,Embalse del Piedras
+Cala,Guadalquivir,37.72921,-6.11564,osm,exacta,Embalse de Cala
+Castro de las Cogotas,Duero,40.70067,-4.69776,osm,exacta,Embalse del Castro de Las Cogotas
+Catllar,Cuencas Internas de Cataluña,41.20870,1.33045,osm,exacta,Pantà del Catllar
+Jerte - Plasencia,Tajo,40.08008,-6.00267,osm,exacta,Embalse de Jerte - Plasencia
+Francisco Abellán,Guadalquivir,37.30331,-3.27758,osm,exacta,Embalse de Francisco Abellán
+La Colada,Guadiana,38.50923,-5.00220,osm,exacta,Embalse de la Colada
+Linares del Arroyo,Duero,41.49859,-3.53035,osm,exacta,Embalse de Linares del Arroyo
+Sancho,"Tinto, Odiel y Piedras",37.47236,-7.02979,osm,exacta,Embalse del Sancho
+Béznar,Cuenca Mediterránea Andaluza,36.92219,-3.55576,osm,exacta,Embalse de Béznar
+"Vado, El",Tajo,41.02038,-3.30136,osm,exacta,Embalse de El Vado
+"Bolera, La",Guadalquivir,37.78803,-2.90276,osm,exacta,La Bolera
+Calanda,Ebro,40.89804,-0.21264,osm,exacta,Embalse de Calanda
+Beleña,Tajo,40.95533,-3.20229,osm,exacta,Embalse de Beleña
+Puentes Viejas,Tajo,41.00744,-3.60954,osm,exacta,Pantano de Puentes Viejas
+Valdeobispo,Tajo,40.13954,-6.19599,osm,exacta,Embalse de Valdeobispo
+Alcollarín,Guadiana,39.26314,-5.75654,osm,exacta,Alcollarín
+Montearagón,Ebro,42.20357,-0.37091,osm,exacta,Embalse de Montearagón
+Peñarroya,Guadiana,39.03151,-2.96834,osm,exacta,Embalse de Peñarroya
+Riosequillo,Tajo,40.98440,-3.64983,osm,exacta,Embalse del Riosequillo
+Sistema Capdella,Ebro,42.51000,1.00300,osm,manual,Estany Gento
+Rivera de Gata,Tajo,40.14856,-6.62965,osm,exacta,Embalse de Rivera de Gata
+Sichar,Júcar,40.01550,-0.25095,osm,exacta,Embassament del Sitjar
+Enciso,Ebro,42.13052,-2.28670,osm,exacta,Embalse de Enciso
+San Sebastián,Miño - Sil,42.15209,-6.92680,osm,exacta,Encoro de San Sebastián
+Algeciras,Segura,37.89299,-1.39620,wikidata,exacta,Embalse de Algeciras
+Celemín,Guadalete-Barbate,36.30825,-5.75101,osm,exacta,Embalse del Celemín
+"Pardo, El",Tajo,40.57166,-3.79125,osm,exacta,Embalse de El Pardo
+Añarbe,Cantábrico Oriental,43.21180,-1.87511,osm,exacta,Presa de Añarbe
+Castrejón,Tajo,39.85037,-4.26923,osm,exacta,Embalse de Castrejón
+Frieira,Miño - Sil,42.21886,-8.16110,osm,exacta,Encoro da Frieira
+Ruecas,Guadiana,39.28190,-5.47974,osm,exacta,Embalse del Ruecas
+Jarrama,"Tinto, Odiel y Piedras",37.67278,-6.50192,osm,exacta,Embalse del Jarrama
+La Cabezuela,Guadiana,38.71119,-3.25084,osm,exacta,Embalse de Marisánchez - La Cabezuela
+Colomera,Guadalquivir,37.41407,-3.70945,osm,exacta,Embalse de Colomera
+Gasset,Guadiana,39.13949,-3.95541,osm,exacta,Embalse Gasset
+Arbón,Cantábrico Occidental,43.43119,-6.76221,osm,exacta,Embalse de Arbón
+Baños,Tajo,40.29554,-5.88566,osm,exacta,Embalse de Baños
+Sierra Boyera,Guadalquivir,38.27406,-5.27061,osm,exacta,Embalse de Sierra Boyera
+"Vellón,El-(Pedrezuela)",Tajo,40.76774,-3.64819,osm,exacta,Embalse Pedrezuela o del Vellón
+Agrio (Aznalcollar),Guadalquivir,37.53928,-6.29051,osm,exacta,Embalse del Agrio
+Cenza,Miño - Sil,42.20281,-7.26298,osm,exacta,Encoro da Cenza
+Castro,Duero,41.53493,-6.13510,osm,exacta,Embalse de Castro
+Laverné,Ebro,42.08205,-1.08089,osm,exacta,Embalse de Laverné
+Pinilla,Tajo,40.93675,-3.79697,osm,exacta,Embalse de Pinilla
+Tanes,Cantábrico Occidental,43.20419,-5.40141,osm,exacta,Embalse de Tanes
+Camarillas,Segura,38.36121,-1.63810,osm,exacta,Embalse de Camarillas
+Casares de Arbas,Duero,42.93000,-5.77600,osm,manual,Embalse de Casares
+Forata,Júcar,39.34441,-0.89148,osm,exacta,Embalse de Forata
+"Agavanzal, Nª Sª de",Duero,41.98702,-6.18991,osm,exacta,Embalse de Nuestra Señora de Agavanzal
+Gergal,Guadalquivir,37.60198,-6.04771,osm,exacta,Embalse del Gergal
+"Atance, El",Tajo,41.09810,-2.77433,osm,exacta,Embalse de Atance
+"Barca, La",Cantábrico Occidental,43.30267,-6.34899,osm,exacta,Embalse de La Barca
+Pajares,Ebro,42.07924,-2.59407,osm,exacta,Embalse de Pajares
+Talave,Segura,38.51021,-1.89248,osm,exacta,Embalse del Talave
+Cordobilla,Guadalquivir,37.35453,-4.71819,osm,exacta,Embalse de Cordobilla
+Los Molinos,Guadiana,38.51200,-6.10700,osm,manual,Embalse de los Molinos del Matachel
+Navalcán,Tajo,40.03598,-5.10422,osm,exacta,Embalse de Navalcán
+Vega del Jabalón,Guadiana,38.77201,-3.74709,osm,exacta,Vega del Jabalón
+Alsa - Mediajo,Cantábrico Occidental,43.08264,-3.99885,osm,exacta,Embalse de Alsa
+El Portillo,Guadalquivir,37.82111,-2.78782,osm,exacta,Embalse de El Portillo
+González Lacasa,Ebro,42.18200,-2.68171,osm,exacta,Embalse González-Lacasa
+Quiebrajano,Guadalquivir,37.62655,-3.71455,osm,exacta,Embalse del Quiebrajano
+"Ribeira, A",Galicia Costa,43.47518,-7.81146,osm,exacta,Encoro da Ribeira
+Terradets,Ebro,42.07050,0.88828,osm,exacta,Pantà de Terradets
+El Vicario,Guadiana,39.06781,-3.93821,osm,exacta,Embalse de El Vicario
+Barrie de la Maza,Galicia Costa,42.88179,-8.75603,osm,exacta,Encoro de Barrié de la Maza
+Bolarque,Tajo,40.40659,-2.79624,osm,exacta,Embalse de Bolarque
+Pálmaces,Tajo,41.06335,-2.91963,osm,exacta,Embalse de Pálmaces
+Beniarrés,Júcar,38.81512,-0.35620,osm,exacta,Presa de Beniarrés
+Siles,Guadalquivir,38.40751,-2.59227,osm,exacta,Embalse de Siles
+Cueva Foradada,Ebro,40.97109,-0.69477,osm,exacta,Embalse de Cueva Foradada
+El Naranjero,Júcar,39.27000,-0.88464,osm,exacta,Embalse de El Naranjero
+La Muela,Júcar,39.23318,-0.92869,osm,exacta,Embalse de La Muela
+Olivargas,"Tinto, Odiel y Piedras",37.73865,-6.81343,osm,exacta,Embalse de Sotiel
+"Rozas, Las",Miño - Sil,42.91924,-6.33847,osm,exacta,Embalse de las Rozas
+Canchales,Guadiana,38.97721,-6.51827,osm,exacta,Embalse de Los Canchales
+Puentes,Segura,37.74448,-1.84026,osm,exacta,Embalse de Puentes
+Santomera,Segura,38.10616,-1.09029,osm,exacta,Embalse de Santomera
+Limonero,Cuenca Mediterránea Andaluza,36.76628,-4.43340,osm,exacta,Embalse de El Limonero
+Sant Pons,Cuencas Internas de Cataluña,41.98323,1.59058,osm,difusa,Pantà de Sant Ponç
+Aceña,Tajo,40.62250,-4.22098,osm,exacta,Embalse de la Aceña
+Horno Tejero,Guadiana,39.16939,-6.43345,osm,exacta,Embalse de Horno Tejero
+"Val, El",Ebro,41.87838,-1.80464,osm,exacta,Embalse del Val
+Águeda,Duero,40.50437,-6.49153,osm,exacta,Embalse de Águeda
+Arlanzón,Duero,42.25193,-3.33362,osm,exacta,Embalse del Arlanzón
+Casasola,Cuenca Mediterránea Andaluza,36.81413,-4.49647,osm,exacta,Embalse de Casasola
+Doña Aldonza,Guadalquivir,37.94794,-3.29384,osm,exacta,Embalse de Doña Aldonza
+Portaje,Tajo,39.87659,-6.52244,osm,exacta,Embalse de Portaje
+Puente Porto,Duero,42.10720,-6.82684,osm,exacta,Embalse de Puente Porto
+Sistema Valle de Arán,Ebro,42.66000,0.80000,manual,manual,Lagos regulados del Valle de Arán
+"Villar, El",Tajo,40.97007,-3.56193,osm,exacta,Embalse de El Villar
+Alfonso XIII,Segura,38.21462,-1.60589,osm,exacta,Embalse de Alfonso XIII
+Arquillo de San Blas,Júcar,40.36399,-1.20490,osm,exacta,Arquillo de San Blas
+Baserca,Ebro,42.58754,0.76014,osm,exacta,Embalse de Baserca / Pantà de Baserca
+Cecebre,Galicia Costa,43.27138,-8.27625,osm,exacta,Encoro de Cecebre
+Eiras,Galicia Costa,42.34159,-8.47417,osm,exacta,Encoro de Eiras
+Ordunte,Cantábrico Oriental,43.15212,-3.29675,osm,exacta,Embalse de Ordunte
+Alcalá del Río,Guadalquivir,37.51948,-5.97232,osm,exacta,Embalse de Alcalá del Río
+Cantillana,Guadalquivir,37.61208,-5.75276,osm,exacta,Embalse de Cantillana
+Cubillas,Guadalquivir,37.27594,-3.67205,osm,exacta,Embalse del Cubillas
+Eúgui,Ebro,42.97583,-1.51417,wikidata,exacta,Embalse de Eugui
+Gargáligas,Guadiana,39.19730,-5.35118,osm,exacta,Embalse del Gargáligas
+Maidevera,Ebro,41.58369,-1.76580,osm,exacta,Embalse de Maidevera
+Vilasouto,Miño - Sil,42.66543,-7.41135,osm,exacta,Encoro de Vilasouto
+"Carpio, El",Guadalquivir,37.96550,-4.50010,manual,manual,Presa El Salto (El Carpio) - es.wikipedia
+Cáceres - Guadiloba,Tajo,39.48396,-6.28075,osm,exacta,Pantano de Guadiloba
+Martín Gonzalo,Guadalquivir,38.10509,-4.33109,osm,exacta,Embalse de Martin Gonzalo
+María Cristina,Júcar,40.04543,-0.16395,osm,exacta,Embassament de Maria Cristina
+Sobrón,Ebro,42.76287,-3.15300,osm,exacta,Embalse de Sobrón
+Valuengo,Guadiana,38.30671,-6.64304,osm,exacta,Embalse de Valuengo
+Villameca,Duero,42.65860,-6.07762,osm,exacta,Embalse de Villameca
+Corumbel Bajo,"Tinto, Odiel y Piedras",37.44223,-6.55687,osm,exacta,Embalse del Corumbel bajo
+Fresneda,Guadalquivir,38.61179,-3.67624,osm,exacta,Embalse de Fresneda I
+Pedro Marín,Guadalquivir,37.91446,-3.37103,osm,exacta,Embalse de Pedro Marín
+Pena,Ebro,40.81200,0.13200,osm,manual,Embalse de Pena
+Víboras,Guadalquivir,37.63567,-3.99451,osm,exacta,Embalse del Víboras
+Guajaraz,Tajo,39.78321,-4.08786,osm,exacta,Embalse del Guajaraz
+Hornachuelos,Guadalquivir,37.86300,-5.22600,osm,manual,Embalse Derivación del Bembézar
+Lechago,Ebro,40.95641,-1.28819,osm,exacta,Embalse de Lechago
+Nogales,Guadiana,38.55616,-6.72686,osm,exacta,Embalse de Nogales
+Puente de Santolea,Ebro,40.74708,-0.34301,osm,exacta,Presa de Puente de Santolea
+Respomuso,Ebro,42.81395,-0.29040,osm,exacta,Embalse de Respomuso
+Sistema Aguas Limpias,Ebro,42.78500,-0.33000,manual,manual,Valle de Aguas Limpias (Sallent de Gállego)
+Sistema Alto Caldarés,Ebro,42.76500,-0.23500,manual,manual,Lagos de Panticosa (Alto Caldarés)
+Sta Uxia,Galicia Costa,42.92180,-9.09288,osm,exacta,Encoro de Santa Uxía
+Villagudín,Galicia Costa,43.10130,-8.50192,osm,difusa,Encoro de Vilagudín
+Lanuza,Ebro,42.75926,-0.32180,osm,exacta,Embalse de Lanuza
+Llauset,Ebro,42.58332,0.68844,osm,exacta,Embalse de Llauset
+Velle,Miño - Sil,42.35752,-7.85084,osm,exacta,Encoro de Velle
+Amadorio,Júcar,38.54205,-0.26430,osm,exacta,Embassament d'Amadòrio
+Cavallers,Ebro,42.59078,0.85629,osm,exacta,Pantà de Cavallers
+Certescáns,Ebro,42.71000,1.30200,osm,manual,Estany de Certascan
+Piedra Aguda,Guadiana,38.66873,-7.02833,osm,exacta,Embalse de Piedra Aguda
+Vadiello,Ebro,42.25354,-0.27535,osm,exacta,Embalse de Vadiello
+Burgomillodo,Duero,41.32650,-3.87861,osm,exacta,Embalse de Burgomillodo
+Cancho del Fresno,Guadiana,39.40573,-5.38787,osm,exacta,Embalse del Cancho del Fresno
+Edrada-Mao,Miño - Sil,42.33671,-7.52516,wikidata,exacta,embassament del Edrada-Mao
+Encinarejo,Guadalquivir,38.19191,-3.98850,osm,exacta,Embalse de El Encinarejo
+"Peña, La",Ebro,42.38623,-0.72369,osm,exacta,Embalse de La Peña
+Picadas,Tajo,40.35301,-4.28009,osm,exacta,Embalse de Picadas
+Arcos de la Frontera,Guadalete-Barbate,36.76300,-5.78800,osm,manual,Embalse de Arcos
+"Campañana, La",Miño - Sil,42.50316,-6.76118,osm,exacta,Embalse de Campañana
+Irabia,Ebro,42.99519,-1.14736,osm,exacta,Irabiako urtegia
+Mar (Lago),Ebro,42.52341,1.00911,osm,exacta,Estany de Mar
+Navamuño,Tajo,40.34241,-5.78212,osm,exacta,Embalse de Navamuño
+Quéntar,Guadalquivir,37.21063,-3.43239,osm,exacta,Embalse de Quéntar
+Salor,Tajo,39.36556,-6.30950,wikidata,exacta,Pantano de Valdesalor
+Santa María de Belsué,Ebro,42.30829,-0.35064,osm,exacta,Embalse de Santa Maria de Belsué
+Valdeinfierno,Segura,37.81040,-1.97217,osm,exacta,Embalse de Valdeinfierno
+Crevillente,Segura,38.26107,-0.79433,osm,exacta,Pantà de Crevillent
+Guadalest,Júcar,38.67954,-0.19203,osm,exacta,Presa de Guadalest
+Guijo de Granadilla,Tajo,40.20051,-6.13702,osm,exacta,Embalse de Guijo de Granadilla
+Marmolejo,Guadalquivir,38.05813,-4.18633,osm,exacta,Presa de Marmolejo
+Peñarrubia,Miño - Sil,42.47963,-6.82293,osm,exacta,Encoro de Penarrubia
+Ciurana,Ebro,41.24970,0.91380,wikidata,exacta,Embalse de Siurana
+"Cohilla, La",Cantábrico Occidental,43.13312,-4.38862,osm,exacta,Embalse de la Cohilla
+Los Machos,"Tinto, Odiel y Piedras",37.32845,-7.22190,osm,exacta,Embalse de los Machos
+"Aguijón, El",Guadiana,38.47397,-6.90253,osm,exacta,Embalse del Aguijón
+Argos,Segura,38.16402,-1.73788,osm,exacta,Embalse del Argós
+Cazalegas,Tajo,40.02582,-4.68101,osm,exacta,Embalse de Cazalegas
+Cervera,Duero,42.87278,-4.54290,osm,exacta,Embalse de Ruesga
+Cornalbo,Guadiana,38.99017,-6.18739,wikidata,exacta,embalse de Cornalvo
+"Forcadas, As",Galicia Costa,43.60415,-8.07287,osm,exacta,Encoro das Forcadas
+Ibai-Eder,Cuencas Internas del País Vasco,43.12100,-2.22100,osm,manual,Ibai-Eder Urtegia
+La Toba,Júcar,40.20375,-1.90032,osm,exacta,Embalse de La Toba
+Montefurado,Miño - Sil,42.35905,-7.22590,osm,exacta,Encoro de Montefurado
+Montijo,Guadiana,38.92346,-6.42785,osm,exacta,Presa de Montijo
+Navacerrada,Tajo,40.71885,-4.00805,osm,exacta,Embalse de Navacerrada
+Saburo (Lago),Ebro,42.52971,1.01407,osm,exacta,Estany de Saburó
+Sequeiros,Miño - Sil,42.43072,-7.23356,osm,exacta,Encoro de Sequeiros
+Ulldecona,Júcar,40.68047,0.22385,osm,exacta,Embassament d'Ulldecona
+Cubilar,Guadiana,39.24567,-5.47052,osm,exacta,Embalse de Cubilar
+Guiamets,Ebro,41.09880,0.75162,wikidata,exacta,embalse de Guiamets
+Monteagudo,Ebro,41.38833,-2.18194,wikidata,exacta,Embalse de Monteagudo
+Pías (San Agustín),Miño - Sil,42.11361,-6.98924,osm,exacta,Encoro de Pías
+San Lorenzo,Ebro,41.85900,0.84000,wikidata,manual,embalse de San Lorenzo de Montgai
+San Martiño,Miño - Sil,42.38593,-7.11834,osm,exacta,Encoro de San Martiño
+Santa Eulalia,Miño - Sil,42.34830,-7.06170,manual,manual,Embalse de Santa Eulalia - es.wikipedia
+Sistema Lagos Espot,Ebro,42.58200,1.00300,osm,manual,Estany de Sant Maurici
+Taibilla,Segura,38.18502,-2.25797,osm,exacta,Embalse del Taibilla
+Urkulu,Cuencas Internas del País Vasco,43.01900,-2.47700,osm,manual,Urkulu urtegia
+Alfilorios,Cantábrico Occidental,43.28910,-5.91723,osm,exacta,Embalse de Los Alfilorios
+Las Fitas,Ebro,41.80012,-0.06331,osm,exacta,Embalse de las Fitas
+Llerena,Guadiana,38.30000,-5.91100,osm,manual,Embalse de ArroyoConejo
+Somiedo (Lagos),Cantábrico Occidental,43.11737,-6.25184,osm,exacta,Embalse de Somiedo
+Anchuricas,Segura,38.19550,-2.54498,osm,exacta,Embalse de Anchuricas
+Buseo,Júcar,39.58701,-0.94732,osm,exacta,Embalse de Buseo
+"Castro, El",Tajo,39.79751,-3.75587,osm,exacta,Embalse del Castro
+Derivación Retortillo,Guadalquivir,37.74524,-5.30984,osm,exacta,Presa Derivación Retortillo
+Ibiur,Cantábrico Oriental,43.07296,-2.12214,osm,exacta,Ibiur
+Moneva,Ebro,41.17125,-0.83266,osm,exacta,Pantano de Moneva
+Odiel,"Tinto, Odiel y Piedras",37.79200,-6.61100,osm,manual,Embalse del Odiel-Perejil
+Rábanos,Duero,41.70860,-2.47331,osm,exacta,Presa Los Rábanos
+Terroba,Ebro,42.26700,-2.43200,osm,manual,Presa Soto - Terroba
+Alcañiz (Estanca),Ebro,41.06245,-0.19499,osm,difusa,La Estanca de Alcañiz
+Almoguera,Tajo,40.30548,-2.92312,osm,exacta,Embalse de Almoguera
+Bachimaña (Lago),Ebro,42.78600,-0.22400,osm,manual,Embalse de Bachimaña Alto
+Brovales,Guadiana,38.35635,-6.69771,osm,exacta,Brovales
+"Cierva, La",Segura,38.06452,-1.49399,osm,exacta,Embalse de La Cierva
+"Jarosa, La",Tajo,40.66755,-4.12352,osm,exacta,Embalse de La Jarosa
+"Pontón Alto, El",Duero,40.90741,-4.02832,osm,exacta,Embalse del Pontón Alto
+Pto. Vallehermoso,Guadiana,38.85722,-3.15693,osm,exacta,Embalse del Puerto de Vallehermoso
+"Torcas, Las",Ebro,41.28456,-1.09744,osm,exacta,Embalse de las Torcas
+Torcón,Tajo,39.61769,-4.36601,osm,exacta,Embalse del Torcón
+Tort (Lago),Ebro,42.52511,0.98196,osm,exacta,Estany Tort
+Aguascebas,Guadalquivir,38.04480,-2.94826,osm,exacta,Embalse de Aguascebas
+Albiña,Ebro,43.00206,-2.62277,osm,exacta,Albinako urtegia
+Algar,Júcar,39.79079,-0.38019,osm,exacta,Embassament d'Algar
+Almodóvar,Guadalete-Barbate,36.15462,-5.64113,osm,exacta,Embalse de Almodóvar
+Boquerón,Guadiana,39.15613,-6.40787,osm,exacta,Embalse del Boquerón
+Foix,Cuencas Internas de Cataluña,41.25838,1.64120,osm,exacta,Pantà de Foix
+Malpasillo ( Jauja ),Guadalquivir,37.28657,-4.67226,wikidata,exacta,Embalse de Malpasillo
+Molino de Chincha,Tajo,40.54202,-2.16618,osm,exacta,Embalse del Molino de la Chincha
+Negro (Lago),Ebro,42.54235,1.04068,wikidata,exacta,presa de Lago Negro
+Regajo,Júcar,39.89501,-0.52836,osm,exacta,Pantano del Regajo
+Riocobo,Galicia Costa,43.67000,-7.44500,osm,manual,Encoro do Río Covo
+Sallente,Ebro,42.50351,0.99049,osm,exacta,Embassament de Sallente
+San Bartolomé,Ebro,42.21788,-1.15032,osm,exacta,Embalse de San Bartolomé
+San José,Duero,41.40387,-5.27301,osm,exacta,Presa de San José
+San Pedro,Miño - Sil,42.45271,-7.71432,osm,exacta,Encoro de San Pedro
+Serones,Duero,40.68049,-4.45226,osm,exacta,Embalse de Serones
+Urdalur,Ebro,42.91833,-2.23694,wikidata,exacta,embalse de Urdalur
+Valdepatao,Ebro,41.55246,0.05636,wikidata,exacta,Embalse de Valdepatao
+Villafranca,Guadalquivir,37.95611,-4.59888,osm,exacta,Presa de Villafranca
+Villagonzalo,Duero,40.87323,-5.49569,osm,exacta,Azud de Villagonzalo
+Bramatuero Alto,Ebro,42.78379,-0.19427,osm,exacta,Embalse de Bramatuero Alto
+Castilseras,Guadiana,38.74358,-4.78799,osm,exacta,Embalse de Castilseras
+Escarra,Ebro,42.74045,-0.36312,osm,exacta,Embalse de Escarra
+Guillena,Guadalquivir,37.56700,-6.04900,osm,manual,(presa sin nombre en OSM en la Rivera de Huelva)
+Guístolas,Miño - Sil,42.33827,-7.31658,osm,exacta,Encoro das Guístolas
+Ip,Ebro,42.72106,-0.45780,osm,exacta,Ibon de Ip
+Nagore,Ebro,42.89200,-1.30300,osm,manual,(azud sin nombre en OSM en el río Irati en Nagore)
+Parras (Las),Ebro,40.81866,-0.92143,osm,exacta,Embalse de las Parras
+"Portiña, La",Tajo,40.00239,-4.84092,osm,exacta,Embalse de La Portiña
+Proserpina,Guadiana,38.97238,-6.36107,osm,exacta,Embalse de Proserpina
+Riudecanyes,Cuencas Internas de Cataluña,41.13748,0.95011,osm,exacta,Embassament de Riudecanyes
+San Antón,Cantábrico Oriental,43.27300,-1.77400,osm,manual,Endara - San Anton urtegia
+Sistema Escarra,Ebro,42.74000,-0.36300,osm,manual,Embalse de Escarra
+Tentudia,Guadiana,38.09181,-6.31533,osm,exacta,Embalse de Tentudía
+Urdiceto,Ebro,42.66500,0.28100,osm,manual,Ibón d'Ordizeto
+"Vencías, Las",Duero,41.41455,-3.95927,osm,exacta,Embalse de las Vencias
+Zocueca,Guadalquivir,38.10473,-3.83260,osm,exacta,Embalse de Zocueca
+Rioseco,Cantábrico Occidental,43.22414,-5.46480,osm,exacta,Embalse de Rioseco

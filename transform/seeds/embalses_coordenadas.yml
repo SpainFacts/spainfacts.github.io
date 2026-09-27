@@ -1,0 +1,48 @@
+version: 2
+
+seeds:
+  - name: embalses_coordenadas
+    description: >
+      Coordenadas (WGS84) de cada embalse del Boletín Hidrológico de MITECO, para
+      pintarlos en un mapa. `embalse` es el nombre EXACTO que usa MITECO (join con
+      stg_miteco_embalses / embalses_actual por embalse + cuenca). Las coordenadas
+      salen sobre todo de OpenStreetMap (centro del bbox del polígono del embalse, o
+      de la presa si no hay polígono; © OpenStreetMap contributors, ODbL) y de
+      Wikidata (P625, CC0); unos pocos puntos son manuales/aproximados (sistemas de
+      lagos del Pirineo, embalses sin nombre en OSM). `confianza`: exacta = nombre
+      normalizado idéntico dentro de su demarcación; difusa = coincidencia
+      aproximada revisada; manual = resuelto a mano (ver nombre_fuente).
+      El Inventario de Presas y Embalses de MITECO no era descargable de forma
+      automatizada (WMS caído y descarga protegida con captcha) en sept. 2026.
+    config:
+      column_types:
+        embalse: varchar
+        cuenca: varchar
+        lat: double
+        lon: double
+        fuente: varchar
+        confianza: varchar
+        nombre_fuente: varchar
+    tests:
+      - unique:
+          arguments:
+            column_name: "embalse || '|' || cuenca"
+    columns:
+      - name: embalse
+        tests: [not_null]
+      - name: cuenca
+        tests: [not_null]
+      - name: lat
+        tests: [not_null]
+      - name: lon
+        tests: [not_null]
+      - name: fuente
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['miteco', 'gdw', 'osm', 'wikidata', 'manual']
+      - name: confianza
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['exacta', 'difusa', 'manual']

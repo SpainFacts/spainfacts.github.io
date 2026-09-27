@@ -6,6 +6,7 @@ description: Estado semanal de los embalses españoles por cuenca, comparado con
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
+    import MapaEmbalses from '../../../../../../src/lib/components/MapaEmbalses.svelte';
 </script>
 
 ```sql espana
@@ -89,6 +90,20 @@ WHERE nivel = 'demarcacion'
 />
 
 <p class="text-xs text-gray-500">Las islas, Ceuta y Melilla no forman parte del Boletín Hidrológico. El ámbito «Cuencas Internas del País Vasco» se suma a la demarcación del Cantábrico Oriental.</p>
+
+## Embalse por embalse
+
+Cada cuadrado es un embalse: su tamaño es proporcional a la capacidad y el relleno, al agua que tiene ahora. El color indica si está por encima (verde azulado) o por debajo (marrón) de lo habitual para esta semana del año, es decir, la media de la misma semana en los diez años anteriores.
+
+```sql mapa_embalses
+SELECT embalse, cuenca, lat, lon, capacidad_hm3, volumen_hm3, pct_llenado,
+       pct_habitual, dif_vs_habitual, uso_electrico
+FROM mother.embalses_actual
+```
+
+<MapaEmbalses data={mapa_embalses} />
+
+<p class="text-xs text-gray-500">Ubicación de los embalses: © colaboradores de OpenStreetMap (ODbL) y Wikidata, casados por nombre con el Boletín Hidrológico. Límites provinciales © Instituto Geográfico Nacional.</p>
 
 ## Cuencas por encima y por debajo de lo habitual
 

@@ -38,7 +38,10 @@ select
     case when h.anios_habitual >= 5 then h.pct_habitual end as pct_habitual,
     case when h.anios_habitual >= 5
          then round(100 * u.volumen_hm3 / u.capacidad_hm3 - h.pct_habitual, 1)
-    end as dif_vs_habitual
+    end as dif_vs_habitual,
+    -- coordenadas: OSM/Wikidata casadas por nombre (seed embalses_coordenadas)
+    g.lat,
+    g.lon
 from ultima u
 left join base a
   on a.embalse = u.embalse
@@ -48,3 +51,6 @@ left join base a
 left join habitual h
   on h.embalse = u.embalse
  and h.cuenca = u.cuenca
+left join {{ ref('embalses_coordenadas') }} g
+  on g.embalse = u.embalse
+ and g.cuenca = u.cuenca
