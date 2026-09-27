@@ -39,3 +39,25 @@ models:
         tests: [not_null]
       - name: cod_serie
         tests: [not_null]
+  - name: embalses_semanal
+    description: "Reserva hídrica semanal por cuenca, demarcación y total España (MITECO)"
+    columns:
+      - name: fecha
+        tests: [not_null]
+      - name: clave
+        tests: [not_null]
+      - name: pct_llenado
+        tests: [not_null]
+  - name: embalses_estado_actual
+    description: "Última semana por cuenca/demarcación/país vs año anterior y media de 10 años"
+    columns:
+      - name: id
+        tests: [not_null, unique]
+  - name: embalses_actual
+    description: "Estado de cada embalse en la última semana publicada"
+    columns:
+      - name: embalse
+        tests: [not_null]
+      - name: cod_demarcacion
+        description: "Null si aparece un ámbito nuevo sin mapear en seeds/cuencas_demarcaciones.csv"
+        tests: [not_null]

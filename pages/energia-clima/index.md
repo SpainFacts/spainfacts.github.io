@@ -207,6 +207,21 @@ ORDER BY año ASC, sector ASC
     </a>
 </div>
 
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-sky-300 dark:hover:border-sky-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-xl mb-4">
+            💧
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Reservas de Agua y Embalses</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Estado semanal de los embalses por cuenca: cuánta agua hay, cómo está frente al año pasado y frente a la media de la última década.
+        </p>
+    </div>
+    <a href="/energia-clima/embalses" class="text-sm font-semibold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center">
+        Ver el estado de los embalses →
+    </a>
+</div>
+
 </Grid>
 
 ---

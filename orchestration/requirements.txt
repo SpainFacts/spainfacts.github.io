@@ -6,6 +6,7 @@ dagster-dbt
 dlt[motherduck]>=1.3
 dbt-duckdb>=1.9
 requests>=2.32
+access-parser>=0.0.6  # lee el .mdb de embalses del MITECO sin drivers ODBC
 tzdata
 # grpcio-health-checking >=1.76 se genera con protobuf 7, pero dbt-core y
 # dagster exigen protobuf <7 -> hay que quedarse en la serie compatible

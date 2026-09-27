@@ -11,3 +11,5 @@ sources:
       - name: eurostat_cuentas_balance
       - name: eurostat_cuentas_gastos
       - name: eurostat_cuentas_ingresos
+      - name: miteco_embalses
+        description: "Reserva hídrica semanal por embalse (MITECO, BD-Embalses 1988-hoy)"

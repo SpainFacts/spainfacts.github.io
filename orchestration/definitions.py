@@ -27,6 +27,7 @@ from dagster_dlt import DagsterDltResource, dlt_assets
 
 from ingestion.eurostat import eurostat
 from ingestion.ine import ine
+from ingestion.miteco import miteco
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TRANSFORM_DIR = REPO_ROOT / "transform"
@@ -56,6 +57,11 @@ def ine_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource)
     group_name="ingesta",
 )
 def eurostat_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+@dlt_assets(dlt_source=miteco(), dlt_pipeline=_pipeline_motherduck("miteco"), name="miteco", group_name="ingesta")
+def miteco_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -113,7 +119,7 @@ schedule_diario = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria],
     schedules=[schedule_diario],
     resources={
