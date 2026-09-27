@@ -4,8 +4,9 @@ description: Pirámide poblacional y distribución por edad y sexo en España.
 ---
 
 <script>
-    import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
-    import PopulationPyramid from '../../../../src/lib/components/PopulationPyramid.svelte';
+    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
+    import PopulationPyramid from '../../../../../../src/lib/components/PopulationPyramid.svelte';
 </script>
 
 # Estructura por Edades de la Población
@@ -85,9 +86,9 @@ La pirámide poblacional muestra la estructura por edades de la población, lo q
 
 ```sql resumen_edades_inicio
 SELECT 
-  SUM(CASE WHEN Edad < 15 THEN Total ELSE 0 END) AS Menores_15,
-  SUM(CASE WHEN Edad BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
-  SUM(CASE WHEN Edad >= 65 THEN Total ELSE 0 END) AS Mayores_65,
+  SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) AS Menores_15,
+  SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
+  SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) AS Mayores_65,
   SUM(Total) AS Total
 FROM mother.totalAnoSexoEdad
 WHERE Anio = ${inputs.año_inicio.value}
@@ -95,9 +96,9 @@ WHERE Anio = ${inputs.año_inicio.value}
 
 ```sql resumen_edades_fin
 SELECT 
-  SUM(CASE WHEN Edad < 15 THEN Total ELSE 0 END) AS Menores_15,
-  SUM(CASE WHEN Edad BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
-  SUM(CASE WHEN Edad >= 65 THEN Total ELSE 0 END) AS Mayores_65,
+  SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) AS Menores_15,
+  SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
+  SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) AS Mayores_65,
   SUM(Total) AS Total
 FROM mother.totalAnoSexoEdad
 WHERE Anio = ${inputs.año_fin.value}
@@ -105,84 +106,84 @@ WHERE Anio = ${inputs.año_fin.value}
 
 <Grid cols=3>
 <Group>
-<Value
-  value={resumen_edades_inicio[0]?.Menores_15}
+<KpiCard
   title="Menores de 15 ({inputs.año_inicio.value})"
-  fmt="compact"
+  value={resumen_edades_inicio[0]?.Menores_15}
+  formattedValue={formatCompact(resumen_edades_inicio[0]?.Menores_15, 2)}
 />
-<Value
-  value={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Menores de 15"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 <Group>
-<Value
-  value={resumen_edades_inicio[0]?.Edad_Laboral}
+<KpiCard
   title="Edad Laboral ({inputs.año_inicio.value})"
-  fmt="compact"
+  value={resumen_edades_inicio[0]?.Edad_Laboral}
+  formattedValue={formatCompact(resumen_edades_inicio[0]?.Edad_Laboral, 2)}
 />
-<Value
-  value={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Edad Laboral"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 <Group>
-<Value
-  value={resumen_edades_inicio[0]?.Mayores_65}
+<KpiCard
   title="Mayores de 65 ({inputs.año_inicio.value})"
-  fmt="compact"
+  value={resumen_edades_inicio[0]?.Mayores_65}
+  formattedValue={formatCompact(resumen_edades_inicio[0]?.Mayores_65, 2)}
 />
-<Value
-  value={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Mayores de 65"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 </Grid>
 
 <Grid cols=3>
 <Group>
-<Value
-  value={resumen_edades_fin[0]?.Menores_15}
+<KpiCard
   title="Menores de 15 ({inputs.año_fin.value})"
-  fmt="compact"
+  value={resumen_edades_fin[0]?.Menores_15}
+  formattedValue={formatCompact(resumen_edades_fin[0]?.Menores_15, 2)}
 />
-<Value
-  value={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Menores de 15"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 <Group>
-<Value
-  value={resumen_edades_fin[0]?.Edad_Laboral}
+<KpiCard
   title="Edad Laboral ({inputs.año_fin.value})"
-  fmt="compact"
+  value={resumen_edades_fin[0]?.Edad_Laboral}
+  formattedValue={formatCompact(resumen_edades_fin[0]?.Edad_Laboral, 2)}
 />
-<Value
-  value={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Edad Laboral"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 <Group>
-<Value
-  value={resumen_edades_fin[0]?.Mayores_65}
+<KpiCard
   title="Mayores de 65 ({inputs.año_fin.value})"
-  fmt="compact"
+  value={resumen_edades_fin[0]?.Mayores_65}
+  formattedValue={formatCompact(resumen_edades_fin[0]?.Mayores_65, 2)}
 />
-<Value
-  value={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+<KpiCard
   title="% Mayores de 65"
-  fmt="number"
-  suffix="%"
+  value={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  formattedValue={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
+  unit="%"
 />
 </Group>
 </Grid>
@@ -197,20 +198,21 @@ El índice de envejecimiento (relación entre población mayor de 65 años y men
 SELECT 
   ${inputs.año_inicio.value} AS Año_Inicio,
   ${inputs.año_fin.value} AS Año_Fin,
-  (resumen_edades_fin[0].Mayores_65 / NULLIF(resumen_edades_fin[0].Menores_15, 0) * 100) AS Indice_Envejecimiento_Fin,
-  (resumen_edades_inicio[0].Mayores_65 / NULLIF(resumen_edades_inicio[0].Menores_15, 0) * 100) AS Indice_Envejecimiento_Inicio,
-  ((resumen_edades_fin[0].Mayores_65 / NULLIF(resumen_edades_fin[0].Menores_15, 0) * 100) - 
-   (resumen_edades_inicio[0].Mayores_65 / NULLIF(resumen_edades_inicio[0].Menores_15, 0) * 100)) AS Cambio_Indice
-FROM ${resumen_edades_inicio}, ${resumen_edades_fin}
+  (f.Mayores_65 / NULLIF(f.Menores_15, 0) * 100) AS Indice_Envejecimiento_Fin,
+  (i.Mayores_65 / NULLIF(i.Menores_15, 0) * 100) AS Indice_Envejecimiento_Inicio,
+  (f.Mayores_65 / NULLIF(f.Menores_15, 0) * 100) -
+  (i.Mayores_65 / NULLIF(i.Menores_15, 0) * 100) AS Cambio_Indice
+FROM ${resumen_edades_inicio} AS i, ${resumen_edades_fin} AS f
 ```
 
-<BigValue
-  value={indice_envejecimiento[0]?.Indice_Envejecimiento_Fin}
+<KpiCard
   title="Índice de Envejecimiento ({inputs.año_fin.value})"
-  fmt="number"
-  suffix="%"
-  change={indice_envejecimiento[0]?.Cambio_Indice}
-  changeSuffix=" pp"
+  value={indice_envejecimiento[0]?.Indice_Envejecimiento_Fin}
+  formattedValue={formatNumber(indice_envejecimiento[0]?.Indice_Envejecimiento_Fin, 1)}
+  unit="%"
+  change={indice_envejecimiento[0]?.Cambio_Indice?.toFixed(1)}
+  changeUnit=" pp"
+  changePeriod="vs {inputs.año_inicio.value}"
 />
 
 ---

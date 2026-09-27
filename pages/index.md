@@ -243,7 +243,7 @@ Explora los grandes pilares que componen la sociedad, la economía y la gestión
             Censo y estado de actividad de los observatorios e instituciones públicas creados en España a lo largo del tiempo.
         </p>
     </div>
-    <a href="/observatorios" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+    <a href="/varios/observatorios" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
         Ver observatorios →
     </a>
 </div>
