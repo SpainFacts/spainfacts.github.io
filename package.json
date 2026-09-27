@@ -17,6 +17,7 @@
   "type": "module",
   "dependencies": {
     "@evidence-dev/bigquery": "^2.0.10",
+    "@evidence-dev/component-utilities": "file:./vendor/evidence-dev-component-utilities-4.0.13.tgz",
     "@evidence-dev/core-components": "^5.2.2",
     "@evidence-dev/csv": "^1.0.14",
     "@evidence-dev/databricks": "^1.0.8",
@@ -35,6 +36,7 @@
     "tailwind-merge": "^3.4.0"
   },
   "overrides": {
+    "@evidence-dev/component-utilities": "$@evidence-dev/component-utilities",
     "jsonwebtoken": "9.0.0",
     "trim@<0.0.3": ">0.0.3",
     "sqlite3": "5.1.5",
