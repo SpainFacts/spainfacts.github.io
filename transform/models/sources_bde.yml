@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: raw_bde
+    description: >
+      Deuda pública territorial según el Protocolo de Déficit Excesivo (PDE, SEC 2010)
+      cargada por dlt (ingestion/bde.py): Boletín Estadístico del Banco de España,
+      capítulos 13 (Comunidades Autónomas) y 14 (Corporaciones Locales), más la
+      deuda viva de las Entidades Locales a 31/12 que publica Hacienda con datos
+      de la Central de Información de Riesgos del Banco de España.
+    schema: raw
+    tables:
+      - name: bde_deuda_ccaa
+        description: >
+          Cuadros be1309 (deuda PDE por comunidad, miles de €) y be1310 (deuda PDE
+          por comunidad en % del PIB regional). Trimestral, formato largo: una fila
+          por serie y periodo. Incluye la serie Total CCAA (sin sufijo territorial).
+      - name: bde_saldo_ccaa
+        description: >
+          Cuadro be13a: capacidad (+) o necesidad (-) de financiación por comunidad,
+          miles de €, flujo MENSUAL no acumulado (total 2005-, por comunidad 2013-). Incluye la serie Total CCAA.
+      - name: bde_deuda_local
+        description: >
+          Cuadros be1406 (deuda PDE de las CCLL por tipo de entidad e instrumento),
+          be1407 (por instrumento y % PIB), be1408 (por tamaño de ayuntamiento) y
+          be1409 (ayuntamientos de más de 300.000 habitantes). Miles de €, trimestral.
+      - name: bde_deuda_viva_eell
+        description: >
+          Deuda viva a 31/12 de cada entidad local (ayuntamientos, diputaciones /
+          consejos / cabildos y resto de EELL: mancomunidades, comarcas, consorcios,
+          entidades menores...), miles de €, 2008-. tipo_fila = entidad | total |
+          ajuste (importes sin provincia: conciliación con el BdE, sin desagregar...).

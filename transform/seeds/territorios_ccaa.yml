@@ -1,0 +1,22 @@
+version: 2
+
+seeds:
+  - name: territorios_ccaa
+    description: >
+      Las 19 comunidades y ciudades autónomas con su código INE (CODAUTO) y el
+      código que usa Hacienda, que difiere del INE entre 10 y 17 (Hacienda ordena
+      alfabéticamente: 10 Extremadura ... 17 Comunidad Valenciana). `slug` es el
+      segmento de URL en /territorios/<slug>.
+    config:
+      column_types:
+        cod_ccaa: varchar
+        cod_ccaa_hacienda: varchar
+        nombre: varchar
+        slug: varchar
+    columns:
+      - name: cod_ccaa
+        tests: [not_null, unique]
+      - name: cod_ccaa_hacienda
+        tests: [not_null, unique]
+      - name: slug
+        tests: [not_null, unique]

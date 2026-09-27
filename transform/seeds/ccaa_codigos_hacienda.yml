@@ -1,0 +1,19 @@
+version: 2
+
+seeds:
+  - name: ccaa_codigos_hacienda
+    description: >
+      Traducción del código de comunidad autónoma que usa el Ministerio de Hacienda
+      (publicación de liquidaciones de las CCAA, SGCIEF) al código INE (cod_ccaa).
+      Coinciden en 01-09 y 18-19 (Ceuta, Melilla); difieren en 10-17 (Hacienda:
+      10 Extremadura, 11 Galicia, 12 Madrid, 13 Murcia, 14 Navarra, 15 País Vasco,
+      16 La Rioja, 17 C. Valenciana). El 00 (total comunidades) no se traduce.
+    config:
+      column_types:
+        cod_ccaa_hacienda: varchar
+        cod_ccaa: varchar
+    columns:
+      - name: cod_ccaa_hacienda
+        tests: [not_null, unique]
+      - name: cod_ccaa
+        tests: [not_null, unique]

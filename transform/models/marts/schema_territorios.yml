@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: territorios
+    description: >
+      Dimensión territorial para el drill-down España > comunidad > provincia:
+      códigos INE (y de Hacienda para comunidades), nombre, slug, ruta de la
+      página y última población oficial del padrón (INE 29005).
+    columns:
+      - name: clave
+        description: "nivel-cod"
+        tests: [not_null, unique]
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+      - name: cod
+        tests: [not_null]
+      - name: nombre
+        tests: [not_null]
+      - name: ruta
+        tests: [not_null, unique]
+      - name: poblacion_ultima
+        tests: [not_null]
+      - name: anio_poblacion
+        tests: [not_null]
+  - name: poblacion_municipios
+    description: >
+      Cifras oficiales de población por municipio, año y sexo (padrón, INE 29005,
+      1996-hoy sin 1997). `vigente` indica si el municipio existe en el
+      diccionario del INE más reciente.
+    columns:
+      - name: clave
+        description: "cod_mun-sexo-anio"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: cod_mun
+        tests: [not_null]
+      - name: municipio
+        tests: [not_null]
+      - name: cod_prov
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('territorios_provincias')
+                field: cod_prov
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: sexo
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Hombres', 'Mujeres']
+      - name: poblacion
+        tests: [not_null]
+  - name: poblacion_territorios
+    description: "Población oficial (INE 29005) agregada por año, sexo y nivel territorial (pais/ccaa/provincia)"
+    columns:
+      - name: clave
+        description: "nivel-cod-sexo-anio"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+      - name: cod
+        tests: [not_null]
+      - name: poblacion
+        tests: [not_null]
+      - name: n_municipios
+        tests: [not_null]

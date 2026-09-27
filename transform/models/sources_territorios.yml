@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_territorios
+    description: "Padrón municipal y diccionario de municipios del INE cargados por dlt (ingestion/ine.py)"
+    schema: raw
+    tables:
+      - name: ine_poblacion_municipios
+        description: "Cifras oficiales de población de los municipios (INE, tabla 29005) por año y sexo, 1996-hoy (sin 1997)"
+      - name: ine_municipios
+        description: "Relación de municipios del INE a 1 de enero de la edición más reciente (diccionarioAA.xlsx)"

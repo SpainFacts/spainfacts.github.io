@@ -83,6 +83,77 @@ def poblacion_provincias():
             }
 
 
+# --- Territorios: padrón municipal y diccionario de municipios -------------
+
+# Cifras oficiales de población de los municipios (revisión anual del padrón),
+# 1996-hoy por municipio y sexo. 1997 no tiene revisión (celdas vacías) y los
+# municipios aún no creados en un año vienen también vacíos: se descartan.
+POBLACION_MUNICIPIOS_CSV = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/29005.csv?nocab=1"
+# Relación de municipios a 1 de enero (se prueba la edición más reciente primero)
+DICCIONARIO_MUNICIPIOS_URLS = [
+    f"https://www.ine.es/daco/daco42/codmun/diccionario{aa:02d}.xlsx" for aa in (27, 26, 25, 24)
+]
+
+
+@dlt.resource(name="ine_poblacion_municipios", write_disposition="replace")
+def poblacion_municipios():
+    with requests.get(POBLACION_MUNICIPIOS_CSV, stream=True, timeout=600) as respuesta:
+        respuesta.raise_for_status()
+        lineas = codecs.iterdecode(respuesta.iter_lines(), "utf-8-sig")  # igual que 56945: UTF-8 con BOM
+        lector = csv.reader(lineas, delimiter=";")
+        next(lector)  # cabecera: Municipios;Sexo;Periodo;Total
+        for municipio, sexo, periodo, total in lector:
+            total = total.strip()
+            if not total or not periodo.strip().isdigit():
+                continue
+            # "28079 Madrid" -> ("28079", "Madrid")
+            cod_mun, _, nombre = municipio.partition(" ")
+            if len(cod_mun) != 5 or not cod_mun.isdigit():
+                continue
+            yield {
+                "anio": int(periodo),
+                "cod_mun": cod_mun,
+                "municipio": nombre,
+                "sexo": sexo,
+                "poblacion": int(total.replace(".", "")),
+            }
+
+
+@dlt.resource(name="ine_municipios", write_disposition="replace")
+def municipios():
+    import io
+
+    import openpyxl
+
+    for url in DICCIONARIO_MUNICIPIOS_URLS:
+        respuesta = requests.get(url, timeout=120)
+        if respuesta.status_code == 200 and respuesta.content[:2] == b"PK":  # xlsx = zip
+            break
+    else:
+        raise RuntimeError("No se encontró ningún diccionario de municipios del INE")
+    hoja = openpyxl.load_workbook(io.BytesIO(respuesta.content), read_only=True).active
+    filas = hoja.iter_rows(values_only=True)
+    for fila in filas:  # 1 fila de título y luego la cabecera
+        if fila and fila[0] == "CODAUTO":
+            break
+    for codauto, cpro, cmun, dc, nombre in (f[:5] for f in filas):
+        if not cpro or not cmun:
+            continue
+        cod_prov = str(cpro).zfill(2)
+        yield {
+            "cod_mun": cod_prov + str(cmun).zfill(3),
+            "cod_prov": cod_prov,
+            "cod_ccaa": str(codauto).zfill(2),
+            "dc": str(dc),
+            "nombre": nombre,
+            "edicion": url.rsplit("/", 1)[-1],
+        }
+
+
 @dlt.source(name="ine")
 def ine():
-    return [_tabla_resource(nombre, tabla_id) for nombre, tabla_id in TABLAS.items()] + [poblacion_provincias]
+    return [_tabla_resource(nombre, tabla_id) for nombre, tabla_id in TABLAS.items()] + [
+        poblacion_provincias,
+        poblacion_municipios,
+        municipios,
+    ]

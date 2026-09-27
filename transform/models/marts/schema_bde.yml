@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: ccaa_deuda
+    description: >
+      Deuda PDE de cada comunidad autónoma a fin de trimestre (Banco de España,
+      be1309/be1310), dic-1994 en adelante. deuda_eur en euros; deuda_pct_pib en %
+      del PIB regional tal como lo publica el BdE (nulo en dic-1994). Sin Ceuta ni Melilla.
+    columns:
+      - name: clave
+        description: "cod_ccaa-fecha"
+        tests: [not_null, unique]
+      - name: fecha
+        description: "Último día del trimestre"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: trimestre
+        tests: [not_null]
+      - name: cod_ccaa
+        description: "Código INE de comunidad (CODAUTO, 01-17)"
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: deuda_eur
+        tests: [not_null]
+  - name: ccaa_saldo
+    description: >
+      Capacidad (+) / necesidad (-) de financiación anual de cada comunidad (PDE):
+      NEGATIVO = DÉFICIT. Suma de los 12 flujos mensuales de be13a (solo años
+      completos; por comunidad desde 2013). saldo_pct_pib calculado con el PIB regional implícito en
+      be1309/be1310 del 4.º trimestre (el BdE no lo publica por comunidad).
+    columns:
+      - name: clave
+        description: "cod_ccaa-anio"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: saldo_eur
+        tests: [not_null]
+      - name: saldo_pct_pib
+        tests: [not_null]
+  - name: local_deuda_provincia
+    description: >
+      Deuda viva de las entidades locales de cada provincia a 31/12 (Hacienda con
+      datos CIR del Banco de España, 2008-): ayuntamientos + diputación / consejos /
+      cabildos + resto de EELL (mancomunidades, comarcas, entidades menores,
+      consorcios...). Anual (trimestre = 4). No reparte los importes sin provincia.
+    columns:
+      - name: clave
+        description: "cod_prov-anio"
+        tests: [not_null, unique]
+      - name: fecha
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: cod_prov
+        description: "Código INE de provincia (01-52)"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: "ref('provincias_codigos')"
+                field: cod_prov
+      - name: deuda_eur
+        tests: [not_null]
+  - name: local_deuda_municipio
+    description: >
+      Deuda PDE de los ayuntamientos de más de 300.000 habitantes a fin de
+      trimestre (Banco de España, be1409; 13 ciudades), dic-1994 en adelante.
+    columns:
+      - name: clave
+        description: "cod_mun-fecha"
+        tests: [not_null, unique]
+      - name: fecha
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: trimestre
+        tests: [not_null]
+      - name: cod_mun
+        description: "Código INE de municipio (5 dígitos)"
+        tests: [not_null]
+      - name: municipio
+        tests: [not_null]
+      - name: deuda_eur
+        tests: [not_null]

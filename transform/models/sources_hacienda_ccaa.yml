@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_hacienda_ccaa
+    description: "Liquidación de los presupuestos de las CCAA, datos consolidados (Ministerio de Hacienda, SGCIEF), cargada por dlt (ingestion/hacienda_ccaa.py). Importes en miles de euros; comunidad en código de Hacienda (00 = total)."
+    schema: raw
+    tables:
+      - name: hacienda_ccaa_capitulos
+        description: "Ingresos (I) y gastos (G) por capítulo económico 1-9 y medida (presupuesto_inicial, presupuesto_definitivo, ejecutado = derechos/obligaciones reconocidas netas, cobrado_pagado = ingresos/pagos líquidos), en formato largo"
+      - name: hacienda_ccaa_funcional
+        description: "Obligaciones reconocidas por área (nivel 'area') y política de gasto (nivel 'politica'), brutas y depuradas de IFL y PAC. clasificacion = 'politicas' (áreas y políticas, vigente) o 'funciones' (antigua por grupos de función, hasta 2005-2009 según comunidad; códigos no comparables)"

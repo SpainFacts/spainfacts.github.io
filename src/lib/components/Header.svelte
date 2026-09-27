@@ -10,6 +10,7 @@
     // Macro-categories curated for USAFacts structure
     const navLinks = [
         { href: "/", label: "Inicio" },
+        { href: "/territorios", label: "Territorios" },
         { href: "/demografia", label: "Demografía" },
         { href: "/economia", label: "Economía" },
         { href: "/cuentas-publicas", label: "Cuentas Públicas" },

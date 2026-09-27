@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: ccaa_cuentas_capitulos
+    description: "Liquidación consolidada de cada comunidad autónoma por capítulo económico, en euros (Ministerio de Hacienda, SGCIEF). tipo = ingreso|gasto; ejecutado = derechos/obligaciones reconocidas netas; sin filas de totales"
+    columns:
+      - name: clave
+        description: "anio-cod_ccaa-tipo-capitulo"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: cod_ccaa
+        description: "Código INE de comunidad autónoma (2 dígitos)"
+        tests: [not_null]
+      - name: tipo
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ingreso', 'gasto']
+      - name: capitulo
+        tests: [not_null]
+      - name: capitulo_nombre
+        tests: [not_null]
+  - name: ccaa_gasto_politicas
+    description: "Obligaciones reconocidas de cada comunidad autónoma por área y política de gasto, en euros; obligaciones = depuradas de IFL y PAC, obligaciones_brutas = sin depurar"
+    columns:
+      - name: clave
+        description: "anio-cod_ccaa-cod_politica"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: cod_area
+        tests: [not_null]
+      - name: area_nombre
+        tests: [not_null]
+      - name: cod_politica
+        tests: [not_null]
+      - name: politica_nombre
+        tests: [not_null]
+      - name: obligaciones
+        tests: [not_null]
+      - name: obligaciones_brutas
+        tests: [not_null]
+  - name: ccaa_cuentas_resumen
+    description: "Ingresos y gastos ejecutados totales y no financieros (capítulos 1-7) de cada comunidad autónoma por año, con saldos, en euros. deficit_no_financiero positivo = déficit"
+    columns:
+      - name: clave
+        description: "anio-cod_ccaa"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: ingresos_totales
+        tests: [not_null]
+      - name: gastos_totales
+        tests: [not_null]
+      - name: saldo
+        tests: [not_null]

@@ -26,6 +26,8 @@ from dagster_dbt import DagsterDbtTranslator, DbtCliResource, DbtProject, dbt_as
 from dagster_dlt import DagsterDltResource, dlt_assets
 
 from ingestion.aemet import aemet
+from ingestion.bde import bde
+from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.destino import es_local
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
@@ -111,6 +113,23 @@ def aemet_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResourc
     yield from dlt_resource.run(context=context)
 
 
+@dlt_assets(dlt_source=bde(), dlt_pipeline=_pipeline_motherduck("bde"), name="bde", group_name="ingesta")
+def bde_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Liquidaciones de las CCAA (Hacienda): ~920 descargas lentas (~45 min) de un
+# dato anual, así que va en un job mensual propio y no en el diario.
+@dlt_assets(
+    dlt_source=hacienda_ccaa(),
+    dlt_pipeline=_pipeline_motherduck("hacienda_ccaa"),
+    name="hacienda_ccaa",
+    group_name="ingesta_mensual",
+)
+def hacienda_ccaa_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
@@ -157,8 +176,15 @@ def deploy_web(context: AssetExecutionContext):
 
 # --- Job y schedule -------------------------------------------------------
 
+# El diario lo refresca todo salvo las fuentes lentas de dato anual (grupo
+# ingesta_mensual); dbt y el deploy van en los dos jobs.
 actualizacion_diaria = define_asset_job(
-    "actualizacion_diaria", selection=AssetSelection.all()
+    "actualizacion_diaria", selection=AssetSelection.all() - AssetSelection.groups("ingesta_mensual")
+)
+
+actualizacion_mensual = define_asset_job(
+    "actualizacion_mensual",
+    selection=AssetSelection.groups("ingesta_mensual") | AssetSelection.assets(transform_assets, deploy_web),
 )
 
 schedule_diario = ScheduleDefinition(
@@ -167,10 +193,16 @@ schedule_diario = ScheduleDefinition(
     execution_timezone="Europe/Madrid",
 )
 
+schedule_mensual = ScheduleDefinition(
+    job=actualizacion_mensual,
+    cron_schedule="0 3 2 * *",  # día 2 de cada mes, antes del diario
+    execution_timezone="Europe/Madrid",
+)
+
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, transform_assets, deploy_web],
-    jobs=[actualizacion_diaria],
-    schedules=[schedule_diario],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, transform_assets, deploy_web],
+    jobs=[actualizacion_diaria, actualizacion_mensual],
+    schedules=[schedule_diario, schedule_mensual],
     resources={
         "dlt_resource": DagsterDltResource(),
         "dbt": DbtCliResource(project_dir=str(TRANSFORM_DIR), profiles_dir=str(TRANSFORM_DIR)),

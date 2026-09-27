@@ -1,0 +1,24 @@
+version: 2
+
+seeds:
+  - name: territorios_provincias
+    description: >
+      Las 52 provincias (y ciudades autónomas) con su código INE (CPRO), la
+      comunidad a la que pertenecen (código INE) y el `slug` usado en
+      /territorios/<ccaa>/<provincia>.
+    config:
+      column_types:
+        cod_prov: varchar
+        cod_ccaa: varchar
+        nombre: varchar
+        slug: varchar
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+      - name: cod_ccaa
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('territorios_ccaa')
+                field: cod_ccaa

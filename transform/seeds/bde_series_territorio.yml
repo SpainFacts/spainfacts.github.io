@@ -1,0 +1,55 @@
+version: 2
+
+seeds:
+  - name: bde_series_territorio
+    description: >
+      Traducción de cada serie del Boletín Estadístico del Banco de España que se
+      usa en los marts de deuda territorial a su código INE: CODAUTO (2 dígitos)
+      para comunidades y código de municipio (5 dígitos, diccionario INE 2026) para
+      los ayuntamientos de más de 300.000 habitantes. Generado a partir de la fila
+      "DESCRIPCIÓN DE LA SERIE" de cada CSV (descripcion_bde), no del sufijo del código.
+      El BdE no publica Ceuta ni Melilla en el capítulo 13 (son CCLL en el PDE).
+    config:
+      column_types:
+        serie: varchar
+        cuadro: varchar
+        medida: varchar
+        ambito: varchar
+        cod_territorio: varchar
+        territorio: varchar
+        descripcion_bde: varchar
+    columns:
+      - name: serie
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: "source('raw_bde', 'bde_deuda_ccaa')"
+                field: serie
+              config:
+                where: "cuadro in ('be1309', 'be1310')"
+          - relationships:
+              arguments:
+                to: "source('raw_bde', 'bde_saldo_ccaa')"
+                field: serie
+              config:
+                where: "cuadro = 'be13a'"
+          - relationships:
+              arguments:
+                to: "source('raw_bde', 'bde_deuda_local')"
+                field: serie
+              config:
+                where: "cuadro = 'be1409'"
+      - name: medida
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['deuda_miles_eur', 'deuda_pct_pib', 'saldo_miles_eur']
+      - name: ambito
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['ccaa', 'municipio']
+      - name: cod_territorio
+        tests: [not_null]

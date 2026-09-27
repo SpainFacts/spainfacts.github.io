@@ -1,0 +1,65 @@
+serie,cuadro,medida,ambito,cod_territorio,territorio,descripcion_bde
+DTNPDE2010_P00000_PS_ACS_AAN,be1309,deuda_miles_eur,ccaa,01,Andalucía,PDE (SEC2010). CCAA. Andalucía. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AAR,be1309,deuda_miles_eur,ccaa,02,Aragón,PDE (SEC2010). CCAA. Aragón. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AAS,be1309,deuda_miles_eur,ccaa,03,Principado de Asturias,PDE (SEC2010). CCAA. Principado de Asturias. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ABA,be1309,deuda_miles_eur,ccaa,04,Illes Balears,PDE (SEC2010). CCAA. Illes Balears. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ACA,be1309,deuda_miles_eur,ccaa,05,Canarias,PDE (SEC2010). CCAA. Canarias. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ACB,be1309,deuda_miles_eur,ccaa,06,Cantabria,PDE (SEC2010). CCAA. Cantabria. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ACO,be1309,deuda_miles_eur,ccaa,07,Castilla y León,PDE (SEC2010). CCAA. Castilla y León. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ACL,be1309,deuda_miles_eur,ccaa,08,Castilla-La Mancha,PDE (SEC2010). CCAA. Castilla-La Mancha. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ACT,be1309,deuda_miles_eur,ccaa,09,Cataluña,PDE (SEC2010). CCAA. Cataluña. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AVA,be1309,deuda_miles_eur,ccaa,10,Comunitat Valenciana,PDE (SEC2010). CCAA. Comunitat Valenciana. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AEX,be1309,deuda_miles_eur,ccaa,11,Extremadura,PDE (SEC2010). CCAA. Extremadura. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AGA,be1309,deuda_miles_eur,ccaa,12,Galicia,PDE (SEC2010). CCAA. Galicia. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AMA,be1309,deuda_miles_eur,ccaa,13,Comunidad de Madrid,PDE (SEC2010). CCAA. Comunidad de Madrid. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_AMU,be1309,deuda_miles_eur,ccaa,14,Región de Murcia,PDE (SEC2010). CCAA. Región de Murcia. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ANA,be1309,deuda_miles_eur,ccaa,15,Comunidad Foral de Navarra,PDE (SEC2010). CCAA. Comunidad Foral de Navarra. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_APV,be1309,deuda_miles_eur,ccaa,16,País Vasco,PDE (SEC2010). CCAA. País Vasco. Deuda PDE. Total
+DTNPDE2010_P00000_PS_ACS_ALR,be1309,deuda_miles_eur,ccaa,17,La Rioja,PDE (SEC2010). CCAA. La Rioja. Deuda PDE. Total
+DTNPDE2010_P0000P_PS_ACS_AAN,be1310,deuda_pct_pib,ccaa,01,Andalucía,PDE (SEC2010). CCAA. Andalucía. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AAR,be1310,deuda_pct_pib,ccaa,02,Aragón,PDE (SEC2010). CCAA. Aragón. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AAS,be1310,deuda_pct_pib,ccaa,03,Principado de Asturias,PDE (SEC2010). CCAA. Principado de Asturias. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ABA,be1310,deuda_pct_pib,ccaa,04,Illes Balears,PDE (SEC2010). CCAA. Illes Balears. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ACA,be1310,deuda_pct_pib,ccaa,05,Canarias,PDE (SEC2010). CCAA. Canarias. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ACB,be1310,deuda_pct_pib,ccaa,06,Cantabria,PDE (SEC2010). CCAA. Cantabria. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ACO,be1310,deuda_pct_pib,ccaa,07,Castilla y León,PDE (SEC2010). CCAA. Castilla y León. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ACL,be1310,deuda_pct_pib,ccaa,08,Castilla-La Mancha,PDE (SEC2010). CCAA. Castilla-La Mancha. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ACT,be1310,deuda_pct_pib,ccaa,09,Cataluña,PDE (SEC2010). CCAA. Cataluña. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AVA,be1310,deuda_pct_pib,ccaa,10,Comunitat Valenciana,PDE (SEC2010). CCAA. Comunitat Valenciana. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AEX,be1310,deuda_pct_pib,ccaa,11,Extremadura,PDE (SEC2010). CCAA. Extremadura. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AGA,be1310,deuda_pct_pib,ccaa,12,Galicia,PDE (SEC2010). CCAA. Galicia. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AMA,be1310,deuda_pct_pib,ccaa,13,Comunidad de Madrid,PDE (SEC2010). CCAA. Comunidad de Madrid. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_AMU,be1310,deuda_pct_pib,ccaa,14,Región de Murcia,PDE (SEC2010). CCAA. Región de Murcia. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ANA,be1310,deuda_pct_pib,ccaa,15,Comunidad Foral de Navarra,PDE (SEC2010). CCAA. Comunidad Foral de Navarra. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_APV,be1310,deuda_pct_pib,ccaa,16,País Vasco,PDE (SEC2010). CCAA. País Vasco. Deuda PDE. Total % PIB pm
+DTNPDE2010_P0000P_PS_ACS_ALR,be1310,deuda_pct_pib,ccaa,17,La Rioja,PDE (SEC2010). CCAA. La Rioja. Deuda PDE. Total % PIB pm
+DMNPDE2010_S00000_ACS_AAN,be13a,saldo_miles_eur,ccaa,01,Andalucía,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Andalucía
+DMNPDE2010_S00000_ACS_AAR,be13a,saldo_miles_eur,ccaa,02,Aragón,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Aragón
+DMNPDE2010_S00000_ACS_AAS,be13a,saldo_miles_eur,ccaa,03,Principado de Asturias,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Principado de Asturias
+DMNPDE2010_S00000_ACS_ABA,be13a,saldo_miles_eur,ccaa,04,Illes Balears,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Illes Balears
+DMNPDE2010_S00000_ACS_ACA,be13a,saldo_miles_eur,ccaa,05,Canarias,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Canarias
+DMNPDE2010_S00000_ACS_ACB,be13a,saldo_miles_eur,ccaa,06,Cantabria,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Cantabria
+DMNPDE2010_S00000_ACS_ACO,be13a,saldo_miles_eur,ccaa,07,Castilla y León,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Castilla y León
+DMNPDE2010_S00000_ACS_ACL,be13a,saldo_miles_eur,ccaa,08,Castilla-La Mancha,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Castilla-La Mancha
+DMNPDE2010_S00000_ACS_ACT,be13a,saldo_miles_eur,ccaa,09,Cataluña,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Cataluña
+DMNPDE2010_S00000_ACS_AVA,be13a,saldo_miles_eur,ccaa,10,Comunidad Valenciana,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Comunidad Valenciana
+DMNPDE2010_S00000_ACS_AEX,be13a,saldo_miles_eur,ccaa,11,Extremadura,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Extremadura
+DMNPDE2010_S00000_ACS_AGA,be13a,saldo_miles_eur,ccaa,12,Galicia,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Galicia
+DMNPDE2010_S00000_ACS_AMA,be13a,saldo_miles_eur,ccaa,13,Comunidad de Madrid,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Comunidad de Madrid
+DMNPDE2010_S00000_ACS_AMU,be13a,saldo_miles_eur,ccaa,14,Región de Murcia,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Región de Murcia
+DMNPDE2010_S00000_ACS_ANA,be13a,saldo_miles_eur,ccaa,15,Comunidad Foral de Navarra,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. Comunidad Foral de Navarra
+DMNPDE2010_S00000_ACS_APV,be13a,saldo_miles_eur,ccaa,16,País Vasco,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. País Vasco
+DMNPDE2010_S00000_ACS_ALR,be13a,saldo_miles_eur,ccaa,17,La Rioja,PDE (SEC 2010). CCAA. Capacidad (+) o necesidad (-) de financiación. La Rioja
+DTNPDE2010_P00000_PS_AYU_PA,be1409,deuda_miles_eur,municipio,03014,Alicante/Alacant,PDE (SEC2010). CCLL. Ayuntamiento de Alicante. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PPM,be1409,deuda_miles_eur,municipio,07040,Palma,PDE (SEC2010). CCLL. Ayuntamiento de Palma de Mallorca. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PB,be1409,deuda_miles_eur,municipio,08019,Barcelona,PDE (SEC2010). CCLL. Ayuntamiento de Barcelona. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PCO,be1409,deuda_miles_eur,municipio,14021,Córdoba,PDE (SEC2010). CCLL. Ayuntamiento de Córdoba. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PM,be1409,deuda_miles_eur,municipio,28079,Madrid,PDE (SEC2010). CCLL. Ayuntamiento de Madrid. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PMA,be1409,deuda_miles_eur,municipio,29067,Málaga,PDE (SEC2010). CCLL. Ayuntamiento de Málaga. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PMU,be1409,deuda_miles_eur,municipio,30030,Murcia,PDE (SEC2010). CCLL. Ayuntamiento de Murcia. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PGC,be1409,deuda_miles_eur,municipio,35016,Las Palmas de Gran Canaria,PDE (SEC2010). CCLL. Ayuntamiento de Las Palmas. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PSE,be1409,deuda_miles_eur,municipio,41091,Sevilla,PDE (SEC2010). CCLL. Ayuntamiento de Sevilla. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PV,be1409,deuda_miles_eur,municipio,46250,València,PDE (SEC2010). CCLL. Ayuntamiento de València. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PVA,be1409,deuda_miles_eur,municipio,47186,Valladolid,PDE (SEC2010). CCLL. Ayuntamiento de Valladolid. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PBI,be1409,deuda_miles_eur,municipio,48020,Bilbao,PDE (SEC2010). CCLL. Ayuntamiento de Bilbao. Deuda PDE. Total
+DTNPDE2010_P00000_PS_AYU_PZ,be1409,deuda_miles_eur,municipio,50297,Zaragoza,PDE (SEC2010). CCLL. Ayuntamiento de Zaragoza. Deuda PDE. Total
