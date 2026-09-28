@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_hacienda_transparencia
+    description: "Indicadores de transparencia municipal del Ministerio de Hacienda cargados por dlt (ingestion/hacienda_transparencia.py): retenciones de la participación en los tributos del Estado por no remitir información (art. 36 Ley 2/2011) y periodo medio de pago a proveedores (PMP_NET)."
+    schema: raw
+    tables:
+      - name: pie_retenciones
+        description: "Una fila por entidad retenida, mes (periodo = día 1) y sección (liquidacion / presupuesto / lineas_fundamentales), de los PDF mensuales de la OVEELL (oct. 2016-hoy). Cada lista es un stock: quién sigue retenido ese mes. Desde nov. 2022 con código (cod_mun INE = provincia + 3 primeros dígitos del resto de código; tipo_entidad AA = ayuntamiento); hasta oct. 2022 solo nombre y provincia (cod_mun nulo: el cruce por nombre se hace en dbt). ejercicio_referencia solo cuando el PDF lo indica. por_dependientes = '(*)': retenido por una entidad o sociedad dependiente."
+      - name: pie_retenciones_importes
+        description: "Euros retenidos cada mes por el art. 36 de la Ley 2/2011 (columna 'Retención Artículo 36 Ley 2/2011' del Excel mensual de entregas a cuenta de la PIE, hojas de municipios); solo importes distintos de cero. modelo = cesion / sistema_general."
+      - name: pmp_entidades
+        description: "Periodo medio de pago (días) comunicado por cada entidad local en cada trimestre (anio, trimestre 1-4) según PMP_NET, fichero2 de marzo/junio/septiembre/diciembre. modelo = cesion (dato del último mes del trimestre) o variables (trimestral). Quien no aparece no lo ha comunicado. cod_mun solo para ayuntamientos (tipo_entidad AA). firmado_en_plazo solo en las primeras publicaciones."
+      - name: pmp_resumen_tipos
+        description: "Entidades que han firmado el PMP y entidades existentes por tipo (AA ayuntamiento, DD diputación, MM mancomunidad...) y trimestre, de la hoja 'Desagregado por tipo'"

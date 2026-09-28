@@ -30,6 +30,7 @@ from ingestion.alcaldes import alcaldes
 from ingestion.bde import bde
 from ingestion.conprel import conprel
 from ingestion.hacienda_ccaa import hacienda_ccaa
+from ingestion.hacienda_transparencia import hacienda_transparencia
 from ingestion.destino import es_local
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
@@ -40,6 +41,7 @@ from ingestion.ine import ine
 from ingestion.miteco import miteco
 from ingestion.observatorios import observatorios
 from ingestion.ree import ree
+from ingestion.ree_visiona import ree_visiona
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TRANSFORM_DIR = REPO_ROOT / "transform"
@@ -108,6 +110,13 @@ def emisiones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltRes
     yield from dlt_resource.run(context=context)
 
 
+# Sistema eléctrico cada 5 minutos (visor de REE), precios y saldos por frontera
+# (ESIOS, necesita ESIOS_TOKEN): incremental desde la última fecha cargada - 2 días.
+@dlt_assets(dlt_source=ree_visiona(), dlt_pipeline=_pipeline_motherduck("ree_visiona"), name="ree_visiona", group_name="ingesta")
+def ree_visiona_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # Incremental: dlt guarda en el destino la última fecha cargada y cada día
 # vuelve a pedir los 20 días anteriores. Un destino vacío (p. ej. un DuckDB
 # local nuevo) dispara el backfill desde 1991 (~1 h): ver docs/desarrollo-local.md.
@@ -151,6 +160,18 @@ def alcaldes_assets(context: AssetExecutionContext, dlt_resource: DagsterDltReso
 # Access (~14 min) de un dato anual; va en el job mensual.
 @dlt_assets(dlt_source=conprel(), dlt_pipeline=_pipeline_motherduck("conprel"), name="conprel", group_name="ingesta_mensual")
 def conprel_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Transparencia (Hacienda): retenciones de la PIE (art. 36 Ley 2/2011, PDF y
+# Excel mensuales) y periodo medio de pago de los ayuntamientos (trimestral).
+@dlt_assets(
+    dlt_source=hacienda_transparencia(),
+    dlt_pipeline=_pipeline_motherduck("hacienda_transparencia"),
+    name="hacienda_transparencia",
+    group_name="ingesta_mensual",
+)
+def hacienda_transparencia_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -224,7 +245,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

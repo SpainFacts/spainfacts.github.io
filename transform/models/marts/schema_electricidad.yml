@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: electricidad_5min
+    description: >
+      CONTRATO (lo usa el directo del sistema eléctrico). Demanda y generación por tecnología cada
+      5 minutos (MW) en península, Baleares y Canarias, del visor de demanda de REE. Todas las
+      tecnologías en MW >= 0 salvo intercambio_neto (+ importación), enlace_baleares (+ hacia Baleares)
+      e hidraulica antes de ~2022 (neta de bombeo). Ver la cabecera del modelo para la equivalencia
+      de campos y la definición de renovable.
+    tests:
+      - unique:
+          column_name: "sistema || '|' || cast(ts_utc as varchar)"
+    columns:
+      - name: sistema
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['peninsula', 'baleares', 'canarias']
+      - name: ts_utc
+        tests: [not_null]
+      - name: ts_local
+        tests: [not_null]
+      - name: demanda_mw
+        tests: [not_null]
+      - name: generacion_total_mw
+        tests: [not_null]
+      - name: renovable_mw
+        tests: [not_null]
+      - name: co2_t_h
+        tests: [not_null]
+
+  - name: electricidad_horaria
+    description: "Medias horarias (MW) por sistema de electricidad_5min, con el precio spot medio de la hora (península)"
+    tests:
+      - unique:
+          column_name: "sistema || '|' || cast(hora_utc as varchar)"
+    columns:
+      - name: sistema
+        tests: [not_null]
+      - name: hora_utc
+        tests: [not_null]
+      - name: hora_local
+        tests: [not_null]
+
+  - name: electricidad_diaria
+    description: "Energía diaria (MWh) por sistema y tecnología, demanda máxima/mínima instantánea, cuota renovable, CO2 y precio spot medio"
+    tests:
+      - unique:
+          column_name: "sistema || '|' || cast(fecha as varchar)"
+    columns:
+      - name: sistema
+        tests: [not_null]
+      - name: fecha
+        tests: [not_null]
+      - name: demanda_mwh
+        tests: [not_null]
+
+  - name: electricidad_extremos_diarios
+    description: "Mejor valor diario de cada métrica de récord por sistema y periodo ('5 min', 'hora', 'día'); base de los récords"
+    tests:
+      - unique:
+          column_name: "codigo || '|' || sistema || '|' || periodo || '|' || cast(fecha as varchar)"
+    columns:
+      - name: codigo
+        tests: [not_null]
+      - name: valor
+        tests: [not_null]
+
+  - name: electricidad_records_historia
+    description: "Cada vez que se batió un récord del sistema eléctrico (máximo o mínimo acumulado), con el valor que se superó"
+    tests:
+      - unique:
+          column_name: "codigo || '|' || sistema || '|' || periodo || '|' || cast(fecha as varchar)"
+    columns:
+      - name: codigo
+        tests: [not_null]
+      - name: valor
+        tests: [not_null]
+      - name: ts_local
+        tests: [not_null]
+
+  - name: electricidad_records
+    description: "Récord vigente por métrica, sistema y periodo, con el récord anterior, días vigente y marca de reciente (30 días)"
+    tests:
+      - unique:
+          column_name: "codigo || '|' || sistema || '|' || periodo"
+    columns:
+      - name: codigo
+        tests: [not_null]
+      - name: categoria
+        tests: [not_null]
+      - name: sistema
+        tests: [not_null]
+      - name: periodo
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['5 min', 'hora', 'día']
+      - name: valor
+        tests: [not_null]
+      - name: ts
+        tests: [not_null]
+      - name: dias_vigente
+        tests: [not_null]

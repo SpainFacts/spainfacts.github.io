@@ -1,0 +1,11 @@
+{
+  "name": "spainfacts-ree-directo",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker: sistema eléctrico español en directo (proxy de REE) para spainfacts.org",
+  "scripts": {
+    "probar": "node test/probar.mjs",
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy"
+  }
+}

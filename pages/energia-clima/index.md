@@ -280,7 +280,35 @@ ORDER BY año ASC, sector ASC
     </a>
 </div>
 
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-teal-300 dark:hover:border-teal-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold text-xl mb-4">
+            📡
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">El Sistema Eléctrico, Ahora</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de la Península, Baleares y Canarias, intercambios con los países vecinos y el precio de la luz.
+        </p>
+    </div>
+    <a href="/energia-clima/directo" class="text-sm font-semibold text-teal-600 dark:text-teal-400 hover:underline inline-flex items-center">
+        Ver el sistema en directo →
+    </a>
+</div>
 
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-yellow-300 dark:hover:border-yellow-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-950/60 text-yellow-600 dark:text-yellow-400 flex items-center justify-center font-bold text-xl mb-4">
+            🏆
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Récords del Sistema Eléctrico</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Máximos y mínimos históricos desde 2015 con datos de REE cada 5 minutos: demanda, solar, eólica, cuota renovable, emisiones, precios e intercambios, y cuándo se batió cada récord.
+        </p>
+    </div>
+    <a href="/energia-clima/records" class="text-sm font-semibold text-yellow-600 dark:text-yellow-400 hover:underline inline-flex items-center">
+        Ver los récords →
+    </a>
+</div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 transition-all">
     <div>

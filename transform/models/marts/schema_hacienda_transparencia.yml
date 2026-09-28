@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: transparencia_pie_mensual
+    description: "Stock mensual de ayuntamientos a los que Hacienda retiene la participación en los tributos del Estado por no remitir la liquidación, el presupuesto o las líneas fundamentales (art. 36 Ley 2/2011; DA 87ª Ley 22/2021), oct. 2016-hoy, con el importe retenido ese mes"
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: seccion
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['liquidacion', 'presupuesto', 'lineas_fundamentales']
+      - name: ejercicio_referencia
+        tests: [not_null]
+
+  - name: transparencia_pie
+    description: "Panel ayuntamiento x ejercicio x sección: si fue retenido, cuántos meses, desde cuándo, cuántos euros y quién gobernaba al empezar la retención (todos los ayuntamientos, para calcular tasas)"
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: retenido
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]
+
+  - name: transparencia_pmp
+    description: "Panel ayuntamiento x trimestre: si comunicó su periodo medio de pago a PMP_NET, cuántos días y si supera los 30, con el gobierno en funciones en el plazo (último día del mes siguiente)"
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: reporta
+        tests: [not_null]
+      - name: familia_en_plazo
+        tests: [not_null]

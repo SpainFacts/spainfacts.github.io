@@ -1,0 +1,10 @@
+# Cloudflare Worker: sistema eléctrico en directo para spainfacts.org
+name = "spainfacts-ree-directo"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+# No hace falta ningún secreto: los servicios de REE son públicos.
+# Para cambiar los orígenes con CORS permitido (separados por comas), descomenta:
+# [vars]
+# ORIGENES_PERMITIDOS = "https://spainfacts.org,https://www.spainfacts.org,http://localhost:3000"

@@ -31,3 +31,9 @@ transform/logs/
 
 # Descargas completas de Global Energy Monitor (solo se versiona el extracto de España)
 data/gem/
+
+# Caché del rastreo de rendiciondecuentas.es (ingestion/tcu.py)
+data/tcu_cache/
+
+# Caché de descargas de Hacienda (ingestion/hacienda_transparencia.py)
+data/hacienda_cache/

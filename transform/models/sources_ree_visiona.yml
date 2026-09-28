@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw_ree_visiona
+    description: "Curvas de 5 minutos del visor de demanda de REE, precios de mercado REData y factores de CO2 (ingestion/ree_visiona.py)"
+    schema: raw
+    tables:
+      - name: ree_visiona_5min
+        description: >
+          Una fila por sistema (peninsula, baleares, canarias) e instante de 5 minutos, con los campos
+          del visor demanda.ree.es en MW y sus nombres originales en snake_case (dem, eol, nuc, car, cc,
+          hid, gnhd, turb, conb, sol_fot, sol_ter, bio, cogen_resto, inter, icb, imp_fra, exp_fra...).
+          ts_local es la hora local del sistema (Canarias en hora canaria); ts_ree la etiqueta original
+          ("2A"/"2B" en el cambio de hora). merge por (sistema, ts_utc).
+      - name: ree_precios
+        description: "REData mercados/precios-mercados-tiempo-real: PVPC (horario) y 'Precio mercado spot' (horario; cuartohorario desde el mercado de 15 min), en €/MWh. merge por (indicador, ts_utc)."
+      - name: ree_coeficientes_co2
+        description: "Factores de emisión (t CO2/MWh) por sistema (peninsula, baleares, canarias) y tecnología que usa el visor de REE."
+      - name: esios_intercambios
+        description: "ESIOS: saldo neto por frontera (+ = importación) en MW medios del periodo (horario hasta 2022, cuartohorario después; energia_mwh es el valor original). Telemedido para francia (10207), portugal (10208) y marruecos (10209); andorra sale de la generación medida de liquidación (10047, con meses de retraso). Rellena los intercambios por país antes de finales de 2024. merge por (frontera, ts_utc)."
