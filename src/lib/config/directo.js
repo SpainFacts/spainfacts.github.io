@@ -9,7 +9,7 @@
 //
 // Si queda vacía, la página /energia-clima/directo usa solo los datos
 // horneados en el build desde el pipeline (mother.electricidad_ultimas_24h).
-const URL_WORKER = '';
+const URL_WORKER = 'https://spainfacts-ree-directo.spainfacts.workers.dev';
 
 let desdeEntorno = '';
 try {
