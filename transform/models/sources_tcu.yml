@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: raw_tcu
+    description: >
+      Plataforma de Rendición de Cuentas de las Entidades Locales (Tribunal de Cuentas y
+      órganos de control externo autonómicos, www.rendiciondecuentas.es), rastreada con
+      calma a una caché local de HTML y cargada por dlt desde esa caché (ingestion/tcu.py).
+      No incluye País Vasco ni Navarra (tienen sus propios órganos de control externo).
+    schema: raw
+    tables:
+      - name: tcu_entidades
+        description: >
+          Una fila por entidad del portal (idEntidad) vista en el listado de la Cuenta
+          General, con los datos de su ficha censal: NIF, población según el portal,
+          estado de actividad y códigos MEH (Hacienda) y MAP (DIR3). cod_mun (INE) sale
+          del código MEH o, si falta, del MAP (metodo_cod_mun); el NIF no sigue la
+          numeración del INE y no se usa para casar. id_ccaa_tcu es la numeración propia
+          del portal, distinta de la del INE.
+      - name: tcu_obligaciones
+        description: >
+          Una fila por entidad, obligación ('cuenta_general', 'control_interno',
+          'contratos') y ejercicio, con el icono del portal (estado_portal) y su
+          normalización (estado: rendida, no_rendida, rendida_no_disponible, no_aplica).
+          fecha_envio solo para la Cuenta General cuyo detalle se ha consultado
+          (detalle_consultado). fecha_extraccion = día en que se descargó la página.

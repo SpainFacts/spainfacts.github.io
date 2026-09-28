@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: transparencia_tcu
+    description: >
+      Rendición al Tribunal de Cuentas (Plataforma de Rendición de Cuentas de las Entidades
+      Locales) de la Cuenta General, la información de control interno y la relación anual
+      de contratos de cada ayuntamiento, por ejercicio, con el gobierno en funciones en el
+      plazo legal. Solo ayuntamientos casados con el código INE; sin País Vasco ni Navarra.
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: municipio
+        tests: [not_null]
+      - name: obligacion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['cuenta_general', 'control_interno', 'contratos']
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['en_plazo', 'fuera_plazo', 'rendida_sin_fecha', 'no_rendida', 'no_vencido', 'no_aplica']
+      - name: fecha_limite
+        tests: [not_null]
+      - name: familia_en_plazo
+        tests: [not_null]
+      - name: aplica_indicador
+        tests: [not_null]
