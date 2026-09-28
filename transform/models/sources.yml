@@ -17,3 +17,5 @@ sources:
         description: "Censo de observatorios públicos (observatoriospublicos.es), JSON sin limpiar"
       - name: miteco_embalses
         description: "Reserva hídrica semanal por embalse (MITECO, BD-Embalses 1988-hoy)"
+      - name: ine_ecepov_calefaccion
+        description: "INE ECEPOV 2021 (tabla 56784): viviendas principales con calefacción según combustible, por provincia (cod_prov '00' = España), tipo de edificio, año de construcción y tamaño del municipio."

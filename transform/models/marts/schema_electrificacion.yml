@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: electrificacion_sectores
+    description: "Consumo final de energía por sector y rama industrial, combustible y cuota de la electricidad, anual desde 1990 (Eurostat nrg_bal_c, ktep)."
+  - name: electrificacion_hogares
+    description: "Energía de los hogares por uso final y combustible, anual desde 2010 (Eurostat nrg_d_hhq, TJ)."
+  - name: electrificacion_bombas_calor
+    description: "Potencia térmica instalada de bombas de calor por tecnología (Eurostat nrg_inf_hptc, MW)."
+  - name: electrificacion_calefaccion_provincia
+    description: "Viviendas principales con calefacción por combustible y provincia (INE ECEPOV 2021)."
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]

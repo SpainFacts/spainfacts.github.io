@@ -13,7 +13,10 @@ que es la cifra anual oficial (sumar los cuatro trimestres inflaba los totales).
 
 import codecs
 import csv
+import io
 import re
+import unicodedata
+from pathlib import Path
 
 import dlt
 import requests
@@ -159,10 +162,54 @@ def municipios():
         }
 
 
+ECEPOV_CALEFACCION_CSV = "https://www.ine.es/jaxi/files/tpx/es/csv_bdsc/56784.csv"
+_PROVINCIAS_SEED = Path(__file__).resolve().parent.parent / "transform" / "seeds" / "territorios_provincias.csv"
+# Nombres del INE que no coinciden con el seed de provincias (sin tildes y en minúsculas)
+_ALIAS_PROVINCIAS_INE = {
+    "alicante/alacant": "03", "araba/alava": "01", "balears, illes": "07", "castellon/castello": "12",
+    "coruna, a": "15", "palmas, las": "35", "rioja, la": "26", "valencia/valencia": "46",
+    "santa cruz de tenerife": "38", "bizkaia": "48", "gipuzkoa": "20", "madrid": "28", "navarra": "31",
+    "asturias": "33", "cantabria": "39", "murcia": "30", "girona": "17", "lleida": "25", "ourense": "32",
+}
+
+
+def _sin_tildes(texto: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFD", texto) if unicodedata.category(c) != "Mn").lower().strip()
+
+
+@dlt.resource(name="ine_ecepov_calefaccion", write_disposition="replace")
+def ecepov_calefaccion():
+    """Encuesta de Características Esenciales de la Población y las Viviendas 2021
+    (INE, tabla 56784): viviendas principales con calefacción según el combustible,
+    por provincia, tipo de edificio, año de construcción y tamaño del municipio."""
+    por_nombre = {}
+    with open(_PROVINCIAS_SEED, encoding="utf-8") as f:
+        for fila in csv.DictReader(f):
+            por_nombre[_sin_tildes(fila["nombre"])] = fila["cod_prov"]
+    por_nombre.update(_ALIAS_PROVINCIAS_INE)
+    respuesta = requests.get(ECEPOV_CALEFACCION_CSV, timeout=120)
+    respuesta.raise_for_status()
+    lector = csv.reader(io.StringIO(respuesta.content.decode("utf-8-sig")), delimiter=";")
+    next(lector)
+    for provincia, edificio, construccion, tamano, combustible, total in lector:
+        cod = None if provincia == "Total Nacional" else por_nombre.get(_sin_tildes(provincia))
+        if provincia != "Total Nacional" and cod is None:
+            raise ValueError(f"Provincia del INE sin código: {provincia}")
+        yield {
+            "cod_prov": cod or "00",
+            "tipo_edificio": edificio,
+            "anio_construccion": construccion,
+            "tamano_municipio": tamano,
+            "combustible": combustible,
+            "viviendas": int(total.replace(".", "")) if total.strip() not in ("", "..", ".") else None,
+        }
+
+
 @dlt.source(name="ine")
 def ine():
     return [_tabla_resource(nombre, tabla_id) for nombre, tabla_id in TABLAS.items()] + [
         poblacion_provincias,
         poblacion_municipios,
         municipios,
+        ecepov_calefaccion,
     ]

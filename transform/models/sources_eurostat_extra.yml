@@ -11,3 +11,9 @@ sources:
         description: "nama_10_gdp: PIB a precios corrientes (B1GQ, CP_MEUR)"
       - name: eurostat_poblacion
         description: "nama_10_pe: población media anual (POP_NC, miles de personas)"
+      - name: eurostat_balance_energetico
+        description: "nrg_bal_c: consumo final de energía (uso energético) por sector y rama industrial y combustible, ktep, desde 1990."
+      - name: eurostat_hogares_usos
+        description: "nrg_d_hhq: energía de los hogares por uso final y combustible, TJ, desde 2010."
+      - name: eurostat_bombas_calor
+        description: "nrg_inf_hptc: potencia térmica instalada (MW) de bombas de calor por tecnología."

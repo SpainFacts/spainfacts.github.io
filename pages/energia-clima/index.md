@@ -340,6 +340,21 @@ ORDER BY año ASC, sector ASC
     </a>
 </div>
 
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl mb-4">
+            🔌
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Electrificación</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Cuánta energía de la industria, el transporte, los hogares y los servicios es ya electricidad, cómo se calientan las casas en cada provincia y cuántas bombas de calor hay.
+        </p>
+    </div>
+    <a href="/energia-clima/electrificacion" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+        Ver la electrificación →
+    </a>
+</div>
+
 </Grid>
 
 ---
