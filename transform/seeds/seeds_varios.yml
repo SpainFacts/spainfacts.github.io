@@ -15,3 +15,17 @@ seeds:
     columns:
       - name: grupo
         tests: [not_null, unique]
+  - name: ine_ccaa_nombres
+    description: "Nombre de cada comunidad tal como lo escriben las tablas del INE (Tempus3) -> código INE de comunidad (00 = Total Nacional)."
+    config:
+      column_types: {nombre_ine: varchar, cod_ccaa: varchar}
+    columns:
+      - name: nombre_ine
+        tests: [not_null, unique]
+  - name: empleo_provincias_bepsap
+    description: "Provincia tal como la escribe el Boletín Estadístico del Personal (sin tildes, en mayúsculas) -> código INE de provincia."
+    config:
+      column_types: {provincia_bepsap: varchar, cod_prov: varchar}
+    columns:
+      - name: provincia_bepsap
+        tests: [not_null, unique]

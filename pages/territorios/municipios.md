@@ -209,6 +209,29 @@ WHERE t.cod_mun = '${inputs.municipio}' AND t.importe > 0
 ORDER BY t.importe DESC
 ```
 
+```sql personal_ayto
+-- Gasto de personal (capítulo 1) del último año definitivo con datos, frente a
+-- la mediana por habitante de los municipios de su mismo tramo de población
+WITH anio AS (SELECT max(anio) AS anio FROM ${cuentas_serie} WHERE tiene_datos AND NOT provisional),
+todos AS (
+    SELECT cod_mun, poblacion, gastos_c1, gastos_total,
+        CASE
+            WHEN poblacion < 1000 THEN 1 WHEN poblacion < 5000 THEN 2 WHEN poblacion < 20000 THEN 3
+            WHEN poblacion < 50000 THEN 4 WHEN poblacion < 100000 THEN 5 WHEN poblacion < 500000 THEN 6 ELSE 7
+        END AS tramo
+    FROM mother.municipios_cuentas
+    WHERE anio = (SELECT anio FROM anio) AND tiene_datos AND NOT provisional AND poblacion > 0
+)
+SELECT
+    (SELECT anio FROM anio) AS anio,
+    m.gastos_c1,
+    m.gastos_c1 / m.poblacion AS por_habitante,
+    m.gastos_c1 / nullif(m.gastos_total, 0) AS peso,
+    (SELECT median(t.gastos_c1 / t.poblacion) FROM todos t WHERE t.tramo = m.tramo) AS mediana_tramo
+FROM todos m
+WHERE m.cod_mun = '${inputs.municipio}'
+```
+
 ```sql deuda_ayto
 SELECT fecha, deuda_eur, deuda_eur / nullif(${mun[0]?.poblacion ?? 1}, 0) AS por_habitante
 FROM mother.local_deuda_municipio
@@ -255,6 +278,28 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
         direction="positive-up"
     />
 </Grid>
+
+{#if personal_ayto.length > 0 && personal_ayto[0]?.gastos_c1 != null}
+
+<Grid cols=2>
+    <KpiCard
+        title="Gasto de personal por habitante"
+        value={personal_ayto[0]?.por_habitante}
+        formattedValue={formatNumber(personal_ayto[0]?.por_habitante, 0)}
+        unit="€"
+        period="Mediana de su tramo: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio}"
+        source="Ministerio de Hacienda (capítulo 1)"
+        href="/cuentas-publicas/empleo-publico"
+    />
+    <KpiCard
+        title="Peso del personal en el gasto"
+        value={personal_ayto[0]?.peso}
+        formattedValue="{formatNumber(100 * personal_ayto[0]?.peso, 0)} %"
+        period="{formatCompact(personal_ayto[0]?.gastos_c1, 1)} € en sueldos, cotizaciones y retribuciones de cargos electos"
+    />
+</Grid>
+
+{/if}
 
 <LineChart
     data={cuentas_grafico}

@@ -201,6 +201,85 @@ ORDER BY fecha
 
 {/if}
 
+```sql empleo_prov
+WITH ult AS (SELECT max(fecha) AS fecha FROM mother.empleo_territorio)
+SELECT
+    strftime(t.fecha, '%d/%m/%Y') AS fecha_texto,
+    max(t.efectivos) FILTER (WHERE t.administracion = 'Total') AS efectivos,
+    max(t.por_1000_hab) FILTER (WHERE t.administracion = 'Total') AS por_1000,
+    (SELECT por_1000_hab FROM mother.empleo_territorio WHERE nivel = 'pais' AND administracion = 'Total' AND fecha = t.fecha) AS por_1000_espana
+FROM mother.empleo_territorio t, ult
+WHERE t.nivel = 'provincia' AND t.cod = '${terr[0]?.cod}' AND t.fecha = ult.fecha
+GROUP BY t.fecha
+```
+
+```sql empleo_prov_sectores
+SELECT sector, administracion, sum(efectivos) AS efectivos
+FROM mother.empleo_efectivos
+WHERE cod_prov = '${terr[0]?.cod}' AND fecha = (SELECT max(fecha) FROM mother.empleo_efectivos)
+GROUP BY ALL
+ORDER BY efectivos DESC
+```
+
+```sql empleo_prov_aytos
+SELECT
+    g.anio,
+    g.gasto_personal_ayuntamientos,
+    g.gasto_personal_ayuntamientos_hab,
+    g.ayuntamientos_con_datos,
+    (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS espana_hab
+FROM mother.empleo_gasto_personal_territorio g
+WHERE g.nivel = 'provincia' AND g.cod = '${terr[0]?.cod}'
+ORDER BY g.anio DESC
+LIMIT 1
+```
+
+{#if empleo_prov.length > 0}
+
+## Empleo público
+
+<Grid cols=3>
+    <KpiCard
+        title="Empleados públicos"
+        value={empleo_prov[0]?.efectivos}
+        formattedValue={formatNumber(empleo_prov[0]?.efectivos, 0)}
+        period="con puesto en la provincia · {empleo_prov[0]?.fecha_texto}"
+        source="Registro Central de Personal"
+    />
+    <KpiCard
+        title="Por cada 1.000 habitantes"
+        value={empleo_prov[0]?.por_1000}
+        formattedValue={formatNumber(empleo_prov[0]?.por_1000, 1)}
+        period="España: {formatNumber(empleo_prov[0]?.por_1000_espana, 1)}"
+        source="Registro Central de Personal"
+    />
+    {#if empleo_prov_aytos.length > 0}
+    <KpiCard
+        title="Gasto de personal de los ayuntamientos"
+        value={empleo_prov_aytos[0]?.gasto_personal_ayuntamientos_hab}
+        formattedValue="{formatNumber(empleo_prov_aytos[0]?.gasto_personal_ayuntamientos_hab, 0)} €/hab."
+        period="{empleo_prov_aytos[0]?.anio} · España: {formatNumber(empleo_prov_aytos[0]?.espana_hab, 0)} € · {formatNumber(empleo_prov_aytos[0]?.ayuntamientos_con_datos, 0)} ayuntamientos con datos"
+        source="Hacienda (CONPREL, capítulo 1)"
+    />
+    {/if}
+</Grid>
+
+<BarChart
+    data={empleo_prov_sectores}
+    x=sector
+    y=efectivos
+    series=administracion
+    swapXY=true
+    sort=false
+    yFmt=num0
+    colorPalette={['#1d4ed8', '#0f766e', '#f59e0b']}
+    title="Empleados públicos en la provincia por sector y administración"
+/>
+
+<p class="text-xs text-gray-500">El Registro Central de Personal no publica el personal de cada ayuntamiento, solo el total de los ayuntamientos y de la diputación (o cabildo, consejo insular) de cada provincia. El gasto de personal de cada ayuntamiento está en su ficha de <a href="/territorios/municipios">municipios</a>. Más en <a href="/cuentas-publicas/empleo-publico">Empleo público</a>.</p>
+
+{/if}
+
 ---
 
 ## Fuentes oficiales

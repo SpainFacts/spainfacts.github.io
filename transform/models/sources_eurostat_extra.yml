@@ -6,7 +6,7 @@ sources:
     schema: raw
     tables:
       - name: eurostat_cuentas_subsectores
-        description: "gov_10a_main: TR, TE y B9 de S13 y subsectores S1311-S1314, en MIO_EUR y PC_GDP"
+        description: "gov_10a_main: TR, TE, B9 y D1PAY (remuneración de asalariados) de S13 y subsectores S1311-S1314, en MIO_EUR y PC_GDP"
       - name: eurostat_pib
         description: "nama_10_gdp: PIB a precios corrientes (B1GQ, CP_MEUR)"
       - name: eurostat_poblacion

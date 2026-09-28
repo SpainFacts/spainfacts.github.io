@@ -29,6 +29,12 @@ TABLAS = {
     # Estadística de Transporte de Viajeros (TV), mensual desde 2012, miles de viajeros:
     "ine_transporte_viajeros": "20239",  # por modo: urbano, metro, autobús, Cercanías, AVE, avión...
     "ine_transporte_ciudades": "20193",  # metro y autobús urbano en las 7 ciudades con metro
+    # Empleo público (EPA, trimestral desde 2002, miles de personas):
+    "ine_epa_asalariados_publicos": "65193",  # por tipo de administración (central, CCAA, local, empresas públicas...)
+    "ine_epa_asalariados_ccaa": "65327",  # público / privado por comunidad autónoma
+    # Salarios:
+    "ine_epa_salarios_deciles": "66250",  # salario medio mensual por decil, asalariados públicos y privados (anual)
+    "ine_ees_salarios_control": "36887",  # Encuesta Cuatrienal de Estructura Salarial 2022: control público/privado
 }
 
 

@@ -165,7 +165,7 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
     height="540px"
 />
 
-<Grid cols=2>
+<Grid cols=3>
     <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
         <h4 class="font-bold text-blue-900 dark:text-blue-300 mb-1">📥 ¿Quieres profundizar en los ingresos?</h4>
         <p class="text-xs text-blue-700 dark:text-blue-400 mb-2">Consulta la recaudación por IRPF, IVA, Sociedades, Cotizaciones y tasas públicas.</p>
@@ -179,6 +179,14 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
         <p class="text-xs text-purple-700 dark:text-purple-400 mb-2">Descubre cuánto gasta el Estado por habitante en Sanidad, Pensiones, Educación y Defensa.</p>
         <a href="/cuentas-publicas/gastos" class="text-xs font-bold text-purple-600 dark:text-purple-300 hover:underline">
             Ver informe completo de Gastos y Coste por Habitante →
+        </a>
+    </div>
+
+    <div class="p-4 rounded-lg bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800">
+        <h4 class="font-bold text-teal-900 dark:text-teal-300 mb-1">🏛️ ¿Cuántos empleados públicos hay?</h4>
+        <p class="text-xs text-teal-700 dark:text-teal-400 mb-2">Cuántos son en cada administración y territorio, cómo han evolucionado, cuánto cobran frente al sector privado y cuánto cuestan.</p>
+        <a href="/cuentas-publicas/empleo-publico" class="text-xs font-bold text-teal-600 dark:text-teal-300 hover:underline">
+            Ver informe de Empleo Público →
         </a>
     </div>
 </Grid>

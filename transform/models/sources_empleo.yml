@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_empleo
+    description: "Empleo público: Boletín Estadístico del Personal al Servicio de las AAPP (ingestion/empleo_publico.py) y tablas de la EPA y de estructura salarial del INE (ingestion/ine.py)"
+    schema: raw
+    tables:
+      - name: bepsap_efectivos
+        description: "Efectivos (NIF distintos) del Registro Central de Personal por edición semestral (1 de enero y 1 de julio, desde 2019-07), administración, organismo, CCAA, provincia, tipo de personal, área, subgrupo y sexo. Ediciones 2023-01 a 2025-07 revisadas en agosto de 2026."
+      - name: ine_epa_asalariados_publicos
+        description: "INE EPA tabla 65193: asalariados del sector público por tipo de administración, sexo y edad (miles), trimestral desde 2002."
+      - name: ine_epa_asalariados_ccaa
+        description: "INE EPA tabla 65327: asalariados públicos y privados por comunidad y sexo (miles y %), trimestral desde 2002."
+      - name: ine_epa_salarios_deciles
+        description: "INE EPA tabla 66250: salario medio mensual bruto por decil, jornada y sector público/privado, anual desde 2006."
+      - name: ine_ees_salarios_control
+        description: "INE Encuesta Cuatrienal de Estructura Salarial 2022, tabla 36887: salario medio anual bruto por comunidad, sexo y control de la empresa (público/privado)."

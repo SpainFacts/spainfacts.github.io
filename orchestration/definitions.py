@@ -35,6 +35,7 @@ from ingestion.destino import es_local
 from ingestion.dgt import dgt
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
+from ingestion.empleo_publico import empleo_publico
 from ingestion.eurostat import eurostat
 from ingestion.gem import gem
 from ingestion.incendios import incendios
@@ -192,6 +193,18 @@ def hacienda_transparencia_assets(context: AssetExecutionContext, dlt_resource: 
     yield from dlt_resource.run(context=context)
 
 
+# Personal de las AAPP (Registro Central de Personal): ediciones semestrales
+# (1 de enero y 1 de julio) publicadas meses después; basta con el job mensual.
+@dlt_assets(
+    dlt_source=empleo_publico(),
+    dlt_pipeline=_pipeline_motherduck("empleo_publico"),
+    name="empleo_publico",
+    group_name="ingesta_mensual",
+)
+def empleo_publico_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
@@ -262,7 +275,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

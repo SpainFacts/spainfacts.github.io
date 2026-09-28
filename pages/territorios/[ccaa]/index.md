@@ -463,6 +463,116 @@ ORDER BY anio
 
 {/if}
 
+```sql empleo
+WITH ult AS (SELECT max(fecha) AS fecha FROM mother.empleo_territorio)
+SELECT
+    strftime(t.fecha, '%d/%m/%Y') AS fecha_texto,
+    max(t.efectivos) FILTER (WHERE t.administracion = 'Total') AS efectivos,
+    max(t.por_1000_hab) FILTER (WHERE t.administracion = 'Total') AS por_1000,
+    max(t.efectivos) FILTER (WHERE t.administracion = 'Estado') AS estado,
+    max(t.efectivos) FILTER (WHERE t.administracion = 'Comunidades autónomas') AS ccaa,
+    max(t.efectivos) FILTER (WHERE t.administracion = 'Entidades locales') AS local,
+    (SELECT por_1000_hab FROM mother.empleo_territorio WHERE nivel = 'pais' AND administracion = 'Total' AND fecha = t.fecha) AS por_1000_espana,
+    (SELECT count(*) + 1 FROM mother.empleo_territorio o
+      WHERE o.nivel = 'ccaa' AND o.administracion = 'Total' AND o.fecha = t.fecha
+        AND o.por_1000_hab > max(t.por_1000_hab) FILTER (WHERE t.administracion = 'Total')) AS puesto
+FROM mother.empleo_territorio t, ult
+WHERE t.nivel = 'ccaa' AND t.cod = '${terr[0]?.cod}' AND t.fecha = ult.fecha
+GROUP BY t.fecha
+```
+
+```sql empleo_sectores
+SELECT sector, administracion, sum(efectivos) AS efectivos
+FROM mother.empleo_efectivos
+WHERE cod_ccaa = '${terr[0]?.cod}' AND fecha = (SELECT max(fecha) FROM mother.empleo_efectivos)
+GROUP BY ALL
+ORDER BY efectivos DESC
+```
+
+```sql empleo_serie
+SELECT fecha, administracion, efectivos
+FROM mother.empleo_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND administracion <> 'Total'
+ORDER BY fecha
+```
+
+```sql empleo_gasto
+SELECT
+    g.anio,
+    g.gasto_personal_ccaa,
+    g.gasto_personal_ccaa_hab,
+    g.gasto_personal_ayuntamientos_hab,
+    (SELECT avg(gasto_personal_ccaa_hab) FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'ccaa' AND x.anio = g.anio AND x.cod <= '17') AS media_ccaa_hab,
+    (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS aytos_espana_hab
+FROM mother.empleo_gasto_personal_territorio g
+WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa IS NOT NULL
+ORDER BY g.anio DESC
+LIMIT 1
+```
+
+```sql empleo_salario
+SELECT salario_publico, salario_privado FROM mother.empleo_salarios_ccaa WHERE cod_ccaa = '${terr[0]?.cod}'
+```
+
+{#if empleo.length > 0}
+
+## Empleo público
+
+<Grid cols=3>
+    <KpiCard
+        title="Empleados públicos"
+        value={empleo[0]?.efectivos}
+        formattedValue={formatNumber(empleo[0]?.efectivos, 0)}
+        period="en {terr[0]?.nombre} · {empleo[0]?.fecha_texto}"
+        source="Registro Central de Personal"
+    />
+    <KpiCard
+        title="Por cada 1.000 habitantes"
+        value={empleo[0]?.por_1000}
+        formattedValue={formatNumber(empleo[0]?.por_1000, 1)}
+        period="España: {formatNumber(empleo[0]?.por_1000_espana, 1)} · puesto {empleo[0]?.puesto} de 19"
+        source="Registro Central de Personal"
+    />
+    {#if empleo_gasto.length > 0}
+    <KpiCard
+        title="Gasto de personal de la comunidad"
+        value={empleo_gasto[0]?.gasto_personal_ccaa_hab}
+        formattedValue="{formatNumber(empleo_gasto[0]?.gasto_personal_ccaa_hab, 0)} €/hab."
+        period="{formatNumber(empleo_gasto[0]?.gasto_personal_ccaa / 1e9, 1)} mil M€ en {empleo_gasto[0]?.anio} · media de las comunidades: {formatNumber(empleo_gasto[0]?.media_ccaa_hab, 0)} €"
+        source="Hacienda (capítulo 1)"
+    />
+    {/if}
+</Grid>
+
+<Grid cols=2>
+    <BarChart
+        data={empleo_sectores}
+        x=sector
+        y=efectivos
+        series=administracion
+        swapXY=true
+        sort=false
+        yFmt=num0
+        colorPalette={['#1d4ed8', '#0f766e', '#f59e0b']}
+        title="Por sector y administración"
+    />
+    <BarChart
+        data={empleo_serie}
+        x=fecha
+        y=efectivos
+        series=administracion
+        type=stacked
+        yFmt=num0
+        xFmt="mmm yyyy"
+        colorPalette={['#0f766e', '#f59e0b', '#1d4ed8']}
+        title="Evolución (1 de enero y 1 de julio)"
+    />
+</Grid>
+
+<p class="text-xs text-gray-500">Personal con puesto en {terr[0]?.nombre} de las tres administraciones: el Estado (Guardia Civil, Policía Nacional, militares, Agencia Tributaria...), la comunidad (sanidad, educación, universidades...) y las entidades locales. {#if empleo_gasto.length > 0 && empleo_gasto[0]?.gasto_personal_ayuntamientos_hab}Los ayuntamientos de la comunidad gastaron en personal {formatNumber(empleo_gasto[0].gasto_personal_ayuntamientos_hab, 0)} € por habitante en {empleo_gasto[0].anio} (media de España: {formatNumber(empleo_gasto[0].aytos_espana_hab, 0)} €).{/if} {#if empleo_salario.length > 0 && empleo_salario[0]?.salario_publico}Salario medio bruto en 2022: {formatNumber(empleo_salario[0].salario_publico, 0)} € al año en el sector público y {formatNumber(empleo_salario[0].salario_privado, 0)} € en el privado (INE).{/if} El salto de 2023 es en parte una revisión del registro. Más en <a href="/cuentas-publicas/empleo-publico">Empleo público</a>.</p>
+
+{/if}
+
 ---
 
 ## Fuentes oficiales
@@ -470,6 +580,7 @@ ORDER BY anio
 - **[INE – Cifras oficiales de población de los municipios (Padrón)](https://www.ine.es/jaxiT3/Tabla.htm?t=29005)**
 - **[Ministerio de Hacienda – Liquidación de los presupuestos de las CCAA](https://serviciostelematicosext.hacienda.gob.es/sgcief/publicacionliquidaciones/aspx/menuinicio.aspx)**: datos consolidados; el gasto por políticas está depurado de la participación de las entidades locales en los tributos y de los fondos de la PAC, que solo transitan por las cuentas autonómicas.
 - **[Banco de España – Boletín Estadístico, capítulo 13](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deuda según el Protocolo de Déficit Excesivo y capacidad/necesidad de financiación de las comunidades autónomas.
+- **[Registro Central de Personal – Boletín Estadístico del Personal al Servicio de las AAPP](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: empleados públicos por administración y provincia del puesto; **[INE – Encuesta de Estructura Salarial 2022](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: salarios públicos y privados.
 - **[Instituto Geográfico Nacional (vía es-atlas)](https://github.com/martgnz/es-atlas)**: límites municipales (CC BY 4.0).
 
 <LastRefreshed prefix="Datos actualizados" />

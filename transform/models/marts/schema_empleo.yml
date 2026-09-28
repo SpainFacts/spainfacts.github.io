@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: empleo_efectivos
+    description: "Personal de las AAPP por edición semestral, administración, sector, provincia, tipo de personal y sexo (Registro Central de Personal)."
+    columns:
+      - name: fecha
+        tests: [not_null]
+      - name: sector
+        tests: [not_null]
+  - name: empleo_territorio
+    description: "Empleados públicos por España, comunidad y provincia, edición y administración, con tasa por 1.000 habitantes."
+  - name: empleo_organismos
+    description: "Organismos del Estado con más personal en la última edición (>= 100 efectivos)."
+  - name: empleo_epa_administracion
+    description: "Asalariados del sector público por tipo de administración, trimestral desde 2002 (EPA 65193)."
+  - name: empleo_epa_ccaa
+    description: "Asalariados públicos y privados por comunidad, trimestral desde 2002 (EPA 65327)."
+  - name: empleo_salarios_deciles
+    description: "Salario medio mensual por decil y sector público/privado (EPA 66250)."
+  - name: empleo_salarios_ccaa
+    description: "Salario medio anual bruto por comunidad y control público/privado (EES 2022, 36887)."
+  - name: empleo_coste
+    description: "Remuneración de asalariados de las AAPP por subsector (Eurostat gov_10a_main D1PAY)."
+  - name: empleo_gasto_personal_territorio
+    description: "Capítulo 1 (gasto de personal) de cada comunidad y de sus ayuntamientos, por año y territorio."

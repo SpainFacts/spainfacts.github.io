@@ -6,7 +6,8 @@ Descarga series oficiales de finanzas y cuentas públicas para España (geo=ES, 
 3. eurostat_cuentas_gastos: Gasto público anual por función COFOG (gov_10a_exp).
 4. eurostat_cuentas_ingresos: Recaudación anual de impuestos y cotizaciones por figura tributaria
    (gov_10a_taxag; el antiguo gov_10a_rev ya no se disemina).
-5. eurostat_cuentas_subsectores: Ingresos (TR), gastos (TE) y saldo (B9) del total AAPP y de sus
+5. eurostat_cuentas_subsectores: Ingresos (TR), gastos (TE), saldo (B9) y remuneración de asalariados
+   (D1PAY, el coste del personal) del total AAPP y de sus
    subsectores (S1311 central, S1312 CCAA, S1313 local, S1314 Seguridad Social), en MIO_EUR y PC_GDP
    (gov_10a_main).
 6. eurostat_pib: PIB anual a precios corrientes (nama_10_gdp, B1GQ, CP_MEUR).
@@ -125,7 +126,7 @@ def eurostat():
             "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
             "gov_10a_main?geo=ES"
             "&sector=S13&sector=S1311&sector=S1312&sector=S1313&sector=S1314"
-            "&unit=MIO_EUR&unit=PC_GDP&na_item=TE&na_item=TR&na_item=B9"
+            "&unit=MIO_EUR&unit=PC_GDP&na_item=TE&na_item=TR&na_item=B9&na_item=D1PAY"
             "&format=JSON&lang=EN"
         )
         resp = requests.get(url, timeout=120)
