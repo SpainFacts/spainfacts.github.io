@@ -325,6 +325,21 @@ ORDER BY año ASC, sector ASC
     </a>
 </div>
 
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-violet-300 dark:hover:border-violet-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xl mb-4">
+            🔋
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Almacenamiento</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            Bombeo hidráulico y baterías: cuánta energía guardan y devuelven, dónde están y los proyectos con permiso de conexión frente al objetivo de 2030.
+        </p>
+    </div>
+    <a href="/energia-clima/almacenamiento" class="text-sm font-semibold text-violet-600 dark:text-violet-400 hover:underline inline-flex items-center">
+        Ver el almacenamiento →
+    </a>
+</div>
+
 </Grid>
 
 ---

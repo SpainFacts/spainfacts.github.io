@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: almacenamiento_mensual
+    description: "Energía turbinada/consumida por bombeo y entregada/cargada por baterías cada mes (balance REE, GWh)."
+    columns:
+      - name: mes
+        tests: [not_null, unique]
+  - name: almacenamiento_diario
+    description: "Energía y picos diarios de bombeo y baterías (ESIOS, desde finales de 2024)."
+    columns:
+      - name: fecha
+        tests: [not_null, unique]
+  - name: almacenamiento_potencia
+    description: "Potencia instalada de bombeo puro y baterías hibridadas por comunidad y mes (ESIOS)."
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+  - name: almacenamiento_acceso
+    description: "Capacidad de acceso a la red de transporte para almacenamiento por comunidad y fichero mensual (REE)."
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]

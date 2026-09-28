@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_almacenamiento
+    description: "Almacenamiento eléctrico (bombeo y baterías): REE REData, ESIOS y capacidad de acceso de REE (ingestion/almacenamiento.py)"
+    schema: raw
+    tables:
+      - name: ree_balance_almacenamiento
+        description: "Balance eléctrico nacional de REE, bloque Almacenamiento, mensual desde 2015 (MWh; consumos en negativo). Cifra oficial."
+      - name: esios_almacenamiento_diario
+        description: "ESIOS 2066/2065/2198/2199: energía diaria (MWh) y pico (MW) de turbinación/consumo de bombeo y entrega/carga de baterías, nacional; desde finales de 2024."
+      - name: esios_almacenamiento_potencia
+        description: "ESIOS 1476 (bombeo puro) y 2275 (baterías hibridadas, desde 2023-05): potencia instalada mensual por comunidad (MW)."
+      - name: ree_acceso_almacenamiento
+        description: "Capacidad de acceso a la red de transporte para almacenamiento (otorgada y en tramitación, MW) por nudo, una foto por fichero mensual de REE."

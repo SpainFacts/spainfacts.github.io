@@ -27,6 +27,7 @@ from dagster_dlt import DagsterDltResource, dlt_assets
 
 from ingestion.aemet import aemet
 from ingestion.alcaldes import alcaldes
+from ingestion.almacenamiento import almacenamiento
 from ingestion.bde import bde
 from ingestion.conprel import conprel
 from ingestion.hacienda_ccaa import hacienda_ccaa
@@ -139,6 +140,13 @@ def bde_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource)
 # matriculaciones y descarga el parque una vez al mes, cuando aparece uno nuevo.
 @dlt_assets(dlt_source=dgt(), dlt_pipeline=_pipeline_motherduck("dgt"), name="dgt", group_name="ingesta")
 def dgt_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Almacenamiento (bombeo y baterías): balance REE, ESIOS (necesita ESIOS_TOKEN)
+# y foto mensual de la capacidad de acceso de REE (solo está en línea la vigente).
+@dlt_assets(dlt_source=almacenamiento(), dlt_pipeline=_pipeline_motherduck("almacenamiento"), name="almacenamiento", group_name="ingesta")
+def almacenamiento_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -275,7 +283,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={
