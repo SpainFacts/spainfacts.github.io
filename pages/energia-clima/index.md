@@ -280,6 +280,23 @@ ORDER BY año ASC, sector ASC
     </a>
 </div>
 
+
+
+<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 transition-all">
+    <div>
+        <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl mb-4">
+            🗺️
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Centrales Eléctricas</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+            El mapa de todas las centrales de España por tecnología y potencia: las que funcionan, las que están en obras o en tramitación y las que ya cerraron, con su propietario y sus fechas.
+        </p>
+    </div>
+    <a href="/energia-clima/centrales" class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center">
+        Ver el mapa de centrales →
+    </a>
+</div>
+
 </Grid>
 
 ---

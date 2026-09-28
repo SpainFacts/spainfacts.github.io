@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: alcaldes_historia
+    description: >
+      Un periodo de alcalde por fila en cada municipio, 1979-hoy (mandatos cerrados
+      del SIL + alcalde vigente 2023-2027), con la familia política del seed
+      partidos_familias. `familia_inferida` marca las etiquetas genéricas del SIL
+      ("C. ELECTORAL", "OTROS") resueltas con la etiqueta de la misma persona en un
+      mandato cercano. `tramo_persona` / `tramo_familia` numeran los tramos
+      continuos de la misma persona / familia dentro del municipio.
+    columns:
+      - name: clave
+        description: "cod_mun-orden"
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: mandato
+        tests: [not_null]
+      - name: fecha_posesion
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]
+      - name: color
+        tests: [not_null]
+
+  - name: alcaldes_actuales
+    description: >
+      Alcalde vigente de cada municipio (mandato 2023-2027), con su familia política,
+      años seguidos en el cargo, años seguidos de su familia en la alcaldía y si la
+      familia cambió respecto al último alcalde del mandato anterior.
+    columns:
+      - name: cod_mun
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('stg_ine_municipios')
+                field: cod_mun
+              config:
+                severity: warn
+      - name: cod_prov
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('territorios_provincias')
+                field: cod_prov
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]
+      - name: color
+        tests: [not_null]
+      - name: fecha_posesion
+        tests: [not_null]
+      - name: anios_en_cargo
+        tests: [not_null]
+      - name: anios_partido
+        tests: [not_null]
+
+  - name: alcaldes_resumen_familias
+    description: "Alcaldías y población gobernada (último padrón) por familia política, mandato 2023-2027."
+    columns:
+      - name: familia
+        tests: [not_null, unique]
+      - name: n_ayuntamientos
+        tests: [not_null]
+
+  - name: alcaldes_familias_territorio
+    description: "Alcaldías (n) y población gobernada por familia en España ('pais'), cada comunidad ('ccaa') y provincia ('provincia')."
+    columns:
+      - name: clave
+        description: "nivel-cod-familia"
+        tests: [not_null, unique]
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+      - name: cod
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]

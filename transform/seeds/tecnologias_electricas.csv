@@ -1,0 +1,16 @@
+tecnologia,color,orden,renovable
+Solar fotovoltaica,#F2B705,1,true
+Solar termoeléctrica,#E07B00,2,true
+Eólica terrestre,#2E9E6B,3,true
+Eólica marina,#12615B,4,true
+Hidráulica,#3B7DD8,5,true
+Bombeo,#1D3F8F,6,false
+Bioenergía,#7F9C2C,7,true
+Residuos,#8C6A43,8,false
+Nuclear,#A04AA8,9,false
+Ciclo combinado,#E4572E,10,false
+Cogeneración,#F2968A,11,false
+Turbina de gas / motores,#B5656B,12,false
+Turbina de vapor (fuel / gas),#6D4447,13,false
+Carbón,#333333,14,false
+Otras,#9CA3AF,15,false

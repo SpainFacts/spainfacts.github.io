@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw_gem
+    description: "Global Integrated Power Tracker (Global Energy Monitor, CC BY 4.0), extracto de España cargado por dlt (ingestion/gem.py)"
+    schema: raw
+    tables:
+      - name: gem_centrales
+        description: >
+          Una fila por unidad o fase de central eléctrica (en operación, en
+          construcción, en tramitación, anunciada, paralizada, cancelada o
+          retirada), con coordenadas, potencia, propietario y fechas. Todas las
+          columnas llegan como texto. cod_prov/cod_ccaa/geo_asignacion se
+          calculan en la ingesta por punto en polígono contra static/geo/provincias.geojson.

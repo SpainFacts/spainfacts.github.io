@@ -1,0 +1,38 @@
+version: 2
+
+seeds:
+  - name: partidos_familias
+    description: >
+      Agrupación de las etiquetas de partido de los ficheros de alcaldes en familias
+      políticas (estatales y principales partidos autonómicos). `partido_original` es la
+      clave normalizada (mayúsculas, sin tildes, signos sustituidos por espacios: la
+      misma expresión que stg_alcaldes). `mandato` y `cod_mun`, normalmente vacíos,
+      acotan excepciones a un mandato o municipio concretos. `regla` es el número de la
+      regla regex que asignó la familia (0 = regla por defecto, 'excepción' = fila
+      manual). Reglas y criterios en partidos_familias.md. Las etiquetas que no estén
+      en el seed se tratan en dbt como 'Independientes y locales'.
+    config:
+      column_types:
+        partido_original: varchar
+        mandato: varchar
+        cod_mun: varchar
+        familia: varchar
+        siglas_familia: varchar
+        color: varchar
+        ambito: varchar
+        regla: varchar
+    tests:
+      - unique:
+          column_name: "partido_original || '|' || coalesce(mandato, '') || '|' || coalesce(cod_mun, '')"
+    columns:
+      - name: partido_original
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]
+      - name: color
+        tests: [not_null]
+      - name: ambito
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['estatal', 'autonómico', 'local']

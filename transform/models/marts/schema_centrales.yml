@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: centrales_unidades
+    description: "Una fila por unidad o fase de central eléctrica en España (Global Energy Monitor, Global Integrated Power Tracker, CC BY 4.0), con tecnología y estado en castellano y provincia por coordenadas"
+    columns:
+      - name: id_unidad
+        tests: [not_null, unique]
+      - name: id_central
+        tests: [not_null]
+      - name: tecnologia
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: "ref('tecnologias_electricas')"
+                field: tecnologia
+      - name: color
+        tests: [not_null]
+      - name: estado_grupo
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['En operación', 'En construcción', 'En tramitación', 'Anunciada', 'Paralizada', 'Cancelada', 'Retirada']
+      - name: cod_prov
+        description: "Código INE de provincia asignado por punto en polígono (static/geo/provincias.geojson)"
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: lat
+        tests: [not_null]
+      - name: lon
+        tests: [not_null]
+  - name: centrales
+    description: "Una fila por central (id de ubicación de GEM) y grupo de estado: potencia sumada de sus unidades, tecnología dominante, coordenadas y propietario principal"
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: nombre
+        tests: [not_null]
+      - name: tecnologia
+        tests: [not_null]
+      - name: color
+        tests: [not_null]
+      - name: estado_grupo
+        tests: [not_null]
+      - name: lat
+        tests: [not_null]
+      - name: lon
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+  - name: centrales_resumen
+    description: "Potencia (MW), unidades y centrales por tecnología y grupo de estado"
+    columns:
+      - name: tecnologia
+        tests: [not_null]
+      - name: estado_grupo
+        tests: [not_null]
+  - name: centrales_por_anio
+    description: "Potencia que entra en servicio (alta) y que se retira (baja) cada año por tecnología y comunidad autónoma, y potencia en construcción por año previsto"
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: tecnologia
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+  - name: centrales_ccaa
+    description: "Potencia (MW) por comunidad autónoma, tecnología y grupo de estado"
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: tecnologia
+        tests: [not_null]
+      - name: estado_grupo
+        tests: [not_null]

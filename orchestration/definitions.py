@@ -26,12 +26,15 @@ from dagster_dbt import DagsterDbtTranslator, DbtCliResource, DbtProject, dbt_as
 from dagster_dlt import DagsterDltResource, dlt_assets
 
 from ingestion.aemet import aemet
+from ingestion.alcaldes import alcaldes
 from ingestion.bde import bde
+from ingestion.conprel import conprel
 from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.destino import es_local
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
 from ingestion.eurostat import eurostat
+from ingestion.gem import gem
 from ingestion.incendios import incendios
 from ingestion.ine import ine
 from ingestion.miteco import miteco
@@ -130,6 +133,27 @@ def hacienda_ccaa_assets(context: AssetExecutionContext, dlt_resource: DagsterDl
     yield from dlt_resource.run(context=context)
 
 
+# Centrales de Global Energy Monitor: lee el extracto de España versionado en
+# ingestion/datos/ (se renueva a mano con cada edición del GIPT).
+@dlt_assets(dlt_source=gem(), dlt_pipeline=_pipeline_motherduck("gem"), name="gem", group_name="ingesta_mensual")
+def gem_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Alcaldes (Ministerio de Política Territorial): el actual cambia poco y el
+# histórico nunca, así que basta con la carga mensual.
+@dlt_assets(dlt_source=alcaldes(), dlt_pipeline=_pipeline_motherduck("alcaldes"), name="alcaldes", group_name="ingesta_mensual")
+def alcaldes_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Liquidaciones de los ayuntamientos (Hacienda, CONPREL): ~290 Excel y 3 bases
+# Access (~14 min) de un dato anual; va en el job mensual.
+@dlt_assets(dlt_source=conprel(), dlt_pipeline=_pipeline_motherduck("conprel"), name="conprel", group_name="ingesta_mensual")
+def conprel_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
@@ -200,7 +224,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

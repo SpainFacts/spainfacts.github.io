@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_conprel
+    description: "Liquidación de los presupuestos de las entidades locales (Ministerio de Hacienda, SGFAL, base de datos CONPREL), cargada por dlt (ingestion/conprel.py). Importes en euros; códigos de municipio INE (provincia 2 + municipio 3)."
+    schema: raw
+    tables:
+      - name: conprel_liquidaciones
+        description: "Una fila por ayuntamiento (tipo A00; Ceuta y Melilla Z00 solo en el avance) y ejercicio, en formato ancho: derechos reconocidos netos por capítulo (ingresos_c1..c9, ingresos_total), obligaciones reconocidas netas por capítulo (gastos_c1..c9, gastos_total) y por área de gasto (gasto_area_0/1/2/3/4/9, gasto_area_total). Definitiva desde 2010 + avance del último año (provisional = true). estado_informacion: C completa, E solo clasificación económica, N sin datos (importes a 0 en el fichero). Hasta 2012 no existe el capítulo 5 de gastos (se carga 0)."
+      - name: conprel_liquidaciones_diputaciones
+        description: "Igual que conprel_liquidaciones para diputaciones provinciales, cabildos y consells insulares (tipo D00); cod_mun = provincia + '000' o código propio de la entidad"
+      - name: conprel_politicas
+        description: "Obligaciones reconocidas netas consolidadas de cada ayuntamiento por política de gasto (2 dígitos de la clasificación por programas, Orden EHA/3565/2008), de la base de datos Access de CONPREL (tb_funcional_cons), últimos ejercicios con liquidación definitiva"
+      - name: conprel_politicas_nombres
+        description: "Nombres de áreas (nivel 'area', 1 dígito) y políticas de gasto (nivel 'politica', 2 dígitos), de tb_cuentasProgramas del último año leído"

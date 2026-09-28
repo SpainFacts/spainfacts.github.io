@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: municipios_cuentas
+    description: "Liquidación del presupuesto de cada ayuntamiento por ejercicio (Hacienda, CONPREL), en euros: ingresos (derechos reconocidos netos) y gastos (obligaciones reconocidas netas) por capítulo, gasto por área, saldo no financiero y cifras por habitante. Una fila por municipio INE y año; importes nulos cuando tiene_datos = false (el ayuntamiento no remitió la liquidación). provisional = avance del último año."
+    columns:
+      - name: clave
+        description: "cod_mun-anio"
+        tests: [not_null, unique]
+      - name: cod_mun
+        description: "Código INE de municipio (5 dígitos)"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: provisional
+        tests: [not_null]
+      - name: municipio
+        tests: [not_null]
+      - name: tiene_datos
+        tests: [not_null]
+      - name: estado_informacion
+        description: "C completa, E solo clasificación económica, N sin datos (otros códigos ocasionales se tratan como con datos)"
+      - name: poblacion
+        description: "Padrón INE del año (o la de CONPREL si falta)"
+      - name: saldo_no_financiero
+        description: "Ingresos no financieros (cap. 1-7) menos gastos no financieros (cap. 1-7): capacidad (+) o necesidad (-) de financiación presupuestaria"
+      - name: gasto_hab
+        description: "gastos_total / poblacion (euros por habitante)"
+      - name: ingreso_hab
+        description: "ingresos_total / poblacion (euros por habitante)"
+  - name: municipios_politicas
+    description: "Obligaciones reconocidas netas consolidadas de cada ayuntamiento por política de gasto (2 dígitos), en euros y por habitante; últimos ejercicios con liquidación definitiva (Hacienda, CONPREL, base de datos Access)"
+    columns:
+      - name: clave
+        description: "cod_mun-anio-cod_politica"
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: cod_area
+        tests: [not_null]
+      - name: cod_politica
+        tests: [not_null]
+      - name: politica_nombre
+        tests: [not_null]
+      - name: importe
+        tests: [not_null]
+  - name: municipios_cuentas_medias
+    description: "Mediana y media ponderada de gasto e ingreso por habitante, y mediana por habitante de cada capítulo y área, por año y tramo de población (solo municipios con datos); tramo 'Todos' = total"
+    columns:
+      - name: clave
+        description: "anio-tramo_poblacion"
+        tests: [not_null, unique]
+      - name: anio
+        tests: [not_null]
+      - name: tramo_poblacion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Todos', '<1.000', '1.000-5.000', '5.000-20.000', '20.000-50.000', '50.000-100.000', '100.000-500.000', '>500.000']
+      - name: tramo_orden
+        tests: [not_null]
+      - name: n_municipios
+        tests: [not_null]

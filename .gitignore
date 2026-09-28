@@ -28,3 +28,6 @@ transform/logs/
 *.duckdb
 *.duckdb.wal
 .claude/
+
+# Descargas completas de Global Energy Monitor (solo se versiona el extracto de España)
+data/gem/

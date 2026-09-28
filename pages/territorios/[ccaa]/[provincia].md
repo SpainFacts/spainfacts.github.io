@@ -35,7 +35,8 @@ antes AS (
 )
 SELECT
     a.cod_mun, a.municipio, a.poblacion,
-    100.0 * (a.poblacion - b.poblacion_antes) / nullif(b.poblacion_antes, 0) AS crecimiento
+    100.0 * (a.poblacion - b.poblacion_antes) / nullif(b.poblacion_antes, 0) AS crecimiento,
+    '/territorios/municipios?m=' || a.cod_mun AS enlace
 FROM actual a
 LEFT JOIN antes b USING (cod_mun)
 ORDER BY a.poblacion DESC
@@ -113,7 +114,7 @@ FROM ${municipios}
     ]}
 />
 
-<DataTable data={municipios} search=true rows=15>
+<DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Municipio" />
     <Column id=poblacion title="Población" fmt=num0 />
     <Column id=crecimiento title="Crecimiento 10 años (%)" fmt=num1 contentType=delta />

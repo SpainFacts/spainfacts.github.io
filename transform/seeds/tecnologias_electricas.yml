@@ -1,0 +1,22 @@
+version: 2
+
+seeds:
+  - name: tecnologias_electricas
+    description: >
+      Tecnologías de generación en castellano con su color (el mismo en todos los
+      mapas y gráficos de centrales), su orden de presentación y si son
+      renovables. El bombeo no cuenta como renovable (es almacenamiento, como en REE); los residuos urbanos
+      se cuentan como no renovables (REE reparte al 50 %: aquí se simplifica).
+    config:
+      column_types:
+        tecnologia: varchar
+        color: varchar
+        orden: integer
+        renovable: boolean
+    columns:
+      - name: tecnologia
+        tests: [not_null, unique]
+      - name: color
+        tests: [not_null, unique]
+      - name: orden
+        tests: [not_null, unique]

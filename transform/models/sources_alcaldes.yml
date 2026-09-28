@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_alcaldes
+    description: "Alcaldes de todos los municipios (Ministerio de Política Territorial y Memoria Democrática), cargados por dlt (ingestion/alcaldes.py)"
+    schema: raw
+    tables:
+      - name: alcaldes_actuales
+        description: >
+          Alcalde vigente de cada municipio en el mandato 2023-2027 (concejales.redsara.es,
+          getAlcaldesLegislatura). Foto del momento de la carga: los cambios a mitad de
+          mandato aparecen con su fecha de posesión, pero no los alcaldes intermedios.
+      - name: alcaldes_historico
+        description: >
+          Alcaldes de los mandatos cerrados 1979-1983 a 2019-2023 (SIL, un Excel por
+          mandato), incluidos los cambios a mitad de mandato. `codigo_ine` es null en
+          1991-2007, cuando el fichero trae el código de 5 dígitos sin dígito de control.
