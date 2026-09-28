@@ -514,6 +514,39 @@ LIMIT 1
 SELECT salario_publico, salario_privado FROM mother.empleo_salarios_ccaa WHERE cod_ccaa = '${terr[0]?.cod}'
 ```
 
+```sql crimen_ccaa
+SELECT
+    b.anio,
+    b.tasa_1000 AS tasa,
+    b.infracciones,
+    e.tasa_1000 AS tasa_espana
+FROM mother.crimen_balance b
+JOIN mother.crimen_balance e ON e.nivel = 'pais' AND e.anio = b.anio AND e.categoria = b.categoria
+WHERE b.nivel = 'ccaa' AND b.cod = '${terr[0]?.cod}' AND b.categoria = 'Total infracciones penales'
+ORDER BY b.anio
+```
+
+{#if crimen_ccaa.length > 0}
+
+## Seguridad
+
+<LineChart
+    data={crimen_ccaa}
+    x=anio
+    y={['tasa', 'tasa_espana']}
+    yFmt=num1
+    xFmt="####"
+    seriesLabels={{tasa: terr[0]?.nombre, tasa_espana: 'España'}}
+    colorPalette={['#b91c1c', '#94a3b8']}
+    legend=true
+    yAxisTitle="por 1.000 habitantes"
+    title="Infracciones penales conocidas por 1.000 habitantes"
+/>
+
+<p class="text-xs text-gray-500">{formatNumber(crimen_ccaa.slice(-1)[0]?.infracciones, 0)} infracciones conocidas en {crimen_ccaa.slice(-1)[0]?.anio} (Ministerio del Interior; incluye policías autonómicas). 2020 es el año del confinamiento. Detalle por tipo de delito y municipio en <a href="/sociedad/criminalidad">Criminalidad</a>.</p>
+
+{/if}
+
 {#if empleo.length > 0}
 
 ## Empleo público

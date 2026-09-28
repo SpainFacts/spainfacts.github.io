@@ -1,0 +1,120 @@
+nivel,territorio_ses,cod
+ccaa,ANDALUCÍA,01
+ccaa,ARAGÓN,02
+ccaa,ASTURIAS (PRINCIPADO DE),03
+ccaa,BALEARS (ILLES),04
+ccaa,CANARIAS,05
+ccaa,CANTABRIA,06
+ccaa,CASTILLA - LA MANCHA,08
+ccaa,CASTILLA Y LEON,07
+ccaa,CASTILLA Y LEÓN,07
+ccaa,CATALUÑA,09
+ccaa,CIUDAD AUTÓNOMA DE CEUTA,18
+ccaa,CIUDAD AUTÓNOMA DE MELILLA,19
+ccaa,COMUNITAT VALENCIANA,10
+ccaa,EXTREMADURA,11
+ccaa,GALICIA,12
+ccaa,MADRID (COMUNIDAD DE),13
+ccaa,MURCIA (REGION DE),14
+ccaa,MURCIA (REGIÓN DE),14
+ccaa,NAVARRA (COMUNIDAD FORAL DE),15
+ccaa,PAÍS VASCO,16
+ccaa,RIOJA (LA),17
+ccaa,TOTAL NACIONAL,00
+provincia,ALBACETE,02
+provincia,ALICANTE/ALACANT,03
+provincia,ALMERÍA,04
+provincia,ARABA/ÁLAVA,01
+provincia,Albacete,02
+provincia,Alicante/Alacant,03
+provincia,Almería,04
+provincia,Araba/Álava,01
+provincia,Asturias,33
+provincia,BADAJOZ,06
+provincia,BARCELONA,08
+provincia,BIZKAIA,48
+provincia,BURGOS,09
+provincia,Badajoz,06
+provincia,Balears (Illes),07
+provincia,Barcelona,08
+provincia,Bizkaia,48
+provincia,Burgos,09
+provincia,CASTELLÓN/CASTELLÓ,12
+provincia,CIUDAD REAL,13
+provincia,CORUÑA (A),15
+provincia,CUENCA,16
+provincia,Cantabria,39
+provincia,Castellón/Castelló,12
+provincia,Ceuta,51
+provincia,Ciudad Real,13
+provincia,Coruña (A),15
+provincia,Cuenca,16
+provincia,CÁCERES,10
+provincia,CÁDIZ,11
+provincia,CÓRDOBA,14
+provincia,Cáceres,10
+provincia,Cádiz,11
+provincia,Córdoba,14
+provincia,GIPUZKOA,20
+provincia,GIRONA,17
+provincia,GRANADA,18
+provincia,GUADALAJARA,19
+provincia,Gipuzkoa,20
+provincia,Girona,17
+provincia,Granada,18
+provincia,Guadalajara,19
+provincia,HUELVA,21
+provincia,HUESCA,22
+provincia,Huelva,21
+provincia,Huesca,22
+provincia,JAÉN,23
+provincia,Jaén,23
+provincia,LEÓN,24
+provincia,LLEIDA,25
+provincia,LUGO,27
+provincia,León,24
+provincia,Lleida,25
+provincia,Lugo,27
+provincia,Madrid,28
+provincia,Melilla,52
+provincia,Murcia,30
+provincia,MÁLAGA,29
+provincia,Málaga,29
+provincia,Navarra,31
+provincia,OURENSE,32
+provincia,Ourense,32
+provincia,PALENCIA,34
+provincia,PALMAS (LAS),35
+provincia,PONTEVEDRA,36
+provincia,Palencia,34
+provincia,Palmas (Las),35
+provincia,Pontevedra,36
+provincia,Rioja (La),26
+provincia,SALAMANCA,37
+provincia,SANTA CRUZ DE TENERIFE,38
+provincia,SEGOVIA,40
+provincia,SEVILLA,41
+provincia,SORIA,42
+provincia,Salamanca,37
+provincia,Santa Cruz de Tenerife,38
+provincia,Segovia,40
+provincia,Sevilla,41
+provincia,Soria,42
+provincia,TARRAGONA,43
+provincia,TERUEL,44
+provincia,TOLEDO,45
+provincia,Tarragona,43
+provincia,Teruel,44
+provincia,Toledo,45
+provincia,Total Nacional,00
+provincia,VALENCIA/VALÈNCIA,46
+provincia,VALLADOLID,47
+provincia,Valencia/València,46
+provincia,Valladolid,47
+provincia,ZAMORA,49
+provincia,ZARAGOZA,50
+provincia,Zamora,49
+provincia,Zaragoza,50
+provincia,ÁVILA,05
+provincia,Ávila,05
+ccaa,NACIONAL,00

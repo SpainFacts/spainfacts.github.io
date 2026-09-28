@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_criminalidad
+    description: "Criminalidad: Portal Estadístico de Criminalidad del Ministerio del Interior (ingestion/criminalidad.py) y Estadística de Condenados del INE (ingestion/ine.py)"
+    schema: raw
+    tables:
+      - name: ses_criminalidad_anual
+        description: "Infracciones penales conocidas por año (2010-), comunidad o provincia y tipología (44). Incluye Mossos, Ertzaintza y Policía Foral."
+      - name: ses_balance_municipios
+        description: "Balance de Criminalidad: infracciones conocidas por periodo (año completo desde 2019 y el acumulado del último trimestre), territorio y tipología; municipios de más de 20.000 habitantes con código INE."
+      - name: ine_condenados_ccaa
+        description: "INE tabla 25704: condenados adultos por comunidad, sexo y nacionalidad (española/extranjera), anual desde 2013."
+      - name: ine_condenados_delitos_nacionalidad
+        description: "INE tabla 49050: delitos por los que se condena, por tipo de delito y nacionalidad del condenado (España)."
+      - name: ine_poblacion_nacionalidad
+        description: "INE tabla 56942: población a 1 de enero por comunidad, grupo quinquenal de edad, nacionalidad y sexo."

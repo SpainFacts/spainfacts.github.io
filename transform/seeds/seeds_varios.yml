@@ -29,3 +29,7 @@ seeds:
     columns:
       - name: provincia_bepsap
         tests: [not_null, unique]
+  - name: ses_territorios
+    description: "Nombre de comunidad o provincia tal como lo escribe el Portal Estadístico de Criminalidad (Ministerio del Interior) -> código INE (00 = España). Generado a partir de los nombres cargados; los no territoriales (extranjero, desconocida) no figuran."
+    config:
+      column_types: {nivel: varchar, territorio_ses: varchar, cod: varchar}

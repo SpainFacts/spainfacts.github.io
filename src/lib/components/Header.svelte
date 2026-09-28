@@ -16,6 +16,7 @@
         { href: "/cuentas-publicas", label: "Cuentas Públicas" },
         { href: "/energia-clima", label: "Energía & Clima" },
         { href: "/movilidad", label: "Movilidad" },
+        { href: "/sociedad", label: "Sociedad" },
         { href: "/indicadores", label: "Indicadores" },
         { href: "/transparencia", label: "Transparencia" },
         { href: "/varios", label: "Varios" },

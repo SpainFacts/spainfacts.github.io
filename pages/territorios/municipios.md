@@ -365,6 +365,52 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
 
 {/if}
 
+```sql crimen_mun
+WITH u AS (SELECT max(anio) AS anio FROM mother.crimen_balance WHERE nivel = 'municipio')
+SELECT
+    b.anio,
+    max(b.infracciones) FILTER (WHERE b.categoria = 'Total infracciones penales') AS infracciones,
+    max(b.tasa_1000) FILTER (WHERE b.categoria = 'Total infracciones penales') AS tasa,
+    max(b.tasa_1000) FILTER (WHERE b.categoria = 'Robos con violencia o intimidación') AS robos_violencia,
+    max(b.tasa_1000) FILTER (WHERE b.categoria = 'Robos con fuerza en domicilios') AS robos_domicilios,
+    (SELECT tasa_1000 FROM mother.crimen_balance e WHERE e.nivel = 'pais' AND e.categoria = 'Total infracciones penales' AND e.anio = b.anio) AS tasa_espana
+FROM mother.crimen_balance b
+JOIN u ON b.anio = u.anio
+WHERE b.nivel = 'municipio' AND b.cod = '${inputs.municipio}'
+GROUP BY b.anio
+```
+
+{#if crimen_mun.length > 0 && crimen_mun[0]?.infracciones != null}
+
+## Seguridad
+
+<Grid cols=3>
+    <KpiCard
+        title="Infracciones penales conocidas"
+        value={crimen_mun[0]?.tasa}
+        formattedValue={formatNumber(crimen_mun[0]?.tasa, 1)}
+        period="por 1.000 habitantes en {crimen_mun[0]?.anio} · España: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
+        source="Ministerio del Interior"
+        href="/sociedad/criminalidad"
+    />
+    <KpiCard
+        title="Robos con violencia"
+        value={crimen_mun[0]?.robos_violencia}
+        formattedValue={formatNumber(crimen_mun[0]?.robos_violencia, 2)}
+        period="por 1.000 habitantes"
+    />
+    <KpiCard
+        title="Robos en domicilios"
+        value={crimen_mun[0]?.robos_domicilios}
+        formattedValue={formatNumber(crimen_mun[0]?.robos_domicilios, 2)}
+        period="por 1.000 habitantes"
+    />
+</Grid>
+
+<p class="text-xs text-gray-500">{formatNumber(crimen_mun[0]?.infracciones, 0)} infracciones penales conocidas por las fuerzas de seguridad en el término municipal (Balance de Criminalidad, municipios de más de 20.000 habitantes). En municipios turísticos o con aeropuerto la tasa por vecino empadronado sale alta porque muchas víctimas son visitantes.</p>
+
+{/if}
+
 ```sql alcalde
 SELECT
     lower(alcalde) AS alcalde,

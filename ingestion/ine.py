@@ -38,6 +38,9 @@ TABLAS = {
     # Salarios:
     "ine_epa_salarios_deciles": "66250",  # salario medio mensual por decil, asalariados públicos y privados (anual)
     "ine_ees_salarios_control": "36887",  # Encuesta Cuatrienal de Estructura Salarial 2022: control público/privado
+    # Criminalidad (Estadística de Condenados, adultos, anual desde 2013):
+    "ine_condenados_ccaa": "25704",  # condenados por comunidad, sexo y nacionalidad (española/extranjera)
+    "ine_condenados_delitos_nacionalidad": "49050",  # delitos e infracciones por nacionalidad del condenado
 }
 
 
@@ -205,6 +208,38 @@ def ecepov_calefaccion():
         }
 
 
+POBLACION_NACIONALIDAD_CSV = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/56942.csv"
+
+
+@dlt.resource(name="ine_poblacion_nacionalidad", write_disposition="replace")
+def poblacion_nacionalidad():
+    """Población residente por comunidad, grupo quinquenal de edad, nacionalidad
+    (española, extranjera y grandes grupos) y sexo (INE 56942, Estadística Continua
+    de Población). CSV de ~130 MB: se lee en streaming y solo se guarda el dato a
+    1 de enero de cada año (la cifra anual oficial)."""
+    with requests.get(POBLACION_NACIONALIDAD_CSV, stream=True, timeout=600) as r:
+        r.raise_for_status()
+        r.encoding = "utf-8-sig"
+        lector = csv.reader(r.iter_lines(decode_unicode=True), delimiter=";")
+        next(lector)
+        for fila in lector:
+            if len(fila) != 6:
+                continue  # líneas vacías del CSV
+            territorio, edad, nacionalidad, sexo, periodo, total = fila
+            m = _ANIO_ENERO.match(periodo.strip())
+            if not m or "UE28" in nacionalidad or "menos UE28" in nacionalidad:
+                continue  # trimestres intermedios y los agregados con Reino Unido (duplican a los UE27)
+            territorio = territorio.strip()
+            yield {
+                "cod_ccaa": "00" if territorio == "Total Nacional" else territorio[:2],
+                "edad": edad.strip(),
+                "nacionalidad": nacionalidad.strip(),
+                "sexo": sexo.strip(),
+                "anio": int(m.group(1)),
+                "poblacion": int(total.replace(".", "")) if total.strip() not in ("", "..") else None,
+            }
+
+
 @dlt.source(name="ine")
 def ine():
     return [_tabla_resource(nombre, tabla_id) for nombre, tabla_id in TABLAS.items()] + [
@@ -212,4 +247,5 @@ def ine():
         poblacion_municipios,
         municipios,
         ecepov_calefaccion,
+        poblacion_nacionalidad,
     ]

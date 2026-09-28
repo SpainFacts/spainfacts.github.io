@@ -30,6 +30,7 @@ from ingestion.alcaldes import alcaldes
 from ingestion.almacenamiento import almacenamiento
 from ingestion.bde import bde
 from ingestion.conprel import conprel
+from ingestion.criminalidad import criminalidad
 from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.hacienda_transparencia import hacienda_transparencia
 from ingestion.destino import es_local
@@ -213,6 +214,13 @@ def empleo_publico_assets(context: AssetExecutionContext, dlt_resource: DagsterD
     yield from dlt_resource.run(context=context)
 
 
+# Criminalidad (Ministerio del Interior): serie anual y Balance trimestral por
+# municipio; basta con el job mensual.
+@dlt_assets(dlt_source=criminalidad(), dlt_pipeline=_pipeline_motherduck("criminalidad"), name="criminalidad", group_name="ingesta_mensual")
+def criminalidad_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
@@ -283,7 +291,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={
