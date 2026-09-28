@@ -1,6 +1,6 @@
 ---
 title: Varios
-description: Contenidos complementarios: indicadores, mapa de la población y observatorios públicos.
+description: "Contenidos complementarios: indicadores, mapa de la población y observatorios públicos."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
