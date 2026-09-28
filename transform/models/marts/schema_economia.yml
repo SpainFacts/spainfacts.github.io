@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: economia_pib_trimestral
+    description: "PIB y componentes de la demanda por trimestre (Eurostat namq_10_gdp, desestacionalizados): nominal, real en euros del último año completo, tasa interanual, peso sobre el PIB y euros reales por habitante en ritmo anual."
+  - name: economia_pib_per_capita
+    description: "PIB por habitante: España en euros reales del último año y comparación en PPS (UE27 = 100) con UE, Alemania, Francia, Italia y Portugal (Eurostat nama_10_pc)."
+  - name: economia_sectores
+    description: "Ramas NACE A10 por año: VAB real, crecimiento real, peso en el VAB, ocupados y asalariados, ocupados por 1.000 hab., peso en el empleo y productividad real (Eurostat nama_10_a10 y nama_10_a10_e)."
+  - name: economia_salarios
+    description: "Coste salarial por trabajador y mes por trimestre, jornada y sector, nominal y real, con variación interanual nominal y real (INE ETCL, tabla 6038)."
+  - name: economia_salarios_anual
+    description: "Salario medio mensual por año (media de los cuatro trimestres de la ETCL), nominal y real, y su crecimiento anual."

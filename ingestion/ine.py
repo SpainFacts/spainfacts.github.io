@@ -54,6 +54,8 @@ TABLAS = {
     "ine_emigraciones_anual": "69702",  # emigraciones con destino al extranjero por sexo y edad
     "ine_saldos_migratorios": "69758",  # saldos por nacionalidad y tipo (exterior/interior), España
     "ine_saldos_migratorios_ccaa": "69762",  # saldos por comunidad, edad, nacionalidad (española/extranjera) y tipo
+    # Salarios: Encuesta Trimestral de Coste Laboral (ETCL), desde 2008
+    "ine_coste_salarial": "6038",  # coste salarial por trabajador y mes por jornada y sector (industria, construcción, servicios)
 }
 
 

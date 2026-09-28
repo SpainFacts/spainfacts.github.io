@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_economia
+    description: "Macroeconomía: contabilidad nacional de Eurostat (ingestion/eurostat.py) y salarios de la ETCL del INE (ingestion/ine.py)"
+    schema: raw
+    tables:
+      - name: eurostat_pib_trimestral
+        description: "namq_10_gdp: PIB y componentes de la demanda (B1GQ, P3, P3_S13, P31_S14_S15, P51G, P6, P7), desestacionalizados, en CLV10_MEUR, CP_MEUR y CLV_PCH_SM, desde 1995."
+      - name: eurostat_pib_per_capita
+        description: "nama_10_pc: PIB por habitante en volumen (CLV10_EUR_HAB) y en PPS (CP_PPS_EU27_2020_HAB) de ES, UE27, DE, FR, IT y PT."
+      - name: eurostat_vab_sectores
+        description: "nama_10_a10: valor añadido bruto por rama NACE A10 (CLV10_MEUR y CP_MEUR), desde 1995."
+      - name: eurostat_empleo_sectores
+        description: "nama_10_a10_e: ocupados (EMP_DC) y asalariados (SAL_DC) por rama NACE A10, miles de personas."
+      - name: ine_coste_salarial
+        description: "INE tabla 6038 (ETCL): coste salarial por trabajador y mes por jornada, sector y componente, trimestral desde 2008."

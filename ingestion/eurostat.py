@@ -219,5 +219,43 @@ def eurostat():
         for coords, valor in parse_json_stat_series(_json("demo_mlexpec?geo=ES&age=Y_LT1&unit=YR")):
             yield {"anio": coords.get("time"), "sexo": coords.get("sex"), "anios": valor}
 
+    # --- Economía --------------------------------------------------------------
+    @dlt.resource(name="eurostat_pib_trimestral", write_disposition="replace")
+    def pib_trimestral():
+        """namq_10_gdp: PIB y componentes de la demanda trimestrales, desestacionalizados (SCA):
+        volumen encadenado (CLV10_MEUR), precios corrientes (CP_MEUR) y tasa interanual (CLV_PCH_SM)."""
+        componentes = ["B1GQ", "P3", "P3_S13", "P31_S14_S15", "P51G", "P6", "P7"]
+        unidades = ["CLV10_MEUR", "CP_MEUR", "CLV_PCH_SM"]
+        consulta = ("namq_10_gdp?geo=ES&s_adj=SCA" + "".join(f"&na_item={x}" for x in componentes)
+                    + "".join(f"&unit={x}" for x in unidades))
+        for coords, valor in parse_json_stat_series(_json(consulta)):
+            yield {"trimestre": coords.get("time"), "componente": coords.get("na_item"), "unidad": coords.get("unit"), "valor": valor}
+
+    @dlt.resource(name="eurostat_pib_per_capita", write_disposition="replace")
+    def pib_per_capita():
+        """nama_10_pc: PIB por habitante en volumen (euros de 2010) y en paridad de poder de compra
+        (PPS, para comparar países), España y países de referencia."""
+        paises = ["ES", "EU27_2020", "DE", "FR", "IT", "PT"]
+        consulta = ("nama_10_pc?na_item=B1GQ&unit=CLV10_EUR_HAB&unit=CP_PPS_EU27_2020_HAB"
+                    + "".join(f"&geo={x}" for x in paises))
+        for coords, valor in parse_json_stat_series(_json(consulta)):
+            # float(): Eurostat mezcla enteros y decimales y dlt crearía una columna variante
+            yield {"anio": coords.get("time"), "pais": coords.get("geo"), "unidad": coords.get("unit"),
+                   "valor": float(valor) if valor is not None else None}
+
+    @dlt.resource(name="eurostat_vab_sectores", write_disposition="replace")
+    def vab_sectores():
+        """nama_10_a10: valor añadido bruto por rama (NACE A10), en volumen y a precios corrientes."""
+        consulta = "nama_10_a10?geo=ES&na_item=B1G&unit=CLV10_MEUR&unit=CP_MEUR"
+        for coords, valor in parse_json_stat_series(_json(consulta)):
+            yield {"anio": coords.get("time"), "rama": coords.get("nace_r2"), "unidad": coords.get("unit"), "valor": valor}
+
+    @dlt.resource(name="eurostat_empleo_sectores", write_disposition="replace")
+    def empleo_sectores():
+        """nama_10_a10_e: ocupados (EMP_DC) y asalariados (SAL_DC) por rama, miles de personas."""
+        consulta = "nama_10_a10_e?geo=ES&unit=THS_PER&na_item=EMP_DC&na_item=SAL_DC"
+        for coords, valor in parse_json_stat_series(_json(consulta)):
+            yield {"anio": coords.get("time"), "rama": coords.get("nace_r2"), "concepto": coords.get("na_item"), "miles": valor}
+
     return [deuda, balance, gastos, ingresos, subsectores, pib, poblacion, balance_energetico, hogares_usos, bombas_calor,
-            esperanza_vida]
+            esperanza_vida, pib_trimestral, pib_per_capita, vab_sectores, empleo_sectores]
