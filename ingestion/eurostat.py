@@ -213,4 +213,11 @@ def eurostat():
             yield {"anio": coords.get("time"), "tecnologia": coords.get("hp_tech"),
                    "tecnologia_nombre": etiquetas.get(coords.get("hp_tech")), "unidad": coords.get("unit"), "valor": valor}
 
-    return [deuda, balance, gastos, ingresos, subsectores, pib, poblacion, balance_energetico, hogares_usos, bombas_calor]
+    @dlt.resource(name="eurostat_esperanza_vida", write_disposition="replace")
+    def esperanza_vida():
+        """demo_mlexpec: esperanza de vida al nacer en España por sexo (el INE solo la da por comunidad)."""
+        for coords, valor in parse_json_stat_series(_json("demo_mlexpec?geo=ES&age=Y_LT1&unit=YR")):
+            yield {"anio": coords.get("time"), "sexo": coords.get("sex"), "anios": valor}
+
+    return [deuda, balance, gastos, ingresos, subsectores, pib, poblacion, balance_energetico, hogares_usos, bombas_calor,
+            esperanza_vida]

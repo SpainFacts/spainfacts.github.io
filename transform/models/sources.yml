@@ -19,3 +19,11 @@ sources:
         description: "Reserva hídrica semanal por embalse (MITECO, BD-Embalses 1988-hoy)"
       - name: ine_ecepov_calefaccion
         description: "INE ECEPOV 2021 (tabla 56784): viviendas principales con calefacción según combustible, por provincia (cod_prov '00' = España), tipo de edificio, año de construcción y tamaño del municipio."
+      - name: ine_esperanza_vida_ccaa
+        description: "INE tabla 1448: esperanza de vida al nacer por comunidad y sexo, anual desde 1975."
+      - name: ine_esperanza_vida_provincia
+        description: "INE tabla 1485: esperanza de vida al nacer por provincia y sexo."
+      - name: ine_defunciones_semanales
+        description: "INE tabla 35177 (EDeS): defunciones semanales por comunidad de residencia desde 1975."
+      - name: ine_defunciones_causas
+        description: "INE tabla 9936: defunciones por causa (lista reducida), sexo y provincia de residencia (cod_prov '00' = España, '99' = extranjero), anual desde 1980."

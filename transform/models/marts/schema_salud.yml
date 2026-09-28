@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: salud_esperanza_vida
+    description: "Esperanza de vida al nacer por España (Eurostat), comunidad y provincia (INE) y sexo."
+    columns:
+      - name: cod
+        tests: [not_null]
+  - name: salud_causas_muerte
+    description: "Defunciones por causa (lista reducida y capítulos CIE-10), sexo, año y territorio de residencia, con tasa bruta por 100.000 hab."
+  - name: salud_mortalidad_semanal
+    description: "Defunciones semanales por comunidad y España y exceso sobre la media 2015-2019 de la misma semana."

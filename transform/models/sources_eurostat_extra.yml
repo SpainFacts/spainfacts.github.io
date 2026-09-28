@@ -17,3 +17,5 @@ sources:
         description: "nrg_d_hhq: energía de los hogares por uso final y combustible, TJ, desde 2010."
       - name: eurostat_bombas_calor
         description: "nrg_inf_hptc: potencia térmica instalada (MW) de bombas de calor por tecnología."
+      - name: eurostat_esperanza_vida
+        description: "demo_mlexpec: esperanza de vida al nacer en España por sexo (T/M/F)."

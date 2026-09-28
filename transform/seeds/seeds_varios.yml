@@ -33,3 +33,10 @@ seeds:
     description: "Nombre de comunidad o provincia tal como lo escribe el Portal Estadístico de Criminalidad (Ministerio del Interior) -> código INE (00 = España). Generado a partir de los nombres cargados; los no territoriales (extranjero, desconocida) no figuran."
     config:
       column_types: {nivel: varchar, territorio_ses: varchar, cod: varchar}
+  - name: ine_provincias_nombres
+    description: "Nombre de provincia tal como lo escriben algunas tablas del INE (p. ej. esperanza de vida, 1485) -> código INE de provincia."
+    config:
+      column_types: {nombre_ine: varchar, cod_prov: varchar}
+    columns:
+      - name: nombre_ine
+        tests: [not_null, unique]

@@ -36,6 +36,10 @@ Cómo vivimos en España: la seguridad, la salud y la población que llega de fu
         <p class="text-lg font-bold text-gray-900 dark:text-white">🚨 Criminalidad</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Delitos conocidos por tipo, comunidad, provincia y municipio desde 2010, cibercriminalidad y condenados por nacionalidad con su contexto.</p>
     </a>
+    <a href="/sociedad/salud" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white">🩺 Salud</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Esperanza de vida por comunidad y provincia, causas de muerte, suicidios, tráfico y exceso de mortalidad semana a semana.</p>
+    </a>
 </div>
 
 <LastRefreshed prefix="Datos actualizados" />

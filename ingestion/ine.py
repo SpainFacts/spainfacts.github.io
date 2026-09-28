@@ -41,6 +41,10 @@ TABLAS = {
     # Criminalidad (Estadística de Condenados, adultos, anual desde 2013):
     "ine_condenados_ccaa": "25704",  # condenados por comunidad, sexo y nacionalidad (española/extranjera)
     "ine_condenados_delitos_nacionalidad": "49050",  # delitos e infracciones por nacionalidad del condenado
+    # Salud:
+    "ine_esperanza_vida_ccaa": "1448",  # esperanza de vida al nacer por comunidad y sexo, anual desde 1975
+    "ine_esperanza_vida_provincia": "1485",  # ídem por provincia
+    "ine_defunciones_semanales": "35177",  # defunciones semanales por comunidad (EDeS), para el exceso de mortalidad
 }
 
 
@@ -180,16 +184,22 @@ def _sin_tildes(texto: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFD", texto) if unicodedata.category(c) != "Mn").lower().strip()
 
 
-@dlt.resource(name="ine_ecepov_calefaccion", write_disposition="replace")
-def ecepov_calefaccion():
-    """Encuesta de Características Esenciales de la Población y las Viviendas 2021
-    (INE, tabla 56784): viviendas principales con calefacción según el combustible,
-    por provincia, tipo de edificio, año de construcción y tamaño del municipio."""
+def _codigos_provincia() -> dict[str, str]:
+    """Nombre de provincia sin tildes y en minúsculas -> código INE (seed + alias del INE)."""
     por_nombre = {}
     with open(_PROVINCIAS_SEED, encoding="utf-8") as f:
         for fila in csv.DictReader(f):
             por_nombre[_sin_tildes(fila["nombre"])] = fila["cod_prov"]
     por_nombre.update(_ALIAS_PROVINCIAS_INE)
+    return por_nombre
+
+
+@dlt.resource(name="ine_ecepov_calefaccion", write_disposition="replace")
+def ecepov_calefaccion():
+    """Encuesta de Características Esenciales de la Población y las Viviendas 2021
+    (INE, tabla 56784): viviendas principales con calefacción según el combustible,
+    por provincia, tipo de edificio, año de construcción y tamaño del municipio."""
+    por_nombre = _codigos_provincia()
     respuesta = requests.get(ECEPOV_CALEFACCION_CSV, timeout=120)
     respuesta.raise_for_status()
     lector = csv.reader(io.StringIO(respuesta.content.decode("utf-8-sig")), delimiter=";")
@@ -240,6 +250,46 @@ def poblacion_nacionalidad():
             }
 
 
+DEFUNCIONES_CAUSAS_CSV = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/9936.csv"
+
+
+@dlt.resource(name="ine_defunciones_causas", write_disposition="replace")
+def defunciones_causas():
+    """Estadística de Defunciones según la Causa de Muerte (INE, tabla 9936): defunciones
+    por causa (lista reducida de 102), sexo y provincia de residencia, anual desde 1980.
+    CSV (UTF-8) leído en streaming; provincia resuelta a código INE ('00' = Nacional)."""
+    por_nombre = _codigos_provincia()
+    with requests.get(DEFUNCIONES_CAUSAS_CSV, stream=True, timeout=600) as r:
+        r.raise_for_status()
+        r.encoding = "utf-8-sig"  # la cabecera HTTP dice ISO-8859-15, pero el fichero es UTF-8
+        lector = csv.reader(r.iter_lines(decode_unicode=True), delimiter=";")
+        next(lector)
+        for fila in lector:
+            if len(fila) != 5:
+                continue
+            causa, sexo, provincia, periodo, total = (x.strip() for x in fila)
+            provincia = provincia.lstrip("﻿")
+            if provincia == "Nacional":
+                cod = "00"
+            elif provincia == "Extranjero":
+                cod = "99"
+            elif re.match(r"^\d{2} ", provincia):
+                cod = provincia[:2]  # "02 Albacete"
+            else:
+                cod = por_nombre.get(_sin_tildes(provincia))
+                if cod is None:
+                    raise ValueError(f"Provincia del INE sin código: {provincia}")
+            m = re.match(r"^([0-9A-Z-]+)\s+(.+)$", causa)  # "001-102  I-XXII...", "00A COVID-19..."
+            yield {
+                "codigo_causa": m.group(1) if m else None,
+                "causa": m.group(2) if m else causa,
+                "sexo": sexo,
+                "cod_prov": cod,
+                "anio": int(periodo),
+                "defunciones": int(total.replace(".", "")) if total not in ("", "..", ".") else None,
+            }
+
+
 @dlt.source(name="ine")
 def ine():
     return [_tabla_resource(nombre, tabla_id) for nombre, tabla_id in TABLAS.items()] + [
@@ -248,4 +298,5 @@ def ine():
         municipios,
         ecepov_calefaccion,
         poblacion_nacionalidad,
+        defunciones_causas,
     ]
