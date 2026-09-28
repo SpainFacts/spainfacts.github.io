@@ -1,0 +1,11 @@
+grupo,etiqueta,orden
+turismo,Turismos,1
+motocicleta,Motocicletas,2
+furgoneta,Furgonetas,3
+camion,Camiones,4
+autobus,Autobuses,5
+ciclomotor,Ciclomotores y cuatriciclos,6
+agricola,Tractores y maquinaria agrícola,7
+remolque,Remolques y semirremolques,8
+especial,Vehículos especiales,9
+otros,Otros,10

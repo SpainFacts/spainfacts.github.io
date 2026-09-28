@@ -26,6 +26,9 @@ TABLAS = {
     "ine_paro": "65219",  # EPA: tasas de paro por sexo y grupo de edad (nacional, 2002-hoy)
     # Ojo: la 65292 que usaba el script antiguo son valores ABSOLUTOS por CCAA
     # (no tiene tasas), y la 4086 está descatalogada (solo 2021-2023).
+    # Estadística de Transporte de Viajeros (TV), mensual desde 2012, miles de viajeros:
+    "ine_transporte_viajeros": "20239",  # por modo: urbano, metro, autobús, Cercanías, AVE, avión...
+    "ine_transporte_ciudades": "20193",  # metro y autobús urbano en las 7 ciudades con metro
 }
 
 

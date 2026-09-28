@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: movilidad_matriculaciones_mensual
+    description: "Matriculaciones ordinarias en España por mes, grupo de vehículo, energía y nuevo/usado (DGT MATRABA)."
+    columns:
+      - name: mes
+        tests: [not_null]
+      - name: energia
+        tests:
+          - relationships: {to: ref('movilidad_energias'), field: energia}
+      - name: grupo
+        tests:
+          - relationships: {to: ref('movilidad_grupos'), field: grupo}
+  - name: movilidad_matriculaciones_provincia
+    description: "Turismos matriculados por mes, provincia, energía y nuevo/usado (DGT MATRABA)."
+    columns:
+      - name: cod_prov
+        tests: [not_null]
+  - name: movilidad_matriculaciones_municipio
+    description: "Turismos nuevos por año y municipio, en columnas por energía (DGT MATRABA)."
+  - name: movilidad_marcas_mensual
+    description: "Vehículos nuevos por mes, grupo, energía y marca."
+  - name: movilidad_modelos_mensual
+    description: "Vehículos nuevos por mes, grupo, energía, marca y modelo (últimos 36 meses)."
+  - name: movilidad_parque_evolucion
+    description: "Parque de vehículos en España por mes cargado, grupo y energía."
+  - name: movilidad_parque_provincia
+    description: "Parque del último mes por provincia, grupo, energía, distintivo ambiental y antigüedad."
+  - name: movilidad_parque_municipio
+    description: "Turismos del último parque por municipio (solo municipios de 10.000 habitantes o más: la DGT anonimiza el resto)."
+    columns:
+      - name: cod_mun
+        tests: [not_null, unique]
+  - name: movilidad_parque_modelos
+    description: "Modelos del último parque con al menos 100 unidades."
+  - name: movilidad_recarga_sitios
+    description: "Emplazamientos de recarga pública (foto del día) con número de puntos y potencia máxima."
+    columns:
+      - name: sitio_id
+        tests: [not_null, unique]
+  - name: movilidad_recarga_provincia
+    description: "Puntos de recarga públicos por provincia frente a turismos enchufables y población."
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+  - name: movilidad_recarga_evolucion
+    description: "Puntos de recarga públicos en España por día y tramo de potencia."
+  - name: movilidad_transporte_modos
+    description: "Viajeros de transporte público en España por mes y modo (INE 20239)."
+  - name: movilidad_transporte_ciudades
+    description: "Viajeros de metro y autobús urbano por ciudad (INE 20193)."

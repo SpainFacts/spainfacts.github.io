@@ -32,6 +32,7 @@ from ingestion.conprel import conprel
 from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.hacienda_transparencia import hacienda_transparencia
 from ingestion.destino import es_local
+from ingestion.dgt import dgt
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
 from ingestion.eurostat import eurostat
@@ -40,6 +41,7 @@ from ingestion.incendios import incendios
 from ingestion.ine import ine
 from ingestion.miteco import miteco
 from ingestion.observatorios import observatorios
+from ingestion.recarga import recarga
 from ingestion.ree import ree
 from ingestion.ree_visiona import ree_visiona
 
@@ -127,6 +129,21 @@ def aemet_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResourc
 
 @dlt_assets(dlt_source=bde(), dlt_pipeline=_pipeline_motherduck("bde"), name="bde", group_name="ingesta")
 def bde_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Microdatos de la DGT: matriculaciones (se publican hacia el día 15) y parque
+# (hacia el día 5, ~1,75 GB). Va en el diario porque, con la caché de agregados
+# de data/dgt_cache/, solo vuelve a pedir los dos últimos meses de
+# matriculaciones y descarga el parque una vez al mes, cuando aparece uno nuevo.
+@dlt_assets(dlt_source=dgt(), dlt_pipeline=_pipeline_motherduck("dgt"), name="dgt", group_name="ingesta")
+def dgt_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Puntos de recarga eléctrica (NAP de la DGT / MITECO): foto diaria.
+@dlt_assets(dlt_source=recarga(), dlt_pipeline=_pipeline_motherduck("recarga"), name="recarga", group_name="ingesta")
+def recarga_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
 
@@ -245,7 +262,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

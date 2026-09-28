@@ -37,3 +37,6 @@ data/tcu_cache/
 
 # Caché de descargas de Hacienda (ingestion/hacienda_transparencia.py)
 data/hacienda_cache/
+
+# Agregados mensuales de los microdatos de la DGT (ingestion/dgt.py)
+data/dgt_cache/

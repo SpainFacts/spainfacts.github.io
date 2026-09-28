@@ -1,0 +1,17 @@
+version: 2
+
+seeds:
+  - name: movilidad_energias
+    description: "Tipos de energía de los vehículos (clasificación de ingestion/dgt.py: categoría eléctrica + propulsión ITV) con etiqueta, orden y color."
+    config:
+      column_types: {energia: varchar, etiqueta: varchar, etiqueta_corta: varchar, orden: integer, color: varchar, es_electrificado: boolean, es_enchufable: boolean}
+    columns:
+      - name: energia
+        tests: [not_null, unique]
+  - name: movilidad_grupos
+    description: "Grupos de vehículos a partir del código de tipo DGT (ingestion/dgt.py: grupo_vehiculo)."
+    config:
+      column_types: {grupo: varchar, etiqueta: varchar, orden: integer}
+    columns:
+      - name: grupo
+        tests: [not_null, unique]

@@ -1,0 +1,9 @@
+energia,etiqueta,etiqueta_corta,orden,color,es_electrificado,es_enchufable
+bev,Eléctrico puro (BEV),Eléctrico,1,#0f766e,true,true
+phev,Híbrido enchufable (PHEV),Enchufable,2,#14b8a6,true,true
+hev,Híbrido no enchufable (HEV),Híbrido,3,#a3e635,true,false
+hidrogeno,Hidrógeno,Hidrógeno,4,#38bdf8,false,false
+gas,Gas (GLP / GNC),Gas,5,#a78bfa,false,false
+gasolina,Gasolina,Gasolina,6,#f59e0b,false,false
+diesel,Diésel,Diésel,7,#78716c,false,false
+otros,Otros / sin dato,Otros,8,#d1d5db,false,false
