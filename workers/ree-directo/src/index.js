@@ -287,6 +287,14 @@ async function curva(sistema, fecha, fetchImpl) {
     return filas.filter((r) => typeof r?.ts === 'string' && r.ts.startsWith(fecha));
 }
 
+/** Una fila está completa si la generación (más lo que entra por los enlaces) cubre
+ *  al menos la mitad de la demanda; Baleares importa buena parte por el enlace. */
+export function filaCompleta(sistema, fila) {
+    const entrada = Math.max(fila.intercambio_neto ?? 0, 0) + Math.max(sistema === 'baleares' ? fila.enlace_baleares ?? 0 : 0, 0);
+    const minimo = sistema === 'baleares' ? 0.35 : 0.5;
+    return fila.generacion_total_mw + entrada >= minimo * fila.demanda_mw;
+}
+
 async function datosSistema(sistema, ahora, fetchImpl) {
     const hoy = fechaMadrid(ahora);
     const ayer = fechaMadrid(ahora - 86400000);
@@ -312,6 +320,9 @@ async function datosSistema(sistema, ahora, fetchImpl) {
         }
     }
     const filas = [...porTs.entries()].sort((a, b) => a[0] - b[0]).map(([, v]) => v);
+    // REE publica los últimos cinco minutos a medias (demanda y solar ya, el resto de
+    // tecnologías a 0): se descartan las filas finales que no cubren la demanda.
+    while (filas.length > 1 && !filaCompleta(sistema, filas[filas.length - 1])) filas.pop();
     if (!filas.length) throw new Error('sin filas');
     const ultimo = filas[filas.length - 1];
     const limite = Date.parse(ultimo.ts_utc) - 24 * 3600000;
