@@ -1,5 +1,8 @@
 ---
+description: "Ingresos, gastos, déficit y deuda de las administraciones públicas españolas, por habitante, descontada la inflación y en porcentaje del PIB."
 title: Cuentas Públicas · El Informe Anual de España
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -180,7 +183,7 @@ ORDER BY anio
         direction="positive-down"
         source="Eurostat (PDE)"
         sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => d.deuda_pib)}
-        href="/indicadores/deuda_publica_pib"
+        href="/varios/indicadores/deuda_publica_pib"
     />
 </Grid>
 
