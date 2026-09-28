@@ -9,12 +9,11 @@
 
     // Macro-categories curated for USAFacts structure
     const navLinks = [
-        { href: "/", label: "Inicio" },
         { href: "/territorios", label: "Territorios" },
         { href: "/demografia", label: "Demografía" },
         { href: "/economia", label: "Economía" },
         { href: "/cuentas-publicas", label: "Cuentas Públicas" },
-        { href: "/energia-clima", label: "Energía & Clima" },
+        { href: "/energia-clima", label: "Energía/Clima" },
         { href: "/movilidad", label: "Movilidad" },
         { href: "/sociedad", label: "Sociedad" },
         { href: "/indicadores", label: "Indicadores" },
@@ -68,9 +67,6 @@
                     <Logo logo="/logo16.svg" />
                     <span class="font-extrabold text-lg tracking-tight text-gray-900 dark:text-white flex items-center gap-1.5">
                         Spain<span class="text-blue-600 dark:text-blue-400">Facts</span>
-                        <span class="hidden sm:inline-block text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                            Datos Oficiales
-                        </span>
                     </span>
                 </a>
 
