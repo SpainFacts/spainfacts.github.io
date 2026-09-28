@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: transparencia_liquidaciones
+    description: "Remisión de la liquidación del presupuesto municipal a Hacienda por año (2013-último definitivo), con el gobierno en funciones en el plazo legal (31/03 del año siguiente)"
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: cod_mun
+        tests: [not_null]
+      - name: familia_en_plazo
+        tests: [not_null]
