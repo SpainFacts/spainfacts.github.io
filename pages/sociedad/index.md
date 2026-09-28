@@ -16,6 +16,25 @@ ORDER BY anio DESC
 LIMIT 1
 ```
 
+```sql crimen_serie
+-- Tasa por 1.000 habitantes: Balance (2019-) y, antes, la serie larga (2010-2018), en orden cronológico
+WITH b AS (
+    SELECT anio, tasa_1000
+    FROM mother.crimen_balance
+    WHERE nivel = 'pais' AND categoria = 'Total infracciones penales'
+),
+l AS (
+    SELECT anio, max(tasa_1000) AS tasa_1000
+    FROM mother.crimen_serie_larga
+    WHERE nivel = 'pais' AND tipologia = 'TOTAL INFRACCIONES PENALES'
+    GROUP BY 1
+)
+SELECT anio, tasa_1000 AS valor FROM b
+UNION ALL
+SELECT anio, tasa_1000 AS valor FROM l WHERE anio < (SELECT min(anio) FROM b)
+ORDER BY anio
+```
+
 # 👥 Sociedad
 
 Cómo vivimos en España: la seguridad, la salud y la población que llega de fuera, con las cifras oficiales y el contexto necesario para leerlas bien.
@@ -24,10 +43,11 @@ Cómo vivimos en España: la seguridad, la salud y la población que llega de fu
     <KpiCard
         title="Infracciones penales conocidas"
         value={crimen[0]?.infracciones}
-        formattedValue={formatCompact(crimen[0]?.infracciones, 2)}
-        period="{formatNumber(crimen[0]?.tasa_1000, 1)} por 1.000 habitantes · {crimen[0]?.anio}"
+        formattedValue="{formatNumber(crimen[0]?.tasa_1000, 1)} por 1.000 hab."
+        period="{formatCompact(crimen[0]?.infracciones, 2)} en total · {crimen[0]?.anio}"
         source="Ministerio del Interior"
         href="/sociedad/criminalidad"
+        sparklineData={crimen_serie}
     />
 </Grid>
 

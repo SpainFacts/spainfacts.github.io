@@ -33,23 +33,40 @@ SELECT
     strftime(mes, '%m/%Y') AS mes_texto,
     sum(vehiculos) FILTER (WHERE grupo = 'turismo') AS turismos,
     sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND energia IN ('bev', 'phev')) AS turismos_enchufables,
-    sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND distintivo = 'SIN') AS turismos_sin_distintivo
+    sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND distintivo = 'SIN') AS turismos_sin_distintivo,
+    any_value((SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1)) AS poblacion
 FROM mother.movilidad_parque_provincia
 GROUP BY mes
 ```
 
 ```sql recarga
-SELECT sum(puntos) AS puntos, sum(puntos_rapidos) AS rapidos FROM mother.movilidad_recarga_provincia
+SELECT sum(puntos) AS puntos, sum(puntos_rapidos) AS rapidos, (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS poblacion FROM mother.movilidad_recarga_provincia
 ```
 
 ```sql transporte
 SELECT
     strftime(mes, '%m/%Y') AS mes_texto,
-    viajeros
+    viajeros,
+    (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS poblacion
 FROM mother.movilidad_transporte_modos
 WHERE clave = 'total'
 ORDER BY mes DESC
 LIMIT 1
+```
+
+```sql transporte_serie
+-- Viajeros por cada 1.000 habitantes, últimos 36 meses
+WITH pob AS (
+    SELECT CAST(anio AS INTEGER) AS anio, poblacion
+    FROM mother.poblacion_territorios
+    WHERE nivel = 'pais' AND sexo = 'Total'
+)
+SELECT t.mes, 1000 * t.viajeros / p.poblacion AS valor
+FROM mother.movilidad_transporte_modos AS t
+JOIN pob AS p ON p.anio = least(CAST(year(t.mes) AS INTEGER), (SELECT max(anio) FROM pob))
+WHERE t.clave = 'total'
+  AND t.mes >= (SELECT max(mes) FROM mother.movilidad_transporte_modos) - INTERVAL 35 MONTH
+ORDER BY t.mes
 ```
 
 # 🚦 Movilidad
@@ -74,26 +91,27 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
     <KpiCard
         title="Turismos en circulación"
         value={parque[0]?.turismos}
-        formattedValue={formatCompact(parque[0]?.turismos, 1)}
-        period="{formatNumber(100 * parque[0]?.turismos_enchufables / parque[0]?.turismos, 1)} % enchufables · {parque[0]?.mes_texto}"
+        formattedValue="{formatNumber(1000 * parque[0]?.turismos / parque[0]?.poblacion, 0)} por 1.000 hab."
+        period="{formatCompact(parque[0]?.turismos, 1)} turismos · {formatNumber(100 * parque[0]?.turismos_enchufables / parque[0]?.turismos, 1)} % enchufables · {parque[0]?.mes_texto}"
         source="DGT"
         href="/movilidad/parque"
     />
     <KpiCard
         title="Puntos de recarga públicos"
         value={recarga[0]?.puntos}
-        formattedValue={formatNumber(recarga[0]?.puntos, 0)}
-        period="{formatNumber(recarga[0]?.rapidos, 0)} rápidos (≥50 kW)"
+        formattedValue="{formatNumber(100000 * recarga[0]?.puntos / recarga[0]?.poblacion, 0)} por 100.000 hab."
+        period="{formatNumber(recarga[0]?.puntos, 0)} puntos, {formatNumber(recarga[0]?.rapidos, 0)} rápidos (≥50 kW)"
         source="NAP DGT / MITECO"
         href="/movilidad/recarga"
     />
     <KpiCard
         title="Viajeros de transporte público"
         value={transporte[0]?.viajeros}
-        formattedValue={formatCompact(transporte[0]?.viajeros, 1)}
-        period={transporte[0]?.mes_texto}
+        formattedValue="{formatNumber(transporte[0]?.viajeros / transporte[0]?.poblacion, 1)} viajes por hab."
+        period="al mes · {formatCompact(transporte[0]?.viajeros, 1)} viajeros · {transporte[0]?.mes_texto}"
         source="INE"
         href="/movilidad/transporte-publico"
+        sparklineData={transporte_serie}
     />
 </Grid>
 

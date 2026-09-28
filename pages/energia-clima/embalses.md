@@ -20,6 +20,20 @@ WHERE nivel = 'pais' AND fecha >= (SELECT max(fecha) - INTERVAL 2 YEAR FROM moth
 ORDER BY fecha
 ```
 
+```sql serie_comparada
+SELECT
+    u.fecha,
+    round(u.pct_llenado - max(s.pct_llenado) FILTER (WHERE s.anio = u.anio - 1), 1) AS dif_anio,
+    round(u.pct_llenado - avg(s.pct_llenado) FILTER (WHERE s.anio BETWEEN u.anio - 10 AND u.anio - 1), 1) AS dif_media
+FROM mother.embalses_semanal AS u
+JOIN mother.embalses_semanal AS s
+  ON s.nivel = 'pais' AND s.semana = u.semana AND s.anio < u.anio
+WHERE u.nivel = 'pais'
+  AND u.fecha >= (SELECT max(fecha) - INTERVAL 1 YEAR FROM mother.embalses_semanal)
+GROUP BY u.fecha, u.anio, u.pct_llenado
+ORDER BY u.fecha
+```
+
 # 💧 Reservas de agua en España
 
 Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)} hm³**, el **{formatNumber(espana[0]?.pct_llenado, 1)} %** de su capacidad total ({formatNumber(espana[0]?.capacidad_hm3, 0)} hm³). Datos del Boletín Hidrológico del MITECO a **{new Date(espana[0]?.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}**, que se publica cada martes.
@@ -41,6 +55,7 @@ Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)
         unit=" pp"
         period="Hace un año: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
+        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
     />
     <KpiCard
         title="Frente a la media de 10 años"
@@ -49,6 +64,7 @@ Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)
         unit=" pp"
         period="Media misma semana: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
+        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
     />
 </Grid>
 

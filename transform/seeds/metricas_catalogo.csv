@@ -1,6 +1,6 @@
 metrica_id,nombre,unidad,fuente,url_fuente,cod_serie
-ipc_variacion_anual,IPC — variación anual,%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=50902,IPC251856
-ipc_indice,IPC — índice general (base 2021),índice,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=50902,IPC251852
+ipc_variacion_anual,IPC — variación anual,%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290750
+ipc_indice,IPC — índice general (base 2025),índice,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290751
 tasa_paro,Tasa de paro (EPA),%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=65219,EPA423474
 deuda_publica,Deuda pública (PDE),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,
 deuda_publica_pib,Deuda pública sobre PIB,% del PIB,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,

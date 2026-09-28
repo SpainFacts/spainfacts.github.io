@@ -139,16 +139,19 @@ GROUP BY Year
   title="Hombres ({inputs.año_fin.value})"
   value={datos_ultimo_anio[0]?.Hombres}
   formattedValue={formatCompact(datos_ultimo_anio[0]?.Hombres, 2)}
+  sparklineData={poblacion_por_sexo3.map(d => 100 * d.Hombres / (d.Hombres + d.Mujeres))}
 />
 <KpiCard
   title="Mujeres ({inputs.año_fin.value})"
   value={datos_ultimo_anio[0]?.Mujeres}
   formattedValue={formatCompact(datos_ultimo_anio[0]?.Mujeres, 2)}
+  sparklineData={poblacion_por_sexo3.map(d => 100 * d.Mujeres / (d.Hombres + d.Mujeres))}
 />
 <KpiCard
   title="Total ({inputs.año_fin.value})"
   value={datos_ultimo_anio[0]?.Total}
   formattedValue={formatCompact(datos_ultimo_anio[0]?.Total, 2)}
+  sparklineData={poblacion_por_sexo3.map(d => d.Hombres + d.Mujeres)}
 />
 </Grid>
 

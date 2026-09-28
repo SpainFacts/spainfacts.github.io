@@ -22,7 +22,8 @@ SELECT
     sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND energia IN ('bev', 'phev')) AS enchufables,
     sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND energia = 'bev') AS bev,
     sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND distintivo = 'SIN') AS sin_distintivo,
-    sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND antiguedad = '20+') AS mas_de_20
+    sum(vehiculos) FILTER (WHERE grupo = 'turismo' AND antiguedad = '20+') AS mas_de_20,
+    (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS poblacion
 FROM mother.movilidad_parque_provincia
 ```
 
@@ -34,8 +35,8 @@ Los vehículos que están dados de alta en la Dirección General de Tráfico, es
     <KpiCard
         title="Turismos en circulación"
         value={resumen[0]?.turismos}
-        formattedValue={formatCompact(resumen[0]?.turismos, 1)}
-        period="{formatCompact(resumen[0]?.vehiculos, 1)} vehículos de todo tipo · {resumen[0]?.mes_texto}"
+        formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} por 1.000 hab."
+        period="{formatCompact(resumen[0]?.turismos, 1)} turismos y {formatCompact(resumen[0]?.vehiculos, 1)} vehículos de todo tipo · {resumen[0]?.mes_texto}"
         source="DGT"
     />
     <KpiCard

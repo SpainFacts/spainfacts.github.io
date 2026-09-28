@@ -12,6 +12,13 @@ description: "España por comunidades autónomas y provincias: población, cuent
 SELECT * FROM mother.territorios WHERE nivel = 'pais'
 ```
 
+```sql espana_serie
+SELECT anio, poblacion AS valor
+FROM mother.poblacion_territorios
+WHERE nivel = 'pais' AND sexo = 'Total'
+ORDER BY anio
+```
+
 ```sql ccaa
 SELECT
     t.cod,
@@ -36,6 +43,14 @@ WHERE nivel = 'provincia'
 ORDER BY nombre
 ```
 
+```sql base
+SELECT max(anio_base) AS anio_base FROM mother.deflactor
+```
+
+```sql anio_gasto
+SELECT max(anio) AS anio FROM mother.ccaa_cuentas_resumen WHERE cod_ccaa <= '17'
+```
+
 # 🗺️ España, territorio a territorio
 
 España es un Estado descentralizado: las **comunidades autónomas** gestionan la sanidad, la educación y buena parte de los servicios sociales, y los **ayuntamientos** y **diputaciones** se ocupan de los servicios de proximidad. Elige una comunidad en el mapa para ver su población, sus cuentas y su deuda, y baja desde ahí a cada provincia.
@@ -47,6 +62,7 @@ España es un Estado descentralizado: las **comunidades autónomas** gestionan l
         formattedValue={formatCompact(espana[0]?.poblacion_ultima, 2)}
         unit="hab."
         period="1 de enero de {espana[0]?.anio_poblacion} · Padrón (INE)"
+        sparklineData={espana_serie}
     />
     <KpiCard
         title="Comunidades y ciudades autónomas"
@@ -92,16 +108,17 @@ España es un Estado descentralizado: las **comunidades autónomas** gestionan l
 ```sql comparativa
 WITH anio_cuentas AS (SELECT max(anio) AS anio FROM mother.ccaa_cuentas_resumen WHERE cod_ccaa <= '17'),
 deuda AS (
-    SELECT cod_ccaa, deuda_eur, deuda_pct_pib
+    SELECT cod_ccaa, anio, deuda_eur, deuda_pct_pib
     FROM mother.ccaa_deuda
     WHERE fecha = (SELECT max(fecha) FROM mother.ccaa_deuda)
 )
+-- Euros por habitante y constantes (euros del último año completo, mother.deflactor)
 SELECT
     c.nombre AS comunidad,
     c.ruta,
     c.poblacion,
-    r.gastos_no_financieros / p.poblacion AS gasto_hab,
-    d.deuda_eur / c.poblacion AS deuda_hab,
+    r.gastos_no_financieros / p.poblacion * fg.factor AS gasto_hab,
+    d.deuda_eur / c.poblacion * coalesce(fd.factor, 1) AS deuda_hab,
     d.deuda_pct_pib / 100 AS deuda_pct_pib
 FROM ${ccaa} c
 LEFT JOIN mother.ccaa_cuentas_resumen r
@@ -109,6 +126,8 @@ LEFT JOIN mother.ccaa_cuentas_resumen r
 LEFT JOIN mother.poblacion_territorios p
   ON p.nivel = 'ccaa' AND p.cod = c.cod AND p.anio = r.anio AND p.sexo = 'Total'
 LEFT JOIN deuda d ON d.cod_ccaa = c.cod
+LEFT JOIN mother.deflactor fg ON fg.anio = CAST(r.anio AS INTEGER)
+LEFT JOIN mother.deflactor fd ON fd.anio = CAST(d.anio AS INTEGER)
 ORDER BY c.poblacion DESC
 ```
 
@@ -117,12 +136,12 @@ ORDER BY c.poblacion DESC
 <DataTable data={comparativa} link=ruta rows=all showLinkCol=false>
     <Column id=comunidad title="Comunidad" />
     <Column id=poblacion title="Población" fmt=num0 />
-    <Column id=gasto_hab title="Gasto no financiero (€/hab.)" fmt=num0 contentType=bar barColor="#99f6e4" />
-    <Column id=deuda_hab title="Deuda (€/hab.)" fmt=num0 />
+    <Column id=gasto_hab title="Gasto no financiero (€/hab., euros de {base[0]?.anio_base})" fmt=num0 contentType=bar barColor="#99f6e4" />
+    <Column id=deuda_hab title="Deuda (€/hab., euros de {base[0]?.anio_base})" fmt=num0 />
     <Column id=deuda_pct_pib title="Deuda (% PIB)" fmt=pct1 contentType=bar barColor="#bfdbfe" />
 </DataTable>
 
-<p class="text-xs text-gray-500">Gasto: última liquidación de Hacienda (capítulos 1 a 7). Deuda: último trimestre del Banco de España. Ceuta y Melilla no tienen deuda autonómica propia en el Protocolo de Déficit Excesivo.</p>
+<p class="text-xs text-gray-500">Importes por habitante y descontada la inflación (euros de {base[0]?.anio_base}, con el IPC medio anual). Gasto: última liquidación de Hacienda ({anio_gasto[0]?.anio}, capítulos 1 a 7). Deuda: último trimestre del Banco de España. Ceuta y Melilla no tienen deuda autonómica propia en el Protocolo de Déficit Excesivo.</p>
 
 ## Comunidades autónomas
 

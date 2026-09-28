@@ -62,6 +62,7 @@ ORDER BY periodo ASC
         changePeriod="vs trimestre anterior"
         direction="positive-down"
         source="INE / EPA"
+        sparklineData={serie_paro.filter(d => d.paro != null).slice(-40).map(d => d.paro)}
         href="/economia/paro"
     />
 
@@ -75,6 +76,7 @@ ORDER BY periodo ASC
         changePeriod="vs mes anterior"
         direction="positive-down"
         source="INE / IPC"
+        sparklineData={serie_ipc.filter(d => d.ipc != null).slice(-36).map(d => d.ipc)}
         href="/economia/ipc"
     />
 </Grid>
@@ -117,4 +119,4 @@ ORDER BY periodo ASC
 
 ## Fuentes Oficiales
 - **[INE - Encuesta de Población Activa (EPA)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176918):** Serie trimestral EPA423474 (tabla 65219).
-- **[INE - Índice de Precios de Consumo (IPC)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176802):** Serie mensual IPC251856 (tabla 50902).
+- **[INE - Índice de Precios de Consumo (IPC)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176802):** Serie mensual IPC290750 (tabla 76125, base 2025).

@@ -12,28 +12,40 @@ title: Cuentas Públicas · El Informe Anual de España
 
 Inspirado en el informe anual que presentan las empresas cotizadas ante los mercados, este apartado presenta el **balance consolidado del Reino de España**: *¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?*
 
+```sql base_deflactor
+-- Año cuyos euros se usan como referencia (último año completo con IPC)
+SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
+```
+
 ```sql balance_reciente
+-- Importes por habitante y en euros constantes: nominal * 1000 / población (millones) * factor del deflactor
 SELECT
-    año AS anio,
-    ingresos_totales_mrd,
-    gastos_totales_mrd,
-    saldo_deficit_mrd,
-    saldo_deficit_pib,
-    deuda_publica_mrd,
-    deuda_pib,
-    poblacion_m
-FROM mother.cuentas_balance_anual
-ORDER BY año DESC
+    CAST(b.año AS INTEGER) AS anio,
+    b.ingresos_totales_mrd,
+    b.gastos_totales_mrd,
+    b.saldo_deficit_mrd,
+    b.saldo_deficit_pib,
+    b.deuda_publica_mrd,
+    b.deuda_pib,
+    b.poblacion_m,
+    b.ingresos_totales_mrd * 1000 / b.poblacion_m * d.factor AS ingresos_hab_real,
+    b.gastos_totales_mrd * 1000 / b.poblacion_m * d.factor AS gastos_hab_real
+FROM mother.cuentas_balance_anual b
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(b.año AS INTEGER)
+ORDER BY b.año DESC
 LIMIT 2
 ```
 
 ```sql serie_balance_historico
+-- Euros por habitante a precios constantes (el deflactor empieza en 2002)
 SELECT
-    año,
-    ingresos_totales_mrd AS "Ingresos Totales",
-    gastos_totales_mrd AS "Gastos Totales",
-    saldo_deficit_mrd AS "Déficit / Superávit"
-FROM mother.cuentas_balance_anual
+    CAST(b.año AS INTEGER) AS año,
+    b.ingresos_totales_mrd * 1000 / b.poblacion_m * d.factor AS "Ingresos por habitante",
+    b.gastos_totales_mrd * 1000 / b.poblacion_m * d.factor AS "Gastos por habitante",
+    b.saldo_deficit_mrd * 1000 / b.poblacion_m * d.factor AS "Déficit / Superávit por habitante"
+FROM mother.cuentas_balance_anual b
+JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(b.año AS INTEGER)
+WHERE b.poblacion_m > 0
 ORDER BY año ASC
 ```
 
@@ -81,47 +93,66 @@ ORDER BY millones_euros DESC
 
 ```sql subsectores_ultimo
 SELECT
-    año AS anio,
-    subsector,
-    gasto_mrd,
-    ingreso_mrd,
-    saldo_deficit_mrd,
-    peso_gasto_pct
-FROM mother.cuentas_subsectores
-WHERE año = (SELECT max(año) FROM mother.cuentas_subsectores)
-ORDER BY gasto_mrd DESC
+    CAST(s.año AS INTEGER) AS anio,
+    s.subsector,
+    s.gasto_mrd,
+    s.ingreso_mrd,
+    s.saldo_deficit_mrd,
+    s.peso_gasto_pct,
+    s.gasto_mrd * 1000 / b.poblacion_m * d.factor AS gasto_hab_real,
+    s.saldo_deficit_mrd * 1000 / b.poblacion_m * d.factor AS saldo_hab_real
+FROM mother.cuentas_subsectores s
+JOIN mother.cuentas_balance_anual b ON CAST(b.año AS INTEGER) = CAST(s.año AS INTEGER)
+JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(s.año AS INTEGER)
+WHERE s.año = (SELECT max(año) FROM mother.cuentas_subsectores)
+ORDER BY s.gasto_mrd DESC
 ```
 
 ```sql rango_historico
+-- Rango de la serie en euros constantes por habitante
 SELECT min(año) AS desde, max(año) AS hasta
-FROM mother.cuentas_balance_anual
+FROM ${serie_balance_historico}
+```
+
+```sql serie_balance_real
+-- Para las mini-gráficas: euros por habitante a precios constantes (mother.deflactor)
+SELECT
+    año AS anio,
+    "Ingresos por habitante" AS ingresos_hab_real,
+    "Gastos por habitante" AS gastos_hab_real
+FROM ${serie_balance_historico}
+ORDER BY anio
 ```
 
 <!-- KPI Ribbon: Resumen Anual del Estado -->
 <Grid cols=4>
     <KpiCard
-        title="Ingresos Totales"
-        value={balance_reciente[0].ingresos_totales_mrd}
-        formattedValue="{formatNumber(balance_reciente[0].ingresos_totales_mrd, 1)} mil M€"
-        period="Ejercicio {balance_reciente[0].anio}"
-        change={(((balance_reciente[0].ingresos_totales_mrd - balance_reciente[1].ingresos_totales_mrd) / balance_reciente[1].ingresos_totales_mrd) * 100).toFixed(1)}
+        title="Ingresos por habitante"
+        value={balance_reciente[0]?.ingresos_hab_real}
+        formattedValue="{formatNumber(balance_reciente[0]?.ingresos_hab_real, 0)} €"
+        unit="/ hab."
+        period="{formatNumber(balance_reciente[0]?.ingresos_totales_mrd, 1)} mil M€ en total · {balance_reciente[0]?.anio} (euros de {base_deflactor[0]?.anio_base})"
+        change={(((balance_reciente[0]?.ingresos_hab_real - balance_reciente[1]?.ingresos_hab_real) / balance_reciente[1]?.ingresos_hab_real) * 100).toFixed(1)}
         changeUnit="%"
-        changePeriod="interanual"
+        changePeriod="interanual, descontada la inflación"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
+        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => d.ingresos_hab_real)}
         href="/cuentas-publicas/ingresos"
     />
 
     <KpiCard
-        title="Gastos Totales"
-        value={balance_reciente[0].gastos_totales_mrd}
-        formattedValue="{formatNumber(balance_reciente[0].gastos_totales_mrd, 1)} mil M€"
-        period="Ejercicio {balance_reciente[0].anio}"
-        change={(((balance_reciente[0].gastos_totales_mrd - balance_reciente[1].gastos_totales_mrd) / balance_reciente[1].gastos_totales_mrd) * 100).toFixed(1)}
+        title="Gasto por habitante"
+        value={balance_reciente[0]?.gastos_hab_real}
+        formattedValue="{formatNumber(balance_reciente[0]?.gastos_hab_real, 0)} €"
+        unit="/ hab."
+        period="{formatNumber(balance_reciente[0]?.gastos_totales_mrd, 1)} mil M€ en total · {balance_reciente[0]?.anio} (euros de {base_deflactor[0]?.anio_base})"
+        change={(((balance_reciente[0]?.gastos_hab_real - balance_reciente[1]?.gastos_hab_real) / balance_reciente[1]?.gastos_hab_real) * 100).toFixed(1)}
         changeUnit="%"
-        changePeriod="interanual"
+        changePeriod="interanual, descontada la inflación"
         direction="neutral"
         source="Eurostat (gov_10a_main)"
+        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => d.gastos_hab_real)}
         href="/cuentas-publicas/gastos"
     />
 
@@ -135,6 +166,7 @@ FROM mother.cuentas_balance_anual
         changePeriod="vs año anterior"
         direction="positive-down"
         source="Eurostat (gov_10a_main)"
+        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />
 
     <KpiCard
@@ -147,9 +179,12 @@ FROM mother.cuentas_balance_anual
         changePeriod="vs año anterior"
         direction="positive-down"
         source="Eurostat (PDE)"
+        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => d.deuda_pib)}
         href="/indicadores/deuda_publica_pib"
     />
 </Grid>
+
+<p class="text-xs text-gray-500">Principio de esta web: los importes en euros se muestran <b>por habitante</b> (para que no crezcan solo porque crece la población) y <b>descontada la inflación</b>, en euros de {base_deflactor[0]?.anio_base} según el IPC medio anual del INE. Los totales en euros corrientes aparecen como dato secundario. Los porcentajes del PIB no necesitan ajuste.</p>
 
 ---
 
@@ -195,14 +230,15 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
 
 ## 2. El Balance Histórico: Ingresos vs Gastos ({rango_historico[0].desde} - {rango_historico[0].hasta})
 
-La diferencia anual entre lo que ingresa el sector público y lo que desembolsa define el **saldo presupuestario** (superávit si es positivo, déficit si es negativo):
+La diferencia anual entre lo que ingresa el sector público y lo que desembolsa define el **saldo presupuestario** (superávit si es positivo, déficit si es negativo). Para que la comparación entre años sea justa, las cifras se expresan por habitante y en euros de {base_deflactor[0]?.anio_base} (la serie empieza en {rango_historico[0]?.desde}, primer año con IPC anual disponible):
 
 <LineChart
     data={serie_balance_historico}
     x=año
-    y={["Ingresos Totales", "Gastos Totales"]}
-    yAxisTitle="Miles de Millones de Euros (Mrd €)"
-    title="Ingresos Públicos vs Gastos Públicos en España"
+    y={["Ingresos por habitante", "Gastos por habitante"]}
+    yAxisTitle="Euros por habitante (euros de {base_deflactor[0]?.anio_base})"
+    yFmt=num0
+    title="Ingresos y gastos públicos por habitante (euros de {base_deflactor[0]?.anio_base}, descontada la inflación)"
     startingAtZero={false}
 />
 
@@ -222,20 +258,22 @@ España es un estado descentralizado donde las competencias de gasto se distribu
 
 <Grid cols=2>
 
-<DataTable data={subsectores_ultimo} title="Desglose por Nivel de Administración ({subsectores_ultimo[0].anio})">
+<DataTable data={subsectores_ultimo} title="Desglose por Nivel de Administración ({subsectores_ultimo[0]?.anio})">
     <Column id=subsector title="Subsector Institucional" />
-    <Column id=gasto_mrd title="Gasto (Mrd €)" fmt='#,##0.0 Mrd €' />
+    <Column id=gasto_hab_real title="Gasto por habitante" fmt='#,##0 €' />
     <Column id=peso_gasto_pct title="% del Gasto" fmt='0.0"%"' />
-    <Column id=saldo_deficit_mrd title="Saldo Fiscal" fmt='#,##0.0 Mrd €' />
+    <Column id=saldo_hab_real title="Saldo por habitante" fmt='#,##0 €' />
+    <Column id=gasto_mrd title="Gasto total (Mrd €)" fmt='#,##0.0' />
 </DataTable>
 
 <div>
     <BarChart
         data={subsectores_ultimo}
         x=subsector
-        y=gasto_mrd
-        yAxisTitle="Gasto (Miles de Millones €)"
-        title="Gasto por subsector administrativo ({subsectores_ultimo[0].anio})"
+        y=gasto_hab_real
+        yAxisTitle="Euros por habitante"
+        yFmt=num0
+        title="Gasto por habitante de cada subsector ({subsectores_ultimo[0]?.anio}, euros de {base_deflactor[0]?.anio_base})"
         swapXY={true}
     />
 </div>

@@ -104,18 +104,33 @@ FROM mother.totalAnoSexoEdad
 WHERE Anio = ${inputs.año_fin.value}
 ```
 
+```sql serie_edades
+SELECT
+  CAST(Anio AS INTEGER) AS anio,
+  100.0 * SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Menores_15,
+  100.0 * SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Edad_Laboral,
+  100.0 * SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Mayores_65,
+  100.0 * SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) / NULLIF(SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END), 0) AS Indice_Envejecimiento
+FROM mother.totalAnoSexoEdad
+WHERE CAST(Anio AS INTEGER) BETWEEN ${inputs.año_inicio.value} AND ${inputs.año_fin.value}
+GROUP BY 1
+ORDER BY 1
+```
+
 <Grid cols=3>
 <Group>
 <KpiCard
   title="Menores de 15 ({inputs.año_inicio.value})"
   value={resumen_edades_inicio[0]?.Menores_15}
   formattedValue={formatCompact(resumen_edades_inicio[0]?.Menores_15, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
 />
 <KpiCard
   title="% Menores de 15"
   value={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
 />
 </Group>
 <Group>
@@ -123,12 +138,14 @@ WHERE Anio = ${inputs.año_fin.value}
   title="Edad Laboral ({inputs.año_inicio.value})"
   value={resumen_edades_inicio[0]?.Edad_Laboral}
   formattedValue={formatCompact(resumen_edades_inicio[0]?.Edad_Laboral, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
 />
 <KpiCard
   title="% Edad Laboral"
   value={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
 />
 </Group>
 <Group>
@@ -136,12 +153,14 @@ WHERE Anio = ${inputs.año_fin.value}
   title="Mayores de 65 ({inputs.año_inicio.value})"
   value={resumen_edades_inicio[0]?.Mayores_65}
   formattedValue={formatCompact(resumen_edades_inicio[0]?.Mayores_65, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
 />
 <KpiCard
   title="% Mayores de 65"
   value={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
 />
 </Group>
 </Grid>
@@ -152,12 +171,14 @@ WHERE Anio = ${inputs.año_fin.value}
   title="Menores de 15 ({inputs.año_fin.value})"
   value={resumen_edades_fin[0]?.Menores_15}
   formattedValue={formatCompact(resumen_edades_fin[0]?.Menores_15, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
 />
 <KpiCard
   title="% Menores de 15"
   value={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
 />
 </Group>
 <Group>
@@ -165,12 +186,14 @@ WHERE Anio = ${inputs.año_fin.value}
   title="Edad Laboral ({inputs.año_fin.value})"
   value={resumen_edades_fin[0]?.Edad_Laboral}
   formattedValue={formatCompact(resumen_edades_fin[0]?.Edad_Laboral, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
 />
 <KpiCard
   title="% Edad Laboral"
   value={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
 />
 </Group>
 <Group>
@@ -178,12 +201,14 @@ WHERE Anio = ${inputs.año_fin.value}
   title="Mayores de 65 ({inputs.año_fin.value})"
   value={resumen_edades_fin[0]?.Mayores_65}
   formattedValue={formatCompact(resumen_edades_fin[0]?.Mayores_65, 2)}
+  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
 />
 <KpiCard
   title="% Mayores de 65"
   value={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   formattedValue={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
   unit="%"
+  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
 />
 </Group>
 </Grid>
@@ -213,6 +238,7 @@ FROM ${resumen_edades_inicio} AS i, ${resumen_edades_fin} AS f
   change={indice_envejecimiento[0]?.Cambio_Indice?.toFixed(1)}
   changeUnit=" pp"
   changePeriod="vs {inputs.año_inicio.value}"
+  sparklineData={serie_edades.map(d => d.Indice_Envejecimiento)}
 />
 
 ---

@@ -22,7 +22,7 @@ models:
       - name: url_oficial
         tests: [not_null]
   - name: ipc
-    description: "IPC del INE (tabla 50902), todas las series"
+    description: "IPC del INE (tabla 76125, base 2025), todas las series"
     columns:
       - name: date
         tests: [not_null]

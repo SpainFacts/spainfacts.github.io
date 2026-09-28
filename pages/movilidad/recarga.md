@@ -15,7 +15,8 @@ SELECT
     sum(puntos_rapidos) AS puntos_rapidos,
     sum(puntos_ultrarrapidos) AS puntos_ultrarrapidos,
     sum(turismos_enchufables) AS enchufables,
-    sum(turismos_enchufables) / sum(puntos) AS enchufables_por_punto
+    sum(turismos_enchufables) / sum(puntos) AS enchufables_por_punto,
+    (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS poblacion
 FROM mother.movilidad_recarga_provincia
 ```
 
@@ -34,8 +35,8 @@ Dónde se puede cargar un coche eléctrico en España, según el registro oficia
     <KpiCard
         title="Puntos de recarga públicos"
         value={totales[0]?.puntos}
-        formattedValue={formatNumber(totales[0]?.puntos, 0)}
-        period="en {formatNumber(totales[0]?.sitios, 0)} emplazamientos"
+        formattedValue="{formatNumber(100000 * totales[0]?.puntos / totales[0]?.poblacion, 0)} por 100.000 hab."
+        period="{formatNumber(totales[0]?.puntos, 0)} puntos en {formatNumber(totales[0]?.sitios, 0)} emplazamientos"
         source="NAP DGT / MITECO"
     />
     <KpiCard

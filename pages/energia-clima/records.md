@@ -50,6 +50,41 @@ WHERE sistema = 'peninsula'
 ORDER BY orden
 ```
 
+```sql progresion
+-- Cómo ha ido mejorando cada récord destacado (del final del primer año de la serie en adelante);
+-- los precios, en euros constantes del último año con IPC
+WITH ipc AS (
+    SELECT CAST(year(periodo) AS INTEGER) AS anio, avg(valor) AS ipc
+    FROM mother.metricas
+    WHERE metrica_id = 'ipc_indice'
+    GROUP BY 1
+),
+ipc_ultimo AS (
+    SELECT ipc FROM ipc ORDER BY anio DESC LIMIT 1
+),
+h2 AS (
+    SELECT codigo, fecha, n_record, valor, unidad, es_inicio_serie,
+        max(n_record) FILTER (WHERE es_inicio_serie) OVER (PARTITION BY codigo) AS ultimo_inicio
+    FROM mother.electricidad_records_historia
+    WHERE sistema = 'peninsula'
+      AND ((codigo = 'demanda_max' AND periodo = '5 min')
+        OR (codigo = 'pct_renovable_max' AND periodo = 'día')
+        OR (codigo = 'solar_fv_max' AND periodo = '5 min')
+        OR (codigo = 'precio_min' AND periodo = 'hora'))
+)
+SELECT
+    h2.codigo,
+    h2.fecha,
+    h2.n_record,
+    CASE WHEN h2.unidad = '€/MWh'
+        THEN h2.valor * (SELECT ipc FROM ipc_ultimo) / coalesce(i.ipc, (SELECT ipc FROM ipc_ultimo))
+        ELSE h2.valor END AS valor
+FROM h2
+LEFT JOIN ipc AS i ON i.anio = CAST(year(h2.fecha) AS INTEGER)
+WHERE NOT h2.es_inicio_serie OR h2.n_record = h2.ultimo_inicio
+ORDER BY h2.codigo, h2.fecha, h2.n_record
+```
+
 ```sql recientes
 SELECT
     h.categoria,
@@ -84,6 +119,7 @@ Los máximos y mínimos históricos de la red eléctrica española desde 2015, c
         unit={' ' + d.unidad}
         period={fecha(d.ts) + ' · ' + vigencia(d.dias_vigente)}
         source="REE · Península"
+        sparklineData={progresion.filter(p => p.codigo === d.codigo)}
     />
 {/each}
 </Grid>

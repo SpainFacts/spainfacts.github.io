@@ -15,11 +15,25 @@ SELECT * FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}
 SELECT poblacion_ultima FROM mother.territorios WHERE nivel = 'pais'
 ```
 
+```sql base
+-- Año de los euros constantes (último año completo de IPC)
+SELECT max(anio_base) AS anio_base FROM mother.deflactor
+```
+
 ```sql serie_poblacion
 SELECT make_date(CAST(anio AS INTEGER), 1, 1) AS fecha, poblacion AS valor
 FROM mother.poblacion_territorios
 WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND sexo = 'Total'
 ORDER BY anio
+```
+
+```sql peso_serie
+SELECT c.anio, 100.0 * c.poblacion / e.poblacion AS valor
+FROM mother.poblacion_territorios c
+JOIN mother.poblacion_territorios e
+  ON e.nivel = 'pais' AND e.sexo = 'Total' AND e.anio = c.anio
+WHERE c.nivel = 'ccaa' AND c.cod = '${terr[0]?.cod}' AND c.sexo = 'Total'
+ORDER BY c.anio
 ```
 
 ```sql poblacion_sexo
@@ -92,6 +106,7 @@ FROM ${municipios}
         formattedValue={formatNumber(100 * terr[0]?.poblacion_ultima / espana[0]?.poblacion_ultima, 1)}
         unit="%"
         period="de la población española"
+        sparklineData={peso_serie}
     />
     <KpiCard
         title="Municipios"
@@ -171,10 +186,16 @@ SELECT
     r.gastos_totales,
     p.poblacion,
     r.gastos_no_financieros / p.poblacion AS gasto_hab,
-    r.ingresos_no_financieros / p.poblacion AS ingreso_hab
+    r.ingresos_no_financieros / p.poblacion AS ingreso_hab,
+    -- Euros por habitante constantes (euros del último año completo)
+    r.gastos_no_financieros / p.poblacion * f.factor AS gasto_hab_real,
+    r.ingresos_no_financieros / p.poblacion * f.factor AS ingreso_hab_real,
+    r.saldo_no_financiero / p.poblacion * f.factor AS saldo_hab_real
 FROM mother.ccaa_cuentas_resumen r
 JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = r.cod_ccaa AND p.anio = r.anio AND p.sexo = 'Total'
+  ON p.nivel = 'ccaa' AND p.cod = r.cod_ccaa AND p.sexo = 'Total'
+ AND p.anio = least(r.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
+LEFT JOIN mother.deflactor f ON f.anio = CAST(r.anio AS INTEGER)
 WHERE r.cod_ccaa = '${terr[0]?.cod}'
 ORDER BY r.anio
 ```
@@ -184,9 +205,9 @@ SELECT * FROM ${cuentas} ORDER BY anio DESC LIMIT 1
 ```
 
 ```sql cuentas_evolucion
-SELECT fecha, 'Ingresos' AS concepto, ingresos_no_financieros AS importe FROM ${cuentas}
+SELECT fecha, 'Ingresos' AS concepto, ingreso_hab_real AS importe FROM ${cuentas}
 UNION ALL
-SELECT fecha, 'Gastos', gastos_no_financieros FROM ${cuentas}
+SELECT fecha, 'Gastos', gasto_hab_real FROM ${cuentas}
 ORDER BY fecha
 ```
 
@@ -194,20 +215,23 @@ ORDER BY fecha
 WITH ultimo AS (SELECT max(anio) AS anio FROM mother.ccaa_cuentas_resumen WHERE cod_ccaa <= '17')
 SELECT
     t.nombre AS comunidad,
-    r.gastos_no_financieros / p.poblacion AS gasto_hab,
+    r.gastos_no_financieros / p.poblacion * f.factor AS gasto_hab,
     CASE WHEN r.cod_ccaa = '${terr[0]?.cod}' THEN 'Esta comunidad' ELSE 'Resto' END AS grupo
 FROM mother.ccaa_cuentas_resumen r
 JOIN mother.poblacion_territorios p
   ON p.nivel = 'ccaa' AND p.cod = r.cod_ccaa AND p.anio = r.anio AND p.sexo = 'Total'
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = r.cod_ccaa
+LEFT JOIN mother.deflactor f ON f.anio = CAST(r.anio AS INTEGER)
 WHERE r.anio = (SELECT anio FROM ultimo) AND r.cod_ccaa <= '17'
 ORDER BY gasto_hab DESC
 ```
 
 ```sql politicas
 -- Gasto por política (depurado de transferencias a ayuntamientos y fondos
--- PAC) por habitante, frente a la media de las 17 comunidades.
+-- PAC) por habitante, frente a la media de las 17 comunidades. Los importes
+-- por habitante van en euros constantes del último año completo.
 WITH anio AS (SELECT max(anio) AS anio FROM mother.ccaa_gasto_politicas WHERE cod_ccaa = '${terr[0]?.cod}'),
+defl AS (SELECT factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 por_ccaa AS (
     SELECT g.cod_ccaa, g.cod_politica, g.politica_nombre, sum(g.obligaciones) AS obligaciones, p.poblacion
     FROM mother.ccaa_gasto_politicas g
@@ -223,8 +247,8 @@ media AS (
 SELECT
     c.politica_nombre AS politica,
     c.obligaciones,
-    c.obligaciones / c.poblacion AS por_habitante,
-    m.media_hab AS media_ccaa,
+    c.obligaciones / c.poblacion * coalesce((SELECT factor FROM defl), 1) AS por_habitante,
+    m.media_hab * coalesce((SELECT factor FROM defl), 1) AS media_ccaa,
     100.0 * (c.obligaciones / c.poblacion - m.media_hab) / nullif(m.media_hab, 0) AS dif_pct,
     c.obligaciones / sum(c.obligaciones) OVER () AS peso
 FROM por_ccaa c
@@ -241,47 +265,56 @@ SELECT politica, 'Media de las CCAA', media_ccaa FROM ${politicas} WHERE peso >=
 
 ```sql capitulos
 SELECT
-    CASE tipo WHEN 'ingreso' THEN 'Ingresos' ELSE 'Gastos' END AS tipo,
-    capitulo,
-    capitulo_nombre,
-    presupuesto_definitivo,
-    ejecutado,
-    ejecutado / nullif(presupuesto_definitivo, 0) AS grado_ejecucion
-FROM mother.ccaa_cuentas_capitulos
-WHERE cod_ccaa = '${terr[0]?.cod}'
-  AND anio = (SELECT max(anio) FROM mother.ccaa_cuentas_capitulos WHERE cod_ccaa = '${terr[0]?.cod}')
-ORDER BY tipo DESC, capitulo
+    CASE c.tipo WHEN 'ingreso' THEN 'Ingresos' ELSE 'Gastos' END AS tipo,
+    c.capitulo,
+    c.capitulo_nombre,
+    c.anio,
+    c.ejecutado / p.poblacion * coalesce(f.factor, 1) AS ejecutado_hab,
+    c.presupuesto_definitivo,
+    c.ejecutado,
+    c.ejecutado / nullif(c.presupuesto_definitivo, 0) AS grado_ejecucion
+FROM mother.ccaa_cuentas_capitulos c
+JOIN mother.poblacion_territorios p
+  ON p.nivel = 'ccaa' AND p.cod = c.cod_ccaa AND p.sexo = 'Total'
+ AND p.anio = least(c.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
+LEFT JOIN mother.deflactor f ON f.anio = CAST(c.anio AS INTEGER)
+WHERE c.cod_ccaa = '${terr[0]?.cod}'
+  AND c.anio = (SELECT max(anio) FROM mother.ccaa_cuentas_capitulos WHERE cod_ccaa = '${terr[0]?.cod}')
+ORDER BY c.tipo DESC, c.capitulo
 ```
 
 {#if cuentas.length > 0 && cuentas_ultimo[0]?.anio >= 2020}
 
 ## Ingresos y gastos de la comunidad
 
-Cuentas ejecutadas (liquidación) de la administración autonómica consolidada. Se usa el gasto **no financiero** (capítulos 1 a 7), que deja fuera la compra de activos y la devolución de deuda, para comparar lo que cada comunidad gasta de verdad en servicios.
+Cuentas ejecutadas (liquidación) de la administración autonómica consolidada. Se usa el gasto **no financiero** (capítulos 1 a 7), que deja fuera la compra de activos y la devolución de deuda, para comparar lo que cada comunidad gasta de verdad en servicios. Todos los importes van **por habitante** y **descontada la inflación**, en euros de {base[0]?.anio_base}: así la evolución no crece solo porque haya más población o suban los precios.
 
 <Grid cols=3>
     <KpiCard
-        title="Gasto no financiero"
-        value={cuentas_ultimo[0]?.gastos_no_financieros}
-        formattedValue={formatCompact(cuentas_ultimo[0]?.gastos_no_financieros, 1)}
+        title="Gasto no financiero por habitante"
+        value={cuentas_ultimo[0]?.gasto_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab_real, 0)}
         unit="€"
-        period="Liquidación {cuentas_ultimo[0]?.anio}"
+        period="Liquidación {cuentas_ultimo[0]?.anio}, en euros de {base[0]?.anio_base} · total: {formatCompact(cuentas_ultimo[0]?.gastos_no_financieros, 0)} € corrientes"
         source="Ministerio de Hacienda"
+        sparklineData={cuentas.filter(d => d.gasto_hab_real != null).map(d => ({anio: d.anio, valor: d.gasto_hab_real}))}
     />
     <KpiCard
-        title="Gasto por habitante"
-        value={cuentas_ultimo[0]?.gasto_hab}
-        formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab, 0)}
+        title="Ingreso no financiero por habitante"
+        value={cuentas_ultimo[0]?.ingreso_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.ingreso_hab_real, 0)}
         unit="€"
-        period="Ingresos no financieros: {formatNumber(cuentas_ultimo[0]?.ingreso_hab, 0)} € por habitante"
+        period="En euros de {base[0]?.anio_base} · total: {formatCompact(cuentas_ultimo[0]?.ingresos_no_financieros, 0)} € corrientes"
+        sparklineData={cuentas.filter(d => d.ingreso_hab_real != null).map(d => ({anio: d.anio, valor: d.ingreso_hab_real}))}
     />
     <KpiCard
-        title="Saldo no financiero"
-        value={cuentas_ultimo[0]?.saldo_no_financiero}
-        formattedValue={formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)}
+        title="Saldo no financiero por habitante"
+        value={cuentas_ultimo[0]?.saldo_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.saldo_hab_real, 0)}
         unit="€"
-        period="Ingresos − gastos no financieros (criterio presupuestario)"
+        period="Ingresos − gastos no financieros, en euros de {base[0]?.anio_base} · total: {formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 0)} € corrientes"
         direction="positive-up"
+        sparklineData={cuentas.filter(d => d.saldo_hab_real != null).map(d => ({anio: d.anio, valor: d.saldo_hab_real}))}
     />
 </Grid>
 
@@ -292,7 +325,7 @@ Cuentas ejecutadas (liquidación) de la administración autonómica consolidada.
     series=grupo
     swapXY=true
     yFmt=num0
-    title="Gasto no financiero por habitante en {cuentas_ultimo[0]?.anio} (€)"
+    title="Gasto no financiero por habitante en {cuentas_ultimo[0]?.anio} (euros de {base[0]?.anio_base})"
     colorPalette={['#0f766e', '#cbd5e1']}
     sort=false
 />
@@ -307,17 +340,17 @@ Cuentas ejecutadas (liquidación) de la administración autonómica consolidada.
     type=grouped
     swapXY=true
     yFmt=num0
-    title="Euros por habitante en cada política (las que pesan al menos un 2 %)"
+    title="Euros por habitante en cada política (euros de {base[0]?.anio_base}; las que pesan al menos un 2 %)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
 <DataTable data={politicas} rows=all>
     <Column id=politica title="Política de gasto" />
-    <Column id=obligaciones title="Gasto (€)" fmt=num0 />
-    <Column id=peso title="Peso" fmt=pct1 contentType=bar barColor="#99f6e4" />
-    <Column id=por_habitante title="€/habitante" fmt=num0 />
+    <Column id=por_habitante title="€/habitante (euros de {base[0]?.anio_base})" fmt=num0 />
     <Column id=media_ccaa title="Media CCAA (€/hab.)" fmt=num0 />
     <Column id=dif_pct title="Diferencia (%)" fmt=num0 contentType=delta />
+    <Column id=peso title="Peso" fmt=pct1 contentType=bar barColor="#99f6e4" />
+    <Column id=obligaciones title="Gasto total (€ corrientes)" fmt=num0 />
 </DataTable>
 
 ### Evolución
@@ -328,7 +361,8 @@ Cuentas ejecutadas (liquidación) de la administración autonómica consolidada.
     y=importe
     series=concepto
     yFmt=num0
-    title="Ingresos y gastos no financieros (€)"
+    yAxisTitle="€ por habitante"
+    title="Ingresos y gastos no financieros por habitante (euros de {base[0]?.anio_base}, descontada la inflación)"
     colorPalette={['#0f766e', '#b45309']}
 />
 
@@ -337,6 +371,7 @@ Cuentas ejecutadas (liquidación) de la administración autonómica consolidada.
 <DataTable data={capitulos} rows=all groupBy=tipo>
     <Column id=capitulo title="Cap." />
     <Column id=capitulo_nombre title="Capítulo" />
+    <Column id=ejecutado_hab title="Ejecutado por habitante (euros de {base[0]?.anio_base})" fmt=num0 />
     <Column id=presupuesto_definitivo title="Presupuesto definitivo (€)" fmt=num0 />
     <Column id=ejecutado title="Ejecutado (€)" fmt=num0 />
     <Column id=grado_ejecucion title="Ejecución" fmt=pct0 />
@@ -358,13 +393,18 @@ ORDER BY fecha
 ```
 
 ```sql deuda_ultima
+-- Deuda por habitante en euros constantes (misma cuenta que deuda_hab_serie)
 SELECT
     d.fecha, d.anio, d.trimestre, d.deuda_eur, d.deuda_pct_pib,
-    d.deuda_eur / nullif(${terr[0]?.poblacion_ultima}, 0) AS deuda_por_habitante,
+    d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS deuda_hab_real,
     a.deuda_pct_pib AS pct_pib_hace_un_anio
 FROM mother.ccaa_deuda d
 LEFT JOIN mother.ccaa_deuda a
   ON a.cod_ccaa = d.cod_ccaa AND a.fecha = d.fecha - INTERVAL 1 YEAR
+LEFT JOIN mother.poblacion_territorios p
+  ON p.nivel = 'ccaa' AND p.cod = d.cod_ccaa AND p.sexo = 'Total'
+ AND p.anio = least(d.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
+LEFT JOIN mother.deflactor f ON f.anio = CAST(d.anio AS INTEGER)
 WHERE d.cod_ccaa = '${terr[0]?.cod}'
 ORDER BY d.fecha DESC
 LIMIT 1
@@ -381,8 +421,27 @@ WHERE d.fecha = (SELECT max(fecha) FROM mother.ccaa_deuda)
 ORDER BY d.deuda_pct_pib DESC
 ```
 
+```sql deuda_hab_serie
+-- Deuda al cierre de cada año (último trimestre publicado) por habitante, en euros constantes
+WITH pob AS (
+    SELECT anio, poblacion FROM mother.poblacion_territorios
+    WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND sexo = 'Total'
+),
+d AS (
+    SELECT anio, deuda_eur FROM mother.ccaa_deuda
+    WHERE cod_ccaa = '${terr[0]?.cod}'
+    QUALIFY row_number() OVER (PARTITION BY anio ORDER BY fecha DESC) = 1
+)
+SELECT d.anio, d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS valor
+FROM d
+JOIN pob p ON p.anio = least(d.anio, (SELECT max(anio) FROM pob))
+-- Sin IPC anual antes de 2002: la serie real empieza ese año
+JOIN mother.deflactor f ON f.anio = CAST(d.anio AS INTEGER)
+ORDER BY d.anio
+```
+
 ```sql saldo
-SELECT make_date(CAST(anio AS INTEGER), 1, 1) AS fecha, anio, saldo_eur, saldo_pct_pib / 100 AS saldo_pct_pib
+SELECT make_date(CAST(anio AS INTEGER), 1, 1) AS fecha, anio, saldo_eur, saldo_pct_pib / 100 AS saldo_pct_pib, saldo_pct_pib AS saldo_pct
 FROM mother.ccaa_saldo
 WHERE cod_ccaa = '${terr[0]?.cod}'
 ORDER BY anio
@@ -394,12 +453,13 @@ ORDER BY anio
 
 <Grid cols=3>
     <KpiCard
-        title="Deuda pública"
-        value={deuda_ultima[0]?.deuda_eur}
-        formattedValue={formatCompact(deuda_ultima[0]?.deuda_eur, 1)}
+        title="Deuda pública por habitante"
+        value={deuda_ultima[0]?.deuda_hab_real}
+        formattedValue={formatNumber(deuda_ultima[0]?.deuda_hab_real, 0)}
         unit="€"
-        period="{deuda_ultima[0]?.trimestre}.º trim. {deuda_ultima[0]?.anio}"
+        period="{deuda_ultima[0]?.trimestre}.º trim. {deuda_ultima[0]?.anio}, en euros de {base[0]?.anio_base} · total: {formatCompact(deuda_ultima[0]?.deuda_eur, 0)} € corrientes"
         source="Banco de España (PDE)"
+        sparklineData={deuda_hab_serie}
     />
     <KpiCard
         title="Deuda sobre el PIB regional"
@@ -410,15 +470,22 @@ ORDER BY anio
         changeUnit=" pp"
         changePeriod="vs. hace un año"
         direction="positive-down"
+        sparklineData={deuda.filter(d => d.deuda_pct_pib != null).slice(-40).map(d => ({fecha: d.fecha, valor: d.deuda_pct_pib}))}
     />
+    {#if saldo.length > 0}
     <KpiCard
-        title="Deuda por habitante"
-        value={deuda_ultima[0]?.deuda_por_habitante}
-        formattedValue={formatNumber(deuda_ultima[0]?.deuda_por_habitante, 0)}
-        unit="€"
-        period="con la población del Padrón {terr[0]?.anio_poblacion}"
+        title="Déficit (−) o superávit (+)"
+        value={saldo[saldo.length - 1]?.saldo_pct}
+        formattedValue={formatNumber(saldo[saldo.length - 1]?.saldo_pct, 1)}
+        unit="% PIB"
+        period="en {saldo[saldo.length - 1]?.anio}"
+        direction="positive-up"
+        sparklineData={saldo.map(d => ({anio: d.anio, valor: d.saldo_pct}))}
     />
+    {/if}
 </Grid>
+
+<p class="text-xs text-gray-500">La deuda por habitante usa la población del Padrón de cada año (la última disponible para los años sin Padrón) y está descontada la inflación: euros de {base[0]?.anio_base} (la serie de la miniatura empieza en 2002, primer año con IPC anual en la base).</p>
 
 <BarChart
     data={deuda_ranking}
@@ -472,6 +539,9 @@ SELECT
     max(t.efectivos) FILTER (WHERE t.administracion = 'Estado') AS estado,
     max(t.efectivos) FILTER (WHERE t.administracion = 'Comunidades autónomas') AS ccaa,
     max(t.efectivos) FILTER (WHERE t.administracion = 'Entidades locales') AS local,
+    100.0 * max(t.efectivos) FILTER (WHERE t.administracion = 'Comunidades autónomas') / max(t.efectivos) FILTER (WHERE t.administracion = 'Total') AS pct_ccaa,
+    100.0 * max(t.efectivos) FILTER (WHERE t.administracion = 'Estado') / max(t.efectivos) FILTER (WHERE t.administracion = 'Total') AS pct_estado,
+    100.0 * max(t.efectivos) FILTER (WHERE t.administracion = 'Entidades locales') / max(t.efectivos) FILTER (WHERE t.administracion = 'Total') AS pct_local,
     (SELECT por_1000_hab FROM mother.empleo_territorio WHERE nivel = 'pais' AND administracion = 'Total' AND fecha = t.fecha) AS por_1000_espana,
     (SELECT count(*) + 1 FROM mother.empleo_territorio o
       WHERE o.nivel = 'ccaa' AND o.administracion = 'Total' AND o.fecha = t.fecha
@@ -482,7 +552,11 @@ GROUP BY t.fecha
 ```
 
 ```sql empleo_sectores
-SELECT sector, administracion, sum(efectivos) AS efectivos
+-- Por 1.000 habitantes, con la última población del Padrón
+SELECT
+    sector, administracion,
+    1000.0 * sum(efectivos) / (SELECT poblacion_ultima FROM mother.territorios WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}') AS por_1000,
+    sum(efectivos) AS efectivos
 FROM mother.empleo_efectivos
 WHERE cod_ccaa = '${terr[0]?.cod}' AND fecha = (SELECT max(fecha) FROM mother.empleo_efectivos)
 GROUP BY ALL
@@ -490,21 +564,39 @@ ORDER BY efectivos DESC
 ```
 
 ```sql empleo_serie
-SELECT fecha, administracion, efectivos
+SELECT fecha, administracion, por_1000_hab, efectivos
 FROM mother.empleo_territorio
 WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND administracion <> 'Total'
 ORDER BY fecha
 ```
 
+```sql empleo_total_serie
+SELECT fecha, efectivos, por_1000_hab
+FROM mother.empleo_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND administracion = 'Total'
+ORDER BY fecha
+```
+
+```sql empleo_gasto_serie
+-- Gasto de personal de la comunidad por habitante, en euros constantes
+SELECT g.anio, g.gasto_personal_ccaa_hab * coalesce(f.factor, 1) AS valor
+FROM mother.empleo_gasto_personal_territorio g
+LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
+WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa_hab IS NOT NULL
+ORDER BY g.anio
+```
+
 ```sql empleo_gasto
+-- Importes por habitante en euros constantes del último año completo
 SELECT
     g.anio,
     g.gasto_personal_ccaa,
-    g.gasto_personal_ccaa_hab,
-    g.gasto_personal_ayuntamientos_hab,
-    (SELECT avg(gasto_personal_ccaa_hab) FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'ccaa' AND x.anio = g.anio AND x.cod <= '17') AS media_ccaa_hab,
-    (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS aytos_espana_hab
+    g.gasto_personal_ccaa_hab * coalesce(f.factor, 1) AS gasto_personal_ccaa_hab,
+    g.gasto_personal_ayuntamientos_hab * coalesce(f.factor, 1) AS gasto_personal_ayuntamientos_hab,
+    coalesce(f.factor, 1) * (SELECT avg(gasto_personal_ccaa_hab) FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'ccaa' AND x.anio = g.anio AND x.cod <= '17') AS media_ccaa_hab,
+    coalesce(f.factor, 1) * (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS aytos_espana_hab
 FROM mother.empleo_gasto_personal_territorio g
+LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
 WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa IS NOT NULL
 ORDER BY g.anio DESC
 LIMIT 1
@@ -553,17 +645,19 @@ ORDER BY b.anio
 
 <Grid cols=3>
     <KpiCard
-        title="Empleados públicos"
-        value={empleo[0]?.efectivos}
-        formattedValue={formatNumber(empleo[0]?.efectivos, 0)}
-        period="en {terr[0]?.nombre} · {empleo[0]?.fecha_texto}"
-        source="Registro Central de Personal"
-    />
-    <KpiCard
-        title="Por cada 1.000 habitantes"
+        title="Empleados públicos por 1.000 habitantes"
         value={empleo[0]?.por_1000}
         formattedValue={formatNumber(empleo[0]?.por_1000, 1)}
-        period="España: {formatNumber(empleo[0]?.por_1000_espana, 1)} · puesto {empleo[0]?.puesto} de 19"
+        period="España: {formatNumber(empleo[0]?.por_1000_espana, 1)} · puesto {empleo[0]?.puesto} de 19 · {formatNumber(empleo[0]?.efectivos, 0)} empleados a {empleo[0]?.fecha_texto}"
+        source="Registro Central de Personal"
+        sparklineData={empleo_total_serie.filter(d => d.por_1000_hab != null).map(d => ({fecha: d.fecha, valor: d.por_1000_hab}))}
+    />
+    <KpiCard
+        title="Trabajan para la comunidad"
+        value={empleo[0]?.pct_ccaa}
+        formattedValue={formatNumber(empleo[0]?.pct_ccaa, 0)}
+        unit="%"
+        period="del empleo público · Estado: {formatNumber(empleo[0]?.pct_estado, 0)} % · entidades locales: {formatNumber(empleo[0]?.pct_local, 0)} %"
         source="Registro Central de Personal"
     />
     {#if empleo_gasto.length > 0}
@@ -571,8 +665,9 @@ ORDER BY b.anio
         title="Gasto de personal de la comunidad"
         value={empleo_gasto[0]?.gasto_personal_ccaa_hab}
         formattedValue="{formatNumber(empleo_gasto[0]?.gasto_personal_ccaa_hab, 0)} €/hab."
-        period="{formatNumber(empleo_gasto[0]?.gasto_personal_ccaa / 1e9, 1)} mil M€ en {empleo_gasto[0]?.anio} · media de las comunidades: {formatNumber(empleo_gasto[0]?.media_ccaa_hab, 0)} €"
+        period="{empleo_gasto[0]?.anio}, en euros de {base[0]?.anio_base} · media de las comunidades: {formatNumber(empleo_gasto[0]?.media_ccaa_hab, 0)} € · total: {formatNumber(empleo_gasto[0]?.gasto_personal_ccaa / 1e9, 1)} mil M€ corrientes"
         source="Hacienda (capítulo 1)"
+        sparklineData={empleo_gasto_serie}
     />
     {/if}
 </Grid>
@@ -581,28 +676,28 @@ ORDER BY b.anio
     <BarChart
         data={empleo_sectores}
         x=sector
-        y=efectivos
+        y=por_1000
         series=administracion
         swapXY=true
         sort=false
-        yFmt=num0
+        yFmt=num1
         colorPalette={['#1d4ed8', '#0f766e', '#f59e0b']}
-        title="Por sector y administración"
+        title="Por sector y administración (por 1.000 habitantes)"
     />
     <BarChart
         data={empleo_serie}
         x=fecha
-        y=efectivos
+        y=por_1000_hab
         series=administracion
         type=stacked
-        yFmt=num0
+        yFmt=num1
         xFmt="mmm yyyy"
         colorPalette={['#0f766e', '#f59e0b', '#1d4ed8']}
-        title="Evolución (1 de enero y 1 de julio)"
+        title="Evolución por 1.000 habitantes (1 de enero y 1 de julio)"
     />
 </Grid>
 
-<p class="text-xs text-gray-500">Personal con puesto en {terr[0]?.nombre} de las tres administraciones: el Estado (Guardia Civil, Policía Nacional, militares, Agencia Tributaria...), la comunidad (sanidad, educación, universidades...) y las entidades locales. {#if empleo_gasto.length > 0 && empleo_gasto[0]?.gasto_personal_ayuntamientos_hab}Los ayuntamientos de la comunidad gastaron en personal {formatNumber(empleo_gasto[0].gasto_personal_ayuntamientos_hab, 0)} € por habitante en {empleo_gasto[0].anio} (media de España: {formatNumber(empleo_gasto[0].aytos_espana_hab, 0)} €).{/if} {#if empleo_salario.length > 0 && empleo_salario[0]?.salario_publico}Salario medio bruto en 2022: {formatNumber(empleo_salario[0].salario_publico, 0)} € al año en el sector público y {formatNumber(empleo_salario[0].salario_privado, 0)} € en el privado (INE).{/if} El salto de 2023 es en parte una revisión del registro. Más en <a href="/cuentas-publicas/empleo-publico">Empleo público</a>.</p>
+<p class="text-xs text-gray-500">Personal con puesto en {terr[0]?.nombre} de las tres administraciones: el Estado (Guardia Civil, Policía Nacional, militares, Agencia Tributaria...), la comunidad (sanidad, educación, universidades...) y las entidades locales. {#if empleo_gasto.length > 0 && empleo_gasto[0]?.gasto_personal_ayuntamientos_hab}Los ayuntamientos de la comunidad gastaron en personal {formatNumber(empleo_gasto[0].gasto_personal_ayuntamientos_hab, 0)} € por habitante en {empleo_gasto[0].anio} (media de España: {formatNumber(empleo_gasto[0].aytos_espana_hab, 0)} €; euros de {base[0]?.anio_base}).{/if} {#if empleo_salario.length > 0 && empleo_salario[0]?.salario_publico}Salario medio bruto en 2022: {formatNumber(empleo_salario[0].salario_publico, 0)} € al año en el sector público y {formatNumber(empleo_salario[0].salario_privado, 0)} € en el privado (INE).{/if} El salto de 2023 es en parte una revisión del registro. Más en <a href="/cuentas-publicas/empleo-publico">Empleo público</a>.</p>
 
 {/if}
 

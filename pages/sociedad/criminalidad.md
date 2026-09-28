@@ -29,6 +29,28 @@ FROM ${espana} e, u
 GROUP BY u.anio
 ```
 
+```sql serie_kpi
+-- Historia para los sparklines, en tasa por 1.000 habitantes: Balance (2019-) y, antes, la serie larga (2010-2018)
+WITH b AS (
+    SELECT anio, categoria, tasa_1000
+    FROM mother.crimen_balance
+    WHERE nivel = 'pais' AND categoria IN ('Total infracciones penales', 'Homicidios y asesinatos consumados')
+),
+l AS (
+    SELECT
+        anio,
+        CASE WHEN tipologia = 'TOTAL INFRACCIONES PENALES' THEN 'Total infracciones penales' ELSE 'Homicidios y asesinatos consumados' END AS categoria,
+        max(tasa_1000) AS tasa_1000
+    FROM mother.crimen_serie_larga
+    WHERE nivel = 'pais' AND (tipologia = 'TOTAL INFRACCIONES PENALES' OR codigo_tipologia = '1.1.1')
+    GROUP BY 1, 2
+)
+SELECT anio, categoria, tasa_1000 FROM b
+UNION ALL
+SELECT anio, categoria, tasa_1000 FROM l WHERE anio < (SELECT min(anio) FROM b)
+ORDER BY categoria, anio
+```
+
 ```sql semestre
 SELECT periodo, anio, infracciones, infracciones_anio_anterior, infracciones / infracciones_anio_anterior - 1 AS variacion
 FROM mother.crimen_ultimo_periodo
@@ -43,20 +65,22 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
     <KpiCard
         title="Infracciones penales conocidas"
         value={resumen[0]?.total}
-        formattedValue={formatCompact(resumen[0]?.total, 2)}
-        period="{formatNumber(resumen[0]?.tasa, 1)} por 1.000 habitantes · {resumen[0]?.anio}"
+        formattedValue="{formatNumber(resumen[0]?.tasa, 1)} por 1.000 hab."
+        period="{formatCompact(resumen[0]?.total, 2)} en total · {resumen[0]?.anio}"
         change={resumen[0]?.total_2019 ? (100 * (resumen[0].total / resumen[0].total_2019 - 1)).toFixed(1) : null}
         changeUnit=" %"
         changePeriod="vs. 2019"
         direction="positive-down"
         source="Ministerio del Interior"
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
     />
     <KpiCard
         title="Homicidios y asesinatos"
         value={resumen[0]?.homicidios}
-        formattedValue={formatNumber(resumen[0]?.homicidios, 0)}
-        period="consumados · {formatNumber(resumen[0]?.homicidios_100k, 2)} por 100.000 habitantes"
+        formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} por 100.000 hab."
+        period="{formatNumber(resumen[0]?.homicidios, 0)} consumados en {resumen[0]?.anio}"
         source="Ministerio del Interior"
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
     />
     <KpiCard
         title="Cibercriminalidad"
@@ -64,6 +88,7 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
         formattedValue="{formatNumber(100 * resumen[0]?.ciber / resumen[0]?.total, 0)} %"
         period="{formatNumber(resumen[0]?.ciber / 1000, 0)} mil infracciones por internet, sobre todo estafas"
         source="Ministerio del Interior"
+        sparklineData={espana.filter(d => d.categoria === 'Cibercriminalidad').map(d => 100 * d.infracciones / (espana.find(t => t.anio === d.anio && t.categoria === 'Total infracciones penales')?.infracciones ?? NaN)).filter(v => Number.isFinite(v))}
     />
     <KpiCard
         title="Este año ({semestre[0]?.periodo})"
@@ -77,12 +102,12 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
     />
 </Grid>
 
-<p class="text-xs text-gray-500">Son hechos <b>conocidos</b> (denunciados o descubiertos por la policía), no todos los delitos cometidos: una subida puede deberse a que se denuncia más (como ha pasado con los delitos sexuales o las estafas por internet). La tasa por habitante no tiene en cuenta a turistas y visitantes, que también sufren y cometen delitos: por eso sale alta en las zonas más turísticas.</p>
+<p class="text-xs text-gray-500">Todas las cifras se dan por habitante para que la evolución no refleje solo el crecimiento de la población (España ganó unos 2 millones de habitantes entre 2019 y 2025); el total aparece como dato secundario. Son hechos <b>conocidos</b> (denunciados o descubiertos por la policía), no todos los delitos cometidos: una subida puede deberse a que se denuncia más (como ha pasado con los delitos sexuales o las estafas por internet). La tasa por habitante no tiene en cuenta a turistas y visitantes, que también sufren y cometen delitos: por eso sale alta en las zonas más turísticas.</p>
 
 ## Qué delitos y cómo evolucionan
 
 ```sql categorias
-SELECT categoria, infracciones, tasa_1000
+SELECT categoria, infracciones, tasa_1000 * 100 AS tasa_100k
 FROM ${espana}
 WHERE anio = (SELECT max(anio) FROM ${espana})
   AND categoria NOT IN ('Total infracciones penales', 'Criminalidad convencional', 'Cibercriminalidad', 'Resto de infracciones',
@@ -93,16 +118,17 @@ ORDER BY infracciones DESC
 <BarChart
     data={categorias}
     x=categoria
-    y=infracciones
+    y=tasa_100k
     swapXY=true
     sort=false
     yFmt=num0
+    yAxisTitle="por 100.000 habitantes"
     fillColor="#b91c1c"
-    title="Principales delitos conocidos en {resumen[0]?.anio}"
+    title="Principales delitos conocidos en {resumen[0]?.anio}, por 100.000 habitantes"
 />
 
 ```sql convencional_ciber
-SELECT anio, categoria, infracciones
+SELECT anio, categoria, infracciones, tasa_1000
 FROM ${espana}
 WHERE categoria IN ('Criminalidad convencional', 'Cibercriminalidad')
 ORDER BY anio
@@ -111,19 +137,20 @@ ORDER BY anio
 <BarChart
     data={convencional_ciber}
     x=anio
-    y=infracciones
+    y=tasa_1000
     series=categoria
     type=stacked
-    yFmt=num0
+    yFmt=num1
+    yAxisTitle="por 1.000 habitantes"
     xFmt="####"
     colorPalette={['#b91c1c', '#7c3aed']}
-    title="Criminalidad convencional y por internet"
+    title="Criminalidad convencional y por internet, por 1.000 habitantes"
 />
 
 <p class="text-xs text-gray-500">2020 es el año del confinamiento. Desde 2019 el Ministerio cuenta aparte la cibercriminalidad (estafas y otros delitos cometidos por internet), que ha crecido mucho más que el resto.</p>
 
 ```sql serie_larga
-SELECT anio, tipologia, infracciones
+SELECT anio, tipologia, infracciones, tasa_1000 * 100 AS tasa_100k
 FROM mother.crimen_serie_larga
 WHERE nivel = 'pais' AND codigo_tipologia IN ('1.1.1', '3.2', '5.1', '5.2.2', '5.3', '5.5.1', '6.1')
 ORDER BY anio
@@ -132,13 +159,14 @@ ORDER BY anio
 <LineChart
     data={serie_larga}
     x=anio
-    y=infracciones
+    y=tasa_100k
     series=tipologia
-    yFmt=num0
+    yFmt=num1
+    yAxisTitle="por 100.000 habitantes"
     xFmt="####"
     yLog=true
     legend=true
-    title="Algunos delitos desde 2010 (escala logarítmica)"
+    title="Algunos delitos desde 2010 por 100.000 habitantes (escala logarítmica)"
 />
 
 <p class="text-xs text-gray-500">Escala logarítmica para ver juntos delitos muy distintos en número: una pendiente igual es un mismo ritmo de crecimiento. Las estafas informáticas se han multiplicado desde 2016, los robos en viviendas han bajado y las agresiones sexuales con penetración conocidas han aumentado, en parte porque se denuncian más.</p>

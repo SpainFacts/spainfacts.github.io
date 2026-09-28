@@ -50,6 +50,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
         changePeriod="en 10 años"
         direction="positive-up"
         source="Eurostat"
+        sparklineData={principales.filter(d => d.cod_sector === 'FC_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}
     />
     <KpiCard
         title="Hogares"
@@ -61,6 +62,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
         changePeriod="en 10 años"
         direction="positive-up"
         source="Eurostat"
+        sparklineData={principales.filter(d => d.cod_sector === 'FC_OTH_HH_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}
     />
     <KpiCard
         title="Industria"
@@ -68,6 +70,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
         formattedValue="{formatNumber(100 * ultimo[0]?.industria, 1)} %"
         period="de su energía es electricidad"
         source="Eurostat"
+        sparklineData={principales.filter(d => d.cod_sector === 'FC_IND_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}
     />
     <KpiCard
         title="Transporte"
@@ -75,6 +78,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
         formattedValue="{formatNumber(100 * ultimo[0]?.transporte, 1)} %"
         period="casi todo es tren; el coche eléctrico apenas se nota aún"
         source="Eurostat"
+        sparklineData={principales.filter(d => d.cod_sector === 'FC_TRA_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}
         href="/movilidad/coche-electrico"
     />
 </Grid>

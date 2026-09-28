@@ -17,6 +17,7 @@ SELECT
     count(*) FILTER (WHERE incumple) AS incumplen,
     count(*) AS total,
     sum(poblacion) FILTER (WHERE incumple) AS poblacion_afectada,
+    1000.0 * coalesce(sum(poblacion) FILTER (WHERE incumple), 0) / sum(poblacion) AS afectados_por_1000,
     count(*) FILTER (WHERE incumple AND poblacion >= 20000) AS grandes
 FROM (SELECT * FROM mother.transparencia_liquidaciones WHERE aplica_indicador)
 WHERE anio = (SELECT anio FROM ${ultimo})
@@ -37,6 +38,16 @@ GROUP BY cod_mun
 
 ```sql resumen_rachas
 SELECT count(*) FILTER (WHERE anios_seguidos >= 3) AS tres_o_mas FROM ${rachas}
+```
+
+```sql liq_serie
+SELECT
+    anio,
+    count(*) FILTER (WHERE incumple) AS incumplen,
+    1000.0 * coalesce(sum(poblacion) FILTER (WHERE incumple), 0) / sum(poblacion) AS afectados_por_1000
+FROM (SELECT * FROM mother.transparencia_liquidaciones WHERE aplica_indicador)
+GROUP BY anio
+ORDER BY anio
 ```
 
 # 🔍 Transparencia: quién no rinde cuentas
@@ -60,13 +71,15 @@ Cada ayuntamiento debe remitir al Ministerio de Hacienda la liquidación de su p
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
         period="{formatNumber(100 * resumen[0]?.incumplen / resumen[0]?.total, 1)} % de {formatNumber(resumen[0]?.total, 0)} ayuntamientos"
         source="Ministerio de Hacienda (CONPREL)"
+        sparklineData={liq_serie.map(d => d.incumplen)}
     />
     <KpiCard
         title="Vecinos afectados"
-        value={resumen[0]?.poblacion_afectada}
-        formattedValue={formatNumber(resumen[0]?.poblacion_afectada, 0)}
-        unit="hab."
-        period="{formatNumber(resumen[0]?.grandes, 0)} de esos ayuntamientos tienen más de 20.000 habitantes"
+        value={resumen[0]?.afectados_por_1000}
+        formattedValue={formatNumber(resumen[0]?.afectados_por_1000, 1)}
+        unit="por cada 1.000 hab."
+        period="{formatNumber(resumen[0]?.poblacion_afectada, 0)} vecinos en total; {formatNumber(resumen[0]?.grandes, 0)} de esos ayuntamientos tienen más de 20.000 habitantes"
+        sparklineData={liq_serie.map(d => d.afectados_por_1000)}
     />
     <KpiCard
         title="Tres años o más seguidos"
@@ -294,6 +307,24 @@ WHERE aplica_indicador AND obligacion = 'cuenta_general'
   AND ejercicio = (SELECT cg FROM ${tcu_ultimo})
 ```
 
+```sql tcu_serie
+-- Solo ejercicios con cobertura comparable (al menos la mitad de ayuntamientos del ejercicio mejor cubierto)
+WITH por_ejercicio AS (
+    SELECT
+        CAST(ejercicio AS INTEGER) AS ejercicio,
+        obligacion,
+        count(*) FILTER (WHERE incumple) AS no_rendida,
+        count(*) AS total
+    FROM ${tcu}
+    WHERE aplica_indicador AND obligacion IN ('cuenta_general', 'control_interno')
+    GROUP BY CAST(ejercicio AS INTEGER), obligacion
+)
+SELECT ejercicio, obligacion, no_rendida
+FROM por_ejercicio
+WHERE total >= 0.5 * (SELECT max(p2.total) FROM por_ejercicio p2 WHERE p2.obligacion = por_ejercicio.obligacion)
+ORDER BY obligacion, ejercicio
+```
+
 ```sql tcu_resumen_ci
 SELECT
     count(*) FILTER (WHERE incumple) AS no_rendida,
@@ -326,6 +357,7 @@ La **Cuenta General** recoge todas las cuentas del ayuntamiento (presupuesto, ba
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
         period="{formatNumber(100 * tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total, 1)} % de {formatNumber(tcu_resumen[0]?.total, 0)} ayuntamientos; no consta rendida a {tcu_cobertura[0]?.extraccion}"
         source="Tribunal de Cuentas (rendiciondecuentas.es)"
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
     />
     <KpiCard
         title="Enviada dentro de plazo"
@@ -338,6 +370,7 @@ La **Cuenta General** recoge todas las cuentas del ayuntamiento (presupuesto, ba
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
         period="{formatNumber(100 * tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total, 1)} % de {formatNumber(tcu_resumen_ci[0]?.total, 0)} ayuntamientos (plazo: 30/04/{tcu_ultimo[0]?.ci + 1})"
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
     />
 </Grid>
 
@@ -510,13 +543,40 @@ SELECT
 FROM mother.transparencia_pie_mensual
 ```
 
+```sql base_deflactor
+-- Año cuyos euros se usan como referencia (último año completo con IPC)
+SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
+```
+
 ```sql pie_resumen
+-- Importes en euros corrientes (eur_12m) y a precios constantes (eur_12m_real = importe por el factor del deflactor de su año)
 SELECT
-    count(DISTINCT cod_mun) FILTER (WHERE periodo = (SELECT periodo FROM ${pie_ultimo})) AS retenidos_mes,
-    count(DISTINCT cod_mun) FILTER (WHERE periodo = (SELECT periodo FROM ${pie_ultimo}) AND seccion = 'liquidacion') AS retenidos_liquidacion,
-    sum(importe_eur) FILTER (WHERE periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m,
-    count(DISTINCT cod_mun) FILTER (WHERE periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS retenidos_12m
-FROM mother.transparencia_pie_mensual
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = (SELECT periodo FROM ${pie_ultimo})) AS retenidos_mes,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = (SELECT periodo FROM ${pie_ultimo}) AND p.seccion = 'liquidacion') AS retenidos_liquidacion,
+    sum(p.importe_eur) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m,
+    sum(p.importe_eur * coalesce(d.factor, 1)) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m_real,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS retenidos_12m
+FROM mother.transparencia_pie_mensual p
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
+```
+
+```sql pie_serie_12m
+-- Últimos 24 meses: retenidos en el mes y acumulado móvil de 12 meses (misma definición que pie_resumen); euros a precios constantes con mother.deflactor
+WITH meses AS (
+    SELECT DISTINCT periodo FROM mother.transparencia_pie_mensual
+)
+SELECT
+    m.periodo,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = m.periodo) AS retenidos_mes,
+    sum(p.importe_eur * coalesce(d.factor, 1)) AS eur_12m_real,
+    count(DISTINCT p.cod_mun) AS retenidos_12m
+FROM meses m
+JOIN mother.transparencia_pie_mensual p
+  ON p.periodo > m.periodo - INTERVAL 12 MONTH AND p.periodo <= m.periodo
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
+WHERE m.periodo > (SELECT max(periodo) FROM meses) - INTERVAL 24 MONTH
+GROUP BY m.periodo
+ORDER BY m.periodo
 ```
 
 <Grid cols=3>
@@ -526,35 +586,40 @@ FROM mother.transparencia_pie_mensual
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_mes, 0)}
         period="{formatNumber(pie_resumen[0]?.retenidos_liquidacion, 0)} de ellos por no remitir la liquidación"
         source="Ministerio de Hacienda (OVEELL)"
+        sparklineData={pie_serie_12m.map(d => d.retenidos_mes)}
     />
     <KpiCard
         title="Retenido en los últimos 12 meses"
-        value={pie_resumen[0]?.eur_12m}
-        formattedValue={formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)}
-        unit="M€"
-        period="participación en tributos del Estado no transferida mientras duraba el incumplimiento"
+        value={pie_resumen[0]?.eur_12m_real}
+        formattedValue={formatNumber(pie_resumen[0]?.eur_12m_real / 1e6, 1)}
+        unit="M€ de {base_deflactor[0]?.anio_base}"
+        period="participación en tributos del Estado no transferida mientras duraba el incumplimiento ({formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)} M€ corrientes)"
         source="Entregas a cuenta mensuales"
+        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => d.eur_12m_real)}
     />
     <KpiCard
         title="Ayuntamientos retenidos en el último año"
         value={pie_resumen[0]?.retenidos_12m}
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_12m, 0)}
         period="al menos un mes en los últimos 12"
+        sparklineData={pie_serie_12m.map(d => d.retenidos_12m)}
     />
 </Grid>
 
 ```sql pie_serie
 SELECT
-    periodo,
-    CASE seccion
+    p.periodo,
+    CASE p.seccion
         WHEN 'liquidacion' THEN 'Liquidación'
         WHEN 'presupuesto' THEN 'Presupuesto del año'
         ELSE 'Líneas fundamentales'
     END AS motivo,
-    count(DISTINCT cod_mun) AS ayuntamientos,
-    sum(importe_eur) AS importe
-FROM mother.transparencia_pie_mensual
-GROUP BY ALL
+    count(DISTINCT p.cod_mun) AS ayuntamientos,
+    sum(p.importe_eur) AS importe,
+    sum(p.importe_eur * coalesce(d.factor, 1)) AS importe_real
+FROM mother.transparencia_pie_mensual p
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
+GROUP BY 1, 2
 ORDER BY periodo, motivo
 ```
 
@@ -571,15 +636,15 @@ ORDER BY periodo, motivo
 <BarChart
     data={pie_serie}
     x=periodo
-    y=importe
+    y=importe_real
     series=motivo
     type=stacked
     yFmt=eur1m
-    title="Euros retenidos cada mes"
+    title="Euros retenidos cada mes (euros de {base_deflactor[0]?.anio_base}, descontada la inflación)"
     colorPalette={['#9a3412', '#f59e0b', '#fcd34d']}
 />
 
-<p class="text-xs text-gray-500">Cada lista mensual es una foto: quién sigue retenido ese mes. La lista de la liquidación se renueva hacia junio (con la liquidación de dos años antes) y se va vaciando a medida que los ayuntamientos la envían; la del presupuesto aparece en noviembre y diciembre, y la de las líneas fundamentales de diciembre a agosto. No hay importes para los meses en que Hacienda no publicó el Excel de entregas a cuenta (marzo y octubre de 2019, noviembre de 2020 a enero de 2021 y febrero de 2022).</p>
+<p class="text-xs text-gray-500">Cada lista mensual es una foto: quién sigue retenido ese mes. La lista de la liquidación se renueva hacia junio (con la liquidación de dos años antes) y se va vaciando a medida que los ayuntamientos la envían; la del presupuesto aparece en noviembre y diciembre, y la de las líneas fundamentales de diciembre a agosto. No hay importes para los meses en que Hacienda no publicó el Excel de entregas a cuenta (marzo y octubre de 2019, noviembre de 2020 a enero de 2021 y febrero de 2022). Como en el resto de la web, los importes se expresan descontada la inflación, en euros de {base_deflactor[0]?.anio_base} (IPC medio anual del INE; el año en curso, con la media de los meses publicados).</p>
 
 ### Retenidos en {pie_ultimo[0]?.mes}
 
@@ -601,6 +666,18 @@ FROM g JOIN actual a ON a.cod_mun = g.cod_mun AND a.grupo = g.grupo
 GROUP BY g.cod_mun
 ```
 
+```sql pie_importe_real
+-- Importe retenido de cada campaña (ayuntamiento, información y ejercicio) en euros constantes, sumando mes a mes
+SELECT
+    p.cod_mun,
+    p.seccion,
+    CAST(p.ejercicio_referencia AS INTEGER) AS anio,
+    sum(p.importe_eur * coalesce(d.factor, 1)) AS importe_real
+FROM mother.transparencia_pie_mensual p
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
+GROUP BY 1, 2, 3
+```
+
 ```sql pie_lista
 SELECT
     t.municipio,
@@ -610,12 +687,14 @@ SELECT
     r.meses_seguidos,
     r.desde,
     sum(t.importe_retenido_eur) AS importe,
+    sum(ir.importe_real) AS importe_real,
     bool_or(t.por_dependientes) AS por_dependientes,
     arg_min(t.lista, t.primer_mes) AS lista,
     arg_min(t.familia, t.primer_mes) AS familia,
     '/territorios/municipios?m=' || t.cod_mun AS enlace
 FROM mother.transparencia_pie t
-LEFT JOIN ${pie_rachas} r USING (cod_mun)
+LEFT JOIN ${pie_importe_real} ir ON ir.cod_mun = t.cod_mun AND ir.seccion = t.seccion AND ir.anio = CAST(t.anio AS INTEGER)
+LEFT JOIN ${pie_rachas} r ON r.cod_mun = t.cod_mun
 LEFT JOIN mother.territorios p ON p.nivel = 'provincia' AND p.cod = t.cod_prov
 WHERE t.sigue_retenido
 GROUP BY t.cod_mun, t.municipio, p.nombre, t.poblacion, r.meses_seguidos, r.desde
@@ -628,12 +707,12 @@ ORDER BY t.poblacion DESC
     <Column id=poblacion title="Habitantes" fmt=num0 />
     <Column id=motivo title="Información pendiente (ejercicio)" />
     <Column id=meses_seguidos title="Meses seguidos retenido" contentType=colorscale colorMax=24 />
-    <Column id=importe title="Retenido en esta campaña" fmt=eur0 />
+    <Column id=importe_real title="Retenido en esta campaña (€ de {base_deflactor[0]?.anio_base})" fmt=eur0 />
     <Column id=lista title="Lista del alcalde al empezar la retención" />
     <Column id=familia title="Familia política" />
 </DataTable>
 
-<p class="text-xs text-gray-500">Ordenados de más a menos habitantes. «Retenido en esta campaña»: euros no transferidos desde que empezó la retención por esa información (si coincide con otra, el importe mensual se reparte entre ambas). Algunos están retenidos por no haber recibido Hacienda la información de una entidad o sociedad que depende del ayuntamiento, no la del propio ayuntamiento.</p>
+<p class="text-xs text-gray-500">Ordenados de más a menos habitantes. «Retenido en esta campaña»: euros no transferidos desde que empezó la retención por esa información (si coincide con otra, el importe mensual se reparte entre ambas), descontada la inflación mes a mes. Algunos están retenidos por no haber recibido Hacienda la información de una entidad o sociedad que depende del ayuntamiento, no la del propio ayuntamiento.</p>
 
 ### Por comunidad autónoma
 
@@ -757,12 +836,24 @@ SELECT
     count(*) FILTER (WHERE aplica_indicador AND NOT reporta) AS no_comunican,
     count(*) FILTER (WHERE aplica_indicador) AS total,
     sum(poblacion) FILTER (WHERE aplica_indicador AND NOT reporta) AS poblacion_afectada,
+    1000.0 * coalesce(sum(poblacion) FILTER (WHERE aplica_indicador AND NOT reporta), 0) / sum(poblacion) FILTER (WHERE aplica_indicador) AS afectados_por_1000,
     count(*) FILTER (WHERE aplica_indicador AND NOT reporta AND poblacion >= 5000) AS mas_5000,
     count(*) FILTER (WHERE supera_30) AS supera_30,
     count(*) FILTER (WHERE reporta) AS comunican,
     sum(poblacion) FILTER (WHERE supera_30) AS poblacion_supera_30
 FROM mother.transparencia_pmp
 WHERE fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo})
+```
+
+```sql pmp_serie
+SELECT
+    fecha_trimestre AS fecha,
+    count(*) FILTER (WHERE aplica_indicador AND NOT reporta) AS no_comunican,
+    1000.0 * coalesce(sum(poblacion) FILTER (WHERE aplica_indicador AND NOT reporta), 0) / sum(poblacion) FILTER (WHERE aplica_indicador) AS afectados_por_1000,
+    count(*) FILTER (WHERE supera_30) AS supera_30
+FROM mother.transparencia_pmp
+GROUP BY fecha_trimestre
+ORDER BY fecha_trimestre
 ```
 
 <Grid cols=3>
@@ -772,19 +863,22 @@ WHERE fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo})
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
         period="{formatNumber(100 * pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total, 1)} % de {formatNumber(pmp_resumen[0]?.total, 0)} ayuntamientos"
         source="Ministerio de Hacienda (PMP_NET)"
+        sparklineData={pmp_serie.map(d => d.no_comunican)}
     />
     <KpiCard
         title="Vecinos afectados"
-        value={pmp_resumen[0]?.poblacion_afectada}
-        formattedValue={formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)}
-        unit="hab."
-        period="{formatNumber(pmp_resumen[0]?.mas_5000, 0)} de esos ayuntamientos tienen más de 5.000 habitantes"
+        value={pmp_resumen[0]?.afectados_por_1000}
+        formattedValue={formatNumber(pmp_resumen[0]?.afectados_por_1000, 1)}
+        unit="por cada 1.000 hab."
+        period="{formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)} vecinos en total; {formatNumber(pmp_resumen[0]?.mas_5000, 0)} de esos ayuntamientos tienen más de 5.000 habitantes"
+        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => d.afectados_por_1000)}
     />
     <KpiCard
         title="Pagan en más de 30 días"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
         period="{formatNumber(100 * pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican, 1)} % de los que lo comunican ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} hab.)"
+        sparklineData={pmp_serie.map(d => d.supera_30)}
     />
 </Grid>
 

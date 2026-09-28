@@ -25,7 +25,7 @@ INE_BASE = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/"
 
 # nombre de tabla destino en raw -> id de tabla del INE
 TABLAS = {
-    "ine_ipc": "50902",  # IPC: índices y tasas de variación (nacional, por grupo COICOP)
+    "ine_ipc": "76125",  # IPC base 2025 (ECOICOP v2, 2002-): índices y tasas de variación nacionales; la 50902 (base 2021) se congeló en dic-2025
     "ine_paro": "65219",  # EPA: tasas de paro por sexo y grupo de edad (nacional, 2002-hoy)
     # Ojo: la 65292 que usaba el script antiguo son valores ABSOLUTOS por CCAA
     # (no tiene tasas), y la 4086 está descatalogada (solo 2021-2023).
@@ -45,6 +45,10 @@ TABLAS = {
     "ine_esperanza_vida_ccaa": "1448",  # esperanza de vida al nacer por comunidad y sexo, anual desde 1975
     "ine_esperanza_vida_provincia": "1485",  # ídem por provincia
     "ine_defunciones_semanales": "35177",  # defunciones semanales por comunidad (EDeS), para el exceso de mortalidad
+    # Inmigración:
+    "ine_flujos_inmigracion": "59011",  # inmigraciones desde el extranjero por nacionalidad, trimestral (ECP)
+    "ine_flujos_emigracion": "59014",  # emigraciones al extranjero por nacionalidad, trimestral (ECP)
+    "ine_nacionalizaciones": "70012",  # adquisiciones de nacionalidad española por comunidad y nacionalidad previa, anual
 }
 
 

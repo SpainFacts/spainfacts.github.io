@@ -52,6 +52,70 @@ ORDER BY anio DESC
 LIMIT 1
 ```
 
+```sql serie_cuota_ccaa
+SELECT
+    fecha,
+    100 * sum(efectivos) FILTER (WHERE administracion = 'Comunidades autónomas') / sum(efectivos) AS cuota_ccaa
+FROM mother.empleo_efectivos
+GROUP BY fecha
+ORDER BY fecha
+```
+
+```sql serie_por_1000
+SELECT fecha, por_1000_hab
+FROM mother.empleo_territorio
+WHERE nivel = 'pais' AND administracion = 'Total' AND por_1000_hab IS NOT NULL
+ORDER BY fecha
+```
+
+```sql coste_serie_real
+-- Para las mini-gráficas: euros por habitante a precios constantes del último año completo con IPC (media anual de ipc_indice)
+WITH ipc AS (
+    SELECT CAST(year(periodo) AS INTEGER) AS anio, avg(valor) AS ipc
+    FROM mother.metricas
+    WHERE metrica_id = 'ipc_indice'
+    GROUP BY 1
+    HAVING count(*) = 12
+),
+base AS (
+    SELECT ipc AS ipc_base FROM ipc ORDER BY anio DESC LIMIT 1
+)
+SELECT
+    c.anio,
+    c.eur_por_habitante * base.ipc_base / ipc.ipc AS eur_hab_real
+FROM mother.empleo_coste c
+JOIN ipc ON ipc.anio = c.anio
+CROSS JOIN base
+WHERE c.cod_sector = 'S13' AND c.eur_por_habitante IS NOT NULL
+ORDER BY c.anio
+```
+
+```sql salario_serie_real
+-- Salario medio público a precios constantes del último año completo (IPC, media anual de ipc_indice)
+WITH ipc AS (
+    SELECT CAST(year(periodo) AS INTEGER) AS anio, avg(valor) AS ipc
+    FROM mother.metricas
+    WHERE metrica_id = 'ipc_indice'
+    GROUP BY 1
+    HAVING count(*) = 12
+),
+base AS (
+    SELECT ipc AS ipc_base FROM ipc ORDER BY anio DESC LIMIT 1
+),
+sal AS (
+    SELECT anio, max(salario_mensual) FILTER (WHERE sector = 'Público') AS publico
+    FROM mother.empleo_salarios_deciles
+    WHERE jornada = 'Jornada a tiempo completo' AND decil = 0
+    GROUP BY anio
+)
+SELECT s.anio, s.publico * base.ipc_base / ipc.ipc AS publico_real
+FROM sal s
+JOIN ipc ON ipc.anio = s.anio
+CROSS JOIN base
+WHERE s.publico IS NOT NULL
+ORDER BY s.anio
+```
+
 # 🏛️ Empleo público
 
 Quién trabaja para las administraciones públicas en España: cuántos son, en qué administración y en qué servicios, dónde, cuánto cobran y cuánto cuestan.
@@ -60,9 +124,10 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
     <KpiCard
         title="Empleados públicos"
         value={resumen[0]?.total}
-        formattedValue={formatCompact(resumen[0]?.total, 2)}
-        period="{formatNumber(por_1000[0]?.por_1000_hab, 0)} por cada 1.000 habitantes · {ultima[0]?.fecha_texto}"
+        formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} por 1.000 hab."
+        period="{formatCompact(resumen[0]?.total, 2)} en total · {ultima[0]?.fecha_texto}"
         source="Registro Central de Personal"
+        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
     />
     <KpiCard
         title="En las comunidades autónomas"
@@ -70,13 +135,15 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(100 * resumen[0]?.ccaa / resumen[0]?.total, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: sobre todo sanidad y educación"
         source="Registro Central de Personal"
+        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
     />
     <KpiCard
-        title="Cuestan al año"
-        value={coste_ultimo[0]?.millones_eur}
-        formattedValue="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mil M€"
-        period="{formatNumber(coste_ultimo[0]?.pct_pib, 1)} % del PIB · {formatNumber(coste_ultimo[0]?.eur_por_habitante, 0)} € por habitante · {coste_ultimo[0]?.anio}"
+        title="Cuestan al año, por habitante"
+        value={coste_ultimo[0]?.eur_por_habitante}
+        formattedValue="{formatNumber(coste_ultimo[0]?.eur_por_habitante, 0)} €"
+        period="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mil M€ en total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)} % del PIB · {coste_ultimo[0]?.anio}"
         source="Eurostat"
+        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
     />
     <KpiCard
         title="Salario medio (jornada completa)"
@@ -84,6 +151,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(salario_ultimo[0]?.publico, 0)} €/mes"
         period="frente a {formatNumber(salario_ultimo[0]?.privado, 0)} € en el sector privado · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
+        sparklineData={salario_serie_real.map(d => d.publico_real)}
     />
 </Grid>
 
@@ -214,42 +282,57 @@ ORDER BY por_1000_hab DESC
 ## ¿Cómo ha evolucionado?
 
 ```sql serie_registro
-SELECT fecha, administracion, sum(efectivos) AS efectivos
-FROM mother.empleo_efectivos
-GROUP BY ALL
-ORDER BY fecha
+-- Empleados por 1.000 habitantes (padrón del año; el último disponible para los más recientes)
+WITH pob AS (
+    SELECT CAST(anio AS INTEGER) AS anio, poblacion
+    FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total'
+)
+SELECT e.fecha, e.administracion, sum(e.efectivos) AS efectivos,
+    1000.0 * sum(e.efectivos) / any_value(p.poblacion) AS por_1000
+FROM mother.empleo_efectivos e
+JOIN pob p ON p.anio = least(CAST(year(e.fecha) AS INTEGER), (SELECT max(anio) FROM pob))
+GROUP BY e.fecha, e.administracion
+ORDER BY e.fecha
 ```
 
 <BarChart
     data={serie_registro}
     x=fecha
-    y=efectivos
+    y=por_1000
     series=administracion
     type=stacked
-    yFmt=num0
+    yFmt=num1
     xFmt="mmm yyyy"
+    yAxisTitle="por 1.000 habitantes"
     colorPalette={['#0f766e', '#f59e0b', '#1d4ed8']}
-    title="Registro Central de Personal: efectivos a 1 de enero y 1 de julio"
+    title="Empleados públicos por 1.000 habitantes (Registro Central de Personal, 1 de enero y 1 de julio)"
 />
 
 <p class="text-xs text-gray-500">Ojo al salto entre julio de 2022 y enero de 2023 (~+240.000): el Ministerio revisó en agosto de 2026 todas las ediciones desde 2023 con nuevas fuentes y diccionarios (sobre todo en las comunidades autónomas), así que parte del aumento es metodológico, no contrataciones. Antes de julio de 2019 no se publican los datos en formato abierto.</p>
 
 ```sql serie_epa
-SELECT trimestre, administracion, asalariados
-FROM mother.empleo_epa_administracion
-WHERE administracion NOT IN ('Total', 'Otras / no sabe')
-ORDER BY trimestre
+WITH pob AS (
+    SELECT CAST(anio AS INTEGER) AS anio, poblacion
+    FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total'
+)
+SELECT e.trimestre, e.administracion, e.asalariados,
+    1000.0 * e.asalariados / p.poblacion AS por_1000
+FROM mother.empleo_epa_administracion e
+JOIN pob p ON p.anio = greatest(least(CAST(year(e.trimestre) AS INTEGER), (SELECT max(anio) FROM pob)), (SELECT min(anio) FROM pob))
+WHERE e.administracion NOT IN ('Total', 'Otras / no sabe')
+ORDER BY e.trimestre
 ```
 
 <BarChart
     data={serie_epa}
     x=trimestre
-    y=asalariados
+    y=por_1000
     series=administracion
     type=stacked
-    yFmt=num0
+    yFmt=num1
     xFmt="yyyy"
-    title="Asalariados del sector público según la EPA (desde 2002)"
+    yAxisTitle="por 1.000 habitantes"
+    title="Asalariados del sector público por 1.000 habitantes según la EPA (desde 2002)"
 />
 
 <p class="text-xs text-gray-500">La Encuesta de Población Activa da una serie más larga (trimestral desde 2002) y cuenta también a las empresas e instituciones públicas, pero es una encuesta: por eso da más empleados públicos que el registro (unos 3,6 millones) y su dato trimestral tiene margen de error. Se aprecian el recorte de 2011-2014 (de 3,28 a 2,93 millones de media anual, con la crisis de la deuda) y el crecimiento posterior, más rápido desde 2018.</p>
@@ -290,14 +373,17 @@ ORDER BY decil
 ```
 
 ```sql brecha
+-- En euros constantes del último año completo (descontada la inflación con el IPC)
 SELECT
-    anio,
-    max(salario_mensual) FILTER (WHERE sector = 'Público') AS publico,
-    max(salario_mensual) FILTER (WHERE sector = 'Privado') AS privado
-FROM mother.empleo_salarios_deciles
-WHERE jornada = 'Jornada a tiempo completo' AND decil = 0
-GROUP BY anio
-ORDER BY anio
+    s.anio,
+    max(s.salario_mensual * d.factor) FILTER (WHERE s.sector = 'Público') AS publico,
+    max(s.salario_mensual * d.factor) FILTER (WHERE s.sector = 'Privado') AS privado,
+    any_value(d.anio_base) AS anio_base
+FROM mother.empleo_salarios_deciles s
+JOIN mother.deflactor d ON d.anio = CAST(s.anio AS INTEGER)
+WHERE s.jornada = 'Jornada a tiempo completo' AND s.decil = 0
+GROUP BY s.anio
+ORDER BY s.anio
 ```
 
 <LineChart
@@ -309,8 +395,8 @@ ORDER BY anio
     colorPalette={['#1d4ed8', '#f59e0b']}
     seriesLabels={{publico: 'Sector público', privado: 'Sector privado'}}
     legend=true
-    yAxisTitle="€ brutos al mes"
-    title="Salario medio bruto mensual, jornada completa"
+    yAxisTitle="€ brutos al mes (euros constantes)"
+    title="Salario medio bruto mensual, jornada completa, en euros de {brecha[0]?.anio_base} descontada la inflación"
 />
 
 <BarChart
@@ -346,10 +432,13 @@ ORDER BY s.salario_publico DESC
 ## ¿Cuánto cuestan?
 
 ```sql coste
-SELECT anio, subsector, millones_eur / 1000 AS miles_millones, pct_pib
-FROM mother.empleo_coste
-WHERE cod_sector <> 'S13'
-ORDER BY anio
+-- Euros por habitante y constantes (descontada la inflación con el IPC)
+SELECT c.anio, c.subsector, c.millones_eur / 1000 AS miles_millones, c.pct_pib,
+    c.eur_por_habitante * d.factor AS eur_hab_real, d.anio_base
+FROM mother.empleo_coste c
+JOIN mother.deflactor d ON d.anio = CAST(c.anio AS INTEGER)
+WHERE c.cod_sector <> 'S13'
+ORDER BY c.anio
 ```
 
 ```sql coste_total
@@ -359,13 +448,13 @@ SELECT anio, pct_pib FROM mother.empleo_coste WHERE cod_sector = 'S13' ORDER BY 
 <BarChart
     data={coste}
     x=anio
-    y=miles_millones
+    y=eur_hab_real
     series=subsector
     type=stacked
-    yFmt=num1
+    yFmt=num0
     xFmt="####"
-    yAxisTitle="miles de millones de €"
-    title="Remuneración de los empleados públicos por administración"
+    yAxisTitle="€ por habitante (constantes)"
+    title="Coste del personal público por habitante y administración, en euros de {coste[0]?.anio_base}"
 />
 
 <LineChart
@@ -379,7 +468,7 @@ SELECT anio, pct_pib FROM mother.empleo_coste WHERE cod_sector = 'S13' ORDER BY 
     title="Coste del personal público sobre el PIB"
 />
 
-<p class="text-xs text-gray-500">Remuneración de asalariados de las administraciones públicas (contabilidad nacional, Eurostat): sueldos y salarios más las cotizaciones sociales que paga la administración como empleador. Las transferencias entre administraciones no cuentan dos veces: cada una paga a su personal.</p>
+<p class="text-xs text-gray-500">Por habitante y en euros constantes, para que la evolución no refleje solo el aumento de la población y de los precios. Remuneración de asalariados de las administraciones públicas (contabilidad nacional, Eurostat): sueldos y salarios más las cotizaciones sociales que paga la administración como empleador. Las transferencias entre administraciones no cuentan dos veces: cada una paga a su personal.</p>
 
 ```sql coste_ccaa
 SELECT

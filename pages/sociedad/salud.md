@@ -42,7 +42,9 @@ SELECT
     max(defunciones) FILTER (WHERE codigo_causa = '001-102') AS total,
     max(defunciones) FILTER (WHERE codigo_causa = '098') AS suicidios,
     max(tasa_100k) FILTER (WHERE codigo_causa = '098') AS suicidios_tasa,
-    max(defunciones) FILTER (WHERE codigo_causa = '090') AS trafico
+    max(defunciones) FILTER (WHERE codigo_causa = '090') AS trafico,
+    max(tasa_100k) FILTER (WHERE codigo_causa = '090') AS trafico_tasa,
+    max(tasa_100k) FILTER (WHERE codigo_causa = '001-102') / 100 AS mortalidad_1000
 FROM ${causas_clave}
 WHERE anio = (SELECT max(anio) FROM ${causas_clave})
 ```
@@ -69,29 +71,29 @@ Cuánto vivimos, de qué morimos y cómo han cambiado las cosas, con las estadí
         sparklineData={ev_serie}
     />
     <KpiCard
-        title="Defunciones"
-        value={causas_ultimo[0]?.total}
-        formattedValue={formatNumber(causas_ultimo[0]?.total, 0)}
-        period="en {causas_ultimo[0]?.anio}"
+        title="Tasa de mortalidad"
+        value={causas_ultimo[0]?.mortalidad_1000}
+        formattedValue="{formatNumber(causas_ultimo[0]?.mortalidad_1000, 1)} por 1.000 hab."
+        period="{formatNumber(causas_ultimo[0]?.total, 0)} defunciones en {causas_ultimo[0]?.anio} · tasa bruta"
         source="INE"
-        sparklineData={causas_clave.filter(d => d.codigo_causa === '001-102' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.defunciones}))}
+        sparklineData={causas_clave.filter(d => d.codigo_causa === '001-102' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.tasa_100k / 100}))}
     />
     <KpiCard
         title="Suicidios"
-        value={causas_ultimo[0]?.suicidios}
-        formattedValue={formatNumber(causas_ultimo[0]?.suicidios, 0)}
-        period="{formatNumber(causas_ultimo[0]?.suicidios_tasa, 1)} por 100.000 habitantes · primera causa externa de muerte"
+        value={causas_ultimo[0]?.suicidios_tasa}
+        formattedValue="{formatNumber(causas_ultimo[0]?.suicidios_tasa, 1)} por 100.000 hab."
+        period="{formatNumber(causas_ultimo[0]?.suicidios, 0)} en {causas_ultimo[0]?.anio} · primera causa externa de muerte"
         source="INE"
-        sparklineData={causas_clave.filter(d => d.codigo_causa === '098' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.defunciones}))}
+        sparklineData={causas_clave.filter(d => d.codigo_causa === '098' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.tasa_100k}))}
     />
     <KpiCard
         title="Muertos en accidentes de tráfico"
-        value={causas_ultimo[0]?.trafico}
-        formattedValue={formatNumber(causas_ultimo[0]?.trafico, 0)}
-        period="residentes en España fallecidos en {causas_ultimo[0]?.anio}"
+        value={causas_ultimo[0]?.trafico_tasa}
+        formattedValue="{formatNumber(causas_ultimo[0]?.trafico_tasa, 1)} por 100.000 hab."
+        period="{formatNumber(causas_ultimo[0]?.trafico, 0)} residentes fallecidos en {causas_ultimo[0]?.anio}"
         source="INE"
         direction="positive-down"
-        sparklineData={causas_clave.filter(d => d.codigo_causa === '090' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.defunciones}))}
+        sparklineData={causas_clave.filter(d => d.codigo_causa === '090' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.tasa_100k}))}
     />
 </Grid>
 
@@ -145,7 +147,7 @@ ORDER BY e.anios DESC
 ## De qué morimos
 
 ```sql capitulos
-SELECT causa, defunciones
+SELECT causa, defunciones, tasa_100k
 FROM mother.salud_causas_muerte
 WHERE nivel = 'pais' AND sexo = 'Total' AND es_capitulo AND codigo_causa <> '001-102'
   AND anio = (SELECT max(anio) FROM mother.salud_causas_muerte)
@@ -156,12 +158,13 @@ LIMIT 10
 <BarChart
     data={capitulos}
     x=causa
-    y=defunciones
+    y=tasa_100k
     swapXY=true
     sort=false
     yFmt=num0
+    yAxisTitle="por 100.000 habitantes"
     fillColor="#0f766e"
-    title="Defunciones por grandes grupos de causas ({causas_ultimo[0]?.anio})"
+    title="Defunciones por grandes grupos de causas por 100.000 habitantes ({causas_ultimo[0]?.anio})"
 />
 
 ```sql evolucion_capitulos
@@ -191,22 +194,24 @@ ORDER BY anio
 ```sql externas
 SELECT anio,
     CASE codigo_causa WHEN '098' THEN 'Suicidios' WHEN '090' THEN 'Accidentes de tráfico' WHEN '099' THEN 'Homicidios' END AS causa,
-    defunciones
+    defunciones,
+    tasa_100k
 FROM ${causas_clave}
-WHERE codigo_causa IN ('098', '090', '099') AND anio >= 1990
+WHERE codigo_causa IN ('098', '090', '099') AND anio >= 1996
 ORDER BY anio
 ```
 
 <LineChart
     data={externas}
     x=anio
-    y=defunciones
+    y=tasa_100k
     series=causa
-    yFmt=num0
+    yFmt=num1
+    yAxisTitle="por 100.000 habitantes"
     xFmt="####"
     legend=true
     colorPalette={['#f59e0b', '#7c3aed', '#b91c1c']}
-    title="Muertes por suicidio, accidentes de tráfico y homicidio"
+    title="Muertes por suicidio, accidentes de tráfico y homicidio, por 100.000 habitantes"
 />
 
 <p class="text-xs text-gray-500">Desde 2008 mueren en España más personas por suicidio que en accidentes de tráfico, que han caído a menos de un tercio desde 2000. Cifras por residencia del fallecido y según la causa del certificado de defunción (los muertos en carretera de la DGT, contados a 30 días, son algo distintos).</p>

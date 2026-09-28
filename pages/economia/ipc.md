@@ -30,7 +30,7 @@ Este gráfico muestra cómo ha variado la inflación a lo largo de los años, lo
 **Fuente:** [INE - Índice de Precios de Consumo (IPC)](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176802&menu=ultiDatos&idp=1254735976607)
 
 ```sql ipc_data
--- Variación anual del índice general (serie IPC251856 del INE)
+-- Variación anual del índice general (serie IPC290750 del INE, base 2025)
 SELECT
     periodo AS date,
     valor AS value

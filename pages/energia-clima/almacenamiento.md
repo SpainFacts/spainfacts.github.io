@@ -17,6 +17,14 @@ FROM mother.almacenamiento_potencia
 WHERE mes = (SELECT max(mes) FROM mother.almacenamiento_potencia)
 ```
 
+```sql baterias_serie
+SELECT mes, sum(mw) AS valor
+FROM mother.almacenamiento_potencia
+WHERE tipo = 'baterias_hibridadas'
+GROUP BY mes
+ORDER BY mes ASC
+```
+
 ```sql acceso_total
 SELECT
     strftime(max(fecha_fichero), '%d/%m/%Y') AS fecha_texto,
@@ -66,6 +74,7 @@ Con cada vez más solar y eólica, el sistema eléctrico necesita guardar la ene
         formattedValue="{formatNumber(potencia_ultima[0]?.baterias_mw, 0)} MW"
         period="hibridadas con parques solares o eólicos · {potencia_ultima[0]?.mes_texto}"
         source="REE (ESIOS)"
+        sparklineData={baterias_serie}
     />
     <KpiCard
         title="Energía devuelta por el bombeo"
@@ -73,6 +82,7 @@ Con cada vez más solar y eólica, el sistema eléctrico necesita guardar la ene
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="en {ultimo_anio[0]?.anio} · {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} veces la de 2019"
         source="REE (balance)"
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Almacenamiento con permiso de acceso"

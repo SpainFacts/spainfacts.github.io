@@ -24,3 +24,8 @@ models:
     description: "Remuneración de asalariados de las AAPP por subsector (Eurostat gov_10a_main D1PAY)."
   - name: empleo_gasto_personal_territorio
     description: "Capítulo 1 (gasto de personal) de cada comunidad y de sus ayuntamientos, por año y territorio."
+  - name: deflactor
+    description: "IPC medio anual (base 2025) y factor para expresar importes en euros constantes del último año completo: importe_real = importe * factor."
+    columns:
+      - name: anio
+        tests: [not_null, unique]

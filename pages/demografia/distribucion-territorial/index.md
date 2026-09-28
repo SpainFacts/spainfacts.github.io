@@ -155,16 +155,25 @@ SELECT
 FROM ${orders_by_state_fin}
 ```
 
+```sql serie_total
+SELECT CAST(Year AS INTEGER) AS anio, Total AS valor
+FROM mother.totalAno
+WHERE CAST(Year AS INTEGER) BETWEEN ${inputs.año_inicio.value} AND ${inputs.año_fin.value}
+ORDER BY anio ASC
+```
+
 <Grid cols=2>
 <KpiCard
   title="Población total ({inputs.año_inicio.value})"
   value={resumen_inicio[0]?.Total}
   formattedValue={formatCompact(resumen_inicio[0]?.Total, 2)}
+  sparklineData={serie_total}
 />
 <KpiCard
   title="Población total ({inputs.año_fin.value})"
   value={resumen_fin[0]?.Total}
   formattedValue={formatCompact(resumen_fin[0]?.Total, 2)}
+  sparklineData={serie_total}
 />
 </Grid>
 

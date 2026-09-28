@@ -46,14 +46,21 @@ LIMIT 1
 ```
 
 ```sql anual
+-- Turismos nuevos por 1.000 habitantes (padrón del año; el último para los más recientes)
+WITH pob AS (
+    SELECT CAST(anio AS INTEGER) AS anio, poblacion
+    FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total'
+)
 SELECT
-    CAST(year(mes) AS INTEGER) AS anio,
-    motor,
-    energia_orden,
-    sum(turismos) AS turismos
-FROM ${mensual}
+    CAST(year(m.mes) AS INTEGER) AS anio,
+    m.motor,
+    m.energia_orden,
+    sum(m.turismos) AS turismos,
+    1000.0 * sum(m.turismos) / any_value(p.poblacion) AS por_1000
+FROM ${mensual} m
+JOIN pob p ON p.anio = least(CAST(year(m.mes) AS INTEGER), (SELECT max(anio) FROM pob))
 GROUP BY ALL
-ORDER BY anio, energia_orden
+ORDER BY anio, m.energia_orden
 ```
 
 ```sql co2
@@ -86,6 +93,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         changePeriod="vs. un año antes"
         direction="positive-up"
         source="DGT"
+        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Enchufables (eléctricos + híbridos enchufables)"
@@ -98,6 +106,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         changePeriod="vs. un año antes"
         direction="positive-up"
         source="DGT"
+        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Electrificados (incluidos híbridos)"
@@ -106,6 +115,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         unit="%"
         period="de los turismos nuevos · {ultimo[0]?.mes_texto}"
         source="DGT"
+        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 
@@ -141,14 +151,15 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
 <BarChart
     data={anual}
     x=anio
-    y=turismos
+    y=por_1000
     series=motor
     type=stacked
-    yFmt=num0
+    yFmt=num1
+    yAxisTitle="por 1.000 habitantes"
     xFmt="####"
     seriesOrder={orden_motores.map(d => d.motor)}
     colorPalette={['#0f766e', '#14b8a6', '#a3e635', '#38bdf8', '#a78bfa', '#f59e0b', '#78716c', '#d1d5db']}
-    title="Turismos nuevos matriculados por año"
+    title="Turismos nuevos matriculados por año, por 1.000 habitantes"
 />
 
 <p class="text-xs text-gray-500">El último año está incompleto (hasta el último mes publicado).</p>

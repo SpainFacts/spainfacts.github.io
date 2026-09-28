@@ -16,7 +16,7 @@ SELECT * FROM mother.calor_espana_diario ORDER BY fecha DESC LIMIT 1
 ```
 
 ```sql serie_espana
-SELECT fecha, anomalia_tmax_media AS valor
+SELECT fecha, anomalia_tmax_media AS valor, n_provincias_por_encima
 FROM mother.calor_espana_diario
 WHERE fecha >= (SELECT max(fecha) - INTERVAL 60 DAY FROM mother.calor_espana_diario)
 ORDER BY fecha
@@ -34,6 +34,22 @@ LIMIT 1
 SELECT m.fecha, m.estacion, m.provincia, m.tmax
 FROM mother.calor_maxima_diaria AS m
 WHERE m.fecha = (SELECT max(fecha) FROM mother.calor_ultimo_dia)
+```
+
+```sql serie_mayor_anomalia
+SELECT fecha, max(anomalia_tmax) AS valor
+FROM mother.calor_provincia_diario
+WHERE fecha >= (SELECT max(fecha) - INTERVAL 60 DAY FROM mother.calor_provincia_diario)
+GROUP BY fecha
+ORDER BY fecha
+```
+
+```sql serie_maxima
+SELECT fecha, max(tmax) AS valor
+FROM mother.calor_maxima_diaria
+WHERE fecha >= (SELECT max(fecha) - INTERVAL 60 DAY FROM mother.calor_maxima_diaria)
+GROUP BY fecha
+ORDER BY fecha
 ```
 
 ```sql records_ultimo_dia
@@ -60,12 +76,14 @@ El **{fechaLarga(espana[0]?.fecha)}** la temperatura máxima en las estaciones d
         formattedValue="{espana[0]?.n_provincias_por_encima}"
         unit=" de {espana[0]?.n_provincias}"
         period="Más de 1 °C sobre su media"
+        sparklineData={serie_espana.map(d => ({valor: d.n_provincias_por_encima}))}
     />
     <KpiCard
         title="Mayor anomalía"
         value={mas_anomala[0]?.anomalia_tmax}
         formattedValue={mas_anomala[0]?.provincia}
         period="{formatNumber(mas_anomala[0]?.tmax, 1)} °C, {signo(mas_anomala[0]?.anomalia_tmax)} °C sobre lo normal"
+        sparklineData={serie_mayor_anomalia}
     />
     <KpiCard
         title="Lugar más caluroso"
@@ -73,6 +91,7 @@ El **{fechaLarga(espana[0]?.fecha)}** la temperatura máxima en las estaciones d
         formattedValue={formatNumber(lugar_mas_caluroso[0]?.tmax, 1)}
         unit=" °C"
         period="{lugar_mas_caluroso[0]?.estacion ?? '-'} ({lugar_mas_caluroso[0]?.provincia ?? '-'})"
+        sparklineData={serie_maxima}
     />
 </Grid>
 

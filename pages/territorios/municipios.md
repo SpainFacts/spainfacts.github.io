@@ -35,6 +35,11 @@ WHERE m.cod_mun = '${inputs.municipio}'
   AND m.anio = (SELECT max(anio) FROM mother.poblacion_municipios)
 ```
 
+```sql base
+-- Año de los euros constantes (último año completo de IPC)
+SELECT max(anio_base) AS anio_base FROM mother.deflactor
+```
+
 ```sql serie_poblacion
 SELECT make_date(CAST(anio AS INTEGER), 1, 1) AS fecha, poblacion AS valor
 FROM mother.poblacion_municipios
@@ -81,6 +86,7 @@ SELECT
         formattedValue={formatNumber(poblacion_contexto[0]?.crecimiento_10, 1)}
         unit="%"
         direction="positive-up"
+        sparklineData={serie_poblacion.slice(-10)}
     />
     <KpiCard
         title="Puesto en España por población"
@@ -101,7 +107,8 @@ SELECT
 
 ```sql cuentas_serie
 -- Serie del municipio junto a la mediana de los municipios de su mismo tramo de
--- población ese año (mediana por habitante: no la distorsionan las ciudades grandes)
+-- población ese año (mediana por habitante: no la distorsionan las ciudades grandes).
+-- Las columnas _real están en euros constantes del último año completo (deflactor).
 WITH mia AS (
     SELECT *,
         CASE
@@ -122,10 +129,17 @@ SELECT
     m.gasto_hab, m.ingreso_hab, m.gastos_total, m.ingresos_total, m.saldo_no_financiero,
     t.gasto_hab_mediana AS gasto_hab_tramo,
     t.ingreso_hab_mediana AS ingreso_hab_tramo,
-    t.n_municipios AS municipios_tramo
+    t.n_municipios AS municipios_tramo,
+    m.gasto_hab * f.factor AS gasto_hab_real,
+    m.ingreso_hab * f.factor AS ingreso_hab_real,
+    m.saldo_no_financiero / nullif(m.poblacion, 0) * f.factor AS saldo_hab_real,
+    t.gasto_hab_mediana * f.factor AS gasto_hab_tramo_real,
+    t.ingreso_hab_mediana * f.factor AS ingreso_hab_tramo_real,
+    f.factor
 FROM mia m
 LEFT JOIN mother.municipios_cuentas_medias t
   ON t.anio = m.anio AND t.tramo_poblacion = m.tramo
+LEFT JOIN mother.deflactor f ON f.anio = CAST(m.anio AS INTEGER)
 ORDER BY m.anio
 ```
 
@@ -137,15 +151,17 @@ LIMIT 1
 ```
 
 ```sql cuentas_grafico
-SELECT fecha, 'Este municipio' AS serie, gasto_hab AS euros FROM ${cuentas_serie} WHERE tiene_datos
+SELECT fecha, 'Este municipio' AS serie, gasto_hab_real AS euros FROM ${cuentas_serie} WHERE tiene_datos
 UNION ALL
-SELECT fecha, 'Mediana de municipios de su tamaño', gasto_hab_tramo FROM ${cuentas_serie}
+SELECT fecha, 'Mediana de municipios de su tamaño', gasto_hab_tramo_real FROM ${cuentas_serie}
 ORDER BY fecha
 ```
 
 ```sql areas
 -- Gasto por áreas del último año definitivo con datos, por habitante, frente a la mediana del tramo
+-- (en euros constantes del último año completo)
 WITH anio AS (SELECT max(anio) AS anio FROM ${cuentas_serie} WHERE tiene_datos AND NOT provisional),
+defl AS (SELECT coalesce(max(factor), 1) AS factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 mia AS (
     SELECT * FROM mother.municipios_cuentas
     WHERE cod_mun = '${inputs.municipio}' AND anio = (SELECT anio FROM anio)
@@ -155,7 +171,7 @@ tramo AS (
     WHERE t.anio = (SELECT anio FROM anio)
       AND t.tramo_poblacion = (SELECT tramo FROM ${cuentas_serie} WHERE anio = (SELECT anio FROM anio))
 )
-SELECT area, este, mediana FROM (
+SELECT area, este * (SELECT factor FROM defl) AS este, mediana * (SELECT factor FROM defl) AS mediana FROM (
     SELECT 'Deuda pública' AS area, 1 AS orden, m.gasto_area_0 / m.poblacion AS este, t.gasto_area_0_hab_mediana AS mediana FROM mia m, tramo t
     UNION ALL SELECT 'Servicios públicos básicos', 2, m.gasto_area_1 / m.poblacion, t.gasto_area_1_hab_mediana FROM mia m, tramo t
     UNION ALL SELECT 'Protección y promoción social', 3, m.gasto_area_2 / m.poblacion, t.gasto_area_2_hab_mediana FROM mia m, tramo t
@@ -174,8 +190,10 @@ SELECT area, 'Mediana de su tramo', mediana FROM ${areas}
 
 ```sql politicas_mun
 -- Gasto por políticas (último año con clasificación por programas) frente a la
--- mediana de los municipios del mismo tramo de población que la informan
+-- mediana de los municipios del mismo tramo de población que la informan.
+-- Importes por habitante en euros constantes del último año completo.
 WITH anio AS (SELECT max(anio) AS anio FROM mother.municipios_politicas),
+defl AS (SELECT coalesce(max(factor), 1) AS factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 pob AS (
     SELECT cod_mun, poblacion,
         CASE
@@ -198,8 +216,8 @@ mediana AS (
 SELECT
     t.politica_nombre AS politica,
     t.importe,
-    t.hab AS por_habitante,
-    m.mediana_hab AS mediana_tramo,
+    t.hab * (SELECT factor FROM defl) AS por_habitante,
+    m.mediana_hab * (SELECT factor FROM defl) AS mediana_tramo,
     100.0 * (t.hab - m.mediana_hab) / nullif(m.mediana_hab, 0) AS dif_pct,
     t.importe / sum(t.importe) OVER () AS peso,
     (SELECT anio FROM anio) AS anio
@@ -212,7 +230,9 @@ ORDER BY t.importe DESC
 ```sql personal_ayto
 -- Gasto de personal (capítulo 1) del último año definitivo con datos, frente a
 -- la mediana por habitante de los municipios de su mismo tramo de población
+-- (por habitante en euros constantes del último año completo)
 WITH anio AS (SELECT max(anio) AS anio FROM ${cuentas_serie} WHERE tiene_datos AND NOT provisional),
+defl AS (SELECT coalesce(max(factor), 1) AS factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 todos AS (
     SELECT cod_mun, poblacion, gastos_c1, gastos_total,
         CASE
@@ -225,18 +245,32 @@ todos AS (
 SELECT
     (SELECT anio FROM anio) AS anio,
     m.gastos_c1,
-    m.gastos_c1 / m.poblacion AS por_habitante,
+    m.gastos_c1 / m.poblacion * (SELECT factor FROM defl) AS por_habitante,
     m.gastos_c1 / nullif(m.gastos_total, 0) AS peso,
-    (SELECT median(t.gastos_c1 / t.poblacion) FROM todos t WHERE t.tramo = m.tramo) AS mediana_tramo
+    (SELECT median(t.gastos_c1 / t.poblacion) FROM todos t WHERE t.tramo = m.tramo) * (SELECT factor FROM defl) AS mediana_tramo
 FROM todos m
 WHERE m.cod_mun = '${inputs.municipio}'
 ```
 
 ```sql deuda_ayto
-SELECT fecha, deuda_eur, deuda_eur / nullif(${mun[0]?.poblacion ?? 1}, 0) AS por_habitante
-FROM mother.local_deuda_municipio
-WHERE cod_mun = '${inputs.municipio}'
-ORDER BY fecha
+-- Deuda por habitante en euros constantes. La población municipal cargada solo
+-- cubre los últimos 10 años: fuera de ese rango se usa el año más cercano.
+-- Sin IPC anual antes de 2002: la serie empieza ese año.
+WITH pob AS (
+    SELECT anio, poblacion FROM mother.poblacion_municipios
+    WHERE cod_mun = '${inputs.municipio}'
+),
+rango AS (SELECT min(anio) AS ini, max(anio) AS fin FROM pob)
+SELECT
+    d.fecha,
+    d.deuda_eur,
+    d.deuda_eur / nullif(p.poblacion, 0) * f.factor AS deuda_hab_real
+FROM mother.local_deuda_municipio d
+CROSS JOIN rango r
+JOIN pob p ON p.anio = greatest(least(CAST(year(d.fecha) AS INTEGER), r.fin), r.ini)
+JOIN mother.deflactor f ON f.anio = CAST(year(d.fecha) AS INTEGER)
+WHERE d.cod_mun = '${inputs.municipio}'
+ORDER BY d.fecha
 ```
 
 ## Cuentas del ayuntamiento
@@ -251,31 +285,34 @@ El último dato disponible es de <b>{cuentas_ultimo[0].anio}</b>: desde entonces
 
 {/if}
 
-Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado, no lo presupuestado). Para que la comparación sea justa, se compara con la **mediana de los municipios de su mismo tramo de población** ({cuentas_ultimo[0].tramo} habitantes).
+Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado, no lo presupuestado). Para que la comparación sea justa, se compara con la **mediana de los municipios de su mismo tramo de población** ({cuentas_ultimo[0].tramo} habitantes). Los importes van **por habitante** y **descontada la inflación**, en euros de {base[0]?.anio_base}.
 
 <Grid cols=3>
     <KpiCard
         title="Gasto por habitante"
-        value={cuentas_ultimo[0]?.gasto_hab}
-        formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab, 0)}
+        value={cuentas_ultimo[0]?.gasto_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab_real, 0)}
         unit="€"
-        period="Mediana de su tramo: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo, 0)} € · {cuentas_ultimo[0]?.anio}{cuentas_ultimo[0]?.provisional ? ' (avance)' : ''}"
+        period="Mediana de su tramo: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} € · {cuentas_ultimo[0]?.anio}{cuentas_ultimo[0]?.provisional ? ' (avance)' : ''}, en euros de {base[0]?.anio_base}"
         source="Ministerio de Hacienda"
+        sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.gasto_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.gasto_hab_real}))}
     />
     <KpiCard
         title="Ingreso por habitante"
-        value={cuentas_ultimo[0]?.ingreso_hab}
-        formattedValue={formatNumber(cuentas_ultimo[0]?.ingreso_hab, 0)}
+        value={cuentas_ultimo[0]?.ingreso_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.ingreso_hab_real, 0)}
         unit="€"
-        period="Mediana de su tramo: {formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo, 0)} €"
+        period="Mediana de su tramo: {formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo_real, 0)} € · en euros de {base[0]?.anio_base}"
+        sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.ingreso_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.ingreso_hab_real}))}
     />
     <KpiCard
-        title="Saldo no financiero"
-        value={cuentas_ultimo[0]?.saldo_no_financiero}
-        formattedValue={formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)}
+        title="Saldo no financiero por habitante"
+        value={cuentas_ultimo[0]?.saldo_hab_real}
+        formattedValue={formatNumber(cuentas_ultimo[0]?.saldo_hab_real, 0)}
         unit="€"
-        period="Ingresos − gastos de los capítulos 1 a 7"
+        period="Ingresos − gastos de los capítulos 1 a 7, en euros de {base[0]?.anio_base} · total: {formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)} € corrientes"
         direction="positive-up"
+        sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.saldo_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.saldo_hab_real}))}
     />
 </Grid>
 
@@ -287,7 +324,7 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
         value={personal_ayto[0]?.por_habitante}
         formattedValue={formatNumber(personal_ayto[0]?.por_habitante, 0)}
         unit="€"
-        period="Mediana de su tramo: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio}"
+        period="Mediana de su tramo: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio}, en euros de {base[0]?.anio_base}"
         source="Ministerio de Hacienda (capítulo 1)"
         href="/cuentas-publicas/empleo-publico"
     />
@@ -295,7 +332,7 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
         title="Peso del personal en el gasto"
         value={personal_ayto[0]?.peso}
         formattedValue="{formatNumber(100 * personal_ayto[0]?.peso, 0)} %"
-        period="{formatCompact(personal_ayto[0]?.gastos_c1, 1)} € en sueldos, cotizaciones y retribuciones de cargos electos"
+        period="{formatCompact(personal_ayto[0]?.gastos_c1, 1)} € corrientes en sueldos, cotizaciones y retribuciones de cargos electos"
     />
 </Grid>
 
@@ -307,7 +344,8 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
     y=euros
     series=serie
     yFmt=num0
-    title="Gasto por habitante (€)"
+    yAxisTitle="€ por habitante"
+    title="Gasto por habitante (euros de {base[0]?.anio_base}, descontada la inflación)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -321,7 +359,7 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
     type=grouped
     swapXY=true
     yFmt=num0
-    title="Gasto por habitante según el área, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio} (€)"
+    title="Gasto por habitante según el área, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio} (euros de {base[0]?.anio_base})"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -333,11 +371,11 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
 
 <DataTable data={politicas_mun} rows=all>
     <Column id=politica title="Política de gasto" />
-    <Column id=importe title="Gasto (€)" fmt=num0 />
-    <Column id=peso title="Peso" fmt=pct1 contentType=bar barColor="#99f6e4" />
-    <Column id=por_habitante title="€/habitante" fmt=num0 />
+    <Column id=por_habitante title="€/habitante (euros de {base[0]?.anio_base})" fmt=num0 />
     <Column id=mediana_tramo title="Mediana del tramo (€/hab.)" fmt=num0 />
     <Column id=dif_pct title="Diferencia (%)" fmt=num0 contentType=delta />
+    <Column id=peso title="Peso" fmt=pct1 contentType=bar barColor="#99f6e4" />
+    <Column id=importe title="Gasto total (€ corrientes)" fmt=num0 />
 </DataTable>
 
 </Details>
@@ -349,11 +387,14 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
 <LineChart
     data={deuda_ayto}
     x=fecha
-    y=deuda_eur
+    y=deuda_hab_real
     yFmt=num0
-    title="Deuda del ayuntamiento (€, Banco de España)"
+    yAxisTitle="€ por habitante"
+    title="Deuda del ayuntamiento por habitante (euros de {base[0]?.anio_base}, Banco de España)"
     lineColor="#b45309"
 />
+
+<p class="text-xs text-gray-500">Deuda al final de cada trimestre: {formatCompact(deuda_ayto[deuda_ayto.length - 1]?.deuda_eur, 0)} € corrientes en el último dato. Por habitante con el Padrón de cada año (el más cercano fuera de los últimos 10 años) y descontada la inflación.</p>
 
 {/if}
 
@@ -380,6 +421,18 @@ WHERE b.nivel = 'municipio' AND b.cod = '${inputs.municipio}'
 GROUP BY b.anio
 ```
 
+```sql crimen_mun_serie
+SELECT
+    anio,
+    max(tasa_1000) FILTER (WHERE categoria = 'Total infracciones penales') AS tasa,
+    max(tasa_1000) FILTER (WHERE categoria = 'Robos con violencia o intimidación') AS robos_violencia,
+    max(tasa_1000) FILTER (WHERE categoria = 'Robos con fuerza en domicilios') AS robos_domicilios
+FROM mother.crimen_balance
+WHERE nivel = 'municipio' AND cod = '${inputs.municipio}'
+GROUP BY anio
+ORDER BY anio
+```
+
 {#if crimen_mun.length > 0 && crimen_mun[0]?.infracciones != null}
 
 ## Seguridad
@@ -392,18 +445,21 @@ GROUP BY b.anio
         period="por 1.000 habitantes en {crimen_mun[0]?.anio} · España: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
         source="Ministerio del Interior"
         href="/sociedad/criminalidad"
+        sparklineData={crimen_mun_serie.filter(d => d.tasa != null).map(d => ({anio: d.anio, valor: d.tasa}))}
     />
     <KpiCard
         title="Robos con violencia"
         value={crimen_mun[0]?.robos_violencia}
         formattedValue={formatNumber(crimen_mun[0]?.robos_violencia, 2)}
         period="por 1.000 habitantes"
+        sparklineData={crimen_mun_serie.filter(d => d.robos_violencia != null).map(d => ({anio: d.anio, valor: d.robos_violencia}))}
     />
     <KpiCard
         title="Robos en domicilios"
         value={crimen_mun[0]?.robos_domicilios}
         formattedValue={formatNumber(crimen_mun[0]?.robos_domicilios, 2)}
         period="por 1.000 habitantes"
+        sparklineData={crimen_mun_serie.filter(d => d.robos_domicilios != null).map(d => ({anio: d.anio, valor: d.robos_domicilios}))}
     />
 </Grid>
 

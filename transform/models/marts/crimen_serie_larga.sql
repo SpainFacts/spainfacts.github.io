@@ -11,6 +11,8 @@ with base as (
         a.infracciones
     from {{ source('raw_criminalidad', 'ses_criminalidad_anual') }} a
     join {{ ref('ses_territorios') }} s on s.territorio_ses = a.territorio and s.nivel = a.nivel
+    -- el total nacional viene en los dos ficheros (comunidades y provincias): solo uno
+    where not (s.cod = '00' and a.nivel = 'provincia')
 )
 
 select

@@ -7,42 +7,52 @@ title: Gasto Público y Destino del Presupuesto
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
 </script>
 
+```sql base_deflactor
+-- Año cuyos euros se usan como referencia (último año completo con IPC)
+SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
+```
+
 ```sql gastos_ultimo
 SELECT
-    año AS anio,
-    funcion_cofog,
-    categoria_macro,
-    millones_euros,
-    porcentaje_gasto_total,
-    porcentaje_pib,
-    gasto_por_habitante_eur
-FROM mother.cuentas_gastos
-WHERE año = (SELECT max(año) FROM mother.cuentas_gastos)
-ORDER BY millones_euros DESC
+    CAST(g.año AS INTEGER) AS anio,
+    g.funcion_cofog,
+    g.categoria_macro,
+    g.millones_euros,
+    g.porcentaje_gasto_total,
+    g.porcentaje_pib,
+    g.gasto_por_habitante_eur,
+    g.gasto_por_habitante_eur * d.factor AS gasto_hab_real
+FROM mother.cuentas_gastos g
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(g.año AS INTEGER)
+WHERE g.año = (SELECT max(año) FROM mother.cuentas_gastos)
+ORDER BY g.millones_euros DESC
 ```
 
 ```sql resumen_gastos
+-- Por habitante en euros constantes (gasto_por_habitante_eur por el factor del deflactor)
 SELECT
-    año AS anio,
-    sum(millones_euros) AS total_mio,
-    sum(porcentaje_pib) AS total_pib,
-    sum(CASE WHEN categoria_macro = 'Gasto Social' THEN porcentaje_gasto_total END) AS social_pct,
-    max(CASE WHEN funcion_cofog = 'Protección Social y Pensiones' THEN millones_euros END) AS pens_mio,
-    max(CASE WHEN funcion_cofog = 'Protección Social y Pensiones' THEN gasto_por_habitante_eur END) AS pens_hab,
-    max(CASE WHEN funcion_cofog = 'Protección Social y Pensiones' THEN porcentaje_gasto_total END) AS pens_pct,
-    max(CASE WHEN funcion_cofog = 'Sanidad Pública' THEN millones_euros END) AS san_mio,
-    max(CASE WHEN funcion_cofog = 'Sanidad Pública' THEN gasto_por_habitante_eur END) AS san_hab,
-    max(CASE WHEN funcion_cofog = 'Sanidad Pública' THEN porcentaje_gasto_total END) AS san_pct,
-    max(CASE WHEN funcion_cofog = 'Educación' THEN millones_euros END) AS edu_mio,
-    max(CASE WHEN funcion_cofog = 'Educación' THEN gasto_por_habitante_eur END) AS edu_hab,
-    max(CASE WHEN funcion_cofog = 'Educación' THEN porcentaje_gasto_total END) AS edu_pct,
-    max(CASE WHEN funcion_cofog = 'Intereses de la Deuda' THEN porcentaje_gasto_total END) AS int_pct,
-    max(CASE WHEN funcion_cofog = 'Asuntos Económicos y Transporte' THEN porcentaje_gasto_total END) AS eco_pct,
-    max(CASE WHEN funcion_cofog = 'Orden Público y Seguridad' THEN porcentaje_gasto_total END) AS seg_pct,
-    max(CASE WHEN funcion_cofog = 'Defensa' THEN porcentaje_gasto_total END) AS def_pct
-FROM mother.cuentas_gastos
-WHERE año = (SELECT max(año) FROM mother.cuentas_gastos)
-GROUP BY año
+    CAST(g.año AS INTEGER) AS anio,
+    sum(g.millones_euros) AS total_mio,
+    sum(g.gasto_por_habitante_eur * d.factor) AS total_hab_real,
+    sum(g.porcentaje_pib) AS total_pib,
+    sum(CASE WHEN g.categoria_macro = 'Gasto Social' THEN g.porcentaje_gasto_total END) AS social_pct,
+    max(CASE WHEN g.funcion_cofog = 'Protección Social y Pensiones' THEN g.millones_euros END) AS pens_mio,
+    max(CASE WHEN g.funcion_cofog = 'Protección Social y Pensiones' THEN g.gasto_por_habitante_eur * d.factor END) AS pens_hab,
+    max(CASE WHEN g.funcion_cofog = 'Protección Social y Pensiones' THEN g.porcentaje_gasto_total END) AS pens_pct,
+    max(CASE WHEN g.funcion_cofog = 'Sanidad Pública' THEN g.millones_euros END) AS san_mio,
+    max(CASE WHEN g.funcion_cofog = 'Sanidad Pública' THEN g.gasto_por_habitante_eur * d.factor END) AS san_hab,
+    max(CASE WHEN g.funcion_cofog = 'Sanidad Pública' THEN g.porcentaje_gasto_total END) AS san_pct,
+    max(CASE WHEN g.funcion_cofog = 'Educación' THEN g.millones_euros END) AS edu_mio,
+    max(CASE WHEN g.funcion_cofog = 'Educación' THEN g.gasto_por_habitante_eur * d.factor END) AS edu_hab,
+    max(CASE WHEN g.funcion_cofog = 'Educación' THEN g.porcentaje_gasto_total END) AS edu_pct,
+    max(CASE WHEN g.funcion_cofog = 'Intereses de la Deuda' THEN g.porcentaje_gasto_total END) AS int_pct,
+    max(CASE WHEN g.funcion_cofog = 'Asuntos Económicos y Transporte' THEN g.porcentaje_gasto_total END) AS eco_pct,
+    max(CASE WHEN g.funcion_cofog = 'Orden Público y Seguridad' THEN g.porcentaje_gasto_total END) AS seg_pct,
+    max(CASE WHEN g.funcion_cofog = 'Defensa' THEN g.porcentaje_gasto_total END) AS def_pct
+FROM mother.cuentas_gastos g
+LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(g.año AS INTEGER)
+WHERE g.año = (SELECT max(año) FROM mother.cuentas_gastos)
+GROUP BY g.año
 ```
 
 ```sql poblacion_ultimo
@@ -52,59 +62,79 @@ WHERE año = (SELECT max(año) FROM mother.cuentas_gastos)
 ```
 
 ```sql serie_gastos_macro
+-- Euros por habitante a precios constantes (el deflactor empieza en 2002)
 SELECT
-    año,
-    categoria_macro,
-    sum(millones_euros) / 1000.0 AS miles_millones
-FROM mother.cuentas_gastos
-GROUP BY año, categoria_macro
-ORDER BY año ASC
+    CAST(g.año AS INTEGER) AS año,
+    g.categoria_macro,
+    sum(g.gasto_por_habitante_eur * d.factor) AS eur_hab_real
+FROM mother.cuentas_gastos g
+JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(g.año AS INTEGER)
+GROUP BY 1, 2
+ORDER BY 1 ASC
 ```
 
 ```sql serie_gastos_funcion
 SELECT
-    año,
+    CAST(g.año AS INTEGER) AS año,
+    g.funcion_cofog,
+    g.gasto_por_habitante_eur * d.factor AS eur_hab_real
+FROM mother.cuentas_gastos g
+JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(g.año AS INTEGER)
+ORDER BY 1 ASC, 3 DESC
+```
+
+```sql serie_gastos_real
+-- Para las mini-gráficas: euros por habitante a precios constantes (mother.deflactor)
+SELECT
+    año AS anio,
     funcion_cofog,
-    millones_euros / 1000.0 AS miles_millones
-FROM mother.cuentas_gastos
-ORDER BY año ASC, millones_euros DESC
+    eur_hab_real
+FROM ${serie_gastos_funcion}
+WHERE funcion_cofog IN ('Protección Social y Pensiones', 'Sanidad Pública', 'Educación')
+  AND eur_hab_real IS NOT NULL
+ORDER BY anio
 ```
 
 # ¿En qué gasta el Estado y cuánto cuesta por ciudadano?
 
-El gasto público consolidado en España alcanzó en {resumen_gastos[0].anio} **{formatNumber(resumen_gastos[0].total_mio / 1000, 1)} mil millones de euros** ({formatNumber(resumen_gastos[0].total_pib, 1)}% del PIB). La mayor parte del presupuesto se destina a las funciones del **Estado del Bienestar**: protección social y pensiones, sanidad y educación representan el **{formatNumber(resumen_gastos[0].social_pct, 1)}% de todo el gasto público**.
+El gasto público consolidado en España alcanzó en {resumen_gastos[0]?.anio} **{formatNumber(resumen_gastos[0]?.total_hab_real, 0)} euros por habitante** ({formatNumber(resumen_gastos[0]?.total_mio / 1000, 1)} mil millones en total, el {formatNumber(resumen_gastos[0]?.total_pib, 1)}% del PIB). La mayor parte del presupuesto se destina a las funciones del **Estado del Bienestar**: protección social y pensiones, sanidad y educación representan el **{formatNumber(resumen_gastos[0].social_pct, 1)}% de todo el gasto público**.
 
 <Grid cols=3>
     <KpiCard
         title="Pensiones y Protección Social"
-        value={resumen_gastos[0].pens_mio}
-        formattedValue="{formatNumber(resumen_gastos[0].pens_mio / 1000, 1)} mil M€"
-        unit="{formatNumber(resumen_gastos[0].pens_hab, 0)} € / hab."
-        period="{formatNumber(resumen_gastos[0].pens_pct, 1)}% del gasto total · {resumen_gastos[0].anio}"
+        value={resumen_gastos[0]?.pens_hab}
+        formattedValue="{formatNumber(resumen_gastos[0]?.pens_hab, 0)} €"
+        unit="/ hab."
+        period="{formatNumber(resumen_gastos[0]?.pens_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.pens_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF10)"
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Protección Social y Pensiones').map(d => d.eur_hab_real)}
     />
 
     <KpiCard
         title="Sanidad Pública"
-        value={resumen_gastos[0].san_mio}
-        formattedValue="{formatNumber(resumen_gastos[0].san_mio / 1000, 1)} mil M€"
-        unit="{formatNumber(resumen_gastos[0].san_hab, 0)} € / hab."
-        period="{formatNumber(resumen_gastos[0].san_pct, 1)}% del gasto total · {resumen_gastos[0].anio}"
+        value={resumen_gastos[0]?.san_hab}
+        formattedValue="{formatNumber(resumen_gastos[0]?.san_hab, 0)} €"
+        unit="/ hab."
+        period="{formatNumber(resumen_gastos[0]?.san_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.san_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF07)"
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Sanidad Pública').map(d => d.eur_hab_real)}
     />
 
     <KpiCard
         title="Educación"
-        value={resumen_gastos[0].edu_mio}
-        formattedValue="{formatNumber(resumen_gastos[0].edu_mio / 1000, 1)} mil M€"
-        unit="{formatNumber(resumen_gastos[0].edu_hab, 0)} € / hab."
-        period="{formatNumber(resumen_gastos[0].edu_pct, 1)}% del gasto total · {resumen_gastos[0].anio}"
+        value={resumen_gastos[0]?.edu_hab}
+        formattedValue="{formatNumber(resumen_gastos[0]?.edu_hab, 0)} €"
+        unit="/ hab."
+        period="{formatNumber(resumen_gastos[0]?.edu_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.edu_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF09)"
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Educación').map(d => d.eur_hab_real)}
     />
 </Grid>
+
+<p class="text-xs text-gray-500">Principio de esta web: los importes se muestran <b>por habitante</b> y <b>descontada la inflación</b>, en euros de {base_deflactor[0]?.anio_base} según el IPC medio anual del INE, para que las cifras de años distintos sean comparables. Los totales en euros corrientes aparecen como dato secundario; los porcentajes (del gasto o del PIB) no necesitan ajuste.</p>
 
 ---
 
@@ -115,32 +145,36 @@ Dividiendo el gasto de cada función entre los ~{formatNumber(poblacion_ultimo[0
 <BarChart
     data={gastos_ultimo}
     x=funcion_cofog
-    y=gasto_por_habitante_eur
-    yAxisTitle="Euros (€) por habitante al año"
-    title="Gasto público por habitante al año según función ({resumen_gastos[0].anio})"
+    y=gasto_hab_real
+    yAxisTitle="Euros por habitante al año (euros de {base_deflactor[0]?.anio_base})"
+    yFmt=num0
+    title="Gasto público por habitante al año según función ({resumen_gastos[0]?.anio}, euros de {base_deflactor[0]?.anio_base})"
     swapXY={true}
 />
 
 <DataTable data={gastos_ultimo} title="Clasificación Funcional del Gasto (COFOG {resumen_gastos[0].anio})">
     <Column id=funcion_cofog title="Función de Gasto" />
     <Column id=categoria_macro title="Macro-Categoría" />
-    <Column id=millones_euros title="Total (M€)" fmt='#,##0 M€' />
+    <Column id=gasto_hab_real title="Por Habitante" fmt='#,##0 €' />
     <Column id=porcentaje_gasto_total title="% Gasto Total" fmt='0.0"%"' />
-    <Column id=gasto_por_habitante_eur title="Por Habitante" fmt='#,##0 €' />
     <Column id=porcentaje_pib title="% sobre el PIB" fmt='0.0"%"' />
+    <Column id=millones_euros title="Total (M€ corrientes)" fmt='#,##0' />
 </DataTable>
 
 ---
 
 ## 2. Evolución del Gasto por Grandes Bloques
 
+Gasto por habitante de cada bloque, en euros de {base_deflactor[0]?.anio_base} (descontada la inflación), desde 2002, primer año con IPC anual disponible:
+
 <AreaChart
     data={serie_gastos_macro}
     x=año
-    y=miles_millones
+    y=eur_hab_real
     series=categoria_macro
-    yAxisTitle="Miles de Millones de Euros (Mrd €)"
-    title="Evolución del Gasto Público por Bloque Funcional"
+    yAxisTitle="Euros por habitante (euros de {base_deflactor[0]?.anio_base})"
+    yFmt=num0
+    title="Gasto público por habitante y bloque funcional (euros de {base_deflactor[0]?.anio_base}, descontada la inflación)"
 />
 
 ---

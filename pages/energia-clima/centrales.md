@@ -34,6 +34,26 @@ FROM mother.centrales_por_anio
 WHERE tecnologia = 'Carbón' AND anio >= 2018
 ```
 
+```sql operacion_serie
+SELECT anio, valor
+FROM (
+    SELECT anio, sum(sum(mw_alta - mw_baja)) OVER (ORDER BY anio) / 1000 AS valor
+    FROM mother.centrales_por_anio
+    WHERE anio <= year(current_date)
+    GROUP BY anio
+)
+WHERE anio >= 2000
+ORDER BY anio
+```
+
+```sql carbon_serie
+SELECT anio, sum(sum(mw_baja)) OVER (ORDER BY anio) / 1000 AS valor
+FROM mother.centrales_por_anio
+WHERE tecnologia = 'Carbón' AND anio >= 2018 AND anio <= year(current_date)
+GROUP BY anio
+ORDER BY anio
+```
+
 # ⚡ Centrales eléctricas de España
 
 España tiene **{formatNumber(kpis[0]?.gw_operacion, 1)} GW** de potencia en **{formatNumber(kpis[0]?.n_operacion, 0)} centrales** de más de 1 MW en funcionamiento, y otros **{formatNumber(kpis[0]?.gw_construccion, 1)} GW** en construcción. Detrás esperan **{formatNumber(kpis[0]?.gw_tramitacion, 0)} GW** de proyectos en tramitación, más que toda la potencia que ya funciona, aunque solo una parte llegará a construirse. Este mapa recoge cada central (en operación, en obras, en tramitación, anunciada o ya cerrada) según el inventario mundial de Global Energy Monitor.
@@ -46,6 +66,7 @@ España tiene **{formatNumber(kpis[0]?.gw_operacion, 1)} GW** de potencia en **{
         unit=" GW"
         period="{formatNumber(kpis[0]?.pct_renovable, 0)} % renovable"
         source="Global Energy Monitor"
+        sparklineData={operacion_serie}
     />
     <KpiCard
         title="En construcción"
@@ -70,6 +91,7 @@ España tiene **{formatNumber(kpis[0]?.gw_operacion, 1)} GW** de potencia en **{
         unit=" GW"
         period="Potencia de carbón retirada"
         source="Global Energy Monitor"
+        sparklineData={carbon_serie}
     />
 </Grid>
 

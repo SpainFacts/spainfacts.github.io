@@ -53,6 +53,16 @@ WHERE tecnologia = 'Eólica'
   AND año = (SELECT max(año) FROM mother.energia_potencia_instalada)
 ```
 
+```sql potencia_serie
+SELECT
+    año,
+    sum(potencia_mw) FILTER (WHERE tecnologia = 'Solar Fotovoltaica') AS solar_mw,
+    sum(potencia_mw) FILTER (WHERE tecnologia = 'Eólica') AS eolica_mw
+FROM mother.energia_potencia_instalada
+GROUP BY año
+ORDER BY año ASC
+```
+
 <Grid cols=4>
     <KpiCard
         title="Cuota Renovable"
@@ -78,6 +88,7 @@ WHERE tecnologia = 'Eólica'
         period={emisiones_totales[0]?.año}
         source="Inventario GEI (MITECO) vía Eurostat"
         href="/energia-clima/emisiones"
+        sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
     />
     <KpiCard
         title="Potencia Solar FV"
@@ -86,6 +97,7 @@ WHERE tecnologia = 'Eólica'
         period={potencia_solar[0]?.año}
         source="Eurostat (nrg_inf_epc)"
         href="/energia-clima/mix-electrico"
+        sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
     />
     <KpiCard
         title="Potencia Eólica"
@@ -94,6 +106,7 @@ WHERE tecnologia = 'Eólica'
         period={potencia_eolica[0]?.año}
         source="Eurostat (nrg_inf_epc)"
         href="/energia-clima/mix-electrico"
+        sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
     />
 </Grid>
 
