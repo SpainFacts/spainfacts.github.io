@@ -127,11 +127,11 @@ ORDER BY c.poblacion DESC
     <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
         <a href={c.ruta} class="text-base font-bold text-gray-900 dark:text-white hover:underline no-underline">{c.nombre}</a>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-2">{formatNumber(c.poblacion, 0)} habitantes · {#if c.crecimiento_10_anios > 0}+{/if}{formatNumber(c.crecimiento_10_anios, 1)} % en 10 años</p>
-        <p class="text-xs mb-0">
-        {#each provincias.filter(p => p.cod_ccaa === c.cod) as p, i}
-            <a href={p.ruta} class="text-blue-600 dark:text-blue-400 hover:underline">{p.nombre}</a>{#if i < provincias.filter(x => x.cod_ccaa === c.cod).length - 1} · {/if}
+        <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs">
+        {#each provincias.filter(p => p.cod_ccaa === c.cod) as p}
+            <a href={p.ruta} class="text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">{p.nombre}</a>
         {/each}
-        </p>
+        </div>
     </div>
 {/each}
 </div>
