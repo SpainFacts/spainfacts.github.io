@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: inmigracion_poblacion
+    description: "Población extranjera a 1 de enero por comunidad y España, con su peso y grandes grupos de nacionalidad (INE 56942)."
+  - name: inmigracion_flujos
+    description: "Inmigraciones y emigraciones exteriores trimestrales por nacionalidad, saldo y tasas por 1.000 hab. (INE 59011/59014)."
+  - name: inmigracion_llegadas
+    description: "Llegadas irregulares por mes y vía (Interior vía ACNUR)."
+  - name: inmigracion_asilo
+    description: "Primeras solicitudes de asilo por mes (Eurostat)."
+  - name: inmigracion_asilo_nacionalidad
+    description: "Primeras solicitudes de asilo por año y nacionalidad (Eurostat)."
+  - name: inmigracion_nacionalizaciones
+    description: "Adquisiciones de nacionalidad española por año, comunidad y nacionalidad previa, con tasa por 1.000 extranjeros residentes (INE 70012)."
+  - name: inmigracion_saldos
+    description: "Saldo migratorio exterior por año: España por nacionalidad (grupos y países) y comunidades por nacionalidad española/extranjera, con tasa por 1.000 hab. (INE EMCR)."
+  - name: inmigracion_flujos_anuales
+    description: "Inmigraciones, emigraciones y saldo exterior de España por año, con tasas por 1.000 hab. (INE EMCR, desde 2021)."

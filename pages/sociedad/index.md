@@ -60,6 +60,10 @@ Cómo vivimos en España: la seguridad, la salud y la población que llega de fu
         <p class="text-lg font-bold text-gray-900 dark:text-white">🩺 Salud</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Esperanza de vida por comunidad y provincia, causas de muerte, suicidios, tráfico y exceso de mortalidad semana a semana.</p>
     </a>
+    <a href="/sociedad/inmigracion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white">🌍 Inmigración</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Población extranjera por comunidad y origen, saldo migratorio, llegadas irregulares, asilo y nacionalizaciones.</p>
+    </a>
 </div>
 
 <LastRefreshed prefix="Datos actualizados" />

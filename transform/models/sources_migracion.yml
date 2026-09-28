@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw_migracion
+    description: "Inmigración: flujos y nacionalizaciones del INE (ingestion/ine.py), llegadas irregulares (ACNUR/Interior) y asilo (Eurostat) (ingestion/migracion.py)"
+    schema: raw
+    tables:
+      - name: ine_flujos_inmigracion
+        description: "INE tabla 59011: inmigraciones desde el extranjero por nacionalidad, trimestral."
+      - name: ine_flujos_emigracion
+        description: "INE tabla 59014: emigraciones al extranjero por nacionalidad, trimestral."
+      - name: ine_nacionalizaciones
+        description: "INE tabla 70012: adquisiciones de nacionalidad española por sexo, comunidad y nacionalidad previa, anual."
+      - name: acnur_llegadas
+        description: "Llegadas irregulares a España por mes y vía (mar península/Baleares, mar Canarias, tierra Ceuta/Melilla), ACNUR con datos de Interior."
+      - name: eurostat_asilo_mensual
+        description: "Eurostat migr_asyappctzm: primeras solicitudes de asilo en España por mes."
+      - name: eurostat_asilo_nacionalidad
+        description: "Eurostat migr_asyappctza: primeras solicitudes de asilo en España por año y nacionalidad."
+      - name: ine_inmigraciones_anual
+        description: "INE tabla 69687 (EMCR): inmigraciones procedentes del extranjero por año, sexo y edad, desde 2021."
+      - name: ine_emigraciones_anual
+        description: "INE tabla 69702 (EMCR): emigraciones con destino al extranjero por año, sexo y edad, desde 2021."
+      - name: ine_saldos_migratorios
+        description: "INE tabla 69758 (EMCR): saldos migratorios por nacionalidad, sexo y tipo (total, exterior, interior), España."
+      - name: ine_saldos_migratorios_ccaa
+        description: "INE tabla 69762 (EMCR): saldos por comunidad, edad, nacionalidad (española/extranjera), sexo y tipo."

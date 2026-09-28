@@ -49,6 +49,11 @@ TABLAS = {
     "ine_flujos_inmigracion": "59011",  # inmigraciones desde el extranjero por nacionalidad, trimestral (ECP)
     "ine_flujos_emigracion": "59014",  # emigraciones al extranjero por nacionalidad, trimestral (ECP)
     "ine_nacionalizaciones": "70012",  # adquisiciones de nacionalidad española por comunidad y nacionalidad previa, anual
+    # Estadística de Migraciones y Cambios de Residencia (EMCR), anual:
+    "ine_inmigraciones_anual": "69687",  # inmigraciones procedentes del extranjero por sexo y edad
+    "ine_emigraciones_anual": "69702",  # emigraciones con destino al extranjero por sexo y edad
+    "ine_saldos_migratorios": "69758",  # saldos por nacionalidad y tipo (exterior/interior), España
+    "ine_saldos_migratorios_ccaa": "69762",  # saldos por comunidad, edad, nacionalidad (española/extranjera) y tipo
 }
 
 
