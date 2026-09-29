@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw_vivienda
+    description: "Vivienda: precios, compraventas e hipotecas del INE y valor tasado, obra nueva y alquiler (SERPAVI) del Ministerio de Vivienda (ingestion/vivienda.py)"
+    schema: raw
+    tables:
+      - name: ine_ipv
+        description: "INE tabla 25171: Índice de Precios de Vivienda (base 2015), trimestral, nacional y CCAA, general / nueva / segunda mano."
+      - name: ine_ipva_ccaa
+        description: "INE tabla 59057: Índice de Precios de Vivienda en Alquiler (base 2015), anual, CCAA (sin País Vasco ni Navarra), por superficie."
+      - name: ine_compraventas
+        description: "INE tabla 6150 (ETDP): compraventas de viviendas por mes, nacional, CCAA y provincia, general / nueva / segunda mano / libre / protegida."
+      - name: ine_hipotecas_ccaa
+        description: "INE tabla 13896 (H): número e importe (miles de euros) de hipotecas por mes, CCAA y naturaleza de la finca."
+      - name: ine_hipotecas_provincias
+        description: "INE tabla 3200 (H): número e importe (miles de euros) de hipotecas por mes, provincia y naturaleza de la finca."
+      - name: vivienda_valor_tasado
+        description: "MIVAU, boletín tabla 35101000: valor tasado medio de la vivienda libre (€/m²) por trimestre, nacional, CCAA y provincia, desde 1995."
+      - name: vivienda_valor_tasado_municipios
+        description: "MIVAU, boletín tabla 35103500: valor tasado medio de la vivienda libre (€/m²) y número de tasaciones por trimestre en municipios de más de 25.000 habitantes, desde 2005."
+      - name: vivienda_obra_nueva
+        description: "MIVAU, boletín tablas 32200500 y 32201000: viviendas libres iniciadas y terminadas por año, nacional, CCAA y provincia, desde 1991."
+      - name: vivienda_serpavi
+        description: "MIVAU, Sistema Estatal de Referencia del Precio del Alquiler (datos IRPF): alquiler mediano €/m² y €/mes, percentiles 25/75, superficie y número de viviendas alquiladas por CCAA, provincia, municipio, año (2011-2024) y tipología."

@@ -1,6 +1,8 @@
 ---
 title: Movilidad
 description: "Movilidad en España: coches que se venden y circulan por tipo de motor, transición al coche eléctrico, puntos de recarga y viajeros de metro, autobús, tren y avión."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -92,7 +94,7 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
         title="Turismos en circulación"
         value={parque[0]?.turismos}
         formattedValue="{formatNumber(1000 * parque[0]?.turismos / parque[0]?.poblacion, 0)} por 1.000 hab."
-        period="{formatCompact(parque[0]?.turismos, 1)} turismos · {formatNumber(100 * parque[0]?.turismos_enchufables / parque[0]?.turismos, 1)} % enchufables · {parque[0]?.mes_texto}"
+        period="{formatCompact(parque[0]?.turismos, 1)} turismos · {formatNumber(parque[0]?.turismos_enchufables / parque[0]?.turismos / 0.01, 1)} % enchufables · {parque[0]?.mes_texto}"
         source="DGT"
         href="/movilidad/parque"
     />

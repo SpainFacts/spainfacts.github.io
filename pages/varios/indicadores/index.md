@@ -1,5 +1,8 @@
 ---
+description: "Todas las series de seguimiento de SpainFacts con su último dato, su evolución y un enlace a la fuente oficial."
 title: Indicadores
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 # Indicadores
@@ -15,7 +18,7 @@ SELECT
     any_value(unidad) AS unidad,
     max(periodo) AS ultimo_periodo,
     any_value(fuente) AS fuente,
-    '/indicadores/' || metrica_id AS enlace
+    '/varios/indicadores/' || metrica_id AS enlace
 FROM mother.metricas
 GROUP BY metrica_id, nombre
 ORDER BY nombre

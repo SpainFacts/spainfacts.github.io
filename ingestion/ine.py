@@ -56,6 +56,7 @@ TABLAS = {
     "ine_saldos_migratorios_ccaa": "69762",  # saldos por comunidad, edad, nacionalidad (española/extranjera) y tipo
     # Salarios: Encuesta Trimestral de Coste Laboral (ETCL), desde 2008
     "ine_coste_salarial": "6038",  # coste salarial por trabajador y mes por jornada y sector (industria, construcción, servicios)
+    "ine_coste_laboral_ccaa": "6061",  # ETCL: coste laboral y salarial por trabajador y mes por comunidad y sector
 }
 
 

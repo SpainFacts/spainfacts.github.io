@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: elecciones_candidaturas
+    description: >
+      Candidaturas de cada proceso electoral (Congreso 1977-2023, Municipales 1979-2023,
+      Parlamento Europeo 1987-2024; Ministerio del Interior, fichero 03) con la familia
+      política (reglas del seed elecciones_partidos_reglas, luego la etiqueta exacta del seed
+      partidos_familias) y el bloque (seed elecciones_bloques). `origen_familia` dice qué
+      regla asignó la familia.
+    columns:
+      - name: proceso
+        tests: [not_null]
+      - name: cod_candidatura
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]
+      - name: bloque
+        tests: [not_null]
+
+  - name: elecciones_votos_territorio
+    description: >
+      Tabla intermedia: votos y escaños por candidatura en España, cada comunidad (INE) y cada
+      provincia, sumando desde las provincias y agrupando por la cabecera de acumulación
+      autonómica o nacional. Incluye el voto CERA. No se publica en Evidence.
+    columns:
+      - name: nivel
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+
+  - name: elecciones_participacion
+    description: >
+      Una fila por elección y territorio (España, comunidad, provincia): censo, votantes,
+      participación (%, sobre el censo de escrutinio con CERA), blancos y nulos, candidatura
+      más votada y segunda, número efectivo de partidos (en votos y escaños) e índice de
+      desproporcionalidad de Gallagher.
+    columns:
+      - name: proceso
+        tests: [not_null]
+      - name: participacion
+        tests: [not_null]
+
+  - name: elecciones_familias
+    description: >
+      Voto (% sobre válidos) y escaños por familia política, elección y territorio (España,
+      comunidad, provincia). La familia se asigna a cada lista provincial y se suma hacia arriba.
+    columns:
+      - name: familia
+        tests: [not_null]
+      - name: bloque
+        tests: [not_null]
+
+  - name: elecciones_partidos
+    description: >
+      Resultado nacional por candidatura en el Congreso y el Parlamento Europeo (listas
+      agrupadas por su cabecera de acumulación nacional): % de voto, escaños, votos por escaño
+      y diferencia entre % de escaños y % de voto. Candidaturas con >= 0,1 % o algún escaño.
+    columns:
+      - name: siglas
+        tests: [not_null]
+
+  - name: elecciones_municipios
+    description: >
+      Resultado de cada elección en cada municipio (ficheros 05/06, total municipal):
+      participación, candidatura ganadora, % por bloque y de las principales familias
+      estatales, número efectivo de partidos. Sin voto CERA. En Municipales, solo municipios
+      de más de 250 habitantes.
+    columns:
+      - name: cod_mun
+        tests: [not_null]
+      - name: proceso
+        tests: [not_null]
+
+  - name: elecciones_municipios_congreso
+    description: >
+      Últimas elecciones al Congreso en cada municipio con nombre, provincia, comunidad,
+      población, participación (y la de las generales anteriores), ganador y % por bloque y
+      principales familias. Para la tabla con buscador de /sociedad/elecciones.
+    columns:
+      - name: cod_mun
+        tests: [unique, not_null]

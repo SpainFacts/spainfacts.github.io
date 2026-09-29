@@ -12,6 +12,7 @@
         { href: "/territorios", label: "Territorios" },
         { href: "/demografia", label: "Demografía" },
         { href: "/economia", label: "Economía" },
+        { href: "/vivienda", label: "Vivienda" },
         { href: "/cuentas-publicas", label: "Cuentas Públicas" },
         { href: "/energia-clima", label: "Energía/Clima" },
         { href: "/movilidad", label: "Movilidad" },

@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: raw_educacion
+    description: "Educación: indicadores de Eurostat (abandono temprano, nivel educativo, NEET, gasto, alumnado y PISA) para España, la UE-27 y las regiones NUTS 2 españolas (ingestion/educacion.py)"
+    schema: raw
+    tables:
+      - name: eurostat_edu_abandono
+        description: "Eurostat edat_lfse_14 (España y UE) y edat_lfse_16 (NUTS 2): % de 18-24 años que han abandonado pronto la educación y la formación."
+      - name: eurostat_edu_nivel
+        description: "Eurostat edat_lfse_03 (España y UE) y edat_lfse_04 (NUTS 2): % de 25-64 años por nivel educativo máximo alcanzado (CINE 2011)."
+      - name: eurostat_edu_neet
+        description: "Eurostat edat_lfse_20 (España y UE) y edat_lfse_22 (NUTS 2): % de jóvenes que ni trabajan ni estudian ni se forman, 15-29 y 18-24 años."
+      - name: eurostat_edu_gasto_cofog
+        description: "Eurostat gov_10a_exp: gasto de las AAPP en educación (COFOG GF09 y subfunciones), millones de euros y % del PIB, España y UE."
+      - name: eurostat_edu_gasto_alumno
+        description: "Eurostat educ_uoe_fini04: gasto anual en centros educativos por alumno equivalente a tiempo completo, por nivel y titularidad; euros, PPS y % del PIB por habitante."
+      - name: eurostat_edu_matriculados
+        description: "Eurostat educ_uoe_enra01: alumnado matriculado en España por nivel CINE y titularidad del centro (pública, privada dependiente del Estado = concertada, privada independiente)."
+      - name: eurostat_edu_secundaria2
+        description: "Eurostat educ_uoe_enrs04: alumnado de secundaria superior por orientación (general / profesional), España y UE."
+      - name: eurostat_edu_pisa
+        description: "Eurostat educ_outc_pisa (con datos de la OCDE, PISA): % de alumnos de 15 años por debajo del nivel 2 en lectura, matemáticas y ciencias, por sexo."

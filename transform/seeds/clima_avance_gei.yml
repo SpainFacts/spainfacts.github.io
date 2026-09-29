@@ -1,0 +1,18 @@
+version: 2
+
+seeds:
+  - name: clima_avance_gei
+    description: >
+      Avance (provisional) del Inventario de Emisiones de GEI de España del último año,
+      publicado por el MITECO antes de la edición definitiva del inventario
+      (Nota-Avance-GEI-2025.pdf, julio de 2026:
+      https://www.miteco.gob.es/content/dam/miteco/es/calidad-y-evaluacion-ambiental/temas/sistema-espanol-de-inventario-sei-/Nota-Avance-GEI-2025.pdf).
+      kt CO2eq tomados de la tabla del Anexo II (formato del art. 26.2 del Reglamento UE
+      2018/1999) y agrupados con el mismo mapeo CRF -> sector que stg_energia_emisiones_gei:
+      Generación Eléctrica = 1A1a (Anexo I); Industria y Procesos = 1A1 - 1A1a + 1A2 + 1B + 2 - 2F - 2G;
+      Residencial y Comercial = 1A4a+1A4b (Anexo I); Agricultura y Ganadería = 3 + 1A4c;
+      Gases Fluorados y Otros = 2F + 2G + 1A5. TOTAL = emisiones brutas sin LULUCF.
+      Se publica solo como dato provisional: los marts clima_* lo usan únicamente para
+      los años que aún no están en Eurostat env_air_gge. Actualizar a mano cada julio.
+    config:
+      column_types: {anio: integer, sector: varchar, kt_co2eq: double}

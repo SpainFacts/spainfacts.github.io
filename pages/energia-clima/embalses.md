@@ -1,6 +1,8 @@
 ---
 title: Reservas de agua y embalses
 description: Estado semanal de los embalses españoles por cuenca, comparado con el año anterior y con la media de los últimos diez años.
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

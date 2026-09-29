@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: demografia_anual
+    description: >
+      Natalidad, mortalidad, fecundidad y crecimiento de la población por año y
+      territorio (pais/ccaa/provincia) desde 1975: nacimientos y defunciones (INE
+      MNP 6524 y 6561), tasas brutas por 1.000 hab., indicador coyuntural de
+      fecundidad, edad media a la maternidad y % de nacidos de madre extranjera
+      (INE IDB), crecimiento total entre dos 1 de enero (ECP 56945) y su
+      descomposición en vegetativo y resto (saldo migratorio y ajustes); saldo
+      exterior de la Estadística de Migraciones desde 2021.
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+      - name: anio
+        tests: [not_null]
+  - name: demografia_envejecimiento
+    description: >
+      Estructura por edades y origen de la población a 1 de enero por año y
+      territorio (pais/ccaa/provincia) desde 1971: % de menores de 16, de 65+ y
+      de 80+, tasas de dependencia, índice de envejecimiento, edad media, ratio
+      de masculinidad (INE ECP 56945) y % de nacidos en el extranjero y de
+      extranjeros desde 2002 (INE ECP 56948 y 56947).
+    columns:
+      - name: clave
+        tests: [not_null, unique]
+      - name: poblacion
+        tests: [not_null]
+  - name: demografia_piramide
+    description: >
+      Pirámide de población a 1 de enero por año, territorio (pais/ccaa/provincia),
+      sexo y grupo quinquenal de edad (hasta 90 y más) desde 1971 (INE ECP 56945),
+      con los nacidos en el extranjero de cada grupo desde 2002 (INE ECP 56948);
+      pct = % sobre la población total del territorio.
+  - name: demografia_hogares
+    description: >
+      Hogares en viviendas familiares a 1 de enero por año y territorio
+      (pais/ccaa/provincia) desde 2021: número, tamaño medio y reparto por número
+      de miembros (INE ECP 60131-60134).
+    columns:
+      - name: clave
+        tests: [not_null, unique]

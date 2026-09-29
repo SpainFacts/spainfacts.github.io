@@ -1,6 +1,8 @@
 ---
 title: Municipios
 description: "Busca cualquier municipio de España: población, cuentas del ayuntamiento y comparación con municipios de su tamaño."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -331,7 +333,7 @@ Liquidación del presupuesto del ayuntamiento (lo realmente ingresado y gastado,
     <KpiCard
         title="Peso del personal en el gasto"
         value={personal_ayto[0]?.peso}
-        formattedValue="{formatNumber(100 * personal_ayto[0]?.peso, 0)} %"
+        formattedValue="{formatNumber(personal_ayto[0]?.peso / 0.01, 0)} %"
         period="{formatCompact(personal_ayto[0]?.gastos_c1, 1)} € corrientes en sueldos, cotizaciones y retribuciones de cargos electos"
     />
 </Grid>
@@ -435,6 +437,146 @@ ORDER BY anio
 
 {#if crimen_mun.length > 0 && crimen_mun[0]?.infracciones != null}
 
+```sql renta_mun
+SELECT
+    CAST(m.anio AS INTEGER) AS anio,
+    m.renta_persona_real, m.renta_hogar_real, m.renta_uc_mediana_real, m.renta_persona,
+    m.puesto_espana, m.municipios_con_dato,
+    p.renta_persona_real AS renta_persona_provincia,
+    e.renta_persona_real AS renta_persona_espana
+FROM mother.renta_municipios m
+LEFT JOIN mother.renta_territorios p ON p.nivel = 'provincia' AND p.cod = m.cod_prov AND p.anio = m.anio
+LEFT JOIN mother.renta_territorios e ON e.nivel = 'pais' AND e.anio = m.anio
+WHERE m.cod_mun = '${inputs.municipio}' AND m.renta_persona_real IS NOT NULL
+ORDER BY m.anio
+```
+
+```sql renta_mun_distritos
+SELECT 'Distrito ' || distrito AS distrito, renta_persona_real, renta_hogar_real, CAST(anio AS INTEGER) AS anio
+FROM mother.renta_distritos
+WHERE cod_mun = '${inputs.municipio}' AND anio = (SELECT max(anio) FROM mother.renta_distritos)
+ORDER BY cod_distrito
+```
+
+```sql paro_mun
+SELECT
+    municipio, paro_registrado, paro_registrado_hace_1_anio, por_100_hab, variacion_anual_pct, oculto,
+    100.0 * paro_registrado_hace_1_anio / poblacion AS por_100_hab_hace_1_anio,
+    strftime(mes, '%m/%Y') AS mes_txt
+FROM mother.mercado_paro_municipios
+WHERE cod_municipio = '${inputs.municipio}'
+```
+
+{#if renta_mun.length > 0 || paro_mun.length > 0}
+
+## Renta y paro
+
+<Grid cols=3>
+{#if renta_mun.length > 0}
+    <KpiCard
+        title="Renta neta por persona"
+        value={renta_mun.slice(-1)[0]?.renta_persona_real}
+        formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_real, 0)} €"
+        period="al año en {renta_mun.slice(-1)[0]?.anio}, euros de 2025 · puesto {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)} de {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} municipios · provincia {formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)} €"
+        direction="positive-up"
+        source="INE / Atlas de Renta"
+        href="/sociedad/desigualdad"
+        sparklineData={renta_mun.map(d => d.renta_persona_real)}
+    />
+    <KpiCard
+        title="Renta neta por hogar"
+        value={renta_mun.slice(-1)[0]?.renta_hogar_real}
+        formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_hogar_real, 0)} €"
+        period="al año en {renta_mun.slice(-1)[0]?.anio}, euros de 2025"
+        direction="positive-up"
+        source="INE / Atlas de Renta"
+        href="/sociedad/desigualdad"
+        sparklineData={renta_mun.map(d => d.renta_hogar_real)}
+    />
+{/if}
+{#if paro_mun.length > 0 && !paro_mun[0]?.oculto}
+    <KpiCard
+        title="Paro registrado"
+        value={paro_mun[0]?.por_100_hab}
+        formattedValue="{formatNumber(paro_mun[0]?.por_100_hab, 1)} por 100 hab."
+        period="{paro_mun[0]?.mes_txt} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} personas ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)} % en un año)"
+        direction="positive-down"
+        source="SEPE"
+        href="/economia/paro"
+        sparklineData={[paro_mun[0]?.por_100_hab_hace_1_anio, paro_mun[0]?.por_100_hab]}
+    />
+{/if}
+</Grid>
+
+{#if renta_mun.length > 1}
+<LineChart
+    data={renta_mun}
+    x=anio
+    y={['renta_persona_real', 'renta_persona_provincia']}
+    seriesLabels={{renta_persona_real: mun[0]?.municipio, renta_persona_provincia: 'Provincia'}}
+    colorPalette={['#b45309', '#94a3b8']}
+    xFmt='0'
+    yFmt='#,##0" €"'
+    yAxisTitle="€ por persona y año (reales)"
+    title="Renta neta media por persona, euros de 2025"
+/>
+{/if}
+
+{#if renta_mun_distritos.length > 1}
+<BarChart
+    data={renta_mun_distritos}
+    x=distrito
+    y=renta_persona_real
+    yFmt='#,##0" €"'
+    title="Renta por persona en cada distrito ({renta_mun_distritos[0]?.anio}, euros de 2025)"
+/>
+{/if}
+
+<p class="text-xs text-gray-500">Renta: Atlas de Distribución de Renta de los Hogares del INE, a partir de datos tributarios. Paro: demandantes parados registrados en el SEPE el último día del mes, sobre la población total del municipio (no hay población de 16 a 64 años por municipio).</p>
+
+{/if}
+
+```sql tur_vut_mun
+SELECT
+    v.periodo, v.viviendas, v.plazas, v.pct_viviendas, v.viviendas_1000hab, v.puesto,
+    e.pct_viviendas AS pct_viviendas_espana,
+    e.viviendas_1000hab AS viviendas_1000hab_espana,
+    (SELECT count(*) FROM mother.turismo_viviendas_municipios x WHERE x.periodo = v.periodo AND x.poblacion >= 1000) AS n_ranking,
+    ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'][CAST(month(v.periodo) AS INTEGER)] || ' de ' || CAST(v.anio AS INTEGER) AS periodo_txt
+FROM mother.turismo_viviendas_municipios v
+JOIN mother.turismo_viviendas e ON e.nivel = 'pais' AND e.periodo = v.periodo
+WHERE v.cod_mun = '${inputs.municipio}'
+ORDER BY v.periodo
+```
+
+{#if tur_vut_mun.length > 0 && tur_vut_mun.slice(-1)[0]?.viviendas != null}
+
+## Viviendas turísticas
+
+<Grid cols=2>
+    <KpiCard
+        title="Viviendas turísticas"
+        value={tur_vut_mun.slice(-1)[0]?.pct_viviendas}
+        formattedValue="{formatNumber(tur_vut_mun.slice(-1)[0]?.pct_viviendas, 2)} % de las viviendas"
+        period="{tur_vut_mun.slice(-1)[0]?.periodo_txt} · España: {formatNumber(tur_vut_mun.slice(-1)[0]?.pct_viviendas_espana, 2)} %"
+        source="INE (experimental)"
+        href="/economia/turismo"
+        sparklineData={tur_vut_mun.filter(d => d.pct_viviendas != null).map(d => ({x: d.periodo, y: d.pct_viviendas}))}
+    />
+    <KpiCard
+        title="Por 1.000 habitantes"
+        value={tur_vut_mun.slice(-1)[0]?.viviendas_1000hab}
+        formattedValue="{formatNumber(tur_vut_mun.slice(-1)[0]?.viviendas_1000hab, 1)}"
+        period="{formatNumber(tur_vut_mun.slice(-1)[0]?.viviendas, 0)} viviendas con {formatNumber(tur_vut_mun.slice(-1)[0]?.plazas, 0)} plazas · España: {formatNumber(tur_vut_mun.slice(-1)[0]?.viviendas_1000hab_espana, 1)}"
+        source="INE (experimental)"
+        sparklineData={tur_vut_mun.filter(d => d.viviendas_1000hab != null).map(d => ({x: d.periodo, y: d.viviendas_1000hab}))}
+    />
+</Grid>
+
+<p class="text-xs text-gray-500">Viviendas anunciadas como alojamiento turístico en las grandes plataformas digitales (medición experimental del INE, semestral). {#if tur_vut_mun.slice(-1)[0]?.puesto}Es el municipio número {formatNumber(tur_vut_mun.slice(-1)[0]?.puesto, 0)} de {formatNumber(tur_vut_mun.slice(-1)[0]?.n_ranking, 0)} con 1.000 habitantes o más por porcentaje de viviendas turísticas.{/if} Más en <a href="/economia/turismo">Turismo</a>.</p>
+
+{/if}
+
 ## Seguridad
 
 <Grid cols=3>
@@ -506,6 +648,59 @@ ORDER BY mandato
 ```
 
 {#if alcalde.length > 0}
+
+```sql elec_mun
+SELECT e.proceso, e.tipo, p.fecha, CAST(e.anio AS INTEGER) AS anio,
+    CASE e.tipo WHEN '02' THEN 'Generales' ELSE 'Municipales' END AS eleccion,
+    e.participacion, e.ganador_siglas, e.ganador_familia, b.color AS ganador_color, e.ganador_pct,
+    e.pct_izquierda, e.pct_derecha, e.pct_nacionalistas, e.pct_psoe, e.pct_pp, e.pct_vox, e.pct_iu_podemos_sumar
+FROM mother.elecciones_municipios e
+JOIN mother.elecciones_participacion p ON p.proceso = e.proceso AND p.nivel = 'pais'
+LEFT JOIN (SELECT DISTINCT familia, color FROM mother.elecciones_familias) b ON b.familia = e.ganador_familia
+WHERE e.cod_mun = '${inputs.municipio}'
+ORDER BY p.fecha
+```
+
+```sql elec_mun_gen
+SELECT *, participacion AS valor FROM ${elec_mun} WHERE tipo = '02' ORDER BY fecha
+```
+
+```sql elec_mun_bloques
+SELECT fecha, bloque, pct FROM (
+    SELECT fecha, unnest(['Izquierda', 'Centro y derecha', 'Nacionalistas y regionalistas']) AS bloque,
+        unnest([pct_izquierda, pct_derecha, pct_nacionalistas]) AS pct
+    FROM ${elec_mun_gen})
+ORDER BY fecha
+```
+
+{#if elec_mun_gen.length > 0}
+
+## Elecciones
+
+<Grid cols=2>
+    <KpiCard title="Participación en las generales" value={elec_mun_gen.slice(-1)[0]?.participacion}
+        formattedValue="{formatNumber(elec_mun_gen.slice(-1)[0]?.participacion, 1)} %"
+        period="{elec_mun_gen.slice(-1)[0]?.anio} · sin voto de residentes en el extranjero"
+        source="Ministerio del Interior" href="/sociedad/elecciones" sparklineData={elec_mun_gen} />
+    <KpiCard title="Más votada en las generales" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
+        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
+        period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Ministerio del Interior"
+        sparklineData={elec_mun_gen.map(d => ({valor: d.ganador_pct}))} />
+</Grid>
+
+<LineChart data={elec_mun_bloques} x=fecha y=pct series=bloque yFmt='0"%"' markers=true
+    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04'}}
+    title="Voto por bloque en las generales, % de los votos válidos" />
+
+<DataTable data={elec_mun} rows=10>
+    <Column id=anio title="Año" fmt='0' />
+    <Column id=eleccion title="Elección" />
+    <Column id=ganador_siglas title="Más votada" />
+    <Column id=ganador_pct title="% voto" fmt='0.0"%"' />
+    <Column id=participacion title="Participación" fmt='0.0"%"' />
+</DataTable>
+
+{/if}
 
 ## ¿Quién gobierna?
 

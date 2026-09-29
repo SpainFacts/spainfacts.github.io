@@ -1,6 +1,8 @@
 ---
 title: Parque de vehículos
 description: "Los vehículos que circulan en España: turismos por tipo de motor, etiqueta ambiental de la DGT y antigüedad, modelos más comunes y comparación por provincia y municipio."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -43,14 +45,14 @@ Los vehículos que están dados de alta en la Dirección General de Tráfico, es
         title="Turismos enchufables"
         value={resumen[0]?.enchufables}
         formattedValue={formatNumber(resumen[0]?.enchufables, 0)}
-        period="{formatNumber(100 * resumen[0]?.enchufables / resumen[0]?.turismos, 1)} % del total · {formatNumber(resumen[0]?.bev, 0)} eléctricos puros"
+        period="{formatNumber(resumen[0]?.enchufables / resumen[0]?.turismos / 0.01, 1)} % del total · {formatNumber(resumen[0]?.bev, 0)} eléctricos puros"
         source="DGT"
     />
     <KpiCard
         title="Turismos sin etiqueta ambiental"
         value={resumen[0]?.sin_distintivo}
         formattedValue={formatCompact(resumen[0]?.sin_distintivo, 1)}
-        period="{formatNumber(100 * resumen[0]?.sin_distintivo / resumen[0]?.turismos, 1)} % · gasolina anterior a 2000 y diésel anterior a 2006"
+        period="{formatNumber(resumen[0]?.sin_distintivo / resumen[0]?.turismos / 0.01, 1)} % · gasolina anterior a 2000 y diésel anterior a 2006"
         source="DGT"
     />
 </Grid>

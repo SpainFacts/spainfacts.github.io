@@ -1,6 +1,8 @@
 ---
 title: Economía
 description: "PIB por habitante, crecimiento, comercio exterior, sectores, empleo, salarios, paro e inflación en España, descontada la inflación y en proporción a la población."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -233,7 +235,15 @@ Salario medio mensual bruto descontada la inflación. [Crecimiento, sectores y d
     </a>
     <a href="/economia/ipc" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold">🛒 Inflación</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Índice de precios de consumo</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Índice de precios de consumo y precio de la energía</div>
+    </a>
+    <a href="/economia/turismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold">🏖️ Turismo</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Turistas por habitante, su gasto real y en % del PIB, hoteles y viviendas turísticas</div>
+    </a>
+    <a href="/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold">🏢 Empresas, emprendimiento e I+D</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Empresas por habitante y tamaño, sociedades creadas y disueltas, concursos, autónomos y gasto en I+D frente a Europa</div>
     </a>
 </Grid>
 

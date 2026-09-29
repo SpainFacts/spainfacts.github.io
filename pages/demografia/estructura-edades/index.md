@@ -1,249 +1,298 @@
 ---
-title: Estructura por Edades · SpainFacts
-description: Pirámide poblacional y distribución por edad y sexo en España.
+title: Edades y envejecimiento
+description: "Pirámides de población de España, cada comunidad y cada provincia; porcentaje de mayores de 65 y 80 años, tasa de dependencia y edad media desde 1971 (INE)."
 ---
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
-    import PopulationPyramid from '../../../../../../src/lib/components/PopulationPyramid.svelte';
 </script>
 
-# Estructura por Edades de la Población
-
-Análisis de la pirámide poblacional española por edad y sexo, con datos históricos del INE.
-
-```sql items
-  SELECT Year
-  FROM mother.totalAno
-  ORDER BY Year ASC
+```sql espana
+SELECT CAST(anio AS INTEGER) AS anio, poblacion, mayores_65, mayores_80, pct_menores_16, pct_65, pct_80,
+    dependencia, dependencia_mayores, indice_envejecimiento, edad_media
+FROM mother.demografia_envejecimiento
+WHERE nivel = 'pais'
+ORDER BY anio
 ```
 
-<div class="hero-card">
-  <h2 class="text-2xl font-bold text-white mb-2">Comparar Pirámides Poblacionales</h2>
-  <p class="text-white/90 mb-4">Selecciona dos años para comparar la estructura por edades:</p>
+```sql inicio
+SELECT * FROM ${espana} ORDER BY anio LIMIT 1
+```
 
-  <div class="dropdown-container">
-    <Dropdown 
-      name=año_inicio
-      data={items}
-      value=Year
-      defaultValue="1971"
-      class="text-xl"
+```sql anios
+SELECT DISTINCT CAST(anio AS INTEGER) AS anio, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio_txt
+FROM mother.demografia_envejecimiento
+ORDER BY anio DESC
+```
+
+# 🔺 Edades y envejecimiento
+
+Cómo se reparte la población por edades, cuánto ha envejecido España desde 1971 y qué comunidades y provincias tienen la población más mayor.
+
+<Grid cols=4>
+    <KpiCard
+        title="Mayores de 65 años"
+        value={espana.slice(-1)[0]?.pct_65}
+        formattedValue="{formatNumber(espana.slice(-1)[0]?.pct_65, 1)} %"
+        period="{formatCompact(espana.slice(-1)[0]?.mayores_65, 2)} personas en {espana.slice(-1)[0]?.anio} · {formatNumber(inicio[0]?.pct_65, 1)} % en {inicio[0]?.anio}"
+        source="INE"
+        sparklineData={espana.map(d => ({anio: d.anio, valor: d.pct_65}))}
     />
-    <Dropdown 
-      name=año_fin
-      data={items}
-      value=Year
-      defaultValue="2024"
+    <KpiCard
+        title="Mayores de 80 años"
+        value={espana.slice(-1)[0]?.pct_80}
+        formattedValue="{formatNumber(espana.slice(-1)[0]?.pct_80, 1)} %"
+        period="{formatCompact(espana.slice(-1)[0]?.mayores_80, 2)} personas · {formatNumber(inicio[0]?.pct_80, 1)} % en {inicio[0]?.anio}"
+        source="INE"
+        sparklineData={espana.map(d => ({anio: d.anio, valor: d.pct_80}))}
     />
-  </div>
-</div>
+    <KpiCard
+        title="Tasa de dependencia"
+        value={espana.slice(-1)[0]?.dependencia}
+        formattedValue="{formatNumber(espana.slice(-1)[0]?.dependencia, 1)} %"
+        period="menores de 16 y mayores de 64 por cada 100 personas de 16 a 64 años, {espana.slice(-1)[0]?.anio}"
+        source="INE"
+        sparklineData={espana.map(d => ({anio: d.anio, valor: d.dependencia}))}
+    />
+    <KpiCard
+        title="Edad media"
+        value={espana.slice(-1)[0]?.edad_media}
+        formattedValue="{formatNumber(espana.slice(-1)[0]?.edad_media, 1)} años"
+        period="{espana.slice(-1)[0]?.anio} · {formatNumber(inicio[0]?.edad_media, 1)} años en {inicio[0]?.anio}"
+        source="INE"
+        sparklineData={espana.map(d => ({anio: d.anio, valor: d.edad_media}))}
+    />
+</Grid>
 
-```sql poblacion_por_sexo_edad_inicio
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  WHERE Anio = ${inputs.año_inicio.value}
+## La pirámide de población de España
+
+Compara la forma de la pirámide en dos años. Cada barra es el porcentaje de la población total que tiene esa edad y sexo, así que las pirámides de años con distinta población se pueden comparar directamente.
+
+<Dropdown data={anios} name=anio_a value=anio_txt title="Primer año" defaultValue="1975" />
+<Dropdown data={anios} name=anio_b value=anio_txt title="Segundo año" />
+
+```sql piramide_a
+SELECT grupo, edad_desde, sexo, CASE WHEN sexo = 'Hombres' THEN -pct ELSE pct END AS pct
+FROM mother.demografia_piramide
+WHERE nivel = 'pais' AND CAST(anio AS INTEGER) = CAST('${inputs.anio_a.value}' AS INTEGER)
+ORDER BY edad_desde, sexo
 ```
 
-```sql poblacion_por_sexo_edad_fin
-  SELECT *
-  FROM mother.totalAnoSexoEdad
-  WHERE Anio = ${inputs.año_fin.value}
+```sql piramide_b
+SELECT grupo, edad_desde, sexo, CASE WHEN sexo = 'Hombres' THEN -pct ELSE pct END AS pct
+FROM mother.demografia_piramide
+WHERE nivel = 'pais' AND CAST(anio AS INTEGER) = CAST('${inputs.anio_b.value}' AS INTEGER)
+ORDER BY edad_desde, sexo
 ```
-
----
-
-## Pirámide de Población Comparada
 
 <Grid cols=2>
-  <Group>
-    <PopulationPyramid 
-      data={poblacion_por_sexo_edad_inicio} 
-      year={inputs.año_inicio.value} 
+    <BarChart
+        data={piramide_a}
+        x=grupo
+        y=pct
+        series=sexo
+        swapXY=true
+        type=stacked
+        sort=false
+        yFmt='0.0"%";0.0"%"'
+        colorPalette={['#0f766e', '#7c3aed']}
+        title="España, {inputs.anio_a.value}"
     />
-  </Group>
-  <Group>
-    <PopulationPyramid 
-      data={poblacion_por_sexo_edad_fin} 
-      year={inputs.año_fin.value} 
+    <BarChart
+        data={piramide_b}
+        x=grupo
+        y=pct
+        series=sexo
+        swapXY=true
+        type=stacked
+        sort=false
+        yFmt='0.0"%";0.0"%"'
+        colorPalette={['#0f766e', '#7c3aed']}
+        title="España, {inputs.anio_b.value}"
     />
-  </Group>
 </Grid>
+
+## Pirámide de cada comunidad y provincia, por lugar de nacimiento
+
+```sql territorios_opciones
+SELECT '00' AS id, 'España' AS nombre, 0 AS orden
+UNION ALL
+SELECT 'c' || cod, nombre, 1 FROM mother.territorios WHERE nivel = 'ccaa'
+UNION ALL
+SELECT 'p' || cod, nombre || ' (provincia)', 2 FROM mother.territorios WHERE nivel = 'provincia'
+ORDER BY orden, nombre
+```
+
+<Dropdown data={territorios_opciones} name=terr value=id label=nombre order=orden title="Territorio" defaultValue="00" />
+
+```sql piramide_terr
+WITH p AS (
+    SELECT * FROM mother.demografia_piramide
+    WHERE anio = (SELECT max(anio) FROM mother.demografia_piramide WHERE nacidos_extranjero IS NOT NULL)
+      AND CASE WHEN '${inputs.terr.value}' = '00' THEN nivel = 'pais'
+               WHEN left('${inputs.terr.value}', 1) = 'c' THEN nivel = 'ccaa' AND cod = substr('${inputs.terr.value}', 2)
+               ELSE nivel = 'provincia' AND cod = substr('${inputs.terr.value}', 2) END
+)
+SELECT grupo, edad_desde, CAST(anio AS INTEGER) AS anio,
+    CASE WHEN sexo = 'Hombres' THEN 'Hombres nacidos en España' ELSE 'Mujeres nacidas en España' END AS serie,
+    CASE WHEN sexo = 'Hombres' THEN -1 ELSE 1 END * (pct - pct_nacidos_extranjero) AS pct,
+    CASE WHEN sexo = 'Hombres' THEN 1 ELSE 3 END AS orden_serie
+FROM p
+UNION ALL
+SELECT grupo, edad_desde, CAST(anio AS INTEGER),
+    CASE WHEN sexo = 'Hombres' THEN 'Hombres nacidos en el extranjero' ELSE 'Mujeres nacidas en el extranjero' END,
+    CASE WHEN sexo = 'Hombres' THEN -1 ELSE 1 END * pct_nacidos_extranjero,
+    CASE WHEN sexo = 'Hombres' THEN 2 ELSE 4 END
+FROM p
+ORDER BY edad_desde, orden_serie
+```
+
+```sql terr_resumen
+SELECT e.*, CAST(e.anio AS INTEGER) AS anio_int
+FROM mother.demografia_envejecimiento e
+WHERE anio = (SELECT max(anio) FROM mother.demografia_envejecimiento)
+  AND CASE WHEN '${inputs.terr.value}' = '00' THEN nivel = 'pais'
+           WHEN left('${inputs.terr.value}', 1) = 'c' THEN nivel = 'ccaa' AND cod = substr('${inputs.terr.value}', 2)
+           ELSE nivel = 'provincia' AND cod = substr('${inputs.terr.value}', 2) END
+```
+
+<BarChart
+    data={piramide_terr}
+    x=grupo
+    y=pct
+    series=serie
+    swapXY=true
+    type=stacked
+    sort=false
+    yFmt='0.0"%";0.0"%"'
+    colorPalette={['#0f766e', '#5eead4', '#7c3aed', '#c4b5fd']}
+    height=460
+    title="Población por edad, sexo y lugar de nacimiento, {piramide_terr[0]?.anio} (% del total)"
+/>
+
+<p class="text-xs text-gray-500">En este territorio, a 1 de enero de {terr_resumen[0]?.anio_int}: {formatNumber(terr_resumen[0]?.pct_65, 1)} % de mayores de 65 años, edad media de {formatNumber(terr_resumen[0]?.edad_media, 1)} años y {formatNumber(terr_resumen[0]?.pct_nacidos_extranjero, 1)} % de nacidos en el extranjero. Nacido en el extranjero no equivale a extranjero: {formatNumber(terr_resumen[0]?.pct_extranjeros, 1)} % de la población tiene nacionalidad extranjera.</p>
+
+## Cómo ha envejecido España
+
+```sql grandes_grupos
+SELECT anio, 'Menores de 16' AS grupo, pct_menores_16 / 100 AS cuota FROM ${espana}
+UNION ALL
+SELECT anio, 'De 16 a 64', (100 - pct_menores_16 - pct_65) / 100 FROM ${espana}
+UNION ALL
+SELECT anio, 'De 65 a 79', (pct_65 - pct_80) / 100 FROM ${espana}
+UNION ALL
+SELECT anio, '80 y más', pct_80 / 100 FROM ${espana}
+ORDER BY anio
+```
+
+```sql dependencia
+SELECT anio, 'Total (menores de 16 y mayores de 64)' AS tasa, dependencia AS valor FROM ${espana}
+UNION ALL
+SELECT anio, 'Solo mayores de 64', dependencia_mayores FROM ${espana}
+ORDER BY anio
+```
+
+```sql dep_min
+SELECT anio, dependencia FROM ${espana} ORDER BY dependencia LIMIT 1
+```
+
+```sql cruce
+SELECT min(anio) AS anio FROM ${espana} WHERE indice_envejecimiento >= 100
+```
+
+<Grid cols=2>
+    <AreaChart
+        data={grandes_grupos}
+        x=anio
+        y=cuota
+        series=grupo
+        type=stacked
+        yFmt=pct0
+        xFmt="####"
+        colorPalette={['#60a5fa', '#94a3b8', '#fb923c', '#c2410c']}
+        title="Población por grandes grupos de edad (% del total)"
+    />
+    <LineChart
+        data={dependencia}
+        x=anio
+        y=valor
+        series=tasa
+        yFmt=num1
+        xFmt="####"
+        colorPalette={['#1e293b', '#c2410c']}
+        yAxisTitle="por cada 100 personas de 16 a 64 años"
+        title="Tasa de dependencia"
+    />
+</Grid>
+
+<p class="text-xs text-gray-500">En {cruce[0]?.anio} España pasó por primera vez a tener más mayores de 64 años que menores de 16; hoy hay {formatNumber(espana.slice(-1)[0]?.indice_envejecimiento, 0)} mayores por cada 100 menores (índice de envejecimiento). La tasa de dependencia tocó su mínimo en {dep_min[0]?.anio} ({formatNumber(dep_min[0]?.dependencia, 1)}); la parte que corresponde a los mayores ha pasado de {formatNumber(inicio[0]?.dependencia_mayores, 1)} a {formatNumber(espana.slice(-1)[0]?.dependencia_mayores, 1)} por cada 100 personas de 16 a 64 años.</p>
+
+## Por comunidad autónoma
+
+```sql ccaa
+SELECT e.cod, t.nombre AS comunidad, t.ruta, e.pct_65 / 100 AS pct_65, e.pct_80 / 100 AS pct_80,
+    e.pct_menores_16 / 100 AS pct_menores_16, e.dependencia, e.indice_envejecimiento, e.edad_media,
+    e.pct_65 - e10.pct_65 AS cambio_65
+FROM mother.demografia_envejecimiento e
+JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = e.cod
+JOIN mother.demografia_envejecimiento e10 ON e10.nivel = 'ccaa' AND e10.cod = e.cod AND e10.anio = e.anio - 10
+WHERE e.nivel = 'ccaa' AND e.anio = (SELECT max(anio) FROM mother.demografia_envejecimiento)
+ORDER BY e.pct_65 DESC
+```
+
+<DataTable data={ccaa} link=ruta rows=all showLinkCol=false>
+    <Column id=comunidad title="Comunidad" />
+    <Column id=pct_65 title="65 y más" fmt=pct1 contentType=bar barColor="#fed7aa" />
+    <Column id=pct_80 title="80 y más" fmt=pct1 />
+    <Column id=pct_menores_16 title="Menores de 16" fmt=pct1 />
+    <Column id=dependencia title="Tasa de dependencia" fmt=num1 />
+    <Column id=indice_envejecimiento title="Mayores por 100 menores" fmt=num0 />
+    <Column id=edad_media title="Edad media" fmt=num1 />
+    <Column id=cambio_65 title="65+ vs hace 10 años (p.p.)" fmt=num1 contentType=delta />
+</DataTable>
+
+## Por provincia
+
+```sql provincias
+SELECT e.cod AS cod_prov, t.nombre AS provincia, t.ruta, e.pct_65 / 100 AS pct_65, e.pct_80 / 100 AS pct_80,
+    e.edad_media, e.dependencia
+FROM mother.demografia_envejecimiento e
+JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = e.cod
+WHERE e.nivel = 'provincia' AND e.anio = (SELECT max(anio) FROM mother.demografia_envejecimiento)
+ORDER BY e.pct_65 DESC
+```
+
+La provincia más envejecida es {provincias[0]?.provincia}, con un {formatNumber(provincias[0]?.pct_65 / 0.01, 1)} % de mayores de 65 años y una edad media de {formatNumber(provincias[0]?.edad_media, 1)} años; la más joven, {provincias.slice(-1)[0]?.provincia}, con un {formatNumber(provincias.slice(-1)[0]?.pct_65 / 0.01, 1)} %.
+
+<AreaMap
+    data={provincias}
+    geoJsonUrl="/geo/provincias.geojson"
+    geoId="cod_prov"
+    areaCol="cod_prov"
+    value="pct_65"
+    valueFmt="pct1"
+    link="ruta"
+    colorPalette={['#fff7ed', '#fb923c', '#7c2d12']}
+    height={460}
+    basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"
+    attribution="Tiles © Esri · Límites © Instituto Geográfico Nacional · Datos: INE"
+    title="Mayores de 65 años en % de la población"
+    tooltip={[
+        {id: 'provincia', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'pct_65', title: '65 y más', fmt: 'pct1'},
+        {id: 'pct_80', title: '80 y más', fmt: 'pct1'},
+        {id: 'edad_media', title: 'Edad media', fmt: 'num1'},
+        {id: 'dependencia', title: 'Tasa de dependencia', fmt: 'num1'}
+    ]}
+/>
 
 ---
 
-## Análisis Demográfico
+## Fuentes y notas
 
-La pirámide poblacional muestra la estructura por edades de la población, lo que permite identificar:
-
-- **Base ancha**: Alta natalidad (típico de poblaciones jóvenes)
-- **Base estrecha**: Baja natalidad (población envejecida)
-- **Cuerpo ancho**: Alta inmigración en edades laborales
-- **Cúspide ancha**: Alta esperanza de vida
-
-### Tendencias en España
-
-```sql resumen_edades_inicio
-SELECT 
-  SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) AS Menores_15,
-  SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
-  SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) AS Mayores_65,
-  SUM(Total) AS Total
-FROM mother.totalAnoSexoEdad
-WHERE Anio = ${inputs.año_inicio.value}
-```
-
-```sql resumen_edades_fin
-SELECT 
-  SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) AS Menores_15,
-  SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) AS Edad_Laboral,
-  SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) AS Mayores_65,
-  SUM(Total) AS Total
-FROM mother.totalAnoSexoEdad
-WHERE Anio = ${inputs.año_fin.value}
-```
-
-```sql serie_edades
-SELECT
-  CAST(Anio AS INTEGER) AS anio,
-  100.0 * SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Menores_15,
-  100.0 * SUM(CASE WHEN Orden_Grupo BETWEEN 15 AND 64 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Edad_Laboral,
-  100.0 * SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) / SUM(Total) AS Pct_Mayores_65,
-  100.0 * SUM(CASE WHEN Orden_Grupo >= 65 THEN Total ELSE 0 END) / NULLIF(SUM(CASE WHEN Orden_Grupo < 15 THEN Total ELSE 0 END), 0) AS Indice_Envejecimiento
-FROM mother.totalAnoSexoEdad
-WHERE CAST(Anio AS INTEGER) BETWEEN ${inputs.año_inicio.value} AND ${inputs.año_fin.value}
-GROUP BY 1
-ORDER BY 1
-```
-
-<Grid cols=3>
-<Group>
-<KpiCard
-  title="Menores de 15 ({inputs.año_inicio.value})"
-  value={resumen_edades_inicio[0]?.Menores_15}
-  formattedValue={formatCompact(resumen_edades_inicio[0]?.Menores_15, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
-/>
-<KpiCard
-  title="% Menores de 15"
-  value={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_inicio[0]?.Menores_15 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
-/>
-</Group>
-<Group>
-<KpiCard
-  title="Edad Laboral ({inputs.año_inicio.value})"
-  value={resumen_edades_inicio[0]?.Edad_Laboral}
-  formattedValue={formatCompact(resumen_edades_inicio[0]?.Edad_Laboral, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
-/>
-<KpiCard
-  title="% Edad Laboral"
-  value={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_inicio[0]?.Edad_Laboral / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
-/>
-</Group>
-<Group>
-<KpiCard
-  title="Mayores de 65 ({inputs.año_inicio.value})"
-  value={resumen_edades_inicio[0]?.Mayores_65}
-  formattedValue={formatCompact(resumen_edades_inicio[0]?.Mayores_65, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
-/>
-<KpiCard
-  title="% Mayores de 65"
-  value={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_inicio[0]?.Mayores_65 / resumen_edades_inicio[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
-/>
-</Group>
-</Grid>
-
-<Grid cols=3>
-<Group>
-<KpiCard
-  title="Menores de 15 ({inputs.año_fin.value})"
-  value={resumen_edades_fin[0]?.Menores_15}
-  formattedValue={formatCompact(resumen_edades_fin[0]?.Menores_15, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
-/>
-<KpiCard
-  title="% Menores de 15"
-  value={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_fin[0]?.Menores_15 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Menores_15)}
-/>
-</Group>
-<Group>
-<KpiCard
-  title="Edad Laboral ({inputs.año_fin.value})"
-  value={resumen_edades_fin[0]?.Edad_Laboral}
-  formattedValue={formatCompact(resumen_edades_fin[0]?.Edad_Laboral, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
-/>
-<KpiCard
-  title="% Edad Laboral"
-  value={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_fin[0]?.Edad_Laboral / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Edad_Laboral)}
-/>
-</Group>
-<Group>
-<KpiCard
-  title="Mayores de 65 ({inputs.año_fin.value})"
-  value={resumen_edades_fin[0]?.Mayores_65}
-  formattedValue={formatCompact(resumen_edades_fin[0]?.Mayores_65, 2)}
-  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
-/>
-<KpiCard
-  title="% Mayores de 65"
-  value={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  formattedValue={(resumen_edades_fin[0]?.Mayores_65 / resumen_edades_fin[0]?.Total * 100).toFixed(1)}
-  unit="%"
-  sparklineData={serie_edades.map(d => d.Pct_Mayores_65)}
-/>
-</Group>
-</Grid>
-
----
-
-## Tendencias de Envejecimiento
-
-El índice de envejecimiento (relación entre población mayor de 65 años y menores de 15 años) es un indicador clave del proceso de transición demográfica.
-
-```sql indice_envejecimiento
-SELECT 
-  ${inputs.año_inicio.value} AS Año_Inicio,
-  ${inputs.año_fin.value} AS Año_Fin,
-  (f.Mayores_65 / NULLIF(f.Menores_15, 0) * 100) AS Indice_Envejecimiento_Fin,
-  (i.Mayores_65 / NULLIF(i.Menores_15, 0) * 100) AS Indice_Envejecimiento_Inicio,
-  (f.Mayores_65 / NULLIF(f.Menores_15, 0) * 100) -
-  (i.Mayores_65 / NULLIF(i.Menores_15, 0) * 100) AS Cambio_Indice
-FROM ${resumen_edades_inicio} AS i, ${resumen_edades_fin} AS f
-```
-
-<KpiCard
-  title="Índice de Envejecimiento ({inputs.año_fin.value})"
-  value={indice_envejecimiento[0]?.Indice_Envejecimiento_Fin}
-  formattedValue={formatNumber(indice_envejecimiento[0]?.Indice_Envejecimiento_Fin, 1)}
-  unit="%"
-  change={indice_envejecimiento[0]?.Cambio_Indice?.toFixed(1)}
-  changeUnit=" pp"
-  changePeriod="vs {inputs.año_inicio.value}"
-  sparklineData={serie_edades.map(d => d.Indice_Envejecimiento)}
-/>
-
----
-
-## Fuentes Oficiales
-- **[INE - Pirámide poblacional](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176951)**
+- **[INE – Estadística Continua de Población](https://www.ine.es/jaxiT3/Tabla.htm?t=56945)** (tabla 56945): población a 1 de enero por provincia, sexo y edad simple desde 1971. Las comunidades suman sus provincias.
+- **[INE – Población por lugar de nacimiento](https://www.ine.es/jaxiT3/Tabla.htm?t=56948)** (tabla 56948): nacidos en España y en el extranjero por provincia, sexo y grupo de edad desde 2002.
+- Definiciones de los Indicadores Demográficos Básicos del INE: tasa de dependencia = (menores de 16 + mayores de 64) / población de 16 a 64 × 100; índice de envejecimiento = mayores de 64 / menores de 16 × 100. La edad media se calcula con la edad simple (el grupo de 100 y más años cuenta como 100,5), por lo que puede diferir en décimas de la que publica el INE.
 
 <LastRefreshed prefix="Datos actualizados" />

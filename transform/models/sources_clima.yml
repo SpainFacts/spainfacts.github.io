@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw_clima
+    description: "Series largas de emisiones de GEI (Eurostat, desde 1990) y del sistema eléctrico (REE REData, desde 2007) cargadas por ingestion/clima.py"
+    schema: raw
+    tables:
+      - name: eurostat_clima_gei
+        description: "Eurostat env_air_gge: emisiones GEI de España por categoría CRF (Mt CO2eq), inventario nacional reportado a la CMNUCC, desde 1990."
+      - name: eurostat_clima_gei_paises
+        description: "Eurostat env_air_gge TOTX4_MEMO (total sin LULUCF ni partidas memo, Mt CO2eq) de España, UE-27 y DE, FR, IT, PT, PL, NL, desde 1990."
+      - name: eurostat_clima_poblacion
+        description: "Eurostat demo_gind AVG: población media anual de España, UE-27 y los países de comparación, desde 1990."
+      - name: clima_ree_generacion
+        description: "REE REData generacion/estructura-generacion: generación anual nacional por tecnología (MWh), desde 2007. provisional=true para el año en curso."
+      - name: clima_ree_demanda
+        description: "REE REData demanda/evolucion: demanda eléctrica anual nacional en barras de central (MWh), desde 2007."
+      - name: clima_ree_emisiones_co2
+        description: "REE REData generacion/no-renovables-detalle-emisiones-CO2: tCO2eq por tecnología no renovable, total ('Total tCO2 eq.') y factor de emisión ('tCO2 eq./MWh'), desde 2007."

@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw_demografia
+    description: "Demografía (ingestion/demografia.py): Movimiento Natural de la Población, Indicadores Demográficos Básicos y Estadística Continua de Población del INE."
+    schema: raw
+    tables:
+      - name: ine_nacimientos_mensual
+        description: "INE MNP tabla 6524: nacimientos por mes y provincia de residencia de la madre, desde 1975 (cod '00' = España, '99' = madres no residentes)."
+      - name: ine_defunciones_mensual
+        description: "INE MNP tabla 6561: defunciones por mes y provincia de residencia, desde 1975."
+      - name: ine_tasa_natalidad
+        description: "INE IDB tablas 1470 (provincias) y 1432 (comunidades): tasa bruta de natalidad, nacidos por 1.000 habitantes, desde 1975."
+      - name: ine_tasa_mortalidad
+        description: "INE IDB tablas 1482 (provincias) y 1445 (comunidades): tasa bruta de mortalidad, defunciones por 1.000 habitantes, desde 1975."
+      - name: ine_fecundidad
+        description: "INE IDB tablas 1478 (provincias) y 1441 (comunidades, por nacionalidad de la madre): indicador coyuntural de fecundidad (hijos por mujer) por orden del nacimiento, desde 1975."
+      - name: ine_edad_maternidad
+        description: "INE IDB tablas 1581 (provincias) y 1580 (comunidades, por nacionalidad de la madre): edad media a la maternidad por orden del nacimiento, desde 1975."
+      - name: ine_nacidos_nacionalidad_madre
+        description: "INE IDB tabla 2777: porcentaje de nacidos según la nacionalidad (española/extranjera) de la madre, España y comunidades, desde 2002."
+      - name: ine_hogares
+        description: "INE ECP tablas 60131 (comunidades) y 60133 (provincias): hogares en viviendas familiares por número de miembros, trimestral desde 2021."
+      - name: ine_hogares_tamano_medio
+        description: "INE ECP tablas 60132 (comunidades) y 60134 (provincias): tamaño medio del hogar, trimestral desde 2021."
+      - name: ine_poblacion_origen_provincia
+        description: "INE ECP tablas 56948 (lugar de nacimiento España/extranjero) y 56947 (nacionalidad española/extranjera): población a 1 de enero por provincia, grupo quinquenal de edad y sexo, desde 2002."

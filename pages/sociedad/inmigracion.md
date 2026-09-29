@@ -1,6 +1,8 @@
 ---
 title: Inmigración
 description: "Población extranjera en España por comunidad y nacionalidad, saldo migratorio, llegadas irregulares por vía, solicitudes de asilo y nacionalizaciones, con datos oficiales."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

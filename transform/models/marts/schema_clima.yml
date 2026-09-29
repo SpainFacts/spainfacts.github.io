@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: clima_emisiones_anual
+    description: "Emisiones de GEI de España por año desde 1990 (Eurostat env_air_gge; avance del MITECO marcado provisional para el último año): total, LULUCF y netas, t CO2eq por habitante (España y UE-27), kg CO2eq por euro de PIB real y variación frente a 1990 y 2005."
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+  - name: clima_emisiones_sectores
+    description: "Emisiones de GEI por sector divulgativo y año desde 1990 (mismo mapeo CRF que energia_emisiones_gei), en Mt, kg CO2eq por habitante y % del total; el avance del MITECO va marcado provisional."
+  - name: clima_emisiones_paises
+    description: "Emisiones de GEI sin LULUCF por habitante de España, UE-27, Alemania, Francia, Italia, Portugal, Polonia y Países Bajos desde 1990, y variación frente a 1990 (Eurostat env_air_gge y demo_gind)."
+  - name: clima_electricidad_anual
+    description: "Sistema eléctrico nacional por año desde 2007 (REE REData): cuotas renovable, libre de emisiones y por tecnología, gCO2eq por kWh generado, emisiones del sector y demanda por habitante."
+    columns:
+      - name: anio
+        tests: [not_null, unique]

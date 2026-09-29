@@ -1,6 +1,8 @@
 ---
 title: Electrificación de la economía
 description: "Cuánta de la energía que consumen la industria, el transporte, los hogares y los servicios en España es electricidad, cómo se calientan las casas por provincia y cuántas bombas de calor hay."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -43,7 +45,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
     <KpiCard
         title="Electricidad en el consumo final"
         value={ultimo[0]?.total}
-        formattedValue="{formatNumber(100 * ultimo[0]?.total, 1)} %"
+        formattedValue="{formatNumber(ultimo[0]?.total / 0.01, 1)} %"
         period="de toda la energía que se usa · {ultimo[0]?.anio}"
         change={hace_10[0]?.total != null ? (100 * (ultimo[0].total - hace_10[0].total)).toFixed(1) : null}
         changeUnit=" pp"
@@ -55,7 +57,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
     <KpiCard
         title="Hogares"
         value={ultimo[0]?.hogares}
-        formattedValue="{formatNumber(100 * ultimo[0]?.hogares, 1)} %"
+        formattedValue="{formatNumber(ultimo[0]?.hogares / 0.01, 1)} %"
         period="de su energía es electricidad"
         change={hace_10[0]?.hogares != null ? (100 * (ultimo[0].hogares - hace_10[0].hogares)).toFixed(1) : null}
         changeUnit=" pp"
@@ -67,7 +69,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
     <KpiCard
         title="Industria"
         value={ultimo[0]?.industria}
-        formattedValue="{formatNumber(100 * ultimo[0]?.industria, 1)} %"
+        formattedValue="{formatNumber(ultimo[0]?.industria / 0.01, 1)} %"
         period="de su energía es electricidad"
         source="Eurostat"
         sparklineData={principales.filter(d => d.cod_sector === 'FC_IND_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}
@@ -75,7 +77,7 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
     <KpiCard
         title="Transporte"
         value={ultimo[0]?.transporte}
-        formattedValue="{formatNumber(100 * ultimo[0]?.transporte, 1)} %"
+        formattedValue="{formatNumber(ultimo[0]?.transporte / 0.01, 1)} %"
         period="casi todo es tren; el coche eléctrico apenas se nota aún"
         source="Eurostat"
         sparklineData={principales.filter(d => d.cod_sector === 'FC_TRA_E').map(d => ({anio: d.anio, valor: 100 * d.cuota_electricidad}))}

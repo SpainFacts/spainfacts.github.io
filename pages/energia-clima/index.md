@@ -1,6 +1,8 @@
 ---
 title: Energía y Clima
 description: Transición ecológica, mix de generación eléctrica y emisiones de gases de efecto invernadero en España.
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -170,7 +172,7 @@ ORDER BY año ASC
     yAxisTitle="Porcentaje del total (%)"
     title="Cuota de generación limpia sobre el total eléctrico"
     colorPalette={['#16a34a', '#3b82f6']}
-    yMin=30
+    yMin=0
     yMax=85
 />
 

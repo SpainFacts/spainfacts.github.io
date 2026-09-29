@@ -1,5 +1,8 @@
 ---
+description: "Catálogo de las fuentes oficiales que usa SpainFacts (INE, Eurostat, ministerios, REE...), con su frecuencia, licencia y metodología."
 title: Trazabilidad y Auditoría de Fuentes
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,3 +1,5 @@
+-- Serie desde 1990: lee raw.eurostat_clima_gei (ingestion/clima.py), que es la misma
+-- consulta a env_air_gge que raw.eurostat_gei (ingestion/emisiones.py) pero sin el corte en 2015.
 -- Emisiones GEI de España (Eurostat env_air_gge, inventario nacional reportado a la
 -- CMNUCC) agrupadas en los sectores divulgativos de la web. Sin LULUCF (CRF4) ni
 -- partidas "memo" (búnkeres internacionales, CO2 de biomasa): la suma de sectores
@@ -19,7 +21,7 @@
 --                              + 1A5 (otra combustión n.c.o.p.) + 6 (otros) + INDCO2 (CO2 indirecto)
 with crf as (
     select anio, src_crf, coalesce(mt_co2eq, 0) as mt
-    from {{ source('raw_energia', 'eurostat_gei') }}
+    from {{ source('raw_clima', 'eurostat_clima_gei') }}
 ),
 
 mapeo as (

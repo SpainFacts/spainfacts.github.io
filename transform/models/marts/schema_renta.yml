@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: renta_ecv_ccaa
+    description: "ECV del INE por año de encuesta, España (cod '00') y comunidades: renta media por persona, por unidad de consumo y por hogar (nominal y real, renta del año anterior), tasa de riesgo de pobreza, AROPE, carencia material y social severa, baja intensidad en el trabajo, % con dificultad para llegar a fin de mes, Gini y S80/S20."
+  - name: renta_ecv_edad
+    description: "ECV del INE, España, por grupo de edad: AROPE, riesgo de pobreza, carencia material y social severa y renta real por persona y por unidad de consumo."
+  - name: renta_municipios
+    description: "ADRH del INE por municipio (código de 5 dígitos) y año 2015-2023: renta neta media por persona y por hogar, media y mediana por unidad de consumo (nominal y real), población del padrón y puesto en España por renta por persona."
+  - name: renta_distritos
+    description: "ADRH del INE por distrito censal (municipios con más de un distrito) y año: renta neta real por persona, por hogar y mediana por unidad de consumo."
+  - name: renta_territorios
+    description: "ADRH del INE para España, comunidades y provincias (código INE) por año: renta neta media por persona y por hogar y renta por unidad de consumo, nominal y real."
+  - name: renta_ue
+    description: "Eurostat EU-SILC para la UE-27 y sus países: Gini, S80/S20 y AROPE (% de población) por año de encuesta."

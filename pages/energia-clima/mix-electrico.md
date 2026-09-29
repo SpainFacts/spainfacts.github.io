@@ -1,23 +1,69 @@
 ---
 title: Mix de Generación Eléctrica
-description: Análisis en profundidad del mix eléctrico español, despliegue renovable y cierre del carbón.
+description: "El mix eléctrico español desde 2007 según Red Eléctrica: cuota renovable, cierre del carbón, emisiones por kWh generado y consumo eléctrico por habitante."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
-# ⚡ Mix de Generación Eléctrica en España
+```sql elec
+SELECT *
+FROM mother.clima_electricidad_anual
+ORDER BY anio
+```
 
-El sistema eléctrico español ha experimentado una transformación radical en la última década. El **carbón** ha pasado de representar el {carbon_hitos[0]?.pct_carbon}% de la generación en {carbon_hitos[0]?.año} al {carbon_hitos[1]?.pct_carbon}% en {carbon_hitos[1]?.año}, sustituido por un despliegue masivo de **energía eólica y solar fotovoltaica**.
+```sql elec_kpi
+WITH e AS (
+    SELECT
+        *,
+        lag(cuota_renovable_pct) OVER (ORDER BY anio) AS renov_prev,
+        lag(g_co2_kwh) OVER (ORDER BY anio) AS g_prev,
+        lag(demanda_kwh_hab) OVER (ORDER BY anio) AS dem_prev,
+        first_value(g_co2_kwh) OVER (ORDER BY anio) AS g_inicio,
+        first_value(cuota_carbon_pct) OVER (ORDER BY anio) AS carbon_inicio,
+        first_value(cuota_renovable_pct) OVER (ORDER BY anio) AS renov_inicio,
+        first_value(demanda_kwh_hab) OVER (ORDER BY anio) AS dem_inicio,
+        CAST(first_value(anio) OVER (ORDER BY anio) AS INTEGER) AS anio_inicio
+    FROM mother.clima_electricidad_anual
+)
+SELECT
+    CAST(anio AS INTEGER) AS anio,
+    anio_inicio,
+    cuota_renovable_pct,
+    cuota_renovable_pct - renov_prev AS renov_var_pp,
+    renov_inicio,
+    cuota_libre_emisiones_pct,
+    g_co2_kwh,
+    100 * (g_co2_kwh / g_prev - 1) AS g_var,
+    g_inicio,
+    100 * (g_co2_kwh / g_inicio - 1) AS g_var_inicio,
+    emisiones_mt,
+    emisiones_t_hab,
+    demanda_kwh_hab,
+    100 * (demanda_kwh_hab / dem_prev - 1) AS dem_var,
+    100 * (demanda_kwh_hab / dem_inicio - 1) AS dem_var_inicio,
+    dem_inicio,
+    demanda_twh,
+    generacion_twh,
+    cuota_carbon_pct,
+    carbon_inicio
+FROM e
+WHERE anio = (SELECT max(anio) FROM mother.clima_electricidad_anual)
+```
 
-```sql carbon_hitos
-SELECT año, round(porcentaje_total, 1) AS pct_carbon
-FROM mother.energia_mix_electrico
-WHERE tecnologia = 'Carbón'
-  AND año IN ((SELECT min(año) FROM mother.energia_mix_electrico), (SELECT max(año) FROM mother.energia_mix_electrico))
-ORDER BY año ASC
+```sql hitos_renov
+SELECT
+    CAST(min(anio) FILTER (WHERE cuota_renovable_pct > 50) AS INTEGER) AS primer_anio_50,
+    max(cuota_renovable_pct) AS renov_max,
+    CAST(arg_max(anio, cuota_renovable_pct) AS INTEGER) AS anio_renov_max,
+    min(g_co2_kwh) AS g_min,
+    CAST(arg_min(anio, g_co2_kwh) AS INTEGER) AS anio_g_min
+FROM mother.clima_electricidad_anual
 ```
 
 ```sql mix_completo
@@ -31,87 +77,184 @@ FROM mother.energia_mix_electrico
 ORDER BY año ASC, tecnologia ASC
 ```
 
-```sql resumen_anual
-SELECT *
-FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
-```
-
----
-
-## Generación por Tecnología (TWh)
-
-```sql mix_por_tech
+```sql mix_pct
 SELECT
-    año,
+    CAST(año AS INTEGER) AS anio,
     tecnologia,
+    porcentaje_total,
     generacion_twh
 FROM mother.energia_mix_electrico
-WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica', 'Hidroeléctrica', 'Nuclear', 'Ciclos Combinados (Gas)', 'Carbón')
-ORDER BY año ASC
+ORDER BY anio, tecnologia
 ```
 
+# ⚡ Mix de Generación Eléctrica en España
+
+De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta cada kWh, año a año desde {elec_kpi[0]?.anio_inicio}, el primer año que publica la API de datos de Red Eléctrica. Las cifras son el balance nacional (península, Baleares, Canarias, Ceuta y Melilla) medido en barras de central, solo con años completos. Como el volumen total depende del tamaño del país, las tecnologías se muestran en **porcentaje de la generación** y el consumo **por habitante**.
+
+<Grid cols=4>
+    <KpiCard
+        title="Electricidad renovable"
+        value={elec_kpi[0]?.cuota_renovable_pct}
+        formattedValue="{formatNumber(elec_kpi[0]?.cuota_renovable_pct, 1)} %"
+        period="de la generación en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.renov_inicio, 1)} % en {elec_kpi[0]?.anio_inicio}"
+        change={elec_kpi[0]?.renov_var_pp?.toFixed(1)}
+        changeUnit=" p.p."
+        changePeriod="vs año anterior"
+        direction="positive-up"
+        source="REE"
+        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+    />
+    <KpiCard
+        title="CO₂ por kWh generado"
+        value={elec_kpi[0]?.g_co2_kwh}
+        formattedValue="{formatNumber(elec_kpi[0]?.g_co2_kwh, 0)} g CO₂eq/kWh"
+        period="en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.g_inicio, 0)} g en {elec_kpi[0]?.anio_inicio} · {formatNumber(elec_kpi[0]?.emisiones_mt, 1)} Mt en total"
+        change={elec_kpi[0]?.g_var?.toFixed(1)}
+        changePeriod="vs año anterior"
+        direction="positive-down"
+        source="REE"
+        sparklineData={elec.map(d => d.g_co2_kwh)}
+    />
+    <KpiCard
+        title="Consumo por habitante"
+        value={elec_kpi[0]?.demanda_kwh_hab}
+        formattedValue="{formatNumber(elec_kpi[0]?.demanda_kwh_hab, 0)} kWh"
+        period="demanda eléctrica por habitante en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.demanda_twh, 1)} TWh en total"
+        change={elec_kpi[0]?.dem_var?.toFixed(1)}
+        changePeriod="vs año anterior"
+        direction="neutral"
+        source="REE / Eurostat"
+        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+    />
+    <KpiCard
+        title="Carbón"
+        value={elec_kpi[0]?.cuota_carbon_pct}
+        formattedValue="{formatNumber(elec_kpi[0]?.cuota_carbon_pct, 1)} %"
+        period="de la generación en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} % en {elec_kpi[0]?.anio_inicio}"
+        direction="positive-down"
+        source="REE"
+        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+    />
+</Grid>
+
+## Peso de cada tecnología en la generación
+
+La renovable superó por primera vez la mitad de la generación en {hitos_renov[0]?.primer_anio_50}, y su máximo anual es del {formatNumber(hitos_renov[0]?.renov_max, 1)} % ({hitos_renov[0]?.anio_renov_max}). En {elec_kpi[0]?.anio}, el {formatNumber(elec_kpi[0]?.cuota_libre_emisiones_pct, 1)} % de la electricidad fue libre de emisiones directas (renovable más nuclear).
+
 <AreaChart
-    data={mix_por_tech}
-    x=año
-    y=generacion_twh
+    data={mix_pct}
+    x=anio
+    y=porcentaje_total
     series=tecnologia
-    yAxisTitle="TWh"
-    title="Generación neta por tecnología (TWh)"
-    colorPalette={['#16a34a', '#facc15', '#3b82f6', '#a855f7', '#f97316', '#6b7280']}
+    type=stacked
+    xFmt='0'
+    yFmt='0"%"'
+    yMax=100
+    yAxisTitle="% de la generación"
+    title="Estructura de la generación eléctrica por tecnología"
 />
 
 <DownloadCsvButton data={mix_completo} filename="spainfacts_mix_electrico_detalle.csv" label="Descargar datos completos del mix (CSV)" />
 
----
-
-## El Desplome del Carbón y el Auge de la Solar FV
-
-Dos de las tendencias más marcadas del sistema eléctrico español:
-
-```sql carbon_vs_solar
-SELECT
-    m1.año,
-    m1.generacion_twh AS "Carbón (TWh)",
-    m2.generacion_twh AS "Solar FV (TWh)"
-FROM mother.energia_mix_electrico m1
-JOIN mother.energia_mix_electrico m2
-    ON m1.año = m2.año
-WHERE m1.tecnologia = 'Carbón'
-  AND m2.tecnologia = 'Solar Fotovoltaica'
-ORDER BY m1.año ASC
+```sql cuota
+SELECT anio, 'Renovable' AS serie, cuota_renovable_pct AS pct FROM mother.clima_electricidad_anual
+UNION ALL
+SELECT anio, 'Libre de emisiones (renovable + nuclear)' AS serie, cuota_libre_emisiones_pct AS pct FROM mother.clima_electricidad_anual
+ORDER BY anio, serie
 ```
 
 <LineChart
-    data={carbon_vs_solar}
-    x=año
-    y={["Carbón (TWh)", "Solar FV (TWh)"]}
-    yAxisTitle="TWh"
-    title="El cruce histórico: Carbón vs. Solar Fotovoltaica"
-    colorPalette={['#6b7280', '#facc15']}
+    data={cuota}
+    x=anio
+    y=pct
+    series=serie
+    xFmt='0'
+    yFmt='0"%"'
+    yMin=0
+    yMax=100
+    yAxisTitle="% de la generación"
+    title="Cuota de generación limpia"
+    colorPalette={['#3b82f6', '#16a34a']}
 />
 
-```sql cruce_solar_carbon
-WITH s AS (
-    SELECT
-        año,
-        sum(generacion_twh) FILTER (WHERE tecnologia = 'Solar Fotovoltaica') AS solar,
-        sum(generacion_twh) FILTER (WHERE tecnologia = 'Carbón') AS carbon
-    FROM mother.energia_mix_electrico
-    GROUP BY año
-)
-SELECT
-    min(año) FILTER (WHERE solar > carbon) AS primer_anio,
-    max(año) AS ultimo_anio,
-    round(arg_max(solar / nullif(carbon, 0), año), 0) AS ratio_ultimo
-FROM s
+## Cuánto CO₂ emite cada kWh
+
+Gramos de CO₂ equivalente emitidos por las centrales por cada kWh generado en el sistema. Red Eléctrica asigna emisiones a las centrales térmicas (carbón, ciclos combinados, cogeneración, motores, turbinas y residuos no renovables); la nuclear y las renovables cuentan cero. El mínimo de la serie es de {formatNumber(hitos_renov[0]?.g_min, 0)} g/kWh en {hitos_renov[0]?.anio_g_min}; desde {elec_kpi[0]?.anio_inicio} el factor ha variado un {formatNumber(elec_kpi[0]?.g_var_inicio, 0)} %.
+
+<BarChart
+    data={elec}
+    x=anio
+    y=g_co2_kwh
+    xFmt='0'
+    yFmt='#,##0'
+    yAxisTitle="g CO₂eq por kWh"
+    title="Intensidad de emisiones de la generación eléctrica"
+    colorPalette={['#dc2626']}
+/>
+
+<LineChart
+    data={elec}
+    x=anio
+    y=emisiones_t_hab
+    xFmt='0'
+    yFmt='0.00'
+    yAxisTitle="t CO₂eq por habitante"
+    title="Emisiones de la generación eléctrica por habitante"
+    colorPalette={['#f97316']}
+/>
+
+## El desplome del carbón y el auge de la solar
+
+```sql carbon_vs_solar
+SELECT anio, 'Carbón' AS tecnologia, cuota_carbon_pct AS pct FROM mother.clima_electricidad_anual
+UNION ALL
+SELECT anio, 'Solar fotovoltaica' AS tecnologia, cuota_solar_fv_pct AS pct FROM mother.clima_electricidad_anual
+UNION ALL
+SELECT anio, 'Eólica' AS tecnologia, cuota_eolica_pct AS pct FROM mother.clima_electricidad_anual
+UNION ALL
+SELECT anio, 'Ciclos combinados (gas)' AS tecnologia, cuota_ciclo_pct AS pct FROM mother.clima_electricidad_anual
+ORDER BY anio, tecnologia
 ```
 
-> **Lectura clave:** En {cruce_solar_carbon[0]?.primer_anio} la solar fotovoltaica superó por primera vez al carbón en generación anual. En {cruce_solar_carbon[0]?.ultimo_anio} la solar produce **{cruce_solar_carbon[0]?.ratio_ultimo} veces** más electricidad que el carbón.
+```sql cruce_solar_carbon
+SELECT
+    CAST(min(anio) FILTER (WHERE cuota_solar_fv_pct > cuota_carbon_pct) AS INTEGER) AS primer_anio,
+    CAST(max(anio) AS INTEGER) AS ultimo_anio,
+    round(arg_max(cuota_solar_fv_pct / nullif(cuota_carbon_pct, 0), anio), 0) AS ratio_ultimo
+FROM mother.clima_electricidad_anual
+```
 
----
+En {cruce_solar_carbon[0]?.primer_anio} la solar fotovoltaica superó por primera vez al carbón en generación anual. En {cruce_solar_carbon[0]?.ultimo_anio} la solar produjo **{cruce_solar_carbon[0]?.ratio_ultimo} veces** más electricidad que el carbón.
 
-## Peso Relativo de Cada Tecnología (último año completo)
+<LineChart
+    data={carbon_vs_solar}
+    x=anio
+    y=pct
+    series=tecnologia
+    xFmt='0'
+    yFmt='0"%"'
+    yAxisTitle="% de la generación"
+    title="Carbón, gas, eólica y solar fotovoltaica"
+    colorPalette={['#6b7280', '#f97316', '#16a34a', '#facc15']}
+/>
+
+## Consumo eléctrico por habitante
+
+Demanda nacional en barras de central dividida por la población media del año. En {elec_kpi[0]?.anio} fue de {formatNumber(elec_kpi[0]?.demanda_kwh_hab, 0)} kWh por habitante, un {formatNumber(Math.abs(elec_kpi[0]?.dem_var_inicio), 0)} % {#if elec_kpi[0]?.dem_var_inicio < 0}menos{:else}más{/if} que en {elec_kpi[0]?.anio_inicio} ({formatNumber(elec_kpi[0]?.dem_inicio, 0)} kWh).
+
+<LineChart
+    data={elec}
+    x=anio
+    y=demanda_kwh_hab
+    xFmt='0'
+    yFmt='#,##0'
+    yAxisTitle="kWh por habitante"
+    startingAtZero={false}
+    title="Demanda eléctrica por habitante"
+    colorPalette={['#2563eb']}
+/>
+
+## Peso de cada tecnología (último año completo)
 
 ```sql mix_ultimo
 SELECT
@@ -127,27 +270,26 @@ ORDER BY generacion_twh DESC
 <BarChart
     data={mix_ultimo}
     x=tecnologia
-    y=generacion_twh
-    yAxisTitle="TWh"
-    title={`Generación por tecnología en ${mix_ultimo[0]?.año ?? ''}`}
+    y=porcentaje_total
+    yFmt='0.0%'
+    yAxisTitle="% de la generación"
+    title="Generación por tecnología en {elec_kpi[0]?.anio}"
     colorPalette={['#16a34a']}
     swapXY=true
 />
 
 <DataTable data={mix_ultimo} search=false>
     <Column id=tecnologia title="Tecnología" />
+    <Column id=porcentaje_total title="% del total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
     <Column id=generacion_twh title="Generación (TWh)" fmt="num1" />
-    <Column id=porcentaje_total title="% del Total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
 </DataTable>
 
----
+## Potencia instalada por tecnología
 
-## Potencia Instalada por Tecnología
-
-La capacidad instalada refleja las decisiones de inversión. La solar FV ha pasado de {solar_hitos[0]?.potencia_mw?.toLocaleString('es-ES')} MW en {solar_hitos[0]?.año} a **{solar_hitos[1]?.potencia_mw?.toLocaleString('es-ES')} MW** en {solar_hitos[1]?.año}, multiplicándose por {solar_hitos.length > 1 ? (solar_hitos[1].potencia_mw / solar_hitos[0].potencia_mw).toFixed(1) : null}.
+La capacidad instalada refleja las decisiones de inversión. La solar FV ha pasado de {formatNumber(solar_hitos[0]?.potencia_mw, 0)} MW en {solar_hitos[0]?.año} a **{formatNumber(solar_hitos[1]?.potencia_mw, 0)} MW** en {solar_hitos[1]?.año}, multiplicándose por {formatNumber(solar_hitos[1]?.potencia_mw / solar_hitos[0]?.potencia_mw, 1)}.
 
 ```sql solar_hitos
-SELECT año, potencia_mw
+SELECT CAST(año AS INTEGER) AS año, potencia_mw
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Solar Fotovoltaica'
   AND año IN ((SELECT min(año) FROM mother.energia_potencia_instalada), (SELECT max(año) FROM mother.energia_potencia_instalada))
@@ -171,48 +313,28 @@ ORDER BY año ASC, potencia_mw DESC
     y=potencia_mw
     series=tecnologia
     type=grouped
+    xFmt='0'
     yAxisTitle="MW instalados"
     title="Potencia instalada por tecnología (MW)"
 />
 
 <DownloadCsvButton data={potencia} filename="spainfacts_potencia_instalada.csv" label="Descargar potencia instalada (CSV)" />
 
----
-
-## Evolución de la Cuota Renovable
-
-```sql cuota
-SELECT
-    año,
-    cuota_renovable_pct AS "% Renovable",
-    cuota_libre_emisiones_pct AS "% Libre de emisiones"
-FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
-```
-
-<LineChart
-    data={cuota}
-    x=año
-    y={["% Renovable", "% Libre de emisiones"]}
-    yAxisTitle="%"
-    title="Cuota de generación limpia"
-    colorPalette={['#16a34a', '#3b82f6']}
-    yMin=30
-    yMax=80
-    labels=true
-/>
-
-> En **{resumen_anual[resumen_anual.length - 1]?.año}**, el **{resumen_anual[resumen_anual.length - 1]?.cuota_renovable_pct?.toFixed(1)}%** de la electricidad generada en España fue de origen renovable y el **{resumen_anual[resumen_anual.length - 1]?.cuota_libre_emisiones_pct?.toFixed(1)}%** fue libre de emisiones directas (renovable + nuclear).
+<DownloadCsvButton data={elec} filename="spainfacts_electricidad_anual.csv" label="Descargar cuotas, emisiones y demanda por año (CSV)" />
 
 ---
 
-## Fuente Primaria
+## Fuentes
 
-**Red Eléctrica de España (REE)** – Operador del Sistema Eléctrico Nacional
-- Portal de datos: [ree.es/es/datos/generacion](https://www.ree.es/es/datos/generacion) (API REData, generación y demanda anual)
-- Balance medido en barras de central, sistema nacional (peninsular y no peninsular). Solo años completos.
-- Licencia: Reutilización del Sector Público / Datos Abiertos.
+**Red Eléctrica de España (REE)**, operador del sistema eléctrico, API [REData](https://www.ree.es/es/datos/apidatos):
+- Generación anual por tecnología (`generacion/estructura-generacion`) y demanda (`demanda/evolucion`), desde 2007, primer año disponible en la API. Balance medido en barras de central, sistema nacional. Solo años completos.
+- Emisiones de CO₂ equivalente de la generación no renovable (`generacion/no-renovables-detalle-emisiones-CO2`); el factor en g/kWh divide esas emisiones entre la generación total.
+- Licencia: reutilización de información del sector público / datos abiertos.
+
+**Población media anual:** Eurostat [demo_gind](https://ec.europa.eu/eurostat/databrowser/view/demo_gind/default/table).
 
 **Potencia instalada:** Eurostat [nrg_inf_epc](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_epc/default/table) (capacidad eléctrica neta máxima reportada por España), usada mientras el servicio de potencia instalada de la API de REE no está disponible; la columna `fuente` del CSV indica el origen. En esta estadística el gas natural agrupa ciclos combinados y cogeneración, y la solar FV incluye autoconsumo.
+
+Las emisiones totales del país, por habitante y por sector están en [Emisiones y descarbonización](/energia-clima/emisiones).
 
 <LastRefreshed prefix="Última sincronización de datos" />

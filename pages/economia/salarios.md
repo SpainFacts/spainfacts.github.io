@@ -1,6 +1,8 @@
 ---
 title: Salarios
 description: "Salario medio en España descontada la inflación, su crecimiento real y nominal, por sector y jornada, y la distribución por deciles."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -209,6 +211,57 @@ Salario medio mensual en euros de {trimestral[0]?.anio_euros}. Una parte de la d
     title="Salario medio real por tipo de jornada"
 />
 
+```sql por_ccaa
+SELECT
+    s.cod,
+    t.nombre AS comunidad,
+    t.ruta,
+    s.salario_real,
+    s.coste_laboral_real,
+    s.crecimiento_real,
+    s.indice_espana,
+    100 * (s.salario_real / b.salario_real - 1) AS cambio_2008,
+    CAST(s.anio AS INTEGER) AS anio,
+    CAST(s.anio_euros AS INTEGER) AS anio_euros
+FROM mother.economia_salarios_ccaa s
+JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = s.cod
+LEFT JOIN mother.economia_salarios_ccaa b ON b.cod = s.cod AND b.anio = 2008
+WHERE s.cod <> '00' AND s.anio = (SELECT max(anio) FROM mother.economia_salarios_ccaa)
+ORDER BY s.salario_real DESC
+```
+
+## Por comunidad autónoma
+
+Salario medio mensual bruto en {por_ccaa[0]?.anio}, en euros de {por_ccaa[0]?.anio_euros}. {por_ccaa[0]?.comunidad} encabeza la lista con {formatNumber(por_ccaa[0]?.salario_real, 0)} € y {por_ccaa.slice(-1)[0]?.comunidad} la cierra con {formatNumber(por_ccaa.slice(-1)[0]?.salario_real, 0)} €. Son euros sin corregir por el coste de la vida, que también varía entre comunidades. Ceuta y Melilla no se publican por separado.
+
+<AreaMap
+    data={por_ccaa}
+    geoJsonUrl="/geo/ccaa.geojson"
+    geoId="cod_ccaa"
+    areaCol="cod"
+    value="salario_real"
+    valueFmt='#,##0" €"'
+    link="ruta"
+    colorPalette={['#fef3c7', '#f59e0b', '#92400e']}
+    height={440}
+    basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"
+    attribution="Tiles © Esri · Límites © Instituto Geográfico Nacional · Datos: INE"
+    tooltip={[
+        {id: 'comunidad', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'salario_real', title: 'Salario medio', fmt: '#,##0" €"'},
+        {id: 'indice_espana', title: 'España = 100', fmt: '0.0'}
+    ]}
+/>
+
+<DataTable data={por_ccaa} rows=20>
+    <Column id=comunidad title="Comunidad"/>
+    <Column id=salario_real title="Salario (€/mes)" fmt='#,##0'/>
+    <Column id=indice_espana title="España = 100" fmt='0.0'/>
+    <Column id=crecimiento_real title="Crecimiento real último año (%)" fmt='0.0' contentType=delta/>
+    <Column id=cambio_2008 title="Real desde 2008 (%)" fmt='0.0' contentType=delta/>
+    <Column id=coste_laboral_real title="Coste total para la empresa (€/mes)" fmt='#,##0'/>
+</DataTable>
+
 ## Cómo se reparte: deciles
 
 La media la inflan los sueldos más altos. La EPA ordena a todos los asalariados de menor a mayor salario y los divide en diez grupos iguales (deciles); el decil 5 es el sueldo típico. Datos de {deciles_ult[0]?.anio}, descontada la inflación.
@@ -237,4 +290,4 @@ Los salarios públicos y su coste están en [Empleo público](/cuentas-publicas/
 
 ---
 
-**Fuentes:** [INE, Encuesta Trimestral de Coste Laboral, tabla 6038](https://www.ine.es/jaxiT3/Tabla.htm?t=6038) (coste salarial por trabajador y mes en industria, construcción y servicios; la media anual es la de sus cuatro trimestres) y [INE, EPA, salarios por deciles, tabla 66250](https://www.ine.es/jaxiT3/Tabla.htm?t=66250). Deflactados con el IPC general del INE (base 2025).
+**Fuentes:** [INE, Encuesta Trimestral de Coste Laboral, tabla 6038](https://www.ine.es/jaxiT3/Tabla.htm?t=6038) (coste salarial por trabajador y mes en industria, construcción y servicios; la media anual es la de sus cuatro trimestres) y [INE, EPA, salarios por deciles, tabla 66250](https://www.ine.es/jaxiT3/Tabla.htm?t=66250); por comunidad, [ETCL, tabla 6061](https://www.ine.es/jaxiT3/Tabla.htm?t=6061). Deflactados con el IPC general del INE (base 2025).

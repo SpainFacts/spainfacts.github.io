@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: pensiones_mensual
+    description: >
+      Pensiones contributivas en España mes a mes desde 2008 (Seguridad Social):
+      número de pensiones en vigor el día 1, pensión media total, de jubilación y
+      de viudedad en euros corrientes y constantes (IPC mensual del INE, euros del
+      año base del deflactor), afiliados medios del mes y afiliados por pensión,
+      y variación interanual nominal y real de la pensión media de jubilación.
+    columns:
+      - name: fecha
+        tests: [not_null, unique]
+      - name: pensiones
+        tests: [not_null]
+  - name: pensiones_territorio
+    description: >
+      Pensiones contributivas por año y territorio (España, comunidad y provincia,
+      códigos INE) desde 2008: media anual de pensiones en vigor, pensión media
+      total y de jubilación (nominal y en euros constantes), pensiones por 1.000
+      habitantes y por 100 personas de 65 años o más (padrón INE) y, desde 2021,
+      afiliados medios y afiliados por pensión (Seguridad Social).
+    columns:
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'provincia']
+      - name: cod
+        tests: [not_null]
+      - name: pensiones
+        tests: [not_null]
+  - name: pensiones_anual
+    description: >
+      Resumen anual de las pensiones contributivas en España: pensiones, pensión
+      media real, pensiones por habitante y por persona mayor, afiliados por
+      pensión, tasa de sustitución aproximada (pensión media de jubilación
+      prorrateada en 12 meses frente al salario medio de la ETCL) y gasto en
+      pensiones en % del PIB de España y de la UE-27 (Eurostat).
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+  - name: pensiones_gasto_pib
+    description: >
+      Gasto público en pensiones en % del PIB por país y año (Eurostat): funciones
+      COFOG vejez (GF1002) y supervivientes (GF1003) del gasto de las AAPP
+      (gov_10a_exp) y gasto en pensiones SEEPROS (spr_exp_pens).
+    columns:
+      - name: geo
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+  - name: pensiones_afiliados_regimen
+    description: >
+      Afiliados medios a la Seguridad Social por régimen y año desde 2001
+      (General con sus sistemas especiales, Autónomos, Mar, Minería del carbón y
+      Total), su peso en el total y por 1.000 habitantes.
+    columns:
+      - name: regimen
+        tests: [not_null]

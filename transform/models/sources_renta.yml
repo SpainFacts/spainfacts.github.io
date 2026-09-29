@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw_renta
+    description: "Renta, pobreza y desigualdad: INE ECV y Atlas de Distribución de Renta de los Hogares, Eurostat EU-SILC (ingestion/renta.py)"
+    schema: raw
+    tables:
+      - name: ine_ecv_renta_ccaa
+        description: "INE ECV tabla 9947: renta media por persona y por unidad de consumo (con y sin alquiler imputado) por CCAA. Periodo = año de la encuesta; la renta es la del año anterior."
+      - name: ine_ecv_renta_hogar_ccaa
+        description: "INE ECV tabla 9949: renta media por hogar por CCAA."
+      - name: ine_ecv_pobreza_ccaa
+        description: "INE ECV tabla 9963: tasa de riesgo de pobreza (umbral 60 % de la mediana nacional) por CCAA."
+      - name: ine_ecv_arope_ccaa
+        description: "INE ECV tabla 76847: tasa AROPE (objetivo Europa 2030) y componentes (pobreza, carencia material y social severa, baja intensidad en el trabajo) por CCAA, desde 2014."
+      - name: ine_ecv_fin_mes_ccaa
+        description: "INE ECV tabla 9990: % de personas según dificultad para llegar a fin de mes, por CCAA."
+      - name: ine_ecv_gini_ccaa
+        description: "INE ECV tabla 76846: coeficiente de Gini y ratio S80/S20 por CCAA."
+      - name: ine_ecv_arope_edad
+        description: "INE ECV tabla 67240: AROPE y componentes por edad y sexo, nacional."
+      - name: ine_ecv_renta_edad
+        description: "INE ECV tabla 76844: renta media por persona y por unidad de consumo por edad y sexo, nacional."
+      - name: ine_adrh_municipios
+        description: "INE ADRH tabla 30824: renta neta y bruta media por persona y por hogar, media y mediana por unidad de consumo, por municipio y distrito censal, 2015-2023 (renta del año del periodo)."
+      - name: ine_adrh_territorios
+        description: "INE ADRH tabla 53689: mismos indicadores para España, CCAA, provincias e islas (por nombre, sin código)."
+      - name: eurostat_renta_desigualdad
+        description: "Eurostat EU-SILC: Gini (ilc_di12), S80/S20 (ilc_di11) y AROPE en % (ilc_peps01n) de todos los países, total de edades y sexos."

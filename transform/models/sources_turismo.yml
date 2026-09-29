@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw_turismo
+    description: "Turismo: FRONTUR, EGATUR, Coyuntura Turística Hotelera, apartamentos turísticos y viviendas turísticas del INE (ingestion/turismo.py)"
+    schema: raw
+    tables:
+      - name: ine_frontur_pais
+        description: "INE tabla 10822 (FRONTUR): turistas internacionales por país de residencia, mensual desde oct-2015."
+      - name: ine_frontur_ccaa
+        description: "INE tabla 10823 (FRONTUR): turistas internacionales por comunidad de destino principal (6 principales + otras), mensual desde oct-2015."
+      - name: ine_egatur_pais
+        description: "INE tabla 10838 (EGATUR): gasto total (millones de euros), gasto medio por persona y por día y duración media por país de residencia, mensual."
+      - name: ine_egatur_ccaa
+        description: "INE tabla 10839 (EGATUR): ídem por comunidad de destino principal (6 principales + otras), mensual."
+      - name: ine_eoh_viajeros
+        description: "INE tabla 2074 (EOH): viajeros y pernoctaciones en establecimientos hoteleros por residencia, nacional, comunidades y provincias, mensual desde 1999."
+      - name: ine_eoh_ocupacion
+        description: "INE tabla 2066 (EOH): establecimientos, plazas, grado de ocupación y personal en hoteles, nacional, comunidades y provincias, mensual desde 1999."
+      - name: ine_eoap_viajeros
+        description: "INE tabla 1993 (EOAP): viajeros y pernoctaciones en apartamentos turísticos por comunidad y residencia, mensual desde 2000."
+      - name: ine_eoap_ocupacion
+        description: "INE tabla 2021 (EOAP): apartamentos, plazas, grado de ocupación y personal por comunidad, mensual desde 2000."
+      - name: ine_vut_viviendas
+        description: "INE tabla 39363 (medición experimental de viviendas turísticas): viviendas turísticas, plazas y plazas por vivienda por territorio (nacional, CCAA, provincia, municipio), semestral desde ago-2020."
+      - name: ine_vut_porcentaje
+        description: "INE tabla 39366: porcentaje de viviendas turísticas sobre el total de viviendas censadas por territorio, semestral desde ago-2020."

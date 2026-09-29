@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: educacion_indicadores
+    description: "Indicadores de la EPA armonizada (Eurostat): abandono temprano (18-24), nivel educativo de 25-64 años (superior, segunda etapa, básica) y jóvenes NEET (15-29 y 18-24), en %, para España (nivel 'pais', cod '00'), la UE-27 ('ue', 'UE') y las comunidades ('ccaa', código INE)."
+    columns:
+      - name: anio
+      - name: nivel
+        description: "'pais', 'ue' o 'ccaa'"
+      - name: cod
+        description: "'00' (España), 'UE' o código INE de la comunidad"
+      - name: indicador
+        description: "abandono, superior_25_64, segunda_25_64, basica_25_64, neet_15_29, neet_18_24"
+      - name: valor
+        description: "% del grupo de edad"
+  - name: educacion_gasto
+    description: "Gasto de las AAPP en educación (Eurostat gov_10a_exp, COFOG GF09 y subfunciones) en % del PIB para España y la UE-27, y en euros constantes por habitante para España."
+    columns:
+      - name: funcion
+        description: "Total, Infantil y primaria, Secundaria, Postsecundaria no superior, Superior"
+      - name: pct_pib
+      - name: millones_eur
+        description: "Millones de euros corrientes"
+      - name: eur_hab_real
+        description: "Solo España: euros constantes de anio_base por habitante"
+  - name: educacion_gasto_alumno
+    description: "Gasto anual en centros educativos por alumno equivalente a tiempo completo (Eurostat educ_uoe_fini04), por nivel: euros, euros constantes (España), PPS y % del PIB por habitante."
+  - name: educacion_matriculados
+    description: "Alumnado matriculado en España por nivel (infantil a universidad) y titularidad (pública, concertada, privada), con alumnos por 1.000 habitantes (Eurostat educ_uoe_enra01 y educ_uoe_enrs04). anio = año de fin de curso."
+  - name: educacion_fp
+    description: "% del alumnado de la segunda etapa de secundaria que cursa formación profesional, España y UE-27 (Eurostat educ_uoe_enrs04)."
+  - name: educacion_pisa
+    description: "PISA (OCDE vía Eurostat educ_outc_pisa): % de alumnos de 15 años con bajo rendimiento en lectura, matemáticas y ciencias, por sexo, España y UE-27."

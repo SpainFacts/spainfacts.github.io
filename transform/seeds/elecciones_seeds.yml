@@ -1,0 +1,57 @@
+version: 2
+
+seeds:
+  - name: elecciones_partidos_reglas
+    description: >
+      Reglas para asignar a cada candidatura de los ficheros de resultados del Ministerio del
+      Interior una familia política (las mismas familias y colores que partidos_familias, más
+      UPyD). Se aplican, por orden, expresiones regulares sobre la clave normalizada de las
+      siglas (mayúsculas, sin tildes, signos -> espacio; si todas las palabras son de una letra,
+      se juntan: 'P.S.O.E.' -> 'PSOE'). `tipos` (p. ej. '02|07') y `anio_desde`/`anio_hasta`
+      acotan una regla a ciertos procesos. Gana la regla de menor `orden` que case; si ninguna
+      casa, se usa la etiqueta exacta del seed partidos_familias (alcaldes) y, si tampoco está,
+      'Otros partidos' (Congreso y Europeas) o 'Independientes y locales' (Municipales).
+    config:
+      column_types:
+        orden: integer
+        patron: varchar
+        tipos: varchar
+        anio_desde: integer
+        anio_hasta: integer
+        familia: varchar
+        nota: varchar
+    columns:
+      - name: orden
+        tests: [unique, not_null]
+      - name: patron
+        tests: [not_null]
+      - name: familia
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('elecciones_bloques')
+                field: familia
+
+  - name: elecciones_bloques
+    description: >
+      Dimensión de familias políticas para las páginas de elecciones: siglas cortas, color
+      (los de partidos_familias) y bloque ideológico para comparar en el tiempo:
+      'Izquierda' (PSOE; IU, Podemos y Sumar), 'Centro y derecha' (PP, Vox, Ciudadanos, UCD,
+      CDS, UPyD, UPN), 'Nacionalistas y regionalistas' (partidos de ámbito autonómico) y
+      'Otros' (resto de candidaturas estatales pequeñas, independientes y locales).
+    config:
+      column_types:
+        familia: varchar
+        siglas_familia: varchar
+        color: varchar
+        bloque: varchar
+        orden: integer
+    columns:
+      - name: familia
+        tests: [unique, not_null]
+      - name: bloque
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Izquierda', 'Centro y derecha', 'Nacionalistas y regionalistas', 'Otros']

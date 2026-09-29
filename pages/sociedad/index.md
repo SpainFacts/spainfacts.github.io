@@ -1,6 +1,8 @@
 ---
 title: Sociedad
-description: "Criminalidad, salud e inmigración en España con datos oficiales: delitos por municipio, condenados, esperanza de vida, causas de muerte y población extranjera."
+description: "Criminalidad, salud, inmigración, renta y pobreza, educación y elecciones en España con datos oficiales, por habitante y comparados con la UE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -58,11 +60,23 @@ Cómo vivimos en España: la seguridad, la salud y la población que llega de fu
     </a>
     <a href="/sociedad/salud" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🩺 Salud</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Esperanza de vida por comunidad y provincia, causas de muerte, suicidios, tráfico y exceso de mortalidad semana a semana.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Esperanza de vida, causas de muerte y exceso de mortalidad, y el sistema sanitario: listas de espera, médicos, camas y gasto.</p>
     </a>
     <a href="/sociedad/inmigracion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🌍 Inmigración</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Población extranjera por comunidad y origen, saldo migratorio, llegadas irregulares, asilo y nacionalizaciones.</p>
+    </a>
+    <a href="/sociedad/desigualdad" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white">💶 Renta, pobreza y desigualdad</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Renta de los hogares descontada la inflación, riesgo de pobreza, AROPE, Gini y S80/S20 por comunidad, edad y municipio, y comparación con la UE.</p>
+    </a>
+    <a href="/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white">🎓 Educación</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Abandono escolar temprano, nivel de estudios de los adultos, jóvenes que ni estudian ni trabajan, gasto por habitante y por alumno, FP y PISA, frente a la UE y por comunidad.</p>
+    </a>
+    <a href="/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white">🗳️ Elecciones</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Generales desde 1977, europeas y municipales: participación, voto por partido y bloque, fragmentación, votos por escaño y ganador en cada provincia y municipio.</p>
     </a>
 </div>
 

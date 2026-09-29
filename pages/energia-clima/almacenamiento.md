@@ -1,6 +1,8 @@
 ---
 title: Almacenamiento de electricidad
 description: "Bombeo hidráulico y baterías en España: cuánta energía almacenan y devuelven, potencia instalada por comunidad, rendimiento y proyectos con permiso de acceso a la red frente al objetivo de 22,5 GW del PNIEC para 2030."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

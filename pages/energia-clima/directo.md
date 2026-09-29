@@ -1,6 +1,8 @@
 ---
 title: El sistema eléctrico, ahora
 description: "El sistema eléctrico español en directo: demanda, mix de generación, % renovable, intensidad de CO₂ e intercambios con Francia, Portugal, Marruecos, Andorra y Baleares cada 5 minutos."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

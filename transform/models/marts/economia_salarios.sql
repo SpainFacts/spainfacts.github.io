@@ -6,7 +6,7 @@
 -- del IPC general (base 2025) de los tres meses del trimestre.
 with base as (
     select
-        cast(epoch_ms(fecha) as date) as fecha,
+        cast(epoch_ms(fecha) + interval 12 hour as date) as fecha,  -- el INE fecha a medianoche peninsular (22:00/23:00 UTC del día anterior)
         split_part(serie, '. ', 1) as jornada_ine,
         split_part(serie, '. ', 2) as sector_ine,
         split_part(serie, '. ', 3) as componente,

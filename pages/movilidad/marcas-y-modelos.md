@@ -1,6 +1,8 @@
 ---
 title: Marcas y modelos más vendidos
 description: "Ranking mensual de marcas y modelos de coches, motos y furgonetas matriculados en España, filtrable por tipo de motor: eléctricos puros, híbridos enchufables, híbridos, gasolina y diésel."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

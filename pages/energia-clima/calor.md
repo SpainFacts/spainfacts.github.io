@@ -1,6 +1,8 @@
 ---
 title: Calor y temperaturas
 description: Mapa diario del calor en España por provincia, comparado con la temperatura máxima habitual de cada día en 1991-2020, y los récords de cada provincia. Datos de AEMET.
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

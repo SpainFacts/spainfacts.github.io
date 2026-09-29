@@ -203,7 +203,7 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
     height="540px"
 />
 
-<Grid cols=3>
+<Grid cols=2>
     <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
         <h4 class="font-bold text-blue-900 dark:text-blue-300 mb-1">📥 ¿Quieres profundizar en los ingresos?</h4>
         <p class="text-xs text-blue-700 dark:text-blue-400 mb-2">Consulta la recaudación por IRPF, IVA, Sociedades, Cotizaciones y tasas públicas.</p>
@@ -225,6 +225,14 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
         <p class="text-xs text-teal-700 dark:text-teal-400 mb-2">Cuántos son en cada administración y territorio, cómo han evolucionado, cuánto cobran frente al sector privado y cuánto cuestan.</p>
         <a href="/cuentas-publicas/empleo-publico" class="text-xs font-bold text-teal-600 dark:text-teal-300 hover:underline">
             Ver informe de Empleo Público →
+        </a>
+    </div>
+
+    <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
+        <h4 class="font-bold text-amber-900 dark:text-amber-300 mb-1">👵 ¿Cuánto cuestan las pensiones?</h4>
+        <p class="text-xs text-amber-700 dark:text-amber-400 mb-2">Pensión media descontada la inflación, afiliados por pensión, gasto en % del PIB frente a la UE y diferencias entre comunidades.</p>
+        <a href="/cuentas-publicas/pensiones" class="text-xs font-bold text-amber-600 dark:text-amber-300 hover:underline">
+            Ver informe de Pensiones →
         </a>
     </div>
 </Grid>

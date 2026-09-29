@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_pensiones
+    description: "Pensiones contributivas y afiliación (Seguridad Social) y gasto en pensiones (Eurostat), cargados por ingestion/pensiones.py"
+    schema: raw
+    tables:
+      - name: ss_pensiones_territorio
+        description: "Seguridad Social (INSS): pensiones contributivas en vigor el día 1 de cada mes por España, comunidad y provincia y clase (número y pensión media en euros/mes), desde enero de 2008. Libros mensuales CA<aaaamm>.xlsx, hoja Total sistema."
+      - name: ss_afiliados_regimen
+        description: "Seguridad Social: afiliados medios mensuales del total del sistema por régimen, desde enero de 2001 (serie por regímenes)."
+      - name: ss_afiliados_provincia
+        description: "Seguridad Social: afiliados medios mensuales por provincia (código INE) y régimen, desde enero de 2021 (libros anuales de afiliación, tabla 3)."
+      - name: eurostat_pensiones_cofog
+        description: "Eurostat gov_10a_exp: gasto de las administraciones públicas (S13) en vejez (GF1002), supervivientes (GF1003) y protección social (GF10), % del PIB, todos los países."
+      - name: eurostat_pensiones_gasto
+        description: "Eurostat spr_exp_pens: gasto en pensiones (SEEPROS, todas las prestaciones), % del PIB, todos los países."

@@ -1,3 +1,10 @@
+---
+title: Indicador
+description: "Serie histórica completa de un indicador oficial, con su último dato y un enlace a la fuente."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
+---
+
 ```sql serie
 SELECT periodo, valor, nombre, unidad, fuente, url_fuente
 FROM mother.metricas

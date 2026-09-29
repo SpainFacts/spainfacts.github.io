@@ -1,6 +1,8 @@
 ---
 title: Incendios forestales
 description: Superficie quemada en España cada año, incendios dentro de la Red Natura 2000, mapa de áreas quemadas y focos activos detectados por satélite.
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

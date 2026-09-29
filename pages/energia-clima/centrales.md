@@ -1,6 +1,8 @@
 ---
 title: Centrales eléctricas
 description: "Mapa de las centrales eléctricas de España: en operación, en construcción, en tramitación y retiradas, por tecnología, potencia y propietario."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

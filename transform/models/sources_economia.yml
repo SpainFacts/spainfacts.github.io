@@ -15,3 +15,5 @@ sources:
         description: "nama_10_a10_e: ocupados (EMP_DC) y asalariados (SAL_DC) por rama NACE A10, miles de personas."
       - name: ine_coste_salarial
         description: "INE tabla 6038 (ETCL): coste salarial por trabajador y mes por jornada, sector y componente, trimestral desde 2008."
+      - name: ine_coste_laboral_ccaa
+        description: "INE tabla 6061 (ETCL): coste laboral y salarial por trabajador y mes por comunidad, sector y componente, trimestral desde 2008."

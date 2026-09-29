@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: empresas_dirce_territorio
+    description: "Empresas activas a 1 de enero por año (DIRCE, INE tabla 302, desde 1999) para España, comunidades (suma de provincias) y provincias: total, personas físicas, sociedades anónimas y limitadas, empresas por 1.000 habitantes y crecimiento anual."
+  - name: empresas_dirce_tamano
+    description: "Empresas por tamaño (sin asalariados, micro, pequeñas, medianas, grandes según asalariados) y % del total, España y comunidades, desde 2020 (DIRCE, INE tabla 39372)."
+  - name: empresas_dirce_sector
+    description: "Empresas por gran sector de actividad (11 grupos de divisiones CNAE 2009), % del total y por 1.000 habitantes, España y comunidades, desde 2020 (DIRCE, INE tabla 39372)."
+  - name: empresas_sociedades_mensual
+    description: "Sociedades mercantiles constituidas y disueltas por mes, con capital suscrito real y sumas móviles de 12 meses por 100.000 habitantes, España y comunidades, desde 1995 (INE tabla 13912)."
+  - name: empresas_sociedades_anual
+    description: "Sociedades mercantiles constituidas y disueltas por año completo, por 100.000 habitantes, disueltas por cada 100 creadas y capital suscrito en euros constantes (total, medio y por habitante), España y comunidades."
+  - name: empresas_concursos
+    description: "Deudores concursados (concursos de acreedores) por año, por 100.000 habitantes y por 1.000 empresas, voluntarios y necesarios, España y comunidades, 2004-2020 (INE, Estadística del Procedimiento Concursal, tabla 2992)."
+  - name: empresas_autonomos
+    description: "Ocupados por cuenta propia (EPA, INE tabla 65316): cuenta propia, empleadores, independientes y asalariados en miles y en % de los ocupados, por trimestre y media anual (trimestre = 0), España y comunidades, desde 2002."
+  - name: empresas_id_paises
+    description: "Gasto en I+D en % del PIB y por habitante (real para España y UE-27) e investigadores por 1.000 ocupados, por país, año y sector ejecutor (Eurostat rd_e_gerdtot y rd_p_perslf)."
+  - name: empresas_id_ccaa
+    description: "Gasto en I+D en % del PIB, euros reales por habitante y millones reales, e investigadores por 1.000 ocupados, por comunidad, año y sector ejecutor (Eurostat rd_e_gerdreg y rd_p_persreg, NUTS 2 traducido a código INE)."
+  - name: empresas_tamano_ue
+    description: "Reparto de empresas, empleo y valor añadido por tamaño (micro, pequeñas, medianas, grandes según personas ocupadas) en España, UE-27 y otros países, desde 2021 (Eurostat sbs_sc_ovw)."
+  - name: empresas_altas_quiebras
+    description: "Índices trimestrales (2021 = 100, desestacionalizados) de altas de empresas y declaraciones de quiebra en España, UE-27 y otros países (Eurostat sts_rb_q)."

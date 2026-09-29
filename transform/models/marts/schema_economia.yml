@@ -11,3 +11,5 @@ models:
     description: "Coste salarial por trabajador y mes por trimestre, jornada y sector, nominal y real, con variación interanual nominal y real (INE ETCL, tabla 6038)."
   - name: economia_salarios_anual
     description: "Salario medio mensual por año (media de los cuatro trimestres de la ETCL), nominal y real, y su crecimiento anual."
+  - name: economia_salarios_ccaa
+    description: "Salario y coste laboral por trabajador y mes por comunidad y año (media de los cuatro trimestres de la ETCL, INE 6061), nominal y real, con crecimiento real e índice España = 100."

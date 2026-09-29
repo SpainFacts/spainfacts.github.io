@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: raw_elecciones
+    description: >
+      Resultados electorales oficiales del Ministerio del Interior (área de descargas de
+      infoelectoral.interior.gob.es, ficheros de texto de longitud fija por proceso), cargados
+      por dlt (ingestion/elecciones.py). Procesos: Congreso de los Diputados (tipo 02, 1977-2023),
+      Municipales (04, 1979-2023) y Parlamento Europeo (07, 1987-2024). `proceso` = tipo + año +
+      mes (p. ej. '02202307'). Los códigos de comunidad `cod_ccaa_mir` son los de Interior
+      (no coinciden con los del INE); las provincias y municipios usan los códigos INE.
+    schema: raw
+    tables:
+      - name: elecciones_procesos
+        description: "Un registro por proceso electoral (fichero 02): tipo y fecha de celebración."
+      - name: elecciones_candidaturas
+        description: >
+          Candidaturas de cada proceso (fichero 03): siglas, denominación y códigos de la
+          candidatura cabecera de acumulación provincial, autonómica y nacional.
+      - name: elecciones_municipios
+        description: >
+          Datos globales por municipio (fichero 05, solo el total municipal, distrito 99): censo,
+          votos en blanco, nulos y a candidaturas. No incluye el voto CERA (residentes ausentes),
+          que solo figura en los totales provinciales. En municipales solo municipios de más de
+          250 habitantes (listas cerradas).
+      - name: elecciones_municipios_votos
+        description: "Votos y electos por candidatura y municipio (fichero 06, total municipal)."
+      - name: elecciones_ambitos
+        description: >
+          Datos globales de ámbito superior al municipio (fichero 07): provincia (cod_prov INE,
+          distrito '9'), comunidad (cod_prov '99') y total nacional (cod_ccaa_mir '99'). Incluyen
+          el voto CERA.
+      - name: elecciones_ambitos_votos
+        description: "Votos y escaños por candidatura en el ámbito superior (fichero 08)."

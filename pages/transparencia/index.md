@@ -1,6 +1,8 @@
 ---
 title: Transparencia
 description: "Administraciones que no cumplen sus obligaciones legales de publicar o remitir información: quiénes son, dónde están y quién gobernaba cuando vencía el plazo."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -69,7 +71,7 @@ Cada ayuntamiento debe remitir al Ministerio de Hacienda la liquidación de su p
         title="Ayuntamientos sin liquidación {ultimo[0]?.anio}"
         value={resumen[0]?.incumplen}
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
-        period="{formatNumber(100 * resumen[0]?.incumplen / resumen[0]?.total, 1)} % de {formatNumber(resumen[0]?.total, 0)} ayuntamientos"
+        period="{formatNumber(resumen[0]?.incumplen / resumen[0]?.total / 0.01, 1)} % de {formatNumber(resumen[0]?.total, 0)} ayuntamientos"
         source="Ministerio de Hacienda (CONPREL)"
         sparklineData={liq_serie.map(d => d.incumplen)}
     />
@@ -355,21 +357,21 @@ La **Cuenta General** recoge todas las cuentas del ayuntamiento (presupuesto, ba
         title="Sin Cuenta General {tcu_ultimo[0]?.cg}"
         value={tcu_resumen[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
-        period="{formatNumber(100 * tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total, 1)} % de {formatNumber(tcu_resumen[0]?.total, 0)} ayuntamientos; no consta rendida a {tcu_cobertura[0]?.extraccion}"
+        period="{formatNumber(tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen[0]?.total, 0)} ayuntamientos; no consta rendida a {tcu_cobertura[0]?.extraccion}"
         source="Tribunal de Cuentas (rendiciondecuentas.es)"
         sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
     />
     <KpiCard
         title="Enviada dentro de plazo"
         value={tcu_resumen[0]?.en_plazo}
-        formattedValue="{formatNumber(100 * tcu_resumen[0]?.en_plazo / tcu_resumen[0]?.total, 1)} %"
+        formattedValue="{formatNumber(tcu_resumen[0]?.en_plazo / tcu_resumen[0]?.total / 0.01, 1)} %"
         period="{formatNumber(tcu_resumen[0]?.en_plazo, 0)} ayuntamientos antes del 15/10/{tcu_ultimo[0]?.cg + 1}; {formatNumber(tcu_resumen[0]?.fuera_plazo, 0)} la enviaron más tarde"
     />
     <KpiCard
         title="Sin control interno {tcu_ultimo[0]?.ci}"
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
-        period="{formatNumber(100 * tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total, 1)} % de {formatNumber(tcu_resumen_ci[0]?.total, 0)} ayuntamientos (plazo: 30/04/{tcu_ultimo[0]?.ci + 1})"
+        period="{formatNumber(tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen_ci[0]?.total, 0)} ayuntamientos (plazo: 30/04/{tcu_ultimo[0]?.ci + 1})"
         sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
     />
 </Grid>
@@ -861,7 +863,7 @@ ORDER BY fecha_trimestre
         title="Sin comunicar el PMP ({pmp_ultimo[0]?.periodo})"
         value={pmp_resumen[0]?.no_comunican}
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
-        period="{formatNumber(100 * pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total, 1)} % de {formatNumber(pmp_resumen[0]?.total, 0)} ayuntamientos"
+        period="{formatNumber(pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total / 0.01, 1)} % de {formatNumber(pmp_resumen[0]?.total, 0)} ayuntamientos"
         source="Ministerio de Hacienda (PMP_NET)"
         sparklineData={pmp_serie.map(d => d.no_comunican)}
     />
@@ -877,7 +879,7 @@ ORDER BY fecha_trimestre
         title="Pagan en más de 30 días"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
-        period="{formatNumber(100 * pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican, 1)} % de los que lo comunican ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} hab.)"
+        period="{formatNumber(pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican / 0.01, 1)} % de los que lo comunican ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} hab.)"
         sparklineData={pmp_serie.map(d => d.supera_30)}
     />
 </Grid>

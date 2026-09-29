@@ -22,4 +22,10 @@ Consulta análisis y recursos transversales que complementan los grandes temas d
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Todas las series de seguimiento (paro, IPC, deuda, déficit...) con su último dato, su evolución y su fuente oficial.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Ver indicadores →</span>
     </a>
+    <a href="/varios/mapa-poblacion" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl">🗺️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Mapa de la población</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Qué provincias ganan y cuáles pierden habitantes desde 1971, en porcentaje.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Ver el mapa →</span>
+    </a>
 </Grid>

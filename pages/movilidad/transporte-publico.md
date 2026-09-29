@@ -1,6 +1,8 @@
 ---
 title: Transporte público
 description: "Viajeros de metro, autobús, Cercanías, AVE, tren de media y larga distancia, avión y barco en España cada mes desde 2012, y el metro y el autobús urbano en Madrid, Barcelona, Valencia, Bilbao, Sevilla, Málaga y Palma."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

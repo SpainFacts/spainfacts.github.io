@@ -1,0 +1,38 @@
+orden,patron,tipos,anio_desde,anio_hasta,familia,nota
+0,"^PSOE H$","02|07",1977,1979,Otros partidos,"PSOE (histórico), escisión de 1972: no es el PSOE"
+1,"^(CC UCD|UCD)$",,,,UCD,UCD y Centristes de Catalunya-UCD (1979)
+2,"^(CC AP|CD)$","02|07",1977,1979,PP,Convivència Catalana (AP) y Coalición Democrática (1977-1979)
+3,"^UPN( |$)",,,,UPN,"UPN, UPN-PP (1989-2008), UPN-AP (1982)"
+4,"^NA$","02|07",2019,2023,UPN,Navarra Suma (UPN-PP-Cs 2019)
+5,"^(PP|AP|PPC|PPEU|PARTIDO POPULAR)( |$)",,,,PP,"PP, AP y sus coaliciones (AP-PDP, PP-PAR, PP-Foro, PP-UPM, PP-EU...)"
+6,"^VOX( |$)",,,,Vox,
+7,"^(CS|CIUDADANOS)( |$)",,,,Ciudadanos,
+8,"^CDS$",,,,CDS,
+9,"^UPYD( |$)",,,,UPyD,Unión Progreso y Democracia
+10,"^(PSOE|PSC|PSDEG|PSDG|PSIB|PSN|PSPV|PSE|PARTIDO SOCIALISTA OBRERO)( |$)|^(PSG|PS G|PSA|PSM) PSOE",,,,PSOE,PSOE y federaciones (PSC; PSdeG; PSE-EE; PSOE-A; PSOE-Progresistas...)
+11,"^(CHA)( |$)",,,,CHA,Incluye CHA-IU (2011): escaño de CHA
+12,"COMPROMIS SUMAR$|^MES PER MALLORCA MES PER MENORCA SUMAR$",,,,"IU, Podemos y Sumar",Candidaturas de la coalición Sumar
+13,"^(COMPROMIS|MES COMPROM|BLOC|PRIMAVERA EUROPEA)( |$)",,,,Compromís,"Compromís, Bloc, Més Compromís (2019) y Primavera Europea (2014)"
+14,"^(IU|IUC|IUCM|IUCL|IUCLM|IUCYL|IULV|IURM|IUA|IUN|IUV|IUIB|IUCM|PCE|PSUC|PCA|PCC PCE|EUPV|EUIA|EUIB|ICV|IC V|IC EV|IX|UPEC|UNIDOS PODEMOS|UNIDAS PODEMOS|PODEMOS|EN COMU|ECP|EN MAREA|SUMAR|MAS PAIS|M PAIS|MAS MADRID|COMUNS SUMAR|CEC PODEMOS|IZQUIERDA EZKERRA)( |$)|^EB [A-Z]",,,,"IU, Podemos y Sumar","PCE, IU y sus federaciones, ICV, Podemos y confluencias, Unidas Podemos, Más País, Sumar"
+15,"^(EU|IC|UP|AGE)( |$)","02|07",,,"IU, Podemos y Sumar","EU (Esquerra Unida), IC (Iniciativa per Catalunya, 1989-1993), UP (Unidad Popular, 2015), AGE (2014)"
+16,"^ENTESA$","02",2004,2004,"IU, Podemos y Sumar",EU del País Valencià + Izquierda Republicana (Entesa 2004)
+17,"^(EAJ PNV|EAJPNV|PNV)( |$)",,,,PNV,
+18,"^(HB|EH|BILDU|AMAIUR|ANV|HERRI BATASUNA)( |$)",,,,EH Bildu (e izquierda abertzale),"HB, EH, Amaiur, EH Bildu"
+19,"^EA( |$)",,,,Eusko Alkartasuna,
+20,"^(ERC|ERFN|ESQUERRA|ER|EC FED|ESQUERRA REPUBLICANA)( |$)",,,,ERC,"ERC y sus coaliciones (ERC-Catsí, ERC-Sobiranistes, Esquerra de Catalunya 1977)"
+21,"^(CIU|CDC|DL|PDPC|UDC IDCC|JXCAT|JUNTS|PDECAT)( |$)",,,,Junts / CiU,"CiU, Pacte Democràtic (1977), UDC (1977), DL (2015), CDC (2016), JxCat/Junts"
+22,"^CUP( |$)",,,,CUP,
+23,"^(BNG|BNPG)( |$)",,,,BNG,BNG y BN-PG (1977-1979)
+24,"^NOS$","02",2015,2015,BNG,Nós-Candidatura Galega (BNG) 2015
+25,"^(CC|CCA|AIC|ATI|NC CCA|COALICION CANARIA)( |$)",,,,Coalición Canaria,"CC, AIC, CC-PNC, CC-NC (2011)"
+26,"^(GBAI|GEROA BAI|NA BAI|NABAI)$",,,,Geroa Bai,
+27,"^PAR( |$)",,,,PAR,
+28,"^PRC$",,,,PRC,
+29,"^(FAC|FORO|FORO ASTURIAS)$",,,,Foro Asturias,
+30,"^UPL$",,,,UPL,
+31,"^(PA|PSA|PSA PA|PA PAP|PA CE|PAP|PARTIDO ANDALUCISTA)( |$)",,,,Partido Andalucista,
+32,"^UV( |$)",,,,Unió Valenciana,
+33,"^(EXISTE|TERUEL EXI|TERUEL EXISTE|ESPANA VACIADA)( |$)",,,,Teruel Existe y España Vaciada,
+34,"^SY$","02",2023,2023,Teruel Existe y España Vaciada,Soria ¡Ya! (2023)
+35,"^AHORA REPUBLICAS","07",2019,2024,ERC,"Ahora Repúblicas (ERC, EH Bildu, BNG y otros), lista única en Europeas; en cada provincia cuenta con sus siglas locales y los escaños nacionales se atribuyen a ERC, que encabezaba la lista"
+36,"^(CEUS|CPE)$","07",2019,2024,PNV,"Coalición por una Europa Solidaria (PNV, CC y otros), encabezada por el PNV"

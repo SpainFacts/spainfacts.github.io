@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: turismo_series
+    description: "Series mensuales de turismo del INE (FRONTUR 10822/10823, EGATUR 10838/10839, EOH 2074/2066, EOAP 1993/2021) normalizadas en formato largo: operación, mes, comunidad (código INE, '00' España, 'otras' resto de FRONTUR/EGATUR), país de residencia, medida, residencia, valor y factor para pasar a euros constantes."
+  - name: turismo_mensual
+    description: "Turismo en España por mes: turistas internacionales, gasto nominal y real, gasto medio por turista y día en euros constantes, pernoctaciones en hoteles y apartamentos por residencia y por 1.000 hab., grado de ocupación, y acumulados de 12 meses (turistas por habitante, gasto real por habitante, gasto en % del PIB)."
+  - name: turismo_anual
+    description: "Turismo en España por año: turistas por habitante, gasto real total, por habitante, por turista y por día, gasto en % del PIB, pernoctaciones hoteleras y en apartamentos por 1.000 hab., % de no residentes y grado de ocupación ponderado."
+  - name: turismo_paises
+    description: "Turistas internacionales por país de residencia y año (FRONTUR), cuota, variación frente a 2019 y gasto real y por turista para los países que desglosa EGATUR."
+  - name: turismo_ccaa_mensual
+    description: "Turismo por comunidad y mes: pernoctaciones y ocupación en hoteles y apartamentos turísticos, por 1.000 habitantes, y turistas internacionales y gasto real en las seis comunidades que desglosan FRONTUR/EGATUR."
+  - name: turismo_ccaa
+    description: "Turismo por comunidad y año: pernoctaciones en hoteles y apartamentos por 1.000 hab., % de no residentes, grado de ocupación ponderado, turistas internacionales y gasto real por habitante (seis comunidades + resto + España)."
+  - name: turismo_viviendas
+    description: "Viviendas de uso turístico (INE, medición experimental) por periodo semestral en España, comunidades y provincias: número, plazas, % sobre las viviendas censadas, por 1.000 habitantes y variación frente al mismo mes del año anterior."
+  - name: turismo_viviendas_municipios
+    description: "Viviendas de uso turístico por municipio y periodo (INE, medición experimental): número, plazas, % sobre las viviendas censadas, por 1.000 habitantes y puesto en España por % (municipios de 1.000 hab. o más)."

@@ -1,6 +1,8 @@
 ---
 title: Récords del sistema eléctrico
 description: "Récords históricos del sistema eléctrico español desde 2015: demanda máxima y mínima, máximos de solar, eólica y renovables, emisiones mínimas, precios e intercambios, en la península, Baleares y Canarias. Datos de REE cada 5 minutos."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -24,6 +24,10 @@
     // Compute change sign & number
     $: numChange = typeof change === "number" ? change : parseFloat(change);
     $: isChangeValid = !isNaN(numChange) && change !== null && change !== undefined;
+    // Texto del cambio con coma decimal y como mucho un decimal (evita 4.714090167984009)
+    $: cambioTexto = isChangeValid
+        ? numChange.toLocaleString("es-ES", { maximumFractionDigits: Math.abs(numChange) >= 100 ? 0 : 1 })
+        : "";
     $: isPositiveChange = numChange > 0;
     $: isZeroChange = numChange === 0;
 
@@ -45,11 +49,14 @@
 
     // Generate SVG path for sparkline if data is available
     $: sparklinePoints = (() => {
-        if (!sparklineData || sparklineData.length < 2) return "";
-        const points = sparklineData.map((d, i) => {
-            const yVal = typeof d === "number" ? d : (d.y ?? d.valor ?? d.value ?? 0);
-            return { x: i, y: yVal };
-        });
+        if (!Array.isArray(sparklineData)) return "";
+        // Ignora huecos (null/undefined/NaN): una serie con años sin dato no debe romper la tarjeta
+        const valores = sparklineData
+            .map((d) => (d == null ? null : typeof d === "number" ? d : (d.y ?? d.valor ?? d.value ?? null)))
+            .map((v) => (v == null ? null : Number(v)))
+            .filter((v) => v !== null && Number.isFinite(v));
+        if (valores.length < 2) return "";
+        const points = valores.map((y, i) => ({ x: i, y }));
         const yValues = points.map(p => p.y);
         const minY = Math.min(...yValues);
         const maxY = Math.max(...yValues);
@@ -106,7 +113,7 @@
                             <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
                         </svg>
                     {/if}
-                    {isPositiveChange ? '+' : ''}{numChange}{changeUnit ? ` ${changeUnit}` : ''}
+                    {isPositiveChange ? '+' : ''}{cambioTexto}{changeUnit ? ` ${changeUnit}` : ''}
                 </span>
             {/if}
             {#if period || changePeriod}

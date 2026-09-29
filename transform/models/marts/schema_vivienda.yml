@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: vivienda_nombres
+    description: "Nombre de territorio del INE en las tablas de vivienda (ETDP, Hipotecas, IPV, IPVA) -> nivel y código INE, con las variantes de provincia que no están en las semillas."
+  - name: vivienda_deflactor_trimestral
+    description: "Factor trimestral para pasar euros de cada trimestre a euros del año base de main.deflactor (IPC general mensual; si faltan meses, factor anual)."
+  - name: vivienda_precio_tasado
+    description: "Valor tasado medio de la vivienda libre (€/m²) por trimestre, España, CCAA y provincias, nominal y real, precio de 90 m² y variación interanual (MIVAU, tabla 35101000)."
+  - name: vivienda_ipv
+    description: "Índice de Precios de Vivienda del INE (tabla 25171, base 2015) por trimestre, España y CCAA, general/nueva/segunda mano, nominal y real (2015 = 100)."
+  - name: vivienda_mercado_mensual
+    description: "Compraventas de viviendas (INE ETDP 6150) e hipotecas sobre viviendas (INE H 13896/3200) por mes, España, CCAA y provincias, importe medio real y sumas de 12 meses por 1.000 hab."
+  - name: vivienda_mercado_anual
+    description: "Compraventas e hipotecas de viviendas por año, España, CCAA y provincias, por 1.000 habitantes, importe medio real, % obra nueva y % hipotecas/compraventas."
+  - name: vivienda_obra_nueva
+    description: "Viviendas libres iniciadas y terminadas por año y por 1.000 habitantes, España, CCAA y provincias (MIVAU, tablas 32200500 y 32201000)."
+  - name: vivienda_alquiler
+    description: "Alquiler mediano (€/mes y €/m²), percentiles y viviendas alquiladas por 1.000 hab., España (media ponderada de CCAA), CCAA y provincias, 2011-2024, nominal y real (SERPAVI, MIVAU)."
+  - name: vivienda_alquiler_municipios
+    description: "Alquiler mediano de pisos por municipio de 20.000 habitantes o más, 2011-2024, real, y cambio real a cinco años (SERPAVI)."
+  - name: vivienda_precio_municipios
+    description: "Valor tasado medio anual (€/m², real) de la vivienda libre en municipios de más de 25.000 habitantes, con código INE (MIVAU, tabla 35103500)."
+  - name: vivienda_esfuerzo
+    description: "Años de salario bruto medio para pagar 90 m² al valor tasado y % del salario que se va en el alquiler mediano, España y CCAA (salario: INE ETCL 6061)."
+  - name: vivienda_ipva
+    description: "Índice de Precios de Vivienda en Alquiler del INE (tabla 59057, base 2015), anual, España y CCAA, nominal y real."
+  - name: vivienda_resumen_territorios
+    description: "Último dato de cada indicador de vivienda por territorio (España, CCAA, provincias): precio real y variaciones, alquiler, compraventas e hipotecas por 1.000 hab., obra terminada y esfuerzo."

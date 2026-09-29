@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: raw_sanidad
+    description: "Sistema sanitario: listas de espera (SISLE-SNS) y gasto sanitario público (EGSP) del Ministerio de Sanidad, y recursos y gasto sanitario de Eurostat (ingestion/sanidad.py)"
+    schema: raw
+    tables:
+      - name: sanidad_sisle_ccaa
+        description: "Ministerio de Sanidad, SISLE-SNS (informes semestrales en PDF, desde 2016 con tabla por comunidad): lista de espera quirúrgica (pacientes, tasa por 1.000 hab., % con más de 6 meses, tiempo medio en días) y de consultas externas (tasa por 1.000 hab., tiempo medio, % de citas a más de 60 días) por comunidad (código INE) y total SNS ('00')."
+      - name: sanidad_sisle_especialidad
+        description: "Ministerio de Sanidad, SISLE-SNS: las mismas cifras por especialidad quirúrgica (14) y de consultas (10); especialidad 'TOTAL' = total SNS de la tabla (desde 2013)."
+      - name: sanidad_egsp
+        description: "Ministerio de Sanidad, Estadística de Gasto Sanitario Público (XLS egspGastoReal): gasto consolidado del sector Comunidades Autónomas por comunidad en euros por habitante (eur_hab_ccaa) y % del PIB (pct_pib_ccaa), y gasto total por sector en miles de euros (miles_eur_sector)."
+      - name: eurostat_san_personal
+        description: "Eurostat hlth_rs_prs2: personal sanitario (médicos PHYS, enfermeras NRS, matronas, dentistas, farmacéuticos) por 100.000 hab. (P_HTHAB) y número (NR), según situación: PRACT ejerciendo, PACT profesionalmente activos, LIC colegiados. Países UE-27."
+      - name: eurostat_san_camas
+        description: "Eurostat hlth_rs_bds1: camas hospitalarias disponibles (HBEDT, total) por 100.000 hab. y número. Países UE-27."
+      - name: eurostat_san_regiones
+        description: "Eurostat hlth_rs_physreg (recurso 'medicos') y hlth_rs_bdsrg2 ('camas') por región NUTS 2 española y total ES, por 100.000 hab. y número."
+      - name: eurostat_san_gasto
+        description: "Eurostat hlth_sha11_hf: gasto sanitario corriente por esquema de financiación (TOT_HF total, HF1 público y seguros obligatorios, HF2 voluntario, HF3 pago directo de los hogares) en % del PIB, EUR por hab., PPS por hab. y millones de euros. Países UE-27 y UE-27."

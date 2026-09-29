@@ -1,6 +1,8 @@
 ---
 title: Coche eléctrico
 description: "Transición al coche eléctrico en España: matriculaciones de turismos por tipo de motor cada mes desde 2015, cuota de eléctricos e híbridos enchufables por provincia y emisiones de CO2."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

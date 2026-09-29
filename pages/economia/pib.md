@@ -1,6 +1,8 @@
 ---
 title: PIB y crecimiento
 description: "Evolución del PIB de España por habitante y descontada la inflación, crecimiento trimestral, componentes de la demanda y comparación con la UE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

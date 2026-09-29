@@ -1,6 +1,8 @@
 ---
 title: Empleo público
 description: "Cuántos empleados públicos hay en España, en qué administración y sector trabajan (sanidad, educación, ayuntamientos, fuerzas de seguridad...), cómo ha evolucionado su número, cuánto cobran frente al sector privado y cuánto cuestan."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -132,7 +134,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
     <KpiCard
         title="En las comunidades autónomas"
         value={resumen[0]?.ccaa}
-        formattedValue="{formatNumber(100 * resumen[0]?.ccaa / resumen[0]?.total, 0)} %"
+        formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: sobre todo sanidad y educación"
         source="Registro Central de Personal"
         sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}

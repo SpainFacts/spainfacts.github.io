@@ -1,6 +1,8 @@
 ---
 title: Comercio exterior
 description: "Exportaciones e importaciones de bienes y servicios de España: peso sobre el PIB, saldo exterior y evolución real por habitante."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

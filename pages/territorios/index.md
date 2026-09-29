@@ -1,6 +1,8 @@
 ---
 title: Territorios
 description: "España por comunidades autónomas y provincias: población, cuentas públicas y deuda de cada administración."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

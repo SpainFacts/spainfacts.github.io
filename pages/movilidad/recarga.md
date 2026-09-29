@@ -1,6 +1,8 @@
 ---
 title: Puntos de recarga
 description: "Mapa de los puntos de recarga públicos para coches eléctricos en España por potencia y operador, y cuántos coches enchufables hay por cada punto en cada provincia."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

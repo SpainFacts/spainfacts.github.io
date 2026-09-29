@@ -1,6 +1,8 @@
 ---
 title: SpainFacts · El Estado de España en Datos Oficiales
 description: "España en datos oficiales: población, economía, cuentas públicas, energía, movilidad, sociedad y transparencia, de España a cada municipio. Independiente y sin sesgo partidista."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -156,7 +158,7 @@ ORDER BY anio
     <KpiCard
         title="Electricidad renovable"
         value={renovables_30[0]?.cuota}
-        formattedValue="{formatNumber(100 * renovables_30[0]?.cuota, 0)} %"
+        formattedValue="{formatNumber(renovables_30[0]?.cuota / 0.01, 0)} %"
         period="de la generación de los últimos 30 días"
         source="REE"
         href="/energia-clima/mix-electrico"
@@ -174,7 +176,7 @@ ORDER BY anio
     <KpiCard
         title="Coches nuevos enchufables"
         value={enchufables.slice(-1)[0]?.valor}
-        formattedValue="{formatNumber(100 * enchufables.slice(-1)[0]?.valor, 1)} %"
+        formattedValue="{formatNumber(enchufables.slice(-1)[0]?.valor / 0.01, 1)} %"
         period="eléctricos + híbridos enchufables · último mes"
         source="DGT"
         href="/movilidad/coche-electrico"
@@ -295,19 +297,25 @@ SELECT
     <a href="/demografia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1">👪</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Demografía</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Evolución de la población, pirámide de edades, envejecimiento y reparto entre provincias.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Evolución de la población, natalidad y fecundidad, envejecimiento, hogares y pirámide de cualquier provincia.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatCompact(poblacion.slice(-1)[0]?.valor, 2)} habitantes →</p>
     </a>
     <a href="/economia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1">💼</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Economía</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Paro de la EPA y precios (IPC), con su evolución histórica.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">PIB por habitante, sectores, comercio exterior, salarios reales, paro, inflación y precio de la energía, turismo y empresas.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Paro: {formatNumber(ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor, 1)} % →</p>
+    </a>
+    <a href="/vivienda" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1">🏠</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">Vivienda</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Precio de compra y alquiler descontada la inflación, cuántos años de sueldo cuesta una casa, compraventas, hipotecas y obra nueva.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Precios, alquiler y esfuerzo →</p>
     </a>
     <a href="/cuentas-publicas" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1">🏛️</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Cuentas públicas</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ingresos, gastos, déficit y deuda de todas las administraciones, y el empleo público: cuántos son, cuánto cobran y cuánto cuestan.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ingresos, gastos, déficit y deuda de todas las administraciones, pensiones y empleo público: cuántos son, cuánto cobran y cuánto cuestan.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatCompact(cabeceras[0]?.empleados, 2)} empleados públicos →</p>
     </a>
     <a href="/energia-clima" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
@@ -325,7 +333,7 @@ SELECT
     <a href="/sociedad" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1">👥</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sociedad</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalidad hasta el nivel de municipio y salud: esperanza de vida, causas de muerte y exceso de mortalidad.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalidad, salud, inmigración, renta y pobreza hasta el nivel de municipio, y educación.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delitos conocidos por 1.000 hab. →</p>
     </a>
     <a href="/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">

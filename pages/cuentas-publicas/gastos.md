@@ -1,5 +1,8 @@
 ---
+description: "En qué gasta el dinero público España: gasto por funciones (pensiones, sanidad, educación...), por habitante y descontada la inflación, y su peso en el PIB."
 title: Gasto Público y Destino del Presupuesto
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

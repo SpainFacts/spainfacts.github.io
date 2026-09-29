@@ -1,6 +1,8 @@
 ---
 title: Sectores económicos
 description: "Cuánto produce y cuánta gente emplea cada sector de la economía española, su crecimiento real y su productividad, desde 1995."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

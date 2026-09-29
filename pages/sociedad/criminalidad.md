@@ -1,6 +1,8 @@
 ---
 title: Criminalidad
 description: "Delitos conocidos en España por tipo, comunidad, provincia y municipio desde 2010, evolución de la cibercriminalidad y condenados por nacionalidad con su contexto."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
@@ -85,7 +87,7 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
     <KpiCard
         title="Cibercriminalidad"
         value={resumen[0]?.ciber}
-        formattedValue="{formatNumber(100 * resumen[0]?.ciber / resumen[0]?.total, 0)} %"
+        formattedValue="{formatNumber(resumen[0]?.ciber / resumen[0]?.total / 0.01, 0)} %"
         period="{formatNumber(resumen[0]?.ciber / 1000, 0)} mil infracciones por internet, sobre todo estafas"
         source="Ministerio del Interior"
         sparklineData={espana.filter(d => d.categoria === 'Cibercriminalidad').map(d => 100 * d.infracciones / (espana.find(t => t.anio === d.anio && t.categoria === 'Total infracciones penales')?.infracciones ?? NaN)).filter(v => Number.isFinite(v))}

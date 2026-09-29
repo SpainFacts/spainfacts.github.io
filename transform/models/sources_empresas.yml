@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw_empresas
+    description: "Tejido empresarial, dinámica empresarial, autónomos e I+D: INE (DIRCE, Sociedades Mercantiles, Procedimiento Concursal, EPA) y Eurostat (I+D, estadística estructural de empresas, altas y quiebras) (ingestion/empresas.py). Las tablas INE llevan nivel/cod_territorio (código INE) y columnas v<variable>/v<variable>_cod con los metadatos de cada dimensión."
+    schema: raw
+    tables:
+      - name: ine_dirce_estrato
+        description: "INE DIRCE tabla 39372 (corte Total CNAE): empresas activas a 1 de enero por comunidad y estrato de asalariados (v336), desde 2020. Los estratos 'De 200 a 249' y 'De 250 a 999' vienen sin código."
+      - name: ine_dirce_actividad
+        description: "INE DIRCE tabla 39372 (corte todos los estratos): empresas por comunidad y división CNAE 2009 (cnae_div, '00' = total; v338 = nombre de la división), desde 2020. En Ceuta y Melilla cnae_div viene vacío: se recupera por v338_cod."
+      - name: ine_dirce_provincias
+        description: "INE DIRCE tabla 302: empresas activas a 1 de enero por provincia y condición jurídica (v337), desde 1999."
+      - name: ine_sm_sociedades
+        description: "INE Estadística de Sociedades Mercantiles tabla 13912: sociedades constituidas, disueltas, que amplían y reducen capital (v568), número y capital en miles de euros (v3), mensual por comunidad desde 1995 (anyo + fk_periodo = mes)."
+      - name: ine_epc_deudores
+        description: "INE Estadística del Procedimiento Concursal tabla 2992: deudores concursados (empresas y personas físicas) por comunidad y provincia y tipo de concurso (v372), anual 2004-2020. El INE no la ha actualizado después de 2020."
+      - name: ine_epa_situacion
+        description: "INE EPA tabla 65316: ocupados por situación profesional (v552), sexo (v18) y comunidad, en miles, trimestral desde 2002 (fk_periodo 19-22 = T1-T4)."
+      - name: eurostat_empresas_gerd
+        description: "Eurostat rd_e_gerdtot: gasto interno en I+D por sector ejecutor (sectperf TOTAL, BES empresas, GOV administraciones, HES enseñanza superior, PNP sin fines de lucro) en % del PIB, euros por habitante y millones de euros, todos los países."
+      - name: eurostat_empresas_gerd_regiones
+        description: "Eurostat rd_e_gerdreg: el mismo gasto para España y sus regiones NUTS 2."
+      - name: eurostat_empresas_investigadores
+        description: "Eurostat rd_p_perslf (países) y rd_p_persreg (España y regiones NUTS 2): investigadores (prof_pos RSE, ambos sexos) en % del empleo, en equivalencia a jornada completa (PC_EMP_FTE) y en personas (PC_EMP_HC), por sector ejecutor."
+      - name: eurostat_empresas_tamano
+        description: "Eurostat sbs_sc_ovw: empresas (ENT_NR), personas ocupadas (EMP_NR) y valor añadido en millones de euros (AV_MEUR) por tamaño (size_emp), economía de mercado sin actividades financieras (B-S sin O ni S94), España, UE-27 y otros países, desde 2021."
+      - name: eurostat_empresas_altas_quiebras
+        description: "Eurostat sts_rb_q: índices trimestrales de altas de empresas (REG) y declaraciones de quiebra (BKRT), 2021=100, desestacionalizados y corregidos de calendario, economía de mercado (B-S sin O ni S94)."

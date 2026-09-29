@@ -31,6 +31,16 @@ from ingestion.almacenamiento import almacenamiento
 from ingestion.bde import bde
 from ingestion.conprel import conprel
 from ingestion.criminalidad import criminalidad
+from ingestion.clima import clima
+from ingestion.demografia import demografia
+from ingestion.educacion import educacion
+from ingestion.elecciones import elecciones
+from ingestion.mercado import mercado
+from ingestion.pensiones import pensiones
+from ingestion.renta import renta
+from ingestion.sanidad import sanidad
+from ingestion.turismo import turismo
+from ingestion.vivienda import vivienda
 from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.hacienda_transparencia import hacienda_transparencia
 from ingestion.destino import es_local
@@ -38,6 +48,7 @@ from ingestion.dgt import dgt
 from ingestion.destino import pipeline as pipeline_destino
 from ingestion.emisiones import emisiones
 from ingestion.empleo_publico import empleo_publico
+from ingestion.empresas import empresas
 from ingestion.eurostat import eurostat
 from ingestion.gem import gem
 from ingestion.incendios import incendios
@@ -228,10 +239,84 @@ def migracion_assets(context: AssetExecutionContext, dlt_resource: DagsterDltRes
     yield from dlt_resource.run(context=context)
 
 
+# --- Temas añadidos en septiembre de 2026 (una fuente dlt por tema) --------
+
+# Paro, IPC y precios de la energía: EPA, IPC (INE), paro registrado (SEPE),
+# Eurostat y Boletín Petrolero de la Comisión Europea.
+@dlt_assets(dlt_source=mercado(), dlt_pipeline=_pipeline_motherduck("mercado"), name="mercado", group_name="ingesta_mensual")
+def mercado_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Vivienda: precios (INE, MIVAU), alquiler (SERPAVI), compraventas, hipotecas y obra nueva.
+@dlt_assets(dlt_source=vivienda(), dlt_pipeline=_pipeline_motherduck("vivienda"), name="vivienda", group_name="ingesta_mensual")
+def vivienda_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Pensiones contributivas y afiliación (Seguridad Social) y gasto en pensiones (Eurostat).
+@dlt_assets(dlt_source=pensiones(), dlt_pipeline=_pipeline_motherduck("pensiones"), name="pensiones", group_name="ingesta_mensual")
+def pensiones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Renta, pobreza y desigualdad: INE ECV y Atlas de Distribución de Renta (ADRH, CSV ~350 MB) y Eurostat EU-SILC.
+@dlt_assets(dlt_source=renta(), dlt_pipeline=_pipeline_motherduck("renta"), name="renta", group_name="ingesta_mensual")
+def renta_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Educación: abandono, nivel educativo, NEET, gasto, alumnado y PISA (Eurostat).
+@dlt_assets(dlt_source=educacion(), dlt_pipeline=_pipeline_motherduck("educacion"), name="educacion", group_name="ingesta_mensual")
+def educacion_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Turismo: FRONTUR, EGATUR, ocupación hotelera y de apartamentos y viviendas turísticas (INE).
+@dlt_assets(dlt_source=turismo(), dlt_pipeline=_pipeline_motherduck("turismo"), name="turismo", group_name="ingesta_mensual")
+def turismo_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Demografía: natalidad, mortalidad, fecundidad, hogares y población por origen (INE, MNP/IDB/ECP).
+@dlt_assets(dlt_source=demografia(), dlt_pipeline=_pipeline_motherduck("demografia"), name="demografia", group_name="ingesta_mensual")
+def demografia_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Clima: inventario GEI desde 1990 (Eurostat), población (demo_gind) y series REE desde 2007.
+@dlt_assets(dlt_source=clima(), dlt_pipeline=_pipeline_motherduck("clima"), name="clima", group_name="ingesta_mensual")
+def clima_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Empresas: DIRCE, sociedades mercantiles, concursos, EPA por situación profesional (INE) e I+D, tamaño y quiebras (Eurostat).
+@dlt_assets(dlt_source=empresas(), dlt_pipeline=_pipeline_motherduck("empresas"), name="empresas", group_name="ingesta_mensual")
+def empresas_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Sistema sanitario: listas de espera SISLE-SNS (PDF semestrales) y gasto sanitario público (EGSP)
+# del Ministerio de Sanidad, y recursos y gasto sanitario de Eurostat.
+@dlt_assets(dlt_source=sanidad(), dlt_pipeline=_pipeline_motherduck("sanidad"), name="sanidad", group_name="ingesta_mensual")
+def sanidad_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Resultados electorales oficiales (Interior, infoelectoral): Congreso, Municipales y Europeas.
+# Al celebrarse unas elecciones nuevas hay que añadirlas a PROCESOS en ingestion/elecciones.py.
+@dlt_assets(dlt_source=elecciones(), dlt_pipeline=_pipeline_motherduck("elecciones"), name="elecciones", group_name="ingesta_mensual")
+def elecciones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
+
+
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "mercado", "pensiones", "renta", "sanidad", "turismo", "vivienda"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -240,6 +325,10 @@ class _Translator(DagsterDbtTranslator):
         # cuyo key por defecto es dlt_<source>_<recurso>.
         if dbt_resource_props["resource_type"] == "source":
             nombre = dbt_resource_props["name"]
+            # Temas con fuente dlt propia: la source dbt raw_<tema> se carga con el pipeline <tema>
+            tema = dbt_resource_props.get("source_name", "").removeprefix("raw_")
+            if tema in PIPELINE_POR_TEMA:
+                return AssetKey(f"dlt_{tema}_{nombre}")
             fuente = "ine" if nombre.startswith("ine_") else "eurostat"
             return AssetKey(f"dlt_{fuente}_{nombre}")
         return super().get_asset_key(dbt_resource_props)
@@ -298,7 +387,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

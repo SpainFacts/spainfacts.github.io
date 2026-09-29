@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: raw_mercado
+    description: "Mercado laboral y precios (ingestion/mercado.py): EPA e IPC del INE, paro e IPCA de Eurostat y paro registrado del SEPE"
+    schema: raw
+    tables:
+      - name: ine_epa_tasas_provincia
+        description: "INE tabla 65349 (EPA): tasas de actividad, paro y empleo por provincia y sexo, trimestral desde 2002."
+      - name: ine_epa_paro_edad_ccaa
+        description: "INE tabla 65334 (EPA): tasas de paro por grupos de edad (menores de 25, 25-54, 55 y más...), sexo y comunidad, trimestral."
+      - name: ine_epa_paro_nacionalidad
+        description: "INE tabla 65336 (EPA): tasas de paro por nacionalidad (española, extranjera UE y no UE), sexo y comunidad, trimestral."
+      - name: ine_epa_paro_formacion
+        description: "INE tabla 66000 (EPA): tasas de paro por nivel de formación alcanzado, sexo y edad, anual desde 2014."
+      - name: ine_epa_parados_busqueda
+        description: "INE tabla 65236 (EPA): parados por tiempo de búsqueda de empleo y sexo (miles y % del total), trimestral."
+      - name: ine_epa_hogares_paro
+        description: "INE tabla 65276 (EPA): % de hogares con al menos un activo en los que todos / al menos la mitad / ninguno de los activos están en paro, por comunidad, trimestral."
+      - name: ine_epa_asalariados_contrato
+        description: "INE tabla 65194 (EPA): asalariados por sexo y tipo de contrato (indefinido, temporal y subtipos), miles y %, trimestral."
+      - name: ine_epa_parcial_motivo
+        description: "INE tabla 65152 (EPA): ocupados a tiempo parcial por motivo de la jornada parcial, sexo y edad (miles), trimestral."
+      - name: ine_ipc_especiales
+        description: "INE tabla 76130 (IPC base 2025): índices y tasas de los grupos especiales (subyacente, productos energéticos, alimentos no elaborados...), mensual desde 2002."
+      - name: ine_ipc_ccaa_variacion
+        description: "INE tabla 76140 (IPC): tasas de variación del índice general por comunidad autónoma, mensual (la API da desde 2002)."
+      - name: ine_ipc_ponderaciones
+        description: "INE tabla 76156 (IPC): ponderaciones (por mil) de los 13 grupos ECOICOP v2, anual."
+      - name: eurostat_paro_mensual
+        description: "Eurostat une_rt_m: tasa de paro mensual desestacionalizada (total y menores de 25) de ES, EU27_2020, EA20, DE, FR, IT y PT."
+      - name: eurostat_ipca
+        description: "Eurostat prc_hicp_minr (ECOICOP v2): IPCA general, tasa anual (RCH_A) e índice 2015=100 (I15), de ES, EU27_2020, EA20, DE, FR, IT y PT."
+      - name: sepe_paro_municipios
+        description: "SEPE, paro registrado por municipio y mes desde 2016 (datos abiertos), por sexo y edad y por sector; las cifras de 1 a 4 personas vienen ocultas (oculto = true, NULL)."
+      - name: sepe_paro_provincias
+        description: "SEPE, paro registrado por provincia y mes desde 2006, suma de los municipios (cifras ocultas '<5' contadas como 2)."
+      - name: ine_ipc_energia
+        description: "INE tabla 76128 (IPC, subclases ECOICOP v2): índice y tasas de electricidad (desde 2002), gas natural, hidrocarburos licuados, combustibles líquidos, gasóleo y gasolina (desde 2017)."
+      - name: ine_ipc_ponderaciones_energia
+        description: "INE tablas 76159 y 76161: ponderaciones (por mil) de las subclases energéticas y del grupo especial Productos energéticos, año en curso."
+      - name: ce_boletin_petrolero
+        description: "Comisión Europea, Weekly Oil Bulletin (histórico): precio semanal con impuestos (€/1000 l) de gasolina 95, gasóleo de automoción, gasóleo de calefacción y GLP, España (ES) y media ponderada de la UE (EU), desde 2005."
+      - name: eurostat_precio_electricidad_hogares
+        description: "Eurostat nrg_pc_204: precio de la electricidad para hogares, banda DC (2.500-4.999 kWh/año), €/kWh con todos los impuestos, semestral desde 2007."
+      - name: eurostat_precio_gas_hogares
+        description: "Eurostat nrg_pc_202: precio del gas natural para hogares, banda D2 (20-199 GJ/año), €/kWh con todos los impuestos, semestral desde 2007."

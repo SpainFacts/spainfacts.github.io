@@ -1,5 +1,8 @@
 ---
+description: "De dónde sale el dinero público: impuestos y cotizaciones sociales en España, por habitante, descontada la inflación y en porcentaje del PIB."
 title: Ingresos Públicos y Recaudación Tributaria
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,5 +1,8 @@
 ---
+description: "Censo de los observatorios públicos de España: cuántos hay, cuándo se crearon, si siguen activos y qué ámbito cubren."
 title: Observatorios Públicos
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 # Observatorios Públicos en España
