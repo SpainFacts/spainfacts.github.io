@@ -1,6 +1,6 @@
 ---
 title: Observatorios públicos
-description: "Censo de los observatorios públicos de España: cuántos hay, qué administración los crea, cuándo nacieron, cuántos siguen activos y cuántos hay por habitante en cada comunidad."
+description: "Censo de los observatorios públicos de España: cuántos hay, qué administración los crea, cuándo nacieron, cuántos siguen activos, cuántos hay por habitante en cada comunidad y qué partido gobernaba cuando se crearon."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -86,11 +86,87 @@ SELECT
     nombre,
     nivel,
     coalesce(comunidad, '') AS comunidad,
+    coalesce(municipio, '') AS municipio,
     anio_creacion,
+    coalesce(partido, '') AS partido,
     estado,
     tipo
 FROM mother.observatorios_detalle
 ORDER BY nombre
+```
+
+```sql partidos
+-- Observatorios con partido atribuido, por familia política y nivel
+SELECT
+    partido,
+    any_value(color_partido) AS color,
+    nivel,
+    count(*) AS observatorios
+FROM mother.observatorios_detalle
+WHERE partido IS NOT NULL
+GROUP BY partido, nivel
+ORDER BY sum(count(*)) OVER (PARTITION BY partido) DESC, nivel
+```
+
+```sql partidos_colores
+SELECT partido, any_value(color_partido) AS color, count(*) AS n
+FROM mother.observatorios_detalle
+WHERE partido IS NOT NULL
+GROUP BY partido
+ORDER BY n DESC
+```
+
+```sql cobertura
+SELECT
+    count(*) FILTER (WHERE partido IS NOT NULL) AS atribuidos,
+    count(*) FILTER (WHERE anio_creacion IS NOT NULL) AS con_anio,
+    count(*) AS total,
+    count(*) FILTER (WHERE partido IS NOT NULL AND cambio_en_el_anio) AS dudosos,
+    count(*) FILTER (WHERE metodo_partido = 'Diputación o cabildo (sin datos)') AS provinciales,
+    min(anio_creacion) FILTER (WHERE partido IS NOT NULL) AS desde
+FROM mother.observatorios_detalle
+```
+
+```sql por_anio_gobierno
+-- Observatorios creados por cada año de gobierno, estatal y autonómico (desde el
+-- primer año con observatorios fechados): mide el ritmo, no el total, porque unos
+-- partidos han gobernado más años o más comunidades que otros
+WITH desde AS (
+    SELECT make_date(CAST(min(anio_creacion) AS INTEGER), 1, 1) AS d FROM mother.observatorios_detalle WHERE partido IS NOT NULL
+),
+anios AS (
+    SELECT
+        CASE g.nivel WHEN 'estatal' THEN 'Estatal' ELSE 'Autonómico' END AS nivel,
+        g.familia AS partido,
+        sum(date_diff('day', greatest(g.desde, (SELECT d FROM desde)), least(coalesce(g.hasta, current_date), current_date)) / 365.25) AS anios_gobierno
+    FROM mother.gobiernos_presidentes g
+    WHERE coalesce(g.hasta, current_date) > (SELECT d FROM desde)
+    GROUP BY ALL
+),
+obs AS (
+    SELECT nivel, partido, count(*) AS observatorios
+    FROM mother.observatorios_detalle
+    WHERE partido IS NOT NULL AND nivel IN ('Estatal', 'Autonómico')
+    GROUP BY ALL
+)
+SELECT
+    a.nivel,
+    a.partido,
+    coalesce(o.observatorios, 0) AS observatorios,
+    a.anios_gobierno,
+    coalesce(o.observatorios, 0) / a.anios_gobierno AS por_anio
+FROM anios a
+LEFT JOIN obs o USING (nivel, partido)
+WHERE a.anios_gobierno >= 2
+ORDER BY a.nivel DESC, por_anio DESC
+```
+
+```sql estatal_anio
+SELECT CAST(anio_creacion AS INTEGER) AS anio, partido, count(*) AS observatorios
+FROM mother.observatorios_detalle
+WHERE nivel = 'Estatal' AND partido IS NOT NULL
+GROUP BY ALL
+ORDER BY anio
 ```
 
 # 🔍 Observatorios públicos
@@ -163,7 +239,7 @@ Por nivel de la administración. El censo solo marca como cerrados {formatNumber
 
 ## Por comunidad autónoma
 
-Observatorios autonómicos, provinciales y locales cuyo ámbito identifica la comunidad, por millón de habitantes (otros {formatNumber(resumen[0]?.sin_comunidad, 0)} observatorios regionales o locales del censo no indican su comunidad y no cuentan aquí).
+Observatorios autonómicos, provinciales y locales de cada comunidad, por millón de habitantes. La comunidad sale del ámbito que indica el censo o, si no lo dice, del nombre del observatorio: el municipio (cruzado con los del INE), la isla o provincia, o el gentilicio ("Andaluz", "Galego"...). Quedan {formatNumber(resumen[0]?.sin_comunidad, 0)} sin ubicar porque su nombre no permite saberlo ("Observatorio Social", "Observatorio del Agua"...).
 
 <AreaMap
     data={por_ccaa}
@@ -191,17 +267,54 @@ Observatorios autonómicos, provinciales y locales cuyo ámbito identifica la co
     <Column id=activos title="Activos confirmados" fmt='0'/>
 </DataTable>
 
+## Quién gobernaba cuando se crearon
+
+Cada observatorio con año de creación se atribuye al partido que gobernaba la administración que lo creó a mitad de ese año: el Gobierno de España para los estatales, la presidencia de la comunidad para los autonómicos y la alcaldía para los municipales. Así se atribuyen {formatNumber(cobertura[0]?.atribuidos, 0)} de los {formatNumber(cobertura[0]?.total, 0)} observatorios del censo: el resto no tiene fecha de creación, es de una diputación o cabildo ({formatNumber(cobertura[0]?.provinciales, 0)}, sin datos de quién los presidía) o no se puede ubicar. En {formatNumber(cobertura[0]?.dudosos, 0)} casos el gobierno cambió ese mismo año y la atribución es menos segura.
+
+<BarChart
+    data={partidos}
+    x=partido
+    y=observatorios
+    series=nivel
+    swapXY=true
+    sort=false
+    colorPalette={['#0f766e', '#6366f1', '#f59e0b', '#94a3b8']}
+    title="Observatorios creados según el partido que gobernaba (con año de creación conocido)"
+/>
+
+Contar sin más favorece a quien más ha gobernado. Por eso la tabla divide los observatorios estatales y autonómicos entre los años que cada partido ha gobernado desde {cobertura[0]?.desde} (sumando comunidades en el caso autonómico). Aun así, el censo documenta mejor los observatorios recientes, lo que pesa más en los partidos que gobiernan ahora.
+
+<DataTable data={por_anio_gobierno} rows=20>
+    <Column id=nivel title="Nivel"/>
+    <Column id=partido title="Partido del presidente"/>
+    <Column id=observatorios title="Observatorios creados" fmt='0'/>
+    <Column id=anios_gobierno title="Años de gobierno" fmt='0.0'/>
+    <Column id=por_anio title="Por año de gobierno" fmt='0.00'/>
+</DataTable>
+
+<BarChart
+    data={estatal_anio}
+    x=anio
+    y=observatorios
+    series=partido
+    xFmt='0'
+    seriesColors={Object.fromEntries(partidos_colores.map(d => [d.partido, d.color]))}
+    title="Observatorios estatales creados cada año, según el partido del Gobierno de España"
+/>
+
 ## Todos los observatorios
 
 <DataTable data={listado} rows=15 search=true>
     <Column id=nombre title="Observatorio" wrap=true/>
     <Column id=nivel title="Nivel"/>
     <Column id=comunidad title="Comunidad"/>
+    <Column id=municipio title="Municipio"/>
     <Column id=anio_creacion title="Creado" fmt='0'/>
+    <Column id=partido title="Gobernaba"/>
     <Column id=estado title="Estado"/>
     <Column id=tipo title="Tipo"/>
 </DataTable>
 
 ---
 
-**Fuente:** [observatoriospublicos.es](https://observatoriospublicos.es/), censo ciudadano de observatorios de las administraciones públicas españolas. El nivel y la comunidad se deducen del ámbito que indica el censo; el estado "Sin información" significa que el censo no dice si el observatorio sigue activo.
+**Fuente:** [observatoriospublicos.es](https://observatoriospublicos.es/), censo ciudadano de observatorios de las administraciones públicas españolas. El nivel y la comunidad se deducen del ámbito que indica el censo y, si no lo indica, del nombre del observatorio (municipios del INE, islas, provincias y gentilicios). El estado "Sin información" significa que el censo no dice si el observatorio sigue activo. Partido: presidencias del Gobierno de España y de las comunidades autónomas revisadas a partir de Wikidata y de las fuentes oficiales, y alcaldes del Sistema de Información Local del Ministerio de Política Territorial ([quién gobierna cada municipio](/territorios/municipios)).

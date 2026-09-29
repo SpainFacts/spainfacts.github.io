@@ -40,3 +40,14 @@ seeds:
     columns:
       - name: nombre_ine
         tests: [not_null, unique]
+  - name: gobiernos_presidentes
+    description: "Presidencias del Gobierno de España (nivel estatal, cod 00) y de cada comunidad y ciudad autónoma (cod INE) desde 1977/1980, con la familia política del presidente (mismas familias que partidos_familias). Revisado a mano a partir de Wikidata (P39) y de las fuentes oficiales; 'hasta' vacío = en el cargo."
+    config:
+      column_types: {nivel: varchar, cod: varchar, desde: date, hasta: date, presidente: varchar, familia: varchar, nota: varchar}
+    columns:
+      - name: familia
+        tests: [not_null]
+  - name: observatorios_claves_territorio
+    description: "Patrones (regex sobre el nombre en minúsculas y sin tildes) que ubican un observatorio en una comunidad (gentilicios) o en una isla/provincia."
+    config:
+      column_types: {patron: varchar, cod_prov: varchar, cod_ccaa: varchar, nota: varchar}

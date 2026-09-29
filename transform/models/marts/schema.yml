@@ -74,7 +74,7 @@ models:
       - name: rango_edad
         tests: [not_null]
   - name: observatorios_detalle
-    description: "Observatorios públicos con nivel de la administración (estatal, autonómico, provincial o insular, local), comunidad cuando el ámbito la identifica, año de creación, estado (Activo, Inactivo o Sin información) y tipo (público o mixto)."
+    description: "Observatorios públicos con nivel de la administración, ubicación (comunidad, provincia y municipio a partir del ámbito o del nombre), año de creación, estado (Activo, Inactivo o Sin información), tipo y partido que gobernaba la administración que lo creó (Gobierno de España, presidencia autonómica o alcaldía) a 1 de julio del año de creación."
   - name: observatorios
     description: "Censo de observatorios públicos (observatoriospublicos.es)"
     columns:

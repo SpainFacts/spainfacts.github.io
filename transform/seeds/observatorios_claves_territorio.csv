@@ -1,0 +1,29 @@
+patron,cod_prov,cod_ccaa,nota
+andaluz|andalucia,,01,
+aragones|aragon,,02,
+asturias|asturian,,03,
+balear|eivissa|ibiza|formentera,,04,
+mallorca,07,04,isla
+menorca,07,04,isla
+canari,,05,
+tenerife|la palma|la gomera|el hierro,38,05,islas de la provincia de Santa Cruz de Tenerife
+gran canaria|lanzarote|fuerteventura,35,05,islas de la provincia de Las Palmas
+cantabri|saja|besaya|liebana,,06,
+castilla y leon|castellano y leones|castellanoleones,,07,
+castilla-la mancha|castilla la mancha|castellano-mancheg|castellanomanchego,,08,
+catalu|catalan|catala,,09,
+valencian|comunitat valenciana,,10,
+extremen|extremadura,,11,
+galicia|galleg|galeg,,12,
+madrilen|comunidad de madrid,,13,
+murcia,,14,
+navarr|nafarroa,,15,
+vasc|euskadi|euskal,,16,
+rioja,,17,
+ceuta,,18,
+melilla,,19,
+bizkaia|vizcaya,48,16,provincia
+gipuzkoa|guipuzcoa,20,16,provincia
+araba|alava,01,16,provincia
+marina alta|marina baixa,03,10,comarcas de Alicante
+coruñes|corunes,15,12,gentilicio de A Coruña
