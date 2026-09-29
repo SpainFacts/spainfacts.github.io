@@ -73,6 +73,8 @@ models:
     columns:
       - name: rango_edad
         tests: [not_null]
+  - name: observatorios_detalle
+    description: "Observatorios públicos con nivel de la administración (estatal, autonómico, provincial o insular, local), comunidad cuando el ámbito la identifica, año de creación, estado (Activo, Inactivo o Sin información) y tipo (público o mixto)."
   - name: observatorios
     description: "Censo de observatorios públicos (observatoriospublicos.es)"
     columns:
