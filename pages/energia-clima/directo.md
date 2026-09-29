@@ -28,7 +28,7 @@ Cuánta electricidad se está consumiendo en este momento en España, con qué t
 
 ## Qué muestra cada dato
 
-**Tres sistemas eléctricos, no uno.** España tiene tres sistemas gestionados por separado: el **peninsular**, el **balear** y el **canario** (Ceuta y Melilla son otros dos sistemas aislados, muy pequeños, que no aparecen aquí). La Península y Baleares están unidas por un cable submarino; Canarias está completamente aislada y cada isla (o pareja de islas) funciona casi como un sistema propio, por eso depende tanto del gasóleo y el fuel.
+**Cinco sistemas eléctricos, no uno.** España tiene cinco sistemas gestionados por separado: el **peninsular**, el **balear**, el **canario** y los de **Ceuta** y **Melilla**, dos sistemas aislados muy pequeños que funcionan con motores diésel y turbinas de gas. **España (total)** es la suma de todos que publica Red Eléctrica. La Península y Baleares están unidas por un cable submarino; Canarias está completamente aislada y cada isla (o pareja de islas) funciona casi como un sistema propio, por eso depende tanto del gasóleo y el fuel.
 
 **Demanda (MW).** Potencia media que se consume en el sistema durante el intervalo de 5 minutos, medida en barras de central (incluye las pérdidas de la red, no el autoconsumo solar de tejados, que reduce la demanda que ve REE).
 

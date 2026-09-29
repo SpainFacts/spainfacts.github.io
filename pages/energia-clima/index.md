@@ -302,7 +302,7 @@ ORDER BY año ASC, sector ASC
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">El Sistema Eléctrico, Ahora</h3>
         <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de la Península, Baleares y Canarias, intercambios con los países vecinos y el precio de la luz.
+            En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de España, la Península, Baleares, Canarias, Ceuta y Melilla, intercambios con los países vecinos y el precio de la luz.
         </p>
     </div>
     <a href="/energia-clima/directo" class="text-sm font-semibold text-teal-600 dark:text-teal-400 hover:underline inline-flex items-center">

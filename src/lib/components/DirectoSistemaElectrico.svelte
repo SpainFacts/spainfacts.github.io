@@ -1,6 +1,6 @@
 <script>
-    // "El sistema eléctrico, ahora": mapa de los tres sistemas eléctricos
-    // (Península, Baleares, Canarias) con intercambios internacionales como
+    // "El sistema eléctrico, ahora": mapa de los sistemas eléctricos (total
+    // nacional, Península, Baleares, Canarias, Ceuta y Melilla) con intercambios internacionales como
     // flechas, tabla con demanda / % renovable / gCO2/kWh, precio y mix de 24 h.
     //
     // Datos: consulta el Cloudflare Worker `spainfacts-ree-directo` cada 5 min.
@@ -17,9 +17,12 @@
     export let intervaloMs = REE_DIRECTO_INTERVALO_MS;
 
     const SISTEMAS = [
+        { id: 'nacional', nombre: 'España (total)' },
         { id: 'peninsula', nombre: 'Península' },
         { id: 'baleares', nombre: 'Baleares' },
         { id: 'canarias', nombre: 'Canarias' },
+        { id: 'ceuta', nombre: 'Ceuta' },
+        { id: 'melilla', nombre: 'Melilla' },
     ];
 
     // Tecnologías del gráfico apilado (orden de abajo arriba) y sus colores.
@@ -173,7 +176,7 @@
     const cx = (lon) => CAN.x0 + (lon - CAN.lonMin) * CAN.cos * CAN.esc;
     const cy = (lat) => CAN_Y0 + 18 + (CAN.latMax - lat) * CAN.esc;
 
-    let formas = { peninsula: '', baleares: '', canarias: '', otros: '' };
+    let formas = { peninsula: '', baleares: '', canarias: '', ceuta: '', melilla: '' };
 
     function camino(geom, fx, fy) {
         const polys = geom.type === 'Polygon' ? [geom.coordinates] : geom.coordinates;
@@ -214,6 +217,9 @@
     $: pen = datos.sistemas.peninsula?.ultimo ?? null;
     $: bal = datos.sistemas.baleares?.ultimo ?? null;
     $: can = datos.sistemas.canarias?.ultimo ?? null;
+    $: ceu = datos.sistemas.ceuta?.ultimo ?? null;
+    $: mel = datos.sistemas.melilla?.ultimo ?? null;
+    $: nacional = datos.sistemas.nacional?.ultimo ?? null;
 
     // Saldo por frontera: > 0 = España importa. Se usa |valor| para no depender del signo con que se guarden las exportaciones.
     const saldo = (u, pais) => {
@@ -249,6 +255,12 @@
         { id: 'peninsula', nombre: 'Península', u: pen, x: px(-3.7), y: py(40.1) },
         { id: 'baleares', nombre: 'Baleares', u: bal, x: px(3.1), y: py(38.75) },
         { id: 'canarias', nombre: 'Canarias', u: can, x: CAN.x0 + 58, y: CAN_Y0 - 52 },
+        { id: 'nacional', nombre: 'España (total)', u: nacional, x: px(4.3), y: py(41.55) },
+    ];
+    // Ceuta y Melilla: etiqueta compacta junto a su contorno (son muy pequeñas a esta escala)
+    $: etiquetasCiudades = [
+        { id: 'ceuta', nombre: 'Ceuta', u: ceu, x: px(-5.32), y: py(35.89), dx: 12, anchor: 'start' },
+        { id: 'melilla', nombre: 'Melilla', u: mel, x: px(-2.94), y: py(35.29), dx: 8, anchor: 'start' },
     ];
     const valorModo = (u, m) =>
         !u ? '—' : m === 'renovables' ? `${fmt(u.pct_renovable, 0)} % renov.` : `${fmt(u.intensidad_gco2_kwh, 0)} g/kWh`;
@@ -324,15 +336,16 @@
     onMount(async () => {
         try {
             const geo = await (await fetch(geoUrl)).json();
-            const f = { peninsula: [], baleares: [], canarias: [], otros: [] };
+            const f = { peninsula: [], baleares: [], canarias: [], ceuta: [], melilla: [] };
             for (const ft of geo.features || []) {
                 const cod = ft.properties?.cod_ccaa;
                 if (cod === '05') f.canarias.push(camino(ft.geometry, cx, cy));
                 else if (cod === '04') f.baleares.push(camino(ft.geometry, px, py));
-                else if (cod === '18' || cod === '19') f.otros.push(camino(ft.geometry, px, py));
+                else if (cod === '18') f.ceuta.push(camino(ft.geometry, px, py));
+                else if (cod === '19') f.melilla.push(camino(ft.geometry, px, py));
                 else f.peninsula.push(camino(ft.geometry, px, py));
             }
-            formas = { peninsula: f.peninsula.join(''), baleares: f.baleares.join(''), canarias: f.canarias.join(''), otros: f.otros.join('') };
+            formas = { peninsula: f.peninsula.join(''), baleares: f.baleares.join(''), canarias: f.canarias.join(''), ceuta: f.ceuta.join(''), melilla: f.melilla.join('') };
         } catch {
             /* sin contorno: se ven igualmente flechas, etiquetas y tabla */
         }
@@ -391,13 +404,14 @@
                 <g class="fill-gray-400 dark:fill-gray-500" font-size="12" letter-spacing="2" font-weight="600">
                     <text x={px(0.9)} y={py(44.15)} text-anchor="middle">FRANCIA</text>
                     <text x={px(-10.4)} y={py(41.3)} text-anchor="middle" transform="rotate(-90 {px(-10.4)} {py(41.3)})">PORTUGAL</text>
-                    <text x={px(-3.2)} y={py(35.15)} text-anchor="middle">MARRUECOS</text>
+                    <text x={px(1.0)} y={py(35.2)} text-anchor="middle">MARRUECOS</text>
                 </g>
 
                 {#if formas.peninsula}
                     <path d={formas.peninsula} fill={colorSistema(pen) ?? 'url(#sse-sin-dato)'} class="stroke-white dark:stroke-gray-900" stroke-width="0.5" on:click={() => (seleccion = 'peninsula')} role="presentation" style="cursor:pointer" />
                     <path d={formas.baleares} fill={colorSistema(bal) ?? 'url(#sse-sin-dato)'} class="stroke-gray-500 dark:stroke-gray-400" stroke-width="0.5" on:click={() => (seleccion = 'baleares')} role="presentation" style="cursor:pointer" />
-                    <path d={formas.otros} class="fill-gray-300 dark:fill-gray-700" />
+                    <path d={formas.ceuta} fill={colorSistema(ceu) ?? 'url(#sse-sin-dato)'} class="stroke-gray-600 dark:stroke-gray-300" stroke-width="1.5" on:click={() => (seleccion = 'ceuta')} role="presentation" style="cursor:pointer" />
+                    <path d={formas.melilla} fill={colorSistema(mel) ?? 'url(#sse-sin-dato)'} class="stroke-gray-600 dark:stroke-gray-300" stroke-width="1.5" on:click={() => (seleccion = 'melilla')} role="presentation" style="cursor:pointer" />
                 {/if}
 
                 <!-- Recuadro de Canarias -->
@@ -451,6 +465,12 @@
                         <text x={e.x} y={e.y + 39} text-anchor="middle" font-size="10.5" font-weight="600" class="fill-gray-700 dark:fill-gray-300">{valorModo(e.u, modoColor)}</text>
                     </g>
                 {/each}
+                {#each etiquetasCiudades as e (e.id)}
+                    <g on:click={() => (seleccion = e.id)} role="presentation" style="cursor:pointer">
+                        <text x={e.x + e.dx} y={e.y - 2} text-anchor={e.anchor} font-size="10.5" font-weight="700" class="{seleccion === e.id ? 'fill-teal-700 dark:fill-teal-400' : 'fill-gray-900 dark:fill-gray-100'} stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{e.nombre}</text>
+                        <text x={e.x + e.dx} y={e.y + 10} text-anchor={e.anchor} font-size="9.5" class="fill-gray-700 dark:fill-gray-300 stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{e.u ? `${fmt(e.u.demanda_mw, 0)} MW · ${valorModo(e.u, modoColor)}` : 'sin datos'}</text>
+                    </g>
+                {/each}
             </svg>
 
             <!-- Leyenda -->
@@ -490,7 +510,7 @@
                         {#each SISTEMAS as s (s.id)}
                             {@const u = datos.sistemas[s.id]?.ultimo}
                             <tr
-                                class="border-t border-gray-100 dark:border-gray-800 cursor-pointer {seleccion === s.id ? 'bg-teal-50 dark:bg-teal-950/40' : 'hover:bg-gray-50 dark:hover:bg-gray-800/40'}"
+                                class="border-t border-gray-100 dark:border-gray-800 cursor-pointer {s.id === 'nacional' ? 'border-b-2 border-b-gray-200 dark:border-b-gray-700' : ''} {seleccion === s.id ? 'bg-teal-50 dark:bg-teal-950/40' : 'hover:bg-gray-50 dark:hover:bg-gray-800/40'}"
                                 on:click={() => (seleccion = s.id)}
                             >
                                 <td class="px-2 sm:px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">
@@ -552,7 +572,7 @@
     <div class="mt-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-3">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
             <p class="font-semibold text-gray-900 dark:text-white text-sm mb-0">Generación por tecnología en las últimas 24 horas · {SISTEMAS.find((s) => s.id === seleccion)?.nombre} (MW)</p>
-            <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-xs">
+            <div class="inline-flex flex-wrap rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-xs">
                 {#each SISTEMAS as s (s.id)}
                     <button class="px-2.5 py-1 {seleccion === s.id ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (seleccion = s.id)}>{s.nombre}</button>
                 {/each}

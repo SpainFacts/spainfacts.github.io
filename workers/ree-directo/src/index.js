@@ -4,7 +4,8 @@
  * Proxy "en directo" del sistema eléctrico español para https://spainfacts.org.
  * En cada petición (con caché de 5 minutos en el borde de Cloudflare):
  *   1. Descarga de Red Eléctrica (REE) la curva de demanda y generación cada
- *      5 minutos de Península, Baleares y Canarias (hoy y ayer, para tener 24 h),
+ *      5 minutos de España (total nacional), Península, Baleares, Canarias, Ceuta y
+ *      Melilla (hoy y ayer, para tener 24 h),
  *      los coeficientes de emisión de CO2 de cada sistema (caché 24 h) y los
  *      precios del mercado spot y del PVPC de hoy.
  *   2. Quita el envoltorio JSONP, normaliza los campos a los MISMOS nombres que la
@@ -37,9 +38,15 @@ const ORIGENES_POR_DEFECTO = [
 ];
 
 export const SISTEMAS = {
+    // Total nacional que publica el propio REE (suma de todos los sistemas)
+    nacional: { servicio: 'Peninsula', curva: 'NACIONALAU', tz: 'Europe/Madrid' },
     peninsula: { servicio: 'Peninsula', curva: 'DEMANDAAU', tz: 'Europe/Madrid' },
     baleares: { servicio: 'Baleares', curva: 'BALEARESAU', tz: 'Europe/Madrid' },
     canarias: { servicio: 'Canarias', curva: 'CANARIASAU', tz: 'Atlantic/Canary' },
+    // Ceuta y Melilla: sistemas aislados (motores diésel, gas y residuos); el visor los sirve
+    // desde el servicio de la península.
+    ceuta: { servicio: 'Peninsula', curva: 'CEUTAAU', tz: 'Europe/Madrid' },
+    melilla: { servicio: 'Peninsula', curva: 'MELILLAAU', tz: 'Europe/Madrid' },
 };
 
 // Coeficientes (t CO2/MWh) de respaldo por si el servicio de REE no responde.
@@ -50,6 +57,9 @@ const COEF_RESPALDO = {
     peninsula: { cc: 0.37, car: 0.95, vap: 0.56, gf: 0.7, cogenResto: 0.28, aut: 0.27, cogen: 0.38, tnr: 0.38, resid: 0.24 },
     baleares: { cc: 0.41, car: 1.05, genAux: 0.68, residNr: 0.24, tnr: 0.37, gas: 0.95, cogen: 0.38, die: 0.68, resid: 0.24 },
     canarias: { cc: 0.6, cogen: 0.41, vap: 0.9, die: 0.68, gas: 1.12 },
+    nacional: { gas: 1.12, cc: 0.37, die: 0.68, aut: 0.27, cogenResto: 0.28, vap: 0.56, tnr: 0.37, genAux: 0.68 },
+    ceuta: { die: 0.68, gas: 1.12 },
+    melilla: { die: 0.68, resid: 0.24, gas: 1.12 },
 };
 
 // Campos de la serie24h (subconjunto para aligerar la respuesta).
@@ -167,8 +177,11 @@ export function normalizarFila(sistema, raw, coef) {
         const v = Number(coef?.[k]);
         return Number.isFinite(v) ? v : 0;
     };
-    const pen = sistema === 'peninsula';
+    const nac = sistema === 'nacional';
+    // El total nacional tiene los mismos campos que la península más los de las islas
+    const pen = sistema === 'peninsula' || nac;
     const bal = sistema === 'baleares';
+    const cym = sistema === 'ceuta' || sistema === 'melilla';
 
     const eol = n('eol'), nuc = n('nuc'), gf = n('gf'), car = n('car'), cc = n('cc'), vap = n('vap');
     const hid = n('hid'), gnhd = n('gnhd'), turb = n('turb'), conb = n('conb');
@@ -177,7 +190,7 @@ export function normalizarFila(sistema, raw, coef) {
     const bat = n('bat'), consBat = n('consBat'), inter = n('inter'), icb = n('icb');
     const die = n('die'), gas = n('gas'), cb = n('cb'), fot = n('fot'), tnr = n('tnr'), trn = n('trn');
     const otrRen = n('otrRen'), resid = n('resid'), genAux = n('genAux'), cogen = n('cogen');
-    const residNr = n('residNr'), residRen = n('residRen');
+    const residNr = n('residNr'), residRen = n('residRen'), turbVap = n('turbVap');
 
     // desglose de bombeo (península ~2022+, Canarias) y solar (península 2016+)
     const hayBombeo = gnhd !== 0 || conb !== 0 || turb !== 0;
@@ -213,16 +226,16 @@ export function normalizarFila(sistema, raw, coef) {
         nuclear: pen ? nuc : 0,
         carbon: car,
         ciclo_combinado: cc,
-        cogeneracion_residuos: pen ? cogenPen : bal ? cogen + residNr + resid : 0,
+        cogeneracion_residuos: pen ? cogenPen : bal ? cogen + residNr + resid : cym ? resid : 0,
         turbinacion_bombeo: bal || !hayBombeo ? null : Math.max(bombeoTurbNeto, 0),
         consumo_bombeo: bal || !hayBombeo ? null : -conb + Math.max(-bombeoTurbNeto, 0),
-        baterias_descarga: pen ? bat : 0,
-        baterias_carga: pen ? -Math.min(consBat, 0) : 0,
-        diesel: pen ? 0 : die,
-        turbina_gas: pen ? 0 : gas,
-        motores_vapor: vap,
+        baterias_descarga: pen || cym ? bat : 0,
+        baterias_carga: pen || cym ? -Math.min(consBat, 0) : 0,
+        diesel: pen && !nac ? 0 : die,
+        turbina_gas: pen && !nac ? 0 : gas,
+        motores_vapor: vap + turbVap,
         otras_renovables: pen ? bio : bal ? otrRen + residRen : 0,
-        otras_no_renovables: pen ? gf : bal ? tnr + genAux : 0,
+        otras_no_renovables: nac ? gf + genAux : pen ? gf : bal ? tnr + genAux : 0,
         intercambio_neto: pen ? inter : null,
         imp_francia: frontera('impFra'), exp_francia: frontera('expFra'),
         imp_portugal: frontera('impPor'), exp_portugal: frontera('expPor'),
@@ -230,12 +243,12 @@ export function normalizarFila(sistema, raw, coef) {
         // Andorra invertida: en REE 'impAnd' es lo que SALE hacia Andorra
         imp_andorra: frontera('expAnd'), exp_andorra: frontera('impAnd'),
         // + = hacia Baleares (icb es negativo cuando sale de la península)
-        enlace_baleares: pen ? -icb : bal ? cb : null,
+        enlace_baleares: nac ? null : pen ? -icb : bal ? cb : null,
     };
 
     // emisiones (t CO2/h): campos originales × factores del propio sistema
     const co2 =
-        car * f('car') + cc * f('cc') + vap * f('vap') + gf * f('gf') + die * f('die') + gas * f('gas') +
+        car * f('car') + cc * f('cc') + (vap + turbVap) * f('vap') + gf * f('gf') + die * f('die') + gas * f('gas') +
         genAux * f('genAux') + cogen * f('cogen') + tnr * f('tnr') + resid * f('resid') + residNr * f('residNr') +
         (pen ? cogenPen * f(bio === 0 && cogenResto === 0 ? 'aut' : 'cogenResto') : 0);
 
@@ -267,9 +280,11 @@ async function coeficientes(sistema, fecha, fetchImpl) {
     const { servicio, curva } = SISTEMAS[sistema];
     try {
         const url = `${REE_DEMANDA}/WSvisionaMoviles${servicio}Rest/resources/coeficientesCO2?callback=cb&curva=${curva}&fecha=${fecha}`;
-        const bruto = quitarJsonp(await pedir(url, { ttl: TTL_COEF, fetchImpl }));
+        let bruto = quitarJsonp(await pedir(url, { ttl: TTL_COEF, fetchImpl }));
+        // El total nacional devuelve una lista de factores por instante: se usa el último
+        if (Array.isArray(bruto)) bruto = bruto[bruto.length - 1] ?? {};
         const valor = {};
-        for (const [k, v] of Object.entries(bruto || {})) valor[k.replace('factorEmisionCO2_', '')] = Number(v);
+        for (const [k, v] of Object.entries(bruto || {})) if (k !== 'ts') valor[k.replace('factorEmisionCO2_', '')] = Number(v);
         if (!Object.keys(valor).length) throw new Error('sin coeficientes');
         cacheCoef[sistema] = { t: Date.now(), valor };
         return valor;
