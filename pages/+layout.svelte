@@ -8,6 +8,9 @@
         formatMillions,
         formatThousands,
     } from "../../../../src/lib/utils.js";
+    // Mapas: no dejar alejar más allá de donde se ve todo ni arrastrarlos lejos
+    import { instalarLimitesMapas } from "../../../../src/lib/mapaLimites.js";
+    instalarLimitesMapas();
     export {
         formatNumber,
         formatCurrency,
