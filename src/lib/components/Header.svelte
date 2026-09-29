@@ -64,7 +64,7 @@
 
                 <!-- Brand Logo & Name -->
                 <a href="/" class="flex-shrink-0 flex items-center gap-2.5 group">
-                    <Logo logo="/logo16.svg" />
+                   <!-- <Logo logo="/logo16.svg" /> -->
                     <span class="font-extrabold text-lg tracking-tight text-gray-900 dark:text-white flex items-center gap-1.5">
                         Spain<span class="text-blue-600 dark:text-blue-400">Facts</span>
                     </span>
