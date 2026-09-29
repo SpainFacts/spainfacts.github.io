@@ -37,9 +37,44 @@ SELECT anio, tasa_1000 AS valor FROM l WHERE anio < (SELECT min(anio) FROM b)
 ORDER BY anio
 ```
 
+```sql vida
+SELECT CAST(anio AS INTEGER) AS anio, anios AS valor
+FROM mother.salud_esperanza_vida
+WHERE (nivel = 'pais' OR cod = '00') AND sexo = 'Ambos sexos'
+ORDER BY anio
+```
+
+```sql nacionalizaciones
+SELECT CAST(anio AS INTEGER) AS anio, nacionalizaciones, por_1000_extranjeros AS valor
+FROM mother.inmigracion_nacionalizaciones
+WHERE cod = '00' AND nacionalidad_previa = 'Total'
+ORDER BY anio
+```
+
+```sql renta
+SELECT CAST(anio AS INTEGER) AS anio, CAST(anio_renta AS INTEGER) AS anio_renta, renta_persona_real AS valor
+FROM mother.renta_ecv_ccaa
+WHERE cod = '00' AND renta_persona_real IS NOT NULL
+ORDER BY anio
+```
+
+```sql abandono
+SELECT CAST(anio AS INTEGER) AS anio, valor
+FROM mother.educacion_indicadores
+WHERE nivel = 'pais' AND indicador = 'abandono'
+ORDER BY anio
+```
+
+```sql participacion
+SELECT fecha, CAST(anio AS INTEGER) AS anio, participacion AS valor
+FROM mother.elecciones_participacion
+WHERE nivel = 'pais' AND tipo = '02'
+ORDER BY fecha
+```
+
 # 👥 Sociedad
 
-Cómo vivimos en España: la seguridad, la salud y la población que llega de fuera, con las cifras oficiales y el contexto necesario para leerlas bien.
+Cómo vivimos en España: la seguridad, la salud, la población que llega de fuera, la renta, la educación y el voto, con las cifras oficiales y el contexto necesario para leerlas bien.
 
 <Grid cols=3>
     <KpiCard
@@ -50,6 +85,61 @@ Cómo vivimos en España: la seguridad, la salud y la población que llega de fu
         source="Ministerio del Interior"
         href="/sociedad/criminalidad"
         sparklineData={crimen_serie}
+    />
+    <KpiCard
+        title="Esperanza de vida al nacer"
+        value={vida.slice(-1)[0]?.valor}
+        formattedValue="{formatNumber(vida.slice(-1)[0]?.valor, 1)} años"
+        period="en {vida.slice(-1)[0]?.anio}, una de las más altas del mundo"
+        change={vida.length > 1 ? vida.slice(-1)[0]?.valor - vida.slice(-2)[0]?.valor : null}
+        changeUnit="años"
+        changePeriod="vs año anterior"
+        direction="positive-up"
+        source="INE"
+        href="/sociedad/salud"
+        sparklineData={vida}
+    />
+    <KpiCard
+        title="Nuevos españoles"
+        value={nacionalizaciones.slice(-1)[0]?.valor}
+        formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} por 1.000 extranjeros"
+        period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} residentes obtuvieron la nacionalidad en {nacionalizaciones.slice(-1)[0]?.anio}"
+        direction="positive-up"
+        source="INE"
+        href="/sociedad/inmigracion"
+        sparklineData={nacionalizaciones}
+    />
+    <KpiCard
+        title="Renta media por persona"
+        value={renta.slice(-1)[0]?.valor}
+        formattedValue="{formatNumber(renta.slice(-1)[0]?.valor, 0)} € al año"
+        period="renta de {renta.slice(-1)[0]?.anio_renta}, descontada la inflación"
+        change={renta.length > 1 ? 100 * (renta.slice(-1)[0]?.valor / renta.slice(-2)[0]?.valor - 1) : null}
+        changePeriod="real vs año anterior"
+        direction="positive-up"
+        source="INE / ECV"
+        href="/sociedad/desigualdad"
+        sparklineData={renta}
+    />
+    <KpiCard
+        title="Abandono escolar temprano"
+        value={abandono.slice(-1)[0]?.valor}
+        formattedValue="{formatNumber(abandono.slice(-1)[0]?.valor, 1)} %"
+        period="de los jóvenes de 18 a 24 años en {abandono.slice(-1)[0]?.anio} · en {abandono[0]?.anio} era el {formatNumber(abandono[0]?.valor, 1)} %"
+        direction="positive-down"
+        source="Eurostat / EPA"
+        href="/sociedad/educacion"
+        sparklineData={abandono}
+    />
+    <KpiCard
+        title="Participación en las generales"
+        value={participacion.slice(-1)[0]?.valor}
+        formattedValue="{formatNumber(participacion.slice(-1)[0]?.valor, 1)} %"
+        period="del censo votó en {participacion.slice(-1)[0]?.anio}"
+        direction="positive-up"
+        source="Ministerio del Interior"
+        href="/sociedad/elecciones"
+        sparklineData={participacion}
     />
 </Grid>
 
