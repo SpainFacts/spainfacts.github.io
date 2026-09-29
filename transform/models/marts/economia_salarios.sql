@@ -36,7 +36,7 @@ ipc_trim as (
         make_date(year(periodo), 3 * quarter(periodo) - 2, 1) as trimestre,
         avg(valor) as ipc,
         count(*) as meses
-    from {{ ref('metricas') }}
+    from {{ ref('metricas_base') }}
     where metrica_id = 'ipc_indice'
     group by 1
 ),

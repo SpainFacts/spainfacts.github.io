@@ -5,5 +5,8 @@ SELECT
     valor,
     unidad,
     fuente,
-    url_fuente
+    url_fuente,
+    tema,
+    pagina,
+    frecuencia
 FROM metricas

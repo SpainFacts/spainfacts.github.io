@@ -9,7 +9,7 @@ with ipc_trim as (
         cast(quarter(periodo) as integer) as trimestre,
         avg(valor) as ipc,
         count(*) as meses
-    from {{ ref('metricas') }}
+    from {{ ref('metricas_base') }}
     where metrica_id = 'ipc_indice'
     group by 1, 2
 ),

@@ -82,7 +82,7 @@ con_territorio as (
 
 ipc as (
     select cast(date_trunc('month', periodo) as date) as mes, valor as ipc
-    from {{ ref('metricas') }}
+    from {{ ref('metricas_base') }}
     where metrica_id = 'ipc_indice'
 ),
 

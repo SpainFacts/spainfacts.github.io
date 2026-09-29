@@ -73,7 +73,7 @@ hipotecas as (
 ),
 
 ipc_mes as (
-    select cast(periodo as date) as fecha, valor as ipc from {{ ref('metricas') }} where metrica_id = 'ipc_indice'
+    select cast(periodo as date) as fecha, valor as ipc from {{ ref('metricas_base') }} where metrica_id = 'ipc_indice'
 ),
 
 base_ipc as (

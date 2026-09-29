@@ -43,3 +43,6 @@ data/dgt_cache/
 
 # Microdatos del Registro Central de Personal (ingestion/empleo_publico.py)
 data/empleo_cache/
+
+# dbt: carpetas de compilación paralelas (--target-path target_<x>)
+transform/target_*/

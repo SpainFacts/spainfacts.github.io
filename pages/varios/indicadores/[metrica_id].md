@@ -6,20 +6,30 @@ og:
 ---
 
 ```sql serie
-SELECT periodo, valor, nombre, unidad, fuente, url_fuente
+SELECT periodo, valor, nombre, unidad, fuente, url_fuente, tema, pagina, frecuencia,
+    CASE frecuencia
+        WHEN 'Anual' THEN strftime(periodo, '%Y')
+        WHEN 'Trimestral' THEN strftime(periodo, '%Y') || '-T' || quarter(periodo)
+        WHEN 'Semestral' THEN strftime(periodo, '%Y') || '-S' || CASE WHEN month(periodo) <= 6 THEN 1 ELSE 2 END
+        WHEN 'Mensual' THEN strftime(periodo, '%Y-%m')
+        ELSE strftime(periodo, '%d/%m/%Y')
+    END AS etiqueta
 FROM mother.metricas
 WHERE metrica_id = '${params.metrica_id}'
-ORDER BY periodo
+ORDER BY periodo DESC
 ```
 
 ```sql ultimo
 SELECT
     valor,
     unidad,
-    strftime(periodo, '%Y-%m') AS periodo,
+    etiqueta AS periodo_texto,
     nombre,
     fuente,
-    url_fuente
+    url_fuente,
+    tema,
+    pagina,
+    frecuencia
 FROM ${serie}
 ORDER BY periodo DESC
 LIMIT 1
@@ -33,7 +43,7 @@ LIMIT 1
     <BigValue
         data={ultimo}
         value=valor
-        title="Último dato ({ultimo[0].periodo})"
+        title="Último dato ({ultimo[0].periodo_texto})"
         fmt='#,##0.0'
     />
     <p>{ultimo[0].unidad}</p>
@@ -42,6 +52,8 @@ LIMIT 1
 <div>
     <p>
         <b>Fuente:</b> <a href="{ultimo[0].url_fuente}" target="_blank">{ultimo[0].fuente}</a><br/>
+        <b>Frecuencia:</b> {ultimo[0].frecuencia}<br/>
+        <b>Apartado:</b> <a href="{ultimo[0].pagina}">{ultimo[0].tema}</a> · <a href="/varios/indicadores/">Todos los indicadores</a><br/>
         <LastRefreshed prefix="Actualizado" />
     </p>
 </div>
@@ -57,6 +69,6 @@ LIMIT 1
 />
 
 <DataTable data={serie} title="Serie completa" rows=15>
-    <Column id=periodo title="Periodo" fmt='yyyy-mm' />
+    <Column id=etiqueta title="Periodo" />
     <Column id=valor title="Valor" fmt='#,##0.0' />
 </DataTable>

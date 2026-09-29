@@ -8,7 +8,7 @@ with anual as (
         cast(year(periodo) as integer) as anio,
         avg(valor) as ipc_medio,
         count(*) as meses
-    from {{ ref('metricas') }}
+    from {{ ref('metricas_base') }}
     where metrica_id = 'ipc_indice'
     group by 1
 ),

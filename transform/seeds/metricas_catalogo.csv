@@ -1,9 +1,9 @@
-metrica_id,nombre,unidad,fuente,url_fuente,cod_serie
-ipc_variacion_anual,IPC — variación anual,%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290750
-ipc_indice,IPC — índice general (base 2025),índice,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290751
-tasa_paro,Tasa de paro (EPA),%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=65219,EPA423474
-deuda_publica,Deuda pública (PDE),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,
-deuda_publica_pib,Deuda pública sobre PIB,% del PIB,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,
-gasto_publico_total,Gasto público total de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,
-ingreso_publico_total,Ingresos públicos totales de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,
-saldo_deficit_publico,Saldo presupuestario (Déficit / Superávit),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,
+metrica_id,nombre,unidad,fuente,url_fuente,cod_serie,tema,pagina,frecuencia
+ipc_variacion_anual,IPC — variación anual,%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290750,Economía,/economia/ipc/,Mensual
+ipc_indice,IPC — índice general (base 2025),índice,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=76125,IPC290751,Economía,/economia/ipc/,Mensual
+tasa_paro,Tasa de paro (EPA),%,INE,https://www.ine.es/jaxiT3/Tabla.htm?t=65219,EPA423474,Economía,/economia/paro/,Trimestral
+deuda_publica,Deuda pública (PDE),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,,Cuentas públicas,/cuentas-publicas/,Trimestral
+deuda_publica_pib,Deuda pública sobre PIB,% del PIB,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10q_ggdebt,,Cuentas públicas,/cuentas-publicas/,Trimestral
+gasto_publico_total,Gasto público total de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,,Cuentas públicas,/cuentas-publicas/gastos/,Anual
+ingreso_publico_total,Ingresos públicos totales de las AAPP,millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,,Cuentas públicas,/cuentas-publicas/ingresos/,Anual
+saldo_deficit_publico,Saldo presupuestario (Déficit / Superávit),millones €,Eurostat,https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main,,Cuentas públicas,/cuentas-publicas/,Anual

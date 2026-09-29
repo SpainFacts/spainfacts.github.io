@@ -15,7 +15,7 @@
 -- Navarra, La Rioja) y Ceuta y Melilla aparecen también como provincia.
 with ipc as (
     select cast(year(periodo) as integer) as anio, cast(month(periodo) as integer) as mes, valor as ipc
-    from {{ ref('metricas') }}
+    from {{ ref('metricas_base') }}
     where metrica_id = 'ipc_indice'
 ),
 
