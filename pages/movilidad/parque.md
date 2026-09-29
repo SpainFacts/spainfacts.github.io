@@ -33,6 +33,12 @@ FROM mother.movilidad_parque_provincia
 
 Los vehículos que están dados de alta en la Dirección General de Tráfico, es decir, los que pueden circular hoy por España: qué motor llevan, qué etiqueta ambiental tienen y cuántos años acumulan.
 
+```sql parque_mensual
+SELECT mes, turismos_1000, pct_enchufables, pct_bev, pct_sin_distintivo
+FROM mother.movilidad_parque_resumen
+ORDER BY mes
+```
+
 <Grid cols=3>
     <KpiCard
         title="Turismos en circulación"
@@ -40,22 +46,28 @@ Los vehículos que están dados de alta en la Dirección General de Tráfico, es
         formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} por 1.000 hab."
         period="{formatCompact(resumen[0]?.turismos, 1)} turismos y {formatCompact(resumen[0]?.vehiculos, 1)} vehículos de todo tipo · {resumen[0]?.mes_texto}"
         source="DGT"
+        sparklineData={parque_mensual.map(d => d.turismos_1000)}
     />
     <KpiCard
         title="Turismos enchufables"
-        value={resumen[0]?.enchufables}
-        formattedValue={formatNumber(resumen[0]?.enchufables, 0)}
-        period="{formatNumber(resumen[0]?.enchufables / resumen[0]?.turismos / 0.01, 1)} % del total · {formatNumber(resumen[0]?.bev, 0)} eléctricos puros"
+        value={parque_mensual.slice(-1)[0]?.pct_enchufables}
+        formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_enchufables, 1)} %"
+        period="de los turismos · {formatNumber(resumen[0]?.enchufables, 0)} enchufables, {formatNumber(resumen[0]?.bev, 0)} eléctricos puros"
         source="DGT"
+        sparklineData={parque_mensual.map(d => d.pct_enchufables)}
     />
     <KpiCard
         title="Turismos sin etiqueta ambiental"
-        value={resumen[0]?.sin_distintivo}
-        formattedValue={formatCompact(resumen[0]?.sin_distintivo, 1)}
-        period="{formatNumber(resumen[0]?.sin_distintivo / resumen[0]?.turismos / 0.01, 1)} % · gasolina anterior a 2000 y diésel anterior a 2006"
+        value={parque_mensual.slice(-1)[0]?.pct_sin_distintivo}
+        formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_sin_distintivo, 1)} %"
+        period="de los turismos · {formatCompact(resumen[0]?.sin_distintivo, 1)} coches · gasolina anterior a 2000 y diésel anterior a 2006"
+        direction="positive-down"
         source="DGT"
+        sparklineData={parque_mensual.map(d => d.pct_sin_distintivo)}
     />
 </Grid>
+
+<p class="text-xs text-gray-500">Las mini-gráficas empiezan en marzo de 2025: la DGT solo conserva los ficheros de parque de los últimos meses, y la serie crece con cada publicación mensual.</p>
 
 <ButtonGroup name=grupo title="Vehículo">
     <ButtonGroupItem valueLabel="Turismos" value="turismo" default />

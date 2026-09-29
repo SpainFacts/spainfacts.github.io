@@ -44,8 +44,8 @@ Dónde se puede cargar un coche eléctrico en España, según el registro oficia
     <KpiCard
         title="Rápidos (50 kW o más)"
         value={totales[0]?.puntos_rapidos}
-        formattedValue={formatNumber(totales[0]?.puntos_rapidos, 0)}
-        period="{formatNumber(totales[0]?.puntos_ultrarrapidos, 0)} de ellos de 150 kW o más"
+        formattedValue="{formatNumber(totales[0]?.puntos_rapidos / totales[0]?.puntos / 0.01, 1)} % de los puntos"
+        period="{formatNumber(totales[0]?.puntos_rapidos, 0)} puntos rápidos, {formatNumber(totales[0]?.puntos_ultrarrapidos, 0)} de ellos de 150 kW o más"
         source="NAP DGT / MITECO"
     />
     <KpiCard

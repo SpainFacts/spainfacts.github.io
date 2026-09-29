@@ -50,3 +50,5 @@ models:
     description: "Viajeros de transporte público en España por mes y modo (INE 20239)."
   - name: movilidad_transporte_ciudades
     description: "Viajeros de metro y autobús urbano por ciudad (INE 20193)."
+  - name: movilidad_parque_resumen
+    description: "Resumen mensual del parque de turismos (DGT): turismos por 1.000 hab., % enchufables, % eléctricos puros, % sin distintivo ambiental y % con más de 20 años."
