@@ -127,38 +127,72 @@ SELECT
 FROM mother.observatorios_detalle
 ```
 
-```sql por_anio_gobierno
--- Observatorios creados por cada año de gobierno, estatal y autonómico (desde el
--- primer año con observatorios fechados): mide el ritmo, no el total, porque unos
--- partidos han gobernado más años o más comunidades que otros
-WITH desde AS (
-    SELECT make_date(CAST(min(anio_creacion) AS INTEGER), 1, 1) AS d FROM mother.observatorios_detalle WHERE partido IS NOT NULL
+```sql esperados
+-- Observados frente a esperados: la creación de observatorios crece con los años (y
+-- el censo documenta mejor los recientes), así que quien gobierna ahora saldría
+-- favorecido. La tendencia de cada año se toma de los observatorios con fecha de los
+-- OTROS niveles (para los estatales, autonómicos y locales), y los observatorios de
+-- cada nivel se reparten según esa tendencia y la parte de cada año que gobernó cada
+-- partido. z: diferencia observada frente al azar (binomial, aproximación normal).
+WITH obs AS (
+    SELECT * FROM mother.observatorios_detalle WHERE anio_creacion IS NOT NULL
 ),
-anios AS (
+anios AS (SELECT CAST(unnest(range(1990, year(current_date) + 1)) AS INTEGER) AS anio),
+tendencia AS (
+    SELECT n.nivel, a.anio, count(o.nombre) AS n_ref
+    FROM (VALUES ('Estatal'), ('Autonómico')) n(nivel)
+    CROSS JOIN anios a
+    LEFT JOIN obs o ON CAST(o.anio_creacion AS INTEGER) = a.anio AND o.nivel <> n.nivel
+    GROUP BY ALL
+),
+pesos AS (
+    SELECT nivel, anio, n_ref / sum(n_ref) OVER (PARTITION BY nivel) AS w FROM tendencia
+),
+gob AS (
     SELECT
         CASE g.nivel WHEN 'estatal' THEN 'Estatal' ELSE 'Autonómico' END AS nivel,
         g.familia AS partido,
-        sum(date_diff('day', greatest(g.desde, (SELECT d FROM desde)), least(coalesce(g.hasta, current_date), current_date)) / 365.25) AS anios_gobierno
+        a.anio,
+        greatest(0, date_diff('day', greatest(CAST(g.desde AS DATE), make_date(a.anio, 1, 1)),
+            least(coalesce(CAST(g.hasta AS DATE), current_date), make_date(a.anio + 1, 1, 1)))) / 365.25
+          / CASE g.nivel WHEN 'estatal' THEN 1 ELSE 19 END AS fraccion
     FROM mother.gobiernos_presidentes g
-    WHERE coalesce(g.hasta, current_date) > (SELECT d FROM desde)
+    CROSS JOIN anios a
+),
+esperado AS (
+    SELECT g.nivel, g.partido, sum(p.w * g.fraccion) AS cuota
+    FROM gob g JOIN pesos p USING (nivel, anio)
     GROUP BY ALL
 ),
-obs AS (
-    SELECT nivel, partido, count(*) AS observatorios
-    FROM mother.observatorios_detalle
-    WHERE partido IS NOT NULL AND nivel IN ('Estatal', 'Autonómico')
+observado AS (
+    SELECT nivel, partido, count(*) AS observados
+    FROM obs WHERE nivel IN ('Estatal', 'Autonómico') AND partido IS NOT NULL
     GROUP BY ALL
-)
+),
+totales AS (SELECT nivel, sum(observados) AS total FROM observado GROUP BY nivel)
 SELECT
-    a.nivel,
-    a.partido,
-    coalesce(o.observatorios, 0) AS observatorios,
-    a.anios_gobierno,
-    coalesce(o.observatorios, 0) / a.anios_gobierno AS por_anio
-FROM anios a
-LEFT JOIN obs o USING (nivel, partido)
-WHERE a.anios_gobierno >= 2
-ORDER BY a.nivel DESC, por_anio DESC
+    e.nivel,
+    e.partido,
+    coalesce(o.observados, 0) AS observados,
+    t.total * e.cuota AS esperados,
+    coalesce(o.observados, 0) / (t.total * e.cuota) AS ratio,
+    (coalesce(o.observados, 0) - t.total * e.cuota) / sqrt(t.total * e.cuota * (1 - e.cuota)) AS z
+FROM esperado e
+JOIN totales t USING (nivel)
+LEFT JOIN observado o USING (nivel, partido)
+WHERE t.total * e.cuota >= 1
+ORDER BY e.nivel DESC, esperados DESC
+```
+
+```sql esperados_resumen
+SELECT
+    max(ratio) FILTER (WHERE nivel = 'Estatal' AND partido = 'PSOE') AS psoe_est,
+    max(ratio) FILTER (WHERE nivel = 'Estatal' AND partido = 'PP') AS pp_est,
+    max(ratio) FILTER (WHERE nivel = 'Autonómico' AND partido = 'PSOE') AS psoe_aut,
+    max(ratio) FILTER (WHERE nivel = 'Autonómico' AND partido = 'PP') AS pp_aut,
+    max(abs(z)) FILTER (WHERE nivel = 'Estatal' AND partido IN ('PSOE', 'PP')) AS z_est,
+    max(abs(z)) FILTER (WHERE nivel = 'Autonómico' AND partido IN ('PSOE', 'PP')) AS z_aut
+FROM ${esperados}
 ```
 
 ```sql estatal_anio
@@ -282,15 +316,17 @@ Cada observatorio con año de creación se atribuye al partido que gobernaba la 
     title="Observatorios creados según el partido que gobernaba (con año de creación conocido)"
 />
 
-Contar sin más favorece a quien más ha gobernado. Por eso la tabla divide los observatorios estatales y autonómicos entre los años que cada partido ha gobernado desde {cobertura[0]?.desde} (sumando comunidades en el caso autonómico). Aun así, el censo documenta mejor los observatorios recientes, lo que pesa más en los partidos que gobiernan ahora.
+Contar sin más favorece a quien más ha gobernado, y también a quien gobierna ahora: se crean cada vez más observatorios (y el censo documenta mejor los recientes). Para descontarlo, la tabla compara los observatorios **observados** con los **esperados** si cada partido hubiera seguido la tendencia del resto del censo en los años en que gobernó (para los estatales, la de los autonómicos y locales, que no dependen del Gobierno de España). Una ratio de 1 es lo esperable; 2, el doble; 0,5, la mitad.
 
-<DataTable data={por_anio_gobierno} rows=20>
+<DataTable data={esperados} rows=20>
     <Column id=nivel title="Nivel"/>
     <Column id=partido title="Partido del presidente"/>
-    <Column id=observatorios title="Observatorios creados" fmt='0'/>
-    <Column id=anios_gobierno title="Años de gobierno" fmt='0.0'/>
-    <Column id=por_anio title="Por año de gobierno" fmt='0.00'/>
+    <Column id=observados title="Observados" fmt='0'/>
+    <Column id=esperados title="Esperados por la tendencia" fmt='0.0'/>
+    <Column id=ratio title="Observados / esperados" fmt='0.00'/>
 </DataTable>
+
+Descontada la tendencia, en el Gobierno de España el PSOE crea {formatNumber(esperados_resumen[0]?.psoe_est, 2)} veces lo esperado y el PP {formatNumber(esperados_resumen[0]?.pp_est, 2)} veces: {#if esperados_resumen[0]?.z_est >= 1.96}una diferencia mayor de la que explicaría el azar, aunque con pocos casos{:else}con tan pocos casos, la diferencia no es mayor de la que podría explicar el azar{/if}. En las comunidades, el PSOE está en {formatNumber(esperados_resumen[0]?.psoe_aut, 2)} y el PP en {formatNumber(esperados_resumen[0]?.pp_aut, 2)}: {#if esperados_resumen[0]?.z_aut >= 1.96}una diferencia mayor de la que explicaría el azar{:else}una diferencia que el azar puede explicar{/if}.
 
 <BarChart
     data={estatal_anio}
