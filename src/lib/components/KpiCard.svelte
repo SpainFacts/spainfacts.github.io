@@ -1,4 +1,5 @@
 <script>
+    import Compartir from "./Compartir.svelte";
     export let title = "";
     export let value = null;
     export let formattedValue = "";
@@ -17,6 +18,33 @@
     export let href = "";
     export let source = "";
     export let sparklineData = []; // Array of numbers or objects { x, y }
+
+    // Texto que se comparte en redes: el dato con su título y periodo
+    $: textoCompartir = `${title}: ${formattedValue || value}${period ? ` (${period})` : ""} · SpainFacts`;
+
+    // Descarga en CSV de la serie de la mini-gráfica
+    function descargarCsv() {
+        const filas = (Array.isArray(sparklineData) ? sparklineData : []).filter((d) => d != null);
+        if (!filas.length) return;
+        const esObjeto = typeof filas[0] === "object";
+        const columnas = esObjeto ? Object.keys(filas[0]) : ["posicion", "valor"];
+        const celda = (v) => {
+            if (v === null || v === undefined) return "";
+            if (v instanceof Date) return v.toISOString().slice(0, 10);
+            const t = String(v);
+            return /[",\n;]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
+        };
+        const lineas = [columnas.join(",")].concat(
+            filas.map((d, i) => (esObjeto ? columnas.map((c) => celda(d[c])) : [i + 1, celda(d)]).join(","))
+        );
+        // ﻿ (BOM) para que Excel abra bien las tildes
+        const blob = new Blob(["﻿" + lineas.join("\n")], { type: "text/csv;charset=utf-8" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `${(title || "dato").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "_")}.csv`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
 
     // Format display value
     $: displayValue = formattedValue || (value !== null && value !== undefined ? value.toString() : "-");
@@ -144,6 +172,19 @@
             <div></div>
         {/if}
 
+        <div class="flex items-center gap-1.5">
+        {#if sparklinePoints}
+            <button
+                type="button"
+                on:click|stopPropagation={descargarCsv}
+                title="Descargar la serie en CSV"
+                aria-label="Descargar la serie en CSV"
+                class="rounded-md border border-gray-200 dark:border-gray-700 p-1 text-gray-500 hover:text-blue-600 hover:border-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+            >
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" /></svg>
+            </button>
+        {/if}
+        <Compartir compacto={true} titulo={title} {textoCompartir} />
         {#if href}
             <a
                 {href}
@@ -155,5 +196,6 @@
                 </svg>
             </a>
         {/if}
+        </div>
     </div>
 </div>

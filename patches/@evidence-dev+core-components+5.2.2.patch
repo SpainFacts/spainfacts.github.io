@@ -1,0 +1,300 @@
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte
+new file mode 100644
+index 0000000..84828af
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte
+@@ -0,0 +1,158 @@
++<script>
++	// SpainFacts: botones para compartir una gráfica en redes (añadido con patch-package).
++	// Comparte la URL de la página con el título de la gráfica.
++	export let titulo = undefined;
++
++	let copiado = false;
++	let aviso = '';
++	let menuAbierto = false;
++
++	const texto = () => {
++		const t = (titulo ?? '').toString().trim();
++		const pagina = typeof document !== 'undefined' ? document.title : '';
++		return t ? `${t} · SpainFacts` : pagina || 'SpainFacts';
++	};
++	const url = () => (typeof window !== 'undefined' ? window.location.href.split('#')[0] : 'https://spainfacts.org');
++
++	const REDES = [
++		{ id: 'x', nombre: 'X', href: () => `https://twitter.com/intent/tweet?text=${encodeURIComponent(texto())}&url=${encodeURIComponent(url())}` },
++		// Instagram no tiene enlace para compartir desde la web: ver compartirInstagram()
++		{ id: 'instagram', nombre: 'Instagram', especial: true },
++		{ id: 'linkedin', nombre: 'LinkedIn', href: () => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url())}` },
++		{ id: 'whatsapp', nombre: 'WhatsApp', href: () => `https://wa.me/?text=${encodeURIComponent(texto() + ' ' + url())}` },
++		{ id: 'telegram', nombre: 'Telegram', href: () => `https://t.me/share/url?url=${encodeURIComponent(url())}&text=${encodeURIComponent(texto())}` }
++	];
++
++	function abrir(red) {
++		if (red.id === 'instagram') return compartirInstagram();
++		window.open(red.href(), '_blank', 'noopener,noreferrer,width=640,height=560');
++		menuAbierto = false;
++	}
++
++	// En el móvil, el menú nativo de compartir incluye Instagram (historias, mensajes);
++	// en el ordenador se copia el enlace y se abre Instagram para pegarlo.
++	async function compartirInstagram() {
++		menuAbierto = false;
++		const movil = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
++		if (movil && navigator.share) {
++			try {
++				await navigator.share({ title: texto(), text: texto(), url: url() });
++				return;
++			} catch {
++				/* cancelado */
++			}
++		}
++		try {
++			await navigator.clipboard.writeText(url());
++			aviso = 'Enlace copiado: pégalo en Instagram';
++		} catch {
++			aviso = 'Copia el enlace de la página para pegarlo en Instagram';
++		}
++		setTimeout(() => (aviso = ''), 4000);
++		window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
++	}
++
++	async function copiar() {
++		try {
++			await navigator.clipboard.writeText(url());
++			copiado = true;
++			setTimeout(() => (copiado = false), 2000);
++		} catch {
++			window.prompt('Copia el enlace:', url());
++		}
++		menuAbierto = false;
++	}
++
++	async function compartirNativo() {
++		if (typeof navigator !== 'undefined' && navigator.share) {
++			try {
++				await navigator.share({ title: texto(), url: url() });
++				return;
++			} catch {
++				/* cancelado: se abre el menú */
++			}
++		}
++		menuAbierto = !menuAbierto;
++	}
++</script>
++
++<div class="compartir" on:mouseleave={() => (menuAbierto = false)}>
++	<button type="button" class="boton-pie" aria-haspopup="true" aria-expanded={menuAbierto} on:click={compartirNativo}>
++		<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
++			><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" /></svg
++		>
++		<span>{aviso || (copiado ? 'Enlace copiado' : 'Compartir')}</span>
++	</button>
++	{#if menuAbierto}
++		<div class="menu" role="menu">
++			{#each REDES as red (red.id)}
++				<button type="button" role="menuitem" on:click={() => abrir(red)}>{red.nombre}</button>
++			{/each}
++			<button type="button" role="menuitem" on:click={copiar}>Copiar enlace</button>
++		</div>
++	{/if}
++</div>
++
++<style>
++	.compartir {
++		position: relative;
++	}
++	.boton-pie {
++		display: flex;
++		align-items: center;
++		gap: 4px;
++		cursor: pointer;
++		font-family: var(--ui-font-family);
++		font-size: 1em;
++		color: var(--base-content);
++		background: transparent;
++		border: 1px solid var(--base-300);
++		border-radius: 999px;
++		padding: 2px 9px;
++		margin: 0 3px;
++		opacity: 0.85;
++		transition: all 150ms;
++	}
++	.boton-pie:hover {
++		opacity: 1;
++		color: var(--primary);
++		border-color: var(--primary);
++	}
++	.boton-pie :global(svg) {
++		stroke: currentColor;
++	}
++	.menu {
++		position: absolute;
++		right: 0;
++		bottom: calc(100% + 6px);
++		z-index: 30;
++		display: flex;
++		flex-direction: column;
++		min-width: 150px;
++		padding: 4px;
++		border: 1px solid var(--base-300);
++		border-radius: 8px;
++		background: var(--base-100);
++		box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
++	}
++	.menu button {
++		text-align: left;
++		padding: 6px 10px;
++		border: none;
++		border-radius: 6px;
++		background: transparent;
++		color: var(--base-content);
++		font-family: var(--ui-font-family);
++		font-size: 13px;
++		cursor: pointer;
++	}
++	.menu button:hover {
++		background: var(--base-200);
++		color: var(--primary);
++	}
++	@media print {
++		.compartir {
++			display: none;
++		}
++	}
++</style>
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
+index ef4cb65..ac15825 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
+@@ -11,7 +11,7 @@
+ 
+ 	export let data = undefined;
+ 	export let queryID = undefined;
+-	export let text = 'Download';
++	export let text = 'Descargar CSV';
+ 	export let display = true;
+ 	$: display = toBoolean(display);
+ 	let errors = [];
+@@ -85,13 +85,14 @@
+ 		font-family: var(--ui-font-family);
+ 		font-size: 1em;
+ 		color: var(--base-content);
+-		opacity: 0.5;
++		opacity: 0.85;
+ 		justify-items: flex-end;
+-		align-items: baseline;
++		align-items: center;
+ 		background-color: transparent;
+-		border: none;
+-		padding: 0;
+-		margin: 0 5px;
++		border: 1px solid var(--base-300);
++		border-radius: 999px;
++		padding: 2px 9px;
++		margin: 0 3px;
+ 		gap: 3px;
+ 		transition: all 200ms;
+ 		-moz-user-select: none;
+@@ -103,6 +104,7 @@
+ 	button:hover {
+ 		opacity: 1;
+ 		color: var(--primary);
++		border-color: var(--primary);
+ 		transition: all 200ms;
+ 	}
+ 
+@@ -111,12 +113,6 @@
+ 		transition: all 200ms;
+ 	}
+ 
+-	@media (max-width: 600px) {
+-		button {
+-			display: none;
+-		}
+-	}
+-
+ 	@media print {
+ 		button {
+ 			display: none;
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
+index b3bfe37..7443ebd 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
+@@ -8,6 +8,7 @@
+ 	import echartsCanvasDownload from '@evidence-dev/component-utilities/echartsCanvasDownload';
+ 	import EChartsCopyTarget from './EChartsCopyTarget.svelte';
+ 	import DownloadData from '../../ui/DownloadData.svelte';
++	import CompartirGrafico from '../../ui/CompartirGrafico.svelte';
+ 	import CodeBlock from '../../ui/CodeBlock.svelte';
+ 	import ChartLoading from '../../ui/ChartLoading.svelte';
+ 	import { flush } from 'svelte/internal';
+@@ -111,7 +112,7 @@
+ 		<div class="chart-footer">
+ 			{#if downloadableImage}
+ 				<DownloadData
+-					text="Save Image"
++					text="Guardar imagen"
+ 					class="download-button"
+ 					downloadData={() => {
+ 						downloadChart = true;
+@@ -119,7 +120,7 @@
+ 							downloadChart = false;
+ 						}, 0);
+ 					}}
+-					display={hovering}
++					display={true}
+ 					{queryID}
+ 				>
+ 					<svg
+@@ -141,13 +142,14 @@
+ 			{/if}
+ 			{#if data && downloadableData}
+ 				<DownloadData
+-					text="Download Data"
++					text="Descargar datos (CSV)"
+ 					{data}
+ 					{queryID}
+ 					class="download-button"
+-					display={hovering}
++					display={true}
+ 				/>
+ 			{/if}
++			<CompartirGrafico titulo={evidenceChartTitle ?? config?.title?.text} />
+ 		</div>
+ 	{/if}
+ 
+@@ -209,8 +211,10 @@
+ 		display: flex;
+ 		justify-content: flex-end;
+ 		align-items: center;
+-		margin: 3px 12px;
++		flex-wrap: wrap;
++		gap: 4px;
++		margin: 6px 8px 2px;
+ 		font-size: 12px;
+-		height: 9px;
++		min-height: 22px;
+ 	}
+ </style>
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte
+index 6792d5b..29d844e 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte
+@@ -758,7 +758,7 @@
+ 					</button>
+ 				</div>
+ 				{#if downloadable}
+-					<DownloadData class="download-button" data={tableData} {queryID} display={hovering} />
++					<DownloadData class="download-button" data={tableData} {queryID} display={true} />
+ 				{/if}
+ 				{#if !isFullPage}
+ 					<EnterFullScreen on:click={() => (fullscreen = true)} display={hovering} />
+@@ -767,7 +767,7 @@
+ 		{:else}
+ 			<div class="table-footer mt-3">
+ 				{#if downloadable}
+-					<DownloadData class="download-button" data={tableData} {queryID} display={hovering} />
++					<DownloadData class="download-button" data={tableData} {queryID} display={true} />
+ 				{/if}
+ 				{#if !isFullPage}
+ 					<EnterFullScreen on:click={() => (fullscreen = true)} display={hovering} />
