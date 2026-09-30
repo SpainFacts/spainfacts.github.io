@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_vivienda_publica_ecv
+    description: "ECV (INE 9997): % de hogares por régimen de tenencia (propiedad, alquiler a precio de mercado, alquiler inferior al precio de mercado, cesión), España ('00') y CCAA, por año."
+  - name: vivienda_publica_espana
+    description: "Vivienda pública en alquiler en España por año: % de hogares en alquiler inferior al precio de mercado (ECV), calificaciones provisionales de vivienda protegida en alquiler (MIVAU 2005-2023) y por 100.000 hab., parque autonómico en alquiler (2019 y 2023), estimación nacional del MIVAU 2023 (318.000 viviendas) por 1.000 hab. y % de hogares, y dato de la OCDE (PH4.2)."
+    columns:
+      - name: anio
+        tests: [unique, not_null]
+  - name: vivienda_publica_ccaa
+    description: "Por comunidad: parque autonómico en alquiler 2019 y 2023 y su variación, desglose por régimen en 2023, parque municipal declarado (ayuntamientos >20.000 hab. que respondieron), suma conocida por 1.000 hab. y % de hogares, último dato de la ECV y calificaciones de alquiler 2005-2023 por 1.000 hab.; partido del Gobierno autonómico a mitad de 2019-2023."
+    columns:
+      - name: cod_ccaa
+        tests: [unique, not_null]
+      - name: autonomico_2023
+        tests: [not_null]
+  - name: vivienda_publica_ccaa_anual
+    description: "Por comunidad y año: % de hogares en alquiler inferior al precio de mercado (ECV) y calificaciones provisionales de vivienda protegida en alquiler por 100.000 hab., con el partido que gobernaba la comunidad a 1 de julio."
+    tests:
+      - unique:
+          column_name: "cod_ccaa || '-' || anio"
+  - name: vivienda_publica_gobiernos
+    description: "Calificaciones provisionales de vivienda protegida en alquiler (2005-2023) por partido del Gobierno autonómico: por 100.000 hab. y año y cuota observada frente a la esperada por población-año."
+    columns:
+      - name: familia
+        tests: [unique, not_null]
+  - name: vivienda_publica_provincias
+    description: "Por provincia: parque municipal en alquiler declarado por los ayuntamientos de más de 20.000 hab. por 1.000 hab. y cobertura de la encuesta; en las comunidades uniprovinciales, también el parque autonómico (conocido_1000hab). No existe un recuento oficial del parque autonómico por provincia."
+    columns:
+      - name: cod_prov
+        tests: [unique, not_null]
+  - name: vivienda_publica_municipios
+    description: "Parque de vivienda de titularidad municipal por régimen en los municipios de más de 20.000 hab. (MIVAU, Tabla 2.8), alquiler por 1.000 hab. y origen del dato (encuesta 2023, boletín 2020 o sin respuesta)."
+  - name: vivienda_publica_internacional
+    description: "Vivienda social en alquiler por país, formato largo: % del parque total (OCDE PH4.2, hacia 2010 y 2022) y % de las viviendas principales (MIVAU/Housing Europe, UE), con España por la ECV y por el parque público del MIVAU."

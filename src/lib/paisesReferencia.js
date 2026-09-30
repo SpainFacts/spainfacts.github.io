@@ -6,6 +6,7 @@
 // Si el país no tiene dato de ese indicador (p. ej. Japón en los de Eurostat),
 // simplemente no aparece.
 // Países con datos en la ingesta: NOR, DNK, SWE, NLD, GRC, JPN, KOR, ISR
+// (y AUT y GBR solo en vivienda_social_pct)
 // (ingestion/internacional.py, PAISES_REFERENCIA). Para añadir otro, amplía
 // también esa lista, la tabla `paises` de internacional_comparativa y las claves
 // `pais.XXX` de src/lib/i18n.js.
@@ -43,7 +44,10 @@ export const PAISES_REFERENCIA = {
     riesgo_pobreza: ['NOR', 'DNK'], // Noruega y Dinamarca: el menor riesgo de pobreza con este umbral
     estudios_terciarios: ['SWE'], // Suecia: la mitad de los adultos con estudios superiores
     estudios_terciarios_25mas: ['KOR'], // Corea del Sur: la expansión universitaria más rápida (casi la mitad de los adultos)
-    gasto_educacion_pib: ['SWE'] // Suecia: de los que más gastan en educación pública
+    gasto_educacion_pib: ['SWE'], // Suecia: de los que más gastan en educación pública
+
+    // Vivienda
+    vivienda_social_pct: ['NLD', 'AUT', 'DNK'] // Países Bajos, Austria y Dinamarca: los mayores parques de vivienda social de Europa (Reino Unido, en la página)
 };
 
 /** ISO3 de los países de referencia de un indicador ([] si no tiene) */

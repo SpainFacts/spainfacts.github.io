@@ -15,3 +15,5 @@ sources:
         description: "Eurostat, países europeos y UE-27 (Grecia = EL): tasa de riesgo de pobreza (ilc_li02, 60 % de la mediana; año de encuesta), % de 25-64 años con estudios terciarios (edat_lfse_03) y consumo final de energía total y de electricidad (nrg_bal_c, FC_E, ktep; consumo_final_energia y consumo_final_electricidad)."
       - name: internacional_aie
         description: "AIE Global EV Data Explorer (CC BY 4.0): cuota de coches eléctricos (BEV + PHEV) en las ventas de turismos nuevos, en %. EUU = 'European Union'. Sin OCDE ni Marruecos."
+      - name: internacional_ocde_vivienda
+        description: "OCDE, Affordable Housing Database, PH4.2: viviendas sociales en alquiler en % del parque total de viviendas (vivienda_social_pct), hacia 2010 y hacia 2022 (año real de cada país); EUU y OED son las medias de la OCDE con el último dato de cada país (anio = 2022 por convención). Incluye Austria (AUT) y Reino Unido (GBR, solo Inglaterra)."

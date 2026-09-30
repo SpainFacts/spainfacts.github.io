@@ -48,6 +48,7 @@ export function idiomaActual() {
 // Textos de la interfaz común (menú, tarjetas, botones, tablas...)
 const TEXTOS = {
     es: {
+        'construccion.titulo': 'Sección en construcción', 'construccion.texto': 'Esta página describe lo que mostrará y de dónde saldrán los datos, pero todavía no está hecha.', 'construccion.motivo': 'Qué falta:', 'construccion.badge': 'En construcción',
         'opc.mas': 'Más opciones', 'opc.imprimir': 'Imprimir o guardar en PDF', 'opc.mostrar': 'Mostrar consultas SQL', 'opc.ocultar': 'Ocultar consultas SQL', 'opc.apariencia': 'Apariencia', 'tema.system': 'Sistema', 'tema.light': 'Claro', 'tema.dark': 'Oscuro',
         'menu.territorios': 'Territorios', 'menu.demografia': 'Demografía', 'menu.economia': 'Economía',
         'menu.vivienda': 'Vivienda', 'menu.cuentas': 'Cuentas Públicas', 'menu.energia': 'Energía/Clima',
@@ -68,7 +69,7 @@ const TEXTOS = {
         'pais.FRA': 'Francia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemania', 'pais.ITA': 'Italia',
         'pais.MAR': 'Marruecos', 'pais.USA': 'EE. UU.', 'pais.CHN': 'China',
         'pais.NOR': 'Noruega', 'pais.DNK': 'Dinamarca', 'pais.SWE': 'Suecia', 'pais.NLD': 'Países Bajos',
-        'pais.GRC': 'Grecia', 'pais.JPN': 'Japón', 'pais.KOR': 'Corea del Sur', 'pais.ISR': 'Israel',
+        'pais.GRC': 'Grecia', 'pais.JPN': 'Japón', 'pais.KOR': 'Corea del Sur', 'pais.ISR': 'Israel', 'pais.AUT': 'Austria', 'pais.GBR': 'Reino Unido',
         'comparativa.referencia': 'País de referencia en este indicador',
         'buscar': 'Buscar…', 'de': 'de', 'sin.resultados': 'Nada coincide con',
         'nueva.pestana': '(se abre en una pestaña nueva)',
@@ -137,6 +138,7 @@ const TEXTOS = {
         'piramide.mujeres': 'Mujeres', 'piramide.hombres': 'Hombres', 'piramide.ano': 'Año'
     },
     en: {
+        'construccion.titulo': 'Section under construction', 'construccion.texto': 'This page describes what it will show and where the data will come from, but it is not built yet.', 'construccion.motivo': 'What is missing:', 'construccion.badge': 'Under construction',
         'opc.mas': 'More options', 'opc.imprimir': 'Print or save as PDF', 'opc.mostrar': 'Show SQL queries', 'opc.ocultar': 'Hide SQL queries', 'opc.apariencia': 'Appearance', 'tema.system': 'System', 'tema.light': 'Light', 'tema.dark': 'Dark',
         'menu.territorios': 'Regions', 'menu.demografia': 'Population', 'menu.economia': 'Economy',
         'menu.vivienda': 'Housing', 'menu.cuentas': 'Public Finances', 'menu.energia': 'Energy/Climate',
@@ -157,7 +159,7 @@ const TEXTOS = {
         'pais.FRA': 'France', 'pais.PRT': 'Portugal', 'pais.DEU': 'Germany', 'pais.ITA': 'Italy',
         'pais.MAR': 'Morocco', 'pais.USA': 'US', 'pais.CHN': 'China',
         'pais.NOR': 'Norway', 'pais.DNK': 'Denmark', 'pais.SWE': 'Sweden', 'pais.NLD': 'Netherlands',
-        'pais.GRC': 'Greece', 'pais.JPN': 'Japan', 'pais.KOR': 'South Korea', 'pais.ISR': 'Israel',
+        'pais.GRC': 'Greece', 'pais.JPN': 'Japan', 'pais.KOR': 'South Korea', 'pais.ISR': 'Israel', 'pais.AUT': 'Austria', 'pais.GBR': 'United Kingdom',
         'comparativa.referencia': 'Benchmark country for this indicator',
         'buscar': 'Search…', 'de': 'of', 'sin.resultados': 'Nothing matches',
         'nueva.pestana': '(opens in a new tab)',
@@ -226,6 +228,7 @@ const TEXTOS = {
         'piramide.mujeres': 'Women', 'piramide.hombres': 'Men', 'piramide.ano': 'Year'
     },
     ca: {
+        'construccion.titulo': 'Secció en construcció', 'construccion.texto': "Aquesta pàgina descriu el que mostrarà i d'on sortiran les dades, però encara no està feta.", 'construccion.motivo': 'Què falta:', 'construccion.badge': 'En construcció',
         'opc.mas': 'Més opcions', 'opc.imprimir': 'Imprimeix o desa en PDF', 'opc.mostrar': 'Mostra les consultes SQL', 'opc.ocultar': 'Amaga les consultes SQL', 'opc.apariencia': 'Aparença', 'tema.system': 'Sistema', 'tema.light': 'Clar', 'tema.dark': 'Fosc',
         'menu.territorios': 'Territoris', 'menu.demografia': 'Demografia', 'menu.economia': 'Economia',
         'menu.vivienda': 'Habitatge', 'menu.cuentas': 'Comptes Públics', 'menu.energia': 'Energia/Clima',
@@ -246,7 +249,7 @@ const TEXTOS = {
         'pais.FRA': 'França', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemanya', 'pais.ITA': 'Itàlia',
         'pais.MAR': 'Marroc', 'pais.USA': 'EUA', 'pais.CHN': 'Xina',
         'pais.NOR': 'Noruega', 'pais.DNK': 'Dinamarca', 'pais.SWE': 'Suècia', 'pais.NLD': 'Països Baixos',
-        'pais.GRC': 'Grècia', 'pais.JPN': 'Japó', 'pais.KOR': 'Corea del Sud', 'pais.ISR': 'Israel',
+        'pais.GRC': 'Grècia', 'pais.JPN': 'Japó', 'pais.KOR': 'Corea del Sud', 'pais.ISR': 'Israel', 'pais.AUT': 'Àustria', 'pais.GBR': 'Regne Unit',
         'comparativa.referencia': 'País de referència en aquest indicador',
         'buscar': 'Cerca…', 'de': 'de', 'sin.resultados': 'Res no coincideix amb',
         'nueva.pestana': "(s'obre en una pestanya nova)",
@@ -315,6 +318,7 @@ const TEXTOS = {
         'piramide.mujeres': 'Dones', 'piramide.hombres': 'Homes', 'piramide.ano': 'Any'
     },
     gl: {
+        'construccion.titulo': 'Sección en construción', 'construccion.texto': 'Esta páxina describe o que amosará e de onde sairán os datos, pero aínda non está feita.', 'construccion.motivo': 'Que falta:', 'construccion.badge': 'En construción',
         'opc.mas': 'Máis opcións', 'opc.imprimir': 'Imprimir ou gardar en PDF', 'opc.mostrar': 'Amosar as consultas SQL', 'opc.ocultar': 'Agochar as consultas SQL', 'opc.apariencia': 'Aparencia', 'tema.system': 'Sistema', 'tema.light': 'Claro', 'tema.dark': 'Escuro',
         'menu.territorios': 'Territorios', 'menu.demografia': 'Demografía', 'menu.economia': 'Economía',
         'menu.vivienda': 'Vivenda', 'menu.cuentas': 'Contas Públicas', 'menu.energia': 'Enerxía/Clima',
@@ -335,7 +339,7 @@ const TEXTOS = {
         'pais.FRA': 'Francia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemaña', 'pais.ITA': 'Italia',
         'pais.MAR': 'Marrocos', 'pais.USA': 'EUA', 'pais.CHN': 'China',
         'pais.NOR': 'Noruega', 'pais.DNK': 'Dinamarca', 'pais.SWE': 'Suecia', 'pais.NLD': 'Países Baixos',
-        'pais.GRC': 'Grecia', 'pais.JPN': 'Xapón', 'pais.KOR': 'Corea do Sur', 'pais.ISR': 'Israel',
+        'pais.GRC': 'Grecia', 'pais.JPN': 'Xapón', 'pais.KOR': 'Corea do Sur', 'pais.ISR': 'Israel', 'pais.AUT': 'Austria', 'pais.GBR': 'Reino Unido',
         'comparativa.referencia': 'País de referencia neste indicador',
         'buscar': 'Buscar…', 'de': 'de', 'sin.resultados': 'Nada coincide con',
         'nueva.pestana': '(ábrese nunha lapela nova)',
@@ -404,6 +408,7 @@ const TEXTOS = {
         'piramide.mujeres': 'Mulleres', 'piramide.hombres': 'Homes', 'piramide.ano': 'Ano'
     },
     eu: {
+        'construccion.titulo': 'Atala eraikitzen', 'construccion.texto': 'Orri honek zer erakutsiko duen eta datuak nondik aterako diren azaltzen du, baina oraindik ez dago eginda.', 'construccion.motivo': 'Zer falta den:', 'construccion.badge': 'Eraikitzen',
         'opc.mas': 'Aukera gehiago', 'opc.imprimir': 'Inprimatu edo gorde PDF gisa', 'opc.mostrar': 'Erakutsi SQL kontsultak', 'opc.ocultar': 'Ezkutatu SQL kontsultak', 'opc.apariencia': 'Itxura', 'tema.system': 'Sistema', 'tema.light': 'Argia', 'tema.dark': 'Iluna',
         'menu.territorios': 'Lurraldeak', 'menu.demografia': 'Demografia', 'menu.economia': 'Ekonomia',
         'menu.vivienda': 'Etxebizitza', 'menu.cuentas': 'Kontu Publikoak', 'menu.energia': 'Energia/Klima',
@@ -424,7 +429,7 @@ const TEXTOS = {
         'pais.FRA': 'Frantzia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemania', 'pais.ITA': 'Italia',
         'pais.MAR': 'Maroko', 'pais.USA': 'AEB', 'pais.CHN': 'Txina',
         'pais.NOR': 'Norvegia', 'pais.DNK': 'Danimarka', 'pais.SWE': 'Suedia', 'pais.NLD': 'Herbehereak',
-        'pais.GRC': 'Grezia', 'pais.JPN': 'Japonia', 'pais.KOR': 'Hego Korea', 'pais.ISR': 'Israel',
+        'pais.GRC': 'Grezia', 'pais.JPN': 'Japonia', 'pais.KOR': 'Hego Korea', 'pais.ISR': 'Israel', 'pais.AUT': 'Austria', 'pais.GBR': 'Erresuma Batua',
         'comparativa.referencia': 'Adierazle honetako erreferentziazko herrialdea',
         'buscar': 'Bilatu…', 'de': '/', 'sin.resultados': 'Ez dago bat datorrenik:',
         'nueva.pestana': '(fitxa berri batean irekitzen da)',

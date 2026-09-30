@@ -29,6 +29,11 @@ aie as (
     from {{ source('raw_internacional', 'internacional_aie') }}
 ),
 
+ocde_vivienda as (
+    select indicador_id, cod_indicador, cod_pais, cast(anio as integer) as anio, valor, 'ocde' as origen
+    from {{ source('raw_internacional', 'internacional_ocde_vivienda') }}
+),
+
 -- peso de la electricidad en el consumo final de energía (uso energético), en %
 electrificacion as (
     select 'electrificacion' as indicador_id, 'nrg_bal_c (FC_E, E7000 / TOTAL)' as cod_indicador,
@@ -51,5 +56,6 @@ union all select * from fmi
 union all select * from owid where indicador_id <> 'turistas_llegadas'
 union all select * from eurostat where indicador_id not in ('consumo_final_energia', 'consumo_final_electricidad')
 union all select * from aie
+union all select * from ocde_vivienda
 union all select * from electrificacion
 union all select * from turistas

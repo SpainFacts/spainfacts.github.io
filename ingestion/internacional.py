@@ -25,9 +25,14 @@ Suecia, Países Bajos, Grecia, Japón, Corea del Sur e Israel.
 5) AIE, Global EV Data Explorer (API CSV, CC BY 4.0): cuota de los coches
    eléctricos (de batería + híbridos enchufables) en las ventas de turismos
    nuevos. Sin OCDE ni Marruecos.
+6) OCDE, Affordable Housing Database, indicador PH4.2: viviendas sociales en
+   alquiler en % del parque total (hacia 2010 y hacia 2022, con medias UE y
+   OCDE). Se lee con ingestion/vivienda_publica.py (ocde_filas) y se añaden
+   Austria y Reino Unido (Inglaterra), referentes de vivienda social.
 
 Recursos (replace): internacional_banco_mundial, internacional_fmi,
-internacional_owid, internacional_eurostat, internacional_aie.
+internacional_owid, internacional_eurostat, internacional_aie,
+internacional_ocde_vivienda.
 """
 
 import csv
@@ -46,6 +51,8 @@ PAISES_FIJOS = ["ESP", "FRA", "PRT", "MAR", "USA", "CHN", "EUU", "OED", "DEU", "
 # Países de referencia (ver src/lib/paisesReferencia.js para el porqué de cada uno)
 PAISES_REFERENCIA = ["NOR", "DNK", "SWE", "NLD", "GRC", "JPN", "KOR", "ISR"]
 PAISES_BM = PAISES_FIJOS + PAISES_REFERENCIA
+# Solo en vivienda social (OCDE PH4.2): Austria y Reino Unido, los referentes clásicos
+PAISES_SOLO_VIVIENDA = ["AUT", "GBR"]
 
 # código WDI -> indicador_id (el catálogo con nombre, unidad y sentido está en dbt)
 INDICADORES_BM = {
@@ -200,7 +207,17 @@ def internacional():
                 yield {"indicador_id": "coche_electrico_cuota", "cod_indicador": "EV sales share (Cars, EV)",
                        "cod_pais": cod, "anio": int(f["year"]), "valor": float(f["value"])}
 
-    return [banco_mundial, fmi, owid, eurostat, aie]
+    @dlt.resource(name="internacional_ocde_vivienda", write_disposition="replace")
+    def ocde_vivienda():
+        from ingestion.vivienda_publica import ocde_filas
+
+        paises = set(PAISES_BM) | set(PAISES_SOLO_VIVIENDA)
+        for f in ocde_filas():
+            if f["cod_pais"] in paises:
+                yield {"indicador_id": "vivienda_social_pct", "cod_indicador": "PH4.2",
+                       "cod_pais": f["cod_pais"], "anio": f["anio"], "valor": f["pct_parque"]}
+
+    return [banco_mundial, fmi, owid, eurostat, aie, ocde_vivienda]
 
 
 if __name__ == "__main__":

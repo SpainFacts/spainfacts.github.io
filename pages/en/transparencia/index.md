@@ -1,7 +1,7 @@
 ---
 title: Transparency
-description: "How Spanish public administrations are held to account: councils' reporting obligations, decree-laws, pardons, rolled-over budgets and Spain's position in international integrity indices, by government and by party."
-i18n_origen: 9ea4661f7e55
+description: "How Spanish public administrations are held to account: councils' reporting obligations, transparency portals, decree-laws, pardons, rolled-over budgets and Spain's position in international integrity indices, by government and by party."
+i18n_origen: 9991e536ee5b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,6 +113,12 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Which councils fail to send the Ministry of Finance their budget outturn, General Account or average payment period, where they are and who was in power when the deadline expired.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See the councils →</span>
     </a>
+    <a href="/en/transparencia/publicidad-activa" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🪟</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Transparency portals</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Which administrations publish what the law requires of them according to the official assessments (Council of Transparency and Canary Islands Transparency Commissioner), and what is still to be assessed.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See who complies →</span>
+    </a>
     <a href="/en/transparencia/decretos-ley" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">📜</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Decree-laws</h3>
@@ -139,11 +145,27 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
     </a>
 </Grid>
 
-## What else could be measured
+## Under construction
 
-There are other parts of accountability with public data that are not here yet because their sources
-are not published in reusable formats or require much more work: the rulings of the Council of
-Transparency and Good Governance (only in HTML and PDF listings), public procurement (thousands of XML
-files from the Public Sector Procurement Platform) and directly awarded grants (National Grants
-Database). Spain's open data sources are listed in
-[Open data in Spain](/en/varios/datos-abiertos).
+These parts of accountability have public data, but are not built yet because their sources are not
+published in easily reusable formats. Each page explains what it will show and what is missing.
+
+<Grid cols=2>
+    <a href="/en/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Public procurement</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Minor contracts, procedures without publication and single-bidder contracts, by administration and party.</p>
+    </a>
+    <a href="/en/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Grants</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How much is awarded without competitive tendering (direct and nominative grants) and who awards it.</p>
+    </a>
+    <a href="/en/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Freedom of information complaints</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How many complaints about information refused are resolved by the Council of Transparency and which ministries they concern.</p>
+    </a>
+</Grid>
+
+Spain's open data sources are listed in [Open data in Spain](/en/varios/datos-abiertos).

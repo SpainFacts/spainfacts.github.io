@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: transparencia_publicidad_activa
+    description: >
+      Evaluaciones oficiales del cumplimiento de la publicidad activa con puntuación por
+      entidad, formato largo (una fila por evaluador, entidad y evaluación): Índice de
+      Transparencia de Canarias del Comisionado de Transparencia de Canarias (Gobierno de
+      Canarias, cabildos, ayuntamientos y entes dependientes, 2016-2025, 0-10) e Índice de
+      Cumplimiento de la Información Obligatoria (ICIO) del Consejo de Transparencia y Buen
+      Gobierno (Portal de la AGE 2021-2025; comunidades, ciudades autónomas y ayuntamientos
+      con convenio, 2020-2021; 0-100). puntuacion lleva ambas a 0-100, pero los métodos no
+      son comparables entre evaluadores. familia y gobernante: partido del alcalde, del
+      presidente autonómico o del presidente del Gobierno en fecha_referencia.
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: evaluador
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Comisionado de Transparencia de Canarias', 'Consejo de Transparencia y Buen Gobierno']
+      - name: entidad
+        tests: [not_null]
+      - name: tipo_administracion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Administración General del Estado', 'Comunidad autónoma', 'Cabildo insular', 'Ayuntamiento', 'Entes dependientes y otros']
+      - name: anio
+        tests: [not_null]
+      - name: estado
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['evaluada', 'incumplidora']
+      - name: cod_ccaa
+        tests: [not_null]

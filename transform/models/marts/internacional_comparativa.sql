@@ -7,7 +7,9 @@
 -- (es_referencia = true). Los agregados del Banco Mundial están ponderados (por población,
 -- PIB...), no son medias simples de países. Los indicadores de Eurostat solo
 -- tienen países europeos y la UE-27; la deuda del FMI no tiene agregado OCDE;
--- los coches eléctricos de la AIE no tienen OCDE ni Marruecos.
+-- los coches eléctricos de la AIE no tienen OCDE ni Marruecos. La vivienda social
+-- (OCDE PH4.2) añade Austria y Reino Unido (Inglaterra) como referencia y tiene
+-- pocos años por país (hacia 2010 y hacia 2022).
 -- sentido: 'positivo' si un valor mayor es mejor, 'negativo' si es peor,
 -- 'neutro' si no tiene lectura clara.
 with catalogo (indicador_id, nombre, unidad, apartado, sentido, fuente, url_fuente) as (
@@ -47,6 +49,7 @@ with catalogo (indicador_id, nombre, unidad, apartado, sentido, fuente, url_fuen
     ('electricidad_renovable', 'Electricidad de origen renovable', '% de la generación eléctrica', 'Energía y clima', 'positivo', 'Ember vía Our World in Data', 'https://ourworldindata.org/grapher/share-electricity-renewables'),
     ('consumo_electrico_pc', 'Consumo eléctrico por habitante', 'kWh por habitante', 'Energía y clima', 'neutro', 'Banco Mundial (WDI)', 'https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC'),
     ('electrificacion', 'Electricidad en el consumo final de energía', '% del consumo final de energía', 'Energía y clima', 'positivo', 'Eurostat (balances energéticos, nrg_bal_c)', 'https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table'),
+    ('vivienda_social_pct', 'Viviendas sociales en alquiler', '% del parque total de viviendas', 'Vivienda', 'neutro', 'OCDE (Affordable Housing Database, PH4.2)', 'https://www.oecd.org/en/data/datasets/oecd-affordable-housing-database.html'),
     ('coche_electrico_cuota', 'Coches eléctricos en las ventas de turismos nuevos', '% de los turismos nuevos (eléctricos puros e híbridos enchufables)', 'Movilidad', 'positivo', 'AIE (Global EV Data Explorer)', 'https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer')
 ),
 
@@ -69,7 +72,10 @@ paises (cod_pais, pais, es_agregado, es_referencia, orden_pais) as (
     ('GRC', 'Grecia', false, true, 15),
     ('JPN', 'Japón', false, true, 16),
     ('KOR', 'Corea del Sur', false, true, 17),
-    ('ISR', 'Israel', false, true, 18)
+    ('ISR', 'Israel', false, true, 18),
+    -- solo en vivienda social (OCDE PH4.2)
+    ('AUT', 'Austria', false, true, 19),
+    ('GBR', 'Reino Unido', false, true, 20)
 )
 
 select

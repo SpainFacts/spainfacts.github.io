@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_transparencia_publicidad_activa
+    description: "Evaluaciones oficiales del cumplimiento de la publicidad activa con puntuación por entidad (ingestion/transparencia_publicidad_activa.py)"
+    schema: raw
+    tables:
+      - name: pa_itcanarias
+        description: "Comisionado de Transparencia de Canarias, Índice de Transparencia de Canarias (ITCanarias), tabla maestra del sector público (XLSX, CC BY 4.0): una fila por entidad y evaluación, 2016-2025. puntuacion 0-10; estado evaluada o incumplidora (no rindió la evaluación). periodo es la etiqueta original de la columna; anio, el último año que cubre."
+      - name: pa_ctbg
+        description: "Consejo de Transparencia y Buen Gobierno, metodología MESTA: Índice de Cumplimiento de la Información Obligatoria (ICIO, 0-100 %) leído del informe definitivo (.docx) de cada evaluación: Portal de la Transparencia de la AGE (2021-2025) y comunidades, ciudades autónomas y ayuntamientos con convenio con el CTBG (2020 y revisión de 2021). cod = '00' (AGE), cod_ccaa INE o cod_mun INE."

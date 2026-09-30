@@ -1,7 +1,7 @@
 ---
-i18n_origen: 9ea4661f7e55
+i18n_origen: 9991e536ee5b
 title: Transparencia
-description: "Como render contas as administracións españolas: obrigas de información dos concellos, decretos lei, indultos, orzamentos prorrogados e a posición de España nos índices internacionais de integridade, por Goberno e por partido."
+description: "Como render contas as administracións españolas: obrigas de información dos concellos, portais de transparencia, decretos lei, indultos, orzamentos prorrogados e a posición de España nos índices internacionais de integridade, por Goberno e por partido."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,6 +113,12 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Que concellos non lle remiten a Facenda a liquidación do orzamento, a Conta Xeral ou o período medio de pagamento, onde están e quen gobernaba cando vencía o prazo.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver os concellos →</span>
     </a>
+    <a href="/gl/transparencia/publicidad-activa" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🪟</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Portais de transparencia</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Que administracións publican o que lles obriga a lei segundo as avaliacións oficiais (Consello de Transparencia e Comisionado de Canarias), e que falta por avaliar.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver quen cumpre →</span>
+    </a>
     <a href="/gl/transparencia/decretos-ley" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">📜</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Decretos lei</h3>
@@ -139,11 +145,27 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
     </a>
 </Grid>
 
-## Que máis se podería medir
+## En construción
 
-Hai outras pezas da rendición de contas con datos públicos que aínda non están aquí porque as súas
-fontes non se publican en formatos reutilizables ou esixen un traballo maior: as resolucións do Consello
-de Transparencia e Bo Goberno (só en listaxes HTML e PDF), a contratación pública (miles de ficheiros
-XML da Plataforma de Contratación do Sector Público) e as subvencións de concesión directa (Base de
-Datos Nacional de Subvencións). As fontes de datos abertos de España están recollidas en
-[Datos abertos en España](/gl/varios/datos-abiertos).
+Estas pezas da rendición de contas teñen datos públicos, pero aínda non están feitas porque as súas
+fontes non se publican en formatos doados de reutilizar. Cada páxina explica que mostrará e que falta.
+
+<Grid cols=2>
+    <a href="/gl/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Contratación pública</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Contratos menores, procedementos sen publicidade e contratos cun só licitador, por administración e partido.</p>
+    </a>
+    <a href="/gl/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvencións</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Canto se concede sen concorrencia competitiva (concesión directa e nominativas) e quen o concede.</p>
+    </a>
+    <a href="/gl/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Reclamacións de acceso á información</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cantas reclamacións por información denegada resolve o Consello de Transparencia e a que ministerios afectan.</p>
+    </a>
+</Grid>
+
+As fontes de datos abertos de España están recollidas en [Datos abertos en España](/gl/varios/datos-abiertos).

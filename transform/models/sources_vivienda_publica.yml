@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: raw_vivienda_publica
+    description: "Vivienda pública en alquiler: Boletín especial Vivienda Social del Observatorio de Vivienda y Suelo (MIVAU, PDF), OCDE Affordable Housing Database PH4.2 (XLSX) y régimen de tenencia de la ECV del INE (tabla 9997) (ingestion/vivienda_publica.py)"
+    schema: raw
+    tables:
+      - name: vp_calificaciones
+        description: "MIVAU, Boletín especial Vivienda Social 2024, Tabla 1.4: calificaciones provisionales de vivienda protegida por régimen de uso (propiedad, alquiler, autopromocion, total) y comunidad, 2005-2023. cod_ccaa '00' = España. viviendas nulo = 'n.d.' o '-' en la tabla."
+      - name: vp_europa
+        description: "MIVAU, Boletín especial Vivienda Social 2024, Tabla 2.1 (Eurostat, Housing Europe y elaboración propia): % de vivienda en alquiler social sobre las viviendas principales en los países de la UE; viviendas principales y parque total del Censo 2011 de Eurostat. anio_dato 2017 si no hay dato de 2023. España: ECV 2023 (alquiler inferior al precio de mercado)."
+      - name: vp_ccaa_parque
+        description: "MIVAU, Encuesta sobre vivienda social (Tablas 2.2 y 2.3 del boletín 2024): parque de vivienda de titularidad de las comunidades y ciudades autónomas y sus entes dependientes por régimen de tenencia, 2019 y 2023. arrendamiento = titularidad pública + colaboración público-privada (solo desglosado en 2023); incluye cesión a bajo precio y alojamiento temporal."
+      - name: vp_municipios
+        description: "MIVAU, Tabla 2.8 del boletín 2024: parque de vivienda de titularidad de los ayuntamientos de más de 20.000 habitantes y sus entes dependientes. origen: encuesta_2023, boletin_2020 (el municipio no respondió en 2023 y se repite su dato de 2019, sin desglose público/PPP) o sin_respuesta (sin cifras). poblacion = padrón 2023."
+      - name: vp_nacional
+        description: "MIVAU, conclusiones del capítulo 2 del boletín 2024: estimación del parque nacional de vivienda pública en alquiler (autonómico + municipal escalado por población) y su cobertura sobre los hogares del Censo 2021."
+      - name: vp_ocde
+        description: "OCDE, Affordable Housing Database, PH4.2 (Table PH4.2.A1): viviendas sociales en alquiler y % del parque total de viviendas hacia 2010 y hacia 2022 por país; es_media = medias UE y OCDE de la figura PH4.2.1 (último dato de cada país; anio = 2022 por convención)."
+      - name: ine_ecv_tenencia_ccaa
+        description: "INE, Encuesta de Condiciones de Vida, tabla 9997: % de hogares por régimen de tenencia de la vivienda (propiedad, alquiler a precio de mercado, alquiler inferior al precio de mercado, cesión) y comunidad, 2004-... (formato Tempus)."

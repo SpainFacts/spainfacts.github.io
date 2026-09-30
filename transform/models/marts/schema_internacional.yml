@@ -24,7 +24,7 @@ models:
           - accepted_values:
               arguments:
                 values: ['ESP', 'FRA', 'PRT', 'MAR', 'USA', 'CHN', 'EUU', 'OED', 'DEU', 'ITA',
-                         'NOR', 'DNK', 'SWE', 'NLD', 'GRC', 'JPN', 'KOR', 'ISR']
+                         'NOR', 'DNK', 'SWE', 'NLD', 'GRC', 'JPN', 'KOR', 'ISR', 'AUT', 'GBR']
       - name: anio
         tests: [not_null]
       - name: valor
