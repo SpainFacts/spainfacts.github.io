@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -102,6 +103,14 @@ Lo que España vende al resto del mundo (exportaciones) y lo que compra fuera (i
         sparklineData={comercio_trim.slice(-24).map(d => d.export_interanual)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('exportaciones_pib')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'exportaciones_pib')} />
+
 
 ## Peso sobre el PIB
 

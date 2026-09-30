@@ -24,6 +24,8 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/'
+          # 5 idiomas: el empaquetado necesita más memoria que el límite por defecto de Node
+          NODE_OPTIONS: '--max-old-space-size=12288'
           # sources/mother usa el conector DuckDB con md:SpainFacts: DuckDB lee el token de aquí
           motherduck_token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
           ## Add and uncomment any environment variables here
@@ -33,6 +35,7 @@ jobs:
           npm run sources:strict
           npm run build:strict
           node tools/sitemap.mjs
+          node tools/html-lang-es.mjs
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3

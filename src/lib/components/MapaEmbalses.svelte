@@ -1,4 +1,8 @@
 <script>
+    import { localeActual } from "../utils.js";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
     // Mapa "embalse por embalse": cada embalse es un depósito cuadrado cuya
     // ÁREA es proporcional a su capacidad, relleno hasta su % de llenado y
     // coloreado según la diferencia con lo habitual (media de la misma semana
@@ -72,25 +76,25 @@
         // los grandes primero para que los pequeños queden encima y se puedan señalar
         .sort((a, b) => b.capacidad_hm3 - a.capacidad_hm3);
 
-    const fmt = (v, dec = 1) => (v === null || v === undefined ? '—' : new Intl.NumberFormat('es-ES', { maximumFractionDigits: dec, minimumFractionDigits: dec }).format(v));
+    const fmt = (v, dec = 1) => (v === null || v === undefined ? '—' : new Intl.NumberFormat(localeActual(), { maximumFractionDigits: dec, minimumFractionDigits: dec }).format(v));
 </script>
 
 <div class="not-prose my-4">
     <div class="flex flex-wrap gap-3 justify-center mb-3 text-sm">
-        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden">
-            {#each [['consumo', 'Consumo'], ['todos', 'Todos'], ['hidro', 'Hidroeléc.']] as [v, t]}
-                <button class="px-3 py-1 {uso === v ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (uso = v)}>{t}</button>
+        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden" role="group" aria-label={t('embalses.uso', lang)}>
+            {#each [['consumo', t('embalses.consumo', lang)], ['todos', t('embalses.todos', lang)], ['hidro', t('embalses.hidroAbr', lang)]] as [v, etq]}
+                <button type="button" aria-pressed={uso === v} class="px-3 py-1 {uso === v ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (uso = v)}>{etq}</button>
             {/each}
         </div>
-        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden">
-            {#each [['peor', 'Peor'], ['todos', 'Todos'], ['mejor', 'Mejor']] as [v, t]}
-                <button class="px-3 py-1 {estado === v ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (estado = v)}>{t}</button>
+        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden" role="group" aria-label={t('embalses.estado', lang)}>
+            {#each [['peor', t('embalses.peor', lang)], ['todos', t('embalses.todos', lang)], ['mejor', t('embalses.mejor', lang)]] as [v, etq]}
+                <button type="button" aria-pressed={estado === v} class="px-3 py-1 {estado === v ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (estado = v)}>{etq}</button>
             {/each}
         </div>
     </div>
 
     <div class="relative">
-        <svg viewBox="0 0 {ANCHO} {ALTO.toFixed(0)}" class="w-full h-auto" role="img" aria-label="Mapa de embalses por porcentaje de reserva">
+        <svg viewBox="0 0 {ANCHO} {ALTO.toFixed(0)}" class="w-full h-auto" role="img" aria-label={t('embalses.aria', lang)}>
             {#each caminos as d}
                 <path {d} class="fill-gray-100 stroke-gray-300 dark:fill-gray-800 dark:stroke-gray-700" stroke-width="0.6" />
             {/each}
@@ -115,22 +119,22 @@
         {#if hover}
             <div class="absolute top-2 right-2 max-w-xs rounded-lg border border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 p-3 text-sm shadow">
                 <p class="font-semibold text-gray-900 dark:text-white mb-1">{hover.embalse}</p>
-                <p class="text-xs text-gray-500 mb-2">{hover.cuenca} · {hover.esHidro ? 'Hidroeléctrico' : 'Consumo'}</p>
-                <p class="mb-0">Llenado: <b>{fmt(hover.pct_llenado)} %</b> ({fmt(hover.volumen_hm3, 0)} de {fmt(hover.capacidad_hm3, 0)} hm³)</p>
-                <p class="mb-0">Habitual en esta semana: {fmt(hover.pct_habitual)} %</p>
-                <p class="mb-0">Diferencia: <b>{hover.dif_vs_habitual > 0 ? '+' : ''}{fmt(hover.dif_vs_habitual)} pp</b></p>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">{hover.cuenca} · {hover.esHidro ? t('embalses.hidro', lang) : t('embalses.consumo', lang)}</p>
+                <p class="mb-0">{t('embalses.llenado', lang)} <b>{fmt(hover.pct_llenado)} %</b> ({fmt(hover.volumen_hm3, 0)} {t('de', lang)} {fmt(hover.capacidad_hm3, 0)} hm³)</p>
+                <p class="mb-0">{t('embalses.habitual', lang)} {fmt(hover.pct_habitual)} %</p>
+                <p class="mb-0">{t('embalses.diferencia', lang)} <b>{hover.dif_vs_habitual > 0 ? '+' : ''}{fmt(hover.dif_vs_habitual)} pp</b></p>
             </div>
         {/if}
     </div>
 
     <div class="flex flex-wrap items-end gap-6 mt-2 text-xs text-gray-600 dark:text-gray-400">
         <div>
-            <p class="font-semibold mb-1">Reserva sobre lo habitual</p>
+            <p class="font-semibold mb-1">{t('embalses.leyenda', lang)}</p>
             <div class="flex">
                 {#each COLORES as c}<span class="inline-block w-5 h-3" style="background:{c}"></span>{/each}
             </div>
-            <div class="flex justify-between w-[200px]"><span>−20 pp</span><span>igual</span><span>+20 pp</span></div>
+            <div class="flex justify-between w-[200px]"><span>−20 pp</span><span>{t('embalses.igual', lang)}</span><span>+20 pp</span></div>
         </div>
-        <p class="mb-0 max-w-md">El tamaño de cada cuadrado es proporcional a la capacidad del embalse y su relleno, al porcentaje de agua embalsada. Gris: sin histórico suficiente. Fuente: {fuente}.</p>
+        <p class="mb-0 max-w-md">{t('embalses.nota', lang)} {fuente}.</p>
     </div>
 </div>

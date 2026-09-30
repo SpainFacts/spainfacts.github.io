@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -274,6 +275,14 @@ Cuántos turistas extranjeros llegan a España en proporción a su población, c
         sparklineData={kpi_hotel.slice(-120).map(d => ({x: d.mes, y: d.pernoct_hotel_1000hab_12m}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('turistas_por_habitante')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'turistas_por_habitante')} />
+
 
 <p class="text-xs text-gray-500">Turistas: visitantes no residentes que pasan al menos una noche en España (FRONTUR). El gasto (EGATUR) incluye transporte internacional, alojamiento, comida y demás compras del viaje, y se da en euros constantes de {hitos[0]?.anio_base}. El porcentaje del PIB compara ese gasto con el PIB nominal: es una referencia de tamaño, no la aportación del turismo al PIB, porque parte del gasto se paga a empresas de fuera de España (billetes de avión, paquetes). Los totales absolutos aparecen solo como referencia en el texto pequeño.</p>
 

@@ -6,6 +6,7 @@ import { join, relative, sep } from 'node:path';
 const DOMINIO = 'https://spainfacts.org';
 const BUILD = 'build';
 const EXCLUIR = ['_app', 'api', 'data', 'indicadores'];  // /indicadores es una redirección
+const IDIOMAS = ['en', 'ca', 'gl', 'eu'];
 
 function paginas(dir) {
     const rutas = [];
@@ -13,6 +14,8 @@ function paginas(dir) {
         const ruta = join(dir, nombre);
         if (statSync(ruta).isDirectory()) {
             if (dir === BUILD && EXCLUIR.includes(nombre)) continue;
+            // /en/indicadores, /ca/indicadores... también son redirecciones
+            if (IDIOMAS.includes(relative(BUILD, dir)) && nombre === 'indicadores') continue;
             rutas.push(...paginas(ruta));
         } else if (nombre === 'index.html') {
             const url = '/' + relative(BUILD, dir).split(sep).join('/');

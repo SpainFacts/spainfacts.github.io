@@ -119,11 +119,11 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose my-6">
     <a href="/movilidad/coche-electrico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">⚡ Coche eléctrico</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚡</span> Coche eléctrico</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Turismos nuevos por tipo de motor cada mes desde 2015, cuota de eléctricos por provincia y emisiones de CO2.</p>
     </a>
     <a href="/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🚗 Marcas y modelos más vendidos</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marcas y modelos más vendidos</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ranking mensual de coches, motos y furgonetas, filtrable por eléctricos, híbridos, gasolina o diésel.</p>
     </a>
     <a href="/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
@@ -131,11 +131,11 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Los vehículos que circulan hoy: motor, etiqueta ambiental, antigüedad y modelos más comunes, por provincia y municipio.</p>
     </a>
     <a href="/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🔌 Puntos de recarga</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Puntos de recarga</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de los puntos públicos por potencia y operador, y coches enchufables por punto en cada provincia.</p>
     </a>
     <a href="/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🚇 Transporte público</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transporte público</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viajeros de metro, autobús, Cercanías, AVE y avión cada mes, y el metro de las siete ciudades que lo tienen.</p>
     </a>
 </div>

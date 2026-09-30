@@ -213,23 +213,23 @@ Precio real del metro cuadrado en el último trimestre. Pulsa en una comunidad p
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
     <a href="/vivienda/precios" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">💶 Precios</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">💶</span> Precios</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Valor tasado por comunidad, provincia y municipio y el Índice de Precios de Vivienda del INE, nueva y de segunda mano, descontada la inflación.</p>
     </a>
     <a href="/vivienda/alquiler" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🔑 Alquiler</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔑</span> Alquiler</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Alquiler mediano por comunidad, provincia y municipio con los datos del IRPF, y cuántas viviendas se alquilan.</p>
     </a>
     <a href="/vivienda/compraventas" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">📝 Compraventas e hipotecas</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📝</span> Compraventas e hipotecas</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viviendas vendidas e hipotecadas por 1.000 habitantes, obra nueva frente a segunda mano e importe medio de la hipoteca.</p>
     </a>
     <a href="/vivienda/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🏗️ Obra nueva</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏗️</span> Obra nueva</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viviendas libres que se empiezan y se terminan cada año por 1.000 habitantes, desde 1991.</p>
     </a>
     <a href="/vivienda/esfuerzo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">⚖️ Esfuerzo</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Esfuerzo</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuántos años de salario cuesta una vivienda y qué parte del sueldo se va en el alquiler, por comunidad.</p>
     </a>
 </div>

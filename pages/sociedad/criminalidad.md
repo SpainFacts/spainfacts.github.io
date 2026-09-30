@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -103,6 +104,14 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
         source="Balance de Criminalidad"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('homicidios')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'homicidios')} />
+
 
 <p class="text-xs text-gray-500">Todas las cifras se dan por habitante para que la evolución no refleje solo el crecimiento de la población (España ganó unos 2 millones de habitantes entre 2019 y 2025); el total aparece como dato secundario. Son hechos <b>conocidos</b> (denunciados o descubiertos por la policía), no todos los delitos cometidos: una subida puede deberse a que se denuncia más (como ha pasado con los delitos sexuales o las estafas por internet). La tasa por habitante no tiene en cuenta a turistas y visitantes, que también sufren y cometen delitos: por eso sale alta en las zonas más turísticas.</p>
 

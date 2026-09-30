@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -224,6 +225,14 @@ Cuántos gases de efecto invernadero emite España desde 1990, año de referenci
         sparklineData={ue_ratio.map(d => d.pct_ue)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('gei_pc')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'gei_pc')} />
+
 
 ## Emisiones por habitante desde 1990
 

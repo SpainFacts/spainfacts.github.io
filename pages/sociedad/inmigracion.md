@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -87,6 +88,14 @@ Cuántos extranjeros viven en España, cuántas personas llegan y se van cada a�
         sparklineData={nacionalizaciones}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('migrantes')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'migrantes')} />
+
 
 <p class="text-xs text-gray-500">Las cifras que dependen del tamaño de la población se dan por habitante. Las llegadas irregulares y las solicitudes de asilo se dan en número de personas porque son hechos que no crecen con la población de España.</p>
 

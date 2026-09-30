@@ -194,7 +194,7 @@ FROM ${filtradas}
     maxSize={26}
     value=tecnologia
     legendType=categorical
-    colorPalette={colores_mapa.map(d => d.color)}
+    colorPalette={[...new Map(Array.from(mapa ?? []).map(d => [d.tecnologia, d.color])).values()]}
     opacity={0.75}
     pointName=nombre
     height={600}

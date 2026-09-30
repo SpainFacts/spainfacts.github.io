@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -98,6 +99,19 @@ Cuánto vivimos, de qué morimos y cómo han cambiado las cosas, con las estadí
         sparklineData={causas_clave.filter(d => d.codigo_causa === '090' && d.anio >= 2000).map(d => ({anio: d.anio, valor: d.tasa_100k}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('esperanza_vida', 'mortalidad_infantil', 'gasto_sanitario_pc_ppa', 'medicos', 'camas', 'suicidios')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'esperanza_vida')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'mortalidad_infantil')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'gasto_sanitario_pc_ppa')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'medicos')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'camas')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'suicidios')} />
+
 
 <p class="text-xs text-gray-500">Si necesitas ayuda o conoces a alguien que pueda necesitarla, llama al <b>024</b>, la línea de atención a la conducta suicida (gratuita, confidencial, 24 horas).</p>
 

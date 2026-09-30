@@ -1,0 +1,490 @@
+// Idiomas del sitio. El castellano vive en la raíz (/economia/paro/) y cada
+// traducción en su prefijo (/en/economia/paro/, /ca/..., /gl/..., /eu/...), con
+// los mismos nombres de ruta, así que cambiar de idioma es cambiar el prefijo.
+// Las páginas traducidas son copias de las de pages/ generadas y revisadas
+// (ver tools/i18n/README.md); este módulo cubre la interfaz común.
+
+export const IDIOMAS = {
+    es: { nombre: 'Castellano', corto: 'ES', locale: 'es-ES' },
+    en: { nombre: 'English', corto: 'EN', locale: 'en-GB' },
+    ca: { nombre: 'Català', corto: 'CA', locale: 'ca-ES' },
+    gl: { nombre: 'Galego', corto: 'GL', locale: 'gl-ES' },
+    eu: { nombre: 'Euskara', corto: 'EU', locale: 'eu-ES' }
+};
+export const PREFIJOS = ['en', 'ca', 'gl', 'eu'];
+
+/** Idioma de una ruta: '/en/economia' -> 'en'; '/economia' -> 'es' */
+export function idiomaDeRuta(ruta = '/') {
+    const primero = String(ruta).split('/')[1];
+    return PREFIJOS.includes(primero) ? primero : 'es';
+}
+
+/** Ruta sin prefijo de idioma: '/en/economia/' -> '/economia/' */
+export function rutaBase(ruta = '/') {
+    const lang = idiomaDeRuta(ruta);
+    if (lang === 'es') return ruta || '/';
+    const resto = String(ruta).slice(lang.length + 1);
+    return resto || '/';
+}
+
+/** La misma página en otro idioma */
+export function rutaEnIdioma(ruta, lang) {
+    const base = rutaBase(ruta);
+    return lang === 'es' ? base : `/${lang}${base === '/' ? '/' : base}`;
+}
+
+/** Enlace interno en el idioma dado ('/economia' -> '/en/economia') */
+export function enlace(href, lang) {
+    if (!href || !href.startsWith('/') || lang === 'es') return href;
+    return rutaEnIdioma(href, lang);
+}
+
+/** Idioma actual en el navegador (útil en componentes sin acceso a $page) */
+export function idiomaActual() {
+    if (typeof window === 'undefined') return 'es';
+    return idiomaDeRuta(window.location.pathname);
+}
+
+// Textos de la interfaz común (menú, tarjetas, botones, tablas...)
+const TEXTOS = {
+    es: {
+        'opc.mas': 'Más opciones', 'opc.imprimir': 'Imprimir o guardar en PDF', 'opc.mostrar': 'Mostrar consultas SQL', 'opc.ocultar': 'Ocultar consultas SQL', 'opc.apariencia': 'Apariencia', 'tema.system': 'Sistema', 'tema.light': 'Claro', 'tema.dark': 'Oscuro',
+        'menu.territorios': 'Territorios', 'menu.demografia': 'Demografía', 'menu.economia': 'Economía',
+        'menu.vivienda': 'Vivienda', 'menu.cuentas': 'Cuentas Públicas', 'menu.energia': 'Energía/Clima',
+        'menu.movilidad': 'Movilidad', 'menu.sociedad': 'Sociedad', 'menu.transparencia': 'Transparencia',
+        'menu.varios': 'Varios', 'menu.fuentes': 'Fuentes',
+        'menu.abrir': 'Abrir menú principal', 'menu.cerrar': 'Cerrar menú principal', 'menu.principal': 'Menú principal',
+        'menu.inicio': 'SpainFacts, página de inicio', 'menu.idioma': 'Idioma',
+        'saltar': 'Saltar al contenido',
+        'kpi.detalle': 'Ver detalle', 'kpi.csv': 'Descargar la serie en CSV', 'kpi.variacion': 'Variación',
+        'kpi.evolucion': 'Evolución reciente de', 'kpi.de': 'de', 'kpi.a': 'a',
+        'compartir': 'Compartir', 'compartir.copiar': 'Copiar enlace', 'compartir.copiado': 'Enlace copiado',
+        'compartir.instagram': 'Enlace copiado: pégalo en Instagram',
+        'compartir.instagram2': 'Copia el enlace de la página para pegarlo en Instagram',
+        'compartir.ventana': '(se abre en una ventana nueva)',
+        'grafico': 'Gráfico', 'grafico.csv': 'Los datos se pueden descargar en CSV debajo.',
+        'grafico.imagen': 'Guardar imagen', 'grafico.datos': 'Descargar datos (CSV)', 'tabla.csv': 'Descargar CSV',
+        'comparativa': 'Comparación internacional', 'pais.ESP': 'España', 'pais.EUU': 'UE', 'pais.OED': 'OCDE',
+        'pais.FRA': 'Francia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemania', 'pais.ITA': 'Italia',
+        'pais.MAR': 'Marruecos', 'pais.USA': 'EE. UU.', 'pais.CHN': 'China',
+        'buscar': 'Buscar…', 'de': 'de', 'sin.resultados': 'Nada coincide con',
+        'nueva.pestana': '(se abre en una pestaña nueva)',
+        'cargando': 'Cargando…', 'sin.datos': 'Sin datos', 'pais.AND': 'Andorra', 'hab': 'hab.',
+        // DirectoSistemaElectrico
+        'directo.sis.nacional': 'España (total)', 'directo.sis.peninsula': 'Península', 'directo.sis.baleares': 'Baleares',
+        'directo.sis.canarias': 'Canarias', 'directo.sis.ceuta': 'Ceuta', 'directo.sis.melilla': 'Melilla',
+        'directo.tec.nuclear': 'Nuclear', 'directo.tec.carbon': 'Carbón', 'directo.tec.ciclo_combinado': 'Ciclo combinado',
+        'directo.tec.cogeneracion_residuos': 'Cogeneración y residuos', 'directo.tec.diesel': 'Motores diésel',
+        'directo.tec.turbina_gas': 'Turbina de gas', 'directo.tec.motores_vapor': 'Turbina de vapor',
+        'directo.tec.otras_no_renovables': 'Otras no renovables', 'directo.tec.hidraulica': 'Hidráulica',
+        'directo.tec.turbinacion_bombeo': 'Turbinación bombeo', 'directo.tec.baterias_descarga': 'Baterías',
+        'directo.tec.otras_renovables': 'Otras renovables', 'directo.tec.eolica': 'Eólica',
+        'directo.tec.solar_termica': 'Solar térmica', 'directo.tec.solar_fv': 'Solar fotovoltaica',
+        'directo.envivo': 'En directo', 'directo.noDirecto': 'No en directo',
+        'directo.datos.pre': 'Datos de las', 'directo.datos.hora': '(hora peninsular)',
+        'directo.retraso': 'con {n} min de retraso', 'directo.datos.build': '(última actualización del sitio)',
+        'directo.sinDatosMin': 'sin datos', 'directo.colorear': 'Colorear sistemas por',
+        'directo.renovables': 'Renovables', 'directo.co2': 'Intensidad de CO₂',
+        'directo.mapa.aria': 'Mapa de los sistemas eléctricos españoles con los intercambios internacionales en este momento',
+        'directo.canarias.nota': 'Canarias (a otra escala; hora canaria = peninsular − 1 h)',
+        'directo.espana': 'España', 'directo.renovAbr': 'renov.',
+        'directo.leyenda.ren': '% de la generación que es renovable',
+        'directo.leyenda.co2': 'Intensidad de carbono de la generación (gCO₂/kWh)',
+        'directo.importa': 'España importa', 'directo.exporta': 'España exporta', 'directo.enlace': 'Enlace Península–Baleares',
+        'directo.tabla.caption': 'Demanda, porcentaje renovable e intensidad de CO₂ por sistema eléctrico',
+        'directo.sistema': 'Sistema', 'directo.demanda': 'Demanda', 'directo.renovable': 'Renovable', 'directo.renov': 'Renov.',
+        'directo.pulsa': 'Pulsa un sistema para ver su mix de las últimas 24 horas.',
+        'directo.saldo': 'Saldo exterior de la Península:', 'directo.importaV': 'importa', 'directo.exportaV': 'exporta',
+        'directo.precio': 'Precio de la electricidad (Península)', 'directo.omie': 'Mercado mayorista (OMIE)',
+        'directo.cuarto': ', cuarto de hora de las', 'directo.pvpc': 'PVPC (tarifa regulada, peajes incluidos)',
+        'directo.horaDe': ', hora de las',
+        'directo.precioUnico': 'Precio único para toda la Península: España es una sola zona de precio.',
+        'directo.soloDirecto': 'El precio solo se muestra en directo. Consulta el mercado diario en',
+        'directo.mixDe': 'Mix de', 'directo.sinDatosSistema': 'Sin datos para este sistema.',
+        'directo.gen24': 'Generación por tecnología en las últimas 24 horas', 'directo.sistemaElectrico': 'Sistema eléctrico',
+        'directo.gen24.aria': 'Generación apilada por tecnología en las últimas 24 horas', 'directo.demandaMin': 'demanda',
+        'directo.sinSerie': 'Sin serie de las últimas 24 horas para este sistema.',
+        'directo.fuente': 'Fuente: Red Eléctrica (REE), datos provisionales en tiempo real cada 5 minutos.',
+        'directo.seActualiza': 'Se actualiza solo cada 5 minutos.',
+        'directo.error.pre': 'No se ha podido conectar con el servicio en directo',
+        'directo.error.post': '; se muestran los datos de la última actualización del sitio.',
+        // MapaEmbalses
+        'embalses.uso': 'Uso del embalse', 'embalses.consumo': 'Consumo', 'embalses.todos': 'Todos', 'embalses.hidroAbr': 'Hidroeléc.',
+        'embalses.estado': 'Estado frente a lo habitual', 'embalses.peor': 'Peor', 'embalses.mejor': 'Mejor',
+        'embalses.aria': 'Mapa de embalses por porcentaje de reserva', 'embalses.hidro': 'Hidroeléctrico',
+        'embalses.llenado': 'Llenado:', 'embalses.habitual': 'Habitual en esta semana:', 'embalses.diferencia': 'Diferencia:',
+        'embalses.leyenda': 'Reserva sobre lo habitual', 'embalses.igual': 'igual',
+        'embalses.nota': 'El tamaño de cada cuadrado es proporcional a la capacidad del embalse y su relleno, al porcentaje de agua embalsada. Gris: sin histórico suficiente. Fuente:',
+        // SankeyPresupuesto
+        'sankey.titulo': 'Flujo de los Presupuestos Consolidados de España',
+        'sankey.subtitulo': 'Recaudación de ingresos tributarios y destino del gasto público (Millones de €)',
+        'sankey.central': 'Presupuesto Consolidado AAPP', 'sankey.flujo': 'Flujo Presupuestario', 'sankey.partida': 'Partida',
+        'sankey.cargando': 'Cargando diagrama de flujo presupuestario...',
+        'sankey.ingresos': 'Ingresos', 'sankey.gastos': 'Gastos', 'sankey.mayores': 'los mayores', 'sankey.unidad': 'M€',
+        // BuscadorInicio y BuscadorMunicipio
+        'buscador.label': 'Busca tu municipio',
+        'buscador.inicio.ph': 'Escribe tu municipio: población, cuentas, quién gobierna…',
+        'buscador.ph': 'Escribe al menos dos letras: Sevilla, Vigo, Almendralejo…',
+        'buscador.encontrados': '{n} municipios encontrados', 'buscador.municipios': 'Municipios',
+        // CustomTable
+        'tabla.sinDatos': 'No hay datos', 'tabla.anterior': 'Página anterior', 'tabla.siguiente': 'Página siguiente',
+        'tabla.pagina': 'Página', 'tabla.filas': '{n} filas', 'tabla.buscarPh': 'Buscar...', 'tabla.buscarEn': 'Buscar en la tabla',
+        'tabla.buscar': 'Buscar', 'tabla.borrar': 'Borrar la búsqueda', 'tabla.csvAria': 'Descargar la tabla en CSV',
+        // PopulationPyramid
+        'piramide.mujeres': 'Mujeres', 'piramide.hombres': 'Hombres', 'piramide.ano': 'Año'
+    },
+    en: {
+        'opc.mas': 'More options', 'opc.imprimir': 'Print or save as PDF', 'opc.mostrar': 'Show SQL queries', 'opc.ocultar': 'Hide SQL queries', 'opc.apariencia': 'Appearance', 'tema.system': 'System', 'tema.light': 'Light', 'tema.dark': 'Dark',
+        'menu.territorios': 'Regions', 'menu.demografia': 'Population', 'menu.economia': 'Economy',
+        'menu.vivienda': 'Housing', 'menu.cuentas': 'Public Finances', 'menu.energia': 'Energy/Climate',
+        'menu.movilidad': 'Mobility', 'menu.sociedad': 'Society', 'menu.transparencia': 'Transparency',
+        'menu.varios': 'More', 'menu.fuentes': 'Sources',
+        'menu.abrir': 'Open main menu', 'menu.cerrar': 'Close main menu', 'menu.principal': 'Main menu',
+        'menu.inicio': 'SpainFacts, home page', 'menu.idioma': 'Language',
+        'saltar': 'Skip to content',
+        'kpi.detalle': 'See details', 'kpi.csv': 'Download the series as CSV', 'kpi.variacion': 'Change',
+        'kpi.evolucion': 'Recent trend of', 'kpi.de': 'from', 'kpi.a': 'to',
+        'compartir': 'Share', 'compartir.copiar': 'Copy link', 'compartir.copiado': 'Link copied',
+        'compartir.instagram': 'Link copied: paste it on Instagram',
+        'compartir.instagram2': 'Copy the page link to paste it on Instagram',
+        'compartir.ventana': '(opens in a new window)',
+        'grafico': 'Chart', 'grafico.csv': 'The data can be downloaded as CSV below.',
+        'grafico.imagen': 'Save image', 'grafico.datos': 'Download data (CSV)', 'tabla.csv': 'Download CSV',
+        'comparativa': 'International comparison', 'pais.ESP': 'Spain', 'pais.EUU': 'EU', 'pais.OED': 'OECD',
+        'pais.FRA': 'France', 'pais.PRT': 'Portugal', 'pais.DEU': 'Germany', 'pais.ITA': 'Italy',
+        'pais.MAR': 'Morocco', 'pais.USA': 'US', 'pais.CHN': 'China',
+        'buscar': 'Search…', 'de': 'of', 'sin.resultados': 'Nothing matches',
+        'nueva.pestana': '(opens in a new tab)',
+        'cargando': 'Loading…', 'sin.datos': 'No data', 'pais.AND': 'Andorra', 'hab': 'inhab.',
+        // DirectoSistemaElectrico
+        'directo.sis.nacional': 'Spain (total)', 'directo.sis.peninsula': 'Mainland', 'directo.sis.baleares': 'Balearic Islands',
+        'directo.sis.canarias': 'Canary Islands', 'directo.sis.ceuta': 'Ceuta', 'directo.sis.melilla': 'Melilla',
+        'directo.tec.nuclear': 'Nuclear', 'directo.tec.carbon': 'Coal', 'directo.tec.ciclo_combinado': 'Combined cycle',
+        'directo.tec.cogeneracion_residuos': 'Cogeneration and waste', 'directo.tec.diesel': 'Diesel engines',
+        'directo.tec.turbina_gas': 'Gas turbine', 'directo.tec.motores_vapor': 'Steam turbine',
+        'directo.tec.otras_no_renovables': 'Other non-renewables', 'directo.tec.hidraulica': 'Hydro',
+        'directo.tec.turbinacion_bombeo': 'Pumped-storage generation', 'directo.tec.baterias_descarga': 'Batteries',
+        'directo.tec.otras_renovables': 'Other renewables', 'directo.tec.eolica': 'Wind',
+        'directo.tec.solar_termica': 'Solar thermal', 'directo.tec.solar_fv': 'Solar PV',
+        'directo.envivo': 'Live', 'directo.noDirecto': 'Not live',
+        'directo.datos.pre': 'Data as of', 'directo.datos.hora': '(mainland Spain time)',
+        'directo.retraso': '{n} min behind', 'directo.datos.build': '(last site update)',
+        'directo.sinDatosMin': 'no data', 'directo.colorear': 'Colour systems by',
+        'directo.renovables': 'Renewables', 'directo.co2': 'CO₂ intensity',
+        'directo.mapa.aria': "Map of Spain's electricity systems with current international exchanges",
+        'directo.canarias.nota': 'Canary Islands (different scale; Canary time = mainland − 1 h)',
+        'directo.espana': 'Spain', 'directo.renovAbr': 'renew.',
+        'directo.leyenda.ren': 'Share of generation from renewables (%)',
+        'directo.leyenda.co2': 'Carbon intensity of generation (gCO₂/kWh)',
+        'directo.importa': 'Spain imports', 'directo.exporta': 'Spain exports', 'directo.enlace': 'Mainland–Balearic link',
+        'directo.tabla.caption': 'Demand, renewable share and CO₂ intensity by electricity system',
+        'directo.sistema': 'System', 'directo.demanda': 'Demand', 'directo.renovable': 'Renewable', 'directo.renov': 'Renew.',
+        'directo.pulsa': 'Click a system to see its mix over the last 24 hours.',
+        'directo.saldo': 'Mainland net exchange:', 'directo.importaV': 'imports', 'directo.exportaV': 'exports',
+        'directo.precio': 'Electricity price (mainland)', 'directo.omie': 'Wholesale market (OMIE)',
+        'directo.cuarto': ', quarter-hour from', 'directo.pvpc': 'PVPC (regulated tariff, network charges included)',
+        'directo.horaDe': ', hour from',
+        'directo.precioUnico': 'Single price for the whole mainland: Spain is a single bidding zone.',
+        'directo.soloDirecto': 'The price is only shown live. See the day-ahead market at',
+        'directo.mixDe': 'Mix:', 'directo.sinDatosSistema': 'No data for this system.',
+        'directo.gen24': 'Generation by technology over the last 24 hours', 'directo.sistemaElectrico': 'Electricity system',
+        'directo.gen24.aria': 'Stacked generation by technology over the last 24 hours', 'directo.demandaMin': 'demand',
+        'directo.sinSerie': 'No data for the last 24 hours for this system.',
+        'directo.fuente': 'Source: Red Eléctrica (REE), provisional real-time data every 5 minutes.',
+        'directo.seActualiza': 'Updates automatically every 5 minutes.',
+        'directo.error.pre': 'Could not connect to the live service',
+        'directo.error.post': '; showing data from the last site update.',
+        // MapaEmbalses
+        'embalses.uso': 'Reservoir use', 'embalses.consumo': 'Supply', 'embalses.todos': 'All', 'embalses.hidroAbr': 'Hydro',
+        'embalses.estado': 'Compared with normal', 'embalses.peor': 'Worse', 'embalses.mejor': 'Better',
+        'embalses.aria': 'Map of reservoirs by storage level', 'embalses.hidro': 'Hydroelectric',
+        'embalses.llenado': 'Fill level:', 'embalses.habitual': 'Normal for this week:', 'embalses.diferencia': 'Difference:',
+        'embalses.leyenda': 'Storage versus normal', 'embalses.igual': 'same',
+        'embalses.nota': "The size of each square is proportional to the reservoir's capacity, and its fill to the percentage of water stored. Grey: not enough history. Source:",
+        // SankeyPresupuesto
+        'sankey.titulo': "Flow of Spain's Consolidated Budgets",
+        'sankey.subtitulo': 'Tax revenue collected and where public spending goes (€ million)',
+        'sankey.central': 'Consolidated general government budget', 'sankey.flujo': 'Budget flow', 'sankey.partida': 'Item',
+        'sankey.cargando': 'Loading budget flow diagram...',
+        'sankey.ingresos': 'Revenue', 'sankey.gastos': 'Spending', 'sankey.mayores': 'largest', 'sankey.unidad': '€m',
+        // BuscadorInicio y BuscadorMunicipio
+        'buscador.label': 'Find your municipality',
+        'buscador.inicio.ph': 'Type your municipality: population, finances, who governs…',
+        'buscador.ph': 'Type at least two letters: Seville, Vigo, Almendralejo…',
+        'buscador.encontrados': '{n} municipalities found', 'buscador.municipios': 'Municipalities',
+        // CustomTable
+        'tabla.sinDatos': 'No data', 'tabla.anterior': 'Previous page', 'tabla.siguiente': 'Next page',
+        'tabla.pagina': 'Page', 'tabla.filas': '{n} rows', 'tabla.buscarPh': 'Search...', 'tabla.buscarEn': 'Search the table',
+        'tabla.buscar': 'Search', 'tabla.borrar': 'Clear search', 'tabla.csvAria': 'Download the table as CSV',
+        // PopulationPyramid
+        'piramide.mujeres': 'Women', 'piramide.hombres': 'Men', 'piramide.ano': 'Year'
+    },
+    ca: {
+        'opc.mas': 'Més opcions', 'opc.imprimir': 'Imprimeix o desa en PDF', 'opc.mostrar': 'Mostra les consultes SQL', 'opc.ocultar': 'Amaga les consultes SQL', 'opc.apariencia': 'Aparença', 'tema.system': 'Sistema', 'tema.light': 'Clar', 'tema.dark': 'Fosc',
+        'menu.territorios': 'Territoris', 'menu.demografia': 'Demografia', 'menu.economia': 'Economia',
+        'menu.vivienda': 'Habitatge', 'menu.cuentas': 'Comptes Públics', 'menu.energia': 'Energia/Clima',
+        'menu.movilidad': 'Mobilitat', 'menu.sociedad': 'Societat', 'menu.transparencia': 'Transparència',
+        'menu.varios': 'Altres', 'menu.fuentes': 'Fonts',
+        'menu.abrir': 'Obre el menú principal', 'menu.cerrar': 'Tanca el menú principal', 'menu.principal': 'Menú principal',
+        'menu.inicio': "SpainFacts, pàgina d'inici", 'menu.idioma': 'Idioma',
+        'saltar': 'Salta al contingut',
+        'kpi.detalle': 'Mostra el detall', 'kpi.csv': 'Descarrega la sèrie en CSV', 'kpi.variacion': 'Variació',
+        'kpi.evolucion': 'Evolució recent de', 'kpi.de': 'de', 'kpi.a': 'a',
+        'compartir': 'Comparteix', 'compartir.copiar': "Copia l'enllaç", 'compartir.copiado': 'Enllaç copiat',
+        'compartir.instagram': "Enllaç copiat: enganxa'l a Instagram",
+        'compartir.instagram2': "Copia l'enllaç de la pàgina per enganxar-lo a Instagram",
+        'compartir.ventana': "(s'obre en una finestra nova)",
+        'grafico': 'Gràfic', 'grafico.csv': 'Les dades es poden descarregar en CSV a sota.',
+        'grafico.imagen': 'Desa la imatge', 'grafico.datos': 'Descarrega les dades (CSV)', 'tabla.csv': 'Descarrega CSV',
+        'comparativa': 'Comparació internacional', 'pais.ESP': 'Espanya', 'pais.EUU': 'UE', 'pais.OED': 'OCDE',
+        'pais.FRA': 'França', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemanya', 'pais.ITA': 'Itàlia',
+        'pais.MAR': 'Marroc', 'pais.USA': 'EUA', 'pais.CHN': 'Xina',
+        'buscar': 'Cerca…', 'de': 'de', 'sin.resultados': 'Res no coincideix amb',
+        'nueva.pestana': "(s'obre en una pestanya nova)",
+        'cargando': 'Carregant…', 'sin.datos': 'Sense dades', 'pais.AND': 'Andorra', 'hab': 'hab.',
+        // DirectoSistemaElectrico
+        'directo.sis.nacional': 'Espanya (total)', 'directo.sis.peninsula': 'Península', 'directo.sis.baleares': 'Balears',
+        'directo.sis.canarias': 'Canàries', 'directo.sis.ceuta': 'Ceuta', 'directo.sis.melilla': 'Melilla',
+        'directo.tec.nuclear': 'Nuclear', 'directo.tec.carbon': 'Carbó', 'directo.tec.ciclo_combinado': 'Cicle combinat',
+        'directo.tec.cogeneracion_residuos': 'Cogeneració i residus', 'directo.tec.diesel': 'Motors dièsel',
+        'directo.tec.turbina_gas': 'Turbina de gas', 'directo.tec.motores_vapor': 'Turbina de vapor',
+        'directo.tec.otras_no_renovables': 'Altres no renovables', 'directo.tec.hidraulica': 'Hidràulica',
+        'directo.tec.turbinacion_bombeo': 'Turbinació de bombament', 'directo.tec.baterias_descarga': 'Bateries',
+        'directo.tec.otras_renovables': 'Altres renovables', 'directo.tec.eolica': 'Eòlica',
+        'directo.tec.solar_termica': 'Solar tèrmica', 'directo.tec.solar_fv': 'Solar fotovoltaica',
+        'directo.envivo': 'En directe', 'directo.noDirecto': 'No en directe',
+        'directo.datos.pre': 'Dades de les', 'directo.datos.hora': '(hora peninsular)',
+        'directo.retraso': 'amb {n} min de retard', 'directo.datos.build': '(darrera actualització del lloc)',
+        'directo.sinDatosMin': 'sense dades', 'directo.colorear': 'Acoloreix els sistemes per',
+        'directo.renovables': 'Renovables', 'directo.co2': 'Intensitat de CO₂',
+        'directo.mapa.aria': 'Mapa dels sistemes elèctrics espanyols amb els intercanvis internacionals en aquest moment',
+        'directo.canarias.nota': 'Canàries (a una altra escala; hora canària = peninsular − 1 h)',
+        'directo.espana': 'Espanya', 'directo.renovAbr': 'renov.',
+        'directo.leyenda.ren': '% de la generació que és renovable',
+        'directo.leyenda.co2': 'Intensitat de carboni de la generació (gCO₂/kWh)',
+        'directo.importa': 'Espanya importa', 'directo.exporta': 'Espanya exporta', 'directo.enlace': 'Enllaç Península–Balears',
+        'directo.tabla.caption': 'Demanda, percentatge renovable i intensitat de CO₂ per sistema elèctric',
+        'directo.sistema': 'Sistema', 'directo.demanda': 'Demanda', 'directo.renovable': 'Renovable', 'directo.renov': 'Renov.',
+        'directo.pulsa': "Fes clic en un sistema per veure'n el mix de les darreres 24 hores.",
+        'directo.saldo': 'Saldo exterior de la Península:', 'directo.importaV': 'importa', 'directo.exportaV': 'exporta',
+        'directo.precio': "Preu de l'electricitat (Península)", 'directo.omie': 'Mercat majorista (OMIE)',
+        'directo.cuarto': ", quart d'hora de les", 'directo.pvpc': 'PVPC (tarifa regulada, peatges inclosos)',
+        'directo.horaDe': ', hora de les',
+        'directo.precioUnico': 'Preu únic per a tota la Península: Espanya és una sola zona de preu.',
+        'directo.soloDirecto': 'El preu només es mostra en directe. Consulta el mercat diari a',
+        'directo.mixDe': 'Mix de', 'directo.sinDatosSistema': 'Sense dades per a aquest sistema.',
+        'directo.gen24': 'Generació per tecnologia en les darreres 24 hores', 'directo.sistemaElectrico': 'Sistema elèctric',
+        'directo.gen24.aria': 'Generació apilada per tecnologia en les darreres 24 hores', 'directo.demandaMin': 'demanda',
+        'directo.sinSerie': 'Sense sèrie de les darreres 24 hores per a aquest sistema.',
+        'directo.fuente': 'Font: Red Eléctrica (REE), dades provisionals en temps real cada 5 minuts.',
+        'directo.seActualiza': "S'actualitza sol cada 5 minuts.",
+        'directo.error.pre': "No s'ha pogut connectar amb el servei en directe",
+        'directo.error.post': '; es mostren les dades de la darrera actualització del lloc.',
+        // MapaEmbalses
+        'embalses.uso': "Ús de l'embassament", 'embalses.consumo': 'Consum', 'embalses.todos': 'Tots', 'embalses.hidroAbr': 'Hidroelèc.',
+        'embalses.estado': "Estat respecte a l'habitual", 'embalses.peor': 'Pitjor', 'embalses.mejor': 'Millor',
+        'embalses.aria': "Mapa d'embassaments per percentatge de reserva", 'embalses.hidro': 'Hidroelèctric',
+        'embalses.llenado': 'Ompliment:', 'embalses.habitual': 'Habitual aquesta setmana:', 'embalses.diferencia': 'Diferència:',
+        'embalses.leyenda': "Reserva respecte a l'habitual", 'embalses.igual': 'igual',
+        'embalses.nota': "La mida de cada quadrat és proporcional a la capacitat de l'embassament, i el seu farciment, al percentatge d'aigua embassada. Gris: sense prou històric. Font:",
+        // SankeyPresupuesto
+        'sankey.titulo': "Flux dels Pressupostos Consolidats d'Espanya",
+        'sankey.subtitulo': "Recaptació d'ingressos tributaris i destinació de la despesa pública (milions d'€)",
+        'sankey.central': 'Pressupost Consolidat AAPP', 'sankey.flujo': 'Flux pressupostari', 'sankey.partida': 'Partida',
+        'sankey.cargando': 'Carregant el diagrama de flux pressupostari...',
+        'sankey.ingresos': 'Ingressos', 'sankey.gastos': 'Despeses', 'sankey.mayores': 'els més grans', 'sankey.unidad': 'M€',
+        // BuscadorInicio y BuscadorMunicipio
+        'buscador.label': 'Cerca el teu municipi',
+        'buscador.inicio.ph': 'Escriu el teu municipi: població, comptes, qui governa…',
+        'buscador.ph': 'Escriu almenys dues lletres: Sevilla, Vigo, Almendralejo…',
+        'buscador.encontrados': '{n} municipis trobats', 'buscador.municipios': 'Municipis',
+        // CustomTable
+        'tabla.sinDatos': 'No hi ha dades', 'tabla.anterior': 'Pàgina anterior', 'tabla.siguiente': 'Pàgina següent',
+        'tabla.pagina': 'Pàgina', 'tabla.filas': '{n} files', 'tabla.buscarPh': 'Cerca...', 'tabla.buscarEn': 'Cerca a la taula',
+        'tabla.buscar': 'Cerca', 'tabla.borrar': 'Esborra la cerca', 'tabla.csvAria': 'Descarrega la taula en CSV',
+        // PopulationPyramid
+        'piramide.mujeres': 'Dones', 'piramide.hombres': 'Homes', 'piramide.ano': 'Any'
+    },
+    gl: {
+        'opc.mas': 'Máis opcións', 'opc.imprimir': 'Imprimir ou gardar en PDF', 'opc.mostrar': 'Amosar as consultas SQL', 'opc.ocultar': 'Agochar as consultas SQL', 'opc.apariencia': 'Aparencia', 'tema.system': 'Sistema', 'tema.light': 'Claro', 'tema.dark': 'Escuro',
+        'menu.territorios': 'Territorios', 'menu.demografia': 'Demografía', 'menu.economia': 'Economía',
+        'menu.vivienda': 'Vivenda', 'menu.cuentas': 'Contas Públicas', 'menu.energia': 'Enerxía/Clima',
+        'menu.movilidad': 'Mobilidade', 'menu.sociedad': 'Sociedade', 'menu.transparencia': 'Transparencia',
+        'menu.varios': 'Outros', 'menu.fuentes': 'Fontes',
+        'menu.abrir': 'Abrir o menú principal', 'menu.cerrar': 'Pechar o menú principal', 'menu.principal': 'Menú principal',
+        'menu.inicio': 'SpainFacts, páxina de inicio', 'menu.idioma': 'Lingua',
+        'saltar': 'Saltar ao contido',
+        'kpi.detalle': 'Ver detalle', 'kpi.csv': 'Descargar a serie en CSV', 'kpi.variacion': 'Variación',
+        'kpi.evolucion': 'Evolución recente de', 'kpi.de': 'de', 'kpi.a': 'a',
+        'compartir': 'Compartir', 'compartir.copiar': 'Copiar ligazón', 'compartir.copiado': 'Ligazón copiada',
+        'compartir.instagram': 'Ligazón copiada: pégaa en Instagram',
+        'compartir.instagram2': 'Copia a ligazón da páxina para pegala en Instagram',
+        'compartir.ventana': '(ábrese nunha xanela nova)',
+        'grafico': 'Gráfico', 'grafico.csv': 'Os datos pódense descargar en CSV debaixo.',
+        'grafico.imagen': 'Gardar imaxe', 'grafico.datos': 'Descargar datos (CSV)', 'tabla.csv': 'Descargar CSV',
+        'comparativa': 'Comparación internacional', 'pais.ESP': 'España', 'pais.EUU': 'UE', 'pais.OED': 'OCDE',
+        'pais.FRA': 'Francia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemaña', 'pais.ITA': 'Italia',
+        'pais.MAR': 'Marrocos', 'pais.USA': 'EUA', 'pais.CHN': 'China',
+        'buscar': 'Buscar…', 'de': 'de', 'sin.resultados': 'Nada coincide con',
+        'nueva.pestana': '(ábrese nunha lapela nova)',
+        'cargando': 'Cargando…', 'sin.datos': 'Sen datos', 'pais.AND': 'Andorra', 'hab': 'hab.',
+        // DirectoSistemaElectrico
+        'directo.sis.nacional': 'España (total)', 'directo.sis.peninsula': 'Península', 'directo.sis.baleares': 'Baleares',
+        'directo.sis.canarias': 'Canarias', 'directo.sis.ceuta': 'Ceuta', 'directo.sis.melilla': 'Melilla',
+        'directo.tec.nuclear': 'Nuclear', 'directo.tec.carbon': 'Carbón', 'directo.tec.ciclo_combinado': 'Ciclo combinado',
+        'directo.tec.cogeneracion_residuos': 'Coxeración e residuos', 'directo.tec.diesel': 'Motores diésel',
+        'directo.tec.turbina_gas': 'Turbina de gas', 'directo.tec.motores_vapor': 'Turbina de vapor',
+        'directo.tec.otras_no_renovables': 'Outras non renovables', 'directo.tec.hidraulica': 'Hidráulica',
+        'directo.tec.turbinacion_bombeo': 'Turbinación de bombeo', 'directo.tec.baterias_descarga': 'Baterías',
+        'directo.tec.otras_renovables': 'Outras renovables', 'directo.tec.eolica': 'Eólica',
+        'directo.tec.solar_termica': 'Solar térmica', 'directo.tec.solar_fv': 'Solar fotovoltaica',
+        'directo.envivo': 'En directo', 'directo.noDirecto': 'Non en directo',
+        'directo.datos.pre': 'Datos das', 'directo.datos.hora': '(hora peninsular)',
+        'directo.retraso': 'con {n} min de atraso', 'directo.datos.build': '(última actualización do sitio)',
+        'directo.sinDatosMin': 'sen datos', 'directo.colorear': 'Colorear os sistemas por',
+        'directo.renovables': 'Renovables', 'directo.co2': 'Intensidade de CO₂',
+        'directo.mapa.aria': 'Mapa dos sistemas eléctricos españois cos intercambios internacionais neste momento',
+        'directo.canarias.nota': 'Canarias (a outra escala; hora canaria = peninsular − 1 h)',
+        'directo.espana': 'España', 'directo.renovAbr': 'renov.',
+        'directo.leyenda.ren': '% da xeración que é renovable',
+        'directo.leyenda.co2': 'Intensidade de carbono da xeración (gCO₂/kWh)',
+        'directo.importa': 'España importa', 'directo.exporta': 'España exporta', 'directo.enlace': 'Enlace Península–Baleares',
+        'directo.tabla.caption': 'Demanda, porcentaxe renovable e intensidade de CO₂ por sistema eléctrico',
+        'directo.sistema': 'Sistema', 'directo.demanda': 'Demanda', 'directo.renovable': 'Renovable', 'directo.renov': 'Renov.',
+        'directo.pulsa': 'Preme un sistema para ver o seu mix das últimas 24 horas.',
+        'directo.saldo': 'Saldo exterior da Península:', 'directo.importaV': 'importa', 'directo.exportaV': 'exporta',
+        'directo.precio': 'Prezo da electricidade (Península)', 'directo.omie': 'Mercado por xunto (OMIE)',
+        'directo.cuarto': ', cuarto de hora das', 'directo.pvpc': 'PVPC (tarifa regulada, peaxes incluídas)',
+        'directo.horaDe': ', hora das',
+        'directo.precioUnico': 'Prezo único para toda a Península: España é unha soa zona de prezo.',
+        'directo.soloDirecto': 'O prezo só se amosa en directo. Consulta o mercado diario en',
+        'directo.mixDe': 'Mix de', 'directo.sinDatosSistema': 'Sen datos para este sistema.',
+        'directo.gen24': 'Xeración por tecnoloxía nas últimas 24 horas', 'directo.sistemaElectrico': 'Sistema eléctrico',
+        'directo.gen24.aria': 'Xeración apilada por tecnoloxía nas últimas 24 horas', 'directo.demandaMin': 'demanda',
+        'directo.sinSerie': 'Sen serie das últimas 24 horas para este sistema.',
+        'directo.fuente': 'Fonte: Red Eléctrica (REE), datos provisionais en tempo real cada 5 minutos.',
+        'directo.seActualiza': 'Actualízase só cada 5 minutos.',
+        'directo.error.pre': 'Non se puido conectar co servizo en directo',
+        'directo.error.post': '; amósanse os datos da última actualización do sitio.',
+        // MapaEmbalses
+        'embalses.uso': 'Uso do encoro', 'embalses.consumo': 'Consumo', 'embalses.todos': 'Todos', 'embalses.hidroAbr': 'Hidroeléc.',
+        'embalses.estado': 'Estado fronte ao habitual', 'embalses.peor': 'Peor', 'embalses.mejor': 'Mellor',
+        'embalses.aria': 'Mapa de encoros por porcentaxe de reserva', 'embalses.hidro': 'Hidroeléctrico',
+        'embalses.llenado': 'Enchido:', 'embalses.habitual': 'Habitual nesta semana:', 'embalses.diferencia': 'Diferenza:',
+        'embalses.leyenda': 'Reserva sobre o habitual', 'embalses.igual': 'igual',
+        'embalses.nota': 'O tamaño de cada cadrado é proporcional á capacidade do encoro, e o seu recheo, á porcentaxe de auga embalsada. Gris: sen histórico suficiente. Fonte:',
+        // SankeyPresupuesto
+        'sankey.titulo': 'Fluxo dos Orzamentos Consolidados de España',
+        'sankey.subtitulo': 'Recadación de ingresos tributarios e destino do gasto público (millóns de €)',
+        'sankey.central': 'Orzamento Consolidado AAPP', 'sankey.flujo': 'Fluxo orzamentario', 'sankey.partida': 'Partida',
+        'sankey.cargando': 'Cargando o diagrama de fluxo orzamentario...',
+        'sankey.ingresos': 'Ingresos', 'sankey.gastos': 'Gastos', 'sankey.mayores': 'os maiores', 'sankey.unidad': 'M€',
+        // BuscadorInicio y BuscadorMunicipio
+        'buscador.label': 'Busca o teu concello',
+        'buscador.inicio.ph': 'Escribe o teu concello: poboación, contas, quen goberna…',
+        'buscador.ph': 'Escribe polo menos dúas letras: Sevilla, Vigo, Almendralejo…',
+        'buscador.encontrados': '{n} concellos atopados', 'buscador.municipios': 'Concellos',
+        // CustomTable
+        'tabla.sinDatos': 'Non hai datos', 'tabla.anterior': 'Páxina anterior', 'tabla.siguiente': 'Páxina seguinte',
+        'tabla.pagina': 'Páxina', 'tabla.filas': '{n} filas', 'tabla.buscarPh': 'Buscar...', 'tabla.buscarEn': 'Buscar na táboa',
+        'tabla.buscar': 'Buscar', 'tabla.borrar': 'Borrar a busca', 'tabla.csvAria': 'Descargar a táboa en CSV',
+        // PopulationPyramid
+        'piramide.mujeres': 'Mulleres', 'piramide.hombres': 'Homes', 'piramide.ano': 'Ano'
+    },
+    eu: {
+        'opc.mas': 'Aukera gehiago', 'opc.imprimir': 'Inprimatu edo gorde PDF gisa', 'opc.mostrar': 'Erakutsi SQL kontsultak', 'opc.ocultar': 'Ezkutatu SQL kontsultak', 'opc.apariencia': 'Itxura', 'tema.system': 'Sistema', 'tema.light': 'Argia', 'tema.dark': 'Iluna',
+        'menu.territorios': 'Lurraldeak', 'menu.demografia': 'Demografia', 'menu.economia': 'Ekonomia',
+        'menu.vivienda': 'Etxebizitza', 'menu.cuentas': 'Kontu Publikoak', 'menu.energia': 'Energia/Klima',
+        'menu.movilidad': 'Mugikortasuna', 'menu.sociedad': 'Gizartea', 'menu.transparencia': 'Gardentasuna',
+        'menu.varios': 'Bestelakoak', 'menu.fuentes': 'Iturriak',
+        'menu.abrir': 'Ireki menu nagusia', 'menu.cerrar': 'Itxi menu nagusia', 'menu.principal': 'Menu nagusia',
+        'menu.inicio': 'SpainFacts, hasiera orria', 'menu.idioma': 'Hizkuntza',
+        'saltar': 'Joan edukira',
+        'kpi.detalle': 'Ikusi xehetasunak', 'kpi.csv': 'Deskargatu seriea CSV formatuan', 'kpi.variacion': 'Aldaketa',
+        'kpi.evolucion': 'Azken bilakaera:', 'kpi.de': '', 'kpi.a': '→',
+        'compartir': 'Partekatu', 'compartir.copiar': 'Kopiatu esteka', 'compartir.copiado': 'Esteka kopiatuta',
+        'compartir.instagram': 'Esteka kopiatuta: itsatsi Instagramen',
+        'compartir.instagram2': 'Kopiatu orriaren esteka Instagramen itsasteko',
+        'compartir.ventana': '(leiho berri batean irekitzen da)',
+        'grafico': 'Grafikoa', 'grafico.csv': 'Datuak CSV formatuan deskarga daitezke behean.',
+        'grafico.imagen': 'Gorde irudia', 'grafico.datos': 'Deskargatu datuak (CSV)', 'tabla.csv': 'Deskargatu CSV',
+        'comparativa': 'Nazioarteko konparazioa', 'pais.ESP': 'Espainia', 'pais.EUU': 'EB', 'pais.OED': 'ELGA',
+        'pais.FRA': 'Frantzia', 'pais.PRT': 'Portugal', 'pais.DEU': 'Alemania', 'pais.ITA': 'Italia',
+        'pais.MAR': 'Maroko', 'pais.USA': 'AEB', 'pais.CHN': 'Txina',
+        'buscar': 'Bilatu…', 'de': '/', 'sin.resultados': 'Ez dago bat datorrenik:',
+        'nueva.pestana': '(fitxa berri batean irekitzen da)',
+        'cargando': 'Kargatzen…', 'sin.datos': 'Daturik ez', 'pais.AND': 'Andorra', 'hab': 'biztanle',
+        // DirectoSistemaElectrico
+        'directo.sis.nacional': 'Espainia (guztira)', 'directo.sis.peninsula': 'Penintsula', 'directo.sis.baleares': 'Balearrak',
+        'directo.sis.canarias': 'Kanariak', 'directo.sis.ceuta': 'Ceuta', 'directo.sis.melilla': 'Melilla',
+        'directo.tec.nuclear': 'Nuklearra', 'directo.tec.carbon': 'Ikatza', 'directo.tec.ciclo_combinado': 'Ziklo konbinatua',
+        'directo.tec.cogeneracion_residuos': 'Kogenerazioa eta hondakinak', 'directo.tec.diesel': 'Diesel motorrak',
+        'directo.tec.turbina_gas': 'Gas-turbina', 'directo.tec.motores_vapor': 'Lurrun-turbina',
+        'directo.tec.otras_no_renovables': 'Beste ez-berriztagarri batzuk', 'directo.tec.hidraulica': 'Hidraulikoa',
+        'directo.tec.turbinacion_bombeo': 'Ponpaketa-turbinazioa', 'directo.tec.baterias_descarga': 'Bateriak',
+        'directo.tec.otras_renovables': 'Beste berriztagarri batzuk', 'directo.tec.eolica': 'Eolikoa',
+        'directo.tec.solar_termica': 'Eguzki-termikoa', 'directo.tec.solar_fv': 'Eguzki-fotovoltaikoa',
+        'directo.envivo': 'Zuzenean', 'directo.noDirecto': 'Ez zuzenean',
+        'directo.datos.pre': 'Datuen ordua:', 'directo.datos.hora': '(penintsulako ordua)',
+        'directo.retraso': '{n} min-ko atzerapenarekin', 'directo.datos.build': '(webgunearen azken eguneraketa)',
+        'directo.sinDatosMin': 'daturik ez', 'directo.colorear': 'Sistemen kolorea, honen arabera',
+        'directo.renovables': 'Berriztagarriak', 'directo.co2': 'CO₂ intentsitatea',
+        'directo.mapa.aria': 'Espainiako sistema elektrikoen mapa, une honetako nazioarteko trukeekin',
+        'directo.canarias.nota': 'Kanariak (beste eskala batean; Kanarietako ordua = penintsulakoa − 1 h)',
+        'directo.espana': 'Espainia', 'directo.renovAbr': 'berriz.',
+        'directo.leyenda.ren': 'Sorkuntzaren zenbat % den berriztagarria',
+        'directo.leyenda.co2': 'Sorkuntzaren karbono-intentsitatea (gCO₂/kWh)',
+        'directo.importa': 'Espainiak inportatzen du', 'directo.exporta': 'Espainiak esportatzen du', 'directo.enlace': 'Penintsula–Balearrak lotura',
+        'directo.tabla.caption': 'Eskaria, ehuneko berriztagarria eta CO₂ intentsitatea sistema elektrikoka',
+        'directo.sistema': 'Sistema', 'directo.demanda': 'Eskaria', 'directo.renovable': 'Berriztagarria', 'directo.renov': 'Berriz.',
+        'directo.pulsa': 'Sakatu sistema bat azken 24 orduetako mixa ikusteko.',
+        'directo.saldo': 'Penintsularen kanpo-saldoa:', 'directo.importaV': 'inportazioa', 'directo.exportaV': 'esportazioa',
+        'directo.precio': 'Elektrizitatearen prezioa (Penintsula)', 'directo.omie': 'Handizkako merkatua (OMIE)',
+        'directo.cuarto': ', ordu-laurdena:', 'directo.pvpc': 'PVPC (tarifa arautua, bidesariak barne)',
+        'directo.horaDe': ', ordua:',
+        'directo.precioUnico': 'Prezio bakarra Penintsula osorako: Espainia prezio-eremu bakarra da.',
+        'directo.soloDirecto': 'Prezioa zuzenean soilik erakusten da. Eguneko merkatua hemen kontsulta dezakezu:',
+        'directo.mixDe': 'Mixa:', 'directo.sinDatosSistema': 'Ez dago daturik sistema honetarako.',
+        'directo.gen24': 'Sorkuntza teknologiaka azken 24 orduetan', 'directo.sistemaElectrico': 'Sistema elektrikoa',
+        'directo.gen24.aria': 'Teknologiaka metatutako sorkuntza azken 24 orduetan', 'directo.demandaMin': 'eskaria',
+        'directo.sinSerie': 'Ez dago azken 24 orduetako seriarik sistema honetarako.',
+        'directo.fuente': 'Iturria: Red Eléctrica (REE), denbora errealeko behin-behineko datuak 5 minuturo.',
+        'directo.seActualiza': 'Bost minuturo eguneratzen da berez.',
+        'directo.error.pre': 'Ezin izan da zuzeneko zerbitzuarekin konektatu',
+        'directo.error.post': '; webgunearen azken eguneraketako datuak erakusten dira.',
+        // MapaEmbalses
+        'embalses.uso': 'Urtegiaren erabilera', 'embalses.consumo': 'Kontsumoa', 'embalses.todos': 'Guztiak', 'embalses.hidroAbr': 'Hidroelek.',
+        'embalses.estado': 'Egoera ohikoarekin alderatuta', 'embalses.peor': 'Okerrago', 'embalses.mejor': 'Hobeto',
+        'embalses.aria': 'Urtegien mapa erreserba-ehunekoaren arabera', 'embalses.hidro': 'Hidroelektrikoa',
+        'embalses.llenado': 'Betetze-maila:', 'embalses.habitual': 'Aste honetan ohikoa:', 'embalses.diferencia': 'Aldea:',
+        'embalses.leyenda': 'Erreserba ohikoarekiko', 'embalses.igual': 'berdin',
+        'embalses.nota': 'Karratu bakoitzaren tamaina urtegiaren edukierarekiko proportzionala da, eta betegarria, urtegiratutako ur-ehunekoarekiko. Grisa: historiko nahikorik ez. Iturria:',
+        // SankeyPresupuesto
+        'sankey.titulo': 'Espainiako Aurrekontu Bateratuen fluxua',
+        'sankey.subtitulo': 'Zerga-sarreren bilketa eta gastu publikoaren norakoa (milioi €)',
+        'sankey.central': 'Herri Administrazioen Aurrekontu Bateratua', 'sankey.flujo': 'Aurrekontu-fluxua', 'sankey.partida': 'Partida',
+        'sankey.cargando': 'Aurrekontu-fluxuaren diagrama kargatzen...',
+        'sankey.ingresos': 'Diru-sarrerak', 'sankey.gastos': 'Gastuak', 'sankey.mayores': 'handienak', 'sankey.unidad': 'M€',
+        // BuscadorInicio y BuscadorMunicipio
+        'buscador.label': 'Bilatu zure udalerria',
+        'buscador.inicio.ph': 'Idatzi zure udalerria: biztanleria, kontuak, nork gobernatzen duen…',
+        'buscador.ph': 'Idatzi gutxienez bi letra: Sevilla, Vigo, Almendralejo…',
+        'buscador.encontrados': '{n} udalerri aurkitu dira', 'buscador.municipios': 'Udalerriak',
+        // CustomTable
+        'tabla.sinDatos': 'Ez dago daturik', 'tabla.anterior': 'Aurreko orria', 'tabla.siguiente': 'Hurrengo orria',
+        'tabla.pagina': 'Orria', 'tabla.filas': '{n} errenkada', 'tabla.buscarPh': 'Bilatu...', 'tabla.buscarEn': 'Bilatu taulan',
+        'tabla.buscar': 'Bilatu', 'tabla.borrar': 'Garbitu bilaketa', 'tabla.csvAria': 'Deskargatu taula CSV formatuan',
+        // PopulationPyramid
+        'piramide.mujeres': 'Emakumeak', 'piramide.hombres': 'Gizonak', 'piramide.ano': 'Urtea'
+    }
+};
+
+/** Texto de la interfaz en el idioma dado (cae al castellano si falta) */
+export function t(clave, lang = 'es') {
+    return TEXTOS[lang]?.[clave] ?? TEXTOS.es[clave] ?? clave;
+}
+
+/** Como t(), sustituyendo {marcadores}: tf('tabla.filas', 'en', { n: 3 }) -> '3 rows' */
+export function tf(clave, lang = 'es', vars = {}) {
+    return t(clave, lang).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+}

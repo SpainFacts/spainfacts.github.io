@@ -8,6 +8,7 @@ og:
 <script>
     import { formatNumber, formatCurrency, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../src/lib/components/Comparativa.svelte';
     import SankeyPresupuesto from '../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
@@ -187,6 +188,14 @@ ORDER BY anio
     />
 </Grid>
 
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('deuda_publica')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'deuda_publica')} />
+
+
 <p class="text-xs text-gray-500">Principio de esta web: los importes en euros se muestran <b>por habitante</b> (para que no crezcan solo porque crece la población) y <b>descontada la inflación</b>, en euros de {base_deflactor[0]?.anio_base} según el IPC medio anual del INE. Los totales en euros corrientes aparecen como dato secundario. Los porcentajes del PIB no necesitan ajuste.</p>
 
 ---
@@ -205,7 +214,7 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
 
 <Grid cols=2>
     <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
-        <h4 class="font-bold text-blue-900 dark:text-blue-300 mb-1">📥 ¿Quieres profundizar en los ingresos?</h4>
+        <h3 class="font-bold text-blue-900 dark:text-blue-300 mb-1"><span aria-hidden="true">📥</span> ¿Quieres profundizar en los ingresos?</h3>
         <p class="text-xs text-blue-700 dark:text-blue-400 mb-2">Consulta la recaudación por IRPF, IVA, Sociedades, Cotizaciones y tasas públicas.</p>
         <a href="/cuentas-publicas/ingresos" class="text-xs font-bold text-blue-600 dark:text-blue-300 hover:underline">
             Ver informe completo de Ingresos Públicos →
@@ -213,7 +222,7 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
     </div>
 
     <div class="p-4 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
-        <h4 class="font-bold text-purple-900 dark:text-purple-300 mb-1">📤 ¿Quieres ver el detalle de los gastos?</h4>
+        <h3 class="font-bold text-purple-900 dark:text-purple-300 mb-1"><span aria-hidden="true">📤</span> ¿Quieres ver el detalle de los gastos?</h3>
         <p class="text-xs text-purple-700 dark:text-purple-400 mb-2">Descubre cuánto gasta el Estado por habitante en Sanidad, Pensiones, Educación y Defensa.</p>
         <a href="/cuentas-publicas/gastos" class="text-xs font-bold text-purple-600 dark:text-purple-300 hover:underline">
             Ver informe completo de Gastos y Coste por Habitante →
@@ -221,17 +230,17 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
     </div>
 
     <div class="p-4 rounded-lg bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800">
-        <h4 class="font-bold text-teal-900 dark:text-teal-300 mb-1">🏛️ ¿Cuántos empleados públicos hay?</h4>
+        <h3 class="font-bold text-teal-900 dark:text-teal-300 mb-1"><span aria-hidden="true">🏛️</span> ¿Cuántos empleados públicos hay?</h3>
         <p class="text-xs text-teal-700 dark:text-teal-400 mb-2">Cuántos son en cada administración y territorio, cómo han evolucionado, cuánto cobran frente al sector privado y cuánto cuestan.</p>
-        <a href="/cuentas-publicas/empleo-publico" class="text-xs font-bold text-teal-600 dark:text-teal-300 hover:underline">
+        <a href="/cuentas-publicas/empleo-publico" class="text-xs font-bold text-teal-700 dark:text-teal-300 hover:underline">
             Ver informe de Empleo Público →
         </a>
     </div>
 
     <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
-        <h4 class="font-bold text-amber-900 dark:text-amber-300 mb-1">👵 ¿Cuánto cuestan las pensiones?</h4>
+        <h3 class="font-bold text-amber-900 dark:text-amber-300 mb-1"><span aria-hidden="true">👵</span> ¿Cuánto cuestan las pensiones?</h3>
         <p class="text-xs text-amber-700 dark:text-amber-400 mb-2">Pensión media descontada la inflación, afiliados por pensión, gasto en % del PIB frente a la UE y diferencias entre comunidades.</p>
-        <a href="/cuentas-publicas/pensiones" class="text-xs font-bold text-amber-600 dark:text-amber-300 hover:underline">
+        <a href="/cuentas-publicas/pensiones" class="text-xs font-bold text-amber-700 dark:text-amber-300 hover:underline">
             Ver informe de Pensiones →
         </a>
     </div>

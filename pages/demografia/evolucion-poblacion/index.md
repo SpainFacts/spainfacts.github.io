@@ -5,6 +5,7 @@ description: "Población de España desde 1971 y su crecimiento anual por 1.000 
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -75,6 +76,14 @@ Cómo ha cambiado el número de habitantes de España desde 1971 y qué parte de
         sparklineData={anual.map(d => ({anio: d.anio, valor: d.resto_1000}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('crecimiento_poblacion')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'crecimiento_poblacion')} />
+
 
 ## Población desde 1971
 

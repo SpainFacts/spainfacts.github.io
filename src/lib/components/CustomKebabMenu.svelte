@@ -1,4 +1,7 @@
 <script>
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
     import Button from "./ui/button/button.svelte";
     import * as DropdownMenu from "./ui/dropdown-menu";
     import { Icon } from "@steeze-ui/svelte-icon";
@@ -36,12 +39,7 @@
 
     export let neverShowQueries = false;
 
-    $: themeLabel =
-        $selectedAppearance === "system"
-            ? "System"
-            : $selectedAppearance === "light"
-              ? "Light"
-              : "Dark";
+    $: themeLabel = t(`tema.${$selectedAppearance}`, lang);
     $: themeIcon = $activeAppearance === "light" ? Sun : Moon;
 </script>
 
@@ -52,15 +50,15 @@
             variant="ghost"
             size="sm"
             class="px-1"
-            aria-label="Menu"
+            aria-label={t("opc.mas", lang)}
         >
-            <Icon src={Dots} class="h-6 w-6" />
+            <Icon src={Dots} class="h-6 w-6" aria-hidden="true" />
         </Button>
     </DropdownMenu.Trigger>
     <DropdownMenu.Content class="w-52 text-xs">
         <DropdownMenu.Group>
             <DropdownMenu.Item on:click={print}>
-                Print PDF
+                {t("opc.imprimir", lang)}
                 <DropdownMenu.Shortcut>⌘P</DropdownMenu.Shortcut>
             </DropdownMenu.Item>
             {#if dev || !neverShowQueries}
@@ -70,7 +68,7 @@
                         showQueries.update((val) => !val);
                     }}
                 >
-                    {$showQueries ? "Hide " : "Show "} Queries
+                    {$showQueries ? t("opc.ocultar", lang) : t("opc.mostrar", lang)}
                 </DropdownMenu.Item>
             {/if}
 
@@ -81,12 +79,12 @@
                         cycleAppearance();
                     }}
                 >
-                    Appearance
+                    {t("opc.apariencia", lang)}
                     <DropdownMenu.Shortcut
                         class="tracking-normal flex flex-row items-center"
                     >
                         <span class="text-xs leading-none">{themeLabel}</span>
-                        <Icon src={themeIcon} class="h-4 w-4 ml-1" />
+                        <Icon src={themeIcon} class="h-4 w-4 ml-1" aria-hidden="true" />
                     </DropdownMenu.Shortcut>
                 </DropdownMenu.Item>
             {/if}

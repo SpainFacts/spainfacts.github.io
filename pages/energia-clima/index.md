@@ -222,7 +222,7 @@ ORDER BY año ASC, sector ASC
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-green-300 dark:hover:border-green-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             ⚡
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Mix de Generación Eléctrica</h3>
@@ -230,14 +230,14 @@ ORDER BY año ASC, sector ASC
             Análisis profundo del mix eléctrico: el auge de la eólica y solar FV, el cierre del carbón, la dependencia del gas natural y el papel de la nuclear.
         </p>
     </div>
-    <a href="/energia-clima/mix-electrico" class="text-sm font-semibold text-green-600 dark:text-green-400 hover:underline inline-flex items-center">
+    <a href="/energia-clima/mix-electrico" class="text-sm font-semibold text-green-700 dark:text-green-400 hover:underline inline-flex items-center">
         Ver informe del mix eléctrico →
     </a>
 </div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-amber-300 dark:hover:border-amber-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🏭
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Emisiones y Descarbonización</h3>
@@ -245,14 +245,14 @@ ORDER BY año ASC, sector ASC
             Desglose sectorial de los gases de efecto invernadero: por qué el transporte es el gran reto pendiente y cómo la electricidad ya se está descarbonizando.
         </p>
     </div>
-    <a href="/energia-clima/emisiones" class="text-sm font-semibold text-amber-600 dark:text-amber-400 hover:underline inline-flex items-center">
+    <a href="/energia-clima/emisiones" class="text-sm font-semibold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center">
         Ver informe de emisiones →
     </a>
 </div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-sky-300 dark:hover:border-sky-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             💧
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Reservas de Agua y Embalses</h3>
@@ -260,14 +260,14 @@ ORDER BY año ASC, sector ASC
             Estado semanal de los embalses por cuenca: cuánta agua hay, cómo está frente al año pasado y frente a la media de la última década.
         </p>
     </div>
-    <a href="/energia-clima/embalses" class="text-sm font-semibold text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center">
+    <a href="/energia-clima/embalses" class="text-sm font-semibold text-sky-700 dark:text-sky-400 hover:underline inline-flex items-center">
         Ver el estado de los embalses →
     </a>
 </div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-orange-300 dark:hover:border-orange-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🌡️
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Calor y Temperaturas</h3>
@@ -282,7 +282,7 @@ ORDER BY año ASC, sector ASC
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-red-300 dark:hover:border-red-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🔥
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Incendios Forestales</h3>
@@ -297,7 +297,7 @@ ORDER BY año ASC, sector ASC
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-teal-300 dark:hover:border-teal-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             📡
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">El Sistema Eléctrico, Ahora</h3>
@@ -305,14 +305,14 @@ ORDER BY año ASC, sector ASC
             En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de España, la Península, Baleares, Canarias, Ceuta y Melilla, intercambios con los países vecinos y el precio de la luz.
         </p>
     </div>
-    <a href="/energia-clima/directo" class="text-sm font-semibold text-teal-600 dark:text-teal-400 hover:underline inline-flex items-center">
+    <a href="/energia-clima/directo" class="text-sm font-semibold text-teal-700 dark:text-teal-400 hover:underline inline-flex items-center">
         Ver el sistema en directo →
     </a>
 </div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-yellow-300 dark:hover:border-yellow-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-950/60 text-yellow-600 dark:text-yellow-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-950/60 text-yellow-600 dark:text-yellow-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🏆
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Récords del Sistema Eléctrico</h3>
@@ -320,14 +320,14 @@ ORDER BY año ASC, sector ASC
             Máximos y mínimos históricos desde 2015 con datos de REE cada 5 minutos: demanda, solar, eólica, cuota renovable, emisiones, precios e intercambios, y cuándo se batió cada récord.
         </p>
     </div>
-    <a href="/energia-clima/records" class="text-sm font-semibold text-yellow-600 dark:text-yellow-400 hover:underline inline-flex items-center">
+    <a href="/energia-clima/records" class="text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:underline inline-flex items-center">
         Ver los récords →
     </a>
 </div>
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🗺️
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Centrales Eléctricas</h3>
@@ -342,7 +342,7 @@ ORDER BY año ASC, sector ASC
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-violet-300 dark:hover:border-violet-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🔋
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Almacenamiento</h3>
@@ -357,7 +357,7 @@ ORDER BY año ASC, sector ASC
 
 <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
     <div>
-        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl mb-4">
+        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
             🔌
         </div>
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Electrificación</h3>

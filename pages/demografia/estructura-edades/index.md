@@ -5,6 +5,7 @@ description: "Pirámides de población de España, cada comunidad y cada provinc
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -64,6 +65,14 @@ Cómo se reparte la población por edades, cuánto ha envejecido España desde 1
         sparklineData={espana.map(d => ({anio: d.anio, valor: d.edad_media}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('poblacion_65')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'poblacion_65')} />
+
 
 ## La pirámide de población de España
 

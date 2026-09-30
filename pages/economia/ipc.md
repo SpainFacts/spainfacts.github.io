@@ -5,6 +5,7 @@ description: "Inflación en España: IPC general y subyacente, precios por grupo
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -236,6 +237,14 @@ Cuánto suben los precios en España, qué se encarece más y cuánto poder de c
         sparklineData={diferencial.slice(-60).map(d => d.diferencial)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('inflacion')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'inflacion')} />
+
 
 <Grid cols=4>
     <KpiCard

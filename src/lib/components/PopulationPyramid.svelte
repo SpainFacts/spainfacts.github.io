@@ -1,6 +1,12 @@
 <script>
     import { ECharts } from "@evidence-dev/core-components";
     import { formatCompact } from "../utils.js";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
+    // Los datos siguen usando "Mujeres"/"Hombres"; solo se traduce lo que se pinta.
+    $: etqMujeres = t("piramide.mujeres", lang);
+    $: etqHombres = t("piramide.hombres", lang);
 
     export let data;
     export let year;
@@ -45,7 +51,7 @@
         legend: {
             top: "5%",
             left: "center",
-            data: ["Mujeres", "Hombres"],
+            data: [etqMujeres, etqHombres],
         },
         grid: [
             { left: "5%", width: "40%", bottom: "3%", containLabel: false },
@@ -100,7 +106,7 @@
         ],
         series: [
             {
-                name: "Mujeres",
+                name: etqMujeres,
                 type: "bar",
                 xAxisIndex: 0,
                 yAxisIndex: 0,
@@ -110,7 +116,7 @@
                 data: dataFemale,
             },
             {
-                name: "Hombres",
+                name: etqHombres,
                 type: "bar",
                 xAxisIndex: 1,
                 yAxisIndex: 1,
@@ -127,7 +133,7 @@
     {#if title}
         <h3 class="markdown">{title}</h3>
     {:else}
-        Año {year}
+        {t("piramide.ano", lang)} {year}
     {/if}
 </div>
 

@@ -1,10 +1,11 @@
 <script>
+    import { localeActual } from "../utils.js";
     import { ECharts } from "@evidence-dev/core-components";
     import { getCompactFormatter } from "../chart-utils.js";
 
     export let data;
     export let title = undefined;
-    export let locale = "es-ES";
+    export let locale = localeActual();
     export let name = "name"; // Key for the name property in data
     export let value = "value"; // Key for the value property in data
 

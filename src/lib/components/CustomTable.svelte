@@ -1,5 +1,8 @@
 <script>
     import { slide, fade } from "svelte/transition";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t, tf } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
 
     export let data = [];
     export let columns = [];
@@ -111,24 +114,31 @@
         class="overflow-x-auto w-full border-b border-gray-200 dark:border-gray-700"
     >
         <table class="w-full text-left border-collapse">
+            {#if title}<caption class="sr-only">{title}</caption>{/if}
             <thead>
                 <tr class="border-b border-gray-200 dark:border-gray-700">
                     {#each columns as col}
                         <th
-                            class="py-1 px-2 font-semibold text-xs text-gray-500 dark:text-gray-400 cursor-pointer hover:text-gray-900 dark:hover:text-gray-200 select-none whitespace-nowrap {col.align ===
+                            scope="col"
+                            aria-sort={sortColumn === col.accessor ? (sortDirection === "asc" ? "ascending" : "descending") : undefined}
+                            class="py-1 px-2 font-semibold text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 select-none whitespace-nowrap {col.align ===
                             'right'
                                 ? 'text-right'
                                 : 'text-left'}"
-                            on:click={() => handleSort(col.accessor)}
                         >
-                            <span class="inline-flex items-center gap-1">
+                            <!-- Botón para poder ordenar también con el teclado -->
+                            <button
+                                type="button"
+                                class="inline-flex min-h-6 items-center gap-1 cursor-pointer font-semibold"
+                                on:click={() => handleSort(col.accessor)}
+                            >
                                 {col.title}
                                 {#if sortColumn === col.accessor}
-                                    <span class="text-[10px] text-gray-400">
+                                    <span class="text-[10px] text-gray-500 dark:text-gray-400" aria-hidden="true">
                                         {#if sortDirection === "asc"}▲{:else}▼{/if}
                                     </span>
                                 {/if}
-                            </span>
+                            </button>
                         </th>
                     {/each}
                 </tr>
@@ -160,7 +170,7 @@
                             colspan={columns.length}
                             class="py-4 text-center text-gray-500 text-xs"
                         >
-                            No hay datos
+                            {t("tabla.sinDatos", lang)}
                         </td>
                     </tr>
                 {/if}
@@ -171,32 +181,36 @@
     <!-- Footer Controls (Pagination & Actions) -->
     <div class="flex justify-between items-center py-1 mt-1 min-h-[28px]">
         <!-- Pagination -->
-        <div class="flex items-center gap-2 text-xs text-gray-500">
+        <div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
             {#if totalPages > 1}
                 <button
-                    class="hover:text-gray-900 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+                    type="button"
+                    aria-label={t("tabla.anterior", lang)}
+                    class="min-h-6 min-w-6 hover:text-gray-900 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
                     on:click={prevPage}
                     disabled={currentPage === 1}
                 >
-                    ←
+                    <span aria-hidden="true">←</span>
                 </button>
                 <span>
-                    {currentPage} / {totalPages}
+                    <span class="sr-only">{t("tabla.pagina", lang)}</span> {currentPage} / {totalPages}
                 </span>
                 <button
-                    class="hover:text-gray-900 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
+                    type="button"
+                    aria-label={t("tabla.siguiente", lang)}
+                    class="min-h-6 min-w-6 hover:text-gray-900 dark:hover:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed"
                     on:click={nextPage}
                     disabled={currentPage === totalPages}
                 >
-                    →
+                    <span aria-hidden="true">→</span>
                 </button>
             {/if}
-            <span class="ml-2 opacity-60">{sortedData.length} filas</span>
+            <span class="ml-2" role="status">{tf("tabla.filas", lang, { n: sortedData.length })}</span>
         </div>
 
-        <!-- Actions (Search & Download) - Visible on Hover -->
+        <!-- Actions (Search & Download) - Visible on Hover (y al llegar con el teclado) -->
         <div
-            class="flex items-center gap-2 transition-opacity duration-200 {isHovered ||
+            class="flex items-center gap-2 transition-opacity duration-200 focus-within:opacity-100 {isHovered ||
             showSearch ||
             searchTerm
                 ? 'opacity-100'
@@ -208,31 +222,38 @@
                     transition:slide={{ axis: "x", duration: 200 }}
                 >
                     <input
-                        type="text"
-                        placeholder="Buscar..."
+                        type="search"
+                        placeholder={t("tabla.buscarPh", lang)}
+                        aria-label={title ? `${t("tabla.buscarEn", lang)} ${title}` : t("tabla.buscarEn", lang)}
                         bind:value={searchTerm}
                         class="px-2 py-0.5 text-xs border rounded border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:border-blue-500 w-32"
                         autoFocus
                     />
                     <button
-                        class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        type="button"
+                        aria-label={t("tabla.borrar", lang)}
+                        class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                         on:click={() => {
                             searchTerm = "";
                             showSearch = false;
                         }}
                     >
-                        ×
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
             {/if}
 
             {#if !showSearch && !searchTerm && searchable}
                 <button
+                    type="button"
                     on:click={() => (showSearch = true)}
-                    class="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                    title="Buscar"
+                    class="p-1 min-h-6 min-w-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    title={t("tabla.buscar", lang)}
+                    aria-label={t("tabla.buscarEn", lang)}
                 >
                     <svg
+                        aria-hidden="true"
+                        focusable="false"
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
                         height="14"
@@ -254,11 +275,15 @@
 
             {#if downloadable}
                 <button
+                    type="button"
                     on:click={downloadCSV}
-                    class="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                    title="Descargar CSV"
+                    class="p-1 min-h-6 min-w-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    title={t("tabla.csv", lang)}
+                    aria-label={t("tabla.csvAria", lang)}
                 >
                     <svg
+                        aria-hidden="true"
+                        focusable="false"
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
                         height="14"

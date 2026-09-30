@@ -1,4 +1,8 @@
 <script>
+	import { page } from '$app/stores';
+	import { idiomaDeRuta, t as tr } from '../i18n.js';
+	$: lang = idiomaDeRuta($page.url.pathname);
+
 	// Botón "Compartir" (X, Instagram, LinkedIn, WhatsApp, Telegram, copiar enlace) para
 	// las tarjetas del sitio. Las gráficas de Evidence usan una copia idéntica añadida con
 	// patch-package (node_modules/@evidence-dev/core-components/.../ui/CompartirGrafico.svelte).
@@ -11,6 +15,22 @@
 	let copiado = false;
 	let aviso = '';
 	let menuAbierto = false;
+	let boton;
+	// id único para enlazar el botón con su menú (aria-controls)
+	const idMenu = `compartir-${Math.random().toString(36).slice(2, 9)}`;
+
+	// Escape cierra el menú y devuelve el foco al botón
+	function tecla(e) {
+		if (e.key === 'Escape' && menuAbierto) {
+			e.stopPropagation();
+			menuAbierto = false;
+			boton?.focus();
+		}
+	}
+	// Al salir con el tabulador del bloque, el menú se cierra
+	function focoFuera(e) {
+		if (!e.currentTarget.contains(e.relatedTarget)) menuAbierto = false;
+	}
 
 	const texto = () => {
 		if (textoCompartir) return textoCompartir;
@@ -50,9 +70,9 @@
 		}
 		try {
 			await navigator.clipboard.writeText(url());
-			aviso = 'Enlace copiado: pégalo en Instagram';
+			aviso = tr('compartir.instagram', lang);
 		} catch {
-			aviso = 'Copia el enlace de la página para pegarlo en Instagram';
+			aviso = tr('compartir.instagram2', lang);
 		}
 		setTimeout(() => (aviso = ''), 4000);
 		window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
@@ -64,7 +84,7 @@
 			copiado = true;
 			setTimeout(() => (copiado = false), 2000);
 		} catch {
-			window.prompt('Copia el enlace:', url());
+			window.prompt(tr('compartir.copiar', lang), url());
 		}
 		menuAbierto = false;
 	}
@@ -82,19 +102,33 @@
 	}
 </script>
 
-<div class="compartir" on:mouseleave={() => (menuAbierto = false)}>
-	<button type="button" class="boton-pie" class:compacto aria-label="Compartir" title="Compartir" aria-haspopup="true" aria-expanded={menuAbierto} on:click|stopPropagation={compartirNativo}>
-		<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="compartir" on:mouseleave={() => (menuAbierto = false)} on:keydown={tecla} on:focusout={focoFuera}>
+	<button
+		type="button"
+		class="boton-pie"
+		class:compacto
+		bind:this={boton}
+		aria-label={compacto && titulo ? `${tr('compartir', lang)}: ${titulo}` : tr('compartir', lang)}
+		title={tr('compartir', lang)}
+		aria-expanded={menuAbierto}
+		aria-controls={idMenu}
+		on:click|stopPropagation={compartirNativo}
+	>
+		<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"
 			><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" /></svg
 		>
-		{#if !compacto || aviso || copiado}<span>{aviso || (copiado ? 'Enlace copiado' : 'Compartir')}</span>{/if}
+		{#if !compacto || aviso || copiado}<span aria-hidden="true">{aviso || (copiado ? tr('compartir.copiado', lang) : tr('compartir', lang))}</span>{/if}
 	</button>
+	<!-- Aviso para lectores de pantalla cuando se copia el enlace -->
+	<span class="sr-only" role="status">{aviso || (copiado ? tr('compartir.copiado', lang) : '')}</span>
 	{#if menuAbierto}
-		<div class="menu" role="menu">
+		<!-- Lista de botones (patrón "disclosure"): se recorre con el tabulador -->
+		<div class="menu" id={idMenu} role="group" aria-label={tr('compartir', lang)}>
 			{#each REDES as red (red.id)}
-				<button type="button" role="menuitem" on:click={() => abrir(red)}>{red.nombre}</button>
+				<button type="button" on:click={() => abrir(red)}>{red.nombre}<span class="sr-only"> {tr('compartir.ventana', lang)}</span></button>
 			{/each}
-			<button type="button" role="menuitem" on:click={copiar}>Copiar enlace</button>
+			<button type="button" on:click={copiar}>{tr('compartir.copiar', lang)}</button>
 		</div>
 	{/if}
 </div>
@@ -122,6 +156,16 @@
 	.boton-pie.compacto {
 		padding: 4px;
 		border-radius: 6px;
+		/* objetivo táctil mínimo de 24 × 24 px (WCAG 2.5.8) */
+		min-width: 24px;
+		min-height: 24px;
+		justify-content: center;
+	}
+	.boton-pie:focus-visible,
+	.menu button:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 2px;
+		opacity: 1;
 	}
 	.boton-pie:hover {
 		opacity: 1;
@@ -147,6 +191,7 @@
 	}
 	.menu button {
 		text-align: left;
+		min-height: 28px;
 		padding: 6px 10px;
 		border: none;
 		border-radius: 6px;

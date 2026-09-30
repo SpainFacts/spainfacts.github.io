@@ -1,4 +1,8 @@
 <script>
+    import { localeActual } from "../utils.js";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t, tf } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
     // Buscador de municipios con URL compartible (?m=<código INE>).
     // Publica la selección como un input de Evidence (igual que TextInput), así
     // las consultas de la página pueden usar '${inputs.<name>}'.
@@ -77,16 +81,16 @@
         else if (e.key === 'Escape') { abierto = false; }
     }
 
-    const miles = (n) => new Intl.NumberFormat('es-ES').format(n ?? 0);
+    const miles = (n) => new Intl.NumberFormat(localeActual()).format(n ?? 0);
 </script>
 
 <div class="not-prose relative max-w-xl my-4">
-    <label for="buscador-municipio" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Busca tu municipio</label>
+    <label for="buscador-municipio" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('buscador.label', lang)}</label>
     <input
         id="buscador-municipio"
         type="search"
         autocomplete="off"
-        placeholder="Escribe al menos dos letras: Sevilla, Vigo, Almendralejo…"
+        placeholder={t('buscador.ph', lang)}
         class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-2 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         bind:value={texto}
         on:focus={() => { abierto = true; texto = ''; }}
@@ -94,20 +98,24 @@
         on:keydown={teclado}
         on:blur={() => setTimeout(() => { abierto = false; if (seleccion && !texto) texto = seleccion.municipio; }, 150)}
         role="combobox"
+        aria-autocomplete="list"
         aria-expanded={sugerencias.length > 0}
         aria-controls="sugerencias-municipio"
+        aria-activedescendant={sugerencias.length ? `sugerencia-municipio-${activo}` : undefined}
     />
+    <span class="sr-only" role="status">{abierto && q.length >= 2 ? tf('buscador.encontrados', lang, { n: sugerencias.length }) : ''}</span>
     {#if sugerencias.length > 0}
-        <ul id="sugerencias-municipio" role="listbox" class="absolute z-20 mt-1 w-full max-h-80 overflow-auto rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
+        <ul id="sugerencias-municipio" role="listbox" aria-label={t('buscador.municipios', lang)} class="absolute z-20 mt-1 w-full max-h-80 overflow-auto rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
             {#each sugerencias as op, i (op.cod_mun)}
-                <li role="option" aria-selected={i === activo}>
+                <li id="sugerencia-municipio-{i}" role="option" aria-selected={i === activo}>
                     <button
                         type="button"
+                        tabindex="-1"
                         class="w-full text-left px-4 py-2 text-sm {i === activo ? 'bg-blue-50 dark:bg-blue-950' : ''} hover:bg-blue-50 dark:hover:bg-blue-950"
                         on:mousedown|preventDefault={() => elegir(op)}
                     >
                         <span class="font-medium text-gray-900 dark:text-white">{op.municipio}</span>
-                        <span class="text-gray-500"> · {op.provincia} · {miles(op.poblacion)} hab.</span>
+                        <span class="text-gray-600 dark:text-gray-400"> · {op.provincia} · {miles(op.poblacion)} {t('hab', lang)}</span>
                     </button>
                 </li>
             {/each}

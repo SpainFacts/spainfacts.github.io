@@ -1,8 +1,18 @@
+// Locale de los formatos numéricos: lo fija el layout según el idioma de la ruta
+// (es-ES, en-GB, ca-ES, gl-ES, eu-ES). Se lee en cada llamada.
+let LOCALE = 'es-ES';
+export function fijarLocale(locale) {
+    LOCALE = locale || 'es-ES';
+}
+export function localeActual() {
+    return LOCALE;
+}
+
 export const formatNumber = (num, decimales = 2) => {
     if (num === null || num === undefined || num === '') return '-';
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
     if (isNaN(numValue)) return '-';
-    return new Intl.NumberFormat('es-ES', {
+    return new Intl.NumberFormat(LOCALE, {
         minimumFractionDigits: decimales,
         maximumFractionDigits: decimales,
         useGrouping: true
@@ -13,7 +23,7 @@ export const formatCurrency = (num) => {
     if (num === null || num === undefined || num === '') return '-';
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
     if (isNaN(numValue)) return '-';
-    return new Intl.NumberFormat('es-ES', {
+    return new Intl.NumberFormat(LOCALE, {
         style: 'currency',
         currency: 'EUR',
         useGrouping: true
@@ -26,7 +36,7 @@ export const formatCompact = (num, decimales = 1) => {
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
     if (isNaN(numValue)) return '-';
 
-    const formatter = new Intl.NumberFormat('es-ES', {
+    const formatter = new Intl.NumberFormat(LOCALE, {
         minimumFractionDigits: decimales,
         maximumFractionDigits: decimales,
         useGrouping: true
@@ -45,7 +55,7 @@ export const formatMillions = (num, decimales = 2) => {
     if (num === null || num === undefined || num === '') return '-';
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
     if (isNaN(numValue)) return '-';
-    return new Intl.NumberFormat('es-ES', {
+    return new Intl.NumberFormat(LOCALE, {
         minimumFractionDigits: decimales,
         maximumFractionDigits: decimales,
         useGrouping: true
@@ -57,7 +67,7 @@ export const formatThousands = (num, decimales = 1) => {
     if (num === null || num === undefined || num === '') return '-';
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
     if (isNaN(numValue)) return '-';
-    return new Intl.NumberFormat('es-ES', {
+    return new Intl.NumberFormat(LOCALE, {
         minimumFractionDigits: decimales,
         maximumFractionDigits: decimales,
         useGrouping: true

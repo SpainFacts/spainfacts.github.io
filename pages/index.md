@@ -103,10 +103,10 @@ ORDER BY anio
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
-            <a href="/territorios" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline">🗺️ Territorios</a>
-            <a href="/energia-clima/directo" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline">⚡ Electricidad ahora</a>
-            <a href="/movilidad/marcas-y-modelos" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline">🚗 Coches más vendidos</a>
-            <a href="/transparencia" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline">🔎 Transparencia</a>
+            <a href="/territorios" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🗺️</span> Territorios</a>
+            <a href="/energia-clima/directo" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">⚡</span> Electricidad ahora</a>
+            <a href="/movilidad/marcas-y-modelos" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🚗</span> Coches más vendidos</a>
+            <a href="/transparencia" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🔎</span> Transparencia</a>
         </div>
     </div>
 </div>
@@ -289,61 +289,61 @@ SELECT
 
 <div class="not-prose grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
     <a href="/territorios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">🗺️</p>
+        <p class="text-2xl mb-1" aria-hidden="true">🗺️</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Territorios</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cada comunidad, provincia y municipio: población, cuentas, deuda, quién gobierna, empleo público y seguridad.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">19 comunidades · {cabeceras[0]?.provincias} provincias · +8.100 municipios →</p>
     </a>
     <a href="/demografia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">👪</p>
+        <p class="text-2xl mb-1" aria-hidden="true">👪</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Demografía</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Evolución de la población, natalidad y fecundidad, envejecimiento, hogares y pirámide de cualquier provincia.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatCompact(poblacion.slice(-1)[0]?.valor, 2)} habitantes →</p>
     </a>
     <a href="/economia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">💼</p>
+        <p class="text-2xl mb-1" aria-hidden="true">💼</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Economía</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">PIB por habitante, sectores, comercio exterior, salarios reales, paro, inflación y precio de la energía, turismo y empresas.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Paro: {formatNumber(ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor, 1)} % →</p>
     </a>
     <a href="/vivienda" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">🏠</p>
+        <p class="text-2xl mb-1" aria-hidden="true">🏠</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Vivienda</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Precio de compra y alquiler descontada la inflación, cuántos años de sueldo cuesta una casa, compraventas, hipotecas y obra nueva.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Precios, alquiler y esfuerzo →</p>
     </a>
     <a href="/cuentas-publicas" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">🏛️</p>
+        <p class="text-2xl mb-1" aria-hidden="true">🏛️</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Cuentas públicas</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ingresos, gastos, déficit y deuda de todas las administraciones, pensiones y empleo público: cuántos son, cuánto cobran y cuánto cuestan.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatCompact(cabeceras[0]?.empleados, 2)} empleados públicos →</p>
     </a>
     <a href="/energia-clima" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">⚡</p>
+        <p class="text-2xl mb-1" aria-hidden="true">⚡</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Energía y clima</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La electricidad en directo y sus récords, centrales, almacenamiento, electrificación, emisiones, embalses, incendios y calor.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(100 * renovables_30[0]?.cuota, 0)} % renovable en el último mes →</p>
     </a>
     <a href="/movilidad" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">🚗</p>
+        <p class="text-2xl mb-1" aria-hidden="true">🚗</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Movilidad</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Coches que se venden y circulan, el avance del eléctrico, marcas y modelos, puntos de recarga y transporte público.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.puntos_recarga, 0)} puntos de recarga públicos →</p>
     </a>
     <a href="/sociedad" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">👥</p>
+        <p class="text-2xl mb-1" aria-hidden="true">👥</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sociedad</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalidad, salud, inmigración, renta y pobreza hasta el nivel de municipio, y educación.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delitos conocidos por 1.000 hab. →</p>
     </a>
     <a href="/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">🔎</p>
+        <p class="text-2xl mb-1" aria-hidden="true">🔎</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Transparencia</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Qué ayuntamientos no rinden cuentas a Hacienda, a quién se le retienen fondos del Estado y quién paga tarde a sus proveedores.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Por municipio y por partido →</p>
     </a>
     <a href="/fuentes" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
-        <p class="text-2xl mb-1">📚</p>
+        <p class="text-2xl mb-1" aria-hidden="true">📚</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Fuentes</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">De dónde sale cada dato: organismo, tabla oficial, frecuencia, licencia y metodología.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conjuntos de datos oficiales →</p>

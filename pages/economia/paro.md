@@ -5,6 +5,7 @@ description: "Tasa de paro en España por sexo, edad, nacionalidad, estudios y t
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -267,6 +268,16 @@ Cuánta gente busca trabajo y no lo encuentra, a quién afecta más, dónde y cu
         sparklineData={registrado.slice(-60).map(d => d.por_100_16_64)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'paro')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'paro_juvenil')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'tasa_empleo')} />
+
 
 <Grid cols=4>
     <KpiCard

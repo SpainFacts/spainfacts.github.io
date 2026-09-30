@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -111,6 +112,15 @@ El producto interior bruto mide todo lo que produce la economía. Para ver si el
         sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => d.indice_ue)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'pib_pc_ppa')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'crecimiento_pib')} />
+
 
 ## PIB por habitante desde 1995
 

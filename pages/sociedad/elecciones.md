@@ -313,10 +313,11 @@ SELECT
     p.ganador_familia, p.ganador_siglas, p.ganador_pct / 100 AS ganador_pct,
     p.segundo_siglas, p.segundo_pct / 100 AS segundo_pct,
     p.participacion / 100 AS participacion, p.escanos,
-    b.orden_familia
+    b.orden_familia, b.color
 FROM mother.elecciones_participacion p
 JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = p.cod
-LEFT JOIN (SELECT DISTINCT familia, orden_familia FROM mother.elecciones_familias) b ON b.familia = p.ganador_familia
+LEFT JOIN (SELECT familia, any_value(orden_familia) AS orden_familia, any_value(color) AS color
+           FROM mother.elecciones_familias GROUP BY familia) b ON b.familia = p.ganador_familia
 WHERE p.nivel = 'provincia' AND p.proceso = '${inputs.eleccion.value}'
 ORDER BY b.orden_familia, p.cod
 ```
@@ -338,7 +339,7 @@ La familia política de la candidatura más votada en cada provincia (la circuns
     areaCol="cod_prov"
     value="ganador_familia"
     legendType=categorical
-    colorPalette={colores_mapa.map(d => d.color)}
+    colorPalette={[...new Map(Array.from(provincias ?? []).map(d => [d.ganador_familia, d.color])).values()]}
     link="ruta"
     height={480}
     basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"

@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -136,6 +137,15 @@ De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta c
         sparklineData={elec.map(d => d.cuota_carbon_pct)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('electricidad_renovable', 'consumo_electrico_pc')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'electricidad_renovable')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'consumo_electrico_pc')} />
+
 
 ## Peso de cada tecnología en la generación
 

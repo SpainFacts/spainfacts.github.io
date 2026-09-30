@@ -5,7 +5,7 @@ og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
-# Indicadores
+# 📋 Indicadores
 
 Todas las series que seguimos en la web, en un solo sitio. Cada una procede de una fuente
 oficial, se actualiza automáticamente y enlaza a su ficha con la serie completa. Los importes

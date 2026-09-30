@@ -5,6 +5,7 @@ description: "Abandono escolar temprano, nivel educativo de los adultos, jóvene
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -107,6 +108,15 @@ Cuántos jóvenes dejan de estudiar demasiado pronto, qué formación tienen los
         sparklineData={gasto_es}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('estudios_terciarios', 'gasto_educacion_pib')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'estudios_terciarios')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'gasto_educacion_pib')} />
+
 
 <p class="text-xs text-gray-500">Los indicadores de jóvenes y adultos son porcentajes de cada grupo de edad (EPA armonizada por Eurostat). El gasto se da por habitante o por alumno y en euros constantes, descontada la inflación con el IPC; los totales, solo como referencia.</p>
 

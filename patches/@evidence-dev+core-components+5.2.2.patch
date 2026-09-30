@@ -1,19 +1,128 @@
+diff --git a/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroup.svelte b/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroup.svelte
+index be53650..cc7487a 100644
+--- a/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroup.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroup.svelte
+@@ -153,6 +153,7 @@
+ 					? 'my-6 flex flex-wrap gap-x-1 gap-y-1'
+ 					: 'inline-flex rounded-md shadow-sm overflow-auto border border-base-300 no-scrollbar h-8 mb-1'}
+ 				role="group"
++				aria-label={title ?? name}
+ 			>
+ 				{#if preset}
+ 					{#each presets[preset] as { value, valueLabel }}
+diff --git a/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroupItem.svelte b/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroupItem.svelte
+index 90bcb11..286bd56 100644
+--- a/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroupItem.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/atoms/inputs/button-group/ButtonGroupItem.svelte
+@@ -52,8 +52,9 @@
+ 		type="button"
+ 		class="flex-none py-1 font-medium px-3 text-xs truncate
+ 		border-r last:border-none border-base-300
+-		hover:bg-base-200 focus:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-base-300
++		hover:bg-base-200 focus:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary
+ 		{$currentValue?.value === value ? 'z-10 bg-base-200 text-primary' : 'z-0 bg-base-100'}"
++		aria-pressed={$currentValue?.value === value}
+ 		on:click={() => update({ valueLabel, value })}
+ 	>
+ 		{valueLabel}
+diff --git a/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte b/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
+index 41263f2..b299591 100644
+--- a/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
+@@ -16,9 +16,16 @@
+ 		return node;
+ 	}
+ 
++	// SpainFacts: la carpeta de idioma (/en, /ca, /gl, /eu) es la portada de ese idioma
++	const PREFIJOS_IDIOMA = ['en', 'ca', 'gl', 'eu'];
++	const INICIO = { es: 'Inicio', en: 'Home', ca: 'Inici', gl: 'Inicio', eu: 'Hasiera' };
++
+ 	export function buildCrumbs(pathArray, fileTree) {
+-		const crumbs = [{ href: '/', title: 'Home' }];
++		const lang = PREFIJOS_IDIOMA.includes(pathArray[0]) ? pathArray[0] : 'es';
++		const raiz = lang === 'es' ? '/' : `/${lang}`;
++		const crumbs = [{ href: '/', title: INICIO[lang] }];
+ 		pathArray.forEach((path, i) => {
++			if (i === 0 && lang !== 'es') return;
+ 			if (path != '' && `/${path}` !== config.deployment.basePath) {
+ 				crumbs.push({
+ 					href: '/' + pathArray.slice(0, i + 1).join('/'),
+@@ -34,8 +41,8 @@
+ 		for (const path of crumbs) {
+ 			if (path.href === '/') {
+ 				// Special case for Home page
+-				path.href = addBasePath('/');
+-				path.title = 'Home';
++				path.href = addBasePath(raiz);
++				path.title = INICIO[lang];
+ 			} else {
+ 				const node = searchFileTree(path.href, fileTree);
+ 				if (!node || !node.isPage) {
+diff --git a/node_modules/@evidence-dev/core-components/dist/themes/themes.js b/node_modules/@evidence-dev/core-components/dist/themes/themes.js
+index adfa5e0..50bc125 100644
+--- a/node_modules/@evidence-dev/core-components/dist/themes/themes.js
++++ b/node_modules/@evidence-dev/core-components/dist/themes/themes.js
+@@ -188,6 +188,11 @@ export class ThemeStores {
+ 				return lightColor ?? input;
+ 			}
+ 			if (appearance === 'dark') {
++				// SpainFacts: un color literal (#hex, 'red'...) se respeta tal cual en modo
++				// oscuro. Convertirlo invertía su luminosidad y daba la vuelta a las escalas
++				// (lo alto salía claro y lo bajo oscuro) y a los colores de los partidos.
++				// Solo se convierten los colores con nombre del tema.
++				if (lightColor === undefined && darkColor === undefined) return input;
+ 				return darkColor ?? convertLightToDark(lightColor ?? input) ?? input;
+ 			}
+ 		}
+@@ -202,6 +207,7 @@ export class ThemeStores {
+ 				return lightColor ?? light;
+ 			}
+ 			if (appearance === 'dark') {
++				if (lightColor === undefined && darkColor === undefined) return light;
+ 				return darkColor ?? convertLightToDark(lightColor ?? light) ?? dark;
+ 			}
+ 		}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte
 new file mode 100644
-index 0000000..84828af
+index 0000000..341674e
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/CompartirGrafico.svelte
-@@ -0,0 +1,158 @@
+@@ -0,0 +1,212 @@
 +<script>
-+	// SpainFacts: botones para compartir una gráfica en redes (añadido con patch-package).
-+	// Comparte la URL de la página con el título de la gráfica.
++	import { page } from '$app/stores';
++	import { idiomaDeRuta, t as tr } from './idioma.js';
++	$: lang = idiomaDeRuta($page.url.pathname);
++
++	// SpainFacts: botón "Compartir" de las gráficas (añadido con patch-package).
++	// Copia de src/lib/components/Compartir.svelte (solo cambia la ruta de idioma.js).
 +	export let titulo = undefined;
++	/** Texto completo a compartir; si no se da, se usa "titulo · SpainFacts". */
++	export let textoCompartir = undefined;
++	/** Solo el icono, sin la palabra "Compartir" (para las tarjetas). */
++	export let compacto = false;
 +
 +	let copiado = false;
 +	let aviso = '';
 +	let menuAbierto = false;
++	let boton;
++	// id único para enlazar el botón con su menú (aria-controls)
++	const idMenu = `compartir-${Math.random().toString(36).slice(2, 9)}`;
++
++	// Escape cierra el menú y devuelve el foco al botón
++	function tecla(e) {
++		if (e.key === 'Escape' && menuAbierto) {
++			e.stopPropagation();
++			menuAbierto = false;
++			boton?.focus();
++		}
++	}
++	// Al salir con el tabulador del bloque, el menú se cierra
++	function focoFuera(e) {
++		if (!e.currentTarget.contains(e.relatedTarget)) menuAbierto = false;
++	}
 +
 +	const texto = () => {
++		if (textoCompartir) return textoCompartir;
 +		const t = (titulo ?? '').toString().trim();
 +		const pagina = typeof document !== 'undefined' ? document.title : '';
 +		return t ? `${t} · SpainFacts` : pagina || 'SpainFacts';
@@ -50,9 +159,9 @@ index 0000000..84828af
 +		}
 +		try {
 +			await navigator.clipboard.writeText(url());
-+			aviso = 'Enlace copiado: pégalo en Instagram';
++			aviso = tr('compartir.instagram', lang);
 +		} catch {
-+			aviso = 'Copia el enlace de la página para pegarlo en Instagram';
++			aviso = tr('compartir.instagram2', lang);
 +		}
 +		setTimeout(() => (aviso = ''), 4000);
 +		window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer');
@@ -64,7 +173,7 @@ index 0000000..84828af
 +			copiado = true;
 +			setTimeout(() => (copiado = false), 2000);
 +		} catch {
-+			window.prompt('Copia el enlace:', url());
++			window.prompt(tr('compartir.copiar', lang), url());
 +		}
 +		menuAbierto = false;
 +	}
@@ -82,19 +191,33 @@ index 0000000..84828af
 +	}
 +</script>
 +
-+<div class="compartir" on:mouseleave={() => (menuAbierto = false)}>
-+	<button type="button" class="boton-pie" aria-haspopup="true" aria-expanded={menuAbierto} on:click={compartirNativo}>
-+		<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
++<!-- svelte-ignore a11y-no-static-element-interactions -->
++<div class="compartir" on:mouseleave={() => (menuAbierto = false)} on:keydown={tecla} on:focusout={focoFuera}>
++	<button
++		type="button"
++		class="boton-pie"
++		class:compacto
++		bind:this={boton}
++		aria-label={compacto && titulo ? `${tr('compartir', lang)}: ${titulo}` : tr('compartir', lang)}
++		title={tr('compartir', lang)}
++		aria-expanded={menuAbierto}
++		aria-controls={idMenu}
++		on:click|stopPropagation={compartirNativo}
++	>
++		<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"
 +			><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" /></svg
 +		>
-+		<span>{aviso || (copiado ? 'Enlace copiado' : 'Compartir')}</span>
++		{#if !compacto || aviso || copiado}<span aria-hidden="true">{aviso || (copiado ? tr('compartir.copiado', lang) : tr('compartir', lang))}</span>{/if}
 +	</button>
++	<!-- Aviso para lectores de pantalla cuando se copia el enlace -->
++	<span class="sr-only" role="status">{aviso || (copiado ? tr('compartir.copiado', lang) : '')}</span>
 +	{#if menuAbierto}
-+		<div class="menu" role="menu">
++		<!-- Lista de botones (patrón "disclosure"): se recorre con el tabulador -->
++		<div class="menu" id={idMenu} role="group" aria-label={tr('compartir', lang)}>
 +			{#each REDES as red (red.id)}
-+				<button type="button" role="menuitem" on:click={() => abrir(red)}>{red.nombre}</button>
++				<button type="button" on:click={() => abrir(red)}>{red.nombre}<span class="sr-only"> {tr('compartir.ventana', lang)}</span></button>
 +			{/each}
-+			<button type="button" role="menuitem" on:click={copiar}>Copiar enlace</button>
++			<button type="button" on:click={copiar}>{tr('compartir.copiar', lang)}</button>
 +		</div>
 +	{/if}
 +</div>
@@ -118,6 +241,20 @@ index 0000000..84828af
 +		margin: 0 3px;
 +		opacity: 0.85;
 +		transition: all 150ms;
++	}
++	.boton-pie.compacto {
++		padding: 4px;
++		border-radius: 6px;
++		/* objetivo táctil mínimo de 24 × 24 px (WCAG 2.5.8) */
++		min-width: 24px;
++		min-height: 24px;
++		justify-content: center;
++	}
++	.boton-pie:focus-visible,
++	.menu button:focus-visible {
++		outline: 2px solid var(--primary);
++		outline-offset: 2px;
++		opacity: 1;
 +	}
 +	.boton-pie:hover {
 +		opacity: 1;
@@ -143,6 +280,7 @@ index 0000000..84828af
 +	}
 +	.menu button {
 +		text-align: left;
++		min-height: 28px;
 +		padding: 6px 10px;
 +		border: none;
 +		border-radius: 6px;
@@ -163,19 +301,33 @@ index 0000000..84828af
 +	}
 +</style>
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
-index ef4cb65..ac15825 100644
+index ef4cb65..0c60551 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/DownloadData.svelte
-@@ -11,7 +11,7 @@
+@@ -11,7 +11,10 @@
  
  	export let data = undefined;
  	export let queryID = undefined;
 -	export let text = 'Download';
-+	export let text = 'Descargar CSV';
++	import { page } from '$app/stores';
++	import { idiomaDeRuta, t } from './idioma.js';
++	export let text = undefined;
++	$: textoBoton = text ?? t('tabla.csv', idiomaDeRuta($page?.url?.pathname ?? '/'));
  	export let display = true;
  	$: display = toBoolean(display);
  	let errors = [];
-@@ -85,13 +85,14 @@
+@@ -53,8 +56,8 @@
+ 	<InlineError inputType="DownloadData" height="32" width="160" error={errors} />
+ {:else if display}
+ 	<div transition:fade|local={errors.length > 0 ? { duration: 0 } : { duration: 200 }}>
+-		<button type="button" aria-label={text} class={$$props.class} on:click={downloadData(data)}>
+-			<span>{text}</span>
++		<button type="button" aria-label={textoBoton} class={$$props.class} on:click={downloadData(data)}>
++			<span>{textoBoton}</span>
+ 			<slot>
+ 				<svg
+ 					width="12"
+@@ -85,13 +88,14 @@
  		font-family: var(--ui-font-family);
  		font-size: 1em;
  		color: var(--base-content);
@@ -195,7 +347,7 @@ index ef4cb65..ac15825 100644
  		gap: 3px;
  		transition: all 200ms;
  		-moz-user-select: none;
-@@ -103,6 +104,7 @@
+@@ -103,6 +107,7 @@
  	button:hover {
  		opacity: 1;
  		color: var(--primary);
@@ -203,7 +355,7 @@ index ef4cb65..ac15825 100644
  		transition: all 200ms;
  	}
  
-@@ -111,12 +113,6 @@
+@@ -111,12 +116,6 @@
  		transition: all 200ms;
  	}
  
@@ -216,28 +368,2943 @@ index ef4cb65..ac15825 100644
  	@media print {
  		button {
  			display: none;
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js
+new file mode 100644
+index 0000000..b1fed5e
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js
+@@ -0,0 +1,72 @@
++// SpainFacts: traducción de las etiquetas que vienen de los DATOS (nombres de series,
++// leyendas y categorías de los ejes) en las páginas traducidas (/en, /ca, /gl, /eu).
++// Las consultas devuelven textos en castellano; aquí se sustituyen al pintar la gráfica.
++// Añadido con patch-package. El diccionario está en etiquetas_diccionario.js.
++import { DICCIONARIO } from './etiquetas_diccionario.js';
++
++const traducir = (texto, dic) => {
++	if (typeof texto !== 'string') return texto;
++	const limpio = texto.trim();
++	if (dic[limpio] !== undefined) return dic[limpio];
++	// "X · España" o "X (INE)": se traduce cada parte si la conoce
++	if (limpio.includes(' · ')) {
++		const partes = limpio.split(' · ');
++		if (partes.some((p) => dic[p] !== undefined)) return partes.map((p) => dic[p] ?? p).join(' · ');
++	}
++	return texto;
++};
++
++const esCategoria = (eje) => eje && (eje.type === 'category' || Array.isArray(eje.data));
++
++export function traducirEtiquetas(config, lang = 'es') {
++	try {
++		if (!config || lang === 'es') return config;
++		const dic = DICCIONARIO[lang];
++		if (!dic || !Array.isArray(config.series)) return config;
++
++		const ejes = (e) => (Array.isArray(e) ? e : e ? [e] : []);
++		const catX = ejes(config.xAxis).some(esCategoria);
++		const catY = ejes(config.yAxis).some(esCategoria);
++
++		const traducirEje = (e) =>
++			Array.isArray(e.data)
++				? { ...e, data: e.data.map((d) => (d && typeof d === 'object' ? { ...d, value: traducir(d.value, dic) } : traducir(d, dic))) }
++				: e;
++
++		const series = config.series.map((s) => {
++			const nueva = { ...s, name: traducir(s.name, dic) };
++			// Sankey y grafos: los enlaces apuntan a los nodos por nombre, se traducen igual
++			if (Array.isArray(s.links))
++				nueva.links = s.links.map((l) => ({ ...l, source: traducir(l.source, dic), target: traducir(l.target, dic) }));
++			if (Array.isArray(s.edges))
++				nueva.edges = s.edges.map((l) => ({ ...l, source: traducir(l.source, dic), target: traducir(l.target, dic) }));
++			if (Array.isArray(s.nodes))
++				nueva.nodes = s.nodes.map((n) => (n && typeof n.name === 'string' ? { ...n, name: traducir(n.name, dic) } : n));
++			if (Array.isArray(s.data)) {
++				nueva.data = s.data.map((d) => {
++					if (Array.isArray(d)) {
++						const c = [...d];
++						if (catX) c[0] = traducir(c[0], dic);
++						if (catY) c[1] = traducir(c[1], dic);
++						return c;
++					}
++					// tartas y embudos: { name, value }
++					if (d && typeof d === 'object' && typeof d.name === 'string') return { ...d, name: traducir(d.name, dic) };
++					return d;
++				});
++			}
++			return nueva;
++		});
++
++		const salida = { ...config, series };
++		if (catX) salida.xAxis = Array.isArray(config.xAxis) ? config.xAxis.map(traducirEje) : traducirEje(config.xAxis);
++		if (catY) salida.yAxis = Array.isArray(config.yAxis) ? config.yAxis.map(traducirEje) : traducirEje(config.yAxis);
++		if (config.legend) {
++			const leyendas = ejes(config.legend).map((l) => (Array.isArray(l.data) ? { ...l, data: l.data.map((d) => traducir(typeof d === 'object' ? d.name : d, dic)) } : l));
++			salida.legend = Array.isArray(config.legend) ? leyendas : leyendas[0];
++		}
++		return salida;
++	} catch {
++		return config;
++	}
++}
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
+new file mode 100644
+index 0000000..96794b0
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
+@@ -0,0 +1,2521 @@
++// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
++// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
++// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
++export const DICCIONARIO = {
++	en: {
++		'(modelo sin especificar)': '(model not specified)',
++		'(provincia)': '(province)',
++		'0 emisiones (azul)': 'Zero emission (blue)',
++		'0-4 años': '0-4 years',
++		'1 persona': '1 person',
++		'1. Hasta la ESO': '1. Up to lower secondary',
++		'10 % mejor pagado (D10)': 'Top-paid 10% (D10)',
++		'10 % peor pagado (D1)': 'Lowest-paid 10% (D1)',
++		'10-14 años': '10-14 years',
++		'15-19 años': '15-19 years',
++		'16 a 19 años': '16 to 19',
++		'2 personas': '2 people',
++		'2. Bachillerato o FP de grado medio': '2. Upper secondary or intermediate VET',
++		'20 a 24 años': '20 to 24',
++		'20+ años': '20+ years',
++		'25 a 54 años': '25 to 54',
++		'3 personas': '3 people',
++		'3. Estudios superiores': '3. Tertiary education',
++		'4 o más': '4 or more',
++		'5-9 años': '5-9 years',
++		'55 años o más': '55 and over',
++		'65 y más años': '65 and over',
++		'80 y más': '80 and over',
++		'85 y más': '85 and over',
++		'abr': 'Apr',
++		'abr.': 'Apr',
++		'abr. 1979': 'Apr 1979',
++		'abr. 2019': 'Apr 2019',
++		'Accidentes de tráfico': 'Road traffic accidents',
++		'Actividades profesionales': 'Professional services',
++		'Actividades profesionales y técnicas': 'Professional and technical activities',
++		'Activo': 'Active',
++		'Actuaciones de carácter general': 'General services',
++		'Actuaciones económicas': 'Economic affairs',
++		'Acumulados': 'Cumulative',
++		'Administración': 'Administration',
++		'Administración Central': 'Central government',
++		'Administración central': 'Central government',
++		'Administración general autonómica': 'Regional general administration',
++		'Administración General del Estado': 'General State Administration',
++		'Administración local': 'Local government',
++		'Administración, educación y sanidad': 'Public administration, education and health',
++		'Administraciones públicas': 'Public administrations',
++		'África': 'Africa',
++		'ago': 'Aug',
++		'ago.': 'Aug',
++		'Agresión sexual con penetración': 'Sexual assault with penetration',
++		'Agrícola': 'Farmland',
++		'Agricultura y Ganadería': 'Agriculture and livestock',
++		'Agricultura y pesca': 'Agriculture and fishing',
++		'Agricultura y silvicultura': 'Agriculture and forestry',
++		'Aire-agua (aerotermia)': 'Air-to-water (aerothermal)',
++		'Aire-agua reversible (aerotermia)': 'Reversible air-to-water (aerothermal)',
++		'Aire-aire reversible (splits de aire acondicionado)': 'Reversible air-to-air (split air conditioners)',
++		'Alcohol y tabaco': 'Alcohol and tobacco',
++		'Alemania': 'Germany',
++		'Alimentación, bebidas y tabaco': 'Food, drink and tobacco',
++		'Alimentos': 'Food',
++		'Alimentos elaborados, bebidas y tabaco': 'Processed food, drink and tobacco',
++		'Alimentos sin elaborar': 'Unprocessed food',
++		'Ambos sexos': 'Both sexes',
++		'América del Norte': 'North America',
++		'Andalucía': 'Andalusia',
++		'Angiología y cirugía vascular': 'Angiology and vascular surgery',
++		'Año': 'Year',
++		'Anual': 'Annual',
++		'Anunciada': 'Announced',
++		'Apartamentos turísticos': 'Tourist apartments',
++		'Aporte de la energía': 'Energy contribution',
++		'Aragón': 'Aragon',
++		'Arbolado': 'Woodland',
++		'Argelia': 'Algeria',
++		'AROPE (pobreza o exclusión)': 'AROPE (poverty or social exclusion)',
++		'Asalariados con contrato temporal': 'Employees on temporary contracts',
++		'Asuntos Económicos y Transporte': 'Economic affairs and transport',
++		'Autonómico': 'Regional',
++		'Autónomos': 'Self-employed',
++		'Ayuntamientos': 'Town councils',
++		'B (amarilla)': 'B (yellow)',
++		'Bachillerato': 'Upper secondary',
++		'Baleares': 'Balearic Islands',
++		'Bélgica': 'Belgium',
++		'Bienes industriales sin energía': 'Non-energy industrial goods',
++		'Bienes públicos preferentes': 'Merit goods (health, education, culture)',
++		'Bioenergía': 'Bioenergy',
++		'Biomasa (leña, pellets)': 'Biomass (firewood, pellets)',
++		'Bizkaia': 'Biscay',
++		'Bombeo': 'Pumped storage',
++		'Bombeo Consumido Gwh': 'Pumping consumption (GWh)',
++		'Bombeo Turbinado Gwh': 'Pumped-storage output (GWh)',
++		'Butano y propano': 'Butane and propane',
++		'C (verde)': 'C (green)',
++		'Calor ambiente (bombas de calor)': 'Ambient heat (heat pumps)',
++		'Calor de redes': 'District heating',
++		'Calor y carbón': 'Heat and coal',
++		'Camas': 'Beds',
++		'Canarias': 'Canary Islands',
++		'Cancelada': 'Cancelled',
++		'Carbón': 'Coal',
++		'Carencia material y social severa': 'Severe material and social deprivation',
++		'Carencia severa': 'Severe deprivation',
++		'Carga Financiera': 'Debt servicing',
++		'Cargado Mwh': 'Charged (MWh)',
++		'Castilla y León': 'Castile and León',
++		'Cataluña': 'Catalonia',
++		'Causas externas de mortalidad': 'External causes of death',
++		'Centro América y Caribe': 'Central America and Caribbean',
++		'Centro y derecha': 'Centre and right',
++		'Cerrada en': 'Closed in',
++		'Chequia': 'Czechia',
++		'Chipre': 'Cyprus',
++		'Cibercriminalidad': 'Cybercrime',
++		'Ciclo combinado': 'Combined cycle',
++		'Ciclos Combinados (Gas)': 'Combined cycle (gas)',
++		'Ciclos combinados (gas)': 'Combined cycle (gas)',
++		'Ciencias': 'Science',
++		'Cirugía cardiaca': 'Cardiac surgery',
++		'Cirugía general y digestiva': 'General and digestive surgery',
++		'Cirugía maxilofacial': 'Maxillofacial surgery',
++		'Cirugía pediátrica': 'Paediatric surgery',
++		'Cirugía plástica': 'Plastic surgery',
++		'Cirugía torácica': 'Thoracic surgery',
++		'Coalición Canaria': 'Canarian Coalition',
++		'Cogeneración': 'Cogeneration',
++		'Cogeneración y Residuos': 'Cogeneration and waste',
++		'Colectiva': 'Collective',
++		'Comercio': 'Retail and wholesale',
++		'Comercio y servicios públicos': 'Commercial and public services',
++		'Comercio, transporte y hostelería': 'Trade, transport and hospitality',
++		'Comisión gestora': 'Caretaker committee',
++		'Compraventas': 'Home sales',
++		'Compraventas de vivienda nueva': 'New-home sales',
++		'Comunicaciones': 'Communications',
++		'Comunidad de Madrid': 'Community of Madrid',
++		'Comunidad Foral de Navarra': 'Navarre',
++		'Comunidad Valenciana': 'Valencian Community',
++		'Comunidades Autónomas': 'Autonomous communities',
++		'Comunidades autónomas': 'Autonomous communities',
++		'Con permiso de acceso': 'With grid access permit',
++		'Concertada': 'Publicly funded private',
++		'Congreso': 'Congress',
++		'Conjunto de las comunidades': 'All regions',
++		'Consta': 'Recorded',
++		'Construcción': 'Construction',
++		'Consumida para almacenar': 'Consumed for storage',
++		'Consumo de los hogares': 'Household consumption',
++		'Consumo Gwh': 'Consumption (GWh)',
++		'Consumo público': 'Government consumption',
++		'Consuntivo': 'Consumptive',
++		'Contra la Administración de Justicia': 'Against the administration of justice',
++		'Contra la libertad': 'Against freedom',
++		'Contra la libertad e indemnidad sexuales': 'Sexual offences',
++		'Contra la salud pública': 'Against public health',
++		'Contra la seguridad vial': 'Road safety offences',
++		'Contra las relaciones familiares': 'Against family relations',
++		'Corporaciones Locales': 'Local government',
++		'Corporaciones locales': 'Local government',
++		'Cotizaciones': 'Social contributions',
++		'Cotizaciones Sociales': 'Social contributions',
++		'Creadas': 'Created',
++		'Creados': 'Created',
++		'Criminalidad convencional': 'Conventional crime',
++		'Croacia': 'Croatia',
++		'Cultura, Ocio y Religión': 'Recreation, culture and religion',
++		'Cuota Bev': 'BEV share',
++		'Cuota Electrificados': 'Electrified share',
++		'Cuota Enchufables': 'Plug-in share',
++		'De 16 a 29 años': '16 to 29',
++		'De 16 a 64': '16 to 64',
++		'De 30 a 44 años': '30 to 44',
++		'De 45 a 64 años': '45 to 64',
++		'De 65 a 79': '65 to 79',
++		'Defensa': 'Defence',
++		'Déficit': 'Deficit',
++		'Déficit / Superávit por habitante': 'Deficit / surplus per person',
++		'Defraudaciones': 'Fraud',
++		'Defunciones': 'Deaths',
++		'Delitos contra la libertad sexual': 'Sexual offences',
++		'Dentro de Natura 2000': 'Inside Natura 2000',
++		'Dermatología': 'Dermatology',
++		'Descontada la inflación': 'Adjusted for inflation',
++		'Desde 2008 (media de 2008 = 100)': 'Since 2008 (2008 average = 100)',
++		'Desde 2019 (media de 2019 = 100)': 'Since 2019 (2019 average = 100)',
++		'Deuda pública': 'Public debt',
++		'Devuelta a la red': 'Returned to the grid',
++		'Diaria': 'Daily',
++		'dic': 'Dec',
++		'dic.': 'Dec',
++		'dic. 2015': 'Dec 2015',
++		'Diésel': 'Diesel',
++		'Dinamarca': 'Denmark',
++		'Diputación / cabildo / consell': 'Provincial / island council',
++		'Diputación o cabildo (sin datos)': 'Provincial or island council (no data)',
++		'Diputaciones, cabildos y consejos insulares': 'Provincial and island councils',
++		'Distrito': 'District',
++		'Distrito Distrito 01': 'District 01',
++		'Distrito Distrito 02': 'District 02',
++		'Distrito Distrito 03': 'District 03',
++		'Distrito Distrito 04': 'District 04',
++		'Distrito Distrito 05': 'District 05',
++		'Distrito Distrito 06': 'District 06',
++		'Distrito Distrito 07': 'District 07',
++		'Distrito Distrito 08': 'District 08',
++		'Distrito Distrito 09': 'District 09',
++		'Distrito Distrito 10': 'District 10',
++		'Distrito Distrito 11': 'District 11',
++		'Distrito Distrito 12': 'District 12',
++		'Distrito Distrito 13': 'District 13',
++		'Distrito Distrito 14': 'District 14',
++		'Distrito Distrito 15': 'District 15',
++		'Distrito Distrito 16': 'District 16',
++		'Distrito Distrito 17': 'District 17',
++		'Distrito Distrito 18': 'District 18',
++		'Distrito Distrito 19': 'District 19',
++		'Distrito Distrito 20': 'District 20',
++		'Distrito Distrito 21': 'District 21',
++		'Disueltas': 'Dissolved',
++		'Economía e Infraestructuras': 'Economy and infrastructure',
++		'Edad': 'Age',
++		'Educación': 'Education',
++		'Educación no universitaria': 'Non-university education',
++		'Educación superior': 'Tertiary education',
++		'Educación, sanidad y servicios sociales': 'Education, health and social services',
++		'EH Bildu (e izquierda abertzale)': 'EH Bildu (and abertzale left)',
++		'El 25 % más barato paga menos de': 'Cheapest 25% pay less than',
++		'El 25 % más caro paga más de': 'Dearest 25% pay more than',
++		'Electricidad': 'Electricity',
++		'Eléctrico puro (BEV)': 'Battery electric (BEV)',
++		'Emisiones por euro de PIB': 'Emissions per euro of GDP',
++		'Emisiones por habitante': 'Emissions per person',
++		'Empleadores (con asalariados)': 'Employers (with employees)',
++		'Empresas': 'Businesses',
++		'Empresas e instituciones públicas': 'Public companies and institutions',
++		'En construcción': 'Under construction',
++		'En escaños': 'By seats',
++		'En operación': 'Operating',
++		'En tramitación': 'Being processed',
++		'En votos': 'By votes',
++		'ene': 'Jan',
++		'ene.': 'Jan',
++		'Energía': 'Energy',
++		'Energía (total)': 'Energy (total)',
++		'Enfermedades del sistema circulatorio': 'Diseases of the circulatory system',
++		'Enfermedades del sistema digestivo': 'Diseases of the digestive system',
++		'Enfermedades del sistema genitourinario': 'Diseases of the genitourinary system',
++		'Enfermedades del sistema nervioso y de los órganos de los sentidos': 'Diseases of the nervous system and sense organs',
++		'Enfermedades del sistema respiratorio': 'Diseases of the respiratory system',
++		'Enfermedades endocrinas, nutricionales y metabólicas': 'Endocrine, nutritional and metabolic diseases',
++		'Enfermedades infecciosas y parasitarias': 'Infectious and parasitic diseases',
++		'Enfermeras': 'Nurses',
++		'Enseñanza': 'Education',
++		'Entidades locales': 'Local authorities',
++		'Entregado Mwh': 'Discharged (MWh)',
++		'Eólica': 'Wind',
++		'Eólica marina': 'Offshore wind',
++		'Eólica terrestre': 'Onshore wind',
++		'Eslovaquia': 'Slovakia',
++		'Eslovenia': 'Slovenia',
++		'ESO': 'Lower secondary (ESO)',
++		'ESO o similar': 'Lower secondary or similar',
++		'España': 'Spain',
++		'España (INE)': 'Spain (INE)',
++		'España (sin LULUCF)': 'Spain (excl. LULUCF)',
++		'España, emisiones netas (con sumideros LULUCF)': 'Spain, net emissions (incl. LULUCF sinks)',
++		'España: Gasóleo de automoción': 'Spain: Diesel',
++		'España: Gasolina 95': 'Spain: Petrol 95',
++		'Española': 'Spanish',
++		'Especialista': 'Specialist',
++		'Esta comunidad': 'This region',
++		'Estado': 'Central State',
++		'Estados Unidos de América': 'United States',
++		'Estafas informáticas': 'Online fraud',
++		'Estatal': 'National',
++		'Este municipio': 'This municipality',
++		'Estudios superiores': 'Tertiary education',
++		'Europa menos UE27_2020': 'Europe excl. EU-27',
++		'Exportaciones': 'Exports',
++		'Extranjera': 'Foreign',
++		'Extranjera (total)': 'Foreign (total)',
++		'Extranjera de fuera de la UE': 'Non-EU foreign',
++		'Extranjera de la UE': 'EU foreign',
++		'Falsedades': 'Forgery',
++		'feb': 'Feb',
++		'feb.': 'Feb',
++		'Finanzas y seguros': 'Finance and insurance',
++		'Finanzas, seguros e inmobiliarias': 'Finance, insurance and real estate',
++		'Finlandia': 'Finland',
++		'FP de grado medio': 'Intermediate VET',
++		'FP de grado medio y básica': 'Basic and intermediate VET',
++		'FP de grado superior': 'Higher VET',
++		'Francia': 'France',
++		'Fuera de Natura 2000': 'Outside Natura 2000',
++		'Fuerzas Armadas': 'Armed Forces',
++		'Funcionario de carrera': 'Permanent civil servant',
++		'Funcionario interino': 'Interim civil servant',
++		'Gas (GLP / GNC)': 'Gas (LPG / CNG)',
++		'Gas natural': 'Natural gas',
++		'Gas Natural (Ciclos y Cogeneración)': 'Natural gas (combined cycle and CHP)',
++		'Gases Fluorados y Otros': 'Fluorinated gases and other',
++		'Gasóleo de automoción': 'Diesel',
++		'Gasóleo de calefacción': 'Heating oil',
++		'Gasóleo, butano y otros derivados del petróleo': 'Heating oil, butane and other petroleum products',
++		'Gasolina': 'Petrol',
++		'Gasolina 95': 'Petrol 95',
++		'Gasto por turista y viaje': 'Spending per tourist and trip',
++		'Gasto Social': 'Social spending',
++		'Gastos': 'Spending',
++		'Gastos por habitante': 'Spending per person',
++		'Generación Eléctrica': 'Power generation',
++		'Generales': 'General elections',
++		'Geotérmica': 'Geothermal',
++		'Ginecología': 'Gynaecology',
++		'Grandes (250 o más)': 'Large (250 or more)',
++		'Grecia': 'Greece',
++		'Hasta la ESO': 'Up to lower secondary',
++		'Híbrido enchufable (PHEV)': 'Plug-in hybrid (PHEV)',
++		'Híbrido no enchufable (HEV)': 'Hybrid (HEV)',
++		'Hidráulica': 'Hydro',
++		'Hidroeléctrica': 'Hydroelectric',
++		'Hidroeléctrico': 'Hydroelectric',
++		'Hidrógeno': 'Hydrogen',
++		'Hidrotérmica': 'Hydrothermal',
++		'Hipotecas sobre viviendas': 'Home mortgages',
++		'Hogar': 'Household goods',
++		'Hogares': 'Households',
++		'Hogares con todos sus activos en paro (%)': 'Households with all active members unemployed (%)',
++		'Hombres': 'Men',
++		'Hombres nacidos en el extranjero': 'Men born abroad',
++		'Hombres nacidos en España': 'Men born in Spain',
++		'Hombres, española': 'Men, Spanish',
++		'Hombres, extranjera': 'Men, foreign',
++		'Homicidio y sus formas': 'Homicide and related offences',
++		'Homicidios': 'Homicides',
++		'Homicidios dolosos/asesinatos consumados': 'Completed murders and homicides',
++		'Homicidios y asesinatos consumados': 'Completed murders and homicides',
++		'Homicidios y asesinatos en tentativa': 'Attempted murders and homicides',
++		'Hostelería': 'Hospitality',
++		'Hoteles': 'Hotels',
++		'Hungría': 'Hungary',
++		'Hurtos': 'Thefts',
++		'Illes Balears': 'Balearic Islands',
++		'Importaciones': 'Imports',
++		'Impuesto sobre Sociedades': 'Corporation tax',
++		'Impuestos Directos': 'Direct taxes',
++		'Impuestos Especiales': 'Excise duties',
++		'Impuestos Indirectos': 'Indirect taxes',
++		'Inactivo': 'Inactive',
++		'Independientes y locales': 'Independent and local parties',
++		'Industria': 'Industry',
++		'Industria y energía': 'Industry and energy',
++		'Industria y Procesos': 'Industry and processes',
++		'Infantil': 'Early childhood',
++		'Infantil (3-5 años)': 'Pre-primary (3-5)',
++		'Inflación general': 'Headline inflation',
++		'Información y comunicaciones': 'Information and communication',
++		'Ingresos': 'Revenue',
++		'Ingresos No Tributarios y Fondos UE': 'Non-tax revenue and EU funds',
++		'Ingresos por habitante': 'Revenue per person',
++		'Iniciadas': 'Started',
++		'Inmobiliarias': 'Real estate',
++		'Intereses de la Deuda': 'Debt interest',
++		'Inversión': 'Investment',
++		'IPC general': 'Headline CPI',
++		'IPSFL': 'NPISH',
++		'Irlanda': 'Ireland',
++		'IRPF y Patrimonio': 'Income and wealth tax',
++		'Italia': 'Italy',
++		'IU, Podemos y Sumar': 'IU, Podemos and Sumar',
++		'IVA': 'VAT',
++		'Izquierda': 'Left',
++		'Jornada a tiempo completo': 'Full-time',
++		'Jubilación': 'Retirement',
++		'jul': 'Jul',
++		'jul.': 'Jul',
++		'jul. 2023': 'Jul 2023',
++		'jun': 'Jun',
++		'jun.': 'Jun',
++		'jun. 1987': 'Jun 1987',
++		'jun. 1989': 'Jun 1989',
++		'jun. 1999': 'Jun 1999',
++		'jun. 2004': 'Jun 2004',
++		'Justicia': 'Justice',
++		'Laboral (sin detalle)': 'Contract staff (no detail)',
++		'Laboral fijo': 'Permanent contract staff',
++		'Laboral temporal': 'Temporary contract staff',
++		'Latinoamérica': 'Latin America',
++		'Lectura': 'Reading',
++		'Lenta (<22 kW)': 'Slow (<22 kW)',
++		'Lesiones': 'Assault and injury',
++		'Lesiones graves y riña tumultuaria': 'Serious injury and affray',
++		'Letonia': 'Latvia',
++		'Libre de emisiones (%) (Renovable + Nuclear)': 'Emission-free (%) (renewable + nuclear)',
++		'Libre de emisiones (renovable + nuclear)': 'Emission-free (renewable + nuclear)',
++		'Líneas fundamentales': 'Budget outline',
++		'Liquidación': 'Final accounts',
++		'Lituania': 'Lithuania',
++		'Llega a fin de mes con dificultad': 'Struggles to make ends meet',
++		'Llegadas desde el extranjero': 'Arrivals from abroad',
++		'Luxemburgo': 'Luxembourg',
++		'Madera': 'Wood',
++		'Madres españolas': 'Spanish mothers',
++		'Madres extranjeras': 'Foreign mothers',
++		'Maquinaria': 'Machinery',
++		'Mar': 'Sea workers',
++		'mar': 'Mar',
++		'mar.': 'Mar',
++		'mar. 1979': 'Mar 1979',
++		'mar. 2004': 'Mar 2004',
++		'Mar: Canarias': 'Sea: Canary Islands',
++		'Mar: península y Baleares': 'Sea: mainland and Balearics',
++		'Marruecos': 'Morocco',
++		'Más de lo esperable': 'Above expectation',
++		'Matemáticas': 'Maths',
++		'Material de transporte': 'Transport equipment',
++		'Matorral': 'Scrubland',
++		'Máxima de este año': 'This year\'s maximum',
++		'may': 'May',
++		'may.': 'May',
++		'may. 2011': 'May 2011',
++		'may. 2015': 'May 2015',
++		'may. 2019': 'May 2019',
++		'may. 2023': 'May 2023',
++		'Media 1991-2020': '1991-2020 average',
++		'Media 2015 2019': '2015-2019 average',
++		'Media 4t Tasa Paro': 'Q4 average unemployment rate',
++		'Media de las CCAA': 'Average of the regions',
++		'Media de todas las pensiones': 'Average of all pensions',
++		'Media UE': 'EU average',
++		'Media UE-27': 'EU-27 average',
++		'media UE-27': 'EU-27 average',
++		'Media UE-27 (sin LULUCF)': 'EU-27 average (excl. LULUCF)',
++		'Media UE: Gasóleo de automoción': 'EU average: Diesel',
++		'Media UE: Gasolina 95': 'EU average: Petrol 95',
++		'Mediana': 'Median',
++		'Mediana de municipios de su tamaño': 'Median of similar-sized municipalities',
++		'Mediana de su tramo': 'Median of its size band',
++		'Medianas (50-249)': 'Medium (50-249)',
++		'Médicos': 'Doctors',
++		'Menores de 16': 'Under 16',
++		'Menores de 16 años': 'Under 16',
++		'Menores de 25 años': 'Under 25',
++		'Menos de lo esperable': 'Below expectation',
++		'Mensual': 'Monthly',
++		'Metales no férreos': 'Non-ferrous metals',
++		'Migración y ajustes': 'Migration and adjustments',
++		'Minerales no metálicos (cemento, cerámica, vidrio)': 'Non-metallic minerals (cement, ceramics, glass)',
++		'Minería del carbón': 'Coal mining',
++		'Minería y canteras': 'Mining and quarrying',
++		'Mitad de la tabla (D5)': 'Middle (D5)',
++		'Mixto (público-privado)': 'Mixed (public-private)',
++		'Motores, Turbinas y Fuel': 'Engines, turbines and fuel oil',
++		'Mujeres': 'Women',
++		'Mujeres nacidas en el extranjero': 'Women born abroad',
++		'Mujeres nacidas en España': 'Women born in Spain',
++		'Mujeres, española': 'Women, Spanish',
++		'Mujeres, extranjera': 'Women, foreign',
++		'Municipales': 'Local elections',
++		'Muy por debajo': 'Well below',
++		'Nacimientos': 'Births',
++		'Nacimientos menos defunciones': 'Births minus deaths',
++		'Nacionalidad': 'Nationality',
++		'Nacionalistas y regionalistas': 'Nationalist and regionalist',
++		'Navarra': 'Navarre',
++		'Neurocirugía': 'Neurosurgery',
++		'No consta': 'Not recorded',
++		'No Tributarios': 'Non-tax',
++		'Nominal': 'Nominal',
++		'Noruega': 'Norway',
++		'nov': 'Nov',
++		'nov.': 'Nov',
++		'nov. 2011': 'Nov 2011',
++		'nov. 2019': 'Nov 2019',
++		'Nueva': 'New',
++		'Ocio y cultura': 'Recreation and culture',
++		'Ocio y otros servicios': 'Recreation and other services',
++		'Ocio y otros servicios personales': 'Recreation and other personal services',
++		'oct': 'Oct',
++		'oct.': 'Oct',
++		'oct. 1989': 'Oct 1989',
++		'Oftalmología': 'Ophthalmology',
++		'Operación': 'Surgery',
++		'Operación programada': 'Scheduled surgery',
++		'Orden Público y Seguridad': 'Public order and safety',
++		'Otorrinolaringología': 'Otolaryngology (ENT)',
++		'Otras': 'Other',
++		'Otras / no sabe': 'Other / don\'t know',
++		'Otras entidades locales': 'Other local authorities',
++		'Otras industrias': 'Other industries',
++		'Otras Renovables': 'Other renewables',
++		'Otras Tecnologías': 'Other technologies',
++		'Otro personal': 'Other staff',
++		'Otros': 'Other',
++		'Otros (cooperativistas, ayuda familiar)': 'Other (co-op members, family workers)',
++		'Otros / sin dato': 'Other / no data',
++		'Otros bienes y servicios': 'Other goods and services',
++		'Otros ciberdelitos': 'Other cybercrime',
++		'Otros Impuestos Directos y sobre el Capital': 'Other direct and capital taxes',
++		'Otros Impuestos Indirectos': 'Other indirect taxes',
++		'Otros países de la UE': 'Other EU countries',
++		'Otros partidos': 'Other parties',
++		'Pagan en más de 30 días (de los que lo comunican)': 'Pay in over 30 days (of those reporting)',
++		'Pago directo de los hogares': 'Out-of-pocket household spending',
++		'País de la UE27_2020 sin España': 'EU-27 country excl. Spain',
++		'País de la UE28 sin España': 'EU-28 country excl. Spain',
++		'País Vasco': 'Basque Country',
++		'Países Bajos': 'Netherlands',
++		'Países Nórdicos': 'Nordic countries',
++		'Papel y artes gráficas': 'Paper and printing',
++		'Parados de un año o más (% de los activos)': 'Unemployed one year or more (% of labour force)',
++		'Paralizada': 'Stalled',
++		'Parciales que querrían jornada completa': 'Part-timers wanting full-time work',
++		'Parlamento Europeo': 'European Parliament',
++		'Partido Andalucista': 'Andalusian Party',
++		'Pastos y otra vegetación natural': 'Grassland and other natural vegetation',
++		'Península': 'Mainland',
++		'Pensión media de jubilación (14 pagas prorrateadas en 12)': 'Average retirement pension (14 payments spread over 12)',
++		'Pensiones de jubilación por 100 personas de 65 años o más': 'Retirement pensions per 100 people aged 65+',
++		'Pensiones por 1.000 habitantes': 'Pensions per 1,000 people',
++		'Pensiones por 100 personas de 65 años o más': 'Pensions per 100 people aged 65+',
++		'Pequeñas (10-49)': 'Small (10-49)',
++		'Pernoct 1000hab': 'Overnight stays per 1,000 people',
++		'Pernoct 1000hab Espana': 'Overnight stays per 1,000 people (Spain)',
++		'Perú': 'Peru',
++		'Petróleo': 'Oil',
++		'PIB real por habitante': 'Real GDP per person',
++		'Pobreza Espana': 'Poverty (Spain)',
++		'Policía Nacional y Guardia Civil': 'National Police and Guardia Civil',
++		'Policías autonómicas': 'Regional police forces',
++		'Polonia': 'Poland',
++		'Por debajo': 'Below',
++		'Por encima': 'Above',
++		'Por persona': 'Per person',
++		'Por unidad de consumo': 'Per consumption unit',
++		'Postsecundaria no superior': 'Post-secondary non-tertiary',
++		'Presupuesto del año': 'Year\'s budget',
++		'Primaria': 'Primary',
++		'Primaria incompleta': 'Incomplete primary',
++		'Primer hijo': 'First child',
++		'Primera consulta con el especialista': 'First specialist appointment',
++		'Principado de Asturias': 'Asturias',
++		'Prisiones': 'Prisons',
++		'Privada': 'Private',
++		'Privado': 'Private',
++		'Protección Social y Pensiones': 'Social protection and pensions',
++		'Protección y promoción social': 'Social protection and promotion',
++		'Provincial o insular': 'Provincial or island',
++		'Pública': 'Public',
++		'Publico': 'Public',
++		'Público': 'Public',
++		'Quebrantamiento de condena': 'Breach of sentence',
++		'Quiebras': 'Bankruptcies',
++		'Química y petroquímica': 'Chemicals and petrochemicals',
++		'Rápida (50-149 kW)': 'Fast (50-149 kW)',
++		'Real': 'Real',
++		'Región de Murcia': 'Region of Murcia',
++		'Reino Unido': 'United Kingdom',
++		'Renovable': 'Renewable',
++		'Renovable (%)': 'Renewable (%)',
++		'Renovables y calor ambiente': 'Renewables and ambient heat',
++		'Renta Persona Provincia': 'Income per person (province)',
++		'Renta Persona Real': 'Real income per person',
++		'República Dominicana': 'Dominican Republic',
++		'Reservas bajas': 'Low reserves',
++		'Residencial y Comercial': 'Residential and commercial',
++		'Residentes en el extranjero': 'Residents abroad',
++		'Residentes en España': 'Residents of Spain',
++		'Residuos': 'Waste',
++		'Restaurantes y hoteles': 'Restaurants and hotels',
++		'Resto': 'Rest',
++		'Resto América': 'Rest of the Americas',
++		'Resto de comunidades': 'Other regions',
++		'Resto de delitos sexuales': 'Other sexual offences',
++		'Resto de Europa': 'Rest of Europe',
++		'Resto de infracciones': 'Other offences',
++		'Resto de países': 'Other countries',
++		'Resto del Mundo': 'Rest of the world',
++		'Retirada': 'Retired',
++		'Riesgo de pobreza': 'At risk of poverty',
++		'Robos': 'Robberies',
++		'Robos con fuerza (domicilios, establecimientos...)': 'Burglaries (homes, premises...)',
++		'Robos con fuerza en domicilios': 'Domestic burglaries',
++		'Robos con fuerza en viviendas': 'Domestic burglaries',
++		'Robos con violencia o intimidación': 'Robbery with violence or intimidation',
++		'Ropa y calzado': 'Clothing and footwear',
++		'Rumanía': 'Romania',
++		'Salario medio bruto (pagas extra prorrateadas)': 'Average gross wage (bonus payments spread)',
++		'Salidas al extranjero': 'Departures abroad',
++		'Sanidad': 'Health',
++		'Sanidad Pública': 'Public health',
++		'Secuestro': 'Kidnapping',
++		'Segunda mano': 'Second-hand',
++		'Seguridad Social': 'Social Security',
++		'Seguridad y Justicia': 'Security and justice',
++		'Seguros voluntarios': 'Voluntary insurance',
++		'Seguros y finanzas': 'Insurance and finance',
++		'Semanal': 'Weekly',
++		'Semestral': 'Half-yearly',
++		'Semirrápida (22-49 kW)': 'Semi-fast (22-49 kW)',
++		'sep': 'Sep',
++		'sep.': 'Sep',
++		'Servicios': 'Services',
++		'Servicios administrativos y auxiliares': 'Administrative and support services',
++		'Servicios Comunitarios': 'Community services',
++		'Servicios públicos básicos': 'Basic public services',
++		'Servicios Públicos Generales': 'General public services',
++		'Sevilla': 'Seville',
++		'Sexo': 'Sex',
++		'Sí': 'Yes',
++		'Siderurgia': 'Iron and steel',
++		'Sin asalariados': 'Without employees',
++		'Sin clasificar': 'Unclassified',
++		'Sin comunicar el PMP': 'Not reporting payment period',
++		'Sin datos': 'No data',
++		'Sin descontar (euros de cada año)': 'Nominal (euros of each year)',
++		'Sin descontar (euros de cada mes)': 'Nominal (euros of each month)',
++		'Sin detalle en la fuente': 'No detail in source',
++		'Sin diferencia clara': 'No clear difference',
++		'Sin estudios': 'No schooling',
++		'Sin etiqueta': 'No label',
++		'Sin fecha': 'No date',
++		'Sin información': 'No information',
++		'Solar Fotovoltaica': 'Solar PV',
++		'Solar fotovoltaica': 'Solar PV',
++		'Solar Térmica': 'Solar thermal',
++		'Solar térmica': 'Solar thermal',
++		'Solar termoeléctrica': 'Concentrated solar power',
++		'Solo mayores de 64': 'Over-64s only',
++		'Subyacente (sin energía ni alimentos frescos)': 'Core (excl. energy and fresh food)',
++		'Sudamérica': 'South America',
++		'Suecia': 'Sweden',
++		'Suicidios': 'Suicides',
++		'Suiza': 'Switzerland',
++		'Superávit': 'Surplus',
++		'Sustracción de vehículos': 'Vehicle theft',
++		'Tasa': 'Rate',
++		'Tasa de actividad': 'Activity rate',
++		'Tasa de empleo': 'Employment rate',
++		'Tasa de paro': 'Unemployment rate',
++		'Tasa Espana': 'Rate (Spain)',
++		'Tasa Paro': 'Unemployment rate',
++		'Tasa Paro Espana': 'Unemployment rate (Spain)',
++		'Tasa Pobreza': 'Poverty rate',
++		'Terminadas': 'Completed',
++		'Teruel Existe y España Vaciada': 'Teruel Existe and Empty Spain',
++		'Textil y cuero': 'Textiles and leather',
++		'Tiempo completo': 'Full-time',
++		'Tiempo parcial': 'Part-time',
++		'Tierra: Ceuta y Melilla': 'Land: Ceuta and Melilla',
++		'Toda la economía': 'Whole economy',
++		'Toda la población': 'Whole population',
++		'Todas': 'All',
++		'Todos': 'All',
++		'Todos los hijos': 'All children',
++		'Total': 'Total',
++		'Total (menores de 16 y mayores de 64)': 'Total (under 16 and over 64)',
++		'TOTAL INFRACCIONES PENALES': 'TOTAL CRIMINAL OFFENCES',
++		'Total infracciones penales': 'Total criminal offences',
++		'Tráfico de drogas': 'Drug trafficking',
++		'Transporte': 'Transport',
++		'Transporte y almacenamiento': 'Transport and storage',
++		'Trastornos mentales y del comportamiento': 'Mental and behavioural disorders',
++		'Traumatología': 'Orthopaedics',
++		'Trimestral': 'Quarterly',
++		'Tumores': 'Cancers',
++		'Turbina de gas / motores': 'Gas turbine / engines',
++		'Turbina de vapor (fuel / gas)': 'Steam turbine (fuel oil / gas)',
++		'Turbinado Gwh': 'Pumped-storage output (GWh)',
++		'UE-27': 'EU-27',
++		'UE-27 (Eurostat)': 'EU-27 (Eurostat)',
++		'UE27_2020 sin España': 'EU-27 excl. Spain',
++		'Ultrarrápida (≥150 kW)': 'Ultra-fast (≥150 kW)',
++		'Umbral cálido (p90)': 'Hot threshold (p90)',
++		'Umbral fresco (p10)': 'Cool threshold (p10)',
++		'Unión Europea': 'European Union',
++		'Universidad y otros estudios superiores': 'University and other tertiary education',
++		'Universidades': 'Universities',
++		'Urología': 'Urology',
++		'València': 'Valencia',
++		'Valor': 'Value',
++		'Valor Espana': 'Value (Spain)',
++		'Viudedad': 'Widowhood',
++		'Vivienda y energía': 'Housing and energy',
++		'Vivienda y Medio Ambiente': 'Housing and environment',
++		'Viviendas libres terminadas': 'Completed private homes',
++		'Zona euro': 'Euro area'
++	},
++	ca: {
++		'(modelo sin especificar)': '(model sense especificar)',
++		'(provincia)': '(província)',
++		'0 emisiones (azul)': '0 emissions (blau)',
++		'0-4 años': '0-4 anys',
++		'1. Hasta la ESO': '1. Fins a l\'ESO',
++		'10 % mejor pagado (D10)': '10 % més ben pagat (D10)',
++		'10 % peor pagado (D1)': '10 % pitjor pagat (D1)',
++		'10-14 años': '10-14 anys',
++		'15-19 años': '15-19 anys',
++		'16 a 19 años': '16 a 19 anys',
++		'2 personas': '2 persones',
++		'2. Bachillerato o FP de grado medio': '2. Batxillerat o FP de grau mitjà',
++		'20 a 24 años': '20 a 24 anys',
++		'20+ años': '20+ anys',
++		'25 a 54 años': '25 a 54 anys',
++		'3 personas': '3 persones',
++		'3. Estudios superiores': '3. Estudis superiors',
++		'4 o más': '4 o més',
++		'5-9 años': '5-9 anys',
++		'55 años o más': '55 anys o més',
++		'65 y más años': '65 anys i més',
++		'80 y más': '80 i més',
++		'85 y más': '85 i més',
++		'A Coruña': 'la Corunya',
++		'Accidentes de tráfico': 'Accidents de trànsit',
++		'Actividades profesionales': 'Activitats professionals',
++		'Actividades profesionales y técnicas': 'Activitats professionals i tècniques',
++		'Activo': 'Actiu',
++		'Actuaciones de carácter general': 'Actuacions de caràcter general',
++		'Actuaciones económicas': 'Actuacions econòmiques',
++		'Acumulados': 'Acumulats',
++		'Administración': 'Administració',
++		'Administración Central': 'Administració central',
++		'Administración central': 'Administració central',
++		'Administración general autonómica': 'Administració general autonòmica',
++		'Administración General del Estado': 'Administració General de l\'Estat',
++		'Administración local': 'Administració local',
++		'Administración, educación y sanidad': 'Administració, educació i sanitat',
++		'Administraciones públicas': 'Administracions públiques',
++		'África': 'Àfrica',
++		'ago': 'ag',
++		'ago.': 'ag.',
++		'Agresión sexual con penetración': 'Agressió sexual amb penetració',
++		'Agricultura y Ganadería': 'Agricultura i ramaderia',
++		'Agricultura y pesca': 'Agricultura i pesca',
++		'Agricultura y silvicultura': 'Agricultura i silvicultura',
++		'Aire-agua (aerotermia)': 'Aire-aigua (aerotèrmia)',
++		'Aire-agua reversible (aerotermia)': 'Aire-aigua reversible (aerotèrmia)',
++		'Aire-aire reversible (splits de aire acondicionado)': 'Aire-aire reversible (splits d\'aire condicionat)',
++		'Álava': 'Àlaba',
++		'Alcohol y tabaco': 'Alcohol i tabac',
++		'Alemania': 'Alemanya',
++		'Alicante': 'Alacant',
++		'Alimentación, bebidas y tabaco': 'Alimentació, begudes i tabac',
++		'Alimentos': 'Aliments',
++		'Alimentos elaborados, bebidas y tabaco': 'Aliments elaborats, begudes i tabac',
++		'Alimentos sin elaborar': 'Aliments sense elaborar',
++		'Almería': 'Almeria',
++		'Ambos sexos': 'Tots dos sexes',
++		'América del Norte': 'Amèrica del Nord',
++		'Andalucía': 'Andalusia',
++		'Angiología y cirugía vascular': 'Angiologia i cirurgia vascular',
++		'Año': 'Any',
++		'Apartamentos turísticos': 'Apartaments turístics',
++		'Aporte de la energía': 'Aportació de l\'energia',
++		'Aragón': 'Aragó',
++		'Arbolado': 'Arbrat',
++		'Argelia': 'Algèria',
++		'AROPE (pobreza o exclusión)': 'AROPE (pobresa o exclusió)',
++		'Asalariados con contrato temporal': 'Assalariats amb contracte temporal',
++		'Asia': 'Àsia',
++		'Asturias': 'Astúries',
++		'Asuntos Económicos y Transporte': 'Afers econòmics i transport',
++		'Austria': 'Àustria',
++		'Autonómico': 'Autonòmic',
++		'Autónomos': 'Autònoms',
++		'Ayuntamientos': 'Ajuntaments',
++		'B (amarilla)': 'B (groga)',
++		'Bachillerato': 'Batxillerat',
++		'Baleares': 'Balears',
++		'Bélgica': 'Bèlgica',
++		'Bienes industriales sin energía': 'Béns industrials sense energia',
++		'Bienes públicos preferentes': 'Béns públics preferents',
++		'Bioenergía': 'Bioenergia',
++		'Biomasa (leña, pellets)': 'Biomassa (llenya, pèl·lets)',
++		'Bizkaia': 'Biscaia',
++		'Bolivia': 'Bolívia',
++		'Bombeo': 'Bombament',
++		'Bombeo Consumido Gwh': 'Bombament consumit (GWh)',
++		'Bombeo Turbinado Gwh': 'Bombament turbinat (GWh)',
++		'Bulgaria': 'Bulgària',
++		'Butano y propano': 'Butà i propà',
++		'C (verde)': 'C (verda)',
++		'Cáceres': 'Càceres',
++		'Cádiz': 'Cadis',
++		'Calor ambiente (bombas de calor)': 'Calor ambient (bombes de calor)',
++		'Calor de redes': 'Calor de xarxes',
++		'Calor y carbón': 'Calor i carbó',
++		'Camas': 'Llits',
++		'Canarias': 'Canàries',
++		'Cancelada': 'Cancel·lada',
++		'Cantabria': 'Cantàbria',
++		'Carbón': 'Carbó',
++		'Carencia material y social severa': 'Privació material i social severa',
++		'Carencia severa': 'Privació severa',
++		'Carga Financiera': 'Càrrega financera',
++		'Cargado Mwh': 'Carregat (MWh)',
++		'Castellón': 'Castelló',
++		'Castilla y León': 'Castella i Lleó',
++		'Castilla-La Mancha': 'Castella-la Manxa',
++		'Cataluña': 'Catalunya',
++		'Causas externas de mortalidad': 'Causes externes de mortalitat',
++		'Centro América y Caribe': 'Amèrica Central i Carib',
++		'Centro y derecha': 'Centre i dreta',
++		'Cerrada en': 'Tancada el',
++		'Chequia': 'Txèquia',
++		'Chipre': 'Xipre',
++		'Cibercriminalidad': 'Cibercriminalitat',
++		'Ciclo combinado': 'Cicle combinat',
++		'Ciclos Combinados (Gas)': 'Cicles combinats (gas)',
++		'Ciclos combinados (gas)': 'Cicles combinats (gas)',
++		'Ciencias': 'Ciències',
++		'Cirugía cardiaca': 'Cirurgia cardíaca',
++		'Cirugía general y digestiva': 'Cirurgia general i digestiva',
++		'Cirugía maxilofacial': 'Cirurgia maxil·lofacial',
++		'Cirugía pediátrica': 'Cirurgia pediàtrica',
++		'Cirugía plástica': 'Cirurgia plàstica',
++		'Cirugía torácica': 'Cirurgia toràcica',
++		'Coalición Canaria': 'Coalició Canària',
++		'Cogeneración': 'Cogeneració',
++		'Cogeneración y Residuos': 'Cogeneració i residus',
++		'Colectiva': 'Col·lectiva',
++		'Colombia': 'Colòmbia',
++		'Comercio': 'Comerç',
++		'Comercio y servicios públicos': 'Comerç i serveis públics',
++		'Comercio, transporte y hostelería': 'Comerç, transport i hostaleria',
++		'Comisión gestora': 'Comissió gestora',
++		'Compraventas': 'Compravendes',
++		'Compraventas de vivienda nueva': 'Compravendes d\'habitatge nou',
++		'Comunicaciones': 'Comunicacions',
++		'Comunidad de Madrid': 'Comunitat de Madrid',
++		'Comunidad Foral de Navarra': 'Comunitat Foral de Navarra',
++		'Comunidad Valenciana': 'Comunitat Valenciana',
++		'Comunidades Autónomas': 'Comunitats autònomes',
++		'Comunidades autónomas': 'Comunitats autònomes',
++		'Con permiso de acceso': 'Amb permís d\'accés',
++		'Congreso': 'Congrés',
++		'Conjunto de las comunidades': 'Conjunt de les comunitats',
++		'Construcción': 'Construcció',
++		'Consumida para almacenar': 'Consumida per emmagatzemar',
++		'Consumo de los hogares': 'Consum de les llars',
++		'Consumo Gwh': 'Consum (GWh)',
++		'Consumo público': 'Consum públic',
++		'Consuntivo': 'Consumptiu',
++		'Contra la Administración de Justicia': 'Contra l\'Administració de Justícia',
++		'Contra la libertad': 'Contra la llibertat',
++		'Contra la libertad e indemnidad sexuales': 'Contra la llibertat i indemnitat sexuals',
++		'Contra la salud pública': 'Contra la salut pública',
++		'Contra la seguridad vial': 'Contra la seguretat viària',
++		'Contra las relaciones familiares': 'Contra les relacions familiars',
++		'Córdoba': 'Còrdova',
++		'Corporaciones Locales': 'Corporacions locals',
++		'Corporaciones locales': 'Corporacions locals',
++		'Cotizaciones': 'Cotitzacions',
++		'Cotizaciones Sociales': 'Cotitzacions socials',
++		'Creadas': 'Creades',
++		'Creados': 'Creats',
++		'Criminalidad convencional': 'Criminalitat convencional',
++		'Croacia': 'Croàcia',
++		'Cuenca': 'Conca',
++		'Cultura, Ocio y Religión': 'Cultura, oci i religió',
++		'Cuota Bev': 'Quota BEV',
++		'Cuota Electrificados': 'Quota electrificats',
++		'Cuota Enchufables': 'Quota endollables',
++		'De 16 a 29 años': 'De 16 a 29 anys',
++		'De 30 a 44 años': 'De 30 a 44 anys',
++		'De 45 a 64 años': 'De 45 a 64 anys',
++		'Déficit': 'Dèficit',
++		'Déficit / Superávit por habitante': 'Dèficit / superàvit per habitant',
++		'Defraudaciones': 'Defraudacions',
++		'Defunciones': 'Defuncions',
++		'Delitos contra la libertad sexual': 'Delictes contra la llibertat sexual',
++		'Dentro de Natura 2000': 'Dins de Natura 2000',
++		'Dermatología': 'Dermatologia',
++		'Descontada la inflación': 'Descomptada la inflació',
++		'Desde 2008 (media de 2008 = 100)': 'Des del 2008 (mitjana del 2008 = 100)',
++		'Desde 2019 (media de 2019 = 100)': 'Des del 2019 (mitjana del 2019 = 100)',
++		'Deuda pública': 'Deute públic',
++		'Devuelta a la red': 'Retornada a la xarxa',
++		'Diaria': 'Diària',
++		'dic': 'des',
++		'dic.': 'des.',
++		'dic. 2015': 'des. 2015',
++		'Diésel': 'Dièsel',
++		'Diputación / cabildo / consell': 'Diputació / cabildo / consell',
++		'Diputación o cabildo (sin datos)': 'Diputació o cabildo (sense dades)',
++		'Diputaciones, cabildos y consejos insulares': 'Diputacions, cabildos i consells insulars',
++		'Distrito': 'Districte',
++		'Distrito Distrito 01': 'Districte 01',
++		'Distrito Distrito 02': 'Districte 02',
++		'Distrito Distrito 03': 'Districte 03',
++		'Distrito Distrito 04': 'Districte 04',
++		'Distrito Distrito 05': 'Districte 05',
++		'Distrito Distrito 06': 'Districte 06',
++		'Distrito Distrito 07': 'Districte 07',
++		'Distrito Distrito 08': 'Districte 08',
++		'Distrito Distrito 09': 'Districte 09',
++		'Distrito Distrito 10': 'Districte 10',
++		'Distrito Distrito 11': 'Districte 11',
++		'Distrito Distrito 12': 'Districte 12',
++		'Distrito Distrito 13': 'Districte 13',
++		'Distrito Distrito 14': 'Districte 14',
++		'Distrito Distrito 15': 'Districte 15',
++		'Distrito Distrito 16': 'Districte 16',
++		'Distrito Distrito 17': 'Districte 17',
++		'Distrito Distrito 18': 'Districte 18',
++		'Distrito Distrito 19': 'Districte 19',
++		'Distrito Distrito 20': 'Districte 20',
++		'Distrito Distrito 21': 'Districte 21',
++		'Disueltas': 'Dissoltes',
++		'Economía e Infraestructuras': 'Economia i infraestructures',
++		'Ecuador': 'Equador',
++		'Edad': 'Edat',
++		'Educación': 'Educació',
++		'Educación no universitaria': 'Educació no universitària',
++		'Educación superior': 'Educació superior',
++		'Educación, sanidad y servicios sociales': 'Educació, sanitat i serveis socials',
++		'EH Bildu (e izquierda abertzale)': 'EH Bildu (i esquerra abertzale)',
++		'El 25 % más barato paga menos de': 'El 25 % més barat paga menys de',
++		'El 25 % más caro paga más de': 'El 25 % més car paga més de',
++		'Electricidad': 'Electricitat',
++		'Eléctrico puro (BEV)': 'Elèctric pur (BEV)',
++		'Emisiones por euro de PIB': 'Emissions per euro de PIB',
++		'Emisiones por habitante': 'Emissions per habitant',
++		'Empleadores (con asalariados)': 'Ocupadors (amb assalariats)',
++		'Empresas': 'Empreses',
++		'Empresas e instituciones públicas': 'Empreses i institucions públiques',
++		'En construcción': 'En construcció',
++		'En escaños': 'En escons',
++		'En operación': 'En operació',
++		'En tramitación': 'En tramitació',
++		'En votos': 'En vots',
++		'ene': 'gen',
++		'ene.': 'gen.',
++		'Energía': 'Energia',
++		'Energía (total)': 'Energia (total)',
++		'Enfermedades del sistema circulatorio': 'Malalties del sistema circulatori',
++		'Enfermedades del sistema digestivo': 'Malalties del sistema digestiu',
++		'Enfermedades del sistema genitourinario': 'Malalties del sistema genitourinari',
++		'Enfermedades del sistema nervioso y de los órganos de los sentidos': 'Malalties del sistema nerviós i dels òrgans dels sentits',
++		'Enfermedades del sistema respiratorio': 'Malalties del sistema respiratori',
++		'Enfermedades endocrinas, nutricionales y metabólicas': 'Malalties endocrines, nutricionals i metabòliques',
++		'Enfermedades infecciosas y parasitarias': 'Malalties infeccioses i parasitàries',
++		'Enfermeras': 'Infermeres',
++		'Enseñanza': 'Ensenyament',
++		'Entidades locales': 'Entitats locals',
++		'Entregado Mwh': 'Lliurat (MWh)',
++		'Eólica': 'Eòlica',
++		'Eólica marina': 'Eòlica marina',
++		'Eólica terrestre': 'Eòlica terrestre',
++		'Eslovaquia': 'Eslovàquia',
++		'Eslovenia': 'Eslovènia',
++		'España': 'Espanya',
++		'España (INE)': 'Espanya (INE)',
++		'España (sin LULUCF)': 'Espanya (sense LULUCF)',
++		'España, emisiones netas (con sumideros LULUCF)': 'Espanya, emissions netes (amb embornals LULUCF)',
++		'España: Gasóleo de automoción': 'Espanya: Gasoil d\'automoció',
++		'España: Gasolina 95': 'Espanya: Gasolina 95',
++		'Española': 'Espanyola',
++		'Esta comunidad': 'Aquesta comunitat',
++		'Estado': 'Estat',
++		'Estados Unidos de América': 'Estats Units',
++		'Estafas informáticas': 'Estafes informàtiques',
++		'Este municipio': 'Aquest municipi',
++		'Estonia': 'Estònia',
++		'Estudios superiores': 'Estudis superiors',
++		'Europa menos UE27_2020': 'Europa excepte UE-27',
++		'Exportaciones': 'Exportacions',
++		'Extranjera': 'Estrangera',
++		'Extranjera (total)': 'Estrangera (total)',
++		'Extranjera de fuera de la UE': 'Estrangera de fora de la UE',
++		'Extranjera de la UE': 'Estrangera de la UE',
++		'Falsedades': 'Falsedats',
++		'feb': 'febr',
++		'feb.': 'febr.',
++		'Finanzas y seguros': 'Finances i assegurances',
++		'Finanzas, seguros e inmobiliarias': 'Finances, assegurances i immobiliàries',
++		'Finlandia': 'Finlàndia',
++		'FP de grado medio': 'FP de grau mitjà',
++		'FP de grado medio y básica': 'FP de grau mitjà i bàsica',
++		'FP de grado superior': 'FP de grau superior',
++		'Francia': 'França',
++		'Fuera de Natura 2000': 'Fora de Natura 2000',
++		'Fuerzas Armadas': 'Forces Armades',
++		'Funcionario de carrera': 'Funcionari de carrera',
++		'Funcionario interino': 'Funcionari interí',
++		'Galicia': 'Galícia',
++		'Gas Natural (Ciclos y Cogeneración)': 'Gas natural (cicles i cogeneració)',
++		'Gases Fluorados y Otros': 'Gasos fluorats i altres',
++		'Gasóleo de automoción': 'Gasoil d\'automoció',
++		'Gasóleo de calefacción': 'Gasoil de calefacció',
++		'Gasóleo, butano y otros derivados del petróleo': 'Gasoil, butà i altres derivats del petroli',
++		'Gasto por turista y viaje': 'Despesa per turista i viatge',
++		'Gasto Social': 'Despesa social',
++		'Gastos': 'Despeses',
++		'Gastos por habitante': 'Despeses per habitant',
++		'Generación Eléctrica': 'Generació elèctrica',
++		'Generales': 'Generals',
++		'Geotérmica': 'Geotèrmica',
++		'Ginecología': 'Ginecologia',
++		'Gipuzkoa': 'Guipúscoa',
++		'Grandes (250 o más)': 'Grans (250 o més)',
++		'Grecia': 'Grècia',
++		'Hasta la ESO': 'Fins a l\'ESO',
++		'Híbrido enchufable (PHEV)': 'Híbrid endollable (PHEV)',
++		'Híbrido no enchufable (HEV)': 'Híbrid no endollable (HEV)',
++		'Hidráulica': 'Hidràulica',
++		'Hidroeléctrica': 'Hidroelèctrica',
++		'Hidroeléctrico': 'Hidroelèctric',
++		'Hidrógeno': 'Hidrogen',
++		'Hidrotérmica': 'Hidrotèrmica',
++		'Hipotecas sobre viviendas': 'Hipoteques sobre habitatges',
++		'Hogar': 'Llar',
++		'Hogares': 'Llars',
++		'Hogares con todos sus activos en paro (%)': 'Llars amb tots els actius a l\'atur (%)',
++		'Hombres': 'Homes',
++		'Hombres nacidos en el extranjero': 'Homes nascuts a l\'estranger',
++		'Hombres nacidos en España': 'Homes nascuts a Espanya',
++		'Hombres, española': 'Homes, espanyola',
++		'Hombres, extranjera': 'Homes, estrangera',
++		'Homicidio y sus formas': 'Homicidi i les seves formes',
++		'Homicidios': 'Homicidis',
++		'Homicidios dolosos/asesinatos consumados': 'Homicidis dolosos/assassinats consumats',
++		'Homicidios y asesinatos consumados': 'Homicidis i assassinats consumats',
++		'Homicidios y asesinatos en tentativa': 'Homicidis i assassinats en grau de temptativa',
++		'Hostelería': 'Hostaleria',
++		'Hoteles': 'Hotels',
++		'Huesca': 'Osca',
++		'Hungría': 'Hongria',
++		'Hurtos': 'Furts',
++		'Importaciones': 'Importacions',
++		'Impuesto sobre Sociedades': 'Impost sobre societats',
++		'Impuestos Directos': 'Impostos directes',
++		'Impuestos Especiales': 'Impostos especials',
++		'Impuestos Indirectos': 'Impostos indirectes',
++		'Inactivo': 'Inactiu',
++		'Independientes y locales': 'Independents i locals',
++		'Industria': 'Indústria',
++		'Industria y energía': 'Indústria i energia',
++		'Industria y Procesos': 'Indústria i processos',
++		'Infantil (3-5 años)': 'Infantil (3-5 anys)',
++		'Inflación general': 'Inflació general',
++		'Información y comunicaciones': 'Informació i comunicacions',
++		'Ingresos': 'Ingressos',
++		'Ingresos No Tributarios y Fondos UE': 'Ingressos no tributaris i fons UE',
++		'Ingresos por habitante': 'Ingressos per habitant',
++		'Iniciadas': 'Iniciades',
++		'Inmobiliarias': 'Immobiliàries',
++		'Intereses de la Deuda': 'Interessos del deute',
++		'Inversión': 'Inversió',
++		'IPSFL': 'ISFLSL',
++		'IRPF y Patrimonio': 'IRPF i Patrimoni',
++		'Italia': 'Itàlia',
++		'IU, Podemos y Sumar': 'IU, Podemos i Sumar',
++		'Izquierda': 'Esquerra',
++		'Jornada a tiempo completo': 'Jornada a temps complet',
++		'Jubilación': 'Jubilació',
++		'jun': 'juny',
++		'jun.': 'juny',
++		'jun. 1987': 'juny 1987',
++		'jun. 1989': 'juny 1989',
++		'jun. 1999': 'juny 1999',
++		'jun. 2004': 'juny 2004',
++		'Justicia': 'Justícia',
++		'Laboral (sin detalle)': 'Laboral (sense detall)',
++		'Laboral fijo': 'Laboral fix',
++		'Latinoamérica': 'Llatinoamèrica',
++		'León': 'Lleó',
++		'Lesiones': 'Lesions',
++		'Lesiones graves y riña tumultuaria': 'Lesions greus i baralla tumultuària',
++		'Letonia': 'Letònia',
++		'Libre de emisiones (%) (Renovable + Nuclear)': 'Lliure d\'emissions (%) (renovable + nuclear)',
++		'Libre de emisiones (renovable + nuclear)': 'Lliure d\'emissions (renovable + nuclear)',
++		'Líneas fundamentales': 'Línies fonamentals',
++		'Liquidación': 'Liquidació',
++		'Lituania': 'Lituània',
++		'Llega a fin de mes con dificultad': 'Arriba a final de mes amb dificultat',
++		'Llegadas desde el extranjero': 'Arribades des de l\'estranger',
++		'Luxemburgo': 'Luxemburg',
++		'Madera': 'Fusta',
++		'Madres españolas': 'Mares espanyoles',
++		'Madres extranjeras': 'Mares estrangeres',
++		'Maquinaria': 'Maquinària',
++		'mar': 'març',
++		'mar.': 'març',
++		'mar. 1979': 'març 1979',
++		'mar. 2004': 'març 2004',
++		'Mar: Canarias': 'Mar: Canàries',
++		'Mar: península y Baleares': 'Mar: península i Balears',
++		'Marruecos': 'Marroc',
++		'Más de lo esperable': 'Més del que és esperable',
++		'Matemáticas': 'Matemàtiques',
++		'Material de transporte': 'Material de transport',
++		'Matorral': 'Matollar',
++		'Máxima de este año': 'Màxima d\'enguany',
++		'may': 'maig',
++		'may.': 'maig',
++		'may. 2011': 'maig 2011',
++		'may. 2015': 'maig 2015',
++		'may. 2019': 'maig 2019',
++		'may. 2023': 'maig 2023',
++		'Media 1991-2020': 'Mitjana 1991-2020',
++		'Media 2015 2019': 'Mitjana 2015-2019',
++		'Media 4t Tasa Paro': 'Mitjana 4t taxa d\'atur',
++		'Media de las CCAA': 'Mitjana de les CA',
++		'Media de todas las pensiones': 'Mitjana de totes les pensions',
++		'Media UE': 'Mitjana UE',
++		'Media UE-27': 'Mitjana UE-27',
++		'media UE-27': 'mitjana UE-27',
++		'Media UE-27 (sin LULUCF)': 'Mitjana UE-27 (sense LULUCF)',
++		'Media UE: Gasóleo de automoción': 'Mitjana UE: Gasoil d\'automoció',
++		'Media UE: Gasolina 95': 'Mitjana UE: Gasolina 95',
++		'Mediana de municipios de su tamaño': 'Mediana de municipis de la seva mida',
++		'Mediana de su tramo': 'Mediana del seu tram',
++		'Medianas (50-249)': 'Mitjanes (50-249)',
++		'Médicos': 'Metges',
++		'Menores de 16': 'Menors de 16',
++		'Menores de 16 años': 'Menors de 16 anys',
++		'Menores de 25 años': 'Menors de 25 anys',
++		'Menos de lo esperable': 'Menys del que és esperable',
++		'Metales no férreos': 'Metalls no fèrrics',
++		'Migración y ajustes': 'Migració i ajustos',
++		'Minerales no metálicos (cemento, cerámica, vidrio)': 'Minerals no metàl·lics (ciment, ceràmica, vidre)',
++		'Minería del carbón': 'Mineria del carbó',
++		'Minería y canteras': 'Mineria i pedreres',
++		'Mitad de la tabla (D5)': 'Meitat de la taula (D5)',
++		'Mixto (público-privado)': 'Mixt (públic-privat)',
++		'Morocco': 'Marroc',
++		'Motores, Turbinas y Fuel': 'Motors, turbines i fuel',
++		'Mujeres': 'Dones',
++		'Mujeres nacidas en el extranjero': 'Dones nascudes a l\'estranger',
++		'Mujeres nacidas en España': 'Dones nascudes a Espanya',
++		'Mujeres, española': 'Dones, espanyola',
++		'Mujeres, extranjera': 'Dones, estrangera',
++		'Municipales': 'Municipals',
++		'Murcia': 'Múrcia',
++		'Muy por debajo': 'Molt per sota',
++		'Nacimientos': 'Naixements',
++		'Nacimientos menos defunciones': 'Naixements menys defuncions',
++		'Nacionalidad': 'Nacionalitat',
++		'Nacionalistas y regionalistas': 'Nacionalistes i regionalistes',
++		'Neurocirugía': 'Neurocirurgia',
++		'No Tributarios': 'No tributaris',
++		'Nueva': 'Nova',
++		'Ocio y cultura': 'Oci i cultura',
++		'Ocio y otros servicios': 'Oci i altres serveis',
++		'Ocio y otros servicios personales': 'Oci i altres serveis personals',
++		'Oftalmología': 'Oftalmologia',
++		'Operación': 'Operació',
++		'Operación programada': 'Operació programada',
++		'Orden Público y Seguridad': 'Ordre públic i seguretat',
++		'Otorrinolaringología': 'Otorinolaringologia',
++		'Otras': 'Altres',
++		'Otras / no sabe': 'Altres / no ho sap',
++		'Otras entidades locales': 'Altres entitats locals',
++		'Otras industrias': 'Altres indústries',
++		'Otras Renovables': 'Altres renovables',
++		'Otras Tecnologías': 'Altres tecnologies',
++		'Otro personal': 'Altre personal',
++		'Otros': 'Altres',
++		'Otros (cooperativistas, ayuda familiar)': 'Altres (cooperativistes, ajuda familiar)',
++		'Otros / sin dato': 'Altres / sense dada',
++		'Otros bienes y servicios': 'Altres béns i serveis',
++		'Otros ciberdelitos': 'Altres ciberdelictes',
++		'Otros Impuestos Directos y sobre el Capital': 'Altres impostos directes i sobre el capital',
++		'Otros Impuestos Indirectos': 'Altres impostos indirectes',
++		'Otros países de la UE': 'Altres països de la UE',
++		'Otros partidos': 'Altres partits',
++		'Pagan en más de 30 días (de los que lo comunican)': 'Paguen en més de 30 dies (dels que ho comuniquen)',
++		'Pago directo de los hogares': 'Pagament directe de les llars',
++		'País de la UE27_2020 sin España': 'País de la UE-27 sense Espanya',
++		'País de la UE28 sin España': 'País de la UE-28 sense Espanya',
++		'País Vasco': 'País Basc',
++		'Países Bajos': 'Països Baixos',
++		'Países Nórdicos': 'Països nòrdics',
++		'Palencia': 'Palència',
++		'Palestine*': 'Palestina*',
++		'Papel y artes gráficas': 'Paper i arts gràfiques',
++		'Parados de un año o más (% de los activos)': 'Aturats d\'un any o més (% dels actius)',
++		'Paraguay': 'Paraguai',
++		'Paralizada': 'Paralitzada',
++		'Parciales que querrían jornada completa': 'Parcials que voldrien jornada completa',
++		'Parlamento Europeo': 'Parlament Europeu',
++		'Partido Andalucista': 'Partit Andalusista',
++		'Pastos y otra vegetación natural': 'Pastures i altra vegetació natural',
++		'Pensión media de jubilación (14 pagas prorrateadas en 12)': 'Pensió mitjana de jubilació (14 pagues prorratejades en 12)',
++		'Pensiones de jubilación por 100 personas de 65 años o más': 'Pensions de jubilació per cada 100 persones de 65 anys o més',
++		'Pensiones por 1.000 habitantes': 'Pensions per 1.000 habitants',
++		'Pensiones por 100 personas de 65 años o más': 'Pensions per cada 100 persones de 65 anys o més',
++		'Pequeñas (10-49)': 'Petites (10-49)',
++		'Pernoct 1000hab': 'Pernoctacions per 1.000 hab.',
++		'Pernoct 1000hab Espana': 'Pernoctacions per 1.000 hab. (Espanya)',
++		'Peru': 'Perú',
++		'Petróleo': 'Petroli',
++		'PIB real por habitante': 'PIB real per habitant',
++		'Pobreza Espana': 'Pobresa (Espanya)',
++		'Policía Nacional y Guardia Civil': 'Policia Nacional i Guàrdia Civil',
++		'Policías autonómicas': 'Policies autonòmiques',
++		'Polonia': 'Polònia',
++		'Por debajo': 'Per sota',
++		'Por encima': 'Per sobre',
++		'Por persona': 'Per persona',
++		'Por unidad de consumo': 'Per unitat de consum',
++		'Postsecundaria no superior': 'Postsecundària no superior',
++		'Presupuesto del año': 'Pressupost de l\'any',
++		'Primaria': 'Primària',
++		'Primaria incompleta': 'Primària incompleta',
++		'Primer hijo': 'Primer fill',
++		'Primera consulta con el especialista': 'Primera consulta amb l\'especialista',
++		'Principado de Asturias': 'Principat d\'Astúries',
++		'Prisiones': 'Presons',
++		'Privado': 'Privat',
++		'Protección Social y Pensiones': 'Protecció social i pensions',
++		'Protección y promoción social': 'Protecció i promoció social',
++		'Publico': 'Públic',
++		'Público': 'Públic',
++		'Quebrantamiento de condena': 'Trencament de condemna',
++		'Quiebras': 'Fallides',
++		'Química y petroquímica': 'Química i petroquímica',
++		'Rápida (50-149 kW)': 'Ràpida (50-149 kW)',
++		'Región de Murcia': 'Regió de Múrcia',
++		'Reino Unido': 'Regne Unit',
++		'Renovables y calor ambiente': 'Renovables i calor ambient',
++		'Renta Persona Provincia': 'Renda per persona (província)',
++		'Renta Persona Real': 'Renda real per persona',
++		'Reservas bajas': 'Reserves baixes',
++		'Residencial y Comercial': 'Residencial i comercial',
++		'Residentes en el extranjero': 'Residents a l\'estranger',
++		'Residentes en España': 'Residents a Espanya',
++		'Residuos': 'Residus',
++		'Restaurantes y hoteles': 'Restaurants i hotels',
++		'Resto': 'Resta',
++		'Resto América': 'Resta d\'Amèrica',
++		'Resto de comunidades': 'Resta de comunitats',
++		'Resto de delitos sexuales': 'Resta de delictes sexuals',
++		'Resto de Europa': 'Resta d\'Europa',
++		'Resto de infracciones': 'Resta d\'infraccions',
++		'Resto de países': 'Resta de països',
++		'Resto del Mundo': 'Resta del món',
++		'Riesgo de pobreza': 'Risc de pobresa',
++		'Robos': 'Robatoris',
++		'Robos con fuerza (domicilios, establecimientos...)': 'Robatoris amb força (domicilis, establiments...)',
++		'Robos con fuerza en domicilios': 'Robatoris amb força en domicilis',
++		'Robos con fuerza en viviendas': 'Robatoris amb força en habitatges',
++		'Robos con violencia o intimidación': 'Robatoris amb violència o intimidació',
++		'Ropa y calzado': 'Roba i calçat',
++		'Rumanía': 'Romania',
++		'Salario medio bruto (pagas extra prorrateadas)': 'Salari mitjà brut (pagues extra prorratejades)',
++		'Salidas al extranjero': 'Sortides a l\'estranger',
++		'Sanidad': 'Sanitat',
++		'Sanidad Pública': 'Sanitat pública',
++		'Secuestro': 'Segrest',
++		'Segovia': 'Segòvia',
++		'Segunda mano': 'Segona mà',
++		'Seguridad Social': 'Seguretat Social',
++		'Seguridad y Justicia': 'Seguretat i justícia',
++		'Seguros voluntarios': 'Assegurances voluntàries',
++		'Seguros y finanzas': 'Assegurances i finances',
++		'Semanal': 'Setmanal',
++		'Semirrápida (22-49 kW)': 'Semiràpida (22-49 kW)',
++		'sep': 'set',
++		'sep.': 'set.',
++		'Servicios': 'Serveis',
++		'Servicios administrativos y auxiliares': 'Serveis administratius i auxiliars',
++		'Servicios Comunitarios': 'Serveis comunitaris',
++		'Servicios públicos básicos': 'Serveis públics bàsics',
++		'Servicios Públicos Generales': 'Serveis públics generals',
++		'Sexo': 'Sexe',
++		'Siderurgia': 'Siderúrgia',
++		'Sin asalariados': 'Sense assalariats',
++		'Sin clasificar': 'Sense classificar',
++		'Sin comunicar el PMP': 'Sense comunicar el PMP',
++		'Sin datos': 'Sense dades',
++		'Sin descontar (euros de cada año)': 'Sense descomptar (euros de cada any)',
++		'Sin descontar (euros de cada mes)': 'Sense descomptar (euros de cada mes)',
++		'Sin detalle en la fuente': 'Sense detall a la font',
++		'Sin diferencia clara': 'Sense diferència clara',
++		'Sin estudios': 'Sense estudis',
++		'Sin etiqueta': 'Sense etiqueta',
++		'Sin fecha': 'Sense data',
++		'Sin información': 'Sense informació',
++		'Solar Fotovoltaica': 'Solar fotovoltaica',
++		'Solar Térmica': 'Solar tèrmica',
++		'Solar térmica': 'Solar tèrmica',
++		'Solar termoeléctrica': 'Solar termoelèctrica',
++		'Solo mayores de 64': 'Només majors de 64',
++		'Somalia': 'Somàlia',
++		'Subyacente (sin energía ni alimentos frescos)': 'Subjacent (sense energia ni aliments frescos)',
++		'Sudamérica': 'Sud-amèrica',
++		'Suecia': 'Suècia',
++		'Suicidios': 'Suïcidis',
++		'Suiza': 'Suïssa',
++		'Superávit': 'Superàvit',
++		'Sustracción de vehículos': 'Sostracció de vehicles',
++		'Tasa': 'Taxa',
++		'Tasa de actividad': 'Taxa d\'activitat',
++		'Tasa de empleo': 'Taxa d\'ocupació',
++		'Tasa de paro': 'Taxa d\'atur',
++		'Tasa Espana': 'Taxa (Espanya)',
++		'Tasa Paro': 'Taxa d\'atur',
++		'Tasa Paro Espana': 'Taxa d\'atur (Espanya)',
++		'Tasa Pobreza': 'Taxa de pobresa',
++		'Terminadas': 'Acabades',
++		'Teruel': 'Terol',
++		'Teruel Existe y España Vaciada': 'Teruel Existe i Espanya Buidada',
++		'Textil y cuero': 'Tèxtil i cuir',
++		'Tiempo completo': 'Temps complet',
++		'Tiempo parcial': 'Temps parcial',
++		'Tierra: Ceuta y Melilla': 'Terra: Ceuta i Melilla',
++		'Toda la economía': 'Tota l\'economia',
++		'Toda la población': 'Tota la població',
++		'Todas': 'Totes',
++		'Todos': 'Tots',
++		'Todos los hijos': 'Tots els fills',
++		'Total': 'Total',
++		'Total (menores de 16 y mayores de 64)': 'Total (menors de 16 i majors de 64)',
++		'TOTAL INFRACCIONES PENALES': 'TOTAL D\'INFRACCIONS PENALS',
++		'Total infracciones penales': 'Total d\'infraccions penals',
++		'Tráfico de drogas': 'Tràfic de drogues',
++		'Transporte': 'Transport',
++		'Transporte y almacenamiento': 'Transport i emmagatzematge',
++		'Trastornos mentales y del comportamiento': 'Trastorns mentals i del comportament',
++		'Traumatología': 'Traumatologia',
++		'Tumores': 'Tumors',
++		'Turbina de gas / motores': 'Turbina de gas / motors',
++		'Turbinado Gwh': 'Turbinat (GWh)',
++		'UE27_2020 sin España': 'UE-27 sense Espanya',
++		'Ultrarrápida (≥150 kW)': 'Ultraràpida (≥150 kW)',
++		'Umbral cálido (p90)': 'Llindar càlid (p90)',
++		'Umbral fresco (p10)': 'Llindar fresc (p10)',
++		'Unión Europea': 'Unió Europea',
++		'Universidad y otros estudios superiores': 'Universitat i altres estudis superiors',
++		'Universidades': 'Universitats',
++		'Urología': 'Urologia',
++		'Valencia': 'València',
++		'Valor Espana': 'Valor (Espanya)',
++		'Venezuela': 'Veneçuela',
++		'Viudedad': 'Viduïtat',
++		'Vivienda y energía': 'Habitatge i energia',
++		'Vivienda y Medio Ambiente': 'Habitatge i medi ambient',
++		'Viviendas libres terminadas': 'Habitatges lliures acabats',
++		'Zaragoza': 'Saragossa'
++	},
++	gl: {
++		'(modelo sin especificar)': '(modelo sen especificar)',
++		'0 emisiones (azul)': '0 emisións (azul)',
++		'0-4 años': '0-4 anos',
++		'1 persona': '1 persoa',
++		'1. Hasta la ESO': '1. Ata a ESO',
++		'10 % mejor pagado (D10)': '10 % mellor pagado (D10)',
++		'10-14 años': '10-14 anos',
++		'15-19 años': '15-19 anos',
++		'16 a 19 años': '16 a 19 anos',
++		'2 personas': '2 persoas',
++		'2. Bachillerato o FP de grado medio': '2. Bacharelato ou FP de grao medio',
++		'20 a 24 años': '20 a 24 anos',
++		'20+ años': '20+ anos',
++		'25 a 54 años': '25 a 54 anos',
++		'3 personas': '3 persoas',
++		'3. Estudios superiores': '3. Estudos superiores',
++		'4 o más': '4 ou máis',
++		'5-9 años': '5-9 anos',
++		'55 años o más': '55 anos ou máis',
++		'65 y más años': '65 anos e máis',
++		'80 y más': '80 e máis',
++		'85 y más': '85 e máis',
++		'Actividades profesionales': 'Actividades profesionais',
++		'Actividades profesionales y técnicas': 'Actividades profesionais e técnicas',
++		'Actuaciones de carácter general': 'Actuacións de carácter xeral',
++		'Actuaciones económicas': 'Actuacións económicas',
++		'Administración Central': 'Administración central',
++		'Administración general autonómica': 'Administración xeral autonómica',
++		'Administración General del Estado': 'Administración Xeral do Estado',
++		'Administración, educación y sanidad': 'Administración, educación e sanidade',
++		'Administraciones públicas': 'Administracións públicas',
++		'Agricultura y Ganadería': 'Agricultura e gandaría',
++		'Agricultura y pesca': 'Agricultura e pesca',
++		'Agricultura y silvicultura': 'Agricultura e silvicultura',
++		'Aire-agua (aerotermia)': 'Aire-auga (aerotermia)',
++		'Aire-agua reversible (aerotermia)': 'Aire-auga reversible (aerotermia)',
++		'Alcohol y tabaco': 'Alcohol e tabaco',
++		'Alemania': 'Alemaña',
++		'Alimentación, bebidas y tabaco': 'Alimentación, bebidas e tabaco',
++		'Alimentos elaborados, bebidas y tabaco': 'Alimentos elaborados, bebidas e tabaco',
++		'Alimentos sin elaborar': 'Alimentos sen elaborar',
++		'Ambos sexos': 'Ambos os sexos',
++		'América del Norte': 'América do Norte',
++		'Angiología y cirugía vascular': 'Anxioloxía e cirurxía vascular',
++		'Año': 'Ano',
++		'Aporte de la energía': 'Achega da enerxía',
++		'Arbolado': 'Arboredo',
++		'Argelia': 'Alxeria',
++		'Argentina': 'Arxentina',
++		'AROPE (pobreza o exclusión)': 'AROPE (pobreza ou exclusión)',
++		'Asuntos Económicos y Transporte': 'Asuntos económicos e transporte',
++		'Ayuntamientos': 'Concellos',
++		'B (amarilla)': 'B (amarela)',
++		'Bachillerato': 'Bacharelato',
++		'Bienes industriales sin energía': 'Bens industriais sen enerxía',
++		'Bienes públicos preferentes': 'Bens públicos preferentes',
++		'Bioenergía': 'Bioenerxía',
++		'Bizkaia': 'Biscaia',
++		'Bombeo Consumido Gwh': 'Bombeo consumido (GWh)',
++		'Bombeo Turbinado Gwh': 'Bombeo turbinado (GWh)',
++		'Butano y propano': 'Butano e propano',
++		'Calor y carbón': 'Calor e carbón',
++		'Carencia material y social severa': 'Carencia material e social severa',
++		'Carga Financiera': 'Carga financeira',
++		'Cargado Mwh': 'Cargado (MWh)',
++		'Castilla y León': 'Castela e León',
++		'Castilla-La Mancha': 'Castela-A Mancha',
++		'Causas externas de mortalidad': 'Causas externas de mortalidade',
++		'Centro América y Caribe': 'América Central e Caribe',
++		'Centro y derecha': 'Centro e dereita',
++		'Cerrada en': 'Pechada en',
++		'Cibercriminalidad': 'Cibercriminalidade',
++		'Ciclos Combinados (Gas)': 'Ciclos combinados (gas)',
++		'Cirugía cardiaca': 'Cirurxía cardíaca',
++		'Cirugía general y digestiva': 'Cirurxía xeral e dixestiva',
++		'Cirugía maxilofacial': 'Cirurxía maxilofacial',
++		'Cirugía pediátrica': 'Cirurxía pediátrica',
++		'Cirugía plástica': 'Cirurxía plástica',
++		'Cirugía torácica': 'Cirurxía torácica',
++		'Ciudadanos': 'Cidadáns',
++		'Cogeneración': 'Coxeración',
++		'Cogeneración y Residuos': 'Coxeración e residuos',
++		'Comercio y servicios públicos': 'Comercio e servizos públicos',
++		'Comercio, transporte y hostelería': 'Comercio, transporte e hostalaría',
++		'Comisión gestora': 'Comisión xestora',
++		'Compraventas': 'Compravendas',
++		'Compraventas de vivienda nueva': 'Compravendas de vivenda nova',
++		'Comunicaciones': 'Comunicacións',
++		'Comunidad de Madrid': 'Comunidade de Madrid',
++		'Comunidad Foral de Navarra': 'Comunidade Foral de Navarra',
++		'Comunidad Valenciana': 'Comunidade Valenciana',
++		'Comunidades Autónomas': 'Comunidades autónomas',
++		'Conjunto de las comunidades': 'Conxunto das comunidades',
++		'Construcción': 'Construción',
++		'Consumo de los hogares': 'Consumo dos fogares',
++		'Consumo Gwh': 'Consumo (GWh)',
++		'Contra la Administración de Justicia': 'Contra a Administración de Xustiza',
++		'Contra la libertad': 'Contra a liberdade',
++		'Contra la libertad e indemnidad sexuales': 'Contra a liberdade e indemnidade sexuais',
++		'Contra la salud pública': 'Contra a saúde pública',
++		'Contra la seguridad vial': 'Contra a seguridade viaria',
++		'Contra las relaciones familiares': 'Contra as relacións familiares',
++		'Corporaciones Locales': 'Corporacións locais',
++		'Corporaciones locales': 'Corporacións locais',
++		'Cotizaciones': 'Cotizacións',
++		'Cotizaciones Sociales': 'Cotizacións sociais',
++		'Criminalidad convencional': 'Criminalidade convencional',
++		'Cultura, Ocio y Religión': 'Cultura, lecer e relixión',
++		'Cuota Bev': 'Cota BEV',
++		'Cuota Electrificados': 'Cota electrificados',
++		'Cuota Enchufables': 'Cota enchufables',
++		'De 16 a 29 años': 'De 16 a 29 anos',
++		'De 30 a 44 años': 'De 30 a 44 anos',
++		'De 45 a 64 años': 'De 45 a 64 anos',
++		'Déficit / Superávit por habitante': 'Déficit / superávit por habitante',
++		'Defraudaciones': 'Defraudacións',
++		'Defunciones': 'Defuncións',
++		'Delitos contra la libertad sexual': 'Delitos contra a liberdade sexual',
++		'Dermatología': 'Dermatoloxía',
++		'Descontada la inflación': 'Descontada a inflación',
++		'Deuda pública': 'Débeda pública',
++		'Devuelta a la red': 'Devolta á rede',
++		'dic': 'dec',
++		'dic.': 'dec.',
++		'dic. 2015': 'dec. 2015',
++		'Diputación / cabildo / consell': 'Deputación / cabido / consell',
++		'Diputación o cabildo (sin datos)': 'Deputación ou cabido (sen datos)',
++		'Diputaciones, cabildos y consejos insulares': 'Deputacións, cabidos e consellos insulares',
++		'Distrito Distrito 01': 'Distrito 01',
++		'Distrito Distrito 02': 'Distrito 02',
++		'Distrito Distrito 03': 'Distrito 03',
++		'Distrito Distrito 04': 'Distrito 04',
++		'Distrito Distrito 05': 'Distrito 05',
++		'Distrito Distrito 06': 'Distrito 06',
++		'Distrito Distrito 07': 'Distrito 07',
++		'Distrito Distrito 08': 'Distrito 08',
++		'Distrito Distrito 09': 'Distrito 09',
++		'Distrito Distrito 10': 'Distrito 10',
++		'Distrito Distrito 11': 'Distrito 11',
++		'Distrito Distrito 12': 'Distrito 12',
++		'Distrito Distrito 13': 'Distrito 13',
++		'Distrito Distrito 14': 'Distrito 14',
++		'Distrito Distrito 15': 'Distrito 15',
++		'Distrito Distrito 16': 'Distrito 16',
++		'Distrito Distrito 17': 'Distrito 17',
++		'Distrito Distrito 18': 'Distrito 18',
++		'Distrito Distrito 19': 'Distrito 19',
++		'Distrito Distrito 20': 'Distrito 20',
++		'Distrito Distrito 21': 'Distrito 21',
++		'Disueltas': 'Disoltas',
++		'Economía e Infraestructuras': 'Economía e infraestruturas',
++		'Edad': 'Idade',
++		'Educación no universitaria': 'Educación non universitaria',
++		'Educación, sanidad y servicios sociales': 'Educación, sanidade e servizos sociais',
++		'EH Bildu (e izquierda abertzale)': 'EH Bildu (e esquerda abertzale)',
++		'El 25 % más barato paga menos de': 'O 25 % máis barato paga menos de',
++		'El 25 % más caro paga más de': 'O 25 % máis caro paga máis de',
++		'Electricidad': 'Electricidade',
++		'Emisiones por euro de PIB': 'Emisións por euro de PIB',
++		'Emisiones por habitante': 'Emisións por habitante',
++		'Empleadores (con asalariados)': 'Empregadores (con asalariados)',
++		'Empresas e instituciones públicas': 'Empresas e institucións públicas',
++		'En construcción': 'En construción',
++		'En escaños': 'En escanos',
++		'ene': 'xan',
++		'ene.': 'xan.',
++		'Energía': 'Enerxía',
++		'Energía (total)': 'Enerxía (total)',
++		'Enfermedades del sistema circulatorio': 'Enfermidades do sistema circulatorio',
++		'Enfermedades del sistema digestivo': 'Enfermidades do sistema dixestivo',
++		'Enfermedades del sistema genitourinario': 'Enfermidades do sistema xenitourinario',
++		'Enfermedades del sistema nervioso y de los órganos de los sentidos': 'Enfermidades do sistema nervioso e dos órganos dos sentidos',
++		'Enfermedades del sistema respiratorio': 'Enfermidades do sistema respiratorio',
++		'Enfermedades endocrinas, nutricionales y metabólicas': 'Enfermidades endócrinas, nutricionais e metabólicas',
++		'Enfermedades infecciosas y parasitarias': 'Enfermidades infecciosas e parasitarias',
++		'Enfermeras': 'Enfermeiras',
++		'Enseñanza': 'Ensino',
++		'Entidades locales': 'Entidades locais',
++		'Entregado Mwh': 'Entregado (MWh)',
++		'Eólica marina': 'Eólica mariña',
++		'ESO o similar': 'ESO ou similar',
++		'España': 'España',
++		'España (sin LULUCF)': 'España (sen LULUCF)',
++		'España, emisiones netas (con sumideros LULUCF)': 'España, emisións netas (con sumidoiros LULUCF)',
++		'Esta comunidad': 'Esta comunidade',
++		'Estados Unidos de América': 'Estados Unidos',
++		'Este municipio': 'Este concello',
++		'Estudios superiores': 'Estudos superiores',
++		'Europa menos UE27_2020': 'Europa agás UE-27',
++		'Exportaciones': 'Exportacións',
++		'Extranjera': 'Estranxeira',
++		'Extranjera (total)': 'Estranxeira (total)',
++		'Extranjera de fuera de la UE': 'Estranxeira de fóra da UE',
++		'Extranjera de la UE': 'Estranxeira da UE',
++		'Falsedades': 'Falsidades',
++		'Finanzas y seguros': 'Finanzas e seguros',
++		'FP de grado medio': 'FP de grao medio',
++		'FP de grado medio y básica': 'FP de grao medio e básica',
++		'FP de grado superior': 'FP de grao superior',
++		'Fuera de Natura 2000': 'Fóra de Natura 2000',
++		'Fuerzas Armadas': 'Forzas Armadas',
++		'Funcionario de carrera': 'Funcionario de carreira',
++		'Gas Natural (Ciclos y Cogeneración)': 'Gas natural (ciclos e coxeración)',
++		'Gases Fluorados y Otros': 'Gases fluorados e outros',
++		'Gasóleo, butano y otros derivados del petróleo': 'Gasóleo, butano e outros derivados do petróleo',
++		'Gasto por turista y viaje': 'Gasto por turista e viaxe',
++		'Gasto Social': 'Gasto social',
++		'Generación Eléctrica': 'Xeración eléctrica',
++		'General': 'Xeral',
++		'Generales': 'Xerais',
++		'Geotérmica': 'Xeotérmica',
++		'Ginecología': 'Xinecoloxía',
++		'Gipuzkoa': 'Guipúscoa',
++		'Grandes (250 o más)': 'Grandes (250 ou máis)',
++		'Hasta la ESO': 'Ata a ESO',
++		'Híbrido no enchufable (HEV)': 'Híbrido non enchufable (HEV)',
++		'Hidrógeno': 'Hidróxeno',
++		'Hipotecas sobre viviendas': 'Hipotecas sobre vivendas',
++		'Hogar': 'Fogar',
++		'Hogares': 'Fogares',
++		'Hogares con todos sus activos en paro (%)': 'Fogares con todos os activos no paro (%)',
++		'Hombres': 'Homes',
++		'Hombres nacidos en el extranjero': 'Homes nados no estranxeiro',
++		'Hombres nacidos en España': 'Homes nados en España',
++		'Hombres, española': 'Homes, española',
++		'Hombres, extranjera': 'Homes, estranxeira',
++		'Homicidio y sus formas': 'Homicidio e as súas formas',
++		'Homicidios dolosos/asesinatos consumados': 'Homicidios dolosos/asasinatos consumados',
++		'Homicidios y asesinatos consumados': 'Homicidios e asasinatos consumados',
++		'Homicidios y asesinatos en tentativa': 'Homicidios e asasinatos en tentativa',
++		'Hostelería': 'Hostalaría',
++		'Hoteles': 'Hoteis',
++		'Hurtos': 'Furtos',
++		'Illes Balears': 'Illas Baleares',
++		'Importaciones': 'Importacións',
++		'Impuesto sobre Sociedades': 'Imposto sobre sociedades',
++		'Impuestos Directos': 'Impostos directos',
++		'Impuestos Especiales': 'Impostos especiais',
++		'Impuestos Indirectos': 'Impostos indirectos',
++		'Independientes y locales': 'Independentes e locais',
++		'Industria y energía': 'Industria e enerxía',
++		'Industria y Procesos': 'Industria e procesos',
++		'Infantil (3-5 años)': 'Infantil (3-5 anos)',
++		'Inflación general': 'Inflación xeral',
++		'Información y comunicaciones': 'Información e comunicacións',
++		'Ingresos No Tributarios y Fondos UE': 'Ingresos non tributarios e fondos UE',
++		'Intereses de la Deuda': 'Xuros da débeda',
++		'Inversión': 'Investimento',
++		'IPC general': 'IPC xeral',
++		'IRPF y Patrimonio': 'IRPF e Patrimonio',
++		'IU, Podemos y Sumar': 'IU, Podemos e Sumar',
++		'IVA': 'IVE',
++		'Izquierda': 'Esquerda',
++		'Jornada a tiempo completo': 'Xornada a tempo completo',
++		'Jubilación': 'Xubilación',
++		'jul': 'xul',
++		'jul.': 'xul.',
++		'jul. 2023': 'xul. 2023',
++		'jun': 'xuñ',
++		'jun.': 'xuñ.',
++		'jun. 1987': 'xuñ. 1987',
++		'jun. 1989': 'xuñ. 1989',
++		'jun. 1999': 'xuñ. 1999',
++		'jun. 2004': 'xuñ. 2004',
++		'Justicia': 'Xustiza',
++		'La Rioja': 'A Rioxa',
++		'Laboral (sin detalle)': 'Laboral (sen detalle)',
++		'Laboral fijo': 'Laboral fixo',
++		'Lesiones': 'Lesións',
++		'Lesiones graves y riña tumultuaria': 'Lesións graves e lea tumultuaria',
++		'Libre de emisiones (%) (Renovable + Nuclear)': 'Libre de emisións (%) (renovable + nuclear)',
++		'Libre de emisiones (renovable + nuclear)': 'Libre de emisións (renovable + nuclear)',
++		'Líneas fundamentales': 'Liñas fundamentais',
++		'Llega a fin de mes con dificultad': 'Chega a fin de mes con dificultade',
++		'Llegadas desde el extranjero': 'Chegadas desde o estranxeiro',
++		'Madera': 'Madeira',
++		'Madres españolas': 'Nais españolas',
++		'Madres extranjeras': 'Nais estranxeiras',
++		'Mar: península y Baleares': 'Mar: península e Baleares',
++		'Marruecos': 'Marrocos',
++		'Más de lo esperable': 'Máis do agardable',
++		'Matorral': 'Mato',
++		'Máxima de este año': 'Máxima deste ano',
++		'may': 'maio',
++		'may.': 'maio',
++		'may. 2011': 'maio 2011',
++		'may. 2015': 'maio 2015',
++		'may. 2019': 'maio 2019',
++		'may. 2023': 'maio 2023',
++		'Media 2015 2019': 'Media 2015-2019',
++		'Media 4t Tasa Paro': 'Media 4T taxa de paro',
++		'Media de las CCAA': 'Media das CCAA',
++		'Media de todas las pensiones': 'Media de todas as pensións',
++		'Media UE-27 (sin LULUCF)': 'Media UE-27 (sen LULUCF)',
++		'Mediana de municipios de su tamaño': 'Mediana de concellos do seu tamaño',
++		'Mediana de su tramo': 'Mediana do seu tramo',
++		'Menores de 16 años': 'Menores de 16 anos',
++		'Menores de 25 años': 'Menores de 25 anos',
++		'Menos de lo esperable': 'Menos do agardable',
++		'Metales no férreos': 'Metais non férreos',
++		'Migración y ajustes': 'Migración e axustes',
++		'Minerales no metálicos (cemento, cerámica, vidrio)': 'Minerais non metálicos (cemento, cerámica, vidro)',
++		'Minería del carbón': 'Minaría do carbón',
++		'Minería y canteras': 'Minaría e canteiras',
++		'Mitad de la tabla (D5)': 'Metade da táboa (D5)',
++		'Morocco': 'Marrocos',
++		'Motores, Turbinas y Fuel': 'Motores, turbinas e fuel',
++		'Mujeres': 'Mulleres',
++		'Mujeres nacidas en el extranjero': 'Mulleres nadas no estranxeiro',
++		'Mujeres nacidas en España': 'Mulleres nadas en España',
++		'Mujeres, española': 'Mulleres, española',
++		'Mujeres, extranjera': 'Mulleres, estranxeira',
++		'Municipales': 'Municipais',
++		'Muy por debajo': 'Moi por debaixo',
++		'Nacimientos': 'Nacementos',
++		'Nacimientos menos defunciones': 'Nacementos menos defuncións',
++		'Nacionalidad': 'Nacionalidade',
++		'Nacionalistas y regionalistas': 'Nacionalistas e rexionalistas',
++		'Neurocirugía': 'Neurocirurxía',
++		'No': 'Non',
++		'No consta': 'Non consta',
++		'No Tributarios': 'Non tributarios',
++		'Nueva': 'Nova',
++		'Ocio y cultura': 'Lecer e cultura',
++		'Ocio y otros servicios': 'Lecer e outros servizos',
++		'Ocio y otros servicios personales': 'Lecer e outros servizos persoais',
++		'oct': 'out',
++		'oct.': 'out.',
++		'oct. 1989': 'out. 1989',
++		'Oftalmología': 'Oftalmoloxía',
++		'Orden Público y Seguridad': 'Orde pública e seguridade',
++		'Otorrinolaringología': 'Otorrinolaringoloxía',
++		'Otras': 'Outras',
++		'Otras / no sabe': 'Outras / non sabe',
++		'Otras entidades locales': 'Outras entidades locais',
++		'Otras industrias': 'Outras industrias',
++		'Otras Renovables': 'Outras renovables',
++		'Otras Tecnologías': 'Outras tecnoloxías',
++		'Otro personal': 'Outro persoal',
++		'Otros': 'Outros',
++		'Otros (cooperativistas, ayuda familiar)': 'Outros (cooperativistas, axuda familiar)',
++		'Otros / sin dato': 'Outros / sen dato',
++		'Otros bienes y servicios': 'Outros bens e servizos',
++		'Otros ciberdelitos': 'Outros ciberdelitos',
++		'Otros Impuestos Directos y sobre el Capital': 'Outros impostos directos e sobre o capital',
++		'Otros Impuestos Indirectos': 'Outros impostos indirectos',
++		'Otros países de la UE': 'Outros países da UE',
++		'Otros partidos': 'Outros partidos',
++		'Pagan en más de 30 días (de los que lo comunican)': 'Pagan en máis de 30 días (dos que o comunican)',
++		'Pago directo de los hogares': 'Pagamento directo dos fogares',
++		'País de la UE27_2020 sin España': 'País da UE-27 sen España',
++		'País de la UE28 sin España': 'País da UE-28 sen España',
++		'Países Bajos': 'Países Baixos',
++		'Países Nórdicos': 'Países nórdicos',
++		'Palestine*': 'Palestina*',
++		'Papel y artes gráficas': 'Papel e artes gráficas',
++		'Parados de un año o más (% de los activos)': 'Parados dun ano ou máis (% dos activos)',
++		'Paraguay': 'Paraguai',
++		'Parciales que querrían jornada completa': 'Parciais que quererían xornada completa',
++		'Pastos y otra vegetación natural': 'Pastos e outra vexetación natural',
++		'Pensión media de jubilación (14 pagas prorrateadas en 12)': 'Pensión media de xubilación (14 pagas prorrateadas en 12)',
++		'Pensiones de jubilación por 100 personas de 65 años o más': 'Pensións de xubilación por 100 persoas de 65 anos ou máis',
++		'Pensiones por 1.000 habitantes': 'Pensións por 1.000 habitantes',
++		'Pensiones por 100 personas de 65 años o más': 'Pensións por 100 persoas de 65 anos ou máis',
++		'Pequeñas (10-49)': 'Pequenas (10-49)',
++		'Pernoct 1000hab': 'Pernoitas por 1.000 hab.',
++		'Pernoct 1000hab Espana': 'Pernoitas por 1.000 hab. (España)',
++		'Peru': 'Perú',
++		'Pobreza Espana': 'Pobreza (España)',
++		'Policía Nacional y Guardia Civil': 'Policía Nacional e Garda Civil',
++		'Por debajo': 'Por debaixo',
++		'Por encima': 'Por riba',
++		'Por persona': 'Por persoa',
++		'Por unidad de consumo': 'Por unidade de consumo',
++		'Postsecundaria no superior': 'Postsecundaria non superior',
++		'Presupuesto del año': 'Orzamento do ano',
++		'Primer hijo': 'Primeiro fillo',
++		'Primera consulta con el especialista': 'Primeira consulta co especialista',
++		'Prisiones': 'Prisións',
++		'Protección Social y Pensiones': 'Protección social e pensións',
++		'Protección y promoción social': 'Protección e promoción social',
++		'Provincial o insular': 'Provincial ou insular',
++		'Publico': 'Público',
++		'Quebrantamiento de condena': 'Quebrantamento de condena',
++		'Quiebras': 'Quebras',
++		'Química y petroquímica': 'Química e petroquímica',
++		'Región de Murcia': 'Rexión de Murcia',
++		'Renovables y calor ambiente': 'Renovables e calor ambiente',
++		'Renta Persona Provincia': 'Renda por persoa (provincia)',
++		'Renta Persona Real': 'Renda real por persoa',
++		'Reservas bajas': 'Reservas baixas',
++		'Residencial y Comercial': 'Residencial e comercial',
++		'Residentes en el extranjero': 'Residentes no estranxeiro',
++		'Restaurantes y hoteles': 'Restaurantes e hoteis',
++		'Resto América': 'Resto de América',
++		'Resto de delitos sexuales': 'Resto de delitos sexuais',
++		'Resto de infracciones': 'Resto de infraccións',
++		'Resto del Mundo': 'Resto do mundo',
++		'Riesgo de pobreza': 'Risco de pobreza',
++		'Robos': 'Roubos',
++		'Robos con fuerza (domicilios, establecimientos...)': 'Roubos con forza (domicilios, establecementos...)',
++		'Robos con fuerza en domicilios': 'Roubos con forza en domicilios',
++		'Robos con fuerza en viviendas': 'Roubos con forza en vivendas',
++		'Robos con violencia o intimidación': 'Roubos con violencia ou intimidación',
++		'Ropa y calzado': 'Roupa e calzado',
++		'Rumanía': 'Romanía',
++		'Salidas al extranjero': 'Saídas ao estranxeiro',
++		'Sanidad': 'Sanidade',
++		'Sanidad Pública': 'Sanidade pública',
++		'Segunda mano': 'Segunda man',
++		'Seguridad Social': 'Seguridade Social',
++		'Seguridad y Justicia': 'Seguridade e xustiza',
++		'Seguros y finanzas': 'Seguros e finanzas',
++		'sep': 'set',
++		'sep.': 'set.',
++		'Servicios': 'Servizos',
++		'Servicios administrativos y auxiliares': 'Servizos administrativos e auxiliares',
++		'Servicios Comunitarios': 'Servizos comunitarios',
++		'Servicios públicos básicos': 'Servizos públicos básicos',
++		'Servicios Públicos Generales': 'Servizos públicos xerais',
++		'Sí': 'Si',
++		'Siderurgia': 'Siderurxia',
++		'Sin asalariados': 'Sen asalariados',
++		'Sin clasificar': 'Sen clasificar',
++		'Sin comunicar el PMP': 'Sen comunicar o PMP',
++		'Sin datos': 'Sen datos',
++		'Sin descontar (euros de cada año)': 'Sen descontar (euros de cada ano)',
++		'Sin descontar (euros de cada mes)': 'Sen descontar (euros de cada mes)',
++		'Sin detalle en la fuente': 'Sen detalle na fonte',
++		'Sin diferencia clara': 'Sen diferenza clara',
++		'Sin estudios': 'Sen estudos',
++		'Sin etiqueta': 'Sen etiqueta',
++		'Sin fecha': 'Sen data',
++		'Sin información': 'Sen información',
++		'Solar Fotovoltaica': 'Solar fotovoltaica',
++		'Solar Térmica': 'Solar térmica',
++		'Solo mayores de 64': 'Só maiores de 64',
++		'Subyacente (sin energía ni alimentos frescos)': 'Subxacente (sen enerxía nin alimentos frescos)',
++		'Sudamérica': 'Suramérica',
++		'Suiza': 'Suíza',
++		'Sustracción de vehículos': 'Subtracción de vehículos',
++		'Tasa': 'Taxa',
++		'Tasa de actividad': 'Taxa de actividade',
++		'Tasa de empleo': 'Taxa de emprego',
++		'Tasa de paro': 'Taxa de paro',
++		'Tasa Espana': 'Taxa (España)',
++		'Tasa Paro': 'Taxa de paro',
++		'Tasa Paro Espana': 'Taxa de paro (España)',
++		'Tasa Pobreza': 'Taxa de pobreza',
++		'Terminadas': 'Rematadas',
++		'Teruel Existe y España Vaciada': 'Teruel Existe e España Baleirada',
++		'Textil y cuero': 'Téxtil e coiro',
++		'Tiempo completo': 'Tempo completo',
++		'Tiempo parcial': 'Tempo parcial',
++		'Tierra: Ceuta y Melilla': 'Terra: Ceuta e Melilla',
++		'Toda la economía': 'Toda a economía',
++		'Toda la población': 'Toda a poboación',
++		'Todos los hijos': 'Todos os fillos',
++		'Total': 'Total',
++		'Total (menores de 16 y mayores de 64)': 'Total (menores de 16 e maiores de 64)',
++		'TOTAL INFRACCIONES PENALES': 'TOTAL DE INFRACCIÓNS PENAIS',
++		'Total infracciones penales': 'Total de infraccións penais',
++		'Transporte y almacenamiento': 'Transporte e almacenamento',
++		'Trastornos mentales y del comportamiento': 'Trastornos mentais e do comportamento',
++		'Traumatología': 'Traumatoloxía',
++		'Turbinado Gwh': 'Turbinado (GWh)',
++		'UE27_2020 sin España': 'UE-27 sen España',
++		'Umbral cálido (p90)': 'Limiar cálido (p90)',
++		'Umbral fresco (p10)': 'Limiar fresco (p10)',
++		'Universidad y otros estudios superiores': 'Universidade e outros estudos superiores',
++		'Urología': 'Uroloxía',
++		'Valor Espana': 'Valor (España)',
++		'Viudedad': 'Viuvez',
++		'Vivienda y energía': 'Vivenda e enerxía',
++		'Vivienda y Medio Ambiente': 'Vivenda e medio ambiente',
++		'Viviendas libres terminadas': 'Vivendas libres rematadas'
++	},
++	eu: {
++		'(modelo sin especificar)': '(modelo zehaztu gabe)',
++		'(provincia)': '(probintzia)',
++		'0 emisiones (azul)': '0 isuri (urdina)',
++		'0-4 años': '0-4 urte',
++		'1 persona': 'Pertsona 1',
++		'1. Hasta la ESO': '1. DBHra arte',
++		'10 % mejor pagado (D10)': 'Soldata handieneko % 10 (D10)',
++		'10 % peor pagado (D1)': 'Soldata txikieneko % 10 (D1)',
++		'10-14 años': '10-14 urte',
++		'15-19 años': '15-19 urte',
++		'16 a 19 años': '16-19 urte',
++		'2 personas': '2 pertsona',
++		'2. Bachillerato o FP de grado medio': '2. Batxilergoa edo erdi-mailako LH',
++		'20 a 24 años': '20-24 urte',
++		'20+ años': '20+ urte',
++		'25 a 54 años': '25-54 urte',
++		'3 personas': '3 pertsona',
++		'3. Estudios superiores': '3. Goi-mailako ikasketak',
++		'4 o más': '4 edo gehiago',
++		'5-9 años': '5-9 urte',
++		'55 años o más': '55 urte edo gehiago',
++		'65 y más años': '65 urte eta gehiago',
++		'80 y más': '80 eta gehiago',
++		'85 y más': '85 eta gehiago',
++		'abr': 'api',
++		'abr.': 'api.',
++		'abr. 1979': '1979 api.',
++		'abr. 2019': '2019 api.',
++		'Accidentes de tráfico': 'Trafiko-istripuak',
++		'Actividades profesionales': 'Jarduera profesionalak',
++		'Actividades profesionales y técnicas': 'Jarduera profesional eta teknikoak',
++		'Activo': 'Aktibo',
++		'Actuaciones de carácter general': 'Izaera orokorreko jarduerak',
++		'Actuaciones económicas': 'Jarduera ekonomikoak',
++		'Acumulados': 'Metatuak',
++		'Administración': 'Administrazioa',
++		'Administración Central': 'Administrazio zentrala',
++		'Administración central': 'Administrazio zentrala',
++		'Administración general autonómica': 'Administrazio orokor autonomikoa',
++		'Administración General del Estado': 'Estatuaren Administrazio Orokorra',
++		'Administración local': 'Toki-administrazioa',
++		'Administración, educación y sanidad': 'Administrazioa, hezkuntza eta osasuna',
++		'Administraciones públicas': 'Administrazio publikoak',
++		'África': 'Afrika',
++		'ago': 'abu',
++		'ago.': 'abu.',
++		'Agresión sexual con penetración': 'Sexu-eraso barneratzearekin',
++		'Agrícola': 'Nekazaritza-lurra',
++		'Agricultura y Ganadería': 'Nekazaritza eta abeltzaintza',
++		'Agricultura y pesca': 'Nekazaritza eta arrantza',
++		'Agricultura y silvicultura': 'Nekazaritza eta basogintza',
++		'Aire-agua (aerotermia)': 'Airea-ura (aerotermia)',
++		'Aire-agua reversible (aerotermia)': 'Airea-ura itzulgarria (aerotermia)',
++		'Aire-aire reversible (splits de aire acondicionado)': 'Airea-airea itzulgarria (aire girotuko splitak)',
++		'Álava': 'Araba',
++		'Alcohol y tabaco': 'Alkohola eta tabakoa',
++		'Alicante': 'Alacant',
++		'Alimentación, bebidas y tabaco': 'Elikadura, edariak eta tabakoa',
++		'Alimentos': 'Elikagaiak',
++		'Alimentos elaborados, bebidas y tabaco': 'Elikagai landuak, edariak eta tabakoa',
++		'Alimentos sin elaborar': 'Elikagai landu gabeak',
++		'Ambos sexos': 'Bi sexuak',
++		'América del Norte': 'Ipar Amerika',
++		'Andalucía': 'Andaluzia',
++		'Angiología y cirugía vascular': 'Angiologia eta kirurgia baskularra',
++		'Año': 'Urtea',
++		'Anual': 'Urtekoa',
++		'Anunciada': 'Iragarria',
++		'Apartamentos turísticos': 'Apartamentu turistikoak',
++		'Aporte de la energía': 'Energiaren ekarpena',
++		'Aragón': 'Aragoi',
++		'Arbolado': 'Zuhaiztia',
++		'Argelia': 'Aljeria',
++		'AROPE (pobreza o exclusión)': 'AROPE (pobrezia edo bazterketa)',
++		'Asalariados con contrato temporal': 'Aldi baterako kontratua duten soldatapekoak',
++		'Asuntos Económicos y Transporte': 'Gai ekonomikoak eta garraioa',
++		'Autonómico': 'Autonomikoa',
++		'Autónomos': 'Autonomoak',
++		'Ayuntamientos': 'Udalak',
++		'B (amarilla)': 'B (horia)',
++		'Bachillerato': 'Batxilergoa',
++		'Baleares': 'Balearrak',
++		'Bélgica': 'Belgika',
++		'Bienes industriales sin energía': 'Energiarik gabeko industria-ondasunak',
++		'Bienes públicos preferentes': 'Ondasun publiko lehenetsiak',
++		'Bilbao': 'Bilbo',
++		'Bioenergía': 'Bioenergia',
++		'Biomasa (leña, pellets)': 'Biomasa (egurra, pelletak)',
++		'Bombeo': 'Ponpaketa',
++		'Bombeo Consumido Gwh': 'Ponpaketan kontsumitua (GWh)',
++		'Bombeo Turbinado Gwh': 'Ponpaketan turbinatua (GWh)',
++		'Butano y propano': 'Butanoa eta propanoa',
++		'C (verde)': 'C (berdea)',
++		'Calor ambiente (bombas de calor)': 'Giro-beroa (bero-ponpak)',
++		'Calor de redes': 'Sareko beroa',
++		'Calor y carbón': 'Beroa eta ikatza',
++		'Camas': 'Oheak',
++		'Canarias': 'Kanariak',
++		'Cancelada': 'Bertan behera utzia',
++		'Cantabria': 'Kantabria',
++		'Carbón': 'Ikatza',
++		'Carencia material y social severa': 'Gabezia material eta sozial larria',
++		'Carencia severa': 'Gabezia larria',
++		'Carga Financiera': 'Finantza-karga',
++		'Cargado Mwh': 'Kargatua (MWh)',
++		'Castellón': 'Castelló',
++		'Castilla y León': 'Gaztela eta Leon',
++		'Castilla-La Mancha': 'Gaztela-Mantxa',
++		'Cataluña': 'Katalunia',
++		'Causas externas de mortalidad': 'Heriotza-kanpo kausak',
++		'Centro América y Caribe': 'Erdialdeko Amerika eta Karibea',
++		'Centro y derecha': 'Zentroa eta eskuina',
++		'Cerrada en': 'Itxia:',
++		'Chequia': 'Txekia',
++		'Chipre': 'Zipre',
++		'Cibercriminalidad': 'Ziberdelinkuentzia',
++		'Ciclo combinado': 'Ziklo konbinatua',
++		'Ciclos Combinados (Gas)': 'Ziklo konbinatuak (gasa)',
++		'Ciclos combinados (gas)': 'Ziklo konbinatuak (gasa)',
++		'Ciencias': 'Zientziak',
++		'Cirugía cardiaca': 'Bihotz-kirurgia',
++		'Cirugía general y digestiva': 'Kirurgia orokorra eta digestiboa',
++		'Cirugía maxilofacial': 'Kirurgia maxilofaziala',
++		'Cirugía pediátrica': 'Kirurgia pediatrikoa',
++		'Cirugía plástica': 'Kirurgia plastikoa',
++		'Cirugía torácica': 'Toraxeko kirurgia',
++		'Coalición Canaria': 'Koalizio Kanariarra',
++		'Cogeneración': 'Kogenerazioa',
++		'Cogeneración y Residuos': 'Kogenerazioa eta hondakinak',
++		'Colectiva': 'Kolektiboa',
++		'Colombia': 'Kolonbia',
++		'Comercio': 'Merkataritza',
++		'Comercio y servicios públicos': 'Merkataritza eta zerbitzu publikoak',
++		'Comercio, transporte y hostelería': 'Merkataritza, garraioa eta ostalaritza',
++		'Comisión gestora': 'Batzorde kudeatzailea',
++		'Compraventas': 'Salerosketak',
++		'Compraventas de vivienda nueva': 'Etxebizitza berrien salerosketak',
++		'Comunicaciones': 'Komunikazioak',
++		'Comunidad de Madrid': 'Madrilgo Erkidegoa',
++		'Comunidad Foral de Navarra': 'Nafarroako Foru Komunitatea',
++		'Comunidad Valenciana': 'Valentziako Erkidegoa',
++		'Comunidades Autónomas': 'Autonomia-erkidegoak',
++		'Comunidades autónomas': 'Autonomia-erkidegoak',
++		'Con permiso de acceso': 'Sarbide-baimenarekin',
++		'Concertada': 'Itunpekoa',
++		'Congreso': 'Kongresua',
++		'Conjunto de las comunidades': 'Erkidego guztiak',
++		'Consta': 'Jasota',
++		'Construcción': 'Eraikuntza',
++		'Consumida para almacenar': 'Biltegiratzeko kontsumitua',
++		'Consumo de los hogares': 'Etxeen kontsumoa',
++		'Consumo Gwh': 'Kontsumoa (GWh)',
++		'Consumo público': 'Kontsumo publikoa',
++		'Consuntivo': 'Kontsumitzailea',
++		'Contra la Administración de Justicia': 'Justizia Administrazioaren aurka',
++		'Contra la libertad': 'Askatasunaren aurka',
++		'Contra la libertad e indemnidad sexuales': 'Sexu-askatasunaren eta -ukiezintasunaren aurka',
++		'Contra la salud pública': 'Osasun publikoaren aurka',
++		'Contra la seguridad vial': 'Bide-segurtasunaren aurka',
++		'Contra las relaciones familiares': 'Familia-harremanen aurka',
++		'Córdoba': 'Kordoba',
++		'Corporaciones Locales': 'Toki-korporazioak',
++		'Corporaciones locales': 'Toki-korporazioak',
++		'Cotizaciones': 'Kotizazioak',
++		'Cotizaciones Sociales': 'Gizarte-kotizazioak',
++		'Creadas': 'Sortuak',
++		'Creados': 'Sortuak',
++		'Criminalidad convencional': 'Ohiko delinkuentzia',
++		'Croacia': 'Kroazia',
++		'Cuba': 'Kuba',
++		'Cultura, Ocio y Religión': 'Kultura, aisia eta erlijioa',
++		'Cuota Bev': 'BEV kuota',
++		'Cuota Electrificados': 'Elektrifikatuen kuota',
++		'Cuota Enchufables': 'Entxufagarrien kuota',
++		'De 16 a 29 años': '16-29 urte',
++		'De 16 a 64': '16-64',
++		'De 30 a 44 años': '30-44 urte',
++		'De 45 a 64 años': '45-64 urte',
++		'De 65 a 79': '65-79',
++		'Defensa': 'Defentsa',
++		'Déficit': 'Defizita',
++		'Déficit / Superávit por habitante': 'Defizita / superabita biztanleko',
++		'Defraudaciones': 'Iruzurrak',
++		'Defunciones': 'Heriotzak',
++		'Delitos contra la libertad sexual': 'Sexu-askatasunaren aurkako delituak',
++		'Dentro de Natura 2000': 'Natura 2000 barruan',
++		'Dermatología': 'Dermatologia',
++		'Descontada la inflación': 'Inflazioa kenduta',
++		'Desde 2008 (media de 2008 = 100)': '2008tik (2008ko batez bestekoa = 100)',
++		'Desde 2019 (media de 2019 = 100)': '2019tik (2019ko batez bestekoa = 100)',
++		'Deuda pública': 'Zor publikoa',
++		'Devuelta a la red': 'Sarera itzulia',
++		'Diaria': 'Egunekoa',
++		'dic': 'abe',
++		'dic.': 'abe.',
++		'dic. 2015': '2015 abe.',
++		'Diésel': 'Diesela',
++		'Dinamarca': 'Danimarka',
++		'Diputación / cabildo / consell': 'Aldundia / kabildoa / kontseilua',
++		'Diputación o cabildo (sin datos)': 'Aldundia edo kabildoa (daturik ez)',
++		'Diputaciones, cabildos y consejos insulares': 'Foru-aldundiak, kabildoak eta uharte-kontseiluak',
++		'Distrito': 'Barrutia',
++		'Distrito Distrito 01': '01. barrutia',
++		'Distrito Distrito 02': '02. barrutia',
++		'Distrito Distrito 03': '03. barrutia',
++		'Distrito Distrito 04': '04. barrutia',
++		'Distrito Distrito 05': '05. barrutia',
++		'Distrito Distrito 06': '06. barrutia',
++		'Distrito Distrito 07': '07. barrutia',
++		'Distrito Distrito 08': '08. barrutia',
++		'Distrito Distrito 09': '09. barrutia',
++		'Distrito Distrito 10': '10. barrutia',
++		'Distrito Distrito 11': '11. barrutia',
++		'Distrito Distrito 12': '12. barrutia',
++		'Distrito Distrito 13': '13. barrutia',
++		'Distrito Distrito 14': '14. barrutia',
++		'Distrito Distrito 15': '15. barrutia',
++		'Distrito Distrito 16': '16. barrutia',
++		'Distrito Distrito 17': '17. barrutia',
++		'Distrito Distrito 18': '18. barrutia',
++		'Distrito Distrito 19': '19. barrutia',
++		'Distrito Distrito 20': '20. barrutia',
++		'Distrito Distrito 21': '21. barrutia',
++		'Disueltas': 'Desegindakoak',
++		'Economía e Infraestructuras': 'Ekonomia eta azpiegiturak',
++		'Ecuador': 'Ekuador',
++		'Edad': 'Adina',
++		'Educación': 'Hezkuntza',
++		'Educación no universitaria': 'Unibertsitatez kanpoko hezkuntza',
++		'Educación superior': 'Goi-mailako hezkuntza',
++		'Educación, sanidad y servicios sociales': 'Hezkuntza, osasuna eta gizarte-zerbitzuak',
++		'EH Bildu (e izquierda abertzale)': 'EH Bildu (eta ezker abertzalea)',
++		'El 25 % más barato paga menos de': 'Merkeenen % 25ek hau baino gutxiago ordaintzen du:',
++		'El 25 % más caro paga más de': 'Garestienen % 25ek hau baino gehiago ordaintzen du:',
++		'Electricidad': 'Elektrizitatea',
++		'Eléctrico puro (BEV)': 'Elektriko hutsa (BEV)',
++		'Emisiones por euro de PIB': 'Isuriak BPGko euroko',
++		'Emisiones por habitante': 'Isuriak biztanleko',
++		'Empleadores (con asalariados)': 'Enplegatzaileak (soldatapekoekin)',
++		'Empresas': 'Enpresak',
++		'Empresas e instituciones públicas': 'Enpresa eta erakunde publikoak',
++		'En construcción': 'Eraikitzen',
++		'En escaños': 'Eserlekutan',
++		'En operación': 'Martxan',
++		'En tramitación': 'Izapidetzen',
++		'En votos': 'Botoetan',
++		'ene': 'urt',
++		'ene.': 'urt.',
++		'Energía': 'Energia',
++		'Energía (total)': 'Energia (guztira)',
++		'Enfermedades del sistema circulatorio': 'Zirkulazio-aparatuaren gaixotasunak',
++		'Enfermedades del sistema digestivo': 'Digestio-aparatuaren gaixotasunak',
++		'Enfermedades del sistema genitourinario': 'Aparatu genitourinarioaren gaixotasunak',
++		'Enfermedades del sistema nervioso y de los órganos de los sentidos': 'Nerbio-sistemaren eta zentzumen-organoen gaixotasunak',
++		'Enfermedades del sistema respiratorio': 'Arnas aparatuaren gaixotasunak',
++		'Enfermedades endocrinas, nutricionales y metabólicas': 'Gaixotasun endokrino, nutrizional eta metabolikoak',
++		'Enfermedades infecciosas y parasitarias': 'Gaixotasun infekzioso eta parasitarioak',
++		'Enfermeras': 'Erizainak',
++		'Enseñanza': 'Irakaskuntza',
++		'Entidades locales': 'Toki-erakundeak',
++		'Entregado Mwh': 'Emana (MWh)',
++		'Eólica': 'Eolikoa',
++		'Eólica marina': 'Itsas eolikoa',
++		'Eólica terrestre': 'Lehorreko eolikoa',
++		'Eslovaquia': 'Eslovakia',
++		'ESO': 'DBH',
++		'ESO o similar': 'DBH edo antzekoa',
++		'España': 'Espainia',
++		'España (INE)': 'Espainia (INE)',
++		'España (sin LULUCF)': 'Espainia (LULUCF gabe)',
++		'España, emisiones netas (con sumideros LULUCF)': 'Espainia, isuri garbiak (LULUCF hustubideekin)',
++		'España: Gasóleo de automoción': 'Espainia: Automobil-gasolioa',
++		'España: Gasolina 95': 'Espainia: 95 gasolina',
++		'Española': 'Espainiarra',
++		'Especialista': 'Espezialista',
++		'Esta comunidad': 'Erkidego hau',
++		'Estado': 'Estatua',
++		'Estados Unidos de América': 'Ameriketako Estatu Batuak',
++		'Estafas informáticas': 'Iruzur informatikoak',
++		'Estatal': 'Estatukoa',
++		'Este municipio': 'Udalerri hau',
++		'Estudios superiores': 'Goi-mailako ikasketak',
++		'Europa menos UE27_2020': 'Europa, EB-27 kenduta',
++		'Exportaciones': 'Esportazioak',
++		'Extranjera': 'Atzerritarra',
++		'Extranjera (total)': 'Atzerritarra (guztira)',
++		'Extranjera de fuera de la UE': 'EBtik kanpoko atzerritarra',
++		'Extranjera de la UE': 'EBko atzerritarra',
++		'Falsedades': 'Faltsukeriak',
++		'feb': 'ots',
++		'feb.': 'ots.',
++		'Finanzas y seguros': 'Finantzak eta aseguruak',
++		'Finanzas, seguros e inmobiliarias': 'Finantzak, aseguruak eta higiezinak',
++		'FP de grado medio': 'Erdi-mailako LH',
++		'FP de grado medio y básica': 'Oinarrizko eta erdi-mailako LH',
++		'FP de grado superior': 'Goi-mailako LH',
++		'Francia': 'Frantzia',
++		'Fuera de Natura 2000': 'Natura 2000tik kanpo',
++		'Fuerzas Armadas': 'Indar Armatuak',
++		'Funcionario de carrera': 'Karrerako funtzionarioa',
++		'Funcionario interino': 'Bitarteko funtzionarioa',
++		'Galicia': 'Galizia',
++		'Gas (GLP / GNC)': 'Gasa (GLP / GNC)',
++		'Gas natural': 'Gas naturala',
++		'Gas Natural (Ciclos y Cogeneración)': 'Gas naturala (zikloak eta kogenerazioa)',
++		'Gases Fluorados y Otros': 'Gas fluoratuak eta beste batzuk',
++		'Gasóleo de automoción': 'Automobil-gasolioa',
++		'Gasóleo de calefacción': 'Berokuntzako gasolioa',
++		'Gasóleo, butano y otros derivados del petróleo': 'Gasolioa, butanoa eta beste petrolio-eratorri batzuk',
++		'Gasolina 95': '95 gasolina',
++		'Gasto por turista y viaje': 'Gastua turista eta bidaia bakoitzeko',
++		'Gasto Social': 'Gizarte-gastua',
++		'Gastos': 'Gastuak',
++		'Gastos por habitante': 'Gastuak biztanleko',
++		'Generación Eléctrica': 'Elektrizitate-sorkuntza',
++		'General': 'Orokorra',
++		'Generales': 'Orokorrak',
++		'Geotérmica': 'Geotermikoa',
++		'Ginecología': 'Ginekologia',
++		'Grandes (250 o más)': 'Handiak (250 edo gehiago)',
++		'Grecia': 'Grezia',
++		'Guinea': 'Ginea',
++		'Hasta la ESO': 'DBHra arte',
++		'Híbrido enchufable (PHEV)': 'Hibrido entxufagarria (PHEV)',
++		'Híbrido no enchufable (HEV)': 'Hibrido ez-entxufagarria (HEV)',
++		'Hidráulica': 'Hidraulikoa',
++		'Hidroeléctrica': 'Hidroelektrikoa',
++		'Hidroeléctrico': 'Hidroelektrikoa',
++		'Hidrógeno': 'Hidrogenoa',
++		'Hidrotérmica': 'Hidrotermikoa',
++		'Hipotecas sobre viviendas': 'Etxebizitzen hipotekak',
++		'Hogar': 'Etxea',
++		'Hogares': 'Etxeak',
++		'Hogares con todos sus activos en paro (%)': 'Aktibo guztiak langabezian dituzten etxeak (%)',
++		'Hombres': 'Gizonak',
++		'Hombres nacidos en el extranjero': 'Atzerrian jaiotako gizonak',
++		'Hombres nacidos en España': 'Espainian jaiotako gizonak',
++		'Hombres, española': 'Gizonak, espainiarrak',
++		'Hombres, extranjera': 'Gizonak, atzerritarrak',
++		'Homicidio y sus formas': 'Hilketa eta haren formak',
++		'Homicidios': 'Hilketak',
++		'Homicidios dolosos/asesinatos consumados': 'Nahitako hilketa/erailketa burutuak',
++		'Homicidios y asesinatos consumados': 'Hilketa eta erailketa burutuak',
++		'Homicidios y asesinatos en tentativa': 'Hilketa eta erailketa saiakerak',
++		'Hostelería': 'Ostalaritza',
++		'Hoteles': 'Hotelak',
++		'Huesca': 'Uesca',
++		'Hungría': 'Hungaria',
++		'Hurtos': 'Ebasketak',
++		'Illes Balears': 'Balear Uharteak',
++		'Importaciones': 'Inportazioak',
++		'Impuesto sobre Sociedades': 'Sozietateen gaineko zerga',
++		'Impuestos Directos': 'Zuzeneko zergak',
++		'Impuestos Especiales': 'Zerga bereziak',
++		'Impuestos Indirectos': 'Zeharkako zergak',
++		'Inactivo': 'Ez-aktibo',
++		'Independientes y locales': 'Independenteak eta tokikoak',
++		'Industria y energía': 'Industria eta energia',
++		'Industria y Procesos': 'Industria eta prozesuak',
++		'Infantil': 'Haur Hezkuntza',
++		'Infantil (3-5 años)': 'Haur Hezkuntza (3-5 urte)',
++		'Inflación general': 'Inflazio orokorra',
++		'Información y comunicaciones': 'Informazioa eta komunikazioak',
++		'Ingresos': 'Diru-sarrerak',
++		'Ingresos No Tributarios y Fondos UE': 'Zergaz kanpoko diru-sarrerak eta EBko funtsak',
++		'Ingresos por habitante': 'Diru-sarrerak biztanleko',
++		'Iniciadas': 'Hasiak',
++		'Inmobiliarias': 'Higiezinak',
++		'Intereses de la Deuda': 'Zorraren interesak',
++		'Inversión': 'Inbertsioa',
++		'IPC general': 'KPI orokorra',
++		'IPSFL': 'IFGEI',
++		'IRPF y Patrimonio': 'PFEZ eta Ondarea',
++		'IU, Podemos y Sumar': 'IU, Podemos eta Sumar',
++		'IVA': 'BEZ',
++		'Izquierda': 'Ezkerra',
++		'Jornada a tiempo completo': 'Lanaldi osoa',
++		'Jubilación': 'Erretiroa',
++		'jul': 'uzt',
++		'jul.': 'uzt.',
++		'jul. 2023': '2023 uzt.',
++		'jun': 'eka',
++		'jun.': 'eka.',
++		'jun. 1987': '1987 eka.',
++		'jun. 1989': '1989 eka.',
++		'jun. 1999': '1999 eka.',
++		'jun. 2004': '2004 eka.',
++		'Justicia': 'Justizia',
++		'La Rioja': 'Errioxa',
++		'Laboral (sin detalle)': 'Lan-kontratudunak (xehetasunik gabe)',
++		'Laboral fijo': 'Lan-kontratudun finkoa',
++		'Laboral temporal': 'Aldi baterako lan-kontratuduna',
++		'Latinoamérica': 'Latinoamerika',
++		'Lectura': 'Irakurmena',
++		'Lenta (<22 kW)': 'Motela (<22 kW)',
++		'León': 'Leon',
++		'Lesiones': 'Lesioak',
++		'Lesiones graves y riña tumultuaria': 'Lesio larriak eta liskar nahasia',
++		'Libre de emisiones (%) (Renovable + Nuclear)': 'Isurketarik gabea (%) (berriztagarria + nuklearra)',
++		'Libre de emisiones (renovable + nuclear)': 'Isurketarik gabea (berriztagarria + nuklearra)',
++		'Líneas fundamentales': 'Oinarrizko ildoak',
++		'Liquidación': 'Likidazioa',
++		'Llega a fin de mes con dificultad': 'Hilabete amaierara nekez iristen da',
++		'Llegadas desde el extranjero': 'Atzerritik etorritakoak',
++		'Local': 'Tokikoa',
++		'Luxemburgo': 'Luxenburgo',
++		'Madera': 'Egurra',
++		'Madres españolas': 'Ama espainiarrak',
++		'Madres extranjeras': 'Ama atzerritarrak',
++		'Maquinaria': 'Makineria',
++		'Mar': 'Itsasoa',
++		'mar. 1979': '1979 mar.',
++		'mar. 2004': '2004 mar.',
++		'Mar: Canarias': 'Itsasoa: Kanariak',
++		'Mar: península y Baleares': 'Itsasoa: penintsula eta Balearrak',
++		'Marruecos': 'Maroko',
++		'Más de lo esperable': 'Espero zitekeena baino gehiago',
++		'Matemáticas': 'Matematika',
++		'Material de transporte': 'Garraio-materiala',
++		'Matorral': 'Sastrakadia',
++		'Máxima de este año': 'Aurtengo maximoa',
++		'may': 'mai',
++		'may.': 'mai.',
++		'may. 2011': '2011 mai.',
++		'may. 2015': '2015 mai.',
++		'may. 2019': '2019 mai.',
++		'may. 2023': '2023 mai.',
++		'Media 1991-2020': '1991-2020 batez bestekoa',
++		'Media 2015 2019': '2015-2019 batez bestekoa',
++		'Media 4t Tasa Paro': '4. hiruhilekoko langabezia-tasa',
++		'Media de las CCAA': 'Erkidegoen batez bestekoa',
++		'Media de todas las pensiones': 'Pentsio guztien batez bestekoa',
++		'Media UE': 'EBko batez bestekoa',
++		'Media UE-27': 'EB-27ko batez bestekoa',
++		'media UE-27': 'EB-27ko batez bestekoa',
++		'Media UE-27 (sin LULUCF)': 'EB-27ko batez bestekoa (LULUCF gabe)',
++		'Media UE: Gasóleo de automoción': 'EBko batez bestekoa: Automobil-gasolioa',
++		'Media UE: Gasolina 95': 'EBko batez bestekoa: 95 gasolina',
++		'Mediana de municipios de su tamaño': 'Antzeko tamainako udalerrien mediana',
++		'Mediana de su tramo': 'Bere tartearen mediana',
++		'Medianas (50-249)': 'Ertainak (50-249)',
++		'Médicos': 'Medikuak',
++		'Menores de 16': '16 urtetik beherakoak',
++		'Menores de 16 años': '16 urtetik beherakoak',
++		'Menores de 25 años': '25 urtetik beherakoak',
++		'Menos de lo esperable': 'Espero zitekeena baino gutxiago',
++		'Mensual': 'Hilekoa',
++		'Metales no férreos': 'Metal ez-burdinazkoak',
++		'Micro (0-9)': 'Mikro (0-9)',
++		'Micro (1-9)': 'Mikro (1-9)',
++		'Migración y ajustes': 'Migrazioa eta doikuntzak',
++		'Minerales no metálicos (cemento, cerámica, vidrio)': 'Mineral ez-metalikoak (zementua, zeramika, beira)',
++		'Minería del carbón': 'Ikatz-meatzaritza',
++		'Minería y canteras': 'Meatzaritza eta harrobiak',
++		'Mitad de la tabla (D5)': 'Erdialdea (D5)',
++		'Mixto (público-privado)': 'Mistoa (publiko-pribatua)',
++		'Morocco': 'Maroko',
++		'Motores, Turbinas y Fuel': 'Motorrak, turbinak eta fuela',
++		'Mujeres': 'Emakumeak',
++		'Mujeres nacidas en el extranjero': 'Atzerrian jaiotako emakumeak',
++		'Mujeres nacidas en España': 'Espainian jaiotako emakumeak',
++		'Mujeres, española': 'Emakumeak, espainiarrak',
++		'Mujeres, extranjera': 'Emakumeak, atzerritarrak',
++		'Municipales': 'Udal hauteskundeak',
++		'Murcia': 'Murtzia',
++		'Muy por debajo': 'Oso azpitik',
++		'Nacimientos': 'Jaiotzak',
++		'Nacimientos menos defunciones': 'Jaiotzak ken heriotzak',
++		'Nacionalidad': 'Nazionalitatea',
++		'Nacionalistas y regionalistas': 'Abertzaleak eta erregionalistak',
++		'Navarra': 'Nafarroa',
++		'Neurocirugía': 'Neurokirurgia',
++		'No': 'Ez',
++		'No consta': 'Jaso gabe',
++		'No Tributarios': 'Zergaz kanpokoak',
++		'Nominal': 'Nominala',
++		'Normal': 'Normala',
++		'Noruega': 'Norvegia',
++		'nov': 'aza',
++		'nov.': 'aza.',
++		'nov. 2011': '2011 aza.',
++		'nov. 2019': '2019 aza.',
++		'Nuclear': 'Nuklearra',
++		'Nueva': 'Berria',
++		'Ocio y cultura': 'Aisia eta kultura',
++		'Ocio y otros servicios': 'Aisia eta beste zerbitzu batzuk',
++		'Ocio y otros servicios personales': 'Aisia eta beste zerbitzu pertsonal batzuk',
++		'oct': 'urr',
++		'oct.': 'urr.',
++		'oct. 1989': '1989 urr.',
++		'Oftalmología': 'Oftalmologia',
++		'Operación': 'Ebakuntza',
++		'Operación programada': 'Programatutako ebakuntza',
++		'Orden Público y Seguridad': 'Ordena publikoa eta segurtasuna',
++		'Otorrinolaringología': 'Otorrinolaringologia',
++		'Otras': 'Beste batzuk',
++		'Otras / no sabe': 'Beste batzuk / ez daki',
++		'Otras entidades locales': 'Beste toki-erakunde batzuk',
++		'Otras industrias': 'Beste industria batzuk',
++		'Otras Renovables': 'Beste berriztagarri batzuk',
++		'Otras Tecnologías': 'Beste teknologia batzuk',
++		'Otro personal': 'Beste langile batzuk',
++		'Otros': 'Beste batzuk',
++		'Otros (cooperativistas, ayuda familiar)': 'Beste batzuk (kooperatibistak, familia-laguntza)',
++		'Otros / sin dato': 'Beste batzuk / daturik gabe',
++		'Otros bienes y servicios': 'Beste ondasun eta zerbitzu batzuk',
++		'Otros ciberdelitos': 'Beste ziberdelitu batzuk',
++		'Otros Impuestos Directos y sobre el Capital': 'Beste zuzeneko zerga batzuk eta kapitalaren gainekoak',
++		'Otros Impuestos Indirectos': 'Beste zeharkako zerga batzuk',
++		'Otros países de la UE': 'EBko beste herrialde batzuk',
++		'Otros partidos': 'Beste alderdi batzuk',
++		'Pagan en más de 30 días (de los que lo comunican)': '30 egun baino gehiagotan ordaintzen dute (jakinarazten dutenetatik)',
++		'Pago directo de los hogares': 'Etxeen zuzeneko ordainketa',
++		'País de la UE27_2020 sin España': 'EB-27ko herrialdea, Espainia gabe',
++		'País de la UE28 sin España': 'EB-28ko herrialdea, Espainia gabe',
++		'País Vasco': 'Euskadi',
++		'Países Bajos': 'Herbehereak',
++		'Países Nórdicos': 'Herrialde nordikoak',
++		'Palestine*': 'Palestina*',
++		'Papel y artes gráficas': 'Papera eta arte grafikoak',
++		'Parados de un año o más (% de los activos)': 'Urtebete edo gehiago langabezian (aktiboen %)',
++		'Paraguay': 'Paraguai',
++		'Paralizada': 'Geldituta',
++		'Parciales que querrían jornada completa': 'Lanaldi osoa nahi luketen lanaldi partzialekoak',
++		'Parlamento Europeo': 'Europako Parlamentua',
++		'Partido Andalucista': 'Alderdi Andaluzista',
++		'Pastos y otra vegetación natural': 'Larreak eta bestelako landaredi naturala',
++		'Península': 'Penintsula',
++		'Pensión media de jubilación (14 pagas prorrateadas en 12)': 'Batez besteko erretiro-pentsioa (14 ordainsari 12tan hainbanatuta)',
++		'Pensiones de jubilación por 100 personas de 65 años o más': 'Erretiro-pentsioak 65 urte edo gehiagoko 100 pertsonako',
++		'Pensiones por 1.000 habitantes': 'Pentsioak 1.000 biztanleko',
++		'Pensiones por 100 personas de 65 años o más': 'Pentsioak 65 urte edo gehiagoko 100 pertsonako',
++		'Pequeñas (10-49)': 'Txikiak (10-49)',
++		'Pernoct 1000hab': 'Gaualdiak 1.000 biztanleko',
++		'Pernoct 1000hab Espana': 'Gaualdiak 1.000 biztanleko (Espainia)',
++		'Perú': 'Peru',
++		'Petróleo': 'Petrolioa',
++		'PIB real por habitante': 'BPG erreala biztanleko',
++		'Pobreza Espana': 'Pobrezia (Espainia)',
++		'Policía Nacional y Guardia Civil': 'Polizia Nazionala eta Guardia Zibila',
++		'Policías autonómicas': 'Polizia autonomikoak',
++		'Por debajo': 'Azpitik',
++		'Por encima': 'Gainetik',
++		'Por persona': 'Pertsonako',
++		'Por unidad de consumo': 'Kontsumo-unitateko',
++		'Postsecundaria no superior': 'Bigarren hezkuntza ondoko ez-goi-mailakoa',
++		'Presupuesto del año': 'Urteko aurrekontua',
++		'Primaria': 'Lehen Hezkuntza',
++		'Primaria incompleta': 'Lehen Hezkuntza osatu gabe',
++		'Primer hijo': 'Lehen seme-alaba',
++		'Primera consulta con el especialista': 'Espezialistarekin lehen kontsulta',
++		'Principado de Asturias': 'Asturiasko Printzerria',
++		'Prisiones': 'Espetxeak',
++		'Privada': 'Pribatua',
++		'Privado': 'Pribatua',
++		'Protección Social y Pensiones': 'Gizarte-babesa eta pentsioak',
++		'Protección y promoción social': 'Gizarte-babesa eta -sustapena',
++		'Provincial o insular': 'Probintziala edo uhartekoa',
++		'Pública': 'Publikoa',
++		'Publico': 'Publikoa',
++		'Público': 'Publikoa',
++		'Quebrantamiento de condena': 'Zigor-haustea',
++		'Quiebras': 'Porrotak',
++		'Química y petroquímica': 'Kimika eta petrokimika',
++		'Rápida (50-149 kW)': 'Azkarra (50-149 kW)',
++		'Real': 'Erreala',
++		'Región de Murcia': 'Murtziako Eskualdea',
++		'Reino Unido': 'Erresuma Batua',
++		'Renovable': 'Berriztagarria',
++		'Renovable (%)': 'Berriztagarria (%)',
++		'Renovables y calor ambiente': 'Berriztagarriak eta giro-beroa',
++		'Renta Persona Provincia': 'Errenta pertsonako (probintzia)',
++		'Renta Persona Real': 'Errenta erreala pertsonako',
++		'República Dominicana': 'Dominikar Errepublika',
++		'Reservas bajas': 'Erreserba baxuak',
++		'Residencial y Comercial': 'Etxebizitzak eta merkataritza',
++		'Residentes en el extranjero': 'Atzerrian bizi direnak',
++		'Residentes en España': 'Espainian bizi direnak',
++		'Residuos': 'Hondakinak',
++		'Restaurantes y hoteles': 'Jatetxeak eta hotelak',
++		'Resto': 'Gainerakoak',
++		'Resto América': 'Gainerako Amerika',
++		'Resto de comunidades': 'Gainerako erkidegoak',
++		'Resto de delitos sexuales': 'Gainerako sexu-delituak',
++		'Resto de Europa': 'Gainerako Europa',
++		'Resto de infracciones': 'Gainerako arau-hausteak',
++		'Resto de países': 'Gainerako herrialdeak',
++		'Resto del Mundo': 'Munduko gainerakoa',
++		'Retirada': 'Erretiratua',
++		'Riesgo de pobreza': 'Pobrezia-arriskua',
++		'Robos': 'Lapurretak',
++		'Robos con fuerza (domicilios, establecimientos...)': 'Indarrezko lapurretak (etxeak, establezimenduak...)',
++		'Robos con fuerza en domicilios': 'Etxebizitzetako indarrezko lapurretak',
++		'Robos con fuerza en viviendas': 'Etxebizitzetako indarrezko lapurretak',
++		'Robos con violencia o intimidación': 'Indarkeriazko edo larderiazko lapurretak',
++		'Ropa y calzado': 'Arropa eta oinetakoak',
++		'Rumanía': 'Errumania',
++		'Salario medio bruto (pagas extra prorrateadas)': 'Batez besteko soldata gordina (ordainsari bereziak hainbanatuta)',
++		'Salidas al extranjero': 'Atzerrira joandakoak',
++		'Sanidad': 'Osasuna',
++		'Sanidad Pública': 'Osasun publikoa',
++		'Secuestro': 'Bahiketa',
++		'Segunda mano': 'Bigarren eskukoa',
++		'Seguridad Social': 'Gizarte Segurantza',
++		'Seguridad y Justicia': 'Segurtasuna eta justizia',
++		'Seguros voluntarios': 'Borondatezko aseguruak',
++		'Seguros y finanzas': 'Aseguruak eta finantzak',
++		'Semanal': 'Astekoa',
++		'Semestral': 'Seihilekoa',
++		'Semirrápida (22-49 kW)': 'Erdi-azkarra (22-49 kW)',
++		'sep': 'ira',
++		'sep.': 'ira.',
++		'Servicios': 'Zerbitzuak',
++		'Servicios administrativos y auxiliares': 'Administrazio- eta laguntza-zerbitzuak',
++		'Servicios Comunitarios': 'Komunitate-zerbitzuak',
++		'Servicios públicos básicos': 'Oinarrizko zerbitzu publikoak',
++		'Servicios Públicos Generales': 'Zerbitzu publiko orokorrak',
++		'Sexo': 'Sexua',
++		'Sí': 'Bai',
++		'Sin asalariados': 'Soldatapekorik gabe',
++		'Sin clasificar': 'Sailkatu gabe',
++		'Sin comunicar el PMP': 'BEA jakinarazi gabe',
++		'Sin datos': 'Daturik ez',
++		'Sin descontar (euros de cada año)': 'Kendu gabe (urte bakoitzeko euroak)',
++		'Sin descontar (euros de cada mes)': 'Kendu gabe (hil bakoitzeko euroak)',
++		'Sin detalle en la fuente': 'Iturrian xehetasunik gabe',
++		'Sin diferencia clara': 'Alde argirik gabe',
++		'Sin estudios': 'Ikasketarik gabe',
++		'Sin etiqueta': 'Etiketarik gabe',
++		'Sin fecha': 'Datarik gabe',
++		'Sin información': 'Informaziorik gabe',
++		'Solar Fotovoltaica': 'Eguzki fotovoltaikoa',
++		'Solar fotovoltaica': 'Eguzki fotovoltaikoa',
++		'Solar Térmica': 'Eguzki-energia termikoa',
++		'Solar térmica': 'Eguzki-energia termikoa',
++		'Solar termoeléctrica': 'Eguzki termoelektrikoa',
++		'Solo mayores de 64': '64 urtetik gorakoak soilik',
++		'Subyacente (sin energía ni alimentos frescos)': 'Azpiko inflazioa (energia eta elikagai freskorik gabe)',
++		'Sudamérica': 'Hego Amerika',
++		'Suecia': 'Suedia',
++		'Suicidios': 'Suizidioak',
++		'Suiza': 'Suitza',
++		'Superávit': 'Superabita',
++		'Sustracción de vehículos': 'Ibilgailu-lapurreta',
++		'Tasa de actividad': 'Jarduera-tasa',
++		'Tasa de empleo': 'Enplegu-tasa',
++		'Tasa de paro': 'Langabezia-tasa',
++		'Tasa Espana': 'Tasa (Espainia)',
++		'Tasa Paro': 'Langabezia-tasa',
++		'Tasa Paro Espana': 'Langabezia-tasa (Espainia)',
++		'Tasa Pobreza': 'Pobrezia-tasa',
++		'Terminadas': 'Amaituak',
++		'Teruel Existe y España Vaciada': 'Teruel Existe eta Espainia Hustua',
++		'Textil y cuero': 'Ehungintza eta larrugintza',
++		'Tiempo completo': 'Lanaldi osoa',
++		'Tiempo parcial': 'Lanaldi partziala',
++		'Tierra: Ceuta y Melilla': 'Lehorra: Ceuta eta Melilla',
++		'Toda la economía': 'Ekonomia osoa',
++		'Toda la población': 'Biztanleria osoa',
++		'Todas': 'Guztiak',
++		'Todos': 'Guztiak',
++		'Todos los hijos': 'Seme-alaba guztiak',
++		'Total': 'Guztira',
++		'Total (menores de 16 y mayores de 64)': 'Guztira (16 urtetik behera eta 64tik gora)',
++		'TOTAL INFRACCIONES PENALES': 'ARAU-HAUSTE PENALAK GUZTIRA',
++		'Total infracciones penales': 'Arau-hauste penalak guztira',
++		'Tráfico de drogas': 'Droga-trafikoa',
++		'Transporte': 'Garraioa',
++		'Transporte y almacenamiento': 'Garraioa eta biltegiratzea',
++		'Trastornos mentales y del comportamiento': 'Buruko eta portaerako nahasmenduak',
++		'Traumatología': 'Traumatologia',
++		'Trimestral': 'Hiruhilekoa',
++		'Tumores': 'Tumoreak',
++		'Turbina de gas / motores': 'Gas-turbina / motorrak',
++		'Turbina de vapor (fuel / gas)': 'Lurrun-turbina (fuela / gasa)',
++		'Turbinado Gwh': 'Turbinatua (GWh)',
++		'UE-27': 'EB-27',
++		'UE-27 (Eurostat)': 'EB-27 (Eurostat)',
++		'UE27_2020 sin España': 'EB-27, Espainia gabe',
++		'Ultrarrápida (≥150 kW)': 'Ultra-azkarra (≥150 kW)',
++		'Umbral cálido (p90)': 'Atalase beroa (p90)',
++		'Umbral fresco (p10)': 'Atalase freskoa (p10)',
++		'Unión Europea': 'Europar Batasuna',
++		'Universidad y otros estudios superiores': 'Unibertsitatea eta beste goi-mailako ikasketak',
++		'Universidades': 'Unibertsitateak',
++		'Urología': 'Urologia',
++		'Valencia': 'Valentzia',
++		'València': 'Valentzia',
++		'Valor': 'Balioa',
++		'Valor Espana': 'Balioa (Espainia)',
++		'Viudedad': 'Alarguntasuna',
++		'Vivienda y energía': 'Etxebizitza eta energia',
++		'Vivienda y Medio Ambiente': 'Etxebizitza eta ingurumena',
++		'Viviendas libres terminadas': 'Amaitutako etxebizitza libreak',
++		'Zona euro': 'Eurogunea'
++	}
++};
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
+new file mode 100644
+index 0000000..072e517
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
+@@ -0,0 +1,164 @@
++// SpainFacts: líneas verticales con acontecimientos clave en las gráficas temporales
++// (añadido con patch-package). Se aplican solas a toda gráfica cuyo eje X sean fechas
++// o años y cuyo rango incluya el evento; una gráfica puede desactivarlas con
++// echartsOptions={{ eventos: false }}.
++import { ETIQUETAS_EVENTOS } from './idioma.js';
++
++/** tipo: 'crisis' (gris, discontinua) | 'gobierno' (color del partido, punteada) */
++export const EVENTOS = [
++	{ fecha: '1977-07-04', etiqueta: 'Gob. Suárez (UCD)', tipo: 'gobierno', color: '#2f9c95' },
++	{ fecha: '1982-12-02', etiqueta: 'Gob. González (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ fecha: '1996-05-05', etiqueta: 'Gob. Aznar (PP)', tipo: 'gobierno', color: '#1d4ed8' },
++	{ fecha: '2004-04-17', etiqueta: 'Gob. Zapatero (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ fecha: '2008-09-15', etiqueta: 'Crisis financiera', tipo: 'crisis' },
++	{ fecha: '2011-12-21', etiqueta: 'Gob. Rajoy (PP)', tipo: 'gobierno', color: '#1d4ed8' },
++	{ fecha: '2018-06-02', etiqueta: 'Gob. Sánchez (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ fecha: '2020-03-14', etiqueta: 'COVID-19', tipo: 'crisis' },
++	{ fecha: '2022-02-24', etiqueta: 'Guerra de Ucrania', tipo: 'crisis' },
++	{ fecha: '2025-06-13', etiqueta: 'Guerra de Irán', tipo: 'crisis' }
++];
++
++const DIA = 86400000;
++
++const aFecha = (v) => {
++	if (v == null) return null;
++	if (v instanceof Date) return v.getTime();
++	if (typeof v === 'number') return v > 1e11 ? v : null; // milisegundos
++	if (typeof v === 'string' && /^\d{4}-\d{2}(-\d{2})?/.test(v)) {
++		const t = Date.parse(v.length === 7 ? v + '-01' : v.slice(0, 10));
++		return Number.isNaN(t) ? null : t;
++	}
++	return null;
++};
++const esAnio = (v) => {
++	const n = typeof v === 'string' && /^\d{4}$/.test(v.trim()) ? Number(v) : v;
++	return typeof n === 'number' && Number.isInteger(n) && n >= 1900 && n <= 2100 ? n : null;
++};
++
++// Valor x de un punto de una serie de ECharts ([x, y], {value: [x, y]} o número suelto)
++const xDe = (d) => {
++	if (Array.isArray(d)) return d[0];
++	if (d && typeof d === 'object' && Array.isArray(d.value)) return d.value[0];
++	return undefined;
++};
++
++const primero = (eje) => (Array.isArray(eje) ? eje[0] : eje);
++
++export function anadirEventos(config, lang = 'es') {
++	try {
++		if (!config || !Array.isArray(config.series) || !config.series.length) return config;
++		if (config.eventos === false) return config;
++		const ejeX = primero(config.xAxis);
++		const ejeY = primero(config.yAxis);
++		if (!ejeX || !ejeY) return config;
++		// Gráficas horizontales (swapXY) o sin eje de categorías/tiempo en X: nada
++		if (ejeY.type === 'category' || ejeY.type === 'time') return config;
++
++		// Valores x de los datos
++		let xs = [];
++		if (ejeX.type === 'category' && Array.isArray(ejeX.data) && ejeX.data.length) {
++			xs = ejeX.data.map((c) => (c && typeof c === 'object' ? c.value : c));
++		} else {
++			for (const s of config.series) {
++				if (!Array.isArray(s?.data)) continue;
++				for (const d of s.data) {
++					const x = xDe(d);
++					if (x !== undefined) xs.push(x);
++				}
++			}
++		}
++		if (xs.length < 3) return config;
++
++		// Modo: fechas o años
++		let modo = null;
++		let tiempos = xs.map(aFecha).filter((t) => t != null);
++		if (tiempos.length >= xs.length * 0.8) modo = 'fecha';
++		let anios = [];
++		if (!modo) {
++			anios = xs.map(esAnio).filter((a) => a != null);
++			if (anios.length >= xs.length * 0.8) modo = 'anio';
++		}
++		if (!modo) return config;
++
++		let lineas = [];
++		if (modo === 'fecha') {
++			const min = Math.min(...tiempos);
++			const max = Math.max(...tiempos);
++			if (max - min < 180 * DIA) return config; // rangos cortos (horas, días): sin eventos
++			for (const e of EVENTOS) {
++				const t = Date.parse(e.fecha);
++				if (t <= min || t > max) continue;
++				// eje de categorías con fechas: la categoría más cercana anterior al evento
++				let valor = t;
++				if (ejeX.type === 'category') {
++					const anteriores = xs.filter((x) => aFecha(x) <= t);
++					if (!anteriores.length) continue;
++					valor = anteriores[anteriores.length - 1];
++				}
++				lineas.push({ e, valor });
++			}
++		} else {
++			const min = Math.min(...anios);
++			const max = Math.max(...anios);
++			if (max - min < 3) return config;
++			for (const e of EVENTOS) {
++				const anio = Number(e.fecha.slice(0, 4));
++				if (anio <= min || anio > max) continue;
++				let valor = anio;
++				if (ejeX.type === 'category') {
++					valor = xs.find((x) => esAnio(x) === anio);
++					if (valor === undefined) continue;
++				} else {
++					// año con fracción: el evento cae en su punto del año
++					const inicio = Date.parse(`${anio}-01-01`);
++					valor = anio + (Date.parse(e.fecha) - inicio) / (365.25 * DIA);
++				}
++				lineas.push({ e, valor });
++			}
++		}
++		if (!lineas.length) return config;
++
++		// Si hay muchos cambios de gobierno en una serie larga, se dejan solo los de crisis
++		// cuando las líneas quedarían demasiado juntas (más de 8)
++		if (lineas.length > 8) lineas = lineas.filter((l) => l.e.tipo !== 'gobierno');
++
++		const marca = {
++			symbol: ['none', 'none'],
++			silent: true,
++			animation: false,
++			label: {
++				show: true,
++				position: 'insideEndTop',
++				formatter: '{b}',
++				fontSize: 9,
++				color: '#8a8f98'
++			},
++			data: lineas.map(({ e, valor }) => ({
++				xAxis: valor,
++				name: ETIQUETAS_EVENTOS[lang]?.[EVENTOS.indexOf(e)] ?? e.etiqueta,
++				lineStyle: {
++					type: e.tipo === 'gobierno' ? 'dotted' : 'dashed',
++					width: 1,
++					color: e.tipo === 'gobierno' ? e.color : '#8a8f98',
++					opacity: e.tipo === 'gobierno' ? 0.55 : 0.8
++				},
++				label: e.tipo === 'gobierno' ? { color: e.color } : undefined
++			}))
++		};
++
++		// Se engancha a la primera serie para no crear una serie nueva (saldría en la leyenda)
++		const series = config.series.map((s, i) => {
++			if (i !== 0) return s;
++			const previa = s.markLine;
++			return {
++				...s,
++				markLine: previa
++					? { ...previa, data: [...(previa.data ?? []), ...marca.data] }
++					: marca
++			};
++		});
++		return { ...config, series };
++	} catch {
++		return config;
++	}
++}
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
+new file mode 100644
+index 0000000..b0e71df
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
+@@ -0,0 +1,91 @@
++// SpainFacts: textos traducidos de los componentes parcheados (patch-package).
++// Copia reducida de src/lib/i18n.js: si cambias uno, cambia el otro.
++
++const PREFIJOS = ['en', 'ca', 'gl', 'eu'];
++export function idiomaDeRuta(ruta = '/') {
++	const primero = String(ruta).split('/')[1];
++	return PREFIJOS.includes(primero) ? primero : 'es';
++}
++export function idiomaActual() {
++	return typeof window === 'undefined' ? 'es' : idiomaDeRuta(window.location.pathname);
++}
++
++const TEXTOS = {
++	es: {
++		'compartir': 'Compartir',
++		'compartir.copiar': 'Copiar enlace',
++		'compartir.copiado': 'Enlace copiado',
++		'compartir.instagram': 'Enlace copiado: pégalo en Instagram',
++		'compartir.instagram2': 'Copia el enlace de la página para pegarlo en Instagram',
++		'compartir.ventana': '(se abre en una ventana nueva)',
++		'grafico': 'Gráfico',
++		'grafico.csv': 'Los datos se pueden descargar en CSV debajo.',
++		'grafico.imagen': 'Guardar imagen',
++		'grafico.datos': 'Descargar datos (CSV)',
++		'tabla.csv': 'Descargar CSV',
++	},
++	en: {
++		'compartir': 'Share',
++		'compartir.copiar': 'Copy link',
++		'compartir.copiado': 'Link copied',
++		'compartir.instagram': 'Link copied: paste it on Instagram',
++		'compartir.instagram2': 'Copy the page link to paste it on Instagram',
++		'compartir.ventana': '(opens in a new window)',
++		'grafico': 'Chart',
++		'grafico.csv': 'The data can be downloaded as CSV below.',
++		'grafico.imagen': 'Save image',
++		'grafico.datos': 'Download data (CSV)',
++		'tabla.csv': 'Download CSV',
++	},
++	ca: {
++		'compartir': 'Comparteix',
++		'compartir.copiar': "Copia l'enllaç",
++		'compartir.copiado': 'Enllaç copiat',
++		'compartir.instagram': "Enllaç copiat: enganxa'l a Instagram",
++		'compartir.instagram2': "Copia l'enllaç de la pàgina per enganxar-lo a Instagram",
++		'compartir.ventana': "(s'obre en una finestra nova)",
++		'grafico': 'Gràfic',
++		'grafico.csv': 'Les dades es poden descarregar en CSV a sota.',
++		'grafico.imagen': 'Desa la imatge',
++		'grafico.datos': 'Descarrega les dades (CSV)',
++		'tabla.csv': 'Descarrega CSV',
++	},
++	gl: {
++		'compartir': 'Compartir',
++		'compartir.copiar': 'Copiar ligazón',
++		'compartir.copiado': 'Ligazón copiada',
++		'compartir.instagram': 'Ligazón copiada: pégaa en Instagram',
++		'compartir.instagram2': 'Copia a ligazón da páxina para pegala en Instagram',
++		'compartir.ventana': '(ábrese nunha xanela nova)',
++		'grafico': 'Gráfico',
++		'grafico.csv': 'Os datos pódense descargar en CSV debaixo.',
++		'grafico.imagen': 'Gardar imaxe',
++		'grafico.datos': 'Descargar datos (CSV)',
++		'tabla.csv': 'Descargar CSV',
++	},
++	eu: {
++		'compartir': 'Partekatu',
++		'compartir.copiar': 'Kopiatu esteka',
++		'compartir.copiado': 'Esteka kopiatuta',
++		'compartir.instagram': 'Esteka kopiatuta: itsatsi Instagramen',
++		'compartir.instagram2': 'Kopiatu orriaren esteka Instagramen itsasteko',
++		'compartir.ventana': '(leiho berri batean irekitzen da)',
++		'grafico': 'Grafikoa',
++		'grafico.csv': 'Datuak CSV formatuan deskarga daitezke behean.',
++		'grafico.imagen': 'Gorde irudia',
++		'grafico.datos': 'Deskargatu datuak (CSV)',
++		'tabla.csv': 'Deskargatu CSV',
++	},
++};
++export function t(clave, lang = 'es') {
++	return TEXTOS[lang]?.[clave] ?? TEXTOS.es[clave] ?? clave;
++}
++
++// Etiquetas de los eventos de eventos.js, en el mismo orden que EVENTOS
++export const ETIQUETAS_EVENTOS = {
++	es: ["Gob. Suárez (UCD)", "Gob. González (PSOE)", "Gob. Aznar (PP)", "Gob. Zapatero (PSOE)", "Crisis financiera", "Gob. Rajoy (PP)", "Gob. Sánchez (PSOE)", "COVID-19", "Guerra de Ucrania", "Guerra de Irán"],
++	en: ["Suárez gov. (UCD)", "González gov. (PSOE)", "Aznar gov. (PP)", "Zapatero gov. (PSOE)", "Financial crisis", "Rajoy gov. (PP)", "Sánchez gov. (PSOE)", "COVID-19", "War in Ukraine", "Iran war"],
++	ca: ["Gov. Suárez (UCD)", "Gov. González (PSOE)", "Gov. Aznar (PP)", "Gov. Zapatero (PSOE)", "Crisi financera", "Gov. Rajoy (PP)", "Gov. Sánchez (PSOE)", "COVID-19", "Guerra d'Ucraïna", "Guerra de l'Iran"],
++	gl: ["Gob. Suárez (UCD)", "Gob. González (PSOE)", "Gob. Aznar (PP)", "Gob. Zapatero (PSOE)", "Crise financeira", "Gob. Rajoy (PP)", "Gob. Sánchez (PSOE)", "COVID-19", "Guerra de Ucraína", "Guerra de Irán"],
++	eu: ["Suárezen gob. (UCD)", "Gonzálezen gob. (PSOE)", "Aznarren gob. (PP)", "Zapateroren gob. (PSOE)", "Finantza krisia", "Rajoyren gob. (PP)", "Sánchezen gob. (PSOE)", "COVID-19", "Ukrainako gerra", "Irango gerra"],
++};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-index b3bfe37..7443ebd 100644
+index b3bfe37..2a4dd87 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-@@ -8,6 +8,7 @@
+@@ -8,6 +8,12 @@
  	import echartsCanvasDownload from '@evidence-dev/component-utilities/echartsCanvasDownload';
  	import EChartsCopyTarget from './EChartsCopyTarget.svelte';
  	import DownloadData from '../../ui/DownloadData.svelte';
 +	import CompartirGrafico from '../../ui/CompartirGrafico.svelte';
++	import { anadirEventos } from '../../ui/eventos.js';
++	import { traducirEtiquetas } from '../../ui/etiquetas.js';
++	import { page } from '$app/stores';
++	import { idiomaDeRuta, t } from '../../ui/idioma.js';
++	$: lang = idiomaDeRuta($page?.url?.pathname ?? '/');
  	import CodeBlock from '../../ui/CodeBlock.svelte';
  	import ChartLoading from '../../ui/ChartLoading.svelte';
  	import { flush } from 'svelte/internal';
-@@ -111,7 +112,7 @@
+@@ -17,6 +23,10 @@
+ 	const { activeAppearance, theme, resolveColorsObject } = getThemeStores();
+ 
+ 	export let config = undefined;
++	// SpainFacts: acontecimientos clave (COVID, crisis, gobiernos...) en los ejes temporales
++	// y, en las páginas traducidas, las etiquetas que vienen de los datos (series, categorías)
++	$: configTraducida = traducirEtiquetas(config, lang);
++	$: configConEventos = echartsOptions?.eventos === false ? configTraducida : anadirEventos(configTraducida, lang);
+ 
+ 	export let queryID = undefined;
+ 	export let evidenceChartTitle = undefined;
+@@ -74,6 +84,8 @@
+ 		{:else}
+ 			<div
+ 				class="chart"
++				role="img"
++				aria-label={`${t('grafico', lang)}${(evidenceChartTitle ?? config?.title?.text) ? `: ${evidenceChartTitle ?? config?.title?.text}` : ''}. ${t('grafico.csv', lang)}`}
+ 				style="
+ 				height: {height};
+ 				width: {width};
+@@ -81,7 +93,7 @@
+ 				display: {copying ? 'none' : 'inherit'}
+ 			"
+ 				use:echarts={{
+-					config,
++					config: configConEventos,
+ 					...$$restProps,
+ 					echartsOptions,
+ 					seriesOptions,
+@@ -97,7 +109,7 @@
+ 	{/if}
+ 
+ 	<EChartsCopyTarget
+-		{config}
++		config={configConEventos}
+ 		{height}
+ 		{width}
+ 		{copying}
+@@ -111,7 +123,7 @@
  		<div class="chart-footer">
  			{#if downloadableImage}
  				<DownloadData
 -					text="Save Image"
-+					text="Guardar imagen"
++					text={t('grafico.imagen', lang)}
  					class="download-button"
  					downloadData={() => {
  						downloadChart = true;
-@@ -119,7 +120,7 @@
+@@ -119,7 +131,7 @@
  							downloadChart = false;
  						}, 0);
  					}}
@@ -246,12 +3313,12 @@ index b3bfe37..7443ebd 100644
  					{queryID}
  				>
  					<svg
-@@ -141,13 +142,14 @@
+@@ -141,13 +153,14 @@
  			{/if}
  			{#if data && downloadableData}
  				<DownloadData
 -					text="Download Data"
-+					text="Descargar datos (CSV)"
++					text={t('grafico.datos', lang)}
  					{data}
  					{queryID}
  					class="download-button"
@@ -263,7 +3330,16 @@ index b3bfe37..7443ebd 100644
  		</div>
  	{/if}
  
-@@ -209,8 +211,10 @@
+@@ -172,7 +185,7 @@
+         overflow: visible;
+     "
+ 		use:echartsCanvasDownload={{
+-			config,
++			config: configConEventos,
+ 			...$$restProps,
+ 			echartsOptions,
+ 			seriesOptions,
+@@ -209,8 +222,10 @@
  		display: flex;
  		justify-content: flex-end;
  		align-items: center;

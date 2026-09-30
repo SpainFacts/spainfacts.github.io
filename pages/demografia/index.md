@@ -127,27 +127,27 @@ En {crecimiento_ultimo[0]?.anio} la población creció {formatNumber(crecimiento
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
     <a href="/demografia/evolucion-poblacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">📈 Evolución de la población</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📈</span> Evolución de la población</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Población desde 1971, crecimiento anual por 1.000 habitantes y cuánto aportan nacimientos, defunciones y migración en cada comunidad.</p>
     </a>
     <a href="/demografia/natalidad" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-pink-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">👶 Natalidad y fecundidad</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">👶</span> Natalidad y fecundidad</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Nacimientos y defunciones por 1.000 habitantes, hijos por mujer, edad de las madres y nacimientos de madre extranjera, por comunidad y provincia.</p>
     </a>
     <a href="/demografia/estructura-edades" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-rose-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🔺 Edades y envejecimiento</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔺</span> Edades y envejecimiento</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pirámides de población de España, cada comunidad y cada provincia; mayores de 65 y de 80 años, dependencia y edad media.</p>
     </a>
     <a href="/demografia/distribucion-territorial" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-emerald-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🗺️ Reparto territorial</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗺️</span> Reparto territorial</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Qué provincias ganan y pierden población, el peso de cada comunidad y el porcentaje de nacidos en el extranjero en cada provincia.</p>
     </a>
     <a href="/demografia/poblacion-sexo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-purple-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">⚖️ Hombres y mujeres</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Hombres y mujeres</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hombres por cada 100 mujeres según la edad, a lo largo del tiempo y en cada provincia.</p>
     </a>
     <a href="/demografia/hogares" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🏠 Hogares</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏠</span> Hogares</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Tamaño medio del hogar y hogares de una sola persona, por comunidad y provincia.</p>
     </a>
 </div>

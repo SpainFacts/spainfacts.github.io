@@ -51,7 +51,7 @@ LIMIT 1
 
 <div>
     <p>
-        <b>Fuente:</b> <a href="{ultimo[0].url_fuente}" target="_blank">{ultimo[0].fuente}</a><br/>
+        <b>Fuente:</b> <a href="{ultimo[0].url_fuente}" target="_blank" rel="noopener noreferrer">{ultimo[0].fuente}<span class="sr-only"> (se abre en una pestaña nueva)</span></a><br/>
         <b>Frecuencia:</b> {ultimo[0].frecuencia}<br/>
         <b>Apartado:</b> <a href="{ultimo[0].pagina}">{ultimo[0].tema}</a> · <a href="/varios/indicadores/">Todos los indicadores</a><br/>
         <LastRefreshed prefix="Actualizado" />

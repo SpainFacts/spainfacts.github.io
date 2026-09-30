@@ -1,4 +1,5 @@
 <script>
+    import { localeActual } from "../utils.js";
     import { ECharts } from "@evidence-dev/core-components";
     import { getNumberFormatter, getCompactFormatter } from "../chart-utils.js";
 
@@ -8,7 +9,7 @@
     export let y2 = undefined;
     export let title = undefined;
     export let yAxisTitle = undefined;
-    export let locale = "es-ES";
+    export let locale = localeActual();
     export let startingAtZero = true;
 
     // Preparar datos

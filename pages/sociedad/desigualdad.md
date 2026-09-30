@@ -5,6 +5,7 @@ description: "Renta media de los hogares descontada la inflación, riesgo de pob
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -112,6 +113,15 @@ Cuánto ingresan de media los hogares en España una vez descontada la inflació
         sparklineData={gini_serie}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('riesgo_pobreza', 'gini')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'riesgo_pobreza')} />
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'gini')} />
+
 
 <p class="text-xs text-gray-500">La Encuesta de Condiciones de Vida (ECV) de cada año pregunta por la renta del año anterior: la ECV {hitos[0]?.anio} recoge la renta de {hitos[0]?.anio_renta}. La pobreza, el Gini y el S80/S20 se calculan con esa renta. Todos los importes están en euros de {hitos[0]?.anio_base}, descontada la inflación con el IPC.</p>
 

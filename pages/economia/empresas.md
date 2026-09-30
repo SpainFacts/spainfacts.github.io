@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -133,6 +134,14 @@ Cuántas empresas hay en España y de qué tamaño son, cuántas sociedades se c
         sparklineData={id_es.map(d => d.pct_pib)}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('id_pib')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'id_pib')} />
+
 
 ## Cuántas empresas hay
 

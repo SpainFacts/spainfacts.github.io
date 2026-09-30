@@ -1,4 +1,7 @@
 <script>
+    import { localeActual } from "../utils.js";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, t, tf } from "../i18n.js";
     // "El sistema eléctrico, ahora": mapa de los sistemas eléctricos (total
     // nacional, Península, Baleares, Canarias, Ceuta y Melilla) con intercambios internacionales como
     // flechas, tabla con demanda / % renovable / gCO2/kWh, precio y mix de 24 h.
@@ -15,6 +18,12 @@
     export let workerUrl = REE_DIRECTO_URL;
     export let geoUrl = '/geo/ccaa.geojson';
     export let intervaloMs = REE_DIRECTO_INTERVALO_MS;
+
+    $: lang = idiomaDeRuta($page.url.pathname);
+    // Los nombres se traducen solo al pintar; id/k siguen siendo las claves de datos del Worker.
+    $: nomSis = (id) => t('directo.sis.' + id, lang);
+    $: nomTec = (k) => t('directo.tec.' + k, lang);
+    $: nomPais = (cod) => t('pais.' + cod, lang);
 
     const SISTEMAS = [
         { id: 'nacional', nombre: 'España (total)' },
@@ -119,13 +128,13 @@
     })();
 
     // ------------------------------------------------------------------ formato
-    const nf = (dec) => new Intl.NumberFormat('es-ES', { maximumFractionDigits: dec, minimumFractionDigits: dec });
+    const nf = (dec) => new Intl.NumberFormat(localeActual(), { maximumFractionDigits: dec, minimumFractionDigits: dec });
     const fmt = (v, dec = 0) => (num(v) === null ? '—' : nf(dec).format(num(v)));
     const hora = (isoTs) =>
-        isoTs ? new Date(isoTs).toLocaleTimeString('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }) : '—';
+        isoTs ? new Date(isoTs).toLocaleTimeString(localeActual(), { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }) : '—';
     const fechaHora = (isoTs) =>
         isoTs
-            ? new Date(isoTs).toLocaleString('es-ES', { timeZone: 'Europe/Madrid', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+            ? new Date(isoTs).toLocaleString(localeActual(), { timeZone: 'Europe/Madrid', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
             : '—';
 
     // Minutos transcurridos desde el último dato (se refresca cada minuto).
@@ -188,10 +197,10 @@
     // ------------------------------------------------------------------ flechas
     // Punto de la frontera (lon, lat) y dirección "hacia fuera" en pantalla.
     const FRONTERAS = [
-        { id: 'francia', nombre: 'Francia', lon: -0.9, lat: 43.0, dx: 0, dy: -1, etq: 'arriba' },
-        { id: 'andorra', nombre: 'Andorra', lon: 1.55, lat: 42.52, dx: 0.35, dy: -1, etq: 'arriba' },
-        { id: 'portugal', nombre: 'Portugal', lon: -7.0, lat: 40.2, dx: -1, dy: 0, etq: 'izquierda' },
-        { id: 'marruecos', nombre: 'Marruecos', lon: -5.6, lat: 35.95, dx: 0, dy: 1, etq: 'abajo' },
+        { id: 'francia', cod: 'FRA', nombre: 'Francia', lon: -0.9, lat: 43.0, dx: 0, dy: -1, etq: 'arriba' },
+        { id: 'andorra', cod: 'AND', nombre: 'Andorra', lon: 1.55, lat: 42.52, dx: 0.35, dy: -1, etq: 'arriba' },
+        { id: 'portugal', cod: 'PRT', nombre: 'Portugal', lon: -7.0, lat: 40.2, dx: -1, dy: 0, etq: 'izquierda' },
+        { id: 'marruecos', cod: 'MAR', nombre: 'Marruecos', lon: -5.6, lat: 35.95, dx: 0, dy: 1, etq: 'abajo' },
     ];
     const LARGO = 46;
 
@@ -262,8 +271,8 @@
         { id: 'ceuta', nombre: 'Ceuta', u: ceu, x: px(-5.32), y: py(35.89), dx: 12, anchor: 'start' },
         { id: 'melilla', nombre: 'Melilla', u: mel, x: px(-2.94), y: py(35.29), dx: 8, anchor: 'start' },
     ];
-    const valorModo = (u, m) =>
-        !u ? '—' : m === 'renovables' ? `${fmt(u.pct_renovable, 0)} % renov.` : `${fmt(u.intensidad_gco2_kwh, 0)} g/kWh`;
+    $: valorModo = (u, m) =>
+        !u ? '—' : m === 'renovables' ? `${fmt(u.pct_renovable, 0)} % ${t('directo.renovAbr', lang)}` : `${fmt(u.intensidad_gco2_kwh, 0)} g/kWh`;
 
     // ------------------------------------------------------------------ gráfico 24 h
     let seleccion = 'peninsula';
@@ -367,25 +376,26 @@
         <div class="flex items-center gap-2 text-sm">
             {#if datos.modo === 'directo'}
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-950/60 text-green-800 dark:text-green-300 px-2.5 py-0.5 font-semibold">
-                    <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-green-600"></span></span>
-                    En directo
+                    <span class="relative flex h-2 w-2" aria-hidden="true"><span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75 animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-green-600"></span></span>
+                    {t('directo.envivo', lang)}
                 </span>
                 <span class="text-gray-600 dark:text-gray-400">
-                    Datos de las <b>{hora(datos.actualizado)}</b> (hora peninsular){#if retrasoMin !== null && retrasoMin > 30}&nbsp;· con {retrasoMin} min de retraso{/if}
+                    {t('directo.datos.pre', lang)} <b>{hora(datos.actualizado)}</b> {t('directo.datos.hora', lang)}{#if retrasoMin !== null && retrasoMin > 30}&nbsp;· {tf('directo.retraso', lang, { n: retrasoMin })}{/if}
                 </span>
             {:else if datos.modo === 'build'}
-                <span class="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 px-2.5 py-0.5 font-semibold">No en directo</span>
-                <span class="text-gray-600 dark:text-gray-400">Datos de las <b>{fechaHora(datos.actualizado)}</b> (última actualización del sitio)</span>
+                <span class="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 px-2.5 py-0.5 font-semibold">{t('directo.noDirecto', lang)}</span>
+                <span class="text-gray-600 dark:text-gray-400">{t('directo.datos.pre', lang)} <b>{fechaHora(datos.actualizado)}</b> {t('directo.datos.build', lang)}</span>
             {:else}
-                <span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-0.5 font-semibold">{cargando ? 'Cargando…' : 'Sin datos'}</span>
+                <span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-0.5 font-semibold">{cargando ? t('cargando', lang) : t('sin.datos', lang)}</span>
             {/if}
         </div>
-        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-sm" role="group" aria-label="Colorear sistemas por">
-            {#each [['renovables', 'Renovables'], ['co2', 'Intensidad de CO₂']] as [v, t]}
+        <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-sm" role="group" aria-label={t('directo.colorear', lang)}>
+            {#each [['renovables', t('directo.renovables', lang)], ['co2', t('directo.co2', lang)]] as [v, etq]}
                 <button
+                    type="button"
                     class="px-3 py-1 {modoColor === v ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}"
                     aria-pressed={modoColor === v}
-                    on:click={() => (modoColor = v)}>{t}</button>
+                    on:click={() => (modoColor = v)}>{etq}</button>
             {/each}
         </div>
     </div>
@@ -393,7 +403,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
         <!-- Mapa -->
         <div class="lg:col-span-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-2">
-            <svg viewBox="0 0 {ANCHO} {ALTO}" class="w-full h-auto" role="img" aria-label="Mapa de los sistemas eléctricos españoles con los intercambios internacionales en este momento">
+            <svg viewBox="0 0 {ANCHO} {ALTO}" class="w-full h-auto" role="img" aria-label={t('directo.mapa.aria', lang)}>
                 <defs>
                     <pattern id="sse-sin-dato" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                         <line x1="0" y1="0" x2="0" y2="6" stroke="#94a3b8" stroke-width="2" />
@@ -402,9 +412,9 @@
 
                 <!-- Nombres de países vecinos -->
                 <g class="fill-gray-400 dark:fill-gray-500" font-size="12" letter-spacing="2" font-weight="600">
-                    <text x={px(0.9)} y={py(44.15)} text-anchor="middle">FRANCIA</text>
-                    <text x={px(-10.4)} y={py(41.3)} text-anchor="middle" transform="rotate(-90 {px(-10.4)} {py(41.3)})">PORTUGAL</text>
-                    <text x={px(1.0)} y={py(35.2)} text-anchor="middle">MARRUECOS</text>
+                    <text x={px(0.9)} y={py(44.15)} text-anchor="middle">{nomPais('FRA').toLocaleUpperCase(localeActual())}</text>
+                    <text x={px(-10.4)} y={py(41.3)} text-anchor="middle" transform="rotate(-90 {px(-10.4)} {py(41.3)})">{nomPais('PRT').toLocaleUpperCase(localeActual())}</text>
+                    <text x={px(1.0)} y={py(35.2)} text-anchor="middle">{nomPais('MAR').toLocaleUpperCase(localeActual())}</text>
                 </g>
 
                 {#if formas.peninsula}
@@ -416,7 +426,7 @@
 
                 <!-- Recuadro de Canarias -->
                 <rect x={CAN.x0 - 4} y={CAN_Y0} width={CAN_W + 8} height={CAN_H + 24} rx="6" class="fill-slate-50 dark:fill-gray-950 stroke-gray-300 dark:stroke-gray-700" stroke-width="1" />
-                <text x={CAN.x0 + 2} y={CAN_Y0 + 13} font-size="10" class="fill-gray-500 dark:fill-gray-400">Canarias (a otra escala; hora canaria = peninsular − 1 h)</text>
+                <text x={CAN.x0 + 2} y={CAN_Y0 + 13} font-size="10" class="fill-gray-500 dark:fill-gray-400">{t('directo.canarias.nota', lang)}</text>
                 {#if formas.canarias}
                     <path d={formas.canarias} fill={colorSistema(can) ?? 'url(#sse-sin-dato)'} class="stroke-gray-500 dark:stroke-gray-400" stroke-width="0.5" on:click={() => (seleccion = 'canarias')} role="presentation" style="cursor:pointer" />
                 {/if}
@@ -445,7 +455,7 @@
                         text-anchor={f.etq === 'izquierda' ? 'end' : 'middle'}
                         font-size="10"
                         class="fill-gray-600 dark:fill-gray-400"
-                    >{f.nombre}{f.mw === null || Math.abs(f.mw) < 1 ? '' : f.importa ? ' → España' : ' ← España'}</text>
+                    >{nomPais(f.cod)}{f.mw === null || Math.abs(f.mw) < 1 ? '' : f.importa ? ` → ${t('directo.espana', lang)}` : ` ← ${t('directo.espana', lang)}`}</text>
                 {/each}
 
                 <!-- Enlace Península–Baleares -->
@@ -460,15 +470,15 @@
                 {#each etiquetas as e (e.id)}
                     <g on:click={() => (seleccion = e.id)} role="presentation" style="cursor:pointer">
                         <rect x={e.x - 56} y={e.y - 2} width="112" height="46" rx="6" class="fill-white/90 dark:fill-gray-900/90 {seleccion === e.id ? 'stroke-teal-700 dark:stroke-teal-400' : 'stroke-gray-300 dark:stroke-gray-700'}" stroke-width={seleccion === e.id ? 2 : 1} />
-                        <text x={e.x} y={e.y + 12} text-anchor="middle" font-size="11.5" font-weight="700" class="fill-gray-900 dark:fill-gray-100">{e.nombre}</text>
-                        <text x={e.x} y={e.y + 26} text-anchor="middle" font-size="10.5" class="fill-gray-700 dark:fill-gray-300">{e.u ? `${fmt(e.u.demanda_mw, 0)} MW` : 'sin datos'}</text>
+                        <text x={e.x} y={e.y + 12} text-anchor="middle" font-size="11.5" font-weight="700" class="fill-gray-900 dark:fill-gray-100">{nomSis(e.id)}</text>
+                        <text x={e.x} y={e.y + 26} text-anchor="middle" font-size="10.5" class="fill-gray-700 dark:fill-gray-300">{e.u ? `${fmt(e.u.demanda_mw, 0)} MW` : t('directo.sinDatosMin', lang)}</text>
                         <text x={e.x} y={e.y + 39} text-anchor="middle" font-size="10.5" font-weight="600" class="fill-gray-700 dark:fill-gray-300">{valorModo(e.u, modoColor)}</text>
                     </g>
                 {/each}
                 {#each etiquetasCiudades as e (e.id)}
                     <g on:click={() => (seleccion = e.id)} role="presentation" style="cursor:pointer">
-                        <text x={e.x + e.dx} y={e.y - 2} text-anchor={e.anchor} font-size="10.5" font-weight="700" class="{seleccion === e.id ? 'fill-teal-700 dark:fill-teal-400' : 'fill-gray-900 dark:fill-gray-100'} stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{e.nombre}</text>
-                        <text x={e.x + e.dx} y={e.y + 10} text-anchor={e.anchor} font-size="9.5" class="fill-gray-700 dark:fill-gray-300 stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{e.u ? `${fmt(e.u.demanda_mw, 0)} MW · ${valorModo(e.u, modoColor)}` : 'sin datos'}</text>
+                        <text x={e.x + e.dx} y={e.y - 2} text-anchor={e.anchor} font-size="10.5" font-weight="700" class="{seleccion === e.id ? 'fill-teal-700 dark:fill-teal-400' : 'fill-gray-900 dark:fill-gray-100'} stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{nomSis(e.id)}</text>
+                        <text x={e.x + e.dx} y={e.y + 10} text-anchor={e.anchor} font-size="9.5" class="fill-gray-700 dark:fill-gray-300 stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3">{e.u ? `${fmt(e.u.demanda_mw, 0)} MW · ${valorModo(e.u, modoColor)}` : t('directo.sinDatosMin', lang)}</text>
                     </g>
                 {/each}
             </svg>
@@ -477,19 +487,19 @@
             <div class="flex flex-wrap items-end justify-between gap-3 px-2 pb-1 text-xs text-gray-600 dark:text-gray-400">
                 <div>
                     {#if modoColor === 'renovables'}
-                        <p class="font-semibold mb-1">% de la generación que es renovable</p>
+                        <p class="font-semibold mb-1">{t('directo.leyenda.ren', lang)}</p>
                         <div class="h-3 w-48 rounded" style="background:linear-gradient(90deg,{ESC_REN.join(',')})"></div>
                         <div class="flex justify-between w-48"><span>0 %</span><span>50 %</span><span>100 %</span></div>
                     {:else}
-                        <p class="font-semibold mb-1">Intensidad de carbono de la generación (gCO₂/kWh)</p>
+                        <p class="font-semibold mb-1">{t('directo.leyenda.co2', lang)}</p>
                         <div class="h-3 w-48 rounded" style="background:linear-gradient(90deg,{ESC_CO2.join(',')})"></div>
                         <div class="flex justify-between w-48"><span>0</span><span>400</span><span>800+</span></div>
                     {/if}
                 </div>
                 <div class="flex flex-col gap-0.5">
-                    <span><span class="inline-block w-3 h-2 bg-sky-600 dark:bg-sky-400 mr-1"></span>España importa</span>
-                    <span><span class="inline-block w-3 h-2 bg-rose-600 dark:bg-rose-400 mr-1"></span>España exporta</span>
-                    <span><span class="inline-block w-3 h-2 bg-violet-600 dark:bg-violet-400 mr-1"></span>Enlace Península–Baleares</span>
+                    <span><span class="inline-block w-3 h-2 bg-sky-600 dark:bg-sky-400 mr-1"></span>{t('directo.importa', lang)}</span>
+                    <span><span class="inline-block w-3 h-2 bg-rose-600 dark:bg-rose-400 mr-1"></span>{t('directo.exporta', lang)}</span>
+                    <span><span class="inline-block w-3 h-2 bg-violet-600 dark:bg-violet-400 mr-1"></span>{t('directo.enlace', lang)}</span>
                 </div>
             </div>
         </div>
@@ -498,12 +508,13 @@
         <div class="lg:col-span-2 flex flex-col gap-4">
             <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
                 <div class="overflow-x-auto"><table class="w-full text-sm whitespace-nowrap">
+                    <caption class="sr-only">{t('directo.tabla.caption', lang)}</caption>
                     <thead class="bg-gray-50 dark:bg-gray-800/60 text-gray-600 dark:text-gray-300 text-xs uppercase tracking-wide">
                         <tr>
-                            <th class="text-left px-2 sm:px-3 py-2">Sistema</th>
-                            <th class="text-right px-2 py-2">Demanda</th>
-                            <th class="text-right px-2 py-2">Renov.</th>
-                            <th class="text-right px-2 sm:px-3 py-2">gCO₂/kWh</th>
+                            <th scope="col" class="text-left px-2 sm:px-3 py-2">{t('directo.sistema', lang)}</th>
+                            <th scope="col" class="text-right px-2 py-2">{t('directo.demanda', lang)}</th>
+                            <th scope="col" class="text-right px-2 py-2"><abbr title={t('directo.renovable', lang)} class="no-underline">{t('directo.renov', lang)}</abbr></th>
+                            <th scope="col" class="text-right px-2 sm:px-3 py-2">gCO₂/kWh</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -514,7 +525,7 @@
                                 on:click={() => (seleccion = s.id)}
                             >
                                 <td class="px-2 sm:px-3 py-2 font-semibold text-gray-900 dark:text-gray-100">
-                                    <span class="inline-block w-2.5 h-2.5 rounded-sm mr-1.5 align-middle" style="background:{colorSistema(u) ?? '#cbd5e1'}"></span>{s.nombre}
+                                    <span class="inline-block w-2.5 h-2.5 rounded-sm mr-1.5 align-middle" style="background:{colorSistema(u) ?? '#cbd5e1'}"></span>{nomSis(s.id)}
                                 </td>
                                 <td class="px-2 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{u ? `${fmt(u.demanda_mw, 0)} MW` : '—'}</td>
                                 <td class="px-2 py-2 text-right tabular-nums text-gray-800 dark:text-gray-200">{u ? `${fmt(u.pct_renovable, 1)} %` : '—'}</td>
@@ -524,45 +535,45 @@
                     </tbody>
                 </table></div>
                 <p class="px-2 sm:px-3 py-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 mb-0">
-                    Pulsa un sistema para ver su mix de las últimas 24 horas.
+                    {t('directo.pulsa', lang)}
                     {#if pen && num(pen.intercambio_neto) !== null}
-                        Saldo exterior de la Península: <b>{num(pen.intercambio_neto) >= 0 ? 'importa' : 'exporta'} {fmt(Math.abs(num(pen.intercambio_neto)), 0)} MW</b>.
+                        {t('directo.saldo', lang)} <b>{num(pen.intercambio_neto) >= 0 ? t('directo.importaV', lang) : t('directo.exportaV', lang)} {fmt(Math.abs(num(pen.intercambio_neto)), 0)} MW</b>.
                     {/if}
                 </p>
             </div>
 
             <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
-                <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2">Precio de la electricidad (Península)</p>
+                <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2">{t('directo.precio', lang)}</p>
                 {#if datos.precios && (num(datos.precios.spot_eur_mwh) !== null || num(datos.precios.pvpc_eur_mwh) !== null)}
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <p class="text-2xl font-bold text-gray-900 dark:text-white mb-0 tabular-nums">{fmt(datos.precios.spot_eur_mwh, 1)} <span class="text-sm font-normal text-gray-500">€/MWh</span></p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-0">Mercado mayorista (OMIE){#if datos.precios.spot_ts}, cuarto de hora de las {hora(datos.precios.spot_ts)}{/if}</p>
+                            <p class="text-2xl font-bold text-gray-900 dark:text-white mb-0 tabular-nums">{fmt(datos.precios.spot_eur_mwh, 1)} <span class="text-sm font-normal text-gray-500 dark:text-gray-400">€/MWh</span></p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-0">{t('directo.omie', lang)}{#if datos.precios.spot_ts}{t('directo.cuarto', lang)} {hora(datos.precios.spot_ts)}{/if}</p>
                         </div>
                         <div>
-                            <p class="text-2xl font-bold text-gray-900 dark:text-white mb-0 tabular-nums">{fmt(datos.precios.pvpc_eur_mwh, 1)} <span class="text-sm font-normal text-gray-500">€/MWh</span></p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-0">PVPC (tarifa regulada, peajes incluidos){#if datos.precios.pvpc_ts}, hora de las {hora(datos.precios.pvpc_ts)}{/if}</p>
+                            <p class="text-2xl font-bold text-gray-900 dark:text-white mb-0 tabular-nums">{fmt(datos.precios.pvpc_eur_mwh, 1)} <span class="text-sm font-normal text-gray-500 dark:text-gray-400">€/MWh</span></p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mb-0">{t('directo.pvpc', lang)}{#if datos.precios.pvpc_ts}{t('directo.horaDe', lang)} {hora(datos.precios.pvpc_ts)}{/if}</p>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 mb-0">Precio único para toda la Península: España es una sola zona de precio.</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 mb-0">{t('directo.precioUnico', lang)}</p>
                 {:else}
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-0">El precio solo se muestra en directo. Consulta el mercado diario en <a class="underline" href="https://www.omie.es/" target="_blank" rel="noopener">OMIE</a>.</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-0">{t('directo.soloDirecto', lang)} <a class="underline" href="https://www.omie.es/" target="_blank" rel="noopener noreferrer">OMIE<span class="sr-only"> {t('nueva.pestana', lang)}</span></a>.</p>
                 {/if}
             </div>
 
             <!-- Mix del sistema seleccionado (último dato o punto señalado) -->
             <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
                 <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold mb-2">
-                    Mix de {SISTEMAS.find((s) => s.id === seleccion)?.nombre} · {filaMix ? hora(iso(filaMix.ts_utc)) : '—'}
+                    {t('directo.mixDe', lang)} {nomSis(seleccion)} · {filaMix ? hora(iso(filaMix.ts_utc)) : '—'}
                 </p>
                 {#each mixAhora.slice(0, 8) as t (t.k)}
                     <div class="flex items-center gap-2 text-xs mb-1">
-                        <span class="w-32 truncate text-gray-700 dark:text-gray-300">{t.n}</span>
+                        <span class="w-32 truncate text-gray-700 dark:text-gray-300">{nomTec(t.k)}</span>
                         <span class="flex-1 h-2.5 rounded bg-gray-100 dark:bg-gray-800 overflow-hidden"><span class="block h-full" style="width:{((t.v / totalMix) * 100).toFixed(1)}%;background:{t.c}"></span></span>
                         <span class="w-20 text-right tabular-nums text-gray-800 dark:text-gray-200">{fmt(t.v, 0)} MW</span>
                     </div>
                 {:else}
-                    <p class="text-sm text-gray-500 mb-0">Sin datos para este sistema.</p>
+                    <p class="text-sm text-gray-500 mb-0">{t('directo.sinDatosSistema', lang)}</p>
                 {/each}
             </div>
         </div>
@@ -571,15 +582,15 @@
     <!-- Gráfico apilado de 24 h -->
     <div class="mt-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-3">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-            <p class="font-semibold text-gray-900 dark:text-white text-sm mb-0">Generación por tecnología en las últimas 24 horas · {SISTEMAS.find((s) => s.id === seleccion)?.nombre} (MW)</p>
-            <div class="inline-flex flex-wrap rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-xs">
+            <p class="font-semibold text-gray-900 dark:text-white text-sm mb-0">{t('directo.gen24', lang)} · {nomSis(seleccion)} (MW)</p>
+            <div class="inline-flex flex-wrap rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-xs" role="group" aria-label={t('directo.sistemaElectrico', lang)}>
                 {#each SISTEMAS as s (s.id)}
-                    <button class="px-2.5 py-1 {seleccion === s.id ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (seleccion = s.id)}>{s.nombre}</button>
+                    <button type="button" aria-pressed={seleccion === s.id} class="min-h-6 px-2.5 py-1 {seleccion === s.id ? 'bg-teal-800 text-white' : 'bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300'}" on:click={() => (seleccion = s.id)}>{nomSis(s.id)}</button>
                 {/each}
             </div>
         </div>
         {#if serie.length > 1}
-            <svg viewBox="0 0 {GW} {GH}" class="w-full h-auto" role="img" aria-label="Generación apilada por tecnología en las últimas 24 horas" on:mousemove={moverRaton} on:mouseleave={() => (hoverIdx = null)}>
+            <svg viewBox="0 0 {GW} {GH}" class="w-full h-auto" role="img" aria-label={t('directo.gen24.aria', lang)} on:mousemove={moverRaton} on:mouseleave={() => (hoverIdx = null)}>
                 {#each ticksY as v}
                     <line x1={GM.l} x2={GW - GM.r} y1={gy(v)} y2={gy(v)} class="stroke-gray-200 dark:stroke-gray-800" stroke-width="1" />
                     <text x={GM.l - 6} y={gy(v) + 3.5} text-anchor="end" font-size="10" class="fill-gray-500 dark:fill-gray-400">{fmt(v, 0)}</text>
@@ -594,24 +605,24 @@
                 {#if puntoHover}
                     <line x1={gx(puntoHover.ts_utc)} x2={gx(puntoHover.ts_utc)} y1={GM.t} y2={GH - GM.b} class="stroke-gray-700 dark:stroke-gray-300" stroke-width="1" />
                     <text x={Math.min(GW - 120, gx(puntoHover.ts_utc) + 6)} y={GM.t + 12} font-size="10.5" font-weight="600" class="fill-gray-900 dark:fill-gray-100 stroke-white dark:stroke-gray-900" paint-order="stroke" stroke-width="3" stroke-linejoin="round">
-                        {hora(puntoHover.ts_utc)} · demanda {fmt(puntoHover.demanda_mw, 0)} MW · {fmt(puntoHover.pct_renovable, 0)} % renov.
+                        {hora(puntoHover.ts_utc)} · {t('directo.demandaMin', lang)} {fmt(puntoHover.demanda_mw, 0)} MW · {fmt(puntoHover.pct_renovable, 0)} % {t('directo.renovAbr', lang)}
                     </text>
                 {/if}
             </svg>
             <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-600 dark:text-gray-400 mt-1">
                 {#each [...tecnologiasVisibles].reverse() as t (t.k)}
-                    <span class="inline-flex items-center"><span class="inline-block w-3 h-3 rounded-sm mr-1" style="background:{t.c}"></span>{t.n}</span>
+                    <span class="inline-flex items-center"><span class="inline-block w-3 h-3 rounded-sm mr-1" style="background:{t.c}"></span>{nomTec(t.k)}</span>
                 {/each}
-                <span class="inline-flex items-center"><span class="inline-block w-4 border-t-2 border-dashed border-gray-900 dark:border-white mr-1"></span>Demanda</span>
+                <span class="inline-flex items-center"><span class="inline-block w-4 border-t-2 border-dashed border-gray-900 dark:border-white mr-1"></span>{t('directo.demanda', lang)}</span>
             </div>
         {:else}
-            <p class="text-sm text-gray-500 dark:text-gray-400 my-6 text-center">Sin serie de las últimas 24 horas para este sistema.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 my-6 text-center">{t('directo.sinSerie', lang)}</p>
         {/if}
     </div>
 
     <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 mb-0">
-        Fuente: Red Eléctrica (REE), datos provisionales en tiempo real cada 5 minutos.
-        {#if datos.modo === 'directo'}Se actualiza solo cada 5 minutos.{:else if workerUrl && errorDirecto}No se ha podido conectar con el servicio en directo ({errorDirecto}); se muestran los datos de la última actualización del sitio.{/if}
+        {t('directo.fuente', lang)}
+        {#if datos.modo === 'directo'}{t('directo.seActualiza', lang)}{:else if workerUrl && errorDirecto}{t('directo.error.pre', lang)} ({errorDirecto}){t('directo.error.post', lang)}{/if}
     </p>
 </div>
 

@@ -327,6 +327,66 @@
 	--yellow-999: #422006;
 }
 
+/* ─── Accesibilidad (WCAG 2.2 AA) ─────────────────────────────────────────── */
+
+/* Foco visible por teclado en todo lo interactivo. En la capa base para que un
+   componente que ya pinta su propio foco (focus:ring…, outline-none) mande. */
+@layer base {
+	:where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1']), [role='button'], [role='option'], [role='menuitem'], [role='tab']):focus-visible {
+		outline: 2px solid var(--color-primary, #2563eb);
+		outline-offset: 2px;
+	}
+}
+
+/* La cabecera es fija: que el elemento enfocado o el ancla no quede tapado por ella */
+html {
+	scroll-padding-top: 5rem;
+}
+
+/* Enlace "Saltar al contenido": invisible hasta que recibe el foco */
+.saltar-contenido {
+	position: absolute;
+	left: 0.75rem;
+	top: -100px;
+	z-index: 100;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	background: var(--color-primary, #2563eb);
+	color: #ffffff;
+	font-weight: 600;
+	text-decoration: none;
+}
+.saltar-contenido:focus {
+	top: 0.75rem;
+	outline: 2px solid #ffffff;
+	outline-offset: 2px;
+}
+#evidence-main-article:focus {
+	outline: none;
+}
+
+/* Modo oscuro: text-gray-500 sobre el fondo casi negro se queda en ~4:1 (<4.5:1).
+   Donde la página no fija un color oscuro propio (dark:text-…), se aclara a gray-400. */
+.theme-dark .text-gray-500:not([class*='dark:text-']):not([class*='hover:text-']),
+.theme-dark .text-gray-600:not([class*='dark:text-']):not([class*='hover:text-']) {
+	color: var(--color-gray-400, #9ca3af);
+}
+
+/* Quien pide menos movimiento no ve animaciones ni desplazamientos suaves */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto !important;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
 .theme-dark .__evidence-leaflet-tile-layer__ {
 	filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }

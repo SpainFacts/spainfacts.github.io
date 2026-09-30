@@ -1,4 +1,8 @@
 <script>
+    import { localeActual } from "../utils.js";
+    import { page } from "$app/stores";
+    import { idiomaDeRuta, enlace, t, tf } from "../i18n.js";
+    $: lang = idiomaDeRuta($page.url.pathname);
     // Buscador de la portada: al elegir un municipio lleva a su ficha
     // (/territorios/municipios?m=<código INE>). Misma búsqueda sin tildes que
     // BuscadorMunicipio, pero sin publicar ningún input de Evidence.
@@ -24,7 +28,7 @@
               .slice(0, 8);
 
     function ir(op) {
-        if (op) window.location.href = `/territorios/municipios?m=${op.cod_mun}`;
+        if (op) window.location.href = `${enlace("/territorios/municipios", lang)}?m=${op.cod_mun}`;
     }
 
     function tecla(e) {
@@ -37,12 +41,17 @@
 </script>
 
 <div class="relative w-full max-w-xl">
-    <label for="buscador-inicio" class="sr-only">Busca tu municipio</label>
+    <label for="buscador-inicio" class="sr-only">{t('buscador.label', lang)}</label>
     <input
         id="buscador-inicio"
         type="search"
         autocomplete="off"
-        placeholder="Escribe tu municipio: población, cuentas, quién gobierna…"
+        placeholder={t('buscador.inicio.ph', lang)}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={abierto && resultados.length > 0}
+        aria-controls="buscador-inicio-lista"
+        aria-activedescendant={abierto && resultados.length ? `buscador-inicio-op-${activo}` : undefined}
         class="w-full rounded-xl border-0 bg-white/95 px-5 py-3.5 text-base text-gray-900 shadow-lg placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-400/50"
         bind:value={texto}
         on:input={() => { abierto = true; activo = 0; }}
@@ -50,17 +59,20 @@
         on:blur={() => setTimeout(() => (abierto = false), 150)}
         on:keydown={tecla}
     />
+    <!-- Número de resultados para lectores de pantalla -->
+    <span class="sr-only" role="status">{consulta.length >= 2 ? tf('buscador.encontrados', lang, { n: resultados.length }) : ''}</span>
     {#if abierto && resultados.length}
-        <ul class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl bg-white text-left shadow-2xl ring-1 ring-black/5 dark:bg-gray-900 dark:ring-white/10">
+        <ul id="buscador-inicio-lista" role="listbox" aria-label={t('buscador.municipios', lang)} class="absolute z-20 mt-2 w-full overflow-hidden rounded-xl bg-white text-left shadow-2xl ring-1 ring-black/5 dark:bg-gray-900 dark:ring-white/10">
             {#each resultados as op, i}
-                <li>
+                <li id="buscador-inicio-op-{i}" role="option" aria-selected={i === activo}>
                     <button
                         type="button"
+                        tabindex="-1"
                         class="flex w-full items-baseline justify-between gap-3 px-4 py-2.5 text-left text-sm {i === activo ? 'bg-blue-50 dark:bg-blue-950/50' : ''} hover:bg-blue-50 dark:hover:bg-blue-950/50"
                         on:mousedown|preventDefault={() => ir(op)}
                     >
                         <span class="font-semibold text-gray-900 dark:text-white">{op.municipio}</span>
-                        <span class="text-xs text-gray-500">{op.provincia} · {Number(op.poblacion ?? 0).toLocaleString('es-ES')} hab.</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400">{op.provincia} · {Number(op.poblacion ?? 0).toLocaleString(localeActual())} {t('hab', lang)}</span>
                     </button>
                 </li>
             {/each}

@@ -226,23 +226,23 @@ Salario medio mensual bruto descontada la inflación. [Crecimiento, sectores y d
 
 <Grid cols=3>
     <a href="/economia/comercio-exterior" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold">🚢 Comercio exterior</div>
+        <div class="font-semibold"><span aria-hidden="true">🚢</span> Comercio exterior</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Exportaciones, importaciones y saldo exterior sobre el PIB</div>
     </a>
     <a href="/economia/paro" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold">👷 Paro</div>
+        <div class="font-semibold"><span aria-hidden="true">👷</span> Paro</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Serie histórica de la EPA</div>
     </a>
     <a href="/economia/ipc" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold">🛒 Inflación</div>
+        <div class="font-semibold"><span aria-hidden="true">🛒</span> Inflación</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Índice de precios de consumo y precio de la energía</div>
     </a>
     <a href="/economia/turismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold">🏖️ Turismo</div>
+        <div class="font-semibold"><span aria-hidden="true">🏖️</span> Turismo</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Turistas por habitante, su gasto real y en % del PIB, hoteles y viviendas turísticas</div>
     </a>
     <a href="/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold">🏢 Empresas, emprendimiento e I+D</div>
+        <div class="font-semibold"><span aria-hidden="true">🏢</span> Empresas, emprendimiento e I+D</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Empresas por habitante y tamaño, sociedades creadas y disueltas, concursos, autónomos y gasto en I+D frente a Europa</div>
     </a>
 </Grid>

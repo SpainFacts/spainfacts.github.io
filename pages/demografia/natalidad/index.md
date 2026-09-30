@@ -5,6 +5,7 @@ description: "Nacimientos y defunciones por 1.000 habitantes, hijos por mujer, e
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -75,6 +76,14 @@ Cuántos niños nacen en España en relación con su población, cuántos hijos 
         sparklineData={anual.filter(d => d.pct_madre_extranjera !== null).map(d => ({anio: d.anio, valor: d.pct_madre_extranjera}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id IN ('fecundidad')
+```
+
+<Comparativa data={comparativa_internacional.filter(d => d.indicador_id === 'fecundidad')} />
+
 
 <p class="text-xs text-gray-500">Las tasas se calculan sobre la población media del año. El indicador coyuntural de fecundidad es el número medio de hijos que tendría una mujer a lo largo de su vida si se mantuvieran las tasas de fecundidad por edad de ese año; para que una población se mantenga sin migración hacen falta unos 2,1.</p>
 
