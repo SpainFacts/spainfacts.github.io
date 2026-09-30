@@ -35,6 +35,7 @@ from ingestion.clima import clima
 from ingestion.demografia import demografia
 from ingestion.educacion import educacion
 from ingestion.elecciones import elecciones
+from ingestion.internacional import internacional
 from ingestion.mercado import mercado
 from ingestion.pensiones import pensiones
 from ingestion.renta import renta
@@ -310,13 +311,20 @@ def elecciones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltRe
     yield from dlt_resource.run(context=context)
 
 
+# Comparativa internacional: Banco Mundial (WDI), deuda del FMI, Ember y ONU Turismo (OWID) y Eurostat,
+# para España, Francia, Portugal, Alemania, Italia, Marruecos, EE. UU., China, UE y OCDE.
+@dlt_assets(dlt_source=internacional(), dlt_pipeline=_pipeline_motherduck("internacional"), name="internacional", group_name="ingesta_mensual")
+def internacional_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "mercado", "pensiones", "renta", "sanidad", "turismo", "vivienda"}
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "turismo", "vivienda"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -387,7 +395,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_internacional
+    description: "Comparativa internacional: Banco Mundial (WDI), FMI (WEO), Our World in Data (Ember y ONU Turismo) y Eurostat, para España, Francia, Portugal, Marruecos, EE. UU., China, Alemania, Italia, UE y OCDE (ingestion/internacional.py)"
+    schema: raw
+    tables:
+      - name: internacional_banco_mundial
+        description: "Banco Mundial WDI, formato largo: indicador_id, cod_indicador (WDI), cod_pais (ISO3 o EUU/OED), anio, valor. EUU y OED son agregados ponderados del Banco Mundial."
+      - name: internacional_fmi
+        description: "FMI WEO (DataMapper GGXWDG_NGDP): deuda bruta de las AAPP en % del PIB. Incluye previsiones (se descartan en staging). EUU = agregado 'EU' del FMI."
+      - name: internacional_owid
+        description: "Our World in Data: % de electricidad renovable (Ember) y llegadas de turistas internacionales con pernoctación (ONU Turismo). EUU = 'European Union (27)', OED = 'OECD (Ember)'."
+      - name: internacional_eurostat
+        description: "Eurostat, países de la UE y UE-27: tasa de riesgo de pobreza (ilc_li02, 60 % de la mediana; año de encuesta) y % de 25-64 años con estudios terciarios (edat_lfse_03)."

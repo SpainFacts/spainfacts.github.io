@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: internacional_comparativa
+    description: >
+      España frente a Francia, Portugal, Alemania, Italia, Marruecos, Estados Unidos,
+      China, la Unión Europea (EUU) y la OCDE (OED), en formato largo por indicador,
+      país y año: ~34 indicadores de economía, empleo, población, salud, educación,
+      desigualdad, seguridad, energía y clima. Fuente principal Banco Mundial (WDI;
+      sus agregados UE y OCDE están ponderados, no son medias simples); deuda pública
+      del FMI (sin OCDE), electricidad renovable (Ember) y turistas (ONU Turismo) vía
+      Our World in Data, riesgo de pobreza y estudios superiores de Eurostat (solo UE).
+      sentido: 'positivo' (más es mejor), 'negativo' (más es peor) o 'neutro'.
+    columns:
+      - name: indicador_id
+        tests: [not_null]
+      - name: cod_pais
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ESP', 'FRA', 'PRT', 'MAR', 'USA', 'CHN', 'EUU', 'OED', 'DEU', 'ITA']
+      - name: anio
+        tests: [not_null]
+      - name: valor
+        tests: [not_null]
+      - name: sentido
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['positivo', 'negativo', 'neutro']
+  - name: internacional_ultimo
+    description: >
+      Último año con dato de cada indicador y país de internacional_comparativa
+      (anio_ultimo), con el valor de España en ese mismo año
+      (valor_espana_mismo_anio) para comparar sin mezclar años. Ojo: algunos
+      agregados se quedan muy atrás (homicidios UE/OCDE en 2015).
+    columns:
+      - name: indicador_id
+        tests: [not_null]
+      - name: cod_pais
+        tests: [not_null]

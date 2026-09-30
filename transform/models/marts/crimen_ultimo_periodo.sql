@@ -1,5 +1,7 @@
 -- Último trimestre publicado del Balance de Criminalidad: acumulado del año en
 -- curso frente al mismo periodo del año anterior, por territorio y categoría.
+-- Uniprovinciales, Ceuta y Melilla vienen solo como comunidad: se copian
+-- también al nivel provincia con su código INE.
 with parcial as (
     select * from {{ ref('crimen_balance_base') }}
     where periodo <> 'enero-diciembre'
@@ -32,8 +34,9 @@ base as (
     where t.categoria is not null
       and b.periodo = (select periodo from tramo)
       and b.anio in ((select anio from ultimo), (select anio - 1 from ultimo))
-)
+),
 
+final as (
 select
     (select anio from ultimo) as anio,
     (select periodo from tramo) as periodo,
@@ -46,3 +49,6 @@ select
 from base
 where cod is not null and nivel in ('pais', 'ccaa', 'provincia', 'municipio')
 group by all
+)
+
+{{ con_uniprovinciales('final', ['anio', 'periodo', 'categoria']) }}
