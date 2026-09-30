@@ -3,7 +3,7 @@ title: Habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació, lloguer, compravendes i hipoteques per 1.000 habitants, obra nova i quants anys de salari costa una casa, per comunitat i província."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 08a20482592f
+i18n_origen: a02abfec5da9
 ---
 
 <script>
@@ -232,6 +232,10 @@ Preu real del metre quadrat en l'últim trimestre. Fes clic en una comunitat per
     <a href="/ca/vivienda/esfuerzo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Esforç</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Quants anys de salari costa un habitatge i quina part del sou se'n va en el lloguer, per comunitat.</p>
+    </a>
+    <a href="/ca/vivienda/vivienda-publica" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏘️</span> Habitatge públic de lloguer</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Habitatges públics de lloguer per 1.000 habitants per comunitat, província i municipi, davant dels Països Baixos, Àustria, França i la mitjana europea, i per partit.</p>
     </a>
 </div>
 

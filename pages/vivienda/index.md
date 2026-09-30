@@ -232,6 +232,10 @@ Precio real del metro cuadrado en el último trimestre. Pulsa en una comunidad p
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Esfuerzo</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuántos años de salario cuesta una vivienda y qué parte del sueldo se va en el alquiler, por comunidad.</p>
     </a>
+    <a href="/vivienda/vivienda-publica" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏘️</span> Vivienda pública en alquiler</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viviendas públicas en alquiler por 1.000 habitantes por comunidad, provincia y municipio, frente a Países Bajos, Austria, Francia y la media europea, y por partido.</p>
+    </a>
 </div>
 
 ---

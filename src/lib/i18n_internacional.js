@@ -4,6 +4,7 @@
 
 export const INDICADORES_INT = {
     en: {
+        vivienda_social_pct: ['Social rental housing', '% of total housing stock'],
         actividad_femenina: ['Female activity rate (15 and over)', '% of women aged 15 and over'],
         camas: ['Hospital beds', 'per 1,000 inhabitants'],
         co2_pc: ['CO2 emissions per capita (excl. LULUCF)', 't CO2 per capita'],
@@ -42,6 +43,7 @@ export const INDICADORES_INT = {
         coche_electrico_cuota: ['Electric cars in new car sales', '% of new cars (battery electric and plug-in hybrids)']
     },
     ca: {
+        vivienda_social_pct: 'Habitatge social de lloguer',
         actividad_femenina: "Taxa d'activitat femenina (15 anys o més)", camas: 'Llits hospitalaris',
         co2_pc: "Emissions de CO2 per habitant (sense LULUCF)", consumo_electrico_pc: 'Consum elèctric per habitant',
         crecimiento_pib: 'Creixement del PIB real', crecimiento_poblacion: 'Creixement de la població',
@@ -60,6 +62,7 @@ export const INDICADORES_INT = {
         coche_electrico_cuota: ['Cotxes elèctrics en les vendes de turismes nous', '% dels turismes nous (elèctrics purs i híbrids endollables)']
     },
     gl: {
+        vivienda_social_pct: 'Vivenda social en aluguer',
         actividad_femenina: 'Taxa de actividade feminina (15 anos ou máis)', camas: 'Camas de hospital',
         co2_pc: 'Emisións de CO2 por habitante (sen LULUCF)', consumo_electrico_pc: 'Consumo eléctrico por habitante',
         crecimiento_pib: 'Crecemento do PIB real', crecimiento_poblacion: 'Crecemento da poboación',
@@ -78,6 +81,7 @@ export const INDICADORES_INT = {
         coche_electrico_cuota: ['Coches eléctricos nas vendas de turismos novos', '% dos turismos novos (eléctricos puros e híbridos enchufables)']
     },
     eu: {
+        vivienda_social_pct: 'Alokairuko gizarte-etxebizitza',
         actividad_femenina: 'Emakumeen jarduera-tasa (15 urte edo gehiago)', camas: 'Ospitaleko oheak',
         co2_pc: 'CO2 isurketak biztanleko (LULUCF gabe)', consumo_electrico_pc: 'Elektrizitate-kontsumoa biztanleko',
         crecimiento_pib: 'BPG errealaren hazkundea', crecimiento_poblacion: 'Biztanleriaren hazkundea',
@@ -99,16 +103,16 @@ export const INDICADORES_INT = {
 
 // Unidades en catalán, gallego y euskera: sustituciones de las palabras frecuentes
 const UNIDADES = {
-    ca: [['% de la población activa de 15 a 24 años', '% de la població activa de 15 a 24 anys'], ['% de la población activa', '% de la població activa'], ['% de las mujeres de 15 años o más', '% de les dones de 15 anys o més'], ['% de la población de 25 a 64 años', '% de la població de 25 a 64 anys'], ['% de la población de 25 años o más', '% de la població de 25 anys o més'], ['% de la población de 15 años o más', '% de la població de 15 anys o més'], ['% de la población', '% de la població'], ['% de la generación eléctrica', '% de la generació elèctrica'], ['% del PIB', '% del PIB'], ['% anual', '% anual'], ['por 1.000 habitantes', 'per 1.000 habitants'], ['por 100.000 habitantes', 'per 100.000 habitants'], ['por habitante', 'per habitant'], ['hijos por mujer', 'fills per dona'], ['años', 'anys'], ['personas', 'persones'], ['turistas', 'turistes'], ['muertes de menores de 1 año por 1.000 nacidos vivos', 'morts de menors d\'1 any per 1.000 nascuts vius'], ['dólares internacionales', 'dòlars internacionals'], ['corrientes', 'corrents'], ['índice', 'índex']],
-    gl: [['% de la población activa de 15 a 24 años', '% da poboación activa de 15 a 24 anos'], ['% de la población activa', '% da poboación activa'], ['% de las mujeres de 15 años o más', '% das mulleres de 15 anos ou máis'], ['% de la población de 25 a 64 años', '% da poboación de 25 a 64 anos'], ['% de la población de 25 años o más', '% da poboación de 25 anos ou máis'], ['% de la población de 15 años o más', '% da poboación de 15 anos ou máis'], ['% de la población', '% da poboación'], ['% de la generación eléctrica', '% da xeración eléctrica'], ['por 1.000 habitantes', 'por 1.000 habitantes'], ['hijos por mujer', 'fillos por muller'], ['años', 'anos'], ['personas', 'persoas'], ['muertes de menores de 1 año por 1.000 nacidos vivos', 'mortes de menores de 1 ano por 1.000 nados vivos'], ['dólares internacionales', 'dólares internacionais'], ['corrientes', 'correntes']],
-    eu: [['% de la población activa de 15 a 24 años', '15-24 urteko biztanle aktiboen %'], ['% de la población activa', 'biztanle aktiboen %'], ['% de las mujeres de 15 años o más', '15 urte edo gehiagoko emakumeen %'], ['% de la población de 25 a 64 años', '25-64 urteko biztanleen %'], ['% de la población de 25 años o más', '25 urte edo gehiagoko biztanleen %'], ['% de la población de 15 años o más', '15 urte edo gehiagoko biztanleen %'], ['% de la población', 'biztanleriaren %'], ['% de la generación eléctrica', 'sorkuntza elektrikoaren %'], ['% del PIB', 'BPGaren %'], ['% anual', '% urtean'], ['por 1.000 habitantes', '1.000 biztanleko'], ['por 100.000 habitantes', '100.000 biztanleko'], ['por habitante', 'biztanleko'], ['hijos por mujer', 'seme-alaba emakumeko'], ['años', 'urte'], ['personas', 'pertsona'], ['turistas', 'turista'], ['muertes de menores de 1 año por 1.000 nacidos vivos', '1 urtetik beherakoen heriotzak 1.000 jaiotza biziko'], ['dólares internacionales', 'nazioarteko dolar'], ['corrientes', 'korronte'], ['índice', 'indizea']]
+    ca: [['% del parque total de viviendas', "% del parc total d'habitatges"], ['% de la población activa de 15 a 24 años', '% de la població activa de 15 a 24 anys'], ['% de la población activa', '% de la població activa'], ['% de las mujeres de 15 años o más', '% de les dones de 15 anys o més'], ['% de la población de 25 a 64 años', '% de la població de 25 a 64 anys'], ['% de la población de 25 años o más', '% de la població de 25 anys o més'], ['% de la población de 15 años o más', '% de la població de 15 anys o més'], ['% de la población', '% de la població'], ['% de la generación eléctrica', '% de la generació elèctrica'], ['% del PIB', '% del PIB'], ['% anual', '% anual'], ['por 1.000 habitantes', 'per 1.000 habitants'], ['por 100.000 habitantes', 'per 100.000 habitants'], ['por habitante', 'per habitant'], ['hijos por mujer', 'fills per dona'], ['años', 'anys'], ['personas', 'persones'], ['turistas', 'turistes'], ['muertes de menores de 1 año por 1.000 nacidos vivos', 'morts de menors d\'1 any per 1.000 nascuts vius'], ['dólares internacionales', 'dòlars internacionals'], ['corrientes', 'corrents'], ['índice', 'índex']],
+    gl: [['% del parque total de viviendas', '% do parque total de vivendas'], ['% de la población activa de 15 a 24 años', '% da poboación activa de 15 a 24 anos'], ['% de la población activa', '% da poboación activa'], ['% de las mujeres de 15 años o más', '% das mulleres de 15 anos ou máis'], ['% de la población de 25 a 64 años', '% da poboación de 25 a 64 anos'], ['% de la población de 25 años o más', '% da poboación de 25 anos ou máis'], ['% de la población de 15 años o más', '% da poboación de 15 anos ou máis'], ['% de la población', '% da poboación'], ['% de la generación eléctrica', '% da xeración eléctrica'], ['por 1.000 habitantes', 'por 1.000 habitantes'], ['hijos por mujer', 'fillos por muller'], ['años', 'anos'], ['personas', 'persoas'], ['muertes de menores de 1 año por 1.000 nacidos vivos', 'mortes de menores de 1 ano por 1.000 nados vivos'], ['dólares internacionales', 'dólares internacionais'], ['corrientes', 'correntes']],
+    eu: [['% del parque total de viviendas', 'etxebizitza-parke osoaren %'], ['% de la población activa de 15 a 24 años', '15-24 urteko biztanle aktiboen %'], ['% de la población activa', 'biztanle aktiboen %'], ['% de las mujeres de 15 años o más', '15 urte edo gehiagoko emakumeen %'], ['% de la población de 25 a 64 años', '25-64 urteko biztanleen %'], ['% de la población de 25 años o más', '25 urte edo gehiagoko biztanleen %'], ['% de la población de 15 años o más', '15 urte edo gehiagoko biztanleen %'], ['% de la población', 'biztanleriaren %'], ['% de la generación eléctrica', 'sorkuntza elektrikoaren %'], ['% del PIB', 'BPGaren %'], ['% anual', '% urtean'], ['por 1.000 habitantes', '1.000 biztanleko'], ['por 100.000 habitantes', '100.000 biztanleko'], ['por habitante', 'biztanleko'], ['hijos por mujer', 'seme-alaba emakumeko'], ['años', 'urte'], ['personas', 'pertsona'], ['turistas', 'turista'], ['muertes de menores de 1 año por 1.000 nacidos vivos', '1 urtetik beherakoen heriotzak 1.000 jaiotza biziko'], ['dólares internacionales', 'nazioarteko dolar'], ['corrientes', 'korronte'], ['índice', 'indizea']]
 };
 
 const FUENTES = {
-    en: [['Banco Mundial', 'World Bank'], ['estimación modelizada OIT', 'ILO modelled estimate'], ['FMI', 'IMF'], ['AIE', 'IEA']],
+    en: [['OCDE', 'OECD'], ['Banco Mundial', 'World Bank'], ['estimación modelizada OIT', 'ILO modelled estimate'], ['FMI', 'IMF'], ['AIE', 'IEA']],
     ca: [['Banco Mundial', 'Banc Mundial'], ['estimación modelizada OIT', 'estimació modelitzada OIT']],
     gl: [['Banco Mundial', 'Banco Mundial'], ['estimación modelizada OIT', 'estimación modelizada OIT']],
-    eu: [['Banco Mundial', 'Munduko Bankua'], ['estimación modelizada OIT', 'LANEren eredu-estimazioa'], ['FMI', 'NDF'], ['AIE', 'IEA']]
+    eu: [['OCDE', 'ELGA'], ['Banco Mundial', 'Munduko Bankua'], ['estimación modelizada OIT', 'LANEren eredu-estimazioa'], ['FMI', 'NDF'], ['AIE', 'IEA']]
 };
 
 const sustituir = (texto, pares) => (pares ?? []).reduce((t, [a, b]) => t.split(a).join(b), texto ?? '');

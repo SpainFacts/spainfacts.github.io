@@ -1,7 +1,7 @@
 ---
 title: Housing
 description: "House prices in Spain adjusted for inflation, rents, sales and mortgages per 1,000 inhabitants, new builds and how many years of salary a home costs, by region and province."
-i18n_origen: 08a20482592f
+i18n_origen: a02abfec5da9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -232,6 +232,10 @@ Real price per square metre in the latest quarter. Click on a region to see its 
     <a href="/en/vivienda/esfuerzo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Affordability</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How many years of salary a home costs and what share of pay goes on rent, by region.</p>
+    </a>
+    <a href="/en/vivienda/vivienda-publica" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏘️</span> Public rental housing</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Public rental homes per 1,000 inhabitants by region, province and municipality, compared with the Netherlands, Austria, France and the European average, and by party.</p>
     </a>
 </div>
 

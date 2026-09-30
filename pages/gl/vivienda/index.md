@@ -1,7 +1,7 @@
 ---
 title: Vivenda
 description: "Prezo da vivenda en España descontada a inflación, aluguer, compravendas e hipotecas por 1.000 habitantes, obra nova e cantos anos de salario custa unha casa, por comunidade e provincia."
-i18n_origen: 08a20482592f
+i18n_origen: a02abfec5da9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -232,6 +232,10 @@ Prezo real do metro cadrado no último trimestre. Preme nunha comunidade para ve
     <a href="/gl/vivienda/esfuerzo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Esforzo</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cantos anos de salario custa unha vivenda e que parte do soldo se vai no aluguer, por comunidade.</p>
+    </a>
+    <a href="/gl/vivienda/vivienda-publica" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏘️</span> Vivenda pública en aluguer</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Vivendas públicas en aluguer por 1.000 habitantes por comunidade, provincia e municipio, fronte aos Países Baixos, Austria, Francia e a media europea, e por partido.</p>
     </a>
 </div>
 

@@ -3,7 +3,7 @@ title: Etxebizitza
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta, alokairua, salerosketak eta hipotekak 1.000 biztanleko, obra berria eta etxe batek zenbat urteko soldata balio duen, erkidego eta probintziaka."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 08a20482592f
+i18n_origen: a02abfec5da9
 ---
 
 <script>
@@ -239,6 +239,10 @@ Metro koadroaren prezio erreala azken hiruhilekoan. Sakatu erkidego batean haren
     <a href="/eu/vivienda/esfuerzo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚖️</span> Ahalegina</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Etxebizitza batek zenbat urteko soldata balio duen eta soldataren zer zati joaten den alokairura, erkidegoka.</p>
+    </a>
+    <a href="/eu/vivienda/vivienda-publica" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-amber-400 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏘️</span> Alokairuko etxebizitza publikoa</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Alokairuko etxebizitza publikoak 1.000 biztanleko, erkidego, probintzia eta udalerriaren arabera, Herbehereekin, Austriarekin, Frantziarekin eta Europako batez bestekoarekin alderatuta, eta alderdika.</p>
     </a>
 </div>
 
