@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: transparencia_internacional
+    description: >
+      España frente a otros países en índices internacionales de corrupción, integridad y
+      gobierno abierto, formato largo por indicador, país y año: Índice de Percepción de la
+      Corrupción (Transparency International, desde 2012), Worldwide Governance Indicators del
+      Banco Mundial (control de la corrupción, voz y rendición de cuentas, eficacia del
+      gobierno, Estado de derecho; desde 1996), V-Dem (corrupción política y en el sector
+      público; desde 1970) y World Justice Project (Estado de derecho y factores de límites al
+      poder, ausencia de corrupción y gobierno abierto; desde 2013). Países de la UE-27 y la
+      OCDE más Marruecos y China; EUU y OED son medias simples de los miembros actuales, solo
+      en WGI y V-Dem (el CPI y el WJP tienen licencia sin obras derivadas). Incluye el puesto
+      de cada país entre los de la UE y la OCDE con dato ese año.
+    columns:
+      - name: indicador_id
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['cpi', 'wgi_control_corrupcion', 'wgi_voz_rendicion_cuentas', 'wgi_eficacia_gobierno',
+                         'wgi_estado_derecho', 'vdem_corrupcion_politica', 'vdem_corrupcion_sector_publico',
+                         'wjp_estado_derecho', 'wjp_ausencia_corrupcion', 'wjp_gobierno_abierto', 'wjp_limites_gobierno']
+      - name: cod_pais
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: valor
+        tests: [not_null]
+      - name: sentido
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['positivo', 'negativo']
+    tests:
+      - unique:
+          column_name: "indicador_id || '|' || cod_pais || '|' || anio"

@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_transparencia_internacional
+    description: "Índices internacionales de corrupción, integridad y gobierno abierto, todos los países (ingestion/transparencia_internacional.py)"
+    schema: raw
+    tables:
+      - name: transparencia_int_cpi
+        description: "Transparency International, Índice de Percepción de la Corrupción (CPI) desde 2012 (hoja «CPI Timeseries» del Excel anual; CC BY-ND 4.0): cod_pais (ISO3), anio, valor (0-100, 100 = muy limpio), puesto (mundial, desde 2017), n_fuentes, error_estandar, edicion."
+      - name: transparencia_int_wgi
+        description: "Banco Mundial, Worldwide Governance Indicators (API v2, fuente 3; CC BY 4.0): puntuación 0-100 (.SC) y su intervalo de confianza del 90 % (valor_min, valor_max) de control de la corrupción, voz y rendición de cuentas, eficacia del gobierno y Estado de derecho."
+      - name: transparencia_int_vdem
+        description: "V-Dem vía Our World in Data (CC BY-SA 4.0 / CC BY 4.0): índices de corrupción política y de corrupción en el sector público (0-1, 1 = máxima corrupción), serie larga."
+      - name: transparencia_int_wjp
+        description: "World Justice Project, Rule of Law Index (Excel histórico; CC BY-NC-ND 4.0): puntuación global y factores 1 (límites al poder), 2 (ausencia de corrupción) y 3 (gobierno abierto), 0-1. Las ediciones 2012-2013 y 2017-2018 se asignan al segundo año (edicion_fuente guarda la etiqueta original)."

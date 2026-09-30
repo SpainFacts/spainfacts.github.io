@@ -36,6 +36,7 @@ from ingestion.demografia import demografia
 from ingestion.educacion import educacion
 from ingestion.elecciones import elecciones
 from ingestion.internacional import internacional
+from ingestion.transparencia_internacional import transparencia_internacional
 from ingestion.mercado import mercado
 from ingestion.pensiones import pensiones
 from ingestion.renta import renta
@@ -44,6 +45,7 @@ from ingestion.turismo import turismo
 from ingestion.vivienda import vivienda
 from ingestion.hacienda_ccaa import hacienda_ccaa
 from ingestion.hacienda_transparencia import hacienda_transparencia
+from ingestion.transparencia_gobierno import transparencia_gobierno
 from ingestion.destino import es_local
 from ingestion.dgt import dgt
 from ingestion.destino import pipeline as pipeline_destino
@@ -317,6 +319,19 @@ def elecciones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltRe
 def internacional_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
     yield from dlt_resource.run(context=context)
 
+# Rendición de cuentas del Gobierno de España: decretos-ley (y su convalidación), leyes,
+# presupuestos e indultos sacados de los sumarios diarios del BOE (carga incremental).
+@dlt_assets(dlt_source=transparencia_gobierno(), dlt_pipeline=_pipeline_motherduck("transparencia_gobierno"), name="transparencia_gobierno", group_name="ingesta")
+def transparencia_gobierno_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Índices internacionales de corrupción, integridad y gobierno abierto: CPI (Transparency International),
+# WGI (Banco Mundial), V-Dem (vía OWID) y Rule of Law Index (World Justice Project), todos los países.
+@dlt_assets(dlt_source=transparencia_internacional(), dlt_pipeline=_pipeline_motherduck("transparencia_internacional"), name="transparencia_internacional", group_name="ingesta_mensual")
+def transparencia_internacional_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
 
 # --- Transformación: dbt --------------------------------------------------
 
@@ -324,7 +339,7 @@ dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "turismo", "vivienda"}
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -395,7 +410,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

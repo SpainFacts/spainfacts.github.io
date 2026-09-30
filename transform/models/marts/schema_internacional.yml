@@ -4,9 +4,13 @@ models:
   - name: internacional_comparativa
     description: >
       España frente a Francia, Portugal, Alemania, Italia, Marruecos, Estados Unidos,
-      China, la Unión Europea (EUU) y la OCDE (OED), en formato largo por indicador,
-      país y año: ~34 indicadores de economía, empleo, población, salud, educación,
-      desigualdad, seguridad, energía y clima. Fuente principal Banco Mundial (WDI;
+      China, la Unión Europea (EUU) y la OCDE (OED), más los países de referencia
+      Noruega, Dinamarca, Suecia, Países Bajos, Grecia, Japón, Corea del Sur e Israel
+      (es_referencia; la web solo los enseña en los indicadores donde son un caso
+      emblemático, src/lib/paisesReferencia.js), en formato largo por indicador,
+      país y año: ~36 indicadores de economía, empleo, población, salud, educación,
+      desigualdad, seguridad, energía, clima y movilidad (electrificación del consumo
+      final, de Eurostat; cuota de coches eléctricos en ventas, de la AIE). Fuente principal Banco Mundial (WDI;
       sus agregados UE y OCDE están ponderados, no son medias simples); deuda pública
       del FMI (sin OCDE), electricidad renovable (Ember) y turistas (ONU Turismo) vía
       Our World in Data, riesgo de pobreza y estudios superiores de Eurostat (solo UE).
@@ -19,7 +23,8 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['ESP', 'FRA', 'PRT', 'MAR', 'USA', 'CHN', 'EUU', 'OED', 'DEU', 'ITA']
+                values: ['ESP', 'FRA', 'PRT', 'MAR', 'USA', 'CHN', 'EUU', 'OED', 'DEU', 'ITA',
+                         'NOR', 'DNK', 'SWE', 'NLD', 'GRC', 'JPN', 'KOR', 'ISR']
       - name: anio
         tests: [not_null]
       - name: valor

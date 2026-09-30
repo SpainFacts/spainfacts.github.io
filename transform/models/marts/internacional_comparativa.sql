@@ -1,9 +1,13 @@
 -- España frente a otros países y agregados, formato largo: una fila por
 -- indicador, país y año. Países: España, Francia, Portugal, Marruecos,
 -- Estados Unidos, China, Alemania e Italia; agregados: Unión Europea (EUU) y
--- OCDE (OED). Los agregados del Banco Mundial están ponderados (por población,
+-- OCDE (OED); y países de referencia que la web solo muestra en los indicadores
+-- donde son un caso emblemático (src/lib/paisesReferencia.js): Noruega,
+-- Dinamarca, Suecia, Países Bajos, Grecia, Japón, Corea del Sur e Israel
+-- (es_referencia = true). Los agregados del Banco Mundial están ponderados (por población,
 -- PIB...), no son medias simples de países. Los indicadores de Eurostat solo
--- tienen países de la UE y la UE-27; la deuda del FMI no tiene agregado OCDE.
+-- tienen países europeos y la UE-27; la deuda del FMI no tiene agregado OCDE;
+-- los coches eléctricos de la AIE no tienen OCDE ni Marruecos.
 -- sentido: 'positivo' si un valor mayor es mejor, 'negativo' si es peor,
 -- 'neutro' si no tiene lectura clara.
 with catalogo (indicador_id, nombre, unidad, apartado, sentido, fuente, url_fuente) as (
@@ -41,21 +45,31 @@ with catalogo (indicador_id, nombre, unidad, apartado, sentido, fuente, url_fuen
     ('gei_pc', 'Emisiones de gases de efecto invernadero por habitante (sin LULUCF)', 't CO2 equivalente por habitante', 'Energía y clima', 'negativo', 'Banco Mundial (WDI, EDGAR)', 'https://data.worldbank.org/indicator/EN.GHG.ALL.PC.CE.AR5'),
     ('co2_pc', 'Emisiones de CO2 por habitante (sin LULUCF)', 't CO2 por habitante', 'Energía y clima', 'negativo', 'Banco Mundial (WDI, EDGAR)', 'https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5'),
     ('electricidad_renovable', 'Electricidad de origen renovable', '% de la generación eléctrica', 'Energía y clima', 'positivo', 'Ember vía Our World in Data', 'https://ourworldindata.org/grapher/share-electricity-renewables'),
-    ('consumo_electrico_pc', 'Consumo eléctrico por habitante', 'kWh por habitante', 'Energía y clima', 'neutro', 'Banco Mundial (WDI)', 'https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC')
+    ('consumo_electrico_pc', 'Consumo eléctrico por habitante', 'kWh por habitante', 'Energía y clima', 'neutro', 'Banco Mundial (WDI)', 'https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC'),
+    ('electrificacion', 'Electricidad en el consumo final de energía', '% del consumo final de energía', 'Energía y clima', 'positivo', 'Eurostat (balances energéticos, nrg_bal_c)', 'https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table'),
+    ('coche_electrico_cuota', 'Coches eléctricos en las ventas de turismos nuevos', '% de los turismos nuevos (eléctricos puros e híbridos enchufables)', 'Movilidad', 'positivo', 'AIE (Global EV Data Explorer)', 'https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer')
 ),
 
-paises (cod_pais, pais, es_agregado, orden_pais) as (
+paises (cod_pais, pais, es_agregado, es_referencia, orden_pais) as (
     values
-    ('ESP', 'España', false, 1),
-    ('EUU', 'Unión Europea', true, 2),
-    ('OED', 'OCDE', true, 3),
-    ('FRA', 'Francia', false, 4),
-    ('DEU', 'Alemania', false, 5),
-    ('ITA', 'Italia', false, 6),
-    ('PRT', 'Portugal', false, 7),
-    ('MAR', 'Marruecos', false, 8),
-    ('USA', 'Estados Unidos', false, 9),
-    ('CHN', 'China', false, 10)
+    ('ESP', 'España', false, false, 1),
+    ('EUU', 'Unión Europea', true, false, 2),
+    ('OED', 'OCDE', true, false, 3),
+    ('FRA', 'Francia', false, false, 4),
+    ('DEU', 'Alemania', false, false, 5),
+    ('ITA', 'Italia', false, false, 6),
+    ('PRT', 'Portugal', false, false, 7),
+    ('MAR', 'Marruecos', false, false, 8),
+    ('USA', 'Estados Unidos', false, false, 9),
+    ('CHN', 'China', false, false, 10),
+    ('NOR', 'Noruega', false, true, 11),
+    ('DNK', 'Dinamarca', false, true, 12),
+    ('SWE', 'Suecia', false, true, 13),
+    ('NLD', 'Países Bajos', false, true, 14),
+    ('GRC', 'Grecia', false, true, 15),
+    ('JPN', 'Japón', false, true, 16),
+    ('KOR', 'Corea del Sur', false, true, 17),
+    ('ISR', 'Israel', false, true, 18)
 )
 
 select
@@ -66,6 +80,7 @@ select
     s.cod_pais,
     p.pais,
     p.es_agregado,
+    p.es_referencia,
     p.orden_pais,
     s.anio,
     cast(s.valor as double) as valor,

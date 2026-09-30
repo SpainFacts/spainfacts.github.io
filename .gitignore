@@ -49,3 +49,7 @@ transform/target_*/
 
 # tools/build-parcial.mjs aparta aquí las páginas que no compila
 .pages-apartadas/
+.build-parcial.lock
+
+# Caché de sumarios del BOE (ingestion/transparencia_gobierno.py)
+data/boe_cache/

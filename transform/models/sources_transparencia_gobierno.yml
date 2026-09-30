@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_transparencia_gobierno
+    description: "Actos del Gobierno de España sacados de los sumarios diarios del BOE (API de datos abiertos), cargados por ingestion/transparencia_gobierno.py"
+    schema: raw
+    tables:
+      - name: boe_actos_gobierno
+        description: "Una fila por entrada del sumario del BOE (identificador BOE-A-...) desde julio de 1977, solo de estos tipos: real_decreto_ley (sección I), convalidacion_rdl (resoluciones del Congreso que ordenan publicar la convalidación o derogación de un real decreto-ley), ley_presupuestos (leyes de Presupuestos Generales del Estado), ley (resto de leyes y leyes orgánicas de las Cortes, sección I, Jefatura del Estado) e indulto (reales decretos de indulto de la sección III; el título se corta tras 'se indulta' y no incluye el nombre de la persona)."

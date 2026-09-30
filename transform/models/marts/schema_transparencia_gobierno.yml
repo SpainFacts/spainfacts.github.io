@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: gobierno_decretos_ley
+    description: "Un real decreto-ley por fila desde julio de 1977 (sumarios del BOE), con el presidente y partido que lo aprobó y si el Congreso lo convalidó o derogó."
+    columns:
+      - name: identificador
+        tests: [unique, not_null]
+      - name: presidente
+        tests: [not_null]
+  - name: gobierno_actos_anual
+    description: "Decretos-ley, leyes e indultos por año de la disposición desde 1978, con el presidente que más días gobernó ese año."
+    columns:
+      - name: anio
+        tests: [unique, not_null]
+  - name: gobierno_presidencias_resumen
+    description: "Decretos-ley, leyes e indultos por presidencia del Gobierno y por partido, por año gobernado y observados frente a esperados según el tiempo gobernado."
+  - name: gobierno_indultos_mensual
+    description: "Reales decretos de indulto por mes de aprobación desde 1977, con el presidente en ejercicio a mitad de mes."
+  - name: gobierno_presupuestos
+    description: "Un ejercicio por fila desde 1978: Ley de Presupuestos Generales del Estado a tiempo, tarde o prorrogada (art. 134.4 CE), días de prórroga y Gobierno que debía presentarla (en funciones el 30 de septiembre del año anterior)."
+    columns:
+      - name: ejercicio
+        tests: [unique, not_null]
+      - name: presidente_responsable
+        tests: [not_null]

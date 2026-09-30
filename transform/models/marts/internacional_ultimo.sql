@@ -14,6 +14,7 @@ select
     u.cod_pais,
     u.pais,
     u.es_agregado,
+    u.es_referencia,
     u.orden_pais,
     u.anio as anio_ultimo,
     u.valor,
