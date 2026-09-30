@@ -1,14 +1,14 @@
 ---
-title: Gardentasuna
+title: Udalen kontu-ematea
 description: "Informazioa argitaratzeko edo bidaltzeko legezko betebeharrak betetzen ez dituzten administrazioak: zein diren, non dauden eta nork gobernatzen zuen epea amaitzean."
-i18n_origen: f1f81e75efbb
+i18n_origen: 3425c0f0ac57
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
-    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 2025eko...)
     const urte = (n, s) => (n == null || n === '' || Number.isNaN(n) ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
     // Datuetatik gaztelaniaz datozen datak euskaratzen ditu («mayo de 2024» → «2024ko maiatza»; «3º trimestre de 2024» → «2024ko 3. hiruhilekoa»)

@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -84,6 +85,13 @@ Descarbonizar no es solo producir la electricidad con renovables: también hay q
         href="/movilidad/coche-electrico"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'electrificacion'
+```
+
+<Comparativa data={comparativa_internacional} />
 
 ## ¿Cuánta de la energía que se usa es electricidad?
 
@@ -239,7 +247,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ## Fuentes y notas
 
-- **[Eurostat – Balances energéticos completos (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consumo final de energía por sector, rama industrial y combustible, 1990-último año.
+- **[Eurostat – Balances energéticos completos (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consumo final de energía por sector, rama industrial y combustible, 1990-último año. La comparación con otros países usa la misma tabla y la misma definición (electricidad entre consumo final de energía, uso energético) y solo cubre países europeos; Noruega y Suecia aparecen como referencia (borde discontinuo) por ser las economías más electrificadas de Europa.
 - **[Eurostat – Consumo de energía de los hogares por uso (nrg_d_hhq)](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table)**: calefacción, agua caliente, cocina, refrigeración e iluminación por combustible, desde 2010 (en España lo elabora el IDAE).
 - **[Eurostat – Bombas de calor (nrg_inf_hptc)](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_hptc/default/table)**: potencia térmica por tecnología.
 - **[INE – ECEPOV 2021, tabla 56784](https://www.ine.es/jaxi/Tabla.htm?tpx=56784)**: viviendas principales con calefacción por tipo de combustible y provincia.

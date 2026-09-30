@@ -1,13 +1,14 @@
 ---
 title: Cotxe elèctric
 description: "Transició al cotxe elèctric a Espanya: matriculacions de turismes per tipus de motor cada mes des del 2015, quota d'elèctrics i híbrids endollables per província i emissions de CO2."
-i18n_origen: 65c1259ad6d0
+i18n_origen: 7dffaf225345
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -121,6 +122,13 @@ Quants dels cotxes que es venen a Espanya ja són elèctrics? La resposta surt d
         sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'coche_electrico_cuota'
+```
+
+<Comparativa data={comparativa_internacional} decimales={0} />
 
 ## Quota de mercat dels turismes nous cada mes
 
@@ -237,5 +245,6 @@ Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 m
 - **[DGT – Microdades de matriculacions de vehicles (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, mensual des del gener del 2015. Només es compten les matriculacions ordinàries de turismes (inclosos tot terrenys) **nous**; els usats importats, que també es matriculen per primera vegada a Espanya, s'exclouen.
 - El tipus de motor combina la categoria de vehicle elèctric (BEV, PHEV, REEV, HEV) i la propulsió de la fitxa tècnica. Gas inclou GLP i gas natural.
 - Les xifres poden diferir lleugerament de les de les associacions del sector (ANFAC, que fa servir els seus propis criteris de data i classificació).
+- La comparació internacional (any complet, elèctrics purs més híbrids endollables) és de l'**[AIE – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), que arrodoneix a nombres enters les quotes recents; per això pot no coincidir exactament amb la de la DGT. Noruega i Dinamarca hi apareixen com a referència (vora discontínua): són els països on el cotxe elèctric és més estès.
 
 <LastRefreshed prefix="Dades actualitzades" />

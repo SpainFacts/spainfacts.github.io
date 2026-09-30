@@ -1,5 +1,5 @@
 ---
-i18n_origen: 65c1259ad6d0
+i18n_origen: 7dffaf225345
 title: Coche eléctrico
 description: "Transición ao coche eléctrico en España: matriculacións de turismos por tipo de motor cada mes desde 2015, cota de eléctricos e híbridos enchufables por provincia e emisións de CO2."
 og:
@@ -8,6 +8,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -121,6 +122,13 @@ Cantos dos coches que se venden en España xa son eléctricos? A resposta sae do
         sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'coche_electrico_cuota'
+```
+
+<Comparativa data={comparativa_internacional} decimales={0} />
 
 ## Cota de mercado dos turismos novos cada mes
 
@@ -237,5 +245,6 @@ Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 m
 - **[DGT – Microdatos de matriculacións de vehículos (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, mensual desde xaneiro de 2015. Cóntanse só as matriculacións ordinarias de turismos (incluídos todoterreos) **novos**; os usados importados, que tamén se matriculan por primeira vez en España, exclúense.
 - O tipo de motor combina a categoría de vehículo eléctrico (BEV, PHEV, REEV, HEV) e a propulsión da ficha técnica. Gas inclúe GLP e gas natural.
 - As cifras poden diferir lixeiramente das das asociacións do sector (ANFAC, que usa os seus propios criterios de data e clasificación).
+- A comparación internacional (ano completo, eléctricos puros máis híbridos enchufables) procede da **[AIE – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), que arredonda a números enteiros as cotas recentes; por iso pode non coincidir exactamente coa da DGT. Noruega e Dinamarca aparecen como referencia (bordo descontinuo): son os países onde o coche eléctrico está máis estendido.
 
 <LastRefreshed prefix="Datos actualizados" />

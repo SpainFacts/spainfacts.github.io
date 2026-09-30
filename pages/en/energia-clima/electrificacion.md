@@ -1,13 +1,14 @@
 ---
 title: Electrification of the economy
 description: "How much of the energy used by industry, transport, households and services in Spain is electricity, how homes are heated in each province and how many heat pumps there are."
-i18n_origen: eb0a2de29207
+i18n_origen: 49a1fe838e5e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -85,6 +86,13 @@ Decarbonising is not just about generating electricity from renewables: we also 
         href="/en/movilidad/coche-electrico"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'electrificacion'
+```
+
+<Comparativa data={comparativa_internacional} />
 
 ## How much of the energy used is electricity?
 
@@ -240,7 +248,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ## Sources and notes
 
-- **[Eurostat – Complete energy balances (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: final energy consumption by sector, industrial branch and fuel, 1990-latest year.
+- **[Eurostat – Complete energy balances (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: final energy consumption by sector, industrial branch and fuel, 1990-latest year. The comparison with other countries uses the same table and the same definition (electricity as a share of final energy consumption, energy use) and only covers European countries; Norway and Sweden appear as a reference (dashed border) as they are the most electrified economies in Europe.
 - **[Eurostat – Energy consumption in households by use (nrg_d_hhq)](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table)**: space heating, water heating, cooking, cooling and lighting by fuel, since 2010 (compiled in Spain by IDAE).
 - **[Eurostat – Heat pumps (nrg_inf_hptc)](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_hptc/default/table)**: thermal capacity by technology.
 - **[INE – ECEPOV 2021, table 56784](https://www.ine.es/jaxi/Tabla.htm?tpx=56784)**: main residences with heating by type of fuel and province.

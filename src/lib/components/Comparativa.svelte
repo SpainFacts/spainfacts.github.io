@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { IDIOMAS, idiomaDeRuta, t } from "../i18n.js";
     import { textosIndicador } from "../i18n_internacional.js";
+    import { paisesReferencia } from "../paisesReferencia.js";
     $: lang = idiomaDeRuta($page.url.pathname);
 
     // Comparación discreta de un indicador de España con otros países y medias
@@ -22,12 +23,20 @@
     export let etiqueta = undefined;
     /** países a mostrar, en este orden (ISO3 del Banco Mundial; EUU = UE, OED = OCDE) */
     export let paises = ["EUU", "OED", "FRA", "PRT", "DEU", "ITA", "MAR", "USA", "CHN"];
-
+    /** países de referencia del indicador, al final y destacados (por defecto,
+     *  los de src/lib/paisesReferencia.js; [] para no mostrarlos) */
+    export let referencia = undefined;
 
     // anio_ultimo en internacional_ultimo; anio en internacional_comparativa
     $: filas = Array.from(data ?? []).map((f) => ({ ...f, anio: f.anio ?? f.anio_ultimo }));
     $: espana = filas.find((f) => f.cod_pais === "ESP");
     $: otros = paises.map((c) => filas.find((f) => f.cod_pais === c)).filter(Boolean);
+    // Países de referencia del indicador (Noruega en coches eléctricos, Japón en
+    // envejecimiento...): no están en los fijos y se marcan con borde discontinuo
+    $: refs = (referencia ?? paisesReferencia(filas[0]?.indicador_id))
+        .filter((c) => c !== "ESP" && !paises.includes(c))
+        .map((c) => filas.find((f) => f.cod_pais === c))
+        .filter(Boolean);
     $: ue = filas.find((f) => f.cod_pais === "EUU");
     // nombre, unidad y fuente vienen en castellano de los datos: se traducen aquí
     $: textos = textosIndicador(filas[0], lang);
@@ -49,12 +58,15 @@
     const anioSi = (f) => (espana && f.anio !== espana.anio ? ` (${f.anio})` : "");
 </script>
 
-{#if espana && otros.length}
+{#if espana && (otros.length || refs.length)}
     <p class="comparativa" aria-label={t('comparativa', lang)}>
         <span class="etiqueta">{etiqueta ?? textos.nombre}:</span>
         <span class="chip espana {tono}" title="{t('pais.ESP', lang)}, {espana.anio}">{t('pais.ESP', lang)} {num(espana.valor)}</span>
         {#each otros as f (f.cod_pais)}
             <span class="chip" title="{f.pais}, {f.anio}">{nombre(f)} {num(f.valor)}{anioSi(f)}</span>
+        {/each}
+        {#each refs as f (f.cod_pais)}
+            <span class="chip referencia" title="{t('comparativa.referencia', lang)} · {nombre(f)}, {f.anio}">{nombre(f)} {num(f.valor)}{anioSi(f)}</span>
         {/each}
         <span class="nota">{unidad}{espana ? ` · ${espana.anio}` : ""}{fuente ? ` · ${fuente}` : ""}</span>
     </p>
@@ -81,6 +93,10 @@
         white-space: nowrap;
         color: var(--base-content);
         font-variant-numeric: tabular-nums;
+    }
+    /* país de referencia del indicador: borde discontinuo, sin más ruido */
+    .chip.referencia {
+        border-style: dashed;
     }
     .chip.espana {
         font-weight: 700;

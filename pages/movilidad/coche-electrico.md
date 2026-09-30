@@ -7,6 +7,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -120,6 +121,13 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'coche_electrico_cuota'
+```
+
+<Comparativa data={comparativa_internacional} decimales={0} />
 
 ## Cuota de mercado de los turismos nuevos cada mes
 
@@ -236,5 +244,6 @@ Cuota de eléctricos e híbridos enchufables en los turismos nuevos de los últi
 - **[DGT – Microdatos de matriculaciones de vehículos (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, mensual desde enero de 2015. Se cuentan solo las matriculaciones ordinarias de turismos (incluidos todoterrenos) **nuevos**; los usados importados, que también se matriculan por primera vez en España, se excluyen.
 - El tipo de motor combina la categoría de vehículo eléctrico (BEV, PHEV, REEV, HEV) y la propulsión de la ficha técnica. Gas incluye GLP y gas natural.
 - Las cifras pueden diferir ligeramente de las de las asociaciones del sector (ANFAC, que usa sus propios criterios de fecha y clasificación).
+- La comparación internacional (año completo, eléctricos puros más híbridos enchufables) es de la **[AIE – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), que redondea a números enteros las cuotas recientes; por eso puede no coincidir exactamente con la de la DGT. Noruega y Dinamarca aparecen como referencia (borde discontinuo): son los países donde el coche eléctrico está más extendido.
 
 <LastRefreshed prefix="Datos actualizados" />

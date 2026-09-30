@@ -1,13 +1,14 @@
 ---
 title: Ekonomiaren elektrifikazioa
 description: "Espainiako industriak, garraioak, etxeek eta zerbitzuek kontsumitzen duten energiaren zenbat den elektrizitatea, nola berotzen diren etxeak probintziaka eta zenbat bero-ponpa dauden."
-i18n_origen: eb0a2de29207
+i18n_origen: 49a1fe838e5e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -85,6 +86,13 @@ Deskarbonizatzea ez da soilik elektrizitatea berriztagarriekin ekoiztea: gaur eg
         href="/eu/movilidad/coche-electrico"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'electrificacion'
+```
+
+<Comparativa data={comparativa_internacional} />
 
 ## Erabiltzen den energiaren zenbat da elektrizitatea?
 
@@ -240,7 +248,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ## Iturriak eta oharrak
 
-- **[Eurostat – Energia-balantze osoak (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: energiaren azken kontsumoa sektoreka, industria-adarka eta erregaika, 1990etik azken urtera arte.
+- **[Eurostat – Energia-balantze osoak (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: energiaren azken kontsumoa sektoreka, industria-adarka eta erregaika, 1990etik azken urtera arte. Beste herrialdeekiko alderaketak taula eta definizio berak erabiltzen ditu (elektrizitatea energiaren azken kontsumoaren gainean, erabilera energetikoa) eta Europako herrialdeak baino ez ditu hartzen; Norvegia eta Suedia erreferentzia gisa agertzen dira (ertz etena), Europako ekonomia elektrifikatuenak direlako.
 - **[Eurostat – Etxeetako energia-kontsumoa erabileraren arabera (nrg_d_hhq)](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table)**: berokuntza, ur beroa, sukaldaritza, hozkuntza eta argiztapena erregaika, 2010etik (Espainian IDAEk egiten du).
 - **[Eurostat – Bero-ponpak (nrg_inf_hptc)](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_hptc/default/table)**: potentzia termikoa teknologiaka.
 - **[INE – ECEPOV 2021, 56784 taula](https://www.ine.es/jaxi/Tabla.htm?tpx=56784)**: berokuntza duten etxebizitza nagusiak, erregai motaren eta probintziaren arabera.

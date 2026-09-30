@@ -448,15 +448,41 @@ index 0000000..b1fed5e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..96794b0
+index 0000000..7102785
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,2521 @@
+@@ -0,0 +1,2618 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
 +export const DICCIONARIO = {
 +	en: {
++		"Canadá": "Canada",
++		"Corea del Sur": "South Korea",
++		"Islandia": "Iceland",
++		"Japón": "Japan",
++		"México": "Mexico",
++		"Nueva Zelanda": "New Zealand",
++		"Turquía": "Türkiye",
++		"OCDE (media simple)": "OECD (simple average)",
++		"Unión Europea (media simple)": "European Union (simple average)",
++		"Resto de la UE": "Rest of the EU",
++		"Resto de la OCDE": "Rest of the OECD",
++		"A tiempo": "On time",
++		"Tarde": "Late",
++		"Prorrogado": "Rolled over",
++		"Prorrogado (en curso)": "Rolled over (ongoing)",
++		"Estado de derecho": "Rule of law",
++		"Estado de derecho (WJP)": "Rule of law (WJP)",
++		"Eficacia del gobierno": "Government effectiveness",
++		"Corrupción política": "Political corruption",
++		"Control de la corrupción": "Control of corruption",
++		"Voz y rendición de cuentas": "Voice and accountability",
++		"Corrupción en el sector público": "Public sector corruption",
++		"Percepción de la corrupción": "Corruption perceptions",
++		"Ausencia de corrupción": "Absence of corruption",
++		"Límites al poder del gobierno": "Constraints on government powers",
++		"Gobierno abierto": "Open government",
 +		'(modelo sin especificar)': '(model not specified)',
 +		'(provincia)': '(province)',
 +		'0 emisiones (azul)': 'Zero emission (blue)',
@@ -1144,6 +1170,35 @@ index 0000000..96794b0
 +		'Zona euro': 'Euro area'
 +	},
 +	ca: {
++		"Australia": "Austràlia",
++		"Canadá": "Canadà",
++		"Chile": "Xile",
++		"China": "Xina",
++		"Corea del Sur": "Corea del Sud",
++		"Islandia": "Islàndia",
++		"Japón": "Japó",
++		"México": "Mèxic",
++		"Nueva Zelanda": "Nova Zelanda",
++		"Turquía": "Turquia",
++		"OCDE (media simple)": "OCDE (mitjana simple)",
++		"Unión Europea (media simple)": "Unió Europea (mitjana simple)",
++		"Resto de la UE": "Resta de la UE",
++		"Resto de la OCDE": "Resta de l'OCDE",
++		"A tiempo": "A temps",
++		"Tarde": "Tard",
++		"Prorrogado": "Prorrogat",
++		"Prorrogado (en curso)": "Prorrogat (en curs)",
++		"Estado de derecho": "Estat de dret",
++		"Estado de derecho (WJP)": "Estat de dret (WJP)",
++		"Eficacia del gobierno": "Eficàcia del govern",
++		"Corrupción política": "Corrupció política",
++		"Control de la corrupción": "Control de la corrupció",
++		"Voz y rendición de cuentas": "Veu i rendició de comptes",
++		"Corrupción en el sector público": "Corrupció en el sector públic",
++		"Percepción de la corrupción": "Percepció de la corrupció",
++		"Ausencia de corrupción": "Absència de corrupció",
++		"Límites al poder del gobierno": "Límits al poder del govern",
++		"Gobierno abierto": "Govern obert",
 +		'(modelo sin especificar)': '(model sense especificar)',
 +		'(provincia)': '(província)',
 +		'0 emisiones (azul)': '0 emissions (blau)',
@@ -1798,6 +1853,21 @@ index 0000000..96794b0
 +		'Zaragoza': 'Saragossa'
 +	},
 +	gl: {
++		"Corea del Sur": "Corea do Sur",
++		"Japón": "Xapón",
++		"Nueva Zelanda": "Nova Zelandia",
++		"Resto de la UE": "Resto da UE",
++		"Resto de la OCDE": "Resto da OCDE",
++		"A tiempo": "A tempo",
++		"Estado de derecho": "Estado de dereito",
++		"Estado de derecho (WJP)": "Estado de dereito (WJP)",
++		"Eficacia del gobierno": "Eficacia do goberno",
++		"Control de la corrupción": "Control da corrupción",
++		"Voz y rendición de cuentas": "Voz e rendición de contas",
++		"Corrupción en el sector público": "Corrupción no sector público",
++		"Percepción de la corrupción": "Percepción da corrupción",
++		"Límites al poder del gobierno": "Límites ao poder do goberno",
++		"Gobierno abierto": "Goberno aberto",
 +		'(modelo sin especificar)': '(modelo sen especificar)',
 +		'0 emisiones (azul)': '0 emisións (azul)',
 +		'0-4 años': '0-4 anos',
@@ -2276,6 +2346,33 @@ index 0000000..96794b0
 +		'Viviendas libres terminadas': 'Vivendas libres rematadas'
 +	},
 +	eu: {
++		"Canadá": "Kanada",
++		"Chile": "Txile",
++		"China": "Txina",
++		"Corea del Sur": "Hego Korea",
++		"Japón": "Japonia",
++		"México": "Mexiko",
++		"Nueva Zelanda": "Zeelanda Berria",
++		"Turquía": "Turkia",
++		"OCDE (media simple)": "ELGA (batez besteko soila)",
++		"Unión Europea (media simple)": "Europar Batasuna (batez besteko soila)",
++		"Resto de la UE": "EBko gainerakoak",
++		"Resto de la OCDE": "ELGAko gainerakoak",
++		"A tiempo": "Garaiz",
++		"Tarde": "Berandu",
++		"Prorrogado": "Luzatua",
++		"Prorrogado (en curso)": "Luzatua (abian)",
++		"Estado de derecho": "Zuzenbide estatua",
++		"Estado de derecho (WJP)": "Zuzenbide estatua (WJP)",
++		"Eficacia del gobierno": "Gobernuaren eraginkortasuna",
++		"Corrupción política": "Ustelkeria politikoa",
++		"Control de la corrupción": "Ustelkeriaren kontrola",
++		"Voz y rendición de cuentas": "Ahotsa eta kontu-ematea",
++		"Corrupción en el sector público": "Sektore publikoko ustelkeria",
++		"Percepción de la corrupción": "Ustelkeriaren pertzepzioa",
++		"Ausencia de corrupción": "Ustelkeriarik eza",
++		"Límites al poder del gobierno": "Gobernuaren boterearen mugak",
++		"Gobierno abierto": "Gobernu irekia",
 +		'(modelo sin especificar)': '(modelo zehaztu gabe)',
 +		'(provincia)': '(probintzia)',
 +		'0 emisiones (azul)': '0 isuri (urdina)',
@@ -2975,29 +3072,72 @@ index 0000000..96794b0
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
 new file mode 100644
-index 0000000..072e517
+index 0000000..89ecc74
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
-@@ -0,0 +1,164 @@
+@@ -0,0 +1,209 @@
 +// SpainFacts: líneas verticales con acontecimientos clave en las gráficas temporales
 +// (añadido con patch-package). Se aplican solas a toda gráfica cuyo eje X sean fechas
 +// o años y cuyo rango incluya el evento; una gráfica puede desactivarlas con
 +// echartsOptions={{ eventos: false }}.
 +import { ETIQUETAS_EVENTOS } from './idioma.js';
 +
-+/** tipo: 'crisis' (gris, discontinua) | 'gobierno' (color del partido, punteada) */
++/**
++ * tipo: 'crisis' (gris, discontinua) | 'gobierno' (color del partido, punteada) | 'medida' (gris, punteada)
++ * Sin filtros, el evento sale en toda gráfica temporal que lo abarque. Con filtros:
++ *  - paginas: prefijos de ruta (sin idioma) donde aplica, p. ej. ['/energia-clima'];
++ *  - claves: expresión regular que debe aparecer en el título, las series o los ejes de la
++ *    gráfica (en cualquier idioma del sitio: las series llegan en castellano, los títulos traducidos).
++ * Las etiquetas traducidas están en idioma.js (ETIQUETAS_EVENTOS[lang][id]).
++ */
++const ELECTRICO = /renovable|renewable|berriztagarri|mix|el[eé]ctric|electricidad|electricitat|electricidade|elektri|generaci|xeraci|sorkuntz|demanda|demand|eólica|wind|solar|nuclear|hidr[aá]ul|ciclo combinado/i;
 +export const EVENTOS = [
-+	{ fecha: '1977-07-04', etiqueta: 'Gob. Suárez (UCD)', tipo: 'gobierno', color: '#2f9c95' },
-+	{ fecha: '1982-12-02', etiqueta: 'Gob. González (PSOE)', tipo: 'gobierno', color: '#e30613' },
-+	{ fecha: '1996-05-05', etiqueta: 'Gob. Aznar (PP)', tipo: 'gobierno', color: '#1d4ed8' },
-+	{ fecha: '2004-04-17', etiqueta: 'Gob. Zapatero (PSOE)', tipo: 'gobierno', color: '#e30613' },
-+	{ fecha: '2008-09-15', etiqueta: 'Crisis financiera', tipo: 'crisis' },
-+	{ fecha: '2011-12-21', etiqueta: 'Gob. Rajoy (PP)', tipo: 'gobierno', color: '#1d4ed8' },
-+	{ fecha: '2018-06-02', etiqueta: 'Gob. Sánchez (PSOE)', tipo: 'gobierno', color: '#e30613' },
-+	{ fecha: '2020-03-14', etiqueta: 'COVID-19', tipo: 'crisis' },
-+	{ fecha: '2022-02-24', etiqueta: 'Guerra de Ucrania', tipo: 'crisis' },
-+	{ fecha: '2025-06-13', etiqueta: 'Guerra de Irán', tipo: 'crisis' }
++	{ id: 'suarez', fecha: '1977-07-04', etiqueta: 'Gob. Suárez (UCD)', tipo: 'gobierno', color: '#2f9c95' },
++	{ id: 'gonzalez', fecha: '1982-12-02', etiqueta: 'Gob. González (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ id: 'aznar', fecha: '1996-05-05', etiqueta: 'Gob. Aznar (PP)', tipo: 'gobierno', color: '#1d4ed8' },
++	{ id: 'euro', fecha: '2002-01-01', etiqueta: 'Llega el euro', tipo: 'medida', paginas: ['/economia/ipc'], claves: /IPC|CPI|KPI|precio|price|preu|prezo|prezio|inflaci|inflazio/i },
++	{ id: 'zapatero', fecha: '2004-04-17', etiqueta: 'Gob. Zapatero (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ id: 'regularizacion', fecha: '2005-02-07', etiqueta: 'Regularización extraordinaria', tipo: 'medida', paginas: ['/sociedad/inmigracion', '/demografia'], claves: /extranjer|foreign|estranger|estranxeir|atzerri|inmigra|immigra|migra|nacionalid|nationalit|nazionalitat|residentes/i },
++	{ id: 'carnet', fecha: '2006-07-01', etiqueta: 'Carné por puntos', tipo: 'medida', paginas: ['/sociedad/salud', '/movilidad', '/territorios'], claves: /tr[aá]fico|traffic|trànsit|trafik|carretera|road|errepide|accident|istripu/i },
++	{ id: 'lehman', fecha: '2008-09-15', etiqueta: 'Crisis financiera', tipo: 'crisis' },
++	{ id: 'rajoy', fecha: '2011-12-21', etiqueta: 'Gob. Rajoy (PP)', tipo: 'gobierno', color: '#1d4ed8' },
++	{ id: 'reforma_laboral_2012', fecha: '2012-02-12', etiqueta: 'Reforma laboral 2012', tipo: 'medida', paginas: ['/economia/paro', '/economia/salarios', '/cuentas-publicas/empleo-publico'], claves: /paro|unemploy|atur|langabez|emple|employ|ocupa|enplegu|temporal|afiliad|contrat|salari|soldat|wage/i },
++	{ id: 'rescate', fecha: '2012-07-20', etiqueta: 'Rescate bancario', tipo: 'medida', paginas: ['/cuentas-publicas', '/economia/pib'], claves: /deuda|debt|deute|débeda|zor|d[eé]ficit|saldo|balance|superávit/i },
++	{ id: 'pensiones_2013', fecha: '2013-12-26', etiqueta: 'Reforma de pensiones 2013', tipo: 'medida', paginas: ['/cuentas-publicas/pensiones'], claves: /pensi/i },
++	{ id: 'sanchez', fecha: '2018-06-02', etiqueta: 'Gob. Sánchez (PSOE)', tipo: 'gobierno', color: '#e30613' },
++	{ id: 'sol', fecha: '2018-10-06', etiqueta: 'Fin del «impuesto al sol»', tipo: 'medida', paginas: ['/energia-clima'], claves: /solar|fotovolt|photovolt|autoconsumo|self-consum|eguzki/i },
++	{ id: 'smi_2019', fecha: '2019-01-01', etiqueta: 'SMI +22 %', tipo: 'medida', paginas: ['/economia/salarios'], claves: /salari|sueldo|wage|soldat|soldata|decil/i },
++	{ id: 'covid', fecha: '2020-03-14', etiqueta: 'COVID-19', tipo: 'crisis' },
++	{ id: 'carbon', fecha: '2020-06-30', etiqueta: 'Cierre de 7 centrales de carbón', tipo: 'medida', paginas: ['/energia-clima'], claves: /carb[oó]n|coal|carbó|ikatz|emisi|emission|isur|CO2|CO₂|intensidad|intensity/i },
++	{ id: 'moves', fecha: '2021-04-13', etiqueta: 'Plan MOVES III', tipo: 'medida', paginas: ['/movilidad'], claves: /el[eé]ctric|elèctric|elektri|enchufable|plug|endoll|recarga|charging|kargatze|BEV|PHEV/i },
++	{ id: 'pensiones_2021', fecha: '2021-12-28', etiqueta: 'Pensiones ligadas al IPC', tipo: 'medida', paginas: ['/cuentas-publicas/pensiones'], claves: /pensi/i },
++	{ id: 'ucrania', fecha: '2022-02-24', etiqueta: 'Guerra de Ucrania', tipo: 'crisis' },
++	{ id: 'reforma_laboral_2022', fecha: '2022-03-30', etiqueta: 'Reforma laboral 2022', tipo: 'medida', paginas: ['/economia/paro', '/economia/salarios', '/cuentas-publicas/empleo-publico'], claves: /paro|unemploy|atur|langabez|emple|employ|ocupa|enplegu|temporal|afiliad|contrat|fijos/i },
++	{ id: 'tope_gas', fecha: '2022-06-15', etiqueta: 'Tope al gas (excepción ibérica)', tipo: 'medida', paginas: ['/energia-clima', '/economia/ipc'], claves: /precio|price|preu|prezo|prezio|mayorista|wholesale|electricidad|electricity|electricitat|elektrizitate|luz/i },
++	{ id: 'ley_vivienda', fecha: '2023-05-26', etiqueta: 'Ley de vivienda', tipo: 'medida', paginas: ['/vivienda'], claves: /alquiler|rent|lloguer|aluguer|alokair|arrendam/i },
++	{ id: 'apagon', fecha: '2025-04-28', etiqueta: 'Apagón general', tipo: 'crisis', paginas: ['/energia-clima'], claves: ELECTRICO },
++	{ id: 'iran', fecha: '2025-06-13', etiqueta: 'Guerra de Irán', tipo: 'crisis' }
 +];
++
++/** ¿Aplica el evento a esta gráfica? (ruta sin prefijo de idioma y texto de la gráfica) */
++export function eventoAplica(e, ruta = '/', texto = '') {
++	if (e.paginas && !e.paginas.some((p) => ruta === p || ruta.startsWith(p + '/'))) return false;
++	if (e.claves && !e.claves.test(texto)) return false;
++	return true;
++}
++
++/** Texto de una configuración de ECharts para buscar las claves: título, series y ejes */
++export function textoDeGrafica(config, extra = '') {
++	if (!config) return extra;
++	const lista = (x) => (Array.isArray(x) ? x : x ? [x] : []);
++	return [
++		extra,
++		...lista(config.title).map((t) => `${t?.text ?? ''} ${t?.subtext ?? ''}`),
++		...lista(config.series).map((s) => s?.name ?? ''),
++		...lista(config.yAxis).map((a) => a?.name ?? ''),
++		...lista(config.xAxis).map((a) => a?.name ?? '')
++	].join(' | ');
++}
 +
 +const DIA = 86400000;
 +
@@ -3025,7 +3165,7 @@ index 0000000..072e517
 +
 +const primero = (eje) => (Array.isArray(eje) ? eje[0] : eje);
 +
-+export function anadirEventos(config, lang = 'es') {
++export function anadirEventos(config, lang = 'es', ruta = '/', texto = '') {
 +	try {
 +		if (!config || !Array.isArray(config.series) || !config.series.length) return config;
 +		if (config.eventos === false) return config;
@@ -3067,6 +3207,7 @@ index 0000000..072e517
 +			const max = Math.max(...tiempos);
 +			if (max - min < 180 * DIA) return config; // rangos cortos (horas, días): sin eventos
 +			for (const e of EVENTOS) {
++				if (!eventoAplica(e, ruta, texto)) continue;
 +				const t = Date.parse(e.fecha);
 +				if (t <= min || t > max) continue;
 +				// eje de categorías con fechas: la categoría más cercana anterior al evento
@@ -3083,6 +3224,7 @@ index 0000000..072e517
 +			const max = Math.max(...anios);
 +			if (max - min < 3) return config;
 +			for (const e of EVENTOS) {
++				if (!eventoAplica(e, ruta, texto)) continue;
 +				const anio = Number(e.fecha.slice(0, 4));
 +				if (anio <= min || anio > max) continue;
 +				let valor = anio;
@@ -3116,9 +3258,9 @@ index 0000000..072e517
 +			},
 +			data: lineas.map(({ e, valor }) => ({
 +				xAxis: valor,
-+				name: ETIQUETAS_EVENTOS[lang]?.[EVENTOS.indexOf(e)] ?? e.etiqueta,
++				name: ETIQUETAS_EVENTOS[lang]?.[e.id] ?? e.etiqueta,
 +				lineStyle: {
-+					type: e.tipo === 'gobierno' ? 'dotted' : 'dashed',
++					type: e.tipo === 'crisis' ? 'dashed' : 'dotted',
 +					width: 1,
 +					color: e.tipo === 'gobierno' ? e.color : '#8a8f98',
 +					opacity: e.tipo === 'gobierno' ? 0.55 : 0.8
@@ -3145,7 +3287,7 @@ index 0000000..072e517
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
 new file mode 100644
-index 0000000..b0e71df
+index 0000000..a01c9ae
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
 @@ -0,0 +1,91 @@
@@ -3232,16 +3374,16 @@ index 0000000..b0e71df
 +	return TEXTOS[lang]?.[clave] ?? TEXTOS.es[clave] ?? clave;
 +}
 +
-+// Etiquetas de los eventos de eventos.js, en el mismo orden que EVENTOS
++// Etiquetas de los eventos de eventos.js, por id del evento
 +export const ETIQUETAS_EVENTOS = {
-+	es: ["Gob. Suárez (UCD)", "Gob. González (PSOE)", "Gob. Aznar (PP)", "Gob. Zapatero (PSOE)", "Crisis financiera", "Gob. Rajoy (PP)", "Gob. Sánchez (PSOE)", "COVID-19", "Guerra de Ucrania", "Guerra de Irán"],
-+	en: ["Suárez gov. (UCD)", "González gov. (PSOE)", "Aznar gov. (PP)", "Zapatero gov. (PSOE)", "Financial crisis", "Rajoy gov. (PP)", "Sánchez gov. (PSOE)", "COVID-19", "War in Ukraine", "Iran war"],
-+	ca: ["Gov. Suárez (UCD)", "Gov. González (PSOE)", "Gov. Aznar (PP)", "Gov. Zapatero (PSOE)", "Crisi financera", "Gov. Rajoy (PP)", "Gov. Sánchez (PSOE)", "COVID-19", "Guerra d'Ucraïna", "Guerra de l'Iran"],
-+	gl: ["Gob. Suárez (UCD)", "Gob. González (PSOE)", "Gob. Aznar (PP)", "Gob. Zapatero (PSOE)", "Crise financeira", "Gob. Rajoy (PP)", "Gob. Sánchez (PSOE)", "COVID-19", "Guerra de Ucraína", "Guerra de Irán"],
-+	eu: ["Suárezen gob. (UCD)", "Gonzálezen gob. (PSOE)", "Aznarren gob. (PP)", "Zapateroren gob. (PSOE)", "Finantza krisia", "Rajoyren gob. (PP)", "Sánchezen gob. (PSOE)", "COVID-19", "Ukrainako gerra", "Irango gerra"],
++	es: {"suarez": "Gob. Suárez (UCD)", "gonzalez": "Gob. González (PSOE)", "aznar": "Gob. Aznar (PP)", "euro": "Llega el euro", "zapatero": "Gob. Zapatero (PSOE)", "regularizacion": "Regularización extraordinaria", "carnet": "Carné por puntos", "lehman": "Crisis financiera", "rajoy": "Gob. Rajoy (PP)", "reforma_laboral_2012": "Reforma laboral 2012", "rescate": "Rescate bancario", "pensiones_2013": "Reforma de pensiones 2013", "sanchez": "Gob. Sánchez (PSOE)", "sol": "Fin del «impuesto al sol»", "smi_2019": "SMI +22 %", "covid": "COVID-19", "carbon": "Cierre de 7 centrales de carbón", "moves": "Plan MOVES III", "pensiones_2021": "Pensiones ligadas al IPC", "ucrania": "Guerra de Ucrania", "reforma_laboral_2022": "Reforma laboral 2022", "tope_gas": "Tope al gas (excepción ibérica)", "ley_vivienda": "Ley de vivienda", "apagon": "Apagón general", "iran": "Guerra de Irán"},
++	en: {"suarez": "Suárez gov. (UCD)", "gonzalez": "González gov. (PSOE)", "aznar": "Aznar gov. (PP)", "euro": "Euro introduced", "zapatero": "Zapatero gov. (PSOE)", "regularizacion": "Mass regularisation", "carnet": "Penalty-point licence", "lehman": "Financial crisis", "rajoy": "Rajoy gov. (PP)", "reforma_laboral_2012": "2012 labour reform", "rescate": "Bank bailout", "pensiones_2013": "2013 pension reform", "sanchez": "Sánchez gov. (PSOE)", "sol": "End of the \"sun tax\"", "smi_2019": "Minimum wage +22%", "covid": "COVID-19", "carbon": "7 coal plants close", "moves": "MOVES III plan", "pensiones_2021": "Pensions linked to CPI", "ucrania": "War in Ukraine", "reforma_laboral_2022": "2022 labour reform", "tope_gas": "Gas price cap (Iberian exception)", "ley_vivienda": "Housing Act", "apagon": "Nationwide blackout", "iran": "Iran war"},
++	ca: {"suarez": "Gov. Suárez (UCD)", "gonzalez": "Gov. González (PSOE)", "aznar": "Gov. Aznar (PP)", "euro": "Arriba l'euro", "zapatero": "Gov. Zapatero (PSOE)", "regularizacion": "Regularització extraordinària", "carnet": "Carnet per punts", "lehman": "Crisi financera", "rajoy": "Gov. Rajoy (PP)", "reforma_laboral_2012": "Reforma laboral 2012", "rescate": "Rescat bancari", "pensiones_2013": "Reforma de pensions 2013", "sanchez": "Gov. Sánchez (PSOE)", "sol": "Fi de l'«impost al sol»", "smi_2019": "SMI +22 %", "covid": "COVID-19", "carbon": "Tancament de 7 centrals de carbó", "moves": "Pla MOVES III", "pensiones_2021": "Pensions lligades a l'IPC", "ucrania": "Guerra d'Ucraïna", "reforma_laboral_2022": "Reforma laboral 2022", "tope_gas": "Topall al gas (excepció ibèrica)", "ley_vivienda": "Llei d'habitatge", "apagon": "Apagada general", "iran": "Guerra de l'Iran"},
++	gl: {"suarez": "Gob. Suárez (UCD)", "gonzalez": "Gob. González (PSOE)", "aznar": "Gob. Aznar (PP)", "euro": "Chega o euro", "zapatero": "Gob. Zapatero (PSOE)", "regularizacion": "Regularización extraordinaria", "carnet": "Carné por puntos", "lehman": "Crise financeira", "rajoy": "Gob. Rajoy (PP)", "reforma_laboral_2012": "Reforma laboral 2012", "rescate": "Rescate bancario", "pensiones_2013": "Reforma das pensións 2013", "sanchez": "Gob. Sánchez (PSOE)", "sol": "Fin do «imposto ao sol»", "smi_2019": "SMI +22 %", "covid": "COVID-19", "carbon": "Peche de 7 centrais de carbón", "moves": "Plan MOVES III", "pensiones_2021": "Pensións ligadas ao IPC", "ucrania": "Guerra de Ucraína", "reforma_laboral_2022": "Reforma laboral 2022", "tope_gas": "Tope ao gas (excepción ibérica)", "ley_vivienda": "Lei de vivenda", "apagon": "Apagamento xeral", "iran": "Guerra de Irán"},
++	eu: {"suarez": "Suárezen gob. (UCD)", "gonzalez": "Gonzálezen gob. (PSOE)", "aznar": "Aznarren gob. (PP)", "euro": "Euroa iritsi da", "zapatero": "Zapateroren gob. (PSOE)", "regularizacion": "Aparteko erregularizazioa", "carnet": "Puntuzko gidabaimena", "lehman": "Finantza krisia", "rajoy": "Rajoyren gob. (PP)", "reforma_laboral_2012": "2012ko lan-erreforma", "rescate": "Banku-erreskatea", "pensiones_2013": "2013ko pentsio-erreforma", "sanchez": "Sánchezen gob. (PSOE)", "sol": "«Eguzki-zergaren» amaiera", "smi_2019": "LGS +22 %", "covid": "COVID-19", "carbon": "7 ikatz-zentral itxi", "moves": "MOVES III plana", "pensiones_2021": "Pentsioak KPIri lotuta", "ucrania": "Ukrainako gerra", "reforma_laboral_2022": "2022ko lan-erreforma", "tope_gas": "Gasaren muga (salbuespen iberiarra)", "ley_vivienda": "Etxebizitza Legea", "apagon": "Itzalaldi orokorra", "iran": "Irango gerra"},
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-index b3bfe37..2a4dd87 100644
+index b3bfe37..26e93ce 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 @@ -8,6 +8,12 @@
@@ -3249,7 +3391,7 @@ index b3bfe37..2a4dd87 100644
  	import EChartsCopyTarget from './EChartsCopyTarget.svelte';
  	import DownloadData from '../../ui/DownloadData.svelte';
 +	import CompartirGrafico from '../../ui/CompartirGrafico.svelte';
-+	import { anadirEventos } from '../../ui/eventos.js';
++	import { anadirEventos, textoDeGrafica } from '../../ui/eventos.js';
 +	import { traducirEtiquetas } from '../../ui/etiquetas.js';
 +	import { page } from '$app/stores';
 +	import { idiomaDeRuta, t } from '../../ui/idioma.js';
@@ -3257,18 +3399,21 @@ index b3bfe37..2a4dd87 100644
  	import CodeBlock from '../../ui/CodeBlock.svelte';
  	import ChartLoading from '../../ui/ChartLoading.svelte';
  	import { flush } from 'svelte/internal';
-@@ -17,6 +23,10 @@
+@@ -17,6 +23,13 @@
  	const { activeAppearance, theme, resolveColorsObject } = getThemeStores();
  
  	export let config = undefined;
 +	// SpainFacts: acontecimientos clave (COVID, crisis, gobiernos...) en los ejes temporales
 +	// y, en las páginas traducidas, las etiquetas que vienen de los datos (series, categorías)
 +	$: configTraducida = traducirEtiquetas(config, lang);
-+	$: configConEventos = echartsOptions?.eventos === false ? configTraducida : anadirEventos(configTraducida, lang);
++	// los eventos por tema se eligen con la ruta (sin idioma) y el texto ORIGINAL de la gráfica
++	$: rutaBase = lang === 'es' ? ($page?.url?.pathname ?? '/') : ($page?.url?.pathname ?? '/').slice(lang.length + 1) || '/';
++	$: textoGrafica = textoDeGrafica(config, evidenceChartTitle ?? '');
++	$: configConEventos = echartsOptions?.eventos === false ? configTraducida : anadirEventos(configTraducida, lang, rutaBase, textoGrafica);
  
  	export let queryID = undefined;
  	export let evidenceChartTitle = undefined;
-@@ -74,6 +84,8 @@
+@@ -74,6 +87,8 @@
  		{:else}
  			<div
  				class="chart"
@@ -3277,7 +3422,7 @@ index b3bfe37..2a4dd87 100644
  				style="
  				height: {height};
  				width: {width};
-@@ -81,7 +93,7 @@
+@@ -81,7 +96,7 @@
  				display: {copying ? 'none' : 'inherit'}
  			"
  				use:echarts={{
@@ -3286,7 +3431,7 @@ index b3bfe37..2a4dd87 100644
  					...$$restProps,
  					echartsOptions,
  					seriesOptions,
-@@ -97,7 +109,7 @@
+@@ -97,7 +112,7 @@
  	{/if}
  
  	<EChartsCopyTarget
@@ -3295,7 +3440,7 @@ index b3bfe37..2a4dd87 100644
  		{height}
  		{width}
  		{copying}
-@@ -111,7 +123,7 @@
+@@ -111,7 +126,7 @@
  		<div class="chart-footer">
  			{#if downloadableImage}
  				<DownloadData
@@ -3304,7 +3449,7 @@ index b3bfe37..2a4dd87 100644
  					class="download-button"
  					downloadData={() => {
  						downloadChart = true;
-@@ -119,7 +131,7 @@
+@@ -119,7 +134,7 @@
  							downloadChart = false;
  						}, 0);
  					}}
@@ -3313,7 +3458,7 @@ index b3bfe37..2a4dd87 100644
  					{queryID}
  				>
  					<svg
-@@ -141,13 +153,14 @@
+@@ -141,13 +156,14 @@
  			{/if}
  			{#if data && downloadableData}
  				<DownloadData
@@ -3330,7 +3475,7 @@ index b3bfe37..2a4dd87 100644
  		</div>
  	{/if}
  
-@@ -172,7 +185,7 @@
+@@ -172,7 +188,7 @@
          overflow: visible;
      "
  		use:echartsCanvasDownload={{
@@ -3339,7 +3484,7 @@ index b3bfe37..2a4dd87 100644
  			...$$restProps,
  			echartsOptions,
  			seriesOptions,
-@@ -209,8 +222,10 @@
+@@ -209,8 +225,10 @@
  		display: flex;
  		justify-content: flex-end;
  		align-items: center;

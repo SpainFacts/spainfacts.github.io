@@ -1,14 +1,14 @@
 ---
-title: Transparència
+title: Retiment de comptes dels ajuntaments
 description: "Administracions que no compleixen les seves obligacions legals de publicar o trametre informació: quines són, on són i qui governava quan vencia el termini."
-i18n_origen: f1f81e75efbb
+i18n_origen: 3425c0f0ac57
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
-    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Dates en català (les etiquetes de mes que es construeixen a les consultes SQL són en castellà)
     const mesDe = (d) => d ? new Date(d).toLocaleDateString('ca-ES', {day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC'}).replace(/^\d+\s+/, '') : '';
     const trimCa = (d) => { if (!d) return ''; const x = new Date(d); return ['1r', '2n', '3r', '4t'][Math.floor(x.getUTCMonth() / 3)] + ' trimestre del ' + x.getUTCFullYear(); };

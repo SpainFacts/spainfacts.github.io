@@ -1,14 +1,14 @@
 ---
-title: Transparency
+title: Council accounts reporting
 description: "Public administrations that fail to meet their legal obligations to publish or submit information: who they are, where they are and who was in power when the deadline expired."
-i18n_origen: f1f81e75efbb
+i18n_origen: 3425c0f0ac57
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
-    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // English date labels (the month labels built in the SQL queries are in Spanish)
     const mesEn = (d) => d ? new Date(d).toLocaleDateString('en-GB', {month: 'long', year: 'numeric', timeZone: 'UTC'}) : '';
     const trimEn = (d) => { if (!d) return ''; const x = new Date(d); return 'Q' + (Math.floor(x.getUTCMonth() / 3) + 1) + ' ' + x.getUTCFullYear(); };

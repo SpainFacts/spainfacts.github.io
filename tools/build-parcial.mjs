@@ -12,7 +12,7 @@
 // conservan siempre. Si un build anterior se cortó de golpe, este script restaura primero
 // lo que quedó en .pages-apartadas/.
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 
 const PAGES = 'pages';
@@ -74,6 +74,35 @@ function seQueda(rel) {
 	return pedidas.some((p) => sinIdioma === p || sinIdioma === `${p}/index` || sinIdioma.startsWith(`${p}/`));
 }
 
+// Cerrojo: dos builds parciales a la vez se pisarían las páginas apartadas. Si hay otro
+// en marcha (su proceso sigue vivo), se espera; si el cerrojo es de un proceso muerto, se ignora.
+const CERROJO = '.build-parcial.lock';
+const vivo = (pid) => {
+	try {
+		process.kill(pid, 0);
+		return true;
+	} catch {
+		return false;
+	}
+};
+const esperar = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+for (;;) {
+	try {
+		writeFileSync(CERROJO, String(process.pid), { flag: 'wx' });
+		break;
+	} catch {
+		const otro = Number(readFileSync(CERROJO, 'utf8'));
+		if (!vivo(otro)) {
+			rmSync(CERROJO, { force: true });
+			continue;
+		}
+		console.log(`Otro build parcial en marcha (pid ${otro}); esperando…`);
+		esperar(20000);
+	}
+}
+const soltar = () => rmSync(CERROJO, { force: true });
+process.on('exit', soltar);
+
 restaurar(); // por si quedó algo de una ejecución cortada
 for (const s of ['SIGINT', 'SIGTERM', 'SIGHUP'])
 	process.on(s, () => {
@@ -94,7 +123,13 @@ try {
 	console.log(`Compilando ${quedan.length} páginas (${apartadas} apartadas):\n  ${quedan.join('\n  ')}`);
 	const script = opcion('--estricto') ? 'build:strict' : 'build';
 	// BUILD_PARCIAL=1: svelte.config.js convierte en avisos los 404 de enlaces a páginas apartadas
-	rmSync('build', { recursive: true, force: true });
+	// Se borra el build anterior para no confundir páginas viejas con las nuevas; si algo
+	// tiene ficheros abiertos (p. ej. un servidor de vista previa sobre build/), se sigue igual
+	try {
+		rmSync('build', { recursive: true, force: true });
+	} catch (e) {
+		console.warn(`No se pudo borrar build/ (${e.code}); quedarán páginas de builds anteriores.`);
+	}
 	const r = spawnSync('npm', ['run', script], { stdio: 'inherit', shell: true, env: { ...process.env, BUILD_PARCIAL: '1' } });
 	process.exitCode = r.status ?? 1;
 } finally {

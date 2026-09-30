@@ -16,6 +16,8 @@ function paginas(dir) {
             if (dir === BUILD && EXCLUIR.includes(nombre)) continue;
             // /en/indicadores, /ca/indicadores... también son redirecciones
             if (IDIOMAS.includes(relative(BUILD, dir)) && nombre === 'indicadores') continue;
+            // /varios/mapa-poblacion (en todos los idiomas) redirige al explorador de mapas
+            if (nombre === 'mapa-poblacion') continue;
             rutas.push(...paginas(ruta));
         } else if (nombre === 'index.html') {
             const url = '/' + relative(BUILD, dir).split(sep).join('/');

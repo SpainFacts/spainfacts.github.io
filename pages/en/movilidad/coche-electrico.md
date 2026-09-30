@@ -1,13 +1,14 @@
 ---
 title: Electric cars
 description: "The shift to electric cars in Spain: new car registrations by engine type every month since 2015, share of battery electric and plug-in hybrids by province, and CO2 emissions."
-i18n_origen: 65c1259ad6d0
+i18n_origen: 7dffaf225345
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -121,6 +122,13 @@ How many of the cars sold in Spain are already electric? The answer comes from t
         sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'coche_electrico_cuota'
+```
+
+<Comparativa data={comparativa_internacional} decimales={0} />
 
 ## Monthly market share of new cars
 
@@ -237,5 +245,6 @@ Share of battery electric and plug-in hybrids among new cars over the last 12 mo
 - **[DGT – Vehicle registration microdata (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, monthly since January 2015. Only ordinary registrations of **new** passenger cars (including off-roaders) are counted; imported used cars, which are also registered in Spain for the first time, are excluded.
 - Engine type combines the electric vehicle category (BEV, PHEV, REEV, HEV) with the propulsion recorded in the vehicle's technical data sheet. Gas includes LPG and natural gas.
 - The figures may differ slightly from those of the industry associations (ANFAC, which uses its own date and classification criteria).
+- The international comparison (full year, battery electric plus plug-in hybrids) comes from the **[IEA – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), which rounds recent shares to whole numbers; that is why it may not match the DGT figure exactly. Norway and Denmark appear as a reference (dashed border): they are the countries where electric cars are most widespread.
 
 <LastRefreshed prefix="Data updated" />

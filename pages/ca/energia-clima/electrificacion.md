@@ -1,13 +1,14 @@
 ---
 title: Electrificació de l'economia
 description: "Quina part de l'energia que consumeixen la indústria, el transport, les llars i els serveis a Espanya és electricitat, com s'escalfen les cases per província i quantes bombes de calor hi ha."
-i18n_origen: eb0a2de29207
+i18n_origen: 49a1fe838e5e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -85,6 +86,13 @@ Descarbonitzar no és només produir l'electricitat amb renovables: també cal *
         href="/ca/movilidad/coche-electrico"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'electrificacion'
+```
+
+<Comparativa data={comparativa_internacional} />
 
 ## Quina part de l'energia que es fa servir és electricitat?
 
@@ -240,7 +248,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ## Fonts i notes
 
-- **[Eurostat – Balanços energètics complets (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consum final d'energia per sector, branca industrial i combustible, 1990-últim any.
+- **[Eurostat – Balanços energètics complets (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consum final d'energia per sector, branca industrial i combustible, 1990-últim any. La comparació amb altres països fa servir la mateixa taula i la mateixa definició (electricitat entre consum final d'energia, ús energètic) i només cobreix països europeus; Noruega i Suècia hi apareixen com a referència (vora discontínua) perquè són les economies més electrificades d'Europa.
 - **[Eurostat – Consum d'energia de les llars per ús (nrg_d_hhq)](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table)**: calefacció, aigua calenta, cuina, refrigeració i il·luminació per combustible, des del 2010 (a Espanya l'elabora l'IDAE).
 - **[Eurostat – Bombes de calor (nrg_inf_hptc)](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_hptc/default/table)**: potència tèrmica per tecnologia.
 - **[INE – ECEPOV 2021, taula 56784](https://www.ine.es/jaxi/Tabla.htm?tpx=56784)**: habitatges principals amb calefacció per tipus de combustible i província.

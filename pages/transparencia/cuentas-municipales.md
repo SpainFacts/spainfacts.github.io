@@ -1,13 +1,13 @@
 ---
-title: Transparencia
+title: Rendición de cuentas de los ayuntamientos
 description: "Administraciones que no cumplen sus obligaciones legales de publicar o remitir información: quiénes son, dónde están y quién gobernaba cuando vencía el plazo."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
-    import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
-    import { formatNumber } from '../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
 ```sql ultimo

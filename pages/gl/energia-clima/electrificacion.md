@@ -1,5 +1,5 @@
 ---
-i18n_origen: eb0a2de29207
+i18n_origen: 49a1fe838e5e
 title: Electrificación da economía
 description: "Canta da enerxía que consomen a industria, o transporte, os fogares e os servizos en España é electricidade, como se quentan as casas por provincia e cantas bombas de calor hai."
 og:
@@ -8,6 +8,7 @@ og:
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -85,6 +86,13 @@ Descarbonizar non é só producir a electricidade con renovables: tamén hai que
         href="/gl/movilidad/coche-electrico"
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'electrificacion'
+```
+
+<Comparativa data={comparativa_internacional} />
 
 ## Canta da enerxía que se usa é electricidade?
 
@@ -240,7 +248,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ## Fontes e notas
 
-- **[Eurostat – Balances enerxéticos completos (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consumo final de enerxía por sector, rama industrial e combustible, 1990-último ano.
+- **[Eurostat – Balances enerxéticos completos (nrg_bal_c)](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table)**: consumo final de enerxía por sector, rama industrial e combustible, 1990-último ano. A comparación con outros países usa a mesma táboa e a mesma definición (electricidade entre consumo final de enerxía, uso enerxético) e só abrangue países europeos; Noruega e Suecia aparecen como referencia (bordo descontinuo) por seren as economías máis electrificadas de Europa.
 - **[Eurostat – Consumo de enerxía dos fogares por uso (nrg_d_hhq)](https://ec.europa.eu/eurostat/databrowser/view/nrg_d_hhq/default/table)**: calefacción, auga quente, cociña, refrixeración e iluminación por combustible, desde 2010 (en España elabórao o IDAE).
 - **[Eurostat – Bombas de calor (nrg_inf_hptc)](https://ec.europa.eu/eurostat/databrowser/view/nrg_inf_hptc/default/table)**: potencia térmica por tecnoloxía.
 - **[INE – ECEPOV 2021, táboa 56784](https://www.ine.es/jaxi/Tabla.htm?tpx=56784)**: vivendas principais con calefacción por tipo de combustible e provincia.

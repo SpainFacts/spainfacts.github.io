@@ -1,9 +1,9 @@
 ---
 title: Altres
-description: "Continguts complementaris: tots els indicadors, explorador de mapes, mapa de la població i observatoris públics."
+description: "Continguts complementaris: tots els indicadors, explorador de mapes, observatoris públics i dades obertes a Espanya i en altres països."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: ec0fb45da318
+i18n_origen: 3077ce7f83f1
 ---
 
 # Altres
@@ -29,10 +29,16 @@ Consulta anàlisis i recursos transversals que complementen els grans temes de S
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Totes les dades amb repartiment geogràfic: tria'n una a la taula i mira-la per comunitat o província.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Obre l'explorador →</span>
     </a>
-    <a href="/ca/varios/mapa-poblacion" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
-        <span class="text-3xl" aria-hidden="true">🗺️</span>
-        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Mapa de la població</h2>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quines províncies guanyen i quines perden habitants des de 1971, en percentatge.</p>
-        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Mostra el mapa →</span>
+    <a href="/ca/varios/datos-abiertos" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🔓</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Dades obertes a Espanya</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Els portals públics i els projectes de la societat civil que obren dades a Espanya, i quins fa servir SpainFacts.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Mostra els projectes →</span>
+    </a>
+    <a href="/ca/varios/inspiracion-internacional" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🌍</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Exemples d'altres països</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Projectes de dades obertes i transparència de fora que serveixen de model, i què podria aprendre Espanya.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Mostra els exemples →</span>
     </a>
 </Grid>

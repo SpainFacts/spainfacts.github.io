@@ -37,7 +37,9 @@ export const INDICADORES_INT = {
         riesgo_pobreza: ['At-risk-of-poverty rate (60% of median)', '% of population'],
         suicidios: ['Suicide rate', 'per 100,000 inhabitants'],
         tasa_empleo: ['Employment rate (15 and over)', '% of population aged 15 and over'],
-        turistas_por_habitante: ['International tourist arrivals per inhabitant', 'tourists per inhabitant']
+        turistas_por_habitante: ['International tourist arrivals per inhabitant', 'tourists per inhabitant'],
+        electrificacion: ['Electricity in final energy consumption', '% of final energy consumption'],
+        coche_electrico_cuota: ['Electric cars in new car sales', '% of new cars (battery electric and plug-in hybrids)']
     },
     ca: {
         actividad_femenina: "Taxa d'activitat femenina (15 anys o més)", camas: 'Llits hospitalaris',
@@ -53,7 +55,9 @@ export const INDICADORES_INT = {
         medicos: 'Metges', migrantes: "Població nascuda a l'estranger (estoc de migrants)", mortalidad_infantil: 'Mortalitat infantil',
         paro: "Taxa d'atur", paro_juvenil: "Taxa d'atur juvenil (15-24 anys)", pib_pc_ppa: 'PIB per habitant en paritat de poder adquisitiu',
         poblacion: 'Població', poblacion_65: 'Població de 65 anys o més', riesgo_pobreza: 'Taxa de risc de pobresa (60 % de la mediana)',
-        suicidios: 'Taxa de suïcidi', tasa_empleo: "Taxa d'ocupació (15 anys o més)", turistas_por_habitante: 'Arribades de turistes internacionals per habitant'
+        suicidios: 'Taxa de suïcidi', tasa_empleo: "Taxa d'ocupació (15 anys o més)", turistas_por_habitante: 'Arribades de turistes internacionals per habitant',
+        electrificacion: ['Electricitat en el consum final d\'energia', '% del consum final d\'energia'],
+        coche_electrico_cuota: ['Cotxes elèctrics en les vendes de turismes nous', '% dels turismes nous (elèctrics purs i híbrids endollables)']
     },
     gl: {
         actividad_femenina: 'Taxa de actividade feminina (15 anos ou máis)', camas: 'Camas de hospital',
@@ -69,7 +73,9 @@ export const INDICADORES_INT = {
         medicos: 'Médicos', migrantes: 'Poboación nada no estranxeiro (stock de migrantes)', mortalidad_infantil: 'Mortalidade infantil',
         paro: 'Taxa de paro', paro_juvenil: 'Taxa de paro xuvenil (15-24 anos)', pib_pc_ppa: 'PIB por habitante en paridade de poder adquisitivo',
         poblacion: 'Poboación', poblacion_65: 'Poboación de 65 anos ou máis', riesgo_pobreza: 'Taxa de risco de pobreza (60 % da mediana)',
-        suicidios: 'Taxa de suicidio', tasa_empleo: 'Taxa de emprego (15 anos ou máis)', turistas_por_habitante: 'Chegadas de turistas internacionais por habitante'
+        suicidios: 'Taxa de suicidio', tasa_empleo: 'Taxa de emprego (15 anos ou máis)', turistas_por_habitante: 'Chegadas de turistas internacionais por habitante',
+        electrificacion: ['Electricidade no consumo final de enerxía', '% do consumo final de enerxía'],
+        coche_electrico_cuota: ['Coches eléctricos nas vendas de turismos novos', '% dos turismos novos (eléctricos puros e híbridos enchufables)']
     },
     eu: {
         actividad_femenina: 'Emakumeen jarduera-tasa (15 urte edo gehiago)', camas: 'Ospitaleko oheak',
@@ -85,7 +91,9 @@ export const INDICADORES_INT = {
         medicos: 'Medikuak', migrantes: 'Atzerrian jaiotako biztanleria (migratzaileak)', mortalidad_infantil: 'Haurren heriotza-tasa',
         paro: 'Langabezia-tasa', paro_juvenil: 'Gazteen langabezia-tasa (15-24 urte)', pib_pc_ppa: 'BPG biztanleko erosahalmen-parekotasunean',
         poblacion: 'Biztanleria', poblacion_65: '65 urte edo gehiagoko biztanleria', riesgo_pobreza: 'Pobrezia-arriskuaren tasa (medianaren % 60)',
-        suicidios: 'Suizidio-tasa', tasa_empleo: 'Enplegu-tasa (15 urte edo gehiago)', turistas_por_habitante: 'Nazioarteko turisten etorrerak biztanleko'
+        suicidios: 'Suizidio-tasa', tasa_empleo: 'Enplegu-tasa (15 urte edo gehiago)', turistas_por_habitante: 'Nazioarteko turisten etorrerak biztanleko',
+        electrificacion: ['Elektrizitatea azken energia-kontsumoan', 'azken energia-kontsumoaren %'],
+        coche_electrico_cuota: ['Auto elektrikoak turismo berrien salmentetan', 'turismo berrien % (elektriko hutsak eta hibrido entxufagarriak)']
     }
 };
 
@@ -97,10 +105,10 @@ const UNIDADES = {
 };
 
 const FUENTES = {
-    en: [['Banco Mundial', 'World Bank'], ['estimación modelizada OIT', 'ILO modelled estimate'], ['FMI', 'IMF']],
+    en: [['Banco Mundial', 'World Bank'], ['estimación modelizada OIT', 'ILO modelled estimate'], ['FMI', 'IMF'], ['AIE', 'IEA']],
     ca: [['Banco Mundial', 'Banc Mundial'], ['estimación modelizada OIT', 'estimació modelitzada OIT']],
     gl: [['Banco Mundial', 'Banco Mundial'], ['estimación modelizada OIT', 'estimación modelizada OIT']],
-    eu: [['Banco Mundial', 'Munduko Bankua'], ['estimación modelizada OIT', 'LANEren eredu-estimazioa'], ['FMI', 'NDF']]
+    eu: [['Banco Mundial', 'Munduko Bankua'], ['estimación modelizada OIT', 'LANEren eredu-estimazioa'], ['FMI', 'NDF'], ['AIE', 'IEA']]
 };
 
 const sustituir = (texto, pares) => (pares ?? []).reduce((t, [a, b]) => t.split(a).join(b), texto ?? '');

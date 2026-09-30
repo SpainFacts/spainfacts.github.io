@@ -1,13 +1,14 @@
 ---
 title: Auto elektrikoa
 description: "Auto elektrikorako trantsizioa Espainian: turismoen matrikulazioak motor motaren arabera hilero 2015etik, elektrikoen eta hibrido entxufagarrien kuota probintziaka eta CO2 isuriak."
-i18n_origen: 65c1259ad6d0
+i18n_origen: 7dffaf225345
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -121,6 +122,13 @@ Espainian saltzen diren autoetatik zenbat dira dagoeneko elektrikoak? Erantzuna 
         sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
+
+```sql comparativa_internacional
+SELECT * FROM mother.internacional_ultimo
+WHERE indicador_id = 'coche_electrico_cuota'
+```
+
+<Comparativa data={comparativa_internacional} decimales={0} />
 
 ## Turismo berrien merkatu-kuota hilero
 
@@ -237,5 +245,6 @@ Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berr
 - **[DGT – Ibilgailuen matrikulazioen mikrodatuak (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, hilero 2015eko urtarriletik. Turismo **berrien** (lur orotako ibilgailuak barne) matrikulazio arruntak soilik zenbatzen dira; inportatutako erabilitakoak, Espainian lehen aldiz matrikulatzen badira ere, kanpoan uzten dira.
 - Motor motak ibilgailu elektrikoaren kategoria (BEV, PHEV, REEV, HEV) eta fitxa teknikoko propultsioa konbinatzen ditu. Gasak GLPa eta gas naturala barne hartzen ditu.
 - Zifrak apur bat desberdinak izan daitezke sektoreko elkarteenekin alderatuta (ANFAC, data- eta sailkapen-irizpide propioak erabiltzen dituena).
+- Nazioarteko alderaketa (urte osoa, elektriko hutsak gehi hibrido entxufagarriak) **[IEA – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** iturritik dator (CC BY 4.0), eta hark zenbaki osoetara biribiltzen ditu azken kuotak; horregatik, baliteke DGTrenarekin zehazki bat ez etortzea. Norvegia eta Danimarka erreferentzia gisa agertzen dira (ertz etena): auto elektrikoa gehien zabalduta dagoen herrialdeak dira.
 
 <LastRefreshed prefix="Datuak eguneratuta" />

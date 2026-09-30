@@ -1,14 +1,14 @@
 ---
-title: Transparencia
+title: Rendición de contas dos concellos
 description: "Administracións que non cumpren as súas obrigas legais de publicar ou remitir información: quen son, onde están e quen gobernaba cando vencía o prazo."
-i18n_origen: f1f81e75efbb
+i18n_origen: 3425c0f0ac57
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
-    import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
+    import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import { formatNumber } from '../../../../../../../src/lib/utils.js';
     const MESES_GL = {enero: 'xaneiro', febrero: 'febreiro', marzo: 'marzo', abril: 'abril', mayo: 'maio', junio: 'xuño', julio: 'xullo', agosto: 'agosto', septiembre: 'setembro', octubre: 'outubro', noviembre: 'novembro', diciembre: 'decembro'};
     const mesGl = (s) => (s ?? '').replace(/^[a-z]+/, (m) => MESES_GL[m] ?? m);
 </script>
