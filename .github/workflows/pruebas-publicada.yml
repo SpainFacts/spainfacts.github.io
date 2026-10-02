@@ -1,0 +1,31 @@
+name: Prueba de la web publicada
+
+# Revisa cada día spainfacts.org con un navegador real: los datos se actualizan solos
+# (Dagster vuelve a desplegar), así que una página puede romperse sin tocar el código.
+# Si falla, GitHub avisa por correo al dueño del repositorio.
+on:
+  schedule:
+    - cron: '30 6 * * *' # todos los días a las 06:30 UTC
+  workflow_dispatch: {}
+
+jobs:
+  humo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Prueba de humo contra spainfacts.org
+        run: |
+          npx playwright install --with-deps chromium
+          node tools/pruebas/humo.mjs --base https://spainfacts.org --concurrencia 4

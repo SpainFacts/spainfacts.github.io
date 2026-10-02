@@ -68,9 +68,9 @@ SELECT
     (SELECT puesto FROM ranking WHERE cod_mun = '${inputs.municipio}') AS puesto
 ```
 
-## {mun[0]?.municipio}
+## {mun[0]?.municipio ?? '…'}
 
-<p class="text-sm text-gray-500"><a href="/territorios">Territorios</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia}</a> › {mun[0]?.municipio}</p>
+<p class="text-sm text-gray-500"><a href="/territorios">Territorios</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa ?? '…'}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia ?? '…'}</a> › {mun[0]?.municipio ?? '…'}</p>
 
 <Grid cols=3>
     <KpiCard
@@ -78,7 +78,7 @@ SELECT
         value={mun[0]?.poblacion}
         formattedValue={formatNumber(mun[0]?.poblacion, 0)}
         unit="hab."
-        period="1 de enero de {mun[0]?.anio}"
+        period="1 de enero de {mun[0]?.anio ?? '…'}"
         source="INE – Padrón"
         sparklineData={serie_poblacion}
     />

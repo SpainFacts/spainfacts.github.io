@@ -6,6 +6,7 @@
 //   node tools/build-parcial.mjs economia --idiomas en       -> además su versión en inglés
 //   node tools/build-parcial.mjs --solo-es                   -> todo el castellano, sin traducciones (~30 min)
 //   node tools/build-parcial.mjs economia --estricto         -> build:strict en vez de build
+//   node tools/build-parcial.mjs economia --probar           -> y luego pruebas estática y de humo
 //   npm run build:parcial -- economia/paro
 //
 // Las rutas son relativas a pages/ (sin .md). La portada (pages/index.md) y el layout se
@@ -134,4 +135,12 @@ try {
 	process.exitCode = r.status ?? 1;
 } finally {
 	restaurar();
+}
+
+// --probar: pasa las pruebas estática y de humo a las páginas que se acaban de compilar
+if (opcion('--probar') && process.exitCode === 0) {
+	for (const prueba of [['tools/pruebas/estatico.mjs', '--parcial'], ['tools/pruebas/humo.mjs', '--disponibles']]) {
+		const p = spawnSync('node', prueba, { stdio: 'inherit', shell: true });
+		if (p.status) process.exitCode = p.status;
+	}
 }

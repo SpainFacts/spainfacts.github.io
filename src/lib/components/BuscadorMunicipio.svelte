@@ -23,15 +23,12 @@
 
     const quitarAcentos = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
+    // Se publica un TEXTO simple (como ButtonGroup), no un objeto con toString():
+    // en la web compilada Evidence rehidrata los inputs desde el prerender como objetos
+    // planos, sin toString, y la consulta acababa recibiendo '[object Object]'.
     function publicar(cod) {
         const limpio = String(cod).replace(/[^0-9]/g, '').slice(0, 5);
-        $inputs[name] = {
-            value: limpio,
-            toString() {
-                return limpio;
-            },
-            sql: `'${limpio}'`
-        };
+        $inputs[name] = limpio;
     }
 
     function elegir(op, actualizarUrl = true) {
@@ -61,6 +58,9 @@
 
     $: if (montado && !seleccion && opciones.length) {
         elegir(opciones.find((o) => o.cod_mun === codUrl) ?? opciones.find((o) => o.cod_mun === defecto), false);
+        // Si la rehidratación de la página pisa el input justo después, se vuelve a publicar
+        const cod = seleccion?.cod_mun;
+        if (cod) setTimeout(() => { if (seleccion?.cod_mun === cod && $inputs[name] !== cod) publicar(cod); }, 300);
     }
 
     $: q = quitarAcentos(texto.trim());

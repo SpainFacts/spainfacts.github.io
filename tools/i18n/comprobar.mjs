@@ -7,7 +7,7 @@
 //   node tools/i18n/comprobar.mjs            -> todos los idiomas
 //   node tools/i18n/comprobar.mjs ca         -> solo catalán
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, sep } from 'node:path';
 
 const PAGES = 'pages';
 const IDIOMAS = process.argv[2] ? [process.argv[2]] : ['en', 'ca', 'gl', 'eu'];
@@ -59,6 +59,9 @@ function ficheroDeRuta(ruta) {
 	return null;
 }
 
+// Páginas cuyas tarjetas viven en literales SQL `VALUES (...)` y se traducen a propósito
+const SQL_TRADUCIDO = ['varios/datos-abiertos.md', 'varios/inspiracion-internacional.md'];
+
 let problemas = 0;
 for (const lang of IDIOMAS) {
 	let ok = 0;
@@ -78,7 +81,7 @@ for (const lang of IDIOMAS) {
 		if (sa.length !== sb.length) errores.push(`bloques sql ${sa.length}≠${sb.length}`);
 		else
 			sa.forEach((q, i) => {
-				if (normalizarSql(q, lang) !== normalizarSql(sb[i], lang)) errores.push(`sql #${i + 1} cambiado`);
+				if (normalizarSql(q, lang) !== normalizarSql(sb[i], lang) && !SQL_TRADUCIDO.includes(rel.split(sep).join('/'))) errores.push(`sql #${i + 1} cambiado`);
 			});
 		const ca = componentes(a);
 		const cb = componentes(b);

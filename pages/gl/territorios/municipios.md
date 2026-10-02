@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 5d749e7a1b83
+i18n_origen: 2dfa35d3aa6e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -69,9 +69,9 @@ SELECT
     (SELECT puesto FROM ranking WHERE cod_mun = '${inputs.municipio}') AS puesto
 ```
 
-## {mun[0]?.municipio}
+## {mun[0]?.municipio ?? '…'}
 
-<p class="text-sm text-gray-500"><a href="/gl/territorios">Territorios</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia}</a> › {mun[0]?.municipio}</p>
+<p class="text-sm text-gray-500"><a href="/gl/territorios">Territorios</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa ?? '…'}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia ?? '…'}</a> › {mun[0]?.municipio ?? '…'}</p>
 
 <Grid cols=3>
     <KpiCard
@@ -79,7 +79,7 @@ SELECT
         value={mun[0]?.poblacion}
         formattedValue={formatNumber(mun[0]?.poblacion, 0)}
         unit="hab."
-        period="1 de xaneiro de {mun[0]?.anio}"
+        period="1 de xaneiro de {mun[0]?.anio ?? '…'}"
         source="INE – Padrón"
         sparklineData={serie_poblacion}
     />

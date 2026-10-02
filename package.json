@@ -5,12 +5,17 @@
     "build": "evidence build",
     "build:strict": "evidence build:strict",
     "dev": "evidence dev --open /",
-    "test": "evidence build",
+    "test": "npm run test:i18n && npm run test:web",
     "sources": "evidence sources",
     "sources:strict": "evidence sources --strict",
     "preview": "evidence preview",
     "postinstall": "patch-package",
-    "build:parcial": "node tools/build-parcial.mjs"
+    "build:parcial": "node tools/build-parcial.mjs",
+    "test:i18n": "node tools/i18n/comprobar.mjs && node tools/i18n/estado.mjs",
+    "test:estatico": "node tools/pruebas/estatico.mjs",
+    "test:humo": "node tools/pruebas/humo.mjs",
+    "test:web": "node tools/pruebas/estatico.mjs && node tools/pruebas/humo.mjs",
+    "test:publicada": "node tools/pruebas/humo.mjs --base https://spainfacts.org"
   },
   "engines": {
     "npm": ">=7.0.0",
@@ -45,6 +50,7 @@
     "axios": "^1.7.4"
   },
   "devDependencies": {
-    "patch-package": "^8.0.1"
+    "patch-package": "^8.0.1",
+    "playwright": "^1.63.0"
   }
 }

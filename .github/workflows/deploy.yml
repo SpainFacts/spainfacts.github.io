@@ -37,6 +37,20 @@ jobs:
           node tools/sitemap.mjs
           node tools/html-lang-es.mjs
 
+      # Pruebas: si algo falla, no se despliega (la web publicada sigue como estaba)
+      - name: Comprobar traducciones
+        run: |
+          node tools/i18n/comprobar.mjs
+          node tools/i18n/estado.mjs
+
+      - name: Prueba estática (lang, títulos, enlaces internos, undefined/NaN)
+        run: node tools/pruebas/estatico.mjs
+
+      - name: Prueba de humo con navegador
+        run: |
+          npx playwright install --with-deps chromium
+          node tools/pruebas/humo.mjs --concurrencia 4
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
