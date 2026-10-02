@@ -37,7 +37,7 @@ import logging
 import re
 import zipfile
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import dlt
@@ -51,6 +51,9 @@ log = logging.getLogger(__name__)
 URL_MAT = (
     "https://www.dgt.es/microdatos/salida/{anio}/{mes}/vehiculos/matriculaciones/"
     "export_mensual_mat_{anio}{mes:02d}.zip"
+)
+URL_MAT_DIA = (
+    "https://www.dgt.es/microdatos/salida/{anio}/{mes}/vehiculos/matriculaciones/export_mat_{fecha}.zip"
 )
 URL_PARQUE = "https://www.dgt.es/microdatos/Parque/parque_vehiculos_{anio}{mes:02d}.zip"
 PRIMER_MES = date(2015, 1, 1)
@@ -128,6 +131,14 @@ def _meses(desde: date, hasta: date):
     while d <= hasta:
         yield d
         d = date(d.year + (d.month == 12), d.month % 12 + 1, 1)
+
+
+def _dias(desde: date, hasta: date):
+    """Días de `desde` a `hasta` (este excluido)."""
+    d = desde
+    while d < hasta:
+        yield d
+        d += timedelta(days=1)
 
 
 def limpiar_modelo(marca: str, modelo: str) -> tuple[str, str]:
@@ -313,22 +324,73 @@ def agregar_matriculaciones(lineas) -> dict:
     }
 
 
-def _matriculaciones_mes(mes: date, refrescar: bool) -> dict | None:
-    cache = CACHE / "matriculaciones" / f"{mes:%Y%m}.json.gz"
-    if cache.exists() and not refrescar:
-        return _leer_cache(cache)
-    zip_tmp = CACHE / "tmp" / f"mat_{mes:%Y%m}.zip"
-    zip_tmp.parent.mkdir(parents=True, exist_ok=True)
-    if not _descargar(URL_MAT.format(anio=mes.year, mes=mes.month), zip_tmp):
-        return None
+def _lineas_zip(zip_tmp: Path):
+    """Líneas de registro del .txt de un zip de matriculaciones (sin la cabecera)."""
     with zipfile.ZipFile(zip_tmp) as z:
         nombre = next(n for n in z.namelist() if n.lower().endswith(".txt"))
         with z.open(nombre) as f:
             texto = io.TextIOWrapper(f, encoding="latin-1", newline="")
             next(texto)  # cabecera "Vehículos matriculados. Letras de la serie..."
-            datos = agregar_matriculaciones(texto)
-    zip_tmp.unlink()
-    _guardar_cache(cache, datos)
+            yield from texto
+
+
+def _lineas_diarias(mes: date):
+    """Todas las líneas del mes a partir de los ficheros diarios, o None si aún no está completo.
+
+    La DGT publica el fichero diario al día siguiente, pero el mensual tarda unas dos
+    semanas: sin esto, el mes anterior no aparece hasta mediados del siguiente. Los días
+    sin actividad (fines de semana, festivos) no tienen fichero; como se publican en
+    orden, el mes está completo si ya hay fichero del último día o de alguno posterior.
+    """
+    siguiente = date(mes.year + (mes.month == 12), mes.month % 12 + 1, 1)
+
+    def _bajar(dia: date) -> Path | None:
+        zip_tmp = CACHE / "tmp" / f"mat_{dia:%Y%m%d}.zip"
+        if zip_tmp.exists() or _descargar(
+            URL_MAT_DIA.format(anio=dia.year, mes=dia.month, fecha=f"{dia:%Y%m%d}"), zip_tmp
+        ):
+            return zip_tmp
+        return None
+
+    cierre = [_bajar(d) for d in _dias(siguiente - timedelta(days=1), siguiente + timedelta(days=4))]
+    if not any(cierre):
+        log.info("Matriculaciones diarias de %s aún sin cerrar", f"{mes:%Y-%m}")
+        return None
+    for z in cierre[1:]:
+        if z:
+            z.unlink()  # días del mes siguiente: solo servían para saber que el mes cerró
+    zips = [z for z in map(_bajar, _dias(mes, siguiente)) if z]
+
+    def _todas():
+        for z in zips:
+            yield from _lineas_zip(z)
+            z.unlink()
+
+    return _todas()
+
+
+def _matriculaciones_mes(mes: date, refrescar: bool) -> dict | None:
+    cache = CACHE / "matriculaciones" / f"{mes:%Y%m}.json.gz"
+    # Mes montado con ficheros diarios: provisional hasta que salga el mensual.
+    cache_diaria = CACHE / "matriculaciones" / f"{mes:%Y%m}.diario.json.gz"
+    if cache.exists() and not refrescar:
+        return _leer_cache(cache)
+    zip_tmp = CACHE / "tmp" / f"mat_{mes:%Y%m}.zip"
+    zip_tmp.parent.mkdir(parents=True, exist_ok=True)
+    if _descargar(URL_MAT.format(anio=mes.year, mes=mes.month), zip_tmp):
+        datos = agregar_matriculaciones(_lineas_zip(zip_tmp))
+        zip_tmp.unlink()
+        _guardar_cache(cache, datos)
+        cache_diaria.unlink(missing_ok=True)
+        return datos
+    if cache_diaria.exists():
+        return _leer_cache(cache_diaria)
+    lineas = _lineas_diarias(mes)
+    if lineas is None:
+        return None
+    log.info("Matriculaciones %s: sin fichero mensual aún, uso los diarios", f"{mes:%Y-%m}")
+    datos = agregar_matriculaciones(lineas)
+    _guardar_cache(cache_diaria, datos)
     return datos
 
 
