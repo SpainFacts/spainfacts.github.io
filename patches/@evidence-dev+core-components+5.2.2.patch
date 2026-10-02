@@ -448,10 +448,10 @@ index 0000000..b1fed5e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..7102785
+index 0000000..3470b3b
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,2618 @@
+@@ -0,0 +1,2622 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
@@ -590,7 +590,8 @@ index 0000000..7102785
 +		'Cataluña': 'Catalonia',
 +		'Causas externas de mortalidad': 'External causes of death',
 +		'Centro América y Caribe': 'Central America and Caribbean',
-+		'Centro y derecha': 'Centre and right',
++		'Derecha': 'Right',
++		'Centro': 'Centre',
 +		'Cerrada en': 'Closed in',
 +		'Chequia': 'Czechia',
 +		'Chipre': 'Cyprus',
@@ -1312,7 +1313,8 @@ index 0000000..7102785
 +		'Cataluña': 'Catalunya',
 +		'Causas externas de mortalidad': 'Causes externes de mortalitat',
 +		'Centro América y Caribe': 'Amèrica Central i Carib',
-+		'Centro y derecha': 'Centre i dreta',
++		'Derecha': 'Dreta',
++		'Centro': 'Centre',
 +		'Cerrada en': 'Tancada el',
 +		'Chequia': 'Txèquia',
 +		'Chipre': 'Xipre',
@@ -1937,7 +1939,8 @@ index 0000000..7102785
 +		'Castilla-La Mancha': 'Castela-A Mancha',
 +		'Causas externas de mortalidad': 'Causas externas de mortalidade',
 +		'Centro América y Caribe': 'América Central e Caribe',
-+		'Centro y derecha': 'Centro e dereita',
++		'Derecha': 'Dereita',
++		'Centro': 'Centro',
 +		'Cerrada en': 'Pechada en',
 +		'Cibercriminalidad': 'Cibercriminalidade',
 +		'Ciclos Combinados (Gas)': 'Ciclos combinados (gas)',
@@ -2484,7 +2487,8 @@ index 0000000..7102785
 +		'Cataluña': 'Katalunia',
 +		'Causas externas de mortalidad': 'Heriotza-kanpo kausak',
 +		'Centro América y Caribe': 'Erdialdeko Amerika eta Karibea',
-+		'Centro y derecha': 'Zentroa eta eskuina',
++		'Derecha': 'Eskuina',
++		'Centro': 'Zentroa',
 +		'Cerrada en': 'Itxia:',
 +		'Chequia': 'Txekia',
 +		'Chipre': 'Zipre',

@@ -1,7 +1,7 @@
 ---
 title: Elections
 description: "Results of general elections since 1977, European and municipal elections: turnout, votes by party and by bloc, fragmentation, votes per seat and the winner in each province and municipality, using official data from the Ministry of the Interior."
-i18n_origen: 52a869023a0e
+i18n_origen: c6f8193148e9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -158,14 +158,15 @@ ORDER BY fecha, orden
 SELECT
     etiqueta,
     max(pct) FILTER (WHERE bloque = 'Izquierda') AS izq,
-    max(pct) FILTER (WHERE bloque = 'Centro y derecha') AS der,
+    max(pct) FILTER (WHERE bloque = 'Derecha') AS der,
+    coalesce(max(pct) FILTER (WHERE bloque = 'Centro'), 0) AS cen,
     max(pct) FILTER (WHERE bloque = 'Nacionalistas y regionalistas') AS nac
 FROM ${bloques}
 WHERE fecha = (SELECT max(fecha) FROM ${bloques})
 GROUP BY etiqueta
 ```
 
-Each list is assigned to a political family and each family to one of four blocs. In the most recent election of this type ({bloques_ultima[0]?.etiqueta}), the nationwide left won {formatNumber(bloques_ultima[0]?.izq, 1)} % of valid votes, the nationwide centre and right {formatNumber(bloques_ultima[0]?.der, 1)} % and nationalist and regionalist parties {formatNumber(bloques_ultima[0]?.nac, 1)} %.
+Each list is assigned to a political family and each family to one of five blocs. In the most recent election of this type ({bloques_ultima[0]?.etiqueta}), the nationwide left won {formatNumber(bloques_ultima[0]?.izq, 1)} % of valid votes, the nationwide right {formatNumber(bloques_ultima[0]?.der, 1)} %, centre parties {formatNumber(bloques_ultima[0]?.cen, 1)} % and nationalist and regionalist parties {formatNumber(bloques_ultima[0]?.nac, 1)} %.
 
 <BarChart
     data={bloques}
@@ -176,11 +177,11 @@ Each list is assigned to a political family and each family to one of four blocs
     sort=false
     yFmt='0"%"'
     yMax={100}
-    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
     title="Votes by bloc, as % of valid votes (the remainder up to 100 is blank votes)"
 />
 
-<p class="text-xs text-gray-500">Left (Izquierda): PSOE and the IU, Podemos and Sumar family (with PCE, ICV, the regional confluences and Más País). Centre and right (Centro y derecha): UCD, CDS, AP-PP, Ciudadanos, UPyD, Vox and UPN. Nationalists and regionalists (Nacionalistas y regionalistas): parties operating within a single region (CiU-Junts, ERC, PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Others (Otros): all remaining lists, mostly small ones and, in municipal elections, groups of electors and independents. This is SpainFacts' own classification: the details of which party labels go into each family are in the website's code (seed elecciones_partidos_reglas).</p>
+<p class="text-xs text-gray-500">Left (Izquierda): PSOE and the IU, Podemos and Sumar family (with PCE, ICV, the regional confluences and Más País). Right (Derecha): AP-PP, Vox and UPN. Centre (Centro): UCD, CDS, Ciudadanos and UPyD. Nationalists and regionalists (Nacionalistas y regionalistas): parties operating within a single region (CiU-Junts, ERC, PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Others (Otros): all remaining lists, mostly small ones and, in municipal elections, groups of electors and independents. This is SpainFacts' own classification: the details of which party labels go into each family are in the website's code (seed elecciones_partidos_reglas).</p>
 
 ## Votes by party
 
@@ -362,7 +363,8 @@ SELECT
     p.participacion / 100 AS participacion,
     p.ganador_siglas, p.ganador_pct / 100 AS ganador_pct,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Izquierda'), 0) AS izq,
-    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro y derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro'), 0) AS cen,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Nacionalistas y regionalistas'), 0) AS nac,
     p.nep_votos
 FROM mother.elecciones_participacion p
@@ -384,7 +386,8 @@ ORDER BY 3 DESC
     <Column id=ganador_siglas title="Most voted" />
     <Column id=ganador_pct title="% of vote" fmt=pct1 />
     <Column id=izq title="Left" fmt=pct1 />
-    <Column id=der title="Centre and right" fmt=pct1 />
+    <Column id=der title="Right" fmt=pct1 />
+    <Column id=cen title="Centre" fmt=pct1 />
     <Column id=nac title="Nationalist and reg." fmt=pct1 />
     <Column id=nep_votos title="Effective no. of parties" fmt='0.0' />
 </DataTable>
@@ -399,6 +402,7 @@ SELECT
     (participacion - participacion_anterior) AS dif_participacion,
     pct_izquierda / 100 AS izq,
     pct_derecha / 100 AS der,
+    pct_centro / 100 AS cen,
     pct_nacionalistas / 100 AS nac,
     '/en' || enlace AS enlace
 FROM mother.elecciones_municipios_congreso
@@ -427,7 +431,8 @@ Results of the last general election in all {formatNumber(municipios_resumen[0]?
     <Column id=participacion title="Turnout" fmt=pct1 />
     <Column id=dif_participacion title="vs previous (pp)" fmt='+0.0;-0.0' contentType=delta />
     <Column id=izq title="Left" fmt=pct1 />
-    <Column id=der title="Centre and right" fmt=pct1 />
+    <Column id=der title="Right" fmt=pct1 />
+    <Column id=cen title="Centre" fmt=pct1 />
     <Column id=nac title="Nationalist and reg." fmt=pct1 />
 </DataTable>
 

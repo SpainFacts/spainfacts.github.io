@@ -37,8 +37,8 @@ seeds:
     description: >
       Dimensión de familias políticas para las páginas de elecciones: siglas cortas, color
       (los de partidos_familias) y bloque ideológico para comparar en el tiempo:
-      'Izquierda' (PSOE; IU, Podemos y Sumar), 'Centro y derecha' (PP, Vox, Ciudadanos, UCD,
-      CDS, UPyD, UPN), 'Nacionalistas y regionalistas' (partidos de ámbito autonómico) y
+      'Izquierda' (PSOE; IU, Podemos y Sumar), 'Derecha' (PP, Vox, UPN), 'Centro' (Ciudadanos, UCD,
+      CDS, UPyD), 'Nacionalistas y regionalistas' (partidos de ámbito autonómico) y
       'Otros' (resto de candidaturas estatales pequeñas, independientes y locales).
     config:
       column_types:
@@ -54,4 +54,4 @@ seeds:
         tests:
           - accepted_values:
               arguments:
-                values: ['Izquierda', 'Centro y derecha', 'Nacionalistas y regionalistas', 'Otros']
+                values: ['Izquierda', 'Derecha', 'Centro', 'Nacionalistas y regionalistas', 'Otros']

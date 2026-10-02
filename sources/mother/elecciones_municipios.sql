@@ -12,6 +12,7 @@ SELECT
     CAST(round(ganador_pct, 1) AS DECIMAL(4, 1)) AS ganador_pct,
     CAST(round(pct_izquierda, 1) AS DECIMAL(4, 1)) AS pct_izquierda,
     CAST(round(pct_derecha, 1) AS DECIMAL(4, 1)) AS pct_derecha,
+    CAST(round(pct_centro, 1) AS DECIMAL(4, 1)) AS pct_centro,
     CAST(round(pct_nacionalistas, 1) AS DECIMAL(4, 1)) AS pct_nacionalistas,
     CAST(round(pct_psoe, 1) AS DECIMAL(4, 1)) AS pct_psoe,
     CAST(round(pct_pp, 1) AS DECIMAL(4, 1)) AS pct_pp,

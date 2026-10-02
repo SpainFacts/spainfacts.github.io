@@ -52,7 +52,8 @@ agg as (
         v.proceso,
         v.cod_mun,
         sum(v.votos) filter (where v.bloque = 'Izquierda') as v_izquierda,
-        sum(v.votos) filter (where v.bloque = 'Centro y derecha') as v_derecha,
+        sum(v.votos) filter (where v.bloque = 'Derecha') as v_derecha,
+        sum(v.votos) filter (where v.bloque = 'Centro') as v_centro,
         sum(v.votos) filter (where v.bloque = 'Nacionalistas y regionalistas') as v_nacionalistas,
         sum(v.votos) filter (where v.familia = 'PSOE') as v_psoe,
         sum(v.votos) filter (where v.familia = 'PP') as v_pp,
@@ -88,7 +89,7 @@ select
     cast(100.0 * g.ganador_votos / nullif(m.blancos + a.v_candidaturas, 0) as decimal(5, 2)) as ganador_pct,
     cast(g.ganador_electos as smallint) as ganador_electos,
     cast(m.escanos as smallint) as concejales,
-    {%- for col, v in [('pct_izquierda', 'v_izquierda'), ('pct_derecha', 'v_derecha'), ('pct_nacionalistas', 'v_nacionalistas'),
+    {%- for col, v in [('pct_izquierda', 'v_izquierda'), ('pct_derecha', 'v_derecha'), ('pct_centro', 'v_centro'), ('pct_nacionalistas', 'v_nacionalistas'),
                        ('pct_psoe', 'v_psoe'), ('pct_pp', 'v_pp'), ('pct_vox', 'v_vox'),
                        ('pct_iu_podemos_sumar', 'v_ips'), ('pct_cs', 'v_cs')] %}
     cast(100.0 * coalesce(a.{{ v }}, 0) / nullif(m.blancos + a.v_candidaturas, 0) as decimal(5, 2)) as {{ col }},

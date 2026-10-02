@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 2dfa35d3aa6e
+i18n_origen: 9e50cb98a359
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -654,7 +654,7 @@ ORDER BY mandato
 SELECT e.proceso, e.tipo, p.fecha, CAST(e.anio AS INTEGER) AS anio,
     CASE e.tipo WHEN '02' THEN 'Generales' ELSE 'Municipales' END AS eleccion,
     e.participacion, e.ganador_siglas, e.ganador_familia, b.color AS ganador_color, e.ganador_pct,
-    e.pct_izquierda, e.pct_derecha, e.pct_nacionalistas, e.pct_psoe, e.pct_pp, e.pct_vox, e.pct_iu_podemos_sumar
+    e.pct_izquierda, e.pct_derecha, e.pct_centro, e.pct_nacionalistas, e.pct_psoe, e.pct_pp, e.pct_vox, e.pct_iu_podemos_sumar
 FROM mother.elecciones_municipios e
 JOIN mother.elecciones_participacion p ON p.proceso = e.proceso AND p.nivel = 'pais'
 LEFT JOIN (SELECT DISTINCT familia, color FROM mother.elecciones_familias) b ON b.familia = e.ganador_familia
@@ -668,8 +668,8 @@ SELECT *, participacion AS valor FROM ${elec_mun} WHERE tipo = '02' ORDER BY fec
 
 ```sql elec_mun_bloques
 SELECT fecha, bloque, pct FROM (
-    SELECT fecha, unnest(['Izquierda', 'Centro y derecha', 'Nacionalistas y regionalistas']) AS bloque,
-        unnest([pct_izquierda, pct_derecha, pct_nacionalistas]) AS pct
+    SELECT fecha, unnest(['Izquierda', 'Derecha', 'Centro', 'Nacionalistas y regionalistas']) AS bloque,
+        unnest([pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas]) AS pct
     FROM ${elec_mun_gen})
 ORDER BY fecha
 ```
@@ -690,7 +690,7 @@ ORDER BY fecha
 </Grid>
 
 <LineChart data={elec_mun_bloques} x=fecha y=pct series=bloque yFmt='0"%"' markers=true
-    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04'}}
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
     title="Vote by bloc in general elections, % of valid votes" />
 
 <DataTable data={elec_mun} rows=10>

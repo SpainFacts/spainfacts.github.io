@@ -3,7 +3,7 @@ title: Eleccions
 description: "Resultats de les eleccions generals des de 1977, europees i municipals: participació, vot per partit i per bloc, fragmentació, vots per escó i guanyador a cada província i municipi, amb les dades oficials del Ministeri de l'Interior."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 52a869023a0e
+i18n_origen: c6f8193148e9
 ---
 
 <script>
@@ -161,14 +161,15 @@ ORDER BY fecha, orden
 SELECT
     etiqueta,
     max(pct) FILTER (WHERE bloque = 'Izquierda') AS izq,
-    max(pct) FILTER (WHERE bloque = 'Centro y derecha') AS der,
+    max(pct) FILTER (WHERE bloque = 'Derecha') AS der,
+    coalesce(max(pct) FILTER (WHERE bloque = 'Centro'), 0) AS cen,
     max(pct) FILTER (WHERE bloque = 'Nacionalistas y regionalistas') AS nac
 FROM ${bloques}
 WHERE fecha = (SELECT max(fecha) FROM ${bloques})
 GROUP BY etiqueta
 ```
 
-Cada candidatura s'assigna a una família política i cada família a un de quatre blocs. En les últimes eleccions d'aquest tipus ({mesCa(bloques_ultima[0]?.etiqueta)}) l'esquerra estatal va sumar el {formatNumber(bloques_ultima[0]?.izq, 1)} % dels vots vàlids, el centre i la dreta estatals el {formatNumber(bloques_ultima[0]?.der, 1)} % i els partits nacionalistes i regionalistes el {formatNumber(bloques_ultima[0]?.nac, 1)} %.
+Cada candidatura s'assigna a una família política i cada família a un de cinc blocs. En les últimes eleccions d'aquest tipus ({mesCa(bloques_ultima[0]?.etiqueta)}) l'esquerra estatal va sumar el {formatNumber(bloques_ultima[0]?.izq, 1)} % dels vots vàlids, la dreta estatal el {formatNumber(bloques_ultima[0]?.der, 1)} %, els partits de centre el {formatNumber(bloques_ultima[0]?.cen, 1)} % i els partits nacionalistes i regionalistes el {formatNumber(bloques_ultima[0]?.nac, 1)} %.
 
 <BarChart
     data={bloques}
@@ -179,11 +180,11 @@ Cada candidatura s'assigna a una família política i cada família a un de quat
     sort=false
     yFmt='0"%"'
     yMax={100}
-    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
     title="Vot per bloc, en % dels vots vàlids (la resta fins a 100 és vot en blanc)"
 />
 
-<p class="text-xs text-gray-500">Esquerra: PSOE i la família d'IU, Podem i Sumar (amb PCE, ICV, les confluències i Más País). Centre i dreta: UCD, CDS, AP-PP, Ciutadans, UPyD, Vox i UPN. Nacionalistes i regionalistes: partits d'àmbit autonòmic (CiU-Junts, ERC, PNB, EH Bildu, BNG, Coalició Canària, Compromís, PAR, PRC, Teruel Existe...). Altres: la resta de candidatures, sobretot petites i, en les municipals, agrupacions d'electors i independents. És una classificació de SpainFacts: el detall de quines sigles van a cada família és al codi del web (seed elecciones_partidos_reglas).</p>
+<p class="text-xs text-gray-500">Esquerra: PSOE i la família d'IU, Podem i Sumar (amb PCE, ICV, les confluències i Más País). Dreta: AP-PP, Vox i UPN. Centre: UCD, CDS, Ciutadans i UPyD. Nacionalistes i regionalistes: partits d'àmbit autonòmic (CiU-Junts, ERC, PNB, EH Bildu, BNG, Coalició Canària, Compromís, PAR, PRC, Teruel Existe...). Altres: la resta de candidatures, sobretot petites i, en les municipals, agrupacions d'electors i independents. És una classificació de SpainFacts: el detall de quines sigles van a cada família és al codi del web (seed elecciones_partidos_reglas).</p>
 
 ## Vot per partit
 
@@ -365,7 +366,8 @@ SELECT
     p.participacion / 100 AS participacion,
     p.ganador_siglas, p.ganador_pct / 100 AS ganador_pct,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Izquierda'), 0) AS izq,
-    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro y derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro'), 0) AS cen,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Nacionalistas y regionalistas'), 0) AS nac,
     p.nep_votos
 FROM mother.elecciones_participacion p
@@ -387,7 +389,8 @@ ORDER BY 3 DESC
     <Column id=ganador_siglas title="Més votada" />
     <Column id=ganador_pct title="% vot" fmt=pct1 />
     <Column id=izq title="Esquerra" fmt=pct1 />
-    <Column id=der title="Centre i dreta" fmt=pct1 />
+    <Column id=der title="Dreta" fmt=pct1 />
+    <Column id=cen title="Centre" fmt=pct1 />
     <Column id=nac title="Nacionalistes i reg." fmt=pct1 />
     <Column id=nep_votos title="Nre. efectiu de partits" fmt='0.0' />
 </DataTable>
@@ -402,6 +405,7 @@ SELECT
     (participacion - participacion_anterior) AS dif_participacion,
     pct_izquierda / 100 AS izq,
     pct_derecha / 100 AS der,
+    pct_centro / 100 AS cen,
     pct_nacionalistas / 100 AS nac,
     '/ca' || enlace AS enlace
 FROM mother.elecciones_municipios_congreso
@@ -430,7 +434,8 @@ Resultat de les últimes generals als {formatNumber(municipios_resumen[0]?.n, 0)
     <Column id=participacion title="Participació" fmt=pct1 />
     <Column id=dif_participacion title="vs. anteriors (p.p.)" fmt='+0.0;-0.0' contentType=delta />
     <Column id=izq title="Esquerra" fmt=pct1 />
-    <Column id=der title="Centre i dreta" fmt=pct1 />
+    <Column id=der title="Dreta" fmt=pct1 />
+    <Column id=cen title="Centre" fmt=pct1 />
     <Column id=nac title="Nacionalistes i reg." fmt=pct1 />
 </DataTable>
 

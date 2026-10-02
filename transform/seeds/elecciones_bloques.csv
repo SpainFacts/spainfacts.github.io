@@ -1,13 +1,13 @@
 familia,siglas_familia,color,bloque,orden
 PSOE,PSOE,#e30613,Izquierda,1
 "IU, Podemos y Sumar",IU-Podemos-Sumar,#7b2d8e,Izquierda,2
-PP,PP,#1d84ce,Centro y derecha,3
-Vox,Vox,#5ac035,Centro y derecha,4
-Ciudadanos,Cs,#eb6109,Centro y derecha,5
-UCD,UCD,#2f9c95,Centro y derecha,6
-CDS,CDS,#9e9d24,Centro y derecha,7
-UPyD,UPyD,#e5007d,Centro y derecha,8
-UPN,UPN,#3949ab,Centro y derecha,9
+PP,PP,#1d84ce,Derecha,3
+Vox,Vox,#5ac035,Derecha,4
+Ciudadanos,Cs,#eb6109,Centro,5
+UCD,UCD,#2f9c95,Centro,6
+CDS,CDS,#9e9d24,Centro,7
+UPyD,UPyD,#e5007d,Centro,8
+UPN,UPN,#3949ab,Derecha,9
 ERC,ERC,#ffb232,Nacionalistas y regionalistas,10
 Junts / CiU,Junts,#20c0b2,Nacionalistas y regionalistas,11
 PNV,PNV,#006b2d,Nacionalistas y regionalistas,12

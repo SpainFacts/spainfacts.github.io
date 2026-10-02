@@ -3,7 +3,7 @@ title: Hauteskundeak
 description: "1977az geroztiko hauteskunde orokorren, europarren eta udal-hauteskundeen emaitzak: parte-hartzea, botoa alderdika eta blokeka, zatiketa, eserlekuko botoak eta irabazlea probintzia eta udalerri bakoitzean, Barne Ministerioaren datu ofizialekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 52a869023a0e
+i18n_origen: c6f8193148e9
 ---
 
 <script>
@@ -161,14 +161,15 @@ ORDER BY fecha, orden
 SELECT
     etiqueta,
     max(pct) FILTER (WHERE bloque = 'Izquierda') AS izq,
-    max(pct) FILTER (WHERE bloque = 'Centro y derecha') AS der,
+    max(pct) FILTER (WHERE bloque = 'Derecha') AS der,
+    coalesce(max(pct) FILTER (WHERE bloque = 'Centro'), 0) AS cen,
     max(pct) FILTER (WHERE bloque = 'Nacionalistas y regionalistas') AS nac
 FROM ${bloques}
 WHERE fecha = (SELECT max(fecha) FROM ${bloques})
 GROUP BY etiqueta
 ```
 
-Hautagaitza bakoitza familia politiko bati esleitzen zaio, eta familia bakoitza lau blokeetako bati. Mota honetako azken hauteskundeetan ({hil(bloques_ultima[0]?.etiqueta)}), estatu mailako ezkerrak baliozko botoen {formatNumber(bloques_ultima[0]?.izq, 1)} % lortu zuen, estatu mailako zentroak eta eskuinak {formatNumber(bloques_ultima[0]?.der, 1)} %, eta alderdi nazionalistek eta erregionalistek {formatNumber(bloques_ultima[0]?.nac, 1)} %.
+Hautagaitza bakoitza familia politiko bati esleitzen zaio, eta familia bakoitza bost blokeetako bati. Mota honetako azken hauteskundeetan ({hil(bloques_ultima[0]?.etiqueta)}), estatu mailako ezkerrak baliozko botoen {formatNumber(bloques_ultima[0]?.izq, 1)} % lortu zuen, estatu mailako eskuinak {formatNumber(bloques_ultima[0]?.der, 1)} %, zentroko alderdiek {formatNumber(bloques_ultima[0]?.cen, 1)} %, eta alderdi nazionalistek eta erregionalistek {formatNumber(bloques_ultima[0]?.nac, 1)} %.
 
 <BarChart
     data={bloques}
@@ -179,11 +180,11 @@ Hautagaitza bakoitza familia politiko bati esleitzen zaio, eta familia bakoitza 
     sort=false
     yFmt='0"%"'
     yMax={100}
-    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
     title="Botoa blokeka, baliozko botoen ehunekotan (100era arteko gainerakoa boto zuria da)"
 />
 
-<p class="text-xs text-gray-500">Ezkerra: PSOE eta IU, Podemos eta Sumarren familia (PCE, ICV, konfluentziak eta Más País barne). Zentroa eta eskuina: UCD, CDS, AP-PP, Ciudadanos, UPyD, Vox eta UPN. Nazionalistak eta erregionalistak: autonomia-eremuko alderdiak (CiU-Junts, ERC, EAJ-PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Beste batzuk: gainerako hautagaitzak, batez ere txikiak eta, udal-hauteskundeetan, hautesle-elkarteak eta independenteak. SpainFactsen sailkapena da: zein siglak zein familiatara doazen webgunearen kodean dago zehaztuta (seed elecciones_partidos_reglas).</p>
+<p class="text-xs text-gray-500">Ezkerra: PSOE eta IU, Podemos eta Sumarren familia (PCE, ICV, konfluentziak eta Más País barne). Eskuina: AP-PP, Vox eta UPN. Zentroa: UCD, CDS, Ciudadanos eta UPyD. Nazionalistak eta erregionalistak: autonomia-eremuko alderdiak (CiU-Junts, ERC, EAJ-PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Beste batzuk: gainerako hautagaitzak, batez ere txikiak eta, udal-hauteskundeetan, hautesle-elkarteak eta independenteak. SpainFactsen sailkapena da: zein siglak zein familiatara doazen webgunearen kodean dago zehaztuta (seed elecciones_partidos_reglas).</p>
 
 ## Botoa alderdika
 
@@ -365,7 +366,8 @@ SELECT
     p.participacion / 100 AS participacion,
     p.ganador_siglas, p.ganador_pct / 100 AS ganador_pct,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Izquierda'), 0) AS izq,
-    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro y derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro'), 0) AS cen,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Nacionalistas y regionalistas'), 0) AS nac,
     p.nep_votos
 FROM mother.elecciones_participacion p
@@ -387,7 +389,8 @@ ORDER BY 3 DESC
     <Column id=ganador_siglas title="Bozkatuena" />
     <Column id=ganador_pct title="Botoen %" fmt=pct1 />
     <Column id=izq title="Ezkerra" fmt=pct1 />
-    <Column id=der title="Zentroa eta eskuina" fmt=pct1 />
+    <Column id=der title="Eskuina" fmt=pct1 />
+    <Column id=cen title="Zentroa" fmt=pct1 />
     <Column id=nac title="Nazionalistak eta erreg." fmt=pct1 />
     <Column id=nep_votos title="Alderdien kopuru efektiboa" fmt='0.0' />
 </DataTable>
@@ -402,6 +405,7 @@ SELECT
     (participacion - participacion_anterior) AS dif_participacion,
     pct_izquierda / 100 AS izq,
     pct_derecha / 100 AS der,
+    pct_centro / 100 AS cen,
     pct_nacionalistas / 100 AS nac,
     '/eu' || enlace AS enlace
 FROM mother.elecciones_municipios_congreso
@@ -430,7 +434,8 @@ Azken hauteskunde orokorren emaitza {formatNumber(municipios_resumen[0]?.n, 0)} 
     <Column id=participacion title="Parte-hartzea" fmt=pct1 />
     <Column id=dif_participacion title="aurrekoekiko (p.p.)" fmt='+0.0;-0.0' contentType=delta />
     <Column id=izq title="Ezkerra" fmt=pct1 />
-    <Column id=der title="Zentroa eta eskuina" fmt=pct1 />
+    <Column id=der title="Eskuina" fmt=pct1 />
+    <Column id=cen title="Zentroa" fmt=pct1 />
     <Column id=nac title="Nazionalistak eta erreg." fmt=pct1 />
 </DataTable>
 

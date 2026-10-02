@@ -157,14 +157,15 @@ ORDER BY fecha, orden
 SELECT
     etiqueta,
     max(pct) FILTER (WHERE bloque = 'Izquierda') AS izq,
-    max(pct) FILTER (WHERE bloque = 'Centro y derecha') AS der,
+    max(pct) FILTER (WHERE bloque = 'Derecha') AS der,
+    coalesce(max(pct) FILTER (WHERE bloque = 'Centro'), 0) AS cen,
     max(pct) FILTER (WHERE bloque = 'Nacionalistas y regionalistas') AS nac
 FROM ${bloques}
 WHERE fecha = (SELECT max(fecha) FROM ${bloques})
 GROUP BY etiqueta
 ```
 
-Cada candidatura se asigna a una familia política y cada familia a uno de cuatro bloques. En las últimas elecciones de este tipo ({bloques_ultima[0]?.etiqueta}) la izquierda estatal sumó el {formatNumber(bloques_ultima[0]?.izq, 1)} % de los votos válidos, el centro y la derecha estatales el {formatNumber(bloques_ultima[0]?.der, 1)} % y los partidos nacionalistas y regionalistas el {formatNumber(bloques_ultima[0]?.nac, 1)} %.
+Cada candidatura se asigna a una familia política y cada familia a uno de cinco bloques. En las últimas elecciones de este tipo ({bloques_ultima[0]?.etiqueta}) la izquierda estatal sumó el {formatNumber(bloques_ultima[0]?.izq, 1)} % de los votos válidos, la derecha estatal el {formatNumber(bloques_ultima[0]?.der, 1)} %, los partidos de centro el {formatNumber(bloques_ultima[0]?.cen, 1)} % y los partidos nacionalistas y regionalistas el {formatNumber(bloques_ultima[0]?.nac, 1)} %.
 
 <BarChart
     data={bloques}
@@ -175,11 +176,11 @@ Cada candidatura se asigna a una familia política y cada familia a uno de cuatr
     sort=false
     yFmt='0"%"'
     yMax={100}
-    seriesColors={{'Izquierda': '#dc2626', 'Centro y derecha': '#2563eb', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04', 'Otros': '#9ca3af'}}
     title="Voto por bloque, en % de los votos válidos (el resto hasta 100 es voto en blanco)"
 />
 
-<p class="text-xs text-gray-500">Izquierda: PSOE y la familia de IU, Podemos y Sumar (con PCE, ICV, las confluencias y Más País). Centro y derecha: UCD, CDS, AP-PP, Ciudadanos, UPyD, Vox y UPN. Nacionalistas y regionalistas: partidos de ámbito autonómico (CiU-Junts, ERC, PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Otros: el resto de candidaturas, sobre todo pequeñas y, en las municipales, agrupaciones de electores e independientes. Es una clasificación de SpainFacts: el detalle de qué siglas van a cada familia está en el código de la web (seed elecciones_partidos_reglas).</p>
+<p class="text-xs text-gray-500">Izquierda: PSOE y la familia de IU, Podemos y Sumar (con PCE, ICV, las confluencias y Más País). Derecha: AP-PP, Vox y UPN. Centro: UCD, CDS, Ciudadanos y UPyD. Nacionalistas y regionalistas: partidos de ámbito autonómico (CiU-Junts, ERC, PNV, EH Bildu, BNG, Coalición Canaria, Compromís, PAR, PRC, Teruel Existe...). Otros: el resto de candidaturas, sobre todo pequeñas y, en las municipales, agrupaciones de electores e independientes. Es una clasificación de SpainFacts: el detalle de qué siglas van a cada familia está en el código de la web (seed elecciones_partidos_reglas).</p>
 
 ## Voto por partido
 
@@ -361,7 +362,8 @@ SELECT
     p.participacion / 100 AS participacion,
     p.ganador_siglas, p.ganador_pct / 100 AS ganador_pct,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Izquierda'), 0) AS izq,
-    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro y derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Derecha'), 0) AS der,
+    coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Centro'), 0) AS cen,
     coalesce(max(f.pct) FILTER (WHERE f.bloque = 'Nacionalistas y regionalistas'), 0) AS nac,
     p.nep_votos
 FROM mother.elecciones_participacion p
@@ -383,7 +385,8 @@ ORDER BY 3 DESC
     <Column id=ganador_siglas title="Más votada" />
     <Column id=ganador_pct title="% voto" fmt=pct1 />
     <Column id=izq title="Izquierda" fmt=pct1 />
-    <Column id=der title="Centro y derecha" fmt=pct1 />
+    <Column id=der title="Derecha" fmt=pct1 />
+    <Column id=cen title="Centro" fmt=pct1 />
     <Column id=nac title="Nacionalistas y reg." fmt=pct1 />
     <Column id=nep_votos title="Nº efectivo de partidos" fmt='0.0' />
 </DataTable>
@@ -398,6 +401,7 @@ SELECT
     (participacion - participacion_anterior) AS dif_participacion,
     pct_izquierda / 100 AS izq,
     pct_derecha / 100 AS der,
+    pct_centro / 100 AS cen,
     pct_nacionalistas / 100 AS nac,
     enlace
 FROM mother.elecciones_municipios_congreso
@@ -426,7 +430,8 @@ Resultado de las últimas generales en los {formatNumber(municipios_resumen[0]?.
     <Column id=participacion title="Participación" fmt=pct1 />
     <Column id=dif_participacion title="vs. anteriores (p.p.)" fmt='+0.0;-0.0' contentType=delta />
     <Column id=izq title="Izquierda" fmt=pct1 />
-    <Column id=der title="Centro y derecha" fmt=pct1 />
+    <Column id=der title="Derecha" fmt=pct1 />
+    <Column id=cen title="Centro" fmt=pct1 />
     <Column id=nac title="Nacionalistas y reg." fmt=pct1 />
 </DataTable>
 

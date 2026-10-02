@@ -39,6 +39,7 @@ select
     e.ganador_pct,
     e.pct_izquierda,
     e.pct_derecha,
+    e.pct_centro,
     e.pct_nacionalistas,
     e.pct_psoe,
     e.pct_pp,
