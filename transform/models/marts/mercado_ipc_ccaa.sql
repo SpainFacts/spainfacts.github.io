@@ -25,7 +25,9 @@ ancho as (
     join {{ ref('ine_ccaa_nombres') }} n on n.nombre_ine = b.territorio
     group by all
 )
+,
 
+final as (
 select
     mes,
     cast(year(mes) as integer) as anio,
@@ -37,3 +39,7 @@ select
             over (partition by cod_ccaa order by mes)) - 1)
     end as subida_desde_2019
 from ancho
+)
+
+-- Sin los meses del IPC adelantado (solo índice general): ver la macro
+{{ solo_meses_completos('final') }}

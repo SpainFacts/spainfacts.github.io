@@ -88,9 +88,10 @@ ORDER BY mes, base
 ```
 
 ```sql grupos_ult
+-- Último mes CON datos por grupos: el IPC adelantado del INE solo trae el índice general
 SELECT grupo_corto, var_anual, contribucion_aprox, ponderacion / 10 AS peso_pct, anio_ponderacion, strftime(mes, '%m/%Y') AS mes_txt
 FROM mother.mercado_ipc_grupos
-WHERE mes = (SELECT max(mes) FROM mother.mercado_ipc_grupos) AND NOT es_general
+WHERE mes = (SELECT max(mes) FROM mother.mercado_ipc_grupos WHERE NOT es_general) AND NOT es_general
 ORDER BY var_anual DESC
 ```
 
@@ -120,7 +121,7 @@ SELECT
     100 * (g.indice / b.media_2019 - 1) AS subida
 FROM mother.mercado_ipc_grupos g
 JOIN b USING (grupo)
-WHERE g.mes = (SELECT max(mes) FROM mother.mercado_ipc_grupos)
+WHERE g.mes = (SELECT max(mes) FROM mother.mercado_ipc_grupos WHERE NOT es_general)
 ORDER BY subida DESC
 ```
 

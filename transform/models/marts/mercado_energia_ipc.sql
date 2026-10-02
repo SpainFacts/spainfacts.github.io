@@ -55,7 +55,9 @@ con_lag as (
 general as (
     select mes, indice_12m as general_12m from con_lag where producto_ine = 'Índice general'
 )
+,
 
+final as (
 select
     c.mes,
     c.producto_ine,
@@ -77,3 +79,7 @@ select
 from con_lag c
 left join general g on g.mes = c.mes
 left join pond p on p.producto_ine = c.producto_ine
+)
+
+-- Sin los meses del IPC adelantado (solo índice general): ver la macro
+{{ solo_meses_completos('final') }}
