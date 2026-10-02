@@ -448,10 +448,10 @@ index 0000000..b1fed5e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..3470b3b
+index 0000000..832cedf
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,2622 @@
+@@ -0,0 +1,2674 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
@@ -591,6 +591,19 @@ index 0000000..3470b3b
 +		'Causas externas de mortalidad': 'External causes of death',
 +		'Centro América y Caribe': 'Central America and Caribbean',
 +		'Derecha': 'Right',
++		'Particulares': 'Private buyers',
++		'Renting': 'Leasing',
++		'Alquiler (rent a car)': 'Car rental',
++		'Taxi, VTC y otros servicios': 'Taxi, ride-hailing and other services',
++		'Camiones': 'Trucks',
++		'Autobuses': 'Buses',
++		'Turismos': 'Cars',
++		'Menos de 5 años': 'Under 5 years',
++		'5 a 9 años': '5 to 9 years',
++		'10 a 14 años': '10 to 14 years',
++		'15 a 19 años': '15 to 19 years',
++		'20 años o más': '20 years or more',
++		'Sin dato': 'No data',
 +		'Centro': 'Centre',
 +		'Cerrada en': 'Closed in',
 +		'Chequia': 'Czechia',
@@ -1314,6 +1327,19 @@ index 0000000..3470b3b
 +		'Causas externas de mortalidad': 'Causes externes de mortalitat',
 +		'Centro América y Caribe': 'Amèrica Central i Carib',
 +		'Derecha': 'Dreta',
++		'Particulares': 'Particulars',
++		'Renting': 'Rènting',
++		'Alquiler (rent a car)': 'Lloguer (rent a car)',
++		'Taxi, VTC y otros servicios': 'Taxi, VTC i altres serveis',
++		'Camiones': 'Camions',
++		'Autobuses': 'Autobusos',
++		'Turismos': 'Turismes',
++		'Menos de 5 años': 'Menys de 5 anys',
++		'5 a 9 años': '5 a 9 anys',
++		'10 a 14 años': '10 a 14 anys',
++		'15 a 19 años': '15 a 19 anys',
++		'20 años o más': '20 anys o més',
++		'Sin dato': 'Sense dada',
 +		'Centro': 'Centre',
 +		'Cerrada en': 'Tancada el',
 +		'Chequia': 'Txèquia',
@@ -1940,6 +1966,19 @@ index 0000000..3470b3b
 +		'Causas externas de mortalidad': 'Causas externas de mortalidade',
 +		'Centro América y Caribe': 'América Central e Caribe',
 +		'Derecha': 'Dereita',
++		'Particulares': 'Particulares',
++		'Renting': 'Renting',
++		'Alquiler (rent a car)': 'Aluguer (rent a car)',
++		'Taxi, VTC y otros servicios': 'Taxi, VTC e outros servizos',
++		'Camiones': 'Camións',
++		'Autobuses': 'Autobuses',
++		'Turismos': 'Turismos',
++		'Menos de 5 años': 'Menos de 5 anos',
++		'5 a 9 años': '5 a 9 anos',
++		'10 a 14 años': '10 a 14 anos',
++		'15 a 19 años': '15 a 19 anos',
++		'20 años o más': '20 anos ou máis',
++		'Sin dato': 'Sen dato',
 +		'Centro': 'Centro',
 +		'Cerrada en': 'Pechada en',
 +		'Cibercriminalidad': 'Cibercriminalidade',
@@ -2488,6 +2527,19 @@ index 0000000..3470b3b
 +		'Causas externas de mortalidad': 'Heriotza-kanpo kausak',
 +		'Centro América y Caribe': 'Erdialdeko Amerika eta Karibea',
 +		'Derecha': 'Eskuina',
++		'Particulares': 'Partikularrak',
++		'Renting': 'Rentinga',
++		'Alquiler (rent a car)': 'Alokairua (rent a car)',
++		'Taxi, VTC y otros servicios': 'Taxia, VTC eta beste zerbitzu batzuk',
++		'Camiones': 'Kamioiak',
++		'Autobuses': 'Autobusak',
++		'Turismos': 'Turismoak',
++		'Menos de 5 años': '5 urte baino gutxiago',
++		'5 a 9 años': '5-9 urte',
++		'10 a 14 años': '10-14 urte',
++		'15 a 19 años': '15-19 urte',
++		'20 años o más': '20 urte edo gehiago',
++		'Sin dato': 'Daturik ez',
 +		'Centro': 'Zentroa',
 +		'Cerrada en': 'Itxia:',
 +		'Chequia': 'Txekia',
@@ -3501,6 +3553,38 @@ index b3bfe37..26e93ce 100644
 +		min-height: 22px;
  	}
  </style>
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte
+index aa5a55d..c3c6615 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte
+@@ -219,6 +219,7 @@
+ 							<!-- Negative bar (if value is negative) -->
+ 							{#if row[column.id] < 0}
+ 								<div
++									class="barra-tabla"
+ 									style="width: {Math.min(
+ 										Math.abs((row[column.id] / total_width) * 100),
+ 										100
+@@ -232,6 +233,7 @@
+ 						<!-- Positive bar (if value is positive or zero) -->
+ 						{#if row[column.id] >= 0}
+ 							<div
++								class="barra-tabla"
+ 								style="width: {Math.min(
+ 									(row[column.id] / total_width) * 100,
+ 									100
+@@ -326,6 +328,11 @@
+ {/each}
+ 
+ <style>
++	/* SpainFacts: las barras usan colores pastel literales (#bfdbfe...) pensados para fondo
++	   claro; en modo oscuro el texto es blanco y no se leía. Se atenúan a un tinte oscuro. */
++	:global(.theme-dark) .barra-tabla {
++		opacity: 0.35;
++	}
+ 	*:focus {
+ 		outline: none;
+ 	}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte
 index 6792d5b..29d844e 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/_DataTable.svelte
