@@ -1,7 +1,7 @@
 ---
-i18n_origen: 2e5d4af180de
+i18n_origen: ae4008cde621
 title: Marcas e modelos máis vendidos
-description: "Clasificación mensual de marcas e modelos de coches, motos e furgonetas matriculados en España, filtrable por tipo de motor: eléctricos puros, híbridos enchufables, híbridos, gasolina e diésel."
+description: "Clasificación mensual de marcas, modelos e grupos de coches, motos, furgonetas, camións e autobuses matriculados en España, filtrable por tipo de motor e por canle: particulares, empresas, renting e aluguer."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -39,17 +39,29 @@ ORDER BY orden
 
 # 🚗 Marcas e modelos máis vendidos
 
-Que se matricula en España cada mes, marca a marca e modelo a modelo, segundo os microdatos da Dirección General de Tráfico. Filtra por tipo de motor para ver, por exemplo, só os **eléctricos puros** ou só os **híbridos enchufables**.
+Que se matricula en España cada mes, marca a marca e modelo a modelo, segundo os microdatos da Dirección General de Tráfico. Filtra por tipo de motor para ver, por exemplo, só os **eléctricos puros**, e por canle para separar o que compran os **particulares** das frotas de empresas, renting e aluguer, que nos turismos son máis da metade.
 
 <div class="not-prose flex flex-wrap gap-4 items-end my-4">
 <ButtonGroup name=grupo title="Vehículo">
     <ButtonGroupItem valueLabel="Turismos" value="turismo" default />
     <ButtonGroupItem valueLabel="Motos" value="motocicleta" />
     <ButtonGroupItem valueLabel="Furgonetas" value="furgoneta" />
+    <ButtonGroupItem valueLabel="Camións" value="camion" />
+    <ButtonGroupItem valueLabel="Autobuses" value="autobus" />
 </ButtonGroup>
 
 <Dropdown name=energia title="Motor" data={energias} value=energia label=energia_etiqueta order=energia_orden>
     <DropdownOption value="todas" valueLabel="Todos os motores" />
+</Dropdown>
+
+<Dropdown name=canal title="Canle">
+    <DropdownOption value="todos" valueLabel="Todas as canles" />
+    <DropdownOption value="particular" valueLabel="Particulares" />
+    <DropdownOption value="flotas" valueLabel="Frotas (todo menos particulares)" />
+    <DropdownOption value="empresa" valueLabel="Empresas" />
+    <DropdownOption value="renting" valueLabel="Renting" />
+    <DropdownOption value="alquiler" valueLabel="Aluguer (rent a car)" />
+    <DropdownOption value="servicio_publico" valueLabel="Taxi, VTC e outros servizos" />
 </Dropdown>
 
 <Dropdown name=periodo title="Período" data={periodos} value=valor label=etiqueta order=orden>
@@ -70,6 +82,7 @@ SELECT *
 FROM mother.movilidad_modelos_mensual
 WHERE grupo = '${inputs.grupo}'
   AND ('${inputs.energia.value}' = 'todas' OR energia = '${inputs.energia.value}')
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND canal <> 'particular') OR canal = '${inputs.canal.value}')
   AND (
     ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(mes, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
     OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(mes) AS INTEGER) = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER))
@@ -78,16 +91,17 @@ WHERE grupo = '${inputs.grupo}'
 
 ```sql filtro_anterior
 -- Mismo periodo un año antes, para la variación
-SELECT marca, modelo, sum(matriculaciones) AS unidades
+SELECT marca, grupo_empresarial, modelo, sum(matriculaciones) AS unidades
 FROM mother.movilidad_modelos_mensual
 WHERE grupo = '${inputs.grupo}'
   AND ('${inputs.energia.value}' = 'todas' OR energia = '${inputs.energia.value}')
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND canal <> 'particular') OR canal = '${inputs.canal.value}')
   AND (
     ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(mes + INTERVAL 12 MONTH, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
     OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(mes) AS INTEGER) + 1 = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER)
         AND month(mes) <= (SELECT max(month(mes)) FROM ${filtro}))
   )
-GROUP BY marca, modelo
+GROUP BY marca, grupo_empresarial, modelo
 ```
 
 ```sql total
@@ -129,11 +143,64 @@ LEFT JOIN ${filtro_anterior} p ON p.marca = a.marca AND p.modelo = a.modelo
 ORDER BY a.unidades DESC, a.marca, a.modelo
 ```
 
+```sql grupos
+WITH act AS (
+    SELECT grupo_empresarial AS grupo, marca, sum(matriculaciones) AS unidades
+    FROM ${filtro} GROUP BY ALL
+),
+ant AS (
+    SELECT grupo_empresarial AS grupo, sum(unidades) AS unidades FROM ${filtro_anterior} GROUP BY ALL
+),
+g AS (
+    SELECT grupo, sum(unidades) AS unidades, count(*) AS n_marcas,
+        string_agg(marca, ', ' ORDER BY unidades DESC) AS marcas
+    FROM act GROUP BY grupo
+)
+SELECT
+    row_number() OVER (ORDER BY g.unidades DESC, g.grupo) AS puesto,
+    g.grupo, g.marcas, g.n_marcas, g.unidades,
+    g.unidades / sum(g.unidades) OVER () AS cuota,
+    CASE WHEN p.unidades >= 20 THEN g.unidades / p.unidades - 1 END AS variacion
+FROM g
+LEFT JOIN ant p ON p.grupo = g.grupo
+ORDER BY g.unidades DESC, g.grupo
+```
+
+```sql top_grupos_grafico
+SELECT grupo, unidades FROM ${grupos} WHERE puesto <= 15 ORDER BY unidades DESC
+```
+
 ```sql top_marcas_grafico
 SELECT marca, unidades FROM ${marcas} WHERE puesto <= 20 ORDER BY unidades DESC
 ```
 
 <p class="text-sm text-gray-600 dark:text-gray-400">{formatNumber(total[0]?.unidades, 0)} unidades novas matriculadas de {formatNumber(total[0]?.marcas, 0)} marcas e {formatNumber(total[0]?.modelos, 0)} modelos cos filtros escollidos.</p>
+
+## Grupos
+
+Moitas marcas pertencen ao mesmo fabricante e comparten plataformas, motores e fábricas: Peugeot, Citroën, Opel, Fiat ou Jeep son de **Stellantis**; Seat, Cupra, Skoda ou Audi, de **Volkswagen**; Volvo, Polestar ou Lynk & Co, do chinés **Geely**; e MG, de **SAIC**. Agrupadas por dono, a repartición do mercado cambia bastante.
+
+<BarChart
+    data={top_grupos_grafico}
+    x=grupo
+    y=unidades
+    swapXY=true
+    sort=false
+    yFmt=num0
+    fillColor="#7c3aed"
+    title="Os 15 grupos con máis matriculacións"
+/>
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=puesto title="#" />
+    <Column id=grupo title="Grupo" />
+    <Column id=marcas title="Marcas (de máis a menos vendas)" wrap=true />
+    <Column id=unidades title="Unidades" fmt=num0 contentType=bar barColor="#ddd6fe" />
+    <Column id=cuota title="Cota" fmt=pct1 />
+    <Column id=variacion title="Vs. un ano antes" fmt=pct0 contentType=delta />
+</DataTable>
+
+<p class="text-xs text-gray-500">Grupo segundo o dono maioritario de cada marca. As participacións do 50 % ou menos non contan: Smart (50 % Mercedes-Benz e 50 % Geely) vai con Geely e Leapmotor (21 % de Stellantis) é o seu propio grupo. As marcas que só lle poñen o seu logo a un coche fabricado por outro, como Ebro (coches de Chery) ou DR (de Chery e outros fabricantes chineses), contan como grupo propio porque a empresa é outra. En camións e autobuses, Volvo e Renault son do grupo AB Volvo e Mercedes-Benz, de Daimler Truck, empresas distintas das dos coches. As marcas sen grupo na táboa son o seu propio grupo.</p>
 
 ## Marcas
 
@@ -167,7 +234,9 @@ SELECT marca, unidades FROM ${marcas} WHERE puesto <= 20 ORDER BY unidades DESC
     <Column id=variacion title="Vs. un ano antes" fmt=pct0 contentType=delta />
 </DataTable>
 
-<p class="text-xs text-gray-500">Só vehículos novos (non se contan os usados importados). A variación compara co mesmo período do ano anterior e omítese cando daquela había menos de 20 unidades. O nome do modelo é o da ficha técnica: algúns coches aparecen con variantes (p. ex. «SANDERO» e «SANDERO STEPWAY»).</p>
+<p class="text-xs text-gray-500">Só vehículos novos (non se contan os usados importados). A variación compara co mesmo período do ano anterior e omítese cando daquela había menos de 20 unidades. O nome do modelo é o da ficha técnica: algúns coches aparecen con variantes (p. ex. «SANDERO» e «SANDERO STEPWAY»). Nos vehículos que remata un carroceiro (camións, autobuses, furgonetas camperizadas) cóntase a marca do chasis, non a do carroceiro.</p>
+
+<p class="text-xs text-gray-500">Canle: os coches de particulares son os matriculados a nome dunha persoa física (inclúe autónomos) sen renting; empresas, os de persoas xurídicas, incluídas as automatriculacións de concesionarios e marcas que despois se venden como «quilómetro cero»; aluguer, os de servizo de aluguer sen condutor (rent a car); e taxi, VTC e outros, os de servizo público.</p>
 
 ```sql mix_marcas
 -- Mezcla de motores de las 15 primeras marcas (sin filtrar por motor)
@@ -175,6 +244,7 @@ WITH base AS (
     SELECT m.marca, m.energia, sum(m.matriculaciones) AS unidades
     FROM mother.movilidad_modelos_mensual m
     WHERE m.grupo = '${inputs.grupo}'
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND m.canal <> 'particular') OR m.canal = '${inputs.canal.value}')
       AND (
         ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(m.mes, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
         OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(m.mes) AS INTEGER) = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER))

@@ -1,7 +1,7 @@
 ---
 title: Cotxe elèctric
 description: "Transició al cotxe elèctric a Espanya: matriculacions de turismes per tipus de motor cada mes des del 2015, quota d'elèctrics i híbrids endollables per província i emissions de CO2."
-i18n_origen: 7dffaf225345
+i18n_origen: f25fe43f1389
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -175,6 +175,66 @@ WHERE indicador_id = 'coche_electrico_cuota'
 
 <p class="text-xs text-gray-500">L'últim any és incomplet (fins a l'últim mes publicat).</p>
 
+## Qui compra els cotxes nous?
+
+```sql canales_anual
+SELECT
+    CAST(year(mes) AS INTEGER) AS anio,
+    canal_etiqueta AS canal,
+    canal_orden,
+    sum(matriculaciones) AS turismos,
+    sum(matriculaciones) FILTER (WHERE energia IN ('bev', 'phev')) / sum(matriculaciones) AS cuota_enchufables
+FROM mother.movilidad_matriculaciones_mensual
+WHERE grupo = 'turismo' AND nuevo_usado = 'N'
+GROUP BY ALL
+ORDER BY anio, canal_orden
+```
+
+```sql canales_orden
+SELECT DISTINCT canal, canal_orden FROM ${canales_anual} ORDER BY canal_orden
+```
+
+```sql canales_ultimo
+SELECT
+    any_value(anio) AS anio,
+    100 * sum(turismos) FILTER (WHERE canal_orden = 1) / sum(turismos) AS pct_particulares,
+    100 * max(cuota_enchufables) FILTER (WHERE canal_orden = 1) AS pct_enchufables_particulares,
+    100 * sum(turismos * cuota_enchufables) FILTER (WHERE canal_orden > 1) / sum(turismos) FILTER (WHERE canal_orden > 1) AS pct_enchufables_flotas
+FROM ${canales_anual}
+-- Último año completo (con diciembre publicado)
+WHERE anio = (SELECT CAST(year(max(mes)) AS INTEGER) - CASE WHEN month(max(mes)) = 12 THEN 0 ELSE 1 END FROM mother.movilidad_matriculaciones_mensual)
+```
+
+Menys de la meitat dels turismes nous els compren particulars. La resta va a flotes: empreses (que inclouen les automatriculacions de concessionaris i marques, els «quilòmetre zero»), rènting, lloguer de cotxes i taxis i VTC. El {canales_ultimo[0]?.anio}, els particulars es van quedar el {formatNumber(canales_ultimo[0]?.pct_particulares, 1)} % de les matriculacions; els endollables van ser el {formatNumber(canales_ultimo[0]?.pct_enchufables_particulares, 1)} % de les seves compres, enfront del {formatNumber(canales_ultimo[0]?.pct_enchufables_flotas, 1)} % a les flotes.
+
+<BarChart
+    data={canales_anual}
+    x=anio
+    y=turismos
+    series=canal
+    type=stacked100
+    yFmt=pct0
+    xFmt="####"
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Turismes nous per canal de venda"
+/>
+
+<LineChart
+    data={canales_anual}
+    x=anio
+    y=cuota_enchufables
+    series=canal
+    yFmt=pct0
+    xFmt="####"
+    markers=true
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Quota d'endollables (elèctrics + híbrids endollables) en cada canal"
+/>
+
+<p class="text-xs text-gray-500">Particulars: matriculats a nom d'una persona física (inclou autònoms) sense rènting. Empreses: persones jurídiques, sense rènting ni lloguer. Rènting: contractes d'arrendament a llarg termini, d'empreses o de particulars. Lloguer: servei de lloguer sense conductor (<em>rent a car</em>). Taxi, VTC i altres: servei públic (taxi, lloguer amb conductor, autoescola...). L'últim any és incomplet.</p>
+
 ## Emissions de CO2 dels cotxes nous
 
 <LineChart
@@ -201,13 +261,19 @@ SELECT
 FROM mother.movilidad_matriculaciones_provincia p, ult
 WHERE p.nuevo_usado = 'N'
   AND p.mes > ult.mes - INTERVAL 12 MONTH
+  AND ('${inputs.canal_prov}' = 'todos' OR p.canal = 'particular')
 GROUP BY ALL
 ORDER BY cuota_enchufables DESC
 ```
 
 ## On es compren més cotxes endollables?
 
-Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 mesos, segons la província del domicili del titular.
+Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 mesos, segons la província del domicili del titular. Per defecte només compten els de particulars: les flotes es matriculen on tenen la seu i deformen el mapa (vegeu la nota de sota).
+
+<ButtonGroup name=canal_prov title="Compradors">
+    <ButtonGroupItem valueLabel="Només particulars" value="particular" default />
+    <ButtonGroupItem valueLabel="Tots, amb flotes" value="todos" />
+</ButtonGroup>
 
 <AreaMap
     data={provincias}
@@ -236,7 +302,7 @@ Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 m
     <Column id=cuota_diesel title="Dièsel" fmt=pct1 />
 </DataTable>
 
-<p class="text-xs text-gray-500">Compte amb Madrid i altres províncies amb seus d'empreses de rènting i lloguer: s'hi matriculen flotes que després circulen per tot el país, cosa que n'infla el volum i la quota.</p>
+<p class="text-xs text-gray-500"><b>On matriculen les flotes.</b> Un cotxe es matricula al municipi del domicili del seu titular, i les empreses de rènting i lloguer trien on domicilien les seves flotes. L'impost de circulació (IVTM) és municipal: cada ajuntament pot apujar la tarifa mínima fins al doble, de manera que moltes flotes es registren en una delegació oberta en un municipi amb l'impost més baix. Per això pobles com La Hiruela, Venturada o Patones (Madrid) o Aguilar de Segarra (Barcelona) matriculen cada any molts més cotxes que habitants no tenen, i segons l'associació AEA deu municipis concentren al voltant del 35 % de les matriculacions de vehicles d'empresa. Aquests cotxes circulen després per tot el país; amb «Tots, amb flotes», Madrid i Barcelona apareixen molt per sobre del que compren els seus veïns. Font: <a href="https://aeaclub.org/ivtm-impuesto-municipal-vehiculos-paraisos-fiscales/">AEA, estudi sobre l'IVTM (2026)</a>. Els municipis, un a un, a <a href="/ca/movilidad/flotas-e-impuestos">Els paradisos fiscals de les flotes</a>.</p>
 
 ---
 
@@ -244,7 +310,8 @@ Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 m
 
 - **[DGT – Microdades de matriculacions de vehicles (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, mensual des del gener del 2015. Només es compten les matriculacions ordinàries de turismes (inclosos tot terrenys) **nous**; els usats importats, que també es matriculen per primera vegada a Espanya, s'exclouen.
 - El tipus de motor combina la categoria de vehicle elèctric (BEV, PHEV, REEV, HEV) i la propulsió de la fitxa tècnica. Gas inclou GLP i gas natural.
-- Les xifres poden diferir lleugerament de les de les associacions del sector (ANFAC, que fa servir els seus propis criteris de data i classificació).
+- Les xifres poden diferir lleugerament de les de les associacions del sector (ANFAC, que fa servir els seus propis criteris de data i classificació). ANFAC separa també particulars, empreses i llogaters; aquí el canal surt del titular (persona física o jurídica), de l'indicador de rènting i del tipus de servei de cada vehicle al fitxer de la DGT.
+- L'últim mes, fins que la DGT publica el fitxer mensual (cap al dia 15 del mes següent), es calcula amb els seus fitxers diaris.
 - La comparació internacional (any complet, elèctrics purs més híbrids endollables) és de l'**[AIE – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), que arrodoneix a nombres enters les quotes recents; per això pot no coincidir exactament amb la de la DGT. Noruega i Dinamarca hi apareixen com a referència (vora discontínua): són els països on el cotxe elèctric és més estès.
 
 <LastRefreshed prefix="Dades actualitzades" />

@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
 description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak eta metro, autobus, tren eta hegazkineko bidaiariak."
-i18n_origen: f38f1ce95c98
+i18n_origen: 672121895650
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -125,11 +125,19 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
     </a>
     <a href="/eu/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marka eta modelo salduenak</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Auto, moto eta furgoneten hileko sailkapena, elektrikoen, hibridoen, gasolinaren edo dieselaren arabera iragazgarria.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Auto, moto, furgoneta, kamioi eta autobusen hileko sailkapena markaren, modeloaren eta taldearen arabera, motorraren eta kanalaren arabera iragazgarria (partikularrak edo flotak).</p>
     </a>
     <a href="/eu/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Ibilgailu-parkea</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Gaur egun zirkulatzen duten ibilgailuak: motorra, ingurumen-etiketa, antzinatasuna eta modelo ohikoenak, probintziaka eta udalerrika.</p>
+    </a>
+    <a href="/eu/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Kamioiak eta autobusak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Matrikulazioak motor motaren arabera, autobus elektrikoaren aurrerapena, talde salduenak eta zirkulatzen dutenen antzinatasuna.</p>
+    </a>
+    <a href="/eu/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> Flotentzako paradisu fiskalak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Hamarka bizilagun eta milaka enpresa-auto dituzten herriak: non matrikulatzen diren flotak zirkulazio-zerga gutxiago ordaintzeko.</p>
     </a>
     <a href="/eu/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Karga-puntuak</p>

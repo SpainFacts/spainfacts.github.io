@@ -1,7 +1,7 @@
 ---
 title: Auto elektrikoa
 description: "Auto elektrikorako trantsizioa Espainian: turismoen matrikulazioak motor motaren arabera hilero 2015etik, elektrikoen eta hibrido entxufagarrien kuota probintziaka eta CO2 isuriak."
-i18n_origen: 7dffaf225345
+i18n_origen: f25fe43f1389
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -175,6 +175,66 @@ WHERE indicador_id = 'coche_electrico_cuota'
 
 <p class="text-xs text-gray-500">Azken urtea osatu gabe dago (argitaratutako azken hilabetera arte).</p>
 
+## Nork erosten ditu auto berriak?
+
+```sql canales_anual
+SELECT
+    CAST(year(mes) AS INTEGER) AS anio,
+    canal_etiqueta AS canal,
+    canal_orden,
+    sum(matriculaciones) AS turismos,
+    sum(matriculaciones) FILTER (WHERE energia IN ('bev', 'phev')) / sum(matriculaciones) AS cuota_enchufables
+FROM mother.movilidad_matriculaciones_mensual
+WHERE grupo = 'turismo' AND nuevo_usado = 'N'
+GROUP BY ALL
+ORDER BY anio, canal_orden
+```
+
+```sql canales_orden
+SELECT DISTINCT canal, canal_orden FROM ${canales_anual} ORDER BY canal_orden
+```
+
+```sql canales_ultimo
+SELECT
+    any_value(anio) AS anio,
+    100 * sum(turismos) FILTER (WHERE canal_orden = 1) / sum(turismos) AS pct_particulares,
+    100 * max(cuota_enchufables) FILTER (WHERE canal_orden = 1) AS pct_enchufables_particulares,
+    100 * sum(turismos * cuota_enchufables) FILTER (WHERE canal_orden > 1) / sum(turismos) FILTER (WHERE canal_orden > 1) AS pct_enchufables_flotas
+FROM ${canales_anual}
+-- Último año completo (con diciembre publicado)
+WHERE anio = (SELECT CAST(year(max(mes)) AS INTEGER) - CASE WHEN month(max(mes)) = 12 THEN 0 ELSE 1 END FROM mother.movilidad_matriculaciones_mensual)
+```
+
+Turismo berrien erdia baino gutxiago erosten dituzte partikularrek. Gainerakoa flotetara doa: enpresak (kontzesionarioen eta marken automatrikulazioak barne, «zero kilometrokoak»), rentinga, auto-alokairua eta taxiak eta VTCak. {canales_ultimo[0]?.anio}. urtean, partikularrek matrikulazioen % {formatNumber(canales_ultimo[0]?.pct_particulares, 1)} hartu zuten; entxufagarriak haien erosketen % {formatNumber(canales_ultimo[0]?.pct_enchufables_particulares, 1)} izan ziren, flotetan % {formatNumber(canales_ultimo[0]?.pct_enchufables_flotas, 1)} izan ziren bitartean.
+
+<BarChart
+    data={canales_anual}
+    x=anio
+    y=turismos
+    series=canal
+    type=stacked100
+    yFmt=pct0
+    xFmt="####"
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Turismo berriak salmenta-kanalaren arabera"
+/>
+
+<LineChart
+    data={canales_anual}
+    x=anio
+    y=cuota_enchufables
+    series=canal
+    yFmt=pct0
+    xFmt="####"
+    markers=true
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Entxufagarrien kuota (elektrikoak + hibrido entxufagarriak) kanal bakoitzean"
+/>
+
+<p class="text-xs text-gray-500">Partikularrak: pertsona fisiko baten izenean (autonomoak barne) rentingik gabe matrikulatutakoak. Enpresak: pertsona juridikoak, rentingik eta alokairurik gabe. Renting: epe luzeko errentamendu-kontratuak, enpresenak edo partikularrenak. Alokairua: gidaririk gabeko alokairu-zerbitzua (rent a car). Taxia, VTCa eta beste batzuk: zerbitzu publikoa (taxia, gidaridun alokairua, autoeskola...). Azken urtea osatu gabe dago.</p>
+
 ## Auto berrien CO2 isuriak
 
 <LineChart
@@ -201,13 +261,19 @@ SELECT
 FROM mother.movilidad_matriculaciones_provincia p, ult
 WHERE p.nuevo_usado = 'N'
   AND p.mes > ult.mes - INTERVAL 12 MONTH
+  AND ('${inputs.canal_prov}' = 'todos' OR p.canal = 'particular')
 GROUP BY ALL
 ORDER BY cuota_enchufables DESC
 ```
 
 ## Non erosten dira auto entxufagarri gehien?
 
-Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berrietan, titularraren helbideko probintziaren arabera.
+Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berrietan, titularraren helbideko probintziaren arabera. Lehenespenez, partikularrenak soilik zenbatzen dira: flotak egoitza duten tokian matrikulatzen dira eta mapa desitxuratzen dute (ikus beheko oharra).
+
+<ButtonGroup name=canal_prov title="Erosleak">
+    <ButtonGroupItem valueLabel="Partikularrak soilik" value="particular" default />
+    <ButtonGroupItem valueLabel="Guztiak, flotak barne" value="todos" />
+</ButtonGroup>
 
 <AreaMap
     data={provincias}
@@ -236,7 +302,7 @@ Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berr
     <Column id=cuota_diesel title="Diesela" fmt=pct1 />
 </DataTable>
 
-<p class="text-xs text-gray-500">Kontuz Madrilekin eta renting eta alokairu enpresen egoitzak dituzten beste probintziekin: bertan matrikulatzen dira gero herrialde osoan zehar zirkulatzen duten flotak, eta horrek haien bolumena eta kuota puzten ditu.</p>
+<p class="text-xs text-gray-500"><b>Non matrikulatzen dituzten flotak.</b> Auto bat titularraren helbideko udalerrian matrikulatzen da, eta renting eta alokairu enpresek aukeratzen dute non helbideratu beren flotak. Zirkulazio-zerga (IVTM) udalekoa da: udal bakoitzak gutxieneko tarifa bikoiztu arte igo dezake, eta, beraz, flota asko zerga baxuena duen udalerri batean irekitako ordezkaritza batean erregistratzen dira. Horregatik, La Hiruela, Venturada edo Patones (Madril) edo Aguilar de Segarra (Bartzelona) bezalako herriek biztanleak baino askoz auto gehiago matrikulatzen dituzte urtero, eta AEA elkartearen arabera hamar udalerrik biltzen dituzte enpresa-ibilgailuen matrikulazioen % 35 inguru. Auto horiek gero herrialde osoan zehar zirkulatzen dute; «Guztiak, flotak barne» aukerarekin, Madril eta Bartzelona beren bizilagunek erosten dutenaren oso gainetik agertzen dira. Iturria: <a href="https://aeaclub.org/ivtm-impuesto-municipal-vehiculos-paraisos-fiscales/">AEA, IVTMri buruzko azterlana (2026)</a>. Udalerriak, banan-banan, <a href="/eu/movilidad/flotas-e-impuestos">Flotentzako paradisu fiskalak</a> orrian.</p>
 
 ---
 
@@ -244,7 +310,8 @@ Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berr
 
 - **[DGT – Ibilgailuen matrikulazioen mikrodatuak (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, hilero 2015eko urtarriletik. Turismo **berrien** (lur orotako ibilgailuak barne) matrikulazio arruntak soilik zenbatzen dira; inportatutako erabilitakoak, Espainian lehen aldiz matrikulatzen badira ere, kanpoan uzten dira.
 - Motor motak ibilgailu elektrikoaren kategoria (BEV, PHEV, REEV, HEV) eta fitxa teknikoko propultsioa konbinatzen ditu. Gasak GLPa eta gas naturala barne hartzen ditu.
-- Zifrak apur bat desberdinak izan daitezke sektoreko elkarteenekin alderatuta (ANFAC, data- eta sailkapen-irizpide propioak erabiltzen dituena).
+- Zifrak apur bat desberdinak izan daitezke sektoreko elkarteenekin alderatuta (ANFAC, data- eta sailkapen-irizpide propioak erabiltzen dituena). ANFACek partikularrak, enpresak eta alokatzaileak ere bereizten ditu; hemen, kanala DGTren fitxategiko ibilgailu bakoitzaren titularretik (pertsona fisikoa edo juridikoa), renting-adierazletik eta zerbitzu motatik ateratzen da.
+- Azken hilabetea, DGTk hileko fitxategia argitaratu arte (hurrengo hilabetearen 15. egunaren inguruan), haren eguneko fitxategiekin kalkulatzen da.
 - Nazioarteko alderaketa (urte osoa, elektriko hutsak gehi hibrido entxufagarriak) **[IEA – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** iturritik dator (CC BY 4.0), eta hark zenbaki osoetara biribiltzen ditu azken kuotak; horregatik, baliteke DGTrenarekin zehazki bat ez etortzea. Norvegia eta Danimarka erreferentzia gisa agertzen dira (ertz etena): auto elektrikoa gehien zabalduta dagoen herrialdeak dira.
 
 <LastRefreshed prefix="Datuak eguneratuta" />

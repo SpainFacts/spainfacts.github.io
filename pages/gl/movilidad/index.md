@@ -1,5 +1,5 @@
 ---
-i18n_origen: f38f1ce95c98
+i18n_origen: 672121895650
 title: Mobilidade
 description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga e viaxeiros de metro, autobús, tren e avión."
 og:
@@ -125,11 +125,19 @@ Como nos movemos en España: os coches que se compran e os que circulan, o avanc
     </a>
     <a href="/gl/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marcas e modelos máis vendidos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Clasificación mensual de coches, motos e furgonetas, filtrable por eléctricos, híbridos, gasolina ou diésel.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Clasificación mensual de coches, motos, furgonetas, camións e autobuses por marca, modelo e grupo, filtrable por motor e por canle (particulares ou frotas).</p>
     </a>
     <a href="/gl/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Parque de vehículos</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Os vehículos que circulan hoxe: motor, etiqueta ambiental, antigüidade e modelos máis comúns, por provincia e concello.</p>
+    </a>
+    <a href="/gl/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Camións e autobuses</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Matriculacións por tipo de motor, avance do autobús eléctrico, grupos máis vendidos e antigüidade dos que circulan.</p>
+    </a>
+    <a href="/gl/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> Os paraísos fiscais das frotas</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Aldeas de unhas decenas de veciños con miles de coches de empresa: onde se matriculan as frotas para pagar menos imposto de circulación.</p>
     </a>
     <a href="/gl/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Puntos de recarga</p>

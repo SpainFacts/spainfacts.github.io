@@ -1,7 +1,7 @@
 ---
 title: Electric cars
 description: "The shift to electric cars in Spain: new car registrations by engine type every month since 2015, share of battery electric and plug-in hybrids by province, and CO2 emissions."
-i18n_origen: 7dffaf225345
+i18n_origen: f25fe43f1389
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -175,6 +175,66 @@ WHERE indicador_id = 'coche_electrico_cuota'
 
 <p class="text-xs text-gray-500">The latest year is incomplete (up to the last month published).</p>
 
+## Who buys new cars?
+
+```sql canales_anual
+SELECT
+    CAST(year(mes) AS INTEGER) AS anio,
+    canal_etiqueta AS canal,
+    canal_orden,
+    sum(matriculaciones) AS turismos,
+    sum(matriculaciones) FILTER (WHERE energia IN ('bev', 'phev')) / sum(matriculaciones) AS cuota_enchufables
+FROM mother.movilidad_matriculaciones_mensual
+WHERE grupo = 'turismo' AND nuevo_usado = 'N'
+GROUP BY ALL
+ORDER BY anio, canal_orden
+```
+
+```sql canales_orden
+SELECT DISTINCT canal, canal_orden FROM ${canales_anual} ORDER BY canal_orden
+```
+
+```sql canales_ultimo
+SELECT
+    any_value(anio) AS anio,
+    100 * sum(turismos) FILTER (WHERE canal_orden = 1) / sum(turismos) AS pct_particulares,
+    100 * max(cuota_enchufables) FILTER (WHERE canal_orden = 1) AS pct_enchufables_particulares,
+    100 * sum(turismos * cuota_enchufables) FILTER (WHERE canal_orden > 1) / sum(turismos) FILTER (WHERE canal_orden > 1) AS pct_enchufables_flotas
+FROM ${canales_anual}
+-- Último año completo (con diciembre publicado)
+WHERE anio = (SELECT CAST(year(max(mes)) AS INTEGER) - CASE WHEN month(max(mes)) = 12 THEN 0 ELSE 1 END FROM mother.movilidad_matriculaciones_mensual)
+```
+
+Fewer than half of new cars are bought by private individuals. The rest go to fleets: companies (which include self-registrations by dealers and brands, the "zero-kilometre" cars), renting, car rental, and taxis and ride-hailing (VTC). In {canales_ultimo[0]?.anio}, private buyers took {formatNumber(canales_ultimo[0]?.pct_particulares, 1)}% of registrations; plug-ins were {formatNumber(canales_ultimo[0]?.pct_enchufables_particulares, 1)}% of their purchases, compared with {formatNumber(canales_ultimo[0]?.pct_enchufables_flotas, 1)}% in fleets.
+
+<BarChart
+    data={canales_anual}
+    x=anio
+    y=turismos
+    series=canal
+    type=stacked100
+    yFmt=pct0
+    xFmt="####"
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="New cars by sales channel"
+/>
+
+<LineChart
+    data={canales_anual}
+    x=anio
+    y=cuota_enchufables
+    series=canal
+    yFmt=pct0
+    xFmt="####"
+    markers=true
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Plug-in share (battery electric + plug-in hybrids) in each channel"
+/>
+
+<p class="text-xs text-gray-500">Private buyers: registered to a natural person (including the self-employed) without renting. Companies: legal entities, without renting or rental. Renting: long-term lease contracts, for companies or individuals. Rental: rental service without driver (rent a car). Taxi, VTC and others: public service (taxi, hire with driver, driving schools...). The latest year is incomplete.</p>
+
 ## CO2 emissions of new cars
 
 <LineChart
@@ -201,13 +261,19 @@ SELECT
 FROM mother.movilidad_matriculaciones_provincia p, ult
 WHERE p.nuevo_usado = 'N'
   AND p.mes > ult.mes - INTERVAL 12 MONTH
+  AND ('${inputs.canal_prov}' = 'todos' OR p.canal = 'particular')
 GROUP BY ALL
 ORDER BY cuota_enchufables DESC
 ```
 
 ## Where are the most plug-in cars bought?
 
-Share of battery electric and plug-in hybrids among new cars over the last 12 months, by the province of the owner's registered address.
+Share of battery electric and plug-in hybrids among new cars over the last 12 months, by the province of the owner's registered address. By default only private buyers' cars are counted: fleets are registered where they have their headquarters and distort the map (see the note below).
+
+<ButtonGroup name=canal_prov title="Buyers">
+    <ButtonGroupItem valueLabel="Private buyers only" value="particular" default />
+    <ButtonGroupItem valueLabel="All, including fleets" value="todos" />
+</ButtonGroup>
 
 <AreaMap
     data={provincias}
@@ -236,7 +302,7 @@ Share of battery electric and plug-in hybrids among new cars over the last 12 mo
     <Column id=cuota_diesel title="Diesel" fmt=pct1 />
 </DataTable>
 
-<p class="text-xs text-gray-500">Be careful with Madrid and other provinces where leasing and rental companies are headquartered: fleets are registered there that then circulate all over the country, which inflates their volume and share.</p>
+<p class="text-xs text-gray-500"><b>Where fleets are registered.</b> A car is registered in the municipality of its owner's domicile, and renting and rental companies choose where to domicile their fleets. Vehicle tax (IVTM) is municipal: each town council can raise the minimum rate up to double, so many fleets are registered at a branch opened in a municipality with the lowest tax. That is why villages such as La Hiruela, Venturada or Patones (Madrid) or Aguilar de Segarra (Barcelona) register many more cars each year than they have inhabitants, and according to the AEA association ten municipalities account for around 35% of company-vehicle registrations. Those cars are then driven all over the country; with "All, including fleets", Madrid and Barcelona appear far above what their residents buy. Source: <a href="https://aeaclub.org/ivtm-impuesto-municipal-vehiculos-paraisos-fiscales/">AEA, study on the IVTM (2026)</a>. The municipalities, one by one, in <a href="/en/movilidad/flotas-e-impuestos">The fleet tax havens</a>.</p>
 
 ---
 
@@ -244,7 +310,8 @@ Share of battery electric and plug-in hybrids among new cars over the last 12 mo
 
 - **[DGT – Vehicle registration microdata (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, monthly since January 2015. Only ordinary registrations of **new** passenger cars (including off-roaders) are counted; imported used cars, which are also registered in Spain for the first time, are excluded.
 - Engine type combines the electric vehicle category (BEV, PHEV, REEV, HEV) with the propulsion recorded in the vehicle's technical data sheet. Gas includes LPG and natural gas.
-- The figures may differ slightly from those of the industry associations (ANFAC, which uses its own date and classification criteria).
+- The figures may differ slightly from those of the industry associations (ANFAC, which uses its own date and classification criteria). ANFAC also separates private buyers, companies and rental firms; here the channel comes from the owner (natural or legal person), the renting flag and the type of service of each vehicle in the DGT file.
+- For the latest month, until the DGT publishes the monthly file (around the 15th of the following month), figures are calculated from its daily files.
 - The international comparison (full year, battery electric plus plug-in hybrids) comes from the **[IEA – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), which rounds recent shares to whole numbers; that is why it may not match the DGT figure exactly. Norway and Denmark appear as a reference (dashed border): they are the countries where electric cars are most widespread.
 
 <LastRefreshed prefix="Data updated" />

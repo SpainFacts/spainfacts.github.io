@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
 description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega i viatgers de metro, autobús, tren i avió."
-i18n_origen: f38f1ce95c98
+i18n_origen: 672121895650
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -125,11 +125,19 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
     </a>
     <a href="/ca/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marques i models més venuts</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Rànquing mensual de cotxes, motos i furgonetes, filtrable per elèctrics, híbrids, gasolina o dièsel.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Rànquing mensual de cotxes, motos, furgonetes, camions i autobusos per marca, model i grup, filtrable per motor i per canal (particulars o flotes).</p>
     </a>
     <a href="/ca/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Parc de vehicles</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Els vehicles que circulen avui: motor, etiqueta ambiental, antiguitat i models més comuns, per província i municipi.</p>
+    </a>
+    <a href="/ca/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Camions i autobusos</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Matriculacions per tipus de motor, avenç de l'autobús elèctric, grups més venuts i antiguitat dels que circulen.</p>
+    </a>
+    <a href="/ca/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> Els paradisos fiscals de les flotes</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pobles d'unes desenes de veïns amb milers de cotxes d'empresa: on es matriculen les flotes per pagar menys impost de circulació.</p>
     </a>
     <a href="/ca/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Punts de recàrrega</p>

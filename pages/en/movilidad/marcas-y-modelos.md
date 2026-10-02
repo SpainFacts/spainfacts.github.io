@@ -1,7 +1,7 @@
 ---
 title: Best-selling makes and models
-description: "Monthly ranking of car, motorbike and van makes and models registered in Spain, filterable by engine type: battery electric, plug-in hybrids, hybrids, petrol and diesel."
-i18n_origen: 2e5d4af180de
+description: "Monthly ranking of makes, models and groups of cars, motorbikes, vans, trucks and buses registered in Spain, filterable by engine type and by channel: private buyers, companies, renting and rental."
+i18n_origen: ae4008cde621
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -39,17 +39,29 @@ ORDER BY orden
 
 # 🚗 Best-selling makes and models
 
-What gets registered in Spain every month, make by make and model by model, according to the microdata of the Directorate-General for Traffic (DGT). Filter by engine type to see, for example, only **battery electric** cars or only **plug-in hybrids**.
+What gets registered in Spain every month, make by make and model by model, according to the microdata of the Directorate-General for Traffic (DGT). Filter by engine type to see, for example, only **battery electric** cars, and by channel to separate what **private buyers** purchase from the fleets of companies, renting and rental, which account for more than half of passenger cars.
 
 <div class="not-prose flex flex-wrap gap-4 items-end my-4">
 <ButtonGroup name=grupo title="Vehicle">
     <ButtonGroupItem valueLabel="Cars" value="turismo" default />
     <ButtonGroupItem valueLabel="Motorbikes" value="motocicleta" />
     <ButtonGroupItem valueLabel="Vans" value="furgoneta" />
+    <ButtonGroupItem valueLabel="Trucks" value="camion" />
+    <ButtonGroupItem valueLabel="Buses" value="autobus" />
 </ButtonGroup>
 
 <Dropdown name=energia title="Engine" data={energias} value=energia label=energia_etiqueta order=energia_orden>
     <DropdownOption value="todas" valueLabel="All engines" />
+</Dropdown>
+
+<Dropdown name=canal title="Channel">
+    <DropdownOption value="todos" valueLabel="All channels" />
+    <DropdownOption value="particular" valueLabel="Private buyers" />
+    <DropdownOption value="flotas" valueLabel="Fleets (all except private buyers)" />
+    <DropdownOption value="empresa" valueLabel="Companies" />
+    <DropdownOption value="renting" valueLabel="Renting" />
+    <DropdownOption value="alquiler" valueLabel="Rental (rent a car)" />
+    <DropdownOption value="servicio_publico" valueLabel="Taxi, VTC and other services" />
 </Dropdown>
 
 <Dropdown name=periodo title="Period" data={periodos} value=valor label=etiqueta order=orden>
@@ -70,6 +82,7 @@ SELECT *
 FROM mother.movilidad_modelos_mensual
 WHERE grupo = '${inputs.grupo}'
   AND ('${inputs.energia.value}' = 'todas' OR energia = '${inputs.energia.value}')
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND canal <> 'particular') OR canal = '${inputs.canal.value}')
   AND (
     ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(mes, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
     OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(mes) AS INTEGER) = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER))
@@ -78,16 +91,17 @@ WHERE grupo = '${inputs.grupo}'
 
 ```sql filtro_anterior
 -- Mismo periodo un año antes, para la variación
-SELECT marca, modelo, sum(matriculaciones) AS unidades
+SELECT marca, grupo_empresarial, modelo, sum(matriculaciones) AS unidades
 FROM mother.movilidad_modelos_mensual
 WHERE grupo = '${inputs.grupo}'
   AND ('${inputs.energia.value}' = 'todas' OR energia = '${inputs.energia.value}')
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND canal <> 'particular') OR canal = '${inputs.canal.value}')
   AND (
     ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(mes + INTERVAL 12 MONTH, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
     OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(mes) AS INTEGER) + 1 = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER)
         AND month(mes) <= (SELECT max(month(mes)) FROM ${filtro}))
   )
-GROUP BY marca, modelo
+GROUP BY marca, grupo_empresarial, modelo
 ```
 
 ```sql total
@@ -129,11 +143,64 @@ LEFT JOIN ${filtro_anterior} p ON p.marca = a.marca AND p.modelo = a.modelo
 ORDER BY a.unidades DESC, a.marca, a.modelo
 ```
 
+```sql grupos
+WITH act AS (
+    SELECT grupo_empresarial AS grupo, marca, sum(matriculaciones) AS unidades
+    FROM ${filtro} GROUP BY ALL
+),
+ant AS (
+    SELECT grupo_empresarial AS grupo, sum(unidades) AS unidades FROM ${filtro_anterior} GROUP BY ALL
+),
+g AS (
+    SELECT grupo, sum(unidades) AS unidades, count(*) AS n_marcas,
+        string_agg(marca, ', ' ORDER BY unidades DESC) AS marcas
+    FROM act GROUP BY grupo
+)
+SELECT
+    row_number() OVER (ORDER BY g.unidades DESC, g.grupo) AS puesto,
+    g.grupo, g.marcas, g.n_marcas, g.unidades,
+    g.unidades / sum(g.unidades) OVER () AS cuota,
+    CASE WHEN p.unidades >= 20 THEN g.unidades / p.unidades - 1 END AS variacion
+FROM g
+LEFT JOIN ant p ON p.grupo = g.grupo
+ORDER BY g.unidades DESC, g.grupo
+```
+
+```sql top_grupos_grafico
+SELECT grupo, unidades FROM ${grupos} WHERE puesto <= 15 ORDER BY unidades DESC
+```
+
 ```sql top_marcas_grafico
 SELECT marca, unidades FROM ${marcas} WHERE puesto <= 20 ORDER BY unidades DESC
 ```
 
 <p class="text-sm text-gray-600 dark:text-gray-400">{formatNumber(total[0]?.unidades, 0)} new units registered across {formatNumber(total[0]?.marcas, 0)} makes and {formatNumber(total[0]?.modelos, 0)} models with the selected filters.</p>
+
+## Groups
+
+Many makes belong to the same manufacturer and share platforms, engines and factories: Peugeot, Citroën, Opel, Fiat and Jeep belong to **Stellantis**; Seat, Cupra, Skoda and Audi to **Volkswagen**; Volvo, Polestar and Lynk & Co to China's **Geely**; and MG to **SAIC**. Grouped by owner, the market split changes considerably.
+
+<BarChart
+    data={top_grupos_grafico}
+    x=grupo
+    y=unidades
+    swapXY=true
+    sort=false
+    yFmt=num0
+    fillColor="#7c3aed"
+    title="The 15 groups with the most registrations"
+/>
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=puesto title="#" />
+    <Column id=grupo title="Group" />
+    <Column id=marcas title="Makes (from most to fewest sales)" wrap=true />
+    <Column id=unidades title="Units" fmt=num0 contentType=bar barColor="#ddd6fe" />
+    <Column id=cuota title="Share" fmt=pct1 />
+    <Column id=variacion title="Vs. a year earlier" fmt=pct0 contentType=delta />
+</DataTable>
+
+<p class="text-xs text-gray-500">Group according to the majority owner of each make. Stakes of 50% or less do not count: Smart (50% Mercedes-Benz and 50% Geely) goes with Geely, and Leapmotor (21% owned by Stellantis) is its own group. Makes that only put their badge on a car built by another manufacturer, such as Ebro (Chery cars) or DR (from Chery and other Chinese manufacturers), count as their own group because the company is different. In trucks and buses, Volvo and Renault belong to the AB Volvo group and Mercedes-Benz to Daimler Truck, companies separate from the car ones. Makes without a group in the table are their own group.</p>
 
 ## Makes
 
@@ -167,7 +234,9 @@ SELECT marca, unidades FROM ${marcas} WHERE puesto <= 20 ORDER BY unidades DESC
     <Column id=variacion title="Vs. a year earlier" fmt=pct0 contentType=delta />
 </DataTable>
 
-<p class="text-xs text-gray-500">New vehicles only (imported used vehicles are not counted). The change is measured against the same period a year earlier and is omitted when there were fewer than 20 units back then. The model name is the one on the technical data sheet: some cars appear with variants (e.g. «SANDERO» and «SANDERO STEPWAY»).</p>
+<p class="text-xs text-gray-500">New vehicles only (imported used vehicles are not counted). The change is measured against the same period a year earlier and is omitted when there were fewer than 20 units back then. The model name is the one on the technical data sheet: some cars appear with variants (e.g. «SANDERO» and «SANDERO STEPWAY»). For vehicles finished by a bodybuilder (trucks, buses, camper vans) the chassis make is counted, not the bodybuilder's.</p>
+
+<p class="text-xs text-gray-500">Channel: private buyers' cars are those registered to a natural person (including the self-employed) without renting; companies, those of legal entities, including self-registrations by dealers and brands that are later sold as "zero-kilometre" cars; rental, those for rental service without driver (rent a car); and taxi, VTC and others, those for public service.</p>
 
 ```sql mix_marcas
 -- Mezcla de motores de las 15 primeras marcas (sin filtrar por motor)
@@ -175,6 +244,7 @@ WITH base AS (
     SELECT m.marca, m.energia, sum(m.matriculaciones) AS unidades
     FROM mother.movilidad_modelos_mensual m
     WHERE m.grupo = '${inputs.grupo}'
+  AND ('${inputs.canal.value}' = 'todos' OR ('${inputs.canal.value}' = 'flotas' AND m.canal <> 'particular') OR m.canal = '${inputs.canal.value}')
       AND (
         ((SELECT p FROM ${periodo_sel}) LIKE 'M%' AND strftime(m.mes, '%Y-%m') = substr((SELECT p FROM ${periodo_sel}), 2))
         OR ((SELECT p FROM ${periodo_sel}) LIKE 'A%' AND CAST(year(m.mes) AS INTEGER) = TRY_CAST(substr((SELECT p FROM ${periodo_sel}), 2) AS INTEGER))

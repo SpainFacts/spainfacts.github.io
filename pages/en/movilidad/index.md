@@ -1,7 +1,7 @@
 ---
 title: Mobility
 description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, and passengers on metro, bus, rail and air."
-i18n_origen: f38f1ce95c98
+i18n_origen: 672121895650
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -125,11 +125,19 @@ How people get around in Spain: the cars being bought and the ones on the road, 
     </a>
     <a href="/en/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Best-selling makes and models</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Monthly ranking of cars, motorbikes and vans, filterable by electric, hybrid, petrol or diesel.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Monthly ranking of cars, motorbikes, vans, trucks and buses by make, model and group, filterable by engine and by channel (private buyers or fleets).</p>
     </a>
     <a href="/en/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Vehicle fleet</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">The vehicles on the road today: engine, environmental label, age and most common models, by province and municipality.</p>
+    </a>
+    <a href="/en/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Trucks and buses</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Registrations by engine type, the rise of the electric bus, best-selling groups and the age of those on the road.</p>
+    </a>
+    <a href="/en/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> The fleet tax havens</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Villages of a few dozen residents with thousands of company cars: where fleets are registered to pay less vehicle tax.</p>
     </a>
     <a href="/en/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Charging points</p>

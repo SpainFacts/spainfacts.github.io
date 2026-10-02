@@ -124,11 +124,19 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
     </a>
     <a href="/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marcas y modelos más vendidos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ranking mensual de coches, motos y furgonetas, filtrable por eléctricos, híbridos, gasolina o diésel.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ranking mensual de coches, motos, furgonetas, camiones y autobuses por marca, modelo y grupo, filtrable por motor y por canal (particulares o flotas).</p>
     </a>
     <a href="/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Parque de vehículos</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Los vehículos que circulan hoy: motor, etiqueta ambiental, antigüedad y modelos más comunes, por provincia y municipio.</p>
+    </a>
+    <a href="/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Camiones y autobuses</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Matriculaciones por tipo de motor, avance del autobús eléctrico, grupos más vendidos y antigüedad de los que circulan.</p>
+    </a>
+    <a href="/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> Los paraísos fiscales de las flotas</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pueblos de unas decenas de vecinos con miles de coches de empresa: dónde se matriculan las flotas para pagar menos impuesto de circulación.</p>
     </a>
     <a href="/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Puntos de recarga</p>

@@ -1,5 +1,5 @@
 ---
-i18n_origen: 7dffaf225345
+i18n_origen: f25fe43f1389
 title: Coche eléctrico
 description: "Transición ao coche eléctrico en España: matriculacións de turismos por tipo de motor cada mes desde 2015, cota de eléctricos e híbridos enchufables por provincia e emisións de CO2."
 og:
@@ -175,6 +175,66 @@ WHERE indicador_id = 'coche_electrico_cuota'
 
 <p class="text-xs text-gray-500">O último ano está incompleto (ata o último mes publicado).</p>
 
+## Quen compra os coches novos?
+
+```sql canales_anual
+SELECT
+    CAST(year(mes) AS INTEGER) AS anio,
+    canal_etiqueta AS canal,
+    canal_orden,
+    sum(matriculaciones) AS turismos,
+    sum(matriculaciones) FILTER (WHERE energia IN ('bev', 'phev')) / sum(matriculaciones) AS cuota_enchufables
+FROM mother.movilidad_matriculaciones_mensual
+WHERE grupo = 'turismo' AND nuevo_usado = 'N'
+GROUP BY ALL
+ORDER BY anio, canal_orden
+```
+
+```sql canales_orden
+SELECT DISTINCT canal, canal_orden FROM ${canales_anual} ORDER BY canal_orden
+```
+
+```sql canales_ultimo
+SELECT
+    any_value(anio) AS anio,
+    100 * sum(turismos) FILTER (WHERE canal_orden = 1) / sum(turismos) AS pct_particulares,
+    100 * max(cuota_enchufables) FILTER (WHERE canal_orden = 1) AS pct_enchufables_particulares,
+    100 * sum(turismos * cuota_enchufables) FILTER (WHERE canal_orden > 1) / sum(turismos) FILTER (WHERE canal_orden > 1) AS pct_enchufables_flotas
+FROM ${canales_anual}
+-- Último año completo (con diciembre publicado)
+WHERE anio = (SELECT CAST(year(max(mes)) AS INTEGER) - CASE WHEN month(max(mes)) = 12 THEN 0 ELSE 1 END FROM mother.movilidad_matriculaciones_mensual)
+```
+
+Menos da metade dos turismos novos cómpranos particulares. O resto vai a frotas: empresas (que inclúen as automatriculacións de concesionarios e marcas, os «quilómetro cero»), renting, aluguer de coches e taxis e VTC. En {canales_ultimo[0]?.anio}, os particulares quedaron co {formatNumber(canales_ultimo[0]?.pct_particulares, 1)} % das matriculacións; os enchufables foron o {formatNumber(canales_ultimo[0]?.pct_enchufables_particulares, 1)} % das súas compras, fronte ao {formatNumber(canales_ultimo[0]?.pct_enchufables_flotas, 1)} % nas frotas.
+
+<BarChart
+    data={canales_anual}
+    x=anio
+    y=turismos
+    series=canal
+    type=stacked100
+    yFmt=pct0
+    xFmt="####"
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Turismos novos por canle de venda"
+/>
+
+<LineChart
+    data={canales_anual}
+    x=anio
+    y=cuota_enchufables
+    series=canal
+    yFmt=pct0
+    xFmt="####"
+    markers=true
+    seriesOrder={canales_orden.map(d => d.canal)}
+    colorPalette={['#0d9488', '#2563eb', '#7c3aed', '#f59e0b', '#9ca3af']}
+    title="Cota de enchufables (eléctricos + híbridos enchufables) en cada canle"
+/>
+
+<p class="text-xs text-gray-500">Particulares: matriculados a nome dunha persoa física (inclúe autónomos) sen renting. Empresas: persoas xurídicas, sen renting nin aluguer. Renting: contratos de arrendamento a longo prazo, de empresas ou de particulares. Aluguer: servizo de aluguer sen condutor (rent a car). Taxi, VTC e outros: servizo público (taxi, aluguer con condutor, autoescola...). O último ano está incompleto.</p>
+
 ## Emisións de CO2 dos coches novos
 
 <LineChart
@@ -201,13 +261,19 @@ SELECT
 FROM mother.movilidad_matriculaciones_provincia p, ult
 WHERE p.nuevo_usado = 'N'
   AND p.mes > ult.mes - INTERVAL 12 MONTH
+  AND ('${inputs.canal_prov}' = 'todos' OR p.canal = 'particular')
 GROUP BY ALL
 ORDER BY cuota_enchufables DESC
 ```
 
 ## Onde se compran máis coches enchufables?
 
-Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 meses, segundo a provincia do domicilio do titular.
+Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 meses, segundo a provincia do domicilio do titular. Por defecto só contan os de particulares: as frotas matricúlanse onde teñen a sede e deforman o mapa (ver a nota de abaixo).
+
+<ButtonGroup name=canal_prov title="Compradores">
+    <ButtonGroupItem valueLabel="Só particulares" value="particular" default />
+    <ButtonGroupItem valueLabel="Todos, con frotas" value="todos" />
+</ButtonGroup>
 
 <AreaMap
     data={provincias}
@@ -236,7 +302,7 @@ Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 m
     <Column id=cuota_diesel title="Diésel" fmt=pct1 />
 </DataTable>
 
-<p class="text-xs text-gray-500">Atención a Madrid e outras provincias con sedes de empresas de renting e aluguer: alí matricúlanse frotas que despois circulan por todo o país, o que incha o seu volume e a súa cota.</p>
+<p class="text-xs text-gray-500"><b>Onde matriculan as frotas.</b> Un coche matricúlase no concello do domicilio do seu titular, e as empresas de renting e aluguer escollen onde domiciliar as súas frotas. O imposto de circulación (IVTM) é municipal: cada concello pode subir a tarifa mínima ata o dobre, así que moitas frotas se rexistran nunha delegación aberta nun concello co imposto máis baixo. Por iso pobos como La Hiruela, Venturada ou Patones (Madrid) ou Aguilar de Segarra (Barcelona) matriculan cada ano moitos máis coches que habitantes teñen, e segundo a asociación AEA dez concellos concentran arredor do 35 % das matriculacións de vehículos de empresa. Eses coches circulan despois por todo o país; con «Todos, con frotas», Madrid e Barcelona aparecen moi por riba do que compran os seus veciños. Fonte: <a href="https://aeaclub.org/ivtm-impuesto-municipal-vehiculos-paraisos-fiscales/">AEA, estudo sobre o IVTM (2026)</a>. Os concellos, un a un, en <a href="/gl/movilidad/flotas-e-impuestos">Os paraísos fiscais das frotas</a>.</p>
 
 ---
 
@@ -244,7 +310,8 @@ Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 m
 
 - **[DGT – Microdatos de matriculacións de vehículos (MATRABA)](https://www.dgt.es/menusecundario/dgt-en-cifras/matraba-listados/matriculaciones-automoviles-mensual.html)**, mensual desde xaneiro de 2015. Cóntanse só as matriculacións ordinarias de turismos (incluídos todoterreos) **novos**; os usados importados, que tamén se matriculan por primeira vez en España, exclúense.
 - O tipo de motor combina a categoría de vehículo eléctrico (BEV, PHEV, REEV, HEV) e a propulsión da ficha técnica. Gas inclúe GLP e gas natural.
-- As cifras poden diferir lixeiramente das das asociacións do sector (ANFAC, que usa os seus propios criterios de data e clasificación).
+- As cifras poden diferir lixeiramente das das asociacións do sector (ANFAC, que usa os seus propios criterios de data e clasificación). ANFAC separa tamén particulares, empresas e alugadores; aquí a canle sae do titular (persoa física ou xurídica), do indicador de renting e do tipo de servizo de cada vehículo no ficheiro da DGT.
+- O último mes, ata que a DGT publica o ficheiro mensual (cara ao día 15 do mes seguinte), calcúlase cos seus ficheiros diarios.
 - A comparación internacional (ano completo, eléctricos puros máis híbridos enchufables) procede da **[AIE – Global EV Data Explorer](https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer)** (CC BY 4.0), que arredonda a números enteiros as cotas recentes; por iso pode non coincidir exactamente coa da DGT. Noruega e Dinamarca aparecen como referencia (bordo descontinuo): son os países onde o coche eléctrico está máis estendido.
 
 <LastRefreshed prefix="Datos actualizados" />
