@@ -1,5 +1,6 @@
 -- Turismos matriculados por mes, provincia del domicilio del vehículo, energía
--- y nuevo/usado (DGT, MATRABA).
+-- nuevo/usado y canal (DGT, MATRABA). Las flotas (renting, alquiler) se matriculan
+-- donde tienen sede, muchas en municipios con el impuesto de circulación más bajo.
 select
     m.mes,
     m.cod_prov,
@@ -9,6 +10,7 @@ select
     e.etiqueta_corta as energia_etiqueta,
     e.orden as energia_orden,
     m.nuevo_usado,
+    m.canal,
     sum(m.matriculaciones) as matriculaciones
 from {{ source('raw_movilidad', 'dgt_matriculaciones') }} m
 join {{ ref('territorios_provincias') }} p on p.cod_prov = m.cod_prov

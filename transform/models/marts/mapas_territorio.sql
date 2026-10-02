@@ -631,7 +631,7 @@ mov_parque as (
 ),
 
 matric as (
-    select mes, cod_prov, cod_ccaa, energia, cast(matriculaciones as double) as matriculaciones
+    select mes, cod_prov, cod_ccaa, energia, canal, cast(matriculaciones as double) as matriculaciones
     from {{ ref('movilidad_matriculaciones_provincia') }}
     where nuevo_usado = 'N'
 ),
@@ -646,14 +646,18 @@ matric_niveles as (
         sum(matriculaciones) as total,
         sum(matriculaciones) filter (where energia in ('bev', 'phev')) as enchufables,
         sum(matriculaciones) filter (where energia = 'bev') as bev,
-        sum(matriculaciones) filter (where energia = 'diesel') as diesel
+        sum(matriculaciones) filter (where energia = 'diesel') as diesel,
+        sum(matriculaciones) filter (where canal = 'particular') as part_total,
+        sum(matriculaciones) filter (where canal = 'particular' and energia in ('bev', 'phev')) as part_enchufables
     from matric group by all
     union all
     select cast(year(mes) as integer), 'ccaa', cod_ccaa,
         sum(matriculaciones),
         sum(matriculaciones) filter (where energia in ('bev', 'phev')),
         sum(matriculaciones) filter (where energia = 'bev'),
-        sum(matriculaciones) filter (where energia = 'diesel')
+        sum(matriculaciones) filter (where energia = 'diesel'),
+        sum(matriculaciones) filter (where canal = 'particular'),
+        sum(matriculaciones) filter (where canal = 'particular' and energia in ('bev', 'phev'))
     from matric where cod_ccaa is not null group by all
 ),
 
@@ -686,6 +690,18 @@ mov_matric as (
     select 'movilidad_matric_pct_diesel', nivel, cod, anio, 100 * coalesce(diesel, 0) / total,
         'Turismos nuevos diésel (% de las matriculaciones)', '%', 'negativo', nota
     from matric_hab
+    -- Solo particulares: las flotas se matriculan donde tienen sede (Madrid y municipios
+    -- con el impuesto de circulación más bajo) y deforman el reparto territorial.
+    union all
+    select 'movilidad_matric_particulares_1000', nivel, cod, anio, 1000 * coalesce(part_total, 0) / poblacion,
+        'Turismos nuevos de particulares por 1.000 habitantes', 'por 1.000 hab', 'neutro', nota
+    from matric_hab
+    union all
+    select 'movilidad_matric_particulares_pct_enchufables', nivel, cod, anio,
+        100 * coalesce(part_enchufables, 0) / part_total,
+        'Turismos nuevos enchufables de particulares (% de sus matriculaciones)', '%', 'positivo', nota
+    from matric_hab
+    where part_total > 0
 ),
 
 recarga_fecha as (

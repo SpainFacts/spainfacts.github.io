@@ -1,12 +1,13 @@
--- Vehículos NUEVOS matriculados por mes, grupo, energía y marca (DGT, MATRABA).
+-- Vehículos NUEVOS matriculados por mes, grupo, energía, canal, marca y grupo
+-- empresarial (DGT, MATRABA). Marca y grupo resueltos en stg_dgt_matriculaciones_marcas.
 select
     mes,
     grupo,
     energia,
-    trim(replace(marca, '¡', '')) as marca,
+    canal,
+    marca,
+    grupo_empresarial,
     sum(matriculaciones) as matriculaciones
-from {{ source('raw_movilidad', 'dgt_matriculaciones_modelos') }}
-where nuevo_usado = 'N'
-  and grupo in ('turismo', 'motocicleta', 'furgoneta')
-  and trim(replace(marca, '¡', '')) <> ''
+from {{ ref('stg_dgt_matriculaciones_marcas') }}
+where grupo in ('turismo', 'motocicleta', 'furgoneta', 'camion', 'autobus')
 group by all

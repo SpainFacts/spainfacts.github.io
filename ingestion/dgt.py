@@ -248,6 +248,19 @@ def modelo_comercial(marca: str, modelo: str) -> str:
     return " ".join(limpias) or " ".join(palabras) or modelo
 
 
+def canal(servicio: str, titular: str, renting: bool) -> str:
+    """Canal de venta, al estilo de las notas del sector (ANFAC separa particulares,
+    empresas y alquiladores). SERVICIO: B00 privado, A01 alquiler sin conductor
+    (rent a car), A02 alquiler con conductor (VTC), A03 autoescuela, A04 taxi..."""
+    if servicio == "A01":
+        return "alquiler"
+    if servicio.startswith("A"):
+        return "servicio_publico"  # taxi, VTC, autoescuela y otros servicios públicos
+    if renting:
+        return "renting"
+    return "particular" if titular == "fisica" else "empresa"
+
+
 def _mes_anterior(d: date) -> date:
     return date(d.year - (d.month == 1), (d.month - 2) % 12 + 1, 1)
 
@@ -308,14 +321,18 @@ def agregar_matriculaciones(lineas) -> dict:
         cod_mun = _campo(linea, 30)
         cod_mun = cod_mun.zfill(5) if cod_mun.isdigit() and int(cod_mun) > 0 else None
         cod_prov = cod_mun[:2] if cod_mun else PROV_DGT_INE.get(_campo(linea, 20))
-        clave = (cod_prov, cod_mun, grupo, ener, nu, renting, titular)
+        can = canal(_campo(linea, 29), titular, renting)
+        clave = (cod_prov, cod_mun, grupo, ener, nu, renting, titular, can)
         territorio[clave] += 1
         emis = _campo(linea, 34)
         if emis.isdigit() and 0 < int(emis) < 1000:
             co2[clave] += int(emis)
             co2_n[clave] += 1
         marca, modelo = limpiar_modelo(_campo(linea, 4), _campo(linea, 5))
-        modelos[(grupo, ener, nu, marca, modelo)] += 1
+        # Vehículos en varias fases (camiones, autobuses, furgonetas camperizadas): MARCA_ITV es
+        # la del carrocero que lo termina (Castrosua, Tecnove...) y este campo, la del chasis.
+        marca_base = " ".join(_campo(linea, 56).replace("¡", "").upper().split())
+        modelos[(grupo, ener, nu, can, marca, modelo, marca_base)] += 1
     if descartadas:
         log.info("Matriculaciones descartadas: %s", dict(descartadas))
     return {
@@ -370,9 +387,9 @@ def _lineas_diarias(mes: date):
 
 
 def _matriculaciones_mes(mes: date, refrescar: bool) -> dict | None:
-    cache = CACHE / "matriculaciones" / f"{mes:%Y%m}.json.gz"
+    cache = CACHE / "matriculaciones_v2" / f"{mes:%Y%m}.json.gz"  # v2: con canal y marca del chasis
     # Mes montado con ficheros diarios: provisional hasta que salga el mensual.
-    cache_diaria = CACHE / "matriculaciones" / f"{mes:%Y%m}.diario.json.gz"
+    cache_diaria = CACHE / "matriculaciones_v2" / f"{mes:%Y%m}.diario.json.gz"
     if cache.exists() and not refrescar:
         return _leer_cache(cache)
     zip_tmp = CACHE / "tmp" / f"mat_{mes:%Y%m}.zip"
@@ -424,21 +441,22 @@ def dgt(meses_recientes: int = 2, parque: bool = True):
     @dlt.resource(name="dgt_matriculaciones", write_disposition=_CLAVE_MES, merge_key="mes")
     def matriculaciones():
         for mes, datos in _cargar_meses():
-            for cod_prov, cod_mun, grupo, ener, nu, renting, titular, n, co2, co2_n in datos["territorio"]:
+            for cod_prov, cod_mun, grupo, ener, nu, renting, titular, can, n, co2, co2_n in datos["territorio"]:
                 yield {
                     "mes": mes, "cod_prov": cod_prov, "cod_mun": cod_mun, "grupo": grupo,
                     "energia": ener, "nuevo_usado": nu, "renting": renting, "titular": titular,
-                    "matriculaciones": n, "co2_suma": co2, "co2_n": co2_n,
+                    "canal": can, "matriculaciones": n, "co2_suma": co2, "co2_n": co2_n,
                 }
 
     @dlt.resource(name="dgt_matriculaciones_modelos", write_disposition=_CLAVE_MES, merge_key="mes")
     def matriculaciones_modelos():
         for mes, datos in _cargar_meses():
-            for grupo, ener, nu, marca, modelo, n in datos["modelos"]:
+            for grupo, ener, nu, can, marca, modelo, marca_base, n in datos["modelos"]:
                 yield {
-                    "mes": mes, "grupo": grupo, "energia": ener, "nuevo_usado": nu,
+                    "mes": mes, "grupo": grupo, "energia": ener, "nuevo_usado": nu, "canal": can,
                     "marca": ALIAS_MARCA.get(marca, marca), "modelo": modelo_comercial(marca, modelo),
                     "modelo_ficha": modelo,
+                    "marca_base": ALIAS_MARCA.get(marca_base, marca_base) or None,
                     "matriculaciones": n,
                 }
 

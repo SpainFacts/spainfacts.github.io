@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: movilidad_matriculaciones_mensual
-    description: "Matriculaciones ordinarias en España por mes, grupo de vehículo, energía y nuevo/usado (DGT MATRABA)."
+    description: "Matriculaciones ordinarias en España por mes, grupo de vehículo, energía y nuevo/usado y canal de venta (DGT MATRABA)."
     columns:
       - name: mes
         tests: [not_null]
@@ -12,6 +12,10 @@ models:
       - name: grupo
         tests:
           - relationships: {to: ref('movilidad_grupos'), field: grupo}
+      - name: canal
+        tests:
+          - not_null
+          - relationships: {to: ref('movilidad_canales'), field: canal}
   - name: movilidad_matriculaciones_provincia
     description: "Turismos matriculados por mes, provincia, energía y nuevo/usado (DGT MATRABA)."
     columns:
@@ -20,7 +24,12 @@ models:
   - name: movilidad_matriculaciones_municipio
     description: "Turismos nuevos por año y municipio, en columnas por energía (DGT MATRABA)."
   - name: movilidad_marcas_mensual
-    description: "Vehículos nuevos por mes, grupo, energía y marca."
+    description: "Vehículos nuevos por mes, grupo, energía, canal, marca (la del chasis en los carrozados) y grupo empresarial."
+    columns:
+      - name: grupo_empresarial
+        tests: [not_null]
+      - name: canal
+        tests: [not_null]
   - name: movilidad_modelos_mensual
     description: "Vehículos nuevos por mes, grupo, energía, marca y modelo (últimos 36 meses)."
   - name: movilidad_parque_evolucion
