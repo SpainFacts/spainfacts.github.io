@@ -1619,7 +1619,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por indicador: arope (% de población), gini (0 a 100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor. 'UE-27' (geo EU27_2020, es_ue=true) es el agregado, no un país: excluirlo en rankings de países. Año de encuesta, no de la renta."
+    "notas": "Filtrar siempre por indicador: arope (% de población), gini (0 a 100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor. 'UE-27' (geo EU27_2020, es_ue=false, a diferencia de los países) es el agregado, no un país: excluirlo en rankings de países. Año de encuesta, no de la renta."
   },
   {
     "tabla": "salud_causas_muerte",
@@ -2096,8 +2096,7 @@
       {
         "columna": "situacion",
         "nombre": "definición del profesional (ejerciendo, activo, total de camas)",
-        "total": null,
-        "defecto": "PRACT"
+        "total": null
       }
     ],
     "filtros": [],
@@ -2181,10 +2180,10 @@
       {
         "columna": "valor",
         "nombre": "puntuación del indicador elegido (la escala depende de la unidad)",
-        "unidad": "%",
+        "unidad": "",
         "tipo": "indice",
         "principal": true,
-        "escala": 100
+        "unidad_columna": "unidad"
       },
       {
         "columna": "puesto_ue",

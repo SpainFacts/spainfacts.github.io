@@ -582,17 +582,15 @@
       {
         "columna": "tasa_1000",
         "nombre": "infracciones penales por cada 1.000 habitantes",
-        "unidad": "%",
+        "unidad": "por cada 1.000 habitantes",
         "tipo": "tasa",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
         "columna": "infracciones",
         "nombre": "infracciones penales conocidas",
-        "unidad": "%",
-        "tipo": "flujo",
-        "escala": 100
+        "unidad": "infracciones",
+        "tipo": "flujo"
       },
       {
         "columna": "poblacion",
@@ -786,17 +784,15 @@
       {
         "columna": "tasa_1000",
         "nombre": "infracciones penales por cada 1.000 habitantes",
-        "unidad": "%",
+        "unidad": "por cada 1.000 habitantes",
         "tipo": "tasa",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
         "columna": "infracciones",
         "nombre": "infracciones penales conocidas",
-        "unidad": "%",
-        "tipo": "flujo",
-        "escala": 100
+        "unidad": "infracciones",
+        "tipo": "flujo"
       },
       {
         "columna": "poblacion",
@@ -847,17 +843,15 @@
       {
         "columna": "infracciones",
         "nombre": "infracciones penales conocidas en el periodo",
-        "unidad": "%",
+        "unidad": "infracciones",
         "tipo": "flujo",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
         "columna": "infracciones_anio_anterior",
         "nombre": "infracciones en el mismo periodo del año anterior",
-        "unidad": "%",
-        "tipo": "flujo",
-        "escala": 100
+        "unidad": "infracciones",
+        "tipo": "flujo"
       }
     ],
     "tiempo": {

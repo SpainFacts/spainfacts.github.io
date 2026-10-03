@@ -684,7 +684,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Turistas internacionales y gasto solo existen para seis comunidades (en el resto valen 0, no son datos reales). Euros reales de 2025. Las medidas por 1.000 habitantes de un mes no se suman con las de otros meses sin avisar."
+    "notas": "Turistas internacionales y gasto solo se publican para algunas comunidades: en el resto están vacíos (NULL); los pocos ceros son reales (meses de 2020 con las fronteras cerradas). Euros reales de 2025. Las medidas por 1.000 habitantes de un mes no se suman con las de otros meses sin avisar."
   },
   {
     "tabla": "turismo_mensual",
@@ -805,7 +805,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Solo España. Los valores 0 en turistas y gasto corresponden a meses sin dato aún publicado (EGATUR/FRONTUR van con retraso respecto a los hoteles). Euros reales de 2025. Las columnas _12m son acumulados móviles y no se suman."
+    "notas": "Solo España. Los meses sin dato publicado (EGATUR/FRONTUR van con retraso respecto a los hoteles) están vacíos (NULL); los dos ceros (abril y mayo de 2020) son reales, por el cierre de fronteras. Euros reales de 2025. Las columnas _12m son acumulados móviles y no se suman."
   },
   {
     "tabla": "turismo_paises",
