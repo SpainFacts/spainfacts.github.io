@@ -1,0 +1,2370 @@
+[
+  {
+    "tabla": "transparencia_liquidaciones",
+    "usar": true,
+    "tema": "Ayuntamientos que no remiten a Hacienda la liquidación de su presupuesto en plazo, por año, partido y tamaño del municipio",
+    "preguntas": [
+      "¿Qué ayuntamientos no han enviado la liquidación del presupuesto a Hacienda?",
+      "¿Qué partido tiene más ayuntamientos incumplidores en la rendición de cuentas?",
+      "¿Cuántos ayuntamientos de Andalucía incumplieron en 2023 la entrega de la liquidación?"
+    ],
+    "medidas": [
+      {
+        "columna": "poblacion",
+        "nombre": "habitantes del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tramo_poblacion",
+        "nombre": "tamaño del municipio",
+        "total": null
+      },
+      {
+        "columna": "familia_en_plazo",
+        "nombre": "partido que gobernaba en el plazo legal",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "aplica_indicador",
+        "valor": "true"
+      }
+    ],
+    "notas": "Una fila por municipio y año. Para tasas hay que contar solo filas con aplica_indicador=true (excluye régimen foral y casos sin dato). Plazo legal: 31 de marzo del año siguiente. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+  },
+  {
+    "tabla": "transparencia_pie",
+    "usar": true,
+    "tema": "Ayuntamientos a los que Hacienda ha retenido la participación en los tributos del Estado por no rendir cuentas, con meses e importe retenido",
+    "preguntas": [
+      "¿A cuántos ayuntamientos retiene Hacienda dinero por no presentar el presupuesto?",
+      "¿Cuánto dinero se ha retenido a los ayuntamientos del PP?",
+      "¿Cuántos meses estuvo retenido el ayuntamiento de Cieza?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_retenido_eur",
+        "nombre": "importe retenido al ayuntamiento",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "meses_retenido",
+        "nombre": "meses de retención",
+        "unidad": "meses",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "habitantes del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "seccion_nombre",
+        "nombre": "documento no remitido (liquidación, presupuesto o líneas fundamentales)",
+        "total": null
+      },
+      {
+        "columna": "tramo_poblacion",
+        "nombre": "tamaño del municipio",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido que gobernaba al empezar la retención",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "aplica_indicador",
+        "valor": "true"
+      }
+    ],
+    "notas": "Una fila por ayuntamiento, ejercicio y sección (incluidos los no retenidos). El importe es nominal en euros (sin ajustar por inflación) y el ejercicio en curso está incompleto. No sumar importes de secciones distintas sin avisar. La respuesta se obtiene contando filas con la columna booleana retenido = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+  },
+  {
+    "tabla": "transparencia_pie_mensual",
+    "usar": true,
+    "tema": "Cuántos ayuntamientos tiene retenida cada mes la participación en los tributos del Estado y cuánto dinero se les retiene",
+    "preguntas": [
+      "¿Cuántos ayuntamientos tienen ahora retenido el dinero de Hacienda?",
+      "¿Cuánto dinero se retuvo a los ayuntamientos en septiembre de 2026?",
+      "¿Cómo ha evolucionado el número de ayuntamientos retenidos desde 2016?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur",
+        "nombre": "importe retenido ese mes",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "periodo",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "seccion",
+        "nombre": "documento no remitido",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por ayuntamiento, mes y sección; el número de ayuntamientos retenidos es el número de cod_mun distintos del mes. No lleva el nombre del municipio (hay que cruzar con otra tabla por cod_mun)."
+  },
+  {
+    "tabla": "transparencia_pmp",
+    "usar": true,
+    "tema": "Periodo medio de pago a proveedores de los ayuntamientos por trimestre y cuántos tardan más de 30 días",
+    "preguntas": [
+      "¿Qué ayuntamientos tardan más de 30 días en pagar a sus proveedores?",
+      "¿Cuántos días tarda en pagar el ayuntamiento de Cieza?",
+      "¿Qué partido tiene más ayuntamientos que no comunican el periodo medio de pago?"
+    ],
+    "medidas": [
+      {
+        "columna": "pmp_dias",
+        "nombre": "periodo medio de pago a proveedores",
+        "unidad": "días",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "habitantes del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "periodo",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tramo_poblacion",
+        "nombre": "tamaño del municipio",
+        "total": null
+      },
+      {
+        "columna": "familia_en_plazo",
+        "nombre": "partido que gobernaba en el plazo",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "aplica_indicador",
+        "valor": "true"
+      }
+    ],
+    "notas": "pmp_dias es nulo si el ayuntamiento no reporta (reporta=false). El periodo es texto tipo 2026T2; fecha_trimestre es la fecha del primer día del trimestre. Para tasas usar solo aplica_indicador=true. La respuesta se obtiene contando filas con la columna booleana supera_30 = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+  },
+  {
+    "tabla": "transparencia_publicidad_activa",
+    "usar": true,
+    "tema": "Puntuación de transparencia (publicidad activa) de ayuntamientos, cabildos y otras entidades según los organismos de transparencia",
+    "preguntas": [
+      "¿Qué ayuntamiento de Canarias es más transparente?",
+      "¿Qué puntuación de transparencia tiene el Ayuntamiento de Adeje?",
+      "¿Qué partido gobierna los ayuntamientos con peor nota de transparencia?"
+    ],
+    "medidas": [
+      {
+        "columna": "puntuacion",
+        "nombre": "puntuación de transparencia (escala 0 a 100)",
+        "unidad": "puntos sobre 100",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "habitantes del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "provincia",
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "entidad",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "indice",
+        "nombre": "índice de evaluación",
+        "total": null,
+        "defecto": "ITCanarias"
+      },
+      {
+        "columna": "tipo_entidad",
+        "nombre": "tipo de entidad",
+        "total": null
+      },
+      {
+        "columna": "tipo_administracion",
+        "nombre": "tipo de administración",
+        "total": null
+      },
+      {
+        "columna": "estado",
+        "nombre": "estado de la evaluación",
+        "total": null,
+        "defecto": "evaluada"
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido de quien gobierna",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "es_ultima",
+        "valor": "true"
+      }
+    ],
+    "notas": "Cubre sobre todo Canarias (ITCanarias) y algunas entidades del Consejo de Transparencia (ICIO). Para la nota actual usar es_ultima=true y estado='evaluada'; las incumplidoras no tienen nota. Las puntuaciones originales vienen en escalas distintas pero puntuacion ya está normalizada a 100."
+  },
+  {
+    "tabla": "transparencia_tcu",
+    "usar": true,
+    "tema": "Ayuntamientos que no rinden al Tribunal de Cuentas la cuenta general, el control interno y los contratos, por ejercicio",
+    "preguntas": [
+      "¿Qué ayuntamientos no han rendido la cuenta general al Tribunal de Cuentas?",
+      "¿Cuántos ayuntamientos rindieron fuera de plazo la cuenta general en 2024?",
+      "¿Qué partido tiene más ayuntamientos incumplidores con el Tribunal de Cuentas?"
+    ],
+    "medidas": [
+      {
+        "columna": "dias_retraso",
+        "nombre": "días de retraso en la rendición",
+        "unidad": "días",
+        "tipo": "media"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "habitantes del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "ejercicio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "obligacion",
+        "nombre": "obligación de rendición (cuenta_general, control_interno, contratos)",
+        "total": null
+      },
+      {
+        "columna": "estado",
+        "nombre": "estado de la rendición",
+        "total": null
+      },
+      {
+        "columna": "tramo_poblacion",
+        "nombre": "tamaño del municipio",
+        "total": null
+      },
+      {
+        "columna": "familia_en_plazo",
+        "nombre": "partido que gobernaba en el plazo",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "aplica_indicador",
+        "valor": "true"
+      }
+    ],
+    "notas": "Solo cubre ayuntamientos de La Rioja, Cádiz y A Coruña (cod_ccaa 17, 01, 12), no toda España. Rastreo del Tribunal de Cuentas a septiembre de 2026; dias_retraso solo existe si rindió fuera de plazo. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+  },
+  {
+    "tabla": "trazabilidad_fuentes",
+    "usar": false,
+    "notas": "Catálogo de metadatos de las fuentes oficiales (licencia, URL, frecuencia), no contiene datos que responda a preguntas de la gente sobre España."
+  },
+  {
+    "tabla": "turismo_anual",
+    "usar": true,
+    "tema": "Turismo en España por año: turistas internacionales, gasto, pernoctaciones y ocupación hotelera",
+    "preguntas": [
+      "¿Cuántos turistas internacionales visitaron España en 2025?",
+      "¿Cuánto gasta de media cada turista que viene a España?",
+      "¿Cómo ha evolucionado el gasto turístico por habitante?",
+      "¿Qué porcentaje del PIB representa el gasto de los turistas?"
+    ],
+    "medidas": [
+      {
+        "columna": "turistas",
+        "nombre": "turistas internacionales que visitan España",
+        "unidad": "turistas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "turistas_por_hab",
+        "nombre": "turistas internacionales por habitante",
+        "unidad": "turistas por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto de los turistas internacionales en euros reales de 2025",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_meur",
+        "nombre": "gasto de los turistas internacionales en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_real_por_hab",
+        "nombre": "gasto turístico real por habitante",
+        "unidad": "€ reales por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_medio_persona_real",
+        "nombre": "gasto medio real por turista",
+        "unidad": "€ reales por turista",
+        "tipo": "media"
+      },
+      {
+        "columna": "gasto_medio_diario_real",
+        "nombre": "gasto medio real por turista y día",
+        "unidad": "€ reales por día",
+        "tipo": "media"
+      },
+      {
+        "columna": "duracion_media",
+        "nombre": "duración media del viaje",
+        "unidad": "noches",
+        "tipo": "media"
+      },
+      {
+        "columna": "gasto_pct_pib",
+        "nombre": "gasto turístico en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pernoct_hotel",
+        "nombre": "pernoctaciones en hoteles",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pernoct_hotel_1000hab",
+        "nombre": "pernoctaciones hoteleras por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pernoct_apart",
+        "nombre": "pernoctaciones en apartamentos turísticos",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupacion_hotel",
+        "nombre": "grado de ocupación hotelera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_extranjeros_hotel",
+        "nombre": "porcentaje de pernoctaciones hoteleras de no residentes",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. El último año (2026) está incompleto (columnas meses_frontur/meses_hotel dicen cuántos meses suma, ahora 8). Los euros reales están en millones de euros de 2025 (anio_base)."
+  },
+  {
+    "tabla": "turismo_ccaa",
+    "usar": true,
+    "tema": "Turismo por comunidad autónoma y año: pernoctaciones por habitante, ocupación hotelera, turistas internacionales y gasto",
+    "preguntas": [
+      "¿Qué comunidad tiene más pernoctaciones turísticas por habitante?",
+      "¿Cuántos turistas internacionales recibió Cataluña en 2025?",
+      "¿Cuál es la ocupación hotelera de Canarias?",
+      "¿Cómo ha evolucionado el turismo en Baleares?"
+    ],
+    "medidas": [
+      {
+        "columna": "pernoct_1000hab",
+        "nombre": "pernoctaciones (hoteles y apartamentos) por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "pernoct_hotel_1000hab",
+        "nombre": "pernoctaciones hoteleras por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pernoct_hotel",
+        "nombre": "pernoctaciones en hoteles",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pernoct_apart",
+        "nombre": "pernoctaciones en apartamentos turísticos",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupacion_hotel",
+        "nombre": "grado de ocupación hotelera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ocupacion_apart",
+        "nombre": "grado de ocupación de apartamentos turísticos",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_extranjeros_hotel",
+        "nombre": "porcentaje de pernoctaciones hoteleras de no residentes",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "turistas",
+        "nombre": "turistas internacionales",
+        "unidad": "turistas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "turistas_por_hab",
+        "nombre": "turistas internacionales por habitante",
+        "unidad": "turistas por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto real de los turistas internacionales",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_real_por_hab",
+        "nombre": "gasto turístico real por habitante",
+        "unidad": "€ reales por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_medio_persona_real",
+        "nombre": "gasto medio real por turista",
+        "unidad": "€ reales por turista",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": {
+        "columna": "comunidad",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Turistas internacionales y gasto solo se desglosan para seis comunidades más 'Resto de comunidades' (cod_ccaa 'otras'); en el resto de filas son nulos. 2026 incompleto (meses_hotel indica los meses sumados). Euros reales de 2025."
+  },
+  {
+    "tabla": "turismo_ccaa_mensual",
+    "usar": true,
+    "tema": "Turismo por comunidad autónoma y mes: pernoctaciones, ocupación hotelera, plazas y turistas internacionales",
+    "preguntas": [
+      "¿Cuántas pernoctaciones hoteleras hubo en Canarias en agosto de 2025?",
+      "¿Qué comunidad tiene mayor ocupación hotelera este verano?",
+      "¿Cómo cambia el turismo en Baleares según el mes del año?"
+    ],
+    "medidas": [
+      {
+        "columna": "pernoct_hotel",
+        "nombre": "pernoctaciones en hoteles",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "pernoct_1000hab",
+        "nombre": "pernoctaciones (hoteles y apartamentos) por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pernoct_hotel_1000hab",
+        "nombre": "pernoctaciones hoteleras por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pernoct_apart",
+        "nombre": "pernoctaciones en apartamentos turísticos",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "plazas_hotel",
+        "nombre": "plazas hoteleras",
+        "unidad": "plazas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupacion_hotel",
+        "nombre": "grado de ocupación hotelera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ocupacion_apart",
+        "nombre": "grado de ocupación de apartamentos turísticos",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "turistas",
+        "nombre": "turistas internacionales",
+        "unidad": "turistas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "turistas_1000hab",
+        "nombre": "turistas internacionales por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto real de los turistas internacionales",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": {
+        "columna": "comunidad",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Turistas internacionales y gasto solo existen para seis comunidades (en el resto valen 0, no son datos reales). Euros reales de 2025. Las medidas por 1.000 habitantes de un mes no se suman con las de otros meses sin avisar."
+  },
+  {
+    "tabla": "turismo_mensual",
+    "usar": true,
+    "tema": "Turismo en España por mes: turistas internacionales, gasto, pernoctaciones en hoteles y apartamentos y acumulado de 12 meses",
+    "preguntas": [
+      "¿Cuántos turistas llegaron a España en julio de 2025?",
+      "¿Cuánto gastaron los turistas internacionales en el último año?",
+      "¿Cómo ha cambiado el número de turistas respecto al año pasado?",
+      "¿Cuál es la ocupación hotelera en agosto?"
+    ],
+    "medidas": [
+      {
+        "columna": "turistas",
+        "nombre": "turistas internacionales en el mes",
+        "unidad": "turistas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "turistas_12m",
+        "nombre": "turistas internacionales en los últimos 12 meses",
+        "unidad": "turistas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "turistas_por_hab_12m",
+        "nombre": "turistas internacionales por habitante en 12 meses",
+        "unidad": "turistas por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "turistas_interanual",
+        "nombre": "variación de turistas frente al mismo mes del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto real de los turistas internacionales en el mes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_real_12m",
+        "nombre": "gasto real de los turistas en los últimos 12 meses",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_real_por_hab_12m",
+        "nombre": "gasto turístico real por habitante en 12 meses",
+        "unidad": "€ reales por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_meur",
+        "nombre": "gasto de los turistas en euros corrientes en el mes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_medio_persona_real",
+        "nombre": "gasto medio real por turista",
+        "unidad": "€ reales por turista",
+        "tipo": "media"
+      },
+      {
+        "columna": "gasto_medio_diario_real",
+        "nombre": "gasto medio real por turista y día",
+        "unidad": "€ reales por día",
+        "tipo": "media"
+      },
+      {
+        "columna": "gasto_pct_pib_12m",
+        "nombre": "gasto turístico en 12 meses en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pernoct_hotel",
+        "nombre": "pernoctaciones en hoteles",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pernoct_apart",
+        "nombre": "pernoctaciones en apartamentos turísticos",
+        "unidad": "pernoctaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupacion_hotel",
+        "nombre": "grado de ocupación hotelera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ocupacion_apart",
+        "nombre": "grado de ocupación de apartamentos turísticos",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. Los valores 0 en turistas y gasto corresponden a meses sin dato aún publicado (EGATUR/FRONTUR van con retraso respecto a los hoteles). Euros reales de 2025. Las columnas _12m son acumulados móviles y no se suman."
+  },
+  {
+    "tabla": "turismo_paises",
+    "usar": true,
+    "tema": "Turistas internacionales que llegan a España según su país de residencia, con cuota, gasto y comparación con 2019",
+    "preguntas": [
+      "¿De qué país vienen más turistas a España?",
+      "¿Cuántos turistas británicos visitaron España en 2025?",
+      "¿Qué país gasta más por turista en España?",
+      "¿Han vuelto ya los turistas alemanes a los niveles de 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "turistas",
+        "nombre": "turistas internacionales",
+        "unidad": "turistas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "cuota",
+        "nombre": "cuota sobre el total de turistas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto real de los turistas del país",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_medio_persona_real",
+        "nombre": "gasto medio real por turista",
+        "unidad": "€ reales por turista",
+        "tipo": "media"
+      },
+      {
+        "columna": "var_2019",
+        "nombre": "variación de turistas frente a 2019",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "pais",
+        "nombre": "país de residencia del turista",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Incluye agregados (Total, Resto Europa, Resto América...) además de países sueltos: comprobar antes de rankear. El año en curso es parcial (columna meses). El gasto solo existe para los países que desglosa EGATUR."
+  },
+  {
+    "tabla": "turismo_viviendas",
+    "usar": true,
+    "tema": "Viviendas de uso turístico en España, comunidades y provincias (estadística experimental del INE)",
+    "preguntas": [
+      "¿Cuántas viviendas turísticas hay en Baleares?",
+      "¿Qué provincia tiene más viviendas de uso turístico por habitante?",
+      "¿Cómo han crecido las viviendas turísticas en España desde 2020?",
+      "¿Qué porcentaje de viviendas son turísticas en Canarias?"
+    ],
+    "medidas": [
+      {
+        "columna": "viviendas_1000hab",
+        "nombre": "viviendas de uso turístico por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "viviendas",
+        "nombre": "viviendas de uso turístico",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "plazas",
+        "nombre": "plazas en viviendas de uso turístico",
+        "unidad": "plazas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_viviendas",
+        "nombre": "porcentaje de viviendas censadas que son de uso turístico",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "var_interanual",
+        "nombre": "variación frente al mismo mes del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "periodo",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Datos semestrales (mayo y noviembre, no mensuales) y de medición experimental del INE. El último dato es mayo de 2026. Una fila por territorio y semestre; el nivel de territorio se indica en la columna nivel (cod_ccaa solo es útil en provincias)."
+  },
+  {
+    "tabla": "turismo_viviendas_municipios",
+    "usar": true,
+    "tema": "Viviendas de uso turístico por municipio (estadística experimental del INE)",
+    "preguntas": [
+      "¿Cuántas viviendas turísticas hay en Adeje?",
+      "¿Qué municipio tiene mayor porcentaje de viviendas turísticas?",
+      "¿Cuántas viviendas de uso turístico tiene Alicante por cada 1.000 habitantes?"
+    ],
+    "medidas": [
+      {
+        "columna": "viviendas_1000hab",
+        "nombre": "viviendas de uso turístico por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "viviendas",
+        "nombre": "viviendas de uso turístico",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "plazas",
+        "nombre": "plazas en viviendas de uso turístico",
+        "unidad": "plazas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_viviendas",
+        "nombre": "porcentaje de viviendas censadas que son de uso turístico",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto en España por porcentaje de viviendas turísticas",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "periodo",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Datos semestrales (mayo y noviembre) y experimentales del INE. El puesto solo se calcula para municipios de 1.000 habitantes o más."
+  },
+  {
+    "tabla": "unemployment",
+    "usar": true,
+    "tema": "Tasa de paro de la EPA en España por trimestre, sexo y grupo de edad",
+    "preguntas": [
+      "¿Cuál es la tasa de paro en España?",
+      "¿Cuál es el paro juvenil entre 16 y 19 años?",
+      "¿Cómo ha evolucionado el paro desde 2008?",
+      "¿Hay más paro entre mujeres que entre hombres?"
+    ],
+    "medidas": [
+      {
+        "columna": "value",
+        "nombre": "tasa de paro",
+        "unidad": "% de la población activa",
+        "tipo": "tasa",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "date",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "serie",
+        "nombre": "serie por sexo y grupo de edad (el texto incluye 'Ambos sexos', 'Hombres', 'Mujeres' y 'Total' o el tramo de edad)",
+        "total": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo total nacional, no hay comunidades. El nombre de las series no es uniforme (unas empiezan por 'Total Nacional. Tasa de paro...' y otras por 'Tasa de paro de la población. Total Nacional...'): filtrar con LIKE. Última fecha 2026-04-01. Tabla básica, para paro por territorio hay otras mejores."
+  },
+  {
+    "tabla": "vivienda_alquiler",
+    "usar": true,
+    "tema": "Precio del alquiler de vivienda (mediana mensual y por m²) en España, comunidades y provincias, 2011-2024",
+    "preguntas": [
+      "¿Cuánto cuesta de media alquilar un piso en Cataluña?",
+      "¿Qué provincia tiene el alquiler más caro?",
+      "¿Cuánto ha subido el alquiler en Madrid desde 2015?",
+      "¿Cuántas viviendas se alquilan por cada 1.000 habitantes en Baleares?"
+    ],
+    "medidas": [
+      {
+        "columna": "alquiler_mes_mediana_real",
+        "nombre": "alquiler mensual mediano en euros reales de 2025",
+        "unidad": "€ reales al mes",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "alquiler_mes_mediana",
+        "nombre": "alquiler mensual mediano en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "precio",
+        "real": "alquiler_mes_mediana_real"
+      },
+      {
+        "columna": "alquiler_m2_mediana_real",
+        "nombre": "alquiler mediano por metro cuadrado en euros reales",
+        "unidad": "€ reales/m² al mes",
+        "tipo": "precio"
+      },
+      {
+        "columna": "alquiler_m2_mediana",
+        "nombre": "alquiler mediano por metro cuadrado en euros corrientes",
+        "unidad": "€/m² al mes",
+        "tipo": "precio",
+        "real": "alquiler_m2_mediana_real"
+      },
+      {
+        "columna": "alquiler_mes_p25_real",
+        "nombre": "alquiler mensual del percentil 25 en euros reales",
+        "unidad": "€ reales al mes",
+        "tipo": "precio"
+      },
+      {
+        "columna": "alquiler_mes_p75_real",
+        "nombre": "alquiler mensual del percentil 75 en euros reales",
+        "unidad": "€ reales al mes",
+        "tipo": "precio"
+      },
+      {
+        "columna": "superficie_mediana",
+        "nombre": "superficie mediana de la vivienda alquilada",
+        "unidad": "m²",
+        "tipo": "media"
+      },
+      {
+        "columna": "viviendas_alquiladas",
+        "nombre": "viviendas alquiladas (contratos de alquiler)",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "alquiladas_1000",
+        "nombre": "viviendas alquiladas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "variacion_real",
+        "nombre": "variación real anual del alquiler",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipologia",
+        "nombre": "tipo de edificio (Colectiva = pisos, Unifamiliar = casas)",
+        "total": null,
+        "defecto": "Colectiva"
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "tipologia",
+        "valor": "Colectiva"
+      }
+    ],
+    "notas": "Fuente SERPAVI (MIVAU), último año 2024. Cada territorio y año tiene dos filas, una por tipología; la cifra habitual es la de pisos (Colectiva). Las medianas no se suman ni se promedian entre territorios sin ponderar. España es la media ponderada de CCAA."
+  },
+  {
+    "tabla": "vivienda_alquiler_municipios",
+    "usar": true,
+    "tema": "Alquiler mediano de pisos por municipio de 20.000 habitantes o más, 2011-2024",
+    "preguntas": [
+      "¿Cuánto cuesta alquilar un piso en Alicante?",
+      "¿Qué municipio grande tiene el alquiler más caro por metro cuadrado?",
+      "¿Cuánto ha subido el alquiler en Adeje en cinco años?"
+    ],
+    "medidas": [
+      {
+        "columna": "alquiler_mes_mediana_real",
+        "nombre": "alquiler mensual mediano en euros reales de 2025",
+        "unidad": "€ reales al mes",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "alquiler_mes_mediana",
+        "nombre": "alquiler mensual mediano en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "precio",
+        "real": "alquiler_mes_mediana_real"
+      },
+      {
+        "columna": "alquiler_m2_mediana_real",
+        "nombre": "alquiler mediano por metro cuadrado en euros reales",
+        "unidad": "€ reales/m² al mes",
+        "tipo": "precio"
+      },
+      {
+        "columna": "alquiler_m2_mediana",
+        "nombre": "alquiler mediano por metro cuadrado en euros corrientes",
+        "unidad": "€/m² al mes",
+        "tipo": "precio",
+        "real": "alquiler_m2_mediana_real"
+      },
+      {
+        "columna": "superficie_mediana",
+        "nombre": "superficie mediana de la vivienda alquilada",
+        "unidad": "m²",
+        "tipo": "media"
+      },
+      {
+        "columna": "viviendas_alquiladas",
+        "nombre": "viviendas alquiladas (contratos)",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "alquiladas_1000",
+        "nombre": "viviendas alquiladas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "variacion_real_5a",
+        "nombre": "variación real del alquiler en cinco años",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo municipios de 20.000 habitantes o más; SERPAVI (MIVAU), último año 2024. Medianas: no se suman."
+  },
+  {
+    "tabla": "vivienda_esfuerzo",
+    "usar": true,
+    "tema": "Esfuerzo para acceder a la vivienda: años de salario para comprar 90 m² y porcentaje del salario que se lleva el alquiler",
+    "preguntas": [
+      "¿Cuántos años de sueldo hacen falta para comprar una vivienda en Madrid?",
+      "¿Qué porcentaje del salario se va en el alquiler en Cataluña?",
+      "¿En qué comunidad es más difícil comprar casa respecto al sueldo?",
+      "¿Cómo ha evolucionado el esfuerzo para comprar vivienda?"
+    ],
+    "medidas": [
+      {
+        "columna": "anios_salario",
+        "nombre": "años de salario bruto medio para pagar 90 m² al valor tasado",
+        "unidad": "años de salario",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "pct_alquiler",
+        "nombre": "porcentaje del salario bruto medio que cuesta el alquiler mediano",
+        "unidad": "% del salario",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "euros_m2",
+        "nombre": "valor tasado medio por metro cuadrado",
+        "unidad": "€/m²",
+        "tipo": "precio"
+      },
+      {
+        "columna": "precio_90m2",
+        "nombre": "precio de una vivienda de 90 m² al valor tasado",
+        "unidad": "€",
+        "tipo": "precio"
+      },
+      {
+        "columna": "salario_anual",
+        "nombre": "salario bruto anual medio",
+        "unidad": "€ al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "alquiler_mes_mediana",
+        "nombre": "alquiler mensual mediano",
+        "unidad": "€ al mes",
+        "tipo": "precio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Importes nominales (corrientes) en euros. pct_alquiler solo existe desde 2011 (año a partir del que hay alquiler SERPAVI) y el último año con dato puede ser 2025 para valor tasado. Salario: Encuesta Trimestral de Coste Laboral del INE."
+  },
+  {
+    "tabla": "vivienda_ipv",
+    "usar": true,
+    "tema": "Índice de Precios de Vivienda del INE (base 2015) por trimestre en España y comunidades, vivienda nueva y de segunda mano",
+    "preguntas": [
+      "¿Cuánto ha subido el precio de la vivienda en el último año?",
+      "¿En qué comunidad han subido más los precios de la vivienda?",
+      "¿Cuánto ha subido la vivienda de segunda mano en Madrid?",
+      "¿Cómo ha evolucionado el precio de la vivienda desde 2007?"
+    ],
+    "medidas": [
+      {
+        "columna": "indice_real",
+        "nombre": "índice de precios de la vivienda en términos reales (2015 = 100)",
+        "unidad": "índice (2015 = 100)",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice de precios de la vivienda nominal (2015 = 100)",
+        "unidad": "índice (2015 = 100)",
+        "tipo": "indice",
+        "real": "indice_real"
+      },
+      {
+        "columna": "interanual_real",
+        "nombre": "variación real frente al mismo trimestre del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "interanual_nominal",
+        "nombre": "variación nominal frente al mismo trimestre del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de vivienda (General, Nueva, Segunda mano)",
+        "total": "General"
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "tipo",
+        "valor": "General"
+      }
+    ],
+    "notas": "Es un índice, no un precio en euros: no se suma ni se compara el nivel entre comunidades, solo evoluciones. Último dato 2025-T4. Para euros por m² usar vivienda_precio_tasado."
+  },
+  {
+    "tabla": "vivienda_ipva",
+    "usar": true,
+    "tema": "Índice de Precios de Vivienda en Alquiler del INE (base 2015), anual, España y comunidades",
+    "preguntas": [
+      "¿Cuánto ha subido el alquiler en España en el último año?",
+      "¿En qué comunidad ha subido más el alquiler en 2024?",
+      "¿Cómo ha evolucionado el precio de los alquileres desde 2011?"
+    ],
+    "medidas": [
+      {
+        "columna": "indice_real",
+        "nombre": "índice de precios del alquiler en términos reales (2015 = 100)",
+        "unidad": "índice (2015 = 100)",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice de precios del alquiler nominal (2015 = 100)",
+        "unidad": "índice (2015 = 100)",
+        "tipo": "indice",
+        "real": "indice_real"
+      },
+      {
+        "columna": "variacion_real",
+        "nombre": "variación real anual del alquiler",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "variacion_nominal",
+        "nombre": "variación nominal anual del alquiler",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Es un índice, no euros; solo sirve para comparar evolución. No todas las comunidades tienen todos los años (faltan algunas como Murcia y Baleares). Último año 2024."
+  },
+  {
+    "tabla": "vivienda_mercado_anual",
+    "usar": true,
+    "tema": "Compraventas de viviendas e hipotecas por año en España, comunidades y provincias",
+    "preguntas": [
+      "¿Cuántas viviendas se vendieron en España en 2025?",
+      "¿Qué comunidad vende más viviendas por cada 1.000 habitantes?",
+      "¿Cuál es el importe medio de una hipoteca en Madrid?",
+      "¿Qué porcentaje de las compraventas son vivienda nueva?"
+    ],
+    "medidas": [
+      {
+        "columna": "compraventas_1000",
+        "nombre": "compraventas de viviendas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "compraventas",
+        "nombre": "compraventas de viviendas",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_nueva",
+        "nombre": "compraventas de vivienda nueva",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_segunda_mano",
+        "nombre": "compraventas de vivienda de segunda mano",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_protegida",
+        "nombre": "compraventas de vivienda protegida",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hipotecas",
+        "nombre": "hipotecas sobre viviendas constituidas",
+        "unidad": "hipotecas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hipotecas_1000",
+        "nombre": "hipotecas sobre viviendas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "importe_hipotecas",
+        "nombre": "importe total de las hipotecas sobre viviendas",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_medio_real",
+        "nombre": "importe medio de una hipoteca en euros reales de 2025",
+        "unidad": "€ reales",
+        "tipo": "media"
+      },
+      {
+        "columna": "importe_medio",
+        "nombre": "importe medio de una hipoteca en euros corrientes",
+        "unidad": "€",
+        "tipo": "media",
+        "real": "importe_medio_real"
+      },
+      {
+        "columna": "pct_nueva",
+        "nombre": "porcentaje de compraventas que son vivienda nueva",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_protegida",
+        "nombre": "porcentaje de compraventas que son vivienda protegida",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_hipoteca",
+        "nombre": "hipotecas como porcentaje de las compraventas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "El año en curso (2026) suma solo unos meses (columna meses; ahora 7) y no es comparable con años completos salvo por 1.000 habitantes de periodos iguales. importe_hipotecas está en euros (no millones). Nivel provincia, ccaa y pais conviven: filtrar por nivel para no duplicar."
+  },
+  {
+    "tabla": "vivienda_mercado_mensual",
+    "usar": true,
+    "tema": "Compraventas de viviendas e hipotecas cada mes en España, comunidades y provincias, con acumulado de 12 meses",
+    "preguntas": [
+      "¿Cuántas viviendas se vendieron en Madrid en julio de 2026?",
+      "¿Cuántas compraventas ha habido en el último año por cada 1.000 habitantes en Andalucía?",
+      "¿Cómo han evolucionado las hipotecas sobre viviendas mes a mes?"
+    ],
+    "medidas": [
+      {
+        "columna": "compraventas",
+        "nombre": "compraventas de viviendas en el mes",
+        "unidad": "compraventas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "compraventas_12m_1000",
+        "nombre": "compraventas de los últimos 12 meses por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "compraventas_12m",
+        "nombre": "compraventas de los últimos 12 meses",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_nueva",
+        "nombre": "compraventas de vivienda nueva",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_segunda_mano",
+        "nombre": "compraventas de vivienda de segunda mano",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "compraventas_protegida",
+        "nombre": "compraventas de vivienda protegida",
+        "unidad": "compraventas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hipotecas",
+        "nombre": "hipotecas sobre viviendas en el mes",
+        "unidad": "hipotecas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hipotecas_12m_1000",
+        "nombre": "hipotecas de los últimos 12 meses por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "importe_hipotecas_real",
+        "nombre": "importe total de hipotecas en euros reales de 2025",
+        "unidad": "€ reales",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_hipotecas",
+        "nombre": "importe total de hipotecas en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_hipotecas_real"
+      },
+      {
+        "columna": "importe_medio_real",
+        "nombre": "importe medio de una hipoteca en euros reales",
+        "unidad": "€ reales",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Última fecha julio de 2026. Las columnas _12m son acumulados móviles (no se suman). El importe está en euros, no en millones. Hay filas de nivel pais, ccaa y provincia: filtrar por nivel para no duplicar."
+  },
+  {
+    "tabla": "vivienda_obra_nueva",
+    "usar": true,
+    "tema": "Viviendas libres iniciadas y terminadas por año en España, comunidades y provincias",
+    "preguntas": [
+      "¿Cuántas viviendas nuevas se terminaron en España en 2025?",
+      "¿Qué provincia construye más viviendas por cada 1.000 habitantes?",
+      "¿Cómo ha evolucionado la construcción de viviendas desde la burbuja?"
+    ],
+    "medidas": [
+      {
+        "columna": "terminadas_1000",
+        "nombre": "viviendas libres terminadas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "terminadas",
+        "nombre": "viviendas libres terminadas",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "iniciadas",
+        "nombre": "viviendas libres iniciadas",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "iniciadas_1000",
+        "nombre": "viviendas libres iniciadas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo vivienda libre (no protegida). MIVAU, de 1991 a 2025. Hay filas de nivel pais, ccaa y provincia: filtrar por nivel."
+  },
+  {
+    "tabla": "vivienda_precio_municipios",
+    "usar": true,
+    "tema": "Precio de la vivienda (valor tasado por m²) en municipios de más de 25.000 habitantes",
+    "preguntas": [
+      "¿Cuánto cuesta el metro cuadrado de vivienda en Alicante?",
+      "¿Qué municipio grande tiene la vivienda más cara?",
+      "¿Cuánto han subido los precios de la vivienda en Adeje?"
+    ],
+    "medidas": [
+      {
+        "columna": "euros_m2_real",
+        "nombre": "valor tasado medio por metro cuadrado en euros reales de 2025",
+        "unidad": "€ reales/m²",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "euros_m2",
+        "nombre": "valor tasado medio por metro cuadrado en euros corrientes",
+        "unidad": "€/m²",
+        "tipo": "precio",
+        "real": "euros_m2_real"
+      },
+      {
+        "columna": "precio_90m2_real",
+        "nombre": "precio real de una vivienda de 90 m²",
+        "unidad": "€ reales",
+        "tipo": "precio"
+      },
+      {
+        "columna": "tasaciones",
+        "nombre": "número de tasaciones",
+        "unidad": "tasaciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "variacion_real",
+        "nombre": "variación real del precio frente al año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Media anual del valor tasado; 2026 incluye solo 2 trimestres (columna trimestres). Solo vivienda libre en municipios de más de 25.000 habitantes. MIVAU, tabla 35103500."
+  },
+  {
+    "tabla": "vivienda_precio_tasado",
+    "usar": true,
+    "tema": "Precio de la vivienda libre (valor tasado en euros por m²) por trimestre en España, comunidades y provincias desde 1995",
+    "preguntas": [
+      "¿Cuánto cuesta el metro cuadrado de vivienda en España?",
+      "¿Cuál es la provincia con la vivienda más cara?",
+      "¿Cuánto ha subido el precio de la vivienda en Madrid en el último año?",
+      "¿Cuánto cuesta una vivienda de 90 metros en Canarias?"
+    ],
+    "medidas": [
+      {
+        "columna": "euros_m2_real",
+        "nombre": "valor tasado medio por metro cuadrado en euros reales de 2025",
+        "unidad": "€ reales/m²",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "euros_m2",
+        "nombre": "valor tasado medio por metro cuadrado en euros corrientes",
+        "unidad": "€/m²",
+        "tipo": "precio",
+        "real": "euros_m2_real"
+      },
+      {
+        "columna": "precio_90m2_real",
+        "nombre": "precio real de una vivienda de 90 m²",
+        "unidad": "€ reales",
+        "tipo": "precio"
+      },
+      {
+        "columna": "precio_90m2",
+        "nombre": "precio de una vivienda de 90 m² en euros corrientes",
+        "unidad": "€",
+        "tipo": "precio",
+        "real": "precio_90m2_real"
+      },
+      {
+        "columna": "interanual_real",
+        "nombre": "variación real frente al mismo trimestre del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "interanual_nominal",
+        "nombre": "variación nominal frente al mismo trimestre del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "MIVAU, tabla 35101000, último dato 2026-T2. Solo vivienda libre. Hay filas de nivel pais, ccaa y provincia: filtrar por nivel. Los precios no se suman."
+  },
+  {
+    "tabla": "vivienda_publica_ccaa",
+    "usar": true,
+    "tema": "Vivienda pública en alquiler por comunidad autónoma: parque autonómico, municipal declarado y calificaciones de vivienda protegida",
+    "preguntas": [
+      "¿Qué comunidad tiene más vivienda pública en alquiler por habitante?",
+      "¿Cuántas viviendas públicas tiene Cataluña?",
+      "¿Ha crecido el parque público de vivienda en alquiler en Andalucía desde 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "conocido_1000hab",
+        "nombre": "vivienda pública en alquiler conocida por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "autonomico_1000hab",
+        "nombre": "parque autonómico en alquiler por cada 1.000 habitantes (2023)",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "autonomico_2023",
+        "nombre": "viviendas del parque autonómico en alquiler en 2023",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "autonomico_2019",
+        "nombre": "viviendas del parque autonómico en alquiler en 2019",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "variacion_pct_2019_2023",
+        "nombre": "variación del parque autonómico entre 2019 y 2023",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "alquiler_publico_conocido",
+        "nombre": "vivienda pública en alquiler conocida (autonómica más municipal declarada)",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "conocido_pct_hogares",
+        "nombre": "vivienda pública en alquiler conocida en porcentaje de los hogares",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ecv_pct_alquiler_inferior",
+        "nombre": "hogares con alquiler inferior al precio de mercado",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "calif_alquiler_2005_2023_1000hab",
+        "nombre": "calificaciones de vivienda protegida en alquiler 2005-2023 por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia_2019_2023",
+        "nombre": "partido que gobernó la comunidad en 2019-2023",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por comunidad con el último dato de cada indicador (foto resumen, sin serie temporal). No existe un recuento oficial completo de vivienda pública: el parque municipal solo incluye ayuntamientos de más de 20.000 habitantes que respondieron (ver cobertura_municipal_pct). La columna 'poblacion' es la del último año."
+  },
+  {
+    "tabla": "vivienda_publica_ccaa_anual",
+    "usar": true,
+    "tema": "Evolución anual por comunidad de la vivienda protegida en alquiler y los hogares con alquiler por debajo del mercado",
+    "preguntas": [
+      "¿Cuántas viviendas protegidas en alquiler se calificaron en Madrid en 2020?",
+      "¿Qué porcentaje de hogares de Canarias tiene un alquiler más barato que el de mercado?",
+      "¿Qué comunidad califica más vivienda protegida en alquiler por habitante?"
+    ],
+    "medidas": [
+      {
+        "columna": "calif_alquiler_100k",
+        "nombre": "calificaciones de vivienda protegida en alquiler por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "calif_alquiler",
+        "nombre": "calificaciones provisionales de vivienda protegida en alquiler",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "calif_total",
+        "nombre": "calificaciones provisionales de vivienda protegida (todos los regímenes)",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ecv_pct_alquiler_inferior",
+        "nombre": "hogares en alquiler por debajo del precio de mercado",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ecv_pct_alquiler_mercado",
+        "nombre": "hogares en alquiler a precio de mercado",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido que gobernaba la comunidad el 1 de julio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Las calificaciones llegan hasta 2023 y la encuesta ECV hasta 2025 (en el resto de años es nulo). Las calificaciones son provisionales de vivienda protegida, no viviendas entregadas."
+  },
+  {
+    "tabla": "vivienda_publica_espana",
+    "usar": true,
+    "tema": "Vivienda pública en alquiler en España por año: hogares con alquiler por debajo del mercado, vivienda protegida calificada y parque público",
+    "preguntas": [
+      "¿Cuántas viviendas públicas en alquiler hay en España?",
+      "¿Qué porcentaje de hogares españoles vive en alquiler social?",
+      "¿Cuántas viviendas protegidas en alquiler se calificaron en 2022?"
+    ],
+    "medidas": [
+      {
+        "columna": "parque_publico_1000hab",
+        "nombre": "parque público de vivienda en alquiler por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "parque_publico_alquiler",
+        "nombre": "parque público de vivienda en alquiler",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "parque_publico_pct_hogares",
+        "nombre": "parque público de alquiler en porcentaje de los hogares",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "parque_autonomico_alquiler",
+        "nombre": "parque autonómico en alquiler",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "calif_alquiler",
+        "nombre": "calificaciones provisionales de vivienda protegida en alquiler",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "calif_alquiler_100k",
+        "nombre": "calificaciones de vivienda protegida en alquiler por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "ecv_pct_alquiler_inferior",
+        "nombre": "hogares con alquiler inferior al precio de mercado",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ecv_pct_propiedad",
+        "nombre": "hogares en vivienda en propiedad",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. Las cifras de parque público (318.000 viviendas, MIVAU) son una única estimación sin serie, repetida en todos los años; las calificaciones llegan hasta 2023 y la encuesta ECV hasta 2025."
+  },
+  {
+    "tabla": "vivienda_publica_gobiernos",
+    "usar": true,
+    "tema": "Vivienda protegida en alquiler calificada según el partido que gobernaba la comunidad autónoma (2005-2023)",
+    "preguntas": [
+      "¿Qué partido ha calificado más vivienda protegida en alquiler?",
+      "¿El PSOE o el PP promueven más vivienda protegida en alquiler por habitante?",
+      "¿Qué partidos autonómicos construyen menos vivienda pública de lo que les correspondería?"
+    ],
+    "medidas": [
+      {
+        "columna": "calif_alquiler_100k_anio",
+        "nombre": "calificaciones de vivienda protegida en alquiler por 100.000 habitantes y año",
+        "unidad": "por cada 100.000 habitantes y año",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "ratio_observado_esperado",
+        "nombre": "cociente entre la cuota de calificaciones y la cuota de población (1 = lo esperado)",
+        "unidad": "veces lo esperado",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "calif_alquiler",
+        "nombre": "calificaciones de vivienda protegida en alquiler acumuladas 2005-2023",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_calif",
+        "nombre": "cuota de las calificaciones totales",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_poblacion",
+        "nombre": "cuota de población-año",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido del Gobierno autonómico",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Resumen agregado 2005-2023 de diez partidos (una fila por partido); no es una serie temporal ni se desglosa por comunidad. Comparación orientativa, no causal."
+  },
+  {
+    "tabla": "vivienda_publica_internacional",
+    "usar": true,
+    "tema": "Vivienda social en alquiler en España comparada con otros países de la OCDE y la UE",
+    "preguntas": [
+      "¿Qué porcentaje de vivienda social tiene España comparado con Francia?",
+      "¿Qué país tiene más vivienda social?",
+      "¿Cuántas viviendas sociales hay en Alemania?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "vivienda social en porcentaje del parque total (OCDE) o de las viviendas principales (UE)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "viviendas_sociales",
+        "nombre": "número de viviendas sociales",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "serie",
+        "nombre": "fuente y definición (ocde_pct_parque o ue_pct_hogares)",
+        "total": null,
+        "defecto": "ocde_pct_parque"
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "es_ultimo",
+        "valor": "true"
+      }
+    ],
+    "notas": "Dos series con definiciones distintas (OCDE: % del parque total, hacia 2010 y 2022; UE: % de viviendas principales, 2023); no mezclarlas. Incluye agregados (es_agregado=true) que no son países: excluirlos en rankings."
+  },
+  {
+    "tabla": "vivienda_publica_municipios",
+    "usar": true,
+    "tema": "Parque de vivienda municipal en alquiler de los ayuntamientos de más de 20.000 habitantes",
+    "preguntas": [
+      "¿Cuántas viviendas públicas de alquiler tiene el Ayuntamiento de Barcelona?",
+      "¿Qué municipio tiene más vivienda municipal en alquiler por habitante?",
+      "¿Qué ayuntamientos grandes no han declarado su parque de vivienda?"
+    ],
+    "medidas": [
+      {
+        "columna": "alquiler_1000hab",
+        "nombre": "viviendas municipales en alquiler por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "alquiler",
+        "nombre": "viviendas municipales en alquiler",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "total",
+        "nombre": "viviendas municipales totales (todos los regímenes)",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "venta",
+        "nombre": "viviendas municipales en venta",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "origen",
+        "nombre": "origen del dato (encuesta_2023, boletin_2020 o sin_respuesta)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por municipio (sin año, última encuesta MIVAU 2023); origen='sin_respuesta' significa que el ayuntamiento no declaró, no que tenga 0 viviendas. No lleva código de municipio, solo de provincia y nombre."
+  },
+  {
+    "tabla": "vivienda_publica_provincias",
+    "usar": true,
+    "tema": "Vivienda pública municipal en alquiler por provincia y cobertura de la encuesta",
+    "preguntas": [
+      "¿Qué provincia tiene más vivienda pública en alquiler por habitante?",
+      "¿Cuántas viviendas municipales de alquiler hay en Vizcaya?",
+      "¿En qué provincias han contestado menos ayuntamientos la encuesta de vivienda pública?"
+    ],
+    "medidas": [
+      {
+        "columna": "municipal_1000hab",
+        "nombre": "vivienda municipal en alquiler declarada por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "municipal_declarado",
+        "nombre": "viviendas municipales en alquiler declaradas",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "conocido_1000hab",
+        "nombre": "vivienda pública conocida en comunidades uniprovinciales por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cobertura_pct",
+        "nombre": "cobertura de la encuesta (población de los ayuntamientos que respondieron)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Una fila por provincia, sin serie temporal. Solo cuenta ayuntamientos de más de 20.000 habitantes que respondieron: es una cota inferior, no un recuento oficial."
+  },
+  {
+    "tabla": "vivienda_resumen_territorios",
+    "usar": true,
+    "tema": "Resumen del último dato de vivienda (precio, alquiler, compraventas, obra nueva y esfuerzo) de cada territorio",
+    "preguntas": [
+      "¿Cuánto cuesta ahora la vivienda en Baleares comparado con su máximo de la burbuja?",
+      "¿Qué provincia tiene el precio de la vivienda más alto?",
+      "¿Cuánto cuesta el alquiler en Barcelona y cuántos años de sueldo hacen falta para comprar?"
+    ],
+    "medidas": [
+      {
+        "columna": "euros_m2_real",
+        "nombre": "valor tasado por metro cuadrado en euros reales de 2025 (último trimestre)",
+        "unidad": "€ reales/m²",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "precio_90m2_real",
+        "nombre": "precio real de una vivienda de 90 m²",
+        "unidad": "€ reales",
+        "tipo": "precio"
+      },
+      {
+        "columna": "precio_interanual_real",
+        "nombre": "variación real del precio en el último año",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "precio_vs_maximo_real",
+        "nombre": "distancia al precio máximo histórico en términos reales",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "alquiler_mes_mediana_real",
+        "nombre": "alquiler mensual mediano en euros reales",
+        "unidad": "€ reales al mes",
+        "tipo": "precio"
+      },
+      {
+        "columna": "alquiler_var_5a",
+        "nombre": "variación real del alquiler en cinco años",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "compraventas_12m_1000",
+        "nombre": "compraventas de los últimos 12 meses por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "hipotecas_12m_1000",
+        "nombre": "hipotecas de los últimos 12 meses por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "terminadas_1000",
+        "nombre": "viviendas libres terminadas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "anios_salario",
+        "nombre": "años de salario para comprar 90 m²",
+        "unidad": "años de salario",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Foto del último dato de cada indicador (cada uno con su fecha: precio 2026-T2, alquiler 2024, mercado jul. 2026, obra 2025, esfuerzo 2025); sin serie temporal. Para ver evolución usar las tablas vivienda_precio_tasado, vivienda_alquiler, etc. pct_alquiler está vacío en algunos territorios. Filtrar por nivel (pais, ccaa, provincia)."
+  }
+]

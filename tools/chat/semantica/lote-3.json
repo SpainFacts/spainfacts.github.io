@@ -1,0 +1,2154 @@
+[
+  {
+    "tabla": "educacion_matriculados",
+    "usar": true,
+    "tema": "Alumnado matriculado en España por etapa educativa (infantil, primaria, ESO, bachillerato, FP, universidad) y por centro público, concertado o privado",
+    "preguntas": [
+      "¿Cuántos alumnos hay matriculados en la ESO?",
+      "¿Qué porcentaje de los alumnos de primaria va a la escuela pública?",
+      "¿Cómo ha evolucionado el alumnado universitario en los últimos años?",
+      "¿Cuántos alumnos hay en la concertada?"
+    ],
+    "medidas": [
+      {
+        "columna": "alumnos",
+        "nombre": "alumnos matriculados",
+        "unidad": "alumnos",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "publica",
+        "nombre": "alumnos en centros públicos",
+        "unidad": "alumnos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "concertada",
+        "nombre": "alumnos en centros concertados",
+        "unidad": "alumnos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "privada",
+        "nombre": "alumnos en centros privados",
+        "unidad": "alumnos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_publica",
+        "nombre": "porcentaje de alumnos en la pública",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_concertada",
+        "nombre": "porcentaje de alumnos en la concertada",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_privada",
+        "nombre": "porcentaje de alumnos en la privada",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "por_1000_hab",
+        "nombre": "alumnos por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "curso",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "nivel",
+        "nombre": "etapa educativa",
+        "total": null
+      },
+      {
+        "columna": "curso",
+        "nombre": "curso escolar",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España; anio es el año en que acaba el curso (2024 = curso 2023-24). No hay fila total: el total de alumnos es la suma de las etapas. Eurostat; datos hasta el curso 2023-24."
+  },
+  {
+    "tabla": "educacion_pisa",
+    "usar": true,
+    "tema": "Alumnos de 15 años con bajo rendimiento en lectura, matemáticas y ciencias según PISA, España frente a la UE",
+    "preguntas": [
+      "¿Qué porcentaje de alumnos españoles suspende en matemáticas en PISA?",
+      "¿Cómo está España en PISA comparada con la UE?",
+      "¿Rinden peor los chicos o las chicas en lectura?",
+      "¿Cómo ha evolucionado el nivel en ciencias de PISA?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_bajo_rendimiento",
+        "nombre": "alumnos de 15 años con bajo rendimiento",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ue"
+      ],
+      "nivel": "nivel",
+      "codigo": null,
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "materia",
+        "nombre": "materia",
+        "total": null
+      },
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "nivel 'pais' es España y 'ue' la media de la UE-27. PISA se hace cada tres años (2000 a 2022); el porcentaje es de bajo rendimiento, no de nota media."
+  },
+  {
+    "tabla": "elecciones_familias",
+    "usar": true,
+    "tema": "Voto y escaños de cada familia política (PP, PSOE, Vox, Sumar, nacionalistas...) en cada elección, por provincia, comunidad y España",
+    "preguntas": [
+      "¿Qué porcentaje de voto sacó Vox en las generales de 2023?",
+      "¿En qué comunidad vota más al PP?",
+      "¿Cuántos escaños tuvo el PSOE en 2019?",
+      "¿Cómo ha evolucionado el voto de la izquierda en Andalucía?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de voto sobre votos válidos",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "votos",
+        "nombre": "votos",
+        "unidad": "votos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "escanos",
+        "nombre": "escaños",
+        "unidad": "escaños",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_escanos",
+        "nombre": "porcentaje de escaños",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de elección (02 Congreso, 04 Municipales, 07 Parlamento Europeo)",
+        "total": null,
+        "defecto": "02"
+      },
+      {
+        "columna": "familia",
+        "nombre": "familia política",
+        "total": null
+      },
+      {
+        "columna": "bloque",
+        "nombre": "bloque (Izquierda, Derecha, Centro, Nacionalistas y regionalistas, Otros)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Hay que filtrar siempre por tipo de elección y año para no mezclar Congreso, municipales y europeas; en 2019 hubo dos generales (abril y noviembre, columna proceso). El código del territorio solo existe en cod (00 España, 01-19 comunidades, 01-52 provincias según nivel); pct está en 0-100."
+  },
+  {
+    "tabla": "elecciones_municipios",
+    "usar": true,
+    "tema": "Resultado de cada elección (generales y municipales) en cada municipio: participación, ganador y voto por bloques",
+    "preguntas": [
+      "¿Quién ganó las elecciones municipales de 2023 en el municipio de código 28079?",
+      "¿Cómo ha evolucionado la participación en las generales en un pueblo?",
+      "¿Qué porcentaje sacó Vox en las municipales de 2023 en Valencia?",
+      "¿En cuántos municipios ganó el PP en 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "ganador_pct",
+        "nombre": "porcentaje de voto del ganador",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_izquierda",
+        "nombre": "voto a la izquierda",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_derecha",
+        "nombre": "voto a la derecha",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_centro",
+        "nombre": "voto al centro",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_nacionalistas",
+        "nombre": "voto a nacionalistas y regionalistas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_psoe",
+        "nombre": "voto al PSOE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_pp",
+        "nombre": "voto al PP",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_vox",
+        "nombre": "voto a Vox",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_iu_podemos_sumar",
+        "nombre": "voto a IU, Podemos y Sumar",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de elección (02 Congreso, 04 Municipales)",
+        "total": null,
+        "defecto": "02"
+      },
+      {
+        "columna": "ganador_familia",
+        "nombre": "familia política ganadora",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "No tiene nombre de municipio, solo código INE de 5 cifras (cod_mun); para nombres usar elecciones_municipios_congreso. Hay que fijar tipo y año: 2019 tiene dos generales (abril y noviembre). Municipales solo incluye municipios de más de 250 habitantes."
+  },
+  {
+    "tabla": "elecciones_municipios_congreso",
+    "usar": true,
+    "tema": "Resultado de las últimas elecciones generales (2023) en cada municipio, con nombre, provincia, comunidad y población",
+    "preguntas": [
+      "¿Quién ganó en Soria en las generales de 2023?",
+      "¿Cuál es el municipio con más participación en las últimas elecciones?",
+      "¿Qué porcentaje votó a Vox en Cieza?",
+      "¿En qué municipios de Burgos ganó el PSOE?"
+    ],
+    "medidas": [
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "participacion_anterior",
+        "nombre": "participación en las generales anteriores",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ganador_pct",
+        "nombre": "porcentaje de voto del ganador",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_izquierda",
+        "nombre": "voto a la izquierda",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_derecha",
+        "nombre": "voto a la derecha",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_nacionalistas",
+        "nombre": "voto a nacionalistas y regionalistas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_psoe",
+        "nombre": "voto al PSOE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_pp",
+        "nombre": "voto al PP",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_vox",
+        "nombre": "voto a Vox",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_iu_podemos_sumar",
+        "nombre": "voto a IU, Podemos y Sumar",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "censo",
+        "nombre": "personas con derecho a voto",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "nep",
+        "nombre": "número efectivo de partidos",
+        "unidad": "partidos",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio",
+        "provincia",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "provincia",
+        "nombre": "provincia",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma",
+        "total": null
+      },
+      {
+        "columna": "ganador_familia",
+        "nombre": "familia política ganadora",
+        "total": null
+      },
+      {
+        "columna": "ganador_siglas",
+        "nombre": "siglas de la candidatura ganadora",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por municipio y solo para las generales de 2023; no sirve para evolución (para eso elecciones_municipios). Los nombres vienen con artículo detrás, p. ej. 'Campillo, El'. pct_centro es siempre 0 en 2023."
+  },
+  {
+    "tabla": "elecciones_participacion",
+    "usar": true,
+    "tema": "Participación, votos en blanco y nulos, ganador y proporcionalidad de cada elección en España, cada comunidad y cada provincia",
+    "preguntas": [
+      "¿Cuál fue la participación en las generales de 2023?",
+      "¿Qué comunidad tuvo más abstención en las últimas elecciones?",
+      "¿Cómo ha evolucionado la participación en las europeas?",
+      "¿Quién ganó las elecciones generales de 2019 en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "votantes",
+        "nombre": "personas que votaron",
+        "unidad": "votantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "censo",
+        "nombre": "censo electoral con voto CERA",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_blancos",
+        "nombre": "porcentaje de votos en blanco",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_nulos",
+        "nombre": "porcentaje de votos nulos",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ganador_pct",
+        "nombre": "porcentaje de voto de la candidatura más votada",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "nep_votos",
+        "nombre": "número efectivo de partidos en votos",
+        "unidad": "partidos",
+        "tipo": "indice"
+      },
+      {
+        "columna": "gallagher",
+        "nombre": "índice de desproporcionalidad de Gallagher",
+        "unidad": "puntos",
+        "tipo": "indice"
+      },
+      {
+        "columna": "escanos",
+        "nombre": "escaños en juego",
+        "unidad": "escaños",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo_nombre",
+        "nombre": "tipo de elección",
+        "total": null,
+        "defecto": "Congreso"
+      },
+      {
+        "columna": "ganador_familia",
+        "nombre": "familia política ganadora",
+        "total": null
+      },
+      {
+        "columna": "ganador_bloque",
+        "nombre": "bloque ganador",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Fijar siempre tipo_nombre (Congreso, Municipales, Parlamento Europeo) y año; en 2019 hay dos generales (fechas distintas). El territorio solo tiene código en cod (00 España). No hay serie para periodos intermedios: una fila por elección."
+  },
+  {
+    "tabla": "elecciones_partidos",
+    "usar": true,
+    "tema": "Resultado nacional de cada partido en las elecciones generales y europeas: % de voto, escaños y votos que cuesta cada escaño",
+    "preguntas": [
+      "¿Cuántos escaños sacó el PP en 2023?",
+      "¿Qué partido necesita más votos por escaño?",
+      "¿Cómo ha evolucionado el voto de Vox desde que apareció?",
+      "¿Cuántos votos tuvo el PSOE en las europeas de 2024?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de voto",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "escanos",
+        "nombre": "escaños",
+        "unidad": "escaños",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "votos",
+        "nombre": "votos",
+        "unidad": "votos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_escanos",
+        "nombre": "porcentaje de escaños",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "votos_por_escano",
+        "nombre": "votos necesarios por cada escaño",
+        "unidad": "votos por escaño",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "ventaja",
+        "nombre": "diferencia entre porcentaje de escaños y de voto",
+        "unidad": "puntos porcentuales",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tipo_nombre",
+        "nombre": "tipo de elección",
+        "total": null,
+        "defecto": "Congreso"
+      },
+      {
+        "columna": "siglas",
+        "nombre": "siglas de la candidatura",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "familia política",
+        "total": null
+      },
+      {
+        "columna": "bloque",
+        "nombre": "bloque",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo ámbito nacional (Congreso y Parlamento Europeo; sin municipales). Fijar tipo_nombre y año: en 2019 hubo dos generales. Solo candidaturas con 0,1 % o algún escaño. Los escaños son de 350 en el Congreso."
+  },
+  {
+    "tabla": "electricidad_diaria",
+    "usar": true,
+    "tema": "Demanda eléctrica diaria y energía generada por tecnología (eólica, solar, nuclear...), cuota renovable, emisiones y precio del mercado en la península, Baleares y Canarias",
+    "preguntas": [
+      "¿Qué porcentaje de la electricidad fue renovable ayer?",
+      "¿Cuánta energía solar se produjo en agosto?",
+      "¿Cuál fue el precio medio de la luz el mes pasado?",
+      "¿Cuántas emisiones de CO2 tiene la electricidad de Canarias?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_renovable",
+        "nombre": "cuota de generación renovable",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "demanda_mwh",
+        "nombre": "demanda de electricidad",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "generacion_total_mwh",
+        "nombre": "generación total",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "renovable_mwh",
+        "nombre": "generación renovable",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "eolica_mwh",
+        "nombre": "generación eólica",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "solar_fv_mwh",
+        "nombre": "generación solar fotovoltaica",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "solar_termica_mwh",
+        "nombre": "generación solar térmica",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hidraulica_mwh",
+        "nombre": "generación hidráulica",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "nuclear_mwh",
+        "nombre": "generación nuclear",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "carbon_mwh",
+        "nombre": "generación con carbón",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ciclo_combinado_mwh",
+        "nombre": "generación con ciclo combinado de gas",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "co2_t",
+        "nombre": "emisiones de CO2 de la generación",
+        "unidad": "t CO2",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "intensidad_gco2_kwh",
+        "nombre": "intensidad de emisiones de la electricidad",
+        "unidad": "g CO2/kWh",
+        "tipo": "media"
+      },
+      {
+        "columna": "precio_spot_medio_eur_mwh",
+        "nombre": "precio medio del mercado mayorista",
+        "unidad": "€/MWh",
+        "tipo": "precio"
+      },
+      {
+        "columna": "demanda_max_mw",
+        "nombre": "pico de demanda del día",
+        "unidad": "MW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "intercambio_neto_mwh",
+        "nombre": "intercambio neto con el exterior (positivo importa)",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "sistema",
+        "nombre": "sistema eléctrico (peninsula, baleares, canarias)",
+        "total": null,
+        "defecto": "peninsula"
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por día y sistema; no hay fila de total nacional (sumar los tres sistemas para España). El último día está incompleto (completo = false). El precio mayorista solo existe para la península; porcentajes, intensidad y precio no se suman, se promedian."
+  },
+  {
+    "tabla": "electricidad_records",
+    "usar": true,
+    "tema": "Récords vigentes del sistema eléctrico (demanda máxima, mayor producción solar o eólica, mayor cuota renovable...) con fecha y valor",
+    "preguntas": [
+      "¿Cuál es el récord de demanda eléctrica en España?",
+      "¿Cuándo se batió el último récord de producción solar?",
+      "¿Cuál ha sido la mayor cuota renovable de la historia?",
+      "¿Cuál es la demanda mínima registrada?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del récord (en la unidad indicada en la fila)",
+        "unidad": "MW, GWh, %, g CO2/kWh o t CO2/h según la fila",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "valor_anterior",
+        "nombre": "valor del récord anterior",
+        "unidad": "mismas unidades que el récord",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "dias_vigente",
+        "nombre": "días que lleva vigente el récord",
+        "unidad": "días",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "veces_batido",
+        "nombre": "veces que se ha batido el récord",
+        "unidad": "veces",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de récord",
+        "total": null
+      },
+      {
+        "columna": "sistema_nombre",
+        "nombre": "sistema eléctrico",
+        "total": null,
+        "defecto": "Península"
+      },
+      {
+        "columna": "periodo",
+        "nombre": "resolución del récord (5 min, hora, día)",
+        "total": null,
+        "defecto": "hora"
+      }
+    ],
+    "filtros": [],
+    "notas": "Cada fila es un récord distinto con su propia unidad (columna unidad); no mezclar ni sumar valores. Fecha es el día en que se batió el récord vigente. Para preguntas generales usar sistema Península y periodo hora."
+  },
+  {
+    "tabla": "electricidad_records_historia",
+    "usar": false,
+    "tema": "Historial de cada vez que se batió un récord eléctrico",
+    "preguntas": [],
+    "medidas": [],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Detalle técnico de la evolución de los récords; para preguntas de la gente basta electricidad_records (récord vigente) y electricidad_diaria."
+  },
+  {
+    "tabla": "electricidad_ultimas_24h",
+    "usar": false,
+    "tema": "Demanda y generación cada 5 minutos de las últimas 24 horas",
+    "preguntas": [],
+    "medidas": [],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Contrato interno del directo de la web (ventana móvil de 24 h, resolución de 5 minutos); lo cotidiano se responde mejor con electricidad_diaria."
+  },
+  {
+    "tabla": "electrificacion_bombas_calor",
+    "usar": true,
+    "tema": "Potencia instalada de bombas de calor en España (aerotermia, splits, geotermia) por tecnología y año",
+    "preguntas": [
+      "¿Cuánta potencia de bombas de calor hay instalada en España?",
+      "¿Cuántos megavatios de aerotermia hay?",
+      "¿Cómo ha crecido la geotermia en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "mw",
+        "nombre": "potencia térmica instalada de bombas de calor",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología de bomba de calor",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, sin fila total (sumar tecnologías). Los splits de aire acondicionado reversibles son casi todo el parque (38.524 MW en 2024). Eurostat; potencia térmica, no eléctrica."
+  },
+  {
+    "tabla": "electrificacion_calefaccion_provincia",
+    "usar": true,
+    "tema": "Con qué combustible se calientan las viviendas principales de cada provincia (electricidad, gas natural, petróleo...)",
+    "preguntas": [
+      "¿Qué provincia calienta más sus casas con electricidad?",
+      "¿Qué porcentaje de viviendas de Madrid tiene calefacción de gas natural?",
+      "¿Cuántas viviendas de Asturias usan petróleo para calentarse?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_electricidad",
+        "nombre": "proporción de viviendas con calefacción eléctrica (0,34 = 34 %)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "cuota_gas",
+        "nombre": "proporción de viviendas con calefacción de gas natural",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "escala": 100
+      },
+      {
+        "columna": "cuota_petroleo",
+        "nombre": "proporción de viviendas con calefacción de petróleo",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "escala": 100
+      },
+      {
+        "columna": "viviendas",
+        "nombre": "viviendas principales con calefacción",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "electricidad",
+        "nombre": "viviendas con calefacción eléctrica",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "gas_natural",
+        "nombre": "viviendas con calefacción de gas natural",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "petroleo",
+        "nombre": "viviendas con calefacción de petróleo",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "otros",
+        "nombre": "viviendas con otros combustibles de calefacción",
+        "unidad": "viviendas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "pais",
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": {
+        "columna": "provincia",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Censo de Población y Viviendas 2021 (INE), foto única sin serie temporal. Las cuotas están en proporción 0-1, no en %. La fila España tiene cod_prov 00; las viviendas son de calefacción, no todas las viviendas."
+  },
+  {
+    "tabla": "electrificacion_hogares",
+    "usar": true,
+    "tema": "Energía que consumen los hogares españoles por uso (calefacción, agua caliente, cocina...) y por combustible, con la parte eléctrica",
+    "preguntas": [
+      "¿Qué parte de la energía de los hogares es electricidad?",
+      "¿Cuánta energía gastan los hogares en calefacción?",
+      "¿Cómo ha evolucionado el uso de gas natural en las casas?",
+      "¿Cuánta energía de biomasa usan los hogares?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota",
+        "nombre": "proporción del consumo del hogar que aporta ese combustible (0,47 = 47 %)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "tj",
+        "nombre": "energía consumida por los hogares",
+        "unidad": "TJ (terajulios)",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "uso",
+        "nombre": "uso final de la energía",
+        "total": "Todos los usos"
+      },
+      {
+        "columna": "combustible",
+        "nombre": "combustible",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España. Para el total hay que fijar uso = 'Todos los usos' (si no se duplica sumando usos); no hay fila total de combustible. Las cuotas son proporción 0-1 dentro de cada uso y año. Eurostat, hasta 2024."
+  },
+  {
+    "tabla": "electrificacion_sectores",
+    "usar": true,
+    "tema": "Consumo final de energía de cada sector (hogares, industria, transporte, servicios...) y cuánta es electricidad, gas, petróleo o renovables",
+    "preguntas": [
+      "¿Qué porcentaje de la energía de la industria es electricidad?",
+      "¿Cuánta energía consume el transporte por carretera?",
+      "¿Cómo ha evolucionado la electrificación de los hogares?",
+      "¿Qué rama industrial consume más gas natural?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_electricidad",
+        "nombre": "proporción de la energía final que es electricidad (0,47 = 47 %)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "total",
+        "nombre": "consumo final de energía",
+        "unidad": "ktep (miles de toneladas equivalentes de petróleo)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "electricidad",
+        "nombre": "consumo de electricidad",
+        "unidad": "ktep",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gas_natural",
+        "nombre": "consumo de gas natural",
+        "unidad": "ktep",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "petroleo",
+        "nombre": "consumo de petróleo y derivados",
+        "unidad": "ktep",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "renovables",
+        "nombre": "consumo de renovables directas",
+        "unidad": "ktep",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "carbon",
+        "nombre": "consumo de carbón",
+        "unidad": "ktep",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector o rama de actividad",
+        "total": "Toda la economía"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, 1990-2024. Los sectores se solapan: Industria incluye sus ramas (siderurgia, química...), Transporte incluye carretera y ferrocarril, y 'Toda la economía' es el total; no sumar todos juntos. Cuotas en proporción 0-1."
+  },
+  {
+    "tabla": "embalses_actual",
+    "usar": true,
+    "tema": "Estado de cada embalse de España en la última semana: cuánto llenos están frente a su media habitual y al año pasado",
+    "preguntas": [
+      "¿Cómo está el embalse de Alarcón?",
+      "¿Qué embalses están casi vacíos?",
+      "¿Qué embalses del Ebro están por encima de lo habitual?",
+      "¿Cuánto agua tiene el embalse de Buendía?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_llenado",
+        "nombre": "porcentaje de llenado del embalse",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "volumen_hm3",
+        "nombre": "agua almacenada",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "capacidad_hm3",
+        "nombre": "capacidad total del embalse",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_hace_un_anio",
+        "nombre": "porcentaje de llenado hace un año",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_habitual",
+        "nombre": "porcentaje de llenado habitual en esta fecha",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "dif_vs_habitual",
+        "nombre": "diferencia respecto al llenado habitual",
+        "unidad": "puntos porcentuales",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semanal",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "cuenca"
+      ],
+      "nivel": null,
+      "codigo": "cod_demarcacion",
+      "nombre": "cuenca",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "embalse",
+        "nombre": "embalse",
+        "total": null
+      },
+      {
+        "columna": "cuenca",
+        "nombre": "cuenca hidrográfica",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Foto de una sola semana (la última, MITECO); 374 embalses. Para evolución usar embalses_semanal, que va por cuenca."
+  },
+  {
+    "tabla": "embalses_estado_actual",
+    "usar": true,
+    "tema": "Reserva de agua de España y de cada cuenca hidrográfica esta semana, frente al año pasado y a la media de diez años",
+    "preguntas": [
+      "¿Cómo están los embalses de España?",
+      "¿Qué cuenca tiene menos agua embalsada?",
+      "¿Están los embalses del Guadalquivir mejor que hace un año?",
+      "¿Cuánta agua hay en el Segura?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_llenado",
+        "nombre": "porcentaje de llenado de la reserva",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "volumen_hm3",
+        "nombre": "agua embalsada",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "capacidad_hm3",
+        "nombre": "capacidad de embalse",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_hace_un_anio",
+        "nombre": "porcentaje de llenado hace un año",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_media_10_anios",
+        "nombre": "porcentaje de llenado medio de los últimos diez años",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "dif_vs_anio_anterior",
+        "nombre": "diferencia con el año anterior",
+        "unidad": "puntos porcentuales",
+        "tipo": "indice"
+      },
+      {
+        "columna": "dif_vs_media_10_anios",
+        "nombre": "diferencia con la media de diez años",
+        "unidad": "puntos porcentuales",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semanal",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "cuenca",
+        "demarcacion"
+      ],
+      "nivel": "nivel",
+      "codigo": "clave",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "clave",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Foto de la última semana publicada (MITECO). Mezcla niveles cuenca y demarcación que se solapan: fijar nivel antes de ordenar o sumar. Para series históricas usar embalses_semanal."
+  },
+  {
+    "tabla": "embalses_semanal",
+    "usar": true,
+    "tema": "Evolución semanal de la reserva de agua embalsada en España y en cada cuenca desde el año 2000",
+    "preguntas": [
+      "¿Cómo ha evolucionado la reserva de agua en España?",
+      "¿Cuánta agua había en los embalses en septiembre de 2022?",
+      "¿Cuándo estuvo más baja la cuenca del Segura?",
+      "¿Cómo están los embalses del Tajo comparado con hace diez años?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_llenado",
+        "nombre": "porcentaje de llenado de la reserva",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "volumen_hm3",
+        "nombre": "agua embalsada",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "capacidad_hm3",
+        "nombre": "capacidad de embalse",
+        "unidad": "hm³",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semanal",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "cuenca"
+      ],
+      "nivel": "nivel",
+      "codigo": "clave",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "clave",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Datos de MITECO desde 2000; pct_llenado puede superar 100 en semanas de sobrellenado. Fijar nivel (el país ES ya incluye todas las cuencas; no sumar cuencas y país). La capacidad cambia ligeramente con los años."
+  },
+  {
+    "tabla": "empleo_coste",
+    "usar": true,
+    "tema": "Cuánto cuesta el personal de las administraciones públicas (sueldos de los empleados públicos) por administración",
+    "preguntas": [
+      "¿Cuánto gasta España en sueldos de empleados públicos?",
+      "¿Cuánto pagan las comunidades autónomas en personal?",
+      "¿Qué porcentaje del PIB son los sueldos públicos?",
+      "¿Cómo ha crecido el coste del personal de los ayuntamientos?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_por_habitante",
+        "nombre": "coste de personal público por habitante",
+        "unidad": "€ por habitante (euros corrientes)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "remuneración de los asalariados públicos",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_pib",
+        "nombre": "coste de personal público en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "subsector",
+        "nombre": "administración",
+        "total": "Total AAPP"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, 1995-2025, euros corrientes (no deflactados). 'Total AAPP' ya es la suma de los demás subsectores: no sumar todas las filas. Eurostat, remuneración de asalariados (D1)."
+  },
+  {
+    "tabla": "empleo_efectivos",
+    "usar": true,
+    "tema": "Cuántos empleados públicos hay por administración, sector (sanidad, educación, policía...), provincia, tipo de contrato y sexo",
+    "preguntas": [
+      "¿Cuántos funcionarios hay en España?",
+      "¿Cuántos médicos y personal sanitario público hay en Andalucía?",
+      "¿Cuántas mujeres trabajan en la Administración General del Estado?",
+      "¿Cuántos funcionarios interinos hay en educación?"
+    ],
+    "medidas": [
+      {
+        "columna": "efectivos",
+        "nombre": "empleados públicos",
+        "unidad": "personas",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "administracion",
+        "nombre": "administración (Estado, comunidades autónomas, entidades locales)",
+        "total": null
+      },
+      {
+        "columna": "sector",
+        "nombre": "sector de actividad",
+        "total": null
+      },
+      {
+        "columna": "tipo_personal",
+        "nombre": "tipo de personal (funcionario, laboral, interino...)",
+        "total": null
+      },
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Registro Central de Personal, ediciones de enero y julio (la última, enero de 2026). No hay filas de total: se suma por categoría y hay que fijar una sola edición (fecha) para no duplicar. Códigos de comunidad y provincia sin nombre. Para tasa por habitante usar empleo_territorio."
+  },
+  {
+    "tabla": "empleo_epa_administracion",
+    "usar": true,
+    "tema": "Asalariados del sector público por tipo de administración en la Encuesta de Población Activa, trimestre a trimestre desde 2002",
+    "preguntas": [
+      "¿Cuántos asalariados públicos hay en España?",
+      "¿Cuántos trabajan para las comunidades autónomas según la EPA?",
+      "¿Cómo ha evolucionado el empleo público desde 2010?",
+      "¿Cuántas personas trabajan en la administración local?"
+    ],
+    "medidas": [
+      {
+        "columna": "asalariados",
+        "nombre": "asalariados del sector público",
+        "unidad": "personas",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "administracion",
+        "nombre": "tipo de administración",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "EPA (INE), solo España. Asalariados públicos de la encuesta, distinto de los efectivos del Registro Central de Personal (empleo_efectivos). 'Total' ya incluye todas las administraciones."
+  },
+  {
+    "tabla": "empleo_epa_ccaa",
+    "usar": true,
+    "tema": "Asalariados públicos y privados en cada comunidad autónoma y qué parte del empleo asalariado es público, trimestral desde 2002",
+    "preguntas": [
+      "¿Qué comunidad tiene más peso del empleo público?",
+      "¿Cuántos asalariados públicos hay en Extremadura?",
+      "¿Cómo ha evolucionado el empleo público en Canarias?",
+      "¿Qué porcentaje de asalariados trabaja para el sector público en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_publico",
+        "nombre": "proporción de asalariados que trabajan en el sector público (0,19 = 19 %)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "publicos",
+        "nombre": "asalariados del sector público",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "privados",
+        "nombre": "asalariados del sector privado",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "total",
+        "nombre": "total de asalariados",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EPA (INE). cod_ccaa 00 es el total de España y 01-19 las comunidades (sin nombres en la tabla); ojo con sumar España y comunidades. La cuota está en proporción 0-1, no en %."
+  },
+  {
+    "tabla": "empleo_gasto_personal_territorio",
+    "usar": true,
+    "tema": "Gasto en personal (sueldos) de cada comunidad autónoma y de sus ayuntamientos, por habitante y en total, por año",
+    "preguntas": [
+      "¿Cuánto gasta Navarra por habitante en personal?",
+      "¿Qué comunidad gasta más en sueldos de sus empleados?",
+      "¿Cuánto gastan los ayuntamientos de Madrid en personal?",
+      "¿Cómo ha evolucionado el gasto en personal de Andalucía?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_personal_ccaa_hab",
+        "nombre": "gasto en personal de la comunidad por habitante",
+        "unidad": "€ por habitante (euros corrientes)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "gasto_personal_ayuntamientos_hab",
+        "nombre": "gasto en personal de los ayuntamientos por habitante",
+        "unidad": "€ por habitante (euros corrientes)",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_personal_ccaa",
+        "nombre": "gasto en personal de la comunidad",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasto_personal_ayuntamientos",
+        "nombre": "gasto en personal de los ayuntamientos",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Capítulo 1 de los presupuestos liquidados, en euros corrientes (no deflactados). El gasto de la comunidad solo existe a nivel ccaa; ayuntamientos a nivel país, comunidad y provincia (con cod = código de provincia, que puede coincidir con el de comunidad: usar nivel). El territorio solo tiene código, sin nombre."
+  },
+  {
+    "tabla": "empleo_organismos",
+    "usar": true,
+    "tema": "Organismos del Estado con más empleados (Fuerzas Armadas, Guardia Civil, Policía Nacional, ministerios...) en la última edición",
+    "preguntas": [
+      "¿Cuántas personas trabajan en las Fuerzas Armadas?",
+      "¿Qué organismo del Estado tiene más empleados?",
+      "¿Cuántos guardias civiles hay?",
+      "¿Cuántas mujeres trabajan en la Agencia Tributaria?"
+    ],
+    "medidas": [
+      {
+        "columna": "efectivos",
+        "nombre": "empleados del organismo",
+        "unidad": "personas",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "mujeres",
+        "nombre": "mujeres empleadas en el organismo",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "organismo",
+        "nombre": "organismo",
+        "total": null
+      },
+      {
+        "columna": "ministerio",
+        "nombre": "ministerio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo la edición de enero de 2026 y solo organismos con 100 o más efectivos; el ministerio viene vacío en Fuerzas Armadas y cuerpos de policía. Nombres de organismos en mayúsculas y sin tildes en muchos casos."
+  },
+  {
+    "tabla": "empleo_salarios_ccaa",
+    "usar": true,
+    "tema": "Salario medio anual bruto de cada comunidad autónoma, en el sector público y en el privado",
+    "preguntas": [
+      "¿Cuánto cobra de media un empleado público en Madrid?",
+      "¿Qué comunidad tiene los salarios más bajos?",
+      "¿Cuánto más cobra un funcionario que un trabajador privado?",
+      "¿Cuál es el salario medio en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "salario_total",
+        "nombre": "salario medio anual bruto",
+        "unidad": "€ al año",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "salario_publico",
+        "nombre": "salario medio anual bruto en el sector público",
+        "unidad": "€ al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "salario_privado",
+        "nombre": "salario medio anual bruto en el sector privado",
+        "unidad": "€ al año",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Encuesta de Estructura Salarial (INE), solo el año 2022, euros corrientes. cod_ccaa 00 es España; las comunidades van por código INE (01 Andalucía... 17 La Rioja; faltan Ceuta y Melilla en algunos casos). Son medias, no se suman."
+  },
+  {
+    "tabla": "empleo_salarios_deciles",
+    "usar": true,
+    "tema": "Salario mensual medio de cada decil de ingresos (de los que menos a los que más cobran), en el sector público y el privado",
+    "preguntas": [
+      "¿Cuánto cobra el 10 % que más gana?",
+      "¿Cuál es el salario mensual medio en España?",
+      "¿Cobra más un empleado público o uno privado?",
+      "¿Cómo han evolucionado los salarios más bajos desde 2006?"
+    ],
+    "medidas": [
+      {
+        "columna": "salario_mensual",
+        "nombre": "salario mensual medio",
+        "unidad": "€ al mes (euros corrientes)",
+        "tipo": "media",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "decil",
+        "nombre": "decil de salario (1 el más bajo, 10 el más alto; 0 es la media de todos)",
+        "total": null
+      },
+      {
+        "columna": "sector",
+        "nombre": "sector público o privado",
+        "total": "Total"
+      },
+      {
+        "columna": "jornada",
+        "nombre": "tipo de jornada",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, 2006-2024. El decil 0 es la media general (2.386 € en 2024), no un decil. Salario bruto mensual medio, sin deflactar; no sumar deciles."
+  },
+  {
+    "tabla": "empleo_territorio",
+    "usar": true,
+    "tema": "Empleados públicos por cada 1.000 habitantes en España, cada comunidad y cada provincia, según administración",
+    "preguntas": [
+      "¿Qué comunidad tiene más empleados públicos por habitante?",
+      "¿Cuántos empleados públicos hay en Castilla y León?",
+      "¿Cuántos funcionarios por cada mil habitantes hay en España?",
+      "¿Cómo ha cambiado el empleo público de Extremadura desde 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_1000_hab",
+        "nombre": "empleados públicos por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "efectivos",
+        "nombre": "empleados públicos",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "administracion",
+        "nombre": "administración",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Registro Central de Personal, ediciones de enero y julio (última enero de 2026). Con administracion = 'Total' ya están sumadas las demás. Territorio solo con código (cod 00 para España; provincia y comunidad pueden compartir dígitos: usar nivel)."
+  },
+  {
+    "tabla": "empresas_altas_quiebras",
+    "usar": true,
+    "tema": "Evolución de las altas de empresas y de las quiebras en España frente a la UE y otros países, como índice trimestral",
+    "preguntas": [
+      "¿Están aumentando las quiebras de empresas en España?",
+      "¿Cómo van las altas de empresas comparado con Alemania?",
+      "¿Cómo han evolucionado las quiebras desde la pandemia?"
+    ],
+    "medidas": [
+      {
+        "columna": "indice",
+        "nombre": "índice de altas o quiebras (2021 = 100)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador",
+        "nombre": "altas o quiebras",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat, desestacionalizado, base 2021 = 100: no es un número de empresas y nunca se suma; solo sirve para comparar tendencias. Los países son España, UE-27, Alemania, Francia, Italia, Países Bajos y Portugal. Último trimestre 2026-Q2."
+  },
+  {
+    "tabla": "empresas_autonomos",
+    "usar": true,
+    "tema": "Autónomos (trabajadores por cuenta propia), empleadores y asalariados en España y cada comunidad, según la EPA",
+    "preguntas": [
+      "¿Cuántos autónomos hay en España?",
+      "¿Qué comunidad tiene más porcentaje de autónomos?",
+      "¿Cómo ha evolucionado el número de autónomos desde 2008?",
+      "¿Cuántos empleadores hay en Galicia?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_cuenta_propia",
+        "nombre": "porcentaje de ocupados que trabajan por cuenta propia",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "cuenta_propia",
+        "nombre": "ocupados por cuenta propia",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "empleadores",
+        "nombre": "empleadores",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "independientes",
+        "nombre": "trabajadores independientes sin asalariados",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "asalariados",
+        "nombre": "asalariados",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados",
+        "nombre": "ocupados totales",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_empleadores",
+        "nombre": "porcentaje de ocupados que son empleadores",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_independientes",
+        "nombre": "porcentaje de ocupados que son independientes",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [
+      {
+        "columna": "trimestre",
+        "distinto": 0
+      }
+    ],
+    "notas": "EPA (INE): cifras en miles de personas. trimestre = 0 es la media anual y 1-4 los trimestres; no mezclar ambos al sumar o contar. cod 00 es España y 01-19 las comunidades. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
+  },
+  {
+    "tabla": "empresas_concursos",
+    "usar": true,
+    "tema": "Concursos de acreedores (empresas y personas en quiebra) por año, por habitante y por empresa, en España y cada comunidad",
+    "preguntas": [
+      "¿Cuántas empresas entraron en concurso de acreedores en 2019?",
+      "¿Qué comunidad tiene más concursos por habitante?",
+      "¿Cómo evolucionaron los concursos tras la crisis de 2008?",
+      "¿Cuántos concursos voluntarios hubo en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "concursos_100k",
+        "nombre": "concursos de acreedores por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "concursos_1000emp",
+        "nombre": "concursos por cada 1.000 empresas",
+        "unidad": "por cada 1.000 empresas",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "concursos",
+        "nombre": "deudores concursados",
+        "unidad": "deudores",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "voluntarios",
+        "nombre": "concursos voluntarios",
+        "unidad": "deudores",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "necesarios",
+        "nombre": "concursos necesarios",
+        "unidad": "deudores",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "empresas",
+        "nombre": "empresas existentes",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE, Estadística del Procedimiento Concursal; la serie termina en 2020. cod 00 es España (no sumar con comunidades). Territorio solo por código INE de comunidad."
+  },
+  {
+    "tabla": "empresas_dirce_sector",
+    "usar": true,
+    "tema": "Número de empresas por gran sector de actividad (comercio, hostelería, construcción...) en España y cada comunidad",
+    "preguntas": [
+      "¿Cuántas empresas de hostelería hay en España?",
+      "¿Qué comunidad tiene más empresas de construcción por habitante?",
+      "¿Qué porcentaje de empresas son de comercio?",
+      "¿Cómo ha cambiado el número de empresas de transporte desde 2020?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_1000hab",
+        "nombre": "empresas del sector por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "empresas",
+        "nombre": "empresas activas",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de las empresas que son de este sector",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "gran sector de actividad",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total sector: se suman los 11 sectores. cod 00 es España y 01-19 las comunidades, solo por código."
+  },
+  {
+    "tabla": "empresas_dirce_tamano",
+    "usar": true,
+    "tema": "Empresas españolas por tamaño (sin asalariados, micro, pequeñas, medianas y grandes) en España y cada comunidad",
+    "preguntas": [
+      "¿Cuántas grandes empresas hay en España?",
+      "¿Qué porcentaje de empresas no tiene asalariados?",
+      "¿Cuántas pymes hay en Cataluña?",
+      "¿Cómo ha evolucionado el número de microempresas?"
+    ],
+    "medidas": [
+      {
+        "columna": "empresas",
+        "nombre": "empresas activas",
+        "unidad": "empresas",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de las empresas que son de este tamaño",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tamano",
+        "nombre": "tamaño de la empresa según asalariados",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total de tamaños: se suman los cinco tramos. cod 00 es España y 01-19 comunidades, sin nombres."
+  },
+  {
+    "tabla": "empresas_dirce_territorio",
+    "usar": true,
+    "tema": "Número de empresas activas en España, cada comunidad y cada provincia, desde 1999, con empresas por 1.000 habitantes y crecimiento",
+    "preguntas": [
+      "¿Cuántas empresas hay en España?",
+      "¿Qué provincia tiene más empresas por habitante?",
+      "¿Cuántas empresas había en Madrid en 2010?",
+      "¿Cuánto han crecido las empresas en Cataluña el último año?"
+    ],
+    "medidas": [
+      {
+        "columna": "empresas_1000hab",
+        "nombre": "empresas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "empresas",
+        "nombre": "empresas activas a 1 de enero",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "personas_fisicas",
+        "nombre": "empresas de personas físicas (autónomos)",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "sociedades",
+        "nombre": "sociedades anónimas y limitadas",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_personas_fisicas",
+        "nombre": "porcentaje de empresas que son personas físicas",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "crecimiento",
+        "nombre": "crecimiento anual del número de empresas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "DIRCE (INE, tabla 302), empresas a 1 de enero. Territorio solo por código y con niveles que se solapan (cod de provincia y de comunidad pueden coincidir): fijar siempre nivel. Personas físicas más sociedades no suman el total (faltan otras formas jurídicas)."
+  }
+]

@@ -42,13 +42,17 @@ function deBase64(b64) {
 }
 
 export function crearIndice(catalogo) {
-	const docs = catalogo.tablas.map((t) => {
+	// Las tablas que la capa semántica marca como auxiliares no se buscan (se pueden describir
+	// por su nombre)
+	const docs = catalogo.tablas.filter((t) => t.semantica?.usar !== false).map((t) => {
+		const s = t.semantica;
 		// Nombre, descripción y páginas pesan más que las columnas
 		const texto = [
 			t.nombre.replace(/_/g, ' '),
 			t.nombre.replace(/_/g, ' '),
 			t.descripcion,
 			t.descripcion,
+			...(s ? [s.tema, s.tema, ...s.preguntas, ...s.medidas.map((m) => m.nombre)] : []),
 			...t.paginas.map((p) => `${p.titulo} ${p.titulo} ${p.ruta.replace(/[/-]/g, ' ')}`),
 			...t.columnas.map((c) => `${c.nombre.replace(/_/g, ' ')} ${c.descripcion ?? ''}`)
 		].join(' ');
@@ -192,7 +196,14 @@ export function fichaCompacta(t) {
 	});
 	const ultimo = columnasTiempo(t).filter((c) => c.max !== undefined).map((c) => `${c.nombre} = ${corto(c.max)}`);
 	const codigos = t.codigos ? `\n${t.codigos.nota}\nComunidades: ${t.codigos.ccaa}.` : '';
-	return `${t.tabla} (${t.filas} filas).${ultimo.length ? ` Último periodo con datos: ${ultimo.join(', ')}.` : ''} Columnas:\n${lineas.join('\n')}${codigos}`;
+	// Capa semántica: la cifra principal, cómo se suma y las trampas, dichas por quien revisó la tabla
+	const s = t.semantica?.usar ? t.semantica : null;
+	const semantica = s
+		? `\nTema: ${s.tema}.\nCifras: ${s.medidas
+				.map((m) => `${m.columna} = ${m.nombre}${m.unidad ? ` (${m.unidad})` : ''}, ${m.tipo}${m.principal ? ', PRINCIPAL' : ''}`)
+				.join('; ')}.${(s.dimensiones ?? []).some((d) => d.total || d.defecto) ? `\nPor defecto: ${s.dimensiones.filter((d) => d.total || d.defecto).map((d) => `${d.columna} = '${d.total ?? d.defecto}'`).join(', ')}.` : ''}${(s.filtros ?? []).length ? `\nFiltrar siempre: ${s.filtros.map((f) => ('distinto' in f ? `${f.columna} <> ${f.distinto}` : `${f.columna} = ${typeof f.valor === 'string' ? `'${f.valor}'` : f.valor}`)).join(' AND ')}.` : ''}${s.notas ? `\nNotas: ${s.notas}` : ''}`
+		: '';
+	return `${t.tabla} (${t.filas} filas).${ultimo.length ? ` Último periodo con datos: ${ultimo.join(', ')}.` : ''}${semantica}\nColumnas:\n${lineas.join('\n')}${codigos}`;
 }
 
 const columnasTiempo = (t) => t.columnas.filter((c) => c.temporal);

@@ -1,0 +1,2053 @@
+[
+  {
+    "tabla": "inmigracion_llegadas",
+    "usar": true,
+    "tema": "Llegadas irregulares de personas migrantes a España por mes y por vía (mar a Canarias, mar a la península y Baleares, tierra a Ceuta y Melilla)",
+    "preguntas": [
+      "¿Cuántos inmigrantes irregulares han llegado a Canarias en 2025?",
+      "¿Cómo han evolucionado las llegadas de pateras a España?",
+      "¿Qué mes ha habido más llegadas irregulares?"
+    ],
+    "medidas": [
+      {
+        "columna": "personas",
+        "nombre": "personas llegadas de forma irregular",
+        "unidad": "personas",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "via",
+        "nombre": "vía de llegada",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos del Ministerio del Interior vía ACNUR. El último mes (septiembre de 2026) está en curso y es incompleto. Sin total: sumar las tres vías para el total de España."
+  },
+  {
+    "tabla": "inmigracion_nacionalizaciones",
+    "usar": true,
+    "tema": "Cuántas personas extranjeras obtienen la nacionalidad española cada año, por comunidad y por nacionalidad de origen",
+    "preguntas": [
+      "¿Cuántos marroquíes se nacionalizaron españoles en 2024?",
+      "¿Qué comunidad concede más nacionalidades españolas?",
+      "¿Cómo han evolucionado las nacionalizaciones en España desde 2013?",
+      "¿Cuántos venezolanos han obtenido la nacionalidad española?"
+    ],
+    "medidas": [
+      {
+        "columna": "nacionalizaciones",
+        "nombre": "adquisiciones de nacionalidad española",
+        "unidad": "personas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "por_1000_extranjeros",
+        "nombre": "nacionalizaciones por cada 1.000 extranjeros residentes",
+        "unidad": "por cada 1.000 extranjeros residentes",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "nacionalidad_previa",
+        "nombre": "nacionalidad de origen (países y grandes grupos como De Sudamérica o De Africa)",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "No hay columna de nombre de comunidad: solo el código INE (00 es España, 13 Madrid). Mezcla países y grupos de países en nacionalidad_previa, no sumarlos entre sí."
+  },
+  {
+    "tabla": "inmigracion_poblacion",
+    "usar": true,
+    "tema": "Población extranjera residente en España y en cada comunidad a 1 de enero, su peso sobre la población y su origen por grandes zonas",
+    "preguntas": [
+      "¿Cuántos extranjeros viven en España?",
+      "¿Qué comunidad tiene mayor porcentaje de población extranjera?",
+      "¿Cuántos latinoamericanos viven en Madrid?",
+      "¿Cómo ha crecido la población extranjera desde 2002?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_extranjeros",
+        "nombre": "peso de los extranjeros sobre la población (fracción de 0 a 1)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "extranjeros",
+        "nombre": "población extranjera",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población total",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "espanoles",
+        "nombre": "población con nacionalidad española",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ue",
+        "nombre": "extranjeros de la Unión Europea",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "resto_europa",
+        "nombre": "extranjeros del resto de Europa",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "africa",
+        "nombre": "extranjeros de África",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "america_norte",
+        "nombre": "extranjeros de América del Norte",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "centroamerica_caribe",
+        "nombre": "extranjeros de Centroamérica y Caribe",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "sudamerica",
+        "nombre": "extranjeros de Sudamérica",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "asia",
+        "nombre": "extranjeros de Asia",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Cifras a 1 de enero (INE, Estadística Continua de Población). pct_extranjeros viene como fracción. Sin columna de nombre de comunidad: usar el código INE de comunidad. Las zonas de origen no suman exactamente el total de extranjeros."
+  },
+  {
+    "tabla": "inmigracion_saldos",
+    "usar": true,
+    "tema": "Saldo migratorio con el exterior (entradas menos salidas) de España por nacionalidad y de cada comunidad por nacionalidad española o extranjera",
+    "preguntas": [
+      "¿Cuál fue el saldo migratorio de España en 2024?",
+      "¿Qué comunidad ganó más población por inmigración?",
+      "¿Cuántos colombianos llegaron a España en 2024 descontando los que se fueron?"
+    ],
+    "medidas": [
+      {
+        "columna": "saldo_1000",
+        "nombre": "saldo migratorio por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "saldo_exterior",
+        "nombre": "saldo migratorio exterior",
+        "unidad": "personas",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "nacionalidad",
+        "nombre": "nacionalidad (países, grupos como Sudamérica, o Española/Extranjera/Total)",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo 2021-2024 (INE, Estadística de Migraciones). La columna es_grupo marca las filas que agrupan países; no sumar países con sus grupos. A nivel comunidad solo hay Total, Española y Extranjera."
+  },
+  {
+    "tabla": "internacional_comparativa",
+    "usar": true,
+    "tema": "España comparada con Francia, Alemania, Italia, Portugal, la UE, la OCDE y otros países en unos 36 indicadores (economía, empleo, salud, educación, energía, clima...) año a año",
+    "preguntas": [
+      "¿Cómo está España de paro comparada con Alemania?",
+      "¿Cuál es la esperanza de vida en España frente a la media de la UE?",
+      "¿Cómo ha evolucionado la deuda pública de Italia desde el año 2000?",
+      "¿Qué país tiene más electricidad renovable, España o Portugal?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador (su unidad depende del indicador, ver columna unidad)",
+        "unidad": "según el indicador (%, por 1.000 habitantes, años, dólares PPA...)",
+        "tipo": "ratio",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ESP"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador_id",
+        "nombre": "indicador",
+        "total": null
+      },
+      {
+        "columna": "apartado",
+        "nombre": "apartado temático",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Formato largo: siempre hay que filtrar un indicador_id, porque cada uno tiene su unidad y no se pueden mezclar. Cada país tiene un último año distinto. UE (EUU) y OCDE (OED) son agregados ponderados (es_agregado). Nunca sumar valores entre países."
+  },
+  {
+    "tabla": "internacional_ultimo",
+    "usar": true,
+    "tema": "Último dato disponible de cada indicador internacional para España y los países de comparación, con el valor de España en ese mismo año",
+    "preguntas": [
+      "¿Qué país tiene la tasa de paro más alta de los comparados?",
+      "¿Cuánto gasta Francia en sanidad en comparación con España?",
+      "¿Dónde es más alta la esperanza de vida, en España o en Japón?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador en su último año (la unidad depende del indicador)",
+        "unidad": "según el indicador (%, por 1.000 habitantes, años, dólares PPA...)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "valor_espana_mismo_anio",
+        "nombre": "valor de España ese mismo año",
+        "unidad": "según el indicador",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio_ultimo",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ESP"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador_id",
+        "nombre": "indicador",
+        "total": null
+      },
+      {
+        "columna": "apartado",
+        "nombre": "apartado temático",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por indicador y país con su último año (anio_ultimo), que puede variar entre países. Hay que filtrar un indicador_id. Sirve para rankings sin evolución; para series largas usar internacional_comparativa."
+  },
+  {
+    "tabla": "ipc",
+    "usar": false,
+    "notas": "Mezcla 56 series del INE en una sola columna value (índices y variaciones anual, mensual y acumulada) con la unidad dentro del texto de serie. Para preguntas sobre inflación son mejores mercado_ipc_grupos (por grupos, con General) y mercado_ipc_ccaa (por comunidad)."
+  },
+  {
+    "tabla": "local_deuda_municipio",
+    "usar": true,
+    "tema": "Deuda financiera de los ayuntamientos de las 13 ciudades de más de 300.000 habitantes, trimestre a trimestre desde 1994",
+    "preguntas": [
+      "¿Cuánto debe el Ayuntamiento de Madrid?",
+      "¿Qué gran ciudad tiene más deuda municipal?",
+      "¿Cómo ha evolucionado la deuda del Ayuntamiento de Barcelona?"
+    ],
+    "medidas": [
+      {
+        "columna": "deuda_eur",
+        "nombre": "deuda del ayuntamiento (criterio de deuda PDE)",
+        "unidad": "€",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Deuda en euros nominales a fin de trimestre (Banco de España). Solo 13 ciudades, no hay versión por habitante; para ello dividir por la población del municipio. El último dato es de junio de 2026."
+  },
+  {
+    "tabla": "local_deuda_provincia",
+    "usar": true,
+    "tema": "Deuda viva de las entidades locales (ayuntamientos, diputaciones y otras) de cada provincia a 31 de diciembre desde 2008",
+    "preguntas": [
+      "¿Qué provincia tiene más deuda local?",
+      "¿Cuánto deben los ayuntamientos de Valencia?",
+      "¿Cómo ha bajado la deuda de las entidades locales desde 2008?"
+    ],
+    "medidas": [
+      {
+        "columna": "deuda_eur",
+        "nombre": "deuda total de las entidades locales de la provincia",
+        "unidad": "€",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "deuda_ayuntamientos_eur",
+        "nombre": "deuda de los ayuntamientos",
+        "unidad": "€",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_diputaciones_eur",
+        "nombre": "deuda de diputaciones, consejos y cabildos",
+        "unidad": "€",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_resto_eell_eur",
+        "nombre": "deuda del resto de entidades locales (mancomunidades, consorcios...)",
+        "unidad": "€",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Una foto a 31 de diciembre (trimestre siempre 4), en euros nominales. Solo hay código de provincia, sin nombre. No incluye importes sin provincia asignada. Para comparar provincias conviene dividir por su población."
+  },
+  {
+    "tabla": "mapas_indicadores",
+    "usar": false,
+    "notas": "Tabla técnica de 257 indicadores mezclados (unidad y sentido distintos en cada uno) que solo alimenta los mapas de la web y repite datos de las tablas de cada tema. Mejor consultar la tabla original del tema."
+  },
+  {
+    "tabla": "medios_contratos_anual",
+    "usar": true,
+    "tema": "Dinero que las administraciones pagan a empresas de medios de comunicación por contratos públicos (publicidad, patrocinios, suscripciones...), por año, nivel de administración y comunidad",
+    "preguntas": [
+      "¿Cuánto han gastado los ayuntamientos en contratos con medios de comunicación en 2024?",
+      "¿Qué comunidad gasta más por habitante en contratos con medios?",
+      "¿Cuánto paga el Gobierno de España en publicidad y patrocinios a los medios?",
+      "¿Cómo ha evolucionado el gasto en contratos con medios desde 2018?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "contratos con medios por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "eur_hab_real"
+      },
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe de contratos con medios privados, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe de contratos con medios privados, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_contratos",
+        "nombre": "número de contratos",
+        "unidad": "contratos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_gris_eur_real",
+        "nombre": "importe en empresas dudosas como medios (zona gris), en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_publicos_eur_real",
+        "nombre": "importe a medios públicos, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_autonomicas_eur_real",
+        "nombre": "parte que viene de plataformas autonómicas y municipales, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "nivel",
+        "nombre": "tipo de administración que contrata (estatal, autonomico, local, empresa_publica, otro)",
+        "total": null
+      },
+      {
+        "columna": "categoria",
+        "nombre": "tipo de contrato (publicidad_inserciones, patrocinio_eventos, suscripciones_servicios_informativos, especiales_suplementos_revistas, otros)",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido que gobernaba a 1 de julio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "2026 es año en curso e incompleto (parcial). Cada fila es una combinación de año, nivel, comunidad y categoría: hay que sumar para el total. Las columnas principales solo cuentan medios privados; gris y públicos van aparte. Un cero no es gasto cero: faltan los menores de Navarra, Madrid y Cataluña 2018-2020 en parte. La comunidad España (cod 00) es el Estado y entes sin comunidad, no la suma de todas."
+  },
+  {
+    "tabla": "medios_contratos_ejemplos",
+    "usar": true,
+    "tema": "Los 50 mayores contratos de patrocinio y eventos de cada año entre administraciones y empresas de medios, con adjudicatario, órgano e importe",
+    "preguntas": [
+      "¿Cuáles son los mayores patrocinios que han pagado las administraciones a medios?",
+      "¿Qué contratos de eventos ha firmado el Ayuntamiento de Madrid con medios?",
+      "¿Cuánto cobró el grupo Prisa por patrocinios en 2023?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe del contrato en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe del contrato en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "municipio"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación del adjudicatario",
+        "total": null
+      },
+      {
+        "columna": "titularidad",
+        "nombre": "titularidad del medio (privada o pública)",
+        "total": null
+      },
+      {
+        "columna": "nivel",
+        "nombre": "nivel de la administración que contrata",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo los 50 mayores contratos de patrocinio por año, no todos los contratos: sirve para ejemplos y rankings de contratos individuales, no para totales. 2026 en curso e incompleto. Hay objeto, órgano y adjudicatario en texto libre."
+  },
+  {
+    "tabla": "medios_contratos_grupos",
+    "usar": true,
+    "tema": "Dinero de contratos públicos que recibe cada grupo de comunicación (Prisa, Atresmedia, Vocento, RTVE, medios locales...) por año y nivel de administración",
+    "preguntas": [
+      "¿Cuánto ha cobrado Atresmedia en contratos públicos en 2024?",
+      "¿Qué grupo de comunicación recibe más dinero de los ayuntamientos?",
+      "¿Cómo ha evolucionado lo que cobra Prisa de las administraciones?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe de contratos recibido por el grupo, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe de contratos recibido, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "importe por habitante de España, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_contratos",
+        "nombre": "número de contratos",
+        "unidad": "contratos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_publicidad_eur_real",
+        "nombre": "importe en publicidad e inserciones",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_patrocinio_eventos_eur_real",
+        "nombre": "importe en patrocinios y eventos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_suscripciones_eur_real",
+        "nombre": "importe en suscripciones y servicios informativos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_especiales_eur_real",
+        "nombre": "importe en especiales y suplementos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación",
+        "total": null
+      },
+      {
+        "columna": "titularidad",
+        "nombre": "titularidad (privada o pública)",
+        "total": null
+      },
+      {
+        "columna": "nivel",
+        "nombre": "tipo de administración que contrata (estatal, autonomico, local, empresa_publica, otro)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "No tiene territorio: una fila por grupo, año y nivel, hay que sumar niveles para el total del grupo. Para eur_hab_real el divisor es la población de España. 2026 en curso e incompleto."
+  },
+  {
+    "tabla": "medios_contratos_municipios",
+    "usar": true,
+    "tema": "Contratos de cada ayuntamiento con empresas de medios de comunicación por año, con el partido del alcalde",
+    "preguntas": [
+      "¿Cuánto ha gastado el Ayuntamiento de Albacete en contratos con medios?",
+      "¿Qué municipio gasta más por habitante en contratos con medios?",
+      "¿Gastan más los ayuntamientos del PP o del PSOE en medios?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "contratos con medios por habitante del municipio, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe de contratos con medios privados, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe de contratos con medios privados, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_contratos",
+        "nombre": "número de contratos",
+        "unidad": "contratos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_patrocinio_eventos_eur_real",
+        "nombre": "importe en patrocinios y eventos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_gris_eur_real",
+        "nombre": "importe en empresas dudosas como medios (zona gris)",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_publicos_eur_real",
+        "nombre": "importe a medios públicos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_municipio",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido del alcalde a 1 de julio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Un cero no es gasto cero: muchas capitales no suben sus menores a PLACSP y faltan los municipios navarros, madrileños (salvo Madrid capital) y catalanes de 2018-2020. Los pueblos muy pequeños dan €/hab desorbitados con un solo contrato. 2026 en curso e incompleto."
+  },
+  {
+    "tabla": "medios_publicidad_age_anual",
+    "usar": true,
+    "tema": "Gasto en publicidad institucional y comercial de la Administración General del Estado por año desde 2006, con el presidente y partido de cada momento",
+    "preguntas": [
+      "¿Cuánto gasta el Gobierno de España en publicidad institucional?",
+      "¿Gastaba más publicidad Rajoy o Sánchez?",
+      "¿Cómo ha evolucionado el gasto en publicidad del Estado desde 2006?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_eur_hab_real",
+        "nombre": "publicidad total (institucional más comercial) por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "institucional_eur_hab_real",
+        "nombre": "publicidad institucional por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "comercial_eur_hab_real",
+        "nombre": "publicidad comercial por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_nominal",
+        "nombre": "coste total ejecutado de las campañas, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "total_eur_hab_real"
+      },
+      {
+        "columna": "institucional_eur_nominal",
+        "nombre": "coste ejecutado de las campañas institucionales, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "institucional_eur_real"
+      },
+      {
+        "columna": "comercial_eur_nominal",
+        "nombre": "coste ejecutado de las campañas comerciales, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "comercial_eur_real"
+      },
+      {
+        "columna": "institucional_eur_real",
+        "nombre": "coste de las campañas institucionales, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "comercial_eur_real",
+        "nombre": "coste de las campañas comerciales, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "planificado_eur_nominal",
+        "nombre": "inversión planificada en campañas institucionales, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "campanas_institucionales",
+        "nombre": "número de campañas institucionales",
+        "unidad": "campañas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ejecucion_pct",
+        "nombre": "porcentaje de ejecución del plan",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido del Gobierno a 1 de julio",
+        "total": null
+      },
+      {
+        "columna": "presidente",
+        "nombre": "presidente del Gobierno",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "2026 solo tiene el plan (planificado), sin gasto ejecutado: las cifras ejecutadas llegan a 2025. 2016 no tiene plan. En euros del año se ve el dato oficial; la web compara en euros constantes por habitante."
+  },
+  {
+    "tabla": "medios_publicidad_age_medios",
+    "usar": true,
+    "tema": "A qué tipo de medio o herramienta (televisión, radio, digital, prensa, exterior, cine...) va la publicidad de la Administración General del Estado cada año",
+    "preguntas": [
+      "¿Cuánto dinero de publicidad institucional del Estado va a la televisión?",
+      "¿Qué porcentaje de la publicidad del Gobierno se gasta en medios digitales?",
+      "¿Cómo ha cambiado el reparto de la publicidad del Estado entre prensa, radio y televisión?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "inversión en el medio, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "inversión en el medio, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "inversión en el medio por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct",
+        "nombre": "peso del medio sobre el total de ese ámbito",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "ambito",
+        "nombre": "tipo de campañas (institucional o institucional_comercial)",
+        "total": null,
+        "defecto": "institucional"
+      },
+      {
+        "columna": "medio_nombre",
+        "nombre": "medio o herramienta",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre un ámbito: institucional (desde 2006, nueve herramientas) y institucional_comercial (desde 2009, con categoría resto) son definiciones distintas y no se suman entre sí. Datos hasta 2025."
+  },
+  {
+    "tabla": "medios_publicidad_empresas_anual",
+    "usar": true,
+    "tema": "Publicidad que pagan las empresas públicas (Loterías, AENA, Correos, RTVE, Renfe...) por año, entidad y ámbito estatal, autonómico o local",
+    "preguntas": [
+      "¿Cuánto gasta Loterías y Apuestas del Estado en publicidad?",
+      "¿Cuánto invierte Renfe en campañas de publicidad?",
+      "¿Qué empresas públicas gastan más en publicidad?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "gasto en publicidad de la entidad, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "gasto en publicidad de la entidad, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto en publicidad por habitante del ámbito, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "municipio"
+      ],
+      "nivel": "ambito",
+      "codigo": "cod_territorio",
+      "nombre": "territorio",
+      "espana": {
+        "columna": "cod_territorio",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "entidad",
+        "nombre": "empresa u organismo público",
+        "total": null
+      },
+      {
+        "columna": "magnitud",
+        "nombre": "qué se mide (coste_campanas_comerciales, publicidad_institucional_en_medios, cuenta_627)",
+        "total": null
+      },
+      {
+        "columna": "tipo_entidad",
+        "nombre": "tipo de entidad (empresa_publica, organismo, rtve)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Las magnitudes no son comparables entre sí: estatal es coste de campañas comerciales (2015-2025), autonómico y local publicidad institucional en medios o cuenta 627 según la fuente. Algunas fuentes incluyen IVA y otras no (iva_incluido). Cubre solo unas pocas comunidades y ciudades."
+  },
+  {
+    "tabla": "medios_publicidad_gobiernos",
+    "usar": true,
+    "tema": "Publicidad de la Administración General del Estado por presidente del Gobierno (Zapatero, Rajoy, Sánchez): media anual por habitante",
+    "preguntas": [
+      "¿Qué presidente del Gobierno ha gastado más en publicidad institucional?",
+      "¿Cuánto gastaba Zapatero en publicidad por habitante comparado con Sánchez?",
+      "¿Gasta más en publicidad el PP o el PSOE?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_eur_hab_real_media",
+        "nombre": "publicidad total media anual por habitante, en euros constantes",
+        "unidad": "€ por habitante y año (euros reales de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "institucional_eur_hab_real_media",
+        "nombre": "publicidad institucional media anual por habitante",
+        "unidad": "€ por habitante y año (euros reales de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "comercial_eur_hab_real_media",
+        "nombre": "publicidad comercial media anual por habitante",
+        "unidad": "€ por habitante y año (euros reales de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "institucional_eur_real_media",
+        "nombre": "publicidad institucional media anual, en euros constantes",
+        "unidad": "€ por año (euros reales de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "ejecucion_pct_media",
+        "nombre": "porcentaje medio de ejecución del plan",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "presidente",
+        "nombre": "presidente del Gobierno",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo tres filas, una por presidente, con medias del periodo (2006-2025, años en anio_desde y anio_hasta). Los periodos son de distinta duración."
+  },
+  {
+    "tabla": "medios_publicidad_grupos",
+    "usar": true,
+    "tema": "Qué grupos de comunicación, empresas y plataformas (Prisa, Atresmedia, Google...) recibieron más publicidad del Estado en 2025",
+    "preguntas": [
+      "¿Qué grupo mediático recibió más publicidad institucional del Estado en 2025?",
+      "¿Cuánto cobró Google de publicidad del Gobierno?",
+      "¿Cuánto dinero de publicidad pública recibió el grupo Vocento?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "inversión de la AGE en el grupo en 2025",
+        "unidad": "€ (euros de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "eur_1000hab_real",
+        "nombre": "inversión por cada 1.000 habitantes",
+        "unidad": "€ por cada 1.000 habitantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "inversión por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct",
+        "nombre": "peso del grupo sobre el total de ese tipo de publicidad",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto en el ranking de ese tipo",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de publicidad (institucional o comercial)",
+        "total": null,
+        "defecto": "institucional"
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo, empresa o plataforma",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo el año 2025 (informes de publicidad institucional y comercial de la AGE). Filtrar siempre tipo: institucional y comercial son informes distintos y el ranking (puesto) es dentro de cada tipo. Algunas filas son plataformas (es_plataforma) o entidades públicas (es_publico), no medios privados; el importe nominal y real coinciden porque es 2025."
+  },
+  {
+    "tabla": "medios_publicidad_territorial_anual",
+    "usar": true,
+    "tema": "Publicidad institucional de ocho comunidades autónomas y de Madrid y Barcelona por año, por habitante, con el partido gobernante",
+    "preguntas": [
+      "¿Qué comunidad gasta más en publicidad institucional por habitante?",
+      "¿Cuánto gasta la Comunidad de Madrid en publicidad institucional?",
+      "¿Cómo ha evolucionado el gasto en publicidad de la Generalitat de Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_eur_hab_real",
+        "nombre": "publicidad institucional total por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "administracion_eur_hab_real",
+        "nombre": "publicidad de la administración por habitante",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "empresas_publicas_eur_hab_real",
+        "nombre": "publicidad de las empresas públicas por habitante",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_real",
+        "nombre": "publicidad institucional total, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_nominal",
+        "nombre": "publicidad institucional total, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "total_eur_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "municipio"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod_ccaa",
+      "nombre": "territorio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido que gobierna a 1 de julio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo ocho comunidades, Madrid y Barcelona. Cada territorio usa base distinta (ejecutado o contratado) y algunos no son comparables entre sí (comparable_entre_territorios false, p. ej. Comunidad de Madrid, Aragón, Murcia). Cataluña y Madrid capital tienen fila de ámbito local o autonómico distinta."
+  },
+  {
+    "tabla": "medios_publicidad_territorial_medios",
+    "usar": true,
+    "tema": "A qué grupos de comunicación va la publicidad institucional de cada comunidad (y de Madrid capital) por año, con su peso y el importe por habitante",
+    "preguntas": [
+      "¿Qué grupo de comunicación recibe más publicidad institucional de la Generalitat?",
+      "¿Cuánto cobra Atresmedia de publicidad de la Comunidad de Madrid?",
+      "¿Qué medios reciben más publicidad pública en el País Vasco?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "publicidad institucional recibida por el grupo, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "publicidad institucional recibida, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "publicidad recibida por habitante del territorio, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_medios",
+        "nombre": "peso del grupo sobre lo asignado a medios identificados",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "municipio"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod_ccaa",
+      "nombre": "territorio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación",
+        "total": null
+      },
+      {
+        "columna": "tipo_grupo",
+        "nombre": "tipo de grupo (privado, publico, plataforma, varios, sin clasificar)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo los 100 primeros grupos por territorio y año; no cruza con el organismo pagador. Cada territorio tiene base distinta (ejecutado o contratado) y fuentes con o sin IVA, así que no son del todo comparables. Solo ocho territorios."
+  },
+  {
+    "tabla": "medios_receptores",
+    "usar": true,
+    "tema": "Cada pago o concesión de una administración a un medio de comunicación (contratos, subvenciones y publicidad del Estado, comunidades y ayuntamientos), con quién paga, quién cobra y el partido que gobernaba",
+    "preguntas": [
+      "¿Cuánto ha pagado la Generalitat de Cataluña a la Cadena SER?",
+      "¿Qué administración ha pagado más a El País?",
+      "¿Cuánto dinero público han recibido los medios del grupo Vocento desde 2019?",
+      "¿Cuánto ha pagado el Ayuntamiento de Madrid a medios de comunicación?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe del pago, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe del pago, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "municipio"
+      ],
+      "nivel": "nivel_admin",
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "medio",
+        "nombre": "medio de comunicación",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación",
+        "total": null
+      },
+      {
+        "columna": "via",
+        "nombre": "vía del pago (Contrato, Subvención, Publicidad institucional del Estado, Publicidad comercial de empresas del Estado, Publicidad institucional autonómica/local)",
+        "total": null
+      },
+      {
+        "columna": "gobierno",
+        "nombre": "administración que paga",
+        "total": null
+      },
+      {
+        "columna": "partido",
+        "nombre": "partido que gobernaba",
+        "total": null
+      },
+      {
+        "columna": "titularidad",
+        "nombre": "titularidad del medio (privada o pública)",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "duplicado_probable",
+        "valor": "false"
+      }
+    ],
+    "notas": "Tabla de unas 150.000 filas, una por pago; sumar importe para totales por medio o administración. La base cambia según la vía (adjudicado, ejecutado, contratado, concedido) y la publicidad autonómica puede estar contratada o ejecutada, así que no es una suma contable homogénea. Hay importes negativos (correcciones). Para totales por medio es más ágil medios_receptores_resumen. 2026 en curso e incompleto."
+  },
+  {
+    "tabla": "medios_receptores_resumen",
+    "usar": true,
+    "tema": "Cuánto dinero público recibe cada medio de comunicación por año y vía (contratos, subvenciones, publicidad del Estado y de las comunidades) y su puesto en el ranking",
+    "preguntas": [
+      "¿Qué medio de comunicación recibe más dinero público?",
+      "¿Cuánto dinero público ha recibido El País?",
+      "¿Cuánto han cobrado las radios de la Cadena SER y COPE entre 2019 y 2025?",
+      "¿Qué grupo de comunicación recibe más publicidad de las comunidades autónomas?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "dinero público recibido por el medio en ese año y vía, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "dinero público recibido, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_pagos",
+        "nombre": "número de pagos",
+        "unidad": "pagos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_real",
+        "nombre": "total del medio en todos los años y vías (repetido en cada fila)",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "total_2019_2025_eur_real",
+        "nombre": "total del medio entre 2019 y 2025 (repetido en cada fila)",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "rango_privados",
+        "nombre": "puesto entre los medios privados",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "medio",
+        "nombre": "medio de comunicación",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación",
+        "total": null
+      },
+      {
+        "columna": "via",
+        "nombre": "vía del dinero (Contrato, Subvención, Publicidad institucional del Estado, Publicidad comercial de empresas del Estado, Publicidad institucional autonómica/local)",
+        "total": null
+      },
+      {
+        "columna": "titularidad",
+        "nombre": "titularidad (privada o pública)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por medio, año y vía. Las columnas total_* y estado_/territorial_/contratos_/subvenciones_ repiten el total del medio en cada fila: no sumarlas. Para el total de un medio usar total_eur_real de una sola fila o sumar importe_eur_real. 2026 en curso e incompleto; la ventana de datos varía por vía."
+  },
+  {
+    "tabla": "medios_subvenciones_anual",
+    "usar": true,
+    "tema": "Subvenciones públicas a medios de comunicación por año, nivel de la administración (Estado, comunidades, ayuntamientos) y comunidad",
+    "preguntas": [
+      "¿Cuánto dinero dan las comunidades en subvenciones a medios de comunicación?",
+      "¿Qué comunidad subvenciona más a los medios por habitante?",
+      "¿Cuánto ha dado el Ministerio de Cultura a medios en subvenciones en 2025?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "subvenciones a medios por habitante del ámbito, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe de subvenciones concedidas, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "importe de subvenciones concedidas, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_concesiones",
+        "nombre": "número de concesiones",
+        "unidad": "concesiones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_beneficiarios",
+        "nombre": "número de beneficiarios",
+        "unidad": "beneficiarios",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido que gobierna a 1 de julio",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos de la BDNS desde 2022 (año de concesión); 2026 está en curso e incompleto. El nivel estatal es el Estado (cod 00); el nivel local suma ayuntamientos de esa comunidad. El Gobierno Vasco no publica en la BDNS sus ayudas a medios. Cifras en euros constantes de 2025."
+  },
+  {
+    "tabla": "medios_subvenciones_beneficiarios",
+    "usar": true,
+    "tema": "Empresas y entidades que reciben subvenciones públicas como medios de comunicación, con lo recibido cada año y en total",
+    "preguntas": [
+      "¿Qué empresas han recibido más subvenciones públicas para medios?",
+      "¿Cuánto ha recibido en subvenciones una cooperativa de comunicación?",
+      "¿Qué asociaciones y fundaciones reciben ayudas a medios?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur_real",
+        "nombre": "subvenciones recibidas en el año, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_nominal",
+        "nombre": "subvenciones recibidas en el año, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_concesiones",
+        "nombre": "número de concesiones en el año",
+        "unidad": "concesiones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_real",
+        "nombre": "total recibido 2022-2026 (repetido en cada fila del beneficiario)",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "rango",
+        "nombre": "puesto del beneficiario por total recibido",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "forma_juridica",
+        "nombre": "forma jurídica",
+        "total": null
+      },
+      {
+        "columna": "tipos_ayuda",
+        "nombre": "tipos de ayuda (estructural, proyectos, lengua, digitalizacion_ia)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo personas jurídicas, una fila por NIF y año. total_* y rango se repiten en cada año del mismo beneficiario: no sumarlos entre filas. Datos 2022-2026 (2026 incompleto). Las administraciones concedentes son texto en mayúsculas."
+  },
+  {
+    "tabla": "medios_tv_ccaa_anual",
+    "usar": true,
+    "tema": "Dinero público que recibe cada radiotelevisión autonómica (TV3, EITB, Telemadrid, Canal Sur...) por año, por habitante, con su cuota de pantalla",
+    "preguntas": [
+      "¿Qué comunidad gasta más por habitante en su televisión autonómica?",
+      "¿Cuánto dinero público recibe TV3 al año?",
+      "¿Cuánto cuesta Telemadrid a cada madrileño?",
+      "¿Qué televisión autonómica tiene más audiencia?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "aportación pública por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "eur_hab_real"
+      },
+      {
+        "columna": "meur_real",
+        "nombre": "aportación pública total, en euros constantes",
+        "unidad": "millones de € (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "meur_nominal",
+        "nombre": "aportación pública total, en euros del año",
+        "unidad": "millones de € (nominales)",
+        "tipo": "flujo",
+        "real": "meur_real"
+      },
+      {
+        "columna": "eur_hab_nominal",
+        "nombre": "aportación pública por habitante, en euros del año",
+        "unidad": "€ por habitante (nominales)",
+        "tipo": "flujo",
+        "real": "eur_hab_real"
+      },
+      {
+        "columna": "cuota_audiencia",
+        "nombre": "cuota de pantalla del ente",
+        "unidad": "% de audiencia",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_canal_principal",
+        "nombre": "cuota de pantalla del canal principal",
+        "unidad": "% de audiencia",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "eur_hab_real_por_punto_cuota",
+        "nombre": "euros por habitante por cada punto de cuota de pantalla",
+        "unidad": "€ por habitante y punto de cuota",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "nombre",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "ente",
+        "nombre": "ente de radio y televisión autonómico",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido que gobierna",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos CNMC 2017-2025 de 14 comunidades con ente propio (Valencia por la Cuenta General). La columna tipo distingue la fuente de cada fila (percibido_cnmc, percibido_cnmc_eur_hab, liquidado), por lo que puede haber varias filas por comunidad y año; mirar tipo antes de promediar. Importes totales en millones de euros."
+  },
+  {
+    "tabla": "medios_tv_espana_anual",
+    "usar": true,
+    "tema": "Dinero público a RTVE y a las televisiones autonómicas en conjunto cada año desde 2008, por habitante",
+    "preguntas": [
+      "¿Cuánto dinero público recibe RTVE al año?",
+      "¿Cuánto paga cada español por la televisión pública?",
+      "¿Cómo ha evolucionado la financiación de RTVE desde 2008?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_eur_hab_real",
+        "nombre": "dinero público a RTVE y autonómicas por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "rtve_eur_hab_real",
+        "nombre": "dinero público a RTVE por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "autonomicas_eur_hab_real",
+        "nombre": "dinero público a las autonómicas por habitante, en euros constantes",
+        "unidad": "€ por habitante (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "rtve_meur_nominal",
+        "nombre": "dinero público a RTVE, en euros del año",
+        "unidad": "millones de € (nominales)",
+        "tipo": "flujo",
+        "real": "rtve_eur_hab_real"
+      },
+      {
+        "columna": "autonomicas_meur_nominal",
+        "nombre": "dinero público a las autonómicas, en euros del año",
+        "unidad": "millones de € (nominales)",
+        "tipo": "flujo",
+        "real": "autonomicas_eur_hab_real"
+      },
+      {
+        "columna": "total_meur_nominal",
+        "nombre": "dinero público total a RTVE y autonómicas, en euros del año",
+        "unidad": "millones de € (nominales)",
+        "tipo": "flujo",
+        "real": "total_eur_hab_real"
+      },
+      {
+        "columna": "cuota_la1",
+        "nombre": "cuota de pantalla de La 1",
+        "unidad": "% de audiencia",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. RTVE desde 2008 (Estado más tasas de operadores); las autonómicas y el total solo desde 2017 y en años con las 14 comunidades con ente. Importes en millones de euros nominales; la cifra por habitante está en euros de 2025."
+  },
+  {
+    "tabla": "medios_tv_gobiernos",
+    "usar": true,
+    "tema": "Dinero público a las televisiones autonómicas según el partido que gobierna la comunidad, por habitante y año",
+    "preguntas": [
+      "¿Qué partido gasta más en televisión autonómica por habitante?",
+      "¿Gastan más en su televisión las comunidades del PP o del PSOE?",
+      "¿Cuánto gastan en televisión pública las comunidades gobernadas por el PNV?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real_anio",
+        "nombre": "aportación pública media anual por habitante, en euros constantes",
+        "unidad": "€ por habitante y año (euros reales de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "meur_real",
+        "nombre": "aportación pública total del periodo, en euros constantes",
+        "unidad": "millones de € (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_dinero",
+        "nombre": "porcentaje del dinero total que llevan las comunidades del partido",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_poblacion",
+        "nombre": "porcentaje de la población que viven en comunidades del partido",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ratio_observado_esperado",
+        "nombre": "dinero recibido frente al esperable por población (1 = lo esperable)",
+        "unidad": "veces lo esperado",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "partido del Gobierno autonómico",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo seis filas, una por partido, con el agregado 2017-2025 (anio_desde y anio_hasta). Los partidos con muy pocos años-comunidad (Coalición Canaria, ERC, Junts) tienen poca base."
+  },
+  {
+    "tabla": "mercado_energia_carburantes",
+    "usar": true,
+    "tema": "Precio semanal de la gasolina, el gasóleo y el gas licuado en España y en la media de la UE desde 2005",
+    "preguntas": [
+      "¿A cuánto está hoy el litro de gasolina en España?",
+      "¿Es más cara la gasolina en España o en la media de la UE?",
+      "¿Cómo ha evolucionado el precio del diésel desde 2005?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_litro_real",
+        "nombre": "precio por litro con impuestos, en euros constantes",
+        "unidad": "€/litro (euros reales de 2025)",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "eur_litro",
+        "nombre": "precio por litro con impuestos, en euros del momento",
+        "unidad": "€/litro (nominales)",
+        "tipo": "precio",
+        "real": "eur_litro_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "semana",
+      "grano": "semanal",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "territorio",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "producto",
+        "nombre": "carburante",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Weekly Oil Bulletin de la UE: precio con impuestos. Solo hay España (ES) y la media de la UE (EU). Los precios no se suman. El último dato es de la semana del 28 de septiembre de 2026."
+  },
+  {
+    "tabla": "mercado_energia_hogares",
+    "usar": true,
+    "tema": "Precio de la electricidad y del gas natural para los hogares por semestre en España y otros países europeos",
+    "preguntas": [
+      "¿Cuánto cuesta el kWh de electricidad en España?",
+      "¿Es más cara la luz en España que en Alemania?",
+      "¿Cómo ha evolucionado el precio del gas natural para los hogares?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_kwh_real",
+        "nombre": "precio del kWh con impuestos, en euros constantes",
+        "unidad": "€/kWh (euros reales de 2025)",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "eur_kwh",
+        "nombre": "precio del kWh con impuestos, en euros del semestre",
+        "unidad": "€/kWh (nominales)",
+        "tipo": "precio",
+        "real": "eur_kwh_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "semestre_inicio",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía (Electricidad o Gas natural)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos semestrales de Eurostat para un consumidor doméstico medio (electricidad banda DC, gas banda D2), con impuestos. La columna de tiempo es la fecha de inicio del semestre; la columna semestre (2025-S1) es la etiqueta legible. Último dato: segundo semestre de 2025. Países: España, Alemania, Francia, Italia, Portugal y UE-27."
+  },
+  {
+    "tabla": "mercado_energia_ipc",
+    "usar": true,
+    "tema": "Cómo suben o bajan los precios de la energía (luz, gas, gasolina, gasóleo, butano) mes a mes y frente al IPC general",
+    "preguntas": [
+      "¿Cuánto ha subido la luz en el último año?",
+      "¿Cómo ha evolucionado el precio de la gasolina frente a la inflación general?",
+      "¿Cuánto pesa la electricidad en el IPC?"
+    ],
+    "medidas": [
+      {
+        "columna": "var_anual",
+        "nombre": "variación del precio en los últimos 12 meses",
+        "unidad": "% anual",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice de precios (base INE)",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "indice_2019",
+        "nombre": "índice de precios con 2019 = 100",
+        "unidad": "índice (2019 = 100)",
+        "tipo": "indice"
+      },
+      {
+        "columna": "ponderacion",
+        "nombre": "peso del producto en la cesta del IPC",
+        "unidad": "por mil de la cesta",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "contribucion_aprox",
+        "nombre": "contribución aproximada a la inflación general",
+        "unidad": "puntos porcentuales",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "producto",
+        "nombre": "producto energético (Electricidad, Gas natural, Gasolina, Gasóleo de automoción, Gasóleo de calefacción, Butano y propano, Energía (total), IPC general)",
+        "total": "IPC general"
+      }
+    ],
+    "filtros": [],
+    "notas": "IPC del INE con ponderaciones de 2026. Electricidad, calefacción, energía total e IPC general desde 2002; gas, gasolina, gasóleo de automoción y butano desde 2017. Las tasas no se suman. Para comparar el precio de la energía con el general usar la fila IPC general."
+  },
+  {
+    "tabla": "mercado_ipc_ccaa",
+    "usar": true,
+    "tema": "Inflación (IPC) de cada comunidad autónoma y de España, mensual y anual, y cuánto han subido los precios desde 2019",
+    "preguntas": [
+      "¿Cuál es la inflación en Madrid?",
+      "¿Qué comunidad tiene la inflación más alta?",
+      "¿Cuánto han subido los precios en Andalucía desde 2019?",
+      "¿Cómo ha evolucionado el IPC en España desde 1978?"
+    ],
+    "medidas": [
+      {
+        "columna": "var_anual",
+        "nombre": "inflación de los últimos 12 meses",
+        "unidad": "% anual",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "var_mensual",
+        "nombre": "variación de precios respecto al mes anterior",
+        "unidad": "% mensual",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "subida_desde_2019",
+        "nombre": "subida acumulada de precios desde diciembre de 2019",
+        "unidad": "% acumulado",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE tabla 76140. Sin nombre de comunidad: solo código INE (00 es el Total nacional, 13 Madrid). Ceuta (18) y Melilla (19) solo desde unos años después. Las tasas no se suman ni se promedian entre comunidades sin ponderar. Último dato: agosto de 2026."
+  },
+  {
+    "tabla": "mercado_ipc_grupos",
+    "usar": true,
+    "tema": "Inflación (IPC) en España por grupos de gasto (alimentos, vivienda y energía, transporte, restaurantes, ropa...) mes a mes, con el índice general",
+    "preguntas": [
+      "¿Cuánto han subido los alimentos en el último año?",
+      "¿Cuál es la inflación general en España?",
+      "¿Qué grupo de gasto ha subido más de precio?",
+      "¿Cómo ha evolucionado el IPC de transporte desde 2020?"
+    ],
+    "medidas": [
+      {
+        "columna": "var_anual",
+        "nombre": "variación de precios de los últimos 12 meses",
+        "unidad": "% anual",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "var_mensual",
+        "nombre": "variación de precios respecto al mes anterior",
+        "unidad": "% mensual",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice de precios del grupo (base INE)",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "ponderacion",
+        "nombre": "peso del grupo en la cesta de la compra del IPC",
+        "unidad": "por mil de la cesta",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "contribucion_aprox",
+        "nombre": "contribución aproximada del grupo a la inflación general",
+        "unidad": "puntos porcentuales",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "grupo_corto",
+        "nombre": "grupo de gasto del IPC (General para el índice total)",
+        "total": "General"
+      }
+    ],
+    "filtros": [],
+    "notas": "IPC nacional del INE con grupos ECOICOP v2 y ponderaciones de 2026. La fila General es el IPC total. Tasas e índices no se suman; la contribución aproximada de los grupos sí aproxima la tasa general. Último dato: agosto de 2026."
+  }
+]

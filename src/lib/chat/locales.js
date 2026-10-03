@@ -87,17 +87,27 @@ export async function crearDecisor({ device = 'webgpu', dtype = 'q4f16', alProgr
  * Embebedor de consultas (el catálogo trae ya los vectores de las tablas y su configuración:
  * catalogo.embeddings = { modelo, dtype, dims }). Si el modelo da más dimensiones que las del
  * catálogo, se recortan (Matryoshka) y se renormaliza.
- * @param {{ modelo?: string, dtype?: string, dims?: number, device?: string, alProgreso?: Function, cacheDir?: string }} [o]
+ *
+ * `archivo` elige otra variante del modelo: el q4 normal de EmbeddingGemma usa el nodo
+ * GatherBlockQuantized, que onnxruntime-web no tiene («Could not find an implementation for
+ * GatherBlockQuantized»; en Node sí funciona). model_no_gather_q4 es el mismo q4 sin ese nodo.
+ * pipeline() no deja elegir el fichero, así que se carga el modelo y se hace la media a mano
+ * (lo mismo que hace pipeline('feature-extraction') con pooling 'mean').
+ * @param {{ modelo?: string, dtype?: string, archivo?: string, dims?: number, device?: string, alProgreso?: Function, cacheDir?: string }} [o]
  */
-export async function crearEmbebedor({ modelo = MODELO_EMBEDDINGS, dtype = 'q4', dims, device, alProgreso, cacheDir } = {}) {
-	const { pipeline } = await cargarLibreria({ cacheDir });
-	const extraer = await pipeline('feature-extraction', modelo, {
+export async function crearEmbebedor({ modelo = MODELO_EMBEDDINGS, dtype = 'q4', archivo, dims, device, alProgreso, cacheDir } = {}) {
+	const { AutoTokenizer, AutoModel, mean_pooling } = await cargarLibreria({ cacheDir });
+	const alCargar = progreso(alProgreso);
+	const tok = await AutoTokenizer.from_pretrained(modelo, { progress_callback: alCargar });
+	const red = await AutoModel.from_pretrained(modelo, {
 		dtype,
+		...(archivo ? { model_file_name: archivo } : {}),
 		...(device ? { device } : {}),
-		progress_callback: progreso(alProgreso)
+		progress_callback: alCargar
 	});
 	return async (texto) => {
-		const v = (await extraer(texto, { pooling: 'mean', normalize: true })).data;
+		const entrada = tok([texto], { padding: true, truncation: true });
+		const v = mean_pooling((await red(entrada)).last_hidden_state, entrada.attention_mask).normalize(2, -1).data;
 		if (!dims || dims >= v.length) return v;
 		const r = v.slice(0, dims);
 		const norma = Math.hypot(...r);

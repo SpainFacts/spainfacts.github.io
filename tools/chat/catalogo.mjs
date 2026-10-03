@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import { DuckDBInstance } from '@duckdb/node-api';
 
@@ -191,6 +192,21 @@ if (fs.existsSync(refTerritorios)) {
 }
 con.closeSync?.();
 
+// ---------- Capa semántica ----------
+// Fichas escritas a mano (tools/chat/semantica/lote-*.json, ver LEEME.md) con la cifra
+// principal, unidades, filtros por defecto y dimensiones de cada tabla: el chat las prefiere
+// a sus reglas generales.
+const DIR_SEMANTICA = path.join(path.dirname(fileURLToPath(import.meta.url)), 'semantica');
+const fichas = new Map();
+for (const f of fs.existsSync(DIR_SEMANTICA) ? fs.readdirSync(DIR_SEMANTICA) : []) {
+	if (!/^lote-.*\.json$/.test(f)) continue;
+	for (const { tabla, ...ficha } of JSON.parse(fs.readFileSync(path.join(DIR_SEMANTICA, f), 'utf8'))) fichas.set(tabla.toLowerCase(), ficha);
+}
+for (const t of tablas) {
+	const ficha = fichas.get(t.nombre.toLowerCase());
+	if (ficha) t.semantica = ficha;
+}
+
 // ---------- Vectores para la búsqueda semántica ----------
 // Con un modelo pequeño de embeddings (el mismo que carga el navegador en /chat) se guarda
 // un vector por tabla, así «murieron» encuentra «defunciones» sin listas de sinónimos.
@@ -201,23 +217,37 @@ con.closeSync?.();
 const EMBEDDINGS = {
 	modelo: 'onnx-community/embeddinggemma-300m-ONNX',
 	dtype: 'q4',
+	// Variante sin GatherBlockQuantized: el q4 normal no carga en el navegador (onnxruntime-web)
+	archivo: 'model_no_gather',
 	dims: 256,
 	prefijo_consulta: 'task: search result | query: ',
 	prefijo_documento: 'title: none | text: '
 };
 let embeddings = null;
 if (!args.includes('--sin-vectores')) {
-	const { pipeline, env } = await import('@huggingface/transformers');
+	// El mismo embebedor que usa el navegador en /chat: los vectores de tablas y preguntas deben
+	// salir del mismo fichero de modelo y del mismo cálculo.
 	// Ruta corta (onnxruntime no abre rutas de más de 260 caracteres en Windows); en el deploy
 	// esta carpeta va en la caché de Actions para no descargar el modelo cada vez
-	env.cacheDir = process.env.SPAINFACTS_MODELOS ?? path.join(os.homedir(), '.cache', 'tjs');
-	const extraer = await pipeline('feature-extraction', EMBEDDINGS.modelo, { dtype: EMBEDDINGS.dtype });
+	const { crearEmbebedor } = await import('../../src/lib/chat/locales.js');
+	const extraer = await crearEmbebedor({
+		modelo: EMBEDDINGS.modelo,
+		dtype: EMBEDDINGS.dtype,
+		archivo: EMBEDDINGS.archivo,
+		cacheDir: process.env.SPAINFACTS_MODELOS ?? path.join(os.homedir(), '.cache', 'tjs')
+	});
+	// Con ficha semántica, el tema, las preguntas de ejemplo y las cifras en lenguaje llano dicen
+	// mejor de qué va la tabla que los nombres de columna
+	const textoFicha = (s, t) => `${s.tema}. ${s.preguntas.join(' ')} ${t.paginas.map((p) => p.titulo).join('. ')}. Cifras: ${s.medidas.map((m) => m.nombre).join(', ')}`;
 	const textoTabla = (t) =>
+		t.semantica?.usar
+			? `${EMBEDDINGS.prefijo_documento}${t.nombre.replace(/_/g, ' ')}. ${textoFicha(t.semantica, t)}`.slice(0, 1500)
+			:
 		`${EMBEDDINGS.prefijo_documento}${t.nombre.replace(/_/g, ' ')}. ${t.descripcion} ${t.paginas.map((p) => p.titulo).join('. ')}. Columnas: ${t.columnas
 			.map((c) => c.nombre.replace(/_/g, ' '))
 			.join(', ')}`.slice(0, 1500);
 	for (const t of tablas) {
-		const v = (await extraer(textoTabla(t), { pooling: 'mean', normalize: true })).data.slice(0, EMBEDDINGS.dims);
+		const v = (await extraer(textoTabla(t))).slice(0, EMBEDDINGS.dims);
 		const norma = Math.hypot(...v);
 		t.vec = Buffer.from(Int8Array.from(v, (x) => Math.max(-127, Math.min(127, Math.round((x / norma) * 127)))).buffer).toString('base64');
 	}

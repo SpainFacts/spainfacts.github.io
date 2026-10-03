@@ -120,11 +120,18 @@
         return decisores.get(clave);
     }
 
-    /** Embebedor de la búsqueda semántica (118 MB, solo en modo decisión) */
+    /** Embebedor de la búsqueda semántica (~195 MB, solo en modo decisión). Si no carga en este
+     *  navegador, el chat sigue buscando solo por palabras en vez de fallar */
+    let sinEmbebedor = false;
     async function obtenerEmbebedor() {
-        if (!embeber && ctx?.catalogo?.embeddings) {
-            const { crearEmbebedor } = await import("../chat/locales.js");
-            embeber = await crearEmbebedor({ modelo: ctx.catalogo.embeddings.modelo, dtype: ctx.catalogo.embeddings.dtype, dims: ctx.catalogo.embeddings.dims, alProgreso: (p, texto) => (progresoModelo = { p, texto }) });
+        if (!embeber && !sinEmbebedor && ctx?.catalogo?.embeddings) {
+            try {
+                const { crearEmbebedor } = await import("../chat/locales.js");
+                embeber = await crearEmbebedor({ modelo: ctx.catalogo.embeddings.modelo, dtype: ctx.catalogo.embeddings.dtype, archivo: ctx.catalogo.embeddings.archivo, dims: ctx.catalogo.embeddings.dims, alProgreso: (p, texto) => (progresoModelo = { p, texto }) });
+            } catch (e) {
+                console.warn("Búsqueda semántica no disponible; se busca solo por palabras:", e);
+                sinEmbebedor = true;
+            }
         }
         return embeber;
     }

@@ -1,0 +1,2090 @@
+[
+  {
+    "tabla": "empresas_id_ccaa",
+    "usar": true,
+    "tema": "Gasto en investigación y desarrollo (I+D) de cada comunidad autónoma y número de investigadores",
+    "preguntas": [
+      "¿Cuánto invierte Madrid en I+D?",
+      "¿Qué comunidad gasta más en investigación por habitante?",
+      "¿Cómo ha evolucionado el gasto en I+D de Cataluña?",
+      "¿Cuántos investigadores hay por cada 1.000 ocupados en el País Vasco?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_pib",
+        "nombre": "gasto en I+D sobre el PIB regional",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto en I+D por habitante en euros constantes de 2025",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "eur_hab",
+        "nombre": "gasto en I+D por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gasto_real_meur",
+        "nombre": "gasto total en I+D en euros constantes de 2025",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "gasto total en I+D en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "investigadores_1000ocup",
+        "nombre": "investigadores por cada 1.000 ocupados",
+        "unidad": "por cada 1.000 ocupados",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "investigadores_ejc",
+        "nombre": "investigadores en equivalencia a jornada completa",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector que ejecuta el gasto",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat, último año 2024. Código 00 es España (excluirlo en rankings de comunidades); los códigos son los del INE y la tabla no trae nombres. Sector Total suma Empresas, Administraciones públicas, Universidades e IPSFL; no mezclar sectores al sumar."
+  },
+  {
+    "tabla": "empresas_id_paises",
+    "usar": true,
+    "tema": "Gasto en I+D de España frente a otros países europeos y del mundo",
+    "preguntas": [
+      "¿Cuánto gasta España en I+D comparado con la UE?",
+      "¿Qué país europeo invierte más en investigación sobre su PIB?",
+      "¿Cómo ha evolucionado el gasto en I+D de España desde 2000?",
+      "¿Cuántos investigadores por cada 1.000 ocupados tiene Alemania?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_pib",
+        "nombre": "gasto en I+D sobre el PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto en I+D por habitante en euros constantes (real para España y UE-27)",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "eur_hab",
+        "nombre": "gasto en I+D por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "gasto total en I+D en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "investigadores_1000ocup",
+        "nombre": "investigadores por cada 1.000 ocupados",
+        "unidad": "por cada 1.000 ocupados",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector que ejecuta el gasto",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat hasta 2024. Incluye agregados UE-27 y Zona euro como si fueran países (no entran en rankings de países). eur_hab_real solo está completa para España y UE-27."
+  },
+  {
+    "tabla": "empresas_sociedades_anual",
+    "usar": true,
+    "tema": "Sociedades mercantiles que se crean y se disuelven cada año en España y en cada comunidad, y su capital",
+    "preguntas": [
+      "¿Cuántas empresas se crearon en Madrid en 2023?",
+      "¿Qué comunidad crea más sociedades por habitante?",
+      "¿Cómo han evolucionado las sociedades creadas en España desde 2008?",
+      "¿Cuántas sociedades se disolvieron en Cataluña el año pasado?"
+    ],
+    "medidas": [
+      {
+        "columna": "constituidas_100k",
+        "nombre": "sociedades constituidas por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "constituidas",
+        "nombre": "sociedades mercantiles constituidas",
+        "unidad": "sociedades",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "disueltas",
+        "nombre": "sociedades mercantiles disueltas",
+        "unidad": "sociedades",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo",
+        "nombre": "saldo de sociedades (constituidas menos disueltas)",
+        "unidad": "sociedades",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "disueltas_100k",
+        "nombre": "sociedades disueltas por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "saldo_100k",
+        "nombre": "saldo de sociedades por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "ratio_disueltas",
+        "nombre": "sociedades disueltas por cada 100 constituidas",
+        "unidad": "por cada 100 constituidas",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "capital_real",
+        "nombre": "capital suscrito en euros constantes de 2025",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "capital_nominal",
+        "nombre": "capital suscrito en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "capital_medio_real",
+        "nombre": "capital medio por sociedad constituida en euros constantes",
+        "unidad": "€",
+        "tipo": "media"
+      },
+      {
+        "columna": "capital_real_hab",
+        "nombre": "capital suscrito por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE (registro mercantil), años completos hasta 2025. Código 00 es España (excluirlo en rankings de comunidades); códigos INE sin nombres. Los euros están en euros, no en miles."
+  },
+  {
+    "tabla": "empresas_sociedades_mensual",
+    "usar": true,
+    "tema": "Sociedades mercantiles constituidas y disueltas mes a mes, con sumas de los últimos 12 meses",
+    "preguntas": [
+      "¿Cuántas empresas se crearon el último mes en España?",
+      "¿Cuántas sociedades se han creado en los últimos 12 meses en Andalucía?",
+      "¿Cómo ha evolucionado la creación de empresas en Madrid mes a mes?"
+    ],
+    "medidas": [
+      {
+        "columna": "constituidas",
+        "nombre": "sociedades constituidas en el mes",
+        "unidad": "sociedades",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "disueltas",
+        "nombre": "sociedades disueltas en el mes",
+        "unidad": "sociedades",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo",
+        "nombre": "saldo del mes (constituidas menos disueltas)",
+        "unidad": "sociedades",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "capital_real",
+        "nombre": "capital suscrito en el mes en euros constantes de 2025",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "capital_nominal",
+        "nombre": "capital suscrito en el mes en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "constituidas_12m",
+        "nombre": "sociedades constituidas en los últimos 12 meses",
+        "unidad": "sociedades",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "disueltas_12m",
+        "nombre": "sociedades disueltas en los últimos 12 meses",
+        "unidad": "sociedades",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "capital_real_12m",
+        "nombre": "capital suscrito en los últimos 12 meses en euros constantes",
+        "unidad": "€",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "constituidas_12m_100k",
+        "nombre": "sociedades constituidas en 12 meses por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "disueltas_12m_100k",
+        "nombre": "sociedades disueltas en 12 meses por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE tabla 13912 hasta julio de 2026. Las columnas _12m ya son sumas móviles: no volver a sumarlas entre meses. Código 00 es España; códigos INE sin nombres. Capital en euros, no miles."
+  },
+  {
+    "tabla": "empresas_tamano_ue",
+    "usar": true,
+    "tema": "Reparto de las empresas, el empleo y el valor añadido según su tamaño (micro, pequeñas, medianas y grandes) en España y Europa",
+    "preguntas": [
+      "¿Qué porcentaje de las empresas españolas son microempresas?",
+      "¿Cuánto empleo generan las grandes empresas en España?",
+      "¿Cuántas pymes tiene España frente a Alemania?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_empleo",
+        "nombre": "porcentaje del empleo que aporta cada tamaño de empresa",
+        "unidad": "% del empleo",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_empresas",
+        "nombre": "porcentaje de las empresas de cada tamaño",
+        "unidad": "% de las empresas",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_vab",
+        "nombre": "porcentaje del valor añadido de cada tamaño",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "empresas",
+        "nombre": "número de empresas",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados",
+        "nombre": "personas ocupadas",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "vab_meur",
+        "nombre": "valor añadido bruto",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tamano",
+        "nombre": "tamaño de la empresa",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat sbs_sc_ovw, 2021-2024, 11 países y UE-27. No hay fila de total: los porcentajes de las cuatro categorías suman 100 para cada país y año. Micro 0-9, pequeñas 10-49, medianas 50-249, grandes 250 o más ocupados."
+  },
+  {
+    "tabla": "energia_emisiones_gei",
+    "usar": true,
+    "tema": "Emisiones de gases de efecto invernadero de España por sector (transporte, industria, agricultura, electricidad...)",
+    "preguntas": [
+      "¿Cuántas emisiones de gases de efecto invernadero tiene España?",
+      "¿Qué sector contamina más?",
+      "¿Cómo han evolucionado las emisiones del transporte desde 1990?",
+      "¿Cuánto emite la generación eléctrica?"
+    ],
+    "medidas": [
+      {
+        "columna": "millones_toneladas_co2eq",
+        "nombre": "emisiones de gases de efecto invernadero (sin sumideros)",
+        "unidad": "millones de t CO2 equivalente",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "porcentaje_total",
+        "nombre": "porcentaje del total de emisiones del año",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector emisor",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Inventario nacional de Eurostat, solo España, 1990-2024, sin uso del suelo (LULUCF). No hay fila de total: se obtiene sumando los sectores de un año (unos 268 millones de t en 2024). Datos absolutos, no por habitante."
+  },
+  {
+    "tabla": "energia_mix_electrico",
+    "usar": true,
+    "tema": "Cuánta electricidad genera España al año con cada tecnología (eólica, solar, nuclear, gas, carbón...)",
+    "preguntas": [
+      "¿Cuánta electricidad genera la energía solar en España?",
+      "¿Qué tecnología produce más electricidad?",
+      "¿Cómo ha evolucionado la generación eólica desde 2010?",
+      "¿Cuánto produce la nuclear?"
+    ],
+    "medidas": [
+      {
+        "columna": "generacion_twh",
+        "nombre": "electricidad generada",
+        "unidad": "TWh",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "porcentaje_total",
+        "nombre": "porcentaje de la generación total del año",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología de generación",
+        "total": null
+      },
+      {
+        "columna": "tipo_fuente",
+        "nombre": "tipo de fuente (renovable o no renovable)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "REE (REData), solo España, años completos 2007-2025. No hay fila de total: sumar tecnologías de un año (unos 272 TWh en 2025). Para el total o la cuota renovable ya calculada, usar energia_resumen_anual_mix."
+  },
+  {
+    "tabla": "energia_potencia_instalada",
+    "usar": true,
+    "tema": "Potencia eléctrica instalada en España a final de año por tecnología (solar, eólica, gas, nuclear...)",
+    "preguntas": [
+      "¿Cuánta potencia solar fotovoltaica hay instalada en España?",
+      "¿Cuántos megavatios de eólica tiene España?",
+      "¿Cómo ha crecido la potencia solar desde 2015?"
+    ],
+    "medidas": [
+      {
+        "columna": "potencia_mw",
+        "nombre": "potencia instalada a cierre de año",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "porcentaje_total",
+        "nombre": "porcentaje de la potencia total instalada",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología",
+        "total": null
+      },
+      {
+        "columna": "tipo",
+        "nombre": "tipo de fuente (renovable, no renovable u otras)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, 2015-2024, fuente Eurostat nrg_inf_epc. Es un stock a fin de año: no se suma entre años, solo entre tecnologías del mismo año (unos 136.000 MW en 2024). El autoconsumo puede no estar incluido."
+  },
+  {
+    "tabla": "energia_resumen_anual_mix",
+    "usar": true,
+    "tema": "Resumen anual del sistema eléctrico español: generación total, parte renovable y demanda",
+    "preguntas": [
+      "¿Qué porcentaje de la electricidad en España es renovable?",
+      "¿Cuánta electricidad demanda España al año?",
+      "¿Cómo ha evolucionado la cuota renovable desde 2007?",
+      "¿Qué porcentaje de la electricidad está libre de emisiones?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_renovable_pct",
+        "nombre": "cuota de generación renovable",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "cuota_libre_emisiones_pct",
+        "nombre": "cuota de generación libre de emisiones",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "total_twh",
+        "nombre": "generación eléctrica total",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "renovable_twh",
+        "nombre": "generación renovable",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "no_renovable_twh",
+        "nombre": "generación no renovable",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "demanda_twh",
+        "nombre": "demanda eléctrica",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "REE, solo España, años completos 2007-2025, una fila por año. La demanda es menor que la generación porque el sistema exporta y hay pérdidas."
+  },
+  {
+    "tabla": "gobierno_actos_anual",
+    "usar": true,
+    "tema": "Decretos-ley, leyes e indultos aprobados cada año desde 1978 y presidente del Gobierno de ese año",
+    "preguntas": [
+      "¿Cuántos decretos-ley aprobó el Gobierno en 2020?",
+      "¿En qué año se aprobaron más leyes?",
+      "¿Cuántos indultos hubo en 2025?",
+      "¿Cómo ha evolucionado el uso del decreto-ley?"
+    ],
+    "medidas": [
+      {
+        "columna": "rdl",
+        "nombre": "reales decretos-ley aprobados",
+        "unidad": "decretos-ley",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "leyes",
+        "nombre": "leyes aprobadas",
+        "unidad": "leyes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_rdl",
+        "nombre": "decretos-ley como porcentaje de las normas con rango de ley del año",
+        "unidad": "% de las normas",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "indultos",
+        "nombre": "reales decretos de indulto aprobados",
+        "unidad": "indultos",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "presidente",
+        "nombre": "presidente del Gobierno que más días gobernó ese año",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido del presidente",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Fuente BOE, 1978-2026. El último año (2026) está en curso e incompleto (anio_en_curso = true). Un año con cambio de gobierno se atribuye a un solo presidente."
+  },
+  {
+    "tabla": "gobierno_decretos_ley",
+    "usar": false,
+    "notas": "Lista de decretos-ley uno por uno, sin cifras que consultar; los totales por año y por presidente están en gobierno_actos_anual y gobierno_presidencias_resumen."
+  },
+  {
+    "tabla": "gobierno_indultos_mensual",
+    "usar": true,
+    "tema": "Número de reales decretos de indulto aprobados cada mes desde 1977",
+    "preguntas": [
+      "¿Cuántos indultos concedió el Gobierno en marzo de 2026?",
+      "¿En qué mes se aprobaron más indultos?",
+      "¿Cómo ha evolucionado el número de indultos?"
+    ],
+    "medidas": [
+      {
+        "columna": "indultos",
+        "nombre": "reales decretos de indulto aprobados en el mes",
+        "unidad": "indultos",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "presidente",
+        "nombre": "presidente del Gobierno a mitad de mes",
+        "total": null
+      },
+      {
+        "columna": "familia",
+        "nombre": "partido del presidente",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo aparecen los meses con algún indulto (no hay filas con cero). Hay una fila anómala del año 1200 (sin presidente) que conviene excluir (anio >= 1977). El último mes publicado es julio de 2026 y 2026 está incompleto."
+  },
+  {
+    "tabla": "gobierno_presidencias_resumen",
+    "usar": true,
+    "tema": "Comparación entre presidentes del Gobierno y partidos en decretos-ley, leyes e indultos, ajustada por el tiempo que gobernaron",
+    "preguntas": [
+      "¿Qué presidente ha aprobado más decretos-ley por año de gobierno?",
+      "¿Quién concedió más indultos por año, Aznar o Sánchez?",
+      "¿Usa más el decreto-ley el PSOE o el PP?",
+      "¿Cuántas leyes aprobó Felipe González por año?"
+    ],
+    "medidas": [
+      {
+        "columna": "rdl_por_anio",
+        "nombre": "decretos-ley aprobados por año de gobierno",
+        "unidad": "decretos-ley por año",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "leyes_por_anio",
+        "nombre": "leyes aprobadas por año de gobierno",
+        "unidad": "leyes por año",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "indultos_por_anio",
+        "nombre": "indultos aprobados por año de gobierno",
+        "unidad": "indultos por año",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_rdl",
+        "nombre": "decretos-ley como porcentaje de las normas con rango de ley",
+        "unidad": "% de las normas",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "rdl",
+        "nombre": "decretos-ley aprobados en total",
+        "unidad": "decretos-ley",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "leyes",
+        "nombre": "leyes aprobadas en total",
+        "unidad": "leyes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "indultos",
+        "nombre": "indultos aprobados en total",
+        "unidad": "indultos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "anios",
+        "nombre": "años gobernados",
+        "unidad": "años",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "rdl_ratio",
+        "nombre": "decretos-ley observados frente a esperados según el tiempo gobernado",
+        "unidad": "veces lo esperado",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "indultos_ratio",
+        "nombre": "indultos observados frente a esperados según el tiempo gobernado",
+        "unidad": "veces lo esperado",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "nivel",
+        "nombre": "tipo de grupo (presidente o partido)",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "presidente o partido",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "10 filas sin periodo: 7 presidentes (nivel Presidente) y 3 partidos (PSOE, PP, UCD; nivel Partido). Presidentes y partidos son vistas distintas de lo mismo: no sumar ambos niveles. Los totales dependen de cuánto gobernó cada uno, por eso la medida principal es por año."
+  },
+  {
+    "tabla": "gobierno_presupuestos",
+    "usar": true,
+    "tema": "Si los Presupuestos Generales del Estado se aprobaron a tiempo, tarde o se prorrogaron cada año desde 1978",
+    "preguntas": [
+      "¿Cuántos años se han prorrogado los presupuestos?",
+      "¿Están prorrogados los presupuestos de este año?",
+      "¿Qué Gobierno ha tenido más presupuestos prorrogados?",
+      "¿Cuántos días estuvieron prorrogados los presupuestos de 2024?"
+    ],
+    "medidas": [
+      {
+        "columna": "dias_prorroga",
+        "nombre": "días con los presupuestos prorrogados o sin ley aprobada",
+        "unidad": "días",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "ejercicio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "situacion",
+        "nombre": "situación del presupuesto",
+        "total": null
+      },
+      {
+        "columna": "presidente_responsable",
+        "nombre": "presidente que debía presentarlo",
+        "total": null
+      },
+      {
+        "columna": "partido_responsable",
+        "nombre": "partido del presidente responsable",
+        "total": null
+      },
+      {
+        "columna": "presidente_1_enero",
+        "nombre": "presidente a 1 de enero",
+        "total": null
+      },
+      {
+        "columna": "partido_1_enero",
+        "nombre": "partido del presidente a 1 de enero",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por ejercicio (1978-2026). Situación: A tiempo, Tarde, Prorrogado y Prorrogado (en curso) para el ejercicio actual, que está abierto. Para contar años prorrogados usar COUNT(*) por situación."
+  },
+  {
+    "tabla": "gobiernos_presidentes",
+    "usar": false,
+    "notas": "Lista de presidentes con fechas, sin cifras que consultar."
+  },
+  {
+    "tabla": "incendios_anual",
+    "usar": true,
+    "tema": "Hectáreas quemadas y número de incendios forestales en España cada año desde 2000",
+    "preguntas": [
+      "¿Cuántas hectáreas se han quemado este año?",
+      "¿Cuál fue el peor año de incendios en España?",
+      "¿Cuántos incendios hubo en 2022?",
+      "¿Cómo han evolucionado los incendios forestales?"
+    ],
+    "medidas": [
+      {
+        "columna": "ha_quemadas",
+        "nombre": "superficie quemada",
+        "unidad": "ha",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "n_incendios",
+        "nombre": "número de incendios (de más de 30 ha)",
+        "unidad": "incendios",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_grandes_incendios",
+        "nombre": "grandes incendios (más de 500 ha)",
+        "unidad": "incendios",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_mayor_incendio",
+        "nombre": "superficie del mayor incendio del año",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_natura2000",
+        "nombre": "superficie quemada en Red Natura 2000",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_natura2000",
+        "nombre": "porcentaje de lo quemado dentro de Red Natura 2000",
+        "unidad": "% de la superficie quemada",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ha_arbolado",
+        "nombre": "superficie quemada de arbolado",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_matorral",
+        "nombre": "superficie quemada de matorral",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_agricola",
+        "nombre": "superficie quemada agrícola",
+        "unidad": "ha",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EFFIS (Copernicus), solo España, una fila por año. El año en curso (es_anio_actual) está incompleto hasta el 24 de septiembre de 2026; para compararlo con años cerrados usar las columnas _misma_fecha (n_incendios_misma_fecha, ha_misma_fecha). Solo recoge incendios de unas 30 ha o más."
+  },
+  {
+    "tabla": "incendios_areas_quemadas",
+    "usar": true,
+    "tema": "Cada incendio forestal grande en España con su fecha, provincia, municipio y hectáreas quemadas",
+    "preguntas": [
+      "¿Cuál ha sido el mayor incendio de este año?",
+      "¿Cuántas hectáreas ardieron en el incendio de Zamora?",
+      "¿Qué incendios hubo en Ourense en 2025?",
+      "¿Cuántos incendios grandes ha habido en León?"
+    ],
+    "medidas": [
+      {
+        "columna": "area_ha",
+        "nombre": "superficie quemada por el incendio",
+        "unidad": "ha",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ha_natura2000",
+        "nombre": "superficie quemada en Red Natura 2000",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_natura2000",
+        "nombre": "porcentaje del incendio dentro de Red Natura 2000",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "provincia",
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "cubierta_principal",
+        "nombre": "tipo de terreno quemado",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Un incendio por fila (EFFIS), solo desde 2017 aunque la fuente anual llega a 2000; para totales por año o provincia son más completas las otras tablas de incendios. 2026 está en curso. cod_prov es el código INE de provincia de dos cifras."
+  },
+  {
+    "tabla": "incendios_focos_activos",
+    "usar": true,
+    "tema": "Focos de calor detectados por satélite en España en los últimos 7 días",
+    "preguntas": [
+      "¿Hay incendios activos ahora mismo en España?",
+      "¿Cuántos focos de calor hay en Asturias esta semana?",
+      "¿En qué provincia hay más focos activos?"
+    ],
+    "medidas": [
+      {
+        "columna": "frp_mw",
+        "nombre": "potencia radiativa del foco de calor",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "confianza",
+        "nombre": "confianza de la detección",
+        "total": null
+      },
+      {
+        "columna": "dia_noche",
+        "nombre": "detección de día o de noche",
+        "total": null
+      },
+      {
+        "columna": "instrumento",
+        "nombre": "satélite e instrumento",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "NASA FIRMS, solo ventana móvil de 7 días. Un foco es un punto detectado, no un incendio: varios satélites pueden detectar el mismo; se cuenta con COUNT(*). Pueden ser quemas agrícolas o industria, no solo incendios forestales."
+  },
+  {
+    "tabla": "incendios_provincia_anio",
+    "usar": true,
+    "tema": "Hectáreas quemadas y número de incendios forestales por provincia y año desde 2000",
+    "preguntas": [
+      "¿Qué provincia ha perdido más superficie por incendios en 2022?",
+      "¿Cuántas hectáreas se quemaron en Ourense en 2025?",
+      "¿Cómo han evolucionado los incendios en León?",
+      "¿En qué provincia hay más incendios?"
+    ],
+    "medidas": [
+      {
+        "columna": "ha_quemadas",
+        "nombre": "superficie quemada",
+        "unidad": "ha",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "n_incendios",
+        "nombre": "número de incendios",
+        "unidad": "incendios",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_natura2000",
+        "nombre": "superficie quemada en Red Natura 2000",
+        "unidad": "ha",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ha_mayor_incendio",
+        "nombre": "superficie del mayor incendio",
+        "unidad": "ha",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EFFIS 2000-2026. El año 2026 está incompleto (datos hasta el 24 de septiembre). No hay fila de España: se suma entre provincias. Solo aparecen las provincias con algún incendio ese año. Total absoluto, no relativo a la superficie forestal."
+  },
+  {
+    "tabla": "industria_ccaa",
+    "usar": true,
+    "tema": "Peso de la industria en la economía de cada comunidad autónoma",
+    "preguntas": [
+      "¿Qué comunidad tiene más industria?",
+      "¿Qué porcentaje de la economía de Navarra es industria?",
+      "¿Cuánto produce la industria por habitante en el País Vasco?",
+      "¿Cómo ha evolucionado el peso de la industria en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_vab_industria",
+        "nombre": "peso de la industria en el valor añadido de la comunidad",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_vab_manufacturas",
+        "nombre": "peso de las manufacturas en el valor añadido",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "vab_industria_hab_real",
+        "nombre": "valor añadido industrial por habitante en euros constantes de 2025",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "vab_manuf_hab_real",
+        "nombre": "valor añadido manufacturero por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cifra_negocios_hab_real",
+        "nombre": "cifra de negocios industrial por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "ocupados_industria_1000_hab",
+        "nombre": "ocupados en la industria por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "vab_industria_meur",
+        "nombre": "valor añadido de la industria en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupados_industria",
+        "nombre": "ocupados en la industria",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "cuota_vab_industria_espana_pct",
+        "nombre": "cuota de la comunidad en el valor añadido industrial de España",
+        "unidad": "% de España",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": {
+        "columna": "ccaa",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat e INE, 2000-2024. España está en la tabla como cod 00 (excluir en rankings). Cifra de negocios en miles de euros en la columna cifra_negocios_miles_eur; las columnas por habitante ya son en euros constantes de 2025."
+  },
+  {
+    "tabla": "industria_ccaa_ramas",
+    "usar": true,
+    "tema": "Cifra de negocios, empleo y locales de cada rama industrial en cada comunidad autónoma",
+    "preguntas": [
+      "¿Qué comunidad vende más en la industria de la alimentación?",
+      "¿Cuántos ocupados tiene la industria del automóvil en Cataluña?",
+      "¿Qué rama industrial pesa más en Galicia?",
+      "¿Cómo ha evolucionado la industria química en Andalucía?"
+    ],
+    "medidas": [
+      {
+        "columna": "cifra_negocios_hab_real",
+        "nombre": "cifra de negocios por habitante en euros constantes de 2025",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "cifra_negocios_miles_eur",
+        "nombre": "cifra de negocios en euros corrientes",
+        "unidad": "miles de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupados",
+        "nombre": "ocupados",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados_1000_hab",
+        "nombre": "ocupados por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "locales",
+        "nombre": "locales industriales",
+        "unidad": "locales",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "cuota_espana_pct",
+        "nombre": "cuota de la comunidad en el total español de la rama",
+        "unidad": "% de España",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "veces_peso_poblacion",
+        "nombre": "cuota de la rama respecto al peso de población de la comunidad",
+        "unidad": "veces su peso poblacional",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "peso_en_industria_ccaa_pct",
+        "nombre": "peso de la rama en la industria de la comunidad",
+        "unidad": "% de la industria",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "rama",
+        "nombre": "rama industrial",
+        "total": "Industria"
+      }
+    ],
+    "filtros": [],
+    "notas": "INE 76823, 2018-2024. Hay ramas agregadas (es_agregado = true: Industria, Industria manufacturera, Industrias extractivas) que contienen a las demás: no sumar agregadas con ramas. No hay fila de España. Algunas ramas tienen secreto estadístico en varias comunidades; la columna nota lo avisa. Nombres de comunidad con formato INE (por ejemplo «Madrid, Comunidad de»)."
+  },
+  {
+    "tabla": "industria_exportaciones_ue",
+    "usar": true,
+    "tema": "Exportaciones industriales de España por producto frente a la Unión Europea: cuota, puesto y líder",
+    "preguntas": [
+      "¿Cuánto exporta España de coches?",
+      "¿Qué puesto ocupa España en exportación de aceite de oliva en la UE?",
+      "¿Qué porcentaje de las exportaciones europeas de azulejos son españolas?",
+      "¿Cómo han evolucionado las exportaciones españolas de aviones?"
+    ],
+    "medidas": [
+      {
+        "columna": "exportacion_es_real_meur",
+        "nombre": "exportaciones españolas en euros constantes de 2025",
+        "unidad": "millones de €",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "exportacion_es_eur",
+        "nombre": "exportaciones españolas en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_pct",
+        "nombre": "cuota de España en las exportaciones de la UE de ese producto",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto de España entre los países de la UE",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "peso_en_exportacion_es_pct",
+        "nombre": "peso del producto en las exportaciones españolas",
+        "unidad": "% de las exportaciones de España",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "veces_peso_poblacion",
+        "nombre": "cuota exportadora respecto al peso de población de España en la UE",
+        "unidad": "veces su peso poblacional",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "exportacion_es_t",
+        "nombre": "exportaciones españolas en toneladas",
+        "unidad": "t",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "exportacion_ue_eur",
+        "nombre": "exportaciones de la UE en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "partida_nombre",
+        "nombre": "producto exportado",
+        "total": "Total de bienes"
+      },
+      {
+        "columna": "destino",
+        "nombre": "destino de la exportación",
+        "total": "WORLD"
+      }
+    ],
+    "filtros": [],
+    "notas": "Comext, 2015-2025. destino WORLD incluye el comercio dentro de la UE (el total 2025 de España es 394.000 millones de €); EXT_EU27_2020 es solo fuera de la UE. Hay capítulos (es_capitulo) que contienen a partidas más finas (p. ej. 87 contiene Turismos 8703): no sumar entre niveles. Las columnas exportacion_es_eur y exportacion_ue_eur están en euros, no en millones."
+  },
+  {
+    "tabla": "industria_fabricas",
+    "usar": true,
+    "tema": "Fábricas de vehículos en España: dónde están, de qué grupo son y qué modelos producen",
+    "preguntas": [
+      "¿Dónde hay fábricas de coches en España?",
+      "¿Qué modelos se fabrican en Martorell?",
+      "¿Qué fábricas tiene Stellantis en España?",
+      "¿Cuántas fábricas de vehículos hay en Castilla y León?"
+    ],
+    "medidas": [
+      {
+        "columna": "n_modelos",
+        "nombre": "modelos en producción",
+        "unidad": "modelos",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "n_adjudicados",
+        "nombre": "modelos adjudicados para el futuro",
+        "unidad": "modelos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "modelos_electrificados",
+        "nombre": "modelos electrificados",
+        "unidad": "modelos",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "provincia",
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_provincia",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "grupo propietario",
+        "total": null
+      },
+      {
+        "columna": "tipo",
+        "nombre": "tipo de vehículo que fabrica",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Mapa de ANFAC de mayo de 2025, solo 16 fábricas, una fila por planta; la columna empleo está vacía. Listados de modelos como texto en modelos y modelos_adjudicados. El nombre de comunidad usa formato INE («Madrid, Comunidad de»)."
+  },
+  {
+    "tabla": "industria_ipi",
+    "usar": true,
+    "tema": "Índice de producción industrial anual de España, sus comunidades y otros países europeos, por rama",
+    "preguntas": [
+      "¿Cómo ha evolucionado la producción industrial en España?",
+      "¿Ha crecido la industria del automóvil en España en 2025?",
+      "¿Qué país europeo ha aumentado más su producción industrial?",
+      "¿Cuánto creció la industria en Cataluña el año pasado?"
+    ],
+    "medidas": [
+      {
+        "columna": "indice",
+        "nombre": "índice de producción industrial (base 2021 = 100)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "variacion_anual_pct",
+        "nombre": "variación anual del índice de producción industrial",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "ambito",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "fuente",
+        "nombre": "fuente y desglose (eurostat por país y rama, ine por destino económico y comunidad, ine_divisiones por división CNAE)",
+        "total": null,
+        "defecto": "ine"
+      },
+      {
+        "columna": "rama_nombre",
+        "nombre": "rama o destino económico",
+        "total": "Total industria"
+      }
+    ],
+    "filtros": [],
+    "notas": "Tres series mezcladas según fuente: eurostat (países, rama B-D es el total), ine (España y comunidades por destino económico; total es «Total industria») e ine_divisiones (España por división CNAE). España aparece como cod 00 (INE) y como ES (Eurostat): filtrar por fuente para no duplicar. La media anual del INE; es un índice, no se suma."
+  },
+  {
+    "tabla": "industria_ipi_mensual",
+    "usar": true,
+    "tema": "Índice de producción industrial mensual de España y sus comunidades por destino económico",
+    "preguntas": [
+      "¿Cómo ha ido la producción industrial el último mes?",
+      "¿Ha subido la industria en Andalucía en el último año?",
+      "¿Cuánto ha crecido la producción de bienes de equipo en España?",
+      "¿Cómo ha evolucionado el índice de producción industrial de Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "variacion_anual_pct",
+        "nombre": "variación de la producción industrial respecto al mismo mes del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice de producción industrial (base 2021 = 100)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice"
+      },
+      {
+        "columna": "variacion_acumulada_pct",
+        "nombre": "variación acumulada en lo que va de año",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "destino",
+        "nombre": "destino económico de los bienes",
+        "total": "Total industria"
+      }
+    ],
+    "filtros": [],
+    "notas": "INE tabla 70177, último mes publicado julio de 2026 (es_ultimo_mes). Los destinos Bienes de consumo duradero y no duradero son partes de Bienes de consumo: no sumar. Es un índice: no se suma entre meses ni territorios. Nombres de comunidad con formato INE."
+  },
+  {
+    "tabla": "industria_peso_ue",
+    "usar": true,
+    "tema": "Cuánto pesa la industria y las manufacturas en la economía y el empleo de España frente a los países de la UE",
+    "preguntas": [
+      "¿Qué país de la UE tiene más industria?",
+      "¿Qué porcentaje de la economía española es industria?",
+      "¿Ha perdido peso la industria en España desde 1995?",
+      "¿Qué puesto ocupa España en peso industrial entre los 27?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_vab_industria",
+        "nombre": "peso de la industria en el valor añadido",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_vab_manufacturas",
+        "nombre": "peso de las manufacturas en el valor añadido",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_empleo_industria",
+        "nombre": "peso de la industria en el empleo",
+        "unidad": "% del empleo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_empleo_manufacturas",
+        "nombre": "peso de las manufacturas en el empleo",
+        "unidad": "% del empleo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto_industria",
+        "nombre": "puesto entre los 27 países por peso industrial",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "vab_manuf_hab_eur_real",
+        "nombre": "valor añadido manufacturero por habitante en euros constantes (solo España y UE)",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "vab_manuf_hab_eur",
+        "nombre": "valor añadido manufacturero por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "vab_industria_meur",
+        "nombre": "valor añadido de la industria",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_manuf_meur",
+        "nombre": "valor añadido de las manufacturas",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_vab_manuf_ue_pct",
+        "nombre": "cuota del país en el valor añadido manufacturero de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "pais_nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat, 1995-2025. Incluye la UE-27 como fila (EU27_2020, sin puesto): no entra en rankings de países. El puesto es entre los 27. Las manufacturas son parte de la industria."
+  },
+  {
+    "tabla": "industria_productos_ue",
+    "usar": true,
+    "tema": "Producción industrial de productos concretos (azulejos, aceite de oliva, jamón, coches, cemento, acero...) en España frente a la UE",
+    "preguntas": [
+      "¿Cuántos coches pequeños fabrica España?",
+      "¿Qué porcentaje del aceite de oliva europeo se produce en España?",
+      "¿Qué puesto ocupa España en producción de cemento?",
+      "¿Cuánto jamón curado se produce en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "cantidad_es_legible",
+        "nombre": "producción vendida de España en la unidad del producto",
+        "unidad": "según unidad_legible (miles de toneladas, unidades, millones de litros o de m²)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "cuota_cantidad_pct",
+        "nombre": "cuota de España en la producción de la UE en cantidad",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto_cantidad",
+        "nombre": "puesto de España entre los países que publican el dato",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "valor_es_real_meur",
+        "nombre": "valor de la producción vendida de España en euros constantes de 2025",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "valor_es_eur",
+        "nombre": "valor de la producción vendida de España en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_valor_pct",
+        "nombre": "cuota de España en el valor de la producción de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "veces_peso_poblacion",
+        "nombre": "cuota de producción respecto al peso de población de España en la UE",
+        "unidad": "veces su peso poblacional",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cantidad_por_1000_hab_es",
+        "nombre": "producción por cada 1.000 habitantes",
+        "unidad": "según unidad_legible por cada 1.000 habitantes",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "producto_nombre",
+        "nombre": "producto industrial",
+        "total": null
+      },
+      {
+        "columna": "unidad_legible",
+        "nombre": "unidad de medida del producto",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Prodcom, 2015-2024, lista cerrada de unos 20 productos. La cantidad cambia de unidad según el producto (unidad_legible): no comparar ni sumar cantidades de productos distintos. La UE es una estimación de Eurostat; el puesto es entre los países que publican el dato (columna nota)."
+  },
+  {
+    "tabla": "industria_ramas_ue",
+    "usar": true,
+    "tema": "Facturación, valor añadido y empleo de cada rama industrial en España frente a la UE",
+    "preguntas": [
+      "¿Cuánto factura la industria de la alimentación en España?",
+      "¿Qué puesto ocupa España en la industria del automóvil europea?",
+      "¿En qué ramas industriales está especializada España?",
+      "¿Cuántas personas trabajan en la industria química en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "cifra_negocios_es_real_meur",
+        "nombre": "cifra de negocios de España en euros constantes de 2025",
+        "unidad": "millones de €",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "cifra_negocios_es_meur",
+        "nombre": "cifra de negocios de España en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "valor_anadido_es_meur",
+        "nombre": "valor añadido de España",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "empleo_es",
+        "nombre": "empleo de España en la rama",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "cuota_cifra_negocios_pct",
+        "nombre": "cuota de España en la facturación de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_empleo_pct",
+        "nombre": "cuota de España en el empleo de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto_cifra_negocios",
+        "nombre": "puesto de España por facturación entre los países con dato",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "indice_especializacion",
+        "nombre": "índice de especialización de España frente a la UE (1 = igual que la UE)",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "veces_peso_poblacion",
+        "nombre": "cuota de facturación respecto al peso de población de España en la UE",
+        "unidad": "veces su peso poblacional",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "rama_nombre",
+        "nombre": "rama industrial",
+        "total": "Industria manufacturera (total)"
+      },
+      {
+        "columna": "nivel",
+        "nombre": "nivel de la clasificación (sección, división, grupo o clase)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat sbs_ovw_act, 2021-2024. Las ramas se anidan por nivel (la sección C incluye las divisiones, que incluyen grupos y clases): no sumar niveles distintos. En ramas con países confidenciales la UE es una suma parcial (columna nota)."
+  },
+  {
+    "tabla": "industria_vehiculos",
+    "usar": true,
+    "tema": "Cuántos vehículos fabrica España frente a otros países del mundo y su puesto mundial",
+    "preguntas": [
+      "¿Cuántos coches fabrica España al año?",
+      "¿Qué país fabrica más vehículos del mundo?",
+      "¿Qué puesto ocupa España en producción de vehículos en Europa?",
+      "¿Qué porcentaje de los vehículos españoles se exporta?"
+    ],
+    "medidas": [
+      {
+        "columna": "vehiculos",
+        "nombre": "vehículos fabricados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "turismos",
+        "nombre": "turismos fabricados",
+        "unidad": "turismos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cuota_mundo_pct",
+        "nombre": "cuota de la producción mundial",
+        "unidad": "% del mundo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto_mundo",
+        "nombre": "puesto en el mundo por producción",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "puesto_europa",
+        "nombre": "puesto en Europa por producción",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "vehiculos_1000_hab",
+        "nombre": "vehículos fabricados por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pct_exportado",
+        "nombre": "porcentaje de la producción que se exporta",
+        "unidad": "% de la producción",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "mundo"
+      ],
+      "nivel": "region",
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "region",
+        "nombre": "región del mundo",
+        "total": "Mundo"
+      },
+      {
+        "columna": "cobertura",
+        "nombre": "cobertura del dato del país (a veces solo turismos)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "OICA para 2019 y 2021-2024 (falta 2020) y ANFAC para España 2025, que no trae puesto ni cuota. La fila Mundo (cod MUNDO) es el total mundial, no un país. Para algunos países (Alemania, Francia...) cobertura indica que solo se publica turismos o turismos y comerciales ligeros, así que no es comparable con el resto."
+  },
+  {
+    "tabla": "inmigracion_asilo",
+    "usar": true,
+    "tema": "Cuántas personas piden asilo por primera vez en España cada mes",
+    "preguntas": [
+      "¿Cuántas solicitudes de asilo hubo el último mes?",
+      "¿Cómo han evolucionado las peticiones de asilo desde 2010?",
+      "¿En qué mes se pidió más asilo en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "solicitudes",
+        "nombre": "primeras solicitudes de asilo en el mes",
+        "unidad": "solicitudes",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat, solo España, 2010 a junio de 2026. Solo primeras solicitudes (no renovaciones ni resoluciones), no es lo mismo que concesiones de asilo."
+  },
+  {
+    "tabla": "inmigracion_asilo_nacionalidad",
+    "usar": true,
+    "tema": "Solicitudes de asilo en España por nacionalidad de quien las pide y año",
+    "preguntas": [
+      "¿De qué país piden más asilo en España?",
+      "¿Cuántos venezolanos pidieron asilo en 2025?",
+      "¿Cómo han evolucionado las solicitudes de asilo de Colombia?",
+      "¿Cuántos malienses piden asilo en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "solicitudes",
+        "nombre": "primeras solicitudes de asilo en el año",
+        "unidad": "solicitudes",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "nacionalidad",
+        "nombre": "nacionalidad del solicitante",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat, solo España, 2010-2025. Los nombres de nacionalidad están en inglés (Peru, Mali, Venezuela, Colombia...). No hay fila de total: sumar nacionalidades de un año. Puede haber agregados de países entre las filas si Eurostat los trae."
+  },
+  {
+    "tabla": "inmigracion_flujos",
+    "usar": true,
+    "tema": "Personas que llegan a España y que se van cada trimestre, por nacionalidad",
+    "preguntas": [
+      "¿Cuántos rumanos llegaron a España el último trimestre?",
+      "¿Qué nacionalidad tiene más inmigraciones?",
+      "¿Cuántos españoles emigraron en el último trimestre?",
+      "¿Cómo ha evolucionado la inmigración desde Marruecos?"
+    ],
+    "medidas": [
+      {
+        "columna": "inmigraciones",
+        "nombre": "inmigraciones procedentes del extranjero en el trimestre",
+        "unidad": "personas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "emigraciones",
+        "nombre": "emigraciones al extranjero en el trimestre",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo",
+        "nombre": "saldo migratorio exterior (llegadas menos salidas)",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "inmigraciones_1000",
+        "nombre": "inmigraciones por cada 1.000 habitantes de España",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "emigraciones_1000",
+        "nombre": "emigraciones por cada 1.000 habitantes de España",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "saldo_1000",
+        "nombre": "saldo migratorio por cada 1.000 habitantes de España",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "nacionalidad",
+        "nombre": "nacionalidad",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "INE 59011/59014, abril de 2023 a julio de 2026 (trimestres que empiezan en esa fecha), solo 18 nacionalidades (las principales): no suman el total de España. Cifras redondeadas a centenas y con huecos (nulos) cuando el dato no se publica; el último trimestre está incompleto. Para el total anual usar inmigracion_flujos_anuales."
+  },
+  {
+    "tabla": "inmigracion_flujos_anuales",
+    "usar": true,
+    "tema": "Inmigraciones, emigraciones y saldo migratorio exterior de España cada año",
+    "preguntas": [
+      "¿Cuánta gente llegó a España en 2024?",
+      "¿Cuál es el saldo migratorio de España?",
+      "¿Cuántos españoles y extranjeros se fueron del país en 2022?",
+      "¿Cómo ha evolucionado la inmigración desde 2021?"
+    ],
+    "medidas": [
+      {
+        "columna": "saldo_1000",
+        "nombre": "saldo migratorio exterior por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "inmigraciones",
+        "nombre": "inmigraciones procedentes del extranjero",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "emigraciones",
+        "nombre": "emigraciones al extranjero",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo",
+        "nombre": "saldo migratorio exterior (llegadas menos salidas)",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "inmigraciones_1000",
+        "nombre": "inmigraciones por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "emigraciones_1000",
+        "nombre": "emigraciones por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE (Estadística de Migraciones), solo España, 2021-2024: solo 4 filas. Incluye españoles y extranjeros."
+  }
+]

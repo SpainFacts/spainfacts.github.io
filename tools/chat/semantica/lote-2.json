@@ -1,0 +1,2408 @@
+[
+  {
+    "tabla": "construccion_empresas_ue",
+    "usar": true,
+    "tema": "Cuántas empresas de construcción hay en España y en los países de la UE, su tamaño y lo que facturan por habitante",
+    "preguntas": [
+      "¿Cuántas empresas de construcción hay por cada 1.000 habitantes en España?",
+      "¿Qué país de la UE tiene más empresas constructoras por habitante?",
+      "¿Cuánto factura la construcción por habitante en Francia comparado con España?",
+      "¿Cuántos trabajadores tiene de media una constructora española?"
+    ],
+    "medidas": [
+      {
+        "columna": "empresas_1000hab",
+        "nombre": "empresas por cada 1.000 habitantes",
+        "unidad": "empresas por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "cifra_negocios_hab_eur_real",
+        "nombre": "cifra de negocios por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cifra_negocios_hab_eur",
+        "nombre": "cifra de negocios por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupados_por_empresa",
+        "nombre": "ocupados por empresa (tamaño medio)",
+        "unidad": "personas por empresa",
+        "tipo": "media"
+      },
+      {
+        "columna": "productividad_miles_eur",
+        "nombre": "productividad por ocupado",
+        "unidad": "miles de € por ocupado",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "puesto_empresas_1000hab",
+        "nombre": "puesto entre los países de la UE en empresas por habitante",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "cuota_empresas_ue_pct",
+        "nombre": "porcentaje de las empresas de construcción de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_cifra_negocios_ue_pct",
+        "nombre": "porcentaje de la cifra de negocios de la construcción de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_poblacion_ue_pct",
+        "nombre": "porcentaje de la población de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "empresas",
+        "nombre": "número de empresas",
+        "unidad": "empresas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados",
+        "nombre": "personas ocupadas",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "cifra_negocios_meur",
+        "nombre": "cifra de negocios total",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "valor_anadido_meur",
+        "nombre": "valor añadido bruto total",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "pais_nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "rama_nombre",
+        "nombre": "rama de la construcción",
+        "total": "Construcción (total)"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat estadísticas estructurales de empresas. Las ramas Edificación, Ingeniería civil y Construcción especializada suman el total; la Unión Europea (27) aparece como fila agregada (código EU27_2020) y no hay que contarla como un país más en los rankings."
+  },
+  {
+    "tabla": "construccion_grandes_constructoras",
+    "usar": true,
+    "tema": "Las grandes constructoras españolas en el ranking mundial de Deloitte: puesto e ingresos",
+    "preguntas": [
+      "¿Cuál es la mayor constructora española del mundo?",
+      "¿Qué puesto ocupa Ferrovial entre las constructoras del mundo?",
+      "¿Cuánto factura ACS y qué parte es del extranjero?"
+    ],
+    "medidas": [
+      {
+        "columna": "puesto",
+        "nombre": "puesto en el ranking mundial de constructoras",
+        "unidad": "puesto",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "ingresos_mill_usd",
+        "nombre": "ingresos por construcción",
+        "unidad": "millones de dólares",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ventas_internacionales_mill_usd",
+        "nombre": "ventas internacionales",
+        "unidad": "millones de dólares",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_ventas_exterior",
+        "nombre": "porcentaje de ventas en el exterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "edicion",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "empresa",
+        "nombre": "constructora",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo 7 filas de la edición 2025 de Global Powers of Construction; los ingresos solo están para ACS y Acciona (el resto aparece sin cifra). Importes en dólares, no en euros."
+  },
+  {
+    "tabla": "construccion_licitacion",
+    "usar": true,
+    "tema": "Cuánto dinero público se licita en obra pública por comunidad autónoma y año, por habitante y en euros reales",
+    "preguntas": [
+      "¿Cuánta obra pública se licita por habitante en Castilla y León?",
+      "¿Qué comunidad ha licitado más obra pública por habitante en 2023?",
+      "¿Cómo ha evolucionado la licitación de obra pública en España desde 2008?",
+      "¿Qué parte de la licitación es obra civil y cuál edificación?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_hab_real",
+        "nombre": "licitación total de obra pública por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "estado_hab_real",
+        "nombre": "licitación del Estado por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "entes_territoriales_hab_real",
+        "nombre": "licitación de comunidades y ayuntamientos por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "edificacion_hab_real",
+        "nombre": "licitación en edificación por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "obra_civil_hab_real",
+        "nombre": "licitación en obra civil por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "epe_hab_real",
+        "nombre": "licitación de entidades públicas estatales por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "age_hab_real",
+        "nombre": "licitación de la Administración General del Estado por habitante en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_estado",
+        "nombre": "porcentaje de la licitación que viene del Estado",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_obra_civil",
+        "nombre": "porcentaje de la licitación que es obra civil",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "total_real_meur",
+        "nombre": "licitación total en euros reales",
+        "unidad": "millones de € de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_meur",
+        "nombre": "licitación total en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "estado_meur",
+        "nombre": "licitación del Estado en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "entes_territoriales_meur",
+        "nombre": "licitación de comunidades y ayuntamientos en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "edificacion_meur",
+        "nombre": "licitación en edificación en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "obra_civil_meur",
+        "nombre": "licitación en obra civil en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "familia_estatal",
+        "nombre": "partido del Gobierno central",
+        "total": null
+      },
+      {
+        "columna": "familia_autonomica",
+        "nombre": "partido del Gobierno autonómico",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Ministerio de Transportes vía ISTAC. La fila 'No regionalizable' (cod NR) recoge obras sin comunidad y no es un territorio comparable; 2024 y 2025 son provisionales. Los importes en euros reales están a precios de 2025."
+  },
+  {
+    "tabla": "construccion_permisos",
+    "usar": true,
+    "tema": "Cuántas viviendas se autorizan o visan para construir o reformar, por habitante, en España, sus comunidades y la UE",
+    "preguntas": [
+      "¿Cuántas viviendas nuevas se visan por cada 1.000 habitantes en Andalucía?",
+      "¿Qué país de la UE concede más permisos de vivienda por habitante?",
+      "¿Cómo ha evolucionado la construcción de vivienda nueva en España desde 2007?",
+      "¿Cuántos metros cuadrados de obra nueva se visan por habitante en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "viviendas_nueva_1000hab",
+        "nombre": "viviendas nuevas con permiso o visado por cada 1.000 habitantes",
+        "unidad": "viviendas por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "viviendas_reforma_1000hab",
+        "nombre": "viviendas reformadas con visado por cada 1.000 habitantes",
+        "unidad": "viviendas por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "m2_residencial_hab",
+        "nombre": "metros cuadrados residenciales con permiso por habitante (UE)",
+        "unidad": "m² por habitante",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "m2_no_residencial_hab",
+        "nombre": "metros cuadrados no residenciales con permiso por habitante (UE)",
+        "unidad": "m² por habitante",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "m2_obra_nueva_hab",
+        "nombre": "metros cuadrados de obra nueva visados por habitante (serie larga de España)",
+        "unidad": "m² por habitante",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "viviendas_nueva",
+        "nombre": "viviendas nuevas con permiso o visado",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "viviendas_ampliacion",
+        "nombre": "viviendas ampliadas con visado",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "viviendas_reforma",
+        "nombre": "viviendas reformadas con visado",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del territorio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nombre",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "ambito",
+        "nombre": "ámbito de los datos (UE = países europeos, CCAA = comunidades, ES_LARGA = España desde 1992)",
+        "total": null,
+        "defecto": "CCAA"
+      }
+    ],
+    "filtros": [],
+    "notas": "Tres fuentes distintas en una tabla: hay que elegir ambito (CCAA para comunidades, UE para comparar países, ES_LARGA para la serie histórica de España); España aparece una vez en cada ámbito con cifras algo distintas porque la fuente no es la misma (permisos de Eurostat frente a visados de colegios de arquitectos)."
+  },
+  {
+    "tabla": "construccion_peso_ue",
+    "usar": true,
+    "tema": "Qué peso tiene la construcción en la economía y el empleo de España y de cada país de la UE",
+    "preguntas": [
+      "¿Qué porcentaje del PIB representa la construcción en España?",
+      "¿Qué país de la UE depende más de la construcción?",
+      "¿Cuántos ocupados en construcción hay por cada 1.000 habitantes en España?",
+      "¿Cómo ha cambiado el peso de la construcción en España desde 2007?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_vab_construccion",
+        "nombre": "peso de la construcción en el valor añadido de la economía",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_empleo_construccion",
+        "nombre": "peso de la construcción en el empleo",
+        "unidad": "% del empleo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ocupados_constr_1000hab",
+        "nombre": "ocupados en construcción por cada 1.000 habitantes",
+        "unidad": "ocupados por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "vab_constr_hab_eur_real",
+        "nombre": "valor añadido de la construcción por habitante en euros reales (solo España)",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_constr_hab_eur",
+        "nombre": "valor añadido de la construcción por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "puesto_vab",
+        "nombre": "puesto entre los 27 países por peso de la construcción en el valor añadido",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "puesto_empleo",
+        "nombre": "puesto entre los 27 países por peso de la construcción en el empleo",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "vab_constr_real_indice_2007",
+        "nombre": "valor añadido real de la construcción (2007 = 100)",
+        "unidad": "índice 2007 = 100",
+        "tipo": "indice"
+      },
+      {
+        "columna": "cuota_vab_constr_ue_pct",
+        "nombre": "porcentaje del valor añadido de la construcción de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_poblacion_ue_pct",
+        "nombre": "porcentaje de la población de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "vab_constr_meur",
+        "nombre": "valor añadido de la construcción",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupados_constr_miles",
+        "nombre": "ocupados en construcción",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "pais_nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat cuentas nacionales. La Unión Europea (27) viene como fila agregada (EU27_2020) sin puesto; los puestos son entre 27 países. Los euros reales por habitante solo existen para España."
+  },
+  {
+    "tabla": "construccion_produccion",
+    "usar": true,
+    "tema": "Cuánto produce el sector de la construcción en España y la UE: índice de producción por rama y variación anual",
+    "preguntas": [
+      "¿Cuánto ha crecido la producción de la construcción en España en 2024?",
+      "¿Cómo está la obra pública en España comparada con 2007?",
+      "¿Qué país de la UE ha recuperado más su producción de edificación?"
+    ],
+    "medidas": [
+      {
+        "columna": "indice_2021",
+        "nombre": "índice de producción de la construcción (2021 = 100)",
+        "unidad": "índice 2021 = 100",
+        "tipo": "indice",
+        "principal": true
+      },
+      {
+        "columna": "indice_2007",
+        "nombre": "índice de producción de la construcción (2007 = 100)",
+        "unidad": "índice 2007 = 100",
+        "tipo": "indice"
+      },
+      {
+        "columna": "var_anual_pct",
+        "nombre": "variación anual de la producción",
+        "unidad": "%",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "pais_nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "rama_nombre",
+        "nombre": "rama de la construcción",
+        "total": "Construcción (total)"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat sts_copr_a, corregido de calendario. Los índices son volúmenes, no euros, y no se suman entre países. El salto de España en 2025 (Construcción total y especializada) es atípico y puede ser una ruptura de serie."
+  },
+  {
+    "tabla": "crimen_balance",
+    "usar": true,
+    "tema": "Delitos conocidos por la policía en España, comunidad, provincia o municipio, por año completo y tipo de delito, con la tasa por habitante",
+    "preguntas": [
+      "¿Cuántos delitos por cada 1.000 habitantes hubo en Madrid en 2024?",
+      "¿Qué provincia tiene más hurtos por habitante?",
+      "¿Cuántos homicidios hubo en España en 2023?",
+      "¿Cómo ha evolucionado la cibercriminalidad desde 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_1000",
+        "nombre": "infracciones penales por cada 1.000 habitantes",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "infracciones",
+        "nombre": "infracciones penales conocidas",
+        "unidad": "%",
+        "tipo": "flujo",
+        "escala": 100
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del territorio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia",
+        "municipio"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "territorio",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de delito",
+        "total": "Total infracciones penales"
+      }
+    ],
+    "filtros": [],
+    "notas": "Balance de Criminalidad del Ministerio del Interior, año completo. Las categorías se solapan (Criminalidad convencional, Cibercriminalidad, Hurtos, Estafas informáticas...), así que no se pueden sumar entre sí; solo hay municipios de más de 20.000 habitantes; los nombres de territorio vienen en mayúsculas y a veces sin tildes; los códigos de comunidad y provincia coinciden entre sí, filtra siempre por nivel."
+  },
+  {
+    "tabla": "crimen_condenados",
+    "usar": true,
+    "tema": "Cuántas personas adultas son condenadas por comunidad, sexo y nacionalidad, y su tasa por habitante",
+    "preguntas": [
+      "¿Cuántos condenados por cada 1.000 habitantes hay entre los extranjeros en España?",
+      "¿Qué comunidad tiene más condenados por habitante?",
+      "¿Cuántas mujeres fueron condenadas en 2024?",
+      "¿Cómo ha evolucionado el número de condenados en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_1000",
+        "nombre": "condenados por cada 1.000 residentes adultos de su misma nacionalidad y sexo",
+        "unidad": "condenados por cada 1.000 adultos",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "condenados",
+        "nombre": "adultos condenados",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion_18",
+        "nombre": "población de 18 años o más",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": {
+        "columna": "cod_ccaa",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Total"
+      },
+      {
+        "columna": "nacionalidad",
+        "nombre": "nacionalidad",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Estadística de condenados del INE. Sin columna de nombre: hay que traducir el código de comunidad (00 = España). La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
+  },
+  {
+    "tabla": "crimen_condenas_delito",
+    "usar": true,
+    "tema": "Por qué delitos se condena en España y a qué nacionalidades pertenecen los condenados",
+    "preguntas": [
+      "¿Por qué delitos se condena más en España?",
+      "¿Cuántas condenas por hurto hubo en 2024?",
+      "¿Cuántas condenas por delitos contra la seguridad vial hay a extranjeros?",
+      "¿Cómo han evolucionado las condenas por violencia de género?"
+    ],
+    "medidas": [
+      {
+        "columna": "total",
+        "nombre": "condenas por el delito",
+        "unidad": "condenas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "espanola",
+        "nombre": "condenas a personas de nacionalidad española",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "extranjera",
+        "nombre": "condenas a personas de nacionalidad extranjera",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ue",
+        "nombre": "condenas a personas de la Unión Europea",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "resto_europa",
+        "nombre": "condenas a personas del resto de Europa",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "africa",
+        "nombre": "condenas a personas de África",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "america",
+        "nombre": "condenas a personas de América",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "asia",
+        "nombre": "condenas a personas de Asia",
+        "unidad": "condenas",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "delito",
+        "nombre": "tipo de delito",
+        "total": "Delitos"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España. La columna delito mezcla grandes grupos y delitos concretos que están dentro de ellos, así que sumar todas las filas cuenta varias veces; el total real es la fila 'Delitos'. Cuenta delitos por los que se condena, no personas: una persona puede tener varios, por eso difiere de la tabla de condenados. Sin tasas por habitante."
+  },
+  {
+    "tabla": "crimen_serie_larga",
+    "usar": true,
+    "tema": "Evolución desde 2010 de los delitos conocidos en España, comunidades y provincias, con 44 tipos de delito y tasa por habitante",
+    "preguntas": [
+      "¿Cómo han evolucionado los robos con violencia en España desde 2010?",
+      "¿Cuántos delitos por 1.000 habitantes hay en Sevilla?",
+      "¿Cuántas agresiones sexuales con penetración se registraron en 2024?",
+      "¿Qué comunidad tiene más tasa de malos tratos en el ámbito familiar?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_1000",
+        "nombre": "infracciones penales por cada 1.000 habitantes",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "infracciones",
+        "nombre": "infracciones penales conocidas",
+        "unidad": "%",
+        "tipo": "flujo",
+        "escala": 100
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del territorio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipologia",
+        "nombre": "tipo de delito",
+        "total": "TOTAL INFRACCIONES PENALES"
+      }
+    ],
+    "filtros": [],
+    "notas": "Ministerio del Interior, serie larga con otra clasificación que el balance reciente. La tipología es jerárquica (nivel_tipologia 0, 1, 2: capítulos, delitos y subtipos), así que no se suma entre niveles. Sin nombre de territorio: solo códigos, y los de comunidad y provincia se solapan, filtra siempre por nivel. Sin municipios."
+  },
+  {
+    "tabla": "crimen_ultimo_periodo",
+    "usar": true,
+    "tema": "Delitos del año en curso hasta el último mes publicado frente al mismo periodo del año anterior",
+    "preguntas": [
+      "¿Están subiendo o bajando los delitos este año en España?",
+      "¿Cuántos robos con violencia hubo de enero a junio de 2026 frente al año pasado?",
+      "¿Ha aumentado la cibercriminalidad en Barcelona este año?"
+    ],
+    "medidas": [
+      {
+        "columna": "infracciones",
+        "nombre": "infracciones penales conocidas en el periodo",
+        "unidad": "%",
+        "tipo": "flujo",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "infracciones_anio_anterior",
+        "nombre": "infracciones en el mismo periodo del año anterior",
+        "unidad": "%",
+        "tipo": "flujo",
+        "escala": 100
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia",
+        "municipio"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "territorio",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de delito",
+        "total": "Total infracciones penales"
+      }
+    ],
+    "filtros": [],
+    "notas": "Acumulado enero-junio de 2026 (columna periodo), no un año completo: solo es comparable con infracciones_anio_anterior, nunca con los años completos de la tabla de balance. Las categorías se solapan; sin tasa por habitante."
+  },
+  {
+    "tabla": "cuentas_balance_anual",
+    "usar": true,
+    "tema": "Ingresos, gastos, déficit y deuda de todas las administraciones públicas de España cada año",
+    "preguntas": [
+      "¿Cuál es la deuda pública de España en porcentaje del PIB?",
+      "¿Cuánto déficit tuvo España en 2024?",
+      "¿Cómo ha evolucionado la deuda pública desde 2008?",
+      "¿Cuánto ingresa y cuánto gasta el Estado al año?"
+    ],
+    "medidas": [
+      {
+        "columna": "saldo_deficit_pib",
+        "nombre": "saldo o déficit de las administraciones públicas en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "deuda_pib",
+        "nombre": "deuda pública en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "deuda_publica_mrd",
+        "nombre": "deuda pública",
+        "unidad": "miles de millones de €",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ingresos_totales_mrd",
+        "nombre": "ingresos públicos totales",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_totales_mrd",
+        "nombre": "gastos públicos totales",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_deficit_mrd",
+        "nombre": "saldo o déficit público (negativo = déficit)",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion_m",
+        "nombre": "población de España",
+        "unidad": "millones de habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España, cuentas consolidadas de Eurostat; los importes están en miles de millones de euros corrientes (no reales). Los valores negativos del saldo son déficit. Sin dato por comunidad (para eso ver las tablas de deuda autonómica)."
+  },
+  {
+    "tabla": "cuentas_gastos",
+    "usar": true,
+    "tema": "En qué gasta el dinero público España: sanidad, educación, pensiones, defensa, intereses de la deuda y demás funciones",
+    "preguntas": [
+      "¿Cuánto gasta España en sanidad por habitante?",
+      "¿Qué porcentaje del PIB se gasta en defensa?",
+      "¿Cuánto se paga de intereses de la deuda al año?",
+      "¿Cómo ha cambiado el gasto en educación desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_por_habitante_eur",
+        "nombre": "gasto público por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "porcentaje_pib",
+        "nombre": "gasto público en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "porcentaje_gasto_total",
+        "nombre": "porcentaje del gasto público total",
+        "unidad": "% del gasto total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "millones_euros",
+        "nombre": "gasto público total",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "funcion_cofog",
+        "nombre": "función del gasto",
+        "total": null
+      },
+      {
+        "columna": "categoria_macro",
+        "nombre": "gran grupo de gasto",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, clasificación COFOG de Eurostat; las diez funciones suman el gasto total (no hay fila de total). Los euros son corrientes, no reales, y el último año es 2024."
+  },
+  {
+    "tabla": "cuentas_ingresos",
+    "usar": true,
+    "tema": "De dónde obtienen dinero las administraciones públicas españolas: IRPF, IVA, sociedades, cotizaciones y demás ingresos",
+    "preguntas": [
+      "¿Cuánto recauda España por IVA?",
+      "¿Qué porcentaje del PIB suponen las cotizaciones sociales?",
+      "¿Cuánto recauda el impuesto de sociedades y cómo ha cambiado desde 2007?",
+      "¿Cuál es el impuesto que más recauda?"
+    ],
+    "medidas": [
+      {
+        "columna": "porcentaje_pib",
+        "nombre": "ingreso público en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "porcentaje_ingreso_total",
+        "nombre": "porcentaje de los ingresos públicos totales",
+        "unidad": "% de los ingresos totales",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "millones_euros",
+        "nombre": "ingreso público recaudado",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "figura de ingreso (impuesto o cotización)",
+        "total": null
+      },
+      {
+        "columna": "tipo_ingreso",
+        "nombre": "tipo de ingreso",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España, Eurostat; las ocho categorías suman el total de ingresos (no hay fila de total). Importes en euros corrientes, sin cifra por habitante; último año 2024."
+  },
+  {
+    "tabla": "cuentas_subsectores",
+    "usar": true,
+    "tema": "Cuánto gastan, ingresan y deben cada una de las administraciones: Estado, comunidades autónomas, ayuntamientos y Seguridad Social",
+    "preguntas": [
+      "¿Cuánto gastan las comunidades autónomas en total?",
+      "¿Qué administración tiene más déficit, el Estado o la Seguridad Social?",
+      "¿Los ayuntamientos tienen superávit o déficit?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_mrd",
+        "nombre": "gasto del subsector",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ingreso_mrd",
+        "nombre": "ingreso del subsector",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_deficit_mrd",
+        "nombre": "saldo o déficit del subsector (negativo = déficit)",
+        "unidad": "miles de millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "peso_gasto_pct",
+        "nombre": "peso del subsector en el gasto público",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "año",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "subsector",
+        "nombre": "administración",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Cuentas no consolidadas de Eurostat: los pesos suman más de 100 % porque las transferencias entre administraciones se cuentan dos veces, así que no se pueden sumar los subsectores para obtener el total (para eso está la tabla de balance anual). Euros corrientes."
+  },
+  {
+    "tabla": "deflactor",
+    "usar": false,
+    "notas": "Tabla auxiliar de IPC medio anual y factor para pasar a euros reales de 2025; no responde preguntas ciudadanas por sí sola y el resto de tablas ya traen sus columnas en euros reales."
+  },
+  {
+    "tabla": "demografia_anual",
+    "usar": true,
+    "tema": "Natalidad, mortalidad, fecundidad y crecimiento de la población de España, comunidades y provincias desde 1975",
+    "preguntas": [
+      "¿Cuántos nacimientos por cada 1.000 habitantes hay en Galicia?",
+      "¿Cuántos hijos tiene de media cada mujer en España?",
+      "¿Qué provincia tiene más defunciones que nacimientos?",
+      "¿Cómo ha evolucionado la natalidad en España desde 1975?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_natalidad",
+        "nombre": "nacimientos por cada 1.000 habitantes",
+        "unidad": "nacimientos por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "tasa_mortalidad",
+        "nombre": "defunciones por cada 1.000 habitantes",
+        "unidad": "defunciones por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "fecundidad",
+        "nombre": "indicador coyuntural de fecundidad (hijos por mujer)",
+        "unidad": "hijos por mujer",
+        "tipo": "media"
+      },
+      {
+        "columna": "fecundidad_espanolas",
+        "nombre": "hijos por mujer de nacionalidad española",
+        "unidad": "hijos por mujer",
+        "tipo": "media"
+      },
+      {
+        "columna": "fecundidad_extranjeras",
+        "nombre": "hijos por mujer de nacionalidad extranjera",
+        "unidad": "hijos por mujer",
+        "tipo": "media"
+      },
+      {
+        "columna": "edad_maternidad",
+        "nombre": "edad media a la maternidad",
+        "unidad": "años",
+        "tipo": "media"
+      },
+      {
+        "columna": "edad_primer_hijo",
+        "nombre": "edad media al primer hijo",
+        "unidad": "años",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_madre_extranjera",
+        "nombre": "porcentaje de nacidos de madre extranjera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "vegetativo_1000",
+        "nombre": "crecimiento vegetativo (nacimientos menos defunciones) por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "crecimiento_1000",
+        "nombre": "crecimiento total de la población por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "saldo_exterior_1000",
+        "nombre": "saldo migratorio con el exterior por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "nacimientos",
+        "nombre": "nacimientos",
+        "unidad": "nacimientos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "defunciones",
+        "nombre": "defunciones",
+        "unidad": "defunciones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "crecimiento_vegetativo",
+        "nombre": "crecimiento vegetativo (nacimientos menos defunciones)",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "crecimiento",
+        "nombre": "crecimiento total de la población entre dos 1 de enero",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_exterior",
+        "nombre": "saldo migratorio con el exterior",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion_inicio",
+        "nombre": "población a 1 de enero",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion_fin",
+        "nombre": "población a 1 de enero del año siguiente",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE. Sin columna de nombre: solo código INE (00 España; los códigos de comunidad y provincia se solapan, filtra por nivel). El saldo exterior solo existe desde 2021 y el último año es 2024."
+  },
+  {
+    "tabla": "demografia_envejecimiento",
+    "usar": true,
+    "tema": "Cuánto envejece la población: porcentaje de mayores de 65 y de 80, edad media, jóvenes y extranjeros por territorio",
+    "preguntas": [
+      "¿Qué porcentaje de la población tiene más de 65 años en Asturias?",
+      "¿Qué provincia está más envejecida?",
+      "¿Cuál es la edad media de los españoles?",
+      "¿Qué porcentaje de la población ha nacido en el extranjero en Baleares?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_65",
+        "nombre": "porcentaje de la población de 65 años o más",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_80",
+        "nombre": "porcentaje de la población de 80 años o más",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_menores_16",
+        "nombre": "porcentaje de la población menor de 16 años",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "edad_media",
+        "nombre": "edad media de la población",
+        "unidad": "años",
+        "tipo": "media"
+      },
+      {
+        "columna": "indice_envejecimiento",
+        "nombre": "índice de envejecimiento (mayores de 64 por cada 100 menores de 16)",
+        "unidad": "mayores por cada 100 menores",
+        "tipo": "indice"
+      },
+      {
+        "columna": "dependencia",
+        "nombre": "tasa de dependencia (menores de 16 y mayores de 64 por cada 100 en edad de trabajar)",
+        "unidad": "por cada 100 personas en edad de trabajar",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "dependencia_mayores",
+        "nombre": "tasa de dependencia de los mayores",
+        "unidad": "por cada 100 personas en edad de trabajar",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "hombres_por_100_mujeres",
+        "nombre": "hombres por cada 100 mujeres",
+        "unidad": "hombres por cada 100 mujeres",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "pct_nacidos_extranjero",
+        "nombre": "porcentaje de la población nacida en el extranjero",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_extranjeros",
+        "nombre": "porcentaje de la población de nacionalidad extranjera",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población a 1 de enero",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mayores_65",
+        "nombre": "personas de 65 años o más",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mayores_80",
+        "nombre": "personas de 80 años o más",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "menores_16",
+        "nombre": "personas menores de 16 años",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "nacidos_extranjero",
+        "nombre": "personas nacidas en el extranjero",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "extranjeros",
+        "nombre": "personas de nacionalidad extranjera",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE, población a 1 de enero (el dato de 2025 es la población a 1 de enero de 2025). Sin columna de nombre: solo códigos, y los de comunidad y provincia se solapan, filtra por nivel. Nacidos en el extranjero y extranjeros solo desde 2002."
+  },
+  {
+    "tabla": "demografia_hogares",
+    "usar": true,
+    "tema": "Cuántos hogares hay, cuántas personas viven en cada uno y cuántos son de una sola persona, por territorio",
+    "preguntas": [
+      "¿Cuántos hogares hay en España?",
+      "¿Qué porcentaje de hogares son unipersonales en Asturias?",
+      "¿Cuál es el tamaño medio de los hogares en Andalucía?",
+      "¿Cuánto han crecido los hogares desde 2021?"
+    ],
+    "medidas": [
+      {
+        "columna": "hogares",
+        "nombre": "número de hogares",
+        "unidad": "hogares",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "tamano_medio",
+        "nombre": "tamaño medio del hogar",
+        "unidad": "personas por hogar",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_unipersonales",
+        "nombre": "porcentaje de hogares de una persona",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_2",
+        "nombre": "porcentaje de hogares de dos personas",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_3",
+        "nombre": "porcentaje de hogares de tres personas",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_4_o_mas",
+        "nombre": "porcentaje de hogares de cuatro o más personas",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "unipersonales",
+        "nombre": "hogares de una sola persona",
+        "unidad": "hogares",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE, hogares en viviendas familiares a 1 de enero, desde 2021 (el último dato es de 1 de enero de 2026). Sin columna de nombre; los códigos de comunidad y provincia se solapan, filtra por nivel."
+  },
+  {
+    "tabla": "demografia_piramide",
+    "usar": true,
+    "tema": "Cuántas personas hay de cada sexo y grupo de edad (pirámide de población) por territorio y año desde 1971",
+    "preguntas": [
+      "¿Cuántas mujeres de más de 85 años hay en España?",
+      "¿Cuántos niños de 0 a 4 años hay en Madrid?",
+      "¿Cómo ha cambiado la población joven de Extremadura desde 1990?",
+      "¿Cuántos hombres de 30 a 34 años nacidos en el extranjero hay en Barcelona?"
+    ],
+    "medidas": [
+      {
+        "columna": "poblacion",
+        "nombre": "población del grupo de edad y sexo",
+        "unidad": "personas",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "pct",
+        "nombre": "porcentaje del grupo sobre la población total del territorio",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "nacidos_extranjero",
+        "nombre": "personas del grupo nacidas en el extranjero",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_nacidos_extranjero",
+        "nombre": "porcentaje de nacidos en el extranjero del grupo sobre la población total",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo quinquenal de edad",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "INE, población a 1 de enero. No hay fila de total: la población total sale de sumar todos los grupos y ambos sexos (o usar demografia_envejecimiento). Los grupos van de '0-4' a '85 y más'; los de 5-9 y 10-14 etc. no ordenan bien alfabéticamente, usar edad_desde. Sin nombre de territorio; filtra por nivel."
+  },
+  {
+    "tabla": "diputados_inmuebles_grupos",
+    "usar": true,
+    "tema": "Cuántos diputados del Congreso son caseros o tienen varios inmuebles, por grupo parlamentario",
+    "preguntas": [
+      "¿Qué partido tiene más diputados caseros?",
+      "¿Cuántos diputados del PP alquilan algún inmueble?",
+      "¿Cuántos inmuebles tiene de mediana un diputado de Vox?",
+      "¿Cuánto cobran de alquiler los diputados del PSOE?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_alquila",
+        "nombre": "porcentaje de diputados que declaran rentas por alquiler",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_dos_viviendas",
+        "nombre": "porcentaje de diputados con dos o más viviendas",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_dos_urbanos",
+        "nombre": "porcentaje de diputados con dos o más inmuebles urbanos",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_dos_equivalentes",
+        "nombre": "porcentaje de diputados con el equivalente a dos o más inmuebles urbanos completos",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_sin_urbanos",
+        "nombre": "porcentaje de diputados sin ningún inmueble urbano",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "n_alquila",
+        "nombre": "diputados que declaran rentas por alquiler",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_dos_viviendas",
+        "nombre": "diputados con dos o más viviendas",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_diputados",
+        "nombre": "diputados del grupo",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_validos",
+        "nombre": "diputados con declaración leída correctamente",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mediana_inmuebles",
+        "nombre": "mediana de inmuebles por diputado",
+        "unidad": "inmuebles",
+        "tipo": "media"
+      },
+      {
+        "columna": "mediana_urbanos",
+        "nombre": "mediana de inmuebles urbanos por diputado",
+        "unidad": "inmuebles",
+        "tipo": "media"
+      },
+      {
+        "columna": "media_alquiler_real_eur",
+        "nombre": "alquiler medio declarado entre los que alquilan",
+        "unidad": "€ de 2025 al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "mediana_alquiler_real_eur",
+        "nombre": "alquiler mediano declarado entre los que alquilan",
+        "unidad": "€ de 2025 al año",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "grupo parlamentario",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Declaraciones de bienes y rentas de los diputados de la XV legislatura (rentas casi siempre del ejercicio 2022). Los porcentajes son sobre los diputados con declaración válida; el grupo Mixto y los pequeños tienen muy pocos diputados, cuidado con porcentajes sobre 5 personas. La fila 'Total' es el Congreso entero. El importe de alquiler es el declarado, en euros de 2025."
+  },
+  {
+    "tabla": "diputados_inmuebles_poblacion",
+    "usar": true,
+    "tema": "Cuántos diputados alquilan inmuebles frente al resto de declarantes del IRPF, por tramo de renta",
+    "preguntas": [
+      "¿Qué porcentaje de los españoles declara ingresos por alquiler?",
+      "¿Los diputados alquilan más que el resto de la población?",
+      "¿Qué porcentaje de quienes ganan entre 60.000 y 150.000 euros alquila inmuebles?",
+      "¿Cuántos declarantes del IRPF tienen inmuebles a su disposición?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de declarantes que cumplen el indicador",
+        "unidad": "% de declarantes",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "n",
+        "nombre": "declarantes que cumplen el indicador",
+        "unidad": "liquidaciones (o diputados)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "total",
+        "nombre": "total de declarantes del grupo",
+        "unidad": "liquidaciones (o diputados)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "media_real_eur",
+        "nombre": "ingreso medio por alquiler entre los que lo declaran",
+        "unidad": "€ de 2025 al año",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "colectivo",
+        "nombre": "colectivo (todos los declarantes, tramo de renta o diputados)",
+        "total": "Declarantes IRPF (todos)"
+      },
+      {
+        "columna": "tramo",
+        "nombre": "tramo de rendimientos en miles de euros",
+        "total": "Total"
+      },
+      {
+        "columna": "indicador_id",
+        "nombre": "indicador (alquila o inmuebles a disposición)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "AEAT, Estadística de los declarantes del IRPF (régimen común, una liquidación conjunta cuenta una vez); años 2019 a 2024 para el IRPF, pero la fila de diputados es del ejercicio 2022, así que la comparación válida es con anio 2022. Los tramos van en miles de euros, p. ej. '(60 - 150]'."
+  },
+  {
+    "tabla": "diputados_inmuebles_resumen",
+    "usar": true,
+    "tema": "Cuántos diputados son caseros según distintas definiciones: alquilan, tienen dos viviendas o dos inmuebles urbanos",
+    "preguntas": [
+      "¿Cuántos diputados son caseros?",
+      "¿Cuántos diputados tienen dos o más viviendas?",
+      "¿Cuántos diputados no tienen ningún inmueble urbano?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de diputados que cumplen la definición",
+        "unidad": "% de diputados con declaración válida",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "n_cumplen",
+        "nombre": "diputados que cumplen la definición",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_validos",
+        "nombre": "diputados con declaración leída correctamente",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_diputados",
+        "nombre": "diputados en activo",
+        "unidad": "diputados",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mediana_urbanos",
+        "nombre": "mediana de inmuebles urbanos por diputado",
+        "unidad": "inmuebles",
+        "tipo": "media"
+      },
+      {
+        "columna": "media_urbanos",
+        "nombre": "media de inmuebles urbanos por diputado",
+        "unidad": "inmuebles",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "definicion_id",
+        "nombre": "definición de casero",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por definición (alquila, dos_viviendas, dos_urbanos, dos_equivalentes, alquila_o_dos_viviendas, sin_urbanos); no hay una única definición oficial de 'casero', hay que decir cuál se usa. Las definiciones se solapan, no se suman. Sobre 347 declaraciones válidas de 350 diputados; rentas del ejercicio 2022."
+  },
+  {
+    "tabla": "economia_pib_per_capita",
+    "usar": true,
+    "tema": "PIB por habitante de España en euros reales y comparación con la UE, Alemania, Francia, Italia y Portugal",
+    "preguntas": [
+      "¿Cuál es el PIB per cápita de España?",
+      "¿Estamos por encima o por debajo de la media europea en renta por habitante?",
+      "¿Cómo se compara el PIB por habitante de España con el de Alemania?",
+      "¿Cómo ha evolucionado el PIB per cápita en España desde 1995?"
+    ],
+    "medidas": [
+      {
+        "columna": "real_eur",
+        "nombre": "PIB por habitante de España en euros reales",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "indice_ue",
+        "nombre": "PIB por habitante en paridad de poder adquisitivo (UE-27 = 100)",
+        "unidad": "índice UE-27 = 100",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat nama_10_pc. real_eur solo existe para España; los demás países y la UE solo tienen el índice en paridad de poder adquisitivo (UE-27 = 100), que no son euros."
+  },
+  {
+    "tabla": "economia_pib_trimestral",
+    "usar": true,
+    "tema": "PIB de España cada trimestre y sus componentes: consumo, inversión, exportaciones e importaciones",
+    "preguntas": [
+      "¿Cuánto ha crecido el PIB de España en el último trimestre respecto al año pasado?",
+      "¿Qué peso tienen las exportaciones en el PIB?",
+      "¿Cuánto es el PIB por habitante de España en euros reales?",
+      "¿Cómo ha evolucionado el consumo de los hogares desde 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_habitante_real",
+        "nombre": "PIB (o componente) por habitante en euros reales, a ritmo anual",
+        "unidad": "€ de 2025 por habitante al año",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "interanual",
+        "nombre": "variación real respecto al mismo trimestre del año anterior",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_pib",
+        "nombre": "peso del componente sobre el PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "real_meur",
+        "nombre": "valor real del trimestre en euros del último año completo",
+        "unidad": "millones de € de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "nominal_meur",
+        "nombre": "valor del trimestre en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "nombre",
+        "nombre": "componente del PIB",
+        "total": "PIB"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat, datos desestacionalizados; el valor por habitante está anualizado (cuatro trimestres) y no se suma entre trimestres. Las importaciones restan al PIB. Las cifras de millones sí son del trimestre (para pasar a año, multiplicar o sumar cuatro trimestres)."
+  },
+  {
+    "tabla": "economia_salarios",
+    "usar": true,
+    "tema": "Cuánto cobra de media un trabajador al mes en España, trimestre a trimestre, por sector y tipo de jornada",
+    "preguntas": [
+      "¿Cuál es el salario medio en España?",
+      "¿Cuánto cobra de media un trabajador de la construcción?",
+      "¿Cuánto han subido los sueldos descontando la inflación desde 2008?",
+      "¿Cuánto cobra un trabajador a tiempo parcial?"
+    ],
+    "medidas": [
+      {
+        "columna": "salario_total_real",
+        "nombre": "coste salarial total por trabajador y mes en euros reales",
+        "unidad": "€ de 2025 al mes",
+        "tipo": "media",
+        "principal": true,
+        "real": "salario_total_real"
+      },
+      {
+        "columna": "salario_total",
+        "nombre": "coste salarial total por trabajador y mes en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "salario_total_real"
+      },
+      {
+        "columna": "salario_ordinario_real",
+        "nombre": "salario ordinario por trabajador y mes en euros reales",
+        "unidad": "€ de 2025 al mes",
+        "tipo": "media"
+      },
+      {
+        "columna": "salario_ordinario",
+        "nombre": "salario ordinario por trabajador y mes en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media"
+      },
+      {
+        "columna": "interanual_real",
+        "nombre": "variación interanual real del coste salarial",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "interanual_nominal",
+        "nombre": "variación interanual nominal del coste salarial",
+        "unidad": "%",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "jornada",
+        "nombre": "tipo de jornada",
+        "total": "Todas"
+      },
+      {
+        "columna": "sector",
+        "nombre": "sector",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "INE ETCL (Encuesta Trimestral de Coste Laboral): es coste salarial bruto por trabajador y mes, con pagas extra prorrateadas; el trimestre muestra fuerte estacionalidad (el cuarto suele subir por las pagas), compara con el mismo trimestre de otro año. Solo España; para comunidades usar economia_salarios_ccaa."
+  },
+  {
+    "tabla": "economia_salarios_anual",
+    "usar": true,
+    "tema": "Salario medio mensual y anual en España por año, sector y jornada, con y sin inflación",
+    "preguntas": [
+      "¿Cuál fue el salario medio en España en 2024?",
+      "¿Cuánto ganan al año de media los trabajadores de la industria?",
+      "¿Han subido los salarios por encima de la inflación en los últimos años?",
+      "¿Cuánto cobran más los de jornada completa que los de parcial?"
+    ],
+    "medidas": [
+      {
+        "columna": "salario_real",
+        "nombre": "salario medio mensual en euros reales",
+        "unidad": "€ de 2025 al mes",
+        "tipo": "media",
+        "principal": true,
+        "real": "salario_real"
+      },
+      {
+        "columna": "salario_nominal",
+        "nombre": "salario medio mensual en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "salario_real"
+      },
+      {
+        "columna": "salario_anual_real",
+        "nombre": "salario medio anual en euros reales",
+        "unidad": "€ de 2025 al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "salario_anual_nominal",
+        "nombre": "salario medio anual en euros corrientes",
+        "unidad": "€ al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "crecimiento_real",
+        "nombre": "crecimiento anual del salario en términos reales",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "crecimiento_nominal",
+        "nombre": "crecimiento anual del salario en términos nominales",
+        "unidad": "%",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "jornada",
+        "nombre": "tipo de jornada",
+        "total": "Todas"
+      },
+      {
+        "columna": "sector",
+        "nombre": "sector",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Media de los cuatro trimestres de la ETCL del INE (coste salarial por trabajador). Solo España. El salario anual es el mensual por doce, aunque las pagas extra ya están prorrateadas."
+  },
+  {
+    "tabla": "economia_salarios_ccaa",
+    "usar": true,
+    "tema": "Cuánto cobran de media los trabajadores en cada comunidad autónoma y cuánto le cuestan a la empresa",
+    "preguntas": [
+      "¿En qué comunidad se cobra más?",
+      "¿Cuál es el salario medio en Extremadura?",
+      "¿Cuánto cuesta un trabajador a la empresa en Madrid?",
+      "¿Cómo han evolucionado los sueldos en Andalucía desde 2008 sin contar la inflación?"
+    ],
+    "medidas": [
+      {
+        "columna": "salario_real",
+        "nombre": "salario medio mensual en euros reales",
+        "unidad": "€ de 2025 al mes",
+        "tipo": "media",
+        "principal": true,
+        "real": "salario_real"
+      },
+      {
+        "columna": "salario_nominal",
+        "nombre": "salario medio mensual en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "salario_real"
+      },
+      {
+        "columna": "coste_laboral_real",
+        "nombre": "coste laboral total por trabajador y mes en euros reales",
+        "unidad": "€ de 2025 al mes",
+        "tipo": "media"
+      },
+      {
+        "columna": "coste_laboral_nominal",
+        "nombre": "coste laboral total por trabajador y mes en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media"
+      },
+      {
+        "columna": "crecimiento_real",
+        "nombre": "crecimiento anual real del salario",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "indice_espana",
+        "nombre": "salario respecto a la media de España (España = 100)",
+        "unidad": "índice España = 100",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "territorio",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "INE ETCL tabla 6061, media de los cuatro trimestres. Solo las 17 comunidades (sin Ceuta ni Melilla). Los nombres usan la forma del INE ('Madrid, Comunidad de', 'Balears, Illes')."
+  },
+  {
+    "tabla": "economia_sectores",
+    "usar": true,
+    "tema": "Qué sectores componen la economía española: peso en el valor añadido y el empleo, ocupados y productividad por rama",
+    "preguntas": [
+      "¿Qué peso tiene la industria en la economía española?",
+      "¿Cuántos ocupados hay en el comercio, transporte y hostelería?",
+      "¿Qué sector es más productivo?",
+      "¿Cómo ha cambiado el peso de la agricultura desde 1995?"
+    ],
+    "medidas": [
+      {
+        "columna": "peso_vab",
+        "nombre": "peso del sector en el valor añadido de la economía",
+        "unidad": "% del valor añadido",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "peso_empleo",
+        "nombre": "peso del sector en el empleo",
+        "unidad": "% del empleo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ocupados_1000_hab",
+        "nombre": "ocupados del sector por cada 1.000 habitantes",
+        "unidad": "ocupados por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "productividad_real",
+        "nombre": "productividad real por ocupado",
+        "unidad": "€ de 2025 por ocupado",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "crecimiento_real",
+        "nombre": "crecimiento real del valor añadido",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "vab_real_meur",
+        "nombre": "valor añadido bruto en euros reales",
+        "unidad": "millones de € de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_nominal_meur",
+        "nombre": "valor añadido bruto en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ocupados_miles",
+        "nombre": "personas ocupadas",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "asalariados_miles",
+        "nombre": "personas asalariadas",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector de la economía",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat NACE A10, solo España. Manufacturas (rama C) es una subrama de Industria y energía (B-E, marcada con es_subrama), así que no hay que sumarlas juntas ni compararlas como sectores independientes."
+  },
+  {
+    "tabla": "educacion_fp",
+    "usar": true,
+    "tema": "Qué porcentaje del alumnado de bachillerato y edad equivalente estudia formación profesional, en España y en la UE",
+    "preguntas": [
+      "¿Qué porcentaje de estudiantes de secundaria hace FP en España?",
+      "¿España tiene menos alumnos de FP que la media de la UE?",
+      "¿Cuántos alumnos de FP hay en España?",
+      "¿Cómo ha evolucionado la FP desde 2013?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_fp",
+        "nombre": "porcentaje del alumnado de segunda etapa de secundaria que cursa FP",
+        "unidad": "% del alumnado",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "alumnos_fp",
+        "nombre": "alumnos de formación profesional",
+        "unidad": "alumnos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "alumnos_etapa",
+        "nombre": "alumnos de segunda etapa de secundaria",
+        "unidad": "alumnos",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ue"
+      ],
+      "nivel": "nivel",
+      "codigo": null,
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat; solo España (nivel pais) y el conjunto de la UE-27 (nivel ue), sin comunidades. Último año 2024."
+  },
+  {
+    "tabla": "educacion_gasto",
+    "usar": true,
+    "tema": "Cuánto gasta el sector público en educación en España frente a la UE, por etapa y por habitante",
+    "preguntas": [
+      "¿Cuánto gasta España en educación por habitante?",
+      "¿Qué porcentaje del PIB se dedica a la educación en España y en la UE?",
+      "¿Cuánto se gasta en universidades?",
+      "¿Cómo ha evolucionado el gasto en educación desde 2009?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto público en educación por habitante en euros reales (solo España)",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "pct_pib",
+        "nombre": "gasto público en educación en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "gasto público en educación",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ue"
+      ],
+      "nivel": "nivel",
+      "codigo": null,
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "funcion",
+        "nombre": "etapa educativa",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat COFOG GF09, solo España y UE-27 (nivel ue). Las euros por habitante reales solo existen para España; la UE solo tiene % del PIB y millones corrientes. Las etapas suman el Total (salvo redondeos); el último año es 2024."
+  },
+  {
+    "tabla": "educacion_gasto_alumno",
+    "usar": true,
+    "tema": "Cuánto se gasta al año por cada alumno en España y en la UE, según el nivel educativo",
+    "preguntas": [
+      "¿Cuánto cuesta al año un alumno de primaria en España?",
+      "¿Cuánto se gasta por alumno universitario?",
+      "¿Gasta España más o menos por alumno que la media europea?",
+      "¿Cómo ha evolucionado el gasto por alumno en la ESO?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_real",
+        "nombre": "gasto anual por alumno en euros reales (solo España)",
+        "unidad": "€ de 2025 por alumno",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "eur",
+        "nombre": "gasto anual por alumno en euros corrientes",
+        "unidad": "€ por alumno",
+        "tipo": "media"
+      },
+      {
+        "columna": "pps",
+        "nombre": "gasto anual por alumno en paridad de poder adquisitivo",
+        "unidad": "PPS por alumno",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_pib_hab",
+        "nombre": "gasto por alumno como porcentaje del PIB por habitante",
+        "unidad": "% del PIB por habitante",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ue"
+      ],
+      "nivel": "nivel_geo",
+      "codigo": null,
+      "nombre": null,
+      "espana": {
+        "columna": "nivel_geo",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "nivel",
+        "nombre": "nivel educativo",
+        "total": "Todos los niveles (de infantil a universidad)"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat educ_uoe_fini04, por alumno equivalente a tiempo completo, hasta 2023. Aquí la columna 'nivel' es el nivel educativo y el territorio está en 'nivel_geo'. Algunos niveles (Bachillerato y FP de grado medio, Bachillerato, FP de grado medio) se solapan; los euros reales solo para España."
+  },
+  {
+    "tabla": "educacion_indicadores",
+    "usar": true,
+    "tema": "Abandono escolar temprano, nivel de estudios de la población adulta y jóvenes que ni estudian ni trabajan, por comunidad, España y UE",
+    "preguntas": [
+      "¿Cuál es la tasa de abandono escolar temprano en España?",
+      "¿Qué comunidad tiene más jóvenes que ni estudian ni trabajan?",
+      "¿Qué porcentaje de adultos tiene estudios superiores en el País Vasco?",
+      "¿Cómo ha evolucionado el abandono escolar desde 2002?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador educativo",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "ue"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador",
+        "nombre": "indicador (abandono, nivel básico, de segunda etapa o superior a los 25-64 años, jóvenes NEET de 15-29 o 18-24)",
+        "total": null,
+        "defecto": "abandono"
+      }
+    ],
+    "filtros": [],
+    "notas": "Eurostat EPA armonizada. Hay que elegir un indicador (abandono, basica_25_64, segunda_25_64, superior_25_64, neet_15_29, neet_18_24); el valor es siempre un porcentaje pero de poblaciones distintas, no se suma ni se promedia entre indicadores. Sin nombres de comunidad: solo código INE (00 España, UE para la Unión Europea); algunos años de comunidades pequeñas faltan."
+  }
+]

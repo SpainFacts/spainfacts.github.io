@@ -1,0 +1,2009 @@
+[
+  {
+    "tabla": "alcaldes_actuales",
+    "usar": true,
+    "tema": "Quién es el alcalde o alcaldesa de cada municipio hoy, de qué partido y cuántos años lleva",
+    "preguntas": [
+      "¿Quién es el alcalde de Cieza?",
+      "¿Cuántos alcaldes del PP hay en la provincia de Burgos?",
+      "¿Qué municipios llevan más años con el mismo alcalde?",
+      "¿En cuántos municipios ha cambiado el partido del alcalde en el último mandato?"
+    ],
+    "medidas": [
+      {
+        "columna": "anios_en_cargo",
+        "nombre": "años seguidos del alcalde en el cargo",
+        "unidad": "años",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "anios_partido",
+        "nombre": "años seguidos de la misma familia política en la alcaldía",
+        "unidad": "años",
+        "tipo": "media"
+      },
+      {
+        "columna": "mandatos_familia",
+        "nombre": "mandatos seguidos de la misma familia política",
+        "unidad": "mandatos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio (padrón 2025)",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "familia política del alcalde",
+        "total": null
+      },
+      {
+        "columna": "cargo",
+        "nombre": "tipo de cargo",
+        "total": null
+      },
+      {
+        "columna": "familia_anterior",
+        "nombre": "familia política del alcalde anterior",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por municipio (8.132), mandato 2023-2027, con las toma de posesión hasta septiembre de 2026. Para contar alcaldías por partido se cuentan filas; para población gobernada se suma poblacion. Los códigos cod_prov y cod_ccaa también están en la tabla. El alcalde se guarda en mayúsculas."
+  },
+  {
+    "tabla": "alcaldes_familias_territorio",
+    "usar": true,
+    "tema": "Cuántas alcaldías y cuánta población gobierna cada partido en España, en cada comunidad y en cada provincia",
+    "preguntas": [
+      "¿Qué partido gobierna más ayuntamientos en España?",
+      "¿Qué porcentaje de la población vive en municipios gobernados por el PSOE?",
+      "¿Cuántas alcaldías tiene el PP en Andalucía?",
+      "¿Qué partido manda en más ayuntamientos de la provincia de Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_poblacion",
+        "nombre": "porcentaje de la población que gobierna el partido",
+        "unidad": "% de la población",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_ayuntamientos",
+        "nombre": "porcentaje de los ayuntamientos que gobierna el partido",
+        "unidad": "% de los ayuntamientos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "n",
+        "nombre": "número de alcaldías",
+        "unidad": "alcaldías",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población gobernada",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "familia política",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Mandato 2023-2027, foto actual. No hay columna de nombre: el territorio se identifica por el código (España 00, comunidades 01-19, provincias 01-52, según el nivel). No sumar entre niveles. Los porcentajes ya son sobre el total del territorio."
+  },
+  {
+    "tabla": "alcaldes_historia",
+    "notas": "Historial de alcaldes (una fila por periodo) sin cifra que consultar: sirve para listar; para preguntas con cifra, alcaldes_actuales o alcaldes_familias_territorio.",
+    "usar": false
+  },
+  {
+    "tabla": "alcaldes_resumen_familias",
+    "usar": true,
+    "tema": "Reparto nacional de alcaldías y población gobernada entre partidos tras las municipales de 2023",
+    "preguntas": [
+      "¿Cuántos ayuntamientos gobierna el PP en España?",
+      "¿Qué partido gobierna a más población?",
+      "¿Cuántas alcaldías tiene Vox?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_poblacion",
+        "nombre": "porcentaje de la población española que gobierna el partido",
+        "unidad": "% de la población",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "pct_ayuntamientos",
+        "nombre": "porcentaje de los ayuntamientos de España que gobierna el partido",
+        "unidad": "% de los ayuntamientos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "n_ayuntamientos",
+        "nombre": "número de ayuntamientos gobernados",
+        "unidad": "ayuntamientos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion_gobernada",
+        "nombre": "población gobernada",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "familia política",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo total España; para comunidades o provincias usar alcaldes_familias_territorio. 25 familias, incluida Independientes y locales y Comisión gestora."
+  },
+  {
+    "tabla": "almacenamiento_acceso",
+    "usar": true,
+    "tema": "Capacidad de conexión a la red concedida o en trámite para baterías y bombeo en cada comunidad",
+    "preguntas": [
+      "¿Cuánta capacidad de acceso para almacenamiento se ha concedido en Andalucía?",
+      "¿Qué comunidad tiene más almacenamiento en tramitación?",
+      "¿Cuántos nudos de la red admiten almacenamiento en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "otorgada_mw",
+        "nombre": "capacidad de acceso otorgada para almacenamiento",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "en_tramitacion_mw",
+        "nombre": "capacidad de acceso en tramitación",
+        "unidad": "MW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "nudos",
+        "nombre": "nudos de la red con capacidad de almacenamiento",
+        "unidad": "nudos",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha_fichero",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo dos ficheros mensuales (septiembre y octubre de 2026); cada uno es una foto completa, así que no se suman entre ficheros: tomar el último. Los nombres de comunidad son los de REE (Comunidad Foral de Navarra, etc.)."
+  },
+  {
+    "tabla": "almacenamiento_diario",
+    "usar": true,
+    "tema": "Cuánta energía mueven cada día el bombeo hidráulico y las baterías en España",
+    "preguntas": [
+      "¿Cuánta energía entregaron las baterías ayer?",
+      "¿Cuál fue el día de mayor turbinado de bombeo?",
+      "¿Cómo ha evolucionado el uso de baterías desde 2025?"
+    ],
+    "medidas": [
+      {
+        "columna": "bombeo_turbinado_mwh",
+        "nombre": "energía generada por bombeo (turbinado)",
+        "unidad": "MWh",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "bombeo_consumido_mwh",
+        "nombre": "energía consumida por bombeo para subir agua",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "baterias_entregado_mwh",
+        "nombre": "energía entregada por las baterías",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "baterias_cargado_mwh",
+        "nombre": "energía cargada en las baterías",
+        "unidad": "MWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "bombeo_turbinado_pico_mw",
+        "nombre": "potencia máxima del día en turbinado de bombeo",
+        "unidad": "MW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "bombeo_consumido_pico_mw",
+        "nombre": "potencia máxima del día en consumo de bombeo",
+        "unidad": "MW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "baterias_entregado_pico_mw",
+        "nombre": "potencia máxima del día entregada por baterías",
+        "unidad": "MW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "baterias_cargado_pico_mw",
+        "nombre": "potencia máxima del día cargando baterías",
+        "unidad": "MW",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Total nacional, desde noviembre de 2024. Datos ESIOS en MWh (1 GWh = 1.000 MWh). Los picos son MW instantáneos y no se suman. El último día puede estar incompleto."
+  },
+  {
+    "tabla": "almacenamiento_mensual",
+    "usar": true,
+    "tema": "Energía mensual del bombeo y de las baterías en España desde 2015 y rendimiento del bombeo",
+    "preguntas": [
+      "¿Cuánta electricidad generó el bombeo en agosto de 2026?",
+      "¿Qué rendimiento tiene el bombeo hidráulico?",
+      "¿Cómo ha crecido la energía entregada por baterías?"
+    ],
+    "medidas": [
+      {
+        "columna": "bombeo_turbinado_gwh",
+        "nombre": "energía generada por bombeo (turbinado)",
+        "unidad": "GWh",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "bombeo_consumido_gwh",
+        "nombre": "energía consumida por bombeo para subir agua",
+        "unidad": "GWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "baterias_entregado_gwh",
+        "nombre": "energía entregada por las baterías",
+        "unidad": "GWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "baterias_cargado_gwh",
+        "nombre": "energía cargada en las baterías",
+        "unidad": "GWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "rendimiento_bombeo",
+        "nombre": "rendimiento del bombeo (energía turbinada entre consumida)",
+        "unidad": "%",
+        "tipo": "ratio",
+        "escala": 100
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Balance REE nacional. El último mes (octubre de 2026) está empezado y es incompleto. Las baterías solo tienen datos desde hace pocos años (nulo antes). El rendimiento es una fracción, no un porcentaje."
+  },
+  {
+    "tabla": "almacenamiento_potencia",
+    "usar": true,
+    "tema": "Potencia instalada de bombeo y de baterías hibridadas por comunidad autónoma",
+    "preguntas": [
+      "¿Cuánta potencia de bombeo hay en Castilla y León?",
+      "¿Qué comunidad tiene más baterías hibridadas?",
+      "¿Cómo ha crecido la potencia de baterías en Andalucía?"
+    ],
+    "medidas": [
+      {
+        "columna": "mw",
+        "nombre": "potencia instalada de almacenamiento",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "comunidad",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de almacenamiento",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Dos tipos: bombeo_puro y baterias_hibridadas; no mezclar si se pregunta por uno solo, y para el total nacional sumar las comunidades en un mismo mes. Es una potencia instalada (foto), no se suma entre meses. Últimos valores nacionales: unos 3.331 MW de bombeo y 256 MW de baterías hibridadas."
+  },
+  {
+    "tabla": "calor_anual",
+    "usar": true,
+    "tema": "Cuánto más calor hace cada año que la media de 1991-2020 en España y cuántos récords diarios se baten",
+    "preguntas": [
+      "¿Cuál fue el año más caluroso en España?",
+      "¿Cuántos grados por encima de lo normal estuvo 2022?",
+      "¿Cuántos récords de calor se batieron el año pasado?",
+      "¿Cómo ha evolucionado la temperatura máxima desde 1991?"
+    ],
+    "medidas": [
+      {
+        "columna": "anomalia_tmax",
+        "nombre": "diferencia de la temperatura máxima media con la normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "anomalia_tmed",
+        "nombre": "diferencia de la temperatura media con la normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmax_verano",
+        "nombre": "diferencia de la temperatura máxima en verano con la normal",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "dias_por_encima",
+        "nombre": "días del año con temperatura máxima por encima de lo normal",
+        "unidad": "días",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "dias_p90",
+        "nombre": "días del año entre el 10 % más calurosos de su época",
+        "unidad": "días",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "records_dia",
+        "nombre": "récords diarios de temperatura máxima batidos en el año (suma de provincias)",
+        "unidad": "récords",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Media de las provincias de España; datos de AEMET desde 1991. El año en curso (2026) está incompleto (anio_completo = false, datos hasta ultima_fecha): no compararlo con años enteros en días o récords. La normal es la media 1991-2020."
+  },
+  {
+    "tabla": "calor_espana_diario",
+    "usar": true,
+    "tema": "Temperatura máxima diaria media de España frente a lo normal, día a día desde 1991",
+    "preguntas": [
+      "¿Qué día ha hecho más calor en España?",
+      "¿Cuánto más calor de lo normal hizo el 15 de agosto de 2025?",
+      "¿Cuántas provincias superaron récords ayer?"
+    ],
+    "medidas": [
+      {
+        "columna": "anomalia_tmax_media",
+        "nombre": "diferencia de la temperatura máxima media con la normal del día",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "tmax_media",
+        "nombre": "temperatura máxima media de las provincias",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmax_media_historica",
+        "nombre": "temperatura máxima normal 1991-2020 del día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmed_media",
+        "nombre": "diferencia de la temperatura media con la normal",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "n_provincias_por_encima",
+        "nombre": "provincias por encima de su temperatura normal",
+        "unidad": "provincias",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_provincias_p90",
+        "nombre": "provincias entre el 10 % más calurosas de su época",
+        "unidad": "provincias",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_records_dia",
+        "nombre": "provincias que baten su récord diario",
+        "unidad": "provincias",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Media de las provincias con dato cada día (n_provincias entre 47 y 52). Temperaturas en grados Celsius. Los recuentos de provincias son por día, no se suman entre días."
+  },
+  {
+    "tabla": "calor_maxima_diaria",
+    "usar": true,
+    "tema": "Qué estación de AEMET registró la temperatura más alta de España cada día",
+    "preguntas": [
+      "¿Dónde hizo más calor en España ayer?",
+      "¿Cuál es la temperatura más alta registrada desde 2025?",
+      "¿Qué estación suele marcar el máximo del país en verano?"
+    ],
+    "medidas": [
+      {
+        "columna": "tmax",
+        "nombre": "temperatura máxima más alta de España ese día",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "altitud",
+        "nombre": "altitud de la estación",
+        "unidad": "m",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "estacion",
+        "nombre": "estación meteorológica",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por día desde enero de 2025 con la estación que marca el máximo nacional. Las provincias van en MAYÚSCULAS sin tildes (CORDOBA, SEVILLA) y hay dos grafías para Tenerife (STA. CRUZ DE TENERIFE y SANTA CRUZ DE TENERIFE). Máximo del periodo: 46 grados en El Granado (Huelva)."
+  },
+  {
+    "tabla": "calor_normal_diaria",
+    "usar": false,
+    "notas": "Tabla auxiliar con la normal climática diaria 1991-2020 por provincia (por día del año); sirve para dibujar la banda de referencia, no para responder preguntas directas. La comparación con la normal ya está en calor_provincia_diario."
+  },
+  {
+    "tabla": "calor_provincia_diario",
+    "usar": true,
+    "tema": "Temperaturas diarias de cada provincia frente a lo normal, con récords de calor, desde 2024",
+    "preguntas": [
+      "¿Qué temperatura máxima hubo en Sevilla el 10 de agosto de 2025?",
+      "¿Cuántos días superó Badajoz el percentil 90 este verano?",
+      "¿Cuánto más calor de lo normal hace hoy en Madrid?",
+      "¿Qué provincia ha tenido más días de récord en 2025?"
+    ],
+    "medidas": [
+      {
+        "columna": "tmax",
+        "nombre": "temperatura máxima del día",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "tmin",
+        "nombre": "temperatura mínima del día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmed",
+        "nombre": "temperatura media del día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmax",
+        "nombre": "diferencia de la máxima con la normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmin",
+        "nombre": "diferencia de la mínima con la normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmed",
+        "nombre": "diferencia de la media con la normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmax_media_historica",
+        "nombre": "temperatura máxima normal 1991-2020 de ese día",
+        "unidad": "°C",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "categoría respecto a lo normal",
+        "total": null
+      },
+      {
+        "columna": "estacion",
+        "nombre": "estación de referencia",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una estación de referencia AEMET por provincia, desde julio de 2024. Para contar días de calor usar supera_p90 o es_record_dia (booleanos) o categoria (Muy por encima, Por encima, Normal, Por debajo, Muy por debajo). Temperaturas en grados Celsius."
+  },
+  {
+    "tabla": "calor_records",
+    "usar": true,
+    "tema": "Los 20 días más calurosos de cada provincia desde 1991",
+    "preguntas": [
+      "¿Cuál es el día más caluroso de la historia en Córdoba?",
+      "¿En qué años se concentran los récords de calor en Valencia?",
+      "¿Qué provincia ha llegado a 46,9 grados?"
+    ],
+    "medidas": [
+      {
+        "columna": "tmax",
+        "nombre": "temperatura máxima del día récord",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "anomalia_tmax",
+        "nombre": "diferencia con la temperatura máxima normal de ese día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmax_media_historica",
+        "nombre": "temperatura máxima normal 1991-2020 de ese día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "posicion",
+        "nombre": "puesto entre los 20 días más calurosos de la provincia",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "estacion",
+        "nombre": "estación de referencia",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo los 20 días más calurosos de cada provincia (posición 1 es el récord absoluto), no todos los días. Para ver el récord de una provincia filtrar posicion = 1."
+  },
+  {
+    "tabla": "calor_ultimo_dia",
+    "usar": true,
+    "tema": "Cómo está hoy la temperatura en cada provincia frente a lo normal, último día con datos",
+    "preguntas": [
+      "¿Qué provincia tiene hoy más calor?",
+      "¿Qué temperatura máxima hay hoy en Albacete?",
+      "¿Qué provincias están por encima de lo normal hoy?"
+    ],
+    "medidas": [
+      {
+        "columna": "tmax",
+        "nombre": "temperatura máxima del último día",
+        "unidad": "°C",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "tmin",
+        "nombre": "temperatura mínima del último día",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmax",
+        "nombre": "diferencia de la máxima con lo normal",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "anomalia_tmin",
+        "nombre": "diferencia de la mínima con lo normal",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmax_media_historica",
+        "nombre": "temperatura máxima normal 1991-2020",
+        "unidad": "°C",
+        "tipo": "media"
+      },
+      {
+        "columna": "tmax_p90",
+        "nombre": "umbral de máxima del 10 % de días más calurosos",
+        "unidad": "°C",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "categoría respecto a lo normal",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una sola fecha (el último día con datos de AEMET, ahora 28 de septiembre de 2026); 52 filas, una por provincia. Para otros días usar calor_provincia_diario."
+  },
+  {
+    "tabla": "ccaa_cuentas_capitulos",
+    "usar": true,
+    "tema": "En qué gasta y de dónde ingresa cada comunidad autónoma, por capítulo económico (personal, transferencias, impuestos...)",
+    "preguntas": [
+      "¿Cuánto gastó Andalucía en personal en 2023?",
+      "¿Cuánto ingresó Cataluña por transferencias corrientes?",
+      "¿Qué capítulo de gasto es el mayor en la Comunidad de Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "ejecutado",
+        "nombre": "importe ejecutado (derechos u obligaciones reconocidas netas)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "presupuesto_inicial",
+        "nombre": "presupuesto inicial",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "presupuesto_definitivo",
+        "nombre": "presupuesto definitivo tras modificaciones",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "cobrado_pagado",
+        "nombre": "importe efectivamente cobrado o pagado",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "ingreso o gasto",
+        "total": null
+      },
+      {
+        "columna": "capitulo_nombre",
+        "nombre": "capítulo económico",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Importes en euros corrientes (no miles ni millones), liquidación 2002-2024 de Hacienda (SGCIEF). Sin filas de total: hay que sumar capítulos y filtrar tipo ('ingreso' o 'gasto') para no mezclarlos. No hay columna con el nombre de la comunidad, solo el código INE (01 Andalucía ... 18 Ceuta, 19 Melilla). No hay versión por habitante ni en euros reales."
+  },
+  {
+    "tabla": "ccaa_cuentas_resumen",
+    "usar": true,
+    "tema": "Ingresos, gastos y saldo anual de cada comunidad autónoma (liquidación del presupuesto)",
+    "preguntas": [
+      "¿Cuánto gastó la Comunidad Valenciana en 2023?",
+      "¿Qué comunidades cerraron 2024 con déficit?",
+      "¿Cómo han evolucionado los ingresos de Galicia desde 2008?",
+      "¿Qué comunidad tuvo el mayor déficit no financiero en 2012?"
+    ],
+    "medidas": [
+      {
+        "columna": "gastos_no_financieros",
+        "nombre": "gastos no financieros (sin deuda ni activos financieros)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ingresos_no_financieros",
+        "nombre": "ingresos no financieros",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_no_financiero",
+        "nombre": "saldo no financiero (positivo = superávit)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "deficit_no_financiero",
+        "nombre": "déficit no financiero (positivo = déficit)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_totales",
+        "nombre": "ingresos totales",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_totales",
+        "nombre": "gastos totales",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo",
+        "nombre": "saldo total (ingresos menos gastos)",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Euros corrientes (no miles), liquidación 2002-2024 de Hacienda. Cuidado con el signo: saldo positivo = superávit, deficit_no_financiero positivo = déficit (es el saldo con el signo cambiado). Sin nombre de comunidad: solo el código INE (01 Andalucía, 13 Madrid, 09 Cataluña...). Sin versión por habitante."
+  },
+  {
+    "tabla": "ccaa_deuda",
+    "usar": true,
+    "tema": "Deuda pública de cada comunidad autónoma, en euros y en porcentaje de su PIB",
+    "preguntas": [
+      "¿Cuánto debe Cataluña?",
+      "¿Qué comunidad tiene más deuda sobre su PIB?",
+      "¿Cómo ha evolucionado la deuda de la Comunidad de Madrid desde 2010?",
+      "¿Cuánta deuda tiene la Comunitat Valenciana?"
+    ],
+    "medidas": [
+      {
+        "columna": "deuda_pct_pib",
+        "nombre": "deuda en % del PIB regional",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "deuda_eur",
+        "nombre": "deuda en euros",
+        "unidad": "€",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Deuda PDE del Banco de España a fin de trimestre, de diciembre de 1994 a junio de 2026; euros corrientes. Sin Ceuta ni Melilla. Nombres como los publica el BdE (Comunidad de Madrid, Comunitat Valenciana, Comunidad Foral de Navarra...). El último trimestre disponible es 2026 T2 (anio 2026, trimestre 2). Es un stock: no sumar trimestres."
+  },
+  {
+    "tabla": "ccaa_gasto_politicas",
+    "usar": true,
+    "tema": "En qué políticas gasta cada comunidad autónoma (sanidad, educación, infraestructuras, cultura...)",
+    "preguntas": [
+      "¿Cuánto gastó Andalucía en educación en 2023?",
+      "¿Qué comunidad gasta más en sanidad?",
+      "¿Cómo ha evolucionado el gasto en cultura de Galicia?",
+      "¿Cuánto gasta Aragón en fomento del empleo?"
+    ],
+    "medidas": [
+      {
+        "columna": "obligaciones",
+        "nombre": "gasto (obligaciones reconocidas depuradas)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "obligaciones_brutas",
+        "nombre": "gasto bruto sin depurar",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "area_nombre",
+        "nombre": "área de gasto",
+        "total": null
+      },
+      {
+        "columna": "politica_nombre",
+        "nombre": "política de gasto",
+        "unidad": null,
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Euros corrientes (no miles), 2006-2024. No hay filas de total: sumar políticas dentro de cada comunidad y año; las 5 áreas suman el gasto total (unos 268.000 millones de euros en 2024 entre todas). Sin nombre de comunidad, solo código INE. Sin versión por habitante: para comparar comunidades hay que dividir por población."
+  },
+  {
+    "tabla": "ccaa_saldo",
+    "usar": true,
+    "tema": "Déficit o superávit anual de cada comunidad autónoma según la contabilidad europea (PDE)",
+    "preguntas": [
+      "¿Qué comunidad tuvo más déficit en 2023?",
+      "¿Cuál fue el déficit de Andalucía en 2020 como porcentaje del PIB?",
+      "¿Qué comunidades cerraron con superávit en 2025?"
+    ],
+    "medidas": [
+      {
+        "columna": "saldo_pct_pib",
+        "nombre": "saldo en % del PIB regional (negativo = déficit)",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "saldo_eur",
+        "nombre": "saldo en euros (negativo = déficit)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pib_implicito_eur",
+        "nombre": "PIB regional implícito usado para el cálculo",
+        "unidad": "€",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Signo negativo = déficit, positivo = superávit. Años completos 2013-2025, sin Ceuta ni Melilla. El PIB regional es implícito (deducido de la deuda), no el oficial."
+  },
+  {
+    "tabla": "centrales",
+    "usar": true,
+    "tema": "Cada central eléctrica de España (solar, eólica, hidráulica, gas, nuclear...) con su potencia, estado y dueño",
+    "preguntas": [
+      "¿Cuál es la central eléctrica más grande de España?",
+      "¿Cuántos parques eólicos hay en Aragón?",
+      "¿Qué centrales solares fotovoltaicas hay en Badajoz?",
+      "¿Qué empresa tiene más potencia renovable?"
+    ],
+    "medidas": [
+      {
+        "columna": "potencia_mw",
+        "nombre": "potencia de la central",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "n_unidades",
+        "nombre": "unidades o aerogeneradores de la central",
+        "unidad": "unidades",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "provincia",
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología",
+        "total": null
+      },
+      {
+        "columna": "estado_grupo",
+        "nombre": "estado de la central",
+        "total": null,
+        "defecto": "En operación"
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma",
+        "total": null
+      },
+      {
+        "columna": "propietario",
+        "nombre": "propietario",
+        "total": null
+      },
+      {
+        "columna": "operador",
+        "nombre": "operador",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos de Global Energy Monitor. Una fila por central y estado: una misma central puede aparecer en 'En operación' y 'Retirada'. Para preguntar por lo que hay hoy filtrar estado_grupo = 'En operación' (si no, se mezclan canceladas, retiradas y en tramitación). La potencia no se suma entre estados. Hay también anio_inicio_min y anio_retiro (año de puesta en marcha y retirada)."
+  },
+  {
+    "tabla": "centrales_ccaa",
+    "usar": true,
+    "tema": "Potencia eléctrica de cada comunidad autónoma por tecnología y estado (en operación, en construcción, en tramitación...)",
+    "preguntas": [
+      "¿Qué comunidad tiene más potencia solar fotovoltaica?",
+      "¿Cuánta potencia eólica hay en Galicia?",
+      "¿Cuánta potencia de ciclo combinado hay en Andalucía?",
+      "¿Qué comunidad tiene más solar en tramitación?"
+    ],
+    "medidas": [
+      {
+        "columna": "potencia_mw",
+        "nombre": "potencia instalada o prevista",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "n_centrales",
+        "nombre": "número de centrales",
+        "unidad": "centrales",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_unidades",
+        "nombre": "número de unidades o aerogeneradores",
+        "unidad": "unidades",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología",
+        "total": null
+      },
+      {
+        "columna": "estado_grupo",
+        "nombre": "estado",
+        "total": null,
+        "defecto": "En operación"
+      }
+    ],
+    "filtros": [],
+    "notas": "Foto actual de Global Energy Monitor, sin año. Para la potencia que existe hoy filtrar estado_grupo = 'En operación'; los demás estados (En tramitación, Anunciada, Paralizada, Cancelada, Retirada, En construcción) no deben sumarse con ella. Es potencia, no producción."
+  },
+  {
+    "tabla": "centrales_por_anio",
+    "usar": true,
+    "tema": "Potencia eléctrica que entra en servicio y que se retira cada año, por tecnología y comunidad",
+    "preguntas": [
+      "¿Cuánta potencia solar fotovoltaica se instaló en 2022?",
+      "¿En qué año se retiró más carbón?",
+      "¿Cuánta potencia eólica entró en servicio en Castilla y León desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "mw_alta",
+        "nombre": "potencia que entra en servicio ese año",
+        "unidad": "MW",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "mw_baja",
+        "nombre": "potencia que se retira ese año",
+        "unidad": "MW",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "mw_neta",
+        "nombre": "potencia neta (altas menos bajas)",
+        "unidad": "MW",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "mw_en_construccion",
+        "nombre": "potencia en construcción con puesta en marcha prevista ese año",
+        "unidad": "MW",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Datos de Global Energy Monitor, años 1913 a 2027; los de 2026-2027 son previsiones de lo que está en construcción. Se pueden sumar años para obtener la potencia acumulada."
+  },
+  {
+    "tabla": "centrales_resumen",
+    "usar": true,
+    "tema": "Potencia eléctrica total de España por tecnología y estado (operación, construcción, tramitación...)",
+    "preguntas": [
+      "¿Cuánta potencia solar fotovoltaica hay en España?",
+      "¿Cuántos MW de eólica hay en tramitación?",
+      "¿Qué tecnología tiene más potencia instalada?"
+    ],
+    "medidas": [
+      {
+        "columna": "potencia_mw",
+        "nombre": "potencia",
+        "unidad": "MW",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "n_centrales",
+        "nombre": "número de centrales",
+        "unidad": "centrales",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_unidades",
+        "nombre": "número de unidades o aerogeneradores",
+        "unidad": "unidades",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tecnologia",
+        "nombre": "tecnología",
+        "total": null
+      },
+      {
+        "columna": "estado_grupo",
+        "nombre": "estado",
+        "total": null,
+        "defecto": "En operación"
+      }
+    ],
+    "filtros": [],
+    "notas": "Total nacional de Global Energy Monitor, sin año. Hay que filtrar estado_grupo = 'En operación' para la potencia actual (en operación suman unos 123.400 MW; en tramitación unos 141.000 MW, que no existen todavía). No mezclar estados."
+  },
+  {
+    "tabla": "clima_electricidad_anual",
+    "usar": true,
+    "tema": "Qué parte de la electricidad en España es renovable o sin emisiones y cuánto CO2 emite cada kWh generado",
+    "preguntas": [
+      "¿Qué porcentaje de la electricidad en España fue renovable en 2025?",
+      "¿Cuánto CO2 emite cada kWh de electricidad?",
+      "¿Cuándo dejó el carbón de ser relevante en la electricidad?",
+      "¿Cuánta electricidad consume cada español?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_renovable_pct",
+        "nombre": "cuota de generación renovable",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "g_co2_kwh",
+        "nombre": "emisiones por kWh generado",
+        "unidad": "g CO2eq/kWh",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cuota_libre_emisiones_pct",
+        "nombre": "cuota de generación sin emisiones",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_eolica_pct",
+        "nombre": "cuota de la eólica",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_solar_fv_pct",
+        "nombre": "cuota de la solar fotovoltaica",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_nuclear_pct",
+        "nombre": "cuota de la nuclear",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_ciclo_pct",
+        "nombre": "cuota del ciclo combinado",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_carbon_pct",
+        "nombre": "cuota del carbón",
+        "unidad": "% de la generación",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "demanda_kwh_hab",
+        "nombre": "demanda eléctrica por habitante",
+        "unidad": "kWh por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "emisiones_t_hab",
+        "nombre": "emisiones del sector eléctrico por habitante",
+        "unidad": "t CO2eq por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "emisiones_mt",
+        "nombre": "emisiones del sector eléctrico",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "generacion_twh",
+        "nombre": "generación eléctrica",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "demanda_twh",
+        "nombre": "demanda eléctrica",
+        "unidad": "TWh",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Sistema eléctrico nacional (REE REData), 2007-2025, años completos. Las cuotas son sobre la generación total del año."
+  },
+  {
+    "tabla": "clima_emisiones_anual",
+    "usar": true,
+    "tema": "Emisiones de gases de efecto invernadero de España por año y por habitante, comparadas con la UE",
+    "preguntas": [
+      "¿Cuántas toneladas de CO2 emite cada español al año?",
+      "¿Cuánto han bajado las emisiones desde 1990?",
+      "¿Emite España más o menos por habitante que la media europea?",
+      "¿Cuántos millones de toneladas emitió España en 2024?"
+    ],
+    "medidas": [
+      {
+        "columna": "t_hab",
+        "nombre": "emisiones de gases de efecto invernadero por habitante (sin sumideros)",
+        "unidad": "t CO2eq por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "total_mt",
+        "nombre": "emisiones totales sin sumideros (LULUCF)",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "netas_mt",
+        "nombre": "emisiones netas (restando los sumideros forestales)",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "lulucf_mt",
+        "nombre": "absorción neta de los sumideros (uso del suelo y bosques; negativa)",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "t_hab_netas",
+        "nombre": "emisiones netas por habitante",
+        "unidad": "t CO2eq por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "t_hab_ue",
+        "nombre": "emisiones por habitante de la UE-27",
+        "unidad": "t CO2eq por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "kg_por_euro",
+        "nombre": "emisiones por euro de PIB real",
+        "unidad": "kg CO2eq por €",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "var_1990_pct",
+        "nombre": "variación de las emisiones frente a 1990",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "var_2005_pct",
+        "nombre": "variación de las emisiones frente a 2005",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "España, 1990-2025. El último año (2025) es un avance provisional del MITECO (provisional = true), el resto es Eurostat. Los millones de toneladas son Mt, es decir, millones de toneladas de CO2 equivalente."
+  },
+  {
+    "tabla": "clima_emisiones_paises",
+    "usar": true,
+    "tema": "Emisiones de gases de efecto invernadero por habitante de España comparadas con Alemania, Francia, Italia, Portugal, Polonia, Países Bajos y la UE",
+    "preguntas": [
+      "¿Quién emite más por habitante, España o Alemania?",
+      "¿Cuánto han bajado las emisiones de Francia desde 1990?",
+      "¿Cuántas toneladas de CO2 por persona emite Polonia?"
+    ],
+    "medidas": [
+      {
+        "columna": "t_hab",
+        "nombre": "emisiones por habitante (sin sumideros)",
+        "unidad": "t CO2eq por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "mt_co2eq",
+        "nombre": "emisiones totales (sin sumideros)",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "var_1990_pct",
+        "nombre": "variación de las emisiones frente a 1990",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo 8 territorios: España, Alemania, Francia, Italia, Portugal, Polonia, Países Bajos y UE-27 (UE-27 va en la columna nombre como 'UE-27', geo = EU27_2020). Datos 1990-2024 (Eurostat)."
+  },
+  {
+    "tabla": "clima_emisiones_sectores",
+    "usar": true,
+    "tema": "Qué sectores emiten más gases de efecto invernadero en España (transporte, industria, agricultura, electricidad...)",
+    "preguntas": [
+      "¿Qué sector emite más CO2 en España?",
+      "¿Cuánto emite el transporte?",
+      "¿Cómo han evolucionado las emisiones de la generación eléctrica desde 1990?",
+      "¿Qué porcentaje de las emisiones es de la agricultura?"
+    ],
+    "medidas": [
+      {
+        "columna": "kg_hab",
+        "nombre": "emisiones del sector por habitante",
+        "unidad": "kg CO2eq por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "mt_co2eq",
+        "nombre": "emisiones del sector",
+        "unidad": "Mt CO2eq",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_total",
+        "nombre": "peso del sector en el total de emisiones",
+        "unidad": "% del total",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "sector",
+        "nombre": "sector",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "España, 1990-2025, 7 sectores que suman el total (no hay fila de total). El último año (2025) es avance provisional del MITECO. Mt = millones de toneladas de CO2 equivalente."
+  },
+  {
+    "tabla": "construccion_afiliados",
+    "usar": true,
+    "tema": "Trabajadores afiliados a la Seguridad Social en la construcción, en España, cada comunidad y cada provincia",
+    "preguntas": [
+      "¿Cuántos trabajadores de la construcción hay en España?",
+      "¿Qué provincia tiene más afiliados en construcción por habitante?",
+      "¿Qué porcentaje de autónomos hay en la construcción en Andalucía?",
+      "¿Cómo ha evolucionado el empleo en la construcción en Madrid desde 2021?"
+    ],
+    "medidas": [
+      {
+        "columna": "afiliados_constr_1000hab",
+        "nombre": "afiliados en construcción por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "afiliados_constr",
+        "nombre": "afiliados medios en construcción",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_constr",
+        "nombre": "peso de la construcción en el total de afiliados",
+        "unidad": "% de los afiliados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_autonomos_constr",
+        "nombre": "porcentaje de autónomos entre los afiliados de la construcción",
+        "unidad": "% de autónomos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "afiliados_total",
+        "nombre": "afiliados totales de todos los sectores",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "cnae",
+        "nombre": "clasificación de actividades usada",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Afiliados medios mensuales desde enero de 2021 (Seguridad Social, sección F, régimen general más autónomos). No sumar entre niveles (pais, ccaa y provincia se solapan); España es nivel = 'pais' con cod '00'. Los afiliados son un nivel, no se suman entre meses. cnae indica el cambio de clasificación a CNAE-2025."
+  },
+  {
+    "tabla": "construccion_ccaa",
+    "usar": true,
+    "tema": "Cuánto pesa la construcción en la economía de cada comunidad autónoma y cuánto valor añade por habitante",
+    "preguntas": [
+      "¿Qué porcentaje de la economía de Andalucía es construcción?",
+      "¿Qué comunidad depende más de la construcción?",
+      "¿Cuánto ha caído el peso de la construcción desde 2007?",
+      "¿Cuánto valor añade la construcción por habitante en Navarra?"
+    ],
+    "medidas": [
+      {
+        "columna": "vab_constr_hab_real",
+        "nombre": "valor añadido de la construcción por habitante en euros constantes",
+        "unidad": "€ reales por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "pct_vab_construccion",
+        "nombre": "peso de la construcción en el valor añadido de la comunidad",
+        "unidad": "% del VAB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "dif_pp_vs_2007",
+        "nombre": "diferencia del peso de la construcción frente a 2007",
+        "unidad": "puntos porcentuales",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "ocupados_constr_1000hab_epa",
+        "nombre": "ocupados en construcción por cada 1.000 habitantes (media anual EPA)",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_ocupados_constr_epa",
+        "nombre": "porcentaje de los ocupados que trabajan en construcción",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "vab_constr_meur",
+        "nombre": "valor añadido bruto de la construcción",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_total_meur",
+        "nombre": "valor añadido bruto total de la comunidad",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat 2000-2024. España es cod '00' (nombre 'España'); las comunidades, 01-19, no incluyen duplicados. El euro constante tiene base 2025. VAB = valor añadido bruto, en millones de euros corrientes en las columnas _meur. puesto es el ranking entre comunidades del año."
+  },
+  {
+    "tabla": "construccion_cemento",
+    "usar": true,
+    "tema": "Cuánto cemento se consume y se produce en España cada año, desde 1970",
+    "preguntas": [
+      "¿Cuánto cemento consume cada español al año?",
+      "¿Cuánto cayó el consumo de cemento tras la crisis de 2008?",
+      "¿Qué porcentaje del cemento producido se exporta?",
+      "¿Cuántas toneladas de cemento se produjeron en 2024?"
+    ],
+    "medidas": [
+      {
+        "columna": "consumo_kg_hab",
+        "nombre": "consumo aparente de cemento por habitante",
+        "unidad": "kg por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "produccion_kg_hab",
+        "nombre": "producción de cemento por habitante",
+        "unidad": "kg por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "consumo_aparente_kt",
+        "nombre": "consumo aparente de cemento",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "produccion_kt",
+        "nombre": "producción de cemento",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "exportaciones_kt",
+        "nombre": "exportaciones de cemento",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importaciones_kt",
+        "nombre": "importaciones de cemento",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "pct_produccion_exportada",
+        "nombre": "porcentaje de la producción que se exporta",
+        "unidad": "% de la producción",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Banco de España, 1970-2025, solo años completos. Kt = miles de toneladas (55.997 kt = unos 56 millones de toneladas). La población está en miles de personas (poblacion_miles)."
+  },
+  {
+    "tabla": "construccion_costes",
+    "usar": true,
+    "tema": "Cuánto han subido los costes de construir una vivienda en España y en otros países europeos",
+    "preguntas": [
+      "¿Cuánto han subido los costes de construcción en España desde 2021?",
+      "¿En qué país europeo han subido más los costes de construir?",
+      "¿Cómo se compara el coste de construcción de España con el de Alemania?"
+    ],
+    "medidas": [
+      {
+        "columna": "coste_indice_2021",
+        "nombre": "índice de costes de construcción (2021 = 100)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice",
+        "principal": true,
+        "real": "coste_real_indice_2021"
+      },
+      {
+        "columna": "coste_real_indice_2021",
+        "nombre": "índice de costes de construcción descontada la inflación general (solo España)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice"
+      },
+      {
+        "columna": "precio_produccion_indice_2021",
+        "nombre": "índice de precios de producción de la vivienda nueva (2021 = 100)",
+        "unidad": "índice (2021 = 100)",
+        "tipo": "indice"
+      },
+      {
+        "columna": "var_coste_anual_pct",
+        "nombre": "variación anual del coste de construcción",
+        "unidad": "% anual",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "pais",
+      "nombre": "pais_nombre",
+      "espana": {
+        "columna": "pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat 1995-2025, índices con base 2021 = 100 (no euros), 28 territorios incluida la UE-27 (pais = EU27_2020). Los índices no se suman. El coste real descontando inflación solo existe para España. España publica la misma serie para costes y precios."
+  },
+  {
+    "tabla": "construccion_empleo",
+    "usar": true,
+    "tema": "Empleo y paro en el sector de la construcción por trimestre en España y cada comunidad (EPA)",
+    "preguntas": [
+      "¿Cuántos ocupados hay en la construcción en Andalucía?",
+      "¿Qué tasa de paro tiene la construcción en Canarias?",
+      "¿Qué porcentaje de los ocupados trabaja en la construcción en España?",
+      "¿Cómo cayó el empleo en la construcción después de 2008?"
+    ],
+    "medidas": [
+      {
+        "columna": "ocupados_constr_1000hab",
+        "nombre": "ocupados en construcción por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "ocupados_constr_miles",
+        "nombre": "ocupados en construcción",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_ocupados_constr",
+        "nombre": "porcentaje de los ocupados que trabajan en construcción",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "tasa_paro_constr",
+        "nombre": "tasa de paro aproximada de la construcción",
+        "unidad": "% de la población activa del sector",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "parados_constr_miles",
+        "nombre": "parados de la construcción",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados_total_miles",
+        "nombre": "ocupados totales de todos los sectores",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "parados_total_miles",
+        "nombre": "parados totales",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EPA 2008 T1 a 2026 T2 (periodo es un texto como 2026T2). Las cifras están en MILES de personas. España es cod '00'; Ceuta y Melilla tienen pocas provincias y datos más ruidosos. Los ocupados son un nivel: no se suman entre trimestres. La tasa de paro es aproximada (parados entre activos del sector)."
+  }
+]

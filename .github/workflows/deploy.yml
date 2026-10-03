@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/tjs
-          key: modelos-chat-embeddinggemma-300m
+          key: modelos-chat-embeddinggemma-300m-no-gather-q4
 
       - name: build
         env:

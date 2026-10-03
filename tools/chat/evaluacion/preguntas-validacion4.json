@@ -1,0 +1,762 @@
+[
+	{
+		"id": "v4-01",
+		"pregunta": "¿Cuántos enchufes públicos hay ahora en España para cargar el coche eléctrico?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.movilidad_recarga_evolucion"],
+		"sql_oro": "SELECT fecha, sum(puntos) AS puntos, sum(potencia_kw) AS kw FROM mother.movilidad_recarga_evolucion WHERE fecha=(SELECT max(fecha) FROM mother.movilidad_recarga_evolucion) GROUP BY fecha",
+		"respuesta": {
+			"valor": 35546,
+			"unidad": "puntos de recarga públicos",
+			"periodo": "2 de octubre de 2026 (último día con datos)",
+			"territorio": "España",
+			"detalle": "Lentas 8.906, semirrápidas 15.729, rápidas 7.358 y ultrarrápidas 3.553"
+		},
+		"acepta": {
+			"cifras": [["35.546", "35546", "35.500", "35,5 mil", "más de 35.000"]],
+			"textos": [],
+			"alternativas": "Suma de los cuatro tramos de potencia del último día: 35.546 puntos de recarga públicos."
+		}
+	},
+	{
+		"id": "v4-02",
+		"pregunta": "¿Cuántos megavatios de centrales nucleares hay funcionando?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.centrales_resumen"],
+		"sql_oro": "SELECT tecnologia, estado_grupo, potencia_mw, n_unidades, n_centrales FROM mother.centrales_resumen WHERE tecnologia='Nuclear' AND estado_grupo='En operación'",
+		"respuesta": {
+			"valor": 7408,
+			"unidad": "MW nucleares en operación",
+			"periodo": "situación actual (GEM)",
+			"territorio": "España",
+			"detalle": "7 reactores en 5 centrales"
+		},
+		"acepta": {
+			"cifras": [["7.408", "7408", "7,4 GW", "7,41 GW", "7.400 MW", "7,4 gigavatios"]],
+			"textos": [],
+			"alternativas": "Global Energy Monitor: 7.408 MW nucleares en operación (7 unidades, 5 centrales)."
+		}
+	},
+	{
+		"id": "v4-03",
+		"pregunta": "¿Qué porcentaje de los chavales que siguen estudiando después de la ESO se mete en FP?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.educacion_fp"],
+		"sql_oro": "SELECT anio, nivel, alumnos_fp, alumnos_etapa, pct_fp FROM mother.educacion_fp WHERE nivel IN ('pais','ue') ORDER BY anio DESC, nivel LIMIT 4",
+		"respuesta": {
+			"valor": 39.2,
+			"unidad": "% del alumnado de la segunda etapa de secundaria que cursa formación profesional",
+			"periodo": "2024",
+			"territorio": "España",
+			"detalle": "773.087 alumnos de FP sobre 1.971.050 de la etapa. En 2013 era el 33,5 %"
+		},
+		"acepta": {
+			"cifras": [["39,2", "39 %", "39%", "39,22"]],
+			"textos": [["2024"]],
+			"alternativas": "Eurostat 2024: el 39,2 % del alumnado de bachillerato y FP de grado medio (segunda etapa de secundaria) cursa FP."
+		}
+	},
+	{
+		"id": "v4-04",
+		"pregunta": "¿Qué parte de las almendras que se recogen en la Unión Europea son españolas?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.primario_ranking_ue"],
+		"sql_oro": "SELECT producto, anio, valor_espana, total_ue, cuota_pct, puesto, pais_segundo FROM mother.primario_ranking_ue WHERE producto='Almendra'",
+		"respuesta": {
+			"valor": 69.6,
+			"unidad": "% de la producción de almendra de la UE-27",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "453 mil toneladas; España es primera y Portugal segunda"
+		},
+		"acepta": {
+			"cifras": [["69,6", "69,59", "70 %", "70%", "casi el 70", "453"]],
+			"textos": [["2025"]],
+			"alternativas": "Eurostat 2025: España produce el 69,6 % de la almendra de la UE (453 mil t)."
+		}
+	},
+	{
+		"id": "v4-05",
+		"pregunta": "¿Cuánta gente está en lista de espera para operarse de traumatología?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.sanidad_listas_especialidad"],
+		"sql_oro": "SELECT fecha, especialidad, tipo, pacientes, dias_medio FROM mother.sanidad_listas_especialidad WHERE especialidad='Traumatología' AND tipo='quirurgica' ORDER BY fecha DESC LIMIT 2",
+		"respuesta": {
+			"valor": 200604,
+			"unidad": "pacientes en lista de espera quirúrgica de traumatología",
+			"periodo": "31 de diciembre de 2025",
+			"territorio": "España",
+			"detalle": "Espera media de 137 días"
+		},
+		"acepta": {
+			"cifras": [["200.604", "200604", "200.000", "200 mil", "unos 200.600"]],
+			"textos": [["2025", "diciembre"]],
+			"alternativas": "SISLE-SNS, 31-12-2025: 200.604 pacientes esperando cirugía de traumatología, con 137 días de espera media."
+		}
+	},
+	{
+		"id": "v4-06",
+		"pregunta": "¿Cuánta gente trabaja en la construcción, dada de alta en la Seguridad Social?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.construccion_afiliados"],
+		"sql_oro": "SELECT anio, mes, nombre, afiliados_constr, afiliados_total, pct_constr FROM mother.construccion_afiliados WHERE nivel='pais' ORDER BY fecha DESC LIMIT 2",
+		"respuesta": {
+			"valor": 1495988,
+			"unidad": "afiliados medios a la Seguridad Social en la construcción",
+			"periodo": "septiembre de 2026",
+			"territorio": "España",
+			"detalle": "El 7,0 % de los 21,35 millones de afiliados. En agosto de 2026: 1.484.348"
+		},
+		"acepta": {
+			"cifras": [["1.495.988", "1.495.9", "1,5 millones", "1,50 millones", "1.496.000", "1,496 millones", "casi 1,5 millones"]],
+			"textos": [["septiembre", "2026"]],
+			"alternativas": "Seguridad Social, septiembre de 2026: 1.495.988 afiliados medios en la sección F (construcción), el 7,0 % del total."
+		}
+	},
+	{
+		"id": "v4-07",
+		"pregunta": "¿Cuál es el récord de producción de placas solares en la península?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.electricidad_records_historia"],
+		"sql_oro": "SELECT codigo, sistema, periodo, fecha, valor, unidad, ts_local FROM mother.electricidad_records_historia WHERE codigo='solar_fv_max' AND sistema='peninsula' ORDER BY valor DESC LIMIT 3",
+		"respuesta": {
+			"valor": 28550,
+			"unidad": "MW de solar fotovoltaica en un tramo de 5 minutos",
+			"periodo": "3 de septiembre de 2026, 14:35",
+			"territorio": "España peninsular",
+			"detalle": "Récord horario: 28.273 MW, el mismo día a las 14:00"
+		},
+		"acepta": {
+			"cifras": [["28.550", "28550", "28,5 GW", "28,55 GW", "28.273", "28,3 GW", "28.272", "28,27 GW"]],
+			"textos": [["2026", "septiembre"]],
+			"alternativas": "REE: récord de solar fotovoltaica peninsular de 28.550 MW (5 min) el 3-9-2026, o 28.273 MW de media horaria."
+		}
+	},
+	{
+		"id": "v4-08",
+		"pregunta": "¿Cuánto se paga de media en sueldos por cada trabajador al mes?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.economia_salarios"],
+		"sql_oro": "SELECT trimestre, salario_total, salario_total_real, interanual_nominal, interanual_real FROM mother.economia_salarios WHERE jornada='Todas' AND sector='Total' ORDER BY trimestre DESC LIMIT 2",
+		"respuesta": {
+			"valor": 2512.68,
+			"unidad": "€ al mes de coste salarial por trabajador (nominal)",
+			"periodo": "2.º trimestre de 2026",
+			"territorio": "España",
+			"detalle": "En euros constantes de 2025: 2.436 €. Sube un 4,0 % en un año (+0,7 % real)"
+		},
+		"acepta": {
+			"cifras": [["2.512,68", "2.512", "2.513", "2.436,09", "2.436", "2.500 €", "2.500 euros"]],
+			"textos": [["2026", "segundo trimestre", "2.º trimestre", "T2"]],
+			"alternativas": "INE ETCL, T2 2026: 2.512,68 € mensuales por trabajador (2.436 € en euros de 2025)."
+		}
+	},
+	{
+		"id": "v4-09",
+		"pregunta": "¿Las fábricas españolas producen más o menos que hace un año?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.industria_ipi_mensual"],
+		"sql_oro": "SELECT nombre, destino, mes, indice, variacion_anual_pct, variacion_acumulada_pct FROM mother.industria_ipi_mensual WHERE es_ultimo_mes AND cod_ccaa='00' AND destino='Total industria'",
+		"respuesta": {
+			"valor": 2.6,
+			"unidad": "% de variación interanual de la producción industrial (IPI)",
+			"periodo": "julio de 2026",
+			"territorio": "España",
+			"detalle": "Más: +2,6 % sobre julio de 2025; +1,3 % acumulado en el año. Índice 113,2 (base 2021 = 100)"
+		},
+		"acepta": {
+			"cifras": [["2,6", "+2,6", "2,6 %", "2,6%"]],
+			"textos": [["julio"]],
+			"alternativas": "INE IPI, julio de 2026: la producción industrial es un 2,6 % superior a la de julio de 2025."
+		}
+	},
+	{
+		"id": "v4-10",
+		"pregunta": "¿Cuánta gente cobra una nómina de las comunidades autónomas?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.empleo_epa_administracion"],
+		"sql_oro": "SELECT trimestre, administracion, asalariados FROM mother.empleo_epa_administracion WHERE administracion='Comunidades autónomas' ORDER BY trimestre DESC LIMIT 2",
+		"respuesta": {
+			"valor": 2101500,
+			"unidad": "asalariados de las administraciones de las comunidades autónomas",
+			"periodo": "2.º trimestre de 2026",
+			"territorio": "España",
+			"detalle": "Total de asalariados públicos 3.646.900; locales 690.500"
+		},
+		"acepta": {
+			"cifras": [["2.101.500", "2.101.5", "2,1 millones", "2,10 millones", "2.100.000", "2,1 M"]],
+			"textos": [["2026", "segundo trimestre", "2.º trimestre"]],
+			"alternativas": "EPA T2 2026: 2.101.500 asalariados trabajan en las comunidades autónomas (el 58 % del empleo público asalariado)."
+		}
+	},
+	{
+		"id": "v4-11",
+		"pregunta": "¿Cuántos robos con fuerza en casas y negocios hay en lo que va de año?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.crimen_ultimo_periodo"],
+		"sql_oro": "SELECT anio, periodo, territorio, categoria, infracciones, infracciones_anio_anterior FROM mother.crimen_ultimo_periodo WHERE nivel='pais' AND categoria LIKE 'Robos con fuerza%'",
+		"respuesta": {
+			"valor": 47738,
+			"unidad": "infracciones penales de robos con fuerza (domicilios, establecimientos...)",
+			"periodo": "enero-junio de 2026",
+			"territorio": "España",
+			"detalle": "Frente a 50.758 en enero-junio de 2025 (-5,9 %)"
+		},
+		"acepta": {
+			"cifras": [["47.738", "47738", "47.700", "unos 47.000", "casi 48.000"]],
+			"textos": [["2026", "enero-junio", "primer semestre", "junio"]],
+			"alternativas": "Balance de Criminalidad enero-junio 2026: 47.738 robos con fuerza (50.758 un año antes)."
+		}
+	},
+	{
+		"id": "v4-12",
+		"pregunta": "¿Qué parte de lo que producimos se gasta en educación?",
+		"tipo": "actual",
+		"tablas_oro": ["mother.educacion_gasto"],
+		"sql_oro": "SELECT anio, nivel, funcion, pct_pib, millones_eur, eur_hab_real FROM mother.educacion_gasto WHERE funcion='Total' ORDER BY anio DESC, nivel LIMIT 4",
+		"respuesta": {
+			"valor": 4.1,
+			"unidad": "% del PIB en gasto público en educación",
+			"periodo": "2024",
+			"territorio": "España",
+			"detalle": "1.384 € reales por habitante. La media de la UE-27 es el 4,7 % del PIB"
+		},
+		"acepta": {
+			"cifras": [["4,1", "4,1 %", "4,1%", "1.384", "1.383", "1.384 €"]],
+			"textos": [["2024"]],
+			"alternativas": "Eurostat COFOG 2024: España gasta el 4,1 % del PIB en educación (UE-27: 4,7 %), unos 1.384 € reales por habitante."
+		}
+	},
+	{
+		"id": "v4-13",
+		"pregunta": "¿Quién ganó las generales de 2023 en la capital de Soria?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.elecciones_municipios_congreso"],
+		"sql_oro": "SELECT municipio, provincia, participacion, ganador_siglas, ganador_pct, pct_pp, pct_psoe, pct_vox FROM mother.elecciones_municipios_congreso WHERE municipio='Soria' AND provincia='Soria'",
+		"respuesta": {
+			"valor": 33.44,
+			"unidad": "% de votos del partido ganador (PSOE)",
+			"periodo": "generales de julio de 2023",
+			"territorio": "Soria (municipio)",
+			"detalle": "PSOE 33,44 %, PP 30,98 %, Vox 7,81 %. Participación del 71,24 %"
+		},
+		"acepta": {
+			"cifras": [["33,44", "33,4", "33 %", "un tercio"]],
+			"textos": [["psoe", "socialistas", "partido socialista"]],
+			"alternativas": "En Soria capital ganó el PSOE (33,4 %) por delante del PP (31,0 %) en las generales de 2023."
+		}
+	},
+	{
+		"id": "v4-14",
+		"pregunta": "¿Cuánto gastó por vecino el Ayuntamiento de Zaragoza en 2024?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.municipios_cuentas_serie"],
+		"sql_oro": "SELECT cod_mun, anio, poblacion, gasto_hab, ingreso_hab, gastos_total FROM mother.municipios_cuentas_serie WHERE cod_mun='50297' AND anio=2024",
+		"respuesta": {
+			"valor": 1644,
+			"unidad": "€ por habitante de gasto (obligaciones reconocidas)",
+			"periodo": "2024",
+			"territorio": "Zaragoza",
+			"detalle": "Gasto total de 1.129 millones de € para 686.986 habitantes. Ingresos de 1.681 € por habitante"
+		},
+		"acepta": {
+			"cifras": [["1.644", "1644", "1.129 millones", "1.129,4", "1.129.384.696", "1.130 millones"]],
+			"textos": [["2024"]],
+			"alternativas": "Hacienda (liquidación de presupuestos), 2024: el Ayuntamiento de Zaragoza gastó 1.644 € por habitante (1.129 M€ en total)."
+		}
+	},
+	{
+		"id": "v4-15",
+		"pregunta": "¿Qué peso tiene la construcción en la economía de Baleares?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.construccion_ccaa"],
+		"sql_oro": "SELECT nombre, anio, pct_vab_construccion, vab_constr_hab_real, puesto, pct_vab_2007 FROM mother.construccion_ccaa WHERE nombre ILIKE '%Balears%' ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 8.03,
+			"unidad": "% del VAB regional que aporta la construcción",
+			"periodo": "2024",
+			"territorio": "Illes Balears",
+			"detalle": "Es el mayor de España (puesto 1). 2.745 € de VAB de construcción por habitante en euros reales"
+		},
+		"acepta": {
+			"cifras": [["8,03", "8 %", "8%", "8,0", "2.745", "2.745,0"]],
+			"textos": [["2024"]],
+			"alternativas": "Eurostat 2024: la construcción pesa el 8,0 % del VAB balear, la comunidad con más peso (2.745 € por habitante reales)."
+		}
+	},
+	{
+		"id": "v4-16",
+		"pregunta": "¿Cuánto cobra de media un trabajador público en el País Vasco?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.empleo_salarios_ccaa", "mother.territorios"],
+		"sql_oro": "SELECT t.nombre, s.anio, s.salario_publico, s.salario_privado, s.salario_total FROM mother.empleo_salarios_ccaa s JOIN mother.territorios t ON t.nivel='ccaa' AND t.cod=s.cod_ccaa WHERE t.nombre='País Vasco'",
+		"respuesta": {
+			"valor": 42799.53,
+			"unidad": "€ de salario medio anual bruto en el sector público",
+			"periodo": "2022",
+			"territorio": "País Vasco",
+			"detalle": "Es el más alto de España. En el sector privado: 29.294 €; media total 32.314 €"
+		},
+		"acepta": {
+			"cifras": [["42.799", "42.800", "42.799,53", "42.8", "42.800 €", "42.800 euros"]],
+			"textos": [["2022"]],
+			"alternativas": "Encuesta de Estructura Salarial 2022: salario público medio del País Vasco, 42.800 € brutos al año (privado 29.294 €)."
+		}
+	},
+	{
+		"id": "v4-17",
+		"pregunta": "¿Cuánto pesa el campo en la economía de Extremadura?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.primario_ccaa"],
+		"sql_oro": "SELECT nombre, anio, vab_primario_meur, peso_vab_pct, vab_primario_eur_hab_real FROM mother.primario_ccaa WHERE nivel='ccaa' AND nombre='Extremadura' ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 8.99,
+			"unidad": "% del VAB total que aporta el sector primario",
+			"periodo": "2024",
+			"territorio": "Extremadura",
+			"detalle": "2.122 € de VAB primario por habitante en euros reales (1.854 € en 2023, con un peso del 8,05 %)"
+		},
+		"acepta": {
+			"cifras": [["8,99", "9 %", "9%", "8,9", "2.122", "2.121,8"]],
+			"textos": [["2024"]],
+			"alternativas": "Eurostat 2024: el sector primario aporta el 9,0 % del VAB de Extremadura (2.122 € reales por habitante)."
+		}
+	},
+	{
+		"id": "v4-18",
+		"pregunta": "¿Cuántos coches nuevos se matricularon en Sevilla durante 2025?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.movilidad_matriculaciones_provincia"],
+		"sql_oro": "SELECT provincia, sum(matriculaciones) AS turismos_nuevos FROM mother.movilidad_matriculaciones_provincia WHERE nuevo_usado='N' AND provincia='Sevilla' AND mes>='2025-01-01' AND mes<'2026-01-01' GROUP BY provincia",
+		"respuesta": {
+			"valor": 23707,
+			"unidad": "turismos nuevos matriculados",
+			"periodo": "2025",
+			"territorio": "Sevilla (provincia)",
+			"detalle": "Suma de los 12 meses de 2025, todos los canales y energías"
+		},
+		"acepta": {
+			"cifras": [["23.707", "23707", "23.700", "unos 23.700", "casi 24.000"]],
+			"textos": [["2025"]],
+			"alternativas": "DGT: 23.707 turismos nuevos matriculados en la provincia de Sevilla en 2025."
+		}
+	},
+	{
+		"id": "v4-19",
+		"pregunta": "¿Cuántos megavatios de bombeo hidráulico hay en Cataluña?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.almacenamiento_potencia"],
+		"sql_oro": "SELECT mes, tipo, comunidad, mw FROM mother.almacenamiento_potencia WHERE tipo='bombeo_puro' AND comunidad='Cataluña' ORDER BY mes DESC LIMIT 2",
+		"respuesta": {
+			"valor": 439.84,
+			"unidad": "MW de bombeo puro instalados",
+			"periodo": "octubre de 2026 (último mes con datos)",
+			"territorio": "Cataluña",
+			"detalle": "Es la tercera comunidad por potencia de bombeo, tras la Comunidad Valenciana (1.512 MW) y Andalucía (585 MW)"
+		},
+		"acepta": {
+			"cifras": [["439,84", "439,8", "440 MW", "440", "0,44 GW"]],
+			"textos": [],
+			"alternativas": "ESIOS: 439,84 MW de bombeo puro en Cataluña (octubre de 2026)."
+		}
+	},
+	{
+		"id": "v4-20",
+		"pregunta": "¿Quién era el alcalde de Pamplona en 2013?",
+		"tipo": "territorio",
+		"tablas_oro": ["mother.alcaldes_historia"],
+		"sql_oro": "SELECT municipio, mandato, alcalde, siglas_familia, fecha_posesion FROM mother.alcaldes_historia WHERE municipio='Pamplona/Iruña' AND mandato='2011-2015'",
+		"respuesta": {
+			"valor": "Enrique Maya Miranda",
+			"unidad": "alcalde del mandato 2011-2015",
+			"periodo": "2011-2015",
+			"territorio": "Pamplona/Iruña",
+			"detalle": "De UPN, tomó posesión el 11 de junio de 2011. Volvió a ser alcalde en 2019-2023"
+		},
+		"acepta": {
+			"cifras": [],
+			"textos": [["enrique maya", "maya miranda"]],
+			"alternativas": "Alcalde de Pamplona en 2013: Enrique Maya Miranda (UPN)."
+		}
+	},
+	{
+		"id": "v4-21",
+		"pregunta": "¿Qué comunidad tiene más peso de industria en su economía?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.industria_ccaa"],
+		"sql_oro": "SELECT ccaa, anio, pct_vab_industria, vab_industria_hab_real, puesto_pct_vab_industria FROM mother.industria_ccaa WHERE anio=(SELECT max(anio) FROM mother.industria_ccaa) ORDER BY pct_vab_industria DESC LIMIT 3",
+		"respuesta": {
+			"valor": 29.33,
+			"unidad": "% del VAB regional que aporta la industria",
+			"periodo": "2024",
+			"territorio": "Comunidad Foral de Navarra",
+			"detalle": "Le siguen La Rioja (25,6 %) y el País Vasco (23,5 %). En Navarra, 10.752 € de VAB industrial por habitante reales"
+		},
+		"acepta": {
+			"cifras": [["29,33", "29,3", "29 %", "29%", "10.752", "10.752,2"]],
+			"textos": [["navarra"]],
+			"alternativas": "Eurostat 2024: Navarra, con el 29,3 % de su VAB en la industria, es la comunidad más industrial."
+		}
+	},
+	{
+		"id": "v4-22",
+		"pregunta": "¿Dónde se recoge más cereal, en qué comunidad?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.primario_ccaa_cultivos"],
+		"sql_oro": "SELECT ccaa, anio, produccion_miles_t, kg_hab, cuota_espana_pct FROM mother.primario_ccaa_cultivos WHERE producto='Cereales' AND anio=(SELECT max(anio) FROM mother.primario_ccaa_cultivos) ORDER BY produccion_miles_t DESC LIMIT 3",
+		"respuesta": {
+			"valor": 8023.88,
+			"unidad": "miles de toneladas de cereales",
+			"periodo": "2024",
+			"territorio": "Castilla y León",
+			"detalle": "Le siguen Castilla-La Mancha (3.674 mil t) y Aragón (3.039 mil t). Por habitante también es primera: 3.360 kg"
+		},
+		"acepta": {
+			"cifras": [["8.023,88", "8.024", "8.023", "8 millones de toneladas", "8,0 millones", "3.360", "3.359"]],
+			"textos": [["castilla y leon", "castilla y león"]],
+			"alternativas": "Eurostat 2024: Castilla y León, 8,02 millones de toneladas de cereales."
+		}
+	},
+	{
+		"id": "v4-23",
+		"pregunta": "¿Con qué presidente del Gobierno se gastó más en publicidad institucional por habitante?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.medios_publicidad_gobiernos"],
+		"sql_oro": "SELECT presidente, familia, anio_desde, anio_hasta, institucional_eur_hab_real_media, institucional_eur_real_media FROM mother.medios_publicidad_gobiernos ORDER BY institucional_eur_hab_real_media DESC",
+		"respuesta": {
+			"valor": 4.4,
+			"unidad": "€ reales por habitante y año de publicidad institucional de la AGE (media del mandato)",
+			"periodo": "2006-2011",
+			"territorio": "José Luis Rodríguez Zapatero",
+			"detalle": "Rajoy: 0,74 € (2012-2017); Sánchez: 1,39 € (2018-2025). En total Zapatero 200,8 M€ reales al año de media"
+		},
+		"acepta": {
+			"cifras": [["4,4", "4,40", "4,39", "200,8", "200 millones"]],
+			"textos": [["zapatero"]],
+			"alternativas": "AGE, publicidad institucional: con Zapatero (2006-2011) se gastaron de media 4,4 € reales por habitante y año, frente a 1,39 € con Sánchez y 0,74 € con Rajoy."
+		}
+	},
+	{
+		"id": "v4-24",
+		"pregunta": "¿En qué comunidad ha entrado más gente de fuera de España por cada mil habitantes en 2024?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.inmigracion_saldos", "mother.territorios"],
+		"sql_oro": "SELECT t.nombre, s.anio, s.saldo_exterior, s.saldo_1000 FROM mother.inmigracion_saldos s JOIN mother.territorios t ON t.nivel='ccaa' AND t.cod=s.cod WHERE s.nivel='ccaa' AND s.nacionalidad='Total' AND s.anio=2024 ORDER BY s.saldo_1000 DESC LIMIT 4",
+		"respuesta": {
+			"valor": 19.7,
+			"unidad": "‰ de saldo migratorio exterior (inmigraciones menos emigraciones por 1.000 habitantes)",
+			"periodo": "2024",
+			"territorio": "Comunitat Valenciana",
+			"detalle": "104.776 personas de saldo. Melilla tiene 17,0 ‰ (1.460 personas) y la Comunidad de Madrid 16,3 ‰ (113.964 personas, el mayor saldo en cifras absolutas)"
+		},
+		"acepta": {
+			"cifras": [["19,7", "19,71", "104.776", "104.7"]],
+			"textos": [["valencia", "valenciana"]],
+			"alternativas": "INE EMigra 2024: la Comunitat Valenciana tiene el mayor saldo migratorio por habitante (19,7 por mil; 104.776 personas)."
+		}
+	},
+	{
+		"id": "v4-25",
+		"pregunta": "¿Qué tipo de central eléctrica puso en marcha más potencia nueva en 2024?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.centrales_por_anio"],
+		"sql_oro": "SELECT anio, tecnologia, round(sum(mw_alta)) AS mw_alta FROM mother.centrales_por_anio WHERE anio=2024 GROUP BY anio, tecnologia ORDER BY mw_alta DESC LIMIT 3",
+		"respuesta": {
+			"valor": 3051,
+			"unidad": "MW de potencia nueva puesta en servicio",
+			"periodo": "2024",
+			"territorio": "España",
+			"detalle": "Solar fotovoltaica 3.051 MW, eólica terrestre 563 MW y solar termoeléctrica 30 MW"
+		},
+		"acepta": {
+			"cifras": [["3.051", "3051", "3,05 GW", "3 GW", "3.000 MW"]],
+			"textos": [["solar", "fotovoltaica", "placas"]],
+			"alternativas": "Global Energy Monitor: en 2024 entraron en servicio 3.051 MW de solar fotovoltaica, la tecnología con más potencia nueva."
+		}
+	},
+	{
+		"id": "v4-26",
+		"pregunta": "¿Cuál fue el incendio forestal más grande de 2025?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.incendios_areas_quemadas"],
+		"sql_oro": "SELECT anio, provincia, municipio, area_ha, fecha FROM mother.incendios_areas_quemadas WHERE anio=2025 ORDER BY area_ha DESC LIMIT 3",
+		"respuesta": {
+			"valor": 40081,
+			"unidad": "hectáreas quemadas en un solo incendio",
+			"periodo": "2025",
+			"territorio": "Zamora (Uña de Quintana)",
+			"detalle": "Le siguen Ourense (A Rúa, 37.179 ha) y León (Benuza, 26.241 ha)"
+		},
+		"acepta": {
+			"cifras": [["40.081", "40081", "40.000", "40 mil", "unas 40.000"]],
+			"textos": [["zamora", "uña de quintana", "una de quintana"]],
+			"alternativas": "EFFIS 2025: el mayor incendio ardió en Zamora (Uña de Quintana), unas 40.081 hectáreas."
+		}
+	},
+	{
+		"id": "v4-27",
+		"pregunta": "¿Qué país europeo tiene más vivienda social o pública de alquiler?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.vivienda_publica_internacional"],
+		"sql_oro": "SELECT serie, pais, anio, valor FROM mother.vivienda_publica_internacional WHERE es_ultimo AND NOT es_agregado ORDER BY valor DESC LIMIT 4",
+		"respuesta": {
+			"valor": 34.07,
+			"unidad": "% del parque de viviendas (OCDE, 2021); 29 % de los hogares en la serie de la UE (2023)",
+			"periodo": "2021 (OCDE) / 2023 (UE)",
+			"territorio": "Países Bajos",
+			"detalle": "Le sigue Austria (23,6 % del parque; 24 % de hogares)"
+		},
+		"acepta": {
+			"cifras": [["34,07", "34 %", "34%", "29 %", "29%", "34,1"]],
+			"textos": [["países bajos", "paises bajos", "holanda"]],
+			"alternativas": "OCDE y Eurostat: los Países Bajos son el país con más vivienda social en alquiler (34 % del parque; 29 % de los hogares)."
+		}
+	},
+	{
+		"id": "v4-28",
+		"pregunta": "¿En qué sector hay más empresas en España?",
+		"tipo": "ranking",
+		"tablas_oro": ["mother.empresas_dirce_sector"],
+		"sql_oro": "SELECT anio, sector, empresas, pct FROM mother.empresas_dirce_sector WHERE cod='00' AND anio=(SELECT max(anio) FROM mother.empresas_dirce_sector) ORDER BY empresas DESC LIMIT 3",
+		"respuesta": {
+			"valor": 625664,
+			"unidad": "empresas",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "El 18,9 % del total. Le siguen actividades profesionales y técnicas (416.544) y construcción (389.146)"
+		},
+		"acepta": {
+			"cifras": [["625.664", "625664", "625.000", "18,9", "19 %", "casi 626.000"]],
+			"textos": [["comercio"]],
+			"alternativas": "DIRCE 2025: el comercio, con 625.664 empresas (18,9 %), es el sector con más empresas."
+		}
+	},
+	{
+		"id": "v4-29",
+		"pregunta": "¿Cuánto ha caído la actividad de la construcción desde 2007, en plena burbuja?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.construccion_produccion"],
+		"sql_oro": "SELECT max(indice_2021) FILTER (WHERE anio=2007) AS i2007, max(indice_2021) FILTER (WHERE anio=2025) AS i2025, 100*(max(indice_2021) FILTER (WHERE anio=2025)/max(indice_2021) FILTER (WHERE anio=2007)-1) AS cambio_pct FROM mother.construccion_produccion WHERE pais='ES' AND rama='F'",
+		"respuesta": {
+			"valor": -42.02,
+			"unidad": "% de variación del índice de producción en la construcción",
+			"periodo": "2007-2025",
+			"territorio": "España",
+			"detalle": "Índice 214,9 en 2007 y 124,6 en 2025 (2021 = 100): hoy se produce el 58 % de lo de 2007"
+		},
+		"acepta": {
+			"cifras": [["42,0", "42 %", "42%", "42,02", "58 %", "57,98", "58%"]],
+			"textos": [],
+			"alternativas": "Eurostat: el índice de producción de la construcción española está un 42 % por debajo de 2007 (124,6 frente a 214,9)."
+		}
+	},
+	{
+		"id": "v4-30",
+		"pregunta": "¿Cuánto más recauda el Estado de IVA que antes de la pandemia, en 2019?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.cuentas_ingresos", "mother.deflactor"],
+		"sql_oro": "SELECT max(millones_euros) FILTER (WHERE año=2019) AS iva_2019, max(millones_euros) FILTER (WHERE año=2024) AS iva_2024, 100*(max(millones_euros) FILTER (WHERE año=2024)/max(millones_euros) FILTER (WHERE año=2019)-1) AS nominal_pct, 100*(max(millones_euros*factor) FILTER (WHERE año=2024)/max(millones_euros*factor) FILTER (WHERE año=2019)-1) AS real_pct FROM mother.cuentas_ingresos c JOIN mother.deflactor d ON d.anio=c.año WHERE categoria='IVA'",
+		"respuesta": {
+			"valor": 26.71,
+			"unidad": "% de subida de la recaudación de IVA (nominal)",
+			"periodo": "2019-2024",
+			"territorio": "España",
+			"detalle": "De 80.889 a 102.495 millones de € (+21.606 M€). En euros constantes de 2025: de 98.429 a 105.235 M€, un +6,9 %"
+		},
+		"acepta": {
+			"cifras": [["26,7", "26,71", "27 %", "21.606", "21.600 millones", "102.495", "6,9", "6,91", "7 %"]],
+			"textos": [],
+			"alternativas": "Eurostat 2019-2024: IVA +26,7 % nominal (80.889 a 102.495 M€); descontando la inflación, +6,9 %. Ambas válidas."
+		}
+	},
+	{
+		"id": "v4-31",
+		"pregunta": "¿Cuánto han subido los precios en España en los últimos diez años, desde 2015?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.deflactor"],
+		"sql_oro": "SELECT max(ipc_medio) FILTER (WHERE anio=2015) AS ipc_2015, max(ipc_medio) FILTER (WHERE anio=2025) AS ipc_2025, 100*(max(ipc_medio) FILTER (WHERE anio=2025)/max(ipc_medio) FILTER (WHERE anio=2015)-1) AS subida_pct FROM mother.deflactor",
+		"respuesta": {
+			"valor": 26.77,
+			"unidad": "% de subida del IPC medio anual",
+			"periodo": "2015-2025",
+			"territorio": "España",
+			"detalle": "IPC medio de 78,9 en 2015 y 100,0 en 2025 (base 2025): 1 € de 2015 equivale a 1,27 € de 2025"
+		},
+		"acepta": {
+			"cifras": [["26,8", "26,77", "27 %", "27%", "1,27", "1,2677"]],
+			"textos": [],
+			"alternativas": "INE, IPC medio anual 2015-2025: los precios han subido un 26,8 %."
+		}
+	},
+	{
+		"id": "v4-32",
+		"pregunta": "¿Cuánto ha aumentado la gente que estudia FP desde 2013?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.educacion_fp"],
+		"sql_oro": "SELECT max(pct_fp) FILTER (WHERE anio=2013) AS pct_2013, max(pct_fp) FILTER (WHERE anio=2024) AS pct_2024, max(pct_fp) FILTER (WHERE anio=2024) - max(pct_fp) FILTER (WHERE anio=2013) AS puntos, max(alumnos_fp) FILTER (WHERE anio=2013) AS fp_2013, max(alumnos_fp) FILTER (WHERE anio=2024) AS fp_2024 FROM mother.educacion_fp WHERE nivel='pais'",
+		"respuesta": {
+			"valor": 5.72,
+			"unidad": "puntos porcentuales de aumento del peso de la FP en la segunda etapa de secundaria",
+			"periodo": "2013-2024",
+			"territorio": "España",
+			"detalle": "Del 33,5 % al 39,2 % del alumnado. Los alumnos de FP pasan de 547.099 a 773.087 (+41 %)"
+		},
+		"acepta": {
+			"cifras": [["5,7", "5,72", "5,7 puntos", "33,5", "39,2", "41 %", "41,3", "773.087", "547.099", "226.000"]],
+			"textos": [],
+			"alternativas": "Eurostat: la FP pasa del 33,5 % al 39,2 % del alumnado (+5,7 puntos), de 547.099 a 773.087 alumnos (+41 %)."
+		}
+	},
+	{
+		"id": "v4-33",
+		"pregunta": "¿Cuánto ha crecido la lista de espera de traumatología desde 2019?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.sanidad_listas_especialidad"],
+		"sql_oro": "SELECT max(pacientes) FILTER (WHERE fecha='2019-12-31') AS pac_2019, max(pacientes) FILTER (WHERE fecha='2025-12-31') AS pac_2025, 100*(max(pacientes) FILTER (WHERE fecha='2025-12-31')/max(pacientes) FILTER (WHERE fecha='2019-12-31')-1) AS cambio_pct FROM mother.sanidad_listas_especialidad WHERE especialidad='Traumatología' AND tipo='quirurgica'",
+		"respuesta": {
+			"valor": 14.69,
+			"unidad": "% de aumento de pacientes en lista de espera quirúrgica de traumatología",
+			"periodo": "diciembre de 2019 a diciembre de 2025",
+			"territorio": "España",
+			"detalle": "De 174.905 a 200.604 pacientes (+25.699). La espera media se mantiene en 137 días"
+		},
+		"acepta": {
+			"cifras": [["14,7", "14,69", "15 %", "25.699", "25.700", "174.905", "200.604"]],
+			"textos": [],
+			"alternativas": "SISLE-SNS: la lista de espera de traumatología pasa de 174.905 a 200.604 pacientes (+14,7 %) entre dic-2019 y dic-2025."
+		}
+	},
+	{
+		"id": "v4-34",
+		"pregunta": "¿Cuánto más se gasta ahora en sanidad pública por persona que en 2019, sin contar la inflación?",
+		"tipo": "evolucion",
+		"tablas_oro": ["mother.sanidad_gasto"],
+		"sql_oro": "SELECT max(eur_hab_real) FILTER (WHERE anio=2019) AS eur_2019, max(eur_hab_real) FILTER (WHERE anio=2024) AS eur_2024, 100*(max(eur_hab_real) FILTER (WHERE anio=2024)/max(eur_hab_real) FILTER (WHERE anio=2019)-1) AS cambio_pct, max(pct_pib) FILTER (WHERE anio=2019) AS pib_2019, max(pct_pib) FILTER (WHERE anio=2024) AS pib_2024 FROM mother.sanidad_gasto WHERE geo='ES' AND financiacion='Público'",
+		"respuesta": {
+			"valor": 7.99,
+			"unidad": "% de aumento del gasto sanitario público por habitante en euros reales",
+			"periodo": "2019-2024",
+			"territorio": "España",
+			"detalle": "De 2.072 a 2.237 € por habitante (euros de 2025): +165 €. Del 6,40 % al 6,68 % del PIB"
+		},
+		"acepta": {
+			"cifras": [["8,0", "7,99", "8 %", "8%", "165", "2.072", "2.237", "0,28 puntos", "6,68", "6,4"]],
+			"textos": [],
+			"alternativas": "Eurostat SHA: el gasto público en sanidad por habitante crece un 8,0 % real entre 2019 y 2024 (de 2.072 a 2.237 €); en % del PIB pasa del 6,40 % al 6,68 %."
+		}
+	},
+	{
+		"id": "v4-35",
+		"pregunta": "¿Cuánto calor de más hizo en 2022 respecto a lo normal?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.calor_anual"],
+		"sql_oro": "SELECT anio, anomalia_tmax, anomalia_tmed, anomalia_tmax_verano, dias_por_encima FROM mother.calor_anual WHERE anio=2022",
+		"respuesta": {
+			"valor": 1.63,
+			"unidad": "°C de anomalía de la temperatura máxima media (respecto a 1991-2020)",
+			"periodo": "2022",
+			"territorio": "España",
+			"detalle": "Anomalía de la temperatura media: +1,40 °C. 2025 fue +1,28 °C y 2019, +0,71 °C"
+		},
+		"acepta": {
+			"cifras": [["1,63", "1,6 grados", "1,6 °C", "1,6 ºC", "1,4"]],
+			"textos": [["2022"]],
+			"alternativas": "AEMET 2022: las máximas estuvieron 1,63 °C por encima de la normal 1991-2020 (la media, 1,40 °C)."
+		}
+	},
+	{
+		"id": "v4-36",
+		"pregunta": "¿Cuántas empresas entraron en concurso de acreedores en 2013?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.empresas_concursos"],
+		"sql_oro": "SELECT cod, anio, concursos, voluntarios, necesarios, concursos_100k FROM mother.empresas_concursos WHERE cod='00' AND anio=2013",
+		"respuesta": {
+			"valor": 9937,
+			"unidad": "deudores concursados",
+			"periodo": "2013",
+			"territorio": "España",
+			"detalle": "21,1 concursos por 100.000 habitantes: el máximo de la serie 2004-2020"
+		},
+		"acepta": {
+			"cifras": [["9.937", "9937", "9.900", "casi 10.000", "unos 10.000", "21,1"]],
+			"textos": [["2013"]],
+			"alternativas": "INE: 9.937 deudores concursados en 2013 (21,1 por 100.000 habitantes), el máximo de la serie."
+		}
+	},
+	{
+		"id": "v4-37",
+		"pregunta": "¿Cuántas toneladas de CO2 echaba a la atmósfera la producción de electricidad en 2007?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.energia_emisiones_gei"],
+		"sql_oro": "SELECT año, sector, millones_toneladas_co2eq, porcentaje_total FROM mother.energia_emisiones_gei WHERE sector='Generación Eléctrica' AND año IN (2007, 2024) ORDER BY año",
+		"respuesta": {
+			"valor": 109.36,
+			"unidad": "millones de toneladas de CO2 equivalente",
+			"periodo": "2007",
+			"territorio": "España",
+			"detalle": "El 24,6 % de todas las emisiones. En 2024 fueron 26,3 Mt"
+		},
+		"acepta": {
+			"cifras": [["109,36", "109,4", "109 millones", "109,3", "24,6"]],
+			"textos": [["2007"]],
+			"alternativas": "Eurostat, inventario de gases de efecto invernadero: la generación eléctrica emitió 109,4 Mt CO2eq en 2007."
+		}
+	},
+	{
+		"id": "v4-38",
+		"pregunta": "¿Cuánto se gastaba al año por cada alumno de la ESO en 2015?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.educacion_gasto_alumno"],
+		"sql_oro": "SELECT anio, nivel, eur, eur_real, pps FROM mother.educacion_gasto_alumno WHERE nivel_geo='pais' AND isced11='ED2' AND anio IN (2015, 2023) ORDER BY anio",
+		"respuesta": {
+			"valor": 5854,
+			"unidad": "€ por alumno y año en centros de ESO (nominal)",
+			"periodo": "2015",
+			"territorio": "España",
+			"detalle": "En euros constantes de 2025: 7.421 €. En 2023: 7.914 € nominales (8.351 € reales)"
+		},
+		"acepta": {
+			"cifras": [["5.854", "5854", "5.800", "7.421", "7.420", "7.421 €"]],
+			"textos": [["2015"]],
+			"alternativas": "Eurostat: gasto de 5.854 € por alumno de ESO en 2015 (7.421 € en euros de 2025)."
+		}
+	},
+	{
+		"id": "v4-39",
+		"pregunta": "¿A cuánta gente condenaron en España por delitos de tráfico en 2019?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.crimen_condenas_delito"],
+		"sql_oro": "SELECT anio, delito, total, espanola, extranjera FROM mother.crimen_condenas_delito WHERE delito='Contra la seguridad vial' AND anio IN (2019, 2025) ORDER BY anio",
+		"respuesta": {
+			"valor": 91413,
+			"unidad": "condenados por delitos contra la seguridad vial",
+			"periodo": "2019",
+			"territorio": "España",
+			"detalle": "En 2025 fueron 103.127"
+		},
+		"acepta": {
+			"cifras": [["91.413", "91413", "91.400", "unos 91.000", "más de 91.000"]],
+			"textos": [["2019"]],
+			"alternativas": "INE, Estadística de Condenados: 91.413 personas condenadas por delitos contra la seguridad vial en 2019."
+		}
+	},
+	{
+		"id": "v4-40",
+		"pregunta": "¿Cuánto dinero dio la Generalitat de Cataluña en subvenciones a medios de comunicación en 2024?",
+		"tipo": "anio",
+		"tablas_oro": ["mother.medios_subvenciones_anual"],
+		"sql_oro": "SELECT anio, nivel, comunidad, importe_eur_nominal, importe_eur_real, eur_hab_real, parcial FROM mother.medios_subvenciones_anual WHERE anio=2024 AND comunidad='Cataluña' AND nivel='autonomico'",
+		"respuesta": {
+			"valor": 16.5,
+			"unidad": "millones de € nominales concedidos por el Gobierno autonómico",
+			"periodo": "2024",
+			"territorio": "Cataluña",
+			"detalle": "16,95 millones de € en euros de 2025 (2,11 € reales por habitante), la mayor cifra de todas las comunidades"
+		},
+		"acepta": {
+			"cifras": [["16,5", "16,51", "16.507.878", "16,95", "16,9", "17 millones", "2,11"]],
+			"textos": [["2024"]],
+			"alternativas": "BDNS 2024: la Generalitat concedió 16,5 M€ (16,9 M€ en euros de 2025) en subvenciones a medios."
+		}
+	}
+]

@@ -1,0 +1,2251 @@
+[
+  {
+    "tabla": "pensiones_anual",
+    "usar": true,
+    "tema": "Las pensiones contributivas en España año a año: cuántas hay, cuánto cobra de media un pensionista y cuánto se gasta",
+    "preguntas": [
+      "¿Cuál es la pensión media en España?",
+      "¿Cuántas pensiones hay en España?",
+      "¿Cuántos afiliados hay por cada pensionista?",
+      "¿Cómo ha evolucionado la pensión media de jubilación en euros reales?"
+    ],
+    "medidas": [
+      {
+        "columna": "pension_media_real",
+        "nombre": "pensión media mensual (todas las clases) en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "pension_media",
+        "nombre": "pensión media mensual en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_real"
+      },
+      {
+        "columna": "pension_media_jubilacion_real",
+        "nombre": "pensión media de jubilación en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "pension_media_jubilacion",
+        "nombre": "pensión media de jubilación en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_jubilacion_real"
+      },
+      {
+        "columna": "pension_jubilacion_prorrateada_real",
+        "nombre": "pensión de jubilación media prorrateada en 12 pagas, euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "pensiones",
+        "nombre": "número de pensiones contributivas en vigor",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pensiones_jubilacion",
+        "nombre": "número de pensiones de jubilación",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pensiones_por_1000_hab",
+        "nombre": "pensiones por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pensiones_por_100_mayores",
+        "nombre": "pensiones por cada 100 personas de 65 años o más",
+        "unidad": "por cada 100 mayores de 65",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "jubilaciones_por_100_mayores",
+        "nombre": "pensiones de jubilación por cada 100 mayores de 65",
+        "unidad": "por cada 100 mayores de 65",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "afiliados",
+        "nombre": "afiliados medios a la Seguridad Social",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "afiliados_por_pension",
+        "nombre": "afiliados por cada pensión (relación cotizantes/pensionistas)",
+        "unidad": "afiliados por pensión",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "tasa_sustitucion_aprox",
+        "nombre": "tasa de sustitución aproximada (pensión de jubilación frente al salario medio)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "salario_real",
+        "nombre": "salario medio mensual en euros constantes (comparativa)",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "gasto_pensiones_seepros_pib",
+        "nombre": "gasto en pensiones en % del PIB de España (SEEPROS)",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_vejez_supervivientes_pib",
+        "nombre": "gasto en vejez y supervivencia en % del PIB de España",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_pensiones_seepros_pib_ue",
+        "nombre": "gasto en pensiones en % del PIB de la UE-27 (SEEPROS)",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_vejez_supervivientes_pib_ue",
+        "nombre": "gasto en vejez y supervivencia en % del PIB de la UE-27",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. El año en curso (2026) solo suma 9 meses (columna meses): es media del periodo y no comparable como año completo. Las pensiones son media anual de pensiones en vigor, no se suman entre años. Euros reales en euros de 2025 (anio_euros). Los gastos en % del PIB tienen huecos en los últimos años."
+  },
+  {
+    "tabla": "pensiones_gasto_pib",
+    "usar": true,
+    "tema": "Cuánto gasta cada país europeo en pensiones, medido como porcentaje de su PIB",
+    "preguntas": [
+      "¿Qué porcentaje del PIB gasta España en pensiones?",
+      "¿Qué país de Europa gasta más en pensiones?",
+      "¿Gasta España más o menos que la media europea en pensiones?",
+      "¿Cómo ha cambiado el gasto en pensiones de Italia desde el año 2000?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_pensiones_seepros_pib",
+        "nombre": "gasto en pensiones (SEEPROS) en % del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "gasto_vejez_supervivientes_pib",
+        "nombre": "gasto público en vejez y supervivientes en % del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_vejez_pib",
+        "nombre": "gasto público en vejez en % del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_supervivientes_pib",
+        "nombre": "gasto público en viudedad y orfandad en % del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gasto_proteccion_social_pib",
+        "nombre": "gasto total en protección social en % del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Incluye filas agregadas 'UE-27' (geo EU27_2020, es_ue=true) junto a los países; para rankings de países usar es_ue=false. Los países no UE (Noruega, Suiza, Turquía...) tienen es_miembro_ue=false. Los últimos años tienen huecos según la serie."
+  },
+  {
+    "tabla": "pensiones_mensual",
+    "usar": true,
+    "tema": "Pensiones contributivas en España mes a mes: número de pensiones, pensión media y afiliados",
+    "preguntas": [
+      "¿Cuántas pensiones hay ahora mismo en España?",
+      "¿Cuál es la pensión media de jubilación este mes?",
+      "¿Cuánto ha subido la pensión de jubilación en el último año descontando la inflación?",
+      "¿Cómo ha evolucionado el número de pensiones desde 2008?"
+    ],
+    "medidas": [
+      {
+        "columna": "pension_media_real",
+        "nombre": "pensión media mensual en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "pension_media",
+        "nombre": "pensión media mensual en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_real"
+      },
+      {
+        "columna": "pension_media_jubilacion_real",
+        "nombre": "pensión media de jubilación en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "pension_media_jubilacion",
+        "nombre": "pensión media de jubilación en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_jubilacion_real"
+      },
+      {
+        "columna": "pension_media_viudedad_real",
+        "nombre": "pensión media de viudedad en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "pensiones",
+        "nombre": "número de pensiones contributivas en vigor",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pensiones_jubilacion",
+        "nombre": "número de pensiones de jubilación",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "importe_mensual",
+        "nombre": "gasto mensual en nóminas de pensiones",
+        "unidad": "€ al mes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "afiliados",
+        "nombre": "afiliados medios del mes",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "afiliados_por_pension",
+        "nombre": "afiliados por cada pensión",
+        "unidad": "afiliados por pensión",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "interanual_jubilacion_nominal",
+        "nombre": "variación interanual de la pensión de jubilación en euros corrientes",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "interanual_jubilacion_real",
+        "nombre": "variación interanual de la pensión de jubilación descontando la inflación",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España. El último mes (2026-09) puede no tener todavía las columnas en euros reales (nulas) por falta de IPC. importe_mensual está en euros (miles de millones, p. ej. 14.500 millones al mes)."
+  },
+  {
+    "tabla": "pensiones_territorio",
+    "usar": true,
+    "tema": "Pensiones contributivas por comunidad autónoma y provincia: cuántas hay y cuánto cobra de media un pensionista",
+    "preguntas": [
+      "¿Cuál es la pensión media en el País Vasco?",
+      "¿Qué comunidad tiene la pensión media más baja?",
+      "¿Cuántas pensiones hay en Andalucía?",
+      "¿En qué provincia hay más pensiones por habitante?"
+    ],
+    "medidas": [
+      {
+        "columna": "pension_media_real",
+        "nombre": "pensión media mensual en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "pension_media",
+        "nombre": "pensión media mensual en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_real"
+      },
+      {
+        "columna": "pension_media_jubilacion_real",
+        "nombre": "pensión media de jubilación en euros constantes",
+        "unidad": "€ al mes (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "pension_media_jubilacion",
+        "nombre": "pensión media de jubilación en euros corrientes",
+        "unidad": "€ al mes",
+        "tipo": "media",
+        "real": "pension_media_jubilacion_real"
+      },
+      {
+        "columna": "pensiones",
+        "nombre": "número de pensiones contributivas (media del año)",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pensiones_jubilacion",
+        "nombre": "número de pensiones de jubilación",
+        "unidad": "pensiones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pensiones_por_1000_hab",
+        "nombre": "pensiones por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pensiones_por_100_mayores",
+        "nombre": "pensiones por cada 100 personas de 65 años o más",
+        "unidad": "por cada 100 mayores de 65",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "jubilaciones_por_100_mayores",
+        "nombre": "jubilaciones por cada 100 personas de 65 años o más",
+        "unidad": "por cada 100 mayores de 65",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "afiliados",
+        "nombre": "afiliados medios a la Seguridad Social",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "afiliados_por_pension",
+        "nombre": "afiliados por cada pensión",
+        "unidad": "afiliados por pensión",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "afiliados_por_1000_hab",
+        "nombre": "afiliados por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del padrón",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Códigos INE: el mismo cod significa cosas distintas según nivel (cod '13' es Madrid como ccaa y Ciudad Real como provincia; filtrar siempre por nivel). Provincia 28 = comunidad de Madrid uniprovincial, mismas cifras. 2026 solo tiene 9 meses (columna meses). Afiliados solo desde 2021."
+  },
+  {
+    "tabla": "poblacion_municipios",
+    "usar": true,
+    "tema": "Cuántos habitantes tiene cada municipio de España según el padrón",
+    "preguntas": [
+      "¿Cuántos habitantes tiene Madrid?",
+      "¿Cuál es el municipio más poblado de Navarra?",
+      "¿Cómo ha crecido la población de Torrejón de Ardoz desde 2016?",
+      "¿Qué municipios tienen menos de 100 habitantes?"
+    ],
+    "medidas": [
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio (padrón, 1 de enero)",
+        "unidad": "habitantes",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Un municipio por fila y año (2016-2025), sin desglose por sexo. Los nombres vienen con el artículo detrás ('Campillo, El', 'Riba, La'). Incluye cod_prov y cod_ccaa (INE) para agrupar. Para totales de provincia o comunidad usar poblacion_territorios."
+  },
+  {
+    "tabla": "poblacion_territorios",
+    "usar": true,
+    "tema": "Población de España, de cada comunidad y de cada provincia por año y sexo",
+    "preguntas": [
+      "¿Cuántos habitantes tiene España?",
+      "¿Qué comunidad tiene más población?",
+      "¿Cuántas mujeres hay en Galicia?",
+      "¿Cómo ha evolucionado la población de Cataluña desde 1996?"
+    ],
+    "medidas": [
+      {
+        "columna": "poblacion",
+        "nombre": "población (padrón, 1 de enero)",
+        "unidad": "habitantes",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "n_municipios",
+        "nombre": "número de municipios del territorio",
+        "unidad": "municipios",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "No tiene columna de nombre: unir con territorios por nivel y cod para obtener el nombre. El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia). Siempre filtrar sexo = 'Total' salvo que se pregunte por hombres o mujeres, o se duplica la población."
+  },
+  {
+    "tabla": "primario_aceite",
+    "usar": true,
+    "tema": "Producción de aceite de oliva por campaña en España, Italia, Grecia, Portugal y el mundo",
+    "preguntas": [
+      "¿Cuánto aceite de oliva produce España?",
+      "¿Qué porcentaje del aceite del mundo es español?",
+      "¿Cómo ha variado la producción de aceite en España desde 2013?",
+      "¿Qué país europeo produce más aceite después de España?"
+    ],
+    "medidas": [
+      {
+        "columna": "produccion_miles_t",
+        "nombre": "producción de aceite de oliva",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "cuota_ue_pct",
+        "nombre": "cuota de la producción de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_mundo_pct",
+        "nombre": "cuota de la producción mundial",
+        "unidad": "% del mundo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "kg_hab",
+        "nombre": "aceite producido por habitante",
+        "unidad": "kg por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "total_ue_miles_t",
+        "nombre": "producción total de la UE",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "mundo_miles_t",
+        "nombre": "producción mundial (COI)",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "campania",
+      "grano": "curso",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": "grupo",
+      "espana": {
+        "columna": "grupo",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "país o grupo de países",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Campañas de octubre a septiembre (2024/25 = octubre 2024 a septiembre 2025). La campaña más reciente (2025/26) es estimación (estimado=true). 'Resto de la UE' y 'Mundo (COI)' no son países: para rankings de países excluirlos."
+  },
+  {
+    "tabla": "primario_aceite_precios",
+    "usar": true,
+    "tema": "Precio del aceite de oliva en origen cada mes, en España, Italia, Grecia y Portugal",
+    "preguntas": [
+      "¿A cuánto está el aceite de oliva virgen extra?",
+      "¿Cuánto ha subido el precio del aceite desde 2020?",
+      "¿En qué país es más barato el aceite de oliva en origen?",
+      "¿Cuál fue el precio máximo del aceite virgen extra en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_kg_real",
+        "nombre": "precio en origen en euros constantes",
+        "unidad": "€/kg (euros de agosto de 2026)",
+        "tipo": "precio",
+        "principal": true
+      },
+      {
+        "columna": "eur_kg",
+        "nombre": "precio en origen en euros corrientes",
+        "unidad": "€/kg",
+        "tipo": "precio",
+        "real": "eur_kg_real"
+      },
+      {
+        "columna": "n_cotizaciones",
+        "nombre": "número de cotizaciones semanales promediadas",
+        "unidad": "cotizaciones",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "categoría del aceite",
+        "total": null,
+        "defecto": "Virgen extra"
+      }
+    ],
+    "filtros": [],
+    "notas": "Para el precio de referencia usar categoria = 'Virgen extra'; no mezclar con Virgen y Lampante (más baratos). Es precio en origen (lo que cobra el productor), no el de supermercado. Precios medios mensuales en euros por kilo."
+  },
+  {
+    "tabla": "primario_ccaa",
+    "usar": true,
+    "tema": "Peso de la agricultura, ganadería, silvicultura y pesca en la economía de cada comunidad y provincia",
+    "preguntas": [
+      "¿Qué comunidad depende más del sector primario?",
+      "¿Cuánto produce el sector primario de Andalucía?",
+      "¿Qué peso tiene la agricultura en la economía de Extremadura?",
+      "¿Cómo ha evolucionado el valor añadido agrario por habitante en Aragón?"
+    ],
+    "medidas": [
+      {
+        "columna": "vab_primario_eur_hab_real",
+        "nombre": "valor añadido del sector primario por habitante en euros constantes",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "vab_primario_eur_hab",
+        "nombre": "valor añadido del sector primario por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "real": "vab_primario_eur_hab_real"
+      },
+      {
+        "columna": "peso_vab_pct",
+        "nombre": "peso del sector primario en el valor añadido total",
+        "unidad": "% del VAB total",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "vab_primario_meur",
+        "nombre": "valor añadido bruto del sector primario",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_total_meur",
+        "nombre": "valor añadido bruto total de la economía",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Datos Eurostat: provincias solo hasta 2023, comunidades y España hasta 2024. La fila de España se llama 'Spain' (nivel pais). Nombres de Eurostat de comunidades (Comunitat Valenciana, Ciudad de Ceuta). El código '00' de España hay que comprobarlo en nivel pais; los códigos coinciden con el INE solo dentro de cada nivel. Para comparar comunidades usar peso_vab_pct o por habitante, no los millones."
+  },
+  {
+    "tabla": "primario_ccaa_cultivos",
+    "usar": true,
+    "tema": "Cuánto cereal, cebada, maíz, arroz, girasol y patata producen y cultivan las comunidades autónomas",
+    "preguntas": [
+      "¿Qué comunidad produce más cereal?",
+      "¿Cuántas toneladas de patata se producen en Galicia?",
+      "¿Dónde se cultiva el arroz en España?",
+      "¿Cómo ha evolucionado la producción de girasol en Andalucía?"
+    ],
+    "medidas": [
+      {
+        "columna": "produccion_miles_t",
+        "nombre": "producción",
+        "unidad": "miles de toneladas",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "superficie_miles_ha",
+        "nombre": "superficie cultivada",
+        "unidad": "miles de hectáreas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "kg_hab",
+        "nombre": "producción por habitante",
+        "unidad": "kg por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "ha_1000hab",
+        "nombre": "superficie por cada 1.000 habitantes",
+        "unidad": "ha por cada 1.000 habitantes",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cuota_espana_pct",
+        "nombre": "cuota de la producción de España",
+        "unidad": "% de España",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población de la comunidad",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "producto",
+        "nombre": "cultivo",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo seis cultivos (Eurostat no da olivar, viñedo, frutales ni hortalizas por región). 'Cereales' incluye Cebada y Maíz en grano: no sumar entre productos. Códigos INE de comunidad (13 = Madrid). El arroz o el maíz son 0 en comunidades donde no se cultivan."
+  },
+  {
+    "tabla": "primario_mundo",
+    "usar": true,
+    "tema": "España frente al mundo en aceite de oliva y vino: producción, exportaciones y viñedo",
+    "preguntas": [
+      "¿Cuántos hectolitros de vino produce España?",
+      "¿Qué puesto ocupa España en el mundo en producción de aceite?",
+      "¿Cuánta superficie de viñedo tiene España?",
+      "¿Qué país exporta más vino?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador (producción, exportación o superficie; la unidad depende del indicador)",
+        "unidad": "según columna unidad",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "puesto_mundo",
+        "nombre": "puesto en el ranking mundial",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador",
+        "nombre": "indicador",
+        "total": null
+      },
+      {
+        "columna": "unidad",
+        "nombre": "unidad de medida",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Tabla pequeña (23 filas) de valores fijos de COI y OIV; cada indicador tiene su unidad (miles de t, millones de hl, miles de millones de €, miles de ha): filtrar siempre por indicador. 'Mundo' (cod MUNDO) no es un país. Solo salen los 3-5 primeros países de cada indicador."
+  },
+  {
+    "tabla": "primario_paises_largo",
+    "usar": false,
+    "notas": "Tabla base en formato largo (producto x país x año) de la que derivan primario_serie_espana, primario_ranking_ue y primario_pesca; mezcla unidades distintas en una sola columna valor, así que no sirve para responder sin filtrar por producto. Usar las derivadas."
+  },
+  {
+    "tabla": "primario_pesca",
+    "usar": true,
+    "tema": "Pesca y acuicultura en la UE: capturas, acuicultura y flota pesquera por país",
+    "preguntas": [
+      "¿Cuántas toneladas de pescado captura España?",
+      "¿Qué país de la UE pesca más?",
+      "¿Cuántos barcos pesqueros tiene España?",
+      "¿Cómo ha cambiado la flota pesquera española desde 2000?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor de la medida elegida (capturas, acuicultura o flota; la unidad depende de la medida)",
+        "unidad": "según columna unidad",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "cuota_pct",
+        "nombre": "cuota del país en el total de la UE",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto del país en la UE",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "kg_hab",
+        "nombre": "capturas o acuicultura por habitante",
+        "unidad": "kg por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_real",
+        "nombre": "valor de la acuicultura en euros constantes",
+        "unidad": "millones de € (euros de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_ue",
+        "nombre": "total de la UE de la medida",
+        "unidad": "según columna unidad",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "medida",
+        "nombre": "tipo de dato pesquero",
+        "total": null,
+        "defecto": "capturas"
+      },
+      {
+        "columna": "producto",
+        "nombre": "descripción de la medida",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre por medida (capturas en miles de t, acuicultura_t en miles de t, acuicultura_eur en millones de euros, flota_gt en miles de GT, flota_nr en número de buques): unidades distintas en la misma columna valor. Irlanda y Portugal no publican capturas recientes, por eso la cuota (cuota_pct) puede estar inflada (ver cuota_min_pct). valor_real solo existe para acuicultura_eur. kg_hab solo en capturas y acuicultura_t."
+  },
+  {
+    "tabla": "primario_ranking_ue",
+    "usar": true,
+    "tema": "En qué productos agrarios, ganaderos y pesqueros España lidera Europa y cuánto pesa frente a su población",
+    "preguntas": [
+      "¿En qué productos agrarios es España el primer productor de la UE?",
+      "¿Qué porcentaje del aguacate europeo se produce en España?",
+      "¿Qué puesto ocupa España en producción de vino en la UE?",
+      "¿Qué país produce más cereales en Europa?"
+    ],
+    "medidas": [
+      {
+        "columna": "cuota_pct",
+        "nombre": "cuota de España en el total de la UE-27",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto de España entre los países de la UE",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "veces_peso_poblacion",
+        "nombre": "cuántas veces su peso en población produce España",
+        "unidad": "veces",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_espana",
+        "nombre": "valor de España del producto (la unidad depende del producto)",
+        "unidad": "según columna unidad",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "total_ue",
+        "nombre": "total de la UE del producto",
+        "unidad": "según columna unidad",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "valor_hab_espana",
+        "nombre": "valor por habitante en España",
+        "unidad": "según columna unidad_hab",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_hab_ue",
+        "nombre": "valor por habitante en la UE",
+        "unidad": "según columna unidad_hab",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de producto",
+        "total": null
+      },
+      {
+        "columna": "producto",
+        "nombre": "producto",
+        "total": null
+      },
+      {
+        "columna": "pais_primero",
+        "nombre": "país que lidera",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por producto con el último año con buena cobertura (2024 o 2025); no es serie temporal. Solo describe a España (no hay otros países salvo primero y segundo). Unidad según producto (miles de t, M EUR, miles de ha...); comparar solo cuotas entre productos distintos. Algunos productos tienen países sin dato (cuota_min_pct, cobertura_pct) y las exportaciones de Países Bajos están infladas por la reexportación."
+  },
+  {
+    "tabla": "primario_serie_espana",
+    "usar": true,
+    "tema": "Evolución desde 2000 de cada producto del campo y la pesca en España: producción, cuota en la UE y valor por habitante",
+    "preguntas": [
+      "¿Cuánto aceite de oliva (en valor) produce España cada año?",
+      "¿Cómo ha evolucionado la producción de tomate en España?",
+      "¿Cuántas cabezas de ganado porcino hay en España?",
+      "¿Qué cuota de la UE tiene España en producción de naranja desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor_espana",
+        "nombre": "valor de España del producto (la unidad depende del producto)",
+        "unidad": "según columna unidad",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "cuota_pct",
+        "nombre": "cuota de España en los países de la UE con dato",
+        "unidad": "% de la UE",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "puesto",
+        "nombre": "puesto de España en la UE",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_hab",
+        "nombre": "valor por habitante (la unidad depende del producto)",
+        "unidad": "según columna unidad_hab",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_real",
+        "nombre": "valor en euros constantes (solo productos en M EUR)",
+        "unidad": "millones de € (euros de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "valor_hab_real",
+        "nombre": "valor por habitante en euros constantes (solo productos en M EUR)",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "total_ue",
+        "nombre": "total de la UE del producto",
+        "unidad": "según columna unidad",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de producto",
+        "total": null
+      },
+      {
+        "columna": "producto",
+        "nombre": "producto",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Siempre filtrar por producto (cada uno con su unidad: miles de t, M EUR, miles de ha, miles de cabezas, buques o miles de GT); no sumar productos distintos. Es solo España. Los años más recientes (2026) están incompletos para algunos cereales. Los productos en M EUR (valor y exportación) tienen valor_real; el resto no. Algunos años tienen pocos países en la UE con dato (n_paises)."
+  },
+  {
+    "tabla": "primario_valor_produccion",
+    "usar": true,
+    "tema": "Valor de la producción agraria de España y de otros países europeos, por habitante y en euros reales, y renta de los agricultores",
+    "preguntas": [
+      "¿Cuánto produce el campo español en euros?",
+      "¿Qué país de Europa tiene la producción agraria más alta por habitante?",
+      "¿Cómo ha evolucionado la renta de los agricultores españoles?",
+      "¿Cuánto vale la producción agraria de Francia?"
+    ],
+    "medidas": [
+      {
+        "columna": "produccion_eur_hab_real",
+        "nombre": "producción agraria por habitante en euros constantes",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "produccion_eur_hab",
+        "nombre": "producción agraria por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "real": "produccion_eur_hab_real"
+      },
+      {
+        "columna": "produccion_meur",
+        "nombre": "producción de la rama agraria en euros corrientes",
+        "unidad": "millones de €",
+        "tipo": "flujo",
+        "real": "produccion_meur_real"
+      },
+      {
+        "columna": "produccion_meur_real",
+        "nombre": "producción de la rama agraria en euros constantes",
+        "unidad": "millones de € (euros de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_meur",
+        "nombre": "valor añadido bruto agrario",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "vab_eur_hab_real",
+        "nombre": "valor añadido agrario por habitante en euros constantes",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "renta_real_uta_eur2020",
+        "nombre": "renta agraria real por unidad de trabajo anual",
+        "unidad": "€ de 2020 por trabajador",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_indicador_a",
+        "nombre": "índice de renta agraria real por trabajador (2015 = 100)",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "volumen_eur2020_hab",
+        "nombre": "volumen de producción por habitante a precios de 2020",
+        "unidad": "€ de 2020 por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "poblacion_miles",
+        "nombre": "población",
+        "unidad": "miles de habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo España, UE-27 (geo EU27_2020) y FR, DE, IT, PL, NL, PT, EL, RO. España se deflacta con el IPC y los demás países con el deflactor del PIB (columna metodo_real): comparar con cautela. UE-27 no es un país. La renta agraria por trabajador y el índice son bastante irregulares."
+  },
+  {
+    "tabla": "renta_distritos",
+    "usar": true,
+    "tema": "Renta de los barrios o distritos de las ciudades grandes de España",
+    "preguntas": [
+      "¿Qué distrito de Madrid tiene más renta?",
+      "¿Cuánta renta por persona tiene el distrito 5 de Valencia?",
+      "¿Cómo ha evolucionado la renta en los distritos de Barcelona?"
+    ],
+    "medidas": [
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta neta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "renta_hogar_real",
+        "nombre": "renta neta media por hogar en euros constantes",
+        "unidad": "€ al año por hogar (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_uc_mediana_real",
+        "nombre": "mediana de la renta por unidad de consumo en euros constantes",
+        "unidad": "€ al año por unidad de consumo (euros de 2025)",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "distrito",
+        "nombre": "distrito censal",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo euros reales (de 2025). No hay nombre de municipio: unir con renta_municipios por cod_mun. Los distritos se llaman 'Distrito 01', 'Distrito 02'...: siempre ir con el municipio (cod_mun, p. ej. 28079 = Madrid). El año más reciente es 2023."
+  },
+  {
+    "tabla": "renta_ecv_ccaa",
+    "usar": true,
+    "tema": "Renta de los hogares, riesgo de pobreza y desigualdad por comunidad autónoma según la Encuesta de Condiciones de Vida",
+    "preguntas": [
+      "¿Qué porcentaje de la población está en riesgo de pobreza en Andalucía?",
+      "¿Qué comunidad tiene la renta media por persona más alta?",
+      "¿Cuántas personas están en riesgo de pobreza o exclusión social (AROPE) en España?",
+      "¿Cómo ha evolucionado la desigualdad (índice de Gini) en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "renta_persona",
+        "nombre": "renta media por persona en euros corrientes",
+        "unidad": "€ al año por persona",
+        "tipo": "media",
+        "real": "renta_persona_real"
+      },
+      {
+        "columna": "renta_hogar_real",
+        "nombre": "renta media por hogar en euros constantes",
+        "unidad": "€ al año por hogar (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_hogar",
+        "nombre": "renta media por hogar en euros corrientes",
+        "unidad": "€ al año por hogar",
+        "tipo": "media",
+        "real": "renta_hogar_real"
+      },
+      {
+        "columna": "renta_uc_real",
+        "nombre": "renta media por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "tasa_pobreza",
+        "nombre": "tasa de riesgo de pobreza",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "arope",
+        "nombre": "población en riesgo de pobreza o exclusión social (AROPE)",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "carencia_severa",
+        "nombre": "carencia material y social severa",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "baja_intensidad",
+        "nombre": "hogares con baja intensidad de empleo",
+        "unidad": "% de la población",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "fin_mes_dificultad",
+        "nombre": "hogares con dificultad para llegar a fin de mes",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "fin_mes_mucha_dificultad",
+        "nombre": "hogares con mucha dificultad para llegar a fin de mes",
+        "unidad": "% de hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "gini",
+        "nombre": "índice de Gini de desigualdad (0 a 100)",
+        "unidad": "puntos",
+        "tipo": "indice"
+      },
+      {
+        "columna": "s80_s20",
+        "nombre": "ratio S80/S20 (renta del 20% más rico entre la del 20% más pobre)",
+        "unidad": "veces",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Sin columna de nombre de territorio: unir con territorios por cod (códigos INE; España = '00'). anio es el año de la encuesta; la renta es del año anterior (anio_renta = anio - 1). Muestra pequeña en comunidades pequeñas: las cifras saltan de un año a otro."
+  },
+  {
+    "tabla": "renta_ecv_edad",
+    "usar": true,
+    "tema": "Pobreza y renta en España según la edad: niños, jóvenes, adultos y mayores",
+    "preguntas": [
+      "¿Qué porcentaje de los niños está en riesgo de pobreza en España?",
+      "¿Qué grupo de edad tiene más riesgo de pobreza?",
+      "¿Cómo ha evolucionado la pobreza entre los mayores de 65 años?",
+      "¿Cuánta renta por persona tienen los jóvenes de 16 a 29 años?"
+    ],
+    "medidas": [
+      {
+        "columna": "arope",
+        "nombre": "población en riesgo de pobreza o exclusión social (AROPE)",
+        "unidad": "% de la población del grupo",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "tasa_pobreza",
+        "nombre": "tasa de riesgo de pobreza",
+        "unidad": "% de la población del grupo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "carencia_severa",
+        "nombre": "carencia material y social severa",
+        "unidad": "% de la población del grupo",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_uc_real",
+        "nombre": "renta media por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "edad",
+        "nombre": "grupo de edad",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España. Los grupos se solapan: 'Menos de 18 años' incluye 'Menores de 16 años', y 'De 18 a 64 años' agrupa a varios de los demás; no sumar. anio es el año de la encuesta (la renta es del año anterior)."
+  },
+  {
+    "tabla": "renta_municipios",
+    "usar": true,
+    "tema": "Renta de cada municipio de España (ADRH del INE): cuánto ganan de media sus habitantes y hogares",
+    "preguntas": [
+      "¿Cuál es el municipio más rico de España?",
+      "¿Cuánta renta por persona tiene Pozuelo de Alarcón?",
+      "¿Qué puesto ocupa Sevilla en renta entre los municipios de España?",
+      "¿Cómo ha evolucionado la renta por persona en Vigo desde 2015?"
+    ],
+    "medidas": [
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta neta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "renta_persona",
+        "nombre": "renta neta media por persona en euros corrientes",
+        "unidad": "€ al año por persona",
+        "tipo": "media",
+        "real": "renta_persona_real"
+      },
+      {
+        "columna": "renta_hogar_real",
+        "nombre": "renta neta media por hogar en euros constantes",
+        "unidad": "€ al año por hogar (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_hogar",
+        "nombre": "renta neta media por hogar en euros corrientes",
+        "unidad": "€ al año por hogar",
+        "tipo": "media",
+        "real": "renta_hogar_real"
+      },
+      {
+        "columna": "renta_uc_real",
+        "nombre": "renta neta media por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_uc_mediana_real",
+        "nombre": "mediana de la renta por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_bruta_persona_real",
+        "nombre": "renta bruta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "puesto_espana",
+        "nombre": "puesto del municipio en España por renta por persona",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del padrón",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Datos del INE 2015-2023 (la renta del año anterior a la encuesta fiscal). Los municipios pequeños pueden no tener dato todos los años (ver municipios_con_dato). Nombres con artículo al final ('Riba, La'). Incluye cod_prov y cod_ccaa para agrupar; para medias de comunidad o provincia usar renta_territorios."
+  },
+  {
+    "tabla": "renta_territorios",
+    "usar": true,
+    "tema": "Renta media de las personas y los hogares en España, cada comunidad y cada provincia (ADRH del INE)",
+    "preguntas": [
+      "¿Qué comunidad tiene más renta por persona?",
+      "¿Cuánta renta por hogar tiene Murcia?",
+      "¿Qué provincia es la más rica de España?",
+      "¿Cómo ha cambiado la renta por persona en Extremadura desde 2015?"
+    ],
+    "medidas": [
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta neta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "renta_persona",
+        "nombre": "renta neta media por persona en euros corrientes",
+        "unidad": "€ al año por persona",
+        "tipo": "media",
+        "real": "renta_persona_real"
+      },
+      {
+        "columna": "renta_hogar_real",
+        "nombre": "renta neta media por hogar en euros constantes",
+        "unidad": "€ al año por hogar (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_hogar",
+        "nombre": "renta neta media por hogar en euros corrientes",
+        "unidad": "€ al año por hogar",
+        "tipo": "media",
+        "real": "renta_hogar_real"
+      },
+      {
+        "columna": "renta_uc_real",
+        "nombre": "renta neta media por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_uc_mediana_real",
+        "nombre": "mediana de la renta por unidad de consumo en euros constantes",
+        "unidad": "€ al año (euros de 2025)",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "España aparece como 'Total Nacional' (nivel pais, cod '00'). Los nombres vienen en formato INE con el artículo al final ('Madrid, Comunidad de', 'Rioja, La', 'Balears, Illes'). El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia). Datos 2015-2023."
+  },
+  {
+    "tabla": "renta_ue",
+    "usar": true,
+    "tema": "Pobreza y desigualdad en la UE: España frente a los demás países en AROPE, Gini y S80/S20",
+    "preguntas": [
+      "¿Qué país de Europa tiene más riesgo de pobreza?",
+      "¿Está España más desigual que la media europea?",
+      "¿Qué porcentaje de la población española está en riesgo de pobreza o exclusión social comparado con Francia?",
+      "¿Cómo ha evolucionado el Gini de Italia?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador elegido (AROPE en %, Gini en puntos, S80/S20 en veces)",
+        "unidad": "según indicador (% o puntos)",
+        "tipo": "porcentaje",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador",
+        "nombre": "indicador de pobreza o desigualdad",
+        "total": null,
+        "defecto": "arope"
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre por indicador: arope (% de población), gini (0 a 100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor. 'UE-27' (geo EU27_2020, es_ue=true) es el agregado, no un país: excluirlo en rankings de países. Año de encuesta, no de la renta."
+  },
+  {
+    "tabla": "salud_causas_muerte",
+    "usar": true,
+    "tema": "De qué mueren los españoles: defunciones por causa, sexo, año y territorio",
+    "preguntas": [
+      "¿De qué mueren más los españoles?",
+      "¿Cuántas personas murieron de cáncer en 2023?",
+      "¿Cuántas muertes por accidente de tráfico hubo en Andalucía en 2019?",
+      "¿Cómo han evolucionado las muertes por suicidio desde 1980?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_100k",
+        "nombre": "defunciones por cada 100.000 habitantes (tasa bruta)",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "defunciones",
+        "nombre": "número de defunciones",
+        "unidad": "defunciones",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Total"
+      },
+      {
+        "columna": "causa",
+        "nombre": "causa de muerte",
+        "total": "Todas las causas"
+      }
+    ],
+    "filtros": [],
+    "notas": "La tabla mezcla capítulos CIE-10 (es_capitulo = true, p. ej. 'Tumores', 'Enfermedades del sistema circulatorio') con causas concretas (es_capitulo = false, p. ej. 'Accidentes de tráfico', 'Suicidio y lesiones autoinfligidas'); no sumar capítulos y causas entre sí (se duplica). 'Todas las causas' es un capítulo y es el total. Para rankings de grandes grupos filtrar es_capitulo = true y excluir 'Todas las causas'. Sin nombre de territorio: unir con territorios por nivel y cod (13 = Madrid como ccaa, Ciudad Real como provincia). Tasa bruta sin ajustar por edad. Último año 2024."
+  },
+  {
+    "tabla": "salud_esperanza_vida",
+    "usar": true,
+    "tema": "Esperanza de vida al nacer en España, cada comunidad y cada provincia, por sexo",
+    "preguntas": [
+      "¿Cuál es la esperanza de vida en España?",
+      "¿En qué comunidad se vive más años?",
+      "¿Cuánto viven las mujeres en Madrid?",
+      "¿Cómo ha cambiado la esperanza de vida desde 1975?"
+    ],
+    "medidas": [
+      {
+        "columna": "anios",
+        "nombre": "esperanza de vida al nacer",
+        "unidad": "años",
+        "tipo": "media",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Ambos sexos"
+      }
+    ],
+    "filtros": [],
+    "notas": "Sin nombre de territorio: unir con territorios por nivel y cod. Cuidado: cod '13' es la comunidad de Madrid (85,6 años) con nivel ccaa y Ciudad Real (83,0) con nivel provincia. España viene de Eurostat (redondeada a un decimal) y comunidades y provincias del INE. Último año 2024."
+  },
+  {
+    "tabla": "salud_mortalidad_semanal",
+    "usar": true,
+    "tema": "Defunciones cada semana en España y en cada comunidad, y cuánto exceso hay sobre lo habitual",
+    "preguntas": [
+      "¿Cuántas personas murieron la semana pasada en España?",
+      "¿Cuántas muertes de más hubo en abril de 2020 por la COVID?",
+      "¿Qué comunidad tuvo más exceso de mortalidad en la ola de calor?",
+      "¿Cómo ha evolucionado la mortalidad semanal en Cataluña?"
+    ],
+    "medidas": [
+      {
+        "columna": "defunciones",
+        "nombre": "defunciones de la semana",
+        "unidad": "defunciones",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "exceso",
+        "nombre": "exceso de mortalidad sobre la media 2015-2019 de la misma semana (0,10 = 10 % más)",
+        "unidad": "%",
+        "tipo": "ratio",
+        "escala": 100
+      },
+      {
+        "columna": "media_2015_2019",
+        "nombre": "media de defunciones de esa semana en 2015-2019",
+        "unidad": "defunciones",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "semana",
+      "grano": "semanal",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Sin nombre de territorio: unir con territorios (cod INE; 13 = Madrid). exceso es una proporción, no un porcentaje: 1,57 significa 157 % más que lo habitual; la media 2015-2019 solo está para las semanas con referencia. La fecha 'semana' es el último día de la semana de datos; no sumar semanas de España con las de comunidades."
+  },
+  {
+    "tabla": "sanidad_gasto",
+    "usar": true,
+    "tema": "Cuánto gasta España y los países europeos en sanidad, público y privado, por habitante y como porcentaje del PIB",
+    "preguntas": [
+      "¿Cuánto gasta España en sanidad por habitante?",
+      "¿Qué porcentaje del PIB se dedica a sanidad en España?",
+      "¿Gasta España más o menos que la UE en sanidad pública?",
+      "¿Qué parte del gasto sanitario pagan directamente los hogares?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto sanitario por habitante en euros constantes (solo España)",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "eur_hab",
+        "nombre": "gasto sanitario por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "real": "eur_hab_real"
+      },
+      {
+        "columna": "pct_pib",
+        "nombre": "gasto sanitario en porcentaje del PIB",
+        "unidad": "% del PIB",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pps_hab",
+        "nombre": "gasto sanitario por habitante en paridad de poder adquisitivo",
+        "unidad": "PPS por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "gasto sanitario total",
+        "unidad": "millones de €",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "financiacion",
+        "nombre": "quién financia el gasto",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar financiacion = 'Total' para el gasto total; 'Público', 'Seguros voluntarios' y 'Pago directo de los hogares' suman el Total, no mezclarlos. 'UE-27' aparece con geo 'UE' (agregado, no país). eur_hab_real solo existe para España; para comparar países usar pct_pib o pps_hab. Datos hasta 2024 (2025 con huecos)."
+  },
+  {
+    "tabla": "sanidad_gasto_ccaa",
+    "usar": true,
+    "tema": "Gasto sanitario público de cada comunidad autónoma por habitante y respecto a su PIB",
+    "preguntas": [
+      "¿Qué comunidad gasta más en sanidad por habitante?",
+      "¿Cuánto gasta Madrid en sanidad pública por habitante?",
+      "¿Qué porcentaje del PIB regional dedica Extremadura a sanidad?",
+      "¿Cómo ha evolucionado el gasto sanitario de Andalucía desde 2002?"
+    ],
+    "medidas": [
+      {
+        "columna": "eur_hab_real",
+        "nombre": "gasto sanitario público por habitante en euros constantes",
+        "unidad": "€ por habitante (euros de 2025)",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "eur_hab",
+        "nombre": "gasto sanitario público por habitante en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "real": "eur_hab_real"
+      },
+      {
+        "columna": "pct_pib",
+        "nombre": "gasto sanitario público en porcentaje del PIB regional",
+        "unidad": "% del PIB regional",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Sin nombre de territorio: unir con territorios por cod (INE). La fila cod '00' (nivel total_ccaa) es el total del conjunto de comunidades, no España entera, y no está en la lista de comunidades. No incluye Ceuta ni Melilla. Los dos últimos años (2023 y 2024) son provisionales (provisional = true). Gasto del sector comunidades autónomas, sin mutuas ni gasto de la Administración central."
+  },
+  {
+    "tabla": "sanidad_listas_especialidad",
+    "usar": true,
+    "tema": "Listas de espera del Sistema Nacional de Salud por especialidad médica: cuántos pacientes esperan y cuántos días",
+    "preguntas": [
+      "¿Cuántos pacientes esperan una operación de traumatología?",
+      "¿Qué especialidad tiene más días de espera?",
+      "¿Cuánto se tarda en ver al dermatólogo?",
+      "¿Cómo ha evolucionado la lista de espera de cirugía de cataratas (oftalmología)?"
+    ],
+    "medidas": [
+      {
+        "columna": "dias_medio",
+        "nombre": "tiempo medio de espera",
+        "unidad": "días",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "pacientes",
+        "nombre": "pacientes en lista de espera (solo quirúrgica)",
+        "unidad": "pacientes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "tasa_1000",
+        "nombre": "pacientes en espera por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_espera_larga",
+        "nombre": "pacientes que esperan mucho (más de 6 meses en cirugía, más de 60 días en consultas)",
+        "unidad": "% de la lista",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de lista (quirúrgica o consultas externas)",
+        "total": null,
+        "defecto": "quirurgica"
+      },
+      {
+        "columna": "especialidad",
+        "nombre": "especialidad",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo total nacional (sin comunidad). Fechas de corte a 31 de diciembre (anual, 2013-2025). Siempre filtrar por tipo: 'quirurgica' tiene pacientes, 'consultas' tiene pacientes nulo. No sumar especialidades de distinto tipo ni especialidades entre sí si un paciente está en varias."
+  },
+  {
+    "tabla": "sanidad_listas_espera",
+    "usar": true,
+    "tema": "Listas de espera del Sistema Nacional de Salud por comunidad autónoma: pacientes, porcentaje que espera mucho y días de espera",
+    "preguntas": [
+      "¿Cuántas personas esperan una operación en España?",
+      "¿Qué comunidad tiene las listas de espera más largas?",
+      "¿Cuántos días se espera de media una operación en Madrid?",
+      "¿Cómo han evolucionado las listas de espera quirúrgicas desde 2016?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_1000",
+        "nombre": "pacientes en lista de espera por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "pacientes",
+        "nombre": "pacientes en lista de espera quirúrgica (nulo en consultas)",
+        "unidad": "pacientes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "dias_medio",
+        "nombre": "tiempo medio de espera",
+        "unidad": "días",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_espera_larga",
+        "nombre": "pacientes que esperan mucho (más de 6 meses en cirugía, más de 60 días en consultas)",
+        "unidad": "% de la lista",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "semestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de lista (quirúrgica o consultas externas)",
+        "total": null,
+        "defecto": "quirurgica"
+      },
+      {
+        "columna": "corte",
+        "nombre": "fecha de corte del semestre",
+        "total": null,
+        "defecto": "diciembre"
+      }
+    ],
+    "filtros": [],
+    "notas": "Dos cortes al año (30 de junio y 31 de diciembre, columna corte); para comparar años usar siempre el mismo corte, normalmente 'diciembre'. Filtrar por tipo: 'quirurgica' o 'consultas' no son comparables entre sí, y pacientes solo existe en quirúrgica. Sin nombre de territorio: unir con territorios por cod (INE; España = '00', 13 = Madrid). Las comunidades empiezan en diciembre de 2016."
+  },
+  {
+    "tabla": "sanidad_recursos",
+    "usar": true,
+    "tema": "Cuántos médicos, enfermeras y camas de hospital tienen España y los países europeos por habitante",
+    "preguntas": [
+      "¿Cuántos médicos hay por habitante en España?",
+      "¿Qué país europeo tiene más camas de hospital por habitante?",
+      "¿Tiene España más enfermeras que la media europea?",
+      "¿Cómo han evolucionado las camas hospitalarias en España desde 1990?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_1000",
+        "nombre": "profesionales o camas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "por_100k",
+        "nombre": "profesionales o camas por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "numero",
+        "nombre": "número total de profesionales o camas",
+        "unidad": "personas o camas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "geo",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "recurso",
+        "nombre": "recurso sanitario (médicos, enfermeras o camas)",
+        "total": null
+      },
+      {
+        "columna": "situacion",
+        "nombre": "definición del profesional (ejerciendo, activo, total de camas)",
+        "total": null,
+        "defecto": "PRACT"
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre por recurso. situacion: 'PRACT' (ejerciendo) es la definición habitual de médicos y enfermeras, 'PACT' (activo profesional) es más amplia y 'mixta' la usa la media de la UE; camas usa 'total' (y 'mixta' en la media UE). No sumar situaciones. La media de la UE tiene geo 'UE' y pais 'UE-27 (media)', ponderada por población de los países con dato; no es un país. Enfermeras ejerciendo se aproximan por 'PRACT'."
+  },
+  {
+    "tabla": "sanidad_recursos_ccaa",
+    "usar": true,
+    "tema": "Médicos y camas de hospital por habitante en cada comunidad autónoma",
+    "preguntas": [
+      "¿Qué comunidad tiene más médicos por habitante?",
+      "¿Cuántas camas de hospital hay por cada 1.000 habitantes en Madrid?",
+      "¿Cuántos médicos hay en Andalucía?",
+      "¿Cómo han evolucionado las camas hospitalarias en Castilla y León?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_1000",
+        "nombre": "médicos o camas por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "por_100k",
+        "nombre": "médicos o camas por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "numero",
+        "nombre": "número de médicos o de camas",
+        "unidad": "médicos o camas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "cod",
+        "valor": "00"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "recurso",
+        "nombre": "recurso sanitario (médicos o camas)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre por recurso: 'medicos' y 'camas' son magnitudes distintas. Sin nombre de territorio: unir con territorios por cod (INE; España = '00'; 13 = Madrid). nuts2 es el código europeo alternativo (ES30 = Madrid). Médicos de Eurostat (ejerciendo) y camas hospitalarias totales; Ceuta y Melilla pueden faltar algunos años. Último año 2024."
+  },
+  {
+    "tabla": "territorios",
+    "usar": false,
+    "notas": "Dimensión auxiliar de territorios (códigos INE y de Hacienda, nombres, slugs, rutas y última población) usada para unir con las demás tablas; no es una cifra que se consulte por sí misma (para población usar poblacion_territorios). Su cod_ccaa_hacienda difiere del INE."
+  },
+  {
+    "tabla": "transparencia_internacional",
+    "usar": true,
+    "tema": "Cómo está España frente a otros países en corrupción, Estado de derecho y gobierno abierto según índices internacionales",
+    "preguntas": [
+      "¿Cuál es la puntuación de España en el índice de percepción de la corrupción?",
+      "¿Qué país de la UE es menos corrupto?",
+      "¿En qué puesto está España de la UE en control de la corrupción?",
+      "¿Cómo ha evolucionado la corrupción percibida en España desde 2012?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "puntuación del indicador elegido (la escala depende de la unidad)",
+        "unidad": "%",
+        "tipo": "indice",
+        "principal": true,
+        "escala": 100
+      },
+      {
+        "columna": "puesto_ue",
+        "nombre": "puesto del país entre los de la UE con dato ese año",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "puesto_ocde",
+        "nombre": "puesto del país entre los de la OCDE con dato ese año",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "puesto_mundial",
+        "nombre": "puesto mundial del país en el indicador",
+        "unidad": "puesto",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "indicador_id",
+        "nombre": "indicador (código)",
+        "total": null,
+        "defecto": "cpi"
+      },
+      {
+        "columna": "nombre_corto",
+        "nombre": "indicador (nombre corto)",
+        "total": null
+      },
+      {
+        "columna": "sentido",
+        "nombre": "sentido de la escala (positivo: más es mejor)",
+        "total": null
+      },
+      {
+        "columna": "fuente",
+        "nombre": "fuente del indicador",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre por indicador_id (la cifra de referencia es 'cpi', Índice de Percepción de la Corrupción, 0 a 100, 100 = muy limpio). Las escalas y el sentido cambian: en V-Dem (vdem_*, sentido negativo, 0 a 1) un valor alto es MÁS corrupción; en los demás, más es mejor. Las medias 'Unión Europea (media simple)' y 'OCDE (media simple)' (es_agregado = true) solo existen en WGI y V-Dem (no en CPI ni WJP) y no son países. Los puestos solo existen entre UE y OCDE."
+  }
+]

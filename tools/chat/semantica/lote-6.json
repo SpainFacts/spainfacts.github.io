@@ -1,0 +1,2139 @@
+[
+  {
+    "tabla": "mercado_ipc_mensual",
+    "usar": true,
+    "tema": "Inflación en España (IPC) mes a mes: general, subyacente, energía, alimentos y servicios",
+    "preguntas": [
+      "¿Cuánto ha subido la inflación en el último mes?",
+      "¿Cuál fue la inflación más alta de los últimos veinte años?",
+      "¿Cuánto han subido los alimentos elaborados este año?",
+      "¿Cuánto poder adquisitivo hemos perdido desde 2019?"
+    ],
+    "medidas": [
+      {
+        "columna": "var_anual",
+        "nombre": "inflación anual (variación del IPC general en 12 meses)",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "var_mensual",
+        "nombre": "variación mensual del IPC general",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "indice",
+        "nombre": "índice IPC general (base 2021=100)",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "subyacente",
+        "nombre": "inflación subyacente (sin energía ni alimentos frescos), variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "energia",
+        "nombre": "inflación de la energía, variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "alimentos_sin_elaborar",
+        "nombre": "inflación de los alimentos sin elaborar, variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "alimentos_elaborados",
+        "nombre": "inflación de los alimentos elaborados, variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "bienes_industriales",
+        "nombre": "inflación de los bienes industriales, variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "servicios",
+        "nombre": "inflación de los servicios, variación anual",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "indice_2008",
+        "nombre": "índice IPC rebasado a 2008=100",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "indice_2019",
+        "nombre": "índice IPC rebasado a 2019=100",
+        "unidad": "índice",
+        "tipo": "indice"
+      },
+      {
+        "columna": "perdida_poder_compra_2019",
+        "nombre": "variación del poder adquisitivo respecto a 2019 (negativo = pérdida)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "IPC nacional del INE (tabla 76130); todas las tasas son variación anual salvo var_mensual. Nada de esto se suma entre meses."
+  },
+  {
+    "tabla": "mercado_ipca_ue",
+    "usar": true,
+    "tema": "Inflación de España comparada con Alemania, Francia, Italia, Portugal y la zona euro (IPCA europeo)",
+    "preguntas": [
+      "¿Tiene España más inflación que Alemania?",
+      "¿Cuál era la inflación de Francia en 2022?",
+      "¿Cómo ha evolucionado la inflación en la zona euro?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_anual",
+        "nombre": "inflación anual armonizada (IPCA)",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "indice_2019",
+        "nombre": "índice de precios armonizado (2019=100)",
+        "unidad": "índice",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat, serie desde 1996. Incluye agregados Zona euro (EA20) y UE-27 además de cinco países; el IPCA español difiere algo del IPC nacional."
+  },
+  {
+    "tabla": "mercado_paro_formacion",
+    "usar": true,
+    "tema": "Tasa de paro según el nivel de estudios y el sexo",
+    "preguntas": [
+      "¿Cuánto paro hay entre quienes tienen estudios superiores?",
+      "¿Qué nivel de estudios tiene más paro?",
+      "¿Cómo ha bajado el paro de las mujeres con solo la ESO desde 2014?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_paro",
+        "nombre": "tasa de paro",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": "Ambos sexos"
+      },
+      {
+        "columna": "nivel_corto",
+        "nombre": "nivel de formación",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "EPA, media anual de los cuatro trimestres, solo España. Para el paro total usar nivel_corto = Total."
+  },
+  {
+    "tabla": "mercado_paro_grupos",
+    "usar": true,
+    "tema": "Tasa de paro trimestral por sexo, edad y nacionalidad",
+    "preguntas": [
+      "¿Cuánto paro juvenil hay ahora?",
+      "¿Qué diferencia de paro hay entre españoles y extranjeros?",
+      "¿Cómo ha evolucionado el paro de las mujeres?",
+      "¿Cuál es la tasa de paro de los mayores de 55 años?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_paro",
+        "nombre": "tasa de paro del grupo",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "dimension",
+        "nombre": "tipo de grupo (Edad, Nacionalidad o Sexo)",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo (por ejemplo Menores de 25 años, Mujeres, Española)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "EPA, España entera. Formato largo: cada grupo es una fila, los grupos de distintas dimensiones no se suman. No hay fila de total; para la tasa general usar mercado_paro_trimestral."
+  },
+  {
+    "tabla": "mercado_paro_municipios",
+    "usar": true,
+    "tema": "Paro registrado en cada municipio en el último mes y su peso sobre la población",
+    "preguntas": [
+      "¿Cuántos parados registrados hay en Cieza?",
+      "¿Qué municipios grandes tienen más paro por habitante?",
+      "¿Cuánto ha subido el paro en Alcobendas respecto al año pasado?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_100_hab",
+        "nombre": "parados registrados por cada 100 habitantes",
+        "unidad": "por cada 100 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "paro_registrado",
+        "nombre": "parados registrados",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "paro_registrado_hace_1_anio",
+        "nombre": "parados registrados hace un año",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "paro_menor25",
+        "nombre": "parados registrados menores de 25 años",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "variacion_anual_pct",
+        "nombre": "variación anual del paro registrado",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_municipio",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "SEPE, solo el último mes (sin histórico). Hay municipios con el mismo nombre en distintas provincias (Cieza): distinguir por cod_prov. paro_menor25 es nulo en municipios pequeños por secreto estadístico; variación_anual_pct puede ser nula si el año pasado era 0. Se divide por población total, no solo 16-64."
+  },
+  {
+    "tabla": "mercado_paro_registrado",
+    "usar": true,
+    "tema": "Paro registrado en las oficinas de empleo, mes a mes, por provincia, comunidad y España",
+    "preguntas": [
+      "¿Cuántos parados registrados hay en España?",
+      "¿Qué provincia tiene más paro registrado por habitante?",
+      "¿Cómo ha evolucionado el paro registrado en Andalucía?",
+      "¿Cuántas mujeres están en paro en Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_100_16_64",
+        "nombre": "parados registrados por cada 100 habitantes de 16 a 64 años",
+        "unidad": "por cada 100 habitantes de 16 a 64 años",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "paro_registrado",
+        "nombre": "parados registrados",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "paro_menor25",
+        "nombre": "parados registrados menores de 25 años",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "paro_hombres",
+        "nombre": "parados registrados hombres",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "paro_mujeres",
+        "nombre": "parados registrados mujeres",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion_16_64",
+        "nombre": "población de 16 a 64 años",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "variacion_mensual",
+        "nombre": "variación mensual del paro registrado",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "variacion_anual",
+        "nombre": "variación anual del paro registrado",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "variacion_anual_pct",
+        "nombre": "variación anual del paro registrado",
+        "unidad": "%",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "SEPE. Sin columna de nombre: cod es el código INE (provincia 01-52, comunidad 01-19, España 00); filtrar siempre por nivel para no mezclar provincias con comunidades. paro_registrado es un stock mensual, no se suma entre meses. Es distinto de la tasa de paro de la EPA."
+  },
+  {
+    "tabla": "mercado_paro_territorios",
+    "usar": true,
+    "tema": "Tasa de paro, empleo y actividad por comunidad autónoma y provincia (EPA trimestral)",
+    "preguntas": [
+      "¿Qué comunidad tiene la mayor tasa de paro?",
+      "¿Cuánto paro juvenil hay en Canarias?",
+      "¿Cómo ha evolucionado la tasa de paro en Extremadura?",
+      "¿Qué provincia tiene más gente trabajando respecto a su población?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_paro",
+        "nombre": "tasa de paro",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "tasa_paro_menor25",
+        "nombre": "tasa de paro de los menores de 25 años",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_paro_extranjeros",
+        "nombre": "tasa de paro de los extranjeros",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_paro_mujeres",
+        "nombre": "tasa de paro de las mujeres",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_empleo",
+        "nombre": "tasa de empleo",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_actividad",
+        "nombre": "tasa de actividad",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_hogares_todos_parados",
+        "nombre": "hogares con todos sus activos en paro",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "tasa_paro_dif_anual",
+        "nombre": "cambio de la tasa de paro en un año",
+        "unidad": "puntos porcentuales",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "media_4t_tasa_paro",
+        "nombre": "tasa de paro, media móvil de cuatro trimestres",
+        "unidad": "%",
+        "tipo": "media"
+      },
+      {
+        "columna": "media_4t_tasa_paro_menor25",
+        "nombre": "tasa de paro juvenil, media móvil de cuatro trimestres",
+        "unidad": "%",
+        "tipo": "media"
+      },
+      {
+        "columna": "media_4t_tasa_empleo",
+        "nombre": "tasa de empleo, media móvil de cuatro trimestres",
+        "unidad": "%",
+        "tipo": "media"
+      },
+      {
+        "columna": "media_4t_hogares_todos_parados",
+        "nombre": "hogares con todos en paro, media móvil de cuatro trimestres",
+        "unidad": "% de los hogares",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EPA del INE. Sin columna de nombre: cod es el código INE (comunidad 01-19, provincia 01-52); filtrar por nivel. No incluye fila de España (usar mercado_paro_trimestral). Las provincias pequeñas tienen valores muy ruidosos; las medias de 4 trimestres los suavizan."
+  },
+  {
+    "tabla": "mercado_paro_trimestral",
+    "usar": true,
+    "tema": "Mercado laboral de España cada trimestre: paro, empleo, temporalidad y jornada parcial (EPA)",
+    "preguntas": [
+      "¿Cuál es la tasa de paro en España ahora?",
+      "¿Cuántos parados hay según la EPA?",
+      "¿Cuánta temporalidad hay entre los asalariados?",
+      "¿Cuántas personas trabajan a tiempo parcial sin quererlo?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_paro",
+        "nombre": "tasa de paro",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "parados",
+        "nombre": "personas en paro",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "tasa_empleo",
+        "nombre": "tasa de empleo",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_actividad",
+        "nombre": "tasa de actividad",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_paro_menor25",
+        "nombre": "tasa de paro de los menores de 25 años",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_paro_espanoles",
+        "nombre": "tasa de paro de los españoles",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "tasa_paro_extranjeros",
+        "nombre": "tasa de paro de los extranjeros",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_parados_larga",
+        "nombre": "parados de larga duración sobre el total de parados",
+        "unidad": "% de los parados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "tasa_paro_larga",
+        "nombre": "tasa de paro de larga duración",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_hogares_todos_parados",
+        "nombre": "hogares con todos sus activos en paro",
+        "unidad": "% de los hogares",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "tasa_temporalidad",
+        "nombre": "tasa de temporalidad de los asalariados",
+        "unidad": "%",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "asalariados",
+        "nombre": "asalariados",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados_parcial",
+        "nombre": "ocupados a tiempo parcial",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "parcial_involuntario",
+        "nombre": "ocupados a tiempo parcial que lo son sin quererlo",
+        "unidad": "personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_parcial_involuntario",
+        "nombre": "tiempo parcial involuntario sobre el total de tiempo parcial",
+        "unidad": "% de los ocupados a tiempo parcial",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "tasa_paro_dif_anual",
+        "nombre": "cambio de la tasa de paro en un año",
+        "unidad": "puntos porcentuales",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "trimestre",
+      "grano": "trimestral",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EPA del INE, solo España, desde 2002. Las personas son stocks trimestrales (no se suman entre trimestres). La columna periodo es solo etiqueta tipo 2026-T2."
+  },
+  {
+    "tabla": "mercado_paro_ue",
+    "usar": true,
+    "tema": "Tasa de paro de España comparada con Alemania, Francia, Italia, Portugal y la UE",
+    "preguntas": [
+      "¿Tiene España más paro que el resto de Europa?",
+      "¿Cuál es el paro juvenil en Alemania?",
+      "¿Cómo ha evolucionado el paro en Portugal desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "tasa_paro",
+        "nombre": "tasa de paro (desestacionalizada)",
+        "unidad": "%",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "tasa_paro_menor25",
+        "nombre": "tasa de paro de los menores de 25 años (desestacionalizada)",
+        "unidad": "%",
+        "tipo": "tasa"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "geo",
+      "nombre": "pais",
+      "espana": {
+        "columna": "pais",
+        "valor": "España"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat une_rt_m, mensual desestacionalizada, desde 1983 (según país). Incluye el agregado UE-27."
+  },
+  {
+    "tabla": "metricas",
+    "usar": false,
+    "tema": "Modelo largo genérico con casi 200 métricas heterogéneas",
+    "preguntas": [],
+    "medidas": [],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Auxiliar: mezcla ~190 indicadores con unidades distintas (%, euros reales, por 1.000 hab...) en una sola columna valor; cada uno tiene ya su tabla temática, que es mejor para responder."
+  },
+  {
+    "tabla": "movilidad_flotas_municipios",
+    "usar": true,
+    "tema": "Municipios donde se matriculan las flotas de empresa y renting, y el impuesto de circulación que allí se paga",
+    "preguntas": [
+      "¿En qué municipio se matriculan más coches de flota?",
+      "¿Cuánto cobra Madrid de impuesto de circulación por un turismo?",
+      "¿Qué pueblos pequeños tienen más coches de flota por habitante?",
+      "¿Cuánto se ahorra una empresa matriculando en Alcobendas?"
+    ],
+    "medidas": [
+      {
+        "columna": "flota",
+        "nombre": "vehículos de flota matriculados en el año",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "flota_por_habitante",
+        "nombre": "vehículos de flota matriculados por habitante",
+        "unidad": "vehículos por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "cuota_flota_espana",
+        "nombre": "parte de toda la flota de España matriculada en el municipio",
+        "unidad": "%",
+        "tipo": "ratio",
+        "escala": 100
+      },
+      {
+        "columna": "particulares",
+        "nombre": "turismos matriculados por particulares en el año",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ivtm_turismo",
+        "nombre": "impuesto de circulación de un turismo medio en el municipio",
+        "unidad": "€ al año",
+        "tipo": "precio"
+      },
+      {
+        "columna": "ivtm_turismo_capital",
+        "nombre": "impuesto de circulación de un turismo medio en la capital de la provincia",
+        "unidad": "€ al año",
+        "tipo": "precio"
+      },
+      {
+        "columna": "ahorro_por_coche",
+        "nombre": "ahorro de impuesto por coche frente a la capital",
+        "unidad": "€ al año",
+        "tipo": "precio"
+      },
+      {
+        "columna": "ahorro_estimado",
+        "nombre": "ahorro total estimado de impuesto de la flota frente a la capital",
+        "unidad": "€ al año",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "DGT MATRABA; solo municipios con 100 o más vehículos de flota al año (unos 250 por año). El último año está incompleto: los rankings usan el último año con doce meses. ivtm_turismo es de 2026 para todos los años."
+  },
+  {
+    "tabla": "movilidad_marcas_mensual",
+    "usar": true,
+    "tema": "Vehículos nuevos matriculados cada mes por marca y grupo empresarial (turismos, furgonetas, camiones, autobuses, motos)",
+    "preguntas": [
+      "¿Qué marca de coches vende más en España?",
+      "¿Cuántos camiones Volvo se matricularon el año pasado?",
+      "¿Qué grupo empresarial lidera las matriculaciones de turismos?",
+      "¿Cuántos coches nuevos compran los particulares frente al renting?"
+    ],
+    "medidas": [
+      {
+        "columna": "matriculaciones",
+        "nombre": "vehículos nuevos matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía",
+        "total": null
+      },
+      {
+        "columna": "canal",
+        "nombre": "canal de compra",
+        "total": null
+      },
+      {
+        "columna": "marca",
+        "nombre": "marca",
+        "total": null
+      },
+      {
+        "columna": "grupo_empresarial",
+        "nombre": "grupo empresarial",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DGT MATRABA, solo vehículos nuevos, sin territorio. No hay fila de total: hay que sumar y casi siempre filtrar por grupo (turismo, camion...) para no mezclar tipos de vehículo. En carrozados la marca es la del chasis."
+  },
+  {
+    "tabla": "movilidad_matriculaciones_mensual",
+    "usar": true,
+    "tema": "Matriculaciones en España cada mes por tipo de vehículo, energía y canal de venta (coche eléctrico, diésel, gasolina...)",
+    "preguntas": [
+      "¿Cuántos coches se matricularon el mes pasado?",
+      "¿Cuántos coches eléctricos se venden al año?",
+      "¿Cómo ha evolucionado la venta de diésel desde 2015?",
+      "¿Cuántos turismos compran los particulares y cuántos las empresas?"
+    ],
+    "medidas": [
+      {
+        "columna": "matriculaciones",
+        "nombre": "vehículos matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "co2_medio",
+        "nombre": "emisiones medias de CO2 declaradas",
+        "unidad": "g CO2/km",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo (turismo, furgoneta, camion...)",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía (bev = eléctrico, phev, hev, gasolina, diesel...)",
+        "total": null
+      },
+      {
+        "columna": "canal",
+        "nombre": "canal de venta (particular, empresa, renting, alquiler, servicio_publico)",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "nuevo_usado",
+        "valor": "N"
+      }
+    ],
+    "notas": "DGT MATRABA. Filtrar nuevo_usado = N para vehículos nuevos (U son usados importados o de segunda mano). Sin fila de total: sumar sobre las categorías y, para 'coches', filtrar grupo = turismo. Matriculaciones ordinarias de España entera; no se suma con co2_medio."
+  },
+  {
+    "tabla": "movilidad_matriculaciones_municipio",
+    "usar": true,
+    "tema": "Turismos nuevos matriculados cada año en cada municipio, por tipo de energía",
+    "preguntas": [
+      "¿Cuántos coches eléctricos se matricularon en Valencia en 2024?",
+      "¿En qué municipios se compran más coches nuevos?",
+      "¿Cuántos turismos se han matriculado en Marbella este año?"
+    ],
+    "medidas": [
+      {
+        "columna": "turismos",
+        "nombre": "turismos nuevos matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "bev",
+        "nombre": "turismos eléctricos puros matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "phev",
+        "nombre": "turismos híbridos enchufables matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "hev",
+        "nombre": "turismos híbridos no enchufables matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gasolina",
+        "nombre": "turismos de gasolina matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "diesel",
+        "nombre": "turismos diésel matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "otras",
+        "nombre": "turismos de otras energías matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "particulares",
+        "nombre": "turismos nuevos matriculados por particulares",
+        "unidad": "vehículos",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "DGT MATRABA. Sin nombre de municipio, solo código INE de cinco dígitos. El último año (2026) llega solo hasta el último mes cargado. Las matriculaciones se registran donde está el domicilio del titular, y las flotas inflan algunos municipios. Los municipios sin matriculaciones no tienen fila; cifras menores de 1 no se publican."
+  },
+  {
+    "tabla": "movilidad_matriculaciones_provincia",
+    "usar": true,
+    "tema": "Turismos matriculados cada mes en cada provincia, por energía y canal de venta",
+    "preguntas": [
+      "¿Cuántos coches eléctricos se matriculan en Barcelona?",
+      "¿Qué provincia compra más híbridos enchufables?",
+      "¿Cómo han evolucionado las matriculaciones en Málaga desde 2015?",
+      "¿Cuántos turismos compran las empresas en Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "matriculaciones",
+        "nombre": "turismos matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "energia_etiqueta",
+        "nombre": "tipo de energía",
+        "total": null
+      },
+      {
+        "columna": "canal",
+        "nombre": "canal de venta (particular, empresa, renting, alquiler, servicio_publico)",
+        "total": null
+      }
+    ],
+    "filtros": [
+      {
+        "columna": "nuevo_usado",
+        "valor": "N"
+      }
+    ],
+    "notas": "DGT MATRABA, solo turismos. Filtrar nuevo_usado = N para nuevos (U = usados). Sin per cápita: dividir por población. Los registros siguen al domicilio del titular, por lo que las flotas y rent a car inflan Madrid, Barcelona, Baleares y otras. cod_ccaa permite agrupar por comunidad. En energia_etiqueta Híbrido es no enchufable y Enchufable es PHEV."
+  },
+  {
+    "tabla": "movilidad_modelos_mensual",
+    "usar": true,
+    "tema": "Modelos de vehículos nuevos más vendidos cada mes (últimos tres años)",
+    "preguntas": [
+      "¿Cuál es el coche más vendido de España?",
+      "¿Cuántos Seat León se matricularon el año pasado?",
+      "¿Qué furgoneta se vende más?",
+      "¿Qué modelo eléctrico vende más?"
+    ],
+    "medidas": [
+      {
+        "columna": "matriculaciones",
+        "nombre": "vehículos nuevos matriculados",
+        "unidad": "vehículos",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía",
+        "total": null
+      },
+      {
+        "columna": "canal",
+        "nombre": "canal de compra",
+        "total": null
+      },
+      {
+        "columna": "marca",
+        "nombre": "marca",
+        "total": null
+      },
+      {
+        "columna": "grupo_empresarial",
+        "nombre": "grupo empresarial",
+        "total": null
+      },
+      {
+        "columna": "modelo",
+        "nombre": "modelo",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DGT MATRABA, solo vehículos nuevos y solo los últimos 36 meses; sin territorio. Sin fila de total: sumar y filtrar por grupo para no mezclar turismos con camiones. Un mismo modelo puede aparecer con variantes de nombre (LEON y LEON SP)."
+  },
+  {
+    "tabla": "movilidad_parque_evolucion",
+    "usar": true,
+    "tema": "Parque de vehículos de España (los que circulan) mes a mes por tipo y energía",
+    "preguntas": [
+      "¿Cuántos coches eléctricos hay circulando en España?",
+      "¿Cuántos camiones hay en España?",
+      "¿Cómo ha crecido el parque de híbridos enchufables este año?"
+    ],
+    "medidas": [
+      {
+        "columna": "vehiculos",
+        "nombre": "vehículos en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia_etiqueta",
+        "nombre": "tipo de energía",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DGT, parque de España entera desde marzo de 2025 (17 cortes mensuales). Es un stock: no sumar meses. Sin fila de total; para 'coches' filtrar grupo = turismo."
+  },
+  {
+    "tabla": "movilidad_parque_modelos",
+    "usar": true,
+    "tema": "Qué modelos de coche circulan más en España (parque del último mes)",
+    "preguntas": [
+      "¿Cuál es el coche más común en las carreteras de España?",
+      "¿Cuántos Seat León hay circulando?",
+      "¿Qué marca tiene más coches en circulación?"
+    ],
+    "medidas": [
+      {
+        "columna": "vehiculos",
+        "nombre": "vehículos del modelo en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo (turismo, motocicleta, furgoneta)",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía",
+        "total": null
+      },
+      {
+        "columna": "marca",
+        "nombre": "marca",
+        "total": null
+      },
+      {
+        "columna": "modelo",
+        "nombre": "modelo",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DGT, solo el último mes y solo modelos con al menos 100 unidades. Hay filas '(modelo sin especificar)' que no son un modelo real."
+  },
+  {
+    "tabla": "movilidad_parque_municipio",
+    "usar": true,
+    "tema": "Turismos que circulan en cada municipio grande, con su energía, distintivo ambiental y antigüedad",
+    "preguntas": [
+      "¿Cuántos coches hay en Zaragoza?",
+      "¿Qué ciudades tienen más coches eléctricos?",
+      "¿Cuántos coches sin etiqueta ambiental hay en Madrid?",
+      "¿Dónde hay más coches de más de quince años?"
+    ],
+    "medidas": [
+      {
+        "columna": "turismos",
+        "nombre": "turismos en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "bev",
+        "nombre": "turismos eléctricos puros",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "phev",
+        "nombre": "turismos híbridos enchufables",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "hev",
+        "nombre": "turismos híbridos no enchufables",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "distintivo_cero",
+        "nombre": "turismos con etiqueta ambiental CERO",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "distintivo_eco",
+        "nombre": "turismos con etiqueta ambiental ECO",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "distintivo_c",
+        "nombre": "turismos con etiqueta ambiental C",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "distintivo_b",
+        "nombre": "turismos con etiqueta ambiental B",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "sin_distintivo",
+        "nombre": "turismos sin etiqueta ambiental",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mas_de_15_anios",
+        "nombre": "turismos de más de 15 años",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "DGT, solo el último mes y solo municipios de 10.000 habitantes o más (la DGT anonimiza el resto). Sin nombre: solo código INE de cinco dígitos. Es un stock; no hay cifra por habitante en la tabla."
+  },
+  {
+    "tabla": "movilidad_parque_provincia",
+    "usar": true,
+    "tema": "Parque de vehículos por provincia, tipo, energía, etiqueta ambiental y antigüedad (último mes)",
+    "preguntas": [
+      "¿Cuántos coches eléctricos hay en Valencia?",
+      "¿Qué provincia tiene más coches antiguos?",
+      "¿Cuántos camiones hay registrados en Zaragoza?",
+      "¿Cuántos vehículos con etiqueta CERO circulan en Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "vehiculos",
+        "nombre": "vehículos en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "provincia",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "grupo",
+        "nombre": "tipo de vehículo",
+        "total": null,
+        "defecto": "turismo"
+      },
+      {
+        "columna": "energia",
+        "nombre": "tipo de energía",
+        "total": null
+      },
+      {
+        "columna": "distintivo",
+        "nombre": "etiqueta ambiental (CERO, ECO, C, B, SIN)",
+        "total": null
+      },
+      {
+        "columna": "antiguedad",
+        "nombre": "antigüedad en años (0-4, 5-9, 10-14, 15-19, 20+)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "DGT, solo el último mes. Sin fila de total: sumar las categorías y filtrar grupo = turismo para coches. cod_ccaa permite agrupar por comunidad. Por habitante hay que dividir por población."
+  },
+  {
+    "tabla": "movilidad_parque_resumen",
+    "usar": true,
+    "tema": "Resumen del parque de turismos de España: coches por habitante y porcentaje de eléctricos, enchufables, sin etiqueta y viejos",
+    "preguntas": [
+      "¿Cuántos coches hay por cada mil habitantes en España?",
+      "¿Qué porcentaje de coches son eléctricos?",
+      "¿Qué parte del parque tiene más de 20 años?"
+    ],
+    "medidas": [
+      {
+        "columna": "turismos_1000",
+        "nombre": "turismos por cada 1.000 habitantes",
+        "unidad": "turismos por cada 1.000 habitantes",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "turismos",
+        "nombre": "turismos en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "vehiculos",
+        "nombre": "vehículos de todo tipo en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "enchufables",
+        "nombre": "turismos enchufables (eléctricos e híbridos enchufables)",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "bev",
+        "nombre": "turismos eléctricos puros",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "sin_distintivo",
+        "nombre": "turismos sin etiqueta ambiental",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "mas_de_20",
+        "nombre": "turismos de más de 20 años",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_enchufables",
+        "nombre": "turismos enchufables sobre el total de turismos",
+        "unidad": "% del parque de turismos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_bev",
+        "nombre": "turismos eléctricos puros sobre el total de turismos",
+        "unidad": "% del parque de turismos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_sin_distintivo",
+        "nombre": "turismos sin etiqueta sobre el total de turismos",
+        "unidad": "% del parque de turismos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_mas_de_20",
+        "nombre": "turismos de más de 20 años sobre el total de turismos",
+        "unidad": "% del parque de turismos",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población de España",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "DGT, España entera, 17 cortes mensuales desde marzo de 2025. La población es una cifra anual fija, por eso turismos_1000 cambia solo por el parque."
+  },
+  {
+    "tabla": "movilidad_recarga_evolucion",
+    "usar": true,
+    "tema": "Puntos de recarga públicos de coches eléctricos en España y su potencia, por tramo de potencia",
+    "preguntas": [
+      "¿Cuántos puntos de recarga públicos hay en España?",
+      "¿Cuántos puntos de recarga ultrarrápida hay?",
+      "¿Cuánta potencia de recarga hay instalada?"
+    ],
+    "medidas": [
+      {
+        "columna": "puntos",
+        "nombre": "puntos de recarga públicos",
+        "unidad": "puntos",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "potencia_kw",
+        "nombre": "potencia total instalada de recarga",
+        "unidad": "kW",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tramo_potencia",
+        "nombre": "tramo de potencia",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Foto diaria del censo público; solo hay unos pocos días cargados, no es una serie histórica larga. Es un stock: para el total de un día sumar los cuatro tramos, nunca entre días."
+  },
+  {
+    "tabla": "movilidad_recarga_provincia",
+    "usar": true,
+    "tema": "Puntos de recarga públicos de coches eléctricos por provincia, frente a población y coches enchufables",
+    "preguntas": [
+      "¿Qué provincia tiene más puntos de recarga por habitante?",
+      "¿Cuántos puntos de recarga hay en Barcelona?",
+      "¿Dónde hay más coches enchufables por cada punto de recarga?",
+      "¿Cuántos puntos de recarga rápida hay en Almería?"
+    ],
+    "medidas": [
+      {
+        "columna": "puntos_por_100k_hab",
+        "nombre": "puntos de recarga por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "puntos",
+        "nombre": "puntos de recarga públicos",
+        "unidad": "puntos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "puntos_rapidos",
+        "nombre": "puntos de recarga rápida (50 kW o más)",
+        "unidad": "puntos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "puntos_ultrarrapidos",
+        "nombre": "puntos de recarga ultrarrápida (150 kW o más)",
+        "unidad": "puntos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "sitios",
+        "nombre": "emplazamientos de recarga",
+        "unidad": "emplazamientos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "potencia_kw",
+        "nombre": "potencia total instalada de recarga",
+        "unidad": "kW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "turismos_enchufables",
+        "nombre": "turismos enchufables en el parque",
+        "unidad": "vehículos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "enchufables_por_punto",
+        "nombre": "turismos enchufables por cada punto de recarga",
+        "unidad": "vehículos por punto",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "provincia",
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Foto del día, una fila por provincia (52, con Ceuta y Melilla). Sin tiempo: no se puede ver evolución. Los puntos rápidos incluyen los ultrarrápidos. cod_ccaa permite agrupar por comunidad."
+  },
+  {
+    "tabla": "movilidad_recarga_sitios",
+    "usar": true,
+    "tema": "Cada emplazamiento de recarga pública de coches eléctricos, con su operador, puntos y potencia",
+    "preguntas": [
+      "¿Qué operador tiene más puntos de recarga?",
+      "¿Cuántos puntos de recarga ultrarrápida hay en Madrid?",
+      "¿Cuántas estaciones de recarga hay en mi municipio?"
+    ],
+    "medidas": [
+      {
+        "columna": "puntos",
+        "nombre": "puntos de recarga del emplazamiento",
+        "unidad": "puntos",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "potencia_max_kw",
+        "nombre": "potencia máxima de un punto del emplazamiento",
+        "unidad": "kW",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "potencia_total_kw",
+        "nombre": "potencia total del emplazamiento",
+        "unidad": "kW",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "municipio",
+        "provincia"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "operador",
+        "nombre": "operador de la recarga",
+        "total": null
+      },
+      {
+        "columna": "tramo",
+        "nombre": "tramo de potencia",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Foto del día, una fila por emplazamiento (contar filas para contar estaciones, sumar puntos para contar puntos). Sin nombre de municipio, solo códigos INE (cod_mun, cod_prov). Los nombres de operador pueden aparecer con distintas razones sociales."
+  },
+  {
+    "tabla": "movilidad_transporte_ciudades",
+    "usar": true,
+    "tema": "Viajeros de metro y autobús urbano en las grandes ciudades",
+    "preguntas": [
+      "¿Cuántos viajeros lleva el metro de Madrid al mes?",
+      "¿Qué ciudad tiene más viajeros de autobús urbano?",
+      "¿Cómo ha evolucionado el metro de Barcelona desde la pandemia?"
+    ],
+    "medidas": [
+      {
+        "columna": "viajeros",
+        "nombre": "viajeros transportados en el mes",
+        "unidad": "viajeros",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": "ciudad",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "modo",
+        "nombre": "modo de transporte (Metro o Autobús urbano)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "INE 20193, solo siete ciudades con metro o autobús (Barcelona, Bilbao, Madrid, Palma, Sevilla, València, Málaga) y no todas tienen metro. Los viajeros son del mes completo; sumar meses es válido. No hay cifra por habitante en la tabla."
+  },
+  {
+    "tabla": "movilidad_transporte_modos",
+    "usar": true,
+    "tema": "Viajeros de transporte público en España cada mes por modo: metro, autobús, tren, avión interior, barco",
+    "preguntas": [
+      "¿Cuántos viajeros usan el transporte público al mes?",
+      "¿Cuánta gente viaja en alta velocidad?",
+      "¿Cómo ha evolucionado el uso del autobús urbano desde 2019?",
+      "¿Cuántos pasajeros hay en vuelos interiores?"
+    ],
+    "medidas": [
+      {
+        "columna": "viajeros",
+        "nombre": "viajeros transportados en el mes",
+        "unidad": "viajeros",
+        "tipo": "flujo",
+        "principal": true
+      }
+    ],
+    "tiempo": {
+      "columna": "mes",
+      "grano": "mensual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "modo",
+        "nombre": "modo de transporte",
+        "total": "Total de viajeros"
+      }
+    ],
+    "filtros": [],
+    "notas": "INE 20239, España entera. Los modos se solapan: Transporte urbano agrupa metro y autobús urbano, Ferrocarril agrupa cercanías, media y larga distancia, Alta Velocidad es parte de larga distancia. No sumar todos los modos: usar el total ('Total de viajeros', que solo cubre el transporte terrestre regular) o elegir un modo concreto. Las series empiezan en años distintos según el modo."
+  },
+  {
+    "tabla": "municipios_cuentas",
+    "usar": true,
+    "tema": "Cuentas de cada ayuntamiento: cuánto ingresa y cuánto gasta, por capítulo y por área, y por habitante",
+    "preguntas": [
+      "¿Cuánto gasta por habitante el ayuntamiento de Sevilla?",
+      "¿Qué ayuntamientos grandes tienen superávit?",
+      "¿Cuánto ingresa Barcelona por impuestos directos?",
+      "¿Cuánto gasta Valencia en personal?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_hab",
+        "nombre": "gasto del ayuntamiento por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "ingreso_hab",
+        "nombre": "ingresos del ayuntamiento por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gastos_total",
+        "nombre": "gastos totales del ayuntamiento (obligaciones reconocidas netas)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_total",
+        "nombre": "ingresos totales del ayuntamiento (derechos reconocidos netos)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_no_financiero",
+        "nombre": "superávit o déficit no financiero (negativo = déficit)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ingresos_c1",
+        "nombre": "ingresos por impuestos directos (IBI, circulación...)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_c2",
+        "nombre": "ingresos por impuestos indirectos",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_c3",
+        "nombre": "ingresos por tasas y otros ingresos",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_c4",
+        "nombre": "ingresos por transferencias corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c1",
+        "nombre": "gasto en personal",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c2",
+        "nombre": "gasto en bienes corrientes y servicios",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c3",
+        "nombre": "gasto en intereses de la deuda",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c4",
+        "nombre": "gasto en transferencias corrientes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c6",
+        "nombre": "gasto en inversiones reales",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_c9",
+        "nombre": "gasto en amortización de pasivos financieros",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [
+      {
+        "columna": "tiene_datos",
+        "valor": true
+      }
+    ],
+    "notas": "Hacienda (CONPREL), importes en euros corrientes (sin deflactar), años 2022 a 2025. Sin nombre: solo código INE de cinco dígitos. Usar solo filas con tiene_datos = true: muchos municipios no han rendido cuentas. 2025 es provisional y con muchos menos municipios (unos 5.900 frente a 7.000). Los capítulos 1 a 4 son operaciones corrientes, 6 y 7 de capital, 8 y 9 financieras; las áreas de gasto (gasto_area_0 a 9) también están. Para series largas usar municipios_cuentas_serie."
+  },
+  {
+    "tabla": "municipios_cuentas_medias",
+    "usar": true,
+    "tema": "Gasto e ingreso típico por habitante de los ayuntamientos según su tamaño, año a año",
+    "preguntas": [
+      "¿Cuánto gasta por habitante un ayuntamiento típico?",
+      "¿Gastan más por habitante los pueblos pequeños o las grandes ciudades?",
+      "¿Cómo ha evolucionado el gasto municipal por habitante desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_hab_mediana",
+        "nombre": "gasto por habitante del ayuntamiento mediano",
+        "unidad": "€ por habitante",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "gasto_hab_media",
+        "nombre": "gasto por habitante medio, ponderado por población",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "ingreso_hab_mediana",
+        "nombre": "ingreso por habitante del ayuntamiento mediano",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "ingreso_hab_media",
+        "nombre": "ingreso por habitante medio, ponderado por población",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "gastos_no_financieros_hab_mediana",
+        "nombre": "gasto no financiero por habitante del ayuntamiento mediano",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "ingresos_no_financieros_hab_mediana",
+        "nombre": "ingreso no financiero por habitante del ayuntamiento mediano",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "saldo_no_financiero_hab_mediana",
+        "nombre": "superávit o déficit por habitante del ayuntamiento mediano",
+        "unidad": "€ por habitante",
+        "tipo": "media"
+      },
+      {
+        "columna": "n_municipios",
+        "nombre": "municipios con datos en el tramo",
+        "unidad": "municipios",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población de los municipios con datos",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tramo_poblacion",
+        "nombre": "tamaño del municipio (habitantes)",
+        "total": "Todos"
+      }
+    ],
+    "filtros": [],
+    "notas": "Hacienda (CONPREL), euros corrientes, solo municipios con datos. El último año (2025) es provisional y con menos municipios. Medianas: no se pueden sumar ni promediar entre tramos."
+  },
+  {
+    "tabla": "municipios_cuentas_serie",
+    "usar": true,
+    "tema": "Evolución desde 2010 del gasto, ingreso y saldo de cada ayuntamiento",
+    "preguntas": [
+      "¿Cómo ha evolucionado el gasto por habitante del ayuntamiento de Madrid?",
+      "¿Cuánta deuda o déficit tuvo Zaragoza en 2012?",
+      "¿Cuánto ha ingresado Bilbao por habitante desde 2010?"
+    ],
+    "medidas": [
+      {
+        "columna": "gasto_hab",
+        "nombre": "gasto del ayuntamiento por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "ingreso_hab",
+        "nombre": "ingresos del ayuntamiento por habitante",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "gastos_total",
+        "nombre": "gastos totales del ayuntamiento",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_total",
+        "nombre": "ingresos totales del ayuntamiento",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_no_financiero",
+        "nombre": "superávit o déficit no financiero (negativo = déficit)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [
+      {
+        "columna": "tiene_datos",
+        "valor": true
+      }
+    ],
+    "notas": "Hacienda (CONPREL), 2010 a 2025, euros corrientes. Sin nombre: código INE de cinco dígitos. Usar solo tiene_datos = true: muchos municipios no rinden cuentas algún año y aparecen con ceros o nulos. 2025 es provisional y con menos municipios."
+  },
+  {
+    "tabla": "municipios_politicas",
+    "usar": true,
+    "tema": "En qué gasta su dinero cada ayuntamiento: educación, cultura, seguridad, vivienda, deuda... (políticas de gasto)",
+    "preguntas": [
+      "¿Cuánto gasta Madrid en cultura por habitante?",
+      "¿Qué municipios gastan más en seguridad ciudadana?",
+      "¿Cuánto dedica Sevilla a servicios sociales?",
+      "¿Qué parte del presupuesto municipal se va en deuda?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_hab",
+        "nombre": "gasto por habitante en la política",
+        "unidad": "€ por habitante",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "importe",
+        "nombre": "gasto del ayuntamiento en la política",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "area_nombre",
+        "nombre": "área de gasto (seis grandes áreas)",
+        "total": null
+      },
+      {
+        "columna": "politica_nombre",
+        "nombre": "política de gasto (educación, cultura, sanidad...)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Hacienda (CONPREL), solo 2024 (último ejercicio definitivo), obligaciones reconocidas netas en euros corrientes. Sin nombre: código INE. Sumar políticas da el gasto total (no mezclar áreas con políticas: son niveles distintos de la misma clasificación). Algunos importes negativos son ajustes."
+  },
+  {
+    "tabla": "observatorios",
+    "usar": false,
+    "tema": "Censo bruto de observatorios públicos",
+    "preguntas": [],
+    "medidas": [],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Duplicada por observatorios_detalle, que añade nivel, ubicación, estado, tipo y partido gobernante; esta solo tiene nombre, año y un ámbito sin normalizar."
+  },
+  {
+    "tabla": "observatorios_detalle",
+    "usar": false,
+    "tema": "Observatorios públicos de España: cuántos hay, quién los creó, dónde están y si siguen activos",
+    "preguntas": [],
+    "medidas": [],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Sin cifras que consultar: es una lista de observatorios (nombre, nivel, estado, partido); lo único contable seria el numero de filas."
+  },
+  {
+    "tabla": "pensiones_afiliados_regimen",
+    "usar": true,
+    "tema": "Afiliados a la Seguridad Social por régimen (general, autónomos, mar, minería) y año",
+    "preguntas": [
+      "¿Cuántos afiliados a la Seguridad Social hay?",
+      "¿Cuántos autónomos hay en España?",
+      "¿Cómo ha evolucionado el número de afiliados desde 2001?",
+      "¿Qué porcentaje de afiliados son autónomos?"
+    ],
+    "medidas": [
+      {
+        "columna": "afiliados",
+        "nombre": "afiliados medios a la Seguridad Social",
+        "unidad": "personas",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "por_1000_hab",
+        "nombre": "afiliados por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "pct_del_total",
+        "nombre": "peso del régimen sobre el total de afiliados",
+        "unidad": "% de los afiliados",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "pais"
+      ],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "regimen",
+        "nombre": "régimen de la Seguridad Social",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Seguridad Social, afiliados medios del año (no se suman entre años). El año en curso solo promedia los meses disponibles (columna meses): filtrar meses = 12 para años completos. Total y los regímenes no se suman a la vez."
+  }
+]

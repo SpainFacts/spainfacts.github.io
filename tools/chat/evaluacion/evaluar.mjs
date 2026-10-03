@@ -18,7 +18,7 @@ import { DuckDBInstance } from '@duckdb/node-api';
 import { crearIndice, buscarTablas } from '../../../src/lib/chat/herramientas.js';
 import { responderPorDecisiones } from '../../../src/lib/chat/decision.js';
 import { responder, crearDecisorOllama } from '../../../src/lib/chat/agente.js';
-import { crearDecisor } from '../../../src/lib/chat/locales.js';
+import { crearDecisor, crearEmbebedor } from '../../../src/lib/chat/locales.js';
 
 const args = process.argv.slice(2);
 const modo = args[0];
@@ -64,7 +64,16 @@ const textoTabla = (t) =>
 		.map((c) => c.nombre.replace(/_/g, ' '))
 		.join(', ')}`.slice(0, 1500);
 
+// El modo decisión ya antepone el prefijo de consulta del catálogo: no ponerlo dos veces
+const conPrefijo = (prefijo, texto) => (texto.startsWith(prefijo) ? texto : prefijo + texto);
+
 async function prepararEmbeddings(clave) {
+	// 'catalogo': lo mismo que el navegador (los vectores que trae el catálogo y su embebedor)
+	if (clave === 'catalogo') {
+		const e = catalogo.embeddings;
+		const embebedor = await crearEmbebedor({ modelo: e.modelo, dtype: e.dtype, archivo: e.archivo, dims: e.dims, cacheDir });
+		return { catalogo, embeber: async (texto) => embebedor(conPrefijo(e.prefijo_consulta ?? '', texto)) };
+	}
 	const cfg = EMBEDDINGS[clave];
 	const { pipeline, env } = await import('@huggingface/transformers');
 	env.cacheDir = cacheDir;
@@ -94,7 +103,7 @@ async function prepararEmbeddings(clave) {
 			vec: Buffer.from(Int8Array.from(vecs[t.nombre], (x) => Math.max(-127, Math.min(127, Math.round(x * 127)))).buffer).toString('base64')
 		}))
 	};
-	return { catalogo: cat, embeber: async (texto) => vector(cfg.consulta + texto) };
+	return { catalogo: cat, embeber: async (texto) => vector(conPrefijo(cfg.consulta, texto)) };
 }
 
 // ---------- Comprobación de respuestas ----------
