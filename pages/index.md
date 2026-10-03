@@ -9,6 +9,7 @@ og:
     import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
     import KpiCard from '../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../src/lib/components/BuscadorInicio.svelte';
+    import Chat from '../../../../src/lib/components/Chat.svelte';
 </script>
 
 ```sql lista_municipios
@@ -110,6 +111,12 @@ ORDER BY anio
         </div>
     </div>
 </div>
+
+## Pregunta a los datos
+
+Escribe una pregunta y un modelo de IA que corre en tu navegador buscará la respuesta entre las tablas de la web. [Más sobre el chat y cómo usarlo con Claude u Ollama](/chat).
+
+<Chat perezoso />
 
 ## España hoy
 

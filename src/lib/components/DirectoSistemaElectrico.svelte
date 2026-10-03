@@ -96,6 +96,10 @@
 
     let directo = null; // respuesta del Worker
     let errorDirecto = null;
+    // El Worker no contesta (fallo de red o tiempo agotado). Es lo que pasa en España
+    // cuando LaLiga hace bloquear IPs de Cloudflare durante los partidos; si contesta
+    // con un error HTTP es otro problema y no se muestra el aviso.
+    let sinRespuesta = false;
     let cargando = false;
     let temporizador;
 
@@ -105,8 +109,16 @@
         try {
             const ctrl = new AbortController();
             const t = setTimeout(() => ctrl.abort(), 15000);
-            const r = await fetch(`${workerUrl}/snapshot`, { signal: ctrl.signal, cache: 'no-cache' });
-            clearTimeout(t);
+            let r;
+            try {
+                r = await fetch(`${workerUrl}/snapshot`, { signal: ctrl.signal, cache: 'no-cache' });
+            } catch (e) {
+                sinRespuesta = true;
+                throw e;
+            } finally {
+                clearTimeout(t);
+            }
+            sinRespuesta = false;
             if (!r.ok) throw new Error(`HTTP ${r.status}`);
             const j = await r.json();
             if (!j?.sistemas || !Object.values(j.sistemas).some(Boolean)) throw new Error('respuesta sin datos');
@@ -389,6 +401,11 @@
                 <span class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-0.5 font-semibold">{cargando ? t('cargando', lang) : t('sin.datos', lang)}</span>
             {/if}
         </div>
+        {#if sinRespuesta}
+            <p class="w-full order-last rounded-md border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 px-3 py-2 text-sm" role="status">
+                {t('directo.bloqueoLaliga', lang)}
+            </p>
+        {/if}
         <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-700 overflow-hidden text-sm" role="group" aria-label={t('directo.colorear', lang)}>
             {#each [['renovables', t('directo.renovables', lang)], ['co2', t('directo.co2', lang)]] as [v, etq]}
                 <button

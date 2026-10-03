@@ -3,13 +3,14 @@ title: SpainFacts · L'estat d'Espanya en dades oficials
 description: "Espanya en dades oficials: població, economia, comptes públics, energia, mobilitat, societat i transparència, d'Espanya a cada municipi. Independent i sense biaix partidista."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 3545b565b77e
+i18n_origen: 33d766fc924e
 ---
 
 <script>
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
+    import Chat from '../../../../../src/lib/components/Chat.svelte';
 </script>
 
 ```sql lista_municipios
@@ -111,6 +112,12 @@ ORDER BY anio
         </div>
     </div>
 </div>
+
+## Pregunta a les dades
+
+Escriu una pregunta i un model d’IA que funciona al teu navegador buscarà la resposta entre les taules del web. [Més sobre el xat i com fer-lo servir amb Claude o Ollama](/ca/chat).
+
+<Chat perezoso />
 
 ## Espanya avui
 

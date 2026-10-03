@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · O Estado de España en Datos Oficiais
 description: "España en datos oficiais: poboación, economía, contas públicas, enerxía, mobilidade, sociedade e transparencia, de España a cada municipio. Independente e sen nesgo partidista."
-i18n_origen: 3545b565b77e
+i18n_origen: 33d766fc924e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -10,6 +10,7 @@ og:
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
+    import Chat from '../../../../../src/lib/components/Chat.svelte';
 </script>
 
 ```sql lista_municipios
@@ -111,6 +112,12 @@ ORDER BY anio
         </div>
     </div>
 </div>
+
+## Pregúntalles aos datos
+
+Escribe unha pregunta e un modelo de IA que funciona no teu navegador buscará a resposta entre as táboas da web. [Máis sobre o chat e como usalo con Claude ou Ollama](/gl/chat).
+
+<Chat perezoso />
 
 ## España hoxe
 

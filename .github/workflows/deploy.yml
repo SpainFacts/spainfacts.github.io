@@ -76,6 +76,13 @@ jobs:
             .evidence/meta/query-cache
           key: fuentes-${{ github.run_id }}-${{ github.run_attempt }}
 
+      # Modelo de embeddings con el que tools/chat/catalogo.mjs calcula los vectores de las tablas
+      - name: Caché del modelo de embeddings del chat
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/tjs
+          key: modelos-chat-embeddinggemma-300m
+
       - name: build
         env:
           BASE_PATH: '/'
@@ -83,6 +90,8 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=12288'
         run: |
           npm run build:strict
+          # Catálogo de tablas para el chat (/chat) y el servidor MCP (tools/mcp)
+          node tools/chat/catalogo.mjs
           node tools/sitemap.mjs
           node tools/html-lang-es.mjs
 

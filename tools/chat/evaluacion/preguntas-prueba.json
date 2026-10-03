@@ -1,0 +1,599 @@
+[
+	{
+		"id": "p01",
+		"pregunta": "¿Cuántos hogares hay en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.demografia_hogares"
+		],
+		"sql_oro": "SELECT anio, hogares, tamano_medio FROM mother.demografia_hogares WHERE nivel='pais' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 19762059,
+			"unidad": "hogares",
+			"periodo": "1 de enero de 2026",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"19.762.059",
+					"19762059",
+					"19,8 millones",
+					"19,76 millones"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Tamaño medio 2,49 personas."
+		}
+	},
+	{
+		"id": "p02",
+		"pregunta": "¿Cuántas personas murieron en accidentes de tráfico en 2023?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.salud_causas_muerte"
+		],
+		"sql_oro": "SELECT anio, defunciones FROM mother.salud_causas_muerte WHERE nivel='pais' AND causa='Accidentes de tráfico' AND sexo='Total' AND anio=2023",
+		"respuesta": {
+			"valor": 1827,
+			"unidad": "defunciones",
+			"periodo": "2023",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.827",
+					"1827"
+				]
+			],
+			"textos": [],
+			"alternativas": "INE, defunciones por causa de muerte (residentes). La DGT publica otra cifra (fallecidos a 30 días) que no está en la web."
+		}
+	},
+	{
+		"id": "p03",
+		"pregunta": "¿Qué provincia tiene más empresas por habitante?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.empresas_dirce_territorio"
+		],
+		"sql_oro": "SELECT d.anio, t.nombre, d.empresas_1000hab FROM mother.empresas_dirce_territorio d JOIN mother.territorios t ON t.nivel='provincia' AND t.cod=d.cod WHERE d.nivel='provincia' AND d.anio=(SELECT max(anio) FROM mother.empresas_dirce_territorio) ORDER BY d.empresas_1000hab DESC LIMIT 1",
+		"respuesta": {
+			"valor": 83.49,
+			"unidad": "empresas por 1.000 hab.",
+			"periodo": "1 de enero de 2025",
+			"territorio": "España",
+			"etiqueta": "Illes Balears"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"83,5",
+					"83,49"
+				]
+			],
+			"textos": [
+				[
+					"balears",
+					"baleares"
+				]
+			],
+			"alternativas": "DIRCE 2025."
+		}
+	},
+	{
+		"id": "p04",
+		"pregunta": "¿Cuál es la renta media por persona en Pozuelo de Alarcón?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.renta_municipios"
+		],
+		"sql_oro": "SELECT anio, municipio, renta_persona, renta_persona_real FROM mother.renta_municipios WHERE municipio='Pozuelo de Alarcón' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 30524,
+			"unidad": "€ netos al año por persona (nominal)",
+			"periodo": "2023",
+			"territorio": "Pozuelo de Alarcón"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"30.524",
+					"30524",
+					"32.209",
+					"32209"
+				]
+			],
+			"textos": [
+				[
+					"2023"
+				]
+			],
+			"alternativas": "ADRH 2023: 30.524 € nominales; 32.209 € en euros de 2025."
+		}
+	},
+	{
+		"id": "p05",
+		"pregunta": "¿A cuánto está el litro de gasolina?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.mercado_energia_carburantes"
+		],
+		"sql_oro": "SELECT semana, eur_litro, eur_litro_real FROM mother.mercado_energia_carburantes WHERE geo='ES' AND producto='Gasolina 95' ORDER BY semana DESC LIMIT 1",
+		"respuesta": {
+			"valor": 1.94,
+			"unidad": "€/litro con impuestos",
+			"periodo": "semana del 28 de septiembre de 2026",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1,94",
+					"1,940",
+					"1,85",
+					"1,854"
+				]
+			],
+			"textos": [],
+			"alternativas": "Gasolina 95: 1,94 €/l nominales (1,85 en euros de 2025). Si se interpreta como gasóleo: 1,93 €/l (no aceptado: se pregunta gasolina)."
+		}
+	},
+	{
+		"id": "p06",
+		"pregunta": "¿Cuánto ha crecido el PIB por habitante desde 2019, descontando la inflación?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.economia_pib_per_capita"
+		],
+		"sql_oro": "SELECT max(real_eur) FILTER (WHERE anio=(SELECT max(anio) FROM mother.economia_pib_per_capita)) - max(real_eur) FILTER (WHERE anio=2019) AS diferencia, max(real_eur) FILTER (WHERE anio=2019) AS r2019, max(real_eur) FILTER (WHERE anio=(SELECT max(anio) FROM mother.economia_pib_per_capita)) AS ultimo FROM mother.economia_pib_per_capita WHERE pais='ES'",
+		"respuesta": {
+			"valor": 1616.88,
+			"unidad": "€ reales por habitante (aumento)",
+			"periodo": "2019-2025",
+			"territorio": "España",
+			"detalle": "32.620 € en 2019 y 34.237 € en 2025 (euros de 2025), +5,0 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.617",
+					"1617",
+					"1.600 €",
+					"1.620",
+					"4,96 %",
+					"4,96%",
+					"5,0 %",
+					"5,0%",
+					"5 %",
+					"5%"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: el aumento (+1.617 € reales, +5,0 %). economia_pib_trimestral también permite calcularlo con otra base trimestral; la cifra anual es la de referencia."
+		}
+	},
+	{
+		"id": "p07",
+		"pregunta": "¿Cuántos pisos turísticos hay en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.turismo_viviendas"
+		],
+		"sql_oro": "SELECT periodo, viviendas, plazas, viviendas_1000hab FROM mother.turismo_viviendas WHERE nivel='pais' ORDER BY periodo DESC LIMIT 1",
+		"respuesta": {
+			"valor": 341001,
+			"unidad": "viviendas de uso turístico",
+			"periodo": "mayo de 2026",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"341.001",
+					"341001",
+					"341.000",
+					"341 mil"
+				]
+			],
+			"textos": [],
+			"alternativas": "INE medición experimental (6,9 por 1.000 hab.)."
+		}
+	},
+	{
+		"id": "p08",
+		"pregunta": "¿Cuántas viviendas nuevas se terminaron el último año?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.vivienda_obra_nueva"
+		],
+		"sql_oro": "SELECT anio, terminadas, terminadas_1000 FROM mother.vivienda_obra_nueva WHERE nivel='pais' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 80792,
+			"unidad": "viviendas libres terminadas",
+			"periodo": "2025",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"80.792",
+					"80792",
+					"80.800",
+					"80,8 mil"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "MIVAU, vivienda libre (1,64 por 1.000 hab.)."
+		}
+	},
+	{
+		"id": "p09",
+		"pregunta": "¿Qué gran ciudad tiene más deuda en total?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.local_deuda_municipio"
+		],
+		"sql_oro": "SELECT fecha, municipio, deuda_eur FROM mother.local_deuda_municipio WHERE fecha=(SELECT max(fecha) FROM mother.local_deuda_municipio) ORDER BY deuda_eur DESC LIMIT 1",
+		"respuesta": {
+			"valor": 1510701000,
+			"unidad": "€ (deuda PDE)",
+			"periodo": "30 de junio de 2026",
+			"territorio": "España",
+			"etiqueta": "Madrid"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.510.701.000",
+					"1510701000",
+					"1.510,7 millones",
+					"1.511 millones",
+					"1.510 millones",
+					"1,51 mil millones",
+					"1,5 mil millones",
+					"1.500 millones"
+				]
+			],
+			"textos": [
+				[
+					"madrid"
+				]
+			],
+			"alternativas": "Ayuntamientos de más de 300.000 hab. (Banco de España). Por habitante el orden podría cambiar; se pregunta el total."
+		}
+	},
+	{
+		"id": "p10",
+		"pregunta": "¿Qué parte del PIB se gastó en pensiones en 2023?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.pensiones_gasto_pib",
+			"mother.pensiones_anual"
+		],
+		"sql_oro": "SELECT anio, gasto_pensiones_seepros_pib, gasto_vejez_supervivientes_pib FROM mother.pensiones_gasto_pib WHERE geo='ES' AND anio=2023",
+		"respuesta": {
+			"valor": 13.16,
+			"unidad": "% del PIB",
+			"periodo": "2023",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"13,16",
+					"13,2",
+					"12,4"
+				]
+			],
+			"textos": [],
+			"alternativas": "Eurostat SEEPROS: 13,16 %; COFOG vejez + supervivientes: 12,4 %. Ambas válidas."
+		}
+	},
+	{
+		"id": "p11",
+		"pregunta": "¿Cuánto ha aumentado el gasto en defensa por habitante desde 2015?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.cuentas_gastos"
+		],
+		"sql_oro": "SELECT max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=(SELECT max(\"año\") FROM mother.cuentas_gastos)) - max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=2015) AS diferencia, max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=2015) AS g2015, max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=(SELECT max(\"año\") FROM mother.cuentas_gastos)) AS ultimo FROM mother.cuentas_gastos WHERE funcion_cofog='Defensa'",
+		"respuesta": {
+			"valor": 66,
+			"unidad": "€ por habitante (aumento, nominal)",
+			"periodo": "2015-2024",
+			"territorio": "España",
+			"detalle": "225 € en 2015 y 291 € en 2024 (+29 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"66 €",
+					"66 euros",
+					"+66",
+					" 66 ",
+					"29 %",
+					"29%",
+					"29,3 %",
+					"29,3%"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: el aumento (+66 €/hab nominales, de 225 a 291; +29,3 %). En euros reales el aumento sería menor: si el modelo deflacta, revisar a mano."
+		}
+	},
+	{
+		"id": "p12",
+		"pregunta": "¿Cuál es el récord de consumo eléctrico en la península?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.electricidad_records"
+		],
+		"sql_oro": "SELECT periodo, valor, unidad, fecha FROM mother.electricidad_records WHERE codigo='demanda_max' AND sistema='peninsula' AND periodo='5 min'",
+		"respuesta": {
+			"valor": 42052,
+			"unidad": "MW (demanda instantánea)",
+			"periodo": "8 de enero de 2021",
+			"territorio": "Península"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"42.052",
+					"42052",
+					"41.784",
+					"41784",
+					"847,5",
+					"848"
+				]
+			],
+			"textos": [],
+			"alternativas": "Demanda máxima: 42.052 MW (5 min) o 41.784 MW (horaria), ambas el 8-1-2021 (Filomena); en energía diaria, 847,5 GWh el 19-1-2017."
+		}
+	},
+	{
+		"id": "p13",
+		"pregunta": "¿Cómo está de agua la cuenca del Guadalquivir?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.embalses_estado_actual",
+			"mother.embalses_semanal"
+		],
+		"sql_oro": "SELECT fecha, nombre, pct_llenado, volumen_hm3 FROM mother.embalses_estado_actual WHERE nivel='cuenca' AND nombre='Guadalquivir'",
+		"respuesta": {
+			"valor": 69.6,
+			"unidad": "% de la capacidad",
+			"periodo": "semana del 29 de septiembre de 2026",
+			"territorio": "Cuenca del Guadalquivir"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"69,6",
+					"5.590",
+					"5590",
+					"5.590 hm3",
+					"5.590 hm³"
+				]
+			],
+			"textos": [],
+			"alternativas": "5.590 hm³ embalsados."
+		}
+	},
+	{
+		"id": "p14",
+		"pregunta": "¿Cuál ha sido el peor año de incendios en España desde 2000?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.incendios_anual",
+			"mother.incendios_provincia_anio"
+		],
+		"sql_oro": "SELECT anio, ha_quemadas FROM mother.incendios_anual ORDER BY ha_quemadas DESC LIMIT 1",
+		"respuesta": {
+			"valor": 401266,
+			"unidad": "hectáreas quemadas",
+			"periodo": "2000-2026",
+			"territorio": "España",
+			"etiqueta": "2025"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"401.266",
+					"401266",
+					"401.000",
+					"400.000",
+					"401 mil",
+					"401,3 mil"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "EFFIS. Medido por superficie quemada."
+		}
+	},
+	{
+		"id": "p15",
+		"pregunta": "¿Cuál fue la marca de coches más vendida en 2025?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.movilidad_marcas_mensual"
+		],
+		"sql_oro": "SELECT marca, sum(matriculaciones) AS matriculaciones FROM mother.movilidad_marcas_mensual WHERE grupo='turismo' AND year(mes)=2025 GROUP BY marca ORDER BY matriculaciones DESC LIMIT 1",
+		"respuesta": {
+			"valor": 97781,
+			"unidad": "turismos nuevos matriculados",
+			"periodo": "2025",
+			"territorio": "España",
+			"etiqueta": "Toyota"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"97.781",
+					"97781",
+					"97.800",
+					"97,8 mil"
+				]
+			],
+			"textos": [
+				[
+					"toyota"
+				]
+			],
+			"alternativas": "DGT, turismos nuevos."
+		}
+	},
+	{
+		"id": "p16",
+		"pregunta": "¿Cuántos días se espera de media para operarse en la sanidad pública?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.sanidad_listas_espera"
+		],
+		"sql_oro": "SELECT fecha, dias_medio, pacientes FROM mother.sanidad_listas_espera WHERE nivel='pais' AND tipo='quirurgica' ORDER BY fecha DESC LIMIT 1",
+		"respuesta": {
+			"valor": 122,
+			"unidad": "días de espera media",
+			"periodo": "31 de diciembre de 2025",
+			"territorio": "España (SNS)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"122 días",
+					"122 dias",
+					"122"
+				]
+			],
+			"textos": [],
+			"alternativas": "SISLE-SNS, lista quirúrgica (853.740 pacientes)."
+		}
+	},
+	{
+		"id": "p17",
+		"pregunta": "¿Cuántos médicos hay por cada 100.000 habitantes en Navarra?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.sanidad_recursos_ccaa"
+		],
+		"sql_oro": "SELECT anio, por_100k, numero FROM mother.sanidad_recursos_ccaa WHERE cod='15' AND recurso='medicos' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 514.17,
+			"unidad": "médicos por 100.000 hab.",
+			"periodo": "2024",
+			"territorio": "Comunidad Foral de Navarra"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"514,17",
+					"514,2",
+					"514"
+				]
+			],
+			"textos": [
+				[
+					"2024"
+				]
+			],
+			"alternativas": "Eurostat hlth_rs_physreg (3.502 médicos)."
+		}
+	},
+	{
+		"id": "p18",
+		"pregunta": "¿Cuántas personas pidieron asilo en España en 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.inmigracion_asilo"
+		],
+		"sql_oro": "SELECT sum(solicitudes) AS solicitudes FROM mother.inmigracion_asilo WHERE year(mes)=2025",
+		"respuesta": {
+			"valor": 141050,
+			"unidad": "primeras solicitudes de asilo",
+			"periodo": "2025",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"141.050",
+					"141050",
+					"141.000",
+					"141 mil"
+				]
+			],
+			"textos": [],
+			"alternativas": "Eurostat, primeras solicitudes."
+		}
+	},
+	{
+		"id": "p19",
+		"pregunta": "¿Cuánto se gastó el Gobierno central en campañas de publicidad institucional en 2023?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.medios_publicidad_age_anual"
+		],
+		"sql_oro": "SELECT anio, institucional_eur_nominal, institucional_eur_real FROM mother.medios_publicidad_age_anual WHERE anio=2023",
+		"respuesta": {
+			"valor": 90373785,
+			"unidad": "€ nominales (ejecutado)",
+			"periodo": "2023",
+			"territorio": "España (AGE)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"90.373.785",
+					"90373785",
+					"90,4 millones",
+					"90,37 millones",
+					"90 millones",
+					"95.363.770",
+					"95363770",
+					"95,4 millones",
+					"95,36 millones"
+				]
+			],
+			"textos": [],
+			"alternativas": "Institucional ejecutado: 90,4 M€ nominales (95,4 M€ en euros de 2025). Si se suma la publicidad comercial de empresas del Estado sale 199,3 M€ (total), que no es lo pedido."
+		}
+	},
+	{
+		"id": "p20",
+		"pregunta": "¿Cuánto han subido los precios en Andalucía desde finales de 2019?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.mercado_ipc_ccaa"
+		],
+		"sql_oro": "SELECT mes, subida_desde_2019 FROM mother.mercado_ipc_ccaa WHERE cod_ccaa='01' ORDER BY mes DESC LIMIT 1",
+		"respuesta": {
+			"valor": 27.12,
+			"unidad": "% subida acumulada del IPC desde dic-2019",
+			"periodo": "agosto de 2026",
+			"territorio": "Andalucía"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"27,1",
+					"27,12"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la subida acumulada (valor final de la serie), 27,1 %."
+		}
+	}
+]

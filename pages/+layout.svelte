@@ -28,7 +28,14 @@
     import Header from "../../../../src/lib/components/Header.svelte";
     import { page } from "$app/stores";
     import { IDIOMAS, idiomaDeRuta, rutaEnIdioma, t } from "../../../../src/lib/i18n.js";
+    import { CLOUDFLARE_ANALITICA_TOKEN } from "../../../../src/lib/config/analitica.js";
+    import { onMount } from "svelte";
     export let data;
+
+    // Las estadísticas solo en la web publicada: en local o en las pruebas, Cloudflare rechaza
+    // el envío (CORS), ensucia la consola y contaría visitas que no son
+    let enProduccion = false;
+    onMount(() => (enProduccion = /(^|\.)spainfacts\.org$/.test(location.hostname)));
 
     // Idioma según la ruta (/en/..., /ca/..., /gl/..., /eu/...; sin prefijo, castellano)
     $: lang = idiomaDeRuta($page.url.pathname);
@@ -55,6 +62,12 @@
         <link rel="alternate" hreflang={codigo} href={"https://spainfacts.org" + rutaEnIdioma($page.url.pathname, codigo)} />
     {/each}
     <link rel="alternate" hreflang="x-default" href={"https://spainfacts.org" + rutaEnIdioma($page.url.pathname, "es")} />
+    <!-- Estadísticas sin cookies (ver src/lib/config/analitica.js). Con defer: si el script
+         no carga (p. ej. bloqueos de LaLiga) la página no se entera. Sigue sola la navegación
+         entre páginas sin recargar. -->
+    {#if CLOUDFLARE_ANALITICA_TOKEN && enProduccion}
+        <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: CLOUDFLARE_ANALITICA_TOKEN })}></script>
+    {/if}
 </svelte:head>
 
 <a href="#evidence-main-article" class="saltar-contenido" on:click={saltarAlContenido}>{t("saltar", lang)}</a>

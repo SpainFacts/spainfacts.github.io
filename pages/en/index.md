@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · The State of Spain in Official Data
 description: "Spain in official data: population, economy, public finances, energy, mobility, society and transparency, from the whole country down to each municipality. Independent and politically neutral."
-i18n_origen: 3545b565b77e
+i18n_origen: 33d766fc924e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -10,6 +10,7 @@ og:
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
+    import Chat from '../../../../../src/lib/components/Chat.svelte';
 </script>
 
 ```sql lista_municipios
@@ -111,6 +112,12 @@ ORDER BY anio
         </div>
     </div>
 </div>
+
+## Ask the data
+
+Type a question and an AI model running in your browser will look for the answer among the site’s tables. [More about the chat and how to use it with Claude or Ollama](/en/chat).
+
+<Chat perezoso />
 
 ## Spain today
 

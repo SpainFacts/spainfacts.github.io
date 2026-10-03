@@ -3,13 +3,14 @@ title: SpainFacts · Espainiaren Egoera Datu Ofizialetan
 description: "Espainia datu ofizialetan: biztanleria, ekonomia, kontu publikoak, energia, mugikortasuna, gizartea eta gardentasuna, Espainia osotik udalerri bakoitzera. Independentea eta alderdi-joerarik gabea."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 3545b565b77e
+i18n_origen: 33d766fc924e
 ---
 
 <script>
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
+    import Chat from '../../../../../src/lib/components/Chat.svelte';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
     const urteK = (y) => { const n = Number(y) % 100, k = n < 20 ? n : n % 20; return [1, 5, 10, 15].includes(k); };
     const urteN = (y) => { const n = Number(y) % 100, k = n < 20 ? n : n % 20; return k === 11 || (n === 0 && Number(y) % 1000 === 0); };
@@ -118,6 +119,12 @@ ORDER BY anio
         </div>
     </div>
 </div>
+
+## Galdetu datuei
+
+Idatzi galdera bat, eta zure nabigatzailean exekutatzen den AA eredu batek webguneko tauletan bilatuko du erantzuna. [Txatari buruz gehiago, eta nola erabili Claude edo Ollamarekin](/eu/chat).
+
+<Chat perezoso />
 
 ## Espainia gaur
 

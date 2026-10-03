@@ -1,0 +1,15 @@
+{
+  "name": "spainfacts-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Servidor MCP para consultar los datos de SpainFacts desde Claude Code, Claude Desktop u otros clientes MCP",
+  "type": "module",
+  "bin": { "spainfacts-mcp": "servidor.mjs" },
+  "scripts": { "start": "node servidor.mjs" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@duckdb/node-api": "^1.4.2-r.1",
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "zod": "^4.0.0"
+  }
+}
