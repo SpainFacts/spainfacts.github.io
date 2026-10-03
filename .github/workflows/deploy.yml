@@ -5,6 +5,11 @@ on:
     branches: 'main' # or whichever branch you want to deploy from
   repository_dispatch:
     types: [data-updated] # lo dispara Dagster tras refrescar los datos
+  # Lanzamiento a mano desde la pestaña Actions: siempre extracción completa
+  workflow_dispatch:
+  # Red de seguridad semanal (lunes 05:00 UTC) por si se cargan datos sin pasar por Dagster
+  schedule:
+    - cron: '0 5 * * 1'
 
 jobs:
   build:
@@ -21,18 +26,62 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Cada consulta a MotherDuck gasta cupo del plan gratuito. En un push de código
+      # los datos no han cambiado: se reutilizan los parquets del despliegue anterior y
+      # solo se lanzan las consultas de sources/ cuyo SQL ha cambiado (evidence sources
+      # --changed compara un hash del SQL guardado en .evidence/meta/query-cache).
+      # Extracción completa: Dagster (data-updated), lanzamiento a mano, la semanal o
+      # un push con [datos] en el mensaje del commit.
+      - name: Decidir tipo de extracción
+        id: modo
+        env:
+          EVENTO: ${{ github.event_name }}
+          MENSAJE: ${{ github.event.head_commit.message }}
+        run: |
+          if [ "$EVENTO" = "push" ] && ! printf '%s' "$MENSAJE" | grep -qiF '[datos]'; then
+            echo "completa=false" >> "$GITHUB_OUTPUT"
+            echo "Extracción incremental: solo las consultas cambiadas"
+          else
+            echo "completa=true" >> "$GITHUB_OUTPUT"
+            echo "Extracción completa desde MotherDuck"
+          fi
+
+      # Sin caché (primera vez o caducada) --changed lo extrae todo, así que se recupera solo
+      - name: Recuperar datos del despliegue anterior
+        if: steps.modo.outputs.completa == 'false'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .evidence/template/static/data
+            .evidence/meta/query-cache
+          key: fuentes-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: fuentes-
+
+      - name: Extraer fuentes
+        env:
+          # sources/mother usa el conector DuckDB con md:SpainFacts: DuckDB lee el token de aquí
+          motherduck_token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
+        run: |
+          if [ "${{ steps.modo.outputs.completa }}" = "true" ]; then
+            npm run sources:strict
+          else
+            npm run sources:strict -- --changed
+          fi
+
+      - name: Guardar datos para el próximo despliegue
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .evidence/template/static/data
+            .evidence/meta/query-cache
+          key: fuentes-${{ github.run_id }}-${{ github.run_attempt }}
+
       - name: build
         env:
           BASE_PATH: '/'
           # 5 idiomas: el empaquetado necesita más memoria que el límite por defecto de Node
           NODE_OPTIONS: '--max-old-space-size=12288'
-          # sources/mother usa el conector DuckDB con md:SpainFacts: DuckDB lee el token de aquí
-          motherduck_token: ${{ secrets.EVIDENCE_SOURCE__MOTHER__TOKEN }}
-          ## Add and uncomment any environment variables here
-          ## EVIDENCE_SOURCE__my_source__username: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__USERNAME }}
-          ## EVIDENCE_SOURCE__my_source__private_key: ${{ secrets.EVIDENCE_SOURCE__MY_SOURCE__PRIVATE_KEY }}
         run: |
-          npm run sources:strict
           npm run build:strict
           node tools/sitemap.mjs
           node tools/html-lang-es.mjs
