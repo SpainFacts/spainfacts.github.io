@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: industria_paises
+    description: "Auxiliar (efímero): nombres en español de los 27 países de la UE y del agregado EU27_2020."
+
+  - name: industria_peso_ue
+    description: >
+      Peso de la industria (B-E) y de las manufacturas (C) en el VAB y en el empleo de cada país de
+      la UE, por año desde 1995 (Eurostat nama_10_a10, nama_10_a10_e, nama_10_pe), con el puesto
+      entre los 27, el VAB manufacturero por habitante (España también en euros constantes) y un
+      índice de volumen 2015 = 100. es_referencia marca España, UE, DE, FR, IT, PL y PT.
+    tests:
+      - unique:
+          arguments:
+            column_name: "pais || '|' || anio"
+
+  - name: industria_ramas_ue
+    description: >
+      Por rama industrial NACE (2 dígitos y algunas de 3-4) y año (2021-último): cifra de negocios,
+      valor añadido y empleo de España frente al total UE (Eurostat sbs_ovw_act), cuota, puesto entre
+      los países con dato, país líder, cuota/peso poblacional y peso de la rama en las manufacturas
+      españolas frente a la UE (índice de especialización). nota explica cuándo la UE es una suma o
+      faltan países confidenciales.
+    tests:
+      - unique:
+          arguments:
+            column_name: "rama || '|' || anio"
+
+  - name: industria_productos_ue
+    description: >
+      Productos industriales (Prodcom DS-059358, lista cerrada: azulejos, coches pequeños, jamón
+      curado, aceite de oliva, cemento, acero, aerogeneradores...) por año: producción vendida de
+      España y de la UE (estimación EU27_2020 de Eurostat), cuota en cantidad y en valor, puesto
+      entre los países que publican el dato, veces su peso poblacional y producción por 1.000 hab.
+    tests:
+      - unique:
+          arguments:
+            column_name: "producto || '|' || anio"
+
+  - name: industria_exportaciones_ue
+    description: >
+      Exportaciones por partida HS industrial (Comext DS-045409) de España frente a la suma de los
+      27, por destino (WORLD con el comercio intra-UE, o EXT_EU27_2020) y año completo: cuota,
+      puesto, puesto sin Países Bajos ni Bélgica (reexportación portuaria), cuota en volumen,
+      exportación real de España y peso de la partida en las exportaciones españolas.
+    tests:
+      - unique:
+          arguments:
+            column_name: "partida || '|' || destino || '|' || anio"
+
+  - name: industria_ipi
+    description: >
+      Índice de producción industrial anual (base 2021 = 100) en formato largo: Eurostat sts_inpr_a
+      por país y rama (fuente eurostat), INE 70177 media anual por comunidad y destino económico
+      (fuente ine) e INE 60282 por división CNAE (fuente ine_divisiones), con variación anual.
+
+  - name: industria_ipi_mensual
+    description: >
+      IPI mensual del INE (tabla 70177), España y comunidades por destino económico: índice,
+      variación interanual y acumulada en el año; es_ultimo_mes marca el último publicado.
+
+  - name: industria_ccaa
+    description: >
+      Peso de la industria por comunidad y año: % del VAB industrial y manufacturero (Eurostat
+      nama_10r_3gva), VAB industrial por habitante en euros constantes, cifra de negocios industrial
+      por habitante real y ocupados por 1.000 hab. (INE 76823), puesto por peso industrial.
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod_ccaa || '|' || anio"
+
+  - name: industria_ccaa_ramas
+    description: >
+      Cifra de negocios, ocupados y locales por comunidad y rama industrial CNAE (INE 76823, desde
+      2018): por habitante real, cuota de la comunidad en el total español de la rama, veces su peso
+      poblacional, peso en la industria de la comunidad y puesto. nota avisa cuando pocas comunidades
+      publican el dato.
+
+  - name: industria_vehiculos
+    description: >
+      Producción de vehículos por país y año (seed industria_vehiculos_paises, OICA 2019 y 2021-2024;
+      España 2025 de ANFAC) con puesto en Europa y en el mundo, cuota mundial, vehículos por 1.000
+      habitantes (UE) y % exportado (España 2025).
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod_pais || '|' || anio"
+
+  - name: industria_fabricas
+    description: >
+      Fábricas de vehículos en España (seed industria_fabricas_coches, mapa de ANFAC de mayo de 2025)
+      con municipio, provincia, comunidad (códigos INE), coordenadas del municipio, modelos en
+      producción y adjudicados.

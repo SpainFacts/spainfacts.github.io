@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -141,7 +142,7 @@ WHERE e.nivel = 'provincia' AND e.sexo = 'Ambos sexos'
 ORDER BY e.anios DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ev_provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

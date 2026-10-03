@@ -1,10 +1,11 @@
 ---
 title: Inflazioa (KPI)
 description: "Inflazioa Espainian: KPI orokorra eta azpikoa, prezioak taldeka, argindarraren, gasaren eta erregaien prezio erreala, prezioak zenbat igo diren 2008tik eta 2019tik, KPI erkidegoka eta euroguneko alderaketa."
-i18n_origen: 68f3d36e2f60
+i18n_origen: c732f0a70537
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -686,7 +687,7 @@ Batez besteko kontsumoko etxe batek kWh bakoitzeko ordaintzen duen batez besteko
 
 Erkidego bakoitzeko urteko inflazioa, {ccaa[0]?.mes_txt}, eta prezioen igoera metatua 2019ko abendutik. Harrezkero prezioak gehien igo diren tokia {ccaa_resumen[0]?.cmax} da (+{formatNumber(ccaa_resumen[0]?.smax / 0.01, 1)} %), eta gutxien igo direna {ccaa_resumen[0]?.cmin} (+{formatNumber(ccaa_resumen[0]?.smin / 0.01, 1)} %). KPIak neurtzen du prezioak zenbat aldatzen diren erkidego bakoitzean, ez erkidego bat bestea baino garestiagoa den.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
@@ -186,7 +187,7 @@ FROM ${filtradas}
 
 <p class="text-sm text-gray-600 dark:text-gray-400">{formatNumber(totales_filtro[0]?.n_centrales, 0)} centrales con {formatNumber(totales_filtro[0]?.gw, 1)} GW con los filtros elegidos.</p>
 
-<BubbleMap
+<MapaEspana
     data={mapa}
     lat=lat
     long=lon

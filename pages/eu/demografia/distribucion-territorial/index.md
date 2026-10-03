@@ -1,10 +1,11 @@
 ---
 title: Biztanleriaren lurralde-banaketa
 description: "Nola banatzen den Espainiako biztanleria erkidego eta probintzien artean 1975etik: kontzentrazioa, biztanleak galtzen dituzten probintziak eta atzerrian jaiotakoen ehunekoa probintzia bakoitzean (INE)."
-i18n_origen: c8fbe04365c1
+i18n_origen: d77c92bbc1bf
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -149,7 +150,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_1975} probintziak biztanle gutxiago dituzte gaur 1975ean baino. Gehien hazi dena {provincias[0]?.provincia} da ({formatNumber(provincias[0]?.crec_1975, 0)} %), eta gehien galdu duena, {provincias.slice(-1)[0]?.provincia} ({formatNumber(provincias.slice(-1)[0]?.crec_1975, 0)} %).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
@@ -175,7 +176,7 @@ FROM ${provincias}
 
 Beste herrialde batean jaiotako egoiliarren proportzioa {formatNumber(provincias_resumen[0]?.max_pct / 0.01, 1)} %-tik ({provincias_resumen[0]?.max_prov}) {formatNumber(provincias_resumen[0]?.min_pct / 0.01, 1)} %-ra ({provincias_resumen[0]?.min_prov}) bitartekoa da.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

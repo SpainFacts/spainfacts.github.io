@@ -1,12 +1,13 @@
 ---
 title: Public rental housing
 description: "How much public rental housing there is in Spain per inhabitant and as a % of households, by region, province and municipality, compared with the Netherlands, Austria, Denmark, France and the European average, and by the party in government."
-i18n_origen: 4f3c32fd277f
+i18n_origen: ee03022518f8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import EnConstruccion from '../../../../../../../src/lib/components/EnConstruccion.svelte';
@@ -330,7 +331,7 @@ The Ministry also compares as a **% of households** (main residences) using data
 
 Known public rental homes per 1,000 inhabitants: those of the region (complete 2023 figure) plus those of the councils of municipalities with more than 20,000 inhabitants that answered the survey (partial figure). Click on a region to see its profile.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -378,7 +379,7 @@ Excluding Ceuta and Melilla, the largest regional rental stocks per inhabitant a
 
 There is no official count of the regional stock by province: the regions report it as a single block. What is known by province is the **municipal rental stock reported by the councils of municipalities with more than 20,000 inhabitants** ({cobertura_mun[0]?.respondieron} answered in 2023, {cobertura_mun[0]?.dato_2019} repeat their 2019 figure and {cobertura_mun[0]?.sin_dato} gave no figures). The map shows it per 1,000 inhabitants of the province; a blank province may have regional stock, or municipalities that did not answer.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

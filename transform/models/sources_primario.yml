@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw_primario
+    description: "Sector primario (agricultura, ganadería y pesca) de los 27 países de la UE: Eurostat (cultivos, ganadería, cuentas económicas de la agricultura, pesca, VAB regional, población, deflactor), Eurostat Comext (exportaciones) y Agri-food data portal de la Comisión (aceite de oliva). Pipeline dlt `primario` (ingestion/primario.py)."
+    schema: raw
+    tables:
+      - name: eurostat_cultivos
+        description: "apro_cpsh1: producción cosechada (HPRD_HUMD_EU_THS_T, miles t) y superficie (AR_THS_HA, miles ha) de ~30 cultivos clave, países UE y EU27_2020, desde 2000. El último año es provisional."
+      - name: eurostat_cultivos_regiones
+        description: "apro_cpshr: lo mismo por comunidad autónoma (NUTS 2 de España) y España."
+      - name: eurostat_ganaderia
+        description: "apro_mt_pann (carne sacrificada, miles t: B1000 bovino, B3100 porcino, B4100 ovino, B4200 caprino, B7000 aves), apro_mt_lspig / lssheep / lscatl (cabaña en noviembre-diciembre, miles de cabezas) y apro_mk_cola (leche de vaca entregada, miles t)."
+      - name: eurostat_cuentas_agricolas
+        description: "aact_eaa01 (valor de la producción a precios básicos, M EUR corrientes), aact_eaa04 (volumen encadenado CLV20_MEUR) para las partidas de nivel alto (código acabado en 000) y aact_eaa06 (renta real de los factores por UTA: RFI_AWU_CLV en CLV20_EUR_AWU e indicador A en I20)."
+      - name: eurostat_pesca
+        description: "fish_ca_main (capturas, t peso vivo, todas las zonas), fish_aq2a (acuicultura, t y EUR) y fish_fleet_alt (flota: NR buques, GT arqueo, KW potencia). Irlanda y Portugal no publican capturas recientes."
+      - name: eurostat_vab_regiones
+        description: "nama_10r_3gva: VAB a precios básicos (CP_MEUR) de la rama A (agricultura, silvicultura y pesca) y total, de España y sus NUTS 2 y NUTS 3."
+      - name: eurostat_poblacion_paises
+        description: "nama_10_pe: población media anual (POP_NC, miles) de los países de la UE y EU27_2020."
+      - name: eurostat_deflactor_pib
+        description: "nama_10_gdp: deflactor implícito del PIB en euros (PD20_EUR, 2020=100)."
+      - name: eurostat_exportaciones
+        description: "Comext DS-045409: exportaciones (flow 2) a WORLD (incluye intra-UE) de cada país de la UE por producto HS (TOTAL, 02, 0203, 0207, 03, 07, 0702, 0709, 08, 0802, 0805, 0806, 1509, 1601, 2204), VALUE_IN_EUROS y QUANTITY_IN_100KG. Grecia se recodifica de GR a EL."
+      - name: primario_aceite_produccion
+        description: "Agri-food data portal (CE): producción de aceite de oliva por país productor y campaña, miles de t, existencias finales e isEstimated."
+      - name: primario_aceite_precios
+        description: "Agri-food data portal (CE): precios semanales en origen del aceite de oliva por mercado y categoría, EUR/100 kg, ES, IT, EL y PT desde 2010."

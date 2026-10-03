@@ -4,6 +4,7 @@ description: "Cómo se reparte la población de España entre comunidades y prov
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -141,7 +142,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_1975} provincias tienen hoy menos habitantes que en 1975. La que más ha crecido es {provincias[0]?.provincia} ({formatNumber(provincias[0]?.crec_1975, 0)} %) y la que más ha perdido, {provincias.slice(-1)[0]?.provincia} ({formatNumber(provincias.slice(-1)[0]?.crec_1975, 0)} %).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
@@ -167,7 +168,7 @@ FROM ${provincias}
 
 La proporción de residentes nacidos en otro país va del {formatNumber(provincias_resumen[0]?.max_pct / 0.01, 1)} % de {provincias_resumen[0]?.max_prov} al {formatNumber(provincias_resumen[0]?.min_pct / 0.01, 1)} % de {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

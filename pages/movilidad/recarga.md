@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -86,7 +87,7 @@ FROM ${mapa}
 ORDER BY tramo_orden
 ```
 
-<BubbleMap
+<MapaEspana
     data={mapa}
     lat=latitud
     long=longitud
@@ -127,7 +128,7 @@ ORDER BY tramo_orden
 SELECT * FROM mother.movilidad_recarga_provincia ORDER BY puntos DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,12 +1,13 @@
 ---
 title: Ekonomiaren elektrifikazioa
 description: "Espainiako industriak, garraioak, etxeek eta zerbitzuek kontsumitzen duten energiaren zenbat den elektrizitatea, nola berotzen diren etxeak probintziaka eta zenbat bero-ponpa dauden."
-i18n_origen: 49a1fe838e5e
+i18n_origen: a287d12777fb
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -215,7 +216,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ### Elektrizitatearekin berotzen diren etxebizitzak, probintziaka
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

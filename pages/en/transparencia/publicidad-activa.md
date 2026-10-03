@@ -1,12 +1,13 @@
 ---
 title: Proactive disclosure
 description: "Do public administrations publish on their transparency portals what the law requires of them? Official assessments by entity (Council of Transparency and Good Governance and Canary Islands Transparency Commissioner), their evolution, the comparison by party and what cannot yet be measured."
-i18n_origen: 8c5314133b0c
+i18n_origen: 3f26672a5738
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -330,7 +331,7 @@ The improvement is clear: the average score of municipal councils rose from {for
 
 ### Municipal councils, {itc_ultimo[0]?.etiqueta}
 
-<AreaMap
+<MapaEspana
     data={itc_aytos_ultimo}
     geoJsonUrl="/geo/municipios/05.geojson"
     geoId="cod_mun"

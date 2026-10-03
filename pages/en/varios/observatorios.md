@@ -3,10 +3,11 @@ title: Public observatories
 description: "Census of Spain's public observatories: how many there are, which administration creates them, when they were set up, how many are still active, how many there are per inhabitant in each region and which party was in government when they were created."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69daf1595b8
+i18n_origen: 10c0e03a581c
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -276,7 +277,7 @@ By level of administration. The census only marks {formatNumber(resumen[0]?.inac
 
 Regional, provincial and local observatories in each autonomous community, per million inhabitants. The region is taken from the scope stated in the census or, if it is not stated, from the observatory's name: the municipality (matched against INE's list), the island or province, or the demonym ("Andaluz", "Galego"...). {formatNumber(resumen[0]?.sin_comunidad, 0)} remain unassigned because their name gives no clue ("Observatorio Social", "Observatorio del Agua"...).
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -1,12 +1,13 @@
 ---
 title: Ur-erreserbak eta urtegiak
 description: Espainiako urtegien asteko egoera arroka, aurreko urtearekin eta azken hamar urteetako batez bestekoarekin alderatuta.
-i18n_origen: 824f1b9d42d1
+i18n_origen: 1e74e7013ff0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     import MapaEmbalses from '../../../../../../../src/lib/components/MapaEmbalses.svelte';
@@ -87,7 +88,7 @@ FROM mother.embalses_estado_actual
 WHERE nivel = 'demarcacion'
 ```
 
-<AreaMap
+<MapaEspana
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"

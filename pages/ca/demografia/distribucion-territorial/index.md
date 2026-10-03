@@ -1,10 +1,11 @@
 ---
 title: Repartiment territorial de la població
 description: "Com es reparteix la població d'Espanya entre comunitats i províncies des de 1975: concentració, províncies que perden habitants i percentatge de nascuts a l'estranger a cada província (INE)."
-i18n_origen: c8fbe04365c1
+i18n_origen: d77c92bbc1bf
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -142,7 +143,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_1975} províncies tenen avui menys habitants que el 1975. La que més ha crescut és {provincias[0]?.provincia} ({formatNumber(provincias[0]?.crec_1975, 0)} %) i la que més n'ha perdut, {provincias.slice(-1)[0]?.provincia} ({formatNumber(provincias.slice(-1)[0]?.crec_1975, 0)} %).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
@@ -168,7 +169,7 @@ FROM ${provincias}
 
 La proporció de residents nascuts en un altre país va del {formatNumber(provincias_resumen[0]?.max_pct / 0.01, 1)} % de {provincias_resumen[0]?.max_prov} al {formatNumber(provincias_resumen[0]?.min_pct / 0.01, 1)} % de {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

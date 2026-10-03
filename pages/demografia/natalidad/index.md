@@ -4,6 +4,7 @@ description: "Nacimientos y defunciones por 1.000 habitantes, hijos por mujer, e
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -201,7 +202,7 @@ ORDER BY a.fecundidad DESC
 ```
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"
@@ -221,7 +222,7 @@ ORDER BY a.fecundidad DESC
             {id: 'edad_maternidad', title: 'Edad media de la madre', fmt: 'num1'}
         ]}
     />
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"
@@ -274,7 +275,7 @@ FROM ${provincias}
 
 En {ultimo[0]?.anio}, {provincias_resumen[0]?.negativas} de las {provincias_resumen[0]?.total} provincias tuvieron más defunciones que nacimientos. La natalidad va de {formatNumber(provincias_resumen[0]?.max_tasa, 1)} nacimientos por 1.000 habitantes en {provincias_resumen[0]?.max_prov} a {formatNumber(provincias_resumen[0]?.min_tasa, 1)} en {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

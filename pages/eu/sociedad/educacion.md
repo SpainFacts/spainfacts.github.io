@@ -1,10 +1,11 @@
 ---
 title: Hezkuntza
 description: "Eskola-uzte goiztiarra, helduen hezkuntza-maila, ez ikasten ez lanean ari diren gazteak, hezkuntza-gastua biztanleko eta ikasleko, ikasleak mailaka eta PISA, Espainia EBrekin alderatuta eta erkidegoka."
-i18n_origen: 724dbfd150f1
+i18n_origen: 1ee091a54980
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -170,7 +171,7 @@ QUALIFY row_number() OVER (PARTITION BY i.cod ORDER BY i.anio DESC) = 1
 ORDER BY abandono DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={abandono_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

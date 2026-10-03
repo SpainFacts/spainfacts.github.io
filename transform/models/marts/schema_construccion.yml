@@ -1,0 +1,113 @@
+version: 2
+
+models:
+  - name: construccion_nuts
+    description: "Auxiliar (efímero): NUTS 2 de Eurostat/ISTAC -> código INE de comunidad y nombre ('ES' -> '00')."
+
+  - name: construccion_deflactor
+    description: "Auxiliar (efímero): main.deflactor (IPC del INE, desde 2002) alargado a 1996-2001 con el IPCA anual de España de Eurostat. real = nominal * factor."
+
+  - name: construccion_peso_ue
+    description: >
+      Peso de la construcción (rama F) en el VAB y en el empleo de cada país de la UE (27 + EU27_2020),
+      por año desde 1995 (Eurostat nama_10_a10, nama_10_a10_e, nama_10_pe): puesto entre los 27,
+      ocupados por 1.000 habitantes, VAB por habitante (España también en euros constantes), índice
+      de volumen 2007 = 100 y cuota en la UE frente a la cuota de población.
+    tests:
+      - unique:
+          arguments:
+            column_name: "pais || '|' || anio"
+
+  - name: construccion_produccion
+    description: >
+      Índice de producción en la construcción (Eurostat sts_copr_a, 2021 = 100, corregido de calendario)
+      por país, rama (F, F41 edificación, F42 ingeniería civil, F43 especializada) y año, también
+      rebasado a 2007 = 100. nota avisa del salto atípico de España en 2025 (F y F43).
+    tests:
+      - unique:
+          arguments:
+            column_name: "pais || '|' || rama || '|' || anio"
+
+  - name: construccion_cemento
+    description: >
+      Cemento en España por año (Banco de España 23.11, datos de Oficemen / Ministerio de Industria):
+      consumo aparente y producción en kg por habitante, exportaciones e importaciones; solo años completos.
+    tests:
+      - unique:
+          arguments:
+            column_name: anio
+
+  - name: construccion_permisos
+    description: >
+      Permisos y visados de obra por habitante. ambito 'UE': viviendas y m² con permiso por país
+      (Eurostat sts_cobp_a, desde 2005); 'CCAA': viviendas visadas de obra nueva, ampliación y reforma
+      por comunidad (Ministerio de Transportes vía ISTAC, desde 2000); 'ES_LARGA': viviendas visadas
+      de obra nueva y m² en España desde 1992 (Banco de España 23.8).
+    tests:
+      - unique:
+          arguments:
+            column_name: "ambito || '|' || cod || '|' || anio"
+
+  - name: construccion_licitacion
+    description: >
+      Licitación oficial de obra pública por año, España ('00'), comunidades y no regionalizable ('NR'),
+      desde 1989 (Ministerio de Transportes vía ISTAC; desglose de entidades públicas estatales del
+      Banco de España): total, Estado (con entidades públicas estatales) y entes territoriales
+      (comunidades + locales), edificación y obra civil, en euros constantes por habitante, con el
+      partido del Gobierno central y autonómico a 1 de julio.
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod || '|' || anio"
+
+  - name: construccion_empleo
+    description: >
+      Ocupados (EPA 65354, sumada de provincias) y parados (EPA 65331) de la construcción por trimestre,
+      España y comunidades, desde 2008: % de los ocupados, ocupados por 1.000 habitantes y tasa de paro
+      aproximada del sector.
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod || '|' || periodo"
+
+  - name: construccion_afiliados
+    description: >
+      Afiliados medios a la Seguridad Social en la construcción (sección F; General + Autónomos) por mes,
+      España, comunidades y provincias, desde 2021: % del total, % de autónomos y por 1.000 habitantes.
+    tests:
+      - unique:
+          arguments:
+            column_name: "nivel || '|' || cod || '|' || anio || '|' || mes"
+
+  - name: construccion_costes
+    description: >
+      Índices de costes de construcción y de precios de producción de la vivienda nueva por país (Eurostat
+      sts_copi_a, 2021 = 100); para España, también el coste descontada la inflación general. España
+      publica la misma serie en costes y en precios.
+    tests:
+      - unique:
+          arguments:
+            column_name: "pais || '|' || anio"
+
+  - name: construccion_ccaa
+    description: >
+      Peso de la construcción en el VAB de cada comunidad (Eurostat nama_10r_3gva) por año desde 2000,
+      VAB del sector por habitante en euros constantes, puesto, comparación con 2007 y media anual de
+      ocupados de la EPA.
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod || '|' || anio"
+
+  - name: construccion_empresas_ue
+    description: >
+      Empresas de la construcción por país, rama (F, F41, F42, F43) y año (Eurostat sbs_ovw_act,
+      2021-último): empresas por 1.000 habitantes, tamaño medio, productividad, cifra de negocios por
+      habitante y cuotas en la UE.
+    tests:
+      - unique:
+          arguments:
+            column_name: "pais || '|' || rama || '|' || anio"
+
+  - name: construccion_grandes_constructoras
+    description: "Constructoras españolas en el Global Powers of Construction de Deloitte (seed construccion_constructoras): puesto mundial e ingresos cuando la fuente los da."

@@ -1,12 +1,13 @@
 ---
 title: Turismoa
 description: "Nazioarteko turistak biztanleko, haien gastua inflazioa kenduta eta BPGaren % gisa, gaualdiak eta hotelen okupazioa erkidegoka, jatorrizko herrialdeak, urtarokotasuna eta etxebizitza turistikoak udalerrika, INEren datuekin."
-i18n_origen: caa9f015f151
+i18n_origen: 6bfff987dc63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -490,7 +491,7 @@ Hilero iritsitako nazioarteko turistak 1.000 biztanleko, {estacional_resumen[0]?
 
 Hoteletako eta apartamentu turistikoetako gaualdiak 1.000 biztanleko, {ccaa[0]?.anio}. urtean. Espainia osoan {formatNumber(ccaa_espana[0]?.pernoct_1000hab, 0)} izan ziren; {ccaa[0]?.comunidad} erkidegoan {formatNumber(ccaa[0]?.pernoct_1000hab, 0)} izatera iritsi ziren, eta {ccaa.slice(-1)[0]?.comunidad} erkidegoan {formatNumber(ccaa.slice(-1)[0]?.pernoct_1000hab, 0)} baino ez.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -557,7 +558,7 @@ INEk plataforma handietan ostatu turistiko gisa iragarritako etxebizitzak zenbat
 
 <p class="text-xs text-gray-500">Seihileko neurketa: otsaila eta abuztua 2024ra arte, eta maiatza eta azaroa geroztik. Denboraldia dagoenez (udan gehiago iragartzen dira), komeni da datu bakoitza beste urte bateko hilabete berekoarekin alderatzea.</p>
 
-<AreaMap
+<MapaEspana
     data={vut_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

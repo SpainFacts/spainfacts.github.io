@@ -1,12 +1,13 @@
 ---
 title: Retiment de comptes dels ajuntaments
 description: "Administracions que no compleixen les seves obligacions legals de publicar o trametre informació: quines són, on són i qui governava quan vencia el termini."
-i18n_origen: 3425c0f0ac57
+i18n_origen: 8aa3c01a34e7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Dates en català (les etiquetes de mes que es construeixen a les consultes SQL són en castellà)
@@ -154,7 +155,7 @@ WHERE t.anio = (SELECT anio FROM ${ultimo})
 GROUP BY ALL
 ```
 
-<AreaMap
+<MapaEspana
     data={por_provincia}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

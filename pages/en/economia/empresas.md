@@ -1,12 +1,13 @@
 ---
 title: Businesses, entrepreneurship and R&D
 description: "How many businesses there are in Spain per inhabitant and how large they are, how many companies are set up and dissolved, insolvency proceedings, the self-employed and R&D spending compared with Europe and by region."
-i18n_origen: ba0336af2883
+i18n_origen: 8db7e727c98e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -188,7 +189,7 @@ The INE's Central Business Register (DIRCE) counts every active business on 1 Ja
 
 By region, {emp_ccaa[0]?.comunidad} has the highest business density, with {formatNumber(emp_ccaa[0]?.empresas_1000hab, 1)} businesses per 1,000 inhabitants, and {emp_ccaa.slice(-1)[0]?.comunidad} the lowest, with {formatNumber(emp_ccaa.slice(-1)[0]?.empresas_1000hab, 1)}. Businesses are counted in the region where they have their head office, not where their premises are.
 
-<AreaMap
+<MapaEspana
     data={emp_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -660,7 +661,7 @@ ORDER BY i.pct_pib DESC
 
 By region, in {id_ccaa[0]?.anio} (latest year with regional data). {id_ccaa[0]?.comunidad} devoted {formatNumber(id_ccaa[0]?.pct_pib, 2)}% of its GDP to R&D and {id_ccaa.slice(-1)[0]?.comunidad} {formatNumber(id_ccaa.slice(-1)[0]?.pct_pib, 2)}%.
 
-<AreaMap
+<MapaEspana
     data={id_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

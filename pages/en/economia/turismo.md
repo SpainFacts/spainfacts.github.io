@@ -1,12 +1,13 @@
 ---
 title: Tourism
 description: "International tourists per inhabitant, their spending adjusted for inflation and as a % of GDP, overnight stays and hotel occupancy by region, countries of origin, seasonality and tourist flats by municipality, with INE data."
-i18n_origen: caa9f015f151
+i18n_origen: 6bfff987dc63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -471,7 +472,7 @@ Breakdown of tourists in {paises[0]?.anio_int} by country of residence, and chan
 
 Overnight stays in hotels and tourist apartments per 1,000 inhabitants in {ccaa[0]?.anio}. For Spain as a whole the figure was {formatNumber(ccaa_espana[0]?.pernoct_1000hab, 0)}; {ccaa[0]?.comunidad} reached {formatNumber(ccaa[0]?.pernoct_1000hab, 0)} and {ccaa.slice(-1)[0]?.comunidad} stood at just {formatNumber(ccaa.slice(-1)[0]?.pernoct_1000hab, 0)}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -538,7 +539,7 @@ INE counts the homes advertised as tourist accommodation on the major platforms 
 
 <p class="text-xs text-gray-500">Measured twice a year: February and August until 2024, May and November since then. Because the figures are seasonal (more homes are advertised in summer), each figure is best compared with the same month of another year.</p>
 
-<AreaMap
+<MapaEspana
     data={vut_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

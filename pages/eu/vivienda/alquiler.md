@@ -1,10 +1,11 @@
 ---
 title: Etxebizitzaren alokairua
 description: "Etxebizitzaren alokairu mediana Espainian inflazioa kenduta, erkidego, probintzia eta udalerriaren arabera, Alokairuaren Prezioaren Estatuko Erreferentzia Sistemaren PFEZ datuekin eta INEren indizearekin."
-i18n_origen: deee5f4dedc1
+i18n_origen: 15b55dba3f41
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -181,7 +182,7 @@ INEk, gainera, kontratu berberen errentari urtez urte jarraitzen dion indize bat
 
 Pisu baten alokairu mediana {urtean(ccaa[0]?.anio)}, {urteko(espana[0]?.anio_base)} eurotan.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -212,7 +213,7 @@ Pisu baten alokairu mediana {urtean(ccaa[0]?.anio)}, {urteko(espana[0]?.anio_bas
 
 ## Probintziaka
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

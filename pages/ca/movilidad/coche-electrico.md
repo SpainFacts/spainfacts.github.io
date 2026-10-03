@@ -1,12 +1,13 @@
 ---
 title: Cotxe elèctric
 description: "Transició al cotxe elèctric a Espanya: matriculacions de turismes per tipus de motor cada mes des del 2015, quota d'elèctrics i híbrids endollables per província i emissions de CO2."
-i18n_origen: f25fe43f1389
+i18n_origen: ed78ed2e1c5f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ Quota d'elèctrics i híbrids endollables en els turismes nous dels últims 12 m
     <ButtonGroupItem valueLabel="Tots, amb flotes" value="todos" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

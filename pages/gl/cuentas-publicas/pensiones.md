@@ -1,10 +1,11 @@
 ---
 title: Pensións
 description: "Pensións contributivas en España: pensión media descontada a inflación, afiliados por pensión, gasto en pensións en % do PIB fronte á UE, pensións por habitante e por comunidade e provincia."
-i18n_origen: cc5339743926
+i18n_origen: 3f8817a42d1f
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     const mesesGl = {enero: 'xaneiro', febrero: 'febreiro', marzo: 'marzo', abril: 'abril', mayo: 'maio', junio: 'xuño', julio: 'xullo', agosto: 'agosto', septiembre: 'setembro', octubre: 'outubro', noviembre: 'novembro', diciembre: 'decembro'};
@@ -382,7 +383,7 @@ Número de pensións por cada 1.000 habitantes e por cada 100 persoas de 65 anos
 
 Datos de {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (media dos {ccaa_extremos[0]?.meses} meses publicados){/if}, en euros de {mensual[0]?.anio_euros}. A pensión media de xubilación máis alta é a de {ccaa_extremos[0]?.max_nombre} ({formatNumber(ccaa_extremos[0]?.max_valor, 0)} €) e a máis baixa a de {ccaa_extremos[0]?.min_nombre} ({formatNumber(ccaa_extremos[0]?.min_valor, 0)} €). Por afiliados por pensión, vai de {formatNumber(ccaa_extremos[0]?.ratio_max_valor, 2)} en {ccaa_extremos[0]?.ratio_max_nombre} a {formatNumber(ccaa_extremos[0]?.ratio_min_valor, 2)} en {ccaa_extremos[0]?.ratio_min_nombre}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -413,7 +414,7 @@ Datos de {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (media dos {
 
 ### Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

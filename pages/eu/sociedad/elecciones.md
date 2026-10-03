@@ -3,10 +3,11 @@ title: Hauteskundeak
 description: "1977az geroztiko hauteskunde orokorren, europarren eta udal-hauteskundeen emaitzak: parte-hartzea, botoa alderdika eta blokeka, zatiketa, eserlekuko botoak eta irabazlea probintzia eta udalerri bakoitzean, Barne Ministerioaren datu ofizialekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c6f8193148e9
+i18n_origen: 855cde6e0399
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Hilabeteen laburdurak (datuetan gaztelaniaz datoz): 'abr. 2019' -> 'api. 2019'
@@ -337,7 +338,7 @@ ORDER BY orden
 
 Probintzia bakoitzean (hauteskunde orokorretako barrutia) boto gehien jaso zituen hautagaitzaren familia politikoa.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

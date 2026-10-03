@@ -1,12 +1,13 @@
 ---
 title: Health
 description: "Life expectancy in Spain by region and province, what people die of, suicides, road deaths, excess mortality and the health system: waiting lists, doctors, nurses, beds and spending per person compared with the EU."
-i18n_origen: 29850a7d6705
+i18n_origen: 997db93797ae
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -146,7 +147,7 @@ WHERE e.nivel = 'provincia' AND e.sexo = 'Ambos sexos'
 ORDER BY e.anios DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ev_provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

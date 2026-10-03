@@ -1,12 +1,13 @@
 ---
 title: Elections
 description: "Results of general elections since 1977, European and municipal elections: turnout, votes by party and by bloc, fragmentation, votes per seat and the winner in each province and municipality, using official data from the Ministry of the Interior."
-i18n_origen: c6f8193148e9
+i18n_origen: 855cde6e0399
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -334,7 +335,7 @@ ORDER BY orden
 
 The political family of the most-voted list in each province (the constituency in general elections).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

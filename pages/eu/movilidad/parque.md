@@ -1,12 +1,13 @@
 ---
 title: Ibilgailu-parkea
 description: "Espainian zirkulatzen duten ibilgailuak: turismoak motor motaren, DGTren ingurumen-etiketaren eta antzinatasunaren arabera, modelo ohikoenak eta probintzien eta udalerrien arteko konparazioa."
-i18n_origen: e10a6f5a05a5
+i18n_origen: 3790208fb9a8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -186,7 +187,7 @@ ORDER BY turismos DESC
     <ButtonGroupItem valueLabel="Entxufagarrien %" value="cuota_enchufables" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

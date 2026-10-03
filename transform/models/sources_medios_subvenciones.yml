@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw_medios_subvenciones
+    description: "Subvenciones a medios de comunicación privados: concesiones y detalle de las convocatorias de la lista curada (seed medios_subvenciones_convocatorias) descargadas de la API de la Base de Datos Nacional de Subvenciones (BDNS/SNPSAP, IGAE) (ingestion/medios_subvenciones.py). Carga MERGE: la BDNS solo muestra 4 años naturales y lo antiguo se conserva en raw."
+    schema: raw
+    tables:
+      - name: bdns_concesiones_medios
+        description: "Una fila por concesión (codConcesion) de las convocatorias incluidas. importe = importe concedido (no pagado); ayuda_equivalente = equivalente de subvención (relevante en préstamos). beneficiario_nombre es null en personas físicas (NIF enmascarado '***' o DNI/NIE). concedente_nivel1/2/3 = administración, comunidad o entidad local y órgano."
+        columns:
+          - name: cod_concesion
+            tests: [unique, not_null]
+          - name: cod_bdns
+            tests: [not_null]
+      - name: bdns_convocatorias_medios
+        description: "Detalle de cada convocatoria incluida (GET /convocatorias?numConv=): presupuesto total, sectores NACE, regiones, tipos de beneficiario, instrumentos, finalidad, bases reguladoras y órgano."
+        columns:
+          - name: cod_bdns
+            tests: [unique, not_null]

@@ -2,7 +2,6 @@
     import { Logo } from "@evidence-dev/core-components";
     import CustomKebabMenu from "./CustomKebabMenu.svelte";
     import { page } from "$app/stores";
-    import SelectorIdioma from "./SelectorIdioma.svelte";
     import { idiomaDeRuta, rutaBase, enlace, t } from "../i18n.js";
 
     export let data = {};
@@ -20,6 +19,7 @@
         { href: "/energia-clima", clave: "menu.energia" },
         { href: "/movilidad", clave: "menu.movilidad" },
         { href: "/sociedad", clave: "menu.sociedad" },
+        { href: "/medios", clave: "menu.medios" },
         { href: "/transparencia", clave: "menu.transparencia" },
         { href: "/varios", clave: "menu.varios" },
         { href: "/fuentes", clave: "menu.fuentes" },
@@ -108,7 +108,6 @@
 
             <!-- Actions / Kebab Menu -->
             <div class="flex items-center gap-2">
-                <SelectorIdioma {lang} ruta={$page.url.pathname} />
                 <CustomKebabMenu />
             </div>
         </div>

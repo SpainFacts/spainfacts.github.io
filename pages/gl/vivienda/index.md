@@ -1,12 +1,13 @@
 ---
 title: Vivenda
 description: "Prezo da vivenda en España descontada a inflación, aluguer, compravendas e hipotecas por 1.000 habitantes, obra nova e cantos anos de salario custa unha casa, por comunidade e provincia."
-i18n_origen: a02abfec5da9
+i18n_origen: 9445f0493756
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -181,7 +182,7 @@ Compravendas de vivendas inscritas nos rexistros da propiedade e hipotecas const
 
 Prezo real do metro cadrado no último trimestre. Preme nunha comunidade para ver a súa ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

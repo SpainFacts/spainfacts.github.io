@@ -1,10 +1,11 @@
 ---
 title: Biztanleriaren bilakaera
 description: "Espainiako biztanleria 1971tik eta haren urteko hazkundea 1.000 biztanleko, jaiotzak ken heriotzak eta migrazioa bereizita, erkidego eta probintziaka (INE)."
-i18n_origen: 40e6678c9212
+i18n_origen: f9535ffb3b9d
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -210,7 +211,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_10} probintziak biztanle gutxiago dituzte gaur duela hamar urte baino, eta {provincias_resumen[0]?.pierden_2000} probintziak 2000n baino gutxiago.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

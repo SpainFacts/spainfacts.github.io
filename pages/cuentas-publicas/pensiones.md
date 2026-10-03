@@ -4,6 +4,7 @@ description: "Pensiones contributivas en España: pensión media descontada la i
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -379,7 +380,7 @@ Número de pensiones por cada 1.000 habitantes y por cada 100 personas de 65 añ
 
 Datos de {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (media de los {ccaa_extremos[0]?.meses} meses publicados){/if}, en euros de {mensual[0]?.anio_euros}. La pensión media de jubilación más alta es la de {ccaa_extremos[0]?.max_nombre} ({formatNumber(ccaa_extremos[0]?.max_valor, 0)} €) y la más baja la de {ccaa_extremos[0]?.min_nombre} ({formatNumber(ccaa_extremos[0]?.min_valor, 0)} €). Por afiliados por pensión, va de {formatNumber(ccaa_extremos[0]?.ratio_max_valor, 2)} en {ccaa_extremos[0]?.ratio_max_nombre} a {formatNumber(ccaa_extremos[0]?.ratio_min_valor, 2)} en {ccaa_extremos[0]?.ratio_min_nombre}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -410,7 +411,7 @@ Datos de {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (media de lo
 
 ### Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

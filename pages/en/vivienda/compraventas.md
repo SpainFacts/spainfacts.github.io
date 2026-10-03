@@ -1,10 +1,11 @@
 ---
 title: Home sales and mortgages
 description: "Home sales and mortgages on homes in Spain per 1,000 inhabitants, new builds versus second-hand and average mortgage amount adjusted for inflation, by region and province."
-i18n_origen: f88105740a74
+i18n_origen: ed62e0823b71
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -209,7 +210,7 @@ Average amount of mortgages taken out on homes, with and without inflation. Mort
 
 Sales over the last 12 months per 1,000 inhabitants.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -240,7 +241,7 @@ Sales over the last 12 months per 1,000 inhabitants.
 
 ## By province
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

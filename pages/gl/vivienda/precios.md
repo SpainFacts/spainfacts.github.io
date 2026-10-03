@@ -1,10 +1,11 @@
 ---
 title: Prezo da vivenda
 description: "Prezo da vivenda en España descontada a inflación: valor taxado por metro cadrado por comunidade, provincia e municipio e o Índice de Prezos de Vivenda do INE, nova e de segunda man."
-i18n_origen: 50400dad918f
+i18n_origen: 058fd706b1df
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -182,7 +183,7 @@ Valor taxado por metro cadrado da comunidade elixida fronte a España, en euros 
 
 En {prov_extremos[0]?.periodo} a provincia co metro cadrado máis caro é {prov_extremos[0]?.cara} ({formatNumber(prov_extremos[0]?.cara_valor, 0)} €/m²) e a máis barata, {prov_extremos[0]?.barata} ({formatNumber(prov_extremos[0]?.barata_valor, 0)} €/m²): na primeira o metro cadrado custa {formatNumber(prov_extremos[0]?.veces, 1)} veces máis. {#if prov_extremos[0]?.en_maximos == 1}Só unha provincia está{:else}{prov_extremos[0]?.en_maximos} provincias están{/if} no seu máximo real desde 2002.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

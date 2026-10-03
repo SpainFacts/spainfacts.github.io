@@ -1,12 +1,13 @@
 ---
 title: Publicitat activa
 description: "Publiquen les administracions als seus portals de transparència el que els obliga la llei? Avaluacions oficials per entitat (Consell de Transparència i Bon Govern i Comissionat de Transparència de Canàries), la seva evolució, la comparació per partit i el que encara no es pot mesurar."
-i18n_origen: 8c5314133b0c
+i18n_origen: 3f26672a5738
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -330,7 +331,7 @@ La millora és clara: la nota mitjana dels ajuntaments va passar de {formatNumbe
 
 ### Ajuntaments, {itc_ultimo[0]?.etiqueta}
 
-<AreaMap
+<MapaEspana
     data={itc_aytos_ultimo}
     geoJsonUrl="/geo/municipios/05.geojson"
     geoId="cod_mun"

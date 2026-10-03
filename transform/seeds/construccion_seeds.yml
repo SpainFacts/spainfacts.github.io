@@ -1,0 +1,36 @@
+version: 2
+
+seeds:
+  - name: construccion_constructoras
+    description: >
+      Constructoras españolas en el ranking mundial Global Powers of Construction de Deloitte
+      (edición 2025, las 100 mayores cotizadas del mundo por ingresos), transcrito a mano de la
+      página de presentación de Deloitte España (sin licencia abierta: se citan pocas cifras y
+      siempre con su fuente en la columna `fuente`). La página solo da ingresos y ventas
+      internacionales de ACS y Acciona; del resto, solo el puesto. Según la misma página, las siete
+      españolas suman 112.529 millones de dólares de ingresos (+17,1 %) y España es el quinto país
+      por ingresos del ranking.
+    config:
+      column_types:
+        edicion: integer
+        puesto: integer
+        empresa: varchar
+        ingresos_mill_usd: double
+        ventas_internacionales_mill_usd: double
+        pct_ventas_exterior: double
+        fuente: varchar
+    columns:
+      - name: edicion
+        description: Edición del informe de Deloitte.
+      - name: puesto
+        description: Posición en el ranking mundial (1-100) por ingresos.
+      - name: empresa
+        description: Grupo constructor.
+      - name: ingresos_mill_usd
+        description: Ingresos del grupo en millones de dólares (moneda del informe), si la fuente lo da.
+      - name: ventas_internacionales_mill_usd
+        description: Ventas fuera de España en millones de dólares, si la fuente lo da.
+      - name: pct_ventas_exterior
+        description: Porcentaje de las ventas fuera de España.
+      - name: fuente
+        description: Documento y URL de origen de la fila.

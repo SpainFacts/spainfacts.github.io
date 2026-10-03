@@ -54,3 +54,12 @@ transform/target_*/
 
 # Caché de sumarios del BOE (ingestion/transparencia_gobierno.py)
 data/boe_cache/
+
+# Fichas, PDF y OCR de las declaraciones de bienes del Congreso (ingestion/diputados_inmuebles.py)
+data/congreso_cache/
+
+# Extracto por diputado de las declaraciones de bienes (OCR): solo se publican los totales
+ingestion/datos/diputados_inmuebles_*.csv
+
+# Caché de las plataformas autonómicas de contratación (ingestion/medios_contratos_ccaa.py)
+data/medios_contratos_ccaa_cache/

@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: medios_receptores
+    description: >
+      Quién recibe qué: una fila por pago o concesión a un medio de comunicación de cualquier
+      administración, uniendo la publicidad del Estado por grupo 2025 (medios_publicidad_grupos), la
+      publicidad institucional de comunidades y ayuntamientos por medio
+      (medios_publicidad_territorial_gasto), los contratos a empresas de medios
+      (medios_contratos_base, desde 2018, es_medio = 'si', sin sospechosos) y las subvenciones a
+      medios privados (medios_subvenciones_concesiones, desde 2022, sin personas físicas). Cada
+      fila se asigna a un medio de la seed medios_cabeceras (NIF > nombre exacto > nombre
+      contenido > grupo de la fuente); lo que no casa no entra. Las bases no son homogéneas: ver
+      iva_incluido, base y fuente.
+    columns:
+      - name: medio_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('medios_cabeceras')
+              field: medio_id
+      - name: medio
+      - name: grupo
+      - name: tipo_medio
+        description: "prensa | digital | radio | tv | agencia | grupo | plataforma"
+      - name: titularidad
+        description: "privada | publica"
+      - name: es_plataforma
+        description: "Google, Meta, TikTok, X, Spotify, Amazon, Netflix, Microsoft: no son medios de comunicación"
+      - name: nivel_asignacion
+        description: "cabecera (la fuente da el nombre del medio) | sociedad (da la empresa editora, por NIF o razón social) | grupo (solo el grupo, o una sociedad con varias cabeceras sin separar)"
+        tests:
+          - accepted_values:
+              values: ['cabecera', 'sociedad', 'grupo']
+      - name: metodo_asignacion
+        description: "nif | nombre_exacto | contiene | grupo"
+      - name: via
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Publicidad institucional del Estado', 'Publicidad comercial de empresas del Estado', 'Publicidad institucional autonómica/local', 'Contrato', 'Subvención']
+      - name: administracion
+        description: "Quién paga: órgano de contratación, organismo pagador de la campaña o concedente (en la publicidad del Estado, AGE o empresas del Estado en bloque)"
+      - name: gobierno
+        description: "Administración de la que depende: Estado, Generalitat de Catalunya, Junta de Castilla y León, Ayuntamiento de Madrid, Entidades locales de <comunidad>..."
+      - name: nivel_admin
+        description: "estatal | autonomico | local | empresa_publica | otro"
+      - name: cod_ccaa
+        description: "Comunidad (código INE) del pagador; '00' = Estado"
+      - name: anio
+        tests: [not_null]
+      - name: concepto
+        description: "Campaña, objeto del contrato o convocatoria"
+      - name: nombre_fuente
+        description: "Nombre del medio, adjudicatario o beneficiario tal como lo escribe la fuente"
+      - name: nif
+        description: "NIF del adjudicatario o beneficiario (contratos y subvenciones)"
+      - name: importe_eur_nominal
+        description: "Euros corrientes, tal como los da la fuente (ver iva_incluido)"
+      - name: importe_eur_real
+        description: "Euros de 2025 (main.deflactor)"
+      - name: iva_incluido
+        description: "true (Estado, supuesto; Aragón y Murcia), false (contratos, Cataluña, C. Valenciana, Ayto. de Madrid), null si la fuente no lo dice o no aplica (subvenciones)"
+      - name: base
+        description: "ejecutado | contratado | adjudicado | concedido"
+      - name: url
+        description: "Enlace al expediente (contratos), a la convocatoria en la BDNS (subvenciones) o al informe (Estado)"
+      - name: fuente
+      - name: fuente_cod
+        description: "age | territorial | contratos | subvenciones"
+      - name: duplicado_probable
+        description: "Contrato de publicidad o inserciones de una comunidad o ayuntamiento cuya publicidad por medio ya está en la fuente territorial ese año: probablemente la misma campaña; no suma en el resumen ni en la página"
+      - name: nota
+
+  - name: medios_receptores_resumen
+    description: >
+      Resumen de medios_receptores por medio, año y vía (importe real, pagos, administraciones), con
+      los totales del medio repetidos (todos los años, 2019-2025 y por vía) y el puesto entre los
+      medios privados que no son plataformas (rango_privados, por total 2019-2025) o entre los
+      públicos (rango_publicos).
+    columns:
+      - name: medio_id
+        tests: [not_null]
+      - name: anio
+      - name: via
+      - name: importe_eur_real
+      - name: n_pagos
+      - name: n_administraciones
+        description: "Órganos pagadores distintos ese año y vía"
+      - name: total_eur_real
+        description: "Total del medio, todos los años, euros de 2025"
+      - name: total_2019_2025_eur_real
+      - name: estado_institucional_eur_real
+      - name: estado_comercial_eur_real
+      - name: territorial_eur_real
+      - name: contratos_eur_real
+      - name: subvenciones_eur_real
+      - name: n_administraciones_total
+      - name: en_ranking
+        description: "Privado y no plataforma"
+      - name: rango_privados
+      - name: rango_publicos

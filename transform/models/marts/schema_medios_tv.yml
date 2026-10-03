@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: medios_tv_ccaa_anual
+    description: "Por comunidad con ente de radio-TV y año (2017-2025): aportación pública (CNMC; Valencia por la Cuenta General y la ejecución de la GVA) en millones nominales y en euros reales por habitante, cuota de pantalla del ente en su comunidad (Barlovento/Kantar), euros reales por habitante por punto de cuota y partido que gobernaba a 1 de julio."
+    tests:
+      - unique:
+          column_name: "cod_ccaa || '-' || anio"
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: meur_nominal
+        description: "Millones de euros corrientes (CNMC en 2017-2021; €/hab de la CNMC por población del INE en 2022-2025; liquidado en Valencia)."
+        tests: [not_null]
+      - name: eur_hab_real
+        description: "Euros por habitante en euros de anio_base (deflactor)."
+      - name: cuota_audiencia
+        description: "Suma de las cuotas de pantalla (%) de los canales de TV del ente en su comunidad."
+      - name: tipo
+        description: "percibido_cnmc, percibido_cnmc_eur_hab (millones reconstruidos) o liquidado."
+  - name: medios_tv_espana_anual
+    description: "España por año: dinero público a RTVE (2008-2025; Estado y tasas/aportaciones de la Ley 8/2009) y a las autonómicas (2017-2025, solo años con todas las comunidades con ente), en millones nominales y euros reales por habitante; cuota de La 1."
+    columns:
+      - name: anio
+        tests: [unique, not_null]
+  - name: medios_tv_gobiernos
+    description: "Aportación pública a las radios y TV autonómicas 2017-2025 por partido del Gobierno autonómico: euros reales por habitante y año y cuota observada frente a la esperada por población-año."
+    columns:
+      - name: familia
+        tests: [unique, not_null]

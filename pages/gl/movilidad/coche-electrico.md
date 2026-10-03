@@ -1,5 +1,5 @@
 ---
-i18n_origen: f25fe43f1389
+i18n_origen: ed78ed2e1c5f
 title: Coche eléctrico
 description: "Transición ao coche eléctrico en España: matriculacións de turismos por tipo de motor cada mes desde 2015, cota de eléctricos e híbridos enchufables por provincia e emisións de CO2."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ Cota de eléctricos e híbridos enchufables nos turismos novos dos últimos 12 m
     <ButtonGroupItem valueLabel="Todos, con frotas" value="todos" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

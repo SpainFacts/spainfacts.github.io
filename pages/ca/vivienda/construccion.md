@@ -1,10 +1,11 @@
 ---
 title: Obra nova
 description: "Habitatges lliures que es comencen i s'acaben cada any a Espanya per 1.000 habitants des del 1996, per comunitat i província, amb dades del Ministeri d'Habitatge."
-i18n_origen: 8eb6bc574063
+i18n_origen: 6b1ad71c87ca
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -144,7 +145,7 @@ Els habitatges acabats es poden comparar amb les compravendes d'habitatge nou qu
 
 Habitatges lliures acabats per 1.000 habitants el {ccaa[0]?.anio}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

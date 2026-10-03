@@ -1,12 +1,13 @@
 ---
 title: Rendición de contas dos concellos
 description: "Administracións que non cumpren as súas obrigas legais de publicar ou remitir información: quen son, onde están e quen gobernaba cando vencía o prazo."
-i18n_origen: 3425c0f0ac57
+i18n_origen: 8aa3c01a34e7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     const MESES_GL = {enero: 'xaneiro', febrero: 'febreiro', marzo: 'marzo', abril: 'abril', mayo: 'maio', junio: 'xuño', julio: 'xullo', agosto: 'agosto', septiembre: 'setembro', octubre: 'outubro', noviembre: 'novembro', diciembre: 'decembro'};
@@ -153,7 +154,7 @@ WHERE t.anio = (SELECT anio FROM ${ultimo})
 GROUP BY ALL
 ```
 
-<AreaMap
+<MapaEspana
     data={por_provincia}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

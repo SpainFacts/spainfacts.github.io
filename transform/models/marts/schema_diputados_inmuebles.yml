@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: diputados_inmuebles_diputados
+    description: >
+      Una fila por diputado en activo del Congreso (XV Legislatura) con los inmuebles y
+      alquileres que declara en su declaración INICIAL de Bienes y Rentas (Registro de
+      Intereses; PDF escaneado leído por OCR). Tabla pública: son declaraciones oficiales
+      publicadas por el Congreso. Capas de "casero": alquila (declara rentas por alquiler),
+      dos_urbanos (2+ inmuebles urbanos, garajes y trasteros incluidos), dos_viviendas
+      (2+ viviendas), dos_equivalentes (2+ urbanos completos sumando el % de titularidad).
+      Si extraccion_ok es false las métricas van a null y la fila no cuenta en los %.
+    columns:
+      - name: id_diputado
+        description: "codParlamentario del Congreso"
+        tests: [not_null, unique]
+      - name: grupo
+        description: "Grupo parlamentario abreviado (PP, PSOE, Vox, Sumar, ERC, Junts, EH Bildu, PNV, Mixto)"
+        tests: [not_null]
+      - name: formacion
+        description: "Formación electoral por la que fue elegido"
+      - name: fecha_declaracion
+        description: "Fecha de registro de la declaración inicial (del nombre del PDF)"
+      - name: ejercicio_rentas
+        description: "Año de las rentas declaradas (el anterior a la declaración)"
+      - name: n_urbanos
+        description: "Inmuebles urbanos declarados (filas; '16 viviendas' en una fila cuenta 16)"
+      - name: n_viviendas_urbanas
+        description: "Urbanos cuya clase es una vivienda (piso, casa, chalet, apartamento...)"
+      - name: urbanos_equivalentes
+        description: "Suma de la fracción de titularidad de los urbanos (% declarado; ganancial/comunidad sin % = 0,5; resto 1)"
+      - name: alquila
+        description: "Declara alguna renta cuyo concepto es un alquiler/arrendamiento de inmuebles"
+      - name: rend_capital_inmobiliario_eur
+        description: "Suma de esas rentas tal como se declaran (euros corrientes; algunos declaran neto, otros bruto o mensual)"
+      - name: rend_real_eur
+        description: "Lo anterior en euros constantes de 2025 (main.deflactor)"
+      - name: extraccion_ok
+        tests: [not_null]
+      - name: nota
+        description: "Motivo de exclusión o aviso de lectura"
+
+  - name: diputados_inmuebles_grupos
+    description: >
+      Por grupo parlamentario (y fila 'Total'): diputados, válidos, excluidos, número y % que
+      cumple cada capa de "casero", diputados sin inmuebles urbanos, medianas de inmuebles y
+      de urbanos equivalentes, y alquiler medio y mediano declarado (euros de 2025) entre los
+      que alquilan. Porcentajes sobre las declaraciones leídas correctamente.
+    columns:
+      - name: grupo
+        tests: [not_null, unique]
+
+  - name: diputados_inmuebles_resumen
+    description: >
+      Una fila por definición de "casero" (alquila, dos_urbanos, dos_viviendas,
+      dos_equivalentes, alquila_o_dos_viviendas, sin_urbanos) con n_cumplen y pct sobre
+      n_validos, más los totales (n_diputados, n_excluidos, medianas, ejercicio de las rentas).
+    columns:
+      - name: definicion_id
+        tests: [not_null, unique]
+
+  - name: diputados_inmuebles_poblacion
+    description: >
+      Comparación con la población general: % de liquidaciones del IRPF (AEAT, Estadística
+      de los declarantes del IRPF, régimen común) con ingresos del capital inmobiliario
+      (partida 102: inmuebles arrendados o cedidos) y con rentas imputadas por inmuebles a
+      disposición (partida 155), por año y tramo de rendimientos e imputaciones, más la fila
+      de los diputados (% que declara alquilar). La unidad de la AEAT es la liquidación (una
+      declaración conjunta cuenta una vez), no la persona. media_real_eur: ingreso íntegro
+      medio por liquidación con la partida (AEAT) o alquiler medio declarado (diputados), en
+      euros de 2025.
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: colectivo
+        tests: [not_null]
+      - name: indicador_id
+        tests: [not_null]

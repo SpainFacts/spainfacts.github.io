@@ -1,12 +1,13 @@
 ---
 title: Turisme
 description: "Turistes internacionals per habitant, la seva despesa descomptada la inflació i en % del PIB, pernoctacions i ocupació hotelera per comunitat, països d'origen, estacionalitat i habitatges turístics per municipi, amb dades de l'INE."
-i18n_origen: caa9f015f151
+i18n_origen: 6bfff987dc63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -480,7 +481,7 @@ Repartiment dels turistes del {paises[0]?.anio_int} per país de residència i v
 
 Pernoctacions en hotels i apartaments turístics per 1.000 habitants el {ccaa[0]?.anio}. En el conjunt d'Espanya van ser {formatNumber(ccaa_espana[0]?.pernoct_1000hab, 0)}; {ccaa[0]?.comunidad} va arribar a {formatNumber(ccaa[0]?.pernoct_1000hab, 0)} i {ccaa.slice(-1)[0]?.comunidad} es va quedar en {formatNumber(ccaa.slice(-1)[0]?.pernoct_1000hab, 0)}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -547,7 +548,7 @@ L'INE compta els habitatges anunciats com a allotjament turístic a les grans pl
 
 <p class="text-xs text-gray-500">Mesurament semestral: febrer i agost fins al 2024, maig i novembre des d'aleshores. Com que hi ha temporada (a l'estiu se n'anuncien més), convé comparar cada dada amb la del mateix mes d'un altre any.</p>
 
-<AreaMap
+<MapaEspana
     data={vut_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

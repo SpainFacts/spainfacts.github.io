@@ -1,12 +1,13 @@
 ---
 title: Heat and temperatures
 description: Daily map of heat in Spain by province, compared with the usual maximum temperature for each day in 1991-2020, and each province's records. AEMET data.
-i18n_origen: 963e5a5d3d55
+i18n_origen: 2e6c1757c41f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 
@@ -130,7 +131,7 @@ FROM mother.calor_provincia_diario
 WHERE strftime(fecha, '%Y-%m-%d') = '${inputs.fecha.value}'
 ```
 
-<AreaMap
+<MapaEspana
     data={mapa}
     geoJsonUrl="/spain-provinces.geojson"
     geoId="cod_prov"

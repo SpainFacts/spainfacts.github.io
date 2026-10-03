@@ -1,12 +1,13 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: 29801a75251e
+i18n_origen: ddca92253749
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 2025eko...)
@@ -229,7 +230,7 @@ ORDER BY anio
 
 ## Udalerriak
 
-<AreaMap
+<MapaEspana
     data={municipios}
     geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
     geoId="cod_mun"

@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -187,7 +188,7 @@ El Directorio Central de Empresas del INE cuenta a 1 de enero todas las empresas
 
 Por comunidad, {emp_ccaa[0]?.comunidad} tiene la mayor densidad empresarial, con {formatNumber(emp_ccaa[0]?.empresas_1000hab, 1)} empresas por 1.000 habitantes, y {emp_ccaa.slice(-1)[0]?.comunidad} la menor, con {formatNumber(emp_ccaa.slice(-1)[0]?.empresas_1000hab, 1)}. Las empresas se cuentan en la comunidad de su sede, no donde tienen sus establecimientos.
 
-<AreaMap
+<MapaEspana
     data={emp_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -659,7 +660,7 @@ ORDER BY i.pct_pib DESC
 
 Por comunidad, en {id_ccaa[0]?.anio} (último año con datos regionales). {id_ccaa[0]?.comunidad} dedicó a I+D el {formatNumber(id_ccaa[0]?.pct_pib, 2)} % de su PIB y {id_ccaa.slice(-1)[0]?.comunidad} el {formatNumber(id_ccaa.slice(-1)[0]?.pct_pib, 2)} %.
 
-<AreaMap
+<MapaEspana
     data={id_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

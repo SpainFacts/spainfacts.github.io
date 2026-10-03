@@ -1,10 +1,11 @@
 ---
 title: Education
 description: "Early school leaving, adult educational attainment, young people neither in employment nor in education, education spending per inhabitant and per pupil, enrolment by level and PISA, comparing Spain with the EU and by region."
-i18n_origen: 724dbfd150f1
+i18n_origen: 1ee091a54980
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -163,7 +164,7 @@ QUALIFY row_number() OVER (PARTITION BY i.cod ORDER BY i.anio DESC) = 1
 ORDER BY abandono DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={abandono_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

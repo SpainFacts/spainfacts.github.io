@@ -4,6 +4,7 @@ description: "Viviendas libres que se empiezan y se terminan cada año en Españ
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -143,7 +144,7 @@ Las viviendas terminadas se pueden comparar con las compraventas de vivienda nue
 
 Viviendas libres terminadas por 1.000 habitantes en {ccaa[0]?.anio}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -1,12 +1,13 @@
 ---
 title: Housing
 description: "House prices in Spain adjusted for inflation, rents, sales and mortgages per 1,000 inhabitants, new builds and how many years of salary a home costs, by region and province."
-i18n_origen: a02abfec5da9
+i18n_origen: 9445f0493756
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -181,7 +182,7 @@ Home sales registered in the property registries and mortgages taken out on home
 
 Real price per square metre in the latest quarter. Click on a region to see its profile.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

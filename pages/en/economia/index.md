@@ -1,7 +1,7 @@
 ---
 title: Economy
 description: "GDP per inhabitant, growth, foreign trade, sectors, employment, wages, unemployment and inflation in Spain, adjusted for inflation and in proportion to population."
-i18n_origen: a21903b3070d
+i18n_origen: 071a947706ae
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -245,6 +245,18 @@ Average gross monthly wage adjusted for inflation. [Growth, sectors and deciles 
     <a href="/en/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏢</span> Businesses, entrepreneurship and R&D</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Businesses per inhabitant and by size, companies created and dissolved, insolvencies, self-employed workers and R&D spending compared with Europe</div>
+    </a>
+    <a href="/en/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🌾</span> Agriculture, livestock and fishing</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Europe's market garden: olive oil, citrus, fruit and vegetables, pigs, wine and fishing, and Spain's place in the EU</div>
+    </a>
+    <a href="/en/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏭</span> Industry</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Cars, tiles, food, trains and wind turbines: where Spain stands out and how much industry it has compared with the EU</div>
+    </a>
+    <a href="/en/economia/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏗️</span> Construction</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">The 2007 bubble, the collapse and the recovery: employment, public works tendered, housing permits and cement compared with the EU</div>
     </a>
 </Grid>
 

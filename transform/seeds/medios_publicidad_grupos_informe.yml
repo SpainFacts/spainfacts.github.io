@@ -1,0 +1,49 @@
+version: 2
+
+seeds:
+  - name: medios_publicidad_grupos_informe
+    description: >
+      Inversión en medios de la publicidad de la Administración General del Estado por
+      grupo mediático, empresa, plataforma o comercializadora, año 2025 (primer año en
+      que se publica, por el art. 25 del Reglamento europeo de libertad de los medios,
+      EMFA). tipo 'institucional': Informe de Publicidad y Comunicación Institucional
+      2025, Anexo IV, tabla «Inversión por grupos» (págs. 163-168 del PDF, 236 filas;
+      la suma cuadra al céntimo con el TOTAL MEDIOS de 73.250.197,27 €). tipo
+      'comercial': Informe 2025 de publicidad estatal comercial, Anexo III, tabla
+      «Inversión por grupos» (págs. 99-112 del PDF, 541 filas; importes redondeados al
+      euro en el informe; la suma, 69.117.599 €, queda 11 € por encima del TOTAL GRUPOS
+      de 69.117.588 € por ese redondeo). Solo compra de medios: no incluye las «líneas
+      de apoyo a campañas» (RRPP, influencers, cartelería: 2,29 M€ institucional y 2,27
+      M€ comercial) ni producción/creatividad ni evaluación, que sí suman en el coste
+      total del Informe (88,08 M€ institucional, 84,06 M€ comercial). Las tablas por
+      grupo no traen soporte (soporte vacío). Extraído con pdfplumber
+      (scratchpad medios_publicidad_seed.py); el importe es lo que la agencia del
+      Acuerdo Marco paga a cada medio según el informe, y los nombres son los del
+      informe tal cual (mayúsculas en el comercial, p. ej. Alphabet Inc. = Google).
+    config:
+      column_types:
+        anio: integer
+        tipo: varchar
+        grupo: varchar
+        soporte: varchar
+        importe_eur: double
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        description: Año del informe (ejecución).
+      - name: tipo
+        description: "'institucional' (campañas de la Ley 29/2005) o 'comercial' (campañas comerciales de entidades públicas estatales: SELAE, Renfe, AENA, Paradores...)."
+        tests:
+          - accepted_values:
+              values: ['institucional', 'comercial']
+      - name: grupo
+        description: Grupo mediático, empresa, plataforma o comercializadora tal y como lo nombra el informe.
+      - name: soporte
+        description: Soporte (TV, radio, digital...). Vacío porque la tabla por grupos no lo desglosa.
+      - name: importe_eur
+        description: Inversión en medios en euros nominales de 2025.
+      - name: fuente
+        description: URL del PDF con ancla a la página y tabla de origen de la fila.
+      - name: nota
+        description: "Marca orientativa: 'plataforma digital o tecnológica, no medio de comunicación' (Google/Alphabet, Meta, Spotify, Amazon, Netflix, ByteDance...), 'medio público (o entidad pública)' (RTVE y radiotelevisiones autonómicas, EFE, ayuntamientos) o filas repetidas en el informe."

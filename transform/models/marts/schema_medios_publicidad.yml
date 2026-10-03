@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: medios_publicidad_age_anual
+    description: >
+      Publicidad de la Administración General del Estado por año, 2006-2025 ejecutado
+      (2007-2026 planificado; 2016 sin plan). Coste total ejecutado de las campañas
+      institucionales y comerciales (producción + compra de medios + evaluación) y lo
+      planificado, en euros nominales, euros constantes y euros constantes por
+      habitante, con el % de ejecución del plan institucional y el presidente y la
+      familia política del Gobierno a 1 de julio. Fuente: CSV de la Comisión de
+      Publicidad y Comunicación Institucional (La Moncloa). IVA: los informes no lo
+      dicen; los importes por medio del Informe 2025 son mayoritariamente múltiplos
+      de 1,21, por lo que se asume que llevan IVA.
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+      - name: institucional_eur_nominal
+        description: Coste ejecutado de las campañas institucionales (Ley 29/2005), euros corrientes.
+      - name: comercial_eur_nominal
+        description: Coste ejecutado de las campañas comerciales (SELAE, Renfe, AENA, Paradores...), euros corrientes.
+      - name: total_eur_nominal
+        description: Institucional + comercial, euros corrientes.
+      - name: planificado_eur_nominal
+        description: Presupuesto institucional del Plan anual (nulo en 2006 y 2016).
+      - name: institucional_eur_hab_real
+        description: Institucional en euros constantes (año base del deflactor) por habitante.
+      - name: comercial_eur_hab_real
+        description: Comercial en euros constantes por habitante.
+      - name: ejecucion_pct
+        description: Ejecutado institucional / planificado institucional, en %.
+      - name: familia
+        description: Partido del presidente del Gobierno a 1 de julio (gobiernos_presidentes, estatal).
+      - name: presidente
+      - name: color
+        description: Color de la familia (seed partidos_familias).
+
+  - name: medios_publicidad_age_medios
+    description: >
+      Inversión de la publicidad de la AGE por herramienta o tipo de medio y año.
+      ambito 'institucional' (2006-, nueve herramientas) o 'institucional_comercial'
+      (2009-, TV, radio, gráficos, digital y resto). Es la difusión (sin producción ni
+      evaluación). pct = % sobre la suma de herramientas del año y ámbito (en 2020 y 2024 el total del CSV no cuadra con sus partes).
+    columns:
+      - name: anio
+      - name: ambito
+      - name: medio
+        description: television, radio, medios_graficos, digital, exterior, cine, relaciones_publicas, marketing, otras, resto.
+      - name: medio_nombre
+      - name: eur_hab_real
+        description: Euros constantes por habitante.
+      - name: pct
+        description: "% de la suma de herramientas del año y ámbito."
+
+  - name: medios_publicidad_grupos
+    description: >
+      Inversión en medios de la publicidad de la AGE en 2025 por grupo mediático,
+      empresa o plataforma (Informe 2025, Anexo IV, institucional; Informe 2025 de
+      publicidad comercial, Anexo III), con euros por habitante, % del total del tipo y
+      puesto. Sin producción, evaluación ni líneas de apoyo. Seed
+      medios_publicidad_grupos_informe.
+    columns:
+      - name: tipo
+        tests:
+          - accepted_values:
+              values: ['institucional', 'comercial']
+      - name: grupo
+      - name: importe_eur_nominal
+      - name: eur_hab_real
+      - name: pct
+      - name: puesto
+      - name: es_plataforma
+        description: Plataforma digital o tecnológica (Google/Alphabet, Meta, Spotify, Amazon, Netflix...), no medio de comunicación.
+      - name: es_publico
+        description: Medio público (RTVE, radiotelevisiones autonómicas, EFE) o entidad pública.
+
+  - name: medios_publicidad_gobiernos
+    description: >
+      Publicidad de la AGE por presidente del Gobierno (a 1 de julio de cada año),
+      2006-2025: media anual de euros constantes por habitante (institucional,
+      comercial y total), mínimo, máximo, años y % medio de ejecución del plan.
+      Orientativo: campañas obligatorias (elecciones, COVID 2020-2022) pesan en
+      ciertos años.
+    columns:
+      - name: presidente
+        tests: [not_null]
+      - name: familia
+      - name: anios
+      - name: institucional_eur_hab_real_media

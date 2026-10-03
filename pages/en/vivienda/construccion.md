@@ -1,10 +1,11 @@
 ---
 title: New builds
 description: "Open-market homes started and completed each year in Spain per 1,000 inhabitants since 1996, by region and province, with data from the Ministry of Housing."
-i18n_origen: 8eb6bc574063
+i18n_origen: 6b1ad71c87ca
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -144,7 +145,7 @@ Completed homes can be compared with the sales of new homes recorded by the INE 
 
 Open-market homes completed per 1,000 inhabitants in {ccaa[0]?.anio}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

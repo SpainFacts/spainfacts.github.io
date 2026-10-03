@@ -1,12 +1,13 @@
 ---
 description: "Fitxa de la província: població, municipis, comptes dels ajuntaments, deute, seguretat i vehicles, amb dades oficials."
-i18n_origen: 29801a75251e
+i18n_origen: ddca92253749
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../../src/lib/utils.js';
 </script>
@@ -227,7 +228,7 @@ ORDER BY anio
 
 ## Municipis
 
-<AreaMap
+<MapaEspana
     data={municipios}
     geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
     geoId="cod_mun"

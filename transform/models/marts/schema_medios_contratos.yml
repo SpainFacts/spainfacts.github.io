@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: medios_contratos_base
+    description: >
+      Contratos públicos adjudicados a empresas de medios de comunicación (PLACSP, Ministerio de
+      Hacienda: perfiles, plataformas agregadas y contratos menores), una fila por expediente ×
+      órgano × lote × adjudicatario, deduplicado con la última actualización. Adjudicatarios del
+      padrón seed medios_padron_nif (es_medio 'si' o 'gris'). Importe adjudicado sin IVA (no
+      pagado) y en euros de 2025. categoria por reglas de texto del objeto. sospechoso = importe
+      > 5 M€ o acuerdo marco de 1 M€ o más con varios adjudicatarios del mismo lote con el mismo
+      importe (excluidos de los totales). Desde la ampliación de 2026-10-03 incluye también los
+      contratos MENORES de las plataformas autonómicas y municipales que PLACSP no trae
+      (fuente_plataforma: cat_pscp y cat_rpc en Cataluña, eus_kontratazioa, and_junta, gal_xunta,
+      rio_car, mad_ayto, bcn_ayto, mad_cm, nav_portal; ingestion/medios_contratos_ccaa.py), sin los que ya llegan por
+      PLACSP. Es un MÍNIMO documentado: siguen faltando los menores de la Comunidad de Madrid y de
+      Navarra, los de Cataluña de 2018-2020 (salvo Barcelona 2018), los de los entes locales andaluces,
+      gallegos y riojanos que no los suben a PLACSP, los de las capitales con perfil en PLACSP que no
+      publican allí sus menores y la publicidad contratada a través de agencias de medios.
+    columns:
+      - name: id_conjunto
+        description: "perfiles | agregadas | menores (PLACSP) | plataformas_autonomicas"
+      - name: fuente_plataforma
+        description: "placsp | cat_pscp (PSCP Cataluña, con NIF) | cat_rpc (Registre públic de contractes, sin NIF) | eus_kontratazioa | and_junta | gal_xunta | rio_car | mad_ayto | bcn_ayto | mad_cm (Comunidad de Madrid, buscador por NIF) | nav_portal (Navarra, relaciones trimestrales de facturas, casado por nombre)"
+      - name: metodo_casado
+        description: "nif | nombre (solo cat_rpc: nombre normalizado idéntico a un nombre conocido de un NIF del padrón, sin ambigüedad)"
+      - name: importe_sin_iva_estimado
+        description: "true si la fuente solo da el importe con IVA (gal_xunta, rio_car, mad_ayto, nav_portal) y el importe sin IVA se ha estimado (÷1,04 suscripciones y prensa, ÷1,21 resto)"
+      - name: nivel
+        description: "estatal | autonomico | local | empresa_publica | otro (universidades, órganos constitucionales, mutuas)"
+      - name: ambito
+        description: "Administración de la que depende el órgano: estatal | autonomico | local | otro"
+      - name: cod_ccaa
+        description: "Comunidad del órgano (código INE)"
+      - name: cod_municipio
+        description: "Código INE del municipio del órgano (ayuntamientos y sus entes), null en el resto"
+      - name: grupo
+        description: "Grupo mediático del adjudicatario según el padrón"
+      - name: titularidad
+        description: "privada | publica (EFE, RTVE, radiotelevisiones autonómicas y locales)"
+      - name: es_medio
+        description: "si | gris (dudoso: comercializadoras, asociaciones, revistas profesionales...)"
+      - name: categoria
+        description: "patrocinio_eventos | publicidad_inserciones | suscripciones_servicios_informativos | especiales_suplementos_revistas | otros"
+      - name: importe_adjudicado_sin_iva
+        description: "Importe adjudicado sin IVA, euros corrientes"
+      - name: importe_eur_real
+        description: "Importe adjudicado sin IVA en euros de 2025 (main.deflactor)"
+      - name: anio
+        description: "Año de adjudicación (o de la última actualización si falta: fecha_es_actualizacion)"
+      - name: sospechoso
+        description: "true si importe > 5 M€ o acuerdo marco (>= 1 M€) con varios adjudicatarios del mismo lote y el mismo importe: excluido de los totales"
+  - name: medios_contratos_anual
+    description: >
+      Contratos a empresas de medios por año, nivel, comunidad del ámbito y categoría del objeto.
+      Columnas principales solo con medios privados es_medio='si' y sin sospechosos; gris y medios
+      públicos en columnas aparte. eur_hab_real con la población de España (estatal) o de la
+      comunidad (autonómico y local). familia/presidente = partido que gobernaba a 1 de julio
+      (estatal y autonómico). parcial = año en curso. importe_autonomicas_eur_real y
+      n_contratos_autonomicas = parte que llega de las plataformas autonómicas y municipales;
+      fuente_plataforma = lista de fuentes de la fila. nota = cobertura de los menores de cada
+      comunidad (qué plataforma los aporta y qué falta: Comunidad de Madrid, Navarra, Cataluña
+      2018-2020...).
+  - name: medios_contratos_grupos
+    description: >
+      Contratos a empresas de medios por grupo, titularidad, año y nivel: importe real, €/hab
+      (España), contratos, menores, importe por categoría, sociedades y órganos. Solo es_medio='si'
+      y sin sospechosos; los públicos se separan con titularidad. importe_autonomicas_eur_real,
+      n_contratos_autonomicas y fuente_plataforma como en medios_contratos_anual.
+  - name: medios_contratos_municipios
+    description: >
+      Contratos a empresas de medios de los ayuntamientos y sus entes por municipio y año, con
+      €/hab real del municipio y la familia del alcalde a 1 de julio (alcaldes_historia). Solo
+      municipios con órgano identificado. Un cero no es gasto cero: muchas capitales no suben
+      sus menores a PLACSP, y faltan los menores de los municipios navarros, madrileños (salvo
+      Madrid capital) y catalanes de 2018-2020. importe_autonomicas_eur_real y fuente_plataforma
+      como en medios_contratos_anual.
+  - name: medios_contratos_ejemplos
+    description: >
+      Los 50 mayores contratos de patrocinio y eventos (patrocinios, foros, jornadas, congresos,
+      premios, galas, desayunos, encuentros, aniversarios, giras...) de cada año a empresas de
+      medios (es_medio='si', sin sospechosos), con objeto, órgano, adjudicatario, importe, enlace,
+      fuente_plataforma y metodo_casado.

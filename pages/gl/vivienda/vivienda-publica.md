@@ -1,12 +1,13 @@
 ---
 title: Vivenda pública en aluguer
 description: "Cantas vivendas públicas en aluguer hai en España por habitante e en % dos fogares, por comunidade, provincia e municipio, comparadas cos Países Baixos, Austria, Dinamarca, Francia e a media europea, e segundo o partido que gobernaba."
-i18n_origen: 4f3c32fd277f
+i18n_origen: ee03022518f8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import EnConstruccion from '../../../../../../../src/lib/components/EnConstruccion.svelte';
@@ -330,7 +331,7 @@ O Ministerio compara tamén en **% dos fogares** (vivendas principais) con datos
 
 Vivendas públicas en aluguer que se coñecen por cada 1.000 habitantes: as da comunidade (dato completo de 2023) máis as dos concellos de máis de 20.000 habitantes que responderon á enquisa (dato parcial). Preme nunha comunidade para ver a súa ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -378,7 +379,7 @@ Sen contar Ceuta e Melilla, os parques autonómicos en aluguer máis grandes por
 
 Non existe un reconto oficial do parque autonómico por provincia: as comunidades declárano en bloque. O que si se coñece por provincia é o **parque municipal en aluguer que declararon os concellos de máis de 20.000 habitantes** ({cobertura_mun[0]?.respondieron} responderon en 2023, {cobertura_mun[0]?.dato_2019} repiten o seu dato de 2019 e {cobertura_mun[0]?.sin_dato} non deron cifras). O mapa amósao por 1.000 habitantes da provincia; unha provincia en branco pode ter parque autonómico, ou municipios que non responderon.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

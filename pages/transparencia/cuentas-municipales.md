@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -150,7 +151,7 @@ WHERE t.anio = (SELECT anio FROM ${ultimo})
 GROUP BY ALL
 ```
 
-<AreaMap
+<MapaEspana
     data={por_provincia}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

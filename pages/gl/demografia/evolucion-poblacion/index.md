@@ -1,10 +1,11 @@
 ---
 title: Evolución da poboación
 description: "Poboación de España desde 1971 e o seu crecemento anual por 1.000 habitantes, separado en nacementos menos defuncións e migración, por comunidade e provincia (INE)."
-i18n_origen: 40e6678c9212
+i18n_origen: f9535ffb3b9d
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -203,7 +204,7 @@ FROM ${provincias}
 
 Hoxe hai {provincias_resumen[0]?.pierden_10} provincias con menos habitantes ca hai dez anos, e {provincias_resumen[0]?.pierden_2000} con menos ca en 2000.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,12 +1,13 @@
 ---
 title: Immigration
 description: "Foreign population in Spain by region and nationality, net migration, irregular arrivals by route, asylum applications and naturalisations, with official data."
-i18n_origen: 4dc4692f98aa
+i18n_origen: 198ef257d0f8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -136,7 +137,7 @@ WHERE i.nivel = 'ccaa' AND i.anio = (SELECT max(anio) FROM mother.inmigracion_po
 ORDER BY i.pct_extranjeros DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

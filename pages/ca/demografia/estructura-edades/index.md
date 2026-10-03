@@ -1,10 +1,11 @@
 ---
 title: Edats i envelliment
 description: "Piràmides de població d'Espanya, de cada comunitat i de cada província; percentatge de més grans de 65 i 80 anys, taxa de dependència i edat mitjana des de 1971 (INE)."
-i18n_origen: 2565fd7bf5bc
+i18n_origen: 4e6c769248eb
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ ORDER BY e.pct_65 DESC
 
 La província més envellida és {provincias[0]?.provincia}, amb un {formatNumber(provincias[0]?.pct_65 / 0.01, 1)} % de més grans de 65 anys i una edat mitjana de {formatNumber(provincias[0]?.edad_media, 1)} anys; la més jove, {provincias.slice(-1)[0]?.provincia}, amb un {formatNumber(provincias.slice(-1)[0]?.pct_65 / 0.01, 1)} %.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,5 +1,5 @@
 ---
-i18n_origen: 8c5314133b0c
+i18n_origen: 3f26672a5738
 title: Publicidade activa
 description: "Publican as administracións nos seus portais de transparencia o que lles obriga a lei? Avaliacións oficiais por entidade (Consello de Transparencia e Bo Goberno e Comisionado de Transparencia de Canarias), a súa evolución, a comparación por partido e o que aínda non se pode medir."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -330,7 +331,7 @@ A mellora é clara: a nota media dos concellos pasou de {formatNumber(itc_aytos_
 
 ### Concellos, {itc_ultimo[0]?.etiqueta}
 
-<AreaMap
+<MapaEspana
     data={itc_aytos_ultimo}
     geoJsonUrl="/geo/municipios/05.geojson"
     geoId="cod_mun"

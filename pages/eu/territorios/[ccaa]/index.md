@@ -1,12 +1,13 @@
 ---
 description: "Autonomia-erkidegoaren fitxa: biztanleria, ekonomia, kontu publikoak, zorra, enplegu publikoa, segurtasuna eta gehiago, datu ofizialekin eta Espainiarekin alderatuta."
-i18n_origen: 55d7a9bd23d8
+i18n_origen: aebfea10a885
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
@@ -270,7 +271,7 @@ ORDER BY anio
 
 ## Udalerriak
 
-<AreaMap
+<MapaEspana
     data={municipios}
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"

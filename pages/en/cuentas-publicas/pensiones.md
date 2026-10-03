@@ -1,10 +1,11 @@
 ---
 title: Pensions
 description: "Contributory pensions in Spain: average pension adjusted for inflation, contributors per pension, pension spending as a % of GDP compared with the EU, pensions per inhabitant and by region and province."
-i18n_origen: cc5339743926
+i18n_origen: 3f8817a42d1f
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 
@@ -391,7 +392,7 @@ Number of pensions per 1,000 inhabitants and per 100 people aged 65 or over (INE
 
 Data for {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (average of the {ccaa_extremos[0]?.meses} months published){/if}, in {mensual[0]?.anio_euros} euros. The highest average retirement pension is in {ccaa_extremos[0]?.max_nombre} (€{formatNumber(ccaa_extremos[0]?.max_valor, 0)}) and the lowest in {ccaa_extremos[0]?.min_nombre} (€{formatNumber(ccaa_extremos[0]?.min_valor, 0)}). Contributors per pension range from {formatNumber(ccaa_extremos[0]?.ratio_max_valor, 2)} in {ccaa_extremos[0]?.ratio_max_nombre} to {formatNumber(ccaa_extremos[0]?.ratio_min_valor, 2)} in {ccaa_extremos[0]?.ratio_min_nombre}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -422,7 +423,7 @@ Data for {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (average of 
 
 ### By province
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

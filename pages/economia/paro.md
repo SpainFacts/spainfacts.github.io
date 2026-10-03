@@ -4,6 +4,7 @@ description: "Tasa de paro en España por sexo, edad, nacionalidad, estudios y t
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -437,7 +438,7 @@ Porcentaje de asalariados con contrato temporal y porcentaje de quienes trabajan
 
 Media de los cuatro últimos trimestres, para suavizar el ruido de la muestra de la EPA en los territorios pequeños. La comunidad con más paro es {terr_resumen[0]?.ccaa_max} ({formatNumber(terr_resumen[0]?.ccaa_max_tasa / 0.01, 1)} %) y la que menos {terr_resumen[0]?.ccaa_min} ({formatNumber(terr_resumen[0]?.ccaa_min_tasa / 0.01, 1)} %). Por provincias, el rango va de {terr_resumen[0]?.prov_min} ({formatNumber(terr_resumen[0]?.prov_min_tasa / 0.01, 1)} %) a {terr_resumen[0]?.prov_max} ({formatNumber(terr_resumen[0]?.prov_max_tasa / 0.01, 1)} %). Pulsa en un territorio para ver su ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -467,7 +468,7 @@ Media de los cuatro últimos trimestres, para suavizar el ruido de la muestra de
     <Column id=hogares_todos_parados title="Hogares todos en paro" fmt=pct1 />
 </DataTable>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -4,6 +4,7 @@ description: "Cuántos hombres hay por cada 100 mujeres en España según la eda
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -140,7 +141,7 @@ ORDER BY ratio DESC
 ```
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={provincias}
         geoJsonUrl="/geo/provincias.geojson"
         geoId="cod_prov"

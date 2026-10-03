@@ -1,0 +1,86 @@
+version: 2
+
+seeds:
+  - name: medios_cabeceras
+    description: >
+      Tabla de MEDIOS tal como los conoce el lector (cabecera o marca: OKDiario, Libertad Digital,
+      El País, Cadena SER...), para el buscador «Quién recibe qué» (mart medios_receptores). Generada
+      una vez con un script (2026-10-03) y revisable a mano: 204 entidades revisadas a mano (origen
+      'curado': cabeceras nacionales y regionales, sociedades multimarca, grupos, medios públicos y
+      plataformas) más entidades automáticas de medios locales con importes relevantes: 'auto_nif'
+      (sociedades del padrón medios_padron_nif o beneficiarios de la BDNS con 25.000 € o más entre
+      contratos y subvenciones, sin grupo con entidad propia, sin asociaciones ni colegios
+      profesionales) y 'auto_nombre' (nombres de medio de la publicidad institucional territorial con
+      250.000 € o más que no casan con ninguna entidad curada ni con un grupo clasificado, quitando
+      exterior, programática, agencias y producción). NIF de las editoras tomados de los propios
+      adjudicatarios de PLACSP y beneficiarios de la BDNS (columna nif de medios_contratos_base y
+      medios_subvenciones_concesiones), y del padrón medios_padron_nif; las sociedades editoras de
+      las cabeceras digitales (Dos Mil Palabras = OKDiario, Libertad Digital S.A. = Libertad Digital
+      y esRadio, El León de El Español Publicaciones = El Español, Diario de Prensa Digital =
+      elDiario.es, Titania = El Confidencial, Display Connectors = Público, Ediciones Prensa Libre
+      = infoLibre, Ediciones Católicos y Vida Pública = El Debate) se comprueban con los objetos de
+      los contratos («suscripción a infolibre», «publicidad en El Debate», «emisora esRadio, del
+      grupo de comunicación Libertad Digital»).
+      Grupos multimedia: cuando una sociedad edita varias marcas y la fuente no las separa, la
+      entidad es la sociedad («Antena 3, laSexta y otros canales (Atresmedia Corporación)»,
+      «COPE, Cadena 100 y Rock FM (Radio Popular, S.A.)») o el grupo («Unidad Editorial (El Mundo,
+      Marca, Expansión; sin separar)», tipo 'grupo').
+    config:
+      column_types:
+        medio_id: varchar
+        medio: varchar
+        grupo: varchar
+        tipo: varchar
+        titularidad: varchar
+        origen: varchar
+        nota: varchar
+    columns:
+      - name: medio_id
+        description: "Identificador estable (slug). Entidades automáticas: nif_<nif> o loc_<nombre>."
+        tests: [unique, not_null]
+      - name: medio
+        description: "Nombre visible en el desplegable"
+      - name: grupo
+        description: "Grupo de comunicación propietario (mismos nombres que medios_padron_nif y medios_grupos_equivalencias); para los medios locales sin grupo, el propio medio"
+      - name: tipo
+        description: "prensa | digital | radio | tv | agencia | grupo (varias cabeceras sin separar) | plataforma (Google, Meta, TikTok...: fuera del ranking de medios)"
+      - name: titularidad
+        description: "privada | publica (RTVE, radiotelevisiones autonómicas y locales, EFE, ACN)"
+      - name: origen
+        description: "curado | auto_nif | auto_nombre"
+      - name: nota
+        description: "Sociedad editora y avisos de asignación"
+
+  - name: medios_cabeceras_alias
+    description: >
+      Cómo aparece cada medio de medios_cabeceras en cada fuente. tipo_patron: 'nif' (NIF del
+      adjudicatario de PLACSP o del beneficiario de la BDNS, exacto), 'nombre_exacto' (nombre
+      normalizado: minúsculas, sin tildes y con todo lo que no es letra o número convertido en un
+      espacio), 'contiene' (el nombre normalizado contiene el patrón como palabras completas) y
+      'grupo' (último recurso: el grupo normalizado que ya traen medios_publicidad_territorial_gasto,
+      medios_contratos_base o medios_padron_nif). Prioridad: nif > nombre_exacto > contiene (gana el
+      patrón más largo) > grupo. fuente: 'age' (publicidad del Estado por grupo, 2025),
+      'territorial' (publicidad de comunidades y ayuntamientos, columna medio), 'todas'.
+    config:
+      column_types:
+        medio_id: varchar
+        patron: varchar
+        tipo_patron: varchar
+        fuente: varchar
+    columns:
+      - name: medio_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('medios_cabeceras')
+              field: medio_id
+      - name: patron
+        tests: [not_null]
+      - name: tipo_patron
+        tests:
+          - accepted_values:
+              values: ['nif', 'nombre_exacto', 'contiene', 'grupo']
+      - name: fuente
+        tests:
+          - accepted_values:
+              values: ['age', 'territorial', 'contratos', 'subvenciones', 'todas']

@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
 </script>
@@ -180,7 +181,7 @@ Compraventas de viviendas inscritas en los registros de la propiedad e hipotecas
 
 Precio real del metro cuadrado en el último trimestre. Pulsa en una comunidad para ver su ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

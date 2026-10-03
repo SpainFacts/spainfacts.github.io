@@ -1,0 +1,999 @@
+nif,nombre,grupo,tipo,titularidad,es_medio,fuente_identificacion,nota
+B50941855,"AGENCIA ARAGONESA DE NOTICIAS, S.L.",Agencia Aragonesa de Noticias,agencia_noticias,privada,si,placsp_nombre,
+A28028744,"AGENCIA EFE, S.A.U.",Agencia EFE,agencia_noticias,publica,si,placsp_nombre,Agencia EFE (SEPI)
+B09544495,AGENCIA DE NOTICIAS ICAL S.L.,Agencia ICAL,agencia_noticias,privada,si,placsp_nombre,Agencia ICAL
+A28782936,"UNIPREX, S.A.U.",Atresmedia-Planeta,radio,privada,si,placsp_nombre;bdns,"Uniprex (Onda Cero, Europa FM)"
+A78839271,ATRESMEDIA CORPORACIÓN DE MEDIOS DE COMUNICACIÓN S.A.,Atresmedia-Planeta,tv,privada,si,bdns_terceros,Atresmedia Corporación
+A82031329,"AUDIOVISUAL ESPAÑOLA 2000, S.A.",Atresmedia-Planeta,prensa,privada,si,placsp_nombre;bdns_terceros,"La Razón (Audiovisual Española 2000); Planeta: solo La Razón, no Editorial Planeta"
+B85498723,"Smartclip Hispania, S.L.",Atresmedia-Planeta,digital,privada,si,bdns_terceros,Smartclip (publicidad digital del grupo)
+A99051039,"Televisión Autonómica de Aragón, S.A.U.",CARTV (Aragón TV y Aragón Radio),tv,publica,si,placsp_nombre,Aragón TV
+A08849622,"CORPORACIÓ CATALANA DE MITJANS AUDIOVISUALS, SA",CCMA (Corporació Catalana de Mitjans Audiovisuals),tv,publica,si,placsp_nombre,"CCMA (TV3, Catalunya Ràdio)"
+A45494994,TELEVISION AUTONOMICA CASTILLA LA MANCHA,CMM (Castilla-La Mancha Media),tv,publica,si,placsp_nombre,Castilla-La Mancha Media
+B45494986,RADIO AUTONÓMICA DE CASTILLA LA MANCHA S.A.,CMM (Castilla-La Mancha Media),radio,publica,si,placsp_nombre,CMM Radio (NIF mal tecleado por el órgano)
+B45785219,Radio autonómica de Castilla la Mancha S.A,CMM (Castilla-La Mancha Media),radio,publica,si,placsp_nombre,CMM Radio (NIF mal tecleado por el órgano)
+A28281308,"RADIO POPULAR, S.A. - COPE SEVILLA",COPE-Ábside Media,radio,privada,si,placsp_nombre,COPE Sevilla (NIF mal tecleado por el órgano)
+A28281368,RADIO POPULAR S.A. - COPE,COPE-Ábside Media,radio,privada,si,placsp_nombre;bdns,Cadena COPE
+A85826477,"13TV, S.A.",COPE-Ábside Media,tv,privada,si,rueca,TRECE (13TV)
+A15073349,"CORPORACION RADIO TELEVISION DE GALICIA, S.A.U",CRTVG,tv,publica,si,placsp_nombre,CRTVG
+A35054519,"INFORMACIONES CANARIAS, S.A.",Canarias7,prensa,privada,si,placsp_nombre,Canarias7 (Informaciones Canarias)
+B78557758,Ediciones Conde Nast SLU.,Condé Nast,revista,privada,si,placsp_nombre,"Vogue, Traveler, GQ"
+A43056787,PROMOTORA MEDITERRANEA DE INFORMACIONES Y COMUNICACIONES SA,Diari de Tarragona,prensa,privada,si,placsp_nombre;bdns,Diari de Tarragona
+A24000291,"EL DIARIO DE LEON, S.A.",Diario de León,prensa,privada,si,placsp_nombre;bdns_terceros,Diario de León
+B24000291,"DIARIO DE LEON, S.A.",Diario de León,prensa,privada,si,placsp_nombre,Diario de León (NIF mal tecleado por el órgano)
+A48139224,EUSKO IRRATIA S.A.,EITB,radio,publica,si,placsp_nombre,Eusko Irratia (EITB)
+A48139232,"EITB MEDIA, S.A.U.",EITB,tv,publica,si,placsp_nombre,EITB Media
+A84289230,"EDITORIAL ECOPRENSA, S.A.",Ecoprensa (elEconomista),prensa,privada,si,bdns_terceros,Editorial Ecoprensa
+A38017844,EDITORIAL LEONCIO RODRIGUEZ S.A.,Editorial Leoncio Rodríguez,prensa,privada,si,bdns_terceros,El Día (Tenerife)
+B42964189,"TITANIA SUR IBERICA, S.L.",El Confidencial,digital,privada,si,placsp_nombre,Titania Sur Ibérica
+B82938572,"TITANIA COMPAÑÍA EDITORIAL, S.L.",El Confidencial,digital,privada,si,placsp_nombre;bdns_terceros,Titania
+A82410044,Prensa Europea del Siglo XXI (El Cultural),El Español,revista,privada,si,placsp_nombre,El Cultural (NIF mal tecleado por el órgano)
+A87115226,"El León de El Español Publicaciones, S.A.",El Español,digital,privada,si,placsp_nombre,El Español
+B82410044,"PRENSA EUROPEA DEL SIGLO XXI, S.L.",El Español,revista,privada,si,placsp_nombre,El Cultural (Prensa Europea del Siglo XXI)
+A08536922,EUROPA PRESS DE CATALUNYA SA,Europa Press,agencia_noticias,privada,si,bdns,Europa Press Catalunya
+A28078343,"EUROPA PRESS NOTICIAS, S.A.",Europa Press,agencia_noticias,privada,si,bdns_terceros,Europa Press Noticias
+A28509883,Europa Press Televisión,Europa Press,agencia_noticias,privada,si,bdns_terceros,Europa Press Televisión
+A41606534,"EUROPA PRESS DELEGACIONES, S.A.",Europa Press,agencia_noticias,privada,si,placsp_nombre;bdns,Europa Press Delegaciones
+A78526852,"Europa Press Comunicación, S.A.",Europa Press,agencia_noticias,privada,si,bdns_terceros,Europa Press Comunicación
+A85716843,"EUROPA PRESS TEMÁTICA, S.A.",Europa Press,agencia_noticias,privada,si,bdns_terceros,Europa Press Temática
+A86466430,Europa Press Medios,Europa Press,agencia_noticias,privada,si,bdns_terceros,Europa Press Medios
+G79362133,"FED. DE ORGANISMOS RADIO Y TV AUTONÓMICOS, FORTA",FORTA (televisiones autonómicas),tv,publica,gris,placsp_nombre,FORTA (federación de radiotelevisiones autonómicas)
+A60032992,"RADIO FLAIXBAC, SA.",Grup Flaix,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B60000841,"FLAIX FM,SL",Grup Flaix,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B25275926,DIARI SEGRE SLU,Grup Segre,prensa,privada,si,placsp_nombre;bdns,Diari Segre
+B57806762,EDICIONS PERIODIQUES ARA-BALEARS SL,Grupo Ara,prensa,privada,si,bdns,Ara Balears
+B65258261,"EDICIÓ DE PREMSA PERIÒDICA ARA, SL",Grupo Ara,prensa,privada,si,bdns,Ara
+B65474843,EDICIONS CLARIANA SL,Grupo Ara,prensa,privada,si,placsp_nombre,Edicions Clariana (Ara)
+A08105702,Grupo Godó de Comunicación,Grupo Godó,eventos_grupo,privada,si,bdns_terceros,Grupo Godó de Comunicación
+A59114082,"EL MUNDO DEPORTIVO,SAU",Grupo Godó,prensa,privada,si,bdns,Mundo Deportivo
+B61475257,"LA VANGUARDIA EDICIONES, S.L.",Grupo Godó,prensa,privada,si,placsp_nombre;bdns,La Vanguardia
+B61726626,"Radiocat XXI, SL",Grupo Godó,radio,privada,si,bdns,RAC1 (Radiocat XXI)
+A22020812,"PUBLICACIONES Y EDICIONES DEL ALTOARAGON, S.A.",Grupo Henneo,prensa,privada,si,placsp_nombre,Diario del AltoAragón
+A50001973,Henneo Media,Grupo Henneo,eventos_grupo,privada,si,bdns_terceros,Henneo Media
+B71043558,Henneo Corporación Editorial,Grupo Henneo,eventos_grupo,privada,si,bdns_terceros,Henneo Corporación Editorial
+B99083966,"20 MINUTOS EDITORA, S.L.",Grupo Henneo,digital,privada,si,bdns,20minutos
+B99288763,HERALDO DE ARAGON EDITORA SLU,Grupo Henneo,prensa,privada,si,placsp_nombre,Heraldo de Aragón
+A11628732,"DIARIO DE JEREZ, S.A.",Grupo Joly,prensa,privada,si,placsp_nombre,Diario de Jerez
+A41926460,"EDITORIAL ANDALUZA DE PERIÓDICOS INDEPENDIENTES, S.A.",Grupo Joly,prensa,privada,si,bdns_terceros,Editorial Andaluza de Periódicos Independientes
+B04615886,EDITORIAL ALMERIENSE PUBLICACIONES INDEPENDIENTES SL,Grupo Joly,prensa,privada,si,placsp_nombre,Diario de Almería
+B11000221,"FEDERICO JOLY Y CIA, S.L.",Grupo Joly,prensa,privada,si,placsp_nombre,Grupo Joly
+B11448339,Ediciones Europa Sur S.L,Grupo Joly,prensa,privada,si,placsp_nombre,Europa Sur
+B11448503,"DIARIO DE CÁDIZ, S.L.",Grupo Joly,prensa,privada,si,placsp_nombre,Diario de Cádiz
+B18655613,"EDITORIAL GRANADINA DE PUBLICACIONES, S.L.",Grupo Joly,prensa,privada,si,placsp_nombre,Granada Hoy
+A31419385,"Diario de Navarra, S.A.",Grupo La Información (Diario de Navarra),prensa,privada,si,bdns_terceros,Diario de Navarra
+B71028898,Diario de Navarra Digital,Grupo La Información (Diario de Navarra),digital,privada,si,bdns_terceros,Diario de Navarra Digital
+A31455082,Zeroa Multimedia S A,Grupo Noticias,prensa,privada,si,placsp_nombre;bdns,Diario de Noticias de Navarra (Zeroa Multimedia)
+A48082440,"EDITORIAL IPARRAGUIRRE, S.A.",Grupo Noticias,prensa,privada,si,bdns_terceros,Deia (Editorial Iparraguirre)
+A98205099,EDICIONES PLAZA SA,Grupo Plaza,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B40516650,"Ediciones Castellón Plaza 2018, S.L.U.",Grupo Plaza,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54711825,EDICIONES LA MARINA PLAZA SL,Grupo Plaza,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98205099,"EDICIONES PLAZA, S.L.",Grupo Plaza,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A04157087,Radio Sabinal S.L.,Grupo Prisa,radio,privada,gris,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+A12037362,Radio Castellón S.A.,Grupo Prisa,radio,privada,si,placsp_nombre;bdns,Radio Castellón (Cadena SER)
+A22009047,RADIO HUESCA S.A.,Grupo Prisa,radio,privada,si,placsp_nombre,Radio Huesca (Cadena SER)
+A24029369,"RADIO LEON, S.A.",Grupo Prisa,radio,privada,si,placsp_nombre,Radio León (NIF mal tecleado por el órgano)
+A24029969,Radio León S.A. (Cadena SER),Grupo Prisa,radio,privada,si,placsp_nombre,Radio León (Cadena SER)
+A26000695,"RADIO RIOJA, S.A.",Grupo Prisa,radio,privada,si,placsp_nombre,Radio Rioja (Cadena SER)
+A27019710,RADIO LUGO S.A.,Grupo Prisa,radio,privada,si,placsp_nombre;bdns;rueca,Radio Lugo (Cadena SER)
+A27111368,RADIO PRINCIPAL S.A (CADENA SER VILALBA),Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+A28297059,GRUPO PRISA,Grupo Prisa,eventos_grupo,privada,si,bdns_terceros,Promotora de Informaciones (matriz)
+A28497444,DIARIO CINCO DÍAS S.A.,Grupo Prisa,prensa,privada,si,placsp_nombre,Cinco Días
+A28805497,"RADIO ESTUDIO,S.A.",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+A30016323,RADIO MURCIA SA,Grupo Prisa,radio,privada,si,placsp_nombre,Radio Murcia (Cadena SER)
+A36005346,"RADIO PONTEVEDRA, SA",Grupo Prisa,radio,privada,si,placsp_nombre;bdns,Radio Pontevedra (Cadena SER)
+A36612414,RADIO VIGO S.A.U.,Grupo Prisa,radio,privada,si,placsp_nombre;bdns,Radio Vigo (Cadena SER)
+A37012267,RADIO SALAMANCA S.A.U.,Grupo Prisa,radio,privada,si,placsp_nombre;rueca,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+A38022182,RADIO CLUB DE CANARIAS S.A.,Grupo Prisa,radio,privada,si,placsp_nombre,Radio Club Canarias (Cadena SER)
+A40012387,"RADIO SEGOVIA, SA",Grupo Prisa,radio,privada,si,placsp_nombre;rueca,Radio Segovia (Cadena SER)
+A50043777,RADIO ZARAGOZA S.A.,Grupo Prisa,radio,privada,si,placsp_nombre,Radio Zaragoza (Cadena SER)
+A78685054,"MAS RADIO, S.A.",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+A80739063,PRISA RADIO SA,Grupo Prisa,radio,privada,si,placsp_nombre,Prisa Radio
+A88096458,PRISA MEDIA SAU,Grupo Prisa,prensa,privada,si,placsp_nombre;bdns,Prisa Media
+B01530450,"Mirandesa de Radio, S.L.",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B03145554,RADIO ALCOY SL,Grupo Prisa,radio,privada,si,rueca;bdns,Radio Alcoy (Cadena SER)
+B06780811,"RADIO EVENTS TERRES DE L'EBRE, SLU",Grupo Prisa,radio,privada,gris,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B11604402,"RADIO JEREZ, S.L.",Grupo Prisa,radio,privada,si,placsp_nombre,Radio Jerez (Cadena SER)
+B13282413,GESTION DE EMISORAS DE RADIO Y TV S.L.L.,Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B15011950,RADIO CORUÑA S.L.,Grupo Prisa,radio,privada,si,placsp_nombre;bdns,Radio Coruña (Cadena SER)
+B18009951,RADIO GRANADA S.L.,Grupo Prisa,radio,privada,si,placsp_nombre,Radio Granada (Cadena SER)
+B21112347,RADIO VALVERDE INFORMACION S.L.,Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B21215678,"GUADIANA DE RADIO,SL",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B23248750,Andalucía Este FM S.L,Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B25713322,"Radio Lleida, SL",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B28016970,SOCIEDAD ESPAÑOLA DE RADIODIFUSIÓN S.L.U,Grupo Prisa,radio,privada,si,placsp_nombre;bdns,Cadena SER
+B28795631,"RÀDIO OLOT, SL",Grupo Prisa,radio,privada,si,placsp_nombre;bdns,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B33004292,RADIO ASTURIAS EAJ19SL,Grupo Prisa,radio,privada,si,placsp_nombre;bdns;rueca,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B38022182,"Radio Club De Canarias, S.L.",Grupo Prisa,radio,privada,si,placsp_nombre,Radio Club Canarias (NIF mal tecleado por el órgano)
+B46555892,"RADIO SURESTE, SL",Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B53845426,Radio Elche S.L.,Grupo Prisa,radio,privada,si,rueca,Radio Elche (Cadena SER)
+B81511834,"DIARIO AS, S.L.",Grupo Prisa,prensa,privada,si,placsp_nombre;bdns,Diario AS
+B82913534,SOCIEDAD DE RADIO NOROESTE SL,Grupo Prisa,radio,privada,si,placsp_nombre,"emisora de la Cadena SER (los objetos la citan): grupo asignado por la red, propiedad societaria no verificada; regla automática"
+B85635878,FACTORIA PRISA NOTICIAS SLU,Grupo Prisa,digital,privada,si,bdns_terceros,Factoría Prisa Noticias
+B85635910,"EDICIONES EL PAIS, S.L.",Grupo Prisa,prensa,privada,si,placsp_nombre;bdns,El País
+A05000468,DIARIO DE AVILA S.A.,Grupo Promecal,prensa,privada,si,placsp_nombre,Diario de Ávila
+A09002387,DIARIO DE BURGOS S.A.,Grupo Promecal,prensa,privada,si,placsp_nombre,Diario de Burgos
+A09310715,EL DIARIO PALENTINO. EL DIA DE PALENCIA,Grupo Promecal,prensa,privada,si,placsp_nombre,Diario Palentino
+B09275165,"PROMECAL AUDIOVISUALES, S.L.",Grupo Promecal,tv,privada,si,placsp_nombre,Promecal Audiovisuales
+B09383134,"GRUPO DE COMUNICACIÓN PROMECAL, S.L.",Grupo Promecal,prensa,privada,si,placsp_nombre,Grupo Promecal
+B09420662,"SERVICIOS DE PRENSA COMUNES, S.L.U.",Grupo Promecal,prensa,privada,si,placsp_nombre,La Tribuna de Guadalajara (Servicios de Prensa Comunes)
+B09570912,PROMECAL GESTION  SL,Grupo Promecal,prensa,privada,si,placsp_nombre,Promecal Gestión
+B45810926,DIARIO LA TRIBUNA DE TOLEDO,Grupo Promecal,prensa,privada,si,placsp_nombre,La Tribuna de Toledo
+A07242753,HORA NOVA S.A.-EDITORA BALEAR S.A.,Grupo Serra,prensa,privada,si,placsp_nombre,Última Hora (Hora Nova)
+A20004073,"SDAD. VASCONGADA DE PUBLICACIONES, S.A.(DIARIO VASCO)",Grupo Vocento,prensa,privada,si,placsp_nombre,El Diario Vasco
+A26004135,"NUEVA RIOJA, S.A.",Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,La Rioja
+A29115672,PRENSA MALAGUEÑA S.A.,Grupo Vocento,prensa,privada,si,placsp_nombre,Sur
+A39000641,EDITORIAL CANTABRIA SA,Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,El Diario Montañés
+A46007126,"FEDERICO DOMENECH, S.A.",Grupo Vocento,prensa,privada,si,placsp_nombre,Las Provincias
+A47000427,"EL NORTE DE CASTILLA, S.A.",Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,El Norte de Castilla
+A48001655,Vocento SA (matriz),Grupo Vocento,eventos_grupo,privada,si,bdns_terceros,Vocento SA (matriz)
+A48536858,"DIARIO EL CORREO, S.A.",Grupo Vocento,prensa,privada,si,bdns_terceros,El Correo
+A78865433,LA VERDAD MULTIMEDIA SA,Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,La Verdad
+A78865441,CORPORACIÓN DE MEDIOS DE EXTREMADURA S.A.,Grupo Vocento,prensa,privada,si,placsp_nombre,Hoy
+A78865458,CORPORACION DE MEDIOS DE ANDALUCIA SA,Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,Ideal
+A81839219,COMERCIAL MULTIMEDIA VOCENTO S.A.U.,Grupo Vocento,prensa,privada,si,bdns_terceros,Comercial Multimedia Vocento (comercializadora de ABC y regionales)
+A82352477,Net TV (Sociedad Gestora de Televisión Net TV),Grupo Vocento,tv,privada,si,rueca,Net TV (Sociedad Gestora de Televisión Net TV)
+B39495460,El Diario Montañés,Grupo Vocento,prensa,privada,si,placsp_nombre,El Diario Montañés (NIF mal tecleado por el órgano)
+B82462813,COMERESA PRENSA SLU,Grupo Vocento,eventos_grupo,privada,si,bdns,Vocento Gestión de Medios y Servicios
+B82824194,"DIARIO ABC, S.L.",Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,ABC
+B91409904,"ABC SEVILLA, S.L.",Grupo Vocento,prensa,privada,si,placsp_nombre;bdns_terceros,ABC de Sevilla
+A17374547,"HERMES COMUNICACIONS, SA",Hermes Comunicacions (El Punt Avui),prensa,privada,si,bdns,El Punt Avui
+B17374547,"HERMES COMUNICACIONS, SL",Hermes Comunicacions (El Punt Avui),prensa,privada,si,placsp_nombre;bdns,El Punt Avui
+A41147380,"MARÍN Y ASOCIADOS, S.A. (Kiss - FM)",Kiss Media / Global,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A84032755,"Kiss Radio, S.A.",Kiss Media / Global,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A84932755,"Kiss Radio, S.A.",Kiss Media / Global,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A82571563,"LIBERTAD DIGITAL, S.A.",Libertad Digital,digital,privada,si,bdns_terceros,Libertad Digital
+A78928371,PUBLIESPAÑA SAU,Mediaset España,tv,privada,si,bdns_terceros,Publiespaña (comercializadora de Mediaset)
+A79075438,"MEDIASET ESPAÑA COMUNICACIÓN, S.A.",Mediaset España,tv,privada,si,bdns_terceros,Mediaset España
+A82432279,Conecta 5 Telecinco,Mediaset España,tv,privada,si,rueca,Conecta 5 Telecinco
+A87728689,GRUPO AUDIOVISUAL MEDIASET ESPAÑA COMUNICACIÓN SA,Mediaset España,tv,privada,si,rueca,Grupo Audiovisual Mediaset España
+A01175529,"CANAL SUR RADIO Y TELEVISIÓN, SA",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A02021657,"PUBLICACIONES ALBACETE, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A03273679,Radio Comunicación S.A.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A03440922,CADENA VALENCIANA DE RADIO SOCIEDAD ANONIMA,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,"emisora asociada a Onda Cero (los objetos la citan); propiedad local, regla automática"
+A04574349,"INTERALMERIA TELEVISION, S.A.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A07006315,"Editorial Menorca, SA",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,Diario Menorca
+A07509698,Nova Televisió SA,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08410797,"PRENSA CIENTIFICA, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08435497,"EDICIONES REUNIDAS,S.A.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08447369,"PREMSA D'OSONA, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08497992,PROMOTORA DE PRENSA INTERNACIONAL S.A.,Medios locales independientes,prensa,privada,gris,placsp_nombre,"regla automática; revisión 2026-10-03 con plataformas autonómicas: la mayoría de sus contratos son material pedagógico y manuales, no publicidad (gris)"
+A08539165,"EDICIONS INTERCOMARCALS, SA",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08605503,EDICIONES DEPORTIVA CATALANAS S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08728305,"DIARIO MARÍTIMAS, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08734949,"Publicacions Penedes, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08746265,"PUBLICACIONES MEN-CAR, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A08844847,"RADIO SALUD,S.A.",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+A08923682,EDICIONES TARIFEC S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A09332461,"BURGOS PUBLICACIONES , S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A11000221,DIARIO DE ALMERIA (Federico Joly y Cia SL),Grupo Joly,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A11267395,Publicaciones del Sur S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A11368412,"TELEVISION CAMPO DE GIBRALTAR, SA",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A11627395,"PUBLICACIONES DEL SUR, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A12200713,COMUNICACIONS DELS PORTS SA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A12211199,"RADIO VILA-REAL, SA",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+A13108345,CASTELLANA DE PRENSA RADIO Y TV. SA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A14100531,DIARIO JAEN S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A14218598,"PAROTEX,S.A. (RADIO LUNA SER MONTORO)",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A15107592,AGN AXENCIA GALEGA DE NOTICIAS S.A.,Medios locales independientes,agencia_noticias,privada,si,placsp_nombre,Axencia Galega de Noticias
+A15575574,ATLÁNTICA DE INFORMACIÓN E COMUNICACIÓN DE GALICIA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A17063421,"RÀDIO MARINA, SA",Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A18896884,DIARIO CÓRDOBA SA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A20644928,Argia,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A21109608,RADIO LEPE S.A,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A21679949,Islas Canarias Televisión S.A.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A24017493,"Ediciones y Publicaciones Astorganas, S.A. (El Faro Astorgano)",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A24029977,Radio Bierzo S.A. (Cadena SER),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A24442998,"PRODUCTORA DE PUBLICIDAD, RADIO Y TV SA",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A26245464,"RIOJA TELEVISION, S.A.",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A26372045,"PROMOTORES DE MEDIOS RIOJANOS, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,Gente / Noticias de La Rioja (Promotores de Medios Riojanos)
+A27281368,"RADIO POPULAR, S.A. COPE",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A28732071,EDICIONES CONICA SA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A28795631,"RÀDIO OLOT, SA",Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A28881563,"EDICIONES DE GASTRONOMIA, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A28927606,CANTABRICO DE PRENSA SA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A29183050,REVISTA LITORAL SA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A30394407,TELEVISION MURCIANA SA,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A31197312,IRUÑEKO KOMUNIKABIDEAK,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A32003915,RADIO ORENSE S.A.,Medios locales independientes,radio,privada,si,placsp_nombre;bdns;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A32100653,LA REGION S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,La Región (Ourense) y Atlántico Diario
+A33600529,EL COMERCIO S.A.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A35070960,"SOCIEDAD CANARIA DE PUBLICACIONES, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A36643674,RIAS BAIXAS COMUNICACIÓN S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,Atlántico Diario (Rías Baixas Comunicación)
+A38011623,DIARIO DE AVISOS,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A38363859,TvLapalma.com (Radio Televisión La Palma S.A.),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A38918470,"Radio Pública de Canarias, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A39602644,TELEVISION POPULAR DE SANTANDER S.A.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A44207488,"Prensa de Teruel, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A44249373,PRENSA DE TERUEL S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A45494986,RADIO AUTONÓMICA DE CASTILLA-LA MANCHA S.A.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A46095543,"RADIO GANDIA, S.A",Medios locales independientes,radio,privada,si,placsp_nombre;bdns;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A46186821,EDICIONS DEL PAIS VALENCIA S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A46218558,INTERVALENCIA SA (97.7 LA RADIO),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A46229292,"EDITORIAL PRENSA VALENCIANA, S.A.",Prensa Ibérica,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A46421913,"GRUPO MEGAHERTZIOS, RADIO SIRENA, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+A46582144,RADIO AUTONOMIA VALENCIANA SA,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+A47227483,DIARIO EL MUNDO DE VALLADOLID,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A47452354,"CASTILLA Y LEON RADIO, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A47454038,"SERVICIOS DE PRENSA COMUNICAPLUS, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A48197321,FM NERVION S.A.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A48425458,"ITXARTU KOMUNIKABIDEAK, S.A.-ONDA VASCA",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A48532469,"EDITORA DEL PAIS VASCO 93, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A49012289,"RADIO ZAMORA, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A50345073,EDICIONES SICILIA S.A,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A50631641,Periodico de Aragón,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A53297628,"RADIO LUCENTUM, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A54709548,"MES CIUTAT, S.A.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A58012865,Premsa i Comunicació del Baix Llobregat SA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A58620121,"EL CIERVO 96, SOCIEDAD ANONIMA EMPRESA PERIODISTICA Y EDITORIAL.",Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+A59056853,"Publicacions de l'Abadia de Montserrat, SA",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A61135521,DIARI DE GIRONA SA,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A64822281,"OCA GLOBAL INSPECCIONES PERIÓDICAS REGLAMENTARIAS, S.A.U.",Medios locales independientes,prensa,privada,no,placsp_nombre,"revisión 2026-10-03: OCA, inspecciones técnicas (ascensores, instalaciones), no es un medio; casó por «PERIÓDICAS»"
+A701687U,"PREMSA ANDORRANA, S.A",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+A70301510,SERMOS GALIZA S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,Sermos Galiza / Nós Diario
+A703503P,ANDORRANA DE PUBLICACIONS,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+A707871V,AGENCIA DE NOTICIES I INFORMACIO SA,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+A73390106,"TELEVISION POPULAR DE LA REGION DE MURCIA, S.A.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A78187952,"EDICIONES PELDAÑO, S.A.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A78683851,Onda Cero Canarias Unipress S.A.U.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A78874054,"BAYARD REVISTAS, S.A.",Medios locales independientes,revista,privada,gris,placsp_nombre;bdns,revistas infantiles (compras para bibliotecas)
+A79010518,"ESTUDIOS DE POLÍTICA EXTERIOR, S.A.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A79126082,RADIO BLANCA S.A.,Medios locales independientes,radio,privada,si,placsp_nombre;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A79253969,Ediciones y Publicaciones Alimentarias S.A.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A79312609,"PUBLICACIONES ALIMARKET, S.A.",Medios locales independientes,revista,privada,gris,placsp_nombre,publicaciones sectoriales y bases de datos (Alimarket)
+A81819179,"EDITORA DE MEDIOS, VALENCIA, ALICANTE Y CASTELLON SA",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A82815200,"LETRAS LIBRES INTERNACIONAL, S.A.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+A82824194,"DIARIO ABC, S.L.",Grupo Vocento,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A84189430,TELEVISION DIGITAL MADRID S.A.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A84395078,SGS INSPECCIONES PERIODICAS SAU,Medios locales independientes,prensa,privada,no,placsp_nombre,"revisión 2026-10-03: empresa de inspecciones técnicas (SGS), no es un medio; casó por «PERIODICAS»"
+A86312691,"Compañía Operadora de Corto y Medio Radio Iberia Express, S.A.U.",Medios locales independientes,radio,privada,gris,placsp_nombre,operadora de radio; actividad no verificada
+A91483545,GUADALMEDIA PUBLICIDAD S.A. (Canal Sur Radio y TV),Medios locales independientes,revista,privada,gris,placsp_nombre,comercializadora de Canal Sur Radio
+A92174796,Torremolinos televisión,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A97517379,TELEVISION POPULAR DEL MEDITERRANEO S.A.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A99051047,Radio Autonómica de Aragón SAU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01040906,LAUDIO IRRATIA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01106665,"RADIO GORBEA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01373489,DIARIO NOTICIAS DE ALAVA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01709518,"MAKMA CULTURAL, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B01797554,"EDITORIAL BALLENA BLANCA, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B01829399,RADIOTELEVISION HUESCA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01850031,Onda Mallorca 971SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B01867118,"Prensa Libre Alicantina, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02151819,CABLE TELEVISION ALBACETE S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02214559,TV ALMANSA SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02335263,PUBLICOR EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02402915,"GEINTEL RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02411726,TELEVISIÓN HELLIN S.L.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02560480,EDITORA DE COMUNICACION DIGITAL S.L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02564052,"PUBLICACIONES DIGITALES ALBACETE, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02570984,"PRENSA, RADIO Y COMUNICACION, S.L",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02583680,MOON SERVICES ONTINYENT SOCIEDAD LIMITADA,Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B02595734,PERIODICO DE ALMANSA SOCIEDAD LIMITADA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02599892,"RADIO, DIGITAL Y PRENSA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02628592,AUDIOVISUAL RADIO Y DIGITAL. S.L,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02671675,"Madrid Noticias e Información, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02846772,"EDICIONES GC, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02851848,EDICIONS DIARI DE TERRASSA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B02858371,"PERSONAS COMUNICACIÓN Y PUBLICIDAD, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B02939106,"PRENSA LOGÍSTICA, SLNE",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03195716,RADIO BENIDORM INTERNACIONAL SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03195724,RADIO ORIHUELA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03277217,Radio Ibi Emisora de Frecuencia Modulada,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03441631,"GRUPO ALFA 5, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B03721552,"MARINA ALTA PERIODIC, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03860798,RADIO COCENTAINA LA VEU DEL COMTAT SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B03989845,AREA OBERTA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B03996584,"EDICIONES NOTIVALLE, S.L.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04179727,ONDA PRISMA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04246054,EDICIONES PARALELO 37 SL,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04465621,HUERCAL OVERA TELEVISION S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04597803,EDICIONES LUZ Y LETRAS SLNEU,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04694667,SPECTRUM RADIO ALMERIA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B04953758,EDICIONES CATÓLICOS Y VIDA PÚBLICA S.L.U,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B05290473,MONTGO OUTSOURCING S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B05303805,"EL DIARIO REGION DE MURCIA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B05311881,REAL DE A 8 COMUNICACION SLU,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B05448501,CICLÓPEA CREATIVA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B05515259,LORCA COMUNICACIÓN RADIO TV PRENSA E INT,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06108690,RADIO HORNACHOS SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06207013,RADIO MONTIJO 94 SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06333793,Periodico Digital Extremadura,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06335467,HOY DIARIO DE EXTREMADURA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06478747,"RADIO TELEVISION DIGITAL COMARCA DE BARROS,S.L",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06531768,PUBLICACIONES JARA SLU,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06640882,"SIBERIA EN LA ONDA, S.L.U.",Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a Onda Cero (los objetos la citan); propiedad local, regla automática"
+B06652861,ART DUOMO GLOBAL SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B06659023,"CONTENIDOS PARA TELEVISIÓN Y MULTIMEDIA, S.L.U.",Medios locales independientes,tv,privada,gris,placsp_nombre,productora de televisión
+B06672158,El diario.es,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06732655,PRENSA Y ASTROTURISMO S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B06737035,RADIO SIERRA SUROESTE SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07623051,"Turismo 2007 SL, Editora Cala Millor 7",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07719800,RADIO EIVISSA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07728876,"Setmanaris i Revistes, SL",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07747629,"PREMSA INDEPENDENT, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07777287,DAS INSEL RADIO S.L,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B07941255,canal 4 television de baleares sl,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B08499469,"EDICIONES ROL, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B08503583,"L’AVENÇ, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B08818189,"PUBLICACIONS ANOIA, S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B08910507,DIRIGIDO POR SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B08984031,CASUAL MAGAZINES S.L.U.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B09291766,"DIARIO ABC, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09339862,"RADIO ARLANZON, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09396961,"EDICIONES Y RECURSOS OCIO CULTURALES, SL",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09431180,Noticias de León S.L. (Gente),Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09437476,GRUPOGO EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09624008,"Todo FM, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B09810482,Abcorp SL (Es Radio),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10118255,KISS FM (MARCE PUBLICIDAD),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10264158,RADIO INTERIOR SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10273308,Via Plata TV,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10337368,"EDICIONES DEL AMBROZ, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10343986,"CANAL NORTE, ES. RADIO",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10418531,TELEPLASENCIA TV S.L,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10512879,"EDICIONES INGOBERNABLES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10737260,"EDUCACION 3.0 EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B10798981,COMPONENTE NORTE EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11094372,Isla Televisión SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11408283,PUBLICACIONES DEL ESTRECHO SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11604972,"Radio Jerez, S.L.",Medios locales independientes,radio,privada,no,placsp_nombre,"revisión 2026-10-03: en la Junta de Andalucía este NIF es SEVITAS MATERIAL DE SEGURIDAD (extintores, alarmas), no Radio Jerez; NIF dudoso, fuera"
+B11627395,"PUBLICACIONES DEL SUR, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11628732,Diario de Jerez SA.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11673803,"ALCESTES, S.L. (7 TV)",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11737392,Sierravisión Arcos TV S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11761186,Gestión Publicitaria Publicaciones del Sur SL.,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11772654,"NOTICIAS LOCALES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11792587,"PERIODICOS GRATUITOS VIVA, S.L.U.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11899408,"ONDA LUZ RONDA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B11901246,Joaquín Ferrer y Cía. Diario el Faro de Ceuta,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B12046728,"PROMOCIONES Y EDICIONES CULTURALES, SA",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B12376349,"PROMO-PUBLIC, PROMOCIONES Y PUBLICACIONES S.L.U.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B12472643,TVCS RETRANSMISIONES SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B12501516,Vila-real Comunicació i Disseny S.L.,Medios locales independientes,revista,privada,si,placsp_nombre;bdns,revista Poble (Vila-real)
+B12540761,"COMUNICACION Y MEDIOS DE LEVANTE, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B12656203,TV Alto Palancia SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B12894192,Diario Digital de Castellón S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B12947156,CASTELLON BASE SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B12960480,COMUNICACIONES LA PLANA SLU,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B12977815,VA DE BO EDITORIAL VALENCIANA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B12989638,Actualitat Diaria S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13108345,"CASTELLANA DE PRENSA, RADIO Y TELEVISIÓN, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13205331,EDICIONES LM S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13217351,EDICIONES SOUBRIET S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13311329,Ediciones Puertollano S.L.,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13314430,"Radio Surco, S.A",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13346135,"MULTIMEDIA,PRENSA Y COMUNICACIÓN,SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13355151,"CALATRAVA LA MANCHA TELEVISIÓN,SL",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13415005,"SEGMENTOS TV, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13422191,"RADIO SURCO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13491865,Factory FM 2009 S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13496856,"EDICIONES JARAIZ, S.L.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13503347,EDICIONES CENTRO MANCHA S. L.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13569645,"OBJETIVO CLM NOTICIAS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13576368,"EDICIONES SERCA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13584479,"PERIODICO DE CASTILLA LA MANCHA, S.L.U",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B13611157,La Voz Comunicación Prensa y Marketing Digital S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B14218598,"PAROTEX,S.A. (RADIO LUNA SER VILLANUEVA DE CÓRDOBA)",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B14321699,"ATALAYA DE TELEVISION, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B14550081,EDITORIAL CORDOBESA DE PUBLICACIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B14710123,Canal Priego TV SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B14878474,"SUR DE CORDOBA RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B15330913,Diario de Cádiz,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B15919947,GRUPO CODIGO CERO COMUNICA CION SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B15948581,"CODIGO TV, SL",Medios locales independientes,tv,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B16110264,"RADIO AZUL, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B16149767,PEITO EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B16611477,"FORMENTERA RÀDIO, SL",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B16925414,"Business prensa 24 h, S.L. (leon7dias.com)",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17039116,"EDICIONS EL BASSEGODA, SLU",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17165960,COMUNICACIONS DEL RIPOLLÈS SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B17317298,Ràdio Ripoll SL,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17331083,Televisió de Roses SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17417650,D-9 COMUNICACIÓ SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B17440553,"DRACVISIÓ, SLU",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,televisión comarcal del Pla de l'Estany
+B17475898,ITRAM COMUNICACIÓ SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B17477779,"OLOT TELEVISIÓ, SL",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17483165,Televisió del Ripollès SLU,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17503038,Televisió de Girona SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B17736448,"NOVES EDICIONS ALTEMPORDANES.,SL.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B18098129,GRUPO TRES EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B18238311,"RADIO TV de MOTRIL, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B18429779,RADIO SALOBREÑA ONDA TROPICAL S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B18916676,TELEVISIÓN DIGITAL TERRESTRE LOCAL DEMOTRIL S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B18986059,VALPARAISO EDICIONES SOCIEDAD LIMITADA,Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B19138434,"INICIATIVAS ALCARREÑAS DE RADIO Y TELEVISIÓN, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B19138484,"INICIATIVAS ALCARREÑAS DE RADIO Y TELEVISIÓN, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B19251818,"ARRIACA TELEVISION, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B19318484,"INICIATIVAS ALCARREÑAS DE RADIO Y TELEVISIÓN, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B19327840,EDITORES DEL HENARES INFORMACIÓN Y PUBLICACIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B19748144,Producción y Comunicación TV SL,Medios locales independientes,revista,privada,gris,placsp_nombre,gabinete de prensa y grabación de plenos
+B20809042,EUSKAL EDITOREA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B20811428,"OIARTZUALDEKO HEDABIDEAK, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B20848073,GOIERRIKO HEDABIDEAK SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B20864260,DONOSTIAKO HEDABIDEAK SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B21110721,Radio Sierra de Aracena S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B21325345,"Ayamonte Televisión, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B21520077,INVERGENTE S.L.-  HUELVA BUENAS NOTICIAS,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B21591284,PERIODICOS PUNTO CERO SL UNIPERSONAL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B22539456,PRISMA SOCIAL EDICIONES,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B22754725,DIARIO DE AVISOS DIGITAL SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B22857163,El Periódico de Galicia SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B23031461,RADIO ANDÚJAR SLU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B23223480,RADIO SIERRA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B23331622,RADIO JAEN S.L.,Medios locales independientes,radio,privada,si,placsp_nombre;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B23378102,"EDICIONES GUADIEL, S.L.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B23754625,MURCIA DIARIO,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24068710,Linares Servicios Generales (Onda Bierzo),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24505141,Sound Deluxe PC. SL (FM Bierzo),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24582744,EOLAS EDICIONES,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24604688,PRENSA 24 HORAS SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24621534,RADIO BIERZO SA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24642597,Desde León al Mundo (Leonoticias),Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24686982,Mediaplanet Global SL (987 TV),Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24691669,"NOTICIAS INDEPENDIENTES DE LEÓN, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B24806242,DIARIO DE VALDERRUEDA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B25026048,PRENSA LERIDANA SL.,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B25066184,LERINFORM LLEIDA SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,Lleida TV (Lerinform)
+B25503566,"EDICIONS SALORIA,S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B25527201,Cadena Pirenaica de Ràdio i Televisió SL,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B25591983,EDICIONS NOVA TARREGA SLU,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B25635186,"GRUPO SIMALRO,SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B25636457,"HOLDER SOLUTIONS, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B25779505,Tàrrega Audiovisuals SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B25814815,MAGAZINE PUBLICACIONES MEDIA SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B26000695,"RADIO RIOJA, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B26164749,RADIO ARNEDO S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B26224550,"RADIO DIFUSIÓN, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B26409011,"RADIO EZCARAY, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B26602318,"VISTANOVA TV, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,productora (entrevistas)
+B27000637,EL PROGRESO DE LUGO S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,El Progreso (Lugo)
+B27486901,PORTAS COMUNICACION S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B27500347,XORNAL DE LUGO S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B27505023,"PRENSA DA MARIÑA, S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B27619840,"EMISION Y PRENSA DE ALIMENTOS Y SALUD, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B27751312,"EDICIONES BASAN, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B27825595,"EDICIÓNS MIDE, S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B27827989,"EDICIONES ESPAEXTERIOR, S.L.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B28281368,RADIO POPULAR S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+B28921195,"EDICIONES Y ESTUDIOS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B28983500,GO EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B29855137,"Radio Costa del Sol, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B29903739,"PRENSA DE MELILLA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B30166664,"SOLO RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B30168587,RADIO ESPUÑA ALHAMA SL,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+B30282248,"RADIO MULA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B30455141,"RADIO TELEVISION DEL SURESTE, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B30540553,"GRUPO PRENSA TRES, COMUNICACION INTEGRAL SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B30918528,"FARNESIO VENTURES, S.L.",Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B31506025,FM LOGISTIC S.L.U.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B31595721,ARALAR IRRATIA SL,Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B31790959,LA FERTILIDAD DE LA TIERRA EDICIONES,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B32215329,GARHERVE SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B34240010,PERIODICOS INVIERTE S.L.U.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35002278,"Editorial Prensa Canaria, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35381904,Radio Faycán (Faycán Publicidad S.L.),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35399534,"Caroma de Inversiones, S.L. ( Radio Las Palmas)",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35411354,RADIO SINTONÍA FM S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35579481,Radiotelevisión Lanzarote S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35581347,PUBLICACIONES DE LANZAROTE SOCIEDAD LIMITADA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35588979,"KISS FM, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35616648,"Radio Difusión Sol, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35628585,MÍRAME TV – FOQUES 33 S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35711308,"Radio Aventura Siglo 21, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35746452,RADIO TINAMAR SLU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35751130,D Aquino Radio S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35756774,Canal 4 TV,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35780550,Radio Insular (Radio Fuerteventura Insular S.L.),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B35796317,VIDERE TV SL,Medios locales independientes,tv,privada,gris,placsp_nombre,productora audiovisual
+B35835834,RADIO SINTONIA DOS FUER SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B36003549,"Lerez Ediciones, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B36223600,TELEVISION DA MANCOMUNIDADE DO SALNES SL,Medios locales independientes,tv,privada,si,placsp_nombre,televisión local del Salnés
+B36344430,PUBLICIDADE TERCEIRO MILENIO S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B36855104,"RUNA PUBLICACIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B36885606,"NUESTROS MAYORES PUBLICACIONES, S.L.",Medios locales independientes,revista,privada,gris,placsp_nombre,revista para mayores
+B36979920,"EDICIONES EDISPORT, S.L.L",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B37524261,DIARIO DE SALAMANCA SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B37532033,ONDA PEÑARANDA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+B37553104,NOTICIAS INDEPENDIENTES DE SALAMANCA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38011623,Canarias de Avisos S.L. (Diario de Avisos),Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38281572,Onda Tagoror,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38385001,RADIO GAROÉ S.R.L,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38492237,CADENA HIT RADIO S.L.U,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38528873,"GENTE RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38764981,Radio Marca (Beach Info Publi S.L),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38788253,"Infodeporte, SL (Radio Marca)",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38887326,"Creaccion.TV,S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B38887329,"Creacción TV, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,productora con programas patrocinados
+B38974242,RADIO TAORO SL.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39277363,"CATÁLOGO PUBLICIDAD Y DISEÑO, S.L. (RADIO SER CANTABRIA)",Medios locales independientes,revista,privada,gris,placsp_nombre,agencia que vende publicidad de la SER
+B39296447,EDICIONES DEL NORTE SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39441225,EDICIONES FINDER SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39516018,TEIBA FM,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39579701,"COMUNICACIÓN RADIOFÓNICA, TELEVISIÓN Y PRENSA ESCRITA CANTABRIA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39580667,OCIOBESAYA S.L. (TELEVISIÓN VEGAVISIÓN),Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39691860,OCIOBESAYA S.L. (TELEVISIÓN VEGAVISIÓN),Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39709548,"CANTABRA DE EDICIONES ON LINE 24 H, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39792528,PUBLICACIONES DEL CANTABRICO SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39797741,RADIO STUDIO TORRELAVEGA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39820808,PRENSA DIGITAL DE CANTABRIA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39834536,S.R.D. ONDA OCCIDENTAL CANTABRIA S.L.U.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B39867288,ASON FM,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B40243941,VEOVEO EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B40265308,"NOTICIAS INDEPENDIENTES DE SEGOVIA, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B40503328,ILUSIONMEDIA TELEVISION SL,Medios locales independientes,tv,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B40512436,EVENTOS Y DIGITALES VALENCIANOS SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B40518003,PONT MEDIA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B40580136,"EDICIONES MURCIA PLAZA, S.L.U.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41178153,"Radio Morón, s.l.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41463787,OPCION RADIO S.L,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41787383,"DIARIO DE SEVILLA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41916313,LEBRIJA TV S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41947037,"EDITEC SUR, S.L. PERIÓDICO LA SEMANA",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B41999368,PRENSA NAZARENA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42200774,SORIA NOTICIAS S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42213116,"NOTICIAS INDEPENDIENTES DE SORIA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42217406,"EDITORA DE PRENSA SORIANA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42221812,Televisión Digital de Teruel S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42553925,Somos Radio 4.0 S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42811091,EDICIONES BOUS AL CARRER S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42827584,Tinto Noticias y Costa Noticias Tinto Comun,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42838573,COMUNICACION ARAGONESA DE TV S.L,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42894279,RIBERA TELEVISIÓ SLU,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42939884,Productora Canaria de Televisión Regional SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B42945683,ROCADAMA S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B43040187,"Ràdio i Televisió de la Catalunya Nova, SL",Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B43121144,El Vallenc SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B43396902,RADIO ULLDECONA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B43496447,"INICIATIVES DE TELEVISIO, SL",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B43518232,"EDICIONS VALLS COMUNICACIÓ, S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B43665256,"La veu de l'Ebre, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B43833862,"IMAGINA RADIO, SL",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B43996941,Televisió Teveon Ebre SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B44198992,"MASMUT PRODUCCIONS, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B44249373,PRENSA DE TERUEL SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B44508133,COMUNICACION PLANA BAIXA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B44534378,PRIME TV CASTELLON SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B44596260,VETEVE MEDIA SLU,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B44843530,COMUNICACION AUDIOVISUAL LA ONDA S.L,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B45561230,"EBORA TELEVISION, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,productora de vídeo con nombre de televisión
+B45707742,"CADENA LOCAL TV, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B45709953,DESCRITO EDICIONES S.L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B45893971,ADC MEDIA EDICIONES TECNICAS SL.,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B45904042,PRENSA DIGITAL DE CLM,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B45922416,Contraste Ideas S.L. (Diario de información regional clm24.es),Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B46048070,"EMPRESA EDITORA SUCRO, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B46194080,EDICIONES Y PROMOCIONES L.A.V. S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B46229290,"Editorial Prensa Valenciana, S.A.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B46373734,"PUBLICACIONES TURIA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B46406799,EDICIONS CAMACUC SL,Medios locales independientes,revista,privada,gris,placsp_nombre;bdns,cómics y revista Camacuc
+B46426573,"GM PUBLICIDAD, S. L. (VALÈNCIA RADIO)",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B47372263,"Ediciones La Meseta, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B47452354,"CASTILLA Y LEÓN RADIO, S.A.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B47542931,ARGI COMUNICACION Y EDICIONES CYL,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B47629571,KISS PUBLICIDAD VALLADOLID 2005 SL (KISS FM),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B48180202,"BUSTURIALDEKO IRRATI TELEBISTA, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B49199334,"AROMAZOIDAR, S.L.",Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B50849983,El periódico de Aragón,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B51017945,Ediciones Ceitil S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B51019016,HACHO EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B51033570,DIARIO EL PUEBLO S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B51033579,diario el pueblo s.l.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B52021839,ONDA CERO MELILLA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B52512464,EDICIONES PERIODICAS DEL NOROESTE SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B52516572,FM RADIO ASTURIAS SLU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B53108296,"NOTICIAS AGENCIA MEDITERRANEO, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B53119863,CONSORCIO DE TELEVISION COMARCAL SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B53132858,"TELEVISION COSTA BLANCA, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,televisión local con contratos ajenos
+B53275400,"Onda Élite Radio Muro, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B53378477,ARTE QUATRE VICTOR SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B53571899,ONDA COSTA SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B53624037,"Ediciones y Publicaciones Culturales, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54143292,"PHONOTEC PRENSA Y MAS, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54217559,DIARIO INFORMACIÓN,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54221825,IBO-RADIO SLU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54383419,LARA & LLORCA COMUNICACION S L,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B54458666,AVANT CEM SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B54496815,"Prime Tv Alicantina, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B54716832,"PRENSA VEGA COSTA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B55343917,"EDICIONS ABRIL 2019, SLL",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B55426365,HOLYCARDS PUBLICACIONES SOCIEDAD LIMITADA,Medios locales independientes,revista,privada,gris,placsp_nombre,publicaciones (suministros)
+B55483853,"AHORA TV BUSINESS, SOCIEDAD LIMITADA",Medios locales independientes,tv,privada,gris,placsp_nombre,producción y streaming de actos
+B55553804,"NOTICIES DE LES COMARQUES DE TARRAGONA, SLU",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B55597702,"TARRACO COMUNICACIO DIGITAL, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B55679369,"Publicacions Grup Turismedia, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B55744924,"CATALUNYA DIARI DIGITAL, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B56142946,Publicaciones Digitales de la Marina Alta S.L.,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B56303233,"MAMOLA NOTICIAS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B56429632,RADIO TELEVISION TENERIFE CANARIAS PLUS S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B56495880,PERIODICO EL MERIDIANO SOCIEDAD LIMITADA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B56657877,"ARTICULO CATORCE EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B57177552,EDICIONS AKHA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B57477085,"Periódico de Ibiza y Formentera, SLU",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B57487548,"SALSEOAPP,S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B57814931,PLAN B PUBLICACIONES SL,Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B57944431,TV BEGIN VIDEOMARKETING SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B58151770,Ediciones RDL Rockdelux SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B58180613,EDICIONS CAVALL FORT SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B58364936,TOT MEDIA COMUNICACIÓ SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B58583568,"EDITORIAL GRAÓ DE IRIF,SL",Medios locales independientes,revista,privada,gris,bdns,producción editorial de revistas
+B59897785,"Ópera Actual, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B60279494,"ANUART, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B60475738,"GUIA DE PRENSA, SL",Medios locales independientes,prensa,privada,gris,placsp_nombre,intermediario de inserciones
+B60711843,"TAELUS, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B60955564,"SERVEIS DE COMUNICACIÓ GLOBAL AQUITÀNIA, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B60962370,EDITORIAL TORRE DE PAPEL S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B61451399,CATALANA DE TELEVISIO LOCAL,Medios locales independientes,tv,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B62036132,"EL CARGOL PUBLICACIONS, SL",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B62066824,"MINORIA ABSOLUTA, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B62240742,"EDICIONES PERIODICAS HISPAPUBLIC, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B62325394,Televisió Sant Cugat SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B62552146,"PRODUCTORA D'EMISIONS DE RADIO, SL",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B62608385,"ANDROMINES.DE TV, SL",Medios locales independientes,tv,privada,gris,placsp_nombre,"productora (reportajes ENG, posproducción)"
+B62677331,"ETV-LLOBREGAT TV, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B63231500,"STATEMENT CITY, SL",Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B63247134,"MOLA TV, SL.",Medios locales independientes,tv,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B63491658,"SERVIEXIT, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B63824726,EDICIONS DE SANTA COLOMA SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B64045511,CANAL TARONJA SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,Canal Taronja
+B64166705,"TIRABOL PRODUCCIONS, S.L",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B64337462,"EDITORA SINGULAR DIGITAL 2GR, SL",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B64801327,"CENTIPEDE FILMS, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B64863335,GRUP ENDERROCK EDICIONS SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B64869670,"PAUTA MEDIA, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B64953758,EDICIONES CATÓLICOS Y VIDA PUBLICA SLU,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B65029001,"EDICIONES VERSATIL, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B65078545,Capgròs Comunicació SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,Capgròs (Mataró)
+B65351074,Connecor Investiments S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B65519712,GENT I TERRA S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B65645483,MPRESS PUBLICACIONES,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B65672495,"TIMEOUT SPAIN MEDIA, S.L",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B65894859,Ediciones Prensa Libre S L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B66162041,PREMSA DE SITGES SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B66319757,TELEVISIÓ DEL BERGUEDÀ SL.,Medios locales independientes,tv,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B66411828,CAXIER EDICIONS SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B66494931,OTTOKAR EDITORA AUDIOVISUAL S.L.,Medios locales independientes,tv,privada,gris,placsp_nombre,productora audiovisual
+B66519828,COLECTIVO 5W SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B66541947,GRUP LES NOTÍCIES DE CATALUNYA SLU.,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B66914367,EDICIONES RUTA-66 SL,Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B66917048,"Edicions del núvol, SLU",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B67007807,Junior Report Desfake,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B67025866,HAUMEA EDICIONS SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B67186866,"NOVAPRESS, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B67211227,Edicions Elbaix SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B67217414,CANAL COSTA CATALANA S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B67258913,"POLITICA Y PROSA, SL",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B67271304,DIARI CONNEXIOBCN SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B67353094,"ANOMALIA EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70077995,ARRINCAMOS SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B70079090,"PORTOCABO TV, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70160213,LIEXGA S.L,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B70325923,"ECONÓMÍA DIGITAL DE GALICIA, S.L.U.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B70399795,"LUZES, XORNALISMO QUE CONTA S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70414438,"IMPRENTA Y PUBLICACIONES SAN CRISTOBAL, SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70434972,EDICIÓNS EMOBRA SL,Medios locales independientes,prensa,privada,no,placsp_nombre,"revisión 2026-10-03: en la Xunta este NIF es EMBADE OBRAS E SERVIZOS (reparaciones), no una editorial; NIF dudoso, fuera"
+B70597026,"21NOTICIAS, PRENSA, RADIO, TELEVISION S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70620414,"EDITORIAL DIARIO DE SANTIAGO, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70625884,CARBINEZ SL MORRAZO NOTICIAS,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70697800,"CORPORACIÓN SI RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B70880828,KOSTA IRRATIA S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B72185960,"MALOBECA MEDIA, S.L.",Medios locales independientes,radio,privada,gris,placsp_nombre,actuaciones infantiles
+B72213622,Una TV Provincia de Cádiz SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B72275506,"EL PERIÓDICO DE CHICLANA, SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B72297575,"8 TV PROVINCIA DE CÁDIZ, SL",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B72424682,TEMPORAL CASA EDITORA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73186462,RADIO MUNICIPAL DE TORRE PACHECO SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73505877,"Gestión de Servicios de Radio, S.L.U",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73538274,PRENSA Y PUBLICACIONES DE YECLA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73554271,"EDICIONES VITALIDAD Y PROGRESO,SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73705527,"COMARCAL TELEVISION LORCA, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73744583,"ONDA CERO NOROESTE-MEDIANOR PUBLICIDAD Y COMUNICACIÓN, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B73894180,MMC RADIO S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B74435728,"POLA DISTRIBUCIONES DE PRENSA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B75034793,Tai Gabe Digitala S L,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B75207936,"SURF CHANNEL, SL",Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B75558981,102 TV CANTABRIA S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B75650630,EDICIONES FLORPANAL SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76044569,"RADIO DIFUSIÓN Y PUBLICIDAD DE CANARIAS, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76056159,Prensa Digital Canaria,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76129840,RADIO TELEVISION ONDA FUERTEVENTURA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76160118,BIOSFERA RADIOTELEVISION SOCIEDAD LIMITADA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76199546,KFTV Televisión S.L,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76247931,CREATIVAMEDIA RADIO Y PUBLICIDAD SRL,Medios locales independientes,radio,privada,gris,placsp_nombre,radio y agencia de publicidad
+B76248855,Inolvidable FM,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76267525,"COMERCIALIZADORA SIETE PUNTO SIETE RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76272848,"RADIO SINTONIA DOS FUER, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76306588,PALSUR TELEVISION S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76339167,RADIO LAS TIRAJANAS SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76517937,Radio CIT Tenerife S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76521418,"RADIO ATLANTIDA SANTA URSULA, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76521533,FM RADIO CANARIAS SL,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+B76575943,TINDAYA TELEVISIÓN SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76593862,RADIO ISLA COMUNICACIONES SLU.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76644459,10 TV (Mandaya 2323 SL),Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76659879,Prensa Insular SLU,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76746734,Trumputin SL  (Ahora TV),Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76758192,RADIO Y EVENTOS MELCHOR SLU,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76768910,Radio Blanca S.A.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76806850,Hierro Radio Garoé S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B76820240,Tenerife buzz / BBR Radio,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B78159142,"EDICIONES JEMMA, SL",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B78196664,"SCHERZO EDITORIAL, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B78517547,FUNCIVA EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B78694346,EDICIONES AVANCES,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B80495971,INVERSOR EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B80815442,"EDICIONES Y PUBLICACIONES TROY, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B80823438,"TRAMA EDITORIAL, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B80979537,POLO DIGITAL MULTIMEDIA S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B81118960,Nature Radio S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B81123895,"A T C EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B81152225,"PRENSA ARANJUEZ, SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B81459141,ORFEO EDICIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B81555286,"Ducal Ediciones,S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B81742199,"Publicaciones MCV, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82060302,FM SPORT EVENTS 2000 SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82187816,"MERLAM PUBLICACIONES DISTRITO 30, S.L.",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B82440041,BLUR EDICIONES S.L.,Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B82475286,"El Iceberg Publicaciones del Sur, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82551391,carposa ediciones,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82599689,"Madrid Diario, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82599804,EDICIONES VIVIR EL VINO SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82745712,EDICIONES MK3 SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B82788639,PLATO 2000 SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B82915534,SOCIEDAD DE RADIO NOROESTE SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B83543389,Publicaciones Confidenciales SLU,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B83589077,GLOBAL HENARES S.L.- NOTICIAS DE GUADALAJARA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B83691790,Artehoy. Publicaciones y gestión S.L.L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B83764035,NUEVA PRENSA  COMUNICACIONES Y SERVICIOS,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B83798892,"EDICIONES SAN MATEO, S.L.",Medios locales independientes,revista,privada,gris,placsp_nombre,servicios editoriales
+B84029370,COSLADA RADIO 102 S. L. L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84039189,"RHO DELTA EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84056332,GRUPO TECNIPUBLICACIONES SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84182864,"KISS TV DIGITAL, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84330836,"Vive Publicaciones, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84361344,PUBLICACIONES PERIODISTICAS JEMAR SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B84430768,"Domingo López Ediciones, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84467059,EDICIONES LISA TARIN SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B84564319,LA COMETA TV S.L.,Medios locales independientes,tv,privada,gris,placsp_nombre,productora de programas
+B84671239,CAIMAN EDICIONES SL,Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B84689546,"ediciones LUMAR, SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85027092,SEK PUBLICACIONES,Medios locales independientes,revista,privada,gris,placsp_nombre,diseño y maquetación de revistas
+B85164523,"PUBLICACIONES PROFESIONALES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85349702,"EDICIONES APUNTES DE LA SIERRA, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85355915,NOREA Y ALOMAN EDICIONES S.L,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85488435,"EDICIONES MARKETING Y PUBLICIDAD, S.L.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85535789,"ARS REVISTA DE ARTE Y COLECCIONISMO, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B85681443,INFORNOTICIAS SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B85742583,"Nuevos Descubridores, S.L.",Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B85964815,"DESPERTA FERRO EDICIONES, SLNE",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86053162,GDT Ediciones S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86184728,EDICIONES SEMELE S.L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86243276,DISEÑO INTEGRADO DE PUBLICIDAD Y TELEVISION S.L.,Medios locales independientes,tv,privada,gris,placsp_nombre,productora de vídeos
+B86293081,ZARABANDA EDICIONES PUBLICIDAD SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86298098,"TALLER DE RADIO, S.L.",Medios locales independientes,radio,privada,gris,placsp_nombre,gestión de publicidad
+B86298205,"Info Madrid Comunicacion y Prensa, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86329943,"Ediciones Idampa, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86483021,VIVE PUBLICACIONES,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86548377,INTERECONOMIA RADIO SL.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86588639,Over The Top Networks Iberica SL,Medios locales independientes,prensa,privada,gris,rueca;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B86672268,INNOVA EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86675097,"ARTESA EDICIONES,  S.L.",Medios locales independientes,revista,privada,gris,bdns,beneficiario de ayudas estatales a revistas culturales; sin contratos en PLACSP al construir el padrón
+B86731221,"Ediciones Trofeo, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86754025,EPI PRENSA SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86768553,"Capital Radio Economía, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86811908,"Brainbot TV, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,productora (campañas)
+B86831880,DROSOPHILA EDICIONES S.L.,Medios locales independientes,revista,privada,gris,placsp_nombre,revista Quercus
+B86850260,"ESPAÑA BUENAS NOTICIAS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86859600,"Ralsa Ediciones, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B86875309,"SPA PUBLICIDAD Y TELEVISIÓN, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,creatividad de campañas
+B86956893,PERIODICO AIRE SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87050761,"LUA EDICIONES 3.0, S.L.",Medios locales independientes,digital,privada,gris,placsp_nombre,webs y diseño
+B87063491,PRENSA ESCRITA AL DIA SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87147260,CTX CONTEXTO,Medios locales independientes,digital,privada,si,placsp_nombre;bdns,CTXT Contexto
+B87325866,CINEMANIA MAGAZINE SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B87518122,"Global Astronomía, S.L.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B87539805,CANAL RURAL AGRO TV S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87764924,LA RADIO QUE VIENE S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87947040,"STYLE PERIODICO, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87961397,"Vivir Ediciones, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87995841,"SILICON RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88019815,DISTRITO TV S L . .,Medios locales independientes,tv,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B88169321,"VERSYS EDICIONES TECNICAS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88169701,"PRENSA Y SERVICIOS DE LA LENGUA, SLU",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88313085,PRENSA DIGITAL CYL SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88436704,"PUBLICACIONES DIGITALES DE SEGURIDAD,S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88592423,AVATEL TELEVISION SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88605266,EDA TV CONSULTING SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B88612676,ONETORO TV SPN S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B90045709,"EL CONTENEDOR EDICIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B90164450,"MAS TV ON LINE, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B90206830,FullMedia Andalucía SL (Canal Sur Radio y Televisión SA.),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B90251174,"MULTIMEDIA EDICIONES GLOBALES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91406900,"Diario ABC Andalucía, S.L.U",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91432393,"PUBLICACIONES E INTERNET ,SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91483545,"GUADALMEDIA, S.A. CANAL SUR RADIO",Medios locales independientes,revista,privada,gris,placsp_nombre,comercializadora de Canal Sur Radio
+B91558304,TELEVISIONES DIGITALES DE ANDALUCIA SL,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91563106,PRENSA Y COMUNICACION LOCAL S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91657528,"ÉCIJA COMARCA TELEVISIÓN, S.L.",Medios locales independientes,tv,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91714683,NIPHO PUBLICACIONES & COMUNICACION,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B91730390,PUBLICACIONES GUADALQUIVIR S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B92055581,TODAS LAS PUBLICACIONES MALAGUEÑAS S.L,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B92491638,"EDITORA MALAGUEÑA DE PUBLICACIONES, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B92680370,"EDICIONES HORO, S.L.",Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B93044717,"Noticias de Málaga 2010, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B93080109,RADIO BELLAMAR SL,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+B93119683,"PUBLICACIONES AVI, SL",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B93142065,MALAGA FM CADENA FM SL,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B93197937,"Costa del Sol Times TV, SL",Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B93727212,EDICIONES DISTRIBUCIONES Y APLICACIONES PERIODICAS SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B94063567,"Virtual Vedra Comunicación, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B94074390,NOS TELEVISIÓN S.L.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B94123650,Editorial Novas do Eixo Atlántico S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B95011276,"EUSKAL PRENSA, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B95284857,LEA-ARTIBAIALDEKO HEDABIDEAK SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B95394607,BIZKAIKO HEDABIDEAK SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B95414116,EDICIONES FECIT S.L.,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B95458758,PUBLICACIONES DYNA S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B95483137,KAEMONE EUROPE S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B95587713,LAUKATU EDICIONES S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B95690723,"MEDIA WORLD TV, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre;rueca,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B95802104,Vinilo FM Radio,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96262316,L´OLLERIA RADIO S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96553920,RADIO DIFUSIÓN TORRE SL,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96656574,SAO EDICIONS SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96725775,RIBERA TELEVISIO SLU,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96944186,EDICIONES CYBERMONDE SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B96969167,Nuevos Soportes De Comunicacion Y Arte S.l.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97158687,RADIO ONE FM S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B97172332,COMARQUES CENTRALS TELEVISIO SL,Medios locales independientes,tv,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+B97495683,VALLBLANCA PRESS SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97617856,TORRENT MEDIA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97621940,"AMUNT ONES, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97665483,"RADIOSIETE MECOMLYS, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97668164,"GRUPO DIARIO EDITORIAL, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B97691380,SOLINT QUATRE DISSENY SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B97822043,TUS NOTICIAS DE LA RIBERA SL,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B97873533,"RADIO MEDITERRANEO AZUL, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98106370,"INVERSIONES ESPECIALES DEL MEDITERRANEO, S.L.",Medios locales independientes,tv,privada,si,placsp_nombre;bdns,Telesafor (Gandia)
+B98112675,AU EDICIONS S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98132095,SETMANARI SETABENSE SL,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98250855,PRIME TV VALENCIANA SL,Medios locales independientes,tv,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98252855,PRIME TV VALENCIANA SL LEVANTE TV,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98276207,PROYECTOS DE COMUNICACION ONTINYENT SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98436462,Vive las fallas,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98466790,PUBLICACIONES MODA Y DISEÑO S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98566219,"ELDIARIOCV, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98581549,"Grupo edigorial de prensa festiva MPG, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98585854,UVEPE PLAZA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98604689,"HORTANOTICIAS, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98614076,EDICIONS LA VEU DEL PAIS VALENCIÁ S.COOP..V,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98614159,"BATISCAFO EDITORIAL, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98644826,LLIBRES DE LA DRASSANA S.L.,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98671738,"GOLSMEDIA SPORTS, S.L.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B98763881,RADIO CV INNOVACIÓN EN COMUNICACIÓN S.L.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98841232,Diario Alicante Plaza,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98858467,"COMARCAL VALLDIGNA RÀDIO, SL",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98883192,"SERVICIOS PERIODISTICOS Y PUBLICITARIOS VALENCIA, S.L",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98887185,VALENCIA EXTRA SL,Medios locales independientes,digital,privada,si,placsp_nombre;bdns,Valencia Extra
+B98891591,LA TRACA PUBLICACIONS VALENCIANES SL,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B98920259,"RADIO SIC Y EXTERIOR, S.L.",Medios locales independientes,radio,privada,gris,placsp_nombre,actúa como agencia de medios
+B98980089,GRUPO CALAFORRA MEDIA SL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+B99226631,"CON R DE RADIO, S.L.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B99433351,"EL DIARIO DE INFORMACIÓN DIGITAL, S.L.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B99494577,ASG Ediciones Digitales de Aragón S.L.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+D28481877,G Y J ESPAÑA EDICIONES S.L. EN C.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+E02579936,"DIARIO SANITARIO, C.B.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+E73865263,EL DIARIO REGIÓN DE MURCIA C.B,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+E74042482,"EDICIONES PROTOCOLO, C.B.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+E98595077,ONDA REQUENA CB (ES RADIO-104.3 FM REQUENA),Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F05543905,Radio Intereconomia,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F08657306,"RÀDIO ASS. DE CATALUNYA, SCCL",Medios locales independientes,radio,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+F11902459,diario el pueblo sl,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F16754830,"METROPOLITAN RADIO Y PODCAST, S.COOP.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F41602830,RADIO LEBRIJA S.C.A.,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F44714202,"Factoría de Noticias y Videos, Coop V",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F57078644,inforaiguer soc coop,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+F66472176,Ona Bages SCCL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+F67269993,"PREMSA LOCAL EL JARDI, SCCL",Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+F86598521,"MÁSPÚBLICO, S. COOP.",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+F90441973,ANA TOLIA EDITORA S. COOP.AND,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F93434249,Plural TV Soc. Coop. And.,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F95628558,Eme Komunikazioa Koop Elk Txikia,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+F98614076,EDICIONS LA VEU P.VALENCIA S.COOP.V,Medios locales independientes,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+F98927551,XTRADIO,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G02143006,ASOC.PRENSA DE ALBACETE,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G07278385,El Mirall,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G12980504,BURRIANA TELEVISIO,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G12992558,Asoc. Espai Audiovisual de Proximitat-ESAP,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G15211790,Emisoras Municipais Galegas (EMUGA),Medios locales independientes,radio,privada,gris,placsp_nombre,asociación de emisoras municipales
+G16974040,ASOC CULTURAL CURATELA ESTUDIO Y EDICION IMAGEN CONTEMPORANEA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G19032473,ASOCIACIÓN DE LA PRENSA DE GUADALAJARA,Medios locales independientes,revista,privada,gris,placsp_nombre,asociación de la prensa (anuario)
+G21573431,AMIGOS DEL PERIODICO LA HIGUERITA,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G24937096,RADIO UNIFM ASOC CULTURAL RECREATIVA Y DEPORTIVA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G30157812,ASOC. DE RADIO Y TELEVISION DE MURCIA,Medios locales independientes,tv,privada,gris,placsp_nombre,asociación profesional de radio y televisión
+G39332671,ASOC CULTURAL REINOSA TRES MARES RADIO,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G39408364,AGRUPACION CULTURAL DE RADIO LA ESTELA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G41922048,ASOC DE LA PRENSA DE SEVILLA-ASOC DE PERIODISTAS DE SEVILLA APS,Medios locales independientes,revista,privada,gris,placsp_nombre,asociación de la prensa
+G44506178,Radio Espai Jove,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G45454493,ASOC. DE LA PRENSA DE TALAVERA,Medios locales independientes,revista,privada,gris,placsp_nombre,asociación de la prensa
+G46229290,"EDITORIAL PRENSA VALENCIANA, SA",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G46236253,Radio Klara,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G54699418,Radio Santa Pola,Medios locales independientes,radio,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G58331729,Ràdio Televisió de Cardedeu,Medios locales independientes,radio,privada,gris,placsp_nombre,radio local (asociación); asistencia técnica
+G59835157,LLENGUA NACIONAL,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G61514162,AS. DE MITJANS D'INFORMACIO I COMUNICACIÓ (AMIC),Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G61850277,"L'ERA,ESPAI DE RECURSOS",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G66580028,"L'AVENIR, EINES PER A LA INFORMACIÓ",Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G71367825,EUSKALERRIA IRRATIA FUNDAZIOA,Medios locales independientes,radio,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G72355001,ASOC CULTURAL RADIOFONICA SHAKE FM,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G73901779,ASOC AMIGOS DE LA RADIO-JUSTINO BERMUDEZ,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a COPE (los objetos citan COPE); propiedad local, regla automática"
+G76674753,CUEVA ONDA,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+G78423795,ECOLOGISTAS EN ACCIÓN - CODA,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+G79092722,ONDA MERLIN COMUNITARIA RADIO SURESTE DE MADRID,Medios locales independientes,radio,privada,gris,placsp_nombre,radio comunitaria (asociación); objetos de formación
+G81639429,ACADEMIA DE LAS CIENCIAS Y ARTE TV ESPAÑA,Medios locales independientes,tv,privada,gris,placsp_nombre,academia de televisión (gala)
+G98187131,ASOCO DE MITJANS DIGITALS DE LA COMTAT V,Medios locales independientes,prensa,privada,gris,bdns;placsp_objetos,beneficiario de ayudas a medios o prestador audiovisual con objetos de publicidad; revisar
+J09395716,DIARIO DE LOS YACIMIENTOS DE LA SIERRA DE ATAPUERCA,Medios locales independientes,prensa,privada,gris,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J12999553,DIARI DEL MAESTRAT SCP,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J15962871,"ONDA COMUNICACIÓN, SC",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J22221865,"RADIO BENABARRE, S.C.",Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J22371769,DIGITAL FRAGA TELEVISIÓN,Medios locales independientes,tv,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J39363163,ONDA OCCIDENTAL SC,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J39569173,ONDA CASTRO S.C.,Medios locales independientes,radio,privada,si,placsp_nombre,"emisora asociada a Onda Cero (los objetos la citan); propiedad local, regla automática"
+J39795232,Radio Costa Esmeralda,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J42208850,Ediciones desdeSoria SC,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J56279409,"EDICIONS DE GASTROTURISMO, SC",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+J81962615,CAUDAL EDICIONES S.C.,Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+L718033L,PREMSA ESPORTIVA ROMGUAL SL,Medios locales independientes,prensa,privada,si,bdns,beneficiario de ayudas a medios con nombre de medio; sin contratos en PLACSP al construir el padrón
+U01675230,"Ceuta actualidad, Ángulo Ceuta, Ediciones ceitil, U.T.E.",Medios locales independientes,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+V48062863,RADIO POPULAR DE BILBAO,Medios locales independientes,radio,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A06446447,SOCIEDAD PUBLICA DE RADIODIFUSION Y,Medios públicos autonómicos,tv,publica,si,placsp_nombre,Canal Extremadura
+A38491098,"Televisión Pública de Canarias, S.A.",Medios públicos autonómicos,tv,publica,si,placsp_nombre,Televisión Pública de Canarias
+A61844411,Intracatalònia SA (Agència Catalana de Notícies),Medios públicos autonómicos,agencia_noticias,publica,si,placsp_nombre,"Agència Catalana de Notícies (Intracatalònia, Generalitat)"
+B01674720,EXTREMADURA TELEVISIÓN EXTV SL,Medios públicos autonómicos,tv,publica,si,placsp_nombre,Extremadura TV
+A07748379,"TELEVISIÓ D'EIVISSA I FORMENTERA, S.A.",Medios públicos locales,tv,publica,si,bdns,Televisió d Eivissa i Formentera (insular)
+A21465406,EMPRESA MUNICIPAL HUELVA TELEVISIÓN TDTL SA,Medios públicos locales,tv,publica,si,placsp_nombre,Huelva Televisión (empresa municipal)
+P6300001B,ENTIDAD PUBLICA EMPRESARIAL DIARIO LANZA,Medios públicos locales,prensa,publica,si,placsp_nombre,Diario Lanza (Diputación de Ciudad Real)
+B09844770,"EDICIONS DIGITALS DE PREMSA LOCAL, S.L.",Nació Digital,prensa,privada,si,placsp_nombre;bdns,regla automática (nombre de medio + objetos de publicidad/suscripción)
+A31743495,EDITORA INDEPEN.MEDIOS DE NAVARRRA,Navarra TV,prensa,privada,si,placsp_nombre,regla automática (nombre de medio + objetos de publicidad/suscripción)
+B87277455,DOS MIL PALABRAS SL,OKDiario,digital,privada,si,bdns_terceros,Dos Mil Palabras (OKDiario)
+A07015845,EDITORA BALEAR SA,Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns,Diario de Mallorca (Editora Balear)
+A07433444,"Diario de Ibiza, SA",Prensa Ibérica,prensa,privada,si,bdns,Diario de Ibiza
+A08398117,EDICIONES ZETA S.A.,Prensa Ibérica,revista,privada,si,placsp_nombre,"Ediciones Zeta (Grupo Zeta, integrado en Prensa Ibérica en 2019)"
+A08849911,"LA OPINION DE ZAMORA, S.A.U.",Prensa Ibérica,prensa,privada,si,placsp_nombre,La Opinión de Zamora
+A08884439,"EDITORIAL PRENSA ALICANTINA, S.A.U.",Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns_terceros,Información
+A10000339,EDITORIAL EXTREMADURA SA,Prensa Ibérica,prensa,privada,si,placsp_nombre,El Periódico Extremadura (ex Zeta)
+A12046728,PROMOCIONES Y EDICIONES CULTURALES SA,Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns,Mediterráneo (ex Zeta)
+A28896884,"DIARIO CORDOBA,S.A.U.",Prensa Ibérica,prensa,privada,si,placsp_nombre,Diario Córdoba (ex Zeta)
+A33052283,"EDITORIAL PRENSA ASTURIANA, S.A.U.",Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns,La Nueva España
+A35002228,PROVINCIA - EDITORIAL PRENSA CANARIA SA,Prensa Ibérica,prensa,privada,si,placsp_nombre,La Provincia (NIF mal tecleado por el órgano)
+A35002278,"EDITORIAL PRENSA CANARIA, S.A.",Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns_terceros,La Provincia
+A35002287,Editorial Prensa Canaria SA,Prensa Ibérica,prensa,privada,si,placsp_nombre,La Provincia (NIF mal tecleado por el órgano)
+A36600815,FARO DE VIGO SA UNIPERSONAL,Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns,Faro de Vigo
+A46229290,EDITORIAL PRENSA VALENCIANA SA,Prensa Ibérica,prensa,privada,si,placsp_nombre;bdns,Levante-EMV
+A50361641,PRENSA DIARIA ARAGONESA S.A.,Prensa Ibérica,prensa,privada,si,placsp_nombre,El Periódico de Aragón (ex Zeta)
+A96116645,"SUPERDEPORTE EMPRESA EDITORIAL, S.A.",Prensa Ibérica,prensa,privada,si,bdns,Superdeporte
+B08841173,"LA OPINION DE MALAGA, S.L.U.",Prensa Ibérica,prensa,privada,si,placsp_nombre,La Opinión de Málaga
+B15162068,"EDITORIAL LA CAPITAL, S.L.",Prensa Ibérica,prensa,privada,si,bdns,La Opinión A Coruña (Editorial La Capital)
+B35074681,La Opinión  A Coruña S.L.,Prensa Ibérica,prensa,privada,si,bdns,La Opinión de A Coruña
+B38530655,LA OPINION DE TENERIFE S.L.,Prensa Ibérica,prensa,privada,si,placsp_nombre,La Opinión de Tenerife
+B57447849,"PRENSA IBERICA 360, S.L.U.",Prensa Ibérica,digital,privada,si,placsp_nombre,Prensa Ibérica 360
+B65117350,PRENSA IBERICA NETWORK SL,Prensa Ibérica,digital,privada,si,placsp_nombre;bdns_terceros,Prensa Ibérica Network
+B65117376,Prensa Ibérica Digital S.L.,Prensa Ibérica,digital,privada,si,bdns_terceros,Prensa Ibérica Digital
+B66485343,"EL PERIÓDICO DE CATALUNYA, SLU",Prensa Ibérica,prensa,privada,si,bdns,El Periódico de Catalunya
+B66603267,PRENSA IBERICA MEDIA SL,Prensa Ibérica,prensa,privada,si,bdns_terceros,Prensa Ibérica Media
+A33924606,RADIOTELEVISIÓN DEL PRINCIPADO DE ASTURIAS S.A,RTPA,tv,publica,si,placsp_nombre,RTPA
+B10811156,Radiotelevisión del Principado,RTPA,tv,publica,si,placsp_nombre,RTPA (NIF mal tecleado por el órgano)
+A73386195,Onda Regional de Murcia,RTRM (La 7 y Onda Regional),radio,publica,si,placsp_nombre,Onda Regional de Murcia
+A41248899,CANAL SUR RADIO Y TELEVISION SA,RTVA (Canal Sur),tv,publica,si,placsp_nombre,Canal Sur Radio y Televisión
+A84818558,"CORPORACIÓN DE RADIO Y TELEVISIÓN ESPAÑOLA, S.A., S.M.E.",RTVE,tv,publica,si,placsp_nombre,Corporación RTVE
+A47637160,RADIO TELEVISION DE CASTILLA Y LEON S.A.,Radio Televisión de Castilla y León,tv,privada,si,placsp_nombre,CyLTV (sociedad privada concesionaria)
+A78955713,"SERVIMEDIA, S.A.",Servimedia,agencia_noticias,privada,si,placsp_nombre,Servimedia (Grupo Social ONCE)
+A79102331,UNIDAD EDITORIAL SA,Unidad Editorial,prensa,privada,si,placsp_nombre;bdns,"El Mundo, Marca, Expansión"
+A82659954,Veo Televisión,Unidad Editorial,tv,privada,si,rueca,Veo Televisión
+B81819179,"Unidad Editorial Ediciones Locales, S.L.",Unidad Editorial,prensa,privada,si,placsp_nombre,Unidad Editorial Ediciones Locales
+B81868697,"UNIDAD EDITORIAL INFORMACIÓN DEPORTIVA, S.L.U.",Unidad Editorial,prensa,privada,si,placsp_nombre,Unidad Editorial Información Deportiva (Marca)
+B82448960,Unedisa Comunicaciones,Unidad Editorial,radio,privada,si,rueca,Unedisa Comunicaciones
+B85157790,UNIDAD EDITORIAL INFORMACION GENERAL SLU,Unidad Editorial,prensa,privada,si,placsp_nombre,Unidad Editorial Información General
+A15000649,"LA VOZ DE GALICIA, S.A.",Voz de Galicia,prensa,privada,si,placsp_nombre;bdns,La Voz de Galicia
+B15054414,"VOZ DE GALICIA RADIO, S.L.U.",Voz de Galicia,radio,privada,si,bdns,Voz de Galicia Radio
+B15292022,"CORPORACIÓN VOZ DE GALICIA, S.L.U.",Voz de Galicia,eventos_grupo,privada,si,bdns_terceros,Corporación Voz de Galicia
+B81606717,"AGENCIA DE NOTICIAS DPA ESPAÑA, S.L.",dpa,agencia_noticias,privada,si,placsp_nombre,Agencia de noticias dpa
+B86509254,DIARIO DE PRENSA DIGITAL S.L,eldiario.es,digital,privada,si,bdns,elDiario.es
+A75771584,CORPORACIÓ AUDIOVISUAL DE LA COMUNITAT VALENCIANA SA,À Punt (CVMC),tv,publica,si,placsp_nombre,À Punt (CACVSA)

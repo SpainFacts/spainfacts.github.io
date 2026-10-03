@@ -1,12 +1,13 @@
 ---
 title: Wildfires
 description: Area burnt in Spain each year, fires within the Natura 2000 network, a map of burnt areas and active fires detected by satellite.
-i18n_origen: e647cb90ccc3
+i18n_origen: 31d2856b157a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -100,7 +101,7 @@ WHERE anio = (SELECT max(anio) FROM mother.incendios_areas_quemadas)
 ORDER BY area_ha DESC
 ```
 
-<BubbleMap
+<MapaEspana
     data={areas_anio}
     lat=latitud
     long=longitud
@@ -153,7 +154,7 @@ WHERE confianza <> 'baja'
 
 <p class="text-sm text-gray-600 dark:text-gray-400">{formatNumber(focos_resumen[0]?.n_focos, 0)} hotspots with medium or high confidence between {new Date(focos_resumen[0]?.desde).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })} and {new Date(focos_resumen[0]?.hasta).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
 
-<PointMap
+<MapaEspana
     data={focos}
     lat=latitud
     long=longitud
@@ -197,7 +198,7 @@ FROM mother.incendios_provincia_anio
 WHERE anio = ${inputs.anio_prov.value}
 ```
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/spain-provinces.geojson"
     geoId="cod_prov"

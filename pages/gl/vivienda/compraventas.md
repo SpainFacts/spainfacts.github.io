@@ -1,10 +1,11 @@
 ---
 title: Compravendas e hipotecas
 description: "Compravendas de vivendas e hipotecas sobre vivendas en España por 1.000 habitantes, vivenda nova fronte a segunda man e importe medio da hipoteca descontada a inflación, por comunidade e provincia."
-i18n_origen: f88105740a74
+i18n_origen: ed62e0823b71
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -209,7 +210,7 @@ Importe medio das hipotecas constituídas sobre vivendas, con e sen inflación. 
 
 Compravendas dos últimos 12 meses por 1.000 habitantes.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -240,7 +241,7 @@ Compravendas dos últimos 12 meses por 1.000 habitantes.
 
 ## Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

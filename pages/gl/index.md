@@ -1,12 +1,13 @@
 ---
 title: SpainFacts · O Estado de España en Datos Oficiais
 description: "España en datos oficiais: poboación, economía, contas públicas, enerxía, mobilidade, sociedade e transparencia, de España a cada municipio. Independente e sen nesgo partidista."
-i18n_origen: 33d766fc924e
+i18n_origen: 55bec392edfc
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
@@ -256,7 +257,7 @@ LEFT JOIN (
     <ButtonGroupItem valueLabel="Débeda" value="deuda" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={mapa_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -343,6 +344,12 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sociedade</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalidade, saúde, inmigración, renda e pobreza ata o nivel de municipio, e educación.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delitos coñecidos por 1.000 hab. →</p>
+    </a>
+    <a href="/gl/medios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1" aria-hidden="true">📰</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">Medios de comunicación</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Canto diñeiro público reciben os medios: televisións públicas, publicidade institucional e subvencións, por comunidade e por partido.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Diñeiro público nos medios →</p>
     </a>
     <a href="/gl/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1" aria-hidden="true">🔎</p>

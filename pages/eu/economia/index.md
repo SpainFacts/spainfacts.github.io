@@ -1,7 +1,7 @@
 ---
 title: Ekonomia
 description: "BPG biztanleko, hazkundea, kanpo-merkataritza, sektoreak, enplegua, soldatak, langabezia eta inflazioa Espainian, inflazioa kenduta eta biztanleriaren arabera."
-i18n_origen: a21903b3070d
+i18n_origen: 071a947706ae
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -245,6 +245,18 @@ Hileko batez besteko soldata gordina, inflazioa kenduta. [Hazkundea, sektoreak e
     <a href="/eu/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏢</span> Enpresak, ekintzailetza eta I+G</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Enpresak biztanleko eta tamainaren arabera, sortutako eta desegindako sozietateak, konkurtsoak, autonomoak eta I+Gko gastua Europarekin alderatuta</div>
+    </a>
+    <a href="/eu/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🌾</span> Nekazaritza, abeltzaintza eta arrantza</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Europako baratza: oliba-olioa, zitrikoak, frutak eta barazkiak, txerrikiak, ardoa eta arrantza, eta Espainiaren postua EBn</div>
+    </a>
+    <a href="/eu/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏭</span> Industria</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Autoak, azulejuak, elikagaiak, trena eta aerosorgailuak: non nabarmentzen den Espainia eta zenbat industria duen EBrekin alderatuta</div>
+    </a>
+    <a href="/eu/economia/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏗️</span> Eraikuntza</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">2007ko burbuila, kolapsoa eta susperraldia: enplegua, lizitatutako obra publikoa, ikus-onetsitako etxebizitzak eta zementua EBrekin alderatuta</div>
     </a>
 </Grid>
 

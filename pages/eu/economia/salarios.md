@@ -1,12 +1,13 @@
 ---
 title: Soldatak
 description: "Espainiako batez besteko soldata inflazioa kenduta, haren hazkunde erreala eta nominala, sektorearen eta lanaldiaren arabera, eta dezilen araberako banaketa."
-i18n_origen: dc575af43c4c
+i18n_origen: a16ce5b323ef
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -235,7 +236,7 @@ ORDER BY s.salario_real DESC
 
 Hileko batez besteko soldata gordina {por_ccaa[0]?.anio}. urtean, {por_ccaa[0]?.anio_euros}. urteko eurotan. Zerrendaren buruan {por_ccaa[0]?.comunidad} dago, {formatNumber(por_ccaa[0]?.salario_real, 0)} €-rekin, eta azkenean {por_ccaa.slice(-1)[0]?.comunidad}, {formatNumber(por_ccaa.slice(-1)[0]?.salario_real, 0)} €-rekin. Bizi-kostuaren arabera zuzendu gabeko euroak dira, eta bizi-kostua ere aldatu egiten da erkidego batetik bestera. Ceuta eta Melilla ez dira bereiz argitaratzen.
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

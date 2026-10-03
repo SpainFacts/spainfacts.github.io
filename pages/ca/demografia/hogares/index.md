@@ -1,10 +1,11 @@
 ---
 title: Llars
 description: "Mida mitjana de la llar i percentatge de llars d'una sola persona a Espanya, per comunitat i província, des del 2021 (INE, Estadística Contínua de Població)."
-i18n_origen: 36e2d1ec8163
+i18n_origen: 0989f96b9d04
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -111,7 +112,7 @@ ORDER BY h.pct_unipersonales DESC
 
 Les llars d'una sola persona van del {formatNumber(provincias[0]?.unipersonales / 0.01, 1)} % de {provincias[0]?.provincia} al {formatNumber(provincias.slice(-1)[0]?.unipersonales / 0.01, 1)} % de {provincias.slice(-1)[0]?.provincia}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

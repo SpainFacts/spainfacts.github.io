@@ -1,10 +1,11 @@
 ---
 title: Renda, pobreza e desigualdade
 description: "Renda media dos fogares descontada a inflación, risco de pobreza, AROPE, carencia material, índice de Gini e S80/S20 en España, por comunidade, idade e municipio, e comparación coa UE."
-i18n_origen: 9952ace4d46b
+i18n_origen: 9c8ab30724e4
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -285,7 +286,7 @@ FROM ${ccaa}
 As diferenzas entre comunidades son grandes: na ECV {ccaa[0]?.anio} a taxa de risco de pobreza ía do {formatNumber(ccaa_extremos[0]?.min_pobreza, 1)} % de {ccaa_extremos[0]?.menos_pobreza} ao {formatNumber(ccaa_extremos[0]?.max_pobreza, 1)} % de {ccaa_extremos[0]?.mas_pobreza}, e a renda neta por persoa de {formatNumber(ccaa_extremos[0]?.min_renta, 0)} € en {ccaa_extremos[0]?.menos_renta} a {formatNumber(ccaa_extremos[0]?.max_renta, 0)} € en {ccaa_extremos[0]?.mas_renta}. O limiar de pobreza é o mesmo para toda España, sen axustar polo custo de vida de cada rexión.
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"

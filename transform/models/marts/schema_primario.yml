@@ -1,0 +1,119 @@
+version: 2
+
+models:
+  - name: primario_paises_largo
+    description: >
+      Sector primario de los 27 países de la UE en formato largo (producto x país x año):
+      cultivos (apro_cpsh1), ganadería (apro_mt_*, apro_mk_cola), pesca (fish_*), valor de la
+      producción agraria (aact_eaa01) y exportaciones (Comext DS-045409), con la población media
+      del país (nama_10_pe). Base de los demás marts primario_.
+    columns:
+      - name: categoria
+        description: "cultivo, ganaderia, pesca, valor, exportacion"
+        tests: [not_null]
+      - name: producto_id
+        tests: [not_null]
+      - name: geo
+        description: "Código Eurostat del país (Grecia = EL)"
+        tests: [not_null]
+      - name: valor
+        description: "Valor en la unidad de la columna unidad"
+        tests: [not_null]
+  - name: primario_ranking_ue
+    description: >
+      Una fila por producto: cuota de España en la UE-27, puesto, primer y segundo país, peso
+      de España en la población de la UE y «veces su peso poblacional» (cuota / peso en
+      población), por habitante en España y en la UE, en el último año con cobertura >= 97 %
+      (o la mejor posible, ver cobertura_pct, paises_sin_dato y cuota_min_pct).
+    columns:
+      - name: producto_id
+        tests: [not_null, unique]
+      - name: cuota_pct
+        description: "España / suma de los países con dato x 100"
+        tests: [not_null]
+      - name: cuota_min_pct
+        description: "Cuota sumando al total el último dato conocido de los países sin dato ese año"
+      - name: puesto
+        description: "Puesto de España entre los países con dato"
+        tests: [not_null]
+      - name: veces_peso_poblacion
+        description: "cuota_pct / cuota_poblacion_pct (1 = lo que le tocaría por población)"
+      - name: valor_hab_espana
+        description: "Por habitante en España, en la unidad de unidad_hab"
+      - name: valor_hab_ue
+        description: "Por habitante en la UE-27 (total de los países con dato / población UE-27)"
+      - name: nota
+        description: "Advertencias del producto (reexportación de Países Bajos, vino en las cuentas agrarias, países sin dato)"
+  - name: primario_serie_espana
+    description: >
+      Series anuales de España desde 2000 para cada producto de primario_paises_largo: valor,
+      cuota sobre los países de la UE con dato, puesto, por habitante y, en los productos en M EUR,
+      en euros constantes (main.deflactor).
+    columns:
+      - name: producto_id
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+  - name: primario_valor_produccion
+    description: >
+      Producción de la rama agraria y VAB agrario (aact_eaa01), volumen (aact_eaa04, CLV20) y
+      renta agraria real por UTA (aact_eaa06) de España, la UE-27 y FR, DE, IT, PL, NL, PT, EL,
+      RO, por habitante y en euros reales (España con el IPC; los demás con su deflactor del PIB).
+    columns:
+      - name: geo
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+  - name: primario_aceite
+    description: >
+      Producción de aceite de oliva por campaña desde 2013/14 (Agri-food data portal de la
+      Comisión): España, Italia, Grecia, Portugal y resto de la UE, cuota en la UE y, con la
+      producción mundial del COI (seed primario_mundo), cuota mundial; fila 'Mundo (COI)'.
+    columns:
+      - name: campania
+        tests: [not_null]
+      - name: grupo
+        tests: [not_null]
+  - name: primario_aceite_precios
+    description: >
+      Precio mensual en origen del aceite de oliva (virgen extra, virgen, lampante) en España,
+      Italia, Grecia y Portugal desde 2010 (media de las cotizaciones semanales de los mercados
+      del país, Agri-food data portal), en EUR/kg corrientes y reales (IPC de España).
+    columns:
+      - name: mes
+        tests: [not_null]
+      - name: eur_kg
+        tests: [not_null]
+  - name: primario_pesca
+    description: >
+      Capturas, acuicultura (t y EUR) y flota (GT y buques) por país de la UE y año desde 2000,
+      con cuota, cuota prudente (sumando el último dato de los ausentes), puesto y kg por
+      habitante. Irlanda y Portugal no publican capturas recientes.
+    columns:
+      - name: medida
+        tests: [not_null]
+      - name: geo
+        tests: [not_null]
+  - name: primario_ccaa
+    description: >
+      VAB de la rama primaria (A: agricultura, ganadería, silvicultura y pesca) y su peso en el
+      VAB total por comunidad y provincia (códigos INE) desde 2000 (Eurostat nama_10r_3gva), con
+      euros por habitante corrientes y reales.
+    columns:
+      - name: nivel
+        description: "pais, ccaa, provincia"
+        tests: [not_null]
+      - name: cod
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+  - name: primario_ccaa_cultivos
+    description: >
+      Producción y superficie de cereales, cebada, maíz, arroz, girasol y patata por comunidad
+      (Eurostat apro_cpshr) desde 2000, con cuota en España y por habitante. Eurostat no da por
+      región olivar, viñedo, cítricos, frutales ni hortalizas.
+    columns:
+      - name: cod
+        tests: [not_null]
+      - name: producto_id
+        tests: [not_null]

@@ -1,10 +1,11 @@
 ---
 title: Housing rents
 description: "Median housing rent in Spain adjusted for inflation, by region, province and municipality, using income tax data from the State Rental Price Reference System and the INE index."
-i18n_origen: deee5f4dedc1
+i18n_origen: 15b55dba3f41
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -174,7 +175,7 @@ The INE also publishes an index that tracks the rent of the same leases year by 
 
 Median rent for a flat in {ccaa[0]?.anio}, in {espana[0]?.anio_base} euros.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -205,7 +206,7 @@ Median rent for a flat in {ccaa[0]?.anio}, in {espana[0]?.anio_base} euros.
 
 ## By province
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,10 +1,11 @@
 ---
 title: Renda, pobresa i desigualtat
 description: "Renda mitjana de les llars descomptada la inflació, risc de pobresa, AROPE, carència material, índex de Gini i S80/S20 a Espanya, per comunitat, edat i municipi, i comparació amb la UE."
-i18n_origen: 9952ace4d46b
+i18n_origen: 9c8ab30724e4
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -285,7 +286,7 @@ FROM ${ccaa}
 Les diferències entre comunitats són grans: a l'ECV {ccaa[0]?.anio} la taxa de risc de pobresa anava del {formatNumber(ccaa_extremos[0]?.min_pobreza, 1)} % de {ccaa_extremos[0]?.menos_pobreza} al {formatNumber(ccaa_extremos[0]?.max_pobreza, 1)} % de {ccaa_extremos[0]?.mas_pobreza}, i la renda neta per persona, de {formatNumber(ccaa_extremos[0]?.min_renta, 0)} € a {ccaa_extremos[0]?.menos_renta} a {formatNumber(ccaa_extremos[0]?.max_renta, 0)} € a {ccaa_extremos[0]?.mas_renta}. El llindar de pobresa és el mateix per a tot Espanya, sense ajustar pel cost de la vida de cada regió.
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"

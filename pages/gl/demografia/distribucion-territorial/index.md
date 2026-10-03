@@ -1,10 +1,11 @@
 ---
 title: Repartición territorial da poboación
 description: "Como se reparte a poboación de España entre comunidades e provincias desde 1975: concentración, provincias que perden habitantes e porcentaxe de nados no estranxeiro en cada provincia (INE)."
-i18n_origen: c8fbe04365c1
+i18n_origen: d77c92bbc1bf
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -142,7 +143,7 @@ FROM ${provincias}
 
 Hoxe hai {provincias_resumen[0]?.pierden_1975} provincias con menos habitantes ca en 1975. A que máis medrou é {provincias[0]?.provincia} ({formatNumber(provincias[0]?.crec_1975, 0)} %) e a que máis perdeu, {provincias.slice(-1)[0]?.provincia} ({formatNumber(provincias.slice(-1)[0]?.crec_1975, 0)} %).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
@@ -168,7 +169,7 @@ Hoxe hai {provincias_resumen[0]?.pierden_1975} provincias con menos habitantes c
 
 A proporción de residentes nados noutro país vai do {formatNumber(provincias_resumen[0]?.max_pct / 0.01, 1)} % de {provincias_resumen[0]?.max_prov} ao {formatNumber(provincias_resumen[0]?.min_pct / 0.01, 1)} % de {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

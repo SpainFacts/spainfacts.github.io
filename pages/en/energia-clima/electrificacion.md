@@ -1,12 +1,13 @@
 ---
 title: Electrification of the economy
 description: "How much of the energy used by industry, transport, households and services in Spain is electricity, how homes are heated in each province and how many heat pumps there are."
-i18n_origen: 49a1fe838e5e
+i18n_origen: a287d12777fb
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -215,7 +216,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ### Homes heated with electricity, by province
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

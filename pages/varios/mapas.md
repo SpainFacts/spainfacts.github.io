@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import TablaSeleccion from '../../../../../../src/lib/components/TablaSeleccion.svelte';
 
     const numero = (v) =>
@@ -129,7 +130,7 @@ ORDER BY posicion
 <div class="col-span-2">
 <!-- Un mapa por nivel: AreaMap no admite cambiar de geojson sin recrearse -->
 {#if elegido[0].nivel === 'Provincia'}
-<AreaMap
+<MapaEspana
     data={datos}
     areaCol=cod
     geoJsonUrl="/geo/provincias.geojson"
@@ -146,7 +147,7 @@ ORDER BY posicion
     basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"
 />
 {:else}
-<AreaMap
+<MapaEspana
     data={datos}
     areaCol=cod
     geoJsonUrl="/geo/ccaa.geojson"

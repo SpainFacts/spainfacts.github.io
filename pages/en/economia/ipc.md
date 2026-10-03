@@ -1,10 +1,11 @@
 ---
 title: Inflation (CPI)
 description: "Inflation in Spain: headline and core CPI, prices by group, the real price of electricity, gas and motor fuels, how much prices have risen since 2008 and 2019, CPI by region and comparison with the euro area."
-i18n_origen: 68f3d36e2f60
+i18n_origen: c732f0a70537
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -686,7 +687,7 @@ Average price per kWh paid by a household with average consumption, including al
 
 Annual inflation in each region in {ccaa[0]?.mes_txt} and cumulative price rise since December 2019. Prices have risen most since then in {ccaa_resumen[0]?.cmax} (+{formatNumber(ccaa_resumen[0]?.smax / 0.01, 1)}%) and least in {ccaa_resumen[0]?.cmin} (+{formatNumber(ccaa_resumen[0]?.smin / 0.01, 1)}%). The CPI measures how much prices change in each region, not whether one region is more expensive than another.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

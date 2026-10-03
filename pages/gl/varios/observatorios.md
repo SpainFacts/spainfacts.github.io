@@ -3,10 +3,11 @@ title: Observatorios públicos
 description: "Censo dos observatorios públicos de España: cantos hai, que administración os crea, cando naceron, cantos seguen activos, cantos hai por habitante en cada comunidade e que partido gobernaba cando se crearon."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69daf1595b8
+i18n_origen: 10c0e03a581c
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -276,7 +277,7 @@ Por nivel da administración. O censo só marca como pechados {formatNumber(resu
 
 Observatorios autonómicos, provinciais e locais de cada comunidade, por millón de habitantes. A comunidade sae do ámbito que indica o censo ou, se non o di, do nome do observatorio: o municipio (cruzado cos do INE), a illa ou provincia, ou o xentilicio ("Andaluz", "Galego"...). Quedan {formatNumber(resumen[0]?.sin_comunidad, 0)} sen situar porque o seu nome non permite sabelo ("Observatorio Social", "Observatorio del Agua"...).
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

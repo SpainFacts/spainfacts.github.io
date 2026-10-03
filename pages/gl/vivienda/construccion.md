@@ -1,10 +1,11 @@
 ---
 title: Obra nova
 description: "Vivendas libres que se comezan e se rematan cada ano en España por 1.000 habitantes desde 1996, por comunidade e provincia, con datos do Ministerio de Vivenda."
-i18n_origen: 8eb6bc574063
+i18n_origen: 6b1ad71c87ca
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -144,7 +145,7 @@ As vivendas rematadas pódense comparar coas compravendas de vivenda nova que re
 
 Vivendas libres rematadas por 1.000 habitantes en {ccaa[0]?.anio}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

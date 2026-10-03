@@ -1,10 +1,11 @@
 ---
 title: Inflació (IPC)
 description: "Inflació a Espanya: IPC general i subjacent, preus per grups, preu real de la llum, el gas i els carburants, quant han pujat els preus des del 2008 i el 2019, IPC per comunitat i comparació amb la zona euro."
-i18n_origen: 68f3d36e2f60
+i18n_origen: c732f0a70537
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -686,7 +687,7 @@ Preu mitjà per kWh que paga una llar de consum mitjà amb tots els impostos (Eu
 
 Inflació anual de cada comunitat el {ccaa[0]?.mes_txt} i pujada acumulada dels preus des del desembre del 2019. On més han pujat els preus des d'aleshores és a {ccaa_resumen[0]?.cmax} (+{formatNumber(ccaa_resumen[0]?.smax / 0.01, 1)} %) i on menys a {ccaa_resumen[0]?.cmin} (+{formatNumber(ccaa_resumen[0]?.smin / 0.01, 1)} %). L'IPC mesura quant canvien els preus a cada comunitat, no si una és més cara que una altra.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

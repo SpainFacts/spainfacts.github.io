@@ -3,10 +3,11 @@ title: Eleccions
 description: "Resultats de les eleccions generals des de 1977, europees i municipals: participació, vot per partit i per bloc, fragmentació, vots per escó i guanyador a cada província i municipi, amb les dades oficials del Ministeri de l'Interior."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c6f8193148e9
+i18n_origen: 855cde6e0399
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Les etiquetes de data arriben de SQL amb el mes abreujat en castellà ('abr. 2019')
@@ -337,7 +338,7 @@ ORDER BY orden
 
 La família política de la candidatura més votada a cada província (la circumscripció de les generals).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

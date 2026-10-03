@@ -1,12 +1,13 @@
 ---
 title: Publizitate aktiboa
 description: "Argitaratzen al dute administrazioek beren gardentasun-atarietan legeak eskatzen diena? Erakundez erakundeko ebaluazio ofizialak (Gardentasun eta Gobernu Oneko Kontseilua eta Kanarietako Gardentasun Komisionatua), haien bilakaera, alderdien araberako alderaketa eta oraindik neurtu ezin dena."
-i18n_origen: 8c5314133b0c
+i18n_origen: 3f26672a5738
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -330,7 +331,7 @@ Hobekuntza argia da: udalen batez besteko nota lehen ebaluazioan {formatNumber(i
 
 ### Udalak, {itc_ultimo[0]?.etiqueta}
 
-<AreaMap
+<MapaEspana
     data={itc_aytos_ultimo}
     geoJsonUrl="/geo/municipios/05.geojson"
     geoId="cod_mun"

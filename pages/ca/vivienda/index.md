@@ -3,10 +3,11 @@ title: Habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació, lloguer, compravendes i hipoteques per 1.000 habitants, obra nova i quants anys de salari costa una casa, per comunitat i província."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a02abfec5da9
+i18n_origen: 9445f0493756
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -181,7 +182,7 @@ Compravendes d'habitatges inscrites als registres de la propietat i hipoteques c
 
 Preu real del metre quadrat en l'últim trimestre. Fes clic en una comunitat per veure'n la fitxa.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

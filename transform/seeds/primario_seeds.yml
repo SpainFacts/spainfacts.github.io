@@ -1,0 +1,46 @@
+version: 2
+
+seeds:
+  - name: primario_mundo
+    description: >
+      Cifras mundiales del sector primario transcritas a mano (revisado el 2026-10-03), para dar
+      el puesto de España fuera de la UE. Aceite de oliva: Consejo Oleícola Internacional (COI),
+      página «Olive sector statistics, December 2025 and forecasts» (© COI, sin licencia abierta:
+      solo unas pocas cifras con cita). Vino y viñedo: OIV, «State of the World Wine Sector in
+      2025» (PDF de mayo de 2026; reutilización con cita). Cada fila lleva su fuente y página.
+      Ojo: la OIV da 28,7 Mhl de vino para España en 2025 (no 29,4).
+    config:
+      column_types:
+        indicador: varchar
+        periodo: varchar
+        anio: integer
+        cod: varchar
+        pais: varchar
+        valor: double
+        unidad: varchar
+        puesto_mundo: integer
+        fuente: varchar
+        url: varchar
+    columns:
+      - name: indicador
+        description: "aceite_produccion, vinedo_superficie, vino_produccion, vino_exportacion_volumen, vino_exportacion_valor"
+      - name: periodo
+        description: "Campaña (aceite, p. ej. 2024/25) o año"
+      - name: anio
+        description: "Año de inicio de la campaña o año natural"
+      - name: cod
+        description: "Código de país (Eurostat para la UE, ISO 2 fuera; MUNDO = total mundial)"
+      - name: valor
+        description: "Cifra publicada, en la unidad de la columna unidad"
+      - name: puesto_mundo
+        description: "Puesto mundial que da la fuente (vacío si no lo da)"
+      - name: fuente
+        description: "Organismo, documento, apartado y página de origen de la fila"
+      - name: url
+        description: "URL del documento"
+  - name: primario_paises
+    description: "Nombres en español de los 27 países de la UE con su código Eurostat (Grecia = EL) y el agregado UE-27."
+    config:
+      column_types:
+        geo: varchar
+        pais: varchar

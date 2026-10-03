@@ -1,0 +1,40 @@
+version: 2
+
+seeds:
+  - name: medios_grupos_equivalencias
+    description: >
+      Tabla de equivalencias nombre en la fuente -> grupo mediático normalizado, para
+      agrupar cabeceras y emisoras de la publicidad autonómica y municipal
+      (raw.pubt_gasto, seed medios_publicidad_territorial_manual), de la AGE (seed
+      medios_publicidad_grupos_informe) y de las subvenciones. Generada con reglas de
+      expresiones regulares sobre el nombre normalizado (mayúsculas, sin tildes) en el
+      scratchpad mpt_equiv.py: p. ej. «VANGUARDIA, LA», «RAC 1» y «MUNDO DEPORTIVO» -> Grupo
+      Godó; «CADENA SER», «LOS40», «PAIS, EL» -> Grupo Prisa; «ONDA CERO», «LA RAZON» ->
+      Atresmedia-Planeta; «TVC», «3CAT», «CATALUNYA RÀDIO» -> CCMA. Los nombres de grupo
+      siguen, cuando existen, los del Anexo IV del Informe 2025 de la AGE. Si un mismo texto
+      nombra medios de varios grupos (contratos conjuntos de Murcia) se marca «Varios
+      grupos (contrato conjunto)». Lo que no está en la tabla se queda con su nombre tal
+      cual. Es una aproximación: emisoras locales asociadas a cadenas y cabeceras que han
+      cambiado de dueño se asignan al dueño actual.
+    config:
+      column_types:
+        nombre_fuente: varchar
+        grupo_normalizado: varchar
+        tipo_grupo: varchar
+        es_publico: boolean
+        nota: varchar
+    columns:
+      - name: nombre_fuente
+        description: Nombre tal cual en la fuente (espacios normalizados). Clave de unión con upper(trim()).
+        tests: [not_null]
+      - name: grupo_normalizado
+        description: Grupo mediático normalizado.
+      - name: tipo_grupo
+        description: "'privado', 'publico' (RTVE, CCMA, EITB, À Punt, Telemadrid, CARTV, RTRM, FORTA, EFE...), 'plataforma' (Google, Meta, TikTok, X, Spotify...) o 'varios'."
+        tests:
+          - accepted_values:
+              values: ['privado', 'publico', 'plataforma', 'varios']
+      - name: es_publico
+        description: true si el grupo es un medio de titularidad pública.
+      - name: nota
+        description: Origen de la equivalencia.

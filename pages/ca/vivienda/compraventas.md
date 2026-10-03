@@ -1,10 +1,11 @@
 ---
 title: Compravendes i hipoteques
 description: "Compravendes d'habitatges i hipoteques sobre habitatges a Espanya per 1.000 habitants, habitatge nou davant de segona mà i import mitjà de la hipoteca descomptada la inflació, per comunitat i província."
-i18n_origen: f88105740a74
+i18n_origen: ed62e0823b71
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -209,7 +210,7 @@ Import mitjà de les hipoteques constituïdes sobre habitatges, amb inflació i 
 
 Compravendes dels últims 12 mesos per 1.000 habitants.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -240,7 +241,7 @@ Compravendes dels últims 12 mesos per 1.000 habitants.
 
 ## Per província
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

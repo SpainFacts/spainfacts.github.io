@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: raw_medios_contratos_ccaa
+    description: >
+      Contratos (sobre todo MENORES) adjudicados a empresas de medios de comunicación publicados en las
+      plataformas autonómicas y municipales de datos abiertos que la sindicación de PLACSP no trae
+      (ingestion/medios_contratos_ccaa.py): Cataluña (PSCP, Socrata ybgg-dgi6, con NIF; Registre públic
+      de contractes, Socrata hb6v-jcbf, sin NIF, casado por nombre), Euskadi (API KontratazioA), Junta de
+      Andalucía (contratación menor, CSV anual), Xunta de Galicia (contratosdegalicia.gal, contratos
+      menores por organismo), Gobierno de La Rioja (contratos menores, CSV anual), Ayuntamiento de Madrid
+      (datos.madrid.es 300253) y Ajuntament de Barcelona (Open Data BCN, 2018). Solo adjudicatarios del
+      padrón seed medios_padron_nif (es_medio si o gris) o, aparte, con nombre de medio (candidatos).
+      Carga MERGE por plataforma, id de contrato y NIF.
+    schema: raw
+    tables:
+      - name: ccaa_contratos_medios
+        description: >
+          Una fila por contrato × adjudicatario del padrón. plataforma = cat_pscp | cat_rpc |
+          eus_kontratazioa | and_junta | gal_xunta | rio_car | mad_ayto | bcn_ayto | mad_cm | nav_portal. metodo_casado = nif |
+          nombre (cat_rpc: nombre normalizado idéntico a un nombre conocido de un NIF del padrón).
+          importe_sin_iva_estimado = true cuando la fuente solo da el importe con IVA (gal_xunta, rio_car, mad_ayto y nav_portal:
+          se divide entre 1,04 en suscripciones y prensa y entre 1,21 en el resto). es_menor
+          según la fuente. nivel/ambito/cod_ccaa/cod_municipio deducidos del órgano.
+      - name: ccaa_candidatos_medios
+        description: "Mismas columnas para adjudicatarios con NIF fuera del padrón y nombre con pinta de medio (regex). Para revisar y ampliar el padrón."
+      - name: ccaa_candidatos_nombres
+        description: "Candidatos agregados por nombre (y NIF si lo hay) de Cataluña (cat_pscp y cat_rpc): número de contratos (y menores) e importe. Para revisar."
+      - name: ccaa_cobertura
+        description: "Filas leídas por plataforma y periodo (año o mes) y, en cat_rpc, tamaño del diccionario de nombres y nombres ambiguos descartados."

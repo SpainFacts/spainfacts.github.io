@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -257,7 +258,7 @@ ORDER BY anio
 
 ## Municipios
 
-<AreaMap
+<MapaEspana
     data={municipios}
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"

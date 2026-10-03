@@ -40,4 +40,10 @@ Consulta análisis y recursos transversales que complementan los grandes temas d
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Proyectos de datos abiertos y transparencia de fuera que sirven de modelo, y qué podría aprender España.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Ver los ejemplos →</span>
     </a>
+    <a href="/varios/diputados-caseros" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🏘️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">¿Cuántos diputados son caseros?</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quién declara alquileres o varias viviendas en su declaración de bienes, por grupo y frente al resto de contribuyentes.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Ver los diputados →</span>
+    </a>
 </Grid>

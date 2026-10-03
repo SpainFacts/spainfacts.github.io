@@ -1,12 +1,13 @@
 ---
 title: Enpresak, ekintzailetza eta I+G
 description: "Zenbat enpresa dauden Espainian biztanleko eta zer tamainatakoak, zenbat sozietate sortzen eta desegiten diren, hartzekodunen konkurtsoak, autonomoak eta I+Gko gastua Europarekin eta erkidegoka alderatuta."
-i18n_origen: ba0336af2883
+i18n_origen: 8db7e727c98e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -188,7 +189,7 @@ INEren Enpresen Direktorio Zentralak urtarrilaren 1ean zenbatzen ditu enpresa ak
 
 Erkidegoei dagokienez, {emp_ccaa[0]?.comunidad} erkidegoak du enpresa-dentsitaterik handiena, 1.000 biztanleko {formatNumber(emp_ccaa[0]?.empresas_1000hab, 1)} enpresarekin, eta {emp_ccaa.slice(-1)[0]?.comunidad} erkidegoak txikiena, {formatNumber(emp_ccaa.slice(-1)[0]?.empresas_1000hab, 1)} enpresarekin. Enpresak egoitza duten erkidegoan zenbatzen dira, ez establezimenduak dituzten tokian.
 
-<AreaMap
+<MapaEspana
     data={emp_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -660,7 +661,7 @@ ORDER BY i.pct_pib DESC
 
 Erkidegoka, {id_ccaa[0]?.anio}. urtean (eskualde-datuak dituen azken urtea). {id_ccaa[0]?.comunidad} erkidegoak bere BPGaren {formatNumber(id_ccaa[0]?.pct_pib, 2)} % bideratu zuen I+Gra, eta {id_ccaa.slice(-1)[0]?.comunidad} erkidegoak {formatNumber(id_ccaa.slice(-1)[0]?.pct_pib, 2)} %.
 
-<AreaMap
+<MapaEspana
     data={id_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

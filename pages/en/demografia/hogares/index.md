@@ -1,10 +1,11 @@
 ---
 title: Households
 description: "Average household size and percentage of one-person households in Spain, by region and province, since 2021 (INE, Continuous Population Statistics)."
-i18n_origen: 36e2d1ec8163
+i18n_origen: 0989f96b9d04
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -111,7 +112,7 @@ ORDER BY h.pct_unipersonales DESC
 
 One-person households range from {formatNumber(provincias[0]?.unipersonales / 0.01, 1)}% in {provincias[0]?.provincia} to {formatNumber(provincias.slice(-1)[0]?.unipersonales / 0.01, 1)}% in {provincias.slice(-1)[0]?.provincia}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

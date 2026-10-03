@@ -1,12 +1,13 @@
 ---
 title: Empreses, emprenedoria i R+D
 description: "Quantes empreses hi ha a Espanya per habitant i de quina mida, quantes societats es creen i es dissolen, els concursos de creditors, els autònoms i la despesa en R+D comparada amb Europa i per comunitat."
-i18n_origen: ba0336af2883
+i18n_origen: 8db7e727c98e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -188,7 +189,7 @@ El Directori Central d'Empreses de l'INE compta a 1 de gener totes les empreses 
 
 Per comunitat, {emp_ccaa[0]?.comunidad} té la densitat empresarial més alta, amb {formatNumber(emp_ccaa[0]?.empresas_1000hab, 1)} empreses per 1.000 habitants, i {emp_ccaa.slice(-1)[0]?.comunidad} la més baixa, amb {formatNumber(emp_ccaa.slice(-1)[0]?.empresas_1000hab, 1)}. Les empreses es compten a la comunitat de la seu, no allà on tenen els establiments.
 
-<AreaMap
+<MapaEspana
     data={emp_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -660,7 +661,7 @@ ORDER BY i.pct_pib DESC
 
 Per comunitat, el {id_ccaa[0]?.anio} (últim any amb dades regionals). {id_ccaa[0]?.comunidad} va dedicar a R+D el {formatNumber(id_ccaa[0]?.pct_pib, 2)} % del seu PIB i {id_ccaa.slice(-1)[0]?.comunidad} el {formatNumber(id_ccaa.slice(-1)[0]?.pct_pib, 2)} %.
 
-<AreaMap
+<MapaEspana
     data={id_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

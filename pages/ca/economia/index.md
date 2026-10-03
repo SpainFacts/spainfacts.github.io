@@ -1,7 +1,7 @@
 ---
 title: Economia
 description: "PIB per habitant, creixement, comerç exterior, sectors, ocupació, salaris, atur i inflació a Espanya, descomptada la inflació i en proporció a la població."
-i18n_origen: a21903b3070d
+i18n_origen: 071a947706ae
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -245,6 +245,18 @@ Salari mitjà mensual brut descomptada la inflació. [Creixement, sectors i deci
     <a href="/ca/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏢</span> Empreses, emprenedoria i R+D</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Empreses per habitant i mida, societats creades i dissoltes, concursos, autònoms i despesa en R+D davant d'Europa</div>
+    </a>
+    <a href="/ca/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🌾</span> Agricultura, ramaderia i pesca</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">L'horta d'Europa: oli, cítrics, fruites i hortalisses, porcí, vi i pesca, i el lloc d'Espanya a la UE</div>
+    </a>
+    <a href="/ca/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏭</span> Indústria</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Cotxes, rajoles, alimentació, tren i aerogeneradors: on destaca Espanya i quanta indústria té davant la UE</div>
+    </a>
+    <a href="/ca/economia/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏗️</span> Construcció</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">La bombolla del 2007, l'enfonsament i la recuperació: ocupació, obra pública licitada, habitatges visats i ciment davant la UE</div>
     </a>
 </Grid>
 

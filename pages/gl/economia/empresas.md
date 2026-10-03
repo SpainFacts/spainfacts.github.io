@@ -1,5 +1,5 @@
 ---
-i18n_origen: ba0336af2883
+i18n_origen: 8db7e727c98e
 title: Empresas, emprendemento e I+D
 description: "Cantas empresas hai en España por habitante e de que tamaño, cantas sociedades se crean e se disolven, os concursos de acredores, os autónomos e o gasto en I+D comparado con Europa e por comunidade."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -188,7 +189,7 @@ O Directorio Central de Empresas do INE conta a 1 de xaneiro todas as empresas a
 
 Por comunidade, {emp_ccaa[0]?.comunidad} ten a maior densidade empresarial, con {formatNumber(emp_ccaa[0]?.empresas_1000hab, 1)} empresas por 1.000 habitantes, e {emp_ccaa.slice(-1)[0]?.comunidad} a menor, con {formatNumber(emp_ccaa.slice(-1)[0]?.empresas_1000hab, 1)}. As empresas cóntanse na comunidade da súa sede, non onde teñen os seus establecementos.
 
-<AreaMap
+<MapaEspana
     data={emp_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -660,7 +661,7 @@ ORDER BY i.pct_pib DESC
 
 Por comunidade, en {id_ccaa[0]?.anio} (último ano con datos rexionais). {id_ccaa[0]?.comunidad} dedicou a I+D o {formatNumber(id_ccaa[0]?.pct_pib, 2)} % do seu PIB e {id_ccaa.slice(-1)[0]?.comunidad} o {formatNumber(id_ccaa.slice(-1)[0]?.pct_pib, 2)} %.
 
-<AreaMap
+<MapaEspana
     data={id_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

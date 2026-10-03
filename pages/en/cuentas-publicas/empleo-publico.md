@@ -1,12 +1,13 @@
 ---
 title: Public employment
 description: "How many public employees there are in Spain, which administration and sector they work in (health, education, town councils, security forces...), how their number has changed, what they earn compared with the private sector and how much they cost."
-i18n_origen: a9194bd3ec9e
+i18n_origen: f35a10c4e8a1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -252,7 +253,7 @@ GROUP BY ALL
 ORDER BY por_1000_hab DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

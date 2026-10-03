@@ -3,10 +3,11 @@ title: SpainFacts · L'estat d'Espanya en dades oficials
 description: "Espanya en dades oficials: població, economia, comptes públics, energia, mobilitat, societat i transparència, d'Espanya a cada municipi. Independent i sense biaix partidista."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 33d766fc924e
+i18n_origen: 55bec392edfc
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
@@ -256,7 +257,7 @@ LEFT JOIN (
     <ButtonGroupItem valueLabel="Deute" value="deuda" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={mapa_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -343,6 +344,12 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Societat</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalitat, salut, immigració, renda i pobresa fins al nivell de municipi, i educació.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delictes coneguts per 1.000 hab. →</p>
+    </a>
+    <a href="/ca/medios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1" aria-hidden="true">📰</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">Mitjans de comunicació</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Quants diners públics reben els mitjans: televisions públiques, publicitat institucional i subvencions, per comunitat i per partit.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Diners públics als mitjans →</p>
     </a>
     <a href="/ca/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1" aria-hidden="true">🔎</p>

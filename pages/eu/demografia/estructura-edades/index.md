@@ -1,10 +1,11 @@
 ---
 title: Adinak eta zahartzea
 description: "Espainiako, erkidego bakoitzeko eta probintzia bakoitzeko biztanleria-piramideak; 65 eta 80 urtetik gorakoen ehunekoa, mendekotasun-tasa eta batez besteko adina 1971tik (INE)."
-i18n_origen: 2565fd7bf5bc
+i18n_origen: 4e6c769248eb
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -282,7 +283,7 @@ ORDER BY e.pct_65 DESC
 
 Probintzia zahartuena {provincias[0]?.provincia} da: 65 urtetik gorakoak {formatNumber(provincias[0]?.pct_65 / 0.01, 1)} % dira eta batez besteko adina {formatNumber(provincias[0]?.edad_media, 1)} urtekoa da; gazteena, {provincias.slice(-1)[0]?.provincia}, {formatNumber(provincias.slice(-1)[0]?.pct_65 / 0.01, 1)} %-rekin.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

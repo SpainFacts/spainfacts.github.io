@@ -1,10 +1,11 @@
 ---
 title: Income, poverty and inequality
 description: "Average household income in Spain adjusted for inflation, at-risk-of-poverty rate, AROPE, material deprivation, Gini index and S80/S20 ratio, by region, age and municipality, and compared with the EU."
-i18n_origen: 9952ace4d46b
+i18n_origen: 9c8ab30724e4
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -285,7 +286,7 @@ FROM ${ccaa}
 The differences between regions are large: in the {ccaa[0]?.anio} ECV the at-risk-of-poverty rate ranged from {formatNumber(ccaa_extremos[0]?.min_pobreza, 1)} % in {ccaa_extremos[0]?.menos_pobreza} to {formatNumber(ccaa_extremos[0]?.max_pobreza, 1)} % in {ccaa_extremos[0]?.mas_pobreza}, and net income per person from €{formatNumber(ccaa_extremos[0]?.min_renta, 0)} in {ccaa_extremos[0]?.menos_renta} to €{formatNumber(ccaa_extremos[0]?.max_renta, 0)} in {ccaa_extremos[0]?.mas_renta}. The poverty threshold is the same for the whole of Spain, with no adjustment for each region's cost of living.
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"

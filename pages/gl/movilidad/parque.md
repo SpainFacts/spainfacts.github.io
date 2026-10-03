@@ -1,5 +1,5 @@
 ---
-i18n_origen: e10a6f5a05a5
+i18n_origen: 3790208fb9a8
 title: Parque de vehículos
 description: "Os vehículos que circulan en España: turismos por tipo de motor, etiqueta ambiental da DGT e antigüidade, modelos máis comúns e comparación por provincia e concello."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -186,7 +187,7 @@ ORDER BY turismos DESC
     <ButtonGroupItem valueLabel="% enchufables" value="cuota_enchufables" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

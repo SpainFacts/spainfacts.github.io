@@ -1,5 +1,5 @@
 ---
-i18n_origen: 49a1fe838e5e
+i18n_origen: a287d12777fb
 title: Electrificación da economía
 description: "Canta da enerxía que consomen a industria, o transporte, os fogares e os servizos en España é electricidade, como se quentan as casas por provincia e cantas bombas de calor hai."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -215,7 +216,7 @@ SELECT * FROM mother.electrificacion_calefaccion_provincia WHERE cod_prov = '00'
 
 ### Vivendas que se quentan con electricidade, por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

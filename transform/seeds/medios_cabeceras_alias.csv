@@ -1,0 +1,1989 @@
+medio_id,patron,tipo_patron,fuente
+el_pais,B85635910,nif,todas
+el_pais,el pais,contiene,territorial
+el_pais,elpais,contiene,territorial
+el_pais,pais el,contiene,territorial
+cadena_ser,A04157087,nif,todas
+cadena_ser,A12037362,nif,todas
+cadena_ser,A22009047,nif,todas
+cadena_ser,A24029369,nif,todas
+cadena_ser,A24029969,nif,todas
+cadena_ser,A26000695,nif,todas
+cadena_ser,A27019710,nif,todas
+cadena_ser,A27111368,nif,todas
+cadena_ser,A28805497,nif,todas
+cadena_ser,A30016323,nif,todas
+cadena_ser,A36005346,nif,todas
+cadena_ser,A36612414,nif,todas
+cadena_ser,A37012267,nif,todas
+cadena_ser,A38022182,nif,todas
+cadena_ser,A40012387,nif,todas
+cadena_ser,A50043777,nif,todas
+cadena_ser,A78685054,nif,todas
+cadena_ser,B01530450,nif,todas
+cadena_ser,B03145554,nif,todas
+cadena_ser,B06780811,nif,todas
+cadena_ser,B11604402,nif,todas
+cadena_ser,B13282413,nif,todas
+cadena_ser,B15011950,nif,todas
+cadena_ser,B18009951,nif,todas
+cadena_ser,B21112347,nif,todas
+cadena_ser,B21215678,nif,todas
+cadena_ser,B23248750,nif,todas
+cadena_ser,B25713322,nif,todas
+cadena_ser,B28016970,nif,todas
+cadena_ser,B28795631,nif,todas
+cadena_ser,B33004292,nif,todas
+cadena_ser,B38022182,nif,todas
+cadena_ser,B46555892,nif,todas
+cadena_ser,B53845426,nif,todas
+cadena_ser,B82913534,nif,todas
+cadena_ser,ser,nombre_exacto,territorial
+cadena_ser,radio madrid,nombre_exacto,territorial
+cadena_ser,cadena ser,contiene,territorial
+cadena_ser,ser catalunya,contiene,territorial
+cadena_ser,ser valencia,contiene,territorial
+cadena_ser,ser zaragoza,contiene,territorial
+cadena_ser,ser cv,contiene,territorial
+cadena_ser,ser castello,contiene,territorial
+cadena_ser,ser castellon,contiene,territorial
+cadena_ser,ser nacional,contiene,territorial
+cadena_ser,ser alicante,contiene,territorial
+cadena_ser,cadena regional ser,contiene,territorial
+cadena_ser,radio madrid om,contiene,territorial
+cadena_ser,radio zaragoza,contiene,territorial
+cadena_ser,radio huesca,contiene,territorial
+cadena_ser,radio barcelona ser,contiene,territorial
+cadena_ser,ser madrid,contiene,territorial
+cadena_ser,ser aragon,contiene,territorial
+los40,los 40,contiene,territorial
+los40,los40,contiene,territorial
+los40,cadena 40,contiene,territorial
+los40,40 principales,contiene,territorial
+los40,40 madrid,contiene,territorial
+cadena_dial,dial,nombre_exacto,territorial
+cadena_dial,cadena dial,contiene,territorial
+cadena_dial,dial madrid,contiene,territorial
+cadena_dial,dial zaragoza,contiene,territorial
+cadena_dial,dial valencia,contiene,territorial
+cadena_dial,dial barcelona,contiene,territorial
+as,B81511834,nif,todas
+as,as,nombre_exacto,territorial
+as,as com,nombre_exacto,territorial
+as,diario as,contiene,territorial
+cinco_dias,A28497444,nif,todas
+cinco_dias,cinco dias,contiene,territorial
+cinco_dias,cincodias,contiene,territorial
+g_prisa,A28297059,nif,todas
+g_prisa,A88096458,nif,todas
+g_prisa,B85635878,nif,todas
+g_prisa,A80739063,nif,todas
+g_prisa,prisa,contiene,territorial
+g_prisa,grupo prisa,contiene,age
+g_prisa,Grupo Prisa,grupo,todas
+antena3,antena 3,contiene,territorial
+antena3,antena3,contiene,territorial
+antena3,a3 tv,contiene,territorial
+lasexta,la sexta,contiene,territorial
+lasexta,lasexta,contiene,territorial
+atresmedia_tv,A78839271,nif,todas
+atresmedia_tv,atresmedia,contiene,territorial
+atresmedia_tv,antena 3 y la sexta,contiene,territorial
+atresmedia_tv,antena3 y la sexta,contiene,territorial
+atresmedia_tv,neox,contiene,territorial
+atresmedia_tv,a3series,contiene,territorial
+onda_cero,onda cero,contiene,territorial
+onda_cero,ondacero,contiene,territorial
+europa_fm,europa fm,contiene,territorial
+uniprex,A28782936,nif,todas
+uniprex,onda cero y europa fm,contiene,territorial
+uniprex,uniprex,contiene,territorial
+la_razon,A82031329,nif,todas
+la_razon,la razon,contiene,territorial
+la_razon,razon la,contiene,territorial
+la_razon,larazon,contiene,territorial
+g_atresmedia,B85498723,nif,todas
+g_atresmedia,atresmedia planeta,contiene,age
+g_atresmedia,atresmedia corporacion,contiene,age
+g_atresmedia,grupo planeta,contiene,age
+g_atresmedia,Atresmedia-Planeta,grupo,todas
+telecinco,telecinco,contiene,territorial
+telecinco,tele 5,contiene,territorial
+telecinco,tele cinco,contiene,territorial
+telecinco,tele5,contiene,territorial
+cuatro,cuatro,nombre_exacto,territorial
+cuatro,cuatro tv,nombre_exacto,territorial
+cuatro,canal cuatro,contiene,territorial
+mediaset,A87728689,nif,todas
+mediaset,A79075438,nif,todas
+mediaset,A78928371,nif,todas
+mediaset,A82432279,nif,todas
+mediaset,mediaset,contiene,territorial
+mediaset,publiespana,contiene,territorial
+mediaset,telecinco y cuatro,contiene,territorial
+mediaset,tele 5 nsf,contiene,territorial
+mediaset,mediaset espana,contiene,age
+mediaset,Mediaset España,grupo,todas
+cope,cope,contiene,territorial
+cope,cadena cope,contiene,territorial
+cadena100,cadena 100,contiene,territorial
+cadena100,c 100,contiene,territorial
+cadena100,cadena100,contiene,territorial
+rock_fm,rock fm,contiene,territorial
+rock_fm,rockfm,contiene,territorial
+trece,A85826477,nif,todas
+trece,trece,nombre_exacto,territorial
+trece,13tv,nombre_exacto,territorial
+trece,13 tv,nombre_exacto,territorial
+trece,trece tv,nombre_exacto,territorial
+radio_popular,A28281368,nif,todas
+radio_popular,A28281308,nif,todas
+radio_popular,A27281368,nif,todas
+radio_popular,radio popular,contiene,territorial
+radio_popular,cope y cadena 100,contiene,territorial
+radio_popular,cope cadena 100,contiene,territorial
+g_cope,grupo cope,contiene,age
+g_cope,COPE-Ábside Media,grupo,todas
+abc,B82824194,nif,todas
+abc,B91409904,nif,todas
+abc,A82824194,nif,todas
+abc,abc,contiene,territorial
+el_correo,A48536858,nif,todas
+el_correo,el correo,contiene,territorial
+el_correo,elcorreo,contiene,territorial
+correo_burgos,el correo de burgos,contiene,territorial
+correo_burgos,correo de burgos,contiene,territorial
+correo_gallego,correo gallego,contiene,territorial
+correo_andalucia,correo de andalucia,contiene,territorial
+diario_vasco,A20004073,nif,todas
+diario_vasco,diario vasco,contiene,territorial
+norte_castilla,A47000427,nif,todas
+norte_castilla,norte de castilla,contiene,territorial
+diario_montanes,A39000641,nif,todas
+diario_montanes,B39495460,nif,todas
+diario_montanes,diario montanes,contiene,territorial
+las_provincias,A46007126,nif,todas
+las_provincias,las provincias,contiene,territorial
+las_provincias,lasprovincias,contiene,territorial
+las_provincias,provincias las,contiene,territorial
+la_verdad,A78865433,nif,todas
+la_verdad,la verdad,contiene,territorial
+la_verdad,laverdad,contiene,territorial
+ideal,A78865458,nif,todas
+ideal,ideal,nombre_exacto,territorial
+ideal,ideal es,nombre_exacto,territorial
+ideal,diario ideal,contiene,territorial
+ideal,ideal granada,contiene,territorial
+ideal,ideal de granada,contiene,territorial
+hoy,A78865441,nif,todas
+hoy,hoy,nombre_exacto,territorial
+hoy,hoy es,nombre_exacto,territorial
+hoy,diario hoy,contiene,territorial
+hoy,hoy extremadura,contiene,territorial
+sur,A29115672,nif,todas
+sur,sur,nombre_exacto,territorial
+sur,sur es,nombre_exacto,territorial
+sur,diario sur,contiene,territorial
+la_rioja,A26004135,nif,todas
+la_rioja,la rioja,nombre_exacto,territorial
+la_rioja,diario la rioja,nombre_exacto,territorial
+la_rioja,larioja com,nombre_exacto,territorial
+el_comercio,A33600529,nif,todas
+el_comercio,el comercio,contiene,territorial
+leonoticias,B24642597,nif,todas
+leonoticias,leonnoticias,contiene,territorial
+leonoticias,leonoticias,contiene,territorial
+burgosconecta,burgosconecta,contiene,territorial
+g_vocento,A48001655,nif,todas
+g_vocento,B82462813,nif,todas
+g_vocento,A81839219,nif,todas
+g_vocento,A82352477,nif,todas
+g_vocento,vocento,contiene,territorial
+g_vocento,xl semanal,contiene,territorial
+g_vocento,cm vocento,contiene,territorial
+g_vocento,grupo vocento,contiene,age
+g_vocento,Grupo Vocento,grupo,todas
+el_mundo,B85157790,nif,todas
+el_mundo,el mundo,contiene,territorial
+el_mundo,elmundo,contiene,territorial
+el_mundo,mundo el,contiene,territorial
+el_mundo,el mundo del s veintiuno,contiene,territorial
+marca,B81868697,nif,todas
+marca,marca,nombre_exacto,territorial
+marca,marca com,nombre_exacto,territorial
+marca,radio marca,contiene,territorial
+marca,r marca,contiene,territorial
+marca,diario marca,contiene,territorial
+marca,marca web,contiene,territorial
+marca,marca radio,contiene,territorial
+expansion,expansion,contiene,territorial
+g_unidad_editorial,A79102331,nif,todas
+g_unidad_editorial,B81819179,nif,todas
+g_unidad_editorial,B82448960,nif,todas
+g_unidad_editorial,A82659954,nif,todas
+g_unidad_editorial,unidad editorial,contiene,territorial
+g_unidad_editorial,unidad editorial,contiene,age
+g_unidad_editorial,Unidad Editorial,grupo,todas
+la_vanguardia,B61475257,nif,todas
+la_vanguardia,vanguardia,contiene,territorial
+la_vanguardia,lavanguardia,contiene,territorial
+mundo_deportivo,A59114082,nif,todas
+mundo_deportivo,mundo deportivo,contiene,territorial
+mundo_deportivo,mundodeportivo,contiene,territorial
+mundo_deportivo,elmundodeportivo,contiene,territorial
+rac1,B61726626,nif,todas
+rac1,rac 1,contiene,territorial
+rac1,rac1,contiene,territorial
+rac1,rac 105,contiene,territorial
+rac1,rac105,contiene,territorial
+rac1,radiocat,contiene,territorial
+rac1,radiocat,contiene,age
+8tv,8tv,nombre_exacto,territorial
+8tv,8 tv,nombre_exacto,territorial
+g_godo,A08105702,nif,todas
+g_godo,godo,contiene,territorial
+g_godo,grupo godo,contiene,age
+g_godo,Grupo Godó,grupo,todas
+el_periodico,B66485343,nif,todas
+el_periodico,el periodico,contiene,territorial
+el_periodico,periodico el,contiene,territorial
+el_periodico,elperiodico,contiene,territorial
+el_periodico,el periodico de catalunya,contiene,territorial
+periodico_aragon,A50361641,nif,todas
+periodico_aragon,A50631641,nif,todas
+periodico_aragon,periodico de aragon,contiene,territorial
+periodico_extremadura,A10000339,nif,todas
+periodico_extremadura,periodico extremadura,contiene,territorial
+periodico_extremadura,periodico de extremadura,contiene,territorial
+periodico_aqui,periodico de aqui,contiene,territorial
+periodico_aqui,elperiodico de aqui,contiene,territorial
+faro_vigo,A36600815,nif,todas
+faro_vigo,faro de vigo,contiene,territorial
+levante_emv,A46229290,nif,todas
+levante_emv,A46229292,nif,todas
+levante_emv,levante emv,contiene,territorial
+levante_emv,levante,contiene,territorial
+levante_emv,levante tv,contiene,territorial
+levante_emv,levante com,contiene,territorial
+informacion,A08884439,nif,todas
+informacion,informacion,nombre_exacto,territorial
+informacion,diario informacion,contiene,territorial
+informacion,informacion com,contiene,territorial
+informacion,informacion tv,contiene,territorial
+nueva_espana,A33052283,nif,todas
+nueva_espana,nueva espana,contiene,territorial
+la_provincia,A35002278,nif,todas
+la_provincia,A35002228,nif,todas
+la_provincia,A35002287,nif,todas
+la_provincia,la provincia,contiene,territorial
+opinion_coruna,B15162068,nif,todas
+opinion_coruna,B35074681,nif,todas
+opinion_coruna,opinion a coruna,contiene,territorial
+opinion_coruna,opinion de a coruna,contiene,territorial
+opinion_coruna,opinion de la coruna,contiene,territorial
+opinion_coruna,opinion coruna,contiene,territorial
+opinion_malaga,B08841173,nif,todas
+opinion_malaga,opinion de malaga,contiene,territorial
+opinion_murcia,opinion de murcia,contiene,territorial
+opinion_zamora,A08849911,nif,todas
+opinion_zamora,opinion de zamora,contiene,territorial
+opinion_zamora,opinion correo zamora,contiene,territorial
+opinion_zamora,opinion el correo de zamora,contiene,territorial
+opinion_tenerife,B38530655,nif,todas
+opinion_tenerife,opinion de tenerife,contiene,territorial
+diario_mallorca,A07015845,nif,todas
+diario_mallorca,diario de mallorca,contiene,territorial
+diario_ibiza,A07433444,nif,todas
+diario_ibiza,diario de ibiza,contiene,territorial
+diari_girona,A61135521,nif,todas
+diari_girona,diari de girona,contiene,territorial
+diari_girona,diaridegirona,contiene,territorial
+regio7,A08539165,nif,todas
+regio7,regio 7,contiene,territorial
+regio7,regio7,contiene,territorial
+diario_cordoba,A28896884,nif,todas
+diario_cordoba,A18896884,nif,todas
+diario_cordoba,diario cordoba,contiene,territorial
+diario_cordoba,diario de cordoba,contiene,territorial
+mediterraneo,A12046728,nif,todas
+mediterraneo,mediterraneo,nombre_exacto,territorial
+mediterraneo,el periodico mediterraneo,nombre_exacto,territorial
+mediterraneo,periodico mediterraneo,contiene,territorial
+mediterraneo,mediterraneo com,contiene,territorial
+mediterraneo,8 tv mediterraneo,contiene,territorial
+mediterraneo,8 mediterraneo,contiene,territorial
+mediterraneo,la 8 mediterraneo,contiene,territorial
+sport,A08605503,nif,todas
+sport,sport,nombre_exacto,territorial
+sport,sport es,nombre_exacto,territorial
+sport,diario sport,contiene,territorial
+superdeporte,A96116645,nif,todas
+superdeporte,superdeporte,contiene,territorial
+g_prensa_iberica,B57447849,nif,todas
+g_prensa_iberica,B65117376,nif,todas
+g_prensa_iberica,B65117350,nif,todas
+g_prensa_iberica,B66603267,nif,todas
+g_prensa_iberica,A08398117,nif,todas
+g_prensa_iberica,prensa iberica,contiene,territorial
+g_prensa_iberica,zeta online,contiene,territorial
+g_prensa_iberica,prensa iberica,contiene,age
+g_prensa_iberica,Prensa Ibérica,grupo,todas
+20minutos,B99083966,nif,todas
+20minutos,20 minutos,contiene,territorial
+20minutos,20minutos,contiene,territorial
+heraldo,B99288763,nif,todas
+heraldo,heraldo,nombre_exacto,territorial
+heraldo,heraldo es,nombre_exacto,territorial
+heraldo,heraldo de aragon,contiene,territorial
+heraldo_soria,heraldo diario de soria,contiene,territorial
+heraldo_soria,diario soria el heraldo,contiene,territorial
+heraldo_soria,heraldo de soria,contiene,territorial
+heraldo_soria,diario de soria,contiene,territorial
+altoaragon,A22020812,nif,todas
+altoaragon,altoaragon,contiene,territorial
+altoaragon,alto aragon,contiene,territorial
+g_henneo,B71043558,nif,todas
+g_henneo,A50001973,nif,todas
+g_henneo,henneo,contiene,territorial
+g_henneo,grupo henneo,contiene,age
+g_henneo,Grupo Henneo,grupo,todas
+diario_cadiz,B11448503,nif,todas
+diario_cadiz,diario de cadiz,contiene,territorial
+diario_sevilla,diario de sevilla,contiene,territorial
+diario_jerez,A11628732,nif,todas
+diario_jerez,diario de jerez,contiene,territorial
+granada_hoy,B18655613,nif,todas
+granada_hoy,granada hoy,contiene,territorial
+diario_almeria,B04615886,nif,todas
+diario_almeria,diario de almeria,contiene,territorial
+europa_sur,B11448339,nif,todas
+europa_sur,europa sur,contiene,territorial
+malaga_hoy,malaga hoy,contiene,territorial
+huelva_informacion,huelva informacion,contiene,territorial
+g_joly,A41926460,nif,todas
+g_joly,B11000221,nif,todas
+g_joly,grupo joly,contiene,territorial
+g_joly,grupo joly,contiene,age
+g_joly,Grupo Joly,grupo,todas
+diario_burgos,A09002387,nif,todas
+diario_burgos,diario de burgos,contiene,territorial
+diario_burgos,diariodeburgos,contiene,territorial
+diario_avila,A05000468,nif,todas
+diario_avila,diario de avila,contiene,territorial
+diario_palentino,A09310715,nif,todas
+diario_palentino,diario palentino,contiene,territorial
+diario_palentino,dia de palencia,contiene,territorial
+tribuna_toledo,B45810926,nif,todas
+tribuna_toledo,tribuna de toledo,contiene,territorial
+tribuna_guadalajara,B09420662,nif,todas
+tribuna_guadalajara,tribuna de guadalajara,contiene,territorial
+tribuna_albacete,tribuna de albacete,contiene,territorial
+tribuna_ciudad_real,tribuna de ciudad real,contiene,territorial
+dia_valladolid,el dia de valladolid,contiene,territorial
+dia_segovia,el dia de segovia,contiene,territorial
+dia_soria,el dia de soria,contiene,territorial
+g_promecal,B09383134,nif,todas
+g_promecal,B09570912,nif,todas
+g_promecal,B09275165,nif,todas
+g_promecal,promecal,contiene,territorial
+g_promecal,grupo promecal,contiene,age
+g_promecal,Grupo Promecal,grupo,todas
+deia,A48082440,nif,todas
+deia,deia,contiene,territorial
+noticias_navarra,A31455082,nif,todas
+noticias_navarra,diario de noticias,nombre_exacto,territorial
+noticias_navarra,noticias de navarra,contiene,territorial
+noticias_navarra,noticiasdenavarra,contiene,territorial
+noticias_gipuzkoa,noticias de gipuzkoa,contiene,territorial
+noticias_alava,B01373489,nif,todas
+noticias_alava,noticias de alava,contiene,territorial
+onda_vasca,A48425458,nif,todas
+onda_vasca,onda vasca,contiene,territorial
+g_noticias,grupo noticias,contiene,age
+g_noticias,Grupo Noticias,grupo,todas
+voz_galicia,A15000649,nif,todas
+voz_galicia,voz de galicia,contiene,territorial
+voz_galicia,lavozdegalicia,contiene,territorial
+g_voz_galicia,B15292022,nif,todas
+g_voz_galicia,B15054414,nif,todas
+g_voz_galicia,corporacion voz de galicia,contiene,age
+g_voz_galicia,Voz de Galicia,grupo,todas
+okdiario,B87277455,nif,todas
+okdiario,okdiario,contiene,territorial
+okdiario,ok diario,contiene,territorial
+okdiario,dos mil palabras,contiene,age
+okdiario,OKDiario,grupo,todas
+libertad_digital,A82571563,nif,todas
+libertad_digital,libertad digital,contiene,territorial
+libertad_digital,libertaddigital,contiene,territorial
+libertad_digital,esradio,contiene,territorial
+libertad_digital,es radio,contiene,territorial
+libertad_digital,es radio huesca,contiene,territorial
+libertad_digital,es radio aragon,contiene,territorial
+libertad_digital,libertad digital,contiene,age
+libertad_digital,Libertad Digital,grupo,todas
+cyl_radio,A47452354,nif,todas
+cyl_radio,castilla y leon esradio,contiene,territorial
+cyl_radio,castilla y leon es radio,contiene,territorial
+cyl_radio,esradio castilla y leon,contiene,territorial
+el_espanol,A87115226,nif,todas
+el_espanol,el espanol,contiene,territorial
+el_espanol,elespanol,contiene,territorial
+el_espanol,el leon de el espanol,contiene,age
+el_espanol,El Español,grupo,todas
+eldiariocyl,eldiariocyl,contiene,territorial
+eldiariocyl,eldiariocyles,contiene,territorial
+eldiariocyl,el diario cyl,contiene,territorial
+noticiascyl,noticiascyl,contiene,territorial
+noticiascyl,noticias cyl,contiene,territorial
+el_cultural,B82410044,nif,todas
+el_cultural,A82410044,nif,todas
+el_cultural,el cultural,contiene,territorial
+el_cultural,prensa europea del siglo xxi,contiene,age
+el_confidencial,B82938572,nif,todas
+el_confidencial,B42964189,nif,todas
+el_confidencial,el confidencial,contiene,territorial
+el_confidencial,elconfidencial,contiene,territorial
+el_confidencial,titania compania editorial,contiene,age
+el_confidencial,El Confidencial,grupo,todas
+confidencial_digital,confidencial digital,contiene,territorial
+confidencial_digital,elconfidencialdigital,contiene,territorial
+confidencial_digital,publicaciones confidenciales,contiene,age
+eldiario,B86509254,nif,todas
+eldiario,eldiario,contiene,territorial
+eldiario,eldiario es,contiene,territorial
+eldiario,el diario es,contiene,territorial
+eldiario,diario de prensa digital,contiene,age
+eldiario,eldiario.es,grupo,todas
+publico,publico,nombre_exacto,territorial
+publico,publico es,nombre_exacto,territorial
+publico,diario publico,nombre_exacto,territorial
+publico,publico quinze,nombre_exacto,territorial
+publico,publico es,contiene,territorial
+publico,display connectors,contiene,age
+publico,Público,grupo,todas
+infolibre,B65894859,nif,todas
+infolibre,infolibre,contiene,territorial
+infolibre,tintalibre,contiene,territorial
+infolibre,ediciones prensa libre,contiene,age
+the_objective,the objective,contiene,territorial
+the_objective,the objetive,contiene,territorial
+the_objective,theobjective,contiene,territorial
+the_objective,the objective media,contiene,age
+vozpopuli,vozpopuli,contiene,territorial
+vozpopuli,vozpopuli digital,contiene,age
+el_debate,B04953758,nif,todas
+el_debate,el debate,contiene,territorial
+el_debate,eldebate,contiene,territorial
+el_debate,ediciones catolicos y vida publica,contiene,age
+esdiario,esdiario,contiene,territorial
+el_independiente,elindependiente,contiene,territorial
+el_independiente,el independiente,contiene,territorial
+periodista_digital,periodistadigital,contiene,territorial
+periodista_digital,periodista digital,contiene,territorial
+periodista_digital,elperiodistadigital,contiene,territorial
+diario16,diario16,contiene,territorial
+diario16,diario 16,contiene,territorial
+el_economista,A84289230,nif,todas
+el_economista,el economista,contiene,territorial
+el_economista,eleconomista,contiene,territorial
+el_economista,ecoprensa,contiene,territorial
+el_economista,ecoprensa,contiene,age
+el_economista,Ecoprensa (elEconomista),grupo,todas
+intereconomia,intereconomia,contiene,territorial
+intereconomia,intereconomia,contiene,age
+madridiario,madridiario,contiene,territorial
+madridiario,madridiario,contiene,age
+65ymas,65ymas,contiene,territorial
+65ymas,65 y mas,contiene,territorial
+65ymas,65ymas,contiene,age
+el_salto,el salto,contiene,territorial
+el_salto,elsalto,contiene,territorial
+el_salto,cooperativa editorial el salto,contiene,age
+hola,hola,nombre_exacto,territorial
+hola,hola com,nombre_exacto,territorial
+hola,hola s l,contiene,age
+conde_nast,B78557758,nif,todas
+conde_nast,vogue,contiene,territorial
+conde_nast,traveler,contiene,territorial
+conde_nast,conde nast,contiene,territorial
+conde_nast,condenast,contiene,territorial
+conde_nast,conde nast,contiene,age
+hearst,hearst,contiene,territorial
+hearst,hearst,contiene,age
+national_geographic,national geographic,contiene,territorial
+national_geographic,nationalgeographic,contiene,territorial
+europa_press,A08536922,nif,todas
+europa_press,A78526852,nif,todas
+europa_press,A41606534,nif,todas
+europa_press,A86466430,nif,todas
+europa_press,A28078343,nif,todas
+europa_press,A28509883,nif,todas
+europa_press,A85716843,nif,todas
+europa_press,europa press,contiene,territorial
+europa_press,europapress,contiene,territorial
+europa_press,Europa Press,grupo,todas
+servimedia,A78955713,nif,todas
+servimedia,servimedia,contiene,territorial
+ical,B09544495,nif,todas
+ical,ical,contiene,territorial
+ical,agencia ical,contiene,territorial
+ical,Agencia ICAL,grupo,todas
+agencia_aragonesa,B50941855,nif,todas
+agencia_aragonesa,agencia aragonesa de noticias,contiene,territorial
+dpa,B81606717,nif,todas
+ara,B65258261,nif,todas
+ara,B57806762,nif,todas
+ara,B65474843,nif,todas
+ara,ara,nombre_exacto,territorial
+ara,diari ara,nombre_exacto,territorial
+ara,ara cat,contiene,territorial
+ara,ara balears,contiene,territorial
+ara,diari ara,contiene,territorial
+ara,ara criatures,contiene,territorial
+ara,ara llegim,contiene,territorial
+ara,edicio de premsa periodica ara,contiene,age
+ara,Grupo Ara,grupo,todas
+punt_avui,A17374547,nif,todas
+punt_avui,B17374547,nif,todas
+punt_avui,punt avui,contiene,territorial
+punt_avui,puntavui,contiene,territorial
+punt_avui,hermes,contiene,age
+punt_avui,Hermes Comunicacions (El Punt Avui),grupo,todas
+segre,B25275926,nif,todas
+segre,segre,contiene,territorial
+segre,Grup Segre,grupo,todas
+diari_tarragona,A43056787,nif,todas
+diari_tarragona,diari de tarragona,contiene,territorial
+diari_tarragona,diaridetarragona,contiene,territorial
+diari_tarragona,promicsa,contiene,age
+diari_tarragona,Diari de Tarragona,grupo,todas
+el_nacional,elnacional,contiene,territorial
+el_nacional,el nacional,contiene,territorial
+el_nacional,El Nacional,grupo,todas
+nacio_digital,B09844770,nif,todas
+nacio_digital,naciodigital,contiene,territorial
+nacio_digital,nacio digital,contiene,territorial
+nacio_digital,edicions de premsa local,contiene,age
+nacio_digital,Nació Digital,grupo,todas
+vilaweb,B61017810,nif,todas
+vilaweb,vilaweb,contiene,territorial
+el_temps,el temps,contiene,territorial
+el_temps,eltemps,contiene,territorial
+el_temps,temps el,contiene,territorial
+el_mon,elmon,contiene,territorial
+el_mon,el mon,contiene,territorial
+cronica_global,cronicaglobal,contiene,territorial
+cronica_global,cronica global,contiene,territorial
+flaix,A60032992,nif,todas
+flaix,B60000841,nif,todas
+flaix,B61801635,nif,todas
+flaix,flaix,contiene,territorial
+flaix,flaixbac,contiene,territorial
+flaix,grupo flaix,contiene,age
+flaix,Grup Flaix,grupo,todas
+teletaxi,tele taxi,contiene,territorial
+teletaxi,teletaxi,contiene,territorial
+teletaxi,Grup TeleTaxi,grupo,todas
+critic,F66334806,nif,todas
+critic,elcritic,contiene,territorial
+critic,el critic,contiene,territorial
+gara,A01276906,nif,todas
+gara,gara,contiene,territorial
+gara,naiz,contiene,territorial
+gara,"Baigorri (Gara, Naiz)",grupo,todas
+berria,berria,contiene,territorial
+berria,Berria Taldea,grupo,todas
+diario_navarra,A31419385,nif,todas
+diario_navarra,B71028898,nif,todas
+diario_navarra,diario de navarra,contiene,territorial
+diario_navarra,diariodenavarra,contiene,territorial
+diario_navarra,grupo la informacion,contiene,age
+diario_navarra,Grupo La Información (Diario de Navarra),grupo,todas
+navarra_tv,A31743495,nif,todas
+navarra_tv,navarra tv,contiene,territorial
+navarra_tv,Navarra TV,grupo,todas
+radio_nervion,A48197321,nif,todas
+radio_nervion,radio nervion,contiene,territorial
+diario_leon,A24000291,nif,todas
+diario_leon,B24000291,nif,todas
+diario_leon,diario de leon,contiene,territorial
+diario_leon,Diario de León,grupo,todas
+gaceta_salamanca,gaceta de salamanca,contiene,territorial
+gaceta_salamanca,grupo promotor salmantino,contiene,age
+adelantado_segovia,adelantado de segovia,contiene,territorial
+adelantado_segovia,El Adelantado de Segovia,grupo,todas
+nueva_cronica,nueva cronica de leon,contiene,territorial
+nueva_cronica,la nueva cronica,contiene,territorial
+rtvcyl,A47637160,nif,todas
+rtvcyl,radio television castilla y leon,contiene,territorial
+rtvcyl,radio television de castilla y leon,contiene,territorial
+rtvcyl,cyltv,contiene,territorial
+rtvcyl,cyl tv,contiene,territorial
+rtvcyl,radio television de castilla y leon,contiene,age
+la_region,A32100653,nif,todas
+la_region,la region,nombre_exacto,territorial
+la_region,diario la region,nombre_exacto,territorial
+la_region,la region de ourense,nombre_exacto,territorial
+la_region,grupo la region,contiene,age
+atlantico,A36643674,nif,todas
+atlantico,atlantico diario,contiene,territorial
+atlantico,rias baixas comunicacion,contiene,age
+el_progreso,B27000637,nif,todas
+el_progreso,el progreso,contiene,territorial
+el_progreso,grupo el progreso,contiene,age
+diario_pontevedra,B36003549,nif,todas
+diario_pontevedra,diario de pontevedra,contiene,territorial
+nos_diario,A70301510,nif,todas
+nos_diario,nos diario,contiene,territorial
+nos_diario,sermos galiza,contiene,territorial
+canarias7,A35054519,nif,todas
+canarias7,canarias7,contiene,territorial
+canarias7,canarias 7,contiene,territorial
+canarias7,informaciones canarias,contiene,age
+el_dia,A38017844,nif,todas
+el_dia,el dia,nombre_exacto,territorial
+el_dia,eldia es,nombre_exacto,territorial
+el_dia,el dia de tenerife,contiene,territorial
+el_dia,leoncio rodriguez,contiene,age
+diario_avisos,A38011623,nif,todas
+diario_avisos,diario de avisos,contiene,territorial
+ultima_hora,A07242753,nif,todas
+ultima_hora,ultima hora,contiene,territorial
+ultima_hora,hora nova,contiene,territorial
+ultima_hora,grupo serra,contiene,age
+diario_jaen,A14100531,nif,todas
+diario_jaen,diario jaen,contiene,territorial
+el_pueblo_ceuta,B51033579,nif,todas
+el_pueblo_ceuta,el pueblo de ceuta,contiene,territorial
+grupo_plaza,A98205099,nif,todas
+grupo_plaza,B98205099,nif,todas
+grupo_plaza,B40516650,nif,todas
+grupo_plaza,B54711825,nif,todas
+grupo_plaza,valencia plaza,contiene,territorial
+grupo_plaza,alicante plaza,contiene,territorial
+grupo_plaza,castellon plaza,contiene,territorial
+grupo_plaza,grupo plaza,contiene,territorial
+grupo_plaza,ediciones plaza,contiene,territorial
+grupo_plaza,ediciones plaza,contiene,age
+grupo_plaza,Grupo Plaza,grupo,todas
+kiss_fm,A41147380,nif,todas
+kiss_fm,A84032755,nif,todas
+kiss_fm,A84932755,nif,todas
+kiss_fm,A79126082,nif,todas
+kiss_fm,kiss fm,contiene,territorial
+kiss_fm,kissfm,contiene,territorial
+kiss_fm,hit fm,contiene,territorial
+kiss_fm,kiss media,contiene,territorial
+kiss_fm,kiss media,contiene,age
+kiss_fm,Kiss Media / Global,grupo,todas
+movistar_plus,movistar,contiene,territorial
+movistar_plus,grupo telefonica,contiene,age
+movistar_plus,telefonica,contiene,age
+movistar_plus,Grupo Telefónica,grupo,todas
+time_out,time out,contiene,territorial
+time_out,timeout,contiene,territorial
+hamaika,hamaika,contiene,territorial
+rtve,A84818558,nif,todas
+rtve,la 1,nombre_exacto,territorial
+rtve,rtve,contiene,territorial
+rtve,tve,contiene,territorial
+rtve,radio nacional,contiene,territorial
+rtve,rne,contiene,territorial
+rtve,la 1 tve,contiene,territorial
+rtve,rtve,contiene,age
+rtve,RTVE,grupo,todas
+ccma,A08849622,nif,todas
+ccma,tvc,contiene,territorial
+ccma,tv3,contiene,territorial
+ccma,catalunya radio,contiene,territorial
+ccma,ccma,contiene,territorial
+ccma,3cat,contiene,territorial
+ccma,catalunya informacio,contiene,territorial
+ccma,corporacio catalana de mitjans audiovisuals,contiene,age
+ccma,CCMA (Corporació Catalana de Mitjans Audiovisuals),grupo,todas
+eitb,A48139232,nif,todas
+eitb,A48139224,nif,todas
+eitb,etb,contiene,territorial
+eitb,eitb,contiene,territorial
+eitb,radio euskadi,contiene,territorial
+eitb,euskadi irratia,contiene,territorial
+eitb,gaztea,contiene,territorial
+eitb,radio vitoria,contiene,territorial
+eitb,euskal irrati telebista,contiene,territorial
+eitb,euskal irrati telebista,contiene,age
+eitb,EITB,grupo,todas
+apunt,A75771584,nif,todas
+apunt,apunt,contiene,territorial
+apunt,a punt,contiene,territorial
+apunt,corporacio valenciana de mitjans,contiene,age
+apunt,À Punt (CVMC),grupo,todas
+canal_sur,A41248899,nif,todas
+canal_sur,canal sur,contiene,territorial
+canal_sur,rtva,contiene,territorial
+canal_sur,radio y television de andalucia,contiene,age
+canal_sur,RTVA (Canal Sur),grupo,todas
+crtvg,A15073349,nif,todas
+crtvg,crtvg,contiene,territorial
+crtvg,tvg,contiene,territorial
+crtvg,radio galega,contiene,territorial
+crtvg,television de galicia,contiene,territorial
+crtvg,corporacion radio television de galicia,contiene,age
+cmm,A45494994,nif,todas
+cmm,B45494986,nif,todas
+cmm,B45785219,nif,todas
+cmm,A45494986,nif,todas
+cmm,cmm,contiene,territorial
+cmm,castilla la mancha media,contiene,territorial
+cmm,castilla la mancha media,contiene,age
+cartv,A99051039,nif,todas
+cartv,A99051047,nif,todas
+cartv,aragon tv,contiene,territorial
+cartv,aragon television,contiene,territorial
+cartv,aragon radio,contiene,territorial
+cartv,cartv,contiene,territorial
+cartv,corporacion aragonesa de radio y television,contiene,age
+cartv,CARTV (Aragón TV y Aragón Radio),grupo,todas
+rtpa,A33924606,nif,todas
+rtpa,B10811156,nif,todas
+rtpa,rtpa,contiene,territorial
+rtpa,tpa,contiene,territorial
+rtrm,A73386195,nif,todas
+rtrm,onda regional,contiene,territorial
+rtrm,rtrm,contiene,territorial
+rtrm,radiotelevision de la region de murcia,contiene,territorial
+rtrm,radiotelevision de la region de murcia,contiene,age
+rtrm,RTRM (La 7 y Onda Regional),grupo,todas
+telemadrid,telemadrid,contiene,territorial
+telemadrid,onda madrid,contiene,territorial
+telemadrid,Telemadrid (Radio Televisión Madrid),grupo,todas
+canal_extremadura,A06446447,nif,todas
+canal_extremadura,B01674720,nif,todas
+canal_extremadura,canal extremadura,contiene,territorial
+canal_extremadura,corporacion extremena de medios audiovisuales,contiene,age
+tv_canaria,A38491098,nif,todas
+tv_canaria,A38918470,nif,todas
+tv_canaria,television canaria,contiene,territorial
+tv_canaria,rtvc,contiene,territorial
+tv_canaria,radio publica de canarias,contiene,territorial
+ib3,ib3,contiene,territorial
+ib3,radiotelevisio de les illes balears,contiene,age
+ib3,radiotelevision de las islas baleares,contiene,age
+forta,G79362133,nif,todas
+forta,forta,contiene,territorial
+forta,medios publicos audiovisuales autonomicos,contiene,age
+forta,FORTA (televisiones autonómicas),grupo,todas
+efe,A28028744,nif,todas
+efe,efe,contiene,territorial
+efe,agencia efe,contiene,territorial
+efe,agencia efe,contiene,age
+efe,Agencia EFE,grupo,todas
+acn,A61844411,nif,todas
+acn,agencia catalana de noticies,contiene,territorial
+acn,acn,contiene,territorial
+google,google,contiene,territorial
+google,youtube,contiene,territorial
+google,dv360,contiene,territorial
+google,google,contiene,age
+google,alphabet,contiene,age
+google,"Alphabet (Google, YouTube)",grupo,todas
+meta,facebook,contiene,territorial
+meta,instagram,contiene,territorial
+meta,meta,contiene,territorial
+meta,meta ads,contiene,territorial
+meta,whatsapp,contiene,territorial
+meta,meta plaforms,contiene,age
+meta,meta platforms,contiene,age
+meta,"Meta (Facebook, Instagram)",grupo,todas
+tiktok,tiktok,contiene,territorial
+tiktok,tik tok,contiene,territorial
+tiktok,bytedance,contiene,age
+tiktok,ByteDance (TikTok),grupo,todas
+x_twitter,twitter,contiene,territorial
+x_twitter,x tw,contiene,territorial
+x_twitter,x twitter,contiene,territorial
+x_twitter,x corp,contiene,age
+x_twitter,X (Twitter),grupo,todas
+spotify,spotify,contiene,territorial
+spotify,spotify,contiene,age
+spotify,Spotify,grupo,todas
+amazon,amazon,contiene,territorial
+amazon,twitch,contiene,territorial
+amazon,amazon,contiene,age
+amazon,Amazon,grupo,todas
+netflix,netflix,contiene,territorial
+netflix,netflix,contiene,age
+netflix,Netflix,grupo,todas
+microsoft,linkedin,contiene,territorial
+microsoft,bing,contiene,territorial
+microsoft,microsoft,contiene,territorial
+microsoft,microsoft,contiene,age
+microsoft,"Microsoft (LinkedIn, Bing)",grupo,todas
+nif_a11627395,A11627395,nif,todas
+nif_a11627395,publicaciones del sur,contiene,age
+nif_b25066184,B25066184,nif,todas
+nif_b25066184,lerinform lleida,contiene,age
+nif_a26372045,A26372045,nif,todas
+nif_a26372045,promotores de medios riojanos,contiene,age
+nif_a02021657,A02021657,nif,todas
+nif_a02021657,publicaciones albacete,contiene,age
+nif_b95284857,B95284857,nif,todas
+nif_b95284857,lea artibaialdeko hedabideak,contiene,age
+nif_a26245464,A26245464,nif,todas
+nif_a26245464,rioja television,contiene,age
+nif_b66541947,B66541947,nif,todas
+nif_b66541947,grup les noticies de catalunya,contiene,age
+nif_b13205331,B13205331,nif,todas
+nif_b13205331,ediciones lm,contiene,age
+nif_a07748379,A07748379,nif,todas
+nif_a07748379,televisio d eivissa i formentera,contiene,age
+nif_b43496447,B43496447,nif,todas
+nif_b43496447,iniciatives de televisio,contiene,age
+nif_a47454038,A47454038,nif,todas
+nif_a47454038,servicios de prensa comunicaplus,contiene,age
+nif_b97668164,B97668164,nif,todas
+nif_b97668164,grupo diario editorial,contiene,age
+nif_g61514162,G61514162,nif,todas
+nif_g61514162,as de mitjans d informacio i comunicacio amic,contiene,age
+nif_b65672495,B65672495,nif,todas
+nif_b65672495,timeout spain media,contiene,age
+nif_b37524261,B37524261,nif,todas
+nif_b37524261,diario de salamanca,contiene,age
+nif_b25636457,B25636457,nif,todas
+nif_b25636457,holder solutions,contiene,age
+nif_b42217406,B42217406,nif,todas
+nif_b42217406,editora de prensa soriana,contiene,age
+nif_b43996941,B43996941,nif,todas
+nif_b43996941,televisio teveon ebre,contiene,age
+nif_b88313085,B88313085,nif,todas
+nif_b88313085,prensa digital cyl,contiene,age
+nif_f95942835,F95942835,nif,todas
+nif_f95942835,gertuko koop s gizarte ekimenekoa,contiene,age
+nif_a08447369,A08447369,nif,todas
+nif_a08447369,premsa d osona,contiene,age
+nif_a46186821,A46186821,nif,todas
+nif_a46186821,edicions del pais valencia,contiene,age
+nif_b67186866,B67186866,nif,todas
+nif_a09332461,A09332461,nif,todas
+nif_a09332461,burgos publicaciones,contiene,age
+nif_b17417650,B17417650,nif,todas
+nif_b17417650,d 9 comunicacio,contiene,age
+nif_g31602477,G31602477,nif,todas
+nif_g31602477,asociacion xaloa de elizondo,contiene,age
+nif_b95011276,B95011276,nif,todas
+nif_b95011276,euskal prensa,contiene,age
+nif_a12200713,A12200713,nif,todas
+nif_a12200713,comunicacions dels ports,contiene,age
+nif_b02564052,B02564052,nif,todas
+nif_b02564052,publicaciones digitales albacete,contiene,age
+nif_b64863335,B64863335,nif,todas
+nif_b64863335,grup enderrock edicions,contiene,age
+nif_b62677331,B62677331,nif,todas
+nif_b62677331,etv llobregat tv,contiene,age
+nif_b58364936,B58364936,nif,todas
+nif_b58364936,tot media comunicacio,contiene,age
+nif_b96725775,B96725775,nif,todas
+nif_b96725775,ribera televisio,contiene,age
+nif_b20809042,B20809042,nif,todas
+nif_b20809042,euskal editorea,contiene,age
+nif_b02851848,B02851848,nif,todas
+nif_b02851848,edicions diari de terrassa,contiene,age
+nif_b61451399,B61451399,nif,todas
+nif_b61451399,catalana de televisio local,contiene,age
+nif_a01418565,A01418565,nif,todas
+nif_a01418565,nafar ikusentzunekoak,contiene,age
+nif_b17503038,B17503038,nif,todas
+nif_b17503038,televisio de girona,contiene,age
+nif_b25635186,B25635186,nif,todas
+nif_b25635186,grupo simalro,contiene,age
+nif_b43833862,B43833862,nif,todas
+nif_b43833862,imagina radio,contiene,age
+nif_b41999368,B41999368,nif,todas
+nif_b41999368,prensa nazarena,contiene,age
+nif_b58180613,B58180613,nif,todas
+nif_b58180613,edicions cavall fort,contiene,age
+nif_b19251818,B19251818,nif,todas
+nif_b19251818,arriaca television,contiene,age
+nif_b47372263,B47372263,nif,todas
+nif_b47372263,ediciones la meseta,contiene,age
+nif_g31595473,G31595473,nif,todas
+nif_g31595473,ttipi ttapa fundazioa,contiene,age
+nif_b17477779,B17477779,nif,todas
+nif_b17477779,olot televisio,contiene,age
+nif_b98887185,B98887185,nif,todas
+nif_b98887185,valencia extra,contiene,age
+nif_b97172332,B97172332,nif,todas
+nif_b97172332,comarques centrals televisio,contiene,age
+nif_b55606925,B55606925,nif,todas
+nif_b55606925,ebre digital,contiene,age
+nif_a43926682,A43926682,nif,todas
+nif_a59056853,A59056853,nif,todas
+nif_a59056853,publicacions de l abadia de montserrat,contiene,age
+nif_b58583568,B58583568,nif,todas
+nif_b58583568,editorial grao de irif,contiene,age
+nif_b53119863,B53119863,nif,todas
+nif_b53119863,consorcio de television comarcal,contiene,age
+nif_b53378477,B53378477,nif,todas
+nif_b53378477,arte quatre victor,contiene,age
+nif_b40265308,B40265308,nif,todas
+nif_b40265308,noticias independientes de segovia,contiene,age
+nif_b43121144,B43121144,nif,todas
+nif_b60711843,B60711843,nif,todas
+nif_b17440553,B17440553,nif,todas
+nif_a701687u,A701687U,nif,todas
+nif_a701687u,premsa andorrana,contiene,age
+nif_b17331083,B17331083,nif,todas
+nif_b17331083,televisio de roses,contiene,age
+nif_b75034793,B75034793,nif,todas
+nif_b75034793,tai gabe digitala,contiene,age
+nif_b42200774,B42200774,nif,todas
+nif_b42200774,soria noticias,contiene,age
+nif_g71367825,G71367825,nif,todas
+nif_g71367825,euskalerria irratia fundazioa,contiene,age
+nif_b25527201,B25527201,nif,todas
+nif_b25527201,cadena pirenaica de radio i televisio,contiene,age
+nif_b12501516,B12501516,nif,todas
+nif_b12501516,vila real comunicacio i disseny,contiene,age
+nif_b07941255,B07941255,nif,todas
+nif_b07941255,canal 4 television de baleares,contiene,age
+nif_f95792347,F95792347,nif,todas
+nif_f95792347,hiruka kooperatiba elkartea,contiene,age
+nif_a63200828,A63200828,nif,todas
+nif_a63200828,emissions digitals de catalunya,contiene,age
+nif_a08734949,A08734949,nif,todas
+nif_a08734949,publicacions penedes,contiene,age
+nif_b36223600,B36223600,nif,todas
+nif_b36223600,television da mancomunidade do salnes,contiene,age
+nif_b64337462,B64337462,nif,todas
+nif_b64337462,editora singular digital 2gr,contiene,age
+nif_b08503583,B08503583,nif,todas
+nif_g31981509,G31981509,nif,todas
+nif_g31981509,guaixe fundazioa,contiene,age
+nif_b11792587,B11792587,nif,todas
+nif_b11792587,periodicos gratuitos viva,contiene,age
+nif_r5800411j,R5800411J,nif,todas
+nif_r5800411j,fund missatge huma i cristia,contiene,age
+nif_a97517379,A97517379,nif,todas
+nif_a97517379,television popular del mediterraneo,contiene,age
+nif_b94063567,B94063567,nif,todas
+nif_b94063567,virtual vedra comunicacion,contiene,age
+nif_a20644928,A20644928,nif,todas
+nif_b98566219,B98566219,nif,todas
+nif_b87995841,B87995841,nif,todas
+nif_b87995841,silicon radio,contiene,age
+nif_b66917048,B66917048,nif,todas
+nif_b66917048,edicions del nuvol,contiene,age
+nif_b88169701,B88169701,nif,todas
+nif_b88169701,prensa y servicios de la lengua,contiene,age
+nif_b12540761,B12540761,nif,todas
+nif_b12540761,comunicacion y medios de levante,contiene,age
+nif_b67353094,B67353094,nif,todas
+nif_b67353094,anomalia ediciones,contiene,age
+nif_g57834004,G57834004,nif,todas
+nif_g57834004,associacio ona mediterrania,contiene,age
+nif_b48180202,B48180202,nif,todas
+nif_b48180202,busturialdeko irrati telebista,contiene,age
+nif_b64443534,B64443534,nif,todas
+nif_b64443534,montcau produccions,contiene,age
+nif_b16110264,B16110264,nif,todas
+nif_b86754025,B86754025,nif,todas
+nif_b17736448,B17736448,nif,todas
+nif_b17736448,noves edicions altempordanes,contiene,age
+nif_b86768553,B86768553,nif,todas
+nif_b86768553,capital radio,contiene,territorial
+nif_b86768553,capital radio economia,contiene,age
+nif_b78159142,B78159142,nif,todas
+nif_b78159142,ediciones jemma,contiene,age
+nif_p6300001b,P6300001B,nif,todas
+nif_p6300001b,entidad publica empresarial diario lanza,contiene,age
+nif_b20811428,B20811428,nif,todas
+nif_b20811428,oiartzualdeko hedabideak,contiene,age
+nif_b25503566,B25503566,nif,todas
+nif_b25503566,edicions saloria,contiene,age
+nif_f20704375,F20704375,nif,todas
+nif_f20704375,goiena komunikazio taldea koop e,contiene,age
+nif_b02402915,B02402915,nif,todas
+nif_b02402915,geintel radio,contiene,age
+nif_b76129840,B76129840,nif,todas
+nif_b76129840,radio television onda fuerteventura,contiene,age
+nif_b45904042,B45904042,nif,todas
+nif_b45904042,prensa digital de clm,contiene,age
+nif_b65078545,B65078545,nif,todas
+nif_b65078545,capgros comunicacio,contiene,age
+nif_b12472643,B12472643,nif,todas
+nif_b12472643,tvcs retransmisiones,contiene,age
+nif_b64045511,B64045511,nif,todas
+nif_b64045511,canal taronja,contiene,age
+nif_b09339862,B09339862,nif,todas
+nif_b09339862,radio arlanzon,contiene,age
+nif_b17039116,B17039116,nif,todas
+nif_b17039116,edicions el bassegoda,contiene,age
+nif_g48855068,G48855068,nif,todas
+nif_g48855068,asociacion cultural ameba kultur elkartea de basauri,contiene,age
+nif_a48532469,A48532469,nif,todas
+nif_a48532469,editora del pais vasco 93,contiene,age
+nif_b55343917,B55343917,nif,todas
+nif_b55343917,edicions abril 2019,contiene,age
+nif_b91558304,B91558304,nif,todas
+nif_b91558304,televisiones digitales de andalucia,contiene,age
+nif_b17091711,B17091711,nif,todas
+nif_b17091711,editorial l emporda,contiene,age
+nif_b56657877,B56657877,nif,todas
+nif_b56657877,articulo catorce ediciones,contiene,age
+nif_b44534378,B44534378,nif,todas
+nif_b44534378,prime tv castellon,contiene,age
+nif_a78874054,A78874054,nif,todas
+nif_a78874054,bayard revistas,contiene,age
+nif_b46406799,B46406799,nif,todas
+nif_b46406799,edicions camacuc,contiene,age
+nif_b64166705,B64166705,nif,todas
+nif_b64166705,tirabol produccions,contiene,age
+nif_b42213116,B42213116,nif,todas
+nif_b42213116,noticias independientes de soria,contiene,age
+nif_a28795631,A28795631,nif,todas
+nif_b17483165,B17483165,nif,todas
+nif_b17483165,televisio del ripolles,contiene,age
+nif_b12894192,B12894192,nif,todas
+nif_b12894192,diario digital de castellon,contiene,age
+nif_b96553920,B96553920,nif,todas
+nif_b96553920,radio difusion torre,contiene,age
+nif_b54383419,B54383419,nif,todas
+nif_b54383419,lara llorca comunicacion,contiene,age
+nif_b03721552,B03721552,nif,todas
+nif_b03721552,marina alta periodic,contiene,age
+nif_b43665256,B43665256,nif,todas
+nif_b43665256,la veu de l ebre,contiene,age
+nif_a54709548,A54709548,nif,todas
+nif_b62325394,B62325394,nif,todas
+nif_b62325394,televisio sant cugat,contiene,age
+nif_b41463787,B41463787,nif,todas
+nif_b41463787,opcion radio,contiene,age
+nif_b02560480,B02560480,nif,todas
+nif_b02560480,editora de comunicacion digital,contiene,age
+nif_b07728876,B07728876,nif,todas
+nif_b07728876,setmanaris i revistes,contiene,age
+nif_b13422191,B13422191,nif,todas
+nif_a703503p,A703503P,nif,todas
+nif_a703503p,andorrana de publicacions,contiene,age
+nif_b76160118,B76160118,nif,todas
+nif_b76160118,biosfera radiotelevision sociedad limitada,contiene,age
+nif_b80979537,B80979537,nif,todas
+nif_b80979537,polo digital multimedia,contiene,age
+nif_b62552146,B62552146,nif,todas
+nif_b62552146,productora d emisions de radio,contiene,age
+nif_b91563106,B91563106,nif,todas
+nif_b91563106,prensa y comunicacion local,contiene,age
+nif_b13415005,B13415005,nif,todas
+nif_b13415005,segmentos tv,contiene,age
+nif_b93197937,B93197937,nif,todas
+nif_b93197937,costa del sol times tv,contiene,age
+nif_f66472176,F66472176,nif,todas
+nif_b92491638,B92491638,nif,todas
+nif_b92491638,editora malaguena de publicaciones,contiene,age
+nif_j42208850,J42208850,nif,todas
+nif_j42208850,ediciones desdesoria sc,contiene,age
+nif_b60955564,B60955564,nif,todas
+nif_b60955564,serveis de comunicacio global aquitania,contiene,age
+nif_b98250855,B98250855,nif,todas
+nif_b98250855,prime tv valenciana,contiene,age
+nif_b44198992,B44198992,nif,todas
+nif_b44198992,masmut produccions,contiene,age
+nif_b03277217,B03277217,nif,todas
+nif_b03277217,radio ibi emisora de frecuencia modulada,contiene,age
+nif_a46095543,A46095543,nif,todas
+nif_a46095543,radio gandia,contiene,age
+nif_b67007807,B67007807,nif,todas
+nif_b67007807,junior report desfake,contiene,age
+nif_b90045709,B90045709,nif,todas
+nif_b90045709,el contenedor ediciones,contiene,age
+nif_b65331704,B65331704,nif,todas
+nif_b65331704,vadevit cat comunicacio vinaria,contiene,age
+nif_a28927606,A28927606,nif,todas
+nif_a28927606,cantabrico de prensa,contiene,age
+nif_b43808294,B43808294,nif,todas
+nif_b12977815,B12977815,nif,todas
+nif_b12977815,va de bo editorial valenciana,contiene,age
+nif_b88605266,B88605266,nif,todas
+nif_b88605266,eda tv consulting,contiene,age
+nif_b98276207,B98276207,nif,todas
+nif_b98276207,proyectos de comunicacion ontinyent,contiene,age
+nif_a07509698,A07509698,nif,todas
+nif_a07509698,nova televisio,contiene,age
+nif_b81459141,B81459141,nif,todas
+nif_b81459141,orfeo ediciones,contiene,age
+nif_g31267008,G31267008,nif,todas
+nif_g31267008,asociacion cultural xorroxin elkartea,contiene,age
+nif_b66319757,B66319757,nif,todas
+nif_b66319757,televisio del bergueda,contiene,age
+nif_g07631260,G07631260,nif,todas
+nif_g07631260,associacio cultural veu de soller,contiene,age
+nif_b54716832,B54716832,nif,todas
+nif_b54716832,prensa vega costa,contiene,age
+nif_b66162041,B66162041,nif,todas
+nif_b66162041,premsa de sitges,contiene,age
+nif_b40580136,B40580136,nif,todas
+nif_b40580136,ediciones murcia plaza,contiene,age
+nif_b45707742,B45707742,nif,todas
+nif_b45707742,cadena local tv,contiene,age
+nif_g43339134,G43339134,nif,todas
+nif_g43339134,associacio cultural revista cambrils,contiene,age
+nif_b57477085,B57477085,nif,todas
+nif_b57477085,periodico de ibiza y formentera,contiene,age
+nif_b44249373,B44249373,nif,todas
+nif_b44249373,diario de teruel,contiene,territorial
+nif_b44249373,prensa de teruel,contiene,age
+nif_f57078644,F57078644,nif,todas
+nif_f57078644,inforaiguer soc coop,contiene,age
+nif_b10264158,B10264158,nif,todas
+nif_b10264158,radio interior,contiene,age
+nif_b67271304,B67271304,nif,todas
+nif_b67271304,diari connexiobcn,contiene,age
+nif_b62036132,B62036132,nif,todas
+nif_b62036132,el cargol publicacions,contiene,age
+nif_b95802104,B95802104,nif,todas
+nif_b95802104,vinilo fm radio,contiene,age
+nif_f98614076,F98614076,nif,todas
+nif_f98614076,edicions la veu p valencia,contiene,age
+nif_g65978348,G65978348,nif,todas
+nif_g65978348,fundacion periodisme plural,contiene,age
+nif_b17317298,B17317298,nif,todas
+nif_b17317298,radio ripoll,contiene,age
+nif_b78196664,B78196664,nif,todas
+nif_b78196664,scherzo editorial,contiene,age
+nif_b63369086,B63369086,nif,todas
+nif_b13576368,B13576368,nif,todas
+nif_b13576368,ediciones serca,contiene,age
+nif_b17165960,B17165960,nif,todas
+nif_b17165960,comunicacions del ripolles,contiene,age
+nif_g25452335,G25452335,nif,todas
+nif_g25452335,a cult garriguenca de comunica,contiene,age
+nif_a31197312,A31197312,nif,todas
+nif_a31197312,iruneko komunikabideak,contiene,age
+nif_b71304455,B71304455,nif,todas
+nif_a707871v,A707871V,nif,todas
+nif_a707871v,agencia de noticies i informacio,contiene,age
+nif_b08818189,B08818189,nif,todas
+nif_b08818189,publicacions anoia,contiene,age
+nif_a30394407,A30394407,nif,todas
+nif_a30394407,television murciana,contiene,age
+nif_b66810987,B66810987,nif,todas
+nif_b66810987,mon terrassa,contiene,age
+nif_b25814815,B25814815,nif,todas
+nif_b25814815,magazine publicaciones media,contiene,age
+nif_b12559514,B12559514,nif,todas
+nif_b12559514,medios audiovisuales del maestrat,contiene,age
+nif_b98980089,B98980089,nif,todas
+nif_b98980089,grupo calaforra media,contiene,age
+nif_b20848073,B20848073,nif,todas
+nif_b20848073,goierriko hedabideak,contiene,age
+nif_b55053482,B55053482,nif,todas
+nif_b55053482,catmedia global,contiene,age
+nif_b54458666,B54458666,nif,todas
+nif_b67273219,B67273219,nif,todas
+nif_b67273219,quelcom global,contiene,age
+nif_f66599226,F66599226,nif,todas
+nif_f66599226,la fura continguts,contiene,age
+nif_b02595734,B02595734,nif,todas
+nif_b02595734,periodico de almansa sociedad limitada,contiene,age
+nif_b96656574,B96656574,nif,todas
+nif_b96656574,sao edicions,contiene,age
+nif_b12656203,B12656203,nif,todas
+nif_b12656203,tv alto palancia,contiene,age
+nif_b95394607,B95394607,nif,todas
+nif_b95394607,bizkaiko hedabideak,contiene,age
+nif_b05311881,B05311881,nif,todas
+nif_b05311881,real de a 8 comunicacion,contiene,age
+nif_b20806840,B20806840,nif,todas
+nif_b20806840,goiherriko ikuskari,contiene,age
+nif_b39834536,B39834536,nif,todas
+nif_b39834536,s r d onda occidental cantabria,contiene,age
+nif_a13108345,A13108345,nif,todas
+nif_a13108345,castellana de prensa radio y tv,contiene,age
+nif_b03989845,B03989845,nif,todas
+nif_b51017945,B51017945,nif,todas
+nif_b51017945,ediciones ceitil,contiene,age
+nif_b59897785,B59897785,nif,todas
+nif_b59897785,opera actual,contiene,age
+nif_b11673803,B11673803,nif,todas
+nif_b11673803,alcestes s l 7 tv,contiene,age
+nif_a73390106,A73390106,nif,todas
+nif_a73390106,television popular de la region de murcia,contiene,age
+nif_b27486901,B27486901,nif,todas
+nif_b27486901,portas comunicacion,contiene,age
+nif_b02151819,B02151819,nif,todas
+nif_b02151819,cable television albacete,contiene,age
+nif_b97617856,B97617856,nif,todas
+nif_b97617856,torrent media,contiene,age
+nif_b97691380,B97691380,nif,todas
+nif_b97691380,solint quatre disseny,contiene,age
+nif_b99494577,B99494577,nif,todas
+nif_b99494577,asg ediciones digitales de aragon,contiene,age
+nif_b38492237,B38492237,nif,todas
+nif_b38492237,cadena hit radio,contiene,age
+nif_b66084377,B66084377,nif,todas
+nif_b66084377,fem produccions,contiene,age
+nif_b63824726,B63824726,nif,todas
+nif_b63824726,edicions de santa coloma,contiene,age
+nif_b13584479,B13584479,nif,todas
+nif_b13584479,periodico de castilla la mancha,contiene,age
+nif_b25754078,B25754078,nif,todas
+nif_b25754078,informacio de comarques,contiene,age
+nif_b02411726,B02411726,nif,todas
+nif_b02411726,television hellin,contiene,age
+nif_b63247134,B63247134,nif,todas
+nif_b43396902,B43396902,nif,todas
+nif_b43396902,radio ulldecona,contiene,age
+nif_l712547l,L712547L,nif,todas
+nif_b87764924,B87764924,nif,todas
+nif_b87764924,la radio que viene,contiene,age
+nif_b44508133,B44508133,nif,todas
+nif_b44508133,comunicacion plana baixa,contiene,age
+nif_b11737392,B11737392,nif,todas
+nif_b11737392,sierravision arcos tv,contiene,age
+nif_b40591877,B40591877,nif,todas
+nif_b40591877,proyecto polaris comunicacion,contiene,age
+nif_v48062863,V48062863,nif,todas
+nif_v48062863,radio popular de bilbao,contiene,territorial
+nif_v48062863,radio popular de bilbao,contiene,age
+nif_b57487548,B57487548,nif,todas
+nif_b36979920,B36979920,nif,todas
+nif_b36979920,ediciones edisport,contiene,age
+nif_b32215329,B32215329,nif,todas
+nif_b25591983,B25591983,nif,todas
+nif_b25591983,nova tarrega,contiene,territorial
+nif_b25591983,edicions nova tarrega,contiene,age
+nif_g31595689,G31595689,nif,todas
+nif_g31595689,asociacion cultural ametza,contiene,age
+nif_b17880063,B17880063,nif,todas
+nif_b17880063,bonart cultural,contiene,age
+nif_b82788639,B82788639,nif,todas
+nif_b57814931,B57814931,nif,todas
+nif_b57814931,plan b publicaciones,contiene,age
+nif_b02599892,B02599892,nif,todas
+nif_b02599892,radio digital y prensa,contiene,age
+nif_b90251174,B90251174,nif,todas
+nif_b90251174,multimedia ediciones globales,contiene,age
+nif_b98106370,B98106370,nif,todas
+nif_b98106370,inversiones especiales del mediterraneo,contiene,age
+nif_b40512436,B40512436,nif,todas
+nif_b40512436,eventos y digitales valencianos,contiene,age
+nif_b13503347,B13503347,nif,todas
+nif_b13503347,ediciones centro mancha,contiene,age
+nif_g04980595,G04980595,nif,todas
+nif_g04980595,associacio espai linia,contiene,age
+nif_a58012865,A58012865,nif,todas
+nif_a58012865,premsa i comunicacio del baix llobregat,contiene,age
+nif_b91730390,B91730390,nif,todas
+nif_b91730390,publicaciones guadalquivir,contiene,age
+nif_b98291750,B98291750,nif,todas
+nif_b98291750,medios impresos y digitales de aqui,contiene,age
+nif_f66807058,F66807058,nif,todas
+nif_b81378846,B81378846,nif,todas
+nif_b81378846,grupo 28 editores,contiene,age
+nif_b65519712,B65519712,nif,todas
+nif_b65519712,gent i terra,contiene,age
+nif_f95539797,F95539797,nif,todas
+nif_f95539797,blb komunikazioa koop e,contiene,age
+nif_b23331622,B23331622,nif,todas
+nif_b65476954,B65476954,nif,todas
+nif_b65476954,grup mesosona,contiene,age
+nif_b76659879,B76659879,nif,todas
+nif_b76659879,prensa insular,contiene,age
+nif_b84671239,B84671239,nif,todas
+nif_b84671239,caiman ediciones,contiene,age
+nif_b35835834,B35835834,nif,todas
+nif_b35835834,radio sintonia dos fuer,contiene,age
+nif_b39797741,B39797741,nif,todas
+nif_b39797741,radio studio torrelavega,contiene,age
+nif_a39602644,A39602644,nif,todas
+nif_a39602644,television popular de santander,contiene,age
+nif_b66411828,B66411828,nif,todas
+nif_b66411828,caxier edicions,contiene,age
+nif_b63999254,B63999254,nif,todas
+nif_b63999254,bifidus produccions,contiene,age
+nif_b60651874,B60651874,nif,todas
+nif_b60651874,tot cerdanyola,contiene,age
+nif_b17947011,B17947011,nif,todas
+nif_b17947011,editorial gavarres,contiene,age
+nif_g31736077,G31736077,nif,todas
+nif_g31736077,asociacion cultural mailope,contiene,age
+nif_b09437476,B09437476,nif,todas
+nif_b09437476,grupogo ediciones,contiene,age
+nif_b98585854,B98585854,nif,todas
+nif_b05303805,B05303805,nif,todas
+nif_b05303805,el diario region de murcia,contiene,age
+nif_f98927551,F98927551,nif,todas
+nif_b65946162,B65946162,nif,todas
+nif_b65946162,infom kit lps,contiene,age
+nif_b14321699,B14321699,nif,todas
+nif_b14321699,atalaya de television,contiene,age
+nif_b01709518,B01709518,nif,todas
+nif_b01709518,makma cultural,contiene,age
+nif_b82475286,B82475286,nif,todas
+nif_b82475286,el iceberg publicaciones del sur,contiene,age
+nif_b67258913,B67258913,nif,todas
+nif_b67258913,politica y prosa,contiene,age
+nif_b43518232,B43518232,nif,todas
+nif_b43518232,edicions valls comunicacio,contiene,age
+nif_b95483137,B95483137,nif,todas
+nif_b95483137,kaemone europe,contiene,age
+nif_a07006315,A07006315,nif,todas
+nif_a07006315,editorial menorca,contiene,age
+nif_b73554271,B73554271,nif,todas
+nif_b73554271,ediciones vitalidad y progreso,contiene,age
+nif_g20869772,G20869772,nif,todas
+nif_g20869772,pausu media asociacion,contiene,age
+nif_b43040187,B43040187,nif,todas
+nif_b43040187,radio i televisio de la catalunya nova,contiene,age
+nif_b56303233,B56303233,nif,todas
+nif_b56303233,mamola noticias,contiene,age
+nif_b31662232,B31662232,nif,todas
+nif_b31662232,nexo diseno y comunicacion,contiene,age
+nif_b70079090,B70079090,nif,todas
+nif_b70079090,portocabo tv,contiene,age
+nif_b55107502,B55107502,nif,todas
+nif_g66245986,G66245986,nif,todas
+nif_g66245986,associacio cultural l independent,contiene,age
+nif_b88592423,B88592423,nif,todas
+nif_b88592423,avatel television,contiene,age
+nif_b64053770,B64053770,nif,todas
+nif_b64053770,garraf news media,contiene,age
+nif_b25779505,B25779505,nif,todas
+nif_b25779505,tarrega audiovisuals,contiene,age
+nif_b54496815,B54496815,nif,todas
+nif_b54496815,prime tv alicantina,contiene,age
+nif_j91939355,J91939355,nif,todas
+nif_j91939355,wabi sabi investments s c,contiene,age
+nif_b55597702,B55597702,nif,todas
+nif_b55597702,tarraco comunicacio digital,contiene,age
+nif_b42911966,B42911966,nif,todas
+nif_b42911966,mecigaya creativa,contiene,age
+nif_b66258757,B66258757,nif,todas
+nif_b07740699,B07740699,nif,todas
+nif_b07740699,el gall editor,contiene,age
+nif_g58331729,G58331729,nif,todas
+nif_g58331729,radio televisio de cardedeu,contiene,age
+nif_b90206830,B90206830,nif,todas
+nif_b90206830,fullmedia andalucia sl canal sur radio y television,contiene,age
+nif_b36344430,B36344430,nif,todas
+nif_b36344430,publicidade terceiro milenio,contiene,age
+nif_f95628558,F95628558,nif,todas
+nif_f95628558,eme komunikazioa koop elk txikia,contiene,age
+nif_b62750443,B62750443,nif,todas
+nif_b62750443,l enllac dels anoiencs,contiene,age
+nif_g46648655,G46648655,nif,todas
+nif_g46648655,fundacio francesc eiximenis,contiene,age
+nif_g63498109,G63498109,nif,todas
+nif_g63498109,associacio cultural valors associacio cultural valors,contiene,age
+nif_b20864260,B20864260,nif,todas
+nif_b20864260,donostiako hedabideak,contiene,age
+nif_b03441631,B03441631,nif,todas
+nif_b03441631,grupo alfa 5,contiene,age
+nif_b72297575,B72297575,nif,todas
+nif_b72297575,8 tv provincia de cadiz,contiene,age
+nif_g61850277,G61850277,nif,todas
+nif_g61850277,l era espai de recursos,contiene,age
+nif_b67605113,B67605113,nif,todas
+nif_b67605113,reputation strategy consultants,contiene,age
+nif_f41602830,F41602830,nif,todas
+nif_f41602830,radio lebrija s c a,contiene,age
+nif_b75618686,B75618686,nif,todas
+nif_b75618686,laboratori d idees creatives sl laboratori d idees creatives,contiene,age
+nif_b78861564,B78861564,nif,todas
+nif_b78861564,arquitectura viva,contiene,age
+nif_b06531768,B06531768,nif,todas
+nif_b06531768,publicaciones jara,contiene,age
+nif_a53297628,A53297628,nif,todas
+nif_a53297628,radio lucentum,contiene,age
+nif_b64869670,B64869670,nif,todas
+nif_g63274534,G63274534,nif,todas
+nif_g63274534,associacio xarxa digital catalana,contiene,age
+nif_b55553804,B55553804,nif,todas
+nif_b55553804,noticies de les comarques de tarragona,contiene,age
+nif_u01675230,U01675230,nif,todas
+nif_u01675230,ceuta actualidad angulo ceuta ediciones ceitil u t e,contiene,age
+nif_b13569645,B13569645,nif,todas
+nif_b13569645,objetivo clm noticias,contiene,age
+nif_b07719800,B07719800,nif,todas
+nif_b07719800,radio eivissa,contiene,age
+nif_g48462451,G48462451,nif,todas
+nif_g48462451,asociacion euskal birusa elkarte kulturala de ermua,contiene,age
+nif_f66694100,F66694100,nif,todas
+nif_f66694100,dies d agost,contiene,age
+nif_b06732655,B06732655,nif,todas
+nif_b06732655,prensa y astroturismo,contiene,age
+nif_g08844797,G08844797,nif,todas
+nif_g08844797,assoc mestres rosa sensat,contiene,age
+nif_b88019815,B88019815,nif,todas
+nif_b39792528,B39792528,nif,todas
+nif_b39792528,publicaciones del cantabrico,contiene,age
+nif_f55686794,F55686794,nif,todas
+nif_b93080109,B93080109,nif,todas
+nif_b93080109,radio bellamar,contiene,age
+nif_b73538274,B73538274,nif,todas
+nif_b73538274,prensa y publicaciones de yecla,contiene,age
+nif_a21109608,A21109608,nif,todas
+nif_b43963487,B43963487,nif,todas
+nif_e57936577,E57936577,nif,todas
+nif_e57936577,cent per cent manacor cb,contiene,age
+nif_a08728305,A08728305,nif,todas
+nif_a08728305,diario maritimas,contiene,age
+nif_g07795867,G07795867,nif,todas
+nif_g07795867,associacio de premsa local de menorca,contiene,age
+nif_b13346135,B13346135,nif,todas
+nif_b13346135,multimedia prensa y comunicacion,contiene,age
+nif_b97495683,B97495683,nif,todas
+nif_b97495683,vallblanca press,contiene,age
+nif_b17475898,B17475898,nif,todas
+nif_b17475898,itram comunicacio,contiene,age
+nif_b65351074,B65351074,nif,todas
+nif_b65351074,connecor investiments,contiene,age
+nif_b02335263,B02335263,nif,todas
+nif_b02335263,publicor ediciones,contiene,age
+nif_b87822284,B87822284,nif,todas
+nif_b63491658,B63491658,nif,todas
+nif_b40518003,B40518003,nif,todas
+nif_a24029977,A24029977,nif,todas
+nif_a24029977,radio bierzo s a cadena ser,contiene,age
+nif_b56495880,B56495880,nif,todas
+nif_b56495880,periodico el meridiano sociedad limitada,contiene,age
+nif_b04465621,B04465621,nif,todas
+nif_b04465621,huercal overa television,contiene,age
+nif_a11368412,A11368412,nif,todas
+nif_a11368412,television campo de gibraltar,contiene,age
+nif_b15919947,B15919947,nif,todas
+nif_b15919947,grupo codigo cero comunica cion,contiene,age
+nif_b82375528,B82375528,nif,todas
+nif_b82375528,g h preimpresion y ediciones,contiene,age
+nif_a41963505,A41963505,nif,todas
+nif_a41963505,libreria y editorial renacimiento sociedad anonima,contiene,age
+nif_b39296447,B39296447,nif,todas
+nif_b39296447,ediciones del norte,contiene,age
+nif_b16680928,B16680928,nif,todas
+nif_b16680928,catalonia audiovisual media,contiene,age
+nif_b07777287,B07777287,nif,todas
+nif_b07777287,das insel radio,contiene,age
+nif_g62896196,G62896196,nif,todas
+nif_g62896196,grup de periodistes ramon barnils,contiene,age
+nif_b70160213,B70160213,nif,todas
+nif_b99433351,B99433351,nif,todas
+nif_b99433351,el diario de informacion digital,contiene,age
+nif_a03273679,A03273679,nif,todas
+nif_a03273679,radio comunicacion,contiene,age
+nif_b51019016,B51019016,nif,todas
+nif_b51019016,hacho ediciones,contiene,age
+nif_b83306522,B83306522,nif,todas
+nif_b83306522,el distrito de madrid comunicacione s y servicios,contiene,age
+nif_b83764035,B83764035,nif,todas
+nif_b83764035,nueva prensa comunicaciones y servicios,contiene,age
+nif_b86522349,B86522349,nif,todas
+nif_b86522349,el leon alado,contiene,age
+nif_b82187816,B82187816,nif,todas
+nif_b82187816,merlam publicaciones distrito 30,contiene,age
+nif_b27825595,B27825595,nif,todas
+nif_b27825595,edicions mide,contiene,age
+nif_b72275506,B72275506,nif,todas
+nif_b72275506,el periodico de chiclana,contiene,age
+nif_b66519828,B66519828,nif,todas
+nif_b66519828,colectivo 5w,contiene,age
+nif_v08983751,V08983751,nif,todas
+nif_v08983751,consell catala del llibre per a infants i joves,contiene,age
+nif_b43831353,B43831353,nif,todas
+nif_b43831353,ebe imatge i comunicacio,contiene,age
+nif_b01040906,B01040906,nif,todas
+nif_b01040906,laudio irratia,contiene,age
+nif_b67217414,B67217414,nif,todas
+nif_b67217414,canal costa catalana,contiene,age
+nif_b52512464,B52512464,nif,todas
+nif_b52512464,ediciones periodicas del noroeste,contiene,age
+nif_b39820808,B39820808,nif,todas
+nif_b39820808,prensa digital de cantabria,contiene,age
+nif_b21591284,B21591284,nif,todas
+nif_b21591284,periodicos punto cero sl unipersonal,contiene,age
+nif_g85945061,G85945061,nif,todas
+nif_g85945061,asociacion hortaleza periodico vecinal,contiene,age
+nif_b30168587,B30168587,nif,todas
+nif_b30168587,radio espuna alhama,contiene,age
+nif_f90441973,F90441973,nif,todas
+nif_f90441973,ana tolia editora s coop and,contiene,age
+nif_b35579481,B35579481,nif,todas
+nif_b35579481,radiotelevision lanzarote,contiene,age
+nif_a08844847,A08844847,nif,todas
+nif_b53830576,B53830576,nif,todas
+nif_b53830576,comercial narmasal,contiene,age
+nif_b06652861,B06652861,nif,todas
+nif_b06652861,art duomo global,contiene,age
+nif_b41916313,B41916313,nif,todas
+nif_b09839069,B09839069,nif,todas
+nif_b09839069,garrotxa digital,contiene,age
+nif_g62841697,G62841697,nif,todas
+nif_g62841697,ass cat editors de diaris,contiene,age
+nif_g48237283,G48237283,nif,todas
+nif_g48237283,asoc cultural mozoilo irratia,contiene,age
+nif_p0700300g,P0700300G,nif,todas
+nif_p0700300g,ajuntament d alcudia,contiene,age
+nif_b62066824,B62066824,nif,todas
+nif_b62066824,minoria absoluta,contiene,age
+nif_b64508955,B64508955,nif,todas
+nif_b64508955,orna comunicacion,contiene,age
+nif_b70399795,B70399795,nif,todas
+nif_b70399795,luzes xornalismo que conta,contiene,age
+nif_b30455141,B30455141,nif,todas
+nif_b30455141,radio television del sureste,contiene,age
+nif_g60493467,G60493467,nif,todas
+nif_g60493467,assoc prom mitj comunic local,contiene,age
+nif_g66079575,G66079575,nif,todas
+nif_g66079575,associacio cluster audiovisual cat,contiene,age
+nif_g28599041,G28599041,nif,todas
+nif_g28599041,fundacion jose ortega y gasset gregorio maranon,contiene,age
+nif_b32323925,B32323925,nif,todas
+nif_b32323925,letras a la carta,contiene,age
+nif_a79253969,A79253969,nif,todas
+nif_a79253969,ediciones y publicaciones alimentarias,contiene,age
+nif_g08621922,G08621922,nif,todas
+nif_g08621922,fed persones sordes de catalunya,contiene,age
+nif_b40243941,B40243941,nif,todas
+nif_b40243941,veoveo ediciones,contiene,age
+nif_b11408283,B11408283,nif,todas
+nif_b11408283,publicaciones del estrecho,contiene,age
+nif_f67469684,F67469684,nif,todas
+nif_b94123650,B94123650,nif,todas
+nif_b94123650,editorial novas do eixo atlantico,contiene,age
+nif_g71137491,G71137491,nif,todas
+nif_g71137491,nafarroako berriak elkartea,contiene,age
+nif_v61980728,V61980728,nif,todas
+nif_v61980728,fund consell de la informacio cat,contiene,age
+nif_b02628592,B02628592,nif,todas
+nif_b02628592,audiovisual radio y digital,contiene,age
+nif_b92055581,B92055581,nif,todas
+nif_b92055581,todas las publicaciones malaguenas,contiene,age
+nif_b15953052,B15953052,nif,todas
+nif_b15953052,ineditor grupo towers,contiene,age
+nif_b86053162,B86053162,nif,todas
+nif_b86053162,gdt ediciones,contiene,age
+nif_b66250507,B66250507,nif,todas
+nif_b66250507,valles publicitat,contiene,age
+nif_b76517937,B76517937,nif,todas
+nif_b76517937,radio cit tenerife,contiene,age
+nif_a32003915,A32003915,nif,todas
+nif_a32003915,radio orense,contiene,age
+nif_g59119594,G59119594,nif,todas
+nif_g59119594,ass cult revista alella,contiene,age
+nif_b61916177,B61916177,nif,todas
+nif_b61916177,ediciones de intervencion cultural,contiene,age
+nif_a706064j,A706064J,nif,todas
+nif_a706064j,la veu del poble,contiene,age
+nif_b85535789,B85535789,nif,todas
+nif_b85535789,ars revista de arte y coleccionismo,contiene,age
+nif_r5800367d,R5800367D,nif,todas
+nif_r5800367d,fund cat crist evang cultura,contiene,age
+nif_b18916676,B18916676,nif,todas
+nif_b18916676,television digital terrestre local demotril,contiene,age
+nif_b84361344,B84361344,nif,todas
+nif_b84361344,publicaciones periodisticas jemar,contiene,age
+nif_a29183050,A29183050,nif,todas
+nif_a29183050,revista litoral,contiene,age
+nif_b70880828,B70880828,nif,todas
+nif_b70880828,kosta irratia,contiene,age
+nif_b87266961,B87266961,nif,todas
+nif_b87266961,producciones de arte y pensamiento,contiene,age
+nif_g64172505,G64172505,nif,todas
+nif_g64172505,assoc catalana de mitjans locals,contiene,age
+nif_b60279494,B60279494,nif,todas
+nif_b97086227,B97086227,nif,todas
+nif_b41947037,B41947037,nif,todas
+nif_b41947037,editec sur s l periodico la semana,contiene,age
+nif_b87147260,B87147260,nif,todas
+nif_b87147260,ctx contexto,contiene,age
+nif_b26409011,B26409011,nif,todas
+nif_b26409011,radio ezcaray,contiene,age
+nif_b65029001,B65029001,nif,todas
+nif_b65029001,ediciones versatil,contiene,age
+nif_g12992558,G12992558,nif,todas
+nif_g12992558,asoc espai audiovisual de proximitat esap,contiene,age
+nif_g58331299,G58331299,nif,todas
+nif_g58331299,torello associacio cultural,contiene,age
+nif_b94074390,B94074390,nif,todas
+nif_b94074390,nos television,contiene,age
+nif_b91714683,B91714683,nif,todas
+nif_b91714683,nipho publicaciones comunicacion,contiene,age
+nif_b72906464,B72906464,nif,todas
+nif_b72906464,villaverde medios,contiene,age
+nif_j22221865,J22221865,nif,todas
+nif_j22221865,radio benabarre s c,contiene,age
+nif_g08824187,G08824187,nif,todas
+nif_g08824187,centre d informacio i documentacio internacionals a barcelona,contiene,age
+nif_b08910507,B08910507,nif,todas
+nif_b08910507,dirigido por,contiene,age
+nif_b03195724,B03195724,nif,todas
+nif_b03195724,radio orihuela,contiene,age
+nif_b12534269,B12534269,nif,todas
+nif_b12534269,artes graficas castell impresores,contiene,age
+nif_b70401435,B70401435,nif,todas
+nif_b70401435,underwood media,contiene,age
+nif_f08657306,F08657306,nif,todas
+nif_f08657306,radio ass de catalunya,contiene,age
+nif_b62240742,B62240742,nif,todas
+nif_b62240742,ediciones periodicas hispapublic,contiene,age
+nif_f86598521,F86598521,nif,todas
+nif_b60366093,B60366093,nif,todas
+nif_b80815442,B80815442,nif,todas
+nif_b80815442,ediciones y publicaciones troy,contiene,age
+nif_g31417181,G31417181,nif,todas
+nif_g31417181,asociacion irati,contiene,age
+nif_b55744924,B55744924,nif,todas
+nif_b55744924,catalunya diari digital,contiene,age
+nif_b98671738,B98671738,nif,todas
+nif_b98671738,golsmedia sports,contiene,age
+nif_b66293499,B66293499,nif,todas
+nif_b66293499,cinquanta set,contiene,age
+nif_f09679770,F09679770,nif,todas
+nif_f09679770,mangrana cultura contemporania,contiene,age
+nif_g64928245,G64928245,nif,todas
+nif_g64928245,cercle tecnologic de catalunya,contiene,age
+nif_b98614159,B98614159,nif,todas
+nif_b98614159,batiscafo editorial,contiene,age
+nif_b42939884,B42939884,nif,todas
+nif_b42939884,productora canaria de television regional,contiene,age
+nif_none,None,nif,todas
+nif_none,32284724500089 radio arrels,contiene,age
+nif_b60962370,B60962370,nif,todas
+nif_b60962370,editorial torre de papel,contiene,age
+nif_b44710820,B44710820,nif,todas
+nif_b44710820,equinox media,contiene,age
+nif_g84439769,G84439769,nif,todas
+nif_g84439769,nacion humana univeral,contiene,age
+nif_e43940485,E43940485,nif,todas
+nif_e43940485,reus comunicacio digital cb,contiene,age
+nif_g65072274,G65072274,nif,todas
+nif_g65072274,associacio cercle d estudis conciliars,contiene,age
+nif_b98301179,B98301179,nif,todas
+nif_b98301179,carbe produccions,contiene,age
+nif_b87325866,B87325866,nif,todas
+nif_b87325866,cinemania magazine,contiene,age
+nif_a15575574,A15575574,nif,todas
+nif_a15575574,atlantica de informacion e comunicacion de galicia,contiene,age
+nif_g43830967,G43830967,nif,todas
+nif_g43830967,associacio cultural amics de l om,contiene,age
+nif_g66580028,G66580028,nif,todas
+nif_g66580028,l avenir eines per a la informacio,contiene,age
+nif_b99226631,B99226631,nif,todas
+nif_b99226631,con r de radio,contiene,age
+nif_b25629734,B25629734,nif,todas
+nif_b25629734,balaguer audiovisuals,contiene,age
+nif_b43527498,B43527498,nif,todas
+nif_b43527498,doble columna,contiene,age
+nif_b97621940,B97621940,nif,todas
+nif_g57574675,G57574675,nif,todas
+nif_g57574675,asociacio cultural audiovisual de ftera,contiene,age
+nif_b33844622,B33844622,nif,todas
+nif_b66565854,B66565854,nif,todas
+nif_b66565854,antul invest,contiene,age
+nif_b24686982,B24686982,nif,todas
+nif_b24686982,mediaplanet global sl 987 tv,contiene,age
+nif_b46373734,B46373734,nif,todas
+nif_b46373734,publicaciones turia,contiene,age
+nif_b66914367,B66914367,nif,todas
+nif_b66914367,ediciones ruta 66,contiene,age
+nif_b36855104,B36855104,nif,todas
+nif_b36855104,runa publicaciones,contiene,age
+nif_f44599751,F44599751,nif,todas
+nif_f44599751,via forana s microcoop,contiene,age
+nif_g58040908,G58040908,nif,todas
+nif_g58040908,associacio radio ripollet,contiene,age
+nif_g66182411,G66182411,nif,todas
+nif_g66182411,associacio mon medieval,contiene,age
+nif_f67269993,F67269993,nif,todas
+nif_f67269993,premsa local el jardi,contiene,age
+nif_b56429632,B56429632,nif,todas
+nif_b56429632,radio television tenerife canarias plus,contiene,age
+nif_b27751312,B27751312,nif,todas
+nif_b27751312,ediciones basan,contiene,age
+nif_b38528873,B38528873,nif,todas
+nif_b55613715,B55613715,nif,todas
+nif_b55613715,quality mera,contiene,age
+nif_g67409052,G67409052,nif,todas
+nif_g67409052,associacio verificat,contiene,age
+nif_g59546556,G59546556,nif,todas
+nif_g59546556,fundacio privada trinijove,contiene,age
+nif_g08508301,G08508301,nif,todas
+nif_g08508301,ass empres cat public gr publ,contiene,age
+nif_g16974040,G16974040,nif,todas
+nif_g16974040,asoc cultural curatela estudio y edicion imagen contemporanea,contiene,age
+nif_g25219841,G25219841,nif,todas
+nif_g25219841,ass amics plana d urgell,contiene,age
+nif_b52553070,B52553070,nif,todas
+nif_b52553070,cuatro gotes producciones,contiene,age
+nif_b09431180,B09431180,nif,todas
+nif_b09431180,noticias de leon s l gente,contiene,age
+nif_b70325923,B70325923,nif,todas
+nif_b70325923,economia digital de galicia,contiene,age
+nif_b05515259,B05515259,nif,todas
+nif_b05515259,lorca comunicacion radio tv prensa e int,contiene,age
+nif_g08496622,G08496622,nif,todas
+nif_g08496622,unio gral treballadors catalunya,contiene,age
+nif_b76521533,B76521533,nif,todas
+nif_b76521533,fm radio canarias,contiene,age
+nif_b19327840,B19327840,nif,todas
+nif_b19327840,editores del henares informacion y publicaciones,contiene,age
+nif_g10587251,G10587251,nif,todas
+nif_g10587251,fundacion analisis de politica exterior,contiene,age
+nif_322847245,322847245,nif,todas
+nif_322847245,associacio arrels,contiene,age
+nif_f16715278,F16715278,nif,todas
+nif_f16715278,la sembra agencia de comunicacio so,contiene,age
+nif_b24068710,B24068710,nif,todas
+nif_b24068710,linares servicios generales onda bierzo,contiene,age
+nif_g63324727,G63324727,nif,todas
+nif_g63324727,collegi prof audiovisual de cat,contiene,age
+nif_g43027531,G43027531,nif,todas
+nif_g43027531,casal de l espluga de francoli,contiene,age
+nif_b08984031,B08984031,nif,todas
+nif_b08984031,casual magazines,contiene,age
+nif_b25026048,B25026048,nif,todas
+nif_b25026048,prensa leridana,contiene,age
+nif_b11899408,B11899408,nif,todas
+nif_b11899408,onda luz ronda,contiene,age
+nif_g16604274,G16604274,nif,todas
+nif_g16604274,associacio de mitjans d informacio i comunicacio illes balears,contiene,age
+nif_b87518122,B87518122,nif,todas
+nif_b87518122,global astronomia,contiene,age
+nif_b12947156,B12947156,nif,todas
+nif_b12947156,castellon base,contiene,age
+nif_b98891591,B98891591,nif,todas
+nif_b98891591,la traca publicacions valencianes,contiene,age
+nif_b86859600,B86859600,nif,todas
+nif_b86859600,ralsa ediciones,contiene,age
+nif_b93119683,B93119683,nif,todas
+nif_b93119683,publicaciones avi,contiene,age
+nif_b96969167,B96969167,nif,todas
+nif_b96969167,nuevos soportes de comunicacion y arte,contiene,age
+nif_a58620121,A58620121,nif,todas
+nif_a58620121,el ciervo 96 sociedad anonima empresa periodistica y editorial,contiene,age
+nif_g66536400,G66536400,nif,todas
+nif_g66536400,associacio caramella,contiene,age
+nif_a12211199,A12211199,nif,todas
+nif_a12211199,radio vila real,contiene,age
+nif_b70697800,B70697800,nif,todas
+nif_b70697800,corporacion si radio,contiene,age
+nif_g66834920,G66834920,nif,todas
+nif_g66834920,asociacion cultural ajoblanco,contiene,age
+nif_b14710123,B14710123,nif,todas
+nif_b14710123,canal priego tv,contiene,age
+nif_b18098129,B18098129,nif,todas
+nif_b18098129,grupo tres ediciones,contiene,age
+nif_b44596260,B44596260,nif,todas
+nif_b44596260,veteve media,contiene,age
+nif_b18238311,B18238311,nif,todas
+nif_b18238311,radio tv de motril,contiene,age
+nif_g58209594,G58209594,nif,todas
+nif_g58209594,instituto romano para asuntos sociales y culturales,contiene,age
+nif_p3114800j,P3114800J,nif,todas
+nif_p3114800j,leitzako udala,contiene,age
+nif_g08449258,G08449258,nif,todas
+nif_g08449258,fundacio roca gales,contiene,age
+nif_b98112675,B98112675,nif,todas
+nif_b05290473,B05290473,nif,todas
+nif_b05290473,montgo outsourcing,contiene,age
+nif_b80823438,B80823438,nif,todas
+nif_b80823438,trama editorial,contiene,age
+nif_a11267395,A11267395,nif,todas
+nif_b96944186,B96944186,nif,todas
+nif_b96944186,ediciones cybermonde,contiene,age
+nif_g43303163,G43303163,nif,todas
+nif_g43303163,associacio cultural revista la segarra,contiene,age
+nif_b86675097,B86675097,nif,todas
+nif_b86675097,artesa ediciones,contiene,age
+nif_b28902757,B28902757,nif,todas
+nif_b28902757,el croquis publicacion de arquitectura construccion y diseno,contiene,age
+nif_b48726533,B48726533,nif,todas
+nif_b48726533,nueva europa diseno imagen y comunicacion,contiene,age
+nif_a21679949,A21679949,nif,todas
+nif_a21679949,islas canarias television,contiene,age
+nif_g07158249,G07158249,nif,todas
+nif_g07158249,associacio de premsa forana de mallorca,contiene,age
+nif_b55299101,B55299101,nif,todas
+nif_b55299101,digital toginama,contiene,age
+nif_g82540048,G82540048,nif,todas
+nif_g82540048,asociacion espanola de editoriales de publicaciones periodicas,contiene,age
+nif_e31696883,E31696883,nif,todas
+nif_e31696883,garcia bueno montserrat y labiano moso rita maria,contiene,age
+nif_l718033l,L718033L,nif,todas
+nif_l718033l,premsa esportiva romgual,contiene,age
+nif_g95514576,G95514576,nif,todas
+nif_g95514576,asoc shareak kultur elkartea,contiene,age
+nif_b93727212,B93727212,nif,todas
+nif_b93727212,ediciones distribuciones y aplicaciones periodicas,contiene,age
+nif_b87961397,B87961397,nif,todas
+nif_b87961397,vivir ediciones,contiene,age
+nif_f61709853,F61709853,nif,todas
+nif_f61709853,opcions de consum responsable,contiene,age
+nif_a36603314,A36603314,nif,todas
+nif_a36603314,editorial galaxia,contiene,age
+nif_b48935530,B48935530,nif,todas
+nif_b48935530,universitario vasco navarro,contiene,age
+nif_b78517547,B78517547,nif,todas
+nif_b78517547,funciva ediciones,contiene,age
+nif_b66400029,B66400029,nif,todas
+nif_b66400029,metropoli abierta,contiene,age
+nif_g80473259,G80473259,nif,todas
+nif_g80473259,a d c dircom,contiene,age
+nif_b95298014,B95298014,nif,todas
+nif_b95298014,hilero zornotzan,contiene,age
+nif_g67190405,G67190405,nif,todas
+nif_g67190405,associacio catosfera,contiene,age
+nif_a35070960,A35070960,nif,todas
+nif_a35070960,sociedad canaria de publicaciones,contiene,age
+nif_a15107592,A15107592,nif,todas
+nif_a15107592,agn axencia galega de noticias,contiene,age
+nif_g78423795,G78423795,nif,todas
+nif_g78423795,ecologistas en accion coda,contiene,age
+nif_a28732071,A28732071,nif,todas
+nif_a28732071,ediciones conica,contiene,age
+nif_b76199546,B76199546,nif,todas
+nif_b76199546,kftv television,contiene,age
+nif_f65890832,F65890832,nif,todas
+nif_f65890832,alternativas economicas,contiene,age
+nif_b66000142,B66000142,nif,todas
+nif_b66000142,promocion de humanidades y economia,contiene,age
+nif_b03238938,B03238938,nif,todas
+nif_b03238938,ingenieria y tecnicas de comunicacion,contiene,age
+nif_g07942014,G07942014,nif,todas
+nif_g07942014,associacio cultural n ali,contiene,age
+nif_b86184728,B86184728,nif,todas
+nif_b86184728,ediciones semele,contiene,age
+nif_g42981498,G42981498,nif,todas
+nif_g42981498,associacio xarxa audivosual comunit,contiene,age
+nif_a08186249,A08186249,nif,todas
+nif_a08186249,editorial planeta,contiene,age
+nif_g63494009,G63494009,nif,todas
+nif_g63494009,la rella iniciatives socioculturals,contiene,age
+nif_b10512879,B10512879,nif,todas
+nif_b10512879,ediciones ingobernables,contiene,age
+nif_a82815200,A82815200,nif,todas
+nif_a82815200,letras libres internacional,contiene,age
+nif_b31658305,B31658305,nif,todas
+nif_b31658305,herritar berri,contiene,age
+nif_b87855045,B87855045,nif,todas
+nif_b87855045,editorial gamereport sociedad limitada,contiene,age
+nif_b97690622,B97690622,nif,todas
+nif_b97690622,teatro de lo inestable de valencia,contiene,age
+nif_g71447072,G71447072,nif,todas
+nif_g71447072,fundacion merindad merindad fundazioa,contiene,age
+nif_b55762710,B55762710,nif,todas
+nif_b55762710,comunicacions locals 2020,contiene,age
+nif_g10382851,G10382851,nif,todas
+nif_g10382851,fundacion re bross,contiene,age
+nif_b02858371,B02858371,nif,todas
+nif_b02858371,personas comunicacion y publicidad,contiene,age
+nif_b70077995,B70077995,nif,todas
+nif_b17969536,B17969536,nif,todas
+nif_b17969536,bacula editors,contiene,age
+nif_g39101241,G39101241,nif,todas
+nif_g39101241,asoc cultural peonza,contiene,age
+nif_g71211635,G71211635,nif,todas
+nif_g71211635,asociacion mintza komunikazio elkartea,contiene,age
+nif_g28879724,G28879724,nif,todas
+nif_g28879724,asoc de directores de escena,contiene,age
+nif_g28852374,G28852374,nif,todas
+nif_g28852374,fundacion sistema,contiene,age
+nif_b76768910,B76768910,nif,todas
+nif_b76768910,radio blanca,contiene,age
+nif_b01797554,B01797554,nif,todas
+nif_b01797554,editorial ballena blanca,contiene,age
+nif_b26224550,B26224550,nif,todas
+nif_b26224550,radio difusion,contiene,age
+nif_g16514093,G16514093,nif,todas
+nif_g16514093,associacio cultural bona pau de montuiri,contiene,age
+nif_b72777048,B72777048,nif,todas
+nif_b72777048,laboratori d idees metropolitanes,contiene,age
+nif_b17803958,B17803958,nif,todas
+nif_b17803958,mass media ripolles,contiene,age
+nif_b90459934,B90459934,nif,todas
+nif_b90459934,isla de nabumbu sociedad limitada,contiene,age
+nif_b82817453,B82817453,nif,todas
+nif_b82817453,conarquitectura ediciones,contiene,age
+nif_b16611477,B16611477,nif,todas
+nif_b16611477,formentera radio,contiene,age
+nif_g61740627,G61740627,nif,todas
+nif_g61740627,fundacio privada marianao casal infantil i juvenil de marianao,contiene,age
+nif_g33744376,G33744376,nif,todas
+nif_g33744376,centro de iniciativas culturales y estudios economicos y sociales cicees cicees,contiene,age
+nif_g28419679,G28419679,nif,todas
+nif_g28419679,fundacion hogar del empleado,contiene,age
+nif_g78054103,G78054103,nif,todas
+nif_g78054103,fundacion francisco giner de los rios,contiene,age
+nif_b64801327,B64801327,nif,todas
+nif_b64801327,centipede films,contiene,age
+nif_g67542662,G67542662,nif,todas
+nif_g67542662,associacio informadors del maresme,contiene,age
+nif_b42945683,B42945683,nif,todas
+nif_g07566839,G07566839,nif,todas
+nif_g07566839,agrupacio cultural de porreres,contiene,age
+nif_f16754830,F16754830,nif,todas
+nif_f16754830,metropolitan radio y podcast,contiene,age
+nif_g05474028,G05474028,nif,todas
+nif_g05474028,ass cult popular tradicional ppcc,contiene,age
+nif_b65637985,B65637985,nif,todas
+nif_b65637985,grupo editorial belgrado 76,contiene,age
+nif_g86957503,G86957503,nif,todas
+nif_g86957503,asoc academia de las artes escenicas de espana,contiene,age
+loc_salamanca24horas,salamanca24horas,nombre_exacto,territorial
+loc_tribuna_digital,tribuna digital,nombre_exacto,territorial
+loc_linia_diverses_edicions,linia diverses edicions,nombre_exacto,territorial
+loc_sapiens,sapiens,nombre_exacto,territorial
+loc_descobrir,descobrir,nombre_exacto,territorial
+loc_zamora24horas,zamora24horas,nombre_exacto,territorial
+loc_mes_tarragona,mes tarragona,nombre_exacto,territorial
+loc_mes_tarragona,mes tarragona,contiene,territorial
+loc_gente,gente,nombre_exacto,territorial
+loc_ileon_com,ileon com,nombre_exacto,territorial
+loc_manana_la,manana la,nombre_exacto,territorial
+loc_castilla_y_leon_economica,castilla y leon economica,nombre_exacto,territorial
+loc_infobierzo,infobierzo,nombre_exacto,territorial
+loc_xarxa_la_tv,xarxa la tv,nombre_exacto,territorial
+loc_diariodigitalleon,diariodigitalleon,nombre_exacto,territorial
+loc_esportiu_l,esportiu l,nombre_exacto,territorial
+loc_canal54,canal54,nombre_exacto,territorial
+loc_bierzodigital,bierzodigital,nombre_exacto,territorial
+loc_salamancartvcyl,salamancartvcyl,nombre_exacto,territorial
+loc_salamancartvcyl,salamancartvcylal dia,nombre_exacto,territorial
+loc_diari_de_sabadell,diari de sabadell,nombre_exacto,territorial
+loc_diari_de_sabadell,diaridesabadell,nombre_exacto,territorial
+loc_petit_sapiens,petit sapiens,nombre_exacto,territorial
+loc_sorianoticias,sorianoticias,nombre_exacto,territorial
+loc_viaempresa,viaempresa,nombre_exacto,territorial
+loc_hoy_aragon,hoy aragon,nombre_exacto,territorial
+loc_btv,btv,nombre_exacto,territorial
+loc_el9nou,el9nou,nombre_exacto,territorial
+loc_el9nou,9 nou el,nombre_exacto,territorial
+loc_el9nou,el 9 nou,nombre_exacto,territorial
+loc_diari_de_terrassa,diari de terrassa,nombre_exacto,territorial
+loc_diari_de_terrassa,diarideterrassa,nombre_exacto,territorial
+loc_enderrock,enderrock,nombre_exacto,territorial
+loc_burgosnoticias,burgosnoticias,nombre_exacto,territorial
+loc_larepublica,larepublica,nombre_exacto,territorial
+loc_racocatala,racocatala,nombre_exacto,territorial
+loc_canal_taronja_tv,canal taronja tv,nombre_exacto,territorial
+loc_lamanyana,lamanyana,nombre_exacto,territorial
+loc_zamoranews,zamoranews,nombre_exacto,territorial
+loc_gaceta_negocios,gaceta negocios,nombre_exacto,territorial
+loc_avila_red,avila red,nombre_exacto,territorial
+loc_nuvol,nuvol,nombre_exacto,territorial
+loc_cronicasalamanca,cronicasalamanca,nombre_exacto,territorial
+loc_cavall_fort,cavall fort,nombre_exacto,territorial
+loc_bizkaia_irratia,bizkaia irratia,nombre_exacto,territorial
+loc_thenewbarcelonapost,thenewbarcelonapost,nombre_exacto,territorial
+loc_desdesoria,desdesoria,nombre_exacto,territorial
+loc_aragon_digital,aragon digital,nombre_exacto,territorial
+loc_radio_u_a_1_lleida,radio u a 1 lleida,nombre_exacto,territorial
+loc_republica_la,republica la,nombre_exacto,territorial
+loc_radio_estel,radio estel,nombre_exacto,territorial
+loc_cyl_mundo,cyl mundo,nombre_exacto,territorial
+loc_ag_actualidad_rural,ag actualidad rural,nombre_exacto,territorial
+loc_tele_medina_tdt,tele medina tdt,nombre_exacto,territorial
+loc_hosteltur,hosteltur,nombre_exacto,territorial
+loc_television_benavente_tdt,television benavente tdt,nombre_exacto,territorial
+loc_radio_la_comarca,radio la comarca,nombre_exacto,territorial
+loc_totbarcelona,totbarcelona,nombre_exacto,territorial
+loc_ebro_fm,ebro fm,nombre_exacto,territorial

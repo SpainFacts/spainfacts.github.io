@@ -3,10 +3,11 @@ title: SpainFacts · Espainiaren Egoera Datu Ofizialetan
 description: "Espainia datu ofizialetan: biztanleria, ekonomia, kontu publikoak, energia, mugikortasuna, gizartea eta gardentasuna, Espainia osotik udalerri bakoitzera. Independentea eta alderdi-joerarik gabea."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 33d766fc924e
+i18n_origen: 55bec392edfc
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
@@ -263,7 +264,7 @@ LEFT JOIN (
     <ButtonGroupItem valueLabel="Zorra" value="deuda" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={mapa_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -350,6 +351,12 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Gizartea</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Kriminalitatea, osasuna, immigrazioa, errenta eta pobrezia udalerri mailaraino, eta hezkuntza.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delitu ezagun 1.000 biz. →</p>
+    </a>
+    <a href="/eu/medios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1" aria-hidden="true">📰</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">Komunikabideak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Zenbat diru publiko jasotzen duten komunikabideek: telebista publikoak, erakunde-publizitatea eta diru-laguntzak, erkidegoka eta alderdika.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Diru publikoa komunikabideetan →</p>
     </a>
     <a href="/eu/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1" aria-hidden="true">🔎</p>

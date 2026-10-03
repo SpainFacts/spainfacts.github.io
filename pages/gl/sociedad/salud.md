@@ -3,10 +3,11 @@ title: Saúde
 description: "Esperanza de vida en España por comunidade e provincia, de que morre a xente, suicidios, accidentes de tráfico, exceso de mortalidade e o sistema sanitario: listas de espera, médicos, enfermeiras, camas e gasto por habitante fronte á UE."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 29850a7d6705
+i18n_origen: 997db93797ae
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -144,7 +145,7 @@ WHERE e.nivel = 'provincia' AND e.sexo = 'Ambos sexos'
 ORDER BY e.anios DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ev_provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,10 +1,11 @@
 ---
 title: Langabezia eta enplegua
 description: "Espainiako langabezia-tasa sexuaren, adinaren, nazionalitatearen, ikasketen eta lurraldearen arabera, gazteen langabezia eta iraupen luzekoa, behin-behinekotasuna, hileko erregistratutako langabezia eta EBrekiko alderaketa."
-i18n_origen: 610c3b85d67c
+i18n_origen: b3ae3805f825
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -438,7 +439,7 @@ Aldi baterako kontratua duten soldatapekoen ehunekoa, eta lanaldi osoko lanik au
 
 Azken lau hiruhilekoen batez bestekoa, lurralde txikietan EPAren laginaren zarata leuntzeko. Langabezia gehien duen erkidegoa {terr_resumen[0]?.ccaa_max} da ({formatNumber(terr_resumen[0]?.ccaa_max_tasa / 0.01, 1)} %), eta gutxien duena {terr_resumen[0]?.ccaa_min} ({formatNumber(terr_resumen[0]?.ccaa_min_tasa / 0.01, 1)} %). Probintziei dagokienez, tartea {terr_resumen[0]?.prov_min} ({formatNumber(terr_resumen[0]?.prov_min_tasa / 0.01, 1)} %) eta {terr_resumen[0]?.prov_max} ({formatNumber(terr_resumen[0]?.prov_max_tasa / 0.01, 1)} %) artekoa da. Sakatu lurralde batean haren fitxa ikusteko.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -468,7 +469,7 @@ Azken lau hiruhilekoen batez bestekoa, lurralde txikietan EPAren laginaren zarat
     <Column id=hogares_todos_parados title="Denak langabezian dituzten etxeak" fmt=pct1 />
 </DataTable>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

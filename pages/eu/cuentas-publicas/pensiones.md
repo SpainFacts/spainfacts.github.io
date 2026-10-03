@@ -1,10 +1,11 @@
 ---
 title: Pentsioak
 description: "Kotizaziopeko pentsioak Espainian: batez besteko pentsioa inflazioa kenduta, afiliatuak pentsioko, pentsioetako gastua BPGaren ehunekotan EBrekin alderatuta, pentsioak biztanleko eta erkidego eta probintziaka."
-i18n_origen: cc5339743926
+i18n_origen: 3f8817a42d1f
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -400,7 +401,7 @@ Pentsio kopurua 1.000 biztanleko eta 65 urteko edo gehiagoko 100 pertsonako (INE
 
 {urteko(ccaa_extremos[0]?.anio)} datuak{#if ccaa_extremos[0]?.meses < 12} (argitaratutako {ccaa_extremos[0]?.meses} hilabeteen batez bestekoa){/if}, {urteko(mensual[0]?.anio_euros)} eurotan. Erretiroko batez besteko pentsio altuena {ccaa_extremos[0]?.max_nombre} erkidegoan dago ({formatNumber(ccaa_extremos[0]?.max_valor, 0)} €), eta baxuena {ccaa_extremos[0]?.min_nombre} erkidegoan ({formatNumber(ccaa_extremos[0]?.min_valor, 0)} €). Pentsioko afiliatuei dagokienez, {formatNumber(ccaa_extremos[0]?.ratio_max_valor, 2)} ({ccaa_extremos[0]?.ratio_max_nombre}) eta {formatNumber(ccaa_extremos[0]?.ratio_min_valor, 2)} ({ccaa_extremos[0]?.ratio_min_nombre}) bitartean dago.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -431,7 +432,7 @@ Pentsio kopurua 1.000 biztanleko eta 65 urteko edo gehiagoko 100 pertsonako (INE
 
 ### Probintziaka
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

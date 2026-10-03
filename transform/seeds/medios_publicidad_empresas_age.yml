@@ -1,0 +1,57 @@
+version: 2
+
+seeds:
+  - name: medios_publicidad_empresas_age
+    description: >
+      Publicidad comercial de la Administración General del Estado por entidad, 2015-2025:
+      coste total de las campañas comerciales («Campañas comerciales no sujetas a la Ley
+      29/2005») de cada sociedad mercantil estatal, entidad pública empresarial u organismo
+      que vende bienes o servicios (Loterías/SELAE, AENA, Correos, Renfe, Paradores, ICO,
+      grupo SEPI...), sumando sus campañas. Fuente: capítulo de campañas comerciales de cada
+      Informe anual de Publicidad y Comunicación Institucional (Comisión de Publicidad y
+      Comunicación Institucional, La Moncloa; índice:
+      https://www.lamoncloa.gob.es/serviciosdeprensa/cpci/paginas/planeseinformes.aspx).
+      Extraído con pdfplumber (tablas por coordenadas; scratchpad mpt_com.py y
+      mpt_seed_emp.py); el Informe 2020 es un PDF escaneado y se transcribió a mano de la
+      imagen. Cuadratura: la suma por año coincide con el total de campañas comerciales de
+      Evolucion_Informes_Publicidad.csv con una diferencia de 0 a 3 € (redondeo de cada fila
+      al euro en el informe): 2015, 2016, 2017, 2023 y 2025 exactos; 2018 +3 €, 2019 -2 €,
+      2020 -1 €, 2021 -2 €, 2022 +1 €, 2024 -2 €. Los subtotales por ministerio cuadran con
+      la misma tolerancia. Euros corrientes; los informes no dicen si llevan IVA (la
+      práctica de la CPCI y los anexos de 2025, múltiplos de 1,21, apuntan a que sí). Incluye
+      producción/creatividad, compra de medios y evaluación: no es solo lo que cobran los
+      medios. RTVE (tipo 'rtve') ya va en el bloque de televisión pública: hay que excluirla
+      para no contarla dos veces. Renfe 2024-2025: la caída (de 18,3 M€ en 2023 a 4,8 y 2,8
+      M€) es la que publica el informe; releyendo el PDF, desde 2024 el cuadro solo recoge
+      campañas corporativas, de información por obras e iniciativas comerciales de Renfe
+      Operadora y deja de aparecer la partida «Campañas comerciales y de imagen» de Renfe
+      Viajeros (27,5 M€ en 2022).
+    config:
+      column_types:
+        anio: integer
+        entidad: varchar
+        ministerio: varchar
+        tipo_entidad: varchar
+        importe_eur: double
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        description: Año del informe (ejecución).
+        tests: [not_null]
+      - name: entidad
+        description: Entidad normalizada (p. ej. «SELAE (Loterías y Apuestas del Estado)», «AENA», «Correos», «Renfe»); el nombre literal del informe va en nota cuando difiere.
+        tests: [not_null]
+      - name: ministerio
+        description: Ministerio de adscripción tal como lo titula el subtotal del informe ese año (cambian con cada Gobierno).
+      - name: tipo_entidad
+        description: "'empresa_publica' (sociedades mercantiles estatales, entidades públicas empresariales, SELAE, ICO, Puertos del Estado...), 'organismo' (organismos autónomos, museos, universidades, BOE, fundaciones del sector público que venden algo) o 'rtve' (Corporación RTVE, excluir en sumas con el bloque TV)."
+        tests:
+          - accepted_values:
+              values: ['empresa_publica', 'organismo', 'rtve']
+      - name: importe_eur
+        description: Coste total de las campañas comerciales de la entidad ese año, euros corrientes.
+      - name: fuente
+        description: URL del PDF con #page= de la primera página del cuadro donde aparece la entidad.
+      - name: nota
+        description: Avisos (coste total con producción y evaluación; IVA no indicado; grupo SEPI / Patrimonio; transcripción manual en 2020; caída de Renfe verificada).

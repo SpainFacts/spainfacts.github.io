@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 
@@ -129,7 +130,7 @@ FROM mother.calor_provincia_diario
 WHERE strftime(fecha, '%Y-%m-%d') = '${inputs.fecha.value}'
 ```
 
-<AreaMap
+<MapaEspana
     data={mapa}
     geoJsonUrl="/spain-provinces.geojson"
     geoId="cod_prov"

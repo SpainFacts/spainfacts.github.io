@@ -1,12 +1,13 @@
 ---
 title: Salaris
 description: "Salari mitjà a Espanya descomptada la inflació, el seu creixement real i nominal, per sector i jornada, i la distribució per decils."
-i18n_origen: dc575af43c4c
+i18n_origen: a16ce5b323ef
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -235,7 +236,7 @@ ORDER BY s.salario_real DESC
 
 Salari mitjà mensual brut el {por_ccaa[0]?.anio}, en euros del {por_ccaa[0]?.anio_euros}. {por_ccaa[0]?.comunidad} encapçala la llista amb {formatNumber(por_ccaa[0]?.salario_real, 0)} € i {por_ccaa.slice(-1)[0]?.comunidad} la tanca amb {formatNumber(por_ccaa.slice(-1)[0]?.salario_real, 0)} €. Són euros sense corregir pel cost de la vida, que també varia entre comunitats. Ceuta i Melilla no es publiquen per separat.
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

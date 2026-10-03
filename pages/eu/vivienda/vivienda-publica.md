@@ -1,12 +1,13 @@
 ---
 title: Alokairuko etxebizitza publikoa
 description: "Zenbat alokairuko etxebizitza publiko dagoen Espainian biztanleko eta etxeen %an, erkidego, probintzia eta udalerriaren arabera, Herbehereekin, Austriarekin, Danimarkarekin, Frantziarekin eta Europako batez bestekoarekin alderatuta, eta gobernatzen zuen alderdiaren arabera."
-i18n_origen: 4f3c32fd277f
+i18n_origen: ee03022518f8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import EnConstruccion from '../../../../../../../src/lib/components/EnConstruccion.svelte';
@@ -334,7 +335,7 @@ Ministerioak **etxeen %an** ere alderatzen du (ohiko etxebizitzak), Housing Euro
 
 Ezagutzen diren alokairuko etxebizitza publikoak 1.000 biztanleko: erkidegoarenak (2023ko datu osoa) gehi inkestari erantzun zioten 20.000 biztanletik gorako udalenak (datu partziala). Sakatu erkidego batean haren fitxa ikusteko.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -382,7 +383,7 @@ Ceuta eta Melilla kontuan hartu gabe, biztanleko alokairuko parke autonomiko han
 
 Ez dago parke autonomikoaren zenbaketa ofizialik probintziaka: erkidegoek multzoan aitortzen dute. Probintziaka ezagutzen dena **20.000 biztanletik gorako udalek aitortutako alokairuko udal-parkea** da (2023an {cobertura_mun[0]?.respondieron} udalek erantzun zuten, {cobertura_mun[0]?.dato_2019} udalek 2019ko datua errepikatzen dute eta {cobertura_mun[0]?.sin_dato} udalek ez zuten zifrarik eman). Mapak probintziako 1.000 biztanleko erakusten du; zuriz dagoen probintzia batek parke autonomikoa izan dezake, edo erantzun ez zuten udalerriak.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

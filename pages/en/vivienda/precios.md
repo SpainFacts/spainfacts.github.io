@@ -1,10 +1,11 @@
 ---
 title: House prices
 description: "House prices in Spain adjusted for inflation: appraised value per square metre by region, province and municipality and the INE House Price Index, new and second-hand."
-i18n_origen: 50400dad918f
+i18n_origen: 058fd706b1df
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -182,7 +183,7 @@ Appraised value per square metre in the selected region compared with Spain, in 
 
 In {prov_extremos[0]?.periodo} the province with the most expensive square metre is {prov_extremos[0]?.cara} ({formatNumber(prov_extremos[0]?.cara_valor, 0)} €/m²) and the cheapest is {prov_extremos[0]?.barata} ({formatNumber(prov_extremos[0]?.barata_valor, 0)} €/m²): a square metre in the former costs {formatNumber(prov_extremos[0]?.veces, 1)} times as much. {#if prov_extremos[0]?.en_maximos == 1}Only one province is{:else}{prov_extremos[0]?.en_maximos} provinces are{/if} at their highest real level since 2002.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

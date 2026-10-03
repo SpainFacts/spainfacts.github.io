@@ -1,6 +1,7 @@
 <script>
     import { page } from "$app/stores";
-    import { idiomaDeRuta, t } from "../i18n.js";
+    import { goto } from "$app/navigation";
+    import { idiomaDeRuta, IDIOMAS, rutaEnIdioma, t } from "../i18n.js";
     $: lang = idiomaDeRuta($page.url.pathname);
     import Button from "./ui/button/button.svelte";
     import * as DropdownMenu from "./ui/dropdown-menu";
@@ -38,6 +39,17 @@
     } = getThemeStores();
 
     export let neverShowQueries = false;
+
+    // Cambio de idioma: misma página con otro prefijo (/economia/paro/ <-> /en/economia/paro/)
+    function cambiarIdioma(nuevo) {
+        if (nuevo === lang) return;
+        try {
+            localStorage.setItem("idioma", nuevo);
+        } catch {
+            /* sin almacenamiento: no pasa nada */
+        }
+        goto(rutaEnIdioma($page.url.pathname, nuevo) + (typeof location !== "undefined" ? location.search : ""));
+    }
 
     $: themeLabel = t(`tema.${$selectedAppearance}`, lang);
     $: themeIcon = $activeAppearance === "light" ? Sun : Moon;
@@ -88,6 +100,16 @@
                     </DropdownMenu.Shortcut>
                 </DropdownMenu.Item>
             {/if}
+        </DropdownMenu.Group>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Group>
+            <DropdownMenu.Label class="text-xs font-medium bg-transparent text-gray-500 dark:text-gray-400">{t("menu.idioma", lang)}</DropdownMenu.Label>
+            {#each Object.entries(IDIOMAS) as [codigo, info]}
+                <DropdownMenu.Item on:click={() => cambiarIdioma(codigo)} aria-current={codigo === lang ? "true" : undefined}>
+                    <span lang={codigo} class={codigo === lang ? "font-semibold" : ""}>{info.nombre}</span>
+                    <DropdownMenu.Shortcut>{codigo === lang ? "✓" : info.corto}</DropdownMenu.Shortcut>
+                </DropdownMenu.Item>
+            {/each}
         </DropdownMenu.Group>
         {#if dev}
             <DropdownMenu.Separator />

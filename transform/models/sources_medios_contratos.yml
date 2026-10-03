@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_medios_contratos
+    description: "Contratos públicos adjudicados a empresas de medios de comunicación: sindicación de datos abiertos de la Plataforma de Contratación del Sector Público (PLACSP, Ministerio de Hacienda), conjuntos perfiles (sindicación 643), plataformas agregadas sin menores (1044) y contratos menores (1143), ficheros anuales 2018-2025 y mensuales desde 2026 (ingestion/medios_contratos.py). Solo se guardan los resultados cuyo adjudicatario está en el padrón de NIF (seed medios_padron_nif) o lo parece por el nombre (candidatos). Carga MERGE por expediente, órgano, lote y NIF, con la versión más reciente."
+    schema: raw
+    tables:
+      - name: pcsp_contratos_medios
+        description: "Una fila por contrato × lote × adjudicatario del padrón (es_medio si o gris en el momento de la carga). Importes sin IVA adjudicados (no pagados). nivel/ambito/cod_ccaa/cod_municipio deducidos del órgano (cadena de dependencias CODICE, registro de órganos, DIR3, código postal, plataforma agregada)."
+      - name: pcsp_candidatos_medios
+        description: "Mismas columnas que pcsp_contratos_medios para adjudicatarios que NO estaban en el padrón al cargar pero cuyo nombre parece de un medio (regex) o estaban en la lista de NIF a revisar. Sirve para ampliar el padrón sin volver a descargar: los marts unen las dos tablas y filtran por el padrón vigente. No contiene personas físicas."
+      - name: pcsp_cobertura
+        description: "Estadísticas por fichero ZIP (conjunto × periodo): entradas Atom, borradas, resultados con NIF de adjudicatario, contratos y órganos distintos, filas del padrón y candidatos, MB y segundos. Sirve para seguir la cobertura (p. ej. órganos que publican menores cada año)."
+      - name: pcsp_organos
+        description: "Registro de órganos de contratación de PLACSP (OrganosContratacion.xlsx): ID Plataforma, nombre, ubicación en el sector público, dependencias, NIF, DIR3, código postal, medio propio y activo. Se reemplaza en cada carga."

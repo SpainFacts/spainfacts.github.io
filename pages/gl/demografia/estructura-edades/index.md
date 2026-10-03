@@ -1,10 +1,11 @@
 ---
 title: Idades e avellentamento
 description: "Pirámides de poboación de España, cada comunidade e cada provincia; porcentaxe de maiores de 65 e 80 anos, taxa de dependencia e idade media desde 1971 (INE)."
-i18n_origen: 2565fd7bf5bc
+i18n_origen: 4e6c769248eb
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ ORDER BY e.pct_65 DESC
 
 A provincia máis avellentada é {provincias[0]?.provincia}, cun {formatNumber(provincias[0]?.pct_65 / 0.01, 1)} % de maiores de 65 anos e unha idade media de {formatNumber(provincias[0]?.edad_media, 1)} anos; a máis nova, {provincias.slice(-1)[0]?.provincia}, cun {formatNumber(provincias.slice(-1)[0]?.pct_65 / 0.01, 1)} %.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

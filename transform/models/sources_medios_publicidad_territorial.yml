@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw_medios_publicidad_territorial
+    description: >
+      Publicidad institucional de comunidades autónomas y grandes ayuntamientos que la
+      publican por medio en formato estructurado (ingestion/medios_publicidad_territorial.py):
+      Cataluña (Socrata 8d5a-6vsk, analisi.transparenciacatalunya.cat), Castilla y León
+      (Opendatasoft publicidad-institucional, CC BY 4.0), Aragón (Excel anuales en
+      aragon.es/transparencia), Navarra (CKAN publicidad-institucional, CC BY 4.0),
+      Región de Murcia (OData PUBLI_Institucional.json), Ayuntamiento de Madrid
+      (datos.madrid.es 300024, CC BY) y Ajuntament de Barcelona (Open Data BCN
+      campanyes-publicitat-institucional, CC BY 4.0).
+    schema: raw
+    tables:
+      - name: pubt_gasto
+        description: >
+          Formato largo: una fila por organismo × medio (× campaña si la fuente la da).
+          cod_ccaa (INE), nivel ('autonomico'|'local'), cod_municipio (INE 5 dígitos, solo
+          local), anio, organismo_pagador (consejería, departamento, ente, empresa o unidad
+          municipal tal cual), es_empresa_publica (por lista de nombres: FGC, Loteries de
+          Catalunya / EAJA, ICF, Ports, INCASOL, Prodeca, TNC, SARGA, EMT, EMVS, Madrid
+          Destino...), medio (cabecera o soporte tal cual; nulo si la fuente no lo da),
+          grupo (empresa editora si la fuente la da: Murcia), tipo_medio (tal cual),
+          campana, importe_eur, iva_incluido (true/false/null según la fuente), base
+          ('ejecutado'|'contratado'), cuenta_en_total (true si la fila suma el total del
+          año; false en desgloses parciales, p. ej. las tablas por medio de Navarra),
+          fuente y nota. Cataluña: neto sin IVA ni comisión de agencia. Madrid: se guarda
+          el importe sin IVA. Aragón y Murcia: con IVA, contratado/adjudicado.

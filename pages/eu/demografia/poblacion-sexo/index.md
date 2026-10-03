@@ -1,10 +1,11 @@
 ---
 title: Gizonak eta emakumeak
 description: "Zenbat gizon dauden 100 emakumeko Espainian adinaren arabera, 1971tik, eta erkidego eta probintzia bakoitzean (INE)."
-i18n_origen: d21837969d2e
+i18n_origen: aabf373a979e
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -141,7 +142,7 @@ ORDER BY ratio DESC
 ```
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={provincias}
         geoJsonUrl="/geo/provincias.geojson"
         geoId="cod_prov"

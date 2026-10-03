@@ -1,10 +1,11 @@
 ---
 title: Obra berria
 description: "Espainian urtero hasten eta amaitzen diren etxebizitza libreak 1.000 biztanleko 1996tik, erkidego eta probintziaka, Etxebizitza Ministerioaren datuekin."
-i18n_origen: 8eb6bc574063
+i18n_origen: 6b1ad71c87ca
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -151,7 +152,7 @@ Amaitutako etxebizitzak INEk erregistratzen dituen etxebizitza berrien saleroske
 
 Amaitutako etxebizitza libreak 1.000 biztanleko, {urtean(ccaa[0]?.anio)}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -3,10 +3,11 @@ title: Behatoki publikoak
 description: "Espainiako behatoki publikoen errolda: zenbat dauden, zein administraziok sortzen dituen, noiz sortu ziren, zenbat dauden oraindik aktibo, zenbat dauden biztanleko erkidego bakoitzean eta zein alderdik gobernatzen zuen sortu zirenean."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69daf1595b8
+i18n_origen: 10c0e03a581c
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -276,7 +277,7 @@ Administrazio-mailaren arabera. Erroldak {formatNumber(resumen[0]?.inactivos, 0)
 
 Erkidego bakoitzeko behatoki autonomikoak, probintzialak eta tokikoak, milioi biztanleko. Erkidegoa erroldak adierazten duen eremutik ateratzen da edo, hori adierazten ez badu, behatokiaren izenetik: udalerria (INEkoekin gurutzatuta), uhartea edo probintzia, edo herritar-izena ("Andaluz", "Galego"...). {formatNumber(resumen[0]?.sin_comunidad, 0)} kokatu gabe geratzen dira, haien izenak ez duelako jakiten uzten ("Observatorio Social", "Observatorio del Agua"...).
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

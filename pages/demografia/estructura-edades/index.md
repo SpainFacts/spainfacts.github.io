@@ -4,6 +4,7 @@ description: "Pirámides de población de España, cada comunidad y cada provinc
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -274,7 +275,7 @@ ORDER BY e.pct_65 DESC
 
 La provincia más envejecida es {provincias[0]?.provincia}, con un {formatNumber(provincias[0]?.pct_65 / 0.01, 1)} % de mayores de 65 años y una edad media de {formatNumber(provincias[0]?.edad_media, 1)} años; la más joven, {provincias.slice(-1)[0]?.provincia}, con un {formatNumber(provincias.slice(-1)[0]?.pct_65 / 0.01, 1)} %.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

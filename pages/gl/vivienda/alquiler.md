@@ -1,10 +1,11 @@
 ---
 title: Aluguer de vivenda
 description: "Aluguer mediano da vivenda en España descontada a inflación, por comunidade, provincia e municipio, cos datos do IRPF do Sistema Estatal de Referencia do Prezo do Aluguer e o índice do INE."
-i18n_origen: deee5f4dedc1
+i18n_origen: 15b55dba3f41
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -174,7 +175,7 @@ O INE publica ademais un índice que segue a renda dos mesmos contratos ano a an
 
 Aluguer mediano dun piso en {ccaa[0]?.anio}, en euros de {espana[0]?.anio_base}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -205,7 +206,7 @@ Aluguer mediano dun piso en {ccaa[0]?.anio}, en euros de {espana[0]?.anio_base}.
 
 ## Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

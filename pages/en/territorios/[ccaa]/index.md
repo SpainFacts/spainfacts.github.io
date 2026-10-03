@@ -1,12 +1,13 @@
 ---
 description: "Autonomous community profile: population, economy, public accounts, debt, public employment, crime and more, with official data compared with Spain as a whole."
-i18n_origen: 55d7a9bd23d8
+i18n_origen: aebfea10a885
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -258,7 +259,7 @@ ORDER BY anio
 
 ## Municipalities
 
-<AreaMap
+<MapaEspana
     data={municipios}
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"

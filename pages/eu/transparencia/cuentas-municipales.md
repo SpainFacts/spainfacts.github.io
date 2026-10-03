@@ -1,12 +1,13 @@
 ---
 title: Udalen kontu-ematea
 description: "Informazioa argitaratzeko edo bidaltzeko legezko betebeharrak betetzen ez dituzten administrazioak: zein diren, non dauden eta nork gobernatzen zuen epea amaitzean."
-i18n_origen: 3425c0f0ac57
+i18n_origen: 8aa3c01a34e7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 2025eko...)
@@ -163,7 +164,7 @@ WHERE t.anio = (SELECT anio FROM ${ultimo})
 GROUP BY ALL
 ```
 
-<AreaMap
+<MapaEspana
     data={por_provincia}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -39,6 +39,15 @@ from ingestion.internacional import internacional
 from ingestion.transparencia_internacional import transparencia_internacional
 from ingestion.transparencia_publicidad_activa import transparencia_publicidad_activa
 from ingestion.vivienda_publica import vivienda_publica
+from ingestion.medios_publicidad import medios_publicidad
+from ingestion.medios_subvenciones import medios_subvenciones
+from ingestion.medios_publicidad_territorial import medios_publicidad_territorial
+from ingestion.medios_contratos import medios_contratos
+from ingestion.medios_contratos_ccaa import medios_contratos_ccaa
+from ingestion.primario import primario
+from ingestion.industria import industria
+from ingestion.construccion import construccion
+from ingestion.diputados_inmuebles import diputados_inmuebles
 from ingestion.mercado import mercado
 from ingestion.pensiones import pensiones
 from ingestion.renta import renta
@@ -349,13 +358,77 @@ def vivienda_publica_assets(context: AssetExecutionContext, dlt_resource: Dagste
     yield from dlt_resource.run(context=context)
 
 
+# Publicidad institucional y comercial de la AGE (CSV de la Comisión de Publicidad
+# y Comunicación Institucional, La Moncloa). Se actualiza una vez al año (junio).
+@dlt_assets(dlt_source=medios_publicidad(), dlt_pipeline=_pipeline_motherduck("medios_publicidad"), name="medios_publicidad", group_name="ingesta_mensual")
+def medios_publicidad_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Subvenciones a medios: concesiones BDNS de la lista curada (seed medios_subvenciones_convocatorias).
+# Merge: la BDNS solo muestra 4 años, así que lo ya cargado se conserva.
+@dlt_assets(dlt_source=medios_subvenciones(), dlt_pipeline=_pipeline_motherduck("medios_subvenciones"), name="medios_subvenciones", group_name="ingesta_mensual")
+def medios_subvenciones_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Publicidad institucional de CCAA (Cataluña, CyL, Aragón, Navarra, Murcia) y de los
+# Ayuntamientos de Madrid y Barcelona, por medio.
+@dlt_assets(dlt_source=medios_publicidad_territorial(), dlt_pipeline=_pipeline_motherduck("medios_publicidad_territorial"), name="medios_publicidad_territorial", group_name="ingesta_mensual")
+def medios_publicidad_territorial_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Contratos adjudicados a empresas de medios (PLACSP: perfiles, agregación y menores).
+# Últimos 3 meses + mes en curso (ficheros mensuales), merge por expediente/órgano/lote/NIF.
+@dlt_assets(dlt_source=medios_contratos(meses=3), dlt_pipeline=_pipeline_motherduck("medios_contratos"), name="medios_contratos", group_name="ingesta_mensual")
+def medios_contratos_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Contratos menores a empresas de medios en las plataformas autonómicas que PLACSP no trae
+# (Cataluña, Euskadi, Andalucía, Galicia, La Rioja, Ayuntamientos de Madrid y Barcelona).
+# Caché persistente: sin ella, Galicia tarda unas 2 h en releerse cada mes.
+@dlt_assets(dlt_source=medios_contratos_ccaa(cache_dir=str(REPO_ROOT / "data" / "medios_contratos_ccaa_cache")), dlt_pipeline=_pipeline_motherduck("medios_contratos_ccaa"), name="medios_contratos_ccaa", group_name="ingesta_mensual")
+def medios_contratos_ccaa_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Sector primario: Eurostat (cultivos, ganadería, cuentas agrarias, pesca, VAB regional),
+# Comext (exportaciones) y Agri-food data portal (aceite de oliva).
+@dlt_assets(dlt_source=primario(), dlt_pipeline=_pipeline_motherduck("primario"), name="primario", group_name="ingesta_mensual")
+def primario_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Industria frente a la UE: Eurostat (nama_10_a10, sbs_ovw_act, sts_inpr_a, nama_10r_3gva,
+# Prodcom DS-059358, Comext DS-045409) e INE (IPI 70177/60282, EEE 76823).
+@dlt_assets(dlt_source=industria(), dlt_pipeline=_pipeline_motherduck("industria"), name="industria", group_name="ingesta_mensual")
+def industria_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Construcción (sector) frente a la UE: Eurostat (nama_10_a10/_e, sts_copr_a, sts_cobp_a, sts_copi_a,
+# sbs_ovw_act, nama_10r_3gva, prc_hicp_aind), INE EPA (65354, 65331), Banco de España be23
+# (visados, licitación, cemento), ISTAC (licitación y visados por CCAA) y Seguridad Social (afiliados F).
+@dlt_assets(dlt_source=construccion(), dlt_pipeline=_pipeline_motherduck("construccion"), name="construccion", group_name="ingesta_mensual")
+def construccion_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Diputados caseros: declaraciones de bienes del Congreso (extracto versionado, OCR en Windows) + AEAT IRPF.
+@dlt_assets(dlt_source=diputados_inmuebles(), dlt_pipeline=_pipeline_motherduck("diputados_inmuebles"), name="diputados_inmuebles", group_name="ingesta_mensual")
+def diputados_inmuebles_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica"}
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -426,7 +499,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

@@ -1,10 +1,11 @@
 ---
 title: Evolució de la població
 description: "Població d'Espanya des de 1971 i el seu creixement anual per 1.000 habitants, separat en naixements menys defuncions i migració, per comunitat i província (INE)."
-i18n_origen: 40e6678c9212
+i18n_origen: f9535ffb3b9d
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -203,7 +204,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_10} províncies tenen avui menys habitants que fa deu anys, i {provincias_resumen[0]?.pierden_2000}, menys que el 2000.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

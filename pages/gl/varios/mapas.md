@@ -3,10 +3,11 @@ title: Explorador de mapas
 description: "Todos os datos de SpainFacts que teñen repartición xeográfica, por comunidade autónoma ou por provincia. Escolle un indicador na táboa e debúxase no mapa."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 47d78cea0317
+i18n_origen: ffea07200ad9
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import TablaSeleccion from '../../../../../../../src/lib/components/TablaSeleccion.svelte';
 
     const numero = (v) =>
@@ -130,7 +131,7 @@ ORDER BY posicion
 <div class="col-span-2">
 <!-- Un mapa por nivel: AreaMap no admite cambiar de geojson sin recrearse -->
 {#if elegido[0].nivel === 'Provincia'}
-<AreaMap
+<MapaEspana
     data={datos}
     areaCol=cod
     geoJsonUrl="/geo/provincias.geojson"
@@ -147,7 +148,7 @@ ORDER BY posicion
     basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"
 />
 {:else}
-<AreaMap
+<MapaEspana
     data={datos}
     areaCol=cod
     geoJsonUrl="/geo/ccaa.geojson"

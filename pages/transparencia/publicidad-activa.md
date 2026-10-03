@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -329,7 +330,7 @@ La mejora es clara: la nota media de los ayuntamientos pasó de {formatNumber(it
 
 ### Ayuntamientos, {itc_ultimo[0]?.etiqueta}
 
-<AreaMap
+<MapaEspana
     data={itc_aytos_ultimo}
     geoJsonUrl="/geo/municipios/05.geojson"
     geoId="cod_mun"

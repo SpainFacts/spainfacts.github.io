@@ -1,10 +1,11 @@
 ---
 title: Etxebizitzaren prezioa
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta: metro koadroko tasazio-balioa erkidego, probintzia eta udalerriaren arabera, eta INEren Etxebizitzaren Prezioen Indizea, berria eta bigarren eskukoa."
-i18n_origen: 50400dad918f
+i18n_origen: 058fd706b1df
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -189,7 +190,7 @@ Aukeratutako erkidegoaren metro koadroko tasazio-balioa Espainiarekin alderatuta
 
 {prov_extremos[0]?.periodo} aldian, metro koadro garestiena duen probintzia {prov_extremos[0]?.cara} da ({formatNumber(prov_extremos[0]?.cara_valor, 0)} €/m²), eta merkeena, {prov_extremos[0]?.barata} ({formatNumber(prov_extremos[0]?.barata_valor, 0)} €/m²): lehenengoan metro koadroak {formatNumber(prov_extremos[0]?.veces, 1)} aldiz gehiago balio du. {#if prov_extremos[0]?.en_maximos == 1}Probintzia bakar bat dago{:else}{prov_extremos[0]?.en_maximos} probintzia daude{/if} 2002az geroztiko bere gehieneko errealean.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

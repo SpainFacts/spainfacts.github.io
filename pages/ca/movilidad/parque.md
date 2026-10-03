@@ -1,12 +1,13 @@
 ---
 title: Parc de vehicles
 description: "Els vehicles que circulen a Espanya: turismes per tipus de motor, etiqueta ambiental de la DGT i antiguitat, models més comuns i comparació per província i municipi."
-i18n_origen: e10a6f5a05a5
+i18n_origen: 3790208fb9a8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -186,7 +187,7 @@ ORDER BY turismos DESC
     <ButtonGroupItem valueLabel="% endollables" value="cuota_enchufables" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

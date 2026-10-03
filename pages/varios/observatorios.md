@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -275,7 +276,7 @@ Por nivel de la administración. El censo solo marca como cerrados {formatNumber
 
 Observatorios autonómicos, provinciales y locales de cada comunidad, por millón de habitantes. La comunidad sale del ámbito que indica el censo o, si no lo dice, del nombre del observatorio: el municipio (cruzado con los del INE), la isla o provincia, o el gentilicio ("Andaluz", "Galego"...). Quedan {formatNumber(resumen[0]?.sin_comunidad, 0)} sin ubicar porque su nombre no permite saberlo ("Observatorio Social", "Observatorio del Agua"...).
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

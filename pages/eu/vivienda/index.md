@@ -3,10 +3,11 @@ title: Etxebizitza
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta, alokairua, salerosketak eta hipotekak 1.000 biztanleko, obra berria eta etxe batek zenbat urteko soldata balio duen, erkidego eta probintziaka."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a02abfec5da9
+i18n_origen: 9445f0493756
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -188,7 +189,7 @@ Jabetza-erregistroetan inskribatutako etxebizitzen salerosketak eta etxebizitzen
 
 Metro koadroaren prezio erreala azken hiruhilekoan. Sakatu erkidego batean haren fitxa ikusteko.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

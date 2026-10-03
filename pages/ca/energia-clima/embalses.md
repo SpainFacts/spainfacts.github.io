@@ -1,12 +1,13 @@
 ---
 title: Reserves d'aigua i embassaments
 description: Estat setmanal dels embassaments espanyols per conca, comparat amb l'any anterior i amb la mitjana dels últims deu anys.
-i18n_origen: 824f1b9d42d1
+i18n_origen: 1e74e7013ff0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     import MapaEmbalses from '../../../../../../../src/lib/components/MapaEmbalses.svelte';
@@ -87,7 +88,7 @@ FROM mother.embalses_estado_actual
 WHERE nivel = 'demarcacion'
 ```
 
-<AreaMap
+<MapaEspana
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"

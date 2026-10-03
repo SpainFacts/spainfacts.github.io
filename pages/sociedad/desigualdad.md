@@ -4,6 +4,7 @@ description: "Renta media de los hogares descontada la inflación, riesgo de pob
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -284,7 +285,7 @@ FROM ${ccaa}
 Las diferencias entre comunidades son grandes: en la ECV {ccaa[0]?.anio} la tasa de riesgo de pobreza iba del {formatNumber(ccaa_extremos[0]?.min_pobreza, 1)} % de {ccaa_extremos[0]?.menos_pobreza} al {formatNumber(ccaa_extremos[0]?.max_pobreza, 1)} % de {ccaa_extremos[0]?.mas_pobreza}, y la renta neta por persona de {formatNumber(ccaa_extremos[0]?.min_renta, 0)} € en {ccaa_extremos[0]?.menos_renta} a {formatNumber(ccaa_extremos[0]?.max_renta, 0)} € en {ccaa_extremos[0]?.mas_renta}. El umbral de pobreza es el mismo para toda España, sin ajustar por el coste de vida de cada región.
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"

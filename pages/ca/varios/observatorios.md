@@ -3,10 +3,11 @@ title: Observatoris públics
 description: "Cens dels observatoris públics d'Espanya: quants n'hi ha, quina administració els crea, quan van néixer, quants continuen actius, quants n'hi ha per habitant a cada comunitat i quin partit governava quan es van crear."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69daf1595b8
+i18n_origen: 10c0e03a581c
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -276,7 +277,7 @@ Per nivell de l'administració. El cens només marca com a tancats {formatNumber
 
 Observatoris autonòmics, provincials i locals de cada comunitat, per milió d'habitants. La comunitat surt de l'àmbit que indica el cens o, si no ho diu, del nom de l'observatori: el municipi (creuat amb els de l'INE), l'illa o la província, o el gentilici ("Andaluz", "Galego"...). En queden {formatNumber(resumen[0]?.sin_comunidad, 0)} sense ubicar perquè el nom no permet saber-ho ("Observatorio Social", "Observatorio del Agua"...).
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

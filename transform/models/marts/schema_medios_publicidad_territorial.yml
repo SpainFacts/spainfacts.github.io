@@ -1,0 +1,149 @@
+version: 2
+
+models:
+  - name: medios_publicidad_territorial_gasto
+    description: >
+      Base en formato largo de la publicidad institucional de comunidades y grandes
+      ayuntamientos (raw.pubt_gasto + seed medios_publicidad_territorial_manual), con el
+      tipo de medio normalizado (tipo_medio_norm), el grupo mediático normalizado (seed
+      medios_grupos_equivalencias; si no está, el propio medio), la marca de medio público
+      y el importe homogeneizado sin IVA (importe_sin_iva_eur, ÷1,21 donde la fuente da
+      importes con IVA). Solo cuenta_en_total = true suma el total de cada año.
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: nivel
+        tests:
+          - accepted_values:
+              values: ['autonomico', 'local']
+      - name: tipo_medio_norm
+        description: prensa, radio, television, digital, redes_sociales, exterior, cine, creatividad_produccion, otros (nulo si la fuente no da tipo).
+      - name: grupo
+        description: Grupo normalizado (Grupo Godó, Grupo Prisa, Atresmedia-Planeta, CCMA, EITB...) o el nombre del medio si no está en la tabla de equivalencias.
+      - name: es_medio_publico
+        description: true para RTVE, CCMA, EITB, À Punt, Telemadrid, CARTV, RTRM, FORTA, EFE...
+      - name: iva_criterio
+        description: Cómo se ha tratado el IVA de la fila.
+
+  - name: medios_publicidad_territorial_anual
+    description: >
+      Publicidad institucional por comunidad autónoma o gran ayuntamiento y año (hasta
+      2025), en euros constantes por habitante, separando administración y empresas
+      públicas, con el partido que gobierna a 1 de julio. Cobertura: Cataluña 2015-2025,
+      Castilla y León 2014-2025, Aragón 2016-2025, Navarra 2012 y 2016-2025, Murcia
+      2014-2025 (incompleta antes de 2017), Comunitat Valenciana 2019-2024, País Vasco
+      2018-2025, Comunidad de Madrid solo Canal de Isabel II 2023-2025, Ayuntamiento de
+      Madrid 2017-2025 y Ajuntament de Barcelona 2012-2024 (+TMB 2021-2024). Las bases no
+      son homogéneas: ver iva_incluido, base, comparable_entre_territorios y nota antes de
+      comparar comunidades.
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: comunidad
+      - name: nivel
+        description: "'autonomico' o 'local'."
+      - name: cod_municipio
+        description: Código INE del municipio (28079 Madrid, 08019 Barcelona) en las filas locales.
+      - name: territorio
+        description: Nombre de la comunidad o del municipio.
+      - name: anio
+        tests: [not_null]
+      - name: administracion_eur_hab_real
+        description: Consejerías, departamentos, organismos y entes no empresariales, euros constantes por habitante.
+      - name: empresas_publicas_eur_hab_real
+        description: Empresas públicas (FGC, Loteries, ICF, FGV, CACSA, Canal, EMT, Madrid Destino, TMB...), euros constantes por habitante.
+      - name: total_eur_hab_real
+        description: Administración + empresas, euros constantes por habitante (importes tal cual de cada fuente).
+      - name: total_sin_iva_eur_hab_real
+        description: Total con el IVA homogeneizado (÷1,21 en Aragón y Murcia; tal cual donde la fuente es sin IVA o no lo indica).
+      - name: administracion_eur_nominal
+      - name: empresas_publicas_eur_nominal
+      - name: total_eur_nominal
+        description: Total en euros corrientes (para texto secundario o tooltip).
+      - name: total_eur_real
+      - name: iva_incluido
+        description: true (Aragón, Murcia), false (Cataluña, C. Valenciana, Ayto. de Madrid), nulo si la fuente no lo dice o se mezclan criterios.
+      - name: iva_fuentes
+      - name: base
+        description: "'ejecutado' o 'contratado' (Aragón, Murcia, C. Valenciana)."
+      - name: comparable_entre_territorios
+        description: true si la base es ejecutado y la fila no es solo una empresa suelta (Canal, TMB). Las filas false deben mostrarse marcadas.
+      - name: organismos
+      - name: poblacion
+      - name: factor_deflactor
+      - name: familia
+        description: Familia política del presidente autonómico (gobiernos_presidentes) o del alcalde (alcaldes_historia) a 1 de julio.
+      - name: presidente_o_alcalde
+        description: Etiqueta del gobierno en la semilla gobiernos_presidentes (puede listar varios presidentes de la misma etapa) o nombre del alcalde.
+      - name: color
+      - name: nota
+        description: Cobertura, IVA, comisión de agencia y base de cada fuente.
+
+  - name: medios_publicidad_territorial_medios
+    description: >
+      Reparto de la publicidad institucional por grupo mediático, territorio y año (100
+      primeros grupos), con importe en euros constantes, por habitante y % sobre lo
+      asignado a medios identificados. Grupos normalizados con medios_grupos_equivalencias.
+      Barcelona (ayuntamiento) no publica cabeceras y no aparece; Navarra y País Vasco usan
+      desgloses por medio que no cruzan con el organismo.
+    columns:
+      - name: territorio
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: rango
+        description: Puesto del grupo en ese territorio y año por importe.
+      - name: grupo
+      - name: tipo_grupo
+        description: privado, publico, plataforma, varios o sin clasificar (no está en la tabla de equivalencias).
+      - name: es_medio_publico
+      - name: n_medios
+        description: Número de nombres de medio distintos agrupados.
+      - name: medios_principales
+        description: Los tres medios con más importe dentro del grupo.
+      - name: importe_eur_real
+      - name: eur_hab_real
+      - name: pct_medios
+        description: "% del importe asignado a medios identificados ese año en ese territorio."
+      - name: importe_eur_nominal
+      - name: importe_empresas_publicas_eur_nominal
+        description: Parte pagada por empresas públicas del territorio.
+      - name: total_medios_eur_nominal
+      - name: iva_incluido
+      - name: base
+      - name: nota
+
+  - name: medios_publicidad_empresas_anual
+    description: >
+      Publicidad de empresas públicas por año, ámbito (estatal, autonómico, local) y
+      entidad, en euros constantes y por habitante del ámbito, con Loterías identificable
+      (es_loterias). Estatal 2015-2025 desde el seed medios_publicidad_empresas_age
+      (coste total de campañas comerciales, incluye organismos que venden algo y RTVE
+      marcada); autonómico y local desde medios_publicidad_territorial_gasto
+      (es_empresa_publica). magnitud distingue coste de campañas comerciales, compra de
+      medios institucional y cuenta 627 (Canal).
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: ambito
+        tests:
+          - accepted_values:
+              values: ['estatal', 'autonomico', 'local']
+      - name: cod_territorio
+      - name: territorio
+      - name: entidad
+        tests: [not_null]
+      - name: tipo_entidad
+        description: empresa_publica, organismo o rtve (no sumar RTVE con el bloque de televisión).
+      - name: es_loterias
+        description: SELAE y Loteries de Catalunya.
+      - name: importe_eur_nominal
+      - name: importe_eur_real
+      - name: eur_hab_real
+        description: Euros constantes por habitante del ámbito (España, la comunidad o el municipio).
+      - name: poblacion
+      - name: iva_incluido
+      - name: base
+      - name: magnitud
+        description: coste_campanas_comerciales (AGE), publicidad_institucional_en_medios (comunidades y ayuntamientos), cuenta_627 (Canal de Isabel II).
+      - name: nota

@@ -1,12 +1,13 @@
 ---
 title: Habitatge públic de lloguer
 description: "Quants habitatges públics de lloguer hi ha a Espanya per habitant i en % de les llars, per comunitat, província i municipi, comparats amb els Països Baixos, Àustria, Dinamarca, França i la mitjana europea, i segons el partit que governava."
-i18n_origen: 4f3c32fd277f
+i18n_origen: ee03022518f8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import EnConstruccion from '../../../../../../../src/lib/components/EnConstruccion.svelte';
@@ -330,7 +331,7 @@ El Ministeri també compara en **% de les llars** (habitatges principals) amb da
 
 Habitatges públics de lloguer coneguts per cada 1.000 habitants: els de la comunitat (dada completa del 2023) més els dels ajuntaments de més de 20.000 habitants que van respondre l'enquesta (dada parcial). Fes clic en una comunitat per veure'n la fitxa.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -378,7 +379,7 @@ Sense comptar Ceuta i Melilla, els parcs autonòmics de lloguer més grans per h
 
 No existeix un recompte oficial del parc autonòmic per província: les comunitats el declaren en bloc. El que sí que es coneix per província és el **parc municipal de lloguer que van declarar els ajuntaments de més de 20.000 habitants** ({cobertura_mun[0]?.respondieron} van respondre el 2023, {cobertura_mun[0]?.dato_2019} repeteixen la dada del 2019 i {cobertura_mun[0]?.sin_dato} no van donar xifres). El mapa el mostra per 1.000 habitants de la província; una província en blanc pot tenir parc autonòmic, o municipis que no van respondre.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

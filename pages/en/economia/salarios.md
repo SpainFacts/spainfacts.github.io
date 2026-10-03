@@ -1,12 +1,13 @@
 ---
 title: Wages
 description: "Average wage in Spain adjusted for inflation, its real and nominal growth, by sector and working hours, and its distribution by decile."
-i18n_origen: dc575af43c4c
+i18n_origen: a16ce5b323ef
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -235,7 +236,7 @@ ORDER BY s.salario_real DESC
 
 Average gross monthly wage in {por_ccaa[0]?.anio}, in {por_ccaa[0]?.anio_euros} euros. {por_ccaa[0]?.comunidad} tops the list with {formatNumber(por_ccaa[0]?.salario_real, 0)} € and {por_ccaa.slice(-1)[0]?.comunidad} comes last with {formatNumber(por_ccaa.slice(-1)[0]?.salario_real, 0)} €. These euros are not adjusted for the cost of living, which also varies between regions. Ceuta and Melilla are not published separately.
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

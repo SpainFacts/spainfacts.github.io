@@ -1,10 +1,11 @@
 ---
 title: Etxeak
 description: "Etxeen batez besteko tamaina eta pertsona bakarreko etxeen ehunekoa Espainian, erkidego eta probintziaka, 2021etik (INE, Biztanleriaren Estatistika Jarraitua)."
-i18n_origen: 36e2d1ec8163
+i18n_origen: 0989f96b9d04
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -118,7 +119,7 @@ ORDER BY h.pct_unipersonales DESC
 
 Pertsona bakarreko etxeak {formatNumber(provincias[0]?.unipersonales / 0.01, 1)} %-tik ({provincias[0]?.provincia}) {formatNumber(provincias.slice(-1)[0]?.unipersonales / 0.01, 1)} %-ra ({provincias.slice(-1)[0]?.provincia}) bitartekoak dira.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,10 +1,11 @@
 ---
 title: Salerosketak eta hipotekak
 description: "Etxebizitzen salerosketak eta etxebizitzen gaineko hipotekak Espainian 1.000 biztanleko, etxebizitza berria bigarren eskukoaren aldean eta hipotekaren batez besteko zenbatekoa inflazioa kenduta, erkidego eta probintziaka."
-i18n_origen: f88105740a74
+i18n_origen: ed62e0823b71
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -216,7 +217,7 @@ Etxebizitzen gainean eratutako hipoteken batez besteko zenbatekoa, inflazioareki
 
 Azken 12 hilabeteetako salerosketak 1.000 biztanleko.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -247,7 +248,7 @@ Azken 12 hilabeteetako salerosketak 1.000 biztanleko.
 
 ## Probintziaka
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

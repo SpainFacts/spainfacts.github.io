@@ -1,10 +1,11 @@
 ---
 title: Unemployment and employment
 description: "Unemployment rate in Spain by sex, age, nationality, education and territory, youth and long-term unemployment, temporary employment, monthly registered unemployment and comparison with the EU."
-i18n_origen: 610c3b85d67c
+i18n_origen: b3ae3805f825
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -438,7 +439,7 @@ Percentage of employees on a temporary contract and percentage of part-time work
 
 Average of the last four quarters, to smooth out sampling noise in the EPA for small territories. The region with the highest unemployment is {terr_resumen[0]?.ccaa_max} ({formatNumber(terr_resumen[0]?.ccaa_max_tasa / 0.01, 1)}%) and the one with the lowest {terr_resumen[0]?.ccaa_min} ({formatNumber(terr_resumen[0]?.ccaa_min_tasa / 0.01, 1)}%). By province, the range runs from {terr_resumen[0]?.prov_min} ({formatNumber(terr_resumen[0]?.prov_min_tasa / 0.01, 1)}%) to {terr_resumen[0]?.prov_max} ({formatNumber(terr_resumen[0]?.prov_max_tasa / 0.01, 1)}%). Click on a territory to see its profile.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -468,7 +469,7 @@ Average of the last four quarters, to smooth out sampling noise in the EPA for s
     <Column id=hogares_todos_parados title="Households all unemployed" fmt=pct1 />
 </DataTable>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

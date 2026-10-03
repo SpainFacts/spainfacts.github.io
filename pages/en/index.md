@@ -1,12 +1,13 @@
 ---
 title: SpainFacts · The State of Spain in Official Data
 description: "Spain in official data: population, economy, public finances, energy, mobility, society and transparency, from the whole country down to each municipality. Independent and politically neutral."
-i18n_origen: 33d766fc924e
+i18n_origen: 55bec392edfc
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../../src/lib/components/BuscadorInicio.svelte';
@@ -256,7 +257,7 @@ LEFT JOIN (
     <ButtonGroupItem valueLabel="Debt" value="deuda" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={mapa_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -343,6 +344,12 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Society</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Crime, health, immigration, income and poverty down to municipal level, and education.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} recorded offences per 1,000 inhabitants →</p>
+    </a>
+    <a href="/en/medios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1" aria-hidden="true">📰</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">The media</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How much public money the media receive: public broadcasters, institutional advertising and subsidies, by region and by party.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Public money in the media →</p>
     </a>
     <a href="/en/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1" aria-hidden="true">🔎</p>

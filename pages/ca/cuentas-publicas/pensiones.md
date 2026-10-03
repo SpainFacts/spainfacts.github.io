@@ -1,10 +1,11 @@
 ---
 title: Pensions
 description: "Pensions contributives a Espanya: pensió mitjana descomptada la inflació, afiliats per pensió, despesa en pensions en % del PIB davant la UE, pensions per habitant i per comunitat i província."
-i18n_origen: cc5339743926
+i18n_origen: 3f8817a42d1f
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // Els mesos arriben de SQL en castellà ('enero de 2025')
@@ -383,7 +384,7 @@ Nombre de pensions per cada 1.000 habitants i per cada 100 persones de 65 anys o
 
 Dades del {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (mitjana dels {ccaa_extremos[0]?.meses} mesos publicats){/if}, en euros de {mensual[0]?.anio_euros}. La pensió mitjana de jubilació més alta és la de {ccaa_extremos[0]?.max_nombre} ({formatNumber(ccaa_extremos[0]?.max_valor, 0)} €) i la més baixa, la de {ccaa_extremos[0]?.min_nombre} ({formatNumber(ccaa_extremos[0]?.min_valor, 0)} €). Pel que fa als afiliats per pensió, va de {formatNumber(ccaa_extremos[0]?.ratio_max_valor, 2)} a {ccaa_extremos[0]?.ratio_max_nombre} a {formatNumber(ccaa_extremos[0]?.ratio_min_valor, 2)} a {ccaa_extremos[0]?.ratio_min_nombre}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -414,7 +415,7 @@ Dades del {ccaa_extremos[0]?.anio}{#if ccaa_extremos[0]?.meses < 12} (mitjana de
 
 ### Per província
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

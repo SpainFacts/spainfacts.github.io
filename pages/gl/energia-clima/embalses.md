@@ -1,5 +1,5 @@
 ---
-i18n_origen: 824f1b9d42d1
+i18n_origen: 1e74e7013ff0
 title: Reservas de auga e encoros
 description: Estado semanal dos encoros españois por conca, comparado co ano anterior e coa media dos últimos dez anos.
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     import MapaEmbalses from '../../../../../../../src/lib/components/MapaEmbalses.svelte';
@@ -87,7 +88,7 @@ FROM mother.embalses_estado_actual
 WHERE nivel = 'demarcacion'
 ```
 
-<AreaMap
+<MapaEspana
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"

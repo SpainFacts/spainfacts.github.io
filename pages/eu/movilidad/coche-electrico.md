@@ -1,12 +1,13 @@
 ---
 title: Auto elektrikoa
 description: "Auto elektrikorako trantsizioa Espainian: turismoen matrikulazioak motor motaren arabera hilero 2015etik, elektrikoen eta hibrido entxufagarrien kuota probintziaka eta CO2 isuriak."
-i18n_origen: f25fe43f1389
+i18n_origen: ed78ed2e1c5f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ Elektrikoen eta hibrido entxufagarrien kuota azken 12 hilabeteetako turismo berr
     <ButtonGroupItem valueLabel="Guztiak, flotak barne" value="todos" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

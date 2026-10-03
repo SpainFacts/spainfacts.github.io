@@ -1,12 +1,13 @@
 ---
 title: Regions
 description: "Spain by autonomous community and province: population, public accounts and debt of each administration."
-i18n_origen: dd7a1e214c07
+i18n_origen: abbe3b0c0256
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -87,7 +88,7 @@ Spain is a decentralised state: the **autonomous communities** run healthcare, e
 
 ## Map of autonomous communities
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

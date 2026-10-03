@@ -1,10 +1,11 @@
 ---
 title: Homes i dones
 description: "Quants homes hi ha per cada 100 dones a Espanya segons l'edat, des de 1971, i a cada comunitat i província (INE)."
-i18n_origen: d21837969d2e
+i18n_origen: aabf373a979e
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -141,7 +142,7 @@ ORDER BY ratio DESC
 ```
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={provincias}
         geoJsonUrl="/geo/provincias.geojson"
         geoId="cod_prov"

@@ -3,10 +3,11 @@ title: Eleccións
 description: "Resultados das eleccións xerais desde 1977, europeas e municipais: participación, voto por partido e por bloque, fragmentación, votos por escano e gañador en cada provincia e municipio, cos datos oficiais do Ministerio do Interior."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c6f8193148e9
+i18n_origen: 855cde6e0399
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // As etiquetas de data veñen do SQL cos meses abreviados en castelán
@@ -337,7 +338,7 @@ ORDER BY orden
 
 A familia política da candidatura máis votada en cada provincia (a circunscrición das xerais).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

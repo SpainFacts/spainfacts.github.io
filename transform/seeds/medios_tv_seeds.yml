@@ -1,0 +1,123 @@
+version: 2
+
+seeds:
+  - name: medios_tv_aportacion
+    description: >
+      Aportación pública anual a los entes autonómicos de radio y televisión, 2017-2025,
+      transcrita a mano de los PDF (revisado el 2026-10-03). Fuente principal: CNMC, Informe
+      Económico Sectorial de Telecomunicaciones y Audiovisual, apartado «Subvenciones de
+      televisión y radio» (subvenciones de explotación, de capital y transferencias de
+      contratos-programa percibidas por TV, radio y ente de cada comunidad; la RNE va en RTVE).
+      2017-2021 en millones de euros (gráficos de barras con etiquetas; 2020 y 2022-2023 con texto
+      vectorial, el resto leído de la imagen); 2022-2025 solo en euros por habitante (la CNMC usa
+      la ECP del INE en 2023-2024 y el Censo anual en 2025). La CNMC publica 13 comunidades y nunca
+      la Comunitat Valenciana: para el código 10 (CVMC / SAMC, À Punt) se usan las cuentas de la
+      CVMC en la Cuenta General de la Generalitat (2017-2023, altas de «otras aportaciones de
+      socios»: la aportación va a patrimonio neto, cuenta 118) y la ejecución presupuestaria del
+      programa 462D en dadesobertes.gva.es (2024-2025, obligaciones reconocidas de los capítulos
+      4, 7 y 8), más el crédito consignado 2017-2020 de la Sindicatura de Comptes como control.
+      Navarra, Cantabria, La Rioja, Ceuta y Melilla no tienen ente público de radio-TV. Castilla y
+      León (RTVCyL) es privada con contrato-programa y la TV de Murcia la gestiona Grupo Secuoya.
+    config:
+      column_types:
+        anio: integer
+        cod_ccaa: varchar
+        ente: varchar
+        valor: double
+        unidad: varchar
+        tipo: varchar
+        extraordinario: boolean
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        description: Año del dato.
+      - name: cod_ccaa
+        description: Código INE de la comunidad (País Vasco 16, Navarra 15).
+      - name: ente
+        description: Ente o empresa de radio-TV autonómica.
+      - name: valor
+        description: Importe en la unidad indicada.
+      - name: unidad
+        description: "'meur' (millones de euros corrientes) o 'eur_hab' (euros por habitante calculados por la CNMC)."
+      - name: tipo
+        description: "'percibido_cnmc' (subvenciones percibidas según la CNMC), 'liquidado' (cuentas o ejecución presupuestaria) o 'presupuestado' (crédito inicial, solo control)."
+      - name: extraordinario
+        description: Pago extraordinario (equilibrio patrimonial, activos financieros…) separado del ordinario. La CNMC no los separa.
+      - name: fuente
+        description: Organismo, documento, página o gráfico y URL del PDF o del dataset.
+      - name: nota
+        description: Perímetro, método y advertencias.
+
+  - name: medios_tv_rtve
+    description: >
+      Financiación pública de la Corporación RTVE por concepto, 2008-2025, en millones de euros
+      corrientes, de la nota de «Subvenciones de explotación» de las cuentas anuales (nota 16 del
+      Grupo RTVE consolidado en 2008-2009; nota 15.1 de la CRTVE en 2010-2012; nota 16.1 desde 2013),
+      índice https://www.rtve.es/rtve/20231016/transparencia-cuentas/943360.shtml. Las cuentas de
+      2008-2013 son escaneadas y se leyeron de la imagen. Cada año sale del informe de ese año o del
+      siguiente (columna comparativa), según indica `fuente`. grupo = 'estado' (compensación de los
+      PGE y otras subvenciones de administraciones), 'tasas_operadores' (Ley 8/2009 y Ley 13/2022:
+      tasa del espectro cedida y aportaciones obligatorias de TV privadas, telecos y plataformas) o
+      'no_publico' (derechos de emisión donados, fuera de los totales).
+    config:
+      column_types:
+        anio: integer
+        concepto: varchar
+        grupo: varchar
+        meur: double
+        extraordinario: boolean
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        description: Año.
+      - name: concepto
+        description: "compensacion_pge, compensacion_pge_extraordinaria, otras_subvenciones_estado, subvenciones_capital, tasa_espectro, aportacion_operadores_tv, aportacion_operadores_telecom, aportacion_tv_a_peticion, donaciones_titulos."
+      - name: grupo
+        description: "'estado', 'tasas_operadores' o 'no_publico'."
+      - name: meur
+        description: Millones de euros corrientes.
+      - name: extraordinario
+        description: Aportación extraordinaria (2024, 100 M€ por encima de la compensación prorrogada).
+      - name: fuente
+        description: Cuentas anuales, nota, columna, página del PDF y URL.
+      - name: nota
+        description: Definición del concepto y advertencias del año.
+
+  - name: medios_tv_audiencia
+    description: >
+      Cuota de pantalla anual (%) de cada cadena autonómica en su comunidad y de La 1 en España,
+      2017-2025, de los informes anuales de Barlovento Comunicación con datos de Kantar
+      (individuos 4+ con invitados, consumo lineal). Solo se guardan cifras, con cita en `fuente`:
+      el informe reserva todos los derechos. Las cuotas de una misma comunidad están en el mismo
+      ámbito y se pueden sumar para el grupo (TV3 + 3/24 + SX3/33 + Esport3 + TV3CAT, ETB1-4…).
+      `principal` marca el canal principal del ente. Castilla y León (La 7 y La 8 de RTVCyL) sale
+      del apartado de autonómicas privadas.
+    config:
+      column_types:
+        anio: integer
+        cod_ccaa: varchar
+        cadena: varchar
+        principal: boolean
+        ambito: varchar
+        cuota: double
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        description: Año.
+      - name: cod_ccaa
+        description: Código INE de la comunidad; '00' para La 1 en España.
+      - name: cadena
+        description: Cadena tal como la nombra Barlovento.
+      - name: principal
+        description: Canal principal del ente (o La 1).
+      - name: ambito
+        description: "'ccaa' (cuota sobre su comunidad) o 'espana'."
+      - name: cuota
+        description: Cuota de pantalla anual en %.
+      - name: fuente
+        description: Informe, tabla, página y URL.
+      - name: nota
+        description: Método y advertencias.

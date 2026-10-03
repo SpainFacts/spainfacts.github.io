@@ -4,6 +4,7 @@ description: "Inflación en España: IPC general y subyacente, precios por grupo
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
@@ -685,7 +686,7 @@ Precio medio por kWh que paga un hogar de consumo medio con todos los impuestos 
 
 Inflación anual de cada comunidad en {ccaa[0]?.mes_txt} y subida acumulada de los precios desde diciembre de 2019. Donde más han subido los precios desde entonces es en {ccaa_resumen[0]?.cmax} (+{formatNumber(ccaa_resumen[0]?.smax / 0.01, 1)} %) y donde menos en {ccaa_resumen[0]?.cmin} (+{formatNumber(ccaa_resumen[0]?.smin / 0.01, 1)} %). El IPC mide cuánto cambian los precios en cada comunidad, no si una es más cara que otra.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

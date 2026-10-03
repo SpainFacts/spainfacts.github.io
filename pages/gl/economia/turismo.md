@@ -1,5 +1,5 @@
 ---
-i18n_origen: caa9f015f151
+i18n_origen: 6bfff987dc63
 title: Turismo
 description: "Turistas internacionais por habitante, o seu gasto descontada a inflación e en % do PIB, pernoitas e ocupación hoteleira por comunidade, países de orixe, estacionalidade e vivendas turísticas por concello, con datos do INE."
 og:
@@ -7,6 +7,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -471,7 +472,7 @@ Repartición dos turistas de {paises[0]?.anio_int} por país de residencia e var
 
 Pernoitas en hoteis e apartamentos turísticos por 1.000 habitantes en {ccaa[0]?.anio}. No conxunto de España foron {formatNumber(ccaa_espana[0]?.pernoct_1000hab, 0)}; {ccaa[0]?.comunidad} chegou a {formatNumber(ccaa[0]?.pernoct_1000hab, 0)} e {ccaa.slice(-1)[0]?.comunidad} quedou en {formatNumber(ccaa.slice(-1)[0]?.pernoct_1000hab, 0)}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -538,7 +539,7 @@ O INE conta as vivendas anunciadas como aloxamento turístico nas grandes plataf
 
 <p class="text-xs text-gray-500">Medición semestral: febreiro e agosto ata 2024, maio e novembro desde entón. Como hai tempada (no verán anúncianse máis), convén comparar cada dato co do mesmo mes doutro ano.</p>
 
-<AreaMap
+<MapaEspana
     data={vut_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -3,10 +3,11 @@ title: Enplegu publikoa
 description: "Zenbat enplegatu publiko dauden Espainian, zein administrazio eta sektoretan lan egiten duten (osasuna, hezkuntza, udalak, segurtasun-indarrak...), nola aldatu den haien kopurua, zenbat kobratzen duten sektore pribatuarekin alderatuta eta zenbat balio duten."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a9194bd3ec9e
+i18n_origen: f35a10c4e8a1
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteen atzizkiak (euskara): 2021ean, 2022an, 2011n · 2021eko, 2022ko · 2010etik, 2020tik
@@ -259,7 +260,7 @@ GROUP BY ALL
 ORDER BY por_1000_hab DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

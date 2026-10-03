@@ -1,10 +1,11 @@
 ---
 title: Territorial distribution of the population
 description: "How Spain's population is distributed across regions and provinces since 1975: concentration, provinces losing inhabitants and the percentage of foreign-born residents in each province (INE)."
-i18n_origen: c8fbe04365c1
+i18n_origen: d77c92bbc1bf
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -142,7 +143,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_1975} provinces have fewer inhabitants today than in 1975. The one that has grown the most is {provincias[0]?.provincia} ({formatNumber(provincias[0]?.crec_1975, 0)}%) and the one that has lost the most is {provincias.slice(-1)[0]?.provincia} ({formatNumber(provincias.slice(-1)[0]?.crec_1975, 0)}%).
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
@@ -168,7 +169,7 @@ FROM ${provincias}
 
 The share of residents born in another country ranges from {formatNumber(provincias_resumen[0]?.max_pct / 0.01, 1)}% in {provincias_resumen[0]?.max_prov} to {formatNumber(provincias_resumen[0]?.min_pct / 0.01, 1)}% in {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

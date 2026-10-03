@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
     import MapaEmbalses from '../../../../../../src/lib/components/MapaEmbalses.svelte';
@@ -86,7 +87,7 @@ FROM mother.embalses_estado_actual
 WHERE nivel = 'demarcacion'
 ```
 
-<AreaMap
+<MapaEspana
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"

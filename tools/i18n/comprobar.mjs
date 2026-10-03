@@ -36,6 +36,8 @@ const normalizarSql = (sql, lang) =>
 		.replace(/--[^\n]*/g, '')
 		.replace(new RegExp(`'/${lang}' \\|\\| `, 'g'), '')
 		.replace(new RegExp(`'/${lang}/`, 'g'), "'/")
+		// etiqueta del año en curso en el eje de las gráficas: se traduce dentro del SQL
+		.replace(/' \((incompleto|incomplete|incomplet|osatu gabea)\)'/g, "' (incompleto)'")
 		.replace(/\* REPLACE \((\w+) AS \1\)/g, '*')
 		.replace(/\b(\w+\.)?(\w+) AS \2\b/g, '$1$2')
 		.replace(/\s+/g, ' ')

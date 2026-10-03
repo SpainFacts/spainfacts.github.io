@@ -1,10 +1,11 @@
 ---
 title: Atur i ocupació
 description: "Taxa d'atur a Espanya per sexe, edat, nacionalitat, estudis i territori, atur juvenil i de llarga durada, temporalitat, atur registrat mensual i comparació amb la UE."
-i18n_origen: 610c3b85d67c
+i18n_origen: b3ae3805f825
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -438,7 +439,7 @@ Percentatge d'assalariats amb contracte temporal i percentatge dels qui treballe
 
 Mitjana dels quatre últims trimestres, per suavitzar el soroll de la mostra de l'EPA als territoris petits. La comunitat amb més atur és {terr_resumen[0]?.ccaa_max} ({formatNumber(terr_resumen[0]?.ccaa_max_tasa / 0.01, 1)} %) i la que menys {terr_resumen[0]?.ccaa_min} ({formatNumber(terr_resumen[0]?.ccaa_min_tasa / 0.01, 1)} %). Per províncies, el rang va de {terr_resumen[0]?.prov_min} ({formatNumber(terr_resumen[0]?.prov_min_tasa / 0.01, 1)} %) a {terr_resumen[0]?.prov_max} ({formatNumber(terr_resumen[0]?.prov_max_tasa / 0.01, 1)} %). Fes clic en un territori per veure'n la fitxa.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -468,7 +469,7 @@ Mitjana dels quatre últims trimestres, per suavitzar el soroll de la mostra de 
     <Column id=hogares_todos_parados title="Llars amb tothom a l'atur" fmt=pct1 />
 </DataTable>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

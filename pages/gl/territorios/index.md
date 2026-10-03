@@ -1,12 +1,13 @@
 ---
 title: Territorios
 description: "España por comunidades autónomas e provincias: poboación, contas públicas e débeda de cada administración."
-i18n_origen: dd7a1e214c07
+i18n_origen: abbe3b0c0256
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -87,7 +88,7 @@ España é un Estado descentralizado: as **comunidades autónomas** xestionan a 
 
 ## Mapa de comunidades autónomas
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

@@ -1,12 +1,13 @@
 ---
 title: Territoris
 description: "Espanya per comunitats autònomes i províncies: població, comptes públics i deute de cada administració."
-i18n_origen: dd7a1e214c07
+i18n_origen: abbe3b0c0256
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -87,7 +88,7 @@ Espanya és un Estat descentralitzat: les **comunitats autònomes** gestionen la
 
 ## Mapa de comunitats autònomes
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

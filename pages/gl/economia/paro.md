@@ -1,10 +1,11 @@
 ---
-i18n_origen: 610c3b85d67c
+i18n_origen: b3ae3805f825
 title: Paro e emprego
 description: "Taxa de paro en España por sexo, idade, nacionalidade, estudos e territorio, paro xuvenil e de longa duración, temporalidade, paro rexistrado mensual e comparación coa UE."
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -438,7 +439,7 @@ Porcentaxe de asalariados con contrato temporal e porcentaxe de quen traballa a 
 
 Media dos catro últimos trimestres, para suavizar o ruído da mostra da EPA nos territorios pequenos. A comunidade con máis paro é {terr_resumen[0]?.ccaa_max} ({formatNumber(terr_resumen[0]?.ccaa_max_tasa / 0.01, 1)} %) e a que menos {terr_resumen[0]?.ccaa_min} ({formatNumber(terr_resumen[0]?.ccaa_min_tasa / 0.01, 1)} %). Por provincias, o rango vai de {terr_resumen[0]?.prov_min} ({formatNumber(terr_resumen[0]?.prov_min_tasa / 0.01, 1)} %) a {terr_resumen[0]?.prov_max} ({formatNumber(terr_resumen[0]?.prov_max_tasa / 0.01, 1)} %). Preme nun territorio para ver a súa ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -468,7 +469,7 @@ Media dos catro últimos trimestres, para suavizar o ruído da mostra da EPA nos
     <Column id=hogares_todos_parados title="Fogares todos en paro" fmt=pct1 />
 </DataTable>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

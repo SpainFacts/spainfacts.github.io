@@ -1,12 +1,13 @@
 ---
 title: Electric cars
 description: "The shift to electric cars in Spain: new car registrations by engine type every month since 2015, share of battery electric and plug-in hybrids by province, and CO2 emissions."
-i18n_origen: f25fe43f1389
+i18n_origen: ed78ed2e1c5f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -275,7 +276,7 @@ Share of battery electric and plug-in hybrids among new cars over the last 12 mo
     <ButtonGroupItem valueLabel="All, including fleets" value="todos" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

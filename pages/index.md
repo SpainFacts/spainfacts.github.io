@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../src/lib/utils.js';
     import KpiCard from '../../../../src/lib/components/KpiCard.svelte';
     import BuscadorInicio from '../../../../src/lib/components/BuscadorInicio.svelte';
@@ -255,7 +256,7 @@ LEFT JOIN (
     <ButtonGroupItem valueLabel="Deuda" value="deuda" />
 </ButtonGroup>
 
-<AreaMap
+<MapaEspana
     data={mapa_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -342,6 +343,12 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sociedad</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Criminalidad, salud, inmigración, renta y pobreza hasta el nivel de municipio, y educación.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{formatNumber(cabeceras[0]?.delitos_1000, 1)} delitos conocidos por 1.000 hab. →</p>
+    </a>
+    <a href="/medios" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <p class="text-2xl mb-1" aria-hidden="true">📰</p>
+        <p class="text-lg font-bold text-gray-900 dark:text-white">Medios de comunicación</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuánto dinero público reciben los medios: televisiones públicas, publicidad institucional y subvenciones, por comunidad y por partido.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Dinero público en los medios →</p>
     </a>
     <a href="/transparencia" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <p class="text-2xl mb-1" aria-hidden="true">🔎</p>

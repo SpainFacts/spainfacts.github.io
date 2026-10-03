@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: raw_construccion
+    description: "Sector de la construcción de España frente a la UE: Eurostat (cuentas nacionales, STS, SBS, cuentas regionales), INE (EPA), Banco de España (Boletín Estadístico cap. 23: visados, licitación, cemento), ISTAC (licitación y visados por comunidad, del Ministerio de Transportes) y Seguridad Social (afiliados por sección CNAE). Carga ingestion/construccion.py (pipeline dlt `construccion`)."
+    schema: raw
+    tables:
+      - name: eurostat_construccion_vab
+        description: "Eurostat nama_10_a10: VAB (B1G) del total y de la rama F (construcción) de los 27 y EU27_2020, en PC_TOT, CP_MEUR y CLV10_MEUR, desde 1995."
+      - name: eurostat_construccion_empleo
+        description: "Eurostat nama_10_a10_e: ocupados (EMP_DC, miles) del total y de la rama F, 27 países y EU27_2020, desde 1995."
+      - name: eurostat_construccion_poblacion
+        description: "Eurostat nama_10_pe: población media anual (POP_NC, miles) de los 27 y EU27_2020."
+      - name: eurostat_construccion_produccion
+        description: "Eurostat sts_copr_a: índice de producción en la construcción (PRD, 2021=100, corregido de calendario) de F, F41, F42 y F43, 27 países y EU27_2020, desde 1995."
+      - name: eurostat_construccion_permisos
+        description: "Eurostat sts_cobp_a: permisos de construcción en viviendas (BPRM_DW, miles) y superficie útil (BPRM_SQM, millones de m²) de edificios residenciales (CPA_F41001), no residenciales (CPA_F41002) y total (CPA_F41001_41002)."
+      - name: eurostat_construccion_costes
+        description: "Eurostat sts_copi_a: índices de costes de construcción (COST) y de precios de producción (PRC_PRR) de la vivienda nueva (CPA_F41001_X_410014), 2021=100, anual."
+      - name: eurostat_construccion_sbs
+        description: "Eurostat sbs_ovw_act: empresas (ENT_NR), personas ocupadas (EMP_NR), cifra de negocios neta (NETTUR_MEUR), valor añadido (AV_MEUR) y productividad aparente (LABPRY_TEUR) de F, F41, F42 y F43, 2021-último."
+      - name: eurostat_construccion_vab_regional
+        description: "Eurostat nama_10r_3gva: VAB a precios corrientes (millones de euros) total y de la rama F de las comunidades (NUTS 2) y de España, desde 2000."
+      - name: eurostat_construccion_hicp
+        description: "Eurostat prc_hicp_aind: IPCA anual de España (2015=100) desde 1996, para enlazar el deflactor hacia atrás de 2002."
+      - name: ine_construccion_ocupados_prov
+        description: "INE EPA tabla 65354: ocupados por sector económico y provincia (miles), trimestral desde 2008 (CNAE-2009)."
+      - name: ine_construccion_parados_ccaa
+        description: "INE EPA tabla 65331: parados por sector económico del último empleo y comunidad (miles), trimestral desde 2008."
+      - name: construccion_bde_series
+        description: "Banco de España, Boletín Estadístico be2308 (visados de dirección de obra), be2309 (licitación oficial, miles de euros) y be2311 (cemento y acero, miles de toneladas), mensual."
+      - name: construccion_licitacion_ccaa
+        description: "ISTAC E20004A_000001 (Ministerio de Transportes, Licitación oficial en construcción): presupuesto de licitación en miles de euros por territorio (NUTS 2), agente contratante y tipo de obra, mensual (mes) y anual (mes nulo) desde 1989."
+      - name: construccion_visados_ccaa
+        description: "ISTAC E20006A_000002 (Ministerio de Transportes, visados de dirección de obra de los colegios de aparejadores): viviendas visadas por tipo de obra, España y comunidades (sin Ceuta ni Melilla), mensual (mes) y anual (mes nulo) desde 2000."
+      - name: construccion_afiliados
+        description: "Seguridad Social, ficheros «Afiliación AAAA.xlsx» (hoja de actividades por provincia): afiliados medios del mes de la sección F (construcción) y del total de secciones, por provincia y régimen (General / Autónomos), desde 2021; 2026 en CNAE-2025."

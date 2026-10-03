@@ -1,12 +1,13 @@
 ---
 title: Council accounts reporting
 description: "Public administrations that fail to meet their legal obligations to publish or submit information: who they are, where they are and who was in power when the deadline expired."
-i18n_origen: 3425c0f0ac57
+i18n_origen: 8aa3c01a34e7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
     // English date labels (the month labels built in the SQL queries are in Spanish)
@@ -154,7 +155,7 @@ WHERE t.anio = (SELECT anio FROM ${ultimo})
 GROUP BY ALL
 ```
 
-<AreaMap
+<MapaEspana
     data={por_provincia}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -1,0 +1,55 @@
+version: 2
+
+seeds:
+  - name: medios_padron_nif
+    description: >
+      Padrón de NIF de empresas de medios de comunicación (versión 1, 2026-10-03), para localizar
+      sus contratos en la Plataforma de Contratación del Sector Público (ingestion/medios_contratos.py
+      y medios_contratos_base). PRECISIÓN antes que exhaustividad: solo personas jurídicas; en duda,
+      es_medio = 'gris' (fuera de los totales). Los NIF revisados y descartados (agencias de
+      publicidad o de medios, productoras técnicas, telecos, seguimiento de medios, editoriales de
+      libros o jurídicas) no figuran aquí; están en la lista de decisiones del script de revisión.
+
+      Cómo se construyó: (1) sociedades de los grupos del Anexo IV del Informe de publicidad
+      institucional 2025 (seed medios_publicidad_grupos_informe) resueltas a NIF con los propios
+      adjudicatarios de PLACSP de septiembre de 2026 y con la API de terceros de la BDNS
+      (https://www.infosubvenciones.es/bdnstrans/api/terceros); (2) beneficiarios personas
+      jurídicas de las convocatorias de ayudas a medios incluidas en medios_subvenciones_convocatorias
+      (main.medios_subvenciones_concesiones); (3) el registro estatal de prestadores de servicios de
+      comunicación audiovisual (https://sedeaplicaciones.mineco.gob.es/ruecaconsultas/Prestadores.aspx),
+      sin telecos, clubes ni instituciones; (4) adjudicatarios de PLACSP 2018-2026 con nombre de
+      medio (diario, periódico, radio, televisión, prensa, ediciones, publicaciones, noticias...)
+      cuyos contratos son mayoritariamente de publicidad, inserciones, suscripciones o patrocinios
+      (regla automática, nota «regla automática»), revisados a mano los de mayor importe.
+      Grupo = propietario (las emisoras locales de la Cadena SER van en Prisa cuando sus contratos
+      citan la SER; las asociadas a COPE u Onda Cero con propiedad local, en «Medios locales
+      independientes» con nota). Planeta-La Razón incluye solo Audiovisual Española 2000 (La Razón),
+      no Editorial Planeta (libros).
+    config:
+      column_types:
+        nif: varchar
+        nombre: varchar
+        grupo: varchar
+        tipo: varchar
+        titularidad: varchar
+        es_medio: varchar
+        fuente_identificacion: varchar
+        nota: varchar
+    columns:
+      - name: nif
+        description: "NIF de la sociedad (sin guiones, mayúsculas)"
+        tests: [unique, not_null]
+      - name: nombre
+        description: "Razón social (la más frecuente en PLACSP o la del registro)"
+      - name: grupo
+        description: "Grupo mediático normalizado (Prisa, Atresmedia, Mediaset/MFE, Vocento, Unidad Editorial, Godó, Prensa Ibérica, Henneo, Joly, COPE/Ábside, Planeta-La Razón, elDiario.es, El Confidencial, Europa Press, EFE, RTVE, Medios públicos autonómicos, Medios locales independientes...)"
+      - name: tipo
+        description: "prensa | digital | radio | tv | agencia_noticias | eventos_grupo | revista"
+      - name: titularidad
+        description: "privada | publica"
+      - name: es_medio
+        description: "si | gris | no (descartado tras revisión: se conserva para no volver a revisarlo; ingesta y marts solo usan si y gris)"
+      - name: fuente_identificacion
+        description: "placsp_nombre (razón social en PLACSP), bdns (beneficiario de ayudas a medios), bdns_terceros (buscador de terceros BDNS), rueca (registro audiovisual), placsp_objetos, revision_manual"
+      - name: nota
+        description: "Cabecera principal o motivo de la clasificación"

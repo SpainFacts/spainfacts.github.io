@@ -1,0 +1,73 @@
+version: 2
+
+seeds:
+  - name: medios_subvenciones_convocatorias
+    description: >
+      Lista curada de convocatorias de la Base de Datos Nacional de Subvenciones (BDNS,
+      https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias, API
+      https://www.infosubvenciones.es/bdnstrans/api/convocatorias?numConv=<cod_bdns>) de ayudas
+      a medios de comunicación privados, revisada a mano el 2026-10-03. La ingesta
+      ingestion/medios_subvenciones.py descarga las concesiones de las filas con incluir = true.
+      Las filas con incluir = false documentan candidatas revisadas y descartadas (no se descargan).
+
+      Cómo se buscaron: (1) texto en el título castellano y cooficial de las convocatorias desde
+      2021 (frases «medios de comunicación», «mitjans de comunicació», «medios informativos»,
+      «prensa», «premsa», «publicaciones periódicas», «emisoras», «hedabide», «euskarazko»,
+      «comunicación local», «radio», «televisión», «revistas culturales», «xornalísticas»,
+      valenciano / catalán / asturiano / euskera en medios…); (2) por órgano (Secretaría Xeral
+      de Medios de la Xunta, DG de Política Lingüística de Baleares, Euskarabidea, SEDIA,
+      DG de Comunicación de Navarra, Andalucía, Extremadura, Canarias, Valencia…); (3) por el
+      sector anotado en las concesiones (filtro `actividad=240`, sección J de la NACE:
+      edición, radiodifusión y contenidos), agrupando por convocatoria, 2022-2025S1. El campo
+      `sectores` de la convocatoria (58.x, 59.x, 60.x, 63.9x, J) se guarda como señal, pero
+      la decisión es manual.
+
+      CRITERIO DE INCLUSIÓN: se incluye una convocatoria cuando el dinero va a la actividad de
+      medios de comunicación de titularidad privada o social (prensa en papel o digital, radio,
+      televisión, revistas, agencias), a sus empresas, cooperativas, fundaciones o asociaciones
+      editoras, o a asociaciones de editores de medios (APPEC, AMIC, Premsa Comarcal, Premsa
+      Forana, AEEPP, ARCE). Cuentan también las ayudas nominativas y convenios a un medio
+      concreto aunque sean para un evento o suplemento (SER, El País, elDiario.es, Diari de
+      Girona), porque son dinero público a una empresa de medios. Se incluyen las revistas
+      culturales del Ministerio de Cultura y del ICEC (zona gris, marcada en `nota`).
+      SE EXCLUYEN: medios públicos (RTVE, À Punt / CVMC / SAMC, emisoras municipales);
+      asociaciones de la prensa, de periodistas, de prensa deportiva y colegios profesionales
+      (son gremiales: galas, congresos, formación); premios y becas de periodismo; prácticas
+      de estudiantes y convenios con universidades; estudios de audiencia (AIMC/EGM);
+      cooperación internacional (AECID); ayudas genéricas que mencionan prensa o quioscos sin
+      ir a medios. Dentro de las convocatorias incluidas se cuentan todos los beneficiarios
+      (también asociaciones o personas físicas que editan un medio); las personas físicas solo
+      aparecen en agregados.
+
+      País Vasco (16): el Gobierno Vasco NO publica en la BDNS sus ayudas a medios (programas de
+      7 M€ en 2024 y 2025, 1 M€ euskera en diarios en castellano...): solo aparecen las
+      Diputaciones forales (Bizkaia) y los ayuntamientos. Navarra (15) sí publica (Gobierno de
+      Navarra y Euskarabidea), aunque las convocatorias de prensa en euskera de 2023 (677118) y
+      2024 (758044) figuran sin concesiones. Andalucía y Canarias no tienen líneas de medios
+      privados visibles desde 2022. La BDNS solo enseña concesiones de los 4 últimos años
+      naturales (hoy, desde 2022).
+    config:
+      column_types:
+        cod_bdns: varchar
+        cod_ccaa: varchar
+        incluir: boolean
+    columns:
+      - name: cod_bdns
+        description: "Código BDNS de la convocatoria (numeroConvocatoria). Fuente de cada fila: https://www.infosubvenciones.es/bdnstrans/GE/es/convocatorias/<cod_bdns>"
+        tests: [unique, not_null]
+      - name: titulo
+        description: "Título de la convocatoria en castellano según la BDNS (campo descripcion)."
+      - name: nivel
+        description: "Nivel de la administración concedente: estatal, autonomico o local (nivel1 de la BDNS)."
+      - name: cod_ccaa
+        description: "Comunidad (código INE) del ámbito del concedente; '00' = Estado. Para los locales, la comunidad del ayuntamiento, diputación o consell. Vacío en algunas filas excluidas."
+      - name: organo
+        description: "Órgano concedente (nivel2 / nivel3 de la BDNS)."
+      - name: tipo_ayuda
+        description: "estructural (funcionamiento, edición o emisión en general), lengua (ligada al uso de una lengua cooficial o propia), digitalizacion_ia (transición tecnológica, IA, radio digital), proyectos (proyectos concretos, revistas culturales), otras (convenios y nominativas a un medio o asociación de medios)."
+      - name: incluir
+        description: "true = se descargan sus concesiones; false = revisada y descartada (motivo en nota)."
+      - name: sectores
+        description: "Códigos NACE del campo sectores de la convocatoria en la BDNS (señal automática, no decide)."
+      - name: nota
+        description: "Línea, beneficiarios típicos y motivo de inclusión o exclusión."

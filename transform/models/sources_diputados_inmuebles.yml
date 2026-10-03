@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: raw_diputados_inmuebles
+    description: >
+      Declaraciones de Bienes y Rentas de los diputados del Congreso (XV Legislatura,
+      Registro de Intereses, PDF escaneados enlazados en la ficha de cada diputado y leídos
+      por OCR) y Estadística de los declarantes del IRPF de la AEAT (partidas de capital
+      inmobiliario por tramos de rendimiento). Carga: ingestion/diputados_inmuebles.py
+      (pipeline dlt diputados_inmuebles, recursos cong_*). Las declaraciones se leen de los
+      extractos versionados ingestion/datos/diputados_inmuebles_*.csv (el OCR solo funciona
+      en Windows: python -m ingestion.diputados_inmuebles --extraer).
+    schema: raw
+    tables:
+      - name: cong_declaraciones_bienes
+        description: >
+          Una fila por diputado en activo de la legislatura con su declaración INICIAL de
+          bienes y rentas (las modificaciones posteriores suelen ser parciales). n_urbanos,
+          n_rusticos, n_sociedad: filas de cada tabla de inmuebles; n_viviendas_urbanas:
+          urbanos cuya clase es una vivienda; urbanos_equivalentes: suma de la fracción de
+          titularidad; rend_capital_inmobiliario_eur: suma de las rentas cuyo concepto es un
+          alquiler (el formulario no tiene una casilla propia); ejercicio_rentas: año anterior
+          a la declaración; extraccion_ok=false si el OCR no reconoce las tablas o la
+          declaración remite a otra.
+      - name: cong_inmuebles_declarados
+        description: "Una fila por inmueble declarado (tipo urbano/rustico/sociedad, clase, situación, fecha de adquisición, derecho y fracción de titularidad)."
+      - name: cong_rentas_declaradas
+        description: "Una fila por renta declarada (sección del formulario, concepto, importe y si es un alquiler)."
+      - name: cong_aeat_irpf_inmobiliario
+        description: >
+          AEAT, Estadística de los declarantes del IRPF, por tramos de rendimientos e
+          imputaciones (miles de euros): liquidaciones totales y con importe en las partidas
+          102 (ingresos íntegros del capital inmobiliario: inmuebles arrendados o cedidos),
+          155 (rentas imputadas de inmuebles a disposición) y 156 (rendimientos netos
+          reducidos). Territorio de régimen fiscal común (sin País Vasco ni Navarra).

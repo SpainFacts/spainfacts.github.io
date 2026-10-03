@@ -1,0 +1,83 @@
+version: 2
+
+seeds:
+  - name: medios_publicidad_territorial_manual
+    description: >
+      Publicidad institucional y de empresas públicas que solo se publica en PDF o JSON de
+      terceros, con las mismas columnas que raw.pubt_gasto (ingestion/medios_publicidad_territorial.py).
+      (1) Comunitat Valenciana 2019-2024 (cod_ccaa 10): PDF anuales de gvaoberta
+      (https://gvaoberta.gva.es/va/publicidad-y-promocion-institucional), «Desglose de los
+      expedientes de AAAA por departamento, tipo de medio, medio de comunicación e importe
+      sin IVA» (consellerias) y «... por entidades del sector público instrumental ...»
+      (Turisme CV, FGV, CACSA, IVF, Aerocas, Circuit Ricardo Tormo, IVAM, IVC, Palau de les
+      Arts...); extraídos con pdfplumber por coordenadas (scratchpad mpt_gva.py) y sumados
+      por año × entidad × medio × tipo; SIN IVA; los PDF no traen total oficial, así que
+      no se pudo cuadrar (FGV 2024 = 0,37 M€, igual que la suma manual previa). La URL
+      exacta de cada PDF está en scratchpad mpt/gva_links.txt; en fuente va el año, el
+      bloque y la página. (2) País Vasco 2018-2025 (cod_ccaa 16): conjunto de datos
+      https://gobiernovasco.marketing/datos/campañas.json de Jaime Gómez-Obregón (licencia
+      CC BY 4.0, extraído de las memorias anuales de publicidad del Gobierno Vasco que se
+      remiten al Parlamento Vasco, Ley 6/2010; el autor declara ~94 % de fiabilidad):
+      filas por departamento con el coste de sus campañas (cuenta_en_total = true) y filas
+      por medio sumando todas las campañas del año (cuenta_en_total = false); IVA no
+      indicado (los importes casi nunca son múltiplos de 1,21: probablemente sin IVA). Las
+      sociedades públicas vascas (Euskotren, SPRI, Basquetour...) no vienen separadas.
+      (3) Canal de Isabel II 2023-2025 (cod_ccaa 13): cuenta 627 «Publicidad, propaganda y
+      relaciones públicas» de la memoria de sus cuentas anuales individuales
+      (https://www.canaldeisabelsegunda.es/en/informacion-economica; 2025 y 2024 en la pág.
+      104 del PDF de 2025, 2023 en la pág. 101 del de 2024): incluye relaciones públicas y
+      patrocinios, no es solo compra de medios. (4) TMB 2021-2025 (cod_municipio 08019):
+      total anual de «Despeses per inversió publicitària campanyes» de
+      https://transparencia.tmb.cat (tabla en imagen, transcrita a mano). EMT, EMVS y
+      Madrid Destino no van aquí: salen ya del Excel del Ayuntamiento de Madrid en
+      raw.pubt_gasto (unidades con es_empresa_publica = true).
+    config:
+      column_types:
+        cod_ccaa: varchar
+        nivel: varchar
+        cod_municipio: varchar
+        anio: integer
+        organismo_pagador: varchar
+        es_empresa_publica: boolean
+        medio: varchar
+        grupo: varchar
+        tipo_medio: varchar
+        importe_eur: double
+        iva_incluido: boolean
+        base: varchar
+        cuenta_en_total: boolean
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: cod_ccaa
+        description: Código INE de la comunidad (10 C. Valenciana, 13 Madrid, 16 País Vasco, 09 Cataluña para TMB).
+        tests: [not_null]
+      - name: nivel
+        description: "'autonomico' o 'local'."
+        tests:
+          - accepted_values:
+              values: ['autonomico', 'local']
+      - name: cod_municipio
+        description: Código INE del municipio (solo nivel local; TMB se asigna a Barcelona, 08019, aunque sirve al área metropolitana).
+      - name: anio
+        tests: [not_null]
+      - name: organismo_pagador
+        description: Consellerias (agregadas), entidad del sector público instrumental, departamento del Gobierno Vasco o empresa.
+      - name: es_empresa_publica
+        description: true para sociedades y entidades empresariales (FGV, CACSA, IVF, Aerocas, Circuit, SPTCV, VAERSA, EVHA, Canal, TMB); Turisme CV, IVAM, IVC, LABORA o el Palau de les Arts cuentan como administración.
+      - name: medio
+        description: Medio o soporte tal cual en la fuente (nulo en filas de total).
+      - name: tipo_medio
+        description: "Tipo de medio cuando la fuente lo da en la misma línea (C. Valenciana: a menudo vacío porque el PDF lo pone en una celda combinada)."
+      - name: importe_eur
+        description: Euros corrientes.
+      - name: iva_incluido
+        description: false en la C. Valenciana (sin IVA); nulo si la fuente no lo dice.
+      - name: base
+        description: "'ejecutado' o 'contratado' (C. Valenciana: expedientes tramitados)."
+      - name: cuenta_en_total
+        description: true si la fila suma el total anual; false en desgloses por medio que repiten importes ya contados (País Vasco).
+      - name: fuente
+        description: Documento y página de origen de cada fila.
+      - name: nota
+        description: Avisos de IVA, cobertura y método.

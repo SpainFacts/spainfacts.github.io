@@ -4,6 +4,7 @@ description: "Compraventas de viviendas e hipotecas sobre viviendas en España p
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -208,7 +209,7 @@ Importe medio de las hipotecas constituidas sobre viviendas, con y sin inflació
 
 Compraventas de los últimos 12 meses por 1.000 habitantes.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -239,7 +240,7 @@ Compraventas de los últimos 12 meses por 1.000 habitantes.
 
 ## Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

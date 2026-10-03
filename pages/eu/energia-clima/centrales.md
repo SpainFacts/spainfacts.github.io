@@ -1,12 +1,13 @@
 ---
 title: Zentral elektrikoak
 description: "Espainiako zentral elektrikoen mapa: martxan, eraikitzen, izapidetzen eta erretiratuak, teknologiaren, potentziaren eta jabearen arabera."
-i18n_origen: abe822fcd116
+i18n_origen: b7b5b135c238
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -187,7 +188,7 @@ FROM ${filtradas}
 
 <p class="text-sm text-gray-600 dark:text-gray-400">Aukeratutako iragazkiekin: {formatNumber(totales_filtro[0]?.n_centrales, 0)} zentral, {formatNumber(totales_filtro[0]?.gw, 1)} GW guztira.</p>
 
-<BubbleMap
+<MapaEspana
     data={mapa}
     lat=lat
     long=lon

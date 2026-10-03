@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_medios_publicidad
+    description: "Publicidad institucional y comercial de la Administración General del Estado: CSV de la Comisión de Publicidad y Comunicación Institucional (La Moncloa, Ley 29/2005), https://www.lamoncloa.gob.es/serviciosdeprensa/cpci/paginas/planeseinformes.aspx (ingestion/medios_publicidad.py)"
+    schema: raw
+    tables:
+      - name: pub_ejecutado
+        description: "Evolucion_Informes_Publicidad.csv: presupuesto ejecutado (coste total de las campañas: producción/creatividad + compra de medios + evaluación) y nº de campañas por año (2006-) y tipo (institucional, comercial, total), según los Informes anuales. Euros nominales; el informe no dice si llevan IVA (ver schema_medios_publicidad.yml)."
+      - name: pub_planificado
+        description: "Evolucion_Planes_Publicidad.csv: presupuesto planificado y nº de campañas de los Planes anuales (2007-, sin plan en 2016) por tipo (institucional, comercial, total)."
+      - name: pub_medios
+        description: "Invers_herram_*.csv: inversión por herramienta de comunicación (television, radio, medios_graficos, digital, exterior, cine, relaciones_publicas, marketing, otras / resto, total_herramientas) y coste total de campañas (total_campanas). ambito institucional (2006-) o institucional_comercial (2009-, con TV, radio, gráficos, digital y resto)."
+      - name: pub_ministerios
+        description: "Informe_<año>_ministerios.csv: nº de campañas y presupuesto ejecutado por ministerio y tipo (institucional, comercial, total); ministerio 'TOTAL' = fila de total. Solo existe para 2025."

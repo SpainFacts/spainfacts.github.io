@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import EnConstruccion from '../../../../../../src/lib/components/EnConstruccion.svelte';
@@ -329,7 +330,7 @@ El Ministerio compara también en **% de los hogares** (viviendas principales) c
 
 Viviendas públicas en alquiler que se conocen por cada 1.000 habitantes: las de la comunidad (dato completo de 2023) más las de los ayuntamientos de más de 20.000 habitantes que respondieron a la encuesta (dato parcial). Pulsa en una comunidad para ver su ficha.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -377,7 +378,7 @@ Sin contar Ceuta y Melilla, los parques autonómicos en alquiler más grandes po
 
 No existe un recuento oficial del parque autonómico por provincia: las comunidades lo declaran en bloque. Lo que sí se conoce por provincia es el **parque municipal en alquiler que declararon los ayuntamientos de más de 20.000 habitantes** ({cobertura_mun[0]?.respondieron} respondieron en 2023, {cobertura_mun[0]?.dato_2019} repiten su dato de 2019 y {cobertura_mun[0]?.sin_dato} no dieron cifras). El mapa lo muestra por 1.000 habitantes de la provincia; una provincia en blanco puede tener parque autonómico, o municipios que no respondieron.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

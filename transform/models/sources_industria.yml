@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw_industria
+    description: "Industria de España frente a la UE: Eurostat (cuentas nacionales, SBS, IPI, Prodcom, Comext) e INE (IPI, Estadística Estructural de Empresas industriales). Carga ingestion/industria.py (pipeline dlt `industria`)."
+    schema: raw
+    tables:
+      - name: eurostat_industria_vab
+        description: "Eurostat nama_10_a10: VAB (B1G) por rama TOTAL, B-E y C de los 27 y EU27_2020, en PC_TOT, CP_MEUR y CLV10_MEUR, desde 1995."
+      - name: eurostat_industria_empleo
+        description: "Eurostat nama_10_a10_e: ocupados (EMP_DC, miles) por rama TOTAL, B-E y C de los 27 y EU27_2020."
+      - name: eurostat_industria_poblacion
+        description: "Eurostat nama_10_pe: población media anual (POP_NC, miles) de los 27 y EU27_2020."
+      - name: eurostat_industria_sbs
+        description: "Eurostat sbs_ovw_act: cifra de negocios neta (NETTUR_MEUR), valor añadido (AV_MEUR), personas ocupadas (EMP_NR) y pesos en el total manufacturero (AV_MFG_PC, EMP_MFG_PC) por rama NACE, 27 países y EU27_2020, 2021-último."
+      - name: eurostat_industria_ipi
+        description: "Eurostat sts_inpr_a: índice de producción industrial anual (2021=100, corregido de calendario) por rama, 27 países y EU27_2020, desde 2000."
+      - name: eurostat_industria_vab_regional
+        description: "Eurostat nama_10r_3gva: VAB a precios corrientes (millones de euros) por rama TOTAL, B-E y C de las comunidades (NUTS 2) y de España."
+      - name: eurostat_industria_prodcom
+        description: "Eurostat Comext DS-059358 (Prodcom): producción vendida en cantidad y valor de una lista cerrada de productos, por país (27) y agregado EU27_2020 (estimación con los confidenciales), desde 2015."
+      - name: eurostat_industria_comext
+        description: "Eurostat Comext DS-045409: exportaciones por partida HS (euros y 100 kg) al mundo y fuera de la UE, por país (27), desde 2015 (el último año puede ser parcial)."
+      - name: ine_industria_ipi_ccaa
+        description: "INE tabla 70177: IPI base 2021 general y por destino económico, nacional y por comunidad, mensual (índice y tasas)."
+      - name: ine_industria_ipi_divisiones
+        description: "INE tabla 60282: IPI por división CNAE, corregido de estacionalidad y calendario, mensual."
+      - name: ine_industria_eee_ccaa
+        description: "INE tabla 76823: Estadística Estructural de Empresas del sector industrial por comunidad y rama (cifra de negocios, personal ocupado, sueldos, inversión, locales)."

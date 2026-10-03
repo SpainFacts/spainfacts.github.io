@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -234,7 +235,7 @@ ORDER BY s.salario_real DESC
 
 Salario medio mensual bruto en {por_ccaa[0]?.anio}, en euros de {por_ccaa[0]?.anio_euros}. {por_ccaa[0]?.comunidad} encabeza la lista con {formatNumber(por_ccaa[0]?.salario_real, 0)} € y {por_ccaa.slice(-1)[0]?.comunidad} la cierra con {formatNumber(por_ccaa.slice(-1)[0]?.salario_real, 0)} €. Son euros sin corregir por el coste de la vida, que también varía entre comunidades. Ceuta y Melilla no se publican por separado.
 
-<AreaMap
+<MapaEspana
     data={por_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

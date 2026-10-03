@@ -1,10 +1,11 @@
 ---
 title: Preu de l'habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació: valor taxat per metre quadrat per comunitat, província i municipi i l'Índex de Preus d'Habitatge de l'INE, nou i de segona mà."
-i18n_origen: 50400dad918f
+i18n_origen: 058fd706b1df
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -182,7 +183,7 @@ Valor taxat per metre quadrat de la comunitat triada davant d'Espanya, en euros 
 
 El {prov_extremos[0]?.periodo} la província amb el metre quadrat més car és {prov_extremos[0]?.cara} ({formatNumber(prov_extremos[0]?.cara_valor, 0)} €/m²) i la més barata, {prov_extremos[0]?.barata} ({formatNumber(prov_extremos[0]?.barata_valor, 0)} €/m²): a la primera el metre quadrat costa {formatNumber(prov_extremos[0]?.veces, 1)} vegades més. {#if prov_extremos[0]?.en_maximos == 1}Només una província és{:else}{prov_extremos[0]?.en_maximos} províncies són{/if} al seu màxim real des del 2002.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

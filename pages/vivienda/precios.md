@@ -4,6 +4,7 @@ description: "Precio de la vivienda en España descontada la inflación: valor t
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
@@ -181,7 +182,7 @@ Valor tasado por metro cuadrado de la comunidad elegida frente a España, en eur
 
 En {prov_extremos[0]?.periodo} la provincia con el metro cuadrado más caro es {prov_extremos[0]?.cara} ({formatNumber(prov_extremos[0]?.cara_valor, 0)} €/m²) y la más barata, {prov_extremos[0]?.barata} ({formatNumber(prov_extremos[0]?.barata_valor, 0)} €/m²): en la primera el metro cuadrado cuesta {formatNumber(prov_extremos[0]?.veces, 1)} veces más. {#if prov_extremos[0]?.en_maximos == 1}Solo una provincia está{:else}{prov_extremos[0]?.en_maximos} provincias están{/if} en su máximo real desde 2002.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

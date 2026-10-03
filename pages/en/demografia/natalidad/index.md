@@ -1,10 +1,11 @@
 ---
 title: Births and fertility
 description: "Births and deaths per 1,000 inhabitants, children per woman, mothers' mean age and births to foreign mothers in Spain, by region and province since 1975 (INE)."
-i18n_origen: a59927850e3c
+i18n_origen: 07771f420182
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -202,7 +203,7 @@ ORDER BY a.fecundidad DESC
 ```
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"
@@ -222,7 +223,7 @@ ORDER BY a.fecundidad DESC
             {id: 'edad_maternidad', title: "Mother's mean age", fmt: 'num1'}
         ]}
     />
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"
@@ -275,7 +276,7 @@ FROM ${provincias}
 
 In {ultimo[0]?.anio}, {provincias_resumen[0]?.negativas} of the {provincias_resumen[0]?.total} provinces recorded more deaths than births. The birth rate ranges from {formatNumber(provincias_resumen[0]?.max_tasa, 1)} births per 1,000 inhabitants in {provincias_resumen[0]?.max_prov} to {formatNumber(provincias_resumen[0]?.min_tasa, 1)} in {provincias_resumen[0]?.min_prov}.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

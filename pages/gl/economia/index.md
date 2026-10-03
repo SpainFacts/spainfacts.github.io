@@ -1,5 +1,5 @@
 ---
-i18n_origen: a21903b3070d
+i18n_origen: 071a947706ae
 title: Economía
 description: "PIB por habitante, crecemento, comercio exterior, sectores, emprego, salarios, paro e inflación en España, descontada a inflación e en proporción á poboación."
 og:
@@ -245,6 +245,18 @@ Salario medio mensual bruto descontada a inflación. [Crecemento, sectores e dec
     <a href="/gl/economia/empresas" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏢</span> Empresas, emprendemento e I+D</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Empresas por habitante e tamaño, sociedades creadas e disoltas, concursos, autónomos e gasto en I+D fronte a Europa</div>
+    </a>
+    <a href="/gl/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🌾</span> Agricultura, gandaría e pesca</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">A horta de Europa: aceite, cítricos, froitas e hortalizas, porcino, viño e pesca, e o posto de España na UE</div>
+    </a>
+    <a href="/gl/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏭</span> Industria</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Coches, azulexos, alimentación, tren e aeroxeradores: onde destaca España e canta industria ten fronte á UE</div>
+    </a>
+    <a href="/gl/economia/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏗️</span> Construción</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">A burbulla de 2007, o derrubamento e a recuperación: emprego, obra pública licitada, vivendas visadas e cemento fronte á UE</div>
     </a>
 </Grid>
 

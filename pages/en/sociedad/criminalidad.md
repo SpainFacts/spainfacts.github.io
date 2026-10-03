@@ -1,12 +1,13 @@
 ---
 title: Crime
 description: "Recorded crime in Spain by type, region, province and municipality since 2010, the rise of cybercrime and convictions by nationality, with context."
-i18n_origen: 6e6193511077
+i18n_origen: 865a8f911a6a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -200,7 +201,7 @@ JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = b.cod
 WHERE b.nivel = 'provincia' AND b.categoria = 'Total infracciones penales' AND b.anio = (SELECT max(anio) FROM mother.crimen_balance)
 ```
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

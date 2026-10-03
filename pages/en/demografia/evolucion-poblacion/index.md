@@ -1,10 +1,11 @@
 ---
 title: Population trends
 description: "Spain's population since 1971 and its annual growth per 1,000 inhabitants, split into births minus deaths and migration, by region and province (INE)."
-i18n_origen: 40e6678c9212
+i18n_origen: f9535ffb3b9d
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -203,7 +204,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_10} provinces have fewer inhabitants today than ten years ago, and {provincias_resumen[0]?.pierden_2000} fewer than in 2000.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

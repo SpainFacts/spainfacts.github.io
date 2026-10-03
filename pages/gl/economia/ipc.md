@@ -1,10 +1,11 @@
 ---
-i18n_origen: 68f3d36e2f60
+i18n_origen: c732f0a70537
 title: Inflación (IPC)
 description: "Inflación en España: IPC xeral e subxacente, prezos por grupos, prezo real da luz, o gas e os carburantes, canto subiron os prezos desde 2008 e 2019, IPC por comunidade e comparación coa zona euro."
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
@@ -686,7 +687,7 @@ Prezo medio por kWh que paga un fogar de consumo medio con todos os impostos (Eu
 
 Inflación anual de cada comunidade en {ccaa[0]?.mes_txt} e suba acumulada dos prezos desde decembro de 2019. Onde máis subiron os prezos desde entón é en {ccaa_resumen[0]?.cmax} (+{formatNumber(ccaa_resumen[0]?.smax / 0.01, 1)} %) e onde menos en {ccaa_resumen[0]?.cmin} (+{formatNumber(ccaa_resumen[0]?.smin / 0.01, 1)} %). O IPC mide canto cambian os prezos en cada comunidade, non se unha é máis cara ca outra.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

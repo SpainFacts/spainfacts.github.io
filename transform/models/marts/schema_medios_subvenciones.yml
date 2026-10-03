@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: medios_subvenciones_concesiones
+    description: "Una fila por concesión de subvención a medios de comunicación privados (BDNS, convocatorias de la seed medios_subvenciones_convocatorias con incluir = true), 2022-... (la BDNS solo muestra 4 años; la carga merge conserva lo antiguo). importe_eur = importe concedido (ayuda equivalente en préstamos y garantías); importe_eur_real en euros de 2025. nivel/cod_ccaa del concedente según la seed. Personas físicas sin nombre."
+    columns:
+      - name: cod_concesion
+        tests: [unique, not_null]
+      - name: anio
+        tests: [not_null]
+      - name: importe_eur_real
+        tests: [not_null]
+  - name: medios_subvenciones_anual
+    description: "Subvenciones a medios por año de concesión, nivel del concedente (estatal, autonomico, local) y comunidad ('00' = Estado): euros nominales y de 2025, euros reales por habitante del ámbito (España para el Estado, la comunidad para autonómicas y locales), nº de concesiones, de beneficiarios (personas jurídicas distintas + concesiones a personas físicas) y de convocatorias; partido que gobernaba a 1 de julio (estatal o autonómico según el nivel; null en locales) con su color; parcial = último año (incompleto). País Vasco: sin el Gobierno Vasco, que no publica en la BDNS."
+    tests:
+      - unique:
+          column_name: "anio || '-' || nivel || '-' || cod_ccaa"
+    columns:
+      - name: eur_hab_real
+        tests: [not_null]
+  - name: medios_subvenciones_beneficiarios
+    description: "Personas jurídicas beneficiarias de subvenciones a medios: una fila por NIF y año con el importe del año y los totales 2022-... repetidos (nombre más reciente, forma jurídica por la letra del NIF, nº de concesiones y convocatorias, administraciones concedentes, comunidades y tipos de ayuda); rango = puesto por importe real total. Sin personas físicas."
+    tests:
+      - unique:
+          column_name: "nif || '-' || anio"
+  - name: medios_subvenciones_tipo
+    description: "Subvenciones a medios por año y tipo de ayuda (estructural, lengua, digitalizacion_ia, proyectos, otras): euros nominales y de 2025, euros reales por habitante de España, nº de concesiones y convocatorias; parcial = último año."
+    tests:
+      - unique:
+          column_name: "anio || '-' || tipo_ayuda"

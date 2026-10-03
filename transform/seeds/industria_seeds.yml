@@ -1,0 +1,93 @@
+version: 2
+
+seeds:
+  - name: industria_vehiculos_paises
+    description: >
+      Producción de vehículos de motor por país y año (unidades), transcrita a mano.
+      2019 y 2021-2024: OICA, «World motor vehicle production by country/region and type»
+      (PDF By-country-region-2024.pdf, octubre de 2025; OICA no publica 2020 en ese PDF).
+      Solo se transcriben los países necesarios para calcular el puesto de España en Europa y
+      en el mundo (todos los que la superan y los europeos relevantes) y el total mundial
+      (cod_pais = MUNDO). OICA mezcla definiciones: Alemania solo turismos (VDA), Francia solo
+      turismos y comerciales ligeros (CCFA) → ver `cobertura`. España 2024 (dato ANFAC) y 2025:
+      nota de prensa de ANFAC de cierre de 2025. OICA y ANFAC no tienen licencia abierta: se
+      citan pocas cifras y siempre con su fuente (columna `fuente`).
+    config:
+      column_types:
+        anio: integer
+        cod_pais: varchar
+        pais: varchar
+        region: varchar
+        vehiculos: bigint
+        turismos: bigint
+        exportados: bigint
+        cobertura: varchar
+        fuente_dato: varchar
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Año.
+      - name: cod_pais
+        description: Código ISO-2 (UK para Reino Unido); MUNDO para el total mundial de OICA.
+      - name: region
+        description: Región OICA (Europa incluye Turquía y Rusia), o Mundo.
+      - name: vehiculos
+        description: Vehículos de motor producidos (turismos + comerciales + industriales, salvo lo dicho en cobertura).
+      - name: turismos
+        description: Turismos producidos (solo España, ANFAC).
+      - name: exportados
+        description: Vehículos exportados (solo España 2025, ANFAC).
+      - name: cobertura
+        description: Advertencias de definición del dato.
+      - name: fuente_dato
+        description: OICA o ANFAC (para España 2024 hay las dos; el mart usa OICA para comparar).
+      - name: fuente
+        description: Documento, página/tabla y URL de cada fila.
+
+  - name: industria_fabricas_coches
+    description: >
+      Fábricas de vehículos en España con los modelos en producción y adjudicados, según el
+      «Mapa de fábricas con modelos en producción y adjudicados (mayo 2025)» de ANFAC
+      (https://anfac.com/cifras-clave/produccion-y-exportacion/, datos leídos del endpoint
+      público del mapa /wp-json/mapsvg/v1/objects/objects_5 el 2026-10-03). Coordenadas: las del
+      MUNICIPIO en Wikidata (P625, CC0), no las de la planta exacta (ver `nota` en Madrid,
+      Barcelona y Sámano). Sin cifras de empleo: no hay una fuente homogénea y abierta (columna
+      vacía a propósito). Códigos de comunidad y provincia: INE.
+    config:
+      column_types:
+        fabrica: varchar
+        grupo: varchar
+        tipo: varchar
+        municipio: varchar
+        cod_municipio: varchar
+        provincia: varchar
+        cod_provincia: varchar
+        ccaa: varchar
+        cod_ccaa: varchar
+        lat: double
+        lon: double
+        modelos: varchar
+        modelos_adjudicados: varchar
+        modelos_electrificados: integer
+        otras_producciones: varchar
+        empleo: integer
+        nota: varchar
+        fuente: varchar
+        fuente_coordenadas: varchar
+    columns:
+      - name: fabrica
+        description: Nombre de la planta (como en ANFAC, salvo Nissan Cantabria, que ANFAC llama Nissan Santander).
+      - name: tipo
+        description: Qué fabrica (turismos, comerciales, camiones, chasis de autobús, componentes).
+      - name: modelos
+        description: Modelos en producción (mayo 2025), separados por «; ».
+      - name: modelos_adjudicados
+        description: Modelos adjudicados con el año previsto de lanzamiento.
+      - name: modelos_electrificados
+        description: Número de modelos en producción con versión electrificada (eléctrica, PHEV o HEV) según ANFAC.
+      - name: empleo
+        description: Vacío (sin fuente homogénea).
+      - name: fuente
+        description: Fuente de la fila.
+      - name: fuente_coordenadas
+        description: Origen de lat/lon.

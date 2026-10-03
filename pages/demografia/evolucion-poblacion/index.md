@@ -4,6 +4,7 @@ description: "Población de España desde 1971 y su crecimiento anual por 1.000 
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -202,7 +203,7 @@ FROM ${provincias}
 
 {provincias_resumen[0]?.pierden_10} provincias tienen hoy menos habitantes que hace diez años, y {provincias_resumen[0]?.pierden_2000} menos que en 2000.
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

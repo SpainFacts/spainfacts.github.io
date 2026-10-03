@@ -245,6 +245,18 @@ Salario medio mensual bruto descontada la inflación. [Crecimiento, sectores y d
         <div class="font-semibold"><span aria-hidden="true">🏢</span> Empresas, emprendimiento e I+D</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Empresas por habitante y tamaño, sociedades creadas y disueltas, concursos, autónomos y gasto en I+D frente a Europa</div>
     </a>
+    <a href="/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🌾</span> Agricultura, ganadería y pesca</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">La huerta de Europa: aceite, cítricos, frutas y hortalizas, porcino, vino y pesca, y el puesto de España en la UE</div>
+    </a>
+    <a href="/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏭</span> Industria</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Coches, azulejos, alimentación, tren y aerogeneradores: dónde destaca España y cuánta industria tiene frente a la UE</div>
+    </a>
+    <a href="/economia/construccion" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🏗️</span> Construcción</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">La burbuja de 2007, el desplome y la recuperación: empleo, obra pública licitada, viviendas visadas y cemento frente a la UE</div>
+    </a>
 </Grid>
 
 ---

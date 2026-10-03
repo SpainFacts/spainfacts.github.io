@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
@@ -465,7 +466,7 @@ Reparto de los turistas de {paises[0]?.anio_int} por país de residencia y varia
 
 Pernoctaciones en hoteles y apartamentos turísticos por 1.000 habitantes en {ccaa[0]?.anio}. En el conjunto de España fueron {formatNumber(ccaa_espana[0]?.pernoct_1000hab, 0)}; {ccaa[0]?.comunidad} llegó a {formatNumber(ccaa[0]?.pernoct_1000hab, 0)} y {ccaa.slice(-1)[0]?.comunidad} se quedó en {formatNumber(ccaa.slice(-1)[0]?.pernoct_1000hab, 0)}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -532,7 +533,7 @@ El INE cuenta las viviendas anunciadas como alojamiento turístico en las grande
 
 <p class="text-xs text-gray-500">Medición semestral: febrero y agosto hasta 2024, mayo y noviembre desde entonces. Como hay temporada (en verano se anuncian más), conviene comparar cada dato con el del mismo mes de otro año.</p>
 
-<AreaMap
+<MapaEspana
     data={vut_ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

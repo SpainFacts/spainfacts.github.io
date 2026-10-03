@@ -6,6 +6,7 @@ og:
 ---
 
 <script>
+    import MapaEspana from '../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../src/lib/utils.js';
 </script>
@@ -86,7 +87,7 @@ España es un Estado descentralizado: las **comunidades autónomas** gestionan l
 
 ## Mapa de comunidades autónomas
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"

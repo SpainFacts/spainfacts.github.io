@@ -1,10 +1,11 @@
 ---
 title: Lloguer d'habitatge
 description: "Lloguer medià de l'habitatge a Espanya descomptada la inflació, per comunitat, província i municipi, amb les dades de l'IRPF del Sistema Estatal de Referència del Preu del Lloguer i l'índex de l'INE."
-i18n_origen: deee5f4dedc1
+i18n_origen: 15b55dba3f41
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -174,7 +175,7 @@ L'INE publica a més un índex que segueix la renda dels mateixos contractes any
 
 Lloguer medià d'un pis el {ccaa[0]?.anio}, en euros de {espana[0]?.anio_base}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -205,7 +206,7 @@ Lloguer medià d'un pis el {ccaa[0]?.anio}, en euros de {espana[0]?.anio_base}.
 
 ## Per província
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -3,10 +3,11 @@ title: Osasuna
 description: "Bizi-itxaropena Espainian erkidego eta probintziaka, zerk eragiten dituen heriotzak, suizidioak, trafiko-istripuak, gehiegizko hilkortasuna eta osasun-sistema: itxaron-zerrendak, medikuak, erizainak, oheak eta biztanleko gastua EBrekin alderatuta."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 29850a7d6705
+i18n_origen: 997db93797ae
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -158,7 +159,7 @@ WHERE e.nivel = 'provincia' AND e.sexo = 'Ambos sexos'
 ORDER BY e.anios DESC
 ```
 
-<AreaMap
+<MapaEspana
     data={ev_provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

@@ -4,6 +4,7 @@ description: "Alquiler mediano de la vivienda en España descontada la inflació
 ---
 
 <script>
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -173,7 +174,7 @@ El INE publica además un índice que sigue la renta de los mismos contratos añ
 
 Alquiler mediano de un piso en {ccaa[0]?.anio}, en euros de {espana[0]?.anio_base}.
 
-<AreaMap
+<MapaEspana
     data={ccaa}
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
@@ -204,7 +205,7 @@ Alquiler mediano de un piso en {ccaa[0]?.anio}, en euros de {espana[0]?.anio_bas
 
 ## Por provincia
 
-<AreaMap
+<MapaEspana
     data={provincias}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"

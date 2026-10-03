@@ -1,10 +1,11 @@
 ---
 title: Errenta, pobrezia eta desberdintasuna
 description: "Etxeen batez besteko errenta inflazioa kenduta, pobrezia-arriskua, AROPE, gabezia materiala, Gini indizea eta S80/S20 Espainian, erkidegoaren, adinaren eta udalerriaren arabera, eta EBrekiko konparazioa."
-i18n_origen: 9952ace4d46b
+i18n_origen: 9c8ab30724e4
 ---
 
 <script>
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
@@ -292,7 +293,7 @@ FROM ${ccaa}
 Erkidegoen arteko aldeak handiak dira: ECV {ccaa[0]?.anio} inkestan, pobrezia-arriskuaren tasa {formatNumber(ccaa_extremos[0]?.min_pobreza, 1)} %-tik ({ccaa_extremos[0]?.menos_pobreza}) {formatNumber(ccaa_extremos[0]?.max_pobreza, 1)} %-ra ({ccaa_extremos[0]?.mas_pobreza}) bitartekoa zen, eta pertsonako errenta garbia {formatNumber(ccaa_extremos[0]?.min_renta, 0)} €-tik ({ccaa_extremos[0]?.menos_renta}) {formatNumber(ccaa_extremos[0]?.max_renta, 0)} €-ra ({ccaa_extremos[0]?.mas_renta}) bitartekoa. Pobrezia-atalasea bera da Espainia osorako, eskualde bakoitzeko bizi-kostuaren arabera doitu gabe.
 
 <Grid cols=2>
-    <AreaMap
+    <MapaEspana
         data={ccaa}
         geoJsonUrl="/geo/ccaa.geojson"
         geoId="cod_ccaa"
