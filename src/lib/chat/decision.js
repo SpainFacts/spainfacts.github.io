@@ -28,12 +28,13 @@ const normalizar = (s) =>
 
 // Palabras que no identifican un valor: «¿qué comunidad...?» no nombra la Comunidad Valenciana
 const NO_NOMBRAN = new Set(
-	'que cual cuales cuanto cuanta cuantos cuantas como donde cuando quien del las los una unos unas por para con sin sobre entre tiene tienen tenia hay son esta estan este esa ese fue han ha mas menos mayor menor gente personas cada media medio total comunidad comunidades autonoma autonomas autonomia autonomias region regiones provincia provincias municipio municipios ciudad ciudades capital pueblo pueblos pais paises territorio territorios zona espanol espanoles actual actualmente ahora hoy dato datos ultimo ultima ultimos ultimas'.split(
+	'que cual cuales cuanto cuanta cuantos cuantas como donde cuando quien del las los una unos unas por para con sin sobre entre tiene tienen tenia hay son esta estan este esa ese fue han ha mas menos mayor menor gente personas cada media medio total comunidad comunidades autonoma autonomas autonomia autonomias region regiones provincia provincias municipio municipios ciudad ciudades capital pueblo pueblos pais paises territorio territorios zona espanol espanoles actual actualmente ahora hoy dato datos ultimo ultima ultimos ultimas gran grande grandes pequeno pequena marca marcas tipo tipos grupo grupos sector sectores partido partidos ano anos'.split(
 		' '
 	)
 );
 const palabras = (s) => new Set(normalizar(s).split(/[^a-z0-9]+/).filter((p) => p.length > 2 && !NO_NOMBRAN.has(p) && !/^(19|20)\d\d$/.test(p)));
 const id = (c) => `"${String(c).replace(/"/g, '""')}"`;
+const esCodigo = (c) => /^cod(_\w+)?$/.test(c); // columnas de código: en el texto va el nombre, no el código
 const lit = (v) => (typeof v === 'number' ? String(v) : `'${String(v).replace(/'/g, "''")}'`);
 
 // ---------- Intención (sin modelo) ----------
@@ -58,17 +59,23 @@ export function leerIntencion(pregunta) {
 	// Ranking: el sustantivo va detrás del interrogativo («¿qué comunidad...?», «¿cuál es la
 	// provincia...?»); «la Comunidad de Madrid» dentro de la frase es un nombre, no un ranking
 	const ranking =
-		/\b(que|cual|cuales)\s+(es\s+|son\s+)?(el\s+|la\s+|los\s+|las\s+)?(comunidad|comunidades|autonomia|autonomias|region|regiones|provincia|provincias|municipio|municipios|ciudad|ciudades|pais|paises|partido|partidos|marca|marcas|sector|sectores)\b/.test(
+		/\b(que|cual|cuales)\s+(es\s+|son\s+|ha sido\s+|fue\s+)?(el\s+|la\s+|los\s+|las\s+)?(\w+\s+)?(comunidad|comunidades|autonomia|autonomias|region|regiones|provincia|provincias|municipio|municipios|ciudad|ciudades|pais|paises|partido|partidos|marca|marcas|sector|sectores)\b/.test(
 			q
 		) || /\bdonde\b/.test(q);
-	const menos = /\b(menos|menor|menores|minim[oa]s?|peor|peores|mas baj[oa]s?)\b/.test(q) && !/\bmenores de\b/.test(q);
+	// «peor/mejor» no invierten el orden: el peor año de incendios es el de más hectáreas
+	const menos = /\b(menos|menor|menores|minim[oa]s?|mas baj[oa]s?)\b/.test(q) && !/\bmenores de\b/.test(q);
+	// «¿Cuál ha sido el peor año...?», «¿en qué año hubo más...?»: ranking de años, no cambio
+	const rankingAnios = /\b(que|cual|en que)\s+(ha sido\s+|fue\s+|es\s+)?(el\s+)?(\w+\s+)?ano\b/.test(q) || /\b(peor|mejor)\s+ano\b/.test(q);
 	let modo = 'ultimo';
-	if (cambio && anios.length) modo = 'cambio';
+	if (rankingAnios) modo = 'historico';
+	else if (cambio && anios.length) modo = 'cambio';
 	else if (serie) modo = 'evolucion';
 	else if (anios.length && mes >= 0) modo = 'mes';
 	else if (anios.length) modo = 'anio';
 	else if (historico) modo = 'historico';
-	return { anios, mes, modo, nivel, ranking, orden: menos ? 'ASC' : 'DESC' };
+	// «desde 2000» en un ranking de años: solo desde ese año
+	const desde = rankingAnios && /\bdesde\b/.test(q) && anios.length ? Math.min(...anios) : null;
+	return { anios, mes, modo, nivel, ranking, orden: menos ? 'ASC' : 'DESC', desde };
 }
 
 // ---------- Columnas ----------
@@ -124,6 +131,11 @@ const SINONIMOS_VALORES = {
 	jovenes: 'menores 25',
 	juvenil: 'menores 25',
 	extranjeros: 'extranjera',
+	consumo: 'demanda consumo',
+	coches: 'turismo turismos',
+	coche: 'turismo turismos',
+	pisos: 'vivienda viviendas',
+	electrico: 'demanda',
 	espana: 'nacional total espana'
 };
 const TERRITORIO = /andaluc|aragon|asturias|balear|canaria|cantabr|castilla|catalu|valencia|extremad|galicia|madrid|murcia|navarra|vasco|rioja|ceuta|melilla|provincia|municipio|comunidad/;
@@ -160,6 +172,23 @@ function formatoPeriodo(v, col) {
 // Decimales solo donde cuentan: 1.181,73 M€ sí, 49.114.494 habitantes no
 const numero = (v) =>
 	typeof v === 'number' ? new Intl.NumberFormat('es-ES', { maximumFractionDigits: Math.abs(v) >= 100000 ? 0 : 2 }).format(v) : v ?? '—';
+
+/** Unidad deducida del nombre de la columna (solo cuando es inequívoca) */
+function unidadDe(nombre) {
+	const n = `_${nombre.toLowerCase()}_`;
+	if (/_(por_)?(1000|1000hab|mil)_/.test(n)) return ' por cada 1.000 habitantes';
+	if (/_(100k|100000)_/.test(n)) return ' por cada 100.000 habitantes';
+	if (/_meur_/.test(n)) return ' millones de €';
+	if (/_mrd_/.test(n)) return ' mil millones de €';
+	if (/_(eur|euros)_/.test(n)) return ' €';
+	if (/_(pct|porcentaje|cuota)_/.test(n) || (/^_tasa_/.test(n) && !/_(1000|100k)_/.test(n))) return ' %';
+	if (/^_ha_/.test(n)) return ' ha';
+	if (/_mw_/.test(n)) return ' MW';
+	if (/_gwh_/.test(n)) return ' GWh';
+	if (/_twh_/.test(n)) return ' TWh';
+	if (/_mt_/.test(n)) return ' Mt';
+	return '';
+}
 
 const coseno = (a, b) => {
 	let s = 0;
@@ -198,6 +227,29 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		return i;
 	};
 	const contexto = `Pregunta del usuario: ${pregunta}`;
+	// Preguntas al decisor; ctx.idiomaDecision = 'es' para hacerlas en castellano
+	const PREGUNTAS_DECISOR = {
+		en: {
+			tabla: 'Which data table answers the user question?',
+			contiene: 'Does this data table contain the figure the user asks for?',
+			cifra: 'Which column is the figure the user asks for?',
+			lugar: 'Which place does the user ask about?',
+			nivel: 'Which territorial level does the user want to compare?',
+			valor: (c) => `Which value of "${c}" does the user ask about?`
+		},
+		es: {
+			tabla: '¿Qué tabla de datos responde a la pregunta del usuario?',
+			contiene: '¿Contiene esta tabla la cifra que pregunta el usuario?',
+			cifra: '¿Qué columna es la cifra que pregunta el usuario?',
+			lugar: '¿Por qué lugar pregunta el usuario?',
+			nivel: '¿Qué nivel territorial quiere comparar el usuario?',
+			valor: (c) => `¿Qué valor de "${c}" pregunta el usuario?`
+		}
+	};
+	const Q = (clave, extra) => {
+		const p = PREGUNTAS_DECISOR[ctx.idiomaDecision ?? 'en'][clave];
+		return typeof p === 'function' ? p(extra) : p;
+	};
 
 	// 1. Tabla: candidatas de la búsqueda (palabras + significado) y el modelo elige; su
 	//    puesto en la búsqueda cuenta como información previa
@@ -209,14 +261,33 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		const tc = columnaTiempo(t);
 		const periodo = tc?.min !== undefined ? ` Periodo: ${String(tc.min).slice(0, 10)} a ${String(tc.max).slice(0, 10)}.` : '';
 		const cols = t.columnas.map((c) => c.nombre).slice(0, 14).join(', ');
-		return `${t.nombre}: ${t.descripcion.slice(0, 200)}${periodo} Columnas: ${cols}`;
+		// Los títulos de las páginas que la usan dicen el tema en lenguaje llano
+		const pags = [...new Set((t.paginas ?? []).map((p) => p.titulo).filter(Boolean))].slice(0, 3).join(' / ');
+		return `${t.nombre}: ${t.descripcion.slice(0, 200)}${periodo}${pags ? ` Páginas: ${pags}.` : ''} Columnas: ${cols}`;
 	};
-	const iTabla = await elegir(
-		contexto,
-		'Which data table answers the user question?',
-		candidatas.map(describirCandidata),
-		candidatas.map((_, k) => -(ctx.priorBusqueda ?? PRIOR_BUSQUEDA) * k)
-	);
+	// Modo de elegir tabla (ctx.eleccionTabla):
+	//   'lista'   -> el modelo ve las 6 y elige una
+	//   'puntual' -> por cada una, «¿contiene la cifra que se pide? sí/no»; gana la de más «sí»
+	//   'ambos'   -> suma de las log-probabilidades de los dos
+	const modoTabla = ctx.eleccionTabla ?? 'lista';
+	let iTabla;
+	if (modoTabla === 'lista') {
+		iTabla = await elegir(contexto, Q('tabla'), candidatas.map(describirCandidata), candidatas.map((_, k) => -(ctx.priorBusqueda ?? PRIOR_BUSQUEDA) * k));
+	} else {
+		const puntos = [];
+		for (const c of candidatas) {
+			const r = await decidir(`${contexto}\nTabla: ${describirCandidata(c)}`, Q('contiene'), ['yes', 'no']);
+			const pSi = typeof r === 'object' && r.probs ? r.probs[0] : r === 0 ? 1 : 0;
+			puntos.push(Math.log(Math.max(pSi, 1e-9)));
+		}
+		if (modoTabla === 'ambos') {
+			const r = await decidir(contexto, Q('tabla'), candidatas.map(describirCandidata));
+			if (typeof r === 'object' && r.probs) r.probs.forEach((p, k) => (puntos[k] += Math.log(Math.max(p, 1e-9))));
+		}
+		iTabla = puntos.indexOf(Math.max(...puntos));
+		decisiones.push({ pregunta: `${Q('tabla')} (${modoTabla})`, opciones: candidatas.map((c) => c.nombre), eleccion: candidatas[iTabla].nombre });
+		alPaso?.({ herramienta: 'decidir', entrada: { pregunta: Q('tabla'), eleccion: candidatas[iTabla].nombre } });
+	}
 	const t = candidatas[iTabla];
 	const ctxTabla = `${contexto}\nTabla: ${t.nombre}. ${t.descripcion}`;
 	const nombres = new Set(t.columnas.map((c) => c.nombre));
@@ -241,11 +312,18 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const medida =
 		porPalabras[0].l >= 1 && porPalabras[0].l - (porPalabras[1]?.l ?? 0) >= 1
 			? porPalabras[0].c
-			: ordenMedidas[await elegir(ctxTabla, 'Which column is the figure the user asks for?', ordenMedidas.map((x) => etiqueta(x.c)))].c;
+			: ordenMedidas[await elegir(ctxTabla, Q('cifra'), ordenMedidas.map((x) => etiqueta(x.c)))].c;
 
 	// 3. Periodo: lo dice la pregunta (años, mes, «desde», «evolución», «récord»)
 	const tcol = columnaTiempo(t);
 	const modo = tcol ? intencion.modo : 'ultimo';
+	// Flujos (se suman: matriculaciones de un año, solicitudes de todas las nacionalidades)
+	// frente a niveles, tasas y precios (no se suman nunca)
+	const esFlujo =
+		/^(matricul|solicitud|llegad|nacimiento|defuncion|venta|compraventa|turistas|pernoct|delito|infraccion|constituid|disuelt|hipoteca|incendio|n_incendio|ha_|hectarea|personas|visitantes|viajeros|pasajeros|condenad|votos|exportacion|importacion)/.test(
+			medida.nombre
+		) && !/(tasa|pct|porcentaje|media|medio|indice|precio|por_|_hab|1000|100k|interanual|var_|_real_hab)/.test(medida.nombre);
+	const sumarEntre = []; // columnas sin total cuyo desglose se suma
 
 	// 4. Territorio. Tres formas de guardarlo en las tablas:
 	//   a) nivel + nombre/territorio            (vivienda_precio_tasado...)
@@ -273,7 +351,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		if (intencion.nivel && empatados.some((p) => p.nivel === intencion.nivel)) empatados = empatados.filter((p) => p.nivel === intencion.nivel);
 		empatados = empatados.slice(0, MAX_OPCIONES);
 		if (empatados.length === 1) return empatados[0];
-		const i = await elegir(ctxTabla, 'Which place does the user ask about?', empatados.map((c) => `${c.nombre} (${NIVEL[c.nivel] ?? c.nivel})`));
+		const i = await elegir(ctxTabla, Q('lugar'), empatados.map((c) => `${c.nombre} (${NIVEL[c.nivel] ?? c.nivel})`));
 		return empatados[i];
 	}
 
@@ -281,7 +359,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	async function nivelAComparar(niveles) {
 		const opciones = niveles.filter((n) => n !== 'pais');
 		if (intencion.nivel && opciones.includes(intencion.nivel)) return intencion.nivel;
-		return opciones[await elegir(ctxTabla, 'Which territorial level does the user want to compare?', opciones.map((v) => NIVEL[v] ?? v))];
+		return opciones[await elegir(ctxTabla, Q('nivel'), opciones.map((v) => NIVEL[v] ?? v))];
 	}
 
 	if (nombres.has('nivel')) {
@@ -315,17 +393,27 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 				unirTerritorios = { col: 'cod', nivel: null };
 			}
 		}
-	} else if (nombres.has('cod_ccaa') && t.codigos?.ccaa) {
-		usadas.add('cod_ccaa');
-		const pares = paresDe(t.codigos.ccaa);
-		for (const [cod, nombre] of pares) codigoANombre.set(cod, nombre);
-		const hay00 = t.columnas.find((c) => c.nombre === 'cod_ccaa').valores?.includes('00');
-		const elegido = await territorioNombrado(pares.map(([cod, nombre]) => ({ nivel: 'ccaa', nombre, filtro: ['cod_ccaa', cod] })));
+	} else if (t.codigos) {
+		// Columnas de código sin nombre (cod_ccaa, cod_prov, cod): se traducen con la lista del
+		// INE. La más fina que nombre la pregunta filtra; si no se nombra ninguna, España (00)
+		// o, en un ranking, se compara al nivel que pida la pregunta.
+		const columnas = t.codigos.columnas ?? (nombres.has('cod_ccaa') ? { cod_ccaa: 'ccaa' } : {});
+		const entradas = Object.entries(columnas).filter(([c]) => nombres.has(c));
+		for (const [c] of entradas) usadas.add(c);
+		const candidatos = entradas.flatMap(([c, nivel]) => paresDe(t.codigos[nivel]).map(([cod, nombre]) => ({ nivel, nombre, filtro: [c, cod] })));
+		for (const k of candidatos) codigoANombre.set(k.filtro[1], k.nombre);
+		const elegido = await territorioNombrado(candidatos);
 		if (elegido) filtros.push(elegido.filtro);
-		else if (hay00 && !intencion.ranking) filtros.push(['cod_ccaa', '00']);
 		else {
-			comparar.push('cod_ccaa');
-			unirTerritorios = { col: 'cod_ccaa', nivel: 'ccaa' };
+			const nivelRanking = intencion.nivel && entradas.some(([, n]) => n === intencion.nivel) ? intencion.nivel : entradas[0]?.[1];
+			const [colRanking] = entradas.find(([, n]) => n === nivelRanking) ?? [];
+			for (const [c] of entradas) {
+				const hay00 = t.columnas.find((x) => x.nombre === c)?.valores?.includes('00');
+				if (intencion.ranking && c === colRanking) {
+					comparar.push(c);
+					unirTerritorios = { col: c, nivel: nivelRanking };
+				} else if (hay00) filtros.push([c, '00']);
+			}
 		}
 	}
 
@@ -367,6 +455,11 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		const { valores, muchos } = await valoresPosibles(c);
 		// Con todos los valores a la vista, uno solo es que no hay nada que elegir; con una
 		// búsqueda (muchos valores), uno solo es justo el nombrado
+		// Muchos valores y ninguno nombrado: en un ranking («¿qué marca...?») se compara entre todos
+		if (muchos && !valores.length) {
+			if (intencion.ranking) comparar.push(c.nombre);
+			continue;
+		}
 		if (!valores.length || (valores.length === 1 && !muchos)) continue;
 		// Texto libre (notas largas) o copias en minúsculas de otra columna (slugs): fuera
 		if (valores.reduce((s, v) => s + v.length, 0) / valores.length > 80) continue;
@@ -378,9 +471,11 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 
 		if (!nombrados.length) {
 			// No nombra ningún valor: el total (o lo nacional) salvo que pida un ranking; sin
-			// total, se compara entre todos (si no son miles)
+			// total, si la cifra es un flujo (solicitudes, llegadas...) se suma entre todos; si
+			// no, se compara entre todos (si no son miles)
 			const porDefecto = total ?? nacional;
 			if (porDefecto && !intencion.ranking) filtros.push([c.nombre, porDefecto]);
+			else if (!porDefecto && !intencion.ranking && esFlujo) sumarEntre.push(c.nombre);
 			else if (!muchos || intencion.ranking) {
 				comparar.push(c.nombre);
 				if (total) totalesFuera.push([c.nombre, total]); // en un ranking, la fila Total sobra
@@ -394,7 +489,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		}
 		// Varios valores parecidos: el modelo elige entre ellos
 		const opciones = nombrados.slice(0, MAX_OPCIONES).map((x) => x.v);
-		filtros.push([c.nombre, opciones[await elegir(ctxTabla, `Which value of "${c.nombre}" does the user ask about?`, opciones)]]);
+		filtros.push([c.nombre, opciones[await elegir(ctxTabla, Q('valor', c.nombre), opciones)]]);
 	}
 
 	// ---------- Traductor determinista ----------
@@ -402,14 +497,17 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	// periodo (t1) usan las mismas, y nada queda ambiguo al cruzar con territorios
 	const col = (a, c) => `${a}.${id(c)}`;
 	const condiciones = [...filtros.map(([c, v]) => (a) => `${col(a, c)} = ${lit(v)}`), (a) => `${col(a, medida.nombre)} IS NOT NULL`];
-	if (unirTerritorios?.col === 'cod_ccaa') condiciones.push((a) => `${col(a, 'cod_ccaa')} <> '00'`); // al comparar, fuera España
+	if (unirTerritorios?.nivel) condiciones.push((a) => `${col(a, unirTerritorios.col)} <> '00'`); // al comparar, fuera España
 	for (const [c, v] of totalesFuera) condiciones.push((a) => `${col(a, c)} <> ${lit(v)}`);
 	// Tablas anuales: el año en curso está incompleto (suma unos meses) y parecería una caída;
 	// no cuenta como «último dato» salvo que se pida ese año
 	const anioActual = new Date(ctx.catalogo.generado ?? Date.now()).getUTCFullYear();
 	const anual = tcol && /^(anio|año|ano|year|ejercicio)$/i.test(tcol.nombre);
+	// Solo si la tabla marca que el año está a medias (columnas meses*, es_anio_actual): un
+	// dato «a 1 de enero» del año en curso está completo
+	const marcaParcial = t.columnas.some((c) => /^(meses\w*|n_meses|es_anio_actual|parcial|es_parcial)$/i.test(c.nombre));
 	let anioIncompleto = false;
-	if (anual && Number(tcol.max) >= anioActual && !intencion.anios.includes(anioActual) && modo !== 'evolucion') {
+	if (anual && marcaParcial && Number(tcol.max) >= anioActual && !intencion.anios.includes(anioActual) && modo !== 'evolucion') {
 		condiciones.push((a) => `${col(a, tcol.nombre)} < ${anioActual}`);
 		anioIncompleto = true;
 	}
@@ -433,18 +531,28 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 
 	const donde = condiciones.map((f) => f('t0'));
 	let periodos = null; // en modo cambio: [inicial, final]
+	// Un flujo en una tabla mensual o trimestral y se pide un año: se suma el año entero
+	const sumaAnual = esFlujo && modo === 'anio' && tcol && !anual;
+	// Y si se comparan dos años («en 2025 que en 2019»), se suma cada año entero
+	const cambioAnual = esFlujo && modo === 'cambio' && tcol && !anual && /DATE|TIMESTAMP/i.test(tcol.tipo);
+	const agregar = sumaAnual || cambioAnual || sumarEntre.length > 0;
+	// Expresión del periodo en la consulta agregada: el año si se suma por años
+	const exprTiempo = tcol ? (cambioAnual ? `year(${col('t0', tcol.nombre)})` : col('t0', tcol.nombre)) : null;
 	if (tcol) {
 		if (modo === 'ultimo') donde.push(`${col('t0', tcol.nombre)} = ${ultimoPeriodo()}`);
+		else if (sumaAnual) donde.push(enAnio('t0', intencion.anios[0]));
 		else if (modo === 'anio') donde.push(`${col('t0', tcol.nombre)} = ${ultimoPeriodo((a) => enAnio(a, intencion.anios[0]))}`);
 		else if (modo === 'mes') donde.push(`${col('t0', tcol.nombre)} = ${ultimoPeriodo((a) => enAnio(a, intencion.anios[0], intencion.mes))}`);
 		else if (modo === 'cambio') {
 			// «desde 2019» -> 2019 frente al último; «en 2024 que en 2008» -> 2008 frente a 2024
 			const [a, b] = [...new Set(intencion.anios)].sort();
-			periodos = [ultimoPeriodo((x) => enAnio(x, a)), b ? ultimoPeriodo((x) => enAnio(x, b)) : ultimoPeriodo()];
-			donde.push(`${col('t0', tcol.nombre)} IN (${periodos.join(', ')})`);
-		}
+			if (cambioAnual) donde.push(`${exprTiempo} IN (${a}, ${b ?? anioActual - 1})`); // años enteros; sin segundo año, el último completo
+			else {
+				periodos = [ultimoPeriodo((x) => enAnio(x, a)), b ? ultimoPeriodo((x) => enAnio(x, b)) : ultimoPeriodo()];
+				donde.push(`${col('t0', tcol.nombre)} IN (${periodos.join(', ')})`);
+			}
+		} else if (modo === 'historico' && intencion.desde) donde.push(anual ? `${col('t0', tcol.nombre)} >= ${intencion.desde}` : `year(${col('t0', tcol.nombre)}) >= ${intencion.desde}`);
 	}
-	const seleccion = [...new Set([...(tcol ? [tcol.nombre] : []), ...comparar, medida.nombre])].map((c) => col('t0', c));
 	const nombreCod = unirTerritorios ? ', ter.nombre AS territorio' : '';
 	const unir = unirTerritorios
 		? ` LEFT JOIN mother.territorios AS ter ON ter.nivel = ${unirTerritorios.nivel ? lit(unirTerritorios.nivel) : 't0.nivel'} AND ter.cod = t0.${id(unirTerritorios.col)}`
@@ -455,7 +563,28 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	else if (comparar.length || modo === 'historico') ordenSQL = `ORDER BY ${col('t0', medida.nombre)} ${intencion.orden}`;
 	if (modo === 'evolucion') limite = 400;
 	if (modo === 'historico' && !comparar.length) limite = 1;
-	const sql = `SELECT ${seleccion.join(', ')}${nombreCod} FROM ${t.tabla} AS t0${unir} WHERE ${donde.join(' AND ')} ${ordenSQL} LIMIT ${limite}`;
+	let sql;
+	if (agregar) {
+		// Suma por grupo (lo que se compara); el periodo se conserva (el año pedido o el último)
+		const grupo = [...(tcol && !sumaAnual ? [exprTiempo] : []), ...comparar.map((c) => col('t0', c))];
+		const sel = [
+			...(sumaAnual ? [`${intencion.anios[0]} AS ${id(tcol.nombre)}`] : []),
+			...grupo.map((g) => (g === exprTiempo && cambioAnual ? `${g} AS ${id(tcol.nombre)}` : g)),
+			...(unirTerritorios ? ['ter.nombre AS territorio'] : []),
+			`sum(${col('t0', medida.nombre)}) AS ${id(medida.nombre)}`
+		];
+		const agrupar = [...grupo, ...(unirTerritorios ? ['ter.nombre'] : [])];
+		const ordenAgregado =
+			(modo === 'cambio' || modo === 'evolucion') && tcol && !sumaAnual
+				? `ORDER BY ${exprTiempo}`
+				: comparar.length
+					? `ORDER BY ${id(medida.nombre)} ${intencion.orden}`
+					: '';
+		sql = `SELECT ${sel.join(', ')} FROM ${t.tabla} AS t0${unir} WHERE ${donde.join(' AND ')}${agrupar.length ? ` GROUP BY ${agrupar.join(', ')}` : ''} ${ordenAgregado} LIMIT ${limite}`;
+	} else {
+		const seleccion = [...new Set([...(tcol ? [tcol.nombre] : []), ...comparar, medida.nombre])].map((c) => col('t0', c));
+		sql = `SELECT ${seleccion.join(', ')}${nombreCod} FROM ${t.tabla} AS t0${unir} WHERE ${donde.join(' AND ')} ${ordenSQL} LIMIT ${limite}`;
+	}
 
 	alPaso?.({ herramienta: 'consultar_sql', entrada: { sql } });
 	const filas = await ctx.consultar(sql);
@@ -466,12 +595,13 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const nombreMedida = medida.descripcion || medida.nombre.replace(/_/g, ' ');
 	if (!filas.length) return { texto: `No hay datos para esa combinación en ${t.tabla}. ${fuente}`, sql, filas, decisiones };
 
-	const quien = (f) => [f.territorio, ...comparar.filter((c) => !['cod', 'cod_ccaa'].includes(c)).map((c) => f[c])].filter(Boolean).join(', ');
-	const describirFila = (f) => `${quien(f) ? `${quien(f)}: ` : ''}${numero(f[medida.nombre])}`;
+	const quien = (f) => [f.territorio, ...comparar.filter((c) => !esCodigo(c)).map((c) => f[c])].filter(Boolean).join(', ');
+	const unidad = unidadDe(medida.nombre);
+	const describirFila = (f) => `${quien(f) ? `${quien(f)}: ` : ''}${numero(f[medida.nombre])}${unidad}`;
 	// Lo que se ha filtrado, en palabras: el nombre del territorio en vez de su código
 	const filtroTexto = filtros
 		.filter(([c]) => c !== 'nivel')
-		.map(([c, v]) => (c === 'cod' || c === 'cod_ccaa' ? codigoANombre.get(v) : v))
+		.map(([c, v]) => (esCodigo(c) ? codigoANombre.get(v) : v))
 		.filter((v) => v && !ES_TOTAL.test(String(v)))
 		.join(', ');
 	const conFiltro = filtroTexto ? ` (${filtroTexto})` : '';
@@ -493,16 +623,17 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 				const [i, f] = [fs[0], fs.at(-1)];
 				const dif = f[medida.nombre] - i[medida.nombre];
 				const pct = i[medida.nombre] ? ` (${dif >= 0 ? '+' : ''}${numero((dif / Math.abs(i[medida.nombre])) * 100)} %)` : '';
-				return { g, dif, texto: `${g ? `${g}: ` : ''}de ${numero(i[medida.nombre])} en ${per(i)} a ${numero(f[medida.nombre])} en ${per(f)}, ${dif >= 0 ? '+' : ''}${numero(dif)}${pct}` };
+				return { g, dif, texto: `${g ? `${g}: ` : ''}de ${numero(i[medida.nombre])}${unidad} en ${per(i)} a ${numero(f[medida.nombre])}${unidad} en ${per(f)}, ${dif >= 0 ? "+" : ""}${numero(dif)}${unidad}${pct}` };
 			})
 			.sort((a, b) => (intencion.orden === 'ASC' ? a.dif - b.dif : b.dif - a.dif));
+		// Sin el periodo inicial (la cifra ya es un cambio, como «subida desde 2019»): el dato final
 		texto = lineas.length
 			? `${nombreMedida}${conFiltro}: ${lineas.length === 1 ? lineas[0].texto : `\n${lineas.slice(0, 5).map((l) => `- ${l.texto}`).join('\n')}`}.`
-			: `${nombreMedida}${conFiltro}: solo hay dato de uno de los dos periodos (${filas.map(per).join(', ')}).`;
+			: `${nombreMedida}${conFiltro}: ${describirFila(filas.at(-1))}${per(filas.at(-1)) ? `, ${per(filas.at(-1))}` : ''}.`;
 	} else if (modo === 'evolucion' && tcol) {
 		const ultima = filas.at(-1);
-		texto = `${nombreMedida}${conFiltro}: de ${numero(filas[0][medida.nombre])} en ${per(filas[0])} a ${numero(ultima[medida.nombre])} en ${per(ultima)}.`;
-		grafico = { tipo: 'linea', x: tcol.nombre, y: medida.nombre, serie: comparar.find((c) => !['cod', 'cod_ccaa'].includes(c)) ?? (unirTerritorios ? 'territorio' : ''), titulo: nombreMedida, filas, sql };
+		texto = `${nombreMedida}${conFiltro}: de ${numero(filas[0][medida.nombre])}${unidad} en ${per(filas[0])} a ${numero(ultima[medida.nombre])}${unidad} en ${per(ultima)}.`;
+		grafico = { tipo: 'linea', x: tcol.nombre, y: medida.nombre, serie: comparar.find((c) => !esCodigo(c)) ?? (unirTerritorios ? 'territorio' : ''), titulo: nombreMedida, filas, sql };
 	} else if (filas.length === 1) {
 		texto = `${nombreMedida}${conFiltro}: ${describirFila(filas[0])}${per(filas[0]) ? `, ${per(filas[0])}` : ''}.`;
 	} else {

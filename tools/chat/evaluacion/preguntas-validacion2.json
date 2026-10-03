@@ -1,0 +1,994 @@
+[
+	{
+		"id": "v01",
+		"pregunta": "¿Cuánta gente más entra a vivir en España de la que se va al extranjero?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.inmigracion_flujos_anuales"
+		],
+		"sql_oro": "SELECT anio, inmigraciones, emigraciones, saldo, saldo_1000 FROM mother.inmigracion_flujos_anuales ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 626268,
+			"unidad": "personas (saldo migratorio exterior)",
+			"periodo": "2024",
+			"territorio": "España",
+			"detalle": "1.288.562 inmigraciones y 662.294 emigraciones; 12,9 por 1.000 hab."
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"626.268",
+					"626268",
+					"626.000",
+					"626 000",
+					"626 mil",
+					"0,63 millones",
+					"12,9 por",
+					"12,89"
+				]
+			],
+			"textos": [
+				[
+					"2024"
+				]
+			],
+			"alternativas": "Saldo migratorio exterior 2024 (INE EMCR): +626.268 (12,9 por 1.000 hab.). 2023 fue +642.296."
+		}
+	},
+	{
+		"id": "v02",
+		"pregunta": "¿Cuántos autónomos hay ahora mismo en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.empresas_autonomos"
+		],
+		"sql_oro": "SELECT periodo, ocupados, cuenta_propia, empleadores, independientes, pct_cuenta_propia FROM mother.empresas_autonomos WHERE cod='00' ORDER BY fecha DESC LIMIT 1",
+		"respuesta": {
+			"valor": 3183.4,
+			"unidad": "miles de ocupados por cuenta propia (EPA)",
+			"periodo": "2º trimestre de 2026",
+			"territorio": "España",
+			"detalle": "14,0 % de los ocupados; 933.100 empleadores y 2.150.600 independientes sin asalariados"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"3.183.400",
+					"3183400",
+					"3.183,4",
+					"3183,4",
+					"3,18 millones",
+					"3,2 millones",
+					"2.150.600",
+					"2150600",
+					"2,15 millones",
+					"2.150,6"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "EPA 2026-T2: 3.183.400 ocupados por cuenta propia (14 % del empleo). Vale también si da solo los independientes sin asalariados (2.150.600). Los afiliados al RETA de la Seguridad Social serían otra cifra (no es esta tabla)."
+		}
+	},
+	{
+		"id": "v03",
+		"pregunta": "¿Cuántos coches hay por cada mil habitantes en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.movilidad_parque_resumen"
+		],
+		"sql_oro": "SELECT mes, turismos, poblacion, turismos_1000 FROM mother.movilidad_parque_resumen ORDER BY mes DESC LIMIT 1",
+		"respuesta": {
+			"valor": 560.43,
+			"unidad": "turismos por 1.000 habitantes",
+			"periodo": "septiembre de 2026",
+			"territorio": "España",
+			"detalle": "27.525.380 turismos en el parque"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"560,4",
+					"560,43",
+					"560 turismos",
+					"560 coches",
+					"560 por"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Parque DGT de septiembre de 2026: 560,4 turismos por 1.000 hab. (27,5 millones). Agosto: 559,3."
+		}
+	},
+	{
+		"id": "v04",
+		"pregunta": "¿Qué porcentaje de los jóvenes menores de 25 años está en paro?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.mercado_paro_ue"
+		],
+		"sql_oro": "SELECT mes, tasa_paro, tasa_paro_menor25 FROM mother.mercado_paro_ue WHERE geo='ES' ORDER BY mes DESC LIMIT 1",
+		"respuesta": {
+			"valor": 22.7,
+			"unidad": "% (tasa de paro desestacionalizada, menores de 25)",
+			"periodo": "agosto de 2026",
+			"territorio": "España",
+			"detalle": "Paro general: 10,0 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"22,7",
+					"22,8"
+				]
+			],
+			"textos": [
+				[
+					"agosto",
+					"2026"
+				]
+			],
+			"alternativas": "Eurostat une_rt_m, agosto de 2026: 22,7 % (julio 22,8 %)."
+		}
+	},
+	{
+		"id": "v05",
+		"pregunta": "¿A cuánto se está pagando al agricultor el kilo de aceite de oliva virgen extra?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.primario_aceite_precios"
+		],
+		"sql_oro": "SELECT mes, categoria, eur_kg, eur_kg_real FROM mother.primario_aceite_precios WHERE geo='ES' AND categoria='Virgen extra' ORDER BY mes DESC LIMIT 1",
+		"respuesta": {
+			"valor": 3.5035,
+			"unidad": "€/kg en origen",
+			"periodo": "septiembre de 2026",
+			"territorio": "España",
+			"detalle": "Agosto de 2026: 3,59 €/kg"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"3,50",
+					"3,5 €",
+					"3,5 euros",
+					"3,59",
+					"3,6 €",
+					"3,6 euros"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Precio en origen (Agri-food data portal), septiembre de 2026: 3,50 €/kg; agosto 3,59 €/kg (último mes con valor real)."
+		}
+	},
+	{
+		"id": "v06",
+		"pregunta": "¿A cuántos ayuntamientos les está reteniendo Hacienda el dinero de la participación en los tributos del Estado?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.transparencia_pie_mensual"
+		],
+		"sql_oro": "SELECT periodo, count(DISTINCT cod_mun) AS ayuntamientos, sum(importe_eur) AS importe FROM mother.transparencia_pie_mensual WHERE periodo=(SELECT max(periodo) FROM mother.transparencia_pie_mensual) GROUP BY periodo",
+		"respuesta": {
+			"valor": 285,
+			"unidad": "ayuntamientos con retención",
+			"periodo": "septiembre de 2026",
+			"territorio": "España",
+			"detalle": "Importe retenido ese mes: 8.279.414 €; agosto: 324 ayuntamientos"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"285"
+				]
+			],
+			"textos": [
+				[
+					"septiembre",
+					"2026"
+				]
+			],
+			"alternativas": "Septiembre de 2026: 285 ayuntamientos (todos por no remitir la liquidación), 8,28 millones € retenidos ese mes."
+		}
+	},
+	{
+		"id": "v07",
+		"pregunta": "¿Cuántos años de sueldo íntegro hacen falta para comprarse un piso de 90 metros?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.vivienda_esfuerzo"
+		],
+		"sql_oro": "SELECT anio, precio_90m2, salario_anual, anios_salario FROM mother.vivienda_esfuerzo WHERE nivel='pais' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 6.71,
+			"unidad": "años de salario bruto medio",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "90 m² a 2.127,6 €/m² = 191.482 €; salario medio 28.519 €"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"6,7",
+					"6,71"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "Valor tasado 2025 y salario ETCL: 6,7 años (2024: 6,2)."
+		}
+	},
+	{
+		"id": "v08",
+		"pregunta": "¿Cuánta potencia de placas solares fotovoltaicas hay instalada en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.energia_potencia_instalada"
+		],
+		"sql_oro": "SELECT \"año\", tecnologia, potencia_mw, porcentaje_total FROM mother.energia_potencia_instalada WHERE tecnologia='Solar Fotovoltaica' ORDER BY \"año\" DESC LIMIT 1",
+		"respuesta": {
+			"valor": 35823,
+			"unidad": "MW",
+			"periodo": "cierre de 2024",
+			"territorio": "España",
+			"detalle": "26,35 % de la potencia total; primera tecnología del parque"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"35.823",
+					"35823",
+					"35,8 gw",
+					"35,8 gigavatios",
+					"35,82 gw",
+					"36 gw",
+					"35.8 gw"
+				]
+			],
+			"textos": [
+				[
+					"2024"
+				]
+			],
+			"alternativas": "Potencia instalada a cierre de 2024: 35.823 MW (26,35 % del total). Otras tablas (centrales GEM) usan otro criterio y pueden dar otra cifra: revisar a mano si cita otra fuente."
+		}
+	},
+	{
+		"id": "v09",
+		"pregunta": "¿Cuánto subieron los precios de la comida en marzo de 2023?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.mercado_ipc_grupos"
+		],
+		"sql_oro": "SELECT mes, grupo_corto, var_anual, var_mensual FROM mother.mercado_ipc_grupos WHERE grupo_corto='Alimentos' AND mes='2023-03-01'",
+		"respuesta": {
+			"valor": 16.5,
+			"unidad": "% interanual (alimentos y bebidas no alcohólicas)",
+			"periodo": "marzo de 2023",
+			"territorio": "España",
+			"detalle": "IPC general 3,3 %; mensual alimentos +1,1 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"16,5"
+				]
+			],
+			"textos": [],
+			"alternativas": "IPC marzo de 2023, alimentos y bebidas no alcohólicas: +16,5 % interanual."
+		}
+	},
+	{
+		"id": "v10",
+		"pregunta": "¿Cuántos viajeros usaron el metro en España en 2024?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.movilidad_transporte_modos"
+		],
+		"sql_oro": "SELECT year(mes) AS anio, sum(viajeros) AS viajeros FROM mother.movilidad_transporte_modos WHERE clave='metro' AND year(mes)=2024 GROUP BY 1",
+		"respuesta": {
+			"valor": 1418406000,
+			"unidad": "viajeros",
+			"periodo": "2024",
+			"territorio": "España"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.418.406.000",
+					"1418406000",
+					"1.418 millones",
+					"1418 millones",
+					"1.418,4 millones",
+					"1418,4 millones",
+					"1,42 mil millones",
+					"1,4 mil millones"
+				]
+			],
+			"textos": [],
+			"alternativas": "INE 20239, metro 2024: 1.418,4 millones de viajeros."
+		}
+	},
+	{
+		"id": "v11",
+		"pregunta": "¿Cuántos extranjeros consiguieron la nacionalidad española en 2023?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.inmigracion_nacionalizaciones"
+		],
+		"sql_oro": "SELECT anio, nacionalizaciones, por_1000_extranjeros FROM mother.inmigracion_nacionalizaciones WHERE cod='00' AND nacionalidad_previa='Total' AND anio=2023",
+		"respuesta": {
+			"valor": 240208,
+			"unidad": "adquisiciones de nacionalidad",
+			"periodo": "2023",
+			"territorio": "España",
+			"detalle": "39,4 por 1.000 extranjeros residentes"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"240.208",
+					"240208",
+					"240.000",
+					"240 mil"
+				]
+			],
+			"textos": [],
+			"alternativas": "INE 70012, 2023: 240.208 (39,4 por 1.000 extranjeros)."
+		}
+	},
+	{
+		"id": "v12",
+		"pregunta": "¿Cuántos reales decretos-ley aprobó el Gobierno en 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.gobierno_actos_anual",
+			"mother.gobierno_decretos_ley"
+		],
+		"sql_oro": "SELECT anio, rdl, leyes, indultos, presidente FROM mother.gobierno_actos_anual WHERE anio=2025",
+		"respuesta": {
+			"valor": 17,
+			"unidad": "reales decretos-ley",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "Frente a 13 leyes ese año; presidente Pedro Sánchez"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					" 17 ",
+					"17 reales",
+					"17 decretos",
+					"17 rdl",
+					"17 real",
+					"(17)",
+					": 17",
+					"17."
+				]
+			],
+			"textos": [],
+			"alternativas": "17 decretos-ley en 2025 (13 leyes, 12 indultos). gobierno_decretos_ley da el mismo recuento."
+		}
+	},
+	{
+		"id": "v13",
+		"pregunta": "¿Cuánto aceite de oliva se produjo en España en la campaña 2024/25?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.primario_aceite"
+		],
+		"sql_oro": "SELECT campania, produccion_miles_t, estimado, cuota_ue_pct, cuota_mundo_pct FROM mother.primario_aceite WHERE grupo='España' AND campania='2024/25'",
+		"respuesta": {
+			"valor": 1421.1,
+			"unidad": "miles de toneladas",
+			"periodo": "campaña 2024/25",
+			"territorio": "España",
+			"detalle": "66 % de la UE y 39,8 % del mundo"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.421.100",
+					"1421100",
+					"1.421,1",
+					"1421,1",
+					"1,42 millones",
+					"1,4 millones",
+					"1.421 miles",
+					"1421 miles",
+					"1.421 mil",
+					"1421 mil"
+				]
+			],
+			"textos": [],
+			"alternativas": "Agri-food data portal, campaña 2024/25: 1.421,1 miles de t (66,0 % de la UE)."
+		}
+	},
+	{
+		"id": "v14",
+		"pregunta": "¿Cuánta electricidad produjeron las centrales hidráulicas de bombeo en julio de 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.almacenamiento_mensual"
+		],
+		"sql_oro": "SELECT mes, bombeo_turbinado_gwh, bombeo_consumido_gwh FROM mother.almacenamiento_mensual WHERE mes='2025-07-01'",
+		"respuesta": {
+			"valor": 534.74,
+			"unidad": "GWh turbinados",
+			"periodo": "julio de 2025",
+			"territorio": "España",
+			"detalle": "Baterías: 0,85 GWh entregados"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"534,7",
+					"534,74",
+					"535 gwh",
+					"534 gwh",
+					"0,53 twh",
+					"534.742",
+					"534742"
+				]
+			],
+			"textos": [],
+			"alternativas": "Balance REE, julio de 2025: 534,7 GWh turbinados por bombeo."
+		}
+	},
+	{
+		"id": "v15",
+		"pregunta": "¿Cuál es la provincia más rica de España en renta por persona?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.renta_territorios"
+		],
+		"sql_oro": "SELECT anio, nombre, renta_persona, renta_persona_real FROM mother.renta_territorios WHERE nivel='provincia' AND anio=(SELECT max(anio) FROM mother.renta_territorios) ORDER BY renta_persona DESC LIMIT 1",
+		"respuesta": {
+			"valor": 19616,
+			"unidad": "€ netos por persona y año (nominal)",
+			"periodo": "2023",
+			"territorio": "España",
+			"etiqueta": "Gipuzkoa",
+			"detalle": "20.699 € en euros de 2025; le siguen Bizkaia (18.738) y Madrid (18.142)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"19.616",
+					"19616",
+					"20.699",
+					"20699"
+				]
+			],
+			"textos": [
+				[
+					"gipuzkoa",
+					"guipuzcoa"
+				]
+			],
+			"alternativas": "ADRH 2023: Gipuzkoa 19.616 € nominales (20.699 € de 2025)."
+		}
+	},
+	{
+		"id": "v16",
+		"pregunta": "¿Qué comunidad recibe más turistas extranjeros en proporción a su población?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.turismo_ccaa"
+		],
+		"sql_oro": "SELECT anio, comunidad, turistas, turistas_por_hab, pernoct_1000hab FROM mother.turismo_ccaa WHERE anio=2025 AND cod_ccaa<>'00' ORDER BY turistas_por_hab DESC LIMIT 1",
+		"respuesta": {
+			"valor": 12.7,
+			"unidad": "turistas internacionales por habitante",
+			"periodo": "2025",
+			"territorio": "España",
+			"etiqueta": "Illes Balears",
+			"detalle": "15.717.968 turistas; Canarias 6,98 por habitante"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"12,7",
+					"15.717.968",
+					"15717968",
+					"15,7 millones",
+					"57.664",
+					"57664"
+				]
+			],
+			"textos": [
+				[
+					"balears",
+					"baleares"
+				]
+			],
+			"alternativas": "FRONTUR 2025: Baleares 12,7 turistas por habitante (15,7 millones). También vale por pernoctaciones por 1.000 hab. (57.664). En total absoluto ganaría Cataluña (20 millones): no es lo que se pregunta."
+		}
+	},
+	{
+		"id": "v17",
+		"pregunta": "¿En qué provincia sale más caro alquilar un piso?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.vivienda_alquiler"
+		],
+		"sql_oro": "SELECT anio, nombre, alquiler_mes_mediana, alquiler_mes_mediana_real, alquiler_m2_mediana FROM mother.vivienda_alquiler WHERE nivel='provincia' AND tipologia='Colectiva' AND anio=(SELECT max(anio) FROM mother.vivienda_alquiler) ORDER BY alquiler_mes_mediana DESC LIMIT 1",
+		"respuesta": {
+			"valor": 800,
+			"unidad": "€/mes (alquiler mediano, vivienda colectiva)",
+			"periodo": "2024",
+			"territorio": "España",
+			"etiqueta": "Madrid",
+			"detalle": "821 € en euros de 2025; 12,12 €/m²; le sigue Barcelona (753 €)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"800",
+					"821",
+					"12,1"
+				]
+			],
+			"textos": [
+				[
+					"madrid"
+				]
+			],
+			"alternativas": "SERPAVI 2024: Madrid 800 €/mes (821 € de 2025), también primera en €/m² (12,12)."
+		}
+	},
+	{
+		"id": "v18",
+		"pregunta": "¿Qué puesto ocupa España en Europa como fabricante de coches?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.industria_vehiculos"
+		],
+		"sql_oro": "SELECT anio, pais, vehiculos, puesto_europa, puesto_mundo FROM mother.industria_vehiculos WHERE pais='España' AND puesto_europa IS NOT NULL ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 2,
+			"unidad": "puesto en Europa",
+			"periodo": "2024",
+			"territorio": "España",
+			"etiqueta": "segundo, tras Alemania",
+			"detalle": "2.376.504 vehículos en 2024; 9.º del mundo"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2.376.504",
+					"2376504",
+					"2,38 millones",
+					"2,4 millones",
+					"2,37 millones"
+				]
+			],
+			"textos": [
+				[
+					"segund",
+					"2.º",
+					"2º",
+					"numero 2",
+					"n.º 2"
+				]
+			],
+			"alternativas": "OICA 2024: España 2.ª de Europa (tras Alemania) y 9.ª del mundo, 2.376.504 vehículos. ANFAC 2025: 2.274.026 vehículos."
+		}
+	},
+	{
+		"id": "v19",
+		"pregunta": "¿Cuál es el país más desigual de la Unión Europea según el índice de Gini?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.renta_ue"
+		],
+		"sql_oro": "SELECT anio, pais, valor FROM mother.renta_ue WHERE indicador='gini' AND es_ue AND anio=(SELECT max(anio) FROM mother.renta_ue WHERE indicador='gini') ORDER BY valor DESC LIMIT 1",
+		"respuesta": {
+			"valor": 37.7,
+			"unidad": "índice de Gini",
+			"periodo": "2025",
+			"territorio": "UE-27",
+			"etiqueta": "Bulgaria",
+			"detalle": "España 30,8; UE-27 29,2"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"37,7"
+				]
+			],
+			"textos": [
+				[
+					"bulgaria"
+				]
+			],
+			"alternativas": "EU-SILC 2025: Bulgaria 37,7 (Letonia 35,6, Lituania 35,5)."
+		}
+	},
+	{
+		"id": "v20",
+		"pregunta": "¿Qué comunidad autónoma dedica una mayor parte de su PIB a investigación y desarrollo?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.empresas_id_ccaa"
+		],
+		"sql_oro": "SELECT i.anio, t.nombre, i.pct_pib, i.eur_hab_real FROM mother.empresas_id_ccaa i JOIN mother.territorios t ON t.nivel='ccaa' AND t.cod=i.cod WHERE i.sector='Total' AND i.anio=(SELECT max(anio) FROM mother.empresas_id_ccaa WHERE sector='Total' AND pct_pib IS NOT NULL) ORDER BY i.pct_pib DESC LIMIT 1",
+		"respuesta": {
+			"valor": 2.34,
+			"unidad": "% del PIB en I+D",
+			"periodo": "2024",
+			"territorio": "España",
+			"etiqueta": "Comunidad Foral de Navarra",
+			"detalle": "País Vasco 2,30 %; Madrid 2,18 %; España 1,50 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2,34"
+				]
+			],
+			"textos": [
+				[
+					"navarra"
+				]
+			],
+			"alternativas": "Eurostat 2024: Navarra 2,34 % del PIB. Si responde por euros por habitante, la primera sería Madrid (1.012 € reales): no es lo que se pregunta."
+		}
+	},
+	{
+		"id": "v21",
+		"pregunta": "¿A cuánto está el metro cuadrado de vivienda en Málaga capital?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.vivienda_precio_municipios"
+		],
+		"sql_oro": "SELECT anio, trimestres, municipio, euros_m2, euros_m2_real FROM mother.vivienda_precio_municipios WHERE municipio='Málaga' ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 3281.91,
+			"unidad": "€/m² (valor tasado medio, nominal)",
+			"periodo": "2026 (dos primeros trimestres)",
+			"territorio": "Málaga",
+			"detalle": "2025 completo: 3.022,6 €/m² nominal (3.021,1 € reales)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"3.282",
+					"3282",
+					"3.281,9",
+					"3281,9",
+					"3.206",
+					"3206",
+					"3.023",
+					"3023",
+					"3.022,6",
+					"3022,6",
+					"3.021",
+					"3021"
+				]
+			],
+			"textos": [
+				[
+					"2026",
+					"2025"
+				]
+			],
+			"alternativas": "MIVAU: media de 2026 (2 trimestres) 3.282 €/m² (3.206 € reales); 2025 completo 3.023 €/m². Ambos válidos."
+		}
+	},
+	{
+		"id": "v22",
+		"pregunta": "¿Cuántos turismos hay matriculados en Getafe?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.movilidad_parque_municipio"
+		],
+		"sql_oro": "SELECT mes, cod_mun, turismos, bev, phev, sin_distintivo FROM mother.movilidad_parque_municipio WHERE cod_mun='28065'",
+		"respuesta": {
+			"valor": 92546,
+			"unidad": "turismos en el parque",
+			"periodo": "septiembre de 2026",
+			"territorio": "Getafe",
+			"detalle": "2.154 eléctricos puros y 11.336 sin distintivo ambiental"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"92.546",
+					"92546",
+					"92.500",
+					"92,5 mil"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Parque DGT de septiembre de 2026 (cod_mun 28065): 92.546 turismos."
+		}
+	},
+	{
+		"id": "v23",
+		"pregunta": "¿Cuántos pisos turísticos hay en Marbella?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.turismo_viviendas_municipios"
+		],
+		"sql_oro": "SELECT periodo, municipio, viviendas, plazas, pct_viviendas, viviendas_1000hab FROM mother.turismo_viviendas_municipios WHERE municipio='Marbella' ORDER BY periodo DESC LIMIT 1",
+		"respuesta": {
+			"valor": 6987,
+			"unidad": "viviendas de uso turístico",
+			"periodo": "mayo de 2026",
+			"territorio": "Marbella",
+			"detalle": "36.435 plazas; 6,97 % de las viviendas; 43,7 por 1.000 hab. En noviembre de 2025 eran 7.914"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"6.987",
+					"6987"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "INE (medición experimental), mayo de 2026: 6.987 viviendas turísticas (7.914 en noviembre de 2025)."
+		}
+	},
+	{
+		"id": "v24",
+		"pregunta": "¿La Junta de Andalucía cerró 2025 con déficit o con superávit?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.ccaa_saldo"
+		],
+		"sql_oro": "SELECT anio, ccaa, saldo_eur, saldo_pct_pib FROM mother.ccaa_saldo WHERE ccaa='Andalucía' AND anio=2025",
+		"respuesta": {
+			"valor": 315000000,
+			"unidad": "€ de capacidad de financiación (superávit)",
+			"periodo": "2025",
+			"territorio": "Andalucía",
+			"detalle": "+0,14 % del PIB regional; en 2024 +1.158 millones (+0,54 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"315 millones",
+					"315.000.000",
+					"315000000",
+					"0,14",
+					"0,3 mil millones",
+					"315 m"
+				]
+			],
+			"textos": [
+				[
+					"superavit"
+				]
+			],
+			"alternativas": "Banco de España (PDE) 2025: superávit de 315 millones € (+0,14 % del PIB)."
+		}
+	},
+	{
+		"id": "v25",
+		"pregunta": "¿Cuánto deben los ayuntamientos y demás entidades locales de la provincia de Zaragoza?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.local_deuda_provincia"
+		],
+		"sql_oro": "SELECT anio, cod_prov, deuda_eur, deuda_ayuntamientos_eur, deuda_diputaciones_eur, deuda_resto_eell_eur FROM mother.local_deuda_provincia WHERE cod_prov='50' ORDER BY anio DESC LIMIT 1",
+		"respuesta": {
+			"valor": 564162746.97,
+			"unidad": "€ de deuda viva",
+			"periodo": "31 de diciembre de 2025",
+			"territorio": "Zaragoza (provincia)",
+			"detalle": "Ayuntamientos 563,37 millones; diputación 0,30 millones; resto de EELL 0,49 millones"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"564,2 millones",
+					"564 millones",
+					"564,16 millones",
+					"564.162.747",
+					"564162747",
+					"563,4 millones",
+					"563 millones",
+					"563,37 millones",
+					"563.373.248",
+					"563373248"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "Hacienda/CIR a 31/12/2025: 564,2 millones € en total (563,4 millones de los ayuntamientos). 2024: 595,7 millones."
+		}
+	},
+	{
+		"id": "v26",
+		"pregunta": "¿Cuánto se ha encarecido la vivienda desde 2015?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.vivienda_ipv"
+		],
+		"sql_oro": "SELECT anio, trimestre, indice, indice_real, indice-100 AS subida_nominal, indice_real-100 AS subida_real FROM mother.vivienda_ipv WHERE nivel='pais' AND tipo='General' ORDER BY fecha DESC LIMIT 1",
+		"respuesta": {
+			"valor": 86.75,
+			"unidad": "% de subida (nominal, IPV base 2015 = 100)",
+			"periodo": "2015-4.º trimestre de 2025",
+			"territorio": "España",
+			"detalle": "Índice 100 en 2015 y 186,75 en 2025-T4 (145,9 en términos reales: +45,9 %). Media anual 2025: 179,9 (+79,9 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"86,75",
+					"86,8",
+					"87 %",
+					"87%",
+					"45,9",
+					"46 %",
+					"46%",
+					"79,9",
+					"80 %",
+					"80%"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la subida. Nominal +86,75 % (IPV 2025-T4); real +45,9 %; media anual 2025 frente a 2015 +79,9 %. Todas válidas."
+		}
+	},
+	{
+		"id": "v27",
+		"pregunta": "¿Cuántos afiliados más tiene la Seguridad Social que antes de la pandemia, en 2019?",
+		"tipo": "comparacion",
+		"tablas_oro": [
+			"mother.pensiones_afiliados_regimen"
+		],
+		"sql_oro": "SELECT max(afiliados) FILTER (WHERE anio=2025) - max(afiliados) FILTER (WHERE anio=2019) AS diferencia, max(afiliados) FILTER (WHERE anio=2019) AS a2019, max(afiliados) FILTER (WHERE anio=2025) AS a2025 FROM mother.pensiones_afiliados_regimen WHERE regimen='Total'",
+		"respuesta": {
+			"valor": 2357376,
+			"unidad": "afiliados medios más",
+			"periodo": "2019-2025",
+			"territorio": "España",
+			"detalle": "19.277.818 de media en 2019 y 21.635.194 en 2025 (+12,2 %). Con la media de enero-agosto de 2026 (22.111.210) serían +2.833.392"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2.357.376",
+					"2357376",
+					"2,36 millones",
+					"2,4 millones",
+					"2,35 millones",
+					"12,2 %",
+					"12,2%",
+					"2.833.392",
+					"2833392",
+					"2,83 millones",
+					"2,8 millones"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la diferencia. 2025 (último año completo) frente a 2019: +2,36 millones (+12,2 %). Si usa 2026 parcial: +2,83 millones, también válido."
+		}
+	},
+	{
+		"id": "v28",
+		"pregunta": "¿Cuánto han caído las emisiones de CO2 de la generación de electricidad desde 2005?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.clima_emisiones_sectores"
+		],
+		"sql_oro": "SELECT max(mt_co2eq) FILTER (WHERE anio=2005) AS mt2005, max(mt_co2eq) FILTER (WHERE anio=2024) AS mt2024, max(mt_co2eq) FILTER (WHERE anio=2005) - max(mt_co2eq) FILTER (WHERE anio=2024) AS caida, (max(mt_co2eq) FILTER (WHERE anio=2024) / max(mt_co2eq) FILTER (WHERE anio=2005) - 1) * 100 AS pct FROM mother.clima_emisiones_sectores WHERE sector='Generación Eléctrica'",
+		"respuesta": {
+			"valor": 85.585,
+			"unidad": "Mt CO2eq menos (caída)",
+			"periodo": "2005-2024",
+			"territorio": "España",
+			"detalle": "111,9 Mt en 2005 y 26,3 Mt en 2024 (-76,5 %). Avance provisional 2025: 27,7 Mt (-84,1 Mt, -75,2 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"85,6",
+					"85,59",
+					"76,5",
+					"76 %",
+					"76%",
+					"77 %",
+					"77%",
+					"84,1",
+					"84,15",
+					"75,2",
+					"75 %",
+					"75%"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la caída. 2005→2024 (último dato definitivo): -85,6 Mt (-76,5 %). Con el avance 2025: -84,1 Mt (-75,2 %). Por habitante: de 2.563 a 538 kg."
+		}
+	},
+	{
+		"id": "v29",
+		"pregunta": "¿Cuántos estudiantes universitarios más hay ahora que en el curso 2014-15?",
+		"tipo": "comparacion",
+		"tablas_oro": [
+			"mother.educacion_matriculados"
+		],
+		"sql_oro": "SELECT max(alumnos) FILTER (WHERE curso='2023-24') - max(alumnos) FILTER (WHERE curso='2014-15') AS diferencia, max(alumnos) FILTER (WHERE curso='2014-15') AS a1415, max(alumnos) FILTER (WHERE curso='2023-24') AS a2324 FROM mother.educacion_matriculados WHERE nivel='Universidad y otros estudios superiores'",
+		"respuesta": {
+			"valor": 233807,
+			"unidad": "alumnos más (universidad y otros estudios superiores)",
+			"periodo": "curso 2014-15 a 2023-24",
+			"territorio": "España",
+			"detalle": "1.591.568 en 2014-15 y 1.825.375 en 2023-24 (+14,7 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"233.807",
+					"233807",
+					"233.800",
+					"234.000",
+					"234 mil",
+					"14,7 %",
+					"14,7%",
+					"0,23 millones"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la diferencia, +233.807 (+14,7 %). Incluye FP superior según la clasificación de Eurostat (CINE 5-8)."
+		}
+	},
+	{
+		"id": "v30",
+		"pregunta": "¿Cuántos viajeros más usaron el AVE en 2025 que en 2019?",
+		"tipo": "comparacion",
+		"tablas_oro": [
+			"mother.movilidad_transporte_modos"
+		],
+		"sql_oro": "SELECT sum(viajeros) FILTER (WHERE year(mes)=2025) - sum(viajeros) FILTER (WHERE year(mes)=2019) AS diferencia, sum(viajeros) FILTER (WHERE year(mes)=2019) AS v2019, sum(viajeros) FILTER (WHERE year(mes)=2025) AS v2025 FROM mother.movilidad_transporte_modos WHERE clave='alta_velocidad'",
+		"respuesta": {
+			"valor": 21415000,
+			"unidad": "viajeros más de alta velocidad",
+			"periodo": "2019-2025",
+			"territorio": "España",
+			"detalle": "22.370.000 en 2019 y 43.785.000 en 2025 (+95,7 %, casi el doble)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"21.415.000",
+					"21415000",
+					"21,4 millones",
+					"21,42 millones",
+					"95,7",
+					"96 %",
+					"96%"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la diferencia, +21,4 millones (+95,7 %). INE 20239, ferrocarril de alta velocidad."
+		}
+	}
+]

@@ -165,13 +165,27 @@ if (fs.existsSync(refTerritorios)) {
 				provincia: lista('provincia'),
 				nota: `cod son códigos del INE: con nivel = 'ccaa', de comunidad; con nivel = 'provincia', de provincia. Para los nombres: JOIN mother.territorios USING (nivel, cod).`
 			};
-		} else if (cols.has('cod_ccaa') && !cols.has('ccaa') && !cols.has('ccaa_nombre') && !cols.has('nombre')) {
-			const cc = t.columnas.find((c) => c.nombre === 'cod_ccaa');
-			const nacional = cc.valores?.includes('00') ? ` El código 00 es el total de España.` : '';
-			t.codigos = {
-				ccaa: lista('ccaa'),
-				nota: `cod_ccaa son códigos de comunidad del INE.${nacional}`
-			};
+		} else if (!cols.has('nivel')) {
+			// Columnas de código sin nombre al lado: cod_ccaa, cod_prov, o un cod con valores de
+			// comunidad (00-19). columnas = { columna: nivel } para que el chat los traduzca
+			const codigosCcaa = new Set(ref.filter((r) => r.nivel === 'ccaa').map((r) => r.cod).concat('00'));
+			const columnas = {};
+			const conNombre = ['ccaa', 'ccaa_nombre', 'nombre', 'comunidad', 'territorio'].some((n) => cols.has(n));
+			if (cols.has('cod_ccaa') && !conNombre) columnas.cod_ccaa = 'ccaa';
+			if (cols.has('cod_prov') && !['provincia', 'nombre_provincia', 'nombre'].some((n) => cols.has(n))) columnas.cod_prov = 'provincia';
+			const cod = t.columnas.find((c) => c.nombre === 'cod');
+			if (cod && !conNombre && cod.valores?.length && cod.valores.every((v) => codigosCcaa.has(v))) columnas.cod = 'ccaa';
+			if (Object.keys(columnas).length) {
+				const con00 = Object.keys(columnas).filter((c) => t.columnas.find((x) => x.nombre === c)?.valores?.includes('00'));
+				t.codigos = {
+					ccaa: lista('ccaa'),
+					provincia: lista('provincia'),
+					columnas,
+					nota: `${Object.entries(columnas)
+						.map(([c, n]) => `${c} son códigos de ${n === 'ccaa' ? 'comunidad' : 'provincia'} del INE`)
+						.join('; ')}.${con00.length ? ` El código 00 es el total de España.` : ''}`
+				};
+			}
 		}
 	}
 }

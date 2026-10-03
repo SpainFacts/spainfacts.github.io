@@ -1,0 +1,1019 @@
+[
+	{
+		"id": "w01",
+		"pregunta": "¿Cuánto CO2 se suelta por cada kilovatio hora de luz que se produce en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.clima_electricidad_anual"
+		],
+		"sql_oro": "SELECT anio, g_co2_kwh, emisiones_mt, cuota_libre_emisiones_pct FROM mother.clima_electricidad_anual ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 108.4,
+			"unidad": "g CO2eq por kWh generado",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "Emisiones del sistema eléctrico: 29,5 Mt CO2eq; 74,5 % de generación libre de emisiones. 2024: 103,1 g/kWh"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"108,4",
+					"108 g",
+					"108 gramos",
+					"0,108 kg",
+					"0,108 kilos"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "REE REData, 2025: 108,4 g CO2eq/kWh (último año completo). 2024 fue 103,1 g/kWh."
+		}
+	},
+	{
+		"id": "w02",
+		"pregunta": "¿Qué porcentaje de los niños está en riesgo de pobreza o exclusión social?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.renta_ecv_edad"
+		],
+		"sql_oro": "SELECT anio, anio_renta, edad, arope, tasa_pobreza, carencia_severa FROM mother.renta_ecv_edad WHERE edad IN ('Menos de 18 años','Menores de 16 años','Total') ORDER BY anio DESC LIMIT 3",
+		"respuesta": {
+			"valor": 33.8,
+			"unidad": "% de menores de 18 años en riesgo de pobreza o exclusión (AROPE)",
+			"periodo": "ECV 2025 (rentas de 2024)",
+			"territorio": "España",
+			"detalle": "Menores de 16: 33,9 %. Tasa de riesgo de pobreza (sin exclusión) de los menores de 18: 28,4 %. Total población: 25,7 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"33,8",
+					"33,9",
+					"34 %",
+					"34%",
+					"28,4",
+					"28,5"
+				]
+			],
+			"textos": [
+				[
+					"2025",
+					"2024"
+				]
+			],
+			"alternativas": "ECV 2025: AROPE menores de 18 = 33,8 % (menores de 16 = 33,9 %). Se admite también la tasa de riesgo de pobreza (28,4 % / 28,5 %) si la presenta como la de los niños."
+		}
+	},
+	{
+		"id": "w03",
+		"pregunta": "¿Cuánto paga un hogar español por cada kWh de electricidad, con impuestos?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.mercado_energia_hogares"
+		],
+		"sql_oro": "SELECT semestre, pais, eur_kwh, eur_kwh_real FROM mother.mercado_energia_hogares WHERE energia='Electricidad' AND geo IN ('ES','EU27_2020') ORDER BY semestre_inicio DESC LIMIT 4",
+		"respuesta": {
+			"valor": 0.2669,
+			"unidad": "€/kWh con impuestos (banda DC, nominal)",
+			"periodo": "2.º semestre de 2025",
+			"territorio": "España",
+			"detalle": "UE-27: 0,2896 €/kWh. 1.er semestre de 2025: 0,2612 €/kWh"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"0,2669",
+					"0,267",
+					"26,7 c",
+					"26,69",
+					"0,27 €",
+					"0,27 euros",
+					"27 céntimos",
+					"0,265",
+					"0,2653"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "Eurostat nrg_pc_204, 2025-S2: 0,2669 €/kWh (0,2653 en euros reales). Vale también 0,27 €/kWh con unidad."
+		}
+	},
+	{
+		"id": "w04",
+		"pregunta": "¿Desde qué año no tiene España unos Presupuestos Generales del Estado nuevos?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.gobierno_presupuestos"
+		],
+		"sql_oro": "SELECT ejercicio, situacion, ley, fecha_publicacion, dias_prorroga FROM mother.gobierno_presupuestos ORDER BY ejercicio DESC LIMIT 4",
+		"respuesta": {
+			"valor": 2023,
+			"unidad": "último ejercicio con Ley de PGE aprobada",
+			"periodo": "2023 (prorrogados 2024, 2025 y 2026)",
+			"territorio": "España",
+			"detalle": "Ley 31/2022, de 23 de diciembre, de PGE para 2023, publicada el 24-12-2022. 2024 y 2025 prorrogados todo el año; 2026 prorrogado en curso"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2023",
+					"31/2022"
+				]
+			],
+			"textos": [],
+			"alternativas": "Los últimos PGE aprobados son los de 2023 (Ley 31/2022). Desde 2024 se prorrogan. La cifra exigida es el año 2023 o la ley 31/2022."
+		}
+	},
+	{
+		"id": "w05",
+		"pregunta": "¿Qué porcentaje de los diputados del Congreso cobra rentas por alquilar inmuebles?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.diputados_inmuebles_resumen"
+		],
+		"sql_oro": "SELECT definicion, n_cumplen, pct, n_validos, ejercicio_rentas FROM mother.diputados_inmuebles_resumen WHERE definicion_id='alquila'",
+		"respuesta": {
+			"valor": 16.1,
+			"unidad": "% de diputados válidos que declaran rentas por alquiler",
+			"periodo": "declaraciones 2023-2026 (rentas de 2022)",
+			"territorio": "Congreso de los Diputados",
+			"detalle": "56 de 347 diputados con declaración válida (350 en total, 3 excluidos)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"16,1",
+					"16 %",
+					"16%",
+					"56 diputados",
+					"56 de 347",
+					"56 de los"
+				]
+			],
+			"textos": [],
+			"alternativas": "Declaraciones de bienes de la XV legislatura: 56 de 347 diputados (16,1 %) declaran rentas por alquiler. El 35,4 % declara 2 o más viviendas (otra definición)."
+		}
+	},
+	{
+		"id": "w06",
+		"pregunta": "¿A qué ritmo está creciendo la economía española ahora mismo?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.economia_pib_trimestral"
+		],
+		"sql_oro": "SELECT anio, trim, interanual, real_meur, por_habitante_real FROM mother.economia_pib_trimestral WHERE componente='B1GQ' ORDER BY trimestre DESC LIMIT 2",
+		"respuesta": {
+			"valor": 2.6,
+			"unidad": "% de crecimiento interanual del PIB real",
+			"periodo": "2.º trimestre de 2026",
+			"territorio": "España",
+			"detalle": "PIB real 432.342 M€ en el trimestre (euros de 2025); 1.er trimestre de 2026 también +2,6 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2,6 %",
+					"2,6%",
+					"2,6 por ciento",
+					"2,6 puntos",
+					"un 2,6"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Eurostat namq_10_gdp: +2,6 % interanual en 2026-T2 (igual que en 2026-T1)."
+		}
+	},
+	{
+		"id": "w07",
+		"pregunta": "¿Cuál es la tasa de paro de los extranjeros en España?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.mercado_paro_grupos"
+		],
+		"sql_oro": "SELECT trimestre, grupo, tasa_paro FROM mother.mercado_paro_grupos WHERE dimension='Nacionalidad' ORDER BY trimestre DESC LIMIT 4",
+		"respuesta": {
+			"valor": 14.27,
+			"unidad": "% de paro de la población extranjera (EPA)",
+			"periodo": "2.º trimestre de 2026",
+			"territorio": "España",
+			"detalle": "Españoles: 8,95 %; extranjeros de la UE: 8,27 %; de fuera de la UE: 16,35 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"14,27",
+					"14,3",
+					"16,35",
+					"16,4"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "EPA 2026-T2: 14,27 % para el total de extranjeros. Vale 16,35 % si responde por los extranjeros de fuera de la UE."
+		}
+	},
+	{
+		"id": "w08",
+		"pregunta": "¿Cuántas enfermeras hay en España por cada 100.000 habitantes?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.sanidad_recursos"
+		],
+		"sql_oro": "SELECT anio, pais, por_100k, por_1000, numero FROM mother.sanidad_recursos WHERE recurso='enfermeras' AND geo IN ('ES','UE') ORDER BY anio DESC LIMIT 4",
+		"respuesta": {
+			"valor": 573.31,
+			"unidad": "enfermeras ejerciendo por 100.000 hab.",
+			"periodo": "2024",
+			"territorio": "España",
+			"detalle": "280.200 enfermeras; media UE-27: 804,5 por 100.000. 2023: 587,8"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"573,3",
+					"573,31",
+					"573 enfermeras",
+					"573 por",
+					"5,73",
+					"5,7 por cada mil",
+					"5,7 por mil",
+					"280.200",
+					"280200"
+				]
+			],
+			"textos": [
+				[
+					"2024"
+				]
+			],
+			"alternativas": "Eurostat hlth_rs_prs2, 2024: 573,3 enfermeras por 100.000 hab. (5,73 por 1.000; 280.200), frente a 804,5 de media UE."
+		}
+	},
+	{
+		"id": "w09",
+		"pregunta": "¿Cuánto paro hay entre la gente con carrera universitaria?",
+		"tipo": "actual",
+		"tablas_oro": [
+			"mother.mercado_paro_formacion"
+		],
+		"sql_oro": "SELECT anio, nivel_corto, tasa_paro FROM mother.mercado_paro_formacion WHERE sexo='Ambos sexos' AND nivel_corto IN ('Estudios superiores','Total') ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 6.36,
+			"unidad": "% de paro de las personas con educación superior (media anual EPA)",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "Paro total: 10,5 %; con primaria: 20,2 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"6,36",
+					"6,4 %",
+					"6,4%",
+					"6,4 por ciento"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "EPA media de 2025: 6,36 % para educación superior, frente al 10,5 % general."
+		}
+	},
+	{
+		"id": "w10",
+		"pregunta": "¿Cuántos indultos aprobó el Gobierno en 2021?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.gobierno_indultos_mensual"
+		],
+		"sql_oro": "SELECT anio, sum(indultos) AS indultos FROM mother.gobierno_indultos_mensual WHERE anio=2021 GROUP BY anio",
+		"respuesta": {
+			"valor": 50,
+			"unidad": "reales decretos de indulto",
+			"periodo": "2021",
+			"territorio": "España",
+			"detalle": "Todos con Pedro Sánchez de presidente; incluye los indultos del procés de junio"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"50 indultos",
+					"50 reales decretos",
+					"50 decretos",
+					"cincuenta",
+					"50 en 2021",
+					"un total de 50",
+					"fueron 50",
+					"aprobó 50",
+					"concedió 50"
+				]
+			],
+			"textos": [
+				[
+					"2021"
+				]
+			],
+			"alternativas": "BOE: 50 reales decretos de indulto en 2021."
+		}
+	},
+	{
+		"id": "w11",
+		"pregunta": "¿Cuánta gente fue condenada por los tribunales en España en 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.crimen_condenados"
+		],
+		"sql_oro": "SELECT anio, condenados, tasa_1000 FROM mother.crimen_condenados WHERE cod_ccaa='00' AND sexo='Total' AND nacionalidad='Total' ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 306237,
+			"unidad": "condenados adultos",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "7,44 por 1.000 residentes de 18 años o más. 2024: 306.807"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"306.237",
+					"306237",
+					"306.000",
+					"306 000",
+					"306 mil",
+					"0,31 millones",
+					"7,44",
+					"7,4 por"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "INE Estadística de condenados: 306.237 adultos condenados en 2025 (7,4 por 1.000 adultos)."
+		}
+	},
+	{
+		"id": "w12",
+		"pregunta": "¿Cuántas personas murieron en España en la peor semana de la primera ola del covid, a principios de abril de 2020?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.salud_mortalidad_semanal"
+		],
+		"sql_oro": "SELECT semana, semana_anio, defunciones, media_2015_2019, exceso FROM mother.salud_mortalidad_semanal WHERE nivel='pais' AND anio=2020 ORDER BY defunciones DESC LIMIT 3",
+		"respuesta": {
+			"valor": 20989,
+			"unidad": "defunciones en una semana",
+			"periodo": "semana 14 de 2020 (2 de abril de 2020)",
+			"territorio": "España",
+			"detalle": "Media 2015-2019 de esa semana: 8.159; exceso +157 %. Semana anterior: 19.862"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"20.989",
+					"20989",
+					"21.000",
+					"21 000",
+					"21 mil",
+					"157 %",
+					"157%",
+					"157,2"
+				]
+			],
+			"textos": [
+				[
+					"2020"
+				]
+			],
+			"alternativas": "MoMo/INE semanal: 20.989 defunciones en la semana 14 de 2020 (+157 % sobre la media 2015-2019)."
+		}
+	},
+	{
+		"id": "w13",
+		"pregunta": "¿Cuántos viajeros usaron el autobús urbano en Barcelona en mayo de 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.movilidad_transporte_ciudades"
+		],
+		"sql_oro": "SELECT mes, modo, ciudad, viajeros FROM mother.movilidad_transporte_ciudades WHERE ciudad='Barcelona' AND modo='Autobús urbano' AND mes='2025-05-01'",
+		"respuesta": {
+			"valor": 21335000,
+			"unidad": "viajeros",
+			"periodo": "mayo de 2025",
+			"territorio": "Barcelona",
+			"detalle": "Abril de 2025: 19.300.000; junio: 19.336.000. Metro en mayo: 43.479.000"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"21.335.000",
+					"21335000",
+					"21.335",
+					"21,3 millones",
+					"21,33 millones",
+					"21,34 millones"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "INE 20193: 21,3 millones de viajeros de autobús urbano en Barcelona en mayo de 2025."
+		}
+	},
+	{
+		"id": "w14",
+		"pregunta": "¿Cuántas noches de hotel se registraron en Baleares en agosto de 2025?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.turismo_ccaa_mensual"
+		],
+		"sql_oro": "SELECT mes, comunidad, pernoct_hotel, pernoct_hotel_extranjeros, ocupacion_hotel, pernoct_hotel_1000hab FROM mother.turismo_ccaa_mensual WHERE cod_ccaa='04' AND mes='2025-08-01'",
+		"respuesta": {
+			"valor": 11418035,
+			"unidad": "pernoctaciones hoteleras",
+			"periodo": "agosto de 2025",
+			"territorio": "Illes Balears",
+			"detalle": "10.529.229 de extranjeros; ocupación hotelera 89,6 %; 9.227 por 1.000 habitantes"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"11.418.035",
+					"11418035",
+					"11,4 millones",
+					"11,42 millones",
+					"11.418",
+					"9.227",
+					"9227"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "INE Coyuntura Turística Hotelera: 11,4 millones de pernoctaciones hoteleras en Baleares en agosto de 2025."
+		}
+	},
+	{
+		"id": "w15",
+		"pregunta": "¿Qué porcentaje de alumnos españoles suspendió en matemáticas en el último PISA?",
+		"tipo": "anio",
+		"tablas_oro": [
+			"mother.educacion_pisa"
+		],
+		"sql_oro": "SELECT anio, nivel, materia, pct_bajo_rendimiento FROM mother.educacion_pisa WHERE anio=2022 AND sexo='Total' AND materia='Matemáticas'",
+		"respuesta": {
+			"valor": 27.3,
+			"unidad": "% de alumnos de 15 años con bajo rendimiento en matemáticas",
+			"periodo": "PISA 2022",
+			"territorio": "España",
+			"detalle": "Media UE-27: 29,5 %. Lectura: 24,4 %; ciencias: 21,3 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"27,3",
+					"27 %",
+					"27%"
+				]
+			],
+			"textos": [
+				[
+					"2022"
+				]
+			],
+			"alternativas": "PISA 2022: 27,3 % de alumnos por debajo del nivel 2 en matemáticas (UE 29,5 %)."
+		}
+	},
+	{
+		"id": "w16",
+		"pregunta": "¿Qué comunidad autónoma gasta menos en sanidad pública por habitante?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.sanidad_gasto_ccaa"
+		],
+		"sql_oro": "SELECT anio, cod, provisional, eur_hab, eur_hab_real FROM mother.sanidad_gasto_ccaa WHERE nivel='ccaa' AND anio=(SELECT max(anio) FROM mother.sanidad_gasto_ccaa) ORDER BY eur_hab ASC LIMIT 3",
+		"respuesta": {
+			"valor": 1657.79,
+			"unidad": "€ por habitante (gasto sanitario público, provisional)",
+			"periodo": "2024",
+			"territorio": "Andalucía",
+			"detalle": "1.702 € en euros constantes de 2025. Le siguen la Comunidad de Madrid (1.779 €) y la Comunidad Valenciana (1.867 €). El que más, País Vasco (2.332 €)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1.658",
+					"1658",
+					"1.657,8",
+					"1657,8",
+					"1.702",
+					"1702"
+				]
+			],
+			"textos": [
+				[
+					"andalucia"
+				]
+			],
+			"alternativas": "EGSP 2024 (provisional): Andalucía, 1.658 €/hab (1.702 € reales)."
+		}
+	},
+	{
+		"id": "w17",
+		"pregunta": "¿Qué comunidad se gasta más dinero por habitante en su radio y televisión autonómica?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.medios_tv_ccaa_anual"
+		],
+		"sql_oro": "SELECT anio, nombre, ente, eur_hab_real, meur_real FROM mother.medios_tv_ccaa_anual WHERE anio=(SELECT max(anio) FROM mother.medios_tv_ccaa_anual) ORDER BY eur_hab_real DESC LIMIT 3",
+		"respuesta": {
+			"valor": 75.8,
+			"unidad": "€ por habitante de aportación pública",
+			"periodo": "2025",
+			"territorio": "País Vasco",
+			"detalle": "EITB: 169,97 millones de €. Le siguen Cataluña (42,5 €) y Galicia (41,9 €)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"75,8",
+					"76 €",
+					"76 euros",
+					"170 millones",
+					"169,97",
+					"169,9",
+					"170,0"
+				]
+			],
+			"textos": [
+				[
+					"vasco",
+					"euskadi",
+					"eitb"
+				]
+			],
+			"alternativas": "CNMC 2025: País Vasco (EITB), 75,8 €/hab (170 M€)."
+		}
+	},
+	{
+		"id": "w18",
+		"pregunta": "¿Qué comunidad tiene más potencia eólica instalada?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.centrales_ccaa"
+		],
+		"sql_oro": "SELECT ccaa, sum(potencia_mw) AS mw FROM mother.centrales_ccaa WHERE tecnologia='Eólica terrestre' AND estado_grupo='En operación' GROUP BY ccaa ORDER BY mw DESC LIMIT 3",
+		"respuesta": {
+			"valor": 6963,
+			"unidad": "MW de eólica terrestre en operación",
+			"periodo": "situación actual (GEM)",
+			"territorio": "Castilla y León",
+			"detalle": "Le siguen Aragón (5.635 MW) y Castilla-La Mancha (4.876 MW)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"6.963",
+					"6963",
+					"6,96 GW",
+					"7 GW",
+					"6,9 GW",
+					"7.000 MW"
+				]
+			],
+			"textos": [
+				[
+					"castilla y leon"
+				]
+			],
+			"alternativas": "Global Energy Monitor: Castilla y León, 6.963 MW eólicos terrestres en operación."
+		}
+	},
+	{
+		"id": "w19",
+		"pregunta": "¿De qué país son la mayoría de los que piden asilo en España?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.inmigracion_asilo_nacionalidad"
+		],
+		"sql_oro": "SELECT anio, nacionalidad, solicitudes FROM mother.inmigracion_asilo_nacionalidad WHERE anio=(SELECT max(anio) FROM mother.inmigracion_asilo_nacionalidad) ORDER BY solicitudes DESC LIMIT 3",
+		"respuesta": {
+			"valor": 84235,
+			"unidad": "primeras solicitudes de asilo",
+			"periodo": "2025",
+			"territorio": "España",
+			"detalle": "Venezuela 84.235 de 141.030 (60 %); después Mali (15.460) y Colombia (14.310)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"84.235",
+					"84235",
+					"84.200",
+					"84 mil",
+					"84.000",
+					"84 000"
+				]
+			],
+			"textos": [
+				[
+					"venezuela",
+					"venezolan"
+				]
+			],
+			"alternativas": "Eurostat 2025: Venezuela, 84.235 primeras solicitudes (60 % del total)."
+		}
+	},
+	{
+		"id": "w20",
+		"pregunta": "¿En qué comunidad se montan más empresas en proporción a sus habitantes?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.empresas_sociedades_anual"
+		],
+		"sql_oro": "SELECT anio, cod, constituidas, constituidas_100k FROM mother.empresas_sociedades_anual WHERE cod<>'00' AND anio=(SELECT max(anio) FROM mother.empresas_sociedades_anual) ORDER BY constituidas_100k DESC LIMIT 3",
+		"respuesta": {
+			"valor": 397.21,
+			"unidad": "sociedades mercantiles constituidas por 100.000 hab.",
+			"periodo": "2025",
+			"territorio": "Comunidad de Madrid",
+			"detalle": "28.349 sociedades constituidas; le sigue Illes Balears (380,9)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"397,2",
+					"397,21",
+					"397 sociedades",
+					"397 empresas",
+					"397 por",
+					"28.349",
+					"28349"
+				]
+			],
+			"textos": [
+				[
+					"madrid"
+				]
+			],
+			"alternativas": "INE Sociedades Mercantiles 2025: Comunidad de Madrid, 397,2 sociedades creadas por 100.000 hab. (28.349)."
+		}
+	},
+	{
+		"id": "w21",
+		"pregunta": "¿Cuál es el organismo del Estado con más trabajadores?",
+		"tipo": "ranking",
+		"tablas_oro": [
+			"mother.empleo_organismos"
+		],
+		"sql_oro": "SELECT fecha, organismo, efectivos, mujeres FROM mother.empleo_organismos ORDER BY efectivos DESC LIMIT 3",
+		"respuesta": {
+			"valor": 123504,
+			"unidad": "efectivos",
+			"periodo": "enero de 2026",
+			"territorio": "Administración General del Estado",
+			"detalle": "Fuerzas Armadas: 123.504 (16.506 mujeres); Guardia Civil 82.609; Policía Nacional 78.740"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"123.504",
+					"123504",
+					"123.500",
+					"123 500",
+					"123 mil",
+					"123.000"
+				]
+			],
+			"textos": [
+				[
+					"fuerzas armadas",
+					"ejercito",
+					"militares"
+				]
+			],
+			"alternativas": "Boletín Estadístico del Personal (enero 2026): Fuerzas Armadas, 123.504 efectivos."
+		}
+	},
+	{
+		"id": "w22",
+		"pregunta": "¿Cuántos parados hay en la ciudad de Sevilla?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.mercado_paro_municipios"
+		],
+		"sql_oro": "SELECT mes, municipio, paro_registrado, paro_registrado_hace_1_anio, por_100_hab, variacion_anual_pct FROM mother.mercado_paro_municipios WHERE cod_municipio='41091'",
+		"respuesta": {
+			"valor": 49275,
+			"unidad": "parados registrados",
+			"periodo": "agosto de 2026",
+			"territorio": "Sevilla (municipio)",
+			"detalle": "7,1 por cada 100 habitantes; hace un año 53.734 (-8,3 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"49.275",
+					"49275",
+					"49.300",
+					"49 mil",
+					"49.000",
+					"7,15",
+					"7,1 por",
+					"7,1 parados"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "SEPE agosto de 2026: 49.275 parados registrados en Sevilla capital (7,1 por 100 hab.)."
+		}
+	},
+	{
+		"id": "w23",
+		"pregunta": "¿Cómo de lleno está el embalse de La Serena?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.embalses_actual"
+		],
+		"sql_oro": "SELECT fecha, embalse, capacidad_hm3, volumen_hm3, pct_llenado, pct_hace_un_anio, pct_habitual FROM mother.embalses_actual WHERE embalse='La Serena'",
+		"respuesta": {
+			"valor": 81.7,
+			"unidad": "% de llenado",
+			"periodo": "semana del 29 de septiembre de 2026",
+			"territorio": "La Serena (Badajoz, cuenca del Guadiana)",
+			"detalle": "2.631 de 3.219 hm³; hace un año 62,1 %; lo habitual 31,8 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"81,7",
+					"82 %",
+					"82%",
+					"2.631",
+					"2631"
+				]
+			],
+			"textos": [],
+			"alternativas": "Boletín hidrológico de 29-09-2026: La Serena al 81,7 % (2.631 hm³ de 3.219)."
+		}
+	},
+	{
+		"id": "w24",
+		"pregunta": "¿Cuánta obra pública se sacó a licitación en la Comunidad Valenciana en 2025?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.construccion_licitacion"
+		],
+		"sql_oro": "SELECT anio, nombre, total_meur, total_hab_real, estado_meur, entes_territoriales_meur, provisional FROM mother.construccion_licitacion WHERE cod='10' AND anio=2025",
+		"respuesta": {
+			"valor": 2248.968,
+			"unidad": "millones de € licitados (provisional)",
+			"periodo": "2025",
+			"territorio": "Comunidad Valenciana",
+			"detalle": "415 € por habitante; 341 M€ del Estado y 1.908 M€ de los entes territoriales. 2024: 2.595 M€ nominales"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2.249",
+					"2249",
+					"2.248,9",
+					"2248,9",
+					"2.248,97",
+					"2,25 mil millones",
+					"2,2 mil millones",
+					"2.250 millones",
+					"415,3",
+					"415 €",
+					"415 euros"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "Licitación oficial 2025 (provisional): 2.249 M€ en la Comunidad Valenciana (415 €/hab)."
+		}
+	},
+	{
+		"id": "w25",
+		"pregunta": "¿Cuánto gasta por habitante el Ayuntamiento de Bilbao?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.municipios_cuentas"
+		],
+		"sql_oro": "SELECT cod_mun, anio, provisional, poblacion, gastos_total, gasto_hab FROM mother.municipios_cuentas WHERE cod_mun='48020' ORDER BY anio DESC LIMIT 2",
+		"respuesta": {
+			"valor": 2084,
+			"unidad": "€ por habitante (gasto liquidado total)",
+			"periodo": "2025 (provisional)",
+			"territorio": "Bilbao",
+			"detalle": "731,7 millones de € en 2025; 2024 (definitivo): 1.980 €/hab y 689,2 M€"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"2.084",
+					"2084",
+					"1.980",
+					"1980",
+					"731,7",
+					"731,68",
+					"689,2"
+				]
+			],
+			"textos": [
+				[
+					"2025",
+					"2024"
+				]
+			],
+			"alternativas": "CONPREL: 2.084 €/hab en 2025 (provisional) o 1.980 €/hab en 2024 (definitivo). Ambos válidos."
+		}
+	},
+	{
+		"id": "w26",
+		"pregunta": "¿Qué porcentaje de la población de Asturias tiene 65 años o más?",
+		"tipo": "territorio",
+		"tablas_oro": [
+			"mother.demografia_piramide"
+		],
+		"sql_oro": "SELECT anio, sum(poblacion) FILTER (WHERE edad_desde>=65) AS mayores_65, sum(poblacion) AS total, 100*sum(poblacion) FILTER (WHERE edad_desde>=65)/sum(poblacion) AS pct_65 FROM mother.demografia_piramide WHERE nivel='ccaa' AND cod='03' AND anio=(SELECT max(anio) FROM mother.demografia_piramide) GROUP BY anio",
+		"respuesta": {
+			"valor": 28.36,
+			"unidad": "% de población de 65 años o más",
+			"periodo": "1 de enero de 2025",
+			"territorio": "Principado de Asturias",
+			"detalle": "287.903 de 1.015.128 habitantes"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"28,36",
+					"28,4",
+					"28 %",
+					"28%",
+					"287.903",
+					"287903"
+				]
+			],
+			"textos": [
+				[
+					"2025"
+				]
+			],
+			"alternativas": "INE ECP a 1-1-2025: 28,4 % de los asturianos tiene 65 años o más (287.903)."
+		}
+	},
+	{
+		"id": "w27",
+		"pregunta": "¿Cuánto ha caído el consumo de cemento por habitante desde el máximo de la burbuja?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.construccion_cemento"
+		],
+		"sql_oro": "SELECT max(consumo_kg_hab) FILTER (WHERE anio=2006) AS kg_2006, max(consumo_kg_hab) FILTER (WHERE anio=2025) AS kg_2025, max(consumo_kg_hab) FILTER (WHERE anio=2025) - max(consumo_kg_hab) FILTER (WHERE anio=2006) AS cambio_kg, 100*(max(consumo_kg_hab) FILTER (WHERE anio=2025)/max(consumo_kg_hab) FILTER (WHERE anio=2006)-1) AS cambio_pct, max(consumo_aparente_kt) FILTER (WHERE anio=2006) AS kt_2006, max(consumo_aparente_kt) FILTER (WHERE anio=2025) AS kt_2025 FROM mother.construccion_cemento",
+		"respuesta": {
+			"valor": -73.23,
+			"unidad": "% de caída del consumo aparente por habitante",
+			"periodo": "2006-2025",
+			"territorio": "España",
+			"detalle": "1.260 kg/hab en 2006 (máximo) frente a 337 kg/hab en 2025: -923 kg por habitante. En total, de 55.896 kt a 16.653 kt (-70,2 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"73,2",
+					"73 %",
+					"73%",
+					"73,23",
+					"922,7",
+					"923 kg",
+					"923 kilos",
+					"922 kg",
+					"70,2",
+					"70 %"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la caída. -73,2 % por habitante (de 1.260 a 337 kg), es decir -923 kg/hab; en toneladas totales -70,2 %. Todas válidas."
+		}
+	},
+	{
+		"id": "w28",
+		"pregunta": "¿Cuánto han subido los alquileres en España desde 2019, antes de la pandemia?",
+		"tipo": "evolucion",
+		"tablas_oro": [
+			"mother.vivienda_ipva"
+		],
+		"sql_oro": "SELECT max(indice) FILTER (WHERE anio=2019) AS i2019, max(indice) FILTER (WHERE anio=2024) AS i2024, 100*(max(indice) FILTER (WHERE anio=2024)/max(indice) FILTER (WHERE anio=2019)-1) AS subida_nominal, 100*(max(indice_real) FILTER (WHERE anio=2024)/max(indice_real) FILTER (WHERE anio=2019)-1) AS cambio_real FROM mother.vivienda_ipva WHERE nivel='pais'",
+		"respuesta": {
+			"valor": 11.75,
+			"unidad": "% de subida nominal del índice de precios de alquiler (INE IPVA)",
+			"periodo": "2019-2024",
+			"territorio": "España",
+			"detalle": "Índice 110,0 en 2019 y 122,9 en 2024 (base 2015). En términos reales el alquiler bajó un 5,7 %"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"11,7",
+					"11,75",
+					"12 %",
+					"12%",
+					"5,7",
+					"5,71"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la subida. +11,7 % nominal (IPVA 2019-2024, último año publicado); en euros reales -5,7 %. Ambas válidas."
+		}
+	},
+	{
+		"id": "w29",
+		"pregunta": "¿Cuántas grandes empresas más hay en España que en 2020?",
+		"tipo": "comparacion",
+		"tablas_oro": [
+			"mother.empresas_dirce_tamano"
+		],
+		"sql_oro": "SELECT max(empresas) FILTER (WHERE anio=2020) AS e2020, max(empresas) FILTER (WHERE anio=2025) AS e2025, max(empresas) FILTER (WHERE anio=2025) - max(empresas) FILTER (WHERE anio=2020) AS diferencia, 100*(max(empresas) FILTER (WHERE anio=2025)/max(empresas) FILTER (WHERE anio=2020)-1) AS pct FROM mother.empresas_dirce_tamano WHERE cod='00' AND tamano='Grandes (250 o más)'",
+		"respuesta": {
+			"valor": 513,
+			"unidad": "empresas de 250 o más asalariados más",
+			"periodo": "2020-2025",
+			"territorio": "España",
+			"detalle": "4.826 en 2020 y 5.339 en 2025 (+10,6 %)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"513",
+					"10,6 %",
+					"10,6%",
+					"10,63",
+					"11 %"
+				]
+			],
+			"textos": [],
+			"alternativas": "Cifra exigida: la diferencia. DIRCE: +513 grandes empresas (+10,6 %) entre 2020 y 2025."
+		}
+	},
+	{
+		"id": "w30",
+		"pregunta": "¿Cuántos puntos más de inflación tiene España que la zona euro?",
+		"tipo": "comparacion",
+		"tablas_oro": [
+			"mother.mercado_ipca_ue"
+		],
+		"sql_oro": "SELECT mes, max(tasa_anual) FILTER (WHERE geo='ES') AS espana, max(tasa_anual) FILTER (WHERE geo='EA20') AS zona_euro, max(tasa_anual) FILTER (WHERE geo='EU27_2020') AS ue, max(tasa_anual) FILTER (WHERE geo='ES') - max(tasa_anual) FILTER (WHERE geo='EA20') AS diferencia FROM mother.mercado_ipca_ue GROUP BY mes ORDER BY mes DESC LIMIT 2",
+		"respuesta": {
+			"valor": 1.4,
+			"unidad": "puntos porcentuales de diferencia en el IPCA interanual",
+			"periodo": "agosto de 2026",
+			"territorio": "España frente a zona euro",
+			"detalle": "España 4,6 %, zona euro 3,2 %, UE-27 3,2 %. En julio de 2026: 3,9 % frente a 2,9 % (1 punto)"
+		},
+		"acepta": {
+			"cifras": [
+				[
+					"1,4 punto",
+					"1,4 p",
+					"1,4 pp",
+					"1,40",
+					"diferencia de 1,4",
+					"1,4 más",
+					"1,4 por encima"
+				]
+			],
+			"textos": [
+				[
+					"2026"
+				]
+			],
+			"alternativas": "Cifra exigida: la diferencia. Agosto de 2026: 4,6 % frente a 3,2 % = 1,4 puntos."
+		}
+	}
+]

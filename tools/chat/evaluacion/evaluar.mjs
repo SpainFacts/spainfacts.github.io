@@ -158,7 +158,7 @@ if (modo === 'busqueda') {
 	const emb = valor('--embeddings', null);
 	const base = emb ? await prepararEmbeddings(emb) : { catalogo, embeber: null };
 	const consultar = await conectar(base.catalogo);
-	const ctx = { catalogo: base.catalogo, indice: crearIndice(base.catalogo), consultar, ...(base.embeber ? { embeber: base.embeber } : {}), ...(valor('--prior', null) !== null ? { priorBusqueda: Number(valor('--prior')) } : {}) };
+	const ctx = { catalogo: base.catalogo, indice: crearIndice(base.catalogo), consultar, ...(base.embeber ? { embeber: base.embeber } : {}), ...(valor('--prior', null) !== null ? { priorBusqueda: Number(valor('--prior')) } : {}), ...(valor('--idioma', null) ? { idiomaDecision: valor('--idioma') } : {}), ...(valor('--tabla', null) ? { eleccionTabla: valor('--tabla') } : {}) };
 	const decidir =
 		modo === 'decision' && valor('--motor', 'ollama') === 'transformers' ? await crearDecisor({ device: 'cpu', dtype: 'q4', cacheDir }) : decidirOllama;
 	let bien = 0;
