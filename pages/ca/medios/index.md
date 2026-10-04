@@ -1,7 +1,7 @@
 ---
 title: Mitjans de comunicació
 description: "Els mitjans de comunicació a Espanya en dades: quants diners públics reben les ràdios i televisions públiques i els mitjans privats en publicitat institucional i subvencions, per habitant, per comunitat i per partit."
-i18n_origen: ec3a4f99d3ea
+i18n_origen: fac8a0e02911
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -84,5 +84,17 @@ Quina relació econòmica tenen les administracions amb els mitjans de comunicac
     <a href="/ca/medios/buscador" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔎</span> Qui rep què</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cerca un mitjà i mira quants diners públics ha rebut, de quines administracions i per què: publicitat, contractes i subvencions, pagament a pagament.</p>
+    </a>
+    <a href="/ca/medios/confianza" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🤝</span> Confiança i consum de notícies</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Quant confien els espanyols en les notícies i en cada mitjà, com s'informen, quants paguen per notícies i quants les eviten, en comparació amb la resta de la UE.</p>
+    </a>
+    <a href="/ca/medios/libertad-pluralismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗽</span> Llibertat de premsa i pluralisme</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La posició d'Espanya en la classificació de Reporters Sense Fronteres, els riscos per al pluralisme i les alertes sobre periodistes del Consell d'Europa.</p>
+    </a>
+    <a href="/ca/medios/sector" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📉</span> El negoci dels mitjans</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Quant es llegeix, es veu i s'escolta, quant s'inverteix en publicitat i en quin suport, quanta gent treballa als mitjans i quant pesen els diners públics.</p>
     </a>
 </div>

@@ -1,0 +1,166 @@
+version: 2
+
+models:
+  - name: medios_confianza_espana_anual
+    description: >
+      España por año de encuesta del Reuters Institute Digital News Report (enero-febrero,
+      muestra online de ~2.000 internautas): % que confía en la mayoría de las noticias la
+      mayor parte del tiempo (2015-), su puesto entre los países de la UE del informe, % que
+      pagó por noticias online (2021-), % que evita las noticias a menudo o a veces (2017,
+      2019, 2022, 2025, 2026), % muy o extremadamente interesado en las noticias (2015-) y %
+      que usó televisión, prensa impresa, internet y redes sociales para informarse la
+      última semana (2013-).
+    columns:
+      - name: anio
+        description: Año del informe (la encuesta se hace a principios de ese año).
+        tests: [not_null, unique]
+      - name: confianza
+        description: "% que dice poder confiar en la mayoría de las noticias la mayor parte del tiempo."
+      - name: confianza_puesto_ue
+        description: Puesto de España entre los Estados de la UE cubiertos por el DNR ese año (1 = más confianza).
+      - name: paises_ue
+        description: Nº de Estados de la UE cubiertos por el DNR ese año.
+      - name: confianza_media_ue
+        description: Media simple de la confianza en esos países.
+      - name: paga
+        description: "% que pagó por noticias online el último año (suscripción, donación o pago puntual)."
+      - name: evita
+        description: "% que evita activamente las noticias a menudo o a veces."
+      - name: interes
+        description: "% muy o extremadamente interesado en las noticias."
+      - name: tv
+        description: "% que usó la televisión para informarse la última semana."
+      - name: prensa
+        description: "% que usó la prensa impresa."
+      - name: online
+        description: "% que usó internet por cualquier vía (webs y apps, redes, podcasts y, desde 2025, chatbots de IA)."
+      - name: redes
+        description: "% que usó redes sociales."
+
+  - name: medios_confianza_fuentes
+    description: >
+      Fuentes de noticias usadas la última semana en España (Digital News Report, gráfico
+      «Sources of news»), formato largo para gráficos: anio, tipo (Televisión, Prensa
+      impresa, Internet (cualquier vía), Redes sociales), pct, anio_informe del que se toma.
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: tipo
+        tests: [not_null]
+      - name: pct
+        description: "% de internautas que usó esa fuente para informarse la última semana."
+      - name: anio_informe
+        description: Informe del que sale el valor (el más reciente que lo trae).
+
+  - name: medios_confianza_marcas
+    description: >
+      Confianza en cada marca de noticias en España, 2020-2026 (Digital News Report): % de
+      quienes la conocen que le dan 6-10 (confía), 5 (ni confía ni desconfía) y 0-4 (no
+      confía) en una escala de confianza de 0 a 10. Unas 15 marcas elegidas por el informe.
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: marca
+        tests: [not_null]
+      - name: confia
+        description: "% que confía (6-10)."
+      - name: ni_confia_ni_desconfia
+        description: "% que da un 5."
+      - name: no_confia
+        description: "% que no confía (0-4)."
+      - name: neto
+        description: confia - no_confia, en puntos.
+      - name: puesto
+        description: Puesto por % que confía ese año (1 = más confianza; empates con el mismo puesto).
+      - name: marcas_anio
+        description: Nº de marcas preguntadas ese año.
+
+  - name: medios_confianza_paises_serie
+    description: >
+      Confianza en las noticias por país y año, 2015-2026 (Digital News Report, gráfico
+      «Overall trust score» de cada página de país), con el puesto entre los Estados de la
+      UE cubiertos y la media simple de esos países.
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: iso2
+        description: Código de dos letras (EL = Grecia, UK = Reino Unido).
+        tests: [not_null]
+      - name: pais
+      - name: ue
+      - name: europa
+      - name: confianza
+        description: "% que confía en la mayoría de las noticias la mayor parte del tiempo."
+      - name: puesto_ue
+      - name: paises_ue
+      - name: media_ue
+
+  - name: medios_confianza_paises
+    description: >
+      Comparación entre los 48 países del último Digital News Report (2026): confianza en
+      las noticias, su valor en el primer año de la serie y el cambio en puntos, % que
+      paga por noticias online, % que evita las noticias, % preocupado por distinguir lo
+      real de lo falso en internet y % que usa redes sociales o de vídeo para informarse,
+      con el puesto entre los Estados de la UE cubiertos (1 = valor más alto).
+    columns:
+      - name: iso2
+        tests: [not_null, unique]
+      - name: pais
+      - name: ue
+      - name: europa
+      - name: anio
+        description: Último año con dato de confianza.
+      - name: confianza
+      - name: confianza_puesto_ue
+      - name: paises_ue
+      - name: confianza_media_ue
+      - name: anio_inicio
+        description: Primer año de la serie de confianza del país.
+      - name: confianza_inicio
+      - name: confianza_cambio_pp
+        description: confianza - confianza_inicio, en puntos.
+      - name: paga
+        description: "% que pagó por noticias online (tarjeta del último informe con dato)."
+      - name: paga_anio
+      - name: evita
+        description: "% que evita las noticias a menudo o a veces (tarjeta, solo 2026)."
+      - name: evita_anio
+      - name: preocupa_falso
+        description: "% preocupado por distinguir lo real de lo falso en las noticias online (resumen ejecutivo)."
+      - name: redes_noticias
+        description: "% que usó redes sociales o de vídeo para informarse la última semana."
+      - name: falso_anio
+      - name: paga_puesto_ue
+      - name: evita_puesto_ue
+      - name: preocupa_falso_puesto_ue
+
+  - name: medios_confianza_eurobarometro
+    description: >
+      Eurobarómetro Standard (Comisión Europea): % que tiende a confiar en la prensa
+      escrita, la radio, la televisión, internet y las redes sociales online por país y
+      oleada, 2013-2025 (oleadas 80 a 104 que incluyen la pregunta; no hay 2023), con la
+      media de la UE (fila EU27/EU28 del propio Eurobarómetro) y el puesto del país entre
+      los Estados miembros. La oleada 80 (2013) no trae prensa ni redes y la 102 (2024)
+      no trae redes sociales.
+    columns:
+      - name: oleada
+        tests: [not_null]
+      - name: referencia
+      - name: anio
+        description: Año de inicio del trabajo de campo.
+      - name: inicio_campo
+      - name: medio
+        tests: [not_null]
+      - name: iso2
+        tests: [not_null]
+      - name: pais
+      - name: ue
+        description: Estado miembro en esa oleada (el Reino Unido hasta 2019).
+      - name: confia
+        description: "% que tiende a confiar."
+      - name: no_confia
+      - name: ns_nc
+      - name: media_ue
+        description: "% de la UE en conjunto (EU28 hasta 2019, EU27 después)."
+      - name: puesto_ue
+      - name: paises_ue

@@ -1,7 +1,8 @@
 -- Subvenciones a medios de comunicación privados por año, nivel de la
 -- administración concedente y comunidad. Fuente: BDNS (IGAE), concesiones de las
--- convocatorias de la lista curada medios_subvenciones_convocatorias (ver
--- medios_subvenciones_concesiones).
+-- convocatorias de la lista curada medios_subvenciones_convocatorias, más el
+-- Gobierno Vasco leído del BOPV (ver medios_subvenciones_concesiones). fuente =
+-- 'bdns', 'bopv' o 'bdns+bopv' según de dónde salen las filas agregadas.
 -- - Año = año de concesión. La BDNS solo muestra 4 años naturales (hoy, 2022-...):
 --   el último año está siempre incompleto (parcial = true).
 -- - eur_hab_real = euros de 2025 por habitante del ámbito del concedente: España
@@ -12,9 +13,10 @@
 --   gobiernos_presidentes): estatal para el nivel estatal y autonómico para el
 --   autonómico. Las locales no llevan familia (cada concedente es un
 --   ayuntamiento o diputación distinto).
--- - Huecos: el Gobierno Vasco no publica en la BDNS sus ayudas a medios (País Vasco
---   solo tiene diputaciones forales y ayuntamientos); Andalucía y Canarias no
---   tienen líneas visibles para medios privados.
+-- - Huecos: el Gobierno Vasco no publica en la BDNS sus ayudas a medios y se toma del
+--   BOPV (Hedabideak, euskera en medios en castellano, COVID 2021-2022, IA 2024-2025);
+--   para 2018-2021 solo hay BOPV (la BDNS empieza en 2022), así que esos años solo
+--   cubren el País Vasco. Andalucía y Canarias no tienen líneas visibles para medios privados.
 with conc as (
     select * from {{ ref('medios_subvenciones_concesiones') }}
 ),
@@ -26,7 +28,8 @@ agregado as (
         count(*) as n_concesiones,
         count(distinct beneficiario_nif) filter (where not es_persona_fisica) as n_beneficiarios_juridicos,
         count(*) filter (where es_persona_fisica) as n_concesiones_personas_fisicas,
-        count(distinct cod_bdns) as n_convocatorias
+        count(distinct cod_bdns) as n_convocatorias,
+        string_agg(distinct fuente, '+' order by fuente) as fuente
     from conc
     group by all
 ),
@@ -76,9 +79,12 @@ select
     g.presidente,
     c.color,
     a.anio = u.anio_max as parcial,
-    case when a.cod_ccaa = '16' and a.nivel <> 'estatal'
-         then 'El Gobierno Vasco no publica en la BDNS sus ayudas a medios: solo diputaciones forales y ayuntamientos'
-    end as nota
+    case when a.cod_ccaa = '16' and a.nivel = 'autonomico'
+         then 'Gobierno Vasco: resoluciones del BOPV (no publica en la BDNS); Hedabideak por anualidades'
+         when a.cod_ccaa = '16' and a.nivel = 'local'
+         then 'Diputaciones forales y ayuntamientos (BDNS)'
+    end as nota,
+    a.fuente
 from agregado a
 cross join ultimo u
 cross join rango_pob r

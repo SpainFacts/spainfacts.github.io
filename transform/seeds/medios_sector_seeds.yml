@@ -1,0 +1,147 @@
+version: 2
+
+seeds:
+  - name: medios_sector_infoadex
+    description: >
+      Inversión publicitaria real estimada en España por medio, en millones de euros corrientes,
+      transcrita de los resúmenes públicos del «Estudio InfoAdex de la inversión publicitaria en
+      España» (ediciones 2010-2026; cada edición da los datos del año anterior y la revisión de
+      los anteriores). Para cada año se toma la edición más reciente que lo publica. Dos
+      metodologías que NO se deben mezclar en una misma serie:
+      «convencionales» (2004-2023): medios convencionales/controlados donde diarios, revistas,
+      radio y televisión son solo el soporte tradicional (diarios = papel) y todo lo digital va
+      en «internet» (desde 2018 «Digital»: search, websites y redes sociales); en la edición 2016
+      Internet se reestimó desde 2014 (salto de 956,5 a 1.076,2 M€) y en la 2021 Exterior desde
+      2018 (de 335,9 a 418,9 M€).
+      «controlados» (2022-2025, ediciones 2025 y 2026): cada medio incluye su parte digital
+      (diarios_dominicales = papel + webs de los periódicos; radio_audio = radio + podcast y
+      agregadores; televisión incluye la conectada) y websites solo son las webs que no son
+      medios de comunicación; diarios_dominicales_papel/_digital = columnas «Non Digital» y
+      «Digital» de 2024-2025.
+      subtotal_controlados = medios convencionales/controlados; subtotal_estimados = medios no
+      convencionales/estimados (buzoneo, patrocinio, PLV, mailing...); gran_total = ambos.
+      El «Total Televisión» 2018 de la edición 2021 (2.172,2) no cuadra con sus componentes ni con
+      el subtotal: se usa el de la edición 2019 (2.127,2). Los PDF de infoadex.es devuelven 403 a
+      descargas automáticas: se leyeron las copias de web.archive.org (mismas URL) y, para la
+      edición 2026, la copia de La Fede (organización del comité técnico del estudio). El estudio
+      completo es de pago; aquí solo están las cifras agregadas del resumen gratuito, con cita.
+    config:
+      column_types:
+        anio: integer
+        medio: varchar
+        inversion_meur: double
+        metodologia: varchar
+        edicion: integer
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Año de la inversión.
+      - name: medio
+        description: "cine, diarios, dominicales, exterior, internet, radio, revistas, television (convencionales); cine, diarios_dominicales(_papel/_digital), exterior, radio_audio, revistas, redes_sociales, search, websites, television (controlados); subtotal_controlados, subtotal_estimados, gran_total."
+      - name: inversion_meur
+        description: Millones de euros corrientes (inversión real estimada, neta de descuentos).
+      - name: metodologia
+        description: "'convencionales' (serie larga 2004-2023) o 'controlados' (metodología nueva 2022-2025)."
+      - name: edicion
+        description: Año de la edición del Estudio InfoAdex de la que sale la cifra.
+      - name: fuente
+        description: Documento, tabla y URL original.
+
+  - name: medios_sector_egm_penetracion
+    description: >
+      Penetración de los medios en España (% de la población de 14 años o más; hasta 1984, 15 o
+      más) según el Estudio General de Medios, transcrita del «Marco General de los Medios en
+      España 2026» (AIMC, publicación gratuita), págs. 11 (evolución de la audiencia general,
+      1980-2025) y 49 (diarios por tipo, 1997-2025). Diarios y suplementos: lectura en el día
+      (diarios) o en el periodo de publicación; «_papel» hasta 2017 solo papel y desde 2018
+      papel + visor digital/PDF; «_internet» acceso diario a la web (diarios). Radio y televisión:
+      audiencia acumulada diaria. Exterior: hasta 2014 haber visto publicidad ayer, desde 2015 en
+      la última semana (ruptura). Cine: semanal hasta 2023, quincenal desde 2024.
+      universo_miles = población de referencia del EGM (miles), solo en la tabla general.
+    config:
+      column_types:
+        anio: integer
+        medio: varchar
+        penetracion_pct: double
+        universo_miles: double
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Año (media de las tres olas del EGM).
+      - name: medio
+        description: "diarios (papel+internet), diarios_papel, diarios_internet, suplementos(_papel/_internet), revistas(_papel/_internet), radio, radio_internet, television, cine, exterior; y de la pág. 49: diarios_tipo_total, diarios_informacion_general, diarios_economicos, diarios_deportivos, diarios_de_pago, diarios_gratuitos."
+      - name: penetracion_pct
+        description: Porcentaje de la población de 14 o más años que lee/ve/escucha el medio.
+      - name: universo_miles
+        description: Población de 14 o más años del EGM, en miles.
+      - name: fuente
+        description: Documento, página y URL.
+
+  - name: medios_sector_egm_minutos
+    description: >
+      Minutos diarios por persona de radio (total, generalista y temática) y televisión, EGM
+      1991-2025 (AIMC, Marco General de los Medios en España 2026, pág. 12).
+    config:
+      column_types:
+        anio: integer
+        medio: varchar
+        minutos_dia: integer
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Año.
+      - name: medio
+        description: radio, radio_generalista, radio_tematica, television.
+      - name: minutos_dia
+        description: Minutos por persona y día (población de 14 o más años).
+      - name: fuente
+        description: Documento, página y URL.
+
+  - name: medios_sector_egm_diarios
+    description: >
+      Audiencia diaria de cada diario (papel + visor digital; % de la población de 14 o más años),
+      EGM 2009-2025, de la tabla de la pág. 50 del Marco General de los Medios en España 2026
+      (AIMC). Solo las cabeceras con la serie completa de 17 años, más la fila «Total Lectores
+      Prensa». No incluye la lectura en la web del periódico.
+    config:
+      column_types:
+        anio: integer
+        cabecera: varchar
+        penetracion_pct: double
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Año.
+      - name: cabecera
+        description: Nombre del diario tal como lo da el EGM.
+      - name: penetracion_pct
+        description: Lectores diarios en % de la población de 14 o más años.
+      - name: fuente
+        description: Documento, página y URL.
+
+  - name: medios_sector_grupos_cuentas
+    description: >
+      Ingresos y beneficio neto consolidados de los grandes grupos de medios cotizados, en
+      millones de euros corrientes. De momento solo Atresmedia (2007-2025), de la tabla
+      «Principales magnitudes» de su web de accionistas (2017-2025 en la página actual; 2007-2016
+      en la versión archivada de 2018). Prisa, Vocento y Mediaset España (absorbida por
+      MFE-MediaForEurope en 2023) quedan pendientes: la CNMV bloquea las descargas automáticas y
+      las series de Prisa están reexpresadas por las ventas de Santillana y Media Capital.
+    config:
+      column_types:
+        anio: integer
+        grupo: varchar
+        ingresos_meur: double
+        resultado_neto_meur: double
+        fuente: varchar
+    columns:
+      - name: anio
+        description: Ejercicio.
+      - name: grupo
+        description: Grupo de comunicación.
+      - name: ingresos_meur
+        description: Ingresos del grupo (millones de euros corrientes).
+      - name: resultado_neto_meur
+        description: Beneficio neto (millones de euros corrientes; negativo = pérdidas).
+      - name: fuente
+        description: Página y URL de origen.

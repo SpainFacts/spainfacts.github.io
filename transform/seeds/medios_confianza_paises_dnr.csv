@@ -1,0 +1,56 @@
+slug,iso2,nombre_en,nombre_alt,nombre_es,ue,europa
+argentina,AR,Argentina,,Argentina,false,false
+australia,AU,Australia,,Australia,false,false
+austria,AT,Austria,,Austria,true,true
+belgium,BE,Belgium,,Bélgica,true,true
+brazil,BR,Brazil,,Brasil,false,false
+bulgaria,BG,Bulgaria,,Bulgaria,true,true
+canada,CA,Canada,,Canadá,false,false
+chile,CL,Chile,,Chile,false,false
+colombia,CO,Colombia,,Colombia,false,false
+croatia,HR,Croatia,,Croacia,true,true
+czech-republic,CZ,Czech Republic,Czechia,Chequia,true,true
+denmark,DK,Denmark,,Dinamarca,true,true
+finland,FI,Finland,,Finlandia,true,true
+france,FR,France,,Francia,true,true
+germany,DE,Germany,,Alemania,true,true
+greece,EL,Greece,,Grecia,true,true
+hong-kong,HK,Hong Kong,,Hong Kong,false,false
+hungary,HU,Hungary,,Hungría,true,true
+india,IN,India,India*,India,false,false
+indonesia,ID,Indonesia,,Indonesia,false,false
+ireland,IE,Ireland,,Irlanda,true,true
+italy,IT,Italy,,Italia,true,true
+japan,JP,Japan,,Japón,false,false
+kenya,KE,Kenya,,Kenia,false,false
+malaysia,MY,Malaysia,,Malasia,false,false
+mexico,MX,Mexico,,México,false,false
+morocco,MA,Morocco,,Marruecos,false,false
+netherlands,NL,Netherlands,,Países Bajos,true,true
+nigeria,NG,Nigeria,,Nigeria,false,false
+norway,NO,Norway,,Noruega,false,true
+peru,PE,Peru,,Perú,false,false
+philippines,PH,Philippines,,Filipinas,false,false
+poland,PL,Poland,,Polonia,true,true
+portugal,PT,Portugal,,Portugal,true,true
+romania,RO,Romania,,Rumanía,true,true
+serbia,RS,Serbia,,Serbia,false,true
+singapore,SG,Singapore,,Singapur,false,false
+slovakia,SK,Slovakia,,Eslovaquia,true,true
+south-africa,ZA,South Africa,South Africa*,Sudáfrica,false,false
+south-korea,KR,South Korea,,Corea del Sur,false,false
+spain,ES,Spain,,España,true,true
+sweden,SE,Sweden,,Suecia,true,true
+switzerland,CH,Switzerland,,Suiza,false,true
+taiwan,TW,Taiwan,,Taiwán,false,false
+thailand,TH,Thailand,,Tailandia,false,false
+turkey,TR,Turkey,,Turquía,false,true
+united-kingdom,UK,United Kingdom,UK,Reino Unido,false,true
+united-states,US,United States,US,Estados Unidos,false,false
+,CY,Cyprus,,Chipre,true,true
+,EE,Estonia,,Estonia,true,true
+,LV,Latvia,,Letonia,true,true
+,LT,Lithuania,,Lituania,true,true
+,LU,Luxembourg,,Luxemburgo,true,true
+,MT,Malta,,Malta,true,true
+,SI,Slovenia,,Eslovenia,true,true

@@ -9,9 +9,16 @@
 --     Navarra (CKAN, IVA no indicado), Murcia (OData, contratos con IVA),
 --     Ayuntamiento de Madrid (datos.madrid.es 300024, se guarda sin IVA) y
 --     Ajuntament de Barcelona (Open Data BCN, por tipo de medio).
+--   * raw.pubt_planes_cm (mismo módulo, ingestion/medios_planes_madrid.py): planes
+--     de medios de la Comunidad de Madrid 2020- (ZIP de Excel del Portal de
+--     Transparencia), neto sin IVA, base 'planificado'.
 --   * seed medios_publicidad_territorial_manual: Comunitat Valenciana (PDF
 --     gvaoberta, sin IVA), País Vasco (JSON de gobiernovasco.marketing, CC BY
---     4.0), Canal de Isabel II (cuenta 627) y TMB (PDF de transparencia).
+--     4.0), Canal de Isabel II (cuenta 627, solo referencia: cuenta_en_total
+--     false) y TMB (PDF de transparencia).
+--   * seed medios_publicidad_canal_planes: planes de medios de Canal de Isabel II
+--     2019-2025 por soporte (PDF de su portal), neto sin IVA, 'planificado'
+--     (2019: 'ejecutado').
 -- Añade: tipo_medio_norm (prensa, radio, television, digital, redes_sociales,
 -- exterior, cine, creatividad_produccion, otros) a partir del texto de cada
 -- fuente, y grupo mediático normalizado con el seed medios_grupos_equivalencias
@@ -45,10 +52,40 @@ manual as (
     from {{ ref('medios_publicidad_territorial_manual') }}
 ),
 
+planes_cm as (
+    select
+        cast(cod_ccaa as varchar) as cod_ccaa,
+        cast(nivel as varchar) as nivel,
+        cast(cod_municipio as varchar) as cod_municipio,
+        cast(anio as integer) as anio,
+        organismo_pagador, es_empresa_publica, medio, grupo as grupo_fuente, tipo_medio, campana,
+        importe_eur, iva_incluido, base, cuenta_en_total, fuente, nota,
+        'ingesta' as origen
+    from {{ source('raw_medios_publicidad_territorial', 'pubt_planes_cm') }}
+),
+
+canal as (
+    select
+        cast(cod_ccaa as varchar) as cod_ccaa,
+        cast(nivel as varchar) as nivel,
+        nullif(cast(cod_municipio as varchar), '') as cod_municipio,
+        cast(anio as integer) as anio,
+        organismo_pagador, es_empresa_publica,
+        nullif(medio, '') as medio, nullif(grupo, '') as grupo_fuente, nullif(tipo_medio, '') as tipo_medio,
+        nullif(campana, '') as campana,
+        importe_eur, iva_incluido, base, cuenta_en_total, fuente, nota,
+        'seed' as origen
+    from {{ ref('medios_publicidad_canal_planes') }}
+),
+
 todo as (
     select * from ingesta
     union all
     select * from manual
+    union all
+    select * from planes_cm
+    union all
+    select * from canal
 ),
 
 equiv as (

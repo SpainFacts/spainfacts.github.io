@@ -1,7 +1,7 @@
 ---
 title: Komunikabideak
 description: "Espainiako komunikabideak datuetan: zenbat diru publiko jasotzen duten irrati-telebista publikoek eta komunikabide pribatuek erakunde-publizitatean eta diru-laguntzetan, biztanleko, erkidegoka eta alderdika."
-i18n_origen: ec3a4f99d3ea
+i18n_origen: fac8a0e02911
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -83,5 +83,17 @@ Zer harreman ekonomiko duten administrazioek komunikabideekin: zenbat kostatzen 
     <a href="/eu/medios/buscador" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔎</span> Nork zer jasotzen duen</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Bilatu komunikabide bat eta ikusi zenbat diru publiko jaso duen, zein administraziotatik eta zergatik: publizitatea, kontratuak eta diru-laguntzak, ordainketaz ordainketa.</p>
+    </a>
+    <a href="/eu/medios/confianza" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🤝</span> Konfiantza eta albisteen kontsumoa</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoitzean, nola informatzen diren, zenbatek ordaintzen duten albisteengatik eta zenbatek saihesten dituzten, EBko gainerako herrialdeekin alderatuta.</p>
+    </a>
+    <a href="/eu/medios/libertad-pluralismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗽</span> Prentsa-askatasuna eta aniztasuna</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Espainiaren postua Mugarik Gabeko Kazetarien sailkapenean, aniztasunerako arriskuak eta Europako Kontseiluak kazetariei buruz emandako alertak.</p>
+    </a>
+    <a href="/eu/medios/sector" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📉</span> Komunikabideen negozioa</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Zenbat irakurtzen, ikusten eta entzuten den, zenbat inbertitzen den publizitatean eta zein euskarritan, zenbat jendek egiten duen lan komunikabideetan eta zenbateko pisua duen diru publikoak.</p>
     </a>
 </div>

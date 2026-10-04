@@ -1,7 +1,7 @@
 ---
 title: The media
 description: "The media in Spain in data: how much public money public broadcasters and private media receive in institutional advertising and subsidies, per inhabitant, by region and by party."
-i18n_origen: ec3a4f99d3ea
+i18n_origen: fac8a0e02911
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -84,5 +84,17 @@ The financial relationship between public administrations and the media: how muc
     <a href="/en/medios/buscador" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔎</span> Who gets what</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Search for a media outlet and see how much public money it has received, from which administrations and why: advertising, contracts and subsidies, payment by payment.</p>
+    </a>
+    <a href="/en/medios/confianza" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🤝</span> Trust and news consumption</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How much Spaniards trust the news and each outlet, how they get informed, how many pay for news and how many avoid it, compared with the rest of the EU.</p>
+    </a>
+    <a href="/en/medios/libertad-pluralismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗽</span> Press freedom and pluralism</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Spain's position in the Reporters Without Borders index, the risks to pluralism and the Council of Europe's alerts about journalists.</p>
+    </a>
+    <a href="/en/medios/sector" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📉</span> The media business</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How much is read, watched and listened to, how much is invested in advertising and in which medium, how many people work in the media and how much weight public money carries.</p>
     </a>
 </div>

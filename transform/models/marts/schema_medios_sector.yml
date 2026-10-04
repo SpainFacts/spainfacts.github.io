@@ -1,0 +1,112 @@
+version: 2
+
+models:
+  - name: medios_sector_empresas
+    description: "Empresas, personas ocupadas, cifra de negocios y valor añadido de las ramas NACE de los medios (periódicos J5813, revistas J5814, radio J601, televisión J602, agencias de noticias J6391 y agregados J58, J581, J59, J60, J639), España y los 27 países de la UE, 2005-último. Eurostat SBS (sbs_na_1a_se_r2 hasta 2020 y sbs_ovw_act desde 2021, columna serie: hay ruptura metodológica en 2021). Por 100.000 habitantes y € por habitante para todos los países; en euros reales solo España."
+    columns:
+      - name: anio
+      - name: pais
+        description: Código Eurostat (ES, EU27_2020, EU28, DE...).
+      - name: rama
+      - name: rama_nombre
+      - name: serie
+        description: "'hasta_2020' o 'desde_2021'."
+      - name: empresas
+      - name: ocupados
+        description: Personas ocupadas (asalariados y no asalariados).
+      - name: cifra_negocios_meur
+        description: Cifra de negocios neta, millones de euros corrientes.
+      - name: valor_anadido_meur
+        description: Valor añadido a coste de factores, millones de euros corrientes.
+      - name: poblacion
+      - name: ocupados_100k_hab
+      - name: cifra_negocios_eur_hab
+        description: Euros corrientes por habitante.
+      - name: cifra_negocios_eur_hab_real
+        description: Solo España, euros del año base por habitante.
+      - name: cifra_negocios_meur_real
+      - name: valor_anadido_eur_hab_real
+      - name: cifra_negocios_eur_ocupado
+        description: Euros corrientes por persona ocupada.
+      - name: anio_base
+
+  - name: medios_sector_publicidad
+    description: "Inversión publicitaria por medio en España (InfoAdex), en millones de euros corrientes y reales, € reales por habitante y % del subtotal de medios convencionales/controlados. Dos metodologías (columna metodologia): 'convencionales' 2004-2023 (diarios = papel, todo lo digital en internet) y 'controlados' 2022-2025 (cada medio con su parte digital)."
+    columns:
+      - name: anio
+      - name: metodologia
+      - name: medio
+      - name: medio_nombre
+      - name: es_desglose
+        description: true para los medios que suman el subtotal de controlados (sin subtotales ni el reparto papel/web).
+      - name: inversion_meur_nominal
+      - name: inversion_meur_real
+      - name: eur_hab_real
+      - name: pct_controlados
+      - name: edicion
+        description: Edición del estudio de la que sale la cifra.
+      - name: poblacion
+      - name: anio_base
+
+  - name: medios_sector_audiencia
+    description: "Penetración de los medios (EGM, AIMC), 1980-2025: % de la población de 14 o más años, personas (miles) y por 1.000 habitantes de toda la población (desde 1998), más minutos diarios de radio y TV."
+    columns:
+      - name: anio
+      - name: medio
+      - name: medio_nombre
+      - name: penetracion_pct
+      - name: universo_miles
+      - name: personas_miles
+      - name: por_1000_hab
+      - name: minutos_dia
+        description: Solo radio y television (1991-2025).
+
+  - name: medios_sector_cabeceras
+    description: "Lectores diarios de cada periódico en papel y visor digital (EGM 2009-2025): % de 14+ años, miles, por 1.000 habitantes, variación desde 2009 y puesto del año."
+    columns:
+      - name: anio
+      - name: cabecera
+      - name: penetracion_pct
+      - name: lectores_miles
+      - name: por_1000_hab
+      - name: variacion_desde_inicio_pct
+      - name: puesto
+
+  - name: medios_sector_grupos
+    description: "Ingresos y beneficio neto de los grandes grupos de medios cotizados (de momento Atresmedia 2007-2025), en euros corrientes, reales y por habitante, con el margen neto."
+    columns:
+      - name: anio
+      - name: grupo
+      - name: ingresos_meur_nominal
+      - name: resultado_neto_meur_nominal
+      - name: ingresos_meur_real
+      - name: resultado_neto_meur_real
+      - name: ingresos_eur_hab_real
+      - name: margen_neto_pct
+      - name: anio_base
+      - name: fuente
+
+  - name: medios_sector_dinero_publico
+    description: "Por año: inversión publicitaria en medios controlados y total del mercado (InfoAdex) frente a la publicidad del Estado (institucional + comercial), la financiación de RTVE y las radiotelevisiones autonómicas, las subvenciones a medios privados y los contratos con medios privados (marts medios_*). Millones de euros corrientes, € reales por habitante y % sobre el mercado (orientativo: no miden lo mismo)."
+    columns:
+      - name: anio
+      - name: metodologia
+      - name: controlados_meur
+      - name: total_mercado_meur
+      - name: publicidad_estado_meur
+      - name: publicidad_institucional_meur
+      - name: tv_publica_meur
+      - name: rtve_meur
+      - name: autonomicas_meur
+      - name: subvenciones_meur
+      - name: contratos_meur
+      - name: publicidad_estado_pct_mercado
+      - name: tv_publica_pct_mercado
+      - name: tv_publica_pct_publicidad_tv
+        description: Financiación pública de RTVE y autonómicas en % de la inversión publicitaria en televisión.
+      - name: controlados_eur_hab_real
+      - name: publicidad_estado_eur_hab_real
+      - name: tv_publica_eur_hab_real
+      - name: subvenciones_eur_hab_real
+      - name: contratos_eur_hab_real
+      - name: anio_base

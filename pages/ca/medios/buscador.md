@@ -1,7 +1,7 @@
 ---
 title: Qui rep què
 description: "Cercador de mitjans de comunicació: tots els diners públics que ha rebut cada mitjà (OKDiario, Libertad Digital, El País, la SER, La Vanguardia...) de totes les administracions, per via (publicitat institucional, contractes i subvencions), any i administració que paga, en euros d'avui."
-i18n_origen: e22d27f052b9
+i18n_origen: 4e52a4100892
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,17 +11,17 @@ og:
 </script>
 
 ```sql lista_medios
-SELECT DISTINCT medio_id,
+SELECT medio_id,
        medio || CASE WHEN titularidad = 'publica' THEN ' (medio público)'
                      WHEN es_plataforma THEN ' (plataforma digital)'
                      ELSE '' END AS etiqueta,
        total_eur_real
-FROM mother.medios_receptores_resumen
+FROM mother.medios_receptores_totales
 ORDER BY total_eur_real DESC
 ```
 
 ```sql sel
-SELECT DISTINCT medio_id, medio, grupo, tipo_medio, titularidad, es_plataforma, en_ranking,
+SELECT medio_id, medio, grupo, tipo_medio, titularidad, es_plataforma, en_ranking,
        total_eur_real, total_eur_nominal, total_2019_2025_eur_real,
        coalesce(estado_institucional_eur_real, 0) + coalesce(estado_comercial_eur_real, 0) AS estado_eur_real,
        coalesce(territorial_eur_real, 0) AS territorial_eur_real,
@@ -37,8 +37,8 @@ SELECT DISTINCT medio_id, medio, grupo, tipo_medio, titularidad, es_plataforma, 
        CAST(rango_privados AS INTEGER) AS rango_privados,
        CAST(rango_publicos AS INTEGER) AS rango_publicos,
        niveles_asignacion,
-       (SELECT count(*) FROM (SELECT DISTINCT medio_id FROM mother.medios_receptores_resumen WHERE en_ranking)) AS n_ranking
-FROM mother.medios_receptores_resumen
+       (SELECT count(*) FROM mother.medios_receptores_totales WHERE en_ranking) AS n_ranking
+FROM mother.medios_receptores_totales
 WHERE medio_id = '${inputs.medio.value}'
 ```
 
@@ -56,7 +56,7 @@ SELECT CAST(anio AS INTEGER) AS anio,
        coalesce(sum(importe_eur_real) FILTER (WHERE via IN ('Contrato', 'Subvención')), 0) AS contratos_subv,
        count(DISTINCT administracion) AS n_admin
 FROM mother.medios_receptores
-WHERE medio_id = '${inputs.medio.value}' AND NOT duplicado_probable AND anio < year(current_date)
+WHERE medio_id = '${inputs.medio.value}' AND anio < year(current_date)
 GROUP BY 1
 ORDER BY 1
 ```
@@ -73,7 +73,7 @@ SELECT gobierno, administracion, via, string_agg(DISTINCT partido, ', ') AS part
        CAST(min(anio) AS INTEGER) AS desde,
        CAST(max(anio) AS INTEGER) AS hasta
 FROM mother.medios_receptores
-WHERE medio_id = '${inputs.medio.value}' AND NOT duplicado_probable
+WHERE medio_id = '${inputs.medio.value}'
 GROUP BY ALL
 ORDER BY importe_eur_real DESC
 ```
@@ -91,10 +91,10 @@ SELECT coalesce(r.partido, 'Sin dato (diputaciones y otras entidades locales)') 
        coalesce(any_value(f.color), '#94a3b8') AS color,
        sum(r.importe_eur_real) AS importe_eur_real, count(*) AS pagos,
        count(DISTINCT r.gobierno) AS administraciones,
-       100 * sum(r.importe_eur_real) / (SELECT sum(importe_eur_real) FROM mother.medios_receptores WHERE medio_id = '${inputs.medio.value}' AND NOT duplicado_probable) AS pct
+       100 * sum(r.importe_eur_real) / (SELECT sum(importe_eur_real) FROM mother.medios_receptores WHERE medio_id = '${inputs.medio.value}') AS pct
 FROM mother.medios_receptores r
 LEFT JOIN (SELECT familia, any_value(color) AS color FROM mother.alcaldes_historia WHERE color IS NOT NULL GROUP BY familia) f ON f.familia = r.partido
-WHERE r.medio_id = '${inputs.medio.value}' AND NOT r.duplicado_probable
+WHERE r.medio_id = '${inputs.medio.value}'
 GROUP BY 1
 ORDER BY importe_eur_real DESC
 ```
@@ -102,7 +102,7 @@ ORDER BY importe_eur_real DESC
 ```sql por_partido_anio
 SELECT CAST(anio AS INTEGER) AS anio, CASE WHEN anio >= year(current_date) THEN CAST(CAST(anio AS INTEGER) AS VARCHAR) || ' (incomplet)' ELSE CAST(CAST(anio AS INTEGER) AS VARCHAR) END AS periodo, coalesce(partido, 'Sin dato') AS partido, sum(importe_eur_real) AS importe_eur_real
 FROM mother.medios_receptores
-WHERE medio_id = '${inputs.medio.value}' AND NOT duplicado_probable
+WHERE medio_id = '${inputs.medio.value}'
 GROUP BY ALL
 ORDER BY anio, partido
 ```
@@ -116,32 +116,32 @@ SELECT CAST(anio AS INTEGER) AS anio, gobierno, coalesce(partido, '—') AS part
        CASE nivel_asignacion WHEN 'cabecera' THEN 'Cabecera' WHEN 'sociedad' THEN 'Sociedad editora' ELSE 'Grupo' END AS asignado_por,
        url
 FROM mother.medios_receptores
-WHERE medio_id = '${inputs.medio.value}' AND NOT duplicado_probable
+WHERE medio_id = '${inputs.medio.value}'
 ORDER BY anio DESC, importe_eur_real DESC
 ```
 
 ```sql duplicados
 SELECT count(*) AS n, coalesce(sum(importe_eur_real), 0) AS importe_eur_real
-FROM mother.medios_receptores
-WHERE medio_id = '${inputs.medio.value}' AND duplicado_probable
+FROM mother.medios_receptores_duplicados
+WHERE medio_id = '${inputs.medio.value}'
 ```
 
 ```sql relacionados
-SELECT DISTINCT medio, tipo_medio, total_2019_2025_eur_real, total_eur_real
-FROM mother.medios_receptores_resumen
+SELECT medio, tipo_medio, total_2019_2025_eur_real, total_eur_real
+FROM mother.medios_receptores_totales
 WHERE grupo = (SELECT grupo FROM ${sel}) AND medio_id <> '${inputs.medio.value}'
 ORDER BY total_eur_real DESC
 ```
 
 ```sql ranking
-SELECT DISTINCT CAST(rango_privados AS INTEGER) AS puesto, medio, grupo,
+SELECT CAST(rango_privados AS INTEGER) AS puesto, medio, grupo,
        total_2019_2025_eur_real, total_eur_real,
        coalesce(estado_institucional_eur_real, 0) + coalesce(estado_comercial_eur_real, 0) AS estado_eur_real,
        coalesce(territorial_eur_real, 0) AS territorial_eur_real,
        coalesce(contratos_eur_real, 0) AS contratos_eur_real,
        coalesce(subvenciones_eur_real, 0) AS subvenciones_eur_real,
        CAST(n_administraciones_total AS INTEGER) AS administraciones
-FROM mother.medios_receptores_resumen
+FROM mother.medios_receptores_totales
 WHERE en_ranking
 ORDER BY puesto
 ```
@@ -157,11 +157,11 @@ LIMIT 25
 ```
 
 ```sql publicos
-SELECT DISTINCT CAST(rango_publicos AS INTEGER) AS puesto, medio, total_2019_2025_eur_real, total_eur_real,
+SELECT CAST(rango_publicos AS INTEGER) AS puesto, medio, total_2019_2025_eur_real, total_eur_real,
        coalesce(estado_institucional_eur_real, 0) + coalesce(estado_comercial_eur_real, 0) AS estado_eur_real,
        coalesce(territorial_eur_real, 0) AS territorial_eur_real,
        coalesce(contratos_eur_real, 0) AS contratos_eur_real
-FROM mother.medios_receptores_resumen
+FROM mother.medios_receptores_totales
 WHERE titularidad = 'publica'
 ORDER BY puesto
 ```
@@ -179,7 +179,6 @@ SELECT
 SELECT via, CAST(min(anio) AS INTEGER) AS desde, CAST(max(anio) AS INTEGER) AS hasta, count(*) AS pagos,
        sum(importe_eur_real) AS importe_eur_real
 FROM mother.medios_receptores
-WHERE NOT duplicado_probable
 GROUP BY via
 ORDER BY importe_eur_real DESC
 ```

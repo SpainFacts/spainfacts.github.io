@@ -4,7 +4,9 @@ models:
   - name: medios_publicidad_territorial_gasto
     description: >
       Base en formato largo de la publicidad institucional de comunidades y grandes
-      ayuntamientos (raw.pubt_gasto + seed medios_publicidad_territorial_manual), con el
+      ayuntamientos (raw.pubt_gasto + raw.pubt_planes_cm, planes de medios de la Comunidad
+      de Madrid + seeds medios_publicidad_territorial_manual y medios_publicidad_canal_planes),
+      con el
       tipo de medio normalizado (tipo_medio_norm), el grupo mediático normalizado (seed
       medios_grupos_equivalencias; si no está, el propio medio), la marca de medio público
       y el importe homogeneizado sin IVA (importe_sin_iva_eur, ÷1,21 donde la fuente da
@@ -32,7 +34,8 @@ models:
       públicas, con el partido que gobierna a 1 de julio. Cobertura: Cataluña 2015-2025,
       Castilla y León 2014-2025, Aragón 2016-2025, Navarra 2012 y 2016-2025, Murcia
       2014-2025 (incompleta antes de 2017), Comunitat Valenciana 2019-2024, País Vasco
-      2018-2025, Comunidad de Madrid solo Canal de Isabel II 2023-2025, Ayuntamiento de
+      2018-2025, Comunidad de Madrid 2020-2025 (planes de medios, base 'planificado', más
+      Canal de Isabel II por soporte; 2019 solo Canal), Ayuntamiento de
       Madrid 2017-2025 y Ajuntament de Barcelona 2012-2024 (+TMB 2021-2024). Las bases no
       son homogéneas: ver iva_incluido, base, comparable_entre_territorios y nota antes de
       comparar comunidades.
@@ -65,9 +68,9 @@ models:
         description: true (Aragón, Murcia), false (Cataluña, C. Valenciana, Ayto. de Madrid), nulo si la fuente no lo dice o se mezclan criterios.
       - name: iva_fuentes
       - name: base
-        description: "'ejecutado' o 'contratado' (Aragón, Murcia, C. Valenciana)."
+        description: "'ejecutado', 'contratado' (Aragón, Murcia, C. Valenciana) o 'planificado' (Comunidad de Madrid y Canal de Isabel II: planes de medios, no ejecución)."
       - name: comparable_entre_territorios
-        description: true si la base es ejecutado y la fila no es solo una empresa suelta (Canal, TMB). Las filas false deben mostrarse marcadas.
+        description: true si la base es ejecutado y la fila no es solo una empresa suelta (Canal 2019, TMB). Las filas false deben mostrarse marcadas; la Comunidad de Madrid es siempre false (base 'planificado').
       - name: organismos
       - name: poblacion
       - name: factor_deflactor
@@ -121,7 +124,8 @@ models:
       (coste total de campañas comerciales, incluye organismos que venden algo y RTVE
       marcada); autonómico y local desde medios_publicidad_territorial_gasto
       (es_empresa_publica). magnitud distingue coste de campañas comerciales, compra de
-      medios institucional y cuenta 627 (Canal).
+      medios institucional y planes de medios (Canal de Isabel II y Consorcio Regional de
+      Transportes, de Madrid).
     columns:
       - name: anio
         tests: [not_null]
@@ -145,5 +149,5 @@ models:
       - name: iva_incluido
       - name: base
       - name: magnitud
-        description: coste_campanas_comerciales (AGE), publicidad_institucional_en_medios (comunidades y ayuntamientos), cuenta_627 (Canal de Isabel II).
+        description: coste_campanas_comerciales (AGE), publicidad_institucional_en_medios (comunidades y ayuntamientos), plan_de_medios (base planificado; Canal de Isabel II 2020-2025 y Consorcio Regional de Transportes). La cuenta 627 de Canal ya no entra.
       - name: nota

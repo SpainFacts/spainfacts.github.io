@@ -80,4 +80,4 @@ models:
       Los 50 mayores contratos de patrocinio y eventos (patrocinios, foros, jornadas, congresos,
       premios, galas, desayunos, encuentros, aniversarios, giras...) de cada año a empresas de
       medios (es_medio='si', sin sospechosos), con objeto, órgano, adjudicatario, importe, enlace,
-      fuente_plataforma y metodo_casado.
+      fuente_plataforma y metodo_casado; ccaa y municipio dan el nombre del territorio del órgano.

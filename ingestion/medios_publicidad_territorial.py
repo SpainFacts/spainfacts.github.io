@@ -25,6 +25,10 @@ campaña cuando la fuente lo da):
   (datosabiertos.carm.es), 2017-, contratos con medio y empresa. Son importes
   contratados (con IVA), no ejecución.
 
+Recurso aparte pubt_planes_cm (replace, mismo esquema): planes de medios de la
+Comunidad de Madrid 2020- (ZIP de Excel del Portal de Transparencia), neto sin IVA,
+base 'planificado'; el parseo está en ingestion/medios_planes_madrid.py.
+
 Recurso (replace): pubt_gasto con columnas cod_ccaa (INE), anio,
 organismo_pagador, es_empresa_publica, medio, grupo, tipo_medio, campana,
 importe_eur, iva_incluido, base ('ejecutado'|'contratado'|'planificado'),
@@ -524,4 +528,27 @@ def medios_publicidad_territorial():
                 raise
             log.info("medios_publicidad_territorial: %s -> %d filas", nombre, n)
 
-    return pubt_gasto
+    @dlt.resource(name="pubt_planes_cm", write_disposition="replace",
+                  columns={"iva_incluido": {"data_type": "bool", "nullable": True},
+                           "cod_municipio": {"data_type": "text", "nullable": True},
+                           "grupo": {"data_type": "text", "nullable": True},
+                           "medio": {"data_type": "text", "nullable": True},
+                           "tipo_medio": {"data_type": "text", "nullable": True},
+                           "campana": {"data_type": "text", "nullable": True},
+                           "nota": {"data_type": "text", "nullable": True},
+                           "importe_eur": {"data_type": "double"}})
+    def pubt_planes_cm():
+        """Planes de medios de la Comunidad de Madrid (2020-), mismo esquema que pubt_gasto.
+        Recurso aparte porque baja ~300 MB de ZIP y tarda: si falla, no tumba pubt_gasto."""
+        from ingestion.medios_planes_madrid import planes_cm
+
+        n = 0
+        for r in planes_cm():
+            n += 1
+            fila = _fila("13", r["anio"], r["organismo_pagador"], r["medio"], r["tipo_medio"], r["importe"],
+                         False, "planificado", r["fuente"], grupo=r["grupo"], campana=r["campana"], nota=r["nota"])
+            fila["es_empresa_publica"] = bool(r["es_empresa_publica"])
+            yield fila
+        log.info("medios_publicidad_territorial: planes de medios de la Comunidad de Madrid -> %d filas", n)
+
+    return pubt_gasto, pubt_planes_cm

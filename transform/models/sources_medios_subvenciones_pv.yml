@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw_medios_subvenciones_pv
+    description: "Subvenciones del Gobierno Vasco a medios de comunicación leídas de las resoluciones de concesión del Boletín Oficial del País Vasco (BOPV, https://www.euskadi.eus/bopv), porque el Gobierno Vasco no las publica en la BDNS (ingestion/medios_subvenciones_pv.py, lista de resoluciones en RESOLUCIONES). Programas: Hedabideak 2016-2018, 2019-2021, 2022-2024 y 2025-2028 (medios en euskera, una fila por anualidad), euskera en medios que usan principalmente el castellano 2018-2025, ayudas COVID-19 a prensa y radio 2021 (Lehendakaritza) y a medios diarios 2022 (Cultura), e IA generativa en medios diarios 2024 y 2025. Carga MERGE."
+    schema: raw
+    tables:
+      - name: pv_concesiones_medios
+        description: "Una fila por proyecto o beneficiario de cada resolución (y por anualidad en las plurianuales). cod_concesion = BOPV-<año>-<nº disposición>-<expediente>[-<anualidad>]. anio = anualidad o año de la convocatoria; fecha_concesion = fecha de la resolución. importe = concedido (final tras modificaciones); importe_inicial = el de la resolución original; importe_total_resolucion = total del proyecto en la resolución (plurianuales). beneficiario_nif solo cuando el BOPV lo publica (COVID). beneficiario_nombre_bopv y proyecto son null en personas físicas. url_bopv = PDF de la resolución."
+        columns:
+          - name: cod_concesion
+            tests: [unique, not_null]
+          - name: importe
+            tests: [not_null]

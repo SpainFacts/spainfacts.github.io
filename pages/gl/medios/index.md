@@ -1,7 +1,7 @@
 ---
 title: Medios de comunicación
 description: "Medios de comunicación en España en datos: canto diñeiro público reciben as radiotelevisións públicas e os medios privados en publicidade institucional e subvencións, por habitante, por comunidade e por partido."
-i18n_origen: ec3a4f99d3ea
+i18n_origen: fac8a0e02911
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -84,5 +84,17 @@ Que relación económica teñen as administracións cos medios de comunicación:
     <a href="/gl/medios/buscador" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔎</span> Quen recibe que</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Busca un medio e mira canto diñeiro público recibiu, de que administracións e por que: publicidade, contratos e subvencións, pagamento a pagamento.</p>
+    </a>
+    <a href="/gl/medios/confianza" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🤝</span> Confianza e consumo de noticias</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Canto confían os españois nas noticias e en cada medio, como se informan, cantos pagan por noticias e cantos as evitan, fronte ao resto da UE.</p>
+    </a>
+    <a href="/gl/medios/libertad-pluralismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗽</span> Liberdade de prensa e pluralismo</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">A posición de España na clasificación de Reporteiros Sen Fronteiras, os riscos para o pluralismo e as alertas sobre xornalistas do Consello de Europa.</p>
+    </a>
+    <a href="/gl/medios/sector" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📉</span> O negocio dos medios</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Canto se le, se ve e se escoita, canto se inviste en publicidade e en que soporte, canta xente traballa nos medios e canto pesa o diñeiro público.</p>
     </a>
 </div>

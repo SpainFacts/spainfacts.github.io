@@ -1,0 +1,37 @@
+version: 2
+
+seeds:
+  - name: medios_confianza_paises_dnr
+    description: >
+      Países del Reuters Institute Digital News Report (slug de su página web
+      https://reutersinstitute.politics.ox.ac.uk/digital-news-report/<año>/<slug>)
+      y de la UE del Eurobarómetro, con su código de dos letras tal como lo usa el
+      Eurobarómetro (Grecia = EL, Reino Unido = UK), el nombre en inglés de los
+      gráficos del DNR, un nombre alternativo (US, UK, Czechia, «India*»...), el
+      nombre en español y si es Estado miembro de la UE / país europeo. Elaborado a
+      mano para el tema medios_confianza.
+    config:
+      column_types:
+        slug: varchar
+        iso2: varchar
+        nombre_en: varchar
+        nombre_alt: varchar
+        nombre_es: varchar
+        ue: boolean
+        europa: boolean
+    columns:
+      - name: slug
+        description: Slug de la página de país del DNR (vacío para los países de la UE que el DNR no cubre).
+      - name: iso2
+        description: Código de dos letras del Eurobarómetro (EL para Grecia, UK para Reino Unido).
+        tests: [not_null, unique]
+      - name: nombre_en
+        description: Nombre en inglés como aparece en los gráficos del DNR.
+      - name: nombre_alt
+        description: Otra forma de nombrarlo en algunos gráficos del DNR.
+      - name: nombre_es
+        description: Nombre en español.
+      - name: ue
+        description: Estado miembro de la UE en 2026.
+      - name: europa
+        description: País europeo (UE, Reino Unido, Noruega, Suiza, Serbia, Turquía).

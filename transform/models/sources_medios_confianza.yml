@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_medios_confianza
+    description: "Confianza y consumo de noticias: Reuters Institute Digital News Report (páginas de país y resumen ejecutivo, gráficos Datawrapper; CC BY 4.0) y Eurobarómetro Standard de la Comisión Europea (anexos de datos en PDF, pregunta de confianza en los medios). ingestion/medios_confianza.py"
+    schema: raw
+    tables:
+      - name: dnr_tarjetas
+        description: "Cifras clave en HTML de cada página de país del DNR desde 2021 (anio_informe, pais_slug, indicador = título de la tarjeta, p. ej. 'Pay for online news', 'Avoid the news sometimes/often', 'Trust in news overall'; valor en %, valor_texto, detalle = cambio y puesto o media global; url)."
+      - name: dnr_graficos
+        description: "Gráficos Datawrapper del DNR en formato largo (anio_informe, pais_slug — 'resumen' para el resumen ejecutivo —, grafico = id Datawrapper, titulo del iframe, fila, etiqueta = primera columna, columna, valor_texto, valor numérico, url de la página, url_datos). España: todos los gráficos de su página desde 2017; resto de países: 'Overall trust score'; resumen: gráficos de confianza, pago, evitación, interés y preocupación por lo falso."
+      - name: eurobarometro_confianza_medios
+        description: "Eurobarómetro Standard, pregunta «how much trust you have in certain (types of) media» (prensa escrita, radio, televisión, internet, redes sociales online): % que tiende a confiar, a no confiar y NS por país y oleada (oleada = número del Eurobarómetro, referencia STDnn, inicio_campo, anexo, url). Extraído del Data annex en PDF de cada oleada."

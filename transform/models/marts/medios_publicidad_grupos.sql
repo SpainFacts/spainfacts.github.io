@@ -30,7 +30,6 @@ select
     s.importe_eur as importe_eur_nominal,
     s.importe_eur * d.factor as importe_eur_real,
     s.importe_eur * d.factor / p.poblacion as eur_hab_real,
-    1000.0 * s.importe_eur * d.factor / p.poblacion as eur_1000hab_real,
     100.0 * s.importe_eur / sum(s.importe_eur) over (partition by s.anio, s.tipo) as pct,
     cast(row_number() over (partition by s.anio, s.tipo order by s.importe_eur desc) as integer) as puesto,
     coalesce(s.nota like 'plataforma%', false) as es_plataforma,

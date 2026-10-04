@@ -27,3 +27,19 @@ sources:
           año; false en desgloses parciales, p. ej. las tablas por medio de Navarra),
           fuente y nota. Cataluña: neto sin IVA ni comisión de agencia. Madrid: se guarda
           el importe sin IVA. Aragón y Murcia: con IVA, contratado/adjudicado.
+      - name: pubt_planes_cm
+        description: >
+          Planes de medios de la Comunidad de Madrid, 2020 hasta el último año publicado
+          (Portal de Transparencia, «Gastos en publicidad y comunicación institucional»,
+          recurso «Planes de medios»: un ZIP de Excel por año, un Excel por campaña y lote).
+          Mismas columnas que pubt_gasto, con cod_ccaa '13', nivel 'autonomico', base
+          'planificado', iva_incluido false (neto tras el descuento, sin IVA; el plan no
+          indica la comisión de la agencia), cuenta_en_total true. Una fila por línea del
+          plan (soporte o cabecera; en exterior, el exclusivista) y por campaña (carpeta del
+          ZIP, con «Anuncio oficial:» delante en los avisos legales y el lote al final).
+          Cada bloque se cuadra con su «TOTAL NETO» y cada fichero con su hoja «Óptico»;
+          la producción que el plan da aparte va como fila sin medio (tipo_medio
+          'PRODUCCIÓN'). es_empresa_publica marca el Consorcio Regional de Transportes (y
+          Metro, Telemadrid o Canal si apareciesen). Se omiten las campañas de Canal de
+          Isabel II del ZIP de 2020, que van con los planes propios de Canal (seed
+          medios_publicidad_canal_planes). Parseo en ingestion/medios_planes_madrid.py.

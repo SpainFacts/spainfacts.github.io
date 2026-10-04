@@ -1987,3 +1987,43 @@ loc_television_benavente_tdt,television benavente tdt,nombre_exacto,territorial
 loc_radio_la_comarca,radio la comarca,nombre_exacto,territorial
 loc_totbarcelona,totbarcelona,nombre_exacto,territorial
 loc_ebro_fm,ebro fm,nombre_exacto,territorial
+telemadrid,tvm la otra,contiene,territorial
+telemadrid,tvm,nombre_exacto,territorial
+telemadrid,la otra,nombre_exacto,territorial
+telemadrid,tvm mas la otra,contiene,territorial
+cadena_ser,ser com madrid,contiene,territorial
+cadena_ser,circuito ser,contiene,territorial
+onda_cero,r onda 0,contiene,territorial
+onda_cero,onda 0 madrid,contiene,territorial
+el_pais,pais madrid,nombre_exacto,territorial
+el_pais,pais,nombre_exacto,territorial
+trece,trece madrid,contiene,territorial
+rtve,la1,nombre_exacto,territorial
+eldiario,el diario,nombre_exacto,territorial
+loc_gente,gente ed conjunta,contiene,territorial
+loc_gente,gente comunidad de madrid,contiene,territorial
+nif_b88019815,distrito tv,contiene,territorial
+nif_b83306522,el distrito,contiene,territorial
+nif_b82187816,30 dias,contiene,territorial
+ochomadrid,8madrid,contiene,territorial
+ochomadrid,8 madrid,contiene,territorial
+toro_tv,toro tv,contiene,territorial
+canal33_madrid,canal 33,contiene,territorial
+tv_digital_madrid,tv digital madrid,contiene,territorial
+merca2,merca2,contiene,territorial
+que_es,que,nombre_exacto,territorial
+que_es,que es,nombre_exacto,territorial
+que_es,que ed madrid,nombre_exacto,territorial
+el_imparcial,elimparcial,contiene,territorial
+el_imparcial,el imparcial,contiene,territorial
+el_plural,elplural,contiene,territorial
+el_plural,el plural,contiene,territorial
+soy_de,soy de,contiene,territorial
+periodico_espana,periodico de espana,contiene,territorial
+niusdiario,niusdiario,contiene,territorial
+madrid365,madrid 365,contiene,territorial
+moncloa_com,moncloa com,nombre_exacto,territorial
+el_liberal,el liberal,contiene,territorial
+el_cierre_digital,elcierredigital,contiene,territorial
+el_cierre_digital,el cierre digital,contiene,territorial
+edatv,edatv,contiene,territorial

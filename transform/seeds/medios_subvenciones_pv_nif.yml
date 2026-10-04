@@ -1,0 +1,28 @@
+version: 2
+
+seeds:
+  - name: medios_subvenciones_pv_nif
+    description: >
+      NIF de los beneficiarios (personas jurídicas) de las ayudas a medios del Gobierno Vasco
+      leídas del BOPV (raw_medios_subvenciones_pv.pv_concesiones_medios), que casi nunca publican
+      el NIF. Una fila por nombre tal como aparece en el BOPV (beneficiario_nombre_bopv); el mart
+      medios_subvenciones_concesiones la une por nombre exacto. Generada el 2026-10-04 con
+      ingestion de apoyo en el scratchpad y revisada a mano: (1) nombre normalizado idéntico al de
+      una concesión BDNS ya cargada, al padrón medios_padron_nif o a una fila del BOPV con NIF
+      (ayudas COVID); (2) autocompletado de beneficiarios de la BDNS
+      (https://www.infosubvenciones.es/bdnstrans/api/terceros?busqueda=<nombre>), aceptando solo
+      coincidencias claras. Los nombres sin NIF identificado se dejan vacíos: sus importes cuentan en
+      los agregados pero no en las tablas por beneficiario. Sin personas físicas.
+    config:
+      column_types:
+        nif: varchar
+    columns:
+      - name: nombre_bopv
+        description: "Nombre del beneficiario exactamente como lo publica el BOPV."
+        tests: [unique, not_null]
+      - name: nif
+        description: "NIF asignado (vacío si no se pudo identificar con seguridad)."
+      - name: metodo
+        description: "nombre_exacto_bdns_padron_bopv, nombre_parecido_revisado, bdns_terceros, bdns_terceros_revisado o sin_identificar."
+      - name: nombre_referencia
+        description: "Nombre con el que casa en la BDNS (autocompletado o parecido), para revisión."

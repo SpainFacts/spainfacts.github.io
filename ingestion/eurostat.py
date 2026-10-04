@@ -257,5 +257,20 @@ def eurostat():
         for coords, valor in parse_json_stat_series(_json(consulta)):
             yield {"anio": coords.get("time"), "rama": coords.get("nace_r2"), "concepto": coords.get("na_item"), "miles": valor}
 
+    # --- Referencias por país (euros reales y por habitante fuera de España) ---
+    @dlt.resource(name="eurostat_hicp_paises", write_disposition="replace")
+    def hicp_paises():
+        """prc_hicp_aind: IPCA anual (2015=100, media anual) de todos los países y la UE-27 desde 1996.
+        Base de mother.deflactor_paises y del tramo 1996-2001 de mother.deflactor."""
+        for coords, valor in parse_json_stat_series(_json("prc_hicp_aind?coicop=CP00&unit=INX_A_AVG")):
+            yield {"anio": coords.get("time"), "geo": coords.get("geo"), "indice": float(valor) if valor is not None else None}
+
+    @dlt.resource(name="eurostat_poblacion_media_paises", write_disposition="replace")
+    def poblacion_paises():
+        """demo_gind: población media anual (AVG) de todos los países y agregados, para las cifras
+        por habitante de las tablas internacionales."""
+        for coords, valor in parse_json_stat_series(_json("demo_gind?indic_de=AVG")):
+            yield {"anio": coords.get("time"), "geo": coords.get("geo"), "poblacion": float(valor) if valor is not None else None}
+
     return [deuda, balance, gastos, ingresos, subsectores, pib, poblacion, balance_energetico, hogares_usos, bombas_calor,
-            esperanza_vida, pib_trimestral, pib_per_capita, vab_sectores, empleo_sectores]
+            esperanza_vida, pib_trimestral, pib_per_capita, vab_sectores, empleo_sectores, hicp_paises, poblacion_paises]

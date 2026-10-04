@@ -1,0 +1,74 @@
+version: 2
+
+seeds:
+  - name: medios_publicidad_canal_planes
+    description: >
+      Planes de medios de Canal de Isabel II, S.A., M.P. (empresa pública de la Comunidad de
+      Madrid), 2019-2025, por campaña, lote y soporte (cabecera, emisora, cadena, site o
+      exclusivista de exterior). Fuente: «Información económica» del portal de Canal
+      (https://www.canaldeisabelsegunda.es/en/informacion-economica), PDF «Campañas de
+      publicidad Canal de Isabel II AAAA» (la URL y la página de cada fila van en fuente).
+      Extraídos con pdfplumber (tablas y, si no hay líneas de tabla, palabras por
+      coordenadas) y cuadrados con el «TOTAL NETO» (más la «PRODUCCIÓN» cuando el plan la
+      separa) o, si el PDF repite por error el total de otro plan, con el IVA/0,21: cuadran
+      el 100 % del importe de 2022 y 2023 y el 82-92 % de 2020, 2021, 2024 y 2025 (2019 no trae totales); el resto son tramos sin
+      total legible. Importes: «Total Neto Final» SIN IVA (el plan suma después el 21 %),
+      que incluye la producción que el plan imputa a cada soporte; base 'planificado',
+      salvo 2019, que el PDF llama «importe ejecutado» (base 'ejecutado', IVA no indicado).
+      Se excluyen las páginas de la Delegación de Cáceres (Extremadura) del PDF de 2025 y
+      los PDF propios de Cáceres de 2021-2024. Mismas columnas que raw.pubt_gasto más
+      campana. Las campañas de Canal que aparecen en el ZIP de planes de la Comunidad de 2020
+      (1,64 M€) se omiten allí para no duplicar: coinciden con este PDF (1,82 M€, que trae
+      además redes sociales y otra ola). La cuenta 627 de sus cuentas anuales (seed
+      medios_publicidad_territorial_manual, 2023-2025) queda con cuenta_en_total = false.
+      Generado con el script del scratchpad (cyii/canal.py, build_canal.py, seed_canal.py).
+    config:
+      column_types:
+        cod_ccaa: varchar
+        nivel: varchar
+        cod_municipio: varchar
+        anio: integer
+        organismo_pagador: varchar
+        es_empresa_publica: boolean
+        medio: varchar
+        grupo: varchar
+        tipo_medio: varchar
+        campana: varchar
+        importe_eur: double
+        iva_incluido: boolean
+        base: varchar
+        cuenta_en_total: boolean
+        fuente: varchar
+        nota: varchar
+    columns:
+      - name: cod_ccaa
+        description: "Siempre '13' (Comunidad de Madrid)."
+        tests: [not_null]
+      - name: nivel
+        description: "Siempre 'autonomico'."
+      - name: anio
+        tests: [not_null]
+      - name: organismo_pagador
+        description: "Canal de Isabel II."
+      - name: es_empresa_publica
+        description: Siempre true.
+      - name: medio
+        description: Soporte tal cual en el PDF (nulo en 5 filas en que el PDF no lo trae legible).
+      - name: grupo
+        description: Grupo que da el PDF en algunos planes de prensa y radio de 2024-2025 (PRISA, VOCENTO...).
+      - name: tipo_medio
+        description: "PRENSA, PRENSA PROXIMIDAD, RADIO, TELEVISIÓN, EXTERIOR, DIGITAL, REDES SOCIALES, REVISTAS o BRANDED CONTENT, según el título del plan (o, si no lo trae, el lote 2 = digital y el nombre del soporte)."
+      - name: campana
+        description: Campaña y lote («Ahorro de agua 1ª Ola (lote 1)»).
+      - name: importe_eur
+        description: Euros corrientes, neto sin IVA.
+      - name: iva_incluido
+        description: false (2020-2025); nulo en 2019.
+      - name: base
+        description: "'planificado' (2020-2025) o 'ejecutado' (2019)."
+      - name: cuenta_en_total
+        description: Siempre true.
+      - name: fuente
+        description: URL del PDF y página.
+      - name: nota
+        description: Si el tramo cuadra con el total del plan, y el formato.

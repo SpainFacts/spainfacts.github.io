@@ -41,6 +41,7 @@ from ingestion.transparencia_publicidad_activa import transparencia_publicidad_a
 from ingestion.vivienda_publica import vivienda_publica
 from ingestion.medios_publicidad import medios_publicidad
 from ingestion.medios_subvenciones import medios_subvenciones
+from ingestion.medios_subvenciones_pv import medios_subvenciones_pv
 from ingestion.medios_publicidad_territorial import medios_publicidad_territorial
 from ingestion.medios_contratos import medios_contratos
 from ingestion.medios_contratos_ccaa import medios_contratos_ccaa
@@ -48,6 +49,9 @@ from ingestion.primario import primario
 from ingestion.industria import industria
 from ingestion.construccion import construccion
 from ingestion.diputados_inmuebles import diputados_inmuebles
+from ingestion.medios_sector import medios_sector
+from ingestion.medios_confianza import medios_confianza
+from ingestion.medios_libertad import medios_libertad
 from ingestion.mercado import mercado
 from ingestion.pensiones import pensiones
 from ingestion.renta import renta
@@ -372,6 +376,13 @@ def medios_subvenciones_assets(context: AssetExecutionContext, dlt_resource: Dag
     yield from dlt_resource.run(context=context)
 
 
+# Subvenciones del Gobierno Vasco a medios: resoluciones de concesión del BOPV (no publica en la BDNS).
+# Merge por cod_concesion; valida que cada tabla cuadre con su total publicado.
+@dlt_assets(dlt_source=medios_subvenciones_pv(), dlt_pipeline=_pipeline_motherduck("medios_subvenciones_pv"), name="medios_subvenciones_pv", group_name="ingesta_mensual")
+def medios_subvenciones_pv_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # Publicidad institucional de CCAA (Cataluña, CyL, Aragón, Navarra, Murcia) y de los
 # Ayuntamientos de Madrid y Barcelona, por medio.
 @dlt_assets(dlt_source=medios_publicidad_territorial(), dlt_pipeline=_pipeline_motherduck("medios_publicidad_territorial"), name="medios_publicidad_territorial", group_name="ingesta_mensual")
@@ -422,13 +433,33 @@ def diputados_inmuebles_assets(context: AssetExecutionContext, dlt_resource: Dag
     yield from dlt_resource.run(context=context)
 
 
+# Negocio de los medios: estadísticas estructurales de empresas de Eurostat (ramas J58-J63.91).
+@dlt_assets(dlt_source=medios_sector(), dlt_pipeline=_pipeline_motherduck("medios_sector"), name="medios_sector", group_name="ingesta_mensual")
+def medios_sector_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Confianza y consumo de noticias: Reuters Institute Digital News Report (páginas de país y
+# gráficos Datawrapper) y Eurobarómetro Standard (anexos PDF). Datos anuales; carga ~20 min.
+@dlt_assets(dlt_source=medios_confianza(), dlt_pipeline=_pipeline_motherduck("medios_confianza"), name="medios_confianza", group_name="ingesta_mensual")
+def medios_confianza_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Libertad de prensa y pluralismo: RSF, Media Pluralism Monitor (EUI), V-Dem (vía OWID) y alertas
+# de la plataforma del Consejo de Europa para la protección del periodismo. Carga ~10 min.
+@dlt_assets(dlt_source=medios_libertad(), dlt_pipeline=_pipeline_motherduck("medios_libertad"), name="medios_libertad", group_name="ingesta_mensual")
+def medios_libertad_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # --- Transformación: dbt --------------------------------------------------
 
 dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa"}
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa", "medios_sector", "medios_confianza", "medios_libertad", "medios_subvenciones_pv"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -499,7 +530,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_subvenciones_pv_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, medios_sector_assets, medios_confianza_assets, medios_libertad_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

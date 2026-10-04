@@ -84,4 +84,16 @@ Qué relación económica tienen las administraciones con los medios de comunica
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔎</span> Quién recibe qué</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Busca un medio y mira cuánto dinero público ha recibido, de qué administraciones y por qué: publicidad, contratos y subvenciones, pago a pago.</p>
     </a>
+    <a href="/medios/confianza" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🤝</span> Confianza y consumo de noticias</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuánto confían los españoles en las noticias y en cada medio, cómo se informan, cuántos pagan por noticias y cuántos las evitan, frente al resto de la UE.</p>
+    </a>
+    <a href="/medios/libertad-pluralismo" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗽</span> Libertad de prensa y pluralismo</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La posición de España en la clasificación de Reporteros Sin Fronteras, los riesgos para el pluralismo y las alertas sobre periodistas del Consejo de Europa.</p>
+    </a>
+    <a href="/medios/sector" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">📉</span> El negocio de los medios</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuánto se lee, se ve y se escucha, cuánto se invierte en publicidad y en qué soporte, cuánta gente trabaja en los medios y cuánto pesa el dinero público.</p>
+    </a>
 </div>

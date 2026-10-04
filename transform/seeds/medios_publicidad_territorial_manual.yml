@@ -26,7 +26,9 @@ seeds:
       relaciones públicas» de la memoria de sus cuentas anuales individuales
       (https://www.canaldeisabelsegunda.es/en/informacion-economica; 2025 y 2024 en la pág.
       104 del PDF de 2025, 2023 en la pág. 101 del de 2024): incluye relaciones públicas y
-      patrocinios, no es solo compra de medios. (4) TMB 2021-2025 (cod_municipio 08019):
+      patrocinios, no es solo compra de medios. Desde 2026-10-04 estas tres filas llevan
+      cuenta_en_total = false: el total de Canal sale de sus planes de medios por cabecera
+      (seed medios_publicidad_canal_planes, 2019-2025) y la 627 queda solo como referencia. (4) TMB 2021-2025 (cod_municipio 08019):
       total anual de «Despeses per inversió publicitària campanyes» de
       https://transparencia.tmb.cat (tabla en imagen, transcrita a mano). EMT, EMVS y
       Madrid Destino no van aquí: salen ya del Excel del Ayuntamiento de Madrid en

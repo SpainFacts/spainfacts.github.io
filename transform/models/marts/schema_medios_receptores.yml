@@ -47,6 +47,10 @@ models:
         description: "estatal | autonomico | local | empresa_publica | otro"
       - name: cod_ccaa
         description: "Comunidad (código INE) del pagador; '00' = Estado"
+      - name: ccaa
+        description: "Nombre de la comunidad del pagador (España para el Estado)"
+      - name: municipio
+        description: "Nombre del municipio del pagador, si es un ayuntamiento"
       - name: anio
         tests: [not_null]
       - name: concepto
@@ -68,25 +72,43 @@ models:
       - name: fuente
       - name: fuente_cod
         description: "age | territorial | contratos | subvenciones"
-      - name: duplicado_probable
-        description: "Contrato de publicidad o inserciones de una comunidad o ayuntamiento cuya publicidad por medio ya está en la fuente territorial ese año: probablemente la misma campaña; no suma en el resumen ni en la página"
       - name: nota
 
-  - name: medios_receptores_resumen
+  - name: medios_receptores_duplicados
     description: >
-      Resumen de medios_receptores por medio, año y vía (importe real, pagos, administraciones), con
-      los totales del medio repetidos (todos los años, 2019-2025 y por vía) y el puesto entre los
-      medios privados que no son plataformas (rango_privados, por total 2019-2025) o entre los
-      públicos (rango_publicos).
+      Pagos excluidos de medios_receptores por ser duplicado probable: contratos de publicidad o
+      inserciones de una comunidad o ayuntamiento cuya publicidad por medio ya está en la fuente
+      territorial ese año (probablemente la misma campaña). Mismas columnas que medios_receptores;
+      no se suman a ella.
     columns:
       - name: medio_id
         tests: [not_null]
+      - name: importe_eur_real
+
+  - name: medios_receptores_resumen
+    description: >
+      Resumen de medios_receptores por medio, año y vía (importe, pagos, administraciones). Sin
+      totales repetidos: los totales del medio y su puesto están en medios_receptores_totales.
+    columns:
+      - name: medio_id
+        tests: [not_null]
+      - name: medio
       - name: anio
       - name: via
       - name: importe_eur_real
       - name: n_pagos
       - name: n_administraciones
         description: "Órganos pagadores distintos ese año y vía"
+
+  - name: medios_receptores_totales
+    description: >
+      Una fila por medio con sus totales (todos los años, 2019-2025 y por vía), el número de pagos y
+      de administraciones y el puesto entre los medios privados que no son plataformas
+      (rango_privados, por total 2019-2025) o entre los públicos (rango_publicos). Sin los pagos
+      duplicados.
+    columns:
+      - name: medio_id
+        tests: [not_null, unique]
       - name: total_eur_real
         description: "Total del medio, todos los años, euros de 2025"
       - name: total_2019_2025_eur_real

@@ -1,7 +1,7 @@
 ---
 title: Diru publikoa komunikabideetan
 description: "Zenbat diru publiko jasotzen duten Espainiako komunikabideek: RTVEri eta telebista autonomikoei egindako ekarpena, Estatuaren erakunde- eta merkataritza-publizitatea komunikazio-taldeka eta komunikabide pribatuentzako diru-laguntzak, biztanleko eta inflazioa kenduta, erkidegoka eta alderdika."
-i18n_origen: dfb93b18d1ce
+i18n_origen: f695df823f3f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -131,7 +131,7 @@ FROM ${pub_medios}
 ```
 
 ```sql pub_grupos
-SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_1000hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
+SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
        CASE WHEN es_plataforma THEN 'Plataforma digital' WHEN es_publico THEN 'Medio público' ELSE 'Grupo de medios' END AS clase
 FROM mother.medios_publicidad_grupos
 ORDER BY tipo DESC, puesto
@@ -321,8 +321,8 @@ ORDER BY eur_hab_real DESC
 ```sql sub_beneficiarios
 SELECT CAST(rango AS INTEGER) AS rango, nombre, total_eur_real, CAST(total_concesiones AS INTEGER) AS concesiones,
        CAST(primer_anio AS INTEGER) AS primer_anio, CAST(ultimo_anio AS INTEGER) AS ultimo_anio, administraciones
-FROM mother.medios_subvenciones_beneficiarios
-WHERE rango <= 25 AND anio = ultimo_anio
+FROM mother.medios_subvenciones_totales
+WHERE rango <= 25
 ORDER BY rango
 ```
 
@@ -512,27 +512,27 @@ Erakunde-kanpainetako espazio-erosketaren banaketa komunikabide motaren arabera.
 <BarChart
     data={pub_grupos_inst}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ 1.000 biztanleko"
+    yFmt='0.00'
+    yAxisTitle="€ biztanleko"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Estatuaren erakunde-publizitatea taldeka, {pub_grupos_resumen[0]?.anio} (€ 1.000 biztanleko)"
+    title="Estatuaren erakunde-publizitatea taldeka, {pub_grupos_resumen[0]?.anio} (€ biztanleko)"
 />
 
 <BarChart
     data={pub_grupos_com}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ 1.000 biztanleko"
+    yFmt='0.00'
+    yAxisTitle="€ biztanleko"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Estatuko enpresen merkataritza-publizitatea taldeka, {pub_grupos_resumen[0]?.anio} (€ 1.000 biztanleko)"
+    title="Estatuko enpresen merkataritza-publizitatea taldeka, {pub_grupos_resumen[0]?.anio} (€ biztanleko)"
 />
 
 <DataTable data={pub_grupos} rows=15 search=true>
@@ -573,7 +573,7 @@ Erkidegoek eta udalek ere publizitatea erosten dute, eta horietako batzuek bakar
     title="Erkidegoen eta udalen erakunde-publizitatea, € biztanleko inflazioa kenduta"
 />
 
-Galiziak, Kanariek, Balearrek, Asturiasek, Kantabriak, Gaztela-Mantxak eta Andaluziak ez dute argitaratzen komunikabide bakoitzeko gastua; Madrilgo Erkidegoak bere komunikabide-planak argitaratzen ditu, baina ez gauzatutakoa. Euskadiko datuak Eusko Jaurlaritzak Legebiltzarrari aurkezten dizkion memorietatik datoz, [gobiernovasco.marketing](https://gobiernovasco.marketing/) webguneak bilduak.
+Galiziak, Kanariek, Balearrek, Asturiasek, Kantabriak, Gaztela-Mantxak eta Andaluziak ez dute argitaratzen komunikabide bakoitzeko gastua; Madrilgo Erkidegoak bere komunikabide-planak argitaratzen ditu (2020tik, kanpainaka eta komunikabideka aurreikusitakoa, BEZik gabe), baina ez gauzatutakoa. Euskadiko datuak Eusko Jaurlaritzak Legebiltzarrari aurkezten dizkion memorietatik datoz, [gobiernovasco.marketing](https://gobiernovasco.marketing/) webguneak bilduak.
 
 Administrazio bakoitzetik gehien jasotzen duten bost taldeak, datua duen azken urtean:
 
@@ -603,7 +603,7 @@ Enpresa publikoek beren kanpainak egiten dituzte, eta ez dira beti agertzen erak
     title="Estatuko enpresen merkataritza-publizitatea, € biztanleko inflazioa kenduta"
 />
 
-Autonomia eta udal mailakoetatik, argitaratzen dituztenen datuak baino ez daude: Canal de Isabel II (bere urteko kontuetan, harreman publikoak eta babesletzak barne), FGC, Loteries de Catalunya, EMT eta Madrid Destino, besteak beste. Metro de Madridek ez du uzten bere datuak deskargatzen.
+Autonomia eta udal mailakoetatik, argitaratzen dituztenen datuak baino ez daude: Canal de Isabel II (bere komunikabide-planak kanpainaka eta komunikabideka 2019tik; urteko kontuak, harreman publikoak eta babesletzak ere biltzen dituztenak, erreferentzia gisa baino ez), FGC, Loteries de Catalunya, EMT eta Madrid Destino, besteak beste. Metro de Madridek ez du uzten bere datuak deskargatzen.
 
 <DataTable data={empresas} rows=15 search=true>
     <Column id=entidad title="Enpresa edo erakundea" />
@@ -744,7 +744,7 @@ Agertzen ez diren erkidegoek ez zieten laguntzarik eman komunikabide pribatuei u
 - **Audientziak**: [Barlovento Comunicación](https://barloventocomunicacion.es/) enpresaren urteko pantaila-kuota, Kantar Mediaren datuekin (4 urteko edo gehiagoko pertsonak, gonbidatuak barne).
 - **Estatuaren publizitatea**: [Erakunde Publizitate eta Komunikaziorako Batzordea, urteko planak eta txostenak](https://www.lamoncloa.gob.es/serviciosdeprensa/cpci/paginas/planeseinformes.aspx) (29/2005 Legea), kanpainen kostu gauzatua 2006tik, komunikabide motaren arabera, eta 2025eko Txostenetik komunikazio-taldeka (erakunde-txostenaren IV. eranskina eta merkataritza-publizitatearenaren III. eranskina). Kostu gauzatuak ekoizpena eta ebaluazioa ere hartzen ditu barne, espazio-erosketaz gain; taldekako banaketa komunikabideen erosketa baino ez da. Txostenek ez dute adierazten zenbatekoek BEZa duten ala ez (biribiltzeko moduagatik, badirudi baietz). Komunikabide bakoitzak kobratzen duena, gainera, kanpainak kontratatzen dituzten komunikabide-agentziek negoziatzen dituzten deskontuen araberakoa da.
 - **Erkidegoen eta udalen publizitatea**: datu irekiak: [Generalitat de Catalunya](https://analisi.transparenciacatalunya.cat/Sector-P-blic/Campanyes-i-promoci-institucional-de-la-Generalita/8d5a-6vsk), [Gaztela eta Leongo Junta](https://analisis.datosabiertos.jcyl.es/explore/dataset/publicidad-institucional/), [Aragoiko Gobernua](https://www.aragon.es/transparencia/gestion-fondos-publicos/campanas-publicidad-institucional), [Nafarroako Gobernua](https://datosabiertos.navarra.es/dataset/publicidad-institucional), [Murtziako Eskualdea](https://transparencia.carm.es/publicidad-institucional), [Madrilgo Udala](https://datos.madrid.es/dataset/300024-0-publicidad-institucional) eta [Bartzelonako Udala](https://opendata-ajuntament.barcelona.cat/data/ca/dataset/campanyes-publicitat-institucional); [Generalitat Valencianaren](https://gvaoberta.gva.es/va/publicidad-y-promocion-institucional) PDF txostenak (haren sektore publiko instrumentalarekin) eta, Euskadirako, [gobiernovasco.marketing](https://gobiernovasco.marketing/) webguneak bildutako Eusko Jaurlaritzaren memoriak (Jaime Gómez-Obregón, CC BY 4.0). Komunikabideen izenak komunikazio-taldeka biltzen dira, SpainFactsen baliokidetasun-taula batekin.
-- **Enpresa publikoak**: Erakunde Publizitate eta Komunikaziorako Batzordearen urteko txostenetako merkataritza-kanpainen kapitulua (erakundeka, 2015-2025); [Canal de Isabel IIren urteko kontuak](https://www.canaldeisabelsegunda.es/en/informacion-economica) (627 kontua, publizitatea, propaganda eta harreman publikoak); [TMBren gardentasun-ataria](https://transparencia.tmb.cat/); eta beren erkidegoko edo udaleko datuetan agertzen diren enpresak. 2024tik, Renferen zifrak Renfe Operadoraren kanpainak baino ez ditu barne hartzen, ez Renfe Viajerosen merkataritza-kanpainak.
+- **Enpresa publikoak**: Erakunde Publizitate eta Komunikaziorako Batzordearen urteko txostenetako merkataritza-kanpainen kapitulua (erakundeka, 2015-2025); [Canal de Isabel IIren komunikabide-planak eta urteko kontuak](https://www.canaldeisabelsegunda.es/en/informacion-economica) (planak kanpainaka eta komunikabideka 2019tik; 627 kontua, publizitatea, propaganda eta harreman publikoak, erreferentzia gisa baino ez); [Madrilgo Erkidegoaren komunikabide-planak](https://www.comunidad.madrid/transparencia/gastos-publicidad-y-comunicacion-institucional) (2020-2025, kanpainaka eta komunikabideka aurreikusitakoa, BEZik gabe); [TMBren gardentasun-ataria](https://transparencia.tmb.cat/); eta beren erkidegoko edo udaleko datuetan agertzen diren enpresak. 2024tik, Renferen zifrak Renfe Operadoraren kanpainak baino ez ditu barne hartzen, ez Renfe Viajerosen merkataritza-kanpainak.
 - **Komunikabideekin egindako kontratuak**: [Sektore Publikoko Kontratazio Plataforma](https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx) (ostatatutako profilen lizitazioak, plataforma autonomiko agregatuak eta kontratu txikiak), 2018tik, eta [kontratazio-organoen erregistroa](https://contrataciondelsectorpublico.gob.es/datosabiertos/OrganosContratacion.xlsx), zein administraziok kontratatzen duen jakiteko. Eskuz berrikusitako komunikabide-enpresen IFZ zerrenda bateko esleipendunak baino ez dira zenbatzen (prentsa-argitaletxeak, irratiak, telebista pribatuak, digitalak eta albiste-agentziak; publizitate-agentziarik, ekoiztetxe teknikorik eta liburu-argitaletxerik gabe). Kontratu mota xedearen testutik ondorioztatzen da. Zentzugabeko zenbatekoak baztertzen dira (zenbateko osoa duten esparru-akordioak).
 - **Diru-laguntzak**: [Diru-laguntzen Datu-base Nazionala](https://www.infosubvenciones.es/bdnstrans/GE/es/concesiones) (IGAE). Komunikabide pribatuentzako laguntza-deialdien eskuz berrikusitako zerrenda bat erabiltzen da (irizpidea SpainFactsen biltegian); emandako zenbatekoa, ez ordaindutakoa, emakida-urtearen arabera. Komunikabide publikoak, prentsa-elkarteak eta bekak baztertzen dira.
 - **Euro konstanteak** INEren KPIarekin eta **biztanleria** erroldatik; Gobernu bakoitzaren alderdia SpainFactsen presidenteen taularen arabera.

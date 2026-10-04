@@ -1,7 +1,7 @@
 ---
 title: Public money in the media
 description: "How much public money the media in Spain receive: funding for RTVE and the regional broadcasters, central government institutional and commercial advertising by media group and subsidies to private media, per inhabitant and adjusted for inflation, by region and by party."
-i18n_origen: dfb93b18d1ce
+i18n_origen: f695df823f3f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -124,7 +124,7 @@ FROM ${pub_medios}
 ```
 
 ```sql pub_grupos
-SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_1000hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
+SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
        CASE WHEN es_plataforma THEN 'Plataforma digital' WHEN es_publico THEN 'Medio público' ELSE 'Grupo de medios' END AS clase
 FROM mother.medios_publicidad_grupos
 ORDER BY tipo DESC, puesto
@@ -314,8 +314,8 @@ ORDER BY eur_hab_real DESC
 ```sql sub_beneficiarios
 SELECT CAST(rango AS INTEGER) AS rango, nombre, total_eur_real, CAST(total_concesiones AS INTEGER) AS concesiones,
        CAST(primer_anio AS INTEGER) AS primer_anio, CAST(ultimo_anio AS INTEGER) AS ultimo_anio, administraciones
-FROM mother.medios_subvenciones_beneficiarios
-WHERE rango <= 25 AND anio = ultimo_anio
+FROM mother.medios_subvenciones_totales
+WHERE rango <= 25
 ORDER BY rango
 ```
 
@@ -506,27 +506,27 @@ Since the {pub_grupos_resumen[0]?.anio} Report, the first under the European Med
 <BarChart
     data={pub_grupos_inst}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ per 1,000 inhabitants"
+    yFmt='0.00'
+    yAxisTitle="€ per inhabitant"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Central government institutional advertising by group, {pub_grupos_resumen[0]?.anio} (€ per 1,000 inhabitants)"
+    title="Central government institutional advertising by group, {pub_grupos_resumen[0]?.anio} (€ per inhabitant)"
 />
 
 <BarChart
     data={pub_grupos_com}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ per 1,000 inhabitants"
+    yFmt='0.00'
+    yAxisTitle="€ per inhabitant"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Commercial advertising by state-owned companies by group, {pub_grupos_resumen[0]?.anio} (€ per 1,000 inhabitants)"
+    title="Commercial advertising by state-owned companies by group, {pub_grupos_resumen[0]?.anio} (€ per inhabitant)"
 />
 
 <DataTable data={pub_grupos} rows=15 search=true>
@@ -567,7 +567,7 @@ Regions and town councils also buy advertising, and only some publish how much a
     title="Institutional advertising by regions and town councils, € per inhabitant adjusted for inflation"
 />
 
-Galicia, the Canary Islands, the Balearic Islands, Asturias, Cantabria, Castile-La Mancha and Andalusia do not publish their spending by outlet; the Community of Madrid publishes its media plans, but not what was actually spent. The Basque Country figures come from the reports the Basque Government submits to Parliament, compiled by [gobiernovasco.marketing](https://gobiernovasco.marketing/).
+Galicia, the Canary Islands, the Balearic Islands, Asturias, Cantabria, Castile-La Mancha and Andalusia do not publish their spending by outlet; the Community of Madrid publishes its media plans (since 2020, what was planned by campaign and outlet, excluding VAT), but not what was actually spent. The Basque Country figures come from the reports the Basque Government submits to Parliament, compiled by [gobiernovasco.marketing](https://gobiernovasco.marketing/).
 
 The five groups that receive most from each administration, in the latest year with data:
 
@@ -597,7 +597,7 @@ Public companies run their own campaigns, which do not always appear in the inst
     title="Commercial advertising by state-owned companies, € per inhabitant adjusted for inflation"
 />
 
-For regional and municipal companies there are only data for those that publish them: Canal de Isabel II (in its annual accounts, including public relations and sponsorship), FGC, Loteries de Catalunya, EMT and Madrid Destino, among others. Metro de Madrid does not allow its data to be downloaded.
+For regional and municipal companies there are only data for those that publish them: Canal de Isabel II (its media plans by campaign and outlet since 2019; its annual accounts, which also include public relations and sponsorship, are kept only as a reference), FGC, Loteries de Catalunya, EMT and Madrid Destino, among others. Metro de Madrid does not allow its data to be downloaded.
 
 <DataTable data={empresas} rows=15 search=true>
     <Column id=entidad title="Company or body" />
@@ -738,7 +738,7 @@ The 25 companies and organisations that have received most since {sub_desde[0]?.
 - **Audiences**: annual audience share from [Barlovento Comunicación](https://barloventocomunicacion.es/) with Kantar Media data (individuals aged 4 and over, including guests).
 - **Central government advertising**: [Institutional Advertising and Communication Commission, annual plans and reports](https://www.lamoncloa.gob.es/serviciosdeprensa/cpci/paginas/planeseinformes.aspx) (Law 29/2005), actual cost of campaigns since 2006, by type of media, and since the 2025 Report by media group (annex IV of the institutional report and annex III of the commercial advertising report). The actual cost includes production and evaluation as well as media buying; the breakdown by group is media buying only. The reports do not say whether the amounts include VAT (judging by how they are rounded, they appear to). What each outlet is paid also depends on the discounts negotiated by the media agencies that contract the campaigns.
 - **Advertising by regions and town councils**: open data from the [Generalitat de Catalunya](https://analisi.transparenciacatalunya.cat/Sector-P-blic/Campanyes-i-promoci-institucional-de-la-Generalita/8d5a-6vsk), the [Junta de Castilla y León](https://analisis.datosabiertos.jcyl.es/explore/dataset/publicidad-institucional/), the [Government of Aragon](https://www.aragon.es/transparencia/gestion-fondos-publicos/campanas-publicidad-institucional), the [Government of Navarre](https://datosabiertos.navarra.es/dataset/publicidad-institucional), the [Region of Murcia](https://transparencia.carm.es/publicidad-institucional), [Madrid City Council](https://datos.madrid.es/dataset/300024-0-publicidad-institucional) and [Barcelona City Council](https://opendata-ajuntament.barcelona.cat/data/ca/dataset/campanyes-publicitat-institucional); PDF reports from the [Generalitat Valenciana](https://gvaoberta.gva.es/va/publicidad-y-promocion-institucional) (with its instrumental public sector) and, for the Basque Country, the compilation of the Basque Government's reports by [gobiernovasco.marketing](https://gobiernovasco.marketing/) (Jaime Gómez-Obregón, CC BY 4.0). Outlet names are grouped by media group using a SpainFacts concordance table.
-- **Public companies**: the commercial campaigns chapter of the annual reports of the Institutional Advertising and Communication Commission (by body, 2015-2025); [annual accounts of Canal de Isabel II](https://www.canaldeisabelsegunda.es/en/informacion-economica) (account 627, advertising, publicity and public relations); [TMB transparency portal](https://transparencia.tmb.cat/); and the companies that appear in the data of their region or town council. Since 2024 the Renfe figure only includes Renfe Operadora's campaigns, not Renfe Viajeros' commercial ones.
+- **Public companies**: the commercial campaigns chapter of the annual reports of the Institutional Advertising and Communication Commission (by body, 2015-2025); [media plans and annual accounts of Canal de Isabel II](https://www.canaldeisabelsegunda.es/en/informacion-economica) (plans by campaign and outlet since 2019; account 627, advertising, publicity and public relations, only as a reference); [media plans of the Community of Madrid](https://www.comunidad.madrid/transparencia/gastos-publicidad-y-comunicacion-institucional) (2020-2025, planned by campaign and outlet, excluding VAT); [TMB transparency portal](https://transparencia.tmb.cat/); and the companies that appear in the data of their region or town council. Since 2024 the Renfe figure only includes Renfe Operadora's campaigns, not Renfe Viajeros' commercial ones.
 - **Contracts with the media**: [Public Sector Procurement Platform](https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx) (tenders from hosted profiles, aggregated regional platforms and minor contracts), since 2018, and the [register of contracting bodies](https://contrataciondelsectorpublico.gob.es/datosabiertos/OrganosContratacion.xlsx) to identify which administration is contracting. Only contractors on a hand-reviewed list of tax IDs of media companies count (press publishers, radio stations, private television channels, digital outlets and news agencies; excluding advertising agencies, technical production companies and book publishers). The type of contract is inferred from the text of its purpose. Absurd amounts (framework agreements with the total amount) are discarded.
 - **Subsidies**: [National Subsidies Database](https://www.infosubvenciones.es/bdnstrans/GE/es/concesiones) (IGAE). A hand-reviewed list of calls for aid to private media is used (criteria in the SpainFacts repository); amount granted, not paid, by year of award. Public media, press associations and scholarships are excluded.
 - **Constant euros** using the INE's CPI and **population** from the municipal register; each Government's party according to the SpainFacts table of presidents.

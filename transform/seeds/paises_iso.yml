@@ -1,0 +1,17 @@
+version: 2
+
+seeds:
+  - name: paises_iso
+    description: >
+      Países y agregados con un solo código para toda la web (ver tools/chat/semantica/CONVENCIONES.md):
+      cod_pais = ISO 3166-1 alfa-2 (EU27_2020, EA, OECD, WLD para los agregados), con su ISO3 (Banco Mundial,
+      OCDE, V-Dem) y su código de Eurostat (EL = Grecia, UK = Reino Unido), y el nombre en castellano.
+    config:
+      column_types: {cod_pais: varchar, iso3: varchar, eurostat: varchar, pais: varchar, es_ue: boolean, es_ocde: boolean, es_agregado: boolean}
+    columns:
+      - name: cod_pais
+        tests: [not_null, unique]
+      - name: iso3
+        tests: [not_null, unique]
+      - name: eurostat
+        tests: [not_null, unique]

@@ -1,0 +1,57 @@
+version: 2
+
+seeds:
+  - name: medios_libertad_mpm_historico
+    description: >
+      Media Pluralism Monitor (EUI, Centre for Media Pluralism and Media Freedom; CC BY 4.0), ediciones
+      pasadas: riesgo por área de cada país, transcrito del índice (tabla de contenidos) de cada informe
+      país en PDF del repositorio Cadmus del EUI, «3.1. Fundamental Protection (41% - medium risk)».
+      Ediciones MPM2016, MPM2017 y MPM2020 a MPM2024, todos los países evaluados (UE, Reino Unido y
+      candidatos). MPM2025: solo España, leído del gráfico de áreas (treemap) de la página 9 del informe
+      país en inglés, porque desde esa edición el índice ya no lleva porcentajes. Extraído con un script
+      (2026-10-04) y revisado; la columna fuente lleva el handle de Cadmus de cada fila. La edición en
+      curso no va aquí: se descarga de las fichas web del CMPF (ingestion/medios_libertad.py).
+    config:
+      column_types:
+        edicion: integer
+        pais_fuente: varchar
+        cod_pais: varchar
+        area: varchar
+        riesgo_pct: double
+        fuente: varchar
+    columns:
+      - name: edicion
+        description: "Edición del MPM (MPM2024 = 2024; evalúa el año anterior salvo MPM2016 y MPM2017)."
+        tests: [not_null]
+      - name: pais_fuente
+        description: "Nombre del país en el título del informe (inglés)."
+      - name: cod_pais
+        description: "ISO 3166-1 alfa-2 (seed paises_iso)."
+        tests: [not_null]
+      - name: area
+        description: "proteccion_fundamental (Basic Protection hasta MPM2020), pluralidad_mercado, independencia_politica, inclusion_social."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['proteccion_fundamental', 'pluralidad_mercado', 'independencia_politica', 'inclusion_social']
+      - name: riesgo_pct
+        description: "Riesgo del área, 0-100 % (más alto = peor), redondeado por el CMPF."
+        tests: [not_null]
+      - name: fuente
+        description: "URL del registro en Cadmus (hdl.handle.net/1814/...) y fichero PDF."
+        tests: [not_null]
+
+  - name: medios_libertad_paises_nombres
+    description: >
+      Nombres de país en inglés tal como aparecen en el Media Pluralism Monitor (títulos de los informes y
+      fichas web del CMPF) y en la Plataforma del Consejo de Europa para la protección del periodismo, con
+      su código ISO alfa-2 del seed paises_iso. Quedan fuera Andorra, Mónaco y San Marino (no están en
+      paises_iso).
+    config:
+      column_types: {nombre_fuente: varchar, cod_pais: varchar}
+    columns:
+      - name: nombre_fuente
+        tests: [unique, not_null]
+      - name: cod_pais
+        tests: [not_null]

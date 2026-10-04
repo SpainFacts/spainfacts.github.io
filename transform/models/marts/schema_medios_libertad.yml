@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: medios_libertad_rsf
+    description: >
+      Clasificación Mundial de la Libertad de Prensa de Reporters sans frontières (RSF), 2002-hoy, formato
+      largo por país, edición e indicador ('global' y, desde 2022, 'politico', 'economico', 'legislativo',
+      'social', 'seguridad'). puntuacion en tres escalas no comparables (escala '2002-2012' 0 = mejor;
+      '2013-2021' y '2022' 0-100, 100 = mejor); puesto_mundial oficial y n_paises clasificados;
+      puesto_ue/n_ue = orden de los puestos oficiales entre los 27 países de la UE actual. Sin medias
+      propias (RSF no da licencia abierta). es_referencia/orden_pais para las gráficas.
+    columns:
+      - name: indicador
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['global', 'politico', 'economico', 'legislativo', 'social', 'seguridad']
+      - name: cod_pais
+        tests: [not_null]
+      - name: edicion
+        tests: [not_null]
+      - name: escala
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['2002-2012', '2013-2021', '2022']
+    tests:
+      - unique:
+          column_name: "indicador || '|' || cod_pais || '|' || edicion"
+
+  - name: medios_libertad_vdem
+    description: >
+      Libertad de los medios según V-Dem (vía Our World in Data), desde 1970, por indicador, país y año:
+      libertad de expresión y fuentes alternativas de información (0-100) y censura gubernamental, acoso a
+      periodistas, autocensura y sesgo de los medios (escala latente, más alto = más libertad). EU27_2020 =
+      media simple de los miembros actuales (si hay al menos el 90 %); puesto_ue/n_ue entre ellos.
+    columns:
+      - name: indicador_id
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['vdem_libertad_expresion', 'vdem_censura_medios', 'vdem_acoso_periodistas',
+                         'vdem_autocensura_medios', 'vdem_sesgo_medios']
+      - name: valor
+        tests: [not_null]
+    tests:
+      - unique:
+          column_name: "indicador_id || '|' || cod_pais || '|' || anio"
+
+  - name: medios_libertad_mpm
+    description: >
+      Media Pluralism Monitor (EUI-CMPF): riesgo para el pluralismo de los medios (0-100 %, más alto = peor)
+      por país, edición (MPM2016, MPM2017, MPM2020 en adelante) y área (protección fundamental, pluralidad del
+      mercado, independencia política, inclusión social y total). Ediciones pasadas del seed
+      medios_libertad_mpm_historico (índices de los informes país en PDF); edición en curso de las fichas web
+      del CMPF. El total es el publicado o, si no lo hay, la media simple de las cuatro áreas (origen).
+      EU27_2020 = media simple de los 27 (solo si están todos); puesto_ue/n_ue (1 = menor riesgo); banda de
+      riesgo según el sistema de cada edición. MPM2025: solo España.
+    columns:
+      - name: area
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['total', 'proteccion_fundamental', 'pluralidad_mercado', 'independencia_politica', 'inclusion_social']
+      - name: riesgo_pct
+        tests: [not_null]
+    tests:
+      - unique:
+          column_name: "area || '|' || cod_pais || '|' || edicion"
+
+  - name: medios_libertad_coe_alertas
+    description: >
+      Alertas de la Plataforma del Consejo de Europa para la protección del periodismo y la seguridad de los
+      periodistas, por país y año desde 2015: alertas (total = activas + resueltas), activas, sin respuesta
+      del Estado, resueltas, periodistas asesinados y alertas por 10 millones de habitantes (población media de Eurostat). EU27_2020 = suma de
+      los 27 entre su población. parcial = año en curso. puesto_ue/n_ue (1 = menos alertas por habitante).
+    columns:
+      - name: cod_pais
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+    tests:
+      - unique:
+          column_name: "cod_pais || '|' || anio"
+
+  - name: medios_libertad_espana
+    description: >
+      España en todos los índices de libertad de prensa y pluralismo, una fila por índice y año: valor de
+      España, puesto entre los 27 de la UE (puesto_ue/n_ue), media simple de la UE cuando la licencia la
+      permite (valor_ue; nunca en RSF), sentido ('positivo' = más es mejor) y n_total (países clasificados
+      en RSF; número absoluto de alertas en el Consejo de Europa). anio = edición en RSF y MPM.
+    columns:
+      - name: indice_id
+        tests: [not_null]
+    tests:
+      - unique:
+          column_name: "indice_id || '|' || anio"

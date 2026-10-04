@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: raw_medios_libertad
+    description: "Libertad de prensa y pluralismo de los medios, todos los países (ingestion/medios_libertad.py)"
+    schema: raw
+    tables:
+      - name: medios_libertad_rsf
+        description: >
+          Reporters sans frontières, Clasificación Mundial de la Libertad de Prensa, un CSV por edición
+          (2002-2010, 2012 = «2011-12», 2013 en adelante): edicion, etiqueta_edicion, escala ('2002-2012',
+          '2013-2021', '2022'), cod_pais (ISO3), pais_fuente, zona, puntuacion, puesto (mundial) y, desde
+          2022, politico/economico/legislativo/social/seguridad _puntuacion y _puesto. Todos los derechos
+          reservados por RSF: se reproducen tal cual, sin medias propias.
+      - name: medios_libertad_vdem
+        description: >
+          V-Dem vía Our World in Data (CC BY-SA 4.0 / CC BY 4.0): censura gubernamental de los medios
+          (v2mecenefm), acoso a periodistas (v2meharjrn), autocensura (v2meslfcen) y sesgo de los medios
+          (v2mebias) en la escala latente (más alto = más libertad), e índice de libertad de expresión
+          (freeexpr, 0-1), desde 1970.
+      - name: medios_libertad_mpm
+        description: >
+          Media Pluralism Monitor (EUI-CMPF, CC BY 4.0), edición en curso, de las fichas de país de
+          cmpf.eui.eu/country/: edicion, pais_fuente, area ('total', 'proteccion_fundamental',
+          'pluralidad_mercado', 'independencia_politica', 'inclusion_social'), riesgo_pct (0-100), url.
+      - name: medios_libertad_coe_alertas
+        description: >
+          Consejo de Europa, Plataforma para la protección del periodismo y la seguridad de los
+          periodistas (fom.coe.int, API pública del portal), por país y año desde 2015: alertas = alertas
+          ACTIVAS (nbAlerte), resueltas (nbAlerteResolu; el total del año es la suma), sin respuesta del
+          Estado y periodistas asesinados.

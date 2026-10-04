@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_medios_sector
+    description: "Estadísticas estructurales de empresas (SBS) de Eurostat para las ramas de los medios de comunicación, España y la UE (ingestion/medios_sector.py). Para España las elabora el INE (Estadística Estructural de Empresas, sector servicios)."
+    schema: raw
+    tables:
+      - name: eurostat_medios_sbs
+        description: "sbs_ovw_act, 2021-último (metodología FRIBS): anio, pais, rama (NACE J58, J581, J5813, J5814, J59, J60, J601, J602, J639, J6391), indicador (ENT_NR empresas, EMP_NR personas ocupadas, NETTUR_MEUR cifra de negocios neta en millones de euros, AV_MEUR valor añadido), valor."
+      - name: eurostat_medios_sbs_2008
+        description: "sbs_na_1a_se_r2, 2005-2020 (metodología anterior; J581 no existe y J5813, J5814 y J6391 solo desde 2016 para España). Indicadores renombrados a los de sbs_ovw_act (V11110->ENT_NR, V12110->NETTUR_MEUR, V12150->AV_MEUR, V16110->EMP_NR); indicador_original guarda el código antiguo."

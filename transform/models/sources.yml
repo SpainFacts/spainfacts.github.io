@@ -13,6 +13,10 @@ sources:
       - name: eurostat_cuentas_balance
       - name: eurostat_cuentas_gastos
       - name: eurostat_cuentas_ingresos
+      - name: eurostat_hicp_paises
+        description: "IPCA anual (2015=100) de todos los países y la UE-27, Eurostat prc_hicp_aind (ingestion/eurostat.py)"
+      - name: eurostat_poblacion_media_paises
+        description: "Población media anual de países y agregados, Eurostat demo_gind AVG (ingestion/eurostat.py)"
       - name: observatorios_publicos
         description: "Censo de observatorios públicos (observatoriospublicos.es), JSON sin limpiar"
       - name: miteco_embalses

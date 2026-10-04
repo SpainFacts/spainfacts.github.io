@@ -3,7 +3,8 @@
 -- empresas públicas (FGC, Loteries de Catalunya, ICF, FGV, CACSA, Canal de
 -- Isabel II, EMT, Madrid Destino, TMB...). Base: medios_publicidad_territorial_gasto
 -- (filas con cuenta_en_total), que reúne Cataluña, Castilla y León, Aragón,
--- Navarra, Murcia, Comunitat Valenciana, País Vasco, Canal de Isabel II y los
+-- Navarra, Murcia, Comunitat Valenciana, País Vasco, la Comunidad de Madrid (planes de
+-- medios 2020-, base 'planificado') con Canal de Isabel II (planes 2019-) y los
 -- Ayuntamientos de Madrid y Barcelona (más TMB). Solo años completos (hasta 2025).
 -- Euros constantes del año base del deflactor (main.deflactor: real = nominal *
 -- factor) por habitante con el padrón a 1 de enero: comunidad
@@ -11,7 +12,7 @@
 -- acotando el año al rango disponible. total_sin_iva_eur_hab_real homogeneiza
 -- el IVA (÷1,21 donde la fuente da importes con IVA; tal cual si los da sin IVA o
 -- no lo indica). Las bases no son iguales (ejecutado frente a contratado, neto sin
--- comisión de agencia en Cataluña, cuenta 627 con RRPP y patrocinios en Canal):
+-- comisión de agencia en Cataluña, planes de medios en la Comunidad de Madrid):
 -- comparable_entre_territorios marca las filas homogéneas (ejecutado y con el IVA
 -- conocido o tratado) y nota explica cada caso. Partido que gobierna a 1 de julio:
 -- comunidades con la semilla gobiernos_presidentes (nivel 'autonomico');
@@ -131,7 +132,8 @@ select
         when d.cod_ccaa = '14' then 'Región de Murcia: contratos de publicidad (contratado), con IVA. Antes de 2017 la serie es incompleta.'
         when d.cod_ccaa = '10' then 'Generalitat Valenciana: consellerias y sector público instrumental (Turisme CV, FGV, CACSA, IVF, Aerocas...). Expedientes tramitados, sin IVA; sin total oficial con el que cuadrar.'
         when d.cod_ccaa = '16' then 'Gobierno Vasco (departamentos), según gobiernovasco.marketing (J. Gómez-Obregón, CC BY 4.0) a partir de las memorias al Parlamento. IVA no indicado (probablemente sin IVA). Sin sociedades públicas aparte.'
-        when d.cod_ccaa = '13' and d.nivel = 'autonomico' then 'Solo Canal de Isabel II (cuenta 627: publicidad, propaganda y relaciones públicas; incluye RRPP y patrocinios). La Comunidad de Madrid solo publica planes de medios, no ejecución: no hay dato de la administración.'
+        when d.cod_ccaa = '13' and d.nivel = 'autonomico' and d.anio < 2020 then 'Solo Canal de Isabel II: su PDF de campañas de 2019 (importe ejecutado por soporte; IVA no indicado). La Comunidad de Madrid publica sus planes de medios desde 2020.'
+        when d.cod_ccaa = '13' and d.nivel = 'autonomico' then 'Comunidad de Madrid: PLANES de medios (lo previsto, no lo ejecutado) de las consejerías y organismos (ZIP de Excel del Portal de Transparencia), neto sin IVA y sin constar la comisión de agencia; más los planes de medios de Canal de Isabel II por soporte (neto sin IVA), en empresas públicas, junto con el Consorcio Regional de Transportes. No comparable con las comunidades que publican ejecución. La cuenta 627 de Canal (con RRPP y patrocinios) no se suma.'
         when d.cod_municipio = '28079' then 'Ayuntamiento de Madrid, organismos autónomos y empresas municipales (EMT, EMVS, Madrid Destino), campañas nacionales e internacionales. Ejecutado, sin IVA (la fuente da también el importe con IVA).'
         when d.cod_municipio = '08019' then 'Ajuntament de Barcelona por campaña y tipo de medio (incluye creatividad y producción), más TMB desde 2021 (empresa de la AMB, asignada a Barcelona). Ejecutado; IVA no indicado.'
     end

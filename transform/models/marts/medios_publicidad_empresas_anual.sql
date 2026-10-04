@@ -10,7 +10,8 @@
 --     Habitantes: España.
 --   * autonomico y local: filas de medios_publicidad_territorial_gasto con
 --     es_empresa_publica (FGC, Loteries de Catalunya/EAJA, ICF, Ports, INCASÒL,
---     Prodeca, TNC, SARGA, FGV, CACSA, IVF, Aerocas, Canal de Isabel II, EMT,
+--     Prodeca, TNC, SARGA, FGV, CACSA, IVF, Aerocas, Canal de Isabel II, Consorcio
+--     Regional de Transportes de Madrid, EMT,
 --     EMVS, Madrid Destino, TMB...), con el nombre normalizado. Habitantes: la
 --     comunidad o el municipio (TMB se asigna a Barcelona aunque sirve al área
 --     metropolitana).
@@ -18,8 +19,10 @@
 -- autonómica), que distorsionan cualquier comparación. magnitud dice qué se
 -- mide: no es lo mismo el coste total de campañas comerciales (AGE: producción,
 -- medios y evaluación), la compra de medios de las campañas institucionales de
--- la comunidad o el ayuntamiento, o la cuenta 627 de Canal (con relaciones
--- públicas y patrocinios). Euros constantes con main.deflactor (real = nominal *
+-- la comunidad o el ayuntamiento, o los planes de medios (lo previsto: Canal de
+-- Isabel II y el Consorcio Regional de Transportes, de los planes de la Comunidad de
+-- Madrid). La cuenta 627 de Canal (con RRPP y patrocinios) ya no entra: queda con
+-- cuenta_en_total = false en el seed manual. Euros constantes con main.deflactor (real = nominal *
 -- factor); padrón de main.poblacion_territorios / main.poblacion_municipios.
 with estatal as (
     select
@@ -72,6 +75,7 @@ terr_norm as (
             when u like '%MADRID DESTINO%' then 'Madrid Destino'
             when u like '%MERCAMADRID%' then 'Mercamadrid'
             when u like '%CANAL DE ISABEL%' then 'Canal de Isabel II'
+            when u like '%CONSORCIO REGIONAL DE TRANSPORTES%' then 'Consorcio Regional de Transportes de Madrid'
             when u like '%TMB%' then 'TMB (Transports Metropolitans de Barcelona)'
             else trim(regexp_replace(organismo_pagador, '^[^-]+ - ', ''))
         end as entidad
@@ -97,10 +101,11 @@ terr_fin as (
         a.importe_eur,
         a.iva_incluido,
         a.base,
-        case when a.entidad = 'Canal de Isabel II' then 'cuenta_627'
+        case when a.base like '%planificado%' then 'plan_de_medios'
             else 'publicidad_institucional_en_medios' end as magnitud,
         case
-            when a.entidad = 'Canal de Isabel II' then 'Cuenta 627 de sus cuentas anuales: publicidad, propaganda y relaciones públicas (incluye RRPP y patrocinios).'
+            when a.entidad = 'Canal de Isabel II' then 'Planes de medios de Canal por soporte (PDF de su portal): neto sin IVA, planificado (2019: ejecutado). No incluye RRPP ni patrocinios (su cuenta 627 era 2,81 / 3,23 / 3,34 M€ en 2023-2025).'
+            when a.entidad like 'Consorcio Regional de Transportes%' then 'Planes de medios de la Comunidad de Madrid (campañas del Consorcio): neto sin IVA, planificado.'
             when a.cod_territorio = '09' then 'Dataset de la Generalitat: importe neto sin IVA ni comisión de agencia.'
             when a.cod_territorio = '10' then 'PDF del sector público instrumental (gvaoberta): sin IVA, expedientes tramitados.'
             when a.cod_territorio = '28079' then 'Excel del Ayuntamiento de Madrid (unidad = empresa municipal): sin IVA, ejecutado.'

@@ -123,7 +123,7 @@ FROM ${pub_medios}
 ```
 
 ```sql pub_grupos
-SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_1000hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
+SELECT CAST(anio AS INTEGER) AS anio, tipo, grupo, importe_eur_nominal, eur_hab_real, pct, CAST(puesto AS INTEGER) AS puesto,
        CASE WHEN es_plataforma THEN 'Plataforma digital' WHEN es_publico THEN 'Medio público' ELSE 'Grupo de medios' END AS clase
 FROM mother.medios_publicidad_grupos
 ORDER BY tipo DESC, puesto
@@ -313,8 +313,8 @@ ORDER BY eur_hab_real DESC
 ```sql sub_beneficiarios
 SELECT CAST(rango AS INTEGER) AS rango, nombre, total_eur_real, CAST(total_concesiones AS INTEGER) AS concesiones,
        CAST(primer_anio AS INTEGER) AS primer_anio, CAST(ultimo_anio AS INTEGER) AS ultimo_anio, administraciones
-FROM mother.medios_subvenciones_beneficiarios
-WHERE rango <= 25 AND anio = ultimo_anio
+FROM mother.medios_subvenciones_totales
+WHERE rango <= 25
 ORDER BY rango
 ```
 
@@ -505,27 +505,27 @@ Desde el Informe de {pub_grupos_resumen[0]?.anio}, el primero bajo el Reglamento
 <BarChart
     data={pub_grupos_inst}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ por 1.000 habitantes"
+    yFmt='0.00'
+    yAxisTitle="€ por habitante"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Publicidad institucional del Estado por grupo, {pub_grupos_resumen[0]?.anio} (€ por 1.000 habitantes)"
+    title="Publicidad institucional del Estado por grupo, {pub_grupos_resumen[0]?.anio} (€ por habitante)"
 />
 
 <BarChart
     data={pub_grupos_com}
     x=grupo
-    y=eur_1000hab_real
+    y=eur_hab_real
     series=clase
     swapXY=true
     sort=false
-    yFmt='0'
-    yAxisTitle="€ por 1.000 habitantes"
+    yFmt='0.00'
+    yAxisTitle="€ por habitante"
     seriesColors={{'Grupo de medios': '#2563eb', 'Plataforma digital': '#a855f7', 'Medio público': '#f59e0b'}}
-    title="Publicidad comercial de las empresas del Estado por grupo, {pub_grupos_resumen[0]?.anio} (€ por 1.000 habitantes)"
+    title="Publicidad comercial de las empresas del Estado por grupo, {pub_grupos_resumen[0]?.anio} (€ por habitante)"
 />
 
 <DataTable data={pub_grupos} rows=15 search=true>
@@ -566,7 +566,7 @@ Las comunidades y los ayuntamientos también compran publicidad, y solo algunos 
     title="Publicidad institucional de comunidades y ayuntamientos, € por habitante descontada la inflación"
 />
 
-Galicia, Canarias, Baleares, Asturias, Cantabria, Castilla-La Mancha y Andalucía no publican su gasto por medio; la Comunidad de Madrid publica sus planes de medios, pero no lo ejecutado. El País Vasco sale de las memorias que el Gobierno Vasco presenta al Parlamento, reunidas por [gobiernovasco.marketing](https://gobiernovasco.marketing/).
+Galicia, Canarias, Baleares, Asturias, Cantabria, Castilla-La Mancha y Andalucía no publican su gasto por medio; la Comunidad de Madrid publica sus planes de medios (desde 2020, lo previsto por campaña y medio, sin IVA), pero no lo ejecutado. El País Vasco sale de las memorias que el Gobierno Vasco presenta al Parlamento, reunidas por [gobiernovasco.marketing](https://gobiernovasco.marketing/).
 
 Los cinco grupos que más reciben de cada administración, en el último año con dato:
 
@@ -596,7 +596,7 @@ Las empresas públicas hacen sus propias campañas, que no siempre aparecen en l
     title="Publicidad comercial de las empresas del Estado, € por habitante descontada la inflación"
 />
 
-De las autonómicas y municipales solo hay datos de las que los publican: Canal de Isabel II (en sus cuentas anuales, con relaciones públicas y patrocinios incluidos), FGC, Loteries de Catalunya, EMT y Madrid Destino, entre otras. Metro de Madrid no permite descargar sus datos.
+De las autonómicas y municipales solo hay datos de las que los publican: Canal de Isabel II (sus planes de medios por campaña y medio desde 2019; sus cuentas anuales, que suman además relaciones públicas y patrocinios, quedan solo como referencia), FGC, Loteries de Catalunya, EMT y Madrid Destino, entre otras. Metro de Madrid no permite descargar sus datos.
 
 <DataTable data={empresas} rows=15 search=true>
     <Column id=entidad title="Empresa o entidad" />
@@ -737,7 +737,7 @@ Las 25 empresas y entidades que más han recibido desde {sub_desde[0]?.desde}, s
 - **Audiencias**: cuota de pantalla anual de [Barlovento Comunicación](https://barloventocomunicacion.es/) con datos de Kantar Media (individuos de 4 años o más, con invitados).
 - **Publicidad del Estado**: [Comisión de Publicidad y Comunicación Institucional, planes e informes anuales](https://www.lamoncloa.gob.es/serviciosdeprensa/cpci/paginas/planeseinformes.aspx) (Ley 29/2005), coste ejecutado de las campañas desde 2006, por tipo de medio, y desde el Informe 2025 por grupo mediático (anexo IV del informe institucional y anexo III del de publicidad comercial). El coste ejecutado incluye producción y evaluación además de la compra de espacios; el reparto por grupo es solo compra de medios. Los informes no indican si los importes llevan IVA (por cómo están redondeados, parece que sí). Lo que cobra cada medio depende además de los descuentos que negocian las agencias de medios que contratan las campañas.
 - **Publicidad de comunidades y ayuntamientos**: datos abiertos de la [Generalitat de Catalunya](https://analisi.transparenciacatalunya.cat/Sector-P-blic/Campanyes-i-promoci-institucional-de-la-Generalita/8d5a-6vsk), la [Junta de Castilla y León](https://analisis.datosabiertos.jcyl.es/explore/dataset/publicidad-institucional/), el [Gobierno de Aragón](https://www.aragon.es/transparencia/gestion-fondos-publicos/campanas-publicidad-institucional), el [Gobierno de Navarra](https://datosabiertos.navarra.es/dataset/publicidad-institucional), la [Región de Murcia](https://transparencia.carm.es/publicidad-institucional), el [Ayuntamiento de Madrid](https://datos.madrid.es/dataset/300024-0-publicidad-institucional) y el [Ajuntament de Barcelona](https://opendata-ajuntament.barcelona.cat/data/ca/dataset/campanyes-publicitat-institucional); informes en PDF de la [Generalitat Valenciana](https://gvaoberta.gva.es/va/publicidad-y-promocion-institucional) (con su sector público instrumental) y, para el País Vasco, la recopilación de las memorias del Gobierno Vasco de [gobiernovasco.marketing](https://gobiernovasco.marketing/) (Jaime Gómez-Obregón, CC BY 4.0). Los nombres de los medios se agrupan por grupo de comunicación con una tabla de equivalencias de SpainFacts.
-- **Empresas públicas**: capítulo de campañas comerciales de los informes anuales de la Comisión de Publicidad y Comunicación Institucional (por entidad, 2015-2025); [cuentas anuales de Canal de Isabel II](https://www.canaldeisabelsegunda.es/en/informacion-economica) (cuenta 627, publicidad, propaganda y relaciones públicas); [portal de transparencia de TMB](https://transparencia.tmb.cat/); y las empresas que aparecen en los datos de su comunidad o ayuntamiento. Desde 2024 la cifra de Renfe solo incluye las campañas de Renfe Operadora, no las comerciales de Renfe Viajeros.
+- **Empresas públicas**: capítulo de campañas comerciales de los informes anuales de la Comisión de Publicidad y Comunicación Institucional (por entidad, 2015-2025); [planes de medios y cuentas anuales de Canal de Isabel II](https://www.canaldeisabelsegunda.es/en/informacion-economica) (planes por campaña y medio desde 2019; la cuenta 627, publicidad, propaganda y relaciones públicas, solo como referencia); [planes de medios de la Comunidad de Madrid](https://www.comunidad.madrid/transparencia/gastos-publicidad-y-comunicacion-institucional) (2020-2025, lo previsto por campaña y medio, sin IVA); [portal de transparencia de TMB](https://transparencia.tmb.cat/); y las empresas que aparecen en los datos de su comunidad o ayuntamiento. Desde 2024 la cifra de Renfe solo incluye las campañas de Renfe Operadora, no las comerciales de Renfe Viajeros.
 - **Contratos con medios**: [Plataforma de Contratación del Sector Público](https://www.hacienda.gob.es/es-ES/GobiernoAbierto/Datos%20Abiertos/Paginas/licitaciones_plataforma_contratacion.aspx) (licitaciones de los perfiles alojados, plataformas autonómicas agregadas y contratos menores), desde 2018, y [registro de órganos de contratación](https://contrataciondelsectorpublico.gob.es/datosabiertos/OrganosContratacion.xlsx) para saber qué administración contrata. Solo cuentan los adjudicatarios de un padrón de NIF de empresas de medios revisado a mano (editoras de prensa, radios, televisiones privadas, digitales y agencias de noticias; sin agencias de publicidad, productoras técnicas ni editoriales de libros). El tipo de contrato se deduce del texto del objeto. Se descartan importes absurdos (acuerdos marco con el importe total).
 - **Subvenciones**: [Base de Datos Nacional de Subvenciones](https://www.infosubvenciones.es/bdnstrans/GE/es/concesiones) (IGAE). Se usa una lista revisada a mano de convocatorias de ayudas a medios privados (criterio en el repositorio de SpainFacts); importe concedido, no pagado, por año de concesión. Se excluyen los medios públicos, las asociaciones de la prensa y las becas.
 - **Euros constantes** con el IPC del INE y **población** del padrón; partido de cada Gobierno según la tabla de presidentes de SpainFacts.

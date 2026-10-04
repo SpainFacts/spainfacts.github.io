@@ -1,0 +1,76 @@
+cod_pais,iso3,eurostat,pais,es_ue,es_ocde,es_agregado
+ES,ESP,ES,España,true,true,false
+DE,DEU,DE,Alemania,true,true,false
+AT,AUT,AT,Austria,true,true,false
+BE,BEL,BE,Bélgica,true,true,false
+BG,BGR,BG,Bulgaria,true,false,false
+CY,CYP,CY,Chipre,true,false,false
+HR,HRV,HR,Croacia,true,false,false
+DK,DNK,DK,Dinamarca,true,true,false
+SK,SVK,SK,Eslovaquia,true,true,false
+SI,SVN,SI,Eslovenia,true,true,false
+EE,EST,EE,Estonia,true,true,false
+FI,FIN,FI,Finlandia,true,true,false
+FR,FRA,FR,Francia,true,true,false
+GR,GRC,EL,Grecia,true,true,false
+HU,HUN,HU,Hungría,true,true,false
+IE,IRL,IE,Irlanda,true,true,false
+IT,ITA,IT,Italia,true,true,false
+LV,LVA,LV,Letonia,true,true,false
+LT,LTU,LT,Lituania,true,true,false
+LU,LUX,LU,Luxemburgo,true,true,false
+MT,MLT,MT,Malta,true,false,false
+NL,NLD,NL,Países Bajos,true,true,false
+PL,POL,PL,Polonia,true,true,false
+PT,PRT,PT,Portugal,true,true,false
+CZ,CZE,CZ,Chequia,true,true,false
+RO,ROU,RO,Rumanía,true,false,false
+SE,SWE,SE,Suecia,true,true,false
+GB,GBR,UK,Reino Unido,false,true,false
+NO,NOR,NO,Noruega,false,true,false
+CH,CHE,CH,Suiza,false,true,false
+IS,ISL,IS,Islandia,false,true,false
+LI,LIE,LI,Liechtenstein,false,false,false
+TR,TUR,TR,Turquía,false,true,false
+RS,SRB,RS,Serbia,false,false,false
+ME,MNE,ME,Montenegro,false,false,false
+MK,MKD,MK,Macedonia del Norte,false,false,false
+AL,ALB,AL,Albania,false,false,false
+BA,BIH,BA,Bosnia y Herzegovina,false,false,false
+XK,XKX,XK,Kosovo,false,false,false
+UA,UKR,UA,Ucrania,false,false,false
+MD,MDA,MD,Moldavia,false,false,false
+GE,GEO,GE,Georgia,false,false,false
+AM,ARM,AM,Armenia,false,false,false
+AZ,AZE,AZ,Azerbaiyán,false,false,false
+BY,BLR,BY,Bielorrusia,false,false,false
+RU,RUS,RU,Rusia,false,false,false
+US,USA,US,Estados Unidos,false,true,false
+CA,CAN,CA,Canadá,false,true,false
+MX,MEX,MX,México,false,true,false
+CL,CHL,CL,Chile,false,true,false
+CO,COL,CO,Colombia,false,true,false
+CR,CRI,CR,Costa Rica,false,true,false
+AR,ARG,AR,Argentina,false,false,false
+BR,BRA,BR,Brasil,false,false,false
+PE,PER,PE,Perú,false,false,false
+JP,JPN,JP,Japón,false,true,false
+KR,KOR,KR,Corea del Sur,false,true,false
+AU,AUS,AU,Australia,false,true,false
+NZ,NZL,NZ,Nueva Zelanda,false,true,false
+IL,ISR,IL,Israel,false,true,false
+CN,CHN,CN,China,false,false,false
+IN,IND,IN,India,false,false,false
+ID,IDN,ID,Indonesia,false,false,false
+ZA,ZAF,ZA,Sudáfrica,false,false,false
+SA,SAU,SA,Arabia Saudí,false,false,false
+MA,MAR,MA,Marruecos,false,false,false
+DZ,DZA,DZ,Argelia,false,false,false
+EG,EGY,EG,Egipto,false,false,false
+NG,NGA,NG,Nigeria,false,false,false
+VN,VNM,VN,Vietnam,false,false,false
+TH,THA,TH,Tailandia,false,false,false
+EU27_2020,EUU,EU27_2020,Unión Europea (27),false,false,true
+EA,EMU,EA,Zona euro,false,false,true
+OECD,OED,OECD,OCDE,false,false,true
+WLD,WLD,WORLD,Mundo,false,false,true
