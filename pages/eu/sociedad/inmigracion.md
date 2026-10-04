@@ -3,7 +3,7 @@ title: Immigrazioa
 description: "Espainiako atzerritar biztanleria erkidegoaren eta nazionalitatearen arabera, migrazio-saldoa, etorrera irregularrak bidearen arabera, asilo-eskaerak eta naturalizazioak, datu ofizialekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 198ef257d0f8
+i18n_origen: 23fdd4374850
 ---
 
 <script>
@@ -21,7 +21,7 @@ i18n_origen: 198ef257d0f8
 </script>
 
 ```sql pob_espana
-SELECT anio, extranjeros, poblacion, 100 * pct_extranjeros AS valor
+SELECT anio, extranjeros, poblacion, extranjeros_pct AS valor
 FROM mother.inmigracion_poblacion
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -137,11 +137,11 @@ ORDER BY anio
 <p class="text-xs text-gray-500">Nazionalitatearen arabera, urtarrilaren 1ean (Biztanleriaren Estatistika Jarraitua). Atzerrian jaio eta dagoeneko Espainiako nazionalitatea duena espainiartzat zenbatzen da; beraz, atzerrian jaiotako biztanleria dezente handiagoa da. Krisi ekonomikoaren ondoren, atzerritarren kopurua 5,4 milioitik (2010) 4,4 milioira (2017) jaitsi zen; ordutik hazten ari da, batez ere latinoamerikarrekin, biztanleriaren 2,0 %-tik 4,9 %-ra igaro baitira.</p>
 
 ```sql ccaa
-SELECT i.cod, t.nombre AS comunidad, '/eu' || t.ruta AS ruta, i.extranjeros, i.pct_extranjeros
+SELECT i.cod, t.nombre AS comunidad, '/eu' || t.ruta AS ruta, i.extranjeros, i.extranjeros_pct
 FROM mother.inmigracion_poblacion i
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = i.cod
 WHERE i.nivel = 'ccaa' AND i.anio = (SELECT max(anio) FROM mother.inmigracion_poblacion)
-ORDER BY i.pct_extranjeros DESC
+ORDER BY i.extranjeros_pct DESC
 ```
 
 <MapaEspana
@@ -149,8 +149,8 @@ ORDER BY i.pct_extranjeros DESC
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
     areaCol="cod"
-    value="pct_extranjeros"
-    valueFmt="pct1"
+    value="extranjeros_pct"
+    valueFmt='0.0"%"'
     link="ruta"
     colorPalette={['#f0fdfa', '#5eead4', '#0f766e']}
     height={440}
@@ -158,7 +158,7 @@ ORDER BY i.pct_extranjeros DESC
     attribution="Lauzak © Esri · Mugak © Instituto Geográfico Nacional · Datuak: INE"
     tooltip={[
         {id: 'comunidad', showColumnName: false, valueClass: 'text-base font-semibold'},
-        {id: 'pct_extranjeros', title: 'Atzerritarrak', fmt: 'pct1'},
+        {id: 'extranjeros_pct', title: 'Atzerritarrak', fmt: '0.0"%"'},
         {id: 'extranjeros', title: 'Pertsonak', fmt: 'num0'}
     ]}
 />
@@ -307,9 +307,7 @@ LIMIT 10
 ```sql nac_origen
 SELECT nacionalidad_previa, nacionalizaciones
 FROM mother.inmigracion_nacionalizaciones
-WHERE cod = '00' AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
-  AND nacionalidad_previa NOT IN ('Total', 'País de la UE27_2020 sin España', 'País de la UE28 sin España')
-  AND nacionalidad_previa NOT LIKE 'De %' AND nacionalidad_previa NOT LIKE 'Resto%' AND nacionalidad_previa NOT LIKE 'País de%' AND nacionalidad_previa NOT LIKE 'Otros%'
+WHERE nivel = 'pais' AND NOT es_grupo AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
 ORDER BY nacionalizaciones DESC
 LIMIT 12
 ```

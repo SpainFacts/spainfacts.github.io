@@ -81,8 +81,7 @@ concursos as (
 
 autonomos as (
     select 'autonomos' as src, 'ccaa' as nivel, cod, anio, pct_cuenta_propia
-    from {{ ref('empresas_autonomos') }}
-    where trimestre = 0
+    from {{ ref('empresas_autonomos_anual') }}
 ),
 
 idi as (
@@ -206,7 +205,7 @@ crimen_cat as (
 ),
 
 condenados as (
-    select 'condenados' as src, 'ccaa' as nivel, cod_ccaa as cod, anio, tasa_1000
+    select 'condenados' as src, nivel, cod, anio, tasa_1000
     from {{ ref('crimen_condenados') }}
     where sexo = 'Total' and nacionalidad = 'Total'
 ),

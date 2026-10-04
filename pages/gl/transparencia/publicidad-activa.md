@@ -1,5 +1,5 @@
 ---
-i18n_origen: 3f26672a5738
+i18n_origen: 6724b8e266cf
 title: Publicidade activa
 description: "Publican as administracións nos seus portais de transparencia o que lles obriga a lei? Avaliacións oficiais por entidade (Consello de Transparencia e Bo Goberno e Comisionado de Transparencia de Canarias), a súa evolución, a comparación por partido e o que aínda non se pode medir."
 og:
@@ -104,7 +104,7 @@ ORDER BY orden
 ```sql itc_aytos_ultimo
 SELECT
     cod_mun, entidad, regexp_replace(entidad, '^Ayuntamiento de ', '') AS municipio,
-    CASE WHEN cod_prov = '35' THEN 'Las Palmas' ELSE 'Santa Cruz de Tenerife' END AS provincia,
+    provincia,
     poblacion, estado, puntuacion, puntuacion_original, familia, gobernante,
     CASE WHEN estado = 'incumplidora' THEN 'No rindió la evaluación' ELSE 'Evaluado' END AS situacion
 FROM ${itc}

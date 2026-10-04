@@ -1,6 +1,7 @@
 -- Precio semanal de los carburantes y del gasóleo de calefacción con todos los
 -- impuestos (Comisión Europea, Weekly Oil Bulletin), España y media de la UE,
 -- desde 2005, en €/litro.
+--   fecha: lunes de la semana.
 --   eur_litro: euros de cada momento (el boletín da €/1.000 l).
 --   eur_litro_real: descontada la inflación, en euros de anio_euros (el último
 --     año completo del IPC), con el IPC general español del mes de la semana
@@ -20,9 +21,10 @@ base as (
 ult as (select max(mes) as mes_ult from ipc)
 
 select
-    w.fecha as semana,
-    w.geo,
-    case w.geo when 'ES' then 'España' else 'Media UE' end as territorio,
+    w.fecha,
+    cast(year(w.fecha) as integer) as anio,
+    case w.geo when 'ES' then 'ES' else 'EU27_2020' end as cod_pais,
+    case w.geo when 'ES' then 'España' else 'Media UE' end as pais,
     w.producto,
     w.eur_1000l / 1000 as eur_litro,
     w.eur_1000l / 1000 * b.indice_base / i.indice as eur_litro_real,

@@ -1,6 +1,6 @@
 -- IPC por comunidad autónoma, mensual (INE, tabla 76140: tasas de variación
 -- del índice general por comunidad; la API da los datos desde 1978 para la tasa
--- mensual y desde 1979 para la anual). cod_ccaa = código INE ('00' = España).
+-- mensual y desde 1979 para la anual). cod_ccaa = código INE ('00' = España, es_nacional).
 --   var_anual, var_mensual: tal como las publica el INE.
 --   subida_desde_2019: subida acumulada de los precios desde diciembre de 2019
 --     (%), encadenando las tasas mensuales publicadas (redondeadas a un
@@ -31,14 +31,17 @@ final as (
 select
     mes,
     cast(year(mes) as integer) as anio,
-    cod_ccaa,
+    a.cod_ccaa,
+    t.nombre as ccaa,
+    a.cod_ccaa = '00' as es_nacional,
     var_anual,
     var_mensual,
     case when mes >= date '2020-01-01' then
         100 * (exp(sum(ln(1 + var_mensual / 100)) filter (where mes >= date '2020-01-01')
-            over (partition by cod_ccaa order by mes)) - 1)
+            over (partition by a.cod_ccaa order by mes)) - 1)
     end as subida_desde_2019
-from ancho
+from ancho a
+left join {{ ref('territorios') }} t on t.cod = a.cod_ccaa and t.nivel = case when a.cod_ccaa = '00' then 'pais' else 'ccaa' end
 )
 
 -- Sin los meses del IPC adelantado (solo índice general): ver la macro

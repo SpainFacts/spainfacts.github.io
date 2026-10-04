@@ -60,14 +60,6 @@ models:
       - name: anios_partido
         tests: [not_null]
 
-  - name: alcaldes_resumen_familias
-    description: "Alcaldías y población gobernada (último padrón) por familia política, mandato 2023-2027."
-    columns:
-      - name: familia
-        tests: [not_null, unique]
-      - name: n_ayuntamientos
-        tests: [not_null]
-
   - name: alcaldes_familias_territorio
     description: "Alcaldías (n) y población gobernada por familia en España ('pais'), cada comunidad ('ccaa') y provincia ('provincia')."
     columns:
@@ -81,6 +73,8 @@ models:
               arguments:
                 values: ['pais', 'ccaa', 'provincia']
       - name: cod
+        tests: [not_null]
+      - name: nombre
         tests: [not_null]
       - name: familia
         tests: [not_null]

@@ -49,11 +49,16 @@ models:
           arguments:
             column_name: "partida || '|' || destino || '|' || anio"
 
-  - name: industria_ipi
+  - name: industria_ipi_paises
     description: >
-      Índice de producción industrial anual (base 2021 = 100) en formato largo: Eurostat sts_inpr_a
-      por país y rama (fuente eurostat), INE 70177 media anual por comunidad y destino económico
-      (fuente ine) e INE 60282 por división CNAE (fuente ine_divisiones), con variación anual.
+      Índice de producción industrial anual (base 2021 = 100) por país europeo (cod_pais ISO) y rama NACE,
+      Eurostat sts_inpr_a, corregido de calendario, con variación anual.
+
+  - name: industria_ipi_ine
+    description: >
+      Índice de producción industrial anual del INE (base 2021 = 100): media anual por España y comunidad y
+      destino económico (tabla 70177) y por división CNAE solo España (tabla 60282); tipo_rama separa las dos
+      familias. Con variación anual.
 
   - name: industria_ipi_mensual
     description: >

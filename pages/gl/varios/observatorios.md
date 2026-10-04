@@ -3,7 +3,7 @@ title: Observatorios públicos
 description: "Censo dos observatorios públicos de España: cantos hai, que administración os crea, cando naceron, cantos seguen activos, cantos hai por habitante en cada comunidade e que partido gobernaba cando se crearon."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 10c0e03a581c
+i18n_origen: a544f976aca5
 ---
 
 <script>
@@ -87,7 +87,7 @@ ORDER BY por_millon DESC
 SELECT
     nombre,
     nivel,
-    coalesce(comunidad, '') AS comunidad,
+    coalesce(ccaa, '') AS comunidad,
     coalesce(municipio, '') AS municipio,
     anio_creacion,
     coalesce(partido, '') AS partido,

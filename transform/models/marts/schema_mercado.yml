@@ -6,11 +6,11 @@ models:
   - name: mercado_paro_grupos
     description: "Tasa de paro trimestral de España por sexo, grupo de edad y nacionalidad (EPA, formato largo)."
   - name: mercado_paro_territorios
-    description: "Tasas de paro, empleo y actividad por comunidad y provincia, trimestral, con medias móviles de cuatro trimestres (EPA)."
+    description: "Tasas de paro, empleo y actividad de España (nivel pais, cod 00), cada comunidad y cada provincia, trimestral, con medias móviles de cuatro trimestres (EPA); territorio = nombre."
   - name: mercado_paro_formacion
     description: "Tasa de paro por nivel de formación y sexo, media anual desde 2014 (EPA, tabla 66000)."
   - name: mercado_paro_registrado
-    description: "Paro registrado mensual (SEPE) por provincia, comunidad y España, por cada 100 habitantes de 16 a 64 años."
+    description: "Paro registrado mensual (SEPE) por provincia, comunidad y España (territorio = nombre), por cada 100 habitantes de 16 a 64 años."
   - name: mercado_paro_municipios
     description: "Paro registrado por municipio en el último mes (SEPE) y hace un año, por cada 100 habitantes."
   - name: mercado_paro_ue
@@ -20,12 +20,12 @@ models:
   - name: mercado_ipc_grupos
     description: "IPC mensual por grupos ECOICOP v2 (índice, tasas y contribución aproximada a la tasa general con las ponderaciones del último año)."
   - name: mercado_ipc_ccaa
-    description: "Tasas de variación mensual y anual del IPC por comunidad y subida acumulada desde diciembre de 2019 (INE 76140)."
+    description: "Tasas de variación mensual y anual del IPC por comunidad (ccaa; cod_ccaa 00 = España, es_nacional) y subida acumulada desde diciembre de 2019 (INE 76140)."
   - name: mercado_ipca_ue
     description: "IPCA mensual de España y otros países de la UE: tasa anual e índice 2019=100 (Eurostat prc_hicp_minr)."
   - name: mercado_energia_ipc
     description: "IPC mensual de la energía por subclase (electricidad, gas natural, butano/propano, gasóleo de calefacción, gasóleo y gasolina), el total de productos energéticos y el IPC general: tasa anual, índice 2019=100, peso y contribución aproximada (INE 76128/76130)."
   - name: mercado_energia_carburantes
-    description: "Precio semanal con impuestos de gasolina 95, gasóleo de automoción, gasóleo de calefacción y GLP en España y media UE, en €/litro nominales y descontada la inflación (Weekly Oil Bulletin)."
+    description: "Precio semanal (fecha) con impuestos de gasolina 95, gasóleo de automoción, gasóleo de calefacción y GLP en España (ES) y media UE (EU27_2020), en €/litro nominales y descontada la inflación (Weekly Oil Bulletin)."
   - name: mercado_energia_hogares
-    description: "Precio semestral de la electricidad (banda DC) y el gas natural (banda D2) para hogares con impuestos, €/kWh nominales y reales, España, UE-27 y otros países (Eurostat nrg_pc_204/202)."
+    description: "Precio semestral (fecha = inicio del semestre) de la electricidad (banda DC) y el gas natural (banda D2) para hogares con impuestos, €/kWh nominales y reales, España, UE-27 y otros países (cod_pais ISO alfa-2; Eurostat nrg_pc_204/202)."

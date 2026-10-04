@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: ccaa_cuentas_capitulos
-    description: "Liquidación consolidada de cada comunidad autónoma por capítulo económico, en euros (Ministerio de Hacienda, SGCIEF). tipo = ingreso|gasto; ejecutado = derechos/obligaciones reconocidas netas; sin filas de totales"
+    description: "Liquidación consolidada de cada comunidad autónoma por capítulo económico, en euros corrientes (Ministerio de Hacienda, SGCIEF). tipo = ingreso|gasto; ejecutado = derechos/obligaciones reconocidas netas; sin filas de totales; ejecutado_eur_hab_real = ejecutado por habitante en euros constantes de anio_base"
     columns:
       - name: clave
         description: "anio-cod_ccaa-tipo-capitulo"
@@ -11,6 +11,8 @@ models:
         tests: [not_null]
       - name: cod_ccaa
         description: "Código INE de comunidad autónoma (2 dígitos)"
+        tests: [not_null]
+      - name: ccaa
         tests: [not_null]
       - name: tipo
         tests:
@@ -23,7 +25,7 @@ models:
       - name: capitulo_nombre
         tests: [not_null]
   - name: ccaa_gasto_politicas
-    description: "Obligaciones reconocidas de cada comunidad autónoma por área y política de gasto, en euros; obligaciones = depuradas de IFL y PAC, obligaciones_brutas = sin depurar"
+    description: "Obligaciones reconocidas de cada comunidad autónoma por área y política de gasto, en euros corrientes; obligaciones = depuradas de IFL y PAC, obligaciones_brutas = sin depurar; obligaciones_eur_hab_real = obligaciones por habitante en euros constantes de anio_base"
     columns:
       - name: clave
         description: "anio-cod_ccaa-cod_politica"
@@ -45,7 +47,7 @@ models:
       - name: obligaciones_brutas
         tests: [not_null]
   - name: ccaa_cuentas_resumen
-    description: "Ingresos y gastos ejecutados totales y no financieros (capítulos 1-7) de cada comunidad autónoma por año, con saldos, en euros. deficit_no_financiero positivo = déficit"
+    description: "Ingresos y gastos ejecutados totales y no financieros (capítulos 1-7) de cada comunidad autónoma por año, con saldos, en euros corrientes (saldo negativo = déficit) y por habitante en euros constantes de anio_base (*_eur_hab_real)"
     columns:
       - name: clave
         description: "anio-cod_ccaa"

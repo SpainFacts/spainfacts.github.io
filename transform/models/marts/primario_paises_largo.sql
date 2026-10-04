@@ -17,6 +17,13 @@
 -- poblacion_miles: Eurostat nama_10_pe (población media); el año sin dato toma el último
 -- disponible. nota: advertencias del producto (reexportación de Países Bajos, vino en las
 -- cuentas agrarias...).
+-- cod_pais: ISO 3166-1 alfa-2 (seed paises_iso; Grecia es GR). `geo` es el código de Eurostat
+-- (EL para Grecia): lo siguen usando los marts que parten de esta tabla y el published
+-- (sources/mother) lo deja fuera.
+-- valor_hab / unidad_hab: cifra por habitante (kg por habitante, ha o cabezas por 1.000 hab.,
+-- euros por habitante, GT por 1.000 hab., buques por 100.000 hab.). valor_real y
+-- valor_hab_real: solo para M EUR, en euros constantes de anio_base con el IPCA de cada país
+-- (deflactor_paises).
 with catalogo as (
     select * from (values
         -- categoria, producto_id, producto, unidad, nota
@@ -134,29 +141,62 @@ datos as (
     from {{ source('raw_primario', 'eurostat_exportaciones') }}
 ),
 
+-- población media anual (Eurostat demo_gind) vía poblacion_paises; poblacion_miles en miles
 poblacion as (
-    select geo, anio, valor as poblacion_miles
-    from {{ source('raw_primario', 'eurostat_poblacion_paises') }}
-    where valor is not null
+    select i.eurostat as geo, p.anio, p.poblacion / 1000 as poblacion_miles
+    from {{ ref('poblacion_paises') }} p
+    join {{ ref('paises_iso') }} i on i.cod_pais = p.cod_pais
+),
+
+base as (
+    select
+        c.categoria,
+        c.producto_id,
+        c.producto,
+        c.unidad,
+        d.geo,
+        i.cod_pais,
+        p.pais,
+        cast(d.anio as integer) as anio,
+        cast(d.valor as double) as valor,
+        coalesce(
+            po.poblacion_miles,
+            (select last(x.poblacion_miles order by x.anio) from poblacion x where x.geo = d.geo)
+        ) as poblacion_miles,
+        c.nota
+    from datos d
+    join catalogo c on c.producto_id = d.producto_id
+    join {{ ref('primario_paises') }} p on p.geo = d.geo and p.geo <> 'EU27_2020'
+    join {{ ref('paises_iso') }} i on i.eurostat = d.geo
+    left join poblacion po on po.geo = d.geo and po.anio = d.anio
+    where d.valor is not null
 )
 
 select
-    c.categoria,
-    c.producto_id,
-    c.producto,
-    c.unidad,
-    d.geo,
-    p.pais,
-    cast(d.anio as integer) as anio,
-    cast(d.valor as double) as valor,
-    coalesce(
-        po.poblacion_miles,
-        (select last(x.poblacion_miles order by x.anio) from poblacion x where x.geo = d.geo)
-    ) as poblacion_miles,
-    c.nota
-from datos d
-join catalogo c on c.producto_id = d.producto_id
-join {{ ref('primario_paises') }} p on p.geo = d.geo and p.geo <> 'EU27_2020'
-left join poblacion po on po.geo = d.geo and po.anio = d.anio
-where d.valor is not null
-order by c.categoria, c.producto_id, d.geo, d.anio
+    b.categoria,
+    b.producto_id,
+    b.producto,
+    b.unidad,
+    b.geo,
+    b.cod_pais,
+    b.pais,
+    b.anio,
+    b.valor,
+    b.poblacion_miles,
+    case when b.unidad = 'buques' then b.valor / b.poblacion_miles * 100
+         else b.valor * 1000 / b.poblacion_miles end as valor_hab,
+    case b.unidad
+        when 'miles de t' then 'kg por habitante'
+        when 'miles de ha' then 'ha por 1.000 habitantes'
+        when 'miles de cabezas' then 'cabezas por 1.000 habitantes'
+        when 'M EUR' then 'euros por habitante'
+        when 'miles de GT' then 'GT por 1.000 habitantes'
+        when 'buques' then 'buques por 100.000 habitantes'
+    end as unidad_hab,
+    case when b.unidad = 'M EUR' then b.valor * f.factor end as valor_real,
+    case when b.unidad = 'M EUR' then b.valor * f.factor * 1000 / b.poblacion_miles end as valor_hab_real,
+    f.anio_base,
+    b.nota
+from base b
+left join {{ ref('deflactor_paises') }} f on f.cod_pais = b.cod_pais and f.anio = b.anio
+order by b.categoria, b.producto_id, b.geo, b.anio

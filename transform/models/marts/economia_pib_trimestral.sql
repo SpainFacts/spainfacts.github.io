@@ -55,7 +55,7 @@ select
     end as nombre,
     b.nominal as nominal_meur,
     b.volumen * e.factor as real_meur,
-    (select anio from completo) as anio_euros,
+    (select anio from completo) as anio_base,
     b.interanual,
     100 * b.nominal / p.pib_nominal as pct_pib,
     4e6 * b.volumen * e.factor / po.poblacion as por_habitante_real

@@ -1,7 +1,7 @@
 ---
 description: "Where public money comes from: taxes and social contributions in Spain, per inhabitant, adjusted for inflation and as a percentage of GDP."
 title: Public Revenue and Tax Collection
-i18n_origen: 7fdaa026f188
+i18n_origen: 41be22719404
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -21,19 +21,17 @@ SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
 ```
 
 ```sql ingresos_hab
--- Ingresos por habitante en euros constantes: millones / población (millones) * factor del deflactor
+-- Ingresos por habitante en euros constantes (ya calculados en la tabla)
 SELECT
-    CAST(i.año AS INTEGER) AS anio,
+    i.anio,
     i.categoria,
     i.tipo_ingreso,
     i.millones_euros,
     i.porcentaje_pib,
     i.porcentaje_ingreso_total,
-    i.millones_euros / b.poblacion_m * d.factor AS eur_hab_real
+    i.ingreso_eur_hab_real AS eur_hab_real
 FROM mother.cuentas_ingresos i
-JOIN mother.cuentas_balance_anual b ON CAST(b.año AS INTEGER) = CAST(i.año AS INTEGER)
-JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(i.año AS INTEGER)
-WHERE b.poblacion_m > 0
+WHERE i.ingreso_eur_hab_real IS NOT NULL
 ```
 
 ```sql ultimos_ingresos_totales
@@ -43,7 +41,7 @@ SELECT
     sum(eur_hab_real) AS total_hab_real,
     sum(porcentaje_pib) AS total_pib
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 GROUP BY anio
 ```
 
@@ -62,7 +60,7 @@ SELECT
     max(CASE WHEN categoria = 'IVA' THEN eur_hab_real END) AS iva_hab,
     max(CASE WHEN categoria = 'IVA' THEN porcentaje_ingreso_total END) AS iva_pct
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 ```
 
 ```sql ingresos_por_categoria_ultimo
@@ -74,12 +72,12 @@ SELECT
     porcentaje_pib,
     porcentaje_ingreso_total
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 ORDER BY millones_euros DESC
 ```
 
 ```sql serie_ingresos_categoria
--- Euros por habitante a precios constantes (el deflactor empieza en 2002)
+-- Euros por habitante a precios constantes (el deflactor empieza en 1996)
 SELECT
     anio AS año,
     categoria,
@@ -89,7 +87,7 @@ ORDER BY año ASC, eur_hab_real DESC
 ```
 
 ```sql serie_ingresos_tipo
--- Euros por habitante a precios constantes (el deflactor empieza en 2002)
+-- Euros por habitante a precios constantes (el deflactor empieza en 1996)
 SELECT
     anio AS año,
     tipo_ingreso,
@@ -177,7 +175,7 @@ In {ultimos_ingresos_totales[0]?.anio}, general government revenue as a whole re
 
 ## 2. Historical Trends in Revenue by Type of Levy
 
-Revenue per inhabitant from each type, in {base_deflactor[0]?.anio_base} euros (adjusted for inflation), since 2002, the first year with annual CPI available:
+Revenue per inhabitant from each type, in {base_deflactor[0]?.anio_base} euros (adjusted for inflation), since 1996, the first year with annual CPI available:
 
 <AreaChart
     data={serie_ingresos_tipo}

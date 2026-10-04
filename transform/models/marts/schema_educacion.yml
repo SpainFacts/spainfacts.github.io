@@ -24,7 +24,7 @@ models:
       - name: eur_hab_real
         description: "Solo España: euros constantes de anio_base por habitante"
   - name: educacion_gasto_alumno
-    description: "Gasto anual en centros educativos por alumno equivalente a tiempo completo (Eurostat educ_uoe_fini04), por nivel: euros, euros constantes (España), PPS y % del PIB por habitante."
+    description: "Gasto anual en centros educativos por alumno equivalente a tiempo completo (Eurostat educ_uoe_fini04), por nivel educativo, de España y de la media de la UE-27: euros, euros constantes (IPCA de cada zona), PPS y % del PIB por habitante."
   - name: educacion_matriculados
     description: "Alumnado matriculado en España por nivel (infantil a universidad) y titularidad (pública, concertada, privada), con alumnos por 1.000 habitantes (Eurostat educ_uoe_enra01 y educ_uoe_enrs04). anio = año de fin de curso."
   - name: educacion_fp

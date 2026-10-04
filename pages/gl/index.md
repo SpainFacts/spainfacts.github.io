@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · O Estado de España en Datos Oficiais
 description: "España en datos oficiais: poboación, economía, contas públicas, enerxía, mobilidade, sociedade e transparencia, de España a cada municipio. Independente e sen nesgo partidista."
-i18n_origen: 55bec392edfc
+i18n_origen: c69067017fff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---

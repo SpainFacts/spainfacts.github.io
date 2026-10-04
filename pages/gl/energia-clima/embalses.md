@@ -1,5 +1,5 @@
 ---
-i18n_origen: 1e74e7013ff0
+i18n_origen: 428062b2d659
 title: Reservas de auga e encoros
 description: Estado semanal dos encoros españois por conca, comparado co ano anterior e coa media dos últimos dez anos.
 og:
@@ -78,7 +78,7 @@ Os encoros españois almacenan hoxe **{formatNumber(espana[0]?.volumen_hm3, 0)} 
 
 ```sql demarcaciones
 SELECT
-    clave,
+    cod,
     nombre,
     pct_llenado / 100 AS llenado,
     volumen_hm3,
@@ -92,7 +92,7 @@ WHERE nivel = 'demarcacion'
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"
-    areaCol="clave"
+    areaCol="cod"
     value="llenado"
     valueFmt="pct0"
     colorPalette={['#fde68a', '#7dd3fc', '#0369a1']}

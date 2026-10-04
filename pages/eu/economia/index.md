@@ -1,7 +1,7 @@
 ---
 title: Ekonomia
 description: "BPG biztanleko, hazkundea, kanpo-merkataritza, sektoreak, enplegua, soldatak, langabezia eta inflazioa Espainian, inflazioa kenduta eta biztanleriaren arabera."
-i18n_origen: 071a947706ae
+i18n_origen: 835b12e5d68d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -19,7 +19,7 @@ ORDER BY anio
 ```
 
 ```sql pib_trim
-SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_euros
+SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY crecimiento DESC
 
 # 📊 Ekonomia
 
-Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz, herrialdearen tamainaren araberakoa dena **biztanleko** erakusten da, eta eurotan neurtzen dena, **inflazioa kenduta** ({pib_trim[0]?.anio_euros}. urteko eurotan).
+Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz, herrialdearen tamainaren araberakoa dena **biztanleko** erakusten da, eta eurotan neurtzen dena, **inflazioa kenduta** ({pib_trim[0]?.anio_base}. urteko eurotan).
 
 <Grid cols=3>
     <KpiCard
         title="BPG biztanleko"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="{pib_hab.slice(-1)[0]?.anio}. urtean, {pib_trim[0]?.anio_euros}. urteko eurotan"
+        period="{pib_hab.slice(-1)[0]?.anio}. urtean, {pib_trim[0]?.anio_base}. urteko eurotan"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="erreala, aurreko urtearekin alderatuta"
         direction="positive-up"
@@ -159,7 +159,7 @@ Ekonomiak biztanle bakoitzeko ekoizten duena, euro konstanteetan. [Hiruhileko ha
     yFmt='#,##0" €"'
     yAxisTitle="€ biztanleko (errealak)"
     startingAtZero={false}
-    title="BPG biztanleko, {pib_trim[0]?.anio_euros}. urteko eurotan"
+    title="BPG biztanleko, {pib_trim[0]?.anio_base}. urteko eurotan"
 />
 
 ## Sektoreak
@@ -201,7 +201,7 @@ Hileko batez besteko soldata gordina, inflazioa kenduta. [Hazkundea, sektoreak e
     yFmt='#,##0" €"'
     yAxisTitle="€ hilean (errealak)"
     startingAtZero={false}
-    title="Hileko batez besteko soldata, {pib_trim[0]?.anio_euros}. urteko eurotan"
+    title="Hileko batez besteko soldata, {pib_trim[0]?.anio_base}. urteko eurotan"
 />
 
 ## Langabezia eta inflazioa

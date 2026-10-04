@@ -2,17 +2,38 @@ version: 2
 
 models:
   - name: crimen_balance
-    description: "Infracciones penales conocidas por año completo (2019-), territorio (España, comunidad, provincia y municipios de más de 20.000 hab.) y categoría, con tasa por 1.000 hab."
+    description: "Infracciones penales conocidas por año completo (2019-), territorio (España, comunidad, provincia y municipios de más de 20.000 hab.) y categoría, con tasa por 1.000 hab. nombre = el de territorios; los municipios llevan el del Balance."
     columns:
       - name: cod
+        tests: [not_null]
+      - name: nombre
         tests: [not_null]
       - name: categoria
         tests: [not_null]
   - name: crimen_ultimo_periodo
-    description: "Acumulado del año en curso del último Balance de Criminalidad frente al mismo periodo del año anterior."
+    description: "Acumulado del año en curso del último Balance de Criminalidad frente al mismo periodo del año anterior, con población, tasa por 1.000 hab. del periodo y variación porcentual."
+    columns:
+      - name: nombre
+        tests: [not_null]
   - name: crimen_serie_larga
-    description: "Infracciones penales conocidas por año (2010-), España, comunidad y provincia y 44 tipologías, con tasa por 1.000 hab."
+    description: "Infracciones penales conocidas por año (2010-), España, comunidad y provincia y 44 tipologías, con tasa por 1.000 hab. nombre = el de territorios."
+    columns:
+      - name: nombre
+        tests: [not_null]
   - name: crimen_condenados
-    description: "Condenados adultos por comunidad, sexo y nacionalidad y tasa por 1.000 residentes de 18+ de la misma nacionalidad y sexo."
+    description: "Condenados adultos por comunidad (y España, nivel pais), sexo y nacionalidad y tasa por 1.000 residentes de 18+ de la misma nacionalidad y sexo."
+    columns:
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa']
+      - name: nombre
+        tests: [not_null]
   - name: crimen_condenas_delito
-    description: "Delitos por los que se condena en España por tipo y nacionalidad del condenado."
+    description: "Delitos por los que se condena en España por tipo y nacionalidad del condenado, con su nivel en el árbol de delitos (nivel_delito, delito_padre) y tasas por 100.000 habitantes."
+    columns:
+      - name: nivel_delito
+        description: "0 total, 1 grupo, 2 delito, 3 subdelito; cada nivel suma el del padre"
+        tests: [not_null]

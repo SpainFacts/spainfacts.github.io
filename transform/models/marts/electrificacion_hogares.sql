@@ -30,11 +30,11 @@ partes as (
 ),
 
 todas as (
-    select p.anio, p.uso, p.combustible, p.tj, p.tj / nullif(t.total, 0) as cuota
+    select p.anio, p.uso, p.combustible, p.tj, 100.0 * p.tj / nullif(t.total, 0) as cuota_pct
     from partes p
     join total t using (anio, uso)
     union all
-    select t.anio, t.uso, 'Otros', t.total - sum(p.tj), (t.total - sum(p.tj)) / nullif(t.total, 0)
+    select t.anio, t.uso, 'Otros', t.total - sum(p.tj), 100.0 * (t.total - sum(p.tj)) / nullif(t.total, 0)
     from total t
     join partes p using (anio, uso)
     group by t.anio, t.uso, t.total
@@ -53,7 +53,8 @@ select
         when 'FC_OTH_HH_E_LE' then 'Iluminación y electrodomésticos'
         when 'FC_OTH_HH_E_OE' then 'Otros usos'
     end as uso,
+    todas.uso = 'FC_OTH_HH_E' as es_total_uso,
     combustible,
     tj,
-    cuota
+    cuota_pct
 from todas

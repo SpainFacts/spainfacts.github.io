@@ -35,9 +35,17 @@ espana as (
     where anios is not null
 )
 
-select anio, nivel, cod, case sexo when 'Varones' then 'Hombres' else sexo end as sexo, anios
+select
+    e.anio,
+    e.nivel,
+    e.cod,
+    t.nombre,
+    case e.sexo when 'Varones' then 'Hombres' else e.sexo end as sexo,
+    e.anios,
+    case e.nivel when 'pais' then 'Eurostat' else 'INE' end as fuente
 from (
     select * from ccaa
     union all select * from provincias
     union all select * from espana
-)
+) e
+left join {{ ref('territorios') }} t on t.nivel = e.nivel and t.cod = e.cod

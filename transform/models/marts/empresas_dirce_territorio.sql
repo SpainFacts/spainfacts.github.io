@@ -6,7 +6,9 @@
 -- administraciones públicas ni el servicio doméstico.
 -- empresas_1000hab = empresas / población del padrón a 1 de enero del mismo año x 1.000
 -- (población de main.poblacion_territorios; si aún no hay padrón del año, la última).
--- sociedades = sociedades anónimas + de responsabilidad limitada.
+-- sociedades = sociedades anónimas + de responsabilidad limitada. personas_fisicas + sociedades
+-- no suman empresas: faltan otras formas jurídicas (cooperativas, comunidades de bienes...).
+-- crecimiento_pct = variación anual del número de empresas, en %.
 with base as (
     select
         case when nivel = 'pais' then '00' else cast(cod_territorio as varchar) end as cod_prov,
@@ -63,6 +65,7 @@ rango as (
 select
     t.nivel,
     t.cod,
+    n.nombre,
     t.anio,
     t.empresas,
     t.personas_fisicas,
@@ -70,9 +73,10 @@ select
     100.0 * t.personas_fisicas / t.empresas as pct_personas_fisicas,
     p.poblacion,
     1000.0 * t.empresas / p.poblacion as empresas_1000hab,
-    100.0 * (t.empresas / lag(t.empresas) over (partition by t.nivel, t.cod order by t.anio) - 1) as crecimiento
+    100.0 * (t.empresas / lag(t.empresas) over (partition by t.nivel, t.cod order by t.anio) - 1) as crecimiento_pct
 from todo t
 cross join rango r
+left join {{ ref('territorios') }} n on n.nivel = t.nivel and n.cod = t.cod
 left join pob p
     on p.nivel = t.nivel and p.cod = t.cod
     and p.anio = greatest(least(t.anio, r.max_anio), r.min_anio)

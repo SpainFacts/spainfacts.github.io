@@ -77,7 +77,7 @@ Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)
 
 ```sql demarcaciones
 SELECT
-    clave,
+    cod,
     nombre,
     pct_llenado / 100 AS llenado,
     volumen_hm3,
@@ -91,7 +91,7 @@ WHERE nivel = 'demarcacion'
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"
-    areaCol="clave"
+    areaCol="cod"
     value="llenado"
     valueFmt="pct0"
     colorPalette={['#fde68a', '#7dd3fc', '#0369a1']}

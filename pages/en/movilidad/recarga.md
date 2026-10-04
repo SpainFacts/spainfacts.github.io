@@ -1,7 +1,7 @@
 ---
 title: Charging points
 description: "Map of public charging points for electric cars in Spain by power and operator, and how many plug-in cars there are per point in each province."
-i18n_origen: ddaf573592d6
+i18n_origen: e8e801641524
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -74,7 +74,8 @@ Where you can charge an electric car in Spain, according to the official registe
 -- la leyenda; luego el resto, de menos a más potencia para que los rápidos queden encima.
 SELECT *
 FROM (
-    SELECT *, row_number() OVER (PARTITION BY tramo ORDER BY potencia_max_kw DESC, sitio_id) = 1 AS primera
+    SELECT sitio_id, sitio, operador, latitud, longitud, puntos, potencia_max_kw, tramo, tramo_orden,
+        row_number() OVER (PARTITION BY tramo ORDER BY potencia_max_kw DESC, sitio_id) = 1 AS primera
     FROM mother.movilidad_recarga_sitios
     WHERE '${inputs.tramo}' = 'todos' OR tramo = '${inputs.tramo}'
 )

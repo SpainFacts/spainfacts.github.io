@@ -48,6 +48,7 @@ retenidos as (
         min(periodo) as primer_mes,
         max(periodo) as ultimo_mes,
         sum(importe_eur) as importe_retenido_eur,
+        sum(importe_eur_real) as importe_retenido_eur_real,
         bool_or(por_dependientes) as por_dependientes,
         bool_or(ejercicio_inferido) as ejercicio_inferido,
         string_agg(distinct metodo_cruce, ',') as metodo_cruce
@@ -86,6 +87,7 @@ panel as (
         r.ultimo_mes,
         r.ultimo_mes = (select periodo from ultimo) as sigue_retenido,
         r.importe_retenido_eur,
+        r.importe_retenido_eur_real,
         coalesce(r.por_dependientes, false) as por_dependientes,
         r.ejercicio_inferido,
         r.metodo_cruce,
@@ -133,7 +135,9 @@ select
     c.cod_mun,
     c.municipio,
     c.cod_prov,
+    tp.nombre as provincia,
     c.cod_ccaa,
+    tc.nombre as ccaa,
     c.anio,
     c.seccion,
     case c.seccion
@@ -164,6 +168,10 @@ select
     c.ultimo_mes,
     coalesce(c.sigue_retenido, false) as sigue_retenido,
     c.importe_retenido_eur,
+    c.importe_retenido_eur_real,
+    c.importe_retenido_eur / nullif(c.poblacion, 0) as importe_retenido_eur_hab,
+    c.importe_retenido_eur_real / nullif(c.poblacion, 0) as importe_retenido_eur_hab_real,
+    (select max(anio_base) from {{ ref('deflactor') }}) as anio_base,
     c.por_dependientes,
     c.ejercicio_inferido,
     c.metodo_cruce,
@@ -171,6 +179,7 @@ select
     c.fin_campania,
     coalesce(c.campania_completa, false) as campania_completa,
     c.cod_prov not in ('01', '20', '48', '31') as aplica_indicador,
+    case when c.cod_prov not in ('01', '20', '48', '31') then (case when c.retenido then 100 else 0 end) end as retenido_pct,
     case when c.cod_prov in ('01', '20', '48', '31')
         then 'Régimen foral: no recibe la participación en tributos del Estado por la vía común'
     end as motivo_exclusion,
@@ -183,3 +192,5 @@ select
 from completo c
 left join gobierno g
   on g.cod_mun = c.cod_mun and g.seccion = c.seccion and g.anio = c.anio and g.n = 1
+left join {{ ref('territorios') }} tp on tp.nivel = 'provincia' and tp.cod = c.cod_prov
+left join {{ ref('territorios') }} tc on tc.nivel = 'ccaa' and tc.cod = c.cod_ccaa

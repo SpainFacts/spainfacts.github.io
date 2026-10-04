@@ -1,7 +1,7 @@
 ---
 title: Flotentzako paradisu fiskalak
 description: "Hamarka biztanleko herriak, non milaka enpresa-auto matrikulatzen diren: renting eta alokairuko flotak zirkulazio-zerga merkeena den tokian helbideratzen dira. DGTren eta Ogasunaren datuak."
-i18n_origen: ad7c7e41b297
+i18n_origen: fb0421136c8a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -24,7 +24,7 @@ WHERE anio < (SELECT max(year(mes)) FROM mother.movilidad_matriculaciones_mensua
 
 ```sql municipios
 SELECT
-    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana,
+    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana_pct,
     ivtm_turismo, capital, ivtm_turismo_capital, ahorro_por_coche, ahorro_estimado
 FROM mother.movilidad_flotas_municipios
 WHERE anio = (SELECT anio FROM ${ultimo_completo})
@@ -35,9 +35,9 @@ ORDER BY flota DESC
 WITH m AS (SELECT * FROM ${municipios})
 SELECT
     (SELECT anio FROM ${ultimo_completo}) AS anio,
-    (SELECT sum(cuota_flota_espana) FROM (SELECT cuota_flota_espana FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
+    (SELECT sum(cuota_flota_espana_pct) FROM (SELECT cuota_flota_espana_pct FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
     sum(flota) FILTER (WHERE poblacion < 5000) AS flota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
     sum(poblacion) FILTER (WHERE poblacion < 5000) / (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS peso_pueblos,
     arg_max(municipio, flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_municipio,
     max(flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_por_hab,
@@ -59,8 +59,8 @@ LIMIT 15
 -- Peso de los pueblos de menos de 5.000 habitantes en las flotas matriculadas cada año
 SELECT
     anio,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
 FROM mother.movilidad_flotas_municipios
 GROUP BY anio
 ORDER BY anio
@@ -73,16 +73,16 @@ Auto bat bere jabeak helbidea duen udalerrian matrikulatzen da. Partikular baten
 <Grid cols=3>
     <KpiCard
         title="Flota-autoak lehen 10 udalerrietan"
-        value={resumen[0]?.cuota_top10 * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_top10 * 100, 0)}
+        value={resumen[0]?.cuota_top10}
+        formattedValue={formatNumber(resumen[0]?.cuota_top10, 0)}
         unit="%"
         period="enpresen, rentingaren eta alokairuaren turismo berrietatik · {resumen[0]?.anio}"
         source="DGT"
     />
     <KpiCard
         title="5.000 biztanletik beherako herrietan"
-        value={resumen[0]?.cuota_pueblos * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_pueblos * 100, 0)}
+        value={resumen[0]?.cuota_pueblos}
+        formattedValue={formatNumber(resumen[0]?.cuota_pueblos, 0)}
         unit="%"
         period="{formatNumber(resumen[0]?.flota_pueblos, 0)} flota-auto biztanleriaren % {formatNumber(resumen[0]?.peso_pueblos * 100, 2)} bizi den udalerrietan · {resumen[0]?.anio}"
         source="DGT / INE"
@@ -117,7 +117,7 @@ Auto bat bere jabeak helbidea duen udalerrian matrikulatzen da. Partikular baten
     <Column id=poblacion title="Biztanleak" fmt=num0 />
     <Column id=flota title="Flota-autoak" fmt=num0 contentType=bar barColor="#fecaca" />
     <Column id=flota_por_habitante title="Biztanleko" fmt=num1 />
-    <Column id=cuota_flota_espana title="Espainiako %" fmt=pct1 />
+    <Column id=cuota_flota_espana_pct title="Espainiako %" fmt=num1 />
     <Column id=ivtm_turismo title="IVTM (€/urte)" fmt=num2 />
     <Column id=ivtm_turismo_capital title="IVTM hiriburuan" fmt=num2 />
     <Column id=ahorro_estimado title="Aurrezki estimatua (€)" fmt=num0 />
@@ -133,7 +133,7 @@ Auto bat bere jabeak helbidea duen udalerrian matrikulatzen da. Partikular baten
     data={evolucion}
     x=anio
     y={['cuota_pueblos', 'cuota_madrid_barcelona']}
-    yFmt=pct0
+    yFmt='0"%"'
     xFmt="####"
     markers=true
     colorPalette={['#b91c1c', '#2563eb']}

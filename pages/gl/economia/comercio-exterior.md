@@ -1,5 +1,5 @@
 ---
-i18n_origen: f25352ecec09
+i18n_origen: d44a780dbaed
 title: Comercio exterior
 description: "Exportacións e importacións de bens e servizos de España: peso sobre o PIB, saldo exterior e evolución real por habitante."
 og:
@@ -25,7 +25,7 @@ SELECT
     max(CASE WHEN componente = 'P7' THEN por_habitante_real END) AS import_hab,
     max(CASE WHEN componente = 'P6' THEN nominal_meur END) AS export_meur,
     max(CASE WHEN componente = 'P7' THEN nominal_meur END) AS import_meur,
-    max(anio_euros) AS anio_euros
+    max(anio_base) AS anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente IN ('P6', 'P7')
 GROUP BY trimestre, anio, trim
@@ -146,7 +146,7 @@ En 2007 España compraba fóra moito máis do que vendía: o déficit chegou ao 
 
 ## Evolución real por habitante
 
-Exportacións e importacións en euros constantes de {comercio_trim[0]?.anio_euros} por habitante, a ritmo anual (o trimestre multiplicado por catro): mostra canto medra de verdade o comercio, sen a inflación nin o aumento de poboación.
+Exportacións e importacións en euros constantes de {comercio_trim[0]?.anio_base} por habitante, a ritmo anual (o trimestre multiplicado por catro): mostra canto medra de verdade o comercio, sen a inflación nin o aumento de poboación.
 
 <LineChart
     data={comercio_largo}
@@ -155,7 +155,7 @@ Exportacións e importacións en euros constantes de {comercio_trim[0]?.anio_eur
     series=flujo
     yAxisTitle="€ por habitante (reais)"
     yFmt='#,##0" €"'
-    title="Comercio exterior por habitante, euros de {comercio_trim[0]?.anio_euros} a ritmo anual"
+    title="Comercio exterior por habitante, euros de {comercio_trim[0]?.anio_base} a ritmo anual"
 />
 
 ---

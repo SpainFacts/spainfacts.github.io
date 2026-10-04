@@ -52,7 +52,9 @@ todo as (
 )
 
 select
+    case when n.cod = '00' then 'pais' else 'ccaa' end as nivel,
     n.cod,
+    tt.nombre,
     t.anio,
     case t.sectperf
         when 'TOTAL' then 'Total' when 'BES' then 'Empresas' when 'GOV' then 'Administraciones públicas'
@@ -68,6 +70,7 @@ select
     cast(d.anio_base as integer) as anio_euros
 from todo t
 join nuts n on n.nuts2 = t.geo
+left join {{ ref('territorios') }} tt on tt.nivel = case when n.cod = '00' then 'pais' else 'ccaa' end and tt.cod = n.cod
 left join {{ ref('deflactor') }} d on d.anio = t.anio
 where t.sectperf in ('TOTAL', 'BES', 'GOV', 'HES', 'PNP')
 order by n.cod, t.anio, t.sectperf

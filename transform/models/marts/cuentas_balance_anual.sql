@@ -1,6 +1,7 @@
 -- Balance anual consolidado de las AAPP de España (S13) a partir de datos oficiales de Eurostat:
 -- ingresos (TR), gastos (TE) y saldo (B9) de gov_10a_main; deuda PDE a cierre de año (Q4) de
--- gov_10q_ggdebt; población media de nama_10_pe.
+-- gov_10q_ggdebt; población media de nama_10_pe. Las cifras en euros por habitante van en euros
+-- constantes de anio_base (deflactor INE/IPCA); antes de 1996 no hay deflactor y quedan vacías.
 with main as (
     select
         cast(periodo as integer) as anio,
@@ -24,22 +25,28 @@ deuda as (
 ),
 
 poblacion as (
-    select cast(periodo as integer) as anio, valor / 1000.0 as poblacion_m
+    select cast(periodo as integer) as anio, valor * 1000.0 as habitantes
     from {{ source('raw_eurostat_extra', 'eurostat_poblacion') }}
     where valor is not null
 )
 
 select
-    m.anio as "año",
+    m.anio,
     round(m.ingresos_mio / 1000.0, 2) as ingresos_totales_mrd,
     round(m.gastos_mio / 1000.0, 2) as gastos_totales_mrd,
     round(m.saldo_mio / 1000.0, 2) as saldo_deficit_mrd,
     m.saldo_pib as saldo_deficit_pib,
     round(d.deuda_mio / 1000.0, 2) as deuda_publica_mrd,
     d.deuda_pib,
-    round(p.poblacion_m, 3) as poblacion_m
+    cast(round(p.habitantes) as bigint) as poblacion,
+    f.anio_base,
+    round(m.ingresos_mio * 1e6 * f.factor / p.habitantes, 0) as ingresos_eur_hab_real,
+    round(m.gastos_mio * 1e6 * f.factor / p.habitantes, 0) as gastos_eur_hab_real,
+    round(m.saldo_mio * 1e6 * f.factor / p.habitantes, 0) as saldo_eur_hab_real,
+    round(d.deuda_mio * 1e6 * f.factor / p.habitantes, 0) as deuda_eur_hab_real
 from main m
 left join deuda d using (anio)
 left join poblacion p using (anio)
+left join {{ ref('deflactor') }} f using (anio)
 where m.ingresos_mio is not null and m.gastos_mio is not null
 order by 1

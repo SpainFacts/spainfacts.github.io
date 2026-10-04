@@ -1,0 +1,62 @@
+delito,delito_padre,nivel_delito
+Delitos,,0
+Contra el patrimonio y el orden socioeconómico,Delitos,1
+Contra la seguridad colectiva,Delitos,1
+Lesiones,Delitos,1
+Contra la libertad,Delitos,1
+Contra la Administración de Justicia,Delitos,1
+Contra el orden público,Delitos,1
+Homicidio y sus formas,Delitos,1
+Falsedades,Delitos,1
+Contra la libertad e indemnidad sexuales,Delitos,1
+Contra las relaciones familiares,Delitos,1
+Contra la Administración Pública,Delitos,1
+Torturas e integridad moral,Delitos,1
+Resto de delitos,Delitos,1
+Hurtos,Contra el patrimonio y el orden socioeconómico,2
+Robos,Contra el patrimonio y el orden socioeconómico,2
+Defraudaciones,Contra el patrimonio y el orden socioeconómico,2
+Daños,Contra el patrimonio y el orden socioeconómico,2
+Receptación y blanqueo de capitales,Contra el patrimonio y el orden socioeconómico,2
+Usurpación,Contra el patrimonio y el orden socioeconómico,2
+Otros delitos contra el patrimonio y orden socioeconómico,Contra el patrimonio y el orden socioeconómico,2
+Robo y hurto de uso de vehículo,Contra el patrimonio y el orden socioeconómico,2
+Contra la seguridad vial,Contra la seguridad colectiva,2
+Contra la salud pública,Contra la seguridad colectiva,2
+Otros delitos contra la seguridad colectiva,Contra la seguridad colectiva,2
+Amenazas,Contra la libertad,2
+Coacciones y detenciones ilegales,Contra la libertad,2
+Quebrantamiento de condena,Contra la Administración de Justicia,2
+Otros delitos contra la Administración de Justicia,Contra la Administración de Justicia,2
+Acusación y denuncia falsas y simulación de delitos,Contra la Administración de Justicia,2
+Atentados contra la autoridad y de la resistencia y desobediencia,Contra el orden público,2
+Otros delitos contra el orden público,Contra el orden público,2
+Homicidio,Homicidio y sus formas,2
+Asesinato,Homicidio y sus formas,2
+Homicidio por imprudencia,Homicidio y sus formas,2
+Inducción al suicidio,Homicidio y sus formas,2
+Falsedades documentales,Falsedades,2
+Otros delitos de las falsedades,Falsedades,2
+Contra los derechos y deberes familiares,Contra las relaciones familiares,2
+Otros delitos contra las relaciones familiares,Contra las relaciones familiares,2
+Otros delitos contra la Administración Pública,Contra la Administración Pública,2
+Desobediencia y denegación auxilio,Contra la Administración Pública,2
+Trato degradante y violencia,Torturas e integridad moral,2
+Tortura,Torturas e integridad moral,2
+Otros,Torturas e integridad moral,2
+Robo con fuerza,Robos,3
+Robo con violencia,Robos,3
+Estafas,Defraudaciones,3
+Apropiación indebida,Defraudaciones,3
+Defraudaciones de fluido eléctrico,Defraudaciones,3
+Atentados contra la autoridad,Atentados contra la autoridad y de la resistencia y desobediencia,3
+Resistencia y desobediencia,Atentados contra la autoridad y de la resistencia y desobediencia,3
+Acusación y denuncias falsas,Acusación y denuncia falsas y simulación de delitos,3
+Simulación del delito,Acusación y denuncia falsas y simulación de delitos,3
+Falsificación documentos públicos,Falsedades documentales,3
+Falsificación documentos privados,Falsedades documentales,3
+Falsificación de certificados,Falsedades documentales,3
+Falsificación de tarjetas de crédito,Falsedades documentales,3
+Abandono de familia,Contra los derechos y deberes familiares,3
+Sustracción de menores,Contra los derechos y deberes familiares,3
+Quebrantamiento de los deberes de custodia,Contra los derechos y deberes familiares,3

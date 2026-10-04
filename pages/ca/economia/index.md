@@ -1,7 +1,7 @@
 ---
 title: Economia
 description: "PIB per habitant, creixement, comerç exterior, sectors, ocupació, salaris, atur i inflació a Espanya, descomptada la inflació i en proporció a la població."
-i18n_origen: 071a947706ae
+i18n_origen: 835b12e5d68d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -19,7 +19,7 @@ ORDER BY anio
 ```
 
 ```sql pib_trim
-SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_euros
+SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY crecimiento DESC
 
 # 📊 Economia
 
-Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que depèn de la mida del país es mostra **per habitant** i el que es mesura en euros, **descomptada la inflació** (en euros del {pib_trim[0]?.anio_euros}).
+Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que depèn de la mida del país es mostra **per habitant** i el que es mesura en euros, **descomptada la inflació** (en euros del {pib_trim[0]?.anio_base}).
 
 <Grid cols=3>
     <KpiCard
         title="PIB per habitant"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="el {pib_hab.slice(-1)[0]?.anio}, en euros del {pib_trim[0]?.anio_euros}"
+        period="el {pib_hab.slice(-1)[0]?.anio}, en euros del {pib_trim[0]?.anio_base}"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real respecte a l'any anterior"
         direction="positive-up"
@@ -159,7 +159,7 @@ El que produeix l'economia per cada habitant, en euros constants. [Creixement tr
     yFmt='#,##0" €"'
     yAxisTitle="€ per habitant (reals)"
     startingAtZero={false}
-    title="PIB per habitant en euros del {pib_trim[0]?.anio_euros}"
+    title="PIB per habitant en euros del {pib_trim[0]?.anio_base}"
 />
 
 ## Sectors
@@ -201,7 +201,7 @@ Salari mitjà mensual brut descomptada la inflació. [Creixement, sectors i deci
     yFmt='#,##0" €"'
     yAxisTitle="€ al mes (reals)"
     startingAtZero={false}
-    title="Salari mitjà mensual en euros del {pib_trim[0]?.anio_euros}"
+    title="Salari mitjà mensual en euros del {pib_trim[0]?.anio_base}"
 />
 
 ## Atur i inflació

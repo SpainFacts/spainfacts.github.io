@@ -1,7 +1,7 @@
 ---
 title: Affordability of buying or renting
 description: "How many years of gross salary a 90 m² home costs in Spain and in each region, and what share of pay goes on rent, with data from the Ministry of Housing and the INE."
-i18n_origen: 5b404f87105a
+i18n_origen: 720363cb6517
 ---
 
 <script>
@@ -10,7 +10,8 @@ i18n_origen: 5b404f87105a
 </script>
 
 ```sql espana
-SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana
+SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana,
+       precio_90m2_real, salario_anual_real, anio_base
 FROM mother.vivienda_esfuerzo
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -34,8 +35,9 @@ SELECT
     arg_max(anio, anios_salario) AS anio_max,
     min(anios_salario) AS anios_min,
     arg_min(anio, anios_salario) AS anio_min,
-    100 * (arg_max(precio_90m2, anio) / arg_min(precio_90m2, anio) - 1) AS var_precio,
-    100 * (arg_max(salario_anual, anio) / arg_min(salario_anual, anio) - 1) AS var_salario,
+    100 * (arg_max(precio_90m2_real, anio) / arg_min(precio_90m2_real, anio) - 1) AS var_precio,
+    100 * (arg_max(salario_anual_real, anio) / arg_min(salario_anual_real, anio) - 1) AS var_salario,
+    CAST(max(anio_base) AS INTEGER) AS anio_base,
     min(anio) AS anio_ini
 FROM ${compra}
 ```
@@ -106,13 +108,13 @@ How much housing weighs on pay. For buying: **how many years of total gross sala
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € per year"
         period="Spain, {hitos[0]?.anio_ult} · a 90 m² flat is appraised at {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual)}
+        sparklineData={compra.map(d => d.salario_anual_real)}
     />
 </Grid>
 
 ## Buying: years of salary
 
-Between {hitos[0]?.anio_ini} and {hitos[0]?.anio_ult} the appraised value of a 90 m² flat changed by {formatNumber(hitos[0]?.var_precio, 1)} % and the average gross salary by {formatNumber(hitos[0]?.var_salario, 1)} %, both in euros of each year. The low point of the series was in {hitos[0]?.anio_min}, at {formatNumber(hitos[0]?.anios_min, 1)} years of salary.
+Between {hitos[0]?.anio_ini} and {hitos[0]?.anio_ult} the appraised value of a 90 m² flat changed by {formatNumber(hitos[0]?.var_precio, 1)} % and the average gross salary by {formatNumber(hitos[0]?.var_salario, 1)} %, both in constant {hitos[0]?.anio_base} euros, net of inflation. The low point of the series was in {hitos[0]?.anio_min}, at {formatNumber(hitos[0]?.anios_min, 1)} years of salary.
 
 <LineChart
     data={compra}

@@ -15,6 +15,13 @@ with base as (
     from {{ source('raw_almacenamiento', 'esios_almacenamiento_potencia') }}
     group by all
 )
-select b.mes, b.tipo, c.cod_ccaa, c.nombre as comunidad, b.mw
+select
+    b.mes as fecha,
+    year(b.mes) as anio,
+    b.mes = max(b.mes) over () as es_ultimo,
+    b.tipo,
+    c.cod_ccaa,
+    c.nombre as ccaa,
+    b.mw
 from base b
 left join {{ ref('territorios_ccaa') }} c on c.nombre = b.ccaa

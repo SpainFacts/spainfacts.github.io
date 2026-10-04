@@ -4,8 +4,7 @@ models:
   - name: energia_mix_electrico
     description: "Generación eléctrica anual nacional por tecnología (REE REData), años completos"
     columns:
-      - name: año
-        quote: true
+      - name: anio
         tests: [not_null]
       - name: tecnologia
         tests: [not_null]
@@ -19,8 +18,7 @@ models:
   - name: energia_resumen_anual_mix
     description: "Resumen anual del sistema eléctrico: total, renovable, cuotas y demanda (REE)"
     columns:
-      - name: año
-        quote: true
+      - name: anio
         tests: [not_null, unique]
       - name: total_twh
         tests: [not_null]
@@ -31,8 +29,7 @@ models:
   - name: energia_potencia_instalada
     description: "Potencia instalada a cierre de año por tecnología (REE o, en su defecto, Eurostat nrg_inf_epc)"
     columns:
-      - name: año
-        quote: true
+      - name: anio
         tests: [not_null]
       - name: tecnologia
         tests: [not_null]
@@ -43,8 +40,7 @@ models:
   - name: energia_emisiones_gei
     description: "Emisiones GEI por sector sin LULUCF (Eurostat env_air_gge, inventario nacional). Mapeo CRF en stg_energia_emisiones_gei."
     columns:
-      - name: año
-        quote: true
+      - name: anio
         tests: [not_null]
       - name: sector
         tests:

@@ -9,32 +9,35 @@
 -- Trampa: Irlanda no publica capturas desde 2018 y Portugal desde 2022 (y el último año
 -- llega incompleto): cuota_pct es sobre los países con dato y cuota_min_pct suma al total
 -- el último dato conocido de los ausentes (desde 2010).
--- kg_hab: miles de t por habitante en kg (capturas y acuicultura); valor_real: acuicultura
--- en euros constantes (main.deflactor, IPC de España, aplicado a todos los países).
+-- valor_hab / unidad_hab: por habitante (kg por habitante en capturas y acuicultura en
+-- volumen, euros por habitante, GT por 1.000 hab., buques por 100.000 hab.); valor_real y
+-- valor_hab_real: acuicultura en euros constantes de anio_base con el IPCA de cada país
+-- (deflactor_paises). cod_pais: ISO (GR para Grecia).
 with base as (
-    select producto_id as medida, producto, unidad, geo, pais, anio, valor, poblacion_miles
+    select producto_id as medida, producto, unidad, cod_pais, pais, anio, valor, poblacion_miles,
+           valor_hab, unidad_hab, valor_real, valor_hab_real, anio_base
     from {{ ref('primario_paises_largo') }}
     where categoria = 'pesca' and anio >= 2000
 ),
 
 paises as (
-    select distinct medida, geo from base where anio >= 2010
+    select distinct medida, cod_pais from base where anio >= 2010
 ),
 
 rejilla as (
-    select a.medida, a.anio, p.geo, b.valor,
+    select a.medida, a.anio, p.cod_pais, b.valor,
            last_value(b.valor ignore nulls) over (
-               partition by a.medida, p.geo order by a.anio
+               partition by a.medida, p.cod_pais order by a.anio
                rows between unbounded preceding and current row) as valor_conocido
     from (select distinct medida, anio from base) a
     join paises p on p.medida = a.medida
-    left join base b on b.medida = a.medida and b.geo = p.geo and b.anio = a.anio
+    left join base b on b.medida = a.medida and b.cod_pais = p.cod_pais and b.anio = a.anio
 ),
 
 ausentes as (
     select medida, anio,
            sum(case when valor is null then valor_conocido end) as ausentes_estimado,
-           string_agg(case when valor is null and valor_conocido is not null then geo end, ', ' order by geo) as paises_sin_dato
+           string_agg(case when valor is null and valor_conocido is not null then cod_pais end, ', ' order by cod_pais) as paises_sin_dato
     from rejilla group by medida, anio
 ),
 
@@ -50,7 +53,7 @@ select
     r.medida,
     r.producto,
     r.unidad,
-    r.geo,
+    r.cod_pais,
     r.pais,
     r.anio,
     r.valor,
@@ -60,10 +63,11 @@ select
     cast(r.puesto as integer) as puesto,
     cast(r.n_paises as integer) as n_paises,
     a.paises_sin_dato,
-    case when r.unidad = 'miles de t' then r.valor * 1000 / r.poblacion_miles end as kg_hab,
-    case when r.unidad = 'M EUR' then r.valor * d.factor end as valor_real,
-    d.anio_base
+    r.valor_hab,
+    r.unidad_hab,
+    r.valor_real,
+    r.valor_hab_real,
+    r.anio_base
 from ranking r
 left join ausentes a on a.medida = r.medida and a.anio = r.anio
-left join {{ ref('deflactor') }} d on d.anio = r.anio
 order by r.medida, r.anio, r.puesto

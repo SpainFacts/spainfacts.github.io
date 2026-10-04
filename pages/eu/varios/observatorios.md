@@ -3,7 +3,7 @@ title: Behatoki publikoak
 description: "Espainiako behatoki publikoen errolda: zenbat dauden, zein administraziok sortzen dituen, noiz sortu ziren, zenbat dauden oraindik aktibo, zenbat dauden biztanleko erkidego bakoitzean eta zein alderdik gobernatzen zuen sortu zirenean."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 10c0e03a581c
+i18n_origen: a544f976aca5
 ---
 
 <script>
@@ -87,7 +87,7 @@ ORDER BY por_millon DESC
 SELECT
     nombre,
     nivel,
-    coalesce(comunidad, '') AS comunidad,
+    coalesce(ccaa, '') AS comunidad,
     coalesce(municipio, '') AS municipio,
     anio_creacion,
     coalesce(partido, '') AS partido,

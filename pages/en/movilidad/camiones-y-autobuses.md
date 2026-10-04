@@ -1,7 +1,7 @@
 ---
 title: Trucks and buses
 description: "Trucks and buses in Spain: registrations by engine type since 2015, the rise of the electric bus, best-selling makes and groups, and the age of those on the road."
-i18n_origen: 4190a8292d58
+i18n_origen: f423a33aa6c8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -163,7 +163,7 @@ Trucks and buses are few compared with cars, but they cover far more kilometres 
 WITH ult AS (SELECT max(mes) AS mes FROM mother.movilidad_marcas_mensual)
 SELECT
     m.grupo,
-    CASE m.grupo WHEN 'camion' THEN 'Camiones' ELSE 'Autobuses' END AS vehiculo,
+    m.grupo_etiqueta AS vehiculo,
     m.grupo_empresarial,
     m.marca,
     sum(m.matriculaciones) AS unidades

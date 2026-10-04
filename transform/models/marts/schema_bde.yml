@@ -4,7 +4,8 @@ models:
   - name: ccaa_deuda
     description: >
       Deuda PDE de cada comunidad autónoma a fin de trimestre (Banco de España,
-      be1309/be1310), dic-1994 en adelante. deuda_eur en euros; deuda_pct_pib en %
+      be1309/be1310), dic-1994 en adelante. deuda_eur en euros corrientes; deuda_eur_hab_real por
+      habitante en euros constantes de anio_base (desde 1996); deuda_pct_pib en %
       del PIB regional tal como lo publica el BdE (nulo en dic-1994). Sin Ceuta ni Melilla.
     columns:
       - name: clave
@@ -30,6 +31,7 @@ models:
       NEGATIVO = DÉFICIT. Suma de los 12 flujos mensuales de be13a (solo años
       completos; por comunidad desde 2013). saldo_pct_pib calculado con el PIB regional implícito en
       be1309/be1310 del 4.º trimestre (el BdE no lo publica por comunidad).
+      saldo_eur_hab_real = saldo por habitante en euros constantes de anio_base.
     columns:
       - name: clave
         description: "cod_ccaa-anio"
@@ -47,7 +49,8 @@ models:
       Deuda viva de las entidades locales de cada provincia a 31/12 (Hacienda con
       datos CIR del Banco de España, 2008-): ayuntamientos + diputación / consejos /
       cabildos + resto de EELL (mancomunidades, comarcas, entidades menores,
-      consorcios...). Anual (trimestre = 4). No reparte los importes sin provincia.
+      consorcios...). Anual (trimestre = 4). No reparte los importes sin provincia. Con nombre
+      de provincia y comunidad y cada importe por habitante en euros constantes (_hab_real).
     columns:
       - name: clave
         description: "cod_prov-anio"
@@ -69,7 +72,8 @@ models:
   - name: local_deuda_municipio
     description: >
       Deuda PDE de los ayuntamientos de más de 300.000 habitantes a fin de
-      trimestre (Banco de España, be1409; 13 ciudades), dic-1994 en adelante.
+      trimestre (Banco de España, be1409; 13 ciudades), dic-1994 en adelante, con población
+      (padrón), deuda en euros constantes y por habitante (corriente y constante).
     columns:
       - name: clave
         description: "cod_mun-fecha"

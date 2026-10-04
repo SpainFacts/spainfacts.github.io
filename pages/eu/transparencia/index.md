@@ -1,7 +1,7 @@
 ---
 title: Gardentasuna
 description: "Nola ematen dituzten kontuak Espainiako administrazioek: udalen informazio-betebeharrak, gardentasun-atariak, lege-dekretuak, indultuak, luzatutako aurrekontuak eta Espainiak osotasun-indize internazionaletan duen lekua, Gobernuka eta alderdika."
-i18n_origen: 9991e536ee5b
+i18n_origen: fd0f9eb9de30
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -35,7 +35,7 @@ SELECT * FROM ${actos} ORDER BY anio DESC LIMIT 1
 ```sql cpi
 SELECT anio, valor, puesto_ue, n_ue
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'cpi' AND cod_pais = 'ESP'
+WHERE indicador_id = 'cpi' AND cod_pais = 'ES'
 ORDER BY anio
 ```
 

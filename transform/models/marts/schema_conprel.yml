@@ -28,6 +28,22 @@ models:
         description: "gastos_total / poblacion (euros por habitante)"
       - name: ingreso_hab
         description: "ingresos_total / poblacion (euros por habitante)"
+      - name: provincia
+        description: "Nombre de la provincia (cod_prov)"
+      - name: gasto_hab_real
+        description: "gasto_hab en euros constantes de anio_base (deflactor del año de la fila)"
+      - name: ingreso_hab_real
+        description: "ingreso_hab en euros constantes de anio_base"
+      - name: saldo_hab_real
+        description: "saldo_no_financiero por habitante en euros constantes de anio_base"
+      - name: gastos_total_real
+        description: "gastos_total en euros constantes de anio_base"
+      - name: ingresos_total_real
+        description: "ingresos_total en euros constantes de anio_base"
+      - name: saldo_no_financiero_real
+        description: "saldo_no_financiero en euros constantes de anio_base"
+      - name: anio_base
+        description: "Año de los euros constantes (el del deflactor)"
   - name: municipios_politicas
     description: "Obligaciones reconocidas netas consolidadas de cada ayuntamiento por política de gasto (2 dígitos), en euros y por habitante; últimos ejercicios con liquidación definitiva (Hacienda, CONPREL, base de datos Access)"
     columns:
@@ -46,6 +62,16 @@ models:
         tests: [not_null]
       - name: importe
         tests: [not_null]
+      - name: municipio
+        description: "Nombre del municipio (último padrón en que aparece)"
+      - name: poblacion
+        description: "Padrón INE del año del importe"
+      - name: importe_real
+        description: "importe en euros constantes de anio_base (deflactor del año del importe)"
+      - name: importe_hab_real
+        description: "importe por habitante en euros constantes de anio_base"
+      - name: anio_base
+        description: "Año de los euros constantes (el del deflactor)"
   - name: municipios_cuentas_medias
     description: "Mediana y media ponderada de gasto e ingreso por habitante, y mediana por habitante de cada capítulo y área, por año y tramo de población (solo municipios con datos); tramo 'Todos' = total"
     columns:

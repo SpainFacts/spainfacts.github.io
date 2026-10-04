@@ -50,16 +50,19 @@ niveles as (
 )
 
 select
-    mes,
-    nivel,
-    cod,
+    n.mes,
+    cast(year(n.mes) as integer) as anio,
+    n.nivel,
+    n.cod,
+    t.nombre as territorio,
     paro_total as paro_registrado,
     paro_menor25,
     paro_hombres,
     paro_mujeres,
     poblacion_16_64,
     100.0 * paro_total / poblacion_16_64 as por_100_16_64,
-    paro_total - lag(paro_total) over (partition by nivel, cod order by mes) as variacion_mensual,
-    paro_total - lag(paro_total, 12) over (partition by nivel, cod order by mes) as variacion_anual,
-    100.0 * (paro_total / lag(paro_total, 12) over (partition by nivel, cod order by mes) - 1) as variacion_anual_pct
-from niveles
+    paro_total - lag(paro_total) over (partition by n.nivel, n.cod order by n.mes) as variacion_mensual,
+    paro_total - lag(paro_total, 12) over (partition by n.nivel, n.cod order by n.mes) as variacion_anual,
+    100.0 * (paro_total / lag(paro_total, 12) over (partition by n.nivel, n.cod order by n.mes) - 1) as variacion_anual_pct
+from niveles n
+left join {{ ref('territorios') }} t on t.nivel = n.nivel and t.cod = n.cod

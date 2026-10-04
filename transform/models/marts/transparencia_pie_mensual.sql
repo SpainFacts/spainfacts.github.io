@@ -148,14 +148,50 @@ final as (
     left join campanias k on k.periodo = c.periodo and c.seccion = 'liquidacion'
     where c.cod_mun is not null
     qualify row_number() over (partition by c.periodo, c.cod_mun, c.seccion order by c.por_dependientes desc) = 1
+),
+
+base as (
+    select
+        f.*,
+        count(*) over (partition by f.periodo, f.cod_mun) as secciones_mes,
+        i.importe_eur as importe_mes_eur,
+        i.importe_eur / count(*) over (partition by f.periodo, f.cod_mun) as importe_eur,
+        count(*) over (partition by f.periodo, f.cod_mun) > 1 and i.importe_eur is not null as importe_compartido,
+        f.periodo || '-' || f.cod_mun || '-' || f.seccion as clave
+    from final f
+    left join importes i on i.periodo = f.periodo and i.cod_mun = f.cod_mun
+),
+
+pob as (
+    select anio, cod_mun, poblacion
+    from {{ ref('poblacion_municipios') }}
+    where sexo = 'Total'
+),
+
+anio_max_pob as (
+    select max(anio) as anio from pob
+),
+
+nombres_mun as (
+    select cod_mun, municipio
+    from {{ ref('poblacion_municipios') }}
+    qualify row_number() over (partition by cod_mun order by anio desc) = 1
 )
 
+-- importe_eur_real: euros constantes del último año completo (mother.deflactor, factor del año
+-- del mes); sin factor para ese año, NULL. Por habitante: población del municipio ese año (o la
+-- del último año publicado).
 select
-    f.*,
-    count(*) over (partition by f.periodo, f.cod_mun) as secciones_mes,
-    i.importe_eur as importe_mes_eur,
-    i.importe_eur / count(*) over (partition by f.periodo, f.cod_mun) as importe_eur,
-    count(*) over (partition by f.periodo, f.cod_mun) > 1 and i.importe_eur is not null as importe_compartido,
-    f.periodo || '-' || f.cod_mun || '-' || f.seccion as clave
-from final f
-left join importes i on i.periodo = f.periodo and i.cod_mun = f.cod_mun
+    b.*,
+    n.municipio,
+    t.nombre as provincia,
+    year(b.periodo) as anio,
+    d.anio_base,
+    b.importe_eur * d.factor as importe_eur_real,
+    b.importe_eur / nullif(p.poblacion, 0) as importe_eur_hab,
+    b.importe_eur * d.factor / nullif(p.poblacion, 0) as importe_eur_hab_real
+from base b
+left join nombres_mun n on n.cod_mun = b.cod_mun
+left join {{ ref('territorios') }} t on t.nivel = 'provincia' and t.cod = b.cod_prov
+left join {{ ref('deflactor') }} d on d.anio = year(b.periodo)
+left join pob p on p.cod_mun = b.cod_mun and p.anio = least(year(b.periodo), (select anio from anio_max_pob))

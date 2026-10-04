@@ -5,8 +5,7 @@
 -- independientes + miembros de cooperativas + ayuda familiar.
 -- pct_cuenta_propia = cuenta propia / ocupados x 100; pct_empleadores y
 -- pct_independientes, igual para cada tipo.
--- anual: media de los cuatro trimestres (solo años completos) en empresas_autonomos
--- con trimestre = 0.
+-- La media anual (cuatro trimestres, solo años completos) está en empresas_autonomos_anual.
 with base as (
     select
         case when nivel = 'pais' then '00' else cast(cod_territorio as varchar) end as cod,
@@ -30,42 +29,24 @@ trimestral as (
         max(valor) filter (where situacion = 'Asalariados : Total') as asalariados
     from base
     group by all
-),
-
-anual as (
-    select
-        cod, anio, 0 as trimestre,
-        avg(ocupados) as ocupados,
-        avg(cuenta_propia) as cuenta_propia,
-        avg(empleadores) as empleadores,
-        avg(independientes) as independientes,
-        avg(asalariados) as asalariados
-    from trimestral
-    group by cod, anio
-    having count(*) = 4
-),
-
-todo as (
-    select * from trimestral
-    union all
-    select * from anual
 )
 
 select
-    cod,
-    anio,
-    trimestre,
-    case when trimestre = 0 then cast(anio as varchar)
-         else cast(anio as varchar) || '-T' || cast(trimestre as varchar) end as periodo,
-    case when trimestre = 0 then make_date(anio, 7, 1)
-         else make_date(anio, 3 * trimestre - 2, 1) end as fecha,
-    ocupados,
-    cuenta_propia,
-    empleadores,
-    independientes,
-    asalariados,
-    100.0 * cuenta_propia / ocupados as pct_cuenta_propia,
-    100.0 * empleadores / ocupados as pct_empleadores,
-    100.0 * independientes / ocupados as pct_independientes
-from todo
-order by cod, anio, trimestre
+    case when x.cod = '00' then 'pais' else 'ccaa' end as nivel,
+    x.cod,
+    t.nombre,
+    x.anio,
+    x.trimestre,
+    cast(x.anio as varchar) || '-T' || cast(x.trimestre as varchar) as periodo,
+    make_date(x.anio, 3 * x.trimestre - 2, 1) as fecha,
+    x.ocupados,
+    x.cuenta_propia,
+    x.empleadores,
+    x.independientes,
+    x.asalariados,
+    100.0 * x.cuenta_propia / x.ocupados as pct_cuenta_propia,
+    100.0 * x.empleadores / x.ocupados as pct_empleadores,
+    100.0 * x.independientes / x.ocupados as pct_independientes
+from trimestral x
+left join {{ ref('territorios') }} t on t.nivel = case when x.cod = '00' then 'pais' else 'ccaa' end and t.cod = x.cod
+order by x.cod, x.anio, x.trimestre

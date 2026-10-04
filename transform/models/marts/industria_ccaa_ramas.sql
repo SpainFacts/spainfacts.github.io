@@ -52,7 +52,7 @@ con_pob as (
 
 select
     c.cod_ccaa,
-    c.ccaa,
+    tt.nombre as ccaa,
     c.rama,
     c.rama in ('Industria', 'Industria manufacturera', 'Industrias extractivas') as es_agregado,
     c.anio,
@@ -76,3 +76,4 @@ select
 from con_pob c
 left join ancho t on t.cod_ccaa = c.cod_ccaa and t.anio = c.anio and t.rama = 'Industria'
 left join {{ ref('deflactor') }} d on d.anio = c.anio
+left join {{ ref('territorios') }} tt on tt.nivel = 'ccaa' and tt.cod = c.cod_ccaa

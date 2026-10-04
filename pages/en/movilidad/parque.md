@@ -1,7 +1,7 @@
 ---
 title: Vehicle fleet
 description: "The vehicles on the road in Spain: cars by engine type, DGT environmental label and age, most common models, and comparison by province and municipality."
-i18n_origen: 3790208fb9a8
+i18n_origen: 5bbacb52d8c4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -130,7 +130,7 @@ SELECT
 FROM mother.movilidad_parque_modelos
 WHERE grupo = '${inputs.grupo}'
   AND ('${inputs.energia.value}' = 'todas' OR energia = '${inputs.energia.value}')
-  AND modelo <> '(modelo sin especificar)'
+  AND es_modelo_real
 GROUP BY marca, modelo
 ORDER BY vehiculos DESC
 ```
@@ -172,13 +172,14 @@ SELECT
     cod_prov,
     provincia,
     sum(vehiculos) AS turismos,
+    sum(vehiculos_por_1000_hab) AS turismos_por_1000_hab,
     sum(vehiculos) FILTER (WHERE energia IN ('bev', 'phev')) / sum(vehiculos) AS cuota_enchufables,
     sum(vehiculos) FILTER (WHERE distintivo = 'SIN') / sum(vehiculos) AS cuota_sin_etiqueta,
     sum(vehiculos) FILTER (WHERE antiguedad = '20+') / sum(vehiculos) AS cuota_mas_20
 FROM mother.movilidad_parque_provincia
 WHERE grupo = 'turismo'
 GROUP BY ALL
-ORDER BY turismos DESC
+ORDER BY turismos_por_1000_hab DESC
 ```
 
 <ButtonGroup name=indicador_prov title="Indicator">
@@ -201,6 +202,7 @@ ORDER BY turismos DESC
     tooltip={[
         {id: 'provincia', showColumnName: false, valueClass: 'text-base font-semibold'},
         {id: 'turismos', title: 'Cars', fmt: 'num0'},
+        {id: 'turismos_por_1000_hab', title: 'Per 1,000 people', fmt: 'num0'},
         {id: 'cuota_sin_etiqueta', title: 'No label', fmt: 'pct1'},
         {id: 'cuota_mas_20', title: 'Over 20 years old', fmt: 'pct1'},
         {id: 'cuota_enchufables', title: 'Plug-in', fmt: 'pct1'}
@@ -210,6 +212,7 @@ ORDER BY turismos DESC
 <DataTable data={provincias} rows=10 search=true>
     <Column id=provincia title="Province" />
     <Column id=turismos title="Cars" fmt=num0 />
+    <Column id=turismos_por_1000_hab title="Per 1,000 people" fmt=num0 />
     <Column id=cuota_sin_etiqueta title="No label" fmt=pct1 />
     <Column id=cuota_mas_20 title="Over 20 years old" fmt=pct1 />
     <Column id=cuota_enchufables title="Plug-in" fmt=pct1 />
@@ -219,31 +222,26 @@ ORDER BY turismos DESC
 
 ```sql municipios
 SELECT
-    m.cod_mun,
-    p.municipio,
-    p.poblacion,
-    m.turismos,
-    1000.0 * m.turismos / p.poblacion AS turismos_por_1000_hab,
-    (m.bev + coalesce(m.phev, 0)) / m.turismos AS cuota_enchufables,
-    m.sin_distintivo / m.turismos AS cuota_sin_etiqueta,
-    m.mas_de_15_anios / m.turismos AS cuota_mas_15
-FROM mother.movilidad_parque_municipio m
-JOIN (
-    SELECT cod_mun, municipio, poblacion
-    FROM mother.poblacion_municipios
-    WHERE anio = (SELECT max(anio) FROM mother.poblacion_municipios)
-) p ON p.cod_mun = m.cod_mun
-WHERE p.poblacion >= 10000
-ORDER BY m.turismos DESC
+    cod_mun,
+    municipio,
+    poblacion,
+    turismos,
+    turismos_por_1000_hab,
+    enchufables_pct,
+    sin_distintivo_pct,
+    mas_de_15_anios_pct
+FROM mother.movilidad_parque_municipio
+WHERE poblacion >= 10000
+ORDER BY turismos DESC
 ```
 
 <DataTable data={municipios} rows=15 search=true>
     <Column id=municipio title="Municipality" />
     <Column id=turismos title="Cars" fmt=num0 />
     <Column id=turismos_por_1000_hab title="Per 1,000 people" fmt=num0 />
-    <Column id=cuota_enchufables title="Plug-in" fmt=pct1 />
-    <Column id=cuota_sin_etiqueta title="No label" fmt=pct1 />
-    <Column id=cuota_mas_15 title="Over 15 years old" fmt=pct1 />
+    <Column id=enchufables_pct title="Plug-in" fmt='0.0"%"' />
+    <Column id=sin_distintivo_pct title="No label" fmt='0.0"%"' />
+    <Column id=mas_de_15_anios_pct title="Over 15 years old" fmt='0.0"%"' />
 </DataTable>
 
 <p class="text-xs text-gray-500">The DGT does not publish the municipality of vehicles registered in municipalities with fewer than 10,000 inhabitants. Municipalities where leasing or rental companies are headquartered (Madrid, Alcobendas...) accumulate vehicles that circulate all over the country, which pushes up their cars per person.</p>

@@ -1,7 +1,7 @@
 ---
 title: Construction
 description: "Construction in Spain compared with the EU: share of value added and employment since 1995, the 2007 bubble and the collapse, public works tendered in real euros per inhabitant and by governing party, housing permits, cement, output, costs, companies and regions."
-i18n_origen: 5258dd464579
+i18n_origen: 60f03001a5e1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -271,7 +271,7 @@ FROM (
 ```sql visados
 SELECT CAST(anio AS INTEGER) AS anio, viviendas_nueva, viviendas_nueva_1000hab, m2_obra_nueva_hab
 FROM mother.construccion_permisos
-WHERE ambito = 'ES_LARGA' AND viviendas_nueva_1000hab IS NOT NULL
+WHERE nivel = 'pais' AND viviendas_nueva_1000hab IS NOT NULL
 ORDER BY anio
 ```
 
@@ -308,11 +308,11 @@ LEFT JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = p.cod
 LEFT JOIN (
     SELECT cod, avg(viviendas_nueva_1000hab) AS media_2004_2007
     FROM mother.construccion_permisos
-    WHERE ambito = 'CCAA' AND anio BETWEEN 2004 AND 2007
+    WHERE nivel = 'ccaa' AND anio BETWEEN 2004 AND 2007
     GROUP BY cod
 ) m ON m.cod = p.cod
-WHERE p.ambito = 'CCAA' AND p.cod <> '00'
-  AND p.anio = (SELECT max(anio) FROM mother.construccion_permisos WHERE ambito = 'CCAA')
+WHERE p.nivel = 'ccaa'
+  AND p.anio = (SELECT max(anio) FROM mother.construccion_permisos WHERE nivel = 'ccaa')
 ORDER BY p.viviendas_nueva_1000hab DESC
 ```
 
@@ -332,34 +332,34 @@ FROM (
 ```sql permisos_ue
 SELECT
     CAST(anio AS INTEGER) AS anio,
-    cod AS pais,
-    CASE cod WHEN 'ES' THEN 'España' WHEN 'EU27_2020' THEN 'UE-27' ELSE nombre END AS serie,
+    cod_pais,
+    CASE cod_pais WHEN 'ES' THEN 'España' WHEN 'EU27_2020' THEN 'UE-27' ELSE pais END AS serie,
     viviendas_nueva_1000hab
-FROM mother.construccion_permisos
-WHERE ambito = 'UE' AND cod IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE')
+FROM mother.construccion_permisos_ue
+WHERE cod_pais IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE')
   AND viviendas_nueva_1000hab IS NOT NULL
-ORDER BY cod, anio
+ORDER BY cod_pais, anio
 ```
 
 ```sql permisos_res
 WITH u AS (
-    SELECT * FROM mother.construccion_permisos
-    WHERE ambito = 'UE' AND viviendas_nueva_1000hab IS NOT NULL
-      AND anio = (SELECT max(anio) FROM mother.construccion_permisos WHERE ambito = 'UE' AND cod = 'ES' AND viviendas_nueva_1000hab IS NOT NULL)
+    SELECT * FROM mother.construccion_permisos_ue
+    WHERE viviendas_nueva_1000hab IS NOT NULL
+      AND anio = (SELECT max(anio) FROM mother.construccion_permisos_ue WHERE cod_pais = 'ES' AND viviendas_nueva_1000hab IS NOT NULL)
 ),
 r AS (
-    SELECT cod, viviendas_nueva_1000hab, row_number() OVER (ORDER BY viviendas_nueva_1000hab DESC) AS rk
-    FROM u WHERE cod <> 'EU27_2020'
+    SELECT cod_pais, viviendas_nueva_1000hab, row_number() OVER (ORDER BY viviendas_nueva_1000hab DESC) AS rk
+    FROM u WHERE cod_pais <> 'EU27_2020'
 )
 SELECT
     CAST(max(u.anio) AS INTEGER) AS anio,
-    max(u.viviendas_nueva_1000hab) FILTER (WHERE u.cod = 'ES') AS es,
-    max(u.viviendas_nueva_1000hab) FILTER (WHERE u.cod = 'EU27_2020') AS ue,
-    max(u.viviendas_nueva) FILTER (WHERE u.cod = 'ES') / 1000 AS es_miles,
-    (SELECT CAST(rk AS INTEGER) FROM r WHERE cod = 'ES') AS puesto,
+    max(u.viviendas_nueva_1000hab) FILTER (WHERE u.cod_pais = 'ES') AS es,
+    max(u.viviendas_nueva_1000hab) FILTER (WHERE u.cod_pais = 'EU27_2020') AS ue,
+    max(u.viviendas_nueva) FILTER (WHERE u.cod_pais = 'ES') / 1000 AS es_miles,
+    (SELECT CAST(rk AS INTEGER) FROM r WHERE cod_pais = 'ES') AS puesto,
     (SELECT CAST(count(*) AS INTEGER) FROM r) AS n,
     (SELECT max(viviendas_nueva) / 1000 FROM mother.construccion_permisos
-     WHERE ambito = 'ES_LARGA' AND anio = (SELECT max(anio) FROM u)) AS visados_miles
+     WHERE nivel = 'pais' AND anio = (SELECT max(anio) FROM u)) AS visados_miles
 FROM u
 ```
 
@@ -394,17 +394,17 @@ FROM ${cemento}
 ```sql prod
 SELECT CAST(anio AS INTEGER) AS anio, rama, rama_nombre, indice_2021, indice_2007, var_anual_pct, nota
 FROM mother.construccion_produccion
-WHERE pais = 'ES' AND anio >= 2000
+WHERE cod_pais = 'ES' AND anio >= 2000
 ORDER BY rama, anio
 ```
 
 ```sql prod_es_ue
 SELECT CAST(anio AS INTEGER) AS anio,
-       CASE pais WHEN 'ES' THEN 'España' WHEN 'EU27_2020' THEN 'UE-27' ELSE pais_nombre END AS serie,
+       CASE cod_pais WHEN 'ES' THEN 'España' WHEN 'EU27_2020' THEN 'UE-27' ELSE pais END AS serie,
        indice_2007
 FROM mother.construccion_produccion
-WHERE rama = 'F' AND pais IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT') AND anio >= 2000
-ORDER BY pais, anio
+WHERE rama = 'F' AND cod_pais IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT') AND anio >= 2000
+ORDER BY cod_pais, anio
 ```
 
 ```sql prod_res
@@ -422,35 +422,35 @@ SELECT
     CAST(arg_min(anio, indice_2007) FILTER (WHERE rama = 'F') AS INTEGER) AS anio_f_min,
     bool_or(nota IS NOT NULL) AS hay_salto,
     (SELECT max(indice_2007) FROM mother.construccion_produccion
-     WHERE pais = 'EU27_2020' AND rama = 'F' AND anio = 2024) AS ue_2024
+     WHERE cod_pais = 'EU27_2020' AND rama = 'F' AND anio = 2024) AS ue_2024
 FROM ${prod}
 ```
 
 ```sql costes
 SELECT CAST(anio AS INTEGER) AS anio, 'Coste nominal' AS serie, coste_indice_2021 AS indice
-FROM mother.construccion_costes WHERE pais = 'ES' AND coste_indice_2021 IS NOT NULL
+FROM mother.construccion_costes WHERE cod_pais = 'ES' AND coste_indice_2021 IS NOT NULL
 UNION ALL
 SELECT CAST(anio AS INTEGER) AS anio, 'Coste descontada la inflación' AS serie, coste_real_indice_2021 AS indice
-FROM mother.construccion_costes WHERE pais = 'ES' AND coste_real_indice_2021 IS NOT NULL
+FROM mother.construccion_costes WHERE cod_pais = 'ES' AND coste_real_indice_2021 IS NOT NULL
 UNION ALL
 SELECT CAST(anio AS INTEGER) AS anio, 'UE-27, precio de producción nominal' AS serie, precio_produccion_indice_2021 AS indice
-FROM mother.construccion_costes WHERE pais = 'EU27_2020' AND precio_produccion_indice_2021 IS NOT NULL
+FROM mother.construccion_costes WHERE cod_pais = 'EU27_2020' AND precio_produccion_indice_2021 IS NOT NULL
 ORDER BY serie, anio
 ```
 
 ```sql costes_res
 SELECT
-    CAST(max(anio) FILTER (WHERE pais = 'ES') AS INTEGER) AS anio,
-    arg_max(coste_indice_2021, anio) FILTER (WHERE pais = 'ES') AS es_nom,
-    arg_max(coste_real_indice_2021, anio) FILTER (WHERE pais = 'ES') AS es_real,
-    max(coste_real_indice_2021) FILTER (WHERE pais = 'ES' AND anio = 2007) AS es_real_2007,
-    max(coste_real_indice_2021) FILTER (WHERE pais = 'ES') AS es_real_max,
-    CAST(arg_max(anio, coste_real_indice_2021) FILTER (WHERE pais = 'ES') AS INTEGER) AS anio_real_max,
-    max(coste_indice_2021) FILTER (WHERE pais = 'ES' AND anio = 2020) AS es_nom_2020,
-    arg_max(precio_produccion_indice_2021, anio) FILTER (WHERE pais = 'EU27_2020') AS ue_precio,
-    CAST(max(anio) FILTER (WHERE pais = 'EU27_2020' AND precio_produccion_indice_2021 IS NOT NULL) AS INTEGER) AS anio_ue
+    CAST(max(anio) FILTER (WHERE cod_pais = 'ES') AS INTEGER) AS anio,
+    arg_max(coste_indice_2021, anio) FILTER (WHERE cod_pais = 'ES') AS es_nom,
+    arg_max(coste_real_indice_2021, anio) FILTER (WHERE cod_pais = 'ES') AS es_real,
+    max(coste_real_indice_2021) FILTER (WHERE cod_pais = 'ES' AND anio = 2007) AS es_real_2007,
+    max(coste_real_indice_2021) FILTER (WHERE cod_pais = 'ES') AS es_real_max,
+    CAST(arg_max(anio, coste_real_indice_2021) FILTER (WHERE cod_pais = 'ES') AS INTEGER) AS anio_real_max,
+    max(coste_indice_2021) FILTER (WHERE cod_pais = 'ES' AND anio = 2020) AS es_nom_2020,
+    arg_max(precio_produccion_indice_2021, anio) FILTER (WHERE cod_pais = 'EU27_2020') AS ue_precio,
+    CAST(max(anio) FILTER (WHERE cod_pais = 'EU27_2020' AND precio_produccion_indice_2021 IS NOT NULL) AS INTEGER) AS anio_ue
 FROM mother.construccion_costes
-WHERE pais IN ('ES', 'EU27_2020')
+WHERE cod_pais IN ('ES', 'EU27_2020')
 ```
 
 ```sql empresas
@@ -512,10 +512,10 @@ FROM ${empresas}
 ```
 
 ```sql constructoras
-SELECT CAST(edicion AS INTEGER) AS edicion, CAST(puesto AS INTEGER) AS puesto, empresa,
+SELECT CAST(anio AS INTEGER) AS edicion, CAST(puesto AS INTEGER) AS puesto, empresa,
        ingresos_mill_usd, pct_ventas_exterior
 FROM mother.construccion_grandes_constructoras
-WHERE edicion = (SELECT max(edicion) FROM mother.construccion_grandes_constructoras)
+WHERE anio = (SELECT max(anio) FROM mother.construccion_grandes_constructoras)
 ORDER BY puesto
 ```
 

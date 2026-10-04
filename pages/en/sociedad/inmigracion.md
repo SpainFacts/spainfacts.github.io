@@ -1,7 +1,7 @@
 ---
 title: Immigration
 description: "Foreign population in Spain by region and nationality, net migration, irregular arrivals by route, asylum applications and naturalisations, with official data."
-i18n_origen: 198ef257d0f8
+i18n_origen: 23fdd4374850
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -14,7 +14,7 @@ og:
 </script>
 
 ```sql pob_espana
-SELECT anio, extranjeros, poblacion, 100 * pct_extranjeros AS valor
+SELECT anio, extranjeros, poblacion, extranjeros_pct AS valor
 FROM mother.inmigracion_poblacion
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -130,11 +130,11 @@ ORDER BY anio
 <p class="text-xs text-gray-500">By nationality at 1 January (Continuous Population Statistics). People born abroad who already hold Spanish nationality count as Spanish, so the foreign-born population is considerably larger. After the economic crisis the number of foreign nationals fell from 5.4 million in 2010 to 4.4 million in 2017; since then it has been rising, above all with Latin Americans, who have gone from 2.0 % to 4.9 % of the population.</p>
 
 ```sql ccaa
-SELECT i.cod, t.nombre AS comunidad, '/en' || t.ruta AS ruta, i.extranjeros, i.pct_extranjeros
+SELECT i.cod, t.nombre AS comunidad, '/en' || t.ruta AS ruta, i.extranjeros, i.extranjeros_pct
 FROM mother.inmigracion_poblacion i
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = i.cod
 WHERE i.nivel = 'ccaa' AND i.anio = (SELECT max(anio) FROM mother.inmigracion_poblacion)
-ORDER BY i.pct_extranjeros DESC
+ORDER BY i.extranjeros_pct DESC
 ```
 
 <MapaEspana
@@ -142,8 +142,8 @@ ORDER BY i.pct_extranjeros DESC
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
     areaCol="cod"
-    value="pct_extranjeros"
-    valueFmt="pct1"
+    value="extranjeros_pct"
+    valueFmt='0.0"%"'
     link="ruta"
     colorPalette={['#f0fdfa', '#5eead4', '#0f766e']}
     height={440}
@@ -151,7 +151,7 @@ ORDER BY i.pct_extranjeros DESC
     attribution="Tiles © Esri · Boundaries © Instituto Geográfico Nacional · Data: INE"
     tooltip={[
         {id: 'comunidad', showColumnName: false, valueClass: 'text-base font-semibold'},
-        {id: 'pct_extranjeros', title: 'Foreign nationals', fmt: 'pct1'},
+        {id: 'extranjeros_pct', title: 'Foreign nationals', fmt: '0.0"%"'},
         {id: 'extranjeros', title: 'People', fmt: 'num0'}
     ]}
 />
@@ -300,9 +300,7 @@ LIMIT 10
 ```sql nac_origen
 SELECT nacionalidad_previa, nacionalizaciones
 FROM mother.inmigracion_nacionalizaciones
-WHERE cod = '00' AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
-  AND nacionalidad_previa NOT IN ('Total', 'País de la UE27_2020 sin España', 'País de la UE28 sin España')
-  AND nacionalidad_previa NOT LIKE 'De %' AND nacionalidad_previa NOT LIKE 'Resto%' AND nacionalidad_previa NOT LIKE 'País de%' AND nacionalidad_previa NOT LIKE 'Otros%'
+WHERE nivel = 'pais' AND NOT es_grupo AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
 ORDER BY nacionalizaciones DESC
 LIMIT 12
 ```

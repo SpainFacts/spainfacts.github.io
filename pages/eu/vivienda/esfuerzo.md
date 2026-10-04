@@ -1,7 +1,7 @@
 ---
 title: Erosteko edo alokatzeko ahalegina
 description: "90 m²-ko etxebizitza batek zenbat urteko soldata gordin balio duen Espainian eta erkidego bakoitzean, eta soldataren zer zati joaten den alokairura, Etxebizitza Ministerioaren eta INEren datuekin."
-i18n_origen: 5b404f87105a
+i18n_origen: 720363cb6517
 ---
 
 <script>
@@ -17,7 +17,8 @@ i18n_origen: 5b404f87105a
 </script>
 
 ```sql espana
-SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana
+SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana,
+       precio_90m2_real, salario_anual_real, anio_base
 FROM mother.vivienda_esfuerzo
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -41,8 +42,9 @@ SELECT
     arg_max(anio, anios_salario) AS anio_max,
     min(anios_salario) AS anios_min,
     arg_min(anio, anios_salario) AS anio_min,
-    100 * (arg_max(precio_90m2, anio) / arg_min(precio_90m2, anio) - 1) AS var_precio,
-    100 * (arg_max(salario_anual, anio) / arg_min(salario_anual, anio) - 1) AS var_salario,
+    100 * (arg_max(precio_90m2_real, anio) / arg_min(precio_90m2_real, anio) - 1) AS var_precio,
+    100 * (arg_max(salario_anual_real, anio) / arg_min(salario_anual_real, anio) - 1) AS var_salario,
+    CAST(max(anio_base) AS INTEGER) AS anio_base,
     min(anio) AS anio_ini
 FROM ${compra}
 ```
@@ -113,13 +115,13 @@ Zenbat eragiten duen etxebizitzak soldatan. Erosteko: **zenbat urteko soldata go
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € urtean"
         period="Espainia, {hitos[0]?.anio_ult} · 90 m²-ko pisu bat {formatNumber(hitos[0]?.precio_ult, 0)} €-tan tasatzen da"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual)}
+        sparklineData={compra.map(d => d.salario_anual_real)}
     />
 </Grid>
 
 ## Erostea: soldata-urteak
 
-{hitos[0]?.anio_ini} eta {hitos[0]?.anio_ult} artean, 90 m²-ko pisu baten tasazio-balioa {formatNumber(hitos[0]?.var_precio, 1)} % aldatu zen, eta batez besteko soldata gordina {formatNumber(hitos[0]?.var_salario, 1)} %, biak urte bakoitzeko eurotan. Seriearen gutxienekoa {urtean(hitos[0]?.anio_min)} izan zen, {formatNumber(hitos[0]?.anios_min, 1)} soldata-urterekin.
+{hitos[0]?.anio_ini} eta {hitos[0]?.anio_ult} artean, 90 m²-ko pisu baten tasazio-balioa {formatNumber(hitos[0]?.var_precio, 1)} % aldatu zen, eta batez besteko soldata gordina {formatNumber(hitos[0]?.var_salario, 1)} %, biak {hitos[0]?.anio_base}ko euro konstanteetan, inflazioa kenduta. Seriearen gutxienekoa {urtean(hitos[0]?.anio_min)} izan zen, {formatNumber(hitos[0]?.anios_min, 1)} soldata-urterekin.
 
 <LineChart
     data={compra}

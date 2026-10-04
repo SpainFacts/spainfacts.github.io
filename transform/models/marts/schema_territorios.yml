@@ -61,6 +61,8 @@ models:
   - name: poblacion_territorios
     description: "Población oficial (INE 29005) agregada por año, sexo y nivel territorial (pais/ccaa/provincia)"
     columns:
+      - name: nombre
+        description: "Nombre del territorio (España, comunidad o provincia), igual que en territorios"
       - name: clave
         description: "nivel-cod-sexo-anio"
         tests: [not_null, unique]

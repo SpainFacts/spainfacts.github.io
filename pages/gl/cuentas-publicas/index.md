@@ -1,7 +1,7 @@
 ---
 description: "Ingresos, gastos, déficit e débeda das administracións públicas españolas, por habitante, descontada a inflación e en porcentaxe do PIB."
 title: Contas Públicas · O Informe Anual de España
-i18n_origen: 0fb297ecbee4
+i18n_origen: 522e6f9ccc1f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -23,40 +23,37 @@ SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
 ```
 
 ```sql balance_reciente
--- Importes por habitante y en euros constantes: nominal * 1000 / población (millones) * factor del deflactor
+-- Importes por habitante y en euros constantes (ya calculados en la tabla)
 SELECT
-    CAST(b.año AS INTEGER) AS anio,
+    b.anio,
     b.ingresos_totales_mrd,
     b.gastos_totales_mrd,
     b.saldo_deficit_mrd,
     b.saldo_deficit_pib,
     b.deuda_publica_mrd,
     b.deuda_pib,
-    b.poblacion_m,
-    b.ingresos_totales_mrd * 1000 / b.poblacion_m * d.factor AS ingresos_hab_real,
-    b.gastos_totales_mrd * 1000 / b.poblacion_m * d.factor AS gastos_hab_real
+    b.ingresos_eur_hab_real AS ingresos_hab_real,
+    b.gastos_eur_hab_real AS gastos_hab_real
 FROM mother.cuentas_balance_anual b
-LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(b.año AS INTEGER)
-ORDER BY b.año DESC
+ORDER BY b.anio DESC
 LIMIT 2
 ```
 
 ```sql serie_balance_historico
--- Euros por habitante a precios constantes (el deflactor empieza en 2002)
+-- Euros por habitante a precios constantes (el deflactor empieza en 1996)
 SELECT
-    CAST(b.año AS INTEGER) AS año,
-    b.ingresos_totales_mrd * 1000 / b.poblacion_m * d.factor AS "Ingresos por habitante",
-    b.gastos_totales_mrd * 1000 / b.poblacion_m * d.factor AS "Gastos por habitante",
-    b.saldo_deficit_mrd * 1000 / b.poblacion_m * d.factor AS "Déficit / Superávit por habitante"
+    b.anio AS año,
+    b.ingresos_eur_hab_real AS "Ingresos por habitante",
+    b.gastos_eur_hab_real AS "Gastos por habitante",
+    b.saldo_eur_hab_real AS "Déficit / Superávit por habitante"
 FROM mother.cuentas_balance_anual b
-JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(b.año AS INTEGER)
-WHERE b.poblacion_m > 0
+WHERE b.ingresos_eur_hab_real IS NOT NULL
 ORDER BY año ASC
 ```
 
 ```sql serie_deficit_pib
 SELECT
-    año,
+    anio AS año,
     saldo_deficit_pib AS deficit_pib
 FROM mother.cuentas_balance_anual
 ORDER BY año ASC
@@ -64,7 +61,7 @@ ORDER BY año ASC
 
 ```sql serie_deuda_pib
 SELECT
-    año,
+    anio AS año,
     deuda_pib
 FROM mother.cuentas_balance_anual
 ORDER BY año ASC
@@ -73,8 +70,8 @@ ORDER BY año ASC
 ```sql sankey_anio
 -- Último ejercicio con desglose publicado tanto de ingresos como de gastos
 SELECT least(
-    (SELECT max(año) FROM mother.cuentas_ingresos),
-    (SELECT max(año) FROM mother.cuentas_gastos)
+    (SELECT max(anio) FROM mother.cuentas_ingresos),
+    (SELECT max(anio) FROM mother.cuentas_gastos)
 ) AS anio
 ```
 
@@ -83,7 +80,7 @@ SELECT
     categoria,
     millones_euros
 FROM mother.cuentas_ingresos
-WHERE año = (SELECT least(max(i.año), (SELECT max(g.año) FROM mother.cuentas_gastos g)) FROM mother.cuentas_ingresos i)
+WHERE anio = (SELECT least(max(i.anio), (SELECT max(g.anio) FROM mother.cuentas_gastos g)) FROM mother.cuentas_ingresos i)
 ORDER BY millones_euros DESC
 ```
 
@@ -92,24 +89,22 @@ SELECT
     funcion_cofog,
     millones_euros
 FROM mother.cuentas_gastos
-WHERE año = (SELECT least(max(g.año), (SELECT max(i.año) FROM mother.cuentas_ingresos i)) FROM mother.cuentas_gastos g)
+WHERE anio = (SELECT least(max(g.anio), (SELECT max(i.anio) FROM mother.cuentas_ingresos i)) FROM mother.cuentas_gastos g)
 ORDER BY millones_euros DESC
 ```
 
 ```sql subsectores_ultimo
 SELECT
-    CAST(s.año AS INTEGER) AS anio,
+    s.anio,
     s.subsector,
     s.gasto_mrd,
     s.ingreso_mrd,
     s.saldo_deficit_mrd,
     s.peso_gasto_pct,
-    s.gasto_mrd * 1000 / b.poblacion_m * d.factor AS gasto_hab_real,
-    s.saldo_deficit_mrd * 1000 / b.poblacion_m * d.factor AS saldo_hab_real
+    s.gasto_eur_hab_real AS gasto_hab_real,
+    s.saldo_eur_hab_real AS saldo_hab_real
 FROM mother.cuentas_subsectores s
-JOIN mother.cuentas_balance_anual b ON CAST(b.año AS INTEGER) = CAST(s.año AS INTEGER)
-JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(s.año AS INTEGER)
-WHERE s.año = (SELECT max(año) FROM mother.cuentas_subsectores)
+WHERE s.anio = (SELECT max(anio) FROM mother.cuentas_subsectores)
 ORDER BY s.gasto_mrd DESC
 ```
 

@@ -51,7 +51,14 @@ select
         when 'FC_IND_TL_E' then 'Textil y cuero'
         when 'FC_IND_NSP_E' then 'Otras industrias'
     end as sector,
-    sector like 'FC_IND_%' and sector <> 'FC_IND_E' as es_rama_industrial,
+    -- total = toda la economía; sector = los grandes sectores; rama_* = desglose de la industria
+    -- y del transporte (sus filas ya están dentro del sector: no se suman con él)
+    case
+        when sector = 'FC_E' then 'total'
+        when sector like 'FC_IND_%' and sector <> 'FC_IND_E' then 'rama_industria'
+        when sector in ('FC_TRA_ROAD_E', 'FC_TRA_RAIL_E') then 'rama_transporte'
+        else 'sector'
+    end as tipo_sector,
     total,
     electricidad,
     gas_natural,
@@ -60,6 +67,10 @@ select
     calor_ambiente,
     calor,
     carbon,
-    electricidad / nullif(total, 0) as cuota_electricidad
+    100.0 * electricidad / nullif(total, 0) as cuota_electricidad_pct,
+    100.0 * gas_natural / nullif(total, 0) as cuota_gas_pct,
+    100.0 * petroleo / nullif(total, 0) as cuota_petroleo_pct,
+    100.0 * renovables / nullif(total, 0) as cuota_renovables_pct,
+    100.0 * (coalesce(calor, 0) + coalesce(carbon, 0)) / nullif(total, 0) as cuota_calor_carbon_pct
 from por_combustible
 where total is not null

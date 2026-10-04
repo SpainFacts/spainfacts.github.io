@@ -162,7 +162,7 @@ Los camiones y autobuses son pocos frente a los coches, pero recorren muchos má
 WITH ult AS (SELECT max(mes) AS mes FROM mother.movilidad_marcas_mensual)
 SELECT
     m.grupo,
-    CASE m.grupo WHEN 'camion' THEN 'Camiones' ELSE 'Autobuses' END AS vehiculo,
+    m.grupo_etiqueta AS vehiculo,
     m.grupo_empresarial,
     m.marca,
     sum(m.matriculaciones) AS unidades

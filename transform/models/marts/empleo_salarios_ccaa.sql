@@ -12,12 +12,20 @@ with base as (
     where serie like '%. Dato base. %. Total. Salario medio bruto.%'
       and valor is not null
 )
+-- brecha_publico_pct = cuánto más (o menos) cobra de media el público que el privado, en %.
+-- Es una sola edición (2022): no lleva euros reales. Ceuta y Melilla no las publica el INE.
 select
     b.anio,
-    n.cod_ccaa,
+    case when n.cod_ccaa = '00' then 'pais' else 'ccaa' end as nivel,
+    n.cod_ccaa as cod,
+    t.nombre,
     max(valor) filter (where control = 'Control de la empresa público') as salario_publico,
     max(valor) filter (where control = 'Control de la empresa privado') as salario_privado,
-    max(valor) filter (where control = 'Total') as salario_total
+    max(valor) filter (where control = 'Total') as salario_total,
+    100.0 * (max(valor) filter (where control = 'Control de la empresa público')
+        / max(valor) filter (where control = 'Control de la empresa privado') - 1) as brecha_publico_pct
 from base b
 join {{ ref('ine_ccaa_nombres') }} n on n.nombre_ine = b.territorio
+left join {{ ref('territorios') }} t
+    on t.nivel = case when n.cod_ccaa = '00' then 'pais' else 'ccaa' end and t.cod = n.cod_ccaa
 group by all

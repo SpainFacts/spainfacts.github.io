@@ -15,10 +15,16 @@ with base as (
 
 total as (
     select anio, te as te_total from base where sector = 'S13'
+),
+
+poblacion as (
+    select cast(periodo as integer) as anio, valor * 1000.0 as habitantes
+    from {{ source('raw_eurostat_extra', 'eurostat_poblacion') }}
+    where valor is not null
 )
 
 select
-    b.anio as "año",
+    b.anio,
     case b.sector
         when 'S1311' then 'Administración Central'
         when 'S1312' then 'Comunidades Autónomas'
@@ -29,9 +35,15 @@ select
     round(b.te / 1000.0, 2) as gasto_mrd,
     round(b.tr / 1000.0, 2) as ingreso_mrd,
     round(b.b9 / 1000.0, 2) as saldo_deficit_mrd,
-    round(b.te / t.te_total * 100, 2) as peso_gasto_pct
+    round(b.te / t.te_total * 100, 2) as peso_gasto_pct,
+    f.anio_base,
+    round(b.te * 1e6 * f.factor / h.habitantes, 0) as gasto_eur_hab_real,
+    round(b.tr * 1e6 * f.factor / h.habitantes, 0) as ingreso_eur_hab_real,
+    round(b.b9 * 1e6 * f.factor / h.habitantes, 0) as saldo_eur_hab_real
 from base b
 join total t using (anio)
+left join poblacion h using (anio)
+left join {{ ref('deflactor') }} f using (anio)
 where b.sector in ('S1311', 'S1312', 'S1313', 'S1314')
   and b.te is not null
 order by 1, 4 desc

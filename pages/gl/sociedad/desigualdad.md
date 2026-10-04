@@ -1,7 +1,7 @@
 ---
 title: Renda, pobreza e desigualdade
 description: "Renda media dos fogares descontada a inflación, risco de pobreza, AROPE, carencia material, índice de Gini e S80/S20 en España, por comunidade, idade e municipio, e comparación coa UE."
-i18n_origen: 9c8ab30724e4
+i18n_origen: 074b220d7ed5
 ---
 
 <script>
@@ -20,15 +20,15 @@ ORDER BY anio
 
 ```sql ue_ultimo
 SELECT
-    max(valor) FILTER (WHERE geo = 'ES' AND indicador = 'gini') AS gini_es,
-    max(valor) FILTER (WHERE geo = 'EU27_2020' AND indicador = 'gini') AS gini_ue,
-    max(valor) FILTER (WHERE geo = 'ES' AND indicador = 'arope') AS arope_es,
-    max(valor) FILTER (WHERE geo = 'EU27_2020' AND indicador = 'arope') AS arope_ue,
-    max(valor) FILTER (WHERE geo = 'ES' AND indicador = 's80_s20') AS s80_es,
-    max(valor) FILTER (WHERE geo = 'EU27_2020' AND indicador = 's80_s20') AS s80_ue,
+    max(valor) FILTER (WHERE cod_pais = 'ES' AND indicador = 'gini') AS gini_es,
+    max(valor) FILTER (WHERE cod_pais = 'EU27_2020' AND indicador = 'gini') AS gini_ue,
+    max(valor) FILTER (WHERE cod_pais = 'ES' AND indicador = 'arope') AS arope_es,
+    max(valor) FILTER (WHERE cod_pais = 'EU27_2020' AND indicador = 'arope') AS arope_ue,
+    max(valor) FILTER (WHERE cod_pais = 'ES' AND indicador = 's80_s20') AS s80_es,
+    max(valor) FILTER (WHERE cod_pais = 'EU27_2020' AND indicador = 's80_s20') AS s80_ue,
     CAST(max(anio) AS INTEGER) AS anio
 FROM mother.renta_ue
-WHERE anio = (SELECT max(anio) FROM mother.renta_ue WHERE geo = 'EU27_2020' AND indicador = 'gini')
+WHERE anio = (SELECT max(anio) FROM mother.renta_ue WHERE cod_pais = 'EU27_2020' AND indicador = 'gini')
 ```
 
 ```sql hitos
@@ -224,7 +224,7 @@ Na ECV {edad[0]?.anio}, o grupo de idade con máis risco de pobreza era o de {ed
 ```sql desigualdad_grafico
 SELECT anio, 'España (INE)' AS territorio, gini FROM ${nac} WHERE gini IS NOT NULL
 UNION ALL
-SELECT anio, 'UE-27 (Eurostat)', valor FROM mother.renta_ue WHERE geo = 'EU27_2020' AND indicador = 'gini'
+SELECT anio, 'UE-27 (Eurostat)', valor FROM mother.renta_ue WHERE cod_pais = 'EU27_2020' AND indicador = 'gini'
 ORDER BY anio, territorio
 ```
 
@@ -243,9 +243,9 @@ O índice de Gini de España foi {formatNumber(hitos[0]?.gini, 1)} na ECV {hitos
 />
 
 ```sql gini_paises
-SELECT pais, valor AS gini, CASE WHEN geo = 'ES' THEN 'España' WHEN geo = 'EU27_2020' THEN 'UE-27' ELSE 'Otros' END AS grupo
+SELECT pais, valor AS gini, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'UE-27' ELSE 'Otros' END AS grupo
 FROM mother.renta_ue
-WHERE indicador = 'gini' AND anio = (SELECT max(anio) FROM mother.renta_ue WHERE geo = 'EU27_2020' AND indicador = 'gini')
+WHERE indicador = 'gini' AND anio = (SELECT max(anio) FROM mother.renta_ue WHERE cod_pais = 'EU27_2020' AND indicador = 'gini')
 ORDER BY valor DESC
 ```
 

@@ -6,6 +6,8 @@
 -- El Balance publica las comunidades uniprovinciales (Asturias, Baleares,
 -- Cantabria, La Rioja, Madrid, Murcia, Navarra) y Ceuta y Melilla solo como
 -- comunidad: se copian también al nivel provincia con su código INE.
+-- nombre: el de territorios (España, comunidades y provincias); los municipios llevan el nombre
+-- del Balance.
 with base as (
     select
         b.anio,
@@ -52,6 +54,20 @@ left join poblacion p
  and p.anio = least(n.anio, (select max(anio) from poblacion))
 where n.nivel in ('pais', 'ccaa', 'provincia', 'municipio') and n.cod is not null
 group by n.anio, n.nivel, n.cod, n.categoria
+),
+
+con_provincias as (
+{{ con_uniprovinciales('final', ['anio', 'categoria']) }}
 )
 
-{{ con_uniprovinciales('final', ['anio', 'categoria']) }}
+select
+    c.anio,
+    c.nivel,
+    c.cod,
+    coalesce(t.nombre, c.territorio) as nombre,
+    c.categoria,
+    c.infracciones,
+    c.poblacion,
+    c.tasa_1000
+from con_provincias c
+left join {{ ref('territorios') }} t on t.nivel = c.nivel and t.cod = c.cod

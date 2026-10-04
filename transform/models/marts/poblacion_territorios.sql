@@ -1,4 +1,6 @@
 -- Población oficial (padrón, INE 29005) agregada a España, comunidad y provincia.
+-- El nombre sale de territorios_ccaa y territorios_provincias (no de `territorios`,
+-- que lee esta tabla para su población_ultima).
 with m as (
     select * from {{ ref('poblacion_municipios') }}
 ),
@@ -13,14 +15,24 @@ agregados as (
     union all
     select anio, 'provincia', cod_prov, sexo, sum(poblacion), count(*)
     from m group by all
+),
+
+nombres as (
+    select 'pais' as nivel, '00' as cod, 'España' as nombre
+    union all
+    select 'ccaa', cod_ccaa, nombre from {{ ref('territorios_ccaa') }}
+    union all
+    select 'provincia', cod_prov, nombre from {{ ref('territorios_provincias') }}
 )
 
 select
-    anio,
-    nivel,
-    cod,
-    sexo,
-    cast(poblacion as bigint) as poblacion,
-    cast(n_municipios as integer) as n_municipios,
-    nivel || '-' || cod || '-' || sexo || '-' || anio as clave
-from agregados
+    a.anio,
+    a.nivel,
+    a.cod,
+    n.nombre,
+    a.sexo,
+    cast(a.poblacion as bigint) as poblacion,
+    cast(a.n_municipios as integer) as n_municipios,
+    a.nivel || '-' || a.cod || '-' || a.sexo || '-' || a.anio as clave
+from agregados a
+left join nombres n on n.nivel = a.nivel and n.cod = a.cod

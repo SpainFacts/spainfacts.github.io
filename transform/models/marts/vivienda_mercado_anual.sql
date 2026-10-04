@@ -7,7 +7,8 @@
 -- pct_hipoteca: hipotecas sobre viviendas / compraventas de viviendas, una
 -- aproximación a qué parte de las compras se financia con hipoteca (no son
 -- las mismas operaciones: también se hipotecan viviendas ya compradas).
--- meses: meses con dato; el año en curso está incompleto.
+-- meses: meses con dato; el año en curso está incompleto (sumas y por habitante solo se comparan con años
+-- de 12 meses). importe_hipotecas_real: suma de los meses ya deflactados (no el factor anual).
 with anual as (
     select
         nivel,
@@ -48,7 +49,8 @@ select
     a.compraventas_segunda_mano,
     a.compraventas_protegida,
     a.hipotecas,
-    a.importe_hipotecas,
+    a.importe_hipotecas_real,
+    a.importe_hipotecas_real / nullif(p.poblacion, 0) as importe_hipotecas_eur_hab_real,
     a.importe_hipotecas / nullif(a.hipotecas, 0) as importe_medio,
     a.importe_hipotecas_real / nullif(a.hipotecas, 0) as importe_medio_real,
     a.anio_base,

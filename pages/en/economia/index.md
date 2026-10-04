@@ -1,7 +1,7 @@
 ---
 title: Economy
 description: "GDP per inhabitant, growth, foreign trade, sectors, employment, wages, unemployment and inflation in Spain, adjusted for inflation and in proportion to population."
-i18n_origen: 071a947706ae
+i18n_origen: 835b12e5d68d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -19,7 +19,7 @@ ORDER BY anio
 ```
 
 ```sql pib_trim
-SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_euros
+SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY crecimiento DESC
 
 # 📊 Economy
 
-How the Spanish economy is changing. In line with the approach used across the whole site, anything that depends on the size of the country is shown **per inhabitant**, and anything measured in euros is shown **adjusted for inflation** (in {pib_trim[0]?.anio_euros} euros).
+How the Spanish economy is changing. In line with the approach used across the whole site, anything that depends on the size of the country is shown **per inhabitant**, and anything measured in euros is shown **adjusted for inflation** (in {pib_trim[0]?.anio_base} euros).
 
 <Grid cols=3>
     <KpiCard
         title="GDP per inhabitant"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="in {pib_hab.slice(-1)[0]?.anio}, in {pib_trim[0]?.anio_euros} euros"
+        period="in {pib_hab.slice(-1)[0]?.anio}, in {pib_trim[0]?.anio_base} euros"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real, vs previous year"
         direction="positive-up"
@@ -159,7 +159,7 @@ What the economy produces for each inhabitant, in constant euros. [Quarterly gro
     yFmt='#,##0" €"'
     yAxisTitle="€ per inhabitant (real)"
     startingAtZero={false}
-    title="GDP per inhabitant in {pib_trim[0]?.anio_euros} euros"
+    title="GDP per inhabitant in {pib_trim[0]?.anio_base} euros"
 />
 
 ## Sectors
@@ -201,7 +201,7 @@ Average gross monthly wage adjusted for inflation. [Growth, sectors and deciles 
     yFmt='#,##0" €"'
     yAxisTitle="€ per month (real)"
     startingAtZero={false}
-    title="Average monthly wage in {pib_trim[0]?.anio_euros} euros"
+    title="Average monthly wage in {pib_trim[0]?.anio_base} euros"
 />
 
 ## Unemployment and inflation

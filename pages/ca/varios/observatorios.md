@@ -3,7 +3,7 @@ title: Observatoris públics
 description: "Cens dels observatoris públics d'Espanya: quants n'hi ha, quina administració els crea, quan van néixer, quants continuen actius, quants n'hi ha per habitant a cada comunitat i quin partit governava quan es van crear."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 10c0e03a581c
+i18n_origen: a544f976aca5
 ---
 
 <script>
@@ -87,7 +87,7 @@ ORDER BY por_millon DESC
 SELECT
     nombre,
     nivel,
-    coalesce(comunidad, '') AS comunidad,
+    coalesce(ccaa, '') AS comunidad,
     coalesce(municipio, '') AS municipio,
     anio_creacion,
     coalesce(partido, '') AS partido,

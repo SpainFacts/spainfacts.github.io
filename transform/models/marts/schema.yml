@@ -21,30 +21,12 @@ models:
         tests: [not_null]
       - name: url_oficial
         tests: [not_null]
-  - name: ipc
-    description: "IPC del INE (tabla 76125, base 2025), todas las series"
-    columns:
-      - name: date
-        tests: [not_null]
-      - name: value
-        tests: [not_null]
-      - name: cod_serie
-        tests: [not_null]
-  - name: unemployment
-    description: "Tasa de paro EPA (tabla 65292), todas las series"
-    columns:
-      - name: date
-        tests: [not_null]
-      - name: value
-        tests: [not_null]
-      - name: cod_serie
-        tests: [not_null]
   - name: embalses_semanal
     description: "Reserva hídrica semanal por cuenca, demarcación y total España (MITECO)"
     columns:
       - name: fecha
         tests: [not_null]
-      - name: clave
+      - name: cod
         tests: [not_null]
       - name: pct_llenado
         tests: [not_null]
@@ -61,22 +43,5 @@ models:
       - name: cod_demarcacion
         description: "Null si aparece un ámbito nuevo sin mapear en seeds/cuencas_demarcaciones.csv"
         tests: [not_null]
-  - name: poblacion_anual
-    description: "Población a 1 de enero por año, provincia (o total nacional) y sexo (INE ECP)"
-    columns:
-      - name: anio
-        tests: [not_null]
-      - name: poblacion
-        tests: [not_null]
-  - name: poblacion_piramide
-    description: "Población nacional por grupo quinquenal de edad y sexo (INE ECP)"
-    columns:
-      - name: rango_edad
-        tests: [not_null]
   - name: observatorios_detalle
     description: "Observatorios públicos con nivel de la administración, ubicación (comunidad, provincia y municipio a partir del ámbito o del nombre), año de creación, estado (Activo, Inactivo o Sin información), tipo y partido que gobernaba la administración que lo creó (Gobierno de España, presidencia autonómica o alcaldía) a 1 de julio del año de creación."
-  - name: observatorios
-    description: "Censo de observatorios públicos (observatoriospublicos.es)"
-    columns:
-      - name: name
-        tests: [not_null]

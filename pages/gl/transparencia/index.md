@@ -1,5 +1,5 @@
 ---
-i18n_origen: 9991e536ee5b
+i18n_origen: fd0f9eb9de30
 title: Transparencia
 description: "Como render contas as administracións españolas: obrigas de información dos concellos, portais de transparencia, decretos lei, indultos, orzamentos prorrogados e a posición de España nos índices internacionais de integridade, por Goberno e por partido."
 og:
@@ -32,7 +32,7 @@ SELECT * FROM ${actos} ORDER BY anio DESC LIMIT 1
 ```sql cpi
 SELECT anio, valor, puesto_ue, n_ue
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'cpi' AND cod_pais = 'ESP'
+WHERE indicador_id = 'cpi' AND cod_pais = 'ES'
 ORDER BY anio
 ```
 

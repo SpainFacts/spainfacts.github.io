@@ -48,7 +48,9 @@ select
     c.cod_mun,
     m.municipio,
     m.cod_prov,
+    tp.nombre as provincia,
     m.cod_ccaa,
+    tc.nombre as ccaa,
     c.anio,
     c.fecha_plazo,
     c.poblacion,
@@ -69,6 +71,8 @@ select
         else 6
     end as tramo_orden,
     c.tiene_datos as remitida,
+    case when not (m.cod_prov in ('01', '31') or (m.cod_prov in ('20', '48') and c.anio <= 2014))
+        then (case when c.tiene_datos then 0 else 100 end) end as incumple_pct,
     not c.tiene_datos and not (m.cod_prov in ('01', '31') or (m.cod_prov in ('20', '48') and c.anio <= 2014)) as incumple,
     not (m.cod_prov in ('01', '31') or (m.cod_prov in ('20', '48') and c.anio <= 2014)) as aplica_indicador,
     case
@@ -88,3 +92,5 @@ left join (
     from {{ ref('poblacion_municipios') }}
     qualify row_number() over (partition by cod_mun order by anio desc) = 1
 ) m on m.cod_mun = c.cod_mun
+left join {{ ref('territorios') }} tp on tp.nivel = 'provincia' and tp.cod = m.cod_prov
+left join {{ ref('territorios') }} tc on tc.nivel = 'ccaa' and tc.cod = m.cod_ccaa

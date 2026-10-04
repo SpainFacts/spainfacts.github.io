@@ -5,8 +5,9 @@
 --   'Pago directo de los hogares' (HF3).
 --   pct_pib (cifra de Eurostat), eur_hab (euros corrientes por habitante), pps_hab (paridad de
 --   poder de compra por habitante, para comparar países) y millones_eur.
---   eur_hab_real: solo España, euros por habitante x factor del deflactor (IPC medio anual del
---   INE) = euros constantes de anio_base.
+--   eur_hab_real y millones_eur_real: euros constantes de anio_base con el IPCA de cada país
+--   (deflactor_paises), para comparar años. cod_pais: ISO (Grecia GR; la UE-27 'EU27_2020');
+--   es_agregado: la fila de la UE-27.
 with base as (
     select
         cast(anio as integer) as anio,
@@ -22,7 +23,7 @@ with base as (
 
 select
     b.anio,
-    case b.geo when 'EU27_2020' then 'UE' else cast(b.geo as varchar) end as geo,
+    cast(i.cod_pais as varchar) as cod_pais,
     case b.geo
         when 'EU27_2020' then 'UE-27'
         when 'ES' then 'España' when 'DE' then 'Alemania' when 'FR' then 'Francia' when 'IT' then 'Italia'
@@ -44,8 +45,11 @@ select
     b.eur_hab,
     b.pps_hab,
     b.millones_eur,
-    case when b.geo = 'ES' then b.eur_hab * d.factor end as eur_hab_real,
-    d.anio_base
+    b.eur_hab * d.factor as eur_hab_real,
+    b.millones_eur * d.factor as millones_eur_real,
+    d.anio_base,
+    b.geo = 'EU27_2020' as es_agregado
 from base b
-left join {{ ref('deflactor') }} d on d.anio = b.anio
+join {{ ref('paises_iso') }} i on i.eurostat = b.geo
+left join {{ ref('deflactor_paises') }} d on d.cod_pais = i.cod_pais and d.anio = b.anio
 where coalesce(b.pct_pib, b.eur_hab, b.pps_hab, b.millones_eur) is not null

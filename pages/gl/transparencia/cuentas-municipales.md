@@ -1,7 +1,7 @@
 ---
 title: Rendición de contas dos concellos
 description: "Administracións que non cumpren as súas obrigas legais de publicar ou remitir información: quen son, onde están e quen gobernaba cando vencía o prazo."
-i18n_origen: 8aa3c01a34e7
+i18n_origen: 899966847983
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -283,9 +283,9 @@ SELECT * FROM mother.transparencia_tcu
 
 ```sql tcu_ultimo
 SELECT
-    CAST(max(ejercicio) FILTER (WHERE obligacion = 'cuenta_general') AS INTEGER) AS cg,
-    CAST(max(ejercicio) FILTER (WHERE obligacion = 'control_interno') AS INTEGER) AS ci,
-    CAST(max(ejercicio) FILTER (WHERE obligacion = 'contratos') AS INTEGER) AS ct
+    CAST(max(anio) FILTER (WHERE obligacion = 'cuenta_general') AS INTEGER) AS cg,
+    CAST(max(anio) FILTER (WHERE obligacion = 'control_interno') AS INTEGER) AS ci,
+    CAST(max(anio) FILTER (WHERE obligacion = 'contratos') AS INTEGER) AS ct
 FROM ${tcu}
 WHERE aplica_indicador
 ```
@@ -310,25 +310,25 @@ SELECT
     count(*) FILTER (WHERE incumple AND poblacion >= 20000) AS grandes
 FROM ${tcu}
 WHERE aplica_indicador AND obligacion = 'cuenta_general'
-  AND ejercicio = (SELECT cg FROM ${tcu_ultimo})
+  AND anio = (SELECT cg FROM ${tcu_ultimo})
 ```
 
 ```sql tcu_serie
 -- Solo ejercicios con cobertura comparable (al menos la mitad de ayuntamientos del ejercicio mejor cubierto)
 WITH por_ejercicio AS (
     SELECT
-        CAST(ejercicio AS INTEGER) AS ejercicio,
+        CAST(anio AS INTEGER) AS anio,
         obligacion,
         count(*) FILTER (WHERE incumple) AS no_rendida,
         count(*) AS total
     FROM ${tcu}
     WHERE aplica_indicador AND obligacion IN ('cuenta_general', 'control_interno')
-    GROUP BY CAST(ejercicio AS INTEGER), obligacion
+    GROUP BY CAST(anio AS INTEGER), obligacion
 )
-SELECT ejercicio, obligacion, no_rendida
+SELECT anio, obligacion, no_rendida
 FROM por_ejercicio
 WHERE total >= 0.5 * (SELECT max(p2.total) FROM por_ejercicio p2 WHERE p2.obligacion = por_ejercicio.obligacion)
-ORDER BY obligacion, ejercicio
+ORDER BY obligacion, anio
 ```
 
 ```sql tcu_resumen_ci
@@ -337,7 +337,7 @@ SELECT
     count(*) AS total
 FROM ${tcu}
 WHERE aplica_indicador AND obligacion = 'control_interno'
-  AND ejercicio = (SELECT ci FROM ${tcu_ultimo})
+  AND anio = (SELECT ci FROM ${tcu_ultimo})
 ```
 
 A **Conta Xeral** recolle todas as contas do concello (orzamento, balance, resultados, tesouraría). Unha vez aprobada polo Pleno, debe enviarse ao **Tribunal de Contas** (ou ao órgano de control externo da comunidade) **antes do 15 de outubro do ano seguinte** (arts. 212.5 e 223.2 do [texto refundido da Lei de facendas locais](https://www.boe.es/buscar/act.php?id=BOE-A-2004-4214)). Ademais, cada concello debe remitir **antes do 30 de abril** a información de **control interno** (acordos adoptados contra os reparos do interventor e principais anomalías de ingresos; art. 218.3 da mesma lei) e, **antes de que remate febreiro**, a **relación anual de contratos** ou, se non os houbo, unha certificación negativa (art. 335 da Lei de contratos do sector público). A plataforma non inclúe o País Vasco nin Navarra, que teñen os seus propios órganos de control externo.
@@ -388,7 +388,7 @@ WITH cg AS (
 ),
 historial AS (
     SELECT cod_mun,
-        string_agg(CAST(CAST(ejercicio AS INTEGER) AS VARCHAR), ', ' ORDER BY ejercicio) FILTER (WHERE incumple) AS ejercicios_sin_rendir,
+        string_agg(CAST(CAST(anio AS INTEGER) AS VARCHAR), ', ' ORDER BY anio) FILTER (WHERE incumple) AS ejercicios_sin_rendir,
         count(*) FILTER (WHERE incumple) AS n_sin_rendir
     FROM cg
     GROUP BY cod_mun
@@ -396,7 +396,7 @@ historial AS (
 ci AS (
     SELECT cod_mun, estado AS estado_ci
     FROM ${tcu}
-    WHERE aplica_indicador AND obligacion = 'control_interno' AND ejercicio = (SELECT ci FROM ${tcu_ultimo})
+    WHERE aplica_indicador AND obligacion = 'control_interno' AND anio = (SELECT ci FROM ${tcu_ultimo})
 )
 SELECT
     t.municipio,
@@ -412,7 +412,7 @@ FROM cg t
 JOIN historial h USING (cod_mun)
 LEFT JOIN ci USING (cod_mun)
 LEFT JOIN mother.territorios p ON p.nivel = 'provincia' AND p.cod = t.cod_prov
-WHERE t.ejercicio = (SELECT cg FROM ${tcu_ultimo}) AND t.incumple
+WHERE t.anio = (SELECT cg FROM ${tcu_ultimo}) AND t.incumple
 ORDER BY t.poblacion DESC
 ```
 
@@ -434,11 +434,11 @@ ORDER BY t.poblacion DESC
 SELECT
     c.nombre AS comunidad,
     '/gl' || c.ruta AS ruta,
-    count(*) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.ejercicio = u.cg) AS ayuntamientos,
-    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.ejercicio = u.cg) AS pct_cg,
-    avg((t.estado = 'en_plazo')::INT) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.ejercicio = u.cg) AS pct_cg_en_plazo,
-    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'control_interno' AND t.ejercicio = u.ci) AS pct_ci,
-    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'contratos' AND t.ejercicio = u.ct) AS pct_ct
+    count(*) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.anio = u.cg) AS ayuntamientos,
+    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.anio = u.cg) AS pct_cg,
+    avg((t.estado = 'en_plazo')::INT) FILTER (WHERE t.obligacion = 'cuenta_general' AND t.anio = u.cg) AS pct_cg_en_plazo,
+    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'control_interno' AND t.anio = u.ci) AS pct_ci,
+    avg(t.incumple::INT) FILTER (WHERE t.obligacion = 'contratos' AND t.anio = u.ct) AS pct_ct
 FROM ${tcu} t
 CROSS JOIN ${tcu_ultimo} u
 JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = t.cod_ccaa
@@ -465,8 +465,8 @@ Contas Xerais non rendidas en todos os exercicios dispoñibles, segundo a famili
 ```sql tcu_por_familia
 WITH base AS (
     SELECT t.*,
-        avg(t.incumple::INT) OVER (PARTITION BY t.ejercicio, t.tramo_orden) AS tasa_tramo,
-        avg(t.incumple::INT) OVER (PARTITION BY t.ejercicio, t.tramo_orden, t.cod_ccaa) AS tasa_tramo_ccaa
+        avg(t.incumple::INT) OVER (PARTITION BY t.anio, t.tramo_orden) AS tasa_tramo,
+        avg(t.incumple::INT) OVER (PARTITION BY t.anio, t.tramo_orden, t.cod_ccaa) AS tasa_tramo_ccaa
     FROM ${tcu} t
     WHERE t.aplica_indicador AND t.obligacion = 'cuenta_general'
 ),
@@ -543,9 +543,9 @@ Cando un concello non lle envía a Facenda a **liquidación do seu orzamento**, 
 
 ```sql pie_ultimo
 SELECT
-    max(periodo) AS periodo,
-    ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'][month(max(periodo))]
-        || ' de ' || year(max(periodo)) AS mes
+    max(fecha) AS periodo,
+    ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'][month(max(fecha))]
+        || ' de ' || year(max(fecha)) AS mes
 FROM mother.transparencia_pie_mensual
 ```
 
@@ -557,29 +557,27 @@ SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
 ```sql pie_resumen
 -- Importes en euros corrientes (eur_12m) y a precios constantes (eur_12m_real = importe por el factor del deflactor de su año)
 SELECT
-    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = (SELECT periodo FROM ${pie_ultimo})) AS retenidos_mes,
-    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = (SELECT periodo FROM ${pie_ultimo}) AND p.seccion = 'liquidacion') AS retenidos_liquidacion,
-    sum(p.importe_eur) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m,
-    sum(p.importe_eur * coalesce(d.factor, 1)) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m_real,
-    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS retenidos_12m
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.fecha = (SELECT periodo FROM ${pie_ultimo})) AS retenidos_mes,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.fecha = (SELECT periodo FROM ${pie_ultimo}) AND p.seccion = 'liquidacion') AS retenidos_liquidacion,
+    sum(p.importe_eur) FILTER (WHERE p.fecha > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m,
+    sum(p.importe_eur_real) FILTER (WHERE p.fecha > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS eur_12m_real,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.fecha > (SELECT periodo FROM ${pie_ultimo}) - INTERVAL 12 MONTH) AS retenidos_12m
 FROM mother.transparencia_pie_mensual p
-LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
 ```
 
 ```sql pie_serie_12m
--- Últimos 24 meses: retenidos en el mes y acumulado móvil de 12 meses (misma definición que pie_resumen); euros a precios constantes con mother.deflactor
+-- Últimos 24 meses: retenidos en el mes y acumulado móvil de 12 meses (misma definición que pie_resumen); euros a precios constantes (importe_eur_real)
 WITH meses AS (
-    SELECT DISTINCT periodo FROM mother.transparencia_pie_mensual
+    SELECT DISTINCT fecha AS periodo FROM mother.transparencia_pie_mensual
 )
 SELECT
     m.periodo,
-    count(DISTINCT p.cod_mun) FILTER (WHERE p.periodo = m.periodo) AS retenidos_mes,
-    sum(p.importe_eur * coalesce(d.factor, 1)) AS eur_12m_real,
+    count(DISTINCT p.cod_mun) FILTER (WHERE p.fecha = m.periodo) AS retenidos_mes,
+    sum(p.importe_eur_real) AS eur_12m_real,
     count(DISTINCT p.cod_mun) AS retenidos_12m
 FROM meses m
 JOIN mother.transparencia_pie_mensual p
-  ON p.periodo > m.periodo - INTERVAL 12 MONTH AND p.periodo <= m.periodo
-LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
+  ON p.fecha > m.periodo - INTERVAL 12 MONTH AND p.fecha <= m.periodo
 WHERE m.periodo > (SELECT max(periodo) FROM meses) - INTERVAL 24 MONTH
 GROUP BY m.periodo
 ORDER BY m.periodo
@@ -614,7 +612,7 @@ ORDER BY m.periodo
 
 ```sql pie_serie
 SELECT
-    p.periodo,
+    p.fecha AS periodo,
     CASE p.seccion
         WHEN 'liquidacion' THEN 'Liquidación'
         WHEN 'presupuesto' THEN 'Presupuesto del año'
@@ -622,9 +620,8 @@ SELECT
     END AS motivo,
     count(DISTINCT p.cod_mun) AS ayuntamientos,
     sum(p.importe_eur) AS importe,
-    sum(p.importe_eur * coalesce(d.factor, 1)) AS importe_real
+    sum(p.importe_eur_real) AS importe_real
 FROM mother.transparencia_pie_mensual p
-LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
 GROUP BY 1, 2
 ORDER BY periodo, motivo
 ```
@@ -657,7 +654,7 @@ ORDER BY periodo, motivo
 ```sql pie_rachas
 -- Meses seguidos retenido (por cualquier motivo) hasta el último mes publicado
 WITH m AS (
-    SELECT DISTINCT cod_mun, periodo FROM mother.transparencia_pie_mensual
+    SELECT DISTINCT cod_mun, fecha AS periodo FROM mother.transparencia_pie_mensual
 ),
 g AS (
     SELECT cod_mun, periodo,
@@ -672,17 +669,6 @@ FROM g JOIN actual a ON a.cod_mun = g.cod_mun AND a.grupo = g.grupo
 GROUP BY g.cod_mun
 ```
 
-```sql pie_importe_real
--- Importe retenido de cada campaña (ayuntamiento, información y ejercicio) en euros constantes, sumando mes a mes
-SELECT
-    p.cod_mun,
-    p.seccion,
-    CAST(p.ejercicio_referencia AS INTEGER) AS anio,
-    sum(p.importe_eur * coalesce(d.factor, 1)) AS importe_real
-FROM mother.transparencia_pie_mensual p
-LEFT JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(year(p.periodo) AS INTEGER)
-GROUP BY 1, 2, 3
-```
 
 ```sql pie_lista
 SELECT
@@ -693,13 +679,12 @@ SELECT
     r.meses_seguidos,
     r.desde,
     sum(t.importe_retenido_eur) AS importe,
-    sum(ir.importe_real) AS importe_real,
+    sum(t.importe_retenido_eur_real) AS importe_real,
     bool_or(t.por_dependientes) AS por_dependientes,
     arg_min(t.lista, t.primer_mes) AS lista,
     arg_min(t.familia, t.primer_mes) AS familia,
     '/gl/territorios/municipios?m=' || t.cod_mun AS enlace
 FROM mother.transparencia_pie t
-LEFT JOIN ${pie_importe_real} ir ON ir.cod_mun = t.cod_mun AND ir.seccion = t.seccion AND ir.anio = CAST(t.anio AS INTEGER)
 LEFT JOIN ${pie_rachas} r ON r.cod_mun = t.cod_mun
 LEFT JOIN mother.territorios p ON p.nivel = 'provincia' AND p.cod = t.cod_prov
 WHERE t.sigue_retenido
@@ -731,7 +716,7 @@ WITH universo AS (
 ),
 retenidos AS (
     SELECT DISTINCT cod_mun FROM mother.transparencia_pie_mensual
-    WHERE periodo = (SELECT periodo FROM ${pie_ultimo})
+    WHERE fecha = (SELECT periodo FROM ${pie_ultimo})
 )
 SELECT
     c.nombre AS comunidad,
@@ -766,7 +751,7 @@ WITH base AS (
     SELECT t.*,
         avg(t.retenido::INT) OVER (PARTITION BY t.seccion, t.anio, t.tramo_orden) AS tasa_tramo,
         avg(t.retenido::INT) OVER (PARTITION BY t.seccion, t.anio, t.tramo_orden, t.cod_ccaa) AS tasa_tramo_ccaa
-    FROM (SELECT * FROM mother.transparencia_pie WHERE aplica_indicador AND campania_completa) t
+    FROM (SELECT * FROM mother.transparencia_pie WHERE aplica_indicador AND NOT es_parcial) t
 ),
 agg AS (
     SELECT
@@ -831,9 +816,9 @@ Todos os concellos deben calcular e **comunicarlle a Facenda cada trimestre o se
 
 ```sql pmp_ultimo
 SELECT
-    max(fecha_trimestre) AS fecha,
-    arg_max(periodo, fecha_trimestre) AS periodo,
-    CAST(arg_max(trimestre, fecha_trimestre) AS INTEGER) || 'º trimestre de ' || CAST(arg_max(anio, fecha_trimestre) AS INTEGER) AS etiqueta
+    max(fecha) AS fecha,
+    arg_max(periodo, fecha) AS periodo,
+    CAST(arg_max(trimestre, fecha) AS INTEGER) || 'º trimestre de ' || CAST(arg_max(anio, fecha) AS INTEGER) AS etiqueta
 FROM mother.transparencia_pmp
 ```
 
@@ -848,18 +833,18 @@ SELECT
     count(*) FILTER (WHERE reporta) AS comunican,
     sum(poblacion) FILTER (WHERE supera_30) AS poblacion_supera_30
 FROM mother.transparencia_pmp
-WHERE fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo})
+WHERE fecha = (SELECT fecha FROM ${pmp_ultimo})
 ```
 
 ```sql pmp_serie
 SELECT
-    fecha_trimestre AS fecha,
+    fecha AS fecha,
     count(*) FILTER (WHERE aplica_indicador AND NOT reporta) AS no_comunican,
     1000.0 * coalesce(sum(poblacion) FILTER (WHERE aplica_indicador AND NOT reporta), 0) / sum(poblacion) FILTER (WHERE aplica_indicador) AS afectados_por_1000,
     count(*) FILTER (WHERE supera_30) AS supera_30
 FROM mother.transparencia_pmp
-GROUP BY fecha_trimestre
-ORDER BY fecha_trimestre
+GROUP BY fecha
+ORDER BY fecha
 ```
 
 <Grid cols=3>
@@ -909,7 +894,7 @@ SELECT
 FROM mother.transparencia_pmp t
 JOIN historial h USING (cod_mun)
 LEFT JOIN mother.territorios p ON p.nivel = 'provincia' AND p.cod = t.cod_prov
-WHERE t.fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo}) AND t.aplica_indicador AND NOT t.reporta
+WHERE t.fecha = (SELECT fecha FROM ${pmp_ultimo}) AND t.aplica_indicador AND NOT t.reporta
 ORDER BY t.poblacion DESC
 ```
 
@@ -936,7 +921,7 @@ SELECT
     count(*) FILTER (WHERE t.supera_30)::DOUBLE / nullif(count(*) FILTER (WHERE t.reporta), 0) AS pct_supera_30
 FROM mother.transparencia_pmp t
 JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = t.cod_ccaa
-WHERE t.fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo}) AND t.aplica_indicador
+WHERE t.fecha = (SELECT fecha FROM ${pmp_ultimo}) AND t.aplica_indicador
 GROUP BY ALL
 ORDER BY pct DESC
 ```
@@ -951,7 +936,7 @@ ORDER BY pct DESC
 
 ```sql pmp_evolucion
 SELECT
-    fecha_trimestre AS fecha,
+    fecha AS fecha,
     'Sin comunicar el PMP' AS indicador,
     avg((NOT reporta)::INT) AS tasa
 FROM mother.transparencia_pmp
@@ -959,7 +944,7 @@ WHERE aplica_indicador
 GROUP BY ALL
 UNION ALL
 SELECT
-    fecha_trimestre,
+    fecha,
     'Pagan en más de 30 días (de los que lo comunican)',
     avg(supera_30::INT)
 FROM mother.transparencia_pmp
@@ -1061,7 +1046,7 @@ SELECT
     '/gl/territorios/municipios?m=' || t.cod_mun AS enlace
 FROM mother.transparencia_pmp t
 LEFT JOIN mother.territorios p ON p.nivel = 'provincia' AND p.cod = t.cod_prov
-WHERE t.fecha_trimestre = (SELECT fecha FROM ${pmp_ultimo}) AND t.supera_30
+WHERE t.fecha = (SELECT fecha FROM ${pmp_ultimo}) AND t.supera_30
 ORDER BY t.poblacion DESC
 ```
 

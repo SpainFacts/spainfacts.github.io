@@ -1,7 +1,7 @@
 ---
 title: Sector primario
 description: "Onde é potencia España no campo e no mar: cota na UE e posto en aceite de oliva, cítricos, froitas e hortalizas, viño, porcino, ovino, pesca e acuicultura, valor da produción agraria por habitante en euros reais e peso do sector primario por comunidade e provincia."
-i18n_origen: 68bd98eb8470
+i18n_origen: f1fe3023279d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -260,10 +260,10 @@ WHERE indicador LIKE 'vin%'
 
 ```sql vino_precio
 SELECT a.pais, a.valor / b.valor AS eur_kg, CAST(a.anio AS INTEGER) AS anio,
-       CASE WHEN a.geo = 'ES' THEN 'España' ELSE 'Otros países' END AS grupo
+       CASE WHEN a.cod_pais = 'ES' THEN 'España' ELSE 'Otros países' END AS grupo
 FROM mother.primario_paises_largo a
 JOIN mother.primario_paises_largo b
-  ON b.geo = a.geo AND b.anio = a.anio AND b.producto_id = 'HS_2204_t'
+  ON b.cod_pais = a.cod_pais AND b.anio = a.anio AND b.producto_id = 'HS_2204_t'
 WHERE a.producto_id = 'HS_2204'
   AND a.anio = (SELECT max(anio) FROM mother.primario_paises_largo WHERE producto_id = 'HS_2204')
   AND b.valor >= 100
@@ -335,15 +335,15 @@ WHERE categoria = 'pesca'
 
 ```sql pesca_serie
 SELECT CAST(anio AS INTEGER) AS anio, 'Sobre los países con dato' AS medida, cuota_pct AS cuota
-FROM mother.primario_pesca WHERE geo = 'ES' AND medida = 'capturas' AND anio >= 2010
+FROM mother.primario_pesca WHERE cod_pais = 'ES' AND medida = 'capturas' AND anio >= 2010
 UNION ALL
 SELECT CAST(anio AS INTEGER), 'Prudente (con el último dato de los que faltan)', cuota_min_pct
-FROM mother.primario_pesca WHERE geo = 'ES' AND medida = 'capturas' AND anio >= 2010
+FROM mother.primario_pesca WHERE cod_pais = 'ES' AND medida = 'capturas' AND anio >= 2010
 ORDER BY anio, medida
 ```
 
 ```sql pesca_paises
-SELECT pais, kg_hab, valor, CASE WHEN geo = 'ES' THEN 'España' ELSE 'Otros países' END AS grupo
+SELECT pais, valor_hab AS kg_hab, valor, CASE WHEN cod_pais = 'ES' THEN 'España' ELSE 'Otros países' END AS grupo
 FROM mother.primario_pesca
 WHERE medida = 'capturas' AND anio = (SELECT max(anio) FROM mother.primario_ranking_ue WHERE producto_id = 'capturas')
 ORDER BY kg_hab DESC

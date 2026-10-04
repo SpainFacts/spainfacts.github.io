@@ -3,7 +3,7 @@ title: Public observatories
 description: "Census of Spain's public observatories: how many there are, which administration creates them, when they were set up, how many are still active, how many there are per inhabitant in each region and which party was in government when they were created."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 10c0e03a581c
+i18n_origen: a544f976aca5
 ---
 
 <script>
@@ -87,7 +87,7 @@ ORDER BY por_millon DESC
 SELECT
     nombre,
     nivel,
-    coalesce(comunidad, '') AS comunidad,
+    coalesce(ccaa, '') AS comunidad,
     coalesce(municipio, '') AS municipio,
     anio_creacion,
     coalesce(partido, '') AS partido,

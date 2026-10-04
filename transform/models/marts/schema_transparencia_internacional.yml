@@ -10,9 +10,9 @@ models:
       gobierno, Estado de derecho; desde 1996), V-Dem (corrupción política y en el sector
       público; desde 1970) y World Justice Project (Estado de derecho y factores de límites al
       poder, ausencia de corrupción y gobierno abierto; desde 2013). Países de la UE-27 y la
-      OCDE más Marruecos y China; EUU y OED son medias simples de los miembros actuales, solo
+      OCDE más Marruecos y China; EU27_2020 y OECD (cod_pais ISO alfa-2) son medias simples de los miembros actuales, solo
       en WGI y V-Dem (el CPI y el WJP tienen licencia sin obras derivadas). Incluye el puesto
-      de cada país entre los de la UE y la OCDE con dato ese año.
+      de cada país entre los de la UE y la OCDE con dato ese año. valor va siempre en puntos 0-100 (los índices 0-1 de V-Dem y WJP se multiplican por 100).
     columns:
       - name: indicador_id
         tests:

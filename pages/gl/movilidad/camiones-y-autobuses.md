@@ -1,5 +1,5 @@
 ---
-i18n_origen: 4190a8292d58
+i18n_origen: f423a33aa6c8
 title: Camións e autobuses
 description: "Camións e autobuses en España: matriculacións por tipo de motor desde 2015, avance do autobús eléctrico, marcas e grupos máis vendidos e antigüidade dos que circulan."
 og:
@@ -163,7 +163,7 @@ Os camións e autobuses son poucos fronte aos coches, pero percorren moitos mái
 WITH ult AS (SELECT max(mes) AS mes FROM mother.movilidad_marcas_mensual)
 SELECT
     m.grupo,
-    CASE m.grupo WHEN 'camion' THEN 'Camiones' ELSE 'Autobuses' END AS vehiculo,
+    m.grupo_etiqueta AS vehiculo,
     m.grupo_empresarial,
     m.marca,
     sum(m.matriculaciones) AS unidades

@@ -14,7 +14,9 @@ models:
   - name: empresas_concursos
     description: "Deudores concursados (concursos de acreedores) por año, por 100.000 habitantes y por 1.000 empresas, voluntarios y necesarios, España y comunidades, 2004-2020 (INE, Estadística del Procedimiento Concursal, tabla 2992)."
   - name: empresas_autonomos
-    description: "Ocupados por cuenta propia (EPA, INE tabla 65316): cuenta propia, empleadores, independientes y asalariados en miles y en % de los ocupados, por trimestre y media anual (trimestre = 0), España y comunidades, desde 2002."
+    description: "Ocupados por cuenta propia (EPA, INE tabla 65316): cuenta propia, empleadores, independientes y asalariados en miles y en % de los ocupados, por trimestre, España y comunidades, desde 2002 (la media anual está en empresas_autonomos_anual)."
+  - name: empresas_autonomos_anual
+    description: "Ocupados por cuenta propia (EPA, INE tabla 65316), media anual de los cuatro trimestres (solo años completos): cuenta propia, empleadores, independientes y asalariados en miles y en % de los ocupados, España y comunidades, desde 2002."
   - name: empresas_id_paises
     description: "Gasto en I+D en % del PIB y por habitante (real para España y UE-27) e investigadores por 1.000 ocupados, por país, año y sector ejecutor (Eurostat rd_e_gerdtot y rd_p_perslf)."
   - name: empresas_id_ccaa

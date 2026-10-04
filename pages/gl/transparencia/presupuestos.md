@@ -1,5 +1,5 @@
 ---
-i18n_origen: 9c2774f02aa0
+i18n_origen: fd19bed34152
 title: Orzamentos prorrogados
 description: "Que anos tivo España Orzamentos Xerais do Estado aprobados a tempo, cales chegaron tarde e cales se prorrogaron, con cantos días de atraso e que Goberno debía presentalos, desde 1978."
 og:
@@ -14,19 +14,19 @@ og:
 
 ```sql ejercicios
 SELECT
-    CAST(ejercicio AS INTEGER) AS ejercicio,
+    CAST(anio AS INTEGER) AS ejercicio,
     situacion,
     coalesce(ley, '') AS ley,
     fecha_publicacion,
     CAST(dias_prorroga AS INTEGER) AS dias_prorroga,
     en_plazo,
-    en_curso,
+    es_parcial AS en_curso,
     presidente_responsable,
     partido_responsable,
     presidente_1_enero,
     coalesce(url_html, '') AS url_html
 FROM mother.gobierno_presupuestos
-ORDER BY ejercicio
+ORDER BY anio
 ```
 
 ```sql resumen

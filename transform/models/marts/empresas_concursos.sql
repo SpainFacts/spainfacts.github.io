@@ -24,7 +24,9 @@ pob as (
 )
 
 select
+    case when b.cod = '00' then 'pais' else 'ccaa' end as nivel,
     b.cod,
+    t.nombre,
     b.anio,
     b.concursos,
     b.voluntarios,
@@ -34,6 +36,7 @@ select
     e.empresas
 from base b
 left join pob p on p.cod = b.cod and p.anio = b.anio
+left join {{ ref('territorios') }} t on t.nivel = case when b.cod = '00' then 'pais' else 'ccaa' end and t.cod = b.cod
 left join {{ ref('empresas_dirce_territorio') }} e
     on e.cod = b.cod and e.anio = b.anio and e.nivel = case when b.cod = '00' then 'pais' else 'ccaa' end
 where b.concursos is not null

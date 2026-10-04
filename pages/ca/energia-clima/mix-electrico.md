@@ -1,7 +1,7 @@
 ---
 title: Mix de Generació Elèctrica
 description: "El mix elèctric espanyol des del 2007 segons Red Eléctrica: quota renovable, tancament del carbó, emissions per kWh generat i consum elèctric per habitant."
-i18n_origen: b285af3e2719
+i18n_origen: 2c4bc7fa07e5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -70,20 +70,20 @@ FROM mother.clima_electricidad_anual
 
 ```sql mix_completo
 SELECT
-    año,
+    anio,
     tecnologia,
     tipo_fuente,
     generacion_twh,
-    porcentaje_total
+    cuota_pct
 FROM mother.energia_mix_electrico
-ORDER BY año ASC, tecnologia ASC
+ORDER BY anio ASC, tecnologia ASC
 ```
 
 ```sql mix_pct
 SELECT
-    CAST(año AS INTEGER) AS anio,
+    CAST(anio AS INTEGER) AS anio,
     tecnologia,
-    porcentaje_total,
+    cuota_pct,
     generacion_twh
 FROM mother.energia_mix_electrico
 ORDER BY anio, tecnologia
@@ -155,7 +155,7 @@ La renovable va superar per primera vegada la meitat de la generació el {hitos_
 <AreaChart
     data={mix_pct}
     x=anio
-    y=porcentaje_total
+    y=cuota_pct
     series=tecnologia
     type=stacked
     xFmt='0'
@@ -269,19 +269,19 @@ Demanda nacional en barres de central dividida per la població mitjana de l'any
 
 ```sql mix_ultimo
 SELECT
-    año,
+    anio,
     tecnologia,
     generacion_twh,
-    porcentaje_total / 100.0 AS porcentaje_total
+    cuota_pct / 100.0 AS cuota_pct
 FROM mother.energia_mix_electrico
-WHERE año = (SELECT max(año) FROM mother.energia_mix_electrico)
+WHERE anio = (SELECT max(anio) FROM mother.energia_mix_electrico)
 ORDER BY generacion_twh DESC
 ```
 
 <BarChart
     data={mix_ultimo}
     x=tecnologia
-    y=porcentaje_total
+    y=cuota_pct
     yFmt='0.0%'
     yAxisTitle="% de la generació"
     title="Generació per tecnologia el {elec_kpi[0]?.anio}"
@@ -291,36 +291,36 @@ ORDER BY generacion_twh DESC
 
 <DataTable data={mix_ultimo} search=false>
     <Column id=tecnologia title="Tecnologia" />
-    <Column id=porcentaje_total title="% del total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
+    <Column id=cuota_pct title="% del total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
     <Column id=generacion_twh title="Generació (TWh)" fmt="num1" />
 </DataTable>
 
 ## Potència instal·lada per tecnologia
 
-La capacitat instal·lada reflecteix les decisions d'inversió. La solar FV ha passat de {formatNumber(solar_hitos[0]?.potencia_mw, 0)} MW el {solar_hitos[0]?.año} a **{formatNumber(solar_hitos[1]?.potencia_mw, 0)} MW** el {solar_hitos[1]?.año}, i s'ha multiplicat per {formatNumber(solar_hitos[1]?.potencia_mw / solar_hitos[0]?.potencia_mw, 1)}.
+La capacitat instal·lada reflecteix les decisions d'inversió. La solar FV ha passat de {formatNumber(solar_hitos[0]?.potencia_mw, 0)} MW el {solar_hitos[0]?.anio} a **{formatNumber(solar_hitos[1]?.potencia_mw, 0)} MW** el {solar_hitos[1]?.anio}, i s'ha multiplicat per {formatNumber(solar_hitos[1]?.potencia_mw / solar_hitos[0]?.potencia_mw, 1)}.
 
 ```sql solar_hitos
-SELECT CAST(año AS INTEGER) AS año, potencia_mw
+SELECT CAST(anio AS INTEGER) AS anio, potencia_mw
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Solar Fotovoltaica'
-  AND año IN ((SELECT min(año) FROM mother.energia_potencia_instalada), (SELECT max(año) FROM mother.energia_potencia_instalada))
-ORDER BY año ASC
+  AND anio IN ((SELECT min(anio) FROM mother.energia_potencia_instalada), (SELECT max(anio) FROM mother.energia_potencia_instalada))
+ORDER BY anio ASC
 ```
 
 ```sql potencia
 SELECT
-    año,
+    anio,
     tecnologia,
     potencia_mw,
     tipo,
     fuente
 FROM mother.energia_potencia_instalada
-ORDER BY año ASC, potencia_mw DESC
+ORDER BY anio ASC, potencia_mw DESC
 ```
 
 <BarChart
     data={potencia}
-    x=año
+    x=anio
     y=potencia_mw
     series=tecnologia
     type=grouped

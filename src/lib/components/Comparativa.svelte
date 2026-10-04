@@ -21,23 +21,23 @@
     export let decimales = 1;
     /** texto antes de los chips (por defecto, el nombre del indicador) */
     export let etiqueta = undefined;
-    /** países a mostrar, en este orden (ISO3 del Banco Mundial; EUU = UE, OED = OCDE) */
-    export let paises = ["EUU", "OED", "FRA", "PRT", "DEU", "ITA", "MAR", "USA", "CHN"];
+    /** países a mostrar, en este orden (ISO alfa-2; EU27_2020 = UE, OECD = OCDE) */
+    export let paises = ["EU27_2020", "OECD", "FR", "PT", "DE", "IT", "MA", "US", "CN"];
     /** países de referencia del indicador, al final y destacados (por defecto,
      *  los de src/lib/paisesReferencia.js; [] para no mostrarlos) */
     export let referencia = undefined;
 
     // anio_ultimo en internacional_ultimo; anio en internacional_comparativa
     $: filas = Array.from(data ?? []).map((f) => ({ ...f, anio: f.anio ?? f.anio_ultimo }));
-    $: espana = filas.find((f) => f.cod_pais === "ESP");
+    $: espana = filas.find((f) => f.cod_pais === "ES");
     $: otros = paises.map((c) => filas.find((f) => f.cod_pais === c)).filter(Boolean);
     // Países de referencia del indicador (Noruega en coches eléctricos, Japón en
     // envejecimiento...): no están en los fijos y se marcan con borde discontinuo
     $: refs = (referencia ?? paisesReferencia(filas[0]?.indicador_id))
-        .filter((c) => c !== "ESP" && !paises.includes(c))
+        .filter((c) => c !== "ES" && !paises.includes(c))
         .map((c) => filas.find((f) => f.cod_pais === c))
         .filter(Boolean);
-    $: ue = filas.find((f) => f.cod_pais === "EUU");
+    $: ue = filas.find((f) => f.cod_pais === "EU27_2020");
     // nombre, unidad y fuente vienen en castellano de los datos: se traducen aquí
     $: textos = textosIndicador(filas[0], lang);
     $: unidad = textos.unidad ?? "";
@@ -61,7 +61,7 @@
 {#if espana && (otros.length || refs.length)}
     <p class="comparativa" aria-label={t('comparativa', lang)}>
         <span class="etiqueta">{etiqueta ?? textos.nombre}:</span>
-        <span class="chip espana {tono}" title="{t('pais.ESP', lang)}, {espana.anio}">{t('pais.ESP', lang)} {num(espana.valor)}</span>
+        <span class="chip espana {tono}" title="{t('pais.ES', lang)}, {espana.anio}">{t('pais.ES', lang)} {num(espana.valor)}</span>
         {#each otros as f (f.cod_pais)}
             <span class="chip" title="{f.pais}, {f.anio}">{nombre(f)} {num(f.valor)}{anioSi(f)}</span>
         {/each}

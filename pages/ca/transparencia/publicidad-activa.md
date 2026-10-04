@@ -1,7 +1,7 @@
 ---
 title: Publicitat activa
 description: "Publiquen les administracions als seus portals de transparència el que els obliga la llei? Avaluacions oficials per entitat (Consell de Transparència i Bon Govern i Comissionat de Transparència de Canàries), la seva evolució, la comparació per partit i el que encara no es pot mesurar."
-i18n_origen: 3f26672a5738
+i18n_origen: 6724b8e266cf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -104,7 +104,7 @@ ORDER BY orden
 ```sql itc_aytos_ultimo
 SELECT
     cod_mun, entidad, regexp_replace(entidad, '^Ayuntamiento de ', '') AS municipio,
-    CASE WHEN cod_prov = '35' THEN 'Las Palmas' ELSE 'Santa Cruz de Tenerife' END AS provincia,
+    provincia,
     poblacion, estado, puntuacion, puntuacion_original, familia, gobernante,
     CASE WHEN estado = 'incumplidora' THEN 'No rindió la evaluación' ELSE 'Evaluado' END AS situacion
 FROM ${itc}

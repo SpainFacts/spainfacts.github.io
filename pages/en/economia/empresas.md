@@ -1,7 +1,7 @@
 ---
 title: Businesses, entrepreneurship and R&D
 description: "How many businesses there are in Spain per inhabitant and how large they are, how many companies are set up and dissolved, insolvency proceedings, the self-employed and R&D spending compared with Europe and by region."
-i18n_origen: 8db7e727c98e
+i18n_origen: c23d9e81ee16
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -14,7 +14,7 @@ og:
 </script>
 
 ```sql emp_pais
-SELECT CAST(anio AS INTEGER) AS anio, empresas, empresas_1000hab, pct_personas_fisicas, crecimiento
+SELECT CAST(anio AS INTEGER) AS anio, empresas, empresas_1000hab, pct_personas_fisicas, crecimiento_pct
 FROM mother.empresas_dirce_territorio
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -55,15 +55,19 @@ SELECT periodo, CAST(anio AS INTEGER) AS anio, trimestre, fecha, ocupados, cuent
     pct_cuenta_propia, pct_empleadores, pct_independientes
 FROM mother.empresas_autonomos
 WHERE cod = '00'
-ORDER BY fecha, trimestre
+ORDER BY fecha
 ```
 
 ```sql autonomos_anual
-SELECT * FROM ${autonomos_pais} WHERE trimestre = 0 ORDER BY anio
+SELECT CAST(anio AS INTEGER) AS anio, ocupados, cuenta_propia, empleadores, independientes,
+    pct_cuenta_propia, pct_empleadores, pct_independientes
+FROM mother.empresas_autonomos_anual
+WHERE cod = '00'
+ORDER BY anio
 ```
 
 ```sql autonomos_ult
-SELECT * FROM ${autonomos_pais} WHERE trimestre > 0 ORDER BY fecha DESC LIMIT 1
+SELECT * FROM ${autonomos_pais} ORDER BY fecha DESC LIMIT 1
 ```
 
 ```sql id_es
@@ -240,20 +244,20 @@ In {tamano_resumen[0]?.anio}, {formatNumber(tamano_resumen[0]?.sin_asal, 1)}% of
 />
 
 ```sql tamano_ue
-SELECT pais, tamano, orden, pct_empresas, pct_empleo, pct_vab, CAST(anio AS INTEGER) AS anio
+SELECT cod_pais, pais, tamano, orden, pct_empresas, pct_empleo, pct_vab, CAST(anio AS INTEGER) AS anio
 FROM mother.empresas_tamano_ue
-WHERE anio = (SELECT max(anio) FROM mother.empresas_tamano_ue WHERE geo = 'EU27_2020' AND pct_vab IS NOT NULL)
-  AND geo IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT')
+WHERE anio = (SELECT max(anio) FROM mother.empresas_tamano_ue WHERE cod_pais = 'EU27_2020' AND pct_vab IS NOT NULL)
+  AND cod_pais IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT')
 ORDER BY orden, pais
 ```
 
 ```sql tamano_ue_resumen
 SELECT
-    max(pct_empleo) FILTER (WHERE pais = 'España' AND orden = 1) AS es_micro,
-    max(pct_empleo) FILTER (WHERE pais = 'UE-27' AND orden = 1) AS ue_micro,
-    max(pct_empleo) FILTER (WHERE pais = 'España' AND orden = 4) AS es_grandes,
-    max(pct_empleo) FILTER (WHERE pais = 'UE-27' AND orden = 4) AS ue_grandes,
-    max(pct_empleo) FILTER (WHERE pais = 'Alemania' AND orden = 4) AS de_grandes,
+    max(pct_empleo) FILTER (WHERE cod_pais = 'ES' AND orden = 1) AS es_micro,
+    max(pct_empleo) FILTER (WHERE cod_pais = 'EU27_2020' AND orden = 1) AS ue_micro,
+    max(pct_empleo) FILTER (WHERE cod_pais = 'ES' AND orden = 4) AS es_grandes,
+    max(pct_empleo) FILTER (WHERE cod_pais = 'EU27_2020' AND orden = 4) AS ue_grandes,
+    max(pct_empleo) FILTER (WHERE cod_pais = 'DE' AND orden = 4) AS de_grandes,
     max(anio) AS anio
 FROM ${tamano_ue}
 ```
@@ -287,7 +291,7 @@ To compare with Europe, Eurostat measures size by persons employed (including ow
 ## What they do
 
 ```sql sector_es
-SELECT sector, empresas, pct, por_1000hab, CAST(anio AS INTEGER) AS anio
+SELECT sector, empresas, pct, por_1000_hab, CAST(anio AS INTEGER) AS anio
 FROM mother.empresas_dirce_sector
 WHERE cod = '00' AND anio = (SELECT max(anio) FROM mother.empresas_dirce_sector)
 ORDER BY pct DESC
@@ -298,7 +302,7 @@ Active businesses by broad sector in {sector_es[0]?.anio}. {sector_es[0]?.sector
 <BarChart
     data={sector_es}
     x=sector
-    y=por_1000hab
+    y=por_1000_hab
     swapXY=true
     yFmt='0.0'
     title="Businesses per 1,000 inhabitants by activity ({sector_es[0]?.anio})"
@@ -489,9 +493,9 @@ SELECT
     a.pct_empleadores,
     a.cuenta_propia,
     CAST(a.anio AS INTEGER) AS anio
-FROM mother.empresas_autonomos a
+FROM mother.empresas_autonomos_anual a
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = a.cod
-WHERE a.trimestre = 0 AND a.anio = (SELECT max(anio) FROM mother.empresas_autonomos WHERE trimestre = 0)
+WHERE a.anio = (SELECT max(anio) FROM mother.empresas_autonomos_anual)
 ORDER BY a.pct_cuenta_propia DESC
 ```
 

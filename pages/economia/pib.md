@@ -19,7 +19,7 @@ SELECT
     por_habitante_real AS valor,
     real_meur,
     nominal_meur,
-    anio_euros
+    anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -73,14 +73,14 @@ ORDER BY indice_ue DESC
 
 # 📈 PIB y crecimiento
 
-El producto interior bruto mide todo lo que produce la economía. Para ver si el país se enriquece de verdad, aquí se muestra **por habitante** (si no, crece con solo sumar población) y **descontada la inflación**, en euros de {pib_trim[0]?.anio_euros}.
+El producto interior bruto mide todo lo que produce la economía. Para ver si el país se enriquece de verdad, aquí se muestra **por habitante** (si no, crece con solo sumar población) y **descontada la inflación**, en euros de {pib_trim[0]?.anio_base}.
 
 <Grid cols=4>
     <KpiCard
         title="PIB por habitante"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_euros}"
+        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_base}"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real vs año anterior"
         direction="positive-up"
@@ -124,7 +124,7 @@ WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
 
 ## PIB por habitante desde 1995
 
-En euros constantes de {pib_trim[0]?.anio_euros}. La crisis de 2008 recortó el PIB por habitante un {formatNumber(-hitos[0]?.caida_crisis, 1)} % hasta 2013; la pandemia lo hundió en 2020 y en {hitos[0]?.anio_ult} está un {formatNumber(hitos[0]?.vs2007, 1)} % por encima del máximo de 2007.
+En euros constantes de {pib_trim[0]?.anio_base}. La crisis de 2008 recortó el PIB por habitante un {formatNumber(-hitos[0]?.caida_crisis, 1)} % hasta 2013; la pandemia lo hundió en 2020 y en {hitos[0]?.anio_ult} está un {formatNumber(hitos[0]?.vs2007, 1)} % por encima del máximo de 2007.
 
 <LineChart
     data={pib_hab}
@@ -134,7 +134,7 @@ En euros constantes de {pib_trim[0]?.anio_euros}. La crisis de 2008 recortó el 
     yFmt='#,##0" €"'
     xFmt='0'
     startingAtZero={false}
-    title="PIB por habitante en euros de {pib_trim[0]?.anio_euros}"
+    title="PIB por habitante en euros de {pib_trim[0]?.anio_base}"
 />
 
 ## Crecimiento trimestral
@@ -161,7 +161,7 @@ Consumo de los hogares, consumo público e inversión por habitante, en euros co
     series=nombre
     yAxisTitle="€ por habitante (reales)"
     yFmt='#,##0" €"'
-    title="Demanda por habitante, euros de {pib_trim[0]?.anio_euros} a ritmo anual"
+    title="Demanda por habitante, euros de {pib_trim[0]?.anio_base} a ritmo anual"
 />
 
 ## Comparación con Europa
@@ -186,4 +186,4 @@ PIB por habitante en paridad de poder de compra, que corrige que los precios no 
 
 ---
 
-**Fuentes:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (contabilidad nacional trimestral, desestacionalizada) y [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (PIB por habitante). Los volúmenes encadenados se reexpresan en euros de {pib_trim[0]?.anio_euros}; la población es la media anual de Eurostat.
+**Fuentes:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (contabilidad nacional trimestral, desestacionalizada) y [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (PIB por habitante). Los volúmenes encadenados se reexpresan en euros de {pib_trim[0]?.anio_base}; la población es la media anual de Eurostat.

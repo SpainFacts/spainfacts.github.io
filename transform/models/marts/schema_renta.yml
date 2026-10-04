@@ -3,6 +3,9 @@ version: 2
 models:
   - name: renta_ecv_ccaa
     description: "ECV del INE por año de encuesta, España (cod '00') y comunidades: renta media por persona, por unidad de consumo y por hogar (nominal y real, renta del año anterior), tasa de riesgo de pobreza, AROPE, carencia material y social severa, baja intensidad en el trabajo, % con dificultad para llegar a fin de mes, Gini y S80/S20."
+    columns:
+      - name: nombre
+        description: "Nombre del territorio (España o comunidad), el mismo que en territorios"
   - name: renta_ecv_edad
     description: "ECV del INE, España, por grupo de edad: AROPE, riesgo de pobreza, carencia material y social severa y renta real por persona y por unidad de consumo."
   - name: renta_municipios
@@ -13,3 +16,12 @@ models:
     description: "ADRH del INE para España, comunidades y provincias (código INE) por año: renta neta media por persona y por hogar y renta por unidad de consumo, nominal y real."
   - name: renta_ue
     description: "Eurostat EU-SILC para la UE-27 y sus países: Gini, S80/S20 y AROPE (% de población) por año de encuesta."
+    columns:
+      - name: cod_pais
+        description: "Código ISO 3166-1 alfa-2 del país (Grecia = GR); EU27_2020 para la UE-27"
+      - name: unidad
+        description: "Unidad de valor según el indicador: % (arope), índice 0-100 (gini) o veces (s80_s20)"
+      - name: es_ue
+        description: "Verdadero para los 27 Estados miembros; falso para el agregado UE-27"
+      - name: es_agregado
+        description: "Verdadero solo para la fila del agregado UE-27"

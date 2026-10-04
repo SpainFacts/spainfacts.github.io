@@ -3,7 +3,7 @@ title: SpainFacts · Espainiaren Egoera Datu Ofizialetan
 description: "Espainia datu ofizialetan: biztanleria, ekonomia, kontu publikoak, energia, mugikortasuna, gizartea eta gardentasuna, Espainia osotik udalerri bakoitzera. Independentea eta alderdi-joerarik gabea."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 55bec392edfc
+i18n_origen: c69067017fff
 ---
 
 <script>

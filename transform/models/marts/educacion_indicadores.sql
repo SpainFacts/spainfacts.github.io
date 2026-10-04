@@ -43,15 +43,36 @@ filas as (
         valor
     from {{ source('raw_educacion', 'eurostat_edu_neet') }}
     where age in ('Y15-29', 'Y18-24')
+),
+
+base as (
+    select
+        cast(f.anio as integer) as anio,
+        case when f.geo = 'ES' then 'pais' when f.geo = 'EU27_2020' then 'ue' else 'ccaa' end as nivel,
+        cast(case when f.geo = 'ES' then '00' when f.geo = 'EU27_2020' then 'UE' else n.cod_ccaa end as varchar) as cod,
+        f.indicador,
+        cast(f.valor as double) as valor
+    from filas f
+    left join nuts n on n.nuts2 = f.geo
+    where f.valor is not null
+      and (f.geo in ('ES', 'EU27_2020') or n.cod_ccaa is not null)
 )
 
 select
-    cast(f.anio as integer) as anio,
-    case when f.geo = 'ES' then 'pais' when f.geo = 'EU27_2020' then 'ue' else 'ccaa' end as nivel,
-    cast(case when f.geo = 'ES' then '00' when f.geo = 'EU27_2020' then 'UE' else n.cod_ccaa end as varchar) as cod,
-    f.indicador,
-    cast(f.valor as double) as valor
-from filas f
-left join nuts n on n.nuts2 = f.geo
-where f.valor is not null
-  and (f.geo in ('ES', 'EU27_2020') or n.cod_ccaa is not null)
+    b.anio,
+    b.nivel,
+    b.cod,
+    coalesce(t.nombre, case when b.nivel = 'ue' then 'Unión Europea' end) as nombre,
+    b.indicador,
+    case b.indicador
+        when 'abandono' then 'Abandono temprano de la educación y la formación (18-24 años)'
+        when 'superior_25_64' then 'Población de 25-64 años con estudios superiores'
+        when 'segunda_25_64' then 'Población de 25-64 años con segunda etapa de secundaria como máximo'
+        when 'basica_25_64' then 'Población de 25-64 años con estudios básicos como máximo'
+        when 'neet_15_29' then 'Jóvenes de 15-29 años que ni trabajan ni estudian'
+        when 'neet_18_24' then 'Jóvenes de 18-24 años que ni trabajan ni estudian'
+    end as indicador_nombre,
+    '%' as unidad,
+    b.valor
+from base b
+left join {{ ref('territorios') }} t on t.nivel = b.nivel and t.cod = b.cod

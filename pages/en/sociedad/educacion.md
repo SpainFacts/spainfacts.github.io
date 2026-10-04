@@ -1,7 +1,7 @@
 ---
 title: Education
 description: "Early school leaving, adult educational attainment, young people neither in employment nor in education, education spending per inhabitant and per pupil, enrolment by level and PISA, comparing Spain with the EU and by region."
-i18n_origen: 1ee091a54980
+i18n_origen: 350e27897b13
 ---
 
 <script>
@@ -281,9 +281,8 @@ These are young people aged 15 to 29 who are neither in employment nor in educat
 />
 
 ```sql neet_ccaa
-SELECT t.nombre AS comunidad, CAST(i.anio AS INTEGER) AS anio, i.valor / 100 AS neet
+SELECT i.nombre AS comunidad, CAST(i.anio AS INTEGER) AS anio, i.valor / 100 AS neet
 FROM mother.educacion_indicadores i
-JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = i.cod
 WHERE i.nivel = 'ccaa' AND i.indicador = 'neet_15_29'
 QUALIFY row_number() OVER (PARTITION BY i.cod ORDER BY i.anio DESC) = 1
 ORDER BY neet DESC
@@ -349,20 +348,20 @@ In {gasto_hitos[0]?.anio_ult}, all levels of government (central, regional and l
 ```sql alumno_es
 SELECT anio, eur_real, eur, anio_base
 FROM mother.educacion_gasto_alumno
-WHERE nivel_geo = 'pais' AND isced11 = 'ED02-8' AND eur_real IS NOT NULL
+WHERE cod_pais = 'ES' AND isced11 = 'ED02-8' AND eur_real IS NOT NULL
 ORDER BY anio
 ```
 
 ```sql alumno_niveles
 SELECT
-    a.nivel,
+    a.nivel_educativo AS nivel,
     CASE a.isced11 WHEN 'ED02' THEN 1 WHEN 'ED1' THEN 2 WHEN 'ED2' THEN 3 WHEN 'ED34_44' THEN 4 WHEN 'ED35_45' THEN 5 ELSE 6 END AS orden,
-    CASE a.nivel_geo WHEN 'pais' THEN 'España' ELSE 'UE-27' END AS zona,
+    CASE a.cod_pais WHEN 'ES' THEN 'España' ELSE 'UE-27' END AS zona,
     a.pps,
     CAST(a.anio AS INTEGER) AS anio
 FROM mother.educacion_gasto_alumno a
 WHERE a.isced11 IN ('ED02', 'ED1', 'ED2', 'ED34_44', 'ED35_45', 'ED5-8')
-  AND a.anio = (SELECT max(anio) FROM mother.educacion_gasto_alumno WHERE nivel_geo = 'ue' AND pps IS NOT NULL)
+  AND a.anio = (SELECT max(anio) FROM mother.educacion_gasto_alumno WHERE cod_pais = 'EU27_2020' AND pps IS NOT NULL)
   AND a.pps IS NOT NULL
 ORDER BY orden, zona
 ```

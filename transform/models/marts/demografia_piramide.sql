@@ -55,14 +55,16 @@ todo as (
 )
 
 select
-    anio,
-    nivel,
-    cod,
-    sexo,
-    edad_desde,
-    case when edad_desde = 85 then '85 y más' else edad_desde || '-' || (edad_desde + 4) end as grupo,
-    poblacion,
-    nacidos_extranjero,
-    100.0 * poblacion / sum(poblacion) over (partition by anio, nivel, cod) as pct,
-    100.0 * nacidos_extranjero / sum(poblacion) over (partition by anio, nivel, cod) as pct_nacidos_extranjero
-from todo
+    x.anio,
+    x.nivel,
+    x.cod,
+    t.nombre,
+    x.sexo,
+    x.edad_desde,
+    case when x.edad_desde = 85 then '85 y más' else x.edad_desde || '-' || (x.edad_desde + 4) end as grupo,
+    x.poblacion,
+    x.nacidos_extranjero,
+    100.0 * x.poblacion / sum(x.poblacion) over (partition by x.anio, x.nivel, x.cod) as pct,
+    100.0 * x.nacidos_extranjero / sum(x.poblacion) over (partition by x.anio, x.nivel, x.cod) as pct_nacidos_extranjero
+from todo x
+left join {{ ref('territorios') }} t on t.nivel = x.nivel and t.cod = x.cod

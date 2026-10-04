@@ -3,7 +3,7 @@ title: SpainFacts · L'estat d'Espanya en dades oficials
 description: "Espanya en dades oficials: població, economia, comptes públics, energia, mobilitat, societat i transparència, d'Espanya a cada municipi. Independent i sense biaix partidista."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 55bec392edfc
+i18n_origen: c69067017fff
 ---
 
 <script>

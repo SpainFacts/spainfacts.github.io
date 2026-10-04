@@ -20,7 +20,7 @@ models:
   - name: gobierno_presupuestos
     description: "Un ejercicio por fila desde 1978: Ley de Presupuestos Generales del Estado a tiempo, tarde o prorrogada (art. 134.4 CE), días de prórroga y Gobierno que debía presentarla (en funciones el 30 de septiembre del año anterior)."
     columns:
-      - name: ejercicio
+      - name: anio
         tests: [unique, not_null]
       - name: presidente_responsable
         tests: [not_null]

@@ -1,7 +1,7 @@
 ---
 title: GDP and growth
 description: "Spain's GDP per inhabitant adjusted for inflation, quarterly growth, components of demand and comparison with the EU."
-i18n_origen: 7ab507e83338
+i18n_origen: 0a70463d9329
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -20,7 +20,7 @@ SELECT
     por_habitante_real AS valor,
     real_meur,
     nominal_meur,
-    anio_euros
+    anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY indice_ue DESC
 
 # 📈 GDP and growth
 
-Gross domestic product measures everything the economy produces. To see whether the country is genuinely getting richer, it is shown here **per inhabitant** (otherwise it grows simply by adding population) and **adjusted for inflation**, in {pib_trim[0]?.anio_euros} euros.
+Gross domestic product measures everything the economy produces. To see whether the country is genuinely getting richer, it is shown here **per inhabitant** (otherwise it grows simply by adding population) and **adjusted for inflation**, in {pib_trim[0]?.anio_base} euros.
 
 <Grid cols=4>
     <KpiCard
         title="GDP per inhabitant"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="in {pib_hab.slice(-1)[0]?.anio}, in {pib_trim[0]?.anio_euros} euros"
+        period="in {pib_hab.slice(-1)[0]?.anio}, in {pib_trim[0]?.anio_base} euros"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real, vs previous year"
         direction="positive-up"
@@ -125,7 +125,7 @@ WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
 
 ## GDP per inhabitant since 1995
 
-In constant {pib_trim[0]?.anio_euros} euros. The 2008 crisis cut GDP per inhabitant by {formatNumber(-hitos[0]?.caida_crisis, 1)}% up to 2013; the pandemic sent it plunging in 2020, and in {hitos[0]?.anio_ult} it stands {formatNumber(hitos[0]?.vs2007, 1)}% above its 2007 peak.
+In constant {pib_trim[0]?.anio_base} euros. The 2008 crisis cut GDP per inhabitant by {formatNumber(-hitos[0]?.caida_crisis, 1)}% up to 2013; the pandemic sent it plunging in 2020, and in {hitos[0]?.anio_ult} it stands {formatNumber(hitos[0]?.vs2007, 1)}% above its 2007 peak.
 
 <LineChart
     data={pib_hab}
@@ -135,7 +135,7 @@ In constant {pib_trim[0]?.anio_euros} euros. The 2008 crisis cut GDP per inhabit
     yFmt='#,##0" €"'
     xFmt='0'
     startingAtZero={false}
-    title="GDP per inhabitant in {pib_trim[0]?.anio_euros} euros"
+    title="GDP per inhabitant in {pib_trim[0]?.anio_base} euros"
 />
 
 ## Quarterly growth
@@ -162,7 +162,7 @@ Household consumption, public consumption and investment per inhabitant, in cons
     series=nombre
     yAxisTitle="€ per inhabitant (real)"
     yFmt='#,##0" €"'
-    title="Demand per inhabitant, {pib_trim[0]?.anio_euros} euros at an annual rate"
+    title="Demand per inhabitant, {pib_trim[0]?.anio_base} euros at an annual rate"
 />
 
 ## Comparison with Europe
@@ -187,4 +187,4 @@ GDP per inhabitant in purchasing power parity, which corrects for prices not bei
 
 ---
 
-**Sources:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (quarterly national accounts, seasonally adjusted) and [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (GDP per inhabitant). Chain-linked volumes are re-expressed in {pib_trim[0]?.anio_euros} euros; population is the Eurostat annual average.
+**Sources:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (quarterly national accounts, seasonally adjusted) and [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (GDP per inhabitant). Chain-linked volumes are re-expressed in {pib_trim[0]?.anio_base} euros; population is the Eurostat annual average.

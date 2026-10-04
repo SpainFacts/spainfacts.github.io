@@ -63,3 +63,8 @@ ingestion/datos/diputados_inmuebles_*.csv
 
 # Caché de las plataformas autonómicas de contratación (ingestion/medios_contratos_ccaa.py)
 data/medios_contratos_ccaa_cache/
+
+# Pruebas locales del modelo de datos y logs/targets de dbt sueltos
+data/parquets-integracion/
+transform/logs_*/
+transform/target-*/

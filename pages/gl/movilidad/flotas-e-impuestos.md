@@ -1,5 +1,5 @@
 ---
-i18n_origen: ad7c7e41b297
+i18n_origen: fb0421136c8a
 title: Os paraísos fiscais das frotas
 description: "Aldeas de unhas decenas de habitantes onde se matriculan miles de coches de empresa: as frotas de renting e aluguer domicílianse onde o imposto de circulación é máis barato. Datos da DGT e de Facenda."
 og:
@@ -24,7 +24,7 @@ WHERE anio < (SELECT max(year(mes)) FROM mother.movilidad_matriculaciones_mensua
 
 ```sql municipios
 SELECT
-    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana,
+    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana_pct,
     ivtm_turismo, capital, ivtm_turismo_capital, ahorro_por_coche, ahorro_estimado
 FROM mother.movilidad_flotas_municipios
 WHERE anio = (SELECT anio FROM ${ultimo_completo})
@@ -35,9 +35,9 @@ ORDER BY flota DESC
 WITH m AS (SELECT * FROM ${municipios})
 SELECT
     (SELECT anio FROM ${ultimo_completo}) AS anio,
-    (SELECT sum(cuota_flota_espana) FROM (SELECT cuota_flota_espana FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
+    (SELECT sum(cuota_flota_espana_pct) FROM (SELECT cuota_flota_espana_pct FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
     sum(flota) FILTER (WHERE poblacion < 5000) AS flota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
     sum(poblacion) FILTER (WHERE poblacion < 5000) / (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS peso_pueblos,
     arg_max(municipio, flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_municipio,
     max(flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_por_hab,
@@ -59,8 +59,8 @@ LIMIT 15
 -- Peso de los pueblos de menos de 5.000 habitantes en las flotas matriculadas cada año
 SELECT
     anio,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
 FROM mother.movilidad_flotas_municipios
 GROUP BY anio
 ORDER BY anio
@@ -73,16 +73,16 @@ Un coche matricúlase no concello onde ten o domicilio o seu dono. Para un parti
 <Grid cols=3>
     <KpiCard
         title="Coches de frota nos 10 primeiros concellos"
-        value={resumen[0]?.cuota_top10 * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_top10 * 100, 0)}
+        value={resumen[0]?.cuota_top10}
+        formattedValue={formatNumber(resumen[0]?.cuota_top10, 0)}
         unit="%"
         period="dos turismos novos de empresas, renting e aluguer · {resumen[0]?.anio}"
         source="DGT"
     />
     <KpiCard
         title="En concellos de menos de 5.000 habitantes"
-        value={resumen[0]?.cuota_pueblos * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_pueblos * 100, 0)}
+        value={resumen[0]?.cuota_pueblos}
+        formattedValue={formatNumber(resumen[0]?.cuota_pueblos, 0)}
         unit="%"
         period="{formatNumber(resumen[0]?.flota_pueblos, 0)} coches de frota en concellos onde vive o {formatNumber(resumen[0]?.peso_pueblos * 100, 2)} % da poboación · {resumen[0]?.anio}"
         source="DGT / INE"
@@ -117,7 +117,7 @@ Un coche matricúlase no concello onde ten o domicilio o seu dono. Para un parti
     <Column id=poblacion title="Habitantes" fmt=num0 />
     <Column id=flota title="Coches de frota" fmt=num0 contentType=bar barColor="#fecaca" />
     <Column id=flota_por_habitante title="Por habitante" fmt=num1 />
-    <Column id=cuota_flota_espana title="% de España" fmt=pct1 />
+    <Column id=cuota_flota_espana_pct title="% de España" fmt=num1 />
     <Column id=ivtm_turismo title="IVTM (€/ano)" fmt=num2 />
     <Column id=ivtm_turismo_capital title="IVTM na capital" fmt=num2 />
     <Column id=ahorro_estimado title="Aforro estimado (€)" fmt=num0 />
@@ -133,7 +133,7 @@ Só cos coches de frota matriculados en {resumen[0]?.anio} nos concellos da táb
     data={evolucion}
     x=anio
     y={['cuota_pueblos', 'cuota_madrid_barcelona']}
-    yFmt=pct0
+    yFmt='0"%"'
     xFmt="####"
     markers=true
     colorPalette={['#b91c1c', '#2563eb']}

@@ -1,4 +1,4 @@
--- Un ejercicio por fila (1978-año en curso): si tuvo Ley de Presupuestos
+-- es_parcial = ejercicio en curso (dias_prorroga crece hasta hoy). Un ejercicio por fila (1978-año en curso): si tuvo Ley de Presupuestos
 -- Generales del Estado propia, cuándo se publicó en el BOE y cuántos días estuvo
 -- el Estado funcionando con los presupuestos del año anterior prorrogados
 -- (art. 134.4 de la Constitución: si la ley no está aprobada el 1 de enero, se
@@ -54,7 +54,7 @@ base as (
 )
 
 select
-    b.ejercicio,
+    b.ejercicio as anio,
     case
         when b.fecha_publicacion < b.inicio then 'A tiempo'
         when b.fecha_publicacion is not null then 'Tarde'
@@ -70,7 +70,7 @@ select
         else date_diff('day', b.inicio, b.fecha_fin)
     end as dias_prorroga,
     b.fecha_publicacion is not null and b.fecha_publicacion < b.inicio as en_plazo,
-    b.en_curso,
+    b.en_curso as es_parcial,
     pr.presidente as presidente_responsable,
     pr.familia as partido_responsable,
     pe.presidente as presidente_1_enero,

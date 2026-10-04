@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: crimen_delitos_jerarquia
+    description: >
+      Jerarquía de los delitos de la Estadística de Condenados del INE (tabla 49050): el total
+      («Delitos»), 13 grupos, delitos y subdelitos. Cada nivel suma exactamente el del padre
+      (comprobado con los datos de todos los años), así que en crimen_condenas_delito solo se
+      puede sumar dentro de un mismo nivel_delito. nivel_delito: 0 total, 1 grupo, 2 delito,
+      3 subdelito; delito_padre: el nivel inmediatamente superior.
+    config:
+      column_types: {delito: varchar, delito_padre: varchar, nivel_delito: integer}

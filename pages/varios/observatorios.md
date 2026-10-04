@@ -86,7 +86,7 @@ ORDER BY por_millon DESC
 SELECT
     nombre,
     nivel,
-    coalesce(comunidad, '') AS comunidad,
+    coalesce(ccaa, '') AS comunidad,
     coalesce(municipio, '') AS municipio,
     anio_creacion,
     coalesce(partido, '') AS partido,

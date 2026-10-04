@@ -33,6 +33,7 @@ select
     r.anio,
     r.nivel,
     r.cod,
+    t2.nombre,
     r.hogares,
     t.tamano_medio,
     r.unipersonales,
@@ -43,3 +44,4 @@ select
     r.nivel || '-' || r.cod || '-' || r.anio as clave
 from resumen r
 left join tamano t using (nivel, cod, anio)
+left join {{ ref('territorios') }} t2 on t2.nivel = r.nivel and t2.cod = r.cod

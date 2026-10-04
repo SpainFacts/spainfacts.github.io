@@ -1,7 +1,7 @@
 ---
 title: Public transport
 description: "Passengers on metro, bus, Cercanías commuter rail, AVE high-speed rail, medium- and long-distance trains, air and sea in Spain every month since 2012, plus metro and city buses in Madrid, Barcelona, Valencia, Bilbao, Seville, Málaga and Palma."
-i18n_origen: 2298a9087930
+i18n_origen: 19974c536a0b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -59,9 +59,8 @@ WHERE nivel = 'pais' AND sexo = 'Total'
 
 ```sql serie_por_mil
 -- Viajeros por cada 1.000 habitantes, últimos 36 meses
-SELECT m.mes, m.clave, 1000 * m.viajeros / p.poblacion AS valor
+SELECT m.mes, m.clave, m.viajeros_por_1000_hab AS valor
 FROM ${modos} AS m
-JOIN ${poblacion} AS p ON p.anio = least(CAST(year(m.mes) AS INTEGER), (SELECT max(anio) FROM ${poblacion}))
 WHERE m.clave IN ('total', 'metro')
   AND m.mes >= (SELECT max(mes) FROM ${modos}) - INTERVAL 35 MONTH
 ORDER BY m.mes
@@ -118,9 +117,8 @@ How many passengers the metro, buses, trains and planes carry in Spain every mon
 </ButtonGroup>
 
 ```sql serie_modo
-SELECT m.mes, m.modo, m.viajeros, 1000.0 * m.viajeros / p.poblacion AS por_1000
+SELECT m.mes, m.modo, m.viajeros, m.viajeros_por_1000_hab AS por_1000
 FROM ${modos} m
-JOIN ${poblacion} p ON p.anio = greatest(least(CAST(year(m.mes) AS INTEGER), (SELECT max(anio) FROM ${poblacion})), (SELECT min(anio) FROM ${poblacion}))
 WHERE ('${inputs.grupo_modo}' = 'urbano' AND clave IN ('metro', 'autobus_urbano'))
    OR ('${inputs.grupo_modo}' = 'tren' AND clave IN ('cercanias', 'media_distancia', 'alta_velocidad', 'larga_distancia_convencional'))
    OR ('${inputs.grupo_modo}' = 'otros' AND clave IN ('autobus_interurbano', 'avion_interior', 'maritimo'))

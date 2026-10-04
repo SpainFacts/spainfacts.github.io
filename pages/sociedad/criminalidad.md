@@ -56,7 +56,7 @@ ORDER BY categoria, anio
 ```
 
 ```sql semestre
-SELECT periodo, anio, infracciones, infracciones_anio_anterior, infracciones / infracciones_anio_anterior - 1 AS variacion
+SELECT periodo, anio, infracciones, infracciones_anio_anterior, variacion_pct / 100 AS variacion
 FROM mother.crimen_ultimo_periodo
 WHERE nivel = 'pais' AND categoria = 'Total infracciones penales'
 ```
@@ -228,7 +228,7 @@ WHERE b.nivel = 'provincia' AND b.categoria = 'Total infracciones penales' AND b
 WITH u AS (SELECT max(anio) AS anio FROM mother.crimen_balance WHERE nivel = 'municipio')
 SELECT
     b.cod AS cod_mun,
-    b.territorio AS municipio,
+    b.nombre AS municipio,
     p.nombre AS provincia,
     b.poblacion,
     max(b.infracciones) FILTER (WHERE b.categoria = 'Total infracciones penales') AS infracciones,
@@ -264,7 +264,7 @@ ORDER BY tasa_1000 DESC
 ```sql condenados
 SELECT anio, sexo, nacionalidad, condenados, poblacion_18, tasa_1000
 FROM mother.crimen_condenados
-WHERE cod_ccaa = '00' AND nacionalidad IN ('Española', 'Extranjera')
+WHERE nivel = 'pais' AND nacionalidad IN ('Española', 'Extranjera')
 ORDER BY anio
 ```
 

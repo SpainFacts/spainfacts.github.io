@@ -1,7 +1,7 @@
 ---
 title: Comerç exterior
 description: "Exportacions i importacions de béns i serveis d'Espanya: pes sobre el PIB, saldo exterior i evolució real per habitant."
-i18n_origen: f25352ecec09
+i18n_origen: d44a780dbaed
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -25,7 +25,7 @@ SELECT
     max(CASE WHEN componente = 'P7' THEN por_habitante_real END) AS import_hab,
     max(CASE WHEN componente = 'P6' THEN nominal_meur END) AS export_meur,
     max(CASE WHEN componente = 'P7' THEN nominal_meur END) AS import_meur,
-    max(anio_euros) AS anio_euros
+    max(anio_base) AS anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente IN ('P6', 'P7')
 GROUP BY trimestre, anio, trim
@@ -146,7 +146,7 @@ El 2007 Espanya comprava fora molt més del que venia: el dèficit va arribar al
 
 ## Evolució real per habitant
 
-Exportacions i importacions en euros constants del {comercio_trim[0]?.anio_euros} per habitant, a ritme anual (el trimestre multiplicat per quatre): mostra quant creix de debò el comerç, sense la inflació ni l'augment de població.
+Exportacions i importacions en euros constants del {comercio_trim[0]?.anio_base} per habitant, a ritme anual (el trimestre multiplicat per quatre): mostra quant creix de debò el comerç, sense la inflació ni l'augment de població.
 
 <LineChart
     data={comercio_largo}
@@ -155,7 +155,7 @@ Exportacions i importacions en euros constants del {comercio_trim[0]?.anio_euros
     series=flujo
     yAxisTitle="€ per habitant (reals)"
     yFmt='#,##0" €"'
-    title="Comerç exterior per habitant, euros del {comercio_trim[0]?.anio_euros} a ritme anual"
+    title="Comerç exterior per habitant, euros del {comercio_trim[0]?.anio_base} a ritme anual"
 />
 
 ---

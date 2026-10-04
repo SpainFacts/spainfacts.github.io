@@ -16,7 +16,7 @@ select
     u.es_agregado,
     u.es_referencia,
     u.orden_pais,
-    u.anio as anio_ultimo,
+    u.anio,
     u.valor,
     esp.valor as valor_espana_mismo_anio,
     u.fuente,
@@ -24,4 +24,4 @@ select
     u.sentido
 from ultimo u
 left join {{ ref('internacional_comparativa') }} esp
-    on esp.indicador_id = u.indicador_id and esp.cod_pais = 'ESP' and esp.anio = u.anio
+    on esp.indicador_id = u.indicador_id and esp.cod_pais = 'ES' and esp.anio = u.anio

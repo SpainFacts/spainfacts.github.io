@@ -8,10 +8,11 @@
 --     (IPC del INE, enlazado con el IPCA antes de 2002; construccion_deflactor), 2021 = 100: si
 --     sube, construir se encarece más que el resto de precios.
 --   var_coste_anual_pct: variación del índice de costes sobre el año anterior.
+-- cod_pais / pais: seed paises_iso (ISO 3166-1 alfa-2, p. ej. GR y no el EL de Eurostat; EU27_2020 la UE-27).
 with base as (
     select
         cast(anio as integer) as anio,
-        pais,
+        pais as pais_eurostat,
         max(indice) filter (where indicador = 'COST') as coste_indice_2021,
         max(indice) filter (where indicador = 'PRC_PRR') as precio_produccion_indice_2021
     from {{ source('raw_construccion', 'eurostat_construccion_costes') }}
@@ -25,16 +26,16 @@ d as (
 
 select
     b.anio,
-    b.pais,
-    n.pais_nombre,
-    b.pais in ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE') as es_referencia,
+    coalesce(n.cod_pais, b.pais_eurostat) as cod_pais,
+    coalesce(n.pais, b.pais_eurostat) as pais,
+    coalesce(n.cod_pais, b.pais_eurostat) in ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE') as es_referencia,
     b.coste_indice_2021,
     b.precio_produccion_indice_2021,
-    case when b.pais = 'ES' then b.coste_indice_2021 * d.factor / d.factor_2021 end as coste_real_indice_2021,
-    100.0 * (b.coste_indice_2021 / nullif(lag(b.coste_indice_2021) over (partition by b.pais order by b.anio), 0) - 1)
+    case when n.cod_pais = 'ES' then b.coste_indice_2021 * d.factor / d.factor_2021 end as coste_real_indice_2021,
+    100.0 * (b.coste_indice_2021 / nullif(lag(b.coste_indice_2021) over (partition by b.pais_eurostat order by b.anio), 0) - 1)
         as var_coste_anual_pct,
-    b.pais = 'ES' as serie_coste_es_precio
+    n.cod_pais = 'ES' as serie_coste_es_precio
 from base b
-left join {{ ref('industria_paises') }} n using (pais)
+left join {{ ref('paises_iso') }} n on n.eurostat = b.pais_eurostat
 left join d on d.anio = b.anio
 where coalesce(b.coste_indice_2021, b.precio_produccion_indice_2021) is not null

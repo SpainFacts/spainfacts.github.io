@@ -1,7 +1,7 @@
 ---
 title: BPG eta hazkundea
 description: "Espainiako BPGaren bilakaera biztanleko eta inflazioa kenduta, hiruhileko hazkundea, eskariaren osagaiak eta EBrekiko alderaketa."
-i18n_origen: 7ab507e83338
+i18n_origen: 0a70463d9329
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -20,7 +20,7 @@ SELECT
     por_habitante_real AS valor,
     real_meur,
     nominal_meur,
-    anio_euros
+    anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY indice_ue DESC
 
 # 📈 BPG eta hazkundea
 
-Barne-produktu gordinak ekonomiak ekoizten duen guztia neurtzen du. Herrialdea benetan aberasten ari den ikusteko, hemen **biztanleko** erakusten da (bestela, biztanleria gehitze hutsarekin hazten da) eta **inflazioa kenduta**, {pib_trim[0]?.anio_euros}. urteko eurotan.
+Barne-produktu gordinak ekonomiak ekoizten duen guztia neurtzen du. Herrialdea benetan aberasten ari den ikusteko, hemen **biztanleko** erakusten da (bestela, biztanleria gehitze hutsarekin hazten da) eta **inflazioa kenduta**, {pib_trim[0]?.anio_base}. urteko eurotan.
 
 <Grid cols=4>
     <KpiCard
         title="BPG biztanleko"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="{pib_hab.slice(-1)[0]?.anio}. urtean, {pib_trim[0]?.anio_euros}. urteko eurotan"
+        period="{pib_hab.slice(-1)[0]?.anio}. urtean, {pib_trim[0]?.anio_base}. urteko eurotan"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="erreala, aurreko urtearekin alderatuta"
         direction="positive-up"
@@ -125,7 +125,7 @@ WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
 
 ## BPG biztanleko 1995etik
 
-{pib_trim[0]?.anio_euros}. urteko euro konstanteetan. 2008ko krisiak biztanleko BPGa {formatNumber(-hitos[0]?.caida_crisis, 1)} % murriztu zuen 2013ra arte; pandemiak 2020an hondoratu zuen, eta {hitos[0]?.anio_ult}. urtean 2007ko gehienekoa baino {formatNumber(hitos[0]?.vs2007, 1)} % gorago dago.
+{pib_trim[0]?.anio_base}. urteko euro konstanteetan. 2008ko krisiak biztanleko BPGa {formatNumber(-hitos[0]?.caida_crisis, 1)} % murriztu zuen 2013ra arte; pandemiak 2020an hondoratu zuen, eta {hitos[0]?.anio_ult}. urtean 2007ko gehienekoa baino {formatNumber(hitos[0]?.vs2007, 1)} % gorago dago.
 
 <LineChart
     data={pib_hab}
@@ -135,7 +135,7 @@ WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
     yFmt='#,##0" €"'
     xFmt='0'
     startingAtZero={false}
-    title="BPG biztanleko, {pib_trim[0]?.anio_euros}. urteko eurotan"
+    title="BPG biztanleko, {pib_trim[0]?.anio_base}. urteko eurotan"
 />
 
 ## Hiruhileko hazkundea
@@ -162,7 +162,7 @@ Etxeen kontsumoa, kontsumo publikoa eta inbertsioa biztanleko, euro konstanteeta
     series=nombre
     yAxisTitle="€ biztanleko (errealak)"
     yFmt='#,##0" €"'
-    title="Eskaria biztanleko, {pib_trim[0]?.anio_euros}. urteko eurotan, urteko erritmoan"
+    title="Eskaria biztanleko, {pib_trim[0]?.anio_base}. urteko eurotan, urteko erritmoan"
 />
 
 ## Europarekin alderatuta
@@ -187,4 +187,4 @@ BPG biztanleko erosahalmen-parekotasunean; horrek zuzentzen du prezioak herriald
 
 ---
 
-**Iturriak:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (hiruhileko kontabilitate nazionala, urtaroko doikuntzarekin) eta [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (BPG biztanleko). Kateatutako bolumenak {pib_trim[0]?.anio_euros}. urteko eurotan adierazten dira berriro; biztanleria Eurostaten urteko batez bestekoa da.
+**Iturriak:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (hiruhileko kontabilitate nazionala, urtaroko doikuntzarekin) eta [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (BPG biztanleko). Kateatutako bolumenak {pib_trim[0]?.anio_base}. urteko eurotan adierazten dira berriro; biztanleria Eurostaten urteko batez bestekoa da.

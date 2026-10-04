@@ -346,35 +346,35 @@ FROM mother.industria_peso_ue
 ```
 
 ```sql ipi_anual
-SELECT CAST(anio AS INTEGER) AS anio, nombre AS pais, indice
-FROM mother.industria_ipi
-WHERE fuente = 'eurostat' AND rama = 'B-D' AND cod IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT') AND anio >= 2005
+SELECT CAST(anio AS INTEGER) AS anio, pais, indice
+FROM mother.industria_ipi_paises
+WHERE rama = 'B-D' AND cod_pais IN ('ES', 'EU27_2020', 'DE', 'FR', 'IT') AND anio >= 2005
 ORDER BY anio, pais
 ```
 
 ```sql ipi_res
-WITH e AS (SELECT * FROM mother.industria_ipi WHERE fuente = 'eurostat' AND rama = 'B-D'),
-     u AS (SELECT max(anio) AS a FROM e WHERE cod = 'ES')
+WITH e AS (SELECT * FROM mother.industria_ipi_paises WHERE rama = 'B-D'),
+     u AS (SELECT max(anio) AS a FROM e WHERE cod_pais = 'ES')
 SELECT
     CAST((SELECT a FROM u) AS INTEGER) AS anio,
-    max(indice) FILTER (WHERE cod = 'ES' AND anio = (SELECT a FROM u)) AS es,
-    max(indice) FILTER (WHERE cod = 'EU27_2020' AND anio = (SELECT a FROM u)) AS ue,
-    max(variacion_anual_pct) FILTER (WHERE cod = 'ES' AND anio = (SELECT a FROM u)) AS es_var,
-    max(variacion_anual_pct) FILTER (WHERE cod = 'EU27_2020' AND anio = (SELECT a FROM u)) AS ue_var,
-    100 * (max(indice) FILTER (WHERE cod = 'ES' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod = 'ES' AND anio = 2019) - 1) AS es_var_2019,
-    100 * (max(indice) FILTER (WHERE cod = 'EU27_2020' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod = 'EU27_2020' AND anio = 2019) - 1) AS ue_var_2019,
-    100 * (max(indice) FILTER (WHERE cod = 'ES' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod = 'ES' AND anio = 2007) - 1) AS es_var_2007,
-    100 * (max(indice) FILTER (WHERE cod = 'EU27_2020' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod = 'EU27_2020' AND anio = 2007) - 1) AS ue_var_2007
+    max(indice) FILTER (WHERE cod_pais = 'ES' AND anio = (SELECT a FROM u)) AS es,
+    max(indice) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = (SELECT a FROM u)) AS ue,
+    max(variacion_anual_pct) FILTER (WHERE cod_pais = 'ES' AND anio = (SELECT a FROM u)) AS es_var,
+    max(variacion_anual_pct) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = (SELECT a FROM u)) AS ue_var,
+    100 * (max(indice) FILTER (WHERE cod_pais = 'ES' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod_pais = 'ES' AND anio = 2019) - 1) AS es_var_2019,
+    100 * (max(indice) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = 2019) - 1) AS ue_var_2019,
+    100 * (max(indice) FILTER (WHERE cod_pais = 'ES' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod_pais = 'ES' AND anio = 2007) - 1) AS es_var_2007,
+    100 * (max(indice) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = (SELECT a FROM u)) / max(indice) FILTER (WHERE cod_pais = 'EU27_2020' AND anio = 2007) - 1) AS ue_var_2007
 FROM e
 ```
 
 ```sql ipi_mes
-SELECT mes, indice, variacion_anual_pct, variacion_acumulada_pct,
-       list_extract(['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], month(mes))
-           || ' de ' || CAST(year(mes) AS VARCHAR) AS mes_txt
+SELECT fecha AS mes, indice, variacion_anual_pct, variacion_acumulada_pct,
+       list_extract(['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], month(fecha))
+           || ' de ' || CAST(year(fecha) AS VARCHAR) AS mes_txt
 FROM mother.industria_ipi_mensual
-WHERE cod_ccaa = '00' AND destino = 'Total industria' AND indice IS NOT NULL
-  AND mes > (SELECT max(mes) FROM mother.industria_ipi_mensual) - INTERVAL 36 MONTH
+WHERE nivel = 'pais' AND destino = 'Total industria' AND indice IS NOT NULL
+  AND fecha > (SELECT max(fecha) FROM mother.industria_ipi_mensual) - INTERVAL 36 MONTH
 ORDER BY mes
 ```
 
@@ -385,14 +385,14 @@ SELECT * FROM ${ipi_mes} ORDER BY mes DESC LIMIT 1
 ```sql ipi_destinos
 SELECT destino, variacion_anual_pct, variacion_acumulada_pct
 FROM mother.industria_ipi_mensual
-WHERE cod_ccaa = '00' AND es_ultimo_mes AND destino <> 'Total industria'
+WHERE nivel = 'pais' AND es_ultimo_mes AND destino <> 'Total industria'
 ORDER BY variacion_acumulada_pct DESC
 ```
 
 ```sql exportaciones
 SELECT partida, partida_nombre, CAST(anio AS INTEGER) AS anio, cuota_pct, CAST(puesto AS INTEGER) AS puesto,
        CAST(puesto_sin_nl_be AS INTEGER) AS puesto_sin_nl_be, lider_nombre AS lider, cuota_nl_be_pct,
-       veces_peso_poblacion, exportacion_es_real_meur, peso_en_exportacion_es_pct,
+       veces_peso_poblacion, exportacion_es_real_meur, exportacion_es_real_eur_hab, peso_en_exportacion_es_pct,
        CASE WHEN veces_peso_poblacion >= 1 THEN 'Más que su peso en población' ELSE 'Menos que su peso en población' END AS grupo
 FROM mother.industria_exportaciones_ue
 WHERE es_ultimo_anio AND destino = 'WORLD' AND partida <> 'TOTAL'
@@ -777,6 +777,7 @@ España vende al exterior (incluidos los demás países de la UE) el {formatNumb
     <Column id=cuota_nl_be_pct title="NL + BE, % de la UE" fmt='0.0' />
     <Column id=peso_en_exportacion_es_pct title="% de las exportaciones españolas" fmt='0.00' />
     <Column id=exportacion_es_real_meur title="Exportación España (M€ de 2025)" fmt='#,##0' />
+    <Column id=exportacion_es_real_eur_hab title="Exportación por habitante (€ de 2025)" fmt='#,##0' />
 </DataTable>
 
 ## ¿Cuánta industria tiene España?

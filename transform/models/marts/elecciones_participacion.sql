@@ -111,6 +111,8 @@ select
     pr.fecha,
     t.nivel,
     t.cod,
+    tt.nombre,
+    pr.tipo_nombre || ', ' || ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'][month(pr.fecha)] || ' de ' || year(pr.fecha) as eleccion,
     cast(t.censo_ine as bigint) as censo_ine,
     cast(t.censo as bigint) as censo,
     cast(t.blancos + t.nulos + t.votos_candidaturas as bigint) as votantes,
@@ -141,3 +143,4 @@ left join procesos pr using (proceso)
 left join frag f using (proceso, nivel, cod)
 left join ganador g using (proceso, nivel, cod)
 left join segundo s using (proceso, nivel, cod)
+left join {{ ref('territorios') }} tt on tt.nivel = t.nivel and tt.cod = t.cod

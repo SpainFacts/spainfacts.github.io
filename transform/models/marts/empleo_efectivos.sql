@@ -62,10 +62,14 @@ select
     c.administracion,
     c.sector,
     c.tipo_personal,
+    year(c.fecha) as anio,
     c.cod_prov,
+    coalesce(t.nombre, 'Extranjero') as provincia,
     t.cod_ccaa,
+    coalesce(cc.nombre, 'Extranjero') as ccaa,
     c.sexo,
     sum(c.efectivos) as efectivos
 from clasificado c
 left join {{ ref('territorios_provincias') }} t on t.cod_prov = c.cod_prov
+left join {{ ref('territorios_ccaa') }} cc on cc.cod_ccaa = t.cod_ccaa
 group by all

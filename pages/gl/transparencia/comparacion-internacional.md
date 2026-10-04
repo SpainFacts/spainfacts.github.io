@@ -1,5 +1,5 @@
 ---
-i18n_origen: b0514e13fe1c
+i18n_origen: 43c868242525
 title: España fronte a outros países
 description: "Índices internacionais de corrupción, integridade e goberno aberto: onde está España respecto da UE, da OCDE e dos países de referencia, e como evolucionou con cada Goberno."
 og:
@@ -19,7 +19,7 @@ WITH e AS (
         lag(anio) OVER (PARTITION BY indicador_id ORDER BY anio) AS anio_anterior,
         row_number() OVER (PARTITION BY indicador_id ORDER BY anio DESC) AS rn
     FROM mother.transparencia_internacional
-    WHERE cod_pais = 'ESP'
+    WHERE cod_pais = 'ES'
 )
 SELECT e.indicador_id, e.nombre_corto, e.unidad, e.sentido, e.fuente, e.orden_indicador,
     CAST(e.anio AS INTEGER) AS anio, e.valor, e.valor_anterior, CAST(e.anio_anterior AS INTEGER) AS anio_anterior,
@@ -30,7 +30,7 @@ SELECT e.indicador_id, e.nombre_corto, e.unidad, e.sentido, e.fuente, e.orden_in
     ue.valor AS valor_ue
 FROM e
 LEFT JOIN mother.transparencia_internacional ue
-    ON ue.indicador_id = e.indicador_id AND ue.anio = e.anio AND ue.cod_pais = 'EUU'
+    ON ue.indicador_id = e.indicador_id AND ue.anio = e.anio AND ue.cod_pais = 'EU27_2020'
 WHERE e.rn = 1
 ORDER BY e.orden_indicador
 ```
@@ -58,7 +58,7 @@ SELECT CAST(min(puesto_ue) AS INTEGER) AS mejor, CAST(max(puesto_ue) AS INTEGER)
 ```sql cpi_inicio
 SELECT CAST(anio AS INTEGER) AS anio, valor, CAST(puesto_ue AS INTEGER) AS puesto_ue
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id = 'cpi'
+WHERE cod_pais = 'ES' AND indicador_id = 'cpi'
 ORDER BY anio
 LIMIT 1
 ```
@@ -66,7 +66,7 @@ LIMIT 1
 ```sql serie_esp
 SELECT indicador_id, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP'
+WHERE cod_pais = 'ES'
 ORDER BY indicador_id, anio
 ```
 
@@ -81,12 +81,12 @@ ORDER BY indicador_id, orden_pais, anio
 ```sql ranking_ue
 -- Países de la UE en el último año con dato de España, España destacada
 SELECT t.indicador_id, t.pais, t.valor, CAST(t.anio AS INTEGER) AS anio,
-    CASE WHEN t.cod_pais = 'ESP' THEN 'España' ELSE 'Resto de la UE' END AS grupo
+    CASE WHEN t.cod_pais = 'ES' THEN 'España' ELSE 'Resto de la UE' END AS grupo
 FROM mother.transparencia_internacional t
 JOIN (
     SELECT indicador_id, max(anio) AS anio
     FROM mother.transparencia_internacional
-    WHERE cod_pais = 'ESP'
+    WHERE cod_pais = 'ES'
     GROUP BY indicador_id
 ) u ON u.indicador_id = t.indicador_id AND u.anio = t.anio
 WHERE t.es_ue
@@ -96,7 +96,7 @@ ORDER BY t.indicador_id, t.valor DESC
 ```sql puesto_ue_serie
 SELECT indicador_id, nombre_corto, CAST(anio AS INTEGER) AS anio, CAST(puesto_ue AS INTEGER) AS puesto_ue, CAST(n_ue AS INTEGER) AS n_ue
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id IN ('cpi', 'wgi_control_corrupcion', 'wjp_estado_derecho') AND anio >= 1996
+WHERE cod_pais = 'ES' AND indicador_id IN ('cpi', 'wgi_control_corrupcion', 'wjp_estado_derecho') AND anio >= 1996
 ORDER BY indicador_id, anio
 ```
 
@@ -150,14 +150,14 @@ SELECT * FROM ${gobiernos} WHERE familia = 'UCD'
 ```sql larga_vdem
 SELECT pais, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'vdem_corrupcion_politica' AND cod_pais IN ('ESP', 'EUU', 'OED') AND anio >= 1977
+WHERE indicador_id = 'vdem_corrupcion_politica' AND cod_pais IN ('ES', 'EU27_2020', 'OECD') AND anio >= 1977
 ORDER BY cod_pais, anio
 ```
 
 ```sql larga_wgi
 SELECT pais, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'wgi_control_corrupcion' AND cod_pais IN ('ESP', 'EUU', 'OED')
+WHERE indicador_id = 'wgi_control_corrupcion' AND cod_pais IN ('ES', 'EU27_2020', 'OECD')
 ORDER BY cod_pais, anio
 ```
 
@@ -181,12 +181,12 @@ base AS (
       AND anio >= 1976 AND NOT es_agregado
 ),
 anios_esp AS (
-    SELECT indicador_id, count(*) AS n FROM base WHERE cod_pais = 'ESP' GROUP BY indicador_id
+    SELECT indicador_id, count(*) AS n FROM base WHERE cod_pais = 'ES' GROUP BY indicador_id
 ),
 panel AS (
     SELECT b.indicador_id, b.cod_pais
     FROM base b JOIN anios_esp a ON a.indicador_id = b.indicador_id
-    WHERE b.es_ue AND b.cod_pais <> 'ESP'
+    WHERE b.es_ue AND b.cod_pais <> 'ES'
     GROUP BY b.indicador_id, b.cod_pais, a.n
     HAVING count(*) = a.n
 ),
@@ -201,7 +201,7 @@ media AS (
 brecha AS (
     SELECT e.indicador_id, e.sentido, e.anio, e.valor - m.valor AS brecha
     FROM base e JOIN media m ON m.indicador_id = e.indicador_id AND m.anio = e.anio
-    WHERE e.cod_pais = 'ESP'
+    WHERE e.cod_pais = 'ES'
 ),
 cambios AS (
     SELECT *,
@@ -211,7 +211,7 @@ cambios AS (
 )
 SELECT
     c.indicador_id,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 'Corrupción política (V-Dem, centésimas)' ELSE 'Control de la corrupción (Banco Mundial, puntos)' END AS indice,
+    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 'Corrupción política (V-Dem, puntos)' ELSE 'Control de la corrupción (Banco Mundial, puntos)' END AS indice,
     CASE g.presidente
         WHEN 'Adolfo Suárez / Leopoldo Calvo-Sotelo' THEN 'Suárez y Calvo-Sotelo'
         WHEN 'Felipe González' THEN 'González'
@@ -226,8 +226,8 @@ SELECT
     CAST(count(c.mejora) AS INTEGER) AS anios,
     CAST(min(c.anio) AS INTEGER) AS primer_anio,
     CAST(max(c.anio) AS INTEGER) AS ultimo_anio,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 100 ELSE 1 END * sum(c.mejora) AS mejora,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 100 ELSE 1 END * sum(c.mejora) / count(c.mejora) AS mejora_anual,
+    sum(c.mejora) AS mejora,
+    sum(c.mejora) / count(c.mejora) AS mejora_anual,
     min(n.n_panel) AS n_panel
 FROM cambios c
 JOIN n_panel n ON n.indicador_id = c.indicador_id
@@ -248,7 +248,7 @@ SELECT * FROM ${mandatos} WHERE indicador_id = 'wgi_control_corrupcion' ORDER BY
 ```sql wjp_factores
 SELECT nombre_corto AS factor, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id LIKE 'wjp_%'
+WHERE cod_pais = 'ES' AND indicador_id LIKE 'wjp_%'
 ORDER BY orden_indicador, anio
 ```
 
@@ -273,12 +273,12 @@ ORDER BY orden_pais, anio
 
 ```sql exp_ranking
 SELECT t.pais, t.valor,
-    CASE WHEN t.cod_pais = 'ESP' THEN 'España' WHEN t.es_ue THEN 'Resto de la UE' ELSE 'Resto de la OCDE' END AS grupo
+    CASE WHEN t.cod_pais = 'ES' THEN 'España' WHEN t.es_ue THEN 'Resto de la UE' ELSE 'Resto de la OCDE' END AS grupo
 FROM mother.transparencia_internacional t
 WHERE t.indicador_id = '${inputs.ind.value}' AND (t.es_ue OR t.es_ocde)
   AND t.anio = (
     SELECT max(anio) FROM mother.transparencia_internacional
-    WHERE indicador_id = '${inputs.ind.value}' AND cod_pais = 'ESP'
+    WHERE indicador_id = '${inputs.ind.value}' AND cod_pais = 'ES'
   )
 ORDER BY t.valor DESC
 ```
@@ -321,10 +321,10 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
     <KpiCard
         title="Goberno aberto (WJP)"
         value={esp_wjp[0]?.valor}
-        formattedValue="{formatNumber(esp_wjp[0]?.valor, 2)} / 1"
+        formattedValue="{formatNumber(esp_wjp[0]?.valor, 0)} / 100"
         period="{esp_wjp[0]?.anio} · posto {esp_wjp[0]?.puesto_ue} de {esp_wjp[0]?.n_ue} na UE"
-        change={(esp_wjp[0]?.cambio / 0.01)?.toFixed(1)}
-        changeUnit=" centésimas"
+        change={esp_wjp[0]?.cambio?.toFixed(1)}
+        changeUnit=" pts"
         changePeriod="vs {esp_wjp[0]?.anio_anterior}"
         direction="positive-up"
         source="World Justice Project"
@@ -333,10 +333,10 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
     <KpiCard
         title="Corrupción política (V-Dem)"
         value={esp_vdem[0]?.valor}
-        formattedValue="{formatNumber(esp_vdem[0]?.valor, 2)} / 1"
+        formattedValue="{formatNumber(esp_vdem[0]?.valor, 1)} / 100"
         period="{esp_vdem[0]?.anio} · máis baixo é mellor · posto {esp_vdem[0]?.puesto_ue} de {esp_vdem[0]?.n_ue} na UE"
-        change={(esp_vdem[0]?.cambio / 0.01)?.toFixed(1)}
-        changeUnit=" centésimas"
+        change={esp_vdem[0]?.cambio?.toFixed(1)}
+        changeUnit=" pts"
         changePeriod="vs {esp_vdem[0]?.anio_anterior}"
         direction="positive-down"
         source="V-Dem"
@@ -356,8 +356,8 @@ No último ano con datos, España queda **entre os postos {rango[0]?.mejor} e {r
     <Column id=wgi_cc title="Control corrupción (0-100)" fmt='0.0' />
     <Column id=wgi_va title="Voz e rendición de contas (0-100)" fmt='0.0' />
     <Column id=wgi_ge title="Eficacia do goberno (0-100)" fmt='0.0' />
-    <Column id=wjp_ga title="Goberno aberto WJP (0-1)" fmt='0.00' />
-    <Column id=vdem_cp title="Corrupción política V-Dem (0-1, menos é mellor)" fmt='0.00' />
+    <Column id=wjp_ga title="Goberno aberto WJP (0-100)" fmt='0.0' />
+    <Column id=vdem_cp title="Corrupción política V-Dem (0-100, menos é mellor)\" fmt='0.0' />
 </DataTable>
 
 ## Percepción da corrupción
@@ -466,8 +466,8 @@ O proxecto **V-Dem** (Universidade de Gotemburgo) reconstrúe con valoracións d
     y=valor
     series=pais
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1 (máis alto = máis corrupción)"
+    yFmt='0.0'
+    yAxisTitle="0-100 (máis alto = máis corrupción)"
     title="Índice de corrupción política (V-Dem), 1977-{esp_vdem[0]?.anio}"
     seriesColors={{'España': '#b91c1c', 'Unión Europea (media simple)': '#475569', 'OCDE (media simple)': '#94a3b8'}}
 >
@@ -490,7 +490,7 @@ O proxecto **V-Dem** (Universidade de Gotemburgo) reconstrúe con valoracións d
 
 ### Por Goberno, fronte á media da UE
 
-Para non lle atribuír a un Goberno o que é unha tendencia europea, mídese **canto cambiou a distancia entre España e a media da UE** durante cada mandato. A media é a dos países da UE con serie completa, para que non cambie a súa composición cos anos ({mandatos_vdem[0]?.n_panel} países en V-Dem desde 1976 e {mandatos_wgi[0]?.n_panel} no Banco Mundial desde 1996). Cada ano asígnaselle a quen gobernaba o 1 de xullo. Un valor positivo significa que España **mellorou respecto da UE**; negativo, que empeorou. En V-Dem exprésase en centésimas do índice (escala 0-100).
+Para non lle atribuír a un Goberno o que é unha tendencia europea, mídese **canto cambiou a distancia entre España e a media da UE** durante cada mandato. A media é a dos países da UE con serie completa, para que non cambie a súa composición cos anos ({mandatos_vdem[0]?.n_panel} países en V-Dem desde 1976 e {mandatos_wgi[0]?.n_panel} no Banco Mundial desde 1996). Cada ano asígnaselle a quen gobernaba o 1 de xullo. Un valor positivo significa que España **mellorou respecto da UE**; negativo, que empeorou. Exprésase en puntos da escala 0-100.
 
 <BarChart
     data={mandatos_vdem}
@@ -500,7 +500,7 @@ Para non lle atribuír a un Goberno o que é unha tendencia europea, mídese **c
     swapXY=true
     sort=false
     yFmt='0.0'
-    title="V-Dem, corrupción política: mellora fronte á UE (centésimas)"
+    title="V-Dem, corrupción política: mellora fronte á UE (puntos)"
     seriesColors={{'UCD': '#16a34a', 'PSOE': '#dc2626', 'PP': '#2563eb'}}
 />
 
@@ -539,8 +539,8 @@ O **Rule of Law Index** do World Justice Project baséase nunha enquisa á poboa
     y=valor
     series=factor
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1"
+    yFmt='0'
+    yAxisTitle="0-100"
     title="España no Rule of Law Index (WJP)"
 />
 
@@ -550,8 +550,8 @@ O **Rule of Law Index** do World Justice Project baséase nunha enquisa á poboa
     y=valor
     series=pais
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1"
+    yFmt='0'
+    yAxisTitle="0-100"
     title="Goberno aberto (WJP, factor 3)"
     seriesColors={{'España': '#b91c1c'}}
 />
@@ -591,8 +591,8 @@ Unidade: {exp_info[0]?.unidad}. {exp_info[0]?.sentido === 'negativo' ? 'Neste í
 
 - **Índice de Percepción da Corrupción (CPI)**, [Transparency International](https://www.transparency.org/en/cpi). Media de entre 3 e 13 fontes (avaliacións de risco país, enquisas a directivos e valoracións de expertos) reescaladas de 0 a 100. Mide a corrupción **percibida no sector público**, non a privada, o branqueo nin o financiamento ilegal de partidos. Comparable desde 2012. Tómase a folla de series do Excel anual de resultados. Licenza CC BY-ND 4.0: reprodúcense as puntuacións e o posto mundial oficiais **sen transformalos** e por iso non se calcula media da UE nin da OCDE (a posición de España na UE é só a orde das puntuacións publicadas).
 - **Worldwide Governance Indicators (WGI)**, [Banco Mundial](https://www.worldbank.org/en/publication/worldwide-governance-indicators), API de datos do Banco Mundial (fonte 3). Modelo estatístico que combina máis de 30 fontes de percepción en seis dimensións; úsase a puntuación de 0 a 100 da revisión metodolóxica de 2024, co seu intervalo de confianza do 90 %. Bienal ata 2002. Licenza CC BY 4.0.
-- **V-Dem** (Varieties of Democracy, Universidade de Gotemburgo), vía [Our World in Data](https://ourworldindata.org/grapher/political-corruption-index). Índices de corrupción política (executivo, lexislativo, xudicial e sector público) e de corrupción no sector público, de 0 a 1 (1 = máxima corrupción), construídos cun modelo de medida sobre as valoracións de miles de expertos por país. Licenzas CC BY-SA 4.0 (V-Dem) e CC BY 4.0 (OWID).
-- **Rule of Law Index**, [World Justice Project](https://worldjusticeproject.org/rule-of-law-index/). Enquisa á poboación xeral e cuestionarios a expertos; escala de 0 a 1. Cobertura crecente de países desde 2012-2013. Licenza CC BY-NC-ND 4.0: puntuacións reproducidas tal cal, sen medias propias.
+- **V-Dem** (Varieties of Democracy, Universidade de Gotemburgo), vía [Our World in Data](https://ourworldindata.org/grapher/political-corruption-index). Índices de corrupción política (executivo, lexislativo, xudicial e sector público) e de corrupción no sector público, de 0 a 100 (100 = máxima corrupción; a escala orixinal de 0 a 1, multiplicada por 100), construídos cun modelo de medida sobre as valoracións de miles de expertos por país. Licenzas CC BY-SA 4.0 (V-Dem) e CC BY 4.0 (OWID).
+- **Rule of Law Index**, [World Justice Project](https://worldjusticeproject.org/rule-of-law-index/). Enquisa á poboación xeral e cuestionarios a expertos; escala de 0 a 100 (a orixinal de 0 a 1, multiplicada por 100). Cobertura crecente de países desde 2012-2013. Licenza CC BY-NC-ND 4.0: puntuacións reproducidas tal cal, sen medias propias.
 - **Medias da UE e da OCDE**: medias simples (non ponderadas por poboación) dos países que **hoxe** son membros, calculadas só para WGI e V-Dem e só nos anos con dato de polo menos o 90 % deles. **Posto na UE/OCDE**: orde entre os membros actuais con dato ese ano (1 = o mellor).
 - **Gobernos**: presidentes do Goberno e partido, do seed de gobernos de SpainFacts. Na análise por mandato, cada ano atribúeselle a quen gobernaba o 1 de xullo, e o cambio anual é a variación da distancia entre España e a media da UE respecto do ano anterior con dato.
 - **Límites comúns**: todos son **índices de percepción**, compostos a partir de enquisas e valoracións subxectivas; varios comparten fontes (por iso se parecen tanto); teñen marxes de erro de varios puntos; e reflicten feitos con atraso. Non substitúen os datos de condenas ou investigacións (ver a [criminalidade](/gl/sociedad/criminalidad/) e a [rendición de contas municipal](/gl/transparencia/cuentas-municipales/)).

@@ -46,6 +46,7 @@ select
     t.anio,
     t.nivel,
     t.cod,
+    tt.nombre,
     t.nacionalidad,
     t.nacionalidad in ('Total', 'Española', 'Extranjera', 'UE27_2020 sin España', 'Europa menos UE27_2020', 'África',
                        'América del Norte', 'Centro América y Caribe', 'Sudamérica', 'Asia', 'Oceanía', 'Apátridas')
@@ -53,6 +54,7 @@ select
     t.saldo_exterior,
     1000.0 * t.saldo_exterior / p.poblacion as saldo_1000
 from todo t
+left join {{ ref('territorios') }} tt on tt.nivel = t.nivel and tt.cod = t.cod
 left join poblacion p
   on p.nivel = t.nivel and p.cod = t.cod
  and p.anio = least(t.anio, (select max(anio) from poblacion))

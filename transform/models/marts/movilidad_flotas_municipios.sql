@@ -58,7 +58,7 @@ select
     f.flota,
     f.particulares,
     f.flota / nullif(p.poblacion, 0) as flota_por_habitante,
-    f.flota / n.flota_espana as cuota_flota_espana,
+    100.0 * f.flota / n.flota_espana as cuota_flota_espana_pct,
     i.turismo_8_12 as ivtm_turismo,
     pc.municipio as capital,
     ic.turismo_8_12 as ivtm_turismo_capital,

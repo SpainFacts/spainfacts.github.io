@@ -28,11 +28,13 @@ select
     e.fecha,
     e.nivel,
     e.cod,
+    t.nombre,
     e.administracion,
     e.efectivos,
     p.poblacion,
     1000.0 * e.efectivos / p.poblacion as por_1000_hab
 from con_total e
+left join {{ ref('territorios') }} t on t.nivel = e.nivel and t.cod = e.cod
 left join poblacion p
   on p.nivel = e.nivel and p.cod = e.cod
  and p.anio = least(year(e.fecha), (select max(anio) from poblacion))

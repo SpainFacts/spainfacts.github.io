@@ -58,7 +58,7 @@ poblacion as (
 )
 
 select
-    a.anio as "año",
+    a.anio,
     a.funcion_cofog,
     case a.funcion_cofog
         when 'Protección Social y Pensiones' then 'Gasto Social'
@@ -74,8 +74,10 @@ select
     a.millones_euros,
     round(a.millones_euros / p.pib_mio * 100, 2) as porcentaje_pib,
     round(a.millones_euros / t.total_mio * 100, 2) as porcentaje_gasto_total,
-    round(a.millones_euros * 1e6 / h.habitantes, 0) as gasto_por_habitante_eur
+    f.anio_base,
+    round(a.millones_euros * 1e6 * f.factor / h.habitantes, 0) as gasto_eur_hab_real
 from ajustado a
+left join {{ ref('deflactor') }} f using (anio)
 join total t using (anio)
 left join pib p using (anio)
 left join poblacion h using (anio)

@@ -1,7 +1,7 @@
 -- Empresas activas a 1 de enero por gran sector de actividad, España y comunidades,
 -- desde 2020 (INE, DIRCE, tabla 39372, todas las empresas; divisiones CNAE 2009
 -- agrupadas en 11 sectores). pct = % del total de empresas del territorio;
--- por_1000hab = empresas del sector por 1.000 habitantes (padrón a 1 de enero del
+-- por_1000_hab = empresas del sector por 1.000 habitantes (padrón a 1 de enero del
 -- año, main.poblacion_territorios; si no hay padrón del año, el último).
 -- En Ceuta y Melilla el INE no pone el número de división en el nombre de la
 -- serie: se recupera con el código de actividad (v338_cod) del resto.
@@ -66,15 +66,18 @@ rango as (
 )
 
 select
+    case when a.cod = '00' then 'pais' else 'ccaa' end as nivel,
     a.cod,
+    n.nombre,
     a.anio,
     a.sector,
     a.empresas,
     100.0 * a.empresas / t.empresas as pct,
-    1000.0 * a.empresas / p.poblacion as por_1000hab
+    1000.0 * a.empresas / p.poblacion as por_1000_hab
 from agregado a
 join agregado t on t.cod = a.cod and t.anio = a.anio and t.sector = 'Total'
 cross join rango r
 left join pob p on p.cod = a.cod and p.anio = least(a.anio, r.max_anio)
+left join {{ ref('territorios') }} n on n.nivel = case when a.cod = '00' then 'pais' else 'ccaa' end and n.cod = a.cod
 where a.sector <> 'Total'
 order by a.cod, a.anio, a.empresas desc

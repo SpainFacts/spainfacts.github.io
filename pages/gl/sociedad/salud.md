@@ -3,7 +3,7 @@ title: Saúde
 description: "Esperanza de vida en España por comunidade e provincia, de que morre a xente, suicidios, accidentes de tráfico, exceso de mortalidade e o sistema sanitario: listas de espera, médicos, enfermeiras, camas e gasto por habitante fronte á UE."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 997db93797ae
+i18n_origen: 89c1708d4d47
 ---
 
 <script>
@@ -57,7 +57,7 @@ WHERE anio = (SELECT max(anio) FROM ${causas_clave})
 ```
 
 ```sql exceso_anual
-SELECT anio, sum(defunciones) AS defunciones, sum(defunciones) / sum(media_2015_2019) - 1 AS exceso, count(*) AS semanas
+SELECT anio, sum(defunciones) AS defunciones, 100 * (sum(defunciones_por_100k_hab) / sum(media_2015_2019_por_100k_hab) - 1) AS exceso_hab_pct, count(*) AS semanas
 FROM mother.salud_mortalidad_semanal
 WHERE nivel = 'pais' AND anio >= 2015
 GROUP BY anio
@@ -169,7 +169,7 @@ ORDER BY e.anios DESC
 ```sql capitulos
 SELECT causa, defunciones, tasa_100k
 FROM mother.salud_causas_muerte
-WHERE nivel = 'pais' AND sexo = 'Total' AND es_capitulo AND codigo_causa <> '001-102'
+WHERE nivel = 'pais' AND sexo = 'Total' AND tipo_causa = 'capitulo'
   AND anio = (SELECT max(anio) FROM mother.salud_causas_muerte)
 ORDER BY defunciones DESC
 LIMIT 10
@@ -264,32 +264,32 @@ ORDER BY tasa DESC
 <BarChart
     data={exceso_anual}
     x=anio
-    y=exceso
-    yFmt=pct0
+    y=exceso_hab_pct
+    yFmt='0"%"'
     xFmt="####"
     fillColor="#b91c1c"
-    title="Mortes de cada ano fronte á media de 2015-2019"
+    title="Mortes por habitante de cada ano fronte á media de 2015-2019"
 />
 
 ```sql semanal
-SELECT semana, defunciones, media_2015_2019
+SELECT fecha, defunciones_por_100k_hab, media_2015_2019_por_100k_hab
 FROM mother.salud_mortalidad_semanal
-WHERE nivel = 'pais' AND semana >= (SELECT max(semana) FROM mother.salud_mortalidad_semanal) - INTERVAL 3 YEAR
-ORDER BY semana
+WHERE nivel = 'pais' AND fecha >= (SELECT max(fecha) FROM mother.salud_mortalidad_semanal) - INTERVAL 3 YEAR
+ORDER BY fecha
 ```
 
 <LineChart
     data={semanal}
-    x=semana
-    y={['defunciones', 'media_2015_2019']}
+    x=fecha
+    y={['defunciones_por_100k_hab', 'media_2015_2019_por_100k_hab']}
     yFmt=num0
-    seriesLabels={{defunciones: 'Defuncións', media_2015_2019: 'Media da mesma semana en 2015-2019'}}
+    seriesLabels={{defunciones_por_100k_hab: 'Defuncións', media_2015_2019_por_100k_hab: 'Media da mesma semana en 2015-2019'}}
     colorPalette={['#b91c1c', '#94a3b8']}
     legend=true
-    title="Defuncións semana a semana (últimos tres anos)"
+    title="Defuncións por 100.000 habitantes semana a semana (últimos tres anos)"
 />
 
-<p class="text-xs text-gray-500">A comparación con 2015-2019 é sinxela e non corrixe que a poboación é cada ano maior e máis numerosa, así que desde 2023 parte do "exceso" é simplemente avellentamento. Os picos coinciden coas ondas de gripe no inverno e coas ondas de calor (ver <a href="/gl/energia-clima/calor">Calor</a>). As últimas semanas poden estar incompletas.</p>
+<p class="text-xs text-gray-500">A comparación con 2015-2019 faise por habitante, así que xa desconta que a poboación é cada ano máis numerosa, pero non corrixe que é máis avellentada, e por iso desde 2023 parte do "exceso" é simplemente avellentamento. Os picos coinciden coas ondas de gripe no inverno e coas ondas de calor (ver <a href="/gl/energia-clima/calor">Calor</a>). As últimas semanas poden estar incompletas.</p>
 
 ```sql san_le
 SELECT fecha, CAST(anio AS INTEGER) AS anio, corte, tipo, pacientes, tasa_1000, pct_espera_larga, dias_medio
@@ -364,28 +364,28 @@ ORDER BY dias_medio DESC
 ```
 
 ```sql san_rec
-SELECT anio, geo, recurso,
+SELECT anio, cod_pais, recurso,
     CASE recurso WHEN 'medicos' THEN 'Médicos' WHEN 'enfermeras' THEN 'Enfermeras' ELSE 'Camas' END
-        || CASE WHEN geo = 'ES' THEN ' · España' ELSE ' · media UE-27' END AS serie,
+        || CASE WHEN cod_pais = 'ES' THEN ' · España' ELSE ' · media UE-27' END AS serie,
     por_1000
 FROM mother.sanidad_recursos
-WHERE geo IN ('ES', 'UE') AND anio >= 2000
+WHERE cod_pais IN ('ES', 'EU27_2020') AND anio >= 2000
 ORDER BY anio
 ```
 
 ```sql san_rec_ultimo
-WITH es AS (SELECT recurso, max(anio) AS anio FROM mother.sanidad_recursos WHERE geo = 'ES' GROUP BY recurso)
+WITH es AS (SELECT recurso, max(anio) AS anio FROM mother.sanidad_recursos WHERE cod_pais = 'ES' GROUP BY recurso)
 SELECT e.recurso, CAST(e.anio AS INTEGER) AS anio, r.por_1000 AS es, r.numero AS numero_es, u.por_1000 AS ue, u.n_paises
 FROM es e
-JOIN mother.sanidad_recursos r ON r.geo = 'ES' AND r.recurso = e.recurso AND r.anio = e.anio
-LEFT JOIN mother.sanidad_recursos u ON u.geo = 'UE' AND u.recurso = e.recurso AND u.anio = e.anio
+JOIN mother.sanidad_recursos r ON r.cod_pais = 'ES' AND r.recurso = e.recurso AND r.anio = e.anio
+LEFT JOIN mother.sanidad_recursos u ON u.cod_pais = 'EU27_2020' AND u.recurso = e.recurso AND u.anio = e.anio
 ```
 
 ```sql san_rec_paises
 WITH ultimo AS (
-    SELECT geo, recurso, max(anio) AS anio
+    SELECT cod_pais, recurso, max(anio) AS anio
     FROM mother.sanidad_recursos
-    WHERE geo <> 'UE' AND anio <= (SELECT max(anio) FROM mother.sanidad_recursos WHERE geo = 'ES')
+    WHERE nivel = 'pais' AND anio <= (SELECT max(anio) FROM mother.sanidad_recursos WHERE cod_pais = 'ES')
     GROUP BY ALL
 )
 SELECT r.pais,
@@ -394,7 +394,7 @@ SELECT r.pais,
     max(r.por_1000) FILTER (WHERE r.recurso = 'camas') AS camas,
     CAST(max(r.anio) AS INTEGER) AS anio
 FROM mother.sanidad_recursos r
-JOIN ultimo u ON u.geo = r.geo AND u.recurso = r.recurso AND u.anio = r.anio
+JOIN ultimo u ON u.cod_pais = r.cod_pais AND u.recurso = r.recurso AND u.anio = r.anio
 GROUP BY ALL
 ORDER BY medicos DESC NULLS LAST
 ```
@@ -423,13 +423,13 @@ ORDER BY medicos DESC
 ```sql san_gasto_es
 SELECT anio, financiacion, pct_pib, eur_hab_real, CAST(anio_base AS INTEGER) AS anio_base
 FROM mother.sanidad_gasto
-WHERE geo = 'ES'
+WHERE cod_pais = 'ES'
 ORDER BY anio
 ```
 
 ```sql san_gasto_ultimo
-WITH es AS (SELECT * FROM mother.sanidad_gasto WHERE geo = 'ES'),
-ue AS (SELECT * FROM mother.sanidad_gasto WHERE geo = 'UE'),
+WITH es AS (SELECT * FROM mother.sanidad_gasto WHERE cod_pais = 'ES'),
+ue AS (SELECT * FROM mother.sanidad_gasto WHERE cod_pais = 'EU27_2020'),
 u AS (SELECT max(anio) AS anio FROM es WHERE financiacion = 'Total'),
 uu AS (SELECT max(anio) AS anio FROM ue WHERE financiacion = 'Total')
 SELECT
@@ -456,22 +456,22 @@ SELECT anio,
     CASE WHEN financiacion = 'Público' THEN 'Público' ELSE 'Privado' END || ' · ' || pais AS serie,
     sum(pct_pib) AS pct_pib
 FROM mother.sanidad_gasto
-WHERE geo IN ('ES', 'UE') AND financiacion IN ('Público', 'Seguros voluntarios', 'Pago directo de los hogares')
+WHERE cod_pais IN ('ES', 'EU27_2020') AND financiacion IN ('Público', 'Seguros voluntarios', 'Pago directo de los hogares')
 GROUP BY ALL
 ORDER BY anio, serie
 ```
 
 ```sql san_gasto_paises
 SELECT pais, pps_hab,
-    CASE WHEN geo = 'ES' THEN 'España' WHEN geo = 'UE' THEN 'Media UE-27' ELSE 'Resto de países' END AS grupo
+    CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media UE-27' ELSE 'Resto de países' END AS grupo
 FROM mother.sanidad_gasto
 WHERE financiacion = 'Total' AND pps_hab IS NOT NULL
-  AND anio = (SELECT max(anio) FROM mother.sanidad_gasto WHERE geo = 'UE' AND financiacion = 'Total' AND pps_hab IS NOT NULL)
+  AND anio = (SELECT max(anio) FROM mother.sanidad_gasto WHERE cod_pais = 'EU27_2020' AND financiacion = 'Total' AND pps_hab IS NOT NULL)
 ORDER BY pps_hab DESC
 ```
 
 ```sql san_gasto_ccaa
-SELECT t.nombre AS comunidad, '/gl' || t.ruta AS ruta, g.eur_hab_real, g.pct_pib / 100 AS pct_pib,
+SELECT t.nombre AS comunidad, '/gl' || t.ruta AS ruta, g.eur_hab_real, g.pct_pib,
     g.eur_hab_real / b.eur_hab_real - 1 AS var_2019,
     CAST(g.anio AS INTEGER) AS anio, g.provisional
 FROM mother.sanidad_gasto_ccaa g
@@ -546,7 +546,7 @@ Canto se agarda para operarse ou ver o especialista na sanidade pública, cantos
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'medicos')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.geo === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
     />
     <KpiCard
         title="Enfermeiras"
@@ -554,7 +554,7 @@ Canto se agarda para operarse ou ver o especialista na sanidade pública, cantos
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.geo === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
     />
     <KpiCard
         title="Camas de hospital"
@@ -562,7 +562,7 @@ Canto se agarda para operarse ou ver o especialista na sanidade pública, cantos
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'camas')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.geo === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
     />
     <KpiCard
         title="Pagamento directo dos fogares"
@@ -728,7 +728,7 @@ En {san_gasto_ultimo[0]?.anio} o gasto sanitario total en España foi de {format
 <DataTable data={san_gasto_ccaa} link=ruta rows=all showLinkCol=false>
     <Column id=comunidad title="Comunidade" />
     <Column id=eur_hab_real title="Gasto sanitario público por habitante (€)" fmt='#,##0' contentType=bar barColor="#99f6e4" />
-    <Column id=pct_pib title="% do PIB rexional" fmt=pct1 />
+    <Column id=pct_pib title="% do PIB rexional" fmt='0.0"%"' />
     <Column id=var_2019 title="Variación real desde 2019" fmt=pct1 />
 </DataTable>
 

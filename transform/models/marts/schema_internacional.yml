@@ -4,7 +4,7 @@ models:
   - name: internacional_comparativa
     description: >
       España frente a Francia, Portugal, Alemania, Italia, Marruecos, Estados Unidos,
-      China, la Unión Europea (EUU) y la OCDE (OED), más los países de referencia
+      China, la Unión Europea (EU27_2020) y la OCDE (OECD); cod_pais es ISO alfa-2, más los países de referencia
       Noruega, Dinamarca, Suecia, Países Bajos, Grecia, Japón, Corea del Sur e Israel
       (es_referencia; la web solo los enseña en los indicadores donde son un caso
       emblemático, src/lib/paisesReferencia.js), en formato largo por indicador,
@@ -23,8 +23,8 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['ESP', 'FRA', 'PRT', 'MAR', 'USA', 'CHN', 'EUU', 'OED', 'DEU', 'ITA',
-                         'NOR', 'DNK', 'SWE', 'NLD', 'GRC', 'JPN', 'KOR', 'ISR', 'AUT', 'GBR']
+                values: ['ES', 'FR', 'PT', 'MA', 'US', 'CN', 'EU27_2020', 'OECD', 'DE', 'IT',
+                         'NO', 'DK', 'SE', 'NL', 'GR', 'JP', 'KR', 'IL', 'AT', 'GB']
       - name: anio
         tests: [not_null]
       - name: valor
@@ -37,7 +37,7 @@ models:
   - name: internacional_ultimo
     description: >
       Último año con dato de cada indicador y país de internacional_comparativa
-      (anio_ultimo), con el valor de España en ese mismo año
+      (anio), con el valor de España en ese mismo año
       (valor_espana_mismo_anio) para comparar sin mezclar años. Ojo: algunos
       agregados se quedan muy atrás (homicidios UE/OCDE en 2015).
     columns:

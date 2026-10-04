@@ -41,7 +41,9 @@ agregado as (
 )
 
 select
+    case when a.cod = '00' then 'pais' else 'ccaa' end as nivel,
     a.cod,
+    n.nombre,
     a.anio,
     a.tamano,
     case a.tamano
@@ -51,5 +53,6 @@ select
     100.0 * a.empresas / t.empresas as pct
 from agregado a
 join agregado t on t.cod = a.cod and t.anio = a.anio and t.tamano = 'Total'
+left join {{ ref('territorios') }} n on n.nivel = case when a.cod = '00' then 'pais' else 'ccaa' end and n.cod = a.cod
 where a.tamano <> 'Total'
 order by a.cod, a.anio, orden

@@ -51,6 +51,7 @@ base as (
         l.provisional,
         m.municipio,
         m.cod_prov,
+        pr.nombre as provincia,
         m.cod_ccaa,
         coalesce(i.poblacion, l.poblacion) as poblacion,
         l.estado_informacion,
@@ -70,15 +71,18 @@ base as (
         {%- endfor %}
     from liquidaciones as l
     join municipios as m on m.cod_mun = l.cod_mun
+    left join {{ ref('territorios_provincias') }} as pr on pr.cod_prov = m.cod_prov
     left join ine as i on i.cod_mun = l.cod_mun and i.anio = l.anio
-)
+),
 
+r as (
 select
     cod_mun,
     anio,
     provisional,
     municipio,
     cod_prov,
+    provincia,
     cod_ccaa,
     poblacion,
     estado_informacion,
@@ -102,4 +106,20 @@ select
     round(ingresos_total / nullif(poblacion, 0), 2) as ingreso_hab,
     cod_mun || '-' || anio as clave
 from base
-order by cod_mun, anio
+)
+
+-- Euros constantes: gasto_hab, ingreso_hab, saldo y totales llevados a los euros
+-- de `anio_base` con el deflactor del año de cada fila (mother.deflactor).
+select
+    r.* exclude (clave),
+    round(r.gasto_hab * d.factor, 2) as gasto_hab_real,
+    round(r.ingreso_hab * d.factor, 2) as ingreso_hab_real,
+    round(r.saldo_no_financiero / nullif(r.poblacion, 0) * d.factor, 2) as saldo_hab_real,
+    r.gastos_total * d.factor as gastos_total_real,
+    r.ingresos_total * d.factor as ingresos_total_real,
+    r.saldo_no_financiero * d.factor as saldo_no_financiero_real,
+    d.anio_base,
+    r.clave
+from r
+left join {{ ref('deflactor') }} as d on d.anio = r.anio
+order by r.cod_mun, r.anio

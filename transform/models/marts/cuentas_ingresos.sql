@@ -55,17 +55,27 @@ pib as (
     select cast(periodo as integer) as anio, valor as pib_mio
     from {{ source('raw_eurostat_extra', 'eurostat_pib') }}
     where valor is not null
+),
+
+poblacion as (
+    select cast(periodo as integer) as anio, valor * 1000.0 as habitantes
+    from {{ source('raw_eurostat_extra', 'eurostat_poblacion') }}
+    where valor is not null
 )
 
 select
-    c.anio as "año",
+    c.anio,
     c.categoria,
     c.tipo_ingreso,
     c.millones_euros,
     round(c.millones_euros / p.pib_mio * 100, 2) as porcentaje_pib,
-    round(c.millones_euros / t.tr * 100, 2) as porcentaje_ingreso_total
+    round(c.millones_euros / t.tr * 100, 2) as porcentaje_ingreso_total,
+    f.anio_base,
+    round(c.millones_euros * 1e6 * f.factor / h.habitantes, 0) as ingreso_eur_hab_real
 from categorias c
 join tr t using (anio)
 left join pib p using (anio)
+left join poblacion h using (anio)
+left join {{ ref('deflactor') }} f using (anio)
 where c.millones_euros is not null
 order by 1, 4 desc

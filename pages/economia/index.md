@@ -18,7 +18,7 @@ ORDER BY anio
 ```
 
 ```sql pib_trim
-SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_euros
+SELECT trimestre, CAST(anio AS INTEGER) || '-T' || CAST(trim AS INTEGER) AS periodo, interanual, anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -73,14 +73,14 @@ ORDER BY crecimiento DESC
 
 # 📊 Economía
 
-Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, lo que depende del tamaño del país se muestra **por habitante** y lo que se mide en euros, **descontada la inflación** (en euros de {pib_trim[0]?.anio_euros}).
+Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, lo que depende del tamaño del país se muestra **por habitante** y lo que se mide en euros, **descontada la inflación** (en euros de {pib_trim[0]?.anio_base}).
 
 <Grid cols=3>
     <KpiCard
         title="PIB por habitante"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_euros}"
+        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_base}"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real vs año anterior"
         direction="positive-up"
@@ -158,7 +158,7 @@ Lo que produce la economía por cada habitante, en euros constantes. [Crecimient
     yFmt='#,##0" €"'
     yAxisTitle="€ por habitante (reales)"
     startingAtZero={false}
-    title="PIB por habitante en euros de {pib_trim[0]?.anio_euros}"
+    title="PIB por habitante en euros de {pib_trim[0]?.anio_base}"
 />
 
 ## Sectores
@@ -200,7 +200,7 @@ Salario medio mensual bruto descontada la inflación. [Crecimiento, sectores y d
     yFmt='#,##0" €"'
     yAxisTitle="€ al mes (reales)"
     startingAtZero={false}
-    title="Salario medio mensual en euros de {pib_trim[0]?.anio_euros}"
+    title="Salario medio mensual en euros de {pib_trim[0]?.anio_base}"
 />
 
 ## Paro e inflación

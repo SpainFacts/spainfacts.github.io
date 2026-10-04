@@ -1,5 +1,5 @@
 -- Potencia instalada a cierre de año por tecnología (MW).
--- Mismas columnas que el antiguo CSV clima_energia.potencia_instalada, más `fuente`.
+-- Solo en total (MW): una central no se reparte por habitante. cuota_pct = % de la potencia total.
 -- "Otras Tecnologías" = total - tecnologías principales (cogeneración, residuos,
 -- biomasa, fuel, bombeo... según la fuente). Ver stg_energia_potencia.
 with pot as (
@@ -37,7 +37,7 @@ todas as (
 )
 
 select
-    a.anio as "año",
+    a.anio,
     a.tecnologia,
     case
         when a.tecnologia in ('Eólica', 'Solar Fotovoltaica', 'Solar Térmica', 'Hidráulica') then 'Renovable'
@@ -45,7 +45,7 @@ select
         else 'No Renovable'
     end as tipo,
     round(a.potencia_mw, 0) as potencia_mw,
-    round(100 * a.potencia_mw / t.total_mw, 2) as porcentaje_total,
+    round(100 * a.potencia_mw / t.total_mw, 2) as cuota_pct,
     a.fuente
 from todas as a
 inner join total as t on t.anio = a.anio and t.fuente = a.fuente

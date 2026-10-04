@@ -44,7 +44,7 @@ agregado as (
 ),
 
 totales as (
-    select proceso, nivel, cod, validos, escanos as escanos_total
+    select proceso, nivel, cod, nombre, tipo_nombre, fecha, eleccion, validos, escanos as escanos_total
     from {{ ref('elecciones_participacion') }}
 )
 
@@ -54,6 +54,10 @@ select
     a.anio,
     a.nivel,
     a.cod,
+    t.nombre,
+    t.tipo_nombre,
+    t.fecha,
+    t.eleccion,
     a.familia,
     b.siglas_familia,
     b.color,

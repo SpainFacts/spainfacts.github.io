@@ -13,7 +13,7 @@ og:
 </script>
 
 ```sql pob_espana
-SELECT anio, extranjeros, poblacion, 100 * pct_extranjeros AS valor
+SELECT anio, extranjeros, poblacion, extranjeros_pct AS valor
 FROM mother.inmigracion_poblacion
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -129,11 +129,11 @@ ORDER BY anio
 <p class="text-xs text-gray-500">Por nacionalidad a 1 de enero (Estadística Continua de Población). Quien nació fuera y ya tiene la nacionalidad española cuenta como español, así que la población nacida en el extranjero es bastante mayor. Tras la crisis económica el número de extranjeros bajó de 5,4 millones en 2010 a 4,4 millones en 2017; desde entonces crece, sobre todo con latinoamericanos, que han pasado del 2,0 % al 4,9 % de la población.</p>
 
 ```sql ccaa
-SELECT i.cod, t.nombre AS comunidad, t.ruta, i.extranjeros, i.pct_extranjeros
+SELECT i.cod, t.nombre AS comunidad, t.ruta, i.extranjeros, i.extranjeros_pct
 FROM mother.inmigracion_poblacion i
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = i.cod
 WHERE i.nivel = 'ccaa' AND i.anio = (SELECT max(anio) FROM mother.inmigracion_poblacion)
-ORDER BY i.pct_extranjeros DESC
+ORDER BY i.extranjeros_pct DESC
 ```
 
 <MapaEspana
@@ -141,8 +141,8 @@ ORDER BY i.pct_extranjeros DESC
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
     areaCol="cod"
-    value="pct_extranjeros"
-    valueFmt="pct1"
+    value="extranjeros_pct"
+    valueFmt='0.0"%"'
     link="ruta"
     colorPalette={['#f0fdfa', '#5eead4', '#0f766e']}
     height={440}
@@ -150,7 +150,7 @@ ORDER BY i.pct_extranjeros DESC
     attribution="Tiles © Esri · Límites © Instituto Geográfico Nacional · Datos: INE"
     tooltip={[
         {id: 'comunidad', showColumnName: false, valueClass: 'text-base font-semibold'},
-        {id: 'pct_extranjeros', title: 'Extranjeros', fmt: 'pct1'},
+        {id: 'extranjeros_pct', title: 'Extranjeros', fmt: '0.0"%"'},
         {id: 'extranjeros', title: 'Personas', fmt: 'num0'}
     ]}
 />
@@ -299,9 +299,7 @@ LIMIT 10
 ```sql nac_origen
 SELECT nacionalidad_previa, nacionalizaciones
 FROM mother.inmigracion_nacionalizaciones
-WHERE cod = '00' AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
-  AND nacionalidad_previa NOT IN ('Total', 'País de la UE27_2020 sin España', 'País de la UE28 sin España')
-  AND nacionalidad_previa NOT LIKE 'De %' AND nacionalidad_previa NOT LIKE 'Resto%' AND nacionalidad_previa NOT LIKE 'País de%' AND nacionalidad_previa NOT LIKE 'Otros%'
+WHERE nivel = 'pais' AND NOT es_grupo AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
 ORDER BY nacionalizaciones DESC
 LIMIT 12
 ```

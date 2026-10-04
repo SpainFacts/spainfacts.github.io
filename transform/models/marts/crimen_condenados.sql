@@ -1,6 +1,7 @@
 -- Condenados adultos por comunidad, sexo y nacionalidad (INE, Estadística de
 -- Condenados, tabla 25704) y su tasa por 1.000 residentes de 18 o más años de
 -- la misma comunidad, sexo y nacionalidad (INE 56942 a 1 de enero del año).
+-- nivel / cod / nombre: 'pais' / '00' / 'España' para el total nacional y 'ccaa' para cada comunidad.
 --
 -- Cautelas (se explican en la web):
 --   - la comunidad es la del juzgado que condena, no la de residencia;
@@ -41,7 +42,9 @@ poblacion as (
 
 select
     c.anio,
-    n.cod_ccaa,
+    case when n.cod_ccaa = '00' then 'pais' else 'ccaa' end as nivel,
+    n.cod_ccaa as cod,
+    coalesce(t.nombre, 'España') as nombre,
     c.sexo,
     c.nacionalidad,
     c.condenados,
@@ -49,5 +52,6 @@ select
     1000.0 * c.condenados / nullif(p.poblacion_18, 0) as tasa_1000
 from condenados c
 join {{ ref('ine_ccaa_nombres') }} n on n.nombre_ine = c.territorio
+left join {{ ref('territorios_ccaa') }} t on t.cod_ccaa = n.cod_ccaa
 left join poblacion p
   on p.anio = c.anio and p.cod_ccaa = n.cod_ccaa and p.sexo = c.sexo and p.nacionalidad = c.nacionalidad

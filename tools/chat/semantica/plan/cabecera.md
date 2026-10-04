@@ -2,7 +2,7 @@
 
 Plan por tabla de las 180 tablas publicadas que tienen algún problema o ninguna página usa (de 268). Lo escribieron seis agentes leyendo cada modelo dbt, el SQL de las páginas que la usan y los datos; nada se ha cambiado todavía. Cómo deben quedar las tablas: [CONVENCIONES.md](CONVENCIONES.md). Inventario de partida: `node tools/chat/semantica/inventario.mjs`.
 
-**Regla de oro:** todo es aditivo. Se añaden columnas al lado de las que hay; nada que use una página (ni sus copias en en/ca/gl/eu) se quita ni se renombra, así que las páginas siguen funcionando sin tocarlas. Pasar una página a las columnas nuevas es un paso aparte, y solo cuando ninguna página use una columna vieja se retira.
+**Decidido por el dueño (2026-10-03):** se hacen las fases 0 a 4. Las columnas mal formadas **se sustituyen** (no se añaden al lado) y se cambian a la vez las páginas que las usan y sus traducciones: la web está en desarrollo y se prefiere un modelo limpio. Decisiones 1, 2, 3, 5, 6 y 7: como se proponen (6 hecho: seed paises_iso, deflactor_paises, poblacion_paises y deflactor desde 1996). Decisión 4: potencia de centrales por comunidad en totales; emisiones, exportaciones y deuda local con las dos cifras (por habitante y total).
 
 ## Fases
 

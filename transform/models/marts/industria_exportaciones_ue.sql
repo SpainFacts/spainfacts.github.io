@@ -1,6 +1,6 @@
 -- Exportaciones industriales de España frente a las de los 27 (Eurostat, Comext DS-045409,
 -- raw.eurostat_industria_comext). Una fila por partida HS, destino y año (2015-último).
---   destino: 'WORLD' = todas las exportaciones (incluye las ventas a otros países de la UE) o
+--   destino: código ('WORLD' / 'EXT_EU27_2020') y destino_nombre: 'WORLD' = todas las exportaciones (incluye las ventas a otros países de la UE) o
 --     'EXT_EU27_2020' = solo fuera de la UE.
 --   exportacion_ue_eur: suma de las exportaciones de los 27 países (Comext publica todos).
 --   cuota_pct / puesto: España sobre los 27 (puesto 1 = mayor exportador).
@@ -8,7 +8,8 @@
 --   Amberes (reexportación), así que su exportación no es producción propia; se da también
 --   puesto_sin_nl_be (puesto de España si no se cuentan NL ni BE).
 --   veces_peso_poblacion: cuota / peso de España en la población de la UE.
---   exportacion_es_real_meur: exportaciones de España en millones de euros constantes de anio_base.
+--   exportacion_es_real_meur y exportacion_es_real_eur_hab: exportaciones de España en millones de
+--     euros constantes de anio_base, en total y por habitante (población de España, poblacion_territorios).
 --   Se excluyen los años en los que algún país no tiene el total de bienes (año incompleto).
 with c as (
     select cast(anio as integer) as anio, pais, destino, partida, partida_nombre, valor_eur, cantidad_100kg
@@ -71,12 +72,12 @@ select
     a.partida_nombre,
     length(a.partida) = 2 as es_capitulo,
     a.destino,
+    case a.destino when 'WORLD' then 'Mundo (incluye UE)' else 'Fuera de la UE' end as destino_nombre,
     a.anio,
     a.anio = max(a.anio) over () as es_ultimo_anio,
-    a.exportacion_es_eur,
     a.exportacion_es_eur / 1e6 * d.factor as exportacion_es_real_meur,
+    a.exportacion_es_eur * d.factor / pe.poblacion as exportacion_es_real_eur_hab,
     d.anio_base,
-    a.exportacion_ue_eur,
     100.0 * a.exportacion_es_eur / nullif(a.exportacion_ue_eur, 0) as cuota_pct,
     pu.puesto,
     pu.puesto_sin_nl_be,
@@ -94,5 +95,7 @@ left join puestos pu using (anio, destino, partida)
 left join poblacion_completa p using (anio)
 left join agregado t on t.anio = a.anio and t.destino = a.destino and t.partida = 'TOTAL'
 left join {{ ref('deflactor') }} d on d.anio = a.anio
+left join {{ ref('poblacion_territorios') }} pe
+    on pe.nivel = 'pais' and pe.cod = '00' and pe.sexo = 'Total' and pe.anio = a.anio
 left join {{ ref('industria_paises') }} nl on nl.pais = a.lider
 where a.exportacion_es_eur is not null

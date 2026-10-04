@@ -227,15 +227,14 @@ esfuerzo as (
 -- ------------------------------------------------------- Cuentas públicas
 balance as (
     select
-        cast(b."año" as integer) as anio,
-        b.ingresos_totales_mrd * 1000 / b.poblacion_m * d.factor as ingresos_hab_real,
-        b.gastos_totales_mrd * 1000 / b.poblacion_m * d.factor as gastos_hab_real,
-        b.saldo_deficit_mrd * 1000 / b.poblacion_m * d.factor as saldo_hab_real,
+        b.anio,
+        b.ingresos_eur_hab_real as ingresos_hab_real,
+        b.gastos_eur_hab_real as gastos_hab_real,
+        b.saldo_eur_hab_real as saldo_hab_real,
         b.saldo_deficit_pib,
-        d.anio_base
+        b.anio_base
     from {{ ref('cuentas_balance_anual') }} b
-    left join {{ ref('deflactor') }} d on cast(d.anio as integer) = cast(b."año" as integer)
-    where b.poblacion_m > 0
+    where b.poblacion > 0
 ),
 
 cuentas_balance as (
@@ -283,17 +282,17 @@ cuentas_gastos as (
             when 'Sanidad Pública' then 'Gasto público en sanidad por habitante (real)'
             when 'Educación' then 'Gasto público en educación por habitante (real)'
         end as nombre,
-        make_date(cast(g."año" as integer), 1, 1) as periodo,
-        g.gasto_por_habitante_eur * d.factor as valor,
-        '€/hab (€ de ' || d.anio_base || ')' as unidad,
+        make_date(g.anio, 1, 1) as periodo,
+        g.gasto_eur_hab_real as valor,
+        '€/hab (€ de ' || g.anio_base || ')' as unidad,
         'Eurostat' as fuente,
         'https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp' as url_fuente,
         'Cuentas públicas' as tema,
         '/cuentas-publicas/gastos/' as pagina,
         'Anual' as frecuencia
     from {{ ref('cuentas_gastos') }} g
-    join {{ ref('deflactor') }} d on cast(d.anio as integer) = cast(g."año" as integer)
-    where g.funcion_cofog in ('Protección Social y Pensiones', 'Sanidad Pública', 'Educación')
+    where g.gasto_eur_hab_real is not null
+      and g.funcion_cofog in ('Protección Social y Pensiones', 'Sanidad Pública', 'Educación')
 ),
 
 cuentas_ingresos as (
@@ -308,18 +307,16 @@ cuentas_ingresos as (
             when 'IRPF y Patrimonio' then 'IRPF y Patrimonio por habitante (real)'
             when 'IVA' then 'IVA por habitante (real)'
         end as nombre,
-        make_date(cast(i."año" as integer), 1, 1) as periodo,
-        i.millones_euros / b.poblacion_m * d.factor as valor,
-        '€/hab (€ de ' || d.anio_base || ')' as unidad,
+        make_date(i.anio, 1, 1) as periodo,
+        i.ingreso_eur_hab_real as valor,
+        '€/hab (€ de ' || i.anio_base || ')' as unidad,
         'Eurostat' as fuente,
         'https://ec.europa.eu/eurostat/databrowser/view/gov_10a_taxag' as url_fuente,
         'Cuentas públicas' as tema,
         '/cuentas-publicas/ingresos/' as pagina,
         'Anual' as frecuencia
     from {{ ref('cuentas_ingresos') }} i
-    join {{ ref('cuentas_balance_anual') }} b on cast(b."año" as integer) = cast(i."año" as integer)
-    join {{ ref('deflactor') }} d on cast(d.anio as integer) = cast(i."año" as integer)
-    where b.poblacion_m > 0
+    where i.ingreso_eur_hab_real is not null
       and i.categoria in ('Cotizaciones Sociales', 'IRPF y Patrimonio', 'IVA')
 ),
 
@@ -419,16 +416,15 @@ empleo as (
         'empleo_publico_coste_hab_real',
         'Remuneración de los empleados públicos por habitante (real)',
         make_date(c.anio, 1, 1),
-        c.eur_por_habitante * d.factor,
-        '€/hab (€ de ' || d.anio_base || ')',
+        c.eur_hab_real,
+        '€/hab (€ de ' || c.anio_base || ')',
         'Eurostat',
         'https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main',
         'Cuentas públicas',
         '/cuentas-publicas/empleo-publico/',
         'Anual'
     from {{ ref('empleo_coste') }} c
-    join deflactor_completo d on d.anio = c.anio
-    where c.cod_sector = 'S13'
+    where c.cod_sector = 'S13' and c.eur_hab_real is not null
     union all
     select
         'empleo_publico_salario_real',
@@ -443,7 +439,7 @@ empleo as (
         'Anual'
     from {{ ref('empleo_salarios_deciles') }} s
     join deflactor_completo d on d.anio = cast(s.anio as integer)
-    where s.jornada = 'Jornada a tiempo completo' and s.decil = 0
+    where s.jornada = 'Jornada a tiempo completo' and s.decil_nombre = 'Total'
     group by s.anio
 ),
 

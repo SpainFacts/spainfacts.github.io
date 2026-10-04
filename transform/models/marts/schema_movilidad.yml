@@ -17,46 +17,89 @@ models:
           - not_null
           - relationships: {to: ref('movilidad_canales'), field: canal}
   - name: movilidad_matriculaciones_provincia
-    description: "Turismos matriculados por mes, provincia, energía y nuevo/usado (DGT MATRABA)."
+    description: "Turismos matriculados por mes, provincia (con comunidad), energía, nuevo/usado y canal (DGT MATRABA); matriculaciones_por_1000_hab es aditiva y es_flota marca renting, alquiler y empresa."
     columns:
       - name: cod_prov
         tests: [not_null]
   - name: movilidad_matriculaciones_municipio
-    description: "Turismos nuevos por año y municipio, en columnas por energía (DGT MATRABA)."
+    description: "Turismos nuevos por año y municipio (con nombre, provincia, comunidad y población), en columnas por energía, con tasas por 1.000 habitantes y % por energía (DGT MATRABA)."
   - name: movilidad_marcas_mensual
-    description: "Vehículos nuevos por mes, grupo, energía, canal, marca (la del chasis en los carrozados) y grupo empresarial."
+    description: "Vehículos nuevos por mes, grupo, energía, canal (con sus etiquetas), marca (la del chasis en los carrozados) y grupo empresarial."
     columns:
       - name: grupo_empresarial
         tests: [not_null]
       - name: canal
         tests: [not_null]
   - name: movilidad_modelos_mensual
-    description: "Vehículos nuevos por mes, grupo, energía, marca y modelo (últimos 36 meses)."
+    description: "Vehículos nuevos por mes, grupo, energía, canal (con sus etiquetas), marca y modelo (últimos 36 meses)."
   - name: movilidad_parque_evolucion
-    description: "Parque de vehículos en España por mes cargado, grupo y energía."
+    description: "Parque de vehículos en España por mes cargado, grupo y energía, con vehículos por 1.000 habitantes."
   - name: movilidad_parque_provincia
     description: "Parque del último mes por provincia, grupo, energía, distintivo ambiental y antigüedad."
+    columns:
+      - name: ccaa
+        description: "Nombre de la comunidad autónoma de la provincia."
+      - name: poblacion
+        description: "Población de la provincia (último padrón); se repite en cada fila, no se suma."
+      - name: vehiculos_por_1000_hab
+        description: "Vehículos por cada 1.000 habitantes de la provincia; la suma de las filas de una provincia es su tasa total."
   - name: movilidad_parque_municipio
     description: "Turismos del último parque por municipio (solo municipios de 10.000 habitantes o más: la DGT anonimiza el resto)."
     columns:
       - name: cod_mun
         tests: [not_null, unique]
+      - name: municipio
+        description: "Nombre del municipio (último padrón)."
+      - name: poblacion
+        description: "Habitantes del municipio en el último padrón."
+      - name: turismos_por_1000_hab
+        description: "Turismos por cada 1.000 habitantes."
+      - name: enchufables_pct
+        description: "Turismos eléctricos puros e híbridos enchufables, en % (0-100) de los turismos."
+      - name: sin_distintivo_pct
+        description: "Turismos sin etiqueta ambiental, en % (0-100) de los turismos."
+      - name: mas_de_15_anios_pct
+        description: "Turismos de 15 o más años, en % (0-100) de los turismos."
   - name: movilidad_parque_modelos
-    description: "Modelos del último parque con al menos 100 unidades."
+    description: "Modelos del último parque con al menos 100 unidades; es_modelo_real = false en las filas sin modelo especificado."
   - name: movilidad_recarga_sitios
     description: "Emplazamientos de recarga pública (foto del día) con número de puntos y potencia máxima."
     columns:
       - name: sitio_id
         tests: [not_null, unique]
+      - name: municipio
+        description: "Nombre del municipio (último padrón); nulo en los pocos emplazamientos sin código."
+      - name: provincia
+        description: "Nombre de la provincia."
+      - name: cod_ccaa
+        description: "Código INE de la comunidad autónoma."
+      - name: ccaa
+        description: "Nombre de la comunidad autónoma."
   - name: movilidad_recarga_provincia
     description: "Puntos de recarga públicos por provincia frente a turismos enchufables y población."
     columns:
       - name: cod_prov
         tests: [not_null, unique]
   - name: movilidad_recarga_evolucion
-    description: "Puntos de recarga públicos en España por día y tramo de potencia."
+    description: "Puntos de recarga públicos en España por día y tramo de potencia (mismo texto de tramo que movilidad_recarga_sitios)."
+    columns:
+      - name: anio
+        description: "Año de la fecha."
+      - name: tramo_orden
+        description: "1 ultrarrápida, 2 rápida, 3 semirrápida, 4 lenta."
   - name: movilidad_transporte_modos
-    description: "Viajeros de transporte público en España por mes y modo (INE 20239)."
+    description: "Viajeros de transporte público en España por mes y modo (INE 20239). Los modos se solapan: cada uno está dentro de su clave_padre."
+    columns:
+      - name: clave_padre
+        description: "Clave del modo que contiene a este (nulo en el total). La suma de los hijos es el padre."
+      - name: es_hoja
+        description: "Verdadero si el modo no se desglosa en otros: sumar solo hojas no duplica."
+      - name: anio
+        description: "Año del mes."
+      - name: poblacion
+        description: "Población de España (padrón del año; el último disponible para años posteriores). Nula en 1997."
+      - name: viajeros_por_1000_hab
+        description: "Viajeros del mes por cada 1.000 habitantes."
   - name: movilidad_transporte_ciudades
     description: "Viajeros de metro y autobús urbano por ciudad (INE 20193)."
   - name: movilidad_parque_resumen

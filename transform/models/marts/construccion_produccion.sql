@@ -6,20 +6,21 @@
 --   indice_2021: índice publicado, 2021 = 100.
 --   indice_2007: el mismo índice rebasado a 2007 = 100 (máximo de la burbuja en España).
 --   var_anual_pct: variación sobre el año anterior.
+--   cod_pais / pais: seed paises_iso (ISO 3166-1 alfa-2, p. ej. GR y no el EL de Eurostat; EU27_2020 la UE-27).
 --   nota: España F y F43 de 2025 saltan +26 % y +32 % sobre 2024 en el dato de Eurostat (que viene
 --     del índice de producción de la industria de la construcción del INE); hay que tratar ese
 --     salto con cautela (posible ruptura de serie): F41 y F42 no lo muestran.
 with base as (
-    select cast(anio as integer) as anio, pais, rama, indice as indice_2021
+    select cast(anio as integer) as anio, pais as pais_eurostat, rama, indice as indice_2021
     from {{ source('raw_construccion', 'eurostat_construccion_produccion') }}
     where indice is not null
 )
 
 select
     b.anio,
-    b.pais,
-    n.pais_nombre,
-    b.pais in ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE') as es_referencia,
+    coalesce(n.cod_pais, b.pais_eurostat) as cod_pais,
+    coalesce(n.pais, b.pais_eurostat) as pais,
+    coalesce(n.cod_pais, b.pais_eurostat) in ('ES', 'EU27_2020', 'DE', 'FR', 'IT', 'PT', 'IE') as es_referencia,
     b.rama,
     case b.rama
         when 'F' then 'Construcción (total)'
@@ -29,11 +30,11 @@ select
     end as rama_nombre,
     b.indice_2021,
     100.0 * b.indice_2021
-        / nullif(max(case when b.anio = 2007 then b.indice_2021 end) over (partition by b.pais, b.rama), 0)
+        / nullif(max(case when b.anio = 2007 then b.indice_2021 end) over (partition by b.pais_eurostat, b.rama), 0)
         as indice_2007,
-    100.0 * (b.indice_2021 / nullif(lag(b.indice_2021) over (partition by b.pais, b.rama order by b.anio), 0) - 1)
+    100.0 * (b.indice_2021 / nullif(lag(b.indice_2021) over (partition by b.pais_eurostat, b.rama order by b.anio), 0) - 1)
         as var_anual_pct,
-    case when b.pais = 'ES' and b.anio >= 2025 and b.rama in ('F', 'F43')
+    case when n.cod_pais = 'ES' and b.anio >= 2025 and b.rama in ('F', 'F43')
         then 'Salto atípico en 2025 (posible ruptura de serie): usar con cautela' end as nota
 from base b
-left join {{ ref('industria_paises') }} n using (pais)
+left join {{ ref('paises_iso') }} n on n.eurostat = b.pais_eurostat

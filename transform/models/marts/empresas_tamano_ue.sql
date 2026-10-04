@@ -33,25 +33,27 @@ agregado as (
     group by all
 )
 
+-- vab_meur_real y vab_eur_hab_real: valor añadido en euros constantes de anio_euros (IPCA de
+-- cada país, deflactor_paises) y por habitante (población media, poblacion_paises).
 select
-    cast(a.geo as varchar) as geo,
-    case a.geo
-        when 'EU27_2020' then 'UE-27' when 'ES' then 'España' when 'DE' then 'Alemania'
-        when 'FR' then 'Francia' when 'IT' then 'Italia' when 'PT' then 'Portugal'
-        when 'NL' then 'Países Bajos' when 'PL' then 'Polonia' when 'SE' then 'Suecia'
-        when 'AT' then 'Austria' when 'BE' then 'Bélgica'
-    end as pais,
+    p.cod_pais,
+    p.pais,
     a.anio,
     a.tamano,
     case a.tamano when 'Micro (0-9)' then 1 when 'Pequeñas (10-49)' then 2
         when 'Medianas (50-249)' then 3 else 4 end as orden,
     a.empresas,
     a.ocupados,
-    a.vab_meur,
+    a.vab_meur * d.factor as vab_meur_real,
+    a.vab_meur * d.factor * 1e6 / pb.poblacion as vab_eur_hab_real,
+    d.anio_base as anio_euros,
     100.0 * a.empresas / t.empresas as pct_empresas,
     100.0 * a.ocupados / t.ocupados as pct_empleo,
     100.0 * a.vab_meur / t.vab_meur as pct_vab
 from agregado a
 join agregado t on t.geo = a.geo and t.anio = a.anio and t.tamano = 'Total'
+join {{ ref('paises_iso') }} p on p.eurostat = a.geo
+left join {{ ref('deflactor_paises') }} d on d.cod_pais = p.cod_pais and d.anio = a.anio
+left join {{ ref('poblacion_paises') }} pb on pb.cod_pais = p.cod_pais and pb.anio = a.anio
 where a.tamano <> 'Total'
 order by a.geo, a.anio, orden

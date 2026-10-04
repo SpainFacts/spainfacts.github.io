@@ -22,11 +22,11 @@ models:
     description: >
       Índice de producción en la construcción (Eurostat sts_copr_a, 2021 = 100, corregido de calendario)
       por país, rama (F, F41 edificación, F42 ingeniería civil, F43 especializada) y año, también
-      rebasado a 2007 = 100. nota avisa del salto atípico de España en 2025 (F y F43).
+      rebasado a 2007 = 100. nota avisa del salto atípico de España en 2025 (F y F43). cod_pais (ISO) y pais.
     tests:
       - unique:
           arguments:
-            column_name: "pais || '|' || rama || '|' || anio"
+            column_name: "cod_pais || '|' || rama || '|' || anio"
 
   - name: construccion_cemento
     description: >
@@ -39,14 +39,25 @@ models:
 
   - name: construccion_permisos
     description: >
-      Permisos y visados de obra por habitante. ambito 'UE': viviendas y m² con permiso por país
-      (Eurostat sts_cobp_a, desde 2005); 'CCAA': viviendas visadas de obra nueva, ampliación y reforma
-      por comunidad (Ministerio de Transportes vía ISTAC, desde 2000); 'ES_LARGA': viviendas visadas
-      de obra nueva y m² en España desde 1992 (Banco de España 23.8).
+      Visados de obra por habitante: viviendas de obra nueva, ampliación y reforma por comunidad
+      (nivel ccaa, Ministerio de Transportes vía ISTAC, desde 2000) y para España (nivel pais; desde
+      2000 el mismo dato del Ministerio, y 1992-1999 el Banco de España 23.8, que también da los m²).
+      España aparece una sola vez por año. Los permisos de la UE (otra fuente) están en
+      construccion_permisos_ue.
     tests:
       - unique:
           arguments:
-            column_name: "ambito || '|' || cod || '|' || anio"
+            column_name: "nivel || '|' || cod || '|' || anio"
+
+  - name: construccion_permisos_ue
+    description: >
+      Permisos de construcción por habitante en los países de la UE y la UE-27 (Eurostat sts_cobp_a,
+      desde 2005): viviendas y m² con permiso, con cod_pais (ISO) y pais. No comparable con los
+      visados de construccion_permisos.
+    tests:
+      - unique:
+          arguments:
+            column_name: "cod_pais || '|' || anio"
 
   - name: construccion_licitacion
     description: >
@@ -83,11 +94,11 @@ models:
     description: >
       Índices de costes de construcción y de precios de producción de la vivienda nueva por país (Eurostat
       sts_copi_a, 2021 = 100); para España, también el coste descontada la inflación general. España
-      publica la misma serie en costes y en precios.
+      publica la misma serie en costes y en precios. cod_pais (ISO) y pais.
     tests:
       - unique:
           arguments:
-            column_name: "pais || '|' || anio"
+            column_name: "cod_pais || '|' || anio"
 
   - name: construccion_ccaa
     description: >

@@ -332,7 +332,7 @@ carburantes as (
         case producto when 'Gasolina 95' then 'economia_gasolina95_real' else 'economia_gasoleo_real' end as metrica_id,
         case producto when 'Gasolina 95' then 'Precio de la gasolina 95 con impuestos (real)'
                       else 'Precio del gasóleo de automoción con impuestos (real)' end as nombre,
-        semana as periodo,
+        fecha as periodo,
         eur_litro_real as valor,
         '€/l (' || (select txt from eur) || ')' as unidad,
         'Comisión Europea' as fuente,
@@ -340,14 +340,14 @@ carburantes as (
         '/economia/ipc/' as pagina,
         'Semanal' as frecuencia
     from {{ ref('mercado_energia_carburantes') }}
-    where territorio = 'España' and producto in ('Gasolina 95', 'Gasóleo de automoción')
+    where cod_pais = 'ES' and producto in ('Gasolina 95', 'Gasóleo de automoción')
 ),
 
 luz_hogares as (
     select
         'economia_luz_hogares_real' as metrica_id,
         'Precio de la luz para los hogares con impuestos (real)' as nombre,
-        semestre_inicio as periodo,
+        fecha as periodo,
         eur_kwh_real as valor,
         '€/kWh (' || (select txt from eur) || ')' as unidad,
         'Eurostat' as fuente,
@@ -414,7 +414,7 @@ autonomos as (
         '/economia/empresas/' as pagina,
         'Trimestral' as frecuencia
     from {{ ref('empresas_autonomos') }}
-    where cod = '00' and trimestre > 0
+    where cod = '00'
 ),
 
 concursos as (

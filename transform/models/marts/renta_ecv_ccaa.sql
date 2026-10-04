@@ -75,6 +75,7 @@ select
     cast(k.anio - 1 as integer) as anio_renta,
     cast(n.cod_ccaa as varchar) as cod,
     case when n.cod_ccaa = '00' then 'pais' else 'ccaa' end as nivel,
+    t.nombre,
     r.renta_persona,
     r.renta_uc,
     h.renta_hogar,
@@ -99,3 +100,5 @@ left join arope a on a.anio = k.anio and a.territorio = k.territorio
 left join fin_mes f on f.anio = k.anio and f.territorio = k.territorio
 left join gini g on g.anio = k.anio and g.territorio = k.territorio
 left join {{ ref('deflactor') }} d on d.anio = k.anio - 1
+left join {{ ref('territorios') }} t
+  on t.cod = n.cod_ccaa and t.nivel = case when n.cod_ccaa = '00' then 'pais' else 'ccaa' end

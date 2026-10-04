@@ -1,7 +1,7 @@
 ---
 title: Camions i autobusos
 description: "Camions i autobusos a Espanya: matriculacions per tipus de motor des del 2015, avenç de l'autobús elèctric, marques i grups més venuts i antiguitat dels que circulen."
-i18n_origen: 4190a8292d58
+i18n_origen: f423a33aa6c8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -163,7 +163,7 @@ Els camions i autobusos són pocs al costat dels cotxes, però recorren molts m�
 WITH ult AS (SELECT max(mes) AS mes FROM mother.movilidad_marcas_mensual)
 SELECT
     m.grupo,
-    CASE m.grupo WHEN 'camion' THEN 'Camiones' ELSE 'Autobuses' END AS vehiculo,
+    m.grupo_etiqueta AS vehiculo,
     m.grupo_empresarial,
     m.marca,
     sum(m.matriculaciones) AS unidades

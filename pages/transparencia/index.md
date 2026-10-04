@@ -31,7 +31,7 @@ SELECT * FROM ${actos} ORDER BY anio DESC LIMIT 1
 ```sql cpi
 SELECT anio, valor, puesto_ue, n_ue
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'cpi' AND cod_pais = 'ESP'
+WHERE indicador_id = 'cpi' AND cod_pais = 'ES'
 ORDER BY anio
 ```
 

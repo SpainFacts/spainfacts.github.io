@@ -30,10 +30,11 @@ base as (
 )
 
 select
-    make_date(cast(left(p.semestre, 4) as integer), case when right(p.semestre, 1) = '1' then 1 else 7 end, 1) as semestre_inicio,
+    make_date(cast(left(p.semestre, 4) as integer), case when right(p.semestre, 1) = '1' then 1 else 7 end, 1) as fecha,
+    cast(left(p.semestre, 4) as integer) as anio,
     p.semestre,
     p.energia,
-    p.geo,
+    p.geo as cod_pais,
     case p.geo
         when 'ES' then 'España'
         when 'EU27_2020' then 'UE-27'

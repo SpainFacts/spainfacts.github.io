@@ -199,8 +199,9 @@ select
     c.nombre,
     c.nivel,
     c.cod_ccaa,
-    nc.nombre as comunidad,
+    nc.nombre as ccaa,
     c.cod_prov,
+    pr.nombre as provincia,
     c.cod_mun,
     mu.municipio,
     c.metodo_ubicacion,
@@ -219,5 +220,6 @@ select
 from con_municipio c
 left join atribucion a using (nombre)
 left join (select distinct cod, nombre from {{ ref('territorios') }} where nivel = 'ccaa') nc on nc.cod = c.cod_ccaa
+left join (select distinct cod, nombre from {{ ref('territorios') }} where nivel = 'provincia') pr on pr.cod = c.cod_prov
 left join municipios mu on mu.cod_mun = c.cod_mun
 left join colores col on col.familia = a.partido

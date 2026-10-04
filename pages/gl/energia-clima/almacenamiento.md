@@ -1,5 +1,5 @@
 ---
-i18n_origen: 664df261ab3d
+i18n_origen: af0dd2e402bd
 title: Almacenamento de electricidade
 description: "Bombeo hidráulico e baterías en España: canta enerxía almacenan e devolven, potencia instalada por comunidade, rendemento e proxectos con permiso de acceso á rede fronte ao obxectivo de 22,5 GW do PNIEC para 2030."
 og:
@@ -13,33 +13,33 @@ og:
 
 ```sql potencia_ultima
 SELECT
-    strftime(max(mes), '%m/%Y') AS mes_texto,
+    strftime(max(fecha), '%m/%Y') AS mes_texto,
     sum(mw) FILTER (WHERE tipo = 'bombeo_puro') AS bombeo_mw,
     sum(mw) FILTER (WHERE tipo = 'baterias_hibridadas') AS baterias_mw
 FROM mother.almacenamiento_potencia
-WHERE mes = (SELECT max(mes) FROM mother.almacenamiento_potencia)
+WHERE es_ultimo
 ```
 
 ```sql baterias_serie
-SELECT mes, sum(mw) AS valor
+SELECT fecha AS mes, sum(mw) AS valor
 FROM mother.almacenamiento_potencia
 WHERE tipo = 'baterias_hibridadas'
-GROUP BY mes
-ORDER BY mes ASC
+GROUP BY fecha
+ORDER BY fecha ASC
 ```
 
 ```sql acceso_total
 SELECT
-    strftime(max(fecha_fichero), '%d/%m/%Y') AS fecha_texto,
+    strftime(max(fecha), '%d/%m/%Y') AS fecha_texto,
     sum(otorgada_mw) AS otorgada_mw,
     sum(en_tramitacion_mw) AS en_tramitacion_mw
 FROM mother.almacenamiento_acceso
-WHERE fecha_fichero = (SELECT max(fecha_fichero) FROM mother.almacenamiento_acceso)
+WHERE es_ultimo
 ```
 
 ```sql anual
 SELECT
-    CAST(year(mes) AS INTEGER) AS anio,
+    anio,
     count(*) AS meses,
     sum(bombeo_turbinado_gwh) AS bombeo_turbinado_gwh,
     sum(bombeo_consumido_gwh) AS bombeo_consumido_gwh,
@@ -121,9 +121,9 @@ ORDER BY anio
 <p class="text-xs text-gray-500">O último ano está incompleto. O almacenamento é un consumidor neto: por cada 100 kWh que se usan para bombear auga recupéranse uns {formatNumber(100 * ultimo_anio[0]?.rendimiento, 0)} ({ultimo_anio[0]?.anio}). Compensa porque se bombea cando a electricidade sobra e é barata (ao mediodía, coa solar) e se turbina cando escasea e é cara. A enerxía turbinada máis que se duplicou desde 2021 (de 2,6 a 5,9 TWh en 2025): hai cada vez máis horas de excedente solar que aproveitar.</p>
 
 ```sql mensual
-SELECT mes, bombeo_turbinado_gwh, bombeo_consumido_gwh
+SELECT fecha AS mes, bombeo_turbinado_gwh, bombeo_consumido_gwh
 FROM mother.almacenamiento_mensual
-ORDER BY mes
+ORDER BY fecha
 ```
 
 <LineChart
@@ -142,18 +142,18 @@ ORDER BY mes
 ## Baterías
 
 ```sql baterias_mensual
-SELECT mes, baterias_entregado_gwh * 1000 AS entregado_mwh, baterias_cargado_gwh * 1000 AS cargado_mwh
+SELECT fecha AS mes, baterias_entregado_gwh * 1000 AS entregado_mwh, baterias_cargado_gwh * 1000 AS cargado_mwh
 FROM mother.almacenamiento_mensual
 WHERE baterias_entregado_gwh IS NOT NULL OR baterias_cargado_gwh IS NOT NULL
-ORDER BY mes
+ORDER BY fecha
 ```
 
 ```sql baterias_potencia
-SELECT mes, sum(mw) AS mw
+SELECT fecha AS mes, sum(mw) AS mw
 FROM mother.almacenamiento_potencia
 WHERE tipo = 'baterias_hibridadas'
-GROUP BY mes
-ORDER BY mes
+GROUP BY fecha
+ORDER BY fecha
 ```
 
 <Grid cols=2>
@@ -224,18 +224,18 @@ FROM mother.almacenamiento_diario
 ```sql potencia_ccaa
 SELECT
     p.cod_ccaa,
-    p.comunidad,
+    p.ccaa,
     sum(p.mw) FILTER (WHERE p.tipo = 'bombeo_puro') AS bombeo_mw,
     sum(p.mw) FILTER (WHERE p.tipo = 'baterias_hibridadas') AS baterias_mw
 FROM mother.almacenamiento_potencia p
-WHERE p.mes = (SELECT max(mes) FROM mother.almacenamiento_potencia)
+WHERE p.es_ultimo
 GROUP BY ALL
 ```
 
 ```sql acceso_ccaa
 SELECT
     a.cod_ccaa,
-    a.comunidad,
+    a.ccaa,
     a.otorgada_mw,
     a.en_tramitacion_mw,
     a.nudos,
@@ -243,20 +243,20 @@ SELECT
     coalesce(p.baterias_mw, 0) AS baterias_mw
 FROM mother.almacenamiento_acceso a
 LEFT JOIN ${potencia_ccaa} p ON p.cod_ccaa = a.cod_ccaa
-WHERE a.fecha_fichero = (SELECT max(fecha_fichero) FROM mother.almacenamiento_acceso)
+WHERE a.es_ultimo
   AND (a.otorgada_mw > 0 OR a.en_tramitacion_mw > 0 OR p.bombeo_mw > 0)
 ORDER BY a.otorgada_mw DESC
 ```
 
 ```sql acceso_grafico
-SELECT comunidad, 'Con permiso de acceso' AS estado, otorgada_mw / 1000 AS gw FROM ${acceso_ccaa}
+SELECT ccaa, 'Con permiso de acceso' AS estado, otorgada_mw / 1000 AS gw FROM ${acceso_ccaa}
 UNION ALL
-SELECT comunidad, 'En tramitación', en_tramitacion_mw / 1000 FROM ${acceso_ccaa}
+SELECT ccaa, 'En tramitación', en_tramitacion_mw / 1000 FROM ${acceso_ccaa}
 ```
 
 <BarChart
     data={acceso_grafico}
-    x=comunidad
+    x=ccaa
     y=gw
     series=estado
     swapXY=true
@@ -266,7 +266,7 @@ SELECT comunidad, 'En tramitación', en_tramitacion_mw / 1000 FROM ${acceso_ccaa
 />
 
 <DataTable data={acceso_ccaa} rows=all>
-    <Column id=comunidad title="Comunidade" />
+    <Column id=ccaa title="Comunidade" />
     <Column id=bombeo_mw title="Bombeo puro instalado (MW)" fmt=num0 />
     <Column id=baterias_mw title="Baterías hibridadas (MW)" fmt=num0 />
     <Column id=otorgada_mw title="Acceso concedido (MW)" fmt=num0 contentType=bar barColor="#99f6e4" />

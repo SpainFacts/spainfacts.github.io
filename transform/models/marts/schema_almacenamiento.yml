@@ -4,7 +4,7 @@ models:
   - name: almacenamiento_mensual
     description: "Energía turbinada/consumida por bombeo y entregada/cargada por baterías cada mes (balance REE, GWh)."
     columns:
-      - name: mes
+      - name: fecha
         tests: [not_null, unique]
   - name: almacenamiento_diario
     description: "Energía y picos diarios de bombeo y baterías (ESIOS, desde finales de 2024)."

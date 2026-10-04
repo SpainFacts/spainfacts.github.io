@@ -25,17 +25,33 @@ models:
   - name: sanidad_listas_especialidad
     description: "Listas de espera del SNS por especialidad (SISLE-SNS): 14 especialidades quirúrgicas y 10 de consultas externas, total nacional, desde diciembre de 2013."
   - name: sanidad_recursos
-    description: "Médicos y enfermeras (Eurostat hlth_rs_prs2, ejerciendo o, en su defecto, profesionalmente activos) y camas hospitalarias (hlth_rs_bds1) por 100.000 y por 1.000 habitantes, países de la UE-27 y media UE ponderada por población de los países con dato ('UE')."
+    description: "Médicos y enfermeras (Eurostat hlth_rs_prs2, ejerciendo o, en su defecto, profesionalmente activos) y camas hospitalarias (hlth_rs_bds1) por 1.000 habitantes, países de la UE-27 y media UE ponderada por población de los países con dato (cod_pais 'EU27_2020')."
     columns:
       - name: recurso
         description: "'medicos', 'enfermeras' o 'camas'"
+      - name: cod_pais
+        description: "ISO 3166-1 alfa-2 (EU27_2020 para la media UE-27)"
+      - name: nivel
+        description: "'pais' o 'agregado' (media UE ponderada por población)"
       - name: situacion
-        description: "PRACT (ejercen), PACT (profesionalmente activos), 'total' (camas) o 'mixta' (media UE)"
+        description: "'ejerciendo', 'activo' (profesionalmente activos, si el país no informa de los que ejercen), 'total' (camas) o 'mixta' (media UE)"
       - name: n_paises
-        description: "Solo geo 'UE': número de países que entran en la media"
+        description: "Solo en la media UE (nivel 'agregado'): número de países que entran en la media"
   - name: sanidad_recursos_ccaa
     description: "Médicos (Eurostat hlth_rs_physreg) y camas hospitalarias (hlth_rs_bdsrg2) por 100.000 y por 1.000 habitantes por comunidad autónoma (NUTS 2 -> código INE) y total España ('00')."
   - name: sanidad_gasto
-    description: "Gasto sanitario corriente por fuente de financiación (Eurostat hlth_sha11_hf): total, público, seguros voluntarios y pago directo de los hogares, en % del PIB, euros por habitante (y constantes para España), PPS por habitante y millones de euros; España, UE-27 y países."
+    description: "Gasto sanitario corriente por fuente de financiación (Eurostat hlth_sha11_hf): total, público, seguros voluntarios y pago directo de los hogares, en % del PIB, euros por habitante y constantes (IPCA de cada país), PPS por habitante y millones de euros corrientes y constantes; España, UE-27 y países."
+    columns:
+      - name: cod_pais
+        description: "Código ISO 3166-1 alfa-2 del país (Grecia = GR); EU27_2020 para la UE-27"
+      - name: es_agregado
+        description: "Verdadero solo para la fila de la UE-27"
+      - name: eur_hab_real
+        description: "eur_hab en euros constantes de anio_base con el IPCA del país (deflactor_paises)"
+      - name: millones_eur_real
+        description: "millones_eur en euros constantes de anio_base con el IPCA del país"
   - name: sanidad_gasto_ccaa
     description: "Gasto sanitario público consolidado del sector Comunidades Autónomas por comunidad (Ministerio de Sanidad, EGSP, anexos I.1 y I.2): euros por habitante corrientes y constantes y % del PIB regional, 2002-último año (los dos últimos, provisionales)."
+    columns:
+      - name: nombre
+        description: "Nombre de la comunidad; 'Total comunidades autónomas' para cod 00 (nivel total_ccaa, no es España)"

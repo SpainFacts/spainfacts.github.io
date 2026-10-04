@@ -69,20 +69,20 @@ FROM mother.clima_electricidad_anual
 
 ```sql mix_completo
 SELECT
-    año,
+    anio,
     tecnologia,
     tipo_fuente,
     generacion_twh,
-    porcentaje_total
+    cuota_pct
 FROM mother.energia_mix_electrico
-ORDER BY año ASC, tecnologia ASC
+ORDER BY anio ASC, tecnologia ASC
 ```
 
 ```sql mix_pct
 SELECT
-    CAST(año AS INTEGER) AS anio,
+    CAST(anio AS INTEGER) AS anio,
     tecnologia,
-    porcentaje_total,
+    cuota_pct,
     generacion_twh
 FROM mother.energia_mix_electrico
 ORDER BY anio, tecnologia
@@ -154,7 +154,7 @@ La renovable superó por primera vez la mitad de la generación en {hitos_renov[
 <AreaChart
     data={mix_pct}
     x=anio
-    y=porcentaje_total
+    y=cuota_pct
     series=tecnologia
     type=stacked
     xFmt='0'
@@ -268,19 +268,19 @@ Demanda nacional en barras de central dividida por la población media del año.
 
 ```sql mix_ultimo
 SELECT
-    año,
+    anio,
     tecnologia,
     generacion_twh,
-    porcentaje_total / 100.0 AS porcentaje_total
+    cuota_pct / 100.0 AS cuota_pct
 FROM mother.energia_mix_electrico
-WHERE año = (SELECT max(año) FROM mother.energia_mix_electrico)
+WHERE anio = (SELECT max(anio) FROM mother.energia_mix_electrico)
 ORDER BY generacion_twh DESC
 ```
 
 <BarChart
     data={mix_ultimo}
     x=tecnologia
-    y=porcentaje_total
+    y=cuota_pct
     yFmt='0.0%'
     yAxisTitle="% de la generación"
     title="Generación por tecnología en {elec_kpi[0]?.anio}"
@@ -290,36 +290,36 @@ ORDER BY generacion_twh DESC
 
 <DataTable data={mix_ultimo} search=false>
     <Column id=tecnologia title="Tecnología" />
-    <Column id=porcentaje_total title="% del total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
+    <Column id=cuota_pct title="% del total" fmt="pct1" contentType=colorscale colorScale={['#dbeafe', '#1d4ed8']} />
     <Column id=generacion_twh title="Generación (TWh)" fmt="num1" />
 </DataTable>
 
 ## Potencia instalada por tecnología
 
-La capacidad instalada refleja las decisiones de inversión. La solar FV ha pasado de {formatNumber(solar_hitos[0]?.potencia_mw, 0)} MW en {solar_hitos[0]?.año} a **{formatNumber(solar_hitos[1]?.potencia_mw, 0)} MW** en {solar_hitos[1]?.año}, multiplicándose por {formatNumber(solar_hitos[1]?.potencia_mw / solar_hitos[0]?.potencia_mw, 1)}.
+La capacidad instalada refleja las decisiones de inversión. La solar FV ha pasado de {formatNumber(solar_hitos[0]?.potencia_mw, 0)} MW en {solar_hitos[0]?.anio} a **{formatNumber(solar_hitos[1]?.potencia_mw, 0)} MW** en {solar_hitos[1]?.anio}, multiplicándose por {formatNumber(solar_hitos[1]?.potencia_mw / solar_hitos[0]?.potencia_mw, 1)}.
 
 ```sql solar_hitos
-SELECT CAST(año AS INTEGER) AS año, potencia_mw
+SELECT CAST(anio AS INTEGER) AS anio, potencia_mw
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Solar Fotovoltaica'
-  AND año IN ((SELECT min(año) FROM mother.energia_potencia_instalada), (SELECT max(año) FROM mother.energia_potencia_instalada))
-ORDER BY año ASC
+  AND anio IN ((SELECT min(anio) FROM mother.energia_potencia_instalada), (SELECT max(anio) FROM mother.energia_potencia_instalada))
+ORDER BY anio ASC
 ```
 
 ```sql potencia
 SELECT
-    año,
+    anio,
     tecnologia,
     potencia_mw,
     tipo,
     fuente
 FROM mother.energia_potencia_instalada
-ORDER BY año ASC, potencia_mw DESC
+ORDER BY anio ASC, potencia_mw DESC
 ```
 
 <BarChart
     data={potencia}
-    x=año
+    x=anio
     y=potencia_mw
     series=tecnologia
     type=grouped

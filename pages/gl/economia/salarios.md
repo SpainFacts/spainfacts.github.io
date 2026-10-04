@@ -1,5 +1,5 @@
 ---
-i18n_origen: a16ce5b323ef
+i18n_origen: fba9f04f2b64
 title: Salarios
 description: "Salario medio en España descontada a inflación, o seu crecemento real e nominal, por sector e xornada, e a distribución por decís."
 og:
@@ -79,13 +79,12 @@ FROM ${anual}
 SELECT
     d.anio,
     d.decil,
-    'D' || d.decil AS nombre_decil,
+    d.decil_nombre AS nombre_decil,
     d.salario_mensual,
-    d.salario_mensual * f.factor AS salario_real,
-    f.anio_base
+    d.salario_mensual_real AS salario_real,
+    d.anio_euros AS anio_base
 FROM mother.empleo_salarios_deciles d
-JOIN mother.deflactor f ON f.anio = d.anio
-WHERE d.jornada = 'Total' AND d.sector = 'Total' AND d.decil > 0
+WHERE d.jornada = 'Total' AND d.sector = 'Total' AND d.decil IS NOT NULL
 ORDER BY d.anio, d.decil
 ```
 

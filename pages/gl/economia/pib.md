@@ -1,5 +1,5 @@
 ---
-i18n_origen: 7ab507e83338
+i18n_origen: 0a70463d9329
 title: PIB e crecemento
 description: "Evolución do PIB de España por habitante e descontada a inflación, crecemento trimestral, compoñentes da demanda e comparación coa UE."
 og:
@@ -20,7 +20,7 @@ SELECT
     por_habitante_real AS valor,
     real_meur,
     nominal_meur,
-    anio_euros
+    anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente = 'B1GQ'
 ORDER BY trimestre
@@ -74,14 +74,14 @@ ORDER BY indice_ue DESC
 
 # 📈 PIB e crecemento
 
-O produto interior bruto mide todo o que produce a economía. Para ver se o país se enriquece de verdade, aquí móstrase **por habitante** (se non, medra só con sumar poboación) e **descontada a inflación**, en euros de {pib_trim[0]?.anio_euros}.
+O produto interior bruto mide todo o que produce a economía. Para ver se o país se enriquece de verdade, aquí móstrase **por habitante** (se non, medra só con sumar poboación) e **descontada a inflación**, en euros de {pib_trim[0]?.anio_base}.
 
 <Grid cols=4>
     <KpiCard
         title="PIB por habitante"
         value={pib_hab.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(pib_hab.slice(-1)[0]?.valor, 0)} €"
-        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_euros}"
+        period="en {pib_hab.slice(-1)[0]?.anio}, en euros de {pib_trim[0]?.anio_base}"
         change={pib_hab.slice(-1)[0]?.crecimiento?.toFixed(1)}
         changePeriod="real vs. ano anterior"
         direction="positive-up"
@@ -125,7 +125,7 @@ WHERE indicador_id IN ('pib_pc_ppa', 'crecimiento_pib')
 
 ## PIB por habitante desde 1995
 
-En euros constantes de {pib_trim[0]?.anio_euros}. A crise de 2008 recortou o PIB por habitante un {formatNumber(-hitos[0]?.caida_crisis, 1)} % ata 2013; a pandemia afundiuno en 2020 e en {hitos[0]?.anio_ult} está un {formatNumber(hitos[0]?.vs2007, 1)} % por riba do máximo de 2007.
+En euros constantes de {pib_trim[0]?.anio_base}. A crise de 2008 recortou o PIB por habitante un {formatNumber(-hitos[0]?.caida_crisis, 1)} % ata 2013; a pandemia afundiuno en 2020 e en {hitos[0]?.anio_ult} está un {formatNumber(hitos[0]?.vs2007, 1)} % por riba do máximo de 2007.
 
 <LineChart
     data={pib_hab}
@@ -135,7 +135,7 @@ En euros constantes de {pib_trim[0]?.anio_euros}. A crise de 2008 recortou o PIB
     yFmt='#,##0" €"'
     xFmt='0'
     startingAtZero={false}
-    title="PIB por habitante en euros de {pib_trim[0]?.anio_euros}"
+    title="PIB por habitante en euros de {pib_trim[0]?.anio_base}"
 />
 
 ## Crecemento trimestral
@@ -162,7 +162,7 @@ Consumo dos fogares, consumo público e investimento por habitante, en euros con
     series=nombre
     yAxisTitle="€ por habitante (reais)"
     yFmt='#,##0" €"'
-    title="Demanda por habitante, euros de {pib_trim[0]?.anio_euros} a ritmo anual"
+    title="Demanda por habitante, euros de {pib_trim[0]?.anio_base} a ritmo anual"
 />
 
 ## Comparación con Europa
@@ -187,4 +187,4 @@ PIB por habitante en paridade de poder de compra, que corrixe que os prezos non 
 
 ---
 
-**Fontes:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (contabilidade nacional trimestral, desestacionalizada) e [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (PIB por habitante). Os volumes encadeados reexprésanse en euros de {pib_trim[0]?.anio_euros}; a poboación é a media anual de Eurostat.
+**Fontes:** [Eurostat, namq_10_gdp](https://ec.europa.eu/eurostat/databrowser/view/namq_10_gdp/default/table) (contabilidade nacional trimestral, desestacionalizada) e [nama_10_pc](https://ec.europa.eu/eurostat/databrowser/view/nama_10_pc/default/table) (PIB por habitante). Os volumes encadeados reexprésanse en euros de {pib_trim[0]?.anio_base}; a poboación é a media anual de Eurostat.

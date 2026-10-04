@@ -1,5 +1,5 @@
 ---
-i18n_origen: 698c69005fd6
+i18n_origen: 44513b3048e6
 title: Enerxía e Clima
 description: Transición ecolóxica, mix de xeración eléctrica e emisións de gases de efecto invernadoiro en España.
 og:
@@ -17,53 +17,53 @@ España situouse como un dos líderes europeos no despregamento de enerxías ren
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
-ORDER BY año DESC
+ORDER BY anio DESC
 LIMIT 1
 ```
 
 ```sql resumen_previo
 SELECT * FROM mother.energia_resumen_anual_mix
-ORDER BY año DESC
+ORDER BY anio DESC
 LIMIT 2
 ```
 
 ```sql resumen_serie
-SELECT año, cuota_renovable_pct AS valor
+SELECT anio, cuota_renovable_pct AS valor
 FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
+ORDER BY anio ASC
 ```
 
 ```sql emisiones_totales
 SELECT
-    año,
+    anio,
     sum(millones_toneladas_co2eq) AS total_emisiones
 FROM mother.energia_emisiones_gei
-GROUP BY año
-ORDER BY año DESC
+GROUP BY anio
+ORDER BY anio DESC
 ```
 
 ```sql potencia_solar
-SELECT potencia_mw, año
+SELECT potencia_mw, anio
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Solar Fotovoltaica'
-  AND año = (SELECT max(año) FROM mother.energia_potencia_instalada)
+  AND anio = (SELECT max(anio) FROM mother.energia_potencia_instalada)
 ```
 
 ```sql potencia_eolica
-SELECT potencia_mw, año
+SELECT potencia_mw, anio
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Eólica'
-  AND año = (SELECT max(año) FROM mother.energia_potencia_instalada)
+  AND anio = (SELECT max(anio) FROM mother.energia_potencia_instalada)
 ```
 
 ```sql potencia_serie
 SELECT
-    año,
+    anio,
     sum(potencia_mw) FILTER (WHERE tecnologia = 'Solar Fotovoltaica') AS solar_mw,
     sum(potencia_mw) FILTER (WHERE tecnologia = 'Eólica') AS eolica_mw
 FROM mother.energia_potencia_instalada
-GROUP BY año
-ORDER BY año ASC
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
 <Grid cols=4>
@@ -71,7 +71,7 @@ ORDER BY año ASC
         title="Cota renovable"
         value={resumen_ultimo[0]?.cuota_renovable_pct}
         unit="%"
-        period={resumen_ultimo[0]?.año}
+        period={resumen_ultimo[0]?.anio}
         change={resumen_previo.length > 1 ? (resumen_previo[0].cuota_renovable_pct - resumen_previo[1].cuota_renovable_pct).toFixed(1) : null}
         changeUnit="pp"
         changePeriod="vs. ano ant."
@@ -88,7 +88,7 @@ ORDER BY año ASC
         changeUnit=" Mt"
         changePeriod="vs. ano ant."
         direction="positive-down"
-        period={emisiones_totales[0]?.año}
+        period={emisiones_totales[0]?.anio}
         source="Inventario GEI (MITECO) vía Eurostat"
         href="/gl/energia-clima/emisiones"
         sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
@@ -97,7 +97,7 @@ ORDER BY año ASC
         title="Potencia solar FV"
         value={potencia_solar[0]?.potencia_mw ? (potencia_solar[0].potencia_mw / 1000).toFixed(1) : null}
         unit=" GW"
-        period={potencia_solar[0]?.año}
+        period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/gl/energia-clima/mix-electrico"
         sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
@@ -106,7 +106,7 @@ ORDER BY año ASC
         title="Potencia eólica"
         value={potencia_eolica[0]?.potencia_mw ? (potencia_eolica[0].potencia_mw / 1000).toFixed(1) : null}
         unit=" GW"
-        period={potencia_eolica[0]?.año}
+        period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/gl/energia-clima/mix-electrico"
         sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
@@ -119,30 +119,30 @@ ORDER BY año ASC
 
 ```sql mix_hitos
 SELECT
-    año,
-    round(sum(porcentaje_total) FILTER (WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica')), 1) AS pct_eolica_solar,
-    round(sum(porcentaje_total) FILTER (WHERE tecnologia = 'Carbón'), 1) AS pct_carbon
+    anio,
+    round(sum(cuota_pct) FILTER (WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica')), 1) AS pct_eolica_solar,
+    round(sum(cuota_pct) FILTER (WHERE tecnologia = 'Carbón'), 1) AS pct_carbon
 FROM mother.energia_mix_electrico
-WHERE año IN ((SELECT min(año) FROM mother.energia_mix_electrico), (SELECT max(año) FROM mother.energia_mix_electrico))
-GROUP BY año
-ORDER BY año ASC
+WHERE anio IN ((SELECT min(anio) FROM mother.energia_mix_electrico), (SELECT max(anio) FROM mother.energia_mix_electrico))
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
-O sistema eléctrico español protagonizou unha transformación histórica: entre {mix_hitos[0]?.año} e {mix_hitos[1]?.año}, a eólica e a solar fotovoltaica pasaron de representar o {mix_hitos[0]?.pct_eolica_solar}% a un **{mix_hitos[1]?.pct_eolica_solar}%** da xeración total, mentres que o carbón caeu do {mix_hitos[0]?.pct_carbon}% ao {mix_hitos[1]?.pct_carbon}%.
+O sistema eléctrico español protagonizou unha transformación histórica: entre {mix_hitos[0]?.anio} e {mix_hitos[1]?.anio}, a eólica e a solar fotovoltaica pasaron de representar o {mix_hitos[0]?.pct_eolica_solar}% a un **{mix_hitos[1]?.pct_eolica_solar}%** da xeración total, mentres que o carbón caeu do {mix_hitos[0]?.pct_carbon}% ao {mix_hitos[1]?.pct_carbon}%.
 
 ```sql mix_areas
 SELECT
-    año,
+    anio,
     tecnologia,
     generacion_twh
 FROM mother.energia_mix_electrico
 WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica', 'Hidroeléctrica', 'Nuclear', 'Ciclos Combinados (Gas)', 'Carbón')
-ORDER BY año ASC, tecnologia ASC
+ORDER BY anio ASC, tecnologia ASC
 ```
 
 <AreaChart
     data={mix_areas}
-    x=año
+    x=anio
     y=generacion_twh
     series=tecnologia
     yAxisTitle="Xeración (TWh)"
@@ -159,16 +159,16 @@ ORDER BY año ASC, tecnologia ASC
 
 ```sql cuota_anual
 SELECT
-    año,
+    anio,
     cuota_renovable_pct AS "Renovable (%)",
     cuota_libre_emisiones_pct AS "Libre de emisiones (%) (Renovable + Nuclear)"
 FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
+ORDER BY anio ASC
 ```
 
 <LineChart
     data={cuota_anual}
-    x=año
+    x=anio
     y={["Renovable (%)", "Libre de emisiones (%) (Renovable + Nuclear)"]}
     yAxisTitle="Porcentaxe do total (%)"
     title="Cota de xeración limpa sobre o total eléctrico"
@@ -183,34 +183,45 @@ ORDER BY año ASC
 
 ```sql emisiones_hitos
 SELECT
-    año,
-    round(max(porcentaje_total) FILTER (WHERE sector = 'Transporte'), 1) AS pct_transporte,
+    anio,
+    round(max(cuota_pct) FILTER (WHERE sector = 'Transporte'), 1) AS pct_transporte,
     max(millones_toneladas_co2eq) FILTER (WHERE sector = 'Generación Eléctrica') AS mt_electrica
 FROM mother.energia_emisiones_gei
-WHERE año IN ((SELECT min(año) FROM mother.energia_emisiones_gei), (SELECT max(año) FROM mother.energia_emisiones_gei))
-GROUP BY año
-ORDER BY año ASC
+WHERE anio IN ((SELECT min(anio) FROM mother.energia_emisiones_gei), (SELECT max(anio) FROM mother.energia_emisiones_gei))
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
-O **transporte** é o sector máis resistente á descarbonización: concentra o **{emisiones_hitos[1]?.pct_transporte}%** das emisións en {emisiones_hitos[1]?.año}. En cambio, a **xeración eléctrica** reduciu as súas emisións un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.año} grazas ao despregamento renovable.
+O **transporte** é o sector máis resistente á descarbonización: concentra o **{emisiones_hitos[1]?.pct_transporte}%** das emisións en {emisiones_hitos[1]?.anio}. En cambio, a **xeración eléctrica** reduciu as súas emisións un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.anio} grazas ao despregamento renovable.
 
 ```sql emisiones_sector
 SELECT
-    año,
+    anio,
     sector,
-    millones_toneladas_co2eq
+    millones_toneladas_co2eq,
+    t_co2eq_hab
 FROM mother.energia_emisiones_gei
-ORDER BY año ASC, sector ASC
+ORDER BY anio ASC, sector ASC
 ```
 
 <BarChart
     data={emisiones_sector}
-    x=año
+    x=anio
     y=millones_toneladas_co2eq
     series=sector
     type=stacked
     yAxisTitle="Millóns de toneladas de CO₂eq"
     title="Emisións GEI por sector (Mt CO₂eq)"
+/>
+
+<BarChart
+    data={emisiones_sector}
+    x=anio
+    y=t_co2eq_hab
+    series=sector
+    type=stacked
+    yAxisTitle="Toneladas de CO₂eq por habitante"
+    title="Emisións GEI por sector, por habitante (t CO₂eq por habitante)"
 />
 
 <DownloadCsvButton data={emisiones_sector} filename="spainfacts_emisiones_gei.csv" label="Descargar emisións GEI (CSV)" />

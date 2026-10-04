@@ -37,7 +37,7 @@ potencia as (
     select
         case tecnologia when 'Solar Fotovoltaica' then 'energia_potencia_solar_fv' else 'energia_potencia_eolica' end as metrica_id,
         case tecnologia when 'Solar Fotovoltaica' then 'Potencia solar fotovoltaica instalada' else 'Potencia eólica instalada' end as nombre,
-        cast("año" as integer) as anio,
+        cast(anio as integer) as anio,
         potencia_mw / 1000.0 as valor
     from {{ ref('energia_potencia_instalada') }}
     where tecnologia in ('Solar Fotovoltaica', 'Eólica')
@@ -77,7 +77,7 @@ electrificacion as (
             when 'FC_TRA_E' then 'Electricidad en el consumo de energía del transporte'
         end as nombre,
         anio,
-        100.0 * cuota_electricidad as valor
+        cuota_electricidad_pct as valor
     from {{ ref('electrificacion_sectores') }}
     where cod_sector in ('FC_E', 'FC_OTH_HH_E', 'FC_IND_E', 'FC_TRA_E')
 ),
@@ -152,24 +152,24 @@ calor as (
 -- ============================ ALMACENAMIENTO ============================
 alm_pot as (
     select
-        mes,
+        fecha as mes,
         sum(mw) filter (where tipo = 'bombeo_puro') as bombeo_mw,
         sum(mw) filter (where tipo = 'baterias_hibridadas') as baterias_mw
     from {{ ref('almacenamiento_potencia') }}
-    group by mes
+    group by fecha
 ),
 
 alm_anual as (
     select
-        cast(year(mes) as integer) as anio,
+        anio,
         count(*) as meses,
         sum(bombeo_turbinado_gwh) as bombeo_turbinado_gwh
     from {{ ref('almacenamiento_mensual') }}
-    group by 1
+    group by anio
 ),
 
 alm_acceso as (
-    select date_trunc('month', fecha_fichero) as mes, sum(otorgada_mw) / 1000.0 as gw
+    select date_trunc('month', fecha) as mes, sum(otorgada_mw) / 1000.0 as gw
     from {{ ref('almacenamiento_acceso') }}
     group by 1
 ),
@@ -300,7 +300,7 @@ rec_dia as (
     select
         fecha,
         sum(puntos) as puntos,
-        sum(puntos) filter (where tramo_potencia like 'rápida%' or tramo_potencia like 'ultrarrápida%') as rapidos
+        sum(puntos) filter (where tramo_orden <= 2) as rapidos
     from {{ ref('movilidad_recarga_evolucion') }}
     group by fecha
 ),

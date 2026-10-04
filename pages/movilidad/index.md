@@ -58,14 +58,8 @@ LIMIT 1
 
 ```sql transporte_serie
 -- Viajeros por cada 1.000 habitantes, últimos 36 meses
-WITH pob AS (
-    SELECT CAST(anio AS INTEGER) AS anio, poblacion
-    FROM mother.poblacion_territorios
-    WHERE nivel = 'pais' AND sexo = 'Total'
-)
-SELECT t.mes, 1000 * t.viajeros / p.poblacion AS valor
+SELECT t.mes, t.viajeros_por_1000_hab AS valor
 FROM mother.movilidad_transporte_modos AS t
-JOIN pob AS p ON p.anio = least(CAST(year(t.mes) AS INTEGER), (SELECT max(anio) FROM pob))
 WHERE t.clave = 'total'
   AND t.mes >= (SELECT max(mes) FROM mother.movilidad_transporte_modos) - INTERVAL 35 MONTH
 ORDER BY t.mes

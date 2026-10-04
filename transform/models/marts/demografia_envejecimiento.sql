@@ -83,6 +83,7 @@ select
     r.anio,
     r.nivel,
     r.cod,
+    t.nombre,
     r.poblacion,
     r.menores_16,
     r.mayores_65,
@@ -103,3 +104,4 @@ select
     r.nivel || '-' || r.cod || '-' || r.anio as clave
 from resumen r
 left join origen o on o.anio = r.anio and o.nivel = r.nivel and o.cod = r.cod
+left join {{ ref('territorios') }} t on t.nivel = r.nivel and t.cod = r.cod

@@ -24,7 +24,7 @@ SELECT
     max(CASE WHEN componente = 'P7' THEN por_habitante_real END) AS import_hab,
     max(CASE WHEN componente = 'P6' THEN nominal_meur END) AS export_meur,
     max(CASE WHEN componente = 'P7' THEN nominal_meur END) AS import_meur,
-    max(anio_euros) AS anio_euros
+    max(anio_base) AS anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente IN ('P6', 'P7')
 GROUP BY trimestre, anio, trim
@@ -145,7 +145,7 @@ En 2007 España compraba fuera mucho más de lo que vendía: el déficit llegó 
 
 ## Evolución real por habitante
 
-Exportaciones e importaciones en euros constantes de {comercio_trim[0]?.anio_euros} por habitante, a ritmo anual (el trimestre multiplicado por cuatro): muestra cuánto crece de verdad el comercio, sin la inflación ni el aumento de población.
+Exportaciones e importaciones en euros constantes de {comercio_trim[0]?.anio_base} por habitante, a ritmo anual (el trimestre multiplicado por cuatro): muestra cuánto crece de verdad el comercio, sin la inflación ni el aumento de población.
 
 <LineChart
     data={comercio_largo}
@@ -154,7 +154,7 @@ Exportaciones e importaciones en euros constantes de {comercio_trim[0]?.anio_eur
     series=flujo
     yAxisTitle="€ por habitante (reales)"
     yFmt='#,##0" €"'
-    title="Comercio exterior por habitante, euros de {comercio_trim[0]?.anio_euros} a ritmo anual"
+    title="Comercio exterior por habitante, euros de {comercio_trim[0]?.anio_base} a ritmo anual"
 />
 
 ---

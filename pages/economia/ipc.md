@@ -455,74 +455,74 @@ FROM mother.mercado_energia_ipc
 ```
 
 ```sql carb
-SELECT semana, territorio, producto, eur_litro, eur_litro_real, anio_euros
+SELECT fecha, pais, producto, eur_litro, eur_litro_real, anio_euros
 FROM mother.mercado_energia_carburantes
-ORDER BY semana, territorio, producto
+ORDER BY fecha, pais, producto
 ```
 
 ```sql carb_es
-SELECT semana, producto, eur_litro_real
+SELECT fecha, producto, eur_litro_real
 FROM ${carb}
-WHERE territorio = 'España' AND producto IN ('Gasolina 95', 'Gasóleo de automoción', 'Gasóleo de calefacción')
-ORDER BY semana, producto
+WHERE pais = 'España' AND producto IN ('Gasolina 95', 'Gasóleo de automoción', 'Gasóleo de calefacción')
+ORDER BY fecha, producto
 ```
 
 ```sql carb_ue
-SELECT semana, territorio || ': ' || producto AS serie, eur_litro_real
+SELECT fecha, pais || ': ' || producto AS serie, eur_litro_real
 FROM ${carb}
-WHERE producto IN ('Gasolina 95', 'Gasóleo de automoción') AND semana >= DATE '2015-01-01'
-ORDER BY semana, serie
+WHERE producto IN ('Gasolina 95', 'Gasóleo de automoción') AND fecha >= DATE '2015-01-01'
+ORDER BY fecha, serie
 ```
 
 ```sql carb_ult
 SELECT
-    max(semana) AS semana,
-    strftime(max(semana), '%d/%m/%Y') AS semana_txt,
+    max(fecha) AS fecha,
+    strftime(max(fecha), '%d/%m/%Y') AS semana_txt,
     max(anio_euros) AS anio_euros,
-    max(eur_litro) FILTER (WHERE territorio = 'España' AND producto = 'Gasolina 95' AND semana = (SELECT max(semana) FROM ${carb})) AS gasolina,
-    max(eur_litro) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de automoción' AND semana = (SELECT max(semana) FROM ${carb})) AS gasoleo,
-    max(eur_litro) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de calefacción' AND semana = (SELECT max(semana) FROM ${carb})) AS calefaccion,
-    max(eur_litro) FILTER (WHERE territorio = 'Media UE' AND producto = 'Gasolina 95' AND semana = (SELECT max(semana) FROM ${carb})) AS gasolina_ue,
-    max(eur_litro) FILTER (WHERE territorio = 'Media UE' AND producto = 'Gasóleo de automoción' AND semana = (SELECT max(semana) FROM ${carb})) AS gasoleo_ue,
-    max(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasolina 95') AS gasolina_real_max,
-    strftime(arg_max(semana, eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasolina 95'), '%m/%Y') AS gasolina_real_max_fecha,
-    max(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de automoción') AS gasoleo_real_max,
-    strftime(arg_max(semana, eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de automoción'), '%m/%Y') AS gasoleo_real_max_fecha,
-    avg(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasolina 95' AND year(semana) = 2019) AS gasolina_real_2019,
-    avg(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de automoción' AND year(semana) = 2019) AS gasoleo_real_2019,
-    max(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasolina 95' AND semana = (SELECT max(semana) FROM ${carb})) AS gasolina_real,
-    max(eur_litro_real) FILTER (WHERE territorio = 'España' AND producto = 'Gasóleo de automoción' AND semana = (SELECT max(semana) FROM ${carb})) AS gasoleo_real
+    max(eur_litro) FILTER (WHERE pais = 'España' AND producto = 'Gasolina 95' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasolina,
+    max(eur_litro) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de automoción' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasoleo,
+    max(eur_litro) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de calefacción' AND fecha = (SELECT max(fecha) FROM ${carb})) AS calefaccion,
+    max(eur_litro) FILTER (WHERE pais = 'Media UE' AND producto = 'Gasolina 95' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasolina_ue,
+    max(eur_litro) FILTER (WHERE pais = 'Media UE' AND producto = 'Gasóleo de automoción' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasoleo_ue,
+    max(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasolina 95') AS gasolina_real_max,
+    strftime(arg_max(fecha, eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasolina 95'), '%m/%Y') AS gasolina_real_max_fecha,
+    max(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de automoción') AS gasoleo_real_max,
+    strftime(arg_max(fecha, eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de automoción'), '%m/%Y') AS gasoleo_real_max_fecha,
+    avg(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasolina 95' AND year(fecha) = 2019) AS gasolina_real_2019,
+    avg(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de automoción' AND year(fecha) = 2019) AS gasoleo_real_2019,
+    max(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasolina 95' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasolina_real,
+    max(eur_litro_real) FILTER (WHERE pais = 'España' AND producto = 'Gasóleo de automoción' AND fecha = (SELECT max(fecha) FROM ${carb})) AS gasoleo_real
 FROM ${carb}
 ```
 
 ```sql carb_spark_gasolina
-SELECT semana, eur_litro_real FROM ${carb} WHERE territorio = 'España' AND producto = 'Gasolina 95' ORDER BY semana
+SELECT fecha, eur_litro_real FROM ${carb} WHERE pais = 'España' AND producto = 'Gasolina 95' ORDER BY fecha
 ```
 
 ```sql carb_spark_gasoleo
-SELECT semana, eur_litro_real FROM ${carb} WHERE territorio = 'España' AND producto = 'Gasóleo de automoción' ORDER BY semana
+SELECT fecha, eur_litro_real FROM ${carb} WHERE pais = 'España' AND producto = 'Gasóleo de automoción' ORDER BY fecha
 ```
 
 ```sql hogares
-SELECT semestre_inicio, semestre, energia, pais, eur_kwh, eur_kwh_real, anio_euros
+SELECT fecha, semestre, energia, pais, eur_kwh, eur_kwh_real, anio_euros
 FROM mother.mercado_energia_hogares
-ORDER BY semestre_inicio, energia, pais
+ORDER BY fecha, energia, pais
 ```
 
 ```sql hogares_elec
-SELECT semestre_inicio, pais, eur_kwh_real FROM ${hogares}
+SELECT fecha, pais, eur_kwh_real FROM ${hogares}
 WHERE energia = 'Electricidad' AND pais IN ('España', 'UE-27', 'Alemania', 'Francia', 'Italia', 'Portugal')
-ORDER BY semestre_inicio, pais
+ORDER BY fecha, pais
 ```
 
 ```sql hogares_gas
-SELECT semestre_inicio, pais, eur_kwh_real FROM ${hogares}
+SELECT fecha, pais, eur_kwh_real FROM ${hogares}
 WHERE energia = 'Gas natural' AND pais IN ('España', 'UE-27', 'Alemania', 'Francia', 'Italia', 'Portugal')
-ORDER BY semestre_inicio, pais
+ORDER BY fecha, pais
 ```
 
 ```sql hogares_es_elec
-SELECT semestre_inicio, eur_kwh_real FROM ${hogares} WHERE energia = 'Electricidad' AND pais = 'España' ORDER BY semestre_inicio
+SELECT fecha, eur_kwh_real FROM ${hogares} WHERE energia = 'Electricidad' AND pais = 'España' ORDER BY fecha
 ```
 
 ```sql hogares_ult
@@ -633,7 +633,7 @@ Precio medio semanal en surtidor con todos los impuestos, según el Boletín Pet
 
 <LineChart
     data={carb_es}
-    x=semana
+    x=fecha
     y=eur_litro_real
     series=producto
     yFmt='0.00" €"'
@@ -646,7 +646,7 @@ En la última semana, la gasolina 95 cuesta en España {formatNumber(carb_ult[0]
 
 <LineChart
     data={carb_ue}
-    x=semana
+    x=fecha
     y=eur_litro_real
     series=serie
     yFmt='0.00" €"'
@@ -661,7 +661,7 @@ Precio medio por kWh que paga un hogar de consumo medio con todos los impuestos 
 
 <LineChart
     data={hogares_elec}
-    x=semestre_inicio
+    x=fecha
     y=eur_kwh_real
     series=pais
     yFmt='0.000" €"'
@@ -671,7 +671,7 @@ Precio medio por kWh que paga un hogar de consumo medio con todos los impuestos 
 
 <LineChart
     data={hogares_gas}
-    x=semestre_inicio
+    x=fecha
     y=eur_kwh_real
     series=pais
     yFmt='0.000" €"'

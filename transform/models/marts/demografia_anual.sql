@@ -135,6 +135,7 @@ select
     b.anio,
     b.nivel,
     b.cod,
+    t.nombre,
     p0.poblacion as poblacion_inicio,
     p1.poblacion as poblacion_fin,
     b.nacimientos,
@@ -160,3 +161,4 @@ from base b
 left join poblacion p0 on p0.nivel = b.nivel and p0.cod = b.cod and p0.anio = b.anio
 left join poblacion p1 on p1.nivel = b.nivel and p1.cod = b.cod and p1.anio = b.anio + 1
 left join saldo_exterior s on s.nivel = b.nivel and s.cod = b.cod and s.anio = b.anio
+left join {{ ref('territorios') }} t on t.nivel = b.nivel and t.cod = b.cod

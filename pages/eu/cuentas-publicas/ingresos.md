@@ -3,7 +3,7 @@ description: "Nondik ateratzen den diru publikoa: zergak eta gizarte-kotizazioak
 title: Diru-sarrera Publikoak eta Zerga-bilketa
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 7fdaa026f188
+i18n_origen: 41be22719404
 ---
 
 <script>
@@ -28,19 +28,17 @@ SELECT CAST(max(anio_base) AS INTEGER) AS anio_base FROM mother.deflactor
 ```
 
 ```sql ingresos_hab
--- Ingresos por habitante en euros constantes: millones / población (millones) * factor del deflactor
+-- Ingresos por habitante en euros constantes (ya calculados en la tabla)
 SELECT
-    CAST(i.año AS INTEGER) AS anio,
+    i.anio,
     i.categoria,
     i.tipo_ingreso,
     i.millones_euros,
     i.porcentaje_pib,
     i.porcentaje_ingreso_total,
-    i.millones_euros / b.poblacion_m * d.factor AS eur_hab_real
+    i.ingreso_eur_hab_real AS eur_hab_real
 FROM mother.cuentas_ingresos i
-JOIN mother.cuentas_balance_anual b ON CAST(b.año AS INTEGER) = CAST(i.año AS INTEGER)
-JOIN mother.deflactor d ON CAST(d.anio AS INTEGER) = CAST(i.año AS INTEGER)
-WHERE b.poblacion_m > 0
+WHERE i.ingreso_eur_hab_real IS NOT NULL
 ```
 
 ```sql ultimos_ingresos_totales
@@ -50,7 +48,7 @@ SELECT
     sum(eur_hab_real) AS total_hab_real,
     sum(porcentaje_pib) AS total_pib
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 GROUP BY anio
 ```
 
@@ -69,7 +67,7 @@ SELECT
     max(CASE WHEN categoria = 'IVA' THEN eur_hab_real END) AS iva_hab,
     max(CASE WHEN categoria = 'IVA' THEN porcentaje_ingreso_total END) AS iva_pct
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 ```
 
 ```sql ingresos_por_categoria_ultimo
@@ -81,12 +79,12 @@ SELECT
     porcentaje_pib,
     porcentaje_ingreso_total
 FROM ${ingresos_hab}
-WHERE anio = (SELECT max(año) FROM mother.cuentas_ingresos)
+WHERE anio = (SELECT max(anio) FROM mother.cuentas_ingresos)
 ORDER BY millones_euros DESC
 ```
 
 ```sql serie_ingresos_categoria
--- Euros por habitante a precios constantes (el deflactor empieza en 2002)
+-- Euros por habitante a precios constantes (el deflactor empieza en 1996)
 SELECT
     anio AS año,
     categoria,
@@ -96,7 +94,7 @@ ORDER BY año ASC, eur_hab_real DESC
 ```
 
 ```sql serie_ingresos_tipo
--- Euros por habitante a precios constantes (el deflactor empieza en 2002)
+-- Euros por habitante a precios constantes (el deflactor empieza en 1996)
 SELECT
     anio AS año,
     tipo_ingreso,
@@ -184,7 +182,7 @@ ORDER BY anio
 
 ## 2. Diru-sarreren Bilakaera Historikoa Zerga Motaren arabera
 
-Mota bakoitzeko diru-sarrerak biztanleko, {urteko(base_deflactor[0]?.anio_base)} eurotan (inflazioa kenduta), 2002tik, urteko KPIa eskuragarri duen lehen urtetik:
+Mota bakoitzeko diru-sarrerak biztanleko, {urteko(base_deflactor[0]?.anio_base)} eurotan (inflazioa kenduta), 1996tik, urteko KPIa eskuragarri duen lehen urtetik:
 
 <AreaChart
     data={serie_ingresos_tipo}

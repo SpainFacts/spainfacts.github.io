@@ -49,8 +49,9 @@ pais as (
     from fechas f
     left join ccaa c on c.fecha = f.fecha and c.tipo = f.tipo and c.cod = '00'
     left join esp_total e on e.fecha = f.fecha and e.tipo = f.tipo
-)
+),
 
+unido as (
 select
     fecha,
     cast(year(fecha) as integer) as anio,
@@ -74,3 +75,10 @@ select
     pacientes, tasa_1000, pct_espera_larga, dias_medio
 from ccaa
 where cod <> '00' and fecha >= date '2013-12-31'
+)
+
+select
+    u.fecha, u.anio, u.corte, u.tipo, u.nivel, u.cod, t.nombre as nombre,
+    u.pacientes, u.tasa_1000, u.pct_espera_larga, u.dias_medio
+from unido u
+left join {{ ref('territorios') }} t on t.nivel = u.nivel and t.cod = u.cod

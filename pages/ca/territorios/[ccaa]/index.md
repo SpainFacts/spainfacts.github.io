@@ -1,6 +1,6 @@
 ---
 description: "Fitxa de la comunitat autònoma: població, economia, comptes públics, deute, ocupació pública, seguretat i més, amb dades oficials i comparades amb Espanya."
-i18n_origen: aebfea10a885
+i18n_origen: b9c51634f0cb
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -294,19 +294,11 @@ SELECT
     r.ingresos_no_financieros,
     r.gastos_no_financieros,
     r.saldo_no_financiero,
-    r.gastos_totales,
-    p.poblacion,
-    r.gastos_no_financieros / p.poblacion AS gasto_hab,
-    r.ingresos_no_financieros / p.poblacion AS ingreso_hab,
     -- Euros por habitante constantes (euros del último año completo)
-    r.gastos_no_financieros / p.poblacion * f.factor AS gasto_hab_real,
-    r.ingresos_no_financieros / p.poblacion * f.factor AS ingreso_hab_real,
-    r.saldo_no_financiero / p.poblacion * f.factor AS saldo_hab_real
+    r.gastos_nf_eur_hab_real AS gasto_hab_real,
+    r.ingresos_nf_eur_hab_real AS ingreso_hab_real,
+    r.saldo_nf_eur_hab_real AS saldo_hab_real
 FROM mother.ccaa_cuentas_resumen r
-JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = r.cod_ccaa AND p.sexo = 'Total'
- AND p.anio = least(r.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
-LEFT JOIN mother.deflactor f ON f.anio = CAST(r.anio AS INTEGER)
 WHERE r.cod_ccaa = '${terr[0]?.cod}'
 ORDER BY r.anio
 ```
@@ -325,14 +317,10 @@ ORDER BY fecha
 ```sql gasto_ranking
 WITH ultimo AS (SELECT max(anio) AS anio FROM mother.ccaa_cuentas_resumen WHERE cod_ccaa <= '17')
 SELECT
-    t.nombre AS comunidad,
-    r.gastos_no_financieros / p.poblacion * f.factor AS gasto_hab,
+    r.ccaa AS comunidad,
+    r.gastos_nf_eur_hab_real AS gasto_hab,
     CASE WHEN r.cod_ccaa = '${terr[0]?.cod}' THEN 'Esta comunidad' ELSE 'Resto' END AS grupo
 FROM mother.ccaa_cuentas_resumen r
-JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = r.cod_ccaa AND p.anio = r.anio AND p.sexo = 'Total'
-JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = r.cod_ccaa
-LEFT JOIN mother.deflactor f ON f.anio = CAST(r.anio AS INTEGER)
 WHERE r.anio = (SELECT anio FROM ultimo) AND r.cod_ccaa <= '17'
 ORDER BY gasto_hab DESC
 ```
@@ -342,25 +330,25 @@ ORDER BY gasto_hab DESC
 -- PAC) por habitante, frente a la media de las 17 comunidades. Los importes
 -- por habitante van en euros constantes del último año completo.
 WITH anio AS (SELECT max(anio) AS anio FROM mother.ccaa_gasto_politicas WHERE cod_ccaa = '${terr[0]?.cod}'),
-defl AS (SELECT factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 por_ccaa AS (
-    SELECT g.cod_ccaa, g.cod_politica, g.politica_nombre, sum(g.obligaciones) AS obligaciones, p.poblacion
+    SELECT g.cod_ccaa, g.cod_politica, g.politica_nombre,
+        sum(g.obligaciones) AS obligaciones,
+        sum(g.obligaciones_eur_hab_real) AS hab_real,
+        any_value(g.poblacion) AS poblacion
     FROM mother.ccaa_gasto_politicas g
-    JOIN mother.poblacion_territorios p
-      ON p.nivel = 'ccaa' AND p.cod = g.cod_ccaa AND p.anio = g.anio AND p.sexo = 'Total'
     WHERE g.anio = (SELECT anio FROM anio) AND g.cod_ccaa <= '17'
     GROUP BY ALL
 ),
 media AS (
-    SELECT cod_politica, sum(obligaciones) / sum(poblacion) AS media_hab
+    SELECT cod_politica, sum(hab_real * poblacion) / sum(poblacion) AS media_hab_real
     FROM por_ccaa GROUP BY cod_politica
 )
 SELECT
     c.politica_nombre AS politica,
     c.obligaciones,
-    c.obligaciones / c.poblacion * coalesce((SELECT factor FROM defl), 1) AS por_habitante,
-    m.media_hab * coalesce((SELECT factor FROM defl), 1) AS media_ccaa,
-    100.0 * (c.obligaciones / c.poblacion - m.media_hab) / nullif(m.media_hab, 0) AS dif_pct,
+    c.hab_real AS por_habitante,
+    m.media_hab_real AS media_ccaa,
+    100.0 * (c.hab_real - m.media_hab_real) / nullif(m.media_hab_real, 0) AS dif_pct,
     c.obligaciones / sum(c.obligaciones) OVER () AS peso
 FROM por_ccaa c
 JOIN media m USING (cod_politica)
@@ -380,15 +368,11 @@ SELECT
     c.capitulo,
     c.capitulo_nombre,
     c.anio,
-    c.ejecutado / p.poblacion * coalesce(f.factor, 1) AS ejecutado_hab,
+    c.ejecutado_eur_hab_real AS ejecutado_hab,
     c.presupuesto_definitivo,
     c.ejecutado,
     c.ejecutado / nullif(c.presupuesto_definitivo, 0) AS grado_ejecucion
 FROM mother.ccaa_cuentas_capitulos c
-JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = c.cod_ccaa AND p.sexo = 'Total'
- AND p.anio = least(c.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
-LEFT JOIN mother.deflactor f ON f.anio = CAST(c.anio AS INTEGER)
 WHERE c.cod_ccaa = '${terr[0]?.cod}'
   AND c.anio = (SELECT max(anio) FROM mother.ccaa_cuentas_capitulos WHERE cod_ccaa = '${terr[0]?.cod}')
 ORDER BY c.tipo DESC, c.capitulo
@@ -504,18 +488,14 @@ ORDER BY fecha
 ```
 
 ```sql deuda_ultima
--- Deuda por habitante en euros constantes (misma cuenta que deuda_hab_serie)
+-- Deuda por habitante en euros constantes (deuda_eur_hab_real)
 SELECT
     d.fecha, d.anio, d.trimestre, d.deuda_eur, d.deuda_pct_pib,
-    d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS deuda_hab_real,
+    d.deuda_eur_hab_real AS deuda_hab_real,
     a.deuda_pct_pib AS pct_pib_hace_un_anio
 FROM mother.ccaa_deuda d
 LEFT JOIN mother.ccaa_deuda a
   ON a.cod_ccaa = d.cod_ccaa AND a.fecha = d.fecha - INTERVAL 1 YEAR
-LEFT JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = d.cod_ccaa AND p.sexo = 'Total'
- AND p.anio = least(d.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
-LEFT JOIN mother.deflactor f ON f.anio = CAST(d.anio AS INTEGER)
 WHERE d.cod_ccaa = '${terr[0]?.cod}'
 ORDER BY d.fecha DESC
 LIMIT 1
@@ -534,21 +514,12 @@ ORDER BY d.deuda_pct_pib DESC
 
 ```sql deuda_hab_serie
 -- Deuda al cierre de cada año (último trimestre publicado) por habitante, en euros constantes
-WITH pob AS (
-    SELECT anio, poblacion FROM mother.poblacion_territorios
-    WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND sexo = 'Total'
-),
-d AS (
-    SELECT anio, deuda_eur FROM mother.ccaa_deuda
-    WHERE cod_ccaa = '${terr[0]?.cod}'
-    QUALIFY row_number() OVER (PARTITION BY anio ORDER BY fecha DESC) = 1
-)
-SELECT d.anio, d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS valor
-FROM d
-JOIN pob p ON p.anio = least(d.anio, (SELECT max(anio) FROM pob))
--- Sin IPC anual antes de 2002: la serie real empieza ese año
-JOIN mother.deflactor f ON f.anio = CAST(d.anio AS INTEGER)
-ORDER BY d.anio
+-- (sin deflactor antes de 1996: la serie real empieza ese año)
+SELECT anio, deuda_eur_hab_real AS valor
+FROM mother.ccaa_deuda
+WHERE cod_ccaa = '${terr[0]?.cod}' AND deuda_eur_hab_real IS NOT NULL
+QUALIFY row_number() OVER (PARTITION BY anio ORDER BY fecha DESC) = 1
+ORDER BY anio
 ```
 
 ```sql saldo
@@ -596,7 +567,7 @@ ORDER BY anio
     {/if}
 </Grid>
 
-<p class="text-xs text-gray-500">El deute per habitant utilitza la població del Padró de cada any (l'última disponible per als anys sense Padró) i està descomptada la inflació: euros de {base[0]?.anio_base} (la sèrie de la miniatura comença el 2002, primer any amb IPC anual a la base).</p>
+<p class="text-xs text-gray-500">El deute per habitant utilitza la població del Padró de cada any (l'última disponible per als anys sense Padró) i està descomptada la inflació: euros de {base[0]?.anio_base} (la sèrie de la miniatura comença el 1996, primer any amb deflactor).</p>
 
 <BarChart
     data={deuda_ranking}
@@ -690,10 +661,9 @@ ORDER BY fecha
 
 ```sql empleo_gasto_serie
 -- Gasto de personal de la comunidad por habitante, en euros constantes
-SELECT g.anio, g.gasto_personal_ccaa_hab * coalesce(f.factor, 1) AS valor
+SELECT g.anio, g.gasto_personal_ccaa_eur_hab_real AS valor
 FROM mother.empleo_gasto_personal_territorio g
-LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
-WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa_hab IS NOT NULL
+WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa_eur_hab_real IS NOT NULL
 ORDER BY g.anio
 ```
 
@@ -702,19 +672,18 @@ ORDER BY g.anio
 SELECT
     g.anio,
     g.gasto_personal_ccaa,
-    g.gasto_personal_ccaa_hab * coalesce(f.factor, 1) AS gasto_personal_ccaa_hab,
-    g.gasto_personal_ayuntamientos_hab * coalesce(f.factor, 1) AS gasto_personal_ayuntamientos_hab,
-    coalesce(f.factor, 1) * (SELECT avg(gasto_personal_ccaa_hab) FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'ccaa' AND x.anio = g.anio AND x.cod <= '17') AS media_ccaa_hab,
-    coalesce(f.factor, 1) * (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS aytos_espana_hab
+    g.gasto_personal_ccaa_eur_hab_real AS gasto_personal_ccaa_hab,
+    g.gasto_personal_ayuntamientos_eur_hab_real AS gasto_personal_ayuntamientos_hab,
+    (SELECT avg(gasto_personal_ccaa_eur_hab_real) FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'ccaa' AND x.anio = g.anio AND x.cod <= '17') AS media_ccaa_hab,
+    (SELECT gasto_personal_ayuntamientos_eur_hab_real FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS aytos_espana_hab
 FROM mother.empleo_gasto_personal_territorio g
-LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
 WHERE g.nivel = 'ccaa' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ccaa IS NOT NULL
 ORDER BY g.anio DESC
 LIMIT 1
 ```
 
 ```sql empleo_salario
-SELECT salario_publico, salario_privado FROM mother.empleo_salarios_ccaa WHERE cod_ccaa = '${terr[0]?.cod}'
+SELECT salario_publico, salario_privado FROM mother.empleo_salarios_ccaa WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}'
 ```
 
 ```sql crimen_ccaa
@@ -1427,9 +1396,9 @@ ORDER BY anio
 
 ```sql empresas_aut
 SELECT a.pct_cuenta_propia, es.pct_cuenta_propia AS pct_espana, CAST(a.anio AS INTEGER) AS anio
-FROM mother.empresas_autonomos a
-JOIN mother.empresas_autonomos es ON es.cod = '00' AND es.anio = a.anio AND es.trimestre = 0
-WHERE a.cod = '${terr[0]?.cod}' AND a.trimestre = 0
+FROM mother.empresas_autonomos_anual a
+JOIN mother.empresas_autonomos_anual es ON es.cod = '00' AND es.anio = a.anio
+WHERE a.cod = '${terr[0]?.cod}'
 ORDER BY a.anio
 ```
 
@@ -1662,14 +1631,13 @@ ORDER BY fecha
 ```
 
 ```sql elec_familias
-SELECT p.fecha, f.familia, f.color, f.orden_familia, f.pct, f.escanos
+SELECT f.fecha, f.familia, f.color, f.orden_familia, f.pct, f.escanos
 FROM mother.elecciones_familias f
-JOIN mother.elecciones_participacion p ON p.proceso = f.proceso AND p.nivel = 'pais'
 WHERE f.nivel = 'ccaa' AND f.cod = '${terr[0]?.cod}' AND f.tipo = '02'
   AND f.familia IN (SELECT familia FROM mother.elecciones_familias
       WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND tipo = '02' AND bloque <> 'Otros'
       GROUP BY familia HAVING max(pct) >= 5)
-ORDER BY p.fecha, f.orden_familia
+ORDER BY f.fecha, f.orden_familia
 ```
 
 ```sql elec_colores

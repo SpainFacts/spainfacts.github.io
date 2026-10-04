@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · The State of Spain in Official Data
 description: "Spain in official data: population, economy, public finances, energy, mobility, society and transparency, from the whole country down to each municipality. Independent and politically neutral."
-i18n_origen: 55bec392edfc
+i18n_origen: c69067017fff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---

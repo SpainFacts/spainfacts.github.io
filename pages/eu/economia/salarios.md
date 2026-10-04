@@ -1,7 +1,7 @@
 ---
 title: Soldatak
 description: "Espainiako batez besteko soldata inflazioa kenduta, haren hazkunde erreala eta nominala, sektorearen eta lanaldiaren arabera, eta dezilen araberako banaketa."
-i18n_origen: a16ce5b323ef
+i18n_origen: fba9f04f2b64
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -79,13 +79,12 @@ FROM ${anual}
 SELECT
     d.anio,
     d.decil,
-    'D' || d.decil AS nombre_decil,
+    d.decil_nombre AS nombre_decil,
     d.salario_mensual,
-    d.salario_mensual * f.factor AS salario_real,
-    f.anio_base
+    d.salario_mensual_real AS salario_real,
+    d.anio_euros AS anio_base
 FROM mother.empleo_salarios_deciles d
-JOIN mother.deflactor f ON f.anio = d.anio
-WHERE d.jornada = 'Total' AND d.sector = 'Total' AND d.decil > 0
+WHERE d.jornada = 'Total' AND d.sector = 'Total' AND d.decil IS NOT NULL
 ORDER BY d.anio, d.decil
 ```
 

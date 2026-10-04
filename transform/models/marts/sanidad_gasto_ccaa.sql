@@ -22,6 +22,7 @@ select
     b.anio,
     case when b.cod = '00' then 'total_ccaa' else 'ccaa' end as nivel,
     b.cod,
+    case when b.cod = '00' then 'Total comunidades autónomas' else t.nombre end as nombre,
     b.provisional,
     b.eur_hab,
     b.eur_hab * d.factor as eur_hab_real,
@@ -29,3 +30,4 @@ select
     d.anio_base
 from base b
 left join {{ ref('deflactor') }} d on d.anio = b.anio
+left join {{ ref('territorios') }} t on t.nivel = 'ccaa' and t.cod = b.cod

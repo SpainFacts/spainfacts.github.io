@@ -1,7 +1,7 @@
 ---
 title: Lurraldeak
 description: "Espainia autonomia-erkidegoka eta probintziaka: biztanleria, kontu publikoak eta administrazio bakoitzaren zorra."
-i18n_origen: abbe3b0c0256
+i18n_origen: 6facd905aab0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,26 +114,22 @@ Espainia Estatu deszentralizatua da: **autonomia-erkidegoek** osasuna, hezkuntza
 ```sql comparativa
 WITH anio_cuentas AS (SELECT max(anio) AS anio FROM mother.ccaa_cuentas_resumen WHERE cod_ccaa <= '17'),
 deuda AS (
-    SELECT cod_ccaa, anio, deuda_eur, deuda_pct_pib
+    SELECT cod_ccaa, anio, deuda_eur_hab_real, deuda_pct_pib
     FROM mother.ccaa_deuda
     WHERE fecha = (SELECT max(fecha) FROM mother.ccaa_deuda)
 )
--- Euros por habitante y constantes (euros del último año completo, mother.deflactor)
+-- Euros por habitante y constantes (euros del último año completo)
 SELECT
     c.nombre AS comunidad,
     c.ruta,
     c.poblacion,
-    r.gastos_no_financieros / p.poblacion * fg.factor AS gasto_hab,
-    d.deuda_eur / c.poblacion * coalesce(fd.factor, 1) AS deuda_hab,
+    r.gastos_nf_eur_hab_real AS gasto_hab,
+    d.deuda_eur_hab_real AS deuda_hab,
     d.deuda_pct_pib / 100 AS deuda_pct_pib
 FROM ${ccaa} c
 LEFT JOIN mother.ccaa_cuentas_resumen r
   ON r.cod_ccaa = c.cod AND r.anio = (SELECT anio FROM anio_cuentas)
-LEFT JOIN mother.poblacion_territorios p
-  ON p.nivel = 'ccaa' AND p.cod = c.cod AND p.anio = r.anio AND p.sexo = 'Total'
 LEFT JOIN deuda d ON d.cod_ccaa = c.cod
-LEFT JOIN mother.deflactor fg ON fg.anio = CAST(r.anio AS INTEGER)
-LEFT JOIN mother.deflactor fd ON fd.anio = CAST(d.anio AS INTEGER)
 ORDER BY c.poblacion DESC
 ```
 

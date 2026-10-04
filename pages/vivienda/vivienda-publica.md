@@ -86,9 +86,9 @@ FROM (
 ```
 
 ```sql ocde_ue
-SELECT max(valor) FILTER (WHERE cod_pais = 'EUU') AS ue, max(valor) FILTER (WHERE cod_pais = 'OED') AS ocde
+SELECT max(pct_parque_total) FILTER (WHERE cod_pais = 'EU27_2020') AS ue, max(pct_parque_total) FILTER (WHERE cod_pais = 'OECD') AS ocde
 FROM mother.vivienda_publica_internacional
-WHERE serie = 'ocde_pct_parque' AND es_ultimo
+WHERE pct_parque_total IS NOT NULL AND es_ultimo
 ```
 
 ```sql provincias
@@ -127,25 +127,25 @@ WHERE cod_prov NOT IN ('51', '52')
 ```
 
 ```sql ocde
-SELECT pais, anio, valor, CAST(viviendas_sociales AS INTEGER) AS viviendas_sociales,
+SELECT pais, anio, pct_parque_total AS valor, CAST(viviendas_sociales AS INTEGER) AS viviendas_sociales,
        CASE WHEN es_espana THEN 'España' WHEN es_agregado THEN 'Media UE / OCDE' ELSE 'Otros países' END AS grupo
 FROM mother.vivienda_publica_internacional
-WHERE serie = 'ocde_pct_parque' AND es_ultimo
+WHERE pct_parque_total IS NOT NULL AND es_ultimo
 ORDER BY valor DESC
 ```
 
 ```sql ocde_evolucion
-SELECT pais, anio, valor
+SELECT pais, anio, pct_parque_total AS valor
 FROM mother.vivienda_publica_internacional
-WHERE serie = 'ocde_pct_parque' AND destacado AND NOT es_agregado
+WHERE pct_parque_total IS NOT NULL AND destacado AND NOT es_agregado
 ORDER BY pais, anio
 ```
 
 ```sql ue_hogares
-SELECT pais, anio, valor,
+SELECT pais, anio, pct_viviendas_principales AS valor,
        CASE WHEN es_espana THEN 'España' WHEN es_agregado THEN 'Media UE' ELSE 'Otros países' END AS grupo
 FROM mother.vivienda_publica_internacional
-WHERE serie = 'ue_pct_hogares'
+WHERE pct_viviendas_principales IS NOT NULL
 ORDER BY valor DESC
 ```
 

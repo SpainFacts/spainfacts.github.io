@@ -35,7 +35,9 @@ rango as (
 )
 
 select
+    case when a.cod = '00' then 'pais' else 'ccaa' end as nivel,
     a.cod,
+    t.nombre,
     a.anio,
     a.constituidas,
     a.disueltas,
@@ -54,4 +56,5 @@ from anual a
 cross join rango r
 left join pob p on p.cod = a.cod and p.anio = greatest(least(a.anio, r.max_anio), r.min_anio)
 left join {{ ref('deflactor') }} d on d.anio = a.anio
+left join {{ ref('territorios') }} t on t.nivel = case when a.cod = '00' then 'pais' else 'ccaa' end and t.cod = a.cod
 order by a.cod, a.anio

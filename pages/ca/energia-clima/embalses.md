@@ -1,7 +1,7 @@
 ---
 title: Reserves d'aigua i embassaments
 description: Estat setmanal dels embassaments espanyols per conca, comparat amb l'any anterior i amb la mitjana dels últims deu anys.
-i18n_origen: 1e74e7013ff0
+i18n_origen: 428062b2d659
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -78,7 +78,7 @@ Els embassaments espanyols emmagatzemen avui **{formatNumber(espana[0]?.volumen_
 
 ```sql demarcaciones
 SELECT
-    clave,
+    cod,
     nombre,
     pct_llenado / 100 AS llenado,
     volumen_hm3,
@@ -92,7 +92,7 @@ WHERE nivel = 'demarcacion'
     data={demarcaciones}
     geoJsonUrl="/demarcaciones-hidrograficas.geojson"
     geoId="cod_demarcacion"
-    areaCol="clave"
+    areaCol="cod"
     value="llenado"
     valueFmt="pct0"
     colorPalette={['#fde68a', '#7dd3fc', '#0369a1']}

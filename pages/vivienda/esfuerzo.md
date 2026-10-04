@@ -9,7 +9,8 @@ description: "Cuántos años de salario bruto cuesta una vivienda de 90 m² en E
 </script>
 
 ```sql espana
-SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana
+SELECT anio, anios_salario, pct_alquiler, precio_90m2, salario_anual, alquiler_mes_mediana,
+       precio_90m2_real, salario_anual_real, anio_base
 FROM mother.vivienda_esfuerzo
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -33,8 +34,9 @@ SELECT
     arg_max(anio, anios_salario) AS anio_max,
     min(anios_salario) AS anios_min,
     arg_min(anio, anios_salario) AS anio_min,
-    100 * (arg_max(precio_90m2, anio) / arg_min(precio_90m2, anio) - 1) AS var_precio,
-    100 * (arg_max(salario_anual, anio) / arg_min(salario_anual, anio) - 1) AS var_salario,
+    100 * (arg_max(precio_90m2_real, anio) / arg_min(precio_90m2_real, anio) - 1) AS var_precio,
+    100 * (arg_max(salario_anual_real, anio) / arg_min(salario_anual_real, anio) - 1) AS var_salario,
+    CAST(max(anio_base) AS INTEGER) AS anio_base,
     min(anio) AS anio_ini
 FROM ${compra}
 ```
@@ -105,13 +107,13 @@ Cuánto pesa la vivienda en el sueldo. Para comprar: **cuántos años de salario
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € al año"
         period="España, {hitos[0]?.anio_ult} · un piso de 90 m² se tasa en {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual)}
+        sparklineData={compra.map(d => d.salario_anual_real)}
     />
 </Grid>
 
 ## Comprar: años de salario
 
-Entre {hitos[0]?.anio_ini} y {hitos[0]?.anio_ult} el valor tasado de un piso de 90 m² cambió un {formatNumber(hitos[0]?.var_precio, 1)} % y el salario bruto medio, un {formatNumber(hitos[0]?.var_salario, 1)} %, ambos en euros de cada año. El mínimo de la serie fue en {hitos[0]?.anio_min}, con {formatNumber(hitos[0]?.anios_min, 1)} años de salario.
+Entre {hitos[0]?.anio_ini} y {hitos[0]?.anio_ult} el valor tasado de un piso de 90 m² cambió un {formatNumber(hitos[0]?.var_precio, 1)} % y el salario bruto medio, un {formatNumber(hitos[0]?.var_salario, 1)} %, ambos en euros constantes de {hitos[0]?.anio_base}, descontada la inflación. El mínimo de la serie fue en {hitos[0]?.anio_min}, con {formatNumber(hitos[0]?.anios_min, 1)} años de salario.
 
 <LineChart
     data={compra}

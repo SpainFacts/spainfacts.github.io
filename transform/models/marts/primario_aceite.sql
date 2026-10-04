@@ -22,9 +22,9 @@ with prod as (
 ),
 
 pob as (
-    select geo, anio, valor as poblacion_miles
-    from {{ source('raw_primario', 'eurostat_poblacion_paises') }}
-    where valor is not null
+    select i.eurostat as geo, p.anio, p.poblacion / 1000 as poblacion_miles
+    from {{ ref('poblacion_paises') }} p
+    join {{ ref('paises_iso') }} i on i.cod_pais = p.cod_pais
 ),
 
 grupos as (

@@ -4,7 +4,7 @@
 --                        profesionalmente activo (PACT); `situacion` dice cuál.
 --   camas:               hlth_rs_bds1, camas hospitalarias disponibles (HBEDT, todas las
 --                        funciones), por 100.000 habitantes.
--- geo 'UE' = media de los países con dato ese año ponderada por población: suma de efectivos
+-- cod_pais EU27_2020 (pais UE-27 (media)) = media de los países con dato ese año ponderada por población: suma de efectivos
 -- (NR) / suma de la población implícita (NR / tasa x 100.000); n_paises dice cuántos entran
 -- (solo años con al menos 24 de los 27 países, para que la media sea comparable).
 with personal as (
@@ -51,33 +51,25 @@ ue as (
     where numero is not null and por_100k > 0
     group by all
     having count(*) >= 24
+),
+
+todo as (
+    select anio, geo, recurso, situacion, por_100k, numero, cast(null as bigint) as n_paises
+    from paises
+    union all
+    select anio, geo, recurso, situacion, por_100k, numero, n_paises
+    from ue
 )
 
 select
-    anio,
-    cast(geo as varchar) as geo,
-    case geo
-        when 'UE' then 'UE-27 (media)'
-        when 'ES' then 'España' when 'DE' then 'Alemania' when 'FR' then 'Francia' when 'IT' then 'Italia'
-        when 'PT' then 'Portugal' when 'BE' then 'Bélgica' when 'BG' then 'Bulgaria' when 'CZ' then 'Chequia'
-        when 'DK' then 'Dinamarca' when 'EE' then 'Estonia' when 'IE' then 'Irlanda' when 'EL' then 'Grecia'
-        when 'HR' then 'Croacia' when 'CY' then 'Chipre' when 'LV' then 'Letonia' when 'LT' then 'Lituania'
-        when 'LU' then 'Luxemburgo' when 'HU' then 'Hungría' when 'MT' then 'Malta' when 'NL' then 'Países Bajos'
-        when 'AT' then 'Austria' when 'PL' then 'Polonia' when 'RO' then 'Rumanía' when 'SI' then 'Eslovenia'
-        when 'SK' then 'Eslovaquia' when 'FI' then 'Finlandia' when 'SE' then 'Suecia'
-        else geo
-    end as pais,
-    recurso,
-    situacion,
-    por_100k,
-    por_100k / 100 as por_1000,
-    numero,
-    cast(null as bigint) as n_paises
-from paises
-
-union all
-
-select
-    anio, geo, 'UE-27 (media)' as pais, recurso, situacion, por_100k, por_100k / 100 as por_1000,
-    numero, n_paises
-from ue
+    t.anio,
+    coalesce(p.cod_pais, case when t.geo = 'UE' then 'EU27_2020' end) as cod_pais,
+    case when t.geo = 'UE' then 'UE-27 (media)' else p.pais end as pais,
+    case when t.geo = 'UE' then 'agregado' else 'pais' end as nivel,
+    t.recurso,
+    case t.situacion when 'PRACT' then 'ejerciendo' when 'PACT' then 'activo' else t.situacion end as situacion,
+    t.por_100k / 100 as por_1000,
+    t.numero,
+    t.n_paises
+from todo t
+left join {{ ref('paises_iso') }} p on p.eurostat = t.geo

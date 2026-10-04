@@ -13,19 +13,19 @@ og:
 
 ```sql ejercicios
 SELECT
-    CAST(ejercicio AS INTEGER) AS ejercicio,
+    CAST(anio AS INTEGER) AS ejercicio,
     situacion,
     coalesce(ley, '') AS ley,
     fecha_publicacion,
     CAST(dias_prorroga AS INTEGER) AS dias_prorroga,
     en_plazo,
-    en_curso,
+    es_parcial AS en_curso,
     presidente_responsable,
     partido_responsable,
     presidente_1_enero,
     coalesce(url_html, '') AS url_html
 FROM mother.gobierno_presupuestos
-ORDER BY ejercicio
+ORDER BY anio
 ```
 
 ```sql resumen

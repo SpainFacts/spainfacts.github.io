@@ -1,7 +1,7 @@
 ---
 title: Espainia beste herrialdeen aldean
 description: "Ustelkeriari, osotasunari eta gobernu irekiari buruzko indize internazionalak: non dagoen Espainia EBren, ELGAren eta erreferentziazko herrialdeen aldean, eta nola aldatu den Gobernu bakoitzarekin."
-i18n_origen: b0514e13fe1c
+i18n_origen: 43c868242525
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -23,7 +23,7 @@ WITH e AS (
         lag(anio) OVER (PARTITION BY indicador_id ORDER BY anio) AS anio_anterior,
         row_number() OVER (PARTITION BY indicador_id ORDER BY anio DESC) AS rn
     FROM mother.transparencia_internacional
-    WHERE cod_pais = 'ESP'
+    WHERE cod_pais = 'ES'
 )
 SELECT e.indicador_id, e.nombre_corto, e.unidad, e.sentido, e.fuente, e.orden_indicador,
     CAST(e.anio AS INTEGER) AS anio, e.valor, e.valor_anterior, CAST(e.anio_anterior AS INTEGER) AS anio_anterior,
@@ -34,7 +34,7 @@ SELECT e.indicador_id, e.nombre_corto, e.unidad, e.sentido, e.fuente, e.orden_in
     ue.valor AS valor_ue
 FROM e
 LEFT JOIN mother.transparencia_internacional ue
-    ON ue.indicador_id = e.indicador_id AND ue.anio = e.anio AND ue.cod_pais = 'EUU'
+    ON ue.indicador_id = e.indicador_id AND ue.anio = e.anio AND ue.cod_pais = 'EU27_2020'
 WHERE e.rn = 1
 ORDER BY e.orden_indicador
 ```
@@ -62,7 +62,7 @@ SELECT CAST(min(puesto_ue) AS INTEGER) AS mejor, CAST(max(puesto_ue) AS INTEGER)
 ```sql cpi_inicio
 SELECT CAST(anio AS INTEGER) AS anio, valor, CAST(puesto_ue AS INTEGER) AS puesto_ue
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id = 'cpi'
+WHERE cod_pais = 'ES' AND indicador_id = 'cpi'
 ORDER BY anio
 LIMIT 1
 ```
@@ -70,7 +70,7 @@ LIMIT 1
 ```sql serie_esp
 SELECT indicador_id, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP'
+WHERE cod_pais = 'ES'
 ORDER BY indicador_id, anio
 ```
 
@@ -85,12 +85,12 @@ ORDER BY indicador_id, orden_pais, anio
 ```sql ranking_ue
 -- Países de la UE en el último año con dato de España, España destacada
 SELECT t.indicador_id, t.pais, t.valor, CAST(t.anio AS INTEGER) AS anio,
-    CASE WHEN t.cod_pais = 'ESP' THEN 'España' ELSE 'Resto de la UE' END AS grupo
+    CASE WHEN t.cod_pais = 'ES' THEN 'España' ELSE 'Resto de la UE' END AS grupo
 FROM mother.transparencia_internacional t
 JOIN (
     SELECT indicador_id, max(anio) AS anio
     FROM mother.transparencia_internacional
-    WHERE cod_pais = 'ESP'
+    WHERE cod_pais = 'ES'
     GROUP BY indicador_id
 ) u ON u.indicador_id = t.indicador_id AND u.anio = t.anio
 WHERE t.es_ue
@@ -100,7 +100,7 @@ ORDER BY t.indicador_id, t.valor DESC
 ```sql puesto_ue_serie
 SELECT indicador_id, nombre_corto, CAST(anio AS INTEGER) AS anio, CAST(puesto_ue AS INTEGER) AS puesto_ue, CAST(n_ue AS INTEGER) AS n_ue
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id IN ('cpi', 'wgi_control_corrupcion', 'wjp_estado_derecho') AND anio >= 1996
+WHERE cod_pais = 'ES' AND indicador_id IN ('cpi', 'wgi_control_corrupcion', 'wjp_estado_derecho') AND anio >= 1996
 ORDER BY indicador_id, anio
 ```
 
@@ -154,14 +154,14 @@ SELECT * FROM ${gobiernos} WHERE familia = 'UCD'
 ```sql larga_vdem
 SELECT pais, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'vdem_corrupcion_politica' AND cod_pais IN ('ESP', 'EUU', 'OED') AND anio >= 1977
+WHERE indicador_id = 'vdem_corrupcion_politica' AND cod_pais IN ('ES', 'EU27_2020', 'OECD') AND anio >= 1977
 ORDER BY cod_pais, anio
 ```
 
 ```sql larga_wgi
 SELECT pais, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'wgi_control_corrupcion' AND cod_pais IN ('ESP', 'EUU', 'OED')
+WHERE indicador_id = 'wgi_control_corrupcion' AND cod_pais IN ('ES', 'EU27_2020', 'OECD')
 ORDER BY cod_pais, anio
 ```
 
@@ -185,12 +185,12 @@ base AS (
       AND anio >= 1976 AND NOT es_agregado
 ),
 anios_esp AS (
-    SELECT indicador_id, count(*) AS n FROM base WHERE cod_pais = 'ESP' GROUP BY indicador_id
+    SELECT indicador_id, count(*) AS n FROM base WHERE cod_pais = 'ES' GROUP BY indicador_id
 ),
 panel AS (
     SELECT b.indicador_id, b.cod_pais
     FROM base b JOIN anios_esp a ON a.indicador_id = b.indicador_id
-    WHERE b.es_ue AND b.cod_pais <> 'ESP'
+    WHERE b.es_ue AND b.cod_pais <> 'ES'
     GROUP BY b.indicador_id, b.cod_pais, a.n
     HAVING count(*) = a.n
 ),
@@ -205,7 +205,7 @@ media AS (
 brecha AS (
     SELECT e.indicador_id, e.sentido, e.anio, e.valor - m.valor AS brecha
     FROM base e JOIN media m ON m.indicador_id = e.indicador_id AND m.anio = e.anio
-    WHERE e.cod_pais = 'ESP'
+    WHERE e.cod_pais = 'ES'
 ),
 cambios AS (
     SELECT *,
@@ -215,7 +215,7 @@ cambios AS (
 )
 SELECT
     c.indicador_id,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 'Corrupción política (V-Dem, centésimas)' ELSE 'Control de la corrupción (Banco Mundial, puntos)' END AS indice,
+    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 'Corrupción política (V-Dem, puntos)' ELSE 'Control de la corrupción (Banco Mundial, puntos)' END AS indice,
     CASE g.presidente
         WHEN 'Adolfo Suárez / Leopoldo Calvo-Sotelo' THEN 'Suárez y Calvo-Sotelo'
         WHEN 'Felipe González' THEN 'González'
@@ -230,8 +230,8 @@ SELECT
     CAST(count(c.mejora) AS INTEGER) AS anios,
     CAST(min(c.anio) AS INTEGER) AS primer_anio,
     CAST(max(c.anio) AS INTEGER) AS ultimo_anio,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 100 ELSE 1 END * sum(c.mejora) AS mejora,
-    CASE WHEN c.indicador_id = 'vdem_corrupcion_politica' THEN 100 ELSE 1 END * sum(c.mejora) / count(c.mejora) AS mejora_anual,
+    sum(c.mejora) AS mejora,
+    sum(c.mejora) / count(c.mejora) AS mejora_anual,
     min(n.n_panel) AS n_panel
 FROM cambios c
 JOIN n_panel n ON n.indicador_id = c.indicador_id
@@ -252,7 +252,7 @@ SELECT * FROM ${mandatos} WHERE indicador_id = 'wgi_control_corrupcion' ORDER BY
 ```sql wjp_factores
 SELECT nombre_corto AS factor, CAST(anio AS INTEGER) AS anio, valor
 FROM mother.transparencia_internacional
-WHERE cod_pais = 'ESP' AND indicador_id LIKE 'wjp_%'
+WHERE cod_pais = 'ES' AND indicador_id LIKE 'wjp_%'
 ORDER BY orden_indicador, anio
 ```
 
@@ -277,12 +277,12 @@ ORDER BY orden_pais, anio
 
 ```sql exp_ranking
 SELECT t.pais, t.valor,
-    CASE WHEN t.cod_pais = 'ESP' THEN 'España' WHEN t.es_ue THEN 'Resto de la UE' ELSE 'Resto de la OCDE' END AS grupo
+    CASE WHEN t.cod_pais = 'ES' THEN 'España' WHEN t.es_ue THEN 'Resto de la UE' ELSE 'Resto de la OCDE' END AS grupo
 FROM mother.transparencia_internacional t
 WHERE t.indicador_id = '${inputs.ind.value}' AND (t.es_ue OR t.es_ocde)
   AND t.anio = (
     SELECT max(anio) FROM mother.transparencia_internacional
-    WHERE indicador_id = '${inputs.ind.value}' AND cod_pais = 'ESP'
+    WHERE indicador_id = '${inputs.ind.value}' AND cod_pais = 'ES'
   )
 ORDER BY t.valor DESC
 ```
@@ -325,10 +325,10 @@ Nola ikusten da kanpotik Espainiako erakundeen osotasuna? Hainbat erakunde inter
     <KpiCard
         title="Gobernu irekia (WJP)"
         value={esp_wjp[0]?.valor}
-        formattedValue="{formatNumber(esp_wjp[0]?.valor, 2)} / 1"
+        formattedValue="{formatNumber(esp_wjp[0]?.valor, 0)} / 100"
         period="{esp_wjp[0]?.anio} · EBko postua: {esp_wjp[0]?.puesto_ue}/{esp_wjp[0]?.n_ue}"
-        change={(esp_wjp[0]?.cambio / 0.01)?.toFixed(1)}
-        changeUnit=" ehunen"
+        change={esp_wjp[0]?.cambio?.toFixed(1)}
+        changeUnit=" pts"
         changePeriod="aurreko datuarekin alderatuta ({esp_wjp[0]?.anio_anterior})"
         direction="positive-up"
         source="World Justice Project"
@@ -337,10 +337,10 @@ Nola ikusten da kanpotik Espainiako erakundeen osotasuna? Hainbat erakunde inter
     <KpiCard
         title="Ustelkeria politikoa (V-Dem)"
         value={esp_vdem[0]?.valor}
-        formattedValue="{formatNumber(esp_vdem[0]?.valor, 2)} / 1"
+        formattedValue="{formatNumber(esp_vdem[0]?.valor, 1)} / 100"
         period="{esp_vdem[0]?.anio} · txikiagoa hobea da · EBko postua: {esp_vdem[0]?.puesto_ue}/{esp_vdem[0]?.n_ue}"
-        change={(esp_vdem[0]?.cambio / 0.01)?.toFixed(1)}
-        changeUnit=" ehunen"
+        change={esp_vdem[0]?.cambio?.toFixed(1)}
+        changeUnit=" pts"
         changePeriod="aurreko datuarekin alderatuta ({esp_vdem[0]?.anio_anterior})"
         direction="positive-down"
         source="V-Dem"
@@ -360,8 +360,8 @@ Herrialde bakoitzaren azken datu erabilgarria indize nagusietan. Guztietan, **ha
     <Column id=wgi_cc title="Ustelkeriaren kontrola (0-100)" fmt='0.0' />
     <Column id=wgi_va title="Ahotsa eta kontu-ematea (0-100)" fmt='0.0' />
     <Column id=wgi_ge title="Gobernuaren eraginkortasuna (0-100)" fmt='0.0' />
-    <Column id=wjp_ga title="Gobernu irekia WJP (0-1)" fmt='0.00' />
-    <Column id=vdem_cp title="Ustelkeria politikoa V-Dem (0-1, txikiagoa hobea)" fmt='0.00' />
+    <Column id=wjp_ga title="Gobernu irekia WJP (0-100)" fmt='0.0' />
+    <Column id=vdem_cp title="Ustelkeria politikoa V-Dem (0-100, txikiagoa hobea)\" fmt='0.0' />
 </DataTable>
 
 ## Ustelkeriaren pertzepzioa
@@ -470,8 +470,8 @@ Postua gaur egun EB-27 osatzen duten eta urte horretan datua duten herrialdeen a
     y=valor
     series=pais
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1 (handiagoa = ustelkeria gehiago)"
+    yFmt='0.0'
+    yAxisTitle="0-100 (handiagoa = ustelkeria gehiago)"
     title="Ustelkeria politikoaren indizea (V-Dem), 1977-{esp_vdem[0]?.anio}"
     seriesColors={{'España': '#b91c1c', 'Unión Europea (media simple)': '#475569', 'OCDE (media simple)': '#94a3b8'}}
 >
@@ -494,7 +494,7 @@ Postua gaur egun EB-27 osatzen duten eta urte horretan datua duten herrialdeen a
 
 ### Gobernuka, EBko batez bestekoaren aldean
 
-Europako joera bat Gobernu bati ez egozteko, **Espainiaren eta EBko batez bestekoaren arteko aldea agintaldi bakoitzean zenbat aldatu zen** neurtzen da. Batez bestekoa serie osoa duten EBko herrialdeena da, urteekin haren osaera alda ez dadin ({mandatos_vdem[0]?.n_panel} herrialde V-Demen 1976tik, eta {mandatos_wgi[0]?.n_panel} Munduko Bankuan 1996tik). Urte bakoitza uztailaren 1ean gobernatzen zuenari esleitzen zaio. Balio positiboak esan nahi du Espainia **EBren aldean hobetu zela**; negatiboak, okerrera egin zuela. V-Demen indizearen ehunenetan adierazten da (0-100 eskala).
+Europako joera bat Gobernu bati ez egozteko, **Espainiaren eta EBko batez bestekoaren arteko aldea agintaldi bakoitzean zenbat aldatu zen** neurtzen da. Batez bestekoa serie osoa duten EBko herrialdeena da, urteekin haren osaera alda ez dadin ({mandatos_vdem[0]?.n_panel} herrialde V-Demen 1976tik, eta {mandatos_wgi[0]?.n_panel} Munduko Bankuan 1996tik). Urte bakoitza uztailaren 1ean gobernatzen zuenari esleitzen zaio. Balio positiboak esan nahi du Espainia **EBren aldean hobetu zela**; negatiboak, okerrera egin zuela. 0-100 eskalako puntuetan adierazten da.
 
 <BarChart
     data={mandatos_vdem}
@@ -504,7 +504,7 @@ Europako joera bat Gobernu bati ez egozteko, **Espainiaren eta EBko batez bestek
     swapXY=true
     sort=false
     yFmt='0.0'
-    title="V-Dem, ustelkeria politikoa: hobekuntza EBren aldean (ehunenak)"
+    title="V-Dem, ustelkeria politikoa: hobekuntza EBren aldean (puntuak)"
     seriesColors={{'UCD': '#16a34a', 'PSOE': '#dc2626', 'PP': '#2563eb'}}
 />
 
@@ -543,8 +543,8 @@ World Justice Projecten **Rule of Law Index** delakoa biztanleria orokorrari egi
     y=valor
     series=factor
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1"
+    yFmt='0'
+    yAxisTitle="0-100"
     title="Espainia Rule of Law Index-ean (WJP)"
 />
 
@@ -554,8 +554,8 @@ World Justice Projecten **Rule of Law Index** delakoa biztanleria orokorrari egi
     y=valor
     series=pais
     xFmt='0'
-    yFmt='0.00'
-    yAxisTitle="0-1"
+    yFmt='0'
+    yAxisTitle="0-100"
     title="Gobernu irekia (WJP, 3. faktorea)"
     seriesColors={{'España': '#b91c1c'}}
 />
@@ -595,8 +595,8 @@ Unitatea: {exp_info[0]?.unidad}. {exp_info[0]?.sentido === 'negativo' ? 'Indize 
 
 - **Ustelkeriaren Pertzepzio Indizea (CPI)**, [Transparency International](https://www.transparency.org/en/cpi). 3 eta 13 iturri arteko batez bestekoa (herrialde-arriskuaren ebaluazioak, zuzendariei egindako inkestak eta adituen balorazioak), 0tik 100era berreskalatuta. **Sektore publikoan hautematen den** ustelkeria neurtzen du, ez pribatua, ez diru-zuritzea, ez alderdien legez kanpoko finantzaketa. 2012tik alderagarria. Emaitzen urteko Excelaren serieen orria hartzen da. CC BY-ND 4.0 lizentzia: puntuazio eta munduko postu ofizialak **eraldatu gabe** erreproduzitzen dira, eta horregatik ez da EBko ez ELGAko batez bestekorik kalkulatzen (Espainiak EBn duen postua argitaratutako puntuazioen ordena besterik ez da).
 - **Worldwide Governance Indicators (WGI)**, [Munduko Bankua](https://www.worldbank.org/en/publication/worldwide-governance-indicators), Munduko Bankuaren datuen APIa (3. iturria). 30 pertzepzio-iturri baino gehiago sei dimentsiotan konbinatzen dituen eredu estatistikoa; 2024ko berrikuspen metodologikoaren 0-100 puntuazioa erabiltzen da, % 90eko konfiantza-tartearekin. Bi urtean behin 2002ra arte. CC BY 4.0 lizentzia.
-- **V-Dem** (Varieties of Democracy, Göteborgeko Unibertsitatea), [Our World in Data](https://ourworldindata.org/grapher/political-corruption-index) bidez. Ustelkeria politikoaren indizeak (exekutiboa, legegilea, judiziala eta sektore publikoa) eta sektore publikoko ustelkeriarenak, 0tik 1era (1 = ustelkeria handiena), herrialde bakoitzeko milaka adituren balorazioen gaineko neurketa-eredu batekin eraikiak. CC BY-SA 4.0 (V-Dem) eta CC BY 4.0 (OWID) lizentziak.
-- **Rule of Law Index**, [World Justice Project](https://worldjusticeproject.org/rule-of-law-index/). Biztanleria orokorrari egindako inkesta eta adituei egindako galdetegiak; 0-1 eskala. Herrialdeen estaldura gero eta handiagoa 2012-2013tik. CC BY-NC-ND 4.0 lizentzia: puntuazioak dauden bezala erreproduzituak, batez besteko propiorik gabe.
+- **V-Dem** (Varieties of Democracy, Göteborgeko Unibertsitatea), [Our World in Data](https://ourworldindata.org/grapher/political-corruption-index) bidez. Ustelkeria politikoaren indizeak (exekutiboa, legegilea, judiziala eta sektore publikoa) eta sektore publikoko ustelkeriarenak, 0tik 100era (100 = ustelkeria handiena; jatorrizko 0-1 eskala, 100 ez biderkatua), herrialde bakoitzeko milaka adituren balorazioen gaineko neurketa-eredu batekin eraikiak. CC BY-SA 4.0 (V-Dem) eta CC BY 4.0 (OWID) lizentziak.
+- **Rule of Law Index**, [World Justice Project](https://worldjusticeproject.org/rule-of-law-index/). Biztanleria orokorrari egindako inkesta eta adituei egindako galdetegiak; 0-100 eskala (jatorrizko 0-1 eskala, 100 ez biderkatua). Herrialdeen estaldura gero eta handiagoa 2012-2013tik. CC BY-NC-ND 4.0 lizentzia: puntuazioak dauden bezala erreproduzituak, batez besteko propiorik gabe.
 - **EBren eta ELGAren batez bestekoak**: **gaur egun** kide diren herrialdeen batez besteko sinpleak (ez biztanleriaren arabera haztatuak), WGIrako eta V-Demerako soilik kalkulatuak, eta haien % 90ek gutxienez datua duten urteetan soilik. **EBko/ELGAko postua**: urte horretan datua duten egungo kideen arteko ordena (1 = onena).
 - **Gobernuak**: Gobernuko presidenteak eta alderdia, SpainFactsen gobernuen seed-etik. Agintaldikako analisian, urte bakoitza uztailaren 1ean gobernatzen zuenari egozten zaio, eta urteko aldaketa Espainiaren eta EBko batez bestekoaren arteko aldeak datua duen aurreko urtearekiko izan duen aldakuntza da.
 - **Muga komunak**: guztiak **pertzepzio-indizeak** dira, inkestetatik eta balorazio subjektiboetatik osatuak; batzuek iturriak partekatzen dituzte (horregatik dira hain antzekoak); hainbat puntuko errore-marjinak dituzte; eta gertaerak atzerapenarekin islatzen dituzte. Ez dituzte ordezkatzen kondenen edo ikerketen datuak (ikus [kriminalitatea](/eu/sociedad/criminalidad/) eta [udalen kontu-ematea](/eu/transparencia/cuentas-municipales/)).

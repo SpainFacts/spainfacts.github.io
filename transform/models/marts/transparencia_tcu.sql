@@ -232,11 +232,13 @@ select
     c.cod_mun,
     m.municipio,
     m.cod_prov,
+    tp.nombre as provincia,
     m.cod_ccaa,
+    tc.nombre as ccaa,
     c.id_entidad,
     c.metodo_casado,
     c.obligacion,
-    c.ejercicio,
+    cast(c.ejercicio as integer) as anio,
     c.fecha_limite,
     c.estado_portal,
     c.estado,
@@ -261,6 +263,8 @@ select
     end as tramo_orden,
     c.vencido and c.estado <> 'no_aplica' and m.cod_prov not in ('01', '20', '31', '48') as aplica_indicador,
     c.estado = 'no_rendida' and c.vencido and m.cod_prov not in ('01', '20', '31', '48') as incumple,
+    case when c.vencido and c.estado <> 'no_aplica' and m.cod_prov not in ('01', '20', '31', '48')
+        then (case when c.estado = 'no_rendida' then 100 else 0 end) end as incumple_pct,
     g.alcalde as alcalde_en_plazo,
     g.partido_original as lista_en_plazo,
     coalesce(g.familia, 'Sin dato de alcalde') as familia_en_plazo,
@@ -271,3 +275,5 @@ from con_poblacion c
 left join gobierno g
   on g.cod_mun = c.cod_mun and g.obligacion = c.obligacion and g.ejercicio = c.ejercicio and g.n = 1
 left join ine m on m.cod_mun = c.cod_mun
+left join {{ ref('territorios') }} tp on tp.nivel = 'provincia' and tp.cod = m.cod_prov
+left join {{ ref('territorios') }} tc on tc.nivel = 'ccaa' and tc.cod = m.cod_ccaa

@@ -1,5 +1,6 @@
 -- Generación eléctrica anual nacional por tecnología (REE), solo años completos.
--- Mismas columnas que el antiguo CSV clima_energia.mix_electrico.
+-- generacion_kwh_hab = kWh por habitante (población de España, poblacion_territorios);
+-- cuota_pct = % del total de la generación del año.
 -- Agrupación de tecnologías REE -> etiquetas de la web:
 --   Hidráulica -> Hidroeléctrica; Ciclo combinado -> Ciclos Combinados (Gas);
 --   Cogeneración + Residuos no renovables -> Cogeneración y Residuos;
@@ -39,11 +40,14 @@ total as (
 )
 
 select
-    g.anio as "año",
+    g.anio,
     g.tecnologia,
     g.tipo_fuente,
     round(sum(g.generacion_twh), 2) as generacion_twh,
-    round(100 * sum(g.generacion_twh) / any_value(t.total_twh), 2) as porcentaje_total
+    round(sum(g.generacion_twh) * 1e9 / any_value(p.poblacion), 0) as generacion_kwh_hab,
+    round(100 * sum(g.generacion_twh) / any_value(t.total_twh), 2) as cuota_pct
 from gen as g
 inner join total as t on t.anio = g.anio
+left join {{ ref('poblacion_territorios') }} as p
+    on p.nivel = 'pais' and p.cod = '00' and p.sexo = 'Total' and p.anio = g.anio
 group by g.anio, g.tecnologia, g.tipo_fuente

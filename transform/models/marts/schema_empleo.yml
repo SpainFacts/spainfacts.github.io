@@ -15,15 +15,15 @@ models:
   - name: empleo_epa_administracion
     description: "Asalariados del sector público por tipo de administración, trimestral desde 2002 (EPA 65193)."
   - name: empleo_epa_ccaa
-    description: "Asalariados públicos y privados por comunidad, trimestral desde 2002 (EPA 65327)."
+    description: "Asalariados públicos y privados por comunidad y España (nivel pais), trimestral desde 2002 (EPA 65327), con la cuota pública en % y por 1.000 habitantes."
   - name: empleo_salarios_deciles
-    description: "Salario medio mensual por decil y sector público/privado (EPA 66250)."
+    description: "Salario medio mensual por decil (decil_nombre D1-D10; Total = media de todos los asalariados, decil vacío) y sector público/privado (EPA 66250), en euros corrientes y reales (anio_euros)."
   - name: empleo_salarios_ccaa
-    description: "Salario medio anual bruto por comunidad y control público/privado (EES 2022, 36887)."
+    description: "Salario medio anual bruto por España (nivel pais) y comunidad y control público/privado (EES 2022, 36887), con la brecha público/privado en %."
   - name: empleo_coste
-    description: "Remuneración de asalariados de las AAPP por subsector (Eurostat gov_10a_main D1PAY)."
+    description: "Remuneración de asalariados de las AAPP por subsector (Eurostat gov_10a_main D1PAY), en euros corrientes y en euros constantes (por habitante y total)."
   - name: empleo_gasto_personal_territorio
-    description: "Capítulo 1 (gasto de personal) de cada comunidad y de sus ayuntamientos, por año y territorio."
+    description: "Capítulo 1 (gasto de personal) de cada comunidad y de sus ayuntamientos, por año y territorio: total corriente y por habitante en euros constantes."
   - name: deflactor
     description: "IPC medio anual (base 2025) y factor para expresar importes en euros constantes del último año completo: importe_real = importe * factor."
     columns:

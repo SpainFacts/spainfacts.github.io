@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 9e50cb98a359
+i18n_origen: 5b934493d7e4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,16 +113,7 @@ SELECT
 -- población ese año (mediana por habitante: no la distorsionan las ciudades grandes).
 -- Las columnas _real están en euros constantes del último año completo (deflactor).
 WITH mia AS (
-    SELECT *,
-        CASE
-            WHEN poblacion < 1000 THEN '<1.000'
-            WHEN poblacion < 5000 THEN '1.000-5.000'
-            WHEN poblacion < 20000 THEN '5.000-20.000'
-            WHEN poblacion < 50000 THEN '20.000-50.000'
-            WHEN poblacion < 100000 THEN '50.000-100.000'
-            WHEN poblacion < 500000 THEN '100.000-500.000'
-            ELSE '>500.000'
-        END AS tramo
+    SELECT *, tramo_poblacion AS tramo
     FROM mother.municipios_cuentas_serie
     WHERE cod_mun = '${inputs.municipio}'
 )
@@ -133,9 +124,9 @@ SELECT
     t.gasto_hab_mediana AS gasto_hab_tramo,
     t.ingreso_hab_mediana AS ingreso_hab_tramo,
     t.n_municipios AS municipios_tramo,
-    m.gasto_hab * f.factor AS gasto_hab_real,
-    m.ingreso_hab * f.factor AS ingreso_hab_real,
-    m.saldo_no_financiero / nullif(m.poblacion, 0) * f.factor AS saldo_hab_real,
+    m.gasto_hab_real,
+    m.ingreso_hab_real,
+    m.saldo_hab_real,
     t.gasto_hab_mediana * f.factor AS gasto_hab_tramo_real,
     t.ingreso_hab_mediana * f.factor AS ingreso_hab_tramo_real,
     f.factor
@@ -196,18 +187,13 @@ SELECT area, 'Mediana de su tramo', mediana FROM ${areas}
 -- mediana de los municipios del mismo tramo de población que la informan.
 -- Importes por habitante en euros constantes del último año completo.
 WITH anio AS (SELECT max(anio) AS anio FROM mother.municipios_politicas),
-defl AS (SELECT coalesce(max(factor), 1) AS factor FROM mother.deflactor WHERE anio = (SELECT CAST(anio AS INTEGER) FROM anio)),
 pob AS (
-    SELECT cod_mun, poblacion,
-        CASE
-            WHEN poblacion < 1000 THEN 1 WHEN poblacion < 5000 THEN 2 WHEN poblacion < 20000 THEN 3
-            WHEN poblacion < 50000 THEN 4 WHEN poblacion < 100000 THEN 5 WHEN poblacion < 500000 THEN 6 ELSE 7
-        END AS tramo
+    SELECT cod_mun, tramo_orden AS tramo
     FROM mother.municipios_cuentas_serie
     WHERE anio = (SELECT anio FROM anio)
 ),
 todas AS (
-    SELECT p.cod_mun, p.cod_politica, p.politica_nombre, p.importe, p.importe / nullif(b.poblacion, 0) AS hab, b.tramo
+    SELECT p.cod_mun, p.cod_politica, p.politica_nombre, p.importe, p.importe_hab_real AS hab, b.tramo
     FROM mother.municipios_politicas p
     JOIN pob b USING (cod_mun)
     WHERE p.anio = (SELECT anio FROM anio)
@@ -219,8 +205,8 @@ mediana AS (
 SELECT
     t.politica_nombre AS politica,
     t.importe,
-    t.hab * (SELECT factor FROM defl) AS por_habitante,
-    m.mediana_hab * (SELECT factor FROM defl) AS mediana_tramo,
+    t.hab AS por_habitante,
+    m.mediana_hab AS mediana_tramo,
     100.0 * (t.hab - m.mediana_hab) / nullif(m.mediana_hab, 0) AS dif_pct,
     t.importe / sum(t.importe) OVER () AS peso,
     (SELECT anio FROM anio) AS anio
@@ -256,24 +242,14 @@ WHERE m.cod_mun = '${inputs.municipio}'
 ```
 
 ```sql deuda_ayto
--- Deuda por habitante en euros constantes. La población municipal cargada solo
--- cubre los últimos 10 años: fuera de ese rango se usa el año más cercano.
--- Sin IPC anual antes de 2002: la serie empieza ese año.
-WITH pob AS (
-    SELECT anio, poblacion FROM mother.poblacion_municipios
-    WHERE cod_mun = '${inputs.municipio}'
-),
-rango AS (SELECT min(anio) AS ini, max(anio) AS fin FROM pob)
+-- Deuda por habitante en euros constantes (el modelo ya trae población y deflactor)
 SELECT
-    d.fecha,
-    d.deuda_eur,
-    d.deuda_eur / nullif(p.poblacion, 0) * f.factor AS deuda_hab_real
-FROM mother.local_deuda_municipio d
-CROSS JOIN rango r
-JOIN pob p ON p.anio = greatest(least(CAST(year(d.fecha) AS INTEGER), r.fin), r.ini)
-JOIN mother.deflactor f ON f.anio = CAST(year(d.fecha) AS INTEGER)
-WHERE d.cod_mun = '${inputs.municipio}'
-ORDER BY d.fecha
+    fecha,
+    deuda_eur,
+    deuda_eur_hab_real
+FROM mother.local_deuda_municipio
+WHERE cod_mun = '${inputs.municipio}' AND deuda_eur_hab_real IS NOT NULL
+ORDER BY fecha
 ```
 
 ## Contas do concello
@@ -390,14 +366,14 @@ Liquidación do orzamento do concello (o realmente ingresado e gastado, non o or
 <LineChart
     data={deuda_ayto}
     x=fecha
-    y=deuda_hab_real
+    y=deuda_eur_hab_real
     yFmt=num0
     yAxisTitle="€ por habitante"
     title="Débeda do concello por habitante (euros de {base[0]?.anio_base}, Banco de España)"
     lineColor="#b45309"
 />
 
-<p class="text-xs text-gray-500">Débeda ao final de cada trimestre: {formatCompact(deuda_ayto[deuda_ayto.length - 1]?.deuda_eur, 0)} € correntes no último dato. Por habitante co Padrón de cada ano (o máis próximo fóra dos últimos 10 anos) e descontada a inflación.</p>
+<p class="text-xs text-gray-500">Débeda ao final de cada trimestre: {formatCompact(deuda_ayto[deuda_ayto.length - 1]?.deuda_eur, 0)} € correntes no último dato. Por habitante co Padrón de cada ano e descontada a inflación.</p>
 
 {/if}
 
@@ -453,7 +429,7 @@ ORDER BY m.anio
 ```
 
 ```sql renta_mun_distritos
-SELECT 'Distrito ' || distrito AS distrito, renta_persona_real, renta_hogar_real, CAST(anio AS INTEGER) AS anio
+SELECT distrito, renta_persona_real, renta_hogar_real, CAST(anio AS INTEGER) AS anio
 FROM mother.renta_distritos
 WHERE cod_mun = '${inputs.municipio}' AND anio = (SELECT max(anio) FROM mother.renta_distritos)
 ORDER BY cod_distrito
@@ -651,15 +627,14 @@ ORDER BY mandato
 {#if alcalde.length > 0}
 
 ```sql elec_mun
-SELECT e.proceso, e.tipo, p.fecha, CAST(e.anio AS INTEGER) AS anio,
+SELECT e.proceso, e.tipo, e.fecha, CAST(e.anio AS INTEGER) AS anio,
     CASE e.tipo WHEN '02' THEN 'Generales' ELSE 'Municipales' END AS eleccion,
     e.participacion, e.ganador_siglas, e.ganador_familia, b.color AS ganador_color, e.ganador_pct,
     e.pct_izquierda, e.pct_derecha, e.pct_centro, e.pct_nacionalistas, e.pct_psoe, e.pct_pp, e.pct_vox, e.pct_iu_podemos_sumar
 FROM mother.elecciones_municipios e
-JOIN mother.elecciones_participacion p ON p.proceso = e.proceso AND p.nivel = 'pais'
 LEFT JOIN (SELECT DISTINCT familia, color FROM mother.elecciones_familias) b ON b.familia = e.ganador_familia
 WHERE e.cod_mun = '${inputs.municipio}'
-ORDER BY p.fecha
+ORDER BY e.fecha
 ```
 
 ```sql elec_mun_gen

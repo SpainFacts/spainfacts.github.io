@@ -304,38 +304,36 @@ cp_empleo as (
 
 cp_gasto_personal as (
     select 'empleo_gasto_personal_ccaa_hab' as ind, g.nivel, g.cod, g.anio,
-        g.gasto_personal_ccaa_hab * f.factor as valor,
+        g.gasto_personal_ccaa_eur_hab_real as valor,
         'Gasto de personal de la comunidad por habitante (real)' as nombre,
         'neutro' as sentido,
         'Capítulo 1 de la liquidación consolidada de la comunidad' as nota
     from {{ ref('empleo_gasto_personal_territorio') }} g
-    join defl f on f.anio = cast(g.anio as integer)
-    where g.nivel = 'ccaa' and g.gasto_personal_ccaa_hab is not null
+    where g.nivel = 'ccaa' and g.gasto_personal_ccaa_eur_hab_real is not null
     union all
     select 'empleo_gasto_personal_aytos_hab', g.nivel, g.cod, g.anio,
-        g.gasto_personal_ayuntamientos_hab * f.factor,
+        g.gasto_personal_ayuntamientos_eur_hab_real,
         'Gasto de personal de los ayuntamientos por habitante (real)', 'neutro',
         'Capítulo 1 de los ayuntamientos con datos en CONPREL, por habitante de esos municipios; sin Álava ni Navarra (régimen foral)'
     from {{ ref('empleo_gasto_personal_territorio') }} g
-    join defl f on f.anio = cast(g.anio as integer)
-    where g.nivel in ('ccaa', 'provincia') and g.gasto_personal_ayuntamientos_hab is not null
+    where g.nivel in ('ccaa', 'provincia') and g.gasto_personal_ayuntamientos_eur_hab_real is not null
 ),
 
 cp_epa as (
-    select 'empleo_publico_cuota_epa' as ind, 'ccaa' as nivel, cod_ccaa as cod,
-        cast(year(trimestre) as integer) as anio,
-        100 * avg(cuota_publico) as valor,
+    select 'empleo_publico_cuota_epa' as ind, 'ccaa' as nivel, cod,
+        cast(anio as integer) as anio,
+        avg(cuota_publico_pct) as valor,
         'Asalariados del sector público (% del total de asalariados, EPA)' as nombre,
         '%' as unidad, 'neutro' as sentido,
         case when count(*) < 4 then 'Media de los ' || count(*) || ' trimestres publicados del año'
              else 'Media anual de los cuatro trimestres' end as nota
     from {{ ref('empleo_epa_ccaa') }}
-    where cod_ccaa between '01' and '19' and cuota_publico is not null
-    group by cod_ccaa, year(trimestre)
+    where nivel = 'ccaa' and cuota_publico_pct is not null
+    group by cod, anio
 ),
 
 cp_salarios as (
-    select 'empleo_salario_publico' as ind, 'ccaa' as nivel, s.cod_ccaa as cod,
+    select 'empleo_salario_publico' as ind, 'ccaa' as nivel, s.cod,
         cast(s.anio as integer) as anio,
         s.salario_publico * f.factor as valor,
         'Salario medio anual en el sector público (real)' as nombre,
@@ -343,14 +341,14 @@ cp_salarios as (
         'Encuesta cuatrienal de Estructura Salarial; salario bruto anual por trabajador' as nota
     from {{ ref('empleo_salarios_ccaa') }} s
     join defl f on f.anio = cast(s.anio as integer)
-    where s.cod_ccaa between '01' and '19' and s.salario_publico is not null
+    where s.nivel = 'ccaa' and s.salario_publico is not null
     union all
-    select 'empleo_brecha_salarial_publico', 'ccaa', s.cod_ccaa, cast(s.anio as integer),
-        100 * (s.salario_publico / s.salario_privado - 1),
+    select 'empleo_brecha_salarial_publico', 'ccaa', s.cod, cast(s.anio as integer),
+        s.brecha_publico_pct,
         'Diferencia del salario público sobre el privado', 'neutro',
         'Encuesta cuatrienal de Estructura Salarial; positivo = el sector público cobra más'
     from {{ ref('empleo_salarios_ccaa') }} s
-    where s.cod_ccaa between '01' and '19' and s.salario_publico is not null and s.salario_privado > 0
+    where s.nivel = 'ccaa' and s.salario_publico is not null and s.salario_privado > 0
 ),
 
 -- =====================================================================
@@ -545,14 +543,14 @@ en_calor as (
 ),
 
 calefaccion as (
-    select 'provincia' as nivel, cod_prov as cod,
+    select 'provincia' as nivel, cod,
         cast(viviendas as double) as viviendas, electricidad, gas_natural, petroleo
     from {{ ref('electrificacion_calefaccion_provincia') }}
-    where cod_prov <> '00' and viviendas > 0
+    where nivel = 'provincia' and viviendas > 0
     union all
     select 'ccaa', cod_ccaa, sum(viviendas), sum(electricidad), sum(gas_natural), sum(petroleo)
     from {{ ref('electrificacion_calefaccion_provincia') }}
-    where cod_prov <> '00' and cod_ccaa is not null
+    where nivel = 'provincia' and cod_ccaa is not null
     group by cod_ccaa
 ),
 

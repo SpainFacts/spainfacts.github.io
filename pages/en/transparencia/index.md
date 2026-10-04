@@ -1,7 +1,7 @@
 ---
 title: Transparency
 description: "How Spanish public administrations are held to account: councils' reporting obligations, transparency portals, decree-laws, pardons, rolled-over budgets and Spain's position in international integrity indices, by government and by party."
-i18n_origen: 9991e536ee5b
+i18n_origen: fd0f9eb9de30
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -32,7 +32,7 @@ SELECT * FROM ${actos} ORDER BY anio DESC LIMIT 1
 ```sql cpi
 SELECT anio, valor, puesto_ue, n_ue
 FROM mother.transparencia_internacional
-WHERE indicador_id = 'cpi' AND cod_pais = 'ESP'
+WHERE indicador_id = 'cpi' AND cod_pais = 'ES'
 ORDER BY anio
 ```
 

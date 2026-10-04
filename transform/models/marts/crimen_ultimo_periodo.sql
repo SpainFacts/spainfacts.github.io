@@ -2,6 +2,9 @@
 -- curso frente al mismo periodo del año anterior, por territorio y categoría.
 -- Uniprovinciales, Ceuta y Melilla vienen solo como comunidad: se copian
 -- también al nivel provincia con su código INE.
+-- tasa_1000: infracciones del periodo acumulado por 1.000 habitantes (padrón más reciente), no
+-- comparable con la de un año completo; variacion_pct: cambio frente al mismo periodo del año anterior.
+-- nombre: el de territorios (España, comunidades y provincias); los municipios llevan el del Balance.
 with parcial as (
     select * from {{ ref('crimen_balance_base') }}
     where periodo <> 'enero-diciembre'
@@ -49,6 +52,35 @@ select
 from base
 where cod is not null and nivel in ('pais', 'ccaa', 'provincia', 'municipio')
 group by all
+),
+
+con_provincias as (
+{{ con_uniprovinciales('final', ['anio', 'periodo', 'categoria']) }}
+),
+
+-- padrón más reciente de cada territorio
+poblacion as (
+    select nivel, cod, poblacion
+    from (
+        select 'municipio' as nivel, cod_mun as cod, anio, poblacion from {{ ref('poblacion_municipios') }} where sexo = 'Total'
+        union all
+        select nivel, cod, anio, poblacion from {{ ref('poblacion_territorios') }} where sexo = 'Total'
+    )
+    qualify anio = max(anio) over (partition by nivel)
 )
 
-{{ con_uniprovinciales('final', ['anio', 'periodo', 'categoria']) }}
+select
+    c.anio,
+    c.periodo,
+    c.nivel,
+    c.cod,
+    coalesce(t.nombre, c.territorio) as nombre,
+    c.categoria,
+    c.infracciones,
+    c.infracciones_anio_anterior,
+    p.poblacion,
+    1000.0 * c.infracciones / nullif(p.poblacion, 0) as tasa_1000,
+    100.0 * (c.infracciones / nullif(c.infracciones_anio_anterior, 0) - 1) as variacion_pct
+from con_provincias c
+left join {{ ref('territorios') }} t on t.nivel = c.nivel and t.cod = c.cod
+left join poblacion p on p.nivel = c.nivel and p.cod = c.cod

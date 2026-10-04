@@ -212,8 +212,11 @@ select
     t.tipo_administracion,
     t.entidad_principal,
     t.cod_ccaa,
+    tc.nombre as ccaa,
     t.cod_prov,
+    tp.nombre as provincia,
     t.cod_mun,
+    nm.municipio,
     t.periodo,
     t.orden_periodo,
     t.anio,
@@ -237,3 +240,10 @@ select
     t.url_pagina,
     t.evaluador || '|' || t.entidad || '|' || t.periodo as clave
 from atribuido t
+left join {{ ref('territorios') }} tc on tc.nivel in ('ccaa', 'pais') and tc.cod = t.cod_ccaa
+left join {{ ref('territorios') }} tp on tp.nivel = 'provincia' and tp.cod = t.cod_prov
+left join (
+    select cod_mun, municipio
+    from {{ ref('poblacion_municipios') }}
+    qualify row_number() over (partition by cod_mun order by anio desc) = 1
+) nm on nm.cod_mun = t.cod_mun

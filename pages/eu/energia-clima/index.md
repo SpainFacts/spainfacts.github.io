@@ -1,7 +1,7 @@
 ---
 title: Energia eta klima
 description: Trantsizio ekologikoa, sorkuntza elektrikoaren mixa eta berotegi-efektuko gasen isuriak Espainian.
-i18n_origen: 698c69005fd6
+i18n_origen: 44513b3048e6
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -17,53 +17,53 @@ Espainia energia berriztagarrien hedapenean Europako liderretako bat bihurtu da.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
-ORDER BY año DESC
+ORDER BY anio DESC
 LIMIT 1
 ```
 
 ```sql resumen_previo
 SELECT * FROM mother.energia_resumen_anual_mix
-ORDER BY año DESC
+ORDER BY anio DESC
 LIMIT 2
 ```
 
 ```sql resumen_serie
-SELECT año, cuota_renovable_pct AS valor
+SELECT anio, cuota_renovable_pct AS valor
 FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
+ORDER BY anio ASC
 ```
 
 ```sql emisiones_totales
 SELECT
-    año,
+    anio,
     sum(millones_toneladas_co2eq) AS total_emisiones
 FROM mother.energia_emisiones_gei
-GROUP BY año
-ORDER BY año DESC
+GROUP BY anio
+ORDER BY anio DESC
 ```
 
 ```sql potencia_solar
-SELECT potencia_mw, año
+SELECT potencia_mw, anio
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Solar Fotovoltaica'
-  AND año = (SELECT max(año) FROM mother.energia_potencia_instalada)
+  AND anio = (SELECT max(anio) FROM mother.energia_potencia_instalada)
 ```
 
 ```sql potencia_eolica
-SELECT potencia_mw, año
+SELECT potencia_mw, anio
 FROM mother.energia_potencia_instalada
 WHERE tecnologia = 'Eólica'
-  AND año = (SELECT max(año) FROM mother.energia_potencia_instalada)
+  AND anio = (SELECT max(anio) FROM mother.energia_potencia_instalada)
 ```
 
 ```sql potencia_serie
 SELECT
-    año,
+    anio,
     sum(potencia_mw) FILTER (WHERE tecnologia = 'Solar Fotovoltaica') AS solar_mw,
     sum(potencia_mw) FILTER (WHERE tecnologia = 'Eólica') AS eolica_mw
 FROM mother.energia_potencia_instalada
-GROUP BY año
-ORDER BY año ASC
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
 <Grid cols=4>
@@ -71,7 +71,7 @@ ORDER BY año ASC
         title="Berriztagarrien kuota"
         value={resumen_ultimo[0]?.cuota_renovable_pct}
         unit="%"
-        period={resumen_ultimo[0]?.año}
+        period={resumen_ultimo[0]?.anio}
         change={resumen_previo.length > 1 ? (resumen_previo[0].cuota_renovable_pct - resumen_previo[1].cuota_renovable_pct).toFixed(1) : null}
         changeUnit="p.p."
         changePeriod="aurreko urtearekiko"
@@ -88,7 +88,7 @@ ORDER BY año ASC
         changeUnit=" Mt"
         changePeriod="aurreko urtearekiko"
         direction="positive-down"
-        period={emisiones_totales[0]?.año}
+        period={emisiones_totales[0]?.anio}
         source="BEG inbentarioa (MITECO), Eurostaten bidez"
         href="/eu/energia-clima/emisiones"
         sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
@@ -97,7 +97,7 @@ ORDER BY año ASC
         title="Eguzki-potentzia FV"
         value={potencia_solar[0]?.potencia_mw ? (potencia_solar[0].potencia_mw / 1000).toFixed(1) : null}
         unit=" GW"
-        period={potencia_solar[0]?.año}
+        period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/eu/energia-clima/mix-electrico"
         sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
@@ -106,7 +106,7 @@ ORDER BY año ASC
         title="Potentzia eolikoa"
         value={potencia_eolica[0]?.potencia_mw ? (potencia_eolica[0].potencia_mw / 1000).toFixed(1) : null}
         unit=" GW"
-        period={potencia_eolica[0]?.año}
+        period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/eu/energia-clima/mix-electrico"
         sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
@@ -119,30 +119,30 @@ ORDER BY año ASC
 
 ```sql mix_hitos
 SELECT
-    año,
-    round(sum(porcentaje_total) FILTER (WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica')), 1) AS pct_eolica_solar,
-    round(sum(porcentaje_total) FILTER (WHERE tecnologia = 'Carbón'), 1) AS pct_carbon
+    anio,
+    round(sum(cuota_pct) FILTER (WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica')), 1) AS pct_eolica_solar,
+    round(sum(cuota_pct) FILTER (WHERE tecnologia = 'Carbón'), 1) AS pct_carbon
 FROM mother.energia_mix_electrico
-WHERE año IN ((SELECT min(año) FROM mother.energia_mix_electrico), (SELECT max(año) FROM mother.energia_mix_electrico))
-GROUP BY año
-ORDER BY año ASC
+WHERE anio IN ((SELECT min(anio) FROM mother.energia_mix_electrico), (SELECT max(anio) FROM mother.energia_mix_electrico))
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
-Espainiako sistema elektrikoak eraldaketa historikoa izan du: {mix_hitos[0]?.año} eta {mix_hitos[1]?.año} artean, energia eolikoak eta eguzki-energia fotovoltaikoak sorkuntza osoaren {mix_hitos[0]?.pct_eolica_solar} % izatetik **{mix_hitos[1]?.pct_eolica_solar} %** izatera igaro dira, eta ikatza, berriz, {mix_hitos[0]?.pct_carbon} %-tik {mix_hitos[1]?.pct_carbon} %-ra jaitsi da.
+Espainiako sistema elektrikoak eraldaketa historikoa izan du: {mix_hitos[0]?.anio} eta {mix_hitos[1]?.anio} artean, energia eolikoak eta eguzki-energia fotovoltaikoak sorkuntza osoaren {mix_hitos[0]?.pct_eolica_solar} % izatetik **{mix_hitos[1]?.pct_eolica_solar} %** izatera igaro dira, eta ikatza, berriz, {mix_hitos[0]?.pct_carbon} %-tik {mix_hitos[1]?.pct_carbon} %-ra jaitsi da.
 
 ```sql mix_areas
 SELECT
-    año,
+    anio,
     tecnologia,
     generacion_twh
 FROM mother.energia_mix_electrico
 WHERE tecnologia IN ('Eólica', 'Solar Fotovoltaica', 'Hidroeléctrica', 'Nuclear', 'Ciclos Combinados (Gas)', 'Carbón')
-ORDER BY año ASC, tecnologia ASC
+ORDER BY anio ASC, tecnologia ASC
 ```
 
 <AreaChart
     data={mix_areas}
-    x=año
+    x=anio
     y=generacion_twh
     series=tecnologia
     yAxisTitle="Sorkuntza (TWh)"
@@ -159,16 +159,16 @@ ORDER BY año ASC, tecnologia ASC
 
 ```sql cuota_anual
 SELECT
-    año,
+    anio,
     cuota_renovable_pct AS "Renovable (%)",
     cuota_libre_emisiones_pct AS "Libre de emisiones (%) (Renovable + Nuclear)"
 FROM mother.energia_resumen_anual_mix
-ORDER BY año ASC
+ORDER BY anio ASC
 ```
 
 <LineChart
     data={cuota_anual}
-    x=año
+    x=anio
     y={["Renovable (%)", "Libre de emisiones (%) (Renovable + Nuclear)"]}
     yAxisTitle="Guztizkoaren ehunekoa (%)"
     title="Sorkuntza garbiaren kuota elektrizitate osoaren gainean"
@@ -183,34 +183,45 @@ ORDER BY año ASC
 
 ```sql emisiones_hitos
 SELECT
-    año,
-    round(max(porcentaje_total) FILTER (WHERE sector = 'Transporte'), 1) AS pct_transporte,
+    anio,
+    round(max(cuota_pct) FILTER (WHERE sector = 'Transporte'), 1) AS pct_transporte,
     max(millones_toneladas_co2eq) FILTER (WHERE sector = 'Generación Eléctrica') AS mt_electrica
 FROM mother.energia_emisiones_gei
-WHERE año IN ((SELECT min(año) FROM mother.energia_emisiones_gei), (SELECT max(año) FROM mother.energia_emisiones_gei))
-GROUP BY año
-ORDER BY año ASC
+WHERE anio IN ((SELECT min(anio) FROM mother.energia_emisiones_gei), (SELECT max(anio) FROM mother.energia_emisiones_gei))
+GROUP BY anio
+ORDER BY anio ASC
 ```
 
-**Garraioa** da deskarbonizazioari gehien eusten dion sektorea: isurien **{emisiones_hitos[1]?.pct_transporte} %** biltzen du {emisiones_hitos[1]?.año}. urtean. Aldiz, **sorkuntza elektrikoak** {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null} % murriztu ditu bere isuriak {emisiones_hitos[0]?.año}. urteaz geroztik, berriztagarrien hedapenari esker.
+**Garraioa** da deskarbonizazioari gehien eusten dion sektorea: isurien **{emisiones_hitos[1]?.pct_transporte} %** biltzen du {emisiones_hitos[1]?.anio}. urtean. Aldiz, **sorkuntza elektrikoak** {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null} % murriztu ditu bere isuriak {emisiones_hitos[0]?.anio}. urteaz geroztik, berriztagarrien hedapenari esker.
 
 ```sql emisiones_sector
 SELECT
-    año,
+    anio,
     sector,
-    millones_toneladas_co2eq
+    millones_toneladas_co2eq,
+    t_co2eq_hab
 FROM mother.energia_emisiones_gei
-ORDER BY año ASC, sector ASC
+ORDER BY anio ASC, sector ASC
 ```
 
 <BarChart
     data={emisiones_sector}
-    x=año
+    x=anio
     y=millones_toneladas_co2eq
     series=sector
     type=stacked
     yAxisTitle="CO₂eq milioi tona"
     title="BEG isuriak sektoreka (Mt CO₂eq)"
+/>
+
+<BarChart
+    data={emisiones_sector}
+    x=anio
+    y=t_co2eq_hab
+    series=sector
+    type=stacked
+    yAxisTitle="CO₂eq tona biztanleko"
+    title="BEG isuriak sektoreka, biztanleko (t CO₂eq biztanleko)"
 />
 
 <DownloadCsvButton data={emisiones_sector} filename="spainfacts_emisiones_gei.csv" label="Deskargatu BEG isuriak (CSV)" />

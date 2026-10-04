@@ -103,7 +103,7 @@ ORDER BY orden
 ```sql itc_aytos_ultimo
 SELECT
     cod_mun, entidad, regexp_replace(entidad, '^Ayuntamiento de ', '') AS municipio,
-    CASE WHEN cod_prov = '35' THEN 'Las Palmas' ELSE 'Santa Cruz de Tenerife' END AS provincia,
+    provincia,
     poblacion, estado, puntuacion, puntuacion_original, familia, gobernante,
     CASE WHEN estado = 'incumplidora' THEN 'No rindió la evaluación' ELSE 'Evaluado' END AS situacion
 FROM ${itc}

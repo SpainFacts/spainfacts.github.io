@@ -23,7 +23,7 @@ WHERE anio < (SELECT max(year(mes)) FROM mother.movilidad_matriculaciones_mensua
 
 ```sql municipios
 SELECT
-    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana,
+    municipio, provincia, poblacion, flota, flota_por_habitante, cuota_flota_espana_pct,
     ivtm_turismo, capital, ivtm_turismo_capital, ahorro_por_coche, ahorro_estimado
 FROM mother.movilidad_flotas_municipios
 WHERE anio = (SELECT anio FROM ${ultimo_completo})
@@ -34,9 +34,9 @@ ORDER BY flota DESC
 WITH m AS (SELECT * FROM ${municipios})
 SELECT
     (SELECT anio FROM ${ultimo_completo}) AS anio,
-    (SELECT sum(cuota_flota_espana) FROM (SELECT cuota_flota_espana FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
+    (SELECT sum(cuota_flota_espana_pct) FROM (SELECT cuota_flota_espana_pct FROM m ORDER BY flota DESC LIMIT 10)) AS cuota_top10,
     sum(flota) FILTER (WHERE poblacion < 5000) AS flota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
     sum(poblacion) FILTER (WHERE poblacion < 5000) / (SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1) AS peso_pueblos,
     arg_max(municipio, flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_municipio,
     max(flota_por_habitante) FILTER (WHERE flota >= 1000) AS record_por_hab,
@@ -58,8 +58,8 @@ LIMIT 15
 -- Peso de los pueblos de menos de 5.000 habitantes en las flotas matriculadas cada año
 SELECT
     anio,
-    sum(cuota_flota_espana) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
-    sum(cuota_flota_espana) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
+    sum(cuota_flota_espana_pct) FILTER (WHERE poblacion < 5000) AS cuota_pueblos,
+    sum(cuota_flota_espana_pct) FILTER (WHERE municipio IN ('Madrid', 'Barcelona')) AS cuota_madrid_barcelona
 FROM mother.movilidad_flotas_municipios
 GROUP BY anio
 ORDER BY anio
@@ -72,16 +72,16 @@ Un coche se matricula en el municipio donde tiene el domicilio su dueño. Para u
 <Grid cols=3>
     <KpiCard
         title="Coches de flota en los 10 primeros municipios"
-        value={resumen[0]?.cuota_top10 * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_top10 * 100, 0)}
+        value={resumen[0]?.cuota_top10}
+        formattedValue={formatNumber(resumen[0]?.cuota_top10, 0)}
         unit="%"
         period="de los turismos nuevos de empresas, renting y alquiler · {resumen[0]?.anio}"
         source="DGT"
     />
     <KpiCard
         title="En pueblos de menos de 5.000 habitantes"
-        value={resumen[0]?.cuota_pueblos * 100}
-        formattedValue={formatNumber(resumen[0]?.cuota_pueblos * 100, 0)}
+        value={resumen[0]?.cuota_pueblos}
+        formattedValue={formatNumber(resumen[0]?.cuota_pueblos, 0)}
         unit="%"
         period="{formatNumber(resumen[0]?.flota_pueblos, 0)} coches de flota en municipios donde vive el {formatNumber(resumen[0]?.peso_pueblos * 100, 2)} % de la población · {resumen[0]?.anio}"
         source="DGT / INE"
@@ -116,7 +116,7 @@ Un coche se matricula en el municipio donde tiene el domicilio su dueño. Para u
     <Column id=poblacion title="Habitantes" fmt=num0 />
     <Column id=flota title="Coches de flota" fmt=num0 contentType=bar barColor="#fecaca" />
     <Column id=flota_por_habitante title="Por habitante" fmt=num1 />
-    <Column id=cuota_flota_espana title="% de España" fmt=pct1 />
+    <Column id=cuota_flota_espana_pct title="% de España" fmt=num1 />
     <Column id=ivtm_turismo title="IVTM (€/año)" fmt=num2 />
     <Column id=ivtm_turismo_capital title="IVTM en la capital" fmt=num2 />
     <Column id=ahorro_estimado title="Ahorro estimado (€)" fmt=num0 />
@@ -132,7 +132,7 @@ Solo con los coches de flota matriculados en {resumen[0]?.anio} en los municipio
     data={evolucion}
     x=anio
     y={['cuota_pueblos', 'cuota_madrid_barcelona']}
-    yFmt=pct0
+    yFmt='0"%"'
     xFmt="####"
     markers=true
     colorPalette={['#b91c1c', '#2563eb']}

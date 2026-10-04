@@ -3,7 +3,7 @@ title: Inmigración
 description: "Poboación estranxeira en España por comunidade e nacionalidade, saldo migratorio, chegadas irregulares por vía, solicitudes de asilo e nacionalizacións, con datos oficiais."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 198ef257d0f8
+i18n_origen: 23fdd4374850
 ---
 
 <script>
@@ -14,7 +14,7 @@ i18n_origen: 198ef257d0f8
 </script>
 
 ```sql pob_espana
-SELECT anio, extranjeros, poblacion, 100 * pct_extranjeros AS valor
+SELECT anio, extranjeros, poblacion, extranjeros_pct AS valor
 FROM mother.inmigracion_poblacion
 WHERE nivel = 'pais'
 ORDER BY anio
@@ -130,11 +130,11 @@ ORDER BY anio
 <p class="text-xs text-gray-500">Por nacionalidade a 1 de xaneiro (Estatística Continua de Poboación). Quen naceu fóra e xa ten a nacionalidade española conta como español, así que a poboación nacida no estranxeiro é bastante maior. Tras a crise económica o número de estranxeiros baixou de 5,4 millóns en 2010 a 4,4 millóns en 2017; desde entón medra, sobre todo con latinoamericanos, que pasaron do 2,0 % ao 4,9 % da poboación.</p>
 
 ```sql ccaa
-SELECT i.cod, t.nombre AS comunidad, '/gl' || t.ruta AS ruta, i.extranjeros, i.pct_extranjeros
+SELECT i.cod, t.nombre AS comunidad, '/gl' || t.ruta AS ruta, i.extranjeros, i.extranjeros_pct
 FROM mother.inmigracion_poblacion i
 JOIN mother.territorios t ON t.nivel = 'ccaa' AND t.cod = i.cod
 WHERE i.nivel = 'ccaa' AND i.anio = (SELECT max(anio) FROM mother.inmigracion_poblacion)
-ORDER BY i.pct_extranjeros DESC
+ORDER BY i.extranjeros_pct DESC
 ```
 
 <MapaEspana
@@ -142,8 +142,8 @@ ORDER BY i.pct_extranjeros DESC
     geoJsonUrl="/geo/ccaa.geojson"
     geoId="cod_ccaa"
     areaCol="cod"
-    value="pct_extranjeros"
-    valueFmt="pct1"
+    value="extranjeros_pct"
+    valueFmt='0.0"%"'
     link="ruta"
     colorPalette={['#f0fdfa', '#5eead4', '#0f766e']}
     height={440}
@@ -151,7 +151,7 @@ ORDER BY i.pct_extranjeros DESC
     attribution="Teselas © Esri · Límites © Instituto Geográfico Nacional · Datos: INE"
     tooltip={[
         {id: 'comunidad', showColumnName: false, valueClass: 'text-base font-semibold'},
-        {id: 'pct_extranjeros', title: 'Estranxeiros', fmt: 'pct1'},
+        {id: 'extranjeros_pct', title: 'Estranxeiros', fmt: '0.0"%"'},
         {id: 'extranjeros', title: 'Persoas', fmt: 'num0'}
     ]}
 />
@@ -300,9 +300,7 @@ LIMIT 10
 ```sql nac_origen
 SELECT nacionalidad_previa, nacionalizaciones
 FROM mother.inmigracion_nacionalizaciones
-WHERE cod = '00' AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
-  AND nacionalidad_previa NOT IN ('Total', 'País de la UE27_2020 sin España', 'País de la UE28 sin España')
-  AND nacionalidad_previa NOT LIKE 'De %' AND nacionalidad_previa NOT LIKE 'Resto%' AND nacionalidad_previa NOT LIKE 'País de%' AND nacionalidad_previa NOT LIKE 'Otros%'
+WHERE nivel = 'pais' AND NOT es_grupo AND anio = (SELECT max(anio) FROM mother.inmigracion_nacionalizaciones)
 ORDER BY nacionalizaciones DESC
 LIMIT 12
 ```

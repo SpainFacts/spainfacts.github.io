@@ -13,6 +13,12 @@ with base as (
     group by 1
 )
 select
-    *,
-    bombeo_turbinado_gwh / nullif(bombeo_consumido_gwh, 0) as rendimiento_bombeo
+    mes as fecha,
+    year(mes) as anio,
+    bombeo_turbinado_gwh,
+    bombeo_consumido_gwh,
+    baterias_entregado_gwh,
+    baterias_cargado_gwh,
+    100 * bombeo_turbinado_gwh / nullif(bombeo_consumido_gwh, 0) as rendimiento_bombeo_pct,
+    mes = max(mes) over () as es_parcial
 from base

@@ -1,6 +1,7 @@
 -- Serie larga de infracciones penales conocidas (2010-) por España, comunidad
 -- y provincia y tipología (Ministerio del Interior, Datos1), con tasa por 1.000 hab.
 -- nivel_tipologia: 0 = grupo ("1. CONTRA LAS PERSONAS"), 1 = tipo ("1.1"), 2 = subtipo ("1.1.1").
+-- nombre: el de territorios (España, comunidades y provincias).
 with base as (
     select
         a.anio,
@@ -19,6 +20,7 @@ select
     b.anio,
     b.nivel,
     b.cod,
+    t.nombre,
     b.codigo_tipologia,
     b.tipologia,
     length(b.codigo_tipologia) - length(replace(b.codigo_tipologia, '.', '')) as nivel_tipologia,
@@ -28,3 +30,4 @@ select
 from base b
 left join {{ ref('poblacion_territorios') }} p
   on p.sexo = 'Total' and p.anio = b.anio and p.cod = b.cod and p.nivel = b.nivel
+left join {{ ref('territorios') }} t on t.nivel = b.nivel and t.cod = b.cod

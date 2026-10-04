@@ -1,7 +1,9 @@
 -- Migraciones exteriores trimestrales de España por nacionalidad (INE,
 -- Estadística Continua de Población, tablas 59011 y 59014): inmigraciones
 -- desde el extranjero y emigraciones hacia él, con el saldo y las tasas por
--- 1.000 habitantes. Los datos más recientes son provisionales.
+-- 1.000 habitantes. Los datos más recientes son provisionales. fecha = primer día del trimestre;
+-- es_parcial = último trimestre publicado (puede estar incompleto). Solo las nacionalidades
+-- principales: no suman el total.
 with entradas as (
     select
         date_trunc('quarter', cast(epoch_ms(fecha) + interval 12 hour as date)) as trimestre,
@@ -27,7 +29,9 @@ poblacion as (
 )
 
 select
-    coalesce(e.trimestre, s.trimestre) as trimestre,
+    coalesce(e.trimestre, s.trimestre) as fecha,
+    cast(year(coalesce(e.trimestre, s.trimestre)) as integer) as anio,
+    coalesce(e.trimestre, s.trimestre) = max(coalesce(e.trimestre, s.trimestre)) over () as es_parcial,
     coalesce(e.nacionalidad, s.nacionalidad) as nacionalidad,
     e.inmigraciones,
     s.emigraciones,

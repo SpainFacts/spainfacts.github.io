@@ -1,7 +1,7 @@
 ---
 title: Kanpo-merkataritza
 description: "Espainiako ondasun eta zerbitzuen esportazioak eta inportazioak: BPGarekiko pisua, kanpo-saldoa eta bilakaera erreala biztanleko."
-i18n_origen: f25352ecec09
+i18n_origen: d44a780dbaed
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -25,7 +25,7 @@ SELECT
     max(CASE WHEN componente = 'P7' THEN por_habitante_real END) AS import_hab,
     max(CASE WHEN componente = 'P6' THEN nominal_meur END) AS export_meur,
     max(CASE WHEN componente = 'P7' THEN nominal_meur END) AS import_meur,
-    max(anio_euros) AS anio_euros
+    max(anio_base) AS anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente IN ('P6', 'P7')
 GROUP BY trimestre, anio, trim
@@ -146,7 +146,7 @@ Esportazioak BPGaren {formatNumber(hitos_comercio[0]?.exp1995, 1)} % ziren 1995e
 
 ## Bilakaera erreala biztanleko
 
-Esportazioak eta inportazioak {comercio_trim[0]?.anio_euros}. urteko euro konstanteetan biztanleko, urteko erritmoan (hiruhilekoa bider lau): merkataritza benetan zenbat hazten den erakusten du, inflaziorik eta biztanleriaren hazkunderik gabe.
+Esportazioak eta inportazioak {comercio_trim[0]?.anio_base}. urteko euro konstanteetan biztanleko, urteko erritmoan (hiruhilekoa bider lau): merkataritza benetan zenbat hazten den erakusten du, inflaziorik eta biztanleriaren hazkunderik gabe.
 
 <LineChart
     data={comercio_largo}
@@ -155,7 +155,7 @@ Esportazioak eta inportazioak {comercio_trim[0]?.anio_euros}. urteko euro konsta
     series=flujo
     yAxisTitle="€ biztanleko (errealak)"
     yFmt='#,##0" €"'
-    title="Kanpo-merkataritza biztanleko, {comercio_trim[0]?.anio_euros}. urteko eurotan, urteko erritmoan"
+    title="Kanpo-merkataritza biztanleko, {comercio_trim[0]?.anio_base}. urteko eurotan, urteko erritmoan"
 />
 
 ---

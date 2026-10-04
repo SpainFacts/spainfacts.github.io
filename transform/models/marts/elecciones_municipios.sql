@@ -12,15 +12,14 @@
 -- Los % se calculan sobre blancos + la suma de votos del fichero 06, para que cuadren
 -- aunque el total del fichero 05 no coincida (pasa en algunos municipios de 1977-1979).
 -- Si los votantes superan el censo (errores de la fuente, sobre todo en 1977), la
--- participación queda en null. Tabla ligera (decimales, sin nombres) para las fichas
--- de municipio: el nombre está en poblacion_municipios / elecciones_municipios_congreso.
+-- participación queda en null. Tabla ligera (decimales) para las fichas de municipio.
 with mun as (
     select
         proceso,
         tipo,
         cast(anio as integer) as anio,
         cod_mun,
-        municipio,
+        municipio as municipio_fuente,
         censo_escrutinio as censo,
         votos_blanco as blancos,
         votos_nulos as nulos,
@@ -78,7 +77,15 @@ select
     m.proceso,
     m.tipo,
     m.anio,
+    pr.fecha,
+    pr.tipo_nombre,
+    pr.eleccion,
     m.cod_mun,
+    coalesce(d.nombre, m.municipio_fuente) as municipio,
+    left(m.cod_mun, 2) as cod_prov,
+    tp.nombre as provincia,
+    tp.cod_ccaa,
+    tc.nombre as ccaa,
     cast(m.censo as integer) as censo,
     cast(m.blancos + m.nulos + m.votos_candidaturas as integer) as votantes,
     case when m.blancos + m.nulos + m.votos_candidaturas <= m.censo then
@@ -98,3 +105,11 @@ select
 from mun m
 left join agg a using (proceso, cod_mun)
 left join ganador g using (proceso, cod_mun)
+left join (
+    select proceso, fecha, tipo_nombre, eleccion
+    from {{ ref('elecciones_participacion') }}
+    where nivel = 'pais'
+) pr on pr.proceso = m.proceso
+left join {{ ref('stg_ine_municipios') }} d on d.cod_mun = m.cod_mun
+left join {{ ref('territorios_provincias') }} tp on tp.cod_prov = left(m.cod_mun, 2)
+left join {{ ref('territorios_ccaa') }} tc on tc.cod_ccaa = tp.cod_ccaa

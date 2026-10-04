@@ -79,7 +79,9 @@ select
     b.cod_mun,
     b.municipio,
     b.cod_prov,
+    tp.nombre as provincia,
     b.cod_ccaa,
+    tc.nombre as ccaa,
     b.anio,
     b.trimestre,
     b.anio || 'T' || b.trimestre as periodo,
@@ -108,6 +110,11 @@ select
     -- 2018): antes el PMP se medía descontando los 30 días de conformidad y
     -- podía ser negativo, así que el umbral no es comparable.
     case when b.anio * 10 + b.trimestre >= 20182 then b.pmp_dias > 30 end as supera_30,
+    case when b.anio * 10 + b.trimestre >= 20182 and not (
+        b.cod_prov = '31'
+        or (b.cod_prov = '01' and b.anio <= 2022)
+        or (b.cod_prov in ('20', '48') and b.anio * 10 + b.trimestre <= 20162)
+    ) then (case when b.pmp_dias > 30 then 100 else 0 end) end as supera_30_pct,
     b.importe_pagos_realizados,
     b.importe_pagos_pendientes,
     b.modelo,
@@ -129,3 +136,5 @@ select
 from base b
 left join gobierno g
   on g.cod_mun = b.cod_mun and g.anio = b.anio and g.trimestre = b.trimestre and g.n = 1
+left join {{ ref('territorios') }} tp on tp.nivel = 'provincia' and tp.cod = b.cod_prov
+left join {{ ref('territorios') }} tc on tc.nivel = 'ccaa' and tc.cod = b.cod_ccaa

@@ -8,17 +8,21 @@ with base as (
     where tipo_edificio = 'Total' and anio_construccion = 'Total' and tamano_municipio = 'Total'
 )
 select
-    b.cod_prov,
-    coalesce(p.nombre, 'España') as provincia,
+    case when b.cod_prov = '00' then 'pais' else 'provincia' end as nivel,
+    b.cod_prov as cod,
+    coalesce(p.nombre, 'España') as nombre,
     p.cod_ccaa,
+    c.nombre as ccaa,
+    2021 as anio,
     max(viviendas) filter (where combustible = 'Total') as viviendas,
     max(viviendas) filter (where combustible = 'Electricidad') as electricidad,
     max(viviendas) filter (where combustible = 'Gas natural') as gas_natural,
     max(viviendas) filter (where combustible like 'Petróleo%') as petroleo,
     max(viviendas) filter (where combustible = 'Otros') as otros,
-    max(viviendas) filter (where combustible = 'Electricidad') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_electricidad,
-    max(viviendas) filter (where combustible = 'Gas natural') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_gas,
-    max(viviendas) filter (where combustible like 'Petróleo%') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_petroleo
+    100.0 * max(viviendas) filter (where combustible = 'Electricidad') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_electricidad_pct,
+    100.0 * max(viviendas) filter (where combustible = 'Gas natural') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_gas_pct,
+    100.0 * max(viviendas) filter (where combustible like 'Petróleo%') / nullif(max(viviendas) filter (where combustible = 'Total'), 0) as cuota_petroleo_pct
 from base b
 left join {{ ref('territorios_provincias') }} p on p.cod_prov = b.cod_prov
+left join {{ ref('territorios_ccaa') }} c on c.cod_ccaa = p.cod_ccaa
 group by all

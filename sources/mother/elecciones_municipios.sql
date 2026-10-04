@@ -1,11 +1,20 @@
 -- Mart dbt elecciones_municipios (transform/models/marts/elecciones_municipios.sql)
 -- ~270k filas (municipio x elección): a Evidence solo llegan Congreso y Municipales,
--- las columnas que usa la ficha de municipio y los % con un decimal (~2,3 MB).
+-- las columnas que usa la ficha de municipio, con nombres de municipio, provincia y
+-- comunidad, y los % con un decimal.
 SELECT
     proceso,
     tipo,
     CAST(anio AS INTEGER) AS anio,
+    fecha,
+    tipo_nombre,
+    eleccion,
     cod_mun,
+    municipio,
+    cod_prov,
+    provincia,
+    cod_ccaa,
+    ccaa,
     CAST(round(participacion, 1) AS DECIMAL(4, 1)) AS participacion,
     ganador_siglas,
     ganador_familia,

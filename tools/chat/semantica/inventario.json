@@ -1,5 +1,5 @@
 {
- "generado": "2026-10-03T18:57:34.868Z",
+ "generado": "2026-10-03T20:49:48.458Z",
  "tablas": [
   {
    "tabla": "alcaldes_actuales",
@@ -23,10 +23,9 @@
    "paginas_traducciones": 0,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "Mandato 2023-2027, foto actual. No hay columna de nombre: el territorio se identifica por el código (España 00, comunidades 01-19, provincias 01-52, según el nivel). No sumar entre niveles. Los porcentajes ya son sobre el total del territorio."
+   "notas_ficha": "Mandato 2023-2027, foto actual. También da el total de España (nivel = pais, cod = 00), con el nombre en la columna nombre. No sumar entre niveles. Los porcentajes ya son sobre el total del territorio. 25 familias, incluida Independientes y locales y Comisión gestora."
   },
   {
    "tabla": "alcaldes_historia",
@@ -45,17 +44,6 @@
    "notas_ficha": "Historial de alcaldes (una fila por periodo) sin cifra que consultar: sirve para listar; para preguntas con cifra, alcaldes_actuales o alcaldes_familias_territorio."
   },
   {
-   "tabla": "alcaldes_resumen_familias",
-   "sql_fuente": "SELECT * FROM alcaldes_resumen_familias",
-   "modelo": "transform/models/marts/alcaldes_resumen_familias.sql",
-   "modelo_modificado": "2026-09-28",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [],
-   "notas_ficha": "Solo total España; para comunidades o provincias usar alcaldes_familias_territorio. 25 familias, incluida Independientes y locales y Comisión gestora."
-  },
-  {
    "tabla": "almacenamiento_acceso",
    "sql_fuente": "-- Mart dbt almacenamiento_acceso (transform/models/marts/almacenamiento_acceso.sql)\nSELECT * FROM almacenamiento_acceso",
    "modelo": "transform/models/marts/almacenamiento_acceso.sql",
@@ -66,10 +54,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "tiempo en columna no estándar",
     "trampa en notas"
    ],
-   "notas_ficha": "Solo dos ficheros mensuales (septiembre y octubre de 2026); cada uno es una foto completa, así que no se suman entre ficheros: tomar el último. Los nombres de comunidad son los de REE (Comunidad Foral de Navarra, etc.)."
+   "notas_ficha": "Cada fichero mensual de REE es una foto completa, así que no se suman entre meses: para la situación actual filtrar es_ultimo = true. Los nombres de comunidad son los de REE (Comunidad Foral de Navarra, etc.)."
   },
   {
    "tabla": "almacenamiento_diario",
@@ -96,10 +83,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "proporción 0-1 en vez de %"
-   ],
-   "notas_ficha": "Balance REE nacional. El último mes (octubre de 2026) está empezado y es incompleto. Las baterías solo tienen datos desde hace pocos años (nulo antes). El rendimiento es una fracción, no un porcentaje."
+   "problemas": [],
+   "notas_ficha": "Balance REE nacional. El último mes (es_parcial = true) está empezado y es incompleto. Las baterías solo tienen datos desde hace pocos años (nulo antes)."
   },
   {
    "tabla": "almacenamiento_potencia",
@@ -115,7 +100,7 @@
     "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "Dos tipos: bombeo_puro y baterias_hibridadas; no mezclar si se pregunta por uno solo, y para el total nacional sumar las comunidades en un mismo mes. Es una potencia instalada (foto), no se suma entre meses. Últimos valores nacionales: unos 3.331 MW de bombeo y 256 MW de baterías hibridadas."
+   "notas_ficha": "Dos tipos: bombeo_puro y baterias_hibridadas; no mezclar si se pregunta por uno solo, y para el total nacional sumar las comunidades en un mismo mes. Es una potencia instalada (foto), no se suma entre meses: para la cifra actual filtrar es_ultimo = true."
   },
   {
    "tabla": "calor_anual",
@@ -225,12 +210,10 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas",
-    "euros sin por habitante ni reales",
     "trampa en notas"
    ],
-   "notas_ficha": "Importes en euros corrientes (no miles ni millones), liquidación 2002-2024 de Hacienda (SGCIEF). Sin filas de total: hay que sumar capítulos y filtrar tipo ('ingreso' o 'gasto') para no mezclarlos. No hay columna con el nombre de la comunidad, solo el código INE (01 Andalucía ... 18 Ceuta, 19 Melilla). No hay versión por habitante ni en euros reales."
+   "notas_ficha": "Liquidación 2002-2024 de Hacienda (SGCIEF). Importes en euros corrientes (no miles ni millones), salvo ejecutado_eur_hab_real: por habitante y en euros constantes del año anio_base, la cifra para comparar comunidades y años. Sin filas de total: hay que sumar capítulos y filtrar tipo ('ingreso' o 'gasto') para no mezclarlos. Ceuta y Melilla son 18 y 19."
   },
   {
    "tabla": "ccaa_cuentas_resumen",
@@ -243,11 +226,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Euros corrientes (no miles), liquidación 2002-2024 de Hacienda. Cuidado con el signo: saldo positivo = superávit, deficit_no_financiero positivo = déficit (es el saldo con el signo cambiado). Sin nombre de comunidad: solo el código INE (01 Andalucía, 13 Madrid, 09 Cataluña...). Sin versión por habitante."
+   "problemas": [],
+   "notas_ficha": "Liquidación 2002-2024 de Hacienda. Los importes sin sufijo van en euros corrientes (no miles); las columnas _eur_hab_real, por habitante y en euros constantes del año anio_base, son las que sirven para comparar comunidades y años. Cuidado con el signo: saldo positivo = superávit, negativo = déficit. Ceuta y Melilla son 18 y 19."
   },
   {
    "tabla": "ccaa_deuda",
@@ -264,10 +244,9 @@
     "src/lib/chat/herramientas.js"
    ],
    "problemas": [
-    "euros sin por habitante ni reales",
     "trampa en notas"
    ],
-   "notas_ficha": "Deuda PDE del Banco de España a fin de trimestre, de diciembre de 1994 a junio de 2026; euros corrientes. Sin Ceuta ni Melilla. Nombres como los publica el BdE (Comunidad de Madrid, Comunitat Valenciana, Comunidad Foral de Navarra...). El último trimestre disponible es 2026 T2 (anio 2026, trimestre 2). Es un stock: no sumar trimestres."
+   "notas_ficha": "Deuda PDE del Banco de España a fin de trimestre, de diciembre de 1994 a junio de 2026. deuda_eur en euros corrientes; deuda_eur_hab_real por habitante en euros constantes del año anio_base (desde 1996). Sin Ceuta ni Melilla. Nombres de comunidad como en el resto de tablas (territorios). El último trimestre disponible es 2026 T2 (anio 2026, trimestre 2). Es un stock: no sumar trimestres."
   },
   {
    "tabla": "ccaa_gasto_politicas",
@@ -279,11 +258,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Euros corrientes (no miles), 2006-2024. No hay filas de total: sumar políticas dentro de cada comunidad y año; las 5 áreas suman el gasto total (unos 268.000 millones de euros en 2024 entre todas). Sin nombre de comunidad, solo código INE. Sin versión por habitante: para comparar comunidades hay que dividir por población."
+   "problemas": [],
+   "notas_ficha": "Euros corrientes (no miles), 2006-2024; obligaciones_eur_hab_real, por habitante y en euros constantes del año anio_base, es la cifra para comparar comunidades y años. No hay filas de total: sumar políticas dentro de cada comunidad y año; las 5 áreas suman el gasto total (unos 268.000 millones de euros en 2024 entre todas). poblacion es el padrón de cada comunidad y año."
   },
   {
    "tabla": "ccaa_saldo",
@@ -295,10 +271,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Signo negativo = déficit, positivo = superávit. Años completos 2013-2025, sin Ceuta ni Melilla. El PIB regional es implícito (deducido de la deuda), no el oficial."
+   "problemas": [],
+   "notas_ficha": "Signo negativo = déficit, positivo = superávit. Años completos 2013-2025, sin Ceuta ni Melilla. saldo_eur en euros corrientes; saldo_eur_hab_real por habitante en euros constantes del año anio_base. El PIB regional es implícito (deducido de la deuda), no el oficial."
   },
   {
    "tabla": "centrales",
@@ -471,7 +445,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Eurostat 1995-2025, índices con base 2021 = 100 (no euros), 28 territorios incluida la UE-27 (pais = EU27_2020). Los índices no se suman. El coste real descontando inflación solo existe para España. España publica la misma serie para costes y precios."
+   "notas_ficha": "Eurostat 1995-2025, índices con base 2021 = 100 (no euros), 28 territorios incluida la UE-27 (cod_pais = EU27_2020). Los índices no se suman. El coste real descontando inflación solo existe para España. España publica la misma serie para costes y precios."
   },
   {
    "tabla": "construccion_empleo",
@@ -511,10 +485,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Solo 7 filas de la edición 2025 de Global Powers of Construction; los ingresos solo están para ACS y Acciona (el resto aparece sin cifra). Importes en dólares, no en euros."
+   "problemas": [],
+   "notas_ficha": "Solo 7 filas de la edición 2025 (anio = 2025) de Global Powers of Construction; los ingresos solo están para ACS y Acciona (el resto aparece sin cifra). Importes en dólares, no en euros."
   },
   {
    "tabla": "construccion_licitacion",
@@ -539,10 +511,23 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "filtro fijo o valor por defecto"
+   "problemas": [],
+   "notas_ficha": "Visados de dirección de obra de los colegios de aparejadores (Ministerio de Transportes), por comunidad desde 2000 y para España desde 1992 (antes de 2000, Banco de España); España aparece una sola vez por año (nivel = pais). Sin Ceuta ni Melilla. La ampliación y la reforma solo existen desde 2000. Los permisos de otros países europeos (otra fuente, no comparable) están en construccion_permisos_ue."
+  },
+  {
+   "tabla": "construccion_permisos_ue",
+   "sql_fuente": "-- Mart dbt construccion_permisos_ue (transform/models/marts/construccion_permisos_ue.sql)\nSELECT * FROM construccion_pe…",
+   "modelo": "transform/models/marts/construccion_permisos_ue.sql",
+   "modelo_modificado": null,
+   "paginas_es": [
+    "pages/economia/construccion.md"
    ],
-   "notas_ficha": "Tres fuentes distintas en una tabla: hay que elegir ambito (CCAA para comunidades, UE para comparar países, ES_LARGA para la serie histórica de España); España aparece una vez en cada ámbito con cifras algo distintas porque la fuente no es la misma (permisos de Eurostat frente a visados de colegios de arquitectos)."
+   "paginas_traducciones": 4,
+   "componentes": [],
+   "problemas": [
+    "unidades mezcladas"
+   ],
+   "notas_ficha": "Eurostat sts_cobp_a desde 2005: países de la UE y la UE-27 (cod_pais = EU27_2020). Son permisos (licencias), no visados: para España da más viviendas que los visados de construccion_permisos (2025: unas 200.000 frente a 139.000) porque el INE envía otra fuente; no mezclar las dos series."
   },
   {
    "tabla": "construccion_peso_ue",
@@ -587,10 +572,9 @@
    "paginas_traducciones": 20,
    "componentes": [],
    "problemas": [
-    "proporción 0-1 en vez de %",
     "trampa en notas"
    ],
-   "notas_ficha": "Balance de Criminalidad del Ministerio del Interior, año completo. Las categorías se solapan (Criminalidad convencional, Cibercriminalidad, Hurtos, Estafas informáticas...), así que no se pueden sumar entre sí; solo hay municipios de más de 20.000 habitantes; los nombres de territorio vienen en mayúsculas y a veces sin tildes; los códigos de comunidad y provincia coinciden entre sí, filtra siempre por nivel."
+   "notas_ficha": "Balance de Criminalidad del Ministerio del Interior, año completo. Las categorías se solapan (Criminalidad convencional, Cibercriminalidad, Hurtos, Estafas informáticas...), así que no se pueden sumar entre sí; solo hay municipios de más de 20.000 habitantes; los códigos de comunidad y provincia coinciden entre sí, filtra siempre por nivel."
   },
   {
    "tabla": "crimen_condenados",
@@ -602,10 +586,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Estadística de condenados del INE. Sin columna de nombre: hay que traducir el código de comunidad (00 = España). La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
+   "problemas": [],
+   "notas_ficha": "Estadística de condenados del INE: el total de España es nivel = pais. La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
   },
   {
    "tabla": "crimen_condenas_delito",
@@ -617,10 +599,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "unidades mezcladas"
-   ],
-   "notas_ficha": "Solo España. La columna delito mezcla grandes grupos y delitos concretos que están dentro de ellos, así que sumar todas las filas cuenta varias veces; el total real es la fila 'Delitos'. Cuenta delitos por los que se condena, no personas: una persona puede tener varios, por eso difiere de la tabla de condenados. Sin tasas por habitante."
+   "problemas": [],
+   "notas_ficha": "Solo España. Los delitos forman un árbol: Delitos (nivel 0) es el total, y cada nivel suma el del padre (columna delito_padre), así que solo se suma dentro de un mismo nivel_delito. Cuenta delitos por los que se condena, no personas: una persona puede tener varios, por eso difiere de la tabla de condenados. Las tasas por 100.000 habitantes usan la población total, española o extranjera según la columna; los condenados extranjeros incluyen personas que no residen en España, lo que eleva su tasa."
   },
   {
    "tabla": "crimen_serie_larga",
@@ -634,11 +614,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
-    "proporción 0-1 en vez de %",
     "trampa en notas"
    ],
-   "notas_ficha": "Ministerio del Interior, serie larga con otra clasificación que el balance reciente. La tipología es jerárquica (nivel_tipologia 0, 1, 2: capítulos, delitos y subtipos), así que no se suma entre niveles. Sin nombre de territorio: solo códigos, y los de comunidad y provincia se solapan, filtra siempre por nivel. Sin municipios."
+   "notas_ficha": "Ministerio del Interior, serie larga con otra clasificación que el balance reciente. La tipología es jerárquica (nivel_tipologia 0, 1, 2: capítulos, delitos y subtipos), así que no se suma entre niveles. Los códigos de comunidad y provincia se solapan, filtra siempre por nivel. Sin municipios."
   },
   {
    "tabla": "crimen_ultimo_periodo",
@@ -651,10 +629,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "proporción 0-1 en vez de %",
     "trampa en notas"
    ],
-   "notas_ficha": "Acumulado enero-junio de 2026 (columna periodo), no un año completo: solo es comparable con infracciones_anio_anterior, nunca con los años completos de la tabla de balance. Las categorías se solapan; sin tasa por habitante."
+   "notas_ficha": "Acumulado enero-junio de 2026 (columna periodo), no un año completo: solo es comparable con infracciones_anio_anterior, nunca con los años completos de la tabla de balance (tampoco su tasa_1000, que es de medio año). Las categorías se solapan."
   },
   {
    "tabla": "cuentas_balance_anual",
@@ -663,16 +640,12 @@
    "modelo_modificado": "2026-09-27",
    "paginas_es": [
     "pages/cuentas-publicas/gastos.md",
-    "pages/cuentas-publicas/index.md",
-    "pages/cuentas-publicas/ingresos.md"
+    "pages/cuentas-publicas/index.md"
    ],
-   "paginas_traducciones": 12,
+   "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales",
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Solo España, cuentas consolidadas de Eurostat; los importes están en miles de millones de euros corrientes (no reales). Los valores negativos del saldo son déficit. Sin dato por comunidad (para eso ver las tablas de deuda autonómica)."
+   "problemas": [],
+   "notas_ficha": "Solo España, cuentas consolidadas de Eurostat. Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales en miles de millones (mrd) son euros corrientes. Los valores negativos del saldo son déficit. Sin dato por comunidad (para eso ver las tablas de deuda autonómica)."
   },
   {
    "tabla": "cuentas_gastos",
@@ -685,10 +658,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Solo España, clasificación COFOG de Eurostat; las diez funciones suman el gasto total (no hay fila de total). Los euros son corrientes, no reales, y el último año es 2024."
+   "problemas": [],
+   "notas_ficha": "Solo España, clasificación COFOG de Eurostat; las diez funciones suman el gasto total (no hay fila de total). El gasto por habitante está en euros constantes del último año completo (anio_base); el total en millones es euros corrientes. Último año 2024."
   },
   {
    "tabla": "cuentas_ingresos",
@@ -701,11 +672,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales",
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Solo España, Eurostat; las ocho categorías suman el total de ingresos (no hay fila de total). Importes en euros corrientes, sin cifra por habitante; último año 2024."
+   "problemas": [],
+   "notas_ficha": "Solo España, Eurostat; las ocho categorías suman el total de ingresos (no hay fila de total). El ingreso por habitante está en euros constantes del último año completo (anio_base); el total en millones es euros corrientes. Último año 2024."
   },
   {
    "tabla": "cuentas_subsectores",
@@ -717,11 +685,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales",
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Cuentas no consolidadas de Eurostat: los pesos suman más de 100 % porque las transferencias entre administraciones se cuentan dos veces, así que no se pueden sumar los subsectores para obtener el total (para eso está la tabla de balance anual). Euros corrientes."
+   "problemas": [],
+   "notas_ficha": "Cuentas no consolidadas de Eurostat: los pesos suman más de 100 % porque las transferencias entre administraciones se cuentan dos veces, así que no se pueden sumar los subsectores para obtener el total (para eso está la tabla de balance anual). Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales en miles de millones (mrd) son corrientes."
   },
   {
    "tabla": "deflactor",
@@ -729,23 +694,34 @@
    "modelo": "transform/models/marts/deflactor.sql",
    "modelo_modificado": "2026-09-30",
    "paginas_es": [
-    "pages/cuentas-publicas/empleo-publico.md",
     "pages/cuentas-publicas/gastos.md",
     "pages/cuentas-publicas/index.md",
     "pages/cuentas-publicas/ingresos.md",
-    "pages/economia/salarios.md",
     "pages/territorios/index.md",
     "pages/territorios/municipios.md",
     "pages/territorios/[ccaa]/index.md",
     "pages/territorios/[ccaa]/[provincia].md",
     "pages/transparencia/cuentas-municipales.md"
    ],
-   "paginas_traducciones": 40,
+   "paginas_traducciones": 32,
    "componentes": [],
    "problemas": [
     "no usable (auxiliar, duplicada o sin cifras)"
    ],
    "notas_ficha": "Tabla auxiliar de IPC medio anual y factor para pasar a euros reales de 2025; no responde preguntas ciudadanas por sí sola y el resto de tablas ya traen sus columnas en euros reales."
+  },
+  {
+   "tabla": "deflactor_paises",
+   "sql_fuente": "-- Mart dbt deflactor_paises (transform/models/marts/deflactor_paises.sql): factor del IPCA de Eurostat para pasar impor…",
+   "modelo": "transform/models/marts/deflactor_paises.sql",
+   "modelo_modificado": null,
+   "paginas_es": [],
+   "paginas_traducciones": 0,
+   "componentes": [],
+   "problemas": [
+    "no usable (auxiliar, duplicada o sin cifras)"
+   ],
+   "notas_ficha": "Tabla de referencia: factor del IPCA de Eurostat para pasar importes de cada país y año a precios del último año completo (importe_real = importe * factor). Las tablas ya traen sus columnas _real."
   },
   {
    "tabla": "demografia_anual",
@@ -762,10 +738,9 @@
    "paginas_traducciones": 20,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "INE. Sin columna de nombre: solo código INE (00 España; los códigos de comunidad y provincia se solapan, filtra por nivel). El saldo exterior solo existe desde 2021 y el último año es 2024."
+   "notas_ficha": "INE. Código INE (00 España) y nombre; los códigos de comunidad y provincia se solapan, filtra por nivel. El saldo exterior solo existe desde 2021 y el último año es 2024."
   },
   {
    "tabla": "demografia_envejecimiento",
@@ -784,10 +759,9 @@
    "paginas_traducciones": 28,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "INE, población a 1 de enero (el dato de 2025 es la población a 1 de enero de 2025). Sin columna de nombre: solo códigos, y los de comunidad y provincia se solapan, filtra por nivel. Nacidos en el extranjero y extranjeros solo desde 2002."
+   "notas_ficha": "INE, población a 1 de enero (el dato de 2025 es la población a 1 de enero de 2025). Los códigos de comunidad y provincia se solapan: filtra por nivel. Nacidos en el extranjero y extranjeros solo desde 2002."
   },
   {
    "tabla": "demografia_hogares",
@@ -800,10 +774,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "INE, hogares en viviendas familiares a 1 de enero, desde 2021 (el último dato es de 1 de enero de 2026). Sin columna de nombre; los códigos de comunidad y provincia se solapan, filtra por nivel."
+   "notas_ficha": "INE, hogares en viviendas familiares a 1 de enero, desde 2021 (el último dato es de 1 de enero de 2026). Los códigos de comunidad y provincia se solapan: filtra por nivel."
   },
   {
    "tabla": "demografia_piramide",
@@ -819,9 +792,9 @@
    "paginas_traducciones": 16,
    "componentes": [],
    "problemas": [
-    "territorio solo con código"
+    "trampa en notas"
    ],
-   "notas_ficha": "INE, población a 1 de enero. No hay fila de total: la población total sale de sumar todos los grupos y ambos sexos (o usar demografia_envejecimiento). Los grupos van de '0-4' a '85 y más'; los de 5-9 y 10-14 etc. no ordenan bien alfabéticamente, usar edad_desde. Sin nombre de territorio; filtra por nivel."
+   "notas_ficha": "INE, población a 1 de enero. No hay fila de total: la población total sale de sumar todos los grupos y ambos sexos (o usar demografia_envejecimiento). Los grupos van de '0-4' a '85 y más'; los de 5-9 y 10-14 etc. no ordenan bien alfabéticamente, usar edad_desde. Los códigos de comunidad y provincia se solapan: filtra por nivel."
   },
   {
    "tabla": "diputados_inmuebles_grupos",
@@ -988,7 +961,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Eurostat educ_uoe_fini04, por alumno equivalente a tiempo completo, hasta 2023. Aquí la columna 'nivel' es el nivel educativo y el territorio está en 'nivel_geo'. Algunos niveles (Bachillerato y FP de grado medio, Bachillerato, FP de grado medio) se solapan; los euros reales solo para España."
+   "notas_ficha": "Eurostat educ_uoe_fini04, por alumno equivalente a tiempo completo, hasta 2023. Territorio: España (ES) y media de la UE (EU27_2020). Los euros reales usan el IPCA de cada zona (deflactor_paises), así que España y la UE son comparables. Algunos niveles (Bachillerato y FP de grado medio, Bachillerato, FP de grado medio) se solapan."
   },
   {
    "tabla": "educacion_indicadores",
@@ -1003,11 +976,10 @@
    "paginas_traducciones": 12,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Eurostat EPA armonizada. Hay que elegir un indicador (abandono, basica_25_64, segunda_25_64, superior_25_64, neet_15_29, neet_18_24); el valor es siempre un porcentaje pero de poblaciones distintas, no se suma ni se promedia entre indicadores. Sin nombres de comunidad: solo código INE (00 España, UE para la Unión Europea); algunos años de comunidades pequeñas faltan."
+   "notas_ficha": "Eurostat EPA armonizada. Hay que elegir un indicador (abandono, basica_25_64, segunda_25_64, superior_25_64, neet_15_29, neet_18_24); el valor es siempre un porcentaje pero de poblaciones distintas, no se suma ni se promedia entre indicadores. Código INE (00 España, UE para la Unión Europea) y nombre; la columna indicador_nombre describe cada indicador; algunos años de comunidades pequeñas faltan."
   },
   {
    "tabla": "educacion_matriculados",
@@ -1049,12 +1021,11 @@
    "paginas_traducciones": 16,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas",
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Hay que filtrar siempre por tipo de elección y año para no mezclar Congreso, municipales y europeas; en 2019 hubo dos generales (abril y noviembre, columna proceso). El código del territorio solo existe en cod (00 España, 01-19 comunidades, 01-52 provincias según nivel); pct está en 0-100."
+   "notas_ficha": "Hay que filtrar siempre por tipo de elección y fecha (eleccion es la etiqueta legible) para no mezclar Congreso, municipales y europeas; en 2019 hubo dos generales (abril y noviembre). El código INE del territorio está en cod (00 España, 01-19 comunidades, 01-52 provincias según nivel) y su nombre en nombre; pct está en 0-100."
   },
   {
    "tabla": "elecciones_municipios",
@@ -1067,10 +1038,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "No tiene nombre de municipio, solo código INE de 5 cifras (cod_mun); para nombres usar elecciones_municipios_congreso. Hay que fijar tipo y año: 2019 tiene dos generales (abril y noviembre). Municipales solo incluye municipios de más de 250 habitantes."
+   "notas_ficha": "Una fila por municipio y elección, con su provincia y comunidad (cod_prov/provincia, cod_ccaa/ccaa). Hay que fijar tipo_nombre y fecha (eleccion es la etiqueta legible): 2019 tiene dos generales (abril y noviembre). Municipales solo incluye municipios de más de 250 habitantes."
   },
   {
    "tabla": "elecciones_municipios_congreso",
@@ -1093,17 +1063,15 @@
    "paginas_es": [
     "pages/sociedad/elecciones.md",
     "pages/sociedad/index.md",
-    "pages/territorios/municipios.md",
     "pages/territorios/[ccaa]/index.md",
     "pages/territorios/[ccaa]/[provincia].md"
    ],
-   "paginas_traducciones": 20,
+   "paginas_traducciones": 16,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "Fijar siempre tipo_nombre (Congreso, Municipales, Parlamento Europeo) y año; en 2019 hay dos generales (fechas distintas). El territorio solo tiene código en cod (00 España). No hay serie para periodos intermedios: una fila por elección."
+   "notas_ficha": "Fijar siempre tipo_nombre (Congreso, Municipales, Parlamento Europeo) y año; en 2019 hay dos generales (fechas distintas). Cada elección lleva su etiqueta legible en eleccion (por ejemplo «Congreso, noviembre de 2019»); el código INE está en cod (00 España) y el nombre en nombre. No hay serie para periodos intermedios: una fila por elección."
   },
   {
    "tabla": "elecciones_partidos",
@@ -1210,10 +1178,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "proporción 0-1 en vez de %"
-   ],
-   "notas_ficha": "Censo de Población y Viviendas 2021 (INE), foto única sin serie temporal. Las cuotas están en proporción 0-1, no en %. La fila España tiene cod_prov 00; las viviendas son de calefacción, no todas las viviendas."
+   "problemas": [],
+   "notas_ficha": "Censo de Población y Viviendas 2021 (INE), foto única de 2021 sin serie temporal. Las cuotas están en % (0-100). La fila de España tiene nivel pais y cod 00; cada provincia lleva también su comunidad (cod_ccaa, ccaa). Las viviendas son las que tienen calefacción, no todas las viviendas."
   },
   {
    "tabla": "electrificacion_hogares",
@@ -1226,10 +1192,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "proporción 0-1 en vez de %",
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España. Para el total hay que fijar uso = 'Todos los usos' (si no se duplica sumando usos); no hay fila total de combustible. Las cuotas son proporción 0-1 dentro de cada uso y año. Eurostat, hasta 2024."
+   "notas_ficha": "Solo España. Para el total hay que usar la fila de todos los usos (es_total_uso = true, uso 'Todos los usos'); si no, al sumar usos se duplica. No hay fila total de combustible. Las cuotas son % dentro de cada uso y año. Eurostat, hasta 2024."
   },
   {
    "tabla": "electrificacion_sectores",
@@ -1242,10 +1207,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "proporción 0-1 en vez de %",
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España, 1990-2024. Los sectores se solapan: Industria incluye sus ramas (siderurgia, química...), Transporte incluye carretera y ferrocarril, y 'Toda la economía' es el total; no sumar todos juntos. Cuotas en proporción 0-1."
+   "notas_ficha": "Solo España, 1990-2024. Los sectores se solapan: la columna tipo_sector dice qué filas se pueden sumar (total = toda la economía; sector = hogares, industria, transporte, servicios y agricultura; rama_industria y rama_transporte son desgloses ya incluidos en su sector). Cuotas en % (0-100)."
   },
   {
    "tabla": "embalses_actual",
@@ -1279,7 +1243,7 @@
   },
   {
    "tabla": "embalses_semanal",
-   "sql_fuente": "-- Serie desde 2000: suficiente para las comparativas y ligera para el navegador\nSELECT fecha, anio, semana, nivel, clav…",
+   "sql_fuente": "-- Serie desde 2000: suficiente para las comparativas y ligera para el navegador\nSELECT fecha, anio, semana, nivel, cod,…",
    "modelo": "transform/models/marts/embalses_semanal.sql",
    "modelo_modificado": "2026-09-27",
    "paginas_es": [
@@ -1291,7 +1255,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Datos de MITECO desde 2000; pct_llenado puede superar 100 en semanas de sobrellenado. Fijar nivel (el país ES ya incluye todas las cuencas; no sumar cuencas y país). La capacidad cambia ligeramente con los años."
+   "notas_ficha": "Datos de MITECO desde 2000; pct_llenado puede superar 100 en semanas de sobrellenado. Fijar nivel (el nivel pais ya incluye todas las cuencas; no sumar cuencas y país). La capacidad cambia ligeramente con los años."
   },
   {
    "tabla": "empleo_coste",
@@ -1306,7 +1270,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España, 1995-2025, euros corrientes (no deflactados). 'Total AAPP' ya es la suma de los demás subsectores: no sumar todas las filas. Eurostat, remuneración de asalariados (D1)."
+   "notas_ficha": "Solo España, 1995-2025. Las columnas por habitante y _real están en euros constantes del último año completo (anio_base; desde 1996, antes quedan vacías); millones_eur es en euros corrientes. 'Total AAPP' ya es la suma de los demás subsectores: no sumar todas las filas. Eurostat, remuneración de asalariados (D1)."
   },
   {
    "tabla": "empleo_efectivos",
@@ -1321,10 +1285,9 @@
    "paginas_traducciones": 12,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "Registro Central de Personal, ediciones de enero y julio (la última, enero de 2026). No hay filas de total: se suma por categoría y hay que fijar una sola edición (fecha) para no duplicar. Códigos de comunidad y provincia sin nombre. Para tasa por habitante usar empleo_territorio."
+   "notas_ficha": "Registro Central de Personal, ediciones de enero y julio (la última, enero de 2026). No hay filas de total: se suma por categoría y hay que fijar una sola edición (fecha) para no duplicar. Cada fila lleva provincia y comunidad (cod_prov/provincia, cod_ccaa/ccaa; «Extranjero» si el puesto está fuera de España). Para tasa por habitante usar empleo_territorio."
   },
   {
    "tabla": "empleo_epa_administracion",
@@ -1350,10 +1313,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
-    "proporción 0-1 en vez de %"
+    "trampa en notas"
    ],
-   "notas_ficha": "EPA (INE). cod_ccaa 00 es el total de España y 01-19 las comunidades (sin nombres en la tabla); ojo con sumar España y comunidades. La cuota está en proporción 0-1, no en %."
+   "notas_ficha": "EPA (INE). La fila de España tiene nivel pais y cod 00: no sumarla con las comunidades. Los asalariados por 1.000 habitantes usan la población del año del trimestre (la última disponible para los más recientes)."
   },
   {
    "tabla": "empleo_gasto_personal_territorio",
@@ -1367,10 +1329,8 @@
    ],
    "paginas_traducciones": 12,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Capítulo 1 de los presupuestos liquidados, en euros corrientes (no deflactados). El gasto de la comunidad solo existe a nivel ccaa; ayuntamientos a nivel país, comunidad y provincia (con cod = código de provincia, que puede coincidir con el de comunidad: usar nivel). El territorio solo tiene código, sin nombre."
+   "problemas": [],
+   "notas_ficha": "Capítulo 1 de los presupuestos liquidados. Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales (€) son corrientes. El gasto de la comunidad solo existe a nivel ccaa; ayuntamientos a nivel país, comunidad y provincia (el cod de una provincia puede coincidir con el de una comunidad: usar nivel). Sin Álava ni Navarra en ayuntamientos (régimen foral)."
   },
   {
    "tabla": "empleo_organismos",
@@ -1397,11 +1357,10 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "euros sin por habitante ni reales",
     "trampa en notas"
    ],
-   "notas_ficha": "Encuesta de Estructura Salarial (INE), solo el año 2022, euros corrientes. cod_ccaa 00 es España; las comunidades van por código INE (01 Andalucía... 17 La Rioja; faltan Ceuta y Melilla en algunos casos). Son medias, no se suman."
+   "notas_ficha": "Encuesta de Estructura Salarial (INE), solo el año 2022, euros corrientes (una sola edición, por eso no lleva versión real). España es nivel pais; faltan Ceuta y Melilla. Son medias, no se suman."
   },
   {
    "tabla": "empleo_salarios_deciles",
@@ -1415,10 +1374,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "euros sin por habitante ni reales",
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España, 2006-2024. El decil 0 es la media general (2.386 € en 2024), no un decil. Salario bruto mensual medio, sin deflactar; no sumar deciles."
+   "notas_ficha": "Solo España, 2006-2024. decil_nombre = Total es la media de todos los asalariados (2.386 € corrientes en 2024) y tiene decil vacío; D1 a D10 son los deciles. Salario bruto mensual medio; para comparar años usar salario_mensual_real. No sumar deciles."
   },
   {
    "tabla": "empleo_territorio",
@@ -1433,10 +1391,8 @@
    ],
    "paginas_traducciones": 16,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Registro Central de Personal, ediciones de enero y julio (última enero de 2026). Con administracion = 'Total' ya están sumadas las demás. Territorio solo con código (cod 00 para España; provincia y comunidad pueden compartir dígitos: usar nivel)."
+   "problemas": [],
+   "notas_ficha": "Registro Central de Personal, ediciones de enero y julio (última enero de 2026). Con administracion = 'Total' ya están sumadas las demás. Provincia y comunidad pueden compartir dígitos de cod: usar siempre nivel."
   },
   {
    "tabla": "empresas_altas_quiebras",
@@ -1457,17 +1413,26 @@
    "modelo": "transform/models/marts/empresas_autonomos.sql",
    "modelo_modificado": "2026-09-29",
    "paginas_es": [
+    "pages/economia/empresas.md"
+   ],
+   "paginas_traducciones": 4,
+   "componentes": [],
+   "problemas": [],
+   "notas_ficha": "EPA (INE): cifras en miles de personas, por trimestre; la media anual está en empresas_autonomos_anual. España es nivel pais y las comunidades nivel ccaa. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
+  },
+  {
+   "tabla": "empresas_autonomos_anual",
+   "sql_fuente": "-- Mart dbt empresas_autonomos_anual (transform/models/marts/empresas_autonomos_anual.sql)\nSELECT * FROM empresas_autono…",
+   "modelo": "transform/models/marts/empresas_autonomos_anual.sql",
+   "modelo_modificado": null,
+   "paginas_es": [
     "pages/economia/empresas.md",
     "pages/territorios/[ccaa]/index.md"
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "unidades mezcladas",
-    "filtro fijo o valor por defecto"
-   ],
-   "notas_ficha": "EPA (INE): cifras en miles de personas. trimestre = 0 es la media anual y 1-4 los trimestres; no mezclar ambos al sumar o contar. cod 00 es España y 01-19 las comunidades. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
+   "problemas": [],
+   "notas_ficha": "EPA (INE): cifras en miles de personas, media de los cuatro trimestres (solo años completos); los trimestres están en empresas_autonomos. España es nivel pais y las comunidades nivel ccaa. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
   },
   {
    "tabla": "empresas_concursos",
@@ -1480,10 +1445,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "INE, Estadística del Procedimiento Concursal; la serie termina en 2020. cod 00 es España (no sumar con comunidades). Territorio solo por código INE de comunidad."
+   "notas_ficha": "INE, Estadística del Procedimiento Concursal; la serie termina en 2020 (el INE no ha publicado más). España es nivel pais (no sumar con comunidades)."
   },
   {
    "tabla": "empresas_dirce_sector",
@@ -1495,10 +1459,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total sector: se suman los 11 sectores. cod 00 es España y 01-19 las comunidades, solo por código."
+   "problemas": [],
+   "notas_ficha": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total sector: se suman los 11 sectores. España es nivel pais y 01-19 las comunidades."
   },
   {
    "tabla": "empresas_dirce_tamano",
@@ -1510,10 +1472,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total de tamaños: se suman los cinco tramos. cod 00 es España y 01-19 comunidades, sin nombres."
+   "problemas": [],
+   "notas_ficha": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total de tamaños: se suman los cinco tramos. España es nivel pais y las comunidades nivel ccaa."
   },
   {
    "tabla": "empresas_dirce_territorio",
@@ -1527,10 +1487,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "DIRCE (INE, tabla 302), empresas a 1 de enero. Territorio solo por código y con niveles que se solapan (cod de provincia y de comunidad pueden coincidir): fijar siempre nivel. Personas físicas más sociedades no suman el total (faltan otras formas jurídicas)."
+   "notas_ficha": "DIRCE (INE, tabla 302), empresas a 1 de enero. Los niveles se solapan en cod (provincia y comunidad pueden coincidir): fijar siempre nivel. Personas físicas más sociedades no suman el total (faltan otras formas jurídicas: cooperativas, comunidades de bienes...)."
   },
   {
    "tabla": "empresas_id_ccaa",
@@ -1544,10 +1503,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas"
    ],
-   "notas_ficha": "Eurostat, último año 2024. Código 00 es España (excluirlo en rankings de comunidades); los códigos son los del INE y la tabla no trae nombres. Sector Total suma Empresas, Administraciones públicas, Universidades e IPSFL; no mezclar sectores al sumar."
+   "notas_ficha": "Eurostat, último año 2024. España es nivel pais (excluirla en rankings de comunidades). Sector Total suma Empresas, Administraciones públicas, Universidades e IPSFL; no mezclar sectores al sumar."
   },
   {
    "tabla": "empresas_id_paises",
@@ -1573,10 +1531,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "INE (registro mercantil), años completos hasta 2025. Código 00 es España (excluirlo en rankings de comunidades); códigos INE sin nombres. Los euros están en euros, no en miles."
+   "problemas": [],
+   "notas_ficha": "INE (registro mercantil), años completos hasta 2025. España es nivel pais (excluirla en rankings de comunidades). Los euros están en euros, no en miles."
   },
   {
    "tabla": "empresas_sociedades_mensual",
@@ -1588,10 +1544,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "INE tabla 13912 hasta julio de 2026. Las columnas _12m ya son sumas móviles: no volver a sumarlas entre meses. Código 00 es España; códigos INE sin nombres. Capital en euros, no miles."
+   "problemas": [],
+   "notas_ficha": "INE tabla 13912 hasta julio de 2026. Las columnas _12m ya son sumas móviles de 12 meses: no volver a sumarlas entre meses. España es nivel pais. Capital en euros, no miles."
   },
   {
    "tabla": "empresas_tamano_ue",
@@ -1603,10 +1557,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Eurostat sbs_sc_ovw, 2021-2024, 11 países y UE-27. No hay fila de total: los porcentajes de las cuatro categorías suman 100 para cada país y año. Micro 0-9, pequeñas 10-49, medianas 50-249, grandes 250 o más ocupados."
+   "problemas": [],
+   "notas_ficha": "Eurostat sbs_sc_ovw, 2021-2024, 11 países y la UE-27 (EU27_2020). No hay fila de total: los porcentajes de las cuatro categorías suman 100 para cada país y año. Micro 0-9, pequeñas 10-49, medianas 50-249, grandes 250 o más ocupados. Euros reales con el IPCA de cada país."
   },
   {
    "tabla": "energia_emisiones_gei",
@@ -1618,10 +1570,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Inventario nacional de Eurostat, solo España, 1990-2024, sin uso del suelo (LULUCF). No hay fila de total: se obtiene sumando los sectores de un año (unos 268 millones de t en 2024). Datos absolutos, no por habitante."
+   "problemas": [],
+   "notas_ficha": "Inventario nacional de Eurostat, solo España, 1990-2024, sin uso del suelo (LULUCF). No hay fila de total: se obtiene sumando los sectores de un año (unos 268 millones de t en 2024). Se dan las dos cifras: total y por habitante (población media de Eurostat)."
   },
   {
    "tabla": "energia_mix_electrico",
@@ -1634,9 +1584,7 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
+   "problemas": [],
    "notas_ficha": "REE (REData), solo España, años completos 2007-2025. No hay fila de total: sumar tecnologías de un año (unos 272 TWh en 2025). Para el total o la cuota renovable ya calculada, usar energia_resumen_anual_mix."
   },
   {
@@ -1651,10 +1599,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "tiempo en columna no estándar",
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España, 2015-2024, fuente Eurostat nrg_inf_epc. Es un stock a fin de año: no se suma entre años, solo entre tecnologías del mismo año (unos 136.000 MW en 2024). El autoconsumo puede no estar incluido."
+   "notas_ficha": "Solo España, 2015-2024, fuente Eurostat nrg_inf_epc. Potencia en total (MW), sin dividir por habitante: una central no se reparte por población. Es un stock a fin de año: no se suma entre años, solo entre tecnologías del mismo año (unos 136.000 MW en 2024). El autoconsumo puede no estar incluido."
   },
   {
    "tabla": "energia_resumen_anual_mix",
@@ -1666,9 +1613,7 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
+   "problemas": [],
    "notas_ficha": "REE, solo España, años completos 2007-2025, una fila por año. La demanda es menor que la generación porque el sistema exporta y hay pérdidas."
   },
   {
@@ -1730,7 +1675,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Solo aparecen los meses con algún indulto (no hay filas con cero). Hay una fila anómala del año 1200 (sin presidente) que conviene excluir (anio >= 1977). El último mes publicado es julio de 2026 y 2026 está incompleto."
+   "notas_ficha": "Solo aparecen los meses con algún indulto (no hay filas con cero). Desde julio de 1977 (sin la fila anómala del año 1200). El último mes publicado es julio de 2026 y su marca es es_parcial: 2026 está incompleto."
   },
   {
    "tabla": "gobierno_presidencias_resumen",
@@ -1758,10 +1703,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Una fila por ejercicio (1978-2026). Situación: A tiempo, Tarde, Prorrogado y Prorrogado (en curso) para el ejercicio actual, que está abierto. Para contar años prorrogados usar COUNT(*) por situación."
+   "problemas": [],
+   "notas_ficha": "Una fila por ejercicio (anio, 1978-2026). Situación: A tiempo, Tarde, Prorrogado y Prorrogado (en curso) para el ejercicio actual, que está abierto (es_parcial). Para contar años prorrogados usar COUNT(*) por situación."
   },
   {
    "tabla": "incendios_anual",
@@ -1841,7 +1784,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "INE 76823, 2018-2024. Hay ramas agregadas (es_agregado = true: Industria, Industria manufacturera, Industrias extractivas) que contienen a las demás: no sumar agregadas con ramas. No hay fila de España. Algunas ramas tienen secreto estadístico en varias comunidades; la columna nota lo avisa. Nombres de comunidad con formato INE (por ejemplo «Madrid, Comunidad de»)."
+   "notas_ficha": "INE 76823, 2018-2024. Hay ramas agregadas (es_agregado = true: Industria, Industria manufacturera, Industrias extractivas) que contienen a las demás: no sumar agregadas con ramas. No hay fila de España. Algunas ramas tienen secreto estadístico en varias comunidades; la columna nota lo avisa."
   },
   {
    "tabla": "industria_exportaciones_ue",
@@ -1854,9 +1797,10 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
+    "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Comext, 2015-2025. destino WORLD incluye el comercio dentro de la UE (el total 2025 de España es 394.000 millones de €); EXT_EU27_2020 es solo fuera de la UE. Hay capítulos (es_capitulo) que contienen a partidas más finas (p. ej. 87 contiene Turismos 8703): no sumar entre niveles. Las columnas exportacion_es_eur y exportacion_ue_eur están en euros, no en millones."
+   "notas_ficha": "Comext, 2015-2025. El destino Mundo (incluye UE) incluye el comercio dentro de la UE (el total 2025 de España es 394.000 millones de €); Fuera de la UE es solo exportación extracomunitaria. Se dan las dos cifras: total y por habitante, ambas en euros constantes. Hay capítulos (es_capitulo) que contienen a partidas más finas (p. ej. 87 contiene Turismos 8703): no sumar entre niveles."
   },
   {
    "tabla": "industria_fabricas",
@@ -1872,21 +1816,18 @@
    "notas_ficha": "Mapa de ANFAC de mayo de 2025, solo 16 fábricas, una fila por planta; la columna empleo está vacía. Listados de modelos como texto en modelos y modelos_adjudicados. El nombre de comunidad usa formato INE («Madrid, Comunidad de»)."
   },
   {
-   "tabla": "industria_ipi",
-   "sql_fuente": "-- Mart dbt industria_ipi (transform/models/marts/industria_ipi.sql)\nSELECT * FROM industria_ipi",
-   "modelo": "transform/models/marts/industria_ipi.sql",
-   "modelo_modificado": "2026-10-03",
-   "paginas_es": [
-    "pages/economia/industria.md"
-   ],
-   "paginas_traducciones": 4,
+   "tabla": "industria_ipi_ine",
+   "sql_fuente": "-- Mart dbt industria_ipi_ine (transform/models/marts/industria_ipi_ine.sql)\nSELECT * FROM industria_ipi_ine",
+   "modelo": "transform/models/marts/industria_ipi_ine.sql",
+   "modelo_modificado": null,
+   "paginas_es": [],
+   "paginas_traducciones": 0,
    "componentes": [],
    "problemas": [
-    "unidades mezcladas",
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Tres series mezcladas según fuente: eurostat (países, rama B-D es el total), ine (España y comunidades por destino económico; total es «Total industria») e ine_divisiones (España por división CNAE). España aparece como cod 00 (INE) y como ES (Eurostat): filtrar por fuente para no duplicar. La media anual del INE; es un índice, no se suma."
+   "notas_ficha": "INE, media anual de los meses de años completos. Dos familias que no se comparan (otra serie y otra corrección): tipo_rama Destino económico (tabla 70177, España y comunidades; total Total industria) y División CNAE (tabla 60282, solo España, corregido de estacionalidad). Es un índice (2021 = 100): no se suma. Los países europeos están en industria_ipi_paises."
   },
   {
    "tabla": "industria_ipi_mensual",
@@ -1901,7 +1842,22 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "INE tabla 70177, último mes publicado julio de 2026 (es_ultimo_mes). Los destinos Bienes de consumo duradero y no duradero son partes de Bienes de consumo: no sumar. Es un índice: no se suma entre meses ni territorios. Nombres de comunidad con formato INE."
+   "notas_ficha": "INE tabla 70177, último mes publicado julio de 2026 (es_ultimo_mes). Los destinos Bienes de consumo duradero y no duradero son partes de Bienes de consumo: no sumar. Es un índice: no se suma entre meses ni territorios."
+  },
+  {
+   "tabla": "industria_ipi_paises",
+   "sql_fuente": "-- Mart dbt industria_ipi_paises (transform/models/marts/industria_ipi_paises.sql)\nSELECT * FROM industria_ipi_paises",
+   "modelo": "transform/models/marts/industria_ipi_paises.sql",
+   "modelo_modificado": null,
+   "paginas_es": [
+    "pages/economia/industria.md"
+   ],
+   "paginas_traducciones": 4,
+   "componentes": [],
+   "problemas": [
+    "trampa en notas"
+   ],
+   "notas_ficha": "Eurostat sts_inpr_a, corregido de calendario, los 27 países y la UE (EU27_2020). La rama B-D es el total de la industria. Es un índice (2021 = 100): no se suma entre años ni países. Las comunidades y las divisiones del INE están en industria_ipi_ine."
   },
   {
    "tabla": "industria_peso_ue",
@@ -1992,7 +1948,7 @@
    "paginas_traducciones": 0,
    "componentes": [],
    "problemas": [],
-   "notas_ficha": "INE 59011/59014, abril de 2023 a julio de 2026 (trimestres que empiezan en esa fecha), solo 18 nacionalidades (las principales): no suman el total de España. Cifras redondeadas a centenas y con huecos (nulos) cuando el dato no se publica; el último trimestre está incompleto. Para el total anual usar inmigracion_flujos_anuales."
+   "notas_ficha": "INE 59011/59014, abril de 2023 a julio de 2026 (fecha = primer día del trimestre), solo 18 nacionalidades (las principales): no suman el total de España. Cifras redondeadas a centenas y con huecos (nulos) cuando el dato no se publica; el último trimestre está incompleto (es_parcial). Para el total anual usar inmigracion_flujos_anuales."
   },
   {
    "tabla": "inmigracion_flujos_anuales",
@@ -2032,11 +1988,10 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "No hay columna de nombre de comunidad: solo el código INE (00 es España, 13 Madrid). Mezcla países y grupos de países en nacionalidad_previa, no sumarlos entre sí."
+   "notas_ficha": "España es nivel pais (nivel ccaa para cada comunidad). nacionalidad_previa mezcla países y grupos de países: es_grupo marca los grupos (Total, continentes, UE...); no sumar grupos con países."
   },
   {
    "tabla": "inmigracion_poblacion",
@@ -2048,11 +2003,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "proporción 0-1 en vez de %"
-   ],
-   "notas_ficha": "Cifras a 1 de enero (INE, Estadística Continua de Población). pct_extranjeros viene como fracción. Sin columna de nombre de comunidad: usar el código INE de comunidad. Las zonas de origen no suman exactamente el total de extranjeros."
+   "problemas": [],
+   "notas_ficha": "Cifras a 1 de enero (INE, Estadística Continua de Población). extranjeros_pct ya está en 0-100. Las zonas de origen no suman exactamente el total de extranjeros."
   },
   {
    "tabla": "inmigracion_saldos",
@@ -2065,7 +2017,6 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
    "notas_ficha": "Solo 2021-2024 (INE, Estadística de Migraciones). La columna es_grupo marca las filas que agrupan países; no sumar países con sus grupos. A nivel comunidad solo hay Total, Española y Extranjera."
@@ -2082,7 +2033,7 @@
     "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "Formato largo: siempre hay que filtrar un indicador_id, porque cada uno tiene su unidad y no se pueden mezclar. Cada país tiene un último año distinto. UE (EUU) y OCDE (OED) son agregados ponderados (es_agregado). Nunca sumar valores entre países."
+   "notas_ficha": "Formato largo: siempre hay que filtrar un indicador_id, porque cada uno tiene su unidad y no se pueden mezclar. cod_pais es ISO alfa-2 (EU27_2020 la UE y OECD la OCDE, agregados ponderados: es_agregado). Cada país tiene un último año distinto: para el último dato de cada país usar internacional_ultimo. Nunca sumar valores entre países."
   },
   {
    "tabla": "internacional_ultimo",
@@ -2116,23 +2067,9 @@
     "src/lib/components/Comparativa.svelte"
    ],
    "problemas": [
-    "tiempo en columna no estándar",
     "trampa en notas"
    ],
-   "notas_ficha": "Una fila por indicador y país con su último año (anio_ultimo), que puede variar entre países. Hay que filtrar un indicador_id. Sirve para rankings sin evolución; para series largas usar internacional_comparativa."
-  },
-  {
-   "tabla": "ipc",
-   "sql_fuente": "SELECT * FROM ipc",
-   "modelo": "transform/models/marts/ipc.sql",
-   "modelo_modificado": "2026-09-28",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "no usable (auxiliar, duplicada o sin cifras)"
-   ],
-   "notas_ficha": "Mezcla 56 series del INE en una sola columna value (índices y variaciones anual, mensual y acumulada) con la unidad dentro del texto de serie. Para preguntas sobre inflación son mejores mercado_ipc_grupos (por grupos, con General) y mercado_ipc_ccaa (por comunidad)."
+   "notas_ficha": "Una fila por indicador y país con su último año (anio), que puede variar entre países. cod_pais es ISO alfa-2 (EU27_2020 la UE, OECD la OCDE). Hay que filtrar un indicador_id. Sirve para rankings sin evolución; para series largas usar internacional_comparativa."
   },
   {
    "tabla": "local_deuda_municipio",
@@ -2145,10 +2082,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Deuda en euros nominales a fin de trimestre (Banco de España). Solo 13 ciudades, no hay versión por habitante; para ello dividir por la población del municipio. El último dato es de junio de 2026."
+   "problemas": [],
+   "notas_ficha": "Deuda a fin de trimestre del ayuntamiento (Banco de España). Solo 13 ciudades de más de 300.000 habitantes. La versión por habitante usa la población del Padrón del año de la fecha (sin dato en 1997) y el deflactor anual: queda vacía donde falta alguno de los dos. El último dato es de junio de 2026."
   },
   {
    "tabla": "local_deuda_provincia",
@@ -2160,11 +2095,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Una foto a 31 de diciembre (trimestre siempre 4), en euros nominales. Solo hay código de provincia, sin nombre. No incluye importes sin provincia asignada. Para comparar provincias conviene dividir por su población."
+   "problemas": [],
+   "notas_ficha": "Una foto a 31 de diciembre (trimestre siempre 4). La versión por habitante usa el Padrón del año (el último para los años sin Padrón) y el deflactor anual. cod_ccaa permite agrupar por comunidad. No incluye importes sin provincia asignada, así que la suma de provincias puede diferir ligeramente del total nacional."
   },
   {
    "tabla": "mapas_indicadores",
@@ -2204,10 +2136,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Solo los 50 mayores contratos de patrocinio por año, no todos los contratos: sirve para ejemplos y rankings de contratos individuales, no para totales. 2026 en curso e incompleto. Hay objeto, órgano y adjudicatario en texto libre."
+   "problemas": [],
+   "notas_ficha": "Solo los 50 mayores contratos de patrocinio por año, no todos los contratos: sirve para ejemplos y rankings de contratos individuales, no para totales (un importe por habitante no tiene sentido en un contrato). ccaa y municipio dan el nombre del territorio del órgano que contrata. 2026 en curso e incompleto. Hay objeto, órgano y adjudicatario en texto libre."
   },
   {
    "tabla": "medios_contratos_grupos",
@@ -2344,10 +2274,24 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
-    "filtro fijo o valor por defecto"
+    "trampa en notas"
    ],
-   "notas_ficha": "Tabla de unas 150.000 filas, una por pago; sumar importe para totales por medio o administración. La base cambia según la vía (adjudicado, ejecutado, contratado, concedido) y la publicidad autonómica puede estar contratada o ejecutada, así que no es una suma contable homogénea. Hay importes negativos (correcciones). Para totales por medio es más ágil medios_receptores_resumen. 2026 en curso e incompleto."
+   "notas_ficha": "Tabla de unas 140.000 filas, una por pago; sumar importe para totales por medio o administración: ya no lleva los pagos duplicados, que están aparte en medios_receptores_duplicados (contratos de publicidad de comunidades y ayuntamientos cuya publicidad por medio ya consta en la fuente territorial), así que no hay que filtrar nada. La base cambia según la vía (adjudicado, ejecutado, contratado, concedido) y la publicidad autonómica puede estar contratada o ejecutada, así que no es una suma contable homogénea. Hay importes negativos (correcciones). Para totales por medio y ranking usar medios_receptores_totales; por año y vía, medios_receptores_resumen. 2026 en curso e incompleto."
+  },
+  {
+   "tabla": "medios_receptores_duplicados",
+   "sql_fuente": "-- Mart dbt medios_receptores_duplicados (transform/models/marts/medios_receptores_duplicados.sql)\nSELECT * FROM medios_…",
+   "modelo": "transform/models/marts/medios_receptores_duplicados.sql",
+   "modelo_modificado": null,
+   "paginas_es": [
+    "pages/medios/buscador.md"
+   ],
+   "paginas_traducciones": 4,
+   "componentes": [],
+   "problemas": [
+    "no usable (auxiliar, duplicada o sin cifras)"
+   ],
+   "notas_ficha": "Pagos que se excluyen de medios_receptores por ser duplicado probable (contratos de publicidad de comunidades y ayuntamientos ya presentes en la fuente territorial ese año). No sumar a medios_receptores; solo sirve para saber cuánto se ha dejado fuera."
   },
   {
    "tabla": "medios_receptores_resumen",
@@ -2359,10 +2303,23 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
+   "problemas": [],
+   "notas_ficha": "Una fila por medio, año y vía; se puede sumar sin doble cuenta. Los totales del medio y su puesto en el ranking están en medios_receptores_totales. 2026 en curso e incompleto; la ventana de datos varía por vía (publicidad del Estado por medio solo 2025, contratos desde 2018, subvenciones desde 2022)."
+  },
+  {
+   "tabla": "medios_receptores_totales",
+   "sql_fuente": "-- Mart dbt medios_receptores_totales (transform/models/marts/medios_receptores_totales.sql)\nSELECT * FROM medios_recept…",
+   "modelo": "transform/models/marts/medios_receptores_totales.sql",
+   "modelo_modificado": null,
+   "paginas_es": [
+    "pages/medios/buscador.md"
+   ],
+   "paginas_traducciones": 4,
+   "componentes": [],
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Una fila por medio, año y vía. Las columnas total_* y estado_/territorial_/contratos_/subvenciones_ repiten el total del medio en cada fila: no sumarlas. Para el total de un medio usar total_eur_real de una sola fila o sumar importe_eur_real. 2026 en curso e incompleto; la ventana de datos varía por vía."
+   "notas_ficha": "Una fila por medio con sus totales de todos los años y vías (sin los pagos duplicados). Las vías no son homogéneas: la publicidad del Estado por medio solo existe para 2025, la territorial solo de las administraciones que publican el medio, los contratos son un mínimo documentado desde 2018 y las subvenciones empiezan en 2022. El ranking (en_ranking) deja fuera las plataformas digitales y los medios públicos. El detalle por año y vía está en medios_receptores_resumen."
   },
   {
    "tabla": "medios_subvenciones_anual",
@@ -2383,15 +2340,24 @@
    "sql_fuente": "-- Mart dbt medios_subvenciones_beneficiarios (transform/models/marts/medios_subvenciones_beneficiarios.sql)\nSELECT * FR…",
    "modelo": "transform/models/marts/medios_subvenciones_beneficiarios.sql",
    "modelo_modificado": "2026-10-03",
+   "paginas_es": [],
+   "paginas_traducciones": 0,
+   "componentes": [],
+   "problemas": [],
+   "notas_ficha": "Solo personas jurídicas, una fila por NIF y año; se puede sumar sin doble cuenta. El total de cada beneficiario, su puesto, su forma jurídica y las administraciones que le conceden están en medios_subvenciones_totales. Datos 2022-2026; es_parcial marca el último año, incompleto."
+  },
+  {
+   "tabla": "medios_subvenciones_totales",
+   "sql_fuente": "-- Mart dbt medios_subvenciones_totales (transform/models/marts/medios_subvenciones_totales.sql)\nSELECT * FROM medios_su…",
+   "modelo": "transform/models/marts/medios_subvenciones_totales.sql",
+   "modelo_modificado": null,
    "paginas_es": [
     "pages/medios/dinero-publico.md"
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "trampa en notas"
-   ],
-   "notas_ficha": "Solo personas jurídicas, una fila por NIF y año. total_* y rango se repiten en cada año del mismo beneficiario: no sumarlos entre filas. Datos 2022-2026 (2026 incompleto). Las administraciones concedentes son texto en mayúsculas."
+   "problemas": [],
+   "notas_ficha": "Solo personas jurídicas, una fila por NIF con el total de 2022-2026 (2026 incompleto). El detalle por año está en medios_subvenciones_beneficiarios. Las administraciones concedentes son texto en mayúsculas."
   },
   {
    "tabla": "medios_tv_ccaa_anual",
@@ -2444,10 +2410,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "tiempo en columna no estándar",
     "trampa en notas"
    ],
-   "notas_ficha": "Weekly Oil Bulletin de la UE: precio con impuestos. Solo hay España (ES) y la media de la UE (EU). Los precios no se suman. El último dato es de la semana del 28 de septiembre de 2026."
+   "notas_ficha": "Weekly Oil Bulletin de la UE: precio con impuestos. Solo hay España (ES) y la media de la UE (EU27_2020). La fecha es el primer día de la semana del boletín. Los precios no se suman."
   },
   {
    "tabla": "mercado_energia_hogares",
@@ -2459,10 +2424,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Datos semestrales de Eurostat para un consumidor doméstico medio (electricidad banda DC, gas banda D2), con impuestos. La columna de tiempo es la fecha de inicio del semestre; la columna semestre (2025-S1) es la etiqueta legible. Último dato: segundo semestre de 2025. Países: España, Alemania, Francia, Italia, Portugal y UE-27."
+   "problemas": [],
+   "notas_ficha": "Datos semestrales de Eurostat para un consumidor doméstico medio (electricidad banda DC, gas banda D2), con impuestos. La fecha es el primer día del semestre; la columna semestre (2025-S1) es la etiqueta legible. Países: España, Alemania, Francia, Italia, Portugal y UE-27 (EU27_2020)."
   },
   {
    "tabla": "mercado_energia_ipc",
@@ -2504,10 +2467,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "INE tabla 76140. Sin nombre de comunidad: solo código INE (00 es el Total nacional, 13 Madrid). Ceuta (18) y Melilla (19) solo desde unos años después. Las tasas no se suman ni se promedian entre comunidades sin ponderar. Último dato: agosto de 2026."
+   "notas_ficha": "INE tabla 76140. cod_ccaa 00 es el Total nacional (ccaa = España, es_nacional); 13 es Madrid. Ceuta (18) y Melilla (19) solo desde unos años después. Las tasas no se suman ni se promedian entre comunidades sin ponderar. Último dato: agosto de 2026."
   },
   {
    "tabla": "mercado_ipc_grupos",
@@ -2592,11 +2554,10 @@
    "paginas_traducciones": 12,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "SEPE. Sin columna de nombre: cod es el código INE (provincia 01-52, comunidad 01-19, España 00); filtrar siempre por nivel para no mezclar provincias con comunidades. paro_registrado es un stock mensual, no se suma entre meses. Es distinto de la tasa de paro de la EPA."
+   "notas_ficha": "SEPE. cod es el código INE (provincia 01-52, comunidad 01-19, España 00) y territorio su nombre; filtrar siempre por nivel para no mezclar provincias con comunidades. Para comparar territorios usar por_100_16_64 (por habitante de 16 a 64 años), no paro_registrado. paro_registrado es un stock mensual, no se suma entre meses. Es distinto de la tasa de paro de la EPA."
   },
   {
    "tabla": "mercado_paro_territorios",
@@ -2611,10 +2572,9 @@
    "paginas_traducciones": 12,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "EPA del INE. Sin columna de nombre: cod es el código INE (comunidad 01-19, provincia 01-52); filtrar por nivel. No incluye fila de España (usar mercado_paro_trimestral). Las provincias pequeñas tienen valores muy ruidosos; las medias de 4 trimestres los suavizan."
+   "notas_ficha": "EPA del INE. cod es el código INE (España 00, comunidad 01-19, provincia 01-52) y territorio su nombre; filtrar por nivel. Columnas por nivel: la provincia no tiene menores de 25, extranjeros ni hogares; la comunidad no tiene empleo ni actividad; España las tiene todas. Las provincias pequeñas tienen valores muy ruidosos; las medias de 4 trimestres los suavizan. La serie nacional completa (con más indicadores) está en mercado_paro_trimestral."
   },
   {
    "tabla": "mercado_paro_trimestral",
@@ -2629,7 +2589,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "EPA del INE, solo España, desde 2002. Las personas son stocks trimestrales (no se suman entre trimestres). La columna periodo es solo etiqueta tipo 2026-T2."
+   "notas_ficha": "EPA del INE, solo España, desde 2002. Las personas son stocks trimestrales (no se suman entre trimestres). La columna periodo es solo etiqueta tipo 2026-T2. Es la serie nacional completa; la misma tasa de paro de España está también en mercado_paro_territorios (nivel pais) para compararla con comunidades y provincias."
   },
   {
    "tabla": "mercado_paro_ue",
@@ -2650,7 +2610,6 @@
    "modelo": "transform/models/marts/metricas.sql",
    "modelo_modificado": "2026-09-30",
    "paginas_es": [
-    "pages/cuentas-publicas/empleo-publico.md",
     "pages/economia/index.md",
     "pages/energia-clima/records.md",
     "pages/index.md",
@@ -2658,7 +2617,7 @@
     "pages/varios/indicadores/index.md",
     "pages/varios/indicadores/[metrica_id].md"
    ],
-   "paginas_traducciones": 28,
+   "paginas_traducciones": 24,
    "componentes": [],
    "problemas": [
     "no usable (auxiliar, duplicada o sin cifras)"
@@ -2675,10 +2634,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "proporción 0-1 en vez de %"
-   ],
-   "notas_ficha": "DGT MATRABA; solo municipios con 100 o más vehículos de flota al año (unos 250 por año). El último año está incompleto: los rankings usan el último año con doce meses. ivtm_turismo es de 2026 para todos los años."
+   "problemas": [],
+   "notas_ficha": "DGT MATRABA; solo municipios con 100 o más vehículos de flota al año (unos 250 por año). El último año está incompleto: los rankings usan el último año con doce meses. ivtm_turismo es la tarifa de 2026 aplicada a todos los años, así que ahorro_por_coche y ahorro_estimado son euros constantes de 2026 por construcción (no hace falta deflactarlos). flota_por_habitante es una razón (coches de flota por habitante, hasta 99 en pueblos pequeños)."
   },
   {
    "tabla": "movilidad_marcas_mensual",
@@ -2695,7 +2652,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "DGT MATRABA, solo vehículos nuevos, sin territorio. No hay fila de total: hay que sumar y casi siempre filtrar por grupo (turismo, camion...) para no mezclar tipos de vehículo. En carrozados la marca es la del chasis."
+   "notas_ficha": "DGT MATRABA, solo vehículos nuevos, sin territorio. No hay fila de total: hay que sumar y casi siempre filtrar por grupo (turismo, camion...) para no mezclar tipos de vehículo. Las columnas grupo_etiqueta, energia_etiqueta y canal_etiqueta traen el nombre de cada código. En carrozados la marca es la del chasis."
   },
   {
    "tabla": "movilidad_matriculaciones_mensual",
@@ -2727,10 +2684,8 @@
    "paginas_es": [],
    "paginas_traducciones": 0,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "DGT MATRABA. Sin nombre de municipio, solo código INE de cinco dígitos. El último año (2026) llega solo hasta el último mes cargado. Las matriculaciones se registran donde está el domicilio del titular, y las flotas inflan algunos municipios. Los municipios sin matriculaciones no tienen fila; cifras menores de 1 no se publican."
+   "problemas": [],
+   "notas_ficha": "DGT MATRABA. Turismos nuevos por año y municipio del domicilio del titular, con nombre, provincia, comunidad y población. Las flotas de renting y alquiler inflan algunos municipios (se matriculan donde tienen la sede): para ordenar pueblos usar particulares_por_1000_hab, que no las cuenta. El último año (2026) llega solo hasta el último mes cargado. Los municipios sin matriculaciones no tienen fila; los que no están en el padrón tienen población y nombre vacíos."
   },
   {
    "tabla": "movilidad_matriculaciones_provincia",
@@ -2747,7 +2702,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "DGT MATRABA, solo turismos. Filtrar nuevo_usado = N para nuevos (U = usados). Sin per cápita: dividir por población. Los registros siguen al domicilio del titular, por lo que las flotas y rent a car inflan Madrid, Barcelona, Baleares y otras. cod_ccaa permite agrupar por comunidad. En energia_etiqueta Híbrido es no enchufable y Enchufable es PHEV."
+   "notas_ficha": "DGT MATRABA, solo turismos. Filtrar nuevo_usado = N para nuevos (U = usados). Para comparar provincias usar matriculaciones_por_1000_hab, que es aditiva (sumar filas de un periodo da la tasa de ese periodo); la población no se incluye para que no se sume. Los registros siguen al domicilio del titular, por lo que las flotas y rent a car inflan Madrid, Barcelona, Baleares y otras: es_flota = false las quita (queda el canal servicio_publico, taxis y VTC). cod_ccaa y ccaa permiten agrupar por comunidad. En energia_etiqueta Híbrido es no enchufable y Enchufable es PHEV."
   },
   {
    "tabla": "movilidad_modelos_mensual",
@@ -2764,7 +2719,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "DGT MATRABA, solo vehículos nuevos y solo los últimos 36 meses; sin territorio. Sin fila de total: sumar y filtrar por grupo para no mezclar turismos con camiones. Un mismo modelo puede aparecer con variantes de nombre (LEON y LEON SP)."
+   "notas_ficha": "DGT MATRABA, solo vehículos nuevos y solo los últimos 36 meses; sin territorio. Sin fila de total: sumar y filtrar por grupo para no mezclar turismos con camiones. Las columnas *_etiqueta traen el nombre de cada código. Un mismo modelo puede aparecer con variantes de nombre (LEON y LEON SP): no se normalizan."
   },
   {
    "tabla": "movilidad_parque_evolucion",
@@ -2778,7 +2733,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "DGT, parque de España entera desde marzo de 2025 (17 cortes mensuales). Es un stock: no sumar meses. Sin fila de total; para 'coches' filtrar grupo = turismo."
+   "notas_ficha": "DGT, parque de España entera desde marzo de 2025 (17 cortes mensuales). Es un stock: no sumar meses. Sin fila de total; para «coches» filtrar grupo = turismo. vehiculos_por_1000_hab usa el padrón del año (el último para los años sin padrón) y se puede sumar entre energías del mismo mes."
   },
   {
    "tabla": "movilidad_parque_modelos",
@@ -2793,7 +2748,7 @@
    "problemas": [
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "DGT, solo el último mes y solo modelos con al menos 100 unidades. Hay filas '(modelo sin especificar)' que no son un modelo real."
+   "notas_ficha": "DGT, solo el último mes y solo modelos con al menos 100 unidades. Las filas «(modelo sin especificar)» no son un modelo real (es_modelo_real = false)."
   },
   {
    "tabla": "movilidad_parque_municipio",
@@ -2805,10 +2760,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "DGT, solo el último mes y solo municipios de 10.000 habitantes o más (la DGT anonimiza el resto). Sin nombre: solo código INE de cinco dígitos. Es un stock; no hay cifra por habitante en la tabla."
+   "problemas": [],
+   "notas_ficha": "DGT, solo el último mes y solo municipios de 10.000 habitantes o más (la DGT anonimiza el resto). Es un stock. Los municipios con sedes de renting o alquiler acumulan coches que circulan por todo el país y disparan sus turismos por habitante."
   },
   {
    "tabla": "movilidad_parque_provincia",
@@ -2826,7 +2779,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "DGT, solo el último mes. Sin fila de total: sumar las categorías y filtrar grupo = turismo para coches. cod_ccaa permite agrupar por comunidad. Por habitante hay que dividir por población."
+   "notas_ficha": "DGT, solo el último mes. Sin fila de total: sumar las categorías y filtrar grupo = turismo para coches. ccaa y cod_ccaa permiten agrupar por comunidad. vehiculos_por_1000_hab es aditiva dentro de una provincia (sumar sus filas da la tasa de la provincia); poblacion se repite en cada fila y no se suma: para una comunidad o para España es sum(vehiculos) / población de ese territorio."
   },
   {
    "tabla": "movilidad_parque_resumen",
@@ -2850,7 +2803,7 @@
    "paginas_traducciones": 0,
    "componentes": [],
    "problemas": [],
-   "notas_ficha": "Foto diaria del censo público; solo hay unos pocos días cargados, no es una serie histórica larga. Es un stock: para el total de un día sumar los cuatro tramos, nunca entre días."
+   "notas_ficha": "Foto diaria del censo público; solo hay unos pocos días cargados, no es una serie histórica larga. Es un stock: para el total de un día sumar los cuatro tramos, nunca entre días. tramo_orden va de 1 (ultrarrápida) a 4 (lenta)."
   },
   {
    "tabla": "movilidad_recarga_provincia",
@@ -2877,10 +2830,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Foto del día, una fila por emplazamiento (contar filas para contar estaciones, sumar puntos para contar puntos). Sin nombre de municipio, solo códigos INE (cod_mun, cod_prov). Los nombres de operador pueden aparecer con distintas razones sociales."
+   "problemas": [],
+   "notas_ficha": "Foto del día, una fila por emplazamiento (contar filas para contar estaciones, sumar puntos para contar puntos). Trae municipio, provincia y ccaa (4 emplazamientos sin ninguno). Los nombres de operador pueden aparecer con distintas razones sociales. La tasa por habitante está en movilidad_recarga_provincia."
   },
   {
    "tabla": "movilidad_transporte_ciudades",
@@ -2909,7 +2860,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "INE 20239, España entera. Los modos se solapan: Transporte urbano agrupa metro y autobús urbano, Ferrocarril agrupa cercanías, media y larga distancia, Alta Velocidad es parte de larga distancia. No sumar todos los modos: usar el total ('Total de viajeros', que solo cubre el transporte terrestre regular) o elegir un modo concreto. Las series empiezan en años distintos según el modo."
+   "notas_ficha": "INE 20239, España entera. Los modos se solapan: cada modo está dentro de su clave_padre (metro y autobús urbano suman Transporte urbano; cercanías, media y larga distancia suman Interurbano por ferrocarril; alta velocidad está dentro de larga distancia; urbano + interurbano + especial y discrecional = total). Para no duplicar, usar es_hoja = true o un solo nivel, o el total (clave = total). Las series empiezan en años distintos según el modo. 1997 no tiene población (el padrón no se publicó)."
   },
   {
    "tabla": "municipios_cuentas",
@@ -2922,10 +2873,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "Hacienda (CONPREL), importes en euros corrientes (sin deflactar), años 2022 a 2025. Sin nombre: solo código INE de cinco dígitos. Usar solo filas con tiene_datos = true: muchos municipios no han rendido cuentas. 2025 es provisional y con muchos menos municipios (unos 5.900 frente a 7.000). Los capítulos 1 a 4 son operaciones corrientes, 6 y 7 de capital, 8 y 9 financieras; las áreas de gasto (gasto_area_0 a 9) también están. Para series largas usar municipios_cuentas_serie."
+   "notas_ficha": "Hacienda (CONPREL), años 2022 a 2025. Totales y gasto/ingreso por habitante en euros corrientes y en constantes (_real, euros de anio_base); capítulos y áreas van solo en euros corrientes del año. Trae municipio, cod_prov y provincia. Usar solo filas con tiene_datos = true: muchos municipios no han rendido cuentas. 2025 es provisional (marca provisional) y con muchos menos municipios (unos 5.900 frente a 7.000). Los capítulos 1 a 4 son operaciones corrientes, 6 y 7 de capital, 8 y 9 financieras; las áreas de gasto (gasto_area_0 a 9) también están. Para series largas usar municipios_cuentas_serie."
   },
   {
    "tabla": "municipios_cuentas_medias",
@@ -2951,10 +2901,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "Hacienda (CONPREL), 2010 a 2025, euros corrientes. Sin nombre: código INE de cinco dígitos. Usar solo tiene_datos = true: muchos municipios no rinden cuentas algún año y aparecen con ceros o nulos. 2025 es provisional y con menos municipios."
+   "notas_ficha": "Hacienda (CONPREL), 2010 a 2025. Euros corrientes y constantes (_real, euros de anio_base). Trae municipio, cod_prov y provincia, y el tramo de población (tramo_poblacion, tramo_orden de 1 a 7: el mismo criterio que municipios_cuentas_medias). Usar solo tiene_datos = true: muchos municipios no rinden cuentas algún año y aparecen con nulos. 2025 es provisional (marca provisional) y con menos municipios."
   },
   {
    "tabla": "municipios_politicas",
@@ -2967,23 +2916,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "unidades mezcladas"
    ],
-   "notas_ficha": "Hacienda (CONPREL), solo 2024 (último ejercicio definitivo), obligaciones reconocidas netas en euros corrientes. Sin nombre: código INE. Sumar políticas da el gasto total (no mezclar áreas con políticas: son niveles distintos de la misma clasificación). Algunos importes negativos son ajustes."
-  },
-  {
-   "tabla": "observatorios",
-   "sql_fuente": "SELECT * FROM observatorios",
-   "modelo": "transform/models/marts/observatorios.sql",
-   "modelo_modificado": "2026-09-27",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "no usable (auxiliar, duplicada o sin cifras)"
-   ],
-   "notas_ficha": "Duplicada por observatorios_detalle, que añade nivel, ubicación, estado, tipo y partido gobernante; esta solo tiene nombre, año y un ámbito sin normalizar."
+   "notas_ficha": "Hacienda (CONPREL), solo 2024 (último ejercicio definitivo), obligaciones reconocidas netas en euros corrientes y constantes (_real, euros de anio_base). Sumar políticas da el gasto total (no mezclar áreas con políticas: son niveles distintos de la misma clasificación). Algunos importes negativos son ajustes."
   },
   {
    "tabla": "observatorios_detalle",
@@ -2999,6 +2934,19 @@
     "no usable (auxiliar, duplicada o sin cifras)"
    ],
    "notas_ficha": "Sin cifras que consultar: es una lista de observatorios (nombre, nivel, estado, partido); lo único contable seria el numero de filas."
+  },
+  {
+   "tabla": "paises_iso",
+   "sql_fuente": "-- Seed dbt paises_iso (transform/seeds/paises_iso.csv): código ISO de cada país y agregado, su ISO3, su código de Euros…",
+   "modelo": null,
+   "modelo_modificado": null,
+   "paginas_es": [],
+   "paginas_traducciones": 0,
+   "componentes": [],
+   "problemas": [
+    "no usable (auxiliar, duplicada o sin cifras)"
+   ],
+   "notas_ficha": "Tabla de referencia: código ISO2 de cada país y agregado (cod_pais), su ISO3, su código de Eurostat y su nombre en castellano. Para unir tablas internacionales, no para responder preguntas."
   },
   {
    "tabla": "pensiones_afiliados_regimen",
@@ -3080,20 +3028,30 @@
    "modelo_modificado": "2026-09-28",
    "paginas_es": [
     "pages/index.md",
-    "pages/movilidad/parque.md",
     "pages/movilidad/transporte-publico.md",
     "pages/territorios/municipios.md",
     "pages/territorios/[ccaa]/index.md",
     "pages/territorios/[ccaa]/[provincia].md"
    ],
-   "paginas_traducciones": 24,
+   "paginas_traducciones": 20,
    "componentes": [],
    "problemas": [],
    "notas_ficha": "Un municipio por fila y año (2016-2025), sin desglose por sexo. Los nombres vienen con el artículo detrás ('Campillo, El', 'Riba, La'). Incluye cod_prov y cod_ccaa (INE) para agrupar. Para totales de provincia o comunidad usar poblacion_territorios."
   },
   {
+   "tabla": "poblacion_paises",
+   "sql_fuente": "-- Mart dbt poblacion_paises (transform/models/marts/poblacion_paises.sql): población media anual de cada país (Eurostat…",
+   "modelo": "transform/models/marts/poblacion_paises.sql",
+   "modelo_modificado": null,
+   "paginas_es": [],
+   "paginas_traducciones": 0,
+   "componentes": [],
+   "problemas": [],
+   "notas_ficha": "Eurostat demo_gind (población media anual). Incluye agregados (Unión Europea (27), Zona euro): en rankings de países, excluirlos."
+  },
+  {
    "tabla": "poblacion_territorios",
-   "sql_fuente": "SELECT anio, nivel, cod, sexo, poblacion, n_municipios\nFROM poblacion_territorios",
+   "sql_fuente": "SELECT anio, nivel, cod, nombre, sexo, poblacion, n_municipios\nFROM poblacion_territorios",
    "modelo": "transform/models/marts/poblacion_territorios.sql",
    "modelo_modificado": "2026-09-28",
    "paginas_es": [
@@ -3116,10 +3074,9 @@
    "paginas_traducciones": 60,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "No tiene columna de nombre: unir con territorios por nivel y cod para obtener el nombre. El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia). Siempre filtrar sexo = 'Total' salvo que se pregunte por hombres o mujeres, o se duplica la población."
+   "notas_ficha": "El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia): filtrar por nivel. Siempre filtrar sexo = 'Total' salvo que se pregunte por hombres o mujeres, o se triplica la población."
   },
   {
    "tabla": "primario_aceite",
@@ -3197,7 +3154,7 @@
   },
   {
    "tabla": "primario_paises_largo",
-   "sql_fuente": "-- Mart dbt primario_paises_largo (transform/models/marts/primario_paises_largo.sql)\nSELECT * FROM primario_paises_largo",
+   "sql_fuente": "-- Mart dbt primario_paises_largo (transform/models/marts/primario_paises_largo.sql)\nSELECT * EXCLUDE (geo) FROM primari…",
    "modelo": "transform/models/marts/primario_paises_largo.sql",
    "modelo_modificado": "2026-10-03",
    "paginas_es": [
@@ -3206,9 +3163,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "no usable (auxiliar, duplicada o sin cifras)"
+    "trampa en notas"
    ],
-   "notas_ficha": "Tabla base en formato largo (producto x país x año) de la que derivan primario_serie_espana, primario_ranking_ue y primario_pesca; mezcla unidades distintas en una sola columna valor, así que no sirve para responder sin filtrar por producto. Usar las derivadas."
+   "notas_ficha": "Tabla base en formato largo (producto x país x año, 27 países de la UE): cada fila lleva su unidad, así que hay que filtrar siempre por producto o producto_id (hay unos 70) y no sumar productos distintos. Por habitante en valor_hab (con unidad_hab) y en euros constantes en valor_real/valor_hab_real (solo millones de euros), con el IPCA de cada país (deflactor_paises). Los valores en euros son corrientes en valor y los países sin euro vienen convertidos por Eurostat. Los años recientes pueden estar incompletos en algunos países (la cuota sobre los países con dato se infla): para cuotas y rankings usar primario_ranking_ue y primario_serie_espana."
   },
   {
    "tabla": "primario_pesca",
@@ -3224,7 +3181,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar siempre por medida (capturas en miles de t, acuicultura_t en miles de t, acuicultura_eur en millones de euros, flota_gt en miles de GT, flota_nr en número de buques): unidades distintas en la misma columna valor. Irlanda y Portugal no publican capturas recientes, por eso la cuota (cuota_pct) puede estar inflada (ver cuota_min_pct). valor_real solo existe para acuicultura_eur. kg_hab solo en capturas y acuicultura_t."
+   "notas_ficha": "Filtrar siempre por medida (capturas en miles de t, acuicultura_t en miles de t, acuicultura_eur en millones de euros, flota_gt en miles de GT, flota_nr en número de buques): unidades distintas en la misma columna valor. valor_hab lleva su unidad en unidad_hab (kg por habitante, euros por habitante, GT por 1.000 habitantes, buques por 100.000 habitantes). valor_real y valor_hab_real existen para acuicultura_eur, en euros constantes de anio_base con el IPCA de cada país. Irlanda y Portugal no publican capturas recientes, por eso la cuota (cuota_pct) puede estar inflada (ver cuota_min_pct)."
   },
   {
    "tabla": "primario_ranking_ue",
@@ -3294,10 +3251,8 @@
    ],
    "paginas_traducciones": 12,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Sin columna de nombre de territorio: unir con territorios por cod (códigos INE; España = '00'). anio es el año de la encuesta; la renta es del año anterior (anio_renta = anio - 1). Muestra pequeña en comunidades pequeñas: las cifras saltan de un año a otro."
+   "problemas": [],
+   "notas_ficha": "anio es el año de la encuesta; la renta es del año anterior (anio_renta = anio - 1). Códigos INE: España = '00' (nivel pais). Muestra pequeña en comunidades pequeñas: las cifras saltan de un año a otro."
   },
   {
    "tabla": "renta_ecv_edad",
@@ -3312,7 +3267,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España. Los grupos se solapan: 'Menos de 18 años' incluye 'Menores de 16 años', y 'De 18 a 64 años' agrupa a varios de los demás; no sumar. anio es el año de la encuesta (la renta es del año anterior)."
+   "notas_ficha": "Solo España. Los grupos con orden 1 a 5 (menores de 16, 16-29, 30-44, 45-64, 65 y más) no se solapan y son los que usa la web; 'Menos de 18 años' incluye a 'Menores de 16 años' y 'De 18 a 64 años' agrupa a varios de los demás (orden nulo): no sumarlos con los otros. anio es el año de la encuesta (la renta es del año anterior)."
   },
   {
    "tabla": "renta_municipios",
@@ -3358,7 +3313,7 @@
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar siempre por indicador: arope (% de población), gini (0 a 100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor. 'UE-27' (geo EU27_2020, es_ue=true) es el agregado, no un país: excluirlo en rankings de países. Año de encuesta, no de la renta."
+   "notas_ficha": "Filtrar siempre por indicador: arope (%), gini (índice 0-100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor, y la columna unidad lo dice en cada fila. La UE-27 (cod_pais EU27_2020, es_agregado = true, es_ue = false) es el agregado, no un país: excluirla en rankings de países (es_ue = true son los 27 países). Año de encuesta, no de la renta."
   },
   {
    "tabla": "salud_causas_muerte",
@@ -3371,11 +3326,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
-    "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "La tabla mezcla capítulos CIE-10 (es_capitulo = true, p. ej. 'Tumores', 'Enfermedades del sistema circulatorio') con causas concretas (es_capitulo = false, p. ej. 'Accidentes de tráfico', 'Suicidio y lesiones autoinfligidas'); no sumar capítulos y causas entre sí (se duplica). 'Todas las causas' es un capítulo y es el total. Para rankings de grandes grupos filtrar es_capitulo = true y excluir 'Todas las causas'. Sin nombre de territorio: unir con territorios por nivel y cod (13 = Madrid como ccaa, Ciudad Real como provincia). Tasa bruta sin ajustar por edad. Último año 2024."
+   "notas_ficha": "tipo_causa separa el total ('Todas las causas'), los capítulos de la CIE-10 ('Tumores', 'Enfermedades del sistema circulatorio'...) y las causas concretas ('Accidentes de tráfico', 'Suicidio y lesiones autoinfligidas'...): sumar solo dentro de un mismo tipo (capítulos y causas entre sí duplican). Para rankings de grandes grupos filtrar tipo_causa = 'capitulo'. El cod 13 es Madrid como ccaa y Ciudad Real como provincia: filtrar por nivel. Tasa bruta sin ajustar por edad (una provincia envejecida tiene más muertes por habitante sin que su salud sea peor). Solo se publican 15 causas concretas elegidas y las provincias desde 2010. Último año 2024."
   },
   {
    "tabla": "salud_esperanza_vida",
@@ -3389,10 +3342,8 @@
    ],
    "paginas_traducciones": 12,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Sin nombre de territorio: unir con territorios por nivel y cod. Cuidado: cod '13' es la comunidad de Madrid (85,6 años) con nivel ccaa y Ciudad Real (83,0) con nivel provincia. España viene de Eurostat (redondeada a un decimal) y comunidades y provincias del INE. Último año 2024."
+   "problemas": [],
+   "notas_ficha": "Cuidado: cod '13' es la comunidad de Madrid (85,6 años) con nivel ccaa y Ciudad Real (83,0) con nivel provincia. España viene de Eurostat (redondeada a un decimal) y comunidades y provincias del INE: la columna fuente lo indica y no son del todo comparables. Último año 2024."
   },
   {
    "tabla": "salud_mortalidad_semanal",
@@ -3405,12 +3356,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
-    "proporción 0-1 en vez de %",
-    "tiempo en columna no estándar",
     "trampa en notas"
    ],
-   "notas_ficha": "Sin nombre de territorio: unir con territorios (cod INE; 13 = Madrid). exceso es una proporción, no un porcentaje: 1,57 significa 157 % más que lo habitual; la media 2015-2019 solo está para las semanas con referencia. La fecha 'semana' es el último día de la semana de datos; no sumar semanas de España con las de comunidades."
+   "notas_ficha": "fecha es el primer día (lunes) de la semana. El exceso se da en % (0-100) de dos formas: exceso_pct sobre las defunciones brutas y exceso_hab_pct sobre la tasa por habitante de 2015-2019 (descuenta que la población crece, pero no el envejecimiento: no hay defunciones semanales por edad en esta tabla). La media 2015-2019 solo está para las semanas con referencia. El cod 13 es Madrid; no sumar semanas de España con las de comunidades. 1997 no tiene población (sin padrón), así que sus tasas son nulas."
   },
   {
    "tabla": "sanidad_gasto",
@@ -3426,7 +3374,7 @@
     "unidades mezcladas",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar financiacion = 'Total' para el gasto total; 'Público', 'Seguros voluntarios' y 'Pago directo de los hogares' suman el Total, no mezclarlos. 'UE-27' aparece con geo 'UE' (agregado, no país). eur_hab_real solo existe para España; para comparar países usar pct_pib o pps_hab. Datos hasta 2024 (2025 con huecos)."
+   "notas_ficha": "Filtrar financiacion = 'Total' para el gasto total; 'Público', 'Seguros voluntarios' y 'Pago directo de los hogares' suman el Total, no mezclarlos. La UE-27 es una fila con cod_pais EU27_2020 y es_agregado = true (no es un país). Los euros constantes usan el IPCA de cada país (deflactor_paises); para comparar países el gasto por habitante en paridad de poder de compra está en pps_hab, y también hay pct_pib. Datos hasta 2024 (2025 con huecos)."
   },
   {
    "tabla": "sanidad_gasto_ccaa",
@@ -3439,10 +3387,8 @@
    ],
    "paginas_traducciones": 8,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código"
-   ],
-   "notas_ficha": "Sin nombre de territorio: unir con territorios por cod (INE). La fila cod '00' (nivel total_ccaa) es el total del conjunto de comunidades, no España entera, y no está en la lista de comunidades. No incluye Ceuta ni Melilla. Los dos últimos años (2023 y 2024) son provisionales (provisional = true). Gasto del sector comunidades autónomas, sin mutuas ni gasto de la Administración central."
+   "problemas": [],
+   "notas_ficha": "La fila cod '00' (nivel total_ccaa, nombre 'Total comunidades autónomas') es el total del conjunto de comunidades, no España entera, y no está en la lista de comunidades. No incluye Ceuta ni Melilla. Los dos últimos años (2023 y 2024) son provisionales (provisional = true). Gasto del sector comunidades autónomas, sin mutuas ni gasto de la Administración central."
   },
   {
    "tabla": "sanidad_listas_especialidad",
@@ -3472,11 +3418,10 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Dos cortes al año (30 de junio y 31 de diciembre, columna corte); para comparar años usar siempre el mismo corte, normalmente 'diciembre'. Filtrar por tipo: 'quirurgica' o 'consultas' no son comparables entre sí, y pacientes solo existe en quirúrgica. Sin nombre de territorio: unir con territorios por cod (INE; España = '00', 13 = Madrid). Las comunidades empiezan en diciembre de 2016."
+   "notas_ficha": "Dos cortes al año (30 de junio y 31 de diciembre, columna corte); para comparar años usar siempre el mismo corte, normalmente 'diciembre'. Filtrar por tipo: 'quirurgica' o 'consultas' no son comparables entre sí, y pacientes solo existe en quirúrgica. Territorio: cod INE (España = '00', 13 = Madrid) y nombre. Las comunidades empiezan en diciembre de 2016."
   },
   {
    "tabla": "sanidad_recursos",
@@ -3489,10 +3434,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar siempre por recurso. situacion: 'PRACT' (ejerciendo) es la definición habitual de médicos y enfermeras, 'PACT' (activo profesional) es más amplia y 'mixta' la usa la media de la UE; camas usa 'total' (y 'mixta' en la media UE). No sumar situaciones. La media de la UE tiene geo 'UE' y pais 'UE-27 (media)', ponderada por población de los países con dato; no es un país. Enfermeras ejerciendo se aproximan por 'PRACT'."
+   "notas_ficha": "Filtrar siempre por recurso. Una sola fila por país, año y recurso: médicos y enfermeras ejerciendo ('ejerciendo') o, si el país no informa ese año, profesionalmente activos ('activo'); situacion lo dice y no hay que filtrarla. Camas: 'total'. La media de la UE tiene cod_pais 'EU27_2020', pais 'UE-27 (media)' y nivel 'agregado', ponderada por población de los países con dato (n_paises); no es un país. cod_pais es ISO alfa-2 (Grecia = GR)."
   },
   {
    "tabla": "sanidad_recursos_ccaa",
@@ -3506,10 +3450,9 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "territorio solo con código",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar siempre por recurso: 'medicos' y 'camas' son magnitudes distintas. Sin nombre de territorio: unir con territorios por cod (INE; España = '00'; 13 = Madrid). nuts2 es el código europeo alternativo (ES30 = Madrid). Médicos de Eurostat (ejerciendo) y camas hospitalarias totales; Ceuta y Melilla pueden faltar algunos años. Último año 2024."
+   "notas_ficha": "Filtrar siempre por recurso: 'medicos' y 'camas' son magnitudes distintas. Territorio: cod INE (España = '00'; 13 = Madrid) y nombre. nuts2 es el código europeo alternativo (ES30 = Madrid). Médicos de Eurostat (ejerciendo) y camas hospitalarias totales; Ceuta y Melilla pueden faltar algunos años. Último año 2024."
   },
   {
    "tabla": "territorios",
@@ -3563,58 +3506,6 @@
    "notas_ficha": "Dimensión auxiliar de territorios (códigos INE y de Hacienda, nombres, slugs, rutas y última población) usada para unir con las demás tablas; no es una cifra que se consulte por sí misma (para población usar poblacion_territorios). Su cod_ccaa_hacienda difiere del INE."
   },
   {
-   "tabla": "totalAno",
-   "sql_fuente": "-- Población total nacional a 1 de enero (INE ECP, mart poblacion_anual)\nSELECT anio::VARCHAR AS Year, poblacion AS Tota…",
-   "modelo": "transform/models/marts/poblacion_anual.sql",
-   "modelo_modificado": "2026-09-27",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "sin ficha"
-   ],
-   "notas_ficha": null
-  },
-  {
-   "tabla": "totalAnoProvincia",
-   "sql_fuente": "-- Población por provincia a 1 de enero; statecode = código INE de 2 dígitos\nSELECT cod_prov AS statecode, provincia AS …",
-   "modelo": "transform/models/marts/poblacion_anual.sql",
-   "modelo_modificado": "2026-09-27",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "sin ficha"
-   ],
-   "notas_ficha": null
-  },
-  {
-   "tabla": "totalAnoSexo",
-   "sql_fuente": "-- Población nacional por sexo a 1 de enero\nSELECT anio::VARCHAR AS Year, poblacion AS Total, sexo AS Sexo\nFROM poblacio…",
-   "modelo": "transform/models/marts/poblacion_anual.sql",
-   "modelo_modificado": "2026-09-27",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "sin ficha"
-   ],
-   "notas_ficha": null
-  },
-  {
-   "tabla": "totalAnoSexoEdad",
-   "sql_fuente": "-- Pirámide nacional por grupos quinquenales (mart poblacion_piramide).\n-- Antes sumaba los cuatro trimestres de cada añ…",
-   "modelo": "transform/models/marts/poblacion_piramide.sql",
-   "modelo_modificado": "2026-09-27",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "sin ficha"
-   ],
-   "notas_ficha": null
-  },
-  {
    "tabla": "transparencia_internacional",
    "sql_fuente": "SELECT * FROM transparencia_internacional",
    "modelo": "transform/models/marts/transparencia_internacional.sql",
@@ -3626,11 +3517,10 @@
    "paginas_traducciones": 8,
    "componentes": [],
    "problemas": [
-    "proporción 0-1 en vez de %",
     "filtro fijo o valor por defecto",
     "trampa en notas"
    ],
-   "notas_ficha": "Filtrar siempre por indicador_id (la cifra de referencia es 'cpi', Índice de Percepción de la Corrupción, 0 a 100, 100 = muy limpio). Las escalas y el sentido cambian: en V-Dem (vdem_*, sentido negativo, 0 a 1) un valor alto es MÁS corrupción; en los demás, más es mejor. Las medias 'Unión Europea (media simple)' y 'OCDE (media simple)' (es_agregado = true) solo existen en WGI y V-Dem (no en CPI ni WJP) y no son países. Los puestos solo existen entre UE y OCDE."
+   "notas_ficha": "Filtrar siempre por indicador_id (la cifra de referencia es 'cpi', Índice de Percepción de la Corrupción, 100 = muy limpio). valor va siempre en puntos 0-100 (los índices 0-1 de WJP y V-Dem se muestran multiplicados por 100). El sentido cambia: en V-Dem (vdem_*, sentido negativo) un valor alto es MÁS corrupción; en los demás, más es mejor. cod_pais es ISO alfa-2 (EU27_2020 la media de la UE, OECD la de la OCDE). Las medias 'Unión Europea (media simple)' y 'OCDE (media simple)' (es_agregado = true) solo existen en WGI y V-Dem (no en CPI ni WJP) y no son países. Los puestos solo existen entre UE y OCDE."
   },
   {
    "tabla": "transparencia_liquidaciones",
@@ -3642,10 +3532,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "filtro fijo o valor por defecto"
-   ],
-   "notas_ficha": "Una fila por municipio y año. Para tasas hay que contar solo filas con aplica_indicador=true (excluye régimen foral y casos sin dato). Plazo legal: 31 de marzo del año siguiente. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+   "problemas": [],
+   "notas_ficha": "Una fila por municipio y año. incumple_pct es 100 si no remitió la liquidación, 0 si sí, y vacío si no aplica (régimen foral y casos sin dato): su media es directamente el porcentaje de ayuntamientos, sin filtros. Plazo legal: 31 de marzo del año siguiente. Los booleanos incumple y remitida sirven para contar ayuntamientos (cuenta solo con aplica_indicador = true)."
   },
   {
    "tabla": "transparencia_pie",
@@ -3658,11 +3546,9 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
-    "filtro fijo o valor por defecto",
-    "euros sin por habitante ni reales",
     "trampa en notas"
    ],
-   "notas_ficha": "Una fila por ayuntamiento, ejercicio y sección (incluidos los no retenidos). El importe es nominal en euros (sin ajustar por inflación) y el ejercicio en curso está incompleto. No sumar importes de secciones distintas sin avisar. La respuesta se obtiene contando filas con la columna booleana retenido = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+   "notas_ficha": "Una fila por ayuntamiento, ejercicio y sección (incluidos los no retenidos). Importes en euros constantes de 2025 (anio_base), también por habitante. retenido_pct es 100 si fue retenido, 0 si no, y vacío si no aplica (territorios forales): su media es el porcentaje de ayuntamientos. es_parcial marca la campaña ya empezada cuando arranca la serie (solo se ven sus últimos meses). No sumar importes de secciones distintas sin avisar."
   },
   {
    "tabla": "transparencia_pie_mensual",
@@ -3674,11 +3560,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "territorio solo con código",
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Una fila por ayuntamiento, mes y sección; el número de ayuntamientos retenidos es el número de cod_mun distintos del mes. No lleva el nombre del municipio (hay que cruzar con otra tabla por cod_mun)."
+   "problemas": [],
+   "notas_ficha": "Una fila por ayuntamiento, mes y sección; el número de ayuntamientos retenidos es el número de cod_mun distintos del mes. Importes en euros constantes de 2025 (anio_base) y por habitante (población del municipio ese año). Si un ayuntamiento está retenido por varias secciones el mismo mes, el importe se reparte entre ellas."
   },
   {
    "tabla": "transparencia_pmp",
@@ -3690,10 +3573,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "filtro fijo o valor por defecto"
-   ],
-   "notas_ficha": "pmp_dias es nulo si el ayuntamiento no reporta (reporta=false). El periodo es texto tipo 2026T2; fecha_trimestre es la fecha del primer día del trimestre. Para tasas usar solo aplica_indicador=true. La respuesta se obtiene contando filas con la columna booleana supera_30 = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+   "problemas": [],
+   "notas_ficha": "pmp_dias es nulo si el ayuntamiento no reporta (reporta=false). fecha es el primer día del trimestre; periodo es el mismo trimestre en texto (2026T2). supera_30_pct es 100 si el PMP supera los 30 días, 0 si no, y vacío si no aplica o antes de 2018T2 (otra metodología): su media es el porcentaje de ayuntamientos. El booleano reporta cuenta cuántos comunican el PMP (solo con aplica_indicador = true)."
   },
   {
    "tabla": "transparencia_publicidad_activa",
@@ -3706,9 +3587,10 @@
    "paginas_traducciones": 4,
    "componentes": [],
    "problemas": [
+    "unidades mezcladas",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "Cubre sobre todo Canarias (ITCanarias) y algunas entidades del Consejo de Transparencia (ICIO). Para la nota actual usar es_ultima=true y estado='evaluada'; las incumplidoras no tienen nota. Las puntuaciones originales vienen en escalas distintas pero puntuacion ya está normalizada a 100."
+   "notas_ficha": "Cubre sobre todo Canarias (ITCanarias) y algunas entidades del Consejo de Transparencia (ICIO). Para la nota actual usar es_ultima=true y estado='evaluada'; las incumplidoras no tienen nota. Las puntuaciones originales vienen en escalas distintas pero puntuacion ya está normalizada a 100. ccaa, provincia y municipio dan el territorio de la entidad evaluada (los entes dependientes llevan el del territorio al que pertenecen); entidad es el nombre de la propia entidad. No mezclar índices (indice): las escalas de ITCanarias y del Consejo no son comparables."
   },
   {
    "tabla": "transparencia_tcu",
@@ -3720,11 +3602,8 @@
    ],
    "paginas_traducciones": 4,
    "componentes": [],
-   "problemas": [
-    "filtro fijo o valor por defecto",
-    "tiempo en columna no estándar"
-   ],
-   "notas_ficha": "Solo cubre ayuntamientos de La Rioja, Cádiz y A Coruña (cod_ccaa 17, 01, 12), no toda España. Rastreo del Tribunal de Cuentas a septiembre de 2026; dias_retraso solo existe si rindió fuera de plazo. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+   "problemas": [],
+   "notas_ficha": "Solo cubre ayuntamientos de La Rioja, Cádiz y A Coruña (cod_ccaa 17, 01, 12), no toda España. Rastreo del Tribunal de Cuentas a septiembre de 2026. anio es el ejercicio al que se refiere la rendición; obligacion tiene rangos de ejercicio distintos (cuenta_general, contratos, control_interno). incumple_pct es 100 si no la rindió, 0 si sí, y vacío si no aplica (plazo no vencido o foral): su media es el porcentaje de ayuntamientos. dias_retraso solo existe si rindió fuera de plazo."
   },
   {
    "tabla": "trazabilidad_fuentes",
@@ -3782,7 +3661,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Turistas internacionales y gasto solo existen para seis comunidades (en el resto valen 0, no son datos reales). Euros reales de 2025. Las medidas por 1.000 habitantes de un mes no se suman con las de otros meses sin avisar."
+   "notas_ficha": "Turistas internacionales y gasto solo se publican para algunas comunidades: en el resto están vacíos (NULL); los pocos ceros son reales (meses de 2020 con las fronteras cerradas). Euros reales de 2025. Las medidas por 1.000 habitantes de un mes no se suman con las de otros meses sin avisar."
   },
   {
    "tabla": "turismo_mensual",
@@ -3797,7 +3676,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "Solo España. Los valores 0 en turistas y gasto corresponden a meses sin dato aún publicado (EGATUR/FRONTUR van con retraso respecto a los hoteles). Euros reales de 2025. Las columnas _12m son acumulados móviles y no se suman."
+   "notas_ficha": "Solo España. Los meses sin dato publicado (EGATUR/FRONTUR van con retraso respecto a los hoteles) están vacíos (NULL); los dos ceros (abril y mayo de 2020) son reales, por el cierre de fronteras. Euros reales de 2025. Las columnas _12m son acumulados móviles y no se suman."
   },
   {
    "tabla": "turismo_paises",
@@ -3841,20 +3720,6 @@
    "componentes": [],
    "problemas": [],
    "notas_ficha": "Datos semestrales (mayo y noviembre) y experimentales del INE. El puesto solo se calcula para municipios de 1.000 habitantes o más."
-  },
-  {
-   "tabla": "unemployment",
-   "sql_fuente": "SELECT * FROM unemployment",
-   "modelo": "transform/models/marts/unemployment.sql",
-   "modelo_modificado": "2026-07-07",
-   "paginas_es": [],
-   "paginas_traducciones": 0,
-   "componentes": [],
-   "problemas": [
-    "tiempo en columna no estándar",
-    "trampa en notas"
-   ],
-   "notas_ficha": "Solo total nacional, no hay comunidades. El nombre de las series no es uniforme (unas empiezan por 'Total Nacional. Tasa de paro...' y otras por 'Tasa de paro de la población. Total Nacional...'): filtrar con LIKE. Última fecha 2026-04-01. Tabla básica, para paro por territorio hay otras mejores."
   },
   {
    "tabla": "vivienda_alquiler",
@@ -3904,10 +3769,8 @@
    ],
    "paginas_traducciones": 16,
    "componentes": [],
-   "problemas": [
-    "euros sin por habitante ni reales"
-   ],
-   "notas_ficha": "Importes nominales (corrientes) en euros. pct_alquiler solo existe desde 2011 (año a partir del que hay alquiler SERPAVI) y el último año con dato puede ser 2025 para valor tasado. Salario: Encuesta Trimestral de Coste Laboral del INE."
+   "problemas": [],
+   "notas_ficha": "anios_salario y pct_alquiler son cocientes de euros del mismo año y valen para comparar entre años; para comparar importes en euros entre años usar las columnas _real (euros constantes de 2025, anio_base). pct_alquiler solo existe desde 2011 (año a partir del que hay alquiler SERPAVI) y el último año con dato puede ser 2025 para valor tasado. Salario: Encuesta Trimestral de Coste Laboral del INE."
   },
   {
    "tabla": "vivienda_ipv",
@@ -3953,7 +3816,7 @@
    "problemas": [
     "trampa en notas"
    ],
-   "notas_ficha": "El año en curso (2026) suma solo unos meses (columna meses; ahora 7) y no es comparable con años completos salvo por 1.000 habitantes de periodos iguales. importe_hipotecas está en euros (no millones). Nivel provincia, ccaa y pais conviven: filtrar por nivel para no duplicar."
+   "notas_ficha": "El año en curso suma solo unos meses (columna meses) y no es comparable con años completos salvo por 1.000 habitantes de periodos iguales; las sumas del año en curso son parciales. importe_hipotecas_real suma los meses ya deflactados (euros, no millones). Nivel provincia, ccaa y pais conviven: filtrar por nivel para no duplicar."
   },
   {
    "tabla": "vivienda_mercado_mensual",
@@ -4087,7 +3950,7 @@
     "unidades mezcladas",
     "filtro fijo o valor por defecto"
    ],
-   "notas_ficha": "Dos series con definiciones distintas (OCDE: % del parque total, hacia 2010 y 2022; UE: % de viviendas principales, 2023); no mezclarlas. Incluye agregados (es_agregado=true) que no son países: excluirlos en rankings."
+   "notas_ficha": "Dos definiciones, cada una en su columna (una de las dos va vacía en cada fila): pct_parque_total (OCDE, % del parque total, hacia 2010 y 2022) y pct_viviendas_principales (MIVAU/Eurostat, 2023). No mezclarlas. cod_pais es ISO alfa-2 (EU27_2020 la UE, OECD la OCDE). Incluye agregados (es_agregado=true) que no son países: excluirlos en rankings. es_ultimo = último dato de cada país en cada definición (defecto)."
   },
   {
    "tabla": "vivienda_publica_municipios",
@@ -4138,18 +4001,15 @@
  ],
  "sin_uso": [
   "alcaldes_familias_territorio",
-  "alcaldes_resumen_familias",
+  "deflactor_paises",
+  "industria_ipi_ine",
   "inmigracion_flujos",
   "internacional_comparativa",
-  "ipc",
+  "medios_subvenciones_beneficiarios",
   "movilidad_matriculaciones_municipio",
   "movilidad_parque_evolucion",
   "movilidad_recarga_evolucion",
-  "observatorios",
-  "totalAno",
-  "totalAnoProvincia",
-  "totalAnoSexo",
-  "totalAnoSexoEdad",
-  "unemployment"
+  "paises_iso",
+  "poblacion_paises"
  ]
 }

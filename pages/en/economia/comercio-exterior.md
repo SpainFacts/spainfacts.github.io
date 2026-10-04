@@ -1,7 +1,7 @@
 ---
 title: Foreign trade
 description: "Spain's exports and imports of goods and services: share of GDP, external balance and real change per inhabitant."
-i18n_origen: f25352ecec09
+i18n_origen: d44a780dbaed
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -25,7 +25,7 @@ SELECT
     max(CASE WHEN componente = 'P7' THEN por_habitante_real END) AS import_hab,
     max(CASE WHEN componente = 'P6' THEN nominal_meur END) AS export_meur,
     max(CASE WHEN componente = 'P7' THEN nominal_meur END) AS import_meur,
-    max(anio_euros) AS anio_euros
+    max(anio_base) AS anio_base
 FROM mother.economia_pib_trimestral
 WHERE componente IN ('P6', 'P7')
 GROUP BY trimestre, anio, trim
@@ -146,7 +146,7 @@ In 2007 Spain bought far more abroad than it sold: the deficit reached {formatNu
 
 ## Real change per inhabitant
 
-Exports and imports in constant {comercio_trim[0]?.anio_euros} euros per inhabitant, at an annual rate (the quarter multiplied by four): this shows how much trade is really growing, stripping out inflation and population growth.
+Exports and imports in constant {comercio_trim[0]?.anio_base} euros per inhabitant, at an annual rate (the quarter multiplied by four): this shows how much trade is really growing, stripping out inflation and population growth.
 
 <LineChart
     data={comercio_largo}
@@ -155,7 +155,7 @@ Exports and imports in constant {comercio_trim[0]?.anio_euros} euros per inhabit
     series=flujo
     yAxisTitle="€ per inhabitant (real)"
     yFmt='#,##0" €"'
-    title="Foreign trade per inhabitant, {comercio_trim[0]?.anio_euros} euros at an annual rate"
+    title="Foreign trade per inhabitant, {comercio_trim[0]?.anio_base} euros at an annual rate"
 />
 
 ---

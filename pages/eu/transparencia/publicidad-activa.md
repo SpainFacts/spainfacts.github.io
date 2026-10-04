@@ -1,7 +1,7 @@
 ---
 title: Publizitate aktiboa
 description: "Argitaratzen al dute administrazioek beren gardentasun-atarietan legeak eskatzen diena? Erakundez erakundeko ebaluazio ofizialak (Gardentasun eta Gobernu Oneko Kontseilua eta Kanarietako Gardentasun Komisionatua), haien bilakaera, alderdien araberako alderaketa eta oraindik neurtu ezin dena."
-i18n_origen: 3f26672a5738
+i18n_origen: 6724b8e266cf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -104,7 +104,7 @@ ORDER BY orden
 ```sql itc_aytos_ultimo
 SELECT
     cod_mun, entidad, regexp_replace(entidad, '^Ayuntamiento de ', '') AS municipio,
-    CASE WHEN cod_prov = '35' THEN 'Las Palmas' ELSE 'Santa Cruz de Tenerife' END AS provincia,
+    provincia,
     poblacion, estado, puntuacion, puntuacion_original, familia, gobernante,
     CASE WHEN estado = 'incumplidora' THEN 'No rindió la evaluación' ELSE 'Evaluado' END AS situacion
 FROM ${itc}

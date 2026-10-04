@@ -1,4 +1,4 @@
--- Última semana publicada para cada (nivel, clave) de embalses_semanal,
+-- Última semana publicada para cada (nivel, cod) de embalses_semanal,
 -- comparada con la misma semana ISO del año anterior y con la media de esa
 -- semana en los 10 años anteriores (criterio del Boletín Hidrológico).
 with serie as (
@@ -26,7 +26,7 @@ historico as (
 select
     u.id,
     u.nivel,
-    u.clave,
+    u.cod,
     u.nombre,
     u.fecha,
     u.capacidad_hm3,

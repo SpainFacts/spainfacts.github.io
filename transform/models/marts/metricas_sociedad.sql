@@ -129,11 +129,11 @@ listas as (
 ),
 
 san_rec as (
-    select * from {{ ref('sanidad_recursos') }} where geo = 'ES'
+    select * from {{ ref('sanidad_recursos') }} where cod_pais = 'ES'
 ),
 
 san_gasto as (
-    select * from {{ ref('sanidad_gasto') }} where geo = 'ES'
+    select * from {{ ref('sanidad_gasto') }} where cod_pais = 'ES'
 ),
 
 series as (
@@ -406,7 +406,7 @@ series as (
     -- ===================== Inmigración =====================
     union all
     select 'sociedad_extranjeros_pct', 'Residentes extranjeros',
-        make_date(cast(anio as integer), 1, 1), 100 * pct_extranjeros, '% de la población',
+        make_date(cast(anio as integer), 1, 1), extranjeros_pct, '% de la población',
         'INE', 'https://www.ine.es/jaxiT3/Tabla.htm?t=56942',
         'Sociedad', '/sociedad/inmigracion/', 'Anual'
     from {{ ref('inmigracion_poblacion') }}

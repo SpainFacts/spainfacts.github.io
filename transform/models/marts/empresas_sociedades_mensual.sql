@@ -78,10 +78,12 @@ movil as (
 )
 
 select
-    cod,
-    anio,
-    mes,
-    fecha,
+    case when m.cod = '00' then 'pais' else 'ccaa' end as nivel,
+    m.cod,
+    t.nombre,
+    m.anio,
+    m.mes,
+    m.fecha,
     constituidas,
     disueltas,
     constituidas - disueltas as saldo,
@@ -90,9 +92,11 @@ select
     case when meses_12 = 12 then constituidas_12m end as constituidas_12m,
     case when meses_12 = 12 then disueltas_12m end as disueltas_12m,
     case when meses_12 = 12 then capital_real_12m end as capital_real_12m,
+    case when meses_12 = 12 then capital_real_12m / poblacion end as capital_real_12m_hab,
     case when meses_12 = 12 then 100000.0 * constituidas_12m / poblacion end as constituidas_12m_100k,
     case when meses_12 = 12 then 100000.0 * disueltas_12m / poblacion end as disueltas_12m_100k,
     poblacion,
     anio_euros
-from movil
-order by cod, fecha
+from movil m
+left join {{ ref('territorios') }} t on t.nivel = case when m.cod = '00' then 'pais' else 'ccaa' end and t.cod = m.cod
+order by m.cod, m.fecha

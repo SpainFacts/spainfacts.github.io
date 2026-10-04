@@ -1,7 +1,7 @@
 ---
 title: Public employment
 description: "How many public employees there are in Spain, which administration and sector they work in (health, education, town councils, security forces...), how their number has changed, what they earn compared with the private sector and how much they cost."
-i18n_origen: f35a10c4e8a1
+i18n_origen: 052b4d0e2fe9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -37,7 +37,7 @@ WHERE nivel = 'pais' AND administracion = 'Total' AND fecha = (SELECT fecha FROM
 ```
 
 ```sql coste_ultimo
-SELECT anio, millones_eur, pct_pib, eur_por_habitante
+SELECT anio, anio_base, millones_eur, pct_pib, eur_hab_real
 FROM mother.empleo_coste
 WHERE cod_sector = 'S13'
 ORDER BY anio DESC
@@ -50,7 +50,7 @@ SELECT
     max(salario_mensual) FILTER (WHERE sector = 'Público') AS publico,
     max(salario_mensual) FILTER (WHERE sector = 'Privado') AS privado
 FROM mother.empleo_salarios_deciles
-WHERE jornada = 'Jornada a tiempo completo' AND decil = 0
+WHERE jornada = 'Jornada a tiempo completo' AND decil_nombre = 'Total'
 GROUP BY anio
 ORDER BY anio DESC
 LIMIT 1
@@ -73,51 +73,19 @@ ORDER BY fecha
 ```
 
 ```sql coste_serie_real
--- Para las mini-gráficas: euros por habitante a precios constantes del último año completo con IPC (media anual de ipc_indice)
-WITH ipc AS (
-    SELECT CAST(year(periodo) AS INTEGER) AS anio, avg(valor) AS ipc
-    FROM mother.metricas
-    WHERE metrica_id = 'ipc_indice'
-    GROUP BY 1
-    HAVING count(*) = 12
-),
-base AS (
-    SELECT ipc AS ipc_base FROM ipc ORDER BY anio DESC LIMIT 1
-)
-SELECT
-    c.anio,
-    c.eur_por_habitante * base.ipc_base / ipc.ipc AS eur_hab_real
-FROM mother.empleo_coste c
-JOIN ipc ON ipc.anio = c.anio
-CROSS JOIN base
-WHERE c.cod_sector = 'S13' AND c.eur_por_habitante IS NOT NULL
-ORDER BY c.anio
+-- Para las mini-gráficas: euros por habitante a precios constantes (ya calculados en la tabla)
+SELECT anio, eur_hab_real
+FROM mother.empleo_coste
+WHERE cod_sector = 'S13' AND eur_hab_real IS NOT NULL
+ORDER BY anio
 ```
 
 ```sql salario_serie_real
--- Salario medio público a precios constantes del último año completo (IPC, media anual de ipc_indice)
-WITH ipc AS (
-    SELECT CAST(year(periodo) AS INTEGER) AS anio, avg(valor) AS ipc
-    FROM mother.metricas
-    WHERE metrica_id = 'ipc_indice'
-    GROUP BY 1
-    HAVING count(*) = 12
-),
-base AS (
-    SELECT ipc AS ipc_base FROM ipc ORDER BY anio DESC LIMIT 1
-),
-sal AS (
-    SELECT anio, max(salario_mensual) FILTER (WHERE sector = 'Público') AS publico
-    FROM mother.empleo_salarios_deciles
-    WHERE jornada = 'Jornada a tiempo completo' AND decil = 0
-    GROUP BY anio
-)
-SELECT s.anio, s.publico * base.ipc_base / ipc.ipc AS publico_real
-FROM sal s
-JOIN ipc ON ipc.anio = s.anio
-CROSS JOIN base
-WHERE s.publico IS NOT NULL
-ORDER BY s.anio
+SELECT anio, max(salario_mensual_real) AS publico_real
+FROM mother.empleo_salarios_deciles
+WHERE jornada = 'Jornada a tiempo completo' AND decil_nombre = 'Total' AND sector = 'Público' AND salario_mensual_real IS NOT NULL
+GROUP BY anio
+ORDER BY anio
 ```
 
 # 🏛️ Public employment
@@ -143,9 +111,9 @@ Who works for Spain's public administrations: how many there are, in which admin
     />
     <KpiCard
         title="Annual cost per inhabitant"
-        value={coste_ultimo[0]?.eur_por_habitante}
-        formattedValue="€{formatNumber(coste_ultimo[0]?.eur_por_habitante, 0)}"
-        period="€{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)}bn in total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)}% of GDP · {coste_ultimo[0]?.anio}"
+        value={coste_ultimo[0]?.eur_hab_real}
+        formattedValue="€{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)}"
+        period="€{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)}bn in total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)}% of GDP · {coste_ultimo[0]?.anio} ({coste_ultimo[0]?.anio_base} euros)"
         source="Eurostat"
         sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
     />
@@ -287,16 +255,10 @@ ORDER BY por_1000_hab DESC
 
 ```sql serie_registro
 -- Empleados por 1.000 habitantes (padrón del año; el último disponible para los más recientes)
-WITH pob AS (
-    SELECT CAST(anio AS INTEGER) AS anio, poblacion
-    FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total'
-)
-SELECT e.fecha, e.administracion, sum(e.efectivos) AS efectivos,
-    1000.0 * sum(e.efectivos) / any_value(p.poblacion) AS por_1000
-FROM mother.empleo_efectivos e
-JOIN pob p ON p.anio = least(CAST(year(e.fecha) AS INTEGER), (SELECT max(anio) FROM pob))
-GROUP BY e.fecha, e.administracion
-ORDER BY e.fecha
+SELECT fecha, administracion, efectivos, por_1000_hab AS por_1000
+FROM mother.empleo_territorio
+WHERE nivel = 'pais' AND administracion <> 'Total'
+ORDER BY fecha
 ```
 
 <BarChart
@@ -342,20 +304,19 @@ ORDER BY e.trimestre
 <p class="text-xs text-gray-500">The Labour Force Survey (EPA) provides a longer series (quarterly since 2002) and also counts public companies and institutions, but it is a survey: that is why it shows more public employees than the register (around 3.6 million) and its quarterly figure has a margin of error. It shows the cuts of 2011-2014 (from 3.28 to 2.93 million on an annual average, during the debt crisis) and the subsequent growth, faster since 2018.</p>
 
 ```sql cuota_ccaa
-SELECT e.trimestre, c.nombre AS comunidad, e.cuota_publico
+SELECT e.fecha, e.nombre AS comunidad, e.cuota_publico_pct
 FROM mother.empleo_epa_ccaa e
-JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = e.cod_ccaa
-WHERE e.trimestre = (SELECT max(trimestre) FROM mother.empleo_epa_ccaa)
-ORDER BY e.cuota_publico DESC
+WHERE e.nivel = 'ccaa' AND e.fecha = (SELECT max(fecha) FROM mother.empleo_epa_ccaa)
+ORDER BY e.cuota_publico_pct DESC
 ```
 
 <BarChart
     data={cuota_ccaa}
     x=comunidad
-    y=cuota_publico
+    y=cuota_publico_pct
     swapXY=true
     sort=false
-    yFmt=pct0
+    yFmt='0"%"'
     fillColor="#1d4ed8"
     title="Public employment as a share of all employees (Labour Force Survey, latest quarter)"
 />
@@ -365,13 +326,13 @@ ORDER BY e.cuota_publico DESC
 ```sql deciles
 SELECT
     decil,
-    'D' || CAST(decil AS VARCHAR) AS decil_txt,
+    decil_nombre AS decil_txt,
     sector,
     salario_mensual
 FROM mother.empleo_salarios_deciles
 WHERE jornada = 'Jornada a tiempo completo'
   AND anio = (SELECT max(anio) FROM mother.empleo_salarios_deciles)
-  AND decil > 0
+  AND decil IS NOT NULL
   AND sector IN ('Público', 'Privado')
 ORDER BY decil
 ```
@@ -380,12 +341,11 @@ ORDER BY decil
 -- En euros constantes del último año completo (descontada la inflación con el IPC)
 SELECT
     s.anio,
-    max(s.salario_mensual * d.factor) FILTER (WHERE s.sector = 'Público') AS publico,
-    max(s.salario_mensual * d.factor) FILTER (WHERE s.sector = 'Privado') AS privado,
-    any_value(d.anio_base) AS anio_base
+    max(s.salario_mensual_real) FILTER (WHERE s.sector = 'Público') AS publico,
+    max(s.salario_mensual_real) FILTER (WHERE s.sector = 'Privado') AS privado,
+    any_value(s.anio_euros) AS anio_base
 FROM mother.empleo_salarios_deciles s
-JOIN mother.deflactor d ON d.anio = CAST(s.anio AS INTEGER)
-WHERE s.jornada = 'Jornada a tiempo completo' AND s.decil = 0
+WHERE s.jornada = 'Jornada a tiempo completo' AND s.decil_nombre = 'Total'
 GROUP BY s.anio
 ORDER BY s.anio
 ```
@@ -418,17 +378,17 @@ ORDER BY s.anio
 <p class="text-xs text-gray-500">Within each decile (each band of 10% of employees ranked by wage), the public and private sectors earn practically the same, and in the top decile the private sector earns more. The average gap comes from composition: there are proportionally many more public employees in the upper bands (doctors, teachers, university graduates, longer service) and almost none in the lowest-paid private-sector jobs (hospitality, retail, agriculture). Gross monthly wage from the main full-time job, before taxes and employee social contributions.</p>
 
 ```sql salarios_ccaa
-SELECT c.nombre AS comunidad, s.salario_publico, s.salario_privado, s.salario_publico / s.salario_privado - 1 AS diferencia
-FROM mother.empleo_salarios_ccaa s
-JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = s.cod_ccaa
-ORDER BY s.salario_publico DESC
+SELECT nombre AS comunidad, salario_publico, salario_privado, brecha_publico_pct AS diferencia
+FROM mother.empleo_salarios_ccaa
+WHERE nivel = 'ccaa'
+ORDER BY salario_publico DESC
 ```
 
 <DataTable data={salarios_ccaa} rows=all>
     <Column id=comunidad title="Region" />
     <Column id=salario_publico title="Public (€/year)" fmt=num0 />
     <Column id=salario_privado title="Private (€/year)" fmt=num0 />
-    <Column id=diferencia title="Difference" fmt=pct0 />
+    <Column id=diferencia title="Difference" fmt='0"%"' />
 </DataTable>
 
 <p class="text-xs text-gray-500">Average gross annual wage in 2022 according to the INE's four-yearly Structure of Earnings Survey, by region of the workplace and by whether the company or body is publicly or privately controlled. It only covers those contributing to the General Social Security Scheme: it leaves out civil servants covered by mutual funds (MUFACE, ISFAS, MUGEJU).</p>
@@ -436,12 +396,11 @@ ORDER BY s.salario_publico DESC
 ## How much do they cost?
 
 ```sql coste
--- Euros por habitante y constantes (descontada la inflación con el IPC)
+-- Euros por habitante y constantes (descontada la inflación con el IPC; ya calculados en la tabla)
 SELECT c.anio, c.subsector, c.millones_eur / 1000 AS miles_millones, c.pct_pib,
-    c.eur_por_habitante * d.factor AS eur_hab_real, d.anio_base
+    c.eur_hab_real, c.anio_base
 FROM mother.empleo_coste c
-JOIN mother.deflactor d ON d.anio = CAST(c.anio AS INTEGER)
-WHERE c.cod_sector <> 'S13'
+WHERE c.cod_sector <> 'S13' AND c.eur_hab_real IS NOT NULL
 ORDER BY c.anio
 ```
 
@@ -479,23 +438,24 @@ SELECT
     c.nombre AS comunidad,
     '/en' || c.ruta AS ruta,
     g.anio,
+    g.anio_base,
     g.gasto_personal_ccaa / 1e6 AS gasto_ccaa_millones,
-    g.gasto_personal_ccaa_hab,
-    g.gasto_personal_ayuntamientos_hab
+    g.gasto_personal_ccaa_eur_hab_real,
+    g.gasto_personal_ayuntamientos_eur_hab_real
 FROM mother.empleo_gasto_personal_territorio g
 JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = g.cod
 WHERE g.nivel = 'ccaa'
   AND g.anio = (SELECT max(anio) FROM mother.empleo_gasto_personal_territorio WHERE nivel = 'ccaa' AND gasto_personal_ccaa IS NOT NULL AND gasto_personal_ayuntamientos IS NOT NULL)
-ORDER BY g.gasto_personal_ccaa_hab DESC
+ORDER BY g.gasto_personal_ccaa_eur_hab_real DESC
 ```
 
-### Staff spending by each region and its town councils ({coste_ccaa[0]?.anio})
+### Staff spending by each region and its town councils ({coste_ccaa[0]?.anio}, {coste_ccaa[0]?.anio_base} euros)
 
 <DataTable data={coste_ccaa} link=ruta rows=all showLinkCol=false>
     <Column id=comunidad title="Region" />
     <Column id=gasto_ccaa_millones title="Regional government (€m)" fmt=num0 />
-    <Column id=gasto_personal_ccaa_hab title="Regional government (€/inhab.)" fmt=num0 contentType=bar barColor="#bfdbfe" />
-    <Column id=gasto_personal_ayuntamientos_hab title="Town councils (€/inhab.)" fmt=num0 contentType=bar barColor="#fde68a" />
+    <Column id=gasto_personal_ccaa_eur_hab_real title="Regional government (€/inhab.)" fmt=num0 contentType=bar barColor="#bfdbfe" />
+    <Column id=gasto_personal_ayuntamientos_eur_hab_real title="Town councils (€/inhab.)" fmt=num0 contentType=bar barColor="#fde68a" />
 </DataTable>
 
 <p class="text-xs text-gray-500">Chapter 1 ("staff costs") of the outturn accounts: the region's figure from the Ministry of Finance; the town councils' figure is the sum of those that submitted their outturn accounts to the Ministry (CONPREL), per inhabitant of those municipalities. The Basque Country and Navarre collect their own taxes (the foral regime) and take on more responsibilities, which raises their spending; in Álava and Navarre town councils do not appear in CONPREL. Each town council's staff spending is on its page in <a href="/en/territorios/municipios">municipalities</a>.</p>

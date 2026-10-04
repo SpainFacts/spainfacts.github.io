@@ -6,7 +6,7 @@
 -- Alemania, Italia, Marruecos, EE. UU., China y los referentes de integridad:
 -- Dinamarca, Finlandia, Nueva Zelanda y Estonia).
 --
--- Agregados EUU (UE-27) y OED (OCDE): MEDIA SIMPLE de los países miembros actuales
+-- Agregados EU27_2020 (UE-27) y OECD (OCDE): MEDIA SIMPLE de los países miembros actuales
 -- con dato ese año (no ponderada por población), solo si hay dato de al menos el
 -- 90 % de ellos, y solo en los índices cuya licencia permite obras derivadas
 -- (Banco Mundial WGI y V-Dem). El CPI (CC BY-ND) y el WJP (CC BY-NC-ND) se
@@ -16,22 +16,24 @@
 -- (1 = el mejor según `sentido`); n_ue / n_ocde: cuántos tienen dato.
 -- puesto_mundial: el oficial de Transparency International (CPI, desde 2017).
 -- sentido: 'positivo' si un valor mayor es mejor, 'negativo' si es peor.
-with catalogo (indicador_id, nombre, nombre_corto, unidad, sentido, agregable, fuente, url_fuente, orden_indicador) as (
+-- valor, valor_min y valor_max van siempre en puntos 0-100 (los índices 0-1 de WJP y V-Dem se
+-- multiplican por 100). Países: cod_pais ISO alfa-2 (seed paises_iso).
+with catalogo (indicador_id, nombre, nombre_corto, unidad, sentido, agregable, fuente, url_fuente, orden_indicador, escala) as (
     values
-    ('cpi', 'Índice de Percepción de la Corrupción (CPI)', 'Percepción de la corrupción', 'puntos (0-100; 100 = muy limpio)', 'positivo', false, 'Transparency International', 'https://www.transparency.org/en/cpi', 1),
-    ('wgi_control_corrupcion', 'Control de la corrupción (WGI)', 'Control de la corrupción', 'puntuación 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 2),
-    ('wgi_voz_rendicion_cuentas', 'Voz y rendición de cuentas (WGI)', 'Voz y rendición de cuentas', 'puntuación 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 3),
-    ('wgi_eficacia_gobierno', 'Eficacia del gobierno (WGI)', 'Eficacia del gobierno', 'puntuación 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 4),
-    ('wgi_estado_derecho', 'Estado de derecho (WGI)', 'Estado de derecho', 'puntuación 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 5),
-    ('vdem_corrupcion_politica', 'Índice de corrupción política (V-Dem)', 'Corrupción política', 'índice 0-1 (1 = máxima corrupción)', 'negativo', true, 'V-Dem vía Our World in Data', 'https://ourworldindata.org/grapher/political-corruption-index', 6),
-    ('vdem_corrupcion_sector_publico', 'Corrupción en el sector público (V-Dem)', 'Corrupción en el sector público', 'índice 0-1 (1 = máxima corrupción)', 'negativo', true, 'V-Dem vía Our World in Data', 'https://ourworldindata.org/grapher/public-sector-corruption-index', 7),
-    ('wjp_estado_derecho', 'Índice de Estado de Derecho (WJP)', 'Estado de derecho (WJP)', 'puntuación 0-1', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 8),
-    ('wjp_ausencia_corrupcion', 'Ausencia de corrupción (WJP, factor 2)', 'Ausencia de corrupción', 'puntuación 0-1', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 9),
-    ('wjp_gobierno_abierto', 'Gobierno abierto (WJP, factor 3)', 'Gobierno abierto', 'puntuación 0-1', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 10),
-    ('wjp_limites_gobierno', 'Límites al poder del gobierno (WJP, factor 1)', 'Límites al poder del gobierno', 'puntuación 0-1', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 11)
+    ('cpi', 'Índice de Percepción de la Corrupción (CPI)', 'Percepción de la corrupción', 'puntos 0-100 (100 = muy limpio)', 'positivo', false, 'Transparency International', 'https://www.transparency.org/en/cpi', 1, 1),
+    ('wgi_control_corrupcion', 'Control de la corrupción (WGI)', 'Control de la corrupción', 'puntos 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 2, 1),
+    ('wgi_voz_rendicion_cuentas', 'Voz y rendición de cuentas (WGI)', 'Voz y rendición de cuentas', 'puntos 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 3, 1),
+    ('wgi_eficacia_gobierno', 'Eficacia del gobierno (WGI)', 'Eficacia del gobierno', 'puntos 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 4, 1),
+    ('wgi_estado_derecho', 'Estado de derecho (WGI)', 'Estado de derecho', 'puntos 0-100', 'positivo', true, 'Banco Mundial (Worldwide Governance Indicators)', 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', 5, 1),
+    ('vdem_corrupcion_politica', 'Índice de corrupción política (V-Dem)', 'Corrupción política', 'puntos 0-100 (100 = máxima corrupción)', 'negativo', true, 'V-Dem vía Our World in Data', 'https://ourworldindata.org/grapher/political-corruption-index', 6, 100),
+    ('vdem_corrupcion_sector_publico', 'Corrupción en el sector público (V-Dem)', 'Corrupción en el sector público', 'puntos 0-100 (100 = máxima corrupción)', 'negativo', true, 'V-Dem vía Our World in Data', 'https://ourworldindata.org/grapher/public-sector-corruption-index', 7, 100),
+    ('wjp_estado_derecho', 'Índice de Estado de Derecho (WJP)', 'Estado de derecho (WJP)', 'puntos 0-100', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 8, 100),
+    ('wjp_ausencia_corrupcion', 'Ausencia de corrupción (WJP, factor 2)', 'Ausencia de corrupción', 'puntos 0-100', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 9, 100),
+    ('wjp_gobierno_abierto', 'Gobierno abierto (WJP, factor 3)', 'Gobierno abierto', 'puntos 0-100', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 10, 100),
+    ('wjp_limites_gobierno', 'Límites al poder del gobierno (WJP, factor 1)', 'Límites al poder del gobierno', 'puntos 0-100', 'positivo', false, 'World Justice Project', 'https://worldjusticeproject.org/rule-of-law-index/', 11, 100)
 ),
 
-paises (cod_pais, pais, es_ue, es_ocde, es_referencia, orden_pais) as (
+paises (iso3, pais, es_ue, es_ocde, es_referencia, orden_pais) as (
     values
     ('ESP', 'España', true, true, true, 1),
     ('FRA', 'Francia', true, true, true, 4),
@@ -81,9 +83,10 @@ paises (cod_pais, pais, es_ue, es_ocde, es_referencia, orden_pais) as (
 ),
 
 series as (
-    select s.*, p.pais, p.es_ue, p.es_ocde, p.es_referencia, p.orden_pais
+    select s.* exclude (cod_pais), i.cod_pais, p.pais, p.es_ue, p.es_ocde, p.es_referencia, p.orden_pais
     from {{ ref('stg_transparencia_internacional') }} s
-    join paises p using (cod_pais)
+    join paises p on p.iso3 = s.cod_pais
+    join {{ ref('paises_iso') }} i on i.iso3 = p.iso3
     where s.valor is not null
 ),
 
@@ -103,13 +106,13 @@ con_puesto as (
 ),
 
 agregados as (
-    select s.indicador_id, 'EUU' as cod_pais, 'Unión Europea (media simple)' as pais, s.anio, avg(s.valor) as valor
+    select s.indicador_id, 'EU27_2020' as cod_pais, 'Unión Europea (media simple)' as pais, s.anio, avg(s.valor) as valor
     from series s join catalogo c using (indicador_id)
     where c.agregable and s.es_ue
     group by s.indicador_id, s.anio
     having count(*) >= 0.9 * 27
     union all
-    select s.indicador_id, 'OED', 'OCDE (media simple)', s.anio, avg(s.valor)
+    select s.indicador_id, 'OECD', 'OCDE (media simple)', s.anio, avg(s.valor)
     from series s join catalogo c using (indicador_id)
     where c.agregable and s.es_ocde
     group by s.indicador_id, s.anio
@@ -124,7 +127,7 @@ todo as (
     from con_puesto
     union all
     select indicador_id, cod_pais, pais, true, false, false, true,
-           case cod_pais when 'EUU' then 2 else 3 end,
+           case cod_pais when 'EU27_2020' then 2 else 3 end,
            anio, valor, null, null, null, null, null, null, null
     from agregados
 )
@@ -136,7 +139,7 @@ select
     t.pais,
     t.cod_pais,
     cast(t.anio as integer) as anio,
-    cast(t.valor as double) as valor,
+    round(cast(t.valor * c.escala as double), 4) as valor,
     c.unidad,
     c.sentido,
     c.fuente,
@@ -147,8 +150,8 @@ select
     t.es_ocde,
     t.es_referencia,
     t.orden_pais,
-    cast(t.valor_min as double) as valor_min,
-    cast(t.valor_max as double) as valor_max,
+    round(cast(t.valor_min * c.escala as double), 4) as valor_min,
+    round(cast(t.valor_max * c.escala as double), 4) as valor_max,
     cast(t.puesto_mundial as integer) as puesto_mundial,
     t.puesto_ue,
     t.n_ue,

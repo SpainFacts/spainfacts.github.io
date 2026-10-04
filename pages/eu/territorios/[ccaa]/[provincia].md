@@ -1,6 +1,6 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: ddca92253749
+i18n_origen: 48c2df64eecc
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -256,27 +256,23 @@ ORDER BY anio
 </DataTable>
 
 ```sql deuda_local
--- Deuda a 31 de diciembre; por habitante (Padrón de cada año, el último para
--- los años sin Padrón) y en euros constantes del último año completo
+-- Deuda a 31 de diciembre: total y por habitante en euros constantes (el modelo ya
+-- trae el Padrón de cada año, el último para los años sin Padrón, y el deflactor)
 SELECT
-    make_date(CAST(d.anio AS INTEGER), 12, 31) AS fecha,
-    d.anio,
-    d.deuda_eur,
-    d.deuda_ayuntamientos_eur,
-    d.deuda_diputaciones_eur,
-    d.deuda_resto_eell_eur,
-    100.0 * d.deuda_ayuntamientos_eur / nullif(d.deuda_eur, 0) AS pct_ayuntamientos,
-    d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS deuda_hab_real,
-    d.deuda_ayuntamientos_eur / p.poblacion * coalesce(f.factor, 1) AS aytos_hab_real,
-    d.deuda_diputaciones_eur / p.poblacion * coalesce(f.factor, 1) AS dip_hab_real,
-    d.deuda_resto_eell_eur / p.poblacion * coalesce(f.factor, 1) AS resto_hab_real
-FROM mother.local_deuda_provincia d
-JOIN mother.poblacion_territorios p
-  ON p.nivel = 'provincia' AND p.cod = d.cod_prov AND p.sexo = 'Total'
- AND p.anio = least(d.anio, (SELECT max(anio) FROM mother.poblacion_territorios))
-LEFT JOIN mother.deflactor f ON f.anio = CAST(d.anio AS INTEGER)
-WHERE d.cod_prov = '${terr[0]?.cod}'
-ORDER BY d.anio
+    fecha,
+    anio,
+    deuda_eur,
+    deuda_ayuntamientos_eur,
+    deuda_diputaciones_eur,
+    deuda_resto_eell_eur,
+    pct_ayuntamientos,
+    deuda_eur_hab_real,
+    deuda_ayuntamientos_eur_hab_real,
+    deuda_diputaciones_eur_hab_real,
+    deuda_resto_eell_eur_hab_real
+FROM mother.local_deuda_provincia
+WHERE cod_prov = '${terr[0]?.cod}'
+ORDER BY anio
 ```
 
 ```sql deuda_local_ultima
@@ -286,39 +282,26 @@ LIMIT 1
 ```
 
 ```sql deuda_local_hab
-SELECT anio, deuda_hab_real AS valor FROM ${deuda_local} ORDER BY anio
+SELECT anio, deuda_eur_hab_real AS valor FROM ${deuda_local} ORDER BY anio
 ```
 
 ```sql deuda_local_tipo
-SELECT fecha, 'Ayuntamientos' AS tipo, aytos_hab_real AS deuda FROM ${deuda_local}
-UNION ALL SELECT fecha, 'Diputación / cabildo / consell', dip_hab_real FROM ${deuda_local}
-UNION ALL SELECT fecha, 'Otras entidades locales', resto_hab_real FROM ${deuda_local}
+SELECT fecha, 'Ayuntamientos' AS tipo, deuda_ayuntamientos_eur_hab_real AS deuda FROM ${deuda_local}
+UNION ALL SELECT fecha, 'Diputación / cabildo / consell', deuda_diputaciones_eur_hab_real FROM ${deuda_local}
+UNION ALL SELECT fecha, 'Otras entidades locales', deuda_resto_eell_eur_hab_real FROM ${deuda_local}
 ORDER BY fecha
 ```
 
 ```sql deuda_ciudades
--- Deuda de los grandes ayuntamientos por habitante y en euros constantes.
--- La fuente de población municipal solo trae los últimos 10 años: fuera de ese
--- rango se usa el año más cercano disponible.
-WITH pob AS (
-    SELECT cod_mun, anio, poblacion FROM mother.poblacion_municipios
-    WHERE cod_prov = '${terr[0]?.cod}'
-),
-rango AS (SELECT min(anio) AS ini, max(anio) AS fin FROM pob)
+-- Deuda de los grandes ayuntamientos por habitante y en euros constantes
 SELECT
-    d.municipio,
-    d.fecha,
-    d.deuda_eur,
-    d.deuda_eur / p.poblacion * coalesce(f.factor, 1) AS deuda_hab_real
-FROM mother.local_deuda_municipio d
-CROSS JOIN rango r
-JOIN pob p
-  ON p.cod_mun = d.cod_mun
- AND p.anio = greatest(least(CAST(year(d.fecha) AS INTEGER), r.fin), r.ini)
--- Sin IPC anual antes de 2002: la serie real empieza ese año
-JOIN mother.deflactor f ON f.anio = CAST(year(d.fecha) AS INTEGER)
-WHERE substr(d.cod_mun, 1, 2) = '${terr[0]?.cod}'
-ORDER BY d.fecha
+    municipio,
+    fecha,
+    deuda_eur,
+    deuda_eur_hab_real
+FROM mother.local_deuda_municipio
+WHERE cod_prov = '${terr[0]?.cod}' AND deuda_eur_hab_real IS NOT NULL
+ORDER BY fecha
 ```
 
 {#if deuda_local.length > 0}
@@ -328,8 +311,8 @@ ORDER BY d.fecha
 <Grid cols=2>
     <KpiCard
         title="Tokiko zor bizia biztanleko"
-        value={deuda_local_ultima[0]?.deuda_hab_real}
-        formattedValue={formatNumber(deuda_local_ultima[0]?.deuda_hab_real, 0)}
+        value={deuda_local_ultima[0]?.deuda_eur_hab_real}
+        formattedValue={formatNumber(deuda_local_ultima[0]?.deuda_eur_hab_real, 0)}
         unit="€"
         period="{urte(deuda_local_ultima[0]?.anio, 'ko')} abenduaren 31, {urte(base[0]?.anio_base, 'ko')} eurotan · guztira: {formatCompact(deuda_local_ultima[0]?.deuda_eur, 0)} € korronte"
         source="Ogasun Ministerioa"
@@ -361,7 +344,7 @@ ORDER BY d.fecha
 <LineChart
     data={deuda_ciudades}
     x=fecha
-    y=deuda_hab_real
+    y=deuda_eur_hab_real
     series=municipio
     yFmt=num0
     yAxisTitle="€ biztanleko"
@@ -370,7 +353,7 @@ ORDER BY d.fecha
 
 {/if}
 
-<p class="text-xs text-gray-500">Zenbatekoak biztanleko (urte bakoitzeko Udal Erroldarekin) eta inflazioa kenduta, urteko batez besteko KPIarekin, {urte(base[0]?.anio_base, 'ko')} eurotan: horrela, seriea ez da hazten auzotar gehiago egoteagatik edo prezioak igotzeagatik soilik. Udal handien zorra 2002an hasten da, oinarrian urteko KPIa duen lehen urtean.</p>
+<p class="text-xs text-gray-500">Zenbatekoak biztanleko (urte bakoitzeko Udal Erroldarekin) eta inflazioa kenduta, urteko batez besteko KPIarekin, {urte(base[0]?.anio_base, 'ko')} eurotan: horrela, seriea ez da hazten auzotar gehiago egoteagatik edo prezioak igotzeagatik soilik.</p>
 
 {/if}
 
@@ -407,10 +390,9 @@ ORDER BY fecha
 
 ```sql empleo_prov_aytos_serie
 -- Gasto de personal de los ayuntamientos por habitante, en euros constantes
-SELECT g.anio, g.gasto_personal_ayuntamientos_hab * coalesce(f.factor, 1) AS valor
+SELECT g.anio, g.gasto_personal_ayuntamientos_eur_hab_real AS valor
 FROM mother.empleo_gasto_personal_territorio g
-LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
-WHERE g.nivel = 'provincia' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ayuntamientos_hab IS NOT NULL
+WHERE g.nivel = 'provincia' AND g.cod = '${terr[0]?.cod}' AND g.gasto_personal_ayuntamientos_eur_hab_real IS NOT NULL
 ORDER BY g.anio
 ```
 
@@ -419,11 +401,10 @@ ORDER BY g.anio
 SELECT
     g.anio,
     g.gasto_personal_ayuntamientos,
-    g.gasto_personal_ayuntamientos_hab * coalesce(f.factor, 1) AS gasto_personal_ayuntamientos_hab,
+    g.gasto_personal_ayuntamientos_eur_hab_real AS gasto_personal_ayuntamientos_hab,
     g.ayuntamientos_con_datos,
-    coalesce(f.factor, 1) * (SELECT gasto_personal_ayuntamientos_hab FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS espana_hab
+    (SELECT gasto_personal_ayuntamientos_eur_hab_real FROM mother.empleo_gasto_personal_territorio x WHERE x.nivel = 'pais' AND x.anio = g.anio) AS espana_hab
 FROM mother.empleo_gasto_personal_territorio g
-LEFT JOIN mother.deflactor f ON f.anio = CAST(g.anio AS INTEGER)
 WHERE g.nivel = 'provincia' AND g.cod = '${terr[0]?.cod}'
 ORDER BY g.anio DESC
 LIMIT 1
@@ -799,14 +780,13 @@ ORDER BY fecha
 ```
 
 ```sql elec_familias
-SELECT p.fecha, f.familia, f.color, f.orden_familia, f.pct, f.escanos
+SELECT f.fecha, f.familia, f.color, f.orden_familia, f.pct, f.escanos
 FROM mother.elecciones_familias f
-JOIN mother.elecciones_participacion p ON p.proceso = f.proceso AND p.nivel = 'pais'
 WHERE f.nivel = 'provincia' AND f.cod = '${terr[0]?.cod}' AND f.tipo = '02'
   AND f.familia IN (SELECT familia FROM mother.elecciones_familias
       WHERE nivel = 'provincia' AND cod = '${terr[0]?.cod}' AND tipo = '02' AND bloque <> 'Otros'
       GROUP BY familia HAVING max(pct) >= 5)
-ORDER BY p.fecha, f.orden_familia
+ORDER BY f.fecha, f.orden_familia
 ```
 
 ```sql elec_colores

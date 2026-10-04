@@ -1,5 +1,6 @@
 -- España frente a otros países y agregados, formato largo: una fila por
--- indicador, país y año. Países: España, Francia, Portugal, Marruecos,
+-- indicador, país y año. cod_pais = ISO alfa-2 (EU27_2020 la UE, OECD la OCDE) con el
+-- seed paises_iso; la ingesta trae el ISO3 y aquí se traduce. Países: España, Francia, Portugal, Marruecos,
 -- Estados Unidos, China, Alemania e Italia; agregados: Unión Europea (EUU) y
 -- OCDE (OED); y países de referencia que la web solo muestra en los indicadores
 -- donde son un caso emblemático (src/lib/paisesReferencia.js): Noruega,
@@ -83,7 +84,7 @@ select
     c.nombre,
     c.unidad,
     c.apartado,
-    s.cod_pais,
+    i.cod_pais,
     p.pais,
     p.es_agregado,
     p.es_referencia,
@@ -97,4 +98,5 @@ select
 from {{ ref('stg_internacional_series') }} s
 join catalogo c using (indicador_id)
 join paises p using (cod_pais)
+join {{ ref('paises_iso') }} i on i.iso3 = s.cod_pais
 where s.valor is not null

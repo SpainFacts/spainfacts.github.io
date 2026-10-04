@@ -1,6 +1,7 @@
 -- Remuneración de asalariados de las AAPP (D1PAY: sueldos + cotizaciones
 -- sociales a cargo del empleador), total y por subsector, anual desde 1995
--- (Eurostat gov_10a_main, contabilidad nacional SEC 2010). Millones de euros y % del PIB.
+-- (Eurostat gov_10a_main, contabilidad nacional SEC 2010). Millones de euros corrientes y % del PIB;
+-- las columnas _real están en euros constantes de anio_base (deflactor del INE; antes de 1996 vacías).
 with base as (
     select
         cast(periodo as integer) as anio,
@@ -29,6 +30,9 @@ select
     end as subsector,
     b.millones_eur,
     b.pct_pib,
-    b.millones_eur * 1e6 / p.habitantes as eur_por_habitante
+    d.anio_base,
+    b.millones_eur * d.factor as millones_eur_real,
+    b.millones_eur * 1e6 * d.factor / p.habitantes as eur_hab_real
 from base b
 left join poblacion p using (anio)
+left join {{ ref('deflactor') }} d using (anio)

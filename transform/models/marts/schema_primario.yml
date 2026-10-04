@@ -14,11 +14,24 @@ models:
       - name: producto_id
         tests: [not_null]
       - name: geo
-        description: "Código Eurostat del país (Grecia = EL)"
+        description: "Código Eurostat del país (Grecia = EL). Solo para los marts internos: la tabla publicada usa cod_pais."
+        tests: [not_null]
+      - name: cod_pais
+        description: "Código ISO 3166-1 alfa-2 del país (Grecia = GR), del seed paises_iso"
         tests: [not_null]
       - name: valor
         description: "Valor en la unidad de la columna unidad"
         tests: [not_null]
+      - name: valor_hab
+        description: "valor por habitante en la unidad de unidad_hab (población media del país)"
+      - name: unidad_hab
+        description: "kg por habitante, ha o cabezas por 1.000 habitantes, euros por habitante, GT por 1.000 habitantes o buques por 100.000 habitantes"
+      - name: valor_real
+        description: "Solo M EUR: valor en euros constantes de anio_base con el IPCA del país (deflactor_paises)"
+      - name: valor_hab_real
+        description: "Solo M EUR: euros constantes de anio_base por habitante"
+      - name: anio_base
+        description: "Año de los euros constantes"
   - name: primario_ranking_ue
     description: >
       Una fila por producto: cuota de España en la UE-27, puesto, primer y segundo país, peso
@@ -92,8 +105,19 @@ models:
     columns:
       - name: medida
         tests: [not_null]
-      - name: geo
+      - name: cod_pais
+        description: "Código ISO 3166-1 alfa-2 del país (Grecia = GR)"
         tests: [not_null]
+      - name: valor_hab
+        description: "valor por habitante en la unidad de unidad_hab (kg por habitante en capturas y acuicultura en volumen)"
+      - name: unidad_hab
+        description: "Unidad de valor_hab"
+      - name: valor_real
+        description: "Acuicultura en euros: euros constantes de anio_base con el IPCA del país"
+      - name: valor_hab_real
+        description: "Acuicultura en euros: euros constantes de anio_base por habitante"
+      - name: anio_base
+        description: "Año de los euros constantes"
   - name: primario_ccaa
     description: >
       VAB de la rama primaria (A: agricultura, ganadería, silvicultura y pesca) y su peso en el

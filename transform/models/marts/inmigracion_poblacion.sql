@@ -9,13 +9,14 @@ with base as (
 )
 
 select
-    cast(anio as integer) as anio,
-    case when cod_ccaa = '00' then 'pais' else 'ccaa' end as nivel,
-    cod_ccaa as cod,
+    cast(b.anio as integer) as anio,
+    case when b.cod_ccaa = '00' then 'pais' else 'ccaa' end as nivel,
+    b.cod_ccaa as cod,
+    t.nombre,
     max(poblacion) filter (where nacionalidad = 'Total') as poblacion,
     max(poblacion) filter (where nacionalidad = 'Española') as espanoles,
     max(poblacion) filter (where nacionalidad = 'Extranjera') as extranjeros,
-    max(poblacion) filter (where nacionalidad = 'Extranjera') / max(poblacion) filter (where nacionalidad = 'Total') as pct_extranjeros,
+    100.0 * max(poblacion) filter (where nacionalidad = 'Extranjera') / max(poblacion) filter (where nacionalidad = 'Total') as extranjeros_pct,
     max(poblacion) filter (where nacionalidad like 'País de la UE27%') as ue,
     max(poblacion) filter (where nacionalidad like 'País de Europa menos UE27%') as resto_europa,
     max(poblacion) filter (where nacionalidad = 'De Africa') as africa,
@@ -23,5 +24,6 @@ select
     max(poblacion) filter (where nacionalidad = 'De Centro América y Caribe') as centroamerica_caribe,
     max(poblacion) filter (where nacionalidad = 'De Sudamérica') as sudamerica,
     max(poblacion) filter (where nacionalidad = 'De Asia') as asia
-from base
+from base b
+left join {{ ref('territorios') }} t on t.nivel = case when b.cod_ccaa = '00' then 'pais' else 'ccaa' end and t.cod = b.cod_ccaa
 group by all
