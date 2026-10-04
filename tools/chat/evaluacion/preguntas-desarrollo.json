@@ -161,8 +161,7 @@
 		"pregunta": "¿Cuál es la tasa de paro en España ahora mismo?",
 		"tipo": "actual",
 		"tablas_oro": [
-			"mother.mercado_paro_trimestral",
-			"mother.unemployment"
+			"mother.mercado_paro_trimestral"
 		],
 		"sql_oro": "SELECT periodo, tasa_paro FROM mother.mercado_paro_trimestral ORDER BY trimestre DESC LIMIT 1",
 		"respuesta": {
@@ -183,7 +182,7 @@
 					"2026"
 				]
 			],
-			"alternativas": "EPA segundo trimestre de 2026. La tabla unemployment (serie total nacional, ambos sexos) da el mismo 9,87."
+			"alternativas": "EPA segundo trimestre de 2026."
 		}
 	},
 	{
@@ -223,8 +222,7 @@
 		"pregunta": "¿A cuánto llegó la inflación en julio de 2022?",
 		"tipo": "anio",
 		"tablas_oro": [
-			"mother.mercado_ipc_mensual",
-			"mother.ipc"
+			"mother.mercado_ipc_mensual"
 		],
 		"sql_oro": "SELECT mes, var_anual FROM mother.mercado_ipc_mensual WHERE mes='2022-07-01'",
 		"respuesta": {
@@ -511,7 +509,7 @@
 		"tablas_oro": [
 			"mother.cuentas_balance_anual"
 		],
-		"sql_oro": "SELECT max(deuda_pib) FILTER (WHERE \"año\"=2020) - arg_max(deuda_pib, \"año\") AS bajada_puntos, max(deuda_pib) FILTER (WHERE \"año\"=2020) AS d2020, arg_max(deuda_pib, \"año\") AS ultima, max(\"año\") AS anio_ultimo FROM mother.cuentas_balance_anual",
+		"sql_oro": "SELECT max(deuda_pib) FILTER (WHERE anio=2020) - arg_max(deuda_pib, anio) AS bajada_puntos, max(deuda_pib) FILTER (WHERE anio=2020) AS d2020, arg_max(deuda_pib, anio) AS ultima, max(anio) AS anio_ultimo FROM mother.cuentas_balance_anual",
 		"respuesta": {
 			"valor": 18.6,
 			"unidad": "puntos de PIB (bajada)",
@@ -587,7 +585,11 @@
 					"1.616,25",
 					"1616,25",
 					"1.616,32",
-					"1616,32"
+					"1616,32",
+					"1.834,58",
+					"1.834",
+					"1834",
+					"1.835"
 				]
 			],
 			"textos": [
@@ -727,7 +729,7 @@
 			"mother.energia_resumen_anual_mix",
 			"mother.energia_mix_electrico"
 		],
-		"sql_oro": "SELECT \"año\", cuota_renovable_pct FROM mother.energia_resumen_anual_mix WHERE \"año\"=2024",
+		"sql_oro": "SELECT anio, cuota_renovable_pct FROM mother.energia_resumen_anual_mix WHERE anio=2024",
 		"respuesta": {
 			"valor": 56.82,
 			"unidad": "% de la generación",
@@ -995,7 +997,7 @@
 			"mother.inmigracion_poblacion",
 			"mother.demografia_envejecimiento"
 		],
-		"sql_oro": "SELECT anio, extranjeros, pct_extranjeros FROM mother.inmigracion_poblacion WHERE nivel='pais' ORDER BY anio DESC LIMIT 1",
+		"sql_oro": "SELECT anio, extranjeros, extranjeros_pct FROM mother.inmigracion_poblacion WHERE nivel='pais' ORDER BY anio DESC LIMIT 1",
 		"respuesta": {
 			"valor": 6911971,
 			"unidad": "residentes de nacionalidad extranjera",
@@ -1139,11 +1141,10 @@
 		"pregunta": "¿En cuántos ayuntamientos gobierna el PP?",
 		"tipo": "actual",
 		"tablas_oro": [
-			"mother.alcaldes_resumen_familias",
 			"mother.alcaldes_actuales",
 			"mother.alcaldes_familias_territorio"
 		],
-		"sql_oro": "SELECT familia, n_ayuntamientos, pct_poblacion FROM mother.alcaldes_resumen_familias WHERE familia='PP'",
+		"sql_oro": "SELECT familia, n, pct_poblacion FROM mother.alcaldes_familias_territorio WHERE nivel='pais' AND familia='PP'",
 		"respuesta": {
 			"valor": 3333,
 			"unidad": "alcaldías",

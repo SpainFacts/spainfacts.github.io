@@ -59,7 +59,14 @@ export function crearIndice(catalogo) {
 		const tf = new Map();
 		const ps = palabras(texto);
 		for (const p of ps) tf.set(p, (tf.get(p) ?? 0) + 1);
-		return { tabla: t, tf, largo: ps.length, enNombre: new Set(palabras(t.nombre.replace(/_/g, ' '))), vec: t.vec ? deBase64(t.vec) : null };
+		return {
+			tabla: t,
+			tf,
+			largo: ps.length,
+			enNombre: new Set(palabras(t.nombre.replace(/_/g, ' '))),
+			vec: t.vec ? deBase64(t.vec) : null,
+			vecsPreguntas: (t.vecs_preguntas ?? []).map(deBase64)
+		};
 	});
 	const df = new Map();
 	for (const d of docs) for (const p of d.tf.keys()) df.set(p, (df.get(p) ?? 0) + 1);
@@ -159,9 +166,15 @@ export function buscarTablas(indice, texto, n = 8, conFicha = 1, vector = null) 
 		const rangoPalabras = new Map(ordenadas.map((x, i) => [x.d, i]));
 		const semanticas = indice.docs
 			.map((d) => {
-				let dot = 0;
-				for (let i = 0; i < d.vec.length; i++) dot += d.vec[i] * vector[i];
-				return { d, s: dot };
+				const prod = (v) => {
+					let dot = 0;
+					for (let i = 0; i < v.length; i++) dot += v[i] * vector[i];
+					return dot;
+				};
+				// Mitad la descripción de la tabla, mitad su pregunta de ejemplo más parecida (solo la
+				// pregunta de ejemplo desordena tablas vecinas; mezcladas, mejor que cada una sola)
+				const mejorP = d.vecsPreguntas.length ? Math.max(...d.vecsPreguntas.map(prod)) : prod(d.vec);
+				return { d, s: 0.5 * prod(d.vec) + 0.5 * mejorP };
 			})
 			.sort((a, b) => b.s - a.s);
 		const rrf = (r) => (r === undefined ? 0 : 1 / (60 + r));

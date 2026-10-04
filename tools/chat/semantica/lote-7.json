@@ -7,7 +7,13 @@
       "¿Cuál es la pensión media en España?",
       "¿Cuántas pensiones hay en España?",
       "¿Cuántos afiliados hay por cada pensionista?",
-      "¿Cómo ha evolucionado la pensión media de jubilación en euros reales?"
+      "¿Cómo ha evolucionado la pensión media de jubilación en euros reales?",
+      "¿Cuánto cobra de media un jubilado al mes?",
+      "¿Cuánto ha subido la paga de los pensionistas desde el año 2000 sin contar la inflación?",
+      "¿Cuántos jubilados hay en España?",
+      "¿Cuántas pensiones hay por cada 100 mayores de 65 años?",
+      "¿Cuánto cobra un pensionista comparado con el sueldo medio?",
+      "¿Cuántos trabajadores cotizan por cada pensionista y cómo ha cambiado?"
     ],
     "medidas": [
       {
@@ -140,7 +146,13 @@
       "¿Qué porcentaje del PIB gasta España en pensiones?",
       "¿Qué país de Europa gasta más en pensiones?",
       "¿Gasta España más o menos que la media europea en pensiones?",
-      "¿Cómo ha cambiado el gasto en pensiones de Italia desde el año 2000?"
+      "¿Cómo ha cambiado el gasto en pensiones de Italia desde el año 2000?",
+      "¿Cuánto dinero público se va en pagar a los jubilados en Francia?",
+      "¿Qué país de la UE gasta menos en pensiones?",
+      "¿Cuánto gasta España en viudedad y orfandad?",
+      "dime cuánto destinan los países a protección social en total",
+      "¿Gasta Alemania más que nosotros en pensiones de vejez?",
+      "¿Cuánto ha subido el gasto en pensiones de España desde 2008?"
     ],
     "medidas": [
       {
@@ -205,7 +217,13 @@
       "¿Cuántas pensiones hay ahora mismo en España?",
       "¿Cuál es la pensión media de jubilación este mes?",
       "¿Cuánto ha subido la pensión de jubilación en el último año descontando la inflación?",
-      "¿Cómo ha evolucionado el número de pensiones desde 2008?"
+      "¿Cómo ha evolucionado el número de pensiones desde 2008?",
+      "¿Cuánto cobra de media un viudo o viuda al mes?",
+      "¿Cuánto dinero se paga cada mes en pensiones?",
+      "¿Cuántos jubilados cobran pensión este mes?",
+      "dime la pensión media del último mes",
+      "¿Cuántas pensiones se han ganado o perdido en el último año?",
+      "¿Cuántos afiliados a la Seguridad Social hay ahora?"
     ],
     "medidas": [
       {
@@ -302,7 +320,13 @@
       "¿Cuál es la pensión media en el País Vasco?",
       "¿Qué comunidad tiene la pensión media más baja?",
       "¿Cuántas pensiones hay en Andalucía?",
-      "¿En qué provincia hay más pensiones por habitante?"
+      "¿En qué provincia hay más pensiones por habitante?",
+      "¿Qué provincia tiene las pensiones más altas?",
+      "¿Cuánto cobra un jubilado en Extremadura?",
+      "¿Dónde cobran más los pensionistas, en Madrid o en Cataluña?",
+      "¿Qué comunidad tiene más pensiones en relación con sus mayores de 65?",
+      "¿Cuántos jubilados hay en Galicia?",
+      "¿Cuánto ha subido la pensión media en Asturias desde 2010?"
     ],
     "medidas": [
       {
@@ -418,7 +442,13 @@
       "¿Cuántos habitantes tiene Madrid?",
       "¿Cuál es el municipio más poblado de Navarra?",
       "¿Cómo ha crecido la población de Torrejón de Ardoz desde 2016?",
-      "¿Qué municipios tienen menos de 100 habitantes?"
+      "¿Qué municipios tienen menos de 100 habitantes?",
+      "¿Cuánta gente vive en mi pueblo?",
+      "¿Cuál es el pueblo más pequeño de España?",
+      "¿Cuántos habitantes tiene Vigo?",
+      "dime los diez municipios con más habitantes",
+      "¿Qué ciudades de más de 100.000 habitantes están perdiendo población?",
+      "¿Cuánto ha crecido Alcalá de Henares en los últimos años?"
     ],
     "medidas": [
       {
@@ -455,7 +485,13 @@
       "¿Cuántos habitantes tiene España?",
       "¿Qué comunidad tiene más población?",
       "¿Cuántas mujeres hay en Galicia?",
-      "¿Cómo ha evolucionado la población de Cataluña desde 1996?"
+      "¿Cómo ha evolucionado la población de Cataluña desde 1996?",
+      "¿Cuánta gente vive en Madrid?",
+      "¿Cuántos hombres hay en Andalucía?",
+      "¿Qué provincia tiene menos habitantes?",
+      "¿Cuántos españoles somos ahora comparado con hace 20 años?",
+      "¿Qué comunidad ha perdido población desde 2000?",
+      "¿Cuántos municipios tiene Castilla y León?"
     ],
     "medidas": [
       {
@@ -485,7 +521,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -499,7 +535,7 @@
       }
     ],
     "filtros": [],
-    "notas": "No tiene columna de nombre: unir con territorios por nivel y cod para obtener el nombre. El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia). Siempre filtrar sexo = 'Total' salvo que se pregunte por hombres o mujeres, o se duplica la población."
+    "notas": "El mismo cod significa cosas distintas por nivel ('13' es Madrid como ccaa y Ciudad Real como provincia): filtrar por nivel. Siempre filtrar sexo = 'Total' salvo que se pregunte por hombres o mujeres, o se triplica la población."
   },
   {
     "tabla": "primario_aceite",
@@ -509,7 +545,13 @@
       "¿Cuánto aceite de oliva produce España?",
       "¿Qué porcentaje del aceite del mundo es español?",
       "¿Cómo ha variado la producción de aceite en España desde 2013?",
-      "¿Qué país europeo produce más aceite después de España?"
+      "¿Qué país europeo produce más aceite después de España?",
+      "¿Cuántas toneladas de aceite se cosecharon la última campaña?",
+      "¿Cuánto aceite produce Grecia?",
+      "¿Qué cuota tiene España en el aceite de la UE?",
+      "¿Cuántos kilos de aceite se producen por habitante en España?",
+      "¿Fue buena o mala la última cosecha de aceite en comparación con la anterior?",
+      "¿Cuánto aceite produce Italia frente a Portugal?"
     ],
     "medidas": [
       {
@@ -586,7 +628,13 @@
       "¿A cuánto está el aceite de oliva virgen extra?",
       "¿Cuánto ha subido el precio del aceite desde 2020?",
       "¿En qué país es más barato el aceite de oliva en origen?",
-      "¿Cuál fue el precio máximo del aceite virgen extra en España?"
+      "¿Cuál fue el precio máximo del aceite virgen extra en España?",
+      "¿Cuánto cuesta el kilo de aceite de oliva a pie de almazara?",
+      "¿Está hoy más caro o más barato el aceite que hace cinco años?",
+      "¿A cuánto está el aceite lampante?",
+      "¿Cuánto cobra un olivarero por kilo en Italia?",
+      "¿Cuándo estuvo más barato el aceite de oliva en los últimos años?",
+      "¿Cuánto subió el aceite en 2023?"
     ],
     "medidas": [
       {
@@ -646,7 +694,13 @@
       "¿Qué comunidad depende más del sector primario?",
       "¿Cuánto produce el sector primario de Andalucía?",
       "¿Qué peso tiene la agricultura en la economía de Extremadura?",
-      "¿Cómo ha evolucionado el valor añadido agrario por habitante en Aragón?"
+      "¿Cómo ha evolucionado el valor añadido agrario por habitante en Aragón?",
+      "¿Cuánta riqueza genera el campo en Castilla-La Mancha?",
+      "¿En qué provincia pesa más la agricultura?",
+      "¿Qué comunidad produce más agricultura y ganadería por habitante?",
+      "¿Cuánto vale la ganadería y la pesca de Galicia?",
+      "¿Qué porcentaje de la economía de Murcia es agricultura?",
+      "¿Cuánto ha cambiado el peso del campo en la economía española?"
     ],
     "medidas": [
       {
@@ -719,7 +773,13 @@
       "¿Qué comunidad produce más cereal?",
       "¿Cuántas toneladas de patata se producen en Galicia?",
       "¿Dónde se cultiva el arroz en España?",
-      "¿Cómo ha evolucionado la producción de girasol en Andalucía?"
+      "¿Cómo ha evolucionado la producción de girasol en Andalucía?",
+      "¿Cuánta cebada se cosecha en Castilla y León?",
+      "¿Qué comunidad cultiva más maíz?",
+      "¿Cuántas hectáreas de girasol hay en Andalucía?",
+      "¿Cuántos kilos de cereal produce Aragón por habitante?",
+      "¿Qué comunidad produce más patata?",
+      "¿Qué parte del arroz de España sale de Andalucía?"
     ],
     "medidas": [
       {
@@ -792,7 +852,13 @@
       "¿Cuántos hectolitros de vino produce España?",
       "¿Qué puesto ocupa España en el mundo en producción de aceite?",
       "¿Cuánta superficie de viñedo tiene España?",
-      "¿Qué país exporta más vino?"
+      "¿Qué país exporta más vino?",
+      "¿Cuál es el mayor productor de vino del mundo?",
+      "¿Cuánto vino exporta España?",
+      "¿Qué país produce más aceite de oliva?",
+      "¿Cuántas hectáreas de viñedo hay en el mundo?",
+      "¿España es la primera exportadora de aceite?",
+      "¿Qué lugar ocupa España en superficie de viñedo?"
     ],
     "medidas": [
       {
@@ -844,8 +910,89 @@
   },
   {
     "tabla": "primario_paises_largo",
-    "usar": false,
-    "notas": "Tabla base en formato largo (producto x país x año) de la que derivan primario_serie_espana, primario_ranking_ue y primario_pesca; mezcla unidades distintas en una sola columna valor, así que no sirve para responder sin filtrar por producto. Usar las derivadas."
+    "usar": true,
+    "tema": "Producción agraria, ganadera, pesquera y exportaciones de cada país de la UE por año, producto a producto (para comparar países)",
+    "preguntas": [
+      "¿Qué país de la UE produce más vino por habitante?",
+      "¿Cuánto exporta Italia de aceite de oliva?",
+      "¿Cuántos cerdos tiene Alemania comparado con España?",
+      "¿Qué país produce más tomate por habitante?",
+      "¿Cuántas vacas hay en Francia?",
+      "¿Qué país europeo produce más leche?",
+      "¿Cuánto trigo cosecha Polonia?",
+      "¿Cuántos kilos de carne de cerdo produce cada país por habitante?",
+      "¿Quién produce más patatas en Europa?",
+      "¿Cuánto vale la producción de fruta de Italia?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del producto en la unidad de la columna unidad (toneladas, hectáreas, cabezas, millones de euros corrientes, buques...)",
+        "unidad": "según columna unidad",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "valor_hab",
+        "nombre": "valor por habitante en la unidad de unidad_hab (kg por habitante, ha o cabezas por 1.000 habitantes, euros por habitante, buques por 100.000 habitantes)",
+        "unidad": "según columna unidad_hab",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_real",
+        "nombre": "valor en euros constantes (solo productos en millones de euros)",
+        "unidad": "millones de € (euros de anio_base)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "valor_hab_real",
+        "nombre": "euros constantes por habitante (solo productos en millones de euros)",
+        "unidad": "€ por habitante (€ de anio_base)",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "poblacion_miles",
+        "nombre": "población media del país",
+        "unidad": "miles de habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "categoria",
+        "nombre": "tipo de dato (cultivo, ganaderia, pesca, valor, exportacion)",
+        "total": null
+      },
+      {
+        "columna": "producto",
+        "nombre": "producto o medida",
+        "total": null
+      },
+      {
+        "columna": "unidad",
+        "nombre": "unidad de valor",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Tabla base en formato largo (producto x país x año, 27 países de la UE): cada fila lleva su unidad, así que hay que filtrar siempre por producto o producto_id (hay unos 70) y no sumar productos distintos. Por habitante en valor_hab (con unidad_hab) y en euros constantes en valor_real/valor_hab_real (solo millones de euros), con el IPCA de cada país (deflactor_paises). Los valores en euros son corrientes en valor y los países sin euro vienen convertidos por Eurostat. Los años recientes pueden estar incompletos en algunos países (la cuota sobre los países con dato se infla): para cuotas y rankings usar primario_ranking_ue y primario_serie_espana."
   },
   {
     "tabla": "primario_pesca",
@@ -855,7 +1002,13 @@
       "¿Cuántas toneladas de pescado captura España?",
       "¿Qué país de la UE pesca más?",
       "¿Cuántos barcos pesqueros tiene España?",
-      "¿Cómo ha cambiado la flota pesquera española desde 2000?"
+      "¿Cómo ha cambiado la flota pesquera española desde 2000?",
+      "¿Cuántos kilos de pescado captura cada país europeo por habitante?",
+      "¿Qué país de Europa tiene más barcos de pesca?",
+      "¿Cuánto pescado se cría en piscifactorías en España?",
+      "¿Qué porcentaje de la pesca europea es de España?",
+      "¿Dónde se pesca menos, en Alemania o en Dinamarca?",
+      "¿Cuánto vale la acuicultura de Grecia?"
     ],
     "medidas": [
       {
@@ -864,6 +1017,24 @@
         "unidad": "según columna unidad",
         "tipo": "nivel",
         "principal": true
+      },
+      {
+        "columna": "valor_hab",
+        "nombre": "valor por habitante: kg de capturas o acuicultura, GT y buques de la flota por habitante (unidad en unidad_hab)",
+        "unidad": "según columna unidad_hab",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_hab_real",
+        "nombre": "valor de la acuicultura en euros constantes por habitante",
+        "unidad": "€ por habitante (€ de anio_base)",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "valor_real",
+        "nombre": "valor de la acuicultura en euros constantes",
+        "unidad": "millones de € (euros de anio_base)",
+        "tipo": "flujo"
       },
       {
         "columna": "cuota_pct",
@@ -876,18 +1047,6 @@
         "nombre": "puesto del país en la UE",
         "unidad": "puesto",
         "tipo": "ratio"
-      },
-      {
-        "columna": "kg_hab",
-        "nombre": "capturas o acuicultura por habitante",
-        "unidad": "kg por habitante",
-        "tipo": "ratio"
-      },
-      {
-        "columna": "valor_real",
-        "nombre": "valor de la acuicultura en euros constantes",
-        "unidad": "millones de € (euros de 2025)",
-        "tipo": "flujo"
       },
       {
         "columna": "total_ue",
@@ -907,10 +1066,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "geo",
+      "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -928,7 +1087,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por medida (capturas en miles de t, acuicultura_t en miles de t, acuicultura_eur en millones de euros, flota_gt en miles de GT, flota_nr en número de buques): unidades distintas en la misma columna valor. Irlanda y Portugal no publican capturas recientes, por eso la cuota (cuota_pct) puede estar inflada (ver cuota_min_pct). valor_real solo existe para acuicultura_eur. kg_hab solo en capturas y acuicultura_t."
+    "notas": "Filtrar siempre por medida (capturas en miles de t, acuicultura_t en miles de t, acuicultura_eur en millones de euros, flota_gt en miles de GT, flota_nr en número de buques): unidades distintas en la misma columna valor. valor_hab lleva su unidad en unidad_hab (kg por habitante, euros por habitante, GT por 1.000 habitantes, buques por 100.000 habitantes). valor_real y valor_hab_real existen para acuicultura_eur, en euros constantes de anio_base con el IPCA de cada país. Irlanda y Portugal no publican capturas recientes, por eso la cuota (cuota_pct) puede estar inflada (ver cuota_min_pct)."
   },
   {
     "tabla": "primario_ranking_ue",
@@ -938,7 +1097,13 @@
       "¿En qué productos agrarios es España el primer productor de la UE?",
       "¿Qué porcentaje del aguacate europeo se produce en España?",
       "¿Qué puesto ocupa España en producción de vino en la UE?",
-      "¿Qué país produce más cereales en Europa?"
+      "¿Qué país produce más cereales en Europa?",
+      "¿Qué productos del campo produce España más que nadie en Europa?",
+      "¿Qué porcentaje de las naranjas de Europa es español?",
+      "¿Cuántas veces produce España más de lo que le tocaría por su población?",
+      "¿En qué producto es España segunda de Europa?",
+      "¿Quién nos gana en producción de leche?",
+      "¿Cuánto pescado produce España frente a la media europea por habitante?"
     ],
     "medidas": [
       {
@@ -1019,7 +1184,13 @@
       "¿Cuánto aceite de oliva (en valor) produce España cada año?",
       "¿Cómo ha evolucionado la producción de tomate en España?",
       "¿Cuántas cabezas de ganado porcino hay en España?",
-      "¿Qué cuota de la UE tiene España en producción de naranja desde 2010?"
+      "¿Qué cuota de la UE tiene España en producción de naranja desde 2010?",
+      "¿Cuántos cerdos hay en España ahora y hace veinte años?",
+      "¿Cuánta producción de trigo tiene España cada año?",
+      "¿Cuántos barcos de pesca tiene España hoy?",
+      "¿Cómo ha cambiado la producción de vino español desde 2005?",
+      "¿Qué puesto tiene España en producción de aceituna en Europa?",
+      "¿Cuántos kilos de fruta producimos por habitante?"
     ],
     "medidas": [
       {
@@ -1095,7 +1266,13 @@
       "¿Cuánto produce el campo español en euros?",
       "¿Qué país de Europa tiene la producción agraria más alta por habitante?",
       "¿Cómo ha evolucionado la renta de los agricultores españoles?",
-      "¿Cuánto vale la producción agraria de Francia?"
+      "¿Cuánto vale la producción agraria de Francia?",
+      "¿Cuánto ganan los agricultores comparado con hace diez años?",
+      "¿Cuánto vale todo lo que produce el campo en Alemania?",
+      "¿Cuánto genera el campo español por cada habitante?",
+      "¿Está subiendo o bajando la renta de los agricultores en Francia?",
+      "¿Cuánto valor añade la agricultura en España?",
+      "¿Qué país produce más por habitante, Países Bajos o España?"
     ],
     "medidas": [
       {
@@ -1191,7 +1368,13 @@
     "preguntas": [
       "¿Qué distrito de Madrid tiene más renta?",
       "¿Cuánta renta por persona tiene el distrito 5 de Valencia?",
-      "¿Cómo ha evolucionado la renta en los distritos de Barcelona?"
+      "¿Cómo ha evolucionado la renta en los distritos de Barcelona?",
+      "¿Cuánto ganan en el distrito de Salamanca de Madrid?",
+      "¿Qué barrio de Barcelona tiene la renta más baja?",
+      "¿Cuál es el distrito más rico de Sevilla?",
+      "¿Cuánta renta por hogar hay en los distritos de Valencia?",
+      "dime los barrios más pobres de Madrid",
+      "¿Han mejorado los ingresos en los distritos de Bilbao?"
     ],
     "medidas": [
       {
@@ -1246,7 +1429,13 @@
       "¿Qué porcentaje de la población está en riesgo de pobreza en Andalucía?",
       "¿Qué comunidad tiene la renta media por persona más alta?",
       "¿Cuántas personas están en riesgo de pobreza o exclusión social (AROPE) en España?",
-      "¿Cómo ha evolucionado la desigualdad (índice de Gini) en Cataluña?"
+      "¿Cómo ha evolucionado la desigualdad (índice de Gini) en Cataluña?",
+      "¿Cuánta gente vive en la pobreza en Extremadura?",
+      "¿Qué comunidad tiene menos pobreza?",
+      "¿Cuánto ingresa un hogar medio en Navarra?",
+      "¿Cuántas personas pasan privaciones materiales graves en Canarias?",
+      "¿Qué comunidad está más desigual?",
+      "¿Ha mejorado el riesgo de pobreza en Andalucía desde 2015?"
     ],
     "medidas": [
       {
@@ -1343,7 +1532,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -1351,7 +1540,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Sin columna de nombre de territorio: unir con territorios por cod (códigos INE; España = '00'). anio es el año de la encuesta; la renta es del año anterior (anio_renta = anio - 1). Muestra pequeña en comunidades pequeñas: las cifras saltan de un año a otro."
+    "notas": "anio es el año de la encuesta; la renta es del año anterior (anio_renta = anio - 1). Códigos INE: España = '00' (nivel pais). Muestra pequeña en comunidades pequeñas: las cifras saltan de un año a otro."
   },
   {
     "tabla": "renta_ecv_edad",
@@ -1361,7 +1550,13 @@
       "¿Qué porcentaje de los niños está en riesgo de pobreza en España?",
       "¿Qué grupo de edad tiene más riesgo de pobreza?",
       "¿Cómo ha evolucionado la pobreza entre los mayores de 65 años?",
-      "¿Cuánta renta por persona tienen los jóvenes de 16 a 29 años?"
+      "¿Cuánta renta por persona tienen los jóvenes de 16 a 29 años?",
+      "¿Los jóvenes son más pobres que los mayores?",
+      "¿Qué porcentaje de menores de 18 años vive en riesgo de pobreza?",
+      "¿Cuánto ingresa de media una persona de entre 45 y 64 años?",
+      "¿Cuántos mayores de 65 pasan privaciones graves?",
+      "¿Cómo ha cambiado la pobreza infantil en la última década?",
+      "¿Qué edad tiene más riesgo de exclusión social?"
     ],
     "medidas": [
       {
@@ -1410,7 +1605,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España. Los grupos se solapan: 'Menos de 18 años' incluye 'Menores de 16 años', y 'De 18 a 64 años' agrupa a varios de los demás; no sumar. anio es el año de la encuesta (la renta es del año anterior)."
+    "notas": "Solo España. Los grupos con orden 1 a 5 (menores de 16, 16-29, 30-44, 45-64, 65 y más) no se solapan y son los que usa la web; 'Menos de 18 años' incluye a 'Menores de 16 años' y 'De 18 a 64 años' agrupa a varios de los demás (orden nulo): no sumarlos con los otros. anio es el año de la encuesta (la renta es del año anterior)."
   },
   {
     "tabla": "renta_municipios",
@@ -1420,7 +1615,13 @@
       "¿Cuál es el municipio más rico de España?",
       "¿Cuánta renta por persona tiene Pozuelo de Alarcón?",
       "¿Qué puesto ocupa Sevilla en renta entre los municipios de España?",
-      "¿Cómo ha evolucionado la renta por persona en Vigo desde 2015?"
+      "¿Cómo ha evolucionado la renta por persona en Vigo desde 2015?",
+      "¿Cuánto ganan de media los vecinos de Alcobendas?",
+      "¿Cuál es el pueblo más pobre de España?",
+      "¿Qué renta por hogar tiene Marbella?",
+      "dime los 10 municipios con más renta",
+      "¿Cuánta renta tiene Torrelavega comparada con Santander?",
+      "¿Dónde viven los más ricos de Galicia?"
     ],
     "medidas": [
       {
@@ -1507,7 +1708,13 @@
       "¿Qué comunidad tiene más renta por persona?",
       "¿Cuánta renta por hogar tiene Murcia?",
       "¿Qué provincia es la más rica de España?",
-      "¿Cómo ha cambiado la renta por persona en Extremadura desde 2015?"
+      "¿Cómo ha cambiado la renta por persona en Extremadura desde 2015?",
+      "¿Cuánto ingresa una familia media en el País Vasco?",
+      "¿Qué provincia tiene la renta más baja?",
+      "¿Cuánto gana de media una persona en Madrid?",
+      "¿Quién tiene más renta, Navarra o Cataluña?",
+      "¿Cuánta renta por hogar hay en Andalucía?",
+      "¿Ha subido la renta por persona en España desde 2015 sin contar la inflación?"
     ],
     "medidas": [
       {
@@ -1581,7 +1788,13 @@
       "¿Qué país de Europa tiene más riesgo de pobreza?",
       "¿Está España más desigual que la media europea?",
       "¿Qué porcentaje de la población española está en riesgo de pobreza o exclusión social comparado con Francia?",
-      "¿Cómo ha evolucionado el Gini de Italia?"
+      "¿Cómo ha evolucionado el Gini de Italia?",
+      "¿Qué país tiene la menor desigualdad de Europa?",
+      "¿Cuánta gente está en riesgo de pobreza en Rumanía?",
+      "¿Es España más desigual que Alemania?",
+      "¿Cuántas veces ganan más los ricos que los pobres en cada país europeo?",
+      "¿Cómo ha cambiado el riesgo de pobreza en España desde 2010?",
+      "¿Cuál es el país más igualitario de la UE?"
     ],
     "medidas": [
       {
@@ -1603,10 +1816,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "geo",
+      "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -1616,10 +1829,15 @@
         "nombre": "indicador de pobreza o desigualdad",
         "total": null,
         "defecto": "arope"
+      },
+      {
+        "columna": "unidad",
+        "nombre": "unidad del indicador (%, índice 0-100, veces)",
+        "total": null
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por indicador: arope (% de población), gini (0 a 100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor. 'UE-27' (geo EU27_2020, es_ue=false, a diferencia de los países) es el agregado, no un país: excluirlo en rankings de países. Año de encuesta, no de la renta."
+    "notas": "Filtrar siempre por indicador: arope (%), gini (índice 0-100) y s80_s20 (veces); son magnitudes distintas en la misma columna valor, y la columna unidad lo dice en cada fila. La UE-27 (cod_pais EU27_2020, es_agregado = true, es_ue = false) es el agregado, no un país: excluirla en rankings de países (es_ue = true son los 27 países). Año de encuesta, no de la renta."
   },
   {
     "tabla": "salud_causas_muerte",
@@ -1629,7 +1847,13 @@
       "¿De qué mueren más los españoles?",
       "¿Cuántas personas murieron de cáncer en 2023?",
       "¿Cuántas muertes por accidente de tráfico hubo en Andalucía en 2019?",
-      "¿Cómo han evolucionado las muertes por suicidio desde 1980?"
+      "¿Cómo han evolucionado las muertes por suicidio desde 1980?",
+      "¿Cuánta gente muere de enfermedades del corazón?",
+      "¿De qué mueren más las mujeres?",
+      "¿Cuántos mueren por enfermedades del sistema nervioso?",
+      "¿En qué comunidad se muere más de cáncer en proporción?",
+      "¿Cuántas muertes por COVID hubo en 2020?",
+      "¿Cuántos hombres se suicidan al año?"
     ],
     "medidas": [
       {
@@ -1659,7 +1883,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -1675,10 +1899,15 @@
         "columna": "causa",
         "nombre": "causa de muerte",
         "total": "Todas las causas"
+      },
+      {
+        "columna": "tipo_causa",
+        "nombre": "tipo de fila: total (todas las causas), capitulo (gran grupo de la CIE-10) o causa (causa concreta)",
+        "total": null
       }
     ],
     "filtros": [],
-    "notas": "La tabla mezcla capítulos CIE-10 (es_capitulo = true, p. ej. 'Tumores', 'Enfermedades del sistema circulatorio') con causas concretas (es_capitulo = false, p. ej. 'Accidentes de tráfico', 'Suicidio y lesiones autoinfligidas'); no sumar capítulos y causas entre sí (se duplica). 'Todas las causas' es un capítulo y es el total. Para rankings de grandes grupos filtrar es_capitulo = true y excluir 'Todas las causas'. Sin nombre de territorio: unir con territorios por nivel y cod (13 = Madrid como ccaa, Ciudad Real como provincia). Tasa bruta sin ajustar por edad. Último año 2024."
+    "notas": "tipo_causa separa el total ('Todas las causas'), los capítulos de la CIE-10 ('Tumores', 'Enfermedades del sistema circulatorio'...) y las causas concretas ('Accidentes de tráfico', 'Suicidio y lesiones autoinfligidas'...): sumar solo dentro de un mismo tipo (capítulos y causas entre sí duplican). Para rankings de grandes grupos filtrar tipo_causa = 'capitulo'. El cod 13 es Madrid como ccaa y Ciudad Real como provincia: filtrar por nivel. Tasa bruta sin ajustar por edad (una provincia envejecida tiene más muertes por habitante sin que su salud sea peor). Solo se publican 15 causas concretas elegidas y las provincias desde 2010. Último año 2024."
   },
   {
     "tabla": "salud_esperanza_vida",
@@ -1688,7 +1917,13 @@
       "¿Cuál es la esperanza de vida en España?",
       "¿En qué comunidad se vive más años?",
       "¿Cuánto viven las mujeres en Madrid?",
-      "¿Cómo ha cambiado la esperanza de vida desde 1975?"
+      "¿Cómo ha cambiado la esperanza de vida desde 1975?",
+      "¿Hasta qué edad vive de media un español?",
+      "¿Cuánto viven los hombres en Galicia?",
+      "¿Qué provincia tiene la mayor esperanza de vida?",
+      "¿Dónde se vive menos años, en Ceuta o en Melilla?",
+      "¿Cuánto más viven las mujeres que los hombres?",
+      "¿Cuántos años vivimos más que en 2000?"
     ],
     "medidas": [
       {
@@ -1712,7 +1947,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -1723,10 +1958,15 @@
         "columna": "sexo",
         "nombre": "sexo",
         "total": "Ambos sexos"
+      },
+      {
+        "columna": "fuente",
+        "nombre": "fuente del dato (Eurostat para España, INE para comunidades y provincias)",
+        "total": null
       }
     ],
     "filtros": [],
-    "notas": "Sin nombre de territorio: unir con territorios por nivel y cod. Cuidado: cod '13' es la comunidad de Madrid (85,6 años) con nivel ccaa y Ciudad Real (83,0) con nivel provincia. España viene de Eurostat (redondeada a un decimal) y comunidades y provincias del INE. Último año 2024."
+    "notas": "Cuidado: cod '13' es la comunidad de Madrid (85,6 años) con nivel ccaa y Ciudad Real (83,0) con nivel provincia. España viene de Eurostat (redondeada a un decimal) y comunidades y provincias del INE: la columna fuente lo indica y no son del todo comparables. Último año 2024."
   },
   {
     "tabla": "salud_mortalidad_semanal",
@@ -1736,32 +1976,61 @@
       "¿Cuántas personas murieron la semana pasada en España?",
       "¿Cuántas muertes de más hubo en abril de 2020 por la COVID?",
       "¿Qué comunidad tuvo más exceso de mortalidad en la ola de calor?",
-      "¿Cómo ha evolucionado la mortalidad semanal en Cataluña?"
+      "¿Cómo ha evolucionado la mortalidad semanal en Cataluña?",
+      "¿Cuántas personas fallecen en una semana normal?",
+      "¿Hubo más muertes de lo normal este verano?",
+      "¿Cuántas muertes se esperaban y cuántas hubo en marzo de 2020?",
+      "¿En qué semana murió más gente en Madrid?",
+      "¿Cuánto exceso de mortalidad hubo en Cataluña?",
+      "dime las defunciones de esta semana en Andalucía"
     ],
     "medidas": [
+      {
+        "columna": "defunciones_por_100k_hab",
+        "nombre": "defunciones de la semana por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
       {
         "columna": "defunciones",
         "nombre": "defunciones de la semana",
         "unidad": "defunciones",
-        "tipo": "flujo",
-        "principal": true
+        "tipo": "flujo"
       },
       {
-        "columna": "exceso",
-        "nombre": "exceso de mortalidad sobre la media 2015-2019 de la misma semana (0,10 = 10 % más)",
+        "columna": "exceso_hab_pct",
+        "nombre": "exceso de mortalidad por habitante sobre la misma semana de 2015-2019 (corrige el crecimiento de la población)",
         "unidad": "%",
-        "tipo": "ratio",
-        "escala": 100
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "exceso_pct",
+        "nombre": "exceso de defunciones brutas sobre la misma semana de 2015-2019",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "media_2015_2019_por_100k_hab",
+        "nombre": "media de la misma semana en 2015-2019, por 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "media"
       },
       {
         "columna": "media_2015_2019",
-        "nombre": "media de defunciones de esa semana en 2015-2019",
+        "nombre": "media de defunciones de la misma semana en 2015-2019",
         "unidad": "defunciones",
         "tipo": "media"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del territorio (padrón del año; el último para años posteriores)",
+        "unidad": "habitantes",
+        "tipo": "nivel"
       }
     ],
     "tiempo": {
-      "columna": "semana",
+      "columna": "fecha",
       "grano": "semanal",
       "parcial": false
     },
@@ -1772,7 +2041,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -1780,7 +2049,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Sin nombre de territorio: unir con territorios (cod INE; 13 = Madrid). exceso es una proporción, no un porcentaje: 1,57 significa 157 % más que lo habitual; la media 2015-2019 solo está para las semanas con referencia. La fecha 'semana' es el último día de la semana de datos; no sumar semanas de España con las de comunidades."
+    "notas": "fecha es el primer día (lunes) de la semana. El exceso se da en % (0-100) de dos formas: exceso_pct sobre las defunciones brutas y exceso_hab_pct sobre la tasa por habitante de 2015-2019 (descuenta que la población crece, pero no el envejecimiento: no hay defunciones semanales por edad en esta tabla). La media 2015-2019 solo está para las semanas con referencia. El cod 13 es Madrid; no sumar semanas de España con las de comunidades. 1997 no tiene población (sin padrón), así que sus tasas son nulas."
   },
   {
     "tabla": "sanidad_gasto",
@@ -1790,22 +2059,41 @@
       "¿Cuánto gasta España en sanidad por habitante?",
       "¿Qué porcentaje del PIB se dedica a sanidad en España?",
       "¿Gasta España más o menos que la UE en sanidad pública?",
-      "¿Qué parte del gasto sanitario pagan directamente los hogares?"
+      "¿Qué parte del gasto sanitario pagan directamente los hogares?",
+      "¿Cuánto se gasta en sanidad privada en España?",
+      "¿Qué país europeo gasta más en salud por persona?",
+      "¿Cuánto del gasto sanitario sale del bolsillo de la gente?",
+      "¿Cuánto gasta Alemania en sanidad?",
+      "¿Ha subido el gasto en sanidad desde 2010?",
+      "¿Cuánto cuesta la sanidad pública de España al año?"
     ],
     "medidas": [
       {
         "columna": "eur_hab_real",
-        "nombre": "gasto sanitario por habitante en euros constantes (solo España)",
-        "unidad": "€ por habitante (euros de 2025)",
+        "nombre": "gasto sanitario por habitante, en euros constantes",
+        "unidad": "€ por habitante (€ de anio_base)",
         "tipo": "ratio",
         "principal": true
       },
       {
         "columna": "eur_hab",
-        "nombre": "gasto sanitario por habitante en euros corrientes",
+        "nombre": "gasto sanitario por habitante, en euros corrientes del año",
         "unidad": "€ por habitante",
         "tipo": "ratio",
         "real": "eur_hab_real"
+      },
+      {
+        "columna": "millones_eur_real",
+        "nombre": "gasto sanitario total, en euros constantes",
+        "unidad": "millones de € (€ de anio_base)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "millones_eur",
+        "nombre": "gasto sanitario total, en euros corrientes del año",
+        "unidad": "millones de €",
+        "tipo": "flujo",
+        "real": "millones_eur_real"
       },
       {
         "columna": "pct_pib",
@@ -1818,12 +2106,6 @@
         "nombre": "gasto sanitario por habitante en paridad de poder adquisitivo",
         "unidad": "PPS por habitante",
         "tipo": "ratio"
-      },
-      {
-        "columna": "millones_eur",
-        "nombre": "gasto sanitario total",
-        "unidad": "millones de €",
-        "tipo": "flujo"
       }
     ],
     "tiempo": {
@@ -1837,10 +2119,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "geo",
+      "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -1852,7 +2134,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar financiacion = 'Total' para el gasto total; 'Público', 'Seguros voluntarios' y 'Pago directo de los hogares' suman el Total, no mezclarlos. 'UE-27' aparece con geo 'UE' (agregado, no país). eur_hab_real solo existe para España; para comparar países usar pct_pib o pps_hab. Datos hasta 2024 (2025 con huecos)."
+    "notas": "Filtrar financiacion = 'Total' para el gasto total; 'Público', 'Seguros voluntarios' y 'Pago directo de los hogares' suman el Total, no mezclarlos. La UE-27 es una fila con cod_pais EU27_2020 y es_agregado = true (no es un país). Los euros constantes usan el IPCA de cada país (deflactor_paises); para comparar países el gasto por habitante en paridad de poder de compra está en pps_hab, y también hay pct_pib. Datos hasta 2024 (2025 con huecos)."
   },
   {
     "tabla": "sanidad_gasto_ccaa",
@@ -1862,7 +2144,13 @@
       "¿Qué comunidad gasta más en sanidad por habitante?",
       "¿Cuánto gasta Madrid en sanidad pública por habitante?",
       "¿Qué porcentaje del PIB regional dedica Extremadura a sanidad?",
-      "¿Cómo ha evolucionado el gasto sanitario de Andalucía desde 2002?"
+      "¿Cómo ha evolucionado el gasto sanitario de Andalucía desde 2002?",
+      "¿Qué comunidad gasta menos en sanidad?",
+      "¿Cuánto gasta el País Vasco en salud por habitante?",
+      "¿Cuánto se dedica a sanidad en Cataluña?",
+      "¿Gasta más Madrid o Andalucía en sanidad por persona?",
+      "¿Qué comunidad destina mayor parte de su riqueza a la sanidad pública?",
+      "¿Cuánto ha aumentado el gasto sanitario de Galicia?"
     ],
     "medidas": [
       {
@@ -1897,15 +2185,12 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
-      "espana": {
-        "columna": "cod",
-        "valor": "00"
-      }
+      "nombre": "nombre",
+      "espana": null
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Sin nombre de territorio: unir con territorios por cod (INE). La fila cod '00' (nivel total_ccaa) es el total del conjunto de comunidades, no España entera, y no está en la lista de comunidades. No incluye Ceuta ni Melilla. Los dos últimos años (2023 y 2024) son provisionales (provisional = true). Gasto del sector comunidades autónomas, sin mutuas ni gasto de la Administración central."
+    "notas": "La fila cod '00' (nivel total_ccaa, nombre 'Total comunidades autónomas') es el total del conjunto de comunidades, no España entera, y no está en la lista de comunidades. No incluye Ceuta ni Melilla. Los dos últimos años (2023 y 2024) son provisionales (provisional = true). Gasto del sector comunidades autónomas, sin mutuas ni gasto de la Administración central."
   },
   {
     "tabla": "sanidad_listas_especialidad",
@@ -1915,7 +2200,13 @@
       "¿Cuántos pacientes esperan una operación de traumatología?",
       "¿Qué especialidad tiene más días de espera?",
       "¿Cuánto se tarda en ver al dermatólogo?",
-      "¿Cómo ha evolucionado la lista de espera de cirugía de cataratas (oftalmología)?"
+      "¿Cómo ha evolucionado la lista de espera de cirugía de cataratas (oftalmología)?",
+      "¿Cuántos días hay que esperar para ver al neurólogo?",
+      "¿Cuántos pacientes esperan operarse de cirugía general?",
+      "¿Qué especialidad tiene más gente esperando más de seis meses?",
+      "¿Cuántas personas esperan una consulta de ginecología?",
+      "¿Ha mejorado la espera de otorrinolaringología?",
+      "¿Cuántos pacientes por cada 1.000 habitantes esperan una operación de rodilla?"
     ],
     "medidas": [
       {
@@ -1974,7 +2265,13 @@
       "¿Cuántas personas esperan una operación en España?",
       "¿Qué comunidad tiene las listas de espera más largas?",
       "¿Cuántos días se espera de media una operación en Madrid?",
-      "¿Cómo han evolucionado las listas de espera quirúrgicas desde 2016?"
+      "¿Cómo han evolucionado las listas de espera quirúrgicas desde 2016?",
+      "¿Qué comunidad tiene menos espera para operarse?",
+      "¿Cuánta gente espera más de seis meses para una operación?",
+      "¿Cuántos días tarda un especialista en Canarias?",
+      "¿Cuántos pacientes esperan una consulta en Cataluña?",
+      "¿Cuántos pacientes por cada 1.000 habitantes hay en lista de espera en Andalucía?",
+      "¿Han subido o bajado las colas de operaciones desde la pandemia?"
     ],
     "medidas": [
       {
@@ -2015,7 +2312,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -2036,7 +2333,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Dos cortes al año (30 de junio y 31 de diciembre, columna corte); para comparar años usar siempre el mismo corte, normalmente 'diciembre'. Filtrar por tipo: 'quirurgica' o 'consultas' no son comparables entre sí, y pacientes solo existe en quirúrgica. Sin nombre de territorio: unir con territorios por cod (INE; España = '00', 13 = Madrid). Las comunidades empiezan en diciembre de 2016."
+    "notas": "Dos cortes al año (30 de junio y 31 de diciembre, columna corte); para comparar años usar siempre el mismo corte, normalmente 'diciembre'. Filtrar por tipo: 'quirurgica' o 'consultas' no son comparables entre sí, y pacientes solo existe en quirúrgica. Territorio: cod INE (España = '00', 13 = Madrid) y nombre. Las comunidades empiezan en diciembre de 2016."
   },
   {
     "tabla": "sanidad_recursos",
@@ -2046,7 +2343,13 @@
       "¿Cuántos médicos hay por habitante en España?",
       "¿Qué país europeo tiene más camas de hospital por habitante?",
       "¿Tiene España más enfermeras que la media europea?",
-      "¿Cómo han evolucionado las camas hospitalarias en España desde 1990?"
+      "¿Cómo han evolucionado las camas hospitalarias en España desde 1990?",
+      "¿Cuántas enfermeras hay por cada 1.000 habitantes en Alemania?",
+      "¿Qué país tiene menos médicos por habitante?",
+      "¿Cuántas camas de hospital tiene Francia?",
+      "¿Cuántos médicos hay en total en España?",
+      "¿Estamos mejor o peor que Italia en número de enfermeras?",
+      "¿Cuántas camas hay por cada mil personas en la media europea?"
     ],
     "medidas": [
       {
@@ -2055,12 +2358,6 @@
         "unidad": "por cada 1.000 habitantes",
         "tipo": "tasa",
         "principal": true
-      },
-      {
-        "columna": "por_100k",
-        "nombre": "profesionales o camas por cada 100.000 habitantes",
-        "unidad": "por cada 100.000 habitantes",
-        "tipo": "tasa"
       },
       {
         "columna": "numero",
@@ -2077,13 +2374,13 @@
     "territorio": {
       "niveles": [
         "pais",
-        "pais_extranjero"
+        "agregado"
       ],
-      "nivel": null,
-      "codigo": "geo",
+      "nivel": "nivel",
+      "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -2100,7 +2397,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por recurso. situacion: 'PRACT' (ejerciendo) es la definición habitual de médicos y enfermeras, 'PACT' (activo profesional) es más amplia y 'mixta' la usa la media de la UE; camas usa 'total' (y 'mixta' en la media UE). No sumar situaciones. La media de la UE tiene geo 'UE' y pais 'UE-27 (media)', ponderada por población de los países con dato; no es un país. Enfermeras ejerciendo se aproximan por 'PRACT'."
+    "notas": "Filtrar siempre por recurso. Una sola fila por país, año y recurso: médicos y enfermeras ejerciendo ('ejerciendo') o, si el país no informa ese año, profesionalmente activos ('activo'); situacion lo dice y no hay que filtrarla. Camas: 'total'. La media de la UE tiene cod_pais 'EU27_2020', pais 'UE-27 (media)' y nivel 'agregado', ponderada por población de los países con dato (n_paises); no es un país. cod_pais es ISO alfa-2 (Grecia = GR)."
   },
   {
     "tabla": "sanidad_recursos_ccaa",
@@ -2110,7 +2407,13 @@
       "¿Qué comunidad tiene más médicos por habitante?",
       "¿Cuántas camas de hospital hay por cada 1.000 habitantes en Madrid?",
       "¿Cuántos médicos hay en Andalucía?",
-      "¿Cómo han evolucionado las camas hospitalarias en Castilla y León?"
+      "¿Cómo han evolucionado las camas hospitalarias en Castilla y León?",
+      "¿Qué comunidad tiene menos camas de hospital?",
+      "¿Cuántos médicos hay en Cataluña?",
+      "¿Cuántos médicos por cada 100.000 habitantes tiene Navarra?",
+      "¿Dónde hay más doctores por habitante, en Madrid o en Murcia?",
+      "¿Cuántas camas hospitalarias tiene Andalucía?",
+      "¿Han perdido camas los hospitales de Aragón?"
     ],
     "medidas": [
       {
@@ -2145,7 +2448,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "cod",
         "valor": "00"
@@ -2159,7 +2462,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por recurso: 'medicos' y 'camas' son magnitudes distintas. Sin nombre de territorio: unir con territorios por cod (INE; España = '00'; 13 = Madrid). nuts2 es el código europeo alternativo (ES30 = Madrid). Médicos de Eurostat (ejerciendo) y camas hospitalarias totales; Ceuta y Melilla pueden faltar algunos años. Último año 2024."
+    "notas": "Filtrar siempre por recurso: 'medicos' y 'camas' son magnitudes distintas. Territorio: cod INE (España = '00'; 13 = Madrid) y nombre. nuts2 es el código europeo alternativo (ES30 = Madrid). Médicos de Eurostat (ejerciendo) y camas hospitalarias totales; Ceuta y Melilla pueden faltar algunos años. Último año 2024."
   },
   {
     "tabla": "territorios",
@@ -2174,16 +2477,21 @@
       "¿Cuál es la puntuación de España en el índice de percepción de la corrupción?",
       "¿Qué país de la UE es menos corrupto?",
       "¿En qué puesto está España de la UE en control de la corrupción?",
-      "¿Cómo ha evolucionado la corrupción percibida en España desde 2012?"
+      "¿Cómo ha evolucionado la corrupción percibida en España desde 2012?",
+      "¿Qué nota saca España en Estado de derecho?",
+      "¿Qué país está mejor en el índice de corrupción?",
+      "¿Cuánta corrupción percibida hay en Italia frente a España?",
+      "¿Ha empeorado España en transparencia estos años?",
+      "¿Qué país de la OCDE es más limpio?",
+      "¿En qué puesto mundial está España en democracia?"
     ],
     "medidas": [
       {
         "columna": "valor",
-        "nombre": "puntuación del indicador elegido (la escala depende de la unidad)",
-        "unidad": "",
+        "nombre": "puntuación del indicador elegido (0 a 100; ver sentido)",
+        "unidad": "puntos 0-100",
         "tipo": "indice",
-        "principal": true,
-        "unidad_columna": "unidad"
+        "principal": true
       },
       {
         "columna": "puesto_ue",
@@ -2217,8 +2525,8 @@
       "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "pais",
-        "valor": "España"
+        "columna": "cod_pais",
+        "valor": "ES"
       }
     },
     "dimensiones": [
@@ -2245,6 +2553,6 @@
       }
     ],
     "filtros": [],
-    "notas": "Filtrar siempre por indicador_id (la cifra de referencia es 'cpi', Índice de Percepción de la Corrupción, 0 a 100, 100 = muy limpio). Las escalas y el sentido cambian: en V-Dem (vdem_*, sentido negativo, 0 a 1) un valor alto es MÁS corrupción; en los demás, más es mejor. Las medias 'Unión Europea (media simple)' y 'OCDE (media simple)' (es_agregado = true) solo existen en WGI y V-Dem (no en CPI ni WJP) y no son países. Los puestos solo existen entre UE y OCDE."
+    "notas": "Filtrar siempre por indicador_id (la cifra de referencia es 'cpi', Índice de Percepción de la Corrupción, 100 = muy limpio). valor va siempre en puntos 0-100 (los índices 0-1 de WJP y V-Dem se muestran multiplicados por 100). El sentido cambia: en V-Dem (vdem_*, sentido negativo) un valor alto es MÁS corrupción; en los demás, más es mejor. cod_pais es ISO alfa-2 (EU27_2020 la media de la UE, OECD la de la OCDE). Las medias 'Unión Europea (media simple)' y 'OCDE (media simple)' (es_agregado = true) solo existen en WGI y V-Dem (no en CPI ni WJP) y no son países. Los puestos solo existen entre UE y OCDE."
   }
 ]

@@ -74,7 +74,7 @@
 		"tablas_oro": [
 			"mother.mercado_energia_hogares"
 		],
-		"sql_oro": "SELECT semestre, pais, eur_kwh, eur_kwh_real FROM mother.mercado_energia_hogares WHERE energia='Electricidad' AND geo IN ('ES','EU27_2020') ORDER BY semestre_inicio DESC LIMIT 4",
+		"sql_oro": "SELECT semestre, pais, eur_kwh, eur_kwh_real FROM mother.mercado_energia_hogares WHERE energia='Electricidad' AND cod_pais IN ('ES','EU27_2020') ORDER BY fecha DESC LIMIT 4",
 		"respuesta": {
 			"valor": 0.2669,
 			"unidad": "€/kWh con impuestos (banda DC, nominal)",
@@ -111,7 +111,7 @@
 		"tablas_oro": [
 			"mother.gobierno_presupuestos"
 		],
-		"sql_oro": "SELECT ejercicio, situacion, ley, fecha_publicacion, dias_prorroga FROM mother.gobierno_presupuestos ORDER BY ejercicio DESC LIMIT 4",
+		"sql_oro": "SELECT anio, situacion, ley, fecha_publicacion, dias_prorroga FROM mother.gobierno_presupuestos ORDER BY anio DESC LIMIT 4",
 		"respuesta": {
 			"valor": 2023,
 			"unidad": "último ejercicio con Ley de PGE aprobada",
@@ -232,7 +232,7 @@
 		"tablas_oro": [
 			"mother.sanidad_recursos"
 		],
-		"sql_oro": "SELECT anio, pais, por_100k, por_1000, numero FROM mother.sanidad_recursos WHERE recurso='enfermeras' AND geo IN ('ES','UE') ORDER BY anio DESC LIMIT 4",
+		"sql_oro": "SELECT anio, pais, por_1000, numero FROM mother.sanidad_recursos WHERE recurso='enfermeras' AND cod_pais IN ('ES','EU27_2020') ORDER BY anio DESC LIMIT 4",
 		"respuesta": {
 			"valor": 573.31,
 			"unidad": "enfermeras ejerciendo por 100.000 hab.",
@@ -338,7 +338,7 @@
 		"tablas_oro": [
 			"mother.crimen_condenados"
 		],
-		"sql_oro": "SELECT anio, condenados, tasa_1000 FROM mother.crimen_condenados WHERE cod_ccaa='00' AND sexo='Total' AND nacionalidad='Total' ORDER BY anio DESC LIMIT 2",
+		"sql_oro": "SELECT anio, condenados, tasa_1000 FROM mother.crimen_condenados WHERE nivel='pais' AND sexo='Total' AND nacionalidad='Total' ORDER BY anio DESC LIMIT 2",
 		"respuesta": {
 			"valor": 306237,
 			"unidad": "condenados adultos",
@@ -374,7 +374,7 @@
 		"tablas_oro": [
 			"mother.salud_mortalidad_semanal"
 		],
-		"sql_oro": "SELECT semana, semana_anio, defunciones, media_2015_2019, exceso FROM mother.salud_mortalidad_semanal WHERE nivel='pais' AND anio=2020 ORDER BY defunciones DESC LIMIT 3",
+		"sql_oro": "SELECT fecha, semana_anio, defunciones, media_2015_2019, exceso_pct FROM mother.salud_mortalidad_semanal WHERE nivel='pais' AND anio=2020 ORDER BY defunciones DESC LIMIT 3",
 		"respuesta": {
 			"valor": 20989,
 			"unidad": "defunciones en una semana",

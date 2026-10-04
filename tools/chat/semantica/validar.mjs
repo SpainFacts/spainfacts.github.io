@@ -3,6 +3,8 @@
 // tabla y que el formato sea el de LEEME.md.
 //
 //   node tools/chat/semantica/validar.mjs [lote-3.json ...]
+//   node tools/chat/semantica/validar.mjs --db data/limpieza-1.duckdb [--tablas a,b]   (contra un DuckDB
+//     local con los modelos ya reconstruidos, en vez de los parquets publicados)
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,16 +12,36 @@ import { fileURLToPath } from 'node:url';
 import { DuckDBInstance } from '@duckdb/node-api';
 
 const aqui = path.dirname(fileURLToPath(import.meta.url));
-const DATOS = '.evidence/template/static/data/mother';
+const DATOS = (process.env.SPAINFACTS_PARQUETS ? process.env.SPAINFACTS_PARQUETS.replace(/\\/g, '/') + '/mother' : '.evidence/template/static/data/mother');
 const TIPOS = new Set(['flujo', 'nivel', 'tasa', 'porcentaje', 'media', 'precio', 'indice', 'ratio']);
 const GRANOS = new Set(['diario', 'semanal', 'mensual', 'trimestral', 'semestral', 'anual', 'curso', 'sin_tiempo']);
 
-const ficheros = process.argv.slice(2).length
-	? process.argv.slice(2).map((f) => (path.isAbsolute(f) ? f : path.join(aqui, path.basename(f))))
+const args = process.argv.slice(2);
+const opcion = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
+const DB = opcion('--db');
+const SOLO = opcion('--tablas') ? new Set(opcion('--tablas').split(',')) : null;
+const sueltos = args.filter((a, i) => a.endsWith('.json') && !['--db', '--tablas'].includes(args[i - 1]));
+const ficheros = sueltos.length
+	? sueltos.map((f) => (path.isAbsolute(f) ? f : path.join(aqui, path.basename(f))))
 	: fs.readdirSync(aqui).filter((f) => /^lote-.*\.json$/.test(f)).map((f) => path.join(aqui, f));
 
 const con = await (await DuckDBInstance.create(':memory:')).connect();
 const q = async (sql) => (await con.runAndReadAll(sql)).getRowObjectsJS();
+if (DB) {
+	await con.run(`ATTACH '${DB.replace(/'/g, "''")}' AS datos (READ_ONLY)`);
+	await con.run("SET search_path = 'datos.main'");
+}
+/** La tabla publicada: su sources/mother/<tabla>.sql sobre el DuckDB, o el parquet extraído */
+function origen(tabla) {
+	if (!DB) {
+		const parquet = `${DATOS}/${tabla}/${tabla}.parquet`;
+		return fs.existsSync(parquet) ? `read_parquet('${parquet}')` : null;
+	}
+	const f = `sources/mother/${tabla}.sql`;
+	if (!fs.existsSync(f)) return null;
+	const sql = fs.readFileSync(f, 'utf8').replace(/--[^\n]*/g, '').trim().replace(/;$/, '');
+	return `(${sql})`;
+}
 const lit = (v) => `'${String(v).replace(/'/g, "''")}'`;
 
 let errores = 0;
@@ -37,15 +59,15 @@ for (const f of ficheros) {
 	for (const s of lista) {
 		fichas++;
 		const mal = [];
-		const parquet = `${DATOS}/${s.tabla}/${s.tabla}.parquet`;
 		if (vistas.has(s.tabla)) mal.push('tabla repetida');
 		vistas.add(s.tabla);
-		if (!fs.existsSync(parquet)) {
-			console.log(`✗ ${s.tabla}: no existe el parquet`);
+		if (SOLO && !SOLO.has(s.tabla)) continue;
+		const fuente = origen(s.tabla);
+		if (!fuente) {
+			console.log(`✗ ${s.tabla}: no existe la tabla publicada`);
 			errores++;
 			continue;
 		}
-		const fuente = `read_parquet('${parquet}')`;
 		const cols = new Map((await q(`DESCRIBE SELECT * FROM ${fuente}`)).map((c) => [c.column_name, c.column_type]));
 		const existe = (c, donde) => {
 			if (c !== null && c !== undefined && !cols.has(c)) mal.push(`${donde}: no existe la columna ${c}`);

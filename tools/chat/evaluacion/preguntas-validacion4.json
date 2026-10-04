@@ -156,7 +156,7 @@
 		"pregunta": "¿Las fábricas españolas producen más o menos que hace un año?",
 		"tipo": "actual",
 		"tablas_oro": ["mother.industria_ipi_mensual"],
-		"sql_oro": "SELECT nombre, destino, mes, indice, variacion_anual_pct, variacion_acumulada_pct FROM mother.industria_ipi_mensual WHERE es_ultimo_mes AND cod_ccaa='00' AND destino='Total industria'",
+		"sql_oro": "SELECT nombre, destino, fecha, indice, variacion_anual_pct, variacion_acumulada_pct FROM mother.industria_ipi_mensual WHERE es_ultimo_mes AND nivel='pais' AND destino='Total industria'",
 		"respuesta": {
 			"valor": 2.6,
 			"unidad": "% de variación interanual de la producción industrial (IPI)",
@@ -194,7 +194,7 @@
 		"pregunta": "¿Cuántos robos con fuerza en casas y negocios hay en lo que va de año?",
 		"tipo": "actual",
 		"tablas_oro": ["mother.crimen_ultimo_periodo"],
-		"sql_oro": "SELECT anio, periodo, territorio, categoria, infracciones, infracciones_anio_anterior FROM mother.crimen_ultimo_periodo WHERE nivel='pais' AND categoria LIKE 'Robos con fuerza%'",
+		"sql_oro": "SELECT anio, periodo, nombre, categoria, infracciones, infracciones_anio_anterior FROM mother.crimen_ultimo_periodo WHERE nivel='pais' AND categoria LIKE 'Robos con fuerza%'",
 		"respuesta": {
 			"valor": 47738,
 			"unidad": "infracciones penales de robos con fuerza (domicilios, establecimientos...)",
@@ -289,7 +289,7 @@
 		"pregunta": "¿Cuánto cobra de media un trabajador público en el País Vasco?",
 		"tipo": "territorio",
 		"tablas_oro": ["mother.empleo_salarios_ccaa", "mother.territorios"],
-		"sql_oro": "SELECT t.nombre, s.anio, s.salario_publico, s.salario_privado, s.salario_total FROM mother.empleo_salarios_ccaa s JOIN mother.territorios t ON t.nivel='ccaa' AND t.cod=s.cod_ccaa WHERE t.nombre='País Vasco'",
+		"sql_oro": "SELECT t.nombre, s.anio, s.salario_publico, s.salario_privado, s.salario_total FROM mother.empleo_salarios_ccaa s JOIN mother.territorios t ON t.nivel='ccaa' AND t.cod=s.cod WHERE t.nombre='País Vasco'",
 		"respuesta": {
 			"valor": 42799.53,
 			"unidad": "€ de salario medio anual bruto en el sector público",
@@ -346,7 +346,7 @@
 		"pregunta": "¿Cuántos megavatios de bombeo hidráulico hay en Cataluña?",
 		"tipo": "territorio",
 		"tablas_oro": ["mother.almacenamiento_potencia"],
-		"sql_oro": "SELECT mes, tipo, comunidad, mw FROM mother.almacenamiento_potencia WHERE tipo='bombeo_puro' AND comunidad='Cataluña' ORDER BY mes DESC LIMIT 2",
+		"sql_oro": "SELECT fecha, tipo, ccaa, mw FROM mother.almacenamiento_potencia WHERE tipo='bombeo_puro' AND ccaa='Cataluña' ORDER BY fecha DESC LIMIT 2",
 		"respuesta": {
 			"valor": 439.84,
 			"unidad": "MW de bombeo puro instalados",
@@ -498,7 +498,7 @@
 		"pregunta": "¿Qué país europeo tiene más vivienda social o pública de alquiler?",
 		"tipo": "ranking",
 		"tablas_oro": ["mother.vivienda_publica_internacional"],
-		"sql_oro": "SELECT serie, pais, anio, valor FROM mother.vivienda_publica_internacional WHERE es_ultimo AND NOT es_agregado ORDER BY valor DESC LIMIT 4",
+		"sql_oro": "SELECT pais, anio, pct_parque_total FROM mother.vivienda_publica_internacional WHERE es_ultimo AND NOT es_agregado AND pct_parque_total IS NOT NULL ORDER BY pct_parque_total DESC LIMIT 4",
 		"respuesta": {
 			"valor": 34.07,
 			"unidad": "% del parque de viviendas (OCDE, 2021); 29 % de los hogares en la serie de la UE (2023)",
@@ -536,7 +536,7 @@
 		"pregunta": "¿Cuánto ha caído la actividad de la construcción desde 2007, en plena burbuja?",
 		"tipo": "evolucion",
 		"tablas_oro": ["mother.construccion_produccion"],
-		"sql_oro": "SELECT max(indice_2021) FILTER (WHERE anio=2007) AS i2007, max(indice_2021) FILTER (WHERE anio=2025) AS i2025, 100*(max(indice_2021) FILTER (WHERE anio=2025)/max(indice_2021) FILTER (WHERE anio=2007)-1) AS cambio_pct FROM mother.construccion_produccion WHERE pais='ES' AND rama='F'",
+		"sql_oro": "SELECT max(indice_2021) FILTER (WHERE anio=2007) AS i2007, max(indice_2021) FILTER (WHERE anio=2025) AS i2025, 100*(max(indice_2021) FILTER (WHERE anio=2025)/max(indice_2021) FILTER (WHERE anio=2007)-1) AS cambio_pct FROM mother.construccion_produccion WHERE cod_pais='ES' AND rama='F'",
 		"respuesta": {
 			"valor": -42.02,
 			"unidad": "% de variación del índice de producción en la construcción",
@@ -555,7 +555,7 @@
 		"pregunta": "¿Cuánto más recauda el Estado de IVA que antes de la pandemia, en 2019?",
 		"tipo": "evolucion",
 		"tablas_oro": ["mother.cuentas_ingresos", "mother.deflactor"],
-		"sql_oro": "SELECT max(millones_euros) FILTER (WHERE año=2019) AS iva_2019, max(millones_euros) FILTER (WHERE año=2024) AS iva_2024, 100*(max(millones_euros) FILTER (WHERE año=2024)/max(millones_euros) FILTER (WHERE año=2019)-1) AS nominal_pct, 100*(max(millones_euros*factor) FILTER (WHERE año=2024)/max(millones_euros*factor) FILTER (WHERE año=2019)-1) AS real_pct FROM mother.cuentas_ingresos c JOIN mother.deflactor d ON d.anio=c.año WHERE categoria='IVA'",
+		"sql_oro": "SELECT max(millones_euros) FILTER (WHERE c.anio=2019) AS iva_2019, max(millones_euros) FILTER (WHERE c.anio=2024) AS iva_2024, 100*(max(millones_euros) FILTER (WHERE c.anio=2024)/max(millones_euros) FILTER (WHERE c.anio=2019)-1) AS nominal_pct, 100*(max(millones_euros*factor) FILTER (WHERE c.anio=2024)/max(millones_euros*factor) FILTER (WHERE c.anio=2019)-1) AS real_pct FROM mother.cuentas_ingresos c JOIN mother.deflactor d ON d.anio=c.anio WHERE categoria='IVA'",
 		"respuesta": {
 			"valor": 26.71,
 			"unidad": "% de subida de la recaudación de IVA (nominal)",
@@ -688,7 +688,7 @@
 		"pregunta": "¿Cuántas toneladas de CO2 echaba a la atmósfera la producción de electricidad en 2007?",
 		"tipo": "anio",
 		"tablas_oro": ["mother.energia_emisiones_gei"],
-		"sql_oro": "SELECT año, sector, millones_toneladas_co2eq, porcentaje_total FROM mother.energia_emisiones_gei WHERE sector='Generación Eléctrica' AND año IN (2007, 2024) ORDER BY año",
+		"sql_oro": "SELECT anio, sector, millones_toneladas_co2eq, cuota_pct FROM mother.energia_emisiones_gei WHERE sector='Generación Eléctrica' AND anio IN (2007, 2024) ORDER BY anio",
 		"respuesta": {
 			"valor": 109.36,
 			"unidad": "millones de toneladas de CO2 equivalente",
@@ -707,18 +707,18 @@
 		"pregunta": "¿Cuánto se gastaba al año por cada alumno de la ESO en 2015?",
 		"tipo": "anio",
 		"tablas_oro": ["mother.educacion_gasto_alumno"],
-		"sql_oro": "SELECT anio, nivel, eur, eur_real, pps FROM mother.educacion_gasto_alumno WHERE nivel_geo='pais' AND isced11='ED2' AND anio IN (2015, 2023) ORDER BY anio",
+		"sql_oro": "SELECT anio, nivel_educativo, eur, eur_real, pps FROM mother.educacion_gasto_alumno WHERE cod_pais='ES' AND isced11='ED2' AND anio IN (2015, 2023) ORDER BY anio",
 		"respuesta": {
 			"valor": 5854,
 			"unidad": "€ por alumno y año en centros de ESO (nominal)",
 			"periodo": "2015",
 			"territorio": "España",
-			"detalle": "En euros constantes de 2025: 7.421 €. En 2023: 7.914 € nominales (8.351 € reales)"
+			"detalle": "En euros constantes de 2025: 7.414 €. En 2023: 7.914 € nominales (8.361 € reales)"
 		},
 		"acepta": {
-			"cifras": [["5.854", "5854", "5.800", "7.421", "7.420", "7.421 €"]],
+			"cifras": [["5.854", "5854", "5.800", "7.414", "7.410", "7.414 €"]],
 			"textos": [["2015"]],
-			"alternativas": "Eurostat: gasto de 5.854 € por alumno de ESO en 2015 (7.421 € en euros de 2025)."
+			"alternativas": "Eurostat: gasto de 5.854 € por alumno de ESO en 2015 (7.414 € en euros de 2025)."
 		}
 	},
 	{

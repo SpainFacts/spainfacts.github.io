@@ -7,7 +7,13 @@
       "¿Quién es el alcalde de Cieza?",
       "¿Cuántos alcaldes del PP hay en la provincia de Burgos?",
       "¿Qué municipios llevan más años con el mismo alcalde?",
-      "¿En cuántos municipios ha cambiado el partido del alcalde en el último mandato?"
+      "¿En cuántos municipios ha cambiado el partido del alcalde en el último mandato?",
+      "¿Quién manda en el ayuntamiento de Lorca?",
+      "Dime la alcaldesa de Vigo y de qué partido es",
+      "¿Cuántos años lleva el mismo partido gobernando en mi pueblo?",
+      "¿Qué alcaldes del PSOE hay en la provincia de Jaén?",
+      "¿Cuántos mandatos seguidos lleva el PP en la alcaldía de Valladolid?",
+      "¿Qué pueblos tienen una comisión gestora en lugar de alcalde?"
     ],
     "medidas": [
       {
@@ -74,7 +80,13 @@
       "¿Qué partido gobierna más ayuntamientos en España?",
       "¿Qué porcentaje de la población vive en municipios gobernados por el PSOE?",
       "¿Cuántas alcaldías tiene el PP en Andalucía?",
-      "¿Qué partido manda en más ayuntamientos de la provincia de Madrid?"
+      "¿Qué partido manda en más ayuntamientos de la provincia de Madrid?",
+      "¿Cuántos pueblos gobierna cada partido en Castilla-La Mancha?",
+      "¿Qué porcentaje de ayuntamientos tiene el PP en toda España?",
+      "¿Cuánta gente vive en ciudades gobernadas por el PP?",
+      "¿Qué partido tiene más alcaldías en la provincia de Zaragoza?",
+      "¿Cuántos ayuntamientos están en manos de independientes y listas locales?",
+      "¿Qué comunidad tiene más alcaldes socialistas?"
     ],
     "medidas": [
       {
@@ -112,7 +124,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -126,60 +138,12 @@
       }
     ],
     "filtros": [],
-    "notas": "Mandato 2023-2027, foto actual. No hay columna de nombre: el territorio se identifica por el código (España 00, comunidades 01-19, provincias 01-52, según el nivel). No sumar entre niveles. Los porcentajes ya son sobre el total del territorio."
+    "notas": "Mandato 2023-2027, foto actual. También da el total de España (nivel = pais, cod = 00), con el nombre en la columna nombre. No sumar entre niveles. Los porcentajes ya son sobre el total del territorio. 25 familias, incluida Independientes y locales y Comisión gestora."
   },
   {
     "tabla": "alcaldes_historia",
     "notas": "Historial de alcaldes (una fila por periodo) sin cifra que consultar: sirve para listar; para preguntas con cifra, alcaldes_actuales o alcaldes_familias_territorio.",
     "usar": false
-  },
-  {
-    "tabla": "alcaldes_resumen_familias",
-    "usar": true,
-    "tema": "Reparto nacional de alcaldías y población gobernada entre partidos tras las municipales de 2023",
-    "preguntas": [
-      "¿Cuántos ayuntamientos gobierna el PP en España?",
-      "¿Qué partido gobierna a más población?",
-      "¿Cuántas alcaldías tiene Vox?"
-    ],
-    "medidas": [
-      {
-        "columna": "pct_poblacion",
-        "nombre": "porcentaje de la población española que gobierna el partido",
-        "unidad": "% de la población",
-        "tipo": "porcentaje",
-        "principal": true
-      },
-      {
-        "columna": "pct_ayuntamientos",
-        "nombre": "porcentaje de los ayuntamientos de España que gobierna el partido",
-        "unidad": "% de los ayuntamientos",
-        "tipo": "porcentaje"
-      },
-      {
-        "columna": "n_ayuntamientos",
-        "nombre": "número de ayuntamientos gobernados",
-        "unidad": "ayuntamientos",
-        "tipo": "nivel"
-      },
-      {
-        "columna": "poblacion_gobernada",
-        "nombre": "población gobernada",
-        "unidad": "habitantes",
-        "tipo": "nivel"
-      }
-    ],
-    "tiempo": null,
-    "territorio": null,
-    "dimensiones": [
-      {
-        "columna": "familia",
-        "nombre": "familia política",
-        "total": null
-      }
-    ],
-    "filtros": [],
-    "notas": "Solo total España; para comunidades o provincias usar alcaldes_familias_territorio. 25 familias, incluida Independientes y locales y Comisión gestora."
   },
   {
     "tabla": "almacenamiento_acceso",
@@ -188,7 +152,14 @@
     "preguntas": [
       "¿Cuánta capacidad de acceso para almacenamiento se ha concedido en Andalucía?",
       "¿Qué comunidad tiene más almacenamiento en tramitación?",
-      "¿Cuántos nudos de la red admiten almacenamiento en Cataluña?"
+      "¿Cuántos nudos de la red admiten almacenamiento en Cataluña?",
+      "¿Cuántos megavatios de baterías tienen permiso para conectarse a la red en Castilla-La Mancha?",
+      "¿Qué comunidad tiene más permisos de acceso para almacenar energía?",
+      "¿Cuánto almacenamiento está pendiente de aprobar en Aragón?",
+      "¿Cuántos puntos de la red eléctrica admiten baterías en Extremadura?",
+      "¿Cómo ha cambiado el acceso concedido para almacenamiento durante el último año?",
+      "¿Cuánta capacidad de baterías y bombeo en trámite hay en total en España?",
+      "¿En qué comunidades hay más puntos de conexión para guardar electricidad?"
     ],
     "medidas": [
       {
@@ -212,7 +183,7 @@
       }
     ],
     "tiempo": {
-      "columna": "fecha_fichero",
+      "columna": "fecha",
       "grano": "mensual",
       "parcial": false
     },
@@ -222,12 +193,12 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": "comunidad",
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Solo dos ficheros mensuales (septiembre y octubre de 2026); cada uno es una foto completa, así que no se suman entre ficheros: tomar el último. Los nombres de comunidad son los de REE (Comunidad Foral de Navarra, etc.)."
+    "notas": "Cada fichero mensual de REE es una foto completa, así que no se suman entre meses: para la situación actual filtrar es_ultimo = true. Los nombres de comunidad son los de REE (Comunidad Foral de Navarra, etc.)."
   },
   {
     "tabla": "almacenamiento_diario",
@@ -236,7 +207,14 @@
     "preguntas": [
       "¿Cuánta energía entregaron las baterías ayer?",
       "¿Cuál fue el día de mayor turbinado de bombeo?",
-      "¿Cómo ha evolucionado el uso de baterías desde 2025?"
+      "¿Cómo ha evolucionado el uso de baterías desde 2025?",
+      "¿Cuánta electricidad dieron ayer las baterías en toda España?",
+      "¿Cuánta agua se bombeó ayer para guardar energía?",
+      "¿Qué día se cargaron más las baterías?",
+      "¿Cuál ha sido la mayor potencia que han dado las baterías en un momento del día?",
+      "¿Cuánta luz generó el bombeo la semana pasada?",
+      "¿Cuánta energía se gastó en subir agua a los embalses de bombeo el mes pasado?",
+      "¿Cuántos MWh almacenaron las baterías el último día con datos?"
     ],
     "medidas": [
       {
@@ -314,7 +292,14 @@
     "preguntas": [
       "¿Cuánta electricidad generó el bombeo en agosto de 2026?",
       "¿Qué rendimiento tiene el bombeo hidráulico?",
-      "¿Cómo ha crecido la energía entregada por baterías?"
+      "¿Cómo ha crecido la energía entregada por baterías?",
+      "¿Cuánta luz se almacena en baterías cada mes en España?",
+      "¿Cuánta electricidad se gastó en bombear agua en julio?",
+      "¿Cuánto ha subido lo que entregan las baterías desde que hay datos?",
+      "¿Cuánta energía se pierde en el bombeo?",
+      "¿Qué mes del año generó más el bombeo hidráulico?",
+      "¿Cuántos GWh cargaron las baterías el año pasado?",
+      "¿Cómo ha evolucionado la producción del bombeo desde 2015?"
     ],
     "medidas": [
       {
@@ -343,15 +328,14 @@
         "tipo": "flujo"
       },
       {
-        "columna": "rendimiento_bombeo",
+        "columna": "rendimiento_bombeo_pct",
         "nombre": "rendimiento del bombeo (energía turbinada entre consumida)",
         "unidad": "%",
-        "tipo": "ratio",
-        "escala": 100
+        "tipo": "ratio"
       }
     ],
     "tiempo": {
-      "columna": "mes",
+      "columna": "fecha",
       "grano": "mensual",
       "parcial": true
     },
@@ -366,7 +350,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Balance REE nacional. El último mes (octubre de 2026) está empezado y es incompleto. Las baterías solo tienen datos desde hace pocos años (nulo antes). El rendimiento es una fracción, no un porcentaje."
+    "notas": "Balance REE nacional. El último mes (es_parcial = true) está empezado y es incompleto. Las baterías solo tienen datos desde hace pocos años (nulo antes)."
   },
   {
     "tabla": "almacenamiento_potencia",
@@ -375,7 +359,14 @@
     "preguntas": [
       "¿Cuánta potencia de bombeo hay en Castilla y León?",
       "¿Qué comunidad tiene más baterías hibridadas?",
-      "¿Cómo ha crecido la potencia de baterías en Andalucía?"
+      "¿Cómo ha crecido la potencia de baterías en Andalucía?",
+      "¿Cuántos megavatios de baterías hay instalados en Cataluña?",
+      "¿Qué comunidad tiene más centrales de bombeo?",
+      "¿Cuánta potencia de bombeo hay en toda España?",
+      "¿Cuánta potencia de almacenamiento había hace dos años en Galicia?",
+      "¿Cuántas baterías conectadas a plantas solares hay en Andalucía?",
+      "¿Dónde está la mayor parte del bombeo puro de España?",
+      "¿Cuánto ha crecido la capacidad de baterías desde que hay datos?"
     ],
     "medidas": [
       {
@@ -387,7 +378,7 @@
       }
     ],
     "tiempo": {
-      "columna": "mes",
+      "columna": "fecha",
       "grano": "mensual",
       "parcial": false
     },
@@ -397,7 +388,7 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": "comunidad",
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [
@@ -408,7 +399,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Dos tipos: bombeo_puro y baterias_hibridadas; no mezclar si se pregunta por uno solo, y para el total nacional sumar las comunidades en un mismo mes. Es una potencia instalada (foto), no se suma entre meses. Últimos valores nacionales: unos 3.331 MW de bombeo y 256 MW de baterías hibridadas."
+    "notas": "Dos tipos: bombeo_puro y baterias_hibridadas; no mezclar si se pregunta por uno solo, y para el total nacional sumar las comunidades en un mismo mes. Es una potencia instalada (foto), no se suma entre meses: para la cifra actual filtrar es_ultimo = true."
   },
   {
     "tabla": "calor_anual",
@@ -418,7 +409,13 @@
       "¿Cuál fue el año más caluroso en España?",
       "¿Cuántos grados por encima de lo normal estuvo 2022?",
       "¿Cuántos récords de calor se batieron el año pasado?",
-      "¿Cómo ha evolucionado la temperatura máxima desde 1991?"
+      "¿Cómo ha evolucionado la temperatura máxima desde 1991?",
+      "¿Cuántos grados más hace ahora que antes en España?",
+      "¿Cuál ha sido el verano más caluroso desde 1991?",
+      "¿Cuántos días de calor extremo hubo el año pasado?",
+      "¿Cuántos récords de temperatura se han batido cada año?",
+      "¿Está subiendo la temperatura media en España?",
+      "¿Cuánto se desvió la temperatura media de 2023 respecto a lo normal?"
     ],
     "medidas": [
       {
@@ -484,7 +481,14 @@
     "preguntas": [
       "¿Qué día ha hecho más calor en España?",
       "¿Cuánto más calor de lo normal hizo el 15 de agosto de 2025?",
-      "¿Cuántas provincias superaron récords ayer?"
+      "¿Cuántas provincias superaron récords ayer?",
+      "¿Cuántos grados hizo de media en España el 1 de agosto de 2024?",
+      "¿Qué día de la historia reciente fue el más caluroso en comparación con lo normal?",
+      "¿Cuántas provincias estuvieron por encima de lo normal el pasado fin de semana?",
+      "¿Cuál es la temperatura normal de un día de julio en España?",
+      "¿Qué tal fue la ola de calor de agosto de 2023 día a día?",
+      "¿Cuántos días de verano pasaron de 5 grados sobre lo normal?",
+      "Dime la temperatura media de España hoy frente a lo habitual"
     ],
     "medidas": [
       {
@@ -556,7 +560,14 @@
     "preguntas": [
       "¿Dónde hizo más calor en España ayer?",
       "¿Cuál es la temperatura más alta registrada desde 2025?",
-      "¿Qué estación suele marcar el máximo del país en verano?"
+      "¿Qué estación suele marcar el máximo del país en verano?",
+      "¿Qué pueblo marcó la máxima de España el pasado julio?",
+      "¿Cuál ha sido la temperatura más alta de España este verano?",
+      "¿En qué estación hizo más calor desde 2025?",
+      "¿Qué provincia aparece más veces con la máxima del país?",
+      "¿A qué altura estaba la estación más calurosa del día?",
+      "¿Cuántos días superó España los 44 grados?",
+      "¿Dónde se registran normalmente las temperaturas más altas del país?"
     ],
     "medidas": [
       {
@@ -610,7 +621,13 @@
       "¿Qué temperatura máxima hubo en Sevilla el 10 de agosto de 2025?",
       "¿Cuántos días superó Badajoz el percentil 90 este verano?",
       "¿Cuánto más calor de lo normal hace hoy en Madrid?",
-      "¿Qué provincia ha tenido más días de récord en 2025?"
+      "¿Qué provincia ha tenido más días de récord en 2025?",
+      "¿Cuántos grados de mínima hubo en Valencia anoche?",
+      "¿Qué tal estuvo la temperatura en Zaragoza el 20 de julio de 2025?",
+      "¿Cuántos días batió Córdoba su récord de calor en 2025?",
+      "¿Cuántos días muy por encima de lo normal tuvo Málaga este verano?",
+      "¿Qué provincia tiene las noches más calurosas?",
+      "¿Cuánto se desvió la temperatura de Bilbao de lo normal ayer?"
     ],
     "medidas": [
       {
@@ -693,7 +710,14 @@
     "preguntas": [
       "¿Cuál es el día más caluroso de la historia en Córdoba?",
       "¿En qué años se concentran los récords de calor en Valencia?",
-      "¿Qué provincia ha llegado a 46,9 grados?"
+      "¿Qué provincia ha llegado a 46,9 grados?",
+      "¿Cuál es el récord de temperatura de Sevilla?",
+      "¿Cuándo hizo el día más caluroso en Madrid?",
+      "¿Qué provincia tiene el récord de calor más alto de España?",
+      "¿Cuántos de los 20 días más calurosos de Badajoz son de los últimos años?",
+      "¿Cuántos grados por encima de lo normal fue el día récord en Valencia?",
+      "¿En qué estación se midió el récord de Jaén?",
+      "¿Cuáles son los días más calurosos de la historia en Alicante?"
     ],
     "medidas": [
       {
@@ -753,7 +777,14 @@
     "preguntas": [
       "¿Qué provincia tiene hoy más calor?",
       "¿Qué temperatura máxima hay hoy en Albacete?",
-      "¿Qué provincias están por encima de lo normal hoy?"
+      "¿Qué provincias están por encima de lo normal hoy?",
+      "¿Qué temperatura hizo ayer en Madrid?",
+      "¿Dónde ha hecho más frío hoy en España?",
+      "¿Cuántos grados de mínima hay hoy en Burgos?",
+      "¿Qué provincias están muy por debajo de lo normal ahora mismo?",
+      "¿Está Sevilla más caliente de lo normal estos días?",
+      "¿Cuánto se aparta hoy la temperatura de Valencia de la normal?",
+      "Dime la temperatura máxima de hoy en todas las provincias"
     ],
     "medidas": [
       {
@@ -825,15 +856,28 @@
     "preguntas": [
       "¿Cuánto gastó Andalucía en personal en 2023?",
       "¿Cuánto ingresó Cataluña por transferencias corrientes?",
-      "¿Qué capítulo de gasto es el mayor en la Comunidad de Madrid?"
+      "¿Qué capítulo de gasto es el mayor en la Comunidad de Madrid?",
+      "¿Cuánto gasta Murcia en sueldos de sus empleados públicos por habitante?",
+      "¿Cuánto gasta Galicia en intereses de la deuda?",
+      "¿Cuánto recauda Madrid en impuestos directos?",
+      "¿Qué comunidad gasta más en inversiones reales por habitante?",
+      "¿Cuánto presupuestó Castilla y León al principio de año y cuánto gastó al final?",
+      "¿Cuánta parte del presupuesto de Cataluña se va en transferencias?",
+      "¿Cómo ha cambiado el gasto en personal de Asturias desde 2010?"
     ],
     "medidas": [
+      {
+        "columna": "ejecutado_eur_hab_real",
+        "nombre": "importe ejecutado por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo",
+        "principal": true
+      },
       {
         "columna": "ejecutado",
         "nombre": "importe ejecutado (derechos u obligaciones reconocidas netas)",
         "unidad": "€",
-        "tipo": "flujo",
-        "principal": true
+        "tipo": "flujo"
       },
       {
         "columna": "presupuesto_inicial",
@@ -865,7 +909,7 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [
@@ -881,7 +925,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Importes en euros corrientes (no miles ni millones), liquidación 2002-2024 de Hacienda (SGCIEF). Sin filas de total: hay que sumar capítulos y filtrar tipo ('ingreso' o 'gasto') para no mezclarlos. No hay columna con el nombre de la comunidad, solo el código INE (01 Andalucía ... 18 Ceuta, 19 Melilla). No hay versión por habitante ni en euros reales."
+    "notas": "Liquidación 2002-2024 de Hacienda (SGCIEF). Importes en euros corrientes (no miles ni millones), salvo ejecutado_eur_hab_real: por habitante y en euros constantes del año anio_base, la cifra para comparar comunidades y años. Sin filas de total: hay que sumar capítulos y filtrar tipo ('ingreso' o 'gasto') para no mezclarlos. Ceuta y Melilla son 18 y 19."
   },
   {
     "tabla": "ccaa_cuentas_resumen",
@@ -891,15 +935,57 @@
       "¿Cuánto gastó la Comunidad Valenciana en 2023?",
       "¿Qué comunidades cerraron 2024 con déficit?",
       "¿Cómo han evolucionado los ingresos de Galicia desde 2008?",
-      "¿Qué comunidad tuvo el mayor déficit no financiero en 2012?"
+      "¿Qué comunidad tuvo el mayor déficit no financiero en 2012?",
+      "¿Cuánto dinero ingresa Andalucía al año?",
+      "¿Qué comunidad gasta más por habitante?",
+      "¿Qué comunidades tienen superávit?",
+      "¿Cuánto gastó Madrid de más sobre lo que ingresó en 2020?",
+      "¿Cuánto gasta cada habitante de Cantabria en términos reales?",
+      "¿Cómo ha cambiado el saldo de Cataluña desde 2002?"
     ],
     "medidas": [
+      {
+        "columna": "gastos_nf_eur_hab_real",
+        "nombre": "gastos no financieros por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ingresos_nf_eur_hab_real",
+        "nombre": "ingresos no financieros por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_nf_eur_hab_real",
+        "nombre": "saldo no financiero por habitante, descontada la inflación (positivo = superávit)",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_totales_eur_hab_real",
+        "nombre": "gastos totales por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "ingresos_totales_eur_hab_real",
+        "nombre": "ingresos totales por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_eur_hab_real",
+        "nombre": "saldo total por habitante, descontada la inflación (positivo = superávit)",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
+      },
       {
         "columna": "gastos_no_financieros",
         "nombre": "gastos no financieros (sin deuda ni activos financieros)",
         "unidad": "€",
-        "tipo": "flujo",
-        "principal": true
+        "tipo": "flujo"
       },
       {
         "columna": "ingresos_no_financieros",
@@ -910,12 +996,6 @@
       {
         "columna": "saldo_no_financiero",
         "nombre": "saldo no financiero (positivo = superávit)",
-        "unidad": "€",
-        "tipo": "flujo"
-      },
-      {
-        "columna": "deficit_no_financiero",
-        "nombre": "déficit no financiero (positivo = déficit)",
         "unidad": "€",
         "tipo": "flujo"
       },
@@ -949,12 +1029,12 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Euros corrientes (no miles), liquidación 2002-2024 de Hacienda. Cuidado con el signo: saldo positivo = superávit, deficit_no_financiero positivo = déficit (es el saldo con el signo cambiado). Sin nombre de comunidad: solo el código INE (01 Andalucía, 13 Madrid, 09 Cataluña...). Sin versión por habitante."
+    "notas": "Liquidación 2002-2024 de Hacienda. Los importes sin sufijo van en euros corrientes (no miles); las columnas _eur_hab_real, por habitante y en euros constantes del año anio_base, son las que sirven para comparar comunidades y años. Cuidado con el signo: saldo positivo = superávit, negativo = déficit. Ceuta y Melilla son 18 y 19."
   },
   {
     "tabla": "ccaa_deuda",
@@ -964,7 +1044,13 @@
       "¿Cuánto debe Cataluña?",
       "¿Qué comunidad tiene más deuda sobre su PIB?",
       "¿Cómo ha evolucionado la deuda de la Comunidad de Madrid desde 2010?",
-      "¿Cuánta deuda tiene la Comunitat Valenciana?"
+      "¿Cuánta deuda tiene la Comunitat Valenciana?",
+      "¿Qué comunidad está más endeudada?",
+      "¿Cuánta deuda tiene cada habitante de Castilla-La Mancha?",
+      "¿Cuántos euros debe Andalucía en total?",
+      "¿Qué comunidad ha reducido más su deuda en los últimos años?",
+      "¿Cuánto debía Madrid en 2012?",
+      "¿Qué porcentaje del PIB debe Galicia?"
     ],
     "medidas": [
       {
@@ -978,6 +1064,12 @@
         "columna": "deuda_eur",
         "nombre": "deuda en euros",
         "unidad": "€",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_eur_hab_real",
+        "nombre": "deuda por habitante, descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
         "tipo": "nivel"
       }
     ],
@@ -997,7 +1089,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Deuda PDE del Banco de España a fin de trimestre, de diciembre de 1994 a junio de 2026; euros corrientes. Sin Ceuta ni Melilla. Nombres como los publica el BdE (Comunidad de Madrid, Comunitat Valenciana, Comunidad Foral de Navarra...). El último trimestre disponible es 2026 T2 (anio 2026, trimestre 2). Es un stock: no sumar trimestres."
+    "notas": "Deuda PDE del Banco de España a fin de trimestre, de diciembre de 1994 a junio de 2026. deuda_eur en euros corrientes; deuda_eur_hab_real por habitante en euros constantes del año anio_base (desde 1996). Sin Ceuta ni Melilla. Nombres de comunidad como en el resto de tablas (territorios). El último trimestre disponible es 2026 T2 (anio 2026, trimestre 2). Es un stock: no sumar trimestres."
   },
   {
     "tabla": "ccaa_gasto_politicas",
@@ -1007,15 +1099,27 @@
       "¿Cuánto gastó Andalucía en educación en 2023?",
       "¿Qué comunidad gasta más en sanidad?",
       "¿Cómo ha evolucionado el gasto en cultura de Galicia?",
-      "¿Cuánto gasta Aragón en fomento del empleo?"
+      "¿Cuánto gasta Aragón en fomento del empleo?",
+      "¿Cuánto se gasta por persona en sanidad en el País Vasco?",
+      "¿En qué gasta más dinero Extremadura?",
+      "¿Cuánto dedica Madrid a servicios sociales?",
+      "¿Qué comunidad gasta más en educación por habitante?",
+      "¿Cuánto invierte Navarra en carreteras?",
+      "¿Cuánto ha subido el gasto en sanidad de Cataluña desde 2010?"
     ],
     "medidas": [
+      {
+        "columna": "obligaciones_eur_hab_real",
+        "nombre": "gasto por habitante (obligaciones depuradas), descontada la inflación",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo",
+        "principal": true
+      },
       {
         "columna": "obligaciones",
         "nombre": "gasto (obligaciones reconocidas depuradas)",
         "unidad": "€",
-        "tipo": "flujo",
-        "principal": true
+        "tipo": "flujo"
       },
       {
         "columna": "obligaciones_brutas",
@@ -1035,7 +1139,7 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [
@@ -1052,7 +1156,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Euros corrientes (no miles), 2006-2024. No hay filas de total: sumar políticas dentro de cada comunidad y año; las 5 áreas suman el gasto total (unos 268.000 millones de euros en 2024 entre todas). Sin nombre de comunidad, solo código INE. Sin versión por habitante: para comparar comunidades hay que dividir por población."
+    "notas": "Euros corrientes (no miles), 2006-2024; obligaciones_eur_hab_real, por habitante y en euros constantes del año anio_base, es la cifra para comparar comunidades y años. No hay filas de total: sumar políticas dentro de cada comunidad y año; las 5 áreas suman el gasto total (unos 268.000 millones de euros en 2024 entre todas). poblacion es el padrón de cada comunidad y año."
   },
   {
     "tabla": "ccaa_saldo",
@@ -1061,7 +1165,14 @@
     "preguntas": [
       "¿Qué comunidad tuvo más déficit en 2023?",
       "¿Cuál fue el déficit de Andalucía en 2020 como porcentaje del PIB?",
-      "¿Qué comunidades cerraron con superávit en 2025?"
+      "¿Qué comunidades cerraron con superávit en 2025?",
+      "¿Qué comunidades tienen déficit en 2024?",
+      "¿Cuánto déficit tuvo Cataluña en euros en 2022?",
+      "¿Qué comunidad logró más superávit en proporción a su economía?",
+      "¿Cuál fue el déficit por habitante de la Comunidad Valenciana?",
+      "¿Cómo ha evolucionado el déficit de Madrid desde 2013?",
+      "¿En qué año tuvo Andalucía su mayor déficit?",
+      "¿Cuántas comunidades cerraron 2021 en números rojos?"
     ],
     "medidas": [
       {
@@ -1082,6 +1193,12 @@
         "nombre": "PIB regional implícito usado para el cálculo",
         "unidad": "€",
         "tipo": "nivel"
+      },
+      {
+        "columna": "saldo_eur_hab_real",
+        "nombre": "saldo por habitante, descontada la inflación (negativo = déficit)",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "flujo"
       }
     ],
     "tiempo": {
@@ -1100,7 +1217,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Signo negativo = déficit, positivo = superávit. Años completos 2013-2025, sin Ceuta ni Melilla. El PIB regional es implícito (deducido de la deuda), no el oficial."
+    "notas": "Signo negativo = déficit, positivo = superávit. Años completos 2013-2025, sin Ceuta ni Melilla. saldo_eur en euros corrientes; saldo_eur_hab_real por habitante en euros constantes del año anio_base. El PIB regional es implícito (deducido de la deuda), no el oficial."
   },
   {
     "tabla": "centrales",
@@ -1110,7 +1227,13 @@
       "¿Cuál es la central eléctrica más grande de España?",
       "¿Cuántos parques eólicos hay en Aragón?",
       "¿Qué centrales solares fotovoltaicas hay en Badajoz?",
-      "¿Qué empresa tiene más potencia renovable?"
+      "¿Qué empresa tiene más potencia renovable?",
+      "¿Qué centrales nucleares hay en España y cuánta potencia tienen?",
+      "¿Quién es el dueño del mayor parque eólico?",
+      "¿Qué centrales hidroeléctricas hay en Lleida?",
+      "¿Cuántas centrales de carbón se han cerrado?",
+      "¿Qué plantas de gas hay en el municipio de Cartagena?",
+      "¿Qué centrales solares se están construyendo en Extremadura?"
     ],
     "medidas": [
       {
@@ -1178,7 +1301,13 @@
       "¿Qué comunidad tiene más potencia solar fotovoltaica?",
       "¿Cuánta potencia eólica hay en Galicia?",
       "¿Cuánta potencia de ciclo combinado hay en Andalucía?",
-      "¿Qué comunidad tiene más solar en tramitación?"
+      "¿Qué comunidad tiene más solar en tramitación?",
+      "¿Qué comunidad produce más energía eólica?",
+      "¿Cuánta energía nuclear hay en Extremadura?",
+      "¿Cuántas centrales solares hay en Castilla-La Mancha?",
+      "¿Cuánta hidráulica hay en Aragón?",
+      "¿Qué comunidad tiene más gas en operación?",
+      "¿Cuánta potencia eólica está en construcción en Aragón?"
     ],
     "medidas": [
       {
@@ -1234,7 +1363,14 @@
     "preguntas": [
       "¿Cuánta potencia solar fotovoltaica se instaló en 2022?",
       "¿En qué año se retiró más carbón?",
-      "¿Cuánta potencia eólica entró en servicio en Castilla y León desde 2010?"
+      "¿Cuánta potencia eólica entró en servicio en Castilla y León desde 2010?",
+      "¿Cuántos megavatios de eólica entraron en servicio en 2020?",
+      "¿Cuándo se instaló más solar en España?",
+      "¿Cuántas centrales de gas se instalaron en los años 2000?",
+      "¿Cuánta potencia se retiró en 2019?",
+      "¿Cuánta solar va a entrar en funcionamiento en 2027?",
+      "¿Cómo ha evolucionado la potencia eólica instalada en Galicia desde 2000?",
+      "¿En qué año se puso en marcha más energía nuclear?"
     ],
     "medidas": [
       {
@@ -1294,7 +1430,14 @@
     "preguntas": [
       "¿Cuánta potencia solar fotovoltaica hay en España?",
       "¿Cuántos MW de eólica hay en tramitación?",
-      "¿Qué tecnología tiene más potencia instalada?"
+      "¿Qué tecnología tiene más potencia instalada?",
+      "¿Cuántas centrales nucleares hay en España?",
+      "¿Cuántos MW de solar hay en construcción?",
+      "¿Cuánta potencia de carbón queda en España?",
+      "¿Cuántos parques eólicos hay en operación?",
+      "¿Cuántas centrales hidroeléctricas tiene el país?",
+      "¿Cuánta potencia solar hay planificada que aún no existe?",
+      "¿Cuántos MW de ciclo combinado hay?"
     ],
     "medidas": [
       {
@@ -1351,7 +1494,13 @@
       "¿Qué porcentaje de la electricidad en España fue renovable en 2025?",
       "¿Cuánto CO2 emite cada kWh de electricidad?",
       "¿Cuándo dejó el carbón de ser relevante en la electricidad?",
-      "¿Cuánta electricidad consume cada español?"
+      "¿Cuánta electricidad consume cada español?",
+      "¿Qué porcentaje de la luz sale de la solar?",
+      "¿Cuánta electricidad producimos en España al año?",
+      "¿Cuánta luz gastamos en total en el país?",
+      "¿Qué parte de la electricidad viene de energías limpias que no emiten?",
+      "¿Qué porcentaje de la electricidad es nuclear?",
+      "¿Cuántos kilos de CO2 sueltan las centrales por cada kWh de luz?"
     ],
     "medidas": [
       {
@@ -1460,7 +1609,13 @@
       "¿Cuántas toneladas de CO2 emite cada español al año?",
       "¿Cuánto han bajado las emisiones desde 1990?",
       "¿Emite España más o menos por habitante que la media europea?",
-      "¿Cuántos millones de toneladas emitió España en 2024?"
+      "¿Cuántos millones de toneladas emitió España en 2024?",
+      "¿Cuántas emisiones de efecto invernadero hay en España?",
+      "¿Cuánto absorben los bosques de lo que emitimos?",
+      "¿Cuánto hemos reducido las emisiones desde 2005?",
+      "¿Cuántos kilos de CO2 emitimos por cada euro de PIB?",
+      "¿Qué emisiones netas tiene un español al año?",
+      "¿Cuánta contaminación de CO2 emitía España en 1990?"
     ],
     "medidas": [
       {
@@ -1544,7 +1699,14 @@
     "preguntas": [
       "¿Quién emite más por habitante, España o Alemania?",
       "¿Cuánto han bajado las emisiones de Francia desde 1990?",
-      "¿Cuántas toneladas de CO2 por persona emite Polonia?"
+      "¿Cuántas toneladas de CO2 por persona emite Polonia?",
+      "¿Qué país emite más por habitante, Polonia o Francia?",
+      "¿Cuántas toneladas de CO2 al año emite Alemania?",
+      "¿Cuánto han bajado las emisiones en Italia desde 1990?",
+      "¿Quién contamina más por persona, Portugal o España?",
+      "¿Cómo está España frente a la media europea en emisiones?",
+      "¿Qué país ha reducido más sus emisiones desde 1990?",
+      "¿Cuántos millones de toneladas emite Países Bajos?"
     ],
     "medidas": [
       {
@@ -1602,7 +1764,13 @@
       "¿Qué sector emite más CO2 en España?",
       "¿Cuánto emite el transporte?",
       "¿Cómo han evolucionado las emisiones de la generación eléctrica desde 1990?",
-      "¿Qué porcentaje de las emisiones es de la agricultura?"
+      "¿Qué porcentaje de las emisiones es de la agricultura?",
+      "¿Qué porcentaje de emisiones viene del transporte?",
+      "¿Cuánto contamina la industria?",
+      "¿Cuántas emisiones produce la agricultura al año?",
+      "¿Qué sector ha reducido más sus emisiones desde 1990?",
+      "¿Cuánto CO2 emiten los edificios, el gas y la calefacción?",
+      "¿Qué sector emite más por habitante?"
     ],
     "medidas": [
       {
@@ -1657,7 +1825,13 @@
       "¿Cuántos trabajadores de la construcción hay en España?",
       "¿Qué provincia tiene más afiliados en construcción por habitante?",
       "¿Qué porcentaje de autónomos hay en la construcción en Andalucía?",
-      "¿Cómo ha evolucionado el empleo en la construcción en Madrid desde 2021?"
+      "¿Cómo ha evolucionado el empleo en la construcción en Madrid desde 2021?",
+      "¿Cuántos albañiles y obreros cotizan a la Seguridad Social en Valencia?",
+      "¿Qué comunidad tiene más trabajadores en la construcción?",
+      "¿Qué parte de los trabajadores del país está en la construcción?",
+      "¿Cuántos autónomos hay en la construcción en Cataluña?",
+      "¿Cómo ha evolucionado el empleo en la construcción desde 2021?",
+      "¿Qué provincia tiene más peso de la construcción en el empleo?"
     ],
     "medidas": [
       {
@@ -1729,7 +1903,13 @@
       "¿Qué porcentaje de la economía de Andalucía es construcción?",
       "¿Qué comunidad depende más de la construcción?",
       "¿Cuánto ha caído el peso de la construcción desde 2007?",
-      "¿Cuánto valor añade la construcción por habitante en Navarra?"
+      "¿Cuánto valor añade la construcción por habitante en Navarra?",
+      "¿Cuánto valor añade la construcción en Baleares?",
+      "¿Cuántos ocupados en construcción hay en Murcia por cada mil habitantes?",
+      "¿En qué comunidad pesa menos la construcción?",
+      "¿Cuántos millones de euros genera la construcción en Cataluña?",
+      "¿Pesa ahora la construcción más o menos que en 2007 en Andalucía?",
+      "¿Qué comunidad ha crecido más en peso de la construcción en el último año?"
     ],
     "medidas": [
       {
@@ -1806,7 +1986,13 @@
       "¿Cuánto cemento consume cada español al año?",
       "¿Cuánto cayó el consumo de cemento tras la crisis de 2008?",
       "¿Qué porcentaje del cemento producido se exporta?",
-      "¿Cuántas toneladas de cemento se produjeron en 2024?"
+      "¿Cuántas toneladas de cemento se produjeron en 2024?",
+      "¿Cuánto cemento se gastó en 2007?",
+      "¿Cuántas toneladas de cemento se consumen al año en España?",
+      "¿Cuánto cemento exporta España?",
+      "¿Cuánto cemento se importa?",
+      "¿Cuándo se consumió más cemento en la historia de España?",
+      "¿Cuántos kilos de cemento por persona se produjeron en 2024?"
     ],
     "medidas": [
       {
@@ -1878,7 +2064,14 @@
     "preguntas": [
       "¿Cuánto han subido los costes de construcción en España desde 2021?",
       "¿En qué país europeo han subido más los costes de construir?",
-      "¿Cómo se compara el coste de construcción de España con el de Alemania?"
+      "¿Cómo se compara el coste de construcción de España con el de Alemania?",
+      "¿Cuánto cuesta ahora construir comparado con 2021?",
+      "¿Qué país europeo ha encarecido más la construcción?",
+      "¿Cuánto han subido los materiales y la mano de obra para construir en Alemania?",
+      "¿Han subido los costes de construcción más que la inflación en España?",
+      "¿Cuánto han subido los precios de las viviendas nuevas desde 2021?",
+      "¿Qué país de Europa tiene la construcción más barata?",
+      "¿Cuánto subió el coste de construir en España en el último año?"
     ],
     "medidas": [
       {
@@ -1918,16 +2111,16 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "pais",
-      "nombre": "pais_nombre",
+      "codigo": "cod_pais",
+      "nombre": "pais",
       "espana": {
-        "columna": "pais",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Eurostat 1995-2025, índices con base 2021 = 100 (no euros), 28 territorios incluida la UE-27 (pais = EU27_2020). Los índices no se suman. El coste real descontando inflación solo existe para España. España publica la misma serie para costes y precios."
+    "notas": "Eurostat 1995-2025, índices con base 2021 = 100 (no euros), 28 territorios incluida la UE-27 (cod_pais = EU27_2020). Los índices no se suman. El coste real descontando inflación solo existe para España. España publica la misma serie para costes y precios."
   },
   {
     "tabla": "construccion_empleo",
@@ -1937,7 +2130,13 @@
       "¿Cuántos ocupados hay en la construcción en Andalucía?",
       "¿Qué tasa de paro tiene la construcción en Canarias?",
       "¿Qué porcentaje de los ocupados trabaja en la construcción en España?",
-      "¿Cómo cayó el empleo en la construcción después de 2008?"
+      "¿Cómo cayó el empleo en la construcción después de 2008?",
+      "¿Cuántos parados hay en la construcción?",
+      "¿Qué comunidad tiene más paro en el sector de la construcción?",
+      "¿Cuántas personas trabajan en construcción en Cataluña?",
+      "¿Cuántos ocupados en construcción había en 2007 frente a ahora?",
+      "¿Cuánta gente de la construcción hay por cada mil habitantes en Murcia?",
+      "¿Cuántos parados tenía la construcción en 2013?"
     ],
     "medidas": [
       {

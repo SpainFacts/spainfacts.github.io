@@ -6,7 +6,13 @@
     "preguntas": [
       "¿Cuántos inmigrantes irregulares han llegado a Canarias en 2025?",
       "¿Cómo han evolucionado las llegadas de pateras a España?",
-      "¿Qué mes ha habido más llegadas irregulares?"
+      "¿Qué mes ha habido más llegadas irregulares?",
+      "¿Cuántas personas han llegado en patera a Canarias este año?",
+      "Dime cuántos inmigrantes han entrado por Ceuta y Melilla",
+      "¿Cuántos han llegado en barco a la península y Baleares?",
+      "¿Ha subido o bajado la inmigración irregular respecto al año pasado?",
+      "¿En qué mes de 2023 llegaron más migrantes a Canarias?",
+      "¿Cuánta gente llega a España sin papeles por mar cada año?"
     ],
     "medidas": [
       {
@@ -41,7 +47,12 @@
       "¿Cuántos marroquíes se nacionalizaron españoles en 2024?",
       "¿Qué comunidad concede más nacionalidades españolas?",
       "¿Cómo han evolucionado las nacionalizaciones en España desde 2013?",
-      "¿Cuántos venezolanos han obtenido la nacionalidad española?"
+      "¿Cuántos venezolanos han obtenido la nacionalidad española?",
+      "¿Cuántos ecuatorianos han conseguido el pasaporte español?",
+      "¿Cuántas nacionalidades se conceden por cada mil extranjeros que viven en Cataluña?",
+      "¿Qué comunidad tiene más nacionalizaciones en proporción a sus extranjeros?",
+      "¿Cuántos latinoamericanos se hacen españoles cada año?",
+      "Dime cuántas personas se hicieron españolas el último año"
     ],
     "medidas": [
       {
@@ -68,23 +79,23 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [
       {
         "columna": "nacionalidad_previa",
-        "nombre": "nacionalidad de origen (países y grandes grupos como De Sudamérica o De Africa)",
+        "nombre": "nacionalidad de origen (países, y grupos como De Sudamérica o De Africa marcados con es_grupo)",
         "total": "Total"
       }
     ],
     "filtros": [],
-    "notas": "No hay columna de nombre de comunidad: solo el código INE (00 es España, 13 Madrid). Mezcla países y grupos de países en nacionalidad_previa, no sumarlos entre sí."
+    "notas": "España es nivel pais (nivel ccaa para cada comunidad). nacionalidad_previa mezcla países y grupos de países: es_grupo marca los grupos (Total, continentes, UE...); no sumar grupos con países."
   },
   {
     "tabla": "inmigracion_poblacion",
@@ -94,16 +105,21 @@
       "¿Cuántos extranjeros viven en España?",
       "¿Qué comunidad tiene mayor porcentaje de población extranjera?",
       "¿Cuántos latinoamericanos viven en Madrid?",
-      "¿Cómo ha crecido la población extranjera desde 2002?"
+      "¿Cómo ha crecido la población extranjera desde 2002?",
+      "¿Cuántos africanos viven en Cataluña?",
+      "¿Qué porcentaje de la población de Baleares es extranjera?",
+      "¿Cuántos europeos de la UE residen en España?",
+      "¿Cuántos asiáticos hay viviendo en España?",
+      "¿Cuántos españoles y cuántos extranjeros hay en cada comunidad?",
+      "¿Cuántos extranjeros había en España en 2010 comparado con ahora?"
     ],
     "medidas": [
       {
-        "columna": "pct_extranjeros",
+        "columna": "extranjeros_pct",
         "nombre": "peso de los extranjeros sobre la población (fracción de 0 a 1)",
         "unidad": "%",
         "tipo": "porcentaje",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
         "columna": "extranjeros",
@@ -178,15 +194,15 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Cifras a 1 de enero (INE, Estadística Continua de Población). pct_extranjeros viene como fracción. Sin columna de nombre de comunidad: usar el código INE de comunidad. Las zonas de origen no suman exactamente el total de extranjeros."
+    "notas": "Cifras a 1 de enero (INE, Estadística Continua de Población). extranjeros_pct ya está en 0-100. Las zonas de origen no suman exactamente el total de extranjeros."
   },
   {
     "tabla": "inmigracion_saldos",
@@ -195,7 +211,13 @@
     "preguntas": [
       "¿Cuál fue el saldo migratorio de España en 2024?",
       "¿Qué comunidad ganó más población por inmigración?",
-      "¿Cuántos colombianos llegaron a España en 2024 descontando los que se fueron?"
+      "¿Cuántos colombianos llegaron a España en 2024 descontando los que se fueron?",
+      "¿Cuánta gente entró y salió de España en 2023, en neto?",
+      "¿Cuántos extranjeros netos ha ganado Cataluña?",
+      "¿Qué comunidad pierde población española por emigración?",
+      "¿Cuántos españoles se han ido al extranjero en balance?",
+      "¿Cuántos venezolanos llegaron a España en 2022 descontando salidas?",
+      "¿Cómo ha cambiado el saldo migratorio de España desde 2021?"
     ],
     "medidas": [
       {
@@ -224,10 +246,10 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [
@@ -248,7 +270,13 @@
       "¿Cómo está España de paro comparada con Alemania?",
       "¿Cuál es la esperanza de vida en España frente a la media de la UE?",
       "¿Cómo ha evolucionado la deuda pública de Italia desde el año 2000?",
-      "¿Qué país tiene más electricidad renovable, España o Portugal?"
+      "¿Qué país tiene más electricidad renovable, España o Portugal?",
+      "¿Cómo ha crecido la riqueza por persona en España frente a Alemania desde 2000?",
+      "¿Cómo ha cambiado la inflación en Francia en los últimos años?",
+      "¿Cuántos médicos por habitante tenía España frente a Italia a lo largo de los años?",
+      "¿Ha subido la desigualdad en España respecto a la UE desde 2010?",
+      "¿Cómo evolucionan las emisiones de CO2 por persona en España y Alemania?",
+      "¿Cómo ha ido el paro juvenil en España frente a Francia?"
     ],
     "medidas": [
       {
@@ -273,7 +301,7 @@
       "nombre": "pais",
       "espana": {
         "columna": "cod_pais",
-        "valor": "ESP"
+        "valor": "ES"
       }
     },
     "dimensiones": [
@@ -289,7 +317,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Formato largo: siempre hay que filtrar un indicador_id, porque cada uno tiene su unidad y no se pueden mezclar. Cada país tiene un último año distinto. UE (EUU) y OCDE (OED) son agregados ponderados (es_agregado). Nunca sumar valores entre países."
+    "notas": "Formato largo: siempre hay que filtrar un indicador_id, porque cada uno tiene su unidad y no se pueden mezclar. cod_pais es ISO alfa-2 (EU27_2020 la UE y OECD la OCDE, agregados ponderados: es_agregado). Cada país tiene un último año distinto: para el último dato de cada país usar internacional_ultimo. Nunca sumar valores entre países."
   },
   {
     "tabla": "internacional_ultimo",
@@ -298,7 +326,14 @@
     "preguntas": [
       "¿Qué país tiene la tasa de paro más alta de los comparados?",
       "¿Cuánto gasta Francia en sanidad en comparación con España?",
-      "¿Dónde es más alta la esperanza de vida, en España o en Japón?"
+      "¿Dónde es más alta la esperanza de vida, en España o en Japón?",
+      "¿Qué país de los comparados tiene más médicos por habitante?",
+      "¿Quién tiene más deuda pública, España o Francia?",
+      "¿En qué país hay más desigualdad de los que salen en la web?",
+      "Dime qué país emite más CO2 por habitante",
+      "¿Qué país gasta más en educación respecto a su PIB?",
+      "¿Cómo está España en inflación frente a la media de la UE en el último dato?",
+      "¿Dónde se venden más coches eléctricos en proporción?"
     ],
     "medidas": [
       {
@@ -316,7 +351,7 @@
       }
     ],
     "tiempo": {
-      "columna": "anio_ultimo",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -329,7 +364,7 @@
       "nombre": "pais",
       "espana": {
         "columna": "cod_pais",
-        "valor": "ESP"
+        "valor": "ES"
       }
     },
     "dimensiones": [
@@ -345,12 +380,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Una fila por indicador y país con su último año (anio_ultimo), que puede variar entre países. Hay que filtrar un indicador_id. Sirve para rankings sin evolución; para series largas usar internacional_comparativa."
-  },
-  {
-    "tabla": "ipc",
-    "usar": false,
-    "notas": "Mezcla 56 series del INE en una sola columna value (índices y variaciones anual, mensual y acumulada) con la unidad dentro del texto de serie. Para preguntas sobre inflación son mejores mercado_ipc_grupos (por grupos, con General) y mercado_ipc_ccaa (por comunidad)."
+    "notas": "Una fila por indicador y país con su último año (anio), que puede variar entre países. cod_pais es ISO alfa-2 (EU27_2020 la UE, OECD la OCDE). Hay que filtrar un indicador_id. Sirve para rankings sin evolución; para series largas usar internacional_comparativa."
   },
   {
     "tabla": "local_deuda_municipio",
@@ -359,15 +389,47 @@
     "preguntas": [
       "¿Cuánto debe el Ayuntamiento de Madrid?",
       "¿Qué gran ciudad tiene más deuda municipal?",
-      "¿Cómo ha evolucionado la deuda del Ayuntamiento de Barcelona?"
+      "¿Cómo ha evolucionado la deuda del Ayuntamiento de Barcelona?",
+      "¿Cuánto debe cada madrileño de deuda del ayuntamiento?",
+      "¿Qué ciudad grande está menos endeudada por habitante?",
+      "¿Cuánto debía el Ayuntamiento de Valencia en 2012?",
+      "¿Ha bajado la deuda del Ayuntamiento de Sevilla en la última década?",
+      "¿Cuánta deuda tiene ahora el Ayuntamiento de Zaragoza?",
+      "Dime la deuda de Bilbao, Málaga y Palma"
     ],
     "medidas": [
+      {
+        "columna": "deuda_eur_hab_real",
+        "nombre": "deuda del ayuntamiento por habitante, en euros constantes",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "nivel",
+        "principal": true
+      },
       {
         "columna": "deuda_eur",
         "nombre": "deuda del ayuntamiento (criterio de deuda PDE)",
         "unidad": "€",
         "tipo": "nivel",
-        "principal": true
+        "real": "deuda_eur_hab_real"
+      },
+      {
+        "columna": "deuda_eur_real",
+        "nombre": "deuda del ayuntamiento en euros constantes",
+        "unidad": "€ (euros constantes)",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_eur_hab",
+        "nombre": "deuda del ayuntamiento por habitante, en euros del momento",
+        "unidad": "€ por habitante (nominales)",
+        "tipo": "nivel",
+        "real": "deuda_eur_hab_real"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del municipio (Padrón del año)",
+        "unidad": "habitantes",
+        "tipo": "nivel"
       }
     ],
     "tiempo": {
@@ -386,7 +448,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Deuda en euros nominales a fin de trimestre (Banco de España). Solo 13 ciudades, no hay versión por habitante; para ello dividir por la población del municipio. El último dato es de junio de 2026."
+    "notas": "Deuda a fin de trimestre del ayuntamiento (Banco de España). Solo 13 ciudades de más de 300.000 habitantes. La versión por habitante usa la población del Padrón del año de la fecha (sin dato en 1997) y el deflactor anual: queda vacía donde falta alguno de los dos. El último dato es de junio de 2026."
   },
   {
     "tabla": "local_deuda_provincia",
@@ -395,33 +457,79 @@
     "preguntas": [
       "¿Qué provincia tiene más deuda local?",
       "¿Cuánto deben los ayuntamientos de Valencia?",
-      "¿Cómo ha bajado la deuda de las entidades locales desde 2008?"
+      "¿Cómo ha bajado la deuda de las entidades locales desde 2008?",
+      "¿Cuánto deben las diputaciones y cabildos de cada provincia?",
+      "¿Qué provincia tiene más deuda de ayuntamientos por habitante?",
+      "¿Cuánto debe la provincia de Málaga entre ayuntamientos y diputación?",
+      "¿Qué parte de la deuda local es de los ayuntamientos en Toledo?",
+      "¿Cuánta deuda tienen las mancomunidades y consorcios?",
+      "¿Qué provincias tienen la deuda local más baja?"
     ],
     "medidas": [
+      {
+        "columna": "deuda_eur_hab_real",
+        "nombre": "deuda total de las entidades locales de la provincia por habitante, en euros constantes",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "deuda_ayuntamientos_eur_hab_real",
+        "nombre": "deuda de los ayuntamientos por habitante, en euros constantes",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_diputaciones_eur_hab_real",
+        "nombre": "deuda de diputaciones, consejos y cabildos por habitante, en euros constantes",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "deuda_resto_eell_eur_hab_real",
+        "nombre": "deuda del resto de entidades locales (mancomunidades, consorcios...) por habitante, en euros constantes",
+        "unidad": "€ por habitante, euros constantes",
+        "tipo": "nivel"
+      },
       {
         "columna": "deuda_eur",
         "nombre": "deuda total de las entidades locales de la provincia",
         "unidad": "€",
         "tipo": "nivel",
-        "principal": true
+        "real": "deuda_eur_hab_real"
+      },
+      {
+        "columna": "deuda_eur_real",
+        "nombre": "deuda total de las entidades locales en euros constantes",
+        "unidad": "€ (euros constantes)",
+        "tipo": "nivel"
       },
       {
         "columna": "deuda_ayuntamientos_eur",
         "nombre": "deuda de los ayuntamientos",
         "unidad": "€",
-        "tipo": "nivel"
+        "tipo": "nivel",
+        "real": "deuda_ayuntamientos_eur_hab_real"
       },
       {
         "columna": "deuda_diputaciones_eur",
         "nombre": "deuda de diputaciones, consejos y cabildos",
         "unidad": "€",
-        "tipo": "nivel"
+        "tipo": "nivel",
+        "real": "deuda_diputaciones_eur_hab_real"
       },
       {
         "columna": "deuda_resto_eell_eur",
         "nombre": "deuda del resto de entidades locales (mancomunidades, consorcios...)",
         "unidad": "€",
-        "tipo": "nivel"
+        "tipo": "nivel",
+        "real": "deuda_resto_eell_eur_hab_real"
+      },
+      {
+        "columna": "pct_ayuntamientos",
+        "nombre": "parte de la deuda local que es de los ayuntamientos",
+        "unidad": "% de la deuda local",
+        "tipo": "porcentaje"
       }
     ],
     "tiempo": {
@@ -435,12 +543,12 @@
       ],
       "nivel": null,
       "codigo": "cod_prov",
-      "nombre": null,
+      "nombre": "provincia",
       "espana": null
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Una foto a 31 de diciembre (trimestre siempre 4), en euros nominales. Solo hay código de provincia, sin nombre. No incluye importes sin provincia asignada. Para comparar provincias conviene dividir por su población."
+    "notas": "Una foto a 31 de diciembre (trimestre siempre 4). La versión por habitante usa el Padrón del año (el último para los años sin Padrón) y el deflactor anual. cod_ccaa permite agrupar por comunidad. No incluye importes sin provincia asignada, así que la suma de provincias puede diferir ligeramente del total nacional."
   },
   {
     "tabla": "mapas_indicadores",
@@ -455,7 +563,13 @@
       "¿Cuánto han gastado los ayuntamientos en contratos con medios de comunicación en 2024?",
       "¿Qué comunidad gasta más por habitante en contratos con medios?",
       "¿Cuánto paga el Gobierno de España en publicidad y patrocinios a los medios?",
-      "¿Cómo ha evolucionado el gasto en contratos con medios desde 2018?"
+      "¿Cómo ha evolucionado el gasto en contratos con medios desde 2018?",
+      "¿Cuánto gastan los gobiernos autonómicos en contratos con periódicos y radios?",
+      "¿Cuánto se paga en contratos de suscripciones a servicios informativos?",
+      "¿Cuántos contratos con medios se firman cada año?",
+      "¿Gastan más en contratos con medios los gobiernos del PSOE o los del PP?",
+      "¿Cuánto dinero de contratos va a medios públicos?",
+      "¿Cuánto gasta Andalucía en contratos con medios?"
     ],
     "medidas": [
       {
@@ -549,7 +663,14 @@
     "preguntas": [
       "¿Cuáles son los mayores patrocinios que han pagado las administraciones a medios?",
       "¿Qué contratos de eventos ha firmado el Ayuntamiento de Madrid con medios?",
-      "¿Cuánto cobró el grupo Prisa por patrocinios en 2023?"
+      "¿Cuánto cobró el grupo Prisa por patrocinios en 2023?",
+      "Dime los contratos de patrocinio más grandes de 2022",
+      "¿Qué ayuntamiento firmó el mayor contrato de eventos con un medio?",
+      "¿Qué contratos de patrocinio tiene Andalucía con medios?",
+      "¿Qué patrocinios han ido a medios públicos?",
+      "¿Qué administración paga los patrocinios más caros a Atresmedia?",
+      "Dame ejemplos de contratos de patrocinio con Mediaset",
+      "¿Cuál es el contrato de eventos más caro que ha pagado una comunidad?"
     ],
     "medidas": [
       {
@@ -580,7 +701,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": null
     },
     "dimensiones": [
@@ -601,7 +722,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo los 50 mayores contratos de patrocinio por año, no todos los contratos: sirve para ejemplos y rankings de contratos individuales, no para totales. 2026 en curso e incompleto. Hay objeto, órgano y adjudicatario en texto libre."
+    "notas": "Solo los 50 mayores contratos de patrocinio por año, no todos los contratos: sirve para ejemplos y rankings de contratos individuales, no para totales (un importe por habitante no tiene sentido en un contrato). ccaa y municipio dan el nombre del territorio del órgano que contrata. 2026 en curso e incompleto. Hay objeto, órgano y adjudicatario en texto libre."
   },
   {
     "tabla": "medios_contratos_grupos",
@@ -610,7 +731,13 @@
     "preguntas": [
       "¿Cuánto ha cobrado Atresmedia en contratos públicos en 2024?",
       "¿Qué grupo de comunicación recibe más dinero de los ayuntamientos?",
-      "¿Cómo ha evolucionado lo que cobra Prisa de las administraciones?"
+      "¿Cómo ha evolucionado lo que cobra Prisa de las administraciones?",
+      "¿Cuánto cobra Mediaset de las administraciones por contratos?",
+      "¿Qué grupo cobra más en contratos de publicidad?",
+      "¿Cuánto reciben televisiones autonómicas como la CCMA o EITB en contratos?",
+      "¿Cuántos contratos públicos tiene el Grupo Vocento?",
+      "¿Cuánto ha cobrado Unidad Editorial en suscripciones de las administraciones?",
+      "¿Cuánto cobran los medios en contratos del Gobierno central frente a los de las comunidades?"
     ],
     "medidas": [
       {
@@ -698,7 +825,13 @@
     "preguntas": [
       "¿Cuánto ha gastado el Ayuntamiento de Albacete en contratos con medios?",
       "¿Qué municipio gasta más por habitante en contratos con medios?",
-      "¿Gastan más los ayuntamientos del PP o del PSOE en medios?"
+      "¿Gastan más los ayuntamientos del PP o del PSOE en medios?",
+      "¿Cuántos contratos con medios ha firmado el Ayuntamiento de Madrid?",
+      "¿Qué ayuntamiento del PSOE gasta más en medios?",
+      "¿Cuánto ha pagado el Ayuntamiento de Sevilla en patrocinios a medios?",
+      "¿Qué ciudades gastan más en patrocinios y eventos con medios?",
+      "¿Cuánto gastó el Ayuntamiento de Zaragoza en medios en 2022?",
+      "¿Cómo ha evolucionado el gasto en medios del Ayuntamiento de Valencia?"
     ],
     "medidas": [
       {
@@ -777,7 +910,14 @@
     "preguntas": [
       "¿Cuánto gasta el Gobierno de España en publicidad institucional?",
       "¿Gastaba más publicidad Rajoy o Sánchez?",
-      "¿Cómo ha evolucionado el gasto en publicidad del Estado desde 2006?"
+      "¿Cómo ha evolucionado el gasto en publicidad del Estado desde 2006?",
+      "¿Cuánto se gastó el Gobierno en publicidad en 2025?",
+      "¿Cuántas campañas institucionales hizo el Estado el último año?",
+      "¿Qué parte de la publicidad del Estado es comercial?",
+      "¿En qué año gastó más el Estado en publicidad institucional?",
+      "¿Cuánto gastaba el Gobierno de Zapatero en publicidad en 2009?",
+      "¿Cuánto de lo previsto en publicidad llega a ejecutarse?",
+      "¿Cuánto tiene previsto gastar el Gobierno en campañas este año?"
     ],
     "medidas": [
       {
@@ -879,7 +1019,13 @@
     "preguntas": [
       "¿Cuánto dinero de publicidad institucional del Estado va a la televisión?",
       "¿Qué porcentaje de la publicidad del Gobierno se gasta en medios digitales?",
-      "¿Cómo ha cambiado el reparto de la publicidad del Estado entre prensa, radio y televisión?"
+      "¿Cómo ha cambiado el reparto de la publicidad del Estado entre prensa, radio y televisión?",
+      "¿Cuánto gasta el Estado en publicidad en radio?",
+      "¿Cuánto de la publicidad del Gobierno va a prensa y revistas?",
+      "¿Qué medio se lleva más dinero de publicidad del Gobierno?",
+      "¿Cuánto se gasta en publicidad exterior, como vallas y marquesinas?",
+      "¿Cuánto ha crecido la publicidad del Estado en internet desde 2010?",
+      "¿Qué porcentaje del gasto en campañas del Estado va al cine?"
     ],
     "medidas": [
       {
@@ -939,7 +1085,14 @@
     "preguntas": [
       "¿Cuánto gasta Loterías y Apuestas del Estado en publicidad?",
       "¿Cuánto invierte Renfe en campañas de publicidad?",
-      "¿Qué empresas públicas gastan más en publicidad?"
+      "¿Qué empresas públicas gastan más en publicidad?",
+      "¿Cuánto gasta AENA en publicidad?",
+      "¿Cuánto se gasta Correos en campañas publicitarias?",
+      "¿Cuánto gasta RTVE en publicidad?",
+      "¿Cuánto ha gastado el Canal de Isabel II en publicidad?",
+      "¿Qué empresa pública catalana, como TMB, gasta más en publicidad?",
+      "¿Cómo ha evolucionado el gasto en publicidad de Renfe?",
+      "¿Cuánto gastan las empresas públicas del Estado en campañas comerciales?"
     ],
     "medidas": [
       {
@@ -1010,7 +1163,13 @@
     "preguntas": [
       "¿Qué presidente del Gobierno ha gastado más en publicidad institucional?",
       "¿Cuánto gastaba Zapatero en publicidad por habitante comparado con Sánchez?",
-      "¿Gasta más en publicidad el PP o el PSOE?"
+      "¿Gasta más en publicidad el PP o el PSOE?",
+      "¿Quién gastó más en publicidad por habitante, Rajoy o Zapatero?",
+      "¿Cuánto gasta de media al año el Gobierno de Sánchez en publicidad institucional?",
+      "¿Qué presidente gastó más en campañas comerciales?",
+      "¿Qué parte de lo planificado en publicidad ejecuta cada presidente?",
+      "Compara el gasto en publicidad de los tres últimos presidentes",
+      "¿Cuánto ha gastado al año el Gobierno de Rajoy en publicidad institucional?"
     ],
     "medidas": [
       {
@@ -1069,7 +1228,13 @@
     "preguntas": [
       "¿Qué grupo mediático recibió más publicidad institucional del Estado en 2025?",
       "¿Cuánto cobró Google de publicidad del Gobierno?",
-      "¿Cuánto dinero de publicidad pública recibió el grupo Vocento?"
+      "¿Cuánto dinero de publicidad pública recibió el grupo Vocento?",
+      "¿Cuánto cobró Atresmedia en publicidad comercial de empresas del Estado?",
+      "¿Qué plataformas digitales recibieron más publicidad del Gobierno?",
+      "¿En qué puesto está Mediaset en publicidad institucional del Estado?",
+      "¿Qué parte de la publicidad institucional del Estado se queda Prisa?",
+      "Dime los cinco grupos que más cobran publicidad del Gobierno",
+      "¿Qué grupo cobra más publicidad de las empresas públicas, como Loterías o Renfe?"
     ],
     "medidas": [
       {
@@ -1078,12 +1243,6 @@
         "unidad": "€ (euros de 2025)",
         "tipo": "flujo",
         "principal": true
-      },
-      {
-        "columna": "eur_1000hab_real",
-        "nombre": "inversión por cada 1.000 habitantes",
-        "unidad": "€ por cada 1.000 habitantes",
-        "tipo": "flujo"
       },
       {
         "columna": "eur_hab_real",
@@ -1133,7 +1292,13 @@
     "preguntas": [
       "¿Qué comunidad gasta más en publicidad institucional por habitante?",
       "¿Cuánto gasta la Comunidad de Madrid en publicidad institucional?",
-      "¿Cómo ha evolucionado el gasto en publicidad de la Generalitat de Cataluña?"
+      "¿Cómo ha evolucionado el gasto en publicidad de la Generalitat de Cataluña?",
+      "¿Cuánto gasta el País Vasco en publicidad institucional por habitante?",
+      "¿Cuánto gasta el Ayuntamiento de Barcelona en publicidad?",
+      "¿Gastan más en publicidad los gobiernos del PP o los del PSOE?",
+      "¿Cuánta publicidad pagan las empresas públicas de la Comunidad Valenciana?",
+      "¿Cuánto gastaba Castilla y León en publicidad institucional en 2015?",
+      "¿Cuánto gasta la Región de Murcia en publicidad institucional?"
     ],
     "medidas": [
       {
@@ -1201,7 +1366,13 @@
     "preguntas": [
       "¿Qué grupo de comunicación recibe más publicidad institucional de la Generalitat?",
       "¿Cuánto cobra Atresmedia de publicidad de la Comunidad de Madrid?",
-      "¿Qué medios reciben más publicidad pública en el País Vasco?"
+      "¿Qué medios reciben más publicidad pública en el País Vasco?",
+      "¿A qué medios va la publicidad institucional de Castilla y León?",
+      "¿Qué porcentaje de la publicidad de Cataluña va a medios públicos?",
+      "¿Cuánto recibe Vocento de publicidad institucional de la Comunidad Valenciana?",
+      "¿Cuánto reparte el Ayuntamiento de Madrid en publicidad entre los medios?",
+      "¿Qué plataformas como Google se llevan publicidad de las comunidades?",
+      "¿Qué grupo recibe más publicidad institucional de Navarra?"
     ],
     "medidas": [
       {
@@ -1263,6 +1434,130 @@
     "notas": "Solo los 100 primeros grupos por territorio y año; no cruza con el organismo pagador. Cada territorio tiene base distinta (ejecutado o contratado) y fuentes con o sin IVA, así que no son del todo comparables. Solo ocho territorios."
   },
   {
+    "tabla": "medios_receptores_totales",
+    "usar": true,
+    "tema": "Cuánto dinero público ha recibido en total cada medio de comunicación (todos los años y por vía) y su puesto en el ranking de medios",
+    "preguntas": [
+      "¿Qué medio de comunicación ha recibido más dinero público?",
+      "¿Cuánto dinero público ha recibido OKDiario?",
+      "¿Cuánto cobra el grupo Prisa de las administraciones?",
+      "¿Qué medios públicos reciben más dinero?",
+      "¿Cuánto dinero público ha recibido El País entre 2019 y 2025?",
+      "¿Qué periódicos digitales reciben más dinero público?",
+      "¿Cuántas administraciones distintas pagan a la Cadena SER?",
+      "¿Qué emisoras de radio han cobrado más dinero público?",
+      "Dime los diez medios privados que más cobran de las administraciones",
+      "¿Qué cadenas de televisión públicas se llevan más dinero?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_2019_2025_eur_real",
+        "nombre": "dinero público recibido por el medio entre 2019 y 2025, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "total_eur_real",
+        "nombre": "dinero público recibido por el medio en todos los años, en euros constantes",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "total_eur_nominal",
+        "nombre": "dinero público recibido por el medio en todos los años, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "total_eur_real"
+      },
+      {
+        "columna": "estado_institucional_eur_real",
+        "nombre": "publicidad institucional del Estado recibida",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "estado_comercial_eur_real",
+        "nombre": "publicidad comercial de empresas del Estado recibida",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "territorial_eur_real",
+        "nombre": "publicidad institucional de comunidades y ayuntamientos recibida",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "contratos_eur_real",
+        "nombre": "contratos recibidos",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "subvenciones_eur_real",
+        "nombre": "subvenciones recibidas",
+        "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_pagos_total",
+        "nombre": "número de pagos",
+        "unidad": "pagos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_administraciones_total",
+        "nombre": "administraciones pagadoras distintas",
+        "unidad": "administraciones",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "rango_privados",
+        "nombre": "puesto entre los medios privados que no son plataformas",
+        "unidad": "puesto",
+        "tipo": "indice"
+      },
+      {
+        "columna": "rango_publicos",
+        "nombre": "puesto entre los medios públicos",
+        "unidad": "puesto",
+        "tipo": "indice"
+      }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "medio",
+        "nombre": "medio de comunicación",
+        "total": null
+      },
+      {
+        "columna": "grupo",
+        "nombre": "grupo de comunicación",
+        "total": null
+      },
+      {
+        "columna": "titularidad",
+        "nombre": "titularidad (privada o pública)",
+        "total": null
+      },
+      {
+        "columna": "tipo_medio",
+        "nombre": "tipo de medio (prensa, digital, radio, tv, agencia, grupo, plataforma)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por medio con sus totales de todos los años y vías (sin los pagos duplicados). Las vías no son homogéneas: la publicidad del Estado por medio solo existe para 2025, la territorial solo de las administraciones que publican el medio, los contratos son un mínimo documentado desde 2018 y las subvenciones empiezan en 2022. El ranking (en_ranking) deja fuera las plataformas digitales y los medios públicos. El detalle por año y vía está en medios_receptores_resumen."
+  },
+  {
+    "tabla": "medios_receptores_duplicados",
+    "usar": false,
+    "notas": "Pagos que se excluyen de medios_receptores por ser duplicado probable (contratos de publicidad de comunidades y ayuntamientos ya presentes en la fuente territorial ese año). No sumar a medios_receptores; solo sirve para saber cuánto se ha dejado fuera."
+  },
+  {
     "tabla": "medios_receptores",
     "usar": true,
     "tema": "Cada pago o concesión de una administración a un medio de comunicación (contratos, subvenciones y publicidad del Estado, comunidades y ayuntamientos), con quién paga, quién cobra y el partido que gobernaba",
@@ -1270,7 +1565,12 @@
       "¿Cuánto ha pagado la Generalitat de Cataluña a la Cadena SER?",
       "¿Qué administración ha pagado más a El País?",
       "¿Cuánto dinero público han recibido los medios del grupo Vocento desde 2019?",
-      "¿Cuánto ha pagado el Ayuntamiento de Madrid a medios de comunicación?"
+      "¿Cuánto ha pagado el Ayuntamiento de Madrid a medios de comunicación?",
+      "¿Cuánto han cobrado los medios de publicidad institucional del Gobierno de España?",
+      "¿Qué pagos hizo el Ayuntamiento de Valencia a medios en 2023?",
+      "¿Cuánto han pagado a medios los gobiernos del PP frente a los del PSOE?",
+      "Dime los pagos más grandes que ha recibido Antena 3",
+      "¿Cuánto ha cobrado COPE de dinero público?"
     ],
     "medidas": [
       {
@@ -1302,7 +1602,7 @@
       ],
       "nivel": "nivel_admin",
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": {
         "columna": "cod_ccaa",
         "valor": "00"
@@ -1340,23 +1640,23 @@
         "total": null
       }
     ],
-    "filtros": [
-      {
-        "columna": "duplicado_probable",
-        "valor": "false"
-      }
-    ],
-    "notas": "Tabla de unas 150.000 filas, una por pago; sumar importe para totales por medio o administración. La base cambia según la vía (adjudicado, ejecutado, contratado, concedido) y la publicidad autonómica puede estar contratada o ejecutada, así que no es una suma contable homogénea. Hay importes negativos (correcciones). Para totales por medio es más ágil medios_receptores_resumen. 2026 en curso e incompleto."
+    "filtros": [],
+    "notas": "Tabla de unas 140.000 filas, una por pago; sumar importe para totales por medio o administración: ya no lleva los pagos duplicados, que están aparte en medios_receptores_duplicados (contratos de publicidad de comunidades y ayuntamientos cuya publicidad por medio ya consta en la fuente territorial), así que no hay que filtrar nada. La base cambia según la vía (adjudicado, ejecutado, contratado, concedido) y la publicidad autonómica puede estar contratada o ejecutada, así que no es una suma contable homogénea. Hay importes negativos (correcciones). Para totales por medio y ranking usar medios_receptores_totales; por año y vía, medios_receptores_resumen. 2026 en curso e incompleto."
   },
   {
     "tabla": "medios_receptores_resumen",
     "usar": true,
-    "tema": "Cuánto dinero público recibe cada medio de comunicación por año y vía (contratos, subvenciones, publicidad del Estado y de las comunidades) y su puesto en el ranking",
+    "tema": "Cuánto dinero público recibe cada medio de comunicación por año y vía (contratos, subvenciones, publicidad del Estado y de las comunidades)",
     "preguntas": [
       "¿Qué medio de comunicación recibe más dinero público?",
       "¿Cuánto dinero público ha recibido El País?",
       "¿Cuánto han cobrado las radios de la Cadena SER y COPE entre 2019 y 2025?",
-      "¿Qué grupo de comunicación recibe más publicidad de las comunidades autónomas?"
+      "¿Qué grupo de comunicación recibe más publicidad de las comunidades autónomas?",
+      "¿Cuánto recibió OKDiario de dinero público en 2024?",
+      "¿Cuánto han cobrado los medios en subvenciones cada año desde 2022?",
+      "¿Cómo ha evolucionado el dinero público que recibe La Vanguardia?",
+      "¿Cuánto cobró Antena 3 de publicidad del Gobierno en 2025?",
+      "¿Cuántos pagos públicos recibe cada medio al año?"
     ],
     "medidas": [
       {
@@ -1379,24 +1679,6 @@
         "nombre": "número de pagos",
         "unidad": "pagos",
         "tipo": "flujo"
-      },
-      {
-        "columna": "total_eur_real",
-        "nombre": "total del medio en todos los años y vías (repetido en cada fila)",
-        "unidad": "€ (euros reales de 2025)",
-        "tipo": "nivel"
-      },
-      {
-        "columna": "total_2019_2025_eur_real",
-        "nombre": "total del medio entre 2019 y 2025 (repetido en cada fila)",
-        "unidad": "€ (euros reales de 2025)",
-        "tipo": "nivel"
-      },
-      {
-        "columna": "rango_privados",
-        "nombre": "puesto entre los medios privados",
-        "unidad": "puesto",
-        "tipo": "indice"
       }
     ],
     "tiempo": {
@@ -1412,23 +1694,13 @@
         "total": null
       },
       {
-        "columna": "grupo",
-        "nombre": "grupo de comunicación",
-        "total": null
-      },
-      {
         "columna": "via",
         "nombre": "vía del dinero (Contrato, Subvención, Publicidad institucional del Estado, Publicidad comercial de empresas del Estado, Publicidad institucional autonómica/local)",
-        "total": null
-      },
-      {
-        "columna": "titularidad",
-        "nombre": "titularidad (privada o pública)",
         "total": null
       }
     ],
     "filtros": [],
-    "notas": "Una fila por medio, año y vía. Las columnas total_* y estado_/territorial_/contratos_/subvenciones_ repiten el total del medio en cada fila: no sumarlas. Para el total de un medio usar total_eur_real de una sola fila o sumar importe_eur_real. 2026 en curso e incompleto; la ventana de datos varía por vía."
+    "notas": "Una fila por medio, año y vía; se puede sumar sin doble cuenta. Los totales del medio y su puesto en el ranking están en medios_receptores_totales. 2026 en curso e incompleto; la ventana de datos varía por vía (publicidad del Estado por medio solo 2025, contratos desde 2018, subvenciones desde 2022)."
   },
   {
     "tabla": "medios_subvenciones_anual",
@@ -1437,7 +1709,13 @@
     "preguntas": [
       "¿Cuánto dinero dan las comunidades en subvenciones a medios de comunicación?",
       "¿Qué comunidad subvenciona más a los medios por habitante?",
-      "¿Cuánto ha dado el Ministerio de Cultura a medios en subvenciones en 2025?"
+      "¿Cuánto ha dado el Ministerio de Cultura a medios en subvenciones en 2025?",
+      "¿Cuánto dan los ayuntamientos en subvenciones a medios?",
+      "¿Cuántas ayudas a medios se conceden al año?",
+      "¿Cuántas empresas distintas reciben subvenciones de medios en Cataluña?",
+      "¿Cómo ha evolucionado el dinero en subvenciones a medios desde 2022?",
+      "¿Subvencionan más a los medios los gobiernos del PP o los del PSOE?",
+      "¿Cuánto da Andalucía en ayudas a periódicos y radios?"
     ],
     "medidas": [
       {
@@ -1504,11 +1782,17 @@
   {
     "tabla": "medios_subvenciones_beneficiarios",
     "usar": true,
-    "tema": "Empresas y entidades que reciben subvenciones públicas como medios de comunicación, con lo recibido cada año y en total",
+    "tema": "Empresas y entidades que reciben subvenciones públicas como medios de comunicación, con lo recibido cada año",
     "preguntas": [
       "¿Qué empresas han recibido más subvenciones públicas para medios?",
       "¿Cuánto ha recibido en subvenciones una cooperativa de comunicación?",
-      "¿Qué asociaciones y fundaciones reciben ayudas a medios?"
+      "¿Qué asociaciones y fundaciones reciben ayudas a medios?",
+      "¿Qué medios locales han cobrado ayudas públicas cada año?",
+      "¿Cuántas ayudas ha recibido una misma empresa de medios?",
+      "¿Qué empresa recibió más subvenciones en 2023?",
+      "¿Cuánto ha recibido Prisa en ayudas públicas cada año?",
+      "¿Cuántas concesiones de ayudas a medios se hacen cada año?",
+      "¿Cuánto ha subido lo que reciben las empresas de medios en subvenciones?"
     ],
     "medidas": [
       {
@@ -1531,11 +1815,64 @@
         "nombre": "número de concesiones en el año",
         "unidad": "concesiones",
         "tipo": "flujo"
-      },
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": null,
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo personas jurídicas, una fila por NIF y año; se puede sumar sin doble cuenta. El total de cada beneficiario, su puesto, su forma jurídica y las administraciones que le conceden están en medios_subvenciones_totales. Datos 2022-2026; es_parcial marca el último año, incompleto."
+  },
+  {
+    "tabla": "medios_subvenciones_totales",
+    "usar": true,
+    "tema": "Cuánto han recibido en total las empresas y entidades que cobran subvenciones públicas como medios de comunicación, y su puesto",
+    "preguntas": [
+      "¿Qué empresa de medios ha recibido más subvenciones públicas?",
+      "¿Cuánto ha recibido en subvenciones el grupo Prisa?",
+      "¿Qué administraciones conceden subvenciones a medios de comunicación?",
+      "¿Qué empresas han cobrado más ayudas públicas desde 2022?",
+      "¿Cuántas administraciones distintas subvencionan a un mismo medio?",
+      "¿Qué fundaciones y asociaciones reciben más ayudas de comunicación?",
+      "¿Qué tipos de ayuda reciben los medios de comunicación?",
+      "¿A cuántas convocatorias de ayudas ha concurrido cada empresa de medios?",
+      "Dime el ranking de empresas de medios por subvenciones recibidas"
+    ],
+    "medidas": [
       {
         "columna": "total_eur_real",
-        "nombre": "total recibido 2022-2026 (repetido en cada fila del beneficiario)",
+        "nombre": "subvenciones recibidas entre 2022 y 2026, en euros constantes",
         "unidad": "€ (euros reales de 2025)",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "total_eur_nominal",
+        "nombre": "subvenciones recibidas entre 2022 y 2026, en euros del año",
+        "unidad": "€ (nominales)",
+        "tipo": "flujo",
+        "real": "total_eur_real"
+      },
+      {
+        "columna": "total_concesiones",
+        "nombre": "número de concesiones",
+        "unidad": "concesiones",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "n_convocatorias",
+        "nombre": "convocatorias distintas",
+        "unidad": "convocatorias",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "n_administraciones",
+        "nombre": "administraciones concedentes distintas",
+        "unidad": "administraciones",
         "tipo": "nivel"
       },
       {
@@ -1545,11 +1882,7 @@
         "tipo": "indice"
       }
     ],
-    "tiempo": {
-      "columna": "anio",
-      "grano": "anual",
-      "parcial": true
-    },
+    "tiempo": null,
     "territorio": null,
     "dimensiones": [
       {
@@ -1564,7 +1897,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo personas jurídicas, una fila por NIF y año. total_* y rango se repiten en cada año del mismo beneficiario: no sumarlos entre filas. Datos 2022-2026 (2026 incompleto). Las administraciones concedentes son texto en mayúsculas."
+    "notas": "Solo personas jurídicas, una fila por NIF con el total de 2022-2026 (2026 incompleto). El detalle por año está en medios_subvenciones_beneficiarios. Las administraciones concedentes son texto en mayúsculas."
   },
   {
     "tabla": "medios_tv_ccaa_anual",
@@ -1574,7 +1907,13 @@
       "¿Qué comunidad gasta más por habitante en su televisión autonómica?",
       "¿Cuánto dinero público recibe TV3 al año?",
       "¿Cuánto cuesta Telemadrid a cada madrileño?",
-      "¿Qué televisión autonómica tiene más audiencia?"
+      "¿Qué televisión autonómica tiene más audiencia?",
+      "¿Cuánto dinero público recibe EITB?",
+      "¿Qué televisión autonómica es más eficiente en dinero por punto de cuota de pantalla?",
+      "¿Qué cuota de pantalla tiene Canal Sur?",
+      "¿Cuánto recibe Canal Extremadura por habitante?",
+      "¿Cuántos millones recibe la Televisión Canaria al año?",
+      "¿Cómo ha cambiado el dinero que recibe À Punt desde 2017?"
     ],
     "medidas": [
       {
@@ -1660,7 +1999,13 @@
     "preguntas": [
       "¿Cuánto dinero público recibe RTVE al año?",
       "¿Cuánto paga cada español por la televisión pública?",
-      "¿Cómo ha evolucionado la financiación de RTVE desde 2008?"
+      "¿Cómo ha evolucionado la financiación de RTVE desde 2008?",
+      "¿Cuánto se gastan las televisiones autonómicas entre todas?",
+      "¿Qué cuota de audiencia tiene La 1?",
+      "¿Cuántos millones recibe RTVE del Estado?",
+      "¿Cuánto cuesta a cada ciudadano la tele pública, RTVE más autonómicas?",
+      "¿Cuánto más gastan las autonómicas por habitante que RTVE?",
+      "¿Ha subido o bajado el dinero público a RTVE sin contar la inflación?"
     ],
     "medidas": [
       {
@@ -1727,7 +2072,13 @@
     "preguntas": [
       "¿Qué partido gasta más en televisión autonómica por habitante?",
       "¿Gastan más en su televisión las comunidades del PP o del PSOE?",
-      "¿Cuánto gastan en televisión pública las comunidades gobernadas por el PNV?"
+      "¿Cuánto gastan en televisión pública las comunidades gobernadas por el PNV?",
+      "¿Qué comunidades gobernadas por Junts o CiU gastan más en televisión?",
+      "¿Qué partido se lleva más dinero de la tele autonómica en proporción a su población?",
+      "¿Cuánto ha gastado el PSOE en televisiones autonómicas en total?",
+      "¿Gasta más en televisión autonómica Coalición Canaria o ERC?",
+      "¿Qué porcentaje del dinero de las tele autonómicas va a comunidades del PP?",
+      "Compara lo que gastan en tele pública el PNV, el PP y el PSOE"
     ],
     "medidas": [
       {
@@ -1781,7 +2132,13 @@
     "preguntas": [
       "¿A cuánto está hoy el litro de gasolina en España?",
       "¿Es más cara la gasolina en España o en la media de la UE?",
-      "¿Cómo ha evolucionado el precio del diésel desde 2005?"
+      "¿Cómo ha evolucionado el precio del diésel desde 2005?",
+      "¿Cuánto cuesta el litro de gasóleo hoy?",
+      "¿Cuánto vale el gas licuado para el coche?",
+      "¿A cuánto está el gasóleo de calefacción?",
+      "¿Cuándo estuvo más cara la gasolina en España?",
+      "¿Cuánto ha subido la gasolina desde 2020 sin contar la inflación?",
+      "¿Es más barato el diésel en España que en la media europea?"
     ],
     "medidas": [
       {
@@ -1800,7 +2157,7 @@
       }
     ],
     "tiempo": {
-      "columna": "semana",
+      "columna": "fecha",
       "grano": "semanal",
       "parcial": false
     },
@@ -1810,10 +2167,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "geo",
-      "nombre": "territorio",
+      "codigo": "cod_pais",
+      "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -1825,7 +2182,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Weekly Oil Bulletin de la UE: precio con impuestos. Solo hay España (ES) y la media de la UE (EU). Los precios no se suman. El último dato es de la semana del 28 de septiembre de 2026."
+    "notas": "Weekly Oil Bulletin de la UE: precio con impuestos. Solo hay España (ES) y la media de la UE (EU27_2020). La fecha es el primer día de la semana del boletín. Los precios no se suman."
   },
   {
     "tabla": "mercado_energia_hogares",
@@ -1834,7 +2191,13 @@
     "preguntas": [
       "¿Cuánto cuesta el kWh de electricidad en España?",
       "¿Es más cara la luz en España que en Alemania?",
-      "¿Cómo ha evolucionado el precio del gas natural para los hogares?"
+      "¿Cómo ha evolucionado el precio del gas natural para los hogares?",
+      "¿Cuánto paga un hogar español por el gas natural frente a Francia?",
+      "¿Qué país europeo tiene la luz más cara para las casas?",
+      "¿Cuánto cuesta el kilovatio hora de luz en Portugal?",
+      "¿Cuánto ha subido la luz de las casas desde 2020 sin contar la inflación?",
+      "¿En qué semestre fue más cara la electricidad doméstica en España?",
+      "¿Cuánto cuesta el gas en España frente a Italia?"
     ],
     "medidas": [
       {
@@ -1853,7 +2216,7 @@
       }
     ],
     "tiempo": {
-      "columna": "semestre_inicio",
+      "columna": "fecha",
       "grano": "semestral",
       "parcial": false
     },
@@ -1863,10 +2226,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "geo",
+      "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "geo",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -1878,7 +2241,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Datos semestrales de Eurostat para un consumidor doméstico medio (electricidad banda DC, gas banda D2), con impuestos. La columna de tiempo es la fecha de inicio del semestre; la columna semestre (2025-S1) es la etiqueta legible. Último dato: segundo semestre de 2025. Países: España, Alemania, Francia, Italia, Portugal y UE-27."
+    "notas": "Datos semestrales de Eurostat para un consumidor doméstico medio (electricidad banda DC, gas banda D2), con impuestos. La fecha es el primer día del semestre; la columna semestre (2025-S1) es la etiqueta legible. Países: España, Alemania, Francia, Italia, Portugal y UE-27 (EU27_2020)."
   },
   {
     "tabla": "mercado_energia_ipc",
@@ -1887,7 +2250,13 @@
     "preguntas": [
       "¿Cuánto ha subido la luz en el último año?",
       "¿Cómo ha evolucionado el precio de la gasolina frente a la inflación general?",
-      "¿Cuánto pesa la electricidad en el IPC?"
+      "¿Cuánto pesa la electricidad en el IPC?",
+      "¿Cuánto ha subido el gas natural en el último año?",
+      "¿Cuánto ha subido el butano?",
+      "¿Qué ha subido más desde 2019, la luz o el IPC general?",
+      "¿Cuánto ha variado el gasóleo de calefacción en el último año?",
+      "¿Qué parte del gasto de las familias se va en electricidad?",
+      "¿Cuánto de la inflación se debe a la luz y al gas?"
     ],
     "medidas": [
       {
@@ -1946,7 +2315,12 @@
       "¿Cuál es la inflación en Madrid?",
       "¿Qué comunidad tiene la inflación más alta?",
       "¿Cuánto han subido los precios en Andalucía desde 2019?",
-      "¿Cómo ha evolucionado el IPC en España desde 1978?"
+      "¿Cómo ha evolucionado el IPC en España desde 1978?",
+      "¿Dónde han subido más los precios desde 2019, en Cataluña o en Galicia?",
+      "¿Qué comunidad tiene la inflación más baja?",
+      "¿Cuánto han subido los precios en Canarias el último mes?",
+      "¿Cuánto ha subido el coste de la vida en la Comunidad Valenciana desde 2019?",
+      "¿Cuánto han subido los precios en Ceuta?"
     ],
     "medidas": [
       {
@@ -1981,7 +2355,7 @@
       ],
       "nivel": null,
       "codigo": "cod_ccaa",
-      "nombre": null,
+      "nombre": "ccaa",
       "espana": {
         "columna": "cod_ccaa",
         "valor": "00"
@@ -1989,7 +2363,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "INE tabla 76140. Sin nombre de comunidad: solo código INE (00 es el Total nacional, 13 Madrid). Ceuta (18) y Melilla (19) solo desde unos años después. Las tasas no se suman ni se promedian entre comunidades sin ponderar. Último dato: agosto de 2026."
+    "notas": "INE tabla 76140. cod_ccaa 00 es el Total nacional (ccaa = España, es_nacional); 13 es Madrid. Ceuta (18) y Melilla (19) solo desde unos años después. Las tasas no se suman ni se promedian entre comunidades sin ponderar. Último dato: agosto de 2026."
   },
   {
     "tabla": "mercado_ipc_grupos",
@@ -1999,7 +2373,12 @@
       "¿Cuánto han subido los alimentos en el último año?",
       "¿Cuál es la inflación general en España?",
       "¿Qué grupo de gasto ha subido más de precio?",
-      "¿Cómo ha evolucionado el IPC de transporte desde 2020?"
+      "¿Cómo ha evolucionado el IPC de transporte desde 2020?",
+      "¿Cuánto han subido los restaurantes y hoteles este año?",
+      "¿Cuánto pesa la vivienda y la energía en el gasto de las familias?",
+      "¿Qué grupo contribuye más a la inflación?",
+      "¿Han bajado los precios de las comunicaciones, como el móvil?",
+      "¿Cuánto ha subido el ocio y la cultura en el último año?"
     ],
     "medidas": [
       {

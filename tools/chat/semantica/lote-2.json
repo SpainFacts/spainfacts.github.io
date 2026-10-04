@@ -7,7 +7,13 @@
       "¿Cuántas empresas de construcción hay por cada 1.000 habitantes en España?",
       "¿Qué país de la UE tiene más empresas constructoras por habitante?",
       "¿Cuánto factura la construcción por habitante en Francia comparado con España?",
-      "¿Cuántos trabajadores tiene de media una constructora española?"
+      "¿Cuántos trabajadores tiene de media una constructora española?",
+      "¿Cuántas constructoras hay en España?",
+      "¿Cuántas empresas de construcción tiene Italia?",
+      "¿Cuánto factura el sector de la construcción en Alemania?",
+      "¿Qué porcentaje de las constructoras de Europa están en España?",
+      "¿Cuántos trabajadores emplea la construcción en Francia?",
+      "¿Qué rama de la construcción tiene más empresas, edificación o ingeniería civil?"
     ],
     "medidas": [
       {
@@ -125,7 +131,14 @@
     "preguntas": [
       "¿Cuál es la mayor constructora española del mundo?",
       "¿Qué puesto ocupa Ferrovial entre las constructoras del mundo?",
-      "¿Cuánto factura ACS y qué parte es del extranjero?"
+      "¿Cuánto factura ACS y qué parte es del extranjero?",
+      "¿Qué constructoras españolas están entre las más grandes del mundo?",
+      "¿Cuánto ingresa Acciona por construcción?",
+      "¿Qué porcentaje de las ventas de ACS está fuera de España?",
+      "¿Cuál es la constructora española con más ventas internacionales?",
+      "¿En qué puesto está Sacyr del mundo?",
+      "¿Cuántas constructoras españolas hay entre las mayores del planeta?",
+      "¿Quién gana más, ACS o Ferrovial?"
     ],
     "medidas": [
       {
@@ -155,7 +168,7 @@
       }
     ],
     "tiempo": {
-      "columna": "edicion",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -168,7 +181,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo 7 filas de la edición 2025 de Global Powers of Construction; los ingresos solo están para ACS y Acciona (el resto aparece sin cifra). Importes en dólares, no en euros."
+    "notas": "Solo 7 filas de la edición 2025 (anio = 2025) de Global Powers of Construction; los ingresos solo están para ACS y Acciona (el resto aparece sin cifra). Importes en dólares, no en euros."
   },
   {
     "tabla": "construccion_licitacion",
@@ -178,7 +191,13 @@
       "¿Cuánta obra pública se licita por habitante en Castilla y León?",
       "¿Qué comunidad ha licitado más obra pública por habitante en 2023?",
       "¿Cómo ha evolucionado la licitación de obra pública en España desde 2008?",
-      "¿Qué parte de la licitación es obra civil y cuál edificación?"
+      "¿Qué parte de la licitación es obra civil y cuál edificación?",
+      "¿Cuánto dinero público se destina a obras en Andalucía?",
+      "¿Cuánto licita el Estado en obra pública al año?",
+      "¿Cuánto licitan las comunidades y los ayuntamientos?",
+      "¿Cuántos millones se licitaron en obra civil en 2023?",
+      "¿Qué comunidad recibe menos obra pública por habitante?",
+      "¿Cuánto se gasta en construir colegios y hospitales frente a carreteras y puentes?"
     ],
     "medidas": [
       {
@@ -309,17 +328,23 @@
   {
     "tabla": "construccion_permisos",
     "usar": true,
-    "tema": "Cuántas viviendas se autorizan o visan para construir o reformar, por habitante, en España, sus comunidades y la UE",
+    "tema": "Cuántas viviendas se visan para construir o reformar por habitante en España y sus comunidades",
     "preguntas": [
       "¿Cuántas viviendas nuevas se visan por cada 1.000 habitantes en Andalucía?",
-      "¿Qué país de la UE concede más permisos de vivienda por habitante?",
       "¿Cómo ha evolucionado la construcción de vivienda nueva en España desde 2007?",
-      "¿Cuántos metros cuadrados de obra nueva se visan por habitante en España?"
+      "¿Cuántos metros cuadrados de obra nueva se visan por habitante en España?",
+      "¿Qué comunidad visa más viviendas por habitante?",
+      "¿Cuántas casas nuevas se visaron en España en 2023?",
+      "¿Cuántas viviendas se reformaron en la Comunidad de Madrid?",
+      "¿Cuántas casas se construyeron en 2007 durante el boom?",
+      "¿Cuántas viviendas se amplían cada año?",
+      "¿Qué comunidad construye menos vivienda nueva por habitante?",
+      "¿Cuántos pisos nuevos se visaron en Cataluña?"
     ],
     "medidas": [
       {
         "columna": "viviendas_nueva_1000hab",
-        "nombre": "viviendas nuevas con permiso o visado por cada 1.000 habitantes",
+        "nombre": "viviendas nuevas con visado por cada 1.000 habitantes",
         "unidad": "viviendas por cada 1.000 habitantes",
         "tipo": "tasa",
         "principal": true
@@ -331,26 +356,14 @@
         "tipo": "tasa"
       },
       {
-        "columna": "m2_residencial_hab",
-        "nombre": "metros cuadrados residenciales con permiso por habitante (UE)",
-        "unidad": "m² por habitante",
-        "tipo": "tasa"
-      },
-      {
-        "columna": "m2_no_residencial_hab",
-        "nombre": "metros cuadrados no residenciales con permiso por habitante (UE)",
-        "unidad": "m² por habitante",
-        "tipo": "tasa"
-      },
-      {
         "columna": "m2_obra_nueva_hab",
-        "nombre": "metros cuadrados de obra nueva visados por habitante (serie larga de España)",
+        "nombre": "metros cuadrados de obra nueva visados por habitante (solo España)",
         "unidad": "m² por habitante",
         "tipo": "tasa"
       },
       {
         "columna": "viviendas_nueva",
-        "nombre": "viviendas nuevas con permiso o visado",
+        "nombre": "viviendas nuevas con visado",
         "unidad": "viviendas",
         "tipo": "flujo"
       },
@@ -381,27 +394,89 @@
     "territorio": {
       "niveles": [
         "pais",
-        "ccaa",
-        "pais_extranjero"
+        "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
       "nombre": "nombre",
       "espana": {
-        "columna": "nombre",
-        "valor": "España"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
-    "dimensiones": [
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Visados de dirección de obra de los colegios de aparejadores (Ministerio de Transportes), por comunidad desde 2000 y para España desde 1992 (antes de 2000, Banco de España); España aparece una sola vez por año (nivel = pais). Sin Ceuta ni Melilla. La ampliación y la reforma solo existen desde 2000. Los permisos de otros países europeos (otra fuente, no comparable) están en construccion_permisos_ue."
+  },
+  {
+    "tabla": "construccion_permisos_ue",
+    "usar": true,
+    "tema": "Cuántas viviendas se autorizan para construir por habitante en cada país de la UE",
+    "preguntas": [
+      "¿Qué país de la UE concede más permisos de vivienda por habitante?",
+      "¿En qué puesto está España en permisos de construcción de vivienda por habitante?",
+      "¿Cuántos metros cuadrados residenciales con permiso por habitante hay en Alemania?",
+      "¿Dónde se construyen más casas por habitante en Europa?",
+      "¿Cuántas licencias de obra para vivienda hay en Francia?",
+      "¿Cuántos permisos de vivienda se dieron en España en 2025?",
+      "¿Qué país de la UE concede menos permisos por habitante?",
+      "¿Cuántos metros cuadrados de oficinas y naves con permiso hay por habitante en Alemania?",
+      "¿Cómo han evolucionado los permisos de vivienda en Portugal desde 2005?",
+      "¿Cuántas viviendas se autorizan en toda la UE?"
+    ],
+    "medidas": [
       {
-        "columna": "ambito",
-        "nombre": "ámbito de los datos (UE = países europeos, CCAA = comunidades, ES_LARGA = España desde 1992)",
-        "total": null,
-        "defecto": "CCAA"
+        "columna": "viviendas_nueva_1000hab",
+        "nombre": "viviendas con permiso de construcción por cada 1.000 habitantes",
+        "unidad": "viviendas por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "m2_residencial_hab",
+        "nombre": "metros cuadrados residenciales con permiso por habitante",
+        "unidad": "m² por habitante",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "m2_no_residencial_hab",
+        "nombre": "metros cuadrados no residenciales con permiso por habitante",
+        "unidad": "m² por habitante",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "viviendas_nueva",
+        "nombre": "viviendas con permiso de construcción",
+        "unidad": "viviendas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del país",
+        "unidad": "habitantes",
+        "tipo": "nivel"
       }
     ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
     "filtros": [],
-    "notas": "Tres fuentes distintas en una tabla: hay que elegir ambito (CCAA para comunidades, UE para comparar países, ES_LARGA para la serie histórica de España); España aparece una vez en cada ámbito con cifras algo distintas porque la fuente no es la misma (permisos de Eurostat frente a visados de colegios de arquitectos)."
+    "notas": "Eurostat sts_cobp_a desde 2005: países de la UE y la UE-27 (cod_pais = EU27_2020). Son permisos (licencias), no visados: para España da más viviendas que los visados de construccion_permisos (2025: unas 200.000 frente a 139.000) porque el INE envía otra fuente; no mezclar las dos series."
   },
   {
     "tabla": "construccion_peso_ue",
@@ -411,7 +486,13 @@
       "¿Qué porcentaje del PIB representa la construcción en España?",
       "¿Qué país de la UE depende más de la construcción?",
       "¿Cuántos ocupados en construcción hay por cada 1.000 habitantes en España?",
-      "¿Cómo ha cambiado el peso de la construcción en España desde 2007?"
+      "¿Cómo ha cambiado el peso de la construcción en España desde 2007?",
+      "¿Cuánta gente trabaja en construcción en España en proporción al empleo total?",
+      "¿Qué país de Europa tiene más empleo en construcción?",
+      "¿En qué puesto está España por peso de la construcción?",
+      "¿Cuántos millones de euros aporta la construcción a la economía?",
+      "¿Cuánto vale la construcción por persona en Irlanda?",
+      "¿Cuánto ha crecido o caído la actividad de la construcción desde 2007?"
     ],
     "medidas": [
       {
@@ -517,7 +598,14 @@
     "preguntas": [
       "¿Cuánto ha crecido la producción de la construcción en España en 2024?",
       "¿Cómo está la obra pública en España comparada con 2007?",
-      "¿Qué país de la UE ha recuperado más su producción de edificación?"
+      "¿Qué país de la UE ha recuperado más su producción de edificación?",
+      "¿Cuánto produce la construcción en España comparado con 2007?",
+      "¿Cómo va la producción de ingeniería civil?",
+      "¿Qué país europeo ha crecido más en obra civil?",
+      "¿Cuánto ha crecido la construcción especializada en 2025?",
+      "¿Cuánto ha caído la producción de edificación respecto a antes de la crisis?",
+      "¿Qué país produce más construcción respecto a 2021?",
+      "¿Está creciendo o decreciendo la construcción en Alemania?"
     ],
     "medidas": [
       {
@@ -551,10 +639,10 @@
         "pais_extranjero"
       ],
       "nivel": null,
-      "codigo": "pais",
-      "nombre": "pais_nombre",
+      "codigo": "cod_pais",
+      "nombre": "pais",
       "espana": {
-        "columna": "pais",
+        "columna": "cod_pais",
         "valor": "ES"
       }
     },
@@ -576,7 +664,13 @@
       "¿Cuántos delitos por cada 1.000 habitantes hubo en Madrid en 2024?",
       "¿Qué provincia tiene más hurtos por habitante?",
       "¿Cuántos homicidios hubo en España en 2023?",
-      "¿Cómo ha evolucionado la cibercriminalidad desde 2019?"
+      "¿Cómo ha evolucionado la cibercriminalidad desde 2019?",
+      "¿Cuántos robos con fuerza hubo en Barcelona en 2024?",
+      "¿Qué municipio tiene más delitos por habitante?",
+      "¿Cuántas estafas informáticas hubo en España el año pasado?",
+      "¿Es Bilbao una ciudad segura comparada con otras?",
+      "¿Cuántos delitos se cometen en Andalucía al año?",
+      "¿Cuántas agresiones sexuales con penetración hubo en 2023?"
     ],
     "medidas": [
       {
@@ -613,7 +707,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": "territorio",
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -627,7 +721,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Balance de Criminalidad del Ministerio del Interior, año completo. Las categorías se solapan (Criminalidad convencional, Cibercriminalidad, Hurtos, Estafas informáticas...), así que no se pueden sumar entre sí; solo hay municipios de más de 20.000 habitantes; los nombres de territorio vienen en mayúsculas y a veces sin tildes; los códigos de comunidad y provincia coinciden entre sí, filtra siempre por nivel."
+    "notas": "Balance de Criminalidad del Ministerio del Interior, año completo. Las categorías se solapan (Criminalidad convencional, Cibercriminalidad, Hurtos, Estafas informáticas...), así que no se pueden sumar entre sí; solo hay municipios de más de 20.000 habitantes; los códigos de comunidad y provincia coinciden entre sí, filtra siempre por nivel."
   },
   {
     "tabla": "crimen_condenados",
@@ -637,7 +731,13 @@
       "¿Cuántos condenados por cada 1.000 habitantes hay entre los extranjeros en España?",
       "¿Qué comunidad tiene más condenados por habitante?",
       "¿Cuántas mujeres fueron condenadas en 2024?",
-      "¿Cómo ha evolucionado el número de condenados en Cataluña?"
+      "¿Cómo ha evolucionado el número de condenados en Cataluña?",
+      "¿Cuántos hombres fueron condenados en España en 2023?",
+      "¿Qué porcentaje de los condenados son extranjeros?",
+      "¿Cuántas personas condenadas hay en Andalucía?",
+      "¿Quién tiene más condenas por habitante, españoles o extranjeros?",
+      "¿Cuántas mujeres extranjeras fueron condenadas?",
+      "¿Qué comunidad tiene menos condenados por habitante?"
     ],
     "medidas": [
       {
@@ -670,12 +770,12 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
-      "codigo": "cod_ccaa",
-      "nombre": null,
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod_ccaa",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [
@@ -691,7 +791,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Estadística de condenados del INE. Sin columna de nombre: hay que traducir el código de comunidad (00 = España). La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
+    "notas": "Estadística de condenados del INE: el total de España es nivel = pais. La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
   },
   {
     "tabla": "crimen_condenas_delito",
@@ -701,7 +801,13 @@
       "¿Por qué delitos se condena más en España?",
       "¿Cuántas condenas por hurto hubo en 2024?",
       "¿Cuántas condenas por delitos contra la seguridad vial hay a extranjeros?",
-      "¿Cómo han evolucionado las condenas por violencia de género?"
+      "¿Cómo han evolucionado las condenas por violencia de género?",
+      "¿Cuántas condenas por homicidio hay al año?",
+      "¿Cuántas personas son condenadas por drogas?",
+      "¿Qué delito tiene más condenas a extranjeros?",
+      "¿Cuántas condenas por robo hubo en 2022?",
+      "¿Cuántos africanos fueron condenados por hurto?",
+      "¿Cuántas condenas por agresión sexual se dictan?"
     ],
     "medidas": [
       {
@@ -752,6 +858,24 @@
         "nombre": "condenas a personas de Asia",
         "unidad": "condenas",
         "tipo": "flujo"
+      },
+      {
+        "columna": "total_por_100k_hab",
+        "nombre": "condenas por el delito por cada 100.000 habitantes",
+        "unidad": "condenas por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "espanola_por_100k_hab",
+        "nombre": "condenas a españoles por cada 100.000 habitantes españoles",
+        "unidad": "condenas por cada 100.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "extranjera_por_100k_hab",
+        "nombre": "condenas a extranjeros por cada 100.000 habitantes extranjeros",
+        "unidad": "condenas por cada 100.000 habitantes",
+        "tipo": "tasa"
       }
     ],
     "tiempo": {
@@ -765,10 +889,15 @@
         "columna": "delito",
         "nombre": "tipo de delito",
         "total": "Delitos"
+      },
+      {
+        "columna": "nivel_delito",
+        "nombre": "nivel del delito en el árbol (0 total, 1 grupo, 2 delito, 3 subdelito)",
+        "total": null
       }
     ],
     "filtros": [],
-    "notas": "Solo España. La columna delito mezcla grandes grupos y delitos concretos que están dentro de ellos, así que sumar todas las filas cuenta varias veces; el total real es la fila 'Delitos'. Cuenta delitos por los que se condena, no personas: una persona puede tener varios, por eso difiere de la tabla de condenados. Sin tasas por habitante."
+    "notas": "Solo España. Los delitos forman un árbol: Delitos (nivel 0) es el total, y cada nivel suma el del padre (columna delito_padre), así que solo se suma dentro de un mismo nivel_delito. Cuenta delitos por los que se condena, no personas: una persona puede tener varios, por eso difiere de la tabla de condenados. Las tasas por 100.000 habitantes usan la población total, española o extranjera según la columna; los condenados extranjeros incluyen personas que no residen en España, lo que eleva su tasa."
   },
   {
     "tabla": "crimen_serie_larga",
@@ -778,7 +907,13 @@
       "¿Cómo han evolucionado los robos con violencia en España desde 2010?",
       "¿Cuántos delitos por 1.000 habitantes hay en Sevilla?",
       "¿Cuántas agresiones sexuales con penetración se registraron en 2024?",
-      "¿Qué comunidad tiene más tasa de malos tratos en el ámbito familiar?"
+      "¿Qué comunidad tiene más tasa de malos tratos en el ámbito familiar?",
+      "¿Cuántos delitos hubo en España en 2010?",
+      "¿Cuántos homicidios dolosos y asesinatos hay cada año?",
+      "¿Cuántos hurtos se denunciaron en Valencia?",
+      "¿Cuántas violaciones se registraron en Madrid en 2019?",
+      "¿Cómo han cambiado los delitos de tráfico de drogas desde 2010?",
+      "¿Qué provincia tiene más robos con violencia por habitante?"
     ],
     "medidas": [
       {
@@ -814,7 +949,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -828,7 +963,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Ministerio del Interior, serie larga con otra clasificación que el balance reciente. La tipología es jerárquica (nivel_tipologia 0, 1, 2: capítulos, delitos y subtipos), así que no se suma entre niveles. Sin nombre de territorio: solo códigos, y los de comunidad y provincia se solapan, filtra siempre por nivel. Sin municipios."
+    "notas": "Ministerio del Interior, serie larga con otra clasificación que el balance reciente. La tipología es jerárquica (nivel_tipologia 0, 1, 2: capítulos, delitos y subtipos), así que no se suma entre niveles. Los códigos de comunidad y provincia se solapan, filtra siempre por nivel. Sin municipios."
   },
   {
     "tabla": "crimen_ultimo_periodo",
@@ -837,7 +972,14 @@
     "preguntas": [
       "¿Están subiendo o bajando los delitos este año en España?",
       "¿Cuántos robos con violencia hubo de enero a junio de 2026 frente al año pasado?",
-      "¿Ha aumentado la cibercriminalidad en Barcelona este año?"
+      "¿Ha aumentado la cibercriminalidad en Barcelona este año?",
+      "¿Cuántos delitos se han cometido este año hasta ahora?",
+      "¿Cuánto han subido las estafas informáticas este año respecto al pasado?",
+      "¿Qué provincias tienen este año más delitos que el pasado?",
+      "¿Cuántos hurtos ha habido en Madrid en lo que va de 2026?",
+      "¿Ha subido o bajado la criminalidad en Sevilla este año?",
+      "¿Qué comunidad ha visto crecer más los delitos este año?",
+      "¿Cuántas infracciones penales hubo en el primer semestre?"
     ],
     "medidas": [
       {
@@ -852,6 +994,24 @@
         "nombre": "infracciones en el mismo periodo del año anterior",
         "unidad": "infracciones",
         "tipo": "flujo"
+      },
+      {
+        "columna": "tasa_1000",
+        "nombre": "infracciones penales del periodo por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "variacion_pct",
+        "nombre": "variación de las infracciones frente al mismo periodo del año anterior",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "población del territorio (padrón más reciente)",
+        "unidad": "habitantes",
+        "tipo": "nivel"
       }
     ],
     "tiempo": {
@@ -868,7 +1028,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": "territorio",
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -882,7 +1042,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Acumulado enero-junio de 2026 (columna periodo), no un año completo: solo es comparable con infracciones_anio_anterior, nunca con los años completos de la tabla de balance. Las categorías se solapan; sin tasa por habitante."
+    "notas": "Acumulado enero-junio de 2026 (columna periodo), no un año completo: solo es comparable con infracciones_anio_anterior, nunca con los años completos de la tabla de balance (tampoco su tasa_1000, que es de medio año). Las categorías se solapan."
   },
   {
     "tabla": "cuentas_balance_anual",
@@ -892,15 +1052,45 @@
       "¿Cuál es la deuda pública de España en porcentaje del PIB?",
       "¿Cuánto déficit tuvo España en 2024?",
       "¿Cómo ha evolucionado la deuda pública desde 2008?",
-      "¿Cuánto ingresa y cuánto gasta el Estado al año?"
+      "¿Cuánto ingresa y cuánto gasta el Estado al año?",
+      "¿Cuánto debe España en total?",
+      "¿Cuánto gastan al año todas las administraciones públicas?",
+      "¿Cuánta deuda pública tiene cada español?",
+      "¿Cuál fue el déficit en 2020 durante la pandemia?",
+      "¿Cuántos euros ingresan las administraciones en total?",
+      "¿Qué porcentaje del PIB es el déficit público?"
     ],
     "medidas": [
+      {
+        "columna": "saldo_eur_hab_real",
+        "nombre": "saldo o déficit público por habitante, en euros constantes (negativo = déficit)",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ingresos_eur_hab_real",
+        "nombre": "ingresos públicos por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "gastos_eur_hab_real",
+        "nombre": "gastos públicos por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "deuda_eur_hab_real",
+        "nombre": "deuda pública por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "nivel"
+      },
       {
         "columna": "saldo_deficit_pib",
         "nombre": "saldo o déficit de las administraciones públicas en porcentaje del PIB",
         "unidad": "% del PIB",
-        "tipo": "porcentaje",
-        "principal": true
+        "tipo": "porcentaje"
       },
       {
         "columna": "deuda_pib",
@@ -912,42 +1102,46 @@
         "columna": "deuda_publica_mrd",
         "nombre": "deuda pública",
         "unidad": "miles de millones de €",
-        "tipo": "nivel"
+        "tipo": "nivel",
+        "real": "deuda_eur_hab_real"
       },
       {
         "columna": "ingresos_totales_mrd",
         "nombre": "ingresos públicos totales",
         "unidad": "miles de millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "ingresos_eur_hab_real"
       },
       {
         "columna": "gastos_totales_mrd",
         "nombre": "gastos públicos totales",
         "unidad": "miles de millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "gastos_eur_hab_real"
       },
       {
         "columna": "saldo_deficit_mrd",
         "nombre": "saldo o déficit público (negativo = déficit)",
         "unidad": "miles de millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "saldo_eur_hab_real"
       },
       {
-        "columna": "poblacion_m",
-        "nombre": "población de España",
-        "unidad": "millones de habitantes",
+        "columna": "poblacion",
+        "nombre": "población de España (media anual)",
+        "unidad": "habitantes",
         "tipo": "nivel"
       }
     ],
     "tiempo": {
-      "columna": "año",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
     "territorio": null,
     "dimensiones": [],
     "filtros": [],
-    "notas": "Solo España, cuentas consolidadas de Eurostat; los importes están en miles de millones de euros corrientes (no reales). Los valores negativos del saldo son déficit. Sin dato por comunidad (para eso ver las tablas de deuda autonómica)."
+    "notas": "Solo España, cuentas consolidadas de Eurostat. Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales en miles de millones (mrd) son euros corrientes. Los valores negativos del saldo son déficit. Sin dato por comunidad (para eso ver las tablas de deuda autonómica)."
   },
   {
     "tabla": "cuentas_gastos",
@@ -957,13 +1151,19 @@
       "¿Cuánto gasta España en sanidad por habitante?",
       "¿Qué porcentaje del PIB se gasta en defensa?",
       "¿Cuánto se paga de intereses de la deuda al año?",
-      "¿Cómo ha cambiado el gasto en educación desde 2010?"
+      "¿Cómo ha cambiado el gasto en educación desde 2010?",
+      "¿Cuánto cuesta el pago de pensiones al año?",
+      "¿Cuánto se gasta en protección social?",
+      "¿Qué parte del gasto público va a la policía y la justicia?",
+      "¿Cuánto se invierte en vivienda y servicios comunitarios?",
+      "¿En qué función gasta más el Estado?",
+      "¿Cuánto gasta España por habitante en transporte y carreteras?"
     ],
     "medidas": [
       {
-        "columna": "gasto_por_habitante_eur",
-        "nombre": "gasto público por habitante",
-        "unidad": "€ por habitante",
+        "columna": "gasto_eur_hab_real",
+        "nombre": "gasto público por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "flujo",
         "principal": true
       },
@@ -983,11 +1183,12 @@
         "columna": "millones_euros",
         "nombre": "gasto público total",
         "unidad": "millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "gasto_eur_hab_real"
       }
     ],
     "tiempo": {
-      "columna": "año",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -1005,7 +1206,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España, clasificación COFOG de Eurostat; las diez funciones suman el gasto total (no hay fila de total). Los euros son corrientes, no reales, y el último año es 2024."
+    "notas": "Solo España, clasificación COFOG de Eurostat; las diez funciones suman el gasto total (no hay fila de total). El gasto por habitante está en euros constantes del último año completo (anio_base); el total en millones es euros corrientes. Último año 2024."
   },
   {
     "tabla": "cuentas_ingresos",
@@ -1015,15 +1216,27 @@
       "¿Cuánto recauda España por IVA?",
       "¿Qué porcentaje del PIB suponen las cotizaciones sociales?",
       "¿Cuánto recauda el impuesto de sociedades y cómo ha cambiado desde 2007?",
-      "¿Cuál es el impuesto que más recauda?"
+      "¿Cuál es el impuesto que más recauda?",
+      "¿Cuánto se recauda de IRPF?",
+      "¿De dónde saca más dinero el Estado?",
+      "¿Cuánto pagamos por cotizaciones a la Seguridad Social?",
+      "¿Cuánto ingresan las administraciones por impuestos al consumo?",
+      "¿Cuánto recaudan los impuestos sobre el patrimonio?",
+      "¿Cuánto paga cada español en impuestos?"
     ],
     "medidas": [
+      {
+        "columna": "ingreso_eur_hab_real",
+        "nombre": "ingreso público por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
       {
         "columna": "porcentaje_pib",
         "nombre": "ingreso público en porcentaje del PIB",
         "unidad": "% del PIB",
-        "tipo": "porcentaje",
-        "principal": true
+        "tipo": "porcentaje"
       },
       {
         "columna": "porcentaje_ingreso_total",
@@ -1035,11 +1248,12 @@
         "columna": "millones_euros",
         "nombre": "ingreso público recaudado",
         "unidad": "millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "ingreso_eur_hab_real"
       }
     ],
     "tiempo": {
-      "columna": "año",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -1057,7 +1271,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España, Eurostat; las ocho categorías suman el total de ingresos (no hay fila de total). Importes en euros corrientes, sin cifra por habitante; último año 2024."
+    "notas": "Solo España, Eurostat; las ocho categorías suman el total de ingresos (no hay fila de total). El ingreso por habitante está en euros constantes del último año completo (anio_base); el total en millones es euros corrientes. Último año 2024."
   },
   {
     "tabla": "cuentas_subsectores",
@@ -1066,27 +1280,55 @@
     "preguntas": [
       "¿Cuánto gastan las comunidades autónomas en total?",
       "¿Qué administración tiene más déficit, el Estado o la Seguridad Social?",
-      "¿Los ayuntamientos tienen superávit o déficit?"
+      "¿Los ayuntamientos tienen superávit o déficit?",
+      "¿Cuánto gasta la Seguridad Social?",
+      "¿Cuánto déficit tiene cada administración?",
+      "¿Cuál es el saldo de las comunidades autónomas?",
+      "¿Cuánto gasta el Estado central al año?",
+      "¿Qué peso tiene el gasto de los ayuntamientos?",
+      "¿Cuánto ingresan las corporaciones locales?",
+      "¿Qué parte del gasto público corresponde a las comunidades?"
     ],
     "medidas": [
+      {
+        "columna": "gasto_eur_hab_real",
+        "nombre": "gasto del subsector por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo",
+        "principal": true
+      },
+      {
+        "columna": "ingreso_eur_hab_real",
+        "nombre": "ingreso del subsector por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "saldo_eur_hab_real",
+        "nombre": "saldo o déficit del subsector por habitante, en euros constantes (negativo = déficit)",
+        "unidad": "€ de 2025 por habitante",
+        "tipo": "flujo"
+      },
       {
         "columna": "gasto_mrd",
         "nombre": "gasto del subsector",
         "unidad": "miles de millones de €",
         "tipo": "flujo",
-        "principal": true
+        "real": "gasto_eur_hab_real"
       },
       {
         "columna": "ingreso_mrd",
         "nombre": "ingreso del subsector",
         "unidad": "miles de millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "ingreso_eur_hab_real"
       },
       {
         "columna": "saldo_deficit_mrd",
         "nombre": "saldo o déficit del subsector (negativo = déficit)",
         "unidad": "miles de millones de €",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "saldo_eur_hab_real"
       },
       {
         "columna": "peso_gasto_pct",
@@ -1096,7 +1338,7 @@
       }
     ],
     "tiempo": {
-      "columna": "año",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -1109,7 +1351,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Cuentas no consolidadas de Eurostat: los pesos suman más de 100 % porque las transferencias entre administraciones se cuentan dos veces, así que no se pueden sumar los subsectores para obtener el total (para eso está la tabla de balance anual). Euros corrientes."
+    "notas": "Cuentas no consolidadas de Eurostat: los pesos suman más de 100 % porque las transferencias entre administraciones se cuentan dos veces, así que no se pueden sumar los subsectores para obtener el total (para eso está la tabla de balance anual). Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales en miles de millones (mrd) son corrientes."
   },
   {
     "tabla": "deflactor",
@@ -1124,7 +1366,13 @@
       "¿Cuántos nacimientos por cada 1.000 habitantes hay en Galicia?",
       "¿Cuántos hijos tiene de media cada mujer en España?",
       "¿Qué provincia tiene más defunciones que nacimientos?",
-      "¿Cómo ha evolucionado la natalidad en España desde 1975?"
+      "¿Cómo ha evolucionado la natalidad en España desde 1975?",
+      "¿Cuántos nacimientos hubo en España el último año?",
+      "¿Cuántas muertes hubo en Asturias?",
+      "¿A qué edad tienen las mujeres su primer hijo en España?",
+      "¿Cuántas personas crece la población por la inmigración?",
+      "¿Qué comunidad tiene más hijos por mujer?",
+      "¿Cuántos bebés nacen de madre extranjera en Cataluña?"
     ],
     "medidas": [
       {
@@ -1250,7 +1498,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1258,7 +1506,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "INE. Sin columna de nombre: solo código INE (00 España; los códigos de comunidad y provincia se solapan, filtra por nivel). El saldo exterior solo existe desde 2021 y el último año es 2024."
+    "notas": "INE. Código INE (00 España) y nombre; los códigos de comunidad y provincia se solapan, filtra por nivel. El saldo exterior solo existe desde 2021 y el último año es 2024."
   },
   {
     "tabla": "demografia_envejecimiento",
@@ -1268,7 +1516,13 @@
       "¿Qué porcentaje de la población tiene más de 65 años en Asturias?",
       "¿Qué provincia está más envejecida?",
       "¿Cuál es la edad media de los españoles?",
-      "¿Qué porcentaje de la población ha nacido en el extranjero en Baleares?"
+      "¿Qué porcentaje de la población ha nacido en el extranjero en Baleares?",
+      "¿Cuántos mayores de 80 años hay en España?",
+      "¿Qué comunidad es más joven?",
+      "¿Cuántos mayores hay por cada cien niños en Galicia?",
+      "¿Cuántos hombres hay por cada cien mujeres en Madrid?",
+      "¿Cuál es el porcentaje de extranjeros en Alicante?",
+      "¿Cuántos menores de 16 años hay en Murcia?"
     ],
     "medidas": [
       {
@@ -1382,7 +1636,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1390,7 +1644,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "INE, población a 1 de enero (el dato de 2025 es la población a 1 de enero de 2025). Sin columna de nombre: solo códigos, y los de comunidad y provincia se solapan, filtra por nivel. Nacidos en el extranjero y extranjeros solo desde 2002."
+    "notas": "INE, población a 1 de enero (el dato de 2025 es la población a 1 de enero de 2025). Los códigos de comunidad y provincia se solapan: filtra por nivel. Nacidos en el extranjero y extranjeros solo desde 2002."
   },
   {
     "tabla": "demografia_hogares",
@@ -1400,7 +1654,13 @@
       "¿Cuántos hogares hay en España?",
       "¿Qué porcentaje de hogares son unipersonales en Asturias?",
       "¿Cuál es el tamaño medio de los hogares en Andalucía?",
-      "¿Cuánto han crecido los hogares desde 2021?"
+      "¿Cuánto han crecido los hogares desde 2021?",
+      "¿Cuántas personas viven solas en España?",
+      "¿Cuántos hogares hay en la Comunidad de Madrid?",
+      "¿Cuántas personas viven de media en una casa en Murcia?",
+      "¿Qué comunidad tiene más gente que vive sola?",
+      "¿Cuántos hogares de cuatro o más personas hay en Cataluña?",
+      "¿Qué provincia tiene los hogares más pequeños?"
     ],
     "medidas": [
       {
@@ -1460,7 +1720,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1468,7 +1728,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "INE, hogares en viviendas familiares a 1 de enero, desde 2021 (el último dato es de 1 de enero de 2026). Sin columna de nombre; los códigos de comunidad y provincia se solapan, filtra por nivel."
+    "notas": "INE, hogares en viviendas familiares a 1 de enero, desde 2021 (el último dato es de 1 de enero de 2026). Los códigos de comunidad y provincia se solapan: filtra por nivel."
   },
   {
     "tabla": "demografia_piramide",
@@ -1478,7 +1738,13 @@
       "¿Cuántas mujeres de más de 85 años hay en España?",
       "¿Cuántos niños de 0 a 4 años hay en Madrid?",
       "¿Cómo ha cambiado la población joven de Extremadura desde 1990?",
-      "¿Cuántos hombres de 30 a 34 años nacidos en el extranjero hay en Barcelona?"
+      "¿Cuántos hombres de 30 a 34 años nacidos en el extranjero hay en Barcelona?",
+      "¿Cuántos jóvenes de 20 a 24 años hay en Valencia?",
+      "¿Cuántos hombres mayores de 85 años hay en Asturias?",
+      "¿Cuántas mujeres de entre 30 y 34 años hay en Galicia?",
+      "¿Cuántas personas de 65 a 69 años hay en España?",
+      "¿Cómo ha cambiado el número de niños en España desde 1971?",
+      "¿Qué porcentaje de la población son jóvenes de 15 a 19 años?"
     ],
     "medidas": [
       {
@@ -1520,7 +1786,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1539,7 +1805,7 @@
       }
     ],
     "filtros": [],
-    "notas": "INE, población a 1 de enero. No hay fila de total: la población total sale de sumar todos los grupos y ambos sexos (o usar demografia_envejecimiento). Los grupos van de '0-4' a '85 y más'; los de 5-9 y 10-14 etc. no ordenan bien alfabéticamente, usar edad_desde. Sin nombre de territorio; filtra por nivel."
+    "notas": "INE, población a 1 de enero. No hay fila de total: la población total sale de sumar todos los grupos y ambos sexos (o usar demografia_envejecimiento). Los grupos van de '0-4' a '85 y más'; los de 5-9 y 10-14 etc. no ordenan bien alfabéticamente, usar edad_desde. Los códigos de comunidad y provincia se solapan: filtra por nivel."
   },
   {
     "tabla": "diputados_inmuebles_grupos",
@@ -1549,7 +1815,13 @@
       "¿Qué partido tiene más diputados caseros?",
       "¿Cuántos diputados del PP alquilan algún inmueble?",
       "¿Cuántos inmuebles tiene de mediana un diputado de Vox?",
-      "¿Cuánto cobran de alquiler los diputados del PSOE?"
+      "¿Cuánto cobran de alquiler los diputados del PSOE?",
+      "¿Cuántos diputados de Sumar son caseros?",
+      "¿Qué grupo del Congreso tiene más diputados con dos viviendas?",
+      "¿Cuántos diputados del PSOE no tienen ningún inmueble urbano?",
+      "¿Cuánto alquiler declara de media un diputado del PP?",
+      "¿Qué porcentaje de diputados cobra rentas por alquileres?",
+      "¿Cuántos diputados tiene cada grupo parlamentario?"
     ],
     "medidas": [
       {
@@ -1652,7 +1924,13 @@
       "¿Qué porcentaje de los españoles declara ingresos por alquiler?",
       "¿Los diputados alquilan más que el resto de la población?",
       "¿Qué porcentaje de quienes ganan entre 60.000 y 150.000 euros alquila inmuebles?",
-      "¿Cuántos declarantes del IRPF tienen inmuebles a su disposición?"
+      "¿Cuántos declarantes del IRPF tienen inmuebles a su disposición?",
+      "¿Cuánto cobra de media un español por alquileres?",
+      "¿Los ricos alquilan más pisos?",
+      "¿Qué porcentaje de los que ganan más de 150.000 euros alquila?",
+      "¿Cuántos declarantes alquilan en 2022?",
+      "¿Quién alquila más, los diputados o la gente de renta alta?",
+      "¿Cuántos españoles tienen dos o más viviendas?"
     ],
     "medidas": [
       {
@@ -1714,7 +1992,14 @@
     "preguntas": [
       "¿Cuántos diputados son caseros?",
       "¿Cuántos diputados tienen dos o más viviendas?",
-      "¿Cuántos diputados no tienen ningún inmueble urbano?"
+      "¿Cuántos diputados no tienen ningún inmueble urbano?",
+      "¿Cuántos diputados alquilan algún piso?",
+      "¿Cuántos diputados son propietarios de más de una vivienda?",
+      "¿Cuántos inmuebles urbanos tiene de media un diputado?",
+      "¿Qué porcentaje de diputados no tiene ninguna casa?",
+      "¿Cuántos parlamentarios tienen dos o más propiedades?",
+      "¿Cuántos diputados cobran rentas de alquiler o tienen dos viviendas?",
+      "¿Cuántos diputados hay en total y cuántas declaraciones se han leído?"
     ],
     "medidas": [
       {
@@ -1775,7 +2060,13 @@
       "¿Cuál es el PIB per cápita de España?",
       "¿Estamos por encima o por debajo de la media europea en renta por habitante?",
       "¿Cómo se compara el PIB por habitante de España con el de Alemania?",
-      "¿Cómo ha evolucionado el PIB per cápita en España desde 1995?"
+      "¿Cómo ha evolucionado el PIB per cápita en España desde 1995?",
+      "¿Cuánto produce cada español al año?",
+      "¿Qué país europeo tiene más PIB por habitante?",
+      "¿Somos más ricos o más pobres que Italia?",
+      "¿Cuándo superó España la renta media europea?",
+      "¿Cuántos euros de PIB por persona tiene España?",
+      "¿Cuánto ha crecido la renta de cada español desde el año 2000?"
     ],
     "medidas": [
       {
@@ -1822,7 +2113,13 @@
       "¿Cuánto ha crecido el PIB de España en el último trimestre respecto al año pasado?",
       "¿Qué peso tienen las exportaciones en el PIB?",
       "¿Cuánto es el PIB por habitante de España en euros reales?",
-      "¿Cómo ha evolucionado el consumo de los hogares desde 2019?"
+      "¿Cómo ha evolucionado el consumo de los hogares desde 2019?",
+      "¿Cuánto creció la economía española el trimestre pasado?",
+      "¿Cuánto consumen los hogares españoles?",
+      "¿Cuánto invierte España en edificios y maquinaria?",
+      "¿Cuánto exportamos al extranjero?",
+      "¿Cuánto importa España?",
+      "¿Cuánto gasta el gobierno en consumo público?"
     ],
     "medidas": [
       {
@@ -1881,7 +2178,13 @@
       "¿Cuál es el salario medio en España?",
       "¿Cuánto cobra de media un trabajador de la construcción?",
       "¿Cuánto han subido los sueldos descontando la inflación desde 2008?",
-      "¿Cuánto cobra un trabajador a tiempo parcial?"
+      "¿Cuánto cobra un trabajador a tiempo parcial?",
+      "¿Cuánto cobra de media un trabajador al mes?",
+      "¿Cuánto cobra un empleado a jornada completa en la industria?",
+      "¿Cuánto ha subido el sueldo en el último trimestre?",
+      "¿Cuánto cobra un trabajador de servicios?",
+      "¿Cuánto ha cambiado el salario desde antes de la pandemia?",
+      "¿Cuánto gana un trabajador antes de descuentos y por mes en el último trimestre?"
     ],
     "medidas": [
       {
@@ -1953,7 +2256,13 @@
       "¿Cuál fue el salario medio en España en 2024?",
       "¿Cuánto ganan al año de media los trabajadores de la industria?",
       "¿Han subido los salarios por encima de la inflación en los últimos años?",
-      "¿Cuánto cobran más los de jornada completa que los de parcial?"
+      "¿Cuánto cobran más los de jornada completa que los de parcial?",
+      "¿Cuánto ganan los trabajadores de la construcción al año?",
+      "¿Cuánto cobra un trabajador en servicios al mes?",
+      "¿Cuántos euros más cobramos respecto al año pasado sin inflación?",
+      "¿Cuánto se paga a los de jornada parcial?",
+      "¿En qué año subió más el sueldo medio?",
+      "¿Los sueldos de hoy ganan más poder de compra que en 2008?"
     ],
     "medidas": [
       {
@@ -2025,7 +2334,13 @@
       "¿En qué comunidad se cobra más?",
       "¿Cuál es el salario medio en Extremadura?",
       "¿Cuánto cuesta un trabajador a la empresa en Madrid?",
-      "¿Cómo han evolucionado los sueldos en Andalucía desde 2008 sin contar la inflación?"
+      "¿Cómo han evolucionado los sueldos en Andalucía desde 2008 sin contar la inflación?",
+      "¿Qué comunidad tiene los salarios más bajos?",
+      "¿Cuánto gana un trabajador en el País Vasco al mes?",
+      "¿Cuánto más se cobra en Madrid que la media del país?",
+      "¿Cuánto cuesta un empleado a la empresa en Cataluña?",
+      "¿Qué comunidad ha subido más los salarios desde 2008?",
+      "¿Cuánto cobra un canario de media?"
     ],
     "medidas": [
       {
@@ -2098,7 +2413,13 @@
       "¿Qué peso tiene la industria en la economía española?",
       "¿Cuántos ocupados hay en el comercio, transporte y hostelería?",
       "¿Qué sector es más productivo?",
-      "¿Cómo ha cambiado el peso de la agricultura desde 1995?"
+      "¿Cómo ha cambiado el peso de la agricultura desde 1995?",
+      "¿Cuánta gente trabaja en la industria?",
+      "¿Qué parte de la economía es agricultura?",
+      "¿Cuánto produce el sector de la construcción?",
+      "¿Qué sector emplea a más gente en España?",
+      "¿Cuántos asalariados hay en actividades públicas y sanitarias?",
+      "¿Qué porcentaje del empleo está en las actividades financieras?"
     ],
     "medidas": [
       {
@@ -2181,7 +2502,13 @@
       "¿Qué porcentaje de estudiantes de secundaria hace FP en España?",
       "¿España tiene menos alumnos de FP que la media de la UE?",
       "¿Cuántos alumnos de FP hay en España?",
-      "¿Cómo ha evolucionado la FP desde 2013?"
+      "¿Cómo ha evolucionado la FP desde 2013?",
+      "¿Cuántos estudiantes de FP hay en España?",
+      "¿Cuántos jóvenes eligen formación profesional en Europa?",
+      "¿Hay más gente en FP que en la media europea?",
+      "¿Cuánto ha crecido la FP desde 2013?",
+      "¿Qué porcentaje de alumnos de bachillerato y equivalentes va a FP?",
+      "¿Qué país de Europa tiene más gente en FP?"
     ],
     "medidas": [
       {
@@ -2234,7 +2561,13 @@
       "¿Cuánto gasta España en educación por habitante?",
       "¿Qué porcentaje del PIB se dedica a la educación en España y en la UE?",
       "¿Cuánto se gasta en universidades?",
-      "¿Cómo ha evolucionado el gasto en educación desde 2009?"
+      "¿Cómo ha evolucionado el gasto en educación desde 2009?",
+      "¿Cuánto se gasta en primaria?",
+      "¿Cuánto dedica el Estado a la universidad?",
+      "¿Gasta España más en educación que la UE?",
+      "¿Cuántos millones se gastaron en educación en 2024?",
+      "¿Cuánto cuesta la educación infantil?",
+      "¿Cuánto se invierte en educación secundaria por habitante?"
     ],
     "medidas": [
       {
@@ -2293,12 +2626,18 @@
       "¿Cuánto cuesta al año un alumno de primaria en España?",
       "¿Cuánto se gasta por alumno universitario?",
       "¿Gasta España más o menos por alumno que la media europea?",
-      "¿Cómo ha evolucionado el gasto por alumno en la ESO?"
+      "¿Cómo ha evolucionado el gasto por alumno en la ESO?",
+      "¿Cuánto gasta el Estado por cada niño en infantil?",
+      "¿Cuánto cuesta un estudiante de FP al año?",
+      "¿Cuánto se gasta por alumno de bachillerato?",
+      "¿Cuánto cuesta un universitario a las arcas públicas?",
+      "¿Cuánto gasta la UE por estudiante?",
+      "¿Gasta más España en cada alumno de secundaria que la media europea?"
     ],
     "medidas": [
       {
         "columna": "eur_real",
-        "nombre": "gasto anual por alumno en euros reales (solo España)",
+        "nombre": "gasto anual por alumno en euros reales (España y media de la UE)",
         "unidad": "€ de 2025 por alumno",
         "tipo": "media",
         "principal": true
@@ -2307,7 +2646,8 @@
         "columna": "eur",
         "nombre": "gasto anual por alumno en euros corrientes",
         "unidad": "€ por alumno",
-        "tipo": "media"
+        "tipo": "media",
+        "real": "eur_real"
       },
       {
         "columna": "pps",
@@ -2329,26 +2669,25 @@
     },
     "territorio": {
       "niveles": [
-        "pais",
-        "ue"
+        "pais_extranjero"
       ],
-      "nivel": "nivel_geo",
-      "codigo": null,
-      "nombre": null,
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
       "espana": {
-        "columna": "nivel_geo",
-        "valor": "pais"
+        "columna": "cod_pais",
+        "valor": "ES"
       }
     },
     "dimensiones": [
       {
-        "columna": "nivel",
+        "columna": "nivel_educativo",
         "nombre": "nivel educativo",
         "total": "Todos los niveles (de infantil a universidad)"
       }
     ],
     "filtros": [],
-    "notas": "Eurostat educ_uoe_fini04, por alumno equivalente a tiempo completo, hasta 2023. Aquí la columna 'nivel' es el nivel educativo y el territorio está en 'nivel_geo'. Algunos niveles (Bachillerato y FP de grado medio, Bachillerato, FP de grado medio) se solapan; los euros reales solo para España."
+    "notas": "Eurostat educ_uoe_fini04, por alumno equivalente a tiempo completo, hasta 2023. Territorio: España (ES) y media de la UE (EU27_2020). Los euros reales usan el IPCA de cada zona (deflactor_paises), así que España y la UE son comparables. Algunos niveles (Bachillerato y FP de grado medio, Bachillerato, FP de grado medio) se solapan."
   },
   {
     "tabla": "educacion_indicadores",
@@ -2358,7 +2697,13 @@
       "¿Cuál es la tasa de abandono escolar temprano en España?",
       "¿Qué comunidad tiene más jóvenes que ni estudian ni trabajan?",
       "¿Qué porcentaje de adultos tiene estudios superiores en el País Vasco?",
-      "¿Cómo ha evolucionado el abandono escolar desde 2002?"
+      "¿Cómo ha evolucionado el abandono escolar desde 2002?",
+      "¿Cuántos jóvenes de 18 a 24 no estudian ni trabajan?",
+      "¿Qué porcentaje de la población adulta solo tiene estudios básicos?",
+      "¿Qué comunidad tiene más abandono escolar?",
+      "¿Qué porcentaje de personas de 25 a 64 años tiene la ESO como máximo?",
+      "¿Qué comunidad tiene más adultos con título universitario?",
+      "¿España tiene más ninis que la UE?"
     ],
     "medidas": [
       {
@@ -2382,7 +2727,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -2397,6 +2742,6 @@
       }
     ],
     "filtros": [],
-    "notas": "Eurostat EPA armonizada. Hay que elegir un indicador (abandono, basica_25_64, segunda_25_64, superior_25_64, neet_15_29, neet_18_24); el valor es siempre un porcentaje pero de poblaciones distintas, no se suma ni se promedia entre indicadores. Sin nombres de comunidad: solo código INE (00 España, UE para la Unión Europea); algunos años de comunidades pequeñas faltan."
+    "notas": "Eurostat EPA armonizada. Hay que elegir un indicador (abandono, basica_25_64, segunda_25_64, superior_25_64, neet_15_29, neet_18_24); el valor es siempre un porcentaje pero de poblaciones distintas, no se suma ni se promedia entre indicadores. Código INE (00 España, UE para la Unión Europea) y nombre; la columna indicador_nombre describe cada indicador; algunos años de comunidades pequeñas faltan."
   }
 ]

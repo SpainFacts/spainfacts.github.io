@@ -24,7 +24,7 @@ const valor = (n, porDefecto) => {
 	return i >= 0 ? args[i + 1] : porDefecto;
 };
 const SALIDA = valor('--salida', 'build/chat/catalogo.json');
-const DATOS = valor('--datos', '.evidence/template/static/data/mother');
+const DATOS = valor('--datos', (process.env.SPAINFACTS_PARQUETS ? process.env.SPAINFACTS_PARQUETS.replace(/\\/g, '/') + '/mother' : '.evidence/template/static/data/mother'));
 const FUENTES = 'sources/mother';
 const MARTS = 'transform/models/marts';
 const PAGINAS = 'pages';
@@ -246,10 +246,19 @@ if (!args.includes('--sin-vectores')) {
 		`${EMBEDDINGS.prefijo_documento}${t.nombre.replace(/_/g, ' ')}. ${t.descripcion} ${t.paginas.map((p) => p.titulo).join('. ')}. Columnas: ${t.columnas
 			.map((c) => c.nombre.replace(/_/g, ' '))
 			.join(', ')}`.slice(0, 1500);
+	const aBase64 = (v) => {
+		const r = v.slice(0, EMBEDDINGS.dims);
+		const norma = Math.hypot(...r);
+		return Buffer.from(Int8Array.from(r, (x) => Math.max(-127, Math.min(127, Math.round((x / norma) * 127)))).buffer).toString('base64');
+	};
 	for (const t of tablas) {
-		const v = (await extraer(textoTabla(t))).slice(0, EMBEDDINGS.dims);
-		const norma = Math.hypot(...v);
-		t.vec = Buffer.from(Int8Array.from(v, (x) => Math.max(-127, Math.min(127, Math.round((x / norma) * 127)))).buffer).toString('base64');
+		t.vec = aBase64(await extraer(textoTabla(t)));
+		// Las preguntas de ejemplo de la ficha, cada una con su vector y como consulta: comparar
+		// pregunta con pregunta encuentra la tabla mejor que pregunta con descripción
+		if (t.semantica?.usar && t.semantica.preguntas?.length) {
+			t.vecs_preguntas = [];
+			for (const p of t.semantica.preguntas) t.vecs_preguntas.push(aBase64(await extraer(`${EMBEDDINGS.prefijo_consulta}${p}`)));
+		}
 	}
 	embeddings = { ...EMBEDDINGS, escala: 127 };
 }

@@ -6,6 +6,8 @@
 //                con herramientas nativas.
 //   local     -> servidor compatible con la API de OpenAI en su ordenador (Ollama, LM Studio)
 //                o un servicio con su clave (OpenRouter...). Protocolo JSON.
+//   otro      -> API de otro proveedor (OpenAI, Gemini, Mistral, Groq, OpenRouter...) con la
+//                clave del usuario, formato de OpenAI y herramientas nativas (function calling).
 //   navegador -> modelo pequeño dentro del navegador con WebLLM (WebGPU). Los pesos se
 //                descargan de Hugging Face, no de spainfacts.org. Protocolo JSON.
 
@@ -29,6 +31,20 @@ export const MODELOS_ANTHROPIC = [
 	{ id: 'claude-haiku-4-5', nombre: 'Claude Haiku 4.5', precio: '1 $ / 5 $ por millón de tokens' }
 ];
 
+// Proveedores con API compatible con OpenAI que admiten llamadas desde el navegador (CORS
+// comprobado el 2026-10-04). El modelo lo escribe la persona: cambian a menudo.
+export const PROVEEDORES_API = [
+	{ id: 'openrouter', nombre: 'OpenRouter (casi todos los modelos con una clave)', url: 'https://openrouter.ai/api/v1' },
+	{ id: 'openai', nombre: 'OpenAI', url: 'https://api.openai.com/v1' },
+	{ id: 'gemini', nombre: 'Google Gemini', url: 'https://generativelanguage.googleapis.com/v1beta/openai' },
+	{ id: 'mistral', nombre: 'Mistral', url: 'https://api.mistral.ai/v1' },
+	{ id: 'groq', nombre: 'Groq', url: 'https://api.groq.com/openai/v1' },
+	{ id: 'deepseek', nombre: 'DeepSeek', url: 'https://api.deepseek.com/v1' },
+	{ id: 'xai', nombre: 'xAI', url: 'https://api.x.ai/v1' },
+	{ id: 'together', nombre: 'Together', url: 'https://api.together.xyz/v1' },
+	{ id: 'propio', nombre: 'Otra dirección compatible con OpenAI', url: '' }
+];
+
 export const WEBLLM_URL = 'https://esm.run/@mlc-ai/web-llm@0.2.85';
 
 /**
@@ -46,6 +62,7 @@ export const WEBLLM_URL = 'https://esm.run/@mlc-ai/web-llm@0.2.85';
  */
 export async function responder(o) {
 	if (o.proveedor === 'anthropic') return responderAnthropic(o);
+	if (o.proveedor === 'otro') return responderOpenAI(o);
 	return responderJSON(o);
 }
 
@@ -108,6 +125,48 @@ async function responderAnthropic({ config, estado, pregunta, ctx, lang, alPaso,
 		);
 		// Todos los resultados en un único mensaje
 		mensajes.push({ role: 'user', content: resultados });
+		if (paso === MAX_PASOS - 1) textos.push('(He llegado al máximo de pasos sin terminar.)');
+	}
+	return { texto: textos.at(-1) ?? '', estado: { mensajes } };
+}
+
+// ---------- Otros proveedores: API de OpenAI con herramientas nativas ----------
+
+// Las herramientas del chat en el formato de OpenAI (function calling)
+const HERRAMIENTAS_OPENAI = HERRAMIENTAS.map((h) => ({
+	type: 'function',
+	function: { name: h.name, description: h.description, parameters: h.input_schema }
+}));
+
+async function responderOpenAI({ config, estado, pregunta, ctx, lang, alPaso, alGrafico }) {
+	const base = (config.url || '').replace(/\/+$/, '');
+	if (!base) throw new Error('Falta la dirección de la API.');
+	const mensajes = estado?.mensajes ?? [{ role: 'system', content: promptSistema(ctx.catalogo, lang) }];
+	mensajes.push({ role: 'user', content: pregunta });
+	const textos = [];
+	for (let paso = 0; paso < MAX_PASOS; paso++) {
+		const r = await fetch(`${base}/chat/completions`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${config.clave}` },
+			body: JSON.stringify({ model: config.modelo, messages: mensajes, tools: HERRAMIENTAS_OPENAI, tool_choice: 'auto' })
+		});
+		if (!r.ok) throw new Error(`${base}: HTTP ${r.status} ${(await r.text()).slice(0, 300)}`);
+		const m = (await r.json()).choices?.[0]?.message;
+		if (!m) throw new Error('La API no ha devuelto ninguna respuesta.');
+		mensajes.push(m);
+		if (typeof m.content === 'string' && m.content.trim()) textos.push(m.content);
+		const llamadas = m.tool_calls ?? [];
+		if (!llamadas.length) break;
+		for (const l of llamadas) {
+			let entrada = {};
+			try {
+				entrada = JSON.parse(l.function?.arguments || '{}');
+			} catch {}
+			alPaso?.({ herramienta: l.function?.name, entrada });
+			const res = await ejecutarHerramienta(l.function?.name, entrada, ctx);
+			if (res.grafico) alGrafico?.(res.grafico);
+			mensajes.push({ role: 'tool', tool_call_id: l.id, content: String(res.resultado) });
+		}
 		if (paso === MAX_PASOS - 1) textos.push('(He llegado al máximo de pasos sin terminar.)');
 	}
 	return { texto: textos.at(-1) ?? '', estado: { mensajes } };
@@ -206,6 +265,48 @@ export async function listarModelosWebLLM() {
 		.map((m) => ({ id: m.model_id, vram: m.vram_required_MB }))
 		.filter((m) => !m.vram || m.vram < 6000)
 		.sort((a, b) => (a.vram ?? 0) - (b.vram ?? 0));
+}
+
+/**
+ * Decisor con un modelo de WebLLM (WebGPU, en el navegador): como el de Ollama, lee la
+ * probabilidad de cada letra en el primer token. Usa la API de texto (el mismo prompt crudo que
+ * Ollama); si esta versión de WebLLM no la tiene, la de chat pidiendo solo la letra.
+ */
+export async function crearDecisorWebLLM(modelo, alProgreso) {
+	const motor = await cargarWebLLM(modelo, alProgreso);
+	return async function decidir(contexto, pregunta, opciones) {
+		const prompt = promptDecision(contexto, pregunta, opciones);
+		let candidatos = [];
+		let texto = '';
+		if (motor.completions?.create) {
+			const r = await motor.completions.create({ prompt, max_tokens: 1, temperature: 0, logprobs: true, top_logprobs: 5 });
+			const c = r.choices?.[0];
+			texto = c?.text ?? '';
+			candidatos = c?.logprobs?.content?.[0]?.top_logprobs ?? [];
+		} else {
+			const r = await motor.chat.completions.create({
+				messages: [{ role: 'user', content: `${prompt.replace(/Answer: \($/, '')}Answer with the letter only.` }],
+				max_tokens: 2,
+				temperature: 0,
+				logprobs: true,
+				top_logprobs: 5
+			});
+			const c = r.choices?.[0];
+			texto = c?.message?.content ?? '';
+			candidatos = c?.logprobs?.content?.[0]?.top_logprobs ?? [];
+		}
+		const porLetra = new Map();
+		for (const x of candidatos) {
+			const l = String(x.token).replace(/[()\s]/g, '');
+			if (/^[A-Z]$/.test(l) && !porLetra.has(l)) porLetra.set(l, x.logprob);
+		}
+		if (!porLetra.size) {
+			const l = texto.replace(/[()\s]/g, '')[0];
+			if (l) porLetra.set(l, 0);
+		}
+		const probs = probabilidadesDeLetras(porLetra, opciones.length);
+		return { indice: probs.indexOf(Math.max(...probs)), probs };
+	};
 }
 
 export async function cargarWebLLM(modelo, alProgreso) {

@@ -1,0 +1,43 @@
+[
+  {
+    "tabla": "paises_iso",
+    "usar": false,
+    "notas": "Tabla de referencia: código ISO2 de cada país y agregado (cod_pais), su ISO3, su código de Eurostat y su nombre en castellano. Para unir tablas internacionales, no para responder preguntas."
+  },
+  {
+    "tabla": "deflactor_paises",
+    "usar": false,
+    "notas": "Tabla de referencia: factor del IPCA de Eurostat para pasar importes de cada país y año a precios del último año completo (importe_real = importe * factor). Las tablas ya traen sus columnas _real."
+  },
+  {
+    "tabla": "poblacion_paises",
+    "usar": true,
+    "tema": "Población de cada país europeo y de la Unión Europea, año a año",
+    "preguntas": [
+      "¿Cuántos habitantes tiene Alemania?",
+      "¿Qué país de la UE tiene más población?",
+      "¿Cómo ha crecido la población de España desde 2000?",
+      "¿Cuánta gente vive en la Unión Europea?",
+      "¿Qué país europeo tiene menos habitantes?",
+      "¿Cuánta gente vive en Francia?",
+      "¿Ha crecido más la población de Alemania o la de España desde 2010?",
+      "¿Qué porcentaje de la población de la UE vive en España?",
+      "¿Cuántos habitantes tiene Polonia?",
+      "¿Qué países europeos pierden población?"
+    ],
+    "medidas": [
+      { "columna": "poblacion", "nombre": "población media del año", "unidad": "habitantes", "tipo": "nivel", "principal": true }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais_extranjero"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat demo_gind (población media anual). Incluye agregados (Unión Europea (27), Zona euro): en rankings de países, excluirlos."
+  }
+]

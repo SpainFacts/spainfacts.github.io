@@ -19,6 +19,7 @@ import { crearIndice, buscarTablas } from '../../../src/lib/chat/herramientas.js
 import { responderPorDecisiones } from '../../../src/lib/chat/decision.js';
 import { responder, crearDecisorOllama } from '../../../src/lib/chat/agente.js';
 import { crearDecisor, crearEmbebedor } from '../../../src/lib/chat/locales.js';
+import { correcta } from './correccion.mjs';
 
 const args = process.argv.slice(2);
 const modo = args[0];
@@ -106,20 +107,14 @@ async function prepararEmbeddings(clave) {
 	return { catalogo: cat, embeber: async (texto) => vector(conPrefijo(cfg.consulta, texto)) };
 }
 
-// ---------- Comprobación de respuestas ----------
-const sinAcentos = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-function correcta(texto, acepta) {
-	const r = sinAcentos(texto);
-	const grupos = [...(acepta?.cifras ?? []), ...(acepta?.textos ?? [])];
-	return grupos.every((g) => g.some((v) => r.includes(sinAcentos(v))));
-}
+// ---------- Comprobación de respuestas: correccion.mjs ----------
 
 // ---------- DuckDB ----------
 async function conectar(cat) {
 	const con = await (await DuckDBInstance.create(':memory:')).connect();
 	await con.run('CREATE SCHEMA mother');
 	for (const t of cat.tablas) {
-		const f = `.evidence/template/static/data/mother/${t.nombre}/${t.nombre}.parquet`;
+		const f = `${(process.env.SPAINFACTS_PARQUETS ? process.env.SPAINFACTS_PARQUETS.replace(/\\/g, '/') + '/mother' : '.evidence/template/static/data/mother')}/${t.nombre}/${t.nombre}.parquet`;
 		if (fs.existsSync(f)) await con.run(`CREATE VIEW mother."${t.nombre}" AS SELECT * FROM read_parquet('${f}')`);
 	}
 	return async (sql) => (await con.runAndReadAll(sql)).getRowObjectsJS();
@@ -167,7 +162,7 @@ if (modo === 'busqueda') {
 	const emb = valor('--embeddings', null);
 	const base = emb ? await prepararEmbeddings(emb) : { catalogo, embeber: null };
 	const consultar = await conectar(base.catalogo);
-	const ctx = { catalogo: base.catalogo, indice: crearIndice(base.catalogo), consultar, ...(base.embeber ? { embeber: base.embeber } : {}), ...(valor('--prior', null) !== null ? { priorBusqueda: Number(valor('--prior')) } : {}), ...(valor('--idioma', null) ? { idiomaDecision: valor('--idioma') } : {}), ...(valor('--tabla', null) ? { eleccionTabla: valor('--tabla') } : {}) };
+	const ctx = { catalogo: base.catalogo, indice: crearIndice(base.catalogo), consultar, ...(base.embeber ? { embeber: base.embeber } : {}), ...(valor('--prior', null) !== null ? { priorBusqueda: Number(valor('--prior')) } : {}), ...(valor('--idioma', null) ? { idiomaDecision: valor('--idioma') } : {}), ...(valor('--tabla', null) ? { eleccionTabla: valor('--tabla') } : {}), ...(valor('--ejemplos', null) ? { ejemplosTabla: Number(valor('--ejemplos')) } : {}) };
 	const decidir =
 		modo === 'decision' && valor('--motor', 'ollama') === 'transformers' ? await crearDecisor({ device: 'cpu', dtype: 'q4', cacheDir }) : decidirOllama;
 	let bien = 0;
@@ -176,19 +171,23 @@ if (modo === 'busqueda') {
 		let texto = '';
 		let error = '';
 		let sql = '';
+		let probTablas = null;
 		try {
 			if (modo === 'decision') {
-				const r = await responderPorDecisiones({ pregunta: p.pregunta, ctx, decidir });
+				// --forzar-oro: la tabla correcta ya elegida (como si la persona la escogiera al preguntarle)
+				const r = await responderPorDecisiones({ pregunta: p.pregunta, ctx: args.includes('--forzar-oro') ? { ...ctx, tablaForzada: p.tablas_oro[0].replace(/^mother\./, '') } : ctx, decidir });
 				texto = r.texto;
 				if (args.includes('--ver')) for (const d of r.decisiones) console.log(`    · ${d.pregunta.slice(0, 60)} -> ${String(d.eleccion).slice(0, 100)}`);
 				if (args.includes('--ver')) console.log(`    SQL: ${r.sql}
     depuración: ${JSON.stringify(r.depuracion)}`);
 				sql = r.sql ?? '';
+				probTablas = r.depuracion?.probTablas ?? null;
 			} else {
 				const pasos = [];
 				const r = await responder({
-					proveedor: 'local',
-					config: { url: 'http://localhost:11434/v1', modelo: MODELO },
+					// --proveedor otro: la vía de «Otro proveedor» (formato OpenAI con herramientas nativas)
+					proveedor: valor('--proveedor', 'local'),
+					config: { url: valor('--url', 'http://localhost:11434/v1'), modelo: MODELO, clave: process.env.CLAVE_API ?? 'ollama' },
 					pregunta: p.pregunta,
 					ctx,
 					lang: 'es',
@@ -202,7 +201,7 @@ if (modo === 'busqueda') {
 		}
 		const ok = !error && correcta(texto, p.acepta);
 		if (ok) bien++;
-		resultados.push({ id: p.id, tipo: p.tipo, ok, segundos: (Date.now() - t0) / 1000, pregunta: p.pregunta, texto, sql, error });
+		resultados.push({ id: p.id, tipo: p.tipo, ok, segundos: (Date.now() - t0) / 1000, pregunta: p.pregunta, texto, sql, error, probTablas });
 		console.log(`${ok ? '✓' : '✗'} ${p.id} [${p.tipo}] ${((Date.now() - t0) / 1000).toFixed(1)}s ${(error || texto).replace(/\s+/g, ' ').slice(0, 150)}`);
 	}
 	const porTipo = {};

@@ -4,7 +4,7 @@
 import fs from 'node:fs';
 import { DuckDBInstance } from '@duckdb/node-api';
 
-const DATOS = '.evidence/template/static/data/mother';
+const DATOS = (process.env.SPAINFACTS_PARQUETS ? process.env.SPAINFACTS_PARQUETS.replace(/\\/g, '/') + '/mother' : '.evidence/template/static/data/mother');
 const sql = process.argv.slice(2).join(' ');
 const con = await (await DuckDBInstance.create(':memory:')).connect();
 await con.run('CREATE SCHEMA mother');

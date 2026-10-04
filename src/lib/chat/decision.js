@@ -17,6 +17,10 @@ import { buscarTablas, buscarFicha, URL_WEB } from './herramientas.js';
 const MAX_OPCIONES = 26; // una letra por opción
 const MAX_MEDIDAS = 8; // columnas candidatas que ve el modelo
 const PRIOR_BUSQUEDA = 0.6; // peso del puesto en la búsqueda al elegir tabla (log-probabilidad)
+// Cuándo duda con la tabla y pregunta en vez de contestar (ctx.aclarar): la elegida no llega a
+// ACLARAR_MAX de probabilidad y la segunda pasa de ACLARAR_SEGUNDA
+const ACLARAR_MAX = 0.6;
+const ACLARAR_SEGUNDA = 0.15;
 const ES_TOTAL = /^(total|ambos sexos|todos|todas|total nacional|nacional|españa|es)$/i;
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
@@ -32,7 +36,16 @@ const NO_NOMBRAN = new Set(
 		' '
 	)
 );
-const palabras = (s) => new Set(normalizar(s).split(/[^a-z0-9]+/).filter((p) => p.length > 2 && !NO_NOMBRAN.has(p) && !/^(19|20)\d\d$/.test(p)));
+// Palabras de dos letras que no nombran nada; las demás (PP, UE, IA...) sí cuentan
+const CORTAS_VACIAS = new Set('de la el en lo los al se su un es si no ya ha he me te le nos os mi tu y o a e u ni'.split(' '));
+const palabras = (s) =>
+	new Set(
+		normalizar(s)
+			.split(/[^a-z0-9]+/)
+			.filter((p) => (p.length > 2 || (p.length === 2 && !CORTAS_VACIAS.has(p))) && !NO_NOMBRAN.has(p) && !/^(19|20)\d\d$/.test(p))
+	);
+/** Formas de una palabra sin plural: «nucleares» y «nuclear», «turistas» y «turista» se encuentran */
+const raices = (p) => (p.length > 4 ? [p, p.replace(/s$/, ''), p.replace(/es$/, '')] : [p]);
 const id = (c) => `"${String(c).replace(/"/g, '""')}"`;
 const esCodigo = (c) => /^cod(_\w+)?$/.test(c); // columnas de código: en el texto va el nombre, no el código
 const lit = (v) => (typeof v === 'number' || typeof v === 'boolean' ? String(v) : `'${String(v).replace(/'/g, "''")}'`);
@@ -44,6 +57,18 @@ export function leerIntencion(pregunta) {
 	const q = normalizar(pregunta);
 	const anios = [...q.matchAll(/\b(19|20)\d\d\b/g)].map((m) => Number(m[0]));
 	if (/antes de la pandemia|antes del covid|prepandemia/.test(q)) anios.push(2019);
+	// «en lo que va de año», «este año»: el año en curso aunque esté a medias
+	const enCurso = /lo que va de ano|lo que llevamos de ano|en lo que va de|este ano|ano en curso/.test(q);
+	if (enCurso && !anios.length) anios.push(new Date().getFullYear());
+	// Qué clase de cifra pide: un recuento, un porcentaje, por habitante, o cuánto ha cambiado
+	const pide = {
+		recuento: /\bcuant[oa]s\b/.test(q) && !/por cada|por habitante|porcentaje|que parte|tasa/.test(q),
+		porcentaje: /porcentaje|que parte|cuanto pesa|\bpeso\b|tasa de|que proporcion|\bpor ciento\b/.test(q),
+		habitante: /por habitante|per capita|por persona|por vecino|por cabeza|por cada (mil|1\.?000|100\.?000|cien mil)|cada (espanol|habitante|persona|vecino|ciudadano)/.test(q),
+		importe: /cuanto (cobra|cobran|gana|ganan|cuesta|cuestan|paga|pagan|se paga|gasta|gastan|se gasta|recauda|vale|valen|dinero)/.test(q),
+		total: /\bcuant[oa]\b/.test(q),
+		subida: /cuanto (ha|han) (subido|bajado|crecido|caido|aumentado|disminuido)|cuanto (se ha|han) encarecido|cuanto (ha|han) cambiado|cuanto mas|cuantos mas|cuantas mas|cuanto menos/.test(q)
+	};
 	const mes = MESES.findIndex((m) => new RegExp(`\\b${m}\\b`).test(q));
 	const cambio =
 		/\bdesde\b|\bque en\b|\bque antes\b|\brespecto\b|comparad|diferencia|\b(ha|han|habia|habian) (subido|bajado|crecido|caido|aumentado|disminuido|cambiado|mejorado|empeorado)\b/.test(q);
@@ -58,10 +83,13 @@ export function leerIntencion(pregunta) {
 				: null;
 	// Ranking: el sustantivo va detrás del interrogativo («¿qué comunidad...?», «¿cuál es la
 	// provincia...?»); «la Comunidad de Madrid» dentro de la frase es un nombre, no un ranking
-	const ranking =
-		/\b(que|cual|cuales)\s+(es\s+|son\s+|ha sido\s+|fue\s+)?(el\s+|la\s+|los\s+|las\s+)?(\w+\s+)?(comunidad|comunidades|autonomia|autonomias|region|regiones|provincia|provincias|municipio|municipios|ciudad|ciudades|pais|paises|partido|partidos|marca|marcas|sector|sectores)\b/.test(
-			q
-		) || /\bdonde\b/.test(q);
+	const reRanking =
+		/\b(que|cual|cuales)\s+(es\s+|son\s+|ha sido\s+|fue\s+)?(el\s+|la\s+|los\s+|las\s+)?(\w+\s+)?(comunidad|comunidades|autonomia|autonomias|region|regiones|provincia|provincias|municipio|municipios|ciudad|ciudades|pais|paises|partido|partidos|marca|marcas|sector|sectores|organismo|organismos|tipo|tecnologia|tecnologias|rama|ramas|grupo|grupos|medio|medios|causa|causas)\b/;
+	const mRanking = q.match(reRanking);
+	const ranking = Boolean(mRanking) || /\bdonde\b/.test(q);
+	// Sobre qué se compara: los territorios o otra dimensión («¿qué sector...?», «¿qué partido...?»)
+	const rankingSobre = mRanking ? mRanking[5] : ranking ? 'comunidad' : null;
+	const rankingTerritorial = ranking && /^(comunidad|comunidades|autonomia|autonomias|region|regiones|provincia|provincias|municipio|municipios|ciudad|ciudades|pais|paises)$/.test(rankingSobre ?? '');
 	// «peor/mejor» no invierten el orden: el peor año de incendios es el de más hectáreas
 	const menos = /\b(menos|menor|menores|minim[oa]s?|mas baj[oa]s?)\b/.test(q) && !/\bmenores de\b/.test(q);
 	// «¿Cuál ha sido el peor año...?», «¿en qué año hubo más...?»: ranking de años, no cambio
@@ -75,7 +103,7 @@ export function leerIntencion(pregunta) {
 	else if (historico) modo = 'historico';
 	// «desde 2000» en un ranking de años: solo desde ese año
 	const desde = rankingAnios && /\bdesde\b/.test(q) && anios.length ? Math.min(...anios) : null;
-	return { anios, mes, modo, nivel, ranking, orden: menos ? 'ASC' : 'DESC', desde };
+	return { anios, mes, modo, nivel, ranking, rankingSobre, rankingTerritorial, orden: menos ? 'ASC' : 'DESC', desde, enCurso, pide };
 }
 
 // ---------- Columnas ----------
@@ -139,7 +167,28 @@ const SINONIMOS_VALORES = {
 	coche: 'turismo turismos',
 	pisos: 'vivienda viviendas',
 	electrico: 'demanda',
-	espana: 'nacional total espana'
+	espana: 'nacional total espana',
+	comida: 'alimentos',
+	alimentacion: 'alimentos',
+	ninos: 'menores 18',
+	nino: 'menores 18',
+	mayores: '65 mayores',
+	jubilados: 'jubilacion',
+	enfermeras: 'enfermeria enfermeros',
+	enfermeros: 'enfermeria',
+	medicos: 'medicina medico',
+	noches: 'pernoctaciones',
+	hotel: 'hoteles hoteleros hotelera',
+	luz: 'electricidad',
+	sueldo: 'salario salarios',
+	sueldos: 'salario salarios',
+	paro: 'parados desempleo',
+	trabajadores: 'empleados ocupados afiliados',
+	europa: 'ue27 eu27 union europea',
+	tren: 'ferrocarril',
+	trenes: 'ferrocarril',
+	avion: 'aereo',
+	aviones: 'aereo'
 };
 const TERRITORIO = /andaluc|aragon|asturias|balear|canaria|cantabr|castilla|catalu|valencia|extremad|galicia|madrid|murcia|navarra|vasco|rioja|ceuta|melilla|provincia|municipio|comunidad/;
 
@@ -147,9 +196,10 @@ const TERRITORIO = /andaluc|aragon|asturias|balear|canaria|cantabr|castilla|cata
 function puntuarValores(valores, pregunta) {
 	const base = normalizar(pregunta);
 	const q = palabras(base + ' ' + [...palabras(base)].map((p) => SINONIMOS_VALORES[p] ?? '').join(' '));
+	const qRaices = new Set([...q].flatMap(raices));
 	const sinTerritorio = !TERRITORIO.test(base);
 	return valores.map((v) => {
-		let s = [...palabras(v)].filter((p) => q.has(p)).length;
+		let s = [...palabras(v)].filter((p) => raices(p).some((r) => qRaices.has(r))).length;
 		// Si no se nombra territorio, lo nacional es lo que se pregunta
 		if (sinTerritorio && /^(nacional|espana|total)\b/.test(normalizar(v))) s += 0.5;
 		return { v, s };
@@ -174,7 +224,7 @@ function formatoPeriodo(v, col) {
 
 // Decimales solo donde cuentan: 1.181,73 M€ sí, 49.114.494 habitantes no
 const numero = (v) =>
-	typeof v === 'number' ? new Intl.NumberFormat('es-ES', { maximumFractionDigits: Math.abs(v) >= 100000 ? 0 : 2 }).format(v) : v ?? '—';
+	typeof v === 'number' ? new Intl.NumberFormat('es-ES', { maximumFractionDigits: Math.abs(v) >= 100000 ? 0 : 2, useGrouping: 'always' }).format(v) : v ?? '—';
 
 /** Unidad deducida del nombre de la columna (solo cuando es inequívoca) */
 function unidadDe(nombre) {
@@ -216,14 +266,21 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const decisiones = [];
 	const intencion = leerIntencion(pregunta);
 	/** Pide al modelo una elección; con `prior` (log-probabilidades extra por opción) las combina */
+	let ultimasProbs = null; // probabilidades de la última elección (si el decisor las da)
 	const elegir = async (contexto, q, opciones, prior = null) => {
 		if (opciones.length === 1) return 0;
 		const lista = opciones.slice(0, MAX_OPCIONES);
 		const r = await decidir(contexto, q, lista);
 		let i = typeof r === 'number' ? r : r.indice;
-		if (prior && typeof r === 'object' && r.probs) {
-			const puntos = lista.map((_, k) => Math.log(Math.max(r.probs[k] ?? 0, 1e-9)) + (prior[k] ?? 0));
+		ultimasProbs = null;
+		if (typeof r === 'object' && r.probs) {
+			// Probabilidad de cada opción tras sumar la información previa (para saber si duda)
+			const puntos = lista.map((_, k) => Math.log(Math.max(r.probs[k] ?? 0, 1e-9)) + (prior?.[k] ?? 0));
 			i = puntos.indexOf(Math.max(...puntos));
+			const max = Math.max(...puntos);
+			const e = puntos.map((p) => Math.exp(p - max));
+			const suma = e.reduce((a, b) => a + b, 0);
+			ultimasProbs = e.map((x) => x / suma);
 		}
 		decisiones.push({ pregunta: q, opciones: lista, eleccion: lista[i] });
 		alPaso?.({ herramienta: 'decidir', entrada: { pregunta: q, eleccion: lista[i] } });
@@ -258,14 +315,19 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	//    puesto en la búsqueda cuenta como información previa
 	const prefijo = ctx.catalogo.embeddings?.prefijo_consulta ?? '';
 	const vector = ctx.embeber ? await ctx.embeber(prefijo + pregunta) : null;
-	const candidatas = buscarTablas(ctx.indice, pregunta, 6, 0, vector).map((x) => buscarFicha(ctx.catalogo, x.tabla));
+	// ctx.tablaForzada: la tabla ya la eligió la persona (respuesta a «¿qué datos quieres usar?»)
+	const forzada = ctx.tablaForzada ? buscarFicha(ctx.catalogo, ctx.tablaForzada) : null;
+	const candidatas = forzada ? [forzada] : buscarTablas(ctx.indice, pregunta, 6, 0, vector).map((x) => buscarFicha(ctx.catalogo, x.tabla));
 	if (!candidatas.length) return { texto: 'No he encontrado datos sobre eso en SpainFacts.', decisiones };
 	const describirCandidata = (t) => {
 		const tc = columnaTiempo(t);
 		const periodo = tc?.min !== undefined ? ` Periodo: ${String(tc.min).slice(0, 10)} a ${String(tc.max).slice(0, 10)}.` : '';
 		// Con ficha semántica: el tema y las cifras en lenguaje llano
 		const s = t.semantica?.usar ? t.semantica : null;
-		if (s) return `${t.nombre}: ${s.tema}.${periodo} Cifras: ${s.medidas.map((m) => m.nombre).slice(0, 8).join(', ')}`;
+		// ctx.ejemplosTabla: además, preguntas de ejemplo de la ficha (dicen qué responde la tabla
+		// mejor que su tema para distinguir tablas vecinas)
+		const ejemplos = ctx.ejemplosTabla && s?.preguntas?.length ? ` Responde preguntas como: ${s.preguntas.slice(0, ctx.ejemplosTabla).map((p) => `«${p}»`).join(' ')}` : '';
+		if (s) return `${t.nombre}: ${s.tema}.${periodo} Cifras: ${s.medidas.map((m) => m.nombre).slice(0, 8).join(', ')}${ejemplos ? `.${ejemplos}` : ''}`;
 		const cols = t.columnas.map((c) => c.nombre).slice(0, 14).join(', ');
 		// Los títulos de las páginas que la usan dicen el tema en lenguaje llano
 		const pags = [...new Set((t.paginas ?? []).map((p) => p.titulo).filter(Boolean))].slice(0, 3).join(' / ');
@@ -277,8 +339,28 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	//   'ambos'   -> suma de las log-probabilidades de los dos
 	const modoTabla = ctx.eleccionTabla ?? 'lista';
 	let iTabla;
-	if (modoTabla === 'lista') {
+	let probTablas = null;
+	let alternativas = []; // otras tablas que podían ser («¿buscabas otros datos?»)
+	/** Una tabla como opción para la persona: su tema en lenguaje llano y la página donde se ve */
+	const opcionDeTabla = (tabla) => {
+		const c = buscarFicha(ctx.catalogo, tabla);
+		const pagina = [...(c.paginas ?? [])].filter((p) => p.titulo && !p.ruta.includes('[')).sort((a, b) => b.ruta.length - a.ruta.length)[0];
+		return { tabla: c.nombre, tema: c.semantica?.tema ?? c.descripcion, pagina: pagina?.titulo ?? null };
+	};
+	if (forzada) iTabla = 0;
+	else if (modoTabla === 'lista') {
 		iTabla = await elegir(contexto, Q('tabla'), candidatas.map(describirCandidata), candidatas.map((_, k) => -(ctx.priorBusqueda ?? PRIOR_BUSQUEDA) * k));
+		probTablas = ultimasProbs ? candidatas.map((c, k) => ({ tabla: c.nombre, p: ultimasProbs[k] ?? 0 })).sort((a, b) => b.p - a.p) : null;
+		// Si duda entre varias, pregunta cuál en vez de contestar con la que quizá no es
+		if (ctx.aclarar && probTablas && probTablas[0].p < ACLARAR_MAX && (probTablas[1]?.p ?? 0) >= ACLARAR_SEGUNDA) {
+			const opciones = probTablas
+				.filter((x) => x.p >= 0.08)
+				.slice(0, 3)
+				.map(({ tabla }) => opcionDeTabla(tabla));
+			return { texto: '', aclaracion: { opciones }, decisiones, depuracion: { intencion, probTablas } };
+		}
+		// Sin umbral: el modelo da 0,99 a la elegida aunque se equivoque, y la buena suele ser la siguiente
+		alternativas = probTablas.slice(1, 3).map(({ tabla }) => opcionDeTabla(tabla));
 	} else {
 		const puntos = [];
 		for (const c of candidatas) {
@@ -312,8 +394,31 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		return m ? `${m.nombre}${m.unidad ? ` (${m.unidad})` : ''}` : etiqueta(c);
 	};
 	const esPrincipal = (c) => fichaMedida.get(c.nombre)?.principal === true;
+	// Lo que pide la forma de la pregunta: «¿cuántos...?» un recuento, «¿qué porcentaje...?» un
+	// porcentaje, «por habitante» una tasa, «¿cuánto ha subido...?» el nivel (no la tasa de variación)
+	const ajusteForma = (c) => {
+		const m = fichaMedida.get(c.nombre);
+		const texto = normalizar(`${c.nombre} ${m?.nombre ?? ''} ${m?.unidad ?? ''}`);
+		const tipo = m?.tipo ?? (/pct|porcentaje|cuota|tasa/.test(texto) ? 'porcentaje' : 'nivel');
+		const porHab = /hab|por_1000|1000|100k|100\.000|por cada|per capita|por persona/.test(texto);
+		const pct = ['porcentaje', 'tasa'].includes(tipo) || /%|pct/.test(texto);
+		const variacion = /variaci|interanual|crecimiento|\bvar\b|var_|_var\b|cambio/.test(texto);
+		const euros = /€|eur|euro/.test(texto);
+		const { pide } = intencion;
+		const q = normalizar(pregunta);
+		let a = 0;
+		if (pide.importe) a += euros && !pct ? 0.12 : -0.12;
+		if (pide.total && !pide.habitante && !pide.porcentaje) a += porHab ? -0.06 : 0.03;
+		// «del año anterior», «del mismo periodo del año pasado»: solo si la pregunta lo dice
+		if (/anterior|pasado/.test(texto) && !/anterior|pasado/.test(q)) a -= 0.12;
+		if (pide.recuento) a += ['flujo', 'nivel'].includes(tipo) && !porHab && !pct ? 0.12 : -0.12;
+		if (pide.porcentaje) a += pct ? 0.12 : -0.08;
+		if (pide.habitante) a += porHab ? 0.12 : -0.08;
+		if ((pide.subida || intencion.modo === 'cambio') && variacion) a -= 0.15;
+		return a;
+	};
 	const lexico = puntuarValores(medidas.map(etiquetaMedida), pregunta).map((x) => x.s);
-	let puntosMedida = lexico.map((s, k) => 0.3 * s + (esPrincipal(medidas[k]) ? 0.3 : 0));
+	let puntosMedida = lexico.map((s, k) => 0.3 * s + (esPrincipal(medidas[k]) ? 0.3 : 0) + 2 * ajusteForma(medidas[k]));
 	if (vector) {
 		const prefDoc = ctx.catalogo.embeddings?.prefijo_documento ?? '';
 		for (const c of medidas) {
@@ -321,23 +426,28 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 			if (!vectoresColumna.has(clave)) vectoresColumna.set(clave, await ctx.embeber(`${prefDoc}${etiquetaMedida(c)}`));
 		}
 		puntosMedida = medidas.map(
-			(c, k) => coseno(vector, vectoresColumna.get(`${t.nombre}.${c.nombre}.${etiquetaMedida(c)}`)) + 0.05 * lexico[k] + (esPrincipal(c) ? 0.05 : 0)
+			(c, k) => coseno(vector, vectoresColumna.get(`${t.nombre}.${c.nombre}.${etiquetaMedida(c)}`)) + 0.05 * lexico[k] + (esPrincipal(c) ? 0.05 : 0) + ajusteForma(c)
 		);
 	}
-	const ordenMedidas = medidas.map((c, k) => ({ c, s: puntosMedida[k], l: lexico[k] })).sort((a, b) => b.s - a.s).slice(0, MAX_MEDIDAS);
+	const todasMedidas = medidas.map((c, k) => ({ c, s: puntosMedida[k], l: lexico[k] })).sort((a, b) => b.s - a.s);
+	// Las cifras que contradicen la forma de la pregunta (una tasa para «¿cuántos...?», una tasa de
+	// variación para «¿cuánto ha subido...?») salen de las opciones si queda alguna que encaje
+	const encajan = todasMedidas.filter((x) => ajusteForma(x.c) >= 0);
+	const ordenMedidas = (encajan.length ? encajan : todasMedidas).slice(0, MAX_MEDIDAS);
 	// Una columna nombrada claramente por la pregunta («turistas», «variación anual») gana
 	// sin preguntar al modelo
 	const porPalabras = [...ordenMedidas].sort((a, b) => b.l - a.l);
 	const medida =
-		porPalabras[0].l >= 1 && porPalabras[0].l - (porPalabras[1]?.l ?? 0) >= 1
+		porPalabras[0].l >= 1 && porPalabras[0].l - (porPalabras[1]?.l ?? 0) >= 1 && ajusteForma(porPalabras[0].c) >= 0
 			? porPalabras[0].c
 			: ordenMedidas[
 					await elegir(
 						ctxTabla,
 						Q('cifra'),
 						ordenMedidas.map((x) => etiquetaMedida(x.c)),
-						// La principal de la ficha parte con ventaja: es lo que se pregunta si no se dice otra cosa
-						sem ? ordenMedidas.map((x) => (esPrincipal(x.c) ? 1 : 0)) : null
+						// La principal de la ficha parte con ventaja (es lo que se pregunta si no se dice otra
+						// cosa), y la forma de la pregunta empuja hacia recuentos, porcentajes o tasas
+						ordenMedidas.map((x) => (esPrincipal(x.c) ? 1 : 0) + 8 * ajusteForma(x.c) + 1.5 * x.l)
 					)
 				].c;
 	const fm = fichaMedida.get(medida.nombre);
@@ -352,6 +462,9 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		: /^(matricul|solicitud|llegad|nacimiento|defuncion|venta|compraventa|turistas|pernoct|delito|infraccion|constituid|disuelt|hipoteca|incendio|n_incendio|ha_|hectarea|personas|visitantes|viajeros|pasajeros|condenad|votos|exportacion|importacion)/.test(
 			medida.nombre
 		) && !/(tasa|pct|porcentaje|media|medio|indice|precio|por_|_hab|1000|100k|interanual|var_|_real_hab)/.test(medida.nombre);
+	// Entre categorías (sexos, tipos, sectores) se suman flujos y también niveles: los empleados de
+	// cada sector suman los del total; tasas, porcentajes, medias y precios no
+	const sumable = fm ? ['flujo', 'nivel'].includes(fm.tipo) : esFlujo;
 	const sumarEntre = []; // columnas sin total cuyo desglose se suma
 
 	// 4. Territorio. Tres formas de guardarlo en las tablas:
@@ -395,6 +508,10 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		return opciones[await elegir(ctxTabla, Q('nivel'), opciones.map((v) => NIVEL[v] ?? v))];
 	}
 
+	// Ranking de territorios («¿qué comunidad...?») frente a ranking de otra cosa («¿qué sector...?»,
+	// «¿qué partido...?»): en el segundo el territorio es España (o la suma) y se compara esa dimensión
+	const rankTer = intencion.ranking && intencion.rankingTerritorial;
+	const rankDim = intencion.ranking && !intencion.rankingTerritorial;
 	const terSem = sem?.territorio ?? null;
 	if (terSem?.codigo) usadas.add(terSem.codigo);
 	if (nombres.has('nivel')) {
@@ -416,7 +533,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		if (elegido) {
 			nivelElegido = elegido.nivel;
 			filtros.push(['nivel', nivelElegido], elegido.filtro);
-		} else if (!intencion.ranking && niveles.includes('pais')) {
+		} else if (!rankTer && niveles.includes('pais')) {
 			nivelElegido = 'pais';
 			filtros.push(['nivel', 'pais']);
 		} else {
@@ -444,7 +561,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 			const [colRanking] = entradas.find(([, n]) => n === nivelRanking) ?? [];
 			for (const [c] of entradas) {
 				const hay00 = t.columnas.find((x) => x.nombre === c)?.valores?.includes('00');
-				if (intencion.ranking && c === colRanking) {
+				if (rankTer && c === colRanking) {
 					comparar.push(c);
 					unirTerritorios = { col: c, nivel: nivelRanking };
 				} else if (hay00) filtros.push([c, '00']);
@@ -460,9 +577,9 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		const nivelTer = terSem.niveles?.find((n) => n !== 'pais') ?? 'ccaa';
 		const elegido = await territorioNombrado(valores.map((v) => ({ nivel: nivelTer, nombre: v, filtro: [c, v] })));
 		if (elegido) filtros.push(elegido.filtro);
-		else if (intencion.ranking || !terSem.espana) {
-			if (!intencion.ranking && esFlujo) sumarEntre.push(c);
-			else if (!muchos || intencion.ranking) {
+		else if (rankTer || !terSem.espana) {
+			if (!rankTer && sumable) sumarEntre.push(c);
+			else if (!muchos || rankTer) {
 				comparar.push(c);
 				if (terSem.espana) totalesFuera.push([terSem.espana.columna, terSem.espana.valor]);
 			}
@@ -482,7 +599,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	);
 	// Columnas de código sin nombre al lado (cod_ccaa sin tabla de códigos...): España (00)
 	for (const c of t.columnas) {
-		if (/^cod_\w+$/.test(c.nombre) && !usadas.has(c.nombre) && c.valores?.includes('00') && !intencion.ranking) filtros.push([c.nombre, '00']);
+		if (/^cod_\w+$/.test(c.nombre) && !usadas.has(c.nombre) && c.valores?.includes('00') && !rankTer) filtros.push([c.nombre, '00']);
 	}
 	/** Valores posibles de una columna con los filtros ya puestos (y, si son muchos, solo los nombrados) */
 	async function valoresPosibles(c) {
@@ -498,6 +615,19 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		}
 		return { valores: filas.map((f) => String(f.v)), muchos: false };
 	}
+	// ¿Qué columna es la del ranking? La que se llama como lo que pregunta («sector» -> sector,
+	// «partido» -> familia/partido); si ninguna, la primera sin valor nombrado
+	const SINONIMOS_RANKING = { pais: 'pais nacionalidad origen', paises: 'pais nacionalidad origen', partido: 'partido familia siglas', partidos: 'partido familia siglas', tipo: 'tipo tecnologia categoria clase' };
+	const sobre = new Set(
+		[...palabras(SINONIMOS_RANKING[normalizar(intencion.rankingSobre ?? '')] ?? intencion.rankingSobre ?? '')].flatMap(raices)
+	);
+	// Ranking de territorios en una tabla sin territorio (o con el país como columna): como ranking de dimensión
+	const rankDimEf = rankDim || (rankTer && !comparar.length && !filtros.some(([c]) => /^(nivel|cod|cod_\w+)$/.test(c)));
+	const esDelRanking = (c) => {
+		const d = sem?.dimensiones?.find((x) => x.columna === c.nombre);
+		return [...palabras(`${c.nombre.replace(/_/g, ' ')} ${d?.nombre ?? ''}`)].some((p) => raices(p).some((r) => sobre.has(r)));
+	};
+	const hayDelRanking = rankDimEf && categoricas.some(esDelRanking);
 	const pendientes = [...categoricas];
 	// Orden: primero las columnas cuyo mejor valor encaja más con la pregunta
 	const mejorEncaje = (c) => Math.max(0, ...puntuarValores(c.valores ?? c.ejemplos ?? [], pregunta).map((x) => x.s));
@@ -508,7 +638,8 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		// búsqueda (muchos valores), uno solo es justo el nombrado
 		// Muchos valores y ninguno nombrado: en un ranking («¿qué marca...?») se compara entre todos
 		if (muchos && !valores.length) {
-			if (intencion.ranking) comparar.push(c.nombre);
+			if (rankDimEf && (esDelRanking(c) || (!hayDelRanking && !comparar.length))) comparar.push(c.nombre);
+			else if (sumable && !rankDim && !intencion.ranking) sumarEntre.push(c.nombre);
 			continue;
 		}
 		if (!valores.length || (valores.length === 1 && !muchos)) continue;
@@ -523,7 +654,19 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		const nombrados = puntos.filter((x) => x.s >= 1).sort((a, b) => b.s - a.s);
 		const nacional = puntos.find((x) => x.s === 0.5)?.v;
 
-		if (!nombrados.length && sem && !dim) continue;
+		// Columna que la ficha no lista como dimensión y la pregunta no nombra: no se filtra; si la
+		// cifra se puede sumar, se suma entre sus valores (si no, saldrían varias filas sueltas)
+		// La columna del ranking se compara entera, aunque alguna palabra coincida con un valor
+		if (rankDimEf && hayDelRanking && esDelRanking(c) && !comparar.includes(c.nombre)) {
+			const dimR = sem?.dimensiones?.find((d) => d.columna === c.nombre);
+			comparar.push(c.nombre);
+			if (dimR?.total && valores.includes(dimR.total)) totalesFuera.push([c.nombre, dimR.total]);
+			continue;
+		}
+		if (!nombrados.length && sem && !dim) {
+			if (sumable && !intencion.ranking) sumarEntre.push(c.nombre);
+			continue;
+		}
 		// Valor por defecto de la ficha (lo que existe hoy frente a lo tramitado...): también en rankings
 		if (!nombrados.length && dim?.defecto && valores.includes(dim.defecto)) {
 			filtros.push([c.nombre, dim.defecto]);
@@ -534,12 +677,13 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 			// total, si la cifra es un flujo (solicitudes, llegadas...) se suma entre todos; si
 			// no, se compara entre todos (si no son miles)
 			const porDefecto = total ?? nacional;
-			if (porDefecto && !intencion.ranking) filtros.push([c.nombre, porDefecto]);
-			else if (!porDefecto && !intencion.ranking && esFlujo) sumarEntre.push(c.nombre);
-			else if (!muchos || intencion.ranking) {
+			// En un ranking de otra dimensión, la del ranking se compara (sin su fila Total)
+			if (rankDimEf && (esDelRanking(c) || (!hayDelRanking && !comparar.length))) {
 				comparar.push(c.nombre);
-				if (total) totalesFuera.push([c.nombre, total]); // en un ranking, la fila Total sobra
+				if (total) totalesFuera.push([c.nombre, total]);
 			} else if (porDefecto) filtros.push([c.nombre, porDefecto]);
+			else if (sumable) sumarEntre.push(c.nombre);
+			else if (!muchos && !rankTer) comparar.push(c.nombre);
 			continue;
 		}
 		// Un valor gana con claridad por las palabras de la pregunta: no hace falta modelo
@@ -658,7 +802,8 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const nombreMedida = fm?.nombre ?? (medida.descripcion || medida.nombre.replace(/_/g, ' '));
 	if (!filas.length) return { texto: `No hay datos para esa combinación en ${t.tabla}. ${fuente}`, sql, filas, decisiones };
 
-	const quien = (f) => [f.territorio, ...comparar.filter((c) => !esCodigo(c)).map((c) => f[c])].filter(Boolean).join(', ');
+	// Sin repetir (el nombre del territorio puede venir de la unión y de una columna a la vez)
+	const quien = (f) => [...new Set([f.territorio, ...comparar.filter((c) => !esCodigo(c)).map((c) => f[c])].filter(Boolean).map(String))].join(', ');
 	const unidad = fm?.unidad ? ` ${fm.unidad}` : unidadDe(medida.nombre);
 	// Unidad de la ficha, o leída de la fila cuando la tabla mezcla unidades en una columna
 	const unidadFila = (f) => (fm?.unidad_columna && f[fm.unidad_columna] ? ` ${f[fm.unidad_columna]}` : unidad);
@@ -709,7 +854,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		const x = unirTerritorios ? 'territorio' : comparar[0];
 		if (x && modo !== 'historico') grafico = { tipo: 'barras', x, y: medida.nombre, serie: '', titulo: `${nombreMedida}${per(filas[0]) ? `, ${per(filas[0])}` : ''}`, filas, sql };
 	}
-	return { texto: `${texto}\n\n${fuente}`, sql, filas, decisiones, grafico, depuracion: { intencion, filtros, comparar, totalesFuera } };
+	return { texto: `${texto}\n\n${fuente}`, sql, filas, decisiones, grafico, alternativas, depuracion: { intencion, filtros, comparar, totalesFuera, probTablas } };
 }
 
 // ---------- Prompt de decisión (formato de los modelos tipo decider) ----------

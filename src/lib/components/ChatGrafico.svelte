@@ -1,15 +1,21 @@
 <script>
-    // Gráfico o tabla que pide el modelo en el chat (herramienta crear_grafico). El modelo
-    // solo elige tipo y columnas; el dibujo, los formatos y el tema son los de la web.
+    // Gráfico o tabla de una respuesta del chat. El modelo (o el traductor del modo decisión)
+    // solo elige tipo y columnas; el dibujo, los formatos y el tema son los de la web. Quien
+    // lee puede cambiar el tipo (barras, líneas, área, tabla) y descargar los datos (CSV) o
+    // el gráfico (PNG).
     import { ECharts } from "@evidence-dev/core-components";
+    import { getInstanceByDom } from "echarts";
     import { localeActual } from "../utils.js";
+    import { t } from "../i18n.js";
     import { getCompactFormatter, getNumberFormatter } from "../chart-utils.js";
 
-    /** @type {{ tipo: 'linea'|'barras'|'tabla', x: string, y: string, serie: string, titulo: string, filas: Record<string, any>[] }} */
+    /** @type {{ tipo: 'linea'|'barras'|'area'|'tabla', x: string, y: string, serie: string, titulo: string, filas: Record<string, any>[], sql?: string }} */
     export let grafico;
+    export let lang = "es";
 
     const MAX_SERIES = 12;
     const MAX_FILAS_TABLA = 200;
+    const TIPOS = ["barras", "linea", "area", "tabla"];
 
     $: locale = localeActual();
     $: compacto = getCompactFormatter(locale, 1);
@@ -24,7 +30,13 @@
         return unicos;
     }
 
-    $: ({ tipo, x, y, serie, titulo, filas } = grafico);
+    $: ({ x, y, serie, titulo, filas } = grafico);
+    // El tipo lo elige quien lee; parte del que traía la respuesta
+    let tipo = grafico.tipo;
+    $: tipo = grafico.tipo;
+    // Solo se puede dibujar si hay eje X y cifra, y más de una fila
+    $: dibujable = Boolean(x && y) && filas.length > 1;
+    $: tiposPosibles = dibujable ? TIPOS : ["tabla"];
     $: categorias = ordenarX(filas.map((f) => f[x]));
     $: nombresSerie = serie ? [...new Set(filas.map((f) => f[serie]))] : [y];
     $: seriesVisibles = nombresSerie.slice(0, MAX_SERIES);
@@ -66,14 +78,80 @@
                   name: s.nombre,
                   data: s.valores,
                   showSymbol: categorias.length < 30,
-                  connectNulls: false
+                  connectNulls: false,
+                  ...(tipo === "area" ? { areaStyle: { opacity: 0.25 }, ...(serie ? { stack: "total" } : {}) } : {})
               }))
     };
     $: columnas = filas.length ? Object.keys(filas[0]) : [];
+
+    // ---------- Descargas ----------
+    const nombreFichero = (ext) =>
+        `${(titulo || "datos")
+            .normalize("NFD")
+            .replace(/[̀-ͯ]/g, "")
+            .replace(/[^\w]+/g, "-")
+            .replace(/^-|-$/g, "")
+            .slice(0, 60)
+            .toLowerCase() || "datos"}.${ext}`;
+
+    function bajar(blob, nombre) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = nombre;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    /** CSV con todas las filas y columnas (UTF-8 con BOM para que Excel lea las tildes) */
+    function descargarCSV() {
+        const celda = (v) => {
+            if (v === null || v === undefined) return "";
+            if (v instanceof Date) return v.toISOString().slice(0, 10);
+            const s = typeof v === "bigint" ? v.toString() : String(v);
+            return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+        };
+        const lineas = [columnas.map(celda).join(","), ...filas.map((f) => columnas.map((c) => celda(f[c])).join(","))];
+        bajar(new Blob(["﻿" + lineas.join("\r\n")], { type: "text/csv;charset=utf-8" }), nombreFichero("csv"));
+    }
+
+    let figura;
+    /** PNG del gráfico tal como se ve, a doble resolución y con el fondo de la página */
+    function descargarPNG() {
+        const el = figura?.querySelector("[_echarts_instance_]");
+        const instancia = el ? getInstanceByDom(el) : null;
+        if (!instancia) return;
+        const fondo = getComputedStyle(document.body).backgroundColor || "#ffffff";
+        const url = instancia.getDataURL({ type: "png", pixelRatio: 2, backgroundColor: fondo });
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = nombreFichero("png");
+        a.click();
+    }
 </script>
 
-<figure class="my-3">
-    {#if titulo}<figcaption class="text-sm font-semibold mb-1">{titulo}</figcaption>{/if}
+<figure class="my-3" bind:this={figura}>
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+        {#if titulo}<figcaption class="text-sm font-semibold">{titulo}</figcaption>{:else}<span></span>{/if}
+        <div class="flex flex-wrap items-center gap-1 text-xs">
+            {#if tiposPosibles.length > 1}
+                <div class="inline-flex rounded-md border border-gray-300 dark:border-gray-600 overflow-hidden" role="group" aria-label={t("chat.grafico.tipo", lang)}>
+                    {#each tiposPosibles as tp}
+                        <button type="button" on:click={() => (tipo = tp)} aria-pressed={tipo === tp}
+                            class="px-2 py-0.5 {tipo === tp ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}">{t(`chat.grafico.${tp}`, lang)}</button>
+                    {/each}
+                </div>
+            {/if}
+            <button type="button" on:click={descargarCSV} title={t("chat.grafico.csvTitulo", lang)}
+                class="rounded-md border border-gray-300 dark:border-gray-600 px-2 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800">CSV</button>
+            {#if tipo !== "tabla"}
+                <button type="button" on:click={descargarPNG} title={t("chat.grafico.pngTitulo", lang)}
+                    class="rounded-md border border-gray-300 dark:border-gray-600 px-2 py-0.5 hover:bg-gray-100 dark:hover:bg-gray-800">PNG</button>
+            {/if}
+        </div>
+    </div>
     {#if tipo === "tabla"}
         <div class="overflow-x-auto max-h-96 border border-gray-200 dark:border-gray-700 rounded-md">
             <table class="text-xs w-full">
@@ -91,7 +169,9 @@
         </div>
         {#if filas.length > MAX_FILAS_TABLA}<p class="text-xs text-gray-500 mt-1">{MAX_FILAS_TABLA} / {filas.length}</p>{/if}
     {:else}
-        <ECharts {config} height="{horizontal ? Math.min(900, 60 + categorias.length * 22) : 340}px" />
+        {#key tipo}
+            <ECharts {config} height="{horizontal ? Math.min(900, 60 + categorias.length * 22) : 340}px" />
+        {/key}
         {#if recortadas > 0}<p class="text-xs text-gray-500 mt-1">+{recortadas}</p>{/if}
     {/if}
 </figure>

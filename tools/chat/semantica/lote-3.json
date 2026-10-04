@@ -7,7 +7,13 @@
       "¿Cuántos alumnos hay matriculados en la ESO?",
       "¿Qué porcentaje de los alumnos de primaria va a la escuela pública?",
       "¿Cómo ha evolucionado el alumnado universitario en los últimos años?",
-      "¿Cuántos alumnos hay en la concertada?"
+      "¿Cuántos alumnos hay en la concertada?",
+      "Dime cuántos niños hay en infantil en España",
+      "¿Cuántos estudiantes hay en la universidad?",
+      "¿Qué porcentaje de los chavales de bachillerato va a un colegio privado?",
+      "¿Cuántos alumnos de FP de grado medio hay?",
+      "¿Cuántos alumnos hay en la escuela pública frente a la concertada?",
+      "¿Han subido o bajado los alumnos de primaria desde 2015?"
     ],
     "medidas": [
       {
@@ -89,7 +95,13 @@
       "¿Qué porcentaje de alumnos españoles suspende en matemáticas en PISA?",
       "¿Cómo está España en PISA comparada con la UE?",
       "¿Rinden peor los chicos o las chicas en lectura?",
-      "¿Cómo ha evolucionado el nivel en ciencias de PISA?"
+      "¿Cómo ha evolucionado el nivel en ciencias de PISA?",
+      "¿Qué porcentaje de chavales españoles de 15 años no entiende bien lo que lee?",
+      "¿Los alumnos españoles van peor que la media europea en ciencias?",
+      "¿Quién suspende más en matemáticas, los chicos o las chicas?",
+      "¿Cuántos jóvenes de 15 años flojean en mates en la UE?",
+      "¿Ha mejorado España en el informe PISA desde el año 2000?",
+      "Dime el último dato de PISA en lectura"
     ],
     "medidas": [
       {
@@ -141,7 +153,13 @@
       "¿Qué porcentaje de voto sacó Vox en las generales de 2023?",
       "¿En qué comunidad vota más al PP?",
       "¿Cuántos escaños tuvo el PSOE en 2019?",
-      "¿Cómo ha evolucionado el voto de la izquierda en Andalucía?"
+      "¿Cómo ha evolucionado el voto de la izquierda en Andalucía?",
+      "¿Cuántos escaños sacó Sumar en las últimas generales?",
+      "¿Cuántos votos tuvo la derecha en Madrid?",
+      "¿En qué provincia gana más el PSOE?",
+      "¿Qué porcentaje de voto tienen los nacionalistas en Cataluña?",
+      "Dime cuántos diputados tiene la izquierda en el Congreso",
+      "¿Cómo ha cambiado el voto de Vox desde 2015 en Valencia?"
     ],
     "medidas": [
       {
@@ -171,7 +189,7 @@
       }
     ],
     "tiempo": {
-      "columna": "anio",
+      "columna": "fecha",
       "grano": "anual",
       "parcial": false
     },
@@ -183,7 +201,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -191,10 +209,10 @@
     },
     "dimensiones": [
       {
-        "columna": "tipo",
-        "nombre": "tipo de elección (02 Congreso, 04 Municipales, 07 Parlamento Europeo)",
+        "columna": "tipo_nombre",
+        "nombre": "tipo de elección (Congreso, Municipales, Parlamento Europeo)",
         "total": null,
-        "defecto": "02"
+        "defecto": "Congreso"
       },
       {
         "columna": "familia",
@@ -208,7 +226,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Hay que filtrar siempre por tipo de elección y año para no mezclar Congreso, municipales y europeas; en 2019 hubo dos generales (abril y noviembre, columna proceso). El código del territorio solo existe en cod (00 España, 01-19 comunidades, 01-52 provincias según nivel); pct está en 0-100."
+    "notas": "Hay que filtrar siempre por tipo de elección y fecha (eleccion es la etiqueta legible) para no mezclar Congreso, municipales y europeas; en 2019 hubo dos generales (abril y noviembre). El código INE del territorio está en cod (00 España, 01-19 comunidades, 01-52 provincias según nivel) y su nombre en nombre; pct está en 0-100."
   },
   {
     "tabla": "elecciones_municipios",
@@ -218,7 +236,13 @@
       "¿Quién ganó las elecciones municipales de 2023 en el municipio de código 28079?",
       "¿Cómo ha evolucionado la participación en las generales en un pueblo?",
       "¿Qué porcentaje sacó Vox en las municipales de 2023 en Valencia?",
-      "¿En cuántos municipios ganó el PP en 2019?"
+      "¿En cuántos municipios ganó el PP en 2019?",
+      "¿Qué participación hubo en mi pueblo en las municipales?",
+      "¿Quién gobernó en Sevilla tras las municipales de 2019?",
+      "¿Cuánto votó la izquierda en Barcelona en las generales de 2023?",
+      "¿Cuántos pueblos ganó el PSOE en las municipales de 2023?",
+      "¿Cómo ha votado Vigo a lo largo de los años?",
+      "¿Cuánto sacó IU, Podemos o Sumar en un municipio concreto?"
     ],
     "medidas": [
       {
@@ -284,7 +308,7 @@
       }
     ],
     "tiempo": {
-      "columna": "anio",
+      "columna": "fecha",
       "grano": "anual",
       "parcial": false
     },
@@ -294,15 +318,15 @@
       ],
       "nivel": null,
       "codigo": "cod_mun",
-      "nombre": null,
+      "nombre": "municipio",
       "espana": null
     },
     "dimensiones": [
       {
-        "columna": "tipo",
-        "nombre": "tipo de elección (02 Congreso, 04 Municipales)",
+        "columna": "tipo_nombre",
+        "nombre": "tipo de elección (Congreso, Municipales)",
         "total": null,
-        "defecto": "02"
+        "defecto": "Congreso"
       },
       {
         "columna": "ganador_familia",
@@ -311,7 +335,7 @@
       }
     ],
     "filtros": [],
-    "notas": "No tiene nombre de municipio, solo código INE de 5 cifras (cod_mun); para nombres usar elecciones_municipios_congreso. Hay que fijar tipo y año: 2019 tiene dos generales (abril y noviembre). Municipales solo incluye municipios de más de 250 habitantes."
+    "notas": "Una fila por municipio y elección, con su provincia y comunidad (cod_prov/provincia, cod_ccaa/ccaa). Hay que fijar tipo_nombre y fecha (eleccion es la etiqueta legible): 2019 tiene dos generales (abril y noviembre). Municipales solo incluye municipios de más de 250 habitantes."
   },
   {
     "tabla": "elecciones_municipios_congreso",
@@ -321,7 +345,13 @@
       "¿Quién ganó en Soria en las generales de 2023?",
       "¿Cuál es el municipio con más participación en las últimas elecciones?",
       "¿Qué porcentaje votó a Vox en Cieza?",
-      "¿En qué municipios de Burgos ganó el PSOE?"
+      "¿En qué municipios de Burgos ganó el PSOE?",
+      "¿Qué pueblo tuvo la participación más baja en las generales de 2023?",
+      "¿Cuántos habitantes tiene el municipio donde ganó Vox?",
+      "¿En cuántos pueblos de Teruel ganó el PP?",
+      "Dime qué partido ganó en Gijón en las últimas generales",
+      "¿Cuántas personas podían votar en Zaragoza?",
+      "¿En qué pueblos gana la izquierda en Cuenca?"
     ],
     "medidas": [
       {
@@ -453,7 +483,14 @@
       "¿Cuál fue la participación en las generales de 2023?",
       "¿Qué comunidad tuvo más abstención en las últimas elecciones?",
       "¿Cómo ha evolucionado la participación en las europeas?",
-      "¿Quién ganó las elecciones generales de 2019 en Cataluña?"
+      "¿Quién ganó las elecciones generales de 2019 en Cataluña?",
+      "¿Cuánta gente se quedó sin votar en las últimas generales?",
+      "¿Cuántos votos en blanco hubo en 2023?",
+      "¿Qué provincia tuvo más participación en las generales?",
+      "¿Cuántos votos nulos hubo en las europeas?",
+      "¿Qué elección ha tenido más abstención?",
+      "¿Cuántos escaños se repartían en Andalucía?",
+      "¿Está el sistema electoral español muy desproporcionado?"
     ],
     "medidas": [
       {
@@ -525,7 +562,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -550,7 +587,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Fijar siempre tipo_nombre (Congreso, Municipales, Parlamento Europeo) y año; en 2019 hay dos generales (fechas distintas). El territorio solo tiene código en cod (00 España). No hay serie para periodos intermedios: una fila por elección."
+    "notas": "Fijar siempre tipo_nombre (Congreso, Municipales, Parlamento Europeo) y año; en 2019 hay dos generales (fechas distintas). Cada elección lleva su etiqueta legible en eleccion (por ejemplo «Congreso, noviembre de 2019»); el código INE está en cod (00 España) y el nombre en nombre. No hay serie para periodos intermedios: una fila por elección."
   },
   {
     "tabla": "elecciones_partidos",
@@ -560,7 +597,13 @@
       "¿Cuántos escaños sacó el PP en 2023?",
       "¿Qué partido necesita más votos por escaño?",
       "¿Cómo ha evolucionado el voto de Vox desde que apareció?",
-      "¿Cuántos votos tuvo el PSOE en las europeas de 2024?"
+      "¿Cuántos votos tuvo el PSOE en las europeas de 2024?",
+      "¿Cuántos votos sacó Podemos en 2016?",
+      "¿Qué partido tuvo más votos en las generales de noviembre de 2019?",
+      "¿Cuánto costó cada diputado a Vox?",
+      "¿Qué porcentaje del voto tuvo Ciudadanos en 2019?",
+      "¿Qué partidos salieron perjudicados por la ley electoral?",
+      "¿Cuántos eurodiputados sacó el PP en 2024?"
     ],
     "medidas": [
       {
@@ -641,7 +684,14 @@
       "¿Qué porcentaje de la electricidad fue renovable ayer?",
       "¿Cuánta energía solar se produjo en agosto?",
       "¿Cuál fue el precio medio de la luz el mes pasado?",
-      "¿Cuántas emisiones de CO2 tiene la electricidad de Canarias?"
+      "¿Cuántas emisiones de CO2 tiene la electricidad de Canarias?",
+      "¿Cuánta luz se consumió ayer en España?",
+      "¿A cuánto estuvo la luz el día de ayer en el mercado mayorista?",
+      "¿Cuánta energía eólica se generó en enero?",
+      "¿Cuánta electricidad produjo la nuclear la semana pasada?",
+      "¿Cuánto carbón se quema hoy para hacer electricidad?",
+      "¿Importamos o exportamos electricidad?",
+      "¿Cuántos gramos de CO2 emite cada kilovatio hora?"
     ],
     "medidas": [
       {
@@ -767,7 +817,13 @@
       "¿Cuál es el récord de demanda eléctrica en España?",
       "¿Cuándo se batió el último récord de producción solar?",
       "¿Cuál ha sido la mayor cuota renovable de la historia?",
-      "¿Cuál es la demanda mínima registrada?"
+      "¿Cuál es la demanda mínima registrada?",
+      "¿Cuánta fotovoltaica se llegó a producir en un día récord?",
+      "¿Cuál es el precio más alto que ha tenido la luz?",
+      "¿Cuál fue el mayor consumo de luz de toda la historia?",
+      "¿Cuándo se batió el récord de eólica?",
+      "¿Cuál es el récord de exportación a Francia?",
+      "Dime el precio más bajo de la luz que se ha registrado"
     ],
     "medidas": [
       {
@@ -855,7 +911,12 @@
     "preguntas": [
       "¿Cuánta potencia de bombas de calor hay instalada en España?",
       "¿Cuántos megavatios de aerotermia hay?",
-      "¿Cómo ha crecido la geotermia en España?"
+      "¿Cómo ha crecido la geotermia en España?",
+      "¿Cuántos aires acondicionados con bomba de calor hay en España?",
+      "¿Cuánta potencia de aerotermia aire-agua hay?",
+      "¿Ha crecido mucho la aerotermia en los últimos años?",
+      "¿Cuántos megavatios de bombas de calor hidrotérmicas hay?",
+      "Dime cuánto calor producen las bombas de calor en el país"
     ],
     "medidas": [
       {
@@ -889,30 +950,33 @@
     "preguntas": [
       "¿Qué provincia calienta más sus casas con electricidad?",
       "¿Qué porcentaje de viviendas de Madrid tiene calefacción de gas natural?",
-      "¿Cuántas viviendas de Asturias usan petróleo para calentarse?"
+      "¿Cuántas viviendas de Asturias usan petróleo para calentarse?",
+      "¿Qué provincia usa más gas natural para la calefacción?",
+      "¿Cuántas casas de Barcelona se calientan con electricidad?",
+      "¿Qué porcentaje de las casas españolas se calienta con petróleo?",
+      "¿En qué provincia se usa más el gasóleo para calentarse?",
+      "¿Cuántas viviendas de Soria tienen calefacción?",
+      "¿Cuántas viviendas se calientan con leña u otros combustibles en Lugo?"
     ],
     "medidas": [
       {
-        "columna": "cuota_electricidad",
-        "nombre": "proporción de viviendas con calefacción eléctrica (0,34 = 34 %)",
+        "columna": "cuota_electricidad_pct",
+        "nombre": "porcentaje de viviendas con calefacción eléctrica",
         "unidad": "%",
         "tipo": "porcentaje",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
-        "columna": "cuota_gas",
-        "nombre": "proporción de viviendas con calefacción de gas natural",
+        "columna": "cuota_gas_pct",
+        "nombre": "porcentaje de viviendas con calefacción de gas natural",
         "unidad": "%",
-        "tipo": "porcentaje",
-        "escala": 100
+        "tipo": "porcentaje"
       },
       {
-        "columna": "cuota_petroleo",
-        "nombre": "proporción de viviendas con calefacción de petróleo",
+        "columna": "cuota_petroleo_pct",
+        "nombre": "porcentaje de viviendas con calefacción de petróleo",
         "unidad": "%",
-        "tipo": "porcentaje",
-        "escala": 100
+        "tipo": "porcentaje"
       },
       {
         "columna": "viviendas",
@@ -945,23 +1009,27 @@
         "tipo": "nivel"
       }
     ],
-    "tiempo": null,
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
     "territorio": {
       "niveles": [
         "pais",
         "provincia"
       ],
-      "nivel": null,
-      "codigo": "cod_prov",
-      "nombre": "provincia",
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
       "espana": {
-        "columna": "provincia",
-        "valor": "España"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Censo de Población y Viviendas 2021 (INE), foto única sin serie temporal. Las cuotas están en proporción 0-1, no en %. La fila España tiene cod_prov 00; las viviendas son de calefacción, no todas las viviendas."
+    "notas": "Censo de Población y Viviendas 2021 (INE), foto única de 2021 sin serie temporal. Las cuotas están en % (0-100). La fila de España tiene nivel pais y cod 00; cada provincia lleva también su comunidad (cod_ccaa, ccaa). Las viviendas son las que tienen calefacción, no todas las viviendas."
   },
   {
     "tabla": "electrificacion_hogares",
@@ -971,16 +1039,21 @@
       "¿Qué parte de la energía de los hogares es electricidad?",
       "¿Cuánta energía gastan los hogares en calefacción?",
       "¿Cómo ha evolucionado el uso de gas natural en las casas?",
-      "¿Cuánta energía de biomasa usan los hogares?"
+      "¿Cuánta energía de biomasa usan los hogares?",
+      "¿Cuánta energía gasta una casa en cocinar?",
+      "¿Qué porcentaje de la calefacción de los hogares es eléctrica?",
+      "¿Cuánta energía solar térmica usan los hogares?",
+      "¿Con qué se calienta el agua caliente en las casas españolas?",
+      "¿Ha bajado el gasóleo en las casas desde el año 2000?",
+      "¿Cuánta energía gastan las casas en aire acondicionado y refrigeración?"
     ],
     "medidas": [
       {
-        "columna": "cuota",
-        "nombre": "proporción del consumo del hogar que aporta ese combustible (0,47 = 47 %)",
+        "columna": "cuota_pct",
+        "nombre": "porcentaje del consumo del hogar que aporta ese combustible",
         "unidad": "%",
         "tipo": "porcentaje",
-        "principal": true,
-        "escala": 100
+        "principal": true
       },
       {
         "columna": "tj",
@@ -1008,7 +1081,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España. Para el total hay que fijar uso = 'Todos los usos' (si no se duplica sumando usos); no hay fila total de combustible. Las cuotas son proporción 0-1 dentro de cada uso y año. Eurostat, hasta 2024."
+    "notas": "Solo España. Para el total hay que usar la fila de todos los usos (es_total_uso = true, uso 'Todos los usos'); si no, al sumar usos se duplica. No hay fila total de combustible. Las cuotas son % dentro de cada uso y año. Eurostat, hasta 2024."
   },
   {
     "tabla": "electrificacion_sectores",
@@ -1018,16 +1091,46 @@
       "¿Qué porcentaje de la energía de la industria es electricidad?",
       "¿Cuánta energía consume el transporte por carretera?",
       "¿Cómo ha evolucionado la electrificación de los hogares?",
-      "¿Qué rama industrial consume más gas natural?"
+      "¿Qué rama industrial consume más gas natural?",
+      "¿Cuánta energía consumen los hogares en total?",
+      "¿Qué parte de la energía del transporte es petróleo?",
+      "¿Cuánta electricidad gasta la siderurgia?",
+      "¿Qué sector consume más energía en España?",
+      "¿Ha subido la electricidad en el consumo de la industria desde 1990?",
+      "¿Qué porcentaje de la energía de los hogares es renovable?",
+      "¿Cuánta energía gasta el ferrocarril?"
     ],
     "medidas": [
       {
-        "columna": "cuota_electricidad",
-        "nombre": "proporción de la energía final que es electricidad (0,47 = 47 %)",
+        "columna": "cuota_electricidad_pct",
+        "nombre": "porcentaje de la energía final que es electricidad",
         "unidad": "%",
         "tipo": "porcentaje",
-        "principal": true,
-        "escala": 100
+        "principal": true
+      },
+      {
+        "columna": "cuota_gas_pct",
+        "nombre": "porcentaje de la energía final que es gas natural",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_petroleo_pct",
+        "nombre": "porcentaje de la energía final que es petróleo y derivados",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_renovables_pct",
+        "nombre": "porcentaje de la energía final que son renovables directas y calor ambiente",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "cuota_calor_carbon_pct",
+        "nombre": "porcentaje de la energía final que es calor de redes y carbón",
+        "unidad": "%",
+        "tipo": "porcentaje"
       },
       {
         "columna": "total",
@@ -1080,7 +1183,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España, 1990-2024. Los sectores se solapan: Industria incluye sus ramas (siderurgia, química...), Transporte incluye carretera y ferrocarril, y 'Toda la economía' es el total; no sumar todos juntos. Cuotas en proporción 0-1."
+    "notas": "Solo España, 1990-2024. Los sectores se solapan: la columna tipo_sector dice qué filas se pueden sumar (total = toda la economía; sector = hogares, industria, transporte, servicios y agricultura; rama_industria y rama_transporte son desgloses ya incluidos en su sector). Cuotas en % (0-100)."
   },
   {
     "tabla": "embalses_actual",
@@ -1090,7 +1193,13 @@
       "¿Cómo está el embalse de Alarcón?",
       "¿Qué embalses están casi vacíos?",
       "¿Qué embalses del Ebro están por encima de lo habitual?",
-      "¿Cuánto agua tiene el embalse de Buendía?"
+      "¿Cuánto agua tiene el embalse de Buendía?",
+      "¿Qué embalses están por debajo de lo normal para esta época?",
+      "¿Cuál es el embalse más grande de España?",
+      "¿Cuánta agua tiene el pantano de Entrepeñas?",
+      "¿Está el embalse de La Serena más lleno que el año pasado?",
+      "¿Qué embalses del Guadalquivir están al máximo?",
+      "¿Cuál es la capacidad del embalse de Mequinenza?"
     ],
     "medidas": [
       {
@@ -1168,7 +1277,13 @@
       "¿Cómo están los embalses de España?",
       "¿Qué cuenca tiene menos agua embalsada?",
       "¿Están los embalses del Guadalquivir mejor que hace un año?",
-      "¿Cuánta agua hay en el Segura?"
+      "¿Cuánta agua hay en el Segura?",
+      "¿Cuánta agua hay hoy en los pantanos de España?",
+      "¿Qué cuenca está mejor de agua esta semana?",
+      "¿Hay más agua que la media de los últimos diez años?",
+      "¿Cómo va el Duero respecto al año pasado?",
+      "Dime a qué porcentaje están los embalses de Cataluña",
+      "¿Cuánta capacidad tienen los embalses del Júcar?"
     ],
     "medidas": [
       {
@@ -1227,11 +1342,11 @@
         "demarcacion"
       ],
       "nivel": "nivel",
-      "codigo": "clave",
+      "codigo": "cod",
       "nombre": "nombre",
       "espana": {
-        "columna": "clave",
-        "valor": "ES"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
@@ -1246,7 +1361,13 @@
       "¿Cómo ha evolucionado la reserva de agua en España?",
       "¿Cuánta agua había en los embalses en septiembre de 2022?",
       "¿Cuándo estuvo más baja la cuenca del Segura?",
-      "¿Cómo están los embalses del Tajo comparado con hace diez años?"
+      "¿Cómo están los embalses del Tajo comparado con hace diez años?",
+      "¿Cuándo estuvieron más llenos los pantanos de España?",
+      "¿Cuánta agua había en los embalses en agosto de 2023?",
+      "¿Cuál ha sido el mínimo histórico de agua embalsada?",
+      "¿Cómo evolucionó la reserva del Guadalquivir durante la sequía?",
+      "¿Cuánto han subido los embalses del Júcar en el último año?",
+      "Dime cómo estaban los pantanos hace cinco años"
     ],
     "medidas": [
       {
@@ -1280,16 +1401,16 @@
         "cuenca"
       ],
       "nivel": "nivel",
-      "codigo": "clave",
+      "codigo": "cod",
       "nombre": "nombre",
       "espana": {
-        "columna": "clave",
-        "valor": "ES"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Datos de MITECO desde 2000; pct_llenado puede superar 100 en semanas de sobrellenado. Fijar nivel (el país ES ya incluye todas las cuencas; no sumar cuencas y país). La capacidad cambia ligeramente con los años."
+    "notas": "Datos de MITECO desde 2000; pct_llenado puede superar 100 en semanas de sobrellenado. Fijar nivel (el nivel pais ya incluye todas las cuencas; no sumar cuencas y país). La capacidad cambia ligeramente con los años."
   },
   {
     "tabla": "empleo_coste",
@@ -1299,13 +1420,19 @@
       "¿Cuánto gasta España en sueldos de empleados públicos?",
       "¿Cuánto pagan las comunidades autónomas en personal?",
       "¿Qué porcentaje del PIB son los sueldos públicos?",
-      "¿Cómo ha crecido el coste del personal de los ayuntamientos?"
+      "¿Cómo ha crecido el coste del personal de los ayuntamientos?",
+      "¿Cuánto cuestan los funcionarios al año?",
+      "¿Cuánto cuesta el personal de la Seguridad Social?",
+      "¿Cuánto gasta cada español en pagar a los empleados públicos?",
+      "¿Cuánto ha subido lo que se paga a los funcionarios desde 2000?",
+      "¿Qué parte de la riqueza del país se va en sueldos públicos?",
+      "¿Cuánto cuestan los empleados de la Administración central?"
     ],
     "medidas": [
       {
-        "columna": "eur_por_habitante",
-        "nombre": "coste de personal público por habitante",
-        "unidad": "€ por habitante (euros corrientes)",
+        "columna": "eur_hab_real",
+        "nombre": "coste de personal público por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "ratio",
         "principal": true
       },
@@ -1313,6 +1440,13 @@
         "columna": "millones_eur",
         "nombre": "remuneración de los asalariados públicos",
         "unidad": "millones de €",
+        "tipo": "flujo",
+        "real": "millones_eur_real"
+      },
+      {
+        "columna": "millones_eur_real",
+        "nombre": "remuneración de los asalariados públicos, en euros constantes",
+        "unidad": "millones de € de 2025",
         "tipo": "flujo"
       },
       {
@@ -1336,7 +1470,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España, 1995-2025, euros corrientes (no deflactados). 'Total AAPP' ya es la suma de los demás subsectores: no sumar todas las filas. Eurostat, remuneración de asalariados (D1)."
+    "notas": "Solo España, 1995-2025. Las columnas por habitante y _real están en euros constantes del último año completo (anio_base; desde 1996, antes quedan vacías); millones_eur es en euros corrientes. 'Total AAPP' ya es la suma de los demás subsectores: no sumar todas las filas. Eurostat, remuneración de asalariados (D1)."
   },
   {
     "tabla": "empleo_efectivos",
@@ -1346,7 +1480,14 @@
       "¿Cuántos funcionarios hay en España?",
       "¿Cuántos médicos y personal sanitario público hay en Andalucía?",
       "¿Cuántas mujeres trabajan en la Administración General del Estado?",
-      "¿Cuántos funcionarios interinos hay en educación?"
+      "¿Cuántos funcionarios interinos hay en educación?",
+      "¿Cuántos policías nacionales y guardias civiles hay en Madrid?",
+      "¿Cuántos profesores públicos hay en Galicia?",
+      "¿Cuántos empleados públicos son mujeres?",
+      "¿Cuántos funcionarios de carrera hay en la Administración General del Estado?",
+      "¿Cuántos trabajan en los ayuntamientos de Sevilla?",
+      "¿Cuántos empleados públicos trabajan en Justicia?",
+      "¿Cuántos trabajadores públicos hay en Ceuta?"
     ],
     "medidas": [
       {
@@ -1369,7 +1510,7 @@
       ],
       "nivel": null,
       "codigo": "cod_prov",
-      "nombre": null,
+      "nombre": "provincia",
       "espana": null
     },
     "dimensiones": [
@@ -1395,7 +1536,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Registro Central de Personal, ediciones de enero y julio (la última, enero de 2026). No hay filas de total: se suma por categoría y hay que fijar una sola edición (fecha) para no duplicar. Códigos de comunidad y provincia sin nombre. Para tasa por habitante usar empleo_territorio."
+    "notas": "Registro Central de Personal, ediciones de enero y julio (la última, enero de 2026). No hay filas de total: se suma por categoría y hay que fijar una sola edición (fecha) para no duplicar. Cada fila lleva provincia y comunidad (cod_prov/provincia, cod_ccaa/ccaa; «Extranjero» si el puesto está fuera de España). Para tasa por habitante usar empleo_territorio."
   },
   {
     "tabla": "empleo_epa_administracion",
@@ -1405,7 +1546,13 @@
       "¿Cuántos asalariados públicos hay en España?",
       "¿Cuántos trabajan para las comunidades autónomas según la EPA?",
       "¿Cómo ha evolucionado el empleo público desde 2010?",
-      "¿Cuántas personas trabajan en la administración local?"
+      "¿Cuántas personas trabajan en la administración local?",
+      "¿Cuánta gente trabaja para el ayuntamiento según la EPA?",
+      "¿Cuántos asalariados públicos había en 2008?",
+      "¿Cuántos trabajadores de la administración autonómica hay?",
+      "¿Ha subido el empleo público en el último trimestre?",
+      "¿Cuánto ha crecido el empleo público desde la pandemia?",
+      "Dime cuántos empleados tiene la Administración central"
     ],
     "medidas": [
       {
@@ -1440,16 +1587,27 @@
       "¿Qué comunidad tiene más peso del empleo público?",
       "¿Cuántos asalariados públicos hay en Extremadura?",
       "¿Cómo ha evolucionado el empleo público en Canarias?",
-      "¿Qué porcentaje de asalariados trabaja para el sector público en España?"
+      "¿Qué porcentaje de asalariados trabaja para el sector público en España?",
+      "¿Dónde hay más funcionarios en proporción a los trabajadores?",
+      "¿Cuántos asalariados privados hay en Murcia?",
+      "¿Qué comunidad tiene menos empleo público?",
+      "¿Cuántos empleados públicos por cada mil habitantes hay en Aragón?",
+      "¿Cuánto pesa el sector público en el empleo de Asturias?",
+      "Dime cuántos asalariados hay en total en la Comunidad Valenciana"
     ],
     "medidas": [
       {
-        "columna": "cuota_publico",
-        "nombre": "proporción de asalariados que trabajan en el sector público (0,19 = 19 %)",
+        "columna": "cuota_publico_pct",
+        "nombre": "porcentaje de asalariados que trabajan en el sector público",
         "unidad": "%",
         "tipo": "porcentaje",
-        "principal": true,
-        "escala": 100
+        "principal": true
+      },
+      {
+        "columna": "publicos_por_1000_hab",
+        "nombre": "asalariados públicos por cada 1.000 habitantes",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
       },
       {
         "columna": "publicos",
@@ -1471,7 +1629,7 @@
       }
     ],
     "tiempo": {
-      "columna": "trimestre",
+      "columna": "fecha",
       "grano": "trimestral",
       "parcial": false
     },
@@ -1480,17 +1638,17 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
-      "codigo": "cod_ccaa",
-      "nombre": null,
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod_ccaa",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "EPA (INE). cod_ccaa 00 es el total de España y 01-19 las comunidades (sin nombres en la tabla); ojo con sumar España y comunidades. La cuota está en proporción 0-1, no en %."
+    "notas": "EPA (INE). La fila de España tiene nivel pais y cod 00: no sumarla con las comunidades. Los asalariados por 1.000 habitantes usan la población del año del trimestre (la última disponible para los más recientes)."
   },
   {
     "tabla": "empleo_gasto_personal_territorio",
@@ -1500,33 +1658,41 @@
       "¿Cuánto gasta Navarra por habitante en personal?",
       "¿Qué comunidad gasta más en sueldos de sus empleados?",
       "¿Cuánto gastan los ayuntamientos de Madrid en personal?",
-      "¿Cómo ha evolucionado el gasto en personal de Andalucía?"
+      "¿Cómo ha evolucionado el gasto en personal de Andalucía?",
+      "¿Cuánto gasta mi ayuntamiento en sueldos por habitante?",
+      "¿Qué provincia gasta más en personal municipal?",
+      "¿Cuánto gasta la Junta de Andalucía en personal?",
+      "¿Qué comunidad paga más a sus empleados por habitante?",
+      "¿Cuánto han subido los sueldos municipales en Valencia desde 2015?",
+      "¿Cuántos euros por vecino se gasta Canarias en su plantilla?"
     ],
     "medidas": [
       {
-        "columna": "gasto_personal_ccaa_hab",
-        "nombre": "gasto en personal de la comunidad por habitante",
-        "unidad": "€ por habitante (euros corrientes)",
+        "columna": "gasto_personal_ccaa_eur_hab_real",
+        "nombre": "gasto en personal de la comunidad por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "ratio",
         "principal": true
       },
       {
-        "columna": "gasto_personal_ayuntamientos_hab",
-        "nombre": "gasto en personal de los ayuntamientos por habitante",
-        "unidad": "€ por habitante (euros corrientes)",
+        "columna": "gasto_personal_ayuntamientos_eur_hab_real",
+        "nombre": "gasto en personal de los ayuntamientos por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "ratio"
       },
       {
         "columna": "gasto_personal_ccaa",
         "nombre": "gasto en personal de la comunidad",
         "unidad": "€",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "gasto_personal_ccaa_eur_hab_real"
       },
       {
         "columna": "gasto_personal_ayuntamientos",
         "nombre": "gasto en personal de los ayuntamientos",
         "unidad": "€",
-        "tipo": "flujo"
+        "tipo": "flujo",
+        "real": "gasto_personal_ayuntamientos_eur_hab_real"
       }
     ],
     "tiempo": {
@@ -1542,7 +1708,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1550,7 +1716,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Capítulo 1 de los presupuestos liquidados, en euros corrientes (no deflactados). El gasto de la comunidad solo existe a nivel ccaa; ayuntamientos a nivel país, comunidad y provincia (con cod = código de provincia, que puede coincidir con el de comunidad: usar nivel). El territorio solo tiene código, sin nombre."
+    "notas": "Capítulo 1 de los presupuestos liquidados. Las columnas por habitante están en euros constantes del último año completo (anio_base); los totales (€) son corrientes. El gasto de la comunidad solo existe a nivel ccaa; ayuntamientos a nivel país, comunidad y provincia (el cod de una provincia puede coincidir con el de una comunidad: usar nivel). Sin Álava ni Navarra en ayuntamientos (régimen foral)."
   },
   {
     "tabla": "empleo_organismos",
@@ -1560,7 +1726,13 @@
       "¿Cuántas personas trabajan en las Fuerzas Armadas?",
       "¿Qué organismo del Estado tiene más empleados?",
       "¿Cuántos guardias civiles hay?",
-      "¿Cuántas mujeres trabajan en la Agencia Tributaria?"
+      "¿Cuántas mujeres trabajan en la Agencia Tributaria?",
+      "¿Cuántos trabajadores tiene Hacienda?",
+      "¿Cuántos empleados tiene el CSIC?",
+      "¿Cuántos funcionarios hay en el Ministerio de Sanidad?",
+      "¿Qué porcentaje de los empleados de la Agencia Tributaria son mujeres?",
+      "¿Cuántos trabajadores tiene Puertos del Estado?",
+      "¿Cuántos empleados públicos tiene el Ministerio de Interior?"
     ],
     "medidas": [
       {
@@ -1606,7 +1778,13 @@
       "¿Cuánto cobra de media un empleado público en Madrid?",
       "¿Qué comunidad tiene los salarios más bajos?",
       "¿Cuánto más cobra un funcionario que un trabajador privado?",
-      "¿Cuál es el salario medio en España?"
+      "¿Cuál es el salario medio en España?",
+      "¿Cuánto gana al año un trabajador privado en Cataluña?",
+      "¿En qué comunidad se cobra más?",
+      "¿Dónde cobran más los funcionarios, en Madrid o en el País Vasco?",
+      "¿En qué comunidad el sector público paga mucho más que el privado?",
+      "¿Cuál es el sueldo medio en Extremadura?",
+      "Dime el sueldo bruto medio de un empleado público en Galicia"
     ],
     "medidas": [
       {
@@ -1627,6 +1805,12 @@
         "nombre": "salario medio anual bruto en el sector privado",
         "unidad": "€ al año",
         "tipo": "media"
+      },
+      {
+        "columna": "brecha_publico_pct",
+        "nombre": "cuánto más (o menos) cobra de media el sector público que el privado",
+        "unidad": "%",
+        "tipo": "porcentaje"
       }
     ],
     "tiempo": {
@@ -1639,17 +1823,17 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
-      "codigo": "cod_ccaa",
-      "nombre": null,
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod_ccaa",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Encuesta de Estructura Salarial (INE), solo el año 2022, euros corrientes. cod_ccaa 00 es España; las comunidades van por código INE (01 Andalucía... 17 La Rioja; faltan Ceuta y Melilla en algunos casos). Son medias, no se suman."
+    "notas": "Encuesta de Estructura Salarial (INE), solo el año 2022, euros corrientes (una sola edición, por eso no lleva versión real). España es nivel pais; faltan Ceuta y Melilla. Son medias, no se suman."
   },
   {
     "tabla": "empleo_salarios_deciles",
@@ -1659,15 +1843,28 @@
       "¿Cuánto cobra el 10 % que más gana?",
       "¿Cuál es el salario mensual medio en España?",
       "¿Cobra más un empleado público o uno privado?",
-      "¿Cómo han evolucionado los salarios más bajos desde 2006?"
+      "¿Cómo han evolucionado los salarios más bajos desde 2006?",
+      "¿Cuánto cobra el 10 % que menos gana?",
+      "¿Cuánto cobra de sueldo medio un trabajador privado al mes?",
+      "¿Cuánto han subido los sueldos en euros reales desde 2006?",
+      "¿Cuál es la diferencia de sueldo entre los más ricos y los más pobres?",
+      "¿Cuánto es el sueldo mensual bruto medio del último año?",
+      "¿Cuánto ganan las personas con jornada parcial?"
     ],
     "medidas": [
       {
-        "columna": "salario_mensual",
-        "nombre": "salario mensual medio",
-        "unidad": "€ al mes (euros corrientes)",
+        "columna": "salario_mensual_real",
+        "nombre": "salario mensual medio en euros constantes",
+        "unidad": "€ al mes (euros constantes de anio_euros)",
         "tipo": "media",
         "principal": true
+      },
+      {
+        "columna": "salario_mensual",
+        "nombre": "salario mensual medio en euros corrientes",
+        "unidad": "€ al mes (euros corrientes)",
+        "tipo": "media",
+        "real": "salario_mensual_real"
       }
     ],
     "tiempo": {
@@ -1678,9 +1875,9 @@
     "territorio": null,
     "dimensiones": [
       {
-        "columna": "decil",
-        "nombre": "decil de salario (1 el más bajo, 10 el más alto; 0 es la media de todos)",
-        "total": null
+        "columna": "decil_nombre",
+        "nombre": "decil de salario (D1 el más bajo, D10 el más alto; Total es la media de todos los asalariados)",
+        "total": "Total"
       },
       {
         "columna": "sector",
@@ -1694,7 +1891,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Solo España, 2006-2024. El decil 0 es la media general (2.386 € en 2024), no un decil. Salario bruto mensual medio, sin deflactar; no sumar deciles."
+    "notas": "Solo España, 2006-2024. decil_nombre = Total es la media de todos los asalariados (2.386 € corrientes en 2024) y tiene decil vacío; D1 a D10 son los deciles. Salario bruto mensual medio; para comparar años usar salario_mensual_real. No sumar deciles."
   },
   {
     "tabla": "empleo_territorio",
@@ -1704,7 +1901,13 @@
       "¿Qué comunidad tiene más empleados públicos por habitante?",
       "¿Cuántos empleados públicos hay en Castilla y León?",
       "¿Cuántos funcionarios por cada mil habitantes hay en España?",
-      "¿Cómo ha cambiado el empleo público de Extremadura desde 2019?"
+      "¿Cómo ha cambiado el empleo público de Extremadura desde 2019?",
+      "¿Cuántos funcionarios hay por cada mil habitantes en Teruel?",
+      "¿En qué provincia hay más empleados públicos por habitante?",
+      "¿Cuántos empleados de la administración local hay en Murcia?",
+      "¿Cuántos empleados públicos tiene la Comunidad de Madrid?",
+      "¿Ha subido o bajado el empleo público en Cantabria en el último año?",
+      "¿Cuántos empleados públicos hay en total en España?"
     ],
     "medidas": [
       {
@@ -1740,7 +1943,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -1754,7 +1957,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Registro Central de Personal, ediciones de enero y julio (última enero de 2026). Con administracion = 'Total' ya están sumadas las demás. Territorio solo con código (cod 00 para España; provincia y comunidad pueden compartir dígitos: usar nivel)."
+    "notas": "Registro Central de Personal, ediciones de enero y julio (última enero de 2026). Con administracion = 'Total' ya están sumadas las demás. Provincia y comunidad pueden compartir dígitos de cod: usar siempre nivel."
   },
   {
     "tabla": "empresas_altas_quiebras",
@@ -1763,7 +1966,13 @@
     "preguntas": [
       "¿Están aumentando las quiebras de empresas en España?",
       "¿Cómo van las altas de empresas comparado con Alemania?",
-      "¿Cómo han evolucionado las quiebras desde la pandemia?"
+      "¿Cómo han evolucionado las quiebras desde la pandemia?",
+      "¿Están cayendo las empresas que se abren en España?",
+      "¿Cómo van las quiebras en Francia frente a España?",
+      "¿Hay más quiebras que antes de la pandemia?",
+      "¿Cómo están las altas de empresas en el conjunto de la UE?",
+      "Dime si las quiebras en España suben más que en Italia",
+      "¿Cómo ha ido la creación de empresas en Portugal?"
     ],
     "medidas": [
       {
@@ -1810,7 +2019,13 @@
       "¿Cuántos autónomos hay en España?",
       "¿Qué comunidad tiene más porcentaje de autónomos?",
       "¿Cómo ha evolucionado el número de autónomos desde 2008?",
-      "¿Cuántos empleadores hay en Galicia?"
+      "¿Cuántos empleadores hay en Galicia?",
+      "¿Cuántos autónomos había en el último trimestre?",
+      "¿Cuántos trabajadores por cuenta propia hay en Andalucía?",
+      "¿Cuántos autónomos tienen asalariados a su cargo?",
+      "¿Qué porcentaje de los que trabajan son autónomos en Galicia?",
+      "¿Han subido los autónomos desde el trimestre pasado?",
+      "¿Cuántos autónomos trabajan solos sin contratar a nadie?"
     ],
     "medidas": [
       {
@@ -1873,22 +2088,106 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
-    "filtros": [
+    "filtros": [],
+    "notas": "EPA (INE): cifras en miles de personas, por trimestre; la media anual está en empresas_autonomos_anual. España es nivel pais y las comunidades nivel ccaa. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
+  },
+  {
+    "tabla": "empresas_autonomos_anual",
+    "usar": true,
+    "tema": "Autónomos (trabajadores por cuenta propia), empleadores y asalariados en España y cada comunidad, media anual según la EPA",
+    "preguntas": [
+      "¿Cuántos autónomos hay en España?",
+      "¿Qué comunidad tiene más porcentaje de autónomos?",
+      "¿Cómo ha evolucionado el número de autónomos desde 2008?",
+      "¿Cuántos empleadores hay en Galicia?",
+      "¿Cuántos autónomos hubo de media en 2024?",
+      "¿Cuántos autónomos tiene Cataluña de media al año?",
+      "¿Qué comunidad tiene menos autónomos en proporción?",
+      "¿Cuántos empleadores hubo de media en España el año pasado?",
+      "¿Cuántos asalariados hay de media al año en España?",
+      "¿Qué parte de los ocupados es autónomo desde el año 2000?"
+    ],
+    "medidas": [
       {
-        "columna": "trimestre",
-        "distinto": 0
+        "columna": "pct_cuenta_propia",
+        "nombre": "porcentaje de ocupados que trabajan por cuenta propia",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "cuenta_propia",
+        "nombre": "ocupados por cuenta propia",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "empleadores",
+        "nombre": "empleadores",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "independientes",
+        "nombre": "trabajadores independientes sin asalariados",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "asalariados",
+        "nombre": "asalariados",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "ocupados",
+        "nombre": "ocupados totales",
+        "unidad": "miles de personas",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "pct_empleadores",
+        "nombre": "porcentaje de ocupados que son empleadores",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_independientes",
+        "nombre": "porcentaje de ocupados que son independientes",
+        "unidad": "% de los ocupados",
+        "tipo": "porcentaje"
       }
     ],
-    "notas": "EPA (INE): cifras en miles de personas. trimestre = 0 es la media anual y 1-4 los trimestres; no mezclar ambos al sumar o contar. cod 00 es España y 01-19 las comunidades. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "nivel",
+        "valor": "pais"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "EPA (INE): cifras en miles de personas, media de los cuatro trimestres (solo años completos); los trimestres están en empresas_autonomos. España es nivel pais y las comunidades nivel ccaa. Son autónomos de la EPA, no de la afiliación a la Seguridad Social."
   },
   {
     "tabla": "empresas_concursos",
@@ -1898,7 +2197,13 @@
       "¿Cuántas empresas entraron en concurso de acreedores en 2019?",
       "¿Qué comunidad tiene más concursos por habitante?",
       "¿Cómo evolucionaron los concursos tras la crisis de 2008?",
-      "¿Cuántos concursos voluntarios hubo en Cataluña?"
+      "¿Cuántos concursos voluntarios hubo en Cataluña?",
+      "¿Cuántos concursos de acreedores hubo en 2015?",
+      "¿Qué comunidad tiene más empresas en quiebra por cada mil?",
+      "¿Cuántas empresas se declararon en concurso necesario?",
+      "¿Cuántos concursos de acreedores hay por cada 100.000 habitantes en Madrid?",
+      "¿Cuándo se disparó el número de empresas en concurso?",
+      "¿Cuántas personas en concurso hubo en la Comunidad Valenciana?"
     ],
     "medidas": [
       {
@@ -1949,17 +2254,17 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "INE, Estadística del Procedimiento Concursal; la serie termina en 2020. cod 00 es España (no sumar con comunidades). Territorio solo por código INE de comunidad."
+    "notas": "INE, Estadística del Procedimiento Concursal; la serie termina en 2020 (el INE no ha publicado más). España es nivel pais (no sumar con comunidades)."
   },
   {
     "tabla": "empresas_dirce_sector",
@@ -1969,11 +2274,17 @@
       "¿Cuántas empresas de hostelería hay en España?",
       "¿Qué comunidad tiene más empresas de construcción por habitante?",
       "¿Qué porcentaje de empresas son de comercio?",
-      "¿Cómo ha cambiado el número de empresas de transporte desde 2020?"
+      "¿Cómo ha cambiado el número de empresas de transporte desde 2020?",
+      "¿Cuántos bares y restaurantes hay en Andalucía?",
+      "¿Qué sector tiene más empresas en España?",
+      "¿Cuántas empresas de construcción hay por cada mil habitantes en Baleares?",
+      "¿Qué porcentaje de las empresas son de hostelería en Canarias?",
+      "¿Cuántas empresas de información y comunicaciones hay en Madrid?",
+      "¿Han subido las empresas de comercio desde 2020?"
     ],
     "medidas": [
       {
-        "columna": "por_1000hab",
+        "columna": "por_1000_hab",
         "nombre": "empresas del sector por cada 1.000 habitantes",
         "unidad": "por cada 1.000 habitantes",
         "tipo": "tasa",
@@ -2002,12 +2313,12 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [
@@ -2018,7 +2329,7 @@
       }
     ],
     "filtros": [],
-    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total sector: se suman los 11 sectores. cod 00 es España y 01-19 las comunidades, solo por código."
+    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total sector: se suman los 11 sectores. España es nivel pais y 01-19 las comunidades."
   },
   {
     "tabla": "empresas_dirce_tamano",
@@ -2028,7 +2339,13 @@
       "¿Cuántas grandes empresas hay en España?",
       "¿Qué porcentaje de empresas no tiene asalariados?",
       "¿Cuántas pymes hay en Cataluña?",
-      "¿Cómo ha evolucionado el número de microempresas?"
+      "¿Cómo ha evolucionado el número de microempresas?",
+      "¿Cuántas empresas hay con más de 250 trabajadores?",
+      "¿Cuántas empresas medianas hay en Madrid?",
+      "¿Qué porcentaje de las empresas son microempresas?",
+      "¿Cuántas empresas de autónomos sin empleados hay en Andalucía?",
+      "¿Cuántas pequeñas empresas hay en el País Vasco?",
+      "¿Cuántas grandes empresas tenía España en 2020 y cuántas tiene ahora?"
     ],
     "medidas": [
       {
@@ -2055,12 +2372,12 @@
         "pais",
         "ccaa"
       ],
-      "nivel": null,
+      "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
-        "columna": "cod",
-        "valor": "00"
+        "columna": "nivel",
+        "valor": "pais"
       }
     },
     "dimensiones": [
@@ -2071,7 +2388,7 @@
       }
     ],
     "filtros": [],
-    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total de tamaños: se suman los cinco tramos. cod 00 es España y 01-19 comunidades, sin nombres."
+    "notas": "DIRCE (INE), empresas a 1 de enero, desde 2020. No hay fila de total de tamaños: se suman los cinco tramos. España es nivel pais y las comunidades nivel ccaa."
   },
   {
     "tabla": "empresas_dirce_territorio",
@@ -2081,7 +2398,14 @@
       "¿Cuántas empresas hay en España?",
       "¿Qué provincia tiene más empresas por habitante?",
       "¿Cuántas empresas había en Madrid en 2010?",
-      "¿Cuánto han crecido las empresas en Cataluña el último año?"
+      "¿Cuánto han crecido las empresas en Cataluña el último año?",
+      "¿Cuántas empresas hay en la provincia de Alicante?",
+      "¿Cuántos negocios hay en Madrid por cada mil habitantes?",
+      "¿Cuántas empresas son sociedades limitadas en Barcelona?",
+      "¿Qué porcentaje de empresas son autónomos en Lugo?",
+      "¿Qué provincia tiene menos empresas?",
+      "¿Cuántas empresas había en España en 1999?",
+      "¿Qué comunidad ha ganado más empresas este año?"
     ],
     "medidas": [
       {
@@ -2116,7 +2440,7 @@
         "tipo": "porcentaje"
       },
       {
-        "columna": "crecimiento",
+        "columna": "crecimiento_pct",
         "nombre": "crecimiento anual del número de empresas",
         "unidad": "%",
         "tipo": "porcentaje"
@@ -2141,7 +2465,7 @@
       ],
       "nivel": "nivel",
       "codigo": "cod",
-      "nombre": null,
+      "nombre": "nombre",
       "espana": {
         "columna": "nivel",
         "valor": "pais"
@@ -2149,6 +2473,6 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "DIRCE (INE, tabla 302), empresas a 1 de enero. Territorio solo por código y con niveles que se solapan (cod de provincia y de comunidad pueden coincidir): fijar siempre nivel. Personas físicas más sociedades no suman el total (faltan otras formas jurídicas)."
+    "notas": "DIRCE (INE, tabla 302), empresas a 1 de enero. Los niveles se solapan en cod (provincia y comunidad pueden coincidir): fijar siempre nivel. Personas físicas más sociedades no suman el total (faltan otras formas jurídicas: cooperativas, comunidades de bienes...)."
   }
 ]

@@ -13,7 +13,7 @@
     import { query } from "@evidence-dev/universal-sql/client-duckdb";
     import { idiomaDeRuta, t } from "../i18n.js";
     import { crearIndice } from "../chat/herramientas.js";
-    import { responder, MODELOS_ANTHROPIC, listarModelosWebLLM, cargarWebLLM, crearDecisorOllama } from "../chat/agente.js";
+    import { responder, MODELOS_ANTHROPIC, PROVEEDORES_API, listarModelosWebLLM, cargarWebLLM, crearDecisorOllama, crearDecisorWebLLM } from "../chat/agente.js";
     import { responderPorDecisiones } from "../chat/decision.js";
     import { markdownSeguro } from "../chat/markdown.js";
     import ChatGrafico from "./ChatGrafico.svelte";
@@ -21,15 +21,25 @@
     $: lang = idiomaDeRuta($page.url.pathname);
 
     const CLAVE_CONFIG = "spainfacts-chat";
-    const PROVEEDORES = ["navegador", "local", "anthropic"];
+    const PROVEEDORES = ["navegador", "local", "anthropic", "otro"];
     // Modelo de decisión del navegador (transformers.js); el resto de la lista son de WebLLM
     const DECISOR_NAVEGADOR = "decisor:gemma-4-e2b";
+    // Modo decisión con modelos de WebLLM (WebGPU): el valor es "decisor-webllm:<id del modelo>"
+    const DECISOR_WEBLLM = "decisor-webllm:";
+    const esDecisorWebLLM = (m) => String(m ?? "").startsWith(DECISOR_WEBLLM);
+    // Los que mejor eligen en las pruebas (tools/chat/evaluacion), si esta versión de WebLLM los tiene
+    const PREFERIDOS_DECISION = [/^Ministral-3-3B/i, /^Qwen3\.5-4B/i, /^Qwen3-4B/i];
+    // Predeterminado: Ministral 3 3B en modo decisión, el que mejor equilibra acierto, tamaño y
+    // velocidad en las pruebas (2026-10-04: 144/210 frente a 139 de Gemma 4 E2B, 2,8 GB). Si esta
+    // versión de WebLLM no lo tiene, se vuelve a Gemma 4 E2B (transformers.js)
+    const DECISOR_PREDETERMINADO = DECISOR_WEBLLM + "Ministral-3-3B-Instruct-2512-BF16-q4f16_1-MLC";
 
     let config = {
         proveedor: "navegador",
-        navegador: { modelo: DECISOR_NAVEGADOR },
+        navegador: { modelo: DECISOR_PREDETERMINADO },
         local: { url: "http://localhost:11434/v1", modelo: "gemma4:e2b", clave: "", agente: false },
         anthropic: { modelo: MODELOS_ANTHROPIC[0].id, clave: "" },
+        otro: { servicio: PROVEEDORES_API[0].id, url: PROVEEDORES_API[0].url, modelo: "", clave: "" },
         recordar: false
     };
     let ctx = null;
@@ -53,7 +63,7 @@
     function cargarConfig() {
         try {
             const g = JSON.parse(localStorage.getItem(CLAVE_CONFIG) ?? "null");
-            if (g) config = { ...config, ...g, navegador: { ...config.navegador, ...g.navegador }, local: { ...config.local, ...g.local }, anthropic: { ...config.anthropic, ...g.anthropic } };
+            if (g) config = { ...config, ...g, navegador: { ...config.navegador, ...g.navegador }, local: { ...config.local, ...g.local }, anthropic: { ...config.anthropic, ...g.anthropic }, otro: { ...config.otro, ...g.otro } };
         } catch {}
     }
     function guardarConfig() {
@@ -63,6 +73,7 @@
             if (!config.recordar) {
                 copia.anthropic.clave = "";
                 copia.local.clave = "";
+                copia.otro.clave = "";
             }
             localStorage.setItem(CLAVE_CONFIG, JSON.stringify(copia));
         } catch {}
@@ -88,9 +99,14 @@
                     modelosWebLLM = await listarModelosWebLLM();
                 } catch {}
             }
-            if (config.navegador.modelo !== DECISOR_NAVEGADOR && !modelosWebLLM.some((m) => m.id === config.navegador.modelo)) {
+            const idWebLLM = esDecisorWebLLM(config.navegador.modelo) ? config.navegador.modelo.slice(DECISOR_WEBLLM.length) : config.navegador.modelo;
+            if (config.navegador.modelo !== DECISOR_NAVEGADOR && !modelosWebLLM.some((m) => m.id === idWebLLM)) {
                 config.navegador.modelo = DECISOR_NAVEGADOR;
             }
+            // Las opciones de WebLLM llegan después de pintar el desplegable: se vuelve a poner el
+            // valor para que muestre el modelo elegido y no la primera opción
+            await tick();
+            config.navegador = { ...config.navegador };
         })();
         return inicio;
     }
@@ -105,13 +121,16 @@
     });
 
     const enModoDecision = (proveedor) =>
-        (proveedor === "navegador" && config.navegador.modelo === DECISOR_NAVEGADOR) || (proveedor === "local" && !config.local.agente);
+        (proveedor === "navegador" && (config.navegador.modelo === DECISOR_NAVEGADOR || esDecisorWebLLM(config.navegador.modelo))) ||
+        (proveedor === "local" && !config.local.agente);
 
     /** Decisor del proveedor actual (lo descarga la primera vez) */
     async function obtenerDecisor(proveedor) {
-        const clave = proveedor === "local" ? `local:${config.local.url}:${config.local.modelo}` : DECISOR_NAVEGADOR;
+        const clave = proveedor === "local" ? `local:${config.local.url}:${config.local.modelo}` : config.navegador.modelo;
         if (!decisores.has(clave)) {
             if (proveedor === "local") decisores.set(clave, crearDecisorOllama({ url: config.local.url, modelo: config.local.modelo }));
+            else if (esDecisorWebLLM(clave))
+                decisores.set(clave, await crearDecisorWebLLM(clave.slice(DECISOR_WEBLLM.length), (p, texto) => (progresoModelo = { p, texto })));
             else {
                 const { crearDecisor } = await import("../chat/locales.js");
                 decisores.set(clave, await crearDecisor({ device: "webgpu", dtype: "q4f16", alProgreso: (p, texto) => (progresoModelo = { p, texto }) }));
@@ -139,7 +158,7 @@
     async function descargarModelo() {
         progresoModelo = { p: 0, texto: "" };
         try {
-            if (config.navegador.modelo === DECISOR_NAVEGADOR) {
+            if (config.navegador.modelo === DECISOR_NAVEGADOR || esDecisorWebLLM(config.navegador.modelo)) {
                 await obtenerEmbebedor();
                 await obtenerDecisor("navegador");
             } else await cargarWebLLM(config.navegador.modelo, (p, texto) => (progresoModelo = { p, texto }));
@@ -153,11 +172,19 @@
     function faltaConfig() {
         if (config.proveedor === "anthropic" && !config.anthropic.clave.trim()) return t("chat.faltaClave", lang);
         if (config.proveedor === "local" && !config.local.modelo.trim()) return t("chat.faltaModelo", lang);
+        if (config.proveedor === "otro" && !config.otro.clave.trim()) return t("chat.faltaClave", lang);
+        if (config.proveedor === "otro" && !config.otro.modelo.trim()) return t("chat.faltaModelo", lang);
         if (config.proveedor === "navegador" && !config.navegador.modelo) return t("chat.faltaModelo", lang);
         return "";
     }
 
-    async function enviar(texto = pregunta) {
+    /**
+     * @param {string} texto
+     * @param {{ tablaForzada?: string, sinAclarar?: boolean, mostrar?: string }} [opciones]
+     *   tablaForzada: la tabla que eligió la persona tras «¿qué datos quieres usar?»;
+     *   sinAclarar: contestar con la que elija el modelo; mostrar: texto de la burbuja de la persona
+     */
+    async function enviar(texto = pregunta, opciones = {}) {
         texto = texto.trim();
         if (!texto || ocupado) return;
         await iniciar();
@@ -170,7 +197,7 @@
         pregunta = "";
         ocupado = true;
         const respuesta = { rol: "asistente", texto: "", pasos: [], graficos: [], enCurso: true };
-        mensajes = [...mensajes, { rol: "usuario", texto, pasos: [], graficos: [] }, respuesta];
+        mensajes = [...mensajes, { rol: "usuario", texto: opciones.mostrar ?? texto, pasos: [], graficos: [] }, respuesta];
         const refrescar = async () => {
             mensajes = mensajes;
             await tick();
@@ -184,7 +211,8 @@
                 const e = await obtenerEmbebedor();
                 const r = await responderPorDecisiones({
                     pregunta: texto,
-                    ctx: { ...ctx, ...(e ? { embeber: e } : {}) },
+                    // Si duda entre tablas pregunta cuál (salvo que ya se haya elegido)
+                    ctx: { ...ctx, ...(e ? { embeber: e } : {}), aclarar: !opciones.tablaForzada && !opciones.sinAclarar, tablaForzada: opciones.tablaForzada },
                     decidir: await obtenerDecisor(proveedor),
                     alPaso: (p) => {
                         respuesta.pasos = [...respuesta.pasos, p];
@@ -192,7 +220,16 @@
                     }
                 });
                 if (r.grafico) respuesta.graficos = [r.grafico];
+                else if (r.filas?.length) {
+                    // Sin gráfico (un dato, una lista): los datos en tabla, para verlos, dibujarlos o descargarlos
+                    const cols = Object.keys(r.filas[0]);
+                    const num = cols.find((k) => typeof r.filas[0][k] === "number");
+                    const eje = cols.find((k) => typeof r.filas[0][k] !== "number");
+                    respuesta.graficos = [{ tipo: "tabla", x: eje ?? "", y: num ?? "", serie: "", titulo: "", filas: r.filas, sql: r.sql }];
+                }
                 respuesta.texto = r.texto;
+                if (r.aclaracion) respuesta.aclaracion = { ...r.aclaracion, pregunta: texto, elegida: null };
+                else if (r.alternativas?.length) respuesta.aclaracion = { opciones: r.alternativas, pregunta: texto, elegida: null, otros: true };
             } else {
             const r = await responder({
                 proveedor,
@@ -223,6 +260,19 @@
         await refrescar();
     }
 
+    /** Respuesta a «¿qué datos quieres usar?»: vuelve a preguntar con esa tabla (o sin preguntar) */
+    function elegirTabla(m, opcion) {
+        if (m.aclaracion.elegida || ocupado) return;
+        m.aclaracion.elegida = opcion?.tabla ?? "-";
+        mensajes = mensajes;
+        enviar(
+            m.aclaracion.pregunta,
+            opcion
+                ? { tablaForzada: opcion.tabla, mostrar: `${t("chat.aclararUsar", lang)}: ${opcion.tema}` }
+                : { sinAclarar: true, mostrar: t("chat.aclararNinguna", lang) }
+        );
+    }
+
     function nuevaConversacion() {
         mensajes = [];
         estados = {};
@@ -243,7 +293,7 @@
     <!-- Elegir modelo -->
     <fieldset class="rounded-lg border border-gray-200 dark:border-gray-700 p-3" on:focusin={iniciar} on:pointerdown={iniciar}>
         <legend class="px-1 text-sm font-semibold">{t("chat.proveedor", lang)}</legend>
-        <div class="grid gap-2 sm:grid-cols-3" role="radiogroup">
+        <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="radiogroup">
             {#each PROVEEDORES as p}
                 <label class="cursor-pointer rounded-md border p-2 text-sm {config.proveedor === p ? 'border-blue-600 bg-blue-50 dark:bg-blue-950/40' : 'border-gray-200 dark:border-gray-700'}">
                     <input type="radio" class="sr-only" bind:group={config.proveedor} value={p} />
@@ -263,6 +313,9 @@
                         <label class="flex items-center gap-2">{t("chat.modelo", lang)}
                             <select bind:value={config.navegador.modelo} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm max-w-[16rem]">
                                 <option value={DECISOR_NAVEGADOR}>{t("chat.decisorRecomendado", lang)}</option>
+                                {#each modelosWebLLM.filter((m) => PREFERIDOS_DECISION.some((r) => r.test(m.id))) as m}
+                                    <option value={DECISOR_WEBLLM + m.id}>{m.id} · {t("chat.modoDecision", lang)}{DECISOR_WEBLLM + m.id === DECISOR_PREDETERMINADO ? ` (${t("chat.recomendado", lang)})` : ""}{m.vram ? ` (~${(m.vram / 1024).toFixed(1)} GB)` : ""}</option>
+                                {/each}
                                 {#if modelosWebLLM.length}
                                     <optgroup label={t("chat.otrosAgente", lang)}>
                                         {#each modelosWebLLM as m}<option value={m.id}>{m.id}{m.vram ? ` (~${(m.vram / 1024).toFixed(1)} GB)` : ""}</option>{/each}
@@ -284,6 +337,18 @@
                     <label class="flex flex-col text-xs">{t("chat.claveOpcional", lang)}<input type="password" autocomplete="off" bind:value={config.local.clave} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>
                 </div>
                 <label class="flex items-center gap-2 text-xs"><input type="checkbox" bind:checked={config.local.agente} /> {t("chat.modoAgente", lang)}</label>
+            {:else if config.proveedor === "otro"}
+                <div class="grid gap-2 sm:grid-cols-2">
+                    <label class="flex flex-col text-xs">{t("chat.servicio", lang)}
+                        <select bind:value={config.otro.servicio} on:change={() => (config.otro.url = PROVEEDORES_API.find((x) => x.id === config.otro.servicio)?.url ?? config.otro.url)}
+                            class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm">
+                            {#each PROVEEDORES_API as s}<option value={s.id}>{s.nombre}</option>{/each}
+                        </select>
+                    </label>
+                    <label class="flex flex-col text-xs">{t("chat.url", lang)}<input bind:value={config.otro.url} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>
+                    <label class="flex flex-col text-xs">{t("chat.modelo", lang)}<input bind:value={config.otro.modelo} placeholder={t("chat.modeloProveedor", lang)} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>
+                    <label class="flex flex-col text-xs">{t("chat.clave", lang)}<input type="password" autocomplete="off" bind:value={config.otro.clave} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>
+                </div>
             {:else}
                 <div class="grid gap-2 sm:grid-cols-2">
                     <label class="flex flex-col text-xs">{t("chat.clave", lang)}<input type="password" autocomplete="off" placeholder="sk-ant-…" bind:value={config.anthropic.clave} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>
@@ -330,8 +395,30 @@
                     {#if m.error}
                         <p class="text-red-700 dark:text-red-400">{t("chat.error", lang)} {m.error}</p>
                     {/if}
-                    {#each m.graficos as g}<ChatGrafico grafico={g} />{/each}
+                    {#each m.graficos as g}<ChatGrafico grafico={g} {lang} />{/each}
                     {#if m.texto}<div class="chat-texto">{@html markdownSeguro(m.texto)}</div>{/if}
+                    {#if m.aclaracion?.otros}
+                        <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+                            <span>{t("chat.otrosDatos", lang)}</span>
+                            {#each m.aclaracion.opciones as op}
+                                <button type="button" on:click={() => elegirTabla(m, op)} disabled={ocupado || !!m.aclaracion.elegida} title={op.pagina ?? ""}
+                                    class="rounded-full border px-2 py-0.5 text-left hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-60 {m.aclaracion.elegida === op.tabla ? 'border-blue-600' : 'border-gray-300 dark:border-gray-600'}">{op.tema}</button>
+                            {/each}
+                        </div>
+                    {:else if m.aclaracion}
+                        <p class="mb-2">{t("chat.aclarar", lang)}</p>
+                        <div class="flex flex-col gap-2">
+                            {#each m.aclaracion.opciones as op}
+                                <button type="button" on:click={() => elegirTabla(m, op)} disabled={ocupado || !!m.aclaracion.elegida}
+                                    class="rounded-md border px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-60 {m.aclaracion.elegida === op.tabla ? 'border-blue-600 bg-blue-50 dark:bg-blue-950' : 'border-gray-300 dark:border-gray-600'}">
+                                    <span class="block">{op.tema}</span>
+                                    {#if op.pagina}<span class="block text-xs text-gray-500 dark:text-gray-400">{op.pagina}</span>{/if}
+                                </button>
+                            {/each}
+                            <button type="button" on:click={() => elegirTabla(m, null)} disabled={ocupado || !!m.aclaracion.elegida}
+                                class="w-fit text-xs text-gray-600 dark:text-gray-400 underline disabled:opacity-60">{t("chat.aclararNinguna", lang)}</button>
+                        </div>
+                    {/if}
                     {#if m.enCurso}
                         <p class="text-gray-500 dark:text-gray-400 animate-pulse">{m.pasos.length ? etiquetaPaso(m.pasos.at(-1)) : t("chat.pensando", lang)}…</p>
                     {/if}

@@ -178,7 +178,7 @@
 		"tablas_oro": [
 			"mother.transparencia_pie_mensual"
 		],
-		"sql_oro": "SELECT periodo, count(DISTINCT cod_mun) AS ayuntamientos, sum(importe_eur) AS importe FROM mother.transparencia_pie_mensual WHERE periodo=(SELECT max(periodo) FROM mother.transparencia_pie_mensual) GROUP BY periodo",
+		"sql_oro": "SELECT fecha, count(DISTINCT cod_mun) AS ayuntamientos, sum(importe_eur) AS importe FROM mother.transparencia_pie_mensual WHERE fecha=(SELECT max(fecha) FROM mother.transparencia_pie_mensual) GROUP BY fecha",
 		"respuesta": {
 			"valor": 285,
 			"unidad": "ayuntamientos con retención",
@@ -238,7 +238,7 @@
 		"tablas_oro": [
 			"mother.energia_potencia_instalada"
 		],
-		"sql_oro": "SELECT \"año\", tecnologia, potencia_mw, porcentaje_total FROM mother.energia_potencia_instalada WHERE tecnologia='Solar Fotovoltaica' ORDER BY \"año\" DESC LIMIT 1",
+		"sql_oro": "SELECT anio, tecnologia, potencia_mw, cuota_pct FROM mother.energia_potencia_instalada WHERE tecnologia='Solar Fotovoltaica' ORDER BY anio DESC LIMIT 1",
 		"respuesta": {
 			"valor": 35823,
 			"unidad": "MW",
@@ -424,7 +424,7 @@
 		"tablas_oro": [
 			"mother.almacenamiento_mensual"
 		],
-		"sql_oro": "SELECT mes, bombeo_turbinado_gwh, bombeo_consumido_gwh FROM mother.almacenamiento_mensual WHERE mes='2025-07-01'",
+		"sql_oro": "SELECT fecha, bombeo_turbinado_gwh, bombeo_consumido_gwh FROM mother.almacenamiento_mensual WHERE fecha='2025-07-01'",
 		"respuesta": {
 			"valor": 534.74,
 			"unidad": "GWh turbinados",

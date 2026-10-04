@@ -6,15 +6,27 @@
     "preguntas": [
       "¿Qué ayuntamientos no han enviado la liquidación del presupuesto a Hacienda?",
       "¿Qué partido tiene más ayuntamientos incumplidores en la rendición de cuentas?",
-      "¿Cuántos ayuntamientos de Andalucía incumplieron en 2023 la entrega de la liquidación?"
+      "¿Cuántos ayuntamientos de Andalucía incumplieron en 2023 la entrega de la liquidación?",
+      "¿Qué porcentaje de ayuntamientos no entrega las cuentas a Hacienda?",
+      "¿Qué ayuntamientos grandes se han saltado el plazo de la liquidación?",
+      "¿Los ayuntamientos del PSOE cumplen más que los del PP con la liquidación?",
+      "¿Han mejorado los ayuntamientos en la entrega de cuentas desde 2015?",
+      "¿Qué provincia tiene más ayuntamientos morosos con la liquidación?",
+      "¿Incumplen más los pueblos pequeños que las ciudades?"
     ],
     "medidas": [
+      {
+        "columna": "incumple_pct",
+        "nombre": "ayuntamientos que no remitieron la liquidación en plazo",
+        "unidad": "% de ayuntamientos",
+        "tipo": "porcentaje",
+        "principal": true
+      },
       {
         "columna": "poblacion",
         "nombre": "habitantes del municipio",
         "unidad": "habitantes",
-        "tipo": "nivel",
-        "principal": true
+        "tipo": "nivel"
       }
     ],
     "tiempo": {
@@ -41,15 +53,20 @@
         "columna": "familia_en_plazo",
         "nombre": "partido que gobernaba en el plazo legal",
         "total": null
-      }
-    ],
-    "filtros": [
+      },
       {
-        "columna": "aplica_indicador",
-        "valor": "true"
+        "columna": "provincia",
+        "nombre": "provincia del municipio",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma del municipio",
+        "total": null
       }
     ],
-    "notas": "Una fila por municipio y año. Para tasas hay que contar solo filas con aplica_indicador=true (excluye régimen foral y casos sin dato). Plazo legal: 31 de marzo del año siguiente. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+    "filtros": [],
+    "notas": "Una fila por municipio y año. incumple_pct es 100 si no remitió la liquidación, 0 si sí, y vacío si no aplica (régimen foral y casos sin dato): su media es directamente el porcentaje de ayuntamientos, sin filtros. Plazo legal: 31 de marzo del año siguiente. Los booleanos incumple y remitida sirven para contar ayuntamientos (cuenta solo con aplica_indicador = true)."
   },
   {
     "tabla": "transparencia_pie",
@@ -58,15 +75,47 @@
     "preguntas": [
       "¿A cuántos ayuntamientos retiene Hacienda dinero por no presentar el presupuesto?",
       "¿Cuánto dinero se ha retenido a los ayuntamientos del PP?",
-      "¿Cuántos meses estuvo retenido el ayuntamiento de Cieza?"
+      "¿Cuántos meses estuvo retenido el ayuntamiento de Cieza?",
+      "¿Qué ayuntamientos han sufrido retenciones de la participación en los tributos del Estado?",
+      "¿Cuánto dinero se ha retenido por habitante en pueblos pequeños?",
+      "¿Qué partido tiene más ayuntamientos con dinero retenido?",
+      "¿Cuántos meses lleva retenido el dinero de Hacienda al ayuntamiento de Úbeda?",
+      "¿Qué provincia tiene más retenciones a sus ayuntamientos?",
+      "¿Cuánto dinero total ha retenido Hacienda a los ayuntamientos de Andalucía?"
     ],
     "medidas": [
       {
-        "columna": "importe_retenido_eur",
-        "nombre": "importe retenido al ayuntamiento",
-        "unidad": "€",
+        "columna": "importe_retenido_eur_hab_real",
+        "nombre": "importe retenido por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "flujo",
         "principal": true
+      },
+      {
+        "columna": "importe_retenido_eur_real",
+        "nombre": "importe retenido al ayuntamiento, en euros constantes",
+        "unidad": "€ de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_retenido_eur",
+        "nombre": "importe retenido al ayuntamiento, en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_retenido_eur_real"
+      },
+      {
+        "columna": "importe_retenido_eur_hab",
+        "nombre": "importe retenido por habitante, en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "flujo",
+        "real": "importe_retenido_eur_hab_real"
+      },
+      {
+        "columna": "retenido_pct",
+        "nombre": "ayuntamientos con la participación retenida",
+        "unidad": "% de ayuntamientos",
+        "tipo": "porcentaje"
       },
       {
         "columna": "meses_retenido",
@@ -110,15 +159,20 @@
         "columna": "familia",
         "nombre": "partido que gobernaba al empezar la retención",
         "total": null
-      }
-    ],
-    "filtros": [
+      },
       {
-        "columna": "aplica_indicador",
-        "valor": "true"
+        "columna": "provincia",
+        "nombre": "provincia del municipio",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma del municipio",
+        "total": null
       }
     ],
-    "notas": "Una fila por ayuntamiento, ejercicio y sección (incluidos los no retenidos). El importe es nominal en euros (sin ajustar por inflación) y el ejercicio en curso está incompleto. No sumar importes de secciones distintas sin avisar. La respuesta se obtiene contando filas con la columna booleana retenido = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+    "filtros": [],
+    "notas": "Una fila por ayuntamiento, ejercicio y sección (incluidos los no retenidos). Importes en euros constantes de 2025 (anio_base), también por habitante. retenido_pct es 100 si fue retenido, 0 si no, y vacío si no aplica (territorios forales): su media es el porcentaje de ayuntamientos. es_parcial marca la campaña ya empezada cuando arranca la serie (solo se ven sus últimos meses). No sumar importes de secciones distintas sin avisar."
   },
   {
     "tabla": "transparencia_pie_mensual",
@@ -127,19 +181,45 @@
     "preguntas": [
       "¿Cuántos ayuntamientos tienen ahora retenido el dinero de Hacienda?",
       "¿Cuánto dinero se retuvo a los ayuntamientos en septiembre de 2026?",
-      "¿Cómo ha evolucionado el número de ayuntamientos retenidos desde 2016?"
+      "¿Cómo ha evolucionado el número de ayuntamientos retenidos desde 2016?",
+      "¿Cuánto dinero se retiene cada mes a los ayuntamientos?",
+      "¿Cuántos ayuntamientos estuvieron retenidos en enero de 2023?",
+      "¿A qué ayuntamientos de Valencia se retiene la participación en tributos?",
+      "¿Cuánto se les retiene por habitante a los ayuntamientos retenidos?",
+      "¿Cuándo hubo más ayuntamientos castigados por Hacienda?",
+      "¿Qué provincia tiene más ayuntamientos retenidos este mes?"
     ],
     "medidas": [
       {
-        "columna": "importe_eur",
-        "nombre": "importe retenido ese mes",
-        "unidad": "€",
+        "columna": "importe_eur_hab_real",
+        "nombre": "importe retenido ese mes por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "flujo",
         "principal": true
+      },
+      {
+        "columna": "importe_eur_real",
+        "nombre": "importe retenido ese mes, en euros constantes",
+        "unidad": "€ de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_eur",
+        "nombre": "importe retenido ese mes, en euros corrientes",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "importe_eur_hab",
+        "nombre": "importe retenido ese mes por habitante, en euros corrientes",
+        "unidad": "€ por habitante",
+        "tipo": "flujo",
+        "real": "importe_eur_hab_real"
       }
     ],
     "tiempo": {
-      "columna": "periodo",
+      "columna": "fecha",
       "grano": "mensual",
       "parcial": false
     },
@@ -149,7 +229,7 @@
       ],
       "nivel": null,
       "codigo": "cod_mun",
-      "nombre": null,
+      "nombre": "municipio",
       "espana": null
     },
     "dimensiones": [
@@ -157,10 +237,15 @@
         "columna": "seccion",
         "nombre": "documento no remitido",
         "total": null
+      },
+      {
+        "columna": "provincia",
+        "nombre": "provincia del municipio",
+        "total": null
       }
     ],
     "filtros": [],
-    "notas": "Una fila por ayuntamiento, mes y sección; el número de ayuntamientos retenidos es el número de cod_mun distintos del mes. No lleva el nombre del municipio (hay que cruzar con otra tabla por cod_mun)."
+    "notas": "Una fila por ayuntamiento, mes y sección; el número de ayuntamientos retenidos es el número de cod_mun distintos del mes. Importes en euros constantes de 2025 (anio_base) y por habitante (población del municipio ese año). Si un ayuntamiento está retenido por varias secciones el mismo mes, el importe se reparte entre ellas."
   },
   {
     "tabla": "transparencia_pmp",
@@ -169,7 +254,13 @@
     "preguntas": [
       "¿Qué ayuntamientos tardan más de 30 días en pagar a sus proveedores?",
       "¿Cuántos días tarda en pagar el ayuntamiento de Cieza?",
-      "¿Qué partido tiene más ayuntamientos que no comunican el periodo medio de pago?"
+      "¿Qué partido tiene más ayuntamientos que no comunican el periodo medio de pago?",
+      "¿Cuántos días tarda de media un ayuntamiento en pagar las facturas?",
+      "¿Qué porcentaje de ayuntamientos paga tarde a sus proveedores?",
+      "¿Qué ayuntamientos de Madrid pagan más rápido?",
+      "¿Cómo ha evolucionado el plazo de pago de los ayuntamientos?",
+      "¿Pagan antes los ayuntamientos grandes o los pequeños?",
+      "¿Qué provincia tiene los ayuntamientos más lentos pagando?"
     ],
     "medidas": [
       {
@@ -180,6 +271,12 @@
         "principal": true
       },
       {
+        "columna": "supera_30_pct",
+        "nombre": "ayuntamientos que pagan a proveedores en más de 30 días",
+        "unidad": "% de ayuntamientos",
+        "tipo": "porcentaje"
+      },
+      {
         "columna": "poblacion",
         "nombre": "habitantes del municipio",
         "unidad": "habitantes",
@@ -187,7 +284,7 @@
       }
     ],
     "tiempo": {
-      "columna": "periodo",
+      "columna": "fecha",
       "grano": "trimestral",
       "parcial": false
     },
@@ -210,15 +307,20 @@
         "columna": "familia_en_plazo",
         "nombre": "partido que gobernaba en el plazo",
         "total": null
-      }
-    ],
-    "filtros": [
+      },
       {
-        "columna": "aplica_indicador",
-        "valor": "true"
+        "columna": "provincia",
+        "nombre": "provincia del municipio",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma del municipio",
+        "total": null
       }
     ],
-    "notas": "pmp_dias es nulo si el ayuntamiento no reporta (reporta=false). El periodo es texto tipo 2026T2; fecha_trimestre es la fecha del primer día del trimestre. Para tasas usar solo aplica_indicador=true. La respuesta se obtiene contando filas con la columna booleana supera_30 = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+    "filtros": [],
+    "notas": "pmp_dias es nulo si el ayuntamiento no reporta (reporta=false). fecha es el primer día del trimestre; periodo es el mismo trimestre en texto (2026T2). supera_30_pct es 100 si el PMP supera los 30 días, 0 si no, y vacío si no aplica o antes de 2018T2 (otra metodología): su media es el porcentaje de ayuntamientos. El booleano reporta cuenta cuántos comunican el PMP (solo con aplica_indicador = true)."
   },
   {
     "tabla": "transparencia_publicidad_activa",
@@ -227,7 +329,13 @@
     "preguntas": [
       "¿Qué ayuntamiento de Canarias es más transparente?",
       "¿Qué puntuación de transparencia tiene el Ayuntamiento de Adeje?",
-      "¿Qué partido gobierna los ayuntamientos con peor nota de transparencia?"
+      "¿Qué partido gobierna los ayuntamientos con peor nota de transparencia?",
+      "¿Qué ayuntamientos suspenden en transparencia?",
+      "¿Qué nota de transparencia tiene el Ayuntamiento de Santa Cruz de Tenerife?",
+      "¿Qué cabildo es el más transparente?",
+      "¿Qué ayuntamientos no han sido evaluados en transparencia?",
+      "¿Los ayuntamientos grandes sacan mejor nota que los pequeños?",
+      "¿Ha mejorado la transparencia de los ayuntamientos canarios desde 2016?"
     ],
     "medidas": [
       {
@@ -287,6 +395,16 @@
         "columna": "familia",
         "nombre": "partido de quien gobierna",
         "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma de la entidad",
+        "total": null
+      },
+      {
+        "columna": "provincia",
+        "nombre": "provincia de la entidad",
+        "total": null
       }
     ],
     "filtros": [
@@ -295,7 +413,7 @@
         "valor": "true"
       }
     ],
-    "notas": "Cubre sobre todo Canarias (ITCanarias) y algunas entidades del Consejo de Transparencia (ICIO). Para la nota actual usar es_ultima=true y estado='evaluada'; las incumplidoras no tienen nota. Las puntuaciones originales vienen en escalas distintas pero puntuacion ya está normalizada a 100."
+    "notas": "Cubre sobre todo Canarias (ITCanarias) y algunas entidades del Consejo de Transparencia (ICIO). Para la nota actual usar es_ultima=true y estado='evaluada'; las incumplidoras no tienen nota. Las puntuaciones originales vienen en escalas distintas pero puntuacion ya está normalizada a 100. ccaa, provincia y municipio dan el territorio de la entidad evaluada (los entes dependientes llevan el del territorio al que pertenecen); entidad es el nombre de la propia entidad. No mezclar índices (indice): las escalas de ITCanarias y del Consejo no son comparables."
   },
   {
     "tabla": "transparencia_tcu",
@@ -304,9 +422,22 @@
     "preguntas": [
       "¿Qué ayuntamientos no han rendido la cuenta general al Tribunal de Cuentas?",
       "¿Cuántos ayuntamientos rindieron fuera de plazo la cuenta general en 2024?",
-      "¿Qué partido tiene más ayuntamientos incumplidores con el Tribunal de Cuentas?"
+      "¿Qué partido tiene más ayuntamientos incumplidores con el Tribunal de Cuentas?",
+      "¿Qué ayuntamientos de Cádiz no han rendido cuentas al Tribunal de Cuentas?",
+      "¿Cuántos días tarde rindió sus cuentas el ayuntamiento de Logroño?",
+      "¿Qué ayuntamientos no han mandado los contratos al Tribunal de Cuentas?",
+      "¿Qué porcentaje de ayuntamientos de La Rioja cumple con el control interno?",
+      "¿Los ayuntamientos pequeños incumplen más con el Tribunal de Cuentas?",
+      "¿Cómo han cambiado los retrasos en rendir cuentas en A Coruña?"
     ],
     "medidas": [
+      {
+        "columna": "incumple_pct",
+        "nombre": "ayuntamientos que no rindieron la obligación",
+        "unidad": "% de ayuntamientos",
+        "tipo": "porcentaje",
+        "principal": true
+      },
       {
         "columna": "dias_retraso",
         "nombre": "días de retraso en la rendición",
@@ -317,12 +448,11 @@
         "columna": "poblacion",
         "nombre": "habitantes del municipio",
         "unidad": "habitantes",
-        "tipo": "nivel",
-        "principal": true
+        "tipo": "nivel"
       }
     ],
     "tiempo": {
-      "columna": "ejercicio",
+      "columna": "anio",
       "grano": "anual",
       "parcial": false
     },
@@ -355,15 +485,20 @@
         "columna": "familia_en_plazo",
         "nombre": "partido que gobernaba en el plazo",
         "total": null
-      }
-    ],
-    "filtros": [
+      },
       {
-        "columna": "aplica_indicador",
-        "valor": "true"
+        "columna": "provincia",
+        "nombre": "provincia del municipio",
+        "total": null
+      },
+      {
+        "columna": "ccaa",
+        "nombre": "comunidad autónoma del municipio",
+        "total": null
       }
     ],
-    "notas": "Solo cubre ayuntamientos de La Rioja, Cádiz y A Coruña (cod_ccaa 17, 01, 12), no toda España. Rastreo del Tribunal de Cuentas a septiembre de 2026; dias_retraso solo existe si rindió fuera de plazo. La respuesta se obtiene contando filas con la columna booleana incumple = true (porcentaje de ayuntamientos = media de esa columna entre las filas con aplica_indicador); no es una medida numérica."
+    "filtros": [],
+    "notas": "Solo cubre ayuntamientos de La Rioja, Cádiz y A Coruña (cod_ccaa 17, 01, 12), no toda España. Rastreo del Tribunal de Cuentas a septiembre de 2026. anio es el ejercicio al que se refiere la rendición; obligacion tiene rangos de ejercicio distintos (cuenta_general, contratos, control_interno). incumple_pct es 100 si no la rindió, 0 si sí, y vacío si no aplica (plazo no vencido o foral): su media es el porcentaje de ayuntamientos. dias_retraso solo existe si rindió fuera de plazo."
   },
   {
     "tabla": "trazabilidad_fuentes",
@@ -378,7 +513,13 @@
       "¿Cuántos turistas internacionales visitaron España en 2025?",
       "¿Cuánto gasta de media cada turista que viene a España?",
       "¿Cómo ha evolucionado el gasto turístico por habitante?",
-      "¿Qué porcentaje del PIB representa el gasto de los turistas?"
+      "¿Qué porcentaje del PIB representa el gasto de los turistas?",
+      "¿Cuántos extranjeros visitan España al año?",
+      "¿Cuánto dinero dejan los turistas en España?",
+      "¿Cuántos días se queda de media un turista?",
+      "¿Cuánto gasta un turista al día?",
+      "¿Cuántos turistas vienen por cada habitante español?",
+      "¿Cuántos turistas había antes de la pandemia?"
     ],
     "medidas": [
       {
@@ -493,7 +634,13 @@
       "¿Qué comunidad tiene más pernoctaciones turísticas por habitante?",
       "¿Cuántos turistas internacionales recibió Cataluña en 2025?",
       "¿Cuál es la ocupación hotelera de Canarias?",
-      "¿Cómo ha evolucionado el turismo en Baleares?"
+      "¿Cómo ha evolucionado el turismo en Baleares?",
+      "¿Dónde se llenan más los hoteles?",
+      "¿Cuántas noches pasan los turistas en apartamentos en Comunitat Valenciana?",
+      "¿Qué porcentaje de los que duermen en hoteles de Baleares son extranjeros?",
+      "¿Cuánto gastan los turistas extranjeros en Andalucía?",
+      "¿Qué comunidad recibe más turistas internacionales?",
+      "¿Cuántas pernoctaciones hoteleras tiene Madrid?"
     ],
     "medidas": [
       {
@@ -599,7 +746,13 @@
     "preguntas": [
       "¿Cuántas pernoctaciones hoteleras hubo en Canarias en agosto de 2025?",
       "¿Qué comunidad tiene mayor ocupación hotelera este verano?",
-      "¿Cómo cambia el turismo en Baleares según el mes del año?"
+      "¿Cómo cambia el turismo en Baleares según el mes del año?",
+      "¿Cuántas plazas de hotel hay en Cataluña?",
+      "¿Cuál es el mes con más turistas en Andalucía?",
+      "¿Cuánto se llenan los hoteles de Canarias en invierno?",
+      "¿Cuántos turistas extranjeros llegaron a Baleares en julio de 2025?",
+      "¿Qué comunidad tuvo más pernoctaciones en apartamentos el pasado agosto?",
+      "¿Cómo cambió el turismo en Cataluña tras la pandemia?"
     ],
     "medidas": [
       {
@@ -694,7 +847,13 @@
       "¿Cuántos turistas llegaron a España en julio de 2025?",
       "¿Cuánto gastaron los turistas internacionales en el último año?",
       "¿Cómo ha cambiado el número de turistas respecto al año pasado?",
-      "¿Cuál es la ocupación hotelera en agosto?"
+      "¿Cuál es la ocupación hotelera en agosto?",
+      "¿Cuántos turistas vinieron el mes pasado?",
+      "¿Cuánto gastaron los turistas en España en agosto?",
+      "¿Cuántos turistas han venido en los últimos 12 meses?",
+      "¿Cuántas noches de hotel se reservaron el pasado verano?",
+      "¿Cuánto ha crecido el turismo respecto al mismo mes de hace un año?",
+      "dime los turistas por habitante del último año"
     ],
     "medidas": [
       {
@@ -815,7 +974,13 @@
       "¿De qué país vienen más turistas a España?",
       "¿Cuántos turistas británicos visitaron España en 2025?",
       "¿Qué país gasta más por turista en España?",
-      "¿Han vuelto ya los turistas alemanes a los niveles de 2019?"
+      "¿Han vuelto ya los turistas alemanes a los niveles de 2019?",
+      "¿Cuántos franceses visitan España?",
+      "¿Qué porcentaje de turistas son británicos?",
+      "¿Cuánto gasta un turista estadounidense en España?",
+      "¿De qué país vienen menos turistas ahora que antes de la pandemia?",
+      "¿Cuántos turistas vienen de Países Bajos?",
+      "dime los cinco países que más visitan España"
     ],
     "medidas": [
       {
@@ -874,7 +1039,13 @@
       "¿Cuántas viviendas turísticas hay en Baleares?",
       "¿Qué provincia tiene más viviendas de uso turístico por habitante?",
       "¿Cómo han crecido las viviendas turísticas en España desde 2020?",
-      "¿Qué porcentaje de viviendas son turísticas en Canarias?"
+      "¿Qué porcentaje de viviendas son turísticas en Canarias?",
+      "¿Cuántos pisos turísticos hay en España?",
+      "¿Cuántas plazas turísticas hay en viviendas en Málaga?",
+      "¿Cuánto han crecido los pisos turísticos en el último año?",
+      "¿Qué comunidad tiene más pisos turísticos por cada 1.000 habitantes?",
+      "¿Qué porcentaje de las casas de Canarias son turísticas?",
+      "¿Cuántos alojamientos de Airbnb hay en Barcelona?"
     ],
     "medidas": [
       {
@@ -939,7 +1110,13 @@
     "preguntas": [
       "¿Cuántas viviendas turísticas hay en Adeje?",
       "¿Qué municipio tiene mayor porcentaje de viviendas turísticas?",
-      "¿Cuántas viviendas de uso turístico tiene Alicante por cada 1.000 habitantes?"
+      "¿Cuántas viviendas de uso turístico tiene Alicante por cada 1.000 habitantes?",
+      "¿Qué pueblo tiene más pisos turísticos por habitante?",
+      "¿Cuántas plazas hay en viviendas turísticas de Benidorm?",
+      "¿Qué porcentaje de viviendas de Sevilla son turísticas?",
+      "dime los municipios con más pisos de alquiler turístico",
+      "¿Cuántas viviendas turísticas hay en San Bartolomé de Tirajana?",
+      "¿Es Santiago de Compostela una ciudad con muchos pisos turísticos?"
     ],
     "medidas": [
       {
@@ -993,41 +1170,6 @@
     "notas": "Datos semestrales (mayo y noviembre) y experimentales del INE. El puesto solo se calcula para municipios de 1.000 habitantes o más."
   },
   {
-    "tabla": "unemployment",
-    "usar": true,
-    "tema": "Tasa de paro de la EPA en España por trimestre, sexo y grupo de edad",
-    "preguntas": [
-      "¿Cuál es la tasa de paro en España?",
-      "¿Cuál es el paro juvenil entre 16 y 19 años?",
-      "¿Cómo ha evolucionado el paro desde 2008?",
-      "¿Hay más paro entre mujeres que entre hombres?"
-    ],
-    "medidas": [
-      {
-        "columna": "value",
-        "nombre": "tasa de paro",
-        "unidad": "% de la población activa",
-        "tipo": "tasa",
-        "principal": true
-      }
-    ],
-    "tiempo": {
-      "columna": "date",
-      "grano": "trimestral",
-      "parcial": false
-    },
-    "territorio": null,
-    "dimensiones": [
-      {
-        "columna": "serie",
-        "nombre": "serie por sexo y grupo de edad (el texto incluye 'Ambos sexos', 'Hombres', 'Mujeres' y 'Total' o el tramo de edad)",
-        "total": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
-      }
-    ],
-    "filtros": [],
-    "notas": "Solo total nacional, no hay comunidades. El nombre de las series no es uniforme (unas empiezan por 'Total Nacional. Tasa de paro...' y otras por 'Tasa de paro de la población. Total Nacional...'): filtrar con LIKE. Última fecha 2026-04-01. Tabla básica, para paro por territorio hay otras mejores."
-  },
-  {
     "tabla": "vivienda_alquiler",
     "usar": true,
     "tema": "Precio del alquiler de vivienda (mediana mensual y por m²) en España, comunidades y provincias, 2011-2024",
@@ -1035,7 +1177,13 @@
       "¿Cuánto cuesta de media alquilar un piso en Cataluña?",
       "¿Qué provincia tiene el alquiler más caro?",
       "¿Cuánto ha subido el alquiler en Madrid desde 2015?",
-      "¿Cuántas viviendas se alquilan por cada 1.000 habitantes en Baleares?"
+      "¿Cuántas viviendas se alquilan por cada 1.000 habitantes en Baleares?",
+      "¿Cuánto vale alquilar un piso en Vizcaya?",
+      "¿Cuánto se paga por metro cuadrado de alquiler en Baleares?",
+      "¿Cuántos pisos se han alquilado en Andalucía?",
+      "¿Qué comunidad tiene el alquiler más barato?",
+      "¿Cuánto mide de media un piso de alquiler?",
+      "¿Cuánto pagan los inquilinos en la franja barata y en la cara de Madrid?"
     ],
     "medidas": [
       {
@@ -1144,7 +1292,13 @@
     "preguntas": [
       "¿Cuánto cuesta alquilar un piso en Alicante?",
       "¿Qué municipio grande tiene el alquiler más caro por metro cuadrado?",
-      "¿Cuánto ha subido el alquiler en Adeje en cinco años?"
+      "¿Cuánto ha subido el alquiler en Adeje en cinco años?",
+      "¿Qué pueblo grande tiene el alquiler más barato?",
+      "¿Cuánto cuesta un alquiler en Getafe?",
+      "¿Cuántos pisos se alquilan en Terrassa por cada 1.000 habitantes?",
+      "¿Cuántos metros tiene un piso de alquiler en Jerez de la Frontera?",
+      "¿Cuánto cuesta el metro cuadrado de alquiler en San Sebastián?",
+      "¿En qué ciudades ha subido más el alquiler en cinco años?"
     ],
     "medidas": [
       {
@@ -1225,7 +1379,13 @@
       "¿Cuántos años de sueldo hacen falta para comprar una vivienda en Madrid?",
       "¿Qué porcentaje del salario se va en el alquiler en Cataluña?",
       "¿En qué comunidad es más difícil comprar casa respecto al sueldo?",
-      "¿Cómo ha evolucionado el esfuerzo para comprar vivienda?"
+      "¿Cómo ha evolucionado el esfuerzo para comprar vivienda?",
+      "¿Cuántos años tengo que ahorrar mi sueldo para pagar un piso en Canarias?",
+      "¿Qué parte del sueldo se come el alquiler en Baleares?",
+      "¿Cuánto cuesta una vivienda de 90 metros en Madrid?",
+      "¿Es hoy más difícil comprar casa que en 2005?",
+      "¿Dónde es más fácil comprar casa en España?",
+      "¿Cuánto es el sueldo bruto medio anual que se usa para calcular el esfuerzo?"
     ],
     "medidas": [
       {
@@ -1243,26 +1403,54 @@
       },
       {
         "columna": "euros_m2",
-        "nombre": "valor tasado medio por metro cuadrado",
+        "nombre": "valor tasado medio por metro cuadrado (euros corrientes)",
         "unidad": "€/m²",
-        "tipo": "precio"
+        "tipo": "precio",
+        "real": "euros_m2_real"
       },
       {
         "columna": "precio_90m2",
-        "nombre": "precio de una vivienda de 90 m² al valor tasado",
+        "nombre": "precio de una vivienda de 90 m² al valor tasado (euros corrientes)",
         "unidad": "€",
-        "tipo": "precio"
+        "tipo": "precio",
+        "real": "precio_90m2_real"
       },
       {
         "columna": "salario_anual",
-        "nombre": "salario bruto anual medio",
+        "nombre": "salario bruto anual medio (euros corrientes)",
         "unidad": "€ al año",
-        "tipo": "media"
+        "tipo": "media",
+        "real": "salario_anual_real"
       },
       {
         "columna": "alquiler_mes_mediana",
-        "nombre": "alquiler mensual mediano",
+        "nombre": "alquiler mensual mediano (euros corrientes)",
         "unidad": "€ al mes",
+        "tipo": "precio",
+        "real": "alquiler_mes_mediana_real"
+      },
+      {
+        "columna": "euros_m2_real",
+        "nombre": "valor tasado medio por metro cuadrado (euros constantes)",
+        "unidad": "€ de 2025/m²",
+        "tipo": "precio"
+      },
+      {
+        "columna": "precio_90m2_real",
+        "nombre": "precio de una vivienda de 90 m² al valor tasado (euros constantes)",
+        "unidad": "€ de 2025",
+        "tipo": "precio"
+      },
+      {
+        "columna": "salario_anual_real",
+        "nombre": "salario bruto anual medio (euros constantes)",
+        "unidad": "€ de 2025 al año",
+        "tipo": "media"
+      },
+      {
+        "columna": "alquiler_mes_mediana_real",
+        "nombre": "alquiler mensual mediano (euros constantes)",
+        "unidad": "€ de 2025 al mes",
         "tipo": "precio"
       }
     ],
@@ -1286,7 +1474,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Importes nominales (corrientes) en euros. pct_alquiler solo existe desde 2011 (año a partir del que hay alquiler SERPAVI) y el último año con dato puede ser 2025 para valor tasado. Salario: Encuesta Trimestral de Coste Laboral del INE."
+    "notas": "anios_salario y pct_alquiler son cocientes de euros del mismo año y valen para comparar entre años; para comparar importes en euros entre años usar las columnas _real (euros constantes de 2025, anio_base). pct_alquiler solo existe desde 2011 (año a partir del que hay alquiler SERPAVI) y el último año con dato puede ser 2025 para valor tasado. Salario: Encuesta Trimestral de Coste Laboral del INE."
   },
   {
     "tabla": "vivienda_ipv",
@@ -1296,7 +1484,13 @@
       "¿Cuánto ha subido el precio de la vivienda en el último año?",
       "¿En qué comunidad han subido más los precios de la vivienda?",
       "¿Cuánto ha subido la vivienda de segunda mano en Madrid?",
-      "¿Cómo ha evolucionado el precio de la vivienda desde 2007?"
+      "¿Cómo ha evolucionado el precio de la vivienda desde 2007?",
+      "¿Cuánto han subido los pisos nuevos en el último trimestre?",
+      "¿Cuánto ha encarecido la vivienda de segunda mano en Cataluña?",
+      "¿Qué comunidad tiene la vivienda que más sube?",
+      "¿Cuánto ha subido la vivienda desde 2015 descontando la inflación?",
+      "¿Ha bajado alguna vez el precio de la vivienda en España desde 2007?",
+      "¿Cuánto subieron los precios de las casas en Baleares el último año?"
     ],
     "medidas": [
       {
@@ -1366,7 +1560,13 @@
     "preguntas": [
       "¿Cuánto ha subido el alquiler en España en el último año?",
       "¿En qué comunidad ha subido más el alquiler en 2024?",
-      "¿Cómo ha evolucionado el precio de los alquileres desde 2011?"
+      "¿Cómo ha evolucionado el precio de los alquileres desde 2011?",
+      "¿Qué comunidad tiene los alquileres que más han subido?",
+      "¿Ha subido el alquiler más que la inflación en Madrid?",
+      "¿Cuánto han subido los alquileres en Cataluña desde 2015?",
+      "¿Cuánto subió el alquiler en España en 2024 sin contar la inflación?",
+      "¿Ha bajado el alquiler en alguna comunidad?",
+      "dime el índice de precios de los alquileres en Canarias"
     ],
     "medidas": [
       {
@@ -1426,7 +1626,13 @@
       "¿Cuántas viviendas se vendieron en España en 2025?",
       "¿Qué comunidad vende más viviendas por cada 1.000 habitantes?",
       "¿Cuál es el importe medio de una hipoteca en Madrid?",
-      "¿Qué porcentaje de las compraventas son vivienda nueva?"
+      "¿Qué porcentaje de las compraventas son vivienda nueva?",
+      "¿Cuántas casas de segunda mano se vendieron el año pasado?",
+      "¿Cuántas hipotecas se firmaron en Andalucía?",
+      "¿Cuántas viviendas protegidas se vendieron en el País Vasco?",
+      "¿Cuánto dinero se prestó en hipotecas en España?",
+      "¿Cuántos pisos se compran por cada 1.000 habitantes en Madrid?",
+      "¿Cómo ha cambiado el número de compraventas desde 2007?"
     ],
     "medidas": [
       {
@@ -1473,9 +1679,15 @@
         "tipo": "ratio"
       },
       {
-        "columna": "importe_hipotecas",
-        "nombre": "importe total de las hipotecas sobre viviendas",
-        "unidad": "€",
+        "columna": "importe_hipotecas_real",
+        "nombre": "importe total de las hipotecas sobre viviendas, en euros constantes",
+        "unidad": "€ de 2025",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_hipotecas_eur_hab_real",
+        "nombre": "importe de las hipotecas sobre viviendas por habitante, en euros constantes",
+        "unidad": "€ de 2025 por habitante",
         "tipo": "flujo"
       },
       {
@@ -1531,7 +1743,7 @@
     },
     "dimensiones": [],
     "filtros": [],
-    "notas": "El año en curso (2026) suma solo unos meses (columna meses; ahora 7) y no es comparable con años completos salvo por 1.000 habitantes de periodos iguales. importe_hipotecas está en euros (no millones). Nivel provincia, ccaa y pais conviven: filtrar por nivel para no duplicar."
+    "notas": "El año en curso suma solo unos meses (columna meses) y no es comparable con años completos salvo por 1.000 habitantes de periodos iguales; las sumas del año en curso son parciales. importe_hipotecas_real suma los meses ya deflactados (euros, no millones). Nivel provincia, ccaa y pais conviven: filtrar por nivel para no duplicar."
   },
   {
     "tabla": "vivienda_mercado_mensual",
@@ -1540,7 +1752,13 @@
     "preguntas": [
       "¿Cuántas viviendas se vendieron en Madrid en julio de 2026?",
       "¿Cuántas compraventas ha habido en el último año por cada 1.000 habitantes en Andalucía?",
-      "¿Cómo han evolucionado las hipotecas sobre viviendas mes a mes?"
+      "¿Cómo han evolucionado las hipotecas sobre viviendas mes a mes?",
+      "¿Cuántos pisos se vendieron el último mes?",
+      "¿Cuántas hipotecas se firmaron en Valencia en junio?",
+      "¿Cuántas casas nuevas se compraron en Cataluña en el último año?",
+      "¿Se venden ahora más o menos casas que hace un año?",
+      "¿Cuántas compraventas de vivienda de segunda mano hubo en Sevilla en el último mes?",
+      "¿Qué provincia lleva más hipotecas por habitante en los últimos 12 meses?"
     ],
     "medidas": [
       {
@@ -1642,7 +1860,13 @@
     "preguntas": [
       "¿Cuántas viviendas nuevas se terminaron en España en 2025?",
       "¿Qué provincia construye más viviendas por cada 1.000 habitantes?",
-      "¿Cómo ha evolucionado la construcción de viviendas desde la burbuja?"
+      "¿Cómo ha evolucionado la construcción de viviendas desde la burbuja?",
+      "¿Cuántas casas se empezaron a construir el año pasado?",
+      "¿Cuántas viviendas libres se terminaron en Andalucía?",
+      "¿En qué comunidad se construye menos?",
+      "¿Cuántos pisos nuevos se hicieron en 2007 y cuántos ahora?",
+      "¿Se construyen ahora más casas por habitante que antes de la crisis?",
+      "¿Cuántas obras de vivienda iniciadas hubo en Madrid en 2024?"
     ],
     "medidas": [
       {
@@ -1701,7 +1925,13 @@
     "preguntas": [
       "¿Cuánto cuesta el metro cuadrado de vivienda en Alicante?",
       "¿Qué municipio grande tiene la vivienda más cara?",
-      "¿Cuánto han subido los precios de la vivienda en Adeje?"
+      "¿Cuánto han subido los precios de la vivienda en Adeje?",
+      "¿Qué ciudad tiene el metro cuadrado más caro?",
+      "¿Cuánto cuesta una casa de 90 metros en Marbella?",
+      "¿Cuántas tasaciones se hicieron en Murcia?",
+      "¿Cuánto ha subido la vivienda en Torrejón de Ardoz respecto al año anterior?",
+      "¿Dónde está más barata la vivienda entre los municipios grandes?",
+      "dime el precio por metro cuadrado de Getafe"
     ],
     "medidas": [
       {
@@ -1763,7 +1993,13 @@
       "¿Cuánto cuesta el metro cuadrado de vivienda en España?",
       "¿Cuál es la provincia con la vivienda más cara?",
       "¿Cuánto ha subido el precio de la vivienda en Madrid en el último año?",
-      "¿Cuánto cuesta una vivienda de 90 metros en Canarias?"
+      "¿Cuánto cuesta una vivienda de 90 metros en Canarias?",
+      "¿Cuánto cuesta el metro cuadrado en Barcelona?",
+      "¿Cuánto vale una casa de 90 metros en Madrid?",
+      "¿Qué provincia tiene el precio por metro cuadrado más barato?",
+      "¿Cuándo estuvo la vivienda más cara en España, en 2007 o ahora?",
+      "¿Cuánto subió la vivienda en Baleares el último año descontando la inflación?",
+      "¿Cómo ha evolucionado el precio de la vivienda en Galicia desde 1995?"
     ],
     "medidas": [
       {
@@ -1836,7 +2072,13 @@
     "preguntas": [
       "¿Qué comunidad tiene más vivienda pública en alquiler por habitante?",
       "¿Cuántas viviendas públicas tiene Cataluña?",
-      "¿Ha crecido el parque público de vivienda en alquiler en Andalucía desde 2019?"
+      "¿Ha crecido el parque público de vivienda en alquiler en Andalucía desde 2019?",
+      "¿Cuántas viviendas tiene el parque público autonómico en Madrid?",
+      "¿Qué comunidad tiene menos vivienda pública para alquilar?",
+      "¿Cuántas casas sociales hay en Navarra por cada 1.000 habitantes?",
+      "¿Qué porcentaje de hogares de Euskadi vive en una casa pública de alquiler?",
+      "¿Qué comunidad ha perdido vivienda pública desde 2019?",
+      "¿Cuántos hogares de Baleares pagan un alquiler por debajo del mercado?"
     ],
     "medidas": [
       {
@@ -1922,7 +2164,13 @@
     "preguntas": [
       "¿Cuántas viviendas protegidas en alquiler se calificaron en Madrid en 2020?",
       "¿Qué porcentaje de hogares de Canarias tiene un alquiler más barato que el de mercado?",
-      "¿Qué comunidad califica más vivienda protegida en alquiler por habitante?"
+      "¿Qué comunidad califica más vivienda protegida en alquiler por habitante?",
+      "¿Cuántas viviendas protegidas de alquiler se aprobaron en Cataluña?",
+      "¿Cómo ha cambiado cada año la vivienda protegida en alquiler en Valencia?",
+      "¿Qué porcentaje de hogares paga alquiler de mercado en Madrid?",
+      "¿Qué comunidad ha calificado menos vivienda protegida por habitante?",
+      "¿Cuántos hogares de Andalucía tienen un alquiler por debajo del mercado?",
+      "¿Se han calificado más pisos protegidos en alquiler en 2023 que en 2015?"
     ],
     "medidas": [
       {
@@ -1988,7 +2236,13 @@
     "preguntas": [
       "¿Cuántas viviendas públicas en alquiler hay en España?",
       "¿Qué porcentaje de hogares españoles vive en alquiler social?",
-      "¿Cuántas viviendas protegidas en alquiler se calificaron en 2022?"
+      "¿Cuántas viviendas protegidas en alquiler se calificaron en 2022?",
+      "¿Cuántos hogares españoles viven en una casa en propiedad?",
+      "¿Cuántas viviendas sociales de alquiler tiene el Estado?",
+      "¿Cuántas casas por cada 1.000 habitantes son públicas?",
+      "¿Qué porcentaje de hogares paga menos alquiler que el del mercado?",
+      "¿Cuántas calificaciones de vivienda protegida de alquiler hubo cada año?",
+      "¿Cómo ha cambiado la vivienda en propiedad en España en los últimos años?"
     ],
     "medidas": [
       {
@@ -2066,7 +2320,13 @@
     "preguntas": [
       "¿Qué partido ha calificado más vivienda protegida en alquiler?",
       "¿El PSOE o el PP promueven más vivienda protegida en alquiler por habitante?",
-      "¿Qué partidos autonómicos construyen menos vivienda pública de lo que les correspondería?"
+      "¿Qué partidos autonómicos construyen menos vivienda pública de lo que les correspondería?",
+      "¿Qué partido construye más viviendas protegidas de alquiler cuando gobierna?",
+      "¿Cuántas viviendas protegidas de alquiler califica el PNV?",
+      "¿Qué partidos han calificado menos de lo que les corresponde por población?",
+      "¿Quién ha hecho más vivienda protegida, PSOE o PP?",
+      "¿Qué fuerza política concentra más calificaciones de alquiler protegido?",
+      "¿Cuántas viviendas por 100.000 habitantes y año ha calificado cada partido?"
     ],
     "medidas": [
       {
@@ -2120,15 +2380,27 @@
     "preguntas": [
       "¿Qué porcentaje de vivienda social tiene España comparado con Francia?",
       "¿Qué país tiene más vivienda social?",
-      "¿Cuántas viviendas sociales hay en Alemania?"
+      "¿Cuántas viviendas sociales hay en Alemania?",
+      "¿Qué país tiene más vivienda social de alquiler en proporción?",
+      "¿Cuántas viviendas sociales hay en Francia?",
+      "¿Tiene España menos vivienda social que la media de la OCDE?",
+      "¿Qué porcentaje de casas son sociales en los Países Bajos?",
+      "¿Cómo está España frente a Italia en vivienda pública?",
+      "¿Qué país europeo tiene la menor vivienda social?"
     ],
     "medidas": [
       {
-        "columna": "valor",
-        "nombre": "vivienda social en porcentaje del parque total (OCDE) o de las viviendas principales (UE)",
-        "unidad": "%",
+        "columna": "pct_parque_total",
+        "nombre": "vivienda social en porcentaje del parque total de viviendas (OCDE)",
+        "unidad": "% del parque total",
         "tipo": "porcentaje",
         "principal": true
+      },
+      {
+        "columna": "pct_viviendas_principales",
+        "nombre": "vivienda social en porcentaje de las viviendas principales (UE)",
+        "unidad": "% de viviendas principales",
+        "tipo": "porcentaje"
       },
       {
         "columna": "viviendas_sociales",
@@ -2150,25 +2422,18 @@
       "codigo": "cod_pais",
       "nombre": "pais",
       "espana": {
-        "columna": "pais",
-        "valor": "España"
+        "columna": "cod_pais",
+        "valor": "ES"
       }
     },
-    "dimensiones": [
-      {
-        "columna": "serie",
-        "nombre": "fuente y definición (ocde_pct_parque o ue_pct_hogares)",
-        "total": null,
-        "defecto": "ocde_pct_parque"
-      }
-    ],
+    "dimensiones": [],
     "filtros": [
       {
         "columna": "es_ultimo",
         "valor": "true"
       }
     ],
-    "notas": "Dos series con definiciones distintas (OCDE: % del parque total, hacia 2010 y 2022; UE: % de viviendas principales, 2023); no mezclarlas. Incluye agregados (es_agregado=true) que no son países: excluirlos en rankings."
+    "notas": "Dos definiciones, cada una en su columna (una de las dos va vacía en cada fila): pct_parque_total (OCDE, % del parque total, hacia 2010 y 2022) y pct_viviendas_principales (MIVAU/Eurostat, 2023). No mezclarlas. cod_pais es ISO alfa-2 (EU27_2020 la UE, OECD la OCDE). Incluye agregados (es_agregado=true) que no son países: excluirlos en rankings. es_ultimo = último dato de cada país en cada definición (defecto)."
   },
   {
     "tabla": "vivienda_publica_municipios",
@@ -2177,7 +2442,13 @@
     "preguntas": [
       "¿Cuántas viviendas públicas de alquiler tiene el Ayuntamiento de Barcelona?",
       "¿Qué municipio tiene más vivienda municipal en alquiler por habitante?",
-      "¿Qué ayuntamientos grandes no han declarado su parque de vivienda?"
+      "¿Qué ayuntamientos grandes no han declarado su parque de vivienda?",
+      "¿Cuántas viviendas municipales de alquiler tiene Madrid?",
+      "¿Qué ayuntamientos grandes no han contestado la encuesta de vivienda?",
+      "¿Cuántas viviendas municipales en venta tiene Sevilla?",
+      "¿Qué ciudad tiene más casas del ayuntamiento por cada 1.000 habitantes?",
+      "¿Cuántas viviendas tiene el ayuntamiento de Pamplona en total?",
+      "dime los ayuntamientos con más vivienda pública de alquiler"
     ],
     "medidas": [
       {
@@ -2233,7 +2504,13 @@
     "preguntas": [
       "¿Qué provincia tiene más vivienda pública en alquiler por habitante?",
       "¿Cuántas viviendas municipales de alquiler hay en Vizcaya?",
-      "¿En qué provincias han contestado menos ayuntamientos la encuesta de vivienda pública?"
+      "¿En qué provincias han contestado menos ayuntamientos la encuesta de vivienda pública?",
+      "¿Qué provincia tiene más vivienda pública municipal?",
+      "¿Cuántas casas municipales de alquiler hay en Barcelona?",
+      "¿En qué provincias hay menos casas públicas de alquiler?",
+      "¿Cuántas casas públicas por cada 1.000 habitantes tiene Álava?",
+      "¿Qué cobertura tiene la encuesta de vivienda en Madrid?",
+      "dime las provincias con más viviendas municipales por habitante"
     ],
     "medidas": [
       {
@@ -2283,7 +2560,13 @@
     "preguntas": [
       "¿Cuánto cuesta ahora la vivienda en Baleares comparado con su máximo de la burbuja?",
       "¿Qué provincia tiene el precio de la vivienda más alto?",
-      "¿Cuánto cuesta el alquiler en Barcelona y cuántos años de sueldo hacen falta para comprar?"
+      "¿Cuánto cuesta el alquiler en Barcelona y cuántos años de sueldo hacen falta para comprar?",
+      "¿Cuánto ha bajado o subido el precio respecto al máximo de la burbuja en Madrid?",
+      "¿Qué provincia tiene el alquiler más caro y la vivienda más cara?",
+      "¿Qué comunidad tiene más hipotecas por habitante?",
+      "dime cómo está la vivienda en Murcia de un vistazo",
+      "¿Dónde se construyen más viviendas por habitante?",
+      "¿En qué comunidad hay que ahorrar más años de sueldo para comprar?"
     ],
     "medidas": [
       {

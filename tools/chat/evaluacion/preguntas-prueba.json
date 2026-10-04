@@ -124,7 +124,7 @@
 		"tablas_oro": [
 			"mother.mercado_energia_carburantes"
 		],
-		"sql_oro": "SELECT semana, eur_litro, eur_litro_real FROM mother.mercado_energia_carburantes WHERE geo='ES' AND producto='Gasolina 95' ORDER BY semana DESC LIMIT 1",
+		"sql_oro": "SELECT fecha, eur_litro, eur_litro_real FROM mother.mercado_energia_carburantes WHERE cod_pais='ES' AND producto='Gasolina 95' ORDER BY fecha DESC LIMIT 1",
 		"respuesta": {
 			"valor": 1.94,
 			"unidad": "€/litro con impuestos",
@@ -306,29 +306,28 @@
 		"tablas_oro": [
 			"mother.cuentas_gastos"
 		],
-		"sql_oro": "SELECT max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=(SELECT max(\"año\") FROM mother.cuentas_gastos)) - max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=2015) AS diferencia, max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=2015) AS g2015, max(gasto_por_habitante_eur) FILTER (WHERE \"año\"=(SELECT max(\"año\") FROM mother.cuentas_gastos)) AS ultimo FROM mother.cuentas_gastos WHERE funcion_cofog='Defensa'",
+		"sql_oro": "SELECT max(gasto_eur_hab_real) FILTER (WHERE anio=(SELECT max(anio) FROM mother.cuentas_gastos)) - max(gasto_eur_hab_real) FILTER (WHERE anio=2015) AS diferencia, max(gasto_eur_hab_real) FILTER (WHERE anio=2015) AS g2015, max(gasto_eur_hab_real) FILTER (WHERE anio=(SELECT max(anio) FROM mother.cuentas_gastos)) AS ultimo FROM mother.cuentas_gastos WHERE funcion_cofog='Defensa'",
 		"respuesta": {
-			"valor": 66,
-			"unidad": "€ por habitante (aumento, nominal)",
+			"valor": 14,
+			"unidad": "€ por habitante (aumento, en euros constantes de 2025)",
 			"periodo": "2015-2024",
 			"territorio": "España",
-			"detalle": "225 € en 2015 y 291 € en 2024 (+29 %)"
+			"detalle": "285 € en 2015 y 299 € en 2024 (+4,9 %), en euros de 2025"
 		},
 		"acepta": {
 			"cifras": [
 				[
-					"66 €",
-					"66 euros",
-					"+66",
-					" 66 ",
-					"29 %",
-					"29%",
-					"29,3 %",
-					"29,3%"
+					"14 €",
+					"14 euros",
+					"+14",
+					" 14 ",
+					"4,9 %",
+					"4,9%",
+					"5 %"
 				]
 			],
 			"textos": [],
-			"alternativas": "Cifra exigida: el aumento (+66 €/hab nominales, de 225 a 291; +29,3 %). En euros reales el aumento sería menor: si el modelo deflacta, revisar a mano."
+			"alternativas": "Cifra exigida: el aumento en euros constantes de 2025 (+14 €/hab, de 285 a 299; +4,9 %). El gasto por habitante de la tabla ya está deflactado."
 		}
 	},
 	{
