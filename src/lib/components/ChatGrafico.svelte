@@ -30,10 +30,18 @@
         return unicos;
     }
 
-    $: ({ x, y, serie, titulo, filas } = grafico);
-    // El tipo lo elige quien lee; parte del que traía la respuesta
+    // Fechas de DuckDB como AAAA-MM-DD (en la tabla, el eje y el CSV) y enteros grandes como números
+    const valorPlano = (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : typeof v === "bigint" ? Number(v) : v);
+    $: ({ x, y, serie, titulo } = grafico);
+    $: filas = grafico.filas.map((f) => Object.fromEntries(Object.entries(f).map(([k, v]) => [k, valorPlano(v)])));
+    // El tipo lo elige quien lee; parte del que traía la respuesta y solo vuelve a él si
+    // llega otro gráfico (el chat repinta los mensajes y pasa el mismo objeto de nuevo)
     let tipo = grafico.tipo;
-    $: tipo = grafico.tipo;
+    let graficoAnterior = grafico;
+    $: if (grafico !== graficoAnterior) {
+        graficoAnterior = grafico;
+        tipo = grafico.tipo;
+    }
     // Solo se puede dibujar si hay eje X y cifra, y más de una fila
     $: dibujable = Boolean(x && y) && filas.length > 1;
     $: tiposPosibles = dibujable ? TIPOS : ["tabla"];
