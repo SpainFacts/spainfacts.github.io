@@ -1,0 +1,226 @@
+[
+  {
+    "tabla": "sermas_lista_espera",
+    "usar": true,
+    "tema": "Lista de espera completa de la sanidad pública madrileña (consultas, pruebas y operaciones) según la memoria anual del SERMAS, incluidos los pacientes sin cita",
+    "preguntas": [
+      "¿Cuántos madrileños esperan una primera consulta con el especialista sin tener cita?",
+      "¿Cuántas personas hay en lista de espera en la Comunidad de Madrid contando a los que no tienen fecha?",
+      "¿Cuántos pacientes esperan una resonancia en Madrid?",
+      "¿Cómo ha crecido la lista de espera sin cita de traumatología en Madrid desde 2021?"
+    ],
+    "medidas": [
+      { "columna": "total_por_1000_hab", "nombre": "pacientes en lista de espera (con y sin cita) por cada 1.000 habitantes", "unidad": "por cada 1.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "total", "nombre": "pacientes en lista de espera (con y sin cita)", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "sin_cita", "nombre": "pacientes en espera sin fecha de cita asignada", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "con_cita", "nombre": "pacientes en espera con fecha de cita", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "sin_cita_pct", "nombre": "porcentaje de la lista sin cita", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "sin_cita_por_1000_hab", "nombre": "pacientes sin cita por cada 1.000 habitantes", "unidad": "por cada 1.000 habitantes", "tipo": "tasa" },
+      { "columna": "con_cita_mas_90_dias", "nombre": "pacientes con cita a más de 90 días", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "tiempo_medio_pendientes_dias", "nombre": "tiempo medio de espera de los pendientes", "unidad": "días", "tipo": "media" },
+      { "columna": "demora_prospectiva_dias", "nombre": "demora prospectiva", "unidad": "días", "tipo": "media" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de lista (consulta, prueba diagnóstica, quirúrgica)", "total": null, "defecto": "consulta" },
+      { "columna": "especialidad", "nombre": "especialidad o prueba", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "Solo Comunidad de Madrid, situación a 31 de diciembre (memoria anual del SERMAS 2015-2025). Los pacientes sin cita no salen en el informe mensual. Las pruebas son 8 técnicas y su 'Total' es la suma de las 8. No sumar especialidades con su Total."
+  },
+  {
+    "tabla": "sermas_lista_espera_mensual",
+    "usar": true,
+    "tema": "Informe mensual de listas de espera de la Comunidad de Madrid: lo publicado cada mes y los pacientes sin cita que se deducen de su propia tasa",
+    "preguntas": [
+      "¿Cuántos pacientes esperan consulta con el especialista en Madrid este mes?",
+      "¿Cuántos pacientes no aparecen en la lista de espera mensual de Madrid?",
+      "¿Cómo ha evolucionado la lista de espera quirúrgica madrileña mes a mes?",
+      "¿Cuál es la demora media para una primera consulta en Madrid?"
+    ],
+    "medidas": [
+      { "columna": "publicado", "nombre": "pacientes en espera que publica el informe mensual (con cita)", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "publicado_por_1000_hab", "nombre": "pacientes publicados por cada 1.000 habitantes", "unidad": "por cada 1.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "total_implicito", "nombre": "lista de espera que se deduce de la tasa publicada", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "no_publicado_implicito", "nombre": "pacientes contados en la tasa pero no en el número publicado", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "no_publicado_implicito_pct", "nombre": "porcentaje de la lista que no se publica", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "demora_corte_dias", "nombre": "demora media de los pendientes", "unidad": "días", "tipo": "media" },
+      { "columna": "entradas_mes", "nombre": "entradas en lista en el mes", "unidad": "personas", "tipo": "flujo" }
+    ],
+    "tiempo": { "columna": "fecha", "grano": "mensual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de lista (consulta, prueba diagnóstica, quirúrgica)", "total": null, "defecto": "consulta" }
+    ],
+    "filtros": [],
+    "notas": "Solo Comunidad de Madrid. 'publicado' no incluye a los pacientes sin cita; 'total_implicito' = tasa del informe x población asignada / 1.000 (solo consultas y pruebas). Faltan algunos meses que la Consejería no publicó en CSV."
+  },
+  {
+    "tabla": "sermas_lista_espera_comparacion",
+    "usar": true,
+    "tema": "Diferencia entre la lista de espera de la memoria anual del SERMAS, el informe mensual de diciembre y lo que Madrid envía al Ministerio de Sanidad",
+    "preguntas": [
+      "¿Cuántos pacientes en lista de espera no salen en el informe mensual de Madrid?",
+      "¿Coincide la lista de espera de la memoria del SERMAS con la que publica cada mes?",
+      "¿Qué parte de la lista de espera madrileña de consultas queda fuera de las cifras mensuales?"
+    ],
+    "medidas": [
+      { "columna": "diferencia_memoria_mensual", "nombre": "pacientes de la memoria anual que no salen en el informe mensual de diciembre", "unidad": "personas", "tipo": "nivel", "principal": true },
+      { "columna": "diferencia_memoria_mensual_pct", "nombre": "porcentaje de la lista completa que no sale en el informe mensual", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "memoria_total", "nombre": "lista completa según la memoria anual", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "mensual_publicado", "nombre": "lista publicada en el informe mensual de diciembre", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "memoria_total_por_1000_hab", "nombre": "lista completa por cada 1.000 habitantes", "unidad": "por cada 1.000 habitantes", "tipo": "tasa" },
+      { "columna": "sisle_tasa_1000", "nombre": "tasa por 1.000 habitantes enviada al Ministerio (SISLE)", "unidad": "por cada 1.000 habitantes", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de lista (consulta, prueba diagnóstica, quirúrgica)", "total": null, "defecto": "consulta" }
+    ],
+    "filtros": [],
+    "notas": "Solo Comunidad de Madrid, diciembre de cada año. En pruebas la memoria cuenta 8 técnicas y el informe mensual todas: no se comparan bien."
+  },
+  {
+    "tabla": "sermas_libre_eleccion",
+    "usar": true,
+    "tema": "Libre elección de hospital en Madrid: pacientes que cada hospital gana o pierde porque eligen otro, por especialidad, con su tipo de gestión (pública, concesión, concierto)",
+    "preguntas": [
+      "¿Qué hospital de Madrid recibe más pacientes por libre elección?",
+      "¿Cuántos pacientes de traumatología pierde el Ramón y Cajal por libre elección?",
+      "¿Cuántos pacientes gana la Fundación Jiménez Díaz con la libre elección?",
+      "¿Qué parte de las primeras consultas de la Fundación Jiménez Díaz viene de otros hospitales?"
+    ],
+    "medidas": [
+      { "columna": "saldo", "nombre": "saldo de pacientes por libre elección (entradas menos salidas)", "unidad": "citas", "tipo": "flujo", "principal": true },
+      { "columna": "entradas", "nombre": "citas entrantes por libre elección", "unidad": "citas", "tipo": "flujo" },
+      { "columna": "salidas", "nombre": "citas salientes por libre elección", "unidad": "citas", "tipo": "flujo" },
+      { "columna": "entradas_pct_primeras", "nombre": "entradas por libre elección en porcentaje de las primeras consultas del hospital", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "saldo_por_1000_hab_madrid", "nombre": "saldo por cada 1.000 habitantes de Madrid", "unidad": "por cada 1.000 habitantes", "tipo": "tasa" },
+      { "columna": "primeras_consultas", "nombre": "primeras consultas del hospital", "unidad": "consultas", "tipo": "flujo" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "hospital", "nombre": "hospital", "total": null },
+      { "columna": "gestion", "nombre": "tipo de gestión del hospital", "total": null },
+      { "columna": "especialidad", "nombre": "especialidad", "total": "Total" },
+      { "columna": "grupo_empresarial", "nombre": "grupo empresarial", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Comunidad de Madrid. Total por hospital 2014-2024; especialidades 2021-2024 (memorias de los hospitales). No sumar especialidades con el Total."
+  },
+  {
+    "tabla": "sermas_libre_eleccion_gestion",
+    "usar": true,
+    "tema": "Saldo de la libre elección de hospital en Madrid por tipo de gestión: cuántos pacientes pasan de los hospitales públicos a los de gestión privada",
+    "preguntas": [
+      "¿Cuántos pacientes ganan los hospitales privados de la red pública madrileña con la libre elección?",
+      "¿Cuántos pacientes pierden los hospitales públicos de Madrid por la libre elección?",
+      "¿Cómo ha evolucionado el saldo de libre elección de los hospitales de concesión?"
+    ],
+    "medidas": [
+      { "columna": "saldo_por_1000_hab", "nombre": "saldo de libre elección por cada 1.000 habitantes de Madrid", "unidad": "por cada 1.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "saldo", "nombre": "saldo de libre elección (entradas menos salidas)", "unidad": "citas", "tipo": "flujo" },
+      { "columna": "entradas", "nombre": "citas entrantes por libre elección", "unidad": "citas", "tipo": "flujo" },
+      { "columna": "salidas", "nombre": "citas salientes por libre elección", "unidad": "citas", "tipo": "flujo" },
+      { "columna": "entradas_pct_total", "nombre": "porcentaje de todas las citas de libre elección que entran en ese tipo de hospital", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "gestion", "nombre": "tipo de gestión del hospital", "total": null },
+      { "columna": "especialidad", "nombre": "especialidad", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "Gestión privada = concesión + concierto singular (gestion_privada = true). Especialidades solo 2021-2024."
+  },
+  {
+    "tabla": "sermas_libre_eleccion_especialidad",
+    "usar": true,
+    "tema": "Peso de la libre elección de hospital en cada especialidad en Madrid",
+    "preguntas": [
+      "¿En qué especialidad eligen más los madrileños otro hospital?",
+      "¿Qué porcentaje de las primeras consultas de traumatología en Madrid son por libre elección?",
+      "¿Cuántas consultas se hicieron por libre elección en Madrid?"
+    ],
+    "medidas": [
+      { "columna": "libre_eleccion_pct", "nombre": "consultas por libre elección en porcentaje de las primeras consultas", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "consultas_libre_eleccion", "nombre": "consultas realizadas por libre elección", "unidad": "consultas", "tipo": "flujo" },
+      { "columna": "primeras_consultas", "nombre": "primeras consultas", "unidad": "consultas", "tipo": "flujo" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "especialidad", "nombre": "especialidad", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "Memoria del SERMAS 2022-2025. Las filas 'Total área...' son subtotales (es_agregado)."
+  },
+  {
+    "tabla": "sermas_coherencia_demora",
+    "usar": true,
+    "tema": "Prueba de coherencia de las listas de espera por comunidad: espera media declarada frente a la que correspondería a su tamaño de lista",
+    "preguntas": [
+      "¿Declara Madrid menos días de espera de los que corresponden a su lista?",
+      "¿Qué comunidad tiene una espera media más baja de lo esperado para su lista de espera?",
+      "¿Es coherente la demora de las listas de espera de cada comunidad?"
+    ],
+    "medidas": [
+      { "columna": "z", "nombre": "desviación de la espera declarada respecto a la esperada, en desviaciones típicas", "unidad": "desviaciones típicas", "tipo": "indice", "principal": true },
+      { "columna": "residuo_dias", "nombre": "días de espera declarados menos los esperados", "unidad": "días", "tipo": "media" },
+      { "columna": "dias_declarados", "nombre": "tiempo medio de espera declarado", "unidad": "días", "tipo": "media" },
+      { "columna": "dias_esperados", "nombre": "tiempo medio de espera esperado por el tamaño de la lista", "unidad": "días", "tipo": "media" },
+      { "columna": "tasa_1000", "nombre": "pacientes en espera por cada 1.000 habitantes", "unidad": "por cada 1.000 habitantes", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "fecha", "grano": "semestral", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de lista (consultas, quirúrgica)", "total": null, "defecto": "consultas" }
+    ],
+    "filtros": [],
+    "notas": "Datos SISLE-SNS (Ministerio de Sanidad), cortes de junio y diciembre. Recta ajustada con las demás comunidades; un z muy negativo es un indicio, no una prueba."
+  }
+]

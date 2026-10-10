@@ -1,0 +1,331 @@
+version: 2
+
+models:
+  - name: sermas_lista_espera
+    description: "Lista de espera del Servicio Madrileño de Salud a 31 de diciembre según la Memoria anual del SERMAS (2015-2025), con la fila de pacientes sin fecha asignada (sin cita) que el informe mensual no publica. tipo consulta (primera consulta, Total y 10 especialidades), prueba (primera prueba, 8 técnicas y su suma 'Total') y quirurgica (lista estructural, 'Total'). total = lista completa (con y sin cita). Por 1.000 habitantes con la población del INE."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        description: "Año de la memoria (situación a 31 de diciembre)"
+        tests: [not_null]
+      - name: fecha_corte
+        description: "31 de diciembre del año"
+        tests: [not_null]
+      - name: tipo
+        description: "consulta (primera consulta externa), prueba (primera prueba diagnóstica) o quirurgica (lista de espera quirúrgica estructural)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['consulta', 'prueba', 'quirurgica']
+      - name: especialidad
+        description: "Especialidad (consultas: Total, Ginecología, Oftalmología, Traumatología, Dermatología, Otorrinolaringología, Neurología, Cirugía, Urología, Digestivo, Cardiología) o técnica (pruebas: Tomografía computerizada, Resonancia magnética, Ecografía, Mamografía, Endoscopia, Hemodinámica, Ecocardiografía, Ergometría, y Total = suma de las 8, cálculo propio); 'Total' en la quirúrgica"
+        tests: [not_null]
+      - name: total
+        description: "Pacientes en espera estructural, lista completa: con cita + sin cita (en la quirúrgica, pacientes en espera estructural)"
+        tests: [not_null]
+      - name: con_cita
+        description: "Pacientes con fecha de cita asignada (los repartidos por tramos de espera); null en la quirúrgica y en 2015 (sin la fila de sin cita)"
+      - name: sin_cita
+        description: "«Número de pacientes sin fecha asignada» de la memoria: esperan sin cita (desde 2016); no salen en el informe mensual. Null en la quirúrgica"
+      - name: sin_cita_pct
+        description: "% de la lista completa sin cita (0-100)"
+      - name: total_por_1000_hab
+        description: "Lista completa por 1.000 habitantes de la Comunidad de Madrid (INE)"
+      - name: sin_cita_por_1000_hab
+        description: "Pacientes sin cita por 1.000 habitantes (INE)"
+      - name: con_cita_0_30_dias
+        description: "Pacientes con cita a 0-30 días de la solicitud (quirúrgica: 0-30 días de espera)"
+      - name: con_cita_31_60_dias
+        description: "Pacientes con cita a 31-60 días"
+      - name: con_cita_61_90_dias
+        description: "Pacientes con cita a 61-90 días"
+      - name: con_cita_mas_90_dias
+        description: "Pacientes con cita a más de 90 días (quirúrgica: más de 90 días de espera)"
+      - name: mas_180_dias
+        description: "Solo quirúrgica: pacientes con más de 180 días de espera"
+      - name: prueba_control
+        description: "Solo pruebas: pacientes en espera estructural de una prueba de control (aparte de la lista de primera prueba)"
+      - name: rechazo_derivacion
+        description: "Solo quirúrgica: pacientes que rechazaron ser derivados a otro centro (fuera de la lista estructural)"
+      - name: transitoriamente_no_programables
+        description: "Solo quirúrgica: pacientes transitoriamente no programables (fuera de la lista estructural)"
+      - name: tiempo_medio_pendientes_dias
+        description: "Tiempo medio de espera de los pacientes pendientes a 31 de diciembre, en días (quirúrgica: demora media estructural)"
+      - name: demora_prospectiva_dias
+        description: "Demora media prospectiva: días que tardaría en absorberse la lista al ritmo de salidas de los 12 meses anteriores"
+      - name: tasa_memoria_1000
+        description: "Tasa por 1.000 habitantes tal como la publica la memoria (sobre población con tarjeta sanitaria)"
+      - name: entradas_anio
+        description: "Entradas en el registro en el año (consultas y pruebas)"
+      - name: salidas_anio
+        description: "Salidas del registro en el año (consultas y pruebas)"
+      - name: poblacion_asignada
+        description: "Población con tarjeta sanitaria que da la memoria"
+      - name: poblacion
+        description: "Población de la Comunidad de Madrid (INE, poblacion_territorios)"
+      - name: sin_cita_en_total_memoria
+        description: "True si el total estructural de la memoria ya incluía a los sin cita; False si no (memoria 2018 y pruebas de 2019: aquí se suman)"
+      - name: fuente_doc
+        description: "Documento y hoja de donde sale la fila"
+      - name: fuente_url
+        description: "Enlace del documento oficial"
+        tests: [not_null]
+
+  - name: sermas_lista_espera_mensual
+    description: "Informe mensual de listas de espera de la Comunidad de Madrid (consultas, pruebas y quirúrgica, 2015/2016 hasta hoy): pacientes publicados (solo con cita), tasa por 1.000 habitantes del propio informe y la lista que se deduce de esa tasa (total_implicito), que incluye a los pacientes sin cita no publicados."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: fecha
+        description: "Primer día del mes del informe"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: mes
+        tests: [not_null]
+      - name: tipo
+        description: "consulta, prueba o quirurgica"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['consulta', 'prueba', 'quirurgica']
+      - name: publicado
+        description: "Pacientes en espera estructural que publica el informe (suma de los tramos por fecha de cita: sin los pacientes sin cita)"
+        tests: [not_null]
+      - name: tasa_publicada_1000
+        description: "Tasa por 1.000 habitantes que publica el mismo informe (consultas y pruebas)"
+      - name: poblacion_asignada
+        description: "Población asignada (tarjeta sanitaria) del informe"
+      - name: total_implicito
+        description: "Lista que se deduce de la tasa publicada: tasa x población asignada / 1.000 (error de redondeo de unas ±35 personas)"
+      - name: no_publicado_implicito
+        description: "total_implicito - publicado: pacientes que cuenta la tasa pero no el número publicado (los sin cita)"
+      - name: no_publicado_implicito_pct
+        description: "% de la lista implícita que no se publica (0-100)"
+      - name: publicado_por_1000_hab
+        description: "Pacientes publicados por 1.000 habitantes (INE)"
+      - name: total_implicito_por_1000_hab
+        description: "Lista implícita por 1.000 habitantes (INE)"
+      - name: demora_corte_dias
+        description: "Demora media de los pendientes a fecha de corte, en días (quirúrgica: demora media estructural)"
+      - name: demora_prospectiva_dias
+        description: "Demora media prospectiva, en días"
+      - name: espera_media_atendidos_dias
+        description: "Espera media de los atendidos en el mes, en días"
+      - name: con_cita_0_30_dias
+      - name: con_cita_31_60_dias
+      - name: con_cita_61_90_dias
+      - name: con_cita_mas_90_dias
+      - name: quirurgica_total_registro
+        description: "Solo quirúrgica: total del registro (estructural + rechazo de derivación + transitoriamente no programables)"
+      - name: rechazo_derivacion
+      - name: transitoriamente_no_programables
+      - name: entradas_mes
+      - name: salidas_mes
+      - name: poblacion
+        description: "Población de la Comunidad de Madrid (INE; el último año con dato para los meses posteriores)"
+      - name: fuente_url
+        tests: [not_null]
+
+  - name: sermas_lista_espera_comparacion
+    description: "La lista de espera de diciembre de cada año en tres documentos oficiales: Memoria anual del SERMAS (lista completa con sin cita), informe mensual de diciembre (solo con cita) y SISLE-SNS del Ministerio de Sanidad. Diferencia entre memoria y lo publicado cada mes."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: fecha_corte
+        tests: [not_null]
+      - name: tipo
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['consulta', 'prueba', 'quirurgica']
+      - name: memoria_total
+        description: "Lista completa de la memoria anual (con y sin cita)"
+      - name: memoria_con_cita
+      - name: memoria_sin_cita
+      - name: mensual_publicado
+        description: "Pacientes que publica el informe mensual de diciembre"
+      - name: mensual_total_implicito
+        description: "Lista que se deduce de la tasa del informe mensual de diciembre"
+      - name: mensual_no_publicado_implicito
+      - name: sisle_pacientes
+        description: "Pacientes que publica el SISLE-SNS (solo quirúrgica)"
+      - name: sisle_pacientes_estimados
+        description: "Consultas: tasa del SISLE x población asignada del informe mensual / 1.000 (estimación propia)"
+      - name: sisle_tasa_1000
+      - name: mensual_tasa_1000
+      - name: memoria_total_por_1000_hab
+        description: "Lista completa de la memoria por 1.000 habitantes (INE)"
+      - name: mensual_publicado_por_1000_hab
+        description: "Lista publicada en el informe mensual por 1.000 habitantes (INE)"
+      - name: diferencia_memoria_mensual
+        description: "memoria_total - mensual_publicado"
+      - name: diferencia_memoria_mensual_pct
+        description: "% de la lista completa de la memoria que no sale en el informe mensual (0-100)"
+      - name: memoria_dias_pendientes
+      - name: mensual_demora_corte_dias
+      - name: sisle_dias_medio
+
+  - name: sermas_libre_eleccion
+    description: "Libre elección de hospital en la Comunidad de Madrid: citas entrantes, salientes y saldo por hospital, año (2014-2024) y especialidad (2021-2024), con el tipo de gestión del hospital y las primeras consultas del hospital en esa especialidad. Memoria del SERMAS (totales hasta 2023) y memoria de cada hospital (especialidades y total de 2024)."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: hospital_id
+        description: "Identificador del hospital (seed sermas_hospitales; mismo id que sanidad_privada_concesiones)"
+        tests: [not_null]
+      - name: hospital
+        tests: [not_null]
+      - name: gestion
+        description: "publica, concesion (Rey Juan Carlos, Infanta Elena, Villalba: Quirónsalud; Torrejón: Ribera), concierto_singular (Fundación Jiménez Díaz, Quirónsalud) o convenio (Gómez Ulla, Ministerio de Defensa)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['publica', 'concesion', 'concierto_singular', 'convenio']
+      - name: gestion_privada
+        description: "True en concesión y concierto singular"
+      - name: grupo_empresarial
+        description: "Quirónsalud o Ribera (según la memoria 2024 de cada hospital); vacío en los públicos"
+      - name: especialidad
+        description: "'Total' o especialidad con nombre normalizado (Traumatología, Ginecología, Aparato Digestivo, Urología...)"
+        tests: [not_null]
+      - name: entradas
+        description: "Citas entrantes: pacientes de otro hospital que eligen este"
+      - name: salidas
+        description: "Citas salientes: pacientes asignados a este hospital que eligen otro"
+      - name: saldo
+        description: "entradas - salidas (positivo = gana pacientes)"
+      - name: primeras_consultas
+        description: "Primeras consultas del hospital en el año y especialidad (memoria del hospital, 2021-2024)"
+      - name: entradas_pct_primeras
+        description: "Entradas por libre elección en % de las primeras consultas del hospital (0-100)"
+      - name: saldo_por_1000_hab_madrid
+        description: "Saldo por 1.000 habitantes de la Comunidad de Madrid (INE)"
+      - name: fuente
+        description: "memoria_sermas (balance de la memoria anual del SERMAS) o memoria_hospital"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['memoria_sermas', 'memoria_hospital']
+      - name: hospital_informe
+        description: "Nombre del hospital tal como sale en el documento"
+      - name: fuente_url
+        tests: [not_null]
+
+  - name: sermas_libre_eleccion_gestion
+    description: "Libre elección de hospital por tipo de gestión y año: entradas, salidas y saldo neto de los hospitales públicos, de concesión, del concierto singular (FJD) y del convenio (Gómez Ulla), en total y por 1.000 habitantes de Madrid."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: especialidad
+        tests: [not_null]
+      - name: gestion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['publica', 'concesion', 'concierto_singular', 'convenio']
+      - name: gestion_privada
+        description: "True en concesión y concierto singular"
+      - name: hospitales
+        description: "Hospitales de ese tipo con dato"
+      - name: entradas
+      - name: salidas
+      - name: saldo
+        description: "entradas - salidas de los hospitales de ese tipo"
+      - name: primeras_consultas
+      - name: entradas_pct_total
+        description: "% de todas las citas de libre elección del año que entran en hospitales de ese tipo (0-100)"
+      - name: saldo_por_1000_hab
+        description: "Saldo neto por 1.000 habitantes de la Comunidad de Madrid (INE)"
+      - name: entradas_por_1000_hab
+      - name: poblacion
+
+  - name: sermas_libre_eleccion_especialidad
+    description: "Memoria anual del SERMAS, balance por especialidad (2022-2025): primeras consultas y consultas por libre elección de cada especialidad y su peso en %."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la Comunidad de Madrid ('13')"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: especialidad
+        tests: [not_null]
+      - name: es_agregado
+        description: "True en las filas de total (Total, Total área médica / quirúrgica / pediátrica / obstétrica)"
+      - name: primeras_consultas
+      - name: consultas_libre_eleccion
+      - name: libre_eleccion_pct
+        description: "consultas por libre elección / primeras consultas (0-100)"
+      - name: dato_repetido
+        description: "True si la fila repite exactamente la del año anterior (la memoria 2024 copia el Total área médica de 2023)"
+      - name: fuente_url
+        tests: [not_null]
+
+  - name: sermas_coherencia_demora
+    description: "Prueba de coherencia del SISLE-SNS: para cada corte semestral, tipo de lista y comunidad, espera media declarada frente a la esperada por su tasa de pacientes por 1.000 habitantes (recta ajustada con las demás comunidades) y su desviación en desviaciones típicas (z)."
+    columns:
+      - name: fecha
+        tests: [not_null]
+      - name: anio
+      - name: corte
+      - name: tipo
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['consultas', 'quirurgica']
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: tasa_1000
+        description: "Pacientes en espera por 1.000 habitantes (SISLE)"
+      - name: dias_declarados
+        description: "Tiempo medio de espera declarado (días)"
+      - name: dias_esperados
+        description: "Tiempo medio que correspondería a su tasa según la recta de las demás comunidades"
+      - name: residuo_dias
+        description: "declarados - esperados (negativo = declara menos espera de la esperada)"
+      - name: z
+        description: "Residuo en desviaciones típicas de los residuos de las demás comunidades"
+      - name: pendiente_dias_por_punto_tasa
+        description: "Días de espera adicionales por cada paciente más por 1.000 habitantes, en la recta de las demás"
+      - name: r2
+        description: "R² de la recta (0-1)"
+      - name: n_comunidades
+        description: "Comunidades usadas en la recta"

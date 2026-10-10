@@ -1,0 +1,282 @@
+version: 2
+
+models:
+  - name: educacion_privada_alumnado
+    description: "Alumnado de enseñanzas no universitarias de régimen general por comunidad autónoma (y España, cod_ccaa '00'), curso, enseñanza y titularidad/financiación del centro (Ministerio de Educación, FP y Deportes, EDUCAbase). Pública / Privada desde 1990-91; la Privada se separa en concertada y no concertada desde 2011-12 (tabla 1.1 de cada curso). El último curso (es_avance) es de avance y solo trae Pública / Privada. País Vasco y Navarra tienen mucha concertada por motivos históricos (ikastolas y cooperativas de enseñanza integradas en la red concertada, colegios religiosos) y Madrid por la expansión de los conciertos desde los 2000: comparar con la sanidad no es inmediato."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad; '00' = España (incluye Ceuta y Melilla)"
+        tests: [not_null]
+      - name: ccaa
+        description: "Nombre de la comunidad (main.territorios); 'España' en la fila nacional"
+        tests: [not_null]
+      - name: curso
+        description: "Curso académico, '2024-2025'"
+        tests: [not_null]
+      - name: anio
+        description: "Año de fin del curso (2024-2025 -> 2025)"
+        tests: [not_null]
+      - name: ensenanza
+        description: "Total (todo el régimen general), Infantil primer ciclo, Infantil segundo ciclo, Primaria, ESO, Bachillerato (presencial y a distancia), FP grado básico, FP grado medio y FP grado superior (presencial y a distancia, sin cursos de especialización), Educación especial"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Infantil primer ciclo', 'Infantil segundo ciclo', 'Primaria', 'ESO', 'Bachillerato', 'FP grado básico', 'FP grado medio', 'FP grado superior', 'Educación especial']
+      - name: orden_ensenanza
+        description: "Orden para gráficas (0 = Total)"
+      - name: titularidad
+        description: "Total, Pública, Privada (concertada + no concertada), Privada concertada, Privada no concertada (estas dos solo desde 2011-12 y no en el curso de avance)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Pública', 'Privada', 'Privada concertada', 'Privada no concertada']
+      - name: alumnos
+        description: "Alumnado matriculado (personas)"
+        tests: [not_null]
+      - name: cuota_pct
+        description: "% del alumnado de la misma comunidad, curso y enseñanza (0-100)"
+        tests: [not_null]
+      - name: es_avance
+        description: "true en el curso de datos de avance (provisional)"
+        tests: [not_null]
+      - name: fuente
+        description: "Tabla de EDUCAbase de la que sale la fila"
+
+  - name: educacion_privada_conciertos
+    description: "Gasto público en conciertos y subvenciones a la enseñanza privada por comunidad autónoma (consejería de educación) y año, en millones de euros corrientes y reales, euros reales por habitante y por alumno de la concertada, y peso sobre el gasto en educación de la consejería (Ministerio de Educación, FP y Deportes, Estadística del Gasto Público en Educación, series 1 y 7). España ('00') = total nacional, con el Ministerio (Ceuta y Melilla). Desde 1992 para España; cada comunidad desde que asumió las competencias educativas (el primer año puede ser parcial: Madrid y Murcia en 1999). País Vasco y Navarra pagan mucho en conciertos por su red histórica de ikastolas y cooperativas."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad; '00' = España"
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: conciertos_meur
+        description: "Gasto en conciertos y subvenciones a centros privados, millones de euros corrientes"
+        tests: [not_null]
+      - name: conciertos_meur_real
+        description: "Lo mismo en millones de euros constantes de anio_base"
+      - name: conciertos_eur_hab_real
+        description: "Euros constantes por habitante (población a 1 de enero)"
+      - name: gasto_educacion_meur
+        description: "Gasto público en educación de la consejería de educación (España: Ministerio + consejerías), sin capítulos financieros, millones de euros corrientes"
+      - name: gasto_educacion_meur_real
+        description: "Lo mismo en millones de euros constantes"
+      - name: peso_pct
+        description: "% de conciertos sobre el gasto en educación de la consejería (0-100)"
+      - name: alumnos_concertada
+        description: "Alumnado en enseñanza privada concertada (régimen general) del curso que termina en el año; desde 2012"
+      - name: conciertos_eur_alumno_real
+        description: "Euros constantes de conciertos por alumno de la concertada; desde 2012"
+      - name: poblacion
+        description: "Población a 1 de enero (INE)"
+      - name: anio_base
+        description: "Año de los euros constantes"
+
+  - name: educacion_privada_universidades
+    description: "Estudiantes matriculados en universidades públicas y privadas por comunidad de la universidad, curso, nivel (Grado con las antiguas licenciaturas desde 1985-86; Máster desde 2006-07; Grado y máster) y modalidad (todas, presencial, no presencial), con la cuota de cada tipo (Ministerio de Ciencia, Innovación y Universidades, SIIU, Estadística de Estudiantes Universitarios). Las universidades privadas no presenciales (UNIR en La Rioja, VIU en la C. Valenciana, UOC en Cataluña, UDIMA en Madrid...) cuentan en la comunidad de su sede: para comparar comunidades, mejor modalidad 'Presencial'. España ('00') incluye UNED y UIMP. El último curso es provisional."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad de la universidad; '00' = España"
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: curso
+        tests: [not_null]
+      - name: anio
+        description: "Año de fin del curso"
+        tests: [not_null]
+      - name: nivel
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Grado', 'Máster', 'Grado y máster']
+      - name: modalidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Todas', 'Presencial', 'No presencial']
+      - name: tipo_universidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Pública', 'Privada']
+      - name: estudiantes
+        description: "Estudiantes matriculados (personas)"
+        tests: [not_null]
+      - name: cuota_pct
+        description: "% de los estudiantes de la misma comunidad, curso, nivel y modalidad (0-100)"
+      - name: es_provisional
+        description: "true en el último curso (datos provisionales)"
+
+  - name: educacion_privada_universidades_numero
+    description: "Número de universidades con actividad por comunidad autónoma de la sede, curso, tipo (pública/privada) y modalidad, desde 2015-16 (SIIU, Estadística de Universidades, Centros y Titulaciones). España ('00') incluye las de ámbito estatal (UNED, UIMP)."
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: curso
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: modalidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Todas', 'Presencial', 'No presencial', 'Especial']
+      - name: tipo_universidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Pública', 'Privada']
+      - name: universidades
+        description: "Número de universidades con actividad"
+        tests: [not_null]
+
+  - name: educacion_privada_fp
+    description: "Alumnado de formación profesional por comunidad autónoma, curso, grado (Básico, Medio, Superior), modalidad (Todas, Presencial, A distancia), familia profesional y titularidad (EDUCAbase). Con familia 'Total' hay las cinco titularidades (incluida la concertada) desde 2011-12; por familia profesional solo Pública / Privada, desde 2016-17. El alumnado a distancia de centros privados se cuenta en la comunidad de la sede del centro."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad; '00' = España"
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: curso
+        tests: [not_null]
+      - name: anio
+        description: "Año de fin del curso"
+        tests: [not_null]
+      - name: grado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Básico', 'Medio', 'Superior']
+      - name: modalidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Todas', 'Presencial', 'A distancia']
+      - name: familia
+        description: "Familia profesional unificada entre cursos ('Sanidad', 'Informática y comunicaciones'...) o 'Total'"
+        tests: [not_null]
+      - name: titularidad
+        description: "Total, Pública, Privada, Privada concertada, Privada no concertada (las dos últimas solo con familia 'Total')"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Pública', 'Privada', 'Privada concertada', 'Privada no concertada']
+      - name: alumnos
+        description: "Alumnado matriculado (personas)"
+        tests: [not_null]
+      - name: cuota_pct
+        description: "% del alumnado del mismo grupo (comunidad, curso, grado, modalidad, familia), 0-100"
+        tests: [not_null]
+
+  - name: educacion_privada_fp_ciclos
+    description: "Alumnado de FP por ciclo formativo (título) y familia profesional, comunidad autónoma, curso, grado, modalidad y titularidad (Total / Pública / Privada), desde 2016-17 (EDUCAbase, gen-ciclos-fp). El detalle por título muestra ciclos donde la privada es mayoría aunque no lo sea en el total."
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: curso
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: grado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Básico', 'Medio', 'Superior']
+      - name: modalidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Todas', 'Presencial', 'A distancia']
+      - name: familia
+        tests: [not_null]
+      - name: ciclo
+        description: "Nombre del ciclo formativo (sin el código de la fuente)"
+        tests: [not_null]
+      - name: titularidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Pública', 'Privada']
+      - name: alumnos
+        tests: [not_null]
+      - name: cuota_pct
+        description: "% del alumnado del mismo ciclo, comunidad, curso, grado y modalidad (0-100)"
+
+  - name: educacion_privada_conciertos_ensenanza
+    description: "Transferencias de las administraciones educativas a centros privados (conciertos y subvenciones) por comunidad, año y enseñanza, incluida la universitaria, desde 2017 (Estadística del Gasto Público en Educación, tabla anual). Millones de euros corrientes y reales, peso sobre el total de la administración y euros reales por alumno de la concertada de la misma enseñanza. Asturias incluye el bachillerato en ESO; Galicia incluyó en 2017 la ESO en primaria."
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: ensenanza
+        description: "Total (con universitaria), Total no universitaria, Infantil y primaria, Infantil, Infantil primer ciclo, Infantil segundo ciclo, Primaria, Secundaria y FP, ESO, Bachillerato, FP, FP grado medio, FP grado superior, FP grado básico, Educación especial, Otras enseñanzas, Universitaria"
+        tests: [not_null]
+      - name: transferencias_meur
+        description: "Millones de euros corrientes"
+        tests: [not_null]
+      - name: transferencias_meur_real
+        description: "Millones de euros constantes de anio_base"
+      - name: peso_pct
+        description: "% sobre el total de transferencias a centros privados de la misma administración y año"
+      - name: alumnos_concertada
+        description: "Alumnado de la concertada en esa enseñanza (curso que termina en el año)"
+      - name: eur_alumno_concertada_real
+        description: "Euros constantes por alumno de la concertada"
+      - name: anio_base
+
+  - name: educacion_privada_universidades_lista
+    description: "Universidades del Registro de Universidades, Centros y Títulos (RUCT): comunidad, tipo (pública/privada), si es de la Iglesia, ánimo de lucro y norma y fecha de creación o reconocimiento, con enlace a la ficha oficial. Las de ámbito estatal (UNED, UIMP) figuran en la comunidad de su sede."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad de la sede"
+        tests: [not_null]
+      - name: ccaa
+        tests: [not_null]
+      - name: codigo_ruct
+        tests: [not_null, unique]
+      - name: universidad
+        tests: [not_null]
+      - name: tipo_universidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Pública', 'Privada']
+      - name: es_iglesia
+        description: "Privada de la Iglesia católica o concordataria"
+      - name: animo_lucro
+        description: "true/false según el RUCT; NULL si no consta"
+      - name: tipo_disposicion
+        description: "Ley Estatal, Ley Autonómica, Decreto, Real Decreto..."
+      - name: boletin
+      - name: fecha_disposicion
+      - name: anio_reconocimiento
+        description: "Año de la disposición de creación o reconocimiento"
+        tests: [not_null]
+      - name: fuente_url
+        description: "Ficha de la universidad en el RUCT"
+        tests: [not_null]

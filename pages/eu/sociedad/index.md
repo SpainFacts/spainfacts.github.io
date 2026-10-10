@@ -3,7 +3,7 @@ title: Gizartea
 description: "Kriminalitatea, osasuna, immigrazioa, errenta eta pobrezia, hezkuntza eta hauteskundeak Espainian, datu ofizialekin, biztanleko eta EBrekin alderatuta."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 92ce41e90090
+i18n_origen: b5a51b86957e
 ---
 
 <script>
@@ -171,6 +171,10 @@ Nola bizi garen Espainian: segurtasuna, osasuna, kanpotik datorren biztanleria, 
     <a href="/eu/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Hezkuntza</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Eskola-uzte goiztiarra, helduen ikasketa-maila, ez ikasten ez lanean ari diren gazteak, biztanleko eta ikasleko gastua, LH eta PISA, EBrekin alderatuta eta erkidegoka.</p>
+    </a>
+    <a href="/eu/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Publikoa eta pribatua</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Osasun eta hezkuntza publikoen zein zati ematen den enpresa eta zentro pribatuen bidez: itunak, emakida-ospitaleak, aseguruak, itunpekoa, LH eta unibertsitate pribatuak.</p>
     </a>
     <a href="/eu/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Hauteskundeak</p>

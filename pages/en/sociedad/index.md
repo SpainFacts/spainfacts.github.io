@@ -1,7 +1,7 @@
 ---
 title: Society
 description: "Crime, health, immigration, income and poverty, education and elections in Spain with official data, per inhabitant and compared with the EU."
-i18n_origen: 92ce41e90090
+i18n_origen: b5a51b86957e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -164,6 +164,10 @@ How we live in Spain: safety, health, the population arriving from abroad, incom
     <a href="/en/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Education</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Early school leaving, adult educational attainment, young people not in education, employment or training, spending per inhabitant and per pupil, vocational training and PISA, against the EU and by region.</p>
+    </a>
+    <a href="/en/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Public and private</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How much of public healthcare and education is delivered through private companies and schools: healthcare contracts, concession hospitals, insurance, state-funded private schools, vocational training and private universities.</p>
     </a>
     <a href="/en/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Elections</p>

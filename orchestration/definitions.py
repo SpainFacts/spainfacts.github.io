@@ -56,6 +56,10 @@ from ingestion.mercado import mercado
 from ingestion.pensiones import pensiones
 from ingestion.renta import renta
 from ingestion.sanidad import sanidad
+from ingestion.gasto_oculto import gasto_oculto
+from ingestion.sermas import sermas
+from ingestion.educacion_privada import educacion_privada
+from ingestion.sanidad_privada import sanidad_privada
 from ingestion.turismo import turismo
 from ingestion.vivienda import vivienda
 from ingestion.hacienda_ccaa import hacienda_ccaa
@@ -321,6 +325,32 @@ def sanidad_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResou
     yield from dlt_resource.run(context=context)
 
 
+# Lo que no sale en la cifra resumida: ejecución presupuestaria por concepto, modificaciones de crédito,
+# convalidaciones de gasto y contratos menores (Comunidad de Madrid).
+@dlt_assets(dlt_source=gasto_oculto(), dlt_pipeline=_pipeline_motherduck("gasto_oculto"), name="gasto_oculto", group_name="ingesta_mensual")
+def gasto_oculto_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Servicio Madrileño de Salud: lista de espera real (con y sin cita) y libre elección, de sus memorias anuales.
+@dlt_assets(dlt_source=sermas(), dlt_pipeline=_pipeline_motherduck("sermas"), name="sermas", group_name="ingesta_mensual")
+def sermas_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Educación pública, concertada y privada por comunidad (EDUCAbase, SIIU y RUCT).
+@dlt_assets(dlt_source=educacion_privada(), dlt_pipeline=_pipeline_motherduck("educacion_privada"), name="educacion_privada", group_name="ingesta_mensual")
+def educacion_privada_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Sanidad pública y privada: EGSP por comunidad y clasificación (conciertos), Catálogo Nacional de
+# Hospitales, cobertura sanitaria de las encuestas de salud del INE y gasto en sanidad de la EPF.
+@dlt_assets(dlt_source=sanidad_privada(), dlt_pipeline=_pipeline_motherduck("sanidad_privada"), name="sanidad_privada", group_name="ingesta_mensual")
+def sanidad_privada_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # Resultados electorales oficiales (Interior, infoelectoral): Congreso, Municipales y Europeas.
 # Al celebrarse unas elecciones nuevas hay que añadirlas a PROCESOS en ingestion/elecciones.py.
 @dlt_assets(dlt_source=elecciones(), dlt_pipeline=_pipeline_motherduck("elecciones"), name="elecciones", group_name="ingesta_mensual")
@@ -459,7 +489,7 @@ dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa", "medios_sector", "medios_confianza", "medios_libertad", "medios_subvenciones_pv"}
+PIPELINE_POR_TEMA = {"clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa", "medios_sector", "medios_confianza", "medios_libertad", "medios_subvenciones_pv", "sanidad_privada", "educacion_privada", "sermas", "gasto_oculto"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -530,7 +560,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_subvenciones_pv_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, medios_sector_assets, medios_confianza_assets, medios_libertad_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, sanidad_privada_assets, educacion_privada_assets, elecciones_assets, internacional_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_subvenciones_pv_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, medios_sector_assets, medios_confianza_assets, medios_libertad_assets, sermas_assets, gasto_oculto_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={

@@ -1,0 +1,246 @@
+version: 2
+
+models:
+  - name: sanidad_privada_gasto
+    description: >
+      Gasto sanitario público de cada comunidad autónoma por partidas (Ministerio de Sanidad,
+      Estadística de Gasto Sanitario Público, cuentas satélite), 2002-último año, en millones de
+      euros corrientes y constantes, euros por habitante y peso sobre el total. Tres clasificaciones:
+      económica (personal, consumo intermedio, conciertos, transferencias/farmacia, capital),
+      funcional (hospitalaria y especializada, primaria, salud pública, farmacia...) y compras a
+      productores de mercado (conciertos hospitalarios, especializados, de primaria, traslado,
+      prótesis y farmacia). Qué es concierto: compra de asistencia a centros que no pertenecen al
+      sector público (con o sin ánimo de lucro) más pagos a otras administraciones por servicios
+      concertados. Cataluña: su peso alto de conciertos es la red XHUP/SISCAT de fundaciones,
+      consorcios no públicos y entidades sin ánimo de lucro, no privatización con ánimo de lucro (los
+      consorcios y empresas públicos son producción propia). Madrid: las cuatro concesiones
+      capitativas y la Fundación Jiménez Díaz entran en conciertos. Comunitat Valenciana: las cápitas
+      del modelo Alzira NO aparecen en conciertos (los hospitalarios concertados no superan 130 M€ ni
+      bajan con las reversiones); su consumo intermedio pesa unos 10 puntos más que la media, que es
+      donde parecen anotarse. Los hospitales PFI de Madrid pagan su canon en consumo intermedio.
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad; '00' = sector Comunidades Autónomas (suma de las 17, sin Ceuta y Melilla, que gestiona el INGESA)"
+        tests: [not_null]
+      - name: ccaa
+        description: "Nombre de la comunidad; 'Total comunidades autónomas' para '00'"
+      - name: anio
+        tests: [not_null]
+      - name: clasificacion
+        description: "'economica', 'funcional' o 'mercado' (compras a productores de mercado, de la cuenta satélite)"
+        tests:
+          - accepted_values:
+              values: ['economica', 'funcional', 'mercado']
+      - name: partida_id
+        description: "Identificador de la partida. economica: remuneracion_personal, consumo_intermedio, consumo_capital_fijo, conciertos, transferencias_corrientes, gasto_capital, total. funcional: hospitalarios_especializados, primaria, salud_publica, servicios_colectivos, farmacia, traslado_protesis, gasto_capital, total. mercado: hospitalarios, especializados, primaria, traslado, protesis, farmacia, conciertos_sin_aapp, total. No sumar partidas con total, ni conciertos_sin_aapp con sus componentes."
+        tests: [not_null]
+      - name: partida
+        description: "Nombre de la partida para mostrar"
+      - name: orden
+        description: "Orden de la partida dentro de su clasificación (total = 9)"
+      - name: gasto_meur
+        description: "Millones de euros corrientes"
+      - name: gasto_meur_real
+        description: "Millones de euros constantes de anio_base (deflactor IPC)"
+      - name: gasto_eur_hab
+        description: "Euros corrientes por habitante (población a 1 de julio)"
+      - name: gasto_eur_hab_real
+        description: "Euros constantes por habitante"
+      - name: peso_pct
+        description: "% sobre el total de la comunidad: gasto consolidado del subsector para 'economica' y 'mercado'; aportación al gasto consolidado para 'funcional'"
+      - name: provisional
+        description: "Verdadero en los dos últimos años (cifras provisionales del EGSP)"
+      - name: anio_base
+        description: "Año de los euros constantes"
+  - name: sanidad_privada_gestion_privada
+    description: >
+      Hospitales públicos de gestión privada con población asignada: concesiones capitativas del
+      modelo Alzira (La Ribera, Torrevieja, Dénia, Manises, Vinalopó) y de Madrid (Infanta Elena,
+      Rey Juan Carlos, Torrejón, General de Villalba), conciertos singulares con población asignada
+      (Fundación Jiménez Díaz, Povisa) y, aparte, los hospitales madrileños PFI de 2008 (concesión de
+      obra y servicios no sanitarios; personal sanitario público). Empresa al inicio y hoy, años de
+      inicio y reversión, duración, población asignada más reciente, cápita si es pública y fuentes
+      (seed sanidad_privada_concesiones, una cita por fila y fiabilidad alta/media/baja).
+    columns:
+      - name: hospital_id
+        tests: [unique, not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: modelo
+        description: "concesion_capitativa, concierto_singular o pfi_no_sanitaria"
+        tests:
+          - accepted_values:
+              values: ['concesion_capitativa', 'concierto_singular', 'pfi_no_sanitaria']
+      - name: anio_reversion
+        description: "Año de reversión a gestión pública directa (vacío si sigue privada)"
+      - name: fecha_reversion
+        description: "Fecha de reversión (decreto del DOGV)"
+      - name: en_gestion_privada
+        description: "Verdadero si sigue en gestión privada (octubre de 2026)"
+      - name: duracion_contrato_anios
+        description: "Duración del contrato en años (Madrid: 30 según prensa salvo la FJD, verificada en su memoria)"
+      - name: poblacion_asignada
+        description: "Población asignada más reciente (tarjeta sanitaria SIP o población de referencia)"
+      - name: poblacion_anio
+        description: "Año de la población asignada (situación a 31 de diciembre)"
+      - name: capita_eur
+        description: "Pago anual por habitante (cápita), solo si hay cifra oficial o citada de documento oficial"
+      - name: capita_anio
+        description: "Año o periodo de la cápita (texto: '2009-2015' es una media del periodo)"
+      - name: fiabilidad
+        description: "alta (fuente oficial vista), media (oficial indirecta o cálculo propio sobre tabla oficial), baja (solo prensa)"
+  - name: sanidad_privada_cobertura
+    description: >
+      Población cuya asistencia sanitaria pública está asignada a un hospital de gestión privada
+      (concesión capitativa o concierto singular con población asignada), por comunidad y año desde
+      1999, y su % sobre la población de la comunidad; aparte, la población de los hospitales PFI.
+      Comunitat Valenciana y Comunidad de Madrid. La población de cada hospital fuera del año de su
+      cifra oficial se estima manteniendo su peso en la población de la comunidad
+      (poblacion_estimada).
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: anio
+        description: "Año (situación a 31 de diciembre)"
+        tests: [not_null]
+      - name: hospitales_gestion_privada
+        description: "Hospitales de concesión capitativa o concierto singular con población asignada activos a 31-12"
+      - name: poblacion_gestion_privada
+        description: "Población asignada a esos hospitales (concesión + concierto singular)"
+      - name: poblacion_concesion
+        description: "Parte de concesiones capitativas"
+      - name: poblacion_concierto_singular
+        description: "Parte de conciertos singulares (Fundación Jiménez Díaz)"
+      - name: poblacion_ccaa
+        description: "Población de la comunidad a 1 de enero del año siguiente (INE)"
+      - name: poblacion_gestion_privada_pct
+        description: "% de la población de la comunidad asignada a hospitales de gestión privada"
+      - name: hospitales_pfi
+        description: "Hospitales PFI (solo servicios no sanitarios privados)"
+      - name: poblacion_pfi
+        description: "Población asignada a hospitales PFI"
+      - name: poblacion_pfi_pct
+        description: "% de la población de la comunidad asignada a hospitales PFI"
+      - name: poblacion_estimada
+        description: "Verdadero si alguna población del año es estimada (no oficial de ese año)"
+      - name: hospitales
+        description: "Lista de hospitales de gestión privada activos"
+  - name: sanidad_privada_seguros
+    description: >
+      Población con seguro sanitario privado por comunidad según las encuestas de salud del INE:
+      ENSE 2006, 2011-12 y 2017 (todas las edades) y EESE 2020 (15 y más años). Modalidad de
+      cobertura exclusiva: solo pública, solo privada, mixta (doble cobertura) y otras;
+      con_seguro_privado_pct = solo privada + mixta. Por sexo ('Ambos sexos' por defecto).
+    columns:
+      - name: cod_ccaa
+        description: "Código INE; '00' = España; incluye Ceuta (18) y Melilla (19) salvo en 2006"
+        tests: [not_null]
+      - name: anio
+        description: "Año de referencia de la encuesta (2011 = ENSE 2011-2012)"
+        tests: [not_null]
+      - name: encuesta
+        description: "ENSE 2006, ENSE 2011-2012, ENSE 2017 o EESE 2020"
+      - name: ambito_poblacion
+        description: "'Todas las edades' (ENSE) o '15 y más años' (EESE 2020)"
+      - name: sexo
+        description: "'Ambos sexos', 'Hombres' o 'Mujeres'"
+        tests:
+          - accepted_values:
+              values: ['Ambos sexos', 'Hombres', 'Mujeres']
+      - name: publica_exclusiva_pct
+        description: "% solo con sanidad pública"
+      - name: privada_exclusiva_pct
+        description: "% solo con seguro privado"
+      - name: mixta_pct
+        description: "% con sanidad pública y seguro privado (doble cobertura)"
+      - name: otras_pct
+        description: "% en otras situaciones (sin seguro, otras)"
+      - name: con_seguro_privado_pct
+        description: "% con seguro privado (privada exclusivamente + mixta)"
+  - name: sanidad_privada_seguros_barometro
+    description: >
+      Personas con seguro médico privado por comunidad según el Barómetro Sanitario (Ministerio de
+      Sanidad y CIS) en 2018, 2019, 2023 y 2024, contratado por la persona o su familia o por la
+      empresa (Tabla 1 del informe del Ministerio «Evaluación de la sanidad privada en el sistema
+      sanitario de España», diciembre de 2025). Encuesta de opinión: no se mezcla con la serie del
+      INE (sanidad_privada_seguros).
+    columns:
+      - name: cod_ccaa
+        description: "Código INE; '00' = España"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: seguro_individual_pct
+        description: "% con seguro contratado por la persona o su familia"
+      - name: seguro_empresa_pct
+        description: "% con seguro contratado por la empresa"
+      - name: seguro_privado_pct
+        description: "% con seguro privado (suma de los dos)"
+  - name: sanidad_privada_gasto_hogares
+    description: >
+      Gasto de los hogares en sanidad (grupo 06 de la Encuesta de Presupuestos Familiares del INE:
+      medicamentos, aparatos, consultas, dentista, servicios hospitalarios pagados de su bolsillo;
+      las primas de seguros médicos van en otro grupo) por comunidad: gasto medio por persona y por
+      hogar en euros corrientes y constantes y % del gasto del hogar. Dos series: 'ecoicop' (tabla
+      73991, 2016-, por defecto) y 'base_2006' (tabla 28486, 2006-2023).
+    columns:
+      - name: cod_ccaa
+        description: "Código INE; '00' = España"
+        tests: [not_null]
+      - name: anio
+        tests: [not_null]
+      - name: serie_epf
+        description: "'ecoicop' (tabla 73991, 2016-) o 'base_2006' (tabla 28486, 2006-2023); no mezclar sin avisar"
+        tests:
+          - accepted_values:
+              values: ['ecoicop', 'base_2006']
+      - name: gasto_persona_eur
+        description: "Gasto medio anual por persona en sanidad, euros corrientes"
+      - name: gasto_persona_eur_real
+        description: "Gasto medio por persona, euros constantes de anio_base"
+      - name: gasto_hogar_eur
+        description: "Gasto medio anual por hogar en sanidad, euros corrientes"
+      - name: gasto_hogar_eur_real
+        description: "Gasto medio por hogar, euros constantes de anio_base"
+      - name: peso_gasto_pct
+        description: "% del gasto total de los hogares que va a sanidad"
+  - name: sanidad_privada_hospitales
+    description: >
+      Hospitales y camas instaladas por comunidad según la dependencia funcional (pública, privada,
+      mutua, ONG) y la vinculación con el SNS (red de utilización pública, concierto sustitutorio,
+      concierto parcial, sin concierto), con camas por 100.000 habitantes y % de hospitales y camas
+      de la comunidad (Ministerio de Sanidad, Catálogo Nacional de Hospitales, ediciones desde
+      2020). El catálogo clasifica como públicos los hospitales de concesión capitativa (Valdemoro,
+      Villalba, Torrejón, Rey Juan Carlos, Vinalopó): no sirve para medir la gestión privada por
+      concesión; sí la red privada concertada (XHUP catalana, Fundación Jiménez Díaz...).
+    columns:
+      - name: cod_ccaa
+        description: "Código INE; '00' = España"
+        tests: [not_null]
+      - name: anio
+        description: "Año de la situación descrita (31 de diciembre); edición del catálogo = anio + 1"
+        tests: [not_null]
+      - name: edicion
+        description: "Edición del Catálogo Nacional de Hospitales"
+      - name: dependencia_grupo
+        description: "publica, privada, mutua u ong"
+        tests:
+          - accepted_values:
+              values: ['publica', 'privada', 'mutua', 'ong']
+      - name: vinculacion_sns
+        description: "red_publica, sustitutorio, concierto_parcial o sin_concierto"
+        tests:
+          - accepted_values:
+              values: ['red_publica', 'sustitutorio', 'concierto_parcial', 'sin_concierto']
+      - name: privado_en_red_publica
+        description: "Verdadero para centros no públicos que funcionan como red pública (RUP o concierto sustitutorio)"
+      - name: hospitales
+        description: "Número de hospitales"
+      - name: camas
+        description: "Camas instaladas"
+      - name: hospitales_pct
+        description: "% de los hospitales de la comunidad"
+      - name: camas_pct
+        description: "% de las camas de la comunidad"
+      - name: camas_por_100k_hab
+        description: "Camas por 100.000 habitantes (población a 1 de enero de la edición)"

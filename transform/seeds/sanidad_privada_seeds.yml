@@ -1,0 +1,79 @@
+version: 2
+
+seeds:
+  - name: sanidad_privada_concesiones
+    description: >
+      Hospitales públicos de gestión privada con población asignada (Comunitat Valenciana, Comunidad
+      de Madrid y Povisa en Vigo), construido a mano el 2026-10-10 con una cita por fila: fechas de
+      reversión de los decretos del DOGV (22/2018, 164/2021, 14/2024, 47/2024), población de las
+      memorias 2024 de los hospitales del SERMAS (SIP-CIBELES), memoria de gestión del departamento
+      de Torrevieja, Xunta (Povisa), Sindicatura de Comptes (cápita de Manises) y prensa solvente
+      cuando no hay dato oficial (dicho en nota y en fiabilidad).
+    config:
+      column_types:
+        hospital_id: varchar
+        cod_ccaa: varchar
+        anio_inicio: integer
+        anio_fin_o_reversion: integer
+        fecha_reversion: date
+        poblacion_asignada: bigint
+        poblacion_anio: integer
+        capita_eur: double
+        capita_anio: varchar
+        duracion_contrato_anios: integer
+    columns:
+      - name: hospital_id
+        tests: [unique, not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: hospital
+        tests: [not_null]
+      - name: modelo
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['concesion_capitativa', 'concierto_singular', 'pfi_no_sanitaria']
+      - name: fiabilidad
+        tests:
+          - accepted_values:
+              values: ['alta', 'media', 'baja']
+      - name: fuente_url
+        tests: [not_null]
+  - name: sanidad_privada_concesiones_poblacion
+    description: "Serie oficial de población asignada en cápita por hospital y año (situación a 31 de diciembre; el corte de primeros de enero se asigna al año anterior). Hoy solo Torrevieja 2018-2020 (Memoria de gestión 2025 del Departamento de Salud de Torrevieja)."
+    config:
+      column_types:
+        hospital_id: varchar
+        anio: integer
+        poblacion_asignada: bigint
+        fecha_corte: date
+    columns:
+      - name: hospital_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('sanidad_privada_concesiones')
+              field: hospital_id
+      - name: poblacion_asignada
+        tests: [not_null]
+      - name: fuente_url
+        tests: [not_null]
+  - name: sanidad_privada_barometro_seguros
+    description: "Porcentaje de personas con seguro médico privado (individual o de empresa) por comunidad, Barómetro Sanitario 2018, 2019, 2023 y 2024, copiado de la Tabla 1 del informe del Ministerio de Sanidad «Evaluación de la sanidad privada en el sistema sanitario de España» (9-12-2025). cod_ccaa '00' = España."
+    config:
+      column_types:
+        cod_ccaa: varchar
+        anio: integer
+        seguro_individual_pct: double
+        seguro_empresa_pct: double
+    columns:
+      - name: cod_ccaa
+        tests: [not_null]
+      - name: anio
+        tests:
+          - not_null
+          - accepted_values:
+              values: [2018, 2019, 2023, 2024]
+              quote: false
+      - name: fuente_url
+        tests: [not_null]

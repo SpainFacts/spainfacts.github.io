@@ -1,0 +1,31 @@
+version: 2
+
+seeds:
+  - name: sermas_hospitales
+    description: >
+      Hospitales del Servicio Madrileño de Salud con libre elección: identificador (el mismo que
+      sanidad_privada_concesiones cuando existe), nombre, patrón para reconocer su nombre en las
+      memorias (expresión regular sobre el nombre en minúsculas y sin tildes) y tipo de gestión.
+      concesion / concierto_singular / convenio: los seis hospitales que la Memoria 2025 del SERMAS
+      (hoja 6.5 «Hospitales con concesión de gestión de servicio público, convenio o concierto
+      singular») audita como gestionados con medios ajenos (fuente_url). grupo_empresarial según la
+      memoria 2024 de cada hospital (grupo_fuente_url).
+    config:
+      column_types:
+        hospital_id: varchar
+        patron: varchar
+    columns:
+      - name: hospital_id
+        tests: [not_null, unique]
+      - name: hospital
+        tests: [not_null]
+      - name: patron
+        tests: [not_null]
+      - name: gestion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['publica', 'concesion', 'concierto_singular', 'convenio']
+      - name: fuente_url
+        tests: [not_null]

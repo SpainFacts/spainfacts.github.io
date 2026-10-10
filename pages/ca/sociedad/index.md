@@ -3,7 +3,7 @@ title: Societat
 description: "Criminalitat, salut, immigració, renda i pobresa, educació i eleccions a Espanya amb dades oficials, per habitant i comparades amb la UE."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 92ce41e90090
+i18n_origen: b5a51b86957e
 ---
 
 <script>
@@ -164,6 +164,10 @@ Com vivim a Espanya: la seguretat, la salut, la població que arriba de fora, la
     <a href="/ca/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Educació</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Abandonament escolar prematur, nivell d'estudis dels adults, joves que ni estudien ni treballen, despesa per habitant i per alumne, FP i PISA, davant la UE i per comunitat.</p>
+    </a>
+    <a href="/ca/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Públic i privat</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Quina part de la sanitat i l'educació públiques es presta a través d'empreses i centres privats: concerts, hospitals de concessió, assegurances, concertada, FP i universitats privades.</p>
     </a>
     <a href="/ca/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Eleccions</p>

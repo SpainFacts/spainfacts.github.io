@@ -1,0 +1,208 @@
+[
+  {
+    "tabla": "sanidad_privada_gasto",
+    "usar": true,
+    "tema": "Cuánto del gasto sanitario público de cada comunidad se va en conciertos con centros privados, en personal propio, en farmacia y en otras partidas",
+    "preguntas": [
+      "¿Qué parte del gasto sanitario de Madrid se va en conciertos con la privada?",
+      "¿Qué comunidad dedica más dinero por habitante a conciertos sanitarios?",
+      "¿Cómo ha evolucionado el peso de los conciertos en la sanidad catalana?",
+      "¿Cuánto gasta la Comunitat Valenciana en farmacia por habitante?"
+    ],
+    "medidas": [
+      { "columna": "peso_pct", "nombre": "peso de la partida en el gasto sanitario público de la comunidad", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "gasto_eur_hab_real", "nombre": "gasto por habitante en euros constantes", "unidad": "€ por habitante", "tipo": "ratio" },
+      { "columna": "gasto_eur_hab", "nombre": "gasto por habitante en euros corrientes", "unidad": "€ por habitante", "tipo": "ratio", "real": "gasto_eur_hab_real" },
+      { "columna": "gasto_meur_real", "nombre": "gasto en millones de euros constantes", "unidad": "millones de €", "tipo": "flujo" },
+      { "columna": "gasto_meur", "nombre": "gasto en millones de euros corrientes", "unidad": "millones de €", "tipo": "flujo", "real": "gasto_meur_real" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "clasificacion", "nombre": "clasificación del gasto", "total": null, "defecto": "economica" },
+      { "columna": "partida_id", "nombre": "partida", "total": "total", "defecto": "conciertos" }
+    ],
+    "filtros": [],
+    "notas": "Ministerio de Sanidad, EGSP. '00' es el total de las comunidades autónomas (sin Ceuta, Melilla ni el gasto estatal), no España. Los dos últimos años son provisionales. No sumar partidas con 'total'. Cataluña tiene muchos conciertos por su red histórica de hospitales sin ánimo de lucro (XHUP); en la Comunitat Valenciana las cápitas de las concesiones no aparecen en conciertos sino, aparentemente, en consumo intermedio. Clasificación 'mercado' = todo lo comprado a productores de mercado (incluye farmacia)."
+  },
+  {
+    "tabla": "sanidad_privada_gestion_privada",
+    "usar": true,
+    "tema": "Hospitales públicos gestionados por empresas privadas (concesiones del modelo Alzira, Madrid) y hospitales de financiación privada (PFI)",
+    "preguntas": [
+      "¿Qué hospitales públicos gestiona una empresa privada en Madrid?",
+      "¿Cuándo volvió el hospital de Torrevieja a la gestión pública?",
+      "¿Qué empresa gestiona el hospital de Valdemoro?",
+      "¿Cuánta población tiene asignada la Fundación Jiménez Díaz?"
+    ],
+    "medidas": [
+      { "columna": "poblacion_asignada", "nombre": "población asignada al hospital", "unidad": "personas", "tipo": "nivel", "principal": true },
+      { "columna": "capita_eur", "nombre": "pago por habitante asignado (cápita)", "unidad": "€ por habitante", "tipo": "precio" },
+      { "columna": "duracion_contrato_anios", "nombre": "duración del contrato", "unidad": "años", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "modelo", "nombre": "modelo de gestión", "total": null },
+      { "columna": "fiabilidad", "nombre": "fiabilidad del dato de población", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Seed hecho a mano con fuente por fila. 'pfi_no_sanitaria' = solo obra y servicios no sanitarios privados (personal sanitario público): no es gestión sanitaria privada. Población de la fecha de poblacion_anio; Dénia y Manises solo con cifras de prensa."
+  },
+  {
+    "tabla": "sanidad_privada_cobertura",
+    "usar": true,
+    "tema": "Qué porcentaje de la población de Madrid y de la Comunitat Valenciana tiene su hospital público gestionado por una empresa privada, año a año",
+    "preguntas": [
+      "¿Qué porcentaje de madrileños tiene asignado un hospital de gestión privada?",
+      "¿Cuánta población valenciana cubrían las concesiones sanitarias antes de las reversiones?",
+      "¿Cómo ha cambiado la población atendida por hospitales privados en Valencia desde 1999?"
+    ],
+    "medidas": [
+      { "columna": "poblacion_gestion_privada_pct", "nombre": "porcentaje de la población asignada a hospitales de gestión privada", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "poblacion_gestion_privada", "nombre": "población asignada a hospitales de gestión privada", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "poblacion_concesion", "nombre": "población asignada a concesiones capitativas", "unidad": "personas", "tipo": "nivel" },
+      { "columna": "hospitales_gestion_privada", "nombre": "hospitales de gestión privada", "unidad": "hospitales", "tipo": "nivel" },
+      { "columna": "poblacion_pfi_pct", "nombre": "porcentaje de la población asignada a hospitales de financiación privada (PFI)", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Solo Comunitat Valenciana y Comunidad de Madrid. Situación a 31 de diciembre. La población de cada hospital en años sin cifra oficial se estima con su peso en la comunidad (poblacion_estimada)."
+  },
+  {
+    "tabla": "sanidad_privada_seguros",
+    "usar": true,
+    "tema": "Porcentaje de la población con seguro sanitario privado o doble cobertura por comunidad, según las encuestas de salud del INE",
+    "preguntas": [
+      "¿Qué porcentaje de la gente tiene seguro médico privado en Madrid?",
+      "¿En qué comunidad hay más doble cobertura sanitaria?",
+      "¿Ha crecido el seguro privado en Cataluña?"
+    ],
+    "medidas": [
+      { "columna": "con_seguro_privado_pct", "nombre": "porcentaje con seguro privado (solo privado o mixto)", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "mixta_pct", "nombre": "porcentaje con doble cobertura pública y privada", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "privada_exclusiva_pct", "nombre": "porcentaje solo con seguro privado", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "publica_exclusiva_pct", "nombre": "porcentaje solo con sanidad pública", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "sexo", "nombre": "sexo", "total": "Ambos sexos" }
+    ],
+    "filtros": [],
+    "notas": "INE: ENSE 2006, 2011-2012 y 2017 (todas las edades) y EESE 2020 (15 y más años); no son del todo comparables. Para 2018-2024 hay otra serie, del Barómetro Sanitario (sanidad_privada_seguros_barometro), con cifras más altas."
+  },
+  {
+    "tabla": "sanidad_privada_seguros_barometro",
+    "usar": true,
+    "tema": "Porcentaje de personas con seguro médico privado (propio o de la empresa) por comunidad según el Barómetro Sanitario, 2018-2024",
+    "preguntas": [
+      "¿Cuánta gente tiene seguro médico privado en España en 2024?",
+      "¿Qué comunidad tiene más seguros privados?",
+      "¿Cuántos madrileños tienen seguro médico pagado por la empresa?"
+    ],
+    "medidas": [
+      { "columna": "seguro_privado_pct", "nombre": "porcentaje con seguro médico privado", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "seguro_individual_pct", "nombre": "porcentaje con seguro privado contratado por la persona o su familia", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "seguro_empresa_pct", "nombre": "porcentaje con seguro privado contratado por la empresa", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Barómetro Sanitario (Ministerio de Sanidad y CIS) según el informe del Ministerio de diciembre de 2025; solo 2018, 2019, 2023 y 2024. Encuesta de opinión: no mezclar con la serie del INE."
+  },
+  {
+    "tabla": "sanidad_privada_gasto_hogares",
+    "usar": true,
+    "tema": "Cuánto pagan los hogares de su bolsillo en salud (medicamentos, dentista, consultas, óptica) por persona y comunidad",
+    "preguntas": [
+      "¿Cuánto gasta cada persona en salud de su bolsillo en Madrid?",
+      "¿En qué comunidad pagan más los hogares por sanidad?",
+      "¿Ha subido el gasto de los hogares en sanidad descontando la inflación?"
+    ],
+    "medidas": [
+      { "columna": "gasto_persona_eur_real", "nombre": "gasto en sanidad por persona en euros constantes", "unidad": "€ por persona", "tipo": "media", "principal": true },
+      { "columna": "gasto_persona_eur", "nombre": "gasto en sanidad por persona en euros corrientes", "unidad": "€ por persona", "tipo": "media", "real": "gasto_persona_eur_real" },
+      { "columna": "gasto_hogar_eur_real", "nombre": "gasto en sanidad por hogar en euros constantes", "unidad": "€ por hogar", "tipo": "media" },
+      { "columna": "gasto_hogar_eur", "nombre": "gasto en sanidad por hogar en euros corrientes", "unidad": "€ por hogar", "tipo": "media", "real": "gasto_hogar_eur_real" },
+      { "columna": "peso_gasto_pct", "nombre": "porcentaje del gasto del hogar que va a sanidad", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "serie_epf", "nombre": "serie de la encuesta", "total": null, "defecto": "ecoicop" }
+    ],
+    "filtros": [],
+    "notas": "INE, Encuesta de Presupuestos Familiares, grupo 06 Sanidad. Serie 'ecoicop' desde 2016 (defecto) y 'base_2006' de 2006 a 2023: no mezclar en una misma serie. Las primas de seguros médicos no están en este grupo."
+  },
+  {
+    "tabla": "sanidad_privada_hospitales",
+    "usar": true,
+    "tema": "Hospitales y camas por comunidad según sean públicos, privados concertados (red pública) o privados sin concierto",
+    "preguntas": [
+      "¿Qué porcentaje de las camas de hospital de Cataluña son de centros privados de la red pública?",
+      "¿Cuántas camas privadas hay por habitante en Madrid?",
+      "¿Cuántos hospitales privados tienen concierto con la sanidad pública?"
+    ],
+    "medidas": [
+      { "columna": "camas_pct", "nombre": "porcentaje de las camas de hospital de la comunidad", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "camas", "nombre": "camas instaladas", "unidad": "camas", "tipo": "nivel" },
+      { "columna": "camas_por_100k_hab", "nombre": "camas por 100.000 habitantes", "unidad": "por cada 100.000 habitantes", "tipo": "tasa" },
+      { "columna": "hospitales", "nombre": "hospitales", "unidad": "hospitales", "tipo": "nivel" },
+      { "columna": "hospitales_pct", "nombre": "porcentaje de los hospitales de la comunidad", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "dependencia_grupo", "nombre": "titularidad del hospital", "total": null },
+      { "columna": "vinculacion_sns", "nombre": "vínculo con la sanidad pública", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Catálogo Nacional de Hospitales (ediciones desde 2020; anio = situación a 31 de diciembre). El catálogo trata como públicos los hospitales de concesión (Valdemoro, Torrejón, Vinalopó...): para la gestión privada por concesión usar sanidad_privada_gestion_privada. Las filas son combinaciones de titularidad y vínculo: sumar camas_pct entre filas de la misma comunidad y año."
+  }
+]

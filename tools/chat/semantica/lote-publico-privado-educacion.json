@@ -1,0 +1,238 @@
+[
+  {
+    "tabla": "educacion_privada_alumnado",
+    "usar": true,
+    "tema": "Cuántos alumnos van a colegios públicos, concertados y privados en cada comunidad autónoma, por etapa (infantil, primaria, ESO, bachillerato, FP)",
+    "preguntas": [
+      "¿Qué porcentaje de alumnos va a la concertada en Madrid?",
+      "¿Qué comunidad tiene más alumnado en centros privados y concertados?",
+      "¿Cómo ha cambiado el peso de la escuela pública en España desde 1990?",
+      "¿Cuántos alumnos de bachillerato estudian en centros privados no concertados en Madrid?"
+    ],
+    "medidas": [
+      { "columna": "cuota_pct", "nombre": "porcentaje del alumnado de la comunidad, curso y enseñanza", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "alumnos", "nombre": "alumnos matriculados", "unidad": "alumnos", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "curso", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "ensenanza", "nombre": "enseñanza o etapa", "total": "Total" },
+      { "columna": "titularidad", "nombre": "titularidad del centro (pública, privada, concertada, no concertada)", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "EDUCAbase (Ministerio de Educación). anio = año de fin del curso. 'Privada' = concertada + no concertada: no sumarla con ellas. La concertada solo se separa desde 2011-12; antes y en el último curso de avance (es_avance) solo hay Pública y Privada. País Vasco y Navarra tienen mucha concertada por motivos históricos (ikastolas, cooperativas)."
+  },
+  {
+    "tabla": "educacion_privada_conciertos",
+    "usar": true,
+    "tema": "Cuánto dinero público pagan las comunidades autónomas a colegios concertados y centros privados (conciertos educativos), por habitante y por alumno",
+    "preguntas": [
+      "¿Cuánto gasta Madrid en conciertos educativos por habitante?",
+      "¿Qué comunidad dedica más parte de su gasto educativo a la concertada?",
+      "¿Cuánto ha crecido el gasto en conciertos en España desde 2000?",
+      "¿Cuánto paga el País Vasco por cada alumno de la concertada?"
+    ],
+    "medidas": [
+      { "columna": "conciertos_eur_hab_real", "nombre": "gasto en conciertos por habitante, descontada la inflación", "unidad": "€ por habitante, euros constantes", "tipo": "flujo", "principal": true },
+      { "columna": "conciertos_meur", "nombre": "gasto en conciertos y subvenciones a centros privados", "unidad": "millones de €", "tipo": "flujo", "real": "conciertos_meur_real" },
+      { "columna": "conciertos_meur_real", "nombre": "gasto en conciertos en euros constantes", "unidad": "millones de €, euros constantes", "tipo": "flujo" },
+      { "columna": "peso_pct", "nombre": "peso de los conciertos en el gasto educativo de la consejería", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "conciertos_eur_alumno_real", "nombre": "gasto en conciertos por alumno de la concertada, descontada la inflación", "unidad": "€ por alumno, euros constantes", "tipo": "ratio" },
+      { "columna": "gasto_educacion_meur", "nombre": "gasto público en educación de la consejería", "unidad": "millones de €", "tipo": "flujo", "real": "gasto_educacion_meur_real" },
+      { "columna": "alumnos_concertada", "nombre": "alumnos de la concertada", "unidad": "alumnos", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Estadística del Gasto Público en Educación (Ministerio de Educación). Cada comunidad aparece desde que asumió las competencias (antes pagaba el Ministerio). La partida incluye subvenciones a privados no concertados y, en el País Vasco, unos 20 M€ a universidades privadas (universitaria_meur). Euros por alumno desde 2012."
+  },
+  {
+    "tabla": "educacion_privada_conciertos_ensenanza",
+    "usar": true,
+    "tema": "A qué etapas va el dinero público que reciben los centros privados y concertados (infantil, primaria, ESO, bachillerato, FP, universidad) en cada comunidad",
+    "preguntas": [
+      "¿Cuánto dinero público reciben los bachilleratos concertados en Madrid?",
+      "¿Cuánto pagan las comunidades a la FP privada concertada?",
+      "¿Qué comunidad subvenciona universidades privadas?"
+    ],
+    "medidas": [
+      { "columna": "transferencias_meur_real", "nombre": "transferencias a centros privados, descontada la inflación", "unidad": "millones de €, euros constantes", "tipo": "flujo", "principal": true },
+      { "columna": "transferencias_meur", "nombre": "transferencias a centros privados", "unidad": "millones de €", "tipo": "flujo", "real": "transferencias_meur_real" },
+      { "columna": "peso_pct", "nombre": "peso de la enseñanza en el total transferido a centros privados", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "eur_alumno_concertada_real", "nombre": "euros por alumno de la concertada de esa enseñanza, descontada la inflación", "unidad": "€ por alumno, euros constantes", "tipo": "ratio" },
+      { "columna": "alumnos_concertada", "nombre": "alumnos de la concertada en esa enseñanza", "unidad": "alumnos", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "ensenanza", "nombre": "enseñanza", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "Desde 2017. Hay filas de grupo ('Total no universitaria', 'Infantil y primaria', 'Secundaria y FP', 'FP') además de las enseñanzas: no sumarlas entre sí. Asturias incluye el bachillerato en ESO."
+  },
+  {
+    "tabla": "educacion_privada_fp",
+    "usar": true,
+    "tema": "Cuántos alumnos de formación profesional estudian en centros públicos, concertados y privados, por comunidad, grado (básico, medio, superior), presencial o a distancia y familia profesional",
+    "preguntas": [
+      "¿Qué porcentaje de la FP de grado superior es privada en Madrid?",
+      "¿Cuánto ha crecido la FP a distancia privada?",
+      "¿En qué familias de FP hay más alumnos en la privada?",
+      "¿Cuántos alumnos de FP de Sanidad estudian en centros privados en Cataluña?"
+    ],
+    "medidas": [
+      { "columna": "cuota_pct", "nombre": "porcentaje del alumnado del grupo", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "alumnos", "nombre": "alumnos matriculados", "unidad": "alumnos", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "curso", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "grado", "nombre": "grado de FP (básico, medio, superior)", "total": null },
+      { "columna": "modalidad", "nombre": "presencial o a distancia", "total": "Todas" },
+      { "columna": "familia", "nombre": "familia profesional", "total": "Total" },
+      { "columna": "titularidad", "nombre": "titularidad del centro", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "EDUCAbase. Con familia 'Total' hay concertada y no concertada (desde 2011-12); por familia solo Pública / Privada (desde 2016-17). 'Privada' = concertada + no concertada. La FP a distancia de centros privados se cuenta en la comunidad del centro aunque el alumno viva en otra."
+  },
+  {
+    "tabla": "educacion_privada_fp_ciclos",
+    "usar": true,
+    "tema": "Alumnos de cada ciclo de FP (título) en centros públicos y privados, por comunidad y curso",
+    "preguntas": [
+      "¿Qué ciclos de FP tienen más alumnos en la privada que en la pública?",
+      "¿Cuántos estudian Higiene bucodental en centros privados?",
+      "¿Qué porcentaje de Desarrollo de aplicaciones multiplataforma es privado en Madrid?"
+    ],
+    "medidas": [
+      { "columna": "cuota_pct", "nombre": "porcentaje del alumnado del ciclo", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "alumnos", "nombre": "alumnos matriculados", "unidad": "alumnos", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "curso", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "grado", "nombre": "grado de FP", "total": null },
+      { "columna": "modalidad", "nombre": "presencial o a distancia", "total": "Todas" },
+      { "columna": "familia", "nombre": "familia profesional", "total": null },
+      { "columna": "ciclo", "nombre": "ciclo formativo", "total": null },
+      { "columna": "titularidad", "nombre": "titularidad del centro", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "Desde 2016-17. Solo Pública / Privada (sin separar la concertada). El nombre del ciclo puede variar ligeramente entre cursos (planes LOGSE y LOE)."
+  },
+  {
+    "tabla": "educacion_privada_universidades",
+    "usar": true,
+    "tema": "Cuántos estudiantes de grado y máster van a universidades públicas y privadas en cada comunidad, presenciales o a distancia",
+    "preguntas": [
+      "¿Qué porcentaje de universitarios de Madrid estudia en una privada?",
+      "¿Cuántos estudiantes de máster hay en universidades privadas en España?",
+      "¿Cómo ha crecido la universidad privada desde 2000?",
+      "¿Qué comunidad tiene más estudiantes en universidades privadas presenciales?"
+    ],
+    "medidas": [
+      { "columna": "cuota_pct", "nombre": "porcentaje de los estudiantes de la comunidad, curso, nivel y modalidad", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "estudiantes", "nombre": "estudiantes matriculados", "unidad": "estudiantes", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "curso", "parcial": true },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "nivel", "nombre": "grado o máster", "total": "Grado y máster" },
+      { "columna": "modalidad", "nombre": "presencial o no presencial", "total": "Todas" },
+      { "columna": "tipo_universidad", "nombre": "universidad pública o privada", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "SIIU (Ministerio de Universidades). La comunidad es la de la universidad: las privadas online (UNIR en La Rioja, VIU en la C. Valenciana, UOC en Cataluña, UDIMA en Madrid) inflan su comunidad; para comparar comunidades usar modalidad 'Presencial'. Grado incluye las antiguas licenciaturas. Último curso provisional. 'Grado y máster' solo desde 2006-07."
+  },
+  {
+    "tabla": "educacion_privada_universidades_numero",
+    "usar": true,
+    "tema": "Cuántas universidades públicas y privadas hay en cada comunidad autónoma",
+    "preguntas": [
+      "¿Cuántas universidades privadas hay en Madrid?",
+      "¿Cuántas universidades privadas se han abierto en España desde 2015?",
+      "¿Qué comunidad tiene más universidades privadas?"
+    ],
+    "medidas": [
+      { "columna": "universidades", "nombre": "universidades con actividad", "unidad": "universidades", "tipo": "nivel", "principal": true }
+    ],
+    "tiempo": { "columna": "anio", "grano": "curso", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": { "columna": "cod_ccaa", "valor": "00" }
+    },
+    "dimensiones": [
+      { "columna": "modalidad", "nombre": "presencial o no presencial", "total": "Todas" },
+      { "columna": "tipo_universidad", "nombre": "universidad pública o privada", "total": "Total" }
+    ],
+    "filtros": [],
+    "notas": "SIIU, desde 2015-16. España incluye UNED y UIMP (ámbito estatal), que no están en ninguna comunidad."
+  },
+  {
+    "tabla": "educacion_privada_universidades_lista",
+    "usar": true,
+    "tema": "Lista de universidades españolas, públicas y privadas, con su comunidad, si tienen ánimo de lucro y el año de su ley de reconocimiento",
+    "preguntas": [
+      "¿Qué universidades privadas se han creado en Andalucía desde 2020?",
+      "¿Cuáles son las universidades privadas con ánimo de lucro de Madrid?",
+      "¿Cuándo se reconoció la Universidad Europea de Madrid?"
+    ],
+    "medidas": [
+      { "columna": "anio_reconocimiento", "nombre": "año de la norma de creación o reconocimiento", "unidad": "año", "tipo": "nivel", "principal": true }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["ccaa"],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "tipo_universidad", "nombre": "universidad pública o privada", "total": null },
+      { "columna": "universidad", "nombre": "universidad", "total": null }
+    ],
+    "filtros": [],
+    "notas": "RUCT (Ministerio de Universidades), una fila por universidad. Para contar universidades, count(*). animo_lucro NULL = no consta en el RUCT. Las concordatarias (Deusto, Navarra, Comillas, Pontificia de Salamanca) llevan la fecha histórica de erección."
+  }
+]

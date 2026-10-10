@@ -68,3 +68,6 @@ data/medios_contratos_ccaa_cache/
 data/parquets-integracion/
 transform/logs_*/
 transform/target-*/
+
+# Caché de PDF y CSV del pipeline gasto_oculto
+data/gasto_oculto_cache/

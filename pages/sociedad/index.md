@@ -164,6 +164,10 @@ Cómo vivimos en España: la seguridad, la salud, la población que llega de fue
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Educación</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Abandono escolar temprano, nivel de estudios de los adultos, jóvenes que ni estudian ni trabajan, gasto por habitante y por alumno, FP y PISA, frente a la UE y por comunidad.</p>
     </a>
+    <a href="/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Público y privado</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuánto de la sanidad y la educación públicas se presta a través de empresas y centros privados: conciertos, hospitales de concesión, seguros, concertada, FP y universidades privadas.</p>
+    </a>
     <a href="/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Elecciones</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Generales desde 1977, europeas y municipales: participación, voto por partido y bloque, fragmentación, votos por escaño y ganador en cada provincia y municipio.</p>

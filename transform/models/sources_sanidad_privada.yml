@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_sanidad_privada
+    description: "Sanidad pública y privada (ingestion/sanidad_privada.py): EGSP del Ministerio de Sanidad por comunidad y clasificación, Catálogo Nacional de Hospitales, cobertura sanitaria de las encuestas de salud del INE y gasto en sanidad de la EPF del INE."
+    schema: raw
+    tables:
+      - name: sanidad_privada_egsp
+        description: "Ministerio de Sanidad, Estadística de Gasto Sanitario Público (XLS egspGastoReal, tablas 2.4 y 3.4.01-3.4.17): gasto consolidado en miles de euros por comunidad (cod_ccaa INE; '00' = sector Comunidades Autónomas), año, bloque (clasificacion: cuenta_satelite, economica, funcional, contabilidad_nacional) y concepto tal como lo rotula la tabla; padre = función de la que cuelga un factor (remuneración, consumo intermedio, capital fijo) en la cuenta satélite; provisional = año marcado (*)."
+      - name: sanidad_privada_cnh
+        description: "Ministerio de Sanidad, Catálogo Nacional de Hospitales (XLSX por edición desde 2020; edición N = situación a 31-12-N-1): un registro por hospital con comunidad, municipio, camas, clase, dependencia funcional y concierto con el SNS (resuelto al del complejo cuando el hospital pertenece a uno)."
+      - name: ine_sp_cobertura
+        description: "INE, Encuesta Nacional de Salud (2006, 2011-12 y 2017: % sobre la población; todas las edades) y Encuesta Europea de Salud en España 2020 (miles de personas de 15 y más años): modalidad de la cobertura sanitaria (exclusiva) por sexo y comunidad."
+      - name: ine_sp_epf
+        description: "INE, Encuesta de Presupuestos Familiares: series del grupo 06 Sanidad por comunidad (gasto medio por hogar, por persona, distribución porcentual y gasto total en miles de euros); tabla 73991 (serie_epf 'ecoicop', 2016-) y 28486 ('base_2006', 2006-2023)."

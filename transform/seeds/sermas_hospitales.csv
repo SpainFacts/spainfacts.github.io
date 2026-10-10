@@ -1,0 +1,30 @@
+hospital_id,hospital,patron,gestion,grupo_empresarial,fuente_url,grupo_fuente_url
+la_paz,Hospital Universitario La Paz,la paz,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hulp.pdf,
+doce_de_octubre,Hospital Universitario 12 de Octubre,12 de octubre,publica,,https://www.comunidad.madrid/docs/assets/2025/11/13/memoria_2024_h12o.pdf,
+ramon_y_cajal,Hospital Universitario Ramón y Cajal,ramon y cajal,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_ryc.pdf,
+gregorio_maranon,Hospital General Universitario Gregorio Marañón,maranon,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hgugm.pdf,
+clinico_san_carlos,Hospital Clínico San Carlos,clinico san carlos,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hcsc.pdf,
+la_princesa,Hospital Universitario de La Princesa,princesa,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_la_princesa.pdf,
+puerta_de_hierro,Hospital Universitario Puerta de Hierro Majadahonda,puerta de hierro,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_puerta_de_hierro.pdf,
+getafe,Hospital Universitario de Getafe,getafe,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_getafe.pdf,
+mostoles,Hospital Universitario de Móstoles,mostoles,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_mostoles.pdf,
+severo_ochoa,Hospital Universitario Severo Ochoa,severo ochoa,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_severo_ochoa_.pdf,
+principe_de_asturias,Hospital Universitario Príncipe de Asturias,principe de asturias,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_principe_de_asturias.pdf,
+fundacion_alcorcon,Hospital Universitario Fundación Alcorcón,alcorcon,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_fundacion_alcorcon.pdf,
+fuenlabrada,Hospital Universitario de Fuenlabrada,fuenlabrada,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_fuenlabrada.pdf,
+infanta_leonor,Hospital Universitario Infanta Leonor,infanta leonor,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_huil.pdf,
+infanta_sofia,Hospital Universitario Infanta Sofía,infanta sofia,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_infanta_sofia.pdf,
+infanta_cristina,Hospital Universitario Infanta Cristina,infanta cristina,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hui_cristrina.pdf,
+henares,Hospital Universitario del Henares,henares,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_henares.pdf,
+sureste,Hospital Universitario del Sureste,sureste,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_sureste.pdf,
+tajo,Hospital Universitario del Tajo,tajo,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_tajo.pdf,
+el_escorial,Hospital Universitario El Escorial,escorial,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_h_escorial.pdf,
+santa_cristina,Hospital Universitario Santa Cristina,santa cristina,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_santa_cristina.pdf,
+nino_jesus,Hospital Infantil Universitario Niño Jesús,nino jesus,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hiu_nino_jesus.pdf,
+cruz_roja,Hospital Central de la Cruz Roja San José y Santa Adela,cruz roja,publica,,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_cruz_roja.pdf,
+fundacion_jimenez_diaz,Hospital Universitario Fundación Jiménez Díaz,jimenez diaz,concierto_singular,Quirónsalud,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_fjd.pdf
+rey_juan_carlos,Hospital Universitario Rey Juan Carlos,rey j(uan|\.)? ?carlos,concesion,Quirónsalud,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_rey_juan_carlos.pdf
+infanta_elena,Hospital Universitario Infanta Elena,infanta elena,concesion,Quirónsalud,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_huie.pdf
+villalba,Hospital Universitario General de Villalba,villalba,concesion,Quirónsalud,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hgu_villalba.pdf
+torrejon,Hospital Universitario de Torrejón,torrejon,concesion,Ribera,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,https://www.comunidad.madrid/docs/assets/2025/11/06/memoria_2024_hu_torrejon.pdf
+gomez_ulla,Hospital Central de la Defensa Gómez Ulla,defensa|gomez ulla,convenio,,https://www.comunidad.madrid/docs/2026-07/datos-abiertos-memoria-2025.zip,

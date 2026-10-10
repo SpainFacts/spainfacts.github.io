@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: raw_gasto_oculto
+    description: "Gasto oculto: lo que la cifra resumida de un presupuesto no enseña (ingestion/gasto_oculto.py). Cuenta General de la Comunidad de Madrid (Intervención General), acuerdos del Consejo de Gobierno de la Comunidad de Madrid y contratos menores de sanidad de Andalucía y Cataluña (datos abiertos)."
+    schema: raw
+    tables:
+      - name: gasto_oculto_cm_liquidacion
+        description: "Cuenta General de la Comunidad de Madrid, cuentas anuales de cada entidad con presupuesto limitativo, estado E.1 «Liquidación del presupuesto de gastos» por centro (EOxxx_E.1.Liq_Ppto_Gastos_1.pdf), 2016 en adelante: una fila por entidad, año y aplicación económica (subconcepto de 5 cifras) con crédito inicial, modificaciones, crédito definitivo, gastos comprometidos, obligaciones reconocidas netas, pagos, pendiente de pago y remanentes, en euros. Descripción recortada como en el PDF."
+      - name: gasto_oculto_cm_modificaciones
+        description: "Cuenta General de la Comunidad de Madrid, memoria de cada entidad, nota 23.1.1.a «Modificaciones de crédito» por centro (EOxxx_F.23.1.1.a.PptoCorr_Gtos_Modificaciones_1.pdf): por aplicación, importe de cada tipo de modificación (créditos extraordinarios, suplementos, ampliaciones, transferencias, incorporaciones de remanentes, créditos generados por ingresos, otras) y total, en euros."
+      - name: gasto_oculto_cat_execucio
+        description: "«Execució mensual del pressupost de la Generalitat de Catalunya. Despeses» (analisi.transparenciacatalunya.cat, Socrata ajns-4mi7), último mes publicado de cada ejercicio desde 2014 (diciembre en los cerrados), agregado en el servidor a entidad, sección, programa y concepto: créditos iniciales, modificaciones por tipo (extraordinarios y suplementos, ampliaciones, incorporaciones, generaciones, aumentos y minoraciones por transferencia), presupuesto definitivo, autorizaciones, disposiciones, obligaciones reconocidas y pagadas, en euros."
+      - name: gasto_oculto_cm_cuadre
+        description: "Control de la lectura de los PDF de la Cuenta General: suma de las aplicaciones leídas frente a la fila TOTAL del documento (obligaciones netas en la liquidación, total en las modificaciones)."
+      - name: gasto_oculto_cm_sesiones
+        description: "Sesiones del Consejo de Gobierno de la Comunidad de Madrid con PDF de referencias de acuerdos (www.comunidad.madrid/acuerdos-consejo-gobierno), fecha y número de acuerdos leídos."
+      - name: gasto_oculto_cm_acuerdos
+        description: "Acuerdos del Consejo de Gobierno de la Comunidad de Madrid de tres tipos (texto de la referencia oficial): convalidacion (se convalida un gasto ya hecho sin el procedimiento debido o sin fiscalización previa), modificacion_presupuestaria (transferencias, generaciones, ampliaciones, suplementos, créditos extraordinarios) y emergencia (informes de contratos tramitados por emergencia). Importe = primer importe en euros citado en el texto."
+      - name: gasto_oculto_menores_grupos
+        description: "Contratos menores de órganos sanitarios agregados por año de adjudicación, órgano, adjudicatario (NIF; las personas físicas juntas como PERSONA_FISICA), tipo de contrato y «objeto parecido» (clave_objeto: 'CPV 331' = grupo CPV de 3 cifras en Cataluña; 'TIT BATA QUIRURGICA' = dos primeras palabras con contenido del título cuando no hay CPV, siempre en Andalucía). Andalucía: «Contratación menor publicada en la Plataforma de Contratación de la Junta de Andalucía» (CSV anual); el Servicio Andaluz de Salud se separa por provincia de ejecución. Cataluña: «Publicacions a la Plataforma de serveis de contractació pública» (Socrata ybgg-dgi6), procediment 'Contracte menor', Departament de Salut e ICS. Solo adjudicaciones desde el 9-3-2018 (LCSP 2017) con un solo adjudicatario; importe de adjudicación sin IVA."
+      - name: gasto_oculto_menores_cobertura
+        description: "Filas leídas y filas de órganos sanitarios por fuente y año de los contratos menores."

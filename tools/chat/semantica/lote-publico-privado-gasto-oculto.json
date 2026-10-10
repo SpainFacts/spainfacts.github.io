@@ -1,0 +1,530 @@
+[
+  {
+    "tabla": "gasto_oculto_ejecucion",
+    "usar": true,
+    "tema": "Cuánto se presupuesta y cuánto se gasta de verdad en cada partida del SERMAS, de la Comunidad de Madrid y de la Generalitat de Catalunya (conciertos sanitarios, hospitales privados, Fundación Jiménez Díaz, intereses de demora, conciertos educativos)",
+    "preguntas": [
+      "¿Cuánto se presupuestó y cuánto se gastó en la Fundación Jiménez Díaz?",
+      "¿Cuánto se desvía el gasto del SERMAS de lo que aprueba la Asamblea de Madrid?",
+      "¿Cuánto paga la Comunidad de Madrid en intereses de demora?",
+      "¿Cuánto gasta CatSalut en conciertos sanitarios frente a lo presupuestado?"
+    ],
+    "medidas": [
+      {
+        "columna": "obligaciones_eur",
+        "nombre": "gasto ejecutado (obligaciones reconocidas)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "obligaciones_eur_real"
+      },
+      {
+        "columna": "credito_inicial_eur",
+        "nombre": "crédito inicial presupuestado",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "credito_inicial_eur_real"
+      },
+      {
+        "columna": "credito_definitivo_eur",
+        "nombre": "crédito definitivo tras las modificaciones",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "modificaciones_eur",
+        "nombre": "modificaciones de crédito durante el año",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "desviacion_eur",
+        "nombre": "gasto por encima de lo presupuestado",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "desviacion_eur_real"
+      },
+      {
+        "columna": "desviacion_pct",
+        "nombre": "desviación del gasto sobre lo presupuestado",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "obligaciones_eur_hab_real",
+        "nombre": "gasto ejecutado por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "desviacion_eur_hab_real",
+        "nombre": "desviación por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "entidad",
+        "nombre": "entidad (SERMAS, Administración de la Comunidad, CatSalut, ICS...)",
+        "total": null
+      },
+      {
+        "columna": "partida",
+        "nombre": "grupo de partidas (conciertos, concesiones, intereses de demora...)",
+        "total": null
+      },
+      {
+        "columna": "capitulo",
+        "nombre": "capítulo económico",
+        "total": null
+      },
+      {
+        "columna": "seccion",
+        "nombre": "sección presupuestaria",
+        "total": null
+      },
+      {
+        "columna": "programa",
+        "nombre": "programa presupuestario",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Madrid: Cuenta General (Intervención General), por subconcepto, sin programa (programa = 'Total'). Cataluña: ejecución mensual de la Generalitat por concepto y programa (último mes del año; meses < 12 = año en curso). Las filas se suman dentro de cada comunidad; desviacion_pct no se suma, se recalcula con sum(obligaciones)/sum(credito_inicial)."
+  },
+  {
+    "tabla": "gasto_oculto_ejecucion_ccaa",
+    "usar": true,
+    "tema": "Cuánto se aparta lo que gasta cada comunidad autónoma de lo que presupuesta, por capítulo",
+    "preguntas": [
+      "¿Qué comunidad gasta más por encima de su presupuesto inicial?",
+      "¿Cuánto se desvió el gasto corriente de Madrid sobre lo presupuestado?",
+      "¿Cuánto modifican su presupuesto las comunidades durante el año?"
+    ],
+    "medidas": [
+      {
+        "columna": "desviacion_pct",
+        "nombre": "desviación del gasto sobre el presupuesto inicial",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "obligaciones_eur",
+        "nombre": "gasto ejecutado (obligaciones reconocidas)",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "credito_inicial_eur",
+        "nombre": "presupuesto inicial",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "modificaciones_eur",
+        "nombre": "modificaciones del presupuesto",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "modificacion_pct",
+        "nombre": "modificaciones sobre el presupuesto inicial",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "desviacion_eur_hab_real",
+        "nombre": "desviación por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "obligaciones_eur_hab_real",
+        "nombre": "gasto ejecutado por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "capitulo_nombre",
+        "nombre": "capítulo de gasto",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Ministerio de Hacienda, liquidación consolidada de las CCAA (la misma que ccaa_cuentas_capitulos). Capítulo 0 = 'Total' (no sumar con los demás)."
+  },
+  {
+    "tabla": "gasto_oculto_modificaciones",
+    "usar": true,
+    "tema": "Modificaciones del presupuesto durante el año: cuánto dinero se mueve entre organismos (de AMAS o Vivienda Social al SERMAS) y cuánto crédito nuevo se añade, en Madrid y Cataluña",
+    "preguntas": [
+      "¿Cuánto dinero se transfiere al SERMAS durante el año?",
+      "¿Qué organismos de la Comunidad de Madrid pierden crédito en transferencias?",
+      "¿Cuánto modifica la Generalitat el presupuesto de CatSalut?"
+    ],
+    "medidas": [
+      {
+        "columna": "total_modificaciones_eur",
+        "nombre": "total de modificaciones de crédito",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "total_modificaciones_eur_real"
+      },
+      {
+        "columna": "transferencias_eur",
+        "nombre": "saldo de transferencias de crédito (positivo recibe, negativo cede)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "transferencias_eur_real"
+      },
+      {
+        "columna": "generados_ingresos_eur",
+        "nombre": "créditos generados por ingresos",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "generados_ingresos_eur_real"
+      },
+      {
+        "columna": "ampliaciones_eur",
+        "nombre": "ampliaciones de crédito",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "suplementos_eur",
+        "nombre": "suplementos de crédito",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "incorporaciones_eur",
+        "nombre": "incorporaciones de remanentes",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "credito_inicial_eur",
+        "nombre": "crédito inicial",
+        "unidad": "€",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "modificacion_pct",
+        "nombre": "modificaciones sobre el crédito inicial",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "total_modificaciones_eur_hab_real",
+        "nombre": "modificaciones por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "entidad",
+        "nombre": "entidad (SERMAS, AMAS, Agencia de Vivienda Social, CatSalut...)",
+        "total": null
+      },
+      {
+        "columna": "capitulo_nombre",
+        "nombre": "capítulo económico",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Madrid: Cuenta General, nota 23.1.1.a de cada entidad (2015-). Cataluña: ejecución mensual de la Generalitat (2014-; extraordinarios y suplementos juntos). Las transferencias suman cero en el conjunto: el saldo por entidad dice quién cede y quién recibe; no hay relación pública de expedientes con origen y destino."
+  },
+  {
+    "tabla": "gasto_oculto_modificaciones_aplicacion",
+    "usar": true,
+    "tema": "De qué partidas sale el dinero que el Gobierno de Madrid mueve durante el año (imprevistos, fondo de contingencia) y adónde va (SERMAS)",
+    "preguntas": [
+      "¿De dónde sale el dinero que se transfiere al SERMAS?",
+      "¿Cuánto se reparte de la partida de imprevistos de la Comunidad de Madrid?",
+      "¿Qué partidas del SERMAS reciben más transferencias de crédito?"
+    ],
+    "medidas": [
+      {
+        "columna": "transferencias_eur",
+        "nombre": "saldo de transferencias de crédito (negativo cede, positivo recibe)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "transferencias_eur_real"
+      },
+      {
+        "columna": "total_modificaciones_eur",
+        "nombre": "total de modificaciones de crédito",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "total_modificaciones_eur_real"
+      },
+      {
+        "columna": "generados_ingresos_eur",
+        "nombre": "créditos generados por ingresos",
+        "unidad": "€",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "entidad",
+        "nombre": "entidad",
+        "total": null
+      },
+      {
+        "columna": "origen_destino",
+        "nombre": "cede o recibe crédito",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Cuenta General de la Comunidad de Madrid (nota 23.1.1.a), 2016-; solo la Administración de la Comunidad y el SERMAS publican esta nota. Descripciones recortadas en el PDF."
+  },
+  {
+    "tabla": "gasto_oculto_convalidaciones",
+    "usar": true,
+    "tema": "Convalidaciones de gasto del Gobierno de la Comunidad de Madrid: gasto hecho sin contrato o sin fiscalización que se aprueba después",
+    "preguntas": [
+      "¿Cuántas convalidaciones de gasto aprueba al año el Gobierno de Madrid?",
+      "¿Qué consejería convalida más gasto?",
+      "¿Cuánto gasto convalidó la Consejería de Sanidad?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur",
+        "nombre": "gasto convalidado",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_convalidaciones",
+        "nombre": "acuerdos de convalidación",
+        "unidad": "acuerdos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_eur_hab_real",
+        "nombre": "gasto convalidado por habitante en euros constantes",
+        "unidad": "€ por habitante",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "area",
+        "nombre": "área de la consejería",
+        "total": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Referencias oficiales de prensa de cada Consejo de Gobierno (2004-): cuentan los acuerdos publicados, no siempre todos los expedientes (la Cámara de Cuentas da 209 en 2024). Importe = el citado en la referencia."
+  },
+  {
+    "tabla": "gasto_oculto_acuerdos",
+    "usar": true,
+    "tema": "Acuerdos del Consejo de Gobierno de Madrid que convalidan gasto, cambian el presupuesto o dan cuenta de contratos de emergencia, uno a uno",
+    "preguntas": [
+      "¿Qué gastos del SERMAS ha convalidado el Gobierno de Madrid?",
+      "¿Qué contratos de emergencia aprobó la Comunidad de Madrid en 2020?",
+      "¿Cuál es la mayor convalidación de gasto de la Comunidad de Madrid?"
+    ],
+    "medidas": [
+      {
+        "columna": "importe_eur",
+        "nombre": "importe del acuerdo",
+        "unidad": "€",
+        "tipo": "flujo",
+        "principal": true,
+        "real": "importe_eur_real"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "diario",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de acuerdo (convalidación, modificación presupuestaria, emergencia)",
+        "total": null
+      },
+      {
+        "columna": "area",
+        "nombre": "área de la consejería",
+        "total": null
+      },
+      {
+        "columna": "subtipo",
+        "nombre": "subtipo",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Texto de la referencia oficial de cada sesión. importe_eur es el primer importe citado; puede faltar."
+  },
+  {
+    "tabla": "gasto_oculto_contratos_menores",
+    "usar": true,
+    "tema": "Contratos menores de la sanidad pública de Andalucía y Cataluña y cuánto de su importe está en posibles fraccionamientos",
+    "preguntas": [
+      "¿Cuánto gasta el Servicio Andaluz de Salud en contratos menores?",
+      "¿Qué parte de los contratos menores de la sanidad catalana podría estar troceada?",
+      "¿Qué hospital catalán tiene más contratos menores?"
+    ],
+    "medidas": [
+      {
+        "columna": "posible_troceo_objeto_pct",
+        "nombre": "importe en grupos de posible fraccionamiento (mismo adjudicatario y objeto parecido)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "importe_eur",
+        "nombre": "importe de los contratos menores sin IVA",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_eur_real"
+      },
+      {
+        "columna": "n_contratos",
+        "nombre": "contratos menores",
+        "unidad": "contratos",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "importe_posible_troceo_objeto_eur",
+        "nombre": "importe en grupos de posible fraccionamiento (criterio estricto)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_posible_troceo_objeto_eur_real"
+      },
+      {
+        "columna": "importe_posible_troceo_eur",
+        "nombre": "importe en grupos de posible fraccionamiento (criterio amplio)",
+        "unidad": "€",
+        "tipo": "flujo",
+        "real": "importe_posible_troceo_eur_real"
+      },
+      {
+        "columna": "posible_troceo_pct",
+        "nombre": "importe en grupos de posible fraccionamiento (criterio amplio)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": true
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "organo",
+        "nombre": "órgano de contratación",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Andalucía 2018- y Cataluña 2023- (datos abiertos con NIF). Madrid no publica sus menores en descarga abierta. Es una señal para revisar, no prueba de fraude; el SAS y el ICS son un solo órgano con muchos hospitales."
+  }
+]

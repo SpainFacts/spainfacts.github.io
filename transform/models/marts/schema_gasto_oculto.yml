@@ -1,0 +1,412 @@
+version: 2
+
+models:
+  - name: gasto_oculto_ejecucion
+    description: "Presupuesto inicial frente a ejecutado por entidad y partida económica. Comunidad de Madrid 2016- por entidad (SERMAS, Administración de la Comunidad, AMAS, Agencia de Vivienda Social...) y subconcepto: Cuenta General de la Comunidad de Madrid (Intervención General), estado de liquidación del presupuesto de gastos de cada entidad (PDF leído y cuadrado con su fila TOTAL). Cataluña 2014- por entidad (Generalitat, CatSalut, ICS...), sección, programa y concepto: ejecución mensual del presupuesto de la Generalitat (Socrata ajns-4mi7), último mes de cada año. La técnica: comparar lo que aprobó la Asamblea (crédito inicial) con lo que se gastó (obligaciones reconocidas). En el SERMAS los conciertos, los hospitales de gestión privada y los intereses de demora se presupuestan muy por debajo de lo que se gasta y se completan con modificaciones durante el año."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad ('13' Comunidad de Madrid, '09' Cataluña)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['13', '09']
+      - name: ccaa
+        description: "Nombre de la comunidad"
+        tests: [not_null]
+      - name: anio
+        description: "Ejercicio presupuestario"
+        tests: [not_null]
+      - name: meses
+        description: "Meses de ejecución que recoge la fila (12 = ejercicio cerrado; menos = año en curso en Cataluña)"
+      - name: es_parcial
+        description: "Año en curso con ejecución incompleta"
+      - name: entidad_cod
+        description: "Código de la entidad: en Madrid el de la Cuenta General (EO049 = SERMAS, EO050 = Administración de la Comunidad...); en Cataluña 'CAT' + código de entitat (CAT5100 = CatSalut, CAT5200 = ICS, CAT1000 = Generalitat)"
+        tests: [not_null]
+      - name: entidad
+        description: "Entidad con presupuesto propio: 'Servicio Madrileño de Salud (SERMAS)', 'Administración de la Comunidad de Madrid', 'Agencia Madrileña de Atención Social'...; en Cataluña 'Generalitat', 'CatSalut', 'ICS'..."
+        tests: [not_null]
+      - name: seccion
+        description: "Sección presupuestaria: en Madrid la propia entidad; en Cataluña la sección (departamento) del presupuesto"
+        tests: [not_null]
+      - name: programa
+        description: "Programa presupuestario (Cataluña, código y nombre); 'Total' en Madrid (la Cuenta General liquida sin programa)"
+        tests: [not_null]
+      - name: capitulo
+        description: "Capítulo económico (1 personal, 2 bienes corrientes y servicios, 3 financieros, 4 transferencias corrientes, 6 inversiones, 7 transferencias de capital, 8 y 9 financieros)"
+        tests: [not_null]
+      - name: articulo
+        description: "Artículo económico (2 cifras; 25 = asistencia sanitaria con medios ajenos)"
+      - name: concepto
+        description: "Concepto económico (3 cifras; 342 = intereses de demora)"
+      - name: subconcepto
+        description: "Aplicación económica de la liquidación (subconcepto, 5 cifras) en Madrid; NULL en Cataluña (agregado a concepto)"
+      - name: descripcion
+        description: "Descripción del subconcepto (Madrid: recortada en el PDF, la más larga del año entre entidades y estados) o del concepto (Cataluña)"
+      - name: partida
+        description: "Grupo de análisis: 'Conciertos con la Fundación Jiménez Díaz', 'Hospitales de gestión privada (concesiones)', 'Conciertos de asistencia sanitaria', 'Canon de hospitales de concesión de obra', 'Intereses de demora', 'Farmacia por receta', 'Conciertos educativos' o 'Resto del capítulo N'"
+        tests: [not_null]
+      - name: credito_inicial_eur
+        description: "Crédito inicial (ley de presupuestos), euros corrientes"
+      - name: modificaciones_eur
+        description: "Modificaciones de crédito del año (neto), euros corrientes"
+      - name: credito_definitivo_eur
+        description: "Crédito definitivo = inicial + modificaciones, euros corrientes"
+      - name: gastos_comprometidos_eur
+        description: "Gastos comprometidos (fase D), euros corrientes"
+      - name: obligaciones_eur
+        description: "Obligaciones reconocidas netas (gasto ejecutado), euros corrientes"
+      - name: pagos_eur
+        description: "Pagos líquidos del ejercicio, euros corrientes"
+      - name: pendiente_pago_eur
+        description: "Obligaciones pendientes de pago a 31 de diciembre, euros corrientes"
+      - name: remanentes_eur
+        description: "Remanentes de crédito (definitivo - obligaciones), euros corrientes"
+      - name: desviacion_eur
+        description: "Obligaciones - crédito inicial, euros corrientes"
+      - name: desviacion_pct
+        description: "Desviación sobre el crédito inicial (0-100; 100 = se gastó el doble de lo presupuestado). NULL si el crédito inicial es 0"
+      - name: modificacion_pct
+        description: "Modificaciones sobre el crédito inicial (0-100)"
+      - name: credito_inicial_eur_real
+        description: "Crédito inicial en euros constantes de anio_base"
+      - name: obligaciones_eur_real
+        description: "Obligaciones reconocidas en euros constantes de anio_base"
+      - name: desviacion_eur_real
+        description: "Desviación en euros constantes de anio_base"
+      - name: credito_inicial_eur_hab_real
+        description: "Crédito inicial por habitante de la Comunidad de Madrid, euros constantes"
+      - name: obligaciones_eur_hab_real
+        description: "Obligaciones reconocidas por habitante de la Comunidad de Madrid, euros constantes"
+      - name: desviacion_eur_hab_real
+        description: "Desviación por habitante de la Comunidad de Madrid, euros constantes"
+      - name: anio_base
+        description: "Año de los euros constantes (main.deflactor)"
+      - name: fuente_url
+        description: "PDF de la Cuenta General (Madrid) o conjunto de datos abiertos (Cataluña) del que sale la fila"
+        tests: [not_null]
+
+  - name: gasto_oculto_ejecucion_ccaa
+    description: "Presupuesto inicial, definitivo y ejecutado de los gastos de cada comunidad autónoma por capítulo económico, 2002 en adelante (Ministerio de Hacienda, liquidación consolidada; deriva de ccaa_cuentas_capitulos). Capítulo 0 = 'Total'. Para comparar entre comunidades cuánto se aparta lo gastado de lo presupuestado."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad"
+        tests: [not_null]
+      - name: ccaa
+        description: "Nombre de la comunidad"
+        tests: [not_null]
+      - name: anio
+        description: "Ejercicio"
+        tests: [not_null]
+      - name: capitulo
+        description: "Capítulo económico de gasto (1-9); 0 = Total"
+        tests: [not_null]
+      - name: capitulo_nombre
+        description: "Nombre del capítulo; 'Total' en el capítulo 0"
+        tests: [not_null]
+      - name: credito_inicial_eur
+        description: "Presupuesto inicial, euros corrientes"
+      - name: modificaciones_eur
+        description: "Presupuesto definitivo - inicial, euros corrientes"
+      - name: credito_definitivo_eur
+        description: "Presupuesto definitivo, euros corrientes"
+      - name: obligaciones_eur
+        description: "Obligaciones reconocidas netas, euros corrientes"
+      - name: desviacion_eur
+        description: "Obligaciones - presupuesto inicial, euros corrientes"
+      - name: desviacion_pct
+        description: "Desviación sobre el presupuesto inicial (0-100)"
+      - name: modificacion_pct
+        description: "Modificaciones sobre el presupuesto inicial (0-100)"
+      - name: credito_inicial_eur_hab_real
+        description: "Presupuesto inicial por habitante, euros constantes"
+      - name: obligaciones_eur_hab_real
+        description: "Obligaciones reconocidas por habitante, euros constantes"
+      - name: desviacion_eur_hab_real
+        description: "Desviación por habitante, euros constantes"
+      - name: anio_base
+        description: "Año de los euros constantes"
+
+  - name: gasto_oculto_modificaciones
+    description: "Modificaciones de crédito por entidad, año, capítulo y tipo (créditos extraordinarios, suplementos, ampliaciones, transferencias, incorporaciones de remanentes, créditos generados por ingresos, otras). Comunidad de Madrid 2016- (Cuenta General, memoria de cada entidad, nota 23.1.1.a) y Cataluña 2014- (ejecución mensual de la Generalitat). Las transferencias suman cero en el conjunto del presupuesto: el saldo de cada entidad dice quién cede crédito y quién lo recibe."
+    columns:
+      - name: cod_ccaa
+        description: "'13' Comunidad de Madrid, '09' Cataluña"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['13', '09']
+      - name: ccaa
+        description: "Nombre de la comunidad"
+        tests: [not_null]
+      - name: anio
+        description: "Ejercicio"
+        tests: [not_null]
+      - name: meses
+        description: "Meses de ejecución (12 = ejercicio cerrado)"
+      - name: es_parcial
+        description: "Año en curso incompleto"
+      - name: entidad_cod
+        description: "Código de la entidad (como en gasto_oculto_ejecucion)"
+        tests: [not_null]
+      - name: entidad
+        description: "Entidad (mismo nombre que en gasto_oculto_ejecucion)"
+        tests: [not_null]
+      - name: capitulo
+        description: "Capítulo económico (1-9)"
+        tests: [not_null]
+      - name: capitulo_nombre
+        description: "Nombre del capítulo"
+      - name: credito_inicial_eur
+        description: "Crédito inicial del capítulo, euros corrientes"
+      - name: creditos_extraordinarios_eur
+        description: "Créditos extraordinarios, euros corrientes"
+      - name: suplementos_eur
+        description: "Suplementos de crédito (en Cataluña, suplementos y créditos extraordinarios juntos), euros corrientes"
+      - name: ampliaciones_eur
+        description: "Ampliaciones de crédito, euros corrientes"
+      - name: transferencias_eur
+        description: "Transferencias de crédito (saldo: positivo = recibe, negativo = cede), euros corrientes"
+      - name: incorporaciones_eur
+        description: "Incorporaciones de remanentes de crédito, euros corrientes"
+      - name: generados_ingresos_eur
+        description: "Créditos generados por ingresos, euros corrientes"
+      - name: otras_eur
+        description: "Otras modificaciones, euros corrientes"
+      - name: total_modificaciones_eur
+        description: "Total de modificaciones, euros corrientes"
+      - name: modificacion_pct
+        description: "Total de modificaciones sobre el crédito inicial (0-100)"
+      - name: transferencias_pct
+        description: "Transferencias sobre el crédito inicial (0-100)"
+      - name: transferencias_eur_real
+        description: "Transferencias en euros constantes"
+      - name: generados_ingresos_eur_real
+        description: "Créditos generados por ingresos en euros constantes"
+      - name: total_modificaciones_eur_real
+        description: "Total de modificaciones en euros constantes"
+      - name: transferencias_eur_hab_real
+        description: "Transferencias por habitante de la comunidad, euros constantes"
+      - name: total_modificaciones_eur_hab_real
+        description: "Modificaciones por habitante de la comunidad, euros constantes"
+      - name: anio_base
+        description: "Año de los euros constantes"
+
+  - name: gasto_oculto_acuerdos
+    description: "Acuerdos del Consejo de Gobierno de la Comunidad de Madrid que convalidan gasto, modifican el presupuesto o dan cuenta de contratos de emergencia, uno por fila, 2004 en adelante (referencias oficiales de cada sesión). Detalle de gasto_oculto_convalidaciones."
+    columns:
+      - name: cod_ccaa
+        description: "'13'"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: id_acuerdo
+        description: "Fichero de la referencia + orden del acuerdo en ella"
+        tests: [not_null, unique]
+      - name: fecha
+        description: "Fecha de la sesión"
+        tests: [not_null]
+      - name: anio
+        description: "Año de la sesión"
+        tests: [not_null]
+      - name: consejeria
+        description: "Epígrafe de la consejería en la referencia (tal como se publicó)"
+        tests: [not_null]
+      - name: area
+        description: "Consejería agrupada por materia"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Sanidad', 'Educación y universidades', 'Servicios sociales y familia', 'Vivienda, transportes e infraestructuras', 'Digitalización', 'Economía, hacienda y empleo', 'Medio ambiente y agricultura', 'Cultura, turismo y deporte', 'Presidencia, justicia e interior', 'Sin epígrafe', 'Otras']
+      - name: tipo
+        description: "convalidacion, modificacion_presupuestaria o emergencia"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['convalidacion', 'modificacion_presupuestaria', 'emergencia']
+      - name: subtipo
+        description: "En las modificaciones: transferencia, generacion, ampliacion, suplemento, credito_extraordinario, incorporacion u otra"
+      - name: importe_eur
+        description: "Primer importe en euros citado en el texto (euros corrientes); NULL si no lo cita"
+      - name: importe_eur_real
+        description: "Importe en euros constantes de anio_base"
+      - name: anio_base
+        description: "Año de los euros constantes"
+      - name: ambito_sanidad
+        description: "Consejería de Sanidad o texto que menciona el SERMAS u hospitales"
+      - name: menciona_sermas
+        description: "El texto menciona el SERMAS o hospitales"
+      - name: menciona_amas
+        description: "El texto menciona la AMAS o residencias"
+      - name: menciona_avs
+        description: "El texto menciona la Agencia de Vivienda Social (antes IVIMA)"
+      - name: menciona_educacion
+        description: "El texto menciona educación, colegios, escuelas infantiles o universidades"
+      - name: texto
+        description: "Texto del acuerdo en la referencia oficial"
+      - name: fuente_url
+        description: "PDF de la referencia de la sesión"
+        tests: [not_null]
+
+  - name: gasto_oculto_convalidaciones
+    description: "Convalidaciones de gasto aprobadas por el Consejo de Gobierno de la Comunidad de Madrid por año y área de la consejería (y 'Total'), 2004 en adelante: número de acuerdos e importe que citan. Gasto hecho sin contrato en vigor, sin fiscalización previa o de ejercicios anteriores que se convalida después para pagarlo. Contraste: la Cámara de Cuentas cuenta 209 expedientes en 2024 (151 de la Administración de la Comunidad, 54,7 M€)."
+    columns:
+      - name: cod_ccaa
+        description: "'13'"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        description: "Año de la sesión del Consejo de Gobierno"
+        tests: [not_null]
+      - name: area
+        description: "Área de la consejería (las de gasto_oculto_acuerdos) o 'Total'"
+        tests: [not_null]
+      - name: n_convalidaciones
+        description: "Acuerdos de convalidación"
+        tests: [not_null]
+      - name: n_sin_importe
+        description: "Acuerdos cuya referencia no cita importe (no suman en importe_eur)"
+      - name: importe_eur
+        description: "Suma de los importes convalidados citados, euros corrientes"
+      - name: importe_eur_real
+        description: "Importe en euros constantes de anio_base"
+      - name: importe_eur_hab_real
+        description: "Importe por habitante de la Comunidad de Madrid, euros constantes"
+      - name: n_sesiones
+        description: "Sesiones del Consejo de Gobierno con referencia leída ese año"
+      - name: anio_base
+        description: "Año de los euros constantes"
+      - name: es_parcial
+        description: "Año en curso (incompleto)"
+
+  - name: gasto_oculto_contratos_menores
+    description: "Contratos menores de los órganos sanitarios por comunidad, órgano y año, con el importe en grupos de posible fraccionamiento: mismo órgano, adjudicatario y tipo de contrato (criterio amplio) y además objeto parecido (CPV de 3 cifras o palabras del título; criterio estricto) con dos o más menores que juntos pasan el umbral de 15.000 € (40.000 € obras) sin IVA. Andalucía 2018- (Servicio Andaluz de Salud por provincia y agencias sanitarias) y Cataluña 2023- (Departament de Salut e ICS). Señal para revisar, no prueba de fraude: el SAS y el ICS son un solo órgano con muchos hospitales y el criterio amplio sale casi siempre alto. La Comunidad de Madrid no publica sus menores en descarga abierta."
+    columns:
+      - name: cod_ccaa
+        description: "Código INE de la comunidad ('01' Andalucía, '09' Cataluña)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['01', '09']
+      - name: ccaa
+        description: "Nombre de la comunidad"
+        tests: [not_null]
+      - name: fuente
+        description: "and_junta (Plataforma de Contratación de la Junta de Andalucía) o cat_pscp (Plataforma de serveis de contractació pública)"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['and_junta', 'cat_pscp']
+      - name: anio
+        description: "Año de adjudicación"
+        tests: [not_null]
+      - name: organo
+        description: "Órgano de contratación (el Servicio Andaluz de Salud, separado por provincia de ejecución)"
+        tests: [not_null]
+      - name: n_contratos
+        description: "Contratos menores (un solo adjudicatario)"
+      - name: n_adjudicatarios
+        description: "Empresas distintas (sin personas físicas)"
+      - name: importe_eur
+        description: "Importe adjudicado sin IVA, euros corrientes"
+      - name: importe_eur_real
+        description: "Importe en euros constantes de anio_base"
+      - name: n_grupos_troceo
+        description: "Grupos órgano + adjudicatario + tipo con 2 o más menores que juntos pasan el umbral"
+      - name: n_contratos_troceo
+        description: "Contratos en esos grupos"
+      - name: importe_posible_troceo_eur
+        description: "Importe de esos grupos, euros corrientes"
+      - name: importe_posible_troceo_eur_real
+        description: "Importe de esos grupos en euros constantes"
+      - name: posible_troceo_pct
+        description: "Importe en grupos de posible troceo sobre el importe de menores del órgano (0-100)"
+      - name: n_grupos_troceo_objeto
+        description: "Criterio estricto: grupos que además comparten objeto parecido (CPV de 3 cifras en Cataluña; dos primeras palabras con contenido del título en Andalucía)"
+      - name: n_contratos_troceo_objeto
+        description: "Contratos en los grupos del criterio estricto"
+      - name: importe_posible_troceo_objeto_eur
+        description: "Importe de los grupos del criterio estricto, euros corrientes"
+      - name: importe_posible_troceo_objeto_eur_real
+        description: "Importe de los grupos del criterio estricto, euros constantes"
+      - name: posible_troceo_objeto_pct
+        description: "Importe de los grupos del criterio estricto sobre el importe de menores del órgano (0-100). Indicador principal"
+      - name: criterio_objeto
+        description: "Cómo se define el objeto parecido: 'CPV (3 cifras)' o 'Palabras del título'"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['CPV (3 cifras)', 'Palabras del título']
+      - name: anio_base
+        description: "Año de los euros constantes"
+      - name: es_parcial
+        description: "Año en curso (incompleto)"
+
+  - name: gasto_oculto_modificaciones_aplicacion
+    description: "Modificaciones de crédito de la Comunidad de Madrid por entidad y subconcepto, 2016 en adelante (Cuenta General, nota 23.1.1.a; solo la publican la Administración de la Comunidad y el SERMAS). Dice de qué partidas sale el crédito que se transfiere: en la Administración General, sobre todo de partidas globales sin destino (22900 Imprevistos e insuficiencias, fondo de contingencia, incremento retributivo)."
+    columns:
+      - name: cod_ccaa
+        description: "'13'"
+        tests: [not_null]
+      - name: ccaa
+        description: "Comunidad de Madrid"
+        tests: [not_null]
+      - name: anio
+        description: "Ejercicio"
+        tests: [not_null]
+      - name: entidad_cod
+        description: "EO050 Administración de la Comunidad, EO049 SERMAS"
+        tests: [not_null]
+      - name: entidad
+        description: "Entidad"
+        tests: [not_null]
+      - name: capitulo
+        description: "Capítulo económico"
+        tests: [not_null]
+      - name: concepto
+        description: "Concepto (3 cifras)"
+      - name: subconcepto
+        description: "Subconcepto (5 cifras)"
+        tests: [not_null]
+      - name: descripcion
+        description: "Descripción (recortada en el PDF)"
+      - name: origen_destino
+        description: "Cede (transferencias negativas), Recibe (positivas) o Sin transferencias"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Cede', 'Recibe', 'Sin transferencias']
+      - name: creditos_extraordinarios_eur
+        description: "Créditos extraordinarios, euros corrientes"
+      - name: suplementos_eur
+        description: "Suplementos, euros corrientes"
+      - name: ampliaciones_eur
+        description: "Ampliaciones, euros corrientes"
+      - name: transferencias_eur
+        description: "Transferencias de crédito (saldo), euros corrientes"
+      - name: incorporaciones_eur
+        description: "Incorporaciones de remanentes, euros corrientes"
+      - name: generados_ingresos_eur
+        description: "Créditos generados por ingresos, euros corrientes"
+      - name: otras_eur
+        description: "Otras modificaciones, euros corrientes"
+      - name: total_modificaciones_eur
+        description: "Total de modificaciones, euros corrientes"
+      - name: transferencias_eur_real
+        description: "Transferencias en euros constantes"
+      - name: total_modificaciones_eur_real
+        description: "Total en euros constantes"
+      - name: anio_base
+        description: "Año de los euros constantes"
+      - name: fuente_url
+        description: "PDF de la Cuenta General"
+        tests: [not_null]

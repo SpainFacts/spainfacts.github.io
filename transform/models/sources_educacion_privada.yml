@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw_educacion_privada
+    description: "Educación pública, concertada y privada por comunidad autónoma: tablas PC-Axis de EDUCAbase (Ministerio de Educación, FP y Deportes) y del SIIU (Ministerio de Ciencia, Innovación y Universidades) (ingestion/educacion_privada.py)"
+    schema: raw
+    tables:
+      - name: educacion_privada_alumnado_curso
+        description: "Estadística de las Enseñanzas no universitarias, resultados detallados de cada curso (tabla 1.1, gen-todas/todas_01.px): alumnado de régimen general por titularidad/financiación (todos, públicos, privados, privada concertada, privada no concertada), comunidad (cod_ccaa INE) y enseñanza, ambos sexos. Cursos 2011-2012 en adelante."
+      - name: educacion_privada_alumnado_serie
+        description: "Series de la Estadística de las Enseñanzas no universitarias (AlumnadoGen/alumnado_N_NN.px): alumnado por titularidad (todos, públicos, privados), comunidad y curso desde 1990-91, una tabla por enseñanza; periodo con '(*)' = datos de avance."
+      - name: educacion_privada_gasto_conciertos
+        description: "Estadística del Gasto Público en Educación, serie 7 (economicas/gasto/series/series_07.px): gasto en conciertos y subvenciones a la enseñanza privada por administración educativa, miles de euros, 1992 en adelante."
+      - name: educacion_privada_gasto_admin
+        description: "Estadística del Gasto Público en Educación, serie 1 (series_01.px): gasto público en educación por tipo de administración (Ministerio, cada consejería de educación, otras administraciones, partidas de ajuste), con y sin capítulos financieros, miles de euros."
+      - name: educacion_privada_univ_matriculados
+        description: "SIIU, Estadística de Estudiantes Universitarios, series históricas por comunidad (HIST_GRADO y HIST_MASTER *_matric_sexo_rama_ca.px): matriculados por tipo (pública/privada) y modalidad (presencial/no presencial) de la universidad, ambos sexos y todas las ramas. Comunidad = la de la universidad (CA00 'Estado' = universidades de ámbito estatal: UNED y UIMP)."
+      - name: educacion_privada_univ_numero
+        description: "SIIU, Estadística de Universidades, Centros y Titulaciones (EUCT/ESTR/px_euct_estr_univ_ca.px): número de universidades con actividad por comunidad, tipo y modalidad, desde 2015-16."
+      - name: educacion_privada_fp_ciclos
+        description: "Estadística de las Enseñanzas no universitarias, tablas de FP «por comunidad autónoma/provincia, ciclo formativo y titularidad» (gen-ciclos-fp de cada curso, localizadas por título): alumnado de FP básica, de grado medio y superior (presencial y a distancia) por ciclo y familia profesional (es_familia = fila de familia), todos / públicos / privados, desde 2016-17. plan LOGSE/LOE en 2016-17 y 2017-18."
+      - name: educacion_privada_gasto_transferencias
+        description: "Estadística del Gasto Público en Educación, tabla anual de transferencias de las administraciones educativas a centros de titularidad privada por administración y enseñanza (economicas/gasto/<año>, gasto07.px; gasto06.px en 2024), miles de euros, desde 2017."
+      - name: educacion_privada_ruct_universidades
+        description: "Registro de Universidades, Centros y Títulos (RUCT): ficha de cada universidad (código, nombre, tipo, ánimo de lucro, comunidad, norma de creación o reconocimiento con boletín, tipo de disposición y fechas dd/mm/aaaa)."

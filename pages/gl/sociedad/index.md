@@ -1,7 +1,7 @@
 ---
 title: Sociedade
 description: "Criminalidade, saúde, inmigración, renda e pobreza, educación e eleccións en España con datos oficiais, por habitante e comparados coa UE."
-i18n_origen: 92ce41e90090
+i18n_origen: b5a51b86957e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -164,6 +164,10 @@ Como vivimos en España: a seguridade, a saúde, a poboación que chega de fóra
     <a href="/gl/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Educación</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Abandono escolar temperán, nivel de estudos dos adultos, mozos que nin estudan nin traballan, gasto por habitante e por alumno, FP e PISA, fronte á UE e por comunidade.</p>
+    </a>
+    <a href="/gl/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Público e privado</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Canto da sanidade e da educación públicas se presta a través de empresas e centros privados: concertos, hospitais de concesión, seguros, concertada, FP e universidades privadas.</p>
     </a>
     <a href="/gl/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Eleccións</p>
