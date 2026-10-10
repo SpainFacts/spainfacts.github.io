@@ -1,7 +1,7 @@
 ---
 title: Etxebizitzaren prezioa
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta: metro koadroko tasazio-balioa erkidego, probintzia eta udalerriaren arabera, eta INEren Etxebizitzaren Prezioen Indizea, berria eta bigarren eskukoa."
-i18n_origen: 058fd706b1df
+i18n_origen: 44b0921ad358
 ---
 
 <script>
@@ -117,7 +117,7 @@ Zenbat balio duen Espainian etxebizitza bat erosteak eta nola aldatu den. Elkar 
         change={precio.slice(-1)[0]?.interanual_real?.toFixed(1)}
         changePeriod="erreala, urtebete lehenagorekiko"
         source="Etxebizitza Ministerioa"
-        sparklineData={precio.map(d => d.euros_m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Prezioen igoera erreala"
@@ -125,7 +125,7 @@ Zenbat balio duen Espainian etxebizitza bat erosteak eta nola aldatu den. Elkar 
         formattedValue="{ipv_general.slice(-1)[0]?.interanual_real >= 0 ? '+' : ''}{formatNumber(ipv_general.slice(-1)[0]?.interanual_real, 1)} %"
         period="IPV, {ipv_general.slice(-1)[0]?.periodo}, urtebete lehenagorekiko · {formatNumber(ipv_general.slice(-1)[0]?.interanual_nominal, 1)} % inflazioa kendu gabe"
         source="INE / IPV"
-        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => d.interanual_real)}
+        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Burbuilaren gehienekoarekiko"
@@ -133,7 +133,7 @@ Zenbat balio duen Espainian etxebizitza bat erosteak eta nola aldatu den. Elkar 
         formattedValue="{ipv_hitos[0]?.vs_max >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max, 1)} %"
         period="prezio erreala, {ipv_hitos[0]?.periodo_max} aldiarekiko (IPV) · {ipv_hitos[0]?.vs_max_nominal >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max_nominal, 1)} % urte bakoitzeko eurotan"
         source="INE / IPV"
-        sparklineData={ipv_general.map(d => d.indice_real)}
+        sparklineData={ipv_general.map(d => ({...d, y: d.indice_real}))}
     />
     <KpiCard
         title="90 m²-ko pisua"
@@ -141,7 +141,7 @@ Zenbat balio duen Espainian etxebizitza bat erosteak eta nola aldatu den. Elkar 
         formattedValue="{formatNumber(precio.slice(-1)[0]?.precio_90m2_real / 1000, 0)} mila €"
         period="Espainiako batez besteko tasazio-balioan, {precio.slice(-1)[0]?.periodo}"
         source="Etxebizitza Ministerioa"
-        sparklineData={precio.map(d => d.precio_90m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.precio_90m2_real}))}
     />
 </Grid>
 

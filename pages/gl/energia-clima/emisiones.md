@@ -1,5 +1,5 @@
 ---
-i18n_origen: 8873f7164972
+i18n_origen: 100c2894f1bf
 title: Emisións e descarbonización
 description: "Emisións oficiais de gases de efecto invernadoiro (GEI) de España desde 1990, por habitante, por euro de PIB real e por sector, fronte aos obxectivos de 2030 e á media europea."
 og:
@@ -194,7 +194,7 @@ Cantos gases de efecto invernadoiro emite España desde 1990, ano de referencia 
         changePeriod="vs. ano anterior"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.t_hab)}
+        sparklineData={anual.map(d => ({...d, y: d.t_hab}))}
     />
     <KpiCard
         title="Fronte a 1990"
@@ -203,7 +203,7 @@ Cantos gases de efecto invernadoiro emite España desde 1990, ano de referencia 
         period="emisións totais en {kpi[0]?.anio} · {formatNumber(kpi[0]?.var_2005_pct, 1)} % fronte a 2005"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.var_1990_pct)}
+        sparklineData={anual.map(d => ({...d, y: d.var_1990_pct}))}
     />
     <KpiCard
         title="Intensidade da economía"
@@ -214,7 +214,7 @@ Cantos gases de efecto invernadoiro emite España desde 1990, ano de referencia 
         changePeriod="desde {intensidad[0]?.anio}"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={intensidad.map(d => d.kg_por_euro)}
+        sparklineData={intensidad.map(d => ({...d, y: d.kg_por_euro}))}
     />
     <KpiCard
         title="España fronte á UE"
@@ -223,7 +223,7 @@ Cantos gases de efecto invernadoiro emite España desde 1990, ano de referencia 
         period="por habitante en {ue_ratio.slice(-1)[0]?.anio}: {formatNumber(ue_ratio.slice(-1)[0]?.t_hab, 1)} t fronte a {formatNumber(ue_ratio.slice(-1)[0]?.t_hab_ue, 1)} t na UE-27"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={ue_ratio.map(d => d.pct_ue)}
+        sparklineData={ue_ratio.map(d => ({...d, y: d.pct_ue}))}
     />
 </Grid>
 

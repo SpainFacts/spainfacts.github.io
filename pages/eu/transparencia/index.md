@@ -1,7 +1,7 @@
 ---
 title: Gardentasuna
 description: "Nola ematen dituzten kontuak Espainiako administrazioek: udalen informazio-betebeharrak, gardentasun-atariak, lege-dekretuak, indultuak, luzatutako aurrekontuak eta Espainiak osotasun-indize internazionaletan duen lekua, Gobernuka eta alderdika."
-i18n_origen: fd0f9eb9de30
+i18n_origen: f730ced4988b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -65,7 +65,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="positive-down"
         href="/eu/transparencia/decretos-ley"
-        sparklineData={actos.map(d => d.rdl)}
+        sparklineData={actos.map(d => ({...d, y: d.rdl}))}
     />
     <KpiCard
         title="Indultuak"
@@ -76,7 +76,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="neutral"
         href="/eu/transparencia/indultos"
-        sparklineData={actos.map(d => d.indultos)}
+        sparklineData={actos.map(d => ({...d, y: d.indultos}))}
     />
     {/if}
     {#if cpi_ult.length}
@@ -89,7 +89,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Transparency International"
         direction="positive-up"
         href="/eu/transparencia/comparacion-internacional"
-        sparklineData={cpi.map(d => d.valor)}
+        sparklineData={cpi.map(d => ({...d, y: d.valor}))}
     />
     {/if}
     {#if liquidaciones_ult.length}
@@ -102,7 +102,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Ogasuna"
         direction="positive-down"
         href="/eu/transparencia/cuentas-municipales"
-        sparklineData={liquidaciones.map(d => d.valor)}
+        sparklineData={liquidaciones.map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

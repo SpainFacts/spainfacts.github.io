@@ -27,6 +27,15 @@
     export let link = undefined;
     export let height = 440;
     export let title = undefined;
+    // Color fijo de cada fila (p. ej. el de la familia política) en mapas categóricos:
+    // la columna lleva un color hex; la leyenda toma el de la primera fila de cada categoría
+    export let colorCol = undefined;
+    // 'todo' (por defecto) encuadra todas las formas; 'denso', ver cajaDensa
+    export let encuadre = 'todo';
+    // Columna numérica que gradúa la intensidad del color (p. ej. el % del más votado):
+    // opacidad del 30 % al 100 % entre los dos valores de intensidadRango
+    export let intensidad = undefined;
+    export let intensidadRango = [25, 60];
     // Modo puntos (sustituye a BubbleMap y PointMap): lat, long y, opcionalmente, size
     export let lat = undefined;
     export let long = undefined;
@@ -110,16 +119,31 @@
         const ow = (w - (b[2] - b[0]) * cos * esc) / 2, oh = (h - (b[3] - b[1]) * esc) / 2;
         return { esc, cos, fx: (lon) => x0 + ow + (lon - b[0]) * cos * esc, fy: (lat) => y0 + oh + (b[3] - lat) * esc };
     }
+    // encuadre="denso": el mapa se ajusta a las piezas de tamaño normal y deja cortadas por
+    // los bordes las enormes (secciones censales rurales casi vacías que ocupan casi todo el
+    // término, como el monte de Tres Cantos); si no hay tal diferencia, encuadra todo.
+    const areaAnillo = (r) => Math.abs(r.reduce((s, [x, y], i) => (i ? s + (r[i - 1][0] * y - x * r[i - 1][1]) : 0), 0)) / 2;
+    function cajaDensa(prin) {
+        const areas = new Map();
+        for (const o of prin) areas.set(o.id, (areas.get(o.id) ?? 0) + areaAnillo(o.p[0]));
+        const orden = [...areas.values()].sort((a, b) => a - b);
+        const mediana = orden[Math.floor(orden.length / 2)] ?? 0;
+        const densas = prin.filter((o) => areas.get(o.id) <= 8 * mediana);
+        const b = caja((densas.length ? densas : prin).map((o) => ({ geometry: { type: 'Polygon', coordinates: o.p } })));
+        const mx = (b[2] - b[0]) * 0.04, my = (b[3] - b[1]) * 0.04;
+        return [b[0] - mx, b[1] - my, b[2] + mx, b[3] + my];
+    }
     const camino = (p, pr) => p.map((a) => a.map(([lon, lat], i) => `${i ? 'L' : 'M'}${pr.fx(lon).toFixed(1)},${pr.fy(lat).toFixed(1)}`).join('') + 'Z').join('');
 
     $: dibujo = (() => {
         if (!piezas.length) return null;
         const prin = piezas.filter((o) => o.z === 'principal');
-        const b = caja(prin.map((o) => ({ geometry: { type: 'Polygon', coordinates: o.p } })));
+        const b = encuadre === 'denso' ? cajaDensa(prin) : caja(prin.map((o) => ({ geometry: { type: 'Polygon', coordinates: o.p } })));
         const cos = Math.cos((((b[1] + b[3]) / 2) * Math.PI) / 180);
         const w = ANCHO - 2 * M;
         const altoPrin = Math.round(((b[3] - b[1]) / ((b[2] - b[0]) * cos)) * w);
-        const pr = proyeccion(prin.map((o) => o.p), M, M, w, altoPrin);
+        const marco = [[[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]], [b[0], b[1]]]];
+        const pr = proyeccion([marco], M, M, w, altoPrin);
         const formas = prin.map((o) => ({ id: o.id, d: camino(o.p, pr) }));
         const recuadros = [];
         const proy = { principal: pr };
@@ -167,6 +191,7 @@
     $: vMin = min ?? (numeros.length ? Math.min(...numeros) : 0);
     $: vMax = max ?? (numeros.length ? Math.max(...numeros) : 1);
     $: paleta = (colorPalette ?? []).filter(Boolean);
+    $: colorCategoria = (c, i) => (colorCol && filas.find((r) => r?.[value] === c)?.[colorCol]) || (paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8');
 
     function hex(c) {
         const m = String(c).trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
@@ -183,6 +208,14 @@
         const a = hex(paleta[i]), b = hex(paleta[i + 1]), f = x - i;
         return '#' + a.map((v, j) => Math.round(v + (b[j] - v) * f).toString(16).padStart(2, '0')).join('');
     }
+    // reactiva (no function) para que el SVG se repinte al cambiar los datos
+    $: opacidadDe = (id) => {
+        if (!intensidad) return undefined;
+        const v = Number(porId.get(id)?.[intensidad]);
+        if (!Number.isFinite(v)) return undefined;
+        const [lo, hi] = intensidadRango;
+        return (0.3 + 0.7 * Math.min(1, Math.max(0, (v - lo) / (hi - lo || 1)))).toFixed(2);
+    };
     function colorDe(id) {
         return colorFila(porId.get(id));
     }
@@ -191,6 +224,7 @@
         if (!value) return paleta[0] ?? '#3b82f6';
         const v = r[value];
         if (categorico) {
+            if (colorCol && r[colorCol]) return r[colorCol];
             const i = categorias.indexOf(v);
             return i < 0 ? null : paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8';
         }
@@ -267,7 +301,8 @@
     $: lineas = filaActiva
         ? (tooltip ?? [{ id: modoPuntos ? pointName : areaCol, showColumnName: false, valueClass: 'font-semibold' }, { id: value, fmt: valueFmt }, ...(size ? [{ id: size, fmt: sizeFmt }] : [])]).filter((t) => t.id).map((t) => ({
               titulo: t.showColumnName === false ? null : t.title ?? t.id,
-              valor: formatear(filaActiva[t.id], t.fmt ?? (t.id === value ? valueFmt : undefined)),
+              // prefixCol: columna con un texto que va delante del valor (p. ej. «≥» si la fuente corta la cifra)
+              valor: (t.prefixCol ? filaActiva[t.prefixCol] ?? '' : '') + formatear(filaActiva[t.id], t.fmt ?? (t.id === value ? valueFmt : undefined)),
               clase: t.valueClass ?? '',
           }))
         : [];
@@ -292,6 +327,7 @@
                     <path
                         d={f.d}
                         fill={colores.get(f.id) ?? 'currentColor'}
+                        fill-opacity={opacidadDe(f.id)}
                         class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
                         stroke-width="0.6"
                         style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
@@ -313,6 +349,7 @@
                         <path
                             d={f.d}
                             fill={colores.get(f.id) ?? 'currentColor'}
+                            fill-opacity={opacidadDe(f.id)}
                             class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
                             stroke-width="0.6"
                             style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
@@ -363,7 +400,7 @@
             <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
                 {#if categorico}
                     {#each categorias as c, i}
-                        <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8'}"></span>{c}</span>
+                        <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{colorCategoria(c, i)}"></span>{c}</span>
                     {/each}
                 {:else if numeros.length}
                     <span>{formatear(vMin, valueFmt)}</span>

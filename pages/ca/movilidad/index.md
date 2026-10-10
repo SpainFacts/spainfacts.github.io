@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
 description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega i viatgers de metro, autobús, tren i avió."
-i18n_origen: 59d7fcbfaeaa
+i18n_origen: 55dddfc9d8f7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -83,7 +83,7 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
         direction="positive-up"
         source="DGT"
         href="/ca/movilidad/coche-electrico"
-        sparklineData={cuota.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Turismes en circulació"

@@ -1,5 +1,5 @@
 ---
-i18n_origen: ed78ed2e1c5f
+i18n_origen: a3ce9f887980
 title: Coche eléctrico
 description: "Transición ao coche eléctrico en España: matriculacións de turismos por tipo de motor cada mes desde 2015, cota de eléctricos e híbridos enchufables por provincia e emisións de CO2."
 og:
@@ -98,7 +98,7 @@ Cantos dos coches que se venden en España xa son eléctricos? A resposta sae do
         changePeriod="vs. un ano antes"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Enchufables (eléctricos + híbridos enchufables)"
@@ -111,7 +111,7 @@ Cantos dos coches que se venden en España xa son eléctricos? A resposta sae do
         changePeriod="vs. un ano antes"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Electrificados (incluídos híbridos)"
@@ -120,7 +120,7 @@ Cantos dos coches que se venden en España xa son eléctricos? A resposta sae do
         unit="%"
         period="dos turismos novos · {ultimo[0]?.mes_texto}"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 

@@ -119,7 +119,7 @@ El **indulto** es la gracia por la que el Gobierno perdona, total o parcialmente
         formattedValue={formatNumber(resumen[0]?.ultimo, 0)}
         period="{formatNumber(resumen[0]?.en_curso, 0)} en lo que va de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.indultos)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.indultos}))}
     />
     <KpiCard
         title="Media de los últimos diez años"

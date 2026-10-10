@@ -93,7 +93,7 @@ El producto interior bruto mide todo lo que produce la economía. Para ver si el
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="interanual real, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
     />
     <KpiCard
         title="PIB por habitante, ritmo anual"
@@ -109,7 +109,7 @@ El producto interior bruto mide todo lo que produce la economía. Para ver si el
         formattedValue={formatNumber(pib_hab.filter(d => d.indice_ue != null).slice(-1)[0]?.indice_ue, 1)}
         period="PIB por habitante en paridad de poder de compra, UE = 100"
         source="Eurostat"
-        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => d.indice_ue)}
+        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => ({...d, y: d.indice_ue}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Habitatge públic de lloguer
 description: "Quants habitatges públics de lloguer hi ha a Espanya per habitant i en % de les llars, per comunitat, província i municipi, comparats amb els Països Baixos, Àustria, Dinamarca, França i la mitjana europea, i segons el partit que governava."
-i18n_origen: a5388d75d815
+i18n_origen: 911f5f63d748
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -214,7 +214,7 @@ Quants habitatges de les administracions es lloguen a preus per sota dels de mer
         changePeriod="vs. 2019"
         direction="neutral"
         source="Ministeri d'Habitatge (enquesta d'habitatge social)"
-        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => d.parque_autonomico_1000hab)}
+        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => ({...d, y: d.parque_autonomico_1000hab}))}
     />
     <KpiCard
         title="Llars amb lloguer per sota de mercat"
@@ -223,7 +223,7 @@ Quants habitatges de les administracions es lloguen a preus per sota dels de mer
         period="de les llars, {resumen[0]?.ecv_anio} · inclou lloguers reduïts privats"
         direction="neutral"
         source="INE (Enquesta de Condicions de Vida)"
-        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => d.ecv_pct_alquiler_inferior)}
+        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => ({...d, y: d.ecv_pct_alquiler_inferior}))}
     />
     <KpiCard
         title="Habitatges protegits de lloguer"
@@ -232,7 +232,7 @@ Quants habitatges de les administracions es lloguen a preus per sota dels de mer
         period="qualificacions provisionals, {resumen[0]?.calif_anio} · {formatNumber(resumen[0]?.calif_ultimo, 0)} habitatges"
         direction="neutral"
         source="Ministeri d'Habitatge"
-        sparklineData={calif.map(d => d.calif_alquiler_100k)}
+        sparklineData={calif.map(d => ({...d, y: d.calif_alquiler_100k}))}
     />
 </Grid>
 

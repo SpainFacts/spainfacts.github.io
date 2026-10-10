@@ -1,7 +1,7 @@
 ---
 title: Industria
 description: "Onde é España unha potencia industrial (automóbil, azulexos, aceite de oliva, xamón, material ferroviario, torres eólicas) e canto pesa a súa industria fronte á media da UE: VEB e emprego manufactureiro, produción industrial, exportacións e comunidades."
-i18n_origen: 276740ec377f
+i18n_origen: 96dc3106de6d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -506,7 +506,7 @@ España non está entre os países máis industriais da Unión Europea: as súas
         changePeriod="vs {veh_res[0]?.anio_ant}"
         direction="positive-up"
         source="OICA e ANFAC"
-        sparklineData={veh.map(d => d.vehiculos_1000_hab)}
+        sparklineData={veh.map(d => ({...d, y: d.vehiculos_1000_hab}))}
     />
     <KpiCard
         title="Azulexos: cota da produción da UE"
@@ -515,7 +515,7 @@ España non está entre os países máis industriais da Unión Europea: as súas
         period="{prod_res[0]?.anio} · en m² · {prod_res[0]?.az_puesto}.º dos {prod_res[0]?.az_n} países que publican o dato"
         direction="positive-up"
         source="Eurostat (Prodcom)"
-        sparklineData={azulejos.map(d => d.cuota_cantidad_pct)}
+        sparklineData={azulejos.map(d => ({...d, y: d.cuota_cantidad_pct}))}
     />
     <KpiCard
         title="Peso das manufacturas na economía"
@@ -527,7 +527,7 @@ España non está entre os países máis industriais da Unión Europea: as súas
         changePeriod="fronte á UE"
         direction="positive-up"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_manufacturas)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_manufacturas}))}
     />
     <KpiCard
         title="Índice de produción industrial"
@@ -538,7 +538,7 @@ España non está entre os países máis industriais da Unión Europea: as súas
         changePeriod="interanual"
         direction="positive-up"
         source="INE (IPI, táboa 70177)"
-        sparklineData={ipi_mes.map(d => d.indice)}
+        sparklineData={ipi_mes.map(d => ({...d, y: d.indice}))}
     />
 </Grid>
 

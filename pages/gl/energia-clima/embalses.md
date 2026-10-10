@@ -1,5 +1,5 @@
 ---
-i18n_origen: 428062b2d659
+i18n_origen: 868173fde4bb
 title: Reservas de auga e encoros
 description: Estado semanal dos encoros españois por conca, comparado co ano anterior e coa media dos últimos dez anos.
 og:
@@ -59,7 +59,7 @@ Os encoros españois almacenan hoxe **{formatNumber(espana[0]?.volumen_hm3, 0)} 
         unit=" pp"
         period="Hai un ano: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_anio}))}
     />
     <KpiCard
         title="Fronte á media de 10 anos"
@@ -68,7 +68,7 @@ Os encoros españois almacenan hoxe **{formatNumber(espana[0]?.volumen_hm3, 0)} 
         unit=" pp"
         period="Media mesma semana: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_media}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Lege-dekretuak
 description: "Espainiako Gobernu bakoitzak 1977tik zenbat errege lege-dekretu onartzen dituen, lege-mailako arauen zer zati egiten den dekretuz, Kongresuak zenbat baliozkotzen edo indargabetzen dituen eta alderdi bakoitza nola alderatzen den gobernatu duen denboraren arabera."
-i18n_origen: 4d28d421b631
+i18n_origen: 2922ec7a33e0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -170,7 +170,7 @@ ORDER BY fecha_disposicion DESC, numero DESC
         formattedValue={formatNumber(resumen[0]?.rdl_ultimo, 0)}
         period="batez bestekoa 1979tik: urteko {formatNumber(resumen[0]?.media_rdl, 1)} · {formatNumber(resumen[0]?.rdl_en_curso, 0)} {urtean(resumen[0]?.anio_en_curso)} orain arte"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.decretos_ley)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.decretos_ley}))}
     />
     <KpiCard
         title="Lege-mailako arauen zatia"
@@ -178,7 +178,7 @@ ORDER BY fecha_disposicion DESC, numero DESC
         formattedValue="{formatNumber(resumen[0]?.pct_ultimo, 0)} %"
         period="lege-dekretuak / (lege-dekretuak + legeak), {urtean(resumen[0]?.ultimo_anio)} · {formatNumber(resumen[0]?.pct_historico, 0)} % 1979tik"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.pct_rdl)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_rdl}))}
     />
     <KpiCard
         title="Egungo Gobernuaren erritmoa"

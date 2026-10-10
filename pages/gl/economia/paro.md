@@ -1,5 +1,5 @@
 ---
-i18n_origen: b3ae3805f825
+i18n_origen: cc5703f42701
 title: Paro e emprego
 description: "Taxa de paro en España por sexo, idade, nacionalidade, estudos e territorio, paro xuvenil e de longa duración, temporalidade, paro rexistrado mensual e comparación coa UE."
 ---
@@ -232,7 +232,7 @@ Canta xente busca traballo e non o atopa, a quen afecta máis, onde e canto dura
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Paro xuvenil (menores de 25)"
@@ -244,7 +244,7 @@ Canta xente busca traballo e non o atopa, a quen afecta máis, onde e canto dura
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_menor25)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Taxa de emprego"
@@ -256,7 +256,7 @@ Canta xente busca traballo e non o atopa, a quen afecta máis, onde e canto dura
         changePeriod="vs. un ano antes"
         direction="positive-up"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_empleo)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_empleo}))}
     />
     <KpiCard
         title="Paro rexistrado"
@@ -267,7 +267,7 @@ Canta xente busca traballo e non o atopa, a quen afecta máis, onde e canto dura
         changePeriod="parados rexistrados vs. un ano antes"
         direction="positive-down"
         source="SEPE"
-        sparklineData={registrado.slice(-60).map(d => d.por_100_16_64)}
+        sparklineData={registrado.slice(-60).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -292,7 +292,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_larga)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_larga}))}
     />
     <KpiCard
         title="Fogares con todos en paro"
@@ -304,7 +304,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.pct_hogares_todos_parados)}
+        sparklineData={epa.map(d => ({...d, y: d.pct_hogares_todos_parados}))}
     />
     <KpiCard
         title="Temporalidade"
@@ -316,7 +316,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_temporalidad)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_temporalidad}))}
     />
     <KpiCard
         title="Parcialidade involuntaria"
@@ -328,7 +328,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs. un ano antes"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => d.pct_parcial_involuntario)}
+        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => ({...d, y: d.pct_parcial_involuntario}))}
     />
 </Grid>
 

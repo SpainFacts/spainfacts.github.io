@@ -1,7 +1,7 @@
 ---
 title: Udalen kontu-ematea
 description: "Informazioa argitaratzeko edo bidaltzeko legezko betebeharrak betetzen ez dituzten administrazioak: zein diren, non dauden eta nork gobernatzen zuen epea amaitzean."
-i18n_origen: 899966847983
+i18n_origen: 6bcb4f6a8ddd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -87,7 +87,7 @@ Udal bakoitzak Ogasun Ministerioari bidali behar dio bere aurrekontuaren likidaz
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
         period="{formatNumber(resumen[0]?.incumplen / resumen[0]?.total / 0.01, 1)} % {formatNumber(resumen[0]?.total, 0)} udalen gainean"
         source="Ogasun Ministerioa (CONPREL)"
-        sparklineData={liq_serie.map(d => d.incumplen)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.incumplen}))}
     />
     <KpiCard
         title="Kaltetutako bizilagunak"
@@ -95,7 +95,7 @@ Udal bakoitzak Ogasun Ministerioari bidali behar dio bere aurrekontuaren likidaz
         formattedValue={formatNumber(resumen[0]?.afectados_por_1000, 1)}
         unit="1.000 biz. bakoitzeko"
         period="{formatNumber(resumen[0]?.poblacion_afectada, 0)} bizilagun guztira; 20.000 biztanletik gorako udalak: {formatNumber(resumen[0]?.grandes, 0)}"
-        sparklineData={liq_serie.map(d => d.afectados_por_1000)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Hiru urte edo gehiago jarraian"
@@ -373,7 +373,7 @@ WHERE aplica_indicador AND obligacion = 'control_interno'
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total / 0.01, 1)} % {formatNumber(tcu_resumen[0]?.total, 0)} udalen gainean; ez dago emandakotzat jasota {tcu_cobertura[0]?.extraccion} datan"
         source="Kontuen Epaitegia (rendiciondecuentas.es)"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => ({...d, y: d.no_rendida}))}
     />
     <KpiCard
         title="Epe barruan bidalia"
@@ -386,7 +386,7 @@ WHERE aplica_indicador AND obligacion = 'control_interno'
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total / 0.01, 1)} % {formatNumber(tcu_resumen_ci[0]?.total, 0)} udalen gainean (epea: 30/04/{tcu_ultimo[0]?.ci + 1})"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => ({...d, y: d.no_rendida}))}
     />
 </Grid>
 
@@ -600,7 +600,7 @@ ORDER BY m.periodo
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_mes, 0)}
         period="horietatik {formatNumber(pie_resumen[0]?.retenidos_liquidacion, 0)} likidazioa ez bidaltzeagatik"
         source="Ogasun Ministerioa (OVEELL)"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_mes)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_mes}))}
     />
     <KpiCard
         title="Azken 12 hilabeteetan atxikitakoa"
@@ -609,14 +609,14 @@ ORDER BY m.periodo
         unit="M€ ({urte(base_deflactor[0]?.anio_base, 'ko')} eurotan)"
         period="ez-betetzeak iraun bitartean transferitu gabeko Estatuaren zergetako partaidetza ({formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)} M€ korronte)"
         source="Hileko konturako entregak"
-        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => d.eur_12m_real)}
+        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => ({...d, y: d.eur_12m_real}))}
     />
     <KpiCard
         title="Azken urtean atxikitako udalak"
         value={pie_resumen[0]?.retenidos_12m}
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_12m, 0)}
         period="gutxienez hilabete batez azken 12etan"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_12m)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_12m}))}
     />
 </Grid>
 
@@ -864,7 +864,7 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
         period="{formatNumber(pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total / 0.01, 1)} % {formatNumber(pmp_resumen[0]?.total, 0)} udalen gainean"
         source="Ogasun Ministerioa (PMP_NET)"
-        sparklineData={pmp_serie.map(d => d.no_comunican)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.no_comunican}))}
     />
     <KpiCard
         title="Kaltetutako bizilagunak"
@@ -872,14 +872,14 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.afectados_por_1000, 1)}
         unit="1.000 biz. bakoitzeko"
         period="{formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)} bizilagun guztira; 5.000 biztanletik gorako udalak: {formatNumber(pmp_resumen[0]?.mas_5000, 0)}"
-        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => d.afectados_por_1000)}
+        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="30 egun baino gehiagoan ordaintzen dute"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
         period="{formatNumber(pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican / 0.01, 1)} % jakinarazten dutenen artean ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} biz.)"
-        sparklineData={pmp_serie.map(d => d.supera_30)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.supera_30}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Komunikabideen negozioa
 description: "Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bizi diren (publizitate-inbertsioa euskarrika) eta zenbat jendek egiten duen lan haietan, biztanleko eta inflazioa kenduta, EBrekin eta jasotzen duten diru publikoarekin alderatuta."
-i18n_origen: e0531df8ebcc
+i18n_origen: 71922c646c15
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -281,7 +281,7 @@ Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bi
         period={`${papel_resumen[0].anio} · ${formatNumber(papel_resumen[0].miles / 1000, 1)} milioi irakurle egunean`}
         source="AIMC (EGM)"
         direction="positive-up"
-        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => d.por_1000_hab)}
+        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Publizitate-inbertsioa komunikabideetan"
@@ -291,7 +291,7 @@ Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bi
         period={`${pub_resumen[0].anio} · ${formatCompact(pub_resumen[0].meur * 1e6, 2)} € telebistan, prentsan, irratian, digitalean, kanpoaldean eta zineman`}
         source="InfoAdex"
         direction="positive-up"
-        sparklineData={pub_mercado.map(d => d.eur_hab_real)}
+        sparklineData={pub_mercado.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Enplegua egunkarien edizioan"
@@ -301,7 +301,7 @@ Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bi
         period={`${empleo_ult[0].anio} · ${formatNumber(empleo_ult[0].periodicos, 0)} pertsona ${formatNumber(empleo_ult[0].periodicos_empresas, 0)} enpresatan`}
         source="INE eta Eurostat (SBS)"
         direction="positive-up"
-        sparklineData={empleo_spark.map(d => d.ocupados_100k_hab)}
+        sparklineData={empleo_spark.map(d => ({...d, y: d.ocupados_100k_hab}))}
     />
     <KpiCard
         title="Estatuaren publizitatea merkatuaren aldean"
@@ -311,7 +311,7 @@ Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bi
         period={`${publico_ult_age[0].anio} · ${formatCompact(publico_ult_age[0].publicidad_estado_meur * 1e6, 2)} € Estatuaren eta haren enpresen kanpainetan`}
         source="Moncloa eta InfoAdex"
         direction="positive-down"
-        sparklineData={publico.map(d => d.publicidad_estado_pct_mercado)}
+        sparklineData={publico.map(d => ({...d, y: d.publicidad_estado_pct_mercado}))}
     />
     {/if}
 </div>

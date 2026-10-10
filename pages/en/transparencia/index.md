@@ -1,7 +1,7 @@
 ---
 title: Transparency
 description: "How Spanish public administrations are held to account: councils' reporting obligations, transparency portals, decree-laws, pardons, rolled-over budgets and Spain's position in international integrity indices, by government and by party."
-i18n_origen: fd0f9eb9de30
+i18n_origen: f730ced4988b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -62,7 +62,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="positive-down"
         href="/en/transparencia/decretos-ley"
-        sparklineData={actos.map(d => d.rdl)}
+        sparklineData={actos.map(d => ({...d, y: d.rdl}))}
     />
     <KpiCard
         title="Pardons"
@@ -73,7 +73,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="neutral"
         href="/en/transparencia/indultos"
-        sparklineData={actos.map(d => d.indultos)}
+        sparklineData={actos.map(d => ({...d, y: d.indultos}))}
     />
     {/if}
     {#if cpi_ult.length}
@@ -86,7 +86,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Transparency International"
         direction="positive-up"
         href="/en/transparencia/comparacion-internacional"
-        sparklineData={cpi.map(d => d.valor)}
+        sparklineData={cpi.map(d => ({...d, y: d.valor}))}
     />
     {/if}
     {#if liquidaciones_ult.length}
@@ -99,7 +99,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Ministry of Finance"
         direction="positive-down"
         href="/en/transparencia/cuentas-municipales"
-        sparklineData={liquidaciones.map(d => d.valor)}
+        sparklineData={liquidaciones.map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

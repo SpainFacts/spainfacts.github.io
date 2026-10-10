@@ -1,7 +1,7 @@
 ---
 title: Inflació (IPC)
 description: "Inflació a Espanya: IPC general i subjacent, preus per grups, preu real de la llum, el gas i els carburants, quant han pujat els preus des del 2008 i el 2019, IPC per comunitat i comparació amb la zona euro."
-i18n_origen: 80b3f9ec9e4d
+i18n_origen: beb0f070e1b9
 ---
 
 <script>
@@ -207,7 +207,7 @@ Quant pugen els preus a Espanya, què s'encareix més i quant poder de compra s'
         changePeriod="respecte al mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.var_anual)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Inflació subjacent"
@@ -219,7 +219,7 @@ Quant pugen els preus a Espanya, què s'encareix més i quant poder de compra s'
         changePeriod="respecte al mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => d.subyacente)}
+        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => ({...d, y: d.subyacente}))}
     />
     <KpiCard
         title="Preus des del 2019"
@@ -228,7 +228,7 @@ Quant pugen els preus a Espanya, què s'encareix més i quant poder de compra s'
         period="el que costava 100 € de mitjana el 2019 avui costa {formatNumber(ipc_ult[0]?.indice_2019, 0)} €"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => d.indice_2019)}
+        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => ({...d, y: d.indice_2019}))}
     />
     <KpiCard
         title="Diferència amb la zona euro"
@@ -237,7 +237,7 @@ Quant pugen els preus a Espanya, què s'encareix més i quant poder de compra s'
         period="inflació harmonitzada: Espanya {formatNumber(diferencial.slice(-1)[0]?.es, 1)} %, zona euro {formatNumber(diferencial.slice(-1)[0]?.ea, 1)} % ({diferencial.slice(-1)[0]?.mes_txt})"
         direction="positive-down"
         source="Eurostat / IPCH"
-        sparklineData={diferencial.slice(-60).map(d => d.diferencial)}
+        sparklineData={diferencial.slice(-60).map(d => ({...d, y: d.diferencial}))}
     />
 </Grid>
 
@@ -260,7 +260,7 @@ WHERE indicador_id IN ('inflacion')
         changePeriod="respecte al mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.energia)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.energia}))}
     />
     <KpiCard
         title="Aliments sense elaborar"
@@ -269,7 +269,7 @@ WHERE indicador_id IN ('inflacion')
         period="fruita, verdura, carn, peix, ous..., respecte a un any abans"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.alimentos_sin_elaborar)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.alimentos_sin_elaborar}))}
     />
     <KpiCard
         title="Inflació mitjana anual"
@@ -278,7 +278,7 @@ WHERE indicador_id IN ('inflacion')
         period="mitjana del {ipc_anual_serie.slice(-1)[0]?.anio} respecte a la del {ipc_anual_serie.slice(-1)[0]?.anio - 1}"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc_anual_serie.map(d => d.inflacion_media)}
+        sparklineData={ipc_anual_serie.map(d => ({...d, y: d.inflacion_media}))}
     />
     <KpiCard
         title="Preus des del 2008"
@@ -287,7 +287,7 @@ WHERE indicador_id IN ('inflacion')
         period="pujada acumulada de l'IPC des de la mitjana del 2008"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => d.indice_2008)}
+        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => ({...d, y: d.indice_2008}))}
     />
 </Grid>
 
@@ -552,7 +552,7 @@ El preu de l'energia ha estat una de les claus de la inflació dels últims anys
         period="respecte a un any abans, {en_ult[0]?.mes_txt} · {formatNumber(en_ult.find(d => d.producto === 'Electricidad')?.indice_2019, 0)} si 2019 = 100"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={en_electricidad.slice(-60).map(d => d.var_anual)}
+        sparklineData={en_electricidad.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Gasolina 95"
@@ -561,7 +561,7 @@ El preu de l'energia ha estat una de les claus de la inflació dels últims anys
         period="setmana del {carb_ult[0]?.semana_txt}, amb impostos, en euros de {carb_ult[0]?.anio_euros} · {formatNumber(carb_ult[0]?.gasolina, 3)} € a preu actual"
         direction="positive-down"
         source="Comissió Europea"
-        sparklineData={carb_spark_gasolina.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasolina.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Gasoil d'automoció"
@@ -570,7 +570,7 @@ El preu de l'energia ha estat una de les claus de la inflació dels últims anys
         period="setmana del {carb_ult[0]?.semana_txt}, amb impostos, en euros de {carb_ult[0]?.anio_euros} · {formatNumber(carb_ult[0]?.gasoleo, 3)} € a preu actual"
         direction="positive-down"
         source="Comissió Europea"
-        sparklineData={carb_spark_gasoleo.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasoleo.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Llum de les llars"
@@ -579,7 +579,7 @@ El preu de l'energia ha estat una de les claus de la inflació dels últims anys
         period="{hogares_ult[0]?.semestre}, amb impostos, en euros de {hogares_ult[0]?.anio_euros} · UE-27 {formatNumber(hogares_ult[0]?.elec_ue_real, 3)} €"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={hogares_es_elec.map(d => d.eur_kwh_real)}
+        sparklineData={hogares_es_elec.map(d => ({...d, y: d.eur_kwh_real}))}
     />
 </Grid>
 

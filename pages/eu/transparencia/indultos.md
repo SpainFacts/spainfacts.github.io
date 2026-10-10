@@ -1,7 +1,7 @@
 ---
 title: Indultuak
 description: "Espainiako Gobernu bakoitzak 1977tik zenbat indultu ematen dituen BOEren arabera, haien bilakaera eta presidente eta alderdi bakoitza nola alderatzen den gobernatu duen denboraren arabera."
-i18n_origen: 774383d84eca
+i18n_origen: a455aff1d882
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -126,7 +126,7 @@ ORDER BY familia
         formattedValue={formatNumber(resumen[0]?.ultimo, 0)}
         period="{formatNumber(resumen[0]?.en_curso, 0)} {urtean(resumen[0]?.anio_en_curso)} orain arte"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.indultos)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.indultos}))}
     />
     <KpiCard
         title="Azken hamar urteetako batez bestekoa"

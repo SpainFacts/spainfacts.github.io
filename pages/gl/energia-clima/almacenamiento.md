@@ -1,5 +1,5 @@
 ---
-i18n_origen: af0dd2e402bd
+i18n_origen: 109cbe23c229
 title: Almacenamento de electricidade
 description: "Bombeo hidráulico e baterías en España: canta enerxía almacenan e devolven, potencia instalada por comunidade, rendemento e proxectos con permiso de acceso á rede fronte ao obxectivo de 22,5 GW do PNIEC para 2030."
 og:
@@ -85,7 +85,7 @@ Con cada vez máis solar e eólica, o sistema eléctrico necesita gardar a enerx
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="en {ultimo_anio[0]?.anio} · {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} veces a de 2019"
         source="REE (balance)"
-        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({...d, valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Almacenamento con permiso de acceso"

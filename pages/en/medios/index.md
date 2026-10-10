@@ -1,7 +1,7 @@
 ---
 title: The media
 description: "The media in Spain in data: how much public money public broadcasters and private media receive in institutional advertising and subsidies, per inhabitant, by region and by party."
-i18n_origen: fac8a0e02911
+i18n_origen: 04e7dfd80d80
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -49,7 +49,7 @@ The financial relationship between public administrations and the media: how muc
         source="CNMC and RTVE"
         direction="positive-down"
         href="/en/medios/dinero-publico"
-        sparklineData={tv.map(d => d.total_eur_hab_real)}
+        sparklineData={tv.map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Central government advertising"
@@ -60,7 +60,7 @@ The financial relationship between public administrations and the media: how muc
         source="Institutional Advertising Commission"
         direction="positive-down"
         href="/en/medios/dinero-publico"
-        sparklineData={pub.map(d => d.institucional_eur_hab_real + d.comercial_eur_hab_real)}
+        sparklineData={pub.map(d => ({...d, y: d.institucional_eur_hab_real + d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subsidies to private media"
@@ -71,7 +71,7 @@ The financial relationship between public administrations and the media: how muc
         source="BDNS"
         direction="positive-down"
         href="/en/medios/dinero-publico"
-        sparklineData={sub.map(d => d.eur_hab_real)}
+        sparklineData={sub.map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

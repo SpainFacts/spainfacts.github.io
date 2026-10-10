@@ -1,7 +1,7 @@
 ---
 title: Comerç exterior
 description: "Exportacions i importacions de béns i serveis d'Espanya: pes sobre el PIB, saldo exterior i evolució real per habitant."
-i18n_origen: d44a780dbaed
+i18n_origen: 57519a9f7dc4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -76,7 +76,7 @@ El que Espanya ven a la resta del món (exportacions) i el que compra fora (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_pct, 1)} % del PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.export_meur / 1000, 0)} mil M€ en el trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.export_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.export_pct}))}
     />
     <KpiCard
         title="Importacions"
@@ -84,7 +84,7 @@ El que Espanya ven a la resta del món (exportacions) i el que compra fora (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.import_pct, 1)} % del PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.import_meur / 1000, 0)} mil M€ en el trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.import_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.import_pct}))}
     />
     <KpiCard
         title="Saldo exterior"
@@ -93,7 +93,7 @@ El que Espanya ven a la resta del món (exportacions) i el que compra fora (impo
         period="exportacions menys importacions el {saldo_anual.slice(-1)[0]?.anio}"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={saldo_anual.map(d => d.saldo_pct)}
+        sparklineData={saldo_anual.map(d => ({...d, y: d.saldo_pct}))}
     />
     <KpiCard
         title="Exportacions reals"
@@ -101,7 +101,7 @@ El que Espanya ven a la resta del món (exportacions) i el que compra fora (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_interanual, 1)} %"
         period="variació interanual en volum, {comercio_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-24).map(d => d.export_interanual)}
+        sparklineData={comercio_trim.slice(-24).map(d => ({...d, y: d.export_interanual}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: New builds
 description: "Open-market homes started and completed each year in Spain per 1,000 inhabitants since 1996, by region and province, with data from the Ministry of Housing."
-i18n_origen: 6b1ad71c87ca
+i18n_origen: 442b873cd088
 ---
 
 <script>
@@ -85,7 +85,7 @@ How many homes are built in Spain. These are **open-market homes** (excluding so
         formattedValue="{formatNumber(hitos[0]?.term_ult, 2)} per 1,000 inhab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.term_total, 0)} open-market homes"
         source="Ministry of Housing"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Homes started"
@@ -93,7 +93,7 @@ How many homes are built in Spain. These are **open-market homes** (excluding so
         formattedValue="{formatNumber(hitos[0]?.ini_ult, 2)} per 1,000 inhab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.ini_total, 0)} open-market homes"
         source="Ministry of Housing"
-        sparklineData={espana.map(d => d.iniciadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.iniciadas_1000}))}
     />
     <KpiCard
         title="Versus the peak"
@@ -101,7 +101,7 @@ How many homes are built in Spain. These are **open-market homes** (excluding so
         formattedValue="{formatNumber(hitos[0]?.fraccion_max / 0.01, 0)} %"
         period="of homes completed per inhabitant in {hitos[0]?.anio_term_max} ({formatNumber(hitos[0]?.term_max, 1)} per 1,000 inhab.)"
         source="Ministry of Housing"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Versus the late 1990s"
@@ -109,7 +109,7 @@ How many homes are built in Spain. These are **open-market homes** (excluding so
         formattedValue="{formatNumber(hitos[0]?.media_9600, 1)} per 1,000 inhab."
         period="homes completed per year on average in 1996-2000"
         source="Ministry of Housing"
-        sparklineData={espana.filter(d => d.anio <= 2000).map(d => d.terminadas_1000)}
+        sparklineData={espana.filter(d => d.anio <= 2000).map(d => ({...d, y: d.terminadas_1000}))}
     />
 </Grid>
 

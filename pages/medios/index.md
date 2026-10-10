@@ -48,7 +48,7 @@ Qué relación económica tienen las administraciones con los medios de comunica
         source="CNMC y RTVE"
         direction="positive-down"
         href="/medios/dinero-publico"
-        sparklineData={tv.map(d => d.total_eur_hab_real)}
+        sparklineData={tv.map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Publicidad del Estado"
@@ -59,7 +59,7 @@ Qué relación económica tienen las administraciones con los medios de comunica
         source="Comisión de Publicidad Institucional"
         direction="positive-down"
         href="/medios/dinero-publico"
-        sparklineData={pub.map(d => d.institucional_eur_hab_real + d.comercial_eur_hab_real)}
+        sparklineData={pub.map(d => ({...d, y: d.institucional_eur_hab_real + d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subvenciones a medios privados"
@@ -70,7 +70,7 @@ Qué relación económica tienen las administraciones con los medios de comunica
         source="BDNS"
         direction="positive-down"
         href="/medios/dinero-publico"
-        sparklineData={sub.map(d => d.eur_hab_real)}
+        sparklineData={sub.map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

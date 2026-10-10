@@ -1,7 +1,7 @@
 ---
 title: Ibilgailu-parkea
 description: "Espainian zirkulatzen duten ibilgailuak: turismoak motor motaren, DGTren ingurumen-etiketaren eta antzinatasunaren arabera, modelo ohikoenak eta probintzien eta udalerrien arteko konparazioa."
-i18n_origen: 5bbacb52d8c4
+i18n_origen: 7ce7ebdce3e1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -48,7 +48,7 @@ ORDER BY mes
         formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} 1.000 biztanleko"
         period="{formatCompact(resumen[0]?.turismos, 1)} turismo eta mota guztietako {formatCompact(resumen[0]?.vehiculos, 1)} ibilgailu · {resumen[0]?.mes_texto}"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.turismos_1000)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.turismos_1000}))}
     />
     <KpiCard
         title="Turismo entxufagarriak"
@@ -56,7 +56,7 @@ ORDER BY mes
         formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_enchufables, 1)} %"
         period="turismoen artean · {formatNumber(resumen[0]?.enchufables, 0)} entxufagarri, {formatNumber(resumen[0]?.bev, 0)} elektriko huts"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_enchufables)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_enchufables}))}
     />
     <KpiCard
         title="Ingurumen-etiketarik gabeko turismoak"
@@ -65,7 +65,7 @@ ORDER BY mes
         period="turismoen artean · {formatCompact(resumen[0]?.sin_distintivo, 1)} auto · 2000 aurreko gasolinazkoak eta 2006 aurreko dieselak"
         direction="positive-down"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_sin_distintivo)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_sin_distintivo}))}
     />
 </Grid>
 

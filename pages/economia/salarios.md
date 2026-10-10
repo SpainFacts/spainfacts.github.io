@@ -112,7 +112,7 @@ Cuánto se cobra en España y si el sueldo da para más o para menos que antes. 
         changePeriod="real vs año anterior"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Subida real del último trimestre"
@@ -121,7 +121,7 @@ Cuánto se cobra en España y si el sueldo da para más o para menos que antes. 
         period="{trimestral.slice(-1)[0]?.periodo} vs un año antes · {formatNumber(trimestral.slice(-1)[0]?.interanual_nominal, 1)} % sin descontar la inflación"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => d.interanual_real)}
+        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Frente a 2008"
@@ -130,7 +130,7 @@ Cuánto se cobra en España y si el sueldo da para más o para menos que antes. 
         period="poder de compra del salario medio en {hitos_salario[0]?.anio_ult} · +{formatNumber(hitos_salario[0]?.nominal_vs2008, 0)} % en euros de cada año"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Salario del decil central"
@@ -138,7 +138,7 @@ Cuánto se cobra en España y si el sueldo da para más o para menos que antes. 
         formattedValue="{formatNumber(deciles_ult.find(d => d.decil === 5)?.salario_real, 0)} €/mes"
         period="lo que cobra el asalariado típico (decil 5 de la EPA) en {deciles_ult[0]?.anio}, euros de {deciles_ult[0]?.anio_base}"
         source="INE / EPA"
-        sparklineData={deciles.filter(d => d.decil === 5).map(d => d.salario_real)}
+        sparklineData={deciles.filter(d => d.decil === 5).map(d => ({...d, y: d.salario_real}))}
     />
 </Grid>
 

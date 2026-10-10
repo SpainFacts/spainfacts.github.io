@@ -1,7 +1,7 @@
 ---
 title: Prezo da vivenda
 description: "Prezo da vivenda en España descontada a inflación: valor taxado por metro cadrado por comunidade, provincia e municipio e o Índice de Prezos de Vivenda do INE, nova e de segunda man."
-i18n_origen: 058fd706b1df
+i18n_origen: 44b0921ad358
 ---
 
 <script>
@@ -110,7 +110,7 @@ Canto vale comprar unha vivenda en España e como cambiou. Hai dúas fontes ofic
         change={precio.slice(-1)[0]?.interanual_real?.toFixed(1)}
         changePeriod="real fronte a un ano antes"
         source="Ministerio de Vivenda"
-        sparklineData={precio.map(d => d.euros_m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Suba real dos prezos"
@@ -118,7 +118,7 @@ Canto vale comprar unha vivenda en España e como cambiou. Hai dúas fontes ofic
         formattedValue="{ipv_general.slice(-1)[0]?.interanual_real >= 0 ? '+' : ''}{formatNumber(ipv_general.slice(-1)[0]?.interanual_real, 1)} %"
         period="IPV, {ipv_general.slice(-1)[0]?.periodo} fronte a un ano antes · {formatNumber(ipv_general.slice(-1)[0]?.interanual_nominal, 1)} % sen descontar a inflación"
         source="INE / IPV"
-        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => d.interanual_real)}
+        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Fronte ao máximo da burbulla"
@@ -126,7 +126,7 @@ Canto vale comprar unha vivenda en España e como cambiou. Hai dúas fontes ofic
         formattedValue="{ipv_hitos[0]?.vs_max >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max, 1)} %"
         period="prezo real fronte a {ipv_hitos[0]?.periodo_max} (IPV) · {ipv_hitos[0]?.vs_max_nominal >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max_nominal, 1)} % en euros de cada ano"
         source="INE / IPV"
-        sparklineData={ipv_general.map(d => d.indice_real)}
+        sparklineData={ipv_general.map(d => ({...d, y: d.indice_real}))}
     />
     <KpiCard
         title="Piso de 90 m²"
@@ -134,7 +134,7 @@ Canto vale comprar unha vivenda en España e como cambiou. Hai dúas fontes ofic
         formattedValue="{formatNumber(precio.slice(-1)[0]?.precio_90m2_real / 1000, 0)} mil €"
         period="ao valor taxado medio de España, {precio.slice(-1)[0]?.periodo}"
         source="Ministerio de Vivenda"
-        sparklineData={precio.map(d => d.precio_90m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.precio_90m2_real}))}
     />
 </Grid>
 

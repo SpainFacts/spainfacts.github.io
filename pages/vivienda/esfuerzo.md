@@ -81,7 +81,7 @@ Cuánto pesa la vivienda en el sueldo. Para comprar: **cuántos años de salario
         period="España, {hitos[0]?.anio_ult} · máximo: {formatNumber(hitos[0]?.anios_max, 1)} en {hitos[0]?.anio_max}"
         direction="positive-down"
         source="Ministerio de Vivienda / INE"
-        sparklineData={compra.map(d => d.anios_salario)}
+        sparklineData={compra.map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Alquiler sobre el salario"
@@ -90,7 +90,7 @@ Cuánto pesa la vivienda en el sueldo. Para comprar: **cuántos años de salario
         period="del salario bruto medio, {alquiler.slice(-1)[0]?.anio} · {formatNumber(alquiler.slice(-1)[0]?.alquiler_mes_mediana, 0)} € al mes"
         direction="positive-down"
         source="Ministerio de Vivienda / INE"
-        sparklineData={alquiler.map(d => d.pct_alquiler)}
+        sparklineData={alquiler.map(d => ({...d, y: d.pct_alquiler}))}
     />
     <KpiCard
         title="Donde más cuesta comprar"
@@ -99,7 +99,7 @@ Cuánto pesa la vivienda en el sueldo. Para comprar: **cuántos años de salario
         period="{ccaa[0]?.comunidad}, {ccaa[0]?.anio} · donde menos: {ccaa.slice(-1)[0]?.comunidad}, {formatNumber(ccaa.slice(-1)[0]?.anios_salario, 1)}"
         direction="positive-down"
         source="Ministerio de Vivienda / INE"
-        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => d.anios_salario)}
+        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Salario bruto medio"
@@ -107,7 +107,7 @@ Cuánto pesa la vivienda en el sueldo. Para comprar: **cuántos años de salario
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € al año"
         period="España, {hitos[0]?.anio_ult} · un piso de 90 m² se tasa en {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual_real)}
+        sparklineData={compra.map(d => ({...d, y: d.salario_anual_real}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Rendición de contas dos concellos
 description: "Administracións que non cumpren as súas obrigas legais de publicar ou remitir información: quen son, onde están e quen gobernaba cando vencía o prazo."
-i18n_origen: 899966847983
+i18n_origen: 6bcb4f6a8ddd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -77,7 +77,7 @@ Cada concello debe remitir ao Ministerio de Facenda a liquidación do seu orzame
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
         period="{formatNumber(resumen[0]?.incumplen / resumen[0]?.total / 0.01, 1)} % de {formatNumber(resumen[0]?.total, 0)} concellos"
         source="Ministerio de Facenda (CONPREL)"
-        sparklineData={liq_serie.map(d => d.incumplen)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.incumplen}))}
     />
     <KpiCard
         title="Veciños afectados"
@@ -85,7 +85,7 @@ Cada concello debe remitir ao Ministerio de Facenda a liquidación do seu orzame
         formattedValue={formatNumber(resumen[0]?.afectados_por_1000, 1)}
         unit="por cada 1.000 hab."
         period="{formatNumber(resumen[0]?.poblacion_afectada, 0)} veciños en total; {formatNumber(resumen[0]?.grandes, 0)} deses concellos teñen máis de 20.000 habitantes"
-        sparklineData={liq_serie.map(d => d.afectados_por_1000)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Tres anos ou máis seguidos"
@@ -363,7 +363,7 @@ A **Conta Xeral** recolle todas as contas do concello (orzamento, balance, resul
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen[0]?.total, 0)} concellos; non consta rendida a {tcu_cobertura[0]?.extraccion}"
         source="Tribunal de Contas (rendiciondecuentas.es)"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => ({...d, y: d.no_rendida}))}
     />
     <KpiCard
         title="Enviada dentro do prazo"
@@ -376,7 +376,7 @@ A **Conta Xeral** recolle todas as contas do concello (orzamento, balance, resul
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen_ci[0]?.total, 0)} concellos (prazo: 30/04/{tcu_ultimo[0]?.ci + 1})"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => ({...d, y: d.no_rendida}))}
     />
 </Grid>
 
@@ -590,7 +590,7 @@ ORDER BY m.periodo
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_mes, 0)}
         period="{formatNumber(pie_resumen[0]?.retenidos_liquidacion, 0)} deles por non remitir a liquidación"
         source="Ministerio de Facenda (OVEELL)"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_mes)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_mes}))}
     />
     <KpiCard
         title="Retido nos últimos 12 meses"
@@ -599,14 +599,14 @@ ORDER BY m.periodo
         unit="M€ de {base_deflactor[0]?.anio_base}"
         period="participación en tributos do Estado non transferida mentres duraba o incumprimento ({formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)} M€ correntes)"
         source="Entregas a conta mensuais"
-        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => d.eur_12m_real)}
+        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => ({...d, y: d.eur_12m_real}))}
     />
     <KpiCard
         title="Concellos retidos no último ano"
         value={pie_resumen[0]?.retenidos_12m}
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_12m, 0)}
         period="polo menos un mes nos últimos 12"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_12m)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_12m}))}
     />
 </Grid>
 
@@ -854,7 +854,7 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
         period="{formatNumber(pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total / 0.01, 1)} % de {formatNumber(pmp_resumen[0]?.total, 0)} concellos"
         source="Ministerio de Facenda (PMP_NET)"
-        sparklineData={pmp_serie.map(d => d.no_comunican)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.no_comunican}))}
     />
     <KpiCard
         title="Veciños afectados"
@@ -862,14 +862,14 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.afectados_por_1000, 1)}
         unit="por cada 1.000 hab."
         period="{formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)} veciños en total; {formatNumber(pmp_resumen[0]?.mas_5000, 0)} deses concellos teñen máis de 5.000 habitantes"
-        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => d.afectados_por_1000)}
+        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Pagan en máis de 30 días"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
         period="{formatNumber(pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican / 0.01, 1)} % dos que o comunican ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} hab.)"
-        sparklineData={pmp_serie.map(d => d.supera_30)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.supera_30}))}
     />
 </Grid>
 

@@ -58,7 +58,7 @@ Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)
         unit=" pp"
         period="Hace un año: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_anio}))}
     />
     <KpiCard
         title="Frente a la media de 10 años"
@@ -67,7 +67,7 @@ Los embalses españoles almacenan hoy **{formatNumber(espana[0]?.volumen_hm3, 0)
         unit=" pp"
         period="Media misma semana: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_media}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Heat and temperatures
 description: Daily map of heat in Spain by province, compared with the usual maximum temperature for each day in 1991-2020, and each province's records. AEMET data.
-i18n_origen: 2e6c1757c41f
+i18n_origen: b2c2b4a53fb2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -80,7 +80,7 @@ On **{fechaLarga(espana[0]?.fecha)}** the maximum temperature at each province's
         formattedValue="{espana[0]?.n_provincias_por_encima}"
         unit=" of {espana[0]?.n_provincias}"
         period="More than 1 °C above their average"
-        sparklineData={serie_espana.map(d => ({valor: d.n_provincias_por_encima}))}
+        sparklineData={serie_espana.map(d => ({...d, valor: d.n_provincias_por_encima}))}
     />
     <KpiCard
         title="Largest anomaly"

@@ -1,7 +1,7 @@
 ---
 title: El negoci dels mitjans
 description: "Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen (la inversió publicitària per suport) i quanta gent hi treballa, per habitant i descomptada la inflació, en comparació amb la UE i amb els diners públics que reben."
-i18n_origen: e0531df8ebcc
+i18n_origen: 71922c646c15
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -274,7 +274,7 @@ Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen i
         period={`${papel_resumen[0].anio} · ${formatNumber(papel_resumen[0].miles / 1000, 1)} milions de lectors al dia`}
         source="AIMC (EGM)"
         direction="positive-up"
-        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => d.por_1000_hab)}
+        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Inversió publicitària en mitjans"
@@ -284,7 +284,7 @@ Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen i
         period={`${pub_resumen[0].anio} · ${formatCompact(pub_resumen[0].meur * 1e6, 2)} € en televisió, premsa, ràdio, digital, exterior i cinema`}
         source="InfoAdex"
         direction="positive-up"
-        sparklineData={pub_mercado.map(d => d.eur_hab_real)}
+        sparklineData={pub_mercado.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Ocupació en l'edició de diaris"
@@ -294,7 +294,7 @@ Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen i
         period={`${empleo_ult[0].anio} · ${formatNumber(empleo_ult[0].periodicos, 0)} persones en ${formatNumber(empleo_ult[0].periodicos_empresas, 0)} empreses`}
         source="INE i Eurostat (SBS)"
         direction="positive-up"
-        sparklineData={empleo_spark.map(d => d.ocupados_100k_hab)}
+        sparklineData={empleo_spark.map(d => ({...d, y: d.ocupados_100k_hab}))}
     />
     <KpiCard
         title="Publicitat de l'Estat respecte al mercat"
@@ -304,7 +304,7 @@ Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen i
         period={`${publico_ult_age[0].anio} · ${formatCompact(publico_ult_age[0].publicidad_estado_meur * 1e6, 2)} € en campanyes de l'Estat i les seves empreses`}
         source="Moncloa i InfoAdex"
         direction="positive-down"
-        sparklineData={publico.map(d => d.publicidad_estado_pct_mercado)}
+        sparklineData={publico.map(d => ({...d, y: d.publicidad_estado_pct_mercado}))}
     />
     {/if}
 </div>

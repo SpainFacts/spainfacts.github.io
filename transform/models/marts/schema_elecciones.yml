@@ -82,3 +82,23 @@ models:
     columns:
       - name: cod_mun
         tests: [unique, not_null]
+
+  - name: elecciones_secciones
+    description: >
+      Resultado por sección censal de las últimas elecciones de cada tipo (Congreso y Municipales
+      de 2023, Parlamento Europeo de 2024), para los mapas de barrio de la ficha de municipio:
+      participación, candidatura más votada (con el color de su familia) y % por bloque y por
+      familia sobre votos válidos. Solo municipios con más de una sección; sin voto CERA.
+      geo_anio dice qué seccionado del INE usar para pintarla
+      (static-extra/geo/secciones/<geo_anio>/<cod_mun>.geojson).
+    columns:
+      - name: proceso
+        tests: [not_null]
+      - name: cod_seccion
+        description: "Código INE de la sección censal (CUSEC): provincia, municipio, distrito (2) y sección (3)"
+        tests: [not_null]
+      - name: seccion
+        description: "Etiqueta legible: «Distrito 01, sección 001»"
+      - name: geo_anio
+        description: "Año del seccionado del INE con el que se dibuja la sección"
+        tests: [not_null]

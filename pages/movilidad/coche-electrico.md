@@ -97,7 +97,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         changePeriod="vs. un año antes"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Enchufables (eléctricos + híbridos enchufables)"
@@ -110,7 +110,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         changePeriod="vs. un año antes"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Electrificados (incluidos híbridos)"
@@ -119,7 +119,7 @@ SELECT DISTINCT motor, energia_orden FROM ${mensual} ORDER BY energia_orden
         unit="%"
         period="de los turismos nuevos · {ultimo[0]?.mes_texto}"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 

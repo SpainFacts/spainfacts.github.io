@@ -1,7 +1,7 @@
 ---
 title: Empreses, emprenedoria i R+D
 description: "Quantes empreses hi ha a Espanya per habitant i de quina mida, quantes societats es creen i es dissolen, els concursos de creditors, els autònoms i la despesa en R+D comparada amb Europa i per comunitat."
-i18n_origen: c23d9e81ee16
+i18n_origen: 990f0d94edd2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -108,7 +108,7 @@ Quantes empreses hi ha a Espanya i de quina mida són, quantes societats es cree
         changePeriod="respecte a l'any anterior"
         direction="positive-up"
         source="INE / DIRCE"
-        sparklineData={emp_pais.map(d => d.empresas_1000hab)}
+        sparklineData={emp_pais.map(d => ({...d, y: d.empresas_1000hab}))}
     />
     <KpiCard
         title="Societats creades"
@@ -119,7 +119,7 @@ Quantes empreses hi ha a Espanya i de quina mida són, quantes societats es cree
         changePeriod="respecte als 12 mesos anteriors"
         direction="positive-up"
         source="INE / Societats Mercantils"
-        sparklineData={soc_12m.slice(-120).map(d => d.constituidas_12m_100k)}
+        sparklineData={soc_12m.slice(-120).map(d => ({...d, y: d.constituidas_12m_100k}))}
     />
     <KpiCard
         title="Autònoms"
@@ -128,7 +128,7 @@ Quantes empreses hi ha a Espanya i de quina mida són, quantes societats es cree
         period="treballen per compte propi ({autonomos_ult[0]?.periodo}) · {formatNumber(autonomos_ult[0]?.cuenta_propia / 1000, 2)} milions de persones"
         direction="neutral"
         source="INE / EPA"
-        sparklineData={autonomos_anual.map(d => d.pct_cuenta_propia)}
+        sparklineData={autonomos_anual.map(d => ({...d, y: d.pct_cuenta_propia}))}
     />
     <KpiCard
         title="Despesa en R+D"
@@ -137,7 +137,7 @@ Quantes empreses hi ha a Espanya i de quina mida són, quantes societats es cree
         period="el {id_ue_ult[0]?.anio} · UE-27: {formatNumber(id_ue_ult[0]?.ue, 2)} % · {formatNumber(id_ue_ult[0]?.es_hab, 0)} € per habitant (euros de {id_es.slice(-1)[0]?.anio_euros})"
         direction="positive-up"
         source="Eurostat / INE"
-        sparklineData={id_es.map(d => d.pct_pib)}
+        sparklineData={id_es.map(d => ({...d, y: d.pct_pib}))}
     />
 </Grid>
 

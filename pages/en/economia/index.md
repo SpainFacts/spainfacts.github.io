@@ -1,7 +1,7 @@
 ---
 title: Economy
 description: "GDP per inhabitant, growth, foreign trade, sectors, employment, wages, unemployment and inflation in Spain, adjusted for inflation and in proportion to population."
-i18n_origen: 835b12e5d68d
+i18n_origen: 21e2042a9bd3
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -86,7 +86,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         changePeriod="real, vs previous year"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={pib_hab.map(d => d.valor)}
+        sparklineData={pib_hab.map(d => ({...d, y: d.valor}))}
         href="/en/economia/pib"
     />
     <KpiCard
@@ -95,7 +95,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)}%"
         period="real year-on-year, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
         href="/en/economia/pib"
     />
     <KpiCard
@@ -104,7 +104,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         formattedValue="{formatNumber(exportaciones.slice(-1)[0]?.pct_pib, 1)}% of GDP"
         period="goods and services, {exportaciones.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={exportaciones.slice(-40).map(d => d.pct_pib)}
+        sparklineData={exportaciones.slice(-40).map(d => ({...d, y: d.pct_pib}))}
         href="/en/economia/comercio-exterior"
     />
     <KpiCard
@@ -116,7 +116,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         changePeriod="real, vs previous year"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={salario.map(d => d.salario_real)}
+        sparklineData={salario.map(d => ({...d, y: d.salario_real}))}
         href="/en/economia/salarios"
     />
     <KpiCard
@@ -129,7 +129,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         changePeriod="vs previous quarter"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={serie_paro.slice(-40).map(d => d.paro)}
+        sparklineData={serie_paro.slice(-40).map(d => ({...d, y: d.paro}))}
         href="/en/economia/paro"
     />
     <KpiCard
@@ -142,7 +142,7 @@ How the Spanish economy is changing. In line with the approach used across the w
         changePeriod="vs previous month"
         direction="positive-down"
         source="INE / CPI"
-        sparklineData={serie_ipc.slice(-36).map(d => d.ipc)}
+        sparklineData={serie_ipc.slice(-36).map(d => ({...d, y: d.ipc}))}
         href="/en/economia/ipc"
     />
 </Grid>

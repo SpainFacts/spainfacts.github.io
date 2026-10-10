@@ -1,7 +1,7 @@
 ---
 title: Emissions and Decarbonisation
 description: "Spain's official greenhouse gas (GHG) emissions since 1990, per person, per euro of real GDP and by sector, set against the 2030 targets and the EU average."
-i18n_origen: 8873f7164972
+i18n_origen: 100c2894f1bf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -194,7 +194,7 @@ How much greenhouse gas Spain has emitted since 1990, the reference year for cli
         changePeriod="vs previous year"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.t_hab)}
+        sparklineData={anual.map(d => ({...d, y: d.t_hab}))}
     />
     <KpiCard
         title="Compared with 1990"
@@ -203,7 +203,7 @@ How much greenhouse gas Spain has emitted since 1990, the reference year for cli
         period="total emissions in {kpi[0]?.anio} · {formatNumber(kpi[0]?.var_2005_pct, 1)} % compared with 2005"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.var_1990_pct)}
+        sparklineData={anual.map(d => ({...d, y: d.var_1990_pct}))}
     />
     <KpiCard
         title="Carbon intensity of the economy"
@@ -214,7 +214,7 @@ How much greenhouse gas Spain has emitted since 1990, the reference year for cli
         changePeriod="since {intensidad[0]?.anio}"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={intensidad.map(d => d.kg_por_euro)}
+        sparklineData={intensidad.map(d => ({...d, y: d.kg_por_euro}))}
     />
     <KpiCard
         title="Spain compared with the EU"
@@ -223,7 +223,7 @@ How much greenhouse gas Spain has emitted since 1990, the reference year for cli
         period="per person in {ue_ratio.slice(-1)[0]?.anio}: {formatNumber(ue_ratio.slice(-1)[0]?.t_hab, 1)} t vs {formatNumber(ue_ratio.slice(-1)[0]?.t_hab_ue, 1)} t in the EU-27"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={ue_ratio.map(d => d.pct_ue)}
+        sparklineData={ue_ratio.map(d => ({...d, y: d.pct_ue}))}
     />
 </Grid>
 

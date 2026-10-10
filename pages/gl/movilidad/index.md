@@ -1,5 +1,5 @@
 ---
-i18n_origen: 59d7fcbfaeaa
+i18n_origen: 55dddfc9d8f7
 title: Mobilidade
 description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga e viaxeiros de metro, autobús, tren e avión."
 og:
@@ -83,7 +83,7 @@ Como nos movemos en España: os coches que se compran e os que circulan, o avanc
         direction="positive-up"
         source="DGT"
         href="/gl/movilidad/coche-electrico"
-        sparklineData={cuota.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Turismos en circulación"

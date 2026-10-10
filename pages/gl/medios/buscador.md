@@ -1,7 +1,7 @@
 ---
 title: Quen recibe que
 description: "Buscador de medios de comunicación: todo o diñeiro público que recibiu cada medio (OKDiario, Libertad Digital, El País, a SER, La Vanguardia...) de todas as administracións, por vía (publicidade institucional, contratos e subvencións), ano e administración que paga, en euros de hoxe."
-i18n_origen: 4e52a4100892
+i18n_origen: 42aa55cbac73
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -211,7 +211,7 @@ Escolle un medio de comunicación e verás todo o que cobrou das administración
         period={`${sel[0].anio_min}-${sel[0].anio_max} · ${formatNumber(sel[0].n_pagos, 0)} pagamentos · ${formatCompact(sel[0].total_eur_nominal, 2)} € correntes`}
         source="SpainFacts con datos da CPCI, comunidades, concellos, PLACSP e BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.total)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.total}))}
     />
     <KpiCard
         title="Publicidade institucional"
@@ -221,7 +221,7 @@ Escolle un medio de comunicación e verás todo o que cobrou das administración
         period={`Estado: ${formatCompact(sel[0].estado_eur_real, 2)} € · comunidades e concellos: ${formatCompact(sel[0].territorial_eur_real, 2)} €`}
         source="CPCI (2025), comunidades e concellos"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.publicidad)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.publicidad}))}
     />
     <KpiCard
         title="Contratos e subvencións"
@@ -231,7 +231,7 @@ Escolle un medio de comunicación e verás todo o que cobrou das administración
         period={`Contratos: ${formatCompact(sel[0].contratos_eur_real, 2)} € · subvencións: ${formatCompact(sel[0].subvenciones_eur_real, 2)} €`}
         source="PLACSP e BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.contratos_subv)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.contratos_subv}))}
     />
     <KpiCard
         title="Administracións que pagan"
@@ -241,7 +241,7 @@ Escolle un medio de comunicación e verás todo o que cobrou das administración
         period={`de ${formatNumber(sel[0].n_gob, 0)} administracións (Estado, comunidades, concellos...)`}
         source="SpainFacts"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.n_admin)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.n_admin}))}
     />
 </div>
 

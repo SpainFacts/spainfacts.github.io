@@ -1,7 +1,7 @@
 ---
 title: Industria
 description: "Non den Espainia industria-potentzia (automobila, azulejuak, oliba-olioa, urdaiazpikoa, trenbide-materiala, dorre eolikoak) eta zenbateko pisua duen haren industriak EBko batez bestekoarekin alderatuta: manufakturen BEGa eta enplegua, industria-ekoizpena, esportazioak eta erkidegoak."
-i18n_origen: 276740ec377f
+i18n_origen: 96dc3106de6d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -521,7 +521,7 @@ Espainia ez dago Europar Batasuneko herrialde industrialenen artean: haren manuf
         changePeriod="{veh_res[0]?.anio_ant}arekin alderatuta"
         direction="positive-up"
         source="OICA eta ANFAC"
-        sparklineData={veh.map(d => d.vehiculos_1000_hab)}
+        sparklineData={veh.map(d => ({...d, y: d.vehiculos_1000_hab}))}
     />
     <KpiCard
         title="Azulejuak: EBko ekoizpenaren kuota"
@@ -530,7 +530,7 @@ Espainia ez dago Europar Batasuneko herrialde industrialenen artean: haren manuf
         period="{prod_res[0]?.anio} · m²-tan · datua argitaratzen duten {prod_res[0]?.az_n} herrialdeen artean {prod_res[0]?.az_puesto}.a"
         direction="positive-up"
         source="Eurostat (Prodcom)"
-        sparklineData={azulejos.map(d => d.cuota_cantidad_pct)}
+        sparklineData={azulejos.map(d => ({...d, y: d.cuota_cantidad_pct}))}
     />
     <KpiCard
         title="Manufakturen pisua ekonomian"
@@ -542,7 +542,7 @@ Espainia ez dago Europar Batasuneko herrialde industrialenen artean: haren manuf
         changePeriod="EBrekin alderatuta"
         direction="positive-up"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_manufacturas)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_manufacturas}))}
     />
     <KpiCard
         title="Industria-ekoizpenaren indizea"
@@ -553,7 +553,7 @@ Espainia ez dago Europar Batasuneko herrialde industrialenen artean: haren manuf
         changePeriod="urte artekoa"
         direction="positive-up"
         source="INE (IPI, 70177 taula)"
-        sparklineData={ipi_mes.map(d => d.indice)}
+        sparklineData={ipi_mes.map(d => ({...d, y: d.indice}))}
     />
 </Grid>
 

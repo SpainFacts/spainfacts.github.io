@@ -3,7 +3,7 @@ title: Observatorios públicos
 description: "Censo dos observatorios públicos de España: cantos hai, que administración os crea, cando naceron, cantos seguen activos, cantos hai por habitante en cada comunidade e que partido gobernaba cando se crearon."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a544f976aca5
+i18n_origen: ff0c7540da64
 ---
 
 <script>
@@ -216,7 +216,7 @@ As administracións crean observatorios para seguir un tema (a violencia de xén
         formattedValue={formatNumber(resumen[0]?.total, 0)}
         period="{formatNumber(resumen[0]?.estatales, 0)} da Administración Xeral do Estado"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.acumulados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.acumulados}))}
     />
     <KpiCard
         title="Activos"
@@ -231,7 +231,7 @@ As administracións crean observatorios para seguir un tema (a violencia de xén
         formattedValue="{formatNumber(resumen[0]?.pct_desde_2015, 0)} %"
         period="{formatNumber(resumen[0]?.desde_2015, 0)} dos {formatNumber(resumen[0]?.con_anio, 0)} con ano de creación coñecido"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.creados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.creados}))}
     />
     <KpiCard
         title="Con participación privada"

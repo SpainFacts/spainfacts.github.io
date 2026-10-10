@@ -82,7 +82,7 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
         direction="positive-up"
         source="DGT"
         href="/movilidad/coche-electrico"
-        sparklineData={cuota.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Turismos en circulación"

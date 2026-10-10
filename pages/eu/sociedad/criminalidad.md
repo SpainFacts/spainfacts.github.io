@@ -3,7 +3,7 @@ title: Kriminalitatea
 description: "Espainian ezagututako delituak motaren, erkidegoaren, probintziaren eta udalerriaren arabera 2010etik, zibergaizkileriaren bilakaera eta kondenatuak nazionalitatearen arabera, haien testuinguruarekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c361bc094630
+i18n_origen: 675d5e735dd8
 ---
 
 <script>
@@ -84,7 +84,7 @@ Polizia Nazionalak, Guardia Civilek, Mossos d'Esquadrak, Ertzaintzak, Nafarroako
         changePeriod="2019arekiko"
         direction="positive-down"
         source="Barne Ministerioa"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => ({...d, y: d.tasa_1000}))}
     />
     <KpiCard
         title="Hilketak eta erailketak"
@@ -92,7 +92,7 @@ Polizia Nazionalak, Guardia Civilek, Mossos d'Esquadrak, Ertzaintzak, Nafarroako
         formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} 100.000 biz."
         period="{formatNumber(resumen[0]?.homicidios, 0)} burutuak, {urtean(resumen[0]?.anio)}"
         source="Barne Ministerioa"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => ({...d, y: d.tasa_1000 * 100}))}
     />
     <KpiCard
         title="Zibergaizkileria"

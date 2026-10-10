@@ -1,7 +1,7 @@
 ---
 title: Llibertat de premsa i pluralisme
 description: "On és Espanya en els índexs internacionals de llibertat de premsa i pluralisme dels mitjans (Reporters Sense Fronteres, Media Pluralism Monitor, V-Dem i la plataforma del Consell d'Europa) i com ha evolucionat respecte a la UE i els països de referència."
-i18n_origen: 70c909289afe
+i18n_origen: d04ffb7eb03d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -273,7 +273,7 @@ Poden els periodistes treballar a Espanya sense pressions i hi ha varietat de mi
         changePeriod={`vs ${k_rsf[0].anio_anterior}`}
         direction="positive-up"
         source="Reporters Sense Fronteres"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => -d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => ({...d, y: -d.valor}))}
     />
     <KpiCard
         title="Risc per al pluralisme"
@@ -285,7 +285,7 @@ Poden els periodistes treballar a Espanya sense pressions i hi ha varietat de mi
         changePeriod={`vs MPM${k_mpm[0].anio_anterior}`}
         direction="positive-down"
         source="Media Pluralism Monitor (EUI)"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Llibertat d'expressió (V-Dem)"
@@ -297,7 +297,7 @@ Poden els periodistes treballar a Espanya sense pressions i hi ha varietat de mi
         changePeriod={`vs ${k_vdem[0].anio_anterior}`}
         direction="positive-up"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Alertes del Consell d'Europa"
@@ -310,7 +310,7 @@ Poden els periodistes treballar a Espanya sense pressions i hi ha varietat de mi
         changePeriod={`vs ${k_coe[0].anio_anterior}`}
         direction="positive-down"
         source="Consell d'Europa"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

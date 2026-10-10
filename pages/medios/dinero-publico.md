@@ -336,7 +336,7 @@ Las administraciones españolas financian a los medios de comunicación por tres
         period={`${tv_espana_ult[0].anio} · ${formatCompact(tv_espana_ult[0].total_meur_nominal * 1e6, 2)} € entre RTVE y las autonómicas`}
         source="CNMC, RTVE y Generalitat Valenciana"
         direction="positive-down"
-        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => d.total_eur_hab_real)}
+        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Publicidad institucional del Estado"
@@ -346,7 +346,7 @@ Las administraciones españolas financian a los medios de comunicación por tres
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].institucional_eur_nominal, 2)} € en campañas de los ministerios`}
         source="Comisión de Publicidad Institucional"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.institucional_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.institucional_eur_hab_real}))}
     />
     <KpiCard
         title="Publicidad de empresas del Estado"
@@ -356,7 +356,7 @@ Las administraciones españolas financian a los medios de comunicación por tres
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].comercial_eur_nominal, 2)} € (Loterías, AENA, Correos, Renfe...)`}
         source="Comisión de Publicidad Institucional"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.comercial_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subvenciones a medios privados"
@@ -366,7 +366,7 @@ Las administraciones españolas financian a los medios de comunicación por tres
         period={`${sub_ult[0].anio} · ${formatCompact(sub_ult[0].eur_nominal, 2)} € en ${formatNumber(sub_ult[0].concesiones, 0)} concesiones`}
         source="Base de Datos Nacional de Subvenciones"
         direction="positive-down"
-        sparklineData={sub_espana.filter(d => !d.parcial).map(d => d.eur_hab_real)}
+        sparklineData={sub_espana.filter(d => !d.parcial).map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

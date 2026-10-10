@@ -164,7 +164,7 @@ El **real decreto-ley** es una norma con rango de ley que aprueba el Gobierno, n
         formattedValue={formatNumber(resumen[0]?.rdl_ultimo, 0)}
         period="media desde 1979: {formatNumber(resumen[0]?.media_rdl, 1)} al año · {formatNumber(resumen[0]?.rdl_en_curso, 0)} en lo que va de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.decretos_ley)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.decretos_ley}))}
     />
     <KpiCard
         title="Parte de las normas con rango de ley"
@@ -172,7 +172,7 @@ El **real decreto-ley** es una norma con rango de ley que aprueba el Gobierno, n
         formattedValue="{formatNumber(resumen[0]?.pct_ultimo, 0)} %"
         period="decretos-ley sobre decretos-ley + leyes en {resumen[0]?.ultimo_anio} · {formatNumber(resumen[0]?.pct_historico, 0)} % desde 1979"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.pct_rdl)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_rdl}))}
     />
     <KpiCard
         title="Ritmo del Gobierno actual"

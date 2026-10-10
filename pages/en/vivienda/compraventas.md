@@ -1,7 +1,7 @@
 ---
 title: Home sales and mortgages
 description: "Home sales and mortgages on homes in Spain per 1,000 inhabitants, new builds versus second-hand and average mortgage amount adjusted for inflation, by region and province."
-i18n_origen: ed62e0823b71
+i18n_origen: 04696dab395c
 ---
 
 <script>
@@ -123,7 +123,7 @@ How many homes change hands each year and how many are bought with a mortgage. T
         change={ultimo[0]?.var_cv?.toFixed(1)}
         changePeriod="vs a year earlier"
         source="INE / ETDP"
-        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => d.compraventas_12m_1000)}
+        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Mortgages on homes"
@@ -133,7 +133,7 @@ How many homes change hands each year and how many are bought with a mortgage. T
         change={ultimo[0]?.var_h?.toFixed(1)}
         changePeriod="vs a year earlier"
         source="INE / Mortgages"
-        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => d.hipotecas_12m_1000)}
+        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => ({...d, y: d.hipotecas_12m_1000}))}
     />
     <KpiCard
         title="Average mortgage"
@@ -141,7 +141,7 @@ How many homes change hands each year and how many are bought with a mortgage. T
         formattedValue="{formatNumber(importe_ult[0]?.importe_medio_real / 1000, 0)} thousand €"
         period="per home in {importe_ult[0]?.anio}, in {anual[0]?.anio_base} euros"
         source="INE / Mortgages"
-        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => d.importe_medio_real)}
+        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => ({...d, y: d.importe_medio_real}))}
     />
     <KpiCard
         title="New homes"
@@ -149,7 +149,7 @@ How many homes change hands each year and how many are bought with a mortgage. T
         formattedValue="{formatNumber(hitos[0]?.pct_nueva_ult, 1)} %"
         period="of sales in {hitos[0]?.anio_ult} · {formatNumber(hitos[0]?.pct_nueva_2008, 0)} % in 2008"
         source="INE / ETDP"
-        sparklineData={anual_completo.map(d => d.pct_nueva)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_nueva}))}
     />
 </Grid>
 

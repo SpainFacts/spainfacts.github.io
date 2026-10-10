@@ -61,7 +61,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="positive-down"
         href="/transparencia/decretos-ley"
-        sparklineData={actos.map(d => d.rdl)}
+        sparklineData={actos.map(d => ({...d, y: d.rdl}))}
     />
     <KpiCard
         title="Indultos"
@@ -72,7 +72,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="neutral"
         href="/transparencia/indultos"
-        sparklineData={actos.map(d => d.indultos)}
+        sparklineData={actos.map(d => ({...d, y: d.indultos}))}
     />
     {/if}
     {#if cpi_ult.length}
@@ -85,7 +85,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Transparency International"
         direction="positive-up"
         href="/transparencia/comparacion-internacional"
-        sparklineData={cpi.map(d => d.valor)}
+        sparklineData={cpi.map(d => ({...d, y: d.valor}))}
     />
     {/if}
     {#if liquidaciones_ult.length}
@@ -98,7 +98,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Hacienda"
         direction="positive-down"
         href="/transparencia/cuentas-municipales"
-        sparklineData={liquidaciones.map(d => d.valor)}
+        sparklineData={liquidaciones.map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

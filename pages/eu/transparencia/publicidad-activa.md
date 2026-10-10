@@ -1,7 +1,7 @@
 ---
 title: Publizitate aktiboa
 description: "Argitaratzen al dute administrazioek beren gardentasun-atarietan legeak eskatzen diena? Erakundez erakundeko ebaluazio ofizialak (Gardentasun eta Gobernu Oneko Kontseilua eta Kanarietako Gardentasun Komisionatua), haien bilakaera, alderdien araberako alderaketa eta oraindik neurtu ezin dena."
-i18n_origen: 6724b8e266cf
+i18n_origen: ade15fac60e0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -205,7 +205,7 @@ ORDER BY orden_periodo DESC, tipo_entidad, entidad
         formattedValue="{formatNumber(age[age.length - 1]?.icio, 1)} %"
         period="betetako derrigorrezko informazioa ({age[age.length - 1]?.anio}, ICIO)"
         source="Gardentasun eta Gobernu Oneko Kontseilua"
-        sparklineData={age.map(d => d.icio)}
+        sparklineData={age.map(d => ({...d, y: d.icio}))}
     />
     <KpiCard
         title="CTBGk ebaluatutako erkidegoak"
@@ -220,14 +220,14 @@ ORDER BY orden_periodo DESC, tipo_entidad, entidad
         formattedValue="10etik {formatNumber(itc_resumen[0]?.media / 10, 2)}"
         period="batez besteko nota Kanarietako Gardentasun Indizean ({itc_ultimo[0]?.etiqueta})"
         source="Kanarietako Gardentasun Komisionatua"
-        sparklineData={itc_aytos_serie.map(d => d.media / 10)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.media / 10}))}
     />
     <KpiCard
         title="Nota baxua duten Kanarietako udalak"
         value={itc_resumen[0]?.bajos}
         formattedValue={formatNumber(itc_resumen[0]?.bajos, 0)}
         period="guztira {formatNumber(itc_resumen[0]?.total, 0)}: 5etik behera edo ebaluazioa egin gabe ({itc_ultimo[0]?.etiqueta})"
-        sparklineData={itc_aytos_serie.map(d => d.suspenso)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.suspenso}))}
     />
 </Grid>
 

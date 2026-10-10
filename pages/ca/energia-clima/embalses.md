@@ -1,7 +1,7 @@
 ---
 title: Reserves d'aigua i embassaments
 description: Estat setmanal dels embassaments espanyols per conca, comparat amb l'any anterior i amb la mitjana dels últims deu anys.
-i18n_origen: 428062b2d659
+i18n_origen: 868173fde4bb
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -59,7 +59,7 @@ Els embassaments espanyols emmagatzemen avui **{formatNumber(espana[0]?.volumen_
         unit=" pp"
         period="Fa un any: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_anio}))}
     />
     <KpiCard
         title="Respecte a la mitjana de 10 anys"
@@ -68,7 +68,7 @@ Els embassaments espanyols emmagatzemen avui **{formatNumber(espana[0]?.volumen_
         unit=" pp"
         period="Mitjana de la mateixa setmana: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_media}))}
     />
 </Grid>
 

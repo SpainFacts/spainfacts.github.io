@@ -1,7 +1,7 @@
 ---
 title: Parc de vehicles
 description: "Els vehicles que circulen a Espanya: turismes per tipus de motor, etiqueta ambiental de la DGT i antiguitat, models més comuns i comparació per província i municipi."
-i18n_origen: 5bbacb52d8c4
+i18n_origen: 7ce7ebdce3e1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -48,7 +48,7 @@ ORDER BY mes
         formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} per 1.000 hab."
         period="{formatCompact(resumen[0]?.turismos, 1)} turismes i {formatCompact(resumen[0]?.vehiculos, 1)} vehicles de tota mena · {resumen[0]?.mes_texto}"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.turismos_1000)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.turismos_1000}))}
     />
     <KpiCard
         title="Turismes endollables"
@@ -56,7 +56,7 @@ ORDER BY mes
         formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_enchufables, 1)} %"
         period="dels turismes · {formatNumber(resumen[0]?.enchufables, 0)} endollables, {formatNumber(resumen[0]?.bev, 0)} elèctrics purs"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_enchufables)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_enchufables}))}
     />
     <KpiCard
         title="Turismes sense etiqueta ambiental"
@@ -65,7 +65,7 @@ ORDER BY mes
         period="dels turismes · {formatCompact(resumen[0]?.sin_distintivo, 1)} cotxes · gasolina anterior al 2000 i dièsel anterior al 2006"
         direction="positive-down"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_sin_distintivo)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_sin_distintivo}))}
     />
 </Grid>
 

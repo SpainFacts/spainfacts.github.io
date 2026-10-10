@@ -3,7 +3,7 @@ title: Salut
 description: "Esperança de vida a Espanya per comunitat i província, de què es mor la gent, suïcidis, accidents de trànsit, excés de mortalitat i el sistema sanitari: llistes d'espera, metges, infermeres, llits i despesa per habitant davant la UE."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 89c1708d4d47
+i18n_origen: 99432a16614d
 ---
 
 <script>
@@ -506,7 +506,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="Ministeri de Sanitat (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.tasa_1000}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.tasa_1000}))}
     />
     <KpiCard
         title="Espera mitjana per operar-se"
@@ -518,7 +518,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         changePeriod="en un any"
         direction="positive-down"
         source="Ministeri de Sanitat (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Espera mitjana per a l'especialista"
@@ -530,7 +530,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         changePeriod="en un any"
         direction="positive-down"
         source="Ministeri de Sanitat (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Despesa sanitària pública"
@@ -538,7 +538,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.pub_real, 0)} € per hab."
         period="{formatNumber(san_gasto_ultimo[0]?.pub_pib, 1)} % del PIB el {san_gasto_ultimo[0]?.anio} · euros de {san_gasto_ultimo[0]?.anio_base}"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({...d, valor: d.eur_hab_real}))}
     />
     <KpiCard
         title="Metges"
@@ -546,7 +546,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.es, 1)} per 1.000 hab."
         period="mitjana UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'medicos')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Infermeres"
@@ -554,7 +554,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.es, 1)} per 1.000 hab."
         period="mitjana UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Llits d'hospital"
@@ -562,7 +562,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.es, 1)} per 1.000 hab."
         period="mitjana UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'camas')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Pagament directe de les llars"
@@ -570,7 +570,7 @@ Quant s'espera per operar-se o veure l'especialista a la sanitat pública, quant
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.hog_real, 0)} € per hab."
         period="de la seva butxaca el {san_gasto_ultimo[0]?.anio} (farmàcia, dentista, consultes privades...) · més {formatNumber(san_gasto_ultimo[0]?.seg_real, 0)} € en assegurances"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({...d, valor: d.eur_hab_real}))}
     />
 </Grid>
 

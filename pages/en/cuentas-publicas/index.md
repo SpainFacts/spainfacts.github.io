@@ -1,7 +1,7 @@
 ---
 description: "Revenue, spending, deficit and debt of Spain's general government, per inhabitant, adjusted for inflation and as a percentage of GDP."
 title: Public Accounts · Spain's Annual Report
-i18n_origen: f87d27f18aaf
+i18n_origen: 6a6b81df44af
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -137,7 +137,7 @@ ORDER BY anio
         changePeriod="year on year, adjusted for inflation"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => d.ingresos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => ({...d, y: d.ingresos_hab_real}))}
         href="/en/cuentas-publicas/ingresos"
     />
 
@@ -152,7 +152,7 @@ ORDER BY anio
         changePeriod="year on year, adjusted for inflation"
         direction="neutral"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => d.gastos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => ({...d, y: d.gastos_hab_real}))}
         href="/en/cuentas-publicas/gastos"
     />
 
@@ -166,7 +166,7 @@ ORDER BY anio
         changePeriod="vs previous year"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
+        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => ({...d, y: d.deficit_pib}))}
     />
 
     <KpiCard
@@ -179,7 +179,7 @@ ORDER BY anio
         changePeriod="vs previous year"
         direction="positive-down"
         source="Eurostat (EDP)"
-        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => d.deuda_pib)}
+        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => ({...d, y: d.deuda_pib}))}
         href="/en/varios/indicadores/deuda_publica_pib"
     />
 </Grid>

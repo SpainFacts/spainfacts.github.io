@@ -1,7 +1,7 @@
 ---
 title: Industry
 description: "Where Spain is an industrial powerhouse (cars, tiles, olive oil, cured ham, railway equipment, wind towers) and how much its industry weighs compared with the EU average: manufacturing GVA and employment, industrial production, exports and regions."
-i18n_origen: 276740ec377f
+i18n_origen: 96dc3106de6d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -508,7 +508,7 @@ Spain is not among the most industrial countries in the European Union: its manu
         changePeriod="vs {veh_res[0]?.anio_ant}"
         direction="positive-up"
         source="OICA and ANFAC"
-        sparklineData={veh.map(d => d.vehiculos_1000_hab)}
+        sparklineData={veh.map(d => ({...d, y: d.vehiculos_1000_hab}))}
     />
     <KpiCard
         title="Tiles: share of EU production"
@@ -517,7 +517,7 @@ Spain is not among the most industrial countries in the European Union: its manu
         period="{prod_res[0]?.anio} · in m² · {ord(prod_res[0]?.az_puesto)} of the {prod_res[0]?.az_n} countries that publish the figure"
         direction="positive-up"
         source="Eurostat (Prodcom)"
-        sparklineData={azulejos.map(d => d.cuota_cantidad_pct)}
+        sparklineData={azulejos.map(d => ({...d, y: d.cuota_cantidad_pct}))}
     />
     <KpiCard
         title="Manufacturing's share of the economy"
@@ -529,7 +529,7 @@ Spain is not among the most industrial countries in the European Union: its manu
         changePeriod="vs the EU"
         direction="positive-up"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_manufacturas)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_manufacturas}))}
     />
     <KpiCard
         title="Industrial production index"
@@ -540,7 +540,7 @@ Spain is not among the most industrial countries in the European Union: its manu
         changePeriod="year on year"
         direction="positive-up"
         source="INE (IPI, table 70177)"
-        sparklineData={ipi_mes.map(d => d.indice)}
+        sparklineData={ipi_mes.map(d => ({...d, y: d.indice}))}
     />
 </Grid>
 

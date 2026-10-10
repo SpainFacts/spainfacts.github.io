@@ -1,7 +1,7 @@
 ---
 title: Lehen sektorea
 description: "Non den Espainia potentzia landan eta itsasoan: EBko kuota eta postua oliba-olioan, zitrikoetan, frutetan eta barazkietan, ardoan, txerrikietan, ardietan, arrantzan eta akuikulturan, nekazaritza-ekoizpenaren balioa biztanleko euro errealetan eta lehen sektorearen pisua erkidego eta probintziaka."
-i18n_origen: f1fe3023279d
+i18n_origen: b0106b55afc7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -490,7 +490,7 @@ Nekazaritza, abeltzaintza eta arrantza: zertan den Espainia **Europar Batasuneko
         period="{aceite_kpi[0]?.campania} kanpaina · munduaren {formatNumber(aceite_kpi[0]?.cuota_mundo, 1)} % (COI) · {formatNumber(aceite_kpi[0]?.prod_kt, 0)} mila t"
         direction="neutral"
         source="Europako Batzordea · COI"
-        sparklineData={aceite_es.map(d => d.cuota_ue_pct)}
+        sparklineData={aceite_es.map(d => ({...d, y: d.cuota_ue_pct}))}
     />
     <KpiCard
         title="Zitrikoak: kuota EBn"
@@ -499,7 +499,7 @@ Nekazaritza, abeltzaintza eta arrantza: zertan den Espainia **Europar Batasuneko
         period="{kpi[0]?.citricos_anio} · EBko 1.a · {formatNumber(kpi[0]?.citricos_kt, 0)} mila t"
         direction="neutral"
         source="Eurostat (apro_cpsh1)"
-        sparklineData={serie_citricos.map(d => d.cuota_pct)}
+        sparklineData={serie_citricos.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Txerri-haragia: kuota EBn"
@@ -511,7 +511,7 @@ Nekazaritza, abeltzaintza eta arrantza: zertan den Espainia **Europar Batasuneko
         changePeriod="{porcino_cambio[0]?.anio_ini}arekin alderatuta"
         direction="neutral"
         source="Eurostat (apro_mt_pann)"
-        sparklineData={serie_porcino.map(d => d.cuota_pct)}
+        sparklineData={serie_porcino.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Nekazaritza-ekoizpena biztanleko"
@@ -520,7 +520,7 @@ Nekazaritza, abeltzaintza eta arrantza: zertan den Espainia **Europar Batasuneko
         period="{valor_resumen[0]?.anio}, gaurko euroak · EB-27: {formatNumber(valor_resumen[0]?.ue, 0)} € · {formatNumber(valor_resumen[0]?.es_meur, 0)} milioi € guztira"
         direction="positive-up"
         source="Eurostat (aact_eaa01)"
-        sparklineData={valor_es.map(d => d.produccion_eur_hab_real)}
+        sparklineData={valor_es.map(d => ({...d, y: d.produccion_eur_hab_real}))}
     />
 </Grid>
 

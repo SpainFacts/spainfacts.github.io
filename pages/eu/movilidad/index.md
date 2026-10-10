@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
 description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak eta metro, autobus, tren eta hegazkineko bidaiariak."
-i18n_origen: 59d7fcbfaeaa
+i18n_origen: 55dddfc9d8f7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -83,7 +83,7 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
         direction="positive-up"
         source="DGT"
         href="/eu/movilidad/coche-electrico"
-        sparklineData={cuota.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Zirkulazioan dauden turismoak"

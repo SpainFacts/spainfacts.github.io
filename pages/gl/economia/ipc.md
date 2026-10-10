@@ -1,5 +1,5 @@
 ---
-i18n_origen: 80b3f9ec9e4d
+i18n_origen: beb0f070e1b9
 title: Inflación (IPC)
 description: "Inflación en España: IPC xeral e subxacente, prezos por grupos, prezo real da luz, o gas e os carburantes, canto subiron os prezos desde 2008 e 2019, IPC por comunidade e comparación coa zona euro."
 ---
@@ -207,7 +207,7 @@ Canto soben os prezos en España, que se encarece máis e canto poder de compra 
         changePeriod="vs. o mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.var_anual)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Inflación subxacente"
@@ -219,7 +219,7 @@ Canto soben os prezos en España, que se encarece máis e canto poder de compra 
         changePeriod="vs. o mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => d.subyacente)}
+        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => ({...d, y: d.subyacente}))}
     />
     <KpiCard
         title="Prezos desde 2019"
@@ -228,7 +228,7 @@ Canto soben os prezos en España, que se encarece máis e canto poder de compra 
         period="o que custaba 100 € de media en 2019 custa hoxe {formatNumber(ipc_ult[0]?.indice_2019, 0)} €"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => d.indice_2019)}
+        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => ({...d, y: d.indice_2019}))}
     />
     <KpiCard
         title="Diferenza coa zona euro"
@@ -237,7 +237,7 @@ Canto soben os prezos en España, que se encarece máis e canto poder de compra 
         period="inflación harmonizada: España {formatNumber(diferencial.slice(-1)[0]?.es, 1)} %, zona euro {formatNumber(diferencial.slice(-1)[0]?.ea, 1)} % ({diferencial.slice(-1)[0]?.mes_txt})"
         direction="positive-down"
         source="Eurostat / IPCH"
-        sparklineData={diferencial.slice(-60).map(d => d.diferencial)}
+        sparklineData={diferencial.slice(-60).map(d => ({...d, y: d.diferencial}))}
     />
 </Grid>
 
@@ -260,7 +260,7 @@ WHERE indicador_id IN ('inflacion')
         changePeriod="vs. o mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.energia)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.energia}))}
     />
     <KpiCard
         title="Alimentos sen elaborar"
@@ -269,7 +269,7 @@ WHERE indicador_id IN ('inflacion')
         period="froita, verdura, carne, peixe, ovos..., vs. un ano antes"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.slice(-60).map(d => d.alimentos_sin_elaborar)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.alimentos_sin_elaborar}))}
     />
     <KpiCard
         title="Inflación media anual"
@@ -278,7 +278,7 @@ WHERE indicador_id IN ('inflacion')
         period="media de {ipc_anual_serie.slice(-1)[0]?.anio} fronte á de {ipc_anual_serie.slice(-1)[0]?.anio - 1}"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc_anual_serie.map(d => d.inflacion_media)}
+        sparklineData={ipc_anual_serie.map(d => ({...d, y: d.inflacion_media}))}
     />
     <KpiCard
         title="Prezos desde 2008"
@@ -287,7 +287,7 @@ WHERE indicador_id IN ('inflacion')
         period="suba acumulada do IPC desde a media de 2008"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => d.indice_2008)}
+        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => ({...d, y: d.indice_2008}))}
     />
 </Grid>
 
@@ -552,7 +552,7 @@ O prezo da enerxía foi unha das claves da inflación dos últimos anos. En {en_
         period="vs. un ano antes, {en_ult[0]?.mes_txt} · {formatNumber(en_ult.find(d => d.producto === 'Electricidad')?.indice_2019, 0)} si 2019 = 100"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={en_electricidad.slice(-60).map(d => d.var_anual)}
+        sparklineData={en_electricidad.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Gasolina 95"
@@ -561,7 +561,7 @@ O prezo da enerxía foi unha das claves da inflación dos últimos anos. En {en_
         period="semana do {carb_ult[0]?.semana_txt}, con impostos, en euros de {carb_ult[0]?.anio_euros} · {formatNumber(carb_ult[0]?.gasolina, 3)} € a prezo actual"
         direction="positive-down"
         source="Comisión Europea"
-        sparklineData={carb_spark_gasolina.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasolina.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Gasóleo de automoción"
@@ -570,7 +570,7 @@ O prezo da enerxía foi unha das claves da inflación dos últimos anos. En {en_
         period="semana do {carb_ult[0]?.semana_txt}, con impostos, en euros de {carb_ult[0]?.anio_euros} · {formatNumber(carb_ult[0]?.gasoleo, 3)} € a prezo actual"
         direction="positive-down"
         source="Comisión Europea"
-        sparklineData={carb_spark_gasoleo.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasoleo.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Luz dos fogares"
@@ -579,7 +579,7 @@ O prezo da enerxía foi unha das claves da inflación dos últimos anos. En {en_
         period="{hogares_ult[0]?.semestre}, con impostos, en euros de {hogares_ult[0]?.anio_euros} · UE-27 {formatNumber(hogares_ult[0]?.elec_ue_real, 3)} €"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={hogares_es_elec.map(d => d.eur_kwh_real)}
+        sparklineData={hogares_es_elec.map(d => ({...d, y: d.eur_kwh_real}))}
     />
 </Grid>
 

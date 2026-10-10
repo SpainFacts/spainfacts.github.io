@@ -1,5 +1,5 @@
 ---
-i18n_origen: d44a780dbaed
+i18n_origen: 57519a9f7dc4
 title: Comercio exterior
 description: "Exportacións e importacións de bens e servizos de España: peso sobre o PIB, saldo exterior e evolución real por habitante."
 og:
@@ -76,7 +76,7 @@ O que España vende ao resto do mundo (exportacións) e o que compra fóra (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_pct, 1)} % do PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.export_meur / 1000, 0)} mil M€ no trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.export_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.export_pct}))}
     />
     <KpiCard
         title="Importacións"
@@ -84,7 +84,7 @@ O que España vende ao resto do mundo (exportacións) e o que compra fóra (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.import_pct, 1)} % do PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.import_meur / 1000, 0)} mil M€ no trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.import_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.import_pct}))}
     />
     <KpiCard
         title="Saldo exterior"
@@ -93,7 +93,7 @@ O que España vende ao resto do mundo (exportacións) e o que compra fóra (impo
         period="exportacións menos importacións en {saldo_anual.slice(-1)[0]?.anio}"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={saldo_anual.map(d => d.saldo_pct)}
+        sparklineData={saldo_anual.map(d => ({...d, y: d.saldo_pct}))}
     />
     <KpiCard
         title="Exportacións reais"
@@ -101,7 +101,7 @@ O que España vende ao resto do mundo (exportacións) e o que compra fóra (impo
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_interanual, 1)} %"
         period="variación interanual en volume, {comercio_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-24).map(d => d.export_interanual)}
+        sparklineData={comercio_trim.slice(-24).map(d => ({...d, y: d.export_interanual}))}
     />
 </Grid>
 

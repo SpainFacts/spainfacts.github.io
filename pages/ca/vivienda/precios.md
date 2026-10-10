@@ -1,7 +1,7 @@
 ---
 title: Preu de l'habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació: valor taxat per metre quadrat per comunitat, província i municipi i l'Índex de Preus d'Habitatge de l'INE, nou i de segona mà."
-i18n_origen: 058fd706b1df
+i18n_origen: 44b0921ad358
 ---
 
 <script>
@@ -110,7 +110,7 @@ Quant val comprar un habitatge a Espanya i com ha canviat. Hi ha dues fonts ofic
         change={precio.slice(-1)[0]?.interanual_real?.toFixed(1)}
         changePeriod="real vs. un any abans"
         source="Ministeri d'Habitatge"
-        sparklineData={precio.map(d => d.euros_m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Pujada real dels preus"
@@ -118,7 +118,7 @@ Quant val comprar un habitatge a Espanya i com ha canviat. Hi ha dues fonts ofic
         formattedValue="{ipv_general.slice(-1)[0]?.interanual_real >= 0 ? '+' : ''}{formatNumber(ipv_general.slice(-1)[0]?.interanual_real, 1)} %"
         period="IPV, {ipv_general.slice(-1)[0]?.periodo} vs. un any abans · {formatNumber(ipv_general.slice(-1)[0]?.interanual_nominal, 1)} % sense descomptar la inflació"
         source="INE / IPV"
-        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => d.interanual_real)}
+        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Respecte al màxim de la bombolla"
@@ -126,7 +126,7 @@ Quant val comprar un habitatge a Espanya i com ha canviat. Hi ha dues fonts ofic
         formattedValue="{ipv_hitos[0]?.vs_max >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max, 1)} %"
         period="preu real vs. {ipv_hitos[0]?.periodo_max} (IPV) · {ipv_hitos[0]?.vs_max_nominal >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max_nominal, 1)} % en euros de cada any"
         source="INE / IPV"
-        sparklineData={ipv_general.map(d => d.indice_real)}
+        sparklineData={ipv_general.map(d => ({...d, y: d.indice_real}))}
     />
     <KpiCard
         title="Pis de 90 m²"
@@ -134,7 +134,7 @@ Quant val comprar un habitatge a Espanya i com ha canviat. Hi ha dues fonts ofic
         formattedValue="{formatNumber(precio.slice(-1)[0]?.precio_90m2_real / 1000, 0)} mil €"
         period="al valor taxat mitjà d'Espanya, {precio.slice(-1)[0]?.periodo}"
         source="Ministeri d'Habitatge"
-        sparklineData={precio.map(d => d.precio_90m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.precio_90m2_real}))}
     />
 </Grid>
 

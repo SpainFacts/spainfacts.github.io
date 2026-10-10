@@ -213,7 +213,7 @@ Cuántas viviendas de las administraciones se alquilan a precios por debajo de l
         changePeriod="vs 2019"
         direction="neutral"
         source="Ministerio de Vivienda (encuesta de vivienda social)"
-        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => d.parque_autonomico_1000hab)}
+        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => ({...d, y: d.parque_autonomico_1000hab}))}
     />
     <KpiCard
         title="Hogares con alquiler por debajo de mercado"
@@ -222,7 +222,7 @@ Cuántas viviendas de las administraciones se alquilan a precios por debajo de l
         period="de los hogares, {resumen[0]?.ecv_anio} · incluye alquileres reducidos privados"
         direction="neutral"
         source="INE (Encuesta de Condiciones de Vida)"
-        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => d.ecv_pct_alquiler_inferior)}
+        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => ({...d, y: d.ecv_pct_alquiler_inferior}))}
     />
     <KpiCard
         title="Viviendas protegidas de alquiler"
@@ -231,7 +231,7 @@ Cuántas viviendas de las administraciones se alquilan a precios por debajo de l
         period="calificaciones provisionales, {resumen[0]?.calif_anio} · {formatNumber(resumen[0]?.calif_ultimo, 0)} viviendas"
         direction="neutral"
         source="Ministerio de Vivienda"
-        sparklineData={calif.map(d => d.calif_alquiler_100k)}
+        sparklineData={calif.map(d => ({...d, y: d.calif_alquiler_100k}))}
     />
 </Grid>
 

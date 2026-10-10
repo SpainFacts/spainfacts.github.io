@@ -1,5 +1,5 @@
 ---
-i18n_origen: 774383d84eca
+i18n_origen: a455aff1d882
 title: Indultos
 description: "Cantos indultos concede cada Goberno de España desde 1977 segundo o BOE, a súa evolución e como se compara cada presidente e cada partido segundo o tempo que gobernou."
 og:
@@ -120,7 +120,7 @@ O **indulto** é a graza pola que o Goberno perdoa, total ou parcialmente, a pen
         formattedValue={formatNumber(resumen[0]?.ultimo, 0)}
         period="{formatNumber(resumen[0]?.en_curso, 0)} no que vai de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.indultos)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.indultos}))}
     />
     <KpiCard
         title="Media dos últimos dez anos"

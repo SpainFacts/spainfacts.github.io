@@ -12,6 +12,28 @@ models:
     description: "ADRH del INE por municipio (código de 5 dígitos) y año 2015-2023: renta neta media por persona y por hogar, media y mediana por unidad de consumo (nominal y real), población del padrón y puesto en España por renta por persona."
   - name: renta_distritos
     description: "ADRH del INE por distrito censal (municipios con más de un distrito) y año: renta neta real por persona, por hogar y mediana por unidad de consumo."
+  - name: renta_secciones
+    description: >
+      ADRH del INE por sección censal (municipios con más de una sección) y año: renta neta real
+      por persona, por hogar y mediana por unidad de consumo, para los mapas de barrio. geo_anio
+      dice qué seccionado del INE usar para pintarla (static-extra/geo/secciones/<geo_anio>/<cod_mun>.geojson).
+    columns:
+      - name: cod_seccion
+        description: "Código INE de la sección censal (CUSEC): provincia, municipio, distrito (2) y sección (3)"
+        tests: [not_null]
+      - name: seccion
+        description: "Etiqueta legible: «Distrito 01, sección 001»"
+      - name: renta_persona_tope
+        description: "Verdadero si la sección está en el valor máximo al que el INE corta la renta por persona ese año (su renta es esa cifra o más)"
+      - name: renta_hogar_tope
+        description: "Lo mismo para la renta por hogar"
+      - name: renta_persona_suelo
+        description: "Verdadero si la sección está en el valor mínimo al que el INE corta la renta por persona ese año (su renta es esa cifra o menos)"
+      - name: renta_hogar_suelo
+        description: "Lo mismo para la renta por hogar"
+      - name: geo_anio
+        description: "Año del seccionado del INE con el que se dibuja la sección"
+        tests: [not_null]
   - name: renta_territorios
     description: "ADRH del INE para España, comunidades y provincias (código INE) por año: renta neta media por persona y por hogar y renta por unidad de consumo, nominal y real."
   - name: renta_ue

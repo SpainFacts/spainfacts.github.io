@@ -1,7 +1,7 @@
 ---
 title: O negocio dos medios
 description: "Canto se len, se ven e se escoitan os medios en España, de que viven (o investimento publicitario por soporte) e canta xente traballa neles, por habitante e descontada a inflación, comparado coa UE e co diñeiro público que reciben."
-i18n_origen: e0531df8ebcc
+i18n_origen: 71922c646c15
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -274,7 +274,7 @@ Canto se len, se ven e se escoitan os medios en España, de que viven e canta xe
         period={`${papel_resumen[0].anio} · ${formatNumber(papel_resumen[0].miles / 1000, 1)} millóns de lectores ao día`}
         source="AIMC (EGM)"
         direction="positive-up"
-        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => d.por_1000_hab)}
+        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Investimento publicitario en medios"
@@ -284,7 +284,7 @@ Canto se len, se ven e se escoitan os medios en España, de que viven e canta xe
         period={`${pub_resumen[0].anio} · ${formatCompact(pub_resumen[0].meur * 1e6, 2)} € en televisión, prensa, radio, dixital, exterior e cine`}
         source="InfoAdex"
         direction="positive-up"
-        sparklineData={pub_mercado.map(d => d.eur_hab_real)}
+        sparklineData={pub_mercado.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Emprego na edición de xornais"
@@ -294,7 +294,7 @@ Canto se len, se ven e se escoitan os medios en España, de que viven e canta xe
         period={`${empleo_ult[0].anio} · ${formatNumber(empleo_ult[0].periodicos, 0)} persoas en ${formatNumber(empleo_ult[0].periodicos_empresas, 0)} empresas`}
         source="INE e Eurostat (SBS)"
         direction="positive-up"
-        sparklineData={empleo_spark.map(d => d.ocupados_100k_hab)}
+        sparklineData={empleo_spark.map(d => ({...d, y: d.ocupados_100k_hab}))}
     />
     <KpiCard
         title="Publicidade do Estado fronte ao mercado"
@@ -304,7 +304,7 @@ Canto se len, se ven e se escoitan os medios en España, de que viven e canta xe
         period={`${publico_ult_age[0].anio} · ${formatCompact(publico_ult_age[0].publicidad_estado_meur * 1e6, 2)} € en campañas do Estado e as súas empresas`}
         source="Moncloa e InfoAdex"
         direction="positive-down"
-        sparklineData={publico.map(d => d.publicidad_estado_pct_mercado)}
+        sparklineData={publico.map(d => ({...d, y: d.publicidad_estado_pct_mercado}))}
     />
     {/if}
 </div>

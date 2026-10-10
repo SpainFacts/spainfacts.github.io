@@ -1,7 +1,7 @@
 ---
 title: Esforç per comprar o llogar
 description: "Quants anys de salari brut costa un habitatge de 90 m² a Espanya i a cada comunitat, i quina part del sou se'n va en el lloguer, amb dades del Ministeri d'Habitatge i de l'INE."
-i18n_origen: 720363cb6517
+i18n_origen: 45b1ea729603
 ---
 
 <script>
@@ -82,7 +82,7 @@ Quant pesa l'habitatge en el sou. Per comprar: **quants anys de salari brut ínt
         period="Espanya, {hitos[0]?.anio_ult} · màxim: {formatNumber(hitos[0]?.anios_max, 1)} el {hitos[0]?.anio_max}"
         direction="positive-down"
         source="Ministeri d'Habitatge / INE"
-        sparklineData={compra.map(d => d.anios_salario)}
+        sparklineData={compra.map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Lloguer sobre el salari"
@@ -91,7 +91,7 @@ Quant pesa l'habitatge en el sou. Per comprar: **quants anys de salari brut ínt
         period="del salari brut mitjà, {alquiler.slice(-1)[0]?.anio} · {formatNumber(alquiler.slice(-1)[0]?.alquiler_mes_mediana, 0)} € al mes"
         direction="positive-down"
         source="Ministeri d'Habitatge / INE"
-        sparklineData={alquiler.map(d => d.pct_alquiler)}
+        sparklineData={alquiler.map(d => ({...d, y: d.pct_alquiler}))}
     />
     <KpiCard
         title="On costa més comprar"
@@ -100,7 +100,7 @@ Quant pesa l'habitatge en el sou. Per comprar: **quants anys de salari brut ínt
         period="{ccaa[0]?.comunidad}, {ccaa[0]?.anio} · on menys: {ccaa.slice(-1)[0]?.comunidad}, {formatNumber(ccaa.slice(-1)[0]?.anios_salario, 1)}"
         direction="positive-down"
         source="Ministeri d'Habitatge / INE"
-        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => d.anios_salario)}
+        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Salari brut mitjà"
@@ -108,7 +108,7 @@ Quant pesa l'habitatge en el sou. Per comprar: **quants anys de salari brut ínt
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € l'any"
         period="Espanya, {hitos[0]?.anio_ult} · un pis de 90 m² es taxa en {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual_real)}
+        sparklineData={compra.map(d => ({...d, y: d.salario_anual_real}))}
     />
 </Grid>
 

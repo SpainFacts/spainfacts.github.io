@@ -1,7 +1,7 @@
 ---
 title: Housing
 description: "House prices in Spain adjusted for inflation, rents, sales and mortgages per 1,000 inhabitants, new builds and how many years of salary a home costs, by region and province."
-i18n_origen: 0e532c3339dc
+i18n_origen: f97a78f90884
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -109,7 +109,7 @@ How much it costs to buy or rent a home in Spain, how many are sold and how many
         direction="neutral"
         source="Ministry of Housing"
         href="/en/vivienda/precios"
-        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => d.euros_m2_real)}
+        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Median rent for a flat"
@@ -121,7 +121,7 @@ How much it costs to buy or rent a home in Spain, how many are sold and how many
         direction="neutral"
         source="Ministry of Housing (SERPAVI)"
         href="/en/vivienda/alquiler"
-        sparklineData={alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Home sales"
@@ -133,7 +133,7 @@ How much it costs to buy or rent a home in Spain, how many are sold and how many
         direction="neutral"
         source="INE / ETDP"
         href="/en/vivienda/compraventas"
-        sparklineData={mercado_mes.map(d => d.compraventas_12m_1000)}
+        sparklineData={mercado_mes.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Years of salary for 90 m²"
@@ -143,7 +143,7 @@ How much it costs to buy or rent a home in Spain, how many are sold and how many
         direction="positive-down"
         source="Ministry of Housing / INE"
         href="/en/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.anios_salario)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 

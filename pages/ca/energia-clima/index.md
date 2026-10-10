@@ -1,7 +1,7 @@
 ---
 title: Energia i Clima
 description: Transició ecològica, mix de generació elèctrica i emissions de gasos d'efecte d'hivernacle a Espanya.
-i18n_origen: 3dd0325563c7
+i18n_origen: 0b1048f4b3b1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -92,7 +92,7 @@ ORDER BY anio ASC
         period={emisiones_totales[0]?.anio}
         source="Inventari GEH (MITECO) via Eurostat"
         href="/ca/energia-clima/emisiones"
-        sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
+        sparklineData={[...emisiones_totales].reverse().map(d => ({...d, valor: d.total_emisiones}))}
     />
     <KpiCard
         title="Potència Solar FV"
@@ -101,7 +101,7 @@ ORDER BY anio ASC
         period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/ca/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.solar_mw / 1000}))}
     />
     <KpiCard
         title="Potència Eòlica"
@@ -110,7 +110,7 @@ ORDER BY anio ASC
         period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/ca/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.eolica_mw / 1000}))}
     />
 </Grid>
 

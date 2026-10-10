@@ -108,7 +108,7 @@ Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuá
         direction="neutral"
         source="Ministerio de Vivienda"
         href="/vivienda/precios"
-        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => d.euros_m2_real)}
+        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Alquiler mediano de un piso"
@@ -120,7 +120,7 @@ Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuá
         direction="neutral"
         source="Ministerio de Vivienda (SERPAVI)"
         href="/vivienda/alquiler"
-        sparklineData={alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Compraventas de viviendas"
@@ -132,7 +132,7 @@ Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuá
         direction="neutral"
         source="INE / ETDP"
         href="/vivienda/compraventas"
-        sparklineData={mercado_mes.map(d => d.compraventas_12m_1000)}
+        sparklineData={mercado_mes.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Años de salario para 90 m²"
@@ -142,7 +142,7 @@ Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuá
         direction="positive-down"
         source="Ministerio de Vivienda / INE"
         href="/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.anios_salario)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 

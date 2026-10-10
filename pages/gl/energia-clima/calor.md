@@ -1,5 +1,5 @@
 ---
-i18n_origen: 2e6c1757c41f
+i18n_origen: b2c2b4a53fb2
 title: Calor e temperaturas
 description: Mapa diario da calor en España por provincia, comparado coa temperatura máxima habitual de cada día en 1991-2020, e os récords de cada provincia. Datos de AEMET.
 og:
@@ -80,7 +80,7 @@ O **{fechaLarga(espana[0]?.fecha)}** a temperatura máxima nas estacións de ref
         formattedValue="{espana[0]?.n_provincias_por_encima}"
         unit=" de {espana[0]?.n_provincias}"
         period="Máis de 1 °C sobre a súa media"
-        sparklineData={serie_espana.map(d => ({valor: d.n_provincias_por_encima}))}
+        sparklineData={serie_espana.map(d => ({...d, valor: d.n_provincias_por_encima}))}
     />
     <KpiCard
         title="Maior anomalía"

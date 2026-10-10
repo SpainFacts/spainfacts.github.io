@@ -1,7 +1,7 @@
 ---
 title: Vivenda
 description: "Prezo da vivenda en España descontada a inflación, aluguer, compravendas e hipotecas por 1.000 habitantes, obra nova e cantos anos de salario custa unha casa, por comunidade e provincia."
-i18n_origen: 0e532c3339dc
+i18n_origen: f97a78f90884
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -109,7 +109,7 @@ Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se
         direction="neutral"
         source="Ministerio de Vivenda"
         href="/gl/vivienda/precios"
-        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => d.euros_m2_real)}
+        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Aluguer mediano dun piso"
@@ -121,7 +121,7 @@ Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se
         direction="neutral"
         source="Ministerio de Vivenda (SERPAVI)"
         href="/gl/vivienda/alquiler"
-        sparklineData={alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Compravendas de vivendas"
@@ -133,7 +133,7 @@ Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se
         direction="neutral"
         source="INE / ETDP"
         href="/gl/vivienda/compraventas"
-        sparklineData={mercado_mes.map(d => d.compraventas_12m_1000)}
+        sparklineData={mercado_mes.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Anos de salario para 90 m²"
@@ -143,7 +143,7 @@ Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se
         direction="positive-down"
         source="Ministerio de Vivenda / INE"
         href="/gl/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.anios_salario)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 

@@ -39,5 +39,170 @@
     "dimensiones": [],
     "filtros": [],
     "notas": "Eurostat demo_gind (población media anual). Incluye agregados (Unión Europea (27), Zona euro): en rankings de países, excluirlos."
+  },
+  {
+    "tabla": "elecciones_secciones",
+    "usar": true,
+    "tema": "Resultado de las últimas generales, municipales y europeas en cada sección censal (barrio) de los municipios",
+    "preguntas": [
+      "¿Qué partido ganó en cada barrio de Madrid en las generales de 2023?",
+      "¿En qué secciones de Sevilla ganó Vox en 2023?",
+      "¿Cuál es la sección censal con más participación de Valencia?",
+      "¿Cuánto votó la izquierda en los barrios de Barcelona en las europeas de 2024?",
+      "¿Dónde sacó más voto el PP en Zaragoza en las municipales de 2023?",
+      "¿Cuántas secciones de Málaga ganó el PSOE en las generales?"
+    ],
+    "medidas": [
+      {
+        "columna": "ganador_pct",
+        "nombre": "porcentaje de voto de la candidatura más votada",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_izquierda",
+        "nombre": "voto a la izquierda",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_derecha",
+        "nombre": "voto a la derecha",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_centro",
+        "nombre": "voto al centro",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_nacionalistas",
+        "nombre": "voto a nacionalistas y regionalistas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_psoe",
+        "nombre": "voto al PSOE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_pp",
+        "nombre": "voto al PP",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_vox",
+        "nombre": "voto a Vox",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_iu_podemos_sumar",
+        "nombre": "voto a IU, Podemos y Sumar",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "eleccion",
+        "nombre": "elección (Congreso o Municipales de 2023, Parlamento Europeo de 2024)",
+        "total": null,
+        "defecto": "Congreso, julio de 2023"
+      },
+      {
+        "columna": "seccion",
+        "nombre": "sección censal",
+        "total": null
+      },
+      {
+        "columna": "ganador_familia",
+        "nombre": "familia política de la candidatura más votada",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por sección censal y elección; filtrar siempre una elección (eleccion o proceso: 02202307 generales, 04202305 municipales, 07202406 europeas). Solo municipios con más de una sección. Los % son sobre votos válidos; sin voto CERA. Las secciones no se suman con %: para el total del municipio usar elecciones_municipios. votantes y censo sí se suman."
+  },
+  {
+    "tabla": "renta_secciones",
+    "usar": true,
+    "tema": "Renta de los hogares en cada sección censal (barrio) de los municipios",
+    "preguntas": [
+      "¿Cuál es la sección censal más rica de Madrid?",
+      "¿Qué barrio de Sevilla tiene la renta por persona más baja?",
+      "¿Cuántas secciones de Barcelona superan los 25.000 euros por persona?",
+      "¿Cuánta diferencia de renta hay entre el barrio más rico y el más pobre de Málaga?"
+    ],
+    "medidas": [
+      {
+        "columna": "renta_persona_real",
+        "nombre": "renta neta media por persona en euros constantes",
+        "unidad": "€ al año por persona (euros de 2025)",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "renta_hogar_real",
+        "nombre": "renta neta media por hogar en euros constantes",
+        "unidad": "€ al año por hogar (euros de 2025)",
+        "tipo": "media"
+      },
+      {
+        "columna": "renta_uc_mediana_real",
+        "nombre": "mediana de la renta por unidad de consumo en euros constantes",
+        "unidad": "€ al año por unidad de consumo (euros de 2025)",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "seccion",
+        "nombre": "sección censal",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo el último año del Atlas de Renta del INE y solo municipios con más de una sección. Las medias no se suman entre secciones: para el municipio usar renta_municipios. Las secciones se llaman 'Distrito 01, sección 001'; ir siempre con el municipio."
   }
 ]

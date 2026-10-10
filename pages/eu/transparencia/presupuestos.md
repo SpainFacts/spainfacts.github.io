@@ -1,7 +1,7 @@
 ---
 title: Luzatutako aurrekontuak
 description: "Zein urtetan izan dituen Espainiak Estatuko Aurrekontu Orokorrak garaiz onartuta, zein iritsi ziren berandu eta zein luzatu ziren, zenbat eguneko atzerapenarekin eta zer Gobernuk aurkeztu behar zituen, 1978tik."
-i18n_origen: fd19bed34152
+i18n_origen: 1b5c090de484
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -139,7 +139,7 @@ Estatuko Aurrekontu Orokorrak Estatuak urtero zenbat eta zertan gasta dezakeen e
         formattedValue={egoera(resumen[0]?.situacion_actual)}
         period="{formatNumber(racha[0]?.seguidos, 0)} ekitaldi jarraian lege propiorik gabe, {urtetik(racha[0]?.desde)} · {formatNumber(resumen[0]?.dias_actual, 0)} luzapen-egun aurten"
         source="BOE"
-        sparklineData={serie.map(d => d.dias_prorroga)}
+        sparklineData={serie.map(d => ({...d, y: d.dias_prorroga}))}
     />
     <KpiCard
         title="Garaiz onartutako azken aurrekontua"

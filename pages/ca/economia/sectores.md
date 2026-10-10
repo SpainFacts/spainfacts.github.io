@@ -1,7 +1,7 @@
 ---
 title: Sectors econòmics
 description: "Quant produeix i quanta gent ocupa cada sector de l'economia espanyola, el seu creixement real i la seva productivitat, des del 1995."
-i18n_origen: 2fb118d1e75d
+i18n_origen: e8ce24d9ad4d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -73,7 +73,7 @@ Què produeix l'economia espanyola i qui ho produeix. El valor afegit de cada se
         formattedValue="{formatNumber(total.slice(-1)[0]?.crecimiento_real, 1)} %"
         period="valor afegit total el {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => d.crecimiento_real)}
+        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => ({...d, y: d.crecimiento_real}))}
     />
     <KpiCard
         title="Ocupats per 1.000 habitants"
@@ -81,7 +81,7 @@ Què produeix l'economia espanyola i qui ho produeix. El valor afegit de cada se
         formattedValue={formatNumber(total.slice(-1)[0]?.ocupados_1000_hab, 0)}
         period="{formatNumber(total.slice(-1)[0]?.ocupados_miles / 1000, 1)} milions d'ocupats el {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.map(d => d.ocupados_1000_hab)}
+        sparklineData={total.map(d => ({...d, y: d.ocupados_1000_hab}))}
     />
     <KpiCard
         title="Productivitat per ocupat"
@@ -89,7 +89,7 @@ Què produeix l'economia espanyola i qui ho produeix. El valor afegit de cada se
         formattedValue="{formatNumber(total.slice(-1)[0]?.productividad_real, 0)} €"
         period="valor afegit per ocupat el {total.slice(-1)[0]?.anio}, euros del {ultimo[0]?.anio_euros}"
         source="Eurostat"
-        sparklineData={total.map(d => d.productividad_real)}
+        sparklineData={total.map(d => ({...d, y: d.productividad_real}))}
     />
     <KpiCard
         title="Sector que més creix des del 2019"

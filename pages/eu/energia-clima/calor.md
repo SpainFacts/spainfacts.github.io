@@ -1,7 +1,7 @@
 ---
 title: Beroa eta tenperaturak
 description: Espainiako beroaren eguneko mapa probintziaka, egun bakoitzeko ohiko tenperatura maximoarekin (1991-2020) alderatuta, eta probintzia bakoitzeko errekorrak. AEMETen datuak.
-i18n_origen: 2e6c1757c41f
+i18n_origen: b2c2b4a53fb2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -80,7 +80,7 @@ Azken datuaren egunean (**{fechaLarga(espana[0]?.fecha)}**), probintzia bakoitze
         formattedValue="{espana[0]?.n_provincias_por_encima}"
         unit=" / {espana[0]?.n_provincias}"
         period="Beren batez bestekoa baino 1 °C baino gehiago"
-        sparklineData={serie_espana.map(d => ({valor: d.n_provincias_por_encima}))}
+        sparklineData={serie_espana.map(d => ({...d, valor: d.n_provincias_por_encima}))}
     />
     <KpiCard
         title="Anomaliarik handiena"

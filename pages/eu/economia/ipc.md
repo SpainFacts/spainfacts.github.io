@@ -1,7 +1,7 @@
 ---
 title: Inflazioa (KPI)
 description: "Inflazioa Espainian: KPI orokorra eta azpikoa, prezioak taldeka, argindarraren, gasaren eta erregaien prezio erreala, prezioak zenbat igo diren 2008tik eta 2019tik, KPI erkidegoka eta euroguneko alderaketa."
-i18n_origen: 80b3f9ec9e4d
+i18n_origen: beb0f070e1b9
 ---
 
 <script>
@@ -207,7 +207,7 @@ Zenbat igotzen diren prezioak Espainian, zer garestitzen den gehien eta zenbat e
         changePeriod="aurreko hilabetearekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.slice(-60).map(d => d.var_anual)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Azpiko inflazioa"
@@ -219,7 +219,7 @@ Zenbat igotzen diren prezioak Espainian, zer garestitzen den gehien eta zenbat e
         changePeriod="aurreko hilabetearekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => d.subyacente)}
+        sparklineData={ipc.filter(d => d.subyacente != null).slice(-60).map(d => ({...d, y: d.subyacente}))}
     />
     <KpiCard
         title="Prezioak 2019tik"
@@ -228,7 +228,7 @@ Zenbat igotzen diren prezioak Espainian, zer garestitzen den gehien eta zenbat e
         period="2019an batez beste 100 € balio zuenak gaur {formatNumber(ipc_ult[0]?.indice_2019, 0)} € balio du"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => d.indice_2019)}
+        sparklineData={ipc.filter(d => d.anio >= 2019).map(d => ({...d, y: d.indice_2019}))}
     />
     <KpiCard
         title="Aldea eurogunearekin"
@@ -237,7 +237,7 @@ Zenbat igotzen diren prezioak Espainian, zer garestitzen den gehien eta zenbat e
         period="inflazio harmonizatua: Espainia {formatNumber(diferencial.slice(-1)[0]?.es, 1)} %, eurogunea {formatNumber(diferencial.slice(-1)[0]?.ea, 1)} % ({diferencial.slice(-1)[0]?.mes_txt})"
         direction="positive-down"
         source="Eurostat / HKPI"
-        sparklineData={diferencial.slice(-60).map(d => d.diferencial)}
+        sparklineData={diferencial.slice(-60).map(d => ({...d, y: d.diferencial}))}
     />
 </Grid>
 
@@ -260,7 +260,7 @@ WHERE indicador_id IN ('inflacion')
         changePeriod="aurreko hilabetearekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.slice(-60).map(d => d.energia)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.energia}))}
     />
     <KpiCard
         title="Landu gabeko elikagaiak"
@@ -269,7 +269,7 @@ WHERE indicador_id IN ('inflacion')
         period="fruta, barazkiak, haragia, arraina, arrautzak..., duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.slice(-60).map(d => d.alimentos_sin_elaborar)}
+        sparklineData={ipc.slice(-60).map(d => ({...d, y: d.alimentos_sin_elaborar}))}
     />
     <KpiCard
         title="Urteko batez besteko inflazioa"
@@ -278,7 +278,7 @@ WHERE indicador_id IN ('inflacion')
         period="{ipc_anual_serie.slice(-1)[0]?.anio}. urteko batez bestekoa, {ipc_anual_serie.slice(-1)[0]?.anio - 1}. urtekoarekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc_anual_serie.map(d => d.inflacion_media)}
+        sparklineData={ipc_anual_serie.map(d => ({...d, y: d.inflacion_media}))}
     />
     <KpiCard
         title="Prezioak 2008tik"
@@ -287,7 +287,7 @@ WHERE indicador_id IN ('inflacion')
         period="KPIaren igoera metatua 2008ko batez bestekotik"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => d.indice_2008)}
+        sparklineData={ipc.filter(d => d.anio >= 2008).map(d => ({...d, y: d.indice_2008}))}
     />
 </Grid>
 
@@ -552,7 +552,7 @@ Energiaren prezioa azken urteetako inflazioaren gakoetako bat izan da. {en_ult[0
         period="duela urtebeterekin alderatuta, {en_ult[0]?.mes_txt} · {formatNumber(en_ult.find(d => d.producto === 'Electricidad')?.indice_2019, 0)}, 2019 = 100 bada"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={en_electricidad.slice(-60).map(d => d.var_anual)}
+        sparklineData={en_electricidad.slice(-60).map(d => ({...d, y: d.var_anual}))}
     />
     <KpiCard
         title="Gasolina 95"
@@ -561,7 +561,7 @@ Energiaren prezioa azken urteetako inflazioaren gakoetako bat izan da. {en_ult[0
         period="{carb_ult[0]?.semana_txt} asteaz geroztik, zergekin, {carb_ult[0]?.anio_euros}. urteko eurotan · {formatNumber(carb_ult[0]?.gasolina, 3)} € egungo prezioan"
         direction="positive-down"
         source="Europako Batzordea"
-        sparklineData={carb_spark_gasolina.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasolina.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Automobilgintzako gasolioa"
@@ -570,7 +570,7 @@ Energiaren prezioa azken urteetako inflazioaren gakoetako bat izan da. {en_ult[0
         period="{carb_ult[0]?.semana_txt} asteaz geroztik, zergekin, {carb_ult[0]?.anio_euros}. urteko eurotan · {formatNumber(carb_ult[0]?.gasoleo, 3)} € egungo prezioan"
         direction="positive-down"
         source="Europako Batzordea"
-        sparklineData={carb_spark_gasoleo.slice(-104).map(d => d.eur_litro_real)}
+        sparklineData={carb_spark_gasoleo.slice(-104).map(d => ({...d, y: d.eur_litro_real}))}
     />
     <KpiCard
         title="Etxeetako argindarra"
@@ -579,7 +579,7 @@ Energiaren prezioa azken urteetako inflazioaren gakoetako bat izan da. {en_ult[0
         period="{hogares_ult[0]?.semestre}, zergekin, {hogares_ult[0]?.anio_euros}. urteko eurotan · EB-27 {formatNumber(hogares_ult[0]?.elec_ue_real, 3)} €"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={hogares_es_elec.map(d => d.eur_kwh_real)}
+        sparklineData={hogares_es_elec.map(d => ({...d, y: d.eur_kwh_real}))}
     />
 </Grid>
 

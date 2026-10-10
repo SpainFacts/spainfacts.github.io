@@ -1,7 +1,7 @@
 ---
 title: Electric cars
 description: "The shift to electric cars in Spain: new car registrations by engine type every month since 2015, share of battery electric and plug-in hybrids by province, and CO2 emissions."
-i18n_origen: ed78ed2e1c5f
+i18n_origen: a3ce9f887980
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -98,7 +98,7 @@ How many of the cars sold in Spain are already electric? The answer comes from t
         changePeriod="vs. a year earlier"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Plug-in (battery electric + plug-in hybrids)"
@@ -111,7 +111,7 @@ How many of the cars sold in Spain are already electric? The answer comes from t
         changePeriod="vs. a year earlier"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Electrified (including hybrids)"
@@ -120,7 +120,7 @@ How many of the cars sold in Spain are already electric? The answer comes from t
         unit="%"
         period="of new cars · {ultimo[0]?.mes_texto}"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 

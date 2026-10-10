@@ -1,0 +1,18 @@
+version: 2
+
+seeds:
+  - name: secciones_geo
+    description: >
+      Ficheros de contornos de secciones censales publicados en static-extra/geo/secciones/<anio>/<cod_mun>.geojson
+      (generado por tools/geo/secciones.py, no editar a mano). El primer año tiene todos los municipios
+      con más de una sección; los siguientes, solo los que cambiaron. elecciones_secciones y
+      renta_secciones eligen para cada dato el fichero más reciente que no sea posterior a su año.
+    config:
+      column_types:
+        anio: integer
+        cod_mun: varchar
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: cod_mun
+        tests: [not_null]

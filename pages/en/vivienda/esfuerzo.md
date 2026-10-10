@@ -1,7 +1,7 @@
 ---
 title: Affordability of buying or renting
 description: "How many years of gross salary a 90 m² home costs in Spain and in each region, and what share of pay goes on rent, with data from the Ministry of Housing and the INE."
-i18n_origen: 720363cb6517
+i18n_origen: 45b1ea729603
 ---
 
 <script>
@@ -82,7 +82,7 @@ How much housing weighs on pay. For buying: **how many years of total gross sala
         period="Spain, {hitos[0]?.anio_ult} · peak: {formatNumber(hitos[0]?.anios_max, 1)} in {hitos[0]?.anio_max}"
         direction="positive-down"
         source="Ministry of Housing / INE"
-        sparklineData={compra.map(d => d.anios_salario)}
+        sparklineData={compra.map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Rent as a share of salary"
@@ -91,7 +91,7 @@ How much housing weighs on pay. For buying: **how many years of total gross sala
         period="of the average gross salary, {alquiler.slice(-1)[0]?.anio} · {formatNumber(alquiler.slice(-1)[0]?.alquiler_mes_mediana, 0)} € per month"
         direction="positive-down"
         source="Ministry of Housing / INE"
-        sparklineData={alquiler.map(d => d.pct_alquiler)}
+        sparklineData={alquiler.map(d => ({...d, y: d.pct_alquiler}))}
     />
     <KpiCard
         title="Where buying costs most"
@@ -100,7 +100,7 @@ How much housing weighs on pay. For buying: **how many years of total gross sala
         period="{ccaa[0]?.comunidad}, {ccaa[0]?.anio} · where it costs least: {ccaa.slice(-1)[0]?.comunidad}, {formatNumber(ccaa.slice(-1)[0]?.anios_salario, 1)}"
         direction="positive-down"
         source="Ministry of Housing / INE"
-        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => d.anios_salario)}
+        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Average gross salary"
@@ -108,7 +108,7 @@ How much housing weighs on pay. For buying: **how many years of total gross sala
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € per year"
         period="Spain, {hitos[0]?.anio_ult} · a 90 m² flat is appraised at {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual_real)}
+        sparklineData={compra.map(d => ({...d, y: d.salario_anual_real}))}
     />
 </Grid>
 

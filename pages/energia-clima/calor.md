@@ -79,7 +79,7 @@ El **{fechaLarga(espana[0]?.fecha)}** la temperatura máxima en las estaciones d
         formattedValue="{espana[0]?.n_provincias_por_encima}"
         unit=" de {espana[0]?.n_provincias}"
         period="Más de 1 °C sobre su media"
-        sparklineData={serie_espana.map(d => ({valor: d.n_provincias_por_encima}))}
+        sparklineData={serie_espana.map(d => ({...d, valor: d.n_provincias_por_encima}))}
     />
     <KpiCard
         title="Mayor anomalía"

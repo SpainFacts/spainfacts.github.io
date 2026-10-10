@@ -1,7 +1,7 @@
 ---
 title: Economia
 description: "PIB per habitant, creixement, comerç exterior, sectors, ocupació, salaris, atur i inflació a Espanya, descomptada la inflació i en proporció a la població."
-i18n_origen: 835b12e5d68d
+i18n_origen: 21e2042a9bd3
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -86,7 +86,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         changePeriod="real respecte a l'any anterior"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={pib_hab.map(d => d.valor)}
+        sparklineData={pib_hab.map(d => ({...d, y: d.valor}))}
         href="/ca/economia/pib"
     />
     <KpiCard
@@ -95,7 +95,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="interanual real, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
         href="/ca/economia/pib"
     />
     <KpiCard
@@ -104,7 +104,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         formattedValue="{formatNumber(exportaciones.slice(-1)[0]?.pct_pib, 1)} % del PIB"
         period="béns i serveis, {exportaciones.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={exportaciones.slice(-40).map(d => d.pct_pib)}
+        sparklineData={exportaciones.slice(-40).map(d => ({...d, y: d.pct_pib}))}
         href="/ca/economia/comercio-exterior"
     />
     <KpiCard
@@ -116,7 +116,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         changePeriod="real respecte a l'any anterior"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={salario.map(d => d.salario_real)}
+        sparklineData={salario.map(d => ({...d, y: d.salario_real}))}
         href="/ca/economia/salarios"
     />
     <KpiCard
@@ -129,7 +129,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         changePeriod="respecte al trimestre anterior"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={serie_paro.slice(-40).map(d => d.paro)}
+        sparklineData={serie_paro.slice(-40).map(d => ({...d, y: d.paro}))}
         href="/ca/economia/paro"
     />
     <KpiCard
@@ -142,7 +142,7 @@ Com evoluciona l'economia espanyola. Seguint el criteri de tot el web, el que de
         changePeriod="respecte al mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={serie_ipc.slice(-36).map(d => d.ipc)}
+        sparklineData={serie_ipc.slice(-36).map(d => ({...d, y: d.ipc}))}
         href="/ca/economia/ipc"
     />
 </Grid>

@@ -1,7 +1,7 @@
 ---
 title: Sorkuntza elektrikoaren mixa
 description: "Espainiako elektrizitate-mixa 2007tik, Red Eléctricaren arabera: berriztagarrien kuota, ikatzaren itxiera, sortutako kWh bakoitzeko isuriak eta biztanleko kontsumo elektrikoa."
-i18n_origen: 2c4bc7fa07e5
+i18n_origen: 7cce8c387246
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -104,7 +104,7 @@ Nondik datorren Espainian sortzen den elektrizitatea eta zenbat CO₂ kostatzen 
         changePeriod="aurreko urtearekin alderatuta"
         direction="positive-up"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_renovable_pct}))}
     />
     <KpiCard
         title="CO₂ sortutako kWh bakoitzeko"
@@ -115,7 +115,7 @@ Nondik datorren Espainian sortzen den elektrizitatea eta zenbat CO₂ kostatzen 
         changePeriod="aurreko urtearekin alderatuta"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.g_co2_kwh)}
+        sparklineData={elec.map(d => ({...d, y: d.g_co2_kwh}))}
     />
     <KpiCard
         title="Kontsumoa biztanleko"
@@ -126,7 +126,7 @@ Nondik datorren Espainian sortzen den elektrizitatea eta zenbat CO₂ kostatzen 
         changePeriod="aurreko urtearekin alderatuta"
         direction="neutral"
         source="REE / Eurostat"
-        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+        sparklineData={elec.map(d => ({...d, y: d.demanda_kwh_hab}))}
     />
     <KpiCard
         title="Ikatza"
@@ -135,7 +135,7 @@ Nondik datorren Espainian sortzen den elektrizitatea eta zenbat CO₂ kostatzen 
         period="sorkuntzarena, {elec_kpi[0]?.anio}. urtean · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} %, {elec_kpi[0]?.anio_inicio}. urtean"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_carbon_pct}))}
     />
 </Grid>
 

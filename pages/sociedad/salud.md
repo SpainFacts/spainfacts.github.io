@@ -503,7 +503,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         changePeriod="frente a un año antes"
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.tasa_1000}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.tasa_1000}))}
     />
     <KpiCard
         title="Espera media para operarse"
@@ -515,7 +515,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         changePeriod="en un año"
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Espera media para el especialista"
@@ -527,7 +527,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         changePeriod="en un año"
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Gasto sanitario público"
@@ -535,7 +535,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.pub_real, 0)} € por hab."
         period="{formatNumber(san_gasto_ultimo[0]?.pub_pib, 1)} % del PIB en {san_gasto_ultimo[0]?.anio} · euros de {san_gasto_ultimo[0]?.anio_base}"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({...d, valor: d.eur_hab_real}))}
     />
     <KpiCard
         title="Médicos"
@@ -543,7 +543,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'medicos')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Enfermeras"
@@ -551,7 +551,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Camas de hospital"
@@ -559,7 +559,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.es, 1)} por 1.000 hab."
         period="media UE: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'camas')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Pago directo de los hogares"
@@ -567,7 +567,7 @@ Cuánto se espera para operarse o ver al especialista en la sanidad pública, cu
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.hog_real, 0)} € por hab."
         period="de su bolsillo en {san_gasto_ultimo[0]?.anio} (farmacia, dentista, consultas privadas...) · más {formatNumber(san_gasto_ultimo[0]?.seg_real, 0)} € en seguros"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({...d, valor: d.eur_hab_real}))}
     />
 </Grid>
 

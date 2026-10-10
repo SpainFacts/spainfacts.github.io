@@ -1,7 +1,7 @@
 ---
 title: Indústria
 description: "On és Espanya una potència industrial (automòbil, rajoles, oli d'oliva, pernil, material ferroviari, torres eòliques) i quant pesa la seva indústria davant la mitjana de la UE: VAB i ocupació manufacturera, producció industrial, exportacions i comunitats."
-i18n_origen: 276740ec377f
+i18n_origen: 96dc3106de6d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -518,7 +518,7 @@ Espanya no és entre els països més industrials de la Unió Europea: les seves
         changePeriod="vs {veh_res[0]?.anio_ant}"
         direction="positive-up"
         source="OICA i ANFAC"
-        sparklineData={veh.map(d => d.vehiculos_1000_hab)}
+        sparklineData={veh.map(d => ({...d, y: d.vehiculos_1000_hab}))}
     />
     <KpiCard
         title="Rajoles: quota de la producció de la UE"
@@ -527,7 +527,7 @@ Espanya no és entre els països més industrials de la Unió Europea: les seves
         period="{prod_res[0]?.anio} · en m² · {ordM(prod_res[0]?.az_puesto)} dels {prod_res[0]?.az_n} països que publiquen la dada"
         direction="positive-up"
         source="Eurostat (Prodcom)"
-        sparklineData={azulejos.map(d => d.cuota_cantidad_pct)}
+        sparklineData={azulejos.map(d => ({...d, y: d.cuota_cantidad_pct}))}
     />
     <KpiCard
         title="Pes de les manufactures en l'economia"
@@ -539,7 +539,7 @@ Espanya no és entre els països més industrials de la Unió Europea: les seves
         changePeriod="davant la UE"
         direction="positive-up"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_manufacturas)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_manufacturas}))}
     />
     <KpiCard
         title="Índex de producció industrial"
@@ -550,7 +550,7 @@ Espanya no és entre els països més industrials de la Unió Europea: les seves
         changePeriod="interanual"
         direction="positive-up"
         source="INE (IPI, taula 70177)"
-        sparklineData={ipi_mes.map(d => d.indice)}
+        sparklineData={ipi_mes.map(d => ({...d, y: d.indice}))}
     />
 </Grid>
 

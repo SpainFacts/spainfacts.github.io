@@ -109,7 +109,7 @@ Cuánto vale comprar una vivienda en España y cómo ha cambiado. Hay dos fuente
         change={precio.slice(-1)[0]?.interanual_real?.toFixed(1)}
         changePeriod="real vs un año antes"
         source="Ministerio de Vivienda"
-        sparklineData={precio.map(d => d.euros_m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Subida real de los precios"
@@ -117,7 +117,7 @@ Cuánto vale comprar una vivienda en España y cómo ha cambiado. Hay dos fuente
         formattedValue="{ipv_general.slice(-1)[0]?.interanual_real >= 0 ? '+' : ''}{formatNumber(ipv_general.slice(-1)[0]?.interanual_real, 1)} %"
         period="IPV, {ipv_general.slice(-1)[0]?.periodo} vs un año antes · {formatNumber(ipv_general.slice(-1)[0]?.interanual_nominal, 1)} % sin descontar la inflación"
         source="INE / IPV"
-        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => d.interanual_real)}
+        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Frente al máximo de la burbuja"
@@ -125,7 +125,7 @@ Cuánto vale comprar una vivienda en España y cómo ha cambiado. Hay dos fuente
         formattedValue="{ipv_hitos[0]?.vs_max >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max, 1)} %"
         period="precio real vs {ipv_hitos[0]?.periodo_max} (IPV) · {ipv_hitos[0]?.vs_max_nominal >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max_nominal, 1)} % en euros de cada año"
         source="INE / IPV"
-        sparklineData={ipv_general.map(d => d.indice_real)}
+        sparklineData={ipv_general.map(d => ({...d, y: d.indice_real}))}
     />
     <KpiCard
         title="Piso de 90 m²"
@@ -133,7 +133,7 @@ Cuánto vale comprar una vivienda en España y cómo ha cambiado. Hay dos fuente
         formattedValue="{formatNumber(precio.slice(-1)[0]?.precio_90m2_real / 1000, 0)} mil €"
         period="al valor tasado medio de España, {precio.slice(-1)[0]?.periodo}"
         source="Ministerio de Vivienda"
-        sparklineData={precio.map(d => d.precio_90m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.precio_90m2_real}))}
     />
 </Grid>
 

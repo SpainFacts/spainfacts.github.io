@@ -1,7 +1,7 @@
 ---
 title: Health
 description: "Life expectancy in Spain by region and province, what people die of, suicides, road deaths, excess mortality and the health system: waiting lists, doctors, nurses, beds and spending per person compared with the EU."
-i18n_origen: 89c1708d4d47
+i18n_origen: 99432a16614d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -508,7 +508,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="Ministry of Health (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.tasa_1000}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.tasa_1000}))}
     />
     <KpiCard
         title="Average wait for surgery"
@@ -520,7 +520,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         changePeriod="in one year"
         direction="positive-down"
         source="Ministry of Health (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Average wait to see a specialist"
@@ -532,7 +532,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         changePeriod="in one year"
         direction="positive-down"
         source="Ministry of Health (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Public health spending"
@@ -540,7 +540,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         formattedValue="€{formatNumber(san_gasto_ultimo[0]?.pub_real, 0)} per person"
         period="{formatNumber(san_gasto_ultimo[0]?.pub_pib, 1)} % of GDP in {san_gasto_ultimo[0]?.anio} · {san_gasto_ultimo[0]?.anio_base} euros"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({...d, valor: d.eur_hab_real}))}
     />
     <KpiCard
         title="Doctors"
@@ -548,7 +548,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.es, 1)} per 1,000 pop."
         period="EU average: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'medicos')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Nurses"
@@ -556,7 +556,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.es, 1)} per 1,000 pop."
         period="EU average: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Hospital beds"
@@ -564,7 +564,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.es, 1)} per 1,000 pop."
         period="EU average: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'camas')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Out-of-pocket payments by households"
@@ -572,7 +572,7 @@ How long people wait for surgery or to see a specialist in the public health ser
         formattedValue="€{formatNumber(san_gasto_ultimo[0]?.hog_real, 0)} per person"
         period="paid directly in {san_gasto_ultimo[0]?.anio} (pharmacy, dentist, private appointments...) · plus €{formatNumber(san_gasto_ultimo[0]?.seg_real, 0)} on insurance"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({...d, valor: d.eur_hab_real}))}
     />
 </Grid>
 

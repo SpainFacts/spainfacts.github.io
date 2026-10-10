@@ -1,7 +1,7 @@
 ---
 title: Compravendas e hipotecas
 description: "Compravendas de vivendas e hipotecas sobre vivendas en España por 1.000 habitantes, vivenda nova fronte a segunda man e importe medio da hipoteca descontada a inflación, por comunidade e provincia."
-i18n_origen: ed62e0823b71
+i18n_origen: 04696dab395c
 ---
 
 <script>
@@ -123,7 +123,7 @@ Cantas vivendas cambian de mans cada ano e cantas se compran con hipoteca. Son c
         change={ultimo[0]?.var_cv?.toFixed(1)}
         changePeriod="fronte a un ano antes"
         source="INE / ETDP"
-        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => d.compraventas_12m_1000)}
+        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Hipotecas sobre vivendas"
@@ -133,7 +133,7 @@ Cantas vivendas cambian de mans cada ano e cantas se compran con hipoteca. Son c
         change={ultimo[0]?.var_h?.toFixed(1)}
         changePeriod="fronte a un ano antes"
         source="INE / Hipotecas"
-        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => d.hipotecas_12m_1000)}
+        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => ({...d, y: d.hipotecas_12m_1000}))}
     />
     <KpiCard
         title="Hipoteca media"
@@ -141,7 +141,7 @@ Cantas vivendas cambian de mans cada ano e cantas se compran con hipoteca. Son c
         formattedValue="{formatNumber(importe_ult[0]?.importe_medio_real / 1000, 0)} mil €"
         period="por vivenda en {importe_ult[0]?.anio}, en euros de {anual[0]?.anio_base}"
         source="INE / Hipotecas"
-        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => d.importe_medio_real)}
+        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => ({...d, y: d.importe_medio_real}))}
     />
     <KpiCard
         title="Vivenda nova"
@@ -149,7 +149,7 @@ Cantas vivendas cambian de mans cada ano e cantas se compran con hipoteca. Son c
         formattedValue="{formatNumber(hitos[0]?.pct_nueva_ult, 1)} %"
         period="das compravendas en {hitos[0]?.anio_ult} · {formatNumber(hitos[0]?.pct_nueva_2008, 0)} % en 2008"
         source="INE / ETDP"
-        sparklineData={anual_completo.map(d => d.pct_nueva)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_nueva}))}
     />
 </Grid>
 

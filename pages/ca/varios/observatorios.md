@@ -3,7 +3,7 @@ title: Observatoris públics
 description: "Cens dels observatoris públics d'Espanya: quants n'hi ha, quina administració els crea, quan van néixer, quants continuen actius, quants n'hi ha per habitant a cada comunitat i quin partit governava quan es van crear."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a544f976aca5
+i18n_origen: ff0c7540da64
 ---
 
 <script>
@@ -216,7 +216,7 @@ Les administracions creen observatoris per seguir un tema (la violència de gèn
         formattedValue={formatNumber(resumen[0]?.total, 0)}
         period="{formatNumber(resumen[0]?.estatales, 0)} de l'Administració General de l'Estat"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.acumulados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.acumulados}))}
     />
     <KpiCard
         title="Actius"
@@ -231,7 +231,7 @@ Les administracions creen observatoris per seguir un tema (la violència de gèn
         formattedValue="{formatNumber(resumen[0]?.pct_desde_2015, 0)} %"
         period="{formatNumber(resumen[0]?.desde_2015, 0)} dels {formatNumber(resumen[0]?.con_anio, 0)} amb any de creació conegut"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.creados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.creados}))}
     />
     <KpiCard
         title="Amb participació privada"

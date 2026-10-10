@@ -1,5 +1,5 @@
 ---
-i18n_origen: fba9f04f2b64
+i18n_origen: c141d7649501
 title: Salarios
 description: "Salario medio en España descontada a inflación, o seu crecemento real e nominal, por sector e xornada, e a distribución por decís."
 og:
@@ -113,7 +113,7 @@ Canto se cobra en España e se o soldo dá para máis ou para menos ca antes. To
         changePeriod="real vs. ano anterior"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Suba real do último trimestre"
@@ -122,7 +122,7 @@ Canto se cobra en España e se o soldo dá para máis ou para menos ca antes. To
         period="{trimestral.slice(-1)[0]?.periodo} vs. un ano antes · {formatNumber(trimestral.slice(-1)[0]?.interanual_nominal, 1)} % sen descontar a inflación"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => d.interanual_real)}
+        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Fronte a 2008"
@@ -131,7 +131,7 @@ Canto se cobra en España e se o soldo dá para máis ou para menos ca antes. To
         period="poder de compra do salario medio en {hitos_salario[0]?.anio_ult} · +{formatNumber(hitos_salario[0]?.nominal_vs2008, 0)} % en euros de cada ano"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Salario do decil central"
@@ -139,7 +139,7 @@ Canto se cobra en España e se o soldo dá para máis ou para menos ca antes. To
         formattedValue="{formatNumber(deciles_ult.find(d => d.decil === 5)?.salario_real, 0)} €/mes"
         period="o que cobra o asalariado típico (decil 5 da EPA) en {deciles_ult[0]?.anio}, euros de {deciles_ult[0]?.anio_base}"
         source="INE / EPA"
-        sparklineData={deciles.filter(d => d.decil === 5).map(d => d.salario_real)}
+        sparklineData={deciles.filter(d => d.decil === 5).map(d => ({...d, y: d.salario_real}))}
     />
 </Grid>
 

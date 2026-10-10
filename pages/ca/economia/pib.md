@@ -1,7 +1,7 @@
 ---
 title: PIB i creixement
 description: "Evolució del PIB d'Espanya per habitant i descomptada la inflació, creixement trimestral, components de la demanda i comparació amb la UE."
-i18n_origen: 0a70463d9329
+i18n_origen: e052747ef102
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -94,7 +94,7 @@ El producte interior brut mesura tot el que produeix l'economia. Per veure si el
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="interanual real, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
     />
     <KpiCard
         title="PIB per habitant, ritme anual"
@@ -110,7 +110,7 @@ El producte interior brut mesura tot el que produeix l'economia. Per veure si el
         formattedValue={formatNumber(pib_hab.filter(d => d.indice_ue != null).slice(-1)[0]?.indice_ue, 1)}
         period="PIB per habitant en paritat de poder adquisitiu, UE = 100"
         source="Eurostat"
-        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => d.indice_ue)}
+        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => ({...d, y: d.indice_ue}))}
     />
 </Grid>
 

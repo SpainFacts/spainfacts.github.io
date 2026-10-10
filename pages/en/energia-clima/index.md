@@ -1,7 +1,7 @@
 ---
 title: Energy and Climate
 description: The ecological transition, the electricity generation mix and greenhouse gas emissions in Spain.
-i18n_origen: 3dd0325563c7
+i18n_origen: 0b1048f4b3b1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -92,7 +92,7 @@ ORDER BY anio ASC
         period={emisiones_totales[0]?.anio}
         source="GHG Inventory (MITECO) via Eurostat"
         href="/en/energia-clima/emisiones"
-        sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
+        sparklineData={[...emisiones_totales].reverse().map(d => ({...d, valor: d.total_emisiones}))}
     />
     <KpiCard
         title="Solar PV capacity"
@@ -101,7 +101,7 @@ ORDER BY anio ASC
         period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/en/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.solar_mw / 1000}))}
     />
     <KpiCard
         title="Wind capacity"
@@ -110,7 +110,7 @@ ORDER BY anio ASC
         period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/en/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.eolica_mw / 1000}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Mobility
 description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, and passengers on metro, bus, rail and air."
-i18n_origen: 59d7fcbfaeaa
+i18n_origen: 55dddfc9d8f7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -83,7 +83,7 @@ How people get around in Spain: the cars being bought and the ones on the road, 
         direction="positive-up"
         source="DGT"
         href="/en/movilidad/coche-electrico"
-        sparklineData={cuota.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Cars on the road"

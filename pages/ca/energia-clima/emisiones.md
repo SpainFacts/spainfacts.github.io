@@ -1,7 +1,7 @@
 ---
 title: Emissions i Descarbonització
 description: "Emissions oficials de gasos d'efecte d'hivernacle (GEH) d'Espanya des del 1990, per habitant, per euro de PIB real i per sector, davant dels objectius del 2030 i de la mitjana europea."
-i18n_origen: 8873f7164972
+i18n_origen: 100c2894f1bf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -194,7 +194,7 @@ Quants gasos d'efecte d'hivernacle emet Espanya des del 1990, any de referència
         changePeriod="vs. any anterior"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.t_hab)}
+        sparklineData={anual.map(d => ({...d, y: d.t_hab}))}
     />
     <KpiCard
         title="Respecte al 1990"
@@ -203,7 +203,7 @@ Quants gasos d'efecte d'hivernacle emet Espanya des del 1990, any de referència
         period="emissions totals el {kpi[0]?.anio} · {formatNumber(kpi[0]?.var_2005_pct, 1)} % respecte al 2005"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.var_1990_pct)}
+        sparklineData={anual.map(d => ({...d, y: d.var_1990_pct}))}
     />
     <KpiCard
         title="Intensitat de l'economia"
@@ -214,7 +214,7 @@ Quants gasos d'efecte d'hivernacle emet Espanya des del 1990, any de referència
         changePeriod="des del {intensidad[0]?.anio}"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={intensidad.map(d => d.kg_por_euro)}
+        sparklineData={intensidad.map(d => ({...d, y: d.kg_por_euro}))}
     />
     <KpiCard
         title="Espanya davant la UE"
@@ -223,7 +223,7 @@ Quants gasos d'efecte d'hivernacle emet Espanya des del 1990, any de referència
         period="per habitant el {ue_ratio.slice(-1)[0]?.anio}: {formatNumber(ue_ratio.slice(-1)[0]?.t_hab, 1)} t davant de {formatNumber(ue_ratio.slice(-1)[0]?.t_hab_ue, 1)} t a la UE-27"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={ue_ratio.map(d => d.pct_ue)}
+        sparklineData={ue_ratio.map(d => ({...d, y: d.pct_ue}))}
     />
 </Grid>
 

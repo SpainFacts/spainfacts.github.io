@@ -1,7 +1,7 @@
 ---
 title: Proactive disclosure
 description: "Do public administrations publish on their transparency portals what the law requires of them? Official assessments by entity (Council of Transparency and Good Governance and Canary Islands Transparency Commissioner), their evolution, the comparison by party and what cannot yet be measured."
-i18n_origen: 6724b8e266cf
+i18n_origen: ade15fac60e0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -205,7 +205,7 @@ Since 2014, the [Transparency Law 19/2013](https://www.boe.es/buscar/act.php?id=
         formattedValue="{formatNumber(age[age.length - 1]?.icio, 1)} %"
         period="of mandatory information complied with in {age[age.length - 1]?.anio} (ICIO)"
         source="Council of Transparency and Good Governance"
-        sparklineData={age.map(d => d.icio)}
+        sparklineData={age.map(d => ({...d, y: d.icio}))}
     />
     <KpiCard
         title="Communities assessed by the CTBG"
@@ -220,14 +220,14 @@ Since 2014, the [Transparency Law 19/2013](https://www.boe.es/buscar/act.php?id=
         formattedValue="{formatNumber(itc_resumen[0]?.media / 10, 2)} out of 10"
         period="average score in the Canary Islands Transparency Index ({itc_ultimo[0]?.etiqueta})"
         source="Canary Islands Transparency Commissioner"
-        sparklineData={itc_aytos_serie.map(d => d.media / 10)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.media / 10}))}
     />
     <KpiCard
         title="Canary Islands councils with a low score"
         value={itc_resumen[0]?.bajos}
         formattedValue={formatNumber(itc_resumen[0]?.bajos, 0)}
         period="out of {formatNumber(itc_resumen[0]?.total, 0)}: below 5 or did not submit to the assessment ({itc_ultimo[0]?.etiqueta})"
-        sparklineData={itc_aytos_serie.map(d => d.suspenso)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.suspenso}))}
     />
 </Grid>
 

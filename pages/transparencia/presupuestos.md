@@ -131,7 +131,7 @@ Los Presupuestos Generales del Estado son la ley que fija cada año cuánto pued
         formattedValue={resumen[0]?.situacion_actual}
         period="{formatNumber(racha[0]?.seguidos, 0)} ejercicios seguidos sin ley propia, desde {racha[0]?.desde} · {formatNumber(resumen[0]?.dias_actual, 0)} días de prórroga este año"
         source="BOE"
-        sparklineData={serie.map(d => d.dias_prorroga)}
+        sparklineData={serie.map(d => ({...d, y: d.dias_prorroga}))}
     />
     <KpiCard
         title="Último presupuesto aprobado a tiempo"

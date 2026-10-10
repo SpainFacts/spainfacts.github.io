@@ -3,7 +3,7 @@ title: Hauteskundeak
 description: "1977az geroztiko hauteskunde orokorren, europarren eta udal-hauteskundeen emaitzak: parte-hartzea, botoa alderdika eta blokeka, zatiketa, eserlekuko botoak eta irabazlea probintzia eta udalerri bakoitzean, Barne Ministerioaren datu ofizialekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 855cde6e0399
+i18n_origen: c483ec970932
 ---
 
 <script>
@@ -76,7 +76,7 @@ Zenbat jendek bozkatzen duen, nori eta nola banatzen diren eserlekuak: 1977az ge
         formattedValue="{resumen[0]?.ganador_siglas} · {formatNumber(resumen[0]?.ganador_pct, 1)} %"
         period="350 eserlekutik {formatNumber(resumen[0]?.ganador_escanos, 0)} · bigarrena: {resumen[0]?.segundo_siglas} ({formatNumber(resumen[0]?.segundo_pct, 1)} %)"
         source="Barne Ministerioa"
-        sparklineData={generales.map(d => ({valor: d.ganador_pct}))}
+        sparklineData={generales.map(d => ({...d, valor: d.ganador_pct}))}
     />
     <KpiCard
         title="Alderdien kopuru efektiboa"
@@ -87,7 +87,7 @@ Zenbat jendek bozkatzen duen, nori eta nola banatzen diren eserlekuak: 1977az ge
         changeUnit=""
         changePeriod="aurrekoarekiko ({hil(resumen[0]?.etiqueta_anterior)})"
         source="Geure kalkulua"
-        sparklineData={generales.map(d => ({valor: d.nep_votos}))}
+        sparklineData={generales.map(d => ({...d, valor: d.nep_votos}))}
     />
     <KpiCard
         title="Boto gehien jaso zituzten bien botoa"
@@ -98,7 +98,7 @@ Zenbat jendek bozkatzen duen, nori eta nola banatzen diren eserlekuak: 1977az ge
         changeUnit="p.p."
         changePeriod="aurrekoarekiko ({hil(resumen[0]?.etiqueta_anterior)})"
         source="Barne Ministerioa"
-        sparklineData={generales.map(d => ({valor: d.dos_primeros}))}
+        sparklineData={generales.map(d => ({...d, valor: d.dos_primeros}))}
     />
 </Grid>
 

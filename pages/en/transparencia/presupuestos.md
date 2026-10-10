@@ -1,7 +1,7 @@
 ---
 title: Rolled-over budgets
 description: "In which years Spain has had a General State Budget approved on time, which arrived late and which were rolled over, how many days late and which government was due to present them, since 1978."
-i18n_origen: fd19bed34152
+i18n_origen: 1b5c090de484
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -135,7 +135,7 @@ The General State Budget is the law that sets each year how much the State may s
         formattedValue={traducirSituacion(resumen[0]?.situacion_actual)}
         period="{formatNumber(racha[0]?.seguidos, 0)} consecutive years without their own budget act, since {racha[0]?.desde} · {formatNumber(resumen[0]?.dias_actual, 0)} days of rollover this year"
         source="BOE"
-        sparklineData={serie.map(d => d.dias_prorroga)}
+        sparklineData={serie.map(d => ({...d, y: d.dias_prorroga}))}
     />
     <KpiCard
         title="Last budget approved on time"

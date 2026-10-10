@@ -84,7 +84,7 @@ Cuántas viviendas se construyen en España. Son **viviendas libres** (sin la pr
         formattedValue="{formatNumber(hitos[0]?.term_ult, 2)} por 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.term_total, 0)} viviendas libres"
         source="Ministerio de Vivienda"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Viviendas iniciadas"
@@ -92,7 +92,7 @@ Cuántas viviendas se construyen en España. Son **viviendas libres** (sin la pr
         formattedValue="{formatNumber(hitos[0]?.ini_ult, 2)} por 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.ini_total, 0)} viviendas libres"
         source="Ministerio de Vivienda"
-        sparklineData={espana.map(d => d.iniciadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.iniciadas_1000}))}
     />
     <KpiCard
         title="Frente al máximo"
@@ -100,7 +100,7 @@ Cuántas viviendas se construyen en España. Son **viviendas libres** (sin la pr
         formattedValue="{formatNumber(hitos[0]?.fraccion_max / 0.01, 0)} %"
         period="de las viviendas terminadas por habitante en {hitos[0]?.anio_term_max} ({formatNumber(hitos[0]?.term_max, 1)} por 1.000 hab.)"
         source="Ministerio de Vivienda"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Frente a finales de los 90"
@@ -108,7 +108,7 @@ Cuántas viviendas se construyen en España. Son **viviendas libres** (sin la pr
         formattedValue="{formatNumber(hitos[0]?.media_9600, 1)} por 1.000 hab."
         period="viviendas terminadas al año de media en 1996-2000"
         source="Ministerio de Vivienda"
-        sparklineData={espana.filter(d => d.anio <= 2000).map(d => d.terminadas_1000)}
+        sparklineData={espana.filter(d => d.anio <= 2000).map(d => ({...d, y: d.terminadas_1000}))}
     />
 </Grid>
 

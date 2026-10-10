@@ -1,7 +1,7 @@
 ---
 title: Construción
 description: "A construción en España fronte á UE: peso no valor engadido e no emprego desde 1995, a burbulla de 2007 e o derrubamento, licitación de obra pública en euros reais por habitante e partido do Goberno, vivendas visadas, cemento, produción, custos, empresas e comunidades."
-i18n_origen: 60f03001a5e1
+i18n_origen: 9b8936d58932
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -583,7 +583,7 @@ A construción foi o motor e despois o lastre da economía española. En {peso_r
         changePeriod="vs 2007"
         direction="neutral"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_construccion)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_construccion}))}
     />
     <KpiCard
         title="Ocupados por 1.000 habitantes"
@@ -595,7 +595,7 @@ A construción foi o motor e despois o lastre da economía española. En {peso_r
         changePeriod="vs hai un ano"
         direction="positive-up"
         source="INE (EPA)"
-        sparklineData={epa.map(d => d.ocupados_constr_1000hab)}
+        sparklineData={epa.map(d => ({...d, y: d.ocupados_constr_1000hab}))}
     />
     <KpiCard
         title="Licitación pública por habitante"
@@ -607,7 +607,7 @@ A construción foi o motor e despois o lastre da economía española. En {peso_r
         changePeriod="vs 2007"
         direction="neutral"
         source="Mº de Transportes"
-        sparklineData={lic.map(d => d.total_hab_real)}
+        sparklineData={lic.map(d => ({...d, y: d.total_hab_real}))}
     />
     <KpiCard
         title="Vivendas visadas por 1.000 hab."
@@ -619,7 +619,7 @@ A construción foi o motor e despois o lastre da economía española. En {peso_r
         changePeriod="vs ano anterior"
         direction="neutral"
         source="Colexios de aparelladores (BdE)"
-        sparklineData={visados.map(d => d.viviendas_nueva_1000hab)}
+        sparklineData={visados.map(d => ({...d, y: d.viviendas_nueva_1000hab}))}
     />
 </Grid>
 

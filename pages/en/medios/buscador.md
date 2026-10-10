@@ -1,7 +1,7 @@
 ---
 title: Who gets what
 description: "Media search: all the public money each outlet (OKDiario, Libertad Digital, El País, Cadena SER, La Vanguardia...) has received from every administration, by channel (institutional advertising, contracts and subsidies), year and paying administration, in today's euros."
-i18n_origen: 4e52a4100892
+i18n_origen: 42aa55cbac73
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -211,7 +211,7 @@ Choose a media outlet and you will see everything it has been paid by the public
         period={`${sel[0].anio_min}-${sel[0].anio_max} · ${formatNumber(sel[0].n_pagos, 0)} payments · ${formatCompact(sel[0].total_eur_nominal, 2)} € nominal`}
         source="SpainFacts with data from the CPCI, regions, town councils, PLACSP and BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.total)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.total}))}
     />
     <KpiCard
         title="Institutional advertising"
@@ -221,7 +221,7 @@ Choose a media outlet and you will see everything it has been paid by the public
         period={`Central government: ${formatCompact(sel[0].estado_eur_real, 2)} € · regions and town councils: ${formatCompact(sel[0].territorial_eur_real, 2)} €`}
         source="CPCI (2025), regions and town councils"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.publicidad)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.publicidad}))}
     />
     <KpiCard
         title="Contracts and subsidies"
@@ -231,7 +231,7 @@ Choose a media outlet and you will see everything it has been paid by the public
         period={`Contracts: ${formatCompact(sel[0].contratos_eur_real, 2)} € · subsidies: ${formatCompact(sel[0].subvenciones_eur_real, 2)} €`}
         source="PLACSP and BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.contratos_subv)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.contratos_subv}))}
     />
     <KpiCard
         title="Paying administrations"
@@ -241,7 +241,7 @@ Choose a media outlet and you will see everything it has been paid by the public
         period={`from ${formatNumber(sel[0].n_gob, 0)} administrations (central government, regions, town councils...)`}
         source="SpainFacts"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.n_admin)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.n_admin}))}
     />
 </div>
 

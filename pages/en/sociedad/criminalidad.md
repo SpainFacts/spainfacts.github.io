@@ -1,7 +1,7 @@
 ---
 title: Crime
 description: "Recorded crime in Spain by type, region, province and municipality since 2010, the rise of cybercrime and convictions by nationality, with context."
-i18n_origen: c361bc094630
+i18n_origen: 675d5e735dd8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -77,7 +77,7 @@ Offences known to the National Police, the Guardia Civil, the Mossos d'Esquadra,
         changePeriod="vs. 2019"
         direction="positive-down"
         source="Ministry of the Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => ({...d, y: d.tasa_1000}))}
     />
     <KpiCard
         title="Homicides and murders"
@@ -85,7 +85,7 @@ Offences known to the National Police, the Guardia Civil, the Mossos d'Esquadra,
         formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} per 100,000 inhabitants"
         period="{formatNumber(resumen[0]?.homicidios, 0)} completed in {resumen[0]?.anio}"
         source="Ministry of the Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => ({...d, y: d.tasa_1000 * 100}))}
     />
     <KpiCard
         title="Cybercrime"

@@ -3,7 +3,7 @@ title: Etxebizitza
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta, alokairua, salerosketak eta hipotekak 1.000 biztanleko, obra berria eta etxe batek zenbat urteko soldata balio duen, erkidego eta probintziaka."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 0e532c3339dc
+i18n_origen: f97a78f90884
 ---
 
 <script>
@@ -116,7 +116,7 @@ Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen dir
         direction="neutral"
         source="Etxebizitza Ministerioa"
         href="/eu/vivienda/precios"
-        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => d.euros_m2_real)}
+        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Pisu baten alokairu mediana"
@@ -128,7 +128,7 @@ Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen dir
         direction="neutral"
         source="Etxebizitza Ministerioa (SERPAVI)"
         href="/eu/vivienda/alquiler"
-        sparklineData={alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Etxebizitzen salerosketak"
@@ -140,7 +140,7 @@ Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen dir
         direction="neutral"
         source="INE / ETDP"
         href="/eu/vivienda/compraventas"
-        sparklineData={mercado_mes.map(d => d.compraventas_12m_1000)}
+        sparklineData={mercado_mes.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="90 m²-rako soldata-urteak"
@@ -150,7 +150,7 @@ Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen dir
         direction="positive-down"
         source="Etxebizitza Ministerioa / INE"
         href="/eu/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.anios_salario)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 

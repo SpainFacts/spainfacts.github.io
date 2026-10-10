@@ -1,7 +1,7 @@
 ---
 title: Public rental housing
 description: "How much public rental housing there is in Spain per inhabitant and as a % of households, by region, province and municipality, compared with the Netherlands, Austria, Denmark, France and the European average, and by the party in government."
-i18n_origen: a5388d75d815
+i18n_origen: 911f5f63d748
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -214,7 +214,7 @@ How many homes owned by public administrations are let at below-market rents to 
         changePeriod="vs 2019"
         direction="neutral"
         source="Ministry of Housing (social housing survey)"
-        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => d.parque_autonomico_1000hab)}
+        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => ({...d, y: d.parque_autonomico_1000hab}))}
     />
     <KpiCard
         title="Households renting below market price"
@@ -223,7 +223,7 @@ How many homes owned by public administrations are let at below-market rents to 
         period="of households, {resumen[0]?.ecv_anio} · includes reduced private rents"
         direction="neutral"
         source="INE (Living Conditions Survey)"
-        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => d.ecv_pct_alquiler_inferior)}
+        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => ({...d, y: d.ecv_pct_alquiler_inferior}))}
     />
     <KpiCard
         title="Subsidised rental homes"
@@ -232,7 +232,7 @@ How many homes owned by public administrations are let at below-market rents to 
         period="provisional approvals, {resumen[0]?.calif_anio} · {formatNumber(resumen[0]?.calif_ultimo, 0)} homes"
         direction="neutral"
         source="Ministry of Housing"
-        sparklineData={calif.map(d => d.calif_alquiler_100k)}
+        sparklineData={calif.map(d => ({...d, y: d.calif_alquiler_100k}))}
     />
 </Grid>
 

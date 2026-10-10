@@ -1,7 +1,7 @@
 ---
 title: GDP and growth
 description: "Spain's GDP per inhabitant adjusted for inflation, quarterly growth, components of demand and comparison with the EU."
-i18n_origen: 0a70463d9329
+i18n_origen: e052747ef102
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -94,7 +94,7 @@ Gross domestic product measures everything the economy produces. To see whether 
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)}%"
         period="real year-on-year, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
     />
     <KpiCard
         title="GDP per inhabitant, annual rate"
@@ -110,7 +110,7 @@ Gross domestic product measures everything the economy produces. To see whether 
         formattedValue={formatNumber(pib_hab.filter(d => d.indice_ue != null).slice(-1)[0]?.indice_ue, 1)}
         period="GDP per inhabitant in purchasing power parity, EU = 100"
         source="Eurostat"
-        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => d.indice_ue)}
+        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => ({...d, y: d.indice_ue}))}
     />
 </Grid>
 

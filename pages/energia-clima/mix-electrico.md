@@ -103,7 +103,7 @@ De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta c
         changePeriod="vs año anterior"
         direction="positive-up"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_renovable_pct}))}
     />
     <KpiCard
         title="CO₂ por kWh generado"
@@ -114,7 +114,7 @@ De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta c
         changePeriod="vs año anterior"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.g_co2_kwh)}
+        sparklineData={elec.map(d => ({...d, y: d.g_co2_kwh}))}
     />
     <KpiCard
         title="Consumo por habitante"
@@ -125,7 +125,7 @@ De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta c
         changePeriod="vs año anterior"
         direction="neutral"
         source="REE / Eurostat"
-        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+        sparklineData={elec.map(d => ({...d, y: d.demanda_kwh_hab}))}
     />
     <KpiCard
         title="Carbón"
@@ -134,7 +134,7 @@ De dónde sale la electricidad que se genera en España y cuánto CO₂ cuesta c
         period="de la generación en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} % en {elec_kpi[0]?.anio_inicio}"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_carbon_pct}))}
     />
 </Grid>
 

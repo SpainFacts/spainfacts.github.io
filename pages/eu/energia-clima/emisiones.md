@@ -1,7 +1,7 @@
 ---
 title: Isuriak eta deskarbonizazioa
 description: "Espainiako berotegi-efektuko gasen (BEG) isuri ofizialak 1990etik, biztanleko, BPG errealaren euro bakoitzeko eta sektoreka, 2030eko helburuekin eta Europako batez bestekoarekin alderatuta."
-i18n_origen: 8873f7164972
+i18n_origen: 100c2894f1bf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -194,7 +194,7 @@ Zenbat berotegi-efektuko gas isurtzen duen Espainiak 1990etik, klima-konpromisoe
         changePeriod="aurreko urtearekin alderatuta"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.t_hab)}
+        sparklineData={anual.map(d => ({...d, y: d.t_hab}))}
     />
     <KpiCard
         title="1990arekin alderatuta"
@@ -203,7 +203,7 @@ Zenbat berotegi-efektuko gas isurtzen duen Espainiak 1990etik, klima-konpromisoe
         period="isuri guztiak, {kpi[0]?.anio}. urtean · {formatNumber(kpi[0]?.var_2005_pct, 1)} % 2005arekin alderatuta"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.var_1990_pct)}
+        sparklineData={anual.map(d => ({...d, y: d.var_1990_pct}))}
     />
     <KpiCard
         title="Ekonomiaren intentsitatea"
@@ -214,7 +214,7 @@ Zenbat berotegi-efektuko gas isurtzen duen Espainiak 1990etik, klima-konpromisoe
         changePeriod="{intensidad[0]?.anio}. urteaz geroztik"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={intensidad.map(d => d.kg_por_euro)}
+        sparklineData={intensidad.map(d => ({...d, y: d.kg_por_euro}))}
     />
     <KpiCard
         title="Espainia EBrekin alderatuta"
@@ -223,7 +223,7 @@ Zenbat berotegi-efektuko gas isurtzen duen Espainiak 1990etik, klima-konpromisoe
         period="biztanleko, {ue_ratio.slice(-1)[0]?.anio}. urtean: {formatNumber(ue_ratio.slice(-1)[0]?.t_hab, 1)} t, EB-27ko {formatNumber(ue_ratio.slice(-1)[0]?.t_hab_ue, 1)} t-ren aldean"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={ue_ratio.map(d => d.pct_ue)}
+        sparklineData={ue_ratio.map(d => ({...d, y: d.pct_ue}))}
     />
 </Grid>
 

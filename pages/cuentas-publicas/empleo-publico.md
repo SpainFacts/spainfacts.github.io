@@ -98,7 +98,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} por 1.000 hab."
         period="{formatCompact(resumen[0]?.total, 2)} en total · {ultima[0]?.fecha_texto}"
         source="Registro Central de Personal"
-        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
+        sparklineData={serie_por_1000.map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="En las comunidades autónomas"
@@ -106,7 +106,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: sobre todo sanidad y educación"
         source="Registro Central de Personal"
-        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
+        sparklineData={serie_cuota_ccaa.map(d => ({...d, y: d.cuota_ccaa}))}
     />
     <KpiCard
         title="Cuestan al año, por habitante"
@@ -114,7 +114,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)} €"
         period="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mil M€ en total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)} % del PIB · {coste_ultimo[0]?.anio} (euros de {coste_ultimo[0]?.anio_base})"
         source="Eurostat"
-        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
+        sparklineData={coste_serie_real.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Salario medio (jornada completa)"
@@ -122,7 +122,7 @@ Quién trabaja para las administraciones públicas en España: cuántos son, en 
         formattedValue="{formatNumber(salario_ultimo[0]?.publico, 0)} €/mes"
         period="frente a {formatNumber(salario_ultimo[0]?.privado, 0)} € en el sector privado · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
-        sparklineData={salario_serie_real.map(d => d.publico_real)}
+        sparklineData={salario_serie_real.map(d => ({...d, y: d.publico_real}))}
     />
 </Grid>
 

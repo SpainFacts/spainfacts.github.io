@@ -3,7 +3,7 @@ title: Behatoki publikoak
 description: "Espainiako behatoki publikoen errolda: zenbat dauden, zein administraziok sortzen dituen, noiz sortu ziren, zenbat dauden oraindik aktibo, zenbat dauden biztanleko erkidego bakoitzean eta zein alderdik gobernatzen zuen sortu zirenean."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a544f976aca5
+i18n_origen: ff0c7540da64
 ---
 
 <script>
@@ -216,7 +216,7 @@ Administrazioek behatokiak sortzen dituzte gai bati jarraitzeko (genero-indarker
         formattedValue={formatNumber(resumen[0]?.total, 0)}
         period="{formatNumber(resumen[0]?.estatales, 0)} Estatuko Administrazio Orokorrarenak"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.acumulados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.acumulados}))}
     />
     <KpiCard
         title="Aktiboak"
@@ -231,7 +231,7 @@ Administrazioek behatokiak sortzen dituzte gai bati jarraitzeko (genero-indarker
         formattedValue="{formatNumber(resumen[0]?.pct_desde_2015, 0)} %"
         period="sorrera-urtea ezaguna duten {formatNumber(resumen[0]?.con_anio, 0)} behatokietatik {formatNumber(resumen[0]?.desde_2015, 0)}"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.creados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.creados}))}
     />
     <KpiCard
         title="Parte-hartze pribatuarekin"

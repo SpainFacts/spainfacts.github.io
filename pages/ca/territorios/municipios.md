@@ -1,7 +1,7 @@
 ---
 title: Municipis
 description: "Cerca qualsevol municipi d'Espanya: població, comptes de l'ajuntament i comparació amb municipis de la seva mida."
-i18n_origen: 5b934493d7e4
+i18n_origen: fad225ccb8b9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,6 +9,7 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -439,7 +440,9 @@ ORDER BY cod_distrito
 SELECT
     municipio, paro_registrado, paro_registrado_hace_1_anio, por_100_hab, variacion_anual_pct, oculto,
     100.0 * paro_registrado_hace_1_anio / poblacion AS por_100_hab_hace_1_anio,
-    strftime(mes, '%m/%Y') AS mes_txt
+    strftime(mes, '%m/%Y') AS mes_txt,
+    strftime(mes, '%Y-%m') AS mes_iso,
+    strftime(mes - INTERVAL 1 YEAR, '%Y-%m') AS mes_iso_hace_1_anio
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
@@ -458,7 +461,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_persona_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Renda neta per llar"
@@ -468,7 +471,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_hogar_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_hogar_real}))}
     />
 {/if}
 {#if paro_mun.length > 0 && !paro_mun[0]?.oculto}
@@ -480,7 +483,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-down"
         source="SEPE"
         href="/ca/economia/paro"
-        sparklineData={[paro_mun[0]?.por_100_hab_hace_1_anio, paro_mun[0]?.por_100_hab]}
+        sparklineData={[{x: paro_mun[0]?.mes_iso_hace_1_anio, y: paro_mun[0]?.por_100_hab_hace_1_anio}, {x: paro_mun[0]?.mes_iso, y: paro_mun[0]?.por_100_hab}]}
     />
 {/if}
 </Grid>
@@ -510,6 +513,165 @@ WHERE cod_municipio = '${inputs.municipio}'
 {/if}
 
 <p class="text-xs text-gray-500">Renda: Atles de Distribució de Renda de les Llars de l'INE, a partir de dades tributàries. Atur: demandants aturats registrats al SEPE l'últim dia del mes, sobre la població total del municipi (no hi ha població de 16 a 64 anys per municipi).</p>
+
+{/if}
+
+```sql barrios_renta
+SELECT cod_mun, cod_seccion, seccion, renta_persona_real, renta_hogar_real,
+    CASE WHEN renta_persona_tope THEN '≥ ' WHEN renta_persona_suelo THEN '≤ ' ELSE '' END AS renta_persona_marca,
+    CASE WHEN renta_hogar_tope THEN '≥ ' WHEN renta_hogar_suelo THEN '≤ ' ELSE '' END AS renta_hogar_marca,
+    CAST(anio AS INTEGER) AS anio, CAST(anio_base AS INTEGER) AS anio_base, CAST(geo_anio AS INTEGER) AS geo_anio
+FROM mother.renta_secciones
+WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
+```
+
+```sql barrios_elecciones
+SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+```
+
+```sql barrios_voto
+SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+    participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
+    pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
+    CASE '${inputs.barrio_capa}'
+        WHEN 'izquierda' THEN pct_izquierda WHEN 'derecha' THEN pct_derecha
+        WHEN 'centro' THEN pct_centro WHEN 'nacionalistas' THEN pct_nacionalistas
+        WHEN 'psoe' THEN pct_psoe WHEN 'pp' THEN pct_pp WHEN 'vox' THEN pct_vox
+        WHEN 'ips' THEN pct_iu_podemos_sumar WHEN 'participacion' THEN participacion
+    END AS valor
+FROM mother.elecciones_secciones
+WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+```
+
+```sql barrios_quintiles
+WITH s AS (
+    SELECT v.*, ntile(5) OVER (ORDER BY r.renta_persona_real) AS quintil
+    FROM ${barrios_voto} v
+    JOIN ${barrios_renta} r USING (cod_seccion)
+)
+SELECT quintil,
+    CASE quintil WHEN 1 THEN '20 % más pobre' WHEN 2 THEN '2.º' WHEN 3 THEN '3.º' WHEN 4 THEN '4.º' ELSE '20 % más rico' END AS grupo,
+    bloque, sum(p * votantes) / sum(votantes) AS pct
+FROM (
+    SELECT quintil, votantes, unnest(['Izquierda', 'Derecha', 'Centro', 'Nacionalistas y regionalistas']) AS bloque,
+        unnest([pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas]) AS p
+    FROM s
+)
+GROUP BY quintil, grupo, bloque
+HAVING (SELECT count(*) FROM s) >= 10
+QUALIFY max(sum(p * votantes) / sum(votantes)) OVER (PARTITION BY bloque) >= 1
+ORDER BY quintil
+```
+
+{#if barrios_renta.length > 1 || barrios_elecciones.length > 0}
+
+## Barri a barri
+
+Cada taca és una **secció censal**, la unitat més petita de l'estadística oficial: unes 1.000-2.500 persones que voten al mateix col·legi. Passa el ratolí per sobre per veure'n la xifra.
+
+{#if barrios_renta.length > 1}
+
+<MapaEspana
+    data={barrios_renta}
+    geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=renta_persona_real
+    valueFmt='#,##0" €"'
+    colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Renda per persona', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Per llar', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
+    height=520
+    title="Renda neta mitjana per persona el {barrios_renta[0]?.anio} (euros de {barrios_renta[0]?.anio_base})"
+/>
+
+{/if}
+
+{#if barrios_elecciones.length > 0}
+
+<ButtonGroup name=barrio_eleccion title="Elecció">
+    {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Generals 2023" value="02" default />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Municipals 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europees 2024" value="07" />{/if}
+</ButtonGroup>
+
+<ButtonGroup name=barrio_capa title="Què veure">
+    <ButtonGroupItem valueLabel="Més votat" value="ganador" default />
+    <ButtonGroupItem valueLabel="Esquerra" value="izquierda" />
+    <ButtonGroupItem valueLabel="Dreta" value="derecha" />
+    <ButtonGroupItem valueLabel="Centre" value="centro" />
+    <ButtonGroupItem valueLabel="Nacionalistes" value="nacionalistas" />
+    <ButtonGroupItem valueLabel="PSOE" value="psoe" />
+    <ButtonGroupItem valueLabel="PP" value="pp" />
+    <ButtonGroupItem valueLabel="Vox" value="vox" />
+    <ButtonGroupItem valueLabel="IU, Podemos i Sumar" value="ips" />
+    <ButtonGroupItem valueLabel="Participació" value="participacion" />
+</ButtonGroup>
+
+{#if barrios_voto.length > 0}
+{#if inputs.barrio_capa === 'ganador'}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=ganador_familia
+    colorCol=ganador_color
+    intensidad=ganador_pct
+    legendType=categorical
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Més votada'}, {id: 'ganador_pct', title: '% dels vàlids', fmt: '0.0"%"'}, {id: 'participacion', title: 'Participació', fmt: '0.0"%"'}]}
+    height=520
+    title="Candidatura més votada a cada secció · {barrios_voto[0]?.eleccion}"
+/>
+
+
+<p class="text-xs text-gray-500">Com més intens és el color, més alt és el percentatge de la candidatura més votada.</p>
+
+{:else}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=valor
+    valueFmt='0.0"%"'
+    colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Més votada'}]}
+    height=520
+    title="{inputs.barrio_capa === 'participacion' ? 'Participació' : ({izquierda: 'Esquerra', derecha: 'Dreta', centro: 'Centre', nacionalistas: 'Nacionalistes i regionalistes', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos i Sumar'})[inputs.barrio_capa] + ', % dels vàlids'} a cada secció · {barrios_voto[0]?.eleccion}"
+/>
+
+{/if}
+{:else}
+
+<p class="text-sm text-gray-500">No hi ha resultats per secció d'aquesta elecció al municipi (a les municipals només es publiquen els de més de 250 habitants amb llistes tancades).</p>
+
+{/if}
+
+{#if barrios_quintiles.length > 0}
+
+<BarChart
+    data={barrios_quintiles}
+    x=grupo
+    y=pct
+    series=bloque
+    type=grouped
+    sort=false
+    yFmt='0"%"'
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
+    title="Voten diferent els barris rics i els pobres? Vot per bloc segons la renda de la secció · {barrios_voto[0]?.eleccion}"
+/>
+
+<p class="text-xs text-gray-500">Les seccions del municipi s'ordenen per renda per persona i es parteixen en cinc grups amb el mateix nombre de seccions; el vot de cada grup és la mitjana de les seves seccions ponderada per votants.</p>
+
+{/if}
+{/if}
+
+<p class="text-xs text-gray-500">Seccions censals: contorns de l'INE de l'any de cada dada. Renda: Atles de Distribució de Renda de les Llars de l'INE, que talla les seccions més riques i les més pobres a un mateix valor màxim i mínim (per això porten al davant «≥» o «≤»). Vots: resultats per mesa del Ministeri de l'Interior sumats per secció, sense el vot dels residents a l'estranger. Els percentatges de vot són sobre vots vàlids (candidatures i en blanc). Les seccions es parteixen o es renumeren quan canvia la seva població, així que alguna pot quedar en gris si no hi ha dada d'aquell any.</p>
 
 {/if}
 
@@ -661,7 +823,7 @@ ORDER BY fecha
     <KpiCard title="Més votada a les generals" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
         period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Ministeri de l'Interior"
-        sparklineData={elec_mun_gen.map(d => ({valor: d.ganador_pct}))} />
+        sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
 <LineChart data={elec_mun_bloques} x=fecha y=pct series=bloque yFmt='0"%"' markers=true

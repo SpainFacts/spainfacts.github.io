@@ -1,7 +1,7 @@
 ---
 title: Liberdade de prensa e pluralismo
 description: "Onde está España nos índices internacionais de liberdade de prensa e pluralismo dos medios (Reporteiros Sen Fronteiras, Media Pluralism Monitor, V-Dem e a plataforma do Consello de Europa) e como evolucionou fronte á UE e aos países de referencia."
-i18n_origen: 70c909289afe
+i18n_origen: d04ffb7eb03d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -273,7 +273,7 @@ Poden os xornalistas traballar en España sen presións e hai variedade de medio
         changePeriod={`vs ${k_rsf[0].anio_anterior}`}
         direction="positive-up"
         source="Reporteiros Sen Fronteiras"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => -d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => ({...d, y: -d.valor}))}
     />
     <KpiCard
         title="Risco para o pluralismo"
@@ -285,7 +285,7 @@ Poden os xornalistas traballar en España sen presións e hai variedade de medio
         changePeriod={`vs MPM${k_mpm[0].anio_anterior}`}
         direction="positive-down"
         source="Media Pluralism Monitor (EUI)"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Liberdade de expresión (V-Dem)"
@@ -297,7 +297,7 @@ Poden os xornalistas traballar en España sen presións e hai variedade de medio
         changePeriod={`vs ${k_vdem[0].anio_anterior}`}
         direction="positive-up"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Alertas do Consello de Europa"
@@ -310,7 +310,7 @@ Poden os xornalistas traballar en España sen presións e hai variedade de medio
         changePeriod={`vs ${k_coe[0].anio_anterior}`}
         direction="positive-down"
         source="Consello de Europa"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

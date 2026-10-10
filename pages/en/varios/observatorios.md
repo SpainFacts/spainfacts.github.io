@@ -3,7 +3,7 @@ title: Public observatories
 description: "Census of Spain's public observatories: how many there are, which administration creates them, when they were set up, how many are still active, how many there are per inhabitant in each region and which party was in government when they were created."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a544f976aca5
+i18n_origen: ff0c7540da64
 ---
 
 <script>
@@ -216,7 +216,7 @@ Public administrations set up observatories to monitor a subject (gender-based v
         formattedValue={formatNumber(resumen[0]?.total, 0)}
         period="{formatNumber(resumen[0]?.estatales, 0)} belong to the General State Administration"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.acumulados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.acumulados}))}
     />
     <KpiCard
         title="Active"
@@ -231,7 +231,7 @@ Public administrations set up observatories to monitor a subject (gender-based v
         formattedValue="{formatNumber(resumen[0]?.pct_desde_2015, 0)}%"
         period="{formatNumber(resumen[0]?.desde_2015, 0)} of the {formatNumber(resumen[0]?.con_anio, 0)} with a known year of creation"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.creados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.creados}))}
     />
     <KpiCard
         title="With private participation"

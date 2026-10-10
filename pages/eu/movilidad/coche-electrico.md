@@ -1,7 +1,7 @@
 ---
 title: Auto elektrikoa
 description: "Auto elektrikorako trantsizioa Espainian: turismoen matrikulazioak motor motaren arabera hilero 2015etik, elektrikoen eta hibrido entxufagarrien kuota probintziaka eta CO2 isuriak."
-i18n_origen: ed78ed2e1c5f
+i18n_origen: a3ce9f887980
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -98,7 +98,7 @@ Espainian saltzen diren autoetatik zenbat dira dagoeneko elektrikoak? Erantzuna 
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Entxufagarriak (elektrikoak + hibrido entxufagarriak)"
@@ -111,7 +111,7 @@ Espainian saltzen diren autoetatik zenbat dira dagoeneko elektrikoak? Erantzuna 
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Elektrifikatuak (hibridoak barne)"
@@ -120,7 +120,7 @@ Espainian saltzen diren autoetatik zenbat dira dagoeneko elektrikoak? Erantzuna 
         unit="%"
         period="turismo berrien artean · {ultimo[0]?.mes_texto}"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 

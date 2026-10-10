@@ -3,7 +3,7 @@ title: Eleccións
 description: "Resultados das eleccións xerais desde 1977, europeas e municipais: participación, voto por partido e por bloque, fragmentación, votos por escano e gañador en cada provincia e municipio, cos datos oficiais do Ministerio do Interior."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 855cde6e0399
+i18n_origen: c483ec970932
 ---
 
 <script>
@@ -76,7 +76,7 @@ Canta xente vota, a quen e como se reparten os escanos: todas as eleccións xera
         formattedValue="{resumen[0]?.ganador_siglas} · {formatNumber(resumen[0]?.ganador_pct, 1)} %"
         period="{formatNumber(resumen[0]?.ganador_escanos, 0)} de 350 escanos · segunda: {resumen[0]?.segundo_siglas} ({formatNumber(resumen[0]?.segundo_pct, 1)} %)"
         source="Ministerio do Interior"
-        sparklineData={generales.map(d => ({valor: d.ganador_pct}))}
+        sparklineData={generales.map(d => ({...d, valor: d.ganador_pct}))}
     />
     <KpiCard
         title="Número efectivo de partidos"
@@ -87,7 +87,7 @@ Canta xente vota, a quen e como se reparten os escanos: todas as eleccións xera
         changeUnit=""
         changePeriod="fronte a {mesGl(resumen[0]?.etiqueta_anterior)}"
         source="Cálculo propio"
-        sparklineData={generales.map(d => ({valor: d.nep_votos}))}
+        sparklineData={generales.map(d => ({...d, valor: d.nep_votos}))}
     />
     <KpiCard
         title="Voto ás dúas máis votadas"
@@ -98,7 +98,7 @@ Canta xente vota, a quen e como se reparten os escanos: todas as eleccións xera
         changeUnit="p.p."
         changePeriod="fronte a {mesGl(resumen[0]?.etiqueta_anterior)}"
         source="Ministerio do Interior"
-        sparklineData={generales.map(d => ({valor: d.dos_primeros}))}
+        sparklineData={generales.map(d => ({...d, valor: d.dos_primeros}))}
     />
 </Grid>
 

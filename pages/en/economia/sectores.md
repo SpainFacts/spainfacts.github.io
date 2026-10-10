@@ -1,7 +1,7 @@
 ---
 title: Economic sectors
 description: "How much each sector of the Spanish economy produces and how many people it employs, its real growth and its productivity, since 1995."
-i18n_origen: 2fb118d1e75d
+i18n_origen: e8ce24d9ad4d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -73,7 +73,7 @@ What the Spanish economy produces and who produces it. Each sector's value added
         formattedValue="{formatNumber(total.slice(-1)[0]?.crecimiento_real, 1)}%"
         period="total value added in {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => d.crecimiento_real)}
+        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => ({...d, y: d.crecimiento_real}))}
     />
     <KpiCard
         title="Employed per 1,000 inhabitants"
@@ -81,7 +81,7 @@ What the Spanish economy produces and who produces it. Each sector's value added
         formattedValue={formatNumber(total.slice(-1)[0]?.ocupados_1000_hab, 0)}
         period="{formatNumber(total.slice(-1)[0]?.ocupados_miles / 1000, 1)} million people in work in {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.map(d => d.ocupados_1000_hab)}
+        sparklineData={total.map(d => ({...d, y: d.ocupados_1000_hab}))}
     />
     <KpiCard
         title="Productivity per worker"
@@ -89,7 +89,7 @@ What the Spanish economy produces and who produces it. Each sector's value added
         formattedValue="{formatNumber(total.slice(-1)[0]?.productividad_real, 0)} €"
         period="value added per person employed in {total.slice(-1)[0]?.anio}, {ultimo[0]?.anio_euros} euros"
         source="Eurostat"
-        sparklineData={total.map(d => d.productividad_real)}
+        sparklineData={total.map(d => ({...d, y: d.productividad_real}))}
     />
     <KpiCard
         title="Fastest-growing sector since 2019"

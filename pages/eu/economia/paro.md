@@ -1,7 +1,7 @@
 ---
 title: Langabezia eta enplegua
 description: "Espainiako langabezia-tasa sexuaren, adinaren, nazionalitatearen, ikasketen eta lurraldearen arabera, gazteen langabezia eta iraupen luzekoa, behin-behinekotasuna, hileko erregistratutako langabezia eta EBrekiko alderaketa."
-i18n_origen: b3ae3805f825
+i18n_origen: cc5703f42701
 ---
 
 <script>
@@ -232,7 +232,7 @@ Zenbat pertsonak bilatzen duten lana aurkitu gabe, nori eragiten dion gehien, no
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Gazteen langabezia (25 urtetik beherakoak)"
@@ -244,7 +244,7 @@ Zenbat pertsonak bilatzen duten lana aurkitu gabe, nori eragiten dion gehien, no
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_menor25)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Enplegu-tasa"
@@ -256,7 +256,7 @@ Zenbat pertsonak bilatzen duten lana aurkitu gabe, nori eragiten dion gehien, no
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-up"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_empleo)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_empleo}))}
     />
     <KpiCard
         title="Erregistratutako langabezia"
@@ -267,7 +267,7 @@ Zenbat pertsonak bilatzen duten lana aurkitu gabe, nori eragiten dion gehien, no
         changePeriod="erregistratutako langabeak, duela urtebeterekin alderatuta"
         direction="positive-down"
         source="SEPE"
-        sparklineData={registrado.slice(-60).map(d => d.por_100_16_64)}
+        sparklineData={registrado.slice(-60).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -292,7 +292,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_larga)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_larga}))}
     />
     <KpiCard
         title="Denak langabezian dituzten etxeak"
@@ -304,7 +304,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.pct_hogares_todos_parados)}
+        sparklineData={epa.map(d => ({...d, y: d.pct_hogares_todos_parados}))}
     />
     <KpiCard
         title="Behin-behinekotasuna"
@@ -316,7 +316,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_temporalidad)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_temporalidad}))}
     />
     <KpiCard
         title="Nahi gabeko lanaldi partziala"
@@ -328,7 +328,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => d.pct_parcial_involuntario)}
+        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => ({...d, y: d.pct_parcial_involuntario}))}
     />
 </Grid>
 

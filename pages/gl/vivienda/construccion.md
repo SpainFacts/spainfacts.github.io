@@ -1,7 +1,7 @@
 ---
 title: Obra nova
 description: "Vivendas libres que se comezan e se rematan cada ano en España por 1.000 habitantes desde 1996, por comunidade e provincia, con datos do Ministerio de Vivenda."
-i18n_origen: 6b1ad71c87ca
+i18n_origen: 442b873cd088
 ---
 
 <script>
@@ -85,7 +85,7 @@ Cantas vivendas se constrúen en España. Son **vivendas libres** (sen a protexi
         formattedValue="{formatNumber(hitos[0]?.term_ult, 2)} por 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.term_total, 0)} vivendas libres"
         source="Ministerio de Vivenda"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Vivendas iniciadas"
@@ -93,7 +93,7 @@ Cantas vivendas se constrúen en España. Son **vivendas libres** (sen a protexi
         formattedValue="{formatNumber(hitos[0]?.ini_ult, 2)} por 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.ini_total, 0)} vivendas libres"
         source="Ministerio de Vivenda"
-        sparklineData={espana.map(d => d.iniciadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.iniciadas_1000}))}
     />
     <KpiCard
         title="Fronte ao máximo"
@@ -101,7 +101,7 @@ Cantas vivendas se constrúen en España. Son **vivendas libres** (sen a protexi
         formattedValue="{formatNumber(hitos[0]?.fraccion_max / 0.01, 0)} %"
         period="das vivendas rematadas por habitante en {hitos[0]?.anio_term_max} ({formatNumber(hitos[0]?.term_max, 1)} por 1.000 hab.)"
         source="Ministerio de Vivenda"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Fronte a finais dos 90"
@@ -109,7 +109,7 @@ Cantas vivendas se constrúen en España. Son **vivendas libres** (sen a protexi
         formattedValue="{formatNumber(hitos[0]?.media_9600, 1)} por 1.000 hab."
         period="vivendas rematadas ao ano de media en 1996-2000"
         source="Ministerio de Vivenda"
-        sparklineData={espana.filter(d => d.anio <= 2000).map(d => d.terminadas_1000)}
+        sparklineData={espana.filter(d => d.anio <= 2000).map(d => ({...d, y: d.terminadas_1000}))}
     />
 </Grid>
 

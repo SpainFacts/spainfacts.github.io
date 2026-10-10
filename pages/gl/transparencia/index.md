@@ -1,5 +1,5 @@
 ---
-i18n_origen: fd0f9eb9de30
+i18n_origen: f730ced4988b
 title: Transparencia
 description: "Como render contas as administracións españolas: obrigas de información dos concellos, portais de transparencia, decretos lei, indultos, orzamentos prorrogados e a posición de España nos índices internacionais de integridade, por Goberno e por partido."
 og:
@@ -62,7 +62,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="positive-down"
         href="/gl/transparencia/decretos-ley"
-        sparklineData={actos.map(d => d.rdl)}
+        sparklineData={actos.map(d => ({...d, y: d.rdl}))}
     />
     <KpiCard
         title="Indultos"
@@ -73,7 +73,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="BOE"
         direction="neutral"
         href="/gl/transparencia/indultos"
-        sparklineData={actos.map(d => d.indultos)}
+        sparklineData={actos.map(d => ({...d, y: d.indultos}))}
     />
     {/if}
     {#if cpi_ult.length}
@@ -86,7 +86,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Transparency International"
         direction="positive-up"
         href="/gl/transparencia/comparacion-internacional"
-        sparklineData={cpi.map(d => d.valor)}
+        sparklineData={cpi.map(d => ({...d, y: d.valor}))}
     />
     {/if}
     {#if liquidaciones_ult.length}
@@ -99,7 +99,7 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         source="Facenda"
         direction="positive-down"
         href="/gl/transparencia/cuentas-municipales"
-        sparklineData={liquidaciones.map(d => d.valor)}
+        sparklineData={liquidaciones.map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

@@ -1,7 +1,7 @@
 ---
 title: Criminalidade
 description: "Delitos coñecidos en España por tipo, comunidade, provincia e municipio desde 2010, evolución da cibercriminalidade e condenados por nacionalidade co seu contexto."
-i18n_origen: c361bc094630
+i18n_origen: 675d5e735dd8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -77,7 +77,7 @@ Os delitos que coñecen a Policía Nacional, a Garda Civil, os Mossos d'Esquadra
         changePeriod="fronte a 2019"
         direction="positive-down"
         source="Ministerio do Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => ({...d, y: d.tasa_1000}))}
     />
     <KpiCard
         title="Homicidios e asasinatos"
@@ -85,7 +85,7 @@ Os delitos que coñecen a Policía Nacional, a Garda Civil, os Mossos d'Esquadra
         formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} por 100.000 hab."
         period="{formatNumber(resumen[0]?.homicidios, 0)} consumados en {resumen[0]?.anio}"
         source="Ministerio do Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => ({...d, y: d.tasa_1000 * 100}))}
     />
     <KpiCard
         title="Cibercriminalidade"

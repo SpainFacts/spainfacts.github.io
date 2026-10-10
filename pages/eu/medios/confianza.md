@@ -1,7 +1,7 @@
 ---
 title: Konfiantza eta albisteen kontsumoa
 description: "Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoitzean, nola informatzen diren (telebista, prentsa, internet, sare sozialak), zenbatek ordaintzen duten albiste digitalengatik eta zenbatek saihesten dituzten, 2013tik eta Europar Batasuneko gainerako herrialdeekin alderatuta."
-i18n_origen: 420973bd0968
+i18n_origen: 5bedbf85df21
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -195,7 +195,7 @@ Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoit
         changePeriod={urtetik(es_resumen[0].primer_anio)}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es_conf.map(d => d.confianza)}
+        sparklineData={es_conf.map(d => ({...d, y: d.confianza}))}
     />
     <KpiCard
         title="Online albisteengatik ordaintzen dute"
@@ -208,7 +208,7 @@ Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoit
         changePeriod={urtetik(es_resumen[0].paga_desde)}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.paga !== null).map(d => d.paga)}
+        sparklineData={es.filter(d => d.paga !== null).map(d => ({...d, y: d.paga}))}
     />
     <KpiCard
         title="Albisteak saihesten dituzte"
@@ -221,7 +221,7 @@ Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoit
         changePeriod={urtetik(es_resumen[0].evita_desde)}
         source="Reuters Institute, Digital News Report"
         direction="positive-down"
-        sparklineData={es.filter(d => d.evita !== null).map(d => d.evita)}
+        sparklineData={es.filter(d => d.evita !== null).map(d => ({...d, y: d.evita}))}
     />
     <KpiCard
         title="Albisteekiko interes handia"
@@ -234,7 +234,7 @@ Zenbaterainoko konfiantza duten espainiarrek albisteetan eta komunikabide bakoit
         changePeriod={urtetik(es_resumen[0].interes_desde)}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.interes !== null).map(d => d.interes)}
+        sparklineData={es.filter(d => d.interes !== null).map(d => ({...d, y: d.interes}))}
     />
     {/if}
 </div>

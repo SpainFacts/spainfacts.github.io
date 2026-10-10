@@ -3,7 +3,7 @@ title: Ocupació pública
 description: "Quants empleats públics hi ha a Espanya, en quina administració i sector treballen (sanitat, educació, ajuntaments, forces de seguretat...), com ha evolucionat el seu nombre, quant cobren davant del sector privat i quant costen."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 052b4d0e2fe9
+i18n_origen: eb201e9adb20
 ---
 
 <script>
@@ -99,7 +99,7 @@ Qui treballa per a les administracions públiques a Espanya: quants són, en qui
         formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} per 1.000 hab."
         period="{formatCompact(resumen[0]?.total, 2)} en total · {ultima[0]?.fecha_texto}"
         source="Registre Central de Personal"
-        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
+        sparklineData={serie_por_1000.map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="A les comunitats autònomes"
@@ -107,7 +107,7 @@ Qui treballa per a les administracions públiques a Espanya: quants són, en qui
         formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: sobretot sanitat i educació"
         source="Registre Central de Personal"
-        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
+        sparklineData={serie_cuota_ccaa.map(d => ({...d, y: d.cuota_ccaa}))}
     />
     <KpiCard
         title="Costen a l'any, per habitant"
@@ -115,7 +115,7 @@ Qui treballa per a les administracions públiques a Espanya: quants són, en qui
         formattedValue="{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)} €"
         period="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mil M€ en total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)} % del PIB · {coste_ultimo[0]?.anio} (euros de {coste_ultimo[0]?.anio_base})"
         source="Eurostat"
-        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
+        sparklineData={coste_serie_real.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Salari mitjà (jornada completa)"
@@ -123,7 +123,7 @@ Qui treballa per a les administracions públiques a Espanya: quants són, en qui
         formattedValue="{formatNumber(salario_ultimo[0]?.publico, 0)} €/mes"
         period="davant de {formatNumber(salario_ultimo[0]?.privado, 0)} € al sector privat · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
-        sparklineData={salario_serie_real.map(d => d.publico_real)}
+        sparklineData={salario_serie_real.map(d => ({...d, y: d.publico_real}))}
     />
 </Grid>
 

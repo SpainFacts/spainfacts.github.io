@@ -29,8 +29,20 @@ Los códigos de comunidad autónoma son los del Ministerio del Interior
 (01 Andalucía ... 19 Melilla), que NO coinciden con los del INE: en dbt se
 obtiene la comunidad a partir de la provincia (código INE).
 
-Carga completa ("replace"): ~40 procesos, unos 2,5 millones de filas,
-idempotente y sin estado.
+Resultados por sección censal (mapas de barrio): para los últimos procesos de
+cada tipo (PROCESOS_SECCION) se descarga además el ZIP por mesa
+
+    https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/{tt}{aaaa}{mm}_MESA.zip
+
+y se suman sus mesas por sección (ficheros 09, datos globales, y 10, votos por
+candidatura). La sección de Interior tiene 4 caracteres ("001 " o "001A": la
+cuarta posición parte una sección en subsecciones); sus tres primeros dígitos,
+con provincia, municipio y distrito, forman el código INE de la sección (CUSEC,
+10 dígitos), que casa con el seccionado del INE y con la renta del ADRH. Las
+filas del C.E.R.A. (municipio 999) no tienen sección y se descartan.
+
+Carga completa ("replace"): ~40 procesos, unos 2,5 millones de filas (más
+~1,5 millones de votos por sección), idempotente y sin estado.
 """
 
 import io
@@ -62,6 +74,12 @@ PROCESOS = (
 )
 
 NECESARIOS = {"02", "03", "05", "06", "07", "08"}
+
+# Procesos con resultados por sección censal: el último de cada tipo. Al añadir
+# uno, comprobar que static-extra/geo/secciones tiene el seccionado de su año
+# (tools/geo/secciones.py).
+URL_MESA = "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/{codigo}_MESA.zip"
+PROCESOS_SECCION = [("02", 2023, 7), ("04", 2023, 5), ("07", 2024, 6)]
 
 TIPOS = {"02": "Congreso", "04": "Municipales", "07": "Parlamento Europeo"}
 
@@ -255,6 +273,80 @@ def elecciones_ambitos_votos():
         ]
 
 
+def _mesas(codigo: str) -> dict[str, list[str]]:
+    """Líneas de los ficheros 09 y 10 del ZIP por mesa del proceso."""
+    r = requests.get(URL_MESA.format(codigo=codigo), headers=CABECERAS, timeout=300)
+    r.raise_for_status()
+    ficheros = {}
+    with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+        for nombre in z.namelist():
+            base = nombre.rsplit("/", 1)[-1].upper()
+            if base.endswith(".DAT") and len(base) == 12 and base[:2] in {"09", "10"} and base[2:4] == codigo[:2]:
+                texto = z.read(nombre).decode("cp1252", errors="replace")
+                ficheros[base[:2]] = [l for l in texto.splitlines() if l.strip()]
+    return ficheros
+
+
+def _cusec(l: str) -> str | None:
+    """Código INE de la sección (prov + mun + distrito + 3 dígitos de sección); None en el CERA."""
+    if l[13:16] == "999" or not l[18:21].isdigit():
+        return None
+    return l[11:18] + l[18:21]
+
+
+_CACHE_MESAS: dict = {}
+
+
+def _datos_mesas():
+    if not _CACHE_MESAS or time.time() - _CACHE_MESAS.get("_t", 0) > 7200:
+        _CACHE_MESAS.clear()
+        for tipo, anio, mes in PROCESOS_SECCION:
+            _CACHE_MESAS[_codigo(tipo, anio, mes)] = (tipo, anio, _mesas(_codigo(tipo, anio, mes)))
+        _CACHE_MESAS["_t"] = time.time()
+    return [(c, *v) for c, v in _CACHE_MESAS.items() if c != "_t"]
+
+
+@dlt.resource(name="elecciones_secciones", write_disposition="replace")
+def elecciones_secciones():
+    campos = ("censo_ine", "censo_escrutinio", "votos_blanco", "votos_nulos", "votos_candidaturas")
+    for codigo, tipo, anio, f in _datos_mesas():
+        secciones = {}
+        for l in f.get("09", []):
+            cusec = _cusec(l)
+            if not cusec:
+                continue
+            clave = (_n(l, 9, 9), cusec)
+            s = secciones.setdefault(clave, dict.fromkeys(campos, 0) | {"mesas": 0})
+            s["mesas"] += 1
+            # 09: censo INE 24-30, escrutinio 31-37, blancos 66-72, nulos 73-79, candidaturas 80-86
+            for campo, (ini, fin) in zip(campos, [(24, 30), (31, 37), (66, 72), (73, 79), (80, 86)]):
+                s[campo] += _n(l, ini, fin) or 0
+        yield [
+            {"proceso": codigo, "tipo": tipo, "anio": anio, "vuelta": vuelta, "cod_seccion": cusec,
+             "cod_mun": cusec[:5], **s}
+            for (vuelta, cusec), s in secciones.items()
+        ]
+
+
+@dlt.resource(name="elecciones_secciones_votos", write_disposition="replace")
+def elecciones_secciones_votos():
+    for codigo, tipo, anio, f in _datos_mesas():
+        votos = {}
+        for l in f.get("10", []):
+            cusec = _cusec(l)
+            if not cusec:
+                continue
+            # 10: candidatura 24-29, votos 30-36
+            clave = (_n(l, 9, 9), cusec, _s(l, 24, 29))
+            votos[clave] = votos.get(clave, 0) + (_n(l, 30, 36) or 0)
+        yield [
+            {"proceso": codigo, "tipo": tipo, "anio": anio, "vuelta": vuelta, "cod_seccion": cusec,
+             "cod_candidatura": cand, "votos": v}
+            for (vuelta, cusec, cand), v in votos.items()
+            if v > 0
+        ]
+
+
 @dlt.source(name="elecciones")
 def elecciones():
     return [
@@ -264,4 +356,12 @@ def elecciones():
         elecciones_municipios_votos,
         elecciones_ambitos,
         elecciones_ambitos_votos,
+        elecciones_secciones,
+        elecciones_secciones_votos,
     ]
+
+
+if __name__ == "__main__":
+    from ingestion.destino import pipeline
+
+    print(pipeline("elecciones").run(elecciones()))

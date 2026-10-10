@@ -1,7 +1,7 @@
 ---
 title: Press freedom and pluralism
 description: "Where Spain stands in the international indices of press freedom and media pluralism (Reporters Without Borders, Media Pluralism Monitor, V-Dem and the Council of Europe platform) and how it has evolved compared with the EU and benchmark countries."
-i18n_origen: 70c909289afe
+i18n_origen: d04ffb7eb03d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -273,7 +273,7 @@ Can journalists work in Spain without pressure, and is there a variety of indepe
         changePeriod={`vs ${k_rsf[0].anio_anterior}`}
         direction="positive-up"
         source="Reporters Without Borders"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => -d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => ({...d, y: -d.valor}))}
     />
     <KpiCard
         title="Risk to pluralism"
@@ -285,7 +285,7 @@ Can journalists work in Spain without pressure, and is there a variety of indepe
         changePeriod={`vs MPM${k_mpm[0].anio_anterior}`}
         direction="positive-down"
         source="Media Pluralism Monitor (EUI)"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Freedom of expression (V-Dem)"
@@ -297,7 +297,7 @@ Can journalists work in Spain without pressure, and is there a variety of indepe
         changePeriod={`vs ${k_vdem[0].anio_anterior}`}
         direction="positive-up"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Council of Europe alerts"
@@ -310,7 +310,7 @@ Can journalists work in Spain without pressure, and is there a variety of indepe
         changePeriod={`vs ${k_coe[0].anio_anterior}`}
         direction="positive-down"
         source="Council of Europe"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

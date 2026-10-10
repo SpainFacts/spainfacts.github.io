@@ -1,7 +1,7 @@
 ---
 title: Ekonomia-sektoreak
 description: "Espainiako ekonomiaren sektore bakoitzak zenbat ekoizten duen eta zenbat pertsona enplegatzen dituen, haren hazkunde erreala eta produktibitatea, 1995etik."
-i18n_origen: 2fb118d1e75d
+i18n_origen: e8ce24d9ad4d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -73,7 +73,7 @@ Zer ekoizten duen Espainiako ekonomiak eta nork ekoizten duen. Sektore bakoitzar
         formattedValue="{formatNumber(total.slice(-1)[0]?.crecimiento_real, 1)} %"
         period="balio erantsi osoa, {total.slice(-1)[0]?.anio}. urtean"
         source="Eurostat"
-        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => d.crecimiento_real)}
+        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => ({...d, y: d.crecimiento_real}))}
     />
     <KpiCard
         title="Landunak 1.000 biztanleko"
@@ -81,7 +81,7 @@ Zer ekoizten duen Espainiako ekonomiak eta nork ekoizten duen. Sektore bakoitzar
         formattedValue={formatNumber(total.slice(-1)[0]?.ocupados_1000_hab, 0)}
         period="{formatNumber(total.slice(-1)[0]?.ocupados_miles / 1000, 1)} milioi landun {total.slice(-1)[0]?.anio}. urtean"
         source="Eurostat"
-        sparklineData={total.map(d => d.ocupados_1000_hab)}
+        sparklineData={total.map(d => ({...d, y: d.ocupados_1000_hab}))}
     />
     <KpiCard
         title="Produktibitatea landun bakoitzeko"
@@ -89,7 +89,7 @@ Zer ekoizten duen Espainiako ekonomiak eta nork ekoizten duen. Sektore bakoitzar
         formattedValue="{formatNumber(total.slice(-1)[0]?.productividad_real, 0)} €"
         period="balio erantsia landun bakoitzeko {total.slice(-1)[0]?.anio}. urtean, {ultimo[0]?.anio_euros}. urteko eurotan"
         source="Eurostat"
-        sparklineData={total.map(d => d.productividad_real)}
+        sparklineData={total.map(d => ({...d, y: d.productividad_real}))}
     />
     <KpiCard
         title="2019tik gehien hazi den sektorea"

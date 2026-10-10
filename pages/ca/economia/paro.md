@@ -1,7 +1,7 @@
 ---
 title: Atur i ocupació
 description: "Taxa d'atur a Espanya per sexe, edat, nacionalitat, estudis i territori, atur juvenil i de llarga durada, temporalitat, atur registrat mensual i comparació amb la UE."
-i18n_origen: b3ae3805f825
+i18n_origen: cc5703f42701
 ---
 
 <script>
@@ -232,7 +232,7 @@ Quanta gent busca feina i no en troba, a qui afecta més, on i quant de temps du
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Atur juvenil (menors de 25)"
@@ -244,7 +244,7 @@ Quanta gent busca feina i no en troba, a qui afecta més, on i quant de temps du
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_menor25)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Taxa d'ocupació"
@@ -256,7 +256,7 @@ Quanta gent busca feina i no en troba, a qui afecta més, on i quant de temps du
         changePeriod="respecte a un any abans"
         direction="positive-up"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_empleo)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_empleo}))}
     />
     <KpiCard
         title="Atur registrat"
@@ -267,7 +267,7 @@ Quanta gent busca feina i no en troba, a qui afecta més, on i quant de temps du
         changePeriod="aturats registrats respecte a un any abans"
         direction="positive-down"
         source="SEPE"
-        sparklineData={registrado.slice(-60).map(d => d.por_100_16_64)}
+        sparklineData={registrado.slice(-60).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -292,7 +292,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_larga)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_larga}))}
     />
     <KpiCard
         title="Llars amb tothom a l'atur"
@@ -304,7 +304,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.pct_hogares_todos_parados)}
+        sparklineData={epa.map(d => ({...d, y: d.pct_hogares_todos_parados}))}
     />
     <KpiCard
         title="Temporalitat"
@@ -316,7 +316,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_temporalidad)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_temporalidad}))}
     />
     <KpiCard
         title="Parcialitat involuntària"
@@ -328,7 +328,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="respecte a un any abans"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => d.pct_parcial_involuntario)}
+        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => ({...d, y: d.pct_parcial_involuntario}))}
     />
 </Grid>
 

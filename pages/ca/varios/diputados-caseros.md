@@ -1,7 +1,7 @@
 ---
 title: Quants diputats són arrendadors?
 description: "Quants diputats del Congrés declaren ingressos per lloguer o tenen diversos habitatges, segons les seves declaracions de béns i rendes, per grup parlamentari i davant el conjunt de declarants de l'IRPF."
-i18n_origen: cfa645ec5bd9
+i18n_origen: b1840c4f7433
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -88,7 +88,7 @@ Els diputats del Congrés presenten en prendre possessió una declaració de bé
         unit="dels diputats"
         period={`${kpi[0].n_alquila} de ${kpi[0].n_validos} · IRPF: ${formatNumber(irpf[0].pct_todos, 1)} % dels declarants`}
         source="Congrés dels Diputats"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Tenen 2 o més habitatges"
@@ -97,7 +97,7 @@ Els diputats del Congrés presenten en prendre possessió una declaració de bé
         unit="dels diputats"
         period={`${kpi[0].n_dos_viviendas} diputats`}
         source="Congrés dels Diputats"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 o més immobles urbans complets"
@@ -106,7 +106,7 @@ Els diputats del Congrés presenten en prendre possessió una declaració de bé
         unit="dels diputats"
         period={`Sumant la seva part de cada immoble · ${kpi[0].n_dos_equivalentes} diputats`}
         source="Congrés dels Diputats"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Sense cap immoble urbà"
@@ -115,7 +115,7 @@ Els diputats del Congrés presenten en prendre possessió una declaració de bé
         unit="dels diputats"
         period={`Mediana: ${formatNumber(kpi[0].mediana_urbanos, 0)} immobles urbans per diputat`}
         source="Congrés dels Diputats"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     {/if}
 </div>

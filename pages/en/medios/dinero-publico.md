@@ -1,7 +1,7 @@
 ---
 title: Public money in the media
 description: "How much public money the media in Spain receive: funding for RTVE and the regional broadcasters, central government institutional and commercial advertising by media group and subsidies to private media, per inhabitant and adjusted for inflation, by region and by party."
-i18n_origen: f695df823f3f
+i18n_origen: 99497b7340e4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -337,7 +337,7 @@ Spanish public administrations fund the media in three ways: they pay for the pu
         period={`${tv_espana_ult[0].anio} · ${formatCompact(tv_espana_ult[0].total_meur_nominal * 1e6, 2)} € for RTVE and the regional broadcasters`}
         source="CNMC, RTVE and Generalitat Valenciana"
         direction="positive-down"
-        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => d.total_eur_hab_real)}
+        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Central government institutional advertising"
@@ -347,7 +347,7 @@ Spanish public administrations fund the media in three ways: they pay for the pu
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].institucional_eur_nominal, 2)} € on ministry campaigns`}
         source="Institutional Advertising Commission"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.institucional_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.institucional_eur_hab_real}))}
     />
     <KpiCard
         title="Advertising by state-owned companies"
@@ -357,7 +357,7 @@ Spanish public administrations fund the media in three ways: they pay for the pu
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].comercial_eur_nominal, 2)} € (Loterías, AENA, Correos, Renfe...)`}
         source="Institutional Advertising Commission"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.comercial_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subsidies to private media"
@@ -367,7 +367,7 @@ Spanish public administrations fund the media in three ways: they pay for the pu
         period={`${sub_ult[0].anio} · ${formatCompact(sub_ult[0].eur_nominal, 2)} € in ${formatNumber(sub_ult[0].concesiones, 0)} grants`}
         source="National Subsidies Database"
         direction="positive-down"
-        sparklineData={sub_espana.filter(d => !d.parcial).map(d => d.eur_hab_real)}
+        sparklineData={sub_espana.filter(d => !d.parcial).map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

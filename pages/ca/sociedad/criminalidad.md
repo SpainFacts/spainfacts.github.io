@@ -3,7 +3,7 @@ title: Criminalitat
 description: "Delictes coneguts a Espanya per tipus, comunitat, província i municipi des de 2010, evolució de la cibercriminalitat i condemnats per nacionalitat amb el seu context."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c361bc094630
+i18n_origen: 675d5e735dd8
 ---
 
 <script>
@@ -77,7 +77,7 @@ Els delictes que coneixen la Policia Nacional, la Guàrdia Civil, els Mossos d'E
         changePeriod="vs. 2019"
         direction="positive-down"
         source="Ministeri de l'Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => ({...d, y: d.tasa_1000}))}
     />
     <KpiCard
         title="Homicidis i assassinats"
@@ -85,7 +85,7 @@ Els delictes que coneixen la Policia Nacional, la Guàrdia Civil, els Mossos d'E
         formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} per 100.000 hab."
         period="{formatNumber(resumen[0]?.homicidios, 0)} consumats el {resumen[0]?.anio}"
         source="Ministeri de l'Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => ({...d, y: d.tasa_1000 * 100}))}
     />
     <KpiCard
         title="Cibercriminalitat"

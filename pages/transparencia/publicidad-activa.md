@@ -204,7 +204,7 @@ Desde 2014, la [Ley 19/2013 de transparencia](https://www.boe.es/buscar/act.php?
         formattedValue="{formatNumber(age[age.length - 1]?.icio, 1)} %"
         period="de la información obligatoria cumplida en {age[age.length - 1]?.anio} (ICIO)"
         source="Consejo de Transparencia y Buen Gobierno"
-        sparklineData={age.map(d => d.icio)}
+        sparklineData={age.map(d => ({...d, y: d.icio}))}
     />
     <KpiCard
         title="Comunidades evaluadas por el CTBG"
@@ -219,14 +219,14 @@ Desde 2014, la [Ley 19/2013 de transparencia](https://www.boe.es/buscar/act.php?
         formattedValue="{formatNumber(itc_resumen[0]?.media / 10, 2)} de 10"
         period="nota media en el Índice de Transparencia de Canarias ({itc_ultimo[0]?.etiqueta})"
         source="Comisionado de Transparencia de Canarias"
-        sparklineData={itc_aytos_serie.map(d => d.media / 10)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.media / 10}))}
     />
     <KpiCard
         title="Ayuntamientos canarios con nota baja"
         value={itc_resumen[0]?.bajos}
         formattedValue={formatNumber(itc_resumen[0]?.bajos, 0)}
         period="de {formatNumber(itc_resumen[0]?.total, 0)}: por debajo de 5 o sin rendir la evaluación ({itc_ultimo[0]?.etiqueta})"
-        sparklineData={itc_aytos_serie.map(d => d.suspenso)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.suspenso}))}
     />
 </Grid>
 

@@ -87,7 +87,7 @@ Los diputados del Congreso presentan al tomar posesión una declaración de bien
         unit="de los diputados"
         period={`${kpi[0].n_alquila} de ${kpi[0].n_validos} · IRPF: ${formatNumber(irpf[0].pct_todos, 1)} % de los declarantes`}
         source="Congreso de los Diputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Tienen 2 o más viviendas"
@@ -96,7 +96,7 @@ Los diputados del Congreso presentan al tomar posesión una declaración de bien
         unit="de los diputados"
         period={`${kpi[0].n_dos_viviendas} diputados`}
         source="Congreso de los Diputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 o más inmuebles urbanos completos"
@@ -105,7 +105,7 @@ Los diputados del Congreso presentan al tomar posesión una declaración de bien
         unit="de los diputados"
         period={`Sumando su parte de cada inmueble · ${kpi[0].n_dos_equivalentes} diputados`}
         source="Congreso de los Diputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Sin ningún inmueble urbano"
@@ -114,7 +114,7 @@ Los diputados del Congreso presentan al tomar posesión una declaración de bien
         unit="de los diputados"
         period={`Mediana: ${formatNumber(kpi[0].mediana_urbanos, 0)} inmuebles urbanos por diputado`}
         source="Congreso de los Diputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     {/if}
 </div>

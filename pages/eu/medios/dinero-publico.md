@@ -1,7 +1,7 @@
 ---
 title: Diru publikoa komunikabideetan
 description: "Zenbat diru publiko jasotzen duten Espainiako komunikabideek: RTVEri eta telebista autonomikoei egindako ekarpena, Estatuaren erakunde- eta merkataritza-publizitatea komunikazio-taldeka eta komunikabide pribatuentzako diru-laguntzak, biztanleko eta inflazioa kenduta, erkidegoka eta alderdika."
-i18n_origen: f695df823f3f
+i18n_origen: 99497b7340e4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -343,7 +343,7 @@ Espainiako administrazioek hiru bidetatik finantzatzen dituzte komunikabideak: i
         period={`${tv_espana_ult[0].anio} · ${formatCompact(tv_espana_ult[0].total_meur_nominal * 1e6, 2)} € RTVEren eta autonomikoen artean`}
         source="CNMC, RTVE eta Generalitat Valenciana"
         direction="positive-down"
-        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => d.total_eur_hab_real)}
+        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Estatuaren erakunde-publizitatea"
@@ -353,7 +353,7 @@ Espainiako administrazioek hiru bidetatik finantzatzen dituzte komunikabideak: i
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].institucional_eur_nominal, 2)} € ministerioen kanpainetan`}
         source="Erakunde Publizitatearen Batzordea"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.institucional_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.institucional_eur_hab_real}))}
     />
     <KpiCard
         title="Estatuko enpresen publizitatea"
@@ -363,7 +363,7 @@ Espainiako administrazioek hiru bidetatik finantzatzen dituzte komunikabideak: i
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].comercial_eur_nominal, 2)} € (Loterías, AENA, Correos, Renfe...)`}
         source="Erakunde Publizitatearen Batzordea"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.comercial_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Diru-laguntzak komunikabide pribatuei"
@@ -373,7 +373,7 @@ Espainiako administrazioek hiru bidetatik finantzatzen dituzte komunikabideak: i
         period={`${sub_ult[0].anio} · ${formatCompact(sub_ult[0].eur_nominal, 2)} € ${formatNumber(sub_ult[0].concesiones, 0)} emakidatan`}
         source="Diru-laguntzen Datu-base Nazionala"
         direction="positive-down"
-        sparklineData={sub_espana.filter(d => !d.parcial).map(d => d.eur_hab_real)}
+        sparklineData={sub_espana.filter(d => !d.parcial).map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

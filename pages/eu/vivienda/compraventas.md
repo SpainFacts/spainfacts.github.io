@@ -1,7 +1,7 @@
 ---
 title: Salerosketak eta hipotekak
 description: "Etxebizitzen salerosketak eta etxebizitzen gaineko hipotekak Espainian 1.000 biztanleko, etxebizitza berria bigarren eskukoaren aldean eta hipotekaren batez besteko zenbatekoa inflazioa kenduta, erkidego eta probintziaka."
-i18n_origen: ed62e0823b71
+i18n_origen: 04696dab395c
 ---
 
 <script>
@@ -130,7 +130,7 @@ Zenbat etxebizitzak aldatzen duten jabez urtero eta zenbat erosten diren hipotek
         change={ultimo[0]?.var_cv?.toFixed(1)}
         changePeriod="urtebete lehenagorekiko"
         source="INE / ETDP"
-        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => d.compraventas_12m_1000)}
+        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Etxebizitzen gaineko hipotekak"
@@ -140,7 +140,7 @@ Zenbat etxebizitzak aldatzen duten jabez urtero eta zenbat erosten diren hipotek
         change={ultimo[0]?.var_h?.toFixed(1)}
         changePeriod="urtebete lehenagorekiko"
         source="INE / Hipotekak"
-        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => d.hipotecas_12m_1000)}
+        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => ({...d, y: d.hipotecas_12m_1000}))}
     />
     <KpiCard
         title="Batez besteko hipoteka"
@@ -148,7 +148,7 @@ Zenbat etxebizitzak aldatzen duten jabez urtero eta zenbat erosten diren hipotek
         formattedValue="{formatNumber(importe_ult[0]?.importe_medio_real / 1000, 0)} mila €"
         period="etxebizitzako {urtean(importe_ult[0]?.anio)}, {urteko(anual[0]?.anio_base)} eurotan"
         source="INE / Hipotekak"
-        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => d.importe_medio_real)}
+        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => ({...d, y: d.importe_medio_real}))}
     />
     <KpiCard
         title="Etxebizitza berria"
@@ -156,7 +156,7 @@ Zenbat etxebizitzak aldatzen duten jabez urtero eta zenbat erosten diren hipotek
         formattedValue="{formatNumber(hitos[0]?.pct_nueva_ult, 1)} %"
         period="salerosketena {urtean(hitos[0]?.anio_ult)} · {formatNumber(hitos[0]?.pct_nueva_2008, 0)} % 2008an"
         source="INE / ETDP"
-        sparklineData={anual_completo.map(d => d.pct_nueva)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_nueva}))}
     />
 </Grid>
 

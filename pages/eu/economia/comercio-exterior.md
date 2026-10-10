@@ -1,7 +1,7 @@
 ---
 title: Kanpo-merkataritza
 description: "Espainiako ondasun eta zerbitzuen esportazioak eta inportazioak: BPGarekiko pisua, kanpo-saldoa eta bilakaera erreala biztanleko."
-i18n_origen: d44a780dbaed
+i18n_origen: 57519a9f7dc4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -76,7 +76,7 @@ Espainiak munduko gainerako herrialdeei saltzen diena (esportazioak) eta kanpoan
         formattedValue="BPGaren {formatNumber(comercio_trim.slice(-1)[0]?.export_pct, 1)} %"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.export_meur / 1000, 0)} mila M€ hiruhilekoan"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.export_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.export_pct}))}
     />
     <KpiCard
         title="Inportazioak"
@@ -84,7 +84,7 @@ Espainiak munduko gainerako herrialdeei saltzen diena (esportazioak) eta kanpoan
         formattedValue="BPGaren {formatNumber(comercio_trim.slice(-1)[0]?.import_pct, 1)} %"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.import_meur / 1000, 0)} mila M€ hiruhilekoan"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.import_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.import_pct}))}
     />
     <KpiCard
         title="Kanpo-saldoa"
@@ -93,7 +93,7 @@ Espainiak munduko gainerako herrialdeei saltzen diena (esportazioak) eta kanpoan
         period="esportazioak ken inportazioak, {saldo_anual.slice(-1)[0]?.anio}. urtean"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={saldo_anual.map(d => d.saldo_pct)}
+        sparklineData={saldo_anual.map(d => ({...d, y: d.saldo_pct}))}
     />
     <KpiCard
         title="Esportazio errealak"
@@ -101,7 +101,7 @@ Espainiak munduko gainerako herrialdeei saltzen diena (esportazioak) eta kanpoan
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_interanual, 1)} %"
         period="urtetik urterako aldakuntza bolumenean, {comercio_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-24).map(d => d.export_interanual)}
+        sparklineData={comercio_trim.slice(-24).map(d => ({...d, y: d.export_interanual}))}
     />
 </Grid>
 

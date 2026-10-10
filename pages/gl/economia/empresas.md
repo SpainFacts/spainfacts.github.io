@@ -1,5 +1,5 @@
 ---
-i18n_origen: c23d9e81ee16
+i18n_origen: 990f0d94edd2
 title: Empresas, emprendemento e I+D
 description: "Cantas empresas hai en España por habitante e de que tamaño, cantas sociedades se crean e se disolven, os concursos de acredores, os autónomos e o gasto en I+D comparado con Europa e por comunidade."
 og:
@@ -108,7 +108,7 @@ Cantas empresas hai en España e de que tamaño son, cantas sociedades se crean 
         changePeriod="vs. ano anterior"
         direction="positive-up"
         source="INE / DIRCE"
-        sparklineData={emp_pais.map(d => d.empresas_1000hab)}
+        sparklineData={emp_pais.map(d => ({...d, y: d.empresas_1000hab}))}
     />
     <KpiCard
         title="Sociedades creadas"
@@ -119,7 +119,7 @@ Cantas empresas hai en España e de que tamaño son, cantas sociedades se crean 
         changePeriod="vs. 12 meses antes"
         direction="positive-up"
         source="INE / Sociedades Mercantiles"
-        sparklineData={soc_12m.slice(-120).map(d => d.constituidas_12m_100k)}
+        sparklineData={soc_12m.slice(-120).map(d => ({...d, y: d.constituidas_12m_100k}))}
     />
     <KpiCard
         title="Autónomos"
@@ -128,7 +128,7 @@ Cantas empresas hai en España e de que tamaño son, cantas sociedades se crean 
         period="traballan por conta propia ({autonomos_ult[0]?.periodo}) · {formatNumber(autonomos_ult[0]?.cuenta_propia / 1000, 2)} millóns de persoas"
         direction="neutral"
         source="INE / EPA"
-        sparklineData={autonomos_anual.map(d => d.pct_cuenta_propia)}
+        sparklineData={autonomos_anual.map(d => ({...d, y: d.pct_cuenta_propia}))}
     />
     <KpiCard
         title="Gasto en I+D"
@@ -137,7 +137,7 @@ Cantas empresas hai en España e de que tamaño son, cantas sociedades se crean 
         period="en {id_ue_ult[0]?.anio} · UE-27: {formatNumber(id_ue_ult[0]?.ue, 2)} % · {formatNumber(id_ue_ult[0]?.es_hab, 0)} € por habitante (euros de {id_es.slice(-1)[0]?.anio_euros})"
         direction="positive-up"
         source="Eurostat / INE"
-        sparklineData={id_es.map(d => d.pct_pib)}
+        sparklineData={id_es.map(d => ({...d, y: d.pct_pib}))}
     />
 </Grid>
 

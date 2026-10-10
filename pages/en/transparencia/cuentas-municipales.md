@@ -1,7 +1,7 @@
 ---
 title: Council accounts reporting
 description: "Public administrations that fail to meet their legal obligations to publish or submit information: who they are, where they are and who was in power when the deadline expired."
-i18n_origen: 899966847983
+i18n_origen: 6bcb4f6a8ddd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -78,7 +78,7 @@ Every town council must submit its budget outturn (what it actually collected an
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
         period="{formatNumber(resumen[0]?.incumplen / resumen[0]?.total / 0.01, 1)}% of {formatNumber(resumen[0]?.total, 0)} town councils"
         source="Ministry of Finance (CONPREL)"
-        sparklineData={liq_serie.map(d => d.incumplen)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.incumplen}))}
     />
     <KpiCard
         title="Residents affected"
@@ -86,7 +86,7 @@ Every town council must submit its budget outturn (what it actually collected an
         formattedValue={formatNumber(resumen[0]?.afectados_por_1000, 1)}
         unit="per 1,000 inhabitants"
         period="{formatNumber(resumen[0]?.poblacion_afectada, 0)} residents in total; {formatNumber(resumen[0]?.grandes, 0)} of those town councils have more than 20,000 inhabitants"
-        sparklineData={liq_serie.map(d => d.afectados_por_1000)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Three or more years in a row"
@@ -364,7 +364,7 @@ The **General Account** brings together all of a town council's accounts (budget
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total / 0.01, 1)}% of {formatNumber(tcu_resumen[0]?.total, 0)} town councils; not recorded as submitted at {tcu_cobertura[0]?.extraccion}"
         source="Court of Audit (rendiciondecuentas.es)"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => ({...d, y: d.no_rendida}))}
     />
     <KpiCard
         title="Submitted on time"
@@ -377,7 +377,7 @@ The **General Account** brings together all of a town council's accounts (budget
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total / 0.01, 1)}% of {formatNumber(tcu_resumen_ci[0]?.total, 0)} town councils (deadline: 30/04/{tcu_ultimo[0]?.ci + 1})"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => ({...d, y: d.no_rendida}))}
     />
 </Grid>
 
@@ -591,7 +591,7 @@ ORDER BY m.periodo
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_mes, 0)}
         period="{formatNumber(pie_resumen[0]?.retenidos_liquidacion, 0)} of them for failing to submit the outturn"
         source="Ministry of Finance (OVEELL)"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_mes)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_mes}))}
     />
     <KpiCard
         title="Withheld in the last 12 months"
@@ -600,14 +600,14 @@ ORDER BY m.periodo
         unit="€m ({base_deflactor[0]?.anio_base} euros)"
         period="share of central government taxes not transferred while the non-compliance lasted (€{formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)}m in current euros)"
         source="Monthly payments on account"
-        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => d.eur_12m_real)}
+        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => ({...d, y: d.eur_12m_real}))}
     />
     <KpiCard
         title="Town councils with funds withheld in the last year"
         value={pie_resumen[0]?.retenidos_12m}
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_12m, 0)}
         period="for at least one month in the last 12"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_12m)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_12m}))}
     />
 </Grid>
 
@@ -855,7 +855,7 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
         period="{formatNumber(pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total / 0.01, 1)}% of {formatNumber(pmp_resumen[0]?.total, 0)} town councils"
         source="Ministry of Finance (PMP_NET)"
-        sparklineData={pmp_serie.map(d => d.no_comunican)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.no_comunican}))}
     />
     <KpiCard
         title="Residents affected"
@@ -863,14 +863,14 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.afectados_por_1000, 1)}
         unit="per 1,000 inhabitants"
         period="{formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)} residents in total; {formatNumber(pmp_resumen[0]?.mas_5000, 0)} of those town councils have more than 5,000 inhabitants"
-        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => d.afectados_por_1000)}
+        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Pay in more than 30 days"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
         period="{formatNumber(pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican / 0.01, 1)}% of those that report it ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} inhabitants)"
-        sparklineData={pmp_serie.map(d => d.supera_30)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.supera_30}))}
     />
 </Grid>
 

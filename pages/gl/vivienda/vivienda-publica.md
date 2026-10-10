@@ -1,7 +1,7 @@
 ---
 title: Vivenda pública en aluguer
 description: "Cantas vivendas públicas en aluguer hai en España por habitante e en % dos fogares, por comunidade, provincia e municipio, comparadas cos Países Baixos, Austria, Dinamarca, Francia e a media europea, e segundo o partido que gobernaba."
-i18n_origen: a5388d75d815
+i18n_origen: 911f5f63d748
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -214,7 +214,7 @@ Cantas vivendas das administracións se alugan a prezos por debaixo dos de merca
         changePeriod="fronte a 2019"
         direction="neutral"
         source="Ministerio de Vivenda (enquisa de vivenda social)"
-        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => d.parque_autonomico_1000hab)}
+        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => ({...d, y: d.parque_autonomico_1000hab}))}
     />
     <KpiCard
         title="Fogares con aluguer por debaixo de mercado"
@@ -223,7 +223,7 @@ Cantas vivendas das administracións se alugan a prezos por debaixo dos de merca
         period="dos fogares, {resumen[0]?.ecv_anio} · inclúe alugueres reducidos privados"
         direction="neutral"
         source="INE (Enquisa de Condicións de Vida)"
-        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => d.ecv_pct_alquiler_inferior)}
+        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => ({...d, y: d.ecv_pct_alquiler_inferior}))}
     />
     <KpiCard
         title="Vivendas protexidas en aluguer"
@@ -232,7 +232,7 @@ Cantas vivendas das administracións se alugan a prezos por debaixo dos de merca
         period="cualificacións provisionais, {resumen[0]?.calif_anio} · {formatNumber(resumen[0]?.calif_ultimo, 0)} vivendas"
         direction="neutral"
         source="Ministerio de Vivenda"
-        sparklineData={calif.map(d => d.calif_alquiler_100k)}
+        sparklineData={calif.map(d => ({...d, y: d.calif_alquiler_100k}))}
     />
 </Grid>
 

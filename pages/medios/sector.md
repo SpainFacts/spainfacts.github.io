@@ -273,7 +273,7 @@ Cuánto se leen, se ven y se escuchan los medios en España, de qué viven y cu�
         period={`${papel_resumen[0].anio} · ${formatNumber(papel_resumen[0].miles / 1000, 1)} millones de lectores al día`}
         source="AIMC (EGM)"
         direction="positive-up"
-        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => d.por_1000_hab)}
+        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Inversión publicitaria en medios"
@@ -283,7 +283,7 @@ Cuánto se leen, se ven y se escuchan los medios en España, de qué viven y cu�
         period={`${pub_resumen[0].anio} · ${formatCompact(pub_resumen[0].meur * 1e6, 2)} € en televisión, prensa, radio, digital, exterior y cine`}
         source="InfoAdex"
         direction="positive-up"
-        sparklineData={pub_mercado.map(d => d.eur_hab_real)}
+        sparklineData={pub_mercado.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Empleo en la edición de periódicos"
@@ -293,7 +293,7 @@ Cuánto se leen, se ven y se escuchan los medios en España, de qué viven y cu�
         period={`${empleo_ult[0].anio} · ${formatNumber(empleo_ult[0].periodicos, 0)} personas en ${formatNumber(empleo_ult[0].periodicos_empresas, 0)} empresas`}
         source="INE y Eurostat (SBS)"
         direction="positive-up"
-        sparklineData={empleo_spark.map(d => d.ocupados_100k_hab)}
+        sparklineData={empleo_spark.map(d => ({...d, y: d.ocupados_100k_hab}))}
     />
     <KpiCard
         title="Publicidad del Estado frente al mercado"
@@ -303,7 +303,7 @@ Cuánto se leen, se ven y se escuchan los medios en España, de qué viven y cu�
         period={`${publico_ult_age[0].anio} · ${formatCompact(publico_ult_age[0].publicidad_estado_meur * 1e6, 2)} € en campañas del Estado y sus empresas`}
         source="Moncloa e InfoAdex"
         direction="positive-down"
-        sparklineData={publico.map(d => d.publicidad_estado_pct_mercado)}
+        sparklineData={publico.map(d => ({...d, y: d.publicidad_estado_pct_mercado}))}
     />
     {/if}
 </div>

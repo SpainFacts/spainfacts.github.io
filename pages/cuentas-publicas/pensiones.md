@@ -216,7 +216,7 @@ Cuánto cobran los pensionistas en España, cuántos trabajadores cotizan por ca
         changePeriod="real vs un año antes"
         direction="positive-up"
         source="Seguridad Social"
-        sparklineData={mensual_real.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={mensual_real.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Afiliados por pensión"
@@ -225,7 +225,7 @@ Cuánto cobran los pensionistas en España, cuántos trabajadores cotizan por ca
         period="{mensual_ratio.slice(-1)[0]?.mes_texto} · {formatNumber(mensual_ratio.slice(-1)[0]?.afiliados / 1e6, 1)} millones de afiliados y {formatNumber(mensual_ratio.slice(-1)[0]?.pensiones / 1e6, 1)} millones de pensiones"
         direction="positive-up"
         source="Seguridad Social"
-        sparklineData={mensual_ratio.map(d => d.afiliados_por_pension)}
+        sparklineData={mensual_ratio.map(d => ({...d, y: d.afiliados_por_pension}))}
     />
     <KpiCard
         title="Gasto en pensiones"
@@ -234,7 +234,7 @@ Cuánto cobran los pensionistas en España, cuántos trabajadores cotizan por ca
         period="{gasto_ult[0]?.anio} · vejez y supervivencia, todas las AAPP · media UE-27: {formatNumber(gasto_ult[0]?.ue, 1)} %"
         direction="positive-down"
         source="Eurostat (COFOG)"
-        sparklineData={gasto_es.map(d => d.gasto_vejez_supervivientes_pib)}
+        sparklineData={gasto_es.map(d => ({...d, y: d.gasto_vejez_supervivientes_pib}))}
     />
     <KpiCard
         title="Pensiones por 1.000 habitantes"
@@ -242,7 +242,7 @@ Cuánto cobran los pensionistas en España, cuántos trabajadores cotizan por ca
         formattedValue={formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_1000_hab, 0)}
         period="{anual_completo.slice(-1)[0]?.anio_i}, media del año · {formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_100_mayores, 0)} por cada 100 personas de 65 años o más"
         source="Seguridad Social / INE"
-        sparklineData={anual_completo.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
 </Grid>
 

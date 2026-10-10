@@ -1,7 +1,7 @@
 ---
 title: Housing rents
 description: "Median housing rent in Spain adjusted for inflation, by region, province and municipality, using income tax data from the State Rental Price Reference System and the INE index."
-i18n_origen: 15b55dba3f41
+i18n_origen: 851526a83095
 ---
 
 <script>
@@ -99,7 +99,7 @@ How much it costs to rent a home in Spain. The data come from **landlords' incom
         change={espana.slice(-1)[0]?.variacion_real?.toFixed(1)}
         changePeriod="real vs previous year"
         source="Ministry of Housing (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Per square metre"
@@ -107,7 +107,7 @@ How much it costs to rent a home in Spain. The data come from **landlords' incom
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiler_m2_mediana_real, 2)} €/m² per month"
         period="median floor area of rented flats: {formatNumber(espana.slice(-1)[0]?.superficie_mediana, 0)} m²"
         source="Ministry of Housing (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_m2_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_m2_mediana_real}))}
     />
     <KpiCard
         title="Rented flats"
@@ -115,7 +115,7 @@ How much it costs to rent a home in Spain. The data come from **landlords' incom
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiladas_1000, 1)} per 1,000 inhab."
         period="declared in income tax returns in {espana.slice(-1)[0]?.anio} · {formatCompact(espana.slice(-1)[0]?.viviendas_alquiladas, 1)} in total"
         source="Ministry of Housing (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiladas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiladas_1000}))}
     />
     <KpiCard
         title="Share of salary"
@@ -125,7 +125,7 @@ How much it costs to rent a home in Spain. The data come from **landlords' incom
         direction="positive-down"
         source="Ministry of Housing / INE"
         href="/en/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.pct_alquiler)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.pct_alquiler}))}
     />
 </Grid>
 

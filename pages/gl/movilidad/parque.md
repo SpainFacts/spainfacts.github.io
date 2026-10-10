@@ -1,5 +1,5 @@
 ---
-i18n_origen: 5bbacb52d8c4
+i18n_origen: 7ce7ebdce3e1
 title: Parque de vehículos
 description: "Os vehículos que circulan en España: turismos por tipo de motor, etiqueta ambiental da DGT e antigüidade, modelos máis comúns e comparación por provincia e concello."
 og:
@@ -48,7 +48,7 @@ ORDER BY mes
         formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} por 1.000 hab."
         period="{formatCompact(resumen[0]?.turismos, 1)} turismos e {formatCompact(resumen[0]?.vehiculos, 1)} vehículos de todo tipo · {resumen[0]?.mes_texto}"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.turismos_1000)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.turismos_1000}))}
     />
     <KpiCard
         title="Turismos enchufables"
@@ -56,7 +56,7 @@ ORDER BY mes
         formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_enchufables, 1)} %"
         period="dos turismos · {formatNumber(resumen[0]?.enchufables, 0)} enchufables, {formatNumber(resumen[0]?.bev, 0)} eléctricos puros"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_enchufables)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_enchufables}))}
     />
     <KpiCard
         title="Turismos sen etiqueta ambiental"
@@ -65,7 +65,7 @@ ORDER BY mes
         period="dos turismos · {formatCompact(resumen[0]?.sin_distintivo, 1)} coches · gasolina anterior a 2000 e diésel anterior a 2006"
         direction="positive-down"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_sin_distintivo)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_sin_distintivo}))}
     />
 </Grid>
 

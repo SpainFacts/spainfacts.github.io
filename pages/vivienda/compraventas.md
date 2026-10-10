@@ -122,7 +122,7 @@ Cuántas viviendas cambian de manos cada año y cuántas se compran con hipoteca
         change={ultimo[0]?.var_cv?.toFixed(1)}
         changePeriod="vs un año antes"
         source="INE / ETDP"
-        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => d.compraventas_12m_1000)}
+        sparklineData={mensual.filter(d => d.compraventas_12m_1000 != null).map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Hipotecas sobre viviendas"
@@ -132,7 +132,7 @@ Cuántas viviendas cambian de manos cada año y cuántas se compran con hipoteca
         change={ultimo[0]?.var_h?.toFixed(1)}
         changePeriod="vs un año antes"
         source="INE / Hipotecas"
-        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => d.hipotecas_12m_1000)}
+        sparklineData={mensual.filter(d => d.hipotecas_12m_1000 != null).map(d => ({...d, y: d.hipotecas_12m_1000}))}
     />
     <KpiCard
         title="Hipoteca media"
@@ -140,7 +140,7 @@ Cuántas viviendas cambian de manos cada año y cuántas se compran con hipoteca
         formattedValue="{formatNumber(importe_ult[0]?.importe_medio_real / 1000, 0)} mil €"
         period="por vivienda en {importe_ult[0]?.anio}, en euros de {anual[0]?.anio_base}"
         source="INE / Hipotecas"
-        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => d.importe_medio_real)}
+        sparklineData={anual.filter(d => d.importe_medio_real != null).map(d => ({...d, y: d.importe_medio_real}))}
     />
     <KpiCard
         title="Vivienda nueva"
@@ -148,7 +148,7 @@ Cuántas viviendas cambian de manos cada año y cuántas se compran con hipoteca
         formattedValue="{formatNumber(hitos[0]?.pct_nueva_ult, 1)} %"
         period="de las compraventas en {hitos[0]?.anio_ult} · {formatNumber(hitos[0]?.pct_nueva_2008, 0)} % en 2008"
         source="INE / ETDP"
-        sparklineData={anual_completo.map(d => d.pct_nueva)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_nueva}))}
     />
 </Grid>
 

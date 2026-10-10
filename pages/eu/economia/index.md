@@ -1,7 +1,7 @@
 ---
 title: Ekonomia
 description: "BPG biztanleko, hazkundea, kanpo-merkataritza, sektoreak, enplegua, soldatak, langabezia eta inflazioa Espainian, inflazioa kenduta eta biztanleriaren arabera."
-i18n_origen: 835b12e5d68d
+i18n_origen: 21e2042a9bd3
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -86,7 +86,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         changePeriod="erreala, aurreko urtearekin alderatuta"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={pib_hab.map(d => d.valor)}
+        sparklineData={pib_hab.map(d => ({...d, y: d.valor}))}
         href="/eu/economia/pib"
     />
     <KpiCard
@@ -95,7 +95,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="urtetik urterakoa, erreala, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
         href="/eu/economia/pib"
     />
     <KpiCard
@@ -104,7 +104,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         formattedValue="BPGaren {formatNumber(exportaciones.slice(-1)[0]?.pct_pib, 1)} %"
         period="ondasunak eta zerbitzuak, {exportaciones.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={exportaciones.slice(-40).map(d => d.pct_pib)}
+        sparklineData={exportaciones.slice(-40).map(d => ({...d, y: d.pct_pib}))}
         href="/eu/economia/comercio-exterior"
     />
     <KpiCard
@@ -116,7 +116,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         changePeriod="erreala, aurreko urtearekin alderatuta"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={salario.map(d => d.salario_real)}
+        sparklineData={salario.map(d => ({...d, y: d.salario_real}))}
         href="/eu/economia/salarios"
     />
     <KpiCard
@@ -129,7 +129,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         changePeriod="aurreko hiruhilekoarekin alderatuta"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={serie_paro.slice(-40).map(d => d.paro)}
+        sparklineData={serie_paro.slice(-40).map(d => ({...d, y: d.paro}))}
         href="/eu/economia/paro"
     />
     <KpiCard
@@ -142,7 +142,7 @@ Nola ari den bilakatzen Espainiako ekonomia. Webgune osoko irizpideari jarraituz
         changePeriod="aurreko hilabetearekin alderatuta"
         direction="positive-down"
         source="INE / KPI"
-        sparklineData={serie_ipc.slice(-36).map(d => d.ipc)}
+        sparklineData={serie_ipc.slice(-36).map(d => ({...d, y: d.ipc}))}
         href="/eu/economia/ipc"
     />
 </Grid>

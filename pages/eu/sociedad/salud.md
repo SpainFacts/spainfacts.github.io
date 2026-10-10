@@ -3,7 +3,7 @@ title: Osasuna
 description: "Bizi-itxaropena Espainian erkidego eta probintziaka, zerk eragiten dituen heriotzak, suizidioak, trafiko-istripuak, gehiegizko hilkortasuna eta osasun-sistema: itxaron-zerrendak, medikuak, erizainak, oheak eta biztanleko gastua EBrekin alderatuta."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 89c1708d4d47
+i18n_origen: 99432a16614d
 ---
 
 <script>
@@ -520,7 +520,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         changePeriod="urtebete lehenagorekiko"
         direction="positive-down"
         source="Osasun Ministerioa (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.tasa_1000}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.tasa_1000}))}
     />
     <KpiCard
         title="Ebakuntzarako batez besteko itxaronaldia"
@@ -532,7 +532,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         changePeriod="urtebetean"
         direction="positive-down"
         source="Osasun Ministerioa (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Espezialistarako batez besteko itxaronaldia"
@@ -544,7 +544,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         changePeriod="urtebetean"
         direction="positive-down"
         source="Osasun Ministerioa (SISLE)"
-        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_le.filter(d => d.tipo === 'consultas').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Osasun-gastu publikoa"
@@ -552,7 +552,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.pub_real, 0)} € biz."
         period="BPGaren {formatNumber(san_gasto_ultimo[0]?.pub_pib, 1)} % {urtean(san_gasto_ultimo[0]?.anio)} · {urteko(san_gasto_ultimo[0]?.anio_base)} euroak"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Público').map(d => ({...d, valor: d.eur_hab_real}))}
     />
     <KpiCard
         title="Medikuak"
@@ -560,7 +560,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.es, 1)} 1.000 biz."
         period="EBko batez bestekoa: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'medicos')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'medicos')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'medicos').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Erizainak"
@@ -568,7 +568,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.es, 1)} 1.000 biz."
         period="EBko batez bestekoa: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'enfermeras')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'enfermeras').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Ospitaleko oheak"
@@ -576,7 +576,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         formattedValue="{formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.es, 1)} 1.000 biz."
         period="EBko batez bestekoa: {formatNumber(san_rec_ultimo.find(d => d.recurso === 'camas')?.ue, 1)} · {san_rec_ultimo.find(d => d.recurso === 'camas')?.anio}"
         source="Eurostat"
-        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_rec.filter(d => d.cod_pais === 'ES' && d.recurso === 'camas').map(d => ({...d, valor: d.por_1000}))}
     />
     <KpiCard
         title="Etxeen ordainketa zuzena"
@@ -584,7 +584,7 @@ Zenbat itxaron behar den osasun publikoan ebakuntza egiteko edo espezialista iku
         formattedValue="{formatNumber(san_gasto_ultimo[0]?.hog_real, 0)} € biz."
         period="beren poltsikotik {urtean(san_gasto_ultimo[0]?.anio)} (farmazia, dentista, kontsulta pribatuak...) · gehi {formatNumber(san_gasto_ultimo[0]?.seg_real, 0)} € aseguruetan"
         source="Eurostat"
-        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto_es.filter(d => d.financiacion === 'Pago directo de los hogares').map(d => ({...d, valor: d.eur_hab_real}))}
     />
 </Grid>
 

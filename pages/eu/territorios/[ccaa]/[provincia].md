@@ -1,6 +1,6 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: 37c4504e6ece
+i18n_origen: 098d74e09c6b
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -490,7 +490,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / BJI"
         href="/eu/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="25 urtetik beherakoen langabezia"
@@ -500,7 +500,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / BJI"
         href="/eu/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro_menor25)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Erregistratutako langabezia"
@@ -510,7 +510,7 @@ ORDER BY mes
         direction="positive-down"
         source="SEPE"
         href="/eu/economia/paro"
-        sparklineData={paro_reg_terr.slice(-36).map(d => d.por_100_16_64)}
+        sparklineData={paro_reg_terr.slice(-36).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -571,7 +571,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
-        sparklineData={renta_prov.map(d => d.renta_persona_real)}
+        sparklineData={renta_prov.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Etxeko batez besteko errenta garbia"
@@ -581,7 +581,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
-        sparklineData={renta_prov.map(d => d.renta_hogar_real)}
+        sparklineData={renta_prov.map(d => ({...d, y: d.renta_hogar_real}))}
     />
 </Grid>
 
@@ -652,7 +652,7 @@ ORDER BY poblacion DESC
         changePeriod="erreala, urtebete lehenagoko aldean"
         source="Etxebizitza Ministerioa"
         href="/eu/vivienda/precios"
-        sparklineData={viv_serie.filter(d => d.serie === 'precio').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'precio').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Pisu baten alokairu mediana"
@@ -661,7 +661,7 @@ ORDER BY poblacion DESC
         period="{viv[0]?.alquiler_anio} · Espainia: {formatNumber(viv[0]?.alquiler_espana, 0)} €/hil."
         source="Etxebizitza Ministerioa (SERPAVI)"
         href="/eu/vivienda/alquiler"
-        sparklineData={viv_serie.filter(d => d.serie === 'alquiler').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'alquiler').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Salerosketak 1.000 biz. bakoitzeko"
@@ -670,7 +670,7 @@ ORDER BY poblacion DESC
         period="{viv[0]?.mercado_mes} arteko 12 hilabeteak · Espainia: {formatNumber(viv[0]?.compraventas_espana, 1)}"
         source="INE / ETDP"
         href="/eu/vivienda/compraventas"
-        sparklineData={viv_serie.filter(d => d.serie === 'compraventas').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'compraventas').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Amaitutako etxebizitzak 1.000 biz. bakoitzeko"
@@ -679,7 +679,7 @@ ORDER BY poblacion DESC
         period="etxebizitza librea, {viv[0]?.obra_anio} · Espainia: {formatNumber(viv[0]?.terminadas_espana, 2)}"
         source="Etxebizitza Ministerioa"
         href="/eu/vivienda/construccion"
-        sparklineData={viv_serie.filter(d => d.serie === 'terminadas').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'terminadas').map(d => ({...d, y: d.valor}))}
     />
 </Grid>
 
@@ -743,7 +743,7 @@ ORDER BY anio
         formattedValue="{formatNumber(pensiones_terr[0]?.pension_media_jubilacion_real, 0)} €/hil."
         period="{pensiones_terr[0]?.anio} ({pensiones_terr[0]?.meses} hilabeteren batez bestekoa), {urte(pensiones_terr[0]?.anio_euros, 'ko')} eurotan · Espainia: {formatNumber(pensiones_terr[0]?.jub_espana, 0)} € · postua: {pensiones_terr[0]?.puesto_pension}/{pensiones_terr[0]?.n_territorios}"
         source="Gizarte Segurantza"
-        sparklineData={pensiones_terr_serie.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Pentsioak 1.000 biztanleko"
@@ -751,7 +751,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.pensiones_por_1000_hab, 0)}
         period="Espainia: {formatNumber(pensiones_terr[0]?.por_1000_espana, 0)} · {formatNumber(pensiones_terr[0]?.pensiones_por_100_mayores, 0)} 65+ urteko 100 pertsonako · {formatNumber(pensiones_terr[0]?.pensiones, 0)} pentsio"
         source="Gizarte Segurantza / INE"
-        sparklineData={pensiones_terr_serie.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
     <KpiCard
         title="Afiliatuak pentsioko"
@@ -759,7 +759,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.afiliados_por_pension, 2)}
         period="Espainia: {formatNumber(pensiones_terr[0]?.ratio_espana, 2)} (probintziako datuak 2021etik)"
         source="Gizarte Segurantza"
-        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => d.afiliados_por_pension)}
+        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => ({...d, y: d.afiliados_por_pension}))}
     />
 </Grid>
 
@@ -810,10 +810,10 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     <KpiCard title="Boto gehien jaso duen hautagaitza" value={elec.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec.slice(-1)[0]?.ganador_pct, 1)} %"
         period="bigarrena: {elec.slice(-1)[0]?.segundo_siglas} ({formatNumber(elec.slice(-1)[0]?.segundo_pct, 1)} %) · {formatNumber(elec.slice(-1)[0]?.escanos, 0)} eserleku probintzian"
-        source="Barne Ministerioa" sparklineData={elec.map(d => ({valor: d.ganador_pct}))} />
+        source="Barne Ministerioa" sparklineData={elec.map(d => ({...d, valor: d.ganador_pct}))} />
     <KpiCard title="Alderdien kopuru eraginkorra" value={elec.slice(-1)[0]?.nep_votos}
         formattedValue={formatNumber(elec.slice(-1)[0]?.nep_votos, 1)} period="botoetan, azken hauteskunde orokorrak"
-        source="Kalkulu propioa" sparklineData={elec.map(d => ({valor: d.nep_votos}))} />
+        source="Kalkulu propioa" sparklineData={elec.map(d => ({...d, valor: d.nep_votos}))} />
 </Grid>
 
 <LineChart data={elec_familias} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true

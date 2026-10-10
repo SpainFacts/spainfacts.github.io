@@ -1,7 +1,7 @@
 ---
 title: Lloguer d'habitatge
 description: "Lloguer medià de l'habitatge a Espanya descomptada la inflació, per comunitat, província i municipi, amb les dades de l'IRPF del Sistema Estatal de Referència del Preu del Lloguer i l'índex de l'INE."
-i18n_origen: 15b55dba3f41
+i18n_origen: 851526a83095
 ---
 
 <script>
@@ -99,7 +99,7 @@ Quant es paga per llogar un habitatge a Espanya. Les dades surten de les **decla
         change={espana.slice(-1)[0]?.variacion_real?.toFixed(1)}
         changePeriod="real vs. any anterior"
         source="Ministeri d'Habitatge (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Per metre quadrat"
@@ -107,7 +107,7 @@ Quant es paga per llogar un habitatge a Espanya. Les dades surten de les **decla
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiler_m2_mediana_real, 2)} €/m² al mes"
         period="superfície mediana del pis llogat: {formatNumber(espana.slice(-1)[0]?.superficie_mediana, 0)} m²"
         source="Ministeri d'Habitatge (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_m2_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_m2_mediana_real}))}
     />
     <KpiCard
         title="Pisos llogats"
@@ -115,7 +115,7 @@ Quant es paga per llogar un habitatge a Espanya. Les dades surten de les **decla
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiladas_1000, 1)} per 1.000 hab."
         period="declarats a l'IRPF el {espana.slice(-1)[0]?.anio} · {formatCompact(espana.slice(-1)[0]?.viviendas_alquiladas, 1)} en total"
         source="Ministeri d'Habitatge (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiladas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiladas_1000}))}
     />
     <KpiCard
         title="Part del salari"
@@ -125,7 +125,7 @@ Quant es paga per llogar un habitatge a Espanya. Les dades surten de les **decla
         direction="positive-down"
         source="Ministeri d'Habitatge / INE"
         href="/ca/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.pct_alquiler)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.pct_alquiler}))}
     />
 </Grid>
 

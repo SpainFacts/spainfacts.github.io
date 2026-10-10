@@ -1,5 +1,5 @@
 ---
-i18n_origen: 2c4bc7fa07e5
+i18n_origen: 7cce8c387246
 title: Mix de xeración eléctrica
 description: "O mix eléctrico español desde 2007 segundo Red Eléctrica: cota renovable, peche do carbón, emisións por kWh xerado e consumo eléctrico por habitante."
 og:
@@ -104,7 +104,7 @@ De onde sae a electricidade que se xera en España e canto CO₂ custa cada kWh,
         changePeriod="vs. ano anterior"
         direction="positive-up"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_renovable_pct}))}
     />
     <KpiCard
         title="CO₂ por kWh xerado"
@@ -115,7 +115,7 @@ De onde sae a electricidade que se xera en España e canto CO₂ custa cada kWh,
         changePeriod="vs. ano anterior"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.g_co2_kwh)}
+        sparklineData={elec.map(d => ({...d, y: d.g_co2_kwh}))}
     />
     <KpiCard
         title="Consumo por habitante"
@@ -126,7 +126,7 @@ De onde sae a electricidade que se xera en España e canto CO₂ custa cada kWh,
         changePeriod="vs. ano anterior"
         direction="neutral"
         source="REE / Eurostat"
-        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+        sparklineData={elec.map(d => ({...d, y: d.demanda_kwh_hab}))}
     />
     <KpiCard
         title="Carbón"
@@ -135,7 +135,7 @@ De onde sae a electricidade que se xera en España e canto CO₂ custa cada kWh,
         period="da xeración en {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} % en {elec_kpi[0]?.anio_inicio}"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_carbon_pct}))}
     />
 </Grid>
 

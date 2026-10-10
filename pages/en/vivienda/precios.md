@@ -1,7 +1,7 @@
 ---
 title: House prices
 description: "House prices in Spain adjusted for inflation: appraised value per square metre by region, province and municipality and the INE House Price Index, new and second-hand."
-i18n_origen: 058fd706b1df
+i18n_origen: 44b0921ad358
 ---
 
 <script>
@@ -110,7 +110,7 @@ How much it costs to buy a home in Spain and how that has changed. There are two
         change={precio.slice(-1)[0]?.interanual_real?.toFixed(1)}
         changePeriod="real vs a year earlier"
         source="Ministry of Housing"
-        sparklineData={precio.map(d => d.euros_m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Real price growth"
@@ -118,7 +118,7 @@ How much it costs to buy a home in Spain and how that has changed. There are two
         formattedValue="{ipv_general.slice(-1)[0]?.interanual_real >= 0 ? '+' : ''}{formatNumber(ipv_general.slice(-1)[0]?.interanual_real, 1)} %"
         period="HPI, {ipv_general.slice(-1)[0]?.periodo} vs a year earlier · {formatNumber(ipv_general.slice(-1)[0]?.interanual_nominal, 1)} % not adjusted for inflation"
         source="INE / HPI"
-        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => d.interanual_real)}
+        sparklineData={ipv_general.filter(d => d.interanual_real != null).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Versus the bubble peak"
@@ -126,7 +126,7 @@ How much it costs to buy a home in Spain and how that has changed. There are two
         formattedValue="{ipv_hitos[0]?.vs_max >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max, 1)} %"
         period="real price vs {ipv_hitos[0]?.periodo_max} (HPI) · {ipv_hitos[0]?.vs_max_nominal >= 0 ? '+' : ''}{formatNumber(ipv_hitos[0]?.vs_max_nominal, 1)} % in euros of each year"
         source="INE / HPI"
-        sparklineData={ipv_general.map(d => d.indice_real)}
+        sparklineData={ipv_general.map(d => ({...d, y: d.indice_real}))}
     />
     <KpiCard
         title="90 m² flat"
@@ -134,7 +134,7 @@ How much it costs to buy a home in Spain and how that has changed. There are two
         formattedValue="{formatNumber(precio.slice(-1)[0]?.precio_90m2_real / 1000, 0)} thousand €"
         period="at Spain's average appraised value, {precio.slice(-1)[0]?.periodo}"
         source="Ministry of Housing"
-        sparklineData={precio.map(d => d.precio_90m2_real)}
+        sparklineData={precio.map(d => ({...d, y: d.precio_90m2_real}))}
     />
 </Grid>
 

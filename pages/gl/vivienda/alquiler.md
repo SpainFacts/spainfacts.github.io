@@ -1,7 +1,7 @@
 ---
 title: Aluguer de vivenda
 description: "Aluguer mediano da vivenda en España descontada a inflación, por comunidade, provincia e municipio, cos datos do IRPF do Sistema Estatal de Referencia do Prezo do Aluguer e o índice do INE."
-i18n_origen: 15b55dba3f41
+i18n_origen: 851526a83095
 ---
 
 <script>
@@ -99,7 +99,7 @@ Canto se paga por alugar unha vivenda en España. Os datos saen das **declaraci�
         change={espana.slice(-1)[0]?.variacion_real?.toFixed(1)}
         changePeriod="real fronte ao ano anterior"
         source="Ministerio de Vivenda (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Por metro cadrado"
@@ -107,7 +107,7 @@ Canto se paga por alugar unha vivenda en España. Os datos saen das **declaraci�
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiler_m2_mediana_real, 2)} €/m² ao mes"
         period="superficie mediana do piso alugado: {formatNumber(espana.slice(-1)[0]?.superficie_mediana, 0)} m²"
         source="Ministerio de Vivenda (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_m2_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_m2_mediana_real}))}
     />
     <KpiCard
         title="Pisos alugados"
@@ -115,7 +115,7 @@ Canto se paga por alugar unha vivenda en España. Os datos saen das **declaraci�
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiladas_1000, 1)} por 1.000 hab."
         period="declarados no IRPF en {espana.slice(-1)[0]?.anio} · {formatCompact(espana.slice(-1)[0]?.viviendas_alquiladas, 1)} en total"
         source="Ministerio de Vivenda (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiladas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiladas_1000}))}
     />
     <KpiCard
         title="Parte do salario"
@@ -125,7 +125,7 @@ Canto se paga por alugar unha vivenda en España. Os datos saen das **declaraci�
         direction="positive-down"
         source="Ministerio de Vivenda / INE"
         href="/gl/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.pct_alquiler)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.pct_alquiler}))}
     />
 </Grid>
 

@@ -108,7 +108,7 @@ El gasto público consolidado en España alcanzó en {resumen_gastos[0]?.anio} *
         period="{formatNumber(resumen_gastos[0]?.pens_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.pens_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF10)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Protección Social y Pensiones').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Protección Social y Pensiones').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -119,7 +119,7 @@ El gasto público consolidado en España alcanzó en {resumen_gastos[0]?.anio} *
         period="{formatNumber(resumen_gastos[0]?.san_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.san_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF07)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Sanidad Pública').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Sanidad Pública').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -130,7 +130,7 @@ El gasto público consolidado en España alcanzó en {resumen_gastos[0]?.anio} *
         period="{formatNumber(resumen_gastos[0]?.edu_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.edu_pct, 1)}% del gasto · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF09)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Educación').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Educación').map(d => ({...d, y: d.eur_hab_real}))}
     />
 </Grid>
 

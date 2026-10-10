@@ -1,7 +1,7 @@
 ---
 description: "De onde sae o diñeiro público: impostos e cotizacións sociais en España, por habitante, descontada a inflación e en porcentaxe do PIB."
 title: Ingresos públicos e recadación tributaria
-i18n_origen: 41be22719404
+i18n_origen: f4370ea6ff06
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -118,7 +118,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.cot_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_tipos[0]?.cot_pct, 1)}% dos ingresos · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -129,7 +129,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.irpf_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_tipos[0]?.irpf_pct, 1)}% dos ingresos · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -140,7 +140,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.iva_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_tipos[0]?.iva_pct, 1)}% dos ingresos · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => ({...d, y: d.eur_hab_real}))}
     />
 </Grid>
 

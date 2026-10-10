@@ -215,7 +215,7 @@ Las administraciones crean observatorios para seguir un tema (la violencia de g�
         formattedValue={formatNumber(resumen[0]?.total, 0)}
         period="{formatNumber(resumen[0]?.estatales, 0)} de la Administración General del Estado"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.acumulados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.acumulados}))}
     />
     <KpiCard
         title="Activos"
@@ -230,7 +230,7 @@ Las administraciones crean observatorios para seguir un tema (la violencia de g�
         formattedValue="{formatNumber(resumen[0]?.pct_desde_2015, 0)} %"
         period="{formatNumber(resumen[0]?.desde_2015, 0)} de los {formatNumber(resumen[0]?.con_anio, 0)} con año de creación conocido"
         source="observatoriospublicos.es"
-        sparklineData={por_anio.map(d => d.creados)}
+        sparklineData={por_anio.map(d => ({...d, y: d.creados}))}
     />
     <KpiCard
         title="Con participación privada"

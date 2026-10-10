@@ -1,7 +1,7 @@
 ---
 title: Erosteko edo alokatzeko ahalegina
 description: "90 m²-ko etxebizitza batek zenbat urteko soldata gordin balio duen Espainian eta erkidego bakoitzean, eta soldataren zer zati joaten den alokairura, Etxebizitza Ministerioaren eta INEren datuekin."
-i18n_origen: 720363cb6517
+i18n_origen: 45b1ea729603
 ---
 
 <script>
@@ -89,7 +89,7 @@ Zenbat eragiten duen etxebizitzak soldatan. Erosteko: **zenbat urteko soldata go
         period="Espainia, {hitos[0]?.anio_ult} · gehienekoa: {formatNumber(hitos[0]?.anios_max, 1)}, {urtean(hitos[0]?.anio_max)}"
         direction="positive-down"
         source="Etxebizitza Ministerioa / INE"
-        sparklineData={compra.map(d => d.anios_salario)}
+        sparklineData={compra.map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Alokairua soldataren gainean"
@@ -98,7 +98,7 @@ Zenbat eragiten duen etxebizitzak soldatan. Erosteko: **zenbat urteko soldata go
         period="batez besteko soldata gordinarena, {alquiler.slice(-1)[0]?.anio} · {formatNumber(alquiler.slice(-1)[0]?.alquiler_mes_mediana, 0)} € hilean"
         direction="positive-down"
         source="Etxebizitza Ministerioa / INE"
-        sparklineData={alquiler.map(d => d.pct_alquiler)}
+        sparklineData={alquiler.map(d => ({...d, y: d.pct_alquiler}))}
     />
     <KpiCard
         title="Erostea garestien den lekua"
@@ -107,7 +107,7 @@ Zenbat eragiten duen etxebizitzak soldatan. Erosteko: **zenbat urteko soldata go
         period="{ccaa[0]?.comunidad}, {ccaa[0]?.anio} · merkeena: {ccaa.slice(-1)[0]?.comunidad}, {formatNumber(ccaa.slice(-1)[0]?.anios_salario, 1)}"
         direction="positive-down"
         source="Etxebizitza Ministerioa / INE"
-        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => d.anios_salario)}
+        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Batez besteko soldata gordina"
@@ -115,7 +115,7 @@ Zenbat eragiten duen etxebizitzak soldatan. Erosteko: **zenbat urteko soldata go
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € urtean"
         period="Espainia, {hitos[0]?.anio_ult} · 90 m²-ko pisu bat {formatNumber(hitos[0]?.precio_ult, 0)} €-tan tasatzen da"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual_real)}
+        sparklineData={compra.map(d => ({...d, y: d.salario_anual_real}))}
     />
 </Grid>
 

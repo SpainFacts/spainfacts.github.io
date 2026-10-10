@@ -1,7 +1,7 @@
 ---
 title: Salaris
 description: "Salari mitjà a Espanya descomptada la inflació, el seu creixement real i nominal, per sector i jornada, i la distribució per decils."
-i18n_origen: fba9f04f2b64
+i18n_origen: c141d7649501
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,7 +113,7 @@ Quant es cobra a Espanya i si el sou dona per a més o per a menys que abans. To
         changePeriod="real respecte a l'any anterior"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Pujada real de l'últim trimestre"
@@ -122,7 +122,7 @@ Quant es cobra a Espanya i si el sou dona per a més o per a menys que abans. To
         period="{trimestral.slice(-1)[0]?.periodo} respecte a un any abans · {formatNumber(trimestral.slice(-1)[0]?.interanual_nominal, 1)} % sense descomptar la inflació"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => d.interanual_real)}
+        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Respecte al 2008"
@@ -131,7 +131,7 @@ Quant es cobra a Espanya i si el sou dona per a més o per a menys que abans. To
         period="poder adquisitiu del salari mitjà el {hitos_salario[0]?.anio_ult} · +{formatNumber(hitos_salario[0]?.nominal_vs2008, 0)} % en euros de cada any"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Salari del decil central"
@@ -139,7 +139,7 @@ Quant es cobra a Espanya i si el sou dona per a més o per a menys que abans. To
         formattedValue="{formatNumber(deciles_ult.find(d => d.decil === 5)?.salario_real, 0)} €/mes"
         period="el que cobra l'assalariat típic (decil 5 de l'EPA) el {deciles_ult[0]?.anio}, euros del {deciles_ult[0]?.anio_base}"
         source="INE / EPA"
-        sparklineData={deciles.filter(d => d.decil === 5).map(d => d.salario_real)}
+        sparklineData={deciles.filter(d => d.decil === 5).map(d => ({...d, y: d.salario_real}))}
     />
 </Grid>
 

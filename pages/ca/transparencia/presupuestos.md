@@ -1,7 +1,7 @@
 ---
 title: Pressupostos prorrogats
 description: "Quins anys Espanya ha tingut Pressupostos Generals de l'Estat aprovats a temps, quins van arribar tard i quins es van prorrogar, amb quants dies de retard i quin Govern els havia de presentar, des de 1978."
-i18n_origen: fd19bed34152
+i18n_origen: 1b5c090de484
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -133,7 +133,7 @@ Els Pressupostos Generals de l'Estat són la llei que fixa cada any quant pot ga
         formattedValue={situacionCa[resumen[0]?.situacion_actual] ?? resumen[0]?.situacion_actual}
         period="{formatNumber(racha[0]?.seguidos, 0)} exercicis seguits sense llei pròpia, des de {racha[0]?.desde} · {formatNumber(resumen[0]?.dias_actual, 0)} dies de pròrroga aquest any"
         source="BOE"
-        sparklineData={serie.map(d => d.dias_prorroga)}
+        sparklineData={serie.map(d => ({...d, y: d.dias_prorroga}))}
     />
     <KpiCard
         title="Últim pressupost aprovat a temps"

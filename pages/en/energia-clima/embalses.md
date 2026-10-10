@@ -1,7 +1,7 @@
 ---
 title: Water reserves and reservoirs
 description: Weekly status of Spain's reservoirs by river basin, compared with the previous year and with the average of the last ten years.
-i18n_origen: 428062b2d659
+i18n_origen: 868173fde4bb
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -59,7 +59,7 @@ Spain's reservoirs currently hold **{formatNumber(espana[0]?.volumen_hm3, 0)} hm
         unit=" pp"
         period="A year ago: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_anio}))}
     />
     <KpiCard
         title="Compared with the 10-year average"
@@ -68,7 +68,7 @@ Spain's reservoirs currently hold **{formatNumber(espana[0]?.volumen_hm3, 0)} hm
         unit=" pp"
         period="Average for the same week: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_media}))}
     />
 </Grid>
 

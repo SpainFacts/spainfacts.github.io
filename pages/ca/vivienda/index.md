@@ -3,7 +3,7 @@ title: Habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació, lloguer, compravendes i hipoteques per 1.000 habitants, obra nova i quants anys de salari costa una casa, per comunitat i província."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 0e532c3339dc
+i18n_origen: f97a78f90884
 ---
 
 <script>
@@ -109,7 +109,7 @@ Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se
         direction="neutral"
         source="Ministeri d'Habitatge"
         href="/ca/vivienda/precios"
-        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => d.euros_m2_real)}
+        sparklineData={precio.filter(d => d.euros_m2_real != null).map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Lloguer medià d'un pis"
@@ -121,7 +121,7 @@ Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se
         direction="neutral"
         source="Ministeri d'Habitatge (SERPAVI)"
         href="/ca/vivienda/alquiler"
-        sparklineData={alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Compravendes d'habitatges"
@@ -133,7 +133,7 @@ Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se
         direction="neutral"
         source="INE / ETDP"
         href="/ca/vivienda/compraventas"
-        sparklineData={mercado_mes.map(d => d.compraventas_12m_1000)}
+        sparklineData={mercado_mes.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Anys de salari per a 90 m²"
@@ -143,7 +143,7 @@ Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se
         direction="positive-down"
         source="Ministeri d'Habitatge / INE"
         href="/ca/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.anios_salario)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 

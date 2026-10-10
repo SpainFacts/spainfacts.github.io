@@ -483,7 +483,7 @@ Agricultura, ganadería y pesca: en qué es España **la primera de la Unión Eu
         period="campaña {aceite_kpi[0]?.campania} · {formatNumber(aceite_kpi[0]?.cuota_mundo, 1)} % del mundo (COI) · {formatNumber(aceite_kpi[0]?.prod_kt, 0)} miles de t"
         direction="neutral"
         source="Comisión Europea · COI"
-        sparklineData={aceite_es.map(d => d.cuota_ue_pct)}
+        sparklineData={aceite_es.map(d => ({...d, y: d.cuota_ue_pct}))}
     />
     <KpiCard
         title="Cítricos: cuota en la UE"
@@ -492,7 +492,7 @@ Agricultura, ganadería y pesca: en qué es España **la primera de la Unión Eu
         period="{kpi[0]?.citricos_anio} · 1.ª de la UE · {formatNumber(kpi[0]?.citricos_kt, 0)} miles de t"
         direction="neutral"
         source="Eurostat (apro_cpsh1)"
-        sparklineData={serie_citricos.map(d => d.cuota_pct)}
+        sparklineData={serie_citricos.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Carne de porcino: cuota en la UE"
@@ -504,7 +504,7 @@ Agricultura, ganadería y pesca: en qué es España **la primera de la Unión Eu
         changePeriod="vs {porcino_cambio[0]?.anio_ini}"
         direction="neutral"
         source="Eurostat (apro_mt_pann)"
-        sparklineData={serie_porcino.map(d => d.cuota_pct)}
+        sparklineData={serie_porcino.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Producción agraria por habitante"
@@ -513,7 +513,7 @@ Agricultura, ganadería y pesca: en qué es España **la primera de la Unión Eu
         period="{valor_resumen[0]?.anio}, euros de hoy · UE-27: {formatNumber(valor_resumen[0]?.ue, 0)} € · {formatNumber(valor_resumen[0]?.es_meur, 0)} millones de € en total"
         direction="positive-up"
         source="Eurostat (aact_eaa01)"
-        sparklineData={valor_es.map(d => d.produccion_eur_hab_real)}
+        sparklineData={valor_es.map(d => ({...d, y: d.produccion_eur_hab_real}))}
     />
 </Grid>
 

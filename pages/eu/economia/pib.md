@@ -1,7 +1,7 @@
 ---
 title: BPG eta hazkundea
 description: "Espainiako BPGaren bilakaera biztanleko eta inflazioa kenduta, hiruhileko hazkundea, eskariaren osagaiak eta EBrekiko alderaketa."
-i18n_origen: 0a70463d9329
+i18n_origen: e052747ef102
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -94,7 +94,7 @@ Barne-produktu gordinak ekonomiak ekoizten duen guztia neurtzen du. Herrialdea b
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="urtetik urterakoa, erreala, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
     />
     <KpiCard
         title="BPG biztanleko, urteko erritmoan"
@@ -110,7 +110,7 @@ Barne-produktu gordinak ekonomiak ekoizten duen guztia neurtzen du. Herrialdea b
         formattedValue={formatNumber(pib_hab.filter(d => d.indice_ue != null).slice(-1)[0]?.indice_ue, 1)}
         period="BPG biztanleko erosahalmen-parekotasunean, EB = 100"
         source="Eurostat"
-        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => d.indice_ue)}
+        sparklineData={pib_hab.filter(d => d.indice_ue != null).map(d => ({...d, y: d.indice_ue}))}
     />
 </Grid>
 

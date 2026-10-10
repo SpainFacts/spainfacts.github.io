@@ -102,10 +102,28 @@
         return Number.isFinite(n) ? n : null;
     }
 
+    const vacio = (v) => v === null || v === undefined || v === "";
+    const CLAVE_FECHA = /^(fecha|date|periodo|period|mes|month|trimestre|anio|ano|año|year)(_|$)/i;
+
+    // Fecha del punto: x/fecha/periodo si vienen; si no, anio (+ mes o trimestre numéricos);
+    // si no, cualquier columna con nombre de fecha o con un Date. Así las filas completas
+    // ({...d, y: ...}) siempre etiquetan el eje con fechas cortas.
     function fechaDeDato(d) {
         if (!d || typeof d !== "object") return "";
-        const raw = d.x ?? d.fecha ?? d.date ?? d.periodo ?? d.mes ?? d.anio ?? d.year;
-        return raw === null || raw === undefined || raw === "" ? "" : raw;
+        for (const clave of ["x", "fecha", "date", "periodo"]) {
+            if (!vacio(d[clave])) return d[clave];
+        }
+        const anio = d.anio ?? d.year;
+        if (!vacio(anio)) {
+            if (/^[1-4]$/.test(String(d.trimestre ?? ""))) return `${anio}-T${d.trimestre}`;
+            if (/^\d{1,2}$/.test(String(d.mes ?? "")) && Number(d.mes) >= 1 && Number(d.mes) <= 12) return `${anio}-${String(d.mes).padStart(2, "0")}`;
+            return anio;
+        }
+        if (!vacio(d.mes) && !/^\d{1,2}$/.test(String(d.mes))) return d.mes;
+        for (const [clave, v] of Object.entries(d)) {
+            if (v instanceof Date || (CLAVE_FECHA.test(clave) && !vacio(v) && descomponerFecha(v))) return v;
+        }
+        return "";
     }
 
     function descomponerFecha(raw) {
@@ -177,7 +195,8 @@
         ? []
         : sparklineData
               .map((d, i) => {
-                  const raw = d == null ? null : typeof d === "number" || typeof d === "string" ? d : (d.y ?? d.valor ?? d.value ?? null);
+                  // Con «y» presente (filas {...d, y: ...}) manda «y» aunque sea null: no cae a otra columna.
+                  const raw = d == null ? null : typeof d === "number" || typeof d === "string" ? d : ("y" in d ? d.y : (d.valor ?? d.value ?? null));
                   return { raw: valorNumerico(raw), fecha: fechaDeDato(d), indice: i };
               })
               .filter((d) => d.raw !== null);

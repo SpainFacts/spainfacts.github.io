@@ -1,7 +1,7 @@
 ---
 title: Esforzo para comprar ou alugar
 description: "Cantos anos de salario bruto custa unha vivenda de 90 m² en España e en cada comunidade, e que parte do soldo se vai no aluguer, con datos do Ministerio de Vivenda e do INE."
-i18n_origen: 720363cb6517
+i18n_origen: 45b1ea729603
 ---
 
 <script>
@@ -82,7 +82,7 @@ Canto pesa a vivenda no soldo. Para comprar: **cantos anos de salario bruto ínt
         period="España, {hitos[0]?.anio_ult} · máximo: {formatNumber(hitos[0]?.anios_max, 1)} en {hitos[0]?.anio_max}"
         direction="positive-down"
         source="Ministerio de Vivenda / INE"
-        sparklineData={compra.map(d => d.anios_salario)}
+        sparklineData={compra.map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Aluguer sobre o salario"
@@ -91,7 +91,7 @@ Canto pesa a vivenda no soldo. Para comprar: **cantos anos de salario bruto ínt
         period="do salario bruto medio, {alquiler.slice(-1)[0]?.anio} · {formatNumber(alquiler.slice(-1)[0]?.alquiler_mes_mediana, 0)} € ao mes"
         direction="positive-down"
         source="Ministerio de Vivenda / INE"
-        sparklineData={alquiler.map(d => d.pct_alquiler)}
+        sparklineData={alquiler.map(d => ({...d, y: d.pct_alquiler}))}
     />
     <KpiCard
         title="Onde máis custa comprar"
@@ -100,7 +100,7 @@ Canto pesa a vivenda no soldo. Para comprar: **cantos anos de salario bruto ínt
         period="{ccaa[0]?.comunidad}, {ccaa[0]?.anio} · onde menos: {ccaa.slice(-1)[0]?.comunidad}, {formatNumber(ccaa.slice(-1)[0]?.anios_salario, 1)}"
         direction="positive-down"
         source="Ministerio de Vivenda / INE"
-        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => d.anios_salario)}
+        sparklineData={ccaa_serie.filter(d => d.nombre === ccaa[0]?.comunidad).map(d => ({...d, y: d.anios_salario}))}
     />
     <KpiCard
         title="Salario bruto medio"
@@ -108,7 +108,7 @@ Canto pesa a vivenda no soldo. Para comprar: **cantos anos de salario bruto ínt
         formattedValue="{formatNumber(hitos[0]?.salario_ult, 0)} € ao ano"
         period="España, {hitos[0]?.anio_ult} · un piso de 90 m² táxase en {formatNumber(hitos[0]?.precio_ult, 0)} €"
         source="INE / ETCL"
-        sparklineData={compra.map(d => d.salario_anual_real)}
+        sparklineData={compra.map(d => ({...d, y: d.salario_anual_real}))}
     />
 </Grid>
 

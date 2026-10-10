@@ -1,7 +1,7 @@
 ---
 description: "Where public money comes from: taxes and social contributions in Spain, per inhabitant, adjusted for inflation and as a percentage of GDP."
 title: Public Revenue and Tax Collection
-i18n_origen: 41be22719404
+i18n_origen: f4370ea6ff06
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -118,7 +118,7 @@ ORDER BY anio
         period="€{formatNumber(resumen_tipos[0]?.cot_mio / 1000, 1)}bn in total · {formatNumber(resumen_tipos[0]?.cot_pct, 1)}% of revenue · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -129,7 +129,7 @@ ORDER BY anio
         period="€{formatNumber(resumen_tipos[0]?.irpf_mio / 1000, 1)}bn in total · {formatNumber(resumen_tipos[0]?.irpf_pct, 1)}% of revenue · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -140,7 +140,7 @@ ORDER BY anio
         period="€{formatNumber(resumen_tipos[0]?.iva_mio / 1000, 1)}bn in total · {formatNumber(resumen_tipos[0]?.iva_pct, 1)}% of revenue · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => ({...d, y: d.eur_hab_real}))}
     />
 </Grid>
 

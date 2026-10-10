@@ -1,7 +1,7 @@
 ---
 title: Nork zer jasotzen duen
 description: "Komunikabideen bilatzailea: komunikabide bakoitzak (OKDiario, Libertad Digital, El País, SER, La Vanguardia...) administrazio guztietatik jaso duen diru publiko guztia, bidearen (erakunde-publizitatea, kontratuak eta diru-laguntzak), urtearen eta ordaintzen duen administrazioaren arabera, gaurko euroetan."
-i18n_origen: 4e52a4100892
+i18n_origen: 42aa55cbac73
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -210,7 +210,7 @@ Aukeratu komunikabide bat, eta datua argitaratzen duten administrazio publikoeta
         period={`${sel[0].anio_min}-${sel[0].anio_max} · ${formatNumber(sel[0].n_pagos, 0)} ordainketa · ${formatCompact(sel[0].total_eur_nominal, 2)} € korronte`}
         source="SpainFacts, CPCI, erkidego, udal, PLACSP eta BDNSren datuekin"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.total)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.total}))}
     />
     <KpiCard
         title="Erakunde-publizitatea"
@@ -220,7 +220,7 @@ Aukeratu komunikabide bat, eta datua argitaratzen duten administrazio publikoeta
         period={`Estatua: ${formatCompact(sel[0].estado_eur_real, 2)} € · erkidegoak eta udalak: ${formatCompact(sel[0].territorial_eur_real, 2)} €`}
         source="CPCI (2025), erkidegoak eta udalak"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.publicidad)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.publicidad}))}
     />
     <KpiCard
         title="Kontratuak eta diru-laguntzak"
@@ -230,7 +230,7 @@ Aukeratu komunikabide bat, eta datua argitaratzen duten administrazio publikoeta
         period={`Kontratuak: ${formatCompact(sel[0].contratos_eur_real, 2)} € · diru-laguntzak: ${formatCompact(sel[0].subvenciones_eur_real, 2)} €`}
         source="PLACSP eta BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.contratos_subv)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.contratos_subv}))}
     />
     <KpiCard
         title="Ordaintzen duten administrazioak"
@@ -240,7 +240,7 @@ Aukeratu komunikabide bat, eta datua argitaratzen duten administrazio publikoeta
         period={`${formatNumber(sel[0].n_gob, 0)} administraziotakoak (Estatua, erkidegoak, udalak...)`}
         source="SpainFacts"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.n_admin)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.n_admin}))}
     />
 </div>
 

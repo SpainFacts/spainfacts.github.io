@@ -1,7 +1,7 @@
 ---
 title: Obra nova
 description: "Habitatges lliures que es comencen i s'acaben cada any a Espanya per 1.000 habitants des del 1996, per comunitat i província, amb dades del Ministeri d'Habitatge."
-i18n_origen: 6b1ad71c87ca
+i18n_origen: 442b873cd088
 ---
 
 <script>
@@ -85,7 +85,7 @@ Quants habitatges es construeixen a Espanya. Són **habitatges lliures** (sense 
         formattedValue="{formatNumber(hitos[0]?.term_ult, 2)} per 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.term_total, 0)} habitatges lliures"
         source="Ministeri d'Habitatge"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Habitatges iniciats"
@@ -93,7 +93,7 @@ Quants habitatges es construeixen a Espanya. Són **habitatges lliures** (sense 
         formattedValue="{formatNumber(hitos[0]?.ini_ult, 2)} per 1.000 hab."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.ini_total, 0)} habitatges lliures"
         source="Ministeri d'Habitatge"
-        sparklineData={espana.map(d => d.iniciadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.iniciadas_1000}))}
     />
     <KpiCard
         title="Respecte al màxim"
@@ -101,7 +101,7 @@ Quants habitatges es construeixen a Espanya. Són **habitatges lliures** (sense 
         formattedValue="{formatNumber(hitos[0]?.fraccion_max / 0.01, 0)} %"
         period="dels habitatges acabats per habitant el {hitos[0]?.anio_term_max} ({formatNumber(hitos[0]?.term_max, 1)} per 1.000 hab.)"
         source="Ministeri d'Habitatge"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Respecte a finals dels 90"
@@ -109,7 +109,7 @@ Quants habitatges es construeixen a Espanya. Són **habitatges lliures** (sense 
         formattedValue="{formatNumber(hitos[0]?.media_9600, 1)} per 1.000 hab."
         period="habitatges acabats l'any de mitjana el 1996-2000"
         source="Ministeri d'Habitatge"
-        sparklineData={espana.filter(d => d.anio <= 2000).map(d => d.terminadas_1000)}
+        sparklineData={espana.filter(d => d.anio <= 2000).map(d => ({...d, y: d.terminadas_1000}))}
     />
 </Grid>
 

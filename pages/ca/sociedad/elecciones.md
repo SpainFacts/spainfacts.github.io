@@ -3,7 +3,7 @@ title: Eleccions
 description: "Resultats de les eleccions generals des de 1977, europees i municipals: participació, vot per partit i per bloc, fragmentació, vots per escó i guanyador a cada província i municipi, amb les dades oficials del Ministeri de l'Interior."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 855cde6e0399
+i18n_origen: c483ec970932
 ---
 
 <script>
@@ -76,7 +76,7 @@ Quanta gent vota, a qui i com es reparteixen els escons: totes les eleccions gen
         formattedValue="{resumen[0]?.ganador_siglas} · {formatNumber(resumen[0]?.ganador_pct, 1)} %"
         period="{formatNumber(resumen[0]?.ganador_escanos, 0)} de 350 escons · segona: {resumen[0]?.segundo_siglas} ({formatNumber(resumen[0]?.segundo_pct, 1)} %)"
         source="Ministeri de l'Interior"
-        sparklineData={generales.map(d => ({valor: d.ganador_pct}))}
+        sparklineData={generales.map(d => ({...d, valor: d.ganador_pct}))}
     />
     <KpiCard
         title="Nombre efectiu de partits"
@@ -87,7 +87,7 @@ Quanta gent vota, a qui i com es reparteixen els escons: totes les eleccions gen
         changeUnit=""
         changePeriod="vs. {mesCa(resumen[0]?.etiqueta_anterior)}"
         source="Càlcul propi"
-        sparklineData={generales.map(d => ({valor: d.nep_votos}))}
+        sparklineData={generales.map(d => ({...d, valor: d.nep_votos}))}
     />
     <KpiCard
         title="Vot a les dues més votades"
@@ -98,7 +98,7 @@ Quanta gent vota, a qui i com es reparteixen els escons: totes les eleccions gen
         changeUnit="p.p."
         changePeriod="vs. {mesCa(resumen[0]?.etiqueta_anterior)}"
         source="Ministeri de l'Interior"
-        sparklineData={generales.map(d => ({valor: d.dos_primeros}))}
+        sparklineData={generales.map(d => ({...d, valor: d.dos_primeros}))}
     />
 </Grid>
 

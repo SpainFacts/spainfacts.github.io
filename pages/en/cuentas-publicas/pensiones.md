@@ -1,7 +1,7 @@
 ---
 title: Pensions
 description: "Contributory pensions in Spain: average pension adjusted for inflation, contributors per pension, pension spending as a % of GDP compared with the EU, pensions per inhabitant and by region and province."
-i18n_origen: 3f8817a42d1f
+i18n_origen: 7c0311a74845
 ---
 
 <script>
@@ -228,7 +228,7 @@ How much pensioners in Spain receive, how many workers contribute for each pensi
         changePeriod="real, vs a year earlier"
         direction="positive-up"
         source="Social Security"
-        sparklineData={mensual_real.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={mensual_real.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Contributors per pension"
@@ -237,7 +237,7 @@ How much pensioners in Spain receive, how many workers contribute for each pensi
         period="{mesEn(mensual_ratio.slice(-1)[0]?.mes_texto)} · {formatNumber(mensual_ratio.slice(-1)[0]?.afiliados / 1e6, 1)} million contributors and {formatNumber(mensual_ratio.slice(-1)[0]?.pensiones / 1e6, 1)} million pensions"
         direction="positive-up"
         source="Social Security"
-        sparklineData={mensual_ratio.map(d => d.afiliados_por_pension)}
+        sparklineData={mensual_ratio.map(d => ({...d, y: d.afiliados_por_pension}))}
     />
     <KpiCard
         title="Pension spending"
@@ -246,7 +246,7 @@ How much pensioners in Spain receive, how many workers contribute for each pensi
         period="{gasto_ult[0]?.anio} · old age and survivors, all levels of government · EU-27 average: {formatNumber(gasto_ult[0]?.ue, 1)}%"
         direction="positive-down"
         source="Eurostat (COFOG)"
-        sparklineData={gasto_es.map(d => d.gasto_vejez_supervivientes_pib)}
+        sparklineData={gasto_es.map(d => ({...d, y: d.gasto_vejez_supervivientes_pib}))}
     />
     <KpiCard
         title="Pensions per 1,000 inhabitants"
@@ -254,7 +254,7 @@ How much pensioners in Spain receive, how many workers contribute for each pensi
         formattedValue={formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_1000_hab, 0)}
         period="{anual_completo.slice(-1)[0]?.anio_i}, annual average · {formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_100_mayores, 0)} per 100 people aged 65 or over"
         source="Social Security / INE"
-        sparklineData={anual_completo.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
 </Grid>
 

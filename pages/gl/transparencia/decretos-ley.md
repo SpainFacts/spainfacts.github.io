@@ -1,5 +1,5 @@
 ---
-i18n_origen: 4d28d421b631
+i18n_origen: 2922ec7a33e0
 title: Decretos lei
 description: "Cantos reais decretos lei aproba cada Goberno de España desde 1977, que parte das normas con rango de lei se fan por decreto, cantos convalida ou derroga o Congreso e como se compara cada partido segundo o tempo que gobernou."
 og:
@@ -165,7 +165,7 @@ O **real decreto lei** é unha norma con rango de lei que aproba o Goberno, non 
         formattedValue={formatNumber(resumen[0]?.rdl_ultimo, 0)}
         period="media desde 1979: {formatNumber(resumen[0]?.media_rdl, 1)} ao ano · {formatNumber(resumen[0]?.rdl_en_curso, 0)} no que vai de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.decretos_ley)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.decretos_ley}))}
     />
     <KpiCard
         title="Parte das normas con rango de lei"
@@ -173,7 +173,7 @@ O **real decreto lei** é unha norma con rango de lei que aproba o Goberno, non 
         formattedValue="{formatNumber(resumen[0]?.pct_ultimo, 0)} %"
         period="decretos lei sobre decretos lei + leis en {resumen[0]?.ultimo_anio} · {formatNumber(resumen[0]?.pct_historico, 0)} % desde 1979"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.pct_rdl)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_rdl}))}
     />
     <KpiCard
         title="Ritmo do Goberno actual"

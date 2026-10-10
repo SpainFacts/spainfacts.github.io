@@ -1,7 +1,7 @@
 ---
 title: Retiment de comptes dels ajuntaments
 description: "Administracions que no compleixen les seves obligacions legals de publicar o trametre informació: quines són, on són i qui governava quan vencia el termini."
-i18n_origen: 899966847983
+i18n_origen: 6bcb4f6a8ddd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -78,7 +78,7 @@ Cada ajuntament ha de trametre al Ministeri d'Hisenda la liquidació del seu pre
         formattedValue={formatNumber(resumen[0]?.incumplen, 0)}
         period="{formatNumber(resumen[0]?.incumplen / resumen[0]?.total / 0.01, 1)} % de {formatNumber(resumen[0]?.total, 0)} ajuntaments"
         source="Ministeri d'Hisenda (CONPREL)"
-        sparklineData={liq_serie.map(d => d.incumplen)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.incumplen}))}
     />
     <KpiCard
         title="Veïns afectats"
@@ -86,7 +86,7 @@ Cada ajuntament ha de trametre al Ministeri d'Hisenda la liquidació del seu pre
         formattedValue={formatNumber(resumen[0]?.afectados_por_1000, 1)}
         unit="per cada 1.000 hab."
         period="{formatNumber(resumen[0]?.poblacion_afectada, 0)} veïns en total; {formatNumber(resumen[0]?.grandes, 0)} d'aquests ajuntaments tenen més de 20.000 habitants"
-        sparklineData={liq_serie.map(d => d.afectados_por_1000)}
+        sparklineData={liq_serie.map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Tres anys o més seguits"
@@ -364,7 +364,7 @@ El **Compte General** recull tots els comptes de l'ajuntament (pressupost, balan
         formattedValue={formatNumber(tcu_resumen[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen[0]?.no_rendida / tcu_resumen[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen[0]?.total, 0)} ajuntaments; no consta com a retut a {tcu_cobertura[0]?.extraccion}"
         source="Tribunal de Comptes (rendiciondecuentas.es)"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'cuenta_general').map(d => ({...d, y: d.no_rendida}))}
     />
     <KpiCard
         title="Enviat dins del termini"
@@ -377,7 +377,7 @@ El **Compte General** recull tots els comptes de l'ajuntament (pressupost, balan
         value={tcu_resumen_ci[0]?.no_rendida}
         formattedValue={formatNumber(tcu_resumen_ci[0]?.no_rendida, 0)}
         period="{formatNumber(tcu_resumen_ci[0]?.no_rendida / tcu_resumen_ci[0]?.total / 0.01, 1)} % de {formatNumber(tcu_resumen_ci[0]?.total, 0)} ajuntaments (termini: 30/04/{tcu_ultimo[0]?.ci + 1})"
-        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => d.no_rendida)}
+        sparklineData={tcu_serie.filter(d => d.obligacion === 'control_interno').map(d => ({...d, y: d.no_rendida}))}
     />
 </Grid>
 
@@ -591,7 +591,7 @@ ORDER BY m.periodo
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_mes, 0)}
         period="{formatNumber(pie_resumen[0]?.retenidos_liquidacion, 0)} d'ells per no trametre la liquidació"
         source="Ministeri d'Hisenda (OVEELL)"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_mes)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_mes}))}
     />
     <KpiCard
         title="Retingut els últims 12 mesos"
@@ -600,14 +600,14 @@ ORDER BY m.periodo
         unit="M€ de {base_deflactor[0]?.anio_base}"
         period="participació en tributs de l'Estat no transferida mentre durava l'incompliment ({formatNumber(pie_resumen[0]?.eur_12m / 1e6, 1)} M€ corrents)"
         source="Lliuraments a compte mensuals"
-        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => d.eur_12m_real)}
+        sparklineData={pie_serie_12m.filter(d => d.eur_12m_real != null).map(d => ({...d, y: d.eur_12m_real}))}
     />
     <KpiCard
         title="Ajuntaments retinguts l'últim any"
         value={pie_resumen[0]?.retenidos_12m}
         formattedValue={formatNumber(pie_resumen[0]?.retenidos_12m, 0)}
         period="almenys un mes en els últims 12"
-        sparklineData={pie_serie_12m.map(d => d.retenidos_12m)}
+        sparklineData={pie_serie_12m.map(d => ({...d, y: d.retenidos_12m}))}
     />
 </Grid>
 
@@ -855,7 +855,7 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.no_comunican, 0)}
         period="{formatNumber(pmp_resumen[0]?.no_comunican / pmp_resumen[0]?.total / 0.01, 1)} % de {formatNumber(pmp_resumen[0]?.total, 0)} ajuntaments"
         source="Ministeri d'Hisenda (PMP_NET)"
-        sparklineData={pmp_serie.map(d => d.no_comunican)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.no_comunican}))}
     />
     <KpiCard
         title="Veïns afectats"
@@ -863,14 +863,14 @@ ORDER BY fecha
         formattedValue={formatNumber(pmp_resumen[0]?.afectados_por_1000, 1)}
         unit="per cada 1.000 hab."
         period="{formatNumber(pmp_resumen[0]?.poblacion_afectada, 0)} veïns en total; {formatNumber(pmp_resumen[0]?.mas_5000, 0)} d'aquests ajuntaments tenen més de 5.000 habitants"
-        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => d.afectados_por_1000)}
+        sparklineData={pmp_serie.filter(d => d.afectados_por_1000 != null).map(d => ({...d, y: d.afectados_por_1000}))}
     />
     <KpiCard
         title="Paguen en més de 30 dies"
         value={pmp_resumen[0]?.supera_30}
         formattedValue={formatNumber(pmp_resumen[0]?.supera_30, 0)}
         period="{formatNumber(pmp_resumen[0]?.supera_30 / pmp_resumen[0]?.comunican / 0.01, 1)} % dels qui el comuniquen ({formatNumber(pmp_resumen[0]?.poblacion_supera_30, 0)} hab.)"
-        sparklineData={pmp_serie.map(d => d.supera_30)}
+        sparklineData={pmp_serie.map(d => ({...d, y: d.supera_30}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 5b934493d7e4
+i18n_origen: fad225ccb8b9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,6 +9,7 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -439,7 +440,9 @@ ORDER BY cod_distrito
 SELECT
     municipio, paro_registrado, paro_registrado_hace_1_anio, por_100_hab, variacion_anual_pct, oculto,
     100.0 * paro_registrado_hace_1_anio / poblacion AS por_100_hab_hace_1_anio,
-    strftime(mes, '%m/%Y') AS mes_txt
+    strftime(mes, '%m/%Y') AS mes_txt,
+    strftime(mes, '%Y-%m') AS mes_iso,
+    strftime(mes - INTERVAL 1 YEAR, '%Y-%m') AS mes_iso_hace_1_anio
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
@@ -458,7 +461,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Household Income Atlas"
         href="/en/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_persona_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Net income per household"
@@ -468,7 +471,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Household Income Atlas"
         href="/en/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_hogar_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_hogar_real}))}
     />
 {/if}
 {#if paro_mun.length > 0 && !paro_mun[0]?.oculto}
@@ -480,7 +483,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-down"
         source="SEPE"
         href="/en/economia/paro"
-        sparklineData={[paro_mun[0]?.por_100_hab_hace_1_anio, paro_mun[0]?.por_100_hab]}
+        sparklineData={[{x: paro_mun[0]?.mes_iso_hace_1_anio, y: paro_mun[0]?.por_100_hab_hace_1_anio}, {x: paro_mun[0]?.mes_iso, y: paro_mun[0]?.por_100_hab}]}
     />
 {/if}
 </Grid>
@@ -510,6 +513,165 @@ WHERE cod_municipio = '${inputs.municipio}'
 {/if}
 
 <p class="text-xs text-gray-500">Income: INE Household Income Distribution Atlas, based on tax data. Unemployment: jobseekers registered as unemployed with SEPE on the last day of the month, relative to the municipality's total population (there is no 16-to-64 population figure by municipality).</p>
+
+{/if}
+
+```sql barrios_renta
+SELECT cod_mun, cod_seccion, seccion, renta_persona_real, renta_hogar_real,
+    CASE WHEN renta_persona_tope THEN '≥ ' WHEN renta_persona_suelo THEN '≤ ' ELSE '' END AS renta_persona_marca,
+    CASE WHEN renta_hogar_tope THEN '≥ ' WHEN renta_hogar_suelo THEN '≤ ' ELSE '' END AS renta_hogar_marca,
+    CAST(anio AS INTEGER) AS anio, CAST(anio_base AS INTEGER) AS anio_base, CAST(geo_anio AS INTEGER) AS geo_anio
+FROM mother.renta_secciones
+WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
+```
+
+```sql barrios_elecciones
+SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+```
+
+```sql barrios_voto
+SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+    participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
+    pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
+    CASE '${inputs.barrio_capa}'
+        WHEN 'izquierda' THEN pct_izquierda WHEN 'derecha' THEN pct_derecha
+        WHEN 'centro' THEN pct_centro WHEN 'nacionalistas' THEN pct_nacionalistas
+        WHEN 'psoe' THEN pct_psoe WHEN 'pp' THEN pct_pp WHEN 'vox' THEN pct_vox
+        WHEN 'ips' THEN pct_iu_podemos_sumar WHEN 'participacion' THEN participacion
+    END AS valor
+FROM mother.elecciones_secciones
+WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+```
+
+```sql barrios_quintiles
+WITH s AS (
+    SELECT v.*, ntile(5) OVER (ORDER BY r.renta_persona_real) AS quintil
+    FROM ${barrios_voto} v
+    JOIN ${barrios_renta} r USING (cod_seccion)
+)
+SELECT quintil,
+    CASE quintil WHEN 1 THEN '20 % más pobre' WHEN 2 THEN '2.º' WHEN 3 THEN '3.º' WHEN 4 THEN '4.º' ELSE '20 % más rico' END AS grupo,
+    bloque, sum(p * votantes) / sum(votantes) AS pct
+FROM (
+    SELECT quintil, votantes, unnest(['Izquierda', 'Derecha', 'Centro', 'Nacionalistas y regionalistas']) AS bloque,
+        unnest([pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas]) AS p
+    FROM s
+)
+GROUP BY quintil, grupo, bloque
+HAVING (SELECT count(*) FROM s) >= 10
+QUALIFY max(sum(p * votantes) / sum(votantes)) OVER (PARTITION BY bloque) >= 1
+ORDER BY quintil
+```
+
+{#if barrios_renta.length > 1 || barrios_elecciones.length > 0}
+
+## Neighbourhood by neighbourhood
+
+Each patch is a **census section**, the smallest unit of official statistics: some 1,000-2,500 people who vote at the same polling station. Hover over it to see its figure.
+
+{#if barrios_renta.length > 1}
+
+<MapaEspana
+    data={barrios_renta}
+    geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=renta_persona_real
+    valueFmt='#,##0" €"'
+    colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Income per person', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Per household', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
+    height=520
+    title="Average net income per person in {barrios_renta[0]?.anio} ({barrios_renta[0]?.anio_base} euros)"
+/>
+
+{/if}
+
+{#if barrios_elecciones.length > 0}
+
+<ButtonGroup name=barrio_eleccion title="Election">
+    {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="General 2023" value="02" default />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Local 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="European 2024" value="07" />{/if}
+</ButtonGroup>
+
+<ButtonGroup name=barrio_capa title="Show">
+    <ButtonGroupItem valueLabel="Winner" value="ganador" default />
+    <ButtonGroupItem valueLabel="Left" value="izquierda" />
+    <ButtonGroupItem valueLabel="Right" value="derecha" />
+    <ButtonGroupItem valueLabel="Centre" value="centro" />
+    <ButtonGroupItem valueLabel="Nationalists" value="nacionalistas" />
+    <ButtonGroupItem valueLabel="PSOE" value="psoe" />
+    <ButtonGroupItem valueLabel="PP" value="pp" />
+    <ButtonGroupItem valueLabel="Vox" value="vox" />
+    <ButtonGroupItem valueLabel="IU, Podemos and Sumar" value="ips" />
+    <ButtonGroupItem valueLabel="Turnout" value="participacion" />
+</ButtonGroup>
+
+{#if barrios_voto.length > 0}
+{#if inputs.barrio_capa === 'ganador'}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=ganador_familia
+    colorCol=ganador_color
+    intensidad=ganador_pct
+    legendType=categorical
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Winner'}, {id: 'ganador_pct', title: '% of valid votes', fmt: '0.0"%"'}, {id: 'participacion', title: 'Turnout', fmt: '0.0"%"'}]}
+    height=520
+    title="Most voted list in each section · {barrios_voto[0]?.eleccion}"
+/>
+
+
+<p class="text-xs text-gray-500">The stronger the colour, the higher the share of the most voted list.</p>
+
+{:else}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=valor
+    valueFmt='0.0"%"'
+    colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Winner'}]}
+    height=520
+    title="{inputs.barrio_capa === 'participacion' ? 'Turnout' : ({izquierda: 'Left', derecha: 'Right', centro: 'Centre', nacionalistas: 'Nationalists and regionalists', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos and Sumar'})[inputs.barrio_capa] + ', % of valid votes'} in each section · {barrios_voto[0]?.eleccion}"
+/>
+
+{/if}
+{:else}
+
+<p class="text-sm text-gray-500">There are no section results for this election in this municipality (local election results are only published for municipalities of over 250 inhabitants with closed lists).</p>
+
+{/if}
+
+{#if barrios_quintiles.length > 0}
+
+<BarChart
+    data={barrios_quintiles}
+    x=grupo
+    y=pct
+    series=bloque
+    type=grouped
+    sort=false
+    yFmt='0"%"'
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
+    title="Do rich and poor neighbourhoods vote differently? Vote by bloc according to the income of the section · {barrios_voto[0]?.eleccion}"
+/>
+
+<p class="text-xs text-gray-500">The municipality's sections are ranked by income per person and split into five groups with the same number of sections; each group's vote is the average of its sections weighted by voters.</p>
+
+{/if}
+{/if}
+
+<p class="text-xs text-gray-500">Census sections: INE boundaries for the year of each figure. Income: INE Household Income Distribution Atlas, which caps the richest and poorest sections at a common maximum and minimum (hence the «≥» or «≤» in front). Votes: Ministry of the Interior results by polling station added up by section, excluding the vote of residents abroad. Vote percentages are of valid votes (lists and blank). Sections are split or renumbered when their population changes, so some may appear grey if there is no figure for that year.</p>
 
 {/if}
 
@@ -661,7 +823,7 @@ ORDER BY fecha
     <KpiCard title="Most voted in general elections" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)}%"
         period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Ministry of the Interior"
-        sparklineData={elec_mun_gen.map(d => ({valor: d.ganador_pct}))} />
+        sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
 <LineChart data={elec_mun_bloques} x=fecha y=pct series=bloque yFmt='0"%"' markers=true

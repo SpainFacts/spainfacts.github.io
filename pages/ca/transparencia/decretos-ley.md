@@ -1,7 +1,7 @@
 ---
 title: Decrets llei
 description: "Quants reials decrets llei aprova cada Govern d'Espanya des de 1977, quina part de les normes amb rang de llei es fan per decret, quants en convalida o en deroga el Congrés i com es compara cada partit segons el temps que ha governat."
-i18n_origen: 4d28d421b631
+i18n_origen: 2922ec7a33e0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -165,7 +165,7 @@ El **reial decret llei** és una norma amb rang de llei que aprova el Govern, no
         formattedValue={formatNumber(resumen[0]?.rdl_ultimo, 0)}
         period="mitjana des de 1979: {formatNumber(resumen[0]?.media_rdl, 1)} l'any · {formatNumber(resumen[0]?.rdl_en_curso, 0)} en el que va de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.decretos_ley)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.decretos_ley}))}
     />
     <KpiCard
         title="Part de les normes amb rang de llei"
@@ -173,7 +173,7 @@ El **reial decret llei** és una norma amb rang de llei que aprova el Govern, no
         formattedValue="{formatNumber(resumen[0]?.pct_ultimo, 0)} %"
         period="decrets llei sobre decrets llei + lleis el {resumen[0]?.ultimo_anio} · {formatNumber(resumen[0]?.pct_historico, 0)} % des de 1979"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.pct_rdl)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pct_rdl}))}
     />
     <KpiCard
         title="Ritme del Govern actual"

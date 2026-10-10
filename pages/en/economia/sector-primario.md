@@ -1,7 +1,7 @@
 ---
 title: Primary sector
 description: "Where Spain is a powerhouse on land and at sea: EU share and rank in olive oil, citrus, fruit and vegetables, wine, pigs, sheep, fishing and aquaculture, value of agricultural output per inhabitant in real euros and weight of the primary sector by region and province."
-i18n_origen: f1fe3023279d
+i18n_origen: b0106b55afc7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -487,7 +487,7 @@ Agriculture, livestock and fishing: where Spain is **number one in the European 
         period="{aceite_kpi[0]?.campania} season · {formatNumber(aceite_kpi[0]?.cuota_mundo, 1)} % of the world (IOC) · {formatNumber(aceite_kpi[0]?.prod_kt, 0)} thousand t"
         direction="neutral"
         source="European Commission · IOC"
-        sparklineData={aceite_es.map(d => d.cuota_ue_pct)}
+        sparklineData={aceite_es.map(d => ({...d, y: d.cuota_ue_pct}))}
     />
     <KpiCard
         title="Citrus fruit: EU share"
@@ -496,7 +496,7 @@ Agriculture, livestock and fishing: where Spain is **number one in the European 
         period="{kpi[0]?.citricos_anio} · 1st in the EU · {formatNumber(kpi[0]?.citricos_kt, 0)} thousand t"
         direction="neutral"
         source="Eurostat (apro_cpsh1)"
-        sparklineData={serie_citricos.map(d => d.cuota_pct)}
+        sparklineData={serie_citricos.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Pigmeat: EU share"
@@ -508,7 +508,7 @@ Agriculture, livestock and fishing: where Spain is **number one in the European 
         changePeriod="vs {porcino_cambio[0]?.anio_ini}"
         direction="neutral"
         source="Eurostat (apro_mt_pann)"
-        sparklineData={serie_porcino.map(d => d.cuota_pct)}
+        sparklineData={serie_porcino.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Agricultural output per inhabitant"
@@ -517,7 +517,7 @@ Agriculture, livestock and fishing: where Spain is **number one in the European 
         period="{valor_resumen[0]?.anio}, today's euros · EU-27: {formatNumber(valor_resumen[0]?.ue, 0)} € · {formatNumber(valor_resumen[0]?.es_meur, 0)} million € in total"
         direction="positive-up"
         source="Eurostat (aact_eaa01)"
-        sparklineData={valor_es.map(d => d.produccion_eur_hab_real)}
+        sparklineData={valor_es.map(d => ({...d, y: d.produccion_eur_hab_real}))}
     />
 </Grid>
 

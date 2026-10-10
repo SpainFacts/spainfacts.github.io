@@ -1,7 +1,7 @@
 ---
 title: Alokairuko etxebizitza publikoa
 description: "Zenbat alokairuko etxebizitza publiko dagoen Espainian biztanleko eta etxeen %an, erkidego, probintzia eta udalerriaren arabera, Herbehereekin, Austriarekin, Danimarkarekin, Frantziarekin eta Europako batez bestekoarekin alderatuta, eta gobernatzen zuen alderdiaren arabera."
-i18n_origen: a5388d75d815
+i18n_origen: 911f5f63d748
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -218,7 +218,7 @@ Administrazioen zenbat etxebizitza alokatzen diren merkatuko prezioen azpitik ze
         changePeriod="2019arekin alderatuta"
         direction="neutral"
         source="Etxebizitza Ministerioa (etxebizitza sozialari buruzko inkesta)"
-        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => d.parque_autonomico_1000hab)}
+        sparklineData={espana.filter(d => d.parque_autonomico_1000hab != null).map(d => ({...d, y: d.parque_autonomico_1000hab}))}
     />
     <KpiCard
         title="Merkatuaren azpiko alokairua duten etxeak"
@@ -227,7 +227,7 @@ Administrazioen zenbat etxebizitza alokatzen diren merkatuko prezioen azpitik ze
         period="etxeen gainean, {resumen[0]?.ecv_anio} · alokairu pribatu murriztuak barne"
         direction="neutral"
         source="INE (Bizi Baldintzei buruzko Inkesta)"
-        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => d.ecv_pct_alquiler_inferior)}
+        sparklineData={espana.filter(d => d.ecv_pct_alquiler_inferior != null).map(d => ({...d, y: d.ecv_pct_alquiler_inferior}))}
     />
     <KpiCard
         title="Alokairuko babes ofizialeko etxebizitzak"
@@ -236,7 +236,7 @@ Administrazioen zenbat etxebizitza alokatzen diren merkatuko prezioen azpitik ze
         period="behin-behineko kalifikazioak, {resumen[0]?.calif_anio} · {formatNumber(resumen[0]?.calif_ultimo, 0)} etxebizitza"
         direction="neutral"
         source="Etxebizitza Ministerioa"
-        sparklineData={calif.map(d => d.calif_alquiler_100k)}
+        sparklineData={calif.map(d => ({...d, y: d.calif_alquiler_100k}))}
     />
 </Grid>
 

@@ -107,7 +107,7 @@ Cuántas empresas hay en España y de qué tamaño son, cuántas sociedades se c
         changePeriod="vs año anterior"
         direction="positive-up"
         source="INE / DIRCE"
-        sparklineData={emp_pais.map(d => d.empresas_1000hab)}
+        sparklineData={emp_pais.map(d => ({...d, y: d.empresas_1000hab}))}
     />
     <KpiCard
         title="Sociedades creadas"
@@ -118,7 +118,7 @@ Cuántas empresas hay en España y de qué tamaño son, cuántas sociedades se c
         changePeriod="vs 12 meses antes"
         direction="positive-up"
         source="INE / Sociedades Mercantiles"
-        sparklineData={soc_12m.slice(-120).map(d => d.constituidas_12m_100k)}
+        sparklineData={soc_12m.slice(-120).map(d => ({...d, y: d.constituidas_12m_100k}))}
     />
     <KpiCard
         title="Autónomos"
@@ -127,7 +127,7 @@ Cuántas empresas hay en España y de qué tamaño son, cuántas sociedades se c
         period="trabajan por cuenta propia ({autonomos_ult[0]?.periodo}) · {formatNumber(autonomos_ult[0]?.cuenta_propia / 1000, 2)} millones de personas"
         direction="neutral"
         source="INE / EPA"
-        sparklineData={autonomos_anual.map(d => d.pct_cuenta_propia)}
+        sparklineData={autonomos_anual.map(d => ({...d, y: d.pct_cuenta_propia}))}
     />
     <KpiCard
         title="Gasto en I+D"
@@ -136,7 +136,7 @@ Cuántas empresas hay en España y de qué tamaño son, cuántas sociedades se c
         period="en {id_ue_ult[0]?.anio} · UE-27: {formatNumber(id_ue_ult[0]?.ue, 2)} % · {formatNumber(id_ue_ult[0]?.es_hab, 0)} € por habitante (euros de {id_es.slice(-1)[0]?.anio_euros})"
         direction="positive-up"
         source="Eurostat / INE"
-        sparklineData={id_es.map(d => d.pct_pib)}
+        sparklineData={id_es.map(d => ({...d, y: d.pct_pib}))}
     />
 </Grid>
 

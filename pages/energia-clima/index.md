@@ -91,7 +91,7 @@ ORDER BY anio ASC
         period={emisiones_totales[0]?.anio}
         source="Inventario GEI (MITECO) vía Eurostat"
         href="/energia-clima/emisiones"
-        sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
+        sparklineData={[...emisiones_totales].reverse().map(d => ({...d, valor: d.total_emisiones}))}
     />
     <KpiCard
         title="Potencia Solar FV"
@@ -100,7 +100,7 @@ ORDER BY anio ASC
         period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.solar_mw / 1000}))}
     />
     <KpiCard
         title="Potencia Eólica"
@@ -109,7 +109,7 @@ ORDER BY anio ASC
         period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.eolica_mw / 1000}))}
     />
 </Grid>
 

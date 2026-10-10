@@ -1,7 +1,7 @@
 ---
 title: Construction
 description: "Construction in Spain compared with the EU: share of value added and employment since 1995, the 2007 bubble and the collapse, public works tendered in real euros per inhabitant and by governing party, housing permits, cement, output, costs, companies and regions."
-i18n_origen: 60f03001a5e1
+i18n_origen: 9b8936d58932
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -586,7 +586,7 @@ Construction was first the engine and then the dead weight of the Spanish econom
         changePeriod="vs 2007"
         direction="neutral"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_construccion)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_construccion}))}
     />
     <KpiCard
         title="Employed per 1,000 inhabitants"
@@ -598,7 +598,7 @@ Construction was first the engine and then the dead weight of the Spanish econom
         changePeriod="vs a year earlier"
         direction="positive-up"
         source="INE (LFS)"
-        sparklineData={epa.map(d => d.ocupados_constr_1000hab)}
+        sparklineData={epa.map(d => ({...d, y: d.ocupados_constr_1000hab}))}
     />
     <KpiCard
         title="Public tenders per inhabitant"
@@ -610,7 +610,7 @@ Construction was first the engine and then the dead weight of the Spanish econom
         changePeriod="vs 2007"
         direction="neutral"
         source="Ministry of Transport"
-        sparklineData={lic.map(d => d.total_hab_real)}
+        sparklineData={lic.map(d => ({...d, y: d.total_hab_real}))}
     />
     <KpiCard
         title="Homes approved per 1,000 inhab."
@@ -622,7 +622,7 @@ Construction was first the engine and then the dead weight of the Spanish econom
         changePeriod="vs previous year"
         direction="neutral"
         source="Associations of quantity surveyors (BdE)"
-        sparklineData={visados.map(d => d.viviendas_nueva_1000hab)}
+        sparklineData={visados.map(d => ({...d, y: d.viviendas_nueva_1000hab}))}
     />
 </Grid>
 

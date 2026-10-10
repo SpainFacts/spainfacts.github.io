@@ -136,7 +136,7 @@ ORDER BY anio
         changePeriod="interanual, descontada la inflación"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => d.ingresos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => ({...d, y: d.ingresos_hab_real}))}
         href="/cuentas-publicas/ingresos"
     />
 
@@ -151,7 +151,7 @@ ORDER BY anio
         changePeriod="interanual, descontada la inflación"
         direction="neutral"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => d.gastos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => ({...d, y: d.gastos_hab_real}))}
         href="/cuentas-publicas/gastos"
     />
 
@@ -165,7 +165,7 @@ ORDER BY anio
         changePeriod="vs año anterior"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
+        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => ({...d, y: d.deficit_pib}))}
     />
 
     <KpiCard
@@ -178,7 +178,7 @@ ORDER BY anio
         changePeriod="vs año anterior"
         direction="positive-down"
         source="Eurostat (PDE)"
-        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => d.deuda_pib)}
+        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => ({...d, y: d.deuda_pib}))}
         href="/varios/indicadores/deuda_publica_pib"
     />
 </Grid>

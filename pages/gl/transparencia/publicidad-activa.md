@@ -1,5 +1,5 @@
 ---
-i18n_origen: 6724b8e266cf
+i18n_origen: ade15fac60e0
 title: Publicidade activa
 description: "Publican as administracións nos seus portais de transparencia o que lles obriga a lei? Avaliacións oficiais por entidade (Consello de Transparencia e Bo Goberno e Comisionado de Transparencia de Canarias), a súa evolución, a comparación por partido e o que aínda non se pode medir."
 og:
@@ -205,7 +205,7 @@ Desde 2014, a [Lei 19/2013 de transparencia](https://www.boe.es/buscar/act.php?i
         formattedValue="{formatNumber(age[age.length - 1]?.icio, 1)} %"
         period="da información obrigatoria cumprida en {age[age.length - 1]?.anio} (ICIO)"
         source="Consello de Transparencia e Bo Goberno"
-        sparklineData={age.map(d => d.icio)}
+        sparklineData={age.map(d => ({...d, y: d.icio}))}
     />
     <KpiCard
         title="Comunidades avaliadas polo CTBG"
@@ -220,14 +220,14 @@ Desde 2014, a [Lei 19/2013 de transparencia](https://www.boe.es/buscar/act.php?i
         formattedValue="{formatNumber(itc_resumen[0]?.media / 10, 2)} de 10"
         period="nota media no Índice de Transparencia de Canarias ({itc_ultimo[0]?.etiqueta})"
         source="Comisionado de Transparencia de Canarias"
-        sparklineData={itc_aytos_serie.map(d => d.media / 10)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.media / 10}))}
     />
     <KpiCard
         title="Concellos canarios con nota baixa"
         value={itc_resumen[0]?.bajos}
         formattedValue={formatNumber(itc_resumen[0]?.bajos, 0)}
         period="de {formatNumber(itc_resumen[0]?.total, 0)}: por debaixo de 5 ou sen render a avaliación ({itc_ultimo[0]?.etiqueta})"
-        sparklineData={itc_aytos_serie.map(d => d.suspenso)}
+        sparklineData={itc_aytos_serie.map(d => ({...d, y: d.suspenso}))}
     />
 </Grid>
 

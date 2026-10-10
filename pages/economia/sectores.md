@@ -72,7 +72,7 @@ Qué produce la economía española y quién lo produce. El valor añadido de ca
         formattedValue="{formatNumber(total.slice(-1)[0]?.crecimiento_real, 1)} %"
         period="valor añadido total en {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => d.crecimiento_real)}
+        sparklineData={total.filter(d => d.crecimiento_real != null).map(d => ({...d, y: d.crecimiento_real}))}
     />
     <KpiCard
         title="Ocupados por 1.000 habitantes"
@@ -80,7 +80,7 @@ Qué produce la economía española y quién lo produce. El valor añadido de ca
         formattedValue={formatNumber(total.slice(-1)[0]?.ocupados_1000_hab, 0)}
         period="{formatNumber(total.slice(-1)[0]?.ocupados_miles / 1000, 1)} millones de ocupados en {total.slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={total.map(d => d.ocupados_1000_hab)}
+        sparklineData={total.map(d => ({...d, y: d.ocupados_1000_hab}))}
     />
     <KpiCard
         title="Productividad por ocupado"
@@ -88,7 +88,7 @@ Qué produce la economía española y quién lo produce. El valor añadido de ca
         formattedValue="{formatNumber(total.slice(-1)[0]?.productividad_real, 0)} €"
         period="valor añadido por ocupado en {total.slice(-1)[0]?.anio}, euros de {ultimo[0]?.anio_euros}"
         source="Eurostat"
-        sparklineData={total.map(d => d.productividad_real)}
+        sparklineData={total.map(d => ({...d, y: d.productividad_real}))}
     />
     <KpiCard
         title="Sector que más crece desde 2019"

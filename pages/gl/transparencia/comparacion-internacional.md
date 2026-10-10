@@ -1,5 +1,5 @@
 ---
-i18n_origen: 43c868242525
+i18n_origen: 01ef937d2b37
 title: España fronte a outros países
 description: "Índices internacionais de corrupción, integridade e goberno aberto: onde está España respecto da UE, da OCDE e dos países de referencia, e como evolucionou con cada Goberno."
 og:
@@ -304,7 +304,7 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
         changePeriod="vs {esp_cpi[0]?.anio_anterior}"
         direction="positive-up"
         source="Transparency International"
-        sparklineData={serie_esp.filter(d => d.indicador_id === 'cpi').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indicador_id === 'cpi').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Control da corrupción (Banco Mundial)"
@@ -316,7 +316,7 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
         changePeriod="vs {esp_wgi[0]?.anio_anterior}"
         direction="positive-up"
         source="Banco Mundial (WGI)"
-        sparklineData={serie_esp.filter(d => d.indicador_id === 'wgi_control_corrupcion').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indicador_id === 'wgi_control_corrupcion').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Goberno aberto (WJP)"
@@ -328,7 +328,7 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
         changePeriod="vs {esp_wjp[0]?.anio_anterior}"
         direction="positive-up"
         source="World Justice Project"
-        sparklineData={serie_esp.filter(d => d.indicador_id === 'wjp_gobierno_abierto').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indicador_id === 'wjp_gobierno_abierto').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Corrupción política (V-Dem)"
@@ -340,7 +340,7 @@ Como se ve a integridade das institucións españolas desde fóra? Varios organi
         changePeriod="vs {esp_vdem[0]?.anio_anterior}"
         direction="positive-down"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indicador_id === 'vdem_corrupcion_politica' && d.anio >= 1977).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indicador_id === 'vdem_corrupcion_politica' && d.anio >= 1977).map(d => ({...d, y: d.valor}))}
     />
 </Grid>
 

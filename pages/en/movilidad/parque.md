@@ -1,7 +1,7 @@
 ---
 title: Vehicle fleet
 description: "The vehicles on the road in Spain: cars by engine type, DGT environmental label and age, most common models, and comparison by province and municipality."
-i18n_origen: 5bbacb52d8c4
+i18n_origen: 7ce7ebdce3e1
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -48,7 +48,7 @@ ORDER BY mes
         formattedValue="{formatNumber(1000 * resumen[0]?.turismos / resumen[0]?.poblacion, 0)} per 1,000 people"
         period="{formatCompact(resumen[0]?.turismos, 1)} cars and {formatCompact(resumen[0]?.vehiculos, 1)} vehicles of all types · {resumen[0]?.mes_texto}"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.turismos_1000)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.turismos_1000}))}
     />
     <KpiCard
         title="Plug-in cars"
@@ -56,7 +56,7 @@ ORDER BY mes
         formattedValue="{formatNumber(parque_mensual.slice(-1)[0]?.pct_enchufables, 1)}%"
         period="of all cars · {formatNumber(resumen[0]?.enchufables, 0)} plug-ins, {formatNumber(resumen[0]?.bev, 0)} battery electric"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_enchufables)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_enchufables}))}
     />
     <KpiCard
         title="Cars without an environmental label"
@@ -65,7 +65,7 @@ ORDER BY mes
         period="of all cars · {formatCompact(resumen[0]?.sin_distintivo, 1)} cars · petrol from before 2000 and diesel from before 2006"
         direction="positive-down"
         source="DGT"
-        sparklineData={parque_mensual.map(d => d.pct_sin_distintivo)}
+        sparklineData={parque_mensual.map(d => ({...d, y: d.pct_sin_distintivo}))}
     />
 </Grid>
 

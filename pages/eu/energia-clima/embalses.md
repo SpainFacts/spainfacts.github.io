@@ -1,7 +1,7 @@
 ---
 title: Ur-erreserbak eta urtegiak
 description: Espainiako urtegien asteko egoera arroka, aurreko urtearekin eta azken hamar urteetako batez bestekoarekin alderatuta.
-i18n_origen: 428062b2d659
+i18n_origen: 868173fde4bb
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -59,7 +59,7 @@ Espainiako urtegiek gaur **{formatNumber(espana[0]?.volumen_hm3, 0)} hm³** bilt
         unit=" p.p."
         period="Duela urtebete: {formatNumber(espana[0]?.pct_hace_un_anio, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_anio}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_anio}))}
     />
     <KpiCard
         title="10 urteko batez bestekoarekin alderatuta"
@@ -68,7 +68,7 @@ Espainiako urtegiek gaur **{formatNumber(espana[0]?.volumen_hm3, 0)} hm³** bilt
         unit=" p.p."
         period="Aste bereko batez bestekoa: {formatNumber(espana[0]?.pct_media_10_anios, 1)} %"
         direction="positive-up"
-        sparklineData={serie_comparada.map(d => ({valor: d.dif_media}))}
+        sparklineData={serie_comparada.map(d => ({...d, valor: d.dif_media}))}
     />
 </Grid>
 

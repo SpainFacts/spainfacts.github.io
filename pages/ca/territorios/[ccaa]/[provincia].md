@@ -1,6 +1,6 @@
 ---
 description: "Fitxa de la província: població, municipis, comptes dels ajuntaments, deute, seguretat i vehicles, amb dades oficials."
-i18n_origen: 37c4504e6ece
+i18n_origen: 098d74e09c6b
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -488,7 +488,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / EPA"
         href="/ca/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Atur dels menors de 25 anys"
@@ -498,7 +498,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / EPA"
         href="/ca/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro_menor25)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Atur registrat"
@@ -508,7 +508,7 @@ ORDER BY mes
         direction="positive-down"
         source="SEPE"
         href="/ca/economia/paro"
-        sparklineData={paro_reg_terr.slice(-36).map(d => d.por_100_16_64)}
+        sparklineData={paro_reg_terr.slice(-36).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -569,7 +569,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
-        sparklineData={renta_prov.map(d => d.renta_persona_real)}
+        sparklineData={renta_prov.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Renda neta mitjana per llar"
@@ -579,7 +579,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
-        sparklineData={renta_prov.map(d => d.renta_hogar_real)}
+        sparklineData={renta_prov.map(d => ({...d, y: d.renta_hogar_real}))}
     />
 </Grid>
 
@@ -650,7 +650,7 @@ ORDER BY poblacion DESC
         changePeriod="real vs. un any abans"
         source="Ministeri d'Habitatge"
         href="/ca/vivienda/precios"
-        sparklineData={viv_serie.filter(d => d.serie === 'precio').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'precio').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Lloguer medià d'un pis"
@@ -659,7 +659,7 @@ ORDER BY poblacion DESC
         period="{viv[0]?.alquiler_anio} · Espanya: {formatNumber(viv[0]?.alquiler_espana, 0)} €/mes"
         source="Ministeri d'Habitatge (SERPAVI)"
         href="/ca/vivienda/alquiler"
-        sparklineData={viv_serie.filter(d => d.serie === 'alquiler').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'alquiler').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Compravendes per 1.000 hab."
@@ -668,7 +668,7 @@ ORDER BY poblacion DESC
         period="12 mesos fins a {viv[0]?.mercado_mes} · Espanya: {formatNumber(viv[0]?.compraventas_espana, 1)}"
         source="INE / ETDP"
         href="/ca/vivienda/compraventas"
-        sparklineData={viv_serie.filter(d => d.serie === 'compraventas').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'compraventas').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Habitatges acabats per 1.000 hab."
@@ -677,7 +677,7 @@ ORDER BY poblacion DESC
         period="habitatge lliure, {viv[0]?.obra_anio} · Espanya: {formatNumber(viv[0]?.terminadas_espana, 2)}"
         source="Ministeri d'Habitatge"
         href="/ca/vivienda/construccion"
-        sparklineData={viv_serie.filter(d => d.serie === 'terminadas').map(d => d.valor)}
+        sparklineData={viv_serie.filter(d => d.serie === 'terminadas').map(d => ({...d, y: d.valor}))}
     />
 </Grid>
 
@@ -741,7 +741,7 @@ ORDER BY anio
         formattedValue="{formatNumber(pensiones_terr[0]?.pension_media_jubilacion_real, 0)} €/mes"
         period="{pensiones_terr[0]?.anio} (mitjana de {pensiones_terr[0]?.meses} mesos), euros de {pensiones_terr[0]?.anio_euros} · Espanya: {formatNumber(pensiones_terr[0]?.jub_espana, 0)} € · posició {pensiones_terr[0]?.puesto_pension} de {pensiones_terr[0]?.n_territorios}"
         source="Seguretat Social"
-        sparklineData={pensiones_terr_serie.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Pensions per 1.000 habitants"
@@ -749,7 +749,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.pensiones_por_1000_hab, 0)}
         period="Espanya: {formatNumber(pensiones_terr[0]?.por_1000_espana, 0)} · {formatNumber(pensiones_terr[0]?.pensiones_por_100_mayores, 0)} per cada 100 persones de 65+ · {formatNumber(pensiones_terr[0]?.pensiones, 0)} pensions"
         source="Seguretat Social / INE"
-        sparklineData={pensiones_terr_serie.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
     <KpiCard
         title="Afiliats per pensió"
@@ -757,7 +757,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.afiliados_por_pension, 2)}
         period="Espanya: {formatNumber(pensiones_terr[0]?.ratio_espana, 2)} (dades per província des del 2021)"
         source="Seguretat Social"
-        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => d.afiliados_por_pension)}
+        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => ({...d, y: d.afiliados_por_pension}))}
     />
 </Grid>
 
@@ -808,10 +808,10 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     <KpiCard title="Candidatura més votada" value={elec.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec.slice(-1)[0]?.ganador_pct, 1)} %"
         period="segona: {elec.slice(-1)[0]?.segundo_siglas} ({formatNumber(elec.slice(-1)[0]?.segundo_pct, 1)} %) · {formatNumber(elec.slice(-1)[0]?.escanos, 0)} escons a la província"
-        source="Ministeri de l'Interior" sparklineData={elec.map(d => ({valor: d.ganador_pct}))} />
+        source="Ministeri de l'Interior" sparklineData={elec.map(d => ({...d, valor: d.ganador_pct}))} />
     <KpiCard title="Nombre efectiu de partits" value={elec.slice(-1)[0]?.nep_votos}
         formattedValue={formatNumber(elec.slice(-1)[0]?.nep_votos, 1)} period="en vots, últimes generals"
-        source="Càlcul propi" sparklineData={elec.map(d => ({valor: d.nep_votos}))} />
+        source="Càlcul propi" sparklineData={elec.map(d => ({...d, valor: d.nep_votos}))} />
 </Grid>
 
 <LineChart data={elec_familias} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true

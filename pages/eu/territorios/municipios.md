@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 5b934493d7e4
+i18n_origen: fad225ccb8b9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,6 +9,7 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
     const urte = (n, s) => (n == null || n === '' ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
@@ -451,7 +452,9 @@ ORDER BY cod_distrito
 SELECT
     municipio, paro_registrado, paro_registrado_hace_1_anio, por_100_hab, variacion_anual_pct, oculto,
     100.0 * paro_registrado_hace_1_anio / poblacion AS por_100_hab_hace_1_anio,
-    strftime(mes, '%m/%Y') AS mes_txt
+    strftime(mes, '%m/%Y') AS mes_txt,
+    strftime(mes, '%Y-%m') AS mes_iso,
+    strftime(mes - INTERVAL 1 YEAR, '%Y-%m') AS mes_iso_hace_1_anio
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
@@ -470,7 +473,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_persona_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Etxeko errenta garbia"
@@ -480,7 +483,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
-        sparklineData={renta_mun.map(d => d.renta_hogar_real)}
+        sparklineData={renta_mun.map(d => ({...d, y: d.renta_hogar_real}))}
     />
 {/if}
 {#if paro_mun.length > 0 && !paro_mun[0]?.oculto}
@@ -492,7 +495,7 @@ WHERE cod_municipio = '${inputs.municipio}'
         direction="positive-down"
         source="SEPE"
         href="/eu/economia/paro"
-        sparklineData={[paro_mun[0]?.por_100_hab_hace_1_anio, paro_mun[0]?.por_100_hab]}
+        sparklineData={[{x: paro_mun[0]?.mes_iso_hace_1_anio, y: paro_mun[0]?.por_100_hab_hace_1_anio}, {x: paro_mun[0]?.mes_iso, y: paro_mun[0]?.por_100_hab}]}
     />
 {/if}
 </Grid>
@@ -522,6 +525,165 @@ WHERE cod_municipio = '${inputs.municipio}'
 {/if}
 
 <p class="text-xs text-gray-500">Errenta: INEren Etxeen Errenta Banaketaren Atlasa, zerga-datuetan oinarrituta. Langabezia: hilaren azken egunean SEPEn erregistratutako langabe eskatzaileak, udalerriko biztanleria osoaren gainean (udalerrika ez dago 16 eta 64 urte bitarteko biztanleriaren daturik).</p>
+
+{/if}
+
+```sql barrios_renta
+SELECT cod_mun, cod_seccion, seccion, renta_persona_real, renta_hogar_real,
+    CASE WHEN renta_persona_tope THEN '≥ ' WHEN renta_persona_suelo THEN '≤ ' ELSE '' END AS renta_persona_marca,
+    CASE WHEN renta_hogar_tope THEN '≥ ' WHEN renta_hogar_suelo THEN '≤ ' ELSE '' END AS renta_hogar_marca,
+    CAST(anio AS INTEGER) AS anio, CAST(anio_base AS INTEGER) AS anio_base, CAST(geo_anio AS INTEGER) AS geo_anio
+FROM mother.renta_secciones
+WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
+```
+
+```sql barrios_elecciones
+SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+```
+
+```sql barrios_voto
+SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+    participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
+    pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
+    CASE '${inputs.barrio_capa}'
+        WHEN 'izquierda' THEN pct_izquierda WHEN 'derecha' THEN pct_derecha
+        WHEN 'centro' THEN pct_centro WHEN 'nacionalistas' THEN pct_nacionalistas
+        WHEN 'psoe' THEN pct_psoe WHEN 'pp' THEN pct_pp WHEN 'vox' THEN pct_vox
+        WHEN 'ips' THEN pct_iu_podemos_sumar WHEN 'participacion' THEN participacion
+    END AS valor
+FROM mother.elecciones_secciones
+WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+```
+
+```sql barrios_quintiles
+WITH s AS (
+    SELECT v.*, ntile(5) OVER (ORDER BY r.renta_persona_real) AS quintil
+    FROM ${barrios_voto} v
+    JOIN ${barrios_renta} r USING (cod_seccion)
+)
+SELECT quintil,
+    CASE quintil WHEN 1 THEN '20 % más pobre' WHEN 2 THEN '2.º' WHEN 3 THEN '3.º' WHEN 4 THEN '4.º' ELSE '20 % más rico' END AS grupo,
+    bloque, sum(p * votantes) / sum(votantes) AS pct
+FROM (
+    SELECT quintil, votantes, unnest(['Izquierda', 'Derecha', 'Centro', 'Nacionalistas y regionalistas']) AS bloque,
+        unnest([pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas]) AS p
+    FROM s
+)
+GROUP BY quintil, grupo, bloque
+HAVING (SELECT count(*) FROM s) >= 10
+QUALIFY max(sum(p * votantes) / sum(votantes)) OVER (PARTITION BY bloque) >= 1
+ORDER BY quintil
+```
+
+{#if barrios_renta.length > 1 || barrios_elecciones.length > 0}
+
+## Auzoz auzo
+
+Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txikiena: hautesleku berean bozkatzen duten 1.000-2.500 pertsona inguru. Pasatu sagua gainetik bakoitzaren zifra ikusteko.
+
+{#if barrios_renta.length > 1}
+
+<MapaEspana
+    data={barrios_renta}
+    geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=renta_persona_real
+    valueFmt='#,##0" €"'
+    colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Errenta pertsonako', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Etxeko', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
+    height=520
+    title="Pertsonako batez besteko errenta garbia, {barrios_renta[0]?.anio} ({barrios_renta[0]?.anio_base}ko eurotan)"
+/>
+
+{/if}
+
+{#if barrios_elecciones.length > 0}
+
+<ButtonGroup name=barrio_eleccion title="Hauteskundeak">
+    {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Orokorrak 2023" value="02" default />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Udalekoak 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europakoak 2024" value="07" />{/if}
+</ButtonGroup>
+
+<ButtonGroup name=barrio_capa title="Zer ikusi">
+    <ButtonGroupItem valueLabel="Bozkatuena" value="ganador" default />
+    <ButtonGroupItem valueLabel="Ezkerra" value="izquierda" />
+    <ButtonGroupItem valueLabel="Eskuina" value="derecha" />
+    <ButtonGroupItem valueLabel="Erdigunea" value="centro" />
+    <ButtonGroupItem valueLabel="Abertzaleak" value="nacionalistas" />
+    <ButtonGroupItem valueLabel="PSOE" value="psoe" />
+    <ButtonGroupItem valueLabel="PP" value="pp" />
+    <ButtonGroupItem valueLabel="Vox" value="vox" />
+    <ButtonGroupItem valueLabel="IU, Podemos eta Sumar" value="ips" />
+    <ButtonGroupItem valueLabel="Parte-hartzea" value="participacion" />
+</ButtonGroup>
+
+{#if barrios_voto.length > 0}
+{#if inputs.barrio_capa === 'ganador'}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=ganador_familia
+    colorCol=ganador_color
+    intensidad=ganador_pct
+    legendType=categorical
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Bozkatuena'}, {id: 'ganador_pct', title: 'Baliozkoen %', fmt: '0.0"%"'}, {id: 'participacion', title: 'Parte-hartzea', fmt: '0.0"%"'}]}
+    height=520
+    title="Sekzio bakoitzean bozkatuena · {barrios_voto[0]?.eleccion}"
+/>
+
+
+<p class="text-xs text-gray-500">Zenbat eta kolore biziagoa, orduan eta handiagoa da bozkatuenaren ehunekoa.</p>
+
+{:else}
+
+<MapaEspana
+    data={barrios_voto}
+    geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
+    geoId=id
+    areaCol=cod_seccion
+    encuadre=denso
+    value=valor
+    valueFmt='0.0"%"'
+    colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
+    tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Bozkatuena'}]}
+    height=520
+    title="{inputs.barrio_capa === 'participacion' ? 'Parte-hartzea' : ({izquierda: 'Ezkerra', derecha: 'Eskuina', centro: 'Erdigunea', nacionalistas: 'Abertzaleak eta erregionalistak', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos eta Sumar'})[inputs.barrio_capa] + ', baliozkoen %'} sekzio bakoitzean · {barrios_voto[0]?.eleccion}"
+/>
+
+{/if}
+{:else}
+
+<p class="text-sm text-gray-500">Ez dago hauteskunde hauen emaitzarik sekzioka udalerri honetan (udal hauteskundeetan 250 biztanletik gorako eta zerrenda itxiak dituzten udalerrienak bakarrik argitaratzen dira).</p>
+
+{/if}
+
+{#if barrios_quintiles.length > 0}
+
+<BarChart
+    data={barrios_quintiles}
+    x=grupo
+    y=pct
+    series=bloque
+    type=grouped
+    sort=false
+    yFmt='0"%"'
+    seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
+    title="Auzo aberatsek eta pobreek bestela bozkatzen dute? Botoa blokeka, sekzioaren errentaren arabera · {barrios_voto[0]?.eleccion}"
+/>
+
+<p class="text-xs text-gray-500">Udalerriko sekzioak pertsonako errentaren arabera ordenatzen dira eta sekzio kopuru bereko bost taldetan banatzen dira; talde bakoitzaren botoa bere sekzioen batez bestekoa da, bozkatzaileen arabera haztatua.</p>
+
+{/if}
+{/if}
+
+<p class="text-xs text-gray-500">Errolda-sekzioak: datu bakoitzaren urteko INEren mugak. Errenta: INEren Etxeen Errenta Banaketaren Atlasa; sekzio aberatsenak eta pobreenak gehieneko eta gutxieneko balio berean mozten ditu (horregatik daramate aurrean «≥» edo «≤»). Botoak: Barne Ministerioaren emaitzak mahaika, sekzioka batuta, atzerrian bizi direnen botorik gabe. Botoen ehunekoak baliozko botoen gainekoak dira (hautagaitzak eta zuriak). Sekzioak zatitu edo berriro zenbakitzen dira biztanleria aldatzen denean; beraz, batzuk grisez ager daitezke urte horretako daturik ez badago.</p>
 
 {/if}
 
@@ -673,7 +835,7 @@ ORDER BY fecha
     <KpiCard title="Boto gehien hauteskunde orokorretan" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
         period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Barne Ministerioa"
-        sparklineData={elec_mun_gen.map(d => ({valor: d.ganador_pct}))} />
+        sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
 <LineChart data={elec_mun_bloques} x=fecha y=pct series=bloque yFmt='0"%"' markers=true

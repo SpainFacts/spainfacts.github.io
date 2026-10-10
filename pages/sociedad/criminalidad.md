@@ -76,7 +76,7 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
         changePeriod="vs. 2019"
         direction="positive-down"
         source="Ministerio del Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => d.tasa_1000)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Total infracciones penales').map(d => ({...d, y: d.tasa_1000}))}
     />
     <KpiCard
         title="Homicidios y asesinatos"
@@ -84,7 +84,7 @@ Los delitos que conocen la Policía Nacional, la Guardia Civil, los Mossos d'Esq
         formattedValue="{formatNumber(resumen[0]?.homicidios_100k, 2)} por 100.000 hab."
         period="{formatNumber(resumen[0]?.homicidios, 0)} consumados en {resumen[0]?.anio}"
         source="Ministerio del Interior"
-        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => d.tasa_1000 * 100)}
+        sparklineData={serie_kpi.filter(d => d.categoria === 'Homicidios y asesinatos consumados').map(d => ({...d, y: d.tasa_1000 * 100}))}
     />
     <KpiCard
         title="Cibercriminalidad"

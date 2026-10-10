@@ -826,7 +826,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / EPA"
         href="/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Paro de menores de 25 años"
@@ -836,7 +836,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / EPA"
         href="/economia/paro"
-        sparklineData={paro_terr.slice(-40).map(d => d.tasa_paro_menor25)}
+        sparklineData={paro_terr.slice(-40).map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Paro registrado"
@@ -846,7 +846,7 @@ ORDER BY mes
         direction="positive-down"
         source="SEPE"
         href="/economia/paro"
-        sparklineData={paro_reg_terr.slice(-36).map(d => d.por_100_16_64)}
+        sparklineData={paro_reg_terr.slice(-36).map(d => ({...d, y: d.por_100_16_64}))}
     />
     <KpiCard
         title="Inflación"
@@ -856,7 +856,7 @@ ORDER BY mes
         direction="positive-down"
         source="INE / IPC"
         href="/economia/ipc"
-        sparklineData={ipc_terr.slice(-36).map(d => d.var_anual)}
+        sparklineData={ipc_terr.slice(-36).map(d => ({...d, y: d.var_anual}))}
     />
 </Grid>
 
@@ -918,7 +918,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-up"
         source="INE / ECV"
         href="/sociedad/desigualdad"
-        sparklineData={renta_ccaa.map(d => d.renta_persona_real)}
+        sparklineData={renta_ccaa.map(d => ({...d, y: d.renta_persona_real}))}
     />
     <KpiCard
         title="Riesgo de pobreza"
@@ -928,7 +928,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-down"
         source="INE / ECV"
         href="/sociedad/desigualdad"
-        sparklineData={renta_ccaa.map(d => d.tasa_pobreza)}
+        sparklineData={renta_ccaa.map(d => ({...d, y: d.tasa_pobreza}))}
     />
     <KpiCard
         title="Pobreza o exclusión (AROPE)"
@@ -938,7 +938,7 @@ ORDER BY m.renta_persona_real DESC
         direction="positive-down"
         source="INE / ECV"
         href="/sociedad/desigualdad"
-        sparklineData={renta_ccaa.filter(d => d.arope != null).map(d => d.arope)}
+        sparklineData={renta_ccaa.filter(d => d.arope != null).map(d => ({...d, y: d.arope}))}
     />
 </Grid>
 
@@ -1033,7 +1033,7 @@ ORDER BY euros_m2_real DESC
         changePeriod="real vs un año antes"
         source="Ministerio de Vivienda"
         href="/vivienda/precios"
-        sparklineData={viv_precio_ccaa.map(d => d.euros_m2_real)}
+        sparklineData={viv_precio_ccaa.map(d => ({...d, y: d.euros_m2_real}))}
     />
     <KpiCard
         title="Alquiler mediano de un piso"
@@ -1042,7 +1042,7 @@ ORDER BY euros_m2_real DESC
         period="{viv[0]?.alquiler_anio} · España: {formatNumber(viv[0]?.alquiler_espana, 0)} €/mes"
         source="Ministerio de Vivienda (SERPAVI)"
         href="/vivienda/alquiler"
-        sparklineData={viv_alquiler.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={viv_alquiler.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Compraventas por 1.000 hab."
@@ -1051,7 +1051,7 @@ ORDER BY euros_m2_real DESC
         period="12 meses hasta {viv[0]?.mercado_mes} · España: {formatNumber(viv[0]?.compraventas_espana, 1)}"
         source="INE / ETDP"
         href="/vivienda/compraventas"
-        sparklineData={viv_mercado.map(d => d.compraventas_12m_1000)}
+        sparklineData={viv_mercado.map(d => ({...d, y: d.compraventas_12m_1000}))}
     />
     <KpiCard
         title="Años de salario para 90 m²"
@@ -1061,7 +1061,7 @@ ORDER BY euros_m2_real DESC
         direction="positive-down"
         source="Ministerio de Vivienda / INE"
         href="/vivienda/esfuerzo"
-        sparklineData={viv_esfuerzo.map(d => d.anios_salario)}
+        sparklineData={viv_esfuerzo.map(d => ({...d, y: d.anios_salario}))}
     />
 </Grid>
 
@@ -1125,7 +1125,7 @@ ORDER BY anio
         formattedValue="{formatNumber(pensiones_terr[0]?.pension_media_jubilacion_real, 0)} €/mes"
         period="{pensiones_terr[0]?.anio} (media de {pensiones_terr[0]?.meses} meses), euros de {pensiones_terr[0]?.anio_euros} · España: {formatNumber(pensiones_terr[0]?.jub_espana, 0)} € · puesto {pensiones_terr[0]?.puesto_pension} de {pensiones_terr[0]?.n_territorios}"
         source="Seguridad Social"
-        sparklineData={pensiones_terr_serie.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Pensiones por 1.000 habitantes"
@@ -1133,7 +1133,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.pensiones_por_1000_hab, 0)}
         period="España: {formatNumber(pensiones_terr[0]?.por_1000_espana, 0)} · {formatNumber(pensiones_terr[0]?.pensiones_por_100_mayores, 0)} por cada 100 personas de 65+ · {formatNumber(pensiones_terr[0]?.pensiones, 0)} pensiones"
         source="Seguridad Social / INE"
-        sparklineData={pensiones_terr_serie.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={pensiones_terr_serie.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
     <KpiCard
         title="Afiliados por pensión"
@@ -1141,7 +1141,7 @@ ORDER BY anio
         formattedValue={formatNumber(pensiones_terr[0]?.afiliados_por_pension, 2)}
         period="España: {formatNumber(pensiones_terr[0]?.ratio_espana, 2)} (datos por comunidad desde 2021)"
         source="Seguridad Social"
-        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => d.afiliados_por_pension)}
+        sparklineData={pensiones_terr_serie.filter(d => d.afiliados_por_pension != null).map(d => ({...d, y: d.afiliados_por_pension}))}
     />
 </Grid>
 
@@ -1190,7 +1190,7 @@ ORDER BY c.anio
         direction="positive-down"
         source="Eurostat / EPA"
         href="/sociedad/educacion"
-        sparklineData={edu_serie.filter(d => d.indicador === 'abandono').map(d => d.valor)}
+        sparklineData={edu_serie.filter(d => d.indicador === 'abandono').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Adultos con estudios superiores"
@@ -1200,7 +1200,7 @@ ORDER BY c.anio
         direction="positive-up"
         source="Eurostat / EPA"
         href="/sociedad/educacion"
-        sparklineData={edu_serie.filter(d => d.indicador === 'superior_25_64').map(d => d.valor)}
+        sparklineData={edu_serie.filter(d => d.indicador === 'superior_25_64').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Jóvenes que ni estudian ni trabajan"
@@ -1210,7 +1210,7 @@ ORDER BY c.anio
         direction="positive-down"
         source="Eurostat / EPA"
         href="/sociedad/educacion"
-        sparklineData={edu_serie.filter(d => d.indicador === 'neet_15_29').map(d => d.valor)}
+        sparklineData={edu_serie.filter(d => d.indicador === 'neet_15_29').map(d => ({...d, y: d.valor}))}
     />
 </Grid>
 
@@ -1426,7 +1426,7 @@ ORDER BY i.anio
         formattedValue={formatNumber(empresas_ccaa[0]?.empresas_1000hab, 1)}
         period="España: {formatNumber(empresas_ccaa[0]?.empresas_1000hab_espana, 1)} · puesto {empresas_ccaa[0]?.puesto} de 19 · {formatNumber(empresas_ccaa[0]?.empresas, 0)} empresas a 1 de enero de {empresas_ccaa[0]?.anio}"
         source="INE / DIRCE"
-        sparklineData={empresas_ccaa_serie.map(d => d.valor)}
+        sparklineData={empresas_ccaa_serie.map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Sociedades creadas por 100.000 hab."
@@ -1434,7 +1434,7 @@ ORDER BY i.anio
         formattedValue={formatNumber(empresas_soc[0]?.constituidas_100k, 0)}
         period="en {empresas_soc[0]?.anio} · España: {formatNumber(empresas_soc[0]?.constituidas_100k_espana, 0)} · disueltas: {formatNumber(empresas_soc[0]?.disueltas_100k, 0)}"
         source="INE / Sociedades Mercantiles"
-        sparklineData={empresas_soc_serie.map(d => d.valor)}
+        sparklineData={empresas_soc_serie.map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Autónomos"
@@ -1442,7 +1442,7 @@ ORDER BY i.anio
         formattedValue="{formatNumber(empresas_aut.slice(-1)[0]?.pct_cuenta_propia, 1)} %"
         period="de los ocupados trabajan por cuenta propia ({empresas_aut.slice(-1)[0]?.anio}) · España: {formatNumber(empresas_aut.slice(-1)[0]?.pct_espana, 1)} %"
         source="INE / EPA"
-        sparklineData={empresas_aut.map(d => d.pct_cuenta_propia)}
+        sparklineData={empresas_aut.map(d => ({...d, y: d.pct_cuenta_propia}))}
     />
     <KpiCard
         title="Gasto en I+D"
@@ -1450,7 +1450,7 @@ ORDER BY i.anio
         formattedValue="{formatNumber(empresas_id.slice(-1)[0]?.pct_pib, 2)} % del PIB"
         period="en {empresas_id.slice(-1)[0]?.anio} · España: {formatNumber(empresas_id.slice(-1)[0]?.pct_pib_espana, 2)} % · {formatNumber(empresas_id.slice(-1)[0]?.eur_hab_real, 0)} € por hab. (euros de {empresas_id.slice(-1)[0]?.anio_euros})"
         source="Eurostat / INE"
-        sparklineData={empresas_id.map(d => d.pct_pib)}
+        sparklineData={empresas_id.map(d => ({...d, y: d.pct_pib}))}
     />
 </Grid>
 
@@ -1538,7 +1538,7 @@ ORDER BY anio
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
         href="/sociedad/salud#listas-de-espera"
-        sparklineData={san_espera.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_espera.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.dias_medio}))}
     />
     <KpiCard
         title="Lista de espera quirúrgica"
@@ -1547,7 +1547,7 @@ ORDER BY anio
         period="España: {formatNumber(san_espera.filter(d => d.tipo === 'quirurgica').slice(-1)[0]?.tasa_espana, 1)} · {formatNumber(san_espera.filter(d => d.tipo === 'quirurgica').slice(-1)[0]?.pct_espera_larga, 1)} % lleva más de 6 meses"
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
-        sparklineData={san_espera.filter(d => d.tipo === 'quirurgica').map(d => ({valor: d.tasa_1000}))}
+        sparklineData={san_espera.filter(d => d.tipo === 'quirurgica').map(d => ({...d, valor: d.tasa_1000}))}
     />
     <KpiCard
         title="Espera media para el especialista"
@@ -1556,7 +1556,7 @@ ORDER BY anio
         period="España: {formatNumber(san_espera.filter(d => d.tipo === 'consultas').slice(-1)[0]?.dias_espana, 0)} · primera consulta"
         direction="positive-down"
         source="Ministerio de Sanidad (SISLE)"
-        sparklineData={san_espera.filter(d => d.tipo === 'consultas').map(d => ({valor: d.dias_medio}))}
+        sparklineData={san_espera.filter(d => d.tipo === 'consultas').map(d => ({...d, valor: d.dias_medio}))}
     />
     {#if san_gasto.length > 0}
     <KpiCard
@@ -1565,7 +1565,7 @@ ORDER BY anio
         formattedValue="{formatNumber(san_gasto.slice(-1)[0]?.eur_hab_real, 0)} € por hab."
         period="conjunto de las comunidades: {formatNumber(san_gasto.slice(-1)[0]?.eur_hab_real_ccaa, 0)} € · {san_gasto.slice(-1)[0]?.anio}{san_gasto.slice(-1)[0]?.provisional ? ' (provisional)' : ''} · euros de {base[0]?.anio_base}"
         source="Ministerio de Sanidad (EGSP)"
-        sparklineData={san_gasto.map(d => ({valor: d.eur_hab_real}))}
+        sparklineData={san_gasto.map(d => ({...d, valor: d.eur_hab_real}))}
     />
     {:else if san_recursos.some(d => d.recurso === 'medicos' && d.por_1000 != null)}
     <KpiCard
@@ -1574,7 +1574,7 @@ ORDER BY anio
         formattedValue="{formatNumber(san_recursos.filter(d => d.recurso === 'medicos').slice(-1)[0]?.por_1000, 1)} por 1.000 hab."
         period="España: {formatNumber(san_recursos.filter(d => d.recurso === 'medicos').slice(-1)[0]?.por_1000_espana, 1)} · {san_recursos.filter(d => d.recurso === 'medicos').slice(-1)[0]?.anio}"
         source="Eurostat"
-        sparklineData={san_recursos.filter(d => d.recurso === 'medicos').map(d => ({valor: d.por_1000}))}
+        sparklineData={san_recursos.filter(d => d.recurso === 'medicos').map(d => ({...d, valor: d.por_1000}))}
     />
     {/if}
 </Grid>
@@ -1660,10 +1660,10 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     <KpiCard title="Candidatura más votada" value={elec.slice(-1)[0]?.ganador_pct}
         formattedValue="{elec.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec.slice(-1)[0]?.ganador_pct, 1)} %"
         period="segunda: {elec.slice(-1)[0]?.segundo_siglas} ({formatNumber(elec.slice(-1)[0]?.segundo_pct, 1)} %) · {formatNumber(elec.slice(-1)[0]?.escanos, 0)} escaños en juego"
-        source="Ministerio del Interior" sparklineData={elec.map(d => ({valor: d.ganador_pct}))} />
+        source="Ministerio del Interior" sparklineData={elec.map(d => ({...d, valor: d.ganador_pct}))} />
     <KpiCard title="Número efectivo de partidos" value={elec.slice(-1)[0]?.nep_votos}
         formattedValue={formatNumber(elec.slice(-1)[0]?.nep_votos, 1)} period="en votos, últimas generales"
-        source="Cálculo propio" sparklineData={elec.map(d => ({valor: d.nep_votos}))} />
+        source="Cálculo propio" sparklineData={elec.map(d => ({...d, valor: d.nep_votos}))} />
 </Grid>
 
 <LineChart data={elec_familias} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true

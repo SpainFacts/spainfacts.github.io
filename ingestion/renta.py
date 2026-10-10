@@ -20,8 +20,9 @@
            distritos y secciones censales en un único CSV (~350 MB). Las tablas
            30656 y 30833...31295 son las mismas cifras partidas por provincia
            (comprobado: 30656 = Albacete, 31295 = Melilla); se usa la 30824
-           porque cubre todo en una sola descarga. Solo se guardan las filas de
-           municipio y de distrito (no las ~36.000 secciones).
+           porque cubre todo en una sola descarga. Se guardan las filas de
+           municipio, distrito y sección censal (~36.000 secciones, para los
+           mapas de barrio; nivel = 'seccion', cod_seccion = CUSEC de 10 dígitos).
      53689 los mismos indicadores para España, CCAA, provincias e islas.
 
 3) Eurostat (EU-SILC), todos los países: ilc_di12 (Gini), ilc_di11 (S80/S20) y
@@ -82,16 +83,16 @@ def renta():
         # Municipios;Distritos;Secciones;Indicadores de renta media;Periodo;Total
         lote = []
         for municipio, distrito, seccion, indicador, periodo, total in _filas_csv("30824"):
-            if seccion.strip():
-                continue
             cod_mun, _, nombre = municipio.partition(" ")
             cod_dis, _, nombre_dis = distrito.strip().partition(" ")
+            cod_sec = seccion.strip().partition(" ")[0]
             lote.append({
-                "nivel": "distrito" if distrito.strip() else "municipio",
+                "nivel": "seccion" if cod_sec else "distrito" if cod_dis else "municipio",
                 "cod_mun": cod_mun,
                 "municipio": nombre,
                 "cod_distrito": cod_dis or None,
                 "distrito": nombre_dis or None,
+                "cod_seccion": cod_sec or None,
                 "indicador": indicador,
                 "anio": int(periodo),
                 "valor": _numero(total),

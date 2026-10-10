@@ -1,5 +1,5 @@
 ---
-i18n_origen: fd19bed34152
+i18n_origen: 1b5c090de484
 title: Orzamentos prorrogados
 description: "Que anos tivo España Orzamentos Xerais do Estado aprobados a tempo, cales chegaron tarde e cales se prorrogaron, con cantos días de atraso e que Goberno debía presentalos, desde 1978."
 og:
@@ -132,7 +132,7 @@ Os Orzamentos Xerais do Estado son a lei que fixa cada ano canto pode gastar o E
         formattedValue={resumen[0]?.situacion_actual}
         period="{formatNumber(racha[0]?.seguidos, 0)} exercicios seguidos sen lei propia, desde {racha[0]?.desde} · {formatNumber(resumen[0]?.dias_actual, 0)} días de prórroga este ano"
         source="BOE"
-        sparklineData={serie.map(d => d.dias_prorroga)}
+        sparklineData={serie.map(d => ({...d, y: d.dias_prorroga}))}
     />
     <KpiCard
         title="Último orzamento aprobado a tempo"

@@ -479,10 +479,10 @@ index 7c632d2..7de445e 100644
  		{varTimeAgo}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js
 new file mode 100644
-index 0000000..b1fed5e
+index 0000000..831135e
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js
-@@ -0,0 +1,72 @@
+@@ -0,0 +1,90 @@
 +// SpainFacts: traducción de las etiquetas que vienen de los DATOS (nombres de series,
 +// leyendas y categorías de los ejes) en las páginas traducidas (/en, /ca, /gl, /eu).
 +// Las consultas devuelven textos en castellano; aquí se sustituyen al pintar la gráfica.
@@ -500,6 +500,24 @@ index 0000000..b1fed5e
 +	}
 +	return texto;
 +};
++
++// seriesColors va por nombre de serie: si la serie se traduce, el color se pierde. Se
++// añaden al objeto las claves traducidas con el mismo color.
++export function traducirColores(colores, lang = 'es') {
++	try {
++		if (!colores || typeof colores !== 'object' || lang === 'es') return colores;
++		const dic = DICCIONARIO[lang];
++		if (!dic) return colores;
++		const salida = { ...colores };
++		for (const [clave, color] of Object.entries(colores)) {
++			const traducida = traducir(clave, dic);
++			if (traducida !== clave && salida[traducida] === undefined) salida[traducida] = color;
++		}
++		return salida;
++	} catch {
++		return colores;
++	}
++}
 +
 +const esCategoria = (eje) => eje && (eje.type === 'category' || Array.isArray(eje.data));
 +
@@ -557,10 +575,10 @@ index 0000000..b1fed5e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..6497fd0
+index 0000000..024c183
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,4045 @@
+@@ -0,0 +1,4065 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
@@ -1327,6 +1345,11 @@ index 0000000..6497fd0
 +		'IU, Podemos y Sumar': 'IU, Podemos and Sumar',
 +		'IVA': 'VAT',
 +		'Izquierda': 'Left',
++		'20 % más pobre': 'Poorest 20 %',
++		'2.º': '2nd',
++		'3.º': '3rd',
++		'4.º': '4th',
++		'20 % más rico': 'Richest 20 %',
 +		'Jornada a tiempo completo': 'Full-time',
 +		'Jubilación': 'Retirement',
 +		'jul': 'Jul',
@@ -2415,6 +2438,11 @@ index 0000000..6497fd0
 +		'Italia': 'Itàlia',
 +		'IU, Podemos y Sumar': 'IU, Podemos i Sumar',
 +		'Izquierda': 'Esquerra',
++		'20 % más pobre': '20 % més pobre',
++		'2.º': '2n',
++		'3.º': '3r',
++		'4.º': '4t',
++		'20 % más rico': '20 % més ric',
 +		'Jornada a tiempo completo': 'Jornada a temps complet',
 +		'Jubilación': 'Jubilació',
 +		'jun': 'juny',
@@ -3274,6 +3302,11 @@ index 0000000..6497fd0
 +		'IU, Podemos y Sumar': 'IU, Podemos e Sumar',
 +		'IVA': 'IVE',
 +		'Izquierda': 'Esquerda',
++		'20 % más pobre': '20 % máis pobre',
++		'2.º': '2.º',
++		'3.º': '3.º',
++		'4.º': '4.º',
++		'20 % más rico': '20 % máis rico',
 +		'Jornada a tiempo completo': 'Xornada a tempo completo',
 +		'Jubilación': 'Xubilación',
 +		'jul': 'xul',
@@ -4269,6 +4302,11 @@ index 0000000..6497fd0
 +		'IU, Podemos y Sumar': 'IU, Podemos eta Sumar',
 +		'IVA': 'BEZ',
 +		'Izquierda': 'Ezkerra',
++		'20 % más pobre': '% 20 pobreena',
++		'2.º': '2.a',
++		'3.º': '3.a',
++		'4.º': '4.a',
++		'20 % más rico': '% 20 aberatsena',
 +		'Jornada a tiempo completo': 'Lanaldi osoa',
 +		'Jubilación': 'Erretiroa',
 +		'jul': 'uzt',
@@ -4919,7 +4957,7 @@ index 0000000..a01c9ae
 +	eu: {"suarez": "Suárezen gob. (UCD)", "gonzalez": "Gonzálezen gob. (PSOE)", "aznar": "Aznarren gob. (PP)", "euro": "Euroa iritsi da", "zapatero": "Zapateroren gob. (PSOE)", "regularizacion": "Aparteko erregularizazioa", "carnet": "Puntuzko gidabaimena", "lehman": "Finantza krisia", "rajoy": "Rajoyren gob. (PP)", "reforma_laboral_2012": "2012ko lan-erreforma", "rescate": "Banku-erreskatea", "pensiones_2013": "2013ko pentsio-erreforma", "sanchez": "Sánchezen gob. (PSOE)", "sol": "«Eguzki-zergaren» amaiera", "smi_2019": "LGS +22 %", "covid": "COVID-19", "carbon": "7 ikatz-zentral itxi", "moves": "MOVES III plana", "pensiones_2021": "Pentsioak KPIri lotuta", "ucrania": "Ukrainako gerra", "reforma_laboral_2022": "2022ko lan-erreforma", "tope_gas": "Gasaren muga (salbuespen iberiarra)", "ley_vivienda": "Etxebizitza Legea", "apagon": "Itzalaldi orokorra", "iran": "Irango gerra"},
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-index b3bfe37..26e93ce 100644
+index b3bfe37..179ce34 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 @@ -8,6 +8,12 @@
@@ -4928,7 +4966,7 @@ index b3bfe37..26e93ce 100644
  	import DownloadData from '../../ui/DownloadData.svelte';
 +	import CompartirGrafico from '../../ui/CompartirGrafico.svelte';
 +	import { anadirEventos, textoDeGrafica } from '../../ui/eventos.js';
-+	import { traducirEtiquetas } from '../../ui/etiquetas.js';
++	import { traducirEtiquetas, traducirColores } from '../../ui/etiquetas.js';
 +	import { page } from '$app/stores';
 +	import { idiomaDeRuta, t } from '../../ui/idioma.js';
 +	$: lang = idiomaDeRuta($page?.url?.pathname ?? '/');
@@ -4967,6 +5005,15 @@ index b3bfe37..26e93ce 100644
  					...$$restProps,
  					echartsOptions,
  					seriesOptions,
+@@ -89,7 +104,7 @@
+ 					renderer,
+ 					connectGroup,
+ 					xAxisLabelOverflow,
+-					seriesColors: $seriesColorsStore,
++					seriesColors: traducirColores($seriesColorsStore, lang),
+ 					theme: $activeAppearance
+ 				}}
+ 			/>
 @@ -97,7 +112,7 @@
  	{/if}
  
@@ -5011,7 +5058,7 @@ index b3bfe37..26e93ce 100644
  		</div>
  	{/if}
  
-@@ -172,7 +188,7 @@
+@@ -172,11 +188,11 @@
          overflow: visible;
      "
  		use:echartsCanvasDownload={{
@@ -5020,6 +5067,11 @@ index b3bfe37..26e93ce 100644
  			...$$restProps,
  			echartsOptions,
  			seriesOptions,
+-			seriesColors: $seriesColorsStore,
++			seriesColors: traducirColores($seriesColorsStore, lang),
+ 			queryID,
+ 			evidenceChartTitle,
+ 			theme: $activeAppearance,
 @@ -209,8 +225,10 @@
  		display: flex;
  		justify-content: flex-end;

@@ -1,7 +1,7 @@
 ---
 title: Obra berria
 description: "Espainian urtero hasten eta amaitzen diren etxebizitza libreak 1.000 biztanleko 1996tik, erkidego eta probintziaka, Etxebizitza Ministerioaren datuekin."
-i18n_origen: 6b1ad71c87ca
+i18n_origen: 442b873cd088
 ---
 
 <script>
@@ -92,7 +92,7 @@ Zenbat etxebizitza eraikitzen diren Espainian. **Etxebizitza libreak** dira (bab
         formattedValue="{formatNumber(hitos[0]?.term_ult, 2)} 1.000 biz."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.term_total, 0)} etxebizitza libre"
         source="Etxebizitza Ministerioa"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="Hasitako etxebizitzak"
@@ -100,7 +100,7 @@ Zenbat etxebizitza eraikitzen diren Espainian. **Etxebizitza libreak** dira (bab
         formattedValue="{formatNumber(hitos[0]?.ini_ult, 2)} 1.000 biz."
         period="{hitos[0]?.anio_ult} · {formatCompact(hitos[0]?.ini_total, 0)} etxebizitza libre"
         source="Etxebizitza Ministerioa"
-        sparklineData={espana.map(d => d.iniciadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.iniciadas_1000}))}
     />
     <KpiCard
         title="Gehienekoarekiko"
@@ -108,7 +108,7 @@ Zenbat etxebizitza eraikitzen diren Espainian. **Etxebizitza libreak** dira (bab
         formattedValue="{formatNumber(hitos[0]?.fraccion_max / 0.01, 0)} %"
         period="{urteko(hitos[0]?.anio_term_max)} biztanleko amaitutako etxebizitzena ({formatNumber(hitos[0]?.term_max, 1)} 1.000 biz.)"
         source="Etxebizitza Ministerioa"
-        sparklineData={espana.map(d => d.terminadas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.terminadas_1000}))}
     />
     <KpiCard
         title="90eko hamarkadaren amaierarekiko"
@@ -116,7 +116,7 @@ Zenbat etxebizitza eraikitzen diren Espainian. **Etxebizitza libreak** dira (bab
         formattedValue="{formatNumber(hitos[0]?.media_9600, 1)} 1.000 biz."
         period="urtean amaitutako etxebizitzak, batez beste, 1996-2000 aldian"
         source="Etxebizitza Ministerioa"
-        sparklineData={espana.filter(d => d.anio <= 2000).map(d => d.terminadas_1000)}
+        sparklineData={espana.filter(d => d.anio <= 2000).map(d => ({...d, y: d.terminadas_1000}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Public employment
 description: "How many public employees there are in Spain, which administration and sector they work in (health, education, town councils, security forces...), how their number has changed, what they earn compared with the private sector and how much they cost."
-i18n_origen: 052b4d0e2fe9
+i18n_origen: eb201e9adb20
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -99,7 +99,7 @@ Who works for Spain's public administrations: how many there are, in which admin
         formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} per 1,000 inhab."
         period="{formatCompact(resumen[0]?.total, 2)} in total · {ultima[0]?.fecha_texto}"
         source="Registro Central de Personal"
-        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
+        sparklineData={serie_por_1000.map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="In the autonomous communities"
@@ -107,7 +107,7 @@ Who works for Spain's public administrations: how many there are, in which admin
         formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)}%"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: mainly health and education"
         source="Registro Central de Personal"
-        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
+        sparklineData={serie_cuota_ccaa.map(d => ({...d, y: d.cuota_ccaa}))}
     />
     <KpiCard
         title="Annual cost per inhabitant"
@@ -115,7 +115,7 @@ Who works for Spain's public administrations: how many there are, in which admin
         formattedValue="€{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)}"
         period="€{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)}bn in total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)}% of GDP · {coste_ultimo[0]?.anio} ({coste_ultimo[0]?.anio_base} euros)"
         source="Eurostat"
-        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
+        sparklineData={coste_serie_real.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Average wage (full-time)"
@@ -123,7 +123,7 @@ Who works for Spain's public administrations: how many there are, in which admin
         formattedValue="€{formatNumber(salario_ultimo[0]?.publico, 0)}/month"
         period="vs €{formatNumber(salario_ultimo[0]?.privado, 0)} in the private sector · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
-        sparklineData={salario_serie_real.map(d => d.publico_real)}
+        sparklineData={salario_serie_real.map(d => ({...d, y: d.publico_real}))}
     />
 </Grid>
 

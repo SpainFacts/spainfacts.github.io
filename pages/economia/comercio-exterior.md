@@ -75,7 +75,7 @@ Lo que España vende al resto del mundo (exportaciones) y lo que compra fuera (i
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_pct, 1)} % del PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.export_meur / 1000, 0)} mil M€ en el trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.export_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.export_pct}))}
     />
     <KpiCard
         title="Importaciones"
@@ -83,7 +83,7 @@ Lo que España vende al resto del mundo (exportaciones) y lo que compra fuera (i
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.import_pct, 1)} % del PIB"
         period="{comercio_trim.slice(-1)[0]?.periodo} · {formatNumber(comercio_trim.slice(-1)[0]?.import_meur / 1000, 0)} mil M€ en el trimestre"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-40).map(d => d.import_pct)}
+        sparklineData={comercio_trim.slice(-40).map(d => ({...d, y: d.import_pct}))}
     />
     <KpiCard
         title="Saldo exterior"
@@ -92,7 +92,7 @@ Lo que España vende al resto del mundo (exportaciones) y lo que compra fuera (i
         period="exportaciones menos importaciones en {saldo_anual.slice(-1)[0]?.anio}"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={saldo_anual.map(d => d.saldo_pct)}
+        sparklineData={saldo_anual.map(d => ({...d, y: d.saldo_pct}))}
     />
     <KpiCard
         title="Exportaciones reales"
@@ -100,7 +100,7 @@ Lo que España vende al resto del mundo (exportaciones) y lo que compra fuera (i
         formattedValue="{formatNumber(comercio_trim.slice(-1)[0]?.export_interanual, 1)} %"
         period="variación interanual en volumen, {comercio_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={comercio_trim.slice(-24).map(d => d.export_interanual)}
+        sparklineData={comercio_trim.slice(-24).map(d => ({...d, y: d.export_interanual}))}
     />
 </Grid>
 

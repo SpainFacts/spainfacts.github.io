@@ -1,7 +1,7 @@
 ---
 title: Wages
 description: "Average wage in Spain adjusted for inflation, its real and nominal growth, by sector and working hours, and its distribution by decile."
-i18n_origen: fba9f04f2b64
+i18n_origen: c141d7649501
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,7 +113,7 @@ How much people earn in Spain, and whether their pay stretches further or less f
         changePeriod="real, vs previous year"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Real rise in the latest quarter"
@@ -122,7 +122,7 @@ How much people earn in Spain, and whether their pay stretches further or less f
         period="{trimestral.slice(-1)[0]?.periodo} vs a year earlier · {formatNumber(trimestral.slice(-1)[0]?.interanual_nominal, 1)}% before adjusting for inflation"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => d.interanual_real)}
+        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="Compared with 2008"
@@ -131,7 +131,7 @@ How much people earn in Spain, and whether their pay stretches further or less f
         period="purchasing power of the average wage in {hitos_salario[0]?.anio_ult} · +{formatNumber(hitos_salario[0]?.nominal_vs2008, 0)}% in current euros"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Middle-decile wage"
@@ -139,7 +139,7 @@ How much people earn in Spain, and whether their pay stretches further or less f
         formattedValue="{formatNumber(deciles_ult.find(d => d.decil === 5)?.salario_real, 0)} €/month"
         period="what the typical employee earns (EPA decile 5) in {deciles_ult[0]?.anio}, {deciles_ult[0]?.anio_base} euros"
         source="INE / EPA"
-        sparklineData={deciles.filter(d => d.decil === 5).map(d => d.salario_real)}
+        sparklineData={deciles.filter(d => d.decil === 5).map(d => ({...d, y: d.salario_real}))}
     />
 </Grid>
 

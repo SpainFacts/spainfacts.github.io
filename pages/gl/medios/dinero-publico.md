@@ -1,7 +1,7 @@
 ---
 title: Diñeiro público nos medios
 description: "Canto diñeiro público reciben os medios de comunicación en España: achega a RTVE e ás televisións autonómicas, publicidade institucional e comercial do Estado por grupo mediático e subvencións a medios privados, por habitante e descontada a inflación, por comunidade e por partido."
-i18n_origen: f695df823f3f
+i18n_origen: 99497b7340e4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -337,7 +337,7 @@ As administracións españolas financian os medios de comunicación por tres ví
         period={`${tv_espana_ult[0].anio} · ${formatCompact(tv_espana_ult[0].total_meur_nominal * 1e6, 2)} € entre RTVE e as autonómicas`}
         source="CNMC, RTVE e Generalitat Valenciana"
         direction="positive-down"
-        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => d.total_eur_hab_real)}
+        sparklineData={tv_espana.filter(d => d.total_eur_hab_real !== null).map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Publicidade institucional do Estado"
@@ -347,7 +347,7 @@ As administracións españolas financian os medios de comunicación por tres ví
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].institucional_eur_nominal, 2)} € en campañas dos ministerios`}
         source="Comisión de Publicidade Institucional"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.institucional_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.institucional_eur_hab_real}))}
     />
     <KpiCard
         title="Publicidade de empresas do Estado"
@@ -357,7 +357,7 @@ As administracións españolas financian os medios de comunicación por tres ví
         period={`${pub_age_ult[0].anio} · ${formatCompact(pub_age_ult[0].comercial_eur_nominal, 2)} € (Loterías, AENA, Correos, Renfe...)`}
         source="Comisión de Publicidade Institucional"
         direction="positive-down"
-        sparklineData={pub_age.map(d => d.comercial_eur_hab_real)}
+        sparklineData={pub_age.map(d => ({...d, y: d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subvencións a medios privados"
@@ -367,7 +367,7 @@ As administracións españolas financian os medios de comunicación por tres ví
         period={`${sub_ult[0].anio} · ${formatCompact(sub_ult[0].eur_nominal, 2)} € en ${formatNumber(sub_ult[0].concesiones, 0)} concesións`}
         source="Base de Datos Nacional de Subvencións"
         direction="positive-down"
-        sparklineData={sub_espana.filter(d => !d.parcial).map(d => d.eur_hab_real)}
+        sparklineData={sub_espana.filter(d => !d.parcial).map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

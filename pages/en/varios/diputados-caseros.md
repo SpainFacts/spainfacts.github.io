@@ -1,7 +1,7 @@
 ---
 title: How many MPs are landlords?
 description: "How many members of the Congress of Deputies declare rental income or own several homes, according to their declarations of assets and income, by parliamentary group and compared with all personal income tax filers."
-i18n_origen: cfa645ec5bd9
+i18n_origen: b1840c4f7433
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -88,7 +88,7 @@ When they take their seats, members of the Congress of Deputies submit a declara
         unit="of MPs"
         period={`${kpi[0].n_alquila} of ${kpi[0].n_validos} · income tax: ${formatNumber(irpf[0].pct_todos, 1)} % of filers`}
         source="Congress of Deputies"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Own 2 or more homes"
@@ -97,7 +97,7 @@ When they take their seats, members of the Congress of Deputies submit a declara
         unit="of MPs"
         period={`${kpi[0].n_dos_viviendas} MPs`}
         source="Congress of Deputies"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 or more whole urban properties"
@@ -106,7 +106,7 @@ When they take their seats, members of the Congress of Deputies submit a declara
         unit="of MPs"
         period={`Adding up their share of each property · ${kpi[0].n_dos_equivalentes} MPs`}
         source="Congress of Deputies"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="No urban property at all"
@@ -115,7 +115,7 @@ When they take their seats, members of the Congress of Deputies submit a declara
         unit="of MPs"
         period={`Median: ${formatNumber(kpi[0].mediana_urbanos, 0)} urban properties per MP`}
         source="Congress of Deputies"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     {/if}
 </div>

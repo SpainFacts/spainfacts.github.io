@@ -1,7 +1,7 @@
 ---
 title: Pensions
 description: "Pensions contributives a Espanya: pensió mitjana descomptada la inflació, afiliats per pensió, despesa en pensions en % del PIB davant la UE, pensions per habitant i per comunitat i província."
-i18n_origen: 3f8817a42d1f
+i18n_origen: 7c0311a74845
 ---
 
 <script>
@@ -220,7 +220,7 @@ Quant cobren els pensionistes a Espanya, quants treballadors cotitzen per cada p
         changePeriod="real vs. un any abans"
         direction="positive-up"
         source="Seguretat Social"
-        sparklineData={mensual_real.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={mensual_real.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Afiliats per pensió"
@@ -229,7 +229,7 @@ Quant cobren els pensionistes a Espanya, quants treballadors cotitzen per cada p
         period="{mesCa(mensual_ratio.slice(-1)[0]?.mes_texto)} · {formatNumber(mensual_ratio.slice(-1)[0]?.afiliados / 1e6, 1)} milions d'afiliats i {formatNumber(mensual_ratio.slice(-1)[0]?.pensiones / 1e6, 1)} milions de pensions"
         direction="positive-up"
         source="Seguretat Social"
-        sparklineData={mensual_ratio.map(d => d.afiliados_por_pension)}
+        sparklineData={mensual_ratio.map(d => ({...d, y: d.afiliados_por_pension}))}
     />
     <KpiCard
         title="Despesa en pensions"
@@ -238,7 +238,7 @@ Quant cobren els pensionistes a Espanya, quants treballadors cotitzen per cada p
         period="{gasto_ult[0]?.anio} · vellesa i supervivència, totes les AP · mitjana UE-27: {formatNumber(gasto_ult[0]?.ue, 1)} %"
         direction="positive-down"
         source="Eurostat (COFOG)"
-        sparklineData={gasto_es.map(d => d.gasto_vejez_supervivientes_pib)}
+        sparklineData={gasto_es.map(d => ({...d, y: d.gasto_vejez_supervivientes_pib}))}
     />
     <KpiCard
         title="Pensions per 1.000 habitants"
@@ -246,7 +246,7 @@ Quant cobren els pensionistes a Espanya, quants treballadors cotitzen per cada p
         formattedValue={formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_1000_hab, 0)}
         period="{anual_completo.slice(-1)[0]?.anio_i}, mitjana de l'any · {formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_100_mayores, 0)} per cada 100 persones de 65 anys o més"
         source="Seguretat Social / INE"
-        sparklineData={anual_completo.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Emprego público
 description: "Cantos empregados públicos hai en España, en que administración e sector traballan (sanidade, educación, concellos, forzas de seguridade...), como evolucionou o seu número, canto cobran fronte ao sector privado e canto custan."
-i18n_origen: 052b4d0e2fe9
+i18n_origen: eb201e9adb20
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -99,7 +99,7 @@ Quen traballa para as administracións públicas en España: cantos son, en que 
         formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} por 1.000 hab."
         period="{formatCompact(resumen[0]?.total, 2)} en total · {ultima[0]?.fecha_texto}"
         source="Rexistro Central de Persoal"
-        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
+        sparklineData={serie_por_1000.map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Nas comunidades autónomas"
@@ -107,7 +107,7 @@ Quen traballa para as administracións públicas en España: cantos son, en que 
         formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: sobre todo sanidade e educación"
         source="Rexistro Central de Persoal"
-        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
+        sparklineData={serie_cuota_ccaa.map(d => ({...d, y: d.cuota_ccaa}))}
     />
     <KpiCard
         title="Custan ao ano, por habitante"
@@ -115,7 +115,7 @@ Quen traballa para as administracións públicas en España: cantos son, en que 
         formattedValue="{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)} €"
         period="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mil M€ en total · {formatNumber(coste_ultimo[0]?.pct_pib, 1)} % do PIB · {coste_ultimo[0]?.anio} (euros de {coste_ultimo[0]?.anio_base})"
         source="Eurostat"
-        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
+        sparklineData={coste_serie_real.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Salario medio (xornada completa)"
@@ -123,7 +123,7 @@ Quen traballa para as administracións públicas en España: cantos son, en que 
         formattedValue="{formatNumber(salario_ultimo[0]?.publico, 0)} €/mes"
         period="fronte a {formatNumber(salario_ultimo[0]?.privado, 0)} € no sector privado · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
-        sparklineData={salario_serie_real.map(d => d.publico_real)}
+        sparklineData={salario_serie_real.map(d => ({...d, y: d.publico_real}))}
     />
 </Grid>
 

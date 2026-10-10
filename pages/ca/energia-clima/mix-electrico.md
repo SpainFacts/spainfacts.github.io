@@ -1,7 +1,7 @@
 ---
 title: Mix de Generació Elèctrica
 description: "El mix elèctric espanyol des del 2007 segons Red Eléctrica: quota renovable, tancament del carbó, emissions per kWh generat i consum elèctric per habitant."
-i18n_origen: 2c4bc7fa07e5
+i18n_origen: 7cce8c387246
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -104,7 +104,7 @@ D'on surt l'electricitat que es genera a Espanya i quant CO₂ costa cada kWh, a
         changePeriod="vs. any anterior"
         direction="positive-up"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_renovable_pct}))}
     />
     <KpiCard
         title="CO₂ per kWh generat"
@@ -115,7 +115,7 @@ D'on surt l'electricitat que es genera a Espanya i quant CO₂ costa cada kWh, a
         changePeriod="vs. any anterior"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.g_co2_kwh)}
+        sparklineData={elec.map(d => ({...d, y: d.g_co2_kwh}))}
     />
     <KpiCard
         title="Consum per habitant"
@@ -126,7 +126,7 @@ D'on surt l'electricitat que es genera a Espanya i quant CO₂ costa cada kWh, a
         changePeriod="vs. any anterior"
         direction="neutral"
         source="REE / Eurostat"
-        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+        sparklineData={elec.map(d => ({...d, y: d.demanda_kwh_hab}))}
     />
     <KpiCard
         title="Carbó"
@@ -135,7 +135,7 @@ D'on surt l'electricitat que es genera a Espanya i quant CO₂ costa cada kWh, a
         period="de la generació el {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} % el {elec_kpi[0]?.anio_inicio}"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_carbon_pct}))}
     />
 </Grid>
 

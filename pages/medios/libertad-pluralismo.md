@@ -272,7 +272,7 @@ FROM mother.medios_libertad_coe_alertas WHERE NOT parcial
         changePeriod={`vs ${k_rsf[0].anio_anterior}`}
         direction="positive-up"
         source="Reporters sans frontières"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => -d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => ({...d, y: -d.valor}))}
     />
     <KpiCard
         title="Riesgo para el pluralismo"
@@ -284,7 +284,7 @@ FROM mother.medios_libertad_coe_alertas WHERE NOT parcial
         changePeriod={`vs MPM${k_mpm[0].anio_anterior}`}
         direction="positive-down"
         source="Media Pluralism Monitor (EUI)"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Libertad de expresión (V-Dem)"
@@ -296,7 +296,7 @@ FROM mother.medios_libertad_coe_alertas WHERE NOT parcial
         changePeriod={`vs ${k_vdem[0].anio_anterior}`}
         direction="positive-up"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Alertas del Consejo de Europa"
@@ -309,7 +309,7 @@ FROM mother.medios_libertad_coe_alertas WHERE NOT parcial
         changePeriod={`vs ${k_coe[0].anio_anterior}`}
         direction="positive-down"
         source="Consejo de Europa"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

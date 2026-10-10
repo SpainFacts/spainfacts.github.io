@@ -1,5 +1,5 @@
 ---
-i18n_origen: 3dd0325563c7
+i18n_origen: 0b1048f4b3b1
 title: Enerxía e Clima
 description: Transición ecolóxica, mix de xeración eléctrica e emisións de gases de efecto invernadoiro en España.
 og:
@@ -92,7 +92,7 @@ ORDER BY anio ASC
         period={emisiones_totales[0]?.anio}
         source="Inventario GEI (MITECO) vía Eurostat"
         href="/gl/energia-clima/emisiones"
-        sparklineData={[...emisiones_totales].reverse().map(d => ({valor: d.total_emisiones}))}
+        sparklineData={[...emisiones_totales].reverse().map(d => ({...d, valor: d.total_emisiones}))}
     />
     <KpiCard
         title="Potencia solar FV"
@@ -101,7 +101,7 @@ ORDER BY anio ASC
         period={potencia_solar[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/gl/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.solar_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.solar_mw / 1000}))}
     />
     <KpiCard
         title="Potencia eólica"
@@ -110,7 +110,7 @@ ORDER BY anio ASC
         period={potencia_eolica[0]?.anio}
         source="Eurostat (nrg_inf_epc)"
         href="/gl/energia-clima/mix-electrico"
-        sparklineData={potencia_serie.map(d => ({valor: d.eolica_mw / 1000}))}
+        sparklineData={potencia_serie.map(d => ({...d, valor: d.eolica_mw / 1000}))}
     />
 </Grid>
 

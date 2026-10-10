@@ -1,7 +1,7 @@
 ---
 title: Unemployment and employment
 description: "Unemployment rate in Spain by sex, age, nationality, education and territory, youth and long-term unemployment, temporary employment, monthly registered unemployment and comparison with the EU."
-i18n_origen: b3ae3805f825
+i18n_origen: cc5703f42701
 ---
 
 <script>
@@ -232,7 +232,7 @@ How many people are looking for work and cannot find it, who is hit hardest, whe
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro}))}
     />
     <KpiCard
         title="Youth unemployment (under 25)"
@@ -244,7 +244,7 @@ How many people are looking for work and cannot find it, who is hit hardest, whe
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_menor25)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_menor25}))}
     />
     <KpiCard
         title="Employment rate"
@@ -256,7 +256,7 @@ How many people are looking for work and cannot find it, who is hit hardest, whe
         changePeriod="vs a year earlier"
         direction="positive-up"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_empleo)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_empleo}))}
     />
     <KpiCard
         title="Registered unemployment"
@@ -267,7 +267,7 @@ How many people are looking for work and cannot find it, who is hit hardest, whe
         changePeriod="registered unemployed vs a year earlier"
         direction="positive-down"
         source="SEPE"
-        sparklineData={registrado.slice(-60).map(d => d.por_100_16_64)}
+        sparklineData={registrado.slice(-60).map(d => ({...d, y: d.por_100_16_64}))}
     />
 </Grid>
 
@@ -292,7 +292,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_paro_larga)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_paro_larga}))}
     />
     <KpiCard
         title="Households with everyone unemployed"
@@ -304,7 +304,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.pct_hogares_todos_parados)}
+        sparklineData={epa.map(d => ({...d, y: d.pct_hogares_todos_parados}))}
     />
     <KpiCard
         title="Temporary employment"
@@ -316,7 +316,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.map(d => d.tasa_temporalidad)}
+        sparklineData={epa.map(d => ({...d, y: d.tasa_temporalidad}))}
     />
     <KpiCard
         title="Involuntary part-time work"
@@ -328,7 +328,7 @@ WHERE indicador_id IN ('paro', 'paro_juvenil', 'tasa_empleo')
         changePeriod="vs a year earlier"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => d.pct_parcial_involuntario)}
+        sparklineData={epa.filter(d => d.pct_parcial_involuntario != null).map(d => ({...d, y: d.pct_parcial_involuntario}))}
     />
 </Grid>
 

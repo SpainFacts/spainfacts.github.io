@@ -3,7 +3,7 @@ title: Enplegu publikoa
 description: "Zenbat enplegatu publiko dauden Espainian, zein administrazio eta sektoretan lan egiten duten (osasuna, hezkuntza, udalak, segurtasun-indarrak...), nola aldatu den haien kopurua, zenbat kobratzen duten sektore pribatuarekin alderatuta eta zenbat balio duten."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 052b4d0e2fe9
+i18n_origen: eb201e9adb20
 ---
 
 <script>
@@ -106,7 +106,7 @@ Nork lan egiten duen Espainiako administrazio publikoentzat: zenbat diren, zein 
         formattedValue="{formatNumber(por_1000[0]?.por_1000_hab, 1)} 1.000 biz."
         period="{formatCompact(resumen[0]?.total, 2)} guztira · {ultima[0]?.fecha_texto}"
         source="Langileen Erregistro Zentrala"
-        sparklineData={serie_por_1000.map(d => d.por_1000_hab)}
+        sparklineData={serie_por_1000.map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Autonomia-erkidegoetan"
@@ -114,7 +114,7 @@ Nork lan egiten duen Espainiako administrazio publikoentzat: zenbat diren, zein 
         formattedValue="{formatNumber(resumen[0]?.ccaa / resumen[0]?.total / 0.01, 0)} %"
         period="{formatCompact(resumen[0]?.ccaa, 2)}: batez ere osasuna eta hezkuntza"
         source="Langileen Erregistro Zentrala"
-        sparklineData={serie_cuota_ccaa.map(d => d.cuota_ccaa)}
+        sparklineData={serie_cuota_ccaa.map(d => ({...d, y: d.cuota_ccaa}))}
     />
     <KpiCard
         title="Urtean balio dutena, biztanleko"
@@ -122,7 +122,7 @@ Nork lan egiten duen Espainiako administrazio publikoentzat: zenbat diren, zein 
         formattedValue="{formatNumber(coste_ultimo[0]?.eur_hab_real, 0)} €"
         period="{formatNumber(coste_ultimo[0]?.millones_eur / 1000, 1)} mila M€ guztira · BPGaren {formatNumber(coste_ultimo[0]?.pct_pib, 1)} % · {coste_ultimo[0]?.anio} ({urteko(coste_ultimo[0]?.anio_base)} euroak)"
         source="Eurostat"
-        sparklineData={coste_serie_real.map(d => d.eur_hab_real)}
+        sparklineData={coste_serie_real.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Batez besteko soldata (lanaldi osoa)"
@@ -130,7 +130,7 @@ Nork lan egiten duen Espainiako administrazio publikoentzat: zenbat diren, zein 
         formattedValue="{formatNumber(salario_ultimo[0]?.publico, 0)} €/hil."
         period="sektore pribatuko {formatNumber(salario_ultimo[0]?.privado, 0)} €-ren aldean · {salario_ultimo[0]?.anio}"
         source="INE (EPA)"
-        sparklineData={salario_serie_real.map(d => d.publico_real)}
+        sparklineData={salario_serie_real.map(d => ({...d, y: d.publico_real}))}
     />
 </Grid>
 

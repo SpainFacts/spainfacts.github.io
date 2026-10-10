@@ -1,7 +1,7 @@
 ---
 title: Prentsa-askatasuna eta aniztasuna
 description: "Non dagoen Espainia prentsa-askatasunaren eta komunikabideen aniztasunaren nazioarteko indizeetan (Mugarik Gabeko Kazetariak, Media Pluralism Monitor, V-Dem eta Europako Kontseiluaren plataforma) eta nola aldatu den EBren eta erreferentziazko herrialdeen aldean."
-i18n_origen: 70c909289afe
+i18n_origen: d04ffb7eb03d
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -280,7 +280,7 @@ Kazetariek presiorik gabe lan egin dezakete Espainian, eta badago komunikabide i
         changePeriod={`${urteko(k_rsf[0].anio_anterior)}arekiko`}
         direction="positive-up"
         source="Reporters sans frontières"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => -d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'rsf_puesto').map(d => ({...d, y: -d.valor}))}
     />
     <KpiCard
         title="Aniztasunerako arriskua"
@@ -292,7 +292,7 @@ Kazetariek presiorik gabe lan egin dezakete Espainian, eta badago komunikabide i
         changePeriod={`MPM${k_mpm[0].anio_anterior} edizioarekiko`}
         direction="positive-down"
         source="Media Pluralism Monitor (EUI)"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'mpm_total').map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Adierazpen-askatasuna (V-Dem)"
@@ -304,7 +304,7 @@ Kazetariek presiorik gabe lan egin dezakete Espainian, eta badago komunikabide i
         changePeriod={`${urteko(k_vdem[0].anio_anterior)}arekiko`}
         direction="positive-up"
         source="V-Dem"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'vdem_libertad_expresion' && d.anio >= 1990).map(d => ({...d, y: d.valor}))}
     />
     <KpiCard
         title="Europako Kontseiluaren alertak"
@@ -317,7 +317,7 @@ Kazetariek presiorik gabe lan egin dezakete Espainian, eta badago komunikabide i
         changePeriod={`${urteko(k_coe[0].anio_anterior)}arekiko`}
         direction="positive-down"
         source="Europako Kontseilua"
-        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => d.valor)}
+        sparklineData={serie_esp.filter(d => d.indice_id === 'coe_alertas').map(d => ({...d, y: d.valor}))}
     />
     {/if}
 </div>

@@ -32,3 +32,10 @@ sources:
           el voto CERA.
       - name: elecciones_ambitos_votos
         description: "Votos y escaños por candidatura en el ámbito superior (fichero 08)."
+      - name: elecciones_secciones
+        description: >
+          Datos globales por sección censal (fichero 09 por mesa, sumado por sección) de los procesos
+          de PROCESOS_SECCION: censo, votos en blanco, nulos y a candidaturas y número de mesas.
+          cod_seccion = código INE de la sección (CUSEC, 10 dígitos). Sin el voto CERA.
+      - name: elecciones_secciones_votos
+        description: "Votos por candidatura y sección censal (fichero 10 por mesa, sumado por sección)."

@@ -1,7 +1,7 @@
 ---
 title: Elektrizitatearen biltegiratzea
 description: "Ponpaketa hidraulikoa eta bateriak Espainian: zenbat energia biltegiratzen eta itzultzen duten, instalatutako potentzia autonomia-erkidegoka, errendimendua eta sarerako sarbide-baimena duten proiektuak, PNIECek 2030erako ezarritako 22,5 GWko helburuaren aldean."
-i18n_origen: af0dd2e402bd
+i18n_origen: 109cbe23c229
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -85,7 +85,7 @@ Gero eta eguzki-energia eta energia eolikoa gehiago dagoenez, sistema elektrikoa
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="{ultimo_anio[0]?.anio}. urtean · 2019koa baino {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} aldiz gehiago"
         source="REE (balantzea)"
-        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({...d, valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Sarbide-baimena duen biltegiratzea"

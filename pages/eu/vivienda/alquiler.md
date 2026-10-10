@@ -1,7 +1,7 @@
 ---
 title: Etxebizitzaren alokairua
 description: "Etxebizitzaren alokairu mediana Espainian inflazioa kenduta, erkidego, probintzia eta udalerriaren arabera, Alokairuaren Prezioaren Estatuko Erreferentzia Sistemaren PFEZ datuekin eta INEren indizearekin."
-i18n_origen: 15b55dba3f41
+i18n_origen: 851526a83095
 ---
 
 <script>
@@ -106,7 +106,7 @@ Zenbat ordaintzen den Espainian etxebizitza bat alokatzeagatik. Datuak **jabeen 
         change={espana.slice(-1)[0]?.variacion_real?.toFixed(1)}
         changePeriod="erreala, aurreko urtearekiko"
         source="Etxebizitza Ministerioa (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_mes_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_mes_mediana_real}))}
     />
     <KpiCard
         title="Metro koadroko"
@@ -114,7 +114,7 @@ Zenbat ordaintzen den Espainian etxebizitza bat alokatzeagatik. Datuak **jabeen 
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiler_m2_mediana_real, 2)} €/m² hilean"
         period="alokatutako pisuaren azalera mediana: {formatNumber(espana.slice(-1)[0]?.superficie_mediana, 0)} m²"
         source="Etxebizitza Ministerioa (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiler_m2_mediana_real)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiler_m2_mediana_real}))}
     />
     <KpiCard
         title="Alokatutako pisuak"
@@ -122,7 +122,7 @@ Zenbat ordaintzen den Espainian etxebizitza bat alokatzeagatik. Datuak **jabeen 
         formattedValue="{formatNumber(espana.slice(-1)[0]?.alquiladas_1000, 1)} 1.000 biz."
         period="PFEZean aitortuak {urtean(espana.slice(-1)[0]?.anio)} · {formatCompact(espana.slice(-1)[0]?.viviendas_alquiladas, 1)} guztira"
         source="Etxebizitza Ministerioa (SERPAVI)"
-        sparklineData={espana.map(d => d.alquiladas_1000)}
+        sparklineData={espana.map(d => ({...d, y: d.alquiladas_1000}))}
     />
     <KpiCard
         title="Soldataren zatia"
@@ -132,7 +132,7 @@ Zenbat ordaintzen den Espainian etxebizitza bat alokatzeagatik. Datuak **jabeen 
         direction="positive-down"
         source="Etxebizitza Ministerioa / INE"
         href="/eu/vivienda/esfuerzo"
-        sparklineData={esfuerzo.map(d => d.pct_alquiler)}
+        sparklineData={esfuerzo.map(d => ({...d, y: d.pct_alquiler}))}
     />
 </Grid>
 

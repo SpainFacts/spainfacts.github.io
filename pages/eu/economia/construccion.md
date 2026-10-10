@@ -1,7 +1,7 @@
 ---
 title: Eraikuntza
 description: "Espainiako eraikuntza EBrekin alderatuta: balio erantsian eta enpleguan duen pisua 1995etik, 2007ko burbuila eta kolapsoa, obra publikoaren lizitazioa biztanleko euro errealetan eta Gobernuko alderdiaren arabera, ikus-onetsitako etxebizitzak, zementua, ekoizpena, kostuak, enpresak eta erkidegoak."
-i18n_origen: 60f03001a5e1
+i18n_origen: 9b8936d58932
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -603,7 +603,7 @@ Eraikuntza Espainiako ekonomiaren motorra izan zen, eta gero haren zama. {urtean
         changePeriod="2007arekin alderatuta"
         direction="neutral"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_construccion)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_construccion}))}
     />
     <KpiCard
         title="Landunak 1.000 biztanleko"
@@ -615,7 +615,7 @@ Eraikuntza Espainiako ekonomiaren motorra izan zen, eta gero haren zama. {urtean
         changePeriod="duela urtebeterekin alderatuta"
         direction="positive-up"
         source="INE (EPA)"
-        sparklineData={epa.map(d => d.ocupados_constr_1000hab)}
+        sparklineData={epa.map(d => ({...d, y: d.ocupados_constr_1000hab}))}
     />
     <KpiCard
         title="Lizitazio publikoa biztanleko"
@@ -627,7 +627,7 @@ Eraikuntza Espainiako ekonomiaren motorra izan zen, eta gero haren zama. {urtean
         changePeriod="2007arekin alderatuta"
         direction="neutral"
         source="Garraio Ministerioa"
-        sparklineData={lic.map(d => d.total_hab_real)}
+        sparklineData={lic.map(d => ({...d, y: d.total_hab_real}))}
     />
     <KpiCard
         title="Ikus-onetsitako etxebizitzak 1.000 biz."
@@ -639,7 +639,7 @@ Eraikuntza Espainiako ekonomiaren motorra izan zen, eta gero haren zama. {urtean
         changePeriod="aurreko urtearekin alderatuta"
         direction="neutral"
         source="Aparejadoreen elkargoak (Espainiako Bankua)"
-        sparklineData={visados.map(d => d.viviendas_nueva_1000hab)}
+        sparklineData={visados.map(d => ({...d, y: d.viviendas_nueva_1000hab}))}
     />
 </Grid>
 

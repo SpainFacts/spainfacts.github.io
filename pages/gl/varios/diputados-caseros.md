@@ -1,7 +1,7 @@
 ---
 title: Cantos deputados son caseiros?
 description: "Cantos deputados do Congreso declaran ingresos por alugueiro ou teñen varias vivendas, segundo as súas declaracións de bens e rendas, por grupo parlamentario e fronte ao conxunto de declarantes do IRPF."
-i18n_origen: cfa645ec5bd9
+i18n_origen: b1840c4f7433
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -88,7 +88,7 @@ Os deputados do Congreso presentan ao tomaren posesión unha declaración de ben
         unit="dos deputados"
         period={`${kpi[0].n_alquila} de ${kpi[0].n_validos} · IRPF: ${formatNumber(irpf[0].pct_todos, 1)} % dos declarantes`}
         source="Congreso dos Deputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Teñen 2 ou máis vivendas"
@@ -97,7 +97,7 @@ Os deputados do Congreso presentan ao tomaren posesión unha declaración de ben
         unit="dos deputados"
         period={`${kpi[0].n_dos_viviendas} deputados`}
         source="Congreso dos Deputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 ou máis inmobles urbanos completos"
@@ -106,7 +106,7 @@ Os deputados do Congreso presentan ao tomaren posesión unha declaración de ben
         unit="dos deputados"
         period={`Sumando a súa parte de cada inmoble · ${kpi[0].n_dos_equivalentes} deputados`}
         source="Congreso dos Deputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Sen ningún inmoble urbano"
@@ -115,7 +115,7 @@ Os deputados do Congreso presentan ao tomaren posesión unha declaración de ben
         unit="dos deputados"
         period={`Mediana: ${formatNumber(kpi[0].mediana_urbanos, 0)} inmobles urbanos por deputado`}
         source="Congreso dos Deputados"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     {/if}
 </div>

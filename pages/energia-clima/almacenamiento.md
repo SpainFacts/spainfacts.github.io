@@ -84,7 +84,7 @@ Con cada vez más solar y eólica, el sistema eléctrico necesita guardar la ene
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="en {ultimo_anio[0]?.anio} · {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} veces la de 2019"
         source="REE (balance)"
-        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({...d, valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Almacenamiento con permiso de acceso"

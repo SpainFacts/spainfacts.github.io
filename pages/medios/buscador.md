@@ -210,7 +210,7 @@ Elige un medio de comunicación y verás todo lo que ha cobrado de las administr
         period={`${sel[0].anio_min}-${sel[0].anio_max} · ${formatNumber(sel[0].n_pagos, 0)} pagos · ${formatCompact(sel[0].total_eur_nominal, 2)} € corrientes`}
         source="SpainFacts con datos de la CPCI, comunidades, ayuntamientos, PLACSP y BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.total)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.total}))}
     />
     <KpiCard
         title="Publicidad institucional"
@@ -220,7 +220,7 @@ Elige un medio de comunicación y verás todo lo que ha cobrado de las administr
         period={`Estado: ${formatCompact(sel[0].estado_eur_real, 2)} € · comunidades y ayuntamientos: ${formatCompact(sel[0].territorial_eur_real, 2)} €`}
         source="CPCI (2025), comunidades y ayuntamientos"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.publicidad)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.publicidad}))}
     />
     <KpiCard
         title="Contratos y subvenciones"
@@ -230,7 +230,7 @@ Elige un medio de comunicación y verás todo lo que ha cobrado de las administr
         period={`Contratos: ${formatCompact(sel[0].contratos_eur_real, 2)} € · subvenciones: ${formatCompact(sel[0].subvenciones_eur_real, 2)} €`}
         source="PLACSP y BDNS"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.contratos_subv)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.contratos_subv}))}
     />
     <KpiCard
         title="Administraciones que pagan"
@@ -240,7 +240,7 @@ Elige un medio de comunicación y verás todo lo que ha cobrado de las administr
         period={`de ${formatNumber(sel[0].n_gob, 0)} administraciones (Estado, comunidades, ayuntamientos...)`}
         source="SpainFacts"
         direction="positive-down"
-        sparklineData={sel_serie.map(d => d.n_admin)}
+        sparklineData={sel_serie.map(d => ({...d, y: d.n_admin}))}
     />
 </div>
 

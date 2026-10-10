@@ -580,7 +580,7 @@ La construcción fue el motor y luego el lastre de la economía española. En {p
         changePeriod="vs 2007"
         direction="neutral"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_construccion)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_construccion}))}
     />
     <KpiCard
         title="Ocupados por 1.000 habitantes"
@@ -592,7 +592,7 @@ La construcción fue el motor y luego el lastre de la economía española. En {p
         changePeriod="vs hace un año"
         direction="positive-up"
         source="INE (EPA)"
-        sparklineData={epa.map(d => d.ocupados_constr_1000hab)}
+        sparklineData={epa.map(d => ({...d, y: d.ocupados_constr_1000hab}))}
     />
     <KpiCard
         title="Licitación pública por habitante"
@@ -604,7 +604,7 @@ La construcción fue el motor y luego el lastre de la economía española. En {p
         changePeriod="vs 2007"
         direction="neutral"
         source="Mº de Transportes"
-        sparklineData={lic.map(d => d.total_hab_real)}
+        sparklineData={lic.map(d => ({...d, y: d.total_hab_real}))}
     />
     <KpiCard
         title="Viviendas visadas por 1.000 hab."
@@ -616,7 +616,7 @@ La construcción fue el motor y luego el lastre de la economía española. En {p
         changePeriod="vs año anterior"
         direction="neutral"
         source="Colegios de aparejadores (BdE)"
-        sparklineData={visados.map(d => d.viviendas_nueva_1000hab)}
+        sparklineData={visados.map(d => ({...d, y: d.viviendas_nueva_1000hab}))}
     />
 </Grid>
 

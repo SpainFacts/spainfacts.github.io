@@ -1,7 +1,7 @@
 ---
 title: The media business
 description: "How much the media are read, watched and listened to in Spain, what they live on (advertising spend by medium) and how many people work in them, per inhabitant and adjusted for inflation, compared with the EU and with the public money they receive."
-i18n_origen: e0531df8ebcc
+i18n_origen: 71922c646c15
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -274,7 +274,7 @@ How much the media are read, watched and listened to in Spain, what they live on
         period={`${papel_resumen[0].anio} · ${formatNumber(papel_resumen[0].miles / 1000, 1)} million readers a day`}
         source="AIMC (EGM)"
         direction="positive-up"
-        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => d.por_1000_hab)}
+        sparklineData={papel.filter(d => d.por_1000_hab !== null).map(d => ({...d, y: d.por_1000_hab}))}
     />
     <KpiCard
         title="Advertising spend in the media"
@@ -284,7 +284,7 @@ How much the media are read, watched and listened to in Spain, what they live on
         period={`${pub_resumen[0].anio} · ${formatCompact(pub_resumen[0].meur * 1e6, 2)} € on television, press, radio, digital, outdoor and cinema`}
         source="InfoAdex"
         direction="positive-up"
-        sparklineData={pub_mercado.map(d => d.eur_hab_real)}
+        sparklineData={pub_mercado.map(d => ({...d, y: d.eur_hab_real}))}
     />
     <KpiCard
         title="Employment in newspaper publishing"
@@ -294,7 +294,7 @@ How much the media are read, watched and listened to in Spain, what they live on
         period={`${empleo_ult[0].anio} · ${formatNumber(empleo_ult[0].periodicos, 0)} people in ${formatNumber(empleo_ult[0].periodicos_empresas, 0)} companies`}
         source="INE and Eurostat (SBS)"
         direction="positive-up"
-        sparklineData={empleo_spark.map(d => d.ocupados_100k_hab)}
+        sparklineData={empleo_spark.map(d => ({...d, y: d.ocupados_100k_hab}))}
     />
     <KpiCard
         title="Central government advertising vs the market"
@@ -304,7 +304,7 @@ How much the media are read, watched and listened to in Spain, what they live on
         period={`${publico_ult_age[0].anio} · ${formatCompact(publico_ult_age[0].publicidad_estado_meur * 1e6, 2)} € on campaigns by the State and its companies`}
         source="Moncloa and InfoAdex"
         direction="positive-down"
-        sparklineData={publico.map(d => d.publicidad_estado_pct_mercado)}
+        sparklineData={publico.map(d => ({...d, y: d.publicidad_estado_pct_mercado}))}
     />
     {/if}
 </div>

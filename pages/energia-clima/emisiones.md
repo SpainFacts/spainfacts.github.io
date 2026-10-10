@@ -193,7 +193,7 @@ Cuántos gases de efecto invernadero emite España desde 1990, año de referenci
         changePeriod="vs año anterior"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.t_hab)}
+        sparklineData={anual.map(d => ({...d, y: d.t_hab}))}
     />
     <KpiCard
         title="Frente a 1990"
@@ -202,7 +202,7 @@ Cuántos gases de efecto invernadero emite España desde 1990, año de referenci
         period="emisiones totales en {kpi[0]?.anio} · {formatNumber(kpi[0]?.var_2005_pct, 1)} % frente a 2005"
         direction="positive-down"
         source="MITECO / Eurostat"
-        sparklineData={anual.map(d => d.var_1990_pct)}
+        sparklineData={anual.map(d => ({...d, y: d.var_1990_pct}))}
     />
     <KpiCard
         title="Intensidad de la economía"
@@ -213,7 +213,7 @@ Cuántos gases de efecto invernadero emite España desde 1990, año de referenci
         changePeriod="desde {intensidad[0]?.anio}"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={intensidad.map(d => d.kg_por_euro)}
+        sparklineData={intensidad.map(d => ({...d, y: d.kg_por_euro}))}
     />
     <KpiCard
         title="España frente a la UE"
@@ -222,7 +222,7 @@ Cuántos gases de efecto invernadero emite España desde 1990, año de referenci
         period="por habitante en {ue_ratio.slice(-1)[0]?.anio}: {formatNumber(ue_ratio.slice(-1)[0]?.t_hab, 1)} t frente a {formatNumber(ue_ratio.slice(-1)[0]?.t_hab_ue, 1)} t en la UE-27"
         direction="positive-down"
         source="Eurostat"
-        sparklineData={ue_ratio.map(d => d.pct_ue)}
+        sparklineData={ue_ratio.map(d => ({...d, y: d.pct_ue}))}
     />
 </Grid>
 

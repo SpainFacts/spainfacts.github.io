@@ -1,7 +1,7 @@
 ---
 title: Electricity Generation Mix
 description: "Spain's electricity mix since 2007 according to Red Eléctrica: renewable share, the coal phase-out, emissions per kWh generated and electricity consumption per person."
-i18n_origen: 2c4bc7fa07e5
+i18n_origen: 7cce8c387246
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -104,7 +104,7 @@ Where the electricity generated in Spain comes from and how much CO₂ each kWh 
         changePeriod="vs previous year"
         direction="positive-up"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_renovable_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_renovable_pct}))}
     />
     <KpiCard
         title="CO₂ per kWh generated"
@@ -115,7 +115,7 @@ Where the electricity generated in Spain comes from and how much CO₂ each kWh 
         changePeriod="vs previous year"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.g_co2_kwh)}
+        sparklineData={elec.map(d => ({...d, y: d.g_co2_kwh}))}
     />
     <KpiCard
         title="Consumption per person"
@@ -126,7 +126,7 @@ Where the electricity generated in Spain comes from and how much CO₂ each kWh 
         changePeriod="vs previous year"
         direction="neutral"
         source="REE / Eurostat"
-        sparklineData={elec.map(d => d.demanda_kwh_hab)}
+        sparklineData={elec.map(d => ({...d, y: d.demanda_kwh_hab}))}
     />
     <KpiCard
         title="Coal"
@@ -135,7 +135,7 @@ Where the electricity generated in Spain comes from and how much CO₂ each kWh 
         period="of generation in {elec_kpi[0]?.anio} · {formatNumber(elec_kpi[0]?.carbon_inicio, 1)} % in {elec_kpi[0]?.anio_inicio}"
         direction="positive-down"
         source="REE"
-        sparklineData={elec.map(d => d.cuota_carbon_pct)}
+        sparklineData={elec.map(d => ({...d, y: d.cuota_carbon_pct}))}
     />
 </Grid>
 

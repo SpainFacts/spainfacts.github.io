@@ -72,7 +72,7 @@ Cuánta gente vota, a quién y cómo se reparten los escaños: todas las eleccio
         formattedValue="{resumen[0]?.ganador_siglas} · {formatNumber(resumen[0]?.ganador_pct, 1)} %"
         period="{formatNumber(resumen[0]?.ganador_escanos, 0)} de 350 escaños · segunda: {resumen[0]?.segundo_siglas} ({formatNumber(resumen[0]?.segundo_pct, 1)} %)"
         source="Ministerio del Interior"
-        sparklineData={generales.map(d => ({valor: d.ganador_pct}))}
+        sparklineData={generales.map(d => ({...d, valor: d.ganador_pct}))}
     />
     <KpiCard
         title="Número efectivo de partidos"
@@ -83,7 +83,7 @@ Cuánta gente vota, a quién y cómo se reparten los escaños: todas las eleccio
         changeUnit=""
         changePeriod="vs. {resumen[0]?.etiqueta_anterior}"
         source="Cálculo propio"
-        sparklineData={generales.map(d => ({valor: d.nep_votos}))}
+        sparklineData={generales.map(d => ({...d, valor: d.nep_votos}))}
     />
     <KpiCard
         title="Voto a las dos más votadas"
@@ -94,7 +94,7 @@ Cuánta gente vota, a quién y cómo se reparten los escaños: todas las eleccio
         changeUnit="p.p."
         changePeriod="vs. {resumen[0]?.etiqueta_anterior}"
         source="Ministerio del Interior"
-        sparklineData={generales.map(d => ({valor: d.dos_primeros}))}
+        sparklineData={generales.map(d => ({...d, valor: d.dos_primeros}))}
     />
 </Grid>
 

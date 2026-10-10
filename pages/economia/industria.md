@@ -503,7 +503,7 @@ España no está entre los países más industriales de la Unión Europea: sus m
         changePeriod="vs {veh_res[0]?.anio_ant}"
         direction="positive-up"
         source="OICA y ANFAC"
-        sparklineData={veh.map(d => d.vehiculos_1000_hab)}
+        sparklineData={veh.map(d => ({...d, y: d.vehiculos_1000_hab}))}
     />
     <KpiCard
         title="Azulejos: cuota de la producción de la UE"
@@ -512,7 +512,7 @@ España no está entre los países más industriales de la Unión Europea: sus m
         period="{prod_res[0]?.anio} · en m² · {prod_res[0]?.az_puesto}.º de los {prod_res[0]?.az_n} países que publican el dato"
         direction="positive-up"
         source="Eurostat (Prodcom)"
-        sparklineData={azulejos.map(d => d.cuota_cantidad_pct)}
+        sparklineData={azulejos.map(d => ({...d, y: d.cuota_cantidad_pct}))}
     />
     <KpiCard
         title="Peso de las manufacturas en la economía"
@@ -524,7 +524,7 @@ España no está entre los países más industriales de la Unión Europea: sus m
         changePeriod="frente a la UE"
         direction="positive-up"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_manufacturas)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_manufacturas}))}
     />
     <KpiCard
         title="Índice de producción industrial"
@@ -535,7 +535,7 @@ España no está entre los países más industriales de la Unión Europea: sus m
         changePeriod="interanual"
         direction="positive-up"
         source="INE (IPI, tabla 70177)"
-        sparklineData={ipi_mes.map(d => d.indice)}
+        sparklineData={ipi_mes.map(d => ({...d, y: d.indice}))}
     />
 </Grid>
 

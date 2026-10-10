@@ -3,7 +3,7 @@ description: "En què gasta els diners públics Espanya: despesa per funcions (p
 title: Despesa pública i destinació del pressupost
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 21ec6e00fe32
+i18n_origen: ffd69e06b546
 ---
 
 <script>
@@ -109,7 +109,7 @@ La despesa pública consolidada a Espanya va arribar el {resumen_gastos[0]?.anio
         period="{formatNumber(resumen_gastos[0]?.pens_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.pens_pct, 1)}% de la despesa · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF10)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Protección Social y Pensiones').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Protección Social y Pensiones').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -120,7 +120,7 @@ La despesa pública consolidada a Espanya va arribar el {resumen_gastos[0]?.anio
         period="{formatNumber(resumen_gastos[0]?.san_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.san_pct, 1)}% de la despesa · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF07)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Sanidad Pública').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Sanidad Pública').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -131,7 +131,7 @@ La despesa pública consolidada a Espanya va arribar el {resumen_gastos[0]?.anio
         period="{formatNumber(resumen_gastos[0]?.edu_mio / 1000, 1)} mil M€ en total · {formatNumber(resumen_gastos[0]?.edu_pct, 1)}% de la despesa · {resumen_gastos[0]?.anio}"
         direction="neutral"
         source="Eurostat (COFOG GF09)"
-        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Educación').map(d => d.eur_hab_real)}
+        sparklineData={serie_gastos_real.filter(d => d.funcion_cofog === 'Educación').map(d => ({...d, y: d.eur_hab_real}))}
     />
 </Grid>
 

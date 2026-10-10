@@ -1,7 +1,7 @@
 ---
 title: Mitjans de comunicació
 description: "Els mitjans de comunicació a Espanya en dades: quants diners públics reben les ràdios i televisions públiques i els mitjans privats en publicitat institucional i subvencions, per habitant, per comunitat i per partit."
-i18n_origen: fac8a0e02911
+i18n_origen: 04e7dfd80d80
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -49,7 +49,7 @@ Quina relació econòmica tenen les administracions amb els mitjans de comunicac
         source="CNMC i RTVE"
         direction="positive-down"
         href="/ca/medios/dinero-publico"
-        sparklineData={tv.map(d => d.total_eur_hab_real)}
+        sparklineData={tv.map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Publicitat de l'Estat"
@@ -60,7 +60,7 @@ Quina relació econòmica tenen les administracions amb els mitjans de comunicac
         source="Comissió de Publicitat Institucional"
         direction="positive-down"
         href="/ca/medios/dinero-publico"
-        sparklineData={pub.map(d => d.institucional_eur_hab_real + d.comercial_eur_hab_real)}
+        sparklineData={pub.map(d => ({...d, y: d.institucional_eur_hab_real + d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Subvencions a mitjans privats"
@@ -71,7 +71,7 @@ Quina relació econòmica tenen les administracions amb els mitjans de comunicac
         source="BDNS"
         direction="positive-down"
         href="/ca/medios/dinero-publico"
-        sparklineData={sub.map(d => d.eur_hab_real)}
+        sparklineData={sub.map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

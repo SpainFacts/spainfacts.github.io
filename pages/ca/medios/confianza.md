@@ -1,7 +1,7 @@
 ---
 title: Confiança i consum de notícies
 description: "Quant confien els espanyols en les notícies i en cada mitjà, com s'informen (televisió, premsa, internet, xarxes), quants paguen per notícies digitals i quants les eviten, des del 2013 i en comparació amb la resta de la Unió Europea."
-i18n_origen: 420973bd0968
+i18n_origen: 5bedbf85df21
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -188,7 +188,7 @@ Quant es refien els espanyols de les notícies i de cada mitjà, per on s'inform
         changePeriod={`des del ${es_resumen[0].primer_anio}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es_conf.map(d => d.confianza)}
+        sparklineData={es_conf.map(d => ({...d, y: d.confianza}))}
     />
     <KpiCard
         title="Paguen per notícies en línia"
@@ -201,7 +201,7 @@ Quant es refien els espanyols de les notícies i de cada mitjà, per on s'inform
         changePeriod={`des del ${es_resumen[0].paga_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.paga !== null).map(d => d.paga)}
+        sparklineData={es.filter(d => d.paga !== null).map(d => ({...d, y: d.paga}))}
     />
     <KpiCard
         title="Eviten les notícies"
@@ -214,7 +214,7 @@ Quant es refien els espanyols de les notícies i de cada mitjà, per on s'inform
         changePeriod={`des del ${es_resumen[0].evita_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-down"
-        sparklineData={es.filter(d => d.evita !== null).map(d => d.evita)}
+        sparklineData={es.filter(d => d.evita !== null).map(d => ({...d, y: d.evita}))}
     />
     <KpiCard
         title="Molt interessats en les notícies"
@@ -227,7 +227,7 @@ Quant es refien els espanyols de les notícies i de cada mitjà, per on s'inform
         changePeriod={`des del ${es_resumen[0].interes_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.interes !== null).map(d => d.interes)}
+        sparklineData={es.filter(d => d.interes !== null).map(d => ({...d, y: d.interes}))}
     />
     {/if}
 </div>

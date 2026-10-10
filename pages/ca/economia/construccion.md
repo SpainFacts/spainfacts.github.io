@@ -1,7 +1,7 @@
 ---
 title: Construcció
 description: "La construcció a Espanya davant la UE: pes en el valor afegit i en l'ocupació des del 1995, la bombolla del 2007 i l'enfonsament, licitació d'obra pública en euros reals per habitant i partit del Govern, habitatges visats, ciment, producció, costos, empreses i comunitats."
-i18n_origen: 60f03001a5e1
+i18n_origen: 9b8936d58932
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -601,7 +601,7 @@ La construcció va ser el motor i després el llast de l'economia espanyola. El 
         changePeriod="vs 2007"
         direction="neutral"
         source="Eurostat (nama_10_a10)"
-        sparklineData={peso_es.map(d => d.pct_vab_construccion)}
+        sparklineData={peso_es.map(d => ({...d, y: d.pct_vab_construccion}))}
     />
     <KpiCard
         title="Ocupats per 1.000 habitants"
@@ -613,7 +613,7 @@ La construcció va ser el motor i després el llast de l'economia espanyola. El 
         changePeriod="vs fa un any"
         direction="positive-up"
         source="INE (EPA)"
-        sparklineData={epa.map(d => d.ocupados_constr_1000hab)}
+        sparklineData={epa.map(d => ({...d, y: d.ocupados_constr_1000hab}))}
     />
     <KpiCard
         title="Licitació pública per habitant"
@@ -625,7 +625,7 @@ La construcció va ser el motor i després el llast de l'economia espanyola. El 
         changePeriod="vs 2007"
         direction="neutral"
         source="Ministeri de Transports"
-        sparklineData={lic.map(d => d.total_hab_real)}
+        sparklineData={lic.map(d => ({...d, y: d.total_hab_real}))}
     />
     <KpiCard
         title="Habitatges visats per 1.000 hab."
@@ -637,7 +637,7 @@ La construcció va ser el motor i després el llast de l'economia espanyola. El 
         changePeriod="vs any anterior"
         direction="neutral"
         source="Col·legis d'aparelladors (BdE)"
-        sparklineData={visados.map(d => d.viviendas_nueva_1000hab)}
+        sparklineData={visados.map(d => ({...d, y: d.viviendas_nueva_1000hab}))}
     />
 </Grid>
 

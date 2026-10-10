@@ -85,7 +85,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         changePeriod="real vs año anterior"
         direction="positive-up"
         source="Eurostat"
-        sparklineData={pib_hab.map(d => d.valor)}
+        sparklineData={pib_hab.map(d => ({...d, y: d.valor}))}
         href="/economia/pib"
     />
     <KpiCard
@@ -94,7 +94,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         formattedValue="{formatNumber(pib_trim.slice(-1)[0]?.interanual, 1)} %"
         period="interanual real, {pib_trim.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={pib_trim.slice(-24).map(d => d.interanual)}
+        sparklineData={pib_trim.slice(-24).map(d => ({...d, y: d.interanual}))}
         href="/economia/pib"
     />
     <KpiCard
@@ -103,7 +103,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         formattedValue="{formatNumber(exportaciones.slice(-1)[0]?.pct_pib, 1)} % del PIB"
         period="bienes y servicios, {exportaciones.slice(-1)[0]?.periodo}"
         source="Eurostat"
-        sparklineData={exportaciones.slice(-40).map(d => d.pct_pib)}
+        sparklineData={exportaciones.slice(-40).map(d => ({...d, y: d.pct_pib}))}
         href="/economia/comercio-exterior"
     />
     <KpiCard
@@ -115,7 +115,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         changePeriod="real vs año anterior"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={salario.map(d => d.salario_real)}
+        sparklineData={salario.map(d => ({...d, y: d.salario_real}))}
         href="/economia/salarios"
     />
     <KpiCard
@@ -128,7 +128,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         changePeriod="vs trimestre anterior"
         direction="positive-down"
         source="INE / EPA"
-        sparklineData={serie_paro.slice(-40).map(d => d.paro)}
+        sparklineData={serie_paro.slice(-40).map(d => ({...d, y: d.paro}))}
         href="/economia/paro"
     />
     <KpiCard
@@ -141,7 +141,7 @@ Cómo evoluciona la economía española. Siguiendo el criterio de toda la web, l
         changePeriod="vs mes anterior"
         direction="positive-down"
         source="INE / IPC"
-        sparklineData={serie_ipc.slice(-36).map(d => d.ipc)}
+        sparklineData={serie_ipc.slice(-36).map(d => ({...d, y: d.ipc}))}
         href="/economia/ipc"
     />
 </Grid>

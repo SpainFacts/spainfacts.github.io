@@ -3,7 +3,7 @@ description: "Ingressos, despeses, dèficit i deute de les administracions públ
 title: Comptes Públics · L'informe anual d'Espanya
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: f87d27f18aaf
+i18n_origen: 6a6b81df44af
 ---
 
 <script>
@@ -137,7 +137,7 @@ ORDER BY anio
         changePeriod="interanual, descomptada la inflació"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => d.ingresos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.ingresos_hab_real != null).map(d => ({...d, y: d.ingresos_hab_real}))}
         href="/ca/cuentas-publicas/ingresos"
     />
 
@@ -152,7 +152,7 @@ ORDER BY anio
         changePeriod="interanual, descomptada la inflació"
         direction="neutral"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => d.gastos_hab_real)}
+        sparklineData={serie_balance_real.filter(d => d.gastos_hab_real != null).map(d => ({...d, y: d.gastos_hab_real}))}
         href="/ca/cuentas-publicas/gastos"
     />
 
@@ -166,7 +166,7 @@ ORDER BY anio
         changePeriod="vs. any anterior"
         direction="positive-up"
         source="Eurostat (gov_10a_main)"
-        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
+        sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => ({...d, y: d.deficit_pib}))}
     />
 
     <KpiCard
@@ -179,7 +179,7 @@ ORDER BY anio
         changePeriod="vs. any anterior"
         direction="positive-down"
         source="Eurostat (PDE)"
-        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => d.deuda_pib)}
+        sparklineData={serie_deuda_pib.filter(d => d.deuda_pib != null).map(d => ({...d, y: d.deuda_pib}))}
         href="/ca/varios/indicadores/deuda_publica_pib"
     />
 </Grid>

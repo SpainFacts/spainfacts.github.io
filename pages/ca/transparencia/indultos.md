@@ -1,7 +1,7 @@
 ---
 title: Indults
 description: "Quants indults concedeix cada Govern d'Espanya des de 1977 segons el BOE, la seva evolució i com es compara cada president i cada partit segons el temps que ha governat."
-i18n_origen: 774383d84eca
+i18n_origen: a455aff1d882
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -120,7 +120,7 @@ L'**indult** és la gràcia per la qual el Govern perdona, totalment o parcialme
         formattedValue={formatNumber(resumen[0]?.ultimo, 0)}
         period="{formatNumber(resumen[0]?.en_curso, 0)} en el que va de {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.indultos)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.indultos}))}
     />
     <KpiCard
         title="Mitjana dels últims deu anys"

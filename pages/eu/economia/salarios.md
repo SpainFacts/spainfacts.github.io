@@ -1,7 +1,7 @@
 ---
 title: Soldatak
 description: "Espainiako batez besteko soldata inflazioa kenduta, haren hazkunde erreala eta nominala, sektorearen eta lanaldiaren arabera, eta dezilen araberako banaketa."
-i18n_origen: fba9f04f2b64
+i18n_origen: c141d7649501
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -113,7 +113,7 @@ Zenbat kobratzen den Espainian eta soldatak lehen baino gehiagorako edo gutxiago
         changePeriod="erreala, aurreko urtearekin alderatuta"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Azken hiruhilekoko igoera erreala"
@@ -122,7 +122,7 @@ Zenbat kobratzen den Espainian eta soldatak lehen baino gehiagorako edo gutxiago
         period="{trimestral.slice(-1)[0]?.periodo}, duela urtebeterekin alderatuta · {formatNumber(trimestral.slice(-1)[0]?.interanual_nominal, 1)} % inflazioa kendu gabe"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => d.interanual_real)}
+        sparklineData={trimestral.filter(d => d.interanual_real != null).slice(-20).map(d => ({...d, y: d.interanual_real}))}
     />
     <KpiCard
         title="2008arekin alderatuta"
@@ -131,7 +131,7 @@ Zenbat kobratzen den Espainian eta soldatak lehen baino gehiagorako edo gutxiago
         period="batez besteko soldataren erosahalmena {hitos_salario[0]?.anio_ult}. urtean · +{formatNumber(hitos_salario[0]?.nominal_vs2008, 0)} % urte bakoitzeko eurotan"
         direction="positive-up"
         source="INE / ETCL"
-        sparklineData={anual.map(d => d.salario_real)}
+        sparklineData={anual.map(d => ({...d, y: d.salario_real}))}
     />
     <KpiCard
         title="Erdiko dezilaren soldata"
@@ -139,7 +139,7 @@ Zenbat kobratzen den Espainian eta soldatak lehen baino gehiagorako edo gutxiago
         formattedValue="{formatNumber(deciles_ult.find(d => d.decil === 5)?.salario_real, 0)} €/hilean"
         period="soldatapeko tipikoak kobratzen duena (EPAren 5. dezila) {deciles_ult[0]?.anio}. urtean, {deciles_ult[0]?.anio_base}. urteko eurotan"
         source="INE / EPA"
-        sparklineData={deciles.filter(d => d.decil === 5).map(d => d.salario_real)}
+        sparklineData={deciles.filter(d => d.decil === 5).map(d => ({...d, y: d.salario_real}))}
     />
 </Grid>
 

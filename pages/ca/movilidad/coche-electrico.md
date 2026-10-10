@@ -1,7 +1,7 @@
 ---
 title: Cotxe elèctric
 description: "Transició al cotxe elèctric a Espanya: matriculacions de turismes per tipus de motor cada mes des del 2015, quota d'elèctrics i híbrids endollables per província i emissions de CO2."
-i18n_origen: ed78ed2e1c5f
+i18n_origen: a3ce9f887980
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -98,7 +98,7 @@ Quants dels cotxes que es venen a Espanya ja són elèctrics? La resposta surt d
         changePeriod="vs. un any abans"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_bev * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_bev * 100}))}
     />
     <KpiCard
         title="Endollables (elèctrics + híbrids endollables)"
@@ -111,7 +111,7 @@ Quants dels cotxes que es venen a Espanya ja són elèctrics? La resposta surt d
         changePeriod="vs. un any abans"
         direction="positive-up"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_enchufables * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_enchufables * 100}))}
     />
     <KpiCard
         title="Electrificats (inclosos híbrids)"
@@ -120,7 +120,7 @@ Quants dels cotxes que es venen a Espanya ja són elèctrics? La resposta surt d
         unit="%"
         period="dels turismes nous · {ultimo[0]?.mes_texto}"
         source="DGT"
-        sparklineData={cuota_mensual.map(d => ({valor: d.cuota_electrificados * 100}))}
+        sparklineData={cuota_mensual.map(d => ({...d, valor: d.cuota_electrificados * 100}))}
     />
 </Grid>
 

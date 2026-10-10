@@ -1,7 +1,7 @@
 ---
 title: Elections
 description: "Results of general elections since 1977, European and municipal elections: turnout, votes by party and by bloc, fragmentation, votes per seat and the winner in each province and municipality, using official data from the Ministry of the Interior."
-i18n_origen: 855cde6e0399
+i18n_origen: c483ec970932
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -73,7 +73,7 @@ How many people vote, for whom, and how the seats are shared out: every general 
         formattedValue="{resumen[0]?.ganador_siglas} · {formatNumber(resumen[0]?.ganador_pct, 1)} %"
         period="{formatNumber(resumen[0]?.ganador_escanos, 0)} of 350 seats · runner-up: {resumen[0]?.segundo_siglas} ({formatNumber(resumen[0]?.segundo_pct, 1)} %)"
         source="Ministry of the Interior"
-        sparklineData={generales.map(d => ({valor: d.ganador_pct}))}
+        sparklineData={generales.map(d => ({...d, valor: d.ganador_pct}))}
     />
     <KpiCard
         title="Effective number of parties"
@@ -84,7 +84,7 @@ How many people vote, for whom, and how the seats are shared out: every general 
         changeUnit=""
         changePeriod="vs {resumen[0]?.etiqueta_anterior}"
         source="Own calculation"
-        sparklineData={generales.map(d => ({valor: d.nep_votos}))}
+        sparklineData={generales.map(d => ({...d, valor: d.nep_votos}))}
     />
     <KpiCard
         title="Vote share of the top two"
@@ -95,7 +95,7 @@ How many people vote, for whom, and how the seats are shared out: every general 
         changeUnit="pp"
         changePeriod="vs {resumen[0]?.etiqueta_anterior}"
         source="Ministry of the Interior"
-        sparklineData={generales.map(d => ({valor: d.dos_primeros}))}
+        sparklineData={generales.map(d => ({...d, valor: d.dos_primeros}))}
     />
 </Grid>
 

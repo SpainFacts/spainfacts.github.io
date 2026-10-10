@@ -3,7 +3,7 @@ description: "Nondik ateratzen den diru publikoa: zergak eta gizarte-kotizazioak
 title: Diru-sarrera Publikoak eta Zerga-bilketa
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 41be22719404
+i18n_origen: f4370ea6ff06
 ---
 
 <script>
@@ -125,7 +125,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.cot_mio / 1000, 1)} mila M€ guztira · diru-sarreren {formatNumber(resumen_tipos[0]?.cot_pct, 1)}% · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'Cotizaciones Sociales').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -136,7 +136,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.irpf_mio / 1000, 1)} mila M€ guztira · diru-sarreren {formatNumber(resumen_tipos[0]?.irpf_pct, 1)}% · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IRPF y Patrimonio').map(d => ({...d, y: d.eur_hab_real}))}
     />
 
     <KpiCard
@@ -147,7 +147,7 @@ ORDER BY anio
         period="{formatNumber(resumen_tipos[0]?.iva_mio / 1000, 1)} mila M€ guztira · diru-sarreren {formatNumber(resumen_tipos[0]?.iva_pct, 1)}% · {ultimos_ingresos_totales[0]?.anio}"
         direction="neutral"
         source="Eurostat (gov_10a_taxag)"
-        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => d.eur_hab_real)}
+        sparklineData={serie_ingresos_real.filter(d => d.categoria === 'IVA').map(d => ({...d, y: d.eur_hab_real}))}
     />
 </Grid>
 

@@ -1,7 +1,7 @@
 ---
 title: Electricity storage
 description: "Pumped hydro and batteries in Spain: how much energy they store and return, installed capacity by region, round-trip efficiency and projects with grid access permits against the PNIEC target of 22.5 GW for 2030."
-i18n_origen: af0dd2e402bd
+i18n_origen: 109cbe23c229
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -85,7 +85,7 @@ With ever more solar and wind power, the electricity system needs to store the s
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="in {ultimo_anio[0]?.anio} · {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} times the 2019 figure"
         source="REE (balance)"
-        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({...d, valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Storage with grid access permits"

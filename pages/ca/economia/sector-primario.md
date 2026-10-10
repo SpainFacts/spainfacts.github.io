@@ -1,7 +1,7 @@
 ---
 title: Sector primari
 description: "On és una potència Espanya al camp i al mar: quota a la UE i lloc en oli d'oliva, cítrics, fruites i hortalisses, vi, porcí, oví, pesca i aqüicultura, valor de la producció agrària per habitant en euros reals i pes del sector primari per comunitat i província."
-i18n_origen: f1fe3023279d
+i18n_origen: b0106b55afc7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -484,7 +484,7 @@ Agricultura, ramaderia i pesca: en què és Espanya **la primera de la Unió Eur
         period="campanya {aceite_kpi[0]?.campania} · {formatNumber(aceite_kpi[0]?.cuota_mundo, 1)} % del món (COI) · {formatNumber(aceite_kpi[0]?.prod_kt, 0)} milers de t"
         direction="neutral"
         source="Comissió Europea · COI"
-        sparklineData={aceite_es.map(d => d.cuota_ue_pct)}
+        sparklineData={aceite_es.map(d => ({...d, y: d.cuota_ue_pct}))}
     />
     <KpiCard
         title="Cítrics: quota a la UE"
@@ -493,7 +493,7 @@ Agricultura, ramaderia i pesca: en què és Espanya **la primera de la Unió Eur
         period="{kpi[0]?.citricos_anio} · 1a de la UE · {formatNumber(kpi[0]?.citricos_kt, 0)} milers de t"
         direction="neutral"
         source="Eurostat (apro_cpsh1)"
-        sparklineData={serie_citricos.map(d => d.cuota_pct)}
+        sparklineData={serie_citricos.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Carn de porcí: quota a la UE"
@@ -505,7 +505,7 @@ Agricultura, ramaderia i pesca: en què és Espanya **la primera de la Unió Eur
         changePeriod="vs {porcino_cambio[0]?.anio_ini}"
         direction="neutral"
         source="Eurostat (apro_mt_pann)"
-        sparklineData={serie_porcino.map(d => d.cuota_pct)}
+        sparklineData={serie_porcino.map(d => ({...d, y: d.cuota_pct}))}
     />
     <KpiCard
         title="Producció agrària per habitant"
@@ -514,7 +514,7 @@ Agricultura, ramaderia i pesca: en què és Espanya **la primera de la Unió Eur
         period="{valor_resumen[0]?.anio}, euros d'avui · UE-27: {formatNumber(valor_resumen[0]?.ue, 0)} € · {formatNumber(valor_resumen[0]?.es_meur, 0)} milions de € en total"
         direction="positive-up"
         source="Eurostat (aact_eaa01)"
-        sparklineData={valor_es.map(d => d.produccion_eur_hab_real)}
+        sparklineData={valor_es.map(d => ({...d, y: d.produccion_eur_hab_real}))}
     />
 </Grid>
 

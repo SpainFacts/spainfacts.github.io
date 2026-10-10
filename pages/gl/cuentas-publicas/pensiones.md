@@ -1,7 +1,7 @@
 ---
 title: Pensións
 description: "Pensións contributivas en España: pensión media descontada a inflación, afiliados por pensión, gasto en pensións en % do PIB fronte á UE, pensións por habitante e por comunidade e provincia."
-i18n_origen: 3f8817a42d1f
+i18n_origen: 7c0311a74845
 ---
 
 <script>
@@ -219,7 +219,7 @@ Canto cobran os pensionistas en España, cantos traballadores cotizan por cada p
         changePeriod="real fronte a un ano antes"
         direction="positive-up"
         source="Seguridade Social"
-        sparklineData={mensual_real.map(d => d.pension_media_jubilacion_real)}
+        sparklineData={mensual_real.map(d => ({...d, y: d.pension_media_jubilacion_real}))}
     />
     <KpiCard
         title="Afiliados por pensión"
@@ -228,7 +228,7 @@ Canto cobran os pensionistas en España, cantos traballadores cotizan por cada p
         period="{mesGl(mensual_ratio.slice(-1)[0]?.mes_texto)} · {formatNumber(mensual_ratio.slice(-1)[0]?.afiliados / 1e6, 1)} millóns de afiliados e {formatNumber(mensual_ratio.slice(-1)[0]?.pensiones / 1e6, 1)} millóns de pensións"
         direction="positive-up"
         source="Seguridade Social"
-        sparklineData={mensual_ratio.map(d => d.afiliados_por_pension)}
+        sparklineData={mensual_ratio.map(d => ({...d, y: d.afiliados_por_pension}))}
     />
     <KpiCard
         title="Gasto en pensións"
@@ -237,7 +237,7 @@ Canto cobran os pensionistas en España, cantos traballadores cotizan por cada p
         period="{gasto_ult[0]?.anio} · vellez e supervivencia, todas as AAPP · media UE-27: {formatNumber(gasto_ult[0]?.ue, 1)} %"
         direction="positive-down"
         source="Eurostat (COFOG)"
-        sparklineData={gasto_es.map(d => d.gasto_vejez_supervivientes_pib)}
+        sparklineData={gasto_es.map(d => ({...d, y: d.gasto_vejez_supervivientes_pib}))}
     />
     <KpiCard
         title="Pensións por 1.000 habitantes"
@@ -245,7 +245,7 @@ Canto cobran os pensionistas en España, cantos traballadores cotizan por cada p
         formattedValue={formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_1000_hab, 0)}
         period="{anual_completo.slice(-1)[0]?.anio_i}, media do ano · {formatNumber(anual_completo.slice(-1)[0]?.pensiones_por_100_mayores, 0)} por cada 100 persoas de 65 anos ou máis"
         source="Seguridade Social / INE"
-        sparklineData={anual_completo.map(d => d.pensiones_por_1000_hab)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.pensiones_por_1000_hab}))}
     />
 </Grid>
 

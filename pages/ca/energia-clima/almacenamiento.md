@@ -1,7 +1,7 @@
 ---
 title: Emmagatzematge d'electricitat
 description: "Bombament hidràulic i bateries a Espanya: quanta energia emmagatzemen i retornen, potència instal·lada per comunitat, rendiment i projectes amb permís d'accés a la xarxa davant l'objectiu de 22,5 GW del PNIEC per al 2030."
-i18n_origen: af0dd2e402bd
+i18n_origen: 109cbe23c229
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -85,7 +85,7 @@ Amb cada vegada més solar i eòlica, el sistema elèctric necessita guardar l'e
         formattedValue="{formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / 1000, 1)} TWh"
         period="el {ultimo_anio[0]?.anio} · {formatNumber(ultimo_anio[0]?.bombeo_turbinado_gwh / anio_2019[0]?.bombeo_turbinado_gwh, 1)} vegades la del 2019"
         source="REE (balanç)"
-        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({valor: d.bombeo_turbinado_gwh / 1000}))}
+        sparklineData={anual.filter(d => Number(d.meses) === 12).map(d => ({...d, valor: d.bombeo_turbinado_gwh / 1000}))}
     />
     <KpiCard
         title="Emmagatzematge amb permís d'accés"

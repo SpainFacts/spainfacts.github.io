@@ -1,7 +1,7 @@
 ---
 title: Komunikabideak
 description: "Espainiako komunikabideak datuetan: zenbat diru publiko jasotzen duten irrati-telebista publikoek eta komunikabide pribatuek erakunde-publizitatean eta diru-laguntzetan, biztanleko, erkidegoka eta alderdika."
-i18n_origen: fac8a0e02911
+i18n_origen: 04e7dfd80d80
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -48,7 +48,7 @@ Zer harreman ekonomiko duten administrazioek komunikabideekin: zenbat kostatzen 
         source="CNMC eta RTVE"
         direction="positive-down"
         href="/eu/medios/dinero-publico"
-        sparklineData={tv.map(d => d.total_eur_hab_real)}
+        sparklineData={tv.map(d => ({...d, y: d.total_eur_hab_real}))}
     />
     <KpiCard
         title="Estatuaren publizitatea"
@@ -59,7 +59,7 @@ Zer harreman ekonomiko duten administrazioek komunikabideekin: zenbat kostatzen 
         source="Erakunde Publizitatearen Batzordea"
         direction="positive-down"
         href="/eu/medios/dinero-publico"
-        sparklineData={pub.map(d => d.institucional_eur_hab_real + d.comercial_eur_hab_real)}
+        sparklineData={pub.map(d => ({...d, y: d.institucional_eur_hab_real + d.comercial_eur_hab_real}))}
     />
     <KpiCard
         title="Diru-laguntzak komunikabide pribatuei"
@@ -70,7 +70,7 @@ Zer harreman ekonomiko duten administrazioek komunikabideekin: zenbat kostatzen 
         source="BDNS"
         direction="positive-down"
         href="/eu/medios/dinero-publico"
-        sparklineData={sub.map(d => d.eur_hab_real)}
+        sparklineData={sub.map(d => ({...d, y: d.eur_hab_real}))}
     />
     {/if}
 </div>

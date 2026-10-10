@@ -1,7 +1,7 @@
 ---
 title: Zenbat diputatu dira etxe-jabe errentatzaile?
 description: "Kongresuko zenbat diputatuk aitortzen dituzten alokairuagatiko diru-sarrerak edo dituzten hainbat etxebizitza, beren ondasun eta errenten aitorpenen arabera, talde parlamentarioka eta PFEZaren aitortzaile guztiekin alderatuta."
-i18n_origen: cfa645ec5bd9
+i18n_origen: b1840c4f7433
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -87,7 +87,7 @@ Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkez
         unit="diputatuena"
         period={`${kpi[0].n_alquila}/${kpi[0].n_validos} diputatu · PFEZ: aitortzaileen ${formatNumber(irpf[0].pct_todos, 1)} %`}
         source="Diputatuen Kongresua"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 etxebizitza edo gehiago dituzte"
@@ -96,7 +96,7 @@ Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkez
         unit="diputatuena"
         period={`${kpi[0].n_dos_viviendas} diputatu`}
         source="Diputatuen Kongresua"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="2 hiri-higiezin oso edo gehiago"
@@ -105,7 +105,7 @@ Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkez
         unit="diputatuena"
         period={`Higiezin bakoitzean duten zatia batuta · ${kpi[0].n_dos_equivalentes} diputatu`}
         source="Diputatuen Kongresua"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     <KpiCard
         title="Hiri-higiezinik batere gabe"
@@ -114,7 +114,7 @@ Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkez
         unit="diputatuena"
         period={`Mediana: ${formatNumber(kpi[0].mediana_urbanos, 0)} hiri-higiezin diputatu bakoitzeko`}
         source="Diputatuen Kongresua"
-        sparklineData={resumen.map(d => d.pct)}
+        sparklineData={resumen.map(d => ({...d, y: d.pct}))}
     />
     {/if}
 </div>

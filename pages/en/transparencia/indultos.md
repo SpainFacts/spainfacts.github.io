@@ -1,7 +1,7 @@
 ---
 title: Pardons
 description: "How many pardons each Spanish government has granted since 1977 according to the BOE, how they have changed and how each prime minister and each party compares given the time it has been in power."
-i18n_origen: 774383d84eca
+i18n_origen: a455aff1d882
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -120,7 +120,7 @@ A **pardon** (indulto) is the act of clemency by which the Government remits, wh
         formattedValue={formatNumber(resumen[0]?.ultimo, 0)}
         period="{formatNumber(resumen[0]?.en_curso, 0)} so far in {resumen[0]?.anio_en_curso}"
         source="BOE"
-        sparklineData={anual_completo.map(d => d.indultos)}
+        sparklineData={anual_completo.map(d => ({...d, y: d.indultos}))}
     />
     <KpiCard
         title="Average over the last ten years"

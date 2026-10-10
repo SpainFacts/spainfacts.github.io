@@ -187,7 +187,7 @@ Cuánto se fían los españoles de las noticias y de cada medio, por dónde se i
         changePeriod={`desde ${es_resumen[0].primer_anio}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es_conf.map(d => d.confianza)}
+        sparklineData={es_conf.map(d => ({...d, y: d.confianza}))}
     />
     <KpiCard
         title="Pagan por noticias online"
@@ -200,7 +200,7 @@ Cuánto se fían los españoles de las noticias y de cada medio, por dónde se i
         changePeriod={`desde ${es_resumen[0].paga_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.paga !== null).map(d => d.paga)}
+        sparklineData={es.filter(d => d.paga !== null).map(d => ({...d, y: d.paga}))}
     />
     <KpiCard
         title="Evitan las noticias"
@@ -213,7 +213,7 @@ Cuánto se fían los españoles de las noticias y de cada medio, por dónde se i
         changePeriod={`desde ${es_resumen[0].evita_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-down"
-        sparklineData={es.filter(d => d.evita !== null).map(d => d.evita)}
+        sparklineData={es.filter(d => d.evita !== null).map(d => ({...d, y: d.evita}))}
     />
     <KpiCard
         title="Muy interesados en las noticias"
@@ -226,7 +226,7 @@ Cuánto se fían los españoles de las noticias y de cada medio, por dónde se i
         changePeriod={`desde ${es_resumen[0].interes_desde}`}
         source="Reuters Institute, Digital News Report"
         direction="positive-up"
-        sparklineData={es.filter(d => d.interes !== null).map(d => d.interes)}
+        sparklineData={es.filter(d => d.interes !== null).map(d => ({...d, y: d.interes}))}
     />
     {/if}
 </div>
