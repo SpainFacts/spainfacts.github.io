@@ -1,13 +1,15 @@
 ---
 description: "Ficha da comunidade autónoma: poboación, economía, contas públicas, débeda, emprego público, seguridade e máis, con datos oficiais e comparados con España."
-i18n_origen: b9c51634f0cb
+i18n_origen: cf127e3a7077
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -91,7 +93,10 @@ SELECT
 FROM ${municipios}
 ```
 
+{#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/gl/territorios">Territorios</a> › {terr[0]?.nombre}</p>
 
@@ -1680,5 +1685,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Banco de España – Boletín Estatístico, capítulo 13](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: débeda segundo o Protocolo de Déficit Excesivo e capacidade/necesidade de financiamento das comunidades autónomas.
 - **[Rexistro Central de Persoal – Boletín Estatístico do Persoal ao Servizo das AAPP](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: empregados públicos por administración e provincia do posto; **[INE – Enquisa de Estrutura Salarial 2022](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: salarios públicos e privados.
 - **[Instituto Geográfico Nacional (vía es-atlas)](https://github.com/martgnz/es-atlas)**: límites municipais (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Actualizando os datos territoriais…</p>
+{/if}
 
 <LastRefreshed prefix="Datos actualizados" />

@@ -30,7 +30,15 @@ export const formatCurrency = (num) => {
     }).format(numValue);
 };
 
-// Formatear números grandes con abreviatura (M para millones, m para miles)
+// Número en texto corrido con el separador del idioma y hasta `max` decimales (40 -> "40", 55.47 -> "55,5")
+export const formatDecimal = (num, max = 1) => {
+    if (num === null || num === undefined || num === '') return '-';
+    const numValue = typeof num === 'string' ? parseFloat(num) : num;
+    if (isNaN(numValue)) return '-';
+    return new Intl.NumberFormat(LOCALE, { maximumFractionDigits: max, useGrouping: 'min2' }).format(numValue);
+};
+
+// Abbreviate large numbers without using "m", which can be mistaken for metres.
 export const formatCompact = (num, decimales = 1) => {
     if (num === null || num === undefined || num === '') return '-';
     const numValue = typeof num === 'string' ? parseFloat(num) : num;
@@ -45,7 +53,7 @@ export const formatCompact = (num, decimales = 1) => {
     if (Math.abs(numValue) >= 1e6) {
         return formatter.format(numValue / 1e6) + ' M';
     } else if (Math.abs(numValue) >= 1e3) {
-        return formatter.format(numValue / 1e3) + ' m'; // Usamos 'm' minúscula para miles como pediste, o 'k' si prefieres
+        return formatter.format(numValue / 1e3) + (LOCALE.startsWith('en') ? 'k' : ' mil');
     }
     return formatter.format(numValue);
 };
@@ -71,7 +79,7 @@ export const formatThousands = (num, decimales = 1) => {
         minimumFractionDigits: decimales,
         maximumFractionDigits: decimales,
         useGrouping: true
-    }).format(numValue / 1e3) + ' m';
+    }).format(numValue / 1e3) + (LOCALE.startsWith('en') ? 'k' : ' mil');
 };
 
 // UI Utilities

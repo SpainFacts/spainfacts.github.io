@@ -26,7 +26,7 @@ index 90bcb11..286bd56 100644
  	>
  		{valueLabel}
 diff --git a/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte b/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
-index 41263f2..b299591 100644
+index 41263f2..1b40ee5 100644
 --- a/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/organisms/layout/BreadCrumbs.svelte
 @@ -16,9 +16,16 @@
@@ -47,7 +47,7 @@ index 41263f2..b299591 100644
  			if (path != '' && `/${path}` !== config.deployment.basePath) {
  				crumbs.push({
  					href: '/' + pathArray.slice(0, i + 1).join('/'),
-@@ -34,8 +41,8 @@
+@@ -34,14 +41,15 @@
  		for (const path of crumbs) {
  			if (path.href === '/') {
  				// Special case for Home page
@@ -58,6 +58,41 @@ index 41263f2..b299591 100644
  			} else {
  				const node = searchFileTree(path.href, fileTree);
  				if (!node || !node.isPage) {
+ 					path.href = null;
+ 				} else {
+-					path.title = node.title ?? path.title;
++					// SpainFacts: solo el nombre corto (antes de « · ») para no desbordar en móvil
++					path.title = node.title?.split(' · ')[0] ?? path.title;
+ 				}
+ 			}
+ 		}
+@@ -60,20 +68,20 @@
+ 	$: crumbs = buildCrumbs($page.url.pathname.split('/').slice(1), fileTree);
+ </script>
+ 
+-<div class="flex items-start mt-0 whitespace-nowrap overflow-auto">
++<div class="flex items-start mt-0 whitespace-nowrap overflow-hidden">
+ 	<div
+-		class="inline-flex items-center text-sm capitalize gap-1 text-base-content-muted mb-2 sm:mb-4"
++		class="inline-flex min-w-0 max-w-full items-center text-sm capitalize gap-1 text-base-content-muted mb-2 sm:mb-4"
+ 	>
+ 		{#each crumbs as crumb, i}
+ 			{#if i > 0}
+-				<Icon src={ChevronRight} size="12px" theme="solid" />
++				<Icon src={ChevronRight} size="12px" theme="solid" class="shrink-0" />
+ 				{#if crumb.href}
+-					<a href={addBasePath(crumb.href)} class="hover:underline">{crumb.title}</a>
++					<a href={addBasePath(crumb.href)} class="hover:underline truncate min-w-0" title={crumb.title}>{crumb.title}</a>
+ 				{:else}
+-					<span class=" cursor-default">{crumb.title}</span>
++					<span class="cursor-default truncate min-w-0" title={crumb.title}>{crumb.title}</span>
+ 				{/if}
+ 			{:else}
+-				<a href={addBasePath(crumb.href)} class="hover:underline">
++				<a href={addBasePath(crumb.href)} class="hover:underline shrink-0">
+ 					{crumb.title}
+ 				</a>
+ 			{/if}
 diff --git a/node_modules/@evidence-dev/core-components/dist/themes/themes.js b/node_modules/@evidence-dev/core-components/dist/themes/themes.js
 index adfa5e0..50bc125 100644
 --- a/node_modules/@evidence-dev/core-components/dist/themes/themes.js
@@ -368,6 +403,80 @@ index ef4cb65..0c60551 100644
  	@media print {
  		button {
  			display: none;
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/LastRefreshed.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/LastRefreshed.svelte
+index 7c632d2..7de445e 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/LastRefreshed.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/LastRefreshed.svelte
+@@ -6,6 +6,8 @@
+ 	import { version } from '$app/environment';
+ 	import { toBoolean } from '../../utils.js';
+ 	import { fmt } from '@evidence-dev/component-utilities/formatting';
++	import { page } from '$app/stores';
++	import { idiomaDeRuta } from './idioma.js';
+ 
+ 	const timestamp = Number(version);
+ 
+@@ -17,33 +19,26 @@
+ 
+ 	export let dateFmt = 'h:mmam/pm mmm d, yyyy';
+ 
+-	function timeAgo(startTimestamp, endTimestamp) {
+-		const secondsAgo = Math.floor((endTimestamp - startTimestamp) / 1000);
+-
+-		if (secondsAgo < 60) {
+-			return secondsAgo === 1 ? '1 second ago' : `${secondsAgo} seconds ago`;
+-		} else if (secondsAgo < 3600) {
+-			const minutesAgo = Math.round(secondsAgo / 60);
+-			return minutesAgo === 1 ? '1 min ago' : `${minutesAgo} mins ago`;
+-		} else if (secondsAgo < 86400) {
+-			const hoursAgo = (secondsAgo / 3600).toFixed(1);
+-			return hoursAgo === '1' ? '1 hour ago' : `${hoursAgo} hours ago`;
+-		} else if (secondsAgo < 604800) {
+-			const daysAgo = Math.round(secondsAgo / 86400);
+-			return daysAgo === 1 ? '1 day ago' : `${daysAgo} days ago`;
+-		} else if (secondsAgo < 2592000) {
+-			const weeksAgo = Math.round(secondsAgo / 604800);
+-			return weeksAgo === 1 ? '1 week ago' : `${weeksAgo} weeks ago`;
+-		} else if (secondsAgo < 31536000) {
+-			const monthsAgo = Math.round(secondsAgo / 2592000);
+-			return monthsAgo === 1 ? '1 month ago' : `${monthsAgo} months ago`;
+-		} else {
+-			const yearsAgo = Math.round(secondsAgo / 31536000);
+-			return yearsAgo === 1 ? '1 year ago' : `${yearsAgo} years ago`;
+-		}
++	// SpainFacts: «hace 3 horas» en el idioma de la página (Intl.RelativeTimeFormat)
++	const LOCALES = { es: 'es-ES', en: 'en-GB', ca: 'ca-ES', gl: 'gl-ES', eu: 'eu-ES' };
++	const UNIDADES = [
++		['year', 31536000],
++		['month', 2592000],
++		['week', 604800],
++		['day', 86400],
++		['hour', 3600],
++		['minute', 60],
++		['second', 1]
++	];
++	function timeAgo(startTimestamp, endTimestamp, lang) {
++		const segundos = Math.max(0, Math.floor((endTimestamp - startTimestamp) / 1000));
++		const [unidad, tam] = UNIDADES.find(([, s]) => segundos >= s) ?? ['second', 1];
++		const rtf = new Intl.RelativeTimeFormat(LOCALES[lang] ?? 'es-ES', { numeric: 'auto' });
++		return rtf.format(-Math.round(segundos / tam), unidad);
+ 	}
+ 
+-	const varTimeAgo = timeAgo(timestamp, Date.now());
++	$: lang = idiomaDeRuta($page.url.pathname);
++	$: varTimeAgo = timeAgo(timestamp, Date.now(), lang);
+ </script>
+ 
+ <svelte:window
+@@ -53,7 +48,7 @@
+ 	on:export-afterprint={() => (printing = false)}
+ />
+ 
+-<p class="text-sm mb-4 cursor-text" title={new Date(timestamp).toLocaleString()}>
++<p class="text-sm mb-4 cursor-text" title={new Date(timestamp).toLocaleString(LOCALES[lang] ?? 'es-ES')}>
+ 	{prefix}
+ 	{#if !printing || !printShowDate}
+ 		{varTimeAgo}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas.js
 new file mode 100644
 index 0000000..b1fed5e

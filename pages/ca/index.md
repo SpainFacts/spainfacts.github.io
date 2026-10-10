@@ -3,7 +3,7 @@ title: SpainFacts · L'estat d'Espanya en dades oficials
 description: "Espanya en dades oficials: població, economia, comptes públics, energia, mobilitat, societat i transparència, d'Espanya a cada municipi. Independent i sense biaix partidista."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69067017fff
+i18n_origen: d80e2a3839de
 ---
 
 <script>
@@ -96,13 +96,13 @@ ORDER BY anio
     <div class="max-w-3xl">
         <p class="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-200 mb-5">
             <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Dades oficials · independent · sense biaix partidista
+            Fonts oficials i documentades · independent · sense biaix partidista
         </p>
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
             Espanya, <span class="text-blue-300">en dades</span>.<br class="hidden sm:inline"/> De tot el país al teu municipi.
         </h1>
         <p class="text-base md:text-lg text-slate-300 leading-relaxed mb-7">
-            Quants som, en què es gasten els diners públics, com es produeix l'electricitat, quins cotxes comprem, quant vivim o quines administracions no compleixen les seves obligacions: les xifres dels organismes oficials, actualitzades cada dia i explicades amb context.
+            Població, economia, comptes públics, energia i vida quotidiana: xifres oficials i altres fonts documentades, amb context i enllaços a l'origen.
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
@@ -113,12 +113,6 @@ ORDER BY anio
         </div>
     </div>
 </div>
-
-## Pregunta a les dades
-
-Escriu una pregunta i un model d’IA que funciona al teu navegador buscarà la resposta entre les taules del web. [Més sobre el xat i com fer-lo servir amb Claude o Ollama](/ca/chat).
-
-<Chat perezoso />
 
 ## Espanya avui
 
@@ -133,7 +127,7 @@ Escriu una pregunta i un model d’IA que funciona al teu navegador buscarà la 
         changeUnit="%"
         changePeriod="en un any"
         direction="neutral"
-        source="INE"
+        source="INE · Padró"
         href="/ca/demografia"
         sparklineData={poblacion}
     />
@@ -201,6 +195,10 @@ Escriu una pregunta i un model d’IA que funciona al teu navegador buscarà la 
         sparklineData={vida}
     />
 </Grid>
+
+<p class="my-3 text-sm text-gray-600 dark:text-gray-400">
+    La població destacada aquí prové del Padró de l'INE a 1 de gener. La secció de <a href="/ca/demografia">Demografia</a> també mostra l'Estadística Contínua de Població, una sèrie diferent; per això les xifres poden variar lleugerament.
+</p>
 
 ## Compara les comunitats
 
@@ -361,16 +359,22 @@ SELECT
         <p class="text-2xl mb-1" aria-hidden="true">📚</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Fonts</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">D'on surt cada dada: organisme, taula oficial, freqüència, llicència i metodologia.</p>
-        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conjunts de dades oficials →</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conjunts de dades documentades →</p>
     </a>
 </div>
+
+## Pregunta a les dades
+
+Fes una pregunta sobre les estadístiques. El xat cerca respostes a les taules del web; obre'n les opcions si prefereixes Claude, Ollama o un altre proveïdor. [Més informació sobre el xat](/ca/chat).
+
+<Chat perezoso />
 
 ## Com treballem
 
 <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
-        <p class="font-bold text-gray-900 dark:text-white mb-1">Només fonts oficials</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Banc d'Espanya, Eurostat, ministeris, REE, DGT, AEMET… Cada gràfic enllaça a la taula d'origen.</p>
+        <p class="font-bold text-gray-900 dark:text-white mb-1">Fonts oficials i documentades</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Banc d'Espanya, Eurostat, ministeris, REE, DGT, AEMET i altres fonts identificades. Cada gràfic enllaça a l'origen.</p>
     </div>
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
         <p class="font-bold text-gray-900 dark:text-white mb-1">Context, no opinió</p>
@@ -382,4 +386,4 @@ SELECT
     </div>
 </div>
 
-<LastRefreshed prefix="Última actualització de les dades" />
+<LastRefreshed prefix="Darrera publicació del lloc" />

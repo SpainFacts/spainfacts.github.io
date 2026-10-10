@@ -1,13 +1,15 @@
 ---
 description: "Autonomous community profile: population, economy, public accounts, debt, public employment, crime and more, with official data compared with Spain as a whole."
-i18n_origen: b9c51634f0cb
+i18n_origen: cf127e3a7077
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -91,7 +93,10 @@ SELECT
 FROM ${municipios}
 ```
 
+{#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/en/territorios">Regions</a> › {terr[0]?.nombre}</p>
 
@@ -1680,5 +1685,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Banco de España – Statistical Bulletin, chapter 13](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: debt under the Excessive Deficit Procedure and net lending/borrowing of the autonomous communities.
 - **[Central Personnel Register – Statistical Bulletin of Public Administration Staff](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: public employees by administration and province of the post; **[INE – Wage Structure Survey 2022](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: public and private sector salaries.
 - **[Instituto Geográfico Nacional (via es-atlas)](https://github.com/martgnz/es-atlas)**: municipal boundaries (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Updating regional data…</p>
+{/if}
 
 <LastRefreshed prefix="Data updated" />

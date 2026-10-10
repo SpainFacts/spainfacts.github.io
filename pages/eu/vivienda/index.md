@@ -3,7 +3,7 @@ title: Etxebizitza
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta, alokairua, salerosketak eta hipotekak 1.000 biztanleko, obra berria eta etxe batek zenbat urteko soldata balio duen, erkidego eta probintziaka."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 9445f0493756
+i18n_origen: 0e532c3339dc
 ---
 
 <script>
@@ -103,7 +103,7 @@ WHERE nivel = 'pais' AND euros_m2_real IS NOT NULL
 
 # 🏠 Etxebizitza
 
-Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen diren eta zenbat eraikitzen diren. Prezioak **inflazioa kenduta** erakusten dira ({urteko(precio[0]?.anio_base)} eurotan) eta eragiketak **1.000 biztanleko**, urteak eta lurraldeak alderatu ahal izateko.
+Zenbat balio duen Espainian etxe bat erosteak edo alokatzeak, zenbat saltzen diren eta zenbat eraikitzen diren. Prezioak **inflazioa kenduta** erakusten dira ({urteko(precio.slice(-1)[0]?.anio_base)} eurotan) eta eragiketak **1.000 biztanleko**, urteak eta lurraldeak alderatu ahal izateko.
 
 <Grid cols=4>
     <KpiCard
@@ -166,7 +166,7 @@ Etxebizitza libreen batez besteko tasazio-balioa, metro koadroko eurotan. Inflaz
     yFmt='#,##0" €"'
     yAxisTitle="€/m²"
     startingAtZero={false}
-    title="Etxebizitza libreen tasazio-balioa Espainian: {urteko(precio[0]?.anio_base)} euroak urte bakoitzeko euroen aldean"
+    title="Etxebizitza libreen tasazio-balioa Espainian: {urteko(precio.slice(-1)[0]?.anio_base)} euroak urte bakoitzeko euroen aldean"
 />
 
 ## Zenbat erosten diren eta zenbat hipotekatzen diren

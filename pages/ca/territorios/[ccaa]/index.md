@@ -1,13 +1,15 @@
 ---
 description: "Fitxa de la comunitat autònoma: població, economia, comptes públics, deute, ocupació pública, seguretat i més, amb dades oficials i comparades amb Espanya."
-i18n_origen: b9c51634f0cb
+i18n_origen: cf127e3a7077
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
@@ -91,7 +93,10 @@ SELECT
 FROM ${municipios}
 ```
 
+{#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/ca/territorios">Territoris</a> › {terr[0]?.nombre}</p>
 
@@ -1680,5 +1685,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Banc d'Espanya – Butlletí Estadístic, capítol 13](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deute segons el Protocol de Dèficit Excessiu i capacitat/necessitat de finançament de les comunitats autònomes.
 - **[Registre Central de Personal – Butlletí Estadístic del Personal al Servei de les AAPP](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: empleats públics per administració i província del lloc de treball; **[INE – Enquesta d'Estructura Salarial 2022](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: salaris públics i privats.
 - **[Instituto Geográfico Nacional (via es-atlas)](https://github.com/martgnz/es-atlas)**: límits municipals (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">S'estan actualitzant les dades territorials…</p>
+{/if}
 
 <LastRefreshed prefix="Dades actualitzades" />

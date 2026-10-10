@@ -1,7 +1,7 @@
 ---
 title: Sociedade
 description: "Criminalidade, saúde, inmigración, renda e pobreza, educación e eleccións en España con datos oficiais, por habitante e comparados coa UE."
-i18n_origen: a221d925c4c4
+i18n_origen: 92ce41e90090
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -101,7 +101,7 @@ Como vivimos en España: a seguridade, a saúde, a poboación que chega de fóra
         sparklineData={vida}
     />
     <KpiCard
-        title="Novos españois"
+        title="Adquisicións de nacionalidade"
         value={nacionalizaciones.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} por 1.000 estranxeiros"
         period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} residentes obtiveron a nacionalidade en {nacionalizaciones.slice(-1)[0]?.anio}"

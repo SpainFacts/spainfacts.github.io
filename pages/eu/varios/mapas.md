@@ -3,7 +3,7 @@ title: Mapen arakatzailea
 description: "Banaketa geografikoa duten SpainFactsen datu guztiak, autonomia-erkidegoka edo probintziaka. Aukeratu adierazle bat taulan eta mapan marrazten da."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: ffea07200ad9
+i18n_origen: 7b2e6db999ac
 ---
 
 <script>
@@ -84,7 +84,7 @@ SELECT * FROM ${catalogo_todo} WHERE indicador_id = '${inputs.indicador}'
 ```
 
 ```sql anios
-SELECT DISTINCT anio FROM mother.mapas_indicadores
+SELECT DISTINCT indicador_id, anio FROM mother.mapas_indicadores
 WHERE indicador_id = '${inputs.indicador}'
 ORDER BY anio DESC
 ```
@@ -110,6 +110,7 @@ anio_elegido AS (
     FROM disponibles
 )
 SELECT
+    d.indicador_id,
     d.cod,
     d.territorio,
     d.anio,
@@ -123,6 +124,7 @@ JOIN anio_elegido a USING (anio)
 ORDER BY posicion
 ```
 
+{#if anios[0]?.indicador_id === elegido[0].indicador_id && datos.length && datos[0]?.indicador_id === elegido[0].indicador_id && datos[0]?.anio === (inputs.anio.value && anios.some(a => String(a.anio) === String(inputs.anio.value)) ? Number(inputs.anio.value) : anios[0]?.anio)}
 <p class="text-sm text-gray-600 dark:text-gray-400">
 {elegido[0].unidad} · {datos[0]?.anio} · {elegido[0].nivel === 'Provincia' ? 'probintziaka' : 'autonomia-erkidegoka'} · Iturria: <a href={elegido[0].url_fuente} target="_blank" rel="noopener noreferrer">{elegido[0].fuente}<span class="sr-only"> (fitxa berri batean irekitzen da)</span></a> · <a href={elegido[0].pagina}>Ikusi atalean: {elegido[0].tema}</a>{#if elegido[0].nota}&nbsp;· {elegido[0].nota}{/if}
 </p>
@@ -174,6 +176,10 @@ ORDER BY posicion
 
 </div>
 </Grid>
+
+{:else}
+<p role="status" class="my-6 text-sm text-gray-600 dark:text-gray-400">Mapa eguneratzen…</p>
+{/if}
 
 {/if}
 

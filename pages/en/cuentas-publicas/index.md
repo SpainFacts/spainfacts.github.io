@@ -1,7 +1,7 @@
 ---
 description: "Revenue, spending, deficit and debt of Spain's general government, per inhabitant, adjusted for inflation and as a percentage of GDP."
 title: Public Accounts · Spain's Annual Report
-i18n_origen: 522e6f9ccc1f
+i18n_origen: f87d27f18aaf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -13,9 +13,9 @@ og:
     import SankeyPresupuesto from '../../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
-# The "10-K" of Spain's Public Accounts
+# Spain's public accounts: the annual report
 
-Inspired by the annual report that listed companies file with the markets, this section presents the **consolidated balance sheet of the Kingdom of Spain**: *how much does the State take in? What is taxpayers' money spent on? What is the annual deficit and how is public debt evolving?*
+Like a company's annual report, but for general government as a whole (central government, regions, local councils and Social Security): *how much does the State take in? What is taxpayers' money spent on? What is the annual deficit and how is public debt evolving?*
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -164,7 +164,7 @@ ORDER BY anio
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="vs previous year"
-        direction="positive-down"
+        direction="positive-up"
         source="Eurostat (gov_10a_main)"
         sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />

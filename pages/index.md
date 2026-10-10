@@ -95,13 +95,13 @@ ORDER BY anio
     <div class="max-w-3xl">
         <p class="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-200 mb-5">
             <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Datos oficiales · independiente · sin sesgo partidista
+            Fuentes oficiales y documentadas · independiente · sin sesgo partidista
         </p>
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
             España, <span class="text-blue-300">en datos</span>.<br class="hidden sm:inline"/> De todo el país a tu municipio.
         </h1>
         <p class="text-base md:text-lg text-slate-300 leading-relaxed mb-7">
-            Cuántos somos, en qué se gasta el dinero público, cómo se produce la electricidad, qué coches compramos, cuánto vivimos o qué administraciones no cumplen con sus obligaciones: las cifras de los organismos oficiales, actualizadas cada día y explicadas con contexto.
+            Población, economía, cuentas públicas, energía y vida cotidiana: cifras oficiales y otras fuentes documentadas, con contexto y enlace a su origen.
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
@@ -112,12 +112,6 @@ ORDER BY anio
         </div>
     </div>
 </div>
-
-## Pregunta a los datos
-
-Escribe una pregunta y un modelo de IA que corre en tu navegador buscará la respuesta entre las tablas de la web. [Más sobre el chat y cómo usarlo con Claude u Ollama](/chat).
-
-<Chat perezoso />
 
 ## España hoy
 
@@ -132,7 +126,7 @@ Escribe una pregunta y un modelo de IA que corre en tu navegador buscará la res
         changeUnit="%"
         changePeriod="en un año"
         direction="neutral"
-        source="INE"
+        source="INE · Padrón"
         href="/demografia"
         sparklineData={poblacion}
     />
@@ -200,6 +194,10 @@ Escribe una pregunta y un modelo de IA que corre en tu navegador buscará la res
         sparklineData={vida}
     />
 </Grid>
+
+<p class="my-3 text-sm text-gray-600 dark:text-gray-400">
+    La población destacada aquí usa el Padrón del INE a 1 de enero. La sección de <a href="/demografia">Demografía</a> también muestra la Estadística Continua de Población, una serie distinta; por eso sus cifras pueden diferir ligeramente.
+</p>
 
 ## Compara las comunidades
 
@@ -360,16 +358,22 @@ SELECT
         <p class="text-2xl mb-1" aria-hidden="true">📚</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Fuentes</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">De dónde sale cada dato: organismo, tabla oficial, frecuencia, licencia y metodología.</p>
-        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conjuntos de datos oficiales →</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conjuntos de datos documentados →</p>
     </a>
 </div>
+
+## Pregunta a los datos
+
+Escribe una pregunta sobre las estadísticas. El chat busca respuestas en las tablas de la web; puedes abrir sus opciones si prefieres usar Claude, Ollama u otro proveedor. [Más sobre el chat](/chat).
+
+<Chat perezoso />
 
 ## Cómo trabajamos
 
 <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
-        <p class="font-bold text-gray-900 dark:text-white mb-1">Solo fuentes oficiales</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Banco de España, Eurostat, ministerios, REE, DGT, AEMET… Cada gráfico enlaza a su tabla de origen.</p>
+        <p class="font-bold text-gray-900 dark:text-white mb-1">Fuentes oficiales y documentadas</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Banco de España, Eurostat, ministerios, REE, DGT, AEMET y otras fuentes identificadas. Cada gráfico enlaza a su origen.</p>
     </div>
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
         <p class="font-bold text-gray-900 dark:text-white mb-1">Contexto, no opinión</p>
@@ -381,4 +385,4 @@ SELECT
     </div>
 </div>
 
-<LastRefreshed prefix="Última actualización de los datos" />
+<LastRefreshed prefix="Última publicación del sitio" />

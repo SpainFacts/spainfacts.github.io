@@ -1,13 +1,15 @@
 ---
 description: "Autonomia-erkidegoaren fitxa: biztanleria, ekonomia, kontu publikoak, zorra, enplegu publikoa, segurtasuna eta gehiago, datu ofizialekin eta Espainiarekin alderatuta."
-i18n_origen: b9c51634f0cb
+i18n_origen: cf127e3a7077
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
@@ -103,7 +105,10 @@ SELECT
 FROM ${municipios}
 ```
 
+{#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/eu/territorios">Lurraldeak</a> › {terr[0]?.nombre}</p>
 
@@ -1692,5 +1697,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Espainiako Bankua – Buletin Estatistikoa, 13. kapitulua](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: Gehiegizko Defizitaren Prozeduraren araberako zorra eta autonomia-erkidegoen finantzaketa-ahalmena/-beharra.
 - **[Langileen Erregistro Zentrala – Administrazio Publikoen zerbitzuko langileen Buletin Estatistikoa](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: enplegatu publikoak administrazioaren eta lanpostuaren probintziaren arabera; **[INE – 2022ko Soldata Egituraren Inkesta](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: soldata publikoak eta pribatuak.
 - **[Instituto Geográfico Nacional (es-atlas bidez)](https://github.com/martgnz/es-atlas)**: udal-mugak (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Lurraldeko datuak eguneratzen…</p>
+{/if}
 
 <LastRefreshed prefix="Datuak eguneratuta" />

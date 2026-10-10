@@ -26,6 +26,8 @@
     ];
     $: lang = idiomaDeRuta($page.url.pathname);
     $: navLinks = enlacesBase.map((l) => ({ ...l, base: l.href, href: enlace(l.href, lang), label: t(l.clave, lang) }));
+    $: navLinksMain = navLinks.filter((l) => !["/medios", "/transparencia", "/fuentes"].includes(l.base));
+    $: navLinksMore = navLinks.filter((l) => ["/medios", "/transparencia", "/fuentes"].includes(l.base));
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
@@ -59,7 +61,7 @@
         <div class="flex justify-between h-16">
             <div class="flex items-center">
                 <!-- Mobile menu button -->
-                <div class="-ml-2 mr-2 flex items-center lg:hidden">
+                <div class="-ml-2 mr-2 flex items-center 2xl:hidden">
                     <button
                         type="button"
                         class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -90,19 +92,38 @@
                 </a>
 
                 <!-- Desktop Navigation Menu -->
-                <nav class="hidden lg:ml-8 lg:flex lg:space-x-1" aria-label={t("menu.principal", lang)}>
-                    {#each navLinks as link}
+                <nav class="hidden 2xl:ml-6 2xl:flex 2xl:items-center 2xl:gap-0.5" aria-label={t("menu.principal", lang)}>
+                    {#each navLinksMain as link}
                         {@const active = isLinkActive($page.url.pathname, link.base)}
                         <a
                             href={link.href}
                             aria-current={active ? "page" : undefined}
-                            class="inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 {active
+                            class="inline-flex items-center px-2.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 {active
                                 ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/50 font-semibold'
                                 : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/60'}"
                         >
                             {link.label}
                         </a>
                     {/each}
+                    <details class="relative">
+                        <summary class="cursor-pointer list-none rounded-lg px-2.5 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-800/60 dark:hover:text-white">
+                            {t("menu.otras", lang)}
+                        </summary>
+                        <div class="absolute right-0 top-full z-50 mt-2 min-w-52 rounded-xl border border-gray-200 bg-white p-1.5 shadow-lg dark:border-gray-700 dark:bg-gray-900">
+                            {#each navLinksMore as link}
+                                {@const active = isLinkActive($page.url.pathname, link.base)}
+                                <a
+                                    href={link.href}
+                                    aria-current={active ? "page" : undefined}
+                                    class="block rounded-lg px-3 py-2 text-sm font-medium {active
+                                        ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300'
+                                        : 'text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800'}"
+                                >
+                                    {link.label}
+                                </a>
+                            {/each}
+                        </div>
+                    </details>
                 </nav>
             </div>
 
@@ -115,7 +136,7 @@
 
     <!-- Mobile menu, show/hide based on menu state -->
     {#if isMenuOpen}
-        <nav class="lg:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pt-2 pb-4 space-y-1 shadow-lg" id="mobile-menu" aria-label={t("menu.principal", lang)}>
+        <nav class="2xl:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 pt-2 pb-4 space-y-1 shadow-lg" id="mobile-menu" aria-label={t("menu.principal", lang)}>
             {#each navLinks as link}
                 {@const active = isLinkActive($page.url.pathname, link.base)}
                 <a

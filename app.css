@@ -27,7 +27,7 @@
 	}
 
 	body {
-		@apply select-none;
+		@apply select-text;
 	}
 
 	/* Default border color */
@@ -164,7 +164,7 @@
 	}
 
 	h1.title {
-		@apply mt-5 mb-1 text-2xl tracking-wide font-bold break-inside-avoid;
+		display: none;
 	}
 
 	h1.markdown {
@@ -452,4 +452,10 @@ html {
 	justify-content: center;
 	gap: 1rem;
 	align-items: center;
+}
+/* DataTable con link: cada fila lleva un <a class="sr-only"> en posición absoluta. Si el
+   contenedor con scroll no está posicionado, esos enlaces se salen de él y ensanchan la
+   página en móvil (Vivienda: 995 px a 391 px de ancho). */
+.table-container .scrollbox {
+	position: relative;
 }

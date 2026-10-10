@@ -1,7 +1,7 @@
 ---
 title: Housing
 description: "House prices in Spain adjusted for inflation, rents, sales and mortgages per 1,000 inhabitants, new builds and how many years of salary a home costs, by region and province."
-i18n_origen: 9445f0493756
+i18n_origen: 0e532c3339dc
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -96,7 +96,7 @@ WHERE nivel = 'pais' AND euros_m2_real IS NOT NULL
 
 # 🏠 Housing
 
-How much it costs to buy or rent a home in Spain, how many are sold and how many are built. Prices are shown **adjusted for inflation** (in {precio[0]?.anio_base} euros) and transactions **per 1,000 inhabitants**, so that years and areas can be compared.
+How much it costs to buy or rent a home in Spain, how many are sold and how many are built. Prices are shown **adjusted for inflation** (in {precio.slice(-1)[0]?.anio_base} euros) and transactions **per 1,000 inhabitants**, so that years and areas can be compared.
 
 <Grid cols=4>
     <KpiCard
@@ -159,7 +159,7 @@ Average appraised value of open-market housing in euros per square metre. Adjust
     yFmt='#,##0" €"'
     yAxisTitle="€/m²"
     startingAtZero={false}
-    title="Appraised value of open-market housing in Spain: {precio[0]?.anio_base} euros versus euros of each year"
+    title="Appraised value of open-market housing in Spain: {precio.slice(-1)[0]?.anio_base} euros versus euros of each year"
 />
 
 ## How many are bought and how many are mortgaged

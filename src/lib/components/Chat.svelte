@@ -290,8 +290,11 @@
 </script>
 
 <div class="not-prose my-4 space-y-4">
-    <!-- Elegir modelo -->
-    <fieldset class="rounded-lg border border-gray-200 dark:border-gray-700 p-3" on:focusin={iniciar} on:pointerdown={iniciar}>
+    <details on:toggle={(e) => e.currentTarget.open && iniciar()}>
+        <summary class="w-fit cursor-pointer rounded-md px-2 py-2 text-sm font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-300 dark:hover:text-blue-100">
+            {t("chat.configurar", lang)}
+        </summary>
+        <fieldset class="mt-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700" on:focusin={iniciar} on:pointerdown={iniciar}>
         <legend class="px-1 text-sm font-semibold">{t("chat.proveedor", lang)}</legend>
         <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="radiogroup">
             {#each PROVEEDORES as p}
@@ -369,7 +372,8 @@
                 </div>
             {/if}
         </div>
-    </fieldset>
+        </fieldset>
+    </details>
 
     {#if errorCatalogo}
         <p class="rounded-md border border-red-300 bg-red-50 dark:bg-red-950/40 dark:border-red-800 px-3 py-2 text-sm">{t("chat.catalogoError", lang)} ({errorCatalogo})</p>

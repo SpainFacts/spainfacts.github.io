@@ -1,7 +1,7 @@
 ---
 description: "Ingresos, gastos, déficit e débeda das administracións públicas españolas, por habitante, descontada a inflación e en porcentaxe do PIB."
 title: Contas Públicas · O Informe Anual de España
-i18n_origen: 522e6f9ccc1f
+i18n_origen: f87d27f18aaf
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -13,9 +13,9 @@ og:
     import SankeyPresupuesto from '../../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
-# O "10-K" das Contas Públicas de España
+# Contas públicas de España: o informe anual
 
-Inspirado no informe anual que presentan as empresas cotizadas ante os mercados, este apartado presenta o **balance consolidado do Reino de España**: *canto ingresa o Estado? en que se gasta o diñeiro dos contribuíntes? cal é o déficit anual e como evoluciona a débeda pública?*
+Como a memoria anual dunha empresa, pero para o conxunto das administracións públicas (Estado, comunidades autónomas, concellos e Seguridade Social): *canto ingresa o Estado? en que se gasta o diñeiro dos contribuíntes? cal é o déficit anual e como evoluciona a débeda pública?*
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -164,7 +164,7 @@ ORDER BY anio
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="fronte ao ano anterior"
-        direction="positive-down"
+        direction="positive-up"
         source="Eurostat (gov_10a_main)"
         sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />

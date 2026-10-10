@@ -11,7 +11,7 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { fmt } from '@evidence-dev/component-utilities/formatting';
-    import { idiomaDeRuta, enlace } from '../i18n.js';
+    import { idiomaDeRuta, enlace, t } from '../i18n.js';
 
     export let data = [];
     export let geoJsonUrl;
@@ -235,6 +235,34 @@
         const r = caja_el?.getBoundingClientRect();
         if (r) pos = { x: ev.clientX - r.left, y: ev.clientY - r.top };
     }
+    function posicionar(ev) {
+        const mapa = caja_el?.getBoundingClientRect();
+        const forma = ev.currentTarget?.getBoundingClientRect();
+        if (mapa && forma) pos = { x: forma.left - mapa.left + forma.width / 2, y: forma.top - mapa.top + forma.height / 2 };
+    }
+    function enfocar(ev, id) {
+        activo = id;
+        puntoActivo = null;
+        posicionar(ev);
+    }
+    function etiquetaFila(fila, id) {
+        const nombre = fila?.[pointName] ?? fila?.territorio ?? fila?.nombre ?? fila?.[areaCol] ?? id;
+        const valorTexto = value ? formatear(fila?.[value], valueFmt) : (SIN_DATO[lang] ?? SIN_DATO.es);
+        return `${nombre}: ${valorTexto}`;
+    }
+    function activarConTeclado(ev, id) {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return;
+        ev.preventDefault();
+        if (link) pulsar(id);
+        else enfocar(ev, id);
+    }
+    function activarPuntoConTeclado(ev, pt) {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return;
+        ev.preventDefault();
+        puntoActivo = pt.i;
+        activo = null;
+        posicionar(ev);
+    }
     $: filaActiva = puntoActivo !== null ? filas[puntoActivo] : activo !== null ? porId.get(activo) : null;
     $: lineas = filaActiva
         ? (tooltip ?? [{ id: modoPuntos ? pointName : areaCol, showColumnName: false, valueClass: 'font-semibold' }, { id: value, fmt: valueFmt }, ...(size ? [{ id: size, fmt: sizeFmt }] : [])]).filter((t) => t.id).map((t) => ({
@@ -255,21 +283,27 @@
     {#if title}<figcaption class="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</figcaption>{/if}
     <div class="relative" bind:this={caja_el} data-mapa-espana>
         {#if error}
-            <p class="text-sm text-gray-500">No se pudo cargar el mapa.</p>
+            <p class="text-sm text-gray-500">{t('mapa.error', lang)}</p>
         {:else if !dibujo}
             <div class="animate-pulse rounded-lg bg-gray-100 dark:bg-gray-800" style="height:{height}px"></div>
         {:else}
-            <svg viewBox="0 0 {ANCHO} {dibujo.alto}" class="w-full h-auto" style="max-height:{Math.max(height, 280)}px" role="img" aria-label={title ?? 'Mapa'} on:mouseleave={() => { activo = null; puntoActivo = null; }}>
-                {#each dibujo.formas as f (f.id + f.d.length)}
+            <svg viewBox="0 0 {ANCHO} {dibujo.alto}" class="w-full h-auto" style="max-height:{Math.max(height, 280)}px" role="group" aria-label={title ?? t('mapa.aria', lang)} on:mouseleave={() => { activo = null; puntoActivo = null; }}>
+                {#each dibujo.formas as f, i (`${f.id}:${i}`)}
                     <path
                         d={f.d}
                         fill={colores.get(f.id) ?? 'currentColor'}
                         class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
                         stroke-width="0.6"
                         style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
-                        role="presentation"
+                        role="button"
+                        tabindex="0"
+                        aria-label={etiquetaFila(porId.get(f.id), f.id)}
+                        aria-pressed={activo === f.id}
                         on:mousemove={(e) => mover(e, f.id)}
-                        on:click={() => pulsar(f.id)}
+                        on:focus={(e) => enfocar(e, f.id)}
+                        on:blur={() => { activo = null; }}
+                        on:keydown={(e) => activarConTeclado(e, f.id)}
+                        on:click={(e) => link ? pulsar(f.id) : mover(e, f.id)}
                     />
                 {/each}
                 {#each dibujo.recuadros as r}
@@ -282,9 +316,15 @@
                             class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
                             stroke-width="0.6"
                             style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
-                            role="presentation"
+                            role="button"
+                            tabindex="0"
+                            aria-label={etiquetaFila(porId.get(f.id), f.id)}
+                            aria-pressed={activo === f.id}
                             on:mousemove={(e) => mover(e, f.id)}
-                            on:click={() => pulsar(f.id)}
+                            on:focus={(e) => enfocar(e, f.id)}
+                            on:blur={() => { activo = null; }}
+                            on:keydown={(e) => activarConTeclado(e, f.id)}
+                            on:click={(e) => link ? pulsar(f.id) : mover(e, f.id)}
                         />
                     {/each}
                 {/each}
@@ -297,8 +337,15 @@
                         fill-opacity={opacity}
                         class="stroke-white dark:stroke-gray-900"
                         stroke-width="0.4"
-                        role="presentation"
+                        role="button"
+                        tabindex="0"
+                        aria-label={etiquetaFila(filas[pt.i], pt.i + 1)}
+                        aria-pressed={puntoActivo === pt.i}
                         on:mousemove={(e) => { puntoActivo = pt.i; mover(e, null); }}
+                        on:focus={(e) => { puntoActivo = pt.i; activo = null; posicionar(e); }}
+                        on:blur={() => { puntoActivo = null; }}
+                        on:keydown={(e) => activarPuntoConTeclado(e, pt)}
+                        on:click={(e) => { puntoActivo = pt.i; activo = null; posicionar(e); }}
                         on:mouseleave={() => (puntoActivo = null)}
                     />
                 {/each}

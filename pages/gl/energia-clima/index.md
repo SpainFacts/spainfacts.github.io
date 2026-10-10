@@ -1,5 +1,5 @@
 ---
-i18n_origen: 44513b3048e6
+i18n_origen: 3dd0325563c7
 title: Enerxía e Clima
 description: Transición ecolóxica, mix de xeración eléctrica e emisións de gases de efecto invernadoiro en España.
 og:
@@ -9,11 +9,12 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
 # 🌱 Enerxía, Clima e Transición Ecolóxica
 
-España situouse como un dos líderes europeos no despregamento de enerxías renovables. Esta sección presenta as cifras oficiais do sistema eléctrico, as emisións de gases de efecto invernadoiro e a evolución da potencia instalada renovable.
+En {resumen_ultimo[0]?.anio}, as renovables xeraron o {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % da electricidade en España, segundo Red Eléctrica. Esta sección presenta as cifras oficiais do sistema eléctrico, as emisións de gases de efecto invernadoiro e a evolución da potencia instalada renovable.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -128,7 +129,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-O sistema eléctrico español protagonizou unha transformación histórica: entre {mix_hitos[0]?.anio} e {mix_hitos[1]?.anio}, a eólica e a solar fotovoltaica pasaron de representar o {mix_hitos[0]?.pct_eolica_solar}% a un **{mix_hitos[1]?.pct_eolica_solar}%** da xeración total, mentres que o carbón caeu do {mix_hitos[0]?.pct_carbon}% ao {mix_hitos[1]?.pct_carbon}%.
+O sistema eléctrico español protagonizou unha transformación histórica: entre {mix_hitos[0]?.anio} e {mix_hitos[1]?.anio}, a eólica e a solar fotovoltaica pasaron de representar o {formatDecimal(mix_hitos[0]?.pct_eolica_solar)}% a un **{formatDecimal(mix_hitos[1]?.pct_eolica_solar)}%** da xeración total, mentres que o carbón caeu do {formatDecimal(mix_hitos[0]?.pct_carbon)}% ao {formatDecimal(mix_hitos[1]?.pct_carbon)}%.
 
 ```sql mix_areas
 SELECT
@@ -192,7 +193,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-O **transporte** é o sector máis resistente á descarbonización: concentra o **{emisiones_hitos[1]?.pct_transporte}%** das emisións en {emisiones_hitos[1]?.anio}. En cambio, a **xeración eléctrica** reduciu as súas emisións un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.anio} grazas ao despregamento renovable.
+O **transporte** é o sector máis resistente á descarbonización: concentra o **{formatDecimal(emisiones_hitos[1]?.pct_transporte)}%** das emisións en {emisiones_hitos[1]?.anio}. En cambio, a **xeración eléctrica** reduciu as súas emisións un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.anio} grazas ao despregamento renovable.
 
 ```sql emisiones_sector
 SELECT

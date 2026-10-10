@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · The State of Spain in Official Data
 description: "Spain in official data: population, economy, public finances, energy, mobility, society and transparency, from the whole country down to each municipality. Independent and politically neutral."
-i18n_origen: c69067017fff
+i18n_origen: d80e2a3839de
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -96,13 +96,13 @@ ORDER BY anio
     <div class="max-w-3xl">
         <p class="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-200 mb-5">
             <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Official data · independent · politically neutral
+            Official and documented sources · independent · politically neutral
         </p>
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
             Spain, <span class="text-blue-300">in data</span>.<br class="hidden sm:inline"/> From the whole country to your municipality.
         </h1>
         <p class="text-base md:text-lg text-slate-300 leading-relaxed mb-7">
-            How many of us there are, what public money is spent on, how electricity is produced, which cars we buy, how long we live and which public administrations fail to meet their obligations: figures from official bodies, updated every day and explained in context.
+            Population, the economy, public finances, energy and everyday life: official figures and other documented sources, with context and links to their origin.
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
@@ -113,12 +113,6 @@ ORDER BY anio
         </div>
     </div>
 </div>
-
-## Ask the data
-
-Type a question and an AI model running in your browser will look for the answer among the site’s tables. [More about the chat and how to use it with Claude or Ollama](/en/chat).
-
-<Chat perezoso />
 
 ## Spain today
 
@@ -133,7 +127,7 @@ Type a question and an AI model running in your browser will look for the answer
         changeUnit="%"
         changePeriod="in one year"
         direction="neutral"
-        source="INE"
+        source="INE · Municipal Register"
         href="/en/demografia"
         sparklineData={poblacion}
     />
@@ -201,6 +195,10 @@ Type a question and an AI model running in your browser will look for the answer
         sparklineData={vida}
     />
 </Grid>
+
+<p class="my-3 text-sm text-gray-600 dark:text-gray-400">
+    The population figure here uses the INE Municipal Register as of 1 January. The <a href="/en/demografia">Demography</a> section also shows the Continuous Population Statistics, a different series, so the figures may differ slightly.
+</p>
 
 ## Compare the regions
 
@@ -361,15 +359,21 @@ SELECT
         <p class="text-2xl mb-1" aria-hidden="true">📚</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sources</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Where each figure comes from: the body, the official table, frequency, licence and methodology.</p>
-        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} official datasets →</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} documented datasets →</p>
     </a>
 </div>
+
+## Ask the data
+
+Ask a question about the statistics. The chat searches the site’s tables; open its options if you prefer Claude, Ollama or another provider. [More about the chat](/en/chat).
+
+<Chat perezoso />
 
 ## How we work
 
 <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
-        <p class="font-bold text-gray-900 dark:text-white mb-1">Official sources only</p>
+        <p class="font-bold text-gray-900 dark:text-white mb-1">Official and documented sources</p>
         <p class="text-sm text-gray-600 dark:text-gray-400">INE, Banco de España, Eurostat, government ministries, REE, DGT, AEMET… Every chart links to its source table.</p>
     </div>
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">

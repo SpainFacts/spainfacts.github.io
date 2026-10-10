@@ -1,13 +1,15 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: 48c2df64eecc
+i18n_origen: 37c4504e6ece
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 2025eko...)
@@ -15,7 +17,7 @@ og:
 </script>
 
 ```sql terr
-SELECT p.*, c.nombre AS ccaa_nombre, '/eu' || c.ruta AS ccaa_ruta, c.poblacion_ultima AS ccaa_poblacion
+SELECT p.*, c.slug AS ccaa_slug, c.nombre AS ccaa_nombre, '/eu' || c.ruta AS ccaa_ruta, c.poblacion_ultima AS ccaa_poblacion
 FROM mother.territorios p
 JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = p.cod_ccaa
 WHERE p.nivel = 'provincia' AND p.slug = '${params.provincia}' AND c.slug = '${params.ccaa}'
@@ -81,7 +83,10 @@ GROUP BY m.anio
 ORDER BY m.anio
 ```
 
+{#if terr[0]?.slug === $currentPage.params.provincia && terr[0]?.ccaa_slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/eu/territorios">Lurraldeak</a> › <a href={terr[0]?.ccaa_ruta}>{terr[0]?.ccaa_nombre}</a> › {terr[0]?.nombre}</p>
 
@@ -828,5 +833,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Ogasun Ministerioa – Toki-erakundeen zor bizia](https://www.hacienda.gob.es/es-ES/CDI/Paginas/SistemasFinanciacionDeuda/InformacionEELLs/DeudaViva.aspx)**: erakunde bakoitzaren zorra abenduaren 31n, Espainiako Bankuaren guztizkoarekin bateratuta.
 - **[Espainiako Bankua – Buletin Estatistikoa, 14. kapitulua](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: 300.000 biztanletik gorako udalen zorra.
 - **[Instituto Geográfico Nacional (es-atlas bidez)](https://github.com/martgnz/es-atlas)**: udal-mugak (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Lurraldeko datuak eguneratzen…</p>
+{/if}
 
 <LastRefreshed prefix="Datuak eguneratuta" />

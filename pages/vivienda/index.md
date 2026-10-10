@@ -95,7 +95,7 @@ WHERE nivel = 'pais' AND euros_m2_real IS NOT NULL
 
 # 🏠 Vivienda
 
-Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuántas se construyen. Los precios se muestran **descontada la inflación** (en euros de {precio[0]?.anio_base}) y las operaciones **por cada 1.000 habitantes**, para poder comparar años y territorios.
+Cuánto cuesta comprar o alquilar una casa en España, cuántas se venden y cuántas se construyen. Los precios se muestran **descontada la inflación** (en euros de {precio.slice(-1)[0]?.anio_base}) y las operaciones **por cada 1.000 habitantes**, para poder comparar años y territorios.
 
 <Grid cols=4>
     <KpiCard
@@ -158,7 +158,7 @@ Valor tasado medio de la vivienda libre en euros por metro cuadrado. Descontada 
     yFmt='#,##0" €"'
     yAxisTitle="€/m²"
     startingAtZero={false}
-    title="Valor tasado de la vivienda libre en España: euros de {precio[0]?.anio_base} frente a euros de cada año"
+    title="Valor tasado de la vivienda libre en España: euros de {precio.slice(-1)[0]?.anio_base} frente a euros de cada año"
 />
 
 ## Cuántas se compran y cuántas se hipotecan

@@ -1,7 +1,7 @@
 ---
 title: Energy and Climate
 description: The ecological transition, the electricity generation mix and greenhouse gas emissions in Spain.
-i18n_origen: 44513b3048e6
+i18n_origen: 3dd0325563c7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,11 +9,12 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
 # 🌱 Energy, Climate and the Ecological Transition
 
-Spain has positioned itself as one of Europe's leaders in deploying renewable energy. This section presents the official figures for the electricity system, greenhouse gas emissions and the growth of installed renewable capacity.
+In {resumen_ultimo[0]?.anio}, renewables generated {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)}% of Spain's electricity, according to Red Eléctrica. This section presents the official figures for the electricity system, greenhouse gas emissions and the growth of installed renewable capacity.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -128,7 +129,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-The Spanish electricity system has undergone a historic transformation: between {mix_hitos[0]?.anio} and {mix_hitos[1]?.anio}, wind and solar PV have gone from {mix_hitos[0]?.pct_eolica_solar}% to **{mix_hitos[1]?.pct_eolica_solar}%** of total generation, while coal has fallen from {mix_hitos[0]?.pct_carbon}% to {mix_hitos[1]?.pct_carbon}%.
+The Spanish electricity system has undergone a historic transformation: between {mix_hitos[0]?.anio} and {mix_hitos[1]?.anio}, wind and solar PV have gone from {formatDecimal(mix_hitos[0]?.pct_eolica_solar)}% to **{formatDecimal(mix_hitos[1]?.pct_eolica_solar)}%** of total generation, while coal has fallen from {formatDecimal(mix_hitos[0]?.pct_carbon)}% to {formatDecimal(mix_hitos[1]?.pct_carbon)}%.
 
 ```sql mix_areas
 SELECT
@@ -192,7 +193,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-**Transport** is the sector most resistant to decarbonisation: it accounts for **{emisiones_hitos[1]?.pct_transporte}%** of emissions in {emisiones_hitos[1]?.anio}. **Electricity generation**, by contrast, has cut its emissions by {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% since {emisiones_hitos[0]?.anio} thanks to the roll-out of renewables.
+**Transport** is the sector most resistant to decarbonisation: it accounts for **{formatDecimal(emisiones_hitos[1]?.pct_transporte)}%** of emissions in {emisiones_hitos[1]?.anio}. **Electricity generation**, by contrast, has cut its emissions by {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% since {emisiones_hitos[0]?.anio} thanks to the roll-out of renewables.
 
 ```sql emisiones_sector
 SELECT

@@ -1,7 +1,7 @@
 ---
 title: Society
 description: "Crime, health, immigration, income and poverty, education and elections in Spain with official data, per inhabitant and compared with the EU."
-i18n_origen: a221d925c4c4
+i18n_origen: 92ce41e90090
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -101,7 +101,7 @@ How we live in Spain: safety, health, the population arriving from abroad, incom
         sparklineData={vida}
     />
     <KpiCard
-        title="New Spanish citizens"
+        title="Acquisitions of Spanish nationality"
         value={nacionalizaciones.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} per 1,000 foreign nationals"
         period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} residents acquired Spanish nationality in {nacionalizaciones.slice(-1)[0]?.anio}"

@@ -3,7 +3,7 @@ description: "Espainiako administrazio publikoen diru-sarrerak, gastuak, defizit
 title: Kontu Publikoak · Espainiaren Urteko Txostena
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 522e6f9ccc1f
+i18n_origen: f87d27f18aaf
 ---
 
 <script>
@@ -20,9 +20,9 @@ i18n_origen: 522e6f9ccc1f
     const urtera = (y) => (y == null ? String() : `${y}${urteK(y) ? 'era' : 'ra'}`);
 </script>
 
-# Espainiako Kontu Publikoen "10-K" txostena
+# Espainiako kontu publikoak: urteko txostena
 
-Burtsan kotizatzen duten enpresek merkatuen aurrean aurkezten duten urteko txostenean oinarrituta, atal honek **Espainiako Erresumaren balantze bateratua** aurkezten du: *zenbat sartzen du Estatuak? zertan gastatzen da zergadunen dirua? zein da urteko defizita eta nola aldatzen da zor publikoa?*
+Enpresa baten urteko txostena bezala, baina administrazio publiko guztientzat (Estatua, autonomia-erkidegoak, udalak eta Gizarte Segurantza): *zenbat sartzen du Estatuak? zertan gastatzen da zergadunen dirua? zein da urteko defizita eta nola aldatzen da zor publikoa?*
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -171,7 +171,7 @@ ORDER BY anio
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="aurreko urtearekiko"
-        direction="positive-down"
+        direction="positive-up"
         source="Eurostat (gov_10a_main)"
         sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />

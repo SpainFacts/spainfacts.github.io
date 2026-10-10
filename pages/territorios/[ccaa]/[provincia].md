@@ -6,13 +6,15 @@ og:
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
 
 ```sql terr
-SELECT p.*, c.nombre AS ccaa_nombre, c.ruta AS ccaa_ruta, c.poblacion_ultima AS ccaa_poblacion
+SELECT p.*, c.slug AS ccaa_slug, c.nombre AS ccaa_nombre, c.ruta AS ccaa_ruta, c.poblacion_ultima AS ccaa_poblacion
 FROM mother.territorios p
 JOIN mother.territorios c ON c.nivel = 'ccaa' AND c.cod = p.cod_ccaa
 WHERE p.nivel = 'provincia' AND p.slug = '${params.provincia}' AND c.slug = '${params.ccaa}'
@@ -78,7 +80,10 @@ GROUP BY m.anio
 ORDER BY m.anio
 ```
 
+{#if terr[0]?.slug === $currentPage.params.provincia && terr[0]?.ccaa_slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/territorios">Territorios</a> › <a href={terr[0]?.ccaa_ruta}>{terr[0]?.ccaa_nombre}</a> › {terr[0]?.nombre}</p>
 
@@ -825,5 +830,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Ministerio de Hacienda – Deuda viva de las entidades locales](https://www.hacienda.gob.es/es-ES/CDI/Paginas/SistemasFinanciacionDeuda/InformacionEELLs/DeudaViva.aspx)**: deuda a 31 de diciembre de cada entidad, conciliada con el total del Banco de España.
 - **[Banco de España – Boletín Estadístico, capítulo 14](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deuda de los ayuntamientos de más de 300.000 habitantes.
 - **[Instituto Geográfico Nacional (vía es-atlas)](https://github.com/martgnz/es-atlas)**: límites municipales (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Actualizando los datos territoriales…</p>
+{/if}
 
 <LastRefreshed prefix="Datos actualizados" />

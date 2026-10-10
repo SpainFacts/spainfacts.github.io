@@ -8,11 +8,12 @@ og:
 <script>
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatDecimal } from '../../../../../src/lib/utils.js';
 </script>
 
 # 🌱 Energía, Clima y Transición Ecológica
 
-España se ha posicionado como uno de los líderes europeos en despliegue de energías renovables. Esta sección presenta las cifras oficiales del sistema eléctrico, las emisiones de gases de efecto invernadero y la evolución de la potencia instalada renovable.
+En {resumen_ultimo[0]?.anio}, las renovables generaron el {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % de la electricidad en España, según Red Eléctrica. Esta sección presenta las cifras oficiales del sistema eléctrico, las emisiones de gases de efecto invernadero y la evolución de la potencia instalada renovable.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -127,7 +128,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-El sistema eléctrico español ha protagonizado una transformación histórica: entre {mix_hitos[0]?.anio} y {mix_hitos[1]?.anio}, la eólica y la solar fotovoltaica han pasado de representar el {mix_hitos[0]?.pct_eolica_solar}% a un **{mix_hitos[1]?.pct_eolica_solar}%** de la generación total, mientras que el carbón ha caído del {mix_hitos[0]?.pct_carbon}% al {mix_hitos[1]?.pct_carbon}%.
+El sistema eléctrico español ha protagonizado una transformación histórica: entre {mix_hitos[0]?.anio} y {mix_hitos[1]?.anio}, la eólica y la solar fotovoltaica han pasado de representar el {formatDecimal(mix_hitos[0]?.pct_eolica_solar)}% a un **{formatDecimal(mix_hitos[1]?.pct_eolica_solar)}%** de la generación total, mientras que el carbón ha caído del {formatDecimal(mix_hitos[0]?.pct_carbon)}% al {formatDecimal(mix_hitos[1]?.pct_carbon)}%.
 
 ```sql mix_areas
 SELECT
@@ -191,7 +192,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-El **transporte** es el sector más resistente a la descarbonización: concentra el **{emisiones_hitos[1]?.pct_transporte}%** de las emisiones en {emisiones_hitos[1]?.anio}. En cambio, la **generación eléctrica** ha reducido sus emisiones un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.anio} gracias al despliegue renovable.
+El **transporte** es el sector más resistente a la descarbonización: concentra el **{formatDecimal(emisiones_hitos[1]?.pct_transporte)}%** de las emisiones en {emisiones_hitos[1]?.anio}. En cambio, la **generación eléctrica** ha reducido sus emisiones un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% desde {emisiones_hitos[0]?.anio} gracias al despliegue renovable.
 
 ```sql emisiones_sector
 SELECT

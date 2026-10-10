@@ -1,7 +1,7 @@
 ---
 title: Vivenda
 description: "Prezo da vivenda en España descontada a inflación, aluguer, compravendas e hipotecas por 1.000 habitantes, obra nova e cantos anos de salario custa unha casa, por comunidade e provincia."
-i18n_origen: 9445f0493756
+i18n_origen: 0e532c3339dc
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -96,7 +96,7 @@ WHERE nivel = 'pais' AND euros_m2_real IS NOT NULL
 
 # 🏠 Vivenda
 
-Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se constrúen. Os prezos móstranse **descontada a inflación** (en euros de {precio[0]?.anio_base}) e as operacións **por cada 1.000 habitantes**, para poder comparar anos e territorios.
+Canto custa comprar ou alugar unha casa en España, cantas se venden e cantas se constrúen. Os prezos móstranse **descontada a inflación** (en euros de {precio.slice(-1)[0]?.anio_base}) e as operacións **por cada 1.000 habitantes**, para poder comparar anos e territorios.
 
 <Grid cols=4>
     <KpiCard
@@ -159,7 +159,7 @@ Valor taxado medio da vivenda libre en euros por metro cadrado. Descontada a inf
     yFmt='#,##0" €"'
     yAxisTitle="€/m²"
     startingAtZero={false}
-    title="Valor taxado da vivenda libre en España: euros de {precio[0]?.anio_base} fronte a euros de cada ano"
+    title="Valor taxado da vivenda libre en España: euros de {precio.slice(-1)[0]?.anio_base} fronte a euros de cada ano"
 />
 
 ## Cantas se compran e cantas se hipotecan

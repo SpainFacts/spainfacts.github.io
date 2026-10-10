@@ -3,7 +3,7 @@ title: Gizartea
 description: "Kriminalitatea, osasuna, immigrazioa, errenta eta pobrezia, hezkuntza eta hauteskundeak Espainian, datu ofizialekin, biztanleko eta EBrekin alderatuta."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a221d925c4c4
+i18n_origen: 92ce41e90090
 ---
 
 <script>
@@ -108,7 +108,7 @@ Nola bizi garen Espainian: segurtasuna, osasuna, kanpotik datorren biztanleria, 
         sparklineData={vida}
     />
     <KpiCard
-        title="Espainiar berriak"
+        title="Nazionalitatea eskuratzeak"
         value={nacionalizaciones.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} 1.000 atzerritarreko"
         period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} egoiliarrek lortu zuten nazionalitatea {urtean(nacionalizaciones.slice(-1)[0]?.anio)}"

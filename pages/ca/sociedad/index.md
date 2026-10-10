@@ -3,7 +3,7 @@ title: Societat
 description: "Criminalitat, salut, immigració, renda i pobresa, educació i eleccions a Espanya amb dades oficials, per habitant i comparades amb la UE."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: a221d925c4c4
+i18n_origen: 92ce41e90090
 ---
 
 <script>
@@ -101,7 +101,7 @@ Com vivim a Espanya: la seguretat, la salut, la població que arriba de fora, la
         sparklineData={vida}
     />
     <KpiCard
-        title="Nous espanyols"
+        title="Adquisicions de nacionalitat"
         value={nacionalizaciones.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} per 1.000 estrangers"
         period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} residents van obtenir la nacionalitat el {nacionalizaciones.slice(-1)[0]?.anio}"

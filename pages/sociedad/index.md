@@ -100,7 +100,7 @@ Cómo vivimos en España: la seguridad, la salud, la población que llega de fue
         sparklineData={vida}
     />
     <KpiCard
-        title="Nuevos españoles"
+        title="Adquisiciones de nacionalidad"
         value={nacionalizaciones.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(nacionalizaciones.slice(-1)[0]?.valor, 1)} por 1.000 extranjeros"
         period="{formatNumber(nacionalizaciones.slice(-1)[0]?.nacionalizaciones, 0)} residentes obtuvieron la nacionalidad en {nacionalizaciones.slice(-1)[0]?.anio}"

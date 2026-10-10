@@ -6,7 +6,9 @@ og:
 ---
 
 <script>
+    import { page as currentPage } from '$app/stores';
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
+    import IndiceTerritorio from '../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
@@ -90,7 +92,10 @@ SELECT
 FROM ${municipios}
 ```
 
+{#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<IndiceTerritorio />
 
 <p class="text-sm text-gray-500"><a href="/territorios">Territorios</a> › {terr[0]?.nombre}</p>
 
@@ -1679,5 +1684,9 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 - **[Banco de España – Boletín Estadístico, capítulo 13](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deuda según el Protocolo de Déficit Excesivo y capacidad/necesidad de financiación de las comunidades autónomas.
 - **[Registro Central de Personal – Boletín Estadístico del Personal al Servicio de las AAPP](https://digital.gob.es/funcion-publica/dgfp/registro-central-personal/boletin.html)**: empleados públicos por administración y provincia del puesto; **[INE – Encuesta de Estructura Salarial 2022](https://www.ine.es/jaxiT3/Tabla.htm?t=36887)**: salarios públicos y privados.
 - **[Instituto Geográfico Nacional (vía es-atlas)](https://github.com/martgnz/es-atlas)**: límites municipales (CC BY 4.0).
+
+{:else}
+<p role="status" class="my-8 text-sm text-gray-600 dark:text-gray-400">Actualizando los datos territoriales…</p>
+{/if}
 
 <LastRefreshed prefix="Datos actualizados" />

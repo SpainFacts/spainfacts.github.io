@@ -2,8 +2,8 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
-    "build": "evidence build",
-    "build:strict": "evidence build:strict",
+    "build": "node tools/evidence-build.mjs build",
+    "build:strict": "node tools/evidence-build.mjs build:strict",
     "dev": "evidence dev --open /",
     "test": "npm run test:i18n && npm run test:web",
     "sources": "evidence sources",

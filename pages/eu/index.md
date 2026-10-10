@@ -3,7 +3,7 @@ title: SpainFacts · Espainiaren Egoera Datu Ofizialetan
 description: "Espainia datu ofizialetan: biztanleria, ekonomia, kontu publikoak, energia, mugikortasuna, gizartea eta gardentasuna, Espainia osotik udalerri bakoitzera. Independentea eta alderdi-joerarik gabea."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c69067017fff
+i18n_origen: d80e2a3839de
 ---
 
 <script>
@@ -103,13 +103,13 @@ ORDER BY anio
     <div class="max-w-3xl">
         <p class="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-200 mb-5">
             <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Datu ofizialak · independentea · alderdi-joerarik gabe
+            Iturri ofizialak eta dokumentatuak · independentea · alderdi-joerarik gabe
         </p>
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
             Espainia, <span class="text-blue-300">datuetan</span>.<br class="hidden sm:inline"/> Herrialde osotik zure udalerrira.
         </h1>
         <p class="text-base md:text-lg text-slate-300 leading-relaxed mb-7">
-            Zenbat garen, zertan gastatzen den diru publikoa, nola ekoizten den elektrizitatea, zer auto erosten ditugun, zenbat bizi garen edo zein administraziok ez dituen betebeharrak betetzen: erakunde ofizialen zifrak, egunero eguneratuak eta testuinguruarekin azalduak.
+            Biztanleria, ekonomia, kontu publikoak, energia eta eguneroko bizitza: datu ofizialak eta beste iturri dokumentatu batzuk, testuinguruarekin eta jatorrirako estekekin.
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
@@ -120,12 +120,6 @@ ORDER BY anio
         </div>
     </div>
 </div>
-
-## Galdetu datuei
-
-Idatzi galdera bat, eta zure nabigatzailean exekutatzen den AA eredu batek webguneko tauletan bilatuko du erantzuna. [Txatari buruz gehiago, eta nola erabili Claude edo Ollamarekin](/eu/chat).
-
-<Chat perezoso />
 
 ## Espainia gaur
 
@@ -140,7 +134,7 @@ Idatzi galdera bat, eta zure nabigatzailean exekutatzen den AA eredu batek webgu
         changeUnit="%"
         changePeriod="urtebetean"
         direction="neutral"
-        source="INE"
+        source="INE · Errolda"
         href="/eu/demografia"
         sparklineData={poblacion}
     />
@@ -208,6 +202,10 @@ Idatzi galdera bat, eta zure nabigatzailean exekutatzen den AA eredu batek webgu
         sparklineData={vida}
     />
 </Grid>
+
+<p class="my-3 text-sm text-gray-600 dark:text-gray-400">
+    Hemen nabarmendutako biztanleria INEren Erroldakoa da, urtarrilaren 1ekoa. <a href="/eu/demografia">Demografia</a> atalean Biztanleriaren Estatistika Jarraituaren seriea ere agertzen da; serie desberdinak direnez, kopuruak pixka bat alda daitezke.
+</p>
 
 ## Alderatu erkidegoak
 
@@ -368,16 +366,22 @@ SELECT
         <p class="text-2xl mb-1" aria-hidden="true">📚</p>
         <p class="text-lg font-bold text-gray-900 dark:text-white">Iturriak</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Nondik ateratzen den datu bakoitza: erakundea, taula ofiziala, maiztasuna, lizentzia eta metodologia.</p>
-        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} datu-multzo ofizial →</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} dokumentatutako datu-multzo →</p>
     </a>
 </div>
+
+## Galdetu datuei
+
+Egin galdera bat estatistikei buruz. Txatak webguneko tauletan bilatzen ditu erantzunak; ireki aukerak Claude, Ollama edo beste hornitzaile bat erabili nahi baduzu. [Txatari buruz gehiago](/eu/chat).
+
+<Chat perezoso />
 
 ## Nola lan egiten dugun
 
 <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
-        <p class="font-bold text-gray-900 dark:text-white mb-1">Iturri ofizialak soilik</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Espainiako Bankua, Eurostat, ministerioak, REE, DGT, AEMET… Grafiko bakoitzak bere jatorrizko taularako esteka du.</p>
+        <p class="font-bold text-gray-900 dark:text-white mb-1">Iturri ofizialak eta dokumentatuak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">INE, Espainiako Bankua, Eurostat, ministerioak, REE, DGT, AEMET eta identifikatutako beste iturri batzuk. Grafiko bakoitzak jatorrira darama.</p>
     </div>
     <div class="rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-5">
         <p class="font-bold text-gray-900 dark:text-white mb-1">Testuingurua, ez iritzia</p>
@@ -389,4 +393,4 @@ SELECT
     </div>
 </div>
 
-<LastRefreshed prefix="Datuen azken eguneratzea" />
+<LastRefreshed prefix="Webgunearen azken argitalpena" />

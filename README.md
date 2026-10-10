@@ -33,8 +33,21 @@ Copia `.env.example` a `.env` y rellena las variables. El `.env` **nunca** se ve
 ```bash
 npm install
 npm run sources     # ejecuta las consultas contra MotherDuck (necesita EVIDENCE_SOURCE__mother__token)
+npm run build       # por defecto permite hasta 12 GB de heap para compilar los cinco idiomas
 npm run dev         # abre http://localhost:3000
 ```
+
+Si el equipo tiene menos memoria disponible, ajusta el límite del build, por ejemplo
+`$env:EVIDENCE_BUILD_HEAP_MB = "8192"` en PowerShell o
+`export EVIDENCE_BUILD_HEAP_MB=8192` en bash. Cierra antes otras aplicaciones pesadas:
+un heap mayor evita el límite de Node, pero necesita memoria física disponible.
+Usa `npm run build` para que se aplique ese ajuste. Si ejecutas directamente el CLI
+global con `evidence build`, configura en su lugar `NODE_OPTIONS` (por ejemplo,
+`$env:NODE_OPTIONS = "--max-old-space-size=8192"` en PowerShell); el CLI global no
+lee `EVIDENCE_BUILD_HEAP_MB`.
+
+`npm run build` también corrige al terminar el `<html lang>` de cada página prerenderizada
+(`tools/html-lang-es.mjs`), igual que el despliegue; con el CLI global hay que ejecutarlo a mano.
 
 ## El stack de datos (Dagster) en local
 

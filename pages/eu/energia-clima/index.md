@@ -1,7 +1,7 @@
 ---
 title: Energia eta klima
 description: Trantsizio ekologikoa, sorkuntza elektrikoaren mixa eta berotegi-efektuko gasen isuriak Espainian.
-i18n_origen: 44513b3048e6
+i18n_origen: 3dd0325563c7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,11 +9,12 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
 # 🌱 Energia, klima eta trantsizio ekologikoa
 
-Espainia energia berriztagarrien hedapenean Europako liderretako bat bihurtu da. Atal honek sistema elektrikoaren zifra ofizialak, berotegi-efektuko gasen isuriak eta instalatutako potentzia berriztagarriaren bilakaera aurkezten ditu.
+{resumen_ultimo[0]?.anio}. urtean, berriztagarriek Espainiako elektrizitatearen {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % sortu zuten, Red Eléctricaren arabera. Atal honek sistema elektrikoaren zifra ofizialak, berotegi-efektuko gasen isuriak eta instalatutako potentzia berriztagarriaren bilakaera aurkezten ditu.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -128,7 +129,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-Espainiako sistema elektrikoak eraldaketa historikoa izan du: {mix_hitos[0]?.anio} eta {mix_hitos[1]?.anio} artean, energia eolikoak eta eguzki-energia fotovoltaikoak sorkuntza osoaren {mix_hitos[0]?.pct_eolica_solar} % izatetik **{mix_hitos[1]?.pct_eolica_solar} %** izatera igaro dira, eta ikatza, berriz, {mix_hitos[0]?.pct_carbon} %-tik {mix_hitos[1]?.pct_carbon} %-ra jaitsi da.
+Espainiako sistema elektrikoak eraldaketa historikoa izan du: {mix_hitos[0]?.anio} eta {mix_hitos[1]?.anio} artean, energia eolikoak eta eguzki-energia fotovoltaikoak sorkuntza osoaren {formatDecimal(mix_hitos[0]?.pct_eolica_solar)} % izatetik **{formatDecimal(mix_hitos[1]?.pct_eolica_solar)} %** izatera igaro dira, eta ikatza, berriz, {formatDecimal(mix_hitos[0]?.pct_carbon)} %-tik {formatDecimal(mix_hitos[1]?.pct_carbon)} %-ra jaitsi da.
 
 ```sql mix_areas
 SELECT
@@ -192,7 +193,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-**Garraioa** da deskarbonizazioari gehien eusten dion sektorea: isurien **{emisiones_hitos[1]?.pct_transporte} %** biltzen du {emisiones_hitos[1]?.anio}. urtean. Aldiz, **sorkuntza elektrikoak** {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null} % murriztu ditu bere isuriak {emisiones_hitos[0]?.anio}. urteaz geroztik, berriztagarrien hedapenari esker.
+**Garraioa** da deskarbonizazioari gehien eusten dion sektorea: isurien **{formatDecimal(emisiones_hitos[1]?.pct_transporte)} %** biltzen du {emisiones_hitos[1]?.anio}. urtean. Aldiz, **sorkuntza elektrikoak** {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null} % murriztu ditu bere isuriak {emisiones_hitos[0]?.anio}. urteaz geroztik, berriztagarrien hedapenari esker.
 
 ```sql emisiones_sector
 SELECT

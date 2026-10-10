@@ -3,7 +3,7 @@ title: Habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació, lloguer, compravendes i hipoteques per 1.000 habitants, obra nova i quants anys de salari costa una casa, per comunitat i província."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 9445f0493756
+i18n_origen: 0e532c3339dc
 ---
 
 <script>
@@ -96,7 +96,7 @@ WHERE nivel = 'pais' AND euros_m2_real IS NOT NULL
 
 # 🏠 Habitatge
 
-Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se'n construeixen. Els preus es mostren **descomptada la inflació** (en euros de {precio[0]?.anio_base}) i les operacions **per cada 1.000 habitants**, per poder comparar anys i territoris.
+Quant costa comprar o llogar una casa a Espanya, quantes se'n venen i quantes se'n construeixen. Els preus es mostren **descomptada la inflació** (en euros de {precio.slice(-1)[0]?.anio_base}) i les operacions **per cada 1.000 habitants**, per poder comparar anys i territoris.
 
 <Grid cols=4>
     <KpiCard
@@ -159,7 +159,7 @@ Valor taxat mitjà de l'habitatge lliure en euros per metre quadrat. Descomptada
     yFmt='#,##0" €"'
     yAxisTitle="€/m²"
     startingAtZero={false}
-    title="Valor taxat de l'habitatge lliure a Espanya: euros de {precio[0]?.anio_base} davant d'euros de cada any"
+    title="Valor taxat de l'habitatge lliure a Espanya: euros de {precio.slice(-1)[0]?.anio_base} davant d'euros de cada any"
 />
 
 ## Quants se'n compren i quants s'hipotequen

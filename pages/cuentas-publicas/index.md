@@ -12,9 +12,9 @@ og:
     import SankeyPresupuesto from '../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
-# El "10-K" de las Cuentas Públicas de España
+# Cuentas públicas de España: el informe anual
 
-Inspirado en el informe anual que presentan las empresas cotizadas ante los mercados, este apartado presenta el **balance consolidado del Reino de España**: *¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?*
+Como la memoria anual de una empresa, pero para el conjunto de las administraciones públicas (Estado, comunidades autónomas, ayuntamientos y Seguridad Social): *¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?*
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -163,7 +163,7 @@ ORDER BY anio
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="vs año anterior"
-        direction="positive-down"
+        direction="positive-up"
         source="Eurostat (gov_10a_main)"
         sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />

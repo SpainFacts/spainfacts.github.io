@@ -3,7 +3,7 @@ description: "Ingressos, despeses, dèficit i deute de les administracions públ
 title: Comptes Públics · L'informe anual d'Espanya
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 522e6f9ccc1f
+i18n_origen: f87d27f18aaf
 ---
 
 <script>
@@ -13,9 +13,9 @@ i18n_origen: 522e6f9ccc1f
     import SankeyPresupuesto from '../../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
-# El "10-K" dels comptes públics d'Espanya
+# Comptes públics d'Espanya: l'informe anual
 
-Inspirat en l'informe anual que presenten les empreses cotitzades davant dels mercats, aquest apartat presenta el **balanç consolidat del Regne d'Espanya**: *quant ingressa l'Estat? en què es gasten els diners dels contribuents? quin és el dèficit anual i com evoluciona el deute públic?*
+Com la memòria anual d'una empresa, però per al conjunt de les administracions públiques (Estat, comunitats autònomes, ajuntaments i Seguretat Social): *quant ingressa l'Estat? en què es gasten els diners dels contribuents? quin és el dèficit anual i com evoluciona el deute públic?*
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -164,7 +164,7 @@ ORDER BY anio
         change={(balance_reciente[0].saldo_deficit_pib - balance_reciente[1].saldo_deficit_pib).toFixed(1)}
         changeUnit="pp"
         changePeriod="vs. any anterior"
-        direction="positive-down"
+        direction="positive-up"
         source="Eurostat (gov_10a_main)"
         sparklineData={serie_deficit_pib.filter(d => d.deficit_pib != null).map(d => d.deficit_pib)}
     />

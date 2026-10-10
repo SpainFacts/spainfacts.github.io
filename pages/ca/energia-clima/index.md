@@ -1,7 +1,7 @@
 ---
 title: Energia i Clima
 description: Transició ecològica, mix de generació elèctrica i emissions de gasos d'efecte d'hivernacle a Espanya.
-i18n_origen: 44513b3048e6
+i18n_origen: 3dd0325563c7
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,11 +9,12 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
+    import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
 # 🌱 Energia, Clima i Transició Ecològica
 
-Espanya s'ha situat com un dels líders europeus en el desplegament d'energies renovables. Aquesta secció presenta les xifres oficials del sistema elèctric, les emissions de gasos d'efecte d'hivernacle i l'evolució de la potència instal·lada renovable.
+El {resumen_ultimo[0]?.anio}, les renovables van generar el {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % de l'electricitat a Espanya, segons Red Eléctrica. Aquesta secció presenta les xifres oficials del sistema elèctric, les emissions de gasos d'efecte d'hivernacle i l'evolució de la potència instal·lada renovable.
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -128,7 +129,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-El sistema elèctric espanyol ha protagonitzat una transformació històrica: entre {mix_hitos[0]?.anio} i {mix_hitos[1]?.anio}, l'eòlica i la solar fotovoltaica han passat de representar el {mix_hitos[0]?.pct_eolica_solar}% a un **{mix_hitos[1]?.pct_eolica_solar}%** de la generació total, mentre que el carbó ha caigut del {mix_hitos[0]?.pct_carbon}% al {mix_hitos[1]?.pct_carbon}%.
+El sistema elèctric espanyol ha protagonitzat una transformació històrica: entre {mix_hitos[0]?.anio} i {mix_hitos[1]?.anio}, l'eòlica i la solar fotovoltaica han passat de representar el {formatDecimal(mix_hitos[0]?.pct_eolica_solar)}% a un **{formatDecimal(mix_hitos[1]?.pct_eolica_solar)}%** de la generació total, mentre que el carbó ha caigut del {formatDecimal(mix_hitos[0]?.pct_carbon)}% al {formatDecimal(mix_hitos[1]?.pct_carbon)}%.
 
 ```sql mix_areas
 SELECT
@@ -192,7 +193,7 @@ GROUP BY anio
 ORDER BY anio ASC
 ```
 
-El **transport** és el sector més resistent a la descarbonització: concentra el **{emisiones_hitos[1]?.pct_transporte}%** de les emissions el {emisiones_hitos[1]?.anio}. En canvi, la **generació elèctrica** ha reduït les seves emissions un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% des del {emisiones_hitos[0]?.anio} gràcies al desplegament renovable.
+El **transport** és el sector més resistent a la descarbonització: concentra el **{formatDecimal(emisiones_hitos[1]?.pct_transporte)}%** de les emissions el {emisiones_hitos[1]?.anio}. En canvi, la **generació elèctrica** ha reduït les seves emissions un {emisiones_hitos.length > 1 ? ((1 - emisiones_hitos[1].mt_electrica / emisiones_hitos[0].mt_electrica) * 100).toFixed(0) : null}% des del {emisiones_hitos[0]?.anio} gràcies al desplegament renovable.
 
 ```sql emisiones_sector
 SELECT
