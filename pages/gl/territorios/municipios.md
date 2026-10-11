@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: fad225ccb8b9
+i18n_origen: 12ad94ccd4aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,7 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
-    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -571,12 +571,11 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
 
 {#if barrios_renta.length > 1}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_renta}
     geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=renta_persona_real
     valueFmt='#,##0" €"'
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
@@ -611,12 +610,11 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=ganador_familia
     colorCol=ganador_color
     intensidad=ganador_pct
@@ -631,12 +629,11 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
 
 {:else}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=valor
     valueFmt='0.0"%"'
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
@@ -671,7 +668,7 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Seccións censuais: contornos do INE do ano de cada dato. Renda: Atlas de Distribución de Renda dos Fogares do INE, que corta as seccións máis ricas e as máis pobres nun mesmo valor máximo e mínimo (por iso levan diante «≥» ou «≤»). Votos: resultados por mesa do Ministerio do Interior sumados por sección, sen o voto dos residentes no estranxeiro. As porcentaxes de voto son sobre votos válidos (candidaturas e en branco). As seccións pártense ou renuméranse cando cambia a súa poboación, así que algunha pode quedar en gris se non hai dato dese ano.</p>
+<p class="text-xs text-gray-500">Seccións censuais: contornos do INE do ano de cada dato, sobre o rueiro do IGN. Renda: Atlas de Distribución de Renda dos Fogares do INE, que corta as seccións máis ricas e as máis pobres nun mesmo valor máximo e mínimo (por iso levan diante «≥» ou «≤»). Votos: resultados por mesa do Ministerio do Interior sumados por sección, sen o voto dos residentes no estranxeiro. As porcentaxes de voto son sobre votos válidos (candidaturas e en branco). As seccións pártense ou renuméranse cando cambia a súa poboación, así que algunha pode quedar en gris se non hai dato dese ano.</p>
 
 {/if}
 

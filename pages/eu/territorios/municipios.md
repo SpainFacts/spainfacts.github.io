@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: fad225ccb8b9
+i18n_origen: 12ad94ccd4aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,7 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
-    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
     const urte = (n, s) => (n == null || n === '' ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
@@ -583,12 +583,11 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 
 {#if barrios_renta.length > 1}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_renta}
     geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=renta_persona_real
     valueFmt='#,##0" €"'
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
@@ -623,12 +622,11 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=ganador_familia
     colorCol=ganador_color
     intensidad=ganador_pct
@@ -643,12 +641,11 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 
 {:else}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=valor
     valueFmt='0.0"%"'
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
@@ -683,7 +680,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Errolda-sekzioak: datu bakoitzaren urteko INEren mugak. Errenta: INEren Etxeen Errenta Banaketaren Atlasa; sekzio aberatsenak eta pobreenak gehieneko eta gutxieneko balio berean mozten ditu (horregatik daramate aurrean «≥» edo «≤»). Botoak: Barne Ministerioaren emaitzak mahaika, sekzioka batuta, atzerrian bizi direnen botorik gabe. Botoen ehunekoak baliozko botoen gainekoak dira (hautagaitzak eta zuriak). Sekzioak zatitu edo berriro zenbakitzen dira biztanleria aldatzen denean; beraz, batzuk grisez ager daitezke urte horretako daturik ez badago.</p>
+<p class="text-xs text-gray-500">Errolda-sekzioak: datu bakoitzaren urteko INEren mugak, IGNren kale-mapa gainean. Errenta: INEren Etxeen Errenta Banaketaren Atlasa; sekzio aberatsenak eta pobreenak gehieneko eta gutxieneko balio berean mozten ditu (horregatik daramate aurrean «≥» edo «≤»). Botoak: Barne Ministerioaren emaitzak mahaika, sekzioka batuta, atzerrian bizi direnen botorik gabe. Botoen ehunekoak baliozko botoen gainekoak dira (hautagaitzak eta zuriak). Sekzioak zatitu edo berriro zenbakitzen dira biztanleria aldatzen denean; beraz, batzuk grisez ager daitezke urte horretako daturik ez badago.</p>
 
 {/if}
 

@@ -8,7 +8,7 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import BuscadorMunicipio from '../../../../../../src/lib/components/BuscadorMunicipio.svelte';
-    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -570,12 +570,11 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
 
 {#if barrios_renta.length > 1}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_renta}
     geoJsonUrl="/geo/secciones/{barrios_renta[0]?.geo_anio}/{barrios_renta[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=renta_persona_real
     valueFmt='#,##0" €"'
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
@@ -610,12 +609,11 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=ganador_familia
     colorCol=ganador_color
     intensidad=ganador_pct
@@ -630,12 +628,11 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
 
 {:else}
 
-<MapaEspana
+<MapaBarrios
     data={barrios_voto}
     geoJsonUrl="/geo/secciones/{barrios_voto[0]?.geo_anio}/{barrios_voto[0]?.cod_mun}.geojson"
     geoId=id
     areaCol=cod_seccion
-    encuadre=denso
     value=valor
     valueFmt='0.0"%"'
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
@@ -670,7 +667,7 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Secciones censales: contornos del INE del año de cada dato. Renta: Atlas de Distribución de Renta de los Hogares del INE, que corta las secciones más ricas y las más pobres a un mismo valor máximo y mínimo (por eso llevan delante «≥» o «≤»). Votos: resultados por mesa del Ministerio del Interior sumados por sección, sin el voto de los residentes en el extranjero. Los porcentajes de voto son sobre votos válidos (candidaturas y en blanco). Las secciones se parten o se renumeran cuando cambia su población, así que alguna puede quedar en gris si no hay dato de ese año.</p>
+<p class="text-xs text-gray-500">Secciones censales: contornos del INE del año de cada dato, sobre el callejero del IGN. Renta: Atlas de Distribución de Renta de los Hogares del INE, que corta las secciones más ricas y las más pobres a un mismo valor máximo y mínimo (por eso llevan delante «≥» o «≤»). Votos: resultados por mesa del Ministerio del Interior sumados por sección, sin el voto de los residentes en el extranjero. Los porcentajes de voto son sobre votos válidos (candidaturas y en blanco). Las secciones se parten o se renumeran cuando cambia su población, así que alguna puede quedar en gris si no hay dato de ese año.</p>
 
 {/if}
 
