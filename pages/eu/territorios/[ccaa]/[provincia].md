@@ -1,6 +1,6 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: 098d74e09c6b
+i18n_origen: edb2f0df67b1
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -119,6 +119,7 @@ ORDER BY m.anio
 ## Biztanleria
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={serie_poblacion}
     x=fecha
     y=valor
@@ -207,6 +208,7 @@ ORDER BY anio
 
 <Grid cols=2>
     <BarChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
         data={demo_piramide}
         x=grupo
         y=pct
@@ -219,6 +221,7 @@ ORDER BY anio
         title="Biztanleria-piramidea, {demo_edades.slice(-1)[0]?.anio} (guztizkoaren %)"
     />
     <LineChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
         data={demo_tasas}
         x=anio
         y=por_1000
@@ -334,6 +337,7 @@ ORDER BY fecha
 </Grid>
 
 <AreaChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={deuda_local_tipo}
     x=fecha
     y=deuda
@@ -347,6 +351,7 @@ ORDER BY fecha
 {#if deuda_ciudades.length > 0}
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={deuda_ciudades}
     x=fecha
     y=deuda_eur_hab_real
@@ -441,6 +446,7 @@ LIMIT 1
 </Grid>
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={empleo_prov_sectores}
     x=sector
     y=por_1000
@@ -515,6 +521,7 @@ ORDER BY mes
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={paro_terr}
     x=trimestre
     y={['media_4t_tasa_paro', 'tasa_paro_espana']}
@@ -684,6 +691,7 @@ ORDER BY poblacion DESC
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod_ccaa } }}
     data={viv_precio}
     x=fecha
     y=euros_m2_real

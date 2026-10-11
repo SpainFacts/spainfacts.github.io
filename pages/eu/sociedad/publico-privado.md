@@ -1,7 +1,7 @@
 ---
 title: Publikoa eta pribatua
 description: "Osasun eta hezkuntza publikoen zein zati ematen den enpresa eta zentro pribatuen bidez, erkidegoz erkidego: osasun-itunak, emakida-ospitaleak, aseguru pribatuak, eskola itunpekoa, LH eta unibertsitate pribatuak."
-i18n_origen: 7b3834633dd5
+i18n_origen: 1b5c008b3f5d
 ---
 
 <script>
@@ -374,6 +374,7 @@ Biztanleko eurotan eta inflazioa kenduta, Madril {conc_hitos[0]?.anio_ini}ko {fo
 
 <LineChart
     data={conc_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_eur_hab_real
     series=comunidad
@@ -391,6 +392,7 @@ Itunez gain, Madril eta Valentziako Erkidegoa dira eremu osoetako arreta osoa en
 
 <LineChart
     data={cob_graf}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=comunidad
@@ -509,6 +511,7 @@ Hilero, Madrilgo Erkidegoak argitaratzen du zenbat paziente dauden lehen kontsul
 
 <BarChart
     data={le_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=por_1000
     series=situacion
@@ -532,6 +535,7 @@ Hitzordurik ez duena ez da batez besteko itxaronaldian ere sartzen. Erkidego bak
 
 <LineChart
     data={coh_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=fecha
     y=dias
     series=demora
@@ -546,6 +550,7 @@ Beren ospitalean hitzordurik lortu ezean, paziente askok beste batean amaitzen d
 
 <LineChart
     data={le_libre}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=saldo_por_1000_hab
     series=gestion
@@ -588,6 +593,7 @@ Rosa María Urbanos katedradunak, SNSren Behatokiko lehen zuzendariak, bi arrazo
 
 <LineChart
     data={hogares}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_persona_eur_real
     series=comunidad
@@ -661,6 +667,7 @@ ORDER BY anio
 
 <LineChart
     data={conc_edu_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=conciertos_eur_hab_real
     series=comunidad
@@ -708,6 +715,7 @@ ORDER BY anio
 
 <LineChart
     data={uni_serie}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=serie
@@ -848,6 +856,7 @@ Aurrekontu batek esaten du gobernu batek zenbat gastatzeko asmoa duen; kontu oro
 
 <BarChart
     data={ejec_priv_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=eur_hab
     series=momento
@@ -859,8 +868,48 @@ Aurrekontu batek esaten du gobernu batek zenbat gastatzeko asmoa duen; kontu oro
     title="SERMAS: Fundación Jiménez Díaz eta emakida-ospitaleak, aurrekontuan jarritakoa eta gastatutakoa biztanleko ({ejec_hitos[0]?.anio_base}ko euroak)"
 />
 
+```sql empresas
+-- Qué empresas cobran del SERMAS cada año (Cuenta General), millones de euros constantes
+SELECT CAST(anio AS INTEGER) AS anio, empresa, importe_meur_real, importe_meur, eur_hab_real, hospitales, anio_base
+FROM mother.sanidad_privada_pagos_empresas
+ORDER BY anio, CASE WHEN empresa_identificada THEN 0 ELSE 1 END, importe_meur DESC
+```
+
+```sql empresas_hitos
+SELECT
+    max(anio) AS anio_ult, min(anio) AS anio_ini, max(anio_base) AS anio_base,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_ult,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT min(anio) FROM ${empresas})) AS quiron_ini,
+    sum(eur_hab_real) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_hab,
+    sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS total_ult,
+    100 * sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas}))
+        / sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS quiron_pct
+FROM ${empresas}
+```
+
+### Zein enpresak eramaten duten dirua
+
+Kontu orokorraren ospitalez ospitaleko xehetasunari esker, nork kobratzen duen jakin daiteke. {empresas_hitos[0]?.anio_ult}. urtean SERMASek {formatNumber(empresas_hitos[0]?.quiron_ult, 0)} milioi ordaindu zizkion Quirónsaludi Jiménez Díaz Fundazioagatik eta bere hiru emakida-ospitaleengatik (madrildar bakoitzeko {formatNumber(empresas_hitos[0]?.quiron_hab, 0)} €), osasun-enpresa pribatuei ordaindutako guztiaren % {formatNumber(empresas_hitos[0]?.quiron_pct, 0)}; {empresas_hitos[0]?.anio_ini}. urtean {formatNumber(empresas_hitos[0]?.quiron_ini, 0)} milioi izan ziren.
+
+<BarChart
+    data={empresas}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
+    x=anio
+    y=importe_meur_real
+    series=empresa
+    type=stacked
+    sort=false
+    xFmt="####"
+    yFmt='#,##0" M€"'
+    colorPalette={['#1d4ed8', '#fdba74', '#94a3b8', '#ea580c']}
+    title="SERMAS: osasun-enpresa pribatuei egindako ordainketak urteka ({empresas_hitos[0]?.anio_base}ko euroetan, milioika)"
+/>
+
+<p class="text-xs text-gray-500">Madrilgo Erkidegoko Kontu Orokorra: kudeaketa pribatuko ospitale bakoitzaren azpikontzeptuan gauzatutako gastua (aitortutako betebeharrak), urte hartan kontrolatzen zuen enpresari esleitua (Torrejón: Sanitas eta Asisa 2018ra arte, Ribera Salud 2018ko abenduaz geroztik). Urte bakoitzak bertan ordaintzen diren aurreko urteetako likidazioak barne hartzen ditu; horregatik daude jauziak. «Beste enpresa batzuk»: erakunde pribatuekin egindako gainerako itunak (dialisia, anbulantziak, probak, laborategiak...), haien enpresa kontuan agertzen ez dela. Ez du barne hartzen obra-emakidaz eraikitako ospitaleen kanona.</p>
+
 <LineChart
     data={ejec_salud}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=desviacion_pct
     series=servicio
@@ -876,6 +925,7 @@ Falta den dirua urtean zehar kreditu-aldaketekin estaltzen da. {recibe[0]?.anio}
 
 <BarChart
     data={imprevistos}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=cedido_meur_real
     series=partida
@@ -891,6 +941,7 @@ Zerbitzu bat indarreko kontraturik gabe edo aurretiazko fiskalizaziorik gabe ema
 
 <BarChart
     data={conval}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=importe_eur_hab_real
     sort=false

@@ -1,6 +1,6 @@
 ---
 description: "Fitxa de la comunitat autònoma: població, economia, comptes públics, deute, ocupació pública, seguretat i més, amb dades oficials i comparades amb Espanya."
-i18n_origen: 723b35537636
+i18n_origen: 27a28a4c59c0
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -129,6 +129,7 @@ FROM ${municipios}
 ## Població
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={serie_poblacion}
     x=fecha
     y=valor
@@ -217,6 +218,7 @@ ORDER BY anio
 
 <Grid cols=2>
     <BarChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={demo_piramide}
         x=grupo
         y=pct
@@ -229,6 +231,7 @@ ORDER BY anio
         title="Piràmide de població, {demo_edades.slice(-1)[0]?.anio} (% del total)"
     />
     <LineChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={demo_tasas}
         x=anio
         y=por_1000
@@ -419,6 +422,7 @@ Comptes executats (liquidació) de l'administració autonòmica consolidada. S'u
 </Grid>
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={gasto_ranking}
     x=comunidad
     y=gasto_hab
@@ -433,6 +437,7 @@ Comptes executats (liquidació) de l'administració autonòmica consolidada. S'u
 ### En què gasta?
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={politicas_grafico}
     x=politica
     y=euros
@@ -456,6 +461,7 @@ Comptes executats (liquidació) de l'administració autonòmica consolidada. S'u
 ### Evolució
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={cuentas_evolucion}
     x=fecha
     y=importe
@@ -575,6 +581,7 @@ ORDER BY anio
 <p class="text-xs text-gray-500">El deute per habitant utilitza la població del Padró de cada any (l'última disponible per als anys sense Padró) i està descomptada la inflació: euros de {base[0]?.anio_base} (la sèrie de la miniatura comença el 1996, primer any amb deflactor).</p>
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={deuda_ranking}
     x=comunidad
     y=deuda_pct_pib
@@ -587,6 +594,7 @@ ORDER BY anio
 />
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={deuda}
     x=fecha
     y=deuda_pct_pib
@@ -599,6 +607,7 @@ ORDER BY anio
 {#if saldo.length > 0}
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={saldo}
     x=anio
     y=saldo_pct_pib
@@ -708,6 +717,7 @@ ORDER BY b.anio
 ## Seguretat
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={crimen_ccaa}
     x=anio
     y={['tasa', 'tasa_espana']}
@@ -759,6 +769,7 @@ ORDER BY b.anio
 
 <Grid cols=2>
     <BarChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={empleo_sectores}
         x=sector
         y=por_1000
@@ -770,6 +781,7 @@ ORDER BY b.anio
         title="Per sector i administració (per 1.000 habitants)"
     />
     <BarChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={empleo_serie}
         x=fecha
         y=por_1000_hab
@@ -862,6 +874,7 @@ ORDER BY mes
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={paro_terr}
     x=trimestre
     y={['tasa_paro', 'tasa_paro_espana']}
@@ -944,6 +957,7 @@ ORDER BY m.renta_persona_real DESC
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={renta_ccaa}
     x=anio
     y={['tasa_pobreza', 'pobreza_espana']}
@@ -1067,6 +1081,7 @@ ORDER BY euros_m2_real DESC
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={viv_precio}
     x=fecha
     y=euros_m2_real
@@ -1216,6 +1231,7 @@ ORDER BY c.anio
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={edu_serie.filter(d => d.indicador === 'abandono')}
     x=anio
     y={['valor', 'valor_espana']}
@@ -1315,6 +1331,7 @@ LIMIT 10
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={tur_ccaa}
     x=anio
     y={['pernoct_1000hab', 'pernoct_1000hab_espana']}
@@ -1328,6 +1345,7 @@ LIMIT 10
 />
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={tur_ccaa_estacional}
     x=mes_nombre
     y={['pernoct_1000hab', 'pernoct_1000hab_espana']}
@@ -1344,6 +1362,7 @@ LIMIT 10
 {#if tur_vut_mun_ccaa.length > 0}
 
 <BarChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={tur_vut_mun_ccaa}
     x=municipio
     y=pct
@@ -1456,6 +1475,7 @@ ORDER BY i.anio
 </Grid>
 
 <LineChart
+    echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
     data={empresas_ccaa_serie}
     x=anio
     y={['valor', 'valor_espana']}
@@ -1582,6 +1602,7 @@ ORDER BY anio
 
 <Grid cols=2>
     <LineChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={san_espera_dias}
         x=fecha
         y=dias_medio
@@ -1594,6 +1615,7 @@ ORDER BY anio
     />
     {#if san_gasto.length > 0}
     <LineChart
+        echartsOptions={{ eventos: { ccaa: terr[0]?.cod } }}
         data={san_gasto_serie}
         x=anio
         y=eur_hab_real

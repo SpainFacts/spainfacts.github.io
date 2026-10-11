@@ -373,6 +373,7 @@ En euros por habitante y descontada la inflación, Madrid ha pasado de {formatNu
 
 <LineChart
     data={conc_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_eur_hab_real
     series=comunidad
@@ -390,6 +391,7 @@ Más allá de los conciertos, Madrid y la Comunitat Valenciana son las únicas c
 
 <LineChart
     data={cob_graf}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=comunidad
@@ -508,6 +510,7 @@ Cada mes la Comunidad de Madrid publica cuántos pacientes esperan una primera c
 
 <BarChart
     data={le_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=por_1000
     series=situacion
@@ -531,6 +534,7 @@ Quien no tiene cita tampoco entra en la demora media. Si se compara la demora qu
 
 <LineChart
     data={coh_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=fecha
     y=dias
     series=demora
@@ -545,6 +549,7 @@ Al no conseguir cita en su hospital, muchos pacientes acaban en otro por libre e
 
 <LineChart
     data={le_libre}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=saldo_por_1000_hab
     series=gestion
@@ -587,6 +592,7 @@ La catedrática Rosa María Urbanos, primera directora del Observatorio del SNS,
 
 <LineChart
     data={hogares}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_persona_eur_real
     series=comunidad
@@ -660,6 +666,7 @@ En {conc_edu_hitos[0]?.anio_ult} las administraciones educativas dedicaron {form
 
 <LineChart
     data={conc_edu_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=conciertos_eur_hab_real
     series=comunidad
@@ -707,6 +714,7 @@ En el curso {uni_hitos[0]?.curso_grado} el {formatNumber(uni_hitos[0]?.es_grado,
 
 <LineChart
     data={uni_serie}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=serie
@@ -847,6 +855,7 @@ Un presupuesto dice cuánto piensa gastar un gobierno; la cuenta general, cuánt
 
 <BarChart
     data={ejec_priv_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=eur_hab
     series=momento
@@ -858,8 +867,48 @@ Un presupuesto dice cuánto piensa gastar un gobierno; la cuenta general, cuánt
     title="SERMAS: Fundación Jiménez Díaz y hospitales de concesión, presupuestado y gastado por habitante (euros de {ejec_hitos[0]?.anio_base})"
 />
 
+```sql empresas
+-- Qué empresas cobran del SERMAS cada año (Cuenta General), millones de euros constantes
+SELECT CAST(anio AS INTEGER) AS anio, empresa, importe_meur_real, importe_meur, eur_hab_real, hospitales, anio_base
+FROM mother.sanidad_privada_pagos_empresas
+ORDER BY anio, CASE WHEN empresa_identificada THEN 0 ELSE 1 END, importe_meur DESC
+```
+
+```sql empresas_hitos
+SELECT
+    max(anio) AS anio_ult, min(anio) AS anio_ini, max(anio_base) AS anio_base,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_ult,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT min(anio) FROM ${empresas})) AS quiron_ini,
+    sum(eur_hab_real) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_hab,
+    sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS total_ult,
+    100 * sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas}))
+        / sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS quiron_pct
+FROM ${empresas}
+```
+
+### Qué empresas se llevan el dinero
+
+Con el desglose por hospital de la cuenta general se puede poner nombre a quien cobra. En {empresas_hitos[0]?.anio_ult} el SERMAS pagó {formatNumber(empresas_hitos[0]?.quiron_ult, 0)} millones a Quirónsalud por la Fundación Jiménez Díaz y sus tres hospitales de concesión ({formatNumber(empresas_hitos[0]?.quiron_hab, 0)} € por madrileño), el {formatNumber(empresas_hitos[0]?.quiron_pct, 0)} % de todo lo que pagó a empresas sanitarias privadas; en {empresas_hitos[0]?.anio_ini} fueron {formatNumber(empresas_hitos[0]?.quiron_ini, 0)} millones.
+
+<BarChart
+    data={empresas}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
+    x=anio
+    y=importe_meur_real
+    series=empresa
+    type=stacked
+    sort=false
+    xFmt="####"
+    yFmt='#,##0" M€"'
+    colorPalette={['#1d4ed8', '#fdba74', '#94a3b8', '#ea580c']}
+    title="SERMAS: pagos a empresas sanitarias privadas por año (millones de euros de {empresas_hitos[0]?.anio_base})"
+/>
+
+<p class="text-xs text-gray-500">Cuenta General de la Comunidad de Madrid: gasto ejecutado (obligaciones reconocidas) en el subconcepto de cada hospital de gestión privada, asignado a la empresa que lo controlaba ese año (Torrejón: Sanitas y Asisa hasta 2018, Ribera Salud desde diciembre de 2018). Cada año incluye las liquidaciones de años anteriores que se pagan en él, por eso hay saltos. «Otras empresas»: el resto de conciertos con entidades privadas (diálisis, ambulancias, pruebas, laboratorios...), cuya empresa no figura en la cuenta. No incluye el canon de los hospitales construidos por concesión de obra.</p>
+
 <LineChart
     data={ejec_salud}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=desviacion_pct
     series=servicio
@@ -875,6 +924,7 @@ El dinero que falta se cubre durante el año con modificaciones de crédito. En 
 
 <BarChart
     data={imprevistos}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=cedido_meur_real
     series=partida
@@ -890,6 +940,7 @@ Cuando un servicio se presta sin contrato en vigor o sin la fiscalización previ
 
 <BarChart
     data={conval}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=importe_eur_hab_real
     sort=false

@@ -1,7 +1,7 @@
 ---
 title: Público e privado
 description: "Canto da sanidade e da educación públicas se presta a través de empresas e centros privados, comunidade a comunidade: concertos sanitarios, hospitais de concesión, seguros privados, escola concertada, FP e universidades privadas."
-i18n_origen: 7b3834633dd5
+i18n_origen: 1b5c008b3f5d
 ---
 
 <script>
@@ -374,6 +374,7 @@ En euros por habitante e descontada a inflación, Madrid pasou de {formatNumber(
 
 <LineChart
     data={conc_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_eur_hab_real
     series=comunidad
@@ -391,6 +392,7 @@ Máis alá dos concertos, Madrid e a Comunitat Valenciana son as únicas comunid
 
 <LineChart
     data={cob_graf}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=comunidad
@@ -509,6 +511,7 @@ Cada mes a Comunidade de Madrid publica cantos pacientes esperan unha primeira c
 
 <BarChart
     data={le_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=por_1000
     series=situacion
@@ -532,6 +535,7 @@ Quen non ten cita tampouco entra na demora media. Se se compara a demora que dec
 
 <LineChart
     data={coh_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=fecha
     y=dias
     series=demora
@@ -546,6 +550,7 @@ Ao non conseguir cita no seu hospital, moitos pacientes acaban noutro por libre 
 
 <LineChart
     data={le_libre}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=saldo_por_1000_hab
     series=gestion
@@ -588,6 +593,7 @@ A catedrática Rosa María Urbanos, primeira directora do Observatorio do SNS, s
 
 <LineChart
     data={hogares}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_persona_eur_real
     series=comunidad
@@ -661,6 +667,7 @@ En {conc_edu_hitos[0]?.anio_ult} as administracións educativas dedicaron {forma
 
 <LineChart
     data={conc_edu_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=conciertos_eur_hab_real
     series=comunidad
@@ -708,6 +715,7 @@ No curso {uni_hitos[0]?.curso_grado} o {formatNumber(uni_hitos[0]?.es_grado, 1)}
 
 <LineChart
     data={uni_serie}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=serie
@@ -848,6 +856,7 @@ Un orzamento di canto pensa gastar un goberno; a conta xeral, canto gastou de ve
 
 <BarChart
     data={ejec_priv_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=eur_hab
     series=momento
@@ -859,8 +868,48 @@ Un orzamento di canto pensa gastar un goberno; a conta xeral, canto gastou de ve
     title="SERMAS: Fundación Jiménez Díaz e hospitais de concesión, orzado e gastado por habitante (euros de {ejec_hitos[0]?.anio_base})"
 />
 
+```sql empresas
+-- Qué empresas cobran del SERMAS cada año (Cuenta General), millones de euros constantes
+SELECT CAST(anio AS INTEGER) AS anio, empresa, importe_meur_real, importe_meur, eur_hab_real, hospitales, anio_base
+FROM mother.sanidad_privada_pagos_empresas
+ORDER BY anio, CASE WHEN empresa_identificada THEN 0 ELSE 1 END, importe_meur DESC
+```
+
+```sql empresas_hitos
+SELECT
+    max(anio) AS anio_ult, min(anio) AS anio_ini, max(anio_base) AS anio_base,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_ult,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT min(anio) FROM ${empresas})) AS quiron_ini,
+    sum(eur_hab_real) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_hab,
+    sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS total_ult,
+    100 * sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas}))
+        / sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS quiron_pct
+FROM ${empresas}
+```
+
+### Que empresas levan o diñeiro
+
+Co desagregado por hospital da conta xeral pódeselle poñer nome a quen cobra. En {empresas_hitos[0]?.anio_ult} o SERMAS pagou {formatNumber(empresas_hitos[0]?.quiron_ult, 0)} millóns a Quirónsalud pola Fundación Jiménez Díaz e os seus tres hospitais de concesión ({formatNumber(empresas_hitos[0]?.quiron_hab, 0)} € por madrileño), o {formatNumber(empresas_hitos[0]?.quiron_pct, 0)} % de todo o que pagou a empresas sanitarias privadas; en {empresas_hitos[0]?.anio_ini} foron {formatNumber(empresas_hitos[0]?.quiron_ini, 0)} millóns.
+
+<BarChart
+    data={empresas}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
+    x=anio
+    y=importe_meur_real
+    series=empresa
+    type=stacked
+    sort=false
+    xFmt="####"
+    yFmt='#,##0" M€"'
+    colorPalette={['#1d4ed8', '#fdba74', '#94a3b8', '#ea580c']}
+    title="SERMAS: pagamentos a empresas sanitarias privadas por ano (millóns de euros de {empresas_hitos[0]?.anio_base})"
+/>
+
+<p class="text-xs text-gray-500">Conta Xeral da Comunidade de Madrid: gasto executado (obrigas recoñecidas) no subconcepto de cada hospital de xestión privada, asignado á empresa que o controlaba ese ano (Torrejón: Sanitas e Asisa ata 2018, Ribera Salud desde decembro de 2018). Cada ano inclúe as liquidacións de anos anteriores que se pagan nel, por iso hai saltos. «Outras empresas»: o resto de concertos con entidades privadas (diálise, ambulancias, probas, laboratorios...), cuxa empresa non figura na conta. Non inclúe o canon dos hospitais construídos por concesión de obra.</p>
+
 <LineChart
     data={ejec_salud}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=desviacion_pct
     series=servicio
@@ -876,6 +925,7 @@ O diñeiro que falta cóbrese durante o ano con modificacións de crédito. En {
 
 <BarChart
     data={imprevistos}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=cedido_meur_real
     series=partida
@@ -891,6 +941,7 @@ Cando un servizo se presta sen contrato en vigor ou sen a fiscalización previa,
 
 <BarChart
     data={conval}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=importe_eur_hab_real
     sort=false

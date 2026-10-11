@@ -575,15 +575,20 @@ index 0000000..831135e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..024c183
+index 0000000..3307c5c
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,4065 @@
+@@ -0,0 +1,4085 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
 +export const DICCIONARIO = {
 +	en: {
++		// Público y privado (sociedad/publico-privado)
++		"Otras empresas (sin desglose)": "Other companies (no breakdown)",
++		"Sanitas y Asisa": "Sanitas and Asisa",
++		"Quirónsalud": "Quirónsalud",
++		"Ribera Salud": "Ribera Salud",
 +		// Público y privado (sociedad/publico-privado)
 +		"Con cita": "With appointment",
 +		"Sin cita": "Without appointment",
@@ -1684,6 +1689,11 @@ index 0000000..024c183
 +	},
 +	ca: {
 +		// Público y privado (sociedad/publico-privado)
++		"Otras empresas (sin desglose)": "Altres empreses (sense desglossament)",
++		"Sanitas y Asisa": "Sanitas i Asisa",
++		"Quirónsalud": "Quirónsalud",
++		"Ribera Salud": "Ribera Salud",
++		// Público y privado (sociedad/publico-privado)
 +		"Con cita": "Amb cita",
 +		"Sin cita": "Sense cita",
 +		"Concertada": "Concertada",
@@ -2749,6 +2759,11 @@ index 0000000..024c183
 +	},
 +	gl: {
 +		// Público y privado (sociedad/publico-privado)
++		"Otras empresas (sin desglose)": "Outras empresas (sen desagregar)",
++		"Sanitas y Asisa": "Sanitas e Asisa",
++		"Quirónsalud": "Quirónsalud",
++		"Ribera Salud": "Ribera Salud",
++		// Público y privado (sociedad/publico-privado)
 +		"Con cita": "Con cita",
 +		"Sin cita": "Sen cita",
 +		"Concertada": "Concertada",
@@ -3540,6 +3555,11 @@ index 0000000..024c183
 +		'Viviendas libres terminadas': 'Vivendas libres rematadas'
 +	},
 +	eu: {
++		// Público y privado (sociedad/publico-privado)
++		"Otras empresas (sin desglose)": "Beste enpresa batzuk (xehetasunik gabe)",
++		"Sanitas y Asisa": "Sanitas eta Asisa",
++		"Quirónsalud": "Quirónsalud",
++		"Ribera Salud": "Ribera Salud",
 +		// Público y privado (sociedad/publico-privado)
 +		"Con cita": "Hitzorduarekin",
 +		"Sin cita": "Hitzordurik gabe",
@@ -4646,15 +4666,48 @@ index 0000000..024c183
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
 new file mode 100644
-index 0000000..89ecc74
+index 0000000..2d23e5a
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/eventos.js
-@@ -0,0 +1,209 @@
+@@ -0,0 +1,250 @@
 +// SpainFacts: líneas verticales con acontecimientos clave en las gráficas temporales
 +// (añadido con patch-package). Se aplican solas a toda gráfica cuyo eje X sean fechas
 +// o años y cuyo rango incluya el evento; una gráfica puede desactivarlas con
 +// echartsOptions={{ eventos: false }}.
++// Gráficas de una comunidad: echartsOptions={{ eventos: { ccaa: '13' } }} cambia los gobiernos de
++// España por los presidentes de esa comunidad (presidentes_autonomicos.js); gráficas que comparan
++// varias comunidades: echartsOptions={{ eventos: { gobiernos: false } }} quita los gobiernos.
 +import { ETIQUETAS_EVENTOS } from './idioma.js';
++import { PRESIDENTES_AUTONOMICOS } from './presidentes_autonomicos.js';
++
++// Colores de los partidos para las líneas de presidentes autonómicos
++const COLOR_PARTIDO = {
++	PP: '#1d4ed8', AP: '#1d4ed8', UPN: '#1d4ed8', PSOE: '#e30613', PSC: '#e30613',
++	CiU: '#18307b', CDC: '#18307b', Junts: '#20c0b2', ERC: '#f5b400', PNV: '#2e7d32', CC: '#f2c500',
++	AIC: '#f2c500', PRC: '#7cb342', PAR: '#c62828', Foro: '#1565c0', UCD: '#2f9c95', CDS: '#2f9c95'
++};
++
++/** Eventos de una gráfica: los generales y, según las opciones, los presidentes de una comunidad */
++function eventosDe(opciones) {
++	if (!opciones || typeof opciones !== 'object') return EVENTOS;
++	const sinGobiernos = EVENTOS.filter((e) => e.tipo !== 'gobierno');
++	if (opciones.ccaa) {
++		const cod = String(opciones.ccaa).padStart(2, '0');
++		const lista = PRESIDENTES_AUTONOMICOS[cod] ?? [];
++		return [
++			...sinGobiernos,
++			...lista.map((p) => ({
++				id: `ccaa_${cod}_${p.desde}`,
++				fecha: p.desde,
++				etiqueta: `${p.etiqueta} (${p.partido})`,
++				tipo: 'gobierno',
++				color: COLOR_PARTIDO[p.partido] ?? '#6b7280'
++			}))
++		].sort((a, b) => a.fecha.localeCompare(b.fecha));
++	}
++	if (opciones.gobiernos === false) return sinGobiernos;
++	return EVENTOS;
++}
 +
 +/**
 + * tipo: 'crisis' (gris, discontinua) | 'gobierno' (color del partido, punteada) | 'medida' (gris, punteada)
@@ -4739,7 +4792,8 @@ index 0000000..89ecc74
 +
 +const primero = (eje) => (Array.isArray(eje) ? eje[0] : eje);
 +
-+export function anadirEventos(config, lang = 'es', ruta = '/', texto = '') {
++export function anadirEventos(config, lang = 'es', ruta = '/', texto = '', opciones = undefined) {
++	const EVENTOS_GRAFICA = eventosDe(opciones);
 +	try {
 +		if (!config || !Array.isArray(config.series) || !config.series.length) return config;
 +		if (config.eventos === false) return config;
@@ -4780,7 +4834,7 @@ index 0000000..89ecc74
 +			const min = Math.min(...tiempos);
 +			const max = Math.max(...tiempos);
 +			if (max - min < 180 * DIA) return config; // rangos cortos (horas, días): sin eventos
-+			for (const e of EVENTOS) {
++			for (const e of EVENTOS_GRAFICA) {
 +				if (!eventoAplica(e, ruta, texto)) continue;
 +				const t = Date.parse(e.fecha);
 +				if (t <= min || t > max) continue;
@@ -4797,7 +4851,7 @@ index 0000000..89ecc74
 +			const min = Math.min(...anios);
 +			const max = Math.max(...anios);
 +			if (max - min < 3) return config;
-+			for (const e of EVENTOS) {
++			for (const e of EVENTOS_GRAFICA) {
 +				if (!eventoAplica(e, ruta, texto)) continue;
 +				const anio = Number(e.fecha.slice(0, 4));
 +				if (anio <= min || anio > max) continue;
@@ -4817,7 +4871,14 @@ index 0000000..89ecc74
 +
 +		// Si hay muchos cambios de gobierno en una serie larga, se dejan solo los de crisis
 +		// cuando las líneas quedarían demasiado juntas (más de 8)
-+		if (lineas.length > 8) lineas = lineas.filter((l) => l.e.tipo !== 'gobierno');
++		if (lineas.length > 8 && opciones?.ccaa) {
++			// Gráficas de una comunidad: los presidentes se quedan; sobran antes las medidas y las
++			// crisis que no sean la financiera ni la COVID
++			lineas = lineas.filter((l) => l.e.tipo !== 'medida');
++			if (lineas.length > 8) lineas = lineas.filter((l) => l.e.tipo === 'gobierno' || ['lehman', 'covid'].includes(l.e.id));
++			if (lineas.length > 8) lineas = lineas.filter((l) => l.e.tipo === 'gobierno' || l.e.id === 'covid');
++		}
++		if (lineas.length > (opciones?.ccaa ? 10 : 8)) lineas = lineas.filter((l) => l.e.tipo !== 'gobierno');
 +
 +		const marca = {
 +			symbol: ['none', 'none'],
@@ -4956,8 +5017,736 @@ index 0000000..a01c9ae
 +	gl: {"suarez": "Gob. Suárez (UCD)", "gonzalez": "Gob. González (PSOE)", "aznar": "Gob. Aznar (PP)", "euro": "Chega o euro", "zapatero": "Gob. Zapatero (PSOE)", "regularizacion": "Regularización extraordinaria", "carnet": "Carné por puntos", "lehman": "Crise financeira", "rajoy": "Gob. Rajoy (PP)", "reforma_laboral_2012": "Reforma laboral 2012", "rescate": "Rescate bancario", "pensiones_2013": "Reforma das pensións 2013", "sanchez": "Gob. Sánchez (PSOE)", "sol": "Fin do «imposto ao sol»", "smi_2019": "SMI +22 %", "covid": "COVID-19", "carbon": "Peche de 7 centrais de carbón", "moves": "Plan MOVES III", "pensiones_2021": "Pensións ligadas ao IPC", "ucrania": "Guerra de Ucraína", "reforma_laboral_2022": "Reforma laboral 2022", "tope_gas": "Tope ao gas (excepción ibérica)", "ley_vivienda": "Lei de vivenda", "apagon": "Apagamento xeral", "iran": "Guerra de Irán"},
 +	eu: {"suarez": "Suárezen gob. (UCD)", "gonzalez": "Gonzálezen gob. (PSOE)", "aznar": "Aznarren gob. (PP)", "euro": "Euroa iritsi da", "zapatero": "Zapateroren gob. (PSOE)", "regularizacion": "Aparteko erregularizazioa", "carnet": "Puntuzko gidabaimena", "lehman": "Finantza krisia", "rajoy": "Rajoyren gob. (PP)", "reforma_laboral_2012": "2012ko lan-erreforma", "rescate": "Banku-erreskatea", "pensiones_2013": "2013ko pentsio-erreforma", "sanchez": "Sánchezen gob. (PSOE)", "sol": "«Eguzki-zergaren» amaiera", "smi_2019": "LGS +22 %", "covid": "COVID-19", "carbon": "7 ikatz-zentral itxi", "moves": "MOVES III plana", "pensiones_2021": "Pentsioak KPIri lotuta", "ucrania": "Ukrainako gerra", "reforma_laboral_2022": "2022ko lan-erreforma", "tope_gas": "Gasaren muga (salbuespen iberiarra)", "ley_vivienda": "Etxebizitza Legea", "apagon": "Itzalaldi orokorra", "iran": "Irango gerra"},
 +};
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/presidentes_autonomicos.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/presidentes_autonomicos.js
+new file mode 100644
+index 0000000..281f373
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/presidentes_autonomicos.js
+@@ -0,0 +1,722 @@
++// SpainFacts: presidentes autonómicos (toma de posesión) para las líneas de eventos de las gráficas.
++// GENERADO por tools/eventos-presidentes.mjs desde transform/seeds/presidentes_autonomicos.csv: no editar a mano.
++export const PRESIDENTES_AUTONOMICOS = {
++	"10": [
++		{
++			"desde": "1983-06-28",
++			"etiqueta": "Lerma",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-07-04",
++			"etiqueta": "Zaplana",
++			"partido": "PP"
++		},
++		{
++			"desde": "2002-07-24",
++			"etiqueta": "Olivas",
++			"partido": "PP"
++		},
++		{
++			"desde": "2003-06-20",
++			"etiqueta": "Camps",
++			"partido": "PP"
++		},
++		{
++			"desde": "2011-07-28",
++			"etiqueta": "Fabra",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-06-28",
++			"etiqueta": "Puig",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-07-17",
++			"etiqueta": "Mazón",
++			"partido": "PP"
++		},
++		{
++			"desde": "2025-12-02",
++			"etiqueta": "Pérez Llorca",
++			"partido": "PP"
++		}
++	],
++	"11": [
++		{
++			"desde": "1983-06-13",
++			"etiqueta": "Rodríguez Ibarra",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2007-06-29",
++			"etiqueta": "Vara",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2011-07-08",
++			"etiqueta": "Monago",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-04",
++			"etiqueta": "Vara",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-07-17",
++			"etiqueta": "Guardiola",
++			"partido": "PP"
++		}
++	],
++	"12": [
++		{
++			"desde": "1982-01-21",
++			"etiqueta": "Albor",
++			"partido": "AP"
++		},
++		{
++			"desde": "1987-09-29",
++			"etiqueta": "González Laxe",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1990-02-05",
++			"etiqueta": "Fraga",
++			"partido": "PP"
++		},
++		{
++			"desde": "2005-08-02",
++			"etiqueta": "Touriño",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2009-04-18",
++			"etiqueta": "Feijóo",
++			"partido": "PP"
++		},
++		{
++			"desde": "2022-05-14",
++			"etiqueta": "Rueda",
++			"partido": "PP"
++		}
++	],
++	"13": [
++		{
++			"desde": "1983-06-15",
++			"etiqueta": "Leguina",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-06-30",
++			"etiqueta": "Ruiz-Gallardón",
++			"partido": "PP"
++		},
++		{
++			"desde": "2003-11-21",
++			"etiqueta": "Aguirre",
++			"partido": "PP"
++		},
++		{
++			"desde": "2012-09-27",
++			"etiqueta": "González",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-06-25",
++			"etiqueta": "Cifuentes",
++			"partido": "PP"
++		},
++		{
++			"desde": "2018-05-21",
++			"etiqueta": "Garrido",
++			"partido": "PP"
++		},
++		{
++			"desde": "2019-08-19",
++			"etiqueta": "Ayuso",
++			"partido": "PP"
++		}
++	],
++	"14": [
++		{
++			"desde": "1983-06-16",
++			"etiqueta": "Hernández Ros",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1984-03-31",
++			"etiqueta": "Collado",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1993-05-03",
++			"etiqueta": "Martínez",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-07-06",
++			"etiqueta": "Valcárcel",
++			"partido": "PP"
++		},
++		{
++			"desde": "2014-04-10",
++			"etiqueta": "Garre",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-03",
++			"etiqueta": "Sánchez",
++			"partido": "PP"
++		},
++		{
++			"desde": "2017-05-03",
++			"etiqueta": "López Miras",
++			"partido": "PP"
++		}
++	],
++	"15": [
++		{
++			"desde": "1984-05-04",
++			"etiqueta": "Urralburu",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1991-09-25",
++			"etiqueta": "Alli",
++			"partido": "UPN"
++		},
++		{
++			"desde": "1995-07-27",
++			"etiqueta": "Otano",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1996-09-18",
++			"etiqueta": "Sanz",
++			"partido": "UPN"
++		},
++		{
++			"desde": "2011-07-01",
++			"etiqueta": "Barcina",
++			"partido": "UPN"
++		},
++		{
++			"desde": "2015-07-22",
++			"etiqueta": "Barkos",
++			"partido": "Geroa Bai"
++		},
++		{
++			"desde": "2019-08-06",
++			"etiqueta": "Chivite",
++			"partido": "PSOE"
++		}
++	],
++	"16": [
++		{
++			"desde": "1980-04-09",
++			"etiqueta": "Garaikoetxea",
++			"partido": "PNV"
++		},
++		{
++			"desde": "1985-01-26",
++			"etiqueta": "Ardanza",
++			"partido": "PNV"
++		},
++		{
++			"desde": "1999-01-02",
++			"etiqueta": "Ibarretxe",
++			"partido": "PNV"
++		},
++		{
++			"desde": "2009-05-07",
++			"etiqueta": "López",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2012-12-15",
++			"etiqueta": "Urkullu",
++			"partido": "PNV"
++		},
++		{
++			"desde": "2024-06-22",
++			"etiqueta": "Pradales",
++			"partido": "PNV"
++		}
++	],
++	"17": [
++		{
++			"desde": "1983-06-06",
++			"etiqueta": "De Miguel",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1987-07-29",
++			"etiqueta": "Espert",
++			"partido": "AP"
++		},
++		{
++			"desde": "1990-01-13",
++			"etiqueta": "Pérez Sáenz",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-07-08",
++			"etiqueta": "Sanz",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-08",
++			"etiqueta": "Ceniceros",
++			"partido": "PP"
++		},
++		{
++			"desde": "2019-08-29",
++			"etiqueta": "Andreu",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-06-30",
++			"etiqueta": "Capellán",
++			"partido": "PP"
++		}
++	],
++	"18": [
++		{
++			"desde": "1995-06-20",
++			"etiqueta": "Fernández",
++			"partido": "PFC"
++		},
++		{
++			"desde": "1996-07-25",
++			"etiqueta": "Fortes",
++			"partido": "PP"
++		},
++		{
++			"desde": "1999-08-27",
++			"etiqueta": "Sampietro",
++			"partido": "GIL"
++		},
++		{
++			"desde": "2001-02-10",
++			"etiqueta": "Vivas",
++			"partido": "PP"
++		}
++	],
++	"19": [
++		{
++			"desde": "1995-06-20",
++			"etiqueta": "Velázquez",
++			"partido": "PP"
++		},
++		{
++			"desde": "1998-03-04",
++			"etiqueta": "Palacios",
++			"partido": "IND"
++		},
++		{
++			"desde": "1999-07-06",
++			"etiqueta": "Aberchán",
++			"partido": "CpM"
++		},
++		{
++			"desde": "2000-07-20",
++			"etiqueta": "Imbroda",
++			"partido": "UPM"
++		},
++		{
++			"desde": "2019-06-22",
++			"etiqueta": "De Castro",
++			"partido": "Cs"
++		},
++		{
++			"desde": "2023-07-15",
++			"etiqueta": "Imbroda",
++			"partido": "PP"
++		}
++	],
++	"01": [
++		{
++			"desde": "1982-08-04",
++			"etiqueta": "Escuredo",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1984-03-14",
++			"etiqueta": "Borbolla",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1990-07-26",
++			"etiqueta": "Chaves",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2009-04-23",
++			"etiqueta": "Griñán",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2013-09-07",
++			"etiqueta": "Díaz",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2019-01-18",
++			"etiqueta": "Moreno",
++			"partido": "PP"
++		}
++	],
++	"02": [
++		{
++			"desde": "1983-06-06",
++			"etiqueta": "Marraco",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1987-07-30",
++			"etiqueta": "Gómez de las Roces",
++			"partido": "PAR"
++		},
++		{
++			"desde": "1991-07-12",
++			"etiqueta": "Eiroa",
++			"partido": "PAR"
++		},
++		{
++			"desde": "1993-09-17",
++			"etiqueta": "Marco",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-07-11",
++			"etiqueta": "Lanzuela",
++			"partido": "PP"
++		},
++		{
++			"desde": "1999-08-02",
++			"etiqueta": "Iglesias",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2011-07-14",
++			"etiqueta": "Rudi",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-05",
++			"etiqueta": "Lambán",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-08-11",
++			"etiqueta": "Azcón",
++			"partido": "PP"
++		}
++	],
++	"03": [
++		{
++			"desde": "1983-06-21",
++			"etiqueta": "De Silva",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1991-07-11",
++			"etiqueta": "Rodríguez-Vigil",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1993-06-23",
++			"etiqueta": "Trevín",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1995-07-17",
++			"etiqueta": "Marqués",
++			"partido": "PP"
++		},
++		{
++			"desde": "1999-07-22",
++			"etiqueta": "Areces",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2011-07-16",
++			"etiqueta": "Cascos",
++			"partido": "Foro"
++		},
++		{
++			"desde": "2012-05-26",
++			"etiqueta": "Fernández",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2019-07-20",
++			"etiqueta": "Barbón",
++			"partido": "PSOE"
++		}
++	],
++	"04": [
++		{
++			"desde": "1983-06-10",
++			"etiqueta": "Cañellas",
++			"partido": "AP"
++		},
++		{
++			"desde": "1995-08-02",
++			"etiqueta": "Soler",
++			"partido": "PP"
++		},
++		{
++			"desde": "1996-06-18",
++			"etiqueta": "Matas",
++			"partido": "PP"
++		},
++		{
++			"desde": "1999-07-27",
++			"etiqueta": "Antich",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2003-06-27",
++			"etiqueta": "Matas",
++			"partido": "PP"
++		},
++		{
++			"desde": "2007-07-06",
++			"etiqueta": "Antich",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2011-06-18",
++			"etiqueta": "Bauzá",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-02",
++			"etiqueta": "Armengol",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-07-07",
++			"etiqueta": "Prohens",
++			"partido": "PP"
++		}
++	],
++	"05": [
++		{
++			"desde": "1983-06-11",
++			"etiqueta": "Saavedra",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1987-08-04",
++			"etiqueta": "Fernández",
++			"partido": "CDS"
++		},
++		{
++			"desde": "1989-01-04",
++			"etiqueta": "Olarte",
++			"partido": "CDS"
++		},
++		{
++			"desde": "1991-07-12",
++			"etiqueta": "Saavedra",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1993-04-06",
++			"etiqueta": "Hermoso",
++			"partido": "AIC"
++		},
++		{
++			"desde": "1999-07-17",
++			"etiqueta": "Román Rodríguez",
++			"partido": "CC"
++		},
++		{
++			"desde": "2003-07-08",
++			"etiqueta": "Adán Martín",
++			"partido": "CC"
++		},
++		{
++			"desde": "2007-07-13",
++			"etiqueta": "Rivero",
++			"partido": "CC"
++		},
++		{
++			"desde": "2015-07-09",
++			"etiqueta": "Clavijo",
++			"partido": "CC"
++		},
++		{
++			"desde": "2019-07-16",
++			"etiqueta": "Torres",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2023-07-14",
++			"etiqueta": "Clavijo",
++			"partido": "CC"
++		}
++	],
++	"06": [
++		{
++			"desde": "1983-06-23",
++			"etiqueta": "Rodríguez",
++			"partido": "AP"
++		},
++		{
++			"desde": "1984-03-31",
++			"etiqueta": "Díaz de Entresotos",
++			"partido": "AP"
++		},
++		{
++			"desde": "1987-07-29",
++			"etiqueta": "Hormaechea",
++			"partido": "AP"
++		},
++		{
++			"desde": "1990-12-13",
++			"etiqueta": "Blanco",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1991-07-08",
++			"etiqueta": "Hormaechea",
++			"partido": "UPCA"
++		},
++		{
++			"desde": "1995-07-19",
++			"etiqueta": "Martínez Sieso",
++			"partido": "PP"
++		},
++		{
++			"desde": "2003-07-02",
++			"etiqueta": "Revilla",
++			"partido": "PRC"
++		},
++		{
++			"desde": "2011-06-27",
++			"etiqueta": "Diego",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-07",
++			"etiqueta": "Revilla",
++			"partido": "PRC"
++		},
++		{
++			"desde": "2023-07-05",
++			"etiqueta": "Buruaga",
++			"partido": "PP"
++		}
++	],
++	"07": [
++		{
++			"desde": "1983-06-03",
++			"etiqueta": "Madrid",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1986-11-24",
++			"etiqueta": "Nalda",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "1987-07-28",
++			"etiqueta": "Aznar",
++			"partido": "AP"
++		},
++		{
++			"desde": "1989-09-20",
++			"etiqueta": "Posada",
++			"partido": "PP"
++		},
++		{
++			"desde": "1991-07-10",
++			"etiqueta": "Lucas",
++			"partido": "PP"
++		},
++		{
++			"desde": "2001-03-19",
++			"etiqueta": "Herrera",
++			"partido": "PP"
++		},
++		{
++			"desde": "2019-07-12",
++			"etiqueta": "Mañueco",
++			"partido": "PP"
++		}
++	],
++	"08": [
++		{
++			"desde": "1983-06-07",
++			"etiqueta": "Bono",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2004-04-30",
++			"etiqueta": "Barreda",
++			"partido": "PSOE"
++		},
++		{
++			"desde": "2011-06-22",
++			"etiqueta": "Cospedal",
++			"partido": "PP"
++		},
++		{
++			"desde": "2015-07-04",
++			"etiqueta": "Page",
++			"partido": "PSOE"
++		}
++	],
++	"09": [
++		{
++			"desde": "1980-05-08",
++			"etiqueta": "Pujol",
++			"partido": "CiU"
++		},
++		{
++			"desde": "2003-12-20",
++			"etiqueta": "Maragall",
++			"partido": "PSC"
++		},
++		{
++			"desde": "2006-11-28",
++			"etiqueta": "Montilla",
++			"partido": "PSC"
++		},
++		{
++			"desde": "2010-12-27",
++			"etiqueta": "Mas",
++			"partido": "CiU"
++		},
++		{
++			"desde": "2016-01-12",
++			"etiqueta": "Puigdemont",
++			"partido": "CDC"
++		},
++		{
++			"desde": "2017-10-28",
++			"etiqueta": "Art. 155",
++			"partido": "PP"
++		},
++		{
++			"desde": "2018-05-17",
++			"etiqueta": "Torra",
++			"partido": "Junts"
++		},
++		{
++			"desde": "2020-09-29",
++			"etiqueta": "Aragonès",
++			"partido": "ERC"
++		},
++		{
++			"desde": "2024-08-10",
++			"etiqueta": "Illa",
++			"partido": "PSC"
++		}
++	]
++};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-index b3bfe37..179ce34 100644
+index b3bfe37..c2029a4 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 @@ -8,6 +8,12 @@
@@ -4983,7 +5772,7 @@ index b3bfe37..179ce34 100644
 +	// los eventos por tema se eligen con la ruta (sin idioma) y el texto ORIGINAL de la gráfica
 +	$: rutaBase = lang === 'es' ? ($page?.url?.pathname ?? '/') : ($page?.url?.pathname ?? '/').slice(lang.length + 1) || '/';
 +	$: textoGrafica = textoDeGrafica(config, evidenceChartTitle ?? '');
-+	$: configConEventos = echartsOptions?.eventos === false ? configTraducida : anadirEventos(configTraducida, lang, rutaBase, textoGrafica);
++	$: configConEventos = echartsOptions?.eventos === false ? configTraducida : anadirEventos(configTraducida, lang, rutaBase, textoGrafica, echartsOptions?.eventos);
  
  	export let queryID = undefined;
  	export let evidenceChartTitle = undefined;

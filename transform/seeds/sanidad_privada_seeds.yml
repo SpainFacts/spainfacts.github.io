@@ -77,3 +77,24 @@ seeds:
               quote: false
       - name: fuente_url
         tests: [not_null]
+
+  - name: sanidad_privada_empresas_hospital
+    description: >
+      Empresa que controla cada hospital de gestión privada del SERMAS por años, con el subconcepto
+      de la Cuenta General de la Comunidad de Madrid en el que se paga (25200 Rey Juan Carlos, 25202
+      Fundación Jiménez Díaz, 25206 Infanta Elena, 25208 Torrejón, 25210 Villalba). Construido a mano
+      el 2026-10-11; cada fila con su fuente (memorias de los hospitales, CNMC, prensa sectorial).
+    config:
+      column_types:
+        subconcepto: varchar
+        desde: integer
+        hasta: integer
+    columns:
+      - name: subconcepto
+        tests: [not_null]
+      - name: empresa
+        tests: [not_null]
+      - name: desde
+        tests: [not_null]
+      - name: fuente_url
+        tests: [not_null]

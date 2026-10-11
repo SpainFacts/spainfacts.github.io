@@ -244,3 +244,37 @@ models:
         description: "% de las camas de la comunidad"
       - name: camas_por_100k_hab
         description: "Camas por 100.000 habitantes (población a 1 de enero de la edición)"
+
+  - name: sanidad_privada_pagos_empresas
+    description: >
+      Qué empresas cobran del Servicio Madrileño de Salud cada año (2016-): gasto ejecutado de la
+      Cuenta General en los subconceptos de cada hospital de gestión privada, asignado a la empresa
+      que lo controlaba ese año (seed sanidad_privada_empresas_hospital), y el resto de conciertos de
+      asistencia sanitaria con entidades privadas sin empresa identificada. Excluye pagos a otras
+      administraciones y el canon de los hospitales construidos por concesión de obra (PFI).
+    columns:
+      - name: cod_ccaa
+        description: Código INE de la comunidad ('13').
+        tests: [not_null]
+      - name: ccaa
+        description: Comunidad de Madrid.
+      - name: anio
+        description: Año del gasto (cerrado).
+        tests: [not_null]
+      - name: empresa
+        description: Empresa que cobra (Quirónsalud, Ribera Salud, Sanitas y Asisa) u 'Otras empresas (sin desglose)'.
+        tests: [not_null]
+      - name: grupo_empresarial
+        description: Grupo propietario de la empresa (Fresenius Helios, Centene / Vivalto Santé...).
+      - name: empresa_identificada
+        description: Falso en el bloque de otros conciertos, cuya empresa no figura en la Cuenta General.
+      - name: hospitales
+        description: Hospitales de la empresa que cobran ese año.
+      - name: importe_meur
+        description: Obligaciones reconocidas en millones de euros corrientes.
+      - name: importe_meur_real
+        description: Lo mismo en millones de euros constantes de anio_base.
+      - name: eur_hab_real
+        description: Euros constantes por habitante de la Comunidad de Madrid.
+      - name: anio_base
+        description: Año de los euros constantes.

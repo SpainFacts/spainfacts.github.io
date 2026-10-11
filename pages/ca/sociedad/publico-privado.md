@@ -1,7 +1,7 @@
 ---
 title: Públic i privat
 description: "Quina part de la sanitat i l'educació públiques es presta a través d'empreses i centres privats, comunitat a comunitat: concerts sanitaris, hospitals de concessió, assegurances privades, escola concertada, FP i universitats privades."
-i18n_origen: 7b3834633dd5
+i18n_origen: 1b5c008b3f5d
 ---
 
 <script>
@@ -374,6 +374,7 @@ En euros per habitant i descomptada la inflació, Madrid ha passat de {formatNum
 
 <LineChart
     data={conc_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_eur_hab_real
     series=comunidad
@@ -391,6 +392,7 @@ Més enllà dels concerts, Madrid i la Comunitat Valenciana són les úniques co
 
 <LineChart
     data={cob_graf}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=comunidad
@@ -509,6 +511,7 @@ Cada mes la Comunitat de Madrid publica quants pacients esperen una primera cons
 
 <BarChart
     data={le_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=por_1000
     series=situacion
@@ -532,6 +535,7 @@ Qui no té cita tampoc entra en la demora mitjana. Si es compara la demora que d
 
 <LineChart
     data={coh_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=fecha
     y=dias
     series=demora
@@ -546,6 +550,7 @@ En no aconseguir cita al seu hospital, molts pacients acaben en un altre per lli
 
 <LineChart
     data={le_libre}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=saldo_por_1000_hab
     series=gestion
@@ -588,6 +593,7 @@ La catedràtica Rosa María Urbanos, primera directora de l'Observatori del SNS,
 
 <LineChart
     data={hogares}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_persona_eur_real
     series=comunidad
@@ -661,6 +667,7 @@ El {conc_edu_hitos[0]?.anio_ult} les administracions educatives van dedicar {for
 
 <LineChart
     data={conc_edu_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=conciertos_eur_hab_real
     series=comunidad
@@ -708,6 +715,7 @@ El curs {uni_hitos[0]?.curso_grado} el {formatNumber(uni_hitos[0]?.es_grado, 1)}
 
 <LineChart
     data={uni_serie}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=serie
@@ -848,6 +856,7 @@ Un pressupost diu quant pensa gastar un govern; el compte general, quant va gast
 
 <BarChart
     data={ejec_priv_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=eur_hab
     series=momento
@@ -859,8 +868,48 @@ Un pressupost diu quant pensa gastar un govern; el compte general, quant va gast
     title="SERMAS: Fundación Jiménez Díaz i hospitals de concessió, pressupostat i gastat per habitant (euros de {ejec_hitos[0]?.anio_base})"
 />
 
+```sql empresas
+-- Qué empresas cobran del SERMAS cada año (Cuenta General), millones de euros constantes
+SELECT CAST(anio AS INTEGER) AS anio, empresa, importe_meur_real, importe_meur, eur_hab_real, hospitales, anio_base
+FROM mother.sanidad_privada_pagos_empresas
+ORDER BY anio, CASE WHEN empresa_identificada THEN 0 ELSE 1 END, importe_meur DESC
+```
+
+```sql empresas_hitos
+SELECT
+    max(anio) AS anio_ult, min(anio) AS anio_ini, max(anio_base) AS anio_base,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_ult,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT min(anio) FROM ${empresas})) AS quiron_ini,
+    sum(eur_hab_real) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_hab,
+    sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS total_ult,
+    100 * sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas}))
+        / sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS quiron_pct
+FROM ${empresas}
+```
+
+### Quines empreses s'enduen els diners
+
+Amb el desglossament per hospital del compte general es pot posar nom a qui cobra. El {empresas_hitos[0]?.anio_ult} el SERMAS va pagar {formatNumber(empresas_hitos[0]?.quiron_ult, 0)} milions a Quirónsalud per la Fundación Jiménez Díaz i els seus tres hospitals de concessió ({formatNumber(empresas_hitos[0]?.quiron_hab, 0)} € per madrileny), el {formatNumber(empresas_hitos[0]?.quiron_pct, 0)} % de tot el que va pagar a empreses sanitàries privades; el {empresas_hitos[0]?.anio_ini} van ser {formatNumber(empresas_hitos[0]?.quiron_ini, 0)} milions.
+
+<BarChart
+    data={empresas}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
+    x=anio
+    y=importe_meur_real
+    series=empresa
+    type=stacked
+    sort=false
+    xFmt="####"
+    yFmt='#,##0" M€"'
+    colorPalette={['#1d4ed8', '#fdba74', '#94a3b8', '#ea580c']}
+    title="SERMAS: pagaments a empreses sanitàries privades per any (milions d'euros de {empresas_hitos[0]?.anio_base})"
+/>
+
+<p class="text-xs text-gray-500">Compte General de la Comunitat de Madrid: despesa executada (obligacions reconegudes) en el subconcepte de cada hospital de gestió privada, assignada a l'empresa que el controlava aquell any (Torrejón: Sanitas i Asisa fins al 2018, Ribera Salud des de desembre de 2018). Cada any inclou les liquidacions d'anys anteriors que s'hi paguen, per això hi ha salts. «Altres empreses»: la resta de concerts amb entitats privades (diàlisi, ambulàncies, proves, laboratoris...), l'empresa dels quals no figura al compte. No inclou el cànon dels hospitals construïts per concessió d'obra.</p>
+
 <LineChart
     data={ejec_salud}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=desviacion_pct
     series=servicio
@@ -876,6 +925,7 @@ Els diners que falten es cobreixen durant l'any amb modificacions de crèdit. El
 
 <BarChart
     data={imprevistos}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=cedido_meur_real
     series=partida
@@ -891,6 +941,7 @@ Quan un servei es presta sense contracte en vigor o sense la fiscalització prè
 
 <BarChart
     data={conval}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=importe_eur_hab_real
     sort=false

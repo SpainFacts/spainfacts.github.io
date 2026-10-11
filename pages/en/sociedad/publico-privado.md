@@ -1,7 +1,7 @@
 ---
 title: Public and private
 description: "How much of public healthcare and education is delivered through private companies and schools, region by region: healthcare contracts, concession hospitals, private insurance, state-funded private schools, vocational training and private universities."
-i18n_origen: 7b3834633dd5
+i18n_origen: 1b5c008b3f5d
 ---
 
 <script>
@@ -374,6 +374,7 @@ In euros per inhabitant and adjusted for inflation, Madrid has gone from {format
 
 <LineChart
     data={conc_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_eur_hab_real
     series=comunidad
@@ -391,6 +392,7 @@ Beyond the contracts, Madrid and the Valencian Community are the only regions th
 
 <LineChart
     data={cob_graf}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=comunidad
@@ -509,6 +511,7 @@ Every month the Community of Madrid publishes how many patients are waiting for 
 
 <BarChart
     data={le_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=por_1000
     series=situacion
@@ -532,6 +535,7 @@ Those without an appointment are not included in the average waiting time either
 
 <LineChart
     data={coh_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=fecha
     y=dias
     series=demora
@@ -546,6 +550,7 @@ Unable to get an appointment at their own hospital, many patients end up at anot
 
 <LineChart
     data={le_libre}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=saldo_por_1000_hab
     series=gestion
@@ -588,6 +593,7 @@ Professor Rosa María Urbanos, the first director of the National Health System 
 
 <LineChart
     data={hogares}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=gasto_persona_eur_real
     series=comunidad
@@ -661,6 +667,7 @@ In {conc_edu_hitos[0]?.anio_ult} the education authorities spent {formatNumber(c
 
 <LineChart
     data={conc_edu_lineas}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=conciertos_eur_hab_real
     series=comunidad
@@ -708,6 +715,7 @@ In the {uni_hitos[0]?.curso_grado} academic year, {formatNumber(uni_hitos[0]?.es
 
 <LineChart
     data={uni_serie}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=cuota
     series=serie
@@ -848,6 +856,7 @@ A budget says how much a government plans to spend; the general account, how muc
 
 <BarChart
     data={ejec_priv_graf}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=eur_hab
     series=momento
@@ -859,8 +868,48 @@ A budget says how much a government plans to spend; the general account, how muc
     title="SERMAS: Fundación Jiménez Díaz and concession hospitals, budgeted and spent per inhabitant ({ejec_hitos[0]?.anio_base} euros)"
 />
 
+```sql empresas
+-- Qué empresas cobran del SERMAS cada año (Cuenta General), millones de euros constantes
+SELECT CAST(anio AS INTEGER) AS anio, empresa, importe_meur_real, importe_meur, eur_hab_real, hospitales, anio_base
+FROM mother.sanidad_privada_pagos_empresas
+ORDER BY anio, CASE WHEN empresa_identificada THEN 0 ELSE 1 END, importe_meur DESC
+```
+
+```sql empresas_hitos
+SELECT
+    max(anio) AS anio_ult, min(anio) AS anio_ini, max(anio_base) AS anio_base,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_ult,
+    sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT min(anio) FROM ${empresas})) AS quiron_ini,
+    sum(eur_hab_real) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas})) AS quiron_hab,
+    sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS total_ult,
+    100 * sum(importe_meur) FILTER (WHERE empresa = 'Quirónsalud' AND anio = (SELECT max(anio) FROM ${empresas}))
+        / sum(importe_meur) FILTER (WHERE anio = (SELECT max(anio) FROM ${empresas})) AS quiron_pct
+FROM ${empresas}
+```
+
+### Which companies get the money
+
+The general account's breakdown by hospital lets us name who gets paid. In {empresas_hitos[0]?.anio_ult} SERMAS paid {formatNumber(empresas_hitos[0]?.quiron_ult, 0)} million euros to Quirónsalud for the Fundación Jiménez Díaz and its three concession hospitals ({formatNumber(empresas_hitos[0]?.quiron_hab, 0)} € per Madrid resident), {formatNumber(empresas_hitos[0]?.quiron_pct, 0)} % of everything it paid to private healthcare companies; in {empresas_hitos[0]?.anio_ini} it was {formatNumber(empresas_hitos[0]?.quiron_ini, 0)} million.
+
+<BarChart
+    data={empresas}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
+    x=anio
+    y=importe_meur_real
+    series=empresa
+    type=stacked
+    sort=false
+    xFmt="####"
+    yFmt='#,##0" M€"'
+    colorPalette={['#1d4ed8', '#fdba74', '#94a3b8', '#ea580c']}
+    title="SERMAS: payments to private healthcare companies by year (million euros of {empresas_hitos[0]?.anio_base})"
+/>
+
+<p class="text-xs text-gray-500">General Account of the Community of Madrid: spending executed (recognised obligations) under each privately managed hospital's sub-item, assigned to the company that controlled it that year (Torrejón: Sanitas and Asisa until 2018, Ribera Salud from December 2018). Each year includes settlements from previous years paid in it, hence the jumps. "Other companies": the remaining contracts with private providers (dialysis, ambulances, tests, laboratories...), whose company is not shown in the account. Excludes the fee for hospitals built under works concessions.</p>
+
 <LineChart
     data={ejec_salud}
+    echartsOptions={{ eventos: { gobiernos: false } }}
     x=anio
     y=desviacion_pct
     series=servicio
@@ -876,6 +925,7 @@ The missing money is covered during the year through budget amendments. In {reci
 
 <BarChart
     data={imprevistos}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=cedido_meur_real
     series=partida
@@ -891,6 +941,7 @@ When a service is provided without a contract in force or without prior audit, t
 
 <BarChart
     data={conval}
+    echartsOptions={{ eventos: { ccaa: '13' } }}
     x=anio
     y=importe_eur_hab_real
     sort=false
