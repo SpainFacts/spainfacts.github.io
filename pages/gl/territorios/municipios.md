@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 12ad94ccd4aa
+i18n_origen: 96324d797ed9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -526,11 +526,11 @@ WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
 ```sql barrios_elecciones
-SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -541,6 +541,9 @@ SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo
     END AS valor
 FROM mother.elecciones_secciones
 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+  -- autonómicas: la última de la comunidad (Cáceres tiene dos)
+  AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
+                 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
 ```
 
 ```sql barrios_quintiles
@@ -592,6 +595,7 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
     {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Xerais 2023" value="02" default />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Municipais 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europeas 2024" value="07" />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '05')}<ButtonGroupItem valueLabel="Autonómicas {barrios_elecciones.find(e => e.tipo === '05')?.anio}" value="05" />{/if}
 </ButtonGroup>
 
 <ButtonGroup name=barrio_capa title="Que ver">
@@ -606,6 +610,12 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
     <ButtonGroupItem valueLabel="IU, Podemos e Sumar" value="ips" />
     <ButtonGroupItem valueLabel="Participación" value="participacion" />
 </ButtonGroup>
+
+{#if barrios_voto[0]?.cobertura}
+
+<p class="text-sm text-amber-700 dark:text-amber-400">Aviso da fonte: {barrios_voto[0].cobertura}.</p>
+
+{/if}
 
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
@@ -668,7 +678,7 @@ Cada mancha é unha **sección censual**, a unidade máis pequena da estatístic
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Seccións censuais: contornos do INE do ano de cada dato, sobre o rueiro do IGN. Renda: Atlas de Distribución de Renda dos Fogares do INE, que corta as seccións máis ricas e as máis pobres nun mesmo valor máximo e mínimo (por iso levan diante «≥» ou «≤»). Votos: resultados por mesa do Ministerio do Interior sumados por sección, sen o voto dos residentes no estranxeiro. As porcentaxes de voto son sobre votos válidos (candidaturas e en branco). As seccións pártense ou renuméranse cando cambia a súa poboación, así que algunha pode quedar en gris se non hai dato dese ano.</p>
+<p class="text-xs text-gray-500">Seccións censuais: contornos do INE do ano de cada dato, sobre o rueiro do IGN. Renda: Atlas de Distribución de Renda dos Fogares do INE, que corta as seccións máis ricas e as máis pobres nun mesmo valor máximo e mínimo (por iso levan diante «≥» ou «≤»). Votos: resultados por mesa do Ministerio do Interior sumados por sección, sen o voto dos residentes no estranxeiro. As porcentaxes de voto son sobre votos válidos (candidaturas e en branco). As seccións pártense ou renuméranse cando cambia a súa poboación, así que algunha pode quedar en gris se non hai dato dese ano. Autonómicas: datos por mesa de cada comunidade (Interior non as publica), sumados por sección. Asturias só publica os de Xixón e Estremadura os de Cáceres.</p>
 
 {/if}
 
@@ -903,5 +913,9 @@ ORDER BY fecha
 - **[Ministerio de Facenda – Liquidacións das entidades locais (CONPREL)](https://serviciostelematicosext.hacienda.gob.es/SGFAL/CONPREL)**: ingresos e gastos por capítulos, áreas e políticas de cada concello desde 2010.
 - **[Banco de España – Boletín Estatístico, capítulo 14](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: débeda dos concellos de máis de 300.000 habitantes.
 - **[Ministerio de Política Territorial – Alcaldes e concelleiros](https://concejales.redsara.es/consulta/)**: alcalde actual (mandato 2023-2027) e listaxes históricas de alcaldes desde 1979 do Sistema de Información Local.
+- **[INE – Atlas de Distribución de Renda dos Fogares](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608)**: renda por concello, distrito e sección censual a partir de datos tributarios.
+- **[INE – Cartografía de seccións censuais](https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout)**: contornos das seccións de cada ano (mapas de barrio).
+- **[Ministerio do Interior – Resultados electorais por mesa](https://infoelectoral.interior.gob.es/es/elecciones-celebradas/area-de-descargas/)**: xerais, municipais e europeas, sumados por sección censual.
+- **[Instituto Xeográfico Nacional – Rueiro (IGN Base)](https://www.ign.es/web/ign/portal/ide-area-nodo-ide-ign)**: fondo de rúas dos mapas de barrio.
 
 <LastRefreshed prefix="Datos actualizados" />

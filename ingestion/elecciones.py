@@ -41,17 +41,31 @@ con provincia, municipio y distrito, forman el código INE de la sección (CUSEC
 10 dígitos), que casa con el seccionado del INE y con la renta del ADRH. Las
 filas del C.E.R.A. (municipio 999) no tienen sección y se descartan.
 
+Autonómicas por sección: Interior no las publica. Cada comunidad tiene su módulo en
+ingestion/autonomicas/<slug>.py (misma interfaz, ver su __init__.py) y aquí se juntan
+con tipo '05' en elecciones_procesos, elecciones_candidaturas (código de candidatura
+inventado: orden alfabético de las siglas dentro del proceso), elecciones_secciones y
+elecciones_secciones_votos, para que dbt les asigne familia y bloque igual que al
+resto. Si la fuente de una comunidad falla, se avisa y se carga el resto.
+
 Carga completa ("replace"): ~40 procesos, unos 2,5 millones de filas (más
 ~1,5 millones de votos por sección), idempotente y sin estado.
 """
 
+import importlib
 import io
+import logging
+import pkgutil
 import time
 import zipfile
 from datetime import date
 
 import dlt
 import requests
+
+import ingestion.autonomicas as autonomicas
+
+log = logging.getLogger(__name__)
 
 URL = "https://infoelectoral.interior.gob.es/estaticos/docxl/apliextr/{codigo}_MUNI.zip"
 CABECERAS = {"User-Agent": "SpainFacts/1.0 (+https://spainfacts.github.io)"}
@@ -152,6 +166,20 @@ def elecciones_procesos():
             "fecha": date(anio_c, mes_c, dia) if dia and mes_c and anio_c else None,
             "ambito": _s(l, 10, 10),
         }
+    for mod, p, *_ in _datos_autonomicas():
+        yield {
+            "proceso": p["proceso"],
+            "tipo": "05",
+            "tipo_nombre": "Autonómicas",
+            "anio": p["fecha"].year,
+            "mes": p["fecha"].month,
+            "fecha": p["fecha"],
+            "ambito": "A",
+            "cod_ccaa": mod.COD_CCAA,
+            "eleccion": p["eleccion"],
+            "fuente": mod.FUENTE,
+            "cobertura": getattr(mod, "COBERTURA", None),
+        }
 
 
 @dlt.resource(name="elecciones_candidaturas", write_disposition="replace")
@@ -170,6 +198,11 @@ def elecciones_candidaturas():
                 "cod_acum_nacional": _s(l, 227, 232),
             }
             for l in f.get("03", [])
+        ]
+    for mod, p, _s2, _v, cands in _datos_autonomicas():
+        yield [
+            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "cod_candidatura": cod, "siglas": siglas}
+            for siglas, cod in cands.items()
         ]
 
 
@@ -306,6 +339,30 @@ def _datos_mesas():
     return [(c, *v) for c, v in _CACHE_MESAS.items() if c != "_t"]
 
 
+_CACHE_AUTONOMICAS: dict = {}
+
+
+def _datos_autonomicas():
+    """[(modulo, proceso, secciones, votos, candidaturas {siglas: cod})] de las autonómicas."""
+    if not _CACHE_AUTONOMICAS or time.time() - _CACHE_AUTONOMICAS.get("_t", 0) > 7200:
+        _CACHE_AUTONOMICAS.clear()
+        datos = []
+        for m in pkgutil.iter_modules(autonomicas.__path__):
+            try:
+                mod = importlib.import_module(f"ingestion.autonomicas.{m.name}")
+                for p in mod.PROCESOS:
+                    secciones = list(mod.secciones(p["proceso"]))
+                    votos = list(mod.votos(p["proceso"]))
+                    siglas = sorted({v["siglas"] for v in votos})
+                    cands = {s: f"{i + 1:06d}" for i, s in enumerate(siglas)}
+                    datos.append((mod, p, secciones, votos, cands))
+            except Exception as e:  # una fuente caída no debe tumbar las demás
+                log.warning("Autonómicas de %s sin cargar: %s", m.name, e)
+        _CACHE_AUTONOMICAS["datos"] = datos
+        _CACHE_AUTONOMICAS["_t"] = time.time()
+    return _CACHE_AUTONOMICAS["datos"]
+
+
 @dlt.resource(name="elecciones_secciones", write_disposition="replace")
 def elecciones_secciones():
     campos = ("censo_ine", "censo_escrutinio", "votos_blanco", "votos_nulos", "votos_candidaturas")
@@ -326,6 +383,14 @@ def elecciones_secciones():
              "cod_mun": cusec[:5], **s}
             for (vuelta, cusec), s in secciones.items()
         ]
+    for mod, p, secciones, _v, _c in _datos_autonomicas():
+        yield [
+            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1,
+             "cod_seccion": s["cod_seccion"], "cod_mun": s["cod_seccion"][:5], "censo_ine": None,
+             "censo_escrutinio": s["censo"], "votos_blanco": s["votos_blanco"], "votos_nulos": s["votos_nulos"],
+             "votos_candidaturas": s["votos_candidaturas"], "mesas": None}
+            for s in secciones
+        ]
 
 
 @dlt.resource(name="elecciones_secciones_votos", write_disposition="replace")
@@ -344,6 +409,17 @@ def elecciones_secciones_votos():
              "cod_candidatura": cand, "votos": v}
             for (vuelta, cusec, cand), v in votos.items()
             if v > 0
+        ]
+    for mod, p, _s2, votos, cands in _datos_autonomicas():
+        suma: dict = {}
+        for v in votos:
+            clave = (v["cod_seccion"], cands[v["siglas"]])
+            suma[clave] = suma.get(clave, 0) + v["votos"]
+        yield [
+            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1, "cod_seccion": cusec,
+             "cod_candidatura": cand, "votos": n}
+            for (cusec, cand), n in suma.items()
+            if n > 0
         ]
 
 

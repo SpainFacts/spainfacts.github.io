@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 12ad94ccd4aa
+i18n_origen: 96324d797ed9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -526,11 +526,11 @@ WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
 ```sql barrios_elecciones
-SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -541,6 +541,9 @@ SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo
     END AS valor
 FROM mother.elecciones_secciones
 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+  -- autonómicas: la última de la comunidad (Cáceres tiene dos)
+  AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
+                 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
 ```
 
 ```sql barrios_quintiles
@@ -592,6 +595,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="General 2023" value="02" default />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Local 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="European 2024" value="07" />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '05')}<ButtonGroupItem valueLabel="Regional {barrios_elecciones.find(e => e.tipo === '05')?.anio}" value="05" />{/if}
 </ButtonGroup>
 
 <ButtonGroup name=barrio_capa title="Show">
@@ -606,6 +610,12 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     <ButtonGroupItem valueLabel="IU, Podemos and Sumar" value="ips" />
     <ButtonGroupItem valueLabel="Turnout" value="participacion" />
 </ButtonGroup>
+
+{#if barrios_voto[0]?.cobertura}
+
+<p class="text-sm text-amber-700 dark:text-amber-400">Source note: {barrios_voto[0].cobertura}.</p>
+
+{/if}
 
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
@@ -668,7 +678,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Census sections: INE boundaries for the year of each figure, over the IGN street map. Income: INE Household Income Distribution Atlas, which caps the richest and poorest sections at a common maximum and minimum (hence the «≥» or «≤» in front). Votes: Ministry of the Interior results by polling station added up by section, excluding the vote of residents abroad. Vote percentages are of valid votes (lists and blank). Sections are split or renumbered when their population changes, so some may appear grey if there is no figure for that year.</p>
+<p class="text-xs text-gray-500">Census sections: INE boundaries for the year of each figure, over the IGN street map. Income: INE Household Income Distribution Atlas, which caps the richest and poorest sections at a common maximum and minimum (hence the «≥» or «≤» in front). Votes: Ministry of the Interior results by polling station added up by section, excluding the vote of residents abroad. Vote percentages are of valid votes (lists and blank). Sections are split or renumbered when their population changes, so some may appear grey if there is no figure for that year. Regional elections: polling-station data from each region (the Ministry of the Interior does not publish them), added up by section. Asturias only publishes Gijón and Extremadura only Cáceres.</p>
 
 {/if}
 
@@ -903,5 +913,9 @@ ORDER BY fecha
 - **[Ministry of Finance – Local authority budget outturns (CONPREL)](https://serviciostelematicosext.hacienda.gob.es/SGFAL/CONPREL)**: revenue and spending by chapter, area and policy for every town council since 2010.
 - **[Banco de España – Statistical Bulletin, chapter 14](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: debt of town councils with more than 300,000 inhabitants.
 - **[Ministry of Territorial Policy – Mayors and councillors](https://concejales.redsara.es/consulta/)**: current mayor (2023-2027 term) and historical lists of mayors since 1979 from the Local Information System.
+- **[INE – Household Income Distribution Atlas](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608)**: income by municipality, district and census section from tax data.
+- **[INE – Census section maps](https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout)**: boundaries of the sections for each year (neighbourhood maps).
+- **[Ministry of the Interior – Election results by polling station](https://infoelectoral.interior.gob.es/es/elecciones-celebradas/area-de-descargas/)**: general, local and European elections, added up by census section.
+- **[National Geographic Institute – Street map (IGN Base)](https://www.ign.es/web/ign/portal/ide-area-nodo-ide-ign)**: street background of the neighbourhood maps.
 
 <LastRefreshed prefix="Data updated" />

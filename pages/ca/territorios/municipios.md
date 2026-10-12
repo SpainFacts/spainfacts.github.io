@@ -1,7 +1,7 @@
 ---
 title: Municipis
 description: "Cerca qualsevol municipi d'Espanya: població, comptes de l'ajuntament i comparació amb municipis de la seva mida."
-i18n_origen: 12ad94ccd4aa
+i18n_origen: 96324d797ed9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -526,11 +526,11 @@ WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
 ```sql barrios_elecciones
-SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -541,6 +541,9 @@ SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo
     END AS valor
 FROM mother.elecciones_secciones
 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+  -- autonómicas: la última de la comunidad (Cáceres tiene dos)
+  AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
+                 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
 ```
 
 ```sql barrios_quintiles
@@ -592,6 +595,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Generals 2023" value="02" default />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Municipals 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europees 2024" value="07" />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '05')}<ButtonGroupItem valueLabel="Autonòmiques {barrios_elecciones.find(e => e.tipo === '05')?.anio}" value="05" />{/if}
 </ButtonGroup>
 
 <ButtonGroup name=barrio_capa title="Què veure">
@@ -606,6 +610,12 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     <ButtonGroupItem valueLabel="IU, Podemos i Sumar" value="ips" />
     <ButtonGroupItem valueLabel="Participació" value="participacion" />
 </ButtonGroup>
+
+{#if barrios_voto[0]?.cobertura}
+
+<p class="text-sm text-amber-700 dark:text-amber-400">Avís de la font: {barrios_voto[0].cobertura}.</p>
+
+{/if}
 
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
@@ -668,7 +678,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Seccions censals: contorns de l'INE de l'any de cada dada, sobre el carrerer de l'IGN. Renda: Atles de Distribució de Renda de les Llars de l'INE, que talla les seccions més riques i les més pobres a un mateix valor màxim i mínim (per això porten al davant «≥» o «≤»). Vots: resultats per mesa del Ministeri de l'Interior sumats per secció, sense el vot dels residents a l'estranger. Els percentatges de vot són sobre vots vàlids (candidatures i en blanc). Les seccions es parteixen o es renumeren quan canvia la seva població, així que alguna pot quedar en gris si no hi ha dada d'aquell any.</p>
+<p class="text-xs text-gray-500">Seccions censals: contorns de l'INE de l'any de cada dada, sobre el carrerer de l'IGN. Renda: Atles de Distribució de Renda de les Llars de l'INE, que talla les seccions més riques i les més pobres a un mateix valor màxim i mínim (per això porten al davant «≥» o «≤»). Vots: resultats per mesa del Ministeri de l'Interior sumats per secció, sense el vot dels residents a l'estranger. Els percentatges de vot són sobre vots vàlids (candidatures i en blanc). Les seccions es parteixen o es renumeren quan canvia la seva població, així que alguna pot quedar en gris si no hi ha dada d'aquell any. Autonòmiques: dades per mesa de cada comunitat (Interior no les publica), sumades per secció. Astúries només publica les de Gijón i Extremadura les de Càceres.</p>
 
 {/if}
 
@@ -903,5 +913,9 @@ ORDER BY fecha
 - **[Ministeri d'Hisenda – Liquidacions de les entitats locals (CONPREL)](https://serviciostelematicosext.hacienda.gob.es/SGFAL/CONPREL)**: ingressos i despeses per capítols, àrees i polítiques de cada ajuntament des del 2010.
 - **[Banc d'Espanya – Butlletí Estadístic, capítol 14](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deute dels ajuntaments de més de 300.000 habitants.
 - **[Ministeri de Política Territorial – Alcaldes i regidors](https://concejales.redsara.es/consulta/)**: alcalde actual (mandat 2023-2027) i llistats històrics d'alcaldes des del 1979 del Sistema d'Informació Local.
+- **[INE – Atles de Distribució de Renda de les Llars](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608)**: renda per municipi, districte i secció censal a partir de dades tributàries.
+- **[INE – Cartografia de seccions censals](https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout)**: contorns de les seccions de cada any (mapes de barri).
+- **[Ministeri de l'Interior – Resultats electorals per mesa](https://infoelectoral.interior.gob.es/es/elecciones-celebradas/area-de-descargas/)**: generals, municipals i europees, sumats per secció censal.
+- **[Institut Geogràfic Nacional – Carrerer (IGN Base)](https://www.ign.es/web/ign/portal/ide-area-nodo-ide-ign)**: fons de carrers dels mapes de barri.
 
 <LastRefreshed prefix="Dades actualitzades" />

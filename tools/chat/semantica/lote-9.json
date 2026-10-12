@@ -43,14 +43,16 @@
   {
     "tabla": "elecciones_secciones",
     "usar": true,
-    "tema": "Resultado de las últimas generales, municipales y europeas en cada sección censal (barrio) de los municipios",
+    "tema": "Resultado de las últimas generales, municipales, europeas y autonómicas en cada sección censal (barrio) de los municipios",
     "preguntas": [
       "¿Qué partido ganó en cada barrio de Madrid en las generales de 2023?",
       "¿En qué secciones de Sevilla ganó Vox en 2023?",
       "¿Cuál es la sección censal con más participación de Valencia?",
       "¿Cuánto votó la izquierda en los barrios de Barcelona en las europeas de 2024?",
       "¿Dónde sacó más voto el PP en Zaragoza en las municipales de 2023?",
-      "¿Cuántas secciones de Málaga ganó el PSOE en las generales?"
+      "¿Cuántas secciones de Málaga ganó el PSOE en las generales?",
+      "¿Qué partido ganó en cada barrio de Barcelona en las autonómicas?",
+      "¿En qué secciones de Sevilla ganó el PP en las andaluzas de 2026?"
     ],
     "medidas": [
       {
@@ -148,7 +150,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Una fila por sección censal y elección; filtrar siempre una elección (eleccion o proceso: 02202307 generales, 04202305 municipales, 07202406 europeas). Solo municipios con más de una sección. Los % son sobre votos válidos; sin voto CERA. Las secciones no se suman con %: para el total del municipio usar elecciones_municipios. votantes y censo sí se suman."
+    "notas": "Una fila por sección censal y elección; filtrar siempre una elección (eleccion o proceso: 02202307 generales, 04202305 municipales, 07202406 europeas; tipo 05 = autonómicas, proceso A + código de comunidad + aaaamm, la última de cada comunidad; Asturias solo Gijón, Extremadura solo Cáceres ciudad, Castilla-La Mancha escrutinio provisional: ver cobertura). Solo municipios con más de una sección. Los % son sobre votos válidos; sin voto CERA. Las secciones no se suman con %: para el total del municipio usar elecciones_municipios. votantes y censo sí se suman."
   },
   {
     "tabla": "renta_secciones",

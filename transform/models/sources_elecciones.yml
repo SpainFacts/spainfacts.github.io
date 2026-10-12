@@ -12,7 +12,10 @@ sources:
     schema: raw
     tables:
       - name: elecciones_procesos
-        description: "Un registro por proceso electoral (fichero 02): tipo y fecha de celebración."
+        description: >
+          Un registro por proceso electoral (fichero 02): tipo y fecha de celebración. Incluye las
+          autonómicas con resultados por sección (tipo '05', ingestion/autonomicas/), con su
+          etiqueta (eleccion), comunidad (cod_ccaa), fuente y aviso de cobertura.
       - name: elecciones_candidaturas
         description: >
           Candidaturas de cada proceso (fichero 03): siglas, denominación y códigos de la

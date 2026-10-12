@@ -36,3 +36,10 @@ orden,patron,tipos,anio_desde,anio_hasta,familia,nota
 34,"^SY$","02",2023,2023,Teruel Existe y España Vaciada,Soria ¡Ya! (2023)
 35,"^AHORA REPUBLICAS","07",2019,2024,ERC,"Ahora Repúblicas (ERC, EH Bildu, BNG y otros), lista única en Europeas; en cada provincia cuenta con sus siglas locales y los escaños nacionales se atribuyen a ERC, que encabezaba la lista"
 36,"^(CEUS|CPE)$","07",2019,2024,PNV,"Coalición por una Europa Solidaria (PNV, CC y otros), encabezada por el PNV"
+40,^PPN$,05,,,PP,PP de Navarra en el Parlamento de Navarra
+41,^GXF PSIB PSOE$,05,,,PSOE,"Gent per Formentera + PSIB-PSOE (Parlament balear, Formentera)"
+42,^CAT JUNTS,05,,,Junts / CiU,Junts+ en el Parlament de Catalunya (CAT-JUNTS+)
+43,^(MM VQ|USP|PORA|POR ANDALUCIA|UP EUPV|CONTIGO ZUREKIN|CONTIGO NAVARRA)( |$),05,,,"IU, Podemos y Sumar","Más Madrid-Verdes Equo, Por Andalucía (IU-Sumar-Podemos), Unides Podem-EUPV, Contigo-Zurekin, Unidas Sí Podemos (Canarias)"
+44,^ANDALUCISTAS( |$),05,,,Partido Andalucista,Andalucistas-PA
+45,^SY$,05,,,Teruel Existe y España Vaciada,Soria ¡Ya! en las Cortes de Castilla y León
+46,^(NC BC|NC|NUEVA CANARIAS|UXGC|MES|EL PI|ASG|PRXE|PR|PLRI|CANTABRISTAS|XAV|DO|ALIANCA CAT|ADELANTE ANDALUCIA|MC REG|MC)( |$),05,,,Otros nacionalistas y regionalistas,"Regionalistas y nacionalistas sin familia propia en las autonómicas: Nueva Canarias, Unidos por Gran Canaria, Més per Mallorca, El Pi, ASG, Partido Riojano, PLRi, Cantabristas, Por Ávila, Democracia Ourensana, Aliança Catalana, Adelante Andalucía, MC Región"

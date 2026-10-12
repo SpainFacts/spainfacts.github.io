@@ -86,7 +86,8 @@ models:
   - name: elecciones_secciones
     description: >
       Resultado por sección censal de las últimas elecciones de cada tipo (Congreso y Municipales
-      de 2023, Parlamento Europeo de 2024), para los mapas de barrio de la ficha de municipio:
+      de 2023, Parlamento Europeo de 2024 y la última autonómica de cada comunidad, tipo '05', de
+      la fuente oficial de cada una), para los mapas de barrio de la ficha de municipio:
       participación, candidatura más votada (con el color de su familia) y % por bloque y por
       familia sobre votos válidos. Solo municipios con más de una sección; sin voto CERA.
       geo_anio dice qué seccionado del INE usar para pintarla
@@ -99,6 +100,8 @@ models:
         tests: [not_null]
       - name: seccion
         description: "Etiqueta legible: «Distrito 01, sección 001»"
+      - name: cobertura
+        description: "Aviso de cobertura de la fuente (autonómicas parciales o provisionales); vacío si es completa"
       - name: geo_anio
         description: "Año del seccionado del INE con el que se dibuja la sección"
         tests: [not_null]

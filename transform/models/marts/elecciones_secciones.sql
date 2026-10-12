@@ -1,10 +1,15 @@
 -- Resultado de las últimas elecciones de cada tipo (Congreso y Municipales de 2023,
--- Parlamento Europeo de 2024) en cada sección censal, para los mapas de barrio de la
--- ficha de municipio. Ministerio del Interior, ficheros por mesa (09 y 10) sumados por
--- sección en la ingesta (ingestion/elecciones.py, PROCESOS_SECCION).
+-- Parlamento Europeo de 2024 y la última autonómica de cada comunidad) en cada sección
+-- censal, para los mapas de barrio de la ficha de municipio. Ministerio del Interior,
+-- ficheros por mesa (09 y 10) sumados por sección (ingestion/elecciones.py,
+-- PROCESOS_SECCION); autonómicas (tipo '05'), de la fuente oficial de cada comunidad
+-- (ingestion/autonomicas/; Asturias solo Gijón y Extremadura solo Cáceres ciudad, que son
+-- las únicas que publican resultados por mesa; Castilla-La Mancha, escrutinio provisional).
 --   participacion   (candidaturas + blanco + nulos) / censo de escrutinio, en %
 --   pct_*           % sobre votos válidos (candidaturas + blanco), como en
---                   elecciones_municipios
+--                   elecciones_municipios. Los votos a candidaturas son el mayor entre el
+--                   total de la sección y la suma por candidatura: en Murcia solo vienen
+--                   por mesa los partidos de más del 1 %, y el resto cuenta en el total.
 --   ganador_*       candidatura más votada en la sección, con el color de su familia
 --   geo_anio        año del seccionado del INE con el que se pinta: el fichero
 --                   static-extra/geo/secciones/<geo_anio>/<cod_mun>.geojson más reciente que no
@@ -75,13 +80,27 @@ pr as (
     select proceso, eleccion
     from {{ ref('elecciones_participacion') }}
     where nivel = 'pais'
+),
+
+-- las autonómicas traen su etiqueta en elecciones_procesos (no tienen totales de ámbito)
+pa as (
+    select proceso, eleccion, cobertura
+    from {{ source('raw_elecciones', 'elecciones_procesos') }}
+    where tipo = '05'
+),
+
+validos as (
+    select s.proceso, s.cod_seccion, s.blancos + greatest(s.votos_candidaturas, coalesce(a.v_candidaturas, 0)) as validos
+    from sec s
+    left join agg a using (proceso, cod_seccion)
 )
 
 select
     s.proceso,
     s.tipo,
     s.anio,
-    pr.eleccion,
+    coalesce(pr.eleccion, pa.eleccion) as eleccion,
+    pa.cobertura,
     s.cod_seccion,
     'Distrito ' || substr(s.cod_seccion, 6, 2) || ', sección ' || right(s.cod_seccion, 3) as seccion,
     s.cod_mun,
@@ -94,10 +113,10 @@ select
     g.ganador_siglas,
     g.ganador_familia,
     g.ganador_color,
-    cast(100.0 * g.ganador_votos / nullif(s.blancos + a.v_candidaturas, 0) as decimal(4, 1)) as ganador_pct,
+    cast(100.0 * g.ganador_votos / nullif(va.validos, 0) as decimal(4, 1)) as ganador_pct,
     {%- for col, v in [('pct_izquierda', 'v_izquierda'), ('pct_derecha', 'v_derecha'), ('pct_centro', 'v_centro'), ('pct_nacionalistas', 'v_nacionalistas'),
                        ('pct_psoe', 'v_psoe'), ('pct_pp', 'v_pp'), ('pct_vox', 'v_vox'), ('pct_iu_podemos_sumar', 'v_ips')] %}
-    cast(100.0 * coalesce(a.{{ v }}, 0) / nullif(s.blancos + a.v_candidaturas, 0) as decimal(4, 1)) as {{ col }},
+    cast(100.0 * coalesce(a.{{ v }}, 0) / nullif(va.validos, 0) as decimal(4, 1)) as {{ col }},
     {%- endfor %}
     coalesce(
         (select max(geo.geo_anio) from geo where geo.cod_mun = s.cod_mun and geo.geo_anio <= s.anio),
@@ -106,7 +125,9 @@ select
 from sec s
 left join agg a using (proceso, cod_seccion)
 left join ganador g using (proceso, cod_seccion)
+left join validos va using (proceso, cod_seccion)
 left join pr using (proceso)
+left join pa using (proceso)
 left join {{ ref('stg_ine_municipios') }} d on d.cod_mun = s.cod_mun
 where s.cod_mun in (select cod_mun from geo)
 order by s.cod_mun, s.proceso, s.cod_seccion

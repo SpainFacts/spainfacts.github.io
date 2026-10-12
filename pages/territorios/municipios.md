@@ -525,11 +525,11 @@ WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
 ```sql barrios_elecciones
-SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -540,6 +540,9 @@ SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo
     END AS valor
 FROM mother.elecciones_secciones
 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+  -- autonómicas: la última de la comunidad (Cáceres tiene dos)
+  AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
+                 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
 ```
 
 ```sql barrios_quintiles
@@ -591,6 +594,7 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
     {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Generales 2023" value="02" default />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Municipales 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europeas 2024" value="07" />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '05')}<ButtonGroupItem valueLabel="Autonómicas {barrios_elecciones.find(e => e.tipo === '05')?.anio}" value="05" />{/if}
 </ButtonGroup>
 
 <ButtonGroup name=barrio_capa title="Qué ver">
@@ -605,6 +609,12 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
     <ButtonGroupItem valueLabel="IU, Podemos y Sumar" value="ips" />
     <ButtonGroupItem valueLabel="Participación" value="participacion" />
 </ButtonGroup>
+
+{#if barrios_voto[0]?.cobertura}
+
+<p class="text-sm text-amber-700 dark:text-amber-400">Aviso de la fuente: {barrios_voto[0].cobertura}.</p>
+
+{/if}
 
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
@@ -667,7 +677,7 @@ Cada mancha es una **sección censal**, la unidad más pequeña de la estadísti
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Secciones censales: contornos del INE del año de cada dato, sobre el callejero del IGN. Renta: Atlas de Distribución de Renta de los Hogares del INE, que corta las secciones más ricas y las más pobres a un mismo valor máximo y mínimo (por eso llevan delante «≥» o «≤»). Votos: resultados por mesa del Ministerio del Interior sumados por sección, sin el voto de los residentes en el extranjero. Los porcentajes de voto son sobre votos válidos (candidaturas y en blanco). Las secciones se parten o se renumeran cuando cambia su población, así que alguna puede quedar en gris si no hay dato de ese año.</p>
+<p class="text-xs text-gray-500">Secciones censales: contornos del INE del año de cada dato, sobre el callejero del IGN. Renta: Atlas de Distribución de Renta de los Hogares del INE, que corta las secciones más ricas y las más pobres a un mismo valor máximo y mínimo (por eso llevan delante «≥» o «≤»). Votos: resultados por mesa del Ministerio del Interior sumados por sección, sin el voto de los residentes en el extranjero. Los porcentajes de voto son sobre votos válidos (candidaturas y en blanco). Las secciones se parten o se renumeran cuando cambia su población, así que alguna puede quedar en gris si no hay dato de ese año. Autonómicas: datos por mesa de cada comunidad (Interior no las publica), sumados por sección. Asturias solo publica los de Gijón y Extremadura los de Cáceres.</p>
 
 {/if}
 
@@ -902,5 +912,9 @@ ORDER BY fecha
 - **[Ministerio de Hacienda – Liquidaciones de las entidades locales (CONPREL)](https://serviciostelematicosext.hacienda.gob.es/SGFAL/CONPREL)**: ingresos y gastos por capítulos, áreas y políticas de cada ayuntamiento desde 2010.
 - **[Banco de España – Boletín Estadístico, capítulo 14](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: deuda de los ayuntamientos de más de 300.000 habitantes.
 - **[Ministerio de Política Territorial – Alcaldes y concejales](https://concejales.redsara.es/consulta/)**: alcalde actual (mandato 2023-2027) y listados históricos de alcaldes desde 1979 del Sistema de Información Local.
+- **[INE – Atlas de Distribución de Renta de los Hogares](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608)**: renta por municipio, distrito y sección censal a partir de datos tributarios.
+- **[INE – Cartografía de secciones censales](https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout)**: contornos de las secciones de cada año (mapas de barrio).
+- **[Ministerio del Interior – Resultados electorales por mesa](https://infoelectoral.interior.gob.es/es/elecciones-celebradas/area-de-descargas/)**: generales, municipales y europeas, sumados por sección censal.
+- **[Instituto Geográfico Nacional – Callejero (IGN Base)](https://www.ign.es/web/ign/portal/ide-area-nodo-ide-ign)**: fondo de calles de los mapas de barrio.
 
 <LastRefreshed prefix="Datos actualizados" />

@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 12ad94ccd4aa
+i18n_origen: 96324d797ed9
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -538,11 +538,11 @@ WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
 ```sql barrios_elecciones
-SELECT DISTINCT tipo FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}'
+SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -553,6 +553,9 @@ SELECT cod_mun, cod_seccion, seccion, eleccion, CAST(geo_anio AS INTEGER) AS geo
     END AS valor
 FROM mother.elecciones_secciones
 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
+  -- autonómicas: la última de la comunidad (Cáceres tiene dos)
+  AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
+                 WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
 ```
 
 ```sql barrios_quintiles
@@ -604,6 +607,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     {#if barrios_elecciones.some(e => e.tipo === '02')}<ButtonGroupItem valueLabel="Orokorrak 2023" value="02" default />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '04')}<ButtonGroupItem valueLabel="Udalekoak 2023" value="04" default={!barrios_elecciones.some(e => e.tipo === '02')} />{/if}
     {#if barrios_elecciones.some(e => e.tipo === '07')}<ButtonGroupItem valueLabel="Europakoak 2024" value="07" />{/if}
+    {#if barrios_elecciones.some(e => e.tipo === '05')}<ButtonGroupItem valueLabel="Autonomikoak {barrios_elecciones.find(e => e.tipo === '05')?.anio}" value="05" />{/if}
 </ButtonGroup>
 
 <ButtonGroup name=barrio_capa title="Zer ikusi">
@@ -618,6 +622,12 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     <ButtonGroupItem valueLabel="IU, Podemos eta Sumar" value="ips" />
     <ButtonGroupItem valueLabel="Parte-hartzea" value="participacion" />
 </ButtonGroup>
+
+{#if barrios_voto[0]?.cobertura}
+
+<p class="text-sm text-amber-700 dark:text-amber-400">Iturriaren oharra: {barrios_voto[0].cobertura}.</p>
+
+{/if}
 
 {#if barrios_voto.length > 0}
 {#if inputs.barrio_capa === 'ganador'}
@@ -680,7 +690,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 {/if}
 {/if}
 
-<p class="text-xs text-gray-500">Errolda-sekzioak: datu bakoitzaren urteko INEren mugak, IGNren kale-mapa gainean. Errenta: INEren Etxeen Errenta Banaketaren Atlasa; sekzio aberatsenak eta pobreenak gehieneko eta gutxieneko balio berean mozten ditu (horregatik daramate aurrean «≥» edo «≤»). Botoak: Barne Ministerioaren emaitzak mahaika, sekzioka batuta, atzerrian bizi direnen botorik gabe. Botoen ehunekoak baliozko botoen gainekoak dira (hautagaitzak eta zuriak). Sekzioak zatitu edo berriro zenbakitzen dira biztanleria aldatzen denean; beraz, batzuk grisez ager daitezke urte horretako daturik ez badago.</p>
+<p class="text-xs text-gray-500">Errolda-sekzioak: datu bakoitzaren urteko INEren mugak, IGNren kale-mapa gainean. Errenta: INEren Etxeen Errenta Banaketaren Atlasa; sekzio aberatsenak eta pobreenak gehieneko eta gutxieneko balio berean mozten ditu (horregatik daramate aurrean «≥» edo «≤»). Botoak: Barne Ministerioaren emaitzak mahaika, sekzioka batuta, atzerrian bizi direnen botorik gabe. Botoen ehunekoak baliozko botoen gainekoak dira (hautagaitzak eta zuriak). Sekzioak zatitu edo berriro zenbakitzen dira biztanleria aldatzen denean; beraz, batzuk grisez ager daitezke urte horretako daturik ez badago. Autonomia-hauteskundeak: erkidego bakoitzaren mahaikako datuak (Barne Ministerioak ez ditu argitaratzen), sekzioka batuta. Asturiasek Gijóngoak baino ez ditu argitaratzen, eta Extremadurak Cácereskoak.</p>
 
 {/if}
 
@@ -915,5 +925,9 @@ ORDER BY fecha
 - **[Ogasun Ministerioa – Toki-erakundeen likidazioak (CONPREL)](https://serviciostelematicosext.hacienda.gob.es/SGFAL/CONPREL)**: udal bakoitzaren diru-sarrerak eta gastuak kapitulu, arlo eta politiken arabera, 2010etik.
 - **[Espainiako Bankua – Buletin Estatistikoa, 14. kapitulua](https://www.bde.es/webbe/es/estadisticas/temas/administraciones-publicas.html)**: 300.000 biztanletik gorako udalen zorra.
 - **[Lurralde Politikako Ministerioa – Alkateak eta zinegotziak](https://concejales.redsara.es/consulta/)**: egungo alkatea (2023-2027 agintaldia) eta Toki Informazio Sistemaren 1979tik aurreragoko alkate-zerrenda historikoak.
+- **[INE – Etxeen Errenta Banaketaren Atlasa](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608)**: errenta udalerri, barruti eta errolda-sekzioka, zerga-datuetatik abiatuta.
+- **[INE – Errolda-sekzioen kartografia](https://www.ine.es/ss/Satellite?L=es_ES&c=Page&cid=1259952026632&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout)**: urte bakoitzeko sekzioen mugak (auzo-mapak).
+- **[Barne Ministerioa – Hauteskunde-emaitzak mahaika](https://infoelectoral.interior.gob.es/es/elecciones-celebradas/area-de-descargas/)**: hauteskunde orokorrak, udalekoak eta Europakoak, errolda-sekzioka batuta.
+- **[Institutu Geografiko Nazionala – Kale-mapa (IGN Base)](https://www.ign.es/web/ign/portal/ide-area-nodo-ide-ign)**: auzo-mapen kaleen hondoa.
 
 <LastRefreshed prefix="Datuak eguneratuta" />
