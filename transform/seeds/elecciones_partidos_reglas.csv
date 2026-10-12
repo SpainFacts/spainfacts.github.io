@@ -36,10 +36,24 @@ orden,patron,tipos,anio_desde,anio_hasta,familia,nota
 34,"^SY$","02",2023,2023,Teruel Existe y España Vaciada,Soria ¡Ya! (2023)
 35,"^AHORA REPUBLICAS","07",2019,2024,ERC,"Ahora Repúblicas (ERC, EH Bildu, BNG y otros), lista única en Europeas; en cada provincia cuenta con sus siglas locales y los escaños nacionales se atribuyen a ERC, que encabezaba la lista"
 36,"^(CEUS|CPE)$","07",2019,2024,PNV,"Coalición por una Europa Solidaria (PNV, CC y otros), encabezada por el PNV"
-40,^PPN$,05,,,PP,PP de Navarra en el Parlamento de Navarra
-41,^GXF PSIB PSOE$,05,,,PSOE,"Gent per Formentera + PSIB-PSOE (Parlament balear, Formentera)"
-42,^CAT JUNTS,05,,,Junts / CiU,Junts+ en el Parlament de Catalunya (CAT-JUNTS+)
-43,^(MM VQ|USP|PORA|POR ANDALUCIA|UP EUPV|CONTIGO ZUREKIN|CONTIGO NAVARRA)( |$),05,,,"IU, Podemos y Sumar","Más Madrid-Verdes Equo, Por Andalucía (IU-Sumar-Podemos), Unides Podem-EUPV, Contigo-Zurekin, Unidas Sí Podemos (Canarias)"
-44,^ANDALUCISTAS( |$),05,,,Partido Andalucista,Andalucistas-PA
-45,^SY$,05,,,Teruel Existe y España Vaciada,Soria ¡Ya! en las Cortes de Castilla y León
-46,^(NC BC|NC|NUEVA CANARIAS|UXGC|MES|EL PI|ASG|PRXE|PR|PLRI|CANTABRISTAS|XAV|DO|ALIANCA CAT|ADELANTE ANDALUCIA|MC REG|MC)( |$),05,,,Otros nacionalistas y regionalistas,"Regionalistas y nacionalistas sin familia propia en las autonómicas: Nueva Canarias, Unidos por Gran Canaria, Més per Mallorca, El Pi, ASG, Partido Riojano, PLRi, Cantabristas, Por Ávila, Democracia Ourensana, Aliança Catalana, Adelante Andalucía, MC Región"
+40,"^PPN$","05",,,PP,"PP de Navarra en el Parlamento de Navarra"
+41,"^GXF PSIB PSOE$","05",,,PSOE,"Gent per Formentera + PSIB-PSOE (Parlament balear, Formentera)"
+42,"^CAT JUNTS","05",,,Junts / CiU,"Junts+ en el Parlament de Catalunya (CAT-JUNTS+)"
+43,"^(MM VQ|USP|PORA|POR ANDALUCIA|UP EUPV|CONTIGO ZUREKIN|CONTIGO NAVARRA)( |$)","05",,,"IU, Podemos y Sumar","Más Madrid-Verdes Equo, Por Andalucía (IU-Sumar-Podemos), Unides Podem-EUPV, Contigo-Zurekin, Unidas Sí Podemos (Canarias)"
+44,"^ANDALUCISTAS( |$)","05",,,Partido Andalucista,"Andalucistas-PA"
+45,"^SY$","05",,,Teruel Existe y España Vaciada,"Soria ¡Ya! en las Cortes de Castilla y León"
+46,"^(NC BC|NC|NUEVA CANARIAS|UXGC|MES|EL PI|ASG|PRXE|PR|PLRI|CANTABRISTAS|XAV|DO|ALIANCA CAT|ADELANTE ANDALUCIA|MC REG|MC)( |$)","05",,,Otros nacionalistas y regionalistas,"Regionalistas y nacionalistas sin familia propia en las autonómicas: Nueva Canarias, Unidos por Gran Canaria, Més per Mallorca, El Pi, ASG, Partido Riojano, PLRi, Cantabristas, Por Ávila, Democracia Ourensana, Aliança Catalana, Adelante Andalucía, MC Región"
+47,"^(JXSI|JUNTSXCAT|JUNTS X CAT|UNIO CAT|UNIO)$","05",,,Junts / CiU,"Junts pel Sí (2015), Junts per Catalunya (2017) y Unió (2015)"
+48,"^(CATSIQUEESPOT|CAT SI QUE ES POT|CATCOMU PODEM|CATCOMU|IC|IC CM|EU EV|UNIDES PODEM EUPV|AGE EU ANOVA|AGE|ENTESA|ENTESA EC|PCC|IZQ EZK|IZQUIERDA UNIDA|EU IU)( |$)","05",,,"IU, Podemos y Sumar","Catalunya Sí que es Pot, Catalunya en Comú-Podem, Iniciativa per Catalunya, EU-EV, IU-CM, Unides Podem-EUPV, AGE, L'Entesa, Izquierda-Ezkerra, PCC, IU-Verdes Murcia"
+49,"^EB$","05",,2005,"IU, Podemos y Sumar","Ezker Batua (País Vasco hasta 2005; después «EB» es Escaños en Blanco)"
+50,"^(FAP|COALICION AP)( |$)","05",,1991,PP,"Coaliciones de Alianza Popular (FAP 1987, AP-PDP-UL 1983)"
+51,"^PSCL PSOE$","05",,,PSOE,"PSCL-PSOE (Castilla y León, 1991)"
+52,"^NA$","05",2019,2019,UPN,"Navarra Suma (UPN-PP-Cs, NA+) en el Parlamento de Navarra 2019"
+53,"^(COALICIO COMPROMIS|BNV|BNV EV|UPV|UPV BN)( |$)","05",,,Compromís,"Coalició Compromís (2011), Bloc (BNV) y Unitat del Poble Valencià"
+54,"^NA BAI","05",,,Geroa Bai,"Nafarroa Bai"
+55,"^(ARALAR|PCTV EHAK|EHAK)( |$)","05",,,EH Bildu (e izquierda abertzale),"Aralar y PCTV-EHAK (2005)"
+56,"^UNIO UNION$","05",2003,2003,Unió Valenciana,"Unió-Unión Valenciana (2003)"
+57,"^UPD$","05",2009,2009,UPyD,"UPyD en el Parlamento Vasco 2009"
+58,"^(EE|UM|PSM|PSM EN|PSM NM|PSM IV EXM|PSM PSI|PSM EN EU EV|UPCA|CDN|U AL|URAS|PAS|URAS PAS|TC PNC|TC ACAL|NCA|FNC|UC FNC|CCN|PCAN|CXG|TEGA|C VA|RI CAT|NE)$","05",,,Otros nacionalistas y regionalistas,"Euskadiko Ezkerra, Unió Mallorquina, PSM, UPCA, CDN, Unidad Alavesa, URAS-PAS, Tierra Comunera, Nueva Canarias, FNC, CCN, Partido Cantonal, Compromiso por Galicia, Terra Galega, Coalició Valenciana, Reagrupament, Nacionalistes d'Esquerra"
+59,"^(GANEMOS IU LV|GANEMOS IU)( |$)","05",,,"IU, Podemos y Sumar","Ganemos-IU-Los Verdes (Extremadura, 2015)"
+60,"^(EXTREMADURA UNIDA|EX)$","05",,,Otros nacionalistas y regionalistas,"Extremadura Unida y eX (Extremeños)"

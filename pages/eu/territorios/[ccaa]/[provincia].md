@@ -1,6 +1,6 @@
 ---
 description: "Probintziaren fitxa: biztanleria, udalerriak, udalen kontuak, zorra, segurtasuna eta ibilgailuak, datu ofizialekin."
-i18n_origen: edb2f0df67b1
+i18n_origen: 5f1c2bf00b51
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -240,6 +240,7 @@ ORDER BY anio
 
 <MapaEspana
     data={municipios}
+    link="enlace"
     geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
     geoId="cod_mun"
     areaCol="cod_mun"
@@ -256,6 +257,8 @@ ORDER BY anio
         {id: 'crecimiento', title: 'Hazkundea 10 urtean (%)', fmt: 'num1'}
     ]}
 />
+
+<p class="text-xs text-gray-500">Sakatu udalerri bat bere fitxara joateko.</p>
 
 <DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Udalerria" />

@@ -237,6 +237,7 @@ ORDER BY anio
 
 <MapaEspana
     data={municipios}
+    link="enlace"
     geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
     geoId="cod_mun"
     areaCol="cod_mun"
@@ -253,6 +254,8 @@ ORDER BY anio
         {id: 'crecimiento', title: 'Crecimiento 10 años (%)', fmt: 'num1'}
     ]}
 />
+
+<p class="text-xs text-gray-500">Pulsa un municipio para ir a su ficha.</p>
 
 <DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Municipio" />

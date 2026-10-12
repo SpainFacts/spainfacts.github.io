@@ -29,7 +29,16 @@ with sec as (
         votos_nulos as nulos,
         votos_candidaturas
     from {{ source('raw_elecciones', 'elecciones_secciones') }}
-    where vuelta = 1
+    where vuelta = 1 and cod_seccion is not null  -- las autonómicas por municipio van aparte
+        -- de las autonómicas, solo la última con secciones de cada comunidad (el histórico
+        -- está en elecciones_autonomicas_municipios)
+        and (tipo <> '05' or proceso in (
+            select max_by(p.proceso, p.fecha)
+            from {{ source('raw_elecciones', 'elecciones_procesos') }} p
+            where p.tipo = '05' and p.proceso in (
+                select distinct proceso from {{ source('raw_elecciones', 'elecciones_secciones') }}
+                where tipo = '05' and cod_seccion is not null)
+            group by p.cod_ccaa))
 ),
 
 votos as (
@@ -44,7 +53,7 @@ votos as (
     from {{ source('raw_elecciones', 'elecciones_secciones_votos') }} v
     left join {{ ref('elecciones_candidaturas') }} c
         on c.proceso = v.proceso and c.cod_candidatura = v.cod_candidatura
-    where v.vuelta = 1 and v.votos > 0
+    where v.vuelta = 1 and v.votos > 0 and v.cod_seccion is not null
 ),
 
 agg as (

@@ -206,5 +206,162 @@
     ],
     "filtros": [],
     "notas": "Solo el último año del Atlas de Renta del INE y solo municipios con más de una sección. Las medias no se suman entre secciones: para el municipio usar renta_municipios. Las secciones se llaman 'Distrito 01, sección 001'; ir siempre con el municipio."
+  },
+  {
+    "tabla": "elecciones_autonomicas_municipios",
+    "usar": true,
+    "tema": "Resultado de las elecciones autonómicas en cada municipio, desde los años ochenta",
+    "preguntas": [
+      "¿Quién ganó las autonómicas de 2026 en Sevilla?",
+      "¿Cómo votó Vigo en las elecciones gallegas de 2024?",
+      "¿En cuántos municipios ganó el PP las andaluzas de 2022?",
+      "¿Qué participación hubo en Bilbao en las vascas de 2020?",
+      "¿Cuánto sacó Vox en Valladolid en las autonómicas de 2026?"
+    ],
+    "medidas": [
+      {
+        "columna": "ganador_pct",
+        "nombre": "porcentaje de voto de la candidatura más votada",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_izquierda",
+        "nombre": "voto a la izquierda",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_derecha",
+        "nombre": "voto a la derecha",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_nacionalistas",
+        "nombre": "voto a nacionalistas y regionalistas",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_psoe",
+        "nombre": "voto al PSOE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_pp",
+        "nombre": "voto al PP",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_vox",
+        "nombre": "voto a Vox",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_iu_podemos_sumar",
+        "nombre": "voto a IU, Podemos y Sumar",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "eleccion",
+        "nombre": "elección autonómica",
+        "total": null
+      },
+      {
+        "columna": "ganador_familia",
+        "nombre": "familia política de la candidatura más votada",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Una fila por elección autonómica y municipio (proceso = A + código INE de la comunidad + aaaamm). Sin voto CERA. Cobertura según la fuente oficial de cada comunidad: Galicia desde 2001, Canarias desde 1995, Madrid desde 1991, Extremadura solo 2015 completa (y la ciudad de Cáceres). participacion vacía cuando la fuente no da blancos y nulos."
+  },
+  {
+    "tabla": "elecciones_autonomicas_familias",
+    "usar": true,
+    "tema": "Voto por familia política en cada elección autonómica de cada comunidad",
+    "preguntas": [
+      "¿Cuánto sacó el PSOE en las andaluzas de 1990?",
+      "¿Cómo ha evolucionado el voto al PNV en las elecciones vascas?",
+      "¿Qué porcentaje tuvo Junts en las catalanas de 2024?",
+      "¿Quién ganó las autonómicas de Madrid de 2021?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct",
+        "nombre": "porcentaje de voto de la familia política",
+        "unidad": "% de los votos válidos",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "votos",
+        "nombre": "votos",
+        "unidad": "votos",
+        "tipo": "nivel"
+      },
+      {
+        "columna": "participacion",
+        "nombre": "participación electoral",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "fecha",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "ccaa"
+      ],
+      "nivel": null,
+      "codigo": "cod_ccaa",
+      "nombre": "ccaa",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "familia",
+        "nombre": "familia política",
+        "total": null
+      },
+      {
+        "columna": "bloque",
+        "nombre": "bloque político",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Suma de los municipios de la comunidad, sin voto CERA: difiere en torno a un punto del resultado oficial. Solo elecciones con datos de al menos el 90 % de los municipios."
   }
 ]

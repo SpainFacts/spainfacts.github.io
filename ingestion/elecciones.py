@@ -47,6 +47,9 @@ con tipo '05' en elecciones_procesos, elecciones_candidaturas (código de candid
 inventado: orden alfabético de las siglas dentro del proceso), elecciones_secciones y
 elecciones_secciones_votos, para que dbt les asigne familia y bloque igual que al
 resto. Si la fuente de una comunidad falla, se avisa y se carga el resto.
+Las autonómicas antiguas (o las comunidades que solo publican por municipio) llegan por
+municipio: van a las mismas tablas con nivel = 'municipio' y cod_seccion vacío; las
+filas por sección llevan nivel = 'seccion'.
 
 Carga completa ("replace"): ~40 procesos, unos 2,5 millones de filas (más
 ~1,5 millones de votos por sección), idempotente y sin estado.
@@ -199,7 +202,7 @@ def elecciones_candidaturas():
             }
             for l in f.get("03", [])
         ]
-    for mod, p, _s2, _v, cands in _datos_autonomicas():
+    for mod, p, _s2, _v, cands, *_ in _datos_autonomicas():
         yield [
             {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "cod_candidatura": cod, "siglas": siglas}
             for siglas, cod in cands.items()
@@ -343,7 +346,7 @@ _CACHE_AUTONOMICAS: dict = {}
 
 
 def _datos_autonomicas():
-    """[(modulo, proceso, secciones, votos, candidaturas {siglas: cod})] de las autonómicas."""
+    """[(modulo, proceso, secciones, votos, candidaturas {siglas: cod}, municipios, votos_municipios)]."""
     if not _CACHE_AUTONOMICAS or time.time() - _CACHE_AUTONOMICAS.get("_t", 0) > 7200:
         _CACHE_AUTONOMICAS.clear()
         datos = []
@@ -353,9 +356,13 @@ def _datos_autonomicas():
                 for p in mod.PROCESOS:
                     secciones = list(mod.secciones(p["proceso"]))
                     votos = list(mod.votos(p["proceso"]))
-                    siglas = sorted({v["siglas"] for v in votos})
+                    municipios, votos_mun = [], []
+                    if hasattr(mod, "municipios"):
+                        municipios = list(mod.municipios(p["proceso"]))
+                        votos_mun = list(mod.votos_municipios(p["proceso"])) if municipios else []
+                    siglas = sorted({v["siglas"] for v in votos + votos_mun})
                     cands = {s: f"{i + 1:06d}" for i, s in enumerate(siglas)}
-                    datos.append((mod, p, secciones, votos, cands))
+                    datos.append((mod, p, secciones, votos, cands, municipios, votos_mun))
             except Exception as e:  # una fuente caída no debe tumbar las demás
                 log.warning("Autonómicas de %s sin cargar: %s", m.name, e)
         _CACHE_AUTONOMICAS["datos"] = datos
@@ -383,13 +390,14 @@ def elecciones_secciones():
              "cod_mun": cusec[:5], **s}
             for (vuelta, cusec), s in secciones.items()
         ]
-    for mod, p, secciones, _v, _c in _datos_autonomicas():
+    for mod, p, secciones, _v, _c, municipios, _vm in _datos_autonomicas():
         yield [
-            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1,
-             "cod_seccion": s["cod_seccion"], "cod_mun": s["cod_seccion"][:5], "censo_ine": None,
-             "censo_escrutinio": s["censo"], "votos_blanco": s["votos_blanco"], "votos_nulos": s["votos_nulos"],
-             "votos_candidaturas": s["votos_candidaturas"], "mesas": None}
-            for s in secciones
+            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1, "nivel": nivel,
+             "cod_seccion": s.get("cod_seccion"), "cod_mun": s.get("cod_mun") or s["cod_seccion"][:5],
+             "censo_ine": None, "censo_escrutinio": s["censo"], "votos_blanco": s["votos_blanco"],
+             "votos_nulos": s["votos_nulos"], "votos_candidaturas": s["votos_candidaturas"], "mesas": None}
+            for nivel, filas in (("seccion", secciones), ("municipio", municipios))
+            for s in filas
         ]
 
 
@@ -410,15 +418,17 @@ def elecciones_secciones_votos():
             for (vuelta, cusec, cand), v in votos.items()
             if v > 0
         ]
-    for mod, p, _s2, votos, cands in _datos_autonomicas():
+    for mod, p, _s2, votos, cands, _m, votos_mun in _datos_autonomicas():
         suma: dict = {}
-        for v in votos:
-            clave = (v["cod_seccion"], cands[v["siglas"]])
-            suma[clave] = suma.get(clave, 0) + v["votos"]
+        for nivel, filas in (("seccion", votos), ("municipio", votos_mun)):
+            for v in filas:
+                cusec = v.get("cod_seccion")
+                clave = (nivel, cusec, v.get("cod_mun") or cusec[:5], cands[v["siglas"]])
+                suma[clave] = suma.get(clave, 0) + v["votos"]
         yield [
-            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1, "cod_seccion": cusec,
-             "cod_candidatura": cand, "votos": n}
-            for (cusec, cand), n in suma.items()
+            {"proceso": p["proceso"], "tipo": "05", "anio": p["fecha"].year, "vuelta": 1, "nivel": nivel,
+             "cod_seccion": cusec, "cod_mun": cod_mun, "cod_candidatura": cand, "votos": n}
+            for (nivel, cusec, cod_mun, cand), n in suma.items()
             if n > 0
         ]
 

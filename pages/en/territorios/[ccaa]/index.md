@@ -1,6 +1,6 @@
 ---
 description: "Autonomous community profile: population, economy, public accounts, debt, public employment, crime and more, with official data compared with Spain as a whole."
-i18n_origen: 27a28a4c59c0
+i18n_origen: 8542312d2686
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -269,6 +269,7 @@ ORDER BY anio
 
 <MapaEspana
     data={municipios}
+    link="enlace"
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"
     areaCol="cod_mun"
@@ -286,7 +287,7 @@ ORDER BY anio
     ]}
 />
 
-<p class="text-xs text-gray-500">The colour scale saturates at the most populous 10% of municipalities so that smaller ones can be told apart.</p>
+<p class="text-xs text-gray-500">The colour scale saturates at the most populous 10% of municipalities so that smaller ones can be told apart. Click a municipality to open its page.</p>
 
 <DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Municipality" />
@@ -1697,6 +1698,104 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     seriesColors={{'España': '#94a3b8'}} title="Turnout in general elections, %" />
 
 {/if}
+
+```sql auto_familias
+SELECT proceso, fecha, anio, eleccion, familia, bloque, color, orden_familia, pct, votos, participacion
+FROM mother.elecciones_autonomicas_familias
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_procesos
+SELECT proceso, any_value(eleccion) AS eleccion, fecha, strftime(fecha, '%-d/%-m/%Y') AS fecha_txt,
+    max(participacion) AS participacion, max(participacion) AS valor
+FROM ${auto_familias}
+GROUP BY proceso, fecha
+ORDER BY fecha
+```
+
+```sql auto_ultima
+SELECT familia, color, orden_familia, pct, votos, eleccion
+FROM ${auto_familias}
+WHERE proceso = (SELECT max_by(proceso, fecha) FROM ${auto_familias}) AND pct >= 1
+ORDER BY pct DESC
+```
+
+```sql auto_evolucion
+SELECT fecha, familia, color, orden_familia, pct
+FROM ${auto_familias}
+WHERE familia IN (SELECT familia FROM ${auto_familias} WHERE bloque <> 'Otros' GROUP BY familia HAVING max(pct) >= 5)
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_opciones
+SELECT DISTINCT proceso, eleccion, fecha
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha DESC
+```
+
+```sql auto_mapa
+SELECT cod_mun, coalesce(municipio, cod_mun) AS municipio, ganador_siglas, ganador_familia, ganador_color,
+    ganador_pct, participacion, '/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}' AND proceso = '${inputs.auto_eleccion.value}'
+```
+
+{#if auto_opciones.length > 0}
+
+## Regional elections
+
+{#if auto_procesos.length > 0}
+
+<Grid cols=2>
+    <KpiCard title="Turnout in regional elections" value={auto_procesos.slice(-1)[0]?.participacion}
+        formattedValue="{formatNumber(auto_procesos.slice(-1)[0]?.participacion, 1)} %"
+        period="{auto_procesos.slice(-1)[0]?.fecha_txt} · excluding voters abroad"
+        source="Official regional source" sparklineData={auto_procesos} />
+    <KpiCard title="Most voted party family" value={auto_ultima[0]?.pct}
+        formattedValue="{auto_ultima[0]?.familia} · {formatNumber(auto_ultima[0]?.pct, 1)} %"
+        period="second: {auto_ultima[1]?.familia} ({formatNumber(auto_ultima[1]?.pct, 1)} %)"
+        source="Official regional source" />
+</Grid>
+
+<BarChart data={auto_ultima} x=familia y=pct series=familia swapXY=true sort=false yFmt='0.0"%"'
+    seriesColors={Object.fromEntries(auto_ultima.map(d => [d.familia, d.color]))}
+    title="Vote by party family, % of valid votes · {auto_ultima[0]?.eleccion}" />
+
+{#if auto_procesos.length > 1}
+<LineChart data={auto_evolucion} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true
+    seriesColors={Object.fromEntries(auto_evolucion.map(d => [d.familia, d.color]))}
+    title="Vote in regional elections by party family, % of valid votes" />
+{/if}
+
+{/if}
+
+<Dropdown data={auto_opciones} name=auto_eleccion value=proceso label=eleccion title="Election" defaultValue={auto_opciones[0]?.proceso} />
+
+<MapaEspana
+    data={auto_mapa}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="ganador_familia"
+    colorCol="ganador_color"
+    legendType="categorical"
+    height={460}
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'ganador_siglas', title: 'Winner'},
+        {id: 'ganador_pct', title: '% of valid votes', fmt: '0.0"%"'},
+        {id: 'participacion', title: 'Turnout', fmt: '0.0"%"'}
+    ]}
+    title="Most voted list in each municipality"
+/>
+
+<p class="text-xs text-gray-500">Results from each region's official source (the Ministry of the Interior does not publish regional elections), by municipality or adding up its census sections. They exclude the vote of residents abroad, so the regional percentages may differ from the official ones by about one point. Elections with data for only some municipalities appear on the map but not in the totals. Click a municipality to open its page.</p>
+
+{/if}
+
 
 ## Official sources
 

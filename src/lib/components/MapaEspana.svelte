@@ -27,6 +27,9 @@
     export let link = undefined;
     export let height = 440;
     export let title = undefined;
+    // Color fijo de cada fila (p. ej. el de la familia política) en mapas categóricos:
+    // la columna lleva un color hex; la leyenda toma el de la primera fila de cada categoría
+    export let colorCol = undefined;
     // Modo puntos (sustituye a BubbleMap y PointMap): lat, long y, opcionalmente, size
     export let lat = undefined;
     export let long = undefined;
@@ -167,6 +170,7 @@
     $: vMin = min ?? (numeros.length ? Math.min(...numeros) : 0);
     $: vMax = max ?? (numeros.length ? Math.max(...numeros) : 1);
     $: paleta = (colorPalette ?? []).filter(Boolean);
+    $: colorCategoria = (c, i) => (colorCol && filas.find((r) => r?.[value] === c)?.[colorCol]) || (paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8');
 
     function hex(c) {
         const m = String(c).trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
@@ -191,6 +195,7 @@
         if (!value) return paleta[0] ?? '#3b82f6';
         const v = r[value];
         if (categorico) {
+            if (colorCol && r[colorCol]) return r[colorCol];
             const i = categorias.indexOf(v);
             return i < 0 ? null : paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8';
         }
@@ -363,7 +368,7 @@
             <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
                 {#if categorico}
                     {#each categorias as c, i}
-                        <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8'}"></span>{c}</span>
+                        <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{colorCategoria(c, i)}"></span>{c}</span>
                     {/each}
                 {:else if numeros.length}
                     <span>{formatear(vMin, valueFmt)}</span>

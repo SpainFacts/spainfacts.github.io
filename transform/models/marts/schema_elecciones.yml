@@ -105,3 +105,29 @@ models:
       - name: geo_anio
         description: "Año del seccionado del INE con el que se dibuja la sección"
         tests: [not_null]
+
+  - name: elecciones_autonomicas_municipios
+    description: >
+      Resultado de cada elección autonómica (todas las que publica la fuente oficial de cada
+      comunidad, ingestion/autonomicas/) en cada municipio: el municipio entero si la fuente lo da,
+      si no la suma de sus secciones. Participación, candidatura más votada con el color de su
+      familia y % por bloque y familia sobre votos válidos; sin voto CERA. cod_mun es el código
+      INE en la fecha de la elección.
+    columns:
+      - name: proceso
+        tests: [not_null]
+      - name: cod_mun
+        tests: [not_null]
+      - name: cod_ccaa
+        tests: [not_null]
+
+  - name: elecciones_autonomicas_familias
+    description: >
+      Voto por familia política en cada elección autonómica, sumando los municipios de la
+      comunidad (sin voto CERA, por eso difiere en torno a un punto del oficial). Solo elecciones
+      con datos de al menos el 90 % de los municipios de la comunidad.
+    columns:
+      - name: proceso
+        tests: [not_null]
+      - name: familia
+        tests: [not_null]

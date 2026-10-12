@@ -1,6 +1,6 @@
 ---
 description: "Fitxa de la comunitat autònoma: població, economia, comptes públics, deute, ocupació pública, seguretat i més, amb dades oficials i comparades amb Espanya."
-i18n_origen: 27a28a4c59c0
+i18n_origen: 8542312d2686
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -269,6 +269,7 @@ ORDER BY anio
 
 <MapaEspana
     data={municipios}
+    link="enlace"
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"
     areaCol="cod_mun"
@@ -286,7 +287,7 @@ ORDER BY anio
     ]}
 />
 
-<p class="text-xs text-gray-500">L'escala de color se satura en el 10 % de municipis més poblats perquè es distingeixin els petits.</p>
+<p class="text-xs text-gray-500">L'escala de color se satura en el 10 % de municipis més poblats perquè es distingeixin els petits. Prem un municipi per anar a la seva fitxa.</p>
 
 <DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Municipi" />
@@ -1697,6 +1698,104 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     seriesColors={{'España': '#94a3b8'}} title="Participació a les generals, %" />
 
 {/if}
+
+```sql auto_familias
+SELECT proceso, fecha, anio, eleccion, familia, bloque, color, orden_familia, pct, votos, participacion
+FROM mother.elecciones_autonomicas_familias
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_procesos
+SELECT proceso, any_value(eleccion) AS eleccion, fecha, strftime(fecha, '%-d/%-m/%Y') AS fecha_txt,
+    max(participacion) AS participacion, max(participacion) AS valor
+FROM ${auto_familias}
+GROUP BY proceso, fecha
+ORDER BY fecha
+```
+
+```sql auto_ultima
+SELECT familia, color, orden_familia, pct, votos, eleccion
+FROM ${auto_familias}
+WHERE proceso = (SELECT max_by(proceso, fecha) FROM ${auto_familias}) AND pct >= 1
+ORDER BY pct DESC
+```
+
+```sql auto_evolucion
+SELECT fecha, familia, color, orden_familia, pct
+FROM ${auto_familias}
+WHERE familia IN (SELECT familia FROM ${auto_familias} WHERE bloque <> 'Otros' GROUP BY familia HAVING max(pct) >= 5)
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_opciones
+SELECT DISTINCT proceso, eleccion, fecha
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha DESC
+```
+
+```sql auto_mapa
+SELECT cod_mun, coalesce(municipio, cod_mun) AS municipio, ganador_siglas, ganador_familia, ganador_color,
+    ganador_pct, participacion, '/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}' AND proceso = '${inputs.auto_eleccion.value}'
+```
+
+{#if auto_opciones.length > 0}
+
+## Eleccions autonòmiques
+
+{#if auto_procesos.length > 0}
+
+<Grid cols=2>
+    <KpiCard title="Participació a les autonòmiques" value={auto_procesos.slice(-1)[0]?.participacion}
+        formattedValue="{formatNumber(auto_procesos.slice(-1)[0]?.participacion, 1)} %"
+        period="{auto_procesos.slice(-1)[0]?.fecha_txt} · sense vot exterior"
+        source="Font oficial de la comunitat" sparklineData={auto_procesos} />
+    <KpiCard title="Família més votada" value={auto_ultima[0]?.pct}
+        formattedValue="{auto_ultima[0]?.familia} · {formatNumber(auto_ultima[0]?.pct, 1)} %"
+        period="segona: {auto_ultima[1]?.familia} ({formatNumber(auto_ultima[1]?.pct, 1)} %)"
+        source="Font oficial de la comunitat" />
+</Grid>
+
+<BarChart data={auto_ultima} x=familia y=pct series=familia swapXY=true sort=false yFmt='0.0"%"'
+    seriesColors={Object.fromEntries(auto_ultima.map(d => [d.familia, d.color]))}
+    title="Vot per família política, % dels vots vàlids · {auto_ultima[0]?.eleccion}" />
+
+{#if auto_procesos.length > 1}
+<LineChart data={auto_evolucion} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true
+    seriesColors={Object.fromEntries(auto_evolucion.map(d => [d.familia, d.color]))}
+    title="Vot a les autonòmiques per família política, % dels vots vàlids" />
+{/if}
+
+{/if}
+
+<Dropdown data={auto_opciones} name=auto_eleccion value=proceso label=eleccion title="Elecció" defaultValue={auto_opciones[0]?.proceso} />
+
+<MapaEspana
+    data={auto_mapa}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="ganador_familia"
+    colorCol="ganador_color"
+    legendType="categorical"
+    height={460}
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'ganador_siglas', title: 'Més votada'},
+        {id: 'ganador_pct', title: '% dels vàlids', fmt: '0.0"%"'},
+        {id: 'participacion', title: 'Participació', fmt: '0.0"%"'}
+    ]}
+    title="Candidatura més votada a cada municipi"
+/>
+
+<p class="text-xs text-gray-500">Resultats de la font oficial de cada comunitat (el Ministeri de l'Interior no publica les autonòmiques), per municipi o sumant-ne les seccions censals. No inclouen el vot dels residents a l'estranger, així que els percentatges de la comunitat poden diferir de l'oficial al voltant d'un punt. Les eleccions de les quals només hi ha dades d'alguns municipis surten al mapa però no als totals. Prem un municipi per anar a la seva fitxa.</p>
+
+{/if}
+
 
 ## Fonts oficials
 

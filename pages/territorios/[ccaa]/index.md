@@ -268,6 +268,7 @@ ORDER BY anio
 
 <MapaEspana
     data={municipios}
+    link="enlace"
     geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
     geoId="cod_mun"
     areaCol="cod_mun"
@@ -285,7 +286,7 @@ ORDER BY anio
     ]}
 />
 
-<p class="text-xs text-gray-500">La escala de color satura en el 10 % de municipios más poblados para que se distingan los pequeños.</p>
+<p class="text-xs text-gray-500">La escala de color satura en el 10 % de municipios más poblados para que se distingan los pequeños. Pulsa un municipio para ir a su ficha.</p>
 
 <DataTable data={municipios} search=true rows=15 link=enlace showLinkCol=false>
     <Column id=municipio title="Municipio" />
@@ -1696,6 +1697,104 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
     seriesColors={{'España': '#94a3b8'}} title="Participación en las generales, %" />
 
 {/if}
+
+```sql auto_familias
+SELECT proceso, fecha, anio, eleccion, familia, bloque, color, orden_familia, pct, votos, participacion
+FROM mother.elecciones_autonomicas_familias
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_procesos
+SELECT proceso, any_value(eleccion) AS eleccion, fecha, strftime(fecha, '%-d/%-m/%Y') AS fecha_txt,
+    max(participacion) AS participacion, max(participacion) AS valor
+FROM ${auto_familias}
+GROUP BY proceso, fecha
+ORDER BY fecha
+```
+
+```sql auto_ultima
+SELECT familia, color, orden_familia, pct, votos, eleccion
+FROM ${auto_familias}
+WHERE proceso = (SELECT max_by(proceso, fecha) FROM ${auto_familias}) AND pct >= 1
+ORDER BY pct DESC
+```
+
+```sql auto_evolucion
+SELECT fecha, familia, color, orden_familia, pct
+FROM ${auto_familias}
+WHERE familia IN (SELECT familia FROM ${auto_familias} WHERE bloque <> 'Otros' GROUP BY familia HAVING max(pct) >= 5)
+ORDER BY fecha, orden_familia
+```
+
+```sql auto_opciones
+SELECT DISTINCT proceso, eleccion, fecha
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}'
+ORDER BY fecha DESC
+```
+
+```sql auto_mapa
+SELECT cod_mun, coalesce(municipio, cod_mun) AS municipio, ganador_siglas, ganador_familia, ganador_color,
+    ganador_pct, participacion, '/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.elecciones_autonomicas_municipios
+WHERE cod_ccaa = '${terr[0]?.cod}' AND proceso = '${inputs.auto_eleccion.value}'
+```
+
+{#if auto_opciones.length > 0}
+
+## Elecciones autonómicas
+
+{#if auto_procesos.length > 0}
+
+<Grid cols=2>
+    <KpiCard title="Participación en las autonómicas" value={auto_procesos.slice(-1)[0]?.participacion}
+        formattedValue="{formatNumber(auto_procesos.slice(-1)[0]?.participacion, 1)} %"
+        period="{auto_procesos.slice(-1)[0]?.fecha_txt} · sin voto exterior"
+        source="Fuente oficial de la comunidad" sparklineData={auto_procesos} />
+    <KpiCard title="Familia más votada" value={auto_ultima[0]?.pct}
+        formattedValue="{auto_ultima[0]?.familia} · {formatNumber(auto_ultima[0]?.pct, 1)} %"
+        period="segunda: {auto_ultima[1]?.familia} ({formatNumber(auto_ultima[1]?.pct, 1)} %)"
+        source="Fuente oficial de la comunidad" />
+</Grid>
+
+<BarChart data={auto_ultima} x=familia y=pct series=familia swapXY=true sort=false yFmt='0.0"%"'
+    seriesColors={Object.fromEntries(auto_ultima.map(d => [d.familia, d.color]))}
+    title="Voto por familia política, % de los votos válidos · {auto_ultima[0]?.eleccion}" />
+
+{#if auto_procesos.length > 1}
+<LineChart data={auto_evolucion} x=fecha y=pct series=familia yFmt='0.0"%"' markers=true
+    seriesColors={Object.fromEntries(auto_evolucion.map(d => [d.familia, d.color]))}
+    title="Voto en las autonómicas por familia política, % de los votos válidos" />
+{/if}
+
+{/if}
+
+<Dropdown data={auto_opciones} name=auto_eleccion value=proceso label=eleccion title="Elección" defaultValue={auto_opciones[0]?.proceso} />
+
+<MapaEspana
+    data={auto_mapa}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="ganador_familia"
+    colorCol="ganador_color"
+    legendType="categorical"
+    height={460}
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'ganador_siglas', title: 'Más votada'},
+        {id: 'ganador_pct', title: '% de los válidos', fmt: '0.0"%"'},
+        {id: 'participacion', title: 'Participación', fmt: '0.0"%"'}
+    ]}
+    title="Candidatura más votada en cada municipio"
+/>
+
+<p class="text-xs text-gray-500">Resultados de la fuente oficial de cada comunidad (el Ministerio del Interior no publica las autonómicas), por municipio o sumando sus secciones censales. No incluyen el voto de los residentes en el extranjero, así que los porcentajes de la comunidad pueden diferir del oficial en torno a un punto. Las elecciones de las que solo hay datos de algunos municipios aparecen en el mapa pero no en los totales. Pulsa un municipio para ir a su ficha.</p>
+
+{/if}
+
 
 ## Fuentes oficiales
 

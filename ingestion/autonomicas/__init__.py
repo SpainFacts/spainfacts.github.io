@@ -26,6 +26,29 @@ def votos(proceso: str) -> Iterable[dict]
     `siglas` tal como las publica la fuente (la familia política se asigna en dbt con
     el seed elecciones_partidos_reglas, como en las generales).
 
+Histórico por municipio (opcional)
+----------------------------------
+PROCESOS puede incluir TODAS las autonómicas de la comunidad (las anteriores también),
+de la más antigua a la más reciente. Los mapas de barrio usan solo la última con datos
+por sección; la página de la comunidad usa todas, por municipio. Para cada proceso:
+
+- si hay datos por sección, secciones()/votos() como arriba (el municipio se saca del
+  código de sección);
+- si solo los hay por municipio (o la sección exige rastrear una API petición a
+  petición), el módulo define además
+
+  def municipios(proceso: str) -> Iterable[dict]
+      {"cod_mun": "41091", "censo": int, "votos_blanco": int, "votos_nulos": int,
+       "votos_candidaturas": int}
+  def votos_municipios(proceso: str) -> Iterable[dict]
+      {"cod_mun": str, "siglas": str, "votos": int}
+
+  y secciones()/votos() devuelven [] para ese proceso. Si para un proceso hay las dos
+  cosas (p. ej. secciones solo de Gijón y municipios de toda Asturias), se usan los
+  municipios para la página de la comunidad y las secciones para el mapa de barrio.
+- cod_mun es el código INE del municipio en la fecha de la elección (5 dígitos); si un
+  municipio ya no existe o ha cambiado de código, se deja tal cual.
+
 Reglas
 ------
 - Descargas en caché en data/autonomicas_cache/<slug>/ (ignorado por git); nada de
@@ -65,8 +88,23 @@ def codigos_ine(anio: int) -> set[str]:
 def probar(modulo) -> None:
     """Resumen de comprobación de un módulo: totales, siglas y casado con el INE."""
     for p in modulo.PROCESOS:
+        if hasattr(modulo, "municipios"):
+            m = list(modulo.municipios(p["proceso"]))
+            if m:
+                vm = list(modulo.votos_municipios(p["proceso"]))
+                print(f"== {p['proceso']} · {p['eleccion']} · POR MUNICIPIO")
+                print(f"municipios: {len({r['cod_mun'] for r in m})} · censo: {sum(r['censo'] or 0 for r in m):,}"
+                      f" · candidaturas: {sum(r['votos_candidaturas'] for r in m):,}"
+                      f" · blancos: {sum(r['votos_blanco'] or 0 for r in m):,} · nulos: {sum(r['votos_nulos'] or 0 for r in m):,}")
+                por: dict[str, int] = {}
+                for r in vm:
+                    por[r["siglas"]] = por.get(r["siglas"], 0) + r["votos"]
+                print(f"suma de votos por candidatura: {sum(por.values()):,} · "
+                      + " · ".join(f"{k} {n:,}" for k, n in sorted(por.items(), key=lambda x: -x[1])[:6]))
         s = list(modulo.secciones(p["proceso"]))
         v = list(modulo.votos(p["proceso"]))
+        if not s:
+            continue
         ine = codigos_ine(p["fecha"].year)
         codigos = {r["cod_seccion"] for r in s}
         casan = len(codigos & ine)
@@ -76,8 +114,8 @@ def probar(modulo) -> None:
         print(f"== {p['proceso']} · {p['eleccion']}")
         print(f"secciones: {len(codigos)} · casan con el INE: {casan} ({100 * casan / max(1, len(codigos)):.1f} %)"
               f" · municipios: {len({c[:5] for c in codigos})}")
-        print(f"censo: {sum(r['censo'] for r in s):,} · candidaturas: {sum(r['votos_candidaturas'] for r in s):,}"
-              f" · blancos: {sum(r['votos_blanco'] for r in s):,} · nulos: {sum(r['votos_nulos'] for r in s):,}")
+        print(f"censo: {sum(r['censo'] or 0 for r in s):,} · candidaturas: {sum(r['votos_candidaturas'] for r in s):,}"
+              f" · blancos: {sum(r['votos_blanco'] or 0 for r in s):,} · nulos: {sum(r['votos_nulos'] or 0 for r in s):,}")
         print(f"suma de votos por candidatura (fichero de votos): {sum(por_siglas.values()):,}")
         for siglas, n in sorted(por_siglas.items(), key=lambda x: -x[1])[:10]:
             print(f"   {siglas}: {n:,}")

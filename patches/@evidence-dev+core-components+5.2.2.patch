@@ -575,10 +575,10 @@ index 0000000..831135e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..3307c5c
+index 0000000..548c042
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,4085 @@
+@@ -0,0 +1,4089 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
@@ -1350,6 +1350,7 @@ index 0000000..3307c5c
 +		'IU, Podemos y Sumar': 'IU, Podemos and Sumar',
 +		'IVA': 'VAT',
 +		'Izquierda': 'Left',
++		'Otros nacionalistas y regionalistas': 'Other nationalists and regionalists',
 +		'20 % más pobre': 'Poorest 20 %',
 +		'2.º': '2nd',
 +		'3.º': '3rd',
@@ -2448,6 +2449,7 @@ index 0000000..3307c5c
 +		'Italia': 'Itàlia',
 +		'IU, Podemos y Sumar': 'IU, Podemos i Sumar',
 +		'Izquierda': 'Esquerra',
++		'Otros nacionalistas y regionalistas': 'Altres nacionalistes i regionalistes',
 +		'20 % más pobre': '20 % més pobre',
 +		'2.º': '2n',
 +		'3.º': '3r',
@@ -3317,6 +3319,7 @@ index 0000000..3307c5c
 +		'IU, Podemos y Sumar': 'IU, Podemos e Sumar',
 +		'IVA': 'IVE',
 +		'Izquierda': 'Esquerda',
++		'Otros nacionalistas y regionalistas': 'Outros nacionalistas e rexionalistas',
 +		'20 % más pobre': '20 % máis pobre',
 +		'2.º': '2.º',
 +		'3.º': '3.º',
@@ -4322,6 +4325,7 @@ index 0000000..3307c5c
 +		'IU, Podemos y Sumar': 'IU, Podemos eta Sumar',
 +		'IVA': 'BEZ',
 +		'Izquierda': 'Ezkerra',
++		'Otros nacionalistas y regionalistas': 'Beste abertzale eta erregionalista batzuk',
 +		'20 % más pobre': '% 20 pobreena',
 +		'2.º': '2.a',
 +		'3.º': '3.a',
