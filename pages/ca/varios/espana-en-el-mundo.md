@@ -3,12 +3,13 @@ title: Espanya al món
 description: "Com es compara Espanya amb els altres països del món en més de 50 indicadors del Banc Mundial, l'FMI, l'ONU i altres fonts: riquesa, ocupació, població, salut, educació, desigualtat, seguretat, energia i clima. Mapa del món, classificació i evolució de cadascun."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: d2d5a42614f5
+i18n_origen: 12150347c546
 ---
 
 <script>
     import MapaMundo from '../../../../../../../src/lib/components/MapaMundo.svelte';
     import TablaSeleccion from '../../../../../../../src/lib/components/TablaSeleccion.svelte';
+    import TarjetasFiltro from '../../../../../../../src/lib/components/TarjetasFiltro.svelte';
     import { IDIOMAS, idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { textosIndicador } from '../../../../../../../src/lib/i18n_internacional.js';
 
@@ -78,24 +79,12 @@ SELECT
 FROM ${resumen}
 ```
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6 not-prose">
-    <div class="rounded-xl border border-green-200 dark:border-green-900 bg-green-50/60 dark:bg-green-950/30 p-4">
-        <p class="text-3xl font-bold text-green-700 dark:text-green-400">{balance[0]?.mejor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">indicadors en què Espanya està millor que la mitjana de la Unió Europea</p>
-    </div>
-    <div class="rounded-xl border border-red-200 dark:border-red-900 bg-red-50/60 dark:bg-red-950/30 p-4">
-        <p class="text-3xl font-bold text-red-700 dark:text-red-400">{balance[0]?.peor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">indicadors en què Espanya està pitjor que la mitjana de la Unió Europea</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.cuarto_alto ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">entre el 25 % de millors països del món</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.mitad_baja ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">a la meitat pitjor del món</p>
-    </div>
-</div>
+<TarjetasFiltro name=filtro tarjetas={[
+    { valor: 'mejor', n: balance[0]?.mejor, texto: 'indicadors en què Espanya està millor que la mitjana de la Unió Europea', tono: 'verde' },
+    { valor: 'peor', n: balance[0]?.peor, texto: 'indicadors en què Espanya està pitjor que la mitjana de la Unió Europea', tono: 'rojo' },
+    { valor: 'cuarto_alto', n: balance[0]?.cuarto_alto, texto: 'entre el 25 % de millors països del món' },
+    { valor: 'mitad_baja', n: balance[0]?.mitad_baja, texto: 'a la meitat pitjor del món' }
+]} />
 
 Davant el món, Espanya surt gairebé sempre per sobre de la mitjana, així que la comparació que més diu
 és la de la Unió Europea. Millor o pitjor només es jutja en els {balance[0]?.con_sentido ?? '…'} indicadors en
@@ -118,7 +107,14 @@ SELECT apartado, min(orden) AS o FROM ${resumen} GROUP BY apartado ORDER BY o
 
 ```sql indicadores
 SELECT * FROM ${resumen}
-WHERE '${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}'
+WHERE ('${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}')
+  AND coalesce(CASE '${inputs.filtro}'
+      WHEN 'mejor' THEN frente_ue = 'mejor'
+      WHEN 'peor' THEN frente_ue = 'peor'
+      WHEN 'cuarto_alto' THEN sentido <> 'neutro' AND puesto <= n_paises / 4.0
+      WHEN 'mitad_baja' THEN sentido <> 'neutro' AND puesto > n_paises / 2.0
+      ELSE true
+  END, false)
 ORDER BY orden
 ```
 

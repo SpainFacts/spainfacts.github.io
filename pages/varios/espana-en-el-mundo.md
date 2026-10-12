@@ -8,6 +8,7 @@ og:
 <script>
     import MapaMundo from '../../../../../../src/lib/components/MapaMundo.svelte';
     import TablaSeleccion from '../../../../../../src/lib/components/TablaSeleccion.svelte';
+    import TarjetasFiltro from '../../../../../../src/lib/components/TarjetasFiltro.svelte';
     import { IDIOMAS, idiomaDeRuta } from '../../../../../../src/lib/i18n.js';
     import { textosIndicador } from '../../../../../../src/lib/i18n_internacional.js';
 
@@ -77,24 +78,12 @@ SELECT
 FROM ${resumen}
 ```
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6 not-prose">
-    <div class="rounded-xl border border-green-200 dark:border-green-900 bg-green-50/60 dark:bg-green-950/30 p-4">
-        <p class="text-3xl font-bold text-green-700 dark:text-green-400">{balance[0]?.mejor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">indicadores en los que España está mejor que la media de la Unión Europea</p>
-    </div>
-    <div class="rounded-xl border border-red-200 dark:border-red-900 bg-red-50/60 dark:bg-red-950/30 p-4">
-        <p class="text-3xl font-bold text-red-700 dark:text-red-400">{balance[0]?.peor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">indicadores en los que España está peor que la media de la Unión Europea</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.cuarto_alto ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">en el 25 % de los mejores países del mundo</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.mitad_baja ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">en la mitad peor del mundo</p>
-    </div>
-</div>
+<TarjetasFiltro name=filtro tarjetas={[
+    { valor: 'mejor', n: balance[0]?.mejor, texto: 'indicadores en los que España está mejor que la media de la Unión Europea', tono: 'verde' },
+    { valor: 'peor', n: balance[0]?.peor, texto: 'indicadores en los que España está peor que la media de la Unión Europea', tono: 'rojo' },
+    { valor: 'cuarto_alto', n: balance[0]?.cuarto_alto, texto: 'en el 25 % de los mejores países del mundo' },
+    { valor: 'mitad_baja', n: balance[0]?.mitad_baja, texto: 'en la mitad peor del mundo' }
+]} />
 
 Frente al mundo, España sale casi siempre por encima de la media, así que la comparación que más dice
 es la de la Unión Europea. Mejor o peor solo se juzga en los {balance[0]?.con_sentido ?? '…'} indicadores en
@@ -117,7 +106,14 @@ SELECT apartado, min(orden) AS o FROM ${resumen} GROUP BY apartado ORDER BY o
 
 ```sql indicadores
 SELECT * FROM ${resumen}
-WHERE '${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}'
+WHERE ('${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}')
+  AND coalesce(CASE '${inputs.filtro}'
+      WHEN 'mejor' THEN frente_ue = 'mejor'
+      WHEN 'peor' THEN frente_ue = 'peor'
+      WHEN 'cuarto_alto' THEN sentido <> 'neutro' AND puesto <= n_paises / 4.0
+      WHEN 'mitad_baja' THEN sentido <> 'neutro' AND puesto > n_paises / 2.0
+      ELSE true
+  END, false)
 ORDER BY orden
 ```
 

@@ -3,12 +3,13 @@ title: Espainia munduan
 description: "Nola konparatzen den Espainia munduko gainerako herrialdeekin Munduko Bankuaren, NDFren, NBEren eta beste iturri batzuen 50 adierazle baino gehiagotan: aberastasuna, enplegua, biztanleria, osasuna, hezkuntza, desberdintasuna, segurtasuna, energia eta klima. Bakoitzaren munduko mapa, sailkapena eta bilakaera."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: d2d5a42614f5
+i18n_origen: 12150347c546
 ---
 
 <script>
     import MapaMundo from '../../../../../../../src/lib/components/MapaMundo.svelte';
     import TablaSeleccion from '../../../../../../../src/lib/components/TablaSeleccion.svelte';
+    import TarjetasFiltro from '../../../../../../../src/lib/components/TarjetasFiltro.svelte';
     import { IDIOMAS, idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { textosIndicador } from '../../../../../../../src/lib/i18n_internacional.js';
 
@@ -78,24 +79,12 @@ SELECT
 FROM ${resumen}
 ```
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6 not-prose">
-    <div class="rounded-xl border border-green-200 dark:border-green-900 bg-green-50/60 dark:bg-green-950/30 p-4">
-        <p class="text-3xl font-bold text-green-700 dark:text-green-400">{balance[0]?.mejor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">adierazle, Espainia Europar Batasuneko batez bestekoa baino hobeto dagoenak</p>
-    </div>
-    <div class="rounded-xl border border-red-200 dark:border-red-900 bg-red-50/60 dark:bg-red-950/30 p-4">
-        <p class="text-3xl font-bold text-red-700 dark:text-red-400">{balance[0]?.peor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">adierazle, Espainia Europar Batasuneko batez bestekoa baino okerrago dagoenak</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.cuarto_alto ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">munduko herrialde onenen % 25ean</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.mitad_baja ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">munduko erdi txarrenean</p>
-    </div>
-</div>
+<TarjetasFiltro name=filtro tarjetas={[
+    { valor: 'mejor', n: balance[0]?.mejor, texto: 'adierazle, Espainia Europar Batasuneko batez bestekoa baino hobeto dagoenak', tono: 'verde' },
+    { valor: 'peor', n: balance[0]?.peor, texto: 'adierazle, Espainia Europar Batasuneko batez bestekoa baino okerrago dagoenak', tono: 'rojo' },
+    { valor: 'cuarto_alto', n: balance[0]?.cuarto_alto, texto: 'munduko herrialde onenen % 25ean' },
+    { valor: 'mitad_baja', n: balance[0]?.mitad_baja, texto: 'munduko erdi txarrenean' }
+]} />
 
 Munduarekin alderatuta, Espainia ia beti batez bestekoaren gainetik dago; horregatik, gehien esaten duen
 konparazioa Europar Batasunarena da. Hobea ala okerragoa den {balance[0]?.con_sentido ?? '…'} adierazletan
@@ -118,7 +107,14 @@ SELECT apartado, min(orden) AS o FROM ${resumen} GROUP BY apartado ORDER BY o
 
 ```sql indicadores
 SELECT * FROM ${resumen}
-WHERE '${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}'
+WHERE ('${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}')
+  AND coalesce(CASE '${inputs.filtro}'
+      WHEN 'mejor' THEN frente_ue = 'mejor'
+      WHEN 'peor' THEN frente_ue = 'peor'
+      WHEN 'cuarto_alto' THEN sentido <> 'neutro' AND puesto <= n_paises / 4.0
+      WHEN 'mitad_baja' THEN sentido <> 'neutro' AND puesto > n_paises / 2.0
+      ELSE true
+  END, false)
 ORDER BY orden
 ```
 

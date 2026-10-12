@@ -3,12 +3,13 @@ title: Espainia Europan
 description: "Nola konparatzen den Espainia gainerako Europarekin Eurostaten 70 adierazle baino gehiagotan: ekonomia, enplegua, kontu publikoak, desberdintasuna, hezkuntza, biztanleria, osasuna, etxebizitza, energia eta klima. Bakoitzaren mapa, sailkapena eta bilakaera."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 8ba895d2d4a0
+i18n_origen: 6f85cfe0154f
 ---
 
 <script>
     import MapaMundo from '../../../../../../../src/lib/components/MapaMundo.svelte';
     import TablaSeleccion from '../../../../../../../src/lib/components/TablaSeleccion.svelte';
+    import TarjetasFiltro from '../../../../../../../src/lib/components/TarjetasFiltro.svelte';
     import { IDIOMAS, idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { textosIndicador } from '../../../../../../../src/lib/i18n_internacional.js';
 
@@ -66,30 +67,18 @@ ORDER BY orden
 SELECT
     count(*) FILTER (WHERE frente_ue = 'mejor') AS mejor,
     count(*) FILTER (WHERE frente_ue = 'peor') AS peor,
-    count(*) FILTER (WHERE puesto_ue IS NOT NULL AND puesto_ue <= n_ue / 3.0) AS tercio_alto,
-    count(*) FILTER (WHERE puesto_ue IS NOT NULL AND puesto_ue > 2 * n_ue / 3.0) AS tercio_bajo,
+    count(*) FILTER (WHERE sentido <> 'neutro' AND puesto_ue <= n_ue / 3.0) AS tercio_alto,
+    count(*) FILTER (WHERE sentido <> 'neutro' AND puesto_ue > 2 * n_ue / 3.0) AS tercio_bajo,
     count(*) FILTER (WHERE sentido <> 'neutro') AS con_sentido
 FROM ${resumen}
 ```
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-6 not-prose">
-    <div class="rounded-xl border border-green-200 dark:border-green-900 bg-green-50/60 dark:bg-green-950/30 p-4">
-        <p class="text-3xl font-bold text-green-700 dark:text-green-400">{balance[0]?.mejor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">adierazle, Espainia EBko batez bestekoa baino hobeto dagoenak</p>
-    </div>
-    <div class="rounded-xl border border-red-200 dark:border-red-900 bg-red-50/60 dark:bg-red-950/30 p-4">
-        <p class="text-3xl font-bold text-red-700 dark:text-red-400">{balance[0]?.peor ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">adierazle, Espainia EBko batez bestekoa baino okerrago dagoenak</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.tercio_alto ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">EB-27ko goiko herenean</p>
-    </div>
-    <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-        <p class="text-3xl font-bold text-gray-900 dark:text-white">{balance[0]?.tercio_bajo ?? '–'}</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">EB-27ko beheko herenean</p>
-    </div>
-</div>
+<TarjetasFiltro name=filtro tarjetas={[
+    { valor: 'mejor', n: balance[0]?.mejor, texto: 'adierazle, Espainia EBko batez bestekoa baino hobeto dagoenak', tono: 'verde' },
+    { valor: 'peor', n: balance[0]?.peor, texto: 'adierazle, Espainia EBko batez bestekoa baino okerrago dagoenak', tono: 'rojo' },
+    { valor: 'tercio_alto', n: balance[0]?.tercio_alto, texto: 'EB-27ko goiko herenean' },
+    { valor: 'tercio_bajo', n: balance[0]?.tercio_bajo, texto: 'EB-27ko beheko herenean' }
+]} />
 
 Hobea ala okerragoa den {balance[0]?.con_sentido ?? '…'} adierazletan baino ez da epaitzen: gehiago argi eta
 garbi hobea denetan (enplegua, errenta, bizi-itxaropena...) edo argi eta garbi okerragoa denetan (langabezia,
@@ -111,7 +100,14 @@ SELECT apartado, min(orden) AS o FROM ${resumen} GROUP BY apartado ORDER BY o
 
 ```sql indicadores
 SELECT * FROM ${resumen}
-WHERE '${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}'
+WHERE ('${inputs.apartado}' = 'Todos' OR apartado = '${inputs.apartado}')
+  AND coalesce(CASE '${inputs.filtro}'
+      WHEN 'mejor' THEN frente_ue = 'mejor'
+      WHEN 'peor' THEN frente_ue = 'peor'
+      WHEN 'tercio_alto' THEN sentido <> 'neutro' AND puesto_ue <= n_ue / 3.0
+      WHEN 'tercio_bajo' THEN sentido <> 'neutro' AND puesto_ue > 2 * n_ue / 3.0
+      ELSE true
+  END, false)
 ORDER BY orden
 ```
 
