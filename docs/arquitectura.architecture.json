@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura de SpainFacts",
+    "quality_profile": "standard",
+    "viewBox": [1320, 740]
+  },
+  "components": [
+    { "id": "fuentes", "type": "external", "label": "Fuentes públicas", "sublabel": "INE, BDE, REE, Eurostat…", "tag": "API · CSV · XLS · PDF", "pos": [20, 350], "size": [170, 64] },
+    { "id": "postgres", "type": "database", "label": "PostgreSQL 16", "sublabel": "estado de Dagster", "brand": "postgresql", "pos": [240, 70], "size": [170, 64] },
+    { "id": "dagster", "type": "backend", "label": "Dagster", "sublabel": "assets · schedule 6:00", "pos": [240, 210], "size": [170, 64] },
+    { "id": "dlt", "type": "backend", "label": "dlt", "sublabel": "ingestion/*.py (Python)", "pos": [240, 350], "size": [170, 64] },
+    { "id": "dbt", "type": "backend", "label": "dbt-duckdb", "sublabel": "staging, marts y tests", "pos": [240, 490], "size": [170, 64] },
+    { "id": "motherduck", "type": "database", "label": "MotherDuck", "sublabel": "DuckDB en la nube", "tag": "raw · staging · main", "pos": [460, 350], "size": [170, 64] },
+    { "id": "repo", "type": "external", "label": "Repositorio GitHub", "sublabel": "push · cron semanal", "brand": "github", "pos": [680, 70], "size": [170, 64] },
+    { "id": "sources", "type": "backend", "label": "Evidence sources", "sublabel": "sources/*.sql → parquet", "pos": [680, 210], "size": [170, 64] },
+    { "id": "build", "type": "backend", "label": "Evidence build", "sublabel": "SvelteKit · 5 idiomas", "pos": [680, 350], "size": [170, 64] },
+    { "id": "catalogo", "type": "backend", "label": "Catálogo del chat", "sublabel": "transformers.js", "tag": "EmbeddingGemma 300M", "brand": "hugging-face", "pos": [680, 490], "size": [170, 64] },
+    { "id": "pruebas", "type": "security", "label": "Pruebas", "sublabel": "Playwright · i18n · estática", "pos": [680, 630], "size": [170, 64] },
+    { "id": "cliente", "type": "external", "label": "Cliente MCP", "sublabel": "Claude Code / Desktop", "pos": [900, 70], "size": [170, 64] },
+    { "id": "mcp", "type": "backend", "label": "Servidor MCP", "sublabel": "MCP SDK · DuckDB Node", "pos": [900, 210], "size": [170, 64] },
+    { "id": "pages", "type": "cloud", "label": "GitHub Pages", "sublabel": "spainfacts.org", "tag": "HTML + parquet", "brand": "github", "pos": [900, 490], "size": [170, 64] },
+    { "id": "ree", "type": "external", "label": "API de REE", "sublabel": "demanda y generación", "pos": [900, 630], "size": [170, 64] },
+    { "id": "llm", "type": "external", "label": "Proveedores LLM", "sublabel": "OpenRouter, Ollama…", "pos": [1120, 210], "size": [170, 64] },
+    { "id": "chat", "type": "frontend", "label": "Chat /chat", "sublabel": "WebLLM · Ministral 3 3B", "pos": [1120, 350], "size": [170, 64] },
+    { "id": "paginas", "type": "frontend", "label": "Páginas Evidence", "sublabel": "ECharts · DuckDB-Wasm", "brand": "svelte", "pos": [1120, 490], "size": [170, 64] },
+    { "id": "worker", "type": "cloud", "label": "Cloudflare Worker", "sublabel": "ree-directo", "brand": "cloudflare", "pos": [1120, 630], "size": [170, 64] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Servidor propio · Docker Compose", "wraps": ["postgres", "dagster", "dlt", "dbt"] },
+    { "kind": "region", "label": "GitHub Actions · deploy.yml", "wraps": ["sources", "build", "catalogo", "pruebas"] },
+    { "kind": "region", "label": "Navegador", "wraps": ["chat", "paginas"] }
+  ],
+  "connections": [
+    { "id": "fuentes-dlt", "from": "fuentes", "to": "dlt", "label": "HTTP", "variant": "emphasis" },
+    { "id": "dagster-pg", "from": "dagster", "to": "postgres", "label": "estado", "fromSide": "top", "toSide": "bottom" },
+    { "id": "dagster-dlt", "from": "dagster", "to": "dlt", "label": "ejecuta", "labelAt": [325, 312], "fromSide": "bottom", "toSide": "top" },
+    { "id": "dagster-dbt", "from": "dagster", "to": "dbt", "fromSide": "left", "toSide": "left" },
+    { "id": "dlt-md", "from": "dlt", "to": "motherduck", "label": "raw.*", "variant": "emphasis" },
+    { "id": "dbt-md", "from": "dbt", "to": "motherduck", "label": "main.*", "fromSide": "right", "toSide": "bottom" },
+    { "id": "dispatch", "from": "dagster", "to": "repo", "label": "repository_dispatch", "variant": "dashed" },
+    { "id": "repo-sources", "from": "repo", "to": "sources", "label": "dispara", "labelAt": [765, 172], "fromSide": "bottom", "toSide": "top" },
+    { "id": "md-sources", "from": "motherduck", "to": "sources", "label": "SQL", "variant": "emphasis" },
+    { "id": "sources-build", "from": "sources", "to": "build", "label": "parquet",  "labelAt": [765, 312], "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "build-catalogo", "from": "build", "to": "catalogo", "label": "tablas", "labelAt": [765, 452], "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "catalogo-pruebas", "from": "catalogo", "to": "pruebas", "label": "build/", "labelAt": [765, 592], "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "pruebas-pages", "from": "pruebas", "to": "pages", "label": "deploy", "variant": "emphasis", "fromSide": "right", "toSide": "left" },
+    { "id": "pages-paginas", "from": "pages", "to": "paginas", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "pages-chat", "from": "pages", "to": "chat", "label": "catálogo", "variant": "dashed", "fromSide": "right", "toSide": "left" },
+    { "id": "chat-llm", "from": "chat", "to": "llm", "label": "API", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "cliente-mcp", "from": "cliente", "to": "mcp", "label": "stdio", "labelAt": [985, 172], "fromSide": "bottom", "toSide": "top" },
+    { "id": "mcp-pages", "from": "mcp", "to": "pages", "label": "parquet", "labelAt": [985, 382], "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
+    { "id": "ree-worker", "from": "ree", "to": "worker", "label": "JSON" },
+    { "id": "worker-paginas", "from": "worker", "to": "paginas", "label": "snapshot", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Datos (Python)", "items": ["Dagster + dagster-dlt + dagster-dbt orquestan cada tema", "dlt con requests, openpyxl, pdfplumber, access-parser", "dbt-duckdb sobre MotherDuck; si falla un test no se publica"] },
+    { "dot": "emerald", "title": "Publicación (Node)", "items": ["Evidence: extracción incremental salvo [datos]", "Copias /en /ca /gl /eu de pages/ con i18n.js", "Pruebas i18n, estática y humo (Playwright) bloquean el deploy"] },
+    { "dot": "amber", "title": "Consumo", "items": ["DuckDB-Wasm consulta los parquets en el navegador", "/chat sin backend: WebLLM local o la clave del usuario", "MCP local con DuckDB; el Worker no usa secretos"] }
+  ]
+}
