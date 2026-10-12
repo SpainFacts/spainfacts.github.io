@@ -133,8 +133,13 @@
     }
     $: if (typeof window !== 'undefined') cargar(geoJsonUrl);
 
+    // Leaflet se carga aparte: si mientras tanto el componente se desmonta (cambio de capa o de
+    // municipio), no hay contenedor y L.map fallaría con «Map container not found»
+    let vivo = true;
     onMount(async () => {
-        L = (await import('leaflet')).default;
+        const modulo = (await import('leaflet')).default;
+        if (!vivo || !caja?.isConnected) return;
+        L = modulo;
         mapa = L.map(caja, { scrollWheelZoom: false, zoomSnap: 0.25, attributionControl: true });
         mapa.attributionControl.setPrefix(false);
         // Callejero gris del IGN (WMTS en la rejilla de Google/OSM: TileMatrix = z, TileCol = x, TileRow = y)
@@ -149,7 +154,11 @@
             mapa.setZoomAround(mapa.mouseEventToContainerPoint(e), mapa.getZoom() + (e.deltaY < 0 ? 0.5 : -0.5));
         }, { passive: false });
     });
-    onDestroy(() => mapa?.remove());
+    onDestroy(() => {
+        vivo = false;
+        mapa?.remove();
+        mapa = null;
+    });
 
     // Al cambiar de municipio se encuadra de nuevo; al cambiar de capa solo se repinta
     let encuadrado = '';
