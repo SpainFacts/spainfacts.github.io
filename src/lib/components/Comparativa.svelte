@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores";
-    import { IDIOMAS, idiomaDeRuta, t } from "../i18n.js";
+    import { IDIOMAS, enlace, idiomaDeRuta, t } from "../i18n.js";
     import { textosIndicador } from "../i18n_internacional.js";
     import { paisesReferencia } from "../paisesReferencia.js";
     $: lang = idiomaDeRuta($page.url.pathname);
@@ -69,6 +69,7 @@
             <span class="chip referencia" title="{t('comparativa.referencia', lang)} · {nombre(f)}, {f.anio}">{nombre(f)} {num(f.valor)}{anioSi(f)}</span>
         {/each}
         <span class="nota">{unidad}{espana ? ` · ${espana.anio}` : ""}{fuente ? ` · ${fuente}` : ""}</span>
+        <a class="nota mas" href={enlace("/varios/espana-en-el-mundo", lang)}>{t("comparativa.mas", lang)}</a>
     </p>
 {/if}
 
@@ -119,5 +120,9 @@
     }
     .nota {
         font-size: 11px;
+    }
+    /* enlace a España en el mundo, con todos los países y la serie histórica */
+    .mas {
+        white-space: nowrap;
     }
 </style>

@@ -1,0 +1,28 @@
+version: 2
+
+seeds:
+  - name: internacional_indicadores
+    description: >
+      Catálogo de los indicadores internacionales: una fila por ámbito ('mundo': Banco Mundial,
+      FMI, Our World in Data y OCDE, todos los países; 'europa': Eurostat, países europeos) e
+      indicador, con nombre, unidad, apartado, sentido ('positivo' si más es mejor, 'negativo'
+      si es peor, 'neutro'), decimales para mostrarlo, fuente y enlace. en_comparativa marca los
+      que salen en internacional_comparativa (las tarjetas de comparación de las páginas
+      temáticas). Para añadir un indicador: su consulta en ingestion/internacional.py y su fila
+      aquí.
+    config:
+      column_types: {ambito: varchar, indicador_id: varchar, nombre: varchar, unidad: varchar, apartado: varchar, sentido: varchar, decimales: integer, fuente: varchar, url_fuente: varchar, en_comparativa: boolean, orden: integer}
+    columns:
+      - name: ambito
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['mundo', 'europa']
+      - name: indicador_id
+        tests: [not_null]
+      - name: sentido
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['positivo', 'negativo', 'neutro']

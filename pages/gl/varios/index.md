@@ -3,7 +3,7 @@ title: Varios
 description: "Contidos complementarios: todos os indicadores, explorador de mapas, observatorios públicos e datos abertos en España e noutros países."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 0a2b52a30341
+i18n_origen: 924e6d066718
 ---
 
 # Varios
@@ -11,6 +11,18 @@ i18n_origen: 0a2b52a30341
 Consulta análises e recursos transversais que complementan os grandes temas de SpainFacts.
 
 <Grid cols=2>
+    <a href="/gl/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🇪🇺</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">España en Europa</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Máis de 70 indicadores de Eurostat: onde está España fronte á media da UE e a cada país europeo, con mapa, clasificación e evolución.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar con Europa →</span>
+    </a>
+    <a href="/gl/varios/espana-en-el-mundo" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🌍</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">España no mundo</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Máis de 50 indicadores do Banco Mundial, o FMI e a ONU: o posto de España entre uns 200 países, con mapa do mundo e series históricas.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar co mundo →</span>
+    </a>
     <a href="/gl/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Observatorios públicos</h2>

@@ -1,76 +1,222 @@
-cod_pais,iso3,eurostat,pais,es_ue,es_ocde,es_agregado
-ES,ESP,ES,España,true,true,false
-DE,DEU,DE,Alemania,true,true,false
-AT,AUT,AT,Austria,true,true,false
-BE,BEL,BE,Bélgica,true,true,false
-BG,BGR,BG,Bulgaria,true,false,false
-CY,CYP,CY,Chipre,true,false,false
-HR,HRV,HR,Croacia,true,false,false
-DK,DNK,DK,Dinamarca,true,true,false
-SK,SVK,SK,Eslovaquia,true,true,false
-SI,SVN,SI,Eslovenia,true,true,false
-EE,EST,EE,Estonia,true,true,false
-FI,FIN,FI,Finlandia,true,true,false
-FR,FRA,FR,Francia,true,true,false
-GR,GRC,EL,Grecia,true,true,false
-HU,HUN,HU,Hungría,true,true,false
-IE,IRL,IE,Irlanda,true,true,false
-IT,ITA,IT,Italia,true,true,false
-LV,LVA,LV,Letonia,true,true,false
-LT,LTU,LT,Lituania,true,true,false
-LU,LUX,LU,Luxemburgo,true,true,false
-MT,MLT,MT,Malta,true,false,false
-NL,NLD,NL,Países Bajos,true,true,false
-PL,POL,PL,Polonia,true,true,false
-PT,PRT,PT,Portugal,true,true,false
-CZ,CZE,CZ,Chequia,true,true,false
-RO,ROU,RO,Rumanía,true,false,false
-SE,SWE,SE,Suecia,true,true,false
-GB,GBR,UK,Reino Unido,false,true,false
-NO,NOR,NO,Noruega,false,true,false
-CH,CHE,CH,Suiza,false,true,false
-IS,ISL,IS,Islandia,false,true,false
-LI,LIE,LI,Liechtenstein,false,false,false
-TR,TUR,TR,Turquía,false,true,false
-RS,SRB,RS,Serbia,false,false,false
-ME,MNE,ME,Montenegro,false,false,false
-MK,MKD,MK,Macedonia del Norte,false,false,false
-AL,ALB,AL,Albania,false,false,false
-BA,BIH,BA,Bosnia y Herzegovina,false,false,false
-XK,XKX,XK,Kosovo,false,false,false
-UA,UKR,UA,Ucrania,false,false,false
-MD,MDA,MD,Moldavia,false,false,false
-GE,GEO,GE,Georgia,false,false,false
-AM,ARM,AM,Armenia,false,false,false
-AZ,AZE,AZ,Azerbaiyán,false,false,false
-BY,BLR,BY,Bielorrusia,false,false,false
-RU,RUS,RU,Rusia,false,false,false
-US,USA,US,Estados Unidos,false,true,false
-CA,CAN,CA,Canadá,false,true,false
-MX,MEX,MX,México,false,true,false
-CL,CHL,CL,Chile,false,true,false
-CO,COL,CO,Colombia,false,true,false
-CR,CRI,CR,Costa Rica,false,true,false
-AR,ARG,AR,Argentina,false,false,false
-BR,BRA,BR,Brasil,false,false,false
-PE,PER,PE,Perú,false,false,false
-JP,JPN,JP,Japón,false,true,false
-KR,KOR,KR,Corea del Sur,false,true,false
-AU,AUS,AU,Australia,false,true,false
-NZ,NZL,NZ,Nueva Zelanda,false,true,false
-IL,ISR,IL,Israel,false,true,false
-CN,CHN,CN,China,false,false,false
-IN,IND,IN,India,false,false,false
-ID,IDN,ID,Indonesia,false,false,false
-ZA,ZAF,ZA,Sudáfrica,false,false,false
-SA,SAU,SA,Arabia Saudí,false,false,false
-MA,MAR,MA,Marruecos,false,false,false
-DZ,DZA,DZ,Argelia,false,false,false
-EG,EGY,EG,Egipto,false,false,false
-NG,NGA,NG,Nigeria,false,false,false
-VN,VNM,VN,Vietnam,false,false,false
-TH,THA,TH,Tailandia,false,false,false
-EU27_2020,EUU,EU27_2020,Unión Europea (27),false,false,true
-EA,EMU,EA,Zona euro,false,false,true
-OECD,OED,OECD,OCDE,false,false,true
-WLD,WLD,WORLD,Mundo,false,false,true
+cod_pais,iso3,eurostat,pais,es_ue,es_ocde,es_agregado,region,es_europa
+ES,ESP,ES,España,true,true,false,Europa y Asia central,true
+DE,DEU,DE,Alemania,true,true,false,Europa y Asia central,true
+AT,AUT,AT,Austria,true,true,false,Europa y Asia central,true
+BE,BEL,BE,Bélgica,true,true,false,Europa y Asia central,true
+BG,BGR,BG,Bulgaria,true,false,false,Europa y Asia central,true
+CY,CYP,CY,Chipre,true,false,false,Europa y Asia central,true
+HR,HRV,HR,Croacia,true,false,false,Europa y Asia central,true
+DK,DNK,DK,Dinamarca,true,true,false,Europa y Asia central,true
+SK,SVK,SK,Eslovaquia,true,true,false,Europa y Asia central,true
+SI,SVN,SI,Eslovenia,true,true,false,Europa y Asia central,true
+EE,EST,EE,Estonia,true,true,false,Europa y Asia central,true
+FI,FIN,FI,Finlandia,true,true,false,Europa y Asia central,true
+FR,FRA,FR,Francia,true,true,false,Europa y Asia central,true
+GR,GRC,EL,Grecia,true,true,false,Europa y Asia central,true
+HU,HUN,HU,Hungría,true,true,false,Europa y Asia central,true
+IE,IRL,IE,Irlanda,true,true,false,Europa y Asia central,true
+IT,ITA,IT,Italia,true,true,false,Europa y Asia central,true
+LV,LVA,LV,Letonia,true,true,false,Europa y Asia central,true
+LT,LTU,LT,Lituania,true,true,false,Europa y Asia central,true
+LU,LUX,LU,Luxemburgo,true,true,false,Europa y Asia central,true
+MT,MLT,MT,Malta,true,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),true
+NL,NLD,NL,Países Bajos,true,true,false,Europa y Asia central,true
+PL,POL,PL,Polonia,true,true,false,Europa y Asia central,true
+PT,PRT,PT,Portugal,true,true,false,Europa y Asia central,true
+CZ,CZE,CZ,Chequia,true,true,false,Europa y Asia central,true
+RO,ROU,RO,Rumanía,true,false,false,Europa y Asia central,true
+SE,SWE,SE,Suecia,true,true,false,Europa y Asia central,true
+GB,GBR,UK,Reino Unido,false,true,false,Europa y Asia central,true
+NO,NOR,NO,Noruega,false,true,false,Europa y Asia central,true
+CH,CHE,CH,Suiza,false,true,false,Europa y Asia central,true
+IS,ISL,IS,Islandia,false,true,false,Europa y Asia central,true
+LI,LIE,LI,Liechtenstein,false,false,false,Europa y Asia central,true
+TR,TUR,TR,Turquía,false,true,false,Europa y Asia central,true
+RS,SRB,RS,Serbia,false,false,false,Europa y Asia central,true
+ME,MNE,ME,Montenegro,false,false,false,Europa y Asia central,true
+MK,MKD,MK,Macedonia del Norte,false,false,false,Europa y Asia central,true
+AL,ALB,AL,Albania,false,false,false,Europa y Asia central,true
+BA,BIH,BA,Bosnia y Herzegovina,false,false,false,Europa y Asia central,true
+XK,XKX,XK,Kosovo,false,false,false,Europa y Asia central,true
+UA,UKR,UA,Ucrania,false,false,false,Europa y Asia central,true
+MD,MDA,MD,Moldavia,false,false,false,Europa y Asia central,true
+GE,GEO,GE,Georgia,false,false,false,Europa y Asia central,true
+AM,ARM,AM,Armenia,false,false,false,Europa y Asia central,true
+AZ,AZE,AZ,Azerbaiyán,false,false,false,Europa y Asia central,true
+BY,BLR,BY,Bielorrusia,false,false,false,Europa y Asia central,true
+RU,RUS,RU,Rusia,false,false,false,Europa y Asia central,true
+US,USA,US,Estados Unidos,false,true,false,América del Norte,false
+CA,CAN,CA,Canadá,false,true,false,América del Norte,false
+MX,MEX,MX,México,false,true,false,América Latina y Caribe,false
+CL,CHL,CL,Chile,false,true,false,América Latina y Caribe,false
+CO,COL,CO,Colombia,false,true,false,América Latina y Caribe,false
+CR,CRI,CR,Costa Rica,false,true,false,América Latina y Caribe,false
+AR,ARG,AR,Argentina,false,false,false,América Latina y Caribe,false
+BR,BRA,BR,Brasil,false,false,false,América Latina y Caribe,false
+PE,PER,PE,Perú,false,false,false,América Latina y Caribe,false
+JP,JPN,JP,Japón,false,true,false,Asia oriental y Pacífico,false
+KR,KOR,KR,Corea del Sur,false,true,false,Asia oriental y Pacífico,false
+AU,AUS,AU,Australia,false,true,false,Asia oriental y Pacífico,false
+NZ,NZL,NZ,Nueva Zelanda,false,true,false,Asia oriental y Pacífico,false
+IL,ISR,IL,Israel,false,true,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+CN,CHN,CN,China,false,false,false,Asia oriental y Pacífico,false
+IN,IND,IN,India,false,false,false,Asia meridional,false
+ID,IDN,ID,Indonesia,false,false,false,Asia oriental y Pacífico,false
+ZA,ZAF,ZA,Sudáfrica,false,false,false,África subsahariana,false
+SA,SAU,SA,Arabia Saudí,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+MA,MAR,MA,Marruecos,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+DZ,DZA,DZ,Argelia,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+EG,EGY,EG,Egipto,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+NG,NGA,NG,Nigeria,false,false,false,África subsahariana,false
+VN,VNM,VN,Vietnam,false,false,false,Asia oriental y Pacífico,false
+TH,THA,TH,Tailandia,false,false,false,Asia oriental y Pacífico,false
+EU27_2020,EUU,EU27_2020,Unión Europea (27),false,false,true,,false
+EA,EMU,EA,Zona euro,false,false,true,,false
+OECD,OED,OECD,OCDE,false,false,true,,false
+WLD,WLD,WORLD,Mundo,false,false,true,,false
+AF,AFG,AF,Afganistán,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+AD,AND,AD,Andorra,false,false,false,Europa y Asia central,true
+AO,AGO,AO,Angola,false,false,false,África subsahariana,false
+AG,ATG,AG,Antigua y Barbuda,false,false,false,América Latina y Caribe,false
+AW,ABW,AW,Aruba,false,false,false,América Latina y Caribe,false
+BS,BHS,BS,Bahamas,false,false,false,América Latina y Caribe,false
+BD,BGD,BD,Bangladés,false,false,false,Asia meridional,false
+BB,BRB,BB,Barbados,false,false,false,América Latina y Caribe,false
+BH,BHR,BH,Baréin,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+BZ,BLZ,BZ,Belice,false,false,false,América Latina y Caribe,false
+BJ,BEN,BJ,Benín,false,false,false,África subsahariana,false
+BM,BMU,BM,Bermudas,false,false,false,América del Norte,false
+BO,BOL,BO,Bolivia,false,false,false,América Latina y Caribe,false
+BW,BWA,BW,Botsuana,false,false,false,África subsahariana,false
+BN,BRN,BN,Brunéi,false,false,false,Asia oriental y Pacífico,false
+BF,BFA,BF,Burkina Faso,false,false,false,África subsahariana,false
+BI,BDI,BI,Burundi,false,false,false,África subsahariana,false
+BT,BTN,BT,Bután,false,false,false,Asia meridional,false
+CV,CPV,CV,Cabo Verde,false,false,false,África subsahariana,false
+KH,KHM,KH,Camboya,false,false,false,Asia oriental y Pacífico,false
+CM,CMR,CM,Camerún,false,false,false,África subsahariana,false
+QA,QAT,QA,Catar,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+TD,TCD,TD,Chad,false,false,false,África subsahariana,false
+KM,COM,KM,Comoras,false,false,false,África subsahariana,false
+CG,COG,CG,Congo,false,false,false,África subsahariana,false
+KP,PRK,KP,Corea del Norte,false,false,false,Asia oriental y Pacífico,false
+CI,CIV,CI,Costa de Marfil,false,false,false,África subsahariana,false
+CU,CUB,CU,Cuba,false,false,false,América Latina y Caribe,false
+CW,CUW,CW,Curazao,false,false,false,América Latina y Caribe,false
+DM,DMA,DM,Dominica,false,false,false,América Latina y Caribe,false
+EC,ECU,EC,Ecuador,false,false,false,América Latina y Caribe,false
+SV,SLV,SV,El Salvador,false,false,false,América Latina y Caribe,false
+AE,ARE,AE,Emiratos Árabes Unidos,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+ER,ERI,ER,Eritrea,false,false,false,África subsahariana,false
+SZ,SWZ,SZ,Esuatini,false,false,false,África subsahariana,false
+ET,ETH,ET,Etiopía,false,false,false,África subsahariana,false
+PH,PHL,PH,Filipinas,false,false,false,Asia oriental y Pacífico,false
+FJ,FJI,FJ,Fiyi,false,false,false,Asia oriental y Pacífico,false
+GA,GAB,GA,Gabón,false,false,false,África subsahariana,false
+GM,GMB,GM,Gambia,false,false,false,África subsahariana,false
+GH,GHA,GH,Ghana,false,false,false,África subsahariana,false
+GI,GIB,GI,Gibraltar,false,false,false,Europa y Asia central,true
+GD,GRD,GD,Granada,false,false,false,América Latina y Caribe,false
+GL,GRL,GL,Groenlandia,false,false,false,Europa y Asia central,false
+GU,GUM,GU,Guam,false,false,false,Asia oriental y Pacífico,false
+GT,GTM,GT,Guatemala,false,false,false,América Latina y Caribe,false
+GN,GIN,GN,Guinea,false,false,false,África subsahariana,false
+GQ,GNQ,GQ,Guinea Ecuatorial,false,false,false,África subsahariana,false
+GW,GNB,GW,Guinea-Bisáu,false,false,false,África subsahariana,false
+GY,GUY,GY,Guyana,false,false,false,América Latina y Caribe,false
+HT,HTI,HT,Haití,false,false,false,América Latina y Caribe,false
+HN,HND,HN,Honduras,false,false,false,América Latina y Caribe,false
+HK,HKG,HK,Hong Kong,false,false,false,Asia oriental y Pacífico,false
+IQ,IRQ,IQ,Irak,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+IR,IRN,IR,Irán,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+IM,IMN,IM,Isla de Man,false,false,false,Europa y Asia central,true
+KY,CYM,KY,Islas Caimán,false,false,false,América Latina y Caribe,false
+FO,FRO,FO,Islas Feroe,false,false,false,Europa y Asia central,true
+MP,MNP,MP,Islas Marianas del Norte,false,false,false,Asia oriental y Pacífico,false
+MH,MHL,MH,Islas Marshall,false,false,false,Asia oriental y Pacífico,false
+SB,SLB,SB,Islas Salomón,false,false,false,Asia oriental y Pacífico,false
+TC,TCA,TC,Islas Turcas y Caicos,false,false,false,América Latina y Caribe,false
+VG,VGB,VG,Islas Vírgenes Británicas,false,false,false,América Latina y Caribe,false
+VI,VIR,VI,Islas Vírgenes de EE. UU.,false,false,false,América Latina y Caribe,false
+JG,CHI,JG,Islas del Canal,false,false,false,Europa y Asia central,false
+JM,JAM,JM,Jamaica,false,false,false,América Latina y Caribe,false
+JO,JOR,JO,Jordania,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+KZ,KAZ,KZ,Kazajistán,false,false,false,Europa y Asia central,false
+KE,KEN,KE,Kenia,false,false,false,África subsahariana,false
+KG,KGZ,KG,Kirguistán,false,false,false,Europa y Asia central,false
+KI,KIR,KI,Kiribati,false,false,false,Asia oriental y Pacífico,false
+KW,KWT,KW,Kuwait,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+LA,LAO,LA,Laos,false,false,false,Asia oriental y Pacífico,false
+LS,LSO,LS,Lesoto,false,false,false,África subsahariana,false
+LR,LBR,LR,Liberia,false,false,false,África subsahariana,false
+LY,LBY,LY,Libia,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+LB,LBN,LB,Líbano,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+MO,MAC,MO,Macao,false,false,false,Asia oriental y Pacífico,false
+MG,MDG,MG,Madagascar,false,false,false,África subsahariana,false
+MY,MYS,MY,Malasia,false,false,false,Asia oriental y Pacífico,false
+MW,MWI,MW,Malaui,false,false,false,África subsahariana,false
+MV,MDV,MV,Maldivas,false,false,false,Asia meridional,false
+ML,MLI,ML,Mali,false,false,false,África subsahariana,false
+MU,MUS,MU,Mauricio,false,false,false,África subsahariana,false
+MR,MRT,MR,Mauritania,false,false,false,África subsahariana,false
+FM,FSM,FM,Micronesia,false,false,false,Asia oriental y Pacífico,false
+MN,MNG,MN,Mongolia,false,false,false,Asia oriental y Pacífico,false
+MZ,MOZ,MZ,Mozambique,false,false,false,África subsahariana,false
+MM,MMR,MM,Myanmar,false,false,false,Asia oriental y Pacífico,false
+MC,MCO,MC,Mónaco,false,false,false,Europa y Asia central,true
+NA,NAM,NA,Namibia,false,false,false,África subsahariana,false
+NR,NRU,NR,Nauru,false,false,false,Asia oriental y Pacífico,false
+NP,NPL,NP,Nepal,false,false,false,Asia meridional,false
+NI,NIC,NI,Nicaragua,false,false,false,América Latina y Caribe,false
+NC,NCL,NC,Nueva Caledonia,false,false,false,Asia oriental y Pacífico,false
+NE,NER,NE,Níger,false,false,false,África subsahariana,false
+OM,OMN,OM,Omán,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+PK,PAK,PK,Pakistán,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+PW,PLW,PW,Palaos,false,false,false,Asia oriental y Pacífico,false
+PS,PSE,PS,Palestina,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+PA,PAN,PA,Panamá,false,false,false,América Latina y Caribe,false
+PG,PNG,PG,Papúa Nueva Guinea,false,false,false,Asia oriental y Pacífico,false
+PY,PRY,PY,Paraguay,false,false,false,América Latina y Caribe,false
+PF,PYF,PF,Polinesia Francesa,false,false,false,Asia oriental y Pacífico,false
+PR,PRI,PR,Puerto Rico,false,false,false,América Latina y Caribe,false
+CF,CAF,CF,República Centroafricana,false,false,false,África subsahariana,false
+CD,COD,CD,República Democrática del Congo,false,false,false,África subsahariana,false
+DO,DOM,DO,República Dominicana,false,false,false,América Latina y Caribe,false
+RW,RWA,RW,Ruanda,false,false,false,África subsahariana,false
+WS,WSM,WS,Samoa,false,false,false,Asia oriental y Pacífico,false
+AS,ASM,AS,Samoa Americana,false,false,false,Asia oriental y Pacífico,false
+KN,KNA,KN,San Cristóbal y Nieves,false,false,false,América Latina y Caribe,false
+SM,SMR,SM,San Marino,false,false,false,Europa y Asia central,true
+MF,MAF,MF,San Martín (Francia),false,false,false,América Latina y Caribe,false
+SX,SXM,SX,San Martín (Países Bajos),false,false,false,América Latina y Caribe,false
+VC,VCT,VC,San Vicente y las Granadinas,false,false,false,América Latina y Caribe,false
+LC,LCA,LC,Santa Lucía,false,false,false,América Latina y Caribe,false
+ST,STP,ST,Santo Tomé y Príncipe,false,false,false,África subsahariana,false
+SN,SEN,SN,Senegal,false,false,false,África subsahariana,false
+SC,SYC,SC,Seychelles,false,false,false,África subsahariana,false
+SL,SLE,SL,Sierra Leona,false,false,false,África subsahariana,false
+SG,SGP,SG,Singapur,false,false,false,Asia oriental y Pacífico,false
+SY,SYR,SY,Siria,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+SO,SOM,SO,Somalia,false,false,false,África subsahariana,false
+LK,LKA,LK,Sri Lanka,false,false,false,Asia meridional,false
+SD,SDN,SD,Sudán,false,false,false,África subsahariana,false
+SS,SSD,SS,Sudán del Sur,false,false,false,África subsahariana,false
+SR,SUR,SR,Surinam,false,false,false,América Latina y Caribe,false
+TZ,TZA,TZ,Tanzania,false,false,false,África subsahariana,false
+TJ,TJK,TJ,Tayikistán,false,false,false,Europa y Asia central,false
+TL,TLS,TL,Timor Oriental,false,false,false,Asia oriental y Pacífico,false
+TG,TGO,TG,Togo,false,false,false,África subsahariana,false
+TO,TON,TO,Tonga,false,false,false,Asia oriental y Pacífico,false
+TT,TTO,TT,Trinidad y Tobago,false,false,false,América Latina y Caribe,false
+TM,TKM,TM,Turkmenistán,false,false,false,Europa y Asia central,false
+TV,TUV,TV,Tuvalu,false,false,false,Asia oriental y Pacífico,false
+TN,TUN,TN,Túnez,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+UG,UGA,UG,Uganda,false,false,false,África subsahariana,false
+UY,URY,UY,Uruguay,false,false,false,América Latina y Caribe,false
+UZ,UZB,UZ,Uzbekistán,false,false,false,Europa y Asia central,false
+VU,VUT,VU,Vanuatu,false,false,false,Asia oriental y Pacífico,false
+VE,VEN,VE,Venezuela,false,false,false,América Latina y Caribe,false
+YE,YEM,YE,Yemen,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+DJ,DJI,DJ,Yibuti,false,false,false,Oriente Medio y norte de África (con Afganistán y Pakistán),false
+ZM,ZMB,ZM,Zambia,false,false,false,África subsahariana,false
+ZW,ZWE,ZW,Zimbabue,false,false,false,África subsahariana,false

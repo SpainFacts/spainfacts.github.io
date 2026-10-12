@@ -10,6 +10,18 @@ og:
 Consulta análisis y recursos transversales que complementan los grandes temas de SpainFacts.
 
 <Grid cols=2>
+    <a href="/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🇪🇺</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">España en Europa</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Más de 70 indicadores de Eurostat: dónde está España frente a la media de la UE y a cada país europeo, con mapa, clasificación y evolución.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar con Europa →</span>
+    </a>
+    <a href="/varios/espana-en-el-mundo" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🌍</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">España en el mundo</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Más de 50 indicadores del Banco Mundial, el FMI y la ONU: el puesto de España entre unos 200 países, con mapa del mundo y series históricas.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar con el mundo →</span>
+    </a>
     <a href="/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Observatorios públicos</h2>

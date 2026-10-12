@@ -2,18 +2,16 @@ version: 2
 
 sources:
   - name: raw_internacional
-    description: "Comparativa internacional: Banco Mundial (WDI), FMI (WEO), Our World in Data (Ember y ONU Turismo), Eurostat y AIE (coches eléctricos), para España, Francia, Portugal, Marruecos, EE. UU., China, Alemania, Italia, UE y OCDE, más los países de referencia Noruega, Dinamarca, Suecia, Países Bajos, Grecia, Japón, Corea del Sur e Israel (ingestion/internacional.py)"
+    description: "España frente al mundo y a Europa: Banco Mundial (WDI), FMI (WEO), Our World in Data (Ember, ONU Turismo, World Happiness Report, PNUD y coches eléctricos de la AIE), Eurostat y OCDE (vivienda social), todos los países que publica cada fuente (ingestion/internacional.py)"
     schema: raw
     tables:
       - name: internacional_banco_mundial
-        description: "Banco Mundial WDI, formato largo: indicador_id, cod_indicador (WDI), cod_pais (ISO3 o EUU/OED), anio, valor. EUU y OED son agregados ponderados del Banco Mundial."
+        description: "Banco Mundial WDI, formato largo: indicador_id, cod_indicador (WDI), cod_pais (ISO3 de todos los países o los agregados WLD, EUU, EMU y OED), anio, valor. Los agregados están ponderados por el Banco Mundial."
       - name: internacional_fmi
-        description: "FMI WEO (DataMapper GGXWDG_NGDP): deuda bruta de las AAPP en % del PIB. Incluye previsiones (se descartan en staging). EUU = agregado 'EU' del FMI."
+        description: "FMI WEO (DataMapper): deuda bruta (GGXWDG_NGDP, deuda_publica) y saldo (GGXCNL_NGDP, saldo_publico) de las AAPP en % del PIB, todos los países y grupos del FMI. Incluye previsiones (se descartan en staging). EUU = agregado 'EU' del FMI."
       - name: internacional_owid
-        description: "Our World in Data: % de electricidad renovable (Ember) y llegadas de turistas internacionales con pernoctación (ONU Turismo). EUU = 'European Union (27)', OED = 'OECD (Ember)'."
+        description: "Our World in Data, todos los países (ISO3) y los agregados EUU, OED y WLD: % de electricidad renovable (Ember), llegadas de turistas internacionales con pernoctación (ONU Turismo), satisfacción con la vida (escalera de Cantril), índice de desarrollo humano (PNUD) y cuota de coches eléctricos en las ventas de turismos (AIE)."
       - name: internacional_eurostat
-        description: "Eurostat, países europeos y UE-27 (Grecia = EL): tasa de riesgo de pobreza (ilc_li02, 60 % de la mediana; año de encuesta), % de 25-64 años con estudios terciarios (edat_lfse_03) y consumo final de energía total y de electricidad (nrg_bal_c, FC_E, ktep; consumo_final_energia y consumo_final_electricidad)."
-      - name: internacional_aie
-        description: "AIE Global EV Data Explorer (CC BY 4.0): cuota de coches eléctricos (BEV + PHEV) en las ventas de turismos nuevos, en %. EUU = 'European Union'. Sin OCDE ni Marruecos."
+        description: "Eurostat, unos 70 indicadores (EUROSTAT_CONSULTAS en ingestion/internacional.py) de todos los países y agregados que publica cada tabla: indicador_id, cod_indicador (tabla), geo (código de Eurostat: EL = Grecia, UK = Reino Unido, EU27_2020...), anio, periodo (2024 o 2024-S1 en las semestrales) y valor. Los indicador_id acabados en _aux y consumo_final_* solo sirven para calcular otros en staging."
       - name: internacional_ocde_vivienda
         description: "OCDE, Affordable Housing Database, PH4.2: viviendas sociales en alquiler en % del parque total de viviendas (vivienda_social_pct), hacia 2010 y hacia 2022 (año real de cada país); EUU y OED son las medias de la OCDE con el último dato de cada país (anio = 2022 por convención). Incluye Austria (AUT) y Reino Unido (GBR, solo Inglaterra)."

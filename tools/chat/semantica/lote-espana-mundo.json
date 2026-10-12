@@ -1,0 +1,96 @@
+[
+  {
+    "tabla": "internacional_mundo",
+    "usar": true,
+    "tema": "Todos los países del mundo comparados con España en unos 55 indicadores (riqueza, empleo, población, salud, educación, desigualdad, seguridad, energía, clima) año a año",
+    "preguntas": [
+      "¿En qué puesto del mundo está España en esperanza de vida?",
+      "¿Qué países tienen más PIB por habitante que España?",
+      "¿Cómo ha evolucionado la fecundidad de España frente a la media mundial?",
+      "¿Qué país tiene más mujeres en el parlamento?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador (su unidad depende del indicador, ver internacional_resumen)",
+        "unidad": "según el indicador (%, años, dólares PPA, por 100.000 habitantes...)",
+        "tipo": "ratio",
+        "principal": true
+      }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais_extranjero"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [
+      { "columna": "indicador_id", "nombre": "indicador", "total": null },
+      { "columna": "region", "nombre": "región del mundo", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Formato largo: siempre hay que filtrar un indicador_id (cada uno tiene su unidad; nombre, unidad y sentido en internacional_resumen con ambito = 'mundo'). Agregados (es_agregado): WLD el mundo, EU27_2020 la UE, EA la zona euro y OECD la OCDE, ponderados por la fuente. Para clasificar países, excluir los agregados y usar un mismo año. Nunca sumar valores entre países."
+  },
+  {
+    "tabla": "internacional_europa",
+    "usar": true,
+    "tema": "Los países europeos comparados con España en unos 77 indicadores de Eurostat (economía, cuentas públicas, empleo, pobreza, educación, población, salud, vivienda, energía) año a año",
+    "preguntas": [
+      "¿Qué país de la UE tiene más paro?",
+      "¿Cómo ha evolucionado la pobreza infantil en España frente a la media de la UE?",
+      "¿Está la deuda pública de España por encima de la de Italia?",
+      "¿En qué país europeo se emancipan antes los jóvenes?"
+    ],
+    "medidas": [
+      {
+        "columna": "valor",
+        "nombre": "valor del indicador (su unidad depende del indicador, ver internacional_resumen)",
+        "unidad": "según el indicador (%, % del PIB, años, PPA, índice UE-27 = 100...)",
+        "tipo": "ratio",
+        "principal": true
+      }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais_extranjero"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [
+      { "columna": "indicador_id", "nombre": "indicador", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Formato largo: siempre hay que filtrar un indicador_id (nombre, unidad y sentido en internacional_resumen con ambito = 'europa'). Mismas definiciones de Eurostat para todos los países; EU27_2020 es la media de la UE-27 (es_agregado). es_ue marca los 27. Nunca sumar valores entre países."
+  },
+  {
+    "tabla": "internacional_resumen",
+    "usar": true,
+    "tema": "Cómo queda España en cada indicador internacional: su valor, la media de la UE y del mundo, su puesto y el mejor país",
+    "preguntas": [
+      "¿En qué indicadores está España peor que la media de la UE?",
+      "¿En qué está España entre los mejores de Europa?",
+      "¿Qué puesto ocupa España en paro en la UE?",
+      "¿Qué país es el mejor en esperanza de vida?"
+    ],
+    "medidas": [
+      { "columna": "valor_espana", "nombre": "valor de España en el año de referencia", "unidad": "según el indicador (columna unidad)", "tipo": "ratio", "principal": true },
+      { "columna": "valor_ue", "nombre": "media de la Unión Europea", "unidad": "según el indicador (columna unidad)", "tipo": "ratio" },
+      { "columna": "valor_mundo", "nombre": "media mundial", "unidad": "según el indicador (columna unidad)", "tipo": "ratio" },
+      { "columna": "puesto", "nombre": "puesto de España (1 = el mejor)", "unidad": "puesto", "tipo": "ratio" },
+      { "columna": "puesto_ue", "nombre": "puesto de España en la UE-27 (1 = el mejor)", "unidad": "puesto", "tipo": "ratio" }
+    ],
+    "tiempo": { "columna": "anio_ref", "grano": "anual", "parcial": false },
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "ambito", "nombre": "ámbito de la comparación (mundo o europa)", "total": null },
+      { "columna": "apartado", "nombre": "apartado temático", "total": null },
+      { "columna": "nombre", "nombre": "indicador", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Una fila por ámbito ('mundo': Banco Mundial y otras fuentes globales; 'europa': Eurostat) e indicador. puesto 1 = el mejor según sentido; en los neutros, el valor más alto. anio_ref es el último año con dato de España y de la mayoría de los países."
+  }
+]

@@ -45,3 +45,114 @@ models:
         tests: [not_null]
       - name: cod_pais
         tests: [not_null]
+  - name: internacional_mundo
+    description: >
+      España en el mundo: series anuales (desde 1990) de todos los países y de los agregados
+      Mundo (WLD), UE-27 (EU27_2020), zona euro (EA) y OCDE (OECD) en los indicadores de ámbito
+      'mundo' del seed internacional_indicadores (Banco Mundial, FMI, Our World in Data y
+      OCDE). Formato largo: indicador_id, país, año y valor. El nombre, la unidad, el sentido
+      y la fuente de cada indicador están en internacional_resumen (ambito = 'mundo'). Los
+      agregados del Banco Mundial están ponderados (no son medias simples de países).
+    columns:
+      - name: indicador_id
+        description: "Indicador (ver internacional_resumen con ambito = 'mundo')."
+        tests: [not_null]
+      - name: cod_pais
+        description: "ISO 3166-1 alfa-2 (seed paises_iso); EU27_2020, EA, OECD y WLD los agregados."
+        tests: [not_null]
+      - name: pais
+        description: "Nombre en castellano."
+      - name: region
+        description: "Región del Banco Mundial (vacía en los agregados)."
+      - name: es_europa
+        description: "País europeo."
+      - name: es_ue
+        description: "Miembro de la UE-27."
+      - name: es_agregado
+        description: "Agregado (Mundo, UE, zona euro, OCDE), no un país."
+      - name: anio
+        tests: [not_null]
+      - name: valor
+        description: "Valor en la unidad del indicador."
+        tests: [not_null]
+  - name: internacional_europa
+    description: >
+      España en Europa: series anuales (desde 1990) de Eurostat de todos los países europeos
+      que publica (UE-27, AELC, Reino Unido y candidatos) y de la UE-27 (EU27_2020) en los
+      indicadores de ámbito 'europa' del seed internacional_indicadores: mismas definiciones
+      para todos los países. Formato largo: indicador_id, país, año y valor. El nombre, la
+      unidad, el sentido y la fuente de cada indicador están en internacional_resumen
+      (ambito = 'europa'). Las semestrales (precio de la luz, salario mínimo) son la media de
+      los dos semestres de cada año.
+    columns:
+      - name: indicador_id
+        description: "Indicador (ver internacional_resumen con ambito = 'europa')."
+        tests: [not_null]
+      - name: cod_pais
+        description: "ISO 3166-1 alfa-2 (Grecia = GR, Reino Unido = GB); EU27_2020 la UE-27."
+        tests: [not_null]
+      - name: pais
+        description: "Nombre en castellano."
+      - name: es_ue
+        description: "Miembro de la UE-27."
+      - name: es_agregado
+        description: "La UE-27 (EU27_2020), no un país."
+      - name: anio
+        tests: [not_null]
+      - name: valor
+        description: "Valor en la unidad del indicador."
+        tests: [not_null]
+  - name: internacional_resumen
+    description: >
+      Cómo queda España en cada indicador internacional: una fila por ámbito ('mundo' o
+      'europa') e indicador, con el catálogo (nombre, unidad, apartado, sentido, decimales,
+      fuente) y, en el año de referencia (anio_ref: el último con dato de España y de al menos
+      el 70 % de los países), su valor, el de la UE-27 y el del mundo, su puesto entre los
+      países con dato (en Europa, entre los europeos; puesto_ue, entre los de la UE-27), el
+      mejor país y los valores de España y la UE diez años antes. puesto 1 = el mejor (el más
+      alto si sentido = 'positivo', el más bajo si 'negativo'); en los 'neutro', 1 = el más alto.
+    columns:
+      - name: ambito
+        tests: [not_null]
+      - name: indicador_id
+        tests: [not_null]
+      - name: nombre
+      - name: unidad
+      - name: apartado
+        description: "Economía, Cuentas públicas, Empleo, Desigualdad, Educación, Población, Salud, Vivienda, Energía y clima, Movilidad, Seguridad o Sociedad."
+      - name: sentido
+        description: "'positivo' (más es mejor), 'negativo' (más es peor) o 'neutro'."
+      - name: decimales
+        description: "Decimales con los que se muestra."
+      - name: fuente
+      - name: url_fuente
+      - name: orden
+        description: "Orden de presentación dentro del ámbito."
+      - name: anio_inicio
+        description: "Primer año con dato de España."
+      - name: anio_ref
+        description: "Año de referencia: el último con dato de España y de al menos el 70 % de los países."
+      - name: anio_ultimo_espana
+        description: "Último año con dato de España (puede ser posterior a anio_ref)."
+      - name: valor_espana
+        description: "España en anio_ref."
+      - name: valor_ue
+        description: "UE-27 en anio_ref (vacío si la fuente no da el agregado ese año)."
+      - name: valor_mundo
+        description: "Mundo en anio_ref (solo ámbito 'mundo')."
+      - name: puesto
+        description: "Puesto de España en anio_ref (1 = el mejor; en los neutros, el más alto)."
+      - name: n_paises
+        description: "Países con dato en anio_ref."
+      - name: puesto_ue
+        description: "Puesto de España entre los países de la UE-27 con dato."
+      - name: n_ue
+        description: "Países de la UE-27 con dato en anio_ref."
+      - name: mejor_cod_pais
+        description: "País en el puesto 1."
+      - name: mejor_pais
+      - name: mejor_valor
+      - name: valor_espana_hace_10
+        description: "España diez años antes de anio_ref."
+      - name: valor_ue_hace_10
+        description: "UE-27 diez años antes de anio_ref."
