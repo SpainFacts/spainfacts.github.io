@@ -3,7 +3,7 @@ title: Altres
 description: "Continguts complementaris: tots els indicadors, explorador de mapes, observatoris públics i dades obertes a Espanya i en altres països."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 924e6d066718
+i18n_origen: c9a30af5dadd
 ---
 
 # Altres
@@ -22,6 +22,12 @@ Consulta anàlisis i recursos transversals que complementen els grans temes de S
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Espanya al món</h2>
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Més de 50 indicadors del Banc Mundial, l'FMI i l'ONU: la posició d'Espanya entre uns 200 països, amb mapa del món i sèries històriques.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Compara amb el món →</span>
+    </a>
+    <a href="/ca/varios/ciudades" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🏙️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Ciutats d'Espanya i d'Europa</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Unes 120 ciutats espanyoles davant 900 d'europees: atur, habitatge, població, trànsit i l'enquesta europea de qualitat de vida, amb mapa i fitxa de cada ciutat.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Compara ciutats →</span>
     </a>
     <a href="/ca/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>

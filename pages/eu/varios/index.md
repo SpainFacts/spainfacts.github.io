@@ -3,7 +3,7 @@ title: Bestelakoak
 description: "Eduki osagarriak: adierazle guztiak, mapen arakatzailea, behatoki publikoak eta datu irekiak Espainian eta beste herrialdeetan."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 924e6d066718
+i18n_origen: c9a30af5dadd
 ---
 
 # Bestelakoak
@@ -22,6 +22,12 @@ Kontsultatu SpainFactsen gai handiak osatzen dituzten zeharkako azterketak eta b
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Espainia munduan</h2>
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Munduko Bankuaren, NDFren eta NBEren 50 adierazle baino gehiago: Espainiaren postua 200 herrialde inguruen artean, munduko mapa eta serie historikoekin.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Munduarekin alderatu →</span>
+    </a>
+    <a href="/eu/varios/ciudades" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🏙️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Espainiako eta Europako hiriak</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Espainiako 120 hiri inguru Europako 900ekin alderatuta: langabezia, etxebizitza, biztanleria, trafikoa eta bizi-kalitateari buruzko Europako inkesta, mapa eta hiri bakoitzaren fitxarekin.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Hiriak alderatu →</span>
     </a>
     <a href="/eu/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>

@@ -22,6 +22,12 @@ Consulta análisis y recursos transversales que complementan los grandes temas d
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Más de 50 indicadores del Banco Mundial, el FMI y la ONU: el puesto de España entre unos 200 países, con mapa del mundo y series históricas.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar con el mundo →</span>
     </a>
+    <a href="/varios/ciudades" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🏙️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Ciudades de España y de Europa</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Unas 120 ciudades españolas frente a 900 europeas: paro, vivienda, población, tráfico y la encuesta europea de calidad de vida, con mapa y ficha de cada ciudad.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Comparar ciudades →</span>
+    </a>
     <a href="/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Observatorios públicos</h2>

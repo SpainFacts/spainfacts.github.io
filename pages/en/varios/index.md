@@ -3,7 +3,7 @@ title: Miscellaneous
 description: "Supplementary content: all indicators, a map explorer, public observatories and open data in Spain and other countries."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 924e6d066718
+i18n_origen: c9a30af5dadd
 ---
 
 # Miscellaneous
@@ -22,6 +22,12 @@ Cross-cutting analyses and resources that complement SpainFacts' main topics.
         <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Spain in the world</h2>
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">More than 50 indicators from the World Bank, the IMF and the UN: Spain's rank among some 200 countries, with a world map and historical series.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Compare with the world →</span>
+    </a>
+    <a href="/en/varios/ciudades" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🏙️</span>
+        <h2 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Cities of Spain and Europe</h2>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Some 120 Spanish cities compared with 900 European ones: unemployment, housing, population, traffic and the European quality of life survey, with a map and a profile of each city.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-purple-700 dark:text-purple-400">Compare cities →</span>
     </a>
     <a href="/en/varios/observatorios" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
         <span class="text-3xl" aria-hidden="true">🔍</span>

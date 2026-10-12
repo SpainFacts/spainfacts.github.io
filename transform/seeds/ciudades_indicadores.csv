@@ -1,0 +1,23 @@
+indicador_id,tabla,codigos,factor,nombre,unidad,apartado,sentido,decimales,orden,valor_min,valor_max
+poblacion,urb_cpop1,DE1001V,1,"Población","habitantes",Población,neutro,0,101,1,
+edad_mediana,urb_cpopstr,DE1073V,1,"Edad mediana de la población","años",Población,neutro,1,102,15,70
+nacidos_extranjero,urb_cpopcb,DE2009I,1,"Población nacida en otro país","% de la población",Población,neutro,1,103,0,100
+extranjeros,urb_cpopcb,DE2007I,1,"Población de nacionalidad extranjera","% de la población",Población,neutro,1,104,0,100
+natalidad,urb_cfermor,SA2007I,1,"Natalidad","nacimientos por 1.000 habitantes",Población,neutro,1,105,0,40
+mortalidad,urb_cfermor,SA2029I,1,"Mortalidad (tasa bruta, depende de la edad de la población)","defunciones por 1.000 habitantes",Población,neutro,1,106,0,40
+mortalidad_infantil,urb_cfermor,SA2004I,1,"Mortalidad infantil","muertes de menores de 1 año por 1.000 nacidos vivos",Población,negativo,1,107,0,50
+hogares_unipersonales,urb_clivcon,DE3002I,1,"Hogares de una sola persona","% de los hogares",Población,neutro,1,108,0,100
+paro,urb_clma,EC1020I,1,"Tasa de paro","% de la población activa",Empleo,negativo,1,1,0,100
+estudios_superiores,urb_ceduc,TE2031I,1,"Población de 25 a 64 años con estudios superiores","% de la población de 25 a 64 años",Educación,positivo,1,301,0,100
+precio_piso_m2,urb_clivcon,SA1053V,1,"Precio medio de compra de un piso","euros por m² (corrientes)",Vivienda,neutro,0,401,100,30000
+coches_1000,urb_ctran,TT1057I,1,"Turismos matriculados","por 1.000 habitantes",Movilidad,neutro,0,501,0,1000
+muertes_trafico,urb_ctran,TT1060I,10,"Muertes en accidentes de tráfico","por 100.000 habitantes",Movilidad,negativo,1,502,0,50
+satisfaccion_ciudad,urb_percep,PS3360V+PS3361V,1,"Satisfechos de vivir en su ciudad","% de acuerdo",Calidad de vida,positivo,0,601,0,100
+seguridad_noche,urb_percep,PS3514V+PS3515V,1,"Se sienten seguros andando solos de noche por su ciudad","% de acuerdo",Calidad de vida,positivo,0,602,0,100
+facil_empleo,urb_percep,PS2012V+PS2013V,1,"Creen que en su ciudad es fácil encontrar un buen trabajo","% de acuerdo",Calidad de vida,positivo,0,603,0,100
+facil_vivienda,urb_percep,PS2032V+PS2033V,1,"Creen que en su ciudad es fácil encontrar una buena vivienda a precio razonable","% de acuerdo",Calidad de vida,positivo,0,604,0,100
+calidad_aire,urb_percep,PS3260V+PS3261V,1,"Satisfechos con la calidad del aire","% de satisfechos",Calidad de vida,positivo,0,605,0,100
+transporte_publico,urb_percep,PS1012V+PS1013V,1,"Satisfechos con el transporte público","% de satisfechos",Calidad de vida,positivo,0,606,0,100
+zonas_verdes,urb_percep,PS1052V+PS1053V,1,"Satisfechos con los parques y zonas verdes","% de satisfechos",Calidad de vida,positivo,0,607,0,100
+confianza_gente,urb_percep,PS3092V+PS3093V,1,"Creen que se puede confiar en la mayoría de la gente de su ciudad","% de acuerdo",Calidad de vida,positivo,0,608,0,100
+corrupcion_local,urb_percep,PS3611V+PS3612V,1,"Creen que hay corrupción en su ayuntamiento","% de acuerdo",Calidad de vida,negativo,0,609,0,100

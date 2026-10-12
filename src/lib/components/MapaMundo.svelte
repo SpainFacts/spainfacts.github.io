@@ -12,11 +12,16 @@
     // Uso:
     //   <MapaMundo data={filas} vista="europa" decimales={1} unidad="% de la población activa" sentido="negativo" />
     // con filas { cod_pais, pais, valor } (y opcionalmente anio, que sale en el tooltip).
+    //
+    // Modo puntos (ciudades): <MapaMundo puntos data={filas} id="cod_ciudad" ... /> con filas
+    // { cod_ciudad, ciudad, lat, lon, valor, poblacion?, es_espana? }: cada fila es un círculo del
+    // color de su quintil, con área proporcional a la población; los países van en gris, las
+    // ciudades españolas con borde oscuro y la de `destacar`, más gruesa.
     import { page } from '$app/stores';
     import { IDIOMAS, idiomaDeRuta } from '../i18n.js';
 
     export let data = [];
-    export let vista = 'mundo'; // 'mundo' | 'europa'
+    export let vista = 'mundo'; // 'mundo' | 'europa' | 'espana' (Península, Baleares y Canarias)
     export let id = 'cod_pais';
     export let value = 'valor';
     export let decimales = 1;
@@ -26,6 +31,11 @@
     export let destacar = 'ES';
     export let title = undefined;
     export let height = 460;
+    export let puntos = false;
+    /** columna con el nombre de cada punto (modo puntos) */
+    export let nombre = 'ciudad';
+    /** columna que da el tamaño de los puntos (modo puntos) */
+    export let size = 'poblacion';
 
     $: lang = idiomaDeRuta($page.url.pathname);
     const TEXTOS = {
@@ -53,7 +63,7 @@
             error = true;
         }
     }
-    $: if (typeof window !== 'undefined') cargar(vista === 'europa' ? '/geo/europa.json' : '/geo/mundo.json');
+    $: if (typeof window !== 'undefined') cargar(vista === 'mundo' ? '/geo/mundo.json' : '/geo/europa.json');
 
     const RAD = Math.PI / 180;
     // Equal Earth (Šavrič, Patterson y Jenny, 2018)
@@ -74,12 +84,13 @@
         return [k * Math.cos(f) * Math.sin(l), -k * (Math.cos(F0) * Math.sin(f) - Math.sin(F0) * Math.cos(f) * Math.cos(l))];
     }
     // Lo que se ve de Europa: de Islandia y Canarias a Chipre, el Cáucaso y el cabo Norte
+    const VENTANA_ESPANA = [[-18.6, 27.3], [4.6, 44], [-9.6, 44], [4.6, 35.6]];
     const VENTANA_EUROPA = [[-24.5, 63.3], [-18.2, 27.6], [-10, 36], [35, 34.5], [44.8, 41], [44, 56], [30, 71.2], [-5, 59]];
 
     const ANCHO = 960;
     $: dibujo = (() => {
         if (!geo?.features) return null;
-        const proy = vista === 'europa' ? laea : equalEarth;
+        const proy = vista === 'mundo' ? equalEarth : laea;
         let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
         const ampliar = ([x, y]) => { if (x < x0) x0 = x; if (y < y0) y0 = y; if (x > x1) x1 = x; if (y > y1) y1 = y; };
         const paises = geo.features.map((f) => ({
@@ -87,7 +98,7 @@
             nombres: f.properties,
             anillos: f.geometry.coordinates.map((p) => p[0].map(([lon, lat]) => proy(lon, lat))),
         }));
-        if (vista === 'europa') VENTANA_EUROPA.forEach(([lon, lat]) => ampliar(proy(lon, lat)));
+        if (vista !== 'mundo') (vista === 'espana' ? VENTANA_ESPANA : VENTANA_EUROPA).forEach(([lon, lat]) => ampliar(proy(lon, lat)));
         else paises.forEach((p) => p.anillos.forEach((a) => a.forEach(ampliar)));
         const esc = ANCHO / (x1 - x0);
         const alto = Math.round((y1 - y0) * esc);
@@ -107,14 +118,15 @@
             const diminuto = visible && Math.max(bx1 - bx0, by1 - by0) < 7;
             return { id: p.id, nombres: p.nombres, d, visible, diminuto, cx: sx / n, cy: sy / n };
         }).filter((f) => f.visible);
-        return { formas, alto };
+        const pr = (lon, lat) => { const [x, y] = proy(lon, lat); return [(x - x0) * esc, (y - y0) * esc]; };
+        return { formas, alto, pr };
     })();
 
     // ------------------------------------------------------------------ datos y colores
     const ok = (v) => v !== null && v !== undefined && v !== '' && Number.isFinite(Number(v));
     $: filas = Array.from(data ?? []);
     $: porId = new Map(filas.filter((r) => ok(r?.[value])).map((r) => [String(r[id]), r]));
-    $: valores = filas.filter((r) => ok(r?.[value]) && !r.es_agregado && String(r[id]).length === 2).map((r) => Number(r[value])).sort((a, b) => a - b);
+    $: valores = filas.filter((r) => ok(r?.[value]) && !r.es_agregado && (puntos || String(r[id]).length === 2)).map((r) => Number(r[value])).sort((a, b) => a - b);
     // cortes de los quintiles
     $: cortes = valores.length >= 5 ? [0.2, 0.4, 0.6, 0.8].map((q) => valores[Math.floor(q * (valores.length - 1))]) : [];
     // azules (más alto = más oscuro); en los indicadores con sentido, verde = mejor y rojo = peor
@@ -128,6 +140,7 @@
         return i;
     }
     $: colorDe = (pid) => {
+        if (puntos) return null;
         const r = porId.get(pid);
         return r ? paleta[clase(Number(r[value]))] : null;
     };
@@ -153,11 +166,24 @@
     }
     $: filaActiva = activo ? porId.get(activo.id) : null;
     // puesto como en internacional_resumen: 1 = el mejor (en los neutros, el más alto)
-    $: puestoActivo = filaActiva && !filaActiva.es_agregado && String(filaActiva[id]).length === 2
+    $: puestoActivo = filaActiva && !filaActiva.es_agregado && (puntos || String(filaActiva[id]).length === 2)
         ? 1 + valores.filter((v) => (sentido === 'negativo' ? v < Number(filaActiva[value]) : v > Number(filaActiva[value]))).length
         : null;
     const etiqueta = (f, r) => `${nombreDe(f, lang)}: ${r ? num(r[value]) : ''}`;
-    $: espana = dibujo?.formas.find((f) => f.id === destacar);
+    $: espana = puntos ? null : dibujo?.formas.find((f) => f.id === destacar);
+    // círculos del modo puntos, los grandes debajo
+    $: tamMax = Math.max(1, ...filas.map((r) => Number(r?.[size]) || 0));
+    $: circulos = puntos && dibujo
+        ? filas
+              .filter((r) => ok(r?.lat) && ok(r?.lon) && ok(r?.[value]))
+              .map((r) => {
+                  const [x, y] = dibujo.pr(Number(r.lon), Number(r.lat));
+                  const rad = 2 + Math.sqrt((Number(r[size]) || 0) / tamMax) * 11;
+                  return { r, x, y, rad, color: paleta[clase(Number(r[value]))], f: { id: String(r[id]), nombres: { es: r[nombre] } } };
+              })
+              .filter((c) => c.x > 0 && c.y > 0 && c.x < ANCHO && c.y < dibujo.alto)
+              .sort((a, b) => b.rad - a.rad)
+        : [];
 </script>
 
 <figure class="my-6 not-prose">
@@ -182,7 +208,7 @@
                             role="button"
                             tabindex={porId.has(f.id) ? 0 : -1}
                             aria-label={etiqueta(f, porId.get(f.id))}
-                            on:mousemove={(e) => mover(e, f)}
+                            on:mousemove={(e) => !puntos && mover(e, f)}
                             on:focus={(e) => enfocar(e, f)}
                             on:blur={() => (activo = null)}
                             on:click={(e) => mover(e, f)}
@@ -193,6 +219,13 @@
                         <circle cx={f.cx.toFixed(1)} cy={f.cy.toFixed(1)} r="4" fill={colorDe(f.id)} class="stroke-gray-500 dark:stroke-gray-300" stroke-width="0.6"
                             role="button" tabindex="-1" aria-label={etiqueta(f, porId.get(f.id))}
                             on:mousemove={(e) => mover(e, f)} on:click={(e) => mover(e, f)} />
+                    {/each}
+                    {#each circulos as c (c.f.id)}
+                        <circle cx={c.x.toFixed(1)} cy={c.y.toFixed(1)} r={c.rad.toFixed(1)} fill={c.color} fill-opacity="0.9"
+                            class={c.f.id === destacar ? 'stroke-gray-900 dark:stroke-white' : c.r.es_espana ? 'stroke-gray-700 dark:stroke-gray-200' : 'stroke-white dark:stroke-gray-900'}
+                            stroke-width={c.f.id === destacar ? 2.5 : c.r.es_espana ? 1 : 0.5}
+                            role="button" tabindex="-1" aria-label="{c.r[nombre]}: {num(c.r[value])}"
+                            on:mousemove={(e) => mover(e, c.f)} on:click={(e) => mover(e, c.f)} />
                     {/each}
                     {#if espana}
                         <path d={espana.d} fill="none" class="stroke-gray-900 dark:stroke-white pointer-events-none" stroke-width="1.6" />

@@ -1,0 +1,72 @@
+[
+  {
+    "tabla": "ciudades",
+    "usar": false,
+    "notas": "Tabla de referencia de las ciudades de Urban Audit: código, nombre, país, coordenadas, población y, en las españolas, el código INE del municipio. Para unir, no para responder preguntas."
+  },
+  {
+    "tabla": "ciudades_series",
+    "usar": true,
+    "tema": "Ciudades españolas y europeas año a año: paro, población, inmigración, natalidad, vivienda, coches, tráfico, estudios y calidad de vida",
+    "preguntas": [
+      "¿Cómo ha evolucionado el paro en Sevilla frente a Lisboa?",
+      "¿Ha subido el precio de los pisos en Madrid frente a París?",
+      "¿Cuántos nacidos en el extranjero hay en Barcelona desde 2015?"
+    ],
+    "medidas": [
+      { "columna": "valor", "nombre": "valor del indicador (su unidad depende del indicador, ver ciudades_resumen)", "unidad": "según el indicador (%, por 1.000 habitantes, euros por m²...)", "tipo": "ratio", "principal": true }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": { "niveles": ["ciudad"], "nivel": null, "codigo": "cod_ciudad", "nombre": "ciudad", "espana": null },
+    "dimensiones": [
+      { "columna": "indicador_id", "nombre": "indicador", "total": null },
+      { "columna": "pais", "nombre": "país", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Formato largo: siempre filtrar un indicador_id. Urban Audit de Eurostat; no todas las ciudades tienen todos los años. Algunas grandes ciudades (Madrid, Barcelona, París) son la «gran ciudad» con municipios vecinos. Nunca sumar valores entre ciudades."
+  },
+  {
+    "tabla": "ciudades_ultimo",
+    "usar": true,
+    "tema": "Último dato de cada ciudad española y europea en cada indicador, con su puesto en Europa y en España",
+    "preguntas": [
+      "¿Qué ciudad española tiene menos paro?",
+      "¿En qué puesto de Europa está Valencia en precio de la vivienda?",
+      "¿Qué ciudades europeas tienen más nacidos en el extranjero?"
+    ],
+    "medidas": [
+      { "columna": "valor", "nombre": "último valor del indicador en la ciudad", "unidad": "según el indicador", "tipo": "ratio", "principal": true },
+      { "columna": "puesto", "nombre": "puesto entre las ciudades europeas (1 = la mejor)", "unidad": "puesto", "tipo": "ratio" },
+      { "columna": "puesto_espana", "nombre": "puesto entre las ciudades españolas (1 = la mejor)", "unidad": "puesto", "tipo": "ratio" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": { "niveles": ["ciudad"], "nivel": null, "codigo": "cod_ciudad", "nombre": "ciudad", "espana": null },
+    "dimensiones": [
+      { "columna": "indicador_id", "nombre": "indicador", "total": null },
+      { "columna": "pais", "nombre": "país", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Una fila por indicador y ciudad con el último dato de los cinco años anteriores al más reciente: cada ciudad puede tener un año distinto (columna anio). es_espana marca las españolas."
+  },
+  {
+    "tabla": "ciudades_resumen",
+    "usar": true,
+    "tema": "Resumen de cada indicador de ciudades: mediana de las ciudades españolas y europeas y la mejor ciudad",
+    "preguntas": [
+      "¿Tienen las ciudades españolas más paro que las europeas?",
+      "¿Cuál es la ciudad europea donde la gente está más satisfecha de vivir?"
+    ],
+    "medidas": [
+      { "columna": "mediana_espana", "nombre": "mediana de las ciudades españolas", "unidad": "según el indicador (columna unidad)", "tipo": "media", "principal": true },
+      { "columna": "mediana_europa", "nombre": "mediana de las ciudades europeas", "unidad": "según el indicador (columna unidad)", "tipo": "media" }
+    ],
+    "tiempo": { "columna": "anio_ref", "grano": "anual", "parcial": false },
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "nombre", "nombre": "indicador", "total": null },
+      { "columna": "apartado", "nombre": "apartado temático", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Una fila por indicador. Medianas de las ciudades con dato, no medias ponderadas por población."
+  }
+]

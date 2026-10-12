@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_ciudades
+    description: "Ciudades de España y de Europa: Urban Audit de Eurostat (estadísticas de ciudades y encuesta de calidad de vida) y puntos de GISCO (ingestion/ciudades.py)"
+    schema: raw
+    tables:
+      - name: ciudades_urban_audit
+        description: "Eurostat Urban Audit, formato largo: tabla (urb_c*, urb_percep), indic_ur, cod_ciudad (código de ciudad, ES001C), nombre_eurostat, anio y valor. Solo los códigos de CODIGOS en la ingesta."
+      - name: ciudades_gisco
+        description: "GISCO URAU_LB_2021 (ciudades): cod_ciudad, nombre, pais_gisco (EL = Grecia), nuts3, capital, superficie_km2, lon y lat del punto de etiqueta."

@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: ciudades
+    description: >
+      Ciudades de Urban Audit (Eurostat), una fila por ciudad: código (ES001C), nombre (el de GISCO,
+      en la lengua local: München, Bruxelles/Brussel), país, posición del punto de etiqueta de GISCO
+      (lat, lon; vacía en las que no están en el mapa de 2021), capital, última población y, en las
+      españolas, el municipio del INE (cod_mun). En algunas grandes ciudades Eurostat usa la «gran
+      ciudad» con municipios vecinos (Madrid, Barcelona, París), así que su población es mayor que
+      la del municipio.
+    columns:
+      - name: cod_ciudad
+        description: "Código de ciudad de Urban Audit (país + 3 cifras + C)."
+        tests: [not_null, unique]
+      - name: ciudad
+        description: "Nombre de la ciudad."
+        tests: [not_null]
+      - name: cod_pais
+        description: "ISO 3166-1 alfa-2 (seed paises_iso; Grecia = GR, Reino Unido = GB)."
+        tests: [not_null]
+      - name: pais
+      - name: es_espana
+      - name: cod_mun
+        description: "Código INE del municipio (solo ciudades españolas), para enlazar con su ficha."
+      - name: es_capital
+      - name: lat
+      - name: lon
+      - name: poblacion
+        description: "Última población de Urban Audit."
+      - name: anio_poblacion
+  - name: ciudades_series
+    description: >
+      Series anuales (desde 2000) de los indicadores de ciudades del seed ciudades_indicadores
+      (Urban Audit de Eurostat y encuesta europea de calidad de vida en las ciudades), en formato
+      largo por indicador, ciudad y año. Nombre, unidad y sentido en ciudades_resumen. Cobertura
+      irregular: no todas las ciudades tienen todos los años.
+    columns:
+      - name: indicador_id
+        tests: [not_null]
+      - name: cod_ciudad
+        tests: [not_null]
+      - name: ciudad
+      - name: cod_pais
+      - name: pais
+      - name: es_espana
+      - name: anio
+        tests: [not_null]
+      - name: valor
+        description: "Valor en la unidad del indicador."
+        tests: [not_null]
+  - name: ciudades_ultimo
+    description: >
+      Último dato de cada ciudad en cada indicador, dentro de los cinco años anteriores al más
+      reciente con al menos 25 ciudades, con su año, su puesto entre todas las ciudades europeas
+      (puesto, n_ciudades) y entre las españolas (puesto_espana, n_espana). Puesto 1 = la mejor según
+      el sentido del indicador; en los neutros, el valor más alto.
+    columns:
+      - name: indicador_id
+        tests: [not_null]
+      - name: cod_ciudad
+        tests: [not_null]
+      - name: anio
+        description: "Año del dato de esa ciudad."
+      - name: valor
+        tests: [not_null]
+      - name: puesto
+      - name: n_ciudades
+      - name: puesto_espana
+      - name: n_espana
+  - name: ciudades_resumen
+    description: >
+      Una fila por indicador de ciudades: catálogo (nombre, unidad, apartado, sentido, decimales,
+      fuente), años del último dato (anio_min a anio_ref), ciudades con dato (europeas y españolas),
+      mediana de las ciudades europeas y de las españolas y mejor ciudad europea y española.
+    columns:
+      - name: indicador_id
+        tests: [not_null, unique]
+      - name: mediana_europa
+        description: "Mediana de las ciudades europeas con dato (no una media ponderada)."
+      - name: mediana_espana
+        description: "Mediana de las ciudades españolas con dato."

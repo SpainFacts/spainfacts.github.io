@@ -1,0 +1,30 @@
+version: 2
+
+seeds:
+  - name: ciudades_indicadores
+    description: >
+      Catálogo de indicadores de ciudades (Urban Audit de Eurostat): tabla y códigos indic_ur que se
+      suman (separados por '+', p. ej. «muy» + «bastante» de acuerdo en la encuesta de percepción),
+      factor por el que se multiplica la suma (muertes por 10.000 habitantes × 10 = por 100.000),
+      nombre, unidad, apartado, sentido ('positivo', 'negativo' o 'neutro'), decimales, orden y el rango
+      plausible (valor_min, valor_max; vacío = sin límite) fuera del cual se descarta un dato.
+    config:
+      column_types: {indicador_id: varchar, tabla: varchar, codigos: varchar, factor: double, nombre: varchar, unidad: varchar, apartado: varchar, sentido: varchar, decimales: integer, orden: integer, valor_min: double, valor_max: double}
+    columns:
+      - name: indicador_id
+        tests: [not_null, unique]
+      - name: sentido
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['positivo', 'negativo', 'neutro']
+  - name: ciudades_municipios
+    description: >
+      Ciudades españolas de Urban Audit cuyo nombre no casa solo con el del municipio del INE
+      (artículo pospuesto, nombre oficial distinto u homónimos): cod_ciudad y cod_mun del INE.
+      Las demás se casan por nombre en ciudades.sql.
+    config:
+      column_types: {cod_ciudad: varchar, cod_mun: varchar, nota: varchar}
+    columns:
+      - name: cod_ciudad
+        tests: [not_null, unique]
