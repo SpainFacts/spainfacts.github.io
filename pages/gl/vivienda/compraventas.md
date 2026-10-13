@@ -1,7 +1,9 @@
 ---
 title: Compravendas e hipotecas
 description: "Compravendas de vivendas e hipotecas sobre vivendas en España por 1.000 habitantes, vivenda nova fronte a segunda man e importe medio da hipoteca descontada a inflación, por comunidade e provincia."
-i18n_origen: 04696dab395c
+i18n_origen: 7389be9db78a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

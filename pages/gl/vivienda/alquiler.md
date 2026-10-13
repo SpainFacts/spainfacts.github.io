@@ -1,7 +1,9 @@
 ---
 title: Aluguer de vivenda
 description: "Aluguer mediano da vivenda en España descontada a inflación, por comunidade, provincia e municipio, cos datos do IRPF do Sistema Estatal de Referencia do Prezo do Aluguer e o índice do INE."
-i18n_origen: 851526a83095
+i18n_origen: a3b533f9df00
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

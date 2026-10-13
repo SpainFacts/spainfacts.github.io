@@ -263,9 +263,26 @@ if (!args.includes('--sin-vectores')) {
 	embeddings = { ...EMBEDDINGS, escala: 127 };
 }
 
+// ---------- Clasificador de tabla ----------
+// Capa lineal sobre el vector de la pregunta, entrenada en local con preguntas generadas de las
+// fichas (tools/chat/entrenamiento/LEEME.md). Solo sirve con los mismos vectores: si cambian
+// el modelo o las dimensiones, no se incluye (hay que reentrenarlo)
+let clasificador = null;
+const RUTA_CLASIFICADOR = 'tools/chat/entrenamiento/clasificador.json';
+if (embeddings && fs.existsSync(RUTA_CLASIFICADOR)) {
+	const c = JSON.parse(fs.readFileSync(RUTA_CLASIFICADOR, 'utf8'));
+	if (c.dims === embeddings.dims) {
+		const nombres = new Set(tablas.map((t) => t.nombre));
+		const fuera = c.tablas.filter((t) => !nombres.has(t));
+		clasificador = c;
+		console.log(`Clasificador de tabla: ${c.tablas.length} tablas${fuera.length ? ` (${fuera.length} ya no están en el catálogo)` : ''}`);
+	} else console.log(`Clasificador de tabla NO incluido: dims ${c.dims} y vectores ${embeddings.dims}`);
+}
+
 const catalogo = {
 	generado: new Date().toISOString(),
 	...(embeddings ? { embeddings } : {}),
+	...(clasificador ? { clasificador } : {}),
 	notas: [
 		'Las tablas se consultan como mother.<nombre> con SQL de DuckDB.',
 		'Principio de la web: comparar siempre por habitante y en euros reales; los totales solo como dato secundario.',

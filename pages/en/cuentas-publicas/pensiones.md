@@ -1,7 +1,9 @@
 ---
 title: Pensions
 description: "Contributory pensions in Spain: average pension adjusted for inflation, contributors per pension, pension spending as a % of GDP compared with the EU, pensions per inhabitant and by region and province."
-i18n_origen: 7c0311a74845
+i18n_origen: 44aa2e4fc91a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Educación
 description: "Abandono escolar temperán, nivel educativo dos adultos, mozos que nin estudan nin traballan, gasto en educación por habitante e por alumno, alumnado por nivel e PISA, con España fronte á UE e por comunidade."
-i18n_origen: 350e27897b13
+i18n_origen: 318ee43f0f8b
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
-i18n_origen: cc5703f42701
+i18n_origen: 15dd2d53ce8c
 title: Paro e emprego
 description: "Taxa de paro en España por sexo, idade, nacionalidade, estudos e territorio, paro xuvenil e de longa duración, temporalidade, paro rexistrado mensual e comparación coa UE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

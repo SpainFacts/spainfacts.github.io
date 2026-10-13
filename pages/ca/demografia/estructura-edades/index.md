@@ -1,7 +1,9 @@
 ---
 title: Edats i envelliment
 description: "Piràmides de població d'Espanya, de cada comunitat i de cada província; percentatge de més grans de 65 i 80 anys, taxa de dependència i edat mitjana des de 1971 (INE)."
-i18n_origen: 4e6c769248eb
+i18n_origen: ec298ddd8ba3
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Atur i ocupació
 description: "Taxa d'atur a Espanya per sexe, edat, nacionalitat, estudis i territori, atur juvenil i de llarga durada, temporalitat, atur registrat mensual i comparació amb la UE."
-i18n_origen: cc5703f42701
+i18n_origen: 15dd2d53ce8c
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

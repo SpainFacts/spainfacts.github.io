@@ -1,7 +1,9 @@
 ---
 title: Age and ageing
 description: "Population pyramids for Spain, each region and each province; percentage of people over 65 and over 80, dependency ratio and mean age since 1971 (INE)."
-i18n_origen: 4e6c769248eb
+i18n_origen: ec298ddd8ba3
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

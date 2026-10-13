@@ -1,7 +1,9 @@
 ---
 title: Renda, pobresa i desigualtat
 description: "Renda mitjana de les llars descomptada la inflació, risc de pobresa, AROPE, carència material, índex de Gini i S80/S20 a Espanya, per comunitat, edat i municipi, i comparació amb la UE."
-i18n_origen: 074b220d7ed5
+i18n_origen: 6b28fb11e0c7
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

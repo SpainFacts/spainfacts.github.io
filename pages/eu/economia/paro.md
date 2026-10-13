@@ -1,7 +1,9 @@
 ---
 title: Langabezia eta enplegua
 description: "Espainiako langabezia-tasa sexuaren, adinaren, nazionalitatearen, ikasketen eta lurraldearen arabera, gazteen langabezia eta iraupen luzekoa, behin-behinekotasuna, hileko erregistratutako langabezia eta EBrekiko alderaketa."
-i18n_origen: cc5703f42701
+i18n_origen: 15dd2d53ce8c
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

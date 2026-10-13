@@ -1,7 +1,9 @@
 ---
 title: House prices
 description: "House prices in Spain adjusted for inflation: appraised value per square metre by region, province and municipality and the INE House Price Index, new and second-hand."
-i18n_origen: 44b0921ad358
+i18n_origen: 8a7262770576
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

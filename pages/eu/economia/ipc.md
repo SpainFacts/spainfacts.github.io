@@ -1,7 +1,9 @@
 ---
 title: Inflazioa (KPI)
 description: "Inflazioa Espainian: KPI orokorra eta azpikoa, prezioak taldeka, argindarraren, gasaren eta erregaien prezio erreala, prezioak zenbat igo diren 2008tik eta 2019tik, KPI erkidegoka eta euroguneko alderaketa."
-i18n_origen: beb0f070e1b9
+i18n_origen: 94eb34373dcc
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -11,6 +11,7 @@
 //   decidir(contexto, pregunta, opciones) -> Promise<índice | { indice, probs }>
 //   ctx.consultar(sql) -> Promise<filas>
 //   ctx.embeber(texto) -> Promise<vector>   (opcional: búsqueda y columnas por significado)
+//   ctx.clasificador                        (opcional: crearClasificador de clasificador.js)
 
 import { buscarTablas, buscarFicha, URL_WEB } from './herramientas.js';
 
@@ -317,7 +318,29 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const vector = ctx.embeber ? await ctx.embeber(prefijo + pregunta) : null;
 	// ctx.tablaForzada: la tabla ya la eligió la persona (respuesta a «¿qué datos quieres usar?»)
 	const forzada = ctx.tablaForzada ? buscarFicha(ctx.catalogo, ctx.tablaForzada) : null;
-	const candidatas = forzada ? [forzada] : buscarTablas(ctx.indice, pregunta, 6, 0, vector).map((x) => buscarFicha(ctx.catalogo, x.tabla));
+	let candidatas = forzada ? [forzada] : buscarTablas(ctx.indice, pregunta, 6, 0, vector).map((x) => buscarFicha(ctx.catalogo, x.tabla));
+	// ctx.clasificador: clasificador de tabla entrenado con preguntas de nuestras fichas
+	// (tools/chat/entrenamiento, src/lib/chat/clasificador.js). Sus mejores tablas entran entre
+	// las candidatas y el orden mezcla su puesto con el de la búsqueda
+	const clas = !forzada && ctx.clasificador && vector ? ctx.clasificador : null;
+	if (clas) {
+		const nClas = ctx.candidatasClasificador ?? 3;
+		// Solo tablas que siguen en el catálogo (el clasificador puede ser de un catálogo anterior)
+		const deClas = clas
+			.mejores(vector, Math.max(nClas, 6) + 6)
+			.map((x) => x.tabla)
+			.filter((t) => buscarFicha(ctx.catalogo, t))
+			.slice(0, Math.max(nClas, 6));
+		const deBusqueda = candidatas.map((c) => c.nombre);
+		const rango = (lista, t) => (lista.includes(t) ? lista.indexOf(t) : 99);
+		const todas = [...new Set([...deClas.slice(0, nClas), ...deBusqueda])];
+		const puntos = (t) => 1 / (2 + rango(deClas, t)) + (ctx.pesoBusqueda ?? 0.5) / (2 + rango(deBusqueda, t));
+		candidatas = todas
+			.sort((a, b) => puntos(b) - puntos(a))
+			.slice(0, 6)
+			.map((t) => buscarFicha(ctx.catalogo, t))
+			.filter(Boolean);
+	}
 	if (!candidatas.length) return { texto: 'No he encontrado datos sobre eso en SpainFacts.', decisiones };
 	const describirCandidata = (t) => {
 		const tc = columnaTiempo(t);
@@ -349,7 +372,13 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	};
 	if (forzada) iTabla = 0;
 	else if (modoTabla === 'lista') {
-		iTabla = await elegir(contexto, Q('tabla'), candidatas.map(describirCandidata), candidatas.map((_, k) => -(ctx.priorBusqueda ?? PRIOR_BUSQUEDA) * k));
+		const lpClas = clas ? clas.logprobs(vector, candidatas.map((c) => c.nombre)) : null;
+		iTabla = await elegir(
+			contexto,
+			Q('tabla'),
+			candidatas.map(describirCandidata),
+			candidatas.map((_, k) => -(ctx.priorBusqueda ?? PRIOR_BUSQUEDA) * k + (lpClas ? (ctx.pesoClasificador ?? 1) * lpClas[k] : 0))
+		);
 		probTablas = ultimasProbs ? candidatas.map((c, k) => ({ tabla: c.nombre, p: ultimasProbs[k] ?? 0 })).sort((a, b) => b.p - a.p) : null;
 		// Si duda entre varias, pregunta cuál en vez de contestar con la que quizá no es
 		if (ctx.aclarar && probTablas && probTablas[0].p < ACLARAR_MAX && (probTablas[1]?.p ?? 0) >= ACLARAR_SEGUNDA) {

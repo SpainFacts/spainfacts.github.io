@@ -1,7 +1,9 @@
 ---
 title: Income, poverty and inequality
 description: "Average household income in Spain adjusted for inflation, at-risk-of-poverty rate, AROPE, material deprivation, Gini index and S80/S20 ratio, by region, age and municipality, and compared with the EU."
-i18n_origen: 074b220d7ed5
+i18n_origen: 6b28fb11e0c7
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

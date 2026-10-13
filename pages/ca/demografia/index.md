@@ -1,7 +1,9 @@
 ---
 title: Demografia
 description: "Població d'Espanya amb dades oficials de l'INE: creixement, natalitat i fecunditat, envelliment, repartiment territorial, homes i dones i llars, per comunitat i província."
-i18n_origen: 306ecbcd10ab
+i18n_origen: 40f356804380
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

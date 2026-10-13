@@ -1,6 +1,8 @@
 ---
 title: Renta, pobreza y desigualdad
 description: "Renta media de los hogares descontada la inflación, riesgo de pobreza, AROPE, carencia material, índice de Gini y S80/S20 en España, por comunidad, edad y municipio, y comparación con la UE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

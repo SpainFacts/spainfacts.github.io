@@ -1,7 +1,9 @@
 ---
 title: Home sales and mortgages
 description: "Home sales and mortgages on homes in Spain per 1,000 inhabitants, new builds versus second-hand and average mortgage amount adjusted for inflation, by region and province."
-i18n_origen: 04696dab395c
+i18n_origen: 7389be9db78a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

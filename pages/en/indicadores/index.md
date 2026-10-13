@@ -1,6 +1,8 @@
 ---
 title: Indicators
-i18n_origen: 91c93cdf2794
+i18n_origen: ff11fca57f37
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

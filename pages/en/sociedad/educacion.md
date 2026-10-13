@@ -1,7 +1,9 @@
 ---
 title: Education
 description: "Early school leaving, adult educational attainment, young people neither in employment nor in education, education spending per inhabitant and per pupil, enrolment by level and PISA, comparing Spain with the EU and by region."
-i18n_origen: 350e27897b13
+i18n_origen: 318ee43f0f8b
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Men and women
 description: "How many men there are per 100 women in Spain by age, since 1971, and in each region and province (INE)."
-i18n_origen: aabf373a979e
+i18n_origen: ff0532a716ba
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,5 +1,4 @@
 ---
-description: "Ficha de la provincia: población, municipios, cuentas de los ayuntamientos, deuda, seguridad y vehículos, con datos oficiales."
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -10,6 +9,8 @@ og:
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+
+    import TituloPagina from '../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -82,6 +83,8 @@ ORDER BY m.anio
 
 {#if terr[0]?.slug === $currentPage.params.provincia && terr[0]?.ccaa_slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<TituloPagina nombre={terr[0]?.nombre} dentro={terr[0]?.ccaa_nombre} descripcion="Ficha de la provincia: población, municipios, cuentas de los ayuntamientos, deuda, seguridad y vehículos, con datos oficiales." />
 
 <IndiceTerritorio />
 

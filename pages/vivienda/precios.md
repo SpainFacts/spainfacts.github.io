@@ -1,6 +1,8 @@
 ---
 title: Precio de la vivienda
 description: "Precio de la vivienda en España descontada la inflación: valor tasado por metro cuadrado por comunidad, provincia y municipio y el Índice de Precios de Vivienda del INE, nueva y de segunda mano."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

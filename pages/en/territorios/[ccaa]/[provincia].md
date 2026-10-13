@@ -1,6 +1,5 @@
 ---
-description: "Province profile: population, municipalities, town council accounts, debt, crime and vehicles, with official data."
-i18n_origen: 5f1c2bf00b51
+i18n_origen: 88c1cb7f3b8b
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -11,6 +10,8 @@ og:
     import MapaEspana from '../../../../../../../../src/lib/components/MapaEspana.svelte';
     import IndiceTerritorio from '../../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../../src/lib/components/KpiCard.svelte';
+
+    import TituloPagina from '../../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../../src/lib/utils.js';
 </script>
 
@@ -83,6 +84,8 @@ ORDER BY m.anio
 
 {#if terr[0]?.slug === $currentPage.params.provincia && terr[0]?.ccaa_slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<TituloPagina nombre={terr[0]?.nombre} dentro={terr[0]?.ccaa_nombre} descripcion="Province profile: population, municipalities, town council accounts, debt, crime and vehicles, with official data." />
 
 <IndiceTerritorio />
 

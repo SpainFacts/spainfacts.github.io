@@ -1,7 +1,9 @@
 ---
 title: Pensións
 description: "Pensións contributivas en España: pensión media descontada a inflación, afiliados por pensión, gasto en pensións en % do PIB fronte á UE, pensións por habitante e por comunidade e provincia."
-i18n_origen: 7c0311a74845
+i18n_origen: 44aa2e4fc91a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

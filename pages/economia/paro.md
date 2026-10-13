@@ -1,6 +1,8 @@
 ---
 title: Paro y empleo
 description: "Tasa de paro en España por sexo, edad, nacionalidad, estudios y territorio, paro juvenil y de larga duración, temporalidad, paro registrado mensual y comparación con la UE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

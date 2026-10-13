@@ -1,7 +1,9 @@
 ---
 title: Obra nova
 description: "Vivendas libres que se comezan e se rematan cada ano en España por 1.000 habitantes desde 1996, por comunidade e provincia, con datos do Ministerio de Vivenda."
-i18n_origen: 442b873cd088
+i18n_origen: 02b91f2bd912
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

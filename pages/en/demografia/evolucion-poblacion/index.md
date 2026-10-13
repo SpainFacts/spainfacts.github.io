@@ -1,7 +1,9 @@
 ---
 title: Population trends
 description: "Spain's population since 1971 and its annual growth per 1,000 inhabitants, split into births minus deaths and migration, by region and province (INE)."
-i18n_origen: f9535ffb3b9d
+i18n_origen: d6ea5d77f690
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

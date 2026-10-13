@@ -1,7 +1,9 @@
 ---
 title: Salerosketak eta hipotekak
 description: "Etxebizitzen salerosketak eta etxebizitzen gaineko hipotekak Espainian 1.000 biztanleko, etxebizitza berria bigarren eskukoaren aldean eta hipotekaren batez besteko zenbatekoa inflazioa kenduta, erkidego eta probintziaka."
-i18n_origen: 04696dab395c
+i18n_origen: 7389be9db78a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

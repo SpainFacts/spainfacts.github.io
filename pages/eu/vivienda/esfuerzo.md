@@ -1,7 +1,9 @@
 ---
 title: Erosteko edo alokatzeko ahalegina
 description: "90 m²-ko etxebizitza batek zenbat urteko soldata gordin balio duen Espainian eta erkidego bakoitzean, eta soldataren zer zati joaten den alokairura, Etxebizitza Ministerioaren eta INEren datuekin."
-i18n_origen: 45b1ea729603
+i18n_origen: e2aa739c40f8
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

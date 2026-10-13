@@ -1,6 +1,8 @@
 ---
 title: Population map
-i18n_origen: b48b48f2f8d6
+i18n_origen: 33f216cceeb3
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

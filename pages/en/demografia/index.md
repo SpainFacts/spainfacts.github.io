@@ -1,7 +1,9 @@
 ---
 title: Demography
 description: "Spain's population from official INE data: growth, births and fertility, ageing, territorial distribution, men and women, and households, by autonomous community and province."
-i18n_origen: 306ecbcd10ab
+i18n_origen: 40f356804380
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

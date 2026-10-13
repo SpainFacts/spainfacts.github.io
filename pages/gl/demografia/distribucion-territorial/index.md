@@ -1,7 +1,9 @@
 ---
 title: Repartición territorial da poboación
 description: "Como se reparte a poboación de España entre comunidades e provincias desde 1975: concentración, provincias que perden habitantes e porcentaxe de nados no estranxeiro en cada provincia (INE)."
-i18n_origen: d77c92bbc1bf
+i18n_origen: 0dd0076e2dd4
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

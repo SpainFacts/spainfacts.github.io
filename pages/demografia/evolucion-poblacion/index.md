@@ -1,6 +1,8 @@
 ---
 title: Evolución de la población
 description: "Población de España desde 1971 y su crecimiento anual por 1.000 habitantes, separado en nacimientos menos defunciones y migración, por comunidad y provincia (INE)."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

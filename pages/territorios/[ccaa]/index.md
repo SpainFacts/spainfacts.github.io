@@ -1,5 +1,4 @@
 ---
-description: "Ficha de la comunidad autónoma: población, economía, cuentas públicas, deuda, empleo público, seguridad y más, con datos oficiales y comparados con España."
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -10,6 +9,8 @@ og:
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import IndiceTerritorio from '../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+
+    import TituloPagina from '../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -94,6 +95,8 @@ FROM ${municipios}
 
 {#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<TituloPagina nombre={terr[0]?.nombre} descripcion="Ficha de la comunidad autónoma: población, economía, cuentas públicas, deuda, empleo público, seguridad y más, con datos oficiales y comparados con España." />
 
 <IndiceTerritorio />
 

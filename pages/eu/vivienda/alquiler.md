@@ -1,7 +1,9 @@
 ---
 title: Etxebizitzaren alokairua
 description: "Etxebizitzaren alokairu mediana Espainian inflazioa kenduta, erkidego, probintzia eta udalerriaren arabera, Alokairuaren Prezioaren Estatuko Erreferentzia Sistemaren PFEZ datuekin eta INEren indizearekin."
-i18n_origen: 851526a83095
+i18n_origen: a3b533f9df00
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

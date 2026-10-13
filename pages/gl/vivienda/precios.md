@@ -1,7 +1,9 @@
 ---
 title: Prezo da vivenda
 description: "Prezo da vivenda en España descontada a inflación: valor taxado por metro cadrado por comunidade, provincia e municipio e o Índice de Prezos de Vivenda do INE, nova e de segunda man."
-i18n_origen: 44b0921ad358
+i18n_origen: 8a7262770576
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

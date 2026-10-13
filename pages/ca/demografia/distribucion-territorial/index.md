@@ -1,7 +1,9 @@
 ---
 title: Repartiment territorial de la població
 description: "Com es reparteix la població d'Espanya entre comunitats i províncies des de 1975: concentració, províncies que perden habitants i percentatge de nascuts a l'estranger a cada província (INE)."
-i18n_origen: d77c92bbc1bf
+i18n_origen: 0dd0076e2dd4
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

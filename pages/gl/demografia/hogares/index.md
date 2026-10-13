@@ -1,7 +1,9 @@
 ---
 title: Fogares
 description: "Tamaño medio do fogar e porcentaxe de fogares dunha soa persoa en España, por comunidade e provincia, desde 2021 (INE, Estatística Continua de Poboación)."
-i18n_origen: 0989f96b9d04
+i18n_origen: 588d93111132
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

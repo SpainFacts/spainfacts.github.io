@@ -1,6 +1,8 @@
 ---
 title: Edades y envejecimiento
 description: "Pirámides de población de España, cada comunidad y cada provincia; porcentaje de mayores de 65 y 80 años, tasa de dependencia y edad media desde 1971 (INE)."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

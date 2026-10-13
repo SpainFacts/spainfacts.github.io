@@ -1,7 +1,9 @@
 ---
 title: Obra berria
 description: "Espainian urtero hasten eta amaitzen diren etxebizitza libreak 1.000 biztanleko 1996tik, erkidego eta probintziaka, Etxebizitza Ministerioaren datuekin."
-i18n_origen: 442b873cd088
+i18n_origen: 02b91f2bd912
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

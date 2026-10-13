@@ -1,7 +1,9 @@
 ---
 title: Inflation (CPI)
 description: "Inflation in Spain: headline and core CPI, prices by group, the real price of electricity, gas and motor fuels, how much prices have risen since 2008 and 2019, CPI by region and comparison with the euro area."
-i18n_origen: beb0f070e1b9
+i18n_origen: 94eb34373dcc
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

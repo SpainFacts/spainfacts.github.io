@@ -1,7 +1,9 @@
 ---
 title: Territorial distribution of the population
 description: "How Spain's population is distributed across regions and provinces since 1975: concentration, provinces losing inhabitants and the percentage of foreign-born residents in each province (INE)."
-i18n_origen: d77c92bbc1bf
+i18n_origen: 0dd0076e2dd4
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Errenta, pobrezia eta desberdintasuna
 description: "Etxeen batez besteko errenta inflazioa kenduta, pobrezia-arriskua, AROPE, gabezia materiala, Gini indizea eta S80/S20 Espainian, erkidegoaren, adinaren eta udalerriaren arabera, eta EBrekiko konparazioa."
-i18n_origen: 074b220d7ed5
+i18n_origen: 6b28fb11e0c7
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

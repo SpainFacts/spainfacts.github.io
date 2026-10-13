@@ -1,5 +1,7 @@
 ---
 title: Indicadores
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

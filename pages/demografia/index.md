@@ -1,6 +1,8 @@
 ---
 title: Demografía
 description: "Población de España con datos oficiales del INE: crecimiento, natalidad y fecundidad, envejecimiento, reparto territorial, hombres y mujeres y hogares, por comunidad y provincia."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

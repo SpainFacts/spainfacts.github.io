@@ -1,7 +1,9 @@
 ---
 title: Esforzo para comprar ou alugar
 description: "Cantos anos de salario bruto custa unha vivenda de 90 m² en España e en cada comunidade, e que parte do soldo se vai no aluguer, con datos do Ministerio de Vivenda e do INE."
-i18n_origen: 45b1ea729603
+i18n_origen: e2aa739c40f8
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

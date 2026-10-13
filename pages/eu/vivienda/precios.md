@@ -1,7 +1,9 @@
 ---
 title: Etxebizitzaren prezioa
 description: "Etxebizitzaren prezioa Espainian inflazioa kenduta: metro koadroko tasazio-balioa erkidego, probintzia eta udalerriaren arabera, eta INEren Etxebizitzaren Prezioen Indizea, berria eta bigarren eskukoa."
-i18n_origen: 44b0921ad358
+i18n_origen: 8a7262770576
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

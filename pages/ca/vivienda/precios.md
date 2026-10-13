@@ -1,7 +1,9 @@
 ---
 title: Preu de l'habitatge
 description: "Preu de l'habitatge a Espanya descomptada la inflació: valor taxat per metre quadrat per comunitat, província i municipi i l'Índex de Preus d'Habitatge de l'INE, nou i de segona mà."
-i18n_origen: 44b0921ad358
+i18n_origen: 8a7262770576
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

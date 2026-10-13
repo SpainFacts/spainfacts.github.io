@@ -1,6 +1,8 @@
 ---
 title: Reparto territorial de la población
 description: "Cómo se reparte la población de España entre comunidades y provincias desde 1975: concentración, provincias que pierden habitantes y porcentaje de nacidos en el extranjero en cada provincia (INE)."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

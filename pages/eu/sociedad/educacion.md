@@ -1,7 +1,9 @@
 ---
 title: Hezkuntza
 description: "Eskola-uzte goiztiarra, helduen hezkuntza-maila, ez ikasten ez lanean ari diren gazteak, hezkuntza-gastua biztanleko eta ikasleko, ikasleak mailaka eta PISA, Espainia EBrekin alderatuta eta erkidegoka."
-i18n_origen: 350e27897b13
+i18n_origen: 318ee43f0f8b
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

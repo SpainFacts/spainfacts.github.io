@@ -1,7 +1,9 @@
 ---
 title: Gizonak eta emakumeak
 description: "Zenbat gizon dauden 100 emakumeko Espainian adinaren arabera, 1971tik, eta erkidego eta probintzia bakoitzean (INE)."
-i18n_origen: aabf373a979e
+i18n_origen: ff0532a716ba
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Demografia
 description: "Espainiako biztanleria INEren datu ofizialekin: hazkundea, jaiotza-tasa eta ugalkortasuna, zahartzea, lurralde-banaketa, gizonak eta emakumeak eta etxeak, erkidego eta probintziaka."
-i18n_origen: 306ecbcd10ab
+i18n_origen: 40f356804380
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

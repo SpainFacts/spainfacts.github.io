@@ -1,6 +1,8 @@
 ---
 title: Alquiler de vivienda
 description: "Alquiler mediano de la vivienda en España descontada la inflación, por comunidad, provincia y municipio, con los datos del IRPF del Sistema Estatal de Referencia del Precio del Alquiler y el índice del INE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

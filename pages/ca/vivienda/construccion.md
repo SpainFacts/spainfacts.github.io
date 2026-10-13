@@ -1,7 +1,9 @@
 ---
 title: Obra nova
 description: "Habitatges lliures que es comencen i s'acaben cada any a Espanya per 1.000 habitants des del 1996, per comunitat i província, amb dades del Ministeri d'Habitatge."
-i18n_origen: 442b873cd088
+i18n_origen: 02b91f2bd912
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

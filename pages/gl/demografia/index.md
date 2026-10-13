@@ -1,7 +1,9 @@
 ---
 title: Demografía
 description: "Poboación de España con datos oficiais do INE: crecemento, natalidade e fecundidade, avellentamento, repartición territorial, homes e mulleres e fogares, por comunidade e provincia."
-i18n_origen: 306ecbcd10ab
+i18n_origen: 40f356804380
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

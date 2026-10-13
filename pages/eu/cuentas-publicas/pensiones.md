@@ -1,7 +1,9 @@
 ---
 title: Pentsioak
 description: "Kotizaziopeko pentsioak Espainian: batez besteko pentsioa inflazioa kenduta, afiliatuak pentsioko, pentsioetako gastua BPGaren ehunekotan EBrekin alderatuta, pentsioak biztanleko eta erkidego eta probintziaka."
-i18n_origen: 7c0311a74845
+i18n_origen: 44aa2e4fc91a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

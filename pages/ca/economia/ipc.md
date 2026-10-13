@@ -1,7 +1,9 @@
 ---
 title: Inflació (IPC)
 description: "Inflació a Espanya: IPC general i subjacent, preus per grups, preu real de la llum, el gas i els carburants, quant han pujat els preus des del 2008 i el 2019, IPC per comunitat i comparació amb la zona euro."
-i18n_origen: beb0f070e1b9
+i18n_origen: 94eb34373dcc
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,6 +1,8 @@
 ---
 title: Compraventas e hipotecas
 description: "Compraventas de viviendas e hipotecas sobre viviendas en España por 1.000 habitantes, vivienda nueva frente a segunda mano e importe medio de la hipoteca descontada la inflación, por comunidad y provincia."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

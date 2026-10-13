@@ -1,7 +1,9 @@
 ---
 title: Housing rents
 description: "Median housing rent in Spain adjusted for inflation, by region, province and municipality, using income tax data from the State Rental Price Reference System and the INE index."
-i18n_origen: 851526a83095
+i18n_origen: a3b533f9df00
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

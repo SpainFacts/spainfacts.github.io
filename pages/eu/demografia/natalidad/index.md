@@ -1,7 +1,9 @@
 ---
 title: Jaiotza-tasa eta ugalkortasuna
 description: "Jaiotzak eta heriotzak 1.000 biztanleko, seme-alabak emakumeko, amen batez besteko adina eta ama atzerritarren jaiotzak Espainian, erkidego eta probintziaka, 1975etik (INE)."
-i18n_origen: 07771f420182
+i18n_origen: 1a88f857ff3e
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

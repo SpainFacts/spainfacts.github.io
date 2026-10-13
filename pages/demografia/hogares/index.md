@@ -1,6 +1,8 @@
 ---
 title: Hogares
 description: "Tamaño medio del hogar y porcentaje de hogares de una sola persona en España, por comunidad y provincia, desde 2021 (INE, Estadística Continua de Población)."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

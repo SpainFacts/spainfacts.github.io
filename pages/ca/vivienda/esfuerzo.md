@@ -1,7 +1,9 @@
 ---
 title: Esforç per comprar o llogar
 description: "Quants anys de salari brut costa un habitatge de 90 m² a Espanya i a cada comunitat, i quina part del sou se'n va en el lloguer, amb dades del Ministeri d'Habitatge i de l'INE."
-i18n_origen: 45b1ea729603
+i18n_origen: e2aa739c40f8
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

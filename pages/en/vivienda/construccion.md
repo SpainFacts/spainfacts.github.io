@@ -1,7 +1,9 @@
 ---
 title: New builds
 description: "Open-market homes started and completed each year in Spain per 1,000 inhabitants since 1996, by region and province, with data from the Ministry of Housing."
-i18n_origen: 442b873cd088
+i18n_origen: 02b91f2bd912
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

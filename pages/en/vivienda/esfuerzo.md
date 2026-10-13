@@ -1,7 +1,9 @@
 ---
 title: Affordability of buying or renting
 description: "How many years of gross salary a 90 m² home costs in Spain and in each region, and what share of pay goes on rent, with data from the Ministry of Housing and the INE."
-i18n_origen: 45b1ea729603
+i18n_origen: e2aa739c40f8
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

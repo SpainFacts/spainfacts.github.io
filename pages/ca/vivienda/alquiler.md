@@ -1,7 +1,9 @@
 ---
 title: Lloguer d'habitatge
 description: "Lloguer medià de l'habitatge a Espanya descomptada la inflació, per comunitat, província i municipi, amb les dades de l'IRPF del Sistema Estatal de Referència del Preu del Lloguer i l'índex de l'INE."
-i18n_origen: 851526a83095
+i18n_origen: a3b533f9df00
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

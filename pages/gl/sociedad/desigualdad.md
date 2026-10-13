@@ -1,7 +1,9 @@
 ---
 title: Renda, pobreza e desigualdade
 description: "Renda media dos fogares descontada a inflación, risco de pobreza, AROPE, carencia material, índice de Gini e S80/S20 en España, por comunidade, idade e municipio, e comparación coa UE."
-i18n_origen: 074b220d7ed5
+i18n_origen: 6b28fb11e0c7
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

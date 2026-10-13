@@ -1,6 +1,8 @@
 ---
 title: Esfuerzo para comprar o alquilar
 description: "Cuántos años de salario bruto cuesta una vivienda de 90 m² en España y en cada comunidad, y qué parte del sueldo se va en el alquiler, con datos del Ministerio de Vivienda y del INE."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

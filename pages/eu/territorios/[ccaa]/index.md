@@ -1,6 +1,5 @@
 ---
-description: "Autonomia-erkidegoaren fitxa: biztanleria, ekonomia, kontu publikoak, zorra, enplegu publikoa, segurtasuna eta gehiago, datu ofizialekin eta Espainiarekin alderatuta."
-i18n_origen: 8542312d2686
+i18n_origen: d9577951222c
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -11,6 +10,8 @@ og:
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import IndiceTerritorio from '../../../../../../../src/lib/components/IndiceTerritorio.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+
+    import TituloPagina from '../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
     const urte = (n, s) => (n == null || n === '' ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
@@ -107,6 +108,8 @@ FROM ${municipios}
 
 {#if terr[0]?.slug === $currentPage.params.ccaa}
 # {terr[0]?.nombre}
+
+<TituloPagina nombre={terr[0]?.nombre} descripcion="Autonomia-erkidegoaren fitxa: biztanleria, ekonomia, kontu publikoak, zorra, enplegu publikoa, segurtasuna eta gehiago, datu ofizialekin eta Espainiarekin alderatuta." />
 
 <IndiceTerritorio />
 

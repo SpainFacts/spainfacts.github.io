@@ -1,6 +1,8 @@
 ---
 title: Hombres y mujeres
 description: "Cuántos hombres hay por cada 100 mujeres en España según la edad, desde 1971, y en cada comunidad y provincia (INE)."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,7 +1,9 @@
 ---
 title: Natalidade e fecundidade
 description: "Nacementos e defuncións por 1.000 habitantes, fillos por muller, idade media das nais e nacementos de nai estranxeira en España, por comunidade e provincia desde 1975 (INE)."
-i18n_origen: 07771f420182
+i18n_origen: 1a88f857ff3e
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

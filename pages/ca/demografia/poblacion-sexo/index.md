@@ -1,7 +1,9 @@
 ---
 title: Homes i dones
 description: "Quants homes hi ha per cada 100 dones a Espanya segons l'edat, des de 1971, i a cada comunitat i província (INE)."
-i18n_origen: aabf373a979e
+i18n_origen: ff0532a716ba
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

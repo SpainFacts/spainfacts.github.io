@@ -1,7 +1,9 @@
 ---
 title: Natalitat i fecunditat
 description: "Naixements i defuncions per 1.000 habitants, fills per dona, edat mitjana de les mares i naixements de mare estrangera a Espanya, per comunitat i província des de 1975 (INE)."
-i18n_origen: 07771f420182
+i18n_origen: 1a88f857ff3e
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

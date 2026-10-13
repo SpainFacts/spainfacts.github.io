@@ -1,7 +1,9 @@
 ---
 title: Unemployment and employment
 description: "Unemployment rate in Spain by sex, age, nationality, education and territory, youth and long-term unemployment, temporary employment, monthly registered unemployment and comparison with the EU."
-i18n_origen: cc5703f42701
+i18n_origen: 15dd2d53ce8c
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

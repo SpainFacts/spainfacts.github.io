@@ -1,7 +1,9 @@
 ---
 title: Biztanleriaren lurralde-banaketa
 description: "Nola banatzen den Espainiako biztanleria erkidego eta probintzien artean 1975etik: kontzentrazioa, biztanleak galtzen dituzten probintziak eta atzerrian jaiotakoen ehunekoa probintzia bakoitzean (INE)."
-i18n_origen: d77c92bbc1bf
+i18n_origen: 0dd0076e2dd4
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

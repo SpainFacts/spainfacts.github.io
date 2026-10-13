@@ -1,7 +1,9 @@
 ---
 title: Compravendes i hipoteques
 description: "Compravendes d'habitatges i hipoteques sobre habitatges a Espanya per 1.000 habitants, habitatge nou davant de segona mà i import mitjà de la hipoteca descomptada la inflació, per comunitat i província."
-i18n_origen: 04696dab395c
+i18n_origen: 7389be9db78a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

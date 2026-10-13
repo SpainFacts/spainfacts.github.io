@@ -1,7 +1,9 @@
 ---
 title: Educació
 description: "Abandonament escolar prematur, nivell educatiu dels adults, joves que ni estudien ni treballen, despesa en educació per habitant i per alumne, alumnat per nivell i PISA, amb Espanya davant la UE i per comunitat."
-i18n_origen: 350e27897b13
+i18n_origen: 318ee43f0f8b
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

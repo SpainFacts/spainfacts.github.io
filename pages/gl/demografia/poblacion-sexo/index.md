@@ -1,7 +1,9 @@
 ---
 title: Homes e mulleres
 description: "Cantos homes hai por cada 100 mulleres en España segundo a idade, desde 1971, e en cada comunidade e provincia (INE)."
-i18n_origen: aabf373a979e
+i18n_origen: ff0532a716ba
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

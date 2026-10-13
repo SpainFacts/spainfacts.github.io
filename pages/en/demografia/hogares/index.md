@@ -1,7 +1,9 @@
 ---
 title: Households
 description: "Average household size and percentage of one-person households in Spain, by region and province, since 2021 (INE, Continuous Population Statistics)."
-i18n_origen: 0989f96b9d04
+i18n_origen: 588d93111132
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

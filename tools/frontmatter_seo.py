@@ -17,7 +17,8 @@ for md in sorted(PAGINAS.rglob("*.md")):
         continue
     fin = texto.index("\n---", 3)
     cabecera, resto = texto[:fin], texto[fin:]
-    if "description:" not in cabecera:
+    # las fichas de territorio la ponen con <TituloPagina> (lleva el nombre del territorio)
+    if "description:" not in cabecera and "<TituloPagina" not in resto:
         print("sin description:", rel)
     if "\nog:" not in cabecera:
         cabecera += f"\nog:\n  image: {IMAGEN}"

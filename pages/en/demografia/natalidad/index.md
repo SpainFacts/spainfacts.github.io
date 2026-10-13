@@ -1,7 +1,9 @@
 ---
 title: Births and fertility
 description: "Births and deaths per 1,000 inhabitants, children per woman, mothers' mean age and births to foreign mothers in Spain, by region and province since 1975 (INE)."
-i18n_origen: 07771f420182
+i18n_origen: 1a88f857ff3e
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

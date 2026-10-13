@@ -1,7 +1,9 @@
 ---
 title: Etxeak
 description: "Etxeen batez besteko tamaina eta pertsona bakarreko etxeen ehunekoa Espainian, erkidego eta probintziaka, 2021etik (INE, Biztanleriaren Estatistika Jarraitua)."
-i18n_origen: 0989f96b9d04
+i18n_origen: 588d93111132
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

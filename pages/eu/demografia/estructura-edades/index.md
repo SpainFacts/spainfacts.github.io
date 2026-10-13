@@ -1,7 +1,9 @@
 ---
 title: Adinak eta zahartzea
 description: "Espainiako, erkidego bakoitzeko eta probintzia bakoitzeko biztanleria-piramideak; 65 eta 80 urtetik gorakoen ehunekoa, mendekotasun-tasa eta batez besteko adina 1971tik (INE)."
-i18n_origen: 4e6c769248eb
+i18n_origen: ec298ddd8ba3
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

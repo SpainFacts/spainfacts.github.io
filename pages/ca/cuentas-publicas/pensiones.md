@@ -1,7 +1,9 @@
 ---
 title: Pensions
 description: "Pensions contributives a Espanya: pensió mitjana descomptada la inflació, afiliats per pensió, despesa en pensions en % del PIB davant la UE, pensions per habitant i per comunitat i província."
-i18n_origen: 7c0311a74845
+i18n_origen: 44aa2e4fc91a
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

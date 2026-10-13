@@ -1,7 +1,9 @@
 ---
 title: Llars
 description: "Mida mitjana de la llar i percentatge de llars d'una sola persona a Espanya, per comunitat i província, des del 2021 (INE, Estadística Contínua de Població)."
-i18n_origen: 0989f96b9d04
+i18n_origen: 588d93111132
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

@@ -1,6 +1,8 @@
 ---
 title: Inflación (IPC)
 description: "Inflación en España: IPC general y subyacente, precios por grupos, precio real de la luz, el gas y los carburantes, cuánto han subido los precios desde 2008 y 2019, IPC por comunidad y comparación con la zona euro."
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
