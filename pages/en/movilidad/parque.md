@@ -1,7 +1,7 @@
 ---
 title: Vehicle fleet
 description: "The vehicles on the road in Spain: cars by engine type, DGT environmental label and age, most common models, and comparison by province and municipality."
-i18n_origen: 7ce7ebdce3e1
+i18n_origen: 085ec47b2364
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,6 +114,29 @@ ORDER BY CASE antiguedad WHEN '0-4' THEN 1 WHEN '5-9' THEN 2 WHEN '10-14' THEN 3
 </Grid>
 
 <p class="text-xs text-gray-500">Age is counted from the date of registration in Spain (for imported used vehicles, from when they were registered here). The environmental label is the one the DGT assigns to each vehicle according to its engine and Euro emissions standard.</p>
+
+## How it changes month by month
+
+```sql evolucion
+SELECT mes, energia, energia_etiqueta AS motor, energia_orden,
+    sum(vehiculos_por_1000_hab) AS por_1000_hab,
+    100.0 * sum(vehiculos) / sum(sum(vehiculos)) OVER (PARTITION BY mes) AS pct
+FROM mother.movilidad_parque_evolucion
+WHERE grupo = '${inputs.grupo}'
+GROUP BY mes, energia, energia_etiqueta, energia_orden
+ORDER BY mes, energia_orden
+```
+
+```sql evolucion_alternativos
+SELECT * FROM ${evolucion} WHERE energia NOT IN ('diesel', 'gasolina', 'otros')
+```
+
+<Grid cols=2>
+    <AreaChart data={evolucion} x=mes y=por_1000_hab series=motor yFmt=num2 title="Per 1,000 inhabitants, by engine" />
+    <LineChart data={evolucion_alternativos} x=mes y=pct series=motor yFmt=num2 title="Alternative engines, % of total" />
+</Grid>
+
+<p class="text-xs text-gray-500">One point for each monthly fleet file published by the DGT since March 2025 (months the DGT did not publish are missing). The percentage is over all vehicles of the selected type.</p>
 
 ## Most common models
 

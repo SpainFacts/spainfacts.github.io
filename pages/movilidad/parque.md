@@ -114,6 +114,29 @@ ORDER BY CASE antiguedad WHEN '0-4' THEN 1 WHEN '5-9' THEN 2 WHEN '10-14' THEN 3
 
 <p class="text-xs text-gray-500">Antigüedad desde la fecha de matriculación en España (en los usados importados, desde que se matricularon aquí). La etiqueta ambiental es la que la DGT asigna a cada vehículo según su motor y su norma Euro.</p>
 
+## Cómo cambia mes a mes
+
+```sql evolucion
+SELECT mes, energia, energia_etiqueta AS motor, energia_orden,
+    sum(vehiculos_por_1000_hab) AS por_1000_hab,
+    100.0 * sum(vehiculos) / sum(sum(vehiculos)) OVER (PARTITION BY mes) AS pct
+FROM mother.movilidad_parque_evolucion
+WHERE grupo = '${inputs.grupo}'
+GROUP BY mes, energia, energia_etiqueta, energia_orden
+ORDER BY mes, energia_orden
+```
+
+```sql evolucion_alternativos
+SELECT * FROM ${evolucion} WHERE energia NOT IN ('diesel', 'gasolina', 'otros')
+```
+
+<Grid cols=2>
+    <AreaChart data={evolucion} x=mes y=por_1000_hab series=motor yFmt=num2 title="Por 1.000 habitantes, por motor" />
+    <LineChart data={evolucion_alternativos} x=mes y=pct series=motor yFmt=num2 title="Motores alternativos, % del total" />
+</Grid>
+
+<p class="text-xs text-gray-500">Un punto por cada fichero mensual de parque publicado por la DGT desde marzo de 2025 (faltan los meses que la DGT no publicó). El porcentaje es sobre todos los vehículos del tipo elegido.</p>
+
 ## Modelos más comunes
 
 <Dropdown name=energia title="Motor" data={energias} value=energia label=energia_etiqueta order=energia_orden>

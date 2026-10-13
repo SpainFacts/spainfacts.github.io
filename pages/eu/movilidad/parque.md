@@ -1,7 +1,7 @@
 ---
 title: Ibilgailu-parkea
 description: "Espainian zirkulatzen duten ibilgailuak: turismoak motor motaren, DGTren ingurumen-etiketaren eta antzinatasunaren arabera, modelo ohikoenak eta probintzien eta udalerrien arteko konparazioa."
-i18n_origen: 7ce7ebdce3e1
+i18n_origen: 085ec47b2364
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,6 +114,29 @@ ORDER BY CASE antiguedad WHEN '0-4' THEN 1 WHEN '5-9' THEN 2 WHEN '10-14' THEN 3
 </Grid>
 
 <p class="text-xs text-gray-500">Antzinatasuna Espainiako matrikulazio-datatik kontatzen da (inportatutako erabilitakoetan, hemen matrikulatu zirenetik). Ingurumen-etiketa DGTk ibilgailu bakoitzari bere motorraren eta Euro arauaren arabera esleitzen diona da.</p>
+
+## Nola aldatzen den hilabetez hilabete
+
+```sql evolucion
+SELECT mes, energia, energia_etiqueta AS motor, energia_orden,
+    sum(vehiculos_por_1000_hab) AS por_1000_hab,
+    100.0 * sum(vehiculos) / sum(sum(vehiculos)) OVER (PARTITION BY mes) AS pct
+FROM mother.movilidad_parque_evolucion
+WHERE grupo = '${inputs.grupo}'
+GROUP BY mes, energia, energia_etiqueta, energia_orden
+ORDER BY mes, energia_orden
+```
+
+```sql evolucion_alternativos
+SELECT * FROM ${evolucion} WHERE energia NOT IN ('diesel', 'gasolina', 'otros')
+```
+
+<Grid cols=2>
+    <AreaChart data={evolucion} x=mes y=por_1000_hab series=motor yFmt=num2 title="1.000 biztanleko, motorraren arabera" />
+    <LineChart data={evolucion_alternativos} x=mes y=pct series=motor yFmt=num2 title="Motor alternatiboak, guztizkoaren %" />
+</Grid>
+
+<p class="text-xs text-gray-500">Puntu bat DGTk 2025eko martxotik argitaratutako parkeko hileko fitxategi bakoitzeko (DGTk argitaratu ez zituen hilabeteak falta dira). Ehunekoa aukeratutako motako ibilgailu guztien gainean dago.</p>
 
 ## Modelo ohikoenak
 

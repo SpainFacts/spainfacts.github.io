@@ -1,7 +1,7 @@
 ---
 title: Parc de vehicles
 description: "Els vehicles que circulen a Espanya: turismes per tipus de motor, etiqueta ambiental de la DGT i antiguitat, models més comuns i comparació per província i municipi."
-i18n_origen: 7ce7ebdce3e1
+i18n_origen: 085ec47b2364
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,6 +114,29 @@ ORDER BY CASE antiguedad WHEN '0-4' THEN 1 WHEN '5-9' THEN 2 WHEN '10-14' THEN 3
 </Grid>
 
 <p class="text-xs text-gray-500">Antiguitat des de la data de matriculació a Espanya (en els usats importats, des que s'hi van matricular). L'etiqueta ambiental és la que la DGT assigna a cada vehicle segons el motor i la norma Euro.</p>
+
+## Com canvia mes a mes
+
+```sql evolucion
+SELECT mes, energia, energia_etiqueta AS motor, energia_orden,
+    sum(vehiculos_por_1000_hab) AS por_1000_hab,
+    100.0 * sum(vehiculos) / sum(sum(vehiculos)) OVER (PARTITION BY mes) AS pct
+FROM mother.movilidad_parque_evolucion
+WHERE grupo = '${inputs.grupo}'
+GROUP BY mes, energia, energia_etiqueta, energia_orden
+ORDER BY mes, energia_orden
+```
+
+```sql evolucion_alternativos
+SELECT * FROM ${evolucion} WHERE energia NOT IN ('diesel', 'gasolina', 'otros')
+```
+
+<Grid cols=2>
+    <AreaChart data={evolucion} x=mes y=por_1000_hab series=motor yFmt=num2 title="Per cada 1.000 habitants, per motor" />
+    <LineChart data={evolucion_alternativos} x=mes y=pct series=motor yFmt=num2 title="Motors alternatius, % del total" />
+</Grid>
+
+<p class="text-xs text-gray-500">Un punt per cada fitxer mensual de parc publicat per la DGT des de març de 2025 (hi falten els mesos que la DGT no va publicar). El percentatge és sobre tots els vehicles del tipus triat.</p>
 
 ## Models més comuns
 

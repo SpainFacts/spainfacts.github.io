@@ -1,5 +1,5 @@
 ---
-i18n_origen: 7ce7ebdce3e1
+i18n_origen: 085ec47b2364
 title: Parque de vehículos
 description: "Os vehículos que circulan en España: turismos por tipo de motor, etiqueta ambiental da DGT e antigüidade, modelos máis comúns e comparación por provincia e concello."
 og:
@@ -114,6 +114,29 @@ ORDER BY CASE antiguedad WHEN '0-4' THEN 1 WHEN '5-9' THEN 2 WHEN '10-14' THEN 3
 </Grid>
 
 <p class="text-xs text-gray-500">Antigüidade desde a data de matriculación en España (nos usados importados, desde que se matricularon aquí). A etiqueta ambiental é a que a DGT asigna a cada vehículo segundo o seu motor e a súa norma Euro.</p>
+
+## Como cambia mes a mes
+
+```sql evolucion
+SELECT mes, energia, energia_etiqueta AS motor, energia_orden,
+    sum(vehiculos_por_1000_hab) AS por_1000_hab,
+    100.0 * sum(vehiculos) / sum(sum(vehiculos)) OVER (PARTITION BY mes) AS pct
+FROM mother.movilidad_parque_evolucion
+WHERE grupo = '${inputs.grupo}'
+GROUP BY mes, energia, energia_etiqueta, energia_orden
+ORDER BY mes, energia_orden
+```
+
+```sql evolucion_alternativos
+SELECT * FROM ${evolucion} WHERE energia NOT IN ('diesel', 'gasolina', 'otros')
+```
+
+<Grid cols=2>
+    <AreaChart data={evolucion} x=mes y=por_1000_hab series=motor yFmt=num2 title="Por cada 1.000 habitantes, por motor" />
+    <LineChart data={evolucion_alternativos} x=mes y=pct series=motor yFmt=num2 title="Motores alternativos, % do total" />
+</Grid>
+
+<p class="text-xs text-gray-500">Un punto por cada ficheiro mensual de parque publicado pola DGT desde marzo de 2025 (faltan os meses que a DGT non publicou). A porcentaxe é sobre todos os vehículos do tipo escollido.</p>
 
 ## Modelos máis comúns
 
