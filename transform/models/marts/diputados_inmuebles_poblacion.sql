@@ -46,7 +46,7 @@ diputados as (
         'Diputados XV (declaración inicial)' as colectivo,
         'Total' as tramo,
         'alquila' as indicador_id,
-        'Declara rentas por alquiler de inmuebles' as indicador,
+        'Declara ingresos por alquiler de inmuebles' as indicador,
         n_alquila as n,
         n_validos as total,
         pct_alquila as pct,

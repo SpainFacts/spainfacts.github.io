@@ -536,6 +536,42 @@ def _inmuebles_en_observaciones(obs: str) -> bool:
                                           r"pleno dominio|continuaci|otros bienes", t))
 
 
+def _es_vivienda(clase: str) -> bool:
+    """La fila incluye alguna vivienda ("piso", "apartamento, trastero y garaje"); un "estudio" o
+    "bajo" que acompaña a un garaje o trastero sin otra vivienda no cuenta."""
+    t = _norm(clase or "")
+    return bool(VIVIENDA.search(t)) and not (
+        ANEXO.search(t) and not re.search(r"vivi?enda|piso|casa|chalet|apartamento|atico|duplex|unifamiliar", t))
+
+
+GARAJE = re.compile(r"garaje|plaza|aparcamiento|parking|trastero|cochera|box")
+LOCAL = re.compile(r"local|nave|oficina|almacen|despacho|negocio|industrial")
+
+
+def _desglose(x: dict) -> dict:
+    """Unidades de una fila urbana por tipo (vivienda, garaje o trastero, local o nave, otros) y
+    cómo se adquirió (herencia o donación, compra, no consta)."""
+    out = {"unidades_garaje": 0, "unidades_local": 0, "unidades_otros": 0}
+    if x["tipo"] == "urbano":
+        partes = (_clases_fundidas(x["clase"]) if len(_clases_fundidas(x["clase"])) > 1 or _fundida(x["fecha_adquisicion"])
+                  else [(x["unidades"], _norm(x["clase"]))])
+        for k, t in partes:
+            if VIVIENDA.search(t) and not ANEXO.search(t):
+                continue
+            if GARAJE.search(t):
+                out["unidades_garaje"] += k
+            elif LOCAL.search(t):
+                out["unidades_local"] += k
+        resto = x["unidades"] - x["unidades_vivienda"]
+        out["unidades_garaje"] = min(out["unidades_garaje"], resto)
+        out["unidades_local"] = min(out["unidades_local"], resto - out["unidades_garaje"])
+        out["unidades_otros"] = resto - out["unidades_garaje"] - out["unidades_local"]
+    t = _norm((x["derecho"] or "") + " " + (x["clase"] or ""))
+    out["titulo"] = ("herencia" if re.search(r"herenc|heredad|herede|donaci|legado|sucesori|testament|lega", t)
+                     else "compra" if re.search(r"compra|adquisic|escritura", t) else "no_consta")
+    return out
+
+
 # Un inmueble dentro de una fila fundida ("1 PISO + 1 PARKING + TRASTERO", "Local comercial - 5 Plazas de Garaje")
 CLASE_FUNDIDA = re.compile(r"(?:\b(\d{1,2}|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+)?"
                            r"(plazas? (?:de )?(?:garaje|aparcamiento|parking)|local(?:es)? comercial(?:es)?|"
@@ -710,9 +746,9 @@ def extraer(leg: int = 15, limite: int | None = None, solo: list[int] | None = N
                 for x in inm:
                     x["unidades"] = _unidades(x["clase"], x["fecha_adquisicion"])
                     x["fraccion_titularidad"] = _fraccion_fila(x["derecho"], x["clase"], x["unidades"])
-                    x["es_vivienda"] = bool(VIVIENDA.search(_norm(x["clase"]))) and not (
-                        ANEXO.search(_norm(x["clase"])) and not re.search(r"vivienda|piso|casa|chalet", _norm(x["clase"])))
+                    x["es_vivienda"] = _es_vivienda(x["clase"])
                     x["unidades_vivienda"] = _unidades_vivienda(x)
+                    x.update(_desglose(x))
                     x["vivienda_habitual"] = bool(re.search(r"habitual", _norm(x["clase"] + " " + x["derecho"])))
                 alq = [r for r in res["rentas"] if _es_alquiler(r)]
                 fuera = ALQUILER.search(_norm(" ".join(x["clase"] + " " + x["derecho"] for x in inm)
@@ -781,8 +817,10 @@ def recontar() -> None:
     for x in inm_rows:
         x["unidades"] = _unidades(x["clase"], x["fecha_adquisicion"])
         x["fraccion_titularidad"] = _fraccion_fila(x["derecho"], x["clase"], x["unidades"])
-        x["es_vivienda"] = x["es_vivienda"] == "True"
+        x["es_vivienda"] = _es_vivienda(x["clase"])
+        x["unidades"] = int(x["unidades"])
         x["unidades_vivienda"] = _unidades_vivienda(x)
+        x.update(_desglose(x))
     por_dip: dict[str, list[dict]] = {}
     for x in inm_rows:
         por_dip.setdefault(x["id_diputado"], []).append(x)
@@ -932,7 +970,8 @@ def diputados_inmuebles():
     @dlt.resource(name="cong_inmuebles_declarados", write_disposition="replace")
     def cong_inmuebles_declarados():
         for f in _leer(EXT_INM):
-            yield _tipar(f, enteros=("legislatura", "id_diputado", "orden", "unidades_vivienda"),
+            yield _tipar(f, enteros=("legislatura", "id_diputado", "orden", "unidades_vivienda",
+                                                 "unidades_garaje", "unidades_local", "unidades_otros"),
                          reales=("fraccion_titularidad",), logicos=("es_vivienda", "vivienda_habitual"))
 
     @dlt.resource(name="cong_rentas_declaradas", write_disposition="replace")

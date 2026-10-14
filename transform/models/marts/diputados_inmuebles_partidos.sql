@@ -3,7 +3,9 @@
 -- federaciones del PSOE dentro de PSOE (ver diputados_inmuebles_diputados). Una fila por
 -- partido y otra 'Total'. Medias y medianas por diputado sobre las declaraciones leídas
 -- correctamente (n_validos), para comparar partidos de distinto tamaño; los totales
--- (suma_*) solo como dato secundario.
+-- (suma_*) solo como dato secundario. La medida principal es urbanos_equivalentes
+-- (inmuebles urbanos completos: suma de su parte de cada uno), que no cuenta las fincas
+-- rústicas, muchas veces parcelas pequeñas heredadas en el rural.
 with d as (
     select * from {{ ref('diputados_inmuebles_diputados') }}
 ),
@@ -26,6 +28,8 @@ select
     median(n_viviendas_urbanas) as mediana_viviendas,
     round(avg(n_rusticos), 2) as media_rusticos,
     round(avg(urbanos_equivalentes), 2) as media_urbanos_equivalentes,
+    median(urbanos_equivalentes) as mediana_urbanos_equivalentes,
+    max(urbanos_equivalentes) as max_urbanos_equivalentes,
     round(100.0 * count(*) filter (where alquila) / nullif(count(*) filter (where extraccion_ok), 0), 1) as pct_alquila,
     round(100.0 * count(*) filter (where dos_viviendas) / nullif(count(*) filter (where extraccion_ok), 0), 1) as pct_dos_viviendas,
     max(n_inmuebles) as max_inmuebles,
@@ -35,4 +39,4 @@ select
     case when partido = 'Total' then 0 else 1 end as orden_total
 from partidos
 group by partido
-order by orden_total, media_urbanos desc
+order by orden_total, media_urbanos_equivalentes desc

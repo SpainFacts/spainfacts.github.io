@@ -73,9 +73,29 @@ models:
       y fila 'Total': diputados, válidos, media y mediana por diputado de inmuebles (urbanos +
       rústicos), urbanos, viviendas y rústicos, urbanos equivalentes medios, % que declara
       alquilar y % con 2 o más viviendas, máximo de un diputado y sumas (dato secundario).
+      Medida principal: media_urbanos_equivalentes (inmuebles urbanos completos por diputado).
     columns:
       - name: partido
         tests: [not_null, unique]
+
+  - name: diputados_inmuebles_composicion
+    description: >
+      Composición del patrimonio inmobiliario declarado (el formulario no pide su valor), por
+      partido y 'Total'. desglose 'tipo': inmuebles por tipo (vivienda, garaje o trastero,
+      local/oficina/nave, otros urbanos, finca rústica) con unidades y por_diputado.
+      desglose 'adquisicion': inmuebles urbanos por título (herencia o donación, compra, no
+      consta) con pct sobre los urbanos del partido. Fila a fila sobre la lectura automática.
+    columns:
+      - name: partido
+        tests: [not_null]
+      - name: desglose
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['tipo', 'adquisicion']
+      - name: categoria
+        tests: [not_null]
 
   - name: diputados_inmuebles_resumen
     description: >

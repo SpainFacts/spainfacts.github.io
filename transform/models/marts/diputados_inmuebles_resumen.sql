@@ -24,7 +24,7 @@ totales as (
 
 defs as (
     select 1 as orden, 'alquila' as definicion_id,
-           'Declara rentas por alquiler de inmuebles' as definicion,
+           'Declara ingresos por alquiler de inmuebles' as definicion,
            count(*) filter (where alquila) as n_cumplen from d
     union all
     select 2, 'dos_urbanos', 'Declara 2 o más inmuebles urbanos (incluye garajes y trasteros)',
@@ -36,7 +36,7 @@ defs as (
     select 4, 'dos_equivalentes', 'Suma 2 o más inmuebles urbanos completos según su % de titularidad',
            count(*) filter (where dos_equivalentes) from d
     union all
-    select 5, 'alquila_o_dos_viviendas', 'Alquila o declara 2 o más viviendas',
+    select 5, 'alquila_o_dos_viviendas', 'Declara ingresos por alquiler o 2 o más viviendas',
            count(*) filter (where alquila or dos_viviendas) from d
     union all
     select 6, 'sin_urbanos', 'No declara ningún inmueble urbano',

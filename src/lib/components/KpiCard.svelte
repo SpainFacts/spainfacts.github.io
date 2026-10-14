@@ -67,7 +67,8 @@
             : (texto.split(".")[1]?.length ?? 0);
         return n.toLocaleString(localeActual(), { maximumFractionDigits: decimales, useGrouping: "min2" });
     }
-    $: displayValue = formattedValue || valorEnIdioma(value, lang);
+    // La cifra y su unidad corta («16,1 %», «3,4 M€») no se parten en dos líneas
+    $: displayValue = String(formattedValue || valorEnIdioma(value, lang)).replace(/(\d) (?=\S{1,4}$)/u, "$1 ");
     $: periodoTexto = [period, changePeriod].filter(Boolean).join(" · ");
 
     // Compute change sign & number
@@ -274,7 +275,7 @@
         </div>
 
         <!-- Main Metric Value & Unit -->
-        <div class="flex min-w-0 items-baseline gap-1.5 my-1">
+        <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5 my-1">
             <span class="min-w-0 break-words text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                 {displayValue}
             </span>
