@@ -1,68 +1,350 @@
-id_diputado,n_urbanos,n_viviendas_urbanas,n_rusticos,n_sociedad,urbanos_equivalentes,nota
-234,21,19,1,0,10.1,
-141,17,3,18,0,3.48,"una plaza de garaje es concesión administrativa al 50 %; 14 bienes al 16,66 %"
-115,21,8,2,0,12.5,
-324,14,4,18,18,5.0,"de sociedades: 10 urbanos y 8 fincas rústicas"
-412,15,9,24,0,9.5,"3 viviendas unifamiliares en pleno dominio o nuda propiedad sin % contadas enteras"
-19,13,13,0,0,11.7,
-53,12,7,1,0,7.5,
-54,8,4,1,0,6.0,"4 bienes con titularidad parcial sin % contados al 50 %"
-281,9,3,0,30,8.0,"26 inmuebles de sociedades en Observaciones (10 fincas rústicas); una nave puede estar repetida en la tabla y en Observaciones"
-8,8,3,0,0,5.5,
-170,8,2,0,0,4.0,
-12,11,8,4,0,9.5,"5 pisos y 2 fincas rústicas en Observaciones; las filas de sociedades nombran entidades, no inmuebles"
-197,18,8,4,0,11.0,"2 casas en Observaciones; rústicos: 4 lotes que nombran unos 21 parajes sin dar el número de fincas"
-63,9,6,1,0,9.0,"vivienda y plaza de garaje añadidas en Observaciones; el rústico es 1/10"
-218,6,4,1,0,4.5,
-238,4,4,54,0,2.25,
-256,5,1,0,14,5.0,
-182,9,3,1,11,9.0,"6 inmuebles de sociedades en Observaciones"
-161,4,2,6,0,2.5,
-151,7,3,2,0,7.0,"las filas de un piso con trastero y garaje al 10 % y al 90 % se toman como el mismo inmueble (si no lo fueran serían 10 urbanos)"
-119,12,4,0,0,8.5,
-209,7,4,0,0,6.0,"plazas de garaje en plural sin número: contadas 2 por las dos fechas de compra"
-211,8,4,5,0,4.0,
-215,9,5,0,0,2.9,
-376,5,3,3,0,3.17,
-216,8,2,0,0,3.0,
-236,5,4,3,0,4.5,"la fila de sociedades solo da un importe y no describe ningún inmueble"
-100,5,2,4,0,2.2,
-246,5,4,3,0,3.5,"propiedad horizontal sin más detalle contada como urbano que no es vivienda"
-404,6,5,0,0,2.6,
-183,7,2,0,0,4.0,
-235,8,5,0,0,5.5,"Observaciones repite 2 bienes de la tabla y añade un piso en Madrid al 50 %"
-193,7,4,0,0,5.125,
-55,7,2,0,0,7.0,
-195,4,3,4,0,1.5,"fincas rústicas en plural sin número: contadas 2"
-190,7,6,0,0,4.0,"multipropiedad sin % contada al 50 %; la plaza de aparcamiento figura en la tabla de rústicos pero es urbana"
-311,5,4,0,0,2.5,
-219,5,4,2,1,4.0,"una vivienda declarada en la tabla de rústicos contada como rústica; de sociedades: portería de una comunidad de propietarios al 5,78 %"
-325,11,5,0,0,3.97,"6 bienes en Observaciones; un solar que aparece dos veces se cuenta una"
-43,8,4,0,0,4.52,"2 pisos en nuda propiedad en Observaciones"
-132,1,1,0,1,0.5,"el solar y la vivienda son el mismo inmueble según Observaciones; de sociedades: un hotel al 8 %"
-118,1,1,0,0,1.0,"Observaciones menciona 1/8 de una vivienda heredada en 1991 sin decir si la conserva: no se cuenta"
-75,5,3,0,0,2.5,"dos bienes a la mitad y dos a un cuarto en nuda propiedad"
-68,6,4,0,0,6.0,"vivienda con plaza de aparcamiento cuenta 2; no declara inmuebles de sociedades"
-352,6,2,0,0,6.0,"en separación de bienes sin %: contadas enteras"
-383,6,2,0,0,3.0,"las 6 filas al 50 %"
-363,5,1,0,0,5.0,
-7,4,2,0,0,0.61,"vivienda al 50 %, casa a 1/32 y dos solares a 1/16 y 1/48"
-146,5,2,0,0,5.0,
-346,5,3,1,0,5.0,
-399,5,2,0,0,5.0,
-101,5,3,0,0,4.5,"una vivienda al 50 %"
-136,5,2,0,0,3.0,"un piso al 100 % y 4 bienes al 50 %"
-29,6,2,0,0,4.5,
-138,5,3,1,0,2.5,"todo al 50 %"
-139,5,3,0,0,4.5,"propiedad sin % contada entera"
-2,3,1,0,0,3.0,
-122,4,4,7,0,2.0,"una vivienda escrita en la tabla de rústicos contada como rústica"
-395,5,1,0,0,5.0,"2 terrenos urbanizables cuentan 2"
-405,3,1,0,0,3.0,
-254,4,2,0,0,3.5,
-203,4,2,0,0,3.0,"plaza y local comprados sin % contados enteros"
-288,4,2,2,0,4.0,
-98,3,2,0,0,2.5,
-176,6,3,0,0,4.0,
-189,4,2,0,0,3.0,"una vivienda con plaza al 50 % y otra al 100 %"
-196,1,1,3,0,1.0,"fincas rústicas escritas en la tabla urbana contadas como rústicas"
+id_diputado,n_urbanos,n_viviendas_urbanas,n_garajes_trasteros,n_locales,n_otros_urbanos,n_rusticos,n_sociedad,urbanos_equivalentes,n_urbanos_herencia,n_urbanos_compra,declara_alquiler,lectura_valida,nota
+1,4,3,1,0,0,0,0,2.333,2,2,false,true,"«Almacén (Residencial Garage)» contado como garaje; dos viviendas en nuda propiedad 16,66 %"
+2,3,1,2,0,0,0,0,3.0,0,3,false,true,«vivienda habitual - piso» = 1 bien; pleno dominio sin mención ganancial en las filas
+4,2,0,1,0,1,0,0,2.0,2,0,false,true,"garaje y solar en propiedad por herencia; casa móvil en otros bienes, no contada como inmueble"
+5,0,0,0,0,0,0,0,0,0,0,false,true,
+7,4,2,0,0,2,0,0,0.615,3,1,false,true,"vivienda 50 %, casa 1/32, solar 1/16 y solar 1/48; la renta inmobiliaria imputada no cuenta como alquiler"
+8,8,3,5,0,0,0,0,5.5,0,8,true,true,"5 garajes (PD y gananciales 50%); líneas de tabla cruzan el texto, no son tachados"
+9,2,0,2,0,0,0,0,1.0,0,2,false,true,"2 plazas de aparcamiento «pleno dominio ganancial»: tomado como ganancial = 0,5 cada una"
+10,2,1,1,0,0,0,0,1,0,2,false,true,
+11,3,2,1,0,0,0,0,2.0,0,2,false,true,"plaza de aparcamiento en derecho de superficie (contado como 1, título no consta)"
+12,11,8,1,0,2,4,0,9.5,3,7,true,true,"5 pisos/estudios en Madrid listados en Observaciones (C-V, sin %: 1 cada uno) además de la tabla; 2 fincas rústicas en Observaciones como «otros», sumadas a las 2 de la tabla; «Agrícola Roga» en la tabla rústica es sociedad (no contada); vivienda en nuda propiedad sin título; sociedades sin inmuebles descritos"
+14,0,0,0,0,0,0,0,0.0,0,0,false,true,
+15,2,2,0,0,0,0,0,1.5,0,2,false,true,
+16,3,1,2,0,0,0,0,3,0,3,false,true,
+17,2,1,1,0,0,0,0,1.0,0,2,false,true,
+18,4,2,2,0,0,0,0,2.0,0,4,false,true,piso + 2 plazas + apartamento todos al 50% compraventa
+19,13,13,0,0,0,0,0,11.7,9,4,true,true,
+21,1,1,0,0,0,0,0,0.5,0,1,false,true,
+23,0,0,0,0,0,0,0,0.0,0,0,false,true,
+24,3,2,1,0,0,0,0,1.5,0,3,false,true,«Vivienda con garaje» contada como 2 bienes al 50 %
+25,5,4,1,0,0,0,0,1.667,1,4,false,true,"viviendas Huelva «pleno dominio ganancial» contadas 0,5"
+26,3,2,1,0,0,0,0,1.07,1,2,false,true,piso al 7% por herencia
+27,2,1,1,0,0,0,0,1,0,2,false,true,
+28,1,1,0,0,0,0,0,0.5,0,1,false,true,
+29,6,2,4,0,0,0,0,4.5,0,6,true,true,"Dos filas 'vivienda, plaza de garaje y trastero' (una al 50%); acciones de Soma Rehabilitación SL sin inmuebles descritos"
+30,2,1,0,0,1,0,0,1.5,1,1,false,true,"Solar en comunidad de bienes sin % = 0,5"
+31,0,0,0,0,0,0,0,0.0,0,0,false,true,
+32,3,2,1,0,0,0,1,3,2,1,false,true,piso y garaje en usufructo (herencia); local de oficina en la tabla de sociedades (Delgado Arce Abogados SLNE)
+33,1,1,0,0,0,0,0,0.5,0,1,false,true,
+34,3,2,1,0,0,3,0,1.063,1,2,false,true,vivienda 6.25 % nuda propiedad por herencia
+35,3,2,1,0,0,0,0,3.0,0,3,false,true,
+38,0,0,0,0,0,0,0,0.0,0,0,false,true,
+39,4,2,2,0,0,3,0,2,1,3,false,true,
+40,2,2,0,0,0,0,0,1.5,0,2,false,true,
+41,3,3,0,0,0,0,0,2.5,1,0,false,true,Vivienda rural «Donación-compraventa» contada como herencia/donación; las otras dos sin título de adquisición
+42,2,2,0,0,0,0,0,1.0,0,2,false,true,
+43,8,4,4,0,0,0,0,4.517,3,5,false,true,"Dos pisos más en observaciones (8,33 % y 16,66 % nuda propiedad por herencia)"
+44,3,2,1,0,0,0,0,2.5,0,0,false,true,no consta título de adquisición
+45,1,1,0,0,0,0,0,0.25,0,0,false,true,25 % nuda propiedad; título de adquisición no consta
+46,1,1,0,0,0,0,0,1,0,1,false,true,
+47,2,1,1,0,0,0,0,2.0,0,2,false,true,
+48,4,2,1,1,0,0,0,2.0,0,3,false,true,"«local comercial, oficina» contado como 1 local; vivienda habitual por escritura de obra nueva (ni compra ni herencia); todo ganancial"
+49,5,1,4,0,0,0,0,2.5,0,5,false,true,«2 garajes» y «2 trasteros» al 50% contados 2 y 2
+50,0,0,0,0,0,0,0,0,0,0,false,true,"Solo participación en Bodegas Patrocinio SCL, sin inmuebles"
+51,5,3,1,1,0,0,0,3.0,3,2,false,true,
+52,2,2,0,0,0,1,0,1.0,0,1,false,true,"en tabla rústica: «Vivienda unifamiliar. Tierra cultivo y bosque» (nuda propiedad proindiviso, donación 2005 + obra nueva 2007): vivienda contada como urbano (0,5, título mixto sin clasificar) y tierra como 1 rústico"
+53,12,7,3,2,0,1,0,7.5,5,6,false,true,"estudio de Alicante 100% (25% herencia y 75% liquidación proindiviso): título mixto, en ninguno"
+54,8,4,4,0,0,1,0,6,4,4,true,true,"titularidad parcial sin % = 0,5 (2 pisos, plaza y trastero por herencia); rendimientos de capital inmobiliario"
+55,7,2,5,0,0,0,0,7.0,0,7,false,true,"vivienda + 2 plazas de garaje + trastero (Cáceres) y vivienda + plaza de garaje + trastero (Cádiz), pleno dominio"
+58,1,1,0,0,0,0,0,0.5,0,0,false,true,ganancial sin título de adquisición
+59,3,3,0,0,0,1,0,1.167,1,1,true,true,"vivienda 2002 por obra nueva (ni compra ni herencia); 50 % + 50 % + 16,66 %"
+60,0,0,0,0,0,0,0,0,0,0,false,true,
+61,5,4,1,0,0,0,0,1.883,1,3,false,true,vivienda Valladolid 30% sin título de adquisición
+62,3,1,2,0,0,0,0,1.5,0,3,false,true,
+63,9,6,3,0,0,1,0,9,3,6,true,true,"OBSERVACIONES añaden vivienda (compra 2022) y plaza de garaje (compra 2023) en Valladolid, distintas por fecha de la fila «Vivienda y garaje» de 2021; si fuesen las mismas, 7 urbanos"
+64,2,2,0,0,0,0,0,1.5,1,1,false,true,
+65,2,2,0,0,0,0,0,2,0,2,true,true,
+67,0,0,0,0,0,0,0,0.0,0,0,false,true,
+68,6,4,1,0,1,0,0,6.0,0,6,true,true,vivienda más plaza de aparcamiento = 2; parcela urbana en otros
+69,1,1,0,0,0,0,0,1.0,0,1,false,true,
+70,1,1,0,0,0,0,0,1,0,1,false,true,
+71,1,1,0,0,0,0,0,0.5,0,0,false,true,"pleno dominio ganancial (0,5); título autopromoción"
+72,1,1,0,0,0,0,0,1,0,1,false,true,
+73,0,0,0,0,0,0,0,0.0,0,0,false,true,
+74,0,0,0,0,0,0,2,0.0,0,0,false,true,tabla de sociedades: «explotación agrícola y vivienda» de Cortijo Carvajal Agrícola SL contada como 2
+75,5,3,2,0,0,0,0,2.5,2,3,true,true,"«Rentas derivadas de bienes inmuebles no afectos a actividades económicas» (1.486,89 €): rendimientos del capital inmobiliario"
+76,1,1,0,0,0,0,0,0.5,0,1,false,true,
+77,2,2,0,0,0,0,0,1.5,0,0,false,true,Piso vivienda habitual propiedad 100% y piso Tarragona nuda propiedad 50%; no consta título de adquisición
+78,1,1,0,0,0,0,0,0.5,0,1,false,true,
+79,0,0,0,0,0,0,0,0.0,0,0,false,true,
+80,5,3,2,0,0,0,0,4,1,4,false,true,"«piso, parking y trastero» al 100 % = 3; apartamento en nuda propiedad 50 % por herencia"
+81,3,2,0,1,0,0,0,1.333,2,1,false,true,"piso pleno dominio + piso y local 16,66 % nuda propiedad por herencia"
+82,4,2,2,0,0,0,0,3,0,4,false,true,"«1/2 PISO y PLAZA GARAJE»: se aplica 1/2 solo al piso; si la mitad fuese también de la plaza, equivalentes 2,5"
+84,2,2,0,0,0,0,1,1.5,0,1,true,true,"segunda vivienda «herencia y compraventa» (título mixto, en ninguno); vivienda en tabla de sociedades (Garre Asesores SL, 50%)"
+85,2,2,0,0,0,0,0,1.5,0,0,true,true,no consta título de adquisición (solo «pleno dominio en proindiviso» 50% y 100%)
+86,0,0,0,0,0,0,0,0,0,0,false,true,
+87,1,1,0,0,0,0,0,1,0,1,false,true,
+88,3,1,0,1,1,0,0,1.5,3,0,true,true,"Casa, local y terreno (en tabla urbana) al 50 % por herencia"
+89,5,4,1,0,0,0,0,1.6,2,2,false,true,"3 bienes al 3,33% (2 por herencia); el garaje al 3,33% no indica título"
+90,6,3,3,0,0,0,0,3,0,0,true,true,3 filas «apartamento/piso y garaje» en nuda propiedad 50 %; sin título de adquisición; renta por alquiler de apartamento
+91,1,1,0,0,0,0,0,0.5,0,1,false,true,"«parte privativo y parte ganancial» sin %: tomado 0,5"
+92,0,0,0,0,0,0,0,0,0,0,false,true,
+93,2,1,1,0,0,0,0,1.0,0,2,false,true,
+94,0,0,0,0,0,0,0,0.0,0,0,false,true,
+95,2,1,1,0,0,0,0,1,0,2,false,true,«Vivienda con plaza de garaje» 50% = 2
+96,0,0,0,0,0,0,0,0,0,0,false,true,
+98,3,2,1,0,0,0,0,2.5,0,3,true,true,"Tercer piso con fecha de adquisición 03-11-2023 (posterior a la declaración, probable errata)"
+99,0,0,0,0,0,0,0,0.0,0,0,false,true,
+100,5,2,3,0,0,4,0,2.2,1,4,false,true,"Plaza 20% herencia; vivienda y plaza gananciales; rústicos: encinar, 2 parcelas de pastos en una fila y olivos (todos 20% herencia)"
+101,5,3,1,1,0,0,0,4.5,3,2,true,true,Título «adquisición» contado como compra
+102,2,1,1,0,0,0,2,2.0,0,2,false,true,"tabla de sociedades: local comercial y finca rústica de la CB Hermanos Martínez Gómez (1/3, herencia)"
+103,1,1,0,0,0,0,0,1,0,0,false,true,vivienda unifamiliar por autoconstrucción
+104,0,0,0,0,0,0,0,0.0,0,0,false,true,
+105,2,2,0,0,0,0,0,1.5,0,2,false,true,
+106,3,3,0,0,0,1,0,1.167,3,0,false,true,
+107,0,0,0,0,0,0,0,0.0,0,0,false,true,
+108,3,2,1,0,0,0,0,2.5,0,1,false,true,Plaza de garaje en concesión (usufructo) contada 1; vivienda por autoconstrucción ni compra ni herencia
+109,3,1,2,0,0,0,0,3,0,3,false,true,
+110,3,1,2,0,0,0,0,1.5,0,3,false,true,
+111,1,0,0,0,1,0,0,0.2,1,0,false,true,"«1/5 parte de un inmueble» sin tipo, nuda propiedad por herencia"
+112,2,1,1,0,0,1,0,1,0,2,false,true,rústica: «inmueble y terreno rústico» contado como 1 finca (dudoso: podría ser 2)
+113,0,0,0,0,0,0,0,0.0,0,0,false,true,
+115,21,8,10,3,0,2,0,12.5,9,9,true,true,"filas agrupadas («2 pisos + 2 trasteros» 25%, etc.); donación de 2 locales contada como herencia; piso+parking+trastero por permuta (3) en ninguno"
+116,2,1,0,0,1,0,0,1.5,1,1,false,true,solar 50 % por herencia
+117,3,1,2,0,0,0,0,1.5,0,0,false,true,tabla vacía; en observaciones: 50% ganancial del domicilio familiar (propiedad de la esposa) con dos plazas de garaje en Valencia
+118,1,1,0,0,0,0,0,1.0,0,1,false,true,Observaciones menciona 1/8 de una vivienda heredada en 1991 sin decir si la conserva: no se cuenta
+119,12,4,8,0,0,0,0,8.5,4,8,false,true,vivienda/garaje/trastero y dúplex/garaje al 100 %; apartamento/garaje/trastero y vivienda/3 plazas de garaje al 50 %; estas últimas por herencia padre y donación madre
+120,3,3,0,0,0,0,0,2.0,1,2,false,true,piso por herencia sin derecho ni % declarado: contado como 1
+121,1,0,0,0,1,0,0,0.5,0,1,false,true,Terreno urbano en otros urbanos
+122,5,5,0,0,0,6,0,2.5,4,1,false,true,una vivienda escrita en la tabla de rústicos (contada como urbana); seis parcelas agrarias = 6 rústicos
+124,3,1,2,0,0,0,0,1.5,0,3,false,true,"Vivienda, garaje y trastero gananciales 50%; renta de inmuebles a disposición (imputada) no cuenta como alquiler"
+125,1,1,0,0,0,0,0,0.5,0,1,false,true,«Apartamento/piso» es un solo bien; 50 % nuda propiedad
+128,3,2,0,1,0,0,0,1.5,2,1,false,true,vivienda padres y almacén al 25% nuda propiedad por herencia
+129,3,1,0,0,2,0,0,3,2,1,false,true,dos fincas urbanas (una en construcción)
+130,2,2,0,0,0,1,3,1.1,1,1,false,true,"rústica: una fila «45,97 hectáreas de tierra» (compraventa y herencia 1994/2005; pueden ser varias parcelas); sociedad: 2 naves de ovino + nave almacén"
+131,3,1,1,0,1,0,0,1.5,0,3,false,true,
+132,1,1,0,0,0,0,1,0.5,0,1,false,true,el solar y la vivienda son el mismo inmueble según Observaciones (vivienda construida en el solar comprado); de sociedades: un hotel al 8 %
+133,0,0,0,0,0,0,0,0.0,0,0,false,true,
+134,2,2,0,0,0,0,0,1.5,0,2,false,true,
+136,5,2,3,0,0,0,0,3.0,0,5,true,true,"rentas con concepto «RENTA INMUEBLE» (11.400 y 6.012,50 €) tomadas como alquiler"
+137,1,0,0,0,1,0,0,1,1,0,false,true,Solar (suelo sin edificar) por donación
+138,5,3,2,0,0,1,0,2.5,0,5,false,true,«Vivienda con garaje y trastero» = 3; «parcela vivienda» contada como vivienda (tiene hipoteca de vivienda)
+139,5,3,2,0,0,0,0,4.5,2,3,false,true,
+140,2,1,1,0,0,0,0,1.5,0,0,false,true,Vivienda 100% y plaza 50%; no consta título de adquisición
+141,17,3,9,1,4,18,0,3.482,0,0,false,true,"5 plazas y 3 trasteros al 16,66 %; garaje al 50 % en concesión administrativa; 2 edificios con finca y 2 solares; sin título de adquisición; rentas inmobiliarias imputadas no cuentan como alquiler"
+142,1,1,0,0,0,2,0,1.0,0,1,false,true,Bienes en Senegal
+143,0,0,0,0,0,0,0,0.0,0,0,false,true,
+145,2,2,0,0,0,0,0,2,0,2,true,true,
+146,5,2,3,0,0,0,0,5.0,3,2,false,true,régimen ganancial pero cada bien declarado en pleno dominio: 1
+148,2,2,0,0,0,0,0,2.0,1,1,false,true,
+149,11,4,2,3,2,3,0,3.762,4,7,true,true,"«Varias fincas rústicas» sin número = 2; «Local comercial y 50 % almacén» = local (propiedad 1) + almacén 0,5; «Dos solares y dos viviendas» al 5 % por herencia; local subsuelo 6,15 %"
+150,2,2,0,0,0,0,0,2.0,0,0,true,true,chalet y piso al 100% sin título de adquisición
+151,7,3,4,0,0,2,0,7,4,3,false,true,las filas de piso con trastero y garaje al 10 % y al 90 % se toman como el mismo inmueble (si no lo fueran serían 10 urbanos); permuta contada como compra
+152,3,0,2,0,1,0,1,2.5,0,3,true,true,«plazas de aparcamiento» plural sin número = 2; «solar urbano plazas de aparcamiento» al 50% contado como 1 otro urbano
+154,1,1,0,0,0,0,0,1,0,1,false,true,
+155,0,0,0,0,0,0,0,0,0,0,false,true,
+156,4,3,1,0,0,0,0,2.5,1,3,true,true,
+157,1,1,0,0,0,0,0,1.0,0,1,false,true,«50% propiedad por compraventa y 50% disolución gananciales»: leído como 100%
+159,1,1,0,0,0,0,0,1,0,0,false,true,piso en pleno dominio por división de gananciales (no contado como compra)
+160,3,1,2,0,0,0,0,3.0,0,3,false,true,
+161,4,2,2,0,0,6,0,2.5,1,3,true,true,"vivienda, plaza de garaje y trastero pleno dominio gananciales (0,5 c/u) + vivienda heredada 100 %; rústicas: 4 fincas + 2 fincas"
+162,3,1,2,0,0,0,0,3,0,3,false,true,
+163,1,1,0,0,0,0,2,0.5,0,1,false,true,vivienda ganancial aunque declara separación de bienes; 2 pisos en tabla de sociedades (Lares del Norte SL)
+164,3,1,2,0,0,0,0,3.0,0,3,false,true,régimen ganancial pero declara «pleno dominio» en los tres
+165,0,0,0,0,0,0,0,0,0,0,false,true,
+166,0,0,0,0,0,0,0,0,0,0,false,true,
+167,2,2,0,0,0,0,0,1.5,0,2,false,true,
+168,1,1,0,0,0,0,0,1.0,0,1,false,true,
+169,1,1,0,0,0,0,0,1,0,1,false,true,
+170,8,2,6,0,0,0,0,4,0,8,false,true,
+171,3,1,2,0,0,0,0,1.5,0,3,false,true,"piso, plaza de aparcamiento y trastero al 50 %; el OCR los leía como rústicos"
+172,3,1,2,0,0,0,0,3,0,3,false,true,plaza y trastero adquiridos en subasta (contados como compra)
+173,0,0,0,0,0,0,0,0.0,0,0,false,true,
+174,3,3,0,0,0,0,0,1.125,1,2,true,true,"piso de Murcia «12.5% 17propiedad» herencia: tomado 12,5 %"
+175,1,1,0,0,0,0,0,0.5,0,1,false,true,Piso al 50% del pleno dominio
+176,6,3,2,0,1,0,0,4.0,0,5,false,true,«vivienda y patio» contado como 1 bien; piso con garaje y trastero = 3; vivienda Humanes nueva construcción (en ninguno)
+177,3,1,2,0,0,0,0,3,0,3,false,true,
+178,2,1,0,0,1,1,0,1.0,2,0,false,true,«Vivienda solar» leída como una vivienda; multipropiedad 50 %
+180,7,2,5,0,0,0,0,3.5,0,7,true,true,"«vivienda con garage y trastero» = 3 y «vivienda con 2 garage y trastero» = 4; nuda propiedad en régimen de gananciales: 0,5 cada uno"
+181,2,1,1,0,0,0,0,1,0,2,false,true,
+182,9,3,6,0,0,1,11,9.0,0,9,true,true,rústica «con residencias diseminado» al 50%; sociedad: 5 en la tabla + 6 en Observaciones (2 oficinas y 4 plazas de garaje)
+183,7,2,4,1,0,0,0,4,1,6,false,true,"«Pleno dominio ganancial» contado 0,5; «piso-garaje-trastero» = 3"
+184,2,2,0,0,0,0,0,2.0,0,2,false,true,
+185,1,1,0,0,0,0,0,1,0,1,false,true,«Piso. Vivienda habitual» = 1 bien
+186,1,1,0,0,0,0,0,0.5,0,1,false,true,piso ganancial aunque declara separación de bienes
+187,0,0,0,0,0,0,0,0.0,0,0,false,true,
+188,1,1,0,0,0,0,0,0.5,0,1,false,true,
+189,4,2,2,0,0,0,0,3,0,4,true,true,"Vivienda y plaza al 50%, vivienda y plaza al 100%; arrendamientos de inmuebles 12.845 €"
+190,7,6,1,0,0,0,0,4.0,6,1,true,true,"Multipropiedad sin % = 0,5; plaza de aparcamiento urbana escrita en tabla de rústicos; filas cruzadas por la cuadrícula del formulario, no tachadas"
+191,1,1,0,0,0,0,0,1,0,1,false,true,
+192,2,2,0,0,0,0,0,2.0,1,1,true,true,
+193,7,4,3,0,0,0,0,5.125,3,4,true,true,"«vivienda (con garaje)» = 2 en tres filas; vivienda al 12,5% por herencia"
+194,0,0,0,0,0,0,0,0.0,0,0,false,true,
+195,4,3,1,0,0,4,0,1.5,4,0,false,true,multipropiedad 25 %/50 %; «fincas rústicas» en plural sin número = 2
+196,1,1,0,0,0,3,0,1.0,0,0,false,true,vivienda unifamiliar por construcción propia; 2 fincas rústicas + 1 finca rústica (herencia) escritas en la tabla urbana
+197,18,8,10,0,0,4,0,11,4,14,false,true,rústicos: 4 lotes que nombran unos 21 parajes sin dar el número de fincas (se cuentan 4); 2 casas añadidas en Observaciones en comunidad de bienes
+198,3,2,1,0,0,0,0,3,2,1,false,true,
+199,2,2,0,0,0,0,0,0.757,1,1,false,true,"«vivienda unifamiliar con finca» contada como 1 bien cada fila; 66 % + 9,747 %"
+200,1,1,0,0,0,0,0,1,0,1,false,true,
+202,2,2,0,0,0,0,0,1.1,1,1,false,true,vivienda Guadalajara 10% nuda propiedad por herencia; paga alquiler de vivienda (no cuenta)
+203,4,2,1,1,0,0,0,3.0,0,4,true,true,plaza de garaje y local sin % (compraventa) contados 1
+204,2,1,1,0,0,0,0,1.0,0,2,false,true,«50% de vivienda con plaza de garage»: 2 bienes al 50%
+206,2,2,0,0,0,0,0,2,1,1,false,true,
+207,1,1,0,0,0,0,0,1,1,0,false,true,Piso pleno dominio por herencia y donación
+208,2,2,0,0,0,0,0,1.08,1,1,false,true,Casa-vivienda habitual escrita en la tabla de rústicos: contada como vivienda urbana; piso al 8 % por herencia
+209,7,4,2,0,1,0,0,6.0,0,7,false,true,"«plazas de garaje» sin número con dos fechas (2006, 2022) = 2; parcela en la tabla urbana sin más detalle"
+210,0,0,0,0,0,0,0,0.0,0,0,false,true,
+211,8,4,4,0,0,5,0,4,1,7,false,true,"Vivienda de Murcia «25% herencia y 25% gananciales, compraventa (2023)» contada 0,5 y como herencia; «4 pequeñas parcelas» rústicas = 4"
+212,0,0,0,0,0,0,0,0,0,0,false,true,
+213,3,2,0,1,0,0,0,2.0,1,2,false,true,
+214,3,3,0,0,0,0,0,2.33,0,3,false,true,loft contado como vivienda; 33 % declarado tal cual
+215,9,5,4,0,0,0,0,2.9,7,2,false,true,Vivienda 50%; 2 viviendas y 3 garajes al 20% herencia; 1 vivienda y 1 garaje al 20% herencia; apartamento 100%
+216,8,2,6,0,0,0,0,3.0,4,4,false,true,
+217,1,1,0,0,0,0,0,1.0,0,1,false,true,
+218,6,4,2,0,0,1,0,4.5,4,2,false,true,donaciones contadas como herencia
+219,6,5,1,0,0,1,1,5,4,2,false,true,"vivienda en Ondara escrita en la tabla de rústicos, contada como urbana; vivienda portería al 5,78 % en tabla de sociedades"
+220,1,1,0,0,0,0,0,1.0,0,1,false,true,
+221,1,1,0,0,0,2,0,0.333,1,0,false,true,
+222,1,1,0,0,0,0,0,1,0,1,true,true,"Renta de alquiler del piso (1.056 €) declarada en 'Otros bienes, rentas o derechos', no en la página de rentas"
+223,1,1,0,0,0,0,0,0.5,0,1,false,true,Deudas citan hipoteca de otra vivienda familiar al 33 % que no figura en bienes
+224,1,1,0,0,0,0,0,1.0,0,1,false,true,
+225,2,2,0,0,0,0,0,1.165,1,1,false,true,"segunda vivienda: 16,5 % en nuda propiedad por herencia"
+228,1,1,0,0,0,0,0,1.0,0,1,false,true,
+229,4,4,0,0,0,0,0,2,0,4,true,true,
+231,1,1,0,0,0,0,0,0.5,0,1,false,true,
+232,2,2,0,0,0,0,0,1.5,0,2,false,true,
+234,21,19,0,0,2,1,0,10.1,20,1,false,true,«16 viviendas» al 50 % por herencia; además 2 viviendas y 2 solares al 50 % y vivienda al 10 %; rústica: viñedo; no declara rentas por alquiler
+235,8,5,3,0,0,0,0,5.5,3,5,true,true,OBSERVACIONES repiten piso y garaje por herencia y añaden piso en Madrid 50 % compra
+236,5,4,1,0,0,3,0,4.5,1,4,false,true,"vivienda+garaje al 85% = 2; tabla de sociedades solo importe (35.000+370.761 herencia), 0; imputación de renta inmobiliaria no es alquiler"
+238,4,4,0,0,0,54,0,2.25,3,1,false,true,"vivienda de A Coruña 50% autoconstrucción 2003 + 50% compra 2020, contada como compra; rústicos: 52 parcelas + 2 fincas"
+239,1,1,0,0,0,0,0,1,0,0,false,true,"Casa unifamiliar propiedad 100%, sin título de adquisición"
+241,4,1,3,0,0,0,0,1.165,4,0,false,true,"3 plazas de aparcamiento al 33,3% y piso al 16,6%, todo por herencia"
+242,1,0,0,1,0,1,0,1.0,1,0,true,true,
+243,1,1,0,0,0,0,2,1.0,0,1,true,true,sociedad: piso con parquing vía Hakkari Patrimonial SL (51%); alquiler mensual de piso en otras rentas
+244,0,0,0,0,0,0,0,0,0,0,false,true,
+245,1,1,0,0,0,0,2,0.5,0,0,false,true,"urbana: 50 % nuda propiedad, título no consta; en la tabla de sociedades aparecen 2 viviendas (piso) con «50 % usufructo» y «propiedad», posiblemente bienes personales mal ubicados"
+246,5,4,0,0,1,3,0,3.5,3,2,false,true,«Propiedad horizontal» 50% contada como otros urbanos
+248,4,0,0,0,4,0,0,2.75,3,1,true,true,los 4 urbanos solo dicen «inmueble» (en otros); renta por alquiler de 2 oficinas en Valencia
+249,0,0,0,0,0,0,0,0.0,0,0,false,true,
+252,3,2,1,0,0,1,0,2.5,1,2,true,true,
+253,5,3,2,0,0,0,0,4.5,0,4,true,true,Incluye garaje en vivienda de Madrid citado en Observaciones (sin valor catastral propio ni finca independiente; titularidad y título no constan)
+254,4,2,2,0,0,0,0,3.5,1,3,false,true,"Vivienda 50% por donación; vivienda, plaza de garaje y trastero privativos por compraventa"
+255,1,1,0,0,0,0,0,1,0,0,false,true,Piso pleno dominio; no consta título de adquisición
+256,5,1,4,0,0,0,14,5.0,0,5,false,true,Sociedad: 12 locales y 2 plazas de aparcamiento
+258,1,1,0,0,0,0,0,0.5,0,0,false,true,Sin título de adquisición
+259,2,1,1,0,0,0,0,1.0,0,2,false,true,«domicilio con plaza de garaje» 50% compraventa = 2
+260,2,1,0,1,0,0,0,1,0,2,true,true,renta como arrendador de local comercial
+262,1,1,0,0,0,0,0,0.5,0,0,false,true,mitad indivisa; título de adquisición no consta
+263,1,1,0,0,0,0,0,0.5,0,0,false,true,título de adquisición no consta (hipoteca de la misma fecha)
+264,0,0,0,0,0,0,0,0.0,0,0,true,true,«renta inmobiliaria» 2022 de un inmueble vendido en mayo de 2023 (por eso no figura en bienes)
+266,1,1,0,0,0,0,0,0.5,0,1,false,true,
+268,3,3,0,0,0,0,0,2.5,1,2,false,true,«Casa rústica» declarada en la tabla urbana; contada como vivienda
+269,1,1,0,0,0,0,0,1,0,1,false,true,
+270,0,0,0,0,0,0,0,0.0,0,0,false,true,
+271,2,2,0,0,0,0,0,2.0,0,2,true,true,el arrendamiento de una vivienda (10.800 €/año) figura en Otros bienes y no en Rentas
+272,1,1,0,0,0,0,0,1,0,1,false,true,
+273,2,1,0,1,0,0,0,2.0,0,2,false,true,
+276,3,1,2,0,0,0,0,3,0,3,false,true,
+277,1,1,0,0,0,5,0,1.0,0,1,false,true,3 rústicas en tabla y 2 más en observaciones (todas 50% herencia)
+281,9,3,5,1,0,0,29,8.0,2,7,false,true,"local y piso en comunidad de bienes por pacto sucesorio (0,5); sociedad: 4 en tabla + 25 en observaciones (se omite la nave de 450 m2 repetida; incluye 4 plazas, 8 fincas rústicas y 2 fincas urbanas; el piso 63,77 m2 de observaciones podría ser el mismo de la tabla urbana)"
+282,0,0,0,0,0,0,0,0.0,0,0,false,true,
+283,2,2,0,0,0,0,2,1.25,1,1,false,true,
+284,2,1,1,0,0,0,0,2,0,2,false,true,'Vivienda unifamiliar con garaje' contada como 2 bienes
+287,2,2,0,0,0,0,0,1.5,0,2,true,true,
+288,4,2,1,0,1,2,0,4,1,3,false,true,«terreno» en la tabla urbana contado como otros urbanos; piso en Hendaya (Francia)
+290,2,2,0,0,0,0,0,2.0,0,2,false,true,«Finca con vivienda a reconstruir» (Bizkaia) contada como vivienda; la otra está en Francia
+291,1,1,0,0,0,0,0,1,0,1,true,true,arrendamiento de vivienda hasta febrero de 2023
+292,0,0,0,0,0,0,0,0.0,0,0,false,true,
+293,2,2,0,0,0,0,0,1,0,2,true,true,
+294,0,0,0,0,0,0,0,0.0,0,0,false,true,
+296,3,2,1,0,0,0,0,3.0,0,3,true,true,
+297,4,1,2,1,0,0,0,2.5,0,4,false,true,Plaza de garaje «pleno dominio 2003» contada al 100%
+298,1,1,0,0,0,0,0,0.5,0,1,false,true,
+299,2,1,1,0,0,0,0,1.0,0,2,false,true,Ganancial aunque declara separación de bienes
+300,2,1,1,0,0,0,0,1.5,0,1,false,true,"piso pleno dominio por «donación y compraventa familia»: título mixto, en ninguno"
+303,1,1,0,0,0,0,0,0.5,0,1,false,true,
+305,1,1,0,0,0,0,0,1.0,0,1,false,true,
+306,5,2,1,2,0,0,0,1.867,3,2,false,true,
+307,3,3,0,0,0,0,0,0.75,2,1,false,true,"«dos casas heredadas» en una fila = 2, octava parte proindivisa de cada una (0,125)"
+309,2,2,0,0,0,25,0,1.0,1,1,false,true,"dos filas «1/2 caserío» (compra 2007 y donación 2008), quizá el mismo caserío; rústicos contados parcela a parcela (9+14+2), la 1ª fila es confusa"
+310,1,1,0,0,0,0,0,1,0,1,false,true,
+311,5,4,0,0,1,0,0,2.5,0,5,false,true,todo ganancial; «piso apartamento» = 1 bien; «parcela» en tabla urbana sin más detalle
+312,1,1,0,0,0,0,0,0.5,0,1,false,true,Vivienda familiar pleno dominio 50% compraventa
+314,2,1,1,0,0,0,0,2.0,0,2,false,true,
+315,3,3,0,0,0,0,0,2.5,0,3,false,true,
+316,,,,,,,,,,,true,false,bienes urbanos: «me remito a la declaración correspondiente al inicio de la XIV legislatura» más una casa ganancial comprada en 2022 en Lucena del Cid; lista incompleta. Rentas: tres alquileres de vivienda (Villarreal x2 y Valencia)
+317,1,1,0,0,0,0,0,0.4,0,1,false,true,
+318,2,2,0,0,0,2,0,1.5,0,1,false,true,vivienda de Moratalla por autoconstrucción (ni herencia ni compra)
+319,2,2,0,0,0,0,1,1.33,2,0,false,true,viviendas en nuda propiedad (33% y 100%) por donación; vivienda unifamiliar 25% en tabla de sociedades
+320,2,2,0,0,0,0,0,1.0,0,2,false,true,
+321,2,1,1,0,0,0,0,1,0,2,false,true,
+323,3,2,1,0,0,0,0,2.5,1,2,true,true,"Piso Palencia por donación, plaza compraventa, piso Madrid privativo 50%; alquiler de vivienda al 50%"
+324,14,4,4,2,4,18,18,5,7,0,true,true,urbanos sin título salvo herencias (compra 0); 4 fincas urbanas en otros; sociedad: 3 locales+local garaje+local comercial+2 viviendas+nave+8 fincas rústicas+2 naves
+325,11,5,0,1,5,0,0,3.969,7,4,false,true,"observaciones añaden 5 solares y 1 local; el solar Castropol enero 2016 50% compraventa aparece repetido al cambiar de página y se cuenta una vez (si fueran dos: 12 urbanos y 4,469)"
+327,1,1,0,0,0,0,0,0.5,0,1,false,true,
+328,1,1,0,0,0,0,0,0.5,0,1,false,true,
+329,1,1,0,0,0,0,0,0.5,0,1,false,true,
+331,4,4,0,0,0,0,0,1.83,2,0,true,true,2 bienes con título «Hipoteca» (no consta compraventa): no contados como compra; 50 % + 33 % + 50 % + 50 %
+332,0,0,0,0,0,0,0,0,0,0,false,true,
+334,3,1,2,0,0,0,0,3.0,0,3,false,true,
+338,0,0,0,0,0,0,0,0.0,0,0,false,true,
+339,2,2,0,0,0,0,0,2,0,2,false,true,
+340,1,1,0,0,0,0,0,0.5,0,1,false,true,
+341,2,1,1,0,0,0,0,2.0,0,2,false,true,
+342,2,1,0,1,0,0,0,1.0,0,1,false,true,despacho y vivienda gananciales; la vivienda no indica título
+344,0,0,0,0,0,0,0,0,0,0,false,true,
+345,1,1,0,0,0,0,0,0.624,0,1,false,true,"62,357 %"
+346,5,3,2,0,0,1,0,5.0,0,5,true,true,"«Rendimientos bienes inmuebles» 5.584,40 € tomado como alquiler"
+347,2,2,0,0,0,0,0,1,0,2,true,true,
+348,1,1,0,0,0,0,0,0.083,1,0,false,true,"8,33% de nuda propiedad por herencia"
+349,1,1,0,0,0,0,0,0.5,0,1,false,true,
+350,1,1,0,0,0,0,2,0.12,1,0,false,true,"Tabla de sociedades: «casa y olivar» en comunidad de bienes 33% (herencia), contados 2"
+351,2,1,1,0,0,0,0,1,0,2,false,true,"'Vivienda, piso y garaje' en una sola fila al 50%: se interpreta vivienda(piso) + garaje = 2; literal podría ser 3"
+352,6,2,4,0,0,0,0,6,0,6,false,true,Separación de bienes sin %: cada bien contado 1
+353,1,1,0,0,0,0,0,0.5,0,1,false,true,Declara renta de explotación agrícola familiar pero ninguna finca rústica
+354,5,2,2,1,0,0,0,2.5,2,3,false,true,"«almacén agrícola» escrito en la tabla rústica, clasificado como local urbano (ganancial, compraventa); 2 pisos con garaje gananciales"
+355,1,1,0,0,0,0,0,1,0,1,false,true,
+357,0,0,0,0,0,0,0,0.0,0,0,false,true,
+358,0,0,0,0,0,0,0,0,0,0,false,true,
+359,1,1,0,0,0,0,0,1.0,0,1,false,true,
+361,1,1,0,0,0,0,0,0.5,0,1,false,true,
+362,4,3,0,1,0,0,0,3,1,3,false,true,
+363,5,1,4,0,0,0,0,5,0,5,false,true,Piso + 2 aparcamientos + 2 trasteros en una fila
+364,0,0,0,0,0,0,0,0,0,0,false,true,
+365,3,1,2,0,0,0,0,3.0,0,3,false,true,
+366,0,0,0,0,0,0,0,0.0,0,0,false,true,
+367,2,1,0,0,1,0,0,1.5,0,2,false,true,solar urbano al 50 %
+368,4,1,3,0,0,0,0,2.0,0,4,false,true,"vivienda y trastero + 2 cocheras, todo ganancial"
+369,2,1,0,0,1,0,0,1.05,0,2,false,true,«terreno» en la tabla urbana sin más detalle (en otros)
+370,2,1,0,0,1,0,1,0.75,2,0,false,true,"parcela rústica escrita en la tabla de rústicas pero su título es suscripción de participaciones de la SL titular (Delicias Forestales): contada como inmueble de sociedad, no rústico a su nombre"
+371,2,2,0,0,0,1,0,1.1,0,2,true,true,vivienda al 10% por «cesión onerosa» contada como compra; «Rendimiento bien inmueble» 12.600 € declarado en intereses
+372,0,0,0,0,0,0,0,0,0,0,false,true,
+373,2,1,1,0,0,0,0,1,0,2,false,true,
+374,1,1,0,0,0,0,0,1.0,0,0,false,true,"Vivienda construida sobre terreno donado por sus padres: autoconstrucción, ni herencia ni compra"
+375,5,3,2,0,0,0,0,2.5,0,5,false,true,"2 «casa» (O Incio) escritas en la tabla rústica, clasificadas como viviendas; piso con trastero y plaza de garaje = 3; todo 50% compraventa"
+376,5,3,1,0,1,3,0,3.167,3,2,true,true,"«Ático trastero» contado como 2 (ático + trastero); 3 hazas de riego al 16,66 %"
+377,0,0,0,0,0,0,0,0,0,0,false,true,
+378,3,1,2,0,0,0,0,1.0,3,0,false,true,"piso + dos plazas de aparcamiento, 1/3 por herencia; en la tabla de sociedades solo «1/36 parte de Sociedad Cultural Recreativa (gastronómica)» sin describir inmueble: 0"
+380,1,1,0,0,0,0,0,0.5,0,0,false,true,título de adquisición no consta (solo «ganancial»)
+381,1,1,0,0,0,0,0,1.0,0,1,false,true,"derecho no consta (compra a promotor 1998); cabecera dice gananciales: si fuera ganancial serían 0,5"
+382,0,0,0,0,0,0,0,0.0,0,0,false,true,
+383,6,2,4,0,0,0,0,3.0,0,6,true,true,
+384,4,3,1,0,0,0,1,3.5,0,3,false,true,"Piso 50% sin título; renta de 118,62 € de un piso de la comunidad del edificio declarada como dividendos, no como alquiler"
+385,2,2,0,0,0,0,0,0.83,0,2,false,true,Vivienda 50% y vivienda 33%
+386,3,1,2,0,0,0,0,3.0,0,3,false,true,Nuda propiedad sin % = 1
+387,2,0,1,0,1,0,0,1.0,0,2,false,true,«parcela urbana con trastero» 50% compraventa = 2
+388,2,1,1,0,0,0,0,2,0,2,false,true,
+389,4,3,1,0,0,0,0,3.5,0,4,true,true,
+390,0,0,0,0,0,0,0,0,0,0,false,true,
+391,1,0,0,0,1,0,0,1.0,0,1,false,true,terreno urbano (otros)
+392,2,1,0,1,0,0,0,0.5,2,0,false,true,
+393,1,1,0,0,0,2,0,0.5,0,1,false,true,
+394,0,0,0,0,0,0,0,0,0,0,false,true,
+395,5,1,2,0,2,0,0,5,0,5,false,true,«2 terrenos urbanizables» = 2
+396,5,2,3,0,0,0,1,2.5,0,5,false,true,"Local comercial de Vilamide SL (1/3) en tabla de sociedades, no suma a urbanos"
+397,0,0,0,0,0,0,0,0.0,0,0,false,true,
+398,2,2,0,0,0,1,0,0.83,0,2,false,true,viviendas al 33 % y 50 %; terreno rústico al 33 %
+399,5,2,3,0,0,0,0,5.0,0,5,false,true,
+400,0,0,0,0,0,0,0,0.0,0,0,false,true,
+401,1,1,0,0,0,0,0,0.5,0,1,false,true,
+402,0,0,0,0,0,0,0,0.0,0,0,false,true,
+403,0,0,0,0,0,0,0,0.0,0,0,false,true,
+404,6,5,1,0,0,0,0,2.6,1,5,true,true,
+405,3,1,2,0,0,0,0,3.0,0,3,false,true,
+406,2,1,0,0,1,1,0,1,0,0,false,true,
+407,1,1,0,0,0,0,0,1,0,1,false,true,
+408,1,1,0,0,0,0,0,1.0,0,1,true,true,"Alquiler = «rendimiento de capital inmobiliario comunidad de vecinos» de 52,49 €"
+409,0,0,0,0,0,0,0,0.0,0,0,false,true,
+410,1,1,0,0,0,0,0,0.5,0,1,false,true,
+412,15,9,6,0,0,24,0,9.5,3,11,true,true,vivienda unifamiliar por autoconstrucción (ni compra ni herencia); 3 viviendas unifamiliares «pleno dominio/nuda propiedad» herencia contadas a 1

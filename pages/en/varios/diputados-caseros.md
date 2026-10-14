@@ -1,7 +1,7 @@
 ---
 title: How many MPs are landlords?
 description: "How many members of the Congress of Deputies declare rental income or own several homes, what real estate they declare, how many whole urban properties each MP and each party owns, according to their declarations of assets and income, and compared with all personal income tax filers."
-i18n_origen: dbee8acb0fd6
+i18n_origen: 965f8dba6a2e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -145,7 +145,6 @@ SELECT row_number() OVER (ORDER BY urbanos_equivalentes DESC, n_urbanos DESC, no
        nombre, partido, circunscripcion, urbanos_equivalentes, n_urbanos, n_viviendas_urbanas, n_rusticos,
        n_inmuebles_sociedad,
        CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
-       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
        url_pdf
 FROM mother.diputados_inmuebles_diputados
 WHERE extraccion_ok
@@ -156,7 +155,32 @@ ORDER BY puesto
 SELECT nombre || ' (' || partido || ')' AS diputado, urbanos_equivalentes, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
 ```
 
+```sql sin_declaracion
+SELECT id_diputado, nombre, partido, circunscripcion, strftime(fecha_alta, '%d/%m/%Y') AS alta, estado_declaracion, url_pdf,
+       'https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=' || id_diputado || '&idLegislatura=XV' AS url_ficha
+FROM mother.diputados_inmuebles_diputados
+WHERE estado_declaracion <> 'valida'
+ORDER BY CASE estado_declaracion WHEN 'sin_declaracion' THEN 1 ELSE 2 END, nombre
+```
+
 # <span aria-hidden="true">🏘️</span> How many MPs are landlords?
+
+{#if sin_declaracion.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ MPs without a declaration of assets</p>
+    {#each sin_declaracion as d}
+    <div class="mt-4">
+        <p class="text-2xl font-extrabold leading-tight text-red-700 dark:text-red-300">{d.nombre} <span class="whitespace-nowrap text-base font-semibold">({d.partido}, {d.circunscripcion})</span></p>
+        {#if d.estado_declaracion === 'sin_declaracion'}
+        <p class="mt-1 text-red-900 dark:text-red-100">Their Congress profile does not link to any declaration of assets and income. In Congress since {d.alta}. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_ficha} target="_blank" rel="noopener">See their profile ↗</a></p>
+        {:else}
+        <p class="mt-1 text-red-900 dark:text-red-100">Their declaration does not list all their assets: for urban properties it refers to the one filed at the start of the 14th Legislature, which Congress no longer publishes. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_pdf} target="_blank" rel="noopener">See the declaration ↗</a></p>
+        {/if}
+    </div>
+    {/each}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">They are not included in the figures or rankings on this page.</p>
+</div>
+{/if}
 
 When they take their seats, members of the Congress of Deputies submit a declaration of assets and income that is published on their profile page. We have read those of the {kpi[0]?.n_diputados} sitting MPs of the 15th Legislature to count how many declare rental income, how many own more than one home and what properties each one declares. Everything that follows is what their declarations state.
 
@@ -270,7 +294,7 @@ Inherited or bought? {formatNumber(adquisicion_total[0]?.pct_compra, 0)} % of th
     sort=false
     yFmt='0"%"'
     yAxisTitle="% of urban properties"
-    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'No consta': '#d4d4d4'}}
+    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'Otro o no consta': '#d4d4d4'}}
     title="How they acquired their urban properties, parties with 5 or more MPs"
 />
 
@@ -367,7 +391,6 @@ The average is pushed up by a few MPs with many properties: the median tells how
     <Column id=n_rusticos title="Rural plots" fmt='0' />
     <Column id=n_inmuebles_sociedad title="From their companies" fmt='0' />
     <Column id=alquila title="Declares rental income" />
-    <Column id=revisado title="Checked by hand" />
     <Column id=url_pdf title="Declaration" contentType=link linkLabel="PDF ↗" openInNewTab=true />
 </DataTable>
 
@@ -376,7 +399,7 @@ The order is set by the «Whole urban» column: a flat inherited among four sibl
 ## Methodology and sources
 
 - **Declarations**: [Congress of Deputies, MPs' profile pages](https://www.congreso.es/es/busqueda-de-diputados), initial declaration of assets and income of each sitting MP of the 15th Legislature (submitted between {resumen[0]?.primera} and {resumen[0]?.ultima}). Later amendments are not used because they are usually partial. {kpi[0]?.n_excluidos} declarations that cannot be read or that refer back to an earlier one are excluded.
-- **Reading**: the documents are scans; they were read with optical character recognition. Rows that name several assets («home, parking space and storage room») are counted asset by asset. All MPs who declare seven or more properties or four or more whole urban properties, and those who continue the list in the Remarks box, have been checked by hand against the PDF («Checked by hand»), and their figures replace the automatically read ones; elsewhere there may be occasional errors, and each MP links to their declaration so it can be checked. The breakdown by type of property and by form of acquisition is calculated row by row from the automatic reading, so its totals do not exactly match those of each MP.
+- **Reading**: the documents are scans. Every declaration has been checked by hand against the PDF, including the Remarks box, where some MPs continue the list of properties: the counts, the share owned of each property, its type, whether it was inherited or bought and whether rental income is declared all come from that review, not from the automatic reading, which made too many mistakes. Each asset named counts as one («home, parking space and storage room» are three). Each MP links to their declaration so it can be checked.
 - **Rental income**: the form has no box for it; it is detected from the description of each income item («alquiler», «arrendamiento», «capital inmobiliario»...). Amounts are as declared, some net, others gross and a few monthly, so they are neither added up nor compared. Imputed income from homes available for own use does not count as rental income.
 - **Whole urban properties**: sum of the ownership share of each urban property (homes, garages, storage rooms, commercial premises, building plots); when it is recorded as marital property or co-owned without a percentage, half is counted. The form does not ask for the value of the properties, so a flat in central Madrid and a house in a village count the same.
 - **Taxpayers**: [Spanish Tax Agency, Personal income tax filers statistics](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), item 102 (income from let property), common-regime territory. The unit is the return, which may be joint, not the person.

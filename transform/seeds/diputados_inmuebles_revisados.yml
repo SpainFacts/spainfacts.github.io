@@ -3,12 +3,16 @@ version: 2
 seeds:
   - name: diputados_inmuebles_revisados
     description: >
-      Recuentos de inmuebles comprobados a mano en el PDF de la declaración inicial de Bienes
-      y Rentas (Congreso, XV Legislatura) para la cabeza del ranking de diputados por número
-      de inmuebles, donde un error del OCR (filas fundidas o saltadas) pesa más. Sustituyen a
-      los del OCR en diputados_inmuebles_diputados. Criterio: cada piso, garaje, trastero,
-      local o solar cuenta uno; "3 plazas de garaje" cuenta tres; urbanos_equivalentes suma
-      la fracción de titularidad de cada urbano (ganancial sin % = 0,5).
+      Revisión a mano, en el PDF, de la declaración inicial de Bienes y Rentas de cada
+      diputado (Congreso, XV Legislatura), incluido el recuadro de Observaciones. Sustituye
+      al OCR en diputados_inmuebles_diputados. Criterio: cada bien nombrado cuenta uno
+      ("vivienda, plaza de garaje y trastero" = 3; "3 plazas de garaje" = 3); tipos urbanos
+      (viviendas, garajes y trasteros, locales/oficinas/naves, otros) suman n_urbanos;
+      urbanos_equivalentes suma la fracción de titularidad de cada urbano (ganancial,
+      comunidad o titularidad parcial sin % = 0,5; pleno dominio o propiedad sin % = 1);
+      n_urbanos_herencia (herencia, donación, legado) y n_urbanos_compra; declara_alquiler:
+      alguna renta por alquiler, arrendamiento o capital inmobiliario (no las imputadas);
+      lectura_valida = false si es ilegible o remite a otra declaración.
     config:
       column_types:
         id_diputado: integer
@@ -16,7 +20,14 @@ seeds:
         n_viviendas_urbanas: integer
         n_rusticos: integer
         n_sociedad: integer
+        n_garajes_trasteros: integer
+        n_locales: integer
+        n_otros_urbanos: integer
         urbanos_equivalentes: double
+        n_urbanos_herencia: integer
+        n_urbanos_compra: integer
+        declara_alquiler: boolean
+        lectura_valida: boolean
         nota: varchar
     columns:
       - name: id_diputado

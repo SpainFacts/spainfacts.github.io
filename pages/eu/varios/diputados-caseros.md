@@ -1,7 +1,7 @@
 ---
 title: Zenbat diputatu dira etxe-jabe errentatzaile?
 description: "Kongresuko zenbat diputatuk aitortzen dituzten alokairuagatiko diru-sarrerak edo dituzten hainbat etxebizitza, zer ondare higiezin aitortzen duten, zenbat hiri-higiezin oso dituen bakoitzak eta alderdi bakoitzak, beren ondasun eta errenten aitorpenen arabera, eta PFEZaren aitortzaile guztiekin alderatuta."
-i18n_origen: dbee8acb0fd6
+i18n_origen: 965f8dba6a2e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -145,7 +145,6 @@ SELECT row_number() OVER (ORDER BY urbanos_equivalentes DESC, n_urbanos DESC, no
        nombre, partido, circunscripcion, urbanos_equivalentes, n_urbanos, n_viviendas_urbanas, n_rusticos,
        n_inmuebles_sociedad,
        CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
-       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
        url_pdf
 FROM mother.diputados_inmuebles_diputados
 WHERE extraccion_ok
@@ -156,7 +155,32 @@ ORDER BY puesto
 SELECT nombre || ' (' || partido || ')' AS diputado, urbanos_equivalentes, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
 ```
 
+```sql sin_declaracion
+SELECT id_diputado, nombre, partido, circunscripcion, strftime(fecha_alta, '%d/%m/%Y') AS alta, estado_declaracion, url_pdf,
+       'https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=' || id_diputado || '&idLegislatura=XV' AS url_ficha
+FROM mother.diputados_inmuebles_diputados
+WHERE estado_declaracion <> 'valida'
+ORDER BY CASE estado_declaracion WHEN 'sin_declaracion' THEN 1 ELSE 2 END, nombre
+```
+
 # <span aria-hidden="true">🏘️</span> Zenbat diputatu dira etxe-jabe errentatzaile?
+
+{#if sin_declaracion.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Ondasun-aitorpenik gabeko diputatuak</p>
+    {#each sin_declaracion as d}
+    <div class="mt-4">
+        <p class="text-2xl font-extrabold leading-tight text-red-700 dark:text-red-300">{d.nombre} <span class="whitespace-nowrap text-base font-semibold">({d.partido}, {d.circunscripcion})</span></p>
+        {#if d.estado_declaracion === 'sin_declaracion'}
+        <p class="mt-1 text-red-900 dark:text-red-100">Kongresuko bere fitxak ez du ondasun eta errenten aitorpenik estekatzen. Kongresuan noiztik: {d.alta}. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_ficha} target="_blank" rel="noopener">Ikusi fitxa ↗</a></p>
+        {:else}
+        <p class="mt-1 text-red-900 dark:text-red-100">Bere aitorpenak ez ditu bere ondasun guztiak zerrendatzen: hiri-higiezinetarako XIV. Legegintzaldiaren hasieran aurkeztutakora jotzen du, eta Kongresuak ez du hori argitaratzen dagoeneko. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_pdf} target="_blank" rel="noopener">Ikusi aitorpena ↗</a></p>
+        {/if}
+    </div>
+    {/each}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">Ez dira orri honetako zifretan ezta rankingetan sartzen.</p>
+</div>
+{/if}
 
 Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkezten dute, eta haien fitxan argitaratzen da. XV. Legegintzaldiko {kpi[0]?.n_diputados} diputatu aktiboenak irakurri ditugu, zenbatek aitortzen dituzten alokairuagatiko diru-sarrerak, zenbatek duten etxebizitza bat baino gehiago eta bakoitzak zer higiezin aitortzen dituen zenbatzeko. Ondoren datorren guztia haien aitorpenetan jasotakoa da.
 
@@ -270,7 +294,7 @@ Herentziaz jasoak ala erosiak? Aitortutako hiri-higiezinen {formatNumber(adquisi
     sort=false
     yFmt='0"%"'
     yAxisTitle="hiri-higiezinen %"
-    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'No consta': '#d4d4d4'}}
+    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'Otro o no consta': '#d4d4d4'}}
     title="Nola eskuratu zituzten beren hiri-higiezinak, 5 diputatu edo gehiagoko alderdiak"
 />
 
@@ -367,7 +391,6 @@ Higiezin asko dituzten diputatu gutxi batzuek batez bestekoa gora botatzen dute:
     <Column id=n_rusticos title="Landa-finkak" fmt='0' />
     <Column id=n_inmuebles_sociedad title="Haien sozietateenak" fmt='0' />
     <Column id=alquila title="Alokairuagatiko diru-sarrerak aitortzen ditu" />
-    <Column id=revisado title="Eskuz berrikusia" />
     <Column id=url_pdf title="Aitorpena" contentType=link linkLabel="PDF ↗" openInNewTab=true />
 </DataTable>
 
@@ -376,7 +399,7 @@ Ordena «Hiri-higiezin osoak» zutabeak ematen du: lau anai-arreben artean heren
 ## Metodologia eta iturriak
 
 - **Aitorpenak**: [Diputatuen Kongresua, diputatuen fitxak](https://www.congreso.es/es/busqueda-de-diputados), XV. Legegintzaldiko diputatu aktibo bakoitzaren hasierako ondasun eta errenten aitorpena ({resumen[0]?.primera} eta {resumen[0]?.ultima} artean aurkeztuak). Ondorengo aldaketak ez dira erabiltzen, partzialak izan ohi direlako. Irakurri ezin diren edo aurreko batera bidaltzen duten {kpi[0]?.n_excluidos} aitorpen baztertzen dira.
-- **Irakurketa**: dokumentuak eskaneatuak dira; karaktere-ezagutze optikoarekin irakurri dira. Hainbat ondasun aipatzen dituzten errenkadak («etxebizitza, garaje-plaza eta trastelekua») ondasunez ondasun zenbatzen dira. Zazpi higiezin edo gehiago edo lau hiri-higiezin oso edo gehiago aitortzen dituzten diputatu guztiak, eta zerrenda Oharren laukian jarraitzen dutenak, eskuz egiaztatu dira PDFan («Eskuz berrikusia»), eta haien zifrek automatikoki irakurritakoak ordezkatzen dituzte; gainerakoetan noizbehinkako akatsak egon daitezke, eta bakoitzak bere aitorpenerako esteka du egiaztatu ahal izateko. Higiezin motaren eta eskuratze moduaren araberako banakapena errenkadaz errenkada kalkulatzen da irakurketa automatikoaren gainean; beraz, haren baturak ez datoz zehazki bat diputatu bakoitzarenekin.
+- **Irakurketa**: dokumentuak eskaneatuak dira. Aitorpen bakoitza eskuz berrikusi da PDFan, Oharren laukia barne, diputatu batzuek han jarraitzen baitute higiezinen zerrenda: zenbaketak, higiezin bakoitzaren jabetza-zatia, mota, oinordetzan jaso edo erosi zen eta alokairuagatiko diru-sarrerak aitortzen diren berrikuspen horretatik datoz, ez irakurketa automatikotik, akats gehiegi egiten baitzituen. Aipatutako ondasun bakoitzak bat balio du («etxebizitza, garaje-plaza eta trastelekua» hiru dira). Diputatu bakoitzak bere aitorpenerako esteka du egiaztatu ahal izateko.
 - **Alokairuagatiko diru-sarrerak**: inprimakiak ez du haientzako laukitxorik; errenta bakoitzaren kontzeptuaren bidez detektatzen dira («alquiler», «arrendamiento», «capital inmobiliario»...). Zenbatekoak aitortutakoak dira, eta batzuek garbian ematen dituzte, beste batzuek gordinean eta norbaitek hilean; beraz, ez dira batzen ezta alderatzen ere. Eskura dauden etxebizitzengatik egotzitako errentak ez dira alokairutzat hartzen.
 - **Hiri-higiezin osoak**: hiri-higiezin bakoitzaren (etxebizitzak, garajeak, trastelekuak, lokalak, orubeak) jabetza-zatiaren batura; irabazpidezkoa edo ehunekorik gabeko proindibisoa gisa ageri denean, erdia zenbatzen da. Inprimakiak ez du higiezinen balioa eskatzen; beraz, Madrilgo erdiguneko pisu bat eta herri bateko etxe bat berdin zenbatzen dira.
 - **Zergadunak**: [Zerga Agentzia, PFEZaren aitortzaileen estatistika](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), 102. partida (errentan emandako higiezinen etekinak), erregimen erkideko lurraldea. Unitatea aitorpena da, baterakoa izan daitekeena, ez pertsona.

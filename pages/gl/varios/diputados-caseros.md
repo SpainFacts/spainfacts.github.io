@@ -1,7 +1,7 @@
 ---
 title: Cantos deputados son caseiros?
 description: "Cantos deputados do Congreso declaran ingresos por alugueiro ou teñen varias vivendas, que patrimonio inmobiliario declaran, cantos inmobles urbanos completos ten cada un e cada partido, segundo as súas declaracións de bens e rendas, e fronte ao conxunto de declarantes do IRPF."
-i18n_origen: dbee8acb0fd6
+i18n_origen: 965f8dba6a2e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -145,7 +145,6 @@ SELECT row_number() OVER (ORDER BY urbanos_equivalentes DESC, n_urbanos DESC, no
        nombre, partido, circunscripcion, urbanos_equivalentes, n_urbanos, n_viviendas_urbanas, n_rusticos,
        n_inmuebles_sociedad,
        CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
-       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
        url_pdf
 FROM mother.diputados_inmuebles_diputados
 WHERE extraccion_ok
@@ -156,7 +155,32 @@ ORDER BY puesto
 SELECT nombre || ' (' || partido || ')' AS diputado, urbanos_equivalentes, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
 ```
 
+```sql sin_declaracion
+SELECT id_diputado, nombre, partido, circunscripcion, strftime(fecha_alta, '%d/%m/%Y') AS alta, estado_declaracion, url_pdf,
+       'https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=' || id_diputado || '&idLegislatura=XV' AS url_ficha
+FROM mother.diputados_inmuebles_diputados
+WHERE estado_declaracion <> 'valida'
+ORDER BY CASE estado_declaracion WHEN 'sin_declaracion' THEN 1 ELSE 2 END, nombre
+```
+
 # <span aria-hidden="true">🏘️</span> Cantos deputados son caseiros?
+
+{#if sin_declaracion.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Deputados sen declaración de bens</p>
+    {#each sin_declaracion as d}
+    <div class="mt-4">
+        <p class="text-2xl font-extrabold leading-tight text-red-700 dark:text-red-300">{d.nombre} <span class="whitespace-nowrap text-base font-semibold">({d.partido}, {d.circunscripcion})</span></p>
+        {#if d.estado_declaracion === 'sin_declaracion'}
+        <p class="mt-1 text-red-900 dark:text-red-100">A súa ficha do Congreso non enlaza ningunha declaración de bens e rendas. No Congreso desde o {d.alta}. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_ficha} target="_blank" rel="noopener">Ver a ficha ↗</a></p>
+        {:else}
+        <p class="mt-1 text-red-900 dark:text-red-100">A súa declaración non enumera todos os seus bens: para os inmobles urbanos remítese á que presentou ao inicio da XIV Lexislatura, que o Congreso xa non publica. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_pdf} target="_blank" rel="noopener">Ver a declaración ↗</a></p>
+        {/if}
+    </div>
+    {/each}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">Non entran nas cifras nin nos rankings desta páxina.</p>
+</div>
+{/if}
 
 Os deputados do Congreso presentan ao tomaren posesión unha declaración de bens e rendas que se publica na súa ficha. Lemos as dos {kpi[0]?.n_diputados} deputados en activo da XV Lexislatura para contar cantos declaran ingresos por alugueiro, cantos teñen máis dunha vivenda e que inmobles declara cada un. Todo o que segue é o que consta nas súas declaracións.
 
@@ -270,7 +294,7 @@ Herdados ou comprados? O {formatNumber(adquisicion_total[0]?.pct_compra, 0)} % d
     sort=false
     yFmt='0"%"'
     yAxisTitle="% dos inmobles urbanos"
-    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'No consta': '#d4d4d4'}}
+    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'Otro o no consta': '#d4d4d4'}}
     title="Como adquiriron os seus inmobles urbanos, partidos con 5 ou máis deputados"
 />
 
@@ -367,7 +391,6 @@ A media sobe cuns poucos deputados con moitos inmobles: a mediana di cantos ten 
     <Column id=n_rusticos title="Fincas rústicas" fmt='0' />
     <Column id=n_inmuebles_sociedad title="Das súas sociedades" fmt='0' />
     <Column id=alquila title="Declara ingresos por alugueiro" />
-    <Column id=revisado title="Revisado a man" />
     <Column id=url_pdf title="Declaración" contentType=link linkLabel="PDF ↗" openInNewTab=true />
 </DataTable>
 
@@ -376,7 +399,7 @@ A orde dáa a columna «Urbanos completos»: un piso herdado entre catro irmáns
 ## Metodoloxía e fontes
 
 - **Declaracións**: [Congreso dos Deputados, fichas dos deputados](https://www.congreso.es/es/busqueda-de-diputados), declaración de bens e rendas inicial de cada deputado en activo da XV Lexislatura (presentadas entre o {resumen[0]?.primera} e o {resumen[0]?.ultima}). As modificacións posteriores non se usan porque adoitan ser parciais. Exclúense {kpi[0]?.n_excluidos} declaracións que non se poden ler ou que remiten a unha anterior.
-- **Lectura**: os documentos son escaneos; léronse con recoñecemento óptico de caracteres. As filas que nomean varios bens («vivenda, praza de garaxe e trasteiro») cóntanse ben a ben. Todos os deputados que declaran sete ou máis inmobles ou catro ou máis urbanos completos, e os que seguen a lista no recadro de Observacións, comprobáronse a man no PDF («Revisado a man»), e as súas cifras substitúen as lidas automaticamente; no resto pode haber erros puntuais, e cada un leva á súa declaración para comprobalo. O desagregamento por tipo de inmoble e por forma de adquisición calcúlase fila a fila sobre a lectura automática, así que as súas sumas non cadran exactamente coas de cada deputado.
+- **Lectura**: os documentos son escaneos. Revisouse a man cada declaración no PDF, incluído o recadro de Observacións, onde algúns seguen a lista de inmobles: os recontos, a parte de propiedade de cada inmoble, o seu tipo, se se herdou ou se mercou e se se declaran ingresos por alugueiro saen desa revisión, non da lectura automática, que se equivocaba de máis. Cada ben nomeado conta un («vivenda, praza de garaxe e trasteiro» son tres). Cada deputado leva á súa declaración para comprobalo.
 - **Ingresos por alugueiro**: o formulario non ten unha casa para eles; detéctanse polo concepto de cada renda («alquiler», «arrendamiento», «capital inmobiliario»...). Os importes son os declarados, que uns dan en neto, outros en bruto e algún ao mes, así que non se suman nin se comparan. As rendas imputadas por vivendas a disposición non contan como alugueiro.
 - **Inmobles urbanos completos**: suma da parte de propiedade de cada inmoble urbano (vivendas, garaxes, trasteiros, locais, soares); cando consta como ganancial ou en proindiviso sen porcentaxe cóntase a metade. O formulario non pide o valor dos inmobles, así que un piso no centro de Madrid e unha casa nunha aldea contan igual.
 - **Contribuíntes**: [Axencia Tributaria, Estatística dos declarantes do IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendementos de inmobles arrendados), territorio de réxime común. A unidade é a declaración, que pode ser conxunta, non a persoa.

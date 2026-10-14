@@ -144,7 +144,6 @@ SELECT row_number() OVER (ORDER BY urbanos_equivalentes DESC, n_urbanos DESC, no
        nombre, partido, circunscripcion, urbanos_equivalentes, n_urbanos, n_viviendas_urbanas, n_rusticos,
        n_inmuebles_sociedad,
        CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
-       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
        url_pdf
 FROM mother.diputados_inmuebles_diputados
 WHERE extraccion_ok
@@ -155,7 +154,32 @@ ORDER BY puesto
 SELECT nombre || ' (' || partido || ')' AS diputado, urbanos_equivalentes, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
 ```
 
+```sql sin_declaracion
+SELECT id_diputado, nombre, partido, circunscripcion, strftime(fecha_alta, '%d/%m/%Y') AS alta, estado_declaracion, url_pdf,
+       'https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=' || id_diputado || '&idLegislatura=XV' AS url_ficha
+FROM mother.diputados_inmuebles_diputados
+WHERE estado_declaracion <> 'valida'
+ORDER BY CASE estado_declaracion WHEN 'sin_declaracion' THEN 1 ELSE 2 END, nombre
+```
+
 # <span aria-hidden="true">🏘️</span> ¿Cuántos diputados son caseros?
+
+{#if sin_declaracion.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Diputados sin declaración de bienes</p>
+    {#each sin_declaracion as d}
+    <div class="mt-4">
+        <p class="text-2xl font-extrabold leading-tight text-red-700 dark:text-red-300">{d.nombre} <span class="whitespace-nowrap text-base font-semibold">({d.partido}, {d.circunscripcion})</span></p>
+        {#if d.estado_declaracion === 'sin_declaracion'}
+        <p class="mt-1 text-red-900 dark:text-red-100">Su ficha del Congreso no enlaza ninguna declaración de bienes y rentas. En el Congreso desde el {d.alta}. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_ficha} target="_blank" rel="noopener">Ver su ficha ↗</a></p>
+        {:else}
+        <p class="mt-1 text-red-900 dark:text-red-100">Su declaración no enumera todos sus bienes: para los inmuebles urbanos se remite a la que presentó al inicio de la XIV Legislatura, que el Congreso ya no publica. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_pdf} target="_blank" rel="noopener">Ver la declaración ↗</a></p>
+        {/if}
+    </div>
+    {/each}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">No entran en las cifras ni en los rankings de esta página.</p>
+</div>
+{/if}
 
 Los diputados del Congreso presentan al tomar posesión una declaración de bienes y rentas que se publica en su ficha. Hemos leído las de los {kpi[0]?.n_diputados} diputados en activo de la XV Legislatura para contar cuántos declaran ingresos por alquiler, cuántos tienen más de una vivienda y qué inmuebles declara cada uno. Todo lo que sigue es lo que consta en sus declaraciones.
 
@@ -269,7 +293,7 @@ El formulario del Congreso no pide el valor de los inmuebles, solo su clase, dó
     sort=false
     yFmt='0"%"'
     yAxisTitle="% de los inmuebles urbanos"
-    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'No consta': '#d4d4d4'}}
+    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'Otro o no consta': '#d4d4d4'}}
     title="Cómo adquirieron sus inmuebles urbanos, partidos con 5 o más diputados"
 />
 
@@ -366,7 +390,6 @@ La media sube con unos pocos diputados con muchos inmuebles: la mediana dice cu�
     <Column id=n_rusticos title="Fincas rústicas" fmt='0' />
     <Column id=n_inmuebles_sociedad title="De sus sociedades" fmt='0' />
     <Column id=alquila title="Declara ingresos por alquiler" />
-    <Column id=revisado title="Revisado a mano" />
     <Column id=url_pdf title="Declaración" contentType=link linkLabel="PDF ↗" openInNewTab=true />
 </DataTable>
 
@@ -375,7 +398,7 @@ El orden lo da la columna «Urbanos completos»: un piso heredado entre cuatro h
 ## Metodología y fuentes
 
 - **Declaraciones**: [Congreso de los Diputados, fichas de los diputados](https://www.congreso.es/es/busqueda-de-diputados), declaración de bienes y rentas inicial de cada diputado en activo de la XV Legislatura (presentadas entre el {resumen[0]?.primera} y el {resumen[0]?.ultima}). Las modificaciones posteriores no se usan porque suelen ser parciales. Se excluyen {kpi[0]?.n_excluidos} declaraciones que no se pueden leer o que remiten a una anterior.
-- **Lectura**: los documentos son escaneos; se han leído con reconocimiento óptico de caracteres. Las filas que nombran varios bienes («vivienda, plaza de garaje y trastero») se cuentan bien a bien. Todos los diputados que declaran siete o más inmuebles o cuatro o más urbanos completos, y los que siguen la lista en el recuadro de Observaciones, se han comprobado a mano en el PDF («Revisado a mano»), y sus cifras sustituyen a las leídas automáticamente; en el resto puede haber errores puntuales, y cada uno enlaza a su declaración para comprobarlo. El desglose por tipo de inmueble y por forma de adquisición se calcula fila a fila sobre la lectura automática, así que sus sumas no cuadran exactamente con las de cada diputado.
+- **Lectura**: los documentos son escaneos. Se ha revisado a mano cada declaración en el PDF, incluido el recuadro de Observaciones, donde algunos siguen la lista de inmuebles: los recuentos, la parte de propiedad de cada inmueble, su tipo, si se heredó o se compró y si se declaran ingresos por alquiler salen de esa revisión, no de la lectura automática, que se equivocaba demasiado. Cada bien nombrado cuenta uno («vivienda, plaza de garaje y trastero» son tres). Cada diputado enlaza a su declaración para comprobarlo.
 - **Ingresos por alquiler**: el formulario no tiene una casilla para ellos; se detectan por el concepto de cada renta («alquiler», «arrendamiento», «capital inmobiliario»...). Los importes son los declarados, que unos dan en neto, otros en bruto y alguno al mes, así que no se suman ni se comparan. Las rentas imputadas por viviendas a disposición no cuentan como alquiler.
 - **Inmuebles urbanos completos**: suma de la parte de propiedad de cada inmueble urbano (viviendas, garajes, trasteros, locales, solares); cuando consta como ganancial o en proindiviso sin porcentaje se cuenta la mitad. El formulario no pide el valor de los inmuebles, así que un piso en el centro de Madrid y una casa en un pueblo cuentan igual.
 - **Contribuyentes**: [Agencia Tributaria, Estadística de los declarantes del IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendimientos de inmuebles arrendados), territorio de régimen común. La unidad es la declaración, que puede ser conjunta, no la persona.

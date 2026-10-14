@@ -1,82 +1,58 @@
 -- Qué inmuebles declaran los diputados del Congreso (XV Legislatura, declaración inicial de
 -- Bienes y Rentas) y cómo los adquirieron, por partido (ver diputados_inmuebles_partidos) y
--- 'Total'. El formulario no pide el valor de los inmuebles: el patrimonio inmobiliario se
--- describe por su composición.
+-- 'Total', a partir de los recuentos revisados a mano de cada diputado
+-- (diputados_inmuebles_diputados). El formulario no pide el valor de los inmuebles: el
+-- patrimonio inmobiliario se describe por su composición.
 --   desglose 'tipo': inmuebles a su nombre por tipo (vivienda, garaje o trastero, local u
 --     oficina, otros urbanos, finca rústica); por_diputado = unidades / diputados válidos.
 --   desglose 'adquisicion': inmuebles urbanos según el título declarado (herencia o
---     donación, compra, no consta); pct = % de los urbanos del partido.
--- Se calcula fila a fila sobre la lectura automática (cong_inmuebles_declarados), también
--- para los diputados revisados a mano, cuyos totales corregidos están en
--- diputados_inmuebles_diputados: por eso estas sumas no cuadran exactamente con aquellas.
-with dip as (
-    select id_diputado, partido from {{ ref('diputados_inmuebles_diputados') }} where extraccion_ok
+--     donación, compra, otro o no consta); pct = % de los urbanos del partido.
+with d as (
+    select * from {{ ref('diputados_inmuebles_diputados') }} where extraccion_ok
 ),
 
-validos as (
-    select partido, count(*) as n_validos from dip group by partido
+p as (
+    select partido, d.* exclude (partido) from d
     union all
-    select 'Total', count(*) from dip
+    select 'Total', d.* exclude (partido) from d
 ),
 
-i as (
-    select dip.partido, x.*
-    from {{ source('raw_diputados_inmuebles', 'cong_inmuebles_declarados') }} x
-    join dip on dip.id_diputado = cast(x.id_diputado as integer)
-),
-
-filas as (
-    select partido, tipo, titulo, cast(unidades as integer) as unidades, unidades_vivienda,
-           unidades_garaje, unidades_local, unidades_otros
-    from i
-    union all
-    select 'Total', tipo, titulo, cast(unidades as integer), unidades_vivienda,
-           unidades_garaje, unidades_local, unidades_otros
-    from i
-),
-
-tipos as (
-    select partido, 'tipo' as desglose, categoria, orden, sum(unidades) as unidades
-    from (
-        select partido, 'Vivienda' as categoria, 1 as orden, unidades_vivienda as unidades from filas where tipo = 'urbano'
-        union all
-        select partido, 'Garaje o trastero', 2, unidades_garaje from filas where tipo = 'urbano'
-        union all
-        select partido, 'Local, oficina o nave', 3, unidades_local from filas where tipo = 'urbano'
-        union all
-        select partido, 'Otros urbanos (solares, edificios...)', 4, unidades_otros from filas where tipo = 'urbano'
-        union all
-        select partido, 'Finca rústica', 5, unidades from filas where tipo = 'rustico'
-    )
-    group by all
-),
-
-adquisicion as (
-    select partido, 'adquisicion' as desglose,
-           case titulo when 'herencia' then 'Herencia o donación' when 'compra' then 'Compra' else 'No consta' end as categoria,
-           case titulo when 'herencia' then 1 when 'compra' then 2 else 3 end as orden,
-           sum(unidades) as unidades
-    from filas
-    where tipo = 'urbano'
-    group by all
+agregado as (
+    select
+        partido,
+        count(*) as n_validos,
+        sum(n_viviendas_urbanas) as viviendas,
+        sum(n_garajes_trasteros) as garajes,
+        sum(n_locales) as locales,
+        sum(n_otros_urbanos) as otros,
+        sum(n_rusticos) as rusticos,
+        sum(n_urbanos) as urbanos,
+        sum(n_urbanos_herencia) as herencia,
+        sum(n_urbanos_compra) as compra
+    from p
+    group by partido
 ),
 
 u as (
-    select * from tipos
-    union all
-    select * from adquisicion
+    select partido, n_validos, 'tipo' as desglose, 'Vivienda' as categoria, 1 as orden, viviendas as unidades from agregado
+    union all select partido, n_validos, 'tipo', 'Garaje o trastero', 2, garajes from agregado
+    union all select partido, n_validos, 'tipo', 'Local, oficina o nave', 3, locales from agregado
+    union all select partido, n_validos, 'tipo', 'Otros urbanos (solares, edificios...)', 4, otros from agregado
+    union all select partido, n_validos, 'tipo', 'Finca rústica', 5, rusticos from agregado
+    union all select partido, n_validos, 'adquisicion', 'Herencia o donación', 1, herencia from agregado
+    union all select partido, n_validos, 'adquisicion', 'Compra', 2, compra from agregado
+    union all select partido, n_validos, 'adquisicion', 'Otro o no consta', 3, urbanos - herencia - compra from agregado
 )
 
 select
-    u.partido,
-    u.desglose,
-    u.categoria,
-    u.orden,
-    cast(u.unidades as integer) as unidades,
-    v.n_validos,
-    round(u.unidades / v.n_validos, 2) as por_diputado,
-    round(100.0 * u.unidades / sum(u.unidades) over (partition by u.partido, u.desglose), 1) as pct,
-    case when u.partido = 'Total' then 0 else 1 end as orden_total
+    partido,
+    desglose,
+    categoria,
+    orden,
+    cast(unidades as integer) as unidades,
+    n_validos,
+    round(unidades / n_validos, 2) as por_diputado,
+    round(100.0 * unidades / nullif(sum(unidades) over (partition by partido, desglose), 0), 1) as pct,
+    case when partido = 'Total' then 0 else 1 end as orden_total
 from u
-join validos v on v.partido = u.partido
-order by orden_total, u.partido, u.desglose, u.orden
+order by orden_total, partido, desglose, orden

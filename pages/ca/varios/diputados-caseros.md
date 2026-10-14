@@ -1,7 +1,7 @@
 ---
 title: Quants diputats són arrendadors?
 description: "Quants diputats del Congrés declaren ingressos per lloguer o tenen diversos habitatges, quin patrimoni immobiliari declaren, quants immobles urbans complets té cadascun i cada partit, segons les seves declaracions de béns i rendes, i davant el conjunt de declarants de l'IRPF."
-i18n_origen: dbee8acb0fd6
+i18n_origen: 965f8dba6a2e
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -145,7 +145,6 @@ SELECT row_number() OVER (ORDER BY urbanos_equivalentes DESC, n_urbanos DESC, no
        nombre, partido, circunscripcion, urbanos_equivalentes, n_urbanos, n_viviendas_urbanas, n_rusticos,
        n_inmuebles_sociedad,
        CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
-       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
        url_pdf
 FROM mother.diputados_inmuebles_diputados
 WHERE extraccion_ok
@@ -156,7 +155,32 @@ ORDER BY puesto
 SELECT nombre || ' (' || partido || ')' AS diputado, urbanos_equivalentes, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
 ```
 
+```sql sin_declaracion
+SELECT id_diputado, nombre, partido, circunscripcion, strftime(fecha_alta, '%d/%m/%Y') AS alta, estado_declaracion, url_pdf,
+       'https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=' || id_diputado || '&idLegislatura=XV' AS url_ficha
+FROM mother.diputados_inmuebles_diputados
+WHERE estado_declaracion <> 'valida'
+ORDER BY CASE estado_declaracion WHEN 'sin_declaracion' THEN 1 ELSE 2 END, nombre
+```
+
 # <span aria-hidden="true">🏘️</span> Quants diputats són arrendadors?
+
+{#if sin_declaracion.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Diputats sense declaració de béns</p>
+    {#each sin_declaracion as d}
+    <div class="mt-4">
+        <p class="text-2xl font-extrabold leading-tight text-red-700 dark:text-red-300">{d.nombre} <span class="whitespace-nowrap text-base font-semibold">({d.partido}, {d.circunscripcion})</span></p>
+        {#if d.estado_declaracion === 'sin_declaracion'}
+        <p class="mt-1 text-red-900 dark:text-red-100">La seva fitxa del Congrés no enllaça cap declaració de béns i rendes. Al Congrés des del {d.alta}. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_ficha} target="_blank" rel="noopener">Veure la fitxa ↗</a></p>
+        {:else}
+        <p class="mt-1 text-red-900 dark:text-red-100">La seva declaració no enumera tots els seus béns: per als immobles urbans es remet a la que va presentar a l'inici de la XIV Legislatura, que el Congrés ja no publica. <a class="font-semibold text-red-700 underline dark:text-red-300" href={d.url_pdf} target="_blank" rel="noopener">Veure la declaració ↗</a></p>
+        {/if}
+    </div>
+    {/each}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">No entren a les xifres ni als rànquings d'aquesta pàgina.</p>
+</div>
+{/if}
 
 Els diputats del Congrés presenten en prendre possessió una declaració de béns i rendes que es publica a la seva fitxa. Hem llegit les dels {kpi[0]?.n_diputados} diputats en actiu de la XV Legislatura per comptar quants declaren ingressos per lloguer, quants tenen més d'un habitatge i quins immobles declara cadascun. Tot el que segueix és el que consta a les seves declaracions.
 
@@ -270,7 +294,7 @@ Heretats o comprats? El {formatNumber(adquisicion_total[0]?.pct_compra, 0)} % de
     sort=false
     yFmt='0"%"'
     yAxisTitle="% dels immobles urbans"
-    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'No consta': '#d4d4d4'}}
+    seriesColors={{'Compra': '#2563eb', 'Herencia o donación': '#f59e0b', 'Otro o no consta': '#d4d4d4'}}
     title="Com van adquirir els seus immobles urbans, partits amb 5 o més diputats"
 />
 
@@ -367,7 +391,6 @@ La mitjana puja amb uns pocs diputats amb molts immobles: la mediana diu quants 
     <Column id=n_rusticos title="Finques rústiques" fmt='0' />
     <Column id=n_inmuebles_sociedad title="De les seves societats" fmt='0' />
     <Column id=alquila title="Declara ingressos per lloguer" />
-    <Column id=revisado title="Revisat a mà" />
     <Column id=url_pdf title="Declaració" contentType=link linkLabel="PDF ↗" openInNewTab=true />
 </DataTable>
 
@@ -376,7 +399,7 @@ L'ordre el dona la columna «Urbans complets»: un pis heretat entre quatre germ
 ## Metodologia i fonts
 
 - **Declaracions**: [Congrés dels Diputats, fitxes dels diputats](https://www.congreso.es/es/busqueda-de-diputados), declaració de béns i rendes inicial de cada diputat en actiu de la XV Legislatura (presentades entre el {resumen[0]?.primera} i el {resumen[0]?.ultima}). Les modificacions posteriors no s'utilitzen perquè solen ser parcials. S'exclouen {kpi[0]?.n_excluidos} declaracions que no es poden llegir o que remeten a una d'anterior.
-- **Lectura**: els documents són escanejos; s'han llegit amb reconeixement òptic de caràcters. Les files que anomenen diversos béns («habitatge, plaça de garatge i traster») es compten bé a bé. Tots els diputats que declaren set o més immobles o quatre o més urbans complets, i els que continuen la llista al requadre d'Observacions, s'han comprovat a mà al PDF («Revisat a mà»), i les seves xifres substitueixen les llegides automàticament; en la resta hi pot haver errors puntuals, i cadascun enllaça amb la seva declaració per comprovar-ho. El desglossament per tipus d'immoble i per forma d'adquisició es calcula fila a fila sobre la lectura automàtica, així que les seves sumes no quadren exactament amb les de cada diputat.
+- **Lectura**: els documents són escanejos. S'ha revisat a mà cada declaració al PDF, inclòs el requadre d'Observacions, on alguns continuen la llista d'immobles: els recomptes, la part de propietat de cada immoble, el seu tipus, si es va heretar o comprar i si es declaren ingressos per lloguer surten d'aquesta revisió, no de la lectura automàtica, que s'equivocava massa. Cada bé esmentat compta com un («habitatge, plaça de garatge i traster» són tres). Cada diputat enllaça amb la seva declaració per comprovar-ho.
 - **Ingressos per lloguer**: el formulari no té cap casella per a ells; es detecten pel concepte de cada renda («alquiler», «arrendamiento», «capital inmobiliario»...). Els imports són els declarats, que uns donen en net, altres en brut i algun al mes, així que no se sumen ni es comparen. Les rendes imputades per habitatges a disposició no compten com a lloguer.
 - **Immobles urbans complets**: suma de la part de propietat de cada immoble urbà (habitatges, garatges, trasters, locals, solars); quan consta com a bé de guanys o en proindivís sense percentatge es compta la meitat. El formulari no demana el valor dels immobles, així que un pis al centre de Madrid i una casa en un poble compten igual.
 - **Contribuents**: [Agència Tributària, Estadística dels declarants de l'IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendiments d'immobles arrendats), territori de règim comú. La unitat és la declaració, que pot ser conjunta, no la persona.

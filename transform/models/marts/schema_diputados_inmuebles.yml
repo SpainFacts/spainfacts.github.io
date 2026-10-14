@@ -30,6 +30,15 @@ models:
         description: "Fincas o parcelas rústicas declaradas"
       - name: n_inmuebles_sociedad
         description: "Inmuebles de sociedades no cotizadas en las que participa, si los lista"
+      - name: fecha_alta
+        description: "Fecha de alta como diputado en la legislatura"
+      - name: estado_declaracion
+        description: "valida | sin_declaracion (su ficha del Congreso no enlaza ninguna declaración de bienes) | incompleta (ilegible o remite a una declaración anterior que ya no se publica)"
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['valida', 'sin_declaracion', 'incompleta']
       - name: fecha_declaracion
         description: "Fecha de registro de la declaración inicial (del nombre del PDF)"
       - name: ejercicio_rentas
@@ -48,10 +57,18 @@ models:
         description: "Lo anterior en euros constantes de 2025 (main.deflactor)"
       - name: extraccion_ok
         tests: [not_null]
-      - name: inmuebles_sin_contar
-        description: "true si el recuadro de Observaciones lista más inmuebles que no se han contado (el OCR no los separa); nunca en los revisados a mano"
+      - name: n_garajes_trasteros
+        description: "Garajes, plazas de aparcamiento y trasteros (revisión manual)"
+      - name: n_locales
+        description: "Locales, oficinas, naves y almacenes (revisión manual)"
+      - name: n_otros_urbanos
+        description: "Otros urbanos: solares, parcelas urbanas, edificios, fincas urbanas sin más detalle (revisión manual)"
+      - name: n_urbanos_herencia
+        description: "Urbanos adquiridos por herencia, donación, legado o pacto sucesorio (revisión manual)"
+      - name: n_urbanos_compra
+        description: "Urbanos adquiridos por compra (revisión manual)"
       - name: revisado_a_mano
-        description: "true si los recuentos de inmuebles se han comprobado a mano en el PDF (seed diputados_inmuebles_revisados)"
+        description: "true si la declaración se ha revisado a mano en el PDF (seed diputados_inmuebles_revisados); false solo para un diputado nuevo aún sin revisar"
       - name: url_pdf
         description: "Declaración inicial en la web del Congreso"
       - name: nota
@@ -83,8 +100,8 @@ models:
       Composición del patrimonio inmobiliario declarado (el formulario no pide su valor), por
       partido y 'Total'. desglose 'tipo': inmuebles por tipo (vivienda, garaje o trastero,
       local/oficina/nave, otros urbanos, finca rústica) con unidades y por_diputado.
-      desglose 'adquisicion': inmuebles urbanos por título (herencia o donación, compra, no
-      consta) con pct sobre los urbanos del partido. Fila a fila sobre la lectura automática.
+      desglose 'adquisicion': inmuebles urbanos por título (herencia o donación, compra, otro o
+      no consta) con pct sobre los urbanos del partido. Sale de la revisión manual por diputado.
     columns:
       - name: partido
         tests: [not_null]
