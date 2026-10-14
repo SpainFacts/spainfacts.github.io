@@ -1,7 +1,7 @@
 ---
 title: How many MPs are landlords?
-description: "How many members of the Congress of Deputies declare rental income or own several homes, according to their declarations of assets and income, by parliamentary group and compared with all personal income tax filers."
-i18n_origen: b1840c4f7433
+description: "How many members of the Congress of Deputies declare rental income or own several homes, how many properties each MP and each party declares, according to their declarations of assets and income, and compared with all personal income tax filers."
+i18n_origen: 5bedfc9c968f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -75,9 +75,42 @@ SELECT grupo, '2 o más viviendas', pct_dos_viviendas, n_validos FROM mother.dip
 ORDER BY n_validos DESC, medida
 ```
 
+```sql partidos
+SELECT partido, CAST(n_validos AS INTEGER) AS diputados, media_inmuebles, mediana_inmuebles, media_urbanos,
+       media_viviendas, media_rusticos, pct_dos_viviendas, max_inmuebles, suma_inmuebles
+FROM mother.diputados_inmuebles_partidos
+WHERE partido <> 'Total'
+ORDER BY media_inmuebles DESC
+```
+
+```sql partidos_largo
+SELECT partido, 'Viviendas' AS tipo, media_viviendas AS media, 1 AS orden_tipo, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Garajes, locales y otros urbanos', round(media_urbanos - media_viviendas, 2), 2, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Fincas rústicas', media_rusticos, 3, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+ORDER BY media_inmuebles DESC, orden_tipo
+```
+
+```sql ranking
+SELECT row_number() OVER (ORDER BY n_inmuebles DESC, n_urbanos DESC, nombre) AS puesto,
+       nombre, partido, circunscripcion, n_inmuebles, n_urbanos, n_viviendas_urbanas, n_rusticos,
+       n_inmuebles_sociedad, urbanos_equivalentes,
+       CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
+       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
+       url_pdf
+FROM mother.diputados_inmuebles_diputados
+WHERE extraccion_ok
+ORDER BY puesto
+```
+
+```sql ranking_top
+SELECT nombre || ' (' || partido || ')' AS diputado, n_inmuebles, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
+```
+
 # <span aria-hidden="true">🏘️</span> How many MPs are landlords?
 
-When they take their seats, members of the Congress of Deputies submit a declaration of assets and income that is published on their profile page. We have read those of the {kpi[0]?.n_diputados} sitting MPs of the 15th Legislature to count how many declare income from letting out property and how many own more than one home. Everything that follows is what their declarations state.
+When they take their seats, members of the Congress of Deputies submit a declaration of assets and income that is published on their profile page. We have read those of the {kpi[0]?.n_diputados} sitting MPs of the 15th Legislature to count how many declare income from letting out property how many own more than one home and how many properties each one declares. Everything that follows is what their declarations state.
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
     {#if kpi.length && irpf.length}
@@ -184,10 +217,73 @@ The Spanish Tax Agency publishes how many personal income tax returns include in
 
 In small groups each MP moves the percentage a lot: with seven MPs, a single one is 14 points.
 
+## Ranking by party
+
+As parties vary greatly in size, they are compared per MP: how many properties each of their MPs declares on average. Properties in their own name are counted, urban (homes, garages, storage rooms, commercial premises, building plots) and rural, whatever their ownership share; those of companies in which they hold a stake are counted separately, in the ranking of MPs. MPs are grouped by the party they were elected for, with the PSC and the other federations within the PSOE.
+
+<BarChart
+    data={partidos_largo}
+    x=partido
+    y=media
+    series=tipo
+    type=stacked
+    sort=false
+    yFmt='0.0'
+    yAxisTitle="Properties per MP (average)"
+    seriesColors={{'Viviendas': '#1d4ed8', 'Garajes, locales y otros urbanos': '#60a5fa', 'Fincas rústicas': '#a3a3a3'}}
+    title="Properties declared per MP, parties with 5 or more MPs"
+/>
+
+<DataTable data={partidos} rows=12>
+    <Column id=partido title="Party" />
+    <Column id=diputados title="MPs" fmt='0' />
+    <Column id=media_inmuebles title="Properties per MP (average)" fmt='0.0' />
+    <Column id=mediana_inmuebles title="Median" fmt='0.0' />
+    <Column id=media_urbanos title="Urban (average)" fmt='0.0' />
+    <Column id=media_viviendas title="Homes (average)" fmt='0.0' />
+    <Column id=media_rusticos title="Rural (average)" fmt='0.0' />
+    <Column id=pct_dos_viviendas title="% 2 or more homes" fmt='0.0' />
+    <Column id=max_inmuebles title="Maximum for one MP" fmt='0' />
+    <Column id=suma_inmuebles title="Party total" fmt='0' />
+</DataTable>
+
+The average is pushed up by a few MPs with many plots of land: the median tells how many properties the typical MP of each party owns. Parties with one or two MPs (BNG, UPN, CC) depend entirely on that person.
+
+## The MPs with the most properties
+
+<BarChart
+    data={ranking_top}
+    x=diputado
+    y=n_inmuebles
+    swapXY=true
+    sort=false
+    yFmt='0'
+    yAxisTitle="Properties in their name (urban and rural)"
+    title="The 15 MPs declaring the most properties"
+/>
+
+<DataTable data={ranking} rows=25 search=true>
+    <Column id=puesto title="#" fmt='0' />
+    <Column id=nombre title="MP" />
+    <Column id=partido title="Party" />
+    <Column id=circunscripcion title="Constituency" />
+    <Column id=n_inmuebles title="Properties" fmt='0' />
+    <Column id=n_urbanos title="Urban" fmt='0' />
+    <Column id=n_viviendas_urbanas title="Homes" fmt='0' />
+    <Column id=n_rusticos title="Rural" fmt='0' />
+    <Column id=n_inmuebles_sociedad title="From their companies" fmt='0' />
+    <Column id=urbanos_equivalentes title="Whole urban" fmt='0.0' />
+    <Column id=alquila title="Declares rental income" />
+    <Column id=revisado title="Checked by hand" />
+    <Column id=url_pdf title="Declaration" contentType=link linkLabel="PDF ↗" openInNewTab=true />
+</DataTable>
+
+Properties in their name count even if only partly owned: a flat inherited among four siblings counts as one. The «Whole urban» column adds up only their share of each urban property. Many rural plots tend to be small inherited parcels, especially in Galicia and Asturias. Each row links to the original declaration on the Congress website.
+
 ## Methodology and sources
 
 - **Declarations**: [Congress of Deputies, MPs' profile pages](https://www.congreso.es/es/busqueda-de-diputados), initial declaration of assets and income of each sitting MP of the 15th Legislature (submitted between {resumen[0]?.primera} and {resumen[0]?.ultima}). Later amendments are not used because they are usually partial. {kpi[0]?.n_excluidos} declarations that cannot be read or that refer back to an earlier one are excluded.
-- **Reading**: the documents are scans; they were read with optical character recognition and a sample of 22 declarations from all groups was checked by hand: the number of urban properties and whether rental income was declared matched in 21 of the 22. There may be occasional errors in other fields; that is why only totals are published, not the figures for each MP.
+- **Reading**: the documents are scans; they were read with optical character recognition and a sample of 22 declarations from all groups was checked by hand: the number of urban properties and whether rental income was declared matched in 21 of the 22. Rows that name several assets («home, parking space and storage room») are counted asset by asset. The 42 MPs who declare seven or more properties, and those who continue the list in the Remarks box, have been checked by hand against the PDF («Checked by hand»), and their figures replace the automatically read ones; elsewhere there may be occasional errors, and each MP links to their declaration so it can be checked.
 - **Rental income**: the form has no box for it; it is detected from the description of each income item («alquiler», «arrendamiento», «capital inmobiliario»...). Amounts are as declared, some net, others gross and a few monthly, so they are neither added up nor compared. Imputed income from homes available for own use does not count as rent.
 - **Whole properties**: sum of the ownership share of each urban property; when it is recorded as marital property or co-owned without a percentage, half is counted.
 - **Taxpayers**: [Spanish Tax Agency, Personal income tax filers statistics](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), item 102 (income from let property), common-regime territory. The unit is the return, which may be joint, not the person.

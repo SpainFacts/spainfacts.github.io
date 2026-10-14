@@ -15,8 +15,28 @@
 -- Euros reales: rend_real_eur = nominal * factor de main.deflactor del ejercicio (euros de 2025).
 -- extraccion_ok = false: el OCR no reconoce las tablas o la declaración remite a otra;
 -- esas filas tienen las capas a null y se excluyen de los porcentajes.
-with d as (
-    select * from {{ source('raw_diputados_inmuebles', 'cong_declaraciones_bienes') }}
+-- Recuentos de inmuebles: los del OCR, salvo los diputados del seed
+-- diputados_inmuebles_revisados (cabeza del ranking comprobada a mano en el PDF), que
+-- mandan; revisado_a_mano lo indica. n_inmuebles = urbanos + rústicos a su nombre
+-- (los de sociedades no cotizadas van aparte, en n_inmuebles_sociedad).
+-- partido: formación por la que fue elegido, con las federaciones del PSOE (PSC, PSdeG...)
+-- dentro de PSOE.
+with r as (
+    select * from {{ ref('diputados_inmuebles_revisados') }}
+),
+
+d as (
+    select
+        o.* replace (
+            coalesce(r.n_urbanos, o.n_urbanos) as n_urbanos,
+            coalesce(r.n_viviendas_urbanas, o.n_viviendas_urbanas) as n_viviendas_urbanas,
+            coalesce(r.n_rusticos, o.n_rusticos) as n_rusticos,
+            coalesce(r.n_sociedad, o.n_sociedad) as n_sociedad,
+            coalesce(r.urbanos_equivalentes, o.urbanos_equivalentes) as urbanos_equivalentes
+        ),
+        r.id_diputado is not null as revisado_a_mano
+    from {{ source('raw_diputados_inmuebles', 'cong_declaraciones_bienes') }} o
+    left join r on r.id_diputado = cast(o.id_diputado as integer)
 )
 
 select
@@ -37,11 +57,20 @@ select
         else d.grupo_parlamentario
     end as grupo,
     d.formacion,
+    case
+        when d.formacion like '%PSOE%' then 'PSOE'
+        when d.formacion = 'VOX' then 'Vox'
+        when d.formacion = 'SUMAR' then 'Sumar'
+        when d.formacion = 'JxCAT-JUNTS' then 'Junts'
+        when d.formacion = 'EAJ-PNV' then 'PNV'
+        when d.formacion = 'CCa' then 'CC'
+        else d.formacion
+    end as partido,
     d.circunscripcion,
     cast(d.fecha_declaracion as date) as fecha_declaracion,
     cast(d.ejercicio_rentas as integer) as ejercicio_rentas,
     d.extraccion_ok,
-    case when d.extraccion_ok then cast(d.n_inmuebles as integer) end as n_inmuebles,
+    case when d.extraccion_ok then cast(d.n_urbanos + d.n_rusticos as integer) end as n_inmuebles,
     case when d.extraccion_ok then cast(d.n_urbanos as integer) end as n_urbanos,
     case when d.extraccion_ok then cast(d.n_viviendas_urbanas as integer) end as n_viviendas_urbanas,
     case when d.extraccion_ok then cast(d.n_rusticos as integer) end as n_rusticos,
@@ -54,10 +83,15 @@ select
     case when d.extraccion_ok then d.n_viviendas_urbanas >= 2 end as dos_viviendas,
     case when d.extraccion_ok then d.urbanos_equivalentes >= 2 end as dos_equivalentes,
     case when d.extraccion_ok then d.vivienda_habitual_declarada end as vivienda_habitual_declarada,
+    -- El recuadro de Observaciones sigue la lista de inmuebles y esos no se han contado
+    -- (en los revisados a mano sí están contados)
+    case when d.extraccion_ok then coalesce(d.inmuebles_en_observaciones, false) and not d.revisado_a_mano end
+        as inmuebles_sin_contar,
     case when d.extraccion_ok then d.menciona_alquiler_fuera_rentas end as menciona_alquiler_fuera_rentas,
     cast(d.n_declaraciones_bienes as integer) as n_declaraciones_bienes,
     d.url_pdf,
     d.url_ultima_declaracion,
+    d.revisado_a_mano,
     d.nota
 from d
 left join {{ ref('deflactor') }} f on f.anio = cast(d.ejercicio_rentas as integer)

@@ -1,6 +1,6 @@
 ---
 title: ¿Cuántos diputados son caseros?
-description: "Cuántos diputados del Congreso declaran ingresos por alquiler o tienen varias viviendas, según sus declaraciones de bienes y rentas, por grupo parlamentario y frente al conjunto de declarantes del IRPF."
+description: "Cuántos diputados del Congreso declaran ingresos por alquiler o tienen varias viviendas, cuántos inmuebles declara cada uno y cada partido, según sus declaraciones de bienes y rentas, y frente al conjunto de declarantes del IRPF."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -74,9 +74,42 @@ SELECT grupo, '2 o más viviendas', pct_dos_viviendas, n_validos FROM mother.dip
 ORDER BY n_validos DESC, medida
 ```
 
+```sql partidos
+SELECT partido, CAST(n_validos AS INTEGER) AS diputados, media_inmuebles, mediana_inmuebles, media_urbanos,
+       media_viviendas, media_rusticos, pct_dos_viviendas, max_inmuebles, suma_inmuebles
+FROM mother.diputados_inmuebles_partidos
+WHERE partido <> 'Total'
+ORDER BY media_inmuebles DESC
+```
+
+```sql partidos_largo
+SELECT partido, 'Viviendas' AS tipo, media_viviendas AS media, 1 AS orden_tipo, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Garajes, locales y otros urbanos', round(media_urbanos - media_viviendas, 2), 2, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Fincas rústicas', media_rusticos, 3, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+ORDER BY media_inmuebles DESC, orden_tipo
+```
+
+```sql ranking
+SELECT row_number() OVER (ORDER BY n_inmuebles DESC, n_urbanos DESC, nombre) AS puesto,
+       nombre, partido, circunscripcion, n_inmuebles, n_urbanos, n_viviendas_urbanas, n_rusticos,
+       n_inmuebles_sociedad, urbanos_equivalentes,
+       CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
+       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
+       url_pdf
+FROM mother.diputados_inmuebles_diputados
+WHERE extraccion_ok
+ORDER BY puesto
+```
+
+```sql ranking_top
+SELECT nombre || ' (' || partido || ')' AS diputado, n_inmuebles, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
+```
+
 # <span aria-hidden="true">🏘️</span> ¿Cuántos diputados son caseros?
 
-Los diputados del Congreso presentan al tomar posesión una declaración de bienes y rentas que se publica en su ficha. Hemos leído las de los {kpi[0]?.n_diputados} diputados en activo de la XV Legislatura para contar cuántos declaran ingresos por alquilar inmuebles y cuántos tienen más de una vivienda. Todo lo que sigue es lo que consta en sus declaraciones.
+Los diputados del Congreso presentan al tomar posesión una declaración de bienes y rentas que se publica en su ficha. Hemos leído las de los {kpi[0]?.n_diputados} diputados en activo de la XV Legislatura para contar cuántos declaran ingresos por alquilar inmuebles, cuántos tienen más de una vivienda y cuántos inmuebles declara cada uno. Todo lo que sigue es lo que consta en sus declaraciones.
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
     {#if kpi.length && irpf.length}
@@ -183,10 +216,73 @@ La Agencia Tributaria publica cuántas declaraciones del IRPF incluyen rendimien
 
 En los grupos pequeños cada diputado mueve mucho el porcentaje: con siete diputados, uno solo son 14 puntos.
 
+## Ranking por partido
+
+Como los partidos tienen tamaños muy distintos, se comparan por diputado: cuántos inmuebles declara de media cada uno de sus diputados. Se cuentan los inmuebles a su nombre, urbanos (viviendas, garajes, trasteros, locales, solares) y fincas rústicas, sea cual sea su parte de propiedad; los de sociedades en las que participan van aparte, en el ranking de diputados. Los diputados se agrupan por la formación por la que fueron elegidos, con el PSC y las demás federaciones dentro del PSOE.
+
+<BarChart
+    data={partidos_largo}
+    x=partido
+    y=media
+    series=tipo
+    type=stacked
+    sort=false
+    yFmt='0.0'
+    yAxisTitle="Inmuebles por diputado (media)"
+    seriesColors={{'Viviendas': '#1d4ed8', 'Garajes, locales y otros urbanos': '#60a5fa', 'Fincas rústicas': '#a3a3a3'}}
+    title="Inmuebles declarados por diputado, partidos con 5 o más diputados"
+/>
+
+<DataTable data={partidos} rows=12>
+    <Column id=partido title="Partido" />
+    <Column id=diputados title="Diputados" fmt='0' />
+    <Column id=media_inmuebles title="Inmuebles por diputado (media)" fmt='0.0' />
+    <Column id=mediana_inmuebles title="Mediana" fmt='0.0' />
+    <Column id=media_urbanos title="Urbanos (media)" fmt='0.0' />
+    <Column id=media_viviendas title="Viviendas (media)" fmt='0.0' />
+    <Column id=media_rusticos title="Rústicos (media)" fmt='0.0' />
+    <Column id=pct_dos_viviendas title="% 2 o más viviendas" fmt='0.0' />
+    <Column id=max_inmuebles title="Máximo de un diputado" fmt='0' />
+    <Column id=suma_inmuebles title="Total del partido" fmt='0' />
+</DataTable>
+
+La media se dispara con unos pocos diputados con muchas fincas: la mediana dice cuántos inmuebles tiene el diputado típico de cada partido. Los partidos con uno o dos diputados (BNG, UPN, CC) dependen por completo de esa persona.
+
+## Los diputados con más inmuebles
+
+<BarChart
+    data={ranking_top}
+    x=diputado
+    y=n_inmuebles
+    swapXY=true
+    sort=false
+    yFmt='0'
+    yAxisTitle="Inmuebles a su nombre (urbanos y rústicos)"
+    title="Los 15 diputados que declaran más inmuebles"
+/>
+
+<DataTable data={ranking} rows=25 search=true>
+    <Column id=puesto title="#" fmt='0' />
+    <Column id=nombre title="Diputado" />
+    <Column id=partido title="Partido" />
+    <Column id=circunscripcion title="Circunscripción" />
+    <Column id=n_inmuebles title="Inmuebles" fmt='0' />
+    <Column id=n_urbanos title="Urbanos" fmt='0' />
+    <Column id=n_viviendas_urbanas title="Viviendas" fmt='0' />
+    <Column id=n_rusticos title="Rústicos" fmt='0' />
+    <Column id=n_inmuebles_sociedad title="De sus sociedades" fmt='0' />
+    <Column id=urbanos_equivalentes title="Urbanos completos" fmt='0.0' />
+    <Column id=alquila title="Declara alquileres" />
+    <Column id=revisado title="Revisado a mano" />
+    <Column id=url_pdf title="Declaración" contentType=link linkLabel="PDF ↗" openInNewTab=true />
+</DataTable>
+
+Cuentan los inmuebles a su nombre aunque sean solo en parte: un piso heredado entre cuatro hermanos cuenta uno. La columna «Urbanos completos» suma solo su parte de cada inmueble urbano. Muchas fincas rústicas suelen ser parcelas pequeñas heredadas, sobre todo en Galicia y Asturias. Cada fila enlaza a la declaración original en la web del Congreso.
+
 ## Metodología y fuentes
 
 - **Declaraciones**: [Congreso de los Diputados, fichas de los diputados](https://www.congreso.es/es/busqueda-de-diputados), declaración de bienes y rentas inicial de cada diputado en activo de la XV Legislatura (presentadas entre el {resumen[0]?.primera} y el {resumen[0]?.ultima}). Las modificaciones posteriores no se usan porque suelen ser parciales. Se excluyen {kpi[0]?.n_excluidos} declaraciones que no se pueden leer o que remiten a una anterior.
-- **Lectura**: los documentos son escaneos; se han leído con reconocimiento óptico de caracteres y se ha comprobado a mano una muestra de 22 declaraciones de todos los grupos: el número de inmuebles urbanos y si declara alquileres coincidían en 21 de las 22. Puede haber errores puntuales en otros campos; por eso solo se publican los totales, no las cifras de cada diputado.
+- **Lectura**: los documentos son escaneos; se han leído con reconocimiento óptico de caracteres y se ha comprobado a mano una muestra de 22 declaraciones de todos los grupos: el número de inmuebles urbanos y si declara alquileres coincidían en 21 de las 22. Las filas que nombran varios bienes («vivienda, plaza de garaje y trastero») se cuentan bien a bien. Los 42 diputados que declaran siete o más inmuebles, y los que siguen la lista en el recuadro de Observaciones, se han comprobado a mano en el PDF («Revisado a mano»), y sus cifras sustituyen a las leídas automáticamente; en el resto puede haber errores puntuales, y cada uno enlaza a su declaración para comprobarlo.
 - **Alquileres**: el formulario no tiene una casilla para ellos; se detectan por el concepto de cada renta («alquiler», «arrendamiento», «capital inmobiliario»...). Los importes son los declarados, que unos dan en neto, otros en bruto y alguno al mes, así que no se suman ni se comparan. Las rentas imputadas por viviendas a disposición no cuentan como alquiler.
 - **Inmuebles completos**: suma de la parte de propiedad de cada inmueble urbano; cuando consta como ganancial o en proindiviso sin porcentaje se cuenta la mitad.
 - **Contribuyentes**: [Agencia Tributaria, Estadística de los declarantes del IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendimientos de inmuebles arrendados), territorio de régimen común. La unidad es la declaración, que puede ser conjunta, no la persona.

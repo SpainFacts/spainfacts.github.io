@@ -486,15 +486,71 @@ def _tabla_inmuebles(pagina):
 NUMEROS = {"dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "seis": 6, "siete": 7, "ocho": 8, "nueve": 9, "diez": 10}
 
 
-def _unidades(clase: str) -> int:
-    """Inmuebles que agrupa una fila: "16 VIVIENDAS", "2 PLAZAS DE APARCAMIENTO", "dos pisos" -> 16, 2, 2."""
+def _unidades(clase: str, fecha: str = "") -> int:
+    """Inmuebles que agrupa una fila: "16 VIVIENDAS", "2 PLAZAS DE APARCAMIENTO", "dos pisos" -> 16, 2, 2.
+
+    Si la clase nombra varios bienes ("Vivienda, plaza de garaje y trastero", "PISO/TRASTERO",
+    "1 PISO + 1 PARKING") o la fila trae varias fechas de adquisición (el OCR ha fundido filas:
+    "Piso Piso" / "1989 1998"), se cuentan los bienes que nombra la clase."""
     m = re.match(r"\W*(\d{1,2}|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+(viviendas|pisos|plazas|garajes|"
                  r"locales|trasteros|apartamentos|casas|naves|solares|fincas|parcelas|aparcamientos|chalets|"
                  r"inmuebles|edificios|oficinas|bajos|aticos|estudios)\b", _norm(clase))
-    if not m:
-        return 1
-    n = NUMEROS.get(m.group(1)) or int(m.group(1))
-    return n if 1 <= n <= 60 else 1
+    n = 1
+    if m:
+        n = NUMEROS.get(m.group(1)) or int(m.group(1))
+        n = n if 1 <= n <= 60 else 1
+    clases = _clases_fundidas(clase)
+    if len(clases) > 1 or _fundida(fecha):
+        n = max(n, sum(c for c, _ in clases))
+    return n
+
+
+def _fundida(fecha: str) -> bool:
+    return len(re.findall(r"(?<!\d)(?:1[89]|20)\d\d(?!\d)", fecha or "")) > 1
+
+
+def _clases_fundidas(clase: str) -> list[tuple[int, str]]:
+    out = []
+    for c, tipo in CLASE_FUNDIDA.findall(_norm(clase)):
+        k = NUMEROS.get(c) or int(c or 1)
+        out.append((k if 1 <= k <= 60 else 1, tipo))
+    return out
+
+
+def _unidades_vivienda(x: dict) -> int:
+    """Viviendas de una fila: si nombra varios bienes ("1 PISO + 1 PARKING + TRASTERO"), solo las que lo son."""
+    if not x["es_vivienda"]:
+        return 0
+    if len(_clases_fundidas(x["clase"])) > 1 or _fundida(x["fecha_adquisicion"]):
+        viv = sum(c for c, t in _clases_fundidas(x["clase"]) if VIVIENDA.search(t) and not ANEXO.search(t))
+        return min(viv, x["unidades"]) or 1
+    return x["unidades"]
+
+
+def _inmuebles_en_observaciones(obs: str) -> bool:
+    """El recuadro de Observaciones continúa la lista de inmuebles ("CONTINUACION: Nave industrial
+    450 m2...", "OTROS BIENES DE NATURALEZA URBANA -Piso (Madrid 2019)"). Esos no se cuentan: se marca."""
+    t = _norm(obs)
+    bienes = len(CLASE_FUNDIDA.findall(t)) + len(re.findall(r"fincas? rustica|parcela", t))
+    return bienes >= 1 and bool(re.search(r"(?<!\d)(?:19|20)\d\d(?!\d)|m2|\d\s*%|herencia|compraventa|"
+                                          r"pleno dominio|continuaci|otros bienes", t))
+
+
+# Un inmueble dentro de una fila fundida ("1 PISO + 1 PARKING + TRASTERO", "Local comercial - 5 Plazas de Garaje")
+CLASE_FUNDIDA = re.compile(r"(?:\b(\d{1,2}|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez)\s+)?"
+                           r"(plazas? (?:de )?(?:garaje|aparcamiento|parking)|local(?:es)? comercial(?:es)?|"
+                           r"vivi?endas?|pisos?|casas?|chalets?|apartamentos?|aticos?|estudios?|duplex|"
+                           r"garajes?|parkings?|plazas?|aparcamientos?|trasteros?|locales|local|naves?|solar(?:es)?|"
+                           r"edificios?|oficinas?)\b")
+
+
+def _fraccion_fila(derecho: str, clase: str, unidades: int) -> float:
+    """Fracción media de una fila que agrupa varios inmuebles con su % cada uno ("50% ... 16,66% ...")."""
+    pct = [float(p.replace(",", ".")) for p in re.findall(r"(\d{1,3}(?:[.,]\d{1,4})?)\s*%", _norm(derecho))]
+    pct = [p for p in pct if 0 < p <= 100]
+    if unidades > 1 and len(pct) == unidades:
+        return round(sum(pct) / len(pct) / 100, 4)
+    return _fraccion(derecho, clase)
 
 
 def _fraccion(derecho: str, clase: str) -> float:
@@ -627,7 +683,7 @@ def extraer(leg: int = 15, limite: int | None = None, solo: list[int] | None = N
         fila = {**base, "url_pdf": url, "fecha_declaracion": None, "n_paginas": None,
                 "origen_texto": None, "n_inmuebles": None, "n_urbanos": None, "n_rusticos": None,
                 "n_sociedad": None, "n_viviendas_urbanas": None, "urbanos_equivalentes": None,
-                "vivienda_habitual_declarada": None, "n_filas_rentas": None, "n_rentas_alquiler": None,
+                "vivienda_habitual_declarada": None, "inmuebles_en_observaciones": None, "n_filas_rentas": None, "n_rentas_alquiler": None,
                 "rend_capital_inmobiliario_eur": None, "menciona_alquiler_fuera_rentas": None,
                 "ejercicio_rentas": None, "n_declaraciones_bienes": len(todas),
                 "url_ultima_declaracion": todas[-1] if len(todas) > 1 else None,
@@ -651,12 +707,12 @@ def extraer(leg: int = 15, limite: int | None = None, solo: list[int] | None = N
                             and not re.search(r"\d{4}", x["fecha_adquisicion"])]
                 inm = [x for x in res["inmuebles"] if x not in remision]
                 res["inmuebles"] = inm
-                urb = [x for x in inm if x["tipo"] == "urbano"]
                 for x in inm:
-                    x["fraccion_titularidad"] = _fraccion(x["derecho"], x["clase"])
-                    x["unidades"] = _unidades(x["clase"])
+                    x["unidades"] = _unidades(x["clase"], x["fecha_adquisicion"])
+                    x["fraccion_titularidad"] = _fraccion_fila(x["derecho"], x["clase"], x["unidades"])
                     x["es_vivienda"] = bool(VIVIENDA.search(_norm(x["clase"]))) and not (
                         ANEXO.search(_norm(x["clase"])) and not re.search(r"vivienda|piso|casa|chalet", _norm(x["clase"])))
+                    x["unidades_vivienda"] = _unidades_vivienda(x)
                     x["vivienda_habitual"] = bool(re.search(r"habitual", _norm(x["clase"] + " " + x["derecho"])))
                 alq = [r for r in res["rentas"] if _es_alquiler(r)]
                 fuera = ALQUILER.search(_norm(" ".join(x["clase"] + " " + x["derecho"] for x in inm)
@@ -683,12 +739,9 @@ def extraer(leg: int = 15, limite: int | None = None, solo: list[int] | None = N
                     notas.append(f"{res['n_paginas']} páginas (anexos)")
                 fila.update({
                     "n_paginas": res["n_paginas"], "origen_texto": pags[0].get("origen") if pags else None,
-                    "n_inmuebles": sum(x["unidades"] for x in inm), "n_urbanos": sum(x["unidades"] for x in urb),
-                    "n_rusticos": sum(x["unidades"] for x in inm if x["tipo"] == "rustico"),
-                    "n_sociedad": sum(x["unidades"] for x in inm if x["tipo"] == "sociedad"),
-                    "n_viviendas_urbanas": sum(x["unidades"] for x in urb if x["es_vivienda"]),
-                    "urbanos_equivalentes": round(sum(x["unidades"] * x["fraccion_titularidad"] for x in urb), 3),
+                    **_totales(inm),
                     "vivienda_habitual_declarada": any(x["vivienda_habitual"] for x in inm),
+                    "inmuebles_en_observaciones": _inmuebles_en_observaciones(res["observaciones"]),
                     "n_filas_rentas": len(res["rentas"]), "n_rentas_alquiler": len(alq),
                     "rend_capital_inmobiliario_eur": round(sum(r["importe_eur"] or 0 for r in alq), 2),
                     "menciona_alquiler_fuera_rentas": bool(fuera),
@@ -708,6 +761,41 @@ def extraer(leg: int = 15, limite: int | None = None, solo: list[int] | None = N
     _escribir(EXT_DECL, decl_rows)
     _escribir(EXT_INM, inm_rows)
     _escribir(EXT_REN, ren_rows)
+
+
+def _totales(inm: list[dict]) -> dict:
+    urb = [x for x in inm if x["tipo"] == "urbano"]
+    return {
+        "n_inmuebles": sum(x["unidades"] for x in inm), "n_urbanos": sum(x["unidades"] for x in urb),
+        "n_rusticos": sum(x["unidades"] for x in inm if x["tipo"] == "rustico"),
+        "n_sociedad": sum(x["unidades"] for x in inm if x["tipo"] == "sociedad"),
+        "n_viviendas_urbanas": sum(x["unidades_vivienda"] for x in urb),
+        "urbanos_equivalentes": round(sum(x["unidades"] * x["fraccion_titularidad"] for x in urb), 3),
+    }
+
+
+def recontar() -> None:
+    """Recalcula unidades, fracciones y totales desde los extractos, sin descargar ni repetir el OCR
+    (para aplicar cambios en _unidades/_fraccion sin alterar qué diputados entran)."""
+    inm_rows = list(csv.DictReader(EXT_INM.open(encoding="utf-8", newline="")))
+    for x in inm_rows:
+        x["unidades"] = _unidades(x["clase"], x["fecha_adquisicion"])
+        x["fraccion_titularidad"] = _fraccion_fila(x["derecho"], x["clase"], x["unidades"])
+        x["es_vivienda"] = x["es_vivienda"] == "True"
+        x["unidades_vivienda"] = _unidades_vivienda(x)
+    por_dip: dict[str, list[dict]] = {}
+    for x in inm_rows:
+        por_dip.setdefault(x["id_diputado"], []).append(x)
+    decl_rows = list(csv.DictReader(EXT_DECL.open(encoding="utf-8", newline="")))
+    for f in decl_rows:
+        obs = None
+        if f["n_inmuebles"] != "":
+            f.update(_totales(por_dip.get(f["id_diputado"], [])))
+            # Observaciones desde la caché del OCR (sin red)
+            obs = _inmuebles_en_observaciones(interpretar(paginas_ocr(pdf_local(f["url_pdf"])))["observaciones"])
+        f["inmuebles_en_observaciones"] = obs
+    _escribir(EXT_DECL, decl_rows)
+    _escribir(EXT_INM, inm_rows)
 
 
 def _escribir(ruta: Path, filas: list[dict]) -> None:
@@ -838,13 +926,14 @@ def diputados_inmuebles():
                                      "n_rusticos", "n_sociedad", "n_viviendas_urbanas", "n_filas_rentas",
                                      "n_rentas_alquiler", "ejercicio_rentas"),
                          reales=("urbanos_equivalentes", "rend_capital_inmobiliario_eur"),
-                         logicos=("vivienda_habitual_declarada", "menciona_alquiler_fuera_rentas", "extraccion_ok"))
+                         logicos=("vivienda_habitual_declarada", "inmuebles_en_observaciones",
+                                  "menciona_alquiler_fuera_rentas", "extraccion_ok"))
 
     @dlt.resource(name="cong_inmuebles_declarados", write_disposition="replace")
     def cong_inmuebles_declarados():
         for f in _leer(EXT_INM):
-            yield _tipar(f, enteros=("legislatura", "id_diputado", "orden"), reales=("fraccion_titularidad",),
-                         logicos=("es_vivienda", "vivienda_habitual"))
+            yield _tipar(f, enteros=("legislatura", "id_diputado", "orden", "unidades_vivienda"),
+                         reales=("fraccion_titularidad",), logicos=("es_vivienda", "vivienda_habitual"))
 
     @dlt.resource(name="cong_rentas_declaradas", write_disposition="replace")
     def cong_rentas_declaradas():
@@ -866,6 +955,7 @@ if __name__ == "__main__":
     ap.add_argument("--limite", type=int)
     ap.add_argument("--solo", type=int, nargs="*")
     ap.add_argument("--revisar", type=int)
+    ap.add_argument("--recontar", action="store_true", help="recalcula totales desde los extractos (sin OCR)")
     ap.add_argument("--descargar", action="store_true", help="solo fichas, PDF y OCR (sin interpretar)")
     a = ap.parse_args()
     if a.descargar:
@@ -879,6 +969,8 @@ if __name__ == "__main__":
                 print(d["codParlamentario"], u, flush=True)
             except Exception as e:  # noqa: BLE001
                 print(d["codParlamentario"], "ERROR", e, flush=True)
+    elif a.recontar:
+        recontar()
     elif a.revisar:
         revisar(a.revisar, a.leg)
     elif a.extraer:

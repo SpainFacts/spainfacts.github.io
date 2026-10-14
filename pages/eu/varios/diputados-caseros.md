@@ -1,7 +1,7 @@
 ---
 title: Zenbat diputatu dira etxe-jabe errentatzaile?
-description: "Kongresuko zenbat diputatuk aitortzen dituzten alokairuagatiko diru-sarrerak edo dituzten hainbat etxebizitza, beren ondasun eta errenten aitorpenen arabera, talde parlamentarioka eta PFEZaren aitortzaile guztiekin alderatuta."
-i18n_origen: b1840c4f7433
+description: "Kongresuko zenbat diputatuk aitortzen dituzten alokairuagatiko diru-sarrerak edo dituzten hainbat etxebizitza, zenbat higiezin aitortzen dituen bakoitzak eta alderdi bakoitzak, beren ondasun eta errenten aitorpenen arabera, eta PFEZaren aitortzaile guztiekin alderatuta."
+i18n_origen: 5bedfc9c968f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -74,9 +74,42 @@ UNION ALL
 SELECT grupo, '2 o más viviendas', pct_dos_viviendas, n_validos FROM mother.diputados_inmuebles_grupos WHERE grupo <> 'Total' AND n_validos >= 20
 ORDER BY n_validos DESC, medida
 ```
+```sql partidos
+SELECT partido, CAST(n_validos AS INTEGER) AS diputados, media_inmuebles, mediana_inmuebles, media_urbanos,
+       media_viviendas, media_rusticos, pct_dos_viviendas, max_inmuebles, suma_inmuebles
+FROM mother.diputados_inmuebles_partidos
+WHERE partido <> 'Total'
+ORDER BY media_inmuebles DESC
+```
+
+```sql partidos_largo
+SELECT partido, 'Viviendas' AS tipo, media_viviendas AS media, 1 AS orden_tipo, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Garajes, locales y otros urbanos', round(media_urbanos - media_viviendas, 2), 2, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Fincas rústicas', media_rusticos, 3, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+ORDER BY media_inmuebles DESC, orden_tipo
+```
+
+```sql ranking
+SELECT row_number() OVER (ORDER BY n_inmuebles DESC, n_urbanos DESC, nombre) AS puesto,
+       nombre, partido, circunscripcion, n_inmuebles, n_urbanos, n_viviendas_urbanas, n_rusticos,
+       n_inmuebles_sociedad, urbanos_equivalentes,
+       CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
+       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
+       url_pdf
+FROM mother.diputados_inmuebles_diputados
+WHERE extraccion_ok
+ORDER BY puesto
+```
+
+```sql ranking_top
+SELECT nombre || ' (' || partido || ')' AS diputado, n_inmuebles, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
+```
+
 # <span aria-hidden="true">🏘️</span> Zenbat diputatu dira etxe-jabe errentatzaile?
 
-Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkezten dute, eta haien fitxan argitaratzen da. XV. Legegintzaldiko {kpi[0]?.n_diputados} diputatu aktiboenak irakurri ditugu, zenbatek aitortzen dituzten higiezinak alokatzeagatiko diru-sarrerak eta zenbatek duten etxebizitza bat baino gehiago zenbatzeko. Ondoren datorren guztia haien aitorpenetan jasotakoa da.
+Kongresuko diputatuek, kargua hartzean, ondasun eta errenten aitorpen bat aurkezten dute, eta haien fitxan argitaratzen da. XV. Legegintzaldiko {kpi[0]?.n_diputados} diputatu aktiboenak irakurri ditugu, zenbatek aitortzen dituzten higiezinak alokatzeagatiko diru-sarrerak zenbatek duten etxebizitza bat baino gehiago eta bakoitzak zenbat higiezin aitortzen dituen zenbatzeko. Ondoren datorren guztia haien aitorpenetan jasotakoa da.
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
     {#if kpi.length && irpf.length}
@@ -183,10 +216,73 @@ Zerga Agentziak argitaratzen du PFEZaren zenbat aitorpenek dituzten alokatutako 
 
 Talde txikietan diputatu bakoitzak asko mugitzen du ehunekoa: zazpi diputaturekin, bakar bat 14 puntu da.
 
+## Alderdien rankinga
+
+Alderdien tamainak oso desberdinak direnez, diputatuka alderatzen dira: diputatu bakoitzak batez beste zenbat higiezin aitortzen dituen. Haien izenean dauden higiezinak zenbatzen dira, hirikoak (etxebizitzak, garajeak, trastelekuak, lokalak, orubeak) eta landa-finkak, jabetza-zatia edozein dela ere; parte hartzen duten sozietateenak aparte doaz, diputatuen rankingean. Diputatuak hautatu zituen alderdiaren arabera taldekatzen dira, PSC eta gainerako federazioak PSOEren barruan.
+
+<BarChart
+    data={partidos_largo}
+    x=partido
+    y=media
+    series=tipo
+    type=stacked
+    sort=false
+    yFmt='0.0'
+    yAxisTitle="Higiezinak diputatuko (batez bestekoa)"
+    seriesColors={{'Viviendas': '#1d4ed8', 'Garajes, locales y otros urbanos': '#60a5fa', 'Fincas rústicas': '#a3a3a3'}}
+    title="Diputatuko aitortutako higiezinak, 5 diputatu edo gehiagoko alderdiak"
+/>
+
+<DataTable data={partidos} rows=12>
+    <Column id=partido title="Alderdia" />
+    <Column id=diputados title="Diputatuak" fmt='0' />
+    <Column id=media_inmuebles title="Higiezinak diputatuko (batez bestekoa)" fmt='0.0' />
+    <Column id=mediana_inmuebles title="Mediana" fmt='0.0' />
+    <Column id=media_urbanos title="Hirikoak (batez bestekoa)" fmt='0.0' />
+    <Column id=media_viviendas title="Etxebizitzak (batez bestekoa)" fmt='0.0' />
+    <Column id=media_rusticos title="Landakoak (batez bestekoa)" fmt='0.0' />
+    <Column id=pct_dos_viviendas title="% 2 etxebizitza edo gehiago" fmt='0.0' />
+    <Column id=max_inmuebles title="Diputatu baten gehienekoa" fmt='0' />
+    <Column id=suma_inmuebles title="Alderdiaren guztizkoa" fmt='0' />
+</DataTable>
+
+Finka asko dituzten diputatu gutxi batzuek batez bestekoa gora botatzen dute: medianak adierazten du alderdi bakoitzeko diputatu tipikoak zenbat higiezin dituen. Diputatu bat edo bi dituzten alderdiak (BNG, UPN, CC) erabat pertsona horren mende daude.
+
+## Higiezin gehien dituzten diputatuak
+
+<BarChart
+    data={ranking_top}
+    x=diputado
+    y=n_inmuebles
+    swapXY=true
+    sort=false
+    yFmt='0'
+    yAxisTitle="Haien izenean dauden higiezinak (hirikoak eta landakoak)"
+    title="Higiezin gehien aitortzen dituzten 15 diputatuak"
+/>
+
+<DataTable data={ranking} rows=25 search=true>
+    <Column id=puesto title="#" fmt='0' />
+    <Column id=nombre title="Diputatua" />
+    <Column id=partido title="Alderdia" />
+    <Column id=circunscripcion title="Barrutia" />
+    <Column id=n_inmuebles title="Higiezinak" fmt='0' />
+    <Column id=n_urbanos title="Hirikoak" fmt='0' />
+    <Column id=n_viviendas_urbanas title="Etxebizitzak" fmt='0' />
+    <Column id=n_rusticos title="Landakoak" fmt='0' />
+    <Column id=n_inmuebles_sociedad title="Haien sozietateenak" fmt='0' />
+    <Column id=urbanos_equivalentes title="Hiri-higiezin osoak" fmt='0.0' />
+    <Column id=alquila title="Alokairuak aitortzen ditu" />
+    <Column id=revisado title="Eskuz berrikusia" />
+    <Column id=url_pdf title="Aitorpena" contentType=link linkLabel="PDF ↗" openInNewTab=true />
+</DataTable>
+
+Haien izenean dauden higiezinak zenbatzen dira, zati batean bakarrik izan arren: lau anai-arreben artean jasotako herentziazko pisu bat bat da. «Hiri-higiezin osoak» zutabeak hiri-higiezin bakoitzean duten zatia bakarrik batzen du. Landa-finka asko herentziaz jasotako lursail txikiak izan ohi dira, batez ere Galizian eta Asturiasen. Errenkada bakoitzak Kongresuaren webguneko jatorrizko aitorpenerako esteka du.
+
 ## Metodologia eta iturriak
 
 - **Aitorpenak**: [Diputatuen Kongresua, diputatuen fitxak](https://www.congreso.es/es/busqueda-de-diputados), XV. Legegintzaldiko diputatu aktibo bakoitzaren hasierako ondasun eta errenten aitorpena ({resumen[0]?.primera} eta {resumen[0]?.ultima} artean aurkeztuak). Ondorengo aldaketak ez dira erabiltzen, partzialak izan ohi direlako. Irakurri ezin diren edo aurreko batera bidaltzen duten {kpi[0]?.n_excluidos} aitorpen baztertzen dira.
-- **Irakurketa**: dokumentuak eskaneatuak dira; karaktere-ezagutze optikoarekin irakurri dira, eta talde guztietako 22 aitorpeneko lagin bat eskuz egiaztatu da: hiri-higiezinen kopurua eta alokairuak aitortzen dituen ala ez bat zetozen 22tik 21etan. Beste eremu batzuetan noizbehinkako akatsak egon daitezke; horregatik, guztizkoak baino ez dira argitaratzen, ez diputatu bakoitzaren zifrak.
+- **Irakurketa**: dokumentuak eskaneatuak dira; karaktere-ezagutze optikoarekin irakurri dira, eta talde guztietako 22 aitorpeneko lagin bat eskuz egiaztatu da: hiri-higiezinen kopurua eta alokairuak aitortzen dituen ala ez bat zetozen 22tik 21etan. Hainbat ondasun aipatzen dituzten errenkadak («etxebizitza, garaje-plaza eta trastelekua») ondasunez ondasun zenbatzen dira. Zazpi higiezin edo gehiago aitortzen dituzten 42 diputatuak, eta zerrenda Oharren laukian jarraitzen dutenak, eskuz egiaztatu dira PDFan («Eskuz berrikusia»), eta haien zifrek automatikoki irakurritakoak ordezkatzen dituzte; gainerakoetan noizbehinkako akatsak egon daitezke, eta bakoitzak bere aitorpenerako esteka du egiaztatu ahal izateko.
 - **Alokairuak**: inprimakiak ez du haientzako laukitxorik; errenta bakoitzaren kontzeptuaren bidez detektatzen dira («alquiler», «arrendamiento», «capital inmobiliario»...). Zenbatekoak aitortutakoak dira, eta batzuek garbian ematen dituzte, beste batzuek gordinean eta norbaitek hilean; beraz, ez dira batzen ezta alderatzen ere. Eskura dauden etxebizitzengatik egotzitako errentak ez dira alokairutzat hartzen.
 - **Higiezin osoak**: hiri-higiezin bakoitzaren jabetza-zatiaren batura; irabazpidezkoa edo ehunekorik gabeko proindibisoa gisa ageri denean, erdia zenbatzen da.
 - **Zergadunak**: [Zerga Agentzia, PFEZaren aitortzaileen estatistika](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), 102. partida (errentan emandako higiezinen etekinak), erregimen erkideko lurraldea. Unitatea aitorpena da, baterakoa izan daitekeena, ez pertsona.

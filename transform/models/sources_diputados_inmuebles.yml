@@ -21,7 +21,9 @@ sources:
           titularidad; rend_capital_inmobiliario_eur: suma de las rentas cuyo concepto es un
           alquiler (el formulario no tiene una casilla propia); ejercicio_rentas: año anterior
           a la declaración; extraccion_ok=false si el OCR no reconoce las tablas o la
-          declaración remite a otra.
+          declaración remite a otra; inmuebles_en_observaciones=true si el recuadro de
+          Observaciones continúa la lista de inmuebles (esos no se cuentan). Una fila que nombra
+          varios bienes ("vivienda, plaza de garaje y trastero") cuenta cada uno.
       - name: cong_inmuebles_declarados
         description: "Una fila por inmueble declarado (tipo urbano/rustico/sociedad, clase, situación, fecha de adquisición, derecho y fracción de titularidad)."
       - name: cong_rentas_declaradas

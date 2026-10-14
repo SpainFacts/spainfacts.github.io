@@ -1,0 +1,24 @@
+version: 2
+
+seeds:
+  - name: diputados_inmuebles_revisados
+    description: >
+      Recuentos de inmuebles comprobados a mano en el PDF de la declaración inicial de Bienes
+      y Rentas (Congreso, XV Legislatura) para la cabeza del ranking de diputados por número
+      de inmuebles, donde un error del OCR (filas fundidas o saltadas) pesa más. Sustituyen a
+      los del OCR en diputados_inmuebles_diputados. Criterio: cada piso, garaje, trastero,
+      local o solar cuenta uno; "3 plazas de garaje" cuenta tres; urbanos_equivalentes suma
+      la fracción de titularidad de cada urbano (ganancial sin % = 0,5).
+    config:
+      column_types:
+        id_diputado: integer
+        n_urbanos: integer
+        n_viviendas_urbanas: integer
+        n_rusticos: integer
+        n_sociedad: integer
+        urbanos_equivalentes: double
+        nota: varchar
+    columns:
+      - name: id_diputado
+        description: "codParlamentario del Congreso"
+        tests: [not_null, unique]

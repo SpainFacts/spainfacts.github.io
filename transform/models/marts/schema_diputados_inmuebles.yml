@@ -10,6 +10,8 @@ models:
       dos_urbanos (2+ inmuebles urbanos, garajes y trasteros incluidos), dos_viviendas
       (2+ viviendas), dos_equivalentes (2+ urbanos completos sumando el % de titularidad).
       Si extraccion_ok es false las métricas van a null y la fila no cuenta en los %.
+      Los recuentos de los diputados con revisado_a_mano = true se han comprobado en el PDF
+      (seed diputados_inmuebles_revisados); el resto son los del OCR.
     columns:
       - name: id_diputado
         description: "codParlamentario del Congreso"
@@ -18,7 +20,16 @@ models:
         description: "Grupo parlamentario abreviado (PP, PSOE, Vox, Sumar, ERC, Junts, EH Bildu, PNV, Mixto)"
         tests: [not_null]
       - name: formacion
-        description: "Formación electoral por la que fue elegido"
+        description: "Formación electoral por la que fue elegido, tal como la da el Congreso (PSC-PSOE, PsdeG-PSOE...)"
+      - name: partido
+        description: "Formación abreviada con las federaciones del PSOE dentro de PSOE (PP, PSOE, Vox, Sumar, ERC, Junts, EH Bildu, PNV, BNG, CC, UPN)"
+        tests: [not_null]
+      - name: n_inmuebles
+        description: "Inmuebles a su nombre: urbanos + rústicos (sin los de sociedades, que van en n_inmuebles_sociedad)"
+      - name: n_rusticos
+        description: "Fincas o parcelas rústicas declaradas"
+      - name: n_inmuebles_sociedad
+        description: "Inmuebles de sociedades no cotizadas en las que participa, si los lista"
       - name: fecha_declaracion
         description: "Fecha de registro de la declaración inicial (del nombre del PDF)"
       - name: ejercicio_rentas
@@ -37,6 +48,12 @@ models:
         description: "Lo anterior en euros constantes de 2025 (main.deflactor)"
       - name: extraccion_ok
         tests: [not_null]
+      - name: inmuebles_sin_contar
+        description: "true si el recuadro de Observaciones lista más inmuebles que no se han contado (el OCR no los separa); nunca en los revisados a mano"
+      - name: revisado_a_mano
+        description: "true si los recuentos de inmuebles se han comprobado a mano en el PDF (seed diputados_inmuebles_revisados)"
+      - name: url_pdf
+        description: "Declaración inicial en la web del Congreso"
       - name: nota
         description: "Motivo de exclusión o aviso de lectura"
 
@@ -48,6 +65,16 @@ models:
       que alquilan. Porcentajes sobre las declaraciones leídas correctamente.
     columns:
       - name: grupo
+        tests: [not_null, unique]
+
+  - name: diputados_inmuebles_partidos
+    description: >
+      Por partido (formación por la que fueron elegidos, federaciones del PSOE dentro de PSOE)
+      y fila 'Total': diputados, válidos, media y mediana por diputado de inmuebles (urbanos +
+      rústicos), urbanos, viviendas y rústicos, urbanos equivalentes medios, % que declara
+      alquilar y % con 2 o más viviendas, máximo de un diputado y sumas (dato secundario).
+    columns:
+      - name: partido
         tests: [not_null, unique]
 
   - name: diputados_inmuebles_resumen

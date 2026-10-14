@@ -1,7 +1,7 @@
 ---
 title: Cantos deputados son caseiros?
-description: "Cantos deputados do Congreso declaran ingresos por alugueiro ou teñen varias vivendas, segundo as súas declaracións de bens e rendas, por grupo parlamentario e fronte ao conxunto de declarantes do IRPF."
-i18n_origen: b1840c4f7433
+description: "Cantos deputados do Congreso declaran ingresos por alugueiro ou teñen varias vivendas, cantos inmobles declara cada un e cada partido, segundo as súas declaracións de bens e rendas, e fronte ao conxunto de declarantes do IRPF."
+i18n_origen: 5bedfc9c968f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -75,9 +75,42 @@ SELECT grupo, '2 o más viviendas', pct_dos_viviendas, n_validos FROM mother.dip
 ORDER BY n_validos DESC, medida
 ```
 
+```sql partidos
+SELECT partido, CAST(n_validos AS INTEGER) AS diputados, media_inmuebles, mediana_inmuebles, media_urbanos,
+       media_viviendas, media_rusticos, pct_dos_viviendas, max_inmuebles, suma_inmuebles
+FROM mother.diputados_inmuebles_partidos
+WHERE partido <> 'Total'
+ORDER BY media_inmuebles DESC
+```
+
+```sql partidos_largo
+SELECT partido, 'Viviendas' AS tipo, media_viviendas AS media, 1 AS orden_tipo, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Garajes, locales y otros urbanos', round(media_urbanos - media_viviendas, 2), 2, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Fincas rústicas', media_rusticos, 3, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+ORDER BY media_inmuebles DESC, orden_tipo
+```
+
+```sql ranking
+SELECT row_number() OVER (ORDER BY n_inmuebles DESC, n_urbanos DESC, nombre) AS puesto,
+       nombre, partido, circunscripcion, n_inmuebles, n_urbanos, n_viviendas_urbanas, n_rusticos,
+       n_inmuebles_sociedad, urbanos_equivalentes,
+       CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
+       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
+       url_pdf
+FROM mother.diputados_inmuebles_diputados
+WHERE extraccion_ok
+ORDER BY puesto
+```
+
+```sql ranking_top
+SELECT nombre || ' (' || partido || ')' AS diputado, n_inmuebles, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
+```
+
 # <span aria-hidden="true">🏘️</span> Cantos deputados son caseiros?
 
-Os deputados do Congreso presentan ao tomaren posesión unha declaración de bens e rendas que se publica na súa ficha. Lemos as dos {kpi[0]?.n_diputados} deputados en activo da XV Lexislatura para contar cantos declaran ingresos por alugar inmobles e cantos teñen máis dunha vivenda. Todo o que segue é o que consta nas súas declaracións.
+Os deputados do Congreso presentan ao tomaren posesión unha declaración de bens e rendas que se publica na súa ficha. Lemos as dos {kpi[0]?.n_diputados} deputados en activo da XV Lexislatura para contar cantos declaran ingresos por alugar inmobles cantos teñen máis dunha vivenda e cantos inmobles declara cada un. Todo o que segue é o que consta nas súas declaracións.
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
     {#if kpi.length && irpf.length}
@@ -184,10 +217,73 @@ A Axencia Tributaria publica cantas declaracións do IRPF inclúen rendementos p
 
 Nos grupos pequenos cada deputado move moito a porcentaxe: con sete deputados, un só son 14 puntos.
 
+## Ranking por partido
+
+Como os partidos teñen tamaños moi distintos, compáranse por deputado: cantos inmobles declara de media cada un dos seus deputados. Cóntanse os inmobles ao seu nome, urbanos (vivendas, garaxes, trasteiros, locais, soares) e fincas rústicas, sexa cal sexa a súa parte de propiedade; os de sociedades nas que participan van á parte, no ranking de deputados. Os deputados agrúpanse pola formación pola que foron elixidos, co PSC e as demais federacións dentro do PSOE.
+
+<BarChart
+    data={partidos_largo}
+    x=partido
+    y=media
+    series=tipo
+    type=stacked
+    sort=false
+    yFmt='0.0'
+    yAxisTitle="Inmobles por deputado (media)"
+    seriesColors={{'Viviendas': '#1d4ed8', 'Garajes, locales y otros urbanos': '#60a5fa', 'Fincas rústicas': '#a3a3a3'}}
+    title="Inmobles declarados por deputado, partidos con 5 ou máis deputados"
+/>
+
+<DataTable data={partidos} rows=12>
+    <Column id=partido title="Partido" />
+    <Column id=diputados title="Deputados" fmt='0' />
+    <Column id=media_inmuebles title="Inmobles por deputado (media)" fmt='0.0' />
+    <Column id=mediana_inmuebles title="Mediana" fmt='0.0' />
+    <Column id=media_urbanos title="Urbanos (media)" fmt='0.0' />
+    <Column id=media_viviendas title="Vivendas (media)" fmt='0.0' />
+    <Column id=media_rusticos title="Rústicos (media)" fmt='0.0' />
+    <Column id=pct_dos_viviendas title="% 2 ou máis vivendas" fmt='0.0' />
+    <Column id=max_inmuebles title="Máximo dun deputado" fmt='0' />
+    <Column id=suma_inmuebles title="Total do partido" fmt='0' />
+</DataTable>
+
+A media dispárase cuns poucos deputados con moitas fincas: a mediana di cantos inmobles ten o deputado típico de cada partido. Os partidos cun ou dous deputados (BNG, UPN, CC) dependen por completo desa persoa.
+
+## Os deputados con máis inmobles
+
+<BarChart
+    data={ranking_top}
+    x=diputado
+    y=n_inmuebles
+    swapXY=true
+    sort=false
+    yFmt='0'
+    yAxisTitle="Inmobles ao seu nome (urbanos e rústicos)"
+    title="Os 15 deputados que declaran máis inmobles"
+/>
+
+<DataTable data={ranking} rows=25 search=true>
+    <Column id=puesto title="#" fmt='0' />
+    <Column id=nombre title="Deputado" />
+    <Column id=partido title="Partido" />
+    <Column id=circunscripcion title="Circunscrición" />
+    <Column id=n_inmuebles title="Inmobles" fmt='0' />
+    <Column id=n_urbanos title="Urbanos" fmt='0' />
+    <Column id=n_viviendas_urbanas title="Vivendas" fmt='0' />
+    <Column id=n_rusticos title="Rústicos" fmt='0' />
+    <Column id=n_inmuebles_sociedad title="Das súas sociedades" fmt='0' />
+    <Column id=urbanos_equivalentes title="Urbanos completos" fmt='0.0' />
+    <Column id=alquila title="Declara alugueiros" />
+    <Column id=revisado title="Revisado a man" />
+    <Column id=url_pdf title="Declaración" contentType=link linkLabel="PDF ↗" openInNewTab=true />
+</DataTable>
+
+Contan os inmobles ao seu nome aínda que sexan só en parte: un piso herdado entre catro irmáns conta un. A columna «Urbanos completos» suma só a súa parte de cada inmoble urbano. Moitas fincas rústicas adoitan ser parcelas pequenas herdadas, sobre todo en Galicia e Asturias. Cada fila leva á declaración orixinal na web do Congreso.
+
 ## Metodoloxía e fontes
 
 - **Declaracións**: [Congreso dos Deputados, fichas dos deputados](https://www.congreso.es/es/busqueda-de-diputados), declaración de bens e rendas inicial de cada deputado en activo da XV Lexislatura (presentadas entre o {resumen[0]?.primera} e o {resumen[0]?.ultima}). As modificacións posteriores non se usan porque adoitan ser parciais. Exclúense {kpi[0]?.n_excluidos} declaracións que non se poden ler ou que remiten a unha anterior.
-- **Lectura**: os documentos son escaneos; léronse con recoñecemento óptico de caracteres e comprobouse a man unha mostra de 22 declaracións de todos os grupos: o número de inmobles urbanos e se declara alugueiros coincidían en 21 das 22. Pode haber erros puntuais noutros campos; por iso só se publican os totais, non as cifras de cada deputado.
+- **Lectura**: os documentos son escaneos; léronse con recoñecemento óptico de caracteres e comprobouse a man unha mostra de 22 declaracións de todos os grupos: o número de inmobles urbanos e se declara alugueiros coincidían en 21 das 22. As filas que nomean varios bens («vivenda, praza de garaxe e trasteiro») cóntanse ben a ben. Os 42 deputados que declaran sete inmobles ou máis, e os que seguen a lista no recadro de Observacións, comprobáronse a man no PDF («Revisado a man»), e as súas cifras substitúen as lidas automaticamente; no resto pode haber erros puntuais, e cada un leva á súa declaración para comprobalo.
 - **Alugueiros**: o formulario non ten unha casa para eles; detéctanse polo concepto de cada renda («alquiler», «arrendamiento», «capital inmobiliario»...). Os importes son os declarados, que uns dan en neto, outros en bruto e algún ao mes, así que non se suman nin se comparan. As rendas imputadas por vivendas a disposición non contan como alugueiro.
 - **Inmobles completos**: suma da parte de propiedade de cada inmoble urbano; cando consta como ganancial ou en proindiviso sen porcentaxe cóntase a metade.
 - **Contribuíntes**: [Axencia Tributaria, Estatística dos declarantes do IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendementos de inmobles arrendados), territorio de réxime común. A unidade é a declaración, que pode ser conxunta, non a persoa.

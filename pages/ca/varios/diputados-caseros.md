@@ -1,7 +1,7 @@
 ---
 title: Quants diputats són arrendadors?
-description: "Quants diputats del Congrés declaren ingressos per lloguer o tenen diversos habitatges, segons les seves declaracions de béns i rendes, per grup parlamentari i davant el conjunt de declarants de l'IRPF."
-i18n_origen: b1840c4f7433
+description: "Quants diputats del Congrés declaren ingressos per lloguer o tenen diversos habitatges, quants immobles declara cadascun i cada partit, segons les seves declaracions de béns i rendes, i davant el conjunt de declarants de l'IRPF."
+i18n_origen: 5bedfc9c968f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -75,9 +75,42 @@ SELECT grupo, '2 o más viviendas', pct_dos_viviendas, n_validos FROM mother.dip
 ORDER BY n_validos DESC, medida
 ```
 
+```sql partidos
+SELECT partido, CAST(n_validos AS INTEGER) AS diputados, media_inmuebles, mediana_inmuebles, media_urbanos,
+       media_viviendas, media_rusticos, pct_dos_viviendas, max_inmuebles, suma_inmuebles
+FROM mother.diputados_inmuebles_partidos
+WHERE partido <> 'Total'
+ORDER BY media_inmuebles DESC
+```
+
+```sql partidos_largo
+SELECT partido, 'Viviendas' AS tipo, media_viviendas AS media, 1 AS orden_tipo, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Garajes, locales y otros urbanos', round(media_urbanos - media_viviendas, 2), 2, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+UNION ALL
+SELECT partido, 'Fincas rústicas', media_rusticos, 3, media_inmuebles, n_validos FROM mother.diputados_inmuebles_partidos WHERE partido <> 'Total' AND n_validos >= 5
+ORDER BY media_inmuebles DESC, orden_tipo
+```
+
+```sql ranking
+SELECT row_number() OVER (ORDER BY n_inmuebles DESC, n_urbanos DESC, nombre) AS puesto,
+       nombre, partido, circunscripcion, n_inmuebles, n_urbanos, n_viviendas_urbanas, n_rusticos,
+       n_inmuebles_sociedad, urbanos_equivalentes,
+       CASE WHEN alquila THEN 'Sí' ELSE 'No' END AS alquila,
+       CASE WHEN revisado_a_mano THEN 'Sí' WHEN inmuebles_sin_contar THEN 'No: hay más en Observaciones' ELSE '' END AS revisado,
+       url_pdf
+FROM mother.diputados_inmuebles_diputados
+WHERE extraccion_ok
+ORDER BY puesto
+```
+
+```sql ranking_top
+SELECT nombre || ' (' || partido || ')' AS diputado, n_inmuebles, puesto FROM ${ranking} WHERE puesto <= 15 ORDER BY puesto
+```
+
 # <span aria-hidden="true">🏘️</span> Quants diputats són arrendadors?
 
-Els diputats del Congrés presenten en prendre possessió una declaració de béns i rendes que es publica a la seva fitxa. Hem llegit les dels {kpi[0]?.n_diputados} diputats en actiu de la XV Legislatura per comptar quants declaren ingressos per llogar immobles i quants tenen més d'un habitatge. Tot el que segueix és el que consta en les seves declaracions.
+Els diputats del Congrés presenten en prendre possessió una declaració de béns i rendes que es publica a la seva fitxa. Hem llegit les dels {kpi[0]?.n_diputados} diputats en actiu de la XV Legislatura per comptar quants declaren ingressos per llogar immobles quants tenen més d'un habitatge i quants immobles declara cadascun. Tot el que segueix és el que consta en les seves declaracions.
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
     {#if kpi.length && irpf.length}
@@ -184,10 +217,73 @@ L'Agència Tributària publica quantes declaracions de l'IRPF inclouen rendiment
 
 En els grups petits cada diputat mou molt el percentatge: amb set diputats, un de sol són 14 punts.
 
+## Rànquing per partit
+
+Com que els partits tenen mides molt diferents, es comparen per diputat: quants immobles declara de mitjana cadascun dels seus diputats. Es compten els immobles al seu nom, urbans (habitatges, garatges, trasters, locals, solars) i finques rústiques, sigui quina sigui la seva part de propietat; els de societats en què participen van a part, en el rànquing de diputats. Els diputats s'agrupen per la formació per la qual van ser elegits, amb el PSC i les altres federacions dins del PSOE.
+
+<BarChart
+    data={partidos_largo}
+    x=partido
+    y=media
+    series=tipo
+    type=stacked
+    sort=false
+    yFmt='0.0'
+    yAxisTitle="Immobles per diputat (mitjana)"
+    seriesColors={{'Viviendas': '#1d4ed8', 'Garajes, locales y otros urbanos': '#60a5fa', 'Fincas rústicas': '#a3a3a3'}}
+    title="Immobles declarats per diputat, partits amb 5 o més diputats"
+/>
+
+<DataTable data={partidos} rows=12>
+    <Column id=partido title="Partit" />
+    <Column id=diputados title="Diputats" fmt='0' />
+    <Column id=media_inmuebles title="Immobles per diputat (mitjana)" fmt='0.0' />
+    <Column id=mediana_inmuebles title="Mediana" fmt='0.0' />
+    <Column id=media_urbanos title="Urbans (mitjana)" fmt='0.0' />
+    <Column id=media_viviendas title="Habitatges (mitjana)" fmt='0.0' />
+    <Column id=media_rusticos title="Rústics (mitjana)" fmt='0.0' />
+    <Column id=pct_dos_viviendas title="% 2 o més habitatges" fmt='0.0' />
+    <Column id=max_inmuebles title="Màxim d'un diputat" fmt='0' />
+    <Column id=suma_inmuebles title="Total del partit" fmt='0' />
+</DataTable>
+
+La mitjana es dispara amb uns quants diputats amb moltes finques: la mediana diu quants immobles té el diputat típic de cada partit. Els partits amb un o dos diputats (BNG, UPN, CC) depenen completament d'aquesta persona.
+
+## Els diputats amb més immobles
+
+<BarChart
+    data={ranking_top}
+    x=diputado
+    y=n_inmuebles
+    swapXY=true
+    sort=false
+    yFmt='0'
+    yAxisTitle="Immobles al seu nom (urbans i rústics)"
+    title="Els 15 diputats que declaren més immobles"
+/>
+
+<DataTable data={ranking} rows=25 search=true>
+    <Column id=puesto title="#" fmt='0' />
+    <Column id=nombre title="Diputat" />
+    <Column id=partido title="Partit" />
+    <Column id=circunscripcion title="Circumscripció" />
+    <Column id=n_inmuebles title="Immobles" fmt='0' />
+    <Column id=n_urbanos title="Urbans" fmt='0' />
+    <Column id=n_viviendas_urbanas title="Habitatges" fmt='0' />
+    <Column id=n_rusticos title="Rústics" fmt='0' />
+    <Column id=n_inmuebles_sociedad title="De les seves societats" fmt='0' />
+    <Column id=urbanos_equivalentes title="Urbans complets" fmt='0.0' />
+    <Column id=alquila title="Declara lloguers" />
+    <Column id=revisado title="Revisat a mà" />
+    <Column id=url_pdf title="Declaració" contentType=link linkLabel="PDF ↗" openInNewTab=true />
+</DataTable>
+
+Compten els immobles al seu nom encara que només ho siguin en part: un pis heretat entre quatre germans compta un. La columna «Urbans complets» suma només la seva part de cada immoble urbà. Moltes finques rústiques solen ser parcel·les petites heretades, sobretot a Galícia i Astúries. Cada fila enllaça a la declaració original al web del Congrés.
+
 ## Metodologia i fonts
 
 - **Declaracions**: [Congrés dels Diputats, fitxes dels diputats](https://www.congreso.es/es/busqueda-de-diputados), declaració de béns i rendes inicial de cada diputat en actiu de la XV Legislatura (presentades entre el {resumen[0]?.primera} i el {resumen[0]?.ultima}). Les modificacions posteriors no s'utilitzen perquè solen ser parcials. S'exclouen {kpi[0]?.n_excluidos} declaracions que no es poden llegir o que remeten a una d'anterior.
-- **Lectura**: els documents són escanejos; s'han llegit amb reconeixement òptic de caràcters i s'ha comprovat a mà una mostra de 22 declaracions de tots els grups: el nombre d'immobles urbans i si declara lloguers coincidien en 21 de les 22. Hi pot haver errors puntuals en altres camps; per això només es publiquen els totals, no les xifres de cada diputat.
+- **Lectura**: els documents són escanejos; s'han llegit amb reconeixement òptic de caràcters i s'ha comprovat a mà una mostra de 22 declaracions de tots els grups: el nombre d'immobles urbans i si declara lloguers coincidien en 21 de les 22. Les files que esmenten diversos béns («habitatge, plaça de garatge i traster») es compten bé a bé. Els 42 diputats que declaren set immobles o més, i els que continuen la llista al requadre d'Observacions, s'han comprovat a mà en el PDF («Revisat a mà»), i les seves xifres substitueixen les llegides automàticament; en la resta hi pot haver errors puntuals, i cadascun enllaça a la seva declaració per comprovar-ho.
 - **Lloguers**: el formulari no té una casella per a ells; es detecten pel concepte de cada renda («alquiler», «arrendamiento», «capital inmobiliario»...). Els imports són els declarats, que uns donen en net, altres en brut i algun al mes, així que no se sumen ni es comparen. Les rendes imputades per habitatges a disposició no compten com a lloguer.
 - **Immobles complets**: suma de la part de propietat de cada immoble urbà; quan consta com a bé de guanys o en proindivís sense percentatge es compta la meitat.
 - **Contribuents**: [Agència Tributària, Estadística dels declarants de l'IRPF](https://sede.agenciatributaria.gob.es/AEAT/Contenidos_Comunes/La_Agencia_Tributaria/Estadisticas/Publicaciones/sites/irpf/2023/jrubikf3d7dfa31d2ce3af7d74ec0cde8d09ed9914891e7.html), partida 102 (rendiments d'immobles arrendats), territori de règim comú. La unitat és la declaració, que pot ser conjunta, no la persona.
