@@ -5750,7 +5750,7 @@ index 0000000..281f373
 +	]
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
-index b3bfe37..c2029a4 100644
+index b3bfe37..b75693d 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 @@ -8,6 +8,12 @@
@@ -5789,7 +5789,7 @@ index b3bfe37..c2029a4 100644
  				style="
  				height: {height};
  				width: {width};
-@@ -81,7 +96,7 @@
+@@ -81,15 +96,16 @@
  				display: {copying ? 'none' : 'inherit'}
  			"
  				use:echarts={{
@@ -5798,8 +5798,10 @@ index b3bfe37..c2029a4 100644
  					...$$restProps,
  					echartsOptions,
  					seriesOptions,
-@@ -89,7 +104,7 @@
- 					renderer,
+ 					dispatch,
+-					renderer,
++					// SVG por defecto: el canvas pinta los títulos pixelados
++					renderer: renderer ?? 'svg',
  					connectGroup,
  					xAxisLabelOverflow,
 -					seriesColors: $seriesColorsStore,
@@ -5807,7 +5809,7 @@ index b3bfe37..c2029a4 100644
  					theme: $activeAppearance
  				}}
  			/>
-@@ -97,7 +112,7 @@
+@@ -97,7 +113,7 @@
  	{/if}
  
  	<EChartsCopyTarget
@@ -5816,7 +5818,7 @@ index b3bfe37..c2029a4 100644
  		{height}
  		{width}
  		{copying}
-@@ -111,7 +126,7 @@
+@@ -111,7 +127,7 @@
  		<div class="chart-footer">
  			{#if downloadableImage}
  				<DownloadData
@@ -5825,7 +5827,7 @@ index b3bfe37..c2029a4 100644
  					class="download-button"
  					downloadData={() => {
  						downloadChart = true;
-@@ -119,7 +134,7 @@
+@@ -119,7 +135,7 @@
  							downloadChart = false;
  						}, 0);
  					}}
@@ -5834,7 +5836,7 @@ index b3bfe37..c2029a4 100644
  					{queryID}
  				>
  					<svg
-@@ -141,13 +156,14 @@
+@@ -141,13 +157,14 @@
  			{/if}
  			{#if data && downloadableData}
  				<DownloadData
@@ -5851,7 +5853,7 @@ index b3bfe37..c2029a4 100644
  		</div>
  	{/if}
  
-@@ -172,11 +188,11 @@
+@@ -172,11 +189,11 @@
          overflow: visible;
      "
  		use:echartsCanvasDownload={{
@@ -5865,7 +5867,7 @@ index b3bfe37..c2029a4 100644
  			queryID,
  			evidenceChartTitle,
  			theme: $activeAppearance,
-@@ -209,8 +225,10 @@
+@@ -209,8 +226,10 @@
  		display: flex;
  		justify-content: flex-end;
  		align-items: center;
@@ -5878,6 +5880,41 @@ index b3bfe37..c2029a4 100644
 +		min-height: 22px;
  	}
  </style>
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte
+index 98a7e3a..8f015a1 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte
+@@ -1,4 +1,5 @@
+ <script>
++	import { dosLineas } from './dosLineas.js';
+ 	import SortIcon from '../../ui/SortIcon.svelte';
+ 	import Info from '../../ui/Info.svelte';
+ 	import { safeExtractColumn } from './datatable.js';
+@@ -100,20 +101,20 @@
+ 				style:background={headerColor}
+ 				style:cursor={sortable ? 'pointer' : 'auto'}
+ 				on:click={sortable ? sortClick(column.id) : ''}
+-				style:vertical-align="bottom"
++				style:vertical-align="top"
+ 				style:border-radius={sortObj.col === column.id ? '2px' : ''}
+ 			>
+ 				<div
+ 					class="{wrapTitles || column.wrapTitle
+-						? `flex items-end ${getWrapTitleAlignment(column, columnSummary)}`
++						? `flex items-start ${getWrapTitleAlignment(column, columnSummary)}`
+ 						: ''} tracking-[-1.5px]"
+ 				>
+ 					<span class="tracking-normal {wrapTitles || column.wrapTitle ? 'whitespace-normal' : ''}">
+-						{column.title
++						{#each dosLineas(column.title
+ 							? column.title
+ 							: formatColumnTitles
+ 								? safeExtractColumn(column, columnSummary).title
+-								: safeExtractColumn(column, columnSummary).id}
++								: safeExtractColumn(column, columnSummary).id) as linea, i}{#if i}<br />{/if}{linea}{/each}
+ 						{#if column.description}
+ 							<Info
+ 								description={column.description}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte
 index aa5a55d..c3c6615 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableRow.svelte
@@ -5932,3 +5969,21 @@ index 6792d5b..29d844e 100644
  				{/if}
  				{#if !isFullPage}
  					<EnterFullScreen on:click={() => (fullscreen = true)} display={hovering} />
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/dosLineas.js b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/dosLineas.js
+new file mode 100644
+index 0000000..20b17cb
+--- /dev/null
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/dosLineas.js
+@@ -0,0 +1,12 @@
++// Parte un encabezado largo en dos líneas por el espacio más cercano a la
++// mitad, para que las columnas no se ensanchen por culpa del título.
++export function dosLineas(texto, minimo = 16) {
++	const s = String(texto ?? '').trim();
++	if (s.length < minimo || !s.includes(' ')) return [s];
++	const mitad = s.length / 2;
++	let corte = -1;
++	for (let i = 0; i < s.length; i++) {
++		if (s[i] === ' ' && (corte < 0 || Math.abs(i - mitad) < Math.abs(corte - mitad))) corte = i;
++	}
++	return [s.slice(0, corte), s.slice(corte + 1)];
++}

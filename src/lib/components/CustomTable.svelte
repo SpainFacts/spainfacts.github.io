@@ -2,6 +2,7 @@
     import { slide, fade } from "svelte/transition";
     import { page } from "$app/stores";
     import { idiomaDeRuta, t, tf } from "../i18n.js";
+    import { dosLineas } from "../utils.js";
     $: lang = idiomaDeRuta($page.url.pathname);
 
     export let data = [];
@@ -121,7 +122,7 @@
                         <th
                             scope="col"
                             aria-sort={sortColumn === col.accessor ? (sortDirection === "asc" ? "ascending" : "descending") : undefined}
-                            class="py-1 px-2 font-semibold text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 select-none whitespace-nowrap {col.align ===
+                            class="py-1 px-2 align-top font-semibold text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 select-none whitespace-nowrap {col.align ===
                             'right'
                                 ? 'text-right'
                                 : 'text-left'}"
@@ -129,10 +130,10 @@
                             <!-- Botón para poder ordenar también con el teclado -->
                             <button
                                 type="button"
-                                class="inline-flex min-h-6 items-center gap-1 cursor-pointer font-semibold"
+                                class="inline-flex min-h-6 items-start gap-1 cursor-pointer font-semibold leading-tight {col.align === 'right' ? 'text-right' : 'text-left'}"
                                 on:click={() => handleSort(col.accessor)}
                             >
-                                {col.title}
+                                <span>{#each dosLineas(col.title) as linea, i}{#if i}<br />{/if}{linea}{/each}</span>
                                 {#if sortColumn === col.accessor}
                                     <span class="text-[10px] text-gray-500 dark:text-gray-400" aria-hidden="true">
                                         {#if sortDirection === "asc"}▲{:else}▼{/if}

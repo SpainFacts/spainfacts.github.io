@@ -178,7 +178,7 @@
         {#if filas.length > MAX_FILAS_TABLA}<p class="text-xs text-gray-500 mt-1">{MAX_FILAS_TABLA} / {filas.length}</p>{/if}
     {:else}
         {#key tipo}
-            <ECharts {config} height="{horizontal ? Math.min(900, 60 + categorias.length * 22) : 340}px" />
+            <ECharts {config} renderer="canvas" height="{horizontal ? Math.min(900, 60 + categorias.length * 22) : 340}px" />
         {/key}
         {#if recortadas > 0}<p class="text-xs text-gray-500 mt-1">+{recortadas}</p>{/if}
     {/if}

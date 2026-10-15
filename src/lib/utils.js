@@ -133,3 +133,16 @@ export const flyAndScale = (node, params = { y: -8, x: 0, start: 0.95, duration:
         easing: cubicOut
     };
 };
+
+// Parte un encabezado largo en dos líneas por el espacio más cercano a la
+// mitad, para que las columnas no se ensanchen por culpa del título.
+export function dosLineas(texto, minimo = 16) {
+	const s = String(texto ?? '').trim();
+	if (s.length < minimo || !s.includes(' ')) return [s];
+	const mitad = s.length / 2;
+	let corte = -1;
+	for (let i = 0; i < s.length; i++) {
+		if (s[i] === ' ' && (corte < 0 || Math.abs(i - mitad) < Math.abs(corte - mitad))) corte = i;
+	}
+	return [s.slice(0, corte), s.slice(corte + 1)];
+}
