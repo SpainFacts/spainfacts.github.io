@@ -1,7 +1,7 @@
 ---
 title: The media business
 description: "How much the media are read, watched and listened to in Spain, what they live on (advertising spend by medium) and how many people work in them, per inhabitant and adjusted for inflation, compared with the EU and with the public money they receive."
-i18n_origen: 71922c646c15
+i18n_origen: 5178b34ed295
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -214,26 +214,37 @@ SELECT
 ```
 
 ```sql grupos
-SELECT CAST(anio AS INTEGER) AS anio, grupo, ingresos_meur_real, resultado_neto_meur_real, ingresos_eur_hab_real,
-       ingresos_meur_nominal, resultado_neto_meur_nominal, margen_neto_pct
+SELECT CAST(anio AS INTEGER) AS anio, grupo, perimetro, ingresos_eur_hab_real, publicidad_eur_hab_real,
+       resultado_neto_eur_hab_real, publicidad_pct_ingresos, margen_neto_pct, plantilla_media,
+       ingresos_meur_real, publicidad_meur_real, resultado_neto_meur_real, anio_base
 FROM mother.medios_sector_grupos
-ORDER BY anio
+ORDER BY grupo, anio
+```
+
+```sql grupos_cambio
+SELECT grupo,
+    min(anio) AS anio_ini,
+    max(anio) AS anio_ult,
+    max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) AS ing_hab_2007,
+    arg_max(ingresos_eur_hab_real, anio) AS ing_hab_ult,
+    100.0 * (arg_max(ingresos_eur_hab_real, anio) / max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) - 1) AS ing_var_pct,
+    max(CASE WHEN anio = 2007 THEN publicidad_eur_hab_real END) AS pub_hab_2007,
+    arg_max(publicidad_eur_hab_real, anio) AS pub_hab_ult,
+    arg_max(publicidad_pct_ingresos, anio) AS pub_pct_ult,
+    arg_max(resultado_neto_eur_hab_real, anio) AS res_hab_ult,
+    arg_max(ingresos_meur_real, anio) AS ing_meur_ult
+FROM ${grupos}
+GROUP BY grupo
+ORDER BY ing_hab_ult DESC
 ```
 
 ```sql grupos_resumen
 SELECT
-    (SELECT ingresos_meur_real FROM ${grupos} WHERE anio = 2007) AS ing_2007,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS ing_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS anio_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS anio_min,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS ing_min
-```
-
-```sql grupos_series
-SELECT anio, 'Ingresos' AS concepto, ingresos_meur_real AS meur_real FROM ${grupos}
-UNION ALL
-SELECT anio, 'Beneficio neto' AS concepto, resultado_neto_meur_real AS meur_real FROM ${grupos}
-ORDER BY anio, concepto
+    (SELECT max(anio_base) FROM ${grupos}) AS anio_base,
+    (SELECT max(anio_ult) FROM ${grupos_cambio}) AS anio_ult,
+    (SELECT sum(ing_hab_2007) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_2007,
+    (SELECT sum(ing_hab_ult) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_ult,
+    (SELECT count(*) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS n_grupos
 ```
 
 ```sql publico
@@ -469,22 +480,88 @@ In {ue[0]?.anio} Spain had {formatNumber(ue_es[0]?.es, 1)} persons employed in n
     <Column id=radio_tv_eur_hab title="Radio and TV: turnover € per inhab." fmt='0.0' />
 </DataTable>
 
-## A large listed group: Atresmedia
+## The large media groups
 
-Revenue and net profit of Atresmedia (Antena 3, laSexta, Onda Cero), in millions of euros adjusted for inflation. In {grupos_resumen[0]?.anio_ult} its revenue was {formatNumber(grupos_resumen[0]?.ing_ult, 0)} million, compared with {formatNumber(grupos_resumen[0]?.ing_2007, 0)} million in 2007; the low point was in {grupos_resumen[0]?.anio_min}, at {formatNumber(grupos_resumen[0]?.ing_min, 0)} million.
+Revenue, advertising, profit and staff of Spain's large media groups according to their own annual accounts, per inhabitant of Spain and in {grupos_resumen[0]?.anio_base} euros (adjusted for inflation). Between 2007 and {grupos_resumen[0]?.anio_ult}, the {grupos_resumen[0]?.n_grupos} groups with data for both years went from earning a combined {formatNumber(grupos_resumen[0]?.ing_hab_2007, 0)} € per inhabitant to {formatNumber(grupos_resumen[0]?.ing_hab_ult, 0)} €.
 
-<BarChart
-    data={grupos_series}
+They do not all measure the same thing: Prisa includes education (Santillana), and its drops in 2014, 2019 and 2020 are business sales (Digital+, Media Capital and Santillana Spain); Unidad Editorial (El Mundo, Marca, Expansión) is the Spanish division of the Italian RCS MediaGroup, which does not publish its net profit or, since 2016, its headcount; and Mediaset España (Telecinco, Cuatro) has been a division of MFE-MediaForEurope since 2023, with no net profit of its own and its staff counted as full-time equivalents.
+
+<LineChart
+    data={grupos}
     x=anio
-    y=meur_real
-    series=concepto
-    type=grouped
+    y=ingresos_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ per inhabitant (adjusted for inflation)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Revenue of each group, € per inhabitant adjusted for inflation"
+/>
+
+<DataTable data={grupos_cambio} rows=10>
+    <Column id=grupo title="Group" />
+    <Column id=ing_hab_2007 title="Revenue 2007, €/inhab." fmt='0.0' />
+    <Column id=ing_hab_ult title="Revenue latest year, €/inhab." fmt='0.0' />
+    <Column id=ing_var_pct title="Change since 2007" fmt='0"%"' contentType=delta />
+    <Column id=anio_ult title="Latest year" fmt='0' />
+    <Column id=ing_meur_ult title="Revenue latest year, millions of real €" fmt='#,##0' />
+</DataTable>
+
+### Advertising
+
+Advertising weighs far more for the television groups than for the press groups, which also live on copy sales, subscriptions and other businesses; and for television it weighs less and less.
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ per inhabitant (adjusted for inflation)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Advertising revenue of each group, € per inhabitant adjusted for inflation"
+/>
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_pct_ingresos
+    series=grupo
+    xFmt='0'
+    yFmt='0"%"'
+    yAxisTitle="% of revenue"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Share of advertising in each group's revenue"
+/>
+
+### Staff and profits
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=plantilla_media
+    series=grupo
     xFmt='0'
     yFmt='#,##0'
-    yAxisTitle="Millions of euros (adjusted for inflation)"
-    seriesColors={{'Ingresos': '#2563eb', 'Beneficio neto': '#16a34a'}}
-    title="Atresmedia: revenue and net profit, millions of euros adjusted for inflation"
+    yAxisTitle="Employees (yearly average)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Average headcount of each group"
 />
+
+Net profit is the profit attributable to each group's shareholders. Prisa's losses in 2014 (2,237 million current euros, 60 € per inhabitant) are off the scale of any chart, so the results are shown in the table.
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=grupo title="Group" />
+    <Column id=anio title="Year" fmt='0' />
+    <Column id=ingresos_eur_hab_real title="Revenue, €/inhab." fmt='0.00' />
+    <Column id=publicidad_eur_hab_real title="Advertising, €/inhab." fmt='0.00' />
+    <Column id=resultado_neto_eur_hab_real title="Net profit, €/inhab." fmt='0.00' contentType=delta />
+    <Column id=margen_neto_pct title="Net margin" fmt='0.0"%"' />
+    <Column id=plantilla_media title="Average headcount" fmt='#,##0' />
+    <Column id=ingresos_meur_real title="Revenue, millions of real €" fmt='#,##0' />
+    <Column id=resultado_neto_meur_real title="Profit, millions of real €" fmt='#,##0' />
+</DataTable>
 
 ## Public money compared with the advertising market
 
@@ -518,6 +595,6 @@ These magnitudes do not measure exactly the same thing: InfoAdex estimates what 
 - **Audiences**: [AIMC, Marco General de los Medios en España 2026](https://www.aimc.es/a1mc-c0nt3nt/uploads/2026/02/Marco_General_Medios_2026.pdf) (free publication with data from the Estudio General de Medios): evolution of the general audience 1980-2025, minutes of radio and television 1991-2025 and readers per newspaper 2009-2025. Reach over the population aged 14 or over; to convert to readers per 1,000 inhabitants it is multiplied by the EGM universe and divided by the whole population of the INE municipal register. Until 2017 newspaper reading is print only; from 2018 it includes the digital replica.
 - **Advertising spend**: public summaries of the [InfoAdex study of advertising spend in Spain](https://www.infoadex.es/) (2010-2026 editions; the full study is paid). For each year the latest published revision is used. The 2004-2023 series follows the old criterion (newspapers = print; digital, under internet) and the 2022-2025 series the new one (each medium with its website); they are not mixed. Internet was revised upwards from 2014 and outdoor from 2018.
 - **Companies and employment**: Eurostat, structural business statistics ([sbs_na_1a_se_r2](https://ec.europa.eu/eurostat/databrowser/view/sbs_na_1a_se_r2/default/table) up to 2020 and [sbs_ovw_act](https://ec.europa.eu/eurostat/databrowser/view/sbs_ovw_act/default/table) from 2021), compiled for Spain by INE with the Structural Business Statistics for the services sector. NACE branches 58.13 (newspapers), 58.14 (magazines), 60.1 (radio), 60.2 (television) and 63.91 (news agencies). The method changed in 2021 (FRIBS regulation).
-- **Atresmedia**: [Key figures](https://www.atresmediacorporacion.com/accionistas-inversores/informacion-economico-financiera/principales-magnitudes/) from its shareholders' website (consolidated accounts).
+- **Media groups**: consolidated annual accounts of Atresmedia, Mediaset España, Prisa and Vocento (shareholders' websites), and annual reports of RCS MediaGroup for its Unidad Editorial division; transcribed by hand, with the PDF and pages of every figure in the `medios_sector_grupos_cuentas` seed. Revenue = net turnover plus other operating income; advertising = advertising sales from the revenue note or the segment information; profit = attributable to the parent company. Each year with that year's accounts, without later restatements.
 - **Public money**: marts of the [Public money in the media](/en/medios/dinero-publico) section (Institutional Advertising and Communication Commission, CNMC, RTVE accounts, BDNS and the Public Procurement Platform).
 - **Constant euros** using the INE CPI, and **population** from the municipal register.

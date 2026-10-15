@@ -1,7 +1,7 @@
 ---
 title: Komunikabideen negozioa
 description: "Zenbat irakurtzen, ikusten eta entzuten diren komunikabideak Espainian, zerez bizi diren (publizitate-inbertsioa euskarrika) eta zenbat jendek egiten duen lan haietan, biztanleko eta inflazioa kenduta, EBrekin eta jasotzen duten diru publikoarekin alderatuta."
-i18n_origen: 71922c646c15
+i18n_origen: 5178b34ed295
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -221,26 +221,37 @@ SELECT
 ```
 
 ```sql grupos
-SELECT CAST(anio AS INTEGER) AS anio, grupo, ingresos_meur_real, resultado_neto_meur_real, ingresos_eur_hab_real,
-       ingresos_meur_nominal, resultado_neto_meur_nominal, margen_neto_pct
+SELECT CAST(anio AS INTEGER) AS anio, grupo, perimetro, ingresos_eur_hab_real, publicidad_eur_hab_real,
+       resultado_neto_eur_hab_real, publicidad_pct_ingresos, margen_neto_pct, plantilla_media,
+       ingresos_meur_real, publicidad_meur_real, resultado_neto_meur_real, anio_base
 FROM mother.medios_sector_grupos
-ORDER BY anio
+ORDER BY grupo, anio
+```
+
+```sql grupos_cambio
+SELECT grupo,
+    min(anio) AS anio_ini,
+    max(anio) AS anio_ult,
+    max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) AS ing_hab_2007,
+    arg_max(ingresos_eur_hab_real, anio) AS ing_hab_ult,
+    100.0 * (arg_max(ingresos_eur_hab_real, anio) / max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) - 1) AS ing_var_pct,
+    max(CASE WHEN anio = 2007 THEN publicidad_eur_hab_real END) AS pub_hab_2007,
+    arg_max(publicidad_eur_hab_real, anio) AS pub_hab_ult,
+    arg_max(publicidad_pct_ingresos, anio) AS pub_pct_ult,
+    arg_max(resultado_neto_eur_hab_real, anio) AS res_hab_ult,
+    arg_max(ingresos_meur_real, anio) AS ing_meur_ult
+FROM ${grupos}
+GROUP BY grupo
+ORDER BY ing_hab_ult DESC
 ```
 
 ```sql grupos_resumen
 SELECT
-    (SELECT ingresos_meur_real FROM ${grupos} WHERE anio = 2007) AS ing_2007,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS ing_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS anio_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS anio_min,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS ing_min
-```
-
-```sql grupos_series
-SELECT anio, 'Ingresos' AS concepto, ingresos_meur_real AS meur_real FROM ${grupos}
-UNION ALL
-SELECT anio, 'Beneficio neto' AS concepto, resultado_neto_meur_real AS meur_real FROM ${grupos}
-ORDER BY anio, concepto
+    (SELECT max(anio_base) FROM ${grupos}) AS anio_base,
+    (SELECT max(anio_ult) FROM ${grupos_cambio}) AS anio_ult,
+    (SELECT sum(ing_hab_2007) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_2007,
+    (SELECT sum(ing_hab_ult) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_ult,
+    (SELECT count(*) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS n_grupos
 ```
 
 ```sql publico
@@ -476,22 +487,88 @@ Adar bakoitzeko enpresetan lanean ari diren pertsonak (soldatapekoak eta norbera
     <Column id=radio_tv_eur_hab title="Irratia eta TB: fakturazioa € biz." fmt='0.0' />
 </DataTable>
 
-## Burtsan kotizatzen duen talde handi bat: Atresmedia
+## Komunikazio-talde handiak
 
-Atresmediaren (Antena 3, laSexta, Onda Cero) diru-sarrerak eta mozkin garbia, milioi eurotan, inflazioa kenduta. {urtean(grupos_resumen[0]?.anio_ult)} {formatNumber(grupos_resumen[0]?.ing_ult, 0)} milioi jaso zituen, 2007ko {formatNumber(grupos_resumen[0]?.ing_2007, 0)} milioien aldean; minimoa {urtean(grupos_resumen[0]?.anio_min)} izan zen, {formatNumber(grupos_resumen[0]?.ing_min, 0)} milioirekin.
+Espainiako komunikazio-talde handien diru-sarrerak, publizitatea, emaitza eta langileak, haien urteko kontuen arabera, Espainiako biztanleko eta {urteko(grupos_resumen[0]?.anio_base)} eurotan (inflazioa kenduta). 2007tik {urtera(grupos_resumen[0]?.anio_ult)}, bi urteetako datuak dituzten {grupos_resumen[0]?.n_grupos} taldeek, guztien artean, biztanleko {formatNumber(grupos_resumen[0]?.ing_hab_2007, 0)} € jasotzetik {formatNumber(grupos_resumen[0]?.ing_hab_ult, 0)} € jasotzera igaro ziren.
 
-<BarChart
-    data={grupos_series}
+Ez dute denek gauza bera neurtzen: Prisak hezkuntza (Santillana) barne hartzen du, eta 2014ko, 2019ko eta 2020ko jaitsierak negozio-salmentak dira (Digital+, Media Capital eta Santillana Espainia); Unidad Editorial (El Mundo, Marca, Expansión) RCS MediaGroup talde italiarraren Espainiako arloa da, eta RCSk ez du haren emaitza garbia argitaratzen, ezta, 2016tik, haren langile kopurua ere; eta Mediaset España (Telecinco, Cuatro) MFE-MediaForEurope taldearen arlo bat da 2023tik, emaitza garbi propiorik gabe eta langileak lanaldi osoko enplegu baliokidetan zenbatuta.
+
+<LineChart
+    data={grupos}
     x=anio
-    y=meur_real
-    series=concepto
-    type=grouped
+    y=ingresos_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ biztanleko (inflazioa kenduta)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Talde bakoitzaren diru-sarrerak, € biztanleko inflazioa kenduta"
+/>
+
+<DataTable data={grupos_cambio} rows=10>
+    <Column id=grupo title="Taldea" />
+    <Column id=ing_hab_2007 title="Diru-sarrerak 2007, €/biz." fmt='0.0' />
+    <Column id=ing_hab_ult title="Diru-sarrerak azken urtea, €/biz." fmt='0.0' />
+    <Column id=ing_var_pct title="Aldaketa 2007tik" fmt='0"%"' contentType=delta />
+    <Column id=anio_ult title="Azken urtea" fmt='0' />
+    <Column id=ing_meur_ult title="Diru-sarrerak azken urtea, milioi € erreal" fmt='#,##0' />
+</DataTable>
+
+### Publizitatea
+
+Publizitateak askoz pisu handiagoa du telebistetan prentsa-taldeetan baino; azken horiek aleen salmentatik, harpidetzetatik eta beste negozio batzuetatik ere bizi dira. Eta telebistetan gero eta pisu txikiagoa du.
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ biztanleko (inflazioa kenduta)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Talde bakoitzaren publizitate-diru-sarrerak, € biztanleko inflazioa kenduta"
+/>
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_pct_ingresos
+    series=grupo
+    xFmt='0'
+    yFmt='0"%"'
+    yAxisTitle="Diru-sarreren %"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Publizitatearen pisua talde bakoitzaren diru-sarreretan"
+/>
+
+### Langileak eta emaitzak
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=plantilla_media
+    series=grupo
     xFmt='0'
     yFmt='#,##0'
-    yAxisTitle="Milioi euro (inflazioa kenduta)"
-    seriesColors={{'Ingresos': '#2563eb', 'Beneficio neto': '#16a34a'}}
-    title="Atresmedia: diru-sarrerak eta mozkin garbia, milioi euro inflazioa kenduta"
+    yAxisTitle="Langileak (urteko batez bestekoa)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Talde bakoitzaren batez besteko langile kopurua"
 />
+
+Emaitza garbia talde bakoitzaren akziodunei egozten zaiena da. Prisaren 2014ko galerak (2.237 milioi euro korronte, 60 € biztanleko) edozein grafikoren eskalatik kanpo geratzen dira; horregatik, emaitzak taulan daude.
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=grupo title="Taldea" />
+    <Column id=anio title="Urtea" fmt='0' />
+    <Column id=ingresos_eur_hab_real title="Diru-sarrerak, €/biz." fmt='0.00' />
+    <Column id=publicidad_eur_hab_real title="Publizitatea, €/biz." fmt='0.00' />
+    <Column id=resultado_neto_eur_hab_real title="Emaitza garbia, €/biz." fmt='0.00' contentType=delta />
+    <Column id=margen_neto_pct title="Marjina garbia" fmt='0.0"%"' />
+    <Column id=plantilla_media title="Batez besteko langileak" fmt='#,##0' />
+    <Column id=ingresos_meur_real title="Diru-sarrerak, milioi € erreal" fmt='#,##0' />
+    <Column id=resultado_neto_meur_real title="Emaitza, milioi € erreal" fmt='#,##0' />
+</DataTable>
 
 ## Diru publikoa publizitate-merkatuaren aldean
 
@@ -525,6 +602,6 @@ Ez dute zehazki gauza bera neurtzen: InfoAdexek komunikabideek publizitate-espaz
 - **Audientziak**: [AIMC, Marco General de los Medios en España 2026](https://www.aimc.es/a1mc-c0nt3nt/uploads/2026/02/Marco_General_Medios_2026.pdf) (Estudio General de Medios-en datuekin doako argitalpena): audientzia orokorraren bilakaera 1980-2025, irrati eta telebistako minutuak 1991-2025 eta egunkariko irakurleak 2009-2025. Penetrazioa 14 urte edo gehiagoko biztanleriaren gainean; 1.000 biztanleko irakurleetara pasatzeko, EGMren unibertsoarekin biderkatzen da eta INEren erroldako biztanleria osoarekin zatitzen. 2017ra arte egunkarien irakurketa papera bakarrik da; 2018tik erreplika digitala ere barne hartzen du.
 - **Publizitate-inbertsioa**: [Estudio InfoAdex de la inversión publicitaria en España](https://www.infoadex.es/) azterlanaren laburpen publikoak (2010-2026 edizioak; azterlan osoa ordainpekoa da). Urte bakoitzerako argitaratutako azken berrikuspena erabiltzen da. 2004-2023 serieak irizpide zaharra jarraitzen du (egunkariak = papera; digitala, interneten) eta 2022-2025ekoak berria (komunikabide bakoitza bere webgunearekin); ez dira nahasten. Internet gora birkalkulatu zen 2014tik aurrera, eta kanpoaldea 2018tik aurrera.
 - **Enpresak eta enplegua**: Eurostat, enpresen egitura-estatistikak ([sbs_na_1a_se_r2](https://ec.europa.eu/eurostat/databrowser/view/sbs_na_1a_se_r2/default/table) 2020ra arte eta [sbs_ovw_act](https://ec.europa.eu/eurostat/databrowser/view/sbs_ovw_act/default/table) 2021etik), Espainiarako INEk zerbitzu-sektoreko Enpresen Egitura Estatistikarekin egiten dituenak. CNAE adarrak: 58.13 (egunkariak), 58.14 (aldizkariak), 60.1 (irratia), 60.2 (telebista) eta 63.91 (albiste-agentziak). 2021ean metodoa aldatu zen (FRIBS araudia).
-- **Atresmedia**: akziodunentzako bere webguneko [Principales magnitudes](https://www.atresmediacorporacion.com/accionistas-inversores/informacion-economico-financiera/principales-magnitudes/) (kontu bateratuak).
+- **Komunikazio-taldeak**: Atresmedia, Mediaset España, Prisa eta Vocentoren urteko kontu bateratuak (akziodunentzako webguneak), eta RCS MediaGroupen urteko txostenak Unidad Editorial arlorako; eskuz transkribatuak, zifra bakoitzaren PDFa eta orrialdeak `medios_sector_grupos_cuentas` seedean dituztela. Diru-sarrerak = negozio-zifra gehi ustiapeneko beste diru-sarrera batzuk; publizitatea = diru-sarreren oharreko edo segmentuen informazioko publizitate-salmentak; emaitza = sozietate nagusiari egotzitakoa. Urte bakoitza urte horretako kontuekin, geroko berradierazpenik gabe.
 - **Diru publikoa**: [Diru publikoa komunikabideetan](/eu/medios/dinero-publico) ataleko mart-ak (Erakunde Publizitate eta Komunikazioaren Batzordea, CNMC, RTVEren kontuak, BDNS eta Kontratazio Plataforma).
 - **Euro konstanteak** INEren KPIarekin eta **biztanleria** erroldakoa.

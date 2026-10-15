@@ -121,27 +121,47 @@ seeds:
 
   - name: medios_sector_grupos_cuentas
     description: >
-      Ingresos y beneficio neto consolidados de los grandes grupos de medios cotizados, en
-      millones de euros corrientes. De momento solo Atresmedia (2007-2025), de la tabla
-      «Principales magnitudes» de su web de accionistas (2017-2025 en la página actual; 2007-2016
-      en la versión archivada de 2018). Prisa, Vocento y Mediaset España (absorbida por
-      MFE-MediaForEurope en 2023) quedan pendientes: la CNMV bloquea las descargas automáticas y
-      las series de Prisa están reexpresadas por las ventas de Santillana y Media Capital.
+      Cuentas de los grandes grupos de comunicación por año, transcritas a mano de las cuentas
+      anuales consolidadas o informes anuales oficiales (web de accionistas o CNMV; una URL de PDF
+      y sus páginas por fila). Atresmedia 2007-2025, Prisa 2005-2025 y Vocento 2005-2025 son el
+      grupo consolidado (perimetro 'grupo'): Prisa incluye la educación (Santillana) y sus caídas de
+      2014, 2019 y 2020 son ventas de negocios (Digital+, Media Capital, Santillana España); 2020-2022 salen de
+      las notas explicativas del informe financiero semestral porque las cuentas no están en su
+      web. Mediaset España 2004-2022 es su grupo consolidado (Gestevisión Telecinco hasta 2010; Cuatro entra a
+      finales de 2010, 2011 es el primer año completo) y 2023-2025 el segmento España de los informes
+      anuales de MFE-MediaForEurope (perimetro 'segmento': sin resultado neto, que MFE no da por país,
+      y plantilla en empleados equivalentes a jornada completa). Unidad Editorial 2007-2025 es el área española de RCS MediaGroup (perimetro
+      'segmento', de los informes anuales de RCS en italiano): sin resultado neto, que RCS no da
+      por área, y sin plantilla desde 2016.
+      Cifras tal como se publicaron cada año (sin las reexpresiones posteriores); en millones de
+      euros corrientes.
     config:
       column_types:
         anio: integer
         grupo: varchar
+        perimetro: varchar
         ingresos_meur: double
+        ingresos_publicidad_meur: double
         resultado_neto_meur: double
+        plantilla_media: integer
         fuente: varchar
+        fuente_url: varchar
     columns:
       - name: anio
         description: Ejercicio.
       - name: grupo
         description: Grupo de comunicación.
+      - name: perimetro
+        description: "'grupo' (cuentas consolidadas del grupo) o 'segmento' (área dentro de la matriz)."
       - name: ingresos_meur
-        description: Ingresos del grupo (millones de euros corrientes).
+        description: Ingresos de explotación (cifra de negocios + otros ingresos de explotación), millones de euros corrientes.
+      - name: ingresos_publicidad_meur
+        description: Ventas de publicidad según la nota de ingresos o la información por segmentos, millones de euros corrientes.
       - name: resultado_neto_meur
-        description: Beneficio neto (millones de euros corrientes; negativo = pérdidas).
+        description: Resultado del ejercicio atribuido a la sociedad dominante (millones de euros corrientes; negativo = pérdidas).
+      - name: plantilla_media
+        description: Número medio de empleados del año.
       - name: fuente
-        description: Página y URL de origen.
+        description: Documento, páginas del visor del PDF y cómo se calcula cada cifra.
+      - name: fuente_url
+        description: URL directa del PDF oficial.

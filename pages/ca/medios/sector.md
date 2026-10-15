@@ -1,7 +1,7 @@
 ---
 title: El negoci dels mitjans
 description: "Quant es llegeixen, es veuen i s'escolten els mitjans a Espanya, de què viuen (la inversió publicitària per suport) i quanta gent hi treballa, per habitant i descomptada la inflació, en comparació amb la UE i amb els diners públics que reben."
-i18n_origen: 71922c646c15
+i18n_origen: 5178b34ed295
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -214,26 +214,37 @@ SELECT
 ```
 
 ```sql grupos
-SELECT CAST(anio AS INTEGER) AS anio, grupo, ingresos_meur_real, resultado_neto_meur_real, ingresos_eur_hab_real,
-       ingresos_meur_nominal, resultado_neto_meur_nominal, margen_neto_pct
+SELECT CAST(anio AS INTEGER) AS anio, grupo, perimetro, ingresos_eur_hab_real, publicidad_eur_hab_real,
+       resultado_neto_eur_hab_real, publicidad_pct_ingresos, margen_neto_pct, plantilla_media,
+       ingresos_meur_real, publicidad_meur_real, resultado_neto_meur_real, anio_base
 FROM mother.medios_sector_grupos
-ORDER BY anio
+ORDER BY grupo, anio
+```
+
+```sql grupos_cambio
+SELECT grupo,
+    min(anio) AS anio_ini,
+    max(anio) AS anio_ult,
+    max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) AS ing_hab_2007,
+    arg_max(ingresos_eur_hab_real, anio) AS ing_hab_ult,
+    100.0 * (arg_max(ingresos_eur_hab_real, anio) / max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) - 1) AS ing_var_pct,
+    max(CASE WHEN anio = 2007 THEN publicidad_eur_hab_real END) AS pub_hab_2007,
+    arg_max(publicidad_eur_hab_real, anio) AS pub_hab_ult,
+    arg_max(publicidad_pct_ingresos, anio) AS pub_pct_ult,
+    arg_max(resultado_neto_eur_hab_real, anio) AS res_hab_ult,
+    arg_max(ingresos_meur_real, anio) AS ing_meur_ult
+FROM ${grupos}
+GROUP BY grupo
+ORDER BY ing_hab_ult DESC
 ```
 
 ```sql grupos_resumen
 SELECT
-    (SELECT ingresos_meur_real FROM ${grupos} WHERE anio = 2007) AS ing_2007,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS ing_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS anio_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS anio_min,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS ing_min
-```
-
-```sql grupos_series
-SELECT anio, 'Ingresos' AS concepto, ingresos_meur_real AS meur_real FROM ${grupos}
-UNION ALL
-SELECT anio, 'Beneficio neto' AS concepto, resultado_neto_meur_real AS meur_real FROM ${grupos}
-ORDER BY anio, concepto
+    (SELECT max(anio_base) FROM ${grupos}) AS anio_base,
+    (SELECT max(anio_ult) FROM ${grupos_cambio}) AS anio_ult,
+    (SELECT sum(ing_hab_2007) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_2007,
+    (SELECT sum(ing_hab_ult) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_ult,
+    (SELECT count(*) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS n_grupos
 ```
 
 ```sql publico
@@ -469,22 +480,88 @@ El {ue[0]?.anio} Espanya tenia {formatNumber(ue_es[0]?.es, 1)} ocupats en l'edic
     <Column id=radio_tv_eur_hab title="Ràdio i TV: facturació € per hab." fmt='0.0' />
 </DataTable>
 
-## Un gran grup cotitzat: Atresmedia
+## Els grans grups de comunicació
 
-Ingressos i benefici net d'Atresmedia (Antena 3, laSexta, Onda Cero), en milions d'euros descomptada la inflació. El {grupos_resumen[0]?.anio_ult} va ingressar {formatNumber(grupos_resumen[0]?.ing_ult, 0)} milions, enfront dels {formatNumber(grupos_resumen[0]?.ing_2007, 0)} milions del 2007; el mínim va ser el {grupos_resumen[0]?.anio_min}, amb {formatNumber(grupos_resumen[0]?.ing_min, 0)} milions.
+Ingressos, publicitat, resultat i plantilla dels grans grups de comunicació espanyols segons els seus propis comptes anuals, per habitant d'Espanya i en euros de {grupos_resumen[0]?.anio_base} (descomptada la inflació). Entre el 2007 i el {grupos_resumen[0]?.anio_ult}, els {grupos_resumen[0]?.n_grupos} grups amb dades dels dos anys van passar d'ingressar entre tots {formatNumber(grupos_resumen[0]?.ing_hab_2007, 0)} € per habitant a {formatNumber(grupos_resumen[0]?.ing_hab_ult, 0)} €.
 
-<BarChart
-    data={grupos_series}
+No tots mesuren el mateix: Prisa inclou l'educació (Santillana) i les seves caigudes del 2014, el 2019 i el 2020 són vendes de negocis (Digital+, Media Capital i Santillana Espanya); Unidad Editorial (El Mundo, Marca, Expansión) és l'àrea espanyola de la italiana RCS MediaGroup, que no publica el seu resultat net ni, des del 2016, la seva plantilla; i Mediaset España (Telecinco, Cuatro) és una àrea del grup MFE-MediaForEurope des del 2023, sense resultat net propi i amb la plantilla en llocs de treball a jornada completa.
+
+<LineChart
+    data={grupos}
     x=anio
-    y=meur_real
-    series=concepto
-    type=grouped
+    y=ingresos_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ per habitant (descomptada la inflació)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Ingressos de cada grup, € per habitant descomptada la inflació"
+/>
+
+<DataTable data={grupos_cambio} rows=10>
+    <Column id=grupo title="Grup" />
+    <Column id=ing_hab_2007 title="Ingressos 2007, €/hab." fmt='0.0' />
+    <Column id=ing_hab_ult title="Ingressos darrer any, €/hab." fmt='0.0' />
+    <Column id=ing_var_pct title="Variació des del 2007" fmt='0"%"' contentType=delta />
+    <Column id=anio_ult title="Darrer any" fmt='0' />
+    <Column id=ing_meur_ult title="Ingressos darrer any, milions d'€ reals" fmt='#,##0' />
+</DataTable>
+
+### Publicitat
+
+La publicitat pesa molt més a les televisions que als grups de premsa, que viuen també de la venda d'exemplars, les subscripcions i altres negocis; i a les televisions pesa cada vegada menys.
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ per habitant (descomptada la inflació)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Ingressos de publicitat de cada grup, € per habitant descomptada la inflació"
+/>
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_pct_ingresos
+    series=grupo
+    xFmt='0'
+    yFmt='0"%"'
+    yAxisTitle="% dels ingressos"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Pes de la publicitat en els ingressos de cada grup"
+/>
+
+### Plantilla i resultats
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=plantilla_media
+    series=grupo
     xFmt='0'
     yFmt='#,##0'
-    yAxisTitle="Milions d'euros (descomptada la inflació)"
-    seriesColors={{'Ingresos': '#2563eb', 'Beneficio neto': '#16a34a'}}
-    title="Atresmedia: ingressos i benefici net, milions d'euros descomptada la inflació"
+    yAxisTitle="Empleats (mitjana de l'any)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Plantilla mitjana de cada grup"
 />
+
+El resultat net és l'atribuït als accionistes de cada grup. Les pèrdues de Prisa el 2014 (2.237 milions d'euros corrents, 60 € per habitant) surten de l'escala de qualsevol gràfic, així que els resultats van a la taula.
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=grupo title="Grup" />
+    <Column id=anio title="Any" fmt='0' />
+    <Column id=ingresos_eur_hab_real title="Ingressos, €/hab." fmt='0.00' />
+    <Column id=publicidad_eur_hab_real title="Publicitat, €/hab." fmt='0.00' />
+    <Column id=resultado_neto_eur_hab_real title="Resultat net, €/hab." fmt='0.00' contentType=delta />
+    <Column id=margen_neto_pct title="Marge net" fmt='0.0"%"' />
+    <Column id=plantilla_media title="Plantilla mitjana" fmt='#,##0' />
+    <Column id=ingresos_meur_real title="Ingressos, milions d'€ reals" fmt='#,##0' />
+    <Column id=resultado_neto_meur_real title="Resultat, milions d'€ reals" fmt='#,##0' />
+</DataTable>
 
 ## Els diners públics respecte al mercat publicitari
 
@@ -518,6 +595,6 @@ Són magnituds que no mesuren exactament el mateix: InfoAdex estima el que reben
 - **Audiències**: [AIMC, Marco General de los Medios en España 2026](https://www.aimc.es/a1mc-c0nt3nt/uploads/2026/02/Marco_General_Medios_2026.pdf) (publicació gratuïta amb dades de l'Estudio General de Medios): evolució de l'audiència general 1980-2025, minuts de ràdio i televisió 1991-2025 i lectors per diari 2009-2025. Penetració sobre la població de 14 anys o més; per passar a lectors per 1.000 habitants es multiplica per l'univers de l'EGM i es divideix per tota la població del padró de l'INE. Fins al 2017 la lectura de diaris és només paper; des del 2018 inclou la rèplica digital.
 - **Inversió publicitària**: resums públics de l'[Estudio InfoAdex de la inversión publicitaria en España](https://www.infoadex.es/) (edicions 2010-2026; l'estudi complet és de pagament). Per a cada any es fa servir l'última revisió publicada. La sèrie 2004-2023 segueix el criteri antic (diaris = paper; el digital, a internet) i la del 2022-2025 el nou (cada mitjà amb el seu web); no es barregen. Internet es va reestimar a l'alça des del 2014 i exterior des del 2018.
 - **Empreses i ocupació**: Eurostat, estadístiques estructurals d'empreses ([sbs_na_1a_se_r2](https://ec.europa.eu/eurostat/databrowser/view/sbs_na_1a_se_r2/default/table) fins al 2020 i [sbs_ovw_act](https://ec.europa.eu/eurostat/databrowser/view/sbs_ovw_act/default/table) des del 2021), que per a Espanya elabora l'INE amb l'Estadística Estructural d'Empreses del sector serveis. Branques CNAE 58.13 (diaris), 58.14 (revistes), 60.1 (ràdio), 60.2 (televisió) i 63.91 (agències de notícies). El 2021 va canviar el mètode (reglament FRIBS).
-- **Atresmedia**: [Principales magnitudes](https://www.atresmediacorporacion.com/accionistas-inversores/informacion-economico-financiera/principales-magnitudes/) del seu web d'accionistes (comptes consolidats).
+- **Grups de comunicació**: comptes anuals consolidats d'Atresmedia, Mediaset España, Prisa i Vocento (webs d'accionistes), i informes anuals de RCS MediaGroup per a l'àrea Unidad Editorial; transcrits a mà, amb el PDF i les pàgines de cada xifra al seed `medios_sector_grupos_cuentas`. Ingressos = xifra de negocis més altres ingressos d'explotació; publicitat = vendes de publicitat de la nota d'ingressos o de la informació per segments; resultat = atribuït a la societat dominant. Cada any amb els comptes d'aquell any, sense les reexpressions posteriors.
 - **Diners públics**: marts de la secció [Diners públics als mitjans](/ca/medios/dinero-publico) (Comisión de Publicidad y Comunicación Institucional, CNMC, comptes de RTVE, BDNS i Plataforma de Contratación).
 - **Euros constants** amb l'IPC de l'INE i **població** del padró.

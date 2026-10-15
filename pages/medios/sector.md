@@ -213,26 +213,37 @@ SELECT
 ```
 
 ```sql grupos
-SELECT CAST(anio AS INTEGER) AS anio, grupo, ingresos_meur_real, resultado_neto_meur_real, ingresos_eur_hab_real,
-       ingresos_meur_nominal, resultado_neto_meur_nominal, margen_neto_pct
+SELECT CAST(anio AS INTEGER) AS anio, grupo, perimetro, ingresos_eur_hab_real, publicidad_eur_hab_real,
+       resultado_neto_eur_hab_real, publicidad_pct_ingresos, margen_neto_pct, plantilla_media,
+       ingresos_meur_real, publicidad_meur_real, resultado_neto_meur_real, anio_base
 FROM mother.medios_sector_grupos
-ORDER BY anio
+ORDER BY grupo, anio
+```
+
+```sql grupos_cambio
+SELECT grupo,
+    min(anio) AS anio_ini,
+    max(anio) AS anio_ult,
+    max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) AS ing_hab_2007,
+    arg_max(ingresos_eur_hab_real, anio) AS ing_hab_ult,
+    100.0 * (arg_max(ingresos_eur_hab_real, anio) / max(CASE WHEN anio = 2007 THEN ingresos_eur_hab_real END) - 1) AS ing_var_pct,
+    max(CASE WHEN anio = 2007 THEN publicidad_eur_hab_real END) AS pub_hab_2007,
+    arg_max(publicidad_eur_hab_real, anio) AS pub_hab_ult,
+    arg_max(publicidad_pct_ingresos, anio) AS pub_pct_ult,
+    arg_max(resultado_neto_eur_hab_real, anio) AS res_hab_ult,
+    arg_max(ingresos_meur_real, anio) AS ing_meur_ult
+FROM ${grupos}
+GROUP BY grupo
+ORDER BY ing_hab_ult DESC
 ```
 
 ```sql grupos_resumen
 SELECT
-    (SELECT ingresos_meur_real FROM ${grupos} WHERE anio = 2007) AS ing_2007,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS ing_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY anio DESC LIMIT 1) AS anio_ult,
-    (SELECT CAST(anio AS INTEGER) FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS anio_min,
-    (SELECT ingresos_meur_real FROM ${grupos} ORDER BY ingresos_meur_real ASC LIMIT 1) AS ing_min
-```
-
-```sql grupos_series
-SELECT anio, 'Ingresos' AS concepto, ingresos_meur_real AS meur_real FROM ${grupos}
-UNION ALL
-SELECT anio, 'Beneficio neto' AS concepto, resultado_neto_meur_real AS meur_real FROM ${grupos}
-ORDER BY anio, concepto
+    (SELECT max(anio_base) FROM ${grupos}) AS anio_base,
+    (SELECT max(anio_ult) FROM ${grupos_cambio}) AS anio_ult,
+    (SELECT sum(ing_hab_2007) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_2007,
+    (SELECT sum(ing_hab_ult) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS ing_hab_ult,
+    (SELECT count(*) FROM ${grupos_cambio} WHERE ing_hab_2007 IS NOT NULL AND anio_ult = (SELECT max(anio_ult) FROM ${grupos_cambio})) AS n_grupos
 ```
 
 ```sql publico
@@ -468,22 +479,88 @@ En {ue[0]?.anio} España tenía {formatNumber(ue_es[0]?.es, 1)} ocupados en la e
     <Column id=radio_tv_eur_hab title="Radio y TV: facturación € por hab." fmt='0.0' />
 </DataTable>
 
-## Un gran grupo cotizado: Atresmedia
+## Los grandes grupos de comunicación
 
-Ingresos y beneficio neto de Atresmedia (Antena 3, laSexta, Onda Cero), en millones de euros descontada la inflación. En {grupos_resumen[0]?.anio_ult} ingresó {formatNumber(grupos_resumen[0]?.ing_ult, 0)} millones, frente a {formatNumber(grupos_resumen[0]?.ing_2007, 0)} millones de 2007; el mínimo fue en {grupos_resumen[0]?.anio_min}, con {formatNumber(grupos_resumen[0]?.ing_min, 0)} millones.
+Ingresos, publicidad, resultado y plantilla de los grandes grupos de comunicación españoles según sus propias cuentas anuales, por habitante de España y en euros de {grupos_resumen[0]?.anio_base} (descontada la inflación). Entre 2007 y {grupos_resumen[0]?.anio_ult}, los {grupos_resumen[0]?.n_grupos} grupos con datos en los dos años pasaron de ingresar entre todos {formatNumber(grupos_resumen[0]?.ing_hab_2007, 0)} € por habitante a {formatNumber(grupos_resumen[0]?.ing_hab_ult, 0)} €.
 
-<BarChart
-    data={grupos_series}
+No todos miden lo mismo: Prisa incluye la educación (Santillana) y sus caídas de 2014, 2019 y 2020 son ventas de negocios (Digital+, Media Capital y Santillana España); Unidad Editorial (El Mundo, Marca, Expansión) es el área española de la italiana RCS MediaGroup, que no publica su resultado neto ni, desde 2016, su plantilla; y Mediaset España (Telecinco, Cuatro) es un área del grupo MFE-MediaForEurope desde 2023, sin resultado neto propio y con la plantilla en empleos a jornada completa.
+
+<LineChart
+    data={grupos}
     x=anio
-    y=meur_real
-    series=concepto
-    type=grouped
+    y=ingresos_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ por habitante (descontada la inflación)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Ingresos de cada grupo, € por habitante descontada la inflación"
+/>
+
+<DataTable data={grupos_cambio} rows=10>
+    <Column id=grupo title="Grupo" />
+    <Column id=ing_hab_2007 title="Ingresos 2007, €/hab." fmt='0.0' />
+    <Column id=ing_hab_ult title="Ingresos último año, €/hab." fmt='0.0' />
+    <Column id=ing_var_pct title="Variación desde 2007" fmt='0"%"' contentType=delta />
+    <Column id=anio_ult title="Último año" fmt='0' />
+    <Column id=ing_meur_ult title="Ingresos último año, millones de € reales" fmt='#,##0' />
+</DataTable>
+
+### Publicidad
+
+La publicidad pesa mucho más en las televisiones que en los grupos de prensa, que viven también de la venta de ejemplares, las suscripciones y otros negocios; y en las televisiones pesa cada vez menos.
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_eur_hab_real
+    series=grupo
+    xFmt='0'
+    yFmt='0.0'
+    yAxisTitle="€ por habitante (descontada la inflación)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Ingresos de publicidad de cada grupo, € por habitante descontada la inflación"
+/>
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=publicidad_pct_ingresos
+    series=grupo
+    xFmt='0'
+    yFmt='0"%"'
+    yAxisTitle="% de los ingresos"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Peso de la publicidad en los ingresos de cada grupo"
+/>
+
+### Plantilla y resultados
+
+<LineChart
+    data={grupos}
+    x=anio
+    y=plantilla_media
+    series=grupo
     xFmt='0'
     yFmt='#,##0'
-    yAxisTitle="Millones de euros (descontada la inflación)"
-    seriesColors={{'Ingresos': '#2563eb', 'Beneficio neto': '#16a34a'}}
-    title="Atresmedia: ingresos y beneficio neto, millones de euros descontada la inflación"
+    yAxisTitle="Empleados (media del año)"
+    seriesColors={{'Atresmedia': '#ea580c', 'Mediaset España': '#2563eb', 'Prisa': '#9333ea', 'Unidad Editorial': '#dc2626', 'Vocento': '#16a34a'}}
+    title="Plantilla media de cada grupo"
 />
+
+El resultado neto es el atribuido a los accionistas de cada grupo. Las pérdidas de Prisa en 2014 (2.237 millones de euros corrientes, 60 € por habitante) se salen de la escala de cualquier gráfico, así que los resultados van en la tabla.
+
+<DataTable data={grupos} rows=15 search=true>
+    <Column id=grupo title="Grupo" />
+    <Column id=anio title="Año" fmt='0' />
+    <Column id=ingresos_eur_hab_real title="Ingresos, €/hab." fmt='0.00' />
+    <Column id=publicidad_eur_hab_real title="Publicidad, €/hab." fmt='0.00' />
+    <Column id=resultado_neto_eur_hab_real title="Resultado neto, €/hab." fmt='0.00' contentType=delta />
+    <Column id=margen_neto_pct title="Margen neto" fmt='0.0"%"' />
+    <Column id=plantilla_media title="Plantilla media" fmt='#,##0' />
+    <Column id=ingresos_meur_real title="Ingresos, millones de € reales" fmt='#,##0' />
+    <Column id=resultado_neto_meur_real title="Resultado, millones de € reales" fmt='#,##0' />
+</DataTable>
 
 ## El dinero público frente al mercado publicitario
 
@@ -517,6 +594,6 @@ Son magnitudes que no miden exactamente lo mismo: InfoAdex estima lo que reciben
 - **Audiencias**: [AIMC, Marco General de los Medios en España 2026](https://www.aimc.es/a1mc-c0nt3nt/uploads/2026/02/Marco_General_Medios_2026.pdf) (publicación gratuita con datos del Estudio General de Medios): evolución de la audiencia general 1980-2025, minutos de radio y televisión 1991-2025 y lectores por diario 2009-2025. Penetración sobre la población de 14 o más años; para pasar a lectores por 1.000 habitantes se multiplica por el universo del EGM y se divide por toda la población del padrón del INE. Hasta 2017 la lectura de diarios es solo papel; desde 2018 incluye la réplica digital.
 - **Inversión publicitaria**: resúmenes públicos del [Estudio InfoAdex de la inversión publicitaria en España](https://www.infoadex.es/) (ediciones 2010-2026; el estudio completo es de pago). Para cada año se usa la última revisión publicada. La serie 2004-2023 sigue el criterio antiguo (diarios = papel; lo digital, en internet) y la de 2022-2025 el nuevo (cada medio con su web); no se mezclan. Internet se reestimó al alza desde 2014 y exterior desde 2018.
 - **Empresas y empleo**: Eurostat, estadísticas estructurales de empresas ([sbs_na_1a_se_r2](https://ec.europa.eu/eurostat/databrowser/view/sbs_na_1a_se_r2/default/table) hasta 2020 y [sbs_ovw_act](https://ec.europa.eu/eurostat/databrowser/view/sbs_ovw_act/default/table) desde 2021), que para España elabora el INE con la Estadística Estructural de Empresas del sector servicios. Ramas CNAE 58.13 (periódicos), 58.14 (revistas), 60.1 (radio), 60.2 (televisión) y 63.91 (agencias de noticias). En 2021 cambió el método (reglamento FRIBS).
-- **Atresmedia**: [Principales magnitudes](https://www.atresmediacorporacion.com/accionistas-inversores/informacion-economico-financiera/principales-magnitudes/) de su web de accionistas (cuentas consolidadas).
+- **Grupos de comunicación**: cuentas anuales consolidadas de Atresmedia, Mediaset España, Prisa y Vocento (webs de accionistas), e informes anuales de RCS MediaGroup para el área Unidad Editorial; transcritas a mano, con el PDF y las páginas de cada cifra en el seed `medios_sector_grupos_cuentas`. Ingresos = cifra de negocios más otros ingresos de explotación; publicidad = ventas de publicidad de la nota de ingresos o de la información por segmentos; resultado = atribuido a la sociedad dominante. Cada año con las cuentas de ese año, sin las reexpresiones posteriores.
 - **Dinero público**: marts de la sección [Dinero público en los medios](/medios/dinero-publico) (Comisión de Publicidad y Comunicación Institucional, CNMC, cuentas de RTVE, BDNS y Plataforma de Contratación).
 - **Euros constantes** con el IPC del INE y **población** del padrón.

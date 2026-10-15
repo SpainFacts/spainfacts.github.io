@@ -73,18 +73,35 @@ models:
       - name: puesto
 
   - name: medios_sector_grupos
-    description: "Ingresos y beneficio neto de los grandes grupos de medios cotizados (de momento Atresmedia 2007-2025), en euros corrientes, reales y por habitante, con el margen neto."
+    description: "Cuentas de los grandes grupos de medios por año (seed medios_sector_grupos_cuentas): ingresos, ingresos de publicidad, resultado neto atribuido a la dominante y plantilla media; Atresmedia, Mediaset España, Prisa y Vocento como grupo consolidado y Unidad Editorial como segmento de RCS MediaGroup. Euros corrientes, reales (deflactor) y por habitante. Los años sin dato de un grupo no tienen fila; Unidad Editorial no tiene resultado neto (RCS no lo da por área)."
     columns:
       - name: anio
+        tests: [not_null]
       - name: grupo
+        tests: [not_null]
+      - name: perimetro
+        description: "'grupo' (cuentas consolidadas) o 'segmento' (área de la matriz: Unidad Editorial en RCS; Mediaset España dentro de MFE desde 2023)."
+        tests:
+          - accepted_values:
+              values: ['grupo', 'segmento']
       - name: ingresos_meur_nominal
+      - name: publicidad_meur_nominal
       - name: resultado_neto_meur_nominal
       - name: ingresos_meur_real
+      - name: publicidad_meur_real
       - name: resultado_neto_meur_real
       - name: ingresos_eur_hab_real
+      - name: publicidad_eur_hab_real
+      - name: resultado_neto_eur_hab_real
+      - name: plantilla_media
+        description: Número medio de empleados del año.
       - name: margen_neto_pct
+      - name: publicidad_pct_ingresos
       - name: anio_base
       - name: fuente
+        description: Documento y páginas (del visor del PDF) de cada dato.
+      - name: fuente_url
+        tests: [not_null]
 
   - name: medios_sector_dinero_publico
     description: "Por año: inversión publicitaria en medios controlados y total del mercado (InfoAdex) frente a la publicidad del Estado (institucional + comercial), la financiación de RTVE y las radiotelevisiones autonómicas, las subvenciones a medios privados y los contratos con medios privados (marts medios_*). Millones de euros corrientes, € reales por habitante y % sobre el mercado (orientativo: no miden lo mismo)."
