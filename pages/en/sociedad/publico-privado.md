@@ -2,6 +2,8 @@
 title: Public and private
 description: "How much of public healthcare and education is delivered through private companies and schools, region by region: healthcare contracts, concession hospitals, private insurance, state-funded private schools, vocational training and private universities."
 i18n_origen: 1b5c008b3f5d
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

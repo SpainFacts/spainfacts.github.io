@@ -75,3 +75,6 @@ data/gasto_oculto_cache/
 # Elecciones autonómicas por sección: descargas de cada comunidad y códigos de sección del INE por año
 data/autonomicas_cache/
 data/secciones_codigos/
+
+# Cachés, copias y bases locales (nunca van al repo)
+data/

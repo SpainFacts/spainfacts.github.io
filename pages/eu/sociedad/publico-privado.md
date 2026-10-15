@@ -2,6 +2,8 @@
 title: Publikoa eta pribatua
 description: "Osasun eta hezkuntza publikoen zein zati ematen den enpresa eta zentro pribatuen bidez, erkidegoz erkidego: osasun-itunak, emakida-ospitaleak, aseguru pribatuak, eskola itunpekoa, LH eta unibertsitate pribatuak."
 i18n_origen: 1b5c008b3f5d
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

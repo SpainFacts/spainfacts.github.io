@@ -25,6 +25,10 @@ elección monta una web de resultados que desaparece al poco tiempo (comprobado 
   «Participación ciudadana» con notas e infografías, pero ninguna tabla por municipio; su banco
   de datos y sus «Datos municipales» (Oracle BI) no tienen resultados electorales. datos.gob.es
   y el catálogo de datos abiertos de la Junta tampoco. Interior no publica las autonómicas.
+- Repetido el 13-10-2026: los dominios de 2023 y 2025 siguen sin resolver; en la Wayback solo
+  hay la página /es/descargas de 2023 (enlaza los .xls definitivos, no capturados) y 404/403
+  de 2025; elecciones2025.juntaex.es solo guardó candidaturas y manuales. datos.gob.es no
+  tiene ningún conjunto electoral de la Junta ni de Badajoz, Mérida o Plasencia.
 
 Fuente 1 · 2015 por municipio (Junta de Extremadura, copia en la Wayback Machine)
 ----------------------------------------------------------------------------------

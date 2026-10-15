@@ -55,6 +55,20 @@ Formato y trampas
   municipios() salen del PDF provisional y quedan a None en los municipios con alguna
   mesa sin grabar (22 municipios, entre ellos Albacete, Talavera y Fuenllana).
 
+Búsqueda del escrutinio DEFINITIVO por mesa de 2023 (repetida el 13-10-2026, sin éxito):
+- elecciones2023.castillalamancha.es/resultados/resultados-def es una vista de Drupal que
+  solo filtra por provincia; el menú «desglosado por mesas» sigue llevando al PDF provisional.
+- «Resultados electorales 2023.pdf» del mismo sitio es el acuerdo de la Junta Electoral en
+  el DOCM (16-6-2023): solo comunidad y circunscripciones.
+- datos.gob.es / datosabiertos.castillalamancha.es: Resultados_CLM_2023.xlsx es la misma
+  tabla por municipio que el CSV (una hoja, Municipios_Resultados); no hay nada por mesa.
+- La Wayback Machine no guardó ningún xls/csv en elecciones2023.castillalamancha.es/sites/;
+  la app de la Junta solo daba el provisional. Ningún ayuntamiento afectado (Albacete,
+  Talavera...) publica las autonómicas por mesa.
+- Mesas sin grabar en 22 municipios: 02003 02009 02030 02037 02081 02901 13013 13042 13043
+  13053 13071 13093 45028 45038 45046 45069 45081 45121 45125 45165 45180 45205. No se
+  imputan (restar al municipal definitivo mezclaría provisional y definitivo).
+
 Resultado oficial (actas de la Junta Electoral de Castilla-La Mancha; DOCM/BOE; para
 1983-2007 los PDF escaneados de la JEC no tienen texto y las cifras son las de esas
 actas recogidas en Wikipedia): ver OFICIAL más abajo.

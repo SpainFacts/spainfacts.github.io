@@ -38,6 +38,13 @@ ingestion/autonomicas/__init__.py):
    - Los votos a candidaturas por concejo de la 190402 coinciden con la suma de
      partidos de la tabla de votos; el censo es el de los concejos, sin CERA.
 
+   Búsqueda de resultados por mesa del resto de concejos (repetida el 13-10-2026, sin
+   éxito): el PxWeb de SADEI (19__04) solo tiene tablas por concejo; datos.gob.es solo
+   lista ese conjunto de SADEI (a03002951-elecciones-autonomicas-asturias); la Junta
+   General (jgpa.es) solo publica las actas por circunscripción; la web de resultados del
+   Principado de 2023 no consta en la Wayback (solo www.elecciones2012.asturias.es); el
+   portal de datos de Oviedo responde 403 y Avilés no tiene portal con elecciones.
+
 2. SECCIONES (solo Gijón, 33024, ~23 % del censo): datos abiertos del Ayuntamiento
    de Gijón, un CSV por convocatoria (https://opendata.gijon.es/descargar.php?id=<id>&tipo=CSV;
    fichas en datos.gob.es l01330241-datos-elecciones-autonomicas-...). Columnas:

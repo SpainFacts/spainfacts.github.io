@@ -2,6 +2,8 @@
 title: Públic i privat
 description: "Quina part de la sanitat i l'educació públiques es presta a través d'empreses i centres privats, comunitat a comunitat: concerts sanitaris, hospitals de concessió, assegurances privades, escola concertada, FP i universitats privades."
 i18n_origen: 1b5c008b3f5d
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

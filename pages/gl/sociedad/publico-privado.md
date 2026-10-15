@@ -2,6 +2,8 @@
 title: Público e privado
 description: "Canto da sanidade e da educación públicas se presta a través de empresas e centros privados, comunidade a comunidade: concertos sanitarios, hospitais de concesión, seguros privados, escola concertada, FP e universidades privadas."
 i18n_origen: 1b5c008b3f5d
+og:
+  image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>

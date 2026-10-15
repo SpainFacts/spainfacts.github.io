@@ -1,0 +1,23 @@
+orden,patron,area
+10,"rtve|radio (y )?television espanola",Corporación RTVE
+20,"proteccion de datos|aepd|mercados y la competencia|cnmc|banco de espana|mercado de valores|cnmv|defensor del pueblo|poder judicial|cgpj|fiscalia|tribunal de cuentas|tribunal constitucional|consejo de estado|casa (de s\.? ?m\.?|de su majestad|del rey|real)|congreso|senado|airef|responsabilidad fiscal|seguridad nuclear|\bcsn\b|junta electoral|consejo de transparencia|consejo economico y social|tribunal supremo|autoridad independiente",Órganos constitucionales e independientes
+30,"colegio|consejo general de (la abogacia|procuradores|colegios|enfermeria|medicos|los colegios)|consejo general de la|camara (oficial|de comercio|de espana)|universidad|\buned\b|\buimp\b|real academia|regantes|federacion espanola|consejo general|cons\. general|consejo regulador|consejo de dentistas|cosital|instituto de actuarios|real acequia|sindicato central de riego|comite olimpico",Colegios profesionales universidades y otras corporaciones
+40,"presidencia del gobierno|s\.? ?g\.? de (la )?presidencia|moncloa|gabinete de la presidencia|seguridad nacional|^presidencia$",Presidencia del Gobierno
+50,"^igualdad$|ministerio de igualdad|m\. de igualdad|instituto de las mujeres|violencia de genero",Igualdad
+55,"politica territorial",Función Pública y Política Territorial
+56,"asuntos economicos",Economía Industria y Comercio
+60,"presidencia|relaciones con las cortes|memoria democratica|patrimonio nacional|\bcis\b|centro de investigaciones sociologicas|boletin oficial del estado|\bboe\b|\bmpre\b|mpreat|justicia|abogacia del estado|registros? (civil|de la propiedad|mercantil)|notari",Presidencia y Justicia
+80,"interior|guardia civil|policia|trafico|\bdgt\b|instituciones penitenciarias|proteccion civil",Interior
+90,"defensa|ejercito|armada|\binta\b|isfas|navantia",Defensa
+100,"exteriores|\bmaec\b|aecid|embajada|consulado|instituto cervantes",Asuntos Exteriores
+110,"hacienda|minhap|minhafp|\baeat\b|tributaria|catastro|igae|intervencion general|loterias|selae|parque movil|\bsepi\b|participaciones industriales|correos|mercado de tabacos|oirescon|fnmt|moneda y timbre|paradores|tragsa|seiasa|\bsae\b|presupuestos",Hacienda
+120,"funcion publica|politica territorial|administraciones territoriales|delegacion del gobierno|subdelegacion del gobierno|muface|\binap\b|transformacion digital|red\.es|incibe|\boci\b",Función Pública y Política Territorial
+130,"agricultura|magrama|pesca|alimentacion|\bfega\b|enesa|mapama|\baica\b",Agricultura Pesca y Alimentación
+140,"inclusion|seguridad social|empleo|trabajo|migraciones|\bsepe\b|\binss\b|\btgss\b|tesoreria general|tesoreria gral|\bitss\b|inspeccion de trabajo|\bmeyss\b|fogasa|mutua|fremap|\bism\b|insst|imserso",Trabajo Seguridad Social y Migraciones
+150,"sanidad|consumo|derechos sociales|servicios sociales|agenda 2030|agenda 2031|aemps|medicamentos|ingesa|trasplantes|aesan|msssi|msss|plan nacional sobre drogas|juventud e infancia|injuve",Sanidad Consumo y Derechos Sociales
+160,"educacion|eduacion|universidades|ciencia|innovacion|\bcsic\b|investigaciones cientificas|carlos iii|isciii|aneca|agencia estatal de investigacion|cdti|sepie|fecyt|ciencia y la tecnologia|\bmecd\b",Educación Ciencia y Universidades
+170,"cultura|deporte|\bcsd\b|celad|museo|biblioteca nacional|inaem|teatro real|icaa|prado",Cultura y Deporte
+180,"fomento|transportes|movilidad|agenda urbana|vivienda|\badif\b|renfe|\baena\b|enaire|autoridad portuaria|^ap de|/ap de|puertos del estado|\baesa\b|seguridad aerea|sasemar|salvamento maritimo|carreteras|ineco|senasa|aviacion civil|sepes",Transportes y Vivienda
+190,"transicion ecologica|reto demografico|medio ambiente|hidrografica|ch del|\bidae\b|aemet|meteorologia|costas|parques nacionales|acuamed|aguas de las cuencas|energia|minetad|mancomunidad de los canales",Transición Ecológica y Energía
+200,"economia|asuntos economicos|industria|comercio|turismo|competitividad|mineco|minetur|patentes y marcas|metrologia|\bine\b|estadistica|\bico\b|credito oficial|tesoro|seguros|sareb|frob|agencia efe|\befe\b|cesce|enisa|cofides",Economía Industria y Comercio
+999,".",Otras entidades
