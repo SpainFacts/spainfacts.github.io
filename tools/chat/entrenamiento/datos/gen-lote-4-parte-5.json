@@ -1,0 +1,1875 @@
+[
+ {
+  "pregunta": "¿Qué comunidad depende más de las fábricas para su economía?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesa la industria en Cataluña?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en fábricas en el País Vasco por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "ocupados_industria_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "comunidad con menos industria",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos obreros industriales hay en Madrid?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "ocupados_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "industria navarra evolución desde 2000",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿La industria de Galicia pesa más o menos que hace 20 años?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2004,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de manufacturas en la economía de La Rioja",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_manufacturas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "La Rioja"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad produce más euros de industria por habitante?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "vab_industria_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de toda la industria de España está en Cataluña?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "cuota_vab_industria_espana_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "valor añadido de la industria en Andalucía en millones",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "vab_industria_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "facturación industrial por habitante en Aragón",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "cifra_negocios_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad factura más en la industria por persona?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "cifra_negocios_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "año con más peso industrial en Asturias",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "manufacturas por habitante en Castilla y León 2019",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "vab_manuf_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores de la industria hay en Valencia?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "ocupados_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué peso tiene el sector industrial en Baleares?",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quina comunitat té més pes industrial?",
+  "idioma": "ca",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto pesa a industria en Galicia?",
+  "idioma": "gl",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which region relies most on manufacturing?",
+  "idioma": "en",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_manufacturas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "industria murcia 2010 peso en el pib",
+  "idioma": "es",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer pisu du industriak Euskadiko ekonomian?",
+  "idioma": "eu",
+  "tabla": "industria_ccaa",
+  "medida": "pct_vab_industria",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en la industria de la alimentación en Andalucía?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria de la alimentación"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad fabrica más coches y vehículos de motor?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cifra_negocios_miles_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "rama": "Fabricación de vehículos de motor, remolques y semirremolques"
+  }
+ },
+ {
+  "pregunta": "empleo en la industria química de Cataluña",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria química"
+  }
+ },
+ {
+  "pregunta": "cuántas fábricas de muebles hay en la Comunidad Valenciana",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "locales",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Fabricación de muebles"
+  }
+ },
+ {
+  "pregunta": "¿Qué rama industrial pesa más en Navarra?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "peso_en_industria_ccaa_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rama",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se concentra la industria farmacéutica española?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cuota_espana_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "rama": "Fabricación de productos farmacéuticos"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la industria del calzado está en la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cuota_espana_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria del cuero y del calzado"
+  }
+ },
+ {
+  "pregunta": "industria textil en Galicia ventas",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cifra_negocios_miles_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria textil"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas trabajan en la industria del papel por cada 1.000 habitantes en el País Vasco?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria del papel"
+  }
+ },
+ {
+  "pregunta": "especialización de Aragón en la fabricación de maquinaria",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "veces_peso_poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Fabricación de maquinaria y equipo n.c.o.p."
+  }
+ },
+ {
+  "pregunta": "ramas de la industria en Extremadura por facturación",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cifra_negocios_miles_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rama",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas bodegas y fábricas de bebidas hay en Castilla-La Mancha?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "locales",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Fabricación de bebidas"
+  }
+ },
+ {
+  "pregunta": "evolución del empleo en la industria del automóvil en Castilla y León",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Fabricación de vehículos de motor, remolques y semirremolques"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el empleo industrial total en Madrid desde 2018?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria"
+  }
+ },
+ {
+  "pregunta": "industria metalúrgica por comunidades, ¿quién emplea a más gente?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "rama": "Metalurgia; fabricación de productos de hierro, acero y ferroaleaciones"
+  }
+ },
+ {
+  "pregunta": "refino de petróleo cifra de negocios en Andalucía 2022",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cifra_negocios_miles_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Coquerías y refino de petróleo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto factura la industria del tabaco por comunidad?",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "cifra_negocios_miles_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "rama": "Industria del tabaco"
+  }
+ },
+ {
+  "pregunta": "Quants treballadors té la indústria alimentària a Catalunya?",
+  "idioma": "ca",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria de la alimentación"
+  }
+ },
+ {
+  "pregunta": "Cantos postos de traballo ten a industria da madeira en Galicia?",
+  "idioma": "gl",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industria de la madera y del corcho, excepto muebles; cestería y espartería"
+  }
+ },
+ {
+  "pregunta": "Which region has the most car manufacturing jobs?",
+  "idioma": "en",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "rama": "Fabricación de vehículos de motor, remolques y semirremolques"
+  }
+ },
+ {
+  "pregunta": "industria electrónica e informática Cantabria locales",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "locales",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Fabricación de productos informáticos, electrónicos y ópticos"
+  }
+ },
+ {
+  "pregunta": "industria extractiva, minas, en Asturias 2020",
+  "idioma": "es",
+  "tabla": "industria_ccaa_ramas",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "rama": "Industrias extractivas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exporta España en total?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Total de bienes",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos millones vende España al extranjero en coches?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Turismos",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "¿En qué puesto está España en la exportación de aceite de oliva dentro de Europa?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Aceite de oliva"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las exportaciones europeas de azulejos son españolas?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Baldosas y azulejos cerámicos"
+  }
+ },
+ {
+  "pregunta": "¿Qué producto vende más España fuera?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "partida_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "exportaciones de jamón",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Jamones y carnes curadas",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "evolución de las ventas de medicamentos al exterior",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Medicamentos dosificados",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vendemos a países de fuera de la UE en turismos?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Turismos",
+   "destino": "EXT_EU27_2020"
+  }
+ },
+ {
+  "pregunta": "¿Ha subido la exportación de aviones desde 2015?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Aviones y helicópteros",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene el cemento en lo que exporta España?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "peso_en_exportacion_es_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Cemento"
+  }
+ },
+ {
+  "pregunta": "exportaciones de productos petrolíferos refinados en 2022",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Productos petrolíferos refinados",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "productos en los que España es líder en Europa por cuota de exportación",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "partida_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de aceite de oliva se exportan?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Aceite de oliva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exportamos de cosméticos y perfumes?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Cosméticos y maquillaje",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "año récord de exportaciones totales de España",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Total de bienes",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "exportaciones de vehículos (capítulo 87) fuera de la UE",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Vehículos (capítulo 87)",
+   "destino": "EXT_EU27_2020"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exporta la UE de neumáticos y qué parte es española?",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_ue_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Neumáticos nuevos"
+  }
+ },
+ {
+  "pregunta": "Quant exporta Espanya de barcos?",
+  "idioma": "ca",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Barcos de pasajeros y de carga",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "Canto exporta España en autobuses e autocares?",
+  "idioma": "gl",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Autobuses y autocares",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "What are Spain's biggest industrial exports?",
+  "idioma": "en",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "partida_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "exportacion aerogeneradores y grupos electrogenos 2023",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Grupos electrógenos y aerogeneradores",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "partes y accesorios de automóviles que vendemos fuera",
+  "idioma": "es",
+  "tabla": "industria_exportaciones_ue",
+  "medida": "exportacion_es_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partida_nombre": "Partes y accesorios de vehículos",
+   "destino": "WORLD"
+  }
+ },
+ {
+  "pregunta": "¿Dónde están las fábricas de coches en España?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué fábricas de coches hay en Cataluña?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos modelos se hacen en la fábrica de Martorell?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "plantas de Stellantis en España",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Stellantis"
+  }
+ },
+ {
+  "pregunta": "¿Dónde fabrica Volkswagen en España?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Volkswagen"
+  }
+ },
+ {
+  "pregunta": "¿Qué fábrica produce más modelos eléctricos o híbridos?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "modelos_electrificados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "fábrica de camiones Iveco, ¿dónde está?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Iveco",
+   "tipo": "camiones"
+  }
+ },
+ {
+  "pregunta": "¿Qué fábricas hay en Navarra?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Navarra, Comunidad Foral de"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "fábricas de coches en Galicia",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se fabrican las furgonetas Mercedes?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Mercedes-Benz"
+  }
+ },
+ {
+  "pregunta": "¿Hay fábricas de coches en Madrid?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Madrid, Comunidad de"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "plantas de Renault en Castilla y León",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Renault"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos modelos están adjudicados a cada fábrica para el futuro?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_adjudicados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "fábrica de Ford en Valencia",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunitat Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Ford"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se montan coches de lujo en España?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "turismos de lujo"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca fabrica en Zaragoza?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde está la fábrica de Nissan?",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Nissan"
+  }
+ },
+ {
+  "pregunta": "On hi ha fàbriques de cotxes a Catalunya?",
+  "idioma": "ca",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que fábricas de automóbiles hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Where are the car factories in Spain?",
+  "idioma": "en",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "fabrica de autobuses daimler",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Daimler Truck"
+  }
+ },
+ {
+  "pregunta": "Ebro Chery fabrica Barcelona",
+  "idioma": "es",
+  "tabla": "industria_fabricas",
+  "medida": "n_modelos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Ebro (con Chery)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto produce la industria española respecto a 2021?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Total industria"
+  }
+ },
+ {
+  "pregunta": "¿Ha crecido la producción industrial en España en 2025?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad ha crecido más en producción industrial?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Total industria"
+  }
+ },
+ {
+  "pregunta": "producción industrial de Cataluña por años",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "índice industrial de Galicia 2019",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "producción de bienes de equipo en España en 2024",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Bienes de equipo"
+  }
+ },
+ {
+  "pregunta": "¿Cómo va la producción de energía eléctrica y gas? evolución",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Energía"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo ha tenido el mayor crecimiento industrial?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "fuente": "eurostat"
+  }
+ },
+ {
+  "pregunta": "España frente a Alemania en producción de fábricas",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "eurostat"
+  }
+ },
+ {
+  "pregunta": "producción industrial de Italia en 2023",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "eurostat"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año para la industria en España?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "caída de la producción industrial por la pandemia de 2020",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto produce Madrid de bienes de consumo?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Madrid, Comunidad de"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Bienes de consumo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado la industria del País Vasco desde 2008?",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "evolución de la producción industrial de Francia",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "eurostat"
+  }
+ },
+ {
+  "pregunta": "producción de bienes intermedios en Andalucía",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine",
+   "rama_nombre": "Bienes intermedios"
+  }
+ },
+ {
+  "pregunta": "índice de producción industrial de Polonia",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Polonia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "eurostat"
+  }
+ },
+ {
+  "pregunta": "Com va la producció industrial a Catalunya?",
+  "idioma": "ca",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "Como evolucionou a produción industrial en Galicia?",
+  "idioma": "gl",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "Has industrial output in Spain gone up?",
+  "idioma": "en",
+  "tabla": "industria_ipi",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ },
+ {
+  "pregunta": "ipi navarra 2022",
+  "idioma": "es",
+  "tabla": "industria_ipi",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Navarra, Comunidad Foral de"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "fuente": "ine"
+  }
+ }
+]

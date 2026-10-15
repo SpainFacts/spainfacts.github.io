@@ -1,0 +1,763 @@
+[
+ {
+  "pregunta": "¿Cuánta gente vive en Soria?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "habitantes de Getafe",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el pueblo más grande de España?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio tiene menos habitantes?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos vecinos tenía Teruel en 2016?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2016
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado la población de Zamora en los últimos años?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2016,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente ha ganado Torrelodones desde 2016?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Torrelodones"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2016,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes hay en València?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "padron de sevilla capital",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas viven en A Coruña?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Coruña, A"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudades son más grandes que Zaragoza?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en Las Palmas de Gran Canaria?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palmas de Gran Canaria, Las"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos vecinos tiene Cuenca capital?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cuenca"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes había en Vitoria en 2020?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vitoria-Gasteiz"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene Pamplona?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Pamplona/Iruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "mi pueblo se vacía, ¿cuánta gente tenía Móstoles hace diez años y cuánta tiene ahora?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Móstoles"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2016,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene Donostia?",
+  "idioma": "es",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Donostia/San Sebastián"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "quants habitants te Barcelona",
+  "idioma": "ca",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canta xente vive en Vigo?",
+  "idioma": "gl",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat biztanle ditu Bilbok?",
+  "idioma": "eu",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many people live in Madrid city?",
+  "idioma": "en",
+  "tabla": "poblacion_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene España?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos españoles hay?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas mujeres hay en España?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hombres viven en Andalucía?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad autónoma tiene más población?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos habitantes?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en la comunidad de Madrid?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "población de la provincia de Valencia",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "46"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tenía España en 2000?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2000
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido la población de España desde 2010?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la población de Castilla y León?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1996,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente ha perdido Extremadura desde 2010?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "11"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas mujeres viven en la provincia de Barcelona?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "08"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos municipios tiene Castilla-La Mancha?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "n_municipios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "08"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más pueblos?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "n_municipios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "habitantes Sevilla provincia 2023",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "41"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos canarios hay?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más población en Asturias?",
+  "idioma": "es",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "03"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "quanta gent viu a Catalunya",
+  "idioma": "ca",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantos habitantes ten Galicia?",
+  "idioma": "gl",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat biztanle ditu Euskadik?",
+  "idioma": "eu",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "What is the population of Spain?",
+  "idioma": "en",
+  "tabla": "poblacion_territorios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total"
+  }
+ }
+]

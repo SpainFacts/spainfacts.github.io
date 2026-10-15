@@ -1,0 +1,2307 @@
+[
+ {
+  "pregunta": "¿Cuántos coches hay por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turismos hay en total en el país?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje del parque son coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué proporción de los coches son enchufables?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_enchufables",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches enchufables circulan por España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "enchufables",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches eléctricos puros en circulación",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de coches no tiene etiqueta de la DGT?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_sin_distintivo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches no tienen distintivo ambiental?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "sin_distintivo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches tienen más de 20 años?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "mas_de_20",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de coches son auténticos vejestorios de más de 20 años?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_mas_de_20",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "antigüedad: coches de más de 20 años hoy y hace un año",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_mas_de_20",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha subido el porcentaje de eléctricos en el último año?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución mensual del porcentaje de coches enchufables",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_enchufables",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos vehículos en total hay en España, contando motos y camiones?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene España según el parque?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches por cada 1.000 personas en marzo de 2025",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Estamos más motorizados que hace un año? (turismos por 1000 habitantes)",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches sin etiqueta había en septiembre de 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "sin_distintivo",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de coches eléctricos en 2025",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Estamos renovando el parque? Evolución de los coches viejos",
+  "idioma": "es",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "mas_de_20",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de cotxes són elèctrics a Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos coches hai por cada mil habitantes?",
+  "idioma": "gl",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of cars in Spain are electric?",
+  "idioma": "en",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "pct_bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat auto dago 1.000 biztanleko Espainian?",
+  "idioma": "eu",
+  "tabla": "movilidad_parque_resumen",
+  "medida": "turismos_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos puntos de recarga hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cargadores para coches eléctricos tenemos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cargadores ultrarrápidos hay?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Ultrarrápida (≥150 kW)"
+  }
+ },
+ {
+  "pregunta": "puntos de recarga rápida de 50 a 149 kW",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Rápida (50-149 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos enchufes de carga lenta hay?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Lenta (<22 kW)"
+  }
+ },
+ {
+  "pregunta": "cargadores semirrápidos de 22 a 49 kW",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Semirrápida (22-49 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Qué potencia total instalada tiene la red de recarga?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "potencia_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "potencia de los cargadores ultrarrápidos en kW",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "potencia_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Ultrarrápida (≥150 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Qué tipo de cargador es el más abundante?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_potencia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el número de puntos de recarga últimamente?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2026,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos puntos de recarga se han instalado desde finales de septiembre?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2026,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los cargadores rápidos",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2026,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Rápida (50-149 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Hay más enchufes lentos o rápidos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_potencia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "red pública de carga del coche eléctrico: tamaño actual",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos kW de carga hay disponibles en lentos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "potencia_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Lenta (<22 kW)"
+  }
+ },
+ {
+  "pregunta": "puntos de recarga el 28 de septiembre de 2026",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde puedo cargar el coche? ¿Cuántos puntos hay en el país?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants punts de recàrrega hi ha a Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos puntos de carga rápida hai en España?",
+  "idioma": "gl",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Rápida (50-149 kW)"
+  }
+ },
+ {
+  "pregunta": "How many public EV chargers are there in Spain?",
+  "idioma": "en",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat kargagailu azkar daude Espainian?",
+  "idioma": "eu",
+  "tabla": "movilidad_recarga_evolucion",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_potencia": "Rápida (50-149 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más puntos de recarga para coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cargadores hay en Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "puntos de carga en Girona",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más cargadores en proporción a la población?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_por_100k_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia está peor dotada de cargadores por habitante?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_por_100k_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cargadores por cada 100.000 habitantes en Teruel",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_por_100k_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cargadores rápidos hay en Valencia?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_rapidos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más cargadores ultrarrápidos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_ultrarrapidos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ultrarrápidos en Barcelona",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_ultrarrapidos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos sitios donde cargar hay en Sevilla?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "sitios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En cuántas estaciones de carga puedo enchufar en Zaragoza?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "sitios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "potencia instalada de recarga en Málaga",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "potencia_kw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más potencia de recarga instalada?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "potencia_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches enchufables en Alicante",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "turismos_enchufables",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches eléctricos tiene que compartir cada cargador en Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "enchufables_por_punto",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más coches eléctricos por cargador, o sea más colas?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "enchufables_por_punto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene mejor ratio de coches enchufables por punto?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "enchufables_por_punto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Voy de viaje a Cantabria con el coche eléctrico, ¿habrá cargadores?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cargadores en Illes Balears",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "puntos de recarga Bizkaia vs Gipuzkoa",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cargadores en Las Palmas por 100.000 habitantes",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos_por_100k_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants punts de recàrrega hi ha a Lleida?",
+  "idioma": "ca",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lleida"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos cargadores hai na Coruña?",
+  "idioma": "gl",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which province has the most EV charging points?",
+  "idioma": "en",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat kargagailu daude Bizkaian?",
+  "idioma": "eu",
+  "tabla": "movilidad_recarga_provincia",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué empresa tiene más puntos de recarga?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "operador",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cargadores de Iberdrola",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "IBERDROLA CLIENTES S.A.U"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos puntos de carga tiene Endesa?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "ENDESA X WAY, S.L."
+  }
+ },
+ {
+  "pregunta": "puntos de recarga de Repsol",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "REPSOL SOLUCIONES ENERGÉTICAS SA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos cargadores hay en Zaragoza?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "puntos de carga en Madrid ciudad",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cargadores en Barcelona",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios tienen más puntos de recarga?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el cargador más potente de España?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "potencia_max_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sitio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "potencia máxima de los cargadores en Bilbao",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "potencia_max_kw",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "potencia total de recarga en Málaga",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "potencia_total_kw",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué estación de carga ofrece más kW en total?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "potencia_total_kw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sitio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "sitios con cargadores ultrarrápidos de más de 150 kW en Sevilla",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo": "Ultrarrápida (≥150 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay cargadores lentos de menos de 22 kW?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tramo": "Lenta (<22 kW)"
+  }
+ },
+ {
+  "pregunta": "estaciones de carga rápida (50-149 kW) de Charging Together",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "CHARGING TOGETHER SL",
+   "tramo": "Rápida (50-149 kW)"
+  }
+ },
+ {
+  "pregunta": "cargadores del ayuntamiento de Barcelona (Barcelona de Serveis Municipals)",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "BARCELONA DE SERVEIS MUNICIPALS, SA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos puntos de carga tiene Wenea?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "Wenea Services Spain, S.L."
+  }
+ },
+ {
+  "pregunta": "semirrápidos de 22 a 49 kW en Madrid",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo": "Semirrápida (22-49 kW)"
+  }
+ },
+ {
+  "pregunta": "¿Qué operadores ponen cargadores ultrarrápidos?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "operador",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tramo": "Ultrarrápida (≥150 kW)"
+  }
+ },
+ {
+  "pregunta": "cargadores de Punto Recargas",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "Punto Recargas SL"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos puntos de Etecnic hay?",
+  "idioma": "es",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "Etecnic Movilidad Electrica, SRL"
+  }
+ },
+ {
+  "pregunta": "Quants punts de recàrrega té Iberdrola?",
+  "idioma": "ca",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "operador": "IBERDROLA CLIENTES S.A.U"
+  }
+ },
+ {
+  "pregunta": "Que empresa ten máis puntos de carga en España?",
+  "idioma": "gl",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "operador",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which company operates the most charging points?",
+  "idioma": "en",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "operador",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat kargagailu daude Bilbon?",
+  "idioma": "eu",
+  "tabla": "movilidad_recarga_sitios",
+  "medida": "puntos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente usa el metro en Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "viajeros del metro de Barcelona en 2024",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos viajeros lleva el autobús urbano en Sevilla?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "¿En qué ciudad se usa más el transporte público?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ciudad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene más usuarios de metro?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ciudad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "autobuses urbanos: ranking de ciudades por viajeros",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ciudad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "metro de València viajeros",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas van en metro en Bilbao?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "bus urbano Málaga pasajeros",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente coge el autobús en Palma?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el metro de Madrid desde 2012?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2012,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cayó el uso del metro de Barcelona en la pandemia?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "¿Ha recuperado el autobús de Madrid los viajeros de 2019?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más viajeros en el metro de Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "viajeros del metro de Madrid en octubre de 2019",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2019
+   ],
+   "mes": 10
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "metro Sevilla pasajeros 2023",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "uso del transporte público en Barcelona en general",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué ciudad cae más el uso del bus urbano en agosto?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 8
+  },
+  "ranking": {
+   "sobre": "ciudad",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos usuarios tiene el bus de Bilbao?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "gente que viaja en metro en Palma de Mallorca",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "Quants viatgers té el metro de Barcelona?",
+  "idioma": "ca",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "Cantos viaxeiros usan o autobús en Madrid?",
+  "idioma": "gl",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Autobús urbano"
+  }
+ },
+ {
+  "pregunta": "How many people ride the Madrid metro?",
+  "idioma": "en",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "Zenbat bidaiarik ditu Bilboko metroak?",
+  "idioma": "eu",
+  "tabla": "movilidad_transporte_ciudades",
+  "medida": "viajeros",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Metro"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente usa el transporte público en España?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "viajeros totales del último mes",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas viajan en tren de cercanías?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Ferrocarril: Cercanías"
+  }
+ },
+ {
+  "pregunta": "usuarios de la alta velocidad (AVE)",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Alta Velocidad"
+  }
+ },
+ {
+  "pregunta": "viajeros del tren de larga distancia",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Ferrocarril: Larga distancia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente usa el tren de media distancia?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Ferrocarril: Media distancia"
+  }
+ },
+ {
+  "pregunta": "pasajeros del metro en toda España",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Urbano por metro"
+  }
+ },
+ {
+  "pregunta": "viajeros de autobús urbano",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Transporte urbano regular por autobús"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente viaja en autobús interurbano?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Interurbano por autobús regular"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos vuelos interiores hay? Pasajeros del avión dentro de España",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Interurbano Aéreo (interior)"
+  }
+ },
+ {
+  "pregunta": "pasajeros de barco entre puertos españoles",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Interurbano Marítimo (cabotaje)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos viajeros usan los vuelos entre islas?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Aéreo: Interinsular"
+  }
+ },
+ {
+  "pregunta": "¿Qué medio de transporte público usa más gente?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el uso del transporte público desde 2019?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cayó el transporte público en 2020 por el covid?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "¿Ha recuperado el tren los viajeros de antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Ferrocarril: Cercanías"
+  }
+ },
+ {
+  "pregunta": "evolución de pasajeros del AVE desde que se liberalizó",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Alta Velocidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más viajeros en transporte público?",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "viajeros de cercanías en marzo de 2020",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Ferrocarril: Cercanías"
+  }
+ },
+ {
+  "pregunta": "transporte escolar y laboral: viajeros",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Transporte especial"
+  }
+ },
+ {
+  "pregunta": "transporte discrecional (autocares de excursión) viajeros",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Transporte Discrecional"
+  }
+ },
+ {
+  "pregunta": "viajeros en transporte público en 2023",
+  "idioma": "es",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "Quants viatgers fan servir el tren a Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Interurbano por ferrocarril"
+  }
+ },
+ {
+  "pregunta": "Cantos pasaxeiros usan o transporte público?",
+  "idioma": "gl",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ },
+ {
+  "pregunta": "How many people use trains in Spain each month?",
+  "idioma": "en",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Interurbano por ferrocarril"
+  }
+ },
+ {
+  "pregunta": "Zenbat pertsonak erabiltzen dute garraio publikoa Espainian?",
+  "idioma": "eu",
+  "tabla": "movilidad_transporte_modos",
+  "medida": "viajeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "modo": "Total de viajeros"
+  }
+ }
+]

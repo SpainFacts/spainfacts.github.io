@@ -1,0 +1,1935 @@
+[
+ {
+  "pregunta": "el gasto de la administración general por habitante",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "gasto_por_habitante_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Servicios Públicos Generales"
+  }
+ },
+ {
+  "pregunta": "¿En qué gasta menos el Gobierno?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "funcion_cofog",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "dinero en defensa 2022 por habitante",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "gasto_por_habitante_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Defensa"
+  }
+ },
+ {
+  "pregunta": "En què gasta els diners públics l'Estat espanyol?",
+  "idioma": "ca",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "funcion_cofog",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos cartos se gastan en sanidade pública?",
+  "idioma": "gl",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Sanidad Pública"
+  }
+ },
+ {
+  "pregunta": "How much does Spain spend on pensions?",
+  "idioma": "en",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Protección Social y Pensiones"
+  }
+ },
+ {
+  "pregunta": "¿De dónde saca dinero el Estado?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "categoria",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se recauda con el IVA?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IVA"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recauda Hacienda con la renta de los ciudadanos (IRPF)?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IRPF y Patrimonio"
+  }
+ },
+ {
+  "pregunta": "porcentaje del PIB que se recauda en cotizaciones sociales",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "porcentaje_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cotizaciones Sociales"
+  }
+ },
+ {
+  "pregunta": "¿Qué impuesto recauda más?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "categoria",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto aportan las empresas con el impuesto de sociedades?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Impuesto sobre Sociedades"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la recaudación del IVA desde 2012?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IVA"
+  }
+ },
+ {
+  "pregunta": "evolución de lo que se recauda por IRPF",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IRPF y Patrimonio"
+  }
+ },
+ {
+  "pregunta": "recaudación de impuestos especiales (tabaco, alcohol, gasolina) en 2023",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Impuestos Especiales"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se recaudó menos por sociedades?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Impuesto sobre Sociedades"
+  }
+ },
+ {
+  "pregunta": "¿Qué proporción de los ingresos públicos son impuestos directos?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "porcentaje_ingreso_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_ingreso": "Impuestos Directos"
+  }
+ },
+ {
+  "pregunta": "peso de las cotizaciones en el total de ingresos",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "porcentaje_ingreso_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_ingreso": "Cotizaciones"
+  }
+ },
+ {
+  "pregunta": "ingresos que no son impuestos ni cotizaciones, fondos europeos",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Ingresos No Tributarios y Fondos UE"
+  }
+ },
+ {
+  "pregunta": "¿Qué impuestos indirectos recaudan más?",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "categoria",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_ingreso": "Impuestos Indirectos"
+  }
+ },
+ {
+  "pregunta": "recaudacion por iva en 2008 en porcentaje del PIB",
+  "idioma": "es",
+  "tabla": "cuentas_ingresos",
+  "medida": "porcentaje_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IVA"
+  }
+ },
+ {
+  "pregunta": "quant recapta Hisenda per IVA?",
+  "idioma": "ca",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IVA"
+  }
+ },
+ {
+  "pregunta": "Cantos cartos recada o Estado en cotizacións sociais?",
+  "idioma": "gl",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cotizaciones Sociales"
+  }
+ },
+ {
+  "pregunta": "How much does Spain collect in income tax?",
+  "idioma": "en",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IRPF y Patrimonio"
+  }
+ },
+ {
+  "pregunta": "Zenbat biltzen da BEZarekin Espainian?",
+  "idioma": "eu",
+  "tabla": "cuentas_ingresos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "IVA"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado central frente a las comunidades autónomas?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "subsector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastan las comunidades autónomas?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades Autónomas"
+  }
+ },
+ {
+  "pregunta": "gasto de los ayuntamientos",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones Locales"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ingresa la Seguridad Social?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "ingreso_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Seguridad Social"
+  }
+ },
+ {
+  "pregunta": "déficit de la Seguridad Social",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Seguridad Social"
+  }
+ },
+ {
+  "pregunta": "¿Qué administración tiene más déficit?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "subsector",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso del gasto de las comunidades autónomas en el gasto público",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "peso_gasto_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades Autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte del gasto público manejan los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "peso_gasto_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones Locales"
+  }
+ },
+ {
+  "pregunta": "evolución del déficit de las comunidades autónomas",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades Autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto de la Administración central desde 2015?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Administración Central"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo tuvo más déficit el Estado central?",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Administración Central"
+  }
+ },
+ {
+  "pregunta": "gasto de las comunidades autónomas en miles de millones",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades Autónomas"
+  }
+ },
+ {
+  "pregunta": "ingresos de los ayuntamientos en miles de millones",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "ingreso_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones Locales"
+  }
+ },
+ {
+  "pregunta": "quién gasta más, el Gobierno o las autonomías",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "subsector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo de los ayuntamientos en 2020",
+  "idioma": "es",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones Locales"
+  }
+ },
+ {
+  "pregunta": "Quant gasten les comunitats autònomes?",
+  "idioma": "ca",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades Autónomas"
+  }
+ },
+ {
+  "pregunta": "Cal é o déficit dos concellos?",
+  "idioma": "gl",
+  "tabla": "cuentas_subsectores",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones Locales"
+  }
+ },
+ {
+  "pregunta": "Which level of government spends the most in Spain?",
+  "idioma": "en",
+  "tabla": "cuentas_subsectores",
+  "medida": "gasto_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "subsector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos niños nacen al año en España?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hijos tiene de media cada mujer en España?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "fecundidad",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más natalidad?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "tasa_natalidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas mueren al año en Galicia?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A qué edad tienen el primer hijo las mujeres en España?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "edad_primer_hijo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha caído la natalidad desde 2008?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la fecundidad en España desde 1975",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "fecundidad",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año nacieron más bebés en España?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo menos hijos por mujer?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "fecundidad",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "crecimiento vegetativo de Asturias",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "crecimiento_vegetativo",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincias pierden población porque mueren más de los que nacen?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "vegetativo_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo migratorio exterior por cada mil habitantes en Cataluña",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "saldo_exterior_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de bebés de madre extranjera en Madrid",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "pct_madre_extranjera",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "fecundidad de las mujeres extranjeras en España",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "fecundidad_extranjeras",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasa de mortalidad en Ourense 2021",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "tasa_mortalidad",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta población ha ganado España en el último año?",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "crecimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "población al empezar el año en Valencia provincia",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "poblacion_inicio",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "edad media de las madres al dar a luz en Navarra",
+  "idioma": "es",
+  "tabla": "demografia_anual",
+  "medida": "edad_maternidad",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants nadons neixen a Catalunya cada any?",
+  "idioma": "ca",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos fillos ten de media unha muller en Galicia?",
+  "idioma": "gl",
+  "tabla": "demografia_anual",
+  "medida": "fecundidad",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many babies are born in Spain each year?",
+  "idioma": "en",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat haur jaiotzen dira Euskadin urtero?",
+  "idioma": "eu",
+  "tabla": "demografia_anual",
+  "medida": "nacimientos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población española tiene más de 65 años?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_65",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la edad media de los españoles?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "edad_media",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad está más envejecida?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_65",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia es más joven?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "edad_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos abuelos mayores de 80 hay en Asturias",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "mayores_80",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de extranjeros en Baleares",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos extranjeros viven en Madrid?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la edad media de la población desde 2000?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "edad_media",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del número de mayores de 65 en España",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "mayores_65",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "índice de envejecimiento en Zamora",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "indice_envejecimiento",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasa de dependencia en España",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "dependencia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos niños menores de 16 años hay en Andalucía",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "menores_16",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hombres hay por cada cien mujeres en España?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "hombres_por_100_mujeres",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de población nacida fuera de España en Cataluña",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_nacidos_extranjero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "población total de Murcia en 2020",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "población de Teruel",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año había más jóvenes menores de 16 en proporción?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_menores_16",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más gente nacida en el extranjero?",
+  "idioma": "es",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_nacidos_extranjero",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de la població té més de 65 anys a Catalunya?",
+  "idioma": "ca",
+  "tabla": "demografia_envejecimiento",
+  "medida": "pct_65",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é a idade media en Galicia?",
+  "idioma": "gl",
+  "tabla": "demografia_envejecimiento",
+  "medida": "edad_media",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How old is the average Spaniard?",
+  "idioma": "en",
+  "tabla": "demografia_envejecimiento",
+  "medida": "edad_media",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat biztanle dago Gipuzkoan?",
+  "idioma": "eu",
+  "tabla": "demografia_envejecimiento",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares hay en España?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas viven de media en cada casa?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "tamano_medio",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de gente vive sola?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_unipersonales",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde viven más personas solas, por comunidades?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_unipersonales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "hogares de 4 o más personas en Andalucía",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_4_o_mas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de hogares con una sola persona en Madrid",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "unipersonales",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el número de hogares desde 2021?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del tamaño medio de los hogares",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "tamano_medio",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hogares de dos personas en Ourense",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_2",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hogares de tres personas en Cataluña",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_3",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene las casas más grandes (más gente por hogar)?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "tamano_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos personas por casa?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "tamano_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "hogares en Valencia en 2023",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas familias hay en Canarias?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el porcentaje de solteros viviendo solos en Asturias",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "pct_unipersonales",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares unipersonales más hay que hace cinco años?",
+  "idioma": "es",
+  "tabla": "demografia_hogares",
+  "medida": "unipersonales",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants llars hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas persoas viven de media en cada fogar en Galicia?",
+  "idioma": "gl",
+  "tabla": "demografia_hogares",
+  "medida": "tamano_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many people live alone in Spain?",
+  "idioma": "en",
+  "tabla": "demografia_hogares",
+  "medida": "unipersonales",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat etxe daude Bizkaian?",
+  "idioma": "eu",
+  "tabla": "demografia_hogares",
+  "medida": "hogares",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hombres y mujeres de 30 a 34 años hay en España?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "30-34"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas mujeres hay en España?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "pirámide de población de España",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos jóvenes de 20 a 24 años hay en Madrid",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "20-24"
+  }
+ },
+ {
+  "pregunta": "personas de 85 años o más en Galicia",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "85 y más"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población son hombres de 40 a 44?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "grupo": "40-44"
+  }
+ },
+ {
+  "pregunta": "nacidos en el extranjero entre 25 y 29 años en Barcelona",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "nacidos_extranjero",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "25-29"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos niños de 0 a 4 años había en España en 1990?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1990
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "0-4"
+  }
+ },
+ {
+  "pregunta": "evolución del número de adolescentes de 15 a 19 años",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "15-19"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el grupo de 65-69 años desde 2010?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "65-69"
+  }
+ },
+ {
+  "pregunta": "baby boomers de 60 a 64 años por comunidades",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "60-64"
+  }
+ },
+ {
+  "pregunta": "porcentaje de extranjeros entre los de 30 a 34 años",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "pct_nacidos_extranjero",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "30-34"
+  }
+ },
+ {
+  "pregunta": "cuántos hombres de 50 a 54 hay en Sevilla",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "grupo": "50-54"
+  }
+ },
+ {
+  "pregunta": "mujeres de entre 75 y 79 años en Asturias",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres",
+   "grupo": "75-79"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia hay más gente de 10 a 14 años?",
+  "idioma": "es",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "10-14"
+  }
+ },
+ {
+  "pregunta": "Quants joves de 15 a 19 anys hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "15-19"
+  }
+ },
+ {
+  "pregunta": "Cantas persoas de 80 a 84 anos hai en Ourense?",
+  "idioma": "gl",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "80-84"
+  }
+ },
+ {
+  "pregunta": "How many men aged 35-39 live in Spain?",
+  "idioma": "en",
+  "tabla": "demografia_piramide",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "grupo": "35-39"
+  }
+ }
+]

@@ -1,0 +1,2830 @@
+[
+ {
+  "pregunta": "cuantos crios hay en el cole de primaria",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "alumnos en la ESO",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ESO"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente está estudiando en la universidad en España?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Universidad y otros estudios superiores"
+  }
+ },
+ {
+  "pregunta": "cuantos niños van a infantil (guarderia y parvulario)",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Infantil"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los chavales de bachillerato va a un instituto público?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "pct_publica",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Bachillerato"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos alumnos de ESO están en la concertada?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "concertada",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ESO"
+  }
+ },
+ {
+  "pregunta": "de cada 100 estudiantes de FP de grado superior, ¿cuántos estudian en centros privados?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "pct_privada",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "FP de grado superior"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos universitarios había en el curso 2019-20?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Universidad y otros estudios superiores",
+   "curso": "2019-20"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el número de alumnos de infantil desde 2015? Hay menos niños, ¿no?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Infantil"
+  }
+ },
+ {
+  "pregunta": "evolución alumnado FP grado medio",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "FP de grado medio y básica"
+  }
+ },
+ {
+  "pregunta": "¿En qué etapa educativa hay más alumnos matriculados?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nivel",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué etapa tiene menos peso de la escuela pública?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "pct_publica",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nivel",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo más alumnos en primaria, el récord de la serie?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "porcentaje concertada primaria 2022",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "pct_concertada",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "Quants alumnes hi ha a batxillerat?",
+  "idioma": "ca",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Bachillerato"
+  }
+ },
+ {
+  "pregunta": "Cantos alumnos hai matriculados na universidade?",
+  "idioma": "gl",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Universidad y otros estudios superiores"
+  }
+ },
+ {
+  "pregunta": "How many students are enrolled in primary school in Spain?",
+  "idioma": "en",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos alumnos hay por cada mil habitantes en la ESO?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ESO"
+  }
+ },
+ {
+  "pregunta": "matriculados postobligatoria sin llegar a la uni (no superior) cuantos",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Postsecundaria no superior"
+  }
+ },
+ {
+  "pregunta": "¿Está bajando el porcentaje de alumnos que van a la pública en infantil?",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "pct_publica",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Infantil"
+  }
+ },
+ {
+  "pregunta": "quantos alumnos van a escola privada en bachillerato",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "privada",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Bachillerato"
+  }
+ },
+ {
+  "pregunta": "cuanto ha subido la gente que estudia FP superior entre 2018 y 2024",
+  "idioma": "es",
+  "tabla": "educacion_matriculados",
+  "medida": "alumnos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "FP de grado superior"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los chavales de 15 años no sabe leer bien según PISA?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "suspensos en mates informe PISA España",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Matemáticas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo estamos en ciencias comparados con Europa?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "ue"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Ciencias",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Les va peor en matemáticas a las chicas o a los chicos?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sexo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "materia": "Matemáticas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas chicas de 15 años tienen bajo nivel en lectura?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos chicos tienen bajo rendimiento en ciencias en PISA 2018?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Ciencias",
+   "sexo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el fracaso en matemáticas de los alumnos españoles desde el año 2000?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Matemáticas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué año fue peor el nivel de lectura de los escolares españoles?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Ha mejorado la lectura entre 2009 y 2022?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2009,
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "pisa media UE lectura 2022",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "ue"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué materia hay más alumnos de 15 años con malos resultados?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "materia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "Quin percentatge d'alumnes té mal nivell de matemàtiques a PISA?",
+  "idioma": "ca",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Matemáticas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "What share of Spanish 15-year-olds are low performers in science?",
+  "idioma": "en",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Ciencias",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "Que porcentaxe de rapaces de 15 anos le mal segundo PISA?",
+  "idioma": "gl",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿España está por encima o por debajo de la media europea en lectura?",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nivel",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "materia": "Lectura",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "cuantos adolescentes suspenden en pisa mates en 2012 y en 2022",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Matemáticas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "el nivel educativo de los jovenes españoles esta empeorando? pisa ciencias",
+  "idioma": "es",
+  "tabla": "educacion_pisa",
+  "medida": "pct_bajo_rendimiento",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "pais"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "materia": "Ciencias",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos votos sacó el PP en las generales de 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "porcentaje de voto vox andalucia generales 2023",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados sacó el PSOE en Madrid provincia en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "escanos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido ganó en Cataluña en las últimas elecciones al Congreso?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el voto del PSOE desde 2008?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido Vox entre 2019 y 2023 en voto?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo tuvo el PP su mejor resultado en generales?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto sacó Ciudadanos en 2015?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Ciudadanos"
+  }
+ },
+ {
+  "pregunta": "voto a la izquierda alternativa (Podemos, IU, Sumar) en Valencia provincia 2019",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "IU, Podemos y Sumar"
+  }
+ },
+ {
+  "pregunta": "En qué comunidad le va mejor al PP",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia sacó más porcentaje de voto Vox en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido ganó las municipales de 2023 en Sevilla provincia?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos concejales logró el PSOE en toda España en las municipales de 2019?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "escanos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "resultado de las europeas 2024 PP porcentaje",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "07",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos escaños sacó Junts / CiU en Barcelona provincia en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "escanos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Junts / CiU"
+  }
+ },
+ {
+  "pregunta": "porcentaje de escaños de ERC en el Congreso en 2019 (noviembre)",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct_escanos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "ERC"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos votos obtuvo el PNV en el País Vasco en el 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PNV"
+  }
+ },
+ {
+  "pregunta": "¿Quién gana más votos en Galicia, el BNG o el PSOE?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "Quants vots ha tret el PSC... vull dir el PSOE a Catalunya a les generals?",
+  "idioma": "ca",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "Cantos votos tivo o BNG en Galicia nas xerais de 2023?",
+  "idioma": "gl",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "BNG"
+  }
+ },
+ {
+  "pregunta": "EH Bildu Gipuzkoan zenbat boto lortu zituen 2023an?",
+  "idioma": "eu",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "EH Bildu (e izquierda abertzale)"
+  }
+ },
+ {
+  "pregunta": "How did Vox do in the 2023 Spanish general election?",
+  "idioma": "en",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "que pasó con UPyD en 2011, cuantos votos",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "votos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2011
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "UPyD"
+  }
+ },
+ {
+  "pregunta": "partidos nacionalistas y regionalistas, cuanto voto suman en españa",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "bloque": "Nacionalistas y regionalistas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto votan a la derecha en Madrid comunidad?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "bloque": "Derecha"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cayó el PP entre 2011 y 2015?",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2011,
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "porcentaje voto Teruel Existe 2023 Teruel",
+  "idioma": "es",
+  "tabla": "elecciones_familias",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02",
+   "familia": "Teruel Existe y España Vaciada"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente votó en Alcobendas en las generales de 2019 (noviembre)?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28006"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "participacion municipales 2023 en el municipio 28079",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Qué pueblo de España vota más a Vox? las municipales de 2023",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_vox",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "municipios donde más gana la izquierda en las generales de 2023",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_izquierda",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos municipios ganó el PP en las municipales de 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04",
+   "ganador_familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pueblos ha ganado el PSOE en las municipales de 2019?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04",
+   "ganador_familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más participación en las municipales de 2019?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "porcentaje del PSOE en el municipio 08019 en las municipales de 2015",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_psoe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la participación en las elecciones municipales de Sevilla ciudad (41091)?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "41091"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "voto del PP en el municipio 46250 desde 1995, cómo ha cambiado",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_pp",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vota la gente a los nacionalistas en el pueblo con código 20069?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_nacionalistas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "20069"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "pct izquierda 2008 vs 2023 en el municipio 50297",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_izquierda",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "50297"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "porcentaje de Podemos/Sumar/IU en municipales 2023 por municipios, los mayores",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_iu_podemos_sumar",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Dónde tuvo Vox más voto en las generales de 2019 noviembre?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_vox",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "02"
+  }
+ },
+ {
+  "pregunta": "¿En qué pueblos ganó Vox las municipales 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04",
+   "ganador_familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pueblos tiene Compromís ganados en 2019?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04",
+   "ganador_familia": "Compromís"
+  }
+ },
+ {
+  "pregunta": "Quin percentatge de participació va haver-hi a les municipals del 2023 al municipi 08019?",
+  "idioma": "ca",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "Zer partaidek irabazi dute udalerri gehien 2023ko udal hauteskundeetan?",
+  "idioma": "eu",
+  "tabla": "elecciones_municipios",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "which towns have the lowest turnout in the municipal elections",
+  "idioma": "en",
+  "tabla": "elecciones_municipios",
+  "medida": "participacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "derecha porcentaje en las municipales en el pueblo 28065 getafe",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_derecha",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28065"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "pueblos con voto al centro municipales 2011 (UPyD, CDS...)",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_centro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2011
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "el pp en un pueblo con codigo ine 15030 en las municipales cuanto saco",
+  "idioma": "es",
+  "tabla": "elecciones_municipios",
+  "medida": "pct_pp",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "15030"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "04"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente votó en Soria capital en las últimas generales?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién ganó en Bilbao en las elecciones del 23J?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "ganador_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "resultado vox en el pueblo de Alcobendas",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_vox",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene Getafe y qué porcentaje votó al PSOE?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_psoe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios tienen más participación en las generales de 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "participacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué pueblo de Andalucía votó más al PP?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_pp",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pueblos de Castilla y León con más voto a Vox",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_vox",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el municipio de Cataluña con más voto independentista (nacionalistas)?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_nacionalistas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué municipio de Valencia provincia hubo menos participación?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pueblos de Madrid ganó el PP?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "ganador_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ganador_familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Ha subido o bajado la participación en Murcia (municipio) respecto a la elección anterior?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "participacion_anterior",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de votantes posibles (censo) en Málaga capital",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "censo",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué pueblos de España tienen más voto de izquierdas?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_izquierda",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de Sumar y Podemos en Oviedo",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_iu_podemos_sumar",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde es más disputada la elección, con más partidos efectivos (NEP)?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "nep",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "derecha porcentaje en pamplona",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_derecha",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Pamplona/Iruña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin partit va guanyar a Palma a les generals del 2023?",
+  "idioma": "ca",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "ganador_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que partido gañou en Vigo nas últimas xerais?",
+  "idioma": "gl",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "ganador_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zaragozan zenbat jendek eman zuen botoa orain dela gutxi?",
+  "idioma": "eu",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "which municipality in Spain voted most for the PSOE in 2023?",
+  "idioma": "en",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_psoe",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios gana Teruel Existe?",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ganador_familia": "Teruel Existe y España Vaciada"
+  }
+ },
+ {
+  "pregunta": "voto a Vox en los pueblos de Murcia comunidad",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "pct_vox",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "habitantes de Granada ciudad",
+  "idioma": "es",
+  "tabla": "elecciones_municipios_congreso",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente fue a votar en las últimas generales?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "abstencion en las europeas de 2024",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Parlamento Europeo"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad se vota más?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia hay más abstención en las generales de 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos votos en blanco hubo en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "pct_blancos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "porcentaje de votos nulos municipales 2019 España",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "pct_nulos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Municipales"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la participación en las generales desde 1977?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo hubo más participación en unas generales? El récord",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se votó menos en las generales?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "participacion Cataluña generales 2019",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "votantes en la provincia de Zaragoza en 2023",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "votantes",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas tenían derecho a voto en España en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "censo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuán proporcional es nuestro sistema electoral? índice de Gallagher",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "gallagher",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "cuantos partidos efectivos hay en el Congreso (NEP) en 2023",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "nep_votos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Quién ganó en Galicia en las generales de 2019 (noviembre) y con cuánto?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "ganador_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿En cuántas provincias ganó el PP en 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "ganador_familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué bloque ganó más provincias en el 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "ganador_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "ganador_bloque",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "cuanto cayó la participación entre las generales de 2008 y 2023",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "participación municipales 2023 en Andalucía",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Municipales"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos escaños hay en juego en la provincia de Madrid?",
+  "idioma": "es",
+  "tabla": "elecciones_participacion",
+  "medida": "escanos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "Quina va ser la participació a les eleccions europees del 2019 a Catalunya?",
+  "idioma": "ca",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Parlamento Europeo"
+  }
+ },
+ {
+  "pregunta": "Zenbat jende joan zen botoa ematera Euskadin 2023an?",
+  "idioma": "eu",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "What was the turnout in the last Spanish general election?",
+  "idioma": "en",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "participacion Ourense xerais 2023",
+  "idioma": "gl",
+  "tabla": "elecciones_participacion",
+  "medida": "participacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos escaños tiene el PP ahora?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "siglas": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos votos hacen falta para sacar un diputado en el PSOE y en Vox?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos_por_escano",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "siglas",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido sacó más votos en las últimas generales?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "siglas",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido sale más perjudicado por la ley electoral, el que necesita más votos por escaño?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos_por_escano",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "siglas",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto sacó Podemos en 2015?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "IU, Podemos y Sumar"
+  }
+ },
+ {
+  "pregunta": "resultado nacional de Vox desde que entró",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "¿Por cuántos puntos ganó el PP al PSOE en 2011?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "ventaja",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2011
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo fue la victoria más ajustada en unas generales?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "ventaja",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "resultados europeas 2024 votos por partido",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "siglas",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Parlamento Europeo"
+  }
+ },
+ {
+  "pregunta": "Sumar o Podemos en las europeas, ¿cuántos eurodiputados sacó el PSOE en 2019?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Parlamento Europeo",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "porcentaje de escaños del PSOE en 2023",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "pct_escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados tenía la UCD en 1979?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1979
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "UCD"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha ido el PP en escaños desde 2000?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos votos perdió el PSOE entre 2019 y 2023?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto subió Ciudadanos de 2015 a 2019 (abril)?",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "Ciudadanos"
+  }
+ },
+ {
+  "pregunta": "¿Qué partidos pequeños sacaron escaños en 2023? Junts, ERC, CC...",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "siglas",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_nombre": "Congreso"
+  }
+ },
+ {
+  "pregunta": "bloque de derecha votos totales en 2023",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "bloque": "Derecha"
+  }
+ },
+ {
+  "pregunta": "Quants escons va treure ERC a les generals de 2019?",
+  "idioma": "ca",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "ERC"
+  }
+ },
+ {
+  "pregunta": "Cantos deputados sacou o BNG nas xerais de 2023?",
+  "idioma": "gl",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "BNG"
+  }
+ },
+ {
+  "pregunta": "How many seats did the PP win in 2023?",
+  "idioma": "en",
+  "tabla": "elecciones_partidos",
+  "medida": "escanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "numero de votos que costo cada diputado a vox en 2023",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos_por_escano",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "PNV Euskadi votos congreso desde 1977",
+  "idioma": "es",
+  "tabla": "elecciones_partidos",
+  "medida": "votos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_nombre": "Congreso",
+   "familia": "PNV"
+  }
+ }
+]

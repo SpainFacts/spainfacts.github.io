@@ -1,0 +1,2407 @@
+[
+ {
+  "pregunta": "¿Cuántos años de sueldo hacen falta para comprar un piso en España?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad es más difícil comprarse una casa con un sueldo normal?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del sueldo se va en pagar el alquiler en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "pct_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos años de salario necesita un madrileño para pagar un piso de 90 metros?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha empeorado desde 2008 la accesibilidad a la vivienda?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el esfuerzo para comprar casa en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje del salario se lleva el alquiler en toda España?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "pct_alquiler",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde es más barato comprar una vivienda en relación con lo que se cobra?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta un piso de 90 m2 en Canarias?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "precio_90m2",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el sueldo medio anual en el País Vasco?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "salario_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año fue más difícil acceder a una vivienda en España?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se necesita más porcentaje del sueldo para pagar un alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "pct_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "esfuerzo vivienda Valencia 2007 anios sueldo",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A cuánto está el metro cuadrado de vivienda en Galicia?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto hay que ahorrar en años de nómina para entrar a una casa en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants anys de sou calen per comprar un habitatge a Catalunya?",
+  "idioma": "ca",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos anos de salario fan falta para mercar un piso en Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many years of salary does it take to buy a flat in Spain?",
+  "idioma": "en",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat urte behar dira soldatarekin etxe bat erosteko Euskadin?",
+  "idioma": "eu",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "anios_salario",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el alquiler medio al mes en Aragón respecto a los ingresos?",
+  "idioma": "es",
+  "tabla": "vivienda_esfuerzo",
+  "medida": "pct_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios de la vivienda según el INE?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la vivienda de segunda mano en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "Segunda mano"
+  }
+ },
+ {
+  "pregunta": "¿Y la vivienda nueva, cuánto se ha encarecido este año?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_nominal",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "Nueva"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad han subido más los precios de las casas en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el índice de precios de vivienda en Madrid desde 2007?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2007,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cayeron los precios de la vivienda tras la crisis de 2008 en España?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2013
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo estuvo la vivienda más cara en términos reales?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "precios vivienda Canarias indice INE tercer trimestre 2023",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023T3"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la vivienda en Baleares en los últimos cinco años?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿La vivienda nueva sube más rápido que la usada en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "Nueva"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene la vivienda que más ha subido desde 2015 en términos reales?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el trimestre de mayor caída de precios de las casas?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_nominal",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "Quant han pujat els preus dels habitatges a Catalunya?",
+  "idioma": "ca",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "Canto subiu o prezo da vivenda en Galicia o último ano?",
+  "idioma": "gl",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "How fast are house prices rising in Spain compared with a year ago?",
+  "idioma": "en",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_nominal",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "Zenbat igo da etxebizitzaren prezioa Euskadin?",
+  "idioma": "eu",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "indice precios vivienda segunda mano Andalucia 2022",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "Segunda mano"
+  }
+ },
+ {
+  "pregunta": "¿Dónde bajan los precios de la vivienda ahora?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vale el índice de precios de la vivienda de Extremadura en comparación con 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "General"
+  }
+ },
+ {
+  "pregunta": "¿Está la vivienda nueva en España por encima de los niveles de 2007?",
+  "idioma": "es",
+  "tabla": "vivienda_ipv",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "Nueva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios de los alquileres según el índice del INE?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el índice de alquiler en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto subió el alquiler en 2023 en términos reales?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad han subido más las rentas de alquiler en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han aumentado los alquileres desde 2015 según el IPVA?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se ha encarecido menos el alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "indice precios alquiler Madrid 2019",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año con mayor subida de los alquileres?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Han bajado alguna vez los alquileres en España?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han cambiado los alquileres en Canarias, descontando la inflación?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se han encarecido los alquileres en la Comunidad Valenciana en 2024?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tasa de subida de alquiler hubo en Andalucía el último año disponible?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant han pujat els lloguers a Catalunya segons l'índex de l'INE?",
+  "idioma": "ca",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto subiron os alugueres en Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much have rents risen in Spain according to the INE rental price index?",
+  "idioma": "en",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat igo dira alokairuak Kantabrian?",
+  "idioma": "eu",
+  "tabla": "vivienda_ipva",
+  "medida": "variacion_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el precio del alquiler de Aragón desde 2011 sin inflación?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2011,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "indice alquiler asturias evolucion 2011 2024",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2011,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde está el alquiler más inflado según el índice base 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos puntos ha subido el índice de rentas de alquiler de Extremadura respecto al 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_ipva",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas se venden al año en España?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas se compraron en Madrid en 2023?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se compran más casas por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hipotecas se firmaron en Andalucía en 2022?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el importe medio de las hipotecas en Baleares en euros reales?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "importe_medio_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de compras de piso se hace con hipoteca?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "pct_hipoteca",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas compraventas fueron de vivienda nueva en 2019?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas de segunda mano se vendieron en Cataluña en 2024?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas_segunda_mano",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se vendieron más viviendas en España?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cayó la compraventa de pisos después del pinchazo de la burbuja?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2013
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de hipotecas en Valencia?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las ventas en Canarias son de vivienda protegida?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "pct_protegida",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene el mayor porcentaje de vivienda nueva en las ventas?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "pct_nueva",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero se movió en hipotecas en España el año pasado?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "importe_hipotecas_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes compravendes d'habitatges hi ha hagut a Barcelona?",
+  "idioma": "ca",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas hipotecas se asinaron en Galicia en 2023?",
+  "idioma": "gl",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many homes were sold in Spain in 2021?",
+  "idioma": "en",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat etxe saldu dira Bizkaian 2022an?",
+  "idioma": "eu",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "compraventas vivienda por provincia 2024 ranking",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos protegidos se vendieron en 2020 en Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_anual",
+  "medida": "compraventas_protegida",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas se vendieron en España el último mes?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas se vendieron en Madrid en marzo de 2024?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-03"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas compraventas se han hecho en los últimos doce meses en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_12m",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se ha vendido más vivienda por cada mil habitantes en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_12m_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hipotecas se firmaron en julio de 2026?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha ido mes a mes la venta de pisos desde 2020?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más compraventas de la historia?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cayó la venta de casas en abril de 2020 por el confinamiento?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hipotecas por cada mil habitantes se han firmado en el último año en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "hipotecas_12m_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos nuevos se vendieron el mes pasado?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas de segunda mano se vendieron en Valencia en enero de 2025?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_segunda_mano",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-01"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el importe medio de una hipoteca ahora, en euros de hoy?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "importe_medio_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero total en hipotecas se concedió en España en diciembre de 2023 en euros reales?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "importe_hipotecas_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023-12"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes hipoteques es van signar a Catalunya el darrer mes?",
+  "idioma": "ca",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas se venderon en Galicia o mes pasado?",
+  "idioma": "gl",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many mortgages were signed in Spain last month?",
+  "idioma": "en",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "hipotecas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "compraventas vivienda protegida mes ultimo",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_protegida",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "compraventa viviendas sevilla ultimo mes",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está subiendo o bajando la compra de viviendas en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas_12m",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Etxebizitza salmentak Bizkaian azken hilabetean?",
+  "idioma": "eu",
+  "tabla": "vivienda_mercado_mensual",
+  "medida": "compraventas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas nuevas se construyen al año en España?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos se empezaron a construir en 2007, en plena burbuja?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se construye más vivienda por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas libres se terminaron en Madrid en 2022?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha caído la construcción de viviendas desde 2006?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2006,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se construyeron más viviendas en España?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la obra nueva en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos se empiezan a construir en Cataluña al año por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad levanta menos casas nuevas?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "construccion viviendas nuevas Valencia 2015",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas se están empezando a hacer en Málaga?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas se terminaron en Toledo en 2008?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Toledo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se construye ahora menos que antes de la crisis? Terminadas por mil habitantes frente a 2007.",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes cases noves s'han acabat a Catalunya?",
+  "idioma": "ca",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas se comezaron a construír en Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many new homes were completed in Spain last year?",
+  "idioma": "en",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat etxe berri bukatu dira Euskadin?",
+  "idioma": "eu",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos nuevos se empezaron en la provincia de Alicante en 2024?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "viviendas iniciadas por comunidad 2025",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "iniciadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se construye lo suficiente en Madrid para el número de habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_obra_nueva",
+  "medida": "terminadas_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el metro cuadrado de vivienda en Marbella?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene las casas más caras de España?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto vale un piso de 90 metros en Getafe?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "precio_90m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio grande tiene la vivienda más barata?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la vivienda en Palma desde 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio del metro cuadrado en Vigo?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio vivienda Vitoria euros metro cuadrado",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vitoria-Gasteiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A cuánto estaba el metro cuadrado en Bilbao en 2007?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas tasaciones se hicieron en Málaga en 2023?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "tasaciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad ha visto subir más los precios de vivienda el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "variacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo estuvo más cara la vivienda en Madrid capital?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta comprar en Barcelona por metro cuadrado?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta un piso de 90 m2 en Murcia capital?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "precio_90m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant val el metre quadrat a Palma?",
+  "idioma": "ca",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto custa o metro cadrado en Coruña?",
+  "idioma": "gl",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Coruña, A"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does a square metre of housing cost in Alicante city?",
+  "idioma": "en",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alacant/Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat balio du metro karratuak Bilbon?",
+  "idioma": "eu",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué precio tiene el piso medio en Alcalá de Henares?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "precio_90m2_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcalá de Henares"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio m2 Santander 2019",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Santander"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el precio de la vivienda en Córdoba capital y cuánto ha variado en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_municipios",
+  "medida": "variacion_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

@@ -22,12 +22,13 @@
         { href: "/medios", clave: "menu.medios" },
         { href: "/transparencia", clave: "menu.transparencia" },
         { href: "/varios", clave: "menu.varios" },
+        { href: "/chat", clave: "menu.chat" },
         { href: "/fuentes", clave: "menu.fuentes" },
     ];
     $: lang = idiomaDeRuta($page.url.pathname);
     $: navLinks = enlacesBase.map((l) => ({ ...l, base: l.href, href: enlace(l.href, lang), label: t(l.clave, lang) }));
-    $: navLinksMain = navLinks.filter((l) => !["/medios", "/transparencia", "/fuentes"].includes(l.base));
-    $: navLinksMore = navLinks.filter((l) => ["/medios", "/transparencia", "/fuentes"].includes(l.base));
+    $: navLinksMain = navLinks.filter((l) => !["/medios", "/transparencia", "/chat", "/fuentes"].includes(l.base));
+    $: navLinksMore = navLinks.filter((l) => ["/medios", "/transparencia", "/chat", "/fuentes"].includes(l.base));
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;

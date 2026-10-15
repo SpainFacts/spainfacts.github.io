@@ -15,6 +15,8 @@
     import { crearIndice } from "../chat/herramientas.js";
     import { responder, MODELOS_ANTHROPIC, PROVEEDORES_API, listarModelosWebLLM, cargarWebLLM, crearDecisorOllama, crearDecisorWebLLM } from "../chat/agente.js";
     import { responderPorDecisiones } from "../chat/decision.js";
+    import { crearClasificador } from "../chat/clasificador.js";
+    import { DECISOR_PROPIO_DISPONIBLE } from "../chat/locales.js";
     import { markdownSeguro } from "../chat/markdown.js";
     import ChatGrafico from "./ChatGrafico.svelte";
 
@@ -24,6 +26,9 @@
     const PROVEEDORES = ["navegador", "local", "anthropic", "otro"];
     // Modelo de decisión del navegador (transformers.js); el resto de la lista son de WebLLM
     const DECISOR_NAVEGADOR = "decisor:gemma-4-e2b";
+    // Decisor propio (decider-0.8b + LoRA, transformers.js): solo si su modelo ya está en Hugging Face
+    const DECISOR_PROPIO = "decisor:propio";
+    const esDecisorTransformers = (m) => m === DECISOR_NAVEGADOR || (m === DECISOR_PROPIO && DECISOR_PROPIO_DISPONIBLE);
     // Modo decisión con modelos de WebLLM (WebGPU): el valor es "decisor-webllm:<id del modelo>"
     const DECISOR_WEBLLM = "decisor-webllm:";
     const esDecisorWebLLM = (m) => String(m ?? "").startsWith(DECISOR_WEBLLM);
@@ -31,8 +36,9 @@
     const PREFERIDOS_DECISION = [/^Ministral-3-3B/i, /^Qwen3\.5-4B/i, /^Qwen3-4B/i];
     // Predeterminado: Ministral 3 3B en modo decisión, el que mejor equilibra acierto, tamaño y
     // velocidad en las pruebas (2026-10-04: 144/210 frente a 139 de Gemma 4 E2B, 2,8 GB). Si esta
-    // versión de WebLLM no lo tiene, se vuelve a Gemma 4 E2B (transformers.js)
-    const DECISOR_PREDETERMINADO = DECISOR_WEBLLM + "Ministral-3-3B-Instruct-2512-BF16-q4f16_1-MLC";
+    // versión de WebLLM no lo tiene, se vuelve a Gemma 4 E2B (transformers.js).
+    // Con el decisor propio ya publicado, él (el mejor medido y el más ligero, ~0,95 GB)
+    const DECISOR_PREDETERMINADO = DECISOR_PROPIO_DISPONIBLE ? DECISOR_PROPIO : DECISOR_WEBLLM + "Ministral-3-3B-Instruct-2512-BF16-q4f16_1-MLC";
 
     let config = {
         proveedor: "navegador",
@@ -90,7 +96,14 @@
                 const r = await fetch("/chat/catalogo.json");
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const catalogo = await r.json();
-                ctx = { catalogo, indice: crearIndice(catalogo), consultar: (sql) => query(sql) };
+                // Clasificador de tabla (tools/chat/entrenamiento): si falla, el chat sigue sin él
+                let clasificador = null;
+                try {
+                    if (catalogo.clasificador) clasificador = crearClasificador(catalogo.clasificador);
+                } catch (e) {
+                    console.warn("Clasificador de tabla no disponible:", e);
+                }
+                ctx = { catalogo, indice: crearIndice(catalogo), consultar: (sql) => query(sql), clasificador };
             } catch (e) {
                 errorCatalogo = String(e?.message ?? e);
             }
@@ -100,7 +113,7 @@
                 } catch {}
             }
             const idWebLLM = esDecisorWebLLM(config.navegador.modelo) ? config.navegador.modelo.slice(DECISOR_WEBLLM.length) : config.navegador.modelo;
-            if (config.navegador.modelo !== DECISOR_NAVEGADOR && !modelosWebLLM.some((m) => m.id === idWebLLM)) {
+            if (!esDecisorTransformers(config.navegador.modelo) && !modelosWebLLM.some((m) => m.id === idWebLLM)) {
                 config.navegador.modelo = DECISOR_NAVEGADOR;
             }
             // Las opciones de WebLLM llegan después de pintar el desplegable: se vuelve a poner el
@@ -121,7 +134,7 @@
     });
 
     const enModoDecision = (proveedor) =>
-        (proveedor === "navegador" && (config.navegador.modelo === DECISOR_NAVEGADOR || esDecisorWebLLM(config.navegador.modelo))) ||
+        (proveedor === "navegador" && (esDecisorTransformers(config.navegador.modelo) || esDecisorWebLLM(config.navegador.modelo))) ||
         (proveedor === "local" && !config.local.agente);
 
     /** Decisor del proveedor actual (lo descarga la primera vez) */
@@ -133,7 +146,7 @@
                 decisores.set(clave, await crearDecisorWebLLM(clave.slice(DECISOR_WEBLLM.length), (p, texto) => (progresoModelo = { p, texto })));
             else {
                 const { crearDecisor } = await import("../chat/locales.js");
-                decisores.set(clave, await crearDecisor({ device: "webgpu", dtype: "q4f16", alProgreso: (p, texto) => (progresoModelo = { p, texto }) }));
+                decisores.set(clave, await crearDecisor({ propio: clave === DECISOR_PROPIO, device: "webgpu", alProgreso: (p, texto) => (progresoModelo = { p, texto }) }));
             }
         }
         return decisores.get(clave);
@@ -158,7 +171,7 @@
     async function descargarModelo() {
         progresoModelo = { p: 0, texto: "" };
         try {
-            if (config.navegador.modelo === DECISOR_NAVEGADOR || esDecisorWebLLM(config.navegador.modelo)) {
+            if (esDecisorTransformers(config.navegador.modelo) || esDecisorWebLLM(config.navegador.modelo)) {
                 await obtenerEmbebedor();
                 await obtenerDecisor("navegador");
             } else await cargarWebLLM(config.navegador.modelo, (p, texto) => (progresoModelo = { p, texto }));
@@ -212,7 +225,7 @@
                 const r = await responderPorDecisiones({
                     pregunta: texto,
                     // Si duda entre tablas pregunta cuál (salvo que ya se haya elegido)
-                    ctx: { ...ctx, ...(e ? { embeber: e } : {}), aclarar: !opciones.tablaForzada && !opciones.sinAclarar, tablaForzada: opciones.tablaForzada },
+                    ctx: { ...ctx, ...(e ? { embeber: e } : {}), lang, aclarar: !opciones.tablaForzada && !opciones.sinAclarar, tablaForzada: opciones.tablaForzada },
                     decidir: await obtenerDecisor(proveedor),
                     alPaso: (p) => {
                         respuesta.pasos = [...respuesta.pasos, p];
@@ -307,7 +320,7 @@
         </div>
 
         <div class="mt-3 text-sm space-y-2">
-            <p class="text-xs text-gray-600 dark:text-gray-400">{t(`chat.p.${config.proveedor}.desc`, lang)}</p>
+            <p class="text-xs text-gray-600 dark:text-gray-400">{t(`chat.p.${config.proveedor}.desc${config.proveedor === "navegador" && config.navegador.modelo === DECISOR_PROPIO ? "Propio" : ""}`, lang)}</p>
             {#if config.proveedor === "navegador"}
                 {#if !hayWebGPU}
                     <p class="text-xs text-amber-700 dark:text-amber-300">{t("chat.sinWebgpu", lang)}</p>
@@ -315,6 +328,7 @@
                     <div class="flex flex-wrap items-center gap-2">
                         <label class="flex items-center gap-2">{t("chat.modelo", lang)}
                             <select bind:value={config.navegador.modelo} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm max-w-[16rem]">
+                                {#if DECISOR_PROPIO_DISPONIBLE}<option value={DECISOR_PROPIO}>{t("chat.decisorPropio", lang)} ({t("chat.recomendado", lang)})</option>{/if}
                                 <option value={DECISOR_NAVEGADOR}>{t("chat.decisorRecomendado", lang)}</option>
                                 {#each modelosWebLLM.filter((m) => PREFERIDOS_DECISION.some((r) => r.test(m.id))) as m}
                                     <option value={DECISOR_WEBLLM + m.id}>{m.id} · {t("chat.modoDecision", lang)}{DECISOR_WEBLLM + m.id === DECISOR_PREDETERMINADO ? ` (${t("chat.recomendado", lang)})` : ""}{m.vram ? ` (~${(m.vram / 1024).toFixed(1)} GB)` : ""}</option>
@@ -345,7 +359,7 @@
                     <label class="flex flex-col text-xs">{t("chat.servicio", lang)}
                         <select bind:value={config.otro.servicio} on:change={() => (config.otro.url = PROVEEDORES_API.find((x) => x.id === config.otro.servicio)?.url ?? config.otro.url)}
                             class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm">
-                            {#each PROVEEDORES_API as s}<option value={s.id}>{s.nombre}</option>{/each}
+                            {#each PROVEEDORES_API as s}<option value={s.id}>{s.id === "propio" ? t("chat.servicioPropio", lang) : s.nombre}</option>{/each}
                         </select>
                     </label>
                     <label class="flex flex-col text-xs">{t("chat.url", lang)}<input bind:value={config.otro.url} class="rounded border border-gray-300 dark:border-gray-600 bg-transparent px-2 py-1 text-sm" /></label>

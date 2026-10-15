@@ -1,0 +1,14 @@
+# Pesos y artefactos regenerables (no van al repo; ver LEEME.md)
+modelos/
+runs/
+__pycache__/
+datos/trazas.jsonl
+datos/vectores-*.json
+datos/catalogo.json
+datos/catalogo.log
+datos/clasificador.json
+*.safetensors
+*.onnx
+*.onnx_data
+*.bin
+*.pt

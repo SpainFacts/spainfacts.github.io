@@ -1,0 +1,14 @@
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'C:\Users\jota\Documents\GitHub\spainfacts.github.io\build\chat\catalogo.json'
+    at Object.readFileSync (node:fs:440:20)
+    at file:///C:/Users/jota/Documents/GitHub/spainfacts.github.io/.claude/worktrees/distracted-dirac-68763f/tools/chat/entrenamiento/evaluar-decisor.mjs:31:32 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\jota\\Documents\\GitHub\\spainfacts.github.io\\build\\chat\\catalogo.json'
+}
+
+Node.js v22.23.2

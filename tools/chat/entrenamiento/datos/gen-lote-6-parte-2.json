@@ -1,0 +1,2693 @@
+[
+ {
+  "pregunta": "¿Qué comunidad tiene la tasa de paro más alta?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay menos paro, en el País Vasco o en Andalucía?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "paro EPA Extremadura",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más paro, según la encuesta de población activa?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "tasa de paro de Jaén",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Jaén"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "¿Qué tasa de paro había en Canarias en el segundo trimestre de 2019?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2019
+   ],
+   "trimestre": 2
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos jóvenes están sin curro en Andalucía, en porcentaje?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_menor25",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más paro juvenil?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_menor25",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "paro de extranjeros en Cataluña",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad los inmigrantes tienen más paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_extranjeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Qué paro tienen las mujeres en Murcia?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_mujeres",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la gente en edad de trabajar tiene empleo en Madrid?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_empleo",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se trabaja más, en Baleares o en Galicia? (tasa de empleo)",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_empleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "tasa de actividad por comunidades",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_actividad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Qué proporción de hogares tienen a todos sus miembros en paro en Andalucía?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "pct_hogares_todos_parados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más hogares en los que no trabaja nadie?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "pct_hogares_todos_parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Ha subido o bajado el paro en Cádiz respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_dif_anual",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincias han mejorado más su paro en un año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro_dif_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "paro medio de los últimos 4 trimestres en Canarias",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "media_4t_tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el paro en Castilla-La Mancha desde 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2013,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el paro en Andalucía desde 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue la peor tasa de paro de Ceuta?",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "paro Cantabria 2024",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia es más difícil encontrar trabajo? Hablo de paro entre jóvenes",
+  "idioma": "es",
+  "tabla": "mercado_paro_territorios",
+  "medida": "media_4t_tasa_paro_menor25",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "Quina és la taxa d'atur a les Illes Balears?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "Cal é a comunidade con máis desemprego?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "Unemployment rate in Andalusia compared with Madrid",
+  "idioma": "en",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ccaa"
+  }
+ },
+ {
+  "pregunta": "Zein probintziatan dago langabezia gehien?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_territorios",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "provincia"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la tasa de paro en España?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "tablas_validas": [
+   "mercado_paro_ue"
+  ],
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente está en paro según la EPA?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro EPA segundo trimestre 2023",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2023
+   ],
+   "trimestre": 2
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de parados en el cuarto trimestre de 2012",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2012
+   ],
+   "trimestre": 4
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población en edad de trabajar tiene empleo?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_empleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente quiere trabajar en España en proporción? (actividad)",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_actividad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro de los jóvenes ahora",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "tablas_validas": [
+   "mercado_paro_grupos"
+  ],
+  "medida": "tasa_paro_menor25",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro de españoles",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "tablas_validas": [
+   "mercado_paro_grupos"
+  ],
+  "medida": "tasa_paro_espanoles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto paro hay entre los extranjeros?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "tablas_validas": [
+   "mercado_paro_grupos"
+  ],
+  "medida": "tasa_paro_extranjeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de parados lleva más de un año buscando empleo?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "pct_parados_larga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro de larga duración",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro_larga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En cuántas casas no trabaja nadie?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "pct_hogares_todos_parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos contratos temporales hay? Dame el porcentaje de temporales entre los asalariados",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_temporalidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "temporalidad en 2019 comparada con ahora",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_temporalidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asalariados hay en España?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja a media jornada?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "ocupados_parcial",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "trabajan a tiempo parcial porque no encuentran jornada completa, ¿cuántos?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parcial_involuntario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de los que tienen jornada parcial la tienen a la fuerza?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "pct_parcial_involuntario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo más paro en España en toda la serie de la EPA?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el mínimo de paro de la serie?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del paro desde la crisis de 2008",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el paro respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro_dif_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados menos hay ahora que en 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro en el tercer trimestre de 2020, el de la pandemia",
+  "idioma": "es",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2020
+   ],
+   "trimestre": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el nombre d'aturats a Espanya segons l'EPA?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto desemprego hai en España agora?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_trimestral",
+  "tablas_validas": [
+   "mercado_paro_ue"
+  ],
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the temporary employment rate in Spain?",
+  "idioma": "en",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "tasa_temporalidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat pertsona dago langabezian Espainian?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_trimestral",
+  "medida": "parados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Estamos peor que Alemania en paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país tiene más paro de Europa entre los grandes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y cuál tiene menos paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro en España frente a la media europea",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasa de paro Francia",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro en Italia en 2015",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Paro de Portugal ahora comparado con el nuestro",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene más paro juvenil?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro juvenil en Alemania",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto paro juvenil tiene España comparada con Europa?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro de los menores de 25 en la UE",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo España el mayor paro de su historia europea?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del paro en España desde 1990 comparado con Europa",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1990,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo evolucionó el paro en Italia tras la crisis del euro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el paro en España desde 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "tablas_validas": [
+   "mercado_paro_trimestral"
+  ],
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro Alemania marzo 2010",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2010
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasa de desempleo Francia vs España en 2022",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿España sigue siendo el país con más paro de Europa?",
+  "idioma": "es",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Unemployment rate in Germany versus Spain",
+  "idioma": "en",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Youth unemployment in the EU, which country is worst?",
+  "idioma": "en",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin país d'Europa té menys atur?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o paro xuvenil en Portugal?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_ue",
+  "medida": "tasa_paro_menor25",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué pueblo se matriculan más coches de empresa?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches de renting están dados de alta en Alcobendas?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Por qué hay tantos coches de empresa matriculados en Alcobendas?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "cuota_flota_espana_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las flotas de España se matricula en Majadahonda?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "cuota_flota_espana_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Majadahonda"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio acumula más flotas respecto a su número de habitantes?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota_por_habitante",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches de empresa por habitante en Venturada",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota_por_habitante",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Venturada"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se paga menos impuesto de circulación para un turismo?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ivtm_turismo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el impuesto de circulación de un coche en Alcobendas?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ivtm_turismo",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pagaría de impuesto de circulación en la capital en vez de en Boadilla del Monte?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ivtm_turismo_capital",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Boadilla del Monte"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se ahorra una empresa por cada coche si lo matricula en Moralzarzal?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ahorro_por_coche",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Moralzarzal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde les sale más barato a las empresas matricular sus coches?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ahorro_por_coche",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ahorro total estimado de matricular flotas en Alcobendas",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ahorro_estimado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento pierde más recaudación porque las empresas matriculan fuera?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "ahorro_estimado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches de particulares matriculados en Majadahonda",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "particulares",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Majadahonda"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la flota de Alcobendas desde 2015?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos vehículos de flota había en Majadahonda en 2018 y cuántos ahora?",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Majadahonda"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "flota matriculada en Madrid capital 2023",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene más coches de renting matriculados? Ranking",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Habitantes de Alcobendas junto a coches de empresa",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vehículos de empresa matriculados en Barcelona",
+  "idioma": "es",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants cotxes d'empresa hi ha matriculats a Barcelona?",
+  "idioma": "ca",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Onde se matriculan máis coches de empresa en Galicia?",
+  "idioma": "gl",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which town has the most company cars registered?",
+  "idioma": "en",
+  "tabla": "movilidad_flotas_municipios",
+  "medida": "flota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué marca de coches vende más?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Toyota se han vendido este año?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TOYOTA"
+  }
+ },
+ {
+  "pregunta": "matriculaciones de Tesla en España",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos BYD se matricularon el mes pasado?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "BYD"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo empresarial vende más coches en España, Volkswagen o Stellantis?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "grupo_empresarial",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "ventas del grupo Renault (Dacia incluida) en 2024",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "grupo_empresarial": "RENAULT"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca de coches eléctricos se vende más?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "marcas que más venden en híbridos enchufables",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "phev"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Cupra se vendieron en 2023?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "CUPRA"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca vende más a particulares?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "particular"
+  }
+ },
+ {
+  "pregunta": "¿Qué marcas se llevan el renting?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "renting"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca de furgonetas vende más?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca de camiones se matricula más?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "camion"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca de motos vende más en España?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos autobuses Iveco se han matriculado?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "autobus",
+   "marca": "IVECO"
+  }
+ },
+ {
+  "pregunta": "evolución de las ventas de Seat desde 2015",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "SEAT"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han crecido las ventas de MG desde 2022?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2022,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "MG"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de Opel en ventas?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "OPEL"
+  }
+ },
+ {
+  "pregunta": "Volkswagen matriculaciones marzo 2024",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "VOLKSWAGEN"
+  }
+ },
+ {
+  "pregunta": "marcas chinas de coches en España ¿cuántos BYD y MG se venden?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Honda motos vendidas 2022",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "motocicleta",
+   "marca": "HONDA"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca ha vendido más diésel?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca vende más coches a alquiladoras (rent a car)?",
+  "idioma": "es",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "alquiler"
+  }
+ },
+ {
+  "pregunta": "Quina marca de cotxes ven més a Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Que marca de coches se vende máis en España?",
+  "idioma": "gl",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Best selling car brands in Spain this year",
+  "idioma": "en",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Zenbat Tesla saldu dira Espainian?",
+  "idioma": "eu",
+  "tabla": "movilidad_marcas_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches nuevos se han vendido este año?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches eléctricos se matricularon el mes pasado?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "ventas de coches eléctricos en 2024",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos híbridos enchufables se vendieron en 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "phev"
+  }
+ },
+ {
+  "pregunta": "coches híbridos normales (no enchufables) vendidos",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "hev"
+  }
+ },
+ {
+  "pregunta": "¿Aún se venden coches diésel?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de gasolina se matricularon en 2019?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "gasolina"
+  }
+ },
+ {
+  "pregunta": "coches de gas (GLP/GNC) matriculados",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "gas"
+  }
+ },
+ {
+  "pregunta": "¿Qué tipo de motor se compra más?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "energia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la venta de coches eléctricos desde 2015?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han caído las ventas de diésel desde 2015?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de ventas de coches de la historia reciente?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Y el peor mes de ventas de coches? Me suena que fue en pandemia",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "matriculaciones de coches abril 2020",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 4
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches se compran los particulares?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "particular"
+  }
+ },
+ {
+  "pregunta": "coches matriculados por empresas",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "empresa"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de renting salen cada año?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "renting"
+  }
+ },
+ {
+  "pregunta": "coches comprados por alquiladoras en verano",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "alquiler"
+  }
+ },
+ {
+  "pregunta": "taxis y VTC nuevos matriculados",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "servicio_publico"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas furgonetas nuevas se venden al año?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas motos se matriculan cada mes?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ },
+ {
+  "pregunta": "camiones nuevos vendidos en 2023",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "camion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto contaminan de media los coches nuevos que se venden?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "co2_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "emisiones medias de CO2 de los coches nuevos en 2015 y ahora",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "co2_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Quants cotxes elèctrics es van matricular l'any passat?",
+  "idioma": "ca",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "Cantos coches eléctricos se venderon este ano?",
+  "idioma": "gl",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "How many new cars were sold in Spain last month?",
+  "idioma": "en",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Zenbat auto elektriko matrikulatu dira 2025ean?",
+  "idioma": "eu",
+  "tabla": "movilidad_matriculaciones_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ }
+]

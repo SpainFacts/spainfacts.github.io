@@ -1,0 +1,2458 @@
+[
+ {
+  "pregunta": "¿Cuánto se gasta el Gobierno en anuncios y campañas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado en publicidad institucional por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "institucional_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en campañas de publicidad del Gobierno 2018",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la publicidad del Estado desde 2006?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2006,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año gastó más el Gobierno en publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas campañas institucionales lanzó el Gobierno en 2023?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "campanas_institucionales",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la publicidad comercial del Estado entre 2012 y 2024?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "comercial_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaba Rajoy en anuncios de la Administración?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Ha gastado más en publicidad un gobierno del PP o del PSOE?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del presupuesto de publicidad planificado llegó a ejecutarse en 2020?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "ejecucion_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "presupuesto planificado en publicidad del Estado 2022",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "planificado_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero en euros de hoy gastó el Estado en publicidad institucional en 2010?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "institucional_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta en publicidad de empresas y negocios la Administración central, la comercial?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "comercial_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto institucional Zapatero 2009",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "institucional_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2009
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "¿Gastó más Sánchez en 2020 por la campaña de la pandemia que en 2019?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "comercial nominal publicidad AGE 2015",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "comercial_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy escribiendo un artículo sobre propaganda: ¿cuánto se gastó el Estado en publicidad total en 2024?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants diners gasta l'Estat en publicitat institucional?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "institucional_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta o Estado en publicidade institucional por habitante?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "institucional_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does the Spanish central government spend on advertising each year?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Estatuak publizitatean urtean?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "total_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de ejecución del presupuesto de publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_anual",
+  "medida": "ejecucion_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué medios se gasta el Gobierno su publicidad, en tele, radio o internet?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero va a la televisión desde las campañas del Estado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Televisión"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la publicidad institucional va a los medios digitales?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Digital"
+  }
+ },
+ {
+  "pregunta": "publicidad del estado en prensa y revistas 2012",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Prensa y revistas"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el dinero de la publicidad pública que se lleva internet?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Digital"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha caído la publicidad del Estado en periódicos de papel desde 2008?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Prensa y revistas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en anuncios en la radio con dinero público?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Radio"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Gobierno en publicidad exterior, en vallas y marquesinas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Exterior"
+  }
+ },
+ {
+  "pregunta": "gasto de publicidad institucional y comercial por tipo de medio",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "ambito": "institucional_comercial"
+  }
+ },
+ {
+  "pregunta": "importe nominal radio publicidad institucional del Estado 2015",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Radio",
+   "ambito": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Qué soporte se lleva la mayor parte del dinero de las campañas públicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto de la publicidad pública por habitante va a la tele?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Televisión"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más gasto en publicidad pública en televisión?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "medio_nombre": "Televisión"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en marketing y relaciones públicas con dinero del Estado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Relaciones públicas"
+  }
+ },
+ {
+  "pregunta": "dinero publico en publicidad en internet 2024",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Digital"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la publicidad del Estado fue a la tele en 2007?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Televisión"
+  }
+ },
+ {
+  "pregunta": "¿A quin mitjà va més publicitat de l'Estat?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto diñeiro vai á radio da publicidade do Estado?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Radio"
+  }
+ },
+ {
+  "pregunta": "Which media type gets the most government advertising money?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer komunikabidek jasotzen du Estatuaren publizitate gehien?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el cine publicitario del Estado en euros reales, no nominales, en 2019?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_age_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio_nombre": "Cine"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta Loterías y Apuestas del Estado en publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "SELAE (Loterías y Apuestas del Estado)"
+  }
+ },
+ {
+  "pregunta": "¿Qué empresa pública gasta más en publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "entidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "anuncios de Renfe en 2023",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Renfe"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto paga Correos en publicidad al año?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Correos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta AENA en campañas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "AENA"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto en publicidad de las empresas públicas del Estado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "estatal"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta Turespaña promocionando el turismo?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Turespaña"
+  }
+ },
+ {
+  "pregunta": "publicidad de las empresas públicas de Cataluña",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "autonomico"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto invierte en publicidad la Generalitat a través de Loteries de Catalunya?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Loteries de Catalunya (EAJA hasta 2021)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto publicidad hace Madrid Destino, la empresa del Ayuntamiento?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Madrid Destino"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta en publicidad Paradores?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Paradores"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta RTVE en publicidad propia por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_entidad": "rtve"
+  }
+ },
+ {
+  "pregunta": "importe nominal publicidad Renfe 2019",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Renfe"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cambió la publicidad de Loterías entre 2015 y 2024?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "SELAE (Loterías y Apuestas del Estado)"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor gasto publicitario de Navantia y las demás empresas del Estado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "entidad": "Navantia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta en anuncios el transporte público de Barcelona, TMB?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "TMB (Transports Metropolitans de Barcelona)"
+  }
+ },
+ {
+  "pregunta": "gasto de campañas comerciales de empresas públicas valencianas",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "magnitud": "coste_campanas_comerciales"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta publicidad institucional en medios compran las empresas públicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "magnitud": "publicidad_institucional_en_medios"
+  }
+ },
+ {
+  "pregunta": "Quant gasta Renfe en publicitat?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Renfe"
+  }
+ },
+ {
+  "pregunta": "Canto gasta Correos en publicidade?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "Correos"
+  }
+ },
+ {
+  "pregunta": "How much do Spanish state-owned companies spend on advertising?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "estatal"
+  }
+ },
+ {
+  "pregunta": "Zenbat gastatzen du SELAE-k publizitatean?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_empresas_anual",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "entidad": "SELAE (Loterías y Apuestas del Estado)"
+  }
+ },
+ {
+  "pregunta": "¿Qué presidente gastó más en publicidad, Zapatero, Rajoy o Sánchez?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaba de media al año Rajoy en publicidad institucional por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "gasto medio en publicidad por habitante, gobiernos del PP frente a gobiernos del PSOE",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién ejecutó mejor el presupuesto de publicidad, Sánchez o Zapatero?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "ejecucion_pct_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta de media Sánchez en publicidad comercial?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "comercial_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "media anual de publicidad institucional en euros reales con Zapatero",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "¿Con qué presidente se ha gastado menos en anuncios del Estado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta en publicidad cada gobierno por persona al año?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gastan más en publicidad los gobiernos de izquierdas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta la publicidad comercial por habitante con Rajoy frente a Sánchez?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "comercial_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "presupuesto de publicidad ejecutado de media con Rajoy",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "ejecucion_pct_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto publicidad se hacía con Zapatero por cabeza?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "comparativa Sánchez Rajoy Zapatero en campañas",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastó en promedio cada gobierno del PSOE en publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "Ya sé que es una pregunta rara, pero ¿qué presidente del Gobierno ha sido más amigo de los anuncios institucionales?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin president ha gastat més en publicitat institucional?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que presidente gastou máis en publicidade do Estado?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish prime minister spent the most on government advertising per person?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "total_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein presidentek gastatu zuen gehien publizitate instituzionalean?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "institucional_eur_hab_real_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "media publicidad estado PP vs PSOE ejecución",
+  "idioma": "es",
+  "tabla": "medios_publicidad_gobiernos",
+  "medida": "ejecucion_pct_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué grupo de medios recibió más publicidad del Estado en 2025?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobró Prisa de la publicidad institucional?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa",
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero del Gobierno se lleva Google?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Google"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa Mediaset en el reparto de publicidad pública?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Mediaset España"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recibe Atresmedia por publicidad institucional?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Atresmedia-Planeta",
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Quién cobra más de la publicidad comercial de empresas públicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "comercial"
+  }
+ },
+ {
+  "pregunta": "ranking de grupos de comunicación por publicidad institucional",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos euros por cada mil habitantes se lleva Vocento?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "eur_1000hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Vocento"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la publicidad del Estado se lleva Prisa?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa",
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gana RTVE de la publicidad que pagan las administraciones?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "RTVE"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recibieron Unidad Editorial y Prensa Ibérica?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Unidad Editorial",
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta publicidad estatal fue a plataformas tecnológicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Google"
+  }
+ },
+ {
+  "pregunta": "importe nominal publicidad estado grupo Godó",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "GRUPO GODÓ",
+   "tipo": "comercial"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el medio que menos recibe?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el top 5 de receptores de publicidad institucional del año pasado?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "institucional"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la publicidad pública se la llevan los grupos públicos?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto percibió la Agencia EFE por publicidad de empresas públicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "AGENCIA EFE, S.A.U.",
+   "tipo": "comercial"
+  }
+ },
+ {
+  "pregunta": "Quin grup rep més publicitat de l'Estat?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o grupo que máis publicidade recibe do Estado?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which media group got the most government advertising in 2025?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein komunikabide-taldek jaso zuen publizitate publiko gehien?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta la Generalitat de Cataluña en publicidad institucional por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta más en campañas y anuncios por persona?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "publicidad del Ayuntamiento de Madrid 2023",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta en anuncios el gobierno de Murcia?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la publicidad institucional de la Junta de Castilla y León?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién gasta más en publicidad por habitante, Madrid ciudad o Barcelona ciudad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gastan más los gobiernos autonómicos del PP o los del PSOE en publicidad?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta en publicidad la administración de Aragón sin contar empresas públicas?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "administracion_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastan las empresas públicas de Cataluña en publicidad por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "empresas_publicas_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto publicitario de Navarra desde 2015?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "importe total en euros publicidad del Gobierno vasco 2021",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "publicidad institucional País Vasco nominal 2019",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor gasto en publicidad del ayuntamiento de Barcelona?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué gasta la Generalitat Valenciana en publicidad al año?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta por habitante la publicidad institucional de Aragón en 2020?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gobiernos con Junts gastan más en publicidad por habitante?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Junts / CiU"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta menos en propaganda institucional por persona?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Voy a escribir sobre transparencia: ¿cuánta publicidad compra la Comunidad de Madrid?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant gasta la Generalitat en publicitat institucional?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta o Goberno vasco en publicidade institucional?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much do regional governments spend on advertising per person?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Nafarroako Gobernuak publizitate instituzionalean?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_territorial_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A qué medios da más publicidad la Generalitat de Cataluña?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta publicidad institucional recibe La Vanguardia, es decir, el Grupo Godó, de la Generalitat?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Godó"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo se lleva más dinero de la publicidad de la Junta de Castilla y León?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Ayuntamiento de Madrid en publicidad en Prisa?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la publicidad de la Región de Murcia va a Vocento?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "pct_medios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Vocento"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero público va a Google y Meta desde las comunidades?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Alphabet (Google, YouTube)"
+  }
+ },
+ {
+  "pregunta": "publicidad del Gobierno vasco a Berria y medios en euskera",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Berria Taldea"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recibe la CCMA de la publicidad de la Generalitat?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "CCMA (Corporació Catalana de Mitjans Audiovisuals)"
+  }
+ },
+ {
+  "pregunta": "¿Qué medio recibe más euros por habitante de Navarra?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado lo que cobra Atresmedia de la publicidad de Aragón?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Atresmedia-Planeta"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobraron las plataformas digitales de la publicidad institucional de Madrid?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_grupo": "plataforma"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto va a medios públicos de la publicidad institucional de la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_grupo": "publico"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra Unidad Editorial de la Junta de Castilla y León en 2022?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Unidad Editorial"
+  }
+ },
+ {
+  "pregunta": "importe nominal publicidad institucional COPE Aragón 2019",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "COPE-Ábside Media"
+  }
+ },
+ {
+  "pregunta": "¿Qué medios privados reciben dinero público en Navarra?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_grupo": "privado"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado la publicidad del Gobierno de Murcia a Prensa Ibérica entre 2015 y 2024?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Prensa Ibérica"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor gasto en publicidad del Gobierno vasco en medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ranking de medios que cobran del Ayuntamiento de Madrid",
+  "idioma": "es",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "A quins mitjans dona més publicitat el Govern de Catalunya?",
+  "idioma": "ca",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "A que medios dá máis publicidade a Comunidade de Madrid?",
+  "idioma": "gl",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which media groups receive the most advertising money from the Catalan government?",
+  "idioma": "en",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein komunikabidek jasotzen dute publizitate gehien Eusko Jaurlaritzatik?",
+  "idioma": "eu",
+  "tabla": "medios_publicidad_territorial_medios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ }
+]

@@ -1,0 +1,52 @@
+✓  v5-01 [actual] 66.6s tasa de empleo: 53,44 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_trimestral.
+✗  v5-02 [actual] 45.1s gasto mensual en nóminas de pensiones: 14.498.177.663 € al mes, 1 de septiembre de 2026. Fuente: tabla mother.pensiones_
+✓  v5-03 [actual] 51.9s inflación anual (variación del IPC general en 12 meses): 4,3 %, agosto de 2026. Fuente: tabla mother.mercado_ipc_mensual
+✓  v5-04 [actual] 38.5s parados registrados menores de 25 años: 168.280 personas, agosto de 2026. Fuente: tabla mother.mercado_paro_registrado.
+✓  v5-05 [actual] 36.9s esperanza de vida al nacer (Mujeres): 86,5 años, 2024. Fuente: tabla mother.salud_esperanza_vida (SpainFacts · El Estado
+✓  v5-06 [actual] 44.7s precio por litro con impuestos, en euros del momento, 28 de septiembre de 2026: - Gasolina 95: 1,94 €/litro (nominales) 
+✗  v5-07 [actual] 39.6s número de hogares: 19.762.059 hogares, 2026. Fuente: tabla mother.demografia_hogares.
+✓t v5-08 [actual] 37.1s superficie quemada: 311.908 ha, 2026. Fuente: tabla mother.incendios_provincia_anio.
+✓  v5-09 [actual] 44.3s saldo o déficit de las administraciones públicas en porcentaje del PIB: -2,4 % del PIB, 2025. Fuente: tabla mother.cuent
+✓  v5-10 [actual] 32.2s potencia instalada de almacenamiento (baterias_hibridadas): 255,9 MW, 1 de octubre de 2026. Fuente: tabla mother.almacen
+✓  v5-11 [actual] 47.7s turismos sin etiqueta sobre el total de turismos: 20,04 % del parque de turismos, septiembre de 2026. Fuente: tabla moth
+✓  v5-12 [actual] 52.7s porcentaje de la población de 80 años o más: 6,17 %, 2025. Fuente: tabla mother.demografia_envejecimiento.
+✗t v5-13 [actual] 52.6s voto al PP (Población de Arroyo, PP): 89,5 %, 23 de julio de 2023. Fuente: tabla mother.elecciones_municipios.
+✓t v5-14 [actual] 37.9s asalariados del sector público: 3.646.900 personas, 2.º trimestre de 2026. Fuente: tabla mother.empleo_epa_administracio
+✗  v5-15 [territorio] 36.3s años seguidos del alcalde en el cargo (Granada, Granada): 3,3 años. Fuente: tabla mother.alcaldes_actuales.
+✗t v5-16 [territorio] 42.2s salario medio mensual en euros reales: 2.376,55 € de 2025 al mes, 2025. Fuente: tabla mother.economia_salarios_ccaa.
+✗t v5-17 [territorio] 50.3s tasa de paro (Extremadura): 13,22 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_territorios.
+✗  v5-18 [territorio] 70.1s pensión media mensual en euros constantes (Asturias): 1.521,65 € al mes (euros de 2025), 2025. (2026 aún está incompleto
+✓  v5-19 [territorio] 42.4s viviendas de uso turístico (Benidorm): 2.564 viviendas, mayo de 2026. Fuente: tabla mother.turismo_viviendas_municipios.
+✓  v5-20 [territorio] 46.3s deuda en % del PIB regional (Comunidad Valenciana): 40 % del PIB, 2.º trimestre de 2026. Fuente: tabla mother.ccaa_deuda
+✓  v5-21 [territorio] 33.9s gasto sanitario público por habitante en euros constantes (Aragón): 2.248,7 € por habitante (euros de 2025), 2024. Fuent
+✓  v5-22 [territorio] 36.7s superficie quemada (Ourense): 140.601 ha, 2025. (2026 aún está incompleto, así que no se usa como último dato.) Fuente: 
+✗t v5-23 [territorio] 23.1s puntos de recarga públicos: 35.546 puntos, 2 de octubre de 2026. Fuente: tabla mother.movilidad_recarga_evolucion.
+✗t v5-24 [territorio] 58.9s alquiler mensual mediano en euros reales de 2025 (Colectiva, Las Palmas): 564,7 € reales al mes, 2024. Fuente: tabla mot
+✗  v5-25 [ranking] 29.8s tasa de paro (desestacionalizada), agosto de 2026: - Francia: 8,2 % - Italia: 6,2 % - UE-27: 6,1 % - Portugal: 5,7 % - A
+✗  v5-26 [ranking] 46.1s número de pensiones de jubilación, 2025: - Melilla: 4.594,17 pensiones - Ceuta: 4.841,67 pensiones - Soria: 15.830,75 pe
+✗  v5-27 [ranking] 19.3s nacionalizaciones por cada 1.000 extranjeros residentes, 2025: - Melilla: 70,52 por cada 1.000 extranjeros residentes - 
+✓  v5-28 [ranking] 20.3s tiempo medio de espera, 2025: - Cirugía plástica: 269 días - Neurocirugía: 172 días - Angiología y cirugía vascular: 152
+✗t v5-29 [ranking] 22.5s No hay datos para esa combinación en mother.crimen_ultimo_periodo. (2026 aún está incompleto, así que no se usa como últ
+✓  v5-30 [ranking] 24.3s gasto real de los turistas del país, 2025: - Reino Unido: 23.648,66 millones de € - Alemania: 15.865,76 millones de € - 
+✗t v5-31 [ranking] 35.0s importe de contratos recibido por el grupo, en euros constantes (Medios públicos autonómicos): 8.631,63 € (euros reales 
+✗  v5-32 [ranking] 17.7s subida acumulada de precios desde diciembre de 2019, agosto de 2026: - Illes Balears: 28,54 % acumulado - Castilla-La Ma
+✓  v5-33 [ranking] 27.9s valor tasado medio por metro cuadrado en euros corrientes, 1 de abril de 2026: - Madrid: 4.089,6 €/m² - Illes Balears: 3
+✓  v5-34 [ranking] 28.0s producción, 2024 (Arroz): - Andalucía: 215,15 miles de toneladas - Extremadura: 131,83 miles de toneladas - Cataluña: 12
+✓t v5-35 [cambio] 27.6s pensión media mensual en euros constantes: de 1.202,03 € al mes (euros de 2025) en 1 de diciembre de 2019 a 1.312,57 € a
+✓  v5-36 [cambio] 17.4s cuota de generación renovable: de 35,56 % de la generación en 2015 a 55,47 % de la generación en 2025, +19,91 % de la ge
+✓  v5-37 [cambio] 23.0s emisiones netas (restando los sumideros forestales): de 247,57 Mt CO2eq en 1990 a 220,29 Mt CO2eq en 2025, -27,29 Mt CO2
+✓t v5-38 [cambio] 13.1s población media del año: de 40.567.864 habitantes en 2000 a 49.359.198 habitantes en 2025, +8.791.334 habitantes (+21,67
+✓  v5-39 [cambio] 20.4s salario medio anual en euros reales: de 29.600,96 € de 2025 al año en 2008 a 28.513,54 € de 2025 al año en 2025, -1.087,
+✗t v5-40 [cambio] 21.2s viviendas libres iniciadas: de 44.679 viviendas en 2015 a 121.827 viviendas en 2025, +77.148 viviendas (+172,67 %). Fuen
+✓  v5-41 [cambio] 19.4s tasa de paro: de 25,73 % en 4.º trimestre de 2013 a 9,87 % en 2.º trimestre de 2026, -15,86 % (-61,64 %). Fuente: tabla 
+✓  v5-42 [cambio] 21.2s población extranjera: de 5.402.579 personas en 2010 a 6.911.971 personas en 2025, +1.509.392 personas (+27,94 %). Fuente
+✓  v5-43 [anio] 20.5s turistas internacionales que visitan España: 18.933.103 turistas, 2020. (2026 aún está incompleto, así que no se usa com
+✓t v5-44 [anio] 18.2s superficie quemada: 315.705 ha, 2022. (2026 aún está incompleto, así que no se usa como último dato.) Fuente: tabla moth
+✓  v5-45 [anio] 13.9s reales decretos-ley aprobados: 39 decretos-ley, 2020. (2026 aún está incompleto, así que no se usa como último dato.) Fu
+✓  v5-46 [anio] 24.2s nacimientos: 420.290 nacimientos, 2015. Fuente: tabla mother.demografia_anual.
+✗  v5-47 [anio] 14.9s número de defunciones (Todas las causas): 464.417 defunciones, 2022. Fuente: tabla mother.salud_causas_muerte.
+✓  v5-48 [anio] 24.5s sociedades mercantiles constituidas: 93.951 sociedades, 2019. Fuente: tabla mother.empresas_sociedades_anual.
+✓  v5-49 [anio] 18.4s viviendas libres terminadas: 579.665 viviendas, 2007. Fuente: tabla mother.vivienda_obra_nueva.
+✓t v5-50 [anio] 14.2s cuota de la nuclear: 21,54 % de la generación, 2019. Fuente: tabla mother.clima_electricidad_anual.
+
+33/50 bien · tabla 36/50 · validacion5 33/50 (tabla 36) · onnx:C:/Users/jota/venvs/onnx-decider/decider-08-base · 1651 s

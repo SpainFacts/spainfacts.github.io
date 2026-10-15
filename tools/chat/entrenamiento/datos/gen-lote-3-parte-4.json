@@ -1,0 +1,2859 @@
+[
+ {
+  "pregunta": "¿Cuál es el sueldo medio en España al mes?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra el 10 % que más gana?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D10",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra el 10 % que menos gana?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D1",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra la clase media, el decil 5?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D5",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta diferencia hay entre los sueldos más altos y los más bajos?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "decil_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobran los funcionarios de media al mes?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Público",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "sueldo medio del sector privado mensual",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Privado",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se cobra a jornada parcial?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Total",
+   "jornada": "Jornada a tiempo parcial"
+  }
+ },
+ {
+  "pregunta": "sueldo medio tiempo completo",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Total",
+   "jornada": "Jornada a tiempo completo"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los sueldos medios desde 2006?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el sueldo de los que menos cobran entre 2010 y 2024?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D1",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobraba el decil 9 en 2015?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D9",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gana un funcionario del decil más alto?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D10",
+   "sector": "Público",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Gana más un funcionario o un privado de los que más cobran?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "decil_nombre": "D10",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "salario mensual del decil 2 sector privado",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D2",
+   "sector": "Privado",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué sueldo tiene el 20 % de abajo, el segundo decil, en 2024?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D2",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra un mileurista de verdad? ¿en qué decil está el sueldo de 1.500 euros?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "decil_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo fue el sueldo medio más alto de la serie?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "Quant cobra de mitjana el 10 % que menys guanya?",
+  "idioma": "ca",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D1",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "How much do the top 10 percent of earners make per month in Spain?",
+  "idioma": "en",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "D10",
+   "sector": "Total",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "Canto cobra de media un funcionario ao mes?",
+  "idioma": "gl",
+  "tabla": "empleo_salarios_deciles",
+  "medida": "salario_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "decil_nombre": "Total",
+   "sector": "Público",
+   "jornada": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos funcionarios hay por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más empleados públicos por habitante?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más funcionarios en relación a su población?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos funcionarios proporcionalmente?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "funcionarios por mil habitantes en Teruel",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados públicos hay en Extremadura en total?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Hay muchos funcionarios en Melilla?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Melilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "trabajadores de ayuntamientos por cada 1000 habitantes en Cantabria",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Entidades locales"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto personal tiene el Estado en Madrid?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Estado"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más empleados autonómicos por habitante?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "administracion": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta población tiene Navarra según este registro?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de funcionarios por habitante en Castilla y León?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el empleo público por mil habitantes desde 2019?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "empleados públicos en la provincia de Badajoz",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Badajoz"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidades tienen menos funcionarios per cápita?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "nº empleados de las comunidades autónomas en Cataluña",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados públicos hay en total en España?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados locales (ayuntamientos y diputaciones) hay en Valencia provincia?",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Entidades locales"
+  }
+ },
+ {
+  "pregunta": "Quants funcionaris per cada mil habitants hi ha a les Illes Balears?",
+  "idioma": "ca",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantos empregados públicos por cada mil habitantes hai en Ourense?",
+  "idioma": "gl",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "Public employees per 1,000 inhabitants by region",
+  "idioma": "en",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat funtzionario daude 1.000 biztanleko Nafarroan?",
+  "idioma": "eu",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "funcionarios per capita Soria enero 2026",
+  "idioma": "es",
+  "tabla": "empleo_territorio",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Se están creando más empresas en España que antes?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿Están cerrando más negocios? quiebras en España",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "¿Cómo van las quiebras de empresas en Alemania?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "altas de empresas en Francia",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿Cómo está España frente a la media de la UE en creación de empresas?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿En qué país europeo están quebrando más empresas?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las quiebras desde el covid?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "¿En qué trimestre hubo más altas de empresas en España?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "periodo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "quiebras en Italia",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "¿Hubo un hundimiento de la creación de empresas en 2020 por la pandemia?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "creacion de empresas Portugal frente a España",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿Cómo estaban las quiebras en 2022 comparadas con 2024?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2022,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "altas empresas UE-27 último dato",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se cerraron más empresas en España?",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "periodo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "Com evolucionen les fallides d'empreses a Espanya?",
+  "idioma": "ca",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "Are business bankruptcies rising in Spain compared with the EU?",
+  "idioma": "en",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "Como van as quebras de empresas en España?",
+  "idioma": "gl",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Quiebras"
+  }
+ },
+ {
+  "pregunta": "negocios que abren en Países Bajos",
+  "idioma": "es",
+  "tabla": "empresas_altas_quiebras",
+  "medida": "indice",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Países Bajos"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "Altas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos autónomos hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los que trabajan son autónomos?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más trabajadores por cuenta propia en proporción?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_cuenta_propia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos autónomos hay en Galicia?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "autónomos con empleados (empleadores) en Cataluña",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "empleadores",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos autónomos sin asalariados hay en Andalucía?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "independientes",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente asalariada hay en Madrid según la EPA?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "asalariados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ocupados hay en total en la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de autónomos desde 2008?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos autónomos se han perdido desde la crisis de 2008? comparar 2008 y 2024",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más autónomos?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "autónomos en el segundo trimestre de 2024",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2024
+   ],
+   "trimestre": 2
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "media anual de trabajadores por cuenta propia en 2023",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de ocupados son empleadores en Aragón?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_empleadores",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de autónomos sin empleados en Extremadura",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_independientes",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más autónomos por ocupado, en Castilla y León o en Canarias?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_cuenta_propia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos emprendedores con gente a su cargo hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "empleadores",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está bajando el peso de los autónomos en el empleo en Murcia?",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "pct_cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "trabajadores por cuenta propia en el País Vasco 2019",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "freelance y autonomos EPA Baleares",
+  "idioma": "es",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants autònoms hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many self-employed people are there in Spain?",
+  "idioma": "en",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos autónomos hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "empresas_autonomos",
+  "medida": "cuenta_propia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas quiebras hay por cada 100.000 habitantes en España?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_100k",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más concursos de acreedores por habitante?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde quiebran más empresas en proporción al número de empresas?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_1000emp",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos concursos de acreedores hubo en Cataluña en 2019?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos concursos voluntarios hubo en España?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "voluntarios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "concursos necesarios (a petición de los acreedores) en Madrid",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "necesarios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo evolucionaron las quiebras con la crisis de 2008-2013?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo más concursos de acreedores?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto bajaron los concursos de 2013 a 2020?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas hay en la estadística de concursos en Andalucía?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "concursos de acreedores por cada mil empresas en la Comunidad Valenciana",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_1000emp",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas y empresas se declararon en quiebra en 2010?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tuvo menos quiebras por habitante en 2020?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de concursos de acreedores en Aragón por cada 100.000 habitantes",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos_100k",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "suspensión de pagos y quiebras en Canarias",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos concursos hubo en Galicia en el último año disponible?",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "quebras de empresas Baleares 2012",
+  "idioma": "es",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants concursos de creditors hi ha hagut a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many bankruptcy proceedings were there in Spain in 2020?",
+  "idioma": "en",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos concursos de acredores houbo en Galicia?",
+  "idioma": "gl",
+  "tabla": "empresas_concursos",
+  "medida": "concursos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos bares y restaurantes hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Hostelería"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas tiendas y negocios de comercio hay en Madrid?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector tiene más empresas en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de empresas son de construcción?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas de construcción hay por cada 1.000 habitantes en Andalucía?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más hostelería por habitante?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Hostelería"
+  }
+ },
+ {
+  "pregunta": "empresas de informática y comunicaciones en Cataluña",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Información y comunicaciones"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas industriales hay en el País Vasco?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y energía"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas de transporte y logística hay?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte y almacenamiento"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el número de empresas de hostelería desde 2020?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Hostelería"
+  }
+ },
+ {
+  "pregunta": "evolución de las empresas de comercio en España",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más empresas de finanzas, seguros e inmobiliarias?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Finanzas, seguros e inmobiliarias"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas consultorías y despachos profesionales hay en Valencia?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Actividades profesionales y técnicas"
+  }
+ },
+ {
+  "pregunta": "empresas de sanidad y educación privadas, número en 2023",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Educación, sanidad y servicios sociales"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector pesa más en Baleares?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de empresas de hostelería en Canarias",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Hostelería"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay menos empresas de ocio y servicios personales?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sector": "Ocio y otros servicios personales"
+  }
+ },
+ {
+  "pregunta": "empresas de servicios administrativos y auxiliares",
+  "idioma": "es",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Servicios administrativos y auxiliares"
+  }
+ },
+ {
+  "pregunta": "Quants bars i restaurants hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Hostelería"
+  }
+ },
+ {
+  "pregunta": "How many construction companies are there in Spain?",
+  "idioma": "en",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "Cantas empresas de comercio hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio"
+  }
+ },
+ {
+  "pregunta": "Zenbat enpresa daude industrian Euskadin?",
+  "idioma": "eu",
+  "tabla": "empresas_dirce_sector",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y energía"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas pymes hay en España? las pequeñas, de 10 a 49 empleados",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas grandes empresas hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos autónomos sin empleados hay como empresa?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Sin asalariados"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de empresas son microempresas?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (1-9)"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más empresas grandes?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "empresas medianas en Cataluña",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Medianas (50-249)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas con asalariados hay en Madrid?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (1-9)"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el número de grandes empresas desde 2020?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "evolución de las empresas sin asalariados",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Sin asalariados"
+  }
+ },
+ {
+  "pregunta": "¿Qué tamaño de empresa es el más común en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "tamano",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de empresas pequeñas en Andalucía",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más proporción de empresas sin asalariados?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tamano": "Sin asalariados"
+  }
+ },
+ {
+  "pregunta": "número de microempresas en Galicia en 2022",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (1-9)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas de más de 250 trabajadores hay en el País Vasco?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas medianas empresas hay en la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Medianas (50-249)"
+  }
+ },
+ {
+  "pregunta": "tejido empresarial de Aragón por tamaño",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "tamano",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes microempreses hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (1-9)"
+  }
+ },
+ {
+  "pregunta": "How many large companies are there in Spain?",
+  "idioma": "en",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "Cantas pemes hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "empresas grandes Navarra 2025 numero",
+  "idioma": "es",
+  "tabla": "empresas_dirce_tamano",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos negocios hay en la provincia de Málaga?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más empresas por habitante?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más empresas por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresas por 1000 habitantes en Madrid comunidad",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas hay en Cataluña?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas había en España en el año 2000?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2000
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de empresas en España desde 1999?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas se perdieron entre 2008 y 2013?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2013
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el tejido empresarial de Almería en 20 años?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Almería"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2004,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde crecen más las empresas, qué provincia?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "crecimiento_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "crecimiento de empresas el último año en Canarias",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "crecimiento_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas sociedades (con forma de empresa) hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "sociedades",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos autónomos persona física tienen negocio en Sevilla provincia?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "personas_fisicas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia hay más empresas de autónomos como persona física en proporción?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "pct_personas_fisicas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "habitantes de Teruel provincia en el directorio de empresas",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se destruyeron más empresas?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "crecimiento_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresas Soria 2025",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos negocios hay por cada 1.000 vecinos en Girona?",
+  "idioma": "es",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes empreses hi ha a la província de Barcelona?",
+  "idioma": "ca",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many companies are there in Spain and how many per 1,000 inhabitants?",
+  "idioma": "en",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas empresas hai na provincia da Coruña?",
+  "idioma": "gl",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat enpresa daude Bizkaian?",
+  "idioma": "eu",
+  "tabla": "empresas_dirce_territorio",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

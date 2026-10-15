@@ -20,6 +20,7 @@ import {
 	promptSistema
 } from './herramientas.js';
 import { promptDecision, probabilidadesDeLetras } from './decision.js';
+import { t, idiomaActual } from '../i18n.js';
 
 const MAX_PASOS = 12;
 const MAX_PASOS_JSON = 8;
@@ -108,7 +109,7 @@ async function responderAnthropic({ config, estado, pregunta, ctx, lang, alPaso,
 		const r = await cliente.beta.messages.create(peticion);
 		mensajes.push({ role: 'assistant', content: r.content });
 		if (r.stop_reason === 'refusal') {
-			textos.push('El modelo no ha querido responder a esta pregunta.');
+			textos.push(t('chat.r.noResponde', lang));
 			break;
 		}
 		for (const b of r.content) if (b.type === 'text' && b.text.trim()) textos.push(b.text);
@@ -140,7 +141,7 @@ const HERRAMIENTAS_OPENAI = HERRAMIENTAS.map((h) => ({
 
 async function responderOpenAI({ config, estado, pregunta, ctx, lang, alPaso, alGrafico }) {
 	const base = (config.url || '').replace(/\/+$/, '');
-	if (!base) throw new Error('Falta la dirección de la API.');
+	if (!base) throw new Error(t('chat.r.faltaUrl', lang));
 	const mensajes = estado?.mensajes ?? [{ role: 'system', content: promptSistema(ctx.catalogo, lang) }];
 	mensajes.push({ role: 'user', content: pregunta });
 	const textos = [];
@@ -152,7 +153,7 @@ async function responderOpenAI({ config, estado, pregunta, ctx, lang, alPaso, al
 		});
 		if (!r.ok) throw new Error(`${base}: HTTP ${r.status} ${(await r.text()).slice(0, 300)}`);
 		const m = (await r.json()).choices?.[0]?.message;
-		if (!m) throw new Error('La API no ha devuelto ninguna respuesta.');
+		if (!m) throw new Error(t('chat.r.sinRespuestaApi', lang));
 		mensajes.push(m);
 		if (typeof m.content === 'string' && m.content.trim()) textos.push(m.content);
 		const llamadas = m.tool_calls ?? [];
@@ -311,7 +312,7 @@ export async function crearDecisorWebLLM(modelo, alProgreso) {
 
 export async function cargarWebLLM(modelo, alProgreso) {
 	if (motorWebLLM && modeloWebLLM === modelo) return motorWebLLM;
-	if (!('gpu' in navigator)) throw new Error('Este navegador no tiene WebGPU (prueba con Chrome o Edge recientes).');
+	if (!('gpu' in navigator)) throw new Error(t('chat.sinWebgpu', idiomaActual()));
 	const webllm = await import(/* @vite-ignore */ WEBLLM_URL);
 	motorWebLLM?.unload?.();
 	motorWebLLM = await webllm.CreateMLCEngine(modelo, {
@@ -398,7 +399,7 @@ async function responderJSON({ proveedor, config, estado, pregunta, ctx, lang, a
 			res.resultado.length > MAX_RESULTADO_JSON ? res.resultado.slice(0, MAX_RESULTADO_JSON) + '… (recortado)' : res.resultado;
 		mensajes.push({ role: 'user', content: `Resultado de ${a.accion}: ${recorte}` });
 	}
-	if (!texto) texto = 'No he conseguido terminar la respuesta con este modelo. Prueba a reformular la pregunta o con un modelo mayor.';
+	if (!texto) texto = t('chat.r.sinTerminar', lang);
 	historial.push({ role: 'user', content: pregunta }, { role: 'assistant', content: JSON.stringify({ accion: 'responder', texto }) });
 	return { texto, estado: { historial } };
 }

@@ -1,0 +1,1792 @@
+[
+ {
+  "pregunta": "¿Cuánto aceite de oliva produce España?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Qué país produce más aceite de oliva del mundo?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del aceite mundial sale de España?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "cuota_mundo_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del aceite europeo es español?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "cuota_ue_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite produjo Italia en la campaña 2022/23?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Italia"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la cosecha de aceite en España desde 2012?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2012,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue la peor campaña de aceite de oliva en España?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "campania",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Y la mejor campaña de aceite en Grecia?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "campania",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "Grecia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos kilos de aceite se producen por habitante en España?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "kg_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite produce Portugal?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Portugal"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite se produce en el mundo entero?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "mundo_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto aceite de oliva produce toda la Unión Europea?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "total_ue_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "producción aceite oliva 2023/24 españa",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Ha bajado la producción de aceite de oliva por la sequía comparada con 2019?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto oro líquido sacamos de los olivos?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pesa Grecia en la producción europea de aceite?",
+  "idioma": "es",
+  "tabla": "primario_aceite",
+  "medida": "cuota_ue_pct",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grecia"
+  }
+ },
+ {
+  "pregunta": "quanta oli d'oliva produeix Espanya",
+  "idioma": "ca",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "Canto aceite de oliva produce Italia?",
+  "idioma": "gl",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Italia"
+  }
+ },
+ {
+  "pregunta": "Zenbat oliba-olio ekoizten du Espainiak?",
+  "idioma": "eu",
+  "tabla": "primario_aceite",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "How much olive oil does Spain produce compared with the rest of the world?",
+  "idioma": "en",
+  "tabla": "primario_aceite",
+  "medida": "cuota_mundo_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "España"
+  }
+ },
+ {
+  "pregunta": "¿A cuánto está el aceite de oliva?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "tablas_validas": [],
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra el agricultor por el kilo de aceite virgen extra?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "precio aceite oliva origen enero 2024",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el precio del aceite desde 2020?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio del aceite de oliva virgen extra?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo estuvo más caro el aceite en origen?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Y cuándo estuvo más barato en términos reales?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vale el kilo de aceite lampante en España?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Lampante"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el aceite virgen (no extra) en origen?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen"
+  }
+ },
+ {
+  "pregunta": "¿En qué país es más caro el aceite de oliva virgen extra, en Italia o en Grecia?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "precio aceite portugal virgen extra",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas cotizaciones hay del aceite de oliva cada mes?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "n_cotizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto costaba el aceite en origen en octubre de 2022?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 10
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta ahora el aceite en euros de hoy comparado con hace diez años?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2016,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "el aceite se ha puesto por las nubes, ¿cuánto pagan al olivarero en Grecia?",
+  "idioma": "es",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "preu de l'oli d'oliva verge extra a Espanya",
+  "idioma": "ca",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "A canto está o aceite de oliva virxe extra en orixe?",
+  "idioma": "gl",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "Zenbatean dago oliba-olio birjina estra jatorrian?",
+  "idioma": "eu",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "What is the price of extra virgin olive oil at source in Spain?",
+  "idioma": "en",
+  "tabla": "primario_aceite_precios",
+  "medida": "eur_kg",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Virgen extra"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad depende más del campo?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesa la agricultura en la economía de Extremadura?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto produce el campo por habitante en Murcia?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_primario_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más peso de la agricultura y la ganadería?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué peso tiene el sector primario en España en total?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Spain"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el peso del campo en Andalucía desde 2000?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha caído el peso del sector agrario en Castilla y León desde 2005?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2005,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones de euros genera el campo en Andalucía?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_primario_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto vale toda la economía de Galicia?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_total_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "valor añadido agrario por habitante en Almería",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_primario_eur_hab_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Almería"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad produce más riqueza del campo por persona?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_primario_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto aportaba la agricultura en La Rioja en 2010?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "La Rioja"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde pesa menos el sector primario?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso del campo en Jaén",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Jaén"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes tiene Aragón según esta fuente?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "tablas_validas": [
+   "poblacion_territorios"
+  ],
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto genera el campo por habitante en Navarra, en euros de hoy?",
+  "idioma": "es",
+  "tabla": "primario_ccaa",
+  "medida": "vab_primario_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pes de l'agricultura a l'economia de Catalunya",
+  "idioma": "ca",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto pesa o sector primario en Galicia?",
+  "idioma": "gl",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein erkidegotan pisatzen du gehien nekazaritzak?",
+  "idioma": "eu",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does farming contribute to the economy of Castilla-La Mancha?",
+  "idioma": "en",
+  "tabla": "primario_ccaa",
+  "medida": "peso_vab_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad cultiva más cereal?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se produce más arroz en España?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Arroz"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta cebada produce Castilla y León?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cebada"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas de girasol hay en Andalucía?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "superficie_miles_ha",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Girasol"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad produce más patatas?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Patata"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto maíz se recoge en Aragón?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Maíz en grano"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la producción de arroz en Cataluña?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Arroz"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte del girasol español se cultiva en Castilla-La Mancha?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "cuota_espana_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Girasol"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos kilos de cereal se producen por habitante en Castilla y León?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "kg_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad dedica más terreno por habitante a los cereales?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "ha_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "patata galicia producción 2020",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Patata"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas de arroz hay en la Comunitat Valenciana?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "superficie_miles_ha",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunitat Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Arroz"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado la superficie de girasol desde 2005?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "superficie_miles_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2005,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Girasol"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de cosecha de cereal en Castilla y León?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad cultiva más cebada para la cerveza?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Cebada"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto trigo y cebada se recoge en Extremadura?",
+  "idioma": "es",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "collita d'arròs a Catalunya",
+  "idioma": "ca",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Arroz"
+  }
+ },
+ {
+  "pregunta": "Canta pataca se produce en Galicia?",
+  "idioma": "gl",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Patata"
+  }
+ },
+ {
+  "pregunta": "Zenbat artoa ekoizten da Nafarroan?",
+  "idioma": "eu",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Maíz en grano"
+  }
+ },
+ {
+  "pregunta": "Which region grows the most barley in Spain?",
+  "idioma": "en",
+  "tabla": "primario_ccaa_cultivos",
+  "medida": "produccion_miles_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Cebada"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa España en producción de vino?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "puesto_mundo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hectolitros de vino produce España?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas de viñedo tiene España?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vinedo_superficie"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene más viñedo del mundo?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "vinedo_superficie"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exporta España de vino en volumen?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_exportacion_volumen"
+  }
+ },
+ {
+  "pregunta": "¿Quién vende más vino al extranjero en dinero?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "vino_exportacion_valor"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto factura España por exportar vino?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_exportacion_valor"
+  }
+ },
+ {
+  "pregunta": "¿Qué país es el mayor productor de aceite de oliva?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "aceite_produccion"
+  }
+ },
+ {
+  "pregunta": "¿En qué puesto está España en aceite de oliva?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "puesto_mundo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "aceite_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite produce Turquía?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Turquía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "aceite_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite de oliva se produce en el mundo?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Mundo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "aceite_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Quién produce más vino, Francia o Italia?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "¿En qué puesto está España exportando vino?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "puesto_mundo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_exportacion_volumen"
+  }
+ },
+ {
+  "pregunta": "producción mundial de vino",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Mundo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto aceite se cosechó en el mundo en 2023?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Mundo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "aceite_produccion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vino exporta Francia?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_exportacion_valor"
+  }
+ },
+ {
+  "pregunta": "¿Qué posición tiene España en el mundo del vino?",
+  "idioma": "es",
+  "tabla": "primario_mundo",
+  "medida": "puesto_mundo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "superfície de vinya a Espanya",
+  "idioma": "ca",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vinedo_superficie"
+  }
+ },
+ {
+  "pregunta": "Cantos hectolitros de viño produce España?",
+  "idioma": "gl",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "vino_produccion"
+  }
+ },
+ {
+  "pregunta": "Which country exports the most wine by volume?",
+  "idioma": "en",
+  "tabla": "primario_mundo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "vino_exportacion_volumen"
+  }
+ }
+]

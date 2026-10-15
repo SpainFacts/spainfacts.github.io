@@ -1,0 +1,1280 @@
+[
+ {
+  "pregunta": "¿Cuántos decretos-ley ha aprobado el Gobierno este año?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas leyes se aprobaron en 2019?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos indultos concedió el Gobierno en 2012?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué año se aprobaron más decretos leyes?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué presidente legisló más a golpe de decreto?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los decretos-ley desde 1978",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas leyes aprobó Zapatero en 2008?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "decretos ley de Rajoy en 2013",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2013
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "indultos de Aznar en 2002",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2002
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José María Aznar"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido ha aprobado más decretos-ley por año, PP o PSOE?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de normas que son decreto-ley en 2020",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "pct_rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha subido el uso de decretos-ley desde 2015?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "pct_rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántas leyes aprobó Pedro Sánchez el año pasado",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se aprobaron menos leyes?",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos indultos hubo por año con Felipe González",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Felipe González"
+  }
+ },
+ {
+  "pregunta": "el año con más indultos de la democracia",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "decrets llei aprovats el 2020",
+  "idioma": "ca",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas leis se aprobaron en 2015?",
+  "idioma": "gl",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many royal decree-laws did Spain pass in 2022?",
+  "idioma": "en",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Adolfo Suárez decretos ley en 1979",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1979
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Adolfo Suárez"
+  }
+ },
+ {
+  "pregunta": "familia UCD número de leyes por año",
+  "idioma": "es",
+  "tabla": "gobierno_actos_anual",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "UCD"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos indultos aprobó el Gobierno el último mes?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "indultos concedidos en junio de 2021",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2021
+   ],
+   "mes": "2021-06"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más indultos de la historia?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución mensual de los indultos con Rajoy",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos indultos firmó Pedro Sánchez en diciembre de 2023?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023-12"
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "perdones del Gobierno por meses con el PP",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "indultos de Aznar en el verano de 2001",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2001,
+    2001
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José María Aznar"
+  }
+ },
+ {
+  "pregunta": "¿En qué mes concedió más indultos Zapatero?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "cuántos indultos se dieron en enero de 1990",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    1990
+   ],
+   "mes": "1990-01"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha habido muchos indultos este año?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "reales decretos de indulto febrero 2019",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2019
+   ],
+   "mes": "2019-02"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "mes con más indultos del PSOE",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos indultos se aprobaron en abril de 2004?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2004
+   ],
+   "mes": "2004-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "indults aprovats al mes de maig de 2022",
+  "idioma": "ca",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": "2022-05"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos indultos concedeu Felipe González en 1985, mes a mes?",
+  "idioma": "gl",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1985,
+    1985
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Felipe González"
+  }
+ },
+ {
+  "pregunta": "How many pardons did the government grant last month?",
+  "idioma": "en",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "indultos con Calvo-Sotelo por mes",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "presidente": "Leopoldo Calvo-Sotelo"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se aprobó el último indulto?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "indultos aprobados en octubre de 2017",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2017
+   ],
+   "mes": "2017-10"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hubo más indultos en 1996 o en 1997?",
+  "idioma": "es",
+  "tabla": "gobierno_indultos_mensual",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1996,
+    1997
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué presidente ha aprobado más decretos-ley por año de mandato?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "¿Qué presidente concedió más indultos al año?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "¿Quién aprobó menos indultos, Sánchez o Rajoy?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "¿PP o PSOE, quién hace más leyes por año?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "leyes_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Partido"
+  }
+ },
+ {
+  "pregunta": "decretos-ley por año de Pedro Sánchez",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos años gobernó Felipe González?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "anios",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "Felipe González"
+  }
+ },
+ {
+  "pregunta": "total de indultos de José María Aznar",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "José María Aznar"
+  }
+ },
+ {
+  "pregunta": "comparativa de presidentes del Gobierno en leyes aprobadas por año",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "leyes_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido ha usado más el decretazo en relación al tiempo que gobernó?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_ratio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Partido"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos decretos-ley ha aprobado el PSOE en total?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Partido",
+   "grupo": "PSOE"
+  }
+ },
+ {
+  "pregunta": "porcentaje de decretos-ley frente a leyes de Rajoy",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "pct_rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Qué presidente indultó más por encima de lo esperado según su tiempo en el cargo?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos_ratio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "leyes por año de Zapatero",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "leyes_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "José Luis Rodríguez Zapatero"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos indultos ha dado el PP por año?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Partido",
+   "grupo": "PP"
+  }
+ },
+ {
+  "pregunta": "ranking de presidentes por decretos ley",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "¿Quién legisló menos por decreto: Felipe González o Aznar?",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "Quin president ha aprovat més decrets llei per any?",
+  "idioma": "ca",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "Which prime minister granted the most pardons per year?",
+  "idioma": "en",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "indultos_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "Presidente"
+  }
+ },
+ {
+  "pregunta": "UCD: decretos ley por año",
+  "idioma": "es",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "rdl_por_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Partido",
+   "grupo": "UCD"
+  }
+ },
+ {
+  "pregunta": "Cantas leis aprobou Rajoy en total?",
+  "idioma": "gl",
+  "tabla": "gobierno_presidencias_resumen",
+  "medida": "leyes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Presidente",
+   "grupo": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos años han estado prorrogados los Presupuestos?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "¿Se aprobaron a tiempo los presupuestos de 2019?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos días de retraso llevan los presupuestos de este año?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado (en curso)"
+  }
+ },
+ {
+  "pregunta": "años en los que las cuentas del Estado llegaron tarde",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Tarde"
+  }
+ },
+ {
+  "pregunta": "¿Qué presidente tuvo más presupuestos prorrogados?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente_responsable",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido ha aprobado más presupuestos a tiempo?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "partido_responsable",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "situacion": "A tiempo"
+  }
+ },
+ {
+  "pregunta": "presupuestos prorrogados de Rajoy",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado",
+   "presidente_responsable": "Mariano Rajoy"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos presupuestos aprobó a tiempo Felipe González?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "A tiempo",
+   "presidente_responsable": "Felipe González"
+  }
+ },
+ {
+  "pregunta": "¿Estamos en presupuestos prorrogados?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año que más tardaron en aprobar las cuentas?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "presupuestos generales del estado 2017 situación",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2017
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas veces ha tardado el Gobierno de Sánchez en aprobar los presupuestos?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Tarde",
+   "presidente_responsable": "Pedro Sánchez"
+  }
+ },
+ {
+  "pregunta": "presupuestos aprobados con el PP en plazo",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "A tiempo",
+   "partido_responsable": "PP"
+  }
+ },
+ {
+  "pregunta": "evolución de los presupuestos prorrogados desde 1978",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "Presupuestos 2023: ¿a tiempo o prorrogados?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién gobernaba el 1 de enero cuando se prorrogaron las cuentas?",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "presidente_1_enero",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "Quants pressupostos s'han prorrogat?",
+  "idioma": "ca",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "Cantos orzamentos xerais foron aprobados tarde?",
+  "idioma": "gl",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Tarde"
+  }
+ },
+ {
+  "pregunta": "How many times has Spain run on extended budgets?",
+  "idioma": "en",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Prorrogado"
+  }
+ },
+ {
+  "pregunta": "PSOE presupuestos tarde",
+  "idioma": "es",
+  "tabla": "gobierno_presupuestos",
+  "medida": "dias_prorroga",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "situacion": "Tarde",
+   "partido_responsable": "PSOE"
+  }
+ }
+]

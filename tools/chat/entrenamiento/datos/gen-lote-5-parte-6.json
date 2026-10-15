@@ -1,0 +1,1954 @@
+[
+ {
+  "pregunta": "¿A cuánto está la gasolina hoy?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "precio del diésel esta semana",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Está más cara la gasolina en España que en el resto de Europa?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Media UE"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto costaba el litro de gasoil en 2012?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el precio más alto que ha alcanzado la gasolina?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio del gasóleo de calefacción?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de calefacción"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el combustible desde 2019 teniendo en cuenta la inflación?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "precio del autogas GLP para el coche",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "GLP de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Es más barato echar gasolina en Alemania? bueno, en la media de la UE",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Media UE"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se pagaba por llenar el depósito de diésel en 2022 en la UE?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Media UE"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo estuvo más barata la gasolina en euros de hoy?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Sigue el gasoil más caro que la gasolina?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio gasolina junio 2022",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 6
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vale ahora el litro de gasolina sin tener en cuenta la inflación?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Por qué está tan caro llenar el depósito? ¿Cuánto cuesta el diésel respecto a hace 10 años?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Qué combustible es más barato, el diésel, la gasolina o el gas licuado?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasolina precio medio europeo ultima semana",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Media UE"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto costó el gasóleo para la caldera en el invierno de 2023?",
+  "idioma": "es",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de calefacción"
+  }
+ },
+ {
+  "pregunta": "Quant costa el litre de gasolina?",
+  "idioma": "ca",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "A canto está o gasóleo?",
+  "idioma": "gl",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "How much is petrol per litre in Spain right now?",
+  "idioma": "en",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "Zenbat balio du gasolinaren litroak gaur?",
+  "idioma": "eu",
+  "tabla": "mercado_energia_carburantes",
+  "medida": "eur_litro",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina 95"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el kWh de luz en casa?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Dónde es más cara la electricidad para las familias, en España o en Alemania?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "precio del gas natural para hogares en Francia",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene la luz más cara?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene el gas más barato para las casas?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la factura de la luz por kWh desde 2015 teniendo en cuenta la inflación?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio del gas natural en las casas españolas?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "precio de la luz para un hogar en el segundo semestre de 2022",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo fue más cara la electricidad doméstica en España?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "semestre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Pagamos más o menos por la luz que la media de la UE?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "precio del kWh en Portugal electricidad",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "gas natural italia hogares precio 2021",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿En qué año estuvo el gas más barato para las casas españolas?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el gas de ciudad por kilovatio hora en mi casa?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "Estoy pensando en irme a vivir a Francia, ¿allí es más barata la electricidad que aquí?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "precio de la luz en 2007 en euros de hoy",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la luz doméstica en Alemania entre 2010 y 2024?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿La electricidad es más cara que el gas por kWh?",
+  "idioma": "es",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "energia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant costa el kWh d'electricitat a les llars espanyoles?",
+  "idioma": "ca",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "Canto custa o kWh de luz nas casas galegas e españolas?",
+  "idioma": "gl",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "How much do households pay per kWh of electricity in Spain compared with Germany?",
+  "idioma": "en",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "Zenbat ordaintzen dute etxeek elektrizitatearen kWh bakoitzeko Espainian?",
+  "idioma": "eu",
+  "tabla": "mercado_energia_hogares",
+  "medida": "eur_kwh",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "energia": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la luz en el último año?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los carburantes respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "¿Sube más el gas que el IPC general?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pesa la electricidad en el IPC?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "ponderacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "subida de la luz en agosto de 2022",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto más cara está la gasolina que en 2019?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el butano desde antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Butano y propano"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio de la energía en los últimos años?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Energía (total)"
+  }
+ },
+ {
+  "pregunta": "¿Qué energía ha subido más, la luz, el gas o la gasolina?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes ha subido más la luz respecto al año anterior?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto contribuye la energía a la inflación?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "contribucion_aprox",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Energía (total)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han bajado los precios del gasóleo de calefacción en 2023?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de calefacción"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene la gasolina en la cesta de la compra del IPC?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "ponderacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "índice de precios del gas natural base 2019",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "IPC del gasóleo de automoción último mes",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasóleo de automoción"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el índice de precios de la electricidad entre 2020 y 2023?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto subió la luz en enero de 2021 con la borrasca Filomena y todo?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2021
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Y el IPC general, a cuánto está?",
+  "idioma": "es",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "IPC general"
+  }
+ },
+ {
+  "pregunta": "Quant ha pujat la llum l'últim any?",
+  "idioma": "ca",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "Canto subiu a gasolina no último ano?",
+  "idioma": "gl",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "How much have electricity prices risen compared with a year ago?",
+  "idioma": "en",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "Zenbat igo da argindarraren prezioa azken urtean?",
+  "idioma": "eu",
+  "tabla": "mercado_energia_ipc",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios en Andalucía en el último año?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más inflación?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde suben menos los precios, en qué comunidad?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto más caro está todo en Cataluña que en 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "subida_desde_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad ha acumulado más subida de precios desde 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "subida_desde_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "IPC Comunidad de Madrid mes pasado",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_mensual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflación en Canarias en 2022",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto subió el IPC en España en junio de 2022?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 6
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la inflación de Galicia en los últimos años?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue la inflación más alta de la historia en España?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ha pasado con los precios en Valencia desde 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "subida_desde_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tuvo la mayor inflación en octubre de 2022?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 10
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios en Ceuta?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "IPC país vasco subida mensual",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_mensual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy a punto de mudarme: ¿en qué comunidad están subiendo menos los precios en este momento?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios en Aragón en los últimos 5 años?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "subida_desde_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue la inflación en Baleares en 1990?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1990
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el IPC de Castilla y León entre 2021 y 2023?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está subiendo o bajando la inflación en Murcia mes a mes?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_mensual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "A quant està la inflació a Catalunya?",
+  "idioma": "ca",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto subiron os prezos en Galicia desde 2019?",
+  "idioma": "gl",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "subida_desde_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the inflation rate in Madrid compared with the Spanish average?",
+  "idioma": "en",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat igo dira prezioak Euskadin azken urtean?",
+  "idioma": "eu",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "IPC Extremadura 2008",
+  "idioma": "es",
+  "tabla": "mercado_ipc_ccaa",
+  "medida": "var_anual",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los alimentos en el último año?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Alimentos"
+  }
+ },
+ {
+  "pregunta": "¿Qué sube más, la comida o la vivienda?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo_corto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué cosas se han abaratado más este último año?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo_corto",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesa la comida en la cesta del IPC?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "ponderacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Alimentos"
+  }
+ },
+ {
+  "pregunta": "subida de precios en restaurantes y hoteles",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Restaurantes y hoteles"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios de la ropa en 2023?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Ropa y calzado"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la inflación del transporte?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Transporte"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de gasto contribuye más a la subida general de precios?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "contribucion_aprox",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo_corto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue la inflación general en marzo de 2022?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios de la sanidad desde 2020 hasta 2024?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Sanidad"
+  }
+ },
+ {
+  "pregunta": "¿A cuánto está la inflación hoy?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta más la vivienda y la energía este mes que el mes anterior?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Vivienda y energía"
+  }
+ },
+ {
+  "pregunta": "cuánto han subido la enseñanza y las matrículas",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Enseñanza"
+  }
+ },
+ {
+  "pregunta": "IPC alcohol y tabaco ultimo dato",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Alcohol y tabaco"
+  }
+ },
+ {
+  "pregunta": "¿En qué mes fue más alta la inflación de los alimentos?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo_corto": "Alimentos"
+  }
+ },
+ {
+  "pregunta": "Estoy haciendo la declaración y me preguntan cuánto han subido los precios del ocio y la cultura",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Ocio y cultura"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el teléfono e internet, las comunicaciones?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Comunicaciones"
+  }
+ },
+ {
+  "pregunta": "índice de precios de muebles y cosas del hogar",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "indice",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Hogar"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los seguros y servicios financieros en 2024?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Seguros y finanzas"
+  }
+ },
+ {
+  "pregunta": "Quant han pujat els aliments l'últim any?",
+  "idioma": "ca",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Alimentos"
+  }
+ },
+ {
+  "pregunta": "Canto subiron os prezos do transporte?",
+  "idioma": "gl",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Transporte"
+  }
+ },
+ {
+  "pregunta": "Which spending category has seen the biggest price increase?",
+  "idioma": "en",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo_corto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat igo dira janarien prezioak azken urtean?",
+  "idioma": "eu",
+  "tabla": "mercado_ipc_grupos",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo_corto": "Alimentos"
+  }
+ }
+]

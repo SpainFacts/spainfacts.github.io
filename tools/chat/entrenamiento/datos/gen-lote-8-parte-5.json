@@ -1,0 +1,322 @@
+[
+ {
+  "pregunta": "¿Dónde es más cara la vivienda: en qué provincia?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo está Madrid en vivienda: precio, alquiler y compraventas?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta un piso de 90 metros en Sevilla?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "precio_90m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se paga de alquiler en Girona?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto por debajo del máximo de la burbuja están los precios en Valencia?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "precio_vs_maximo_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad necesita más años de sueldo para comprar vivienda?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "anios_salario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia ha subido más el alquiler en cinco años?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "alquiler_var_5a",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde han subido más los precios de la vivienda este último año?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "precio_interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia está más cerca de su máximo histórico de precios?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "precio_vs_maximo_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "resumen vivienda Baleares precio alquiler hipotecas",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hipotecas por cada mil habitantes se firman al año en Alicante?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "hipotecas_12m_1000",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se construye más vivienda nueva por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "terminadas_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas compraventas por cada mil habitantes se han hecho en Murcia?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "compraventas_12m_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la foto actual de la vivienda en España: precio medio del metro cuadrado?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant costa un pis a Barcelona i quant el lloguer?",
+  "idioma": "ca",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Como está a vivenda en Galicia, prezos e alugueres?",
+  "idioma": "gl",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Give me a summary of housing in the Basque Country: prices, rents, mortgages.",
+  "idioma": "en",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer egoeratan dago etxebizitza Gipuzkoan, prezioa eta alokairua?",
+  "idioma": "eu",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene el alquiler más caro y la vivienda a la vez?",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "provincias con vivienda mas barata y alquiler mas barato",
+  "idioma": "es",
+  "tabla": "vivienda_resumen_territorios",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ }
+]

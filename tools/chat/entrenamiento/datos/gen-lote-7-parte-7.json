@@ -1,0 +1,1740 @@
+[
+ {
+  "pregunta": "¿Cuánto hay que esperar para operarse de traumatología?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Traumatología"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pacientes esperan una operación de cataratas u ojos?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pacientes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Oftalmología"
+  }
+ },
+ {
+  "pregunta": "¿Qué especialidad tiene la lista de espera más larga para operarse?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "especialidad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos días se tarda en conseguir cita con el dermatólogo?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "consultas",
+   "especialidad": "Dermatología"
+  }
+ },
+ {
+  "pregunta": "esperas consulta neurología",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "consultas",
+   "especialidad": "Neurología"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de pacientes de cirugía plástica espera más de seis meses?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pct_espera_larga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Cirugía plástica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han cambiado las esperas en urología en los últimos años?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2013,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Urología"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas esperan en cirugía general?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pacientes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Cirugía general y digestiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha empeorado la espera de ginecología desde 2019?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Ginecología"
+  }
+ },
+ {
+  "pregunta": "¿En qué especialidad hay más gente con espera larga para consulta?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pct_espera_larga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "especialidad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "consultas"
+  }
+ },
+ {
+  "pregunta": "pacientes en lista de espera por cada mil habitantes en traumatología",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Traumatología"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se espera para ver al cardiólogo?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "consultas",
+   "especialidad": "Cardiología"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de lista de espera quirúrgica en neurocirugía?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Neurocirugía"
+  }
+ },
+ {
+  "pregunta": "mi madre espera operarse de la rodilla, ¿cuántos días de media tarda la sanidad pública?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Traumatología"
+  }
+ },
+ {
+  "pregunta": "pacientes esperando otorrino",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pacientes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Otorrinolaringología"
+  }
+ },
+ {
+  "pregunta": "¿Qué especialidad quirúrgica tiene más pacientes en espera?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "pacientes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "especialidad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "temps d'espera per operar-se d'oftalmologia",
+  "idioma": "ca",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "especialidad": "Oftalmología"
+  }
+ },
+ {
+  "pregunta": "Cantos días hai que esperar para ver o dermatólogo?",
+  "idioma": "gl",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "consultas",
+   "especialidad": "Dermatología"
+  }
+ },
+ {
+  "pregunta": "How long is the waiting list for surgery in Spain by specialty?",
+  "idioma": "en",
+  "tabla": "sanidad_listas_especialidad",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "especialidad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente espera una operación en España?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "tablas_validas": [
+   "sanidad_listas_especialidad"
+  ],
+  "medida": "pacientes",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más gente en lista de espera quirúrgica por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos días se espera de media para operarse en Canarias?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se espera menos para una consulta con especialista?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "consultas"
+  }
+ },
+ {
+  "pregunta": "lista de espera Andalucía diciembre",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "pacientes",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "corte": "diciembre"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de pacientes espera más de 6 meses en Cataluña?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "pct_espera_larga",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han empeorado las listas de espera en Madrid desde 2017?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2017,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las esperas quirúrgicas en España?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2016,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos días hay que esperar para ver a un especialista en Valencia?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "consultas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pacientes había en lista de espera en junio de 2023?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "pacientes",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica",
+   "corte": "junio"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene la mayor proporción de esperas largas?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "pct_espera_larga",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se opera uno antes, en Galicia o en Extremadura?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "esperas sanidad pública País Vasco",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo hubo más gente esperando en consultas externas?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "consultas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pacientes esperan por cada mil habitantes en Baleares?",
+  "idioma": "es",
+  "tabla": "sanidad_listas_espera",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "04"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "llista d'espera quirúrgica a Catalunya",
+  "idioma": "ca",
+  "tabla": "sanidad_listas_espera",
+  "medida": "pacientes",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "Cantos días se agarda para operarse en Galicia?",
+  "idioma": "gl",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "Which region has the longest surgery waiting times?",
+  "idioma": "en",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "Zenbat egun itxaron behar da ebakuntza baterako Nafarroan?",
+  "idioma": "eu",
+  "tabla": "sanidad_listas_espera",
+  "medida": "dias_medio",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "15"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo": "quirurgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos hay por habitante en España?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas enfermeras tiene España por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "enfermeras",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas camas de hospital hay en España?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas",
+   "situacion": "total"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene más médicos por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene menos camas hospitalarias por cada 100.000 habitantes?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "recurso": "camas",
+   "situacion": "total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos había en España en 2005?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2005
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de enfermeras en España?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "enfermeras",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas camas de hospital se han perdido desde 2000?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_100k",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas",
+   "situacion": "total"
+  }
+ },
+ {
+  "pregunta": "¿Tenemos más o menos médicos que Alemania?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos hay de media en la UE?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27 (media)"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "mixta"
+  }
+ },
+ {
+  "pregunta": "enfermeras por habitante Portugal",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "enfermeras",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de Europa tiene más enfermeros?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "enfermeras",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas camas de hospital hay por mil habitantes en Francia?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas",
+   "situacion": "total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos en activo hay en total en España?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "activo"
+  }
+ },
+ {
+  "pregunta": "¿En qué año había más camas por habitante en España?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "camas",
+   "situacion": "total"
+  }
+ },
+ {
+  "pregunta": "metges per habitant a Espanya",
+  "idioma": "ca",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "Cantas enfermeiras hai en España?",
+  "idioma": "gl",
+  "tabla": "sanidad_recursos",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "enfermeras",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "How many doctors per 1,000 people does Spain have compared with Italy?",
+  "idioma": "en",
+  "tabla": "sanidad_recursos",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos",
+   "situacion": "ejerciendo"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más médicos por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas camas de hospital hay en Andalucía?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Dónde faltan más médicos?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "médicos por 1000 habitantes Castilla y León",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas camas hospitalarias tiene Madrid por cada 100.000 habitantes?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_100k",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de médicos en Cataluña?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han crecido los médicos en Galicia desde 2010?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene menos camas de hospital por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos ejercen en Navarra?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "15"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "camas hospital Extremadura 2015",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "11"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos doctores hay en Canarias por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más camas por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos tiene el País Vasco?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con menos camas en Aragón?",
+  "idioma": "es",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "02"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "metges per habitant a Catalunya",
+  "idioma": "ca",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "Cantas camas de hospital hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "numero",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "Which Spanish region has the most hospital beds per capita?",
+  "idioma": "en",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "recurso": "camas"
+  }
+ },
+ {
+  "pregunta": "Zenbat sendagile daude Euskadin 1000 biztanleko?",
+  "idioma": "eu",
+  "tabla": "sanidad_recursos_ccaa",
+  "medida": "por_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "recurso": "medicos"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa España en corrupción?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "puesto_mundial",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta corrupción hay en España según Transparencia Internacional?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de Europa es el más limpio?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el país más corrupto de la UE?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la nota de corrupción de España desde 2012?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2012,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Hemos mejorado en control de la corrupción desde 2000?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wgi_control_corrupcion"
+  }
+ },
+ {
+  "pregunta": "¿Qué tal funciona el Estado de derecho en España?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wgi_estado_derecho"
+  }
+ },
+ {
+  "pregunta": "¿En qué puesto de la UE está España en corrupción?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "puesto_ue",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto tenemos en la OCDE en percepción de corrupción?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "puesto_ocde",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "corrupción política España V-Dem",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "vdem_corrupcion_politica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo es de transparente el gobierno español según el World Justice Project?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wjp_gobierno_abierto"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene menos corrupción en el sector público, Dinamarca o Italia?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Dinamarca"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "vdem_corrupcion_sector_publico"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de España en el índice de corrupción?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "corrupción Italia índice percepción 2020",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "¿Cómo está España en límites al poder del gobierno?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wjp_limites_gobierno"
+  }
+ },
+ {
+  "pregunta": "¿Y en eficacia del gobierno según el Banco Mundial?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wgi_eficacia_gobierno"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta voz y rendición de cuentas tiene Portugal?",
+  "idioma": "es",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "wgi_voz_rendicion_cuentas"
+  }
+ },
+ {
+  "pregunta": "corrupció a Espanya, quin lloc ocupem?",
+  "idioma": "ca",
+  "tabla": "transparencia_internacional",
+  "medida": "puesto_mundial",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "En que posto está España en corrupción?",
+  "idioma": "gl",
+  "tabla": "transparencia_internacional",
+  "medida": "puesto_ue",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ },
+ {
+  "pregunta": "Which country is the least corrupt in the world according to Transparency International?",
+  "idioma": "en",
+  "tabla": "transparencia_internacional",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "cpi"
+  }
+ }
+]

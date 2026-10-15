@@ -1,0 +1,2374 @@
+[
+ {
+  "pregunta": "¿Cuánto dinero público ha recibido El País?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El País"
+  }
+ },
+ {
+  "pregunta": "¿Qué periódico cobra más de las administraciones?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cobrado la Cadena SER de la Generalitat?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Cadena SER",
+   "gobierno": "Generalitat de Catalunya"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto paga el PP en publicidad a los medios cuando gobierna?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partido": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Quién da más dinero a los medios, los gobiernos del PSOE o los del PP?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "partido",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "subvenciones recibidas por La Vanguardia",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Vanguardia",
+   "via": "Subvención"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero reciben los medios de la Xunta de Galicia?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "gobierno": "Xunta de Galicia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha pagado el Ayuntamiento de Madrid a los medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "gobierno": "Ayuntamiento de Madrid"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra ABC de publicidad institucional autonómica y local?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "ABC",
+   "via": "Publicidad institucional autonómica/local"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recibe la prensa de Aragón por contratos con el gobierno aragonés?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Contrato"
+  }
+ },
+ {
+  "pregunta": "¿Qué medios privados cobran dinero público en Cataluña?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "titularidad": "privada"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero público ha llegado a las televisiones y radios públicas?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "titularidad": "publica"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cobrado Heraldo de Aragón en 2023?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Heraldo de Aragón"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el dinero público que recibe El Periódico de Catalunya?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El Periódico (de Catalunya)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado lo que cobra Atresmedia de dinero público entre 2019 y 2025?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Atresmedia-Planeta"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobran de empresas públicas del Estado los medios por publicidad comercial?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Publicidad comercial de empresas del Estado"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos euros han ido a medios de la Región de Murcia?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se pagó más dinero público a medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero ha recibido el grupo Prensa Ibérica en total de ayuntamientos?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Prensa Ibérica",
+   "nivel_admin": "local"
+  }
+ },
+ {
+  "pregunta": "importe nominal 3Cat TV3 2022",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "3Cat (TV3, Catalunya Ràdio)"
+  }
+ },
+ {
+  "pregunta": "Mi cuñado dice que El Mundo vive de subvenciones: ¿cuánto recibe de dinero público?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El Mundo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobraron los medios de gobiernos autonómicos del PNV?",
+  "idioma": "es",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "partido": "PNV",
+   "nivel_admin": "autonomico"
+  }
+ },
+ {
+  "pregunta": "Quants diners públics rep La Vanguardia?",
+  "idioma": "ca",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Vanguardia"
+  }
+ },
+ {
+  "pregunta": "Canto diñeiro público recibe La Voz de Galicia?",
+  "idioma": "gl",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Voz de Galicia"
+  }
+ },
+ {
+  "pregunta": "How much public money does El País receive from regional governments?",
+  "idioma": "en",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El País",
+   "nivel_admin": "autonomico"
+  }
+ },
+ {
+  "pregunta": "Zenbat diru publiko jasotzen du Deia-k?",
+  "idioma": "eu",
+  "tabla": "medios_receptores",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Deia"
+  }
+ },
+ {
+  "pregunta": "¿Qué medio de comunicación recibe más dinero público en total?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cobrado la Cadena SER en dinero de las administraciones?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Cadena SER"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pagos públicos ha recibido Europa Press?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "n_pagos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Europa Press"
+  }
+ },
+ {
+  "pregunta": "top medios que reciben subvenciones",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "via": "Subvención"
+  }
+ },
+ {
+  "pregunta": "top medios que reciben contratos públicos en 2024",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "via": "Contrato"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra La Vanguardia por publicidad institucional autonómica y local?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Vanguardia",
+   "via": "Publicidad institucional autonómica/local"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cobrado Ara en dinero público desde 2018?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Ara"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los ingresos públicos de EITB?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "EITB (ETB, Euskadi Irratia, Radio Euskadi)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido lo que recibe El Periódico desde 2019?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El Periódico (de Catalunya)"
+  }
+ },
+ {
+  "pregunta": "¿Qué medio recibió más dinero público en 2021?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas administraciones diferentes pagan a Agencia EFE?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "n_administraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Agencia EFE"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos gobiernos distintos pagan a El Correo?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "n_gobiernos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El Correo"
+  }
+ },
+ {
+  "pregunta": "cobro de ABC en subvenciones y contratos públicos",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "ABC"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero público ha recibido elDiario.es?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "elDiario.es"
+  }
+ },
+ {
+  "pregunta": "¿Y El Confidencial?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "El Confidencial"
+  }
+ },
+ {
+  "pregunta": "importe nominal Diario de Navarra 2020",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "Diario de Navarra"
+  }
+ },
+ {
+  "pregunta": "¿Qué medio tiene más dinero de publicidad institucional del Estado?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "via": "Publicidad institucional del Estado"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobró 3Cat de dinero público el año pasado?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "3Cat (TV3, Catalunya Ràdio)"
+  }
+ },
+ {
+  "pregunta": "¿Qué periodico de la lista del dinero público es el que menos recibe?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy comparando medios: ¿cuánto dinero público reciben El Mundo y La Razón?",
+  "idioma": "es",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Razón"
+  }
+ },
+ {
+  "pregunta": "Quin mitjà rep més diners públics?",
+  "idioma": "ca",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos pagos públicos recibe La Voz de Galicia?",
+  "idioma": "gl",
+  "tabla": "medios_receptores_resumen",
+  "medida": "n_pagos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medio": "La Voz de Galicia"
+  }
+ },
+ {
+  "pregunta": "Which media outlet gets the most public money overall?",
+  "idioma": "en",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein komunikabidek jasotzen du diru publiko gehien?",
+  "idioma": "eu",
+  "tabla": "medios_receptores_resumen",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "medio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero se da en ayudas a los medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad subvenciona más a los medios por habitante?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas subvenciones a medios ha concedido el Gobierno vasco?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "n_concesiones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas periodísticas reciben ayudas públicas en Cataluña?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "n_beneficiarios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el dinero en subvenciones a la prensa en Navarra?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ayudas del Estado a medios 2023",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "estatal"
+  }
+ },
+ {
+  "pregunta": "subvenciones de los ayuntamientos a medios locales",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "¿Qué gobiernos autonómicos dan más ayudas a medios, los del PNV o los del PP?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el dinero en ayudas a medios en Galicia desde 2019?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor dinero en subvenciones a medios de España?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos euros por persona dio la Generalitat en subvenciones a los medios?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "importe nominal subvenciones medios Canarias 2022",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad da menos ayudas a la prensa?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas ayudas a medios dio Castilla y León en 2024?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "n_concesiones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobran los medios en subvenciones de la Comunidad de Madrid?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto del Estado recibe la prensa en ayudas por la digitalización, en euros constantes?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "estatal"
+  }
+ },
+ {
+  "pregunta": "subvenciones a medios de comunicación Baleares",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants diners dona la Generalitat Valenciana en ajudes als mitjans?",
+  "idioma": "ca",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto diñeiro dá a Xunta en axudas aos medios?",
+  "idioma": "gl",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much public subsidy do media outlets get in the Basque Country?",
+  "idioma": "en",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat diru-laguntza ematen zaie komunikabideei Nafarroan?",
+  "idioma": "eu",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ayudas prensa asturias ultimo año por habitante",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué empresa de medios recibe más subvenciones?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha recibido en ayudas Diario El Correo?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Diario El Correo SA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas ayudas ha recibido La Vanguardia Ediciones?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "n_concesiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "LA VANGUARDIA EDICIONES SLU"
+  }
+ },
+ {
+  "pregunta": "¿Quién cobró la mayor subvención a medios en 2024?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las ayudas a Komunikazio Biziagoa?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "KOMUNIKAZIO BIZIAGOA,S.A.L."
+  }
+ },
+ {
+  "pregunta": "subvenciones públicas recibidas por Ara",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "EDICIO DE PREMSA PERIODICA ARA, SL"
+  }
+ },
+ {
+  "pregunta": "¿Qué empresas y entidades reciben ayudas para medios en euskera?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobró Elhuyar Fundazioa en ayudas públicas?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Elhuyar Fundazioa"
+  }
+ },
+ {
+  "pregunta": "importe nominal subvenciones Sociedad Vascongada de Publicaciones",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Sociedad Vascongada de Publicaciones, S.A."
+  }
+ },
+ {
+  "pregunta": "¿Quién se llevó la mayor ayuda a medios en 2019?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra Europa Press de subvenciones?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Agencia Europa Press, S.A."
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido las ayudas a Sumando TV y Web entre 2020 y 2024?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "SUMANDO TV Y WEB SAU"
+  }
+ },
+ {
+  "pregunta": "¿Quién es el mayor beneficiario de las ayudas públicas a la prensa en todo el periodo?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresas de comunicación con más concesiones de ayudas",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "n_concesiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas subvenciones recibió Goiena en 2022?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "n_concesiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "GOIENA KOMUNIKAZIO TALDEA KOOP E"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero público cobra Xangorin Koop?",
+  "idioma": "es",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Xangorin Koop Elkarte Txikia"
+  }
+ },
+ {
+  "pregunta": "Quina empresa de comunicació rep més ajudes?",
+  "idioma": "ca",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que empresa recibe máis subvencións aos medios?",
+  "idioma": "gl",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which media company receives the most public grants?",
+  "idioma": "en",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein enpresak jasotzen ditu diru-laguntza gehien?",
+  "idioma": "eu",
+  "tabla": "medios_subvenciones_beneficiarios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta TV3 a los catalanes por habitante?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué televisión autonómica sale más cara?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones se lleva Telemadrid del dinero público?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero recibe Canal Sur de la Junta?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué cuota de audiencia tiene la televisión autonómica gallega?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "cuota_audiencia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué televisión autonómica tiene mejor audiencia?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "cuota_audiencia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta cada punto de audiencia de la tele pública de Aragón?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real_por_punto_cuota",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la tele autonómica menos eficiente, que más gasta por cada punto de cuota?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real_por_punto_cuota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el dinero público de EITB?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la financiación de IB3 desde 2017?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2017,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "presupuesto de À Punt 2020",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué televisión autonómica cuesta menos por vecino?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto fue el año en que la CCMA recibió más dinero público?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta audiencia tiene el canal principal de la tele canaria?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "cuota_canal_principal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "euros por habitante nominal televisión pública Asturias 2019",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta la tele de Castilla-La Mancha al año?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "meur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué hace Extremadura gastando en su televisión pública?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente ve la tele de Murcia, la 7?",
+  "idioma": "es",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "cuota_audiencia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant costa TV3 per habitant?",
+  "idioma": "ca",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto custa a CRTVG por habitante?",
+  "idioma": "gl",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much do regional public TV channels cost per person?",
+  "idioma": "en",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat balio du EITB-k biztanleko?",
+  "idioma": "eu",
+  "tabla": "medios_tv_ccaa_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero público recibe RTVE?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en total en televisiones públicas, estatal y autonómicas, por habitante?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta RTVE a cada español?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero se llevan en conjunto las teles autonómicas?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "autonomicas_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la financiación de RTVE desde 2008?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el dinero de RTVE por habitante desde 2008?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se pagó en total a las televisiones públicas en 2015?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "total_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué audiencia tiene La 1?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "cuota_la1",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año con mejor audiencia de La 1?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "cuota_la1",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del dinero de RTVE viene del Estado y qué parte de tasas?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_estado_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pagan las teles autonómicas por habitante?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "autonomicas_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado en la tele pública en 2019?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año gastamos más en televisión pública?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "total_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "aportación del Estado a RTVE por habitante",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_estado_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasas de la tele pública recaudadas por habitante",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_tasas_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas comunidades dan datos de su televisión autonómica?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "comunidades_con_dato",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha subido o bajado la audiencia de La 1 en los últimos años?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "cuota_la1",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy en contra de pagar la tele pública: ¿cuántos millones cuesta RTVE al año?",
+  "idioma": "es",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant costa RTVE a cada espanyol?",
+  "idioma": "ca",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto custa RTVE a cada español?",
+  "idioma": "gl",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much public money goes to RTVE every year?",
+  "idioma": "en",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_meur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat balio du RTVE-k biztanleko?",
+  "idioma": "eu",
+  "tabla": "medios_tv_espana_anual",
+  "medida": "rtve_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Las comunidades del PP gastan más en su televisión pública que las del PSOE?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido da más dinero a su tele autonómica por habitante?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones han recibido las teles de comunidades gobernadas por el PNV?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "meur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PNV"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte del dinero de las televisiones autonómicas se lleva Junts?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "cuota_dinero",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Junts / CiU"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene el PP en la población y qué peso en el dinero de las teles?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "cuota_poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido recibe más de lo esperado para su población en televisión autonómica?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "ratio_observado_esperado",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastan por persona las comunidades del PSOE en televisión pública?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "tele autonómica gobernada por ERC por habitante",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "ERC"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero por habitante da Coalición Canaria a su televisión?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Coalición Canaria"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido gasta menos en tele pública por habitante?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay partidos que se llevan más dinero del que les corresponde por habitantes?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "ratio_observado_esperado",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones se llevaron las televisiones autonómicas con gobiernos del PSOE?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "meur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "porcentaje del dinero de teles autonómicas por partido",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "cuota_dinero",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población vive en comunidades del PSOE?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "cuota_poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ }
+]

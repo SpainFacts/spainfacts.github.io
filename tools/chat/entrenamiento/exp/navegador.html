@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Prueba decisor en el navegador</title>
+<style>body{font:14px system-ui;margin:16px;background:#fff;color:#111}pre{white-space:pre-wrap}</style>
+</head>
+<body>
+<h1>Prueba decisor ONNX</h1>
+<p>?modelo=&lt;id o ruta&gt;&amp;device=webgpu|wasm&amp;dtype=q4|q4f16&amp;clas=1</p>
+<pre id="log"></pre>
+<script type="module">
+const log = (s) => (document.getElementById('log').textContent += s + '\n');
+const q = new URLSearchParams(location.search);
+const modelo = q.get('modelo') ?? 'onnx-community/Qwen3.5-0.8B-ONNX';
+const device = q.get('device') ?? 'webgpu';
+const dtypeTexto = q.get('dtype') ?? 'q4';
+// dtype por fichero: {"embed_tokens":"fp16","decoder_model_merged":"q4"}
+const dtype = dtypeTexto.startsWith('{') ? JSON.parse(dtypeTexto) : dtypeTexto;
+window.resultado = { estado: 'cargando' };
+try {
+	const tjs = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0');
+	const { AutoTokenizer, AutoModelForCausalLM, LogitsProcessor, LogitsProcessorList, env } = tjs;
+	if (q.get('local')) {
+		env.allowLocalModels = true;
+		env.allowRemoteModels = false;
+		env.localModelPath = q.get('local');
+	}
+	const t0 = performance.now();
+	const tok = await AutoTokenizer.from_pretrained(modelo);
+	const red = await AutoModelForCausalLM.from_pretrained(modelo, { dtype, device, use_external_data_format: true });
+	log(`cargado ${modelo} ${device} ${dtype} en ${((performance.now() - t0) / 1000).toFixed(1)} s`);
+	class Captura extends LogitsProcessor {
+		logits = null;
+		_call(_ids, logits) { this.logits ??= logits; return logits; }
+	}
+	const prompt = (ctx, preg, ops) => `Context:\n${ctx}\n\nQuestion: ${preg}\nOptions:\n${ops.map((o, i) => `(${String.fromCharCode(65 + i)}) ${o}`).join('\n')}\nAnswer: (`;
+	const casos = [
+		['Pregunta del usuario: ¿cuántos parados hay en España?', ['turismo_anual: turistas que llegan a España', 'mercado_paro_registrado: paro registrado en las oficinas de empleo', 'pensiones_mensual: pensiones que paga la Seguridad Social'], 1],
+		['Pregunta del usuario: ¿cuánto cobran de media los jubilados?', ['vivienda_alquiler: precio del alquiler', 'pensiones_mensual: pensiones que paga la Seguridad Social y su importe medio', 'mercado_paro_registrado: paro registrado'], 1]
+	];
+	const res = [];
+	for (const [ctx, ops, oro] of casos) {
+		const t1 = performance.now();
+		const cap = new Captura();
+		const lista = new LogitsProcessorList();
+		lista.push(cap);
+		const gemma = /gemma/i.test(red.config?.model_type ?? '');
+		const entrada = tok((gemma ? '<bos>' : '') + prompt(ctx, 'Which data table answers the user question?', ops), { add_special_tokens: false });
+		await red.generate({ ...entrada, max_new_tokens: 1, do_sample: false, logits_processor: lista });
+		const n = cap.logits.dims.at(-1);
+		const fila = cap.logits.data.subarray(cap.logits.data.length - n);
+		const l = ops.map((_, i) => Number(fila[tok.encode(String.fromCharCode(65 + i), { add_special_tokens: false })[0]]));
+		const m = Math.max(...l);
+		const e = l.map((x) => Math.exp(x - m));
+		const s = e.reduce((a, b) => a + b, 0);
+		const probs = e.map((x) => +(x / s).toFixed(3));
+		res.push({ probs, oro, ms: Math.round(performance.now() - t1) });
+		log(`${ctx.slice(22)} -> ${JSON.stringify(probs)} (oro ${oro}) ${Math.round(performance.now() - t1)} ms`);
+	}
+	window.resultado = { estado: 'ok', res };
+} catch (err) {
+	log('ERROR: ' + (err.stack ?? err));
+	window.resultado = { estado: 'error', error: String(err.message ?? err) };
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2559 @@
+[
+ {
+  "pregunta": "¿A cuánto está el metro cuadrado de la vivienda en España?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto vale una casa de 90 metros en Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "precio_90m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene la vivienda más cara?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene los pisos más baratos de España?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto costaba el metro cuadrado en 2007 en España, en euros de entonces?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el precio de la vivienda desde el máximo de la burbuja?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2014
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio de la vivienda en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios de las casas en el último año en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "interanual_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tocó techo el precio de los pisos en España?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio vivienda tasada Valencia 2T 2024",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024T2"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el piso de 90 metros en Barcelona sin contar la inflación?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "precio_90m2",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad ha visto subir más el valor de las viviendas en el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto vale la vivienda en Teruel comparado con hace diez años?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Teruel"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant val el metre quadrat d'habitatge a Girona?",
+  "idioma": "ca",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é a provincia con vivendas máis caras de Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the average price per square metre of housing in Madrid?",
+  "idioma": "en",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein da etxebizitzaren prezioa metro karratuko Gipuzkoan?",
+  "idioma": "eu",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincias han bajado los precios de la vivienda este año?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta una casa en Castilla y León por metro cuadrado?",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio metro cuadrado españa 1995",
+  "idioma": "es",
+  "tabla": "vivienda_precio_tasado",
+  "medida": "euros_m2",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1995
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más vivienda pública en alquiler por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas sociales tiene el País Vasco?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_2023",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene menos pisos públicos de alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el parque público de viviendas autonómico entre 2019 y 2023 en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "variacion_pct_2019_2023",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde ha aumentado más la vivienda pública en alquiler en los últimos años?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "variacion_pct_2019_2023",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares vive en alquiler público en Navarra?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_pct_hogares",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas de protección oficial en alquiler se han calificado en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "calif_alquiler_2005_2023_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares paga un alquiler por debajo del mercado en Canarias?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas había en Madrid en 2019?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gobernada por el PSOE tiene más vivienda pública por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "familia_2019_2023": "PSOE"
+  }
+ },
+ {
+  "pregunta": "vivienda social alquiler comunidad Valencia cuantas",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "alquiler_publico_conocido",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos públicos hay por cada mil habitantes en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde es más fácil conseguir un alquiler social?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_pct_hogares",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad del PP tiene menos vivienda pública?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "familia_2019_2023": "PP"
+  }
+ },
+ {
+  "pregunta": "Quants habitatges públics de lloguer té Catalunya?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "alquiler_publico_conocido",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canta vivenda pública de aluguer hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "alquiler_publico_conocido",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which region has the most public rental housing per inhabitant?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein erkidegok dauka alokairuko etxebizitza publiko gehien?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "conocido_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas de protección para alquiler se han calificado desde 2005 por cada mil habitantes en el País Vasco?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "calif_alquiler_2005_2023_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos públicos tiene Extremadura?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa",
+  "medida": "autonomico_2023",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas protegidas en alquiler se calificaron en Madrid cada año?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares pagaba un alquiler por debajo del mercado en Cantabria en 2020?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la vivienda protegida en alquiler en Cataluña por cada 100.000 habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler_100k",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad calificó más vivienda protegida de alquiler en 2010?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares viven con alquiler de mercado en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "ecv_pct_alquiler_mercado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se hizo más vivienda protegida en toda España en alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el porcentaje de hogares con alquiler barato en Andalucía desde 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "calificaciones vivienda protegida total Galicia 2019",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se calificaron más viviendas protegidas de alquiler por habitante en 2022?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas protegidas de todo tipo se calificaron en Canarias en 2008?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene hoy más hogares con alquiler por debajo de precio de mercado?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha ido el alquiler protegido en el País Vasco gobernado por el PNV?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PNV"
+  }
+ },
+ {
+  "pregunta": "Quantes vivendes protegides de lloguer es van qualificar a Catalunya el 2015?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas protexidas de aluguer se cualificaron en Galicia?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many subsidised rental homes were approved in the Basque Country each year?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat etxebizitza babestu kalifikatu dira Nafarroan urtero?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivienda protegida alquiler comunidad ranking 2023",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad ha mejorado más desde 2010 en alquiler protegido calificado?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de la vivienda protegida en Valencia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "calif_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares de Murcia paga alquiler de mercado?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_ccaa_anual",
+  "medida": "ecv_pct_alquiler_mercado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas de alquiler hay en España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos sociales hay por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares vive en un alquiler público?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_pct_hogares",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas protegidas de alquiler se calificaron en España en 2010?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la construcción de vivienda protegida en alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de hogares españoles es propietario de su casa?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "ecv_pct_propiedad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares pagan un alquiler más barato que el de mercado?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el porcentaje de propietarios desde 2010?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "ecv_pct_propiedad",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se calificó más vivienda de alquiler protegido en España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas autonómicas de alquiler hay en el país?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_autonomico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivienda protegida alquiler calificada por 100.000 habitantes españa 2018",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos de protección oficial para alquilar se aprobaron el último año con dato?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants habitatges públics de lloguer hi ha a tot Espanya?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas públicas de aluguer hai en España?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much public rental housing is there in Spain?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat alokairuko etxebizitza publiko dago Espainian?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Tiene España suficiente vivienda social? ¿Cuántas hay por mil habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "parque_publico_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje hogares alquiler inferior mercado españa evolucion",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "ecv_pct_alquiler_inferior",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas se construyeron antes de la crisis, en 2008?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año en alquiler protegido calificado en España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_espana",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido ha hecho más vivienda protegida de alquiler cuando gobernaba?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido construye menos vivienda protegida en alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas protegidas de alquiler promovió el PSOE en las comunidades que gobernó?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas protegidas de alquiler calificó el PP por cada 100.000 habitantes y año?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido hace menos de lo esperado en vivienda protegida según su población gobernada?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "ratio_observado_esperado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué cuota de la vivienda protegida de alquiler calificó el PNV?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "cuota_calif",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PNV"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población española vivía en comunidades gobernadas por el PP entre 2005 y 2023?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "cuota_poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Hace Junts más vivienda protegida de lo esperado?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "ratio_observado_esperado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Junts / CiU"
+  }
+ },
+ {
+  "pregunta": "vivienda protegida alquiler por partido gobierno autonomico",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién promueve más alquiler protegido, la izquierda o la derecha?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y Coalición Canaria, cuánta vivienda protegida de alquiler ha promovido?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Coalición Canaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pisos protegidos para alquilar tiene la huella de ERC?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "ERC"
+  }
+ },
+ {
+  "pregunta": "Quin partit ha promogut més habitatge protegit de lloguer?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que partido promoveu máis vivenda protexida de aluguer cando gobernaba?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which party built the most protected rental housing while in regional government?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein alderdik sustatu du alokairuko etxebizitza babestu gehien gobernuan zegoenean?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler_100k_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué hace Ciudadanos en vivienda protegida cuando gobierna una comunidad?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "calif_alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Ciudadanos"
+  }
+ },
+ {
+  "pregunta": "vivienda protegida cuota poblacion gobernada por partido",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "cuota_poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido de los que han gobernado calificó una mayor proporción de la vivienda de alquiler protegida?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_gobiernos",
+  "medida": "cuota_calif",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de vivienda social tiene España comparado con Europa?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene más vivienda social?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas sociales hay en Francia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "viviendas_sociales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Francia"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de viviendas son sociales en los Países Bajos?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Países Bajos"
+  }
+ },
+ {
+  "pregunta": "¿Está España por encima o por debajo de la media de la OCDE en vivienda pública?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de Europa tiene menos vivienda social en proporción?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vivienda pública tiene Alemania respecto a España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Alemania"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las viviendas principales son sociales en Austria?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Austria"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas sociales de alquiler hay en el Reino Unido?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "viviendas_sociales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Reino Unido (Inglaterra)"
+  }
+ },
+ {
+  "pregunta": "vivienda social por paises ocde ranking",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene el parque de alquiler social más grande del mundo en porcentaje?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pisos sociales tiene Dinamarca?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "viviendas_sociales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Dinamarca"
+  }
+ },
+ {
+  "pregunta": "¿Cómo se compara la vivienda social de Italia con la de España?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Italia"
+  }
+ },
+ {
+  "pregunta": "Quin país europeu té més habitatge social?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "Que porcentaxe de vivenda social ten Suecia?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Suecia"
+  }
+ },
+ {
+  "pregunta": "What percentage of housing is social housing in Spain versus the Netherlands?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_parque_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "España"
+  }
+ },
+ {
+  "pregunta": "Zer herrialdek dauka etxebizitza sozial gehien Europan?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de vivienda social tiene Irlanda?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Irlanda"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas de alquiler social hay en Finlandia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "viviendas_sociales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "es_ultimo": "true",
+   "pais": "Finlandia"
+  }
+ },
+ {
+  "pregunta": "¿En qué puesto está España de los países de la UE en porcentaje de vivienda social?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_internacional",
+  "medida": "pct_viviendas_principales",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "es_ultimo": "true"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas municipales de alquiler tiene el Ayuntamiento de Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene más vivienda pública municipal por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos sociales tiene el ayuntamiento de Barcelona?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos tienen el mayor parque de vivienda social propia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad grande tiene menos vivienda municipal?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "origen": "encuesta_2023"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas en alquiler por cada mil habitantes hay en Cádiz?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler_1000hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas en total tiene el ayuntamiento de Sevilla?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas municipales se han vendido en Zaragoza?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "venta",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivienda municipal alquiler Bilbao",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos no han contestado la encuesta de vivienda municipal?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "origen": "sin_respuesta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pisos de alquiler social hay en Getafe?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad de Andalucía tiene más pisos públicos municipales?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el parque municipal de alquiler de Palma?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants habitatges municipals de lloguer té l'Ajuntament de Barcelona?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas de aluguer ten o concello de Vigo?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many council houses does the city of Alicante own for rent?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alacant/Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat etxebizitza ditu Bilboko Udalak alokairuan?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento tiene más pisos públicos por cada mil vecinos entre los grandes?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivienda publica ayuntamiento Gijón",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "alquiler",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Gijón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas casas municipales en venta tiene Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_municipios",
+  "medida": "venta",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más vivienda municipal en alquiler por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas municipales de alquiler hay en la provincia de Cádiz?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos pisos sociales de los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos públicos por mil habitantes hay en Bizkaia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "conocido_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué cobertura tiene la encuesta de vivienda pública municipal en Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "cobertura_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas sociales municipales hay en Barcelona provincia?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivienda municipal alquiler Málaga provincia",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia es más fácil conseguir un alquiler social del ayuntamiento?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincias tienen todos sus ayuntamientos grandes contabilizados en la encuesta de vivienda?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "cobertura_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta vivienda pública municipal hay en Gipuzkoa por habitante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos públicos hay en total, de ayuntamientos y comunidad, por cada mil habitantes en Sevilla?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "conocido_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas municipales de alquiler hay en Las Palmas?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes vivendes municipals de lloguer hi ha a la província de València?",
+  "idioma": "ca",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas municipais de aluguer hai na provincia da Coruña?",
+  "idioma": "gl",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which province has the most municipal rental housing per capita?",
+  "idioma": "en",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer probintziak dauka udal-etxebizitza gehien biztanleko?",
+  "idioma": "eu",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pisos municipales alquiler Zaragoza provincia",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas hay en Navarra por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "conocido_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia lidera en vivienda pública de alquiler tras Cádiz?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas públicas municipales tiene Alicante?",
+  "idioma": "es",
+  "tabla": "vivienda_publica_provincias",
+  "medida": "municipal_declarado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

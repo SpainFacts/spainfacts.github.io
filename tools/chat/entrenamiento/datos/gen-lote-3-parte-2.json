@@ -1,0 +1,2561 @@
+[
+ {
+  "pregunta": "¿Qué porcentaje de la luz de ayer fue renovable?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "pct_renovable",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "cuanta electricidad se consumió en España ayer",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "demanda_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía produjeron los molinos de viento ayer?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "eolica_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta placa solar fotovoltaica generó hoy?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "solar_fv_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿A cuánto está la luz hoy? precio del mercado mayorista",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "precio_spot_medio_eur_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "precio luz mercado diario mes de agosto 2025",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "precio_spot_medio_eur_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Qué día del último año se generó más con nucleares?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "nuclear_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas emisiones de CO2 produce la generación eléctrica al día?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "co2_t",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cómo de sucia es la electricidad que consumimos hoy? gramos de CO2 por kWh",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "intensidad_gco2_kwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad se genera con carbón todavía?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "carbon_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gas (ciclos combinados) se quema para hacer luz?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "ciclo_combinado_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "demanda de electricidad en Canarias",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "demanda_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "canarias"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de renovables hay en Baleares?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "pct_renovable",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "baleares"
+  }
+ },
+ {
+  "pregunta": "evolución del precio de la luz en el mercado mayorista desde 2023",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "precio_spot_medio_eur_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado la cuota renovable en el último año?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "pct_renovable",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo fue el día con la luz más cara de la serie?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "precio_spot_medio_eur_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Qué día hubo más energía hidráulica en 2024?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "hidraulica_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "demanda máxima de potencia que se alcanzó cada día en la península",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "demanda_max_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿España está exportando o importando electricidad? saldo con otros países",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "intercambio_neto_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "energia solar termica que produce al dia",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "solar_termica_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad se generó en total ayer?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "generacion_total_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad limpia se produjo el mes pasado en la península?",
+  "idioma": "es",
+  "tabla": "electricidad_diaria",
+  "medida": "renovable_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "Quanta energia eòlica es va generar ahir?",
+  "idioma": "ca",
+  "tabla": "electricidad_diaria",
+  "medida": "eolica_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "How much of Spain's electricity came from renewables yesterday?",
+  "idioma": "en",
+  "tabla": "electricidad_diaria",
+  "medida": "pct_renovable",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "Canto custa hoxe a electricidade no mercado?",
+  "idioma": "gl",
+  "tabla": "electricidad_diaria",
+  "medida": "precio_spot_medio_eur_mwh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sistema": "peninsula"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el récord de consumo de luz en España?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se batió el récord de solar fotovoltaica?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Solar fotovoltaica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "record de produccion eolica",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Eólica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el precio más barato que ha tenido la luz?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Precio mínimo",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "¿Y el precio más alto de la historia reciente de la luz?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Precio máximo",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el máximo de renovables que hemos tenido en un momento dado?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cuota renovable máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto tiempo lleva sin batirse el récord de demanda?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "dias_vigente",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas veces se ha batido el récord solar?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "veces_batido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Solar fotovoltaica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuál era el récord anterior de eólica antes del actual?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor_anterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Eólica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la demanda mínima registrada?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda mínima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "record de baterias descarga maxima",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Descarga de baterías máxima",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el mínimo de emisiones de CO2 que se ha conseguido en el sistema eléctrico?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Emisiones de CO2 mínimas",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "mayor exportacion a Francia de electricidad",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Exportación máxima a Francia",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta nuclear se llegó a generar en el mejor momento?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Nuclear máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el récord de demanda en Canarias?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda máxima",
+   "sistema_nombre": "Canarias"
+  }
+ },
+ {
+  "pregunta": "máxima demanda de las Baleares",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda máxima",
+   "sistema_nombre": "Baleares"
+  }
+ },
+ {
+  "pregunta": "¿Qué récords se han batido recientemente en el sistema eléctrico?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué récord lleva más tiempo sin batirse?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "dias_vigente",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "categoria",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "récord de cuota solar máxima en la península",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cuota solar máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se produjo la mayor generación hidráulica?",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Hidráulica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "Quin és el rècord de demanda d'electricitat a Espanya?",
+  "idioma": "ca",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Demanda máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "What is the record for solar power in Spain?",
+  "idioma": "en",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Solar fotovoltaica máxima",
+   "sistema_nombre": "Península",
+   "periodo": "hora"
+  }
+ },
+ {
+  "pregunta": "record de importacion de electricidad desde Portugal",
+  "idioma": "es",
+  "tabla": "electricidad_records",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Importación máxima desde Portugal",
+   "sistema_nombre": "Península"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos aires acondicionados con bomba de calor hay en España?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-aire reversible (splits de aire acondicionado)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta potencia de aerotermia hay instalada?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-agua (aerotermia)"
+  }
+ },
+ {
+  "pregunta": "potencia instalada de geotermia en bombas de calor",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Geotérmica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha crecido el parque de bombas de calor desde 2014?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2014,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los splits en España",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-aire reversible (splits de aire acondicionado)"
+  }
+ },
+ {
+  "pregunta": "¿Qué tipo de bomba de calor es la más extendida?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta aerotermia reversible había en 2020?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-agua reversible (aerotermia)"
+  }
+ },
+ {
+  "pregunta": "bombas de calor hidrotermicas mw",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Hidrotérmica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas bombas de calor se han instalado en el último año?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2023,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas bombas de calor hay en 2024 en total?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está despegando la aerotermia en España?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-agua (aerotermia)"
+  }
+ },
+ {
+  "pregunta": "Quantes bombes de calor hi ha instal·lades a Espanya?",
+  "idioma": "ca",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much heat pump capacity is installed in Spain?",
+  "idioma": "en",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se instalaron más aires acondicionados con bomba de calor?",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tecnologia": "Aire-aire reversible (splits de aire acondicionado)"
+  }
+ },
+ {
+  "pregunta": "Cantas bombas de calor hai en España?",
+  "idioma": "gl",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "calefaccion con bomba de calor, potencia de aire-agua desde 2018",
+  "idioma": "es",
+  "tabla": "electrificacion_bombas_calor",
+  "medida": "mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Aire-agua (aerotermia)"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de casas se calienta con electricidad en Sevilla?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares de Madrid tienen calefacción de gas?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "gas_natural",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia usan más el gas natural para calentarse?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_gas_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se calientan más con gasoil o butano?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_petroleo_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia calienta más sus casas con electricidad?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "calefacción eléctrica en Las Palmas",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas con calefacción hay en Barcelona provincia?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la media de España en hogares con calefacción eléctrica?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "viviendas que usan petróleo para calentarse en Lugo",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "petroleo",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lugo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuantas casas con calefaccion electrica hay en Valencia",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "electricidad",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia se usa menos el gas natural en la calefacción?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_gas_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo se calientan en Soria, con gasoil o con leña?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_petroleo_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia del norte tiene más calefacción de gas?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_gas_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "viviendas con otros combustibles de calefacción (leña, biomasa) en Ávila",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "otros",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ávila"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gas se usa para calentarse en Bizkaia?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_gas_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo se calientan los españoles en el censo de 2021?",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de cases es calefacta amb electricitat a Girona?",
+  "idioma": "ca",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas se quentan con gasóleo na Coruña?",
+  "idioma": "gl",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "petroleo",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "which province heats the most homes with electricity?",
+  "idioma": "en",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "calefaccion de gas natural en Alicante, porcentaje de hogares",
+  "idioma": "es",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_gas_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer proportzio berotzen da elektrizitatearekin Gipuzkoan?",
+  "idioma": "eu",
+  "tabla": "electrificacion_calefaccion_provincia",
+  "medida": "cuota_electricidad_pct",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta energía gastan las casas en España?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la energía de los hogares es electricidad?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿Con qué se calientan los hogares españoles?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "combustible",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "uso": "Calefacción"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad se usa para cocinar?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Cocina",
+   "combustible": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "porcentaje de gas en la calefacción de las casas",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Calefacción",
+   "combustible": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el uso de leña y pellets en los hogares desde 2010?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Biomasa (leña, pellets)"
+  }
+ },
+ {
+  "pregunta": "evolución de la electrificación de los hogares",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "¿En qué se va más energía en casa, calefacción, agua caliente o electrodomésticos?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "uso",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del agua caliente se calienta con placas solares?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Agua caliente",
+   "combustible": "Solar térmica"
+  }
+ },
+ {
+  "pregunta": "consumo de energía por refrigeración (aire acondicionado) en las casas",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Refrigeración"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto butano y gasóleo se gasta en los hogares?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Gasóleo, butano y otros derivados del petróleo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía de las bombas de calor consumen los hogares?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Calor ambiente (bombas de calor)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gas natural gastan las viviendas en 2015?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "iluminacion y electrodomesticos consumo de energia de los hogares",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Iluminación y electrodomésticos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente cocina ya con electricidad frente a gas?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "combustible",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "uso": "Cocina"
+  }
+ },
+ {
+  "pregunta": "¿Estamos dejando el gas en casa? evolución del gas natural en los hogares",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Gas natural"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la calefacción es eléctrica hoy frente a 2012?",
+  "idioma": "es",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Calefacción",
+   "combustible": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "Quina part de l'energia de les llars és electricitat?",
+  "idioma": "ca",
+  "tabla": "electrificacion_hogares",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Todos los usos",
+   "combustible": "Electricidad"
+  }
+ },
+ {
+  "pregunta": "How much energy do Spanish households use for heating?",
+  "idioma": "en",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Calefacción"
+  }
+ },
+ {
+  "pregunta": "Canta enerxía gastan as casas en calefacción?",
+  "idioma": "gl",
+  "tabla": "electrificacion_hogares",
+  "medida": "tj",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "uso": "Calefacción"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la energía de la industria es electricidad?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía consume el transporte?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector gasta más energía en España?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué sector está más electrificado?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta electricidad usa la construcción?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "electricidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "consumo de energia de los hogares, petroleo",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "petroleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Hogares"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía renovable usa la industria?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "renovables",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gas natural consume la siderurgia?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "gas_natural",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Siderurgia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto carbón se sigue quemando en la industria?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "carbon",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "¿Está electrificándose el transporte por carretera?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte por carretera"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad usa el tren?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "electricidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Ferrocarril"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía final se consume en toda la economía?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Toda la economía"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el consumo energético total desde 2007?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Toda la economía"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el uso de electricidad en servicios y comercio?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio y servicios públicos"
+  }
+ },
+ {
+  "pregunta": "consumo energetico del campo, agricultura",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Agricultura y silvicultura"
+  }
+ },
+ {
+  "pregunta": "energia que gasta la industria quimica",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Química y petroquímica"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se consumió más energía en España?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Toda la economía"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía gasta la industria del cemento, cerámica y vidrio?",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Minerales no metálicos (cemento, cerámica, vidrio)"
+  }
+ },
+ {
+  "pregunta": "cuota electrica de toda la economia en 1990 y ahora",
+  "idioma": "es",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1990,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Toda la economía"
+  }
+ },
+ {
+  "pregunta": "Quanta energia consumeix el transport a Espanya?",
+  "idioma": "ca",
+  "tabla": "electrificacion_sectores",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "How much of the energy used by industry is electric?",
+  "idioma": "en",
+  "tabla": "electrificacion_sectores",
+  "medida": "cuota_electricidad_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "Canta electricidade consome o sector servizos?",
+  "idioma": "gl",
+  "tabla": "electrificacion_sectores",
+  "medida": "electricidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio y servicios públicos"
+  }
+ },
+ {
+  "pregunta": "¿Cómo está de agua el pantano de Buendía?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Buendía"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hectómetros cúbicos tiene Alcántara ahora?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "volumen_hm3",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Alcántara"
+  }
+ },
+ {
+  "pregunta": "¿Qué pantano está más vacío?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el pantano más lleno de España?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta capacidad tiene La Serena?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "capacidad_hm3",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "La Serena"
+  }
+ },
+ {
+  "pregunta": "pantanos del Segura, cual esta mejor",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Segura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo estaba Yesa hace un año comparado con ahora?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_hace_un_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Yesa"
+  }
+ },
+ {
+  "pregunta": "¿Qué embalses están por debajo de lo que es normal en esta época?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "dif_vs_habitual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está Mequinenza más lleno de lo habitual?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "dif_vs_habitual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Mequinenza"
+  }
+ },
+ {
+  "pregunta": "porcentaje habitual de llenado de Entrepeñas en esta fecha",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_habitual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Entrepeñas"
+  }
+ },
+ {
+  "pregunta": "¿Qué pantanos de Andalucía tienen peor situación?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Guadalquivir"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "embalses del Duero con más agua",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Duero"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el embalse más grande de la cuenca del Ebro?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "capacidad_hm3",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Ebro"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pantano de Contreras agua que tiene",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "volumen_hm3",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Contreras"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se ha llenado Iznájar respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_hace_un_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Iznájar"
+  }
+ },
+ {
+  "pregunta": "Quin pantà està més buit a Catalunya?",
+  "idioma": "ca",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Cuencas Internas de Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "How full is the Alarcón reservoir?",
+  "idioma": "en",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Alarcón"
+  }
+ },
+ {
+  "pregunta": "Como está o encoro de Ricobayo?",
+  "idioma": "gl",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "embalse": "Ricobayo"
+  }
+ },
+ {
+  "pregunta": "¿Hay algún pantano gallego en niveles bajos? cuenca Miño-Sil",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Miño - Sil"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pantanos del Tajo, cuanto llenan",
+  "idioma": "es",
+  "tabla": "embalses_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Tajo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "embalse",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo está la reserva de agua en España?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hm3 de agua hay embalsados en España?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Qué cuenca tiene más agua en porcentaje?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "cuenca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Qué cuenca está peor de agua?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "cuenca",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Hay más o menos agua que el año pasado en el Guadalquivir?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "dif_vs_anio_anterior",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Guadalquivir"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Estamos por encima de la media de diez años en reservas de agua?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "dif_vs_media_10_anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "porcentaje de agua en el Segura",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Segura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la capacidad total de los embalses de España?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "capacidad_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Qué cuenca tiene más reserva respecto a su media?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "dif_vs_media_10_anios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "cuenca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cómo está el Ebro hoy frente al año pasado?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_hace_un_anio",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Ebro"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "agua embalsada Duero ahora y media 10 años",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_media_10_anios",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Duero"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta agua tienen los pantanos de Cataluña?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Cuencas Internas de Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cómo anda la sequía en el Júcar?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Júcar"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Qué cuenca ha empeorado más respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "dif_vs_anio_anterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "cuenca",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta agua tiene el Tajo en hm3?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Tajo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "situación de los embalses de la cuenca del Guadiana",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Guadiana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto llena la reserva hídrica hoy comparado con lo normal?",
+  "idioma": "es",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "Com estan els embassaments de les conques internes de Catalunya?",
+  "idioma": "ca",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Cuencas Internas de Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "How much water is stored in Spanish reservoirs now?",
+  "idioma": "en",
+  "tabla": "embalses_estado_actual",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "Como está a reserva de auga en Galicia Costa?",
+  "idioma": "gl",
+  "tabla": "embalses_estado_actual",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Galicia Costa"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ }
+]

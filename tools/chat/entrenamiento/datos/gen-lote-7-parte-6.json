@@ -1,0 +1,1699 @@
+[
+ {
+  "pregunta": "¿De qué se muere más la gente en España?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "causa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas mueren de cáncer al año?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Tumores",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos mueren en accidentes de tráfico?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Accidentes de tráfico",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos suicidios hubo el último año?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Suicidio y lesiones autoinfligidas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hombres mueren por enfermedades del corazón?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Enfermedades del sistema circulatorio",
+   "sexo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "muertes por covid 2020",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "COVID-19. Virus identificado",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han cambiado las muertes en carretera desde 2000?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Accidentes de tráfico",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas muertes hubo en total en 2022?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Todas las causas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas mujeres mueren de cáncer de pulmón?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Tumor maligno de la tráquea, de los bronquios y del pulmón",
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "tasa de mortalidad por enfermedades del sistema respiratorio por cada 100.000 habitantes",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "tasa_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Enfermedades del sistema respiratorio",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más muertes por cáncer en proporción a su población?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "tasa_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "causa": "Tumores",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente muere por demencia y problemas mentales?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Trastornos mentales orgánicos, senil y presenil",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos mueren por ictus o derrame cerebral?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Enfermedades cerebrovasculares",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hombres se suicidan en Galicia?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Suicidio y lesiones autoinfligidas",
+   "sexo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "defunciones Andalucía todas las causas",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Todas las causas",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos homicidios hay al año?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Agresiones (homicidio)",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más muertes por accidente de tráfico?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "causa": "Accidentes de tráfico",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han bajado las muertes por melanoma desde 1990?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1990,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Melanoma maligno de la piel",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos mueren de infarto y otras enfermedades del corazón en Madrid?",
+  "idioma": "es",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Otras enfermedades del corazón",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "morts per càncer a Catalunya",
+  "idioma": "ca",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Tumores",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantos morren por accidentes de tráfico en España?",
+  "idioma": "gl",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "causa": "Accidentes de tráfico",
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "What are the main causes of death in Spain?",
+  "idioma": "en",
+  "tabla": "salud_causas_muerte",
+  "medida": "defunciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "causa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos años vive de media un español?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto viven las mujeres en España?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se vive más años, en qué comunidad?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia se vive menos?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "esperanza de vida hombres Andalucía",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos años ha ganado de vida un español desde 1975?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1975,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la longevidad en Madrid?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1975,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vivían las mujeres españolas en 1990?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1990
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se vive en Ceuta?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "18"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se vive en la provincia de Soria?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "42"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto más viven ellas que ellos en España?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sexo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos años espera vivir un bebé que nace en Castilla y León?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "Quiero mudarme a un sitio donde se viva más, ¿cuál es la provincia con más esperanza de vida?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "esperanza de vida Canarias 2010",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año en que bajó la esperanza de vida por la pandemia?",
+  "idioma": "es",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "esperança de vida a Catalunya",
+  "idioma": "ca",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "Canto vive a xente en Galicia?",
+  "idioma": "gl",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "Zenbat urte bizi dira Euskadin batez beste?",
+  "idioma": "eu",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "What is the life expectancy in Spain?",
+  "idioma": "en",
+  "tabla": "salud_esperanza_vida",
+  "medida": "anios",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente murió la última semana?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas fallecieron en Madrid la semana pasada?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay más muertes de las normales ahora?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas muertes se esperaban en una semana normal?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "media_2015_2019",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "exceso de mortalidad Cataluña",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue la semana con más fallecimientos de toda la serie?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tuvo el mayor exceso de muertes?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las defunciones semanales en España durante los últimos años?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "muertes semana primera de abril de 2020 Madrid",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 4
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se disparó la mortalidad con la ola de calor del verano de 2022?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 7
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos más murieron que antes de la pandemia en Andalucía?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas defunciones hubo en Galicia en enero de 2023?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "curva de fallecidos por semanas en España",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "comparación de las muertes semanales con la media de 2015 a 2019 en Valencia",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "media_2015_2019",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos fallecidos hubo en Castilla y León en la semana del pico del COVID?",
+  "idioma": "es",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "morts per setmana a Catalunya",
+  "idioma": "ca",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos falecementos houbo esta semana en Galicia?",
+  "idioma": "gl",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "defunciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Was there excess mortality in Spain last week?",
+  "idioma": "en",
+  "tabla": "salud_mortalidad_semanal",
+  "medida": "exceso",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta España en sanidad por persona?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del PIB se va en sanidad?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo gasta más en salud en proporción a su riqueza?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pagan los hogares españoles de su bolsillo por la sanidad?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Pago directo de los hogares"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado en sanidad pública?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Público"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en seguros médicos privados?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Seguros voluntarios"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha crecido el gasto sanitario por habitante en España desde 2000?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto más gasta España en salud que en 2010?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "gasto sanitario Alemania PIB",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Gastamos en sanidad más o menos que la media de la UE?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta Francia en sanidad en euros ajustados por poder adquisitivo?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pps_hab",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué país gasta menos en médicos y hospitales por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pps_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "gasto público en sanidad España 2015",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Público"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor gasto en salud en relación al PIB?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la sanidad la pagamos de nuestro bolsillo?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Pago directo de los hogares"
+  }
+ },
+ {
+  "pregunta": "despesa sanitària per habitant a Espanya",
+  "idioma": "ca",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "Canto gasta Portugal en sanidade?",
+  "idioma": "gl",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "How much does Spain spend on healthcare as a share of GDP?",
+  "idioma": "en",
+  "tabla": "sanidad_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Espainiak osasunean biztanleko?",
+  "idioma": "eu",
+  "tabla": "sanidad_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "financiacion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta más en sanidad por habitante?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta Madrid en sanidad pública por persona?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta menos en salud?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto sanitario Andalucía por habitante",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de su PIB dedica Extremadura a la sanidad?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "11"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto sanitario de Cataluña desde 2002?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2002,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto en salud en Galicia desde 2010?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto sanidad País Vasco euros corrientes",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad pesa más la sanidad sobre su economía?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaba Valencia por habitante en sanidad en 2008?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de gasto sanitario por habitante en Castilla y León?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto invierte Navarra en la salud de cada vecino?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "15"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta Canarias en el sistema de salud respecto al PIB regional?",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "recortes sanidad Murcia 2012 gasto por persona",
+  "idioma": "es",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "14"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "despesa en sanitat per habitant a Catalunya",
+  "idioma": "ca",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta Galicia en sanidade por habitante?",
+  "idioma": "gl",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish region spends the most on healthcare per person?",
+  "idioma": "en",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein erkidegok gastatzen du gehien osasunean?",
+  "idioma": "eu",
+  "tabla": "sanidad_gasto_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ }
+]

@@ -1,0 +1,2471 @@
+[
+ {
+  "pregunta": "¿Cómo ha evolucionado el agua en los pantanos de España en los últimos años?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de sequía en los embalses?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo estuvieron más llenos los pantanos?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "agua embalsada en España en septiembre de 2022",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Cómo estaba el Guadalquivir en 2017 en plena sequía?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Guadalquivir"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2017
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "evolución embalses Cataluña desde 2020",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Cuencas Internas de Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta agua había en el Segura en 2010?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Segura"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿La reserva hídrica de ahora es mejor o peor que la de 2019?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "serie histórica de llenado del Ebro",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Ebro"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el agua en el Tajo desde 2023?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Tajo"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2023,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Qué cuenca tuvo peor sequía alguna vez?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "cuenca",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "capacidad total de los embalses de España con los años",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "capacidad_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "¿Llovió mucho en 2010? ¿Cuánto llenaron los embalses?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "hectómetros cúbicos embalsados el año pasado",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "volumen_hm3",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "nivel del Duero hace 10 años vs hoy",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Duero"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2016,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han estado los pantanos de la cuenca del Júcar en verano de 2023?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Júcar"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo estuvo el Guadiana más lleno?",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Guadiana"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "Com ha evolucionat l'aigua als embassaments des de l'any 2000?",
+  "idioma": "ca",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "How have Spanish reservoir levels changed over time?",
+  "idioma": "en",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "pais"
+  }
+ },
+ {
+  "pregunta": "Como evolucionou a reserva de auga no Miño-Sil?",
+  "idioma": "gl",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Miño - Sil"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "sequia en el Segura historico minimo de llenado",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Segura"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "las cuencas del norte siempre estan mas llenas? comparar cuenca cantabrico occidental en 2024",
+  "idioma": "es",
+  "tabla": "embalses_semanal",
+  "medida": "pct_llenado",
+  "territorio": {
+   "nivel": "cuenca",
+   "nombre": "Cantábrico Occidental"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "cuenca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto nos cuestan los sueldos de los funcionarios por persona?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del PIB se va en pagar a los empleados públicos?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos millones se gastan en nóminas públicas?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gastan las comunidades autónomas en personal?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "gasto en sueldos de los ayuntamientos y demás corporaciones locales",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones locales"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el coste de los funcionarios desde 2010?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado lo que cuesta el personal público en porcentaje del PIB?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se gastó más en sueldos públicos respecto al PIB?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Qué administración paga más en personal, el Estado, las autonomías o los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "subsector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coste de personal Seguridad Social por habitante",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Seguridad Social"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el personal de la Administración central?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Administración central"
+  }
+ },
+ {
+  "pregunta": "nominas del sector publico en 2008",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gastan en funcionarios por cada español las autonomías?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se pagaba a los empleados públicos en 1995?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    1995
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo bajó el gasto en personal público por los recortes?",
+  "idioma": "es",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "Quant costa el personal de les administracions públiques per habitant?",
+  "idioma": "ca",
+  "tabla": "empleo_coste",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "How much does Spain spend on public sector wages as a share of GDP?",
+  "idioma": "en",
+  "tabla": "empleo_coste",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Total AAPP"
+  }
+ },
+ {
+  "pregunta": "Canto gastan os concellos en persoal?",
+  "idioma": "gl",
+  "tabla": "empleo_coste",
+  "medida": "millones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "subsector": "Corporaciones locales"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos y personal sanitario público hay?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Sanidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos profesores trabajan en la pública, en educación no universitaria?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Educación no universitaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos policías nacionales y guardias civiles hay?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Policía Nacional y Guardia Civil"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos funcionarios hay en Galicia?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos empleados públicos trabajan en la provincia de Zamora?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos funcionarios interinos hay?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_personal": "Funcionario interino"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente tiene contrato laboral temporal en la administración?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_personal": "Laboral temporal"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas mujeres trabajan en las administraciones públicas?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hombres hay en los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "sector": "Ayuntamientos"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más empleados públicos?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más funcionarios?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en las universidades públicas?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Universidades"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos funcionarios hay en Justicia?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Justicia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores públicos hay en prisiones?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Prisiones"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados públicos tenían las comunidades autónomas en 2019?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido la plantilla de sanidad pública desde 2019?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Sanidad"
+  }
+ },
+ {
+  "pregunta": "evolución del número de funcionarios en Andalucía",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos policías autonómicos hay (Mossos, Ertzaintza...)?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Policías autonómicas"
+  }
+ },
+ {
+  "pregunta": "funcionarios de carrera en Canarias",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_personal": "Funcionario de carrera"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados tienen las diputaciones, cabildos y consejos insulares?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Diputaciones, cabildos y consejos insulares"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos trabajan para el Estado en Ceuta?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Estado"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados del Estado hay en las Fuerzas Armadas?",
+  "idioma": "es",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Fuerzas Armadas"
+  }
+ },
+ {
+  "pregunta": "Quants funcionaris hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many public employees are there in the Basque Country?",
+  "idioma": "en",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos empregados públicos hai en Lugo?",
+  "idioma": "gl",
+  "tabla": "empleo_efectivos",
+  "medida": "efectivos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lugo"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asalariados públicos hay según la encuesta de población activa?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en los ayuntamientos y la administración local?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Administración local"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores tienen las comunidades autónomas en la EPA?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Comunidades autónomas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos asalariados públicos había en 2010 y cuántos hay ahora?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el empleo público desde 2002?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo hubo más empleados públicos, el máximo histórico?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo bajó más el empleo público por los recortes?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué administración emplea a más gente?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "administracion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empleados en empresas e instituciones públicas",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Empresas e instituciones públicas"
+  }
+ },
+ {
+  "pregunta": "asalariados Seguridad Social epa trimestre",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Seguridad Social"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos asalariados había en la administración central en 2015?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Administración central"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados públicos se han sumado desde el covid (2019)?",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "personas que trabajan para el sector publico en el primer trimestre de 2024",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "evolución de los empleados de la administración local",
+  "idioma": "es",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Administración local"
+  }
+ },
+ {
+  "pregunta": "Quants assalariats públics hi ha a Espanya segons l'EPA?",
+  "idioma": "ca",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "How many public sector employees are there according to the labour force survey?",
+  "idioma": "en",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantos asalariados públicos hai en España?",
+  "idioma": "gl",
+  "tabla": "empleo_epa_administracion",
+  "medida": "asalariados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "administracion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los que cobran una nómina trabaja para la administración en Extremadura?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más peso de empleo público?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay menos funcionarios en proporción?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asalariados públicos hay en Andalucía?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asalariados privados hay en Madrid?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "privados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "total de asalariados en Cataluña",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del empleo asalariado es público en España?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el peso del empleo público en Canarias desde 2008?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los empleados públicos en la Comunidad Valenciana",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuantos empleados privados hay en el País Vasco en 2019",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "privados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad ha creado más empleo público?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empleo público Ceuta y Melilla proporción",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asalariados tiene Galicia entre públicos y privados?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "% empleo publico Castilla-La Mancha ultimo trimestre",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla-La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo más empleados públicos en Aragón?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores públicos hay en Murcia?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de asalariados son públicos en Asturias?",
+  "idioma": "es",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge dels assalariats de Catalunya treballa per a l'administració?",
+  "idioma": "ca",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos asalariados públicos hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "publicos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of employees in Navarre work in the public sector?",
+  "idioma": "en",
+  "tabla": "empleo_epa_ccaa",
+  "medida": "cuota_publico_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta Andalucía en sueldos de sus empleados por habitante?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta más en funcionarios por persona?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta menos en nóminas públicas por habitante?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastan los ayuntamientos en personal por habitante en España?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en personal de los ayuntamientos de la provincia de Cádiz",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en total la Comunidad de Madrid en sueldos?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto total de personal de los ayuntamientos de Cataluña",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene los ayuntamientos que más gastan en personal por habitante?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto en personal de la Generalitat Valenciana?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido lo que gasta Galicia en personal desde 2010?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto personal ccaa 2015 Castilla y León por habitante",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el País Vasco en personal por cabeza?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año gastaron más los ayuntamientos en sueldos?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta Canarias en nóminas de su gobierno regional?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene los ayuntamientos más caros en personal?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en funcionarios ayuntamiento Madrid provincia por habitante",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ayuntamientos_eur_hab_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el personal de las comunidades autónomas en total?",
+  "idioma": "es",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant gasta la Generalitat de Catalunya en personal per habitant?",
+  "idioma": "ca",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much do Spanish regions spend on staff per person?",
+  "idioma": "en",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta a Xunta en persoal por habitante?",
+  "idioma": "gl",
+  "tabla": "empleo_gasto_personal_territorio",
+  "medida": "gasto_personal_ccaa_eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué organismo del Estado tiene más empleados?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "organismo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos militares hay en España?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "FUERZAS ARMADAS"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos guardias civiles hay?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "GUARDIA CIVIL"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos policías nacionales hay y cuántas son mujeres?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "mujeres",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "POLICIA NACIONAL"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en Hacienda (la Agencia Tributaria)?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "AGENCIA ESTATAL DE ADMINISTRACION TRIBUTARIA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos investigadores y empleados tiene el CSIC?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "CONSEJO SUPERIOR DE INVESTIGACIONES CIENTIFICAS - CSIC"
+  }
+ },
+ {
+  "pregunta": "empleados de Adif",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "ADMINISTRADOR DE INFRAESTRUCTURAS FERROVIARIAS (ADIF)"
+  }
+ },
+ {
+  "pregunta": "¿Qué ministerio tiene más personal?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ministerio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas mujeres hay en la Guardia Civil?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "mujeres",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "GUARDIA CIVIL"
+  }
+ },
+ {
+  "pregunta": "¿En qué organismo hay más mujeres?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "mujeres",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "organismo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "personal del INSS, la seguridad social",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "INSTITUTO NACIONAL DE LA SEGURIDAD SOCIAL -INSS-"
+  }
+ },
+ {
+  "pregunta": "funcionarios del ministerio de Interior",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "INTERIOR"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos empleados tiene el INE?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "INSTITUTO NACIONAL DE ESTADISTICA (INE), O.A."
+  }
+ },
+ {
+  "pregunta": "¿Cuántos funcionarios trabajan en los tribunales de instancia?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "ADMINISTRACION AL SERVICIO DE TRIBUNALES DE INSTANCIA"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en el ministerio de Sanidad?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "SANIDAD"
+  }
+ },
+ {
+  "pregunta": "¿Cuáles son los 5 organismos con más personal público del Estado?",
+  "idioma": "es",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "organismo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants treballadors té l'Agència Tributària?",
+  "idioma": "ca",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "AGENCIA ESTATAL DE ADMINISTRACION TRIBUTARIA"
+  }
+ },
+ {
+  "pregunta": "How many people work in the Spanish armed forces?",
+  "idioma": "en",
+  "tabla": "empleo_organismos",
+  "medida": "efectivos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "organismo": "FUERZAS ARMADAS"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra de media un asalariado en Madrid?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se cobra más?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se cobra menos de sueldo?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gana un funcionario en Cataluña al año?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_publico",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldo en el sector privado en Extremadura",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_privado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde cobran más los empleados públicos?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_publico",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad es más barato el sueldo de un empleado de empresa privada?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_privado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el sueldo medio en España?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldo medio funcionario España",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_publico",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se cobra en el País Vasco de media?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "salario bruto anual Galicia privado",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_privado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cobran más los funcionarios o los trabajadores privados en Andalucía?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_publico",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra un asalariado medio en Canarias en 2022?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más diferencia entre lo que cobra un funcionario y uno privado?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_publico",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldos Navarra",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra la gente en Baleares al año?",
+  "idioma": "es",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el sou mitjà a Catalunya?",
+  "idioma": "ca",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the average salary in the Madrid region?",
+  "idioma": "en",
+  "tabla": "empleo_salarios_ccaa",
+  "medida": "salario_total",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

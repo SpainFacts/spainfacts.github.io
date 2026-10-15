@@ -14,6 +14,7 @@
 //   ctx.clasificador                        (opcional: crearClasificador de clasificador.js)
 
 import { buscarTablas, buscarFicha, URL_WEB } from './herramientas.js';
+import { IDIOMAS, tf, rutaEnIdioma } from '../i18n.js';
 
 const MAX_OPCIONES = 26; // una letra por opción
 const MAX_MEDIDAS = 8; // columnas candidatas que ve el modelo
@@ -209,31 +210,41 @@ function puntuarValores(valores, pregunta) {
 
 // ---------- Formato de la respuesta ----------
 
-function formatoPeriodo(v, col) {
+// Los textos fijos de la respuesta salen de src/lib/i18n.js (claves chat.r.*) en el idioma de
+// la página (ctx.lang; castellano si no se da). Las etiquetas de los datos siguen en castellano
+const fijo = (clave, lang, vars) => tf(`chat.r.${clave}`, lang, vars);
+
+function formatoPeriodo(v, col, lang = 'es') {
 	if (v === null || v === undefined) return '';
+	const trimestre = (n, anio) => fijo('trimestre', lang, { n, anio });
 	const d = v instanceof Date ? v : /^\d{4}-\d\d-\d\d/.test(String(v)) ? new Date(String(v).slice(0, 10) + 'T00:00:00Z') : null;
 	if (d && !isNaN(d)) {
 		const m = d.getUTCMonth();
-		if (/trimestre/i.test(col.nombre)) return `${Math.floor(m / 3) + 1}.º trimestre de ${d.getUTCFullYear()}`;
-		if (d.getUTCDate() === 1 && !/^fecha$/i.test(col.nombre)) return `${MESES[m]} de ${d.getUTCFullYear()}`;
-		if (m === 11 && d.getUTCDate() === 31) return `${d.getUTCFullYear()}`;
-		if ([2, 5, 8, 11].includes(m) && d.getUTCDate() >= 30) return `${Math.floor(m / 3) + 1}.º trimestre de ${d.getUTCFullYear()}`;
-		return `${d.getUTCDate()} de ${MESES[m]} de ${d.getUTCFullYear()}`;
+		const anio = d.getUTCFullYear();
+		if (/trimestre/i.test(col.nombre)) return trimestre(Math.floor(m / 3) + 1, anio);
+		if (d.getUTCDate() === 1 && !/^fecha$/i.test(col.nombre)) return fijo('mes', lang, { mes: fijo('meses', lang).split(',')[m], anio });
+		if (m === 11 && d.getUTCDate() === 31) return `${anio}`;
+		if ([2, 5, 8, 11].includes(m) && d.getUTCDate() >= 30) return trimestre(Math.floor(m / 3) + 1, anio);
+		return fijo('dia', lang, { dia: d.getUTCDate(), mesDe: fijo('mesesDe', lang).split(',')[m], anio });
 	}
-	return String(v).replace(/^(\d{4})-T(\d)$/, '$2.º trimestre de $1').replace(/\.0$/, '');
+	return String(v)
+		.replace(/^(\d{4})-T(\d)$/, (_, anio, n) => trimestre(n, anio))
+		.replace(/\.0$/, '');
 }
 
 // Decimales solo donde cuentan: 1.181,73 M€ sí, 49.114.494 habitantes no
-const numero = (v) =>
-	typeof v === 'number' ? new Intl.NumberFormat('es-ES', { maximumFractionDigits: Math.abs(v) >= 100000 ? 0 : 2, useGrouping: 'always' }).format(v) : v ?? '—';
+const formatoNumero = (v, lang = 'es') =>
+	typeof v === 'number'
+		? new Intl.NumberFormat(IDIOMAS[lang]?.locale ?? 'es-ES', { maximumFractionDigits: Math.abs(v) >= 100000 ? 0 : 2, useGrouping: 'always' }).format(v)
+		: v ?? '—';
 
 /** Unidad deducida del nombre de la columna (solo cuando es inequívoca) */
-function unidadDe(nombre) {
+function unidadDe(nombre, lang = 'es') {
 	const n = `_${nombre.toLowerCase()}_`;
-	if (/_(por_)?(1000|1000hab|mil)_/.test(n)) return ' por cada 1.000 habitantes';
-	if (/_(100k|100000)_/.test(n)) return ' por cada 100.000 habitantes';
-	if (/_meur_/.test(n)) return ' millones de €';
-	if (/_mrd_/.test(n)) return ' mil millones de €';
+	if (/_(por_)?(1000|1000hab|mil)_/.test(n)) return ` ${fijo('u.mil', lang)}`;
+	if (/_(100k|100000)_/.test(n)) return ` ${fijo('u.cienmil', lang)}`;
+	if (/_meur_/.test(n)) return ` ${fijo('u.meur', lang)}`;
+	if (/_mrd_/.test(n)) return ` ${fijo('u.mrd', lang)}`;
 	if (/_(eur|euros)_/.test(n)) return ' €';
 	if (/_(pct|porcentaje|cuota)_/.test(n) || (/^_tasa_/.test(n) && !/_(1000|100k)_/.test(n))) return ' %';
 	if (/^_ha_/.test(n)) return ' ha';
@@ -265,6 +276,9 @@ const vectoresColumna = new Map();
  */
 export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso }) {
 	const decisiones = [];
+	// Idioma de los textos fijos de la respuesta (ctx.lang: 'es', 'en', 'ca', 'gl' o 'eu')
+	const lang = IDIOMAS[ctx.lang] ? ctx.lang : 'es';
+	const numero = (v) => formatoNumero(v, lang);
 	const intencion = leerIntencion(pregunta);
 	/** Pide al modelo una elección; con `prior` (log-probabilidades extra por opción) las combina */
 	let ultimasProbs = null; // probabilidades de la última elección (si el decisor las da)
@@ -341,7 +355,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 			.map((t) => buscarFicha(ctx.catalogo, t))
 			.filter(Boolean);
 	}
-	if (!candidatas.length) return { texto: 'No he encontrado datos sobre eso en SpainFacts.', decisiones };
+	if (!candidatas.length) return { texto: fijo('sinDatos', lang), decisiones };
 	const describirCandidata = (t) => {
 		const tc = columnaTiempo(t);
 		const periodo = tc?.min !== undefined ? ` Periodo: ${String(tc.min).slice(0, 10)} a ${String(tc.max).slice(0, 10)}.` : '';
@@ -417,7 +431,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	const medidas = sem
 		? sem.medidas.map((m) => t.columnas.find((c) => c.nombre === m.columna)).filter(Boolean)
 		: t.columnas.filter((c) => esNumerica(c) && !esTemporal(c) && !NO_MEDIDA.test(c.nombre));
-	if (!medidas.length) return { texto: `La tabla ${t.tabla} no tiene cifras que consultar.`, decisiones };
+	if (!medidas.length) return { texto: fijo('sinCifras', lang, { tabla: t.tabla }), decisiones };
 	const etiquetaMedida = (c) => {
 		const m = fichaMedida.get(c.nombre);
 		return m ? `${m.nombre}${m.unidad ? ` (${m.unidad})` : ''}` : etiqueta(c);
@@ -827,13 +841,13 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 	// ---------- Respuesta con plantilla ----------
 	// La más específica, no la portada; sin plantillas de ruta (/territorios/[ccaa]) ni páginas sin título
 	const pagina = [...(t.paginas ?? [])].filter((p) => p.titulo && !p.ruta.includes('[')).sort((a, b) => b.ruta.length - a.ruta.length)[0];
-	const fuente = `${anioIncompleto ? `(${anioActual} aún está incompleto, así que no se usa como último dato.)\n` : ''}Fuente: tabla ${t.tabla}${pagina ? ` (${pagina.titulo}: ${URL_WEB}${pagina.ruta})` : ''}.`;
+	const fuente = `${anioIncompleto ? `${fijo('incompleto', lang, { anio: anioActual })}\n` : ''}${fijo('fuente', lang, { tabla: t.tabla })}${pagina ? ` (${pagina.titulo}: ${URL_WEB}${rutaEnIdioma(pagina.ruta, lang)})` : ''}.`;
 	const nombreMedida = fm?.nombre ?? (medida.descripcion || medida.nombre.replace(/_/g, ' '));
-	if (!filas.length) return { texto: `No hay datos para esa combinación en ${t.tabla}. ${fuente}`, sql, filas, decisiones };
+	if (!filas.length) return { texto: `${fijo('sinFilas', lang, { tabla: t.tabla })} ${fuente}`, sql, filas, decisiones };
 
 	// Sin repetir (el nombre del territorio puede venir de la unión y de una columna a la vez)
 	const quien = (f) => [...new Set([f.territorio, ...comparar.filter((c) => !esCodigo(c)).map((c) => f[c])].filter(Boolean).map(String))].join(', ');
-	const unidad = fm?.unidad ? ` ${fm.unidad}` : unidadDe(medida.nombre);
+	const unidad = fm?.unidad ? ` ${fm.unidad}` : unidadDe(medida.nombre, lang);
 	// Unidad de la ficha, o leída de la fila cuando la tabla mezcla unidades en una columna
 	const unidadFila = (f) => (fm?.unidad_columna && f[fm.unidad_columna] ? ` ${f[fm.unidad_columna]}` : unidad);
 	const describirFila = (f) => `${quien(f) ? `${quien(f)}: ` : ''}${numero(f[medida.nombre])}${unidadFila(f)}`;
@@ -844,7 +858,9 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		.filter((v) => v && !ES_TOTAL.test(String(v)))
 		.join(', ');
 	const conFiltro = filtroTexto ? ` (${filtroTexto})` : '';
-	const per = (f) => (tcol ? formatoPeriodo(f[tcol.nombre], tcol) : '');
+	const per = (f) => (tcol ? formatoPeriodo(f[tcol.nombre], tcol, lang) : '');
+	/** «de 3 en 2010 a 5 en 2020» con los números ya con su unidad */
+	const deA = (fi, ff) => fijo('deA', lang, { a: `${numero(fi[medida.nombre])}${unidad}`, pa: per(fi), b: `${numero(ff[medida.nombre])}${unidad}`, pb: per(ff) });
 
 	let texto;
 	let grafico;
@@ -862,7 +878,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 				const [i, f] = [fs[0], fs.at(-1)];
 				const dif = f[medida.nombre] - i[medida.nombre];
 				const pct = i[medida.nombre] ? ` (${dif >= 0 ? '+' : ''}${numero((dif / Math.abs(i[medida.nombre])) * 100)} %)` : '';
-				return { g, dif, texto: `${g ? `${g}: ` : ''}de ${numero(i[medida.nombre])}${unidad} en ${per(i)} a ${numero(f[medida.nombre])}${unidad} en ${per(f)}, ${dif >= 0 ? "+" : ""}${numero(dif)}${unidad}${pct}` };
+				return { g, dif, texto: `${g ? `${g}: ` : ''}${deA(i, f)}, ${dif >= 0 ? "+" : ""}${numero(dif)}${unidad}${pct}` };
 			})
 			.sort((a, b) => (intencion.orden === 'ASC' ? a.dif - b.dif : b.dif - a.dif));
 		// Sin el periodo inicial (la cifra ya es un cambio, como «subida desde 2019»): el dato final
@@ -871,7 +887,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 			: `${nombreMedida}${conFiltro}: ${describirFila(filas.at(-1))}${per(filas.at(-1)) ? `, ${per(filas.at(-1))}` : ''}.`;
 	} else if (modo === 'evolucion' && tcol) {
 		const ultima = filas.at(-1);
-		texto = `${nombreMedida}${conFiltro}: de ${numero(filas[0][medida.nombre])}${unidad} en ${per(filas[0])} a ${numero(ultima[medida.nombre])}${unidad} en ${per(ultima)}.`;
+		texto = `${nombreMedida}${conFiltro}: ${deA(filas[0], ultima)}.`;
 		grafico = { tipo: 'linea', x: tcol.nombre, y: medida.nombre, serie: comparar.find((c) => !esCodigo(c)) ?? (unirTerritorios ? 'territorio' : ''), titulo: nombreMedida, filas, sql };
 	} else if (filas.length === 1) {
 		texto = `${nombreMedida}${conFiltro}: ${describirFila(filas[0])}${per(filas[0]) ? `, ${per(filas[0])}` : ''}.`;
@@ -879,7 +895,7 @@ export async function responderPorDecisiones({ pregunta, ctx, decidir, alPaso })
 		texto = `${nombreMedida}${per(filas[0]) && modo !== 'historico' ? `, ${per(filas[0])}` : ''}${conFiltro}:\n${filas
 			.slice(0, 5)
 			.map((f) => `- ${describirFila(f)}${modo === 'historico' && per(f) ? ` (${per(f)})` : ''}`)
-			.join('\n')}${filas.length > 5 ? `\n- (${filas.length - 5} más)` : ''}`;
+			.join('\n')}${filas.length > 5 ? `\n- ${fijo('mas', lang, { n: filas.length - 5 })}` : ''}`;
 		const x = unirTerritorios ? 'territorio' : comparar[0];
 		if (x && modo !== 'historico') grafico = { tipo: 'barras', x, y: medida.nombre, serie: '', titulo: `${nombreMedida}${per(filas[0]) ? `, ${per(filas[0])}` : ''}`, filas, sql };
 	}

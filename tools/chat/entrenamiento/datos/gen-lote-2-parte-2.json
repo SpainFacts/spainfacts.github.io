@@ -1,0 +1,1961 @@
+[
+ {
+  "pregunta": "evolución de los delitos en Valencia ciudad",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué ciudad se roban más coches?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "Sustracción de vehículos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas veces tocan la puerta para robar en casas en Sevilla?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Robos con fuerza en domicilios"
+  }
+ },
+ {
+  "pregunta": "cibercriminalidad España 2023",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cibercriminalidad"
+  }
+ },
+ {
+  "pregunta": "¿Qué municipio tiene más tráfico de drogas por habitante?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "Tráfico de drogas"
+  }
+ },
+ {
+  "pregunta": "¿Es más peligrosa Málaga que Zaragoza?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tasa de criminalidad en Ceuta",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué año ha habido más delitos en España desde 2019?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "secuestros en España por año",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Secuestro"
+  }
+ },
+ {
+  "pregunta": "delitos en Canarias en 2021 por cada mil habitantes",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants delictes hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos roubos con violencia hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Robos con violencia o intimidación"
+  }
+ },
+ {
+  "pregunta": "Which Spanish region has the highest crime rate?",
+  "idioma": "en",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat delitu egon dira Euskadin?",
+  "idioma": "eu",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos condenados hay en España al año?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más condenados por habitante?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "cuántas mujeres han sido condenadas en Madrid",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos extranjeros condenados hay en Cataluña?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Extranjera"
+  }
+ },
+ {
+  "pregunta": "tasa de condenados españoles por cada mil adultos",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Española"
+  }
+ },
+ {
+  "pregunta": "¿Qué proporción de hombres condenados hay en Andalucía?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las condenas en España desde 2013?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido los condenados en Valencia desde 2019?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué año hubo más gente condenada en España?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué tasa de condena tienen los extranjeros frente a los españoles?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Extranjera"
+  }
+ },
+ {
+  "pregunta": "condenados en Galicia 2022",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay menos condenados por cada mil adultos?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "población adulta de Aragón con la que se calcula la tasa de condenados",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "poblacion_18",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "mujeres condenadas por cada mil mujeres adultas en España",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas condenas a extranjeros hubo en Baleares en 2024?",
+  "idioma": "es",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Extranjera"
+  }
+ },
+ {
+  "pregunta": "Quantes persones han estat condemnades a Catalunya?",
+  "idioma": "ca",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantas persoas foron condenadas en Galicia?",
+  "idioma": "gl",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "How many people were convicted in Spain last year?",
+  "idioma": "en",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Total",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat gizon kondenatu dituzte Euskadin?",
+  "idioma": "eu",
+  "tabla": "crimen_condenados",
+  "medida": "condenados",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Por qué delitos condenan más en España?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "delito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas condenas por violencia en el hogar y trato degradante hubo?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Trato degradante y violencia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas condenas por conducir sin carnet o borracho (seguridad vial)?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Contra la seguridad vial"
+  }
+ },
+ {
+  "pregunta": "condenas por tráfico de droga a extranjeros",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "extranjera",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Contra la salud pública"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas condenas por asesinato hubo en 2023?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Asesinato"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas condenas por homicidio a gente de África?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "africa",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Homicidio"
+  }
+ },
+ {
+  "pregunta": "condenas por estafas de españoles",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "espanola",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Estafas"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido las condenas por delitos sexuales desde 2015?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Contra la libertad e indemnidad sexuales"
+  }
+ },
+ {
+  "pregunta": "evolución de condenas por robos",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Robos"
+  }
+ },
+ {
+  "pregunta": "total de condenas dictadas en España",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Delitos"
+  }
+ },
+ {
+  "pregunta": "condenados de la UE por delitos de lesiones",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "ue",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Lesiones"
+  }
+ },
+ {
+  "pregunta": "condenas a latinoamericanos por amenazas",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "america",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Amenazas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas condenas hay a asiáticos por delitos contra la salud pública?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "asia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Contra la salud pública"
+  }
+ },
+ {
+  "pregunta": "condenas de otros europeos (no UE) por hurtos",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "resto_europa",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Hurtos"
+  }
+ },
+ {
+  "pregunta": "¿Qué delito acumula menos condenas?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "delito",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo más condenas por violación y agresión?",
+  "idioma": "es",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Contra la libertad e indemnidad sexuales"
+  }
+ },
+ {
+  "pregunta": "condenas per quebrantament de condemna",
+  "idioma": "ca",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Quebrantamiento de condena"
+  }
+ },
+ {
+  "pregunta": "Cantas condenas por roubo con forza hai?",
+  "idioma": "gl",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "delito": "Robo con fuerza"
+  }
+ },
+ {
+  "pregunta": "What crimes are people convicted of most often in Spain?",
+  "idioma": "en",
+  "tabla": "crimen_condenas_delito",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "delito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los delitos en España desde 2010?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "delitos por cada mil habitantes en España en 2012",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido las agresiones sexuales desde 2015?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Agresión sexual"
+  }
+ },
+ {
+  "pregunta": "¿En qué año hubo más robos en viviendas?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Robos con fuerza en viviendas"
+  }
+ },
+ {
+  "pregunta": "¿En qué año hubo menos delitos en España desde 2010?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de las estafas en Cataluña",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Estafas"
+  }
+ },
+ {
+  "pregunta": "malos tratos en el ámbito familiar por provincias",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipologia": "Malos tratos ámbito familiar"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tenía más robos de coches hace diez años?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipologia": "Sustracción de vehículos"
+  }
+ },
+ {
+  "pregunta": "homicidios dolosos en España cada año",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Homicidios dolosos/asesinatos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos delitos de tráfico de drogas se registraron en 2014 en Andalucía?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2014
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Tráfico de drogas"
+  }
+ },
+ {
+  "pregunta": "pornografía infantil denuncias evolución",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Pornografía de menores"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado la criminalidad en Madrid desde 2010?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "delitos contra la propiedad intelectual",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Contra la propiedad intelectual/industrial"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tuvo mayor tasa de delitos en 2010?",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "blanqueo de capitales evolución España",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Blanqueo de capitales"
+  }
+ },
+ {
+  "pregunta": "hurtos en Sevilla provincia por años",
+  "idioma": "es",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Hurtos"
+  }
+ },
+ {
+  "pregunta": "delictes contra la seguretat viària a Catalunya al llarg dels anys",
+  "idioma": "ca",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Contra la seguridad vial"
+  }
+ },
+ {
+  "pregunta": "How has crime in Spain changed since 2010?",
+  "idioma": "en",
+  "tabla": "crimen_serie_larga",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Como evolucionaron as agresións sexuais en Galicia?",
+  "idioma": "gl",
+  "tabla": "crimen_serie_larga",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Agresión sexual"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos delitos ha habido en lo que va de año en España?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Han subido o bajado los delitos este año respecto al anterior?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "delitos en Barcelona en el primer semestre",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad lleva más robos con violencia en lo que va de año?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "Robos con violencia o intimidación"
+  }
+ },
+ {
+  "pregunta": "hurtos en Madrid enero-junio",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Hurtos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas agresiones sexuales con penetración van este año?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Agresión sexual con penetración"
+  }
+ },
+ {
+  "pregunta": "ciberdelitos hasta junio comparado con el año pasado",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Cibercriminalidad"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad lleva más delitos en lo que va de año?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "delitos hasta ahora en Valencia el año anterior mismo periodo",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones_anio_anterior",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos homicidios consumados llevamos este año?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Homicidios y asesinatos consumados"
+  }
+ },
+ {
+  "pregunta": "estafas por internet este año Andalucía",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Estafas informáticas"
+  }
+ },
+ {
+  "pregunta": "robos de coches en el primer semestre en Sevilla",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Sustracción de vehículos"
+  }
+ },
+ {
+  "pregunta": "¿Dónde han aumentado más los delitos este año?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos delitos hubo en Canarias en el mismo periodo del año pasado?",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones_anio_anterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "tráfico de drogas lo que va de año en Cádiz",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Tráfico de drogas"
+  }
+ },
+ {
+  "pregunta": "delitos más recientes publicados Bilbao",
+  "idioma": "es",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants delictes porta aquest any Catalunya?",
+  "idioma": "ca",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Como van os delitos este ano en Galicia?",
+  "idioma": "gl",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many crimes so far this year in Spain compared to last year?",
+  "idioma": "en",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Aurten zenbat delitu izan dira Euskadin orain arte?",
+  "idioma": "eu",
+  "tabla": "crimen_ultimo_periodo",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto déficit tiene España este año?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A cuánto asciende la deuda pública española en euros?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_publica_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje del PIB debe el Estado?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuánto ingresan en total las administraciones públicas",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "ingresos_totales_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el sector público en total?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "gastos_totales_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "déficit público en 2012 en porcentaje del PIB",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la deuda pública desde 2019?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_publica_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la deuda sobre el PIB",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año de mayor déficit en España?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se debía más, en proporción al PIB?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo superávit por última vez?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda pública total en miles de millones de euros",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_publica_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "total que gasta el sector público al año, en miles de millones",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "gastos_totales_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "lo que ingresa el sector público en total, en miles de millones",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "ingresos_totales_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "déficit en 2020, el año de la pandemia",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el gasto público desde 2015?",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "gastos_totales_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el agujero de las cuentas públicas en miles de millones",
+  "idioma": "es",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el deute públic d'Espanya?",
+  "idioma": "ca",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_publica_mrd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto é o déficit público español?",
+  "idioma": "gl",
+  "tabla": "cuentas_balance_anual",
+  "medida": "saldo_deficit_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is Spain's public debt as a share of GDP?",
+  "idioma": "en",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat zor du Espainiako Estatuak BPGaren aldean?",
+  "idioma": "eu",
+  "tabla": "cuentas_balance_anual",
+  "medida": "deuda_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué se gasta más el dinero público en España?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "funcion_cofog",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta por habitante en sanidad pública?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "gasto_por_habitante_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Sanidad Pública"
+  }
+ },
+ {
+  "pregunta": "gasto en pensiones y protección social como porcentaje del PIB",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "porcentaje_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Protección Social y Pensiones"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto nos cuesta la defensa?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Defensa"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se paga en intereses de la deuda al año?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Intereses de la Deuda"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte del gasto público va a educación?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "porcentaje_gasto_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Educación"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado el gasto en sanidad desde 2019?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Sanidad Pública"
+  }
+ },
+ {
+  "pregunta": "evolución del gasto en policía y justicia",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Orden Público y Seguridad"
+  }
+ },
+ {
+  "pregunta": "gasto en vivienda y medio ambiente en 2010",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "millones_euros",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Vivienda y Medio Ambiente"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se gastó más en intereses de la deuda?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "porcentaje_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Intereses de la Deuda"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado en cultura y deporte por persona?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "gasto_por_habitante_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Cultura, Ocio y Religión"
+  }
+ },
+ {
+  "pregunta": "gasto en carreteras y transporte como % del PIB",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "porcentaje_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion_cofog": "Asuntos Económicos y Transporte"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto del gasto es gasto social?",
+  "idioma": "es",
+  "tabla": "cuentas_gastos",
+  "medida": "porcentaje_gasto_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria_macro": "Gasto Social"
+  }
+ }
+]

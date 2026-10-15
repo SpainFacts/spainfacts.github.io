@@ -1,0 +1,1847 @@
+[
+ {
+  "pregunta": "¿Cuánto se gasta en investigar en Cataluña en relación a lo que produce?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad se gasta más en I+D respecto a su riqueza?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "comunidades que menos invierten en ciencia e investigación",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos científicos e investigadores hay en Madrid por cada mil trabajadores?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "investigadores_1000ocup",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más investigadores en proporción a la gente que trabaja?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "investigadores_1000ocup",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de investigadores en Andalucía 2022",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "investigadores_ejc",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos euros por persona gasta el País Vasco en investigación?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en I+D por habitante por comunidades, la que más",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones se dedican a investigación en Galicia?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "gasto_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el gasto en I+D de Navarra desde 2010?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "15"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la inversión en investigación en Valencia",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Las universidades de Madrid, ¿cuánto gastan en investigación?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "gasto_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Universidades"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto invierten las empresas privadas en I+D en Cataluña?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Empresas"
+  }
+ },
+ {
+  "pregunta": "en qué comunidad las empresas gastan más en innovación en relación al PIB",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sector": "Empresas"
+  }
+ },
+ {
+  "pregunta": "gasto I+D administraciones públicas Extremadura 2020",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "11"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Administraciones públicas"
+  }
+ },
+ {
+  "pregunta": "Cuánto gasta España en investigación comparado con su PIB",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año que más se invirtió en I+D en España respecto al PIB?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "despesa en recerca i desenvolupament a Catalunya en 2023",
+  "idioma": "ca",
+  "tabla": "empresas_id_ccaa",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos investigadores hai en Galicia por cada mil ocupados?",
+  "idioma": "gl",
+  "tabla": "empresas_id_ccaa",
+  "medida": "investigadores_1000ocup",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does Madrid spend on research per person?",
+  "idioma": "en",
+  "tabla": "empresas_id_ccaa",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "i+d aragon 2019 cuanto gasto",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "02"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Euskadik ikerketan BPGaren aldean?",
+  "idioma": "eu",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se invierte más o menos en investigación en Canarias que hace veinte años?",
+  "idioma": "es",
+  "tabla": "empresas_id_ccaa",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2004,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país de Europa dedica más dinero a la investigación respecto a su PIB?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿España gasta más o menos que Alemania en I+D?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en I+D de Alemania",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto invierte Corea del Sur en investigación?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Corea del Sur"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo estamos en ciencia respecto a la media de la UE?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "país con menos investigadores por cada mil ocupados",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "investigadores_1000ocup",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos investigadores tiene Finlandia por cada 1.000 trabajadores?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "investigadores_1000ocup",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Finlandia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en investigación por persona en Suiza",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "eur_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Suiza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Quién gasta más euros por habitante en I+D, Suecia o Italia?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "eur_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero total gasta China en I+D?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "China"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del gasto en investigación de España desde 2000",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la inversión en I+D de Portugal desde 2015?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estados Unidos o Japón, gasto en innovación 2022",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Estados Unidos"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastan las empresas españolas en I+D comparado con Francia?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Empresas"
+  }
+ },
+ {
+  "pregunta": "gasto en investigación de las universidades en Países Bajos",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Países Bajos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Universidades"
+  }
+ },
+ {
+  "pregunta": "Quin país europeu inverteix més en recerca?",
+  "idioma": "ca",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which country spends the most on research and development?",
+  "idioma": "en",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo gastó España más en investigación respecto a su economía?",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "i+d irlanda 2021 millones",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Irlanda"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta Dinamarca en investigación por habitante?",
+  "idioma": "gl",
+  "tabla": "empresas_id_paises",
+  "medida": "eur_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Dinamarca"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ciencia: España frente a Reino Unido en porcentaje del PIB 2019",
+  "idioma": "es",
+  "tabla": "empresas_id_paises",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Reino Unido"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas se crearon en España el año pasado?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se montan más empresas por habitante?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas sociedades cierran cada año en Madrid?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "negocios nuevos en Andalucía en 2023",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se crean más empresas de las que desaparecen en Cataluña?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "saldo",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "comunidad donde más sociedades cierran por cada 100 que abren",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "ratio_disueltas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto capital llevan de media las empresas nuevas?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "capital_medio_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "capital total invertido en sociedades creadas en Valencia",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "capital_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año para crear empresas en España?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo cerraron más sociedades en España, en la crisis de 2008?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de las altas de sociedades mercantiles en Galicia",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han cambiado las empresas creadas en España desde 2019?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "emprendimiento por comunidades: ¿cuál emprende más por cada 100.000 habitantes?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene el saldo de sociedades más bajo?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "saldo_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "empreses que es creen a les Illes Balears 2024",
+  "idioma": "ca",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "04"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas sociedades se disolveron en Galicia en 2020?",
+  "idioma": "gl",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many companies were set up in Spain in 2022?",
+  "idioma": "en",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sociedades creadas murcia 2021",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "14"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "capital desembolsado por habitante en las nuevas empresas de Madrid",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "capital_real_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresa berriak Euskadin 2023an zenbat sortu ziren?",
+  "idioma": "eu",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Tengo una idea de negocio: ¿cuántas sociedades nuevas se registran en Aragón al año?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "02"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas sociedades se disolvieron en España desde 2010 hasta ahora?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_anual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas se han creado el último mes?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sociedades constituidas en marzo de 2025",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-03"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas sociedades se crearon en Andalucía en junio de 2024?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-06"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresas que cierran en Madrid cada mes",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas se han abierto en el último año completo, sumando los últimos 12 meses?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas_12m",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "negocios nuevos en doce meses en Cataluña",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas_12m",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad crea más empresas por cada 100.000 habitantes en el último año?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas_12m_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución mensual de las sociedades constituidas en España",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál ha sido el mes con más empresas creadas?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "mes con más disoluciones de sociedades en la historia",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha ido el saldo de empresas este año mes a mes?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "saldo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto capital se puso en las empresas creadas en enero de 2026?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "capital_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-01"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "disoluciones de empresas últimos 12 meses Valencia",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas_12m",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "empreses creades a Catalunya aquest mes",
+  "idioma": "ca",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "companies dissolved in Spain last month",
+  "idioma": "en",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sociedades nuevas en castilla y leon julio 2026",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "07"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Han subido o bajado las empresas que se crean respecto a hace un año?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas_12m",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas empresas novas se rexistraron en Galicia en abril de 2025?",
+  "idioma": "gl",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "constituidas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "comunidades con más cierres de empresas por 100.000 habitantes en el último año",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas_12m_100k",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas empresas desaparecieron en agosto de 2024?",
+  "idioma": "es",
+  "tabla": "empresas_sociedades_mensual",
+  "medida": "disueltas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las empresas españolas son autónomos y microempresas?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en grandes empresas en España?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del empleo está en las pymes pequeñas?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "¿En qué país pesan más las multinacionales y empresas grandes en el empleo?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "país con más microempresas en proporción",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empresas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "cuánto valor generan las empresas medianas en Alemania",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "vab_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Medianas (50-249)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas empresas medianas hay en España?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Medianas (50-249)"
+  }
+ },
+ {
+  "pregunta": "¿Qué tamaño de empresa aporta más riqueza en España?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_vab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tamano",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de empleo en pymes italianas pequeñas 2022",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "comparar el peso de las grandes empresas en España y en la UE",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_vab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Unión Europea (27)"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "¿Han crecido las microempresas en España desde 2021?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "evolución del empleo en grandes empresas españolas",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "Francia: porcentaje de valor añadido de las pymes medianas",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_vab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Medianas (50-249)"
+  }
+ },
+ {
+  "pregunta": "¿Dónde dependen más del tejido de pequeñas empresas para dar trabajo, en Portugal o Países Bajos?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "How big a share of Spanish jobs is in small firms?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "Quin percentatge de les empreses espanyoles són microempreses?",
+  "idioma": "ca",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "empleo empresas grandes polonia 2023",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empleo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Polonia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ },
+ {
+  "pregunta": "Cantas persoas traballan en microempresas en España?",
+  "idioma": "gl",
+  "tabla": "empresas_tamano_ue",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto valor añadido generan en conjunto las empresas pequeñas en Austria?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "vab_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Austria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Pequeñas (10-49)"
+  }
+ },
+ {
+  "pregunta": "Suecia: porcentaje de empresas micro en 2024",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Suecia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Micro (0-9)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto del total de empresas son grandes en Bélgica?",
+  "idioma": "es",
+  "tabla": "empresas_tamano_ue",
+  "medida": "pct_empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Bélgica"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tamano": "Grandes (250 o más)"
+  }
+ }
+]

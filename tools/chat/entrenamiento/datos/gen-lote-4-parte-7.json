@@ -1,0 +1,1293 @@
+[
+ {
+  "pregunta": "¿Cuánta gente ha pedido asilo en España el último mes?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas pidieron protección internacional en 2023?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "solicitudes de asilo en marzo de 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-03"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo más peticiones de asilo en un mes?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de las peticiones de refugio desde 2010",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Han subido las solicitudes de asilo desde 2019?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos refugiados pidieron asilo en 2015?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas han solicitado asilo en lo que va de 2026?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el mes con menos solicitudes de asilo",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "peticiones de asilo por meses el último año",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas solicitudes de asilo hubo en abril de 2022, con la guerra de Ucrania?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": "2022-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pidieron asilo en 2020 con la pandemia?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "primeras solicitudes de protección internacional en España 2018",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "asilo julio 2025",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas piden asilo cada año en España?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes persones han sol·licitat asil a Espanya aquest any?",
+  "idioma": "ca",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas solicitudes de asilo hai cada mes en España?",
+  "idioma": "gl",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many people applied for asylum in Spain last year?",
+  "idioma": "en",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat lagunek eskatu dute asiloa Espainian 2024an?",
+  "idioma": "eu",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "asilo en españa record mensual",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Es cierto que cada vez piden más asilo? Comparativa 2020 y 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿De qué países vienen más solicitantes de asilo?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos venezolanos piden asilo en España?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "solicitudes de asilo de colombianos en 2023",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Colombia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos ucranianos pidieron refugio en 2022?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Ukraine"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos marroquíes piden asilo?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Morocco"
+  }
+ },
+ {
+  "pregunta": "¿Qué nacionalidad pidió más asilo en 2019?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del asilo de personas de Mali",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Mali"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han aumentado las solicitudes de Perú desde 2015?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Peru"
+  }
+ },
+ {
+  "pregunta": "refugiados sirios que piden asilo en España",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Syria"
+  }
+ },
+ {
+  "pregunta": "asilo afganos 2021",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Afghanistan"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos cubanos han solicitado asilo?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Cuba"
+  }
+ },
+ {
+  "pregunta": "¿De dónde son los que piden asilo en Canarias... qué nacionalidades son más frecuentes?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año pidieron más asilo los venezolanos?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "solicitantes de asilo argentinos",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Argentina"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene menos solicitudes de asilo en España?",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants hondurenys sol·liciten asil a Espanya?",
+  "idioma": "ca",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Honduras"
+  }
+ },
+ {
+  "pregunta": "Cantos senegaleses piden asilo en España?",
+  "idioma": "gl",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Senegal"
+  }
+ },
+ {
+  "pregunta": "Which nationalities apply for asylum in Spain the most?",
+  "idioma": "en",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "asilo nicaragua 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Nicaragua"
+  }
+ },
+ {
+  "pregunta": "refugio de mauritanos en 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Mauritania"
+  }
+ },
+ {
+  "pregunta": "Zenbat kolonbiarrek eskatu dute asiloa 2024an?",
+  "idioma": "eu",
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "medida": "solicitudes",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Colombia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos marroquíes han llegado a España este trimestre?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Marruecos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos españoles se han ido a vivir fuera en el último trimestre?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Española"
+  }
+ },
+ {
+  "pregunta": "saldo migratorio de los venezolanos",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "¿De qué nacionalidad llegan más personas al país?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué nacionalidad se va más de España?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "llegadas de colombianos en 2025",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Colombia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos ucranianos han venido a España desde 2023?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2023,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Ucrania"
+  }
+ },
+ {
+  "pregunta": "inmigración de rumanos por cada mil habitantes",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Rumanía"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos británicos se han ido de España?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Reino Unido"
+  }
+ },
+ {
+  "pregunta": "salidas de peruanos por trimestre",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Perú"
+  }
+ },
+ {
+  "pregunta": "¿Qué nacionalidad gana más población por migraciones?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nacionalidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos argentinos llegaron en el primer trimestre de 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-01"
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Argentina"
+  }
+ },
+ {
+  "pregunta": "llegadas de pakistaníes comparadas con hace un año",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Pakistán"
+  }
+ },
+ {
+  "pregunta": "evolución del saldo migratorio de los españoles",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Española"
+  }
+ },
+ {
+  "pregunta": "inmigrantes de China entrando por mil habitantes",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "China"
+  }
+ },
+ {
+  "pregunta": "saldo por 1.000 habitantes de los marroquíes",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "saldo_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Marruecos"
+  }
+ },
+ {
+  "pregunta": "emigraciones de venezolanos por 1.000 habitantes",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "emigraciones_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "Quants colombians han arribat a Espanya aquest trimestre?",
+  "idioma": "ca",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Colombia"
+  }
+ },
+ {
+  "pregunta": "Cantos italianos chegaron a España no último trimestre?",
+  "idioma": "gl",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Italia"
+  }
+ },
+ {
+  "pregunta": "How many Moroccans moved to Spain last quarter?",
+  "idioma": "en",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Marruecos"
+  }
+ },
+ {
+  "pregunta": "ecuatorianos que llegan a españa",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Ecuador"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos cubanos y brasileños entran y salen? saldo de Brasil",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Brasil"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente ha llegado a España en el último año?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas emigraron de España en 2023?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el saldo migratorio de España?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Entra más gente de la que sale?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inmigrantes que llegaron en 2022",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la inmigración en España desde 2021",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado la gente que llega a vivir a España desde 2021?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo migratorio por cada 1.000 habitantes",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo más llegadas?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "salidas de España al extranjero por año",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "llegadas por cada mil habitantes en 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "emigración por cada 1.000 habitantes en 2021",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "emigraciones_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos se fueron de España en 2021 y cuántos vinieron?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "año con mayor saldo migratorio positivo",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta población ha ganado España por migración exterior en 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quanta gent ha arribat a Espanya el 2024?",
+  "idioma": "ca",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas persoas emigraron de España o ano pasado?",
+  "idioma": "gl",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the net migration of Spain?",
+  "idioma": "en",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat jende iritsi da Espainiara 2023an?",
+  "idioma": "eu",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "inmigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "migracion neta españa 2022",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "saldo",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha subido la emigración desde 2021?",
+  "idioma": "es",
+  "tabla": "inmigracion_flujos_anuales",
+  "medida": "emigraciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

@@ -1,14 +1,26 @@
 // Modelos que corren en el equipo de quien usa el chat (navegador con WebGPU o Node), con
 // transformers.js. Los pesos se descargan de Hugging Face, nunca de spainfacts.org.
 //
-//   crearDecisor()   -> decidir(contexto, pregunta, opciones) con Gemma 4 E2B: una pasada
-//                       por pregunta y se lee la puntuación de cada letra (modo decisión)
+//   crearDecisor()   -> decidir(contexto, pregunta, opciones) con Gemma 4 E2B o el decisor
+//                       propio ({ propio: true }): una pasada por pregunta y se lee la
+//                       puntuación de cada letra (modo decisión)
 //   crearEmbebedor() -> vector de un texto con EmbeddingGemma (búsqueda semántica)
 
 import { promptDecision } from './decision.js';
 
 export const MODELO_DECISOR = 'onnx-community/gemma-4-E2B-it-ONNX';
 export const MODELO_EMBEDDINGS = 'onnx-community/embeddinggemma-300m-ONNX';
+
+// Decisor propio: decider-0.8b (Qwen3.5 0,8B) afinado con LoRA en local con preguntas de
+// nuestras fichas (tools/chat/entrenamiento/LEEME.md). Medido el mejor en modo decisión
+// (197/270 frente a 191 de Ministral 3 3B y 187 de Gemma 4 E2B) y pesa ~0,95 GB.
+// Publicado en Hugging Face el 2026-10-15. Si se vuelve a poner un marcador que empiece por
+// PENDIENTE/, el chat deja de ofrecer la opción.
+export const MODELO_DECISOR_PROPIO = 'Jotapostre/decider-0.8b-lora-onnx';
+export const DECISOR_PROPIO_DISPONIBLE = !MODELO_DECISOR_PROPIO.startsWith('PENDIENTE/');
+// El q4 normal del decodificador y las incrustaciones en fp16 (el q4 de embed_tokens usa
+// GatherBlockQuantized, que onnxruntime-web no tiene). Probado en WASM y WebGPU (2026-10-04)
+const DTYPE_DECISOR_PROPIO = { embed_tokens: 'fp16', decoder_model_merged: 'q4' };
 
 let transformers = null;
 async function cargarLibreria(opciones = {}) {
@@ -37,13 +49,16 @@ function progreso(alProgreso) {
 }
 
 /**
- * Decisor con Gemma 4 E2B (solo texto: ni audio ni visión).
- * @param {{ device?: 'webgpu'|'wasm'|'cpu', dtype?: string, alProgreso?: Function, cacheDir?: string }} [o]
+ * Decisor con Gemma 4 E2B (solo texto: ni audio ni visión) u otro modelo de transformers.js
+ * (`modelo`: id de Hugging Face; `propio: true` = el decisor propio con su dtype).
+ * @param {{ modelo?: string, propio?: boolean, device?: 'webgpu'|'wasm'|'cpu', dtype?: string|object, alProgreso?: Function, cacheDir?: string }} [o]
  */
-export async function crearDecisor({ device = 'webgpu', dtype = 'q4f16', alProgreso, cacheDir } = {}) {
+export async function crearDecisor({ modelo: id, propio = false, device = 'webgpu', dtype, alProgreso, cacheDir } = {}) {
+	id ??= propio ? MODELO_DECISOR_PROPIO : MODELO_DECISOR;
+	dtype ??= propio ? DTYPE_DECISOR_PROPIO : 'q4f16';
 	const { AutoTokenizer, AutoModelForCausalLM, LogitsProcessor, LogitsProcessorList } = await cargarLibreria({ cacheDir });
-	const tok = await AutoTokenizer.from_pretrained(MODELO_DECISOR);
-	const modelo = await AutoModelForCausalLM.from_pretrained(MODELO_DECISOR, {
+	const tok = await AutoTokenizer.from_pretrained(id);
+	const modelo = await AutoModelForCausalLM.from_pretrained(id, {
 		dtype,
 		device,
 		use_external_data_format: true,
@@ -58,6 +73,7 @@ export async function crearDecisor({ device = 'webgpu', dtype = 'q4f16', alProgr
 			return logits;
 		}
 	}
+	const gemma = /gemma/i.test(modelo.config?.model_type ?? id);
 	const idLetra = new Map();
 	const idDe = (letra) => {
 		if (!idLetra.has(letra)) idLetra.set(letra, tok.encode(letra, { add_special_tokens: false })[0]);
@@ -68,8 +84,8 @@ export async function crearDecisor({ device = 'webgpu', dtype = 'q4f16', alProgr
 		const captura = new Captura();
 		const lista = new LogitsProcessorList();
 		lista.push(captura);
-		// Gemma necesita el token de inicio; sin él responde casi al azar
-		const entrada = tok((tok.bos_token ?? '<bos>') + promptDecision(contexto, pregunta, opciones), { add_special_tokens: false });
+		// Gemma necesita el token de inicio; sin él responde casi al azar (Qwen no lleva)
+		const entrada = tok((gemma ? (tok.bos_token ?? '<bos>') : '') + promptDecision(contexto, pregunta, opciones), { add_special_tokens: false });
 		await modelo.generate({ ...entrada, max_new_tokens: 1, do_sample: false, logits_processor: lista });
 		const n = captura.logits.dims.at(-1);
 		const fila = captura.logits.data.subarray(captura.logits.data.length - n);

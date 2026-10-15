@@ -1,0 +1,1440 @@
+[
+ {
+  "pregunta": "¿Cuántas hectáreas han ardido este año en España?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de incendios forestales?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de fuegos en 2022",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos incendios grandes hubo en 2017?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "n_grandes_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2017
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto monte se ha quemado en 2025?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué extensión tuvo el mayor incendio del año pasado?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_mayor_incendio",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la superficie quemada en España desde 2000",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Han aumentado los incendios respecto a 2015?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas de bosque arbolado ha devorado el fuego?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_arbolado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "superficie de matorral quemada en 2012",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_matorral",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hectáreas de cultivos que se han quemado",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_agricola",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de lo quemado es espacio protegido de la Red Natura?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "pct_natura2000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hectáreas de Natura 2000 quemadas en 2022",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_natura2000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "año con menos superficie quemada",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Este año se ha quemado más o menos que el año pasado?",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "año con más incendios de todos",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "grandes incendios por año desde 2010",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "n_grandes_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes hectàrees han cremat a Espanya enguany?",
+  "idioma": "ca",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos incendios forestais houbo en 2023?",
+  "idioma": "gl",
+  "tabla": "incendios_anual",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many hectares burned in Spain in 2022?",
+  "idioma": "en",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hectareas quemadas 2019 españa",
+  "idioma": "es",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat hektarea erre dira Espainian 2025ean?",
+  "idioma": "eu",
+  "tabla": "incendios_anual",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál ha sido el incendio más grande de este año?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas quemó el incendio de Navaluenga?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Navaluenga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "los incendios más grandes registrados en Ourense",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué incendio ha sido el peor desde 2017?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendio de Zamora en agosto de 2025, ¿cuánto ardió?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios grandes en Huelva este verano",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Huelva"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué incendios afectaron a espacios naturales protegidos?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "ha_natura2000",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de Natura 2000 afectado en el incendio de Niebla",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "pct_natura2000",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Niebla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio ha sufrido el mayor incendio forestal?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el incendio más extenso de Asturias?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Asturias"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios de más de 1000 hectáreas en Cáceres",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cáceres"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "fuegos grandes en pinares y bosques",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "cubierta_principal": "Arbolado"
+  }
+ },
+ {
+  "pregunta": "incendios que quemaron sobre todo matorral en Galicia",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "cubierta_principal": "Matorral"
+  }
+ },
+ {
+  "pregunta": "fuegos en campos de cultivo, los mayores",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "cubierta_principal": "Agrícola"
+  }
+ },
+ {
+  "pregunta": "incendios en pastos grandes",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "cubierta_principal": "Pastos y otra vegetación natural"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas ardieron en el incendio de Uña de Quintana?",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Uña de Quintana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendio mayor de León en 2022",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "León"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin va ser el incendi més gran a Catalunya?",
+  "idioma": "ca",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal foi o maior incendio de Ourense en 2025?",
+  "idioma": "gl",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "biggest wildfire in Spain last year",
+  "idioma": "en",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios grandes en Ávila",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ávila"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendio mas grande de la historia reciente de Guadalajara",
+  "idioma": "es",
+  "tabla": "incendios_areas_quemadas",
+  "medida": "area_ha",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Guadalajara"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "incendio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay fuegos activos ahora mismo en España?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más focos de calor esta semana?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay incendios ahora mismo en Asturias?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "focos de calor detectados por satélite en Ourense",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos puntos de fuego hay hoy en Málaga?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "focos activos en Badajoz de los últimos días",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Badajoz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué focos son de alta confianza ahora?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "confianza": "alta"
+  }
+ },
+ {
+  "pregunta": "incendios detectados de noche en España",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dia_noche": "Noche"
+  }
+ },
+ {
+  "pregunta": "¿Qué potencia radiativa tienen los fuegos detectados esta semana?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay fuego en Madrid hoy?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el fuego más intenso detectado por la NASA",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "focos de calor en León esta semana",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "León"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "puntos calientes detectados el 25 de septiembre",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-09"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos focos se detectaron en Cádiz ayer?",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "focos de calor en Sevilla de confianza media",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "confianza": "media"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se ve humo por satélite? provincias con más actividad",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Hi ha focus actius ara mateix a Girona?",
+  "idioma": "ca",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Hai lumes activos agora en Pontevedra?",
+  "idioma": "gl",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Pontevedra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Are there active wildfires in Spain right now?",
+  "idioma": "en",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "focos burgos satelite ultima semana",
+  "idioma": "es",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Burgos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Sute aktiborik dago gaur Asturiasen?",
+  "idioma": "eu",
+  "tabla": "incendios_focos_activos",
+  "medida": "frp_mw",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia ha perdido más monte por incendios este año?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "hectáreas quemadas en Ourense en 2025",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos incendios hubo en Pontevedra el año pasado?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Pontevedra"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "provincia con más fuegos forestales de la historia",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de las hectáreas quemadas en León desde 2000",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "León"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia es la más castigada por el fuego?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ardió en Zamora en 2022?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios en Cáceres desde 2010",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cáceres"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Valencia: superficie quemada en 2012",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se quema más o menos en Asturias que hace diez años?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Asturias"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el mayor incendio registrado en Huelva?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_mayor_incendio",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Huelva"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "provincia donde más Red Natura se quemó en 2025",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_natura2000",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de incendios en Tenerife en 2023",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Santa Cruz de Tenerife"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ranking de provincias con menos fuegos en 2024",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "hectáreas quemadas en Ávila",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ávila"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios en Madrid por años",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes hectàrees van cremar a Tarragona el 2019?",
+  "idioma": "ca",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Tarragona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas hectáreas arderon en Lugo en 2025?",
+  "idioma": "gl",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lugo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which province had the most forest fires in 2022?",
+  "idioma": "en",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "incendios forestales barcelona 2022",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "n_incendios",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat hektarea erre ziren Bizkaian 2017an?",
+  "idioma": "eu",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2017
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo fue el peor año de fuego en Ourense?",
+  "idioma": "es",
+  "tabla": "incendios_provincia_anio",
+  "medida": "ha_quemadas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

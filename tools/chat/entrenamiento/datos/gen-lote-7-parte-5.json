@@ -1,0 +1,1997 @@
+[
+ {
+  "pregunta": "¿Cuánto gana la gente de cada barrio de Madrid?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué distrito de Barcelona tiene la renta más alta?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el barrio más pobre de Sevilla?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "41091"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta por hogar distrito 01 madrid",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 01"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ingresa un hogar en el distrito 05 de Valencia?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 05"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la renta del distrito 02 de Zaragoza?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "50297"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 02"
+  }
+ },
+ {
+  "pregunta": "¿Qué barrio de Bilbao tiene los hogares con más ingresos?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "48020"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "diferencia de renta entre barrios de Málaga",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "29067"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la renta por persona del distrito 03 de Madrid desde 2015?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 03"
+  }
+ },
+ {
+  "pregunta": "renta mediana por unidad de consumo en el distrito 07 de Barcelona",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_uc_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 07"
+  }
+ },
+ {
+  "pregunta": "¿Dónde viven los más ricos de Madrid?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se gana menos en Barcelona, en qué barrio?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta persona distrito 10 Sevilla 2020",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "41091"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "distrito": "Distrito 10"
+  }
+ },
+ {
+  "pregunta": "¿Qué desigualdad hay entre los distritos de Valencia?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_uc_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el distrito más rico de Zaragoza?",
+  "idioma": "es",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "50297"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renda dels barris de Barcelona, quin guanya més?",
+  "idioma": "ca",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que barrio de Vigo ten maior renda?",
+  "idioma": "gl",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "36057"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which district of Madrid is the wealthiest?",
+  "idioma": "en",
+  "tabla": "renta_distritos",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "distrito",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más gente en riesgo de pobreza?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "tasa_pobreza",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de andaluces está en riesgo de pobreza o exclusión?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "arope",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "01"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde cuesta más llegar a fin de mes?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "fin_mes_dificultad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ganan de media los hogares de Madrid?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "13"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad es la más desigual?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "gini",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué desigualdad hay en Cataluña entre el 20 % más rico y el 20 % más pobre?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "s80_s20",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente pasa privaciones graves en Canarias?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "carencia_severa",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "05"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad viven más personas con empleos precarios o de baja intensidad?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "baja_intensidad",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hogares tienen mucha dificultad para llegar a fin de mes en España?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "fin_mes_mucha_dificultad",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado la pobreza en Extremadura desde 2010?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "tasa_pobreza",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "11"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la renta por persona en el País Vasco?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "16"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2004,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta por persona en euros corrientes en Navarra",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_persona",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "15"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de pobreza en España?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "arope",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "indice gini España 2019",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "gini",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "00"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta una persona consumidora media según renta por unidad de consumo en Galicia?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_uc_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "12"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "hogares en dificultades Murcia",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "fin_mes_dificultad",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "14"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobran al año los hogares en la Comunidad Valenciana, en euros constantes?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "10"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué región tiene la renta más baja por persona?",
+  "idioma": "es",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "taxa de pobresa a Catalunya",
+  "idioma": "ca",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "tasa_pobreza",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "09"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que comunidade ten máis risco de pobreza?",
+  "idioma": "gl",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish region has the highest poverty risk?",
+  "idioma": "en",
+  "tabla": "renta_ecv_ccaa",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de niños vive en riesgo de pobreza?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "Menos de 18 años"
+  }
+ },
+ {
+  "pregunta": "¿Qué edad tiene más pobreza, los jóvenes o los mayores?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "edad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos jubilados están en riesgo de pobreza?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "tasa_pobreza",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "65 y más años"
+  }
+ },
+ {
+  "pregunta": "pobreza jóvenes 16 a 29 años",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "De 16 a 29 años"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el riesgo de pobreza infantil?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "Menos de 18 años"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos adultos de 45 a 64 años pasan privaciones materiales severas?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "carencia_severa",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "De 45 a 64 años"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gana al año un joven de 16 a 29 años?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "De 16 a 29 años"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la pobreza entre los mayores de 65 desde 2008?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "65 y más años"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de edad ingresa más?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "edad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población total está en riesgo de pobreza?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "tasa_pobreza",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "Total"
+  }
+ },
+ {
+  "pregunta": "pobreza severa menores de 16 años",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "carencia_severa",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "Menores de 16 años"
+  }
+ },
+ {
+  "pregunta": "¿En qué año hubo más pobreza juvenil?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "edad": "De 16 a 29 años"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobran las personas de 30 a 44 años por unidad de consumo?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "renta_uc_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "De 30 a 44 años"
+  }
+ },
+ {
+  "pregunta": "mis padres están jubilados, ¿cuánta gente de su edad está en riesgo de exclusión?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "65 y más años"
+  }
+ },
+ {
+  "pregunta": "¿Los niños son más pobres que los adultos?",
+  "idioma": "es",
+  "tabla": "renta_ecv_edad",
+  "medida": "tasa_pobreza",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "edad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pobresa infantil a Espanya",
+  "idioma": "ca",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "Menos de 18 años"
+  }
+ },
+ {
+  "pregunta": "A pobreza dos mozos en España",
+  "idioma": "gl",
+  "tabla": "renta_ecv_edad",
+  "medida": "arope",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "De 16 a 29 años"
+  }
+ },
+ {
+  "pregunta": "What share of people over 65 are at risk of poverty in Spain?",
+  "idioma": "en",
+  "tabla": "renta_ecv_edad",
+  "medida": "tasa_pobreza",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "edad": "65 y más años"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el municipio más rico de España?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gana la gente en Pozuelo de Alarcón?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Pozuelo de Alarcón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué pueblo tiene la renta más baja?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta media hogar Badalona",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Badalona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la renta en Vigo desde 2015?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el sueldo medio de los vecinos de Alcobendas?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa Sevilla en renta entre todos los municipios?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "puesto_espana",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ingresaba un hogar de Bilbao en 2019?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta bruta por persona en Sant Cugat del Vallès",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_bruta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sant Cugat del Vallès"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "estoy pensando en mudarme a Zaragoza, ¿cuánto gana la gente allí?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta mediana por unidad de consumo en Málaga",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_uc_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ganaba un vecino de Alcorcón en 2016?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcorcón"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2016
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad grande tiene los hogares con más renta?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_hogar_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra de media un ciudadano de A Coruña?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Coruña, A"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el sueldo medio por unidad de consumo en València?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_uc_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio ha mejorado más su renta?",
+  "idioma": "es",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renda mitjana de Barcelona ciutat",
+  "idioma": "ca",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o concello con máis renda de Galicia?",
+  "idioma": "gl",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein udalerritan dago errenta handiena?",
+  "idioma": "eu",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the average income in Madrid city?",
+  "idioma": "en",
+  "tabla": "renta_municipios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gana de media un español al año?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Total Nacional"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene los habitantes más ricos?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos renta?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta por hogar Madrid, Comunidad de",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Madrid, Comunidad de"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ingresa de media una persona en Extremadura?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la renta en Andalucía desde 2015?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los ingresos de los gallegos?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta media provincia de Gipuzkoa",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobraban los sevillanos en 2018?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué región tiene la renta por hogar más alta?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_hogar_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "renta persona euros corrientes Cataluña 2022",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la renta mediana por unidad de consumo en Navarra?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_uc_mediana_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Navarra, Comunidad Foral de"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se vive con menos dinero, en Murcia o en Canarias?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gana una familia media en Castilla - La Mancha?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_hogar",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla - La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "salario medio por habitante en Rioja, La",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Rioja, La"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido la renta de los hogares en Balears desde 2015?",
+  "idioma": "es",
+  "tabla": "renta_territorios",
+  "medida": "renta_hogar_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Balears, Illes"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "renda per persona al País Basc",
+  "idioma": "ca",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é a renda media en Galicia?",
+  "idioma": "gl",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein probintziatan dago errenta gutxien?",
+  "idioma": "eu",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish province has the highest income per person?",
+  "idioma": "en",
+  "tabla": "renta_territorios",
+  "medida": "renta_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente está en riesgo de pobreza en España comparado con Europa?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de la UE es más desigual?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "gini"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene menos pobreza?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "índice Gini de España",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "gini"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas veces más gana el 20 % rico que el 20 % pobre en España?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "s80_s20"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la desigualdad en España desde 2008?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "gini"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el riesgo de pobreza en Portugal desde 2010?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "pobreza Rumanía",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Rumanía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de pobreza en España comparado con Europa?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente está en riesgo de exclusión social en Alemania?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene el reparto de renta más igualitario?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador": "s80_s20"
+  }
+ },
+ {
+  "pregunta": "gini francia 2020",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "gini"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la media de pobreza en la Unión Europea?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Somos más pobres que los italianos?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos búlgaros están en riesgo de pobreza o exclusión?",
+  "idioma": "es",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Bulgaria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "pobresa a Espanya respecte a la UE",
+  "idioma": "ca",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "Cal é o país da UE con máis desigualdade?",
+  "idioma": "gl",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "gini"
+  }
+ },
+ {
+  "pregunta": "Which EU country has the highest poverty risk?",
+  "idioma": "en",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "arope"
+  }
+ },
+ {
+  "pregunta": "Zein herrialdek du pobrezia gehien Europan?",
+  "idioma": "eu",
+  "tabla": "renta_ue",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "arope"
+  }
+ }
+]

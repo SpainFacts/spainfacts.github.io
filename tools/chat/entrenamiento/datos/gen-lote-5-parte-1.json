@@ -1,0 +1,2445 @@
+[
+ {
+  "pregunta": "¿Cuánta gente ha llegado en patera a Canarias este año?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "llegadas irregulares a España ultimo mes",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos migrantes entraron por la valla de Ceuta y Melilla en 2023?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Tierra: Ceuta y Melilla"
+  }
+ },
+ {
+  "pregunta": "cayucos canarias agosto 2023",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "¿Por qué vía llegan más inmigrantes sin papeles, por mar o por tierra?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "via",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las llegadas de pateras a Baleares y la península desde 2018?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2018,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: península y Baleares"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de llegadas de inmigrantes irregulares a España?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han aumentado las entradas ilegales por mar a Canarias entre 2019 y 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "Estoy preparando un trabajo: ¿cuántas personas migrantes llegaron de forma irregular a España en 2018?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pateras a la peninsula y baleares 2025",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: península y Baleares"
+  }
+ },
+ {
+  "pregunta": "¿En qué mes llegaron más migrantes a Canarias?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos sin papeles han entrado por tierra en Ceuta y Melilla desde 2014?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Tierra: Ceuta y Melilla"
+  }
+ },
+ {
+  "pregunta": "Quants migrants han arribat en pastera a Canàries aquest any?",
+  "idioma": "ca",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "Cantas persoas chegaron en patera ás Canarias en 2021?",
+  "idioma": "gl",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "How many irregular migrants arrived in Spain by sea in 2024?",
+  "idioma": "en",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat migratzaile iritsi dira legez kanpo Kanariar uharteetara 2022an?",
+  "idioma": "eu",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: Canarias"
+  }
+ },
+ {
+  "pregunta": "Entradas irregulares a Baleares y costa peninsular en septiembre del año pasado",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Mar: península y Baleares"
+  }
+ },
+ {
+  "pregunta": "¿Ha subido o ha bajado la llegada de pateras en los últimos meses?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inmigrantes irregulares llegados en 2015, por tierra",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "via": "Tierra: Ceuta y Melilla"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos inmigrantes ilegales llegan a España al año de media?",
+  "idioma": "es",
+  "tabla": "inmigracion_llegadas",
+  "medida": "personas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos extranjeros se han hecho españoles en el último año?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente consigue la nacionalidad española cada año en Cataluña?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "nacionalidad española concedida marroquíes 2022",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Marruecos"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad da más nacionalidades españolas?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se nacionalizan más extranjeros en proporción a los que viven allí?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "por_1000_extranjeros",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos colombianos han obtenido la nacionalidad española?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Colombia"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han cambiado las nacionalizaciones desde 2015 hasta hoy?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más concesiones de nacionalidad?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "nuevos españoles venezolanos andalucía",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos latinoamericanos del Sur se nacionalizaron españoles en 2019?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "De Sudamérica"
+  }
+ },
+ {
+  "pregunta": "¿Y las nacionalidades concedidas a gente de África en Madrid?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "De Africa"
+  }
+ },
+ {
+  "pregunta": "Estoy hablando con unos amigos ecuatorianos: ¿cuántos ecuatorianos se hicieron españoles en 2023?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Ecuador"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas nacionalizaciones por cada 1.000 extranjeros hubo en Valencia en 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "por_1000_extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se han duplicado las concesiones de nacionalidad desde 2013?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants peruans han aconseguit la nacionalitat espanyola?",
+  "idioma": "ca",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Perú"
+  }
+ },
+ {
+  "pregunta": "Cantos estranxeiros obtiveron a nacionalidade española en Galicia en 2020?",
+  "idioma": "gl",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many people became Spanish citizens last year?",
+  "idioma": "en",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat atzerritarrek lortu dute espainiar nazionalitatea Euskadin 2021ean?",
+  "idioma": "eu",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "nacionalidad concedida dominicanos Canarias 2018",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "República Dominicana"
+  }
+ },
+ {
+  "pregunta": "naturalizaciones cuba cuantas",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad_previa": "Cuba"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad ha concedido menos nacionalidades?",
+  "idioma": "es",
+  "tabla": "inmigracion_nacionalizaciones",
+  "medida": "nacionalizaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la gente que vive en España es extranjera?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos extranjeros viven en Madrid?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más inmigrantes en proporción?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay menos población extranjera, en qué autonomía?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos africanos viven en Cataluña?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "africa",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos sudamericanos hay empadronados en España?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "sudamerica",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿De dónde viene la mayoría de los extranjeros que viven en Baleares?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el porcentaje de inmigrantes desde 2002?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2002,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución población extranjera comunidad valenciana",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos europeos comunitarios residen en España?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos asiáticos viven en Andalucía?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "asia",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos españoles de nacimiento o nacionalidad hay en Canarias?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "espanoles",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "población total de Murcia en 2010",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo hubo más extranjeros en España, qué año fue el récord?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "inmigrantes de centroamérica y caribe en españa 2024",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "centroamerica_caribe",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente de fuera de la UE pero de Europa vive aquí, rusos, ucranianos y demás?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "resto_europa",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos norteamericanos viven en Illes Balears?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "america_norte",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de extranjeros había en Galicia en 2008?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de població estrangera hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos estranxeiros hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of the population in Spain was born abroad or has foreign nationality?",
+  "idioma": "en",
+  "tabla": "inmigracion_poblacion",
+  "tablas_validas": [
+   "internacional_comparativa"
+  ],
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat atzerritar bizi dira Euskadin?",
+  "idioma": "eu",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en Ceuta y qué porcentaje es extranjera?",
+  "idioma": "es",
+  "tabla": "inmigracion_poblacion",
+  "medida": "extranjeros_pct",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Entra más gente de fuera de la que sale de España?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el saldo migratorio de Cataluña con el extranjero?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gana más población por la inmigración?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidades pierden gente que se marcha fuera?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo migratorio de españoles que se van al extranjero 2023",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Española"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos extranjeros netos han entrado en España en 2022?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Extranjera"
+  }
+ },
+ {
+  "pregunta": "saldo migratorio marroquíes españa",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Marruecos"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la llegada neta de inmigrantes desde 2021?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos colombianos más han llegado que salido en 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Colombia"
+  }
+ },
+ {
+  "pregunta": "¿Gana o pierde población Andalucía por migración exterior por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_1000",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Mis padres quieren irse a vivir fuera: ¿cuántos españoles se marcharon de Galicia en 2022?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Española"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con mayor saldo migratorio exterior de los últimos tiempos?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nacionalidad": "Total"
+  }
+ },
+ {
+  "pregunta": "migración neta venezolanos",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Venezuela"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el saldo migratorio de Madrid entre 2021 y 2024?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el saldo migratori amb l'estranger de la Comunitat Valenciana?",
+  "idioma": "ca",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o saldo migratorio con outros países en Galicia?",
+  "idioma": "gl",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What was the net international migration of Spain in 2023?",
+  "idioma": "en",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Kanpoko migrazio-saldoa Euskadin 2022an",
+  "idioma": "eu",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "altas menos bajas por migración exterior de ucranianos 2022",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Ucrania"
+  }
+ },
+ {
+  "pregunta": "inmigración neta de gente de Asia en Cataluña",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nacionalidad": "Asia"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad recibe más rumanos netos?",
+  "idioma": "es",
+  "tabla": "inmigracion_saldos",
+  "medida": "saldo_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nacionalidad": "Rumanía"
+  }
+ },
+ {
+  "pregunta": "¿Cómo está el paro en España comparado con Alemania?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "paro"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente joven está en paro en Francia?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "paro_juvenil"
+  }
+ },
+ {
+  "pregunta": "esperanza de vida japon 2000",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Japón"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2000
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "esperanza_vida"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la esperanza de vida en España desde 1990?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1990,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "esperanza_vida"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hijos tienen las mujeres en Italia?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "fecundidad"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de la lista tiene más deuda pública?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "deuda_publica"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue la peor inflación de España en la historia reciente?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "inflacion"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la deuda pública española desde 2008 hasta 2024?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "deuda_publica"
+  }
+ },
+ {
+  "pregunta": "¿En qué país se vende mayor proporción de coches eléctricos nuevos?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "coche_electrico_cuota"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos médicos por habitante hay en Grecia respecto a España?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "medicos"
+  }
+ },
+ {
+  "pregunta": "CO2 por persona en China 2015",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "China"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "co2_pc"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad sale de renovables en Dinamarca?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Dinamarca"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "electricidad_renovable"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene la mayor desigualdad de renta entre los comparados?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "gini"
+  }
+ },
+ {
+  "pregunta": "¿Gastamos en sanidad más o menos que Alemania en proporción al PIB?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "gasto_sanitario_pib"
+  }
+ },
+ {
+  "pregunta": "¿Hay muchos más homicidios en Estados Unidos que en España?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Estados Unidos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "homicidios"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos turistas vienen por habitante a Portugal?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "turistas_por_habitante"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el PIB por persona de Corea del Sur entre 1990 y 2023?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Corea del Sur"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1990,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "pib_pc_ppa"
+  }
+ },
+ {
+  "pregunta": "tasa de riesgo de pobreza marruecos",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Marruecos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "riesgo_pobreza"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de gente con estudios superiores hay en el Reino Unido?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Reino Unido"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "estudios_terciarios"
+  }
+ },
+ {
+  "pregunta": "Voy a opositar a médico y me pregunto cuántas camas de hospital por mil habitantes tenemos frente a Suecia",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Suecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos suicidios hay en Corea del Sur?",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Corea del Sur"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "suicidios"
+  }
+ },
+ {
+  "pregunta": "Com ha evolucionat l'atur a Espanya des dels anys noranta?",
+  "idioma": "ca",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1991,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "paro"
+  }
+ },
+ {
+  "pregunta": "Canto gastan en investigación e desenvolvemento Alemaña e España?",
+  "idioma": "gl",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "id_pib"
+  }
+ },
+ {
+  "pregunta": "How does life expectancy in Spain compare with Norway?",
+  "idioma": "en",
+  "tabla": "internacional_comparativa",
+  "tablas_validas": [
+   "internacional_ultimo"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Noruega"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "esperanza_vida"
+  }
+ },
+ {
+  "pregunta": "Zer da Espainiako BPG hazkundea 2019an?",
+  "idioma": "eu",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "crecimiento_pib"
+  }
+ },
+ {
+  "pregunta": "porcentaje de mayores de 65 en Japón 2020",
+  "idioma": "es",
+  "tabla": "internacional_comparativa",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Japón"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "poblacion_65"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el último dato de paro en Italia?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "tablas_validas": [
+   "internacional_comparativa"
+  ],
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "paro"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene el paro juvenil más alto?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "paro_juvenil"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene la inflación más baja ahora mismo?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador_id": "inflacion"
+  }
+ },
+ {
+  "pregunta": "¿Dónde viven más años, en España o en Japón?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "esperanza_vida"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se emite de CO2 por habitante en Estados Unidos hoy?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Estados Unidos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "co2_pc"
+  }
+ },
+ {
+  "pregunta": "¿Cómo estamos en gasto en I+D frente a la media de la OCDE?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "OCDE"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "id_pib"
+  }
+ },
+ {
+  "pregunta": "gasto en educación público respecto al PIB, Francia",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "gasto_educacion_pib"
+  }
+ },
+ {
+  "pregunta": "¿Qué país gasta más en sanidad por persona?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "gasto_sanitario_pc_ppa"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el valor de España y cuál el de Alemania en tasa de empleo?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor_espana_mismo_anio",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "tasa_empleo"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de comparación tiene la tasa de suicidio más alta?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "suicidios"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente usa internet en Marruecos?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Marruecos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "internet"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene más camas de hospital por habitante?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "camas"
+  }
+ },
+ {
+  "pregunta": "¿Hay más pobres en España que en Portugal?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "riesgo_pobreza"
+  }
+ },
+ {
+  "pregunta": "fecundidad china ultimo dato",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "China"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "fecundidad"
+  }
+ },
+ {
+  "pregunta": "Estoy pensando en emigrar: ¿en qué país de los comparados es más fácil encontrar trabajo, es decir, mayor tasa de empleo?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "tasa_empleo"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene el mayor porcentaje de vivienda social?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "vivienda_social_pct"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población de Alemania ha nacido en otro país?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "migrantes"
+  }
+ },
+ {
+  "pregunta": "¿Qué proporción de la electricidad es renovable en Noruega?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Noruega"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "electricidad_renovable"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos homicidios por cada 100.000 hay en Países Bajos?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Países Bajos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "homicidios"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la deuda pública de Grecia?",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "deuda_publica"
+  }
+ },
+ {
+  "pregunta": "Quin país té el PIB per càpita més alt?",
+  "idioma": "ca",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "pib_pc_ppa"
+  }
+ },
+ {
+  "pregunta": "Cal é o país con maior consumo eléctrico por habitante?",
+  "idioma": "gl",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "consumo_electrico_pc"
+  }
+ },
+ {
+  "pregunta": "Which country has the highest share of electric cars in new sales?",
+  "idioma": "en",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "coche_electrico_cuota"
+  }
+ },
+ {
+  "pregunta": "Zein herrialdetan dago langabezia-tasa altuena?",
+  "idioma": "eu",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "paro"
+  }
+ },
+ {
+  "pregunta": "mortalidad infantil españa vs suecia",
+  "idioma": "es",
+  "tabla": "internacional_ultimo",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Suecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "mortalidad_infantil"
+  }
+ }
+]

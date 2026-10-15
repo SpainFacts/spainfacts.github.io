@@ -1,0 +1,43 @@
+✗  d01 [actual] 28.8s número de municipios del territorio: 8.132 municipios, 2025. Fuente: tabla mother.poblacion_territorios (Dinero público 
+✓  d02 [evolucion] 44.8s nacimientos: de 519.779 nacimientos en 2008 a 318.005 nacimientos en 2024, -201.774 nacimientos (-38,82 %). Fuente: tabl
+✓  d03 [ranking] 56.6s edad media de la población, 2025: - Principado de Asturias: 49,59 años - Castilla y León: 48,6 años - Galicia: 48,52 año
+✓  d04 [territorio] 22.6s población del municipio (padrón, 1 de enero) (Valladolid, Valladolid): 302.614 habitantes, 2025. Fuente: tabla mother.po
+✓  d05 [actual] 43.9s parados registrados: 2.355.531 personas, agosto de 2026. Fuente: tabla mother.mercado_paro_registrado.
+✓  d06 [actual] 43.1s tasa de paro: 9,87 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_trimestral.
+✓  d07 [ranking] 45.5s tasa de paro, 2.º trimestre de 2026: - Gipuzkoa: 5,4 % - Palencia: 5,55 % - Illes Balears: 6,11 % - Teruel: 6,23 % - Sor
+✓  d08 [anio] 33.8s inflación anual (variación del IPC general en 12 meses): 10,8 %, julio de 2022. Fuente: tabla mother.mercado_ipc_mensual
+✗  d09 [anio] 45.9s salario medio mensual en euros reales, 2024: - Industria: 2.717,83 € de 2025 al mes - Servicios: 2.316,47 € de 2025 al m
+✓  d10 [territorio] 53.4s salario medio mensual en euros reales (País Vasco): 2.668,54 € de 2025 al mes, 2025. Fuente: tabla mother.economia_salar
+✓  d11 [actual] 51.4s sociedades constituidas en el mes: 11.150 sociedades, 1 de julio de 2026. Fuente: tabla mother.empresas_sociedades_mensu
+✓  d12 [comparacion] 60.1s turistas internacionales en el mes: de 83.509.151 turistas en 2019 a 96.803.893 turistas en 2025, +13.294.742 turistas (
+✓  d13 [ranking] 43.9s turistas internacionales, 2025: - Reino Unido: 19.084.422 turistas - Francia: 12.767.489 turistas - Alemania: 12.050.835
+✓  d14 [actual] 49.7s valor tasado medio por metro cuadrado en euros reales de 2025: 2.283,22 € reales/m², 1 de abril de 2026. Fuente: tabla m
+✗t d15 [territorio] 49.2s alquiler mensual mediano en euros reales de 2025 (Colectiva, Barcelona): 773,29 € reales al mes, 2024. Fuente: tabla mot
+✓  d16 [evolucion] 57.2s compraventas de viviendas en el mes: de 505.467 compraventas en 2019 a 711.543 compraventas en 2025, +206.076 compravent
+✓  d17 [evolucion] 39.7s deuda pública en porcentaje del PIB: de 119,3 % del PIB en 2020 a 100,7 % del PIB en 2025, -18,6 % del PIB (-15,59 %). F
+✓t d18 [actual] 59.9s pensión media de jubilación en euros constantes: 1.506,11 € al mes (euros de 2025), 2025. (2026 aún está incompleto, así
+✓  d19 [ranking] 54.9s pensión media mensual en euros constantes, 2025: - País Vasco: 1.616,32 € al mes (euros de 2025) - Principado de Asturia
+✗  d20 [actual] 24.4s empleados públicos (Policía Nacional y Guardia Civil, Funcionario de carrera): 149.607 personas, 1 de enero de 2026. Fue
+✓  d21 [territorio] 40.6s deuda en euros (Cataluña): 92.769.619.000 €, 2.º trimestre de 2026. Fuente: tabla mother.ccaa_deuda (SpainFacts · El Est
+✗t d22 [actual] 39.8s porcentaje de llenado del embalse, 29 de septiembre de 2026: - Miño - Sil, Montefurado: 100 % - Guadiana, Montijo: 100 %
+✓  d23 [anio] 31.7s emisiones de gases de efecto invernadero por habitante (sin sumideros): 5,48 t CO2eq por habitante, 2024. Fuente: tabla 
+✓t d24 [anio] 34.5s cuota de generación renovable: 56,82 % de la generación, 2024. Fuente: tabla mother.clima_electricidad_anual.
+✓  d25 [ranking] 41.8s superficie quemada, 2025: - Ourense: 140.601 ha - León: 73.294 ha - Zamora: 47.900 ha - Cáceres: 38.975 ha - Badajoz: 15
+✓  d26 [territorio] 44.5s temperatura máxima del día récord (Córdoba): 46,9 °C, 14 de agosto de 2021. Fuente: tabla mother.calor_records.
+✓  d27 [actual] 24.8s vehículos matriculados (N, Turismos, Eléctrico puro (BEV)): 17.641 vehículos, septiembre de 2026. Fuente: tabla mother.m
+✗  d28 [ranking] 29.8s puntos de recarga por cada 100.000 habitantes: - País Vasco: 132,69 por cada 100.000 habitantes - Cataluña: 126,07 por c
+✓t d29 [actual] 37.2s turismos en el parque: 27.525.380 vehículos, septiembre de 2026. Fuente: tabla mother.movilidad_parque_resumen.
+✗t d30 [anio] 43.3s No hay datos para esa combinación en mother.crimen_ultimo_periodo. (2026 aún está incompleto, así que no se usa como últ
+✓  d31 [ranking] 26.2s valor del indicador educativo, 2025 (Abandono temprano de la educación y la formación (18-24 años)): - Región de Murcia:
+✓  d32 [territorio] 30.3s esperanza de vida al nacer (Comunidad de Madrid): 85,58 años, 2024. Fuente: tabla mother.salud_esperanza_vida (SpainFact
+✓  d33 [actual] 44.7s población extranjera: 6.911.971 personas, 2025. Fuente: tabla mother.inmigracion_poblacion.
+✓  d34 [anio] 28.2s personas llegadas de forma irregular (Mar: Canarias): 46.843 personas, 2024. Fuente: tabla mother.inmigracion_llegadas.
+✗  d35 [ranking] 40.6s población en riesgo de pobreza o exclusión social (AROPE), 2025: - País Vasco: 14,7 % de la población - Illes Balears: 1
+✓  d36 [anio] 33.6s votos (PP, Congreso): 8.160.837 votos, 2023. Fuente: tabla mother.elecciones_partidos.
+✗  d37 [comparacion] 50.3s personas que votaron (Congreso, noviembre de 2019): 24.507.715 votantes, 2019. Fuente: tabla mother.elecciones_participa
+✓  d38 [actual] 29.1s número de alcaldías (PP): 3.333 alcaldías. Fuente: tabla mother.alcaldes_familias_territorio.
+✓  d39 [actual] 36.7s puntuación del indicador elegido (0 a 100; ver sentido) (Índice de Percepción de la Corrupción (CPI)): 55 puntos 0-100, 
+✓  d40 [anio] 50.4s dinero público a RTVE, en euros del año: 1.181,73 millones de € (nominales), 2024. Fuente: tabla mother.medios_tv_espana
+✓  p01 [actual] 44.4s número de hogares: 19.762.059 hogares, 2026. Fuente: tabla mother.demografia_hogares.
+✓  p02 [anio] 38.2s número de defunciones (Accidentes de tráfico): 1.827 defunciones, 2023. Fuente: tabla mother.salud_causas_muerte.
+✓  p03 [ranking] 35.8s empresas por cada 1.000 habitantes, 2025: - Illes Balears: 83,49 por cada 1.000 habitantes - Málaga: 79,51 por cada 1.00

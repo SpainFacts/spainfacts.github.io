@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Prueba clasificador</title>
+<style>body{font:14px system-ui;margin:16px;background:#fff;color:#111}pre{white-space:pre-wrap}</style>
+</head>
+<body>
+<h1>Clasificador de tabla en el navegador</h1>
+<pre id="log"></pre>
+<script type="module">
+// El mismo camino que el chat: EmbeddingGemma (model_no_gather q4, media, 256 dims) y el
+// clasificador del catálogo (src/lib/chat/clasificador.js = ../clasificador.mjs)
+import { crearClasificador } from './clasificador.js';
+const log = (s) => (document.getElementById('log').textContent += s + '\n');
+const device = new URLSearchParams(location.search).get('device') ?? 'wasm';
+window.resultado = { estado: 'cargando' };
+try {
+	const { AutoTokenizer, AutoModel, mean_pooling } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0');
+	const M = 'onnx-community/embeddinggemma-300m-ONNX';
+	const tok = await AutoTokenizer.from_pretrained(M);
+	const red = await AutoModel.from_pretrained(M, { dtype: 'q4', model_file_name: 'model_no_gather', device });
+	const clas = crearClasificador(await (await fetch('../clasificador.json')).json());
+	const embeber = async (t) => {
+		const e = tok([`task: search result | query: ${t}`], { padding: true, truncation: true });
+		const v = mean_pooling((await red(e)).last_hidden_state, e.attention_mask).normalize(2, -1).data.slice(0, 256);
+		const n = Math.hypot(...v);
+		return Array.from(v, (x) => x / n);
+	};
+	const res = {};
+	for (const q of ['¿Cuántos parados hay en Andalucía?', '¿Cuánto cuesta alquilar un piso en Madrid?', '¿Cuántas hectáreas se quemaron en 2022?']) {
+		const t0 = performance.now();
+		const top = clas.mejores(await embeber(q), 3).map((x) => x.tabla);
+		res[q] = top;
+		log(`${q} -> ${top.join(', ')} (${Math.round(performance.now() - t0)} ms)`);
+	}
+	window.resultado = { estado: 'ok', device, res };
+} catch (err) {
+	log('ERROR: ' + (err.stack ?? err));
+	window.resultado = { estado: 'error', error: String(err.message ?? err) };
+}
+</script>
+</body>
+</html>

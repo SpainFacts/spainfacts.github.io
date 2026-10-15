@@ -1,0 +1,2238 @@
+[
+ {
+  "pregunta": "¿Cuánto gasta el ayuntamiento de Madrid por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ingresa por vecino el ayuntamiento de Barcelona?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingreso_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento gasta más por persona?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad gasta menos por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "presupuesto total del ayuntamiento de Sevilla",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero ingresa al año el Ayuntamiento de Valencia?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingresos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos acaban el año en números rojos?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "saldo_no_financiero",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Tiene superávit el ayuntamiento de Bilbao?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo del ayuntamiento de Zaragoza en 2023",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en Marbella según las cuentas municipales?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto recauda el IBI en Málaga?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingresos_c1",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "impuestos indirectos (ICIO, plusvalías) recaudados por el ayuntamiento de Marbella",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingresos_c2",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ingresa Valladolid por tasas y precios públicos?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingresos_c3",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "transferencias que recibe el ayuntamiento de Soria del Estado",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingresos_c4",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta Madrid en sueldos de sus empleados municipales?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c1",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en bienes y servicios del ayuntamiento de Getafe",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c2",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto paga de intereses de deuda el ayuntamiento de Córdoba?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c3",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "subvenciones y transferencias que da el ayuntamiento de Oviedo",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c4",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto invierte en obras el Ayuntamiento de Murcia?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c6",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto devuelve de deuda al año el ayuntamiento de Cartagena?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c9",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cartagena"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad invierte más en obras por encima de las demás?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_c6",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto por habitante de Granada en 2022 y en 2025",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2022,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el gasto del ayuntamiento de Alcobendas?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2022,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ayuntamiento de Palma: gasto per cápita 2024",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento ingresa más por habitante? Ranking",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "ingreso_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuentas del ayuntamiento de Pozuelo de Alarcón",
+  "idioma": "es",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Pozuelo de Alarcón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant gasta l'ajuntament de Girona per habitant?",
+  "idioma": "ca",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta o concello de Vigo?",
+  "idioma": "gl",
+  "tabla": "municipios_cuentas",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does the Madrid city council spend per resident?",
+  "idioma": "en",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Bilboko udalak biztanleko?",
+  "idioma": "eu",
+  "tabla": "municipios_cuentas",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta de media un ayuntamiento por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el gasto típico por vecino de un ayuntamiento?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ingresa por persona un ayuntamiento normal?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "ingreso_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Los ayuntamientos pequeños gastan más por habitante que los grandes?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_poblacion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto por habitante en pueblos de menos de 1.000 habitantes",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "gasto por vecino en municipios de 1.000 a 5.000 habitantes",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "1.000-5.000"
+  }
+ },
+ {
+  "pregunta": "gasto por habitante en ciudades de 5.000 a 20.000 habitantes",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "5.000-20.000"
+  }
+ },
+ {
+  "pregunta": "municipios de 20.000 a 50.000 habitantes: gasto por persona",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "20.000-50.000"
+  }
+ },
+ {
+  "pregunta": "gasto por habitante en ciudades entre 50.000 y 100.000 vecinos",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "50.000-100.000"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gastan las ciudades de 100.000 a 500.000 habitantes por vecino?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "100.000-500.000"
+  }
+ },
+ {
+  "pregunta": "gasto per cápita de las ciudades de más de 500.000 habitantes",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": ">500.000"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto típico de los ayuntamientos desde 2010?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido lo que ingresan los ayuntamientos por habitante desde 2015?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "ingreso_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Los ayuntamientos pequeños ingresan más por persona?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "ingreso_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_poblacion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo medio de un ayuntamiento por habitante",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "saldo_no_financiero_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos tienen más déficit por habitante según tamaño?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "saldo_no_financiero_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_poblacion",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gastos corrientes (no financieros) típicos por habitante",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gastos_no_financieros_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "ingresos no financieros típicos por vecino",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "ingresos_no_financieros_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos hay en España?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "n_municipios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos municipios hay de menos de mil habitantes?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "n_municipios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "gasto medio por habitante de los ayuntamientos en 2019",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Qué año gastaron más los ayuntamientos por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta población vive en municipios de más de medio millón de habitantes?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": ">500.000"
+  }
+ },
+ {
+  "pregunta": "Quant gasta de mitjana un ajuntament per habitant?",
+  "idioma": "ca",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "Canto gasta de media un concello por veciño?",
+  "idioma": "gl",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "Todos"
+  }
+ },
+ {
+  "pregunta": "Typical municipal spending per resident in Spain by town size",
+  "idioma": "en",
+  "tabla": "municipios_cuentas_medias",
+  "medida": "gasto_hab_mediana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_poblacion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto del ayuntamiento de Madrid desde 2010?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto por habitante en Sevilla desde 2015?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los ingresos del ayuntamiento de Valencia",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "ingreso_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "saldo del ayuntamiento de Barcelona año a año",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año gastó más el ayuntamiento de Zaragoza?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo Málaga más superávit?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo más déficit el ayuntamiento de Valladolid?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto total del ayuntamiento de Bilbao en 2012",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ingresos totales del ayuntamiento de Murcia en 2018",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "ingresos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaba por vecino Granada en 2010?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto por habitante de Oviedo en la crisis de 2012",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el presupuesto de Palma desde 2019?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "población de Alcobendas desde 2010",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "poblacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Los ingresos de Córdoba suben más que sus gastos?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "ingreso_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "serie de gasto del ayuntamiento de Vigo",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto per cápita Getafe 2020",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado el gasto de Marbella en la última década?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del superávit del ayuntamiento de Santander",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "saldo_no_financiero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Santander"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el presupuesto del ayuntamiento de Burgos desde 2010?",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Burgos"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el ayuntamiento de Salamanca: gastos totales en 2016",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Salamanca"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2016
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "historial de ingresos por habitante en Soria",
+  "idioma": "es",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "ingreso_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Com ha evolucionat la despesa de l'ajuntament de Tarragona?",
+  "idioma": "ca",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gasto_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Tarragona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Como evolucionou o gasto do concello de Vigo desde 2010?",
+  "idioma": "gl",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How has the Barcelona city council budget changed since 2010?",
+  "idioma": "en",
+  "tabla": "municipios_cuentas_serie",
+  "medida": "gastos_total",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el ayuntamiento de Madrid en cultura por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Cultura"
+  }
+ },
+ {
+  "pregunta": "¿En qué se gasta el dinero el ayuntamiento de Barcelona?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "politica_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en seguridad y policía local en Sevilla",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Seguridad y movilidad ciudadana"
+  }
+ },
+ {
+  "pregunta": "¿Qué ciudad gasta más en deporte por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "politica_nombre": "Deporte"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto destina Bilbao a educación?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Educación"
+  }
+ },
+ {
+  "pregunta": "gasto en sanidad del ayuntamiento de Zaragoza",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Sanidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta Valencia en servicios sociales?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Servicios Sociales y promoción social"
+  }
+ },
+ {
+  "pregunta": "presupuesto de vivienda y urbanismo en Málaga",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Vivienda y urbanismo"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento destina más al medio ambiente por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "politica_nombre": "Medio ambiente"
+  }
+ },
+ {
+  "pregunta": "gasto en transporte público del ayuntamiento de Madrid",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Transporte público"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta en fomento del empleo el ayuntamiento de Sevilla?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Fomento del Empleo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto paga de deuda el ayuntamiento de Murcia?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Deuda Pública"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuestan los políticos? Gasto en órganos de gobierno del ayuntamiento de Valladolid",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Órganos de gobierno"
+  }
+ },
+ {
+  "pregunta": "¿Qué ciudad gasta más en cultura por habitante?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "politica_nombre": "Cultura"
+  }
+ },
+ {
+  "pregunta": "gasto en infraestructuras del ayuntamiento de Córdoba",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Infraestructuras"
+  }
+ },
+ {
+  "pregunta": "gasto en bienestar comunitario (limpieza, alumbrado, agua) en Granada",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Bienestar comunitario"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento gasta más en turismo y comercio local?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "politica_nombre": "Comercio, turismo y pequeñas y medianas empresas"
+  }
+ },
+ {
+  "pregunta": "gasto en investigación e innovación en Bilbao",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Investigación, desarrollo e innovación"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto destina Getafe a servicios de carácter general?",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Servicios de carácter general"
+  }
+ },
+ {
+  "pregunta": "gasto en agricultura y ganadería del ayuntamiento de Lleida",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Lleida"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Agricultura, Ganadería y Pesca"
+  }
+ },
+ {
+  "pregunta": "gasto social de los ayuntamientos grandes: protección y promoción social",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "area_nombre": "Actuaciones de protección y promoción social"
+  }
+ },
+ {
+  "pregunta": "gasto en servicios públicos básicos de Oviedo",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "area_nombre": "Servicios públicos básicos"
+  }
+ },
+ {
+  "pregunta": "ayuntamiento de Vigo: gasto en deporte en 2024",
+  "idioma": "es",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Deporte"
+  }
+ },
+ {
+  "pregunta": "En què gasta els diners l'ajuntament de València?",
+  "idioma": "ca",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "politica_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "En que gasta o diñeiro o concello de Vigo?",
+  "idioma": "gl",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "politica_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does Madrid city council spend on culture?",
+  "idioma": "en",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Cultura"
+  }
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Bilboko udalak hezkuntzan?",
+  "idioma": "eu",
+  "tabla": "municipios_politicas",
+  "medida": "importe",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "politica_nombre": "Educación"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas personas cotizan a la Seguridad Social?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "afiliados totales a la Seguridad Social",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos autónomos hay en España?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores por cuenta ajena hay en el régimen general?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "General"
+  }
+ },
+ {
+  "pregunta": "afiliados al régimen del mar (pescadores)",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Mar"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos mineros del carbón quedan cotizando?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Minería del carbón"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de afiliados son autónomos?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "pct_del_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de los cotizantes está en el régimen general?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "pct_del_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "General"
+  }
+ },
+ {
+  "pregunta": "afiliados por cada 1.000 habitantes",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "autónomos por cada mil habitantes",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de autónomos desde 2008?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos afiliados más hay que antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "evolución de los cotizantes del régimen general desde 2001",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2001,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "General"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos afiliados había en 2013, en lo peor de la crisis?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2013
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué año hubo más afiliados a la Seguridad Social?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos autónomos había en 2019?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha caído la minería del carbón en afiliados desde 2001?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2001,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Minería del carbón"
+  }
+ },
+ {
+  "pregunta": "gente trabajando dada de alta en 2022",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué régimen tiene más afiliados?",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "regimen",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso de los autónomos sobre el total de cotizantes en 2010 y ahora",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "pct_del_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "porcentaje de afiliados en el mar",
+  "idioma": "es",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "pct_del_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Mar"
+  }
+ },
+ {
+  "pregunta": "Quants cotitzants hi ha a la Seguretat Social?",
+  "idioma": "ca",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "Cantos autónomos hai en España?",
+  "idioma": "gl",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ },
+ {
+  "pregunta": "How many people are registered with Social Security in Spain?",
+  "idioma": "en",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat autonomo daude Espainian?",
+  "idioma": "eu",
+  "tabla": "pensiones_afiliados_regimen",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "regimen": "Autónomos"
+  }
+ }
+]

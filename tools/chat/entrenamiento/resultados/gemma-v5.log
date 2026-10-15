@@ -1,0 +1,11 @@
+✓  v5-01 [actual] 93.5s tasa de empleo: 53,44 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_trimestral (Paro y empleo: https://spa
+✗  v5-02 [actual] 51.9s gasto mensual en nóminas de pensiones: 14.498.177.663 € al mes, 1 de septiembre de 2026. Fuente: tabla mother.pensiones_
+✓  v5-03 [actual] 42.8s inflación anual (variación del IPC general en 12 meses): 4,3 %, agosto de 2026. Fuente: tabla mother.mercado_ipc_mensual
+✗t v5-04 [actual] 85.6s tasa de paro (desestacionalizada): 10 %, agosto de 2026. Fuente: tabla mother.mercado_paro_ue (Paro y empleo: https://sp
+✓  v5-05 [actual] 53.3s esperanza de vida al nacer (Mujeres): 86,5 años, 2024. Fuente: tabla mother.salud_esperanza_vida (Salud: https://spainfa
+✓  v5-06 [actual] 147.1s precio por litro con impuestos, en euros del momento, 28 de septiembre de 2026: - Gasolina 95: 1,94 €/litro (nominales) 
+✗  v5-07 [actual] 119.5s número de hogares: 19.762.059 hogares, 2026. Fuente: tabla mother.demografia_hogares (Hogares: https://spainfacts.org/de
+✓  v5-08 [actual] 82.3s superficie quemada: 311.908 ha, 2026. Fuente: tabla mother.incendios_anual (Incendios forestales: https://spainfacts.org
+✓  v5-09 [actual] 38.1s saldo o déficit de las administraciones públicas en porcentaje del PIB: -2,4 % del PIB, 2025. Fuente: tabla mother.cuent
+✓  v5-10 [actual] 36.1s potencia instalada de almacenamiento (baterias_hibridadas): 255,9 MW, 1 de octubre de 2026. Fuente: tabla mother.almacen
+✓  v5-11 [actual] 36.9s turismos sin etiqueta sobre el total de turismos: 20,04 % del parque de turismos, septiembre de 2026. Fuente: tabla moth

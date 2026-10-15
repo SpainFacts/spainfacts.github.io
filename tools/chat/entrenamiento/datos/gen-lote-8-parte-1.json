@@ -1,0 +1,2345 @@
+[
+ {
+  "pregunta": "¿Qué porcentaje de ayuntamientos no manda a tiempo a Hacienda la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido tiene más alcaldes que llegan tarde con las cuentas del año al Ministerio de Hacienda?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pueblos que no entregan la liquidacion del presupuesto 2023",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cumple el ayuntamiento de Sevilla con el plazo de entrega de la liquidación a Hacienda?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos pequeños, de menos de mil vecinos, se retrasan en rendir la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "¿Ha mejorado con los años la puntualidad de los ayuntamientos al enviar la liquidación a Hacienda?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo más ayuntamientos fuera de plazo con la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Los ayuntamientos del PP entregan antes de tiempo la liquidación que los del PSOE?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado desde 2015 el porcentaje de consistorios que no presentan la liquidación en plazo?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Les grans ciutats, de més de 100.000 habitants, presenten a temps la liquidació del pressupost?",
+  "idioma": "ca",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": ">100.000"
+  }
+ },
+ {
+  "pregunta": "Que partido ten máis concellos que non presentan a liquidación do orzamento a tempo?",
+  "idioma": "gl",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which political party has the most town halls that miss the deadline to submit their budget settlement to the Treasury?",
+  "idioma": "en",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer partidu du udal gehien, aurrekontuaren likidazioa epean aurkezten ez dutenak?",
+  "idioma": "eu",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "liquidacion presupuesto ayuntamientos incumplen 2019",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos de Madrid llegaron tarde a entregar sus cuentas liquidadas a Hacienda en 2022?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Los municipios donde gobierna Vox cumplen con el plazo de rendir la liquidación?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia_en_plazo": "Vox"
+  }
+ },
+ {
+  "pregunta": "mi pueblo tiene unos 3.000 habitantes, ¿los ayuntamientos de ese tamaño suelen presentar a tiempo la liquidacion?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "1.000-5.000"
+  }
+ },
+ {
+  "pregunta": "¿Qué tamaño de municipio incumple más el plazo de la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tramo_poblacion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos habitantes viven en municipios que no entregan la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué alcaldes de izquierdas (IU, Podemos y Sumar) han presentado tarde la liquidación?",
+  "idioma": "es",
+  "tabla": "transparencia_liquidaciones",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia_en_plazo": "IU, Podemos y Sumar"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos tienen retenido el dinero que les da el Estado por no rendir cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿A qué ayuntamiento le ha retenido Hacienda más dinero de la participación en los tributos del Estado?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero le tiene retenido Hacienda al ayuntamiento de Ourense?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Ourense"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos meses lleva Alicante sin cobrar la parte que le toca de los impuestos del Estado?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "meses_retenido",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alacant/Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido tiene más ayuntamientos con la PIE retenida?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ayuntamientos con la paga del estado retenida 2023",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos meses de media dura la retención de los ingresos del Estado a los ayuntamientos morosos con las cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "meses_retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se retuvo a Telde en 2016 por no mandar el presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Telde"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2016
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido desde 2018 el número de ayuntamientos castigados con la retención de la participación en tributos?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pueblos de menos de mil habitantes han sufrido retención por no rendir la liquidación del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "¿Por no presentar qué documento se retiene más dinero a los ayuntamientos, el presupuesto o la liquidación?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "seccion_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quins ajuntaments tenen retingut el diner de la participació en els tributs de l'Estat?",
+  "idioma": "ca",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos concellos teñen retida a participación nos tributos do Estado por non presentar as contas?",
+  "idioma": "gl",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much money has the Treasury withheld from town halls for failing to submit their accounts?",
+  "idioma": "en",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "retención particip tributos estado ayuntamiento Leganés 2023 cuanto",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "importe_retenido_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Leganés"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de ayuntamientos con retención de la PIE desde 2014?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2014,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos del PP tienen el dinero del Estado retenido por no hacer la liquidación?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos grandes, de más de 100.000 habitantes, están castigados sin cobrar su parte de los impuestos estatales?",
+  "idioma": "es",
+  "tabla": "transparencia_pie",
+  "medida": "retenido",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": ">100.000"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero tiene retenido ahora mismo Hacienda a los ayuntamientos por no rendir cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos tenían retenida la participación en tributos del Estado en marzo de 2024?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-03"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más dinero retenido a los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha ido mes a mes la cantidad retenida a los ayuntamientos morosos con las cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué importe se retuvo por la liquidación del presupuesto no presentada?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "seccion": "liquidacion"
+  }
+ },
+ {
+  "pregunta": "retenciones mensuales ayuntamientos presupuesto no presentado",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "seccion": "presupuesto"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero se le retuvo a los ayuntamientos en enero de 2025 por no enviar las líneas fundamentales del presupuesto?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-01"
+  },
+  "ranking": null,
+  "filtros": {
+   "seccion": "lineas_fundamentales"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado desde 2020 el dinero retenido cada mes a los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia concentra más retenciones de dinero a sus ayuntamientos?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se retiene a los ayuntamientos de Las Palmas cada mes?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants diners es van retenir als ajuntaments el darrer mes per no presentar els pressupostos?",
+  "idioma": "ca",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much money was withheld from Spanish town halls each month last year?",
+  "idioma": "en",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes de 2023 hubo más dinero bloqueado a los ayuntamientos por Hacienda?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero retenido por habitante a los ayuntamientos de Madrid en 2024?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur_hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "retencion mensual pie ayuntamientos 2022",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay ahora menos ayuntamientos castigados con retención que hace cinco años?",
+  "idioma": "es",
+  "tabla": "transparencia_pie_mensual",
+  "medida": "importe_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos días tarda de media un ayuntamiento en pagar a sus proveedores?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento paga más tarde a las empresas que le prestan servicios?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos días tarda el Ayuntamiento de Madrid en pagar las facturas?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos tardan más de 30 días en pagar a proveedores?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "periodo medio de pago Barcelona 2025 T4",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025T4"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido tiene más ayuntamientos que pagan por encima del plazo legal de los 30 días?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado lo que tarda Sevilla en pagar a sus proveedores?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha empeorado desde 2023 el porcentaje de ayuntamientos que pagan tarde a proveedores?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2023,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el trimestre en que más ayuntamientos se pasaron del plazo de pago?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "periodo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Los pueblos de menos de 1.000 habitantes pagan antes o después que las ciudades?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia pagan más tarde los ayuntamientos a sus acreedores?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant triga l'Ajuntament de Barcelona a pagar les factures als proveïdors?",
+  "idioma": "ca",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos días tarda o concello de Vigo en pagar aos provedores?",
+  "idioma": "gl",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many days does the Zaragoza city council take to pay its suppliers?",
+  "idioma": "en",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Udalek zenbat egunetan ordaintzen diete hornitzaileei batez beste?",
+  "idioma": "eu",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos del PP tardan más de un mes en pagar las facturas?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia_en_plazo": "PP"
+  }
+ },
+ {
+  "pregunta": "que ayuntamiento de andalucia paga mas tarde a los proveedores",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto tardaba Logroño en pagar a proveedores en el segundo trimestre de 2024?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "pmp_dias",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Logroño"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024T2"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Pagan con puntualidad a las empresas los ayuntamientos grandes, los de más de 100.000 habitantes?",
+  "idioma": "es",
+  "tabla": "transparencia_pmp",
+  "medida": "supera_30",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": ">100.000"
+  }
+ },
+ {
+  "pregunta": "¿Qué nota de transparencia tiene el Ayuntamiento de Las Palmas de Gran Canaria?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palmas de Gran Canaria, Las"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento es el más transparente de Canarias?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuáles son los ayuntamientos que peor cumplen con la publicidad activa de la información pública?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la transparencia del Ayuntamiento de Arona?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Arona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la nota de transparencia de los cabildos desde 2018?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2018,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_entidad": "Cabildos"
+  }
+ },
+ {
+  "pregunta": "ranking transparencia ayuntamientos canarias 2024",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos han incumplido y no tienen ni nota de transparencia?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "estado": "incumplidora"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido gobierna los ayuntamientos con mejor puntuación en transparencia?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué nota sacan las universidades canarias en transparencia?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_entidad": "Universidad"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año en que peor nota tuvo el Ayuntamiento de La Laguna en transparencia?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "San Cristóbal de La Laguna"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tal están en transparencia las fundaciones y empresas públicas de los cabildos?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipo_administracion": "Entes dependientes y otros"
+  }
+ },
+ {
+  "pregunta": "Quina nota de transparència té l'Ajuntament d'Arona?",
+  "idioma": "ca",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Arona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o concello máis transparente segundo os organismos de transparencia?",
+  "idioma": "gl",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Canary Islands town hall scores best on public transparency?",
+  "idioma": "en",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué nota de transparencia tuvo Albacete en el índice ICIO?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Albacete"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "indice": "ICIO (MESTA)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos puntos sobre cien sacó Oviedo en transparencia?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "que concello de canarias suspende en transparencia",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cumple el Ayuntamiento de Teguise con la publicación de información a la ciudadanía en 2023?",
+  "idioma": "es",
+  "tabla": "transparencia_publicidad_activa",
+  "medida": "puntuacion",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Teguise"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamientos no han mandado la cuenta general al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "obligacion": "cuenta_general"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos días tarda Cádiz de retraso en rendir cuentas al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "dias_retraso",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de ayuntamientos de La Rioja incumple con el Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "La Rioja"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cumple Logroño con la obligación de enviar los contratos al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Logroño"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "obligacion": "contratos"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento de A Coruña lleva más retraso con el envío de cuentas al órgano fiscalizador?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "dias_retraso",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué partido tiene más alcaldes que no rinden el control interno al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia_en_plazo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "obligacion": "control_interno"
+  }
+ },
+ {
+  "pregunta": "¿Ha mejorado desde 2015 el cumplimiento de los ayuntamientos con el Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos de Cádiz no presentaron la cuenta general en 2022?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "obligacion": "cuenta_general"
+  }
+ },
+ {
+  "pregunta": "tribunal de cuentas ayuntamientos que entregan fuera de plazo",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "estado": "fuera_plazo"
+  }
+ },
+ {
+  "pregunta": "¿Qué obligación con el Tribunal de Cuentas incumplen más los ayuntamientos?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "obligacion",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el incumplimiento de rendir cuentas en los ayuntamientos gaditanos?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año en rendición de cuentas de los ayuntamientos de La Rioja?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "La Rioja"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quins ajuntaments no han lliurat els comptes al Tribunal de Comptes?",
+  "idioma": "ca",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que concellos da Coruña non entregaron as contas ao Tribunal de Contas?",
+  "idioma": "gl",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which town halls haven't submitted their accounts to the Court of Audit on time?",
+  "idioma": "en",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Jerez de la Frontera ha rendido las cuentas al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Jerez de la Frontera"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas viven en municipios que no rinden cuentas al Tribunal de Cuentas?",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "rendicion de cuentas pueblos pequeños riojanos de menos de mil habitantes",
+  "idioma": "es",
+  "tabla": "transparencia_tcu",
+  "medida": "incumple",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "La Rioja"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tramo_poblacion": "<1.000"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos turistas extranjeros visitan España al año?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gastan los guiris en España?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "gasto_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas vinieron a España en 2019?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el número de turistas internacionales desde 2019?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año llegaron más turistas a España?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesa lo que gastan los turistas en el PIB español?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "gasto_pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas noches se quedan de media los turistas que vienen a España?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "duracion_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto medio por persona de los turistas extranjeros?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "gasto_medio_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta al día un turista extranjero en España?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "gasto_medio_diario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ocupación tienen los hoteles españoles al año?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas pernoctaciones hoteleras hubo en 2023?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "pernoct_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cayó el turismo en España en 2020 por la pandemia?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas hay por cada habitante en España?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "turistas_por_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los que duermen en hoteles son extranjeros?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "pct_extranjeros_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants turistes estrangers va rebre Espanya el 2018?",
+  "idioma": "ca",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos turistas internacionais veñen a España cada ano?",
+  "idioma": "gl",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many international tourists visit Spain per year, and how has it changed since 2010?",
+  "idioma": "en",
+  "tabla": "turismo_anual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "turismo españa 2024 gasto total turistas",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "gasto_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas noches en apartamentos turísticos se contabilizaron en 2022?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "pernoct_apart",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los pernoctes en hoteles por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "turismo_anual",
+  "medida": "pernoct_hotel_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más pernoctaciones en hoteles por habitante?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ocupación hotelera tiene Baleares?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas extranjeros recibe Cataluña al año?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "turistas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se gastan más dinero los visitantes de fuera, por cabeza?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "gasto_medio_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene los hoteles más vacíos?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el turismo en Canarias?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la ocupación de los apartamentos turísticos en Andalucía desde 2019?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_apart",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde duermen más extranjeros en hoteles, en qué región?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pct_extranjeros_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "turismo Galicia 2019 pernoctaciones hoteleras",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas por habitante tiene la Comunidad de Madrid?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "turistas_por_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad está más saturada de turistas respecto a sus vecinos?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año para el turismo hotelero de la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta de media cada turista internacional en Baleares?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "gasto_medio_persona_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quina comunitat té més ocupació hotelera?",
+  "idioma": "ca",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é a comunidade onde máis turistas pasan a noite en hoteis?",
+  "idioma": "gl",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which region of Spain has the highest hotel occupancy?",
+  "idioma": "en",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein erkidegotan dago turista gehien biztanleko?",
+  "idioma": "eu",
+  "tabla": "turismo_ccaa",
+  "medida": "turistas_por_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pernoctaciones apartamentos turisticos por comunidad 2024",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "pernoct_apart",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el gasto total de los turistas extranjeros en Canarias en euros de hoy?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "gasto_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo está Asturias de ocupación hotelera comparada con hace diez años?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa",
+  "medida": "ocupacion_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

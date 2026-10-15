@@ -1,0 +1,1273 @@
+[
+ {
+  "pregunta": "¿Cuánto cobra de media un jubilado en España?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_mensual"
+  ],
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuantas pensiones hay en españa ahora mismo",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_mensual"
+  ],
+  "medida": "pensiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto era la pensión media en 2015, ya descontando la inflación?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos trabajadores en activo mantienen a cada pensionista?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_mensual"
+  ],
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado lo que cobran los pensionistas desde 2008 sin contar la subida de precios?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el número de jubilados desde 2010?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pensiones_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de lo que cobraba trabajando se lleva un jubilado?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "tasa_sustitucion_aprox",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta España en pensiones respecto a lo que produce el país?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_gasto_pib"
+  ],
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gastamos más o menos que la media europea en pensiones?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_gasto_pib"
+  ],
+  "medida": "gasto_pensiones_seepros_pib_ue",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo menos cotizantes por cada pensionista?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra un asalariado de media al mes en euros constantes?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "De cada 100 personas mayores de 65, ¿cuántas cobran pensión?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pensiones_por_100_mayores",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensiones por cada mil habitantes en españa",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pensiones_por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la pensión de jubilación media repartida en doce pagas?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pension_jubilacion_prorrateada_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pension media en euros de entonces año 2000 sin ajustar inflacion",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2000
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobraba un jubilado en 2019, en euros corrientes?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte del PIB se va en pensiones de vejez y viudedad?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "gasto_vejez_supervivientes_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos jubilados hay por cada cien mayores de 65 años?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "medida": "jubilaciones_por_100_mayores",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "jubilats pensio mitjana espanya aquest any",
+  "idioma": "ca",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos afiliados hai por cada pensionista en España?",
+  "idioma": "gl",
+  "tabla": "pensiones_anual",
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat pentsio daude Espainian gaur egun?",
+  "idioma": "eu",
+  "tabla": "pensiones_anual",
+  "medida": "pensiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does an average retiree get paid each month in Spain?",
+  "idioma": "en",
+  "tabla": "pensiones_anual",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos afiliados a la Seguridad Social hay en total?",
+  "idioma": "es",
+  "tabla": "pensiones_anual",
+  "tablas_validas": [
+   "pensiones_mensual"
+  ],
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país de Europa gasta más en pensiones en proporción a su economía?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto se gasta Francia en pensiones respecto al PIB?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en pensiones españa porcentaje pib 2010",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el gasto en pensiones de España desde 1990?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1990,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país europeo gasta menos en jubilaciones?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_vejez_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dedica Italia a pagar viudedad y orfandad?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_supervivientes_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gastamos en pensiones más que Alemania?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de la riqueza de España se va en protección social en general?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_proteccion_social_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Ranking de la UE en gasto de protección social sobre el PIB",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_proteccion_social_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año en que España más gastó en pensiones en proporción al PIB?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto jubilaciones portugal pib ultimo año",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_vejez_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto destina Grecia a pensiones comparado con su PIB?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Grecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta de media la Unión Europea en pensiones?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaba España en pensiones de vejez en 2000 frente a 2020?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_vejez_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "despesa en pensions respecte al PIB a Itàlia",
+  "idioma": "ca",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta Suecia en pensións en relación co PIB?",
+  "idioma": "gl",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Suecia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which European country spends the most on pensions as a share of GDP?",
+  "idioma": "en",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Frantziak pentsioetan BPGaren aldean?",
+  "idioma": "eu",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se paga más en pensiones, en España o en Polonia?",
+  "idioma": "es",
+  "tabla": "pensiones_gasto_pib",
+  "medida": "gasto_pensiones_seepros_pib",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Polonia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto es la pensión media este mes?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas pensiones se pagan ahora en España?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "tablas_validas": [
+   "pensiones_anual"
+  ],
+  "medida": "pensiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensión media jubilación marzo 2024",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero se va cada mes en pagar pensiones?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "importe_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido las pensiones de jubilación en el último año, con la inflación descontada?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "interanual_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "subida interanual pension jubilacion en euros corrientes",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "interanual_jubilacion_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado mes a mes los afiliados por pensionista?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra de media una viuda o viudo?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_viudedad_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más jubilados cobrando pensión?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pensiones_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos afiliados había en enero de 2020?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "afiliados",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la pensión media desde enero de 2019?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos jubilados hay ahora?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "tablas_validas": [
+   "pensiones_anual"
+  ],
+  "medida": "pensiones_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobraba un jubilado en diciembre de 2012 en euros de hoy?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2012
+   ],
+   "mes": 12
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución mensual de la paga de los jubilados desde 2008",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cotizantes sostienen cada pensión ahora mismo?",
+  "idioma": "es",
+  "tabla": "pensiones_mensual",
+  "tablas_validas": [
+   "pensiones_anual"
+  ],
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "quant es paga de pensions cada mes a espanya",
+  "idioma": "ca",
+  "tabla": "pensiones_mensual",
+  "medida": "importe_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many pensions are paid in Spain in the latest month?",
+  "idioma": "en",
+  "tabla": "pensiones_mensual",
+  "medida": "pensiones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto cobra de media un xubilado este mes?",
+  "idioma": "gl",
+  "tabla": "pensiones_mensual",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad cobran más de pensión los jubilados?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra de media un pensionista en Extremadura?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensión media provincia de Sevilla",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene las pensiones más bajas?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos jubilados hay en Galicia?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones_jubilacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más pensionistas por cada cien mayores de 65?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones_por_100_mayores",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobraba un jubilado vasco en 2015?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos cotizantes hay por cada pensionista en Andalucía?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "afiliados_por_pension",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene menos afiliados por cada pensión?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "afiliados_por_pension",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las pensiones en Cataluña desde 2010?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensiones por mil habitantes asturias",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones_por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Principado de Asturias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas pensiones hay en la provincia de Barcelona?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido las pensiones en Madrid desde 2019?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "estoy pensando en jubilarme en Murcia, ¿cuánto suele cobrar la gente allí de pensión?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_jubilacion_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Región de Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en cada comunidad según el dato de pensiones?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "tablas_validas": [
+   "poblacion_territorios"
+  ],
+  "medida": "poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos afiliados por cada mil habitantes hay en Canarias?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "afiliados_por_1000_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más jubilados cobrando pensión?",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones_jubilacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensio mitjana per comunitats, quina cobra mes?",
+  "idioma": "ca",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas pensións hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "pensiones_territorio",
+  "medida": "pensiones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat da pentsio-batez bestekoa Nafarroan?",
+  "idioma": "eu",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which region of Spain has the lowest average pension?",
+  "idioma": "en",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "pensión media en Ceuta",
+  "idioma": "es",
+  "tabla": "pensiones_territorio",
+  "medida": "pension_media",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Ceuta"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

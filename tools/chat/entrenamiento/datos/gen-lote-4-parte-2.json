@@ -1,0 +1,1282 @@
+[
+ {
+  "pregunta": "¿Cuánto CO2 echa a la atmósfera el transporte en España?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector contamina más en España?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de la contaminación viene de los coches y camiones?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "emisiones de gases de efecto invernadero de la agricultura y los animales",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Agricultura y Ganadería"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han bajado las emisiones de las centrales eléctricas desde 2005?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2005,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Generación Eléctrica"
+  }
+ },
+ {
+  "pregunta": "cómo han evolucionado las emisiones de la industria en España",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y Procesos"
+  }
+ },
+ {
+  "pregunta": "¿En qué año contaminó más España?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "el peor año de emisiones del transporte",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector ha recortado más sus emisiones desde 1990?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1990,
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "emisiones de las casas y los comercios en 2019",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Residencial y Comercial"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto contaminan los vertederos y la basura?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Residuos"
+  }
+ },
+ {
+  "pregunta": "porcentaje de emisiones que son de la electricidad en 2010",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Generación Eléctrica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de gases de efecto invernadero emitió España en 2023?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "huella de carbono por sectores en España",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant CO2 emet el transport a Espanya?",
+  "idioma": "ca",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Transporte"
+  }
+ },
+ {
+  "pregunta": "Cantas emisións de gases ten a agricultura en España?",
+  "idioma": "gl",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Agricultura y Ganadería"
+  }
+ },
+ {
+  "pregunta": "Which sector emits the most greenhouse gases in Spain?",
+  "idioma": "en",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "emisiones gei 2000 vs 2024 total",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contaminacion de la industria pesada, evolucion 1990-2024",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    1990,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y Procesos"
+  }
+ },
+ {
+  "pregunta": "gases fluorados y otros emisiones",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "millones_toneladas_co2eq",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Gases Fluorados y Otros"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene el sector residencial en las emisiones totales de España?",
+  "idioma": "es",
+  "tabla": "energia_emisiones_gei",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Residencial y Comercial"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad se genera con el viento en España?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "¿De dónde sale la luz que consumimos? ¿Qué tecnología produce más?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de la electricidad que viene de la nuclear",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Nuclear"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta energía se genera con placas solares al año?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "evolución del carbón en la producción de electricidad",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Carbón"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido la solar desde 2015?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la luz es renovable y cuál no?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tipo_fuente",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "producción hidroeléctrica en 2022, año de sequía",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Hidroeléctrica"
+  }
+ },
+ {
+  "pregunta": "¿En qué año generó más electricidad el gas de los ciclos combinados?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Ciclos Combinados (Gas)"
+  }
+ },
+ {
+  "pregunta": "el año con menos viento: eólica récord a la baja",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta electricidad generó el carbón en 2008?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Carbón"
+  }
+ },
+ {
+  "pregunta": "cogeneración generación eléctrica TWh",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Cogeneración y Residuos"
+  }
+ },
+ {
+  "pregunta": "mix eléctrico de España por tecnologías 2019",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se ha reducido el peso de las centrales de gas en la generación desde 2010?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Ciclos Combinados (Gas)"
+  }
+ },
+ {
+  "pregunta": "de las energías limpias, ¿cuál genera más?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_fuente": "Renovable"
+  }
+ },
+ {
+  "pregunta": "Quanta electricitat produeix l'energia eòlica a Espanya?",
+  "idioma": "ca",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "Cal é a tecnoloxía que máis electricidade xera en España?",
+  "idioma": "gl",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of Spanish electricity comes from solar?",
+  "idioma": "en",
+  "tabla": "energia_mix_electrico",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "nuclear generacion 2012 twh",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Nuclear"
+  }
+ },
+ {
+  "pregunta": "Solar térmica, ¿cuánto produce?",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Térmica"
+  }
+ },
+ {
+  "pregunta": "tecnologías no renovables que más producen",
+  "idioma": "es",
+  "tabla": "energia_mix_electrico",
+  "medida": "generacion_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipo_fuente": "No Renovable"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos megavatios de placas solares hay instalados en España?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "capacidad de los parques eólicos del país",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "¿Qué tecnología tiene más potencia instalada?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta potencia nuclear queda en España?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Nuclear"
+  }
+ },
+ {
+  "pregunta": "cuántas centrales de carbón quedan en capacidad MW",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Carbón"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha crecido la capacidad solar desde 2015?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "evolución de la potencia eólica instalada",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "capacidad instalada en gas natural en 2018",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Gas Natural (Ciclos y Cogeneración)"
+  }
+ },
+ {
+  "pregunta": "qué porcentaje del parque de generación es renovable",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tipo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la potencia instalada es hidráulica?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Hidráulica"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se instaló más potencia fotovoltaica de golpe?",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "en qué año había más capacidad de carbón",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Carbón"
+  }
+ },
+ {
+  "pregunta": "MW totales de centrales de España en 2015",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": {
+   "sobre": "tecnologia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso de la solar fotovoltaica en el parque de generación 2024",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "porcentaje_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "capacidad solar termoeléctrica instalada",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Térmica"
+  }
+ },
+ {
+  "pregunta": "Quants megawatts hi ha instal·lats d'energia eòlica?",
+  "idioma": "ca",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Eólica"
+  }
+ },
+ {
+  "pregunta": "Cantos MW de potencia hidráulica hai en España?",
+  "idioma": "gl",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Hidráulica"
+  }
+ },
+ {
+  "pregunta": "How much installed solar capacity does Spain have?",
+  "idioma": "en",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Solar Fotovoltaica"
+  }
+ },
+ {
+  "pregunta": "¿Han cerrado centrales nucleares? potencia desde 2015",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tecnologia": "Nuclear"
+  }
+ },
+ {
+  "pregunta": "potencia renovable frente a no renovable",
+  "idioma": "es",
+  "tabla": "energia_potencia_instalada",
+  "medida": "potencia_mw",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "tipo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la luz es renovable en España?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta electricidad se generó en total el año pasado?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "total_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta electricidad consumimos los españoles?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de las renovables en el sistema eléctrico",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la cuota renovable desde 2010?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué año hubo más energía verde en el mix?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo fue mínima la demanda de electricidad?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "generación renovable en TWh de 2020",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "renovable_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "electricidad producida con fuentes no renovables en 2007",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "no_renovable_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de electricidad está libre de emisiones?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_libre_emisiones_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la demanda de luz desde 2007",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2007,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hemos consumido más o menos electricidad que antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "año récord de producción total de electricidad",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "total_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la demanda eléctrica de 2021?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuota renovable 2015",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la generación no emite CO2?",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_libre_emisiones_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge d'electricitat és renovable a Espanya?",
+  "idioma": "ca",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canta electricidade se xera en España en total?",
+  "idioma": "gl",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "total_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much electricity does Spain use per year?",
+  "idioma": "en",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "demanda_twh",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "en qué año la renovable superó el 50 por ciento",
+  "idioma": "es",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Elektrizitate berriztagarriaren kuota zenbat da Espainian?",
+  "idioma": "eu",
+  "tabla": "energia_resumen_anual_mix",
+  "medida": "cuota_renovable_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

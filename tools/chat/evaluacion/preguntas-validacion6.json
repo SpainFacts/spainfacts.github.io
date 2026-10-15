@@ -1,0 +1,1655 @@
+[
+  {
+    "id": "v6-01",
+    "pregunta": "¿A cuánto está la inflación en España ahora mismo?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.mercado_ipc_mensual"
+    ],
+    "sql_oro": "SELECT mes, var_anual FROM mother.mercado_ipc_mensual ORDER BY mes DESC LIMIT 1",
+    "respuesta": {
+      "valor": 4.3,
+      "unidad": "% interanual (IPC general)",
+      "periodo": "agosto de 2026",
+      "territorio": "España",
+      "detalle": "La subyacente está en el 2,9 %."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "4,3",
+          "4,3 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la tasa anual del IPC general de agosto de 2026 (4,3 %). No vale la subyacente (2,9 %) como respuesta principal ni la de julio (3,6 %)."
+    }
+  },
+  {
+    "id": "v6-02",
+    "pregunta": "¿Cómo de llenos están los embalses en España esta semana?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.embalses_estado_actual"
+    ],
+    "sql_oro": "SELECT fecha, pct_llenado, volumen_hm3, capacidad_hm3 FROM mother.embalses_estado_actual WHERE nivel = 'pais'",
+    "respuesta": {
+      "valor": 59.2,
+      "unidad": "% de la capacidad",
+      "periodo": "semana del 29 de septiembre de 2026",
+      "territorio": "España",
+      "detalle": "33.204 hm³ de 56.043 hm³."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "59,2",
+          "59,2 %",
+          "59 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el porcentaje de llenado (59,2 %). El volumen (33.204 hm³) solo como complemento."
+    }
+  },
+  {
+    "id": "v6-03",
+    "pregunta": "¿Cuánto cobra de media un jubilado en España este mes?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.pensiones_mensual"
+    ],
+    "sql_oro": "SELECT fecha, pension_media_jubilacion FROM mother.pensiones_mensual ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 1576.1,
+      "unidad": "euros al mes (pensión media de jubilación)",
+      "periodo": "septiembre de 2026",
+      "territorio": "España",
+      "detalle": "Pensión contributiva media de jubilación, euros corrientes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "1.576,10",
+          "1.576,1",
+          "1.576",
+          "1576"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la pensión media de jubilación de septiembre de 2026 (1.576,10 €). No vale la pensión media del conjunto del sistema (1.374,57 €), que incluye viudedad, incapacidad, etc."
+    }
+  },
+  {
+    "id": "v6-04",
+    "pregunta": "¿Qué tasa de paro hay ahora en España según la EPA?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.mercado_paro_trimestral"
+    ],
+    "sql_oro": "SELECT periodo, tasa_paro FROM mother.mercado_paro_trimestral ORDER BY trimestre DESC LIMIT 1",
+    "respuesta": {
+      "valor": 9.87,
+      "unidad": "% de la población activa",
+      "periodo": "segundo trimestre de 2026",
+      "territorio": "España"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "9,87",
+          "9,9",
+          "9,87 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la tasa de paro EPA del 2T 2026 (9,87 %). No vale la del 1T 2026 (10,83 %) ni el paro registrado."
+    }
+  },
+  {
+    "id": "v6-05",
+    "pregunta": "¿Cuánto vale el metro cuadrado de una vivienda libre en España según las tasaciones más recientes?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.vivienda_precio_tasado"
+    ],
+    "sql_oro": "SELECT periodo, euros_m2, precio_90m2 FROM mother.vivienda_precio_tasado WHERE nivel = 'pais' ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 2355,
+      "unidad": "€/m²",
+      "periodo": "segundo trimestre de 2026",
+      "territorio": "España",
+      "detalle": "Un piso de 90 m² saldría por unos 211.950 €."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "2.355",
+          "2355",
+          "2.355,0"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el valor tasado medio del 2T 2026 (2.355 €/m²). No vale el del 1T 2026 (2.315,7 €/m²)."
+    }
+  },
+  {
+    "id": "v6-06",
+    "pregunta": "¿A cuánto está el litro de gasolina 95 en España?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.mercado_energia_carburantes"
+    ],
+    "sql_oro": "SELECT fecha, eur_litro FROM mother.mercado_energia_carburantes WHERE cod_pais = 'ES' AND producto = 'Gasolina 95' ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 1.94,
+      "unidad": "€/litro con impuestos",
+      "periodo": "semana del 28 de septiembre de 2026",
+      "territorio": "España"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "1,94",
+          "1,940",
+          "1,9397"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el precio semanal de la gasolina 95 (1,94 €/l). No vale el del gasóleo (1,934 €/l) ni la media UE."
+    }
+  },
+  {
+    "id": "v6-07",
+    "pregunta": "¿Cuántos turistas extranjeros han venido a España en los últimos doce meses?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.turismo_mensual"
+    ],
+    "sql_oro": "SELECT mes, turistas_12m FROM mother.turismo_mensual ORDER BY mes DESC LIMIT 1",
+    "respuesta": {
+      "valor": 100386683,
+      "unidad": "turistas internacionales (suma de 12 meses)",
+      "periodo": "septiembre de 2025 a agosto de 2026",
+      "territorio": "España"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "100.386.683",
+          "100,4 millones",
+          "100,39 millones",
+          "100 millones"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el acumulado de 12 meses hasta agosto de 2026 (unos 100,4 millones). No vale el total del año 2025 (96,8 millones) ni el dato de un solo mes."
+    }
+  },
+  {
+    "id": "v6-08",
+    "pregunta": "¿Cuántos puntos de recarga públicos para coches eléctricos hay en España?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.movilidad_recarga_evolucion"
+    ],
+    "sql_oro": "SELECT fecha, SUM(puntos) AS puntos FROM mother.movilidad_recarga_evolucion WHERE fecha = (SELECT MAX(fecha) FROM mother.movilidad_recarga_evolucion) GROUP BY fecha",
+    "respuesta": {
+      "valor": 35546,
+      "unidad": "puntos de recarga públicos",
+      "periodo": "2 de octubre de 2026",
+      "territorio": "España",
+      "detalle": "Suma de los cuatro tramos de potencia."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "35.546",
+          "35546",
+          "35.500",
+          "35,5 mil"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el total de puntos del último día (35.546); el del 28 de septiembre (35.530) también cae dentro del margen."
+    }
+  },
+  {
+    "id": "v6-09",
+    "pregunta": "¿Qué porcentaje de los turismos que circulan en España son enchufables?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.movilidad_parque_resumen"
+    ],
+    "sql_oro": "SELECT mes, pct_enchufables FROM mother.movilidad_parque_resumen ORDER BY mes DESC LIMIT 1",
+    "respuesta": {
+      "valor": 3.35,
+      "unidad": "% del parque de turismos",
+      "periodo": "septiembre de 2026",
+      "territorio": "España",
+      "detalle": "Eléctricos puros + híbridos enchufables; los eléctricos puros solos son el 1,49 %."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "3,35",
+          "3,4",
+          "3,35 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el % de enchufables del parque de septiembre de 2026 (3,35 %). No vale solo el de eléctricos puros (1,49 %) ni la cuota sobre las ventas."
+    }
+  },
+  {
+    "id": "v6-10",
+    "pregunta": "¿A cuánto se paga el aceite de oliva virgen extra en origen en España?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.primario_aceite_precios"
+    ],
+    "sql_oro": "SELECT mes, eur_kg FROM mother.primario_aceite_precios WHERE geo = 'ES' AND categoria = 'Virgen extra' ORDER BY mes DESC LIMIT 1",
+    "respuesta": {
+      "valor": 3.5,
+      "unidad": "€/kg",
+      "periodo": "septiembre de 2026",
+      "territorio": "España"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "3,50",
+          "3,5",
+          "3,503"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el precio medio de septiembre de 2026 (3,50 €/kg). El de agosto (3,59 €/kg) no entra en el margen."
+    }
+  },
+  {
+    "id": "v6-11",
+    "pregunta": "¿A cuántos ayuntamientos les tiene retenido Hacienda el dinero de la participación en tributos del Estado por no mandar sus cuentas?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.transparencia_pie_mensual"
+    ],
+    "sql_oro": "SELECT fecha, COUNT(DISTINCT cod_mun) AS ayuntamientos, SUM(importe_eur) AS importe FROM mother.transparencia_pie_mensual WHERE fecha = (SELECT MAX(fecha) FROM mother.transparencia_pie_mensual) GROUP BY fecha",
+    "respuesta": {
+      "valor": 285,
+      "unidad": "ayuntamientos",
+      "periodo": "septiembre de 2026",
+      "territorio": "España",
+      "detalle": "Todos por no remitir la liquidación; 8,28 millones de euros retenidos ese mes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "285"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el número de ayuntamientos con retención en septiembre de 2026 (285). No vale el de agosto (324)."
+    }
+  },
+  {
+    "id": "v6-12",
+    "pregunta": "¿Cuántas viviendas turísticas hay en España?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.turismo_viviendas"
+    ],
+    "sql_oro": "SELECT periodo, viviendas, viviendas_1000hab FROM mother.turismo_viviendas WHERE nivel = 'pais' ORDER BY periodo DESC LIMIT 1",
+    "respuesta": {
+      "valor": 341001,
+      "unidad": "viviendas de uso turístico",
+      "periodo": "mayo de 2026",
+      "territorio": "España",
+      "detalle": "6,94 por cada 1.000 habitantes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "341.001",
+          "341.000",
+          "341 mil",
+          "6,94"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el número de viviendas turísticas de mayo de 2026 (341.001) o su tasa (6,94 por 1.000 hab.). No vale el dato de noviembre de 2025 (329.764)."
+    }
+  },
+  {
+    "id": "v6-13",
+    "pregunta": "¿Cuánta deuda pública tiene España en relación con su PIB?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.cuentas_balance_anual"
+    ],
+    "sql_oro": "SELECT anio, deuda_pib, deuda_publica_mrd FROM mother.cuentas_balance_anual ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 100.7,
+      "unidad": "% del PIB",
+      "periodo": "2025",
+      "territorio": "España",
+      "detalle": "1.698.230 millones de euros."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "100,7",
+          "100,7 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la deuda de las AAPP en % del PIB de 2025 (100,7 %). No vale la de 2024 (101,6 %)."
+    }
+  },
+  {
+    "id": "v6-14",
+    "pregunta": "¿Qué parte de la electricidad que se genera en España sale de renovables?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.energia_resumen_anual_mix",
+      "mother.clima_electricidad_anual"
+    ],
+    "sql_oro": "SELECT anio, cuota_renovable_pct FROM mother.energia_resumen_anual_mix ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 55.47,
+      "unidad": "% de la generación",
+      "periodo": "2025 (último año completo)",
+      "territorio": "España",
+      "detalle": "Las dos tablas dan la misma cifra. En 2024 fue el 56,82 %."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "55,47",
+          "55,5",
+          "55,47 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la cuota renovable de 2025 (55,47 %). No vale la de 2024 (56,82 %) ni la cuota libre de emisiones (74,51 %)."
+    }
+  },
+  {
+    "id": "v6-15",
+    "pregunta": "¿Cuánto dinero público por habitante se lleva RTVE?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.medios_tv_espana_anual"
+    ],
+    "sql_oro": "SELECT anio, rtve_eur_hab_real, rtve_meur_nominal FROM mother.medios_tv_espana_anual ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 23.21,
+      "unidad": "€ por habitante (euros de 2025)",
+      "periodo": "2025",
+      "territorio": "España",
+      "detalle": "1.139,95 millones de euros en total."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "23,21",
+          "23,2",
+          "23 €"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la aportación pública a RTVE por habitante en 2025 (23,21 €). No vale la de 2024 (24,97 €)."
+    }
+  },
+  {
+    "id": "v6-16",
+    "pregunta": "¿Cuántos delitos e infracciones penales se llevan registrados en España en lo que va de 2026?",
+    "tipo": "actual",
+    "tablas_oro": [
+      "mother.crimen_ultimo_periodo"
+    ],
+    "sql_oro": "SELECT periodo, infracciones, tasa_1000, variacion_pct FROM mother.crimen_ultimo_periodo WHERE nivel = 'pais' AND categoria = 'Total infracciones penales'",
+    "respuesta": {
+      "valor": 1217476,
+      "unidad": "infracciones penales",
+      "periodo": "enero-junio de 2026",
+      "territorio": "España",
+      "detalle": "24,79 por 1.000 habitantes; +0,53 % frente al primer semestre de 2025."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "1.217.476",
+          "1,22 millones",
+          "1,2 millones",
+          "24,79",
+          "24,8"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el total de enero a junio de 2026 (1.217.476) o la tasa del periodo (24,79 por 1.000 hab.). No vale el total del año 2025 completo."
+    }
+  },
+  {
+    "id": "v6-17",
+    "pregunta": "¿Cuál es la tasa de paro en Andalucía ahora?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.mercado_paro_territorios"
+    ],
+    "sql_oro": "SELECT trimestre, tasa_paro FROM mother.mercado_paro_territorios WHERE nivel = 'ccaa' AND territorio = 'Andalucía' ORDER BY trimestre DESC LIMIT 1",
+    "respuesta": {
+      "valor": 14.56,
+      "unidad": "% de la población activa",
+      "periodo": "segundo trimestre de 2026",
+      "territorio": "Andalucía"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "14,56",
+          "14,6",
+          "14,56 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la tasa de paro EPA de Andalucía del 2T 2026 (14,56 %). No vale la del 1T 2026 (14,66 %)."
+    }
+  },
+  {
+    "id": "v6-18",
+    "pregunta": "¿Cuál es la renta media por persona en Pozuelo de Alarcón?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.renta_municipios"
+    ],
+    "sql_oro": "SELECT anio, renta_persona, renta_hogar, puesto_espana FROM mother.renta_municipios WHERE cod_mun = '28115' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 30524,
+      "unidad": "€ por persona y año (renta neta media)",
+      "periodo": "2023",
+      "territorio": "Pozuelo de Alarcón (Madrid)",
+      "detalle": "Puesto 1 de España; 96.290 € por hogar. En euros de 2025 serían unos 38.660 € si se usara la renta real."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "30.524",
+          "30.500",
+          "30,5 mil"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la renta neta media por persona de 2023 en euros corrientes (30.524 €). No vale la renta por hogar (96.290 €)."
+    }
+  },
+  {
+    "id": "v6-19",
+    "pregunta": "¿Cuántos habitantes tiene la ciudad de Valladolid?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.poblacion_municipios"
+    ],
+    "sql_oro": "SELECT anio, poblacion FROM mother.poblacion_municipios WHERE cod_mun = '47186' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 302614,
+      "unidad": "habitantes",
+      "periodo": "1 de enero de 2025 (padrón)",
+      "territorio": "Valladolid (municipio)"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "302.614",
+          "302.600",
+          "302 mil",
+          "302.000"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la población del municipio de Valladolid en 2025 (302.614). No vale la de la provincia."
+    }
+  },
+  {
+    "id": "v6-20",
+    "pregunta": "¿Cuánto debe la Comunidad Valenciana en porcentaje de su PIB?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.ccaa_deuda"
+    ],
+    "sql_oro": "SELECT fecha, deuda_pct_pib, deuda_eur FROM mother.ccaa_deuda WHERE ccaa = 'Comunidad Valenciana' ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 40,
+      "unidad": "% del PIB regional",
+      "periodo": "30 de junio de 2026",
+      "territorio": "Comunidad Valenciana",
+      "detalle": "64.593 millones de euros."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "40",
+          "40,0",
+          "40 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la deuda PDE en % del PIB al cierre del 2T 2026 (40 %)."
+    }
+  },
+  {
+    "id": "v6-21",
+    "pregunta": "¿Cuánto cuesta alquilar un piso en la provincia de Málaga?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.vivienda_alquiler"
+    ],
+    "sql_oro": "SELECT anio, alquiler_mes_mediana, alquiler_m2_mediana FROM mother.vivienda_alquiler WHERE nivel = 'provincia' AND nombre = 'Málaga' AND tipologia = 'Colectiva' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 676.67,
+      "unidad": "€ al mes (alquiler mediano, vivienda colectiva)",
+      "periodo": "2024",
+      "territorio": "provincia de Málaga",
+      "detalle": "9,04 €/m² al mes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "676,67",
+          "676,7",
+          "677",
+          "9,04",
+          "9,0"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el alquiler mediano de los pisos (vivienda colectiva) en 2024: 676,67 €/mes o 9,04 €/m². No vale el de unifamiliares (696,20 €) salvo que se den ambos."
+    }
+  },
+  {
+    "id": "v6-22",
+    "pregunta": "¿Cuántos años se vive de media en Navarra?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.salud_esperanza_vida"
+    ],
+    "sql_oro": "SELECT anio, anios FROM mother.salud_esperanza_vida WHERE nivel = 'ccaa' AND nombre = 'Comunidad Foral de Navarra' AND sexo = 'Ambos sexos' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 84.66,
+      "unidad": "años de esperanza de vida al nacer",
+      "periodo": "2024",
+      "territorio": "Comunidad Foral de Navarra",
+      "detalle": "Hombres 81,96; mujeres 87,33."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "84,66",
+          "84,7",
+          "84,66 años"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la esperanza de vida al nacer de ambos sexos en 2024 (84,66 años)."
+    }
+  },
+  {
+    "id": "v6-23",
+    "pregunta": "¿Cuántos parados hay apuntados en el paro en la ciudad de Cádiz?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.mercado_paro_municipios"
+    ],
+    "sql_oro": "SELECT mes, paro_registrado, por_100_hab FROM mother.mercado_paro_municipios WHERE municipio = 'Cádiz'",
+    "respuesta": {
+      "valor": 7241,
+      "unidad": "parados registrados",
+      "periodo": "agosto de 2026",
+      "territorio": "Cádiz (municipio)",
+      "detalle": "6,59 por cada 100 habitantes; hace un año eran 8.459."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "7.241",
+          "7241",
+          "6,59",
+          "6,6"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el paro registrado de agosto de 2026 en el municipio (7.241) o su tasa por 100 habitantes (6,59). No vale el de la provincia."
+    }
+  },
+  {
+    "id": "v6-24",
+    "pregunta": "¿Cuántas hectáreas ardieron en la provincia de Ourense en 2025?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.incendios_provincia_anio"
+    ],
+    "sql_oro": "SELECT anio, ha_quemadas, n_incendios FROM mother.incendios_provincia_anio WHERE provincia = 'Ourense' AND anio = 2025",
+    "respuesta": {
+      "valor": 140601,
+      "unidad": "hectáreas",
+      "periodo": "2025",
+      "territorio": "Ourense",
+      "detalle": "82 incendios cartografiados por EFFIS."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "140.601",
+          "140.600",
+          "140.000",
+          "140 mil",
+          "140,6 mil"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la superficie quemada en Ourense en 2025 (unas 140.600 ha)."
+    }
+  },
+  {
+    "id": "v6-25",
+    "pregunta": "¿Cuánto gasta Asturias en sanidad pública por habitante?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.sanidad_gasto_ccaa"
+    ],
+    "sql_oro": "SELECT anio, eur_hab, eur_hab_real, provisional FROM mother.sanidad_gasto_ccaa WHERE nombre = 'Principado de Asturias' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 2384.49,
+      "unidad": "€ por habitante (euros de 2025)",
+      "periodo": "2024 (provisional)",
+      "territorio": "Principado de Asturias",
+      "detalle": "En euros corrientes de 2024: 2.322,40 €."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "2.384,49",
+          "2.384",
+          "2.380",
+          "2.322,40",
+          "2.322",
+          "2.320"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el gasto sanitario público por habitante de 2024, en euros constantes (2.384 €) o corrientes (2.322 €). No vale el de 2023."
+    }
+  },
+  {
+    "id": "v6-26",
+    "pregunta": "¿Cuánta deuda tiene el Ayuntamiento de Zaragoza por cada vecino?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.local_deuda_municipio"
+    ],
+    "sql_oro": "SELECT fecha, deuda_eur_hab, deuda_eur FROM mother.local_deuda_municipio WHERE municipio = 'Zaragoza' ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 724.45,
+      "unidad": "€ por habitante",
+      "periodo": "30 de junio de 2026",
+      "territorio": "Zaragoza (ayuntamiento)",
+      "detalle": "502,11 millones de euros en total."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "724,45",
+          "724,5",
+          "724",
+          "725"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la deuda PDE por habitante del 2T 2026 (724,45 €)."
+    }
+  },
+  {
+    "id": "v6-27",
+    "pregunta": "¿Cuántos delitos por cada mil habitantes hubo en la ciudad de Barcelona en 2025?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.crimen_balance"
+    ],
+    "sql_oro": "SELECT anio, infracciones, tasa_1000 FROM mother.crimen_balance WHERE nivel = 'municipio' AND nombre = 'Barcelona' AND categoria = 'Total infracciones penales' AND anio = 2025",
+    "respuesta": {
+      "valor": 97.99,
+      "unidad": "infracciones penales por 1.000 habitantes",
+      "periodo": "2025",
+      "territorio": "Barcelona (municipio)",
+      "detalle": "169.678 infracciones penales conocidas."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "97,99",
+          "98",
+          "97,98",
+          "98,0"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la tasa del total de infracciones penales del municipio en 2025 (97,99 por 1.000 hab.). No vale la de la provincia ni la de criminalidad convencional (88,05)."
+    }
+  },
+  {
+    "id": "v6-28",
+    "pregunta": "¿Cuánto dinero público recibe por habitante la radio y televisión pública de Cataluña?",
+    "tipo": "territorio",
+    "tablas_oro": [
+      "mother.medios_tv_ccaa_anual"
+    ],
+    "sql_oro": "SELECT anio, ente, eur_hab_real, meur_nominal FROM mother.medios_tv_ccaa_anual WHERE nombre = 'Cataluña' ORDER BY anio DESC LIMIT 1",
+    "respuesta": {
+      "valor": 42.5,
+      "unidad": "€ por habitante",
+      "periodo": "2025",
+      "territorio": "Cataluña (CCMA, 3Cat)",
+      "detalle": "346,2 millones de euros."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "42,5",
+          "42,50",
+          "42 €",
+          "43"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la aportación pública a la CCMA por habitante en 2025 (42,5 €). El total (346,2 millones) solo como complemento."
+    }
+  },
+  {
+    "id": "v6-29",
+    "pregunta": "¿Qué comunidad autónoma tiene la renta por persona más alta?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.renta_territorios",
+      "mother.renta_ecv_ccaa"
+    ],
+    "sql_oro": "SELECT nombre, renta_persona FROM mother.renta_territorios WHERE nivel = 'ccaa' AND anio = (SELECT MAX(anio) FROM mother.renta_territorios) ORDER BY renta_persona DESC LIMIT 3",
+    "respuesta": {
+      "valor": 18885,
+      "unidad": "€ por persona (renta neta media, ADRH)",
+      "periodo": "2023",
+      "territorio": "País Vasco",
+      "detalle": "Le siguen Madrid (18.142 €) y Cataluña. La ECV (encuesta 2025) también da al País Vasco en cabeza (19.923 €)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "País Vasco",
+          "Euskadi",
+          "Euskadi/País Vasco"
+        ]
+      ],
+      "alternativas": "Vale el País Vasco con cualquiera de las dos fuentes de renta (Atlas de distribución de renta o Encuesta de Condiciones de Vida). No se exige cifra."
+    }
+  },
+  {
+    "id": "v6-30",
+    "pregunta": "¿En qué provincia es más barata la vivienda por metro cuadrado?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.vivienda_precio_tasado"
+    ],
+    "sql_oro": "SELECT nombre, euros_m2 FROM mother.vivienda_precio_tasado WHERE nivel = 'provincia' AND fecha = (SELECT MAX(fecha) FROM mother.vivienda_precio_tasado) ORDER BY euros_m2 ASC LIMIT 3",
+    "respuesta": {
+      "valor": 854.2,
+      "unidad": "€/m² (valor tasado)",
+      "periodo": "segundo trimestre de 2026",
+      "territorio": "Ciudad Real",
+      "detalle": "Le siguen Jaén (912,7 €/m²) y Cuenca (950,3 €/m²)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Ciudad Real"
+        ]
+      ],
+      "alternativas": "Vale Ciudad Real. No se exige la cifra (854,2 €/m²)."
+    }
+  },
+  {
+    "id": "v6-31",
+    "pregunta": "¿Qué partido tiene más alcaldes en España y cuántos?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.alcaldes_familias_territorio"
+    ],
+    "sql_oro": "SELECT familia, n, pct_ayuntamientos FROM mother.alcaldes_familias_territorio WHERE nivel = 'pais' ORDER BY n DESC LIMIT 3",
+    "respuesta": {
+      "valor": 3333,
+      "unidad": "alcaldías",
+      "periodo": "mandato 2023-2027 (situación actual)",
+      "territorio": "España",
+      "detalle": "PP con 3.333 (40,99 % de los ayuntamientos); PSOE 2.397."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "3.333",
+          "3333"
+        ]
+      ],
+      "textos": [
+        [
+          "PP",
+          "Partido Popular"
+        ]
+      ],
+      "alternativas": "Hay que decir PP y su número de alcaldías (3.333)."
+    }
+  },
+  {
+    "id": "v6-32",
+    "pregunta": "Entre España, Alemania, Francia, Italia, Portugal, Polonia y Países Bajos, ¿cuál emite más gases de efecto invernadero por habitante?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.clima_emisiones_paises"
+    ],
+    "sql_oro": "SELECT nombre, t_hab FROM mother.clima_emisiones_paises WHERE anio = (SELECT MAX(anio) FROM mother.clima_emisiones_paises) AND geo <> 'EU27_2020' ORDER BY t_hab DESC LIMIT 3",
+    "respuesta": {
+      "valor": 9.33,
+      "unidad": "t CO2eq por habitante (sin LULUCF)",
+      "periodo": "2024",
+      "territorio": "Polonia",
+      "detalle": "Le siguen Países Bajos (7,82) y Alemania (7,78); España 5,48."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Polonia"
+        ]
+      ],
+      "alternativas": "Vale Polonia. No se exige la cifra (9,33 t por habitante)."
+    }
+  },
+  {
+    "id": "v6-33",
+    "pregunta": "¿Qué comunidad tiene el mayor porcentaje de población extranjera?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.inmigracion_poblacion"
+    ],
+    "sql_oro": "SELECT nombre, extranjeros_pct FROM mother.inmigracion_poblacion WHERE nivel = 'ccaa' AND anio = (SELECT MAX(anio) FROM mother.inmigracion_poblacion) ORDER BY extranjeros_pct DESC LIMIT 3",
+    "respuesta": {
+      "valor": 21.67,
+      "unidad": "% de extranjeros sobre la población",
+      "periodo": "1 de enero de 2025",
+      "territorio": "Illes Balears",
+      "detalle": "Le siguen Comunitat Valenciana (19,46 %) y Cataluña (18,74 %)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Baleares",
+          "Balears",
+          "Illes Balears",
+          "Islas Baleares"
+        ]
+      ],
+      "alternativas": "Vale Illes Balears. No se exige la cifra (21,67 %)."
+    }
+  },
+  {
+    "id": "v6-34",
+    "pregunta": "¿Qué grupo de comunicación se llevó más dinero de la publicidad institucional del Gobierno en 2025?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.medios_publicidad_grupos"
+    ],
+    "sql_oro": "SELECT grupo, importe_eur_nominal, pct FROM mother.medios_publicidad_grupos WHERE tipo = 'institucional' AND anio = 2025 ORDER BY importe_eur_nominal DESC LIMIT 3",
+    "respuesta": {
+      "valor": 12178931.33,
+      "unidad": "€",
+      "periodo": "2025",
+      "territorio": "España (Administración General del Estado)",
+      "detalle": "Grupo Prisa, 12,18 millones (16,6 % del total); le siguen Atresmedia-Planeta (8,93 M€) y Mediaset España (5,76 M€)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Prisa",
+          "PRISA"
+        ]
+      ],
+      "alternativas": "Vale el Grupo Prisa. No se exige la cifra (12,18 millones de euros)."
+    }
+  },
+  {
+    "id": "v6-35",
+    "pregunta": "¿Cuál fue la marca de coches más vendida en España en 2025?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.movilidad_marcas_mensual"
+    ],
+    "sql_oro": "SELECT marca, SUM(matriculaciones) AS turismos FROM mother.movilidad_marcas_mensual WHERE grupo = 'turismo' AND anio = 2025 GROUP BY marca ORDER BY turismos DESC LIMIT 3",
+    "respuesta": {
+      "valor": 97781,
+      "unidad": "turismos nuevos matriculados",
+      "periodo": "2025",
+      "territorio": "España",
+      "detalle": "Toyota; le siguen Renault (84.443) y Volkswagen (82.082)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Toyota",
+          "TOYOTA"
+        ]
+      ],
+      "alternativas": "Vale Toyota. No se exige la cifra (97.781 turismos)."
+    }
+  },
+  {
+    "id": "v6-36",
+    "pregunta": "¿De qué país eran la mayoría de los que pidieron asilo en España en 2025?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.inmigracion_asilo_nacionalidad"
+    ],
+    "sql_oro": "SELECT nacionalidad, solicitudes FROM mother.inmigracion_asilo_nacionalidad WHERE anio = 2025 ORDER BY solicitudes DESC LIMIT 3",
+    "respuesta": {
+      "valor": 84235,
+      "unidad": "primeras solicitudes de asilo",
+      "periodo": "2025",
+      "territorio": "España",
+      "detalle": "Venezuela; le siguen Mali (15.460) y Colombia (14.310)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Venezuela",
+          "venezolan"
+        ]
+      ],
+      "alternativas": "Vale Venezuela (o «venezolanos»). No se exige la cifra (84.235)."
+    }
+  },
+  {
+    "id": "v6-37",
+    "pregunta": "¿Cuál es la comunidad más industrial de España, la que tiene más peso de la industria en su economía?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.industria_ccaa"
+    ],
+    "sql_oro": "SELECT ccaa, pct_vab_industria FROM mother.industria_ccaa WHERE anio = (SELECT MAX(anio) FROM mother.industria_ccaa) AND cod_ccaa <> '00' ORDER BY pct_vab_industria DESC LIMIT 3",
+    "respuesta": {
+      "valor": 29.33,
+      "unidad": "% del VAB",
+      "periodo": "2024",
+      "territorio": "Comunidad Foral de Navarra",
+      "detalle": "Le siguen La Rioja (25,64 %) y País Vasco (23,49 %)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Navarra"
+        ]
+      ],
+      "alternativas": "Vale Navarra. No se exige la cifra (29,33 % del VAB)."
+    }
+  },
+  {
+    "id": "v6-38",
+    "pregunta": "¿Qué país europeo fabrica más vehículos?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.industria_vehiculos"
+    ],
+    "sql_oro": "SELECT pais, vehiculos, puesto_europa FROM mother.industria_vehiculos WHERE anio = 2024 AND region = 'Europa' ORDER BY vehiculos DESC LIMIT 3",
+    "respuesta": {
+      "valor": 4069222,
+      "unidad": "vehículos producidos",
+      "periodo": "2024 (último año con todos los países)",
+      "territorio": "Alemania",
+      "detalle": "España es segunda con 2.376.504."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Alemania"
+        ]
+      ],
+      "alternativas": "Vale Alemania. No se exige la cifra."
+    }
+  },
+  {
+    "id": "v6-39",
+    "pregunta": "¿Qué gran sector de la economía española da trabajo a más gente?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.economia_sectores"
+    ],
+    "sql_oro": "SELECT sector, ocupados_miles, peso_empleo FROM mother.economia_sectores WHERE anio = (SELECT MAX(anio) FROM mother.economia_sectores) AND rama <> 'TOTAL' ORDER BY ocupados_miles DESC LIMIT 3",
+    "respuesta": {
+      "valor": 6600.6,
+      "unidad": "miles de ocupados",
+      "periodo": "2025",
+      "territorio": "España",
+      "detalle": "Comercio, transporte y hostelería, 29,1 % del empleo; le sigue Administración, educación y sanidad (4.988.600)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Comercio, transporte y hostelería",
+          "comercio, transporte",
+          "comercio y hostelería",
+          "Comercio"
+        ]
+      ],
+      "alternativas": "Vale la rama «Comercio, transporte y hostelería» (G-I). No vale decir solo «servicios» ni «Administración, educación y sanidad»."
+    }
+  },
+  {
+    "id": "v6-40",
+    "pregunta": "¿Qué país de la Unión Europea produce más tomates?",
+    "tipo": "ranking",
+    "tablas_oro": [
+      "mother.primario_ranking_ue"
+    ],
+    "sql_oro": "SELECT producto, anio, pais_primero, valor_primero, puesto, valor_espana, cuota_pct FROM mother.primario_ranking_ue WHERE producto = 'Tomate'",
+    "respuesta": {
+      "valor": 6625.6,
+      "unidad": "miles de toneladas",
+      "periodo": "2025",
+      "territorio": "Italia",
+      "detalle": "Italia es primera con 6.625,6 miles de t; España es segunda con 3.988,75 miles de t (23,89 % de la UE)."
+    },
+    "acepta": {
+      "cifras": [],
+      "textos": [
+        [
+          "Italia"
+        ]
+      ],
+      "alternativas": "Vale Italia. Decir España es incorrecto (es la segunda)."
+    }
+  },
+  {
+    "id": "v6-41",
+    "pregunta": "¿Cuánto ha crecido la población de España en los últimos diez años, de 2015 a 2025?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.poblacion_territorios"
+    ],
+    "sql_oro": "SELECT anio, poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' AND anio IN (2015, 2025) ORDER BY anio",
+    "respuesta": {
+      "valor": 2490112,
+      "unidad": "habitantes más",
+      "periodo": "1 de enero de 2015 a 1 de enero de 2025",
+      "territorio": "España",
+      "detalle": "De 46.624.382 a 49.114.494 (+5,34 %)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "2.490.112",
+          "2,49 millones",
+          "2,5 millones",
+          "5,34",
+          "5,3 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el aumento absoluto (unos 2,49 millones) o en porcentaje (+5,34 %)."
+    }
+  },
+  {
+    "id": "v6-42",
+    "pregunta": "¿Cuánto han bajado las emisiones de gases de efecto invernadero de España desde 2005?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.clima_emisiones_anual"
+    ],
+    "sql_oro": "SELECT anio, total_mt, var_2005_pct, provisional FROM mother.clima_emisiones_anual WHERE anio IN (2005, (SELECT MAX(anio) FROM mother.clima_emisiones_anual)) ORDER BY anio",
+    "respuesta": {
+      "valor": -38.45,
+      "unidad": "% frente a 2005",
+      "periodo": "2005 a 2025 (2025 provisional)",
+      "territorio": "España",
+      "detalle": "De 439,88 a 270,74 Mt CO2eq: −169,1 Mt."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "38,45",
+          "38,5",
+          "38 %",
+          "169,1",
+          "169"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la caída en porcentaje (−38,45 %) o en millones de toneladas (−169,1 Mt) hasta 2025. Si usa 2024 como último año, no vale."
+    }
+  },
+  {
+    "id": "v6-43",
+    "pregunta": "¿Cuánto ha aumentado la compraventa de viviendas en España desde 2019 hasta 2025?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.vivienda_mercado_anual"
+    ],
+    "sql_oro": "SELECT anio, compraventas, compraventas_1000 FROM mother.vivienda_mercado_anual WHERE nivel = 'pais' AND anio IN (2019, 2025) ORDER BY anio",
+    "respuesta": {
+      "valor": 206076,
+      "unidad": "compraventas más al año",
+      "periodo": "2019 a 2025",
+      "territorio": "España",
+      "detalle": "De 505.467 a 711.543 (+40,8 %); por 1.000 habitantes, de 10,75 a 14,49."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "206.076",
+          "206.000",
+          "40,8",
+          "40,77",
+          "41 %",
+          "3,74",
+          "3,7"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la subida absoluta (206.076), en porcentaje (+40,8 %) o por 1.000 habitantes (+3,74)."
+    }
+  },
+  {
+    "id": "v6-44",
+    "pregunta": "¿Hay más o menos empresas activas en España que en 2020? ¿Cuánto ha cambiado?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.empresas_dirce_territorio"
+    ],
+    "sql_oro": "SELECT anio, empresas, empresas_1000hab FROM mother.empresas_dirce_territorio WHERE nivel = 'pais' AND anio IN (2020, (SELECT MAX(anio) FROM mother.empresas_dirce_territorio)) ORDER BY anio",
+    "respuesta": {
+      "valor": -93604,
+      "unidad": "empresas activas",
+      "periodo": "1 de enero de 2020 a 1 de enero de 2025",
+      "territorio": "España",
+      "detalle": "De 3.404.428 a 3.310.824 (−2,75 %); por 1.000 habitantes, de 71,75 a 67,41."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "93.604",
+          "93.600",
+          "94.000",
+          "2,75",
+          "2,7 %",
+          "2,8 %",
+          "4,34",
+          "4,3"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la caída absoluta (−93.604), en porcentaje (−2,75 %) o por 1.000 habitantes (−4,34). Debe quedar claro que hay menos."
+    }
+  },
+  {
+    "id": "v6-45",
+    "pregunta": "¿Cuánto ha aumentado el número de médicos por cada mil habitantes en España entre 2013 y 2024?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.sanidad_recursos"
+    ],
+    "sql_oro": "SELECT anio, por_1000, numero FROM mother.sanidad_recursos WHERE cod_pais = 'ES' AND recurso = 'medicos' AND anio IN (2013, 2024) ORDER BY anio",
+    "respuesta": {
+      "valor": 0.83,
+      "unidad": "médicos más por 1.000 habitantes",
+      "periodo": "2013 a 2024",
+      "territorio": "España",
+      "detalle": "De 3,81 a 4,64 por 1.000 hab. (+21,7 %); de 177.665 a 226.667 médicos ejerciendo."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "0,83",
+          "0,8",
+          "0,826",
+          "21,7",
+          "21,66"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la diferencia en la tasa (+0,83 por 1.000 hab.) o la variación porcentual de la tasa (+21,7 %)."
+    }
+  },
+  {
+    "id": "v6-46",
+    "pregunta": "¿Cuántos empleados públicos más hay ahora que en julio de 2019?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.empleo_territorio"
+    ],
+    "sql_oro": "SELECT fecha, efectivos, por_1000_hab FROM mother.empleo_territorio WHERE nivel = 'pais' AND administracion = 'Total' AND fecha IN ('2019-07-01', (SELECT MAX(fecha) FROM mother.empleo_territorio)) ORDER BY fecha",
+    "respuesta": {
+      "valor": 476111,
+      "unidad": "empleados públicos más",
+      "periodo": "julio de 2019 a enero de 2026",
+      "territorio": "España",
+      "detalle": "De 2.595.614 a 3.071.725 (+18,3 %); por 1.000 habitantes, de 55,2 a 62,5."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "476.111",
+          "476.000",
+          "18,3",
+          "18,34",
+          "7,35",
+          "7,3"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el aumento absoluto (476.111), en porcentaje (+18,3 %) o por 1.000 habitantes (+7,35), según el Registro Central de Personal."
+    }
+  },
+  {
+    "id": "v6-47",
+    "pregunta": "¿Cuántos turistas extranjeros más llegaron en 2025 que en 2019, antes de la pandemia?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.turismo_anual"
+    ],
+    "sql_oro": "SELECT anio, turistas, turistas_por_hab FROM mother.turismo_anual WHERE anio IN (2019, 2025) ORDER BY anio",
+    "respuesta": {
+      "valor": 13294742,
+      "unidad": "turistas internacionales más",
+      "periodo": "2019 a 2025",
+      "territorio": "España",
+      "detalle": "De 83.509.151 a 96.803.893 (+15,9 %)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "13.294.742",
+          "13,3 millones",
+          "13,29 millones",
+          "15,9",
+          "15,92"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el aumento absoluto (unos 13,3 millones) o el porcentaje (+15,9 %)."
+    }
+  },
+  {
+    "id": "v6-48",
+    "pregunta": "Según el índice de precios de vivienda del INE, ¿cuánto se ha encarecido la vivienda desde 2015?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.vivienda_ipv"
+    ],
+    "sql_oro": "SELECT periodo, indice, indice_real FROM mother.vivienda_ipv WHERE nivel = 'pais' AND tipo = 'General' ORDER BY fecha DESC LIMIT 1",
+    "respuesta": {
+      "valor": 86.75,
+      "unidad": "% de subida nominal (índice 2015 = 100)",
+      "periodo": "2015 al cuarto trimestre de 2025",
+      "territorio": "España",
+      "detalle": "Índice 186,75. Descontando la inflación, la subida real es del 45,9 % (índice real 145,88)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "86,75",
+          "86,8",
+          "87 %",
+          "186,75",
+          "45,9",
+          "45,88",
+          "46 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la subida nominal (+86,75 %, índice 186,75) o la real (+45,9 %) hasta el 4T 2025."
+    }
+  },
+  {
+    "id": "v6-49",
+    "pregunta": "¿Cuánto ha bajado el paro registrado en España en el último año?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.mercado_paro_registrado"
+    ],
+    "sql_oro": "SELECT mes, paro_registrado, variacion_anual, variacion_anual_pct FROM mother.mercado_paro_registrado WHERE nivel = 'pais' ORDER BY mes DESC LIMIT 1",
+    "respuesta": {
+      "valor": -70512,
+      "unidad": "parados registrados",
+      "periodo": "agosto de 2025 a agosto de 2026",
+      "territorio": "España",
+      "detalle": "Queda en 2.355.531 parados (−2,91 % interanual)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "70.512",
+          "70.500",
+          "2,91",
+          "2,9 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la variación interanual de agosto de 2026 (−70.512 parados, −2,91 %). No vale la de julio (−93.043)."
+    }
+  },
+  {
+    "id": "v6-50",
+    "pregunta": "¿Cuánto cayeron las llegadas irregulares de inmigrantes en 2025 respecto a 2024?",
+    "tipo": "cambio",
+    "tablas_oro": [
+      "mother.inmigracion_llegadas"
+    ],
+    "sql_oro": "SELECT YEAR(mes) AS anio, SUM(personas) AS llegadas FROM mother.inmigracion_llegadas WHERE YEAR(mes) IN (2024, 2025) GROUP BY 1 ORDER BY 1",
+    "respuesta": {
+      "valor": -27543,
+      "unidad": "personas",
+      "periodo": "2024 a 2025",
+      "territorio": "España (todas las vías)",
+      "detalle": "De 64.318 a 36.775 (−42,8 %)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "27.543",
+          "27.500",
+          "42,8",
+          "42,82",
+          "43 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la caída absoluta (−27.543 personas) o en porcentaje (−42,8 %), sumando mar y tierra."
+    }
+  },
+  {
+    "id": "v6-51",
+    "pregunta": "¿A cuánto llegó la inflación en julio de 2022?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.mercado_ipc_mensual"
+    ],
+    "sql_oro": "SELECT mes, var_anual FROM mother.mercado_ipc_mensual WHERE mes = '2022-07-01'",
+    "respuesta": {
+      "valor": 10.8,
+      "unidad": "% interanual (IPC general)",
+      "periodo": "julio de 2022",
+      "territorio": "España"
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "10,8",
+          "10,8 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la tasa anual del IPC de julio de 2022 (10,8 %). No vale el IPCA."
+    }
+  },
+  {
+    "id": "v6-52",
+    "pregunta": "¿Cuántas hectáreas se quemaron en España en 2022?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.incendios_anual"
+    ],
+    "sql_oro": "SELECT anio, ha_quemadas, n_incendios FROM mother.incendios_anual WHERE anio = 2022",
+    "respuesta": {
+      "valor": 315705,
+      "unidad": "hectáreas",
+      "periodo": "2022",
+      "territorio": "España",
+      "detalle": "1.482 incendios cartografiados por EFFIS."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "315.705",
+          "315.700",
+          "315.000",
+          "316.000",
+          "315,7 mil"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la superficie quemada en 2022 según EFFIS (unas 315.700 ha)."
+    }
+  },
+  {
+    "id": "v6-53",
+    "pregunta": "¿Qué participación hubo en las elecciones generales de julio de 2023?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.elecciones_participacion"
+    ],
+    "sql_oro": "SELECT eleccion, participacion, votantes FROM mother.elecciones_participacion WHERE nivel = 'pais' AND tipo = '02' AND anio = 2023",
+    "respuesta": {
+      "valor": 66.59,
+      "unidad": "% del censo (con residentes en el extranjero)",
+      "periodo": "23 de julio de 2023",
+      "territorio": "España",
+      "detalle": "24.952.447 votantes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "66,59",
+          "66,6",
+          "66,59 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la participación sobre el censo de escrutinio con CERA (66,59 %). La participación sin CERA (en torno al 70 %) no vale."
+    }
+  },
+  {
+    "id": "v6-54",
+    "pregunta": "¿Cuántos reales decretos-ley aprobó el Gobierno en 2020?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.gobierno_actos_anual",
+      "mother.gobierno_decretos_ley"
+    ],
+    "sql_oro": "SELECT anio, rdl, leyes FROM mother.gobierno_actos_anual WHERE anio = 2020",
+    "respuesta": {
+      "valor": 39,
+      "unidad": "reales decretos-ley",
+      "periodo": "2020",
+      "territorio": "España",
+      "detalle": "Contando por fecha de la disposición; ambas tablas coinciden. Ese año se aprobaron 14 leyes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "39"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale 39 decretos-ley."
+    }
+  },
+  {
+    "id": "v6-55",
+    "pregunta": "¿Qué porcentaje de votos sacó el PSOE en las generales de 2008?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.elecciones_partidos"
+    ],
+    "sql_oro": "SELECT fecha, siglas, pct, escanos FROM mother.elecciones_partidos WHERE anio = 2008 AND tipo = '02' AND siglas = 'PSOE'",
+    "respuesta": {
+      "valor": 43.87,
+      "unidad": "% de los votos válidos",
+      "periodo": "9 de marzo de 2008",
+      "territorio": "España",
+      "detalle": "169 escaños."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "43,87",
+          "43,9",
+          "43,87 %"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el % sobre votos válidos (43,87 %). Los 169 escaños solo como complemento."
+    }
+  },
+  {
+    "id": "v6-56",
+    "pregunta": "¿Cuántos parados registrados había en España en abril de 2020, en pleno confinamiento?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.mercado_paro_registrado"
+    ],
+    "sql_oro": "SELECT mes, paro_registrado, variacion_anual FROM mother.mercado_paro_registrado WHERE nivel = 'pais' AND mes = '2020-04-01'",
+    "respuesta": {
+      "valor": 3831203,
+      "unidad": "parados registrados",
+      "periodo": "abril de 2020",
+      "territorio": "España",
+      "detalle": "667.637 más que un año antes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "3.831.203",
+          "3,83 millones",
+          "3,8 millones"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el paro registrado (SEPE) de abril de 2020 (3.831.203). No vale el paro EPA."
+    }
+  },
+  {
+    "id": "v6-57",
+    "pregunta": "¿Cuántos niños nacieron en España en 2008?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.demografia_anual"
+    ],
+    "sql_oro": "SELECT anio, nacimientos, tasa_natalidad FROM mother.demografia_anual WHERE nivel = 'pais' AND anio = 2008",
+    "respuesta": {
+      "valor": 519779,
+      "unidad": "nacimientos",
+      "periodo": "2008",
+      "territorio": "España",
+      "detalle": "11,28 por 1.000 habitantes."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "519.779",
+          "519.800",
+          "520.000",
+          "11,28",
+          "11,3"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el número de nacimientos (519.779) o la tasa bruta de natalidad (11,28 por 1.000)."
+    }
+  },
+  {
+    "id": "v6-58",
+    "pregunta": "¿Cuánto cemento se consumía por habitante en España en 2007, en plena burbuja?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.construccion_cemento"
+    ],
+    "sql_oro": "SELECT anio, consumo_kg_hab, consumo_aparente_kt FROM mother.construccion_cemento WHERE anio = 2007",
+    "respuesta": {
+      "valor": 1237.89,
+      "unidad": "kg por habitante (consumo aparente)",
+      "periodo": "2007",
+      "territorio": "España",
+      "detalle": "55.997 miles de toneladas en total."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "1.237,89",
+          "1.237,9",
+          "1.238",
+          "1.240"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el consumo aparente por habitante de 2007 (unos 1.238 kg)."
+    }
+  },
+  {
+    "id": "v6-59",
+    "pregunta": "¿Cuál era la esperanza de vida en España en 2020, el año del covid?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.salud_esperanza_vida"
+    ],
+    "sql_oro": "SELECT anio, anios, fuente FROM mother.salud_esperanza_vida WHERE nivel = 'pais' AND sexo = 'Ambos sexos' AND anio = 2020",
+    "respuesta": {
+      "valor": 82.3,
+      "unidad": "años de esperanza de vida al nacer",
+      "periodo": "2020",
+      "territorio": "España",
+      "detalle": "En 2019 era de 83,5 años (Eurostat)."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "82,3",
+          "82,3 años",
+          "82,4"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale la esperanza de vida de ambos sexos en 2020 (82,3 años; 82,4 por redondeo de otra fuente también entra)."
+    }
+  },
+  {
+    "id": "v6-60",
+    "pregunta": "¿Cuántos coches nuevos se matricularon en España en 2020?",
+    "tipo": "anio",
+    "tablas_oro": [
+      "mother.movilidad_matriculaciones_mensual"
+    ],
+    "sql_oro": "SELECT YEAR(mes) AS anio, SUM(matriculaciones) AS turismos FROM mother.movilidad_matriculaciones_mensual WHERE grupo = 'turismo' AND nuevo_usado = 'N' AND YEAR(mes) = 2020 GROUP BY 1",
+    "respuesta": {
+      "valor": 895001,
+      "unidad": "turismos nuevos",
+      "periodo": "2020",
+      "territorio": "España",
+      "detalle": "En 2019 fueron 1.322.591. La suma por marcas (movilidad_marcas_mensual) da la misma cifra."
+    },
+    "acepta": {
+      "cifras": [
+        [
+          "895.001",
+          "895.000",
+          "895 mil",
+          "0,9 millones"
+        ]
+      ],
+      "textos": [],
+      "alternativas": "Vale el total de turismos nuevos matriculados en 2020 (895.001). No vale si incluye usados o todos los tipos de vehículo."
+    }
+  }
+]

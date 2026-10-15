@@ -1,0 +1,1987 @@
+[
+ {
+  "pregunta": "¿Cuántas constructoras hay por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país europeo tiene más empresas de obras por habitante?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántas empresas de construcción hay en Portugal",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja de media en cada empresa constructora española?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "ocupados_por_empresa",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "facturación por habitante de las empresas de obra pública en Francia",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "cifra_negocios_hab_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Ingeniería civil (obra pública)"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de la UE factura más en construcción por persona?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "cifra_negocios_hab_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las constructoras de toda la UE están en España?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "cuota_empresas_ue_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "empresas de edificación en Italia 2022",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Edificación"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el número de constructoras en España desde 2021?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la productividad de cada obrero en las constructoras alemanas",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "productividad_miles_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué puesto está España en empresas de construcción por habitante dentro de Europa?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "puesto_empresas_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos empleos genera la construcción especializada (fontaneros, electricistas, etc.) en España?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Construcción especializada"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto valor añade el sector de la construcción español, en millones?",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "valor_anadido_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Qué país tiene las constructoras más grandes por número de empleados",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "ocupados_por_empresa",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "en que pais de europa hay menos empresas constructoras por cada 1000 personas",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuota de facturación de la construcción española sobre el total europeo",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "medida": "cuota_cifra_negocios_ue_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants constructors hi ha a Espanya per cada mil habitants?",
+  "idioma": "ca",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas empresas de obra civil hai en España?",
+  "idioma": "gl",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Ingeniería civil (obra pública)"
+  }
+ },
+ {
+  "pregunta": "How many construction firms are there in Spain compared with the EU?",
+  "idioma": "en",
+  "tabla": "construccion_empresas_ue",
+  "medida": "empresas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which EU country has the biggest construction turnover per inhabitant?",
+  "idioma": "en",
+  "tabla": "construccion_empresas_ue",
+  "medida": "cifra_negocios_hab_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro y curro en la obra: cuanta gente curra en el ladrillo en España",
+  "idioma": "es",
+  "tabla": "construccion_empresas_ue",
+  "tablas_validas": [
+   "construccion_peso_ue"
+  ],
+  "medida": "ocupados",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la mayor constructora de España según el ranking mundial?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué puesto mundial está ACS entre las constructoras?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "ACS"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ingresa Acciona al año en dólares?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ingresos_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "Acciona"
+  }
+ },
+ {
+  "pregunta": "¿Qué constructora española factura más?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ingresos_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de ventas en el extranjero de Ferrovial",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "pct_ventas_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "Ferrovial"
+  }
+ },
+ {
+  "pregunta": "¿Qué empresa de obras española vende más fuera de España?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "pct_ventas_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ventas internacionales de Sacyr",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ventas_internacionales_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "Sacyr"
+  }
+ },
+ {
+  "pregunta": "¿Cuál de las grandes constructoras españolas depende menos del mercado exterior?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "pct_ventas_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ranking Deloitte constructoras mundiales españolas",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde queda FCC en la lista de constructoras globales?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "FCC"
+  }
+ },
+ {
+  "pregunta": "puesto de OHLA en el top mundial de la construcción",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "OHLA"
+  }
+ },
+ {
+  "pregunta": "¿Y el Grupo San José, qué posición tiene?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "Grupo San José"
+  }
+ },
+ {
+  "pregunta": "cuánto de lo que gana ACS viene de fuera de España",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "pct_ventas_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "ACS"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos millones de dólares vende Acciona fuera?",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ventas_internacionales_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "empresa": "Acciona"
+  }
+ },
+ {
+  "pregunta": "Quina és la constructora espanyola més gran del món?",
+  "idioma": "ca",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the biggest Spanish construction company by revenue?",
+  "idioma": "en",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ingresos_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é a constructora española con máis vendas no estranxeiro?",
+  "idioma": "gl",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "pct_ventas_exterior",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "las grandes del ladrillo y las autopistas: quién manda en facturación",
+  "idioma": "es",
+  "tabla": "construccion_grandes_constructoras",
+  "medida": "ingresos_mill_usd",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "empresa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero público se licita en obras por habitante en Andalucía?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad recibe más licitación de obra pública por habitante?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuánto se licitó en obra pública en España en 2019",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta obra civil se ha licitado en Galicia por persona?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "obra_civil_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "licitación edificios públicos Madrid por habitante",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "edificacion_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de la obra pública la licita el Estado y cuál las comunidades y ayuntamientos?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "pct_estado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la obra pública licitada en Cataluña desde 2015?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la licitación de obras en Canarias?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se licitó más obra pública en España?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_real_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo fue el peor año de licitación en obra pública?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_real_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad recibe menos inversión del Estado en obras por habitante?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "estado_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "inversión de la Administración General del Estado en obra por habitante en Aragón",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "age_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Aragón"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "licitación de ayuntamientos y comunidades por habitante en el País Vasco",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "entes_territoriales_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la licitación es obra civil (carreteras, trenes) en Extremadura?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "pct_obra_civil",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "obras públicas en Navarra 2023, en millones",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Licitan más las comunidades gobernadas por el PP o por el PSOE?",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "familia_autonomica",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "licitacion de empresas publicas estatales en Valencia",
+  "idioma": "es",
+  "tabla": "construccion_licitacion",
+  "medida": "epe_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant es licita en obra pública per habitant a Catalunya?",
+  "idioma": "ca",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto se licita en obra pública en Galicia por habitante?",
+  "idioma": "gl",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much public works spending is tendered per person in Spain?",
+  "idioma": "en",
+  "tabla": "construccion_licitacion",
+  "medida": "total_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas nuevas se aprueban por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad se construyen más pisos nuevos por habitante?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "cuántos pisos se visaron para reformar en Madrid",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_reforma",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas nuevas se visaron en España en 2007, en pleno boom?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "ES_LARGA"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más viviendas autorizadas en España desde 1992?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "ES_LARGA"
+  }
+ },
+ {
+  "pregunta": "¿Y el año con menos obra nueva residencial tras la crisis?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "ES_LARGA"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la construcción de viviendas nuevas en Andalucía?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "¿Qué país de la UE concede más permisos de vivienda por habitante?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "ambito": "UE"
+  }
+ },
+ {
+  "pregunta": "metros cuadrados de obra nueva por habitante en Cataluña",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "m2_obra_nueva_hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas se han ampliado en Galicia?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_ampliacion",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "reformas de viviendas por cada mil habitantes en Castilla y León",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_reforma_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla y León"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha caído la construcción de vivienda nueva desde 2019?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "ES_LARGA"
+  }
+ },
+ {
+  "pregunta": "m2 de edificios no residenciales (oficinas, naves) por habitante en España",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "m2_no_residencial_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "UE"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas casas nuevas se levantan en Canarias?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas viviendas nuevas se construyen en Francia en comparación con España?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "UE"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad construye menos viviendas nuevas?",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "obra nueva vivienda Comunitat Valenciana 2022",
+  "idioma": "es",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "Quants habitatges nous es construeixen a Espanya?",
+  "idioma": "ca",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas novas se constrúen en Galicia?",
+  "idioma": "gl",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "CCAA"
+  }
+ },
+ {
+  "pregunta": "Are more new homes being built per capita in Spain than in the EU average?",
+  "idioma": "en",
+  "tabla": "construccion_permisos",
+  "medida": "viviendas_nueva_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "ambito": "UE"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene la construcción en la economía española?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los trabajadores españoles curra en la construcción?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_empleo_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué país europeo pesa más el ladrillo en la economía?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos ocupados en construcción por cada mil habitantes en Alemania",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "ocupados_constr_1000hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesaba la construcción en España en 2007 respecto al PIB?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2007
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el peso de la construcción desde el boom inmobiliario?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2007,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del empleo en el sector de la construcción en España desde 1995",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_empleo_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo la construcción su máximo peso en la economía española?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "valor añadido de la construcción por habitante en euros reales",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "vab_constr_hab_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tamaño tiene la construcción española frente al resto de la UE?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "cuota_vab_constr_ue_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué puesto de la UE está España en peso de la construcción?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "puesto_vab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué puesto está España en empleo de la construcción?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "puesto_empleo",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "índice de actividad de la construcción respecto a 2007 en España",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "vab_constr_real_indice_2007",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "miles de personas ocupadas en construcción en Italia",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "ocupados_constr_miles",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "país europeo con menos peso de la construcción",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais_nombre",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos millones de euros aporta la construcción al valor añadido en Portugal?",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "vab_constr_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso del sector de la obra en Irlanda 2008",
+  "idioma": "es",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Irlanda"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin pes té la construcció a l'economia espanyola?",
+  "idioma": "ca",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto pesa a construción na economía de España?",
+  "idioma": "gl",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_vab_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of Spanish jobs is in construction?",
+  "idioma": "en",
+  "tabla": "construccion_peso_ue",
+  "medida": "pct_empleo_construccion",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo va la producción de la construcción en España?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha crecido la obra en España el último año?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cayó la actividad de la construcción durante la crisis, respecto a 2007?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2007",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país europeo ha crecido más en construcción este año?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la producción en ingeniería civil en España",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Ingeniería civil (obra pública)"
+  }
+ },
+ {
+  "pregunta": "producción de edificación en Alemania 2023",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Edificación"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de la construcción española?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2007",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "actividad de la construcción especializada en España",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Construcción especializada"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la producción de obra en Portugal desde 2019?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "variación de la actividad constructora en Francia frente al año anterior",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se ha hundido más la construcción en la UE?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "índice de producción construcción Unión Europea",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Unión Europea (27)"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Se ha recuperado ya la construcción española del nivel de 2007?",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2007",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "crecimiento anual de la obra civil en Italia",
+  "idioma": "es",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "rama_nombre": "Ingeniería civil (obra pública)"
+  }
+ },
+ {
+  "pregunta": "¿Com ha evolucionat la producció de la construcció a Espanya?",
+  "idioma": "ca",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Como vai a actividade da construción en España comparada con Alemaña?",
+  "idioma": "gl",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Has construction output in Spain grown since 2021?",
+  "idioma": "en",
+  "tabla": "construccion_produccion",
+  "medida": "indice_2021",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Eraikuntzaren jarduera hazi al da Espainian?",
+  "idioma": "eu",
+  "tabla": "construccion_produccion",
+  "medida": "var_anual_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos delitos hay por cada mil habitantes en España?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es la provincia con más delitos por habitante?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad es la más segura?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "tasa_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos robos con violencia hubo en Barcelona en 2024",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Robos con violencia o intimidación"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos hurtos hubo en Madrid capital el año pasado?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Hurtos"
+  }
+ },
+ {
+  "pregunta": "delitos sexuales en Andalucía",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Delitos contra la libertad sexual"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos homicidios consumados hay al año en España?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Homicidios y asesinatos consumados"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido las estafas por internet desde 2019?",
+  "idioma": "es",
+  "tabla": "crimen_balance",
+  "medida": "infracciones",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "Estafas informáticas"
+  }
+ }
+]

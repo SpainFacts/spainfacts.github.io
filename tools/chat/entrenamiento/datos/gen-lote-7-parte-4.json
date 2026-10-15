@@ -1,0 +1,1382 @@
+[
+ {
+  "pregunta": "¿Cuánto pescado captura España al año?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo pesca más?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos barcos de pesca tiene España?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "¿Qué país tiene la mayor flota pesquera de la UE?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pescado se cría en piscifactorías en España?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "acuicultura_t"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero mueve la acuicultura en España?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "acuicultura_eur"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la pesca europea es española?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "cuota_pct",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos kilos de pescado captura cada español al año?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "kg_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado las capturas de pesca en España desde el año 2000?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos buques menos hay en la flota española que en 2000?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pesca Dinamarca?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Dinamarca"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "¿Qué país cría más pescado y marisco?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "medida": "acuicultura_t"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto valía la acuicultura española en 2015 en euros de hoy?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "acuicultura_eur"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de arqueo suman los barcos españoles?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_gt"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de capturas en España?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "flota pesquera francia número de buques",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa España en acuicultura?",
+  "idioma": "es",
+  "tabla": "primario_pesca",
+  "medida": "puesto",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "acuicultura_t"
+  }
+ },
+ {
+  "pregunta": "captures de pesca a Espanya",
+  "idioma": "ca",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "capturas"
+  }
+ },
+ {
+  "pregunta": "Cantos barcos de pesca ten España?",
+  "idioma": "gl",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "How many fishing vessels does Italy have?",
+  "idioma": "en",
+  "tabla": "primario_pesca",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "medida": "flota_nr"
+  }
+ },
+ {
+  "pregunta": "¿En qué cultivos es España líder de Europa?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "cultivo"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del aguacate europeo se produce en España?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Aguacate"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa España en producción de naranjas?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Naranja"
+  }
+ },
+ {
+  "pregunta": "¿Quién produce más tomate en la UE?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Tomate"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de limones produce España?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Limón y lima"
+  }
+ },
+ {
+  "pregunta": "¿En qué productos del campo pesa España más que su población?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "veces_peso_poblacion",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta carne de cerdo produce España frente a Europa?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Carne de porcino"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos cerdos hay en España?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cabaña porcina"
+  }
+ },
+ {
+  "pregunta": "¿Qué país europeo lidera en carne de vacuno?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Carne de bovino"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vino exporta España comparado con la UE?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Exportación de vino (volumen)"
+  }
+ },
+ {
+  "pregunta": "¿España es la primera exportadora de aceite de oliva en Europa?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Exportación de aceite de oliva (volumen)"
+  }
+ },
+ {
+  "pregunta": "¿Qué lugar ocupa España en superficie de olivar?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Olivar (superficie)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta fresa se produce en España y en la UE?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Fresa"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos kilos de naranja por habitante da España comparado con la media europea?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "valor_hab_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Naranja"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos kilos de aceituna por cabeza cosecha un español frente a un europeo?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "valor_hab_ue",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Aceituna"
+  }
+ },
+ {
+  "pregunta": "¿En qué ganadería destaca más España frente al resto?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "ganaderia"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas ovejas hay en España respecto a toda la UE?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "total_ue",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cabaña ovina"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la pesca europea es nuestra?",
+  "idioma": "es",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Capturas de pesca"
+  }
+ },
+ {
+  "pregunta": "en quins productes agraris lidera Espanya Europa",
+  "idioma": "ca",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "En que produtos lidera España en Europa?",
+  "idioma": "gl",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "In which crops is Spain the top producer in the EU?",
+  "idioma": "en",
+  "tabla": "primario_ranking_ue",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "producto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "categoria": "cultivo"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la producción de naranjas en España desde el año 2000?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Naranja"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas hectáreas de olivar hay ahora y cuántas había en 2005?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2005,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Olivar (superficie)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos cerdos había en España en 2010?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cabaña porcina"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas ovejas hay en España hoy?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cabaña ovina"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero ha generado el aceite de oliva en el último año?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Aceite de oliva (valor)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto valía el vino español en euros de hoy en 2010?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Vino (valor)"
+  }
+ },
+ {
+  "pregunta": "¿Qué parte de la producción europea de tomate es española y cómo ha cambiado?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "cuota_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Tomate"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta leche de vaca se produce en España?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Leche de vaca"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos buques de pesca había en 2000 frente a ahora?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Flota pesquera (buques)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de aguacate se cosechan?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Aguacate"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de producción de aceituna?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "producto": "Aceituna"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exporta España de aceite de oliva?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Exportación de aceite de oliva (volumen)"
+  }
+ },
+ {
+  "pregunta": "exportaciones vino españa evolución",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2002,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Exportación de vino (volumen)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vale la producción vegetal española por habitante, en euros reales?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Producción vegetal"
+  }
+ },
+ {
+  "pregunta": "¿Qué puesto ocupa España en producción de carne de cerdo cada año?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "puesto",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Carne de porcino"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cereal se cosechó en 2022?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cereales"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas toneladas de almendra producimos?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Almendra"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos euros de exportación de frutas y frutos secos?",
+  "idioma": "es",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Exportación de frutas y frutos secos (HS 08)"
+  }
+ },
+ {
+  "pregunta": "evolució de la producció de taronja a Espanya",
+  "idioma": "ca",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Naranja"
+  }
+ },
+ {
+  "pregunta": "Cantas vacas hai en España?",
+  "idioma": "gl",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Cabaña bovina"
+  }
+ },
+ {
+  "pregunta": "How many hectares of vineyards does Spain have?",
+  "idioma": "en",
+  "tabla": "primario_serie_espana",
+  "medida": "valor_espana",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "producto": "Viñedo (superficie)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto produce el campo español por habitante?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país de Europa saca más dinero del campo por habitante?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto vale toda la producción agraria española en millones de euros?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto valía la producción agraria de Francia en 2010?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2010
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el valor de la producción agraria española desde 2000, sin inflación?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la riqueza que genera el campo por persona en España?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ganan los agricultores por trabajador?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "renta_real_uta_eur2020",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado la renta de los agricultores en Europa?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "renta_indicador_a",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué valor añadido genera la agricultura española?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "vab_meur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "valor añadido agrario por habitante españa en euros reales",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "vab_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente vive en España según esta serie?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "tablas_validas": [
+   "poblacion_territorios"
+  ],
+  "medida": "poblacion_miles",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto produce el campo alemán respecto al español?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país tiene la renta agraria por trabajador más alta?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "renta_real_uta_eur2020",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mejor año de la renta de los agricultores españoles?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "renta_real_uta_eur2020",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto produce el campo italiano por habitante?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto crece el volumen de producción agraria por persona?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "volumen_eur2020_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto produce el campo en Polonia en millones de euros de hoy?",
+  "idioma": "es",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur_real",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Polonia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "valor de la producció agrària per habitant a Espanya",
+  "idioma": "ca",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto vale a produción agraria en Portugal?",
+  "idioma": "gl",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_meur",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much do Spanish farms produce per inhabitant?",
+  "idioma": "en",
+  "tabla": "primario_valor_produccion",
+  "medida": "produccion_eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

@@ -1,0 +1,602 @@
+[
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-01",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": false,
+  "tabla": "mercado_ipc_ccaa",
+  "texto": "inflación de los últimos 12 meses: 4,3 % anual, agosto de 2026.\n\nFuente: tabla mother.mercado_ipc_ccaa.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-02",
+  "tipo": "actual",
+  "ok": false,
+  "tablaOk": false,
+  "tabla": "embalses_actual",
+  "texto": "porcentaje de llenado del embalse, 29 de septiembre de 2026:\n- Miño - Sil, Montefurado: 100 %\n- Guadiana, Montijo: 100 %\n- Duero, San José: 100 %\n- Duero, Villagonzalo: 100 %\n- Duero, Rábanos: 100 %\n- (25 más)\n\nFuente: tabla mother.embalses_actual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-03",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "pensiones_mensual",
+  "texto": "pensión media de jubilación en euros corrientes: 1.576,1 € al mes, 1 de septiembre de 2026.\n\nFuente: tabla mother.pensiones_mensual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-04",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "mercado_paro_trimestral",
+  "texto": "tasa de paro: 9,87 %, 2.º trimestre de 2026.\n\nFuente: tabla mother.mercado_paro_trimestral.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-05",
+  "tipo": "actual",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "vivienda_precio_tasado",
+  "texto": "valor tasado medio por metro cuadrado en euros reales de 2025: 2.283,22 € reales/m², 1 de abril de 2026.\n\nFuente: tabla mother.vivienda_precio_tasado.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-06",
+  "tipo": "actual",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "mercado_energia_carburantes",
+  "texto": "precio por litro con impuestos, en euros constantes (Gasolina 95): 1,85 €/litro (euros reales de 2025), 28 de septiembre de 2026.\n\nFuente: tabla mother.mercado_energia_carburantes.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-07",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "turismo_mensual",
+  "texto": "turistas internacionales en los últimos 12 meses: 100.386.683 turistas, agosto de 2026.\n\nFuente: tabla mother.turismo_mensual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-08",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "movilidad_recarga_evolucion",
+  "texto": "puntos de recarga públicos: 35.546 puntos, 2 de octubre de 2026.\n\nFuente: tabla mother.movilidad_recarga_evolucion.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-09",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "movilidad_parque_resumen",
+  "texto": "turismos enchufables sobre el total de turismos: 3,35 % del parque de turismos, septiembre de 2026.\n\nFuente: tabla mother.movilidad_parque_resumen.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-10",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "primario_aceite_precios",
+  "texto": "precio en origen en euros corrientes (Virgen extra): 3,5 €/kg, septiembre de 2026.\n\nFuente: tabla mother.primario_aceite_precios.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-11",
+  "tipo": "actual",
+  "ok": false,
+  "tablaOk": false,
+  "tabla": "transparencia_pie",
+  "texto": "importe retenido al ayuntamiento, en euros corrientes: 45.824.996 €, 2025.\n\n(2026 aún está incompleto, así que no se usa como último dato.)\nFuente: tabla mother.transparencia_pie.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-12",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "turismo_viviendas",
+  "texto": "viviendas de uso turístico: 341.001 viviendas, mayo de 2026.\n\nFuente: tabla mother.turismo_viviendas.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-13",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "cuentas_balance_anual",
+  "texto": "deuda pública en porcentaje del PIB: 100,7 % del PIB, 2025.\n\nFuente: tabla mother.cuentas_balance_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-14",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "energia_resumen_anual_mix",
+  "texto": "cuota de generación renovable: 55,47 % de la generación, 2025.\n\nFuente: tabla mother.energia_resumen_anual_mix.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-15",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "medios_tv_espana_anual",
+  "texto": "dinero público a RTVE por habitante, en euros constantes: 23,21 € por habitante (euros reales de 2025), 2025.\n\nFuente: tabla mother.medios_tv_espana_anual (Dinero público en los medios: https://spainfacts.org/medios/dinero-publico).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-16",
+  "tipo": "actual",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "crimen_ultimo_periodo",
+  "texto": "infracciones penales conocidas en el periodo (Total infracciones penales): 1.217.476 infracciones, 2026.\n\nFuente: tabla mother.crimen_ultimo_periodo.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-17",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "mercado_paro_territorios",
+  "texto": "tasa de paro (Andalucía): 14,56 %, 2.º trimestre de 2026.\n\nFuente: tabla mother.mercado_paro_territorios.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-18",
+  "tipo": "territorio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "renta_municipios",
+  "texto": "renta neta media por persona en euros constantes (Pozuelo de Alarcón): 32.209,38 € al año por persona (euros de 2025), 2023.\n\nFuente: tabla mother.renta_municipios.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-19",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "poblacion_municipios",
+  "texto": "población del municipio (padrón, 1 de enero) (Valladolid, Valladolid): 302.614 habitantes, 2025.\n\nFuente: tabla mother.poblacion_municipios (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-20",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "ccaa_deuda",
+  "texto": "deuda en % del PIB regional (Comunidad Valenciana): 40 % del PIB, 2.º trimestre de 2026.\n\nFuente: tabla mother.ccaa_deuda (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-21",
+  "tipo": "territorio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "vivienda_alquiler",
+  "texto": "alquiler mensual mediano en euros reales de 2025 (Colectiva, Málaga): 694,76 € reales al mes, 2024.\n\nFuente: tabla mother.vivienda_alquiler.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-22",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "salud_esperanza_vida",
+  "texto": "esperanza de vida al nacer (Comunidad Foral de Navarra): 84,66 años, 2024.\n\nFuente: tabla mother.salud_esperanza_vida (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-23",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "mercado_paro_municipios",
+  "texto": "parados registrados (Cádiz, Cádiz): 7.241 personas, agosto de 2026.\n\nFuente: tabla mother.mercado_paro_municipios.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-24",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "incendios_provincia_anio",
+  "texto": "superficie quemada (Ourense): 140.601 ha, 2025.\n\n(2026 aún está incompleto, así que no se usa como último dato.)\nFuente: tabla mother.incendios_provincia_anio.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-25",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "sanidad_gasto_ccaa",
+  "texto": "gasto sanitario público por habitante en euros constantes (Principado de Asturias): 2.384,49 € por habitante (euros de 2025), 2024.\n\nFuente: tabla mother.sanidad_gasto_ccaa.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-26",
+  "tipo": "territorio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "local_deuda_municipio",
+  "texto": "deuda del ayuntamiento por habitante, en euros constantes (Zaragoza): 704,63 € por habitante, euros constantes, 2.º trimestre de 2026.\n\nFuente: tabla mother.local_deuda_municipio.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-27",
+  "tipo": "territorio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "crimen_balance",
+  "texto": "infracciones penales por cada 1.000 habitantes (Barcelona, Resto de delitos sexuales): 0,5 por cada 1.000 habitantes, 2025.\n\nFuente: tabla mother.crimen_balance (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-28",
+  "tipo": "territorio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "medios_tv_ccaa_anual",
+  "texto": "aportación pública por habitante, en euros constantes (Cataluña): 42,5 € por habitante (euros reales de 2025), 2025.\n\nFuente: tabla mother.medios_tv_ccaa_anual (Dinero público en los medios: https://spainfacts.org/medios/dinero-publico).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-29",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "renta_territorios",
+  "texto": "renta neta media por persona en euros constantes, 2023:\n- País Vasco: 19.927,73 € al año por persona (euros de 2025)\n- Madrid, Comunidad de: 19.143,71 € al año por persona (euros de 2025)\n- Cataluña: 17.369,89 € al año por persona (euros de 2025)\n- Navarra, Comunidad Foral de: 17.329,8 € al año por persona (euros de 2025)\n- Balears, Illes: 17.007,95 € al año por persona (euros de 2025)\n- (14 más)\n\nFuente: tabla mother.renta_territorios.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-30",
+  "tipo": "ranking",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "vivienda_precio_tasado",
+  "texto": "valor tasado medio por metro cuadrado en euros reales de 2025, 1 de abril de 2026:\n- Madrid: 3.964,95 € reales/m²\n- Illes Balears: 3.859,46 € reales/m²\n- Gipuzkoa: 3.407,47 € reales/m²\n- Barcelona: 3.106,53 € reales/m²\n- Málaga: 2.989,51 € reales/m²\n- (25 más)\n\nFuente: tabla mother.vivienda_precio_tasado.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-31",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "alcaldes_familias_territorio",
+  "texto": "número de alcaldías:\n- PP: 3.333 alcaldías\n- PSOE: 2.397 alcaldías\n- Independientes y locales, Ind.: 818 alcaldías\n- Junts / CiU, Junts: 331 alcaldías\n- ERC: 331 alcaldías\n- (20 más)\n\nFuente: tabla mother.alcaldes_familias_territorio.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-32",
+  "tipo": "ranking",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "clima_emisiones_paises",
+  "texto": "emisiones por habitante (sin sumideros) (Italia): 6,17 t CO2eq por habitante, 2024.\n\nFuente: tabla mother.clima_emisiones_paises.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-33",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "inmigracion_poblacion",
+  "texto": "peso de los extranjeros sobre la población (fracción de 0 a 1), 2025:\n- Illes Balears: 21,67 %\n- Comunidad Valenciana: 19,46 %\n- Cataluña: 18,74 %\n- Comunidad de Madrid: 16,61 %\n- Región de Murcia: 15,92 %\n- (14 más)\n\nFuente: tabla mother.inmigracion_poblacion.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-34",
+  "tipo": "ranking",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "medios_publicidad_grupos",
+  "texto": "peso del grupo sobre el total de ese tipo de publicidad (BARRADOS COMUNICACIÓN Y PUBLICIDAD): 0 % del total, 2025.\n\nFuente: tabla mother.medios_publicidad_grupos (Dinero público en los medios: https://spainfacts.org/medios/dinero-publico).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-35",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "movilidad_marcas_mensual",
+  "texto": "vehículos nuevos matriculados, 2025 (Turismos):\n- TOYOTA: 97.781 vehículos\n- RENAULT: 84.443 vehículos\n- VOLKSWAGEN: 82.082 vehículos\n- HYUNDAI: 68.450 vehículos\n- SEAT: 66.128 vehículos\n- (25 más)\n\nFuente: tabla mother.movilidad_marcas_mensual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-36",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "inmigracion_asilo_nacionalidad",
+  "texto": "primeras solicitudes de asilo en el año, 2025:\n- Venezuela: 84.235 solicitudes\n- Mali: 15.460 solicitudes\n- Colombia: 14.310 solicitudes\n- Peru: 3.465 solicitudes\n- Senegal: 3.300 solicitudes\n- (25 más)\n\nFuente: tabla mother.inmigracion_asilo_nacionalidad.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-37",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "industria_ccaa",
+  "texto": "peso de la industria en el valor añadido de la comunidad, 2024:\n- Comunidad Foral de Navarra: 29,33 % del valor añadido\n- La Rioja: 25,64 % del valor añadido\n- País Vasco: 23,49 % del valor añadido\n- Aragón: 23,31 % del valor añadido\n- Castilla-La Mancha: 22,67 % del valor añadido\n- (14 más)\n\nFuente: tabla mother.industria_ccaa.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-38",
+  "tipo": "ranking",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "industria_vehiculos",
+  "texto": "vehículos fabricados (total OICA): Mundo: 92.504.338 vehículos, 2024.\n\nFuente: tabla mother.industria_vehiculos.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-39",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "economia_sectores",
+  "texto": "peso del sector en el valor añadido de la economía, 2025:\n- Comercio, transporte y hostelería: 24,27 % del valor añadido\n- Administración, educación y sanidad: 17,16 % del valor añadido\n- Industria y energía: 15,43 % del valor añadido\n- Manufacturas: 11,67 % del valor añadido\n- Inmobiliarias: 11,18 % del valor añadido\n- (6 más)\n\nFuente: tabla mother.economia_sectores.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-40",
+  "tipo": "ranking",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "primario_ranking_ue",
+  "texto": "valor de España del producto (la unidad depende del producto) (Tomate): Italia: 3.988,75 según columna unidad, 2025.\n\nFuente: tabla mother.primario_ranking_ue.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-41",
+  "tipo": "cambio",
+  "ok": false,
+  "tablaOk": false,
+  "tabla": "demografia_anual",
+  "texto": "nacimientos: 420.290 nacimientos, 2015.\n\nFuente: tabla mother.demografia_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-42",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "clima_emisiones_anual",
+  "texto": "emisiones totales sin sumideros (LULUCF): de 439,88 Mt CO2eq en 2005 a 270,74 Mt CO2eq en 2025, -169,14 Mt CO2eq (-38,45 %).\n\nFuente: tabla mother.clima_emisiones_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-43",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "vivienda_mercado_anual",
+  "texto": "compraventas de viviendas: de 505.467 compraventas en 2019 a 711.543 compraventas en 2025, +206.076 compraventas (+40,77 %).\n\n(2026 aún está incompleto, así que no se usa como último dato.)\nFuente: tabla mother.vivienda_mercado_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-44",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "empresas_dirce_territorio",
+  "texto": "empresas activas a 1 de enero: de 3.404.428 empresas en 2020 a 3.310.824 empresas en 2025, -93.604 empresas (-2,75 %).\n\nFuente: tabla mother.empresas_dirce_territorio.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-45",
+  "tipo": "cambio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "sanidad_recursos",
+  "texto": "profesionales o camas por cada 1.000 habitantes: de 7 por cada 1.000 habitantes en 2013 a 12,23 por cada 1.000 habitantes en 2013, +5,23 por cada 1.000 habitantes (+74,69 %).\n\nFuente: tabla mother.sanidad_recursos.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-46",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": false,
+  "tabla": "empleo_efectivos",
+  "texto": "empleados públicos: de 2.595.614 personas en 1 de julio de 2019 a 3.071.725 personas en 1 de enero de 2026, +476.111 personas (+18,34 %).\n\nFuente: tabla mother.empleo_efectivos.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-47",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": false,
+  "tabla": "turismo_mensual",
+  "texto": "turistas internacionales en el mes: de 83.509.151 turistas en 2019 a 96.803.893 turistas en 2025, +13.294.742 turistas (+15,92 %).\n\nFuente: tabla mother.turismo_mensual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-48",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "vivienda_ipv",
+  "texto": "índice de precios de la vivienda en términos reales (2015 = 100) (General): de 100,97 índice (2015 = 100) en 1 de octubre de 2015 a 145,88 índice (2015 = 100) en 1 de octubre de 2025, +44,91 índice (2015 = 100) (+44,48 %).\n\nFuente: tabla mother.vivienda_ipv.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-49",
+  "tipo": "cambio",
+  "ok": false,
+  "tablaOk": true,
+  "tabla": "mercado_paro_registrado",
+  "texto": "parados registrados: 5.040.222 personas, febrero de 2013.\n\nFuente: tabla mother.mercado_paro_registrado.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-50",
+  "tipo": "cambio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "inmigracion_llegadas",
+  "texto": "personas llegadas de forma irregular: de 64.318 personas en 2024 a 36.775 personas en 2025, -27.543 personas (-42,82 %).\n\nFuente: tabla mother.inmigracion_llegadas.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-51",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "mercado_ipc_mensual",
+  "texto": "inflación anual (variación del IPC general en 12 meses): 10,8 %, julio de 2022.\n\nFuente: tabla mother.mercado_ipc_mensual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-52",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "incendios_anual",
+  "texto": "superficie quemada: 315.705 ha, 2022.\n\n(2026 aún está incompleto, así que no se usa como último dato.)\nFuente: tabla mother.incendios_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-53",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "elecciones_participacion",
+  "texto": "participación electoral (Congreso, julio de 2023): 66,59 %, 23 de julio de 2023.\n\nFuente: tabla mother.elecciones_participacion.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-54",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "gobierno_actos_anual",
+  "texto": "reales decretos-ley aprobados: 39 decretos-ley, 2020.\n\n(2026 aún está incompleto, así que no se usa como último dato.)\nFuente: tabla mother.gobierno_actos_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-55",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "elecciones_partidos",
+  "texto": "porcentaje de voto (PSOE, Congreso): 43,87 %, 9 de marzo de 2008.\n\nFuente: tabla mother.elecciones_partidos.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-56",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "mercado_paro_registrado",
+  "texto": "parados registrados: 3.831.203 personas, abril de 2020.\n\nFuente: tabla mother.mercado_paro_registrado.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-57",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "demografia_anual",
+  "texto": "nacimientos: 519.779 nacimientos, 2008.\n\nFuente: tabla mother.demografia_anual.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-58",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "construccion_cemento",
+  "texto": "consumo aparente de cemento por habitante: 1.237,89 kg por habitante, 2007.\n\nFuente: tabla mother.construccion_cemento.",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-59",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "salud_esperanza_vida",
+  "texto": "esperanza de vida al nacer: 82,3 años, 2020.\n\nFuente: tabla mother.salud_esperanza_vida (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ },
+ {
+  "bateria": "preguntas-validacion6.json",
+  "id": "v6-60",
+  "tipo": "anio",
+  "ok": true,
+  "tablaOk": true,
+  "tabla": "movilidad_matriculaciones_mensual",
+  "texto": "vehículos matriculados (N, Turismos): 895.001 vehículos, 2020.\n\nFuente: tabla mother.movilidad_matriculaciones_mensual (SpainFacts · El Estado de España en Datos Oficiales: https://spainfacts.org/).",
+  "error": ""
+ }
+]

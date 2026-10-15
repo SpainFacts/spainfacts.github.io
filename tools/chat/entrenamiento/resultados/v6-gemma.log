@@ -1,0 +1,62 @@
+✓  v6-01 [actual] 31.9s inflación anual (variación del IPC general en 12 meses): 4,3 %, agosto de 2026. Fuente: tabla mother.mercado_ipc_mensual
+✓t v6-02 [actual] 3.5s diferencia respecto al llenado habitual, 29 de septiembre de 2026: - Cuenca Mediterránea Andaluza, Viñuela, La: 58,7 pun
+✗t v6-03 [actual] 8.1s pensión media de jubilación en euros corrientes: 1.506,05 € al mes, 2025. (2026 aún está incompleto, así que no se usa c
+✗  v6-04 [actual] 5.7s tasa de paro de los españoles: 8,95 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_trimestral.
+✗t v6-05 [actual] 5.5s valor tasado por metro cuadrado en euros reales de 2025 (último trimestre): 2.283,22 € reales/m². Fuente: tabla mother.v
+✓  v6-06 [actual] 3.3s precio por litro con impuestos, en euros del momento (Gasolina 95): 1,94 €/litro (nominales), 28 de septiembre de 2026. 
+✓  v6-07 [actual] 7.4s turistas internacionales en los últimos 12 meses: 100.386.683 turistas, agosto de 2026. Fuente: tabla mother.turismo_men
+✓  v6-08 [actual] 2.0s puntos de recarga públicos: 35.546 puntos, 2 de octubre de 2026. Fuente: tabla mother.movilidad_recarga_evolucion.
+✓  v6-09 [actual] 5.1s turismos enchufables sobre el total de turismos: 3,35 % del parque de turismos, septiembre de 2026. Fuente: tabla mother
+✓  v6-10 [actual] 2.5s precio en origen en euros constantes (Virgen extra): 3,59 €/kg (euros de agosto de 2026), agosto de 2026. Fuente: tabla 
+✗t v6-11 [actual] 5.2s importe retenido al ayuntamiento, en euros constantes: 46.090.046 € de 2025, 2025. (2026 aún está incompleto, así que no
+✓  v6-12 [actual] 2.9s viviendas de uso turístico: 341.001 viviendas, mayo de 2026. Fuente: tabla mother.turismo_viviendas.
+✓  v6-13 [actual] 4.9s deuda pública en porcentaje del PIB: 100,7 % del PIB, 2025. Fuente: tabla mother.cuentas_balance_anual.
+✓  v6-14 [actual] 5.2s cuota de generación renovable: 55,47 % de la generación, 2025. Fuente: tabla mother.clima_electricidad_anual.
+✗t v6-15 [actual] 3.9s dinero público recibido, en euros del año (RTVE (TVE, RNE, rtve.es)): 2.296.242 € (nominales), 2025. (2026 aún está inco
+✓  v6-16 [actual] 3.4s infracciones penales conocidas en el periodo (Total infracciones penales): 1.217.476 infracciones, 2026. Fuente: tabla m
+✓  v6-17 [territorio] 4.6s tasa de paro (Andalucía): 14,56 %, 2.º trimestre de 2026. Fuente: tabla mother.mercado_paro_territorios.
+✗  v6-18 [territorio] 5.7s renta neta media por persona en euros constantes (Pozuelo de Alarcón): 32.209,38 € al año por persona (euros de 2025), 2
+✓  v6-19 [territorio] 2.0s población del municipio (padrón, 1 de enero) (Valladolid, Valladolid): 302.614 habitantes, 2025. Fuente: tabla mother.po
+✓  v6-20 [territorio] 3.3s deuda en % del PIB regional (Comunidad Valenciana): 40 % del PIB, 2.º trimestre de 2026. Fuente: tabla mother.ccaa_deuda
+✗  v6-21 [territorio] 4.5s alquiler mensual mediano en euros reales de 2025 (Colectiva, Málaga): 694,76 € reales al mes, 2024. Fuente: tabla mother
+✓  v6-22 [territorio] 2.0s esperanza de vida al nacer (Comunidad Foral de Navarra): 84,66 años, 2024. Fuente: tabla mother.salud_esperanza_vida (Sp
+✓  v6-23 [territorio] 3.5s parados registrados (Cádiz, Cádiz): 7.241 personas, agosto de 2026. Fuente: tabla mother.mercado_paro_municipios.
+✓  v6-24 [territorio] 3.6s superficie quemada (Ourense): 140.601 ha, 2025. (2026 aún está incompleto, así que no se usa como último dato.) Fuente: 
+✓  v6-25 [territorio] 2.8s gasto sanitario público por habitante en euros corrientes (Principado de Asturias): 2.322,4 € por habitante, 2024. Fuent
+✗  v6-26 [territorio] 3.8s deuda del ayuntamiento por habitante, en euros constantes (Zaragoza): 704,63 € por habitante, euros constantes, 2.º trim
+✗  v6-27 [territorio] 3.8s infracciones penales por cada 1.000 habitantes (Barcelona, Delitos contra la libertad sexual): 0,77 por cada 1.000 habit
+✓  v6-28 [territorio] 4.6s aportación pública por habitante, en euros constantes (Cataluña): 42,5 € por habitante (euros reales de 2025), 2025. Fue
+✓  v6-29 [ranking] 4.6s renta neta media por persona en euros constantes, 2023: - País Vasco: 19.927,73 € al año por persona (euros de 2025) - M
+✗  v6-30 [ranking] 4.3s valor tasado medio por metro cuadrado en euros corrientes, 1 de abril de 2026: - Madrid: 4.089,6 €/m² - Illes Balears: 3
+✓  v6-31 [ranking] 2.7s número de alcaldías: - PP: 3.333 alcaldías - PSOE: 2.397 alcaldías - Independientes y locales, Ind.: 818 alcaldías - Jun
+✗  v6-32 [ranking] 4.3s emisiones por habitante (sin sumideros) (Alemania): 7,78 t CO2eq por habitante, 2024. Fuente: tabla mother.clima_emision
+✓  v6-33 [ranking] 3.6s peso de los extranjeros sobre la población (fracción de 0 a 1), 2025: - Illes Balears: 21,67 % - Comunidad Valenciana: 1
+✗  v6-34 [ranking] 2.6s peso del grupo sobre el total de ese tipo de publicidad (PERSONAS COMUNICACIÓN Y PUBLICIDAD, S.L.): 0 % del total, 2025.
+✓  v6-35 [ranking] 2.3s vehículos nuevos matriculados, 2025 (Turismos): - TOYOTA: 97.781 vehículos - RENAULT: 84.443 vehículos - VOLKSWAGEN: 82.
+✓  v6-36 [ranking] 2.0s primeras solicitudes de asilo en el año, 2025: - Venezuela: 84.235 solicitudes - Mali: 15.460 solicitudes - Colombia: 14
+✓  v6-37 [ranking] 5.6s peso de la industria en el valor añadido de la comunidad, 2024: - Comunidad Foral de Navarra: 29,33 % del valor añadido 
+✗  v6-38 [ranking] 4.3s No hay datos para esa combinación en mother.industria_vehiculos. Fuente: tabla mother.industria_vehiculos.
+✓  v6-39 [ranking] 4.2s peso del sector en el valor añadido de la economía, 2025: - Comercio, transporte y hostelería: 24,27 % del valor añadido
+✓t v6-40 [ranking] 5.0s valor del producto en la unidad de la columna unidad (toneladas, hectáreas, cabezas, millones de euros corrientes, buque
+✗  v6-41 [cambio] 3.0s número de municipios del territorio: de 8.119 municipios en 2015 a 8.132 municipios en 2025, +13 municipios (+0,16 %). F
+✓  v6-42 [cambio] 5.0s emisiones totales sin sumideros (LULUCF): de 439,88 Mt CO2eq en 2005 a 270,74 Mt CO2eq en 2025, -169,14 Mt CO2eq (-38,45
+✓  v6-43 [cambio] 7.0s compraventas de viviendas: de 505.467 compraventas en 2019 a 711.543 compraventas en 2025, +206.076 compraventas (+40,77
+✓  v6-44 [cambio] 3.4s empresas activas a 1 de enero: de 3.404.428 empresas en 2020 a 3.310.824 empresas en 2025, -93.604 empresas (-2,75 %). F
+✗t v6-45 [cambio] 2.7s médicos o camas por cada 1.000 habitantes: de 2,96 por cada 1.000 habitantes en 2013 a 4,64 por cada 1.000 habitantes en
+✓t v6-46 [cambio] 2.5s empleados públicos: de 2.595.614 personas en 1 de julio de 2019 a 3.071.725 personas en 1 de enero de 2026, +476.111 per
+✓  v6-47 [cambio] 7.1s turistas internacionales que visitan España: de 83.509.151 turistas en 2019 a 96.803.893 turistas en 2025, +13.294.742 t
+✓  v6-48 [cambio] 4.1s índice de precios de la vivienda en términos reales (2015 = 100) (General): de 100,97 índice (2015 = 100) en 1 de octubr
+✗  v6-49 [cambio] 4.4s parados registrados: 5.040.222 personas, febrero de 2013. Fuente: tabla mother.mercado_paro_registrado.
+✓  v6-50 [cambio] 2.0s personas llegadas de forma irregular: de 64.318 personas en 2024 a 36.775 personas en 2025, -27.543 personas (-42,82 %).
+✓  v6-51 [anio] 1.7s inflación anual (variación del IPC general en 12 meses): 10,8 %, julio de 2022. Fuente: tabla mother.mercado_ipc_mensual
+✓  v6-52 [anio] 4.4s superficie quemada: 315.705 ha, 2022. (2026 aún está incompleto, así que no se usa como último dato.) Fuente: tabla moth
+✓  v6-53 [anio] 3.2s participación electoral (Congreso, julio de 2023): 66,59 %, 23 de julio de 2023. Fuente: tabla mother.elecciones_partici
+✓  v6-54 [anio] 3.3s reales decretos-ley aprobados: 39 decretos-ley, 2020. (2026 aún está incompleto, así que no se usa como último dato.) Fu
+✓  v6-55 [anio] 3.8s porcentaje de voto (PSOE, Congreso): 43,87 %, 9 de marzo de 2008. Fuente: tabla mother.elecciones_partidos.
+✓  v6-56 [anio] 2.5s parados registrados: 3.831.203 personas, abril de 2020. Fuente: tabla mother.mercado_paro_registrado.
+✗  v6-57 [anio] 7.0s crecimiento vegetativo (nacimientos menos defunciones): 133.455 personas, 2008. Fuente: tabla mother.demografia_anual.
+✓  v6-58 [anio] 4.1s consumo aparente de cemento por habitante: 1.237,89 kg por habitante, 2007. Fuente: tabla mother.construccion_cemento.
+✓  v6-59 [anio] 1.6s esperanza de vida al nacer: 82,3 años, 2020. Fuente: tabla mother.salud_esperanza_vida (SpainFacts · El Estado de España
+✓  v6-60 [anio] 1.8s vehículos matriculados (N, Turismos): 895.001 vehículos, 2020. Fuente: tabla mother.movilidad_matriculaciones_mensual (S
+
+43/60 bien · tabla 52/60 · validacion6 43/60 (tabla 52) · ollama:gemma4:e2b · 265 s

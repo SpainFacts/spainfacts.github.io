@@ -1,0 +1,98 @@
+[
+ {
+  "pregunta": "¿Gastan más en televisión los gobiernos nacionalistas?",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "comparar gasto televisión pública autonómica según el partido gobernante 2017-2025",
+  "idioma": "es",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin partit gasta més en televisió autonòmica per habitant?",
+  "idioma": "ca",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Que partido gasta máis nas televisións autonómicas por habitante?",
+  "idioma": "gl",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which party spends the most on regional TV per inhabitant?",
+  "idioma": "en",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein alderdik gastatzen du gehien telebista autonomikoan biztanleko?",
+  "idioma": "eu",
+  "tabla": "medios_tv_gobiernos",
+  "medida": "eur_hab_real_anio",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ }
+]

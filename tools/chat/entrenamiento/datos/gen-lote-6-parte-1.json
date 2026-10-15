@@ -1,0 +1,2347 @@
+[
+ {
+  "pregunta": "¿A cuánto está la inflación ahora mismo?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuanto han subido los precios en el último año",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué inflación hubo en marzo de 2022?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "IPC julio 2023",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": 7
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto subieron los precios de un mes para otro en el último dato?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "subida mensual de precios en enero de 2024",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_mensual",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido la luz y los carburantes en el último mes? (componente energético)",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "energia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflacion de la energia en agosto de 2022",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "energia",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con la inflación más alta de toda la serie?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y el mes en que los precios más bajaron respecto al año anterior?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Inflación subyacente, sin energía ni alimentos frescos, ahora",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "subyacente",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la inflación subyacente desde 2020?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "subyacente",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta ahora la comida fresca respecto al año pasado? (fruta, carne, pescado)",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "alimentos_sin_elaborar",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "subida de los alimentos elaborados (pan, aceite, conservas) en 2023",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "alimentos_elaborados",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los servicios (restaurantes, ocio, alquiler...) este año?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "servicios",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflación de los bienes industriales (ropa, coches, electrónica)",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "bienes_industriales",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto poder adquisitivo hemos perdido desde 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "perdida_poder_compra_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto valen hoy 100 euros de 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "perdida_poder_compra_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del índice de precios desde 2008",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "indice_2008",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios en total desde 2019 hasta hoy?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el IPC en los últimos cinco años?",
+  "idioma": "es",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant ha pujat l'inflació aquest any?",
+  "idioma": "ca",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto subiron os prezos no último ano?",
+  "idioma": "gl",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What is the current inflation rate in Spain?",
+  "idioma": "en",
+  "tabla": "mercado_ipc_mensual",
+  "tablas_validas": [
+   "mercado_ipca_ue"
+  ],
+  "medida": "var_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat igo da energiaren prezioa azken hilean?",
+  "idioma": "eu",
+  "tabla": "mercado_ipc_mensual",
+  "medida": "energia",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Está España más cara o más barata que Alemania en inflación?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflación en Alemania ahora",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país de los grandes de Europa tiene la inflación más alta?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y cuál tiene la más baja?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflacion francia 2022",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Inflación en Italia en el pico de 2022",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo va la inflación en Portugal comparada con la nuestra?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo se compara la inflación de España con la media de la zona euro?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Zona euro"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflación media de toda la UE",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes ha tenido España la inflación más alta de la historia europea armonizada?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la inflación española frente a la europea desde 2019",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los precios en la zona euro desde 2019?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "indice_2019",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Zona euro"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde han subido más los precios desde 2019, en España o en Alemania?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Inflación armonizada IPCA España septiembre 2021",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2021
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál era la inflación en la zona euro en enero de 2023?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Zona euro"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": 1
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "inflacion portugal vs españa 2024",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Spain inflation compared with Germany and France",
+  "idioma": "en",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Euro area inflation rate right now",
+  "idioma": "en",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Zona euro"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Com va la inflació a Alemanya comparada amb la d'Espanya?",
+  "idioma": "ca",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o país europeo onde máis subiron os prezos desde 2019?",
+  "idioma": "gl",
+  "tabla": "mercado_ipca_ue",
+  "medida": "indice_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "A Europa le sube el coste de la vida igual que a nosotros?",
+  "idioma": "es",
+  "tabla": "mercado_ipca_ue",
+  "medida": "tasa_anual",
+  "territorio": {
+   "nivel": "pais_extranjero",
+   "nombre": "UE-27"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tasa de paro tienen los universitarios?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Estudios superiores"
+  }
+ },
+ {
+  "pregunta": "¿Quién está más en paro, los que no tienen estudios o los que tienen carrera?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "paro según nivel de estudios 2023",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Compensa estudiar para no estar parado? Paro de los que solo tienen la ESO",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "ESO o similar"
+  }
+ },
+ {
+  "pregunta": "tasa de paro de los que han hecho FP de grado medio",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "FP de grado medio"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto paro hay entre los que solo terminaron bachillerato?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Bachillerato"
+  }
+ },
+ {
+  "pregunta": "Paro de las mujeres con estudios superiores",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Mujeres",
+   "nivel_corto": "Estudios superiores"
+  }
+ },
+ {
+  "pregunta": "¿Los hombres sin estudios están más parados que las mujeres sin estudios?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sexo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel_corto": "Sin estudios"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el paro de los titulados universitarios desde 2014?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2014,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Estudios superiores"
+  }
+ },
+ {
+  "pregunta": "evolucion paro gente sin estudios",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2014,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Sin estudios"
+  }
+ },
+ {
+  "pregunta": "¿En qué año fue más alto el paro de quienes no pasaron de primaria?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Primaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto bajó el paro de la gente con primaria incompleta entre 2014 y 2024?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2014,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Primaria incompleta"
+  }
+ },
+ {
+  "pregunta": "tasa de paro total en 2019 según estudios",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Qué nivel de estudios tiene menos paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "paro hombres con FP medio 2021",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Hombres",
+   "nivel_corto": "FP de grado medio"
+  }
+ },
+ {
+  "pregunta": "Mi hijo duda si hacer carrera o dejarlo en la ESO, ¿cuánta gente de cada grupo está en paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Qué diferencia de paro hay entre hombres y mujeres con la misma formación?",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "sexo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "nivel_corto": "Total"
+  }
+ },
+ {
+  "pregunta": "tasa de paro en general en 2020 por sexo",
+  "idioma": "es",
+  "tabla": "mercado_paro_formacion",
+  "tablas_validas": [
+   "mercado_paro_trimestral",
+   "mercado_paro_grupos"
+  ],
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel_corto": "Total"
+  }
+ },
+ {
+  "pregunta": "Quin és l'atur de la gent amb estudis superiors?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "sexo": "Ambos sexos",
+   "nivel_corto": "Estudios superiores"
+  }
+ },
+ {
+  "pregunta": "Taxa de paro segundo o nivel de estudos",
+  "idioma": "gl",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "Unemployment rate by education level in Spain",
+  "idioma": "en",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "Zer ikasketa-mailak du langabezia tasa altuena?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_formacion",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "nivel_corto",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "sexo": "Ambos sexos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánta gente joven está en paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "tablas_validas": [
+   "mercado_paro_trimestral",
+   "mercado_paro_ue"
+  ],
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "Menores de 25 años"
+  }
+ },
+ {
+  "pregunta": "paro de los de 55 años o más",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "55 años o más"
+  }
+ },
+ {
+  "pregunta": "¿Qué tasa de paro tienen los adolescentes de 16 a 19 años?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "16 a 19 años"
+  }
+ },
+ {
+  "pregunta": "Paro entre los 20 y los 24 años",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "20 a 24 años"
+  }
+ },
+ {
+  "pregunta": "¿Qué edad tiene la gente que más sufre el paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dimension": "Edad"
+  }
+ },
+ {
+  "pregunta": "paro de las mujeres ahora",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Sexo",
+   "grupo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Hay más paro entre hombres o entre mujeres?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dimension": "Sexo"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto paro hay entre los inmigrantes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Nacionalidad",
+   "grupo": "Extranjera (total)"
+  }
+ },
+ {
+  "pregunta": "tasa de paro de los españoles",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Nacionalidad",
+   "grupo": "Española"
+  }
+ },
+ {
+  "pregunta": "¿El paro es mayor entre extranjeros de fuera de la UE que entre los comunitarios?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dimension": "Nacionalidad"
+  }
+ },
+ {
+  "pregunta": "paro de extranjeros de la UE 2022",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Nacionalidad",
+   "grupo": "Extranjera de la UE"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el paro juvenil desde 2008?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "Menores de 25 años"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor momento del paro de los jóvenes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "trimestre",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "Menores de 25 años"
+  }
+ },
+ {
+  "pregunta": "paro mujeres 2013 primer trimestre",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "trimestre",
+   "anios": [
+    2013
+   ],
+   "trimestre": 1
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Sexo",
+   "grupo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el paro de los hombres desde 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Sexo",
+   "grupo": "Hombres"
+  }
+ },
+ {
+  "pregunta": "evolución paro extranjeros no comunitarios",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Nacionalidad",
+   "grupo": "Extranjera de fuera de la UE"
+  }
+ },
+ {
+  "pregunta": "paro 25 a 54 años 2019",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "25 a 54 años"
+  }
+ },
+ {
+  "pregunta": "¿Los mayores de 55 tienen más o menos paro que los jóvenes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "dimension": "Edad"
+  }
+ },
+ {
+  "pregunta": "Quin és l'atur de les dones?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Sexo",
+   "grupo": "Mujeres"
+  }
+ },
+ {
+  "pregunta": "Canta xente nova está en paro en España?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "Menores de 25 años"
+  }
+ },
+ {
+  "pregunta": "Youth unemployment rate in Spain",
+  "idioma": "en",
+  "tabla": "mercado_paro_grupos",
+  "tablas_validas": [
+   "mercado_paro_trimestral",
+   "mercado_paro_ue"
+  ],
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Edad",
+   "grupo": "Menores de 25 años"
+  }
+ },
+ {
+  "pregunta": "Atzerritarren langabezia tasa zenbatekoa da?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_grupos",
+  "medida": "tasa_paro",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "dimension": "Nacionalidad",
+   "grupo": "Extranjera (total)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos parados hay en Getafe?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro registrado en Vigo",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué ciudad grande hay más gente apuntada al paro en proporción a sus habitantes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "por_100_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué pueblo tiene menos paro por habitante?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "por_100_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados menores de 25 hay en Zaragoza?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_menor25",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro joven en Sevilla",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_menor25",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados había en Murcia hace un año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado_hace_1_anio",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Ha subido o bajado el paro en Cartagena respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "variacion_anual_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cartagena"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios han reducido más el paro en el último año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudades han visto crecer más el paro en un año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro en Marbella",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población de Cádiz está apuntada al paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "por_100_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro por cada 100 habitantes en Albacete",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "por_100_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Albacete"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Me mudo a Burgos por trabajo, ¿cómo está allí el paro?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "por_100_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Burgos"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "nº parados Valladolid",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál es el municipio con más parados de España?",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro registrado en Valencia ciudad",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente cobra o busca curro en Soria capital? (paro registrado)",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Soria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro joven Bilbao",
+  "idioma": "es",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_menor25",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants aturats hi ha a Lleida?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Lleida"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos parados hai en Vigo?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many people are registered unemployed in Madrid city?",
+  "idioma": "en",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat langabe daude Bilbon?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_municipios",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados hay registrados en España?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cifra de paro del último mes",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido o bajado el paro este mes?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "variacion_mensual",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados menos hay que hace un año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "variacion_anual",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro registrado Andalucía",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro en Cataluña en agosto de 2024",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos parados hay en la provincia de Málaga?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más parados?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más paro en relación con su población en edad de trabajar?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "por_100_16_64",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y la que menos paro tiene en proporción?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "por_100_16_64",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más paro registrado por habitante?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "por_100_16_64",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro de los menores de 25 años en Canarias",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_menor25",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos hombres están en paro en Madrid?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_hombres",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas mujeres paradas hay en Extremadura?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_mujeres",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes de la historia hubo más parados registrados en España?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál ha sido el mínimo de parados desde 2006?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del paro registrado en España desde 2019",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el paro en Sevilla desde 2013?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro Valencia provincia diciembre 2020",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": 12
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincias han reducido más el paro en el último año en porcentaje?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde ha subido más el paro en el último año?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "variacion_anual_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro registrado en Bizkaia",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "paro Illes Balears en invierno vs verano",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2023,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas personas en edad de trabajar hay en Granada?",
+  "idioma": "es",
+  "tabla": "mercado_paro_registrado",
+  "medida": "poblacion_16_64",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants aturats hi ha registrats a Catalunya?",
+  "idioma": "ca",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos parados hai rexistrados na provincia da Coruña?",
+  "idioma": "gl",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Registered unemployment in Spain this month",
+  "idioma": "en",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat langabe daude Euskadin?",
+  "idioma": "eu",
+  "tabla": "mercado_paro_registrado",
+  "medida": "paro_registrado",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

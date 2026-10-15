@@ -1,0 +1,1677 @@
+[
+ {
+  "pregunta": "¿Cuántos coches nuevos se matricularon en Madrid el año pasado?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches nuevos Sevilla 2024",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué municipio se matriculan más turismos nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos eléctricos se matricularon en Barcelona en 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad compra más coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "híbridos enchufables matriculados en Bilbao",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "phev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos híbridos (HEV) se vendieron en València?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "hev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches de gasolina nuevos en Zaragoza",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "gasolina",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos diésel se compraron en Málaga el año pasado?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "diesel",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde se matriculan más diésel nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "diesel",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches de otras energías (gas, hidrógeno) matriculados en Madrid",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "otras",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches nuevos compran los particulares en Valladolid?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "particulares",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la venta de coches nuevos en Murcia desde 2015?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han crecido los eléctricos matriculados en Madrid desde 2019?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de los coches eléctricos nuevos en Granada",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2015,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "matriculaciones turismos Córdoba 2019",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año se matricularon más coches nuevos en Oviedo?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy pensando en el coche eléctrico, ¿cuánta gente en Alcobendas ya lo ha comprado este año?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcobendas"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches se matriculan en Marbella al año?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Marbella"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ranking de ciudades por coches enchufables nuevos",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "phev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches nuevos se vendieron en Palma en 2023?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants cotxes elèctrics nous es van matricular a Barcelona?",
+  "idioma": "ca",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos coches novos se matricularon en Vigo?",
+  "idioma": "gl",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many new cars were registered in Madrid in 2024?",
+  "idioma": "en",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat auto berri matrikulatu dira Bilbon?",
+  "idioma": "eu",
+  "tabla": "movilidad_matriculaciones_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches se matriculan en Madrid cada mes?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches nuevos Valencia 2024",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia se compran más coches nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia compra más coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "energia_etiqueta": "Eléctrico"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos eléctricos se vendieron en Barcelona el año pasado?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Eléctrico"
+  }
+ },
+ {
+  "pregunta": "coches enchufables en Málaga 2025",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Enchufable"
+  }
+ },
+ {
+  "pregunta": "híbridos matriculados en Alicante",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Híbrido"
+  }
+ },
+ {
+  "pregunta": "¿Dónde se venden más diésel nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "energia_etiqueta": "Diésel"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de gasolina nuevos en Sevilla?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "coches de gas nuevos en Zaragoza",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Gas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches nuevos se compran los particulares en Bizkaia?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "canal": "particular"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más coches de renting nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "canal": "renting"
+  }
+ },
+ {
+  "pregunta": "coches de alquiler matriculados en Illes Balears",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "canal": "alquiler"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia matricula más coches de empresa?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "canal": "empresa"
+  }
+ },
+ {
+  "pregunta": "taxis y VTC nuevos en Madrid",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "canal": "servicio_publico"
+  }
+ },
+ {
+  "pregunta": "evolución de coches eléctricos nuevos en Cádiz",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2018,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Eléctrico"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han subido las ventas de coches en Asturias desde 2020?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Asturias"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ventas de coches en Las Palmas en agosto de 2024",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": 8
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes se venden más coches en Illes Balears?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia compra menos coches nuevos?",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches nuevos Guipúzcoa (Gipuzkoa) 2023",
+  "idioma": "es",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants cotxes es matriculen a Girona?",
+  "idioma": "ca",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos coches eléctricos se matriculan na Coruña?",
+  "idioma": "gl",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "energia_etiqueta": "Eléctrico"
+  }
+ },
+ {
+  "pregunta": "Which province buys the most new cars?",
+  "idioma": "en",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein probintziatan erosten dira auto elektriko gehien?",
+  "idioma": "eu",
+  "tabla": "movilidad_matriculaciones_provincia",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "energia_etiqueta": "Eléctrico"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el coche más vendido de España?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "top 10 modelos más vendidos el mes pasado",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Dacia Sandero se han vendido este año?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "DACIA",
+   "modelo": "SANDERO"
+  }
+ },
+ {
+  "pregunta": "¿Se sigue vendiendo bien el Seat Ibiza?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "SEAT",
+   "modelo": "IBIZA"
+  }
+ },
+ {
+  "pregunta": "Toyota Corolla ventas 2024",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TOYOTA",
+   "modelo": "COROLLA"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el eléctrico que más se vende?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Tesla Model 3 se matricularon en 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA",
+   "modelo": "MODEL 3"
+  }
+ },
+ {
+  "pregunta": "Tesla Model Y matriculaciones el último mes",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA",
+   "modelo": "MODEL Y"
+  }
+ },
+ {
+  "pregunta": "¿Qué híbrido enchufable es el más vendido?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "phev"
+  }
+ },
+ {
+  "pregunta": "modelo diésel más vendido en España",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "¿Qué coche compran más los particulares?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "particular"
+  }
+ },
+ {
+  "pregunta": "¿Qué modelo se lleva el renting?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "canal": "renting"
+  }
+ },
+ {
+  "pregunta": "¿Qué furgoneta se vende más?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas Peugeot Rifter se han matriculado?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "furgoneta",
+   "marca": "PEUGEOT",
+   "modelo": "RIFTER"
+  }
+ },
+ {
+  "pregunta": "moto más vendida de España",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ },
+ {
+  "pregunta": "¿Qué camión se vende más?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "camion"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos BYD Dolphin Surf se han vendido?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "BYD",
+   "modelo": "DOLPHIN SURF"
+  }
+ },
+ {
+  "pregunta": "evolución de ventas del Kia EV3",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2024,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "KIA",
+   "modelo": "EV3"
+  }
+ },
+ {
+  "pregunta": "Toyota C-HR vendidos en marzo de 2026",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": 3
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TOYOTA",
+   "modelo": "C-HR"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Nissan Qashqai se vendieron en 2024 respecto a 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2024,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "NISSAN",
+   "modelo": "QASHQAI"
+  }
+ },
+ {
+  "pregunta": "mejor mes de ventas del Opel Corsa",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "OPEL",
+   "modelo": "CORSA"
+  }
+ },
+ {
+  "pregunta": "SUV más vendido, ¿el Hyundai Tucson?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "HYUNDAI",
+   "modelo": "TUCSON"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el coche más vendido en agosto de 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 8
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Quin és el cotxe més venut a Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Cal é o modelo de coche máis vendido este mes?",
+  "idioma": "gl",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "What is the best-selling electric car in Spain?",
+  "idioma": "en",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "Zein da Espainian gehien saltzen den autoa?",
+  "idioma": "eu",
+  "tabla": "movilidad_modelos_mensual",
+  "medida": "matriculaciones",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches hay circulando en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches eléctricos circulan por España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Eléctrico puro (BEV)"
+  }
+ },
+ {
+  "pregunta": "parque de híbridos enchufables",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Híbrido enchufable (PHEV)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos híbridos no enchufables hay en las carreteras?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Híbrido no enchufable (HEV)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches diésel quedan en circulación?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Diésel"
+  }
+ },
+ {
+  "pregunta": "coches de gasolina que circulan",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Gasolina"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de gas (GLP/GNC) hay?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Gas (GLP / GNC)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de hidrógeno hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Hidrógeno"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha crecido el parque de coches eléctricos en el último año?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Eléctrico puro (BEV)"
+  }
+ },
+ {
+  "pregunta": "evolución mensual de los coches diésel en circulación",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Diésel"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos eléctricos más hay que en marzo de 2025?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2025,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Eléctrico puro (BEV)"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas furgonetas hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas motos circulan?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ }
+]

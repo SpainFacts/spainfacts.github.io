@@ -1,0 +1,1994 @@
+[
+ {
+  "pregunta": "crecimiento nominal de los salarios en 2023",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "crecimiento_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué año cayeron más los sueldos reales?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "crecimiento_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el salario de la industria desde 2019?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "nómina media en 2020 en euros de 2025",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Gana más un currante de la industria o uno de servicios?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "jornada": "Todas"
+  }
+ },
+ {
+  "pregunta": "Quin és el salari anual mitjà a Espanya?",
+  "idioma": "ca",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "Canto gañan ao ano os traballadores da construción?",
+  "idioma": "gl",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "How much have real wages grown in Spain since 2008?",
+  "idioma": "en",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué comunidad se cobra más?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde son más bajos los sueldos?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldo medio en Extremadura",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta un trabajador a la empresa en el País Vasco?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "coste_laboral_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "salario mensual en Madrid",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Madrid, Comunidad de"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ganan los canarios al mes?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han subido los sueldos en Andalucía desde 2010?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del salario en Cataluña",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad han crecido más los sueldos reales el último año?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "crecimiento_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto por encima de la media está el salario de Navarra?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "indice_espana",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Navarra, Comunidad Foral de"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "salario en Galicia en 2018",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene el coste laboral más alto para las empresas?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "coste_laboral_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldos en Baleares frente a España",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "indice_espana",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Balears, Illes"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo cobraron más los murcianos?",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Murcia, Región de"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldo medio de Castilla-La Mancha",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Castilla - La Mancha"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "sueldo medio por comunidades autónomas",
+  "idioma": "es",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el sou mitjà a la Comunitat Valenciana?",
+  "idioma": "ca",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunitat Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto se cobra en Galicia comparado con Madrid?",
+  "idioma": "gl",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish region pays the highest wages?",
+  "idioma": "en",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "territorio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat irabazten da soldata Euskadin?",
+  "idioma": "eu",
+  "tabla": "economia_salarios_ccaa",
+  "medida": "salario_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué sector aporta más a la economía española?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente trabaja en comercio, transporte y hostelería?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Comercio, transporte y hostelería"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del empleo es de la construcción?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_empleo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "productividad de cada trabajador en el sector financiero",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "productividad_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Finanzas y seguros"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector es más productivo por ocupado?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "productividad_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "peso del campo y la pesca en la economía",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Agricultura y pesca"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha perdido peso la industria desde 1995?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1995,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y energía"
+  }
+ },
+ {
+  "pregunta": "evolución del empleo en agricultura",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Agricultura y pesca"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos asalariados hay en administración, educación y sanidad?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "asalariados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Administración, educación y sanidad"
+  }
+ },
+ {
+  "pregunta": "actividades inmobiliarias valor añadido en millones",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "vab_nominal_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Inmobiliarias"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector crece más?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "crecimiento_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "ocupados por cada mil habitantes en servicios de información y comunicaciones",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Información y comunicaciones"
+  }
+ },
+ {
+  "pregunta": "peso de las manufacturas en el valor añadido",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Manufacturas"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector emplea a menos gente?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "aportación del turismo y ocio (ocio y otros servicios) al PIB",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Ocio y otros servicios"
+  }
+ },
+ {
+  "pregunta": "¿En qué año pesó más la construcción en la economía?",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "valor añadido real de las actividades profesionales en 2019",
+  "idioma": "es",
+  "tabla": "economia_sectores",
+  "medida": "vab_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Actividades profesionales"
+  }
+ },
+ {
+  "pregunta": "Quin sector té més pes en l'economia espanyola?",
+  "idioma": "ca",
+  "tabla": "economia_sectores",
+  "medida": "peso_vab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas persoas traballan na industria en España?",
+  "idioma": "gl",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "sector": "Industria y energía"
+  }
+ },
+ {
+  "pregunta": "Which sector employs the most people in Spain?",
+  "idioma": "en",
+  "tabla": "economia_sectores",
+  "medida": "ocupados_miles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los estudiantes de bachillerato hace FP?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay más alumnos de formación profesional en España o en la media de Europa?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuántos chavales estudian ciclos formativos en España",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido la FP desde 2013?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución del alumnado de formación profesional",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año hubo más gente estudiando FP?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "alumnos totales de la etapa de bachillerato y FP en España 2020",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_etapa",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de estudiantes de FP en la Unión Europea",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Estamos por debajo de la UE en alumnos de FP?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "% de alumnado en ciclos de grado medio y superior en 2018",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo España la menor proporción de alumnos en FP?",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "número de estudiantes de la UE en formación profesional",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_fp",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "formación profesional último dato",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "alumnos en total entre bachillerato y FP en Europa",
+  "idioma": "es",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_etapa",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de l'alumnat fa formació professional a Espanya?",
+  "idioma": "ca",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos alumnos estudan formación profesional en España?",
+  "idioma": "gl",
+  "tabla": "educacion_fp",
+  "medida": "alumnos_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What share of upper-secondary students are in vocational training in Spain?",
+  "idioma": "en",
+  "tabla": "educacion_fp",
+  "medida": "pct_fp",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el Estado en educación por habitante?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje del PIB se dedica a educación?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Gasta España más o menos que Europa en educación?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "gasto público en universidades",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Superior"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta la educación infantil y primaria?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Infantil y primaria"
+  }
+ },
+ {
+  "pregunta": "gasto en secundaria por habitante",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Secundaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto educativo desde 2010?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Se recortó en educación durante la crisis?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se gastó más en educación?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Y el año en que se gastó menos en educación en proporción al PIB?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "gasto en etapas postsecundarias no universitarias",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Postsecundaria no superior"
+  }
+ },
+ {
+  "pregunta": "% del PIB que gasta la UE en enseñanza superior",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Superior"
+  }
+ },
+ {
+  "pregunta": "gasto educación 2015 en millones",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero se mete en los colegios e institutos?",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "presupuesto de educación en la Unión Europea en millones",
+  "idioma": "es",
+  "tabla": "educacion_gasto",
+  "medida": "millones_eur",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "UE"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "Quant gasta Espanya en educació per habitant?",
+  "idioma": "ca",
+  "tabla": "educacion_gasto",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "Canto gasta España en educación en porcentaxe do PIB?",
+  "idioma": "gl",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "How much does Spain spend on education compared with the EU?",
+  "idioma": "en",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "Zenbat gastatzen da hezkuntzan BPGaren ehunekotan?",
+  "idioma": "eu",
+  "tabla": "educacion_gasto",
+  "medida": "pct_pib",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "funcion": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta cada estudiante al año?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta por cada universitario?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Educación superior"
+  }
+ },
+ {
+  "pregunta": "gasto por alumno de primaria en España",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta un alumno de la ESO?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ESO"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se gasta en un chaval de FP de grado medio?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "FP de grado medio"
+  }
+ },
+ {
+  "pregunta": "¿Gasta España más por alumno que la media europea?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "pps",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "gasto por estudiante de bachillerato frente a la UE",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "pps",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "Unión Europea"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Bachillerato"
+  }
+ },
+ {
+  "pregunta": "gasto en infantil por niño de 3 a 5 años",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Infantil (3-5 años)"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto por alumno desde 2012?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "evolución del gasto por universitario",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Educación superior"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo se gastó más por alumno?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "gasto por alumno como porcentaje del PIB por habitante",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "pct_pib_hab",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "¿Qué nivel educativo sale más caro por alumno?",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nivel",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto por alumno 2019 en euros corrientes",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "cuánto cuesta un estudiante de primaria en la UE",
+  "idioma": "es",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "Unión Europea"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Primaria"
+  }
+ },
+ {
+  "pregunta": "Quant costa cada alumne a l'any?",
+  "idioma": "ca",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "Canto se gasta por alumno na ESO?",
+  "idioma": "gl",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "ESO"
+  }
+ },
+ {
+  "pregunta": "How much is spent per student in Spain?",
+  "idioma": "en",
+  "tabla": "educacion_gasto_alumno",
+  "medida": "eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "Todos los niveles (de infantil a universidad)"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de jóvenes abandona los estudios pronto en España?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más abandono escolar?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos ninis hay entre 15 y 29 años?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "neet_15_29"
+  }
+ },
+ {
+  "pregunta": "porcentaje de jóvenes que ni estudian ni trabajan en Andalucía",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "neet_15_29"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de adultos de 25 a 64 tiene estudios universitarios?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "superior_25_64"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de la población adulta solo tiene estudios básicos?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "basica_25_64"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más gente con título superior?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador": "superior_25_64"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el abandono escolar desde 2008?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "evolución del abandono temprano en Canarias",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "¿En qué año fue más alto el abandono escolar en España?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "abandono escolar en la Unión Europea",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ue",
+   "nombre": "Unión Europea"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "ninis de 18 a 24 años en Madrid",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "neet_18_24"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene menos jóvenes que ni estudian ni trabajan?",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "indicador": "neet_15_29"
+  }
+ },
+ {
+  "pregunta": "gente de 25 a 64 con bachillerato o FP medio como máximo en Cataluña",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "segunda_25_64"
+  }
+ },
+ {
+  "pregunta": "abandono escolar en 2012 en Extremadura",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Extremadura"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "estudios superiores de los adultos en el País Vasco",
+  "idioma": "es",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "superior_25_64"
+  }
+ },
+ {
+  "pregunta": "Quin percentatge de joves abandona els estudis a Catalunya?",
+  "idioma": "ca",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "Cal é a taxa de abandono escolar en Galicia?",
+  "idioma": "gl",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "What is the early school leaving rate in Spain?",
+  "idioma": "en",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ },
+ {
+  "pregunta": "Eskola uztea zenbatekoa da Euskadin?",
+  "idioma": "eu",
+  "tabla": "educacion_indicadores",
+  "medida": "valor",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador": "abandono"
+  }
+ }
+]

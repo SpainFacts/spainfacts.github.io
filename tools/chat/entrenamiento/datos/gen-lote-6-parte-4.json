@@ -1,0 +1,1488 @@
+[
+ {
+  "pregunta": "¿Cuántos camiones hay matriculados?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "camion"
+  }
+ },
+ {
+  "pregunta": "autobuses en circulación",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "autobus"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos tractores y vehículos agrícolas hay?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "agricola"
+  }
+ },
+ {
+  "pregunta": "ciclomotores en España",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "ciclomotor"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos remolques hay?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "remolque"
+  }
+ },
+ {
+  "pregunta": "parque total de vehículos de España en septiembre de 2025",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": 9
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tipo de motor domina entre los coches que circulan?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "energia_etiqueta",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "coches con otra energía o sin dato",
+  "idioma": "es",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Otros / sin dato"
+  }
+ },
+ {
+  "pregunta": "Quants cotxes elèctrics circulen per Espanya?",
+  "idioma": "ca",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Eléctrico puro (BEV)"
+  }
+ },
+ {
+  "pregunta": "Cantos coches diésel circulan en España?",
+  "idioma": "gl",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia_etiqueta": "Diésel"
+  }
+ },
+ {
+  "pregunta": "How many cars are there on Spanish roads?",
+  "idioma": "en",
+  "tabla": "movilidad_parque_evolucion",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Qué coche es el más común en las calles de España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Seat Ibiza circulan?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "SEAT",
+   "modelo": "IBIZA"
+  }
+ },
+ {
+  "pregunta": "Renault Clio en circulación",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "RENAULT",
+   "modelo": "CLIO"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Golf hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "VOLKSWAGEN",
+   "modelo": "GOLF"
+  }
+ },
+ {
+  "pregunta": "Ford Focus: ¿cuántos quedan rodando?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "FORD",
+   "modelo": "FOCUS"
+  }
+ },
+ {
+  "pregunta": "¿Qué marca tiene más coches circulando?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "marca",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Tesla hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Tesla Model 3 circulan?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "TESLA",
+   "modelo": "MODEL 3"
+  }
+ },
+ {
+  "pregunta": "modelos eléctricos más extendidos",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el híbrido enchufable más común?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "phev"
+  }
+ },
+ {
+  "pregunta": "híbridos normales más habituales",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "hev"
+  }
+ },
+ {
+  "pregunta": "modelo de coche diésel más repetido",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "¿Qué coches de gasolina hay más?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "gasolina"
+  }
+ },
+ {
+  "pregunta": "modelos de coches de gas más comunes",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "gas"
+  }
+ },
+ {
+  "pregunta": "¿Qué furgoneta es la más habitual?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "moto más popular en circulación",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas Honda hay en las carreteras? (motos)",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "motocicleta",
+   "marca": "HONDA"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Dacia Sandero hay en España?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "DACIA",
+   "modelo": "SANDERO"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos Nissan Qashqai circulan?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "NISSAN",
+   "modelo": "QASHQAI"
+  }
+ },
+ {
+  "pregunta": "Opel Astra o Opel Corsa, ¿cuál hay más?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "OPEL"
+  }
+ },
+ {
+  "pregunta": "top 10 coches más abundantes del parque",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Quedan muchos Seat León?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "marca": "SEAT",
+   "modelo": "LEON"
+  }
+ },
+ {
+  "pregunta": "Quin és el cotxe més comú de les nostres carreteres?",
+  "idioma": "ca",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Cal é o coche máis habitual en España?",
+  "idioma": "gl",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Most common car model on Spanish roads",
+  "idioma": "en",
+  "tabla": "movilidad_parque_modelos",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "modelo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches hay en Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches registrados en Barcelona ciudad",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches eléctricos hay en Madrid capital?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "eléctricos en València",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos híbridos enchufables hay en Sevilla?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "phev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "41091"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches híbridos de Zaragoza",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "hev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "50297"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad grande tiene más coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "bev",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches con etiqueta CERO circulan en Barcelona?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "distintivo_cero",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches con etiqueta ECO en Málaga",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "distintivo_eco",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "29067"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches tienen la etiqueta C en Bilbao?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "distintivo_c",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "48020"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches con etiqueta B en València",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "distintivo_b",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches sin etiqueta ambiental hay en Madrid, los que no podrían entrar en la ZBE?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "sin_distintivo",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene más coches sin etiqueta?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "sin_distintivo",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches de más de 15 años hay en Sevilla?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "mas_de_15_anios",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "41091"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene el parque más viejo en proporción?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "mas_de_15_anios_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de coches enchufables por municipio, ranking",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "enchufables_pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene más coches por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos_por_1000_hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "coches por cada 1.000 habitantes en Zaragoza",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos_por_1000_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "50297"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches tiene la gente en Bilbao en proporción a los vecinos?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos_por_1000_hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "48020"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de coches sin etiqueta en Barcelona",
+  "idioma": "es",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "sin_distintivo_pct",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants cotxes hi ha a València?",
+  "idioma": "ca",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "46250"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos coches eléctricos hai en Madrid?",
+  "idioma": "gl",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "bev",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "28079"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many cars are registered in Barcelona?",
+  "idioma": "en",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "08019"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat auto daude Bilbon?",
+  "idioma": "eu",
+  "tabla": "movilidad_parque_municipio",
+  "medida": "turismos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "48020"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos coches hay en la provincia de Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más coches?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más coches eléctricos?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "coches eléctricos circulando en Barcelona provincia",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "híbridos enchufables en Valencia",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "phev"
+  }
+ },
+ {
+  "pregunta": "diésel en circulación en Sevilla",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "diesel"
+  }
+ },
+ {
+  "pregunta": "coches con etiqueta cero en Málaga",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "distintivo": "CERO"
+  }
+ },
+ {
+  "pregunta": "coches con etiqueta ECO por provincias",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "distintivo": "ECO"
+  }
+ },
+ {
+  "pregunta": "¿Dónde hay más coches sin etiqueta medioambiental?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "distintivo": "SIN"
+  }
+ },
+ {
+  "pregunta": "coches con etiqueta B en Zaragoza",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "distintivo": "B"
+  }
+ },
+ {
+  "pregunta": "coches con distintivo C en Alicante",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "distintivo": "C"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos coches de menos de 5 años hay en Madrid?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "antiguedad": "0-4"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene el parque de coches más viejo, con más de 20 años?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "antiguedad": "20+"
+  }
+ },
+ {
+  "pregunta": "coches de entre 10 y 14 años en Cádiz",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "antiguedad": "10-14"
+  }
+ },
+ {
+  "pregunta": "coches de 15 a 19 años en Lugo",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lugo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "antiguedad": "15-19"
+  }
+ },
+ {
+  "pregunta": "coches de entre 5 y 9 años en Cantabria",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cantabria"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "antiguedad": "5-9"
+  }
+ },
+ {
+  "pregunta": "¿Cuántas motos hay en Illes Balears?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "motocicleta"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más camiones?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "camion"
+  }
+ },
+ {
+  "pregunta": "furgonetas en Murcia",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "furgoneta"
+  }
+ },
+ {
+  "pregunta": "tractores y maquinaria agrícola en Lleida",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Lleida"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "agricola"
+  }
+ },
+ {
+  "pregunta": "coches de gasolina en Bizkaia",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "gasolina"
+  }
+ },
+ {
+  "pregunta": "¿Qué provincia tiene menos coches?",
+  "idioma": "es",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Quants cotxes hi ha a la província de Girona?",
+  "idioma": "ca",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ },
+ {
+  "pregunta": "Cantos coches eléctricos hai en Pontevedra?",
+  "idioma": "gl",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Pontevedra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "Which province has the most electric cars?",
+  "idioma": "en",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "turismo",
+   "energia": "bev"
+  }
+ },
+ {
+  "pregunta": "Zenbat auto dago Gipuzkoan?",
+  "idioma": "eu",
+  "tabla": "movilidad_parque_provincia",
+  "medida": "vehiculos",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "turismo"
+  }
+ }
+]

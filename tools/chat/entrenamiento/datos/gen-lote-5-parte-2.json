@@ -1,0 +1,2148 @@
+[
+ {
+  "pregunta": "¿Cuánto debe el Ayuntamiento de Madrid?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad grande está más endeudada?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda ayuntamiento valencia",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto debe cada vecino de Barcelona por la deuda del ayuntamiento?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur_hab_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento de las grandes ciudades tiene menos deuda por habitante?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la deuda del consistorio de Zaragoza?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo tuvo más deuda el Ayuntamiento de Madrid, cuál fue el pico?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "fecha",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado la deuda municipal de Madrid desde 2014?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2014,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda de Sevilla ayuntamiento a finales de 2019",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto debe el ayuntamiento de Valladolid en euros reales descontando la inflación?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valladolid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Debe más Málaga o Sevilla?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Mi alcalde dice que hemos bajado la deuda: ¿cuánto debe el ayuntamiento de Bilbao hoy comparado con 2010?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2010,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto debe Palma de Mallorca en deuda municipal?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda viva Las Palmas de Gran Canaria ayuntamiento 2023",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Las Palmas de Gran Canaria"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué deuda tenía el ayuntamiento de Murcia en 2012?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2012
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto debe el ayuntamiento de Córdoba por habitante?",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur_hab_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Córdoba"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant deu l'Ajuntament de Barcelona?",
+  "idioma": "ca",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto debe o concello de Madrid?",
+  "idioma": "gl",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much debt does the city council of Valencia have?",
+  "idioma": "en",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat zor du Bilboko udalak?",
+  "idioma": "eu",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda alicante ayuntamiento último trimestre",
+  "idioma": "es",
+  "tabla": "local_deuda_municipio",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alicante/Alacant"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto deben los ayuntamientos y diputaciones de Barcelona?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más deuda local?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué diputación debe más dinero?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_diputaciones_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda de los ayuntamientos de la provincia de Valencia 2020",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_ayuntamientos_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto debe la Diputación de Sevilla?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_diputaciones_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado la deuda local en Madrid desde 2008?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado la deuda de las entidades locales de Alicante entre 2012 y 2024?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2012,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué provincia deben más los ayuntamientos por habitante?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene sus ayuntamientos más saneados, con menos deuda por vecino?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda de mancomunidades, consorcios y demás entes locales en Cádiz",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_resto_eell_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Cádiz"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de endeudamiento local en Navarra?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Navarra"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué parte de la deuda de A Coruña es de los ayuntamientos y qué parte de la diputación?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "A Coruña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda ayuntamientos Bizkaia 2015",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_ayuntamientos_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Bizkaia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quina província té els ajuntaments més endeutats?",
+  "idioma": "ca",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_ayuntamientos_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto deben os concellos da provincia de Pontevedra?",
+  "idioma": "gl",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_ayuntamientos_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Pontevedra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much debt do local governments in Malaga province have?",
+  "idioma": "en",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat zor dute Gipuzkoako toki erakundeek?",
+  "idioma": "eu",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "deuda publica local de la provincia de Toledo en 2025",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Toledo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto deben los pueblos de Zamora?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_ayuntamientos_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Zamora"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Y en euros reales, sin inflación, cuánta deuda local tiene Murcia?",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Murcia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Voy a opositar a secretario de ayuntamiento y quiero saber cuánta deuda tienen las entidades locales de Las Palmas",
+  "idioma": "es",
+  "tabla": "local_deuda_provincia",
+  "medida": "deuda_eur",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero público se gasta en contratos con medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad paga más a los medios por contratos, por habitante?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos contratos firmó la Junta de Andalucía con medios en 2023?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "n_contratos",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "gasto en publicidad pagada a periódicos por contratos Comunidad de Madrid",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "publicidad_inserciones"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se paga en patrocinios de eventos a los medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "categoria": "patrocinio_eventos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pagan los ayuntamientos a la prensa en contratos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto han pagado las empresas públicas a los medios en 2022?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "empresa_publica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el dinero de los contratos con la prensa en Cataluña?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Gobiernan más gastadores en medios los del PSOE o los del PP?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad gasta menos por habitante en contratos con medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el gasto en contratos con medios entre 2019 y 2025?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Contratos grises con medios en Valencia: ¿cuánto importan?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_gris_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos de suscripciones a servicios de noticias de agencia pagados por el Estado",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "estatal",
+   "categoria": "suscripciones_servicios_informativos"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año de más gasto en contratos con medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Estoy investigando para un reportaje: ¿cuánto dinero en contratos con medios ha repartido el Gobierno vasco en 2024?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "autonomico"
+  }
+ },
+ {
+  "pregunta": "importe nominal contratos medios Galicia 2021",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_nominal",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos publicos adjudicados a medios por las comunidades autonomas, 2020",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_autonomicas_eur_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants diners donen els ajuntaments en contractes als mitjans a Catalunya?",
+  "idioma": "ca",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "Canto diñeiro paga a Xunta en contratos cos medios?",
+  "idioma": "gl",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "autonomico"
+  }
+ },
+ {
+  "pregunta": "How much public money goes into media contracts in Navarre?",
+  "idioma": "en",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Foral de Navarra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat diru publiko doa komunikabideekin egindako kontratuetara Euskadin?",
+  "idioma": "eu",
+  "tabla": "medios_contratos_anual",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos contratos con medios firmó Canarias en 2025 por habitante?",
+  "idioma": "es",
+  "tabla": "medios_contratos_anual",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuáles son los mayores contratos de patrocinio con medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rango",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el contrato de patrocinio más caro de 2023?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": {
+   "sobre": "rango",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué contratos grandes ha firmado el Estado con empresas de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "estatal"
+  }
+ },
+ {
+  "pregunta": "mayores contratos de ayuntamientos con medios",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de comunicación se lleva los contratos de eventos más gordos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos de patrocinio adjudicados al Grupo Prisa",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos euros pagó un ayuntamiento a Atresmedia por una gala?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Atresmedia-Planeta",
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobró COPE por patrocinios públicos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "COPE-Ábside Media"
+  }
+ },
+ {
+  "pregunta": "¿Qué eventos patrocinan las comunidades con dinero público en medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "autonomico"
+  }
+ },
+ {
+  "pregunta": "contratos mayores a medios públicos autonómicos",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Medios públicos autonómicos"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero reciben los medios privados en grandes contratos de eventos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "titularidad": "privada"
+  }
+ },
+ {
+  "pregunta": "¿Y los medios públicos, cuánto reciben en esos contratos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "titularidad": "publica"
+  }
+ },
+ {
+  "pregunta": "principales contratos de las empresas públicas con medios en 2024",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nivel": "empresa_publica"
+  }
+ },
+ {
+  "pregunta": "¿Qué contrato de patrocinio con Vocento fue el más caro?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rango",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "Grupo Vocento"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pagó el ayuntamiento por patrocinar el congreso organizado por Unidad Editorial?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Unidad Editorial"
+  }
+ },
+ {
+  "pregunta": "¿Cómo han cambiado los mayores contratos con medios entre 2019 y 2025?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos a Europa Press 2022",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Europa Press"
+  }
+ },
+ {
+  "pregunta": "¿Qué importe tuvieron los contratos de 2018 a medios locales independientes?",
+  "idioma": "es",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Medios locales independientes"
+  }
+ },
+ {
+  "pregunta": "Quins són els contractes de patrocini més grans amb mitjans catalans?",
+  "idioma": "ca",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "CCMA (Corporació Catalana de Mitjans Audiovisuals)"
+  }
+ },
+ {
+  "pregunta": "Cales son os contratos de patrocinio máis caros con medios en Galicia?",
+  "idioma": "gl",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Voz de Galicia"
+  }
+ },
+ {
+  "pregunta": "Which are the largest sponsorship contracts between public bodies and media companies?",
+  "idioma": "en",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rango",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zein dira komunikabideekin sinatutako babes-kontratu handienak?",
+  "idioma": "eu",
+  "tabla": "medios_contratos_ejemplos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "rango",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero público ha recibido el Grupo Prisa por contratos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de comunicación cobra más de las administraciones por contratos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos públicos de Atresmedia en 2023",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Atresmedia-Planeta"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos contratos tiene Vocento con ayuntamientos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "n_contratos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Vocento",
+   "nivel": "local"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto recibió RTVE en contratos de las empresas públicas?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "RTVE",
+   "nivel": "empresa_publica"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado lo que cobra Prensa Ibérica de las administraciones?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Prensa Ibérica"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de medios se lleva más en publicidad de contratos públicos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_publicidad_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobra la Agencia EFE por suscripciones del Estado?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_suscripciones_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Agencia EFE"
+  }
+ },
+ {
+  "pregunta": "patrocinio y eventos: ¿qué grupo cobra más?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_patrocinio_eventos_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobran los medios privados frente a los públicos en contratos?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "titularidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobró El Español de dinero público en 2024?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "El Español"
+  }
+ },
+ {
+  "pregunta": "¿Ha subido lo que gana Unidad Editorial con contratos públicos desde 2019?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Unidad Editorial"
+  }
+ },
+ {
+  "pregunta": "suplementos y revistas especiales pagados con dinero publico a Condé Nast",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_especiales_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Condé Nast"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año que más cobró Mediaset España de las administraciones?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "grupo": "Mediaset España"
+  }
+ },
+ {
+  "pregunta": "¿Qué cantidad por habitante representan los contratos con el Grupo Godó?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Godó"
+  }
+ },
+ {
+  "pregunta": "Pagos del Estado a OKDiario por contratos",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "OKDiario",
+   "nivel": "estatal"
+  }
+ },
+ {
+  "pregunta": "dinero de contratos de eldiario.es",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "eldiario.es"
+  }
+ },
+ {
+  "pregunta": "Quant cobra el Grup Godó de les administracions?",
+  "idioma": "ca",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Godó"
+  }
+ },
+ {
+  "pregunta": "Canto cobra a Voz de Galicia das administracións?",
+  "idioma": "gl",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Voz de Galicia"
+  }
+ },
+ {
+  "pregunta": "How much public money does the Prisa group receive in contracts?",
+  "idioma": "en",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Grupo Prisa"
+  }
+ },
+ {
+  "pregunta": "Zenbat diru jasotzen du EITB-k administrazioen kontratuetatik?",
+  "idioma": "eu",
+  "tabla": "medios_contratos_grupos",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "EITB"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos contratos menores se dieron a Libertad Digital?",
+  "idioma": "es",
+  "tabla": "medios_contratos_grupos",
+  "medida": "n_contratos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Libertad Digital"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto gasta el ayuntamiento de Madrid en contratos con medios de comunicación?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento paga más a la prensa por habitante?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos con medios ayuntamiento de Sevilla 2022",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos contratos con medios firmó el Ayuntamiento de Valencia?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "n_contratos",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "València"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Los alcaldes del PP gastan más en medios por habitante que los del PSOE?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "eur_hab_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "familia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto paga en patrocinios de eventos con medios el ayuntamiento de Zaragoza?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_patrocinio_eventos_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el gasto de Barcelona ciudad en contratos con medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cobran los medios de Málaga ciudad del ayuntamiento?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "ayuntamientos que más gastan en publicidad en prensa en 2024",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año que más gastó en medios el ayuntamiento de Vigo?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "anio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el dinero que da el ayuntamiento de Bilbao a los medios desde 2019?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "mi pueblo es Valdepeñas, ¿cuánto dinero ha dado el ayuntamiento a medios locales?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Valdepeñas"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "importe nominal contratos medios ayuntamiento Granada",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_nominal",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos de ayuntamientos con medios en el municipio de Gijón por habitante",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "eur_hab_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Gijón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos ayuntamientos gobernados por Vox pagan a medios?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Vox"
+  }
+ },
+ {
+  "pregunta": "gasto de ayuntamientos de Compromís en medios",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "familia": "Compromís"
+  }
+ },
+ {
+  "pregunta": "¿Qué ayuntamiento tiene contratos con medios sin que se sepa su partido, con más dinero?",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_publicos_eur_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant gasta l'Ajuntament de Barcelona en contractes amb mitjans?",
+  "idioma": "ca",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto gasta o Concello de Vigo en contratos con medios?",
+  "idioma": "gl",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much does Seville city council spend on media contracts?",
+  "idioma": "en",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat gastatzen du Donostiako udalak komunikabideetan?",
+  "idioma": "eu",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Donostia/San Sebastián"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "contratos medios ayuntamiento oviedo 2025",
+  "idioma": "es",
+  "tabla": "medios_contratos_municipios",
+  "medida": "importe_eur_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Oviedo"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]

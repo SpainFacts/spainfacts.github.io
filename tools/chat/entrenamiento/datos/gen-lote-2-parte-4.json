@@ -1,0 +1,1897 @@
+[
+ {
+  "pregunta": "¿Cuántos diputados del PP alquilan pisos?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué partido tiene más caseros entre sus diputados?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de diputados del PSOE con dos viviendas",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_dos_viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "PSOE"
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo del Congreso tiene menos propietarios?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_sin_urbanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos diputados de Vox tienen casa de alquiler?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Vox"
+  }
+ },
+ {
+  "pregunta": "mediana de inmuebles que tienen los diputados de Sumar",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "mediana_inmuebles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Sumar"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobran de alquileres de media los diputados del PP?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "media_alquiler_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "PP"
+  }
+ },
+ {
+  "pregunta": "¿Qué diputados ingresan más por alquileres, los del PSOE o los del PP?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "media_alquiler_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "porcentaje de diputados de ERC que tienen alguna vivienda alquilada",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "ERC"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados hay en total que alquilan?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Total"
+  }
+ },
+ {
+  "pregunta": "diputados de Junts con dos o más pisos urbanos",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_dos_urbanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Junts"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados del PNV han presentado declaración de bienes válida?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_validos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "PNV"
+  }
+ },
+ {
+  "pregunta": "¿Quién tiene más casas, la izquierda o la derecha del Congreso?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "mediana_inmuebles",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "mediana de alquiler que declaran los diputados de EH Bildu",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "mediana_alquiler_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "EH Bildu"
+  }
+ },
+ {
+  "pregunta": "porcentaje de diputados del Congreso que son caseros",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Total"
+  }
+ },
+ {
+  "pregunta": "cuantos diputados del grupo mixto no tienen ningun inmueble urbano",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_sin_urbanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Mixto"
+  }
+ },
+ {
+  "pregunta": "número de pisos equivalentes que tienen los diputados de Vox",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_dos_equivalentes",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "Vox"
+  }
+ },
+ {
+  "pregunta": "Quants diputats del PSOE lloguen pisos?",
+  "idioma": "ca",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "PSOE"
+  }
+ },
+ {
+  "pregunta": "Which party has the most landlords among its MPs?",
+  "idioma": "en",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "pct_alquila",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "grupo",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat diputatuk dute bi etxebizitza EH Bilduren taldean?",
+  "idioma": "eu",
+  "tabla": "diputados_inmuebles_grupos",
+  "medida": "n_dos_viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "grupo": "EH Bildu"
+  }
+ },
+ {
+  "pregunta": "¿Los diputados alquilan más que el resto de españoles?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "porcentaje de contribuyentes que alquilan un inmueble",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "tramo": "Total",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos declarantes con ingresos altos (más de 601.000 euros) alquilan pisos?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF, rendimientos Mayor de 601 mil €",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Quién tiene más pisos de alquiler, un mileurista o un rico?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "colectivo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "porcentaje de gente con inmuebles a su disposición en el IRPF",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "indicador_id": "inmuebles_a_disposicion"
+  }
+ },
+ {
+  "pregunta": "qué porcentaje de los diputados alquila frente a los que ganan entre 60.000 y 150.000",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ingresan de media por alquiler los declarantes de entre 30 y 60 mil euros?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "media_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF, rendimientos (30 - 60] mil €",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "evolución del porcentaje de contribuyentes que alquilan desde 2019",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el número de casas alquiladas por los declarantes desde 2019?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "n",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Qué tramo de renta tiene más caseros?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "tramo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "porcentaje de rentas bajas (menos de 12.000 euros) que alquilan",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF, rendimientos (6 - 12] mil €",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "ingresos medios por alquiler de los diputados frente a la población",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "media_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": {
+   "sobre": "colectivo",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "número total de declarantes del IRPF en 2022",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "tramo": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Son los diputados más caseros que los españoles con sus mismos ingresos?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "alquiler medio declarado por quienes cobran más de 150.000 euros",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "media_real_eur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF, rendimientos (150 - 601] mil €",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "Els diputats lloguen més que la resta de contribuents?",
+  "idioma": "ca",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "Do MPs rent out property more than ordinary taxpayers?",
+  "idioma": "en",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "Cantos contribuíntes aluga inmobles en 2021?",
+  "idioma": "gl",
+  "tabla": "diputados_inmuebles_poblacion",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2021
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "colectivo": "Declarantes IRPF (todos)",
+   "indicador_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los diputados son caseros?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados tienen dos viviendas o más?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_viviendas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados no tienen ningún inmueble urbano?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "sin_urbanos"
+  }
+ },
+ {
+  "pregunta": "porcentaje de diputados con dos o más inmuebles urbanos, contando garajes",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_urbanos"
+  }
+ },
+ {
+  "pregunta": "número de diputados que alquilan o tienen dos pisos",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila_o_dos_viviendas"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos inmuebles tiene de media un diputado?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "media_urbanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_urbanos"
+  }
+ },
+ {
+  "pregunta": "mediana de propiedades urbanas de los parlamentarios",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "mediana_urbanos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados hay y cuántos presentaron declaración válida?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_validos",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "porcentaje de congresistas con propiedades equivalentes a dos inmuebles completos",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_equivalentes"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos de los 350 diputados tienen un piso en alquiler?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "porcentaje de diputados sin propiedades",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "sin_urbanos"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados del Congreso son propietarios de más de un piso?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_viviendas"
+  }
+ },
+ {
+  "pregunta": "número de diputados que forman parte de la muestra de declaraciones de bienes",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_diputados",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos diputados viven de las rentas de sus casas?",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "qué definicion de casero da mas diputados",
+  "idioma": "es",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "definicion_id",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin percentatge de diputats té dos habitatges?",
+  "idioma": "ca",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "pct",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_viviendas"
+  }
+ },
+ {
+  "pregunta": "How many MPs own more than one home?",
+  "idioma": "en",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "dos_viviendas"
+  }
+ },
+ {
+  "pregunta": "Cantos deputados teñen un piso aluguer?",
+  "idioma": "gl",
+  "tabla": "diputados_inmuebles_resumen",
+  "medida": "n_cumplen",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "definicion_id": "alquila"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto produce cada español de media al año?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Estamos por encima o por debajo de la media europea en riqueza por persona?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué país de los grandes tiene más riqueza por habitante, Alemania o Francia?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "nombre",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "PIB per cápita de Italia comparado con la UE",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Italia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el PIB por persona en España desde 2000?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2000,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolución de la renta per cápita española",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué año tuvimos más PIB por habitante?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuándo se hundió más la riqueza por habitante en España?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "PIB por habitante en 2008 en euros de hoy",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2008
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado España frente a Portugal en nivel de vida?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Portugal"
+  },
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hemos convergido con la UE desde 1995?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    1995,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "índice de riqueza de Alemania respecto a Europa",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Alemania"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué tan ricos somos comparados con Francia?",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "Francia"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "nivel de renta por persona en España 2019",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuanto gana cada habitante en pib en España",
+  "idioma": "es",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és el PIB per habitant d'Espanya?",
+  "idioma": "ca",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o PIB por habitante de España respecto á UE?",
+  "idioma": "gl",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Is Spain richer per person than the EU average?",
+  "idioma": "en",
+  "tabla": "economia_pib_per_capita",
+  "medida": "indice_ue",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat da Espainiako BPG per capita?",
+  "idioma": "eu",
+  "tabla": "economia_pib_per_capita",
+  "medida": "real_eur",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo va la economía española este trimestre?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el PIB respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto vale el PIB de España en millones?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "cuánto consumen las familias españolas",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Consumo de los hogares"
+  }
+ },
+ {
+  "pregunta": "gasto de las administraciones públicas en consumo",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Consumo público"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto exporta España en lo que va de año?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Exportaciones"
+  }
+ },
+ {
+  "pregunta": "importaciones de España en el último trimestre",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "nominal_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Importaciones"
+  }
+ },
+ {
+  "pregunta": "¿Qué peso tiene la inversión (formación de capital) en el PIB?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Inversión"
+  }
+ },
+ {
+  "pregunta": "peso de las exportaciones en el PIB",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "pct_pib",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Exportaciones"
+  }
+ },
+ {
+  "pregunta": "evolución del PIB por habitante desde 2008",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "por_habitante_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cayó el PIB en 2020 por la pandemia?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor trimestre de la economía española?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuál ha sido el mejor trimestre de crecimiento?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el consumo de los hogares desde 2019?",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Consumo de los hogares"
+  }
+ },
+ {
+  "pregunta": "PIB trimestral nominal en euros corrientes",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "nominal_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "crecimiento de la inversión interanual",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "Inversión"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto crece la economía? dato trimestral",
+  "idioma": "es",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "Com ha evolucionat el PIB d'Espanya trimestre a trimestre?",
+  "idioma": "ca",
+  "tabla": "economia_pib_trimestral",
+  "medida": "real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "Canto creceu a economía española este trimestre?",
+  "idioma": "gl",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "How fast is the Spanish economy growing?",
+  "idioma": "en",
+  "tabla": "economia_pib_trimestral",
+  "medida": "interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "nombre": "PIB"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra de media un trabajador en España al mes?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ganan los currantes de la construcción?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "sueldo medio en la industria",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobran los trabajadores de servicios?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Servicios"
+  }
+ },
+ {
+  "pregunta": "salario de los que trabajan a media jornada",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Tiempo parcial",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "sueldo de la gente con jornada completa",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Tiempo completo",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto subieron los sueldos en el último año, descontando la inflación?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "subida nominal de los salarios respecto al año anterior",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "interanual_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector paga mejor?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "jornada": "Todas"
+  }
+ },
+ {
+  "pregunta": "salario en el segundo trimestre de 2023",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el sueldo medio desde 2008?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "evolución del salario ordinario sin pagas extra",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_ordinario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo han cobrado más los trabajadores en términos reales?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuándo bajaron más los sueldos?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "interanual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "salario ordinario en euros corrientes en servicios",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_ordinario",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Servicios"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra un trabajador de la construcción a tiempo completo?",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Tiempo completo",
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "Quin és el sou mitjà a Espanya?",
+  "idioma": "ca",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "Canto cobran de media os traballadores cada trimestre?",
+  "idioma": "gl",
+  "tabla": "economia_salarios",
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "What is the average monthly wage in Spain?",
+  "idioma": "en",
+  "tabla": "economia_salarios",
+  "medida": "salario_total_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "cuanto cobra la gente en españa, tabla trimestral",
+  "idioma": "es",
+  "tabla": "economia_salarios",
+  "tablas_validas": [
+   "economia_salarios_anual"
+  ],
+  "medida": "salario_total",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el sueldo medio anual en España?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha crecido el salario real en 2025?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "crecimiento_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "salario medio mensual en 2015",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2015
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "¿Han perdido poder adquisitivo los sueldos desde 2008?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2008,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "evolución del sueldo en el sector servicios con la inflación descontada",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Servicios"
+  }
+ },
+ {
+  "pregunta": "¿En qué año se cobró más en la industria?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Industria"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cobra al año alguien de la construcción?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_nominal",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Todas",
+   "sector": "Construcción"
+  }
+ },
+ {
+  "pregunta": "¿Qué sector tiene el sueldo más bajo?",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": {
+   "sobre": "sector",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "jornada": "Todas"
+  }
+ },
+ {
+  "pregunta": "sueldo anual a tiempo parcial",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Tiempo parcial",
+   "sector": "Total"
+  }
+ },
+ {
+  "pregunta": "sueldo anual a jornada completa",
+  "idioma": "es",
+  "tabla": "economia_salarios_anual",
+  "medida": "salario_anual_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo"
+  },
+  "ranking": null,
+  "filtros": {
+   "jornada": "Tiempo completo",
+   "sector": "Total"
+  }
+ }
+]

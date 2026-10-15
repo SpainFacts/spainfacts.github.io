@@ -1,0 +1,2603 @@
+[
+ {
+  "pregunta": "¿Cuántas noches de hotel se contaron en Andalucía el pasado agosto?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad llenó más sus hoteles en julio de 2025?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-07"
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas plazas hoteleras tiene Cataluña?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "plazas_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué mes se llenan más los hoteles de Baleares?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "ocupacion_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han ido mes a mes las pernoctaciones en Canarias este año?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "turistas extranjeros Madrid marzo 2024",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "turistas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-03"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas internacionales por cada mil habitantes recibió la Comunidad Valenciana en agosto de 2023?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "turistas_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ocupación tienen los apartamentos turísticos de Canarias este mes?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "ocupacion_apart",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos días se cerraron los hoteles en abril de 2020? Quiero ver las pernoctaciones de Cataluña.",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": "2020-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cayeron las noches de hotel en Baleares entre agosto de 2019 y agosto de 2020?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el mes con más gasto de turistas extranjeros en Cataluña?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "gasto_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué comunidad hay más noches de hotel por habitante este último mes?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "comunidad",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes pernoctacions hoteleres hi va haver a Catalunya el juliol de 2024?",
+  "idioma": "ca",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas prazas hoteleiras hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "plazas_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many hotel overnight stays were there in the Balearic Islands last August?",
+  "idioma": "en",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2026
+   ],
+   "mes": "2026-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "evolucion mensual ocupacion hotelera Andalucia",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "ocupacion_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas noches se duerme en Valencia en hoteles en enero frente a agosto de 2025?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gastaron los turistas en Madrid el mes de diciembre de 2024 en euros actuales?",
+  "idioma": "es",
+  "tabla": "turismo_ccaa_mensual",
+  "medida": "gasto_real_meur",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-12"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas extranjeros llegaron a España el último mes?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas ha recibido España en los últimos doce meses?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas_12m",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos guiris vinieron en agosto de 2024?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han crecido las llegadas de turistas respecto al año pasado?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas_interanual",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál ha sido el mes con más turistas de la historia?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta el turismo extranjero acumulado en el último año?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "gasto_real_12m",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto dinero dejaron los turistas en España en julio de 2023?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "gasto_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas noches de hotel se registraron en España en abril de 2025?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "pernoct_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha ido mes a mes la ocupación de los hoteles desde 2022?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2022,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "turistas españa abril 2020 coronavirus",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2020
+   ],
+   "mes": "2020-04"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto pesa el gasto de los turistas en la economía en el último año?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "gasto_pct_pib_12m",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos turistas por habitante han llegado en los últimos doce meses?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas_por_hab_12m",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto gasta de media por persona cada turista extranjero este mes?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "gasto_medio_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el gasto diario de un turista desde antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "gasto_medio_diario_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2019,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quants turistes han vingut a Espanya aquest últim mes?",
+  "idioma": "ca",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantos turistas visitaron España en xullo de 2025?",
+  "idioma": "gl",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2025
+   ],
+   "mes": "2025-07"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "What was the hotel occupancy in Spain last month?",
+  "idioma": "en",
+  "tabla": "turismo_mensual",
+  "medida": "ocupacion_hotel",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ocupación tuvieron los apartamentos turísticos en el último mes?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "ocupacion_apart",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas pernoctaciones en apartamentos hubo en agosto de 2022?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "pernoct_apart",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2022
+   ],
+   "mes": "2022-08"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué meses del año vienen menos turistas a España?",
+  "idioma": "es",
+  "tabla": "turismo_mensual",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "mes",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿De qué país vienen más turistas a España?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos británicos visitaron España el último año?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Reino Unido"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos alemanes vinieron de vacaciones a España en 2019?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2019
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Alemania"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de turistas es francés?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "cuota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Francia"
+  }
+ },
+ {
+  "pregunta": "¿Qué nacionalidad gasta más por persona cuando nos visita?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "gasto_medio_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué países han vuelto a superar los niveles de turistas de antes de la pandemia?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "var_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Vienen más o menos estadounidenses que antes del covid?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "var_2019",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Estados Unidos de América"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el número de turistas rusos?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Rusia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto dinero dejan los turistas de Países Bajos en España?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "gasto_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Países Bajos"
+  }
+ },
+ {
+  "pregunta": "turistas italianos españa 2023",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Italia"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el número de visitantes portugueses desde 2015?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Portugal"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con más turistas británicos?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Reino Unido"
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de los turistas extranjeros viene de los países nórdicos?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "cuota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Países Nórdicos"
+  }
+ },
+ {
+  "pregunta": "D'on venen més turistes a Espanya? Quin país en té la quota més gran?",
+  "idioma": "ca",
+  "tabla": "turismo_paises",
+  "medida": "cuota",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "De que países veñen máis turistas a España?",
+  "idioma": "gl",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many French tourists came to Spain last year?",
+  "idioma": "en",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Francia"
+  }
+ },
+ {
+  "pregunta": "Zein herrialdetatik datoz turista gehien Espainiara?",
+  "idioma": "eu",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "pais",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "cuanto gastan los belgas cuando vienen a españa",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "gasto_medio_persona_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Bélgica"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos suizos nos visitaron en 2022?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "turistas",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Suiza"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos irlandeses viajan a España cada año y cuánto gastan?",
+  "idioma": "es",
+  "tabla": "turismo_paises",
+  "medida": "gasto_real_meur",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "pais": "Irlanda"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pisos turísticos hay en España?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué provincia tiene más pisos turísticos por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas de uso turístico hay en Málaga?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene más viviendas turísticas respecto a su población?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas plazas de alojamiento ofrecen los pisos turísticos en Baleares?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "plazas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han crecido los pisos turísticos en el último año?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "var_interanual",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las viviendas de Canarias son turísticas?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "pct_viviendas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los apartamentos turísticos en Cataluña desde 2020?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas turísticas había en Madrid en noviembre de 2023?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2023
+   ],
+   "mes": "2023-11"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos turísticos hay en Alicante por mil vecinos?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas_1000hab",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Alicante"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pisos turisticos por provincia ranking",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más apartamentos de alquiler vacacional, en Andalucía o en la Comunidad Valenciana?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos de Airbnb hay en Girona?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Girona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha aumentado desde 2021 el alquiler turístico en Las Palmas?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Las Palmas"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quantes vivendes d'ús turístic hi ha a Catalunya?",
+  "idioma": "ca",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cantas vivendas turísticas hai en Galicia?",
+  "idioma": "gl",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Galicia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How many tourist apartments are there in the Balearic Islands per 1,000 inhabitants?",
+  "idioma": "en",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas_1000hab",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat bizitza turistiko daude Gipuzkoan?",
+  "idioma": "eu",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el semestre con más pisos turísticos en España?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas plazas turísticas en viviendas hay en Santa Cruz de Tenerife?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas",
+  "medida": "plazas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Santa Cruz de Tenerife"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipio tiene más pisos turísticos por habitante?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas turísticas hay en Barcelona capital?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántos pisos de alquiler vacacional hay en el municipio de Madrid?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad de España tiene más apartamentos turísticos en total?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué porcentaje de las casas de Palma son para turistas?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "pct_viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas plazas turísticas en viviendas hay en Barcelona?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "plazas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué puesto está Madrid en pisos turísticos por habitante entre todos los municipios?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "puesto",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "pisos turisticos municipio Naut Aran",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Naut Aran"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué pueblos hay más pisos turísticos que vecinos, proporcionalmente?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios tienen la mayor proporción de vivienda turística respecto al total de viviendas?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "pct_viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto han crecido los pisos turísticos en Palma desde 2021?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2021,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo han evolucionado los alquileres turísticos en Barcelona?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin municipi té més habitatges d'ús turístic per cada mil habitants?",
+  "idioma": "ca",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Cal é o municipio con máis pisos turísticos en total?",
+  "idioma": "gl",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Which Spanish town has the highest number of holiday rentals per capita?",
+  "idioma": "en",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zer udalerritan daude etxebizitza turistiko gehien biztanleko?",
+  "idioma": "eu",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas turísticas había en Barcelona en mayo de 2024?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2024
+   ],
+   "mes": "2024-05"
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "vivendas turisticas en Margalef",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Margalef"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué municipios del interior tienen un porcentaje alto de casas dedicadas a turistas?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "pct_viviendas",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Hay muchos pisos turísticos en el municipio de Palma por cada 1.000 vecinos?",
+  "idioma": "es",
+  "tabla": "turismo_viviendas_municipios",
+  "medida": "viviendas_1000hab",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánta gente está en paro en España, en porcentaje?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cuál es la tasa de paro actual?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cuál era la tasa de desempleo en el primer trimestre de 2019?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "mes",
+   "anios": [
+    2019
+   ],
+   "mes": "2019T1"
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha bajado el paro desde 2013?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2013,
+    2025
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el peor año de paro de la historia reciente?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el desempleo desde 2008?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2008,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Qué porcentaje de jóvenes de 16 a 19 años está sin curro?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. De 16 a 19 años. "
+  }
+ },
+ {
+  "pregunta": "paro mujeres españa ultimo trimestre",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Mujeres. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Hay más paro entre los hombres o entre las mujeres?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "serie",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Hombres. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Qué tasa de paro tienen los de 20 a 24 años?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. De 20 a 24 años. "
+  }
+ },
+ {
+  "pregunta": "¿Cuál es el paro de los mayores de 55 a 59 años?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Tasa de paro de la población. Total Nacional. Ambos sexos. De 55 a 59 años. "
+  }
+ },
+ {
+  "pregunta": "¿Qué paro hay entre los hombres de 25 a 29 años?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Tasa de paro de la población. Total Nacional. Hombres. De 25 a 29 años. "
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el paro de las mujeres de 30 a 34 años?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Tasa de paro de la población. Total Nacional. Mujeres. De 30 a 34 años. "
+  }
+ },
+ {
+  "pregunta": "¿Qué grupo de edad sufre más el paro?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "serie",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quin és l'atur entre els joves de 20 a 24 anys?",
+  "idioma": "ca",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. De 20 a 24 años. "
+  }
+ },
+ {
+  "pregunta": "Cal é a taxa de paro das mulleres?",
+  "idioma": "gl",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Mujeres. Total. "
+  }
+ },
+ {
+  "pregunta": "What is Spain's unemployment rate right now?",
+  "idioma": "en",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "Zein da langabezia-tasa Espainian?",
+  "idioma": "eu",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "desempleo españa 2024 tasa",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Ambos sexos. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Ha subido o bajado el paro de los hombres desde 2020?",
+  "idioma": "es",
+  "tabla": "unemployment",
+  "medida": "value",
+  "territorio": null,
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2026
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "serie": "Total Nacional. Tasa de paro de la población. Hombres. Total. "
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta alquilar un piso en España?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "estoy pensando en mudarme a Valencia, ¿cuánto cuesta el alquiler allí?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Valencia"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿En qué provincia es más caro el alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Qué comunidad tiene los alquileres más baratos?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "ccaa",
+   "orden": "ASC"
+  },
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto se paga por metro cuadrado de alquiler en Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_m2_mediana_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el alquiler en Barcelona desde 2015?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2015,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cómo ha evolucionado el precio de los alquileres en Andalucía?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Andalucía"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuántos pisos se alquilaron en 2022 en Sevilla?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "viviendas_alquiladas",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2022
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Qué superficie tiene un piso de alquiler típico en Canarias?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "superficie_mediana",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Canarias"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuestan las casas unifamiliares en alquiler en Cataluña?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Cataluña"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Unifamiliar"
+  }
+ },
+ {
+  "pregunta": "alquiler mediano Málaga 2020",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2020
+   ]
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuál fue el año con el alquiler más caro de España en euros de hoy?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "pais",
+   "nombre": "España"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto pagan al mes el 25% de inquilinos con alquileres más baratos en Madrid?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_p25_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad de Madrid"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Y cuánto el 25% de los más caros en Baleares?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_p75_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Illes Balears"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto ha variado el alquiler en términos reales en la Comunidad Valenciana el último año?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "variacion_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "Comunidad Valenciana"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "Quant costa llogar un pis a Barcelona?",
+  "idioma": "ca",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "Canto custa alugar un piso en Pontevedra?",
+  "idioma": "gl",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Pontevedra"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "What is the median monthly rent in the Basque Country?",
+  "idioma": "en",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "ccaa",
+   "nombre": "País Vasco"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "Zenbat balio du alokairuak Gipuzkoan hilean?",
+  "idioma": "eu",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "provincia",
+   "nombre": "Gipuzkoa"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Dónde alquilan más pisos por cada mil habitantes?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler",
+  "medida": "alquiladas_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "provincia",
+   "orden": "DESC"
+  },
+  "filtros": {
+   "tipologia": "Colectiva"
+  }
+ },
+ {
+  "pregunta": "¿Cuánto cuesta alquilar un piso en la ciudad de Granada?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Granada"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad tiene el alquiler más caro de España?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto es el alquiler por metro cuadrado en Getafe?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_m2_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Getafe"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿En qué municipios se paga menos de alquiler?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "alquiler Alcalá de Henares 2018",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Alcalá de Henares"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2018
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha subido el alquiler en Palma en los últimos cinco años?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "variacion_real_5a",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cómo ha cambiado el precio del alquiler en Málaga capital desde 2011?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Málaga"
+  },
+  "periodo": {
+   "modo": "evolucion",
+   "anios": [
+    2011,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuántas viviendas se alquilaron en Zaragoza en 2023?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "viviendas_alquiladas",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Zaragoza"
+  },
+  "periodo": {
+   "modo": "anio",
+   "anios": [
+    2023
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué piso medio se alquila en Bilbao, cuántos metros tiene?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "superficie_mediana",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Dónde hay más alquileres por cada mil vecinos entre las ciudades grandes?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiladas_1000",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "DESC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta el alquiler en Vélez-Málaga?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vélez-Málaga"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuál fue el año más caro para alquilar en Barcelona?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Barcelona"
+  },
+  "periodo": {
+   "modo": "historico",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto ha cambiado el alquiler en Madrid entre 2014 y 2024?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Madrid"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2014,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Quant costa llogar a Palma de Mallorca?",
+  "idioma": "ca",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Palma"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Canto custa o aluguer en Vigo?",
+  "idioma": "gl",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Vigo"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "How much is rent per square metre in Seville?",
+  "idioma": "en",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_m2_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Sevilla"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "Zenbat balio du alokairuak Bilbon?",
+  "idioma": "eu",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Bilbao"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "precio alquiler Gijon euros mes",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Gijón"
+  },
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": null,
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Qué ciudad de más de 20.000 habitantes es la más barata para alquilar por metro cuadrado?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_m2_mediana_real",
+  "territorio": null,
+  "periodo": {
+   "modo": "ultimo",
+   "anios": []
+  },
+  "ranking": {
+   "sobre": "municipio",
+   "orden": "ASC"
+  },
+  "filtros": {}
+ },
+ {
+  "pregunta": "¿Cuánto cuesta alquilar en Santander comparado con 2020?",
+  "idioma": "es",
+  "tabla": "vivienda_alquiler_municipios",
+  "medida": "alquiler_mes_mediana_real",
+  "territorio": {
+   "nivel": "municipio",
+   "nombre": "Santander"
+  },
+  "periodo": {
+   "modo": "cambio",
+   "anios": [
+    2020,
+    2024
+   ]
+  },
+  "ranking": null,
+  "filtros": {}
+ }
+]
