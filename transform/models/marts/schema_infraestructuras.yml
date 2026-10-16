@@ -1,6 +1,6 @@
 version: 2
 
-# Movilidad > Infraestructuras: gasolineras y carburantes, oleoductos y gasoductos, ferrocarril.
+# Movilidad > Infraestructuras: gasolineras y carburantes, oleoductos y gasoductos, ferrocarril, carreteras.
 
 models:
   - name: movilidad_gasolineras
@@ -74,3 +74,25 @@ models:
     description: "Trenes de viajeros al día entre cada par de paradas consecutivas (los dos sentidos), por clase, con los operadores."
   - name: movilidad_ferrocarril_europa
     description: "Ferrocarril por país y año (Eurostat): km de líneas y por 100.000 habitantes, km de alta velocidad (dedicada + adaptada, y solo dedicada), % de líneas electrificadas, viajeros-km y toneladas-km totales y por habitante."
+  - name: movilidad_carreteras_red
+    description: "Red de carreteras para el mapa por titular (estado, comunidad, diputacion = diputaciones, forales, cabildos y consells), tipo (peaje, autovia = autopista libre o autovía, multicarril, convencional), carretera y provincia, con trazado de varias partes ('|'). Estado: catálogo oficial RCE; el resto: OpenStreetMap con la titularidad deducida de la matrícula (km aproximados)."
+    columns:
+      - name: titular
+        tests:
+          - accepted_values:
+              values: ['estado', 'comunidad', 'diputacion']
+      - name: tipo
+        tests:
+          - accepted_values:
+              values: ['peaje', 'autovia', 'multicarril', 'convencional']
+  - name: movilidad_carreteras_trafico
+    description: "IMD (vehículos al día, los dos sentidos) por tramo de la Red de Carreteras del Estado del último año de cada carretera (anio), con % y número de pesados. Visor Hermes del Ministerio de Transportes."
+  - name: movilidad_carreteras_provincia
+    description: "Km oficiales de carretera por provincia en el último año del Anuario del Ministerio de Transportes: por titular y tipo de vía, gran capacidad (peaje + autovía + multicarril), por 100.000 habitantes y por 100 km²."
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+  - name: movilidad_carreteras_espana
+    description: "Km de carretera de toda España por año desde 1970, titular y tipo de vía (Anuario del Ministerio de Transportes), y por 100.000 habitantes."
+  - name: movilidad_carreteras_europa
+    description: "Km de autopistas por país y año (Eurostat road_if_motorwa), por 100.000 habitantes y por 1.000 km² de superficie."

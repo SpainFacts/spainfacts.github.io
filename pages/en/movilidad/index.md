@@ -1,7 +1,7 @@
 ---
 title: Mobility
 description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, passengers on metro, bus and rail, and airport passengers."
-i18n_origen: ae6f26bf5ad4
+i18n_origen: 64e679ff2046
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -150,6 +150,10 @@ How people get around in Spain: the cars being bought and the ones on the road, 
 ## Infrastructure
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/en/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Roads</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Map of every road by who runs it (the State, the region or the provincial council), which ones are toll roads, how many vehicles use each section, and the comparison with Europe.</p>
+    </a>
     <a href="/en/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Railway network</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Map of every railway line and of how many passenger trains run each day on every section and through every station, compared with Europe.</p>

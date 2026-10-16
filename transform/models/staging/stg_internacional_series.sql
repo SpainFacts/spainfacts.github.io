@@ -7,7 +7,8 @@
 -- con el seed paises_iso; las series semestrales se promedian en los años con los dos
 -- semestres. Cálculos: turistas por habitante (ONU Turismo y población del Banco Mundial),
 -- peso de la electricidad en el consumo final de energía, pernoctaciones y pasajeros de
--- avión por habitante y % de nacidos en otro país (Eurostat).
+-- avión por habitante, km de autopista por 100.000 habitantes y % de nacidos en otro país
+-- (Eurostat).
 with bm as (
     select indicador_id, cod_indicador, cod_pais, cast(anio as integer) as anio, valor, 'bm' as origen
     from {{ source('raw_internacional', 'internacional_banco_mundial') }}
@@ -69,6 +70,14 @@ pasajeros_avion as (
     where n.indicador_id = 'pasajeros_avion_aux' and p.valor > 0
 ),
 
+autopistas as (
+    select 'autopistas_100k' as indicador_id, 'road_if_motorwa / demo_gind (AVG)' as cod_indicador,
+           n.cod_pais, n.anio, 100000 * n.valor / p.valor as valor, 'eurostat' as origen
+    from eurostat n
+    join eurostat p on p.indicador_id = 'poblacion_media_aux' and p.cod_pais = n.cod_pais and p.anio = n.anio
+    where n.indicador_id = 'autopistas_km_aux' and p.valor > 0
+),
+
 nacidos_extranjero as (
     select 'nacidos_extranjero' as indicador_id, 'migr_pop3ctb (FOR / TOTAL)' as cod_indicador,
            f.cod_pais, f.anio, 100 * f.valor / t.valor as valor, 'eurostat' as origen
@@ -97,6 +106,7 @@ todas as (
     union all select * from electrificacion
     union all select * from pernoctaciones
     union all select * from pasajeros_avion
+    union all select * from autopistas
     union all select * from nacidos_extranjero
 )
 

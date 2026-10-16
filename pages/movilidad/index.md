@@ -149,6 +149,10 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
 ## Infraestructuras
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Carreteras</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas las carreteras según las gestione el Estado, la comunidad o la diputación, cuáles son de peaje, cuántos vehículos pasan por cada tramo y la comparación con Europa.</p>
+    </a>
     <a href="/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Red de ferrocarril</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas las vías de tren y de cuántos trenes de viajeros pasan al día por cada tramo y estación, con la comparación con Europa.</p>

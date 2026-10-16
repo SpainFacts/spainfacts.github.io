@@ -140,6 +140,7 @@ export const INDICADORES_INT = {
         'europa:reciclaje': ['Recycling rate of municipal waste', '% of municipal waste'],
         'europa:coches_1000': ['Passenger cars', 'per 1,000 inhabitants'],
         pasajeros_avion_hab: ['Air passengers (arrivals and departures) per inhabitant', 'passengers per inhabitant'],
+        autopistas_100k: ['Motorways', 'km per 100,000 inhabitants'],
         'europa:muertes_trafico': ['Road traffic deaths', 'per 100,000 inhabitants'],
         'europa:homicidios': ['Intentional homicides recorded by the police', 'per 100,000 inhabitants'],
         'europa:mujeres_parlamento': ['Women in national parliament', '% of seats']
@@ -261,6 +262,7 @@ export const INDICADORES_INT = {
         'europa:reciclaje': ["Taxa de reciclatge dels residus municipals", "% dels residus municipals"],
         'europa:coches_1000': ["Turismes", "per 1.000 habitants"],
         pasajeros_avion_hab: ["Passatgers d'avió (arribades i sortides) per habitant", "passatgers per habitant"],
+        autopistas_100k: ['Autopistes i autovies', 'km per 100.000 habitants'],
         'europa:muertes_trafico': ["Morts en accidents de trànsit", "per 100.000 habitants"],
         'europa:homicidios': ["Homicidis intencionats registrats per la policia", "per 100.000 habitants"],
         'europa:mujeres_parlamento': ["Dones al parlament nacional", "% dels escons"]
@@ -382,6 +384,7 @@ export const INDICADORES_INT = {
         'europa:reciclaje': ['Taxa de reciclaxe dos residuos municipais', '% dos residuos municipais'],
         'europa:coches_1000': ['Turismos', 'por 1.000 habitantes'],
         pasajeros_avion_hab: ['Pasaxeiros de avión (chegadas e saídas) por habitante', 'pasaxeiros por habitante'],
+        autopistas_100k: ['Autoestradas e autovías', 'km por 100.000 habitantes'],
         'europa:muertes_trafico': ['Mortes en accidentes de tráfico', 'por 100.000 habitantes'],
         'europa:homicidios': ['Homicidios intencionados rexistrados pola policía', 'por 100.000 habitantes'],
         'europa:mujeres_parlamento': ['Mulleres no parlamento nacional', '% dos escanos']
@@ -503,6 +506,7 @@ export const INDICADORES_INT = {
         'europa:reciclaje': ['Udal-hondakinen birziklatze-tasa', 'udal-hondakinen %'],
         'europa:coches_1000': ['Turismoak', '1.000 biztanleko'],
         pasajeros_avion_hab: ['Hegazkin-bidaiariak (iritsierak eta irteerak) biztanleko', 'bidaiari biztanleko'],
+        autopistas_100k: ['Autobideak eta autobiak', 'km 100.000 biztanleko'],
         'europa:muertes_trafico': ['Trafiko-istripuetako heriotzak', '100.000 biztanleko'],
         'europa:homicidios': ['Poliziak erregistratutako nahitako hilketak', '100.000 biztanleko'],
         'europa:mujeres_parlamento': ['Emakumeak parlamentu nazionalean', 'eserlekuen %']

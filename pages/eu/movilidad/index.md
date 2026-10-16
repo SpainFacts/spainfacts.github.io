@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
 description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak, metro, autobus eta treneko bidaiariak, eta aireportuetako bidaiariak."
-i18n_origen: ae6f26bf5ad4
+i18n_origen: 64e679ff2046
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -150,6 +150,10 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
 ## Azpiegiturak
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/eu/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Errepideak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Errepide guztien mapa, Estatuak, erkidegoak edo aldundiak kudeatzen dituen arabera, zeintzuk diren ordainpekoak, zati bakoitzetik zenbat ibilgailu igarotzen diren eta Europarekiko alderaketa.</p>
+    </a>
     <a href="/eu/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Trenbide-sarea</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Trenbide guztien mapa eta egunero zati eta geltoki bakoitzetik zenbat bidaiari-tren igarotzen diren, Europarekin alderatuta.</p>

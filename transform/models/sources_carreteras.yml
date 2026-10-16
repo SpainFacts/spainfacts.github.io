@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_carreteras
+    description: "Red de carreteras de España por titularidad, tipo de vía y peaje: km del Anuario del Ministerio de Transportes (visor BDOTLE del OTLE), catálogo oficial de la Red de Carreteras del Estado, redes autonómicas y provinciales de OpenStreetMap, IMD por tramo del visor Hermes y autopistas de Eurostat (ingestion/carreteras.py)"
+    schema: raw
+    tables:
+      - name: carreteras_longitud_provincia
+        description: "Km de carretera por provincia (cod_prov INE), año (desde 2012), titular (estado, comunidad, diputacion = diputaciones, diputaciones forales, cabildos y consells) y tipo (peaje, autovia = autopistas libres y autovías, multicarril, convencional). OTLE, conjunto 377."
+      - name: carreteras_longitud_espana
+        description: "Km de carretera de toda España por año (desde 1970), titular y tipo. OTLE, conjunto 452."
+      - name: carreteras_red
+        description: "Trazados por titular, tipo, carretera (matrícula) y provincia. Estado: catálogo RCE del Ministerio (clase oficial). Comunidades y diputaciones: OpenStreetMap (© colaboradores de OpenStreetMap, ODbL), titularidad deducida de la matrícula, peaje de toll=yes y las dos calzadas fundidas. Trazado 'lon,lat;lon,lat|...'."
+      - name: carreteras_imd
+        description: "Tramos de la Red de Carreteras del Estado (y unos pocos forales) con su IMD total (vehículos al día, los dos sentidos) y % de pesados del último año que tiene cada carretera (anio), del visor Hermes del Ministerio."
+      - name: carreteras_eurostat
+        description: "Eurostat por país (cod_fuente = código Eurostat) y año: km de autopistas (road_if_motorwa, MWAY) y superficie en km² (demo_r_d3area)."

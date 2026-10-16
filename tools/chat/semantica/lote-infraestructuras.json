@@ -492,5 +492,148 @@
     "dimensiones": [],
     "filtros": [],
     "notas": "Eurostat; EU27_2020 es la Unión Europea. Km de líneas de Eurostat, que no se comparan con los km de corredor de OpenStreetMap de movilidad_ferrocarril_red y _provincia. Muchos huecos (NULL) según país y año: la alta velocidad dedicada y los viajeros-km empiezan tarde en varios países, y el último año suele estar incompleto entre países."
+  },
+  {
+    "tabla": "movilidad_carreteras_provincia",
+    "usar": true,
+    "tema": "Kilómetros de carretera de cada provincia según quién la gestiona (Estado, comunidad, diputación) y su tipo (peaje, autovía, multicarril, convencional), por habitante y por superficie",
+    "preguntas": [
+      "¿Qué provincia tiene más kilómetros de carretera por habitante?",
+      "¿Cuántos kilómetros de autopista de peaje hay en Galicia?",
+      "¿Cuántos kilómetros de carreteras tiene la Diputación de Barcelona?",
+      "¿Qué provincias tienen más autovías por superficie?"
+    ],
+    "medidas": [
+      { "columna": "km_por_100k_hab", "nombre": "kilómetros de carretera por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "km_total", "nombre": "kilómetros de carretera", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_estado", "nombre": "kilómetros de carretera del Estado", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_comunidad", "nombre": "kilómetros de carretera de la comunidad autónoma", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_diputacion", "nombre": "kilómetros de carretera de diputaciones, diputaciones forales, cabildos y consells", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_gran_capacidad", "nombre": "kilómetros de autopistas, autovías y carreteras multicarril", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_peaje", "nombre": "kilómetros de autopista de peaje", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_peaje_estado", "nombre": "kilómetros de autopista de peaje del Estado", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_autovia", "nombre": "kilómetros de autopistas libres y autovías", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_multicarril", "nombre": "kilómetros de carreteras multicarril", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_convencional", "nombre": "kilómetros de carreteras convencionales", "unidad": "km", "tipo": "nivel" },
+      { "columna": "peaje_pct_gran_capacidad", "nombre": "parte de la red de gran capacidad que es de peaje", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "km_gran_capacidad_por_100k_hab", "nombre": "kilómetros de autopistas, autovías y multicarril por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa" },
+      { "columna": "km_por_100_km2", "nombre": "kilómetros de carretera por cada 100 km² de superficie", "unidad": "km por cada 100 km²", "tipo": "tasa" },
+      { "columna": "km_gran_capacidad_por_100_km2", "nombre": "kilómetros de autopistas, autovías y multicarril por cada 100 km²", "unidad": "km por cada 100 km²", "tipo": "tasa" },
+      { "columna": "poblacion", "nombre": "población", "unidad": "habitantes", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Anuario del Ministerio de Transportes, solo el último año (anio); la serie de España está en movilidad_carreteras_espana. Los km de las diputaciones incluyen las diputaciones forales vascas, los cabildos de Canarias y los consells de Baleares; no incluye las carreteras de los ayuntamientos. Los km sí se suman entre provincias (cod_ccaa para agrupar por comunidad); las tasas no."
+  },
+  {
+    "tabla": "movilidad_carreteras_espana",
+    "usar": true,
+    "tema": "Kilómetros de carretera de toda España cada año desde 1970 según quién la gestiona y su tipo (peaje, autovía, multicarril, convencional)",
+    "preguntas": [
+      "¿Cuántos kilómetros de autovía tenía España en 1990?",
+      "¿Cuántos kilómetros de autopistas de peaje quedan?",
+      "¿Cuánto ha crecido la red de autovías desde 1980?",
+      "¿Cuántos kilómetros de carretera gestiona el Estado?"
+    ],
+    "medidas": [
+      { "columna": "km", "nombre": "kilómetros de carretera", "unidad": "km", "tipo": "nivel", "principal": true },
+      { "columna": "km_por_100k_hab", "nombre": "kilómetros de carretera por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "titular", "nombre": "quién gestiona la carretera (estado, comunidad, diputacion)", "total": null },
+      { "columna": "tipo", "nombre": "tipo de vía (peaje, autovia, multicarril, convencional)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Anuario del Ministerio de Transportes; no hay fila de total: sumar los km de las filas del año (los km se suman entre titulares y tipos, y las tasas también porque comparten población). Hasta 1985 solo cada cinco años. En 1984 el Estado traspasó unos 50.000 km a las comunidades. Diputacion incluye forales, cabildos y consells."
+  },
+  {
+    "tabla": "movilidad_carreteras_red",
+    "usar": true,
+    "tema": "Cada carretera de España con quién la gestiona (Estado, comunidad, diputación), su tipo (peaje, autovía, multicarril, convencional) y sus kilómetros en cada provincia",
+    "preguntas": [
+      "¿Qué autopistas de peaje hay en España?",
+      "¿Cuántos kilómetros de peaje tiene la AP-9?",
+      "¿Quién gestiona la AP-8?",
+      "¿Qué autovías son de la Junta de Andalucía?"
+    ],
+    "medidas": [
+      { "columna": "longitud_km", "nombre": "kilómetros de la carretera en la provincia", "unidad": "km", "tipo": "nivel", "principal": true }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "titular", "nombre": "quién gestiona la carretera (estado, comunidad, diputacion)", "total": null },
+      { "columna": "tipo", "nombre": "tipo de vía (peaje, autovia, multicarril, convencional)", "total": null },
+      { "columna": "carretera", "nombre": "matrícula de la carretera (AP-9, A-2, CL-601...)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Red del Estado del catálogo oficial del Ministerio (km exactos); la de comunidades, diputaciones, cabildos y consells sale de OpenStreetMap con la titularidad deducida de la matrícula (km aproximados, algo por encima de los oficiales). Para km oficiales por provincia usar movilidad_carreteras_provincia. La columna trazado es texto de coordenadas para el mapa: no usarla en consultas ni gráficos del chat."
+  },
+  {
+    "tabla": "movilidad_carreteras_trafico",
+    "usar": true,
+    "tema": "Cuántos coches y camiones pasan al día por cada tramo de las carreteras del Estado (intensidad media diaria)",
+    "preguntas": [
+      "¿Cuál es la carretera con más tráfico de España?",
+      "¿Cuántos vehículos pasan al día por la A-6?",
+      "¿Qué tramos tienen más camiones?",
+      "¿Cuánto tráfico tiene la AP-9?"
+    ],
+    "medidas": [
+      { "columna": "imd", "nombre": "vehículos al día (intensidad media diaria, los dos sentidos)", "unidad": "vehículos al día", "tipo": "media", "principal": true },
+      { "columna": "imd_pesados", "nombre": "camiones y autobuses al día", "unidad": "vehículos al día", "tipo": "media" },
+      { "columna": "pesados_pct", "nombre": "parte del tráfico que son vehículos pesados", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "longitud_km", "nombre": "longitud del tramo", "unidad": "km", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "carretera", "nombre": "matrícula de la carretera (A-6, AP-9, N-340...)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Mapa de tráfico del Ministerio de Transportes: solo la Red de Carreteras del Estado (y unos pocos tramos forales); de cada carretera el último año que tiene (anio, casi siempre 2024). No sumar la IMD entre tramos: para una carretera, dar el máximo o la media ponderada por longitud_km. pk_inicio y pk_fin son puntos kilométricos. La columna trazado es texto de coordenadas para el mapa: no usarla en consultas ni gráficos del chat."
+  },
+  {
+    "tabla": "movilidad_carreteras_europa",
+    "usar": true,
+    "tema": "Kilómetros de autopistas y autovías de España frente a los países de Europa cada año, por habitante y por superficie",
+    "preguntas": [
+      "¿Qué país de Europa tiene más kilómetros de autopista?",
+      "¿Tiene España más autovías por habitante que Francia?",
+      "¿Cuántos kilómetros de autopista tiene Alemania?",
+      "¿Cómo ha crecido la red de autopistas de España desde 1990 frente a Italia?"
+    ],
+    "medidas": [
+      { "columna": "km_por_100k_hab", "nombre": "kilómetros de autopistas y autovías por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "km_autopistas", "nombre": "kilómetros de autopistas y autovías", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_por_1000_km2", "nombre": "kilómetros de autopistas y autovías por cada 1.000 km² de superficie", "unidad": "km por cada 1.000 km²", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "pais_extranjero", "ue"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat road_if_motorwa (autopistas, que en España incluyen las autovías). El último año publicado varía mucho por país: comparar con el último dato de cada uno. La tasa por habitante es NULL si falta la población del año."
   }
 ]

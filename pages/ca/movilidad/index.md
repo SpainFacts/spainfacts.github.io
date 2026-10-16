@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
 description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega, viatgers de metro, autobús i tren, i passatgers dels aeroports."
-i18n_origen: ae6f26bf5ad4
+i18n_origen: 64e679ff2046
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -150,6 +150,10 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
 ## Infraestructures
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/ca/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Carreteres</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de totes les carreteres segons les gestioni l'Estat, la comunitat o la diputació, quines són de peatge, quants vehicles passen per cada tram i la comparació amb Europa.</p>
+    </a>
     <a href="/ca/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Xarxa de ferrocarril</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de totes les vies de tren i de quants trens de viatgers passen cada dia per cada tram i estació, amb la comparació amb Europa.</p>

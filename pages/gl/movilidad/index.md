@@ -1,5 +1,5 @@
 ---
-i18n_origen: ae6f26bf5ad4
+i18n_origen: 64e679ff2046
 title: Mobilidade
 description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga, viaxeiros de metro, autobús e tren, e pasaxeiros dos aeroportos."
 og:
@@ -150,6 +150,10 @@ Como nos movemos en España: os coches que se compran e os que circulan, o avanc
 ## Infraestruturas
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/gl/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Estradas</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas as estradas segundo as xestione o Estado, a comunidade ou a deputación, cales son de peaxe, cantos vehículos pasan por cada tramo e a comparación con Europa.</p>
+    </a>
     <a href="/gl/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Rede de ferrocarril</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas as vías de tren e de cantos trens de viaxeiros pasan ao día por cada tramo e estación, coa comparación con Europa.</p>
