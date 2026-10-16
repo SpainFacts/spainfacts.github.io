@@ -258,6 +258,33 @@
     })();
 
     $: sparklineDisponible = !!sparklineGeometry;
+
+    // Punto bajo el ratón (o el dedo): el más cercano en horizontal, con su fecha y su valor
+    let indiceActivo = null;
+    function moverPuntero(evento) {
+        const n = valoresGrafica.length;
+        if (n < 2) return;
+        const caja = evento.currentTarget.getBoundingClientRect();
+        if (!caja.width) return;
+        const fraccion = Math.min(1, Math.max(0, (evento.clientX - caja.left) / caja.width));
+        indiceActivo = Math.round(fraccion * (n - 1));
+    }
+    $: if (indiceActivo !== null && indiceActivo >= valoresGrafica.length) indiceActivo = null;
+    $: puntoActivo = (() => {
+        if (indiceActivo === null || !sparklineGeometry) return null;
+        const n = valoresGrafica.length;
+        const v = valoresGrafica[indiceActivo];
+        const fecha = datosSparkline[indiceActivo]?.fecha;
+        const izquierda = (indiceActivo / (n - 1)) * 100;
+        const [, yTexto] = sparklineGeometry.points.split(" ")[indiceActivo].split(",");
+        return {
+            izquierda,
+            arriba: (Number(yTexto) / 80) * 100,
+            x: (indiceActivo / (n - 1)) * 320,
+            fecha: fecha ? fechaCompacta(fecha, formatoFechaGrafica) : `#${indiceActivo + 1}`,
+            valor: `${numeroCorto(v)}${unidadGrafica ? ` ${unidadGrafica}` : ""}`,
+        };
+    })();
 </script>
 
 <div class="kpi-card group relative flex min-w-0 flex-col rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300 sm:p-5 dark:border-gray-800 dark:bg-gray-900">
@@ -320,6 +347,13 @@
                     <span class="whitespace-nowrap" title="{t('kpi.minimo', lang)}: {minimoCompleto}">{minimoTexto}</span>
                 </div>
                 <div class="w-full min-w-0">
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <div
+                        class="relative touch-pan-y"
+                        on:pointermove={moverPuntero}
+                        on:pointerdown={moverPuntero}
+                        on:pointerleave={() => (indiceActivo = null)}
+                    >
                     <svg class="block h-20 w-full overflow-visible" viewBox="0 0 320 80" preserveAspectRatio="none" role="img" aria-label={descripcionSparkline}>
                         <line x1="0" x2="320" y1={sparklineGeometry.maxY} y2={sparklineGeometry.maxY} class="stroke-gray-200 dark:stroke-gray-700" stroke-width="1" stroke-dasharray="2 4" />
                         <line x1="0" x2="320" y1={sparklineGeometry.minY} y2={sparklineGeometry.minY} class="stroke-gray-200 dark:stroke-gray-700" stroke-width="1" stroke-dasharray="2 4" />
@@ -336,7 +370,27 @@
                             points={sparklineGeometry.points}
                         />
                         <circle cx={sparklineGeometry.last.x} cy={sparklineGeometry.last.y} r="3.5" class="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-gray-900" stroke-width="2" />
+                        {#if puntoActivo}
+                            <line x1={puntoActivo.x} x2={puntoActivo.x} y1="0" y2="80" class="stroke-gray-400 dark:stroke-gray-500" stroke-width="1" vector-effect="non-scaling-stroke" />
+                        {/if}
                     </svg>
+                    {#if puntoActivo}
+                        <!-- Punto y etiqueta en HTML: el SVG se estira (preserveAspectRatio="none") y deformaría un círculo -->
+                        <span
+                            class="pointer-events-none absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-blue-600 dark:border-gray-900 dark:bg-blue-400"
+                            style="left: {puntoActivo.izquierda}%; top: {puntoActivo.arriba}%;"
+                            aria-hidden="true"
+                        ></span>
+                        <div
+                            class="pointer-events-none absolute bottom-full z-10 mb-1 whitespace-nowrap rounded-md border border-gray-200 bg-white px-2 py-1 text-xs shadow-md dark:border-gray-700 dark:bg-gray-800"
+                            style="left: {puntoActivo.izquierda}%; transform: translateX(-{puntoActivo.izquierda}%);"
+                            aria-hidden="true"
+                        >
+                            <span class="text-gray-500 dark:text-gray-400">{puntoActivo.fecha}</span>
+                            <span class="ml-1 font-semibold text-gray-900 dark:text-white">{puntoActivo.valor}</span>
+                        </div>
+                    {/if}
+                    </div>
                     <div class="mt-1 flex justify-between gap-2 text-[10px] leading-tight text-gray-500 dark:text-gray-400">
                         <span class="max-w-[48%] truncate" title={fechaInicio || t('kpi.inicio', lang)}>{fechaInicio || t('kpi.inicio', lang)}</span>
                         <span class="max-w-[48%] truncate text-right" title={fechaFinal || t('kpi.ultimo', lang)}>{fechaFinal || t('kpi.ultimo', lang)}</span>
