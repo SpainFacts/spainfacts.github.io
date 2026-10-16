@@ -1,7 +1,7 @@
 ---
-i18n_origen: 18fd367213c4
+i18n_origen: ae6f26bf5ad4
 title: Mobilidade
-description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga e viaxeiros de metro, autobús, tren e avión."
+description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga, viaxeiros de metro, autobús e tren, e pasaxeiros dos aeroportos."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -68,7 +68,7 @@ ORDER BY t.mes
 
 # 🚦 Mobilidade
 
-Como nos movemos en España: os coches que se compran e os que circulan, o avance do coche eléctrico, onde se pode recargar e cantos viaxeiros usan o transporte público.
+Como nos movemos en España: os coches que se compran e os que circulan, o avance do coche eléctrico, onde se pode recargar, cantos viaxeiros usan o transporte público e cantos pasaxeiros pasan polos aeroportos.
 
 <Grid cols=4>
     <KpiCard
@@ -140,6 +140,10 @@ Como nos movemos en España: os coches que se compran e os que circulan, o avanc
     <a href="/gl/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transporte público</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viaxeiros de metro, autobús, Cercanías, AVE e avión cada mes, e o metro das sete cidades que o teñen.</p>
+    </a>
+    <a href="/gl/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Aeroportos</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pasaxeiros, voos e mercadorías de cada aeroporto de AENA desde 2004, canto tráfico é nacional ou internacional e como se comparan cos grandes aeroportos europeos.</p>
     </a>
 </div>
 

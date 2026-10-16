@@ -1,7 +1,7 @@
 ---
 title: Public transport
 description: "Passengers on metro, bus, Cercanías commuter rail, AVE high-speed rail, medium- and long-distance trains, air and sea in Spain every month since 2012, plus metro and city buses in Madrid, Barcelona, Valencia, Bilbao, Seville, Málaga and Palma."
-i18n_origen: 19974c536a0b
+i18n_origen: 23e881de4f4a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -244,5 +244,6 @@ ORDER BY a.modo DESC, a.por_habitante DESC
 
 - **[INE – Passenger Transport Statistics](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176906&menu=ultiDatos&idp=1254735576820)**, tables [20239](https://www.ine.es/jaxiT3/Tabla.htm?t=20239) (Spain by mode) and [20193](https://www.ine.es/jaxiT3/Tabla.htm?t=20193) (cities with a metro). Monthly since 2012; the INE publishes it about 40 days after the end of each month.
 - Urban transport: metro and regular city buses. Cercanías commuter rail counts as intercity.
+- Air: domestic flights only. Passengers at each airport, including international flights, are in [Airports](/en/movilidad/aeropuertos).
 
 <LastRefreshed prefix="Data updated" />

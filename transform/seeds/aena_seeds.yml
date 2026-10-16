@@ -1,0 +1,57 @@
+version: 2
+
+seeds:
+  - name: aena_aeropuertos
+    description: >
+      Aeropuertos y helipuertos que aparecen en el informe mensual de tráfico de AENA, con
+      su código OACI e IATA, nombre actual, provincia (código INE) y coordenadas (WGS84, de
+      OurAirports, dominio público). `red`: espana (la red española de AENA), reino_unido
+      (Londres-Luton y Leeds Bradford) o brasil (Aena Brasil, desde 2024). Los aeropuertos
+      españoles que no son de AENA (Lleida-Alguaire, Castellón, Ciudad Real, Teruel,
+      Andorra-La Seu) no están en el informe.
+    config:
+      column_types:
+        oaci: varchar
+        iata: varchar
+        nombre: varchar
+        tipo: varchar
+        cod_prov: varchar
+        municipio: varchar
+        lat: double
+        lon: double
+        red: varchar
+        nota: varchar
+    columns:
+      - name: oaci
+        tests: [not_null, unique]
+      - name: red
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['espana', 'reino_unido', 'brasil']
+      - name: cod_prov
+        tests:
+          - relationships:
+              arguments:
+                to: ref('territorios_provincias')
+                field: cod_prov
+
+  - name: aena_aeropuertos_nombres
+    description: >
+      Cada nombre con el que un aeropuerto ha salido en los informes mensuales de AENA
+      desde 2004 (en mayúsculas, tal cual tras limpiar espacios: MADRID-BARAJAS, ADOLFO
+      SUÁREZ MADRID-BARAJAS...) y su código OACI. Si AENA cambia un nombre, el test de
+      movilidad_aeropuertos_mensual avisa y hay que añadir aquí la fila.
+    config:
+      column_types:
+        nombre_aena: varchar
+        oaci: varchar
+    columns:
+      - name: nombre_aena
+        tests: [not_null, unique]
+      - name: oaci
+        tests:
+          - relationships:
+              arguments:
+                to: ref('aena_aeropuertos')
+                field: oaci

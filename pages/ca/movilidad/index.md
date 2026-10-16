@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
-description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega i viatgers de metro, autobús, tren i avió."
-i18n_origen: 18fd367213c4
+description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega, viatgers de metro, autobús i tren, i passatgers dels aeroports."
+i18n_origen: ae6f26bf5ad4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -68,7 +68,7 @@ ORDER BY t.mes
 
 # 🚦 Mobilitat
 
-Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç del cotxe elèctric, on es pot recarregar i quants viatgers fan servir el transport públic.
+Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç del cotxe elèctric, on es pot recarregar, quants viatgers fan servir el transport públic i quants passatgers passen pels aeroports.
 
 <Grid cols=4>
     <KpiCard
@@ -140,6 +140,10 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
     <a href="/ca/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transport públic</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viatgers de metro, autobús, Rodalies, AVE i avió cada mes, i el metro de les set ciutats que en tenen.</p>
+    </a>
+    <a href="/ca/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Aeroports</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Passatgers, vols i mercaderies de cada aeroport d'AENA des del 2004, quant trànsit és nacional o internacional i com es comparen amb els grans aeroports europeus.</p>
     </a>
 </div>
 

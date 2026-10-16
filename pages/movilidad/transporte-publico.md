@@ -243,5 +243,6 @@ ORDER BY a.modo DESC, a.por_habitante DESC
 
 - **[INE – Estadística de Transporte de Viajeros](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176906&menu=ultiDatos&idp=1254735576820)**, tablas [20239](https://www.ine.es/jaxiT3/Tabla.htm?t=20239) (España por modo) y [20193](https://www.ine.es/jaxiT3/Tabla.htm?t=20193) (ciudades con metro). Mensual desde 2012; el INE la publica unos 40 días después del final de cada mes.
 - Transporte urbano: metro y autobús urbano regular. El tren de Cercanías cuenta como interurbano.
+- Avión: solo vuelos dentro de España. Los pasajeros de cada aeropuerto, también los de vuelos internacionales, están en [Aeropuertos](/movilidad/aeropuertos).
 
 <LastRefreshed prefix="Datos actualizados" />

@@ -1,7 +1,7 @@
 ---
 title: Mobility
-description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, and passengers on metro, bus, rail and air."
-i18n_origen: 18fd367213c4
+description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, passengers on metro, bus and rail, and airport passengers."
+i18n_origen: ae6f26bf5ad4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -68,7 +68,7 @@ ORDER BY t.mes
 
 # 🚦 Mobility
 
-How people get around in Spain: the cars being bought and the ones on the road, the progress of electric cars, where you can charge, and how many passengers use public transport.
+How people get around in Spain: the cars being bought and the ones on the road, the progress of electric cars, where you can charge, how many passengers use public transport and how many pass through the airports.
 
 <Grid cols=4>
     <KpiCard
@@ -140,6 +140,10 @@ How people get around in Spain: the cars being bought and the ones on the road, 
     <a href="/en/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Public transport</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Metro, bus, Cercanías commuter rail, AVE high-speed rail and air passengers every month, and the metro in the seven cities that have one.</p>
+    </a>
+    <a href="/en/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Airports</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Passengers, flights and cargo at every AENA airport since 2004, how much traffic is domestic or international, and how they compare with the big European airports.</p>
     </a>
 </div>
 

@@ -1,5 +1,5 @@
 ---
-i18n_origen: 19974c536a0b
+i18n_origen: 23e881de4f4a
 title: Transporte público
 description: "Viaxeiros de metro, autobús, Cercanías, AVE, tren de media e longa distancia, avión e barco en España cada mes desde 2012, e o metro e o autobús urbano en Madrid, Barcelona, Valencia, Bilbao, Sevilla, Málaga e Palma."
 og:
@@ -244,5 +244,6 @@ ORDER BY a.modo DESC, a.por_habitante DESC
 
 - **[INE – Estadística de Transporte de Viajeros](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176906&menu=ultiDatos&idp=1254735576820)**, táboas [20239](https://www.ine.es/jaxiT3/Tabla.htm?t=20239) (España por modo) e [20193](https://www.ine.es/jaxiT3/Tabla.htm?t=20193) (cidades con metro). Mensual desde 2012; o INE publícaa uns 40 días despois do final de cada mes.
 - Transporte urbano: metro e autobús urbano regular. O tren de Cercanías conta como interurbano.
+- Avión: só voos dentro de España. Os pasaxeiros de cada aeroporto, tamén os de voos internacionais, están en [Aeroportos](/gl/movilidad/aeropuertos).
 
 <LastRefreshed prefix="Datos actualizados" />

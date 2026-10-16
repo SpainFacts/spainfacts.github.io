@@ -221,6 +221,8 @@ EUROSTAT_CONSULTAS = {
     "reciclaje": "cei_wm011?wst_oper=RCY&unit=PC",
     # Movilidad y seguridad
     "coches_1000": "road_eqs_carhab",
+    # pasajeros de avión del país (llegadas + salidas); por habitante en dbt
+    "pasajeros_avion_aux": "ttr00012?unit=PAS&tra_meas=PAS_CRD&tra_cov=TOTAL&schedule=TOTAL",
     "muertes_trafico": "sdg_11_40?tra_infr=TOTAL&unit=RT",
     "homicidios": "crim_off_cat?iccs=ICCS0101&unit=P_HTHAB",
     # Política

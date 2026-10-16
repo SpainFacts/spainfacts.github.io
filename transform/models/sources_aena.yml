@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_aena
+    description: "Aeropuertos: tráfico mensual de la red de AENA (informes mensuales de estadísticas de tráfico aéreo) y pasajeros anuales de los aeropuertos europeos de Eurostat (ingestion/aena.py)"
+    schema: raw
+    tables:
+      - name: aena_trafico_mensual
+        description: "AENA, informe mensual de tráfico (XLS de cada mes desde enero de 2004): pasajeros, operaciones (aterrizajes + despegues) y mercancía en kg de cada aeropuerto y helipuerto, llegadas + salidas. `aeropuerto` es el nombre del informe en mayúsculas (cambia con los años: se traduce con el seed aena_aeropuertos_nombres); 'TOTAL' = Total Red Aena. Desde 2024 incluye Londres-Luton y su total británico. `provisional` marca los meses que AENA aún no ha cerrado."
+      - name: aena_eurostat_aeropuertos
+        description: "Eurostat avia_paoa: pasajeros transportados (llegadas + salidas) por aeropuerto declarante y año, total (TOTAL), nacionales (NAT), dentro de la UE-27 (INTL_IEU27_2020) y fuera de la UE-27 (INTL_XEU27_2020), de todos los aeropuertos europeos que publica. cod_aeropuerto = país_OACI (ES_LEMD)."

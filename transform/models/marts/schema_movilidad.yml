@@ -104,3 +104,45 @@ models:
     description: "Viajeros de metro y autobús urbano por ciudad (INE 20193)."
   - name: movilidad_parque_resumen
     description: "Resumen mensual del parque de turismos (DGT): turismos por 1.000 hab., % enchufables, % eléctricos puros, % sin distintivo ambiental y % con más de 20 años."
+  - name: movilidad_aeropuertos_mensual
+    description: "Tráfico de cada aeropuerto y helipuerto de AENA por mes desde 2004 (informe mensual de AENA): pasajeros (llegadas + salidas, con tránsitos), operaciones (aterrizajes + despegues), mercancía en toneladas y año móvil (*_12m). red = espana, reino_unido (Luton, Leeds Bradford) o brasil (Aena Brasil, desde 2024)."
+    tests:
+      - unique:
+          arguments:
+            column_name: "cast(mes as varchar) || '-' || cast(oaci as varchar)"
+    columns:
+      - name: oaci
+        description: "Código OACI. Nulo si AENA usa un nombre nuevo que no está en el seed aena_aeropuertos_nombres: añadirlo allí."
+        tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: pasajeros
+        description: "Pasajeros (llegadas + salidas) del mes."
+      - name: pasajeros_12m
+        description: "Pasajeros de los últimos 12 meses (año móvil)."
+  - name: movilidad_aeropuertos_espana
+    description: "Tráfico total de la red española de AENA por mes desde 2004, con año móvil, variación frente al mismo mes del año anterior y de 2019, y pasajeros por habitante (padrón de España)."
+    columns:
+      - name: mes
+        tests: [not_null, unique]
+      - name: pasajeros_12m_por_hab
+        description: "Pasajeros de los últimos 12 meses por habitante (cada viaje de ida y vuelta cuenta cuatro veces: dos salidas y dos llegadas)."
+  - name: movilidad_aeropuertos_anual
+    description: "Tráfico de cada aeropuerto de AENA por año, con variación frente al año anterior (completo o mismos meses) y frente a 2019, puesto en su red, pasajeros por operación y reparto de pasajeros entre vuelos nacionales, UE-27 y fuera de la UE-27 (Eurostat, desde 2020)."
+    tests:
+      - unique:
+          arguments:
+            column_name: "cast(anio as varchar) || '-' || cast(oaci as varchar)"
+  - name: movilidad_aeropuertos_ccaa
+    description: "Pasajeros de los aeropuertos de AENA por comunidad autónoma y año, en total y por habitante."
+    tests:
+      - unique:
+          arguments:
+            column_name: "cast(anio as varchar) || '-' || cast(cod_ccaa as varchar)"
+  - name: movilidad_aeropuertos_europa
+    description: "Pasajeros de los aeropuertos europeos por año (Eurostat avia_paoa), con puesto en Europa y % de pasajeros internacionales. Sin el Reino Unido desde 2020 (no envía datos a Eurostat)."
+    tests:
+      - unique:
+          arguments:
+            column_name: "cast(anio as varchar) || '-' || cast(cod_aeropuerto as varchar)"

@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
-description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak eta metro, autobus, tren eta hegazkineko bidaiariak."
-i18n_origen: 18fd367213c4
+description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak, metro, autobus eta treneko bidaiariak, eta aireportuetako bidaiariak."
+i18n_origen: ae6f26bf5ad4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -68,7 +68,7 @@ ORDER BY t.mes
 
 # 🚦 Mugikortasuna
 
-Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, auto elektrikoaren aurrerapena, non karga daitekeen eta zenbat bidaiarik erabiltzen duten garraio publikoa.
+Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, auto elektrikoaren aurrerapena, non karga daitekeen, zenbat bidaiarik erabiltzen duten garraio publikoa eta zenbat bidaiari igarotzen diren aireportuetatik.
 
 <Grid cols=4>
     <KpiCard
@@ -140,6 +140,10 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
     <a href="/eu/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Garraio publikoa</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Metro, autobus, Cercanías (aldiriko trenak), AVE eta hegazkineko bidaiariak hilero, eta metroa duten zazpi hirietako metroa.</p>
+    </a>
+    <a href="/eu/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Aireportuak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">AENAren aireportu bakoitzeko bidaiariak, hegaldiak eta salgaiak 2004tik, trafikoaren zenbat den barnekoa edo nazioartekoa eta Europako aireportu handiekin nola alderatzen diren.</p>
     </a>
 </div>
 

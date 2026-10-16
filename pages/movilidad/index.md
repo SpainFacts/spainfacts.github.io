@@ -1,6 +1,6 @@
 ---
 title: Movilidad
-description: "Movilidad en España: coches que se venden y circulan por tipo de motor, transición al coche eléctrico, puntos de recarga y viajeros de metro, autobús, tren y avión."
+description: "Movilidad en España: coches que se venden y circulan por tipo de motor, transición al coche eléctrico, puntos de recarga, viajeros de metro, autobús y tren, y pasajeros de los aeropuertos."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -67,7 +67,7 @@ ORDER BY t.mes
 
 # 🚦 Movilidad
 
-Cómo nos movemos en España: los coches que se compran y los que circulan, el avance del coche eléctrico, dónde se puede recargar y cuántos viajeros usan el transporte público.
+Cómo nos movemos en España: los coches que se compran y los que circulan, el avance del coche eléctrico, dónde se puede recargar, cuántos viajeros usan el transporte público y cuántos pasajeros pasan por los aeropuertos.
 
 <Grid cols=4>
     <KpiCard
@@ -139,6 +139,10 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
     <a href="/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transporte público</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viajeros de metro, autobús, Cercanías, AVE y avión cada mes, y el metro de las siete ciudades que lo tienen.</p>
+    </a>
+    <a href="/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Aeropuertos</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pasajeros, vuelos y mercancía de cada aeropuerto de AENA desde 2004, cuánto tráfico es nacional o internacional y cómo se comparan con los grandes aeropuertos europeos.</p>
     </a>
 </div>
 

@@ -17,6 +17,7 @@ export const PAISES_REFERENCIA = {
     electrificacion: ['NO', 'SE'], // Noruega y Suecia: las economías más electrificadas de Europa (hidráulica, bombas de calor, coche eléctrico)
     electricidad_renovable: ['DK', 'NO'], // Dinamarca: referente eólico; Noruega: casi toda su electricidad es hidráulica
     consumo_electrico_pc: ['NO'], // Noruega: el mayor consumo eléctrico por habitante de Europa (calefacción y coche eléctricos)
+    pasajeros_avion_hab: ['GR', 'NO'], // Grecia: destino turístico de islas, como España; Noruega: el avión para moverse por dentro del país
     gei_pc: ['SE'], // Suecia: país rico con emisiones por habitante muy bajas
     co2_pc: ['SE'],
 

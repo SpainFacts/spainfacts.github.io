@@ -1,7 +1,7 @@
 ---
 title: Garraio publikoa
 description: "Metro, autobus, Cercanías (aldiriko trenak), AVE, distantzia ertaineko eta luzeko tren, hegazkin eta itsasontziko bidaiariak Espainian hilero 2012tik, eta metroa eta hiri-autobusa Madrilen, Bartzelonan, Valentzian, Bilbon, Sevillan, Malagan eta Palman."
-i18n_origen: 19974c536a0b
+i18n_origen: 23e881de4f4a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -244,5 +244,6 @@ ORDER BY a.modo DESC, a.por_habitante DESC
 
 - **[INE – Bidaiarien Garraioaren Estatistika](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176906&menu=ultiDatos&idp=1254735576820)**, [20239](https://www.ine.es/jaxiT3/Tabla.htm?t=20239) taula (Espainia, garraiobidearen arabera) eta [20193](https://www.ine.es/jaxiT3/Tabla.htm?t=20193) taula (metroa duten hiriak). Hilekoa 2012tik; INEk hilabete bakoitza amaitu eta 40 bat egunera argitaratzen du.
 - Hiri-garraioa: metroa eta hiri-autobus erregularra. Cercanías trena hiriarteko garraiotzat hartzen da.
+- Hegazkina: Espainia barruko hegaldiak bakarrik. Aireportu bakoitzeko bidaiariak, nazioarteko hegaldietakoak barne, [Aireportuak](/eu/movilidad/aeropuertos) orrian daude.
 
 <LastRefreshed prefix="Datuak eguneratuta" />

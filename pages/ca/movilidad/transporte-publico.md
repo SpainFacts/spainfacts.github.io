@@ -1,7 +1,7 @@
 ---
 title: Transport públic
 description: "Viatgers de metro, autobús, Rodalies, AVE, tren de mitjana i llarga distància, avió i vaixell a Espanya cada mes des del 2012, i el metro i l'autobús urbà a Madrid, Barcelona, València, Bilbao, Sevilla, Màlaga i Palma."
-i18n_origen: 19974c536a0b
+i18n_origen: 23e881de4f4a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -244,5 +244,6 @@ ORDER BY a.modo DESC, a.por_habitante DESC
 
 - **[INE – Estadística de Transport de Viatgers](https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176906&menu=ultiDatos&idp=1254735576820)**, taules [20239](https://www.ine.es/jaxiT3/Tabla.htm?t=20239) (Espanya per mitjà) i [20193](https://www.ine.es/jaxiT3/Tabla.htm?t=20193) (ciutats amb metro). Mensual des del 2012; l'INE la publica uns 40 dies després del final de cada mes.
 - Transport urbà: metro i autobús urbà regular. El tren de Rodalies compta com a interurbà.
+- Avió: només vols dins d'Espanya. Els passatgers de cada aeroport, també els de vols internacionals, són a [Aeroports](/ca/movilidad/aeropuertos).
 
 <LastRefreshed prefix="Dades actualitzades" />
