@@ -38,6 +38,14 @@
     export let maxSize = 20;
     export let opacity = 0.8;
     export let pointName = undefined;
+    // Modo líneas (vías de tren, oleoductos): la columna `geom` trae el trazado como texto
+    // «lon,lat;lon,lat|lon,lat;...» (tramos separados por |) y, opcionalmente, `width`
+    // da el grosor (p. ej. trenes al día), proporcional entre minWidth y maxWidth
+    export let geom = undefined;
+    export let width = undefined;
+    export let widthFmt = undefined;
+    export let minWidth = 0.7;
+    export let maxWidth = 6;
     export let basemap = undefined;
     export let attribution = undefined;
     $: basemap, attribution; // compatibilidad con AreaMap
@@ -62,7 +70,8 @@
         }
     }
     $: modoPuntos = !!(lat && long);
-    $: urlGeo = geoJsonUrl ?? (modoPuntos ? '/geo/ccaa.geojson' : undefined);
+    $: modoLineas = !!geom;
+    $: urlGeo = geoJsonUrl ?? (modoPuntos || modoLineas ? '/geo/ccaa.geojson' : undefined);
     onMount(() => cargar(urlGeo));
     $: if (typeof window !== 'undefined') cargar(urlGeo);
 
@@ -162,7 +171,7 @@
 
     // ------------------------------------------------------------------ datos y colores
     $: filas = Array.from(data ?? []);
-    $: porId = modoPuntos ? new Map() : new Map(filas.map((r) => [String(r?.[areaCol] ?? ''), r]));
+    $: porId = modoPuntos || modoLineas ? new Map() : new Map(filas.map((r) => [String(r?.[areaCol] ?? ''), r]));
     $: categorico = legendType === 'categorical';
     $: categorias = categorico ? [...new Set(filas.map((r) => r?.[value]).filter((v) => v !== null && v !== undefined))] : [];
     $: numeros = categorico ? [] : filas.map((r) => Number(r?.[value])).filter((v) => r_ok(v));
@@ -222,6 +231,27 @@
         : [];
     let puntoActivo = null;
 
+    // Trazados proyectados; cada tramo, en la zona de su primer vértice. Los más gruesos, debajo
+    $: anchoMax = width ? Math.max(1e-9, ...filas.map((r) => Math.abs(Number(r?.[width])) || 0)) : 1;
+    $: trazos = modoLineas && dibujo
+        ? filas
+              .map((r, i) => {
+                  const partes = String(r?.[geom] ?? '').split('|').map((s) => s.split(';').map((c) => c.split(',').map(Number)).filter((c) => c.length === 2 && r_ok(c[0]) && r_ok(c[1])));
+                  const d = partes
+                      .filter((p) => p.length > 1)
+                      .map((p) => {
+                          const pr = dibujo.proy[zonaPunto(p[0][0], p[0][1])] ?? dibujo.proy.principal;
+                          return p.map(([lo, la], j) => `${j ? 'L' : 'M'}${pr.fx(lo).toFixed(1)},${pr.fy(la).toFixed(1)}`).join('');
+                      })
+                      .join('');
+                  if (!d) return null;
+                  const w = width ? minWidth + Math.sqrt((Math.abs(Number(r[width])) || 0) / anchoMax) * (maxWidth - minWidth) : 1.4;
+                  return { i, d, w, c: colorFila(r) ?? '#64748b' };
+              })
+              .filter(Boolean)
+              .sort((a, b) => b.w - a.w)
+        : [];
+
     const formatear = (v, f) => {
         if (v === null || v === undefined || v === '') return '—';
         if (f) {
@@ -270,7 +300,7 @@
     }
     $: filaActiva = puntoActivo !== null ? filas[puntoActivo] : activo !== null ? porId.get(activo) : null;
     $: lineas = filaActiva
-        ? (tooltip ?? [{ id: modoPuntos ? pointName : areaCol, showColumnName: false, valueClass: 'font-semibold' }, { id: value, fmt: valueFmt }, ...(size ? [{ id: size, fmt: sizeFmt }] : [])]).filter((t) => t.id).map((t) => ({
+        ? (tooltip ?? [{ id: modoPuntos || modoLineas ? pointName : areaCol, showColumnName: false, valueClass: 'font-semibold' }, { id: value, fmt: valueFmt }, ...(size ? [{ id: size, fmt: sizeFmt }] : []), ...(width && modoLineas ? [{ id: width, fmt: widthFmt }] : [])]).filter((t) => t.id).map((t) => ({
               titulo: t.showColumnName === false ? null : t.title ?? t.id,
               valor: formatear(filaActiva[t.id], t.fmt ?? (t.id === value ? valueFmt : undefined)),
               clase: t.valueClass ?? '',
@@ -333,6 +363,29 @@
                         />
                     {/each}
                 {/each}
+                {#each trazos as tr (tr.i)}
+                    <path d={tr.d} fill="none" stroke={tr.c} stroke-width={puntoActivo === tr.i ? tr.w + 1.5 : tr.w} stroke-linecap="round" stroke-linejoin="round" stroke-opacity={opacity} pointer-events="none" />
+                {/each}
+                {#each trazos as tr (tr.i)}
+                    <!-- Trazo invisible más ancho para que las líneas finas se puedan señalar -->
+                    <path
+                        d={tr.d}
+                        fill="none"
+                        stroke="transparent"
+                        stroke-width={Math.max(tr.w, 7)}
+                        style="pointer-events:stroke"
+                        role="button"
+                        tabindex="0"
+                        aria-label={etiquetaFila(filas[tr.i], tr.i + 1)}
+                        aria-pressed={puntoActivo === tr.i}
+                        on:mousemove={(e) => { puntoActivo = tr.i; mover(e, null); }}
+                        on:focus={(e) => { puntoActivo = tr.i; activo = null; posicionar(e); }}
+                        on:blur={() => { puntoActivo = null; }}
+                        on:keydown={(e) => activarPuntoConTeclado(e, tr)}
+                        on:click={(e) => { puntoActivo = tr.i; activo = null; mover(e, null); }}
+                        on:mouseleave={() => (puntoActivo = null)}
+                    />
+                {/each}
                 {#each puntos as pt (pt.i)}
                     <circle
                         cx={pt.x.toFixed(1)}
@@ -375,7 +428,7 @@
                     <span class="inline-block h-2.5 w-40 rounded-sm" style="background:linear-gradient(to right, {(paleta.length ? paleta : ['#eff6ff', '#1e3a8a']).join(', ')})"></span>
                     <span>{formatear(vMax, valueFmt)}</span>
                 {/if}
-                {#if !modoPuntos}<span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-200 dark:bg-gray-700"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>{/if}
+                {#if !modoPuntos && !modoLineas}<span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-200 dark:bg-gray-700"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>{/if}
             </div>
         {/if}
     </div>

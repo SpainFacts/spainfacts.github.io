@@ -1,0 +1,496 @@
+[
+  {
+    "tabla": "movilidad_gasolineras",
+    "usar": true,
+    "tema": "Cada gasolinera de venta al público de España, con su marca, grupo empresarial, municipio y precio actual de cada carburante",
+    "preguntas": [
+      "¿Cuántas gasolineras hay en mi municipio?",
+      "¿Cuál es la gasolinera más barata de gasóleo en Madrid?",
+      "¿Cuántas gasolineras de Repsol hay en Galicia?",
+      "¿Cuántas gasolineras abren 24 horas en Valencia?"
+    ],
+    "medidas": [
+      { "columna": "precio_gasoleo_a", "nombre": "precio del gasóleo A", "unidad": "€/l", "tipo": "precio", "principal": true },
+      { "columna": "precio_gasolina_95", "nombre": "precio de la gasolina 95", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gasolina_98", "nombre": "precio de la gasolina 98", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gasoleo_premium", "nombre": "precio del gasóleo premium", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_glp", "nombre": "precio del autogás (GLP)", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gnc", "nombre": "precio del gas natural comprimido", "unidad": "€/kg", "tipo": "precio" },
+      { "columna": "precio_gnl", "nombre": "precio del gas natural licuado", "unidad": "€/kg", "tipo": "precio" },
+      { "columna": "precio_hidrogeno", "nombre": "precio del hidrógeno", "unidad": "€/kg", "tipo": "precio" },
+      { "columna": "precio_diesel_renovable", "nombre": "precio del diésel renovable", "unidad": "€/l", "tipo": "precio" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["municipio", "provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [
+      { "columna": "grupo", "nombre": "grupo empresarial (Repsol, Moeve (Cepsa), BP, DISA (Shell), Galp, Ballenoil...)", "total": null },
+      { "columna": "tipo", "nombre": "tipo de gasolinera (Petrolera, Bajo coste, Supermercado, Cooperativa, Independiente con marca, Independiente u otra)", "total": null },
+      { "columna": "rotulo", "nombre": "rótulo o marca de la estación", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Foto del día del geoportal del MITECO (fecha_precios), una fila por estación: contar filas para contar gasolineras; sin serie histórica (la evolución del precio está en movilidad_carburantes_precios). Precio NULL = la estación no vende ese carburante (no promediar como cero). Unas pocas estaciones sin municipio (fuera de los polígonos). latitud/longitud son coordenadas, no cifras. Las tasas por habitante están en movilidad_gasolineras_provincia y _municipio."
+  },
+  {
+    "tabla": "movilidad_gasolineras_grupos",
+    "usar": true,
+    "tema": "Gasolineras de cada grupo empresarial (Repsol, Moeve-Cepsa, BP, Shell...), su cuota de la red y si son más caras o más baratas que la media",
+    "preguntas": [
+      "¿Qué empresa tiene más gasolineras en España?",
+      "¿Qué cuota de las gasolineras tiene Repsol?",
+      "¿Qué cadena de gasolineras es la más barata?",
+      "¿Cuánto más cara es la gasolina en BP que la media?"
+    ],
+    "medidas": [
+      { "columna": "estaciones", "nombre": "gasolineras del grupo", "unidad": "gasolineras", "tipo": "nivel", "principal": true },
+      { "columna": "cuota_pct", "nombre": "cuota de las gasolineras de España", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "provincias", "nombre": "provincias con alguna gasolinera del grupo", "unidad": "provincias", "tipo": "nivel" },
+      { "columna": "precio_gasoleo_a", "nombre": "precio medio del gasóleo A en el grupo", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gasolina_95", "nombre": "precio medio de la gasolina 95 en el grupo", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "dif_gasoleo_a", "nombre": "diferencia del gasóleo A con la media de España", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "dif_gasolina_95", "nombre": "diferencia de la gasolina 95 con la media de España", "unidad": "€/l", "tipo": "precio" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "grupo", "nombre": "grupo empresarial (Repsol incluye Campsa y Petronor; Moeve (Cepsa); DISA (Shell))", "total": null },
+      { "columna": "tipo", "nombre": "tipo de gasolinera (Petrolera, Bajo coste, Supermercado, Cooperativa, Independiente con marca, Independiente u otra)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Foto del día para toda España (sin desglose territorial). Precio medio simple de las estaciones del grupo, no ponderado por ventas; diferencia positiva = más caro que la media. Hay miles de grupos de una sola estación: para rankings de precio conviene exigir un mínimo de estaciones."
+  },
+  {
+    "tabla": "movilidad_gasolineras_provincia",
+    "usar": true,
+    "tema": "Gasolineras por provincia frente a su población: cuántas hay por habitante, vecinos sin gasolinera en su pueblo, bajo coste, precio y litros consumidos por habitante",
+    "preguntas": [
+      "¿Qué provincia tiene más gasolineras por habitante?",
+      "¿Cuántos vecinos viven en municipios sin gasolinera en Soria?",
+      "¿En qué provincia es más barato el gasóleo?",
+      "¿Dónde se consume más carburante por habitante?"
+    ],
+    "medidas": [
+      { "columna": "estaciones_por_10k_hab", "nombre": "gasolineras por cada 10.000 habitantes", "unidad": "por cada 10.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "estaciones", "nombre": "gasolineras", "unidad": "gasolineras", "tipo": "nivel" },
+      { "columna": "poblacion", "nombre": "población", "unidad": "habitantes", "tipo": "nivel" },
+      { "columna": "municipios", "nombre": "municipios", "unidad": "municipios", "tipo": "nivel" },
+      { "columna": "municipios_sin_gasolinera", "nombre": "municipios sin ninguna gasolinera", "unidad": "municipios", "tipo": "nivel" },
+      { "columna": "poblacion_sin_gasolinera", "nombre": "vecinos de municipios sin gasolinera", "unidad": "habitantes", "tipo": "nivel" },
+      { "columna": "poblacion_sin_gasolinera_pct", "nombre": "población que vive en un municipio sin gasolinera", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "bajo_coste_pct", "nombre": "gasolineras de bajo coste", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "supermercado_pct", "nombre": "gasolineras de supermercado", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "abiertas_24h_pct", "nombre": "gasolineras abiertas 24 horas", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "grupo_principal_pct", "nombre": "cuota del grupo con más gasolineras en la provincia", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "precio_gasoleo_a", "nombre": "precio medio actual del gasóleo A", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gasolina_95", "nombre": "precio medio actual de la gasolina 95", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "litros_automocion_hab", "nombre": "litros de carburante de automoción consumidos por habitante en el último año completo", "unidad": "litros por habitante", "tipo": "tasa" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Foto del día, una fila por provincia (52). grupo_principal dice qué grupo tiene más estaciones (casi siempre Repsol; DISA (Shell) en Canarias). Los litros por habitante son del año anio_consumo de CORES, no del día; su serie está en movilidad_carburantes_consumo. Precio medio simple de las estaciones. cod_ccaa permite agrupar por comunidad."
+  },
+  {
+    "tabla": "movilidad_gasolineras_municipio",
+    "usar": true,
+    "tema": "Gasolineras de cada municipio de España (también los que no tienen ninguna), por habitante y con su precio medio",
+    "preguntas": [
+      "¿Cuántas gasolineras hay en Zaragoza?",
+      "¿Tiene gasolinera mi pueblo?",
+      "¿Qué municipio grande tiene menos gasolineras por habitante?",
+      "¿Cuánto cuesta de media el gasóleo en Sevilla?"
+    ],
+    "medidas": [
+      { "columna": "estaciones_por_10k_hab", "nombre": "gasolineras por cada 10.000 habitantes", "unidad": "por cada 10.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "estaciones", "nombre": "gasolineras", "unidad": "gasolineras", "tipo": "nivel" },
+      { "columna": "poblacion", "nombre": "población", "unidad": "habitantes", "tipo": "nivel" },
+      { "columna": "precio_gasoleo_a", "nombre": "precio medio actual del gasóleo A", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "precio_gasolina_95", "nombre": "precio medio actual de la gasolina 95", "unidad": "€/l", "tipo": "precio" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["municipio", "provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": "municipio",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Foto del día, una fila por municipio vigente (8.132), con 0 gasolineras y precio NULL donde no hay ninguna. En pueblos muy pequeños la tasa por 10.000 habitantes se dispara: para rankings filtrar por población (p. ej. más de 20.000 habitantes). Hay nombres de municipio repetidos en distintas provincias: identificar por cod_mun."
+  },
+  {
+    "tabla": "movilidad_carburantes_precios",
+    "usar": true,
+    "tema": "Precio medio mensual de la gasolina, el gasóleo y el autogás en España y en cada provincia desde 2007, también en euros de hoy",
+    "preguntas": [
+      "¿Cuánto cuesta el litro de gasóleo en España?",
+      "¿Cómo ha evolucionado el precio de la gasolina desde 2007?",
+      "¿En qué provincia es más cara la gasolina 95?",
+      "¿Está la gasolina más cara que en 2012 descontando la inflación?"
+    ],
+    "medidas": [
+      { "columna": "precio_litro", "nombre": "precio medio por litro", "unidad": "€/l", "tipo": "precio", "principal": true, "real": "precio_litro_real" },
+      { "columna": "precio_litro_real", "nombre": "precio medio por litro en euros constantes", "unidad": "€/l (euros constantes)", "tipo": "precio" },
+      { "columna": "precio_mediano_litro", "nombre": "precio mediano por litro", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "estaciones", "nombre": "estaciones con precio de ese carburante", "unidad": "gasolineras", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "fecha", "grano": "mensual", "parcial": true },
+    "territorio": {
+      "niveles": ["pais", "provincia"],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": { "columna": "nivel", "valor": "pais" }
+    },
+    "dimensiones": [
+      { "columna": "producto", "nombre": "carburante (gasoleo_a, gasolina_95, glp; el nombre legible en carburante)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Media de los días 1, 8, 15 y 22 de cada mes (columna dias); el mes en curso puede tener menos días. Nunca sumar precios entre productos ni meses. precio_litro_real va en euros de anio_base con el deflactor de España y es NULL en los años sin deflactor (normalmente el año en curso), no «sin inflación». Para comparar con otros países de la UE, movilidad_carburantes_ue."
+  },
+  {
+    "tabla": "movilidad_carburantes_ue",
+    "usar": true,
+    "tema": "Precio de la gasolina y el gasóleo en cada país de la Unión Europea cada mes, con y sin impuestos, frente a España y la media de la UE",
+    "preguntas": [
+      "¿Es la gasolina más barata en España que en Francia?",
+      "¿Qué país de la UE tiene el gasóleo más caro?",
+      "¿Cuántos impuestos lleva un litro de gasolina en España frente a la media europea?",
+      "¿Cómo ha evolucionado el precio del gasóleo en Europa desde 2005?"
+    ],
+    "medidas": [
+      { "columna": "precio_litro", "nombre": "precio por litro con impuestos", "unidad": "€/l", "tipo": "precio", "principal": true, "real": "precio_litro_real" },
+      { "columna": "precio_litro_real", "nombre": "precio por litro con impuestos en euros constantes", "unidad": "€/l (euros constantes)", "tipo": "precio" },
+      { "columna": "precio_sin_impuestos_litro", "nombre": "precio por litro sin impuestos", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "impuestos_litro", "nombre": "impuestos por litro", "unidad": "€/l", "tipo": "precio" },
+      { "columna": "impuestos_pct", "nombre": "impuestos sobre el precio final", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": { "columna": "fecha", "grano": "mensual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "pais_extranjero", "ue"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [
+      { "columna": "producto", "nombre": "carburante (gasolina_95, gasoleo_a; el nombre legible en carburante)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Weekly Oil Bulletin de la Comisión Europea, media mensual. EU27_2020 es la media de la UE. Precio real con el IPCA de cada país (deflactor_paises), en euros de anio_base; NULL en los años o países sin deflactor, nunca «sin inflación». Los precios de España por provincia y desde 2007 están en movilidad_carburantes_precios (otra fuente: no mezclar)."
+  },
+  {
+    "tabla": "movilidad_carburantes_consumo",
+    "usar": true,
+    "tema": "Litros de gasolina y gasóleo consumidos cada año en España, por comunidad y por provincia, en total y por habitante",
+    "preguntas": [
+      "¿Cuántos litros de carburante se consumen al año en España?",
+      "¿Qué provincia consume más gasóleo por habitante?",
+      "¿Ha bajado el consumo de gasolina desde 2007?",
+      "¿Qué parte del carburante de automoción es gasóleo?"
+    ],
+    "medidas": [
+      { "columna": "litros_automocion_hab", "nombre": "litros de carburante de automoción por habitante", "unidad": "litros por habitante", "tipo": "tasa", "principal": true },
+      { "columna": "automocion_litros", "nombre": "litros de carburante de automoción (gasolinas + gasóleo A)", "unidad": "litros", "tipo": "flujo" },
+      { "columna": "gasolina_litros", "nombre": "litros de gasolina", "unidad": "litros", "tipo": "flujo" },
+      { "columna": "gasoleo_a_litros", "nombre": "litros de gasóleo A (automoción)", "unidad": "litros", "tipo": "flujo" },
+      { "columna": "gasoleo_b_litros", "nombre": "litros de gasóleo B (agrícola y pesca)", "unidad": "litros", "tipo": "flujo" },
+      { "columna": "gasoleo_c_litros", "nombre": "litros de gasóleo C (calefacción)", "unidad": "litros", "tipo": "flujo" },
+      { "columna": "litros_gasolina_hab", "nombre": "litros de gasolina por habitante", "unidad": "litros por habitante", "tipo": "tasa" },
+      { "columna": "litros_gasoleo_a_hab", "nombre": "litros de gasóleo A por habitante", "unidad": "litros por habitante", "tipo": "tasa" },
+      { "columna": "gasoleo_pct_automocion", "nombre": "gasóleo sobre el carburante de automoción", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "poblacion", "nombre": "población", "unidad": "habitantes", "tipo": "nivel" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": true },
+    "territorio": {
+      "niveles": ["pais", "ccaa", "provincia"],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": { "columna": "nivel", "valor": "pais" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "CORES, pasado de toneladas a litros. La columna meses dice los meses con dato: el año en curso tiene meses < 12 y no se compara con años completos (ni en total ni por habitante). Las comunidades faltan los años en que CORES no separa todas sus provincias (Canarias al principio). Los por habitante son NULL donde no hay población. Algún valor de gasóleo B sale ligeramente negativo por correcciones de la fuente."
+  },
+  {
+    "tabla": "movilidad_oleoductos",
+    "usar": true,
+    "tema": "Oleoductos de España según OpenStreetMap: tramos, operador (Exolum, Repsol...) y kilómetros",
+    "preguntas": [
+      "¿Cuántos kilómetros de oleoductos hay en España?",
+      "¿De quién son los oleoductos españoles?",
+      "¿Cuánto mide el oleoducto Rota - San Roque?"
+    ],
+    "medidas": [
+      { "columna": "longitud_km", "nombre": "longitud del tramo", "unidad": "km", "tipo": "nivel", "principal": true }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "operador", "nombre": "operador (Exolum, Repsol, Sin operador en OSM)", "total": null },
+      { "columna": "ubicacion", "nombre": "ubicación del tramo (underground enterrado, overground en superficie, overhead elevado)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Una fila por vía de OpenStreetMap (ODbL), no por oleoducto: sumar longitud_km para el total; la mayoría de tramos no tiene nombre. La red real de Exolum (unos 4.000 km según la CNMC) está en movilidad_oleoductos_exolum: OSM no está completo. La columna trazado es texto de coordenadas 'lon,lat;lon,lat' para dibujar el mapa: no usarla en consultas ni gráficos del chat; diametro es texto."
+  },
+  {
+    "tabla": "movilidad_gasoductos",
+    "usar": true,
+    "tema": "Gasoductos y plantas regasificadoras de gas natural licuado de España y las conexiones internacionales, con su estado, propietario, capacidad y longitud",
+    "preguntas": [
+      "¿Cuántas regasificadoras hay en España?",
+      "¿Qué gasoductos conectan España con otros países?",
+      "¿Cuál es el gasoducto con más capacidad?",
+      "¿Qué gasoductos están propuestos o cancelados?"
+    ],
+    "medidas": [
+      { "columna": "longitud_km_espana", "nombre": "longitud del gasoducto dentro de España", "unidad": "km", "tipo": "nivel", "principal": true },
+      { "columna": "capacidad", "nombre": "capacidad (miles de millones de m3 al año los gasoductos, millones de toneladas de GNL al año las terminales)", "unidad": "bcm/año o Mt de GNL/año", "unidad_columna": "unidad_capacidad", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "estado", "nombre": "estado (En servicio, Propuesto, Paralizado, Cancelado)", "total": null, "defecto": "En servicio" },
+      { "columna": "tipo", "nombre": "tipo de instalación (gasoducto, terminal_gnl)", "total": null },
+      { "columna": "tipo_texto", "nombre": "tipo de instalación en texto (Gasoducto, Terminal de GNL (regasificadora))", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Global Gas Infrastructure Tracker de Global Energy Monitor (CC BY 4.0). Por defecto contar y sumar solo lo que está en servicio (estado = 'En servicio', o en_servicio = true): los propuestos y cancelados no existen. No sumar capacidad de gasoductos con la de terminales (unidades distintas, ver unidad_capacidad). internacional = true si cruza a otro país; las terminales llevan latitud/longitud y no longitud. La columna trazado es texto de coordenadas para el mapa: no usarla en consultas ni gráficos del chat; anio_inicio es un año, no una cifra."
+  },
+  {
+    "tabla": "movilidad_gas_importaciones",
+    "usar": true,
+    "tema": "De qué países importa España el gas natural cada año (Argelia, Estados Unidos, Rusia, Nigeria...) y cuánto",
+    "preguntas": [
+      "¿De dónde viene el gas que importa España?",
+      "¿Cuánto gas compra España a Rusia?",
+      "¿Qué parte del gas importado viene de Argelia?",
+      "¿Cómo han cambiado las importaciones de gas desde 2021?"
+    ],
+    "medidas": [
+      { "columna": "millones_m3", "nombre": "gas importado del país", "unidad": "millones de m³", "tipo": "flujo", "principal": true },
+      { "columna": "cuota_pct", "nombre": "cuota del gas importado ese año", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "total_millones_m3", "nombre": "gas importado en total ese año (todos los orígenes)", "unidad": "millones de m³", "tipo": "nivel" },
+      { "columna": "total_m3_por_hab", "nombre": "gas importado en total por habitante", "unidad": "m³ por habitante", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "pais", "nombre": "país de origen del gas (cod_pais en ISO; Sin especificar con cod_pais NULL)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Eurostat nrg_ti_gas. pais es el origen, no el territorio del dato (siempre España). total_millones_m3 y total_m3_por_hab se repiten en cada fila del año: no sumarlos entre países. Incluye gasoducto y GNL; Francia y Portugal pueden ser tránsito."
+  },
+  {
+    "tabla": "movilidad_oleoductos_exolum",
+    "usar": true,
+    "tema": "Red logística de Exolum (antigua CLH) cada año: carburantes que salen de sus almacenes y cuánto se mueve por oleoducto, barco o camión",
+    "preguntas": [
+      "¿Cuánto combustible mueve Exolum al año?",
+      "¿Qué parte de los carburantes se transporta por oleoducto?",
+      "¿Cuántos kilómetros de oleoductos tiene Exolum?",
+      "¿Cuántos litros por habitante salen de los almacenes de CLH?"
+    ],
+    "medidas": [
+      { "columna": "salidas_litros_hab", "nombre": "salidas de los almacenes por habitante", "unidad": "litros por habitante", "tipo": "tasa", "principal": true },
+      { "columna": "salidas_mm3", "nombre": "salidas de productos de los almacenes", "unidad": "millones de m³", "tipo": "flujo" },
+      { "columna": "salidas_carburantes_mm3", "nombre": "salidas de carburantes de los almacenes", "unidad": "millones de m³", "tipo": "flujo" },
+      { "columna": "transporte_mt", "nombre": "producto transportado", "unidad": "millones de toneladas", "tipo": "flujo" },
+      { "columna": "oleoducto_pct", "nombre": "transporte primario por oleoducto", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "buque_pct", "nombre": "transporte primario por barco", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "camion_pct", "nombre": "transporte primario por camión", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "red_km", "nombre": "kilómetros de la red de oleoductos", "unidad": "km", "tipo": "nivel" },
+      { "columna": "distancia_media_oleoducto_km", "nombre": "distancia media recorrida por oleoducto", "unidad": "km", "tipo": "media" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais"],
+      "nivel": null,
+      "codigo": null,
+      "nombre": null,
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Informes anuales de la CNMC sobre Exolum (CLH hasta 2021), una fila por año desde 2011. Algunos años no traen el reparto por modo ni los km de red (NULL). El reparto excluye el transporte por la propia tubería del cliente."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_red",
+    "usar": true,
+    "tema": "Líneas de la red ferroviaria de España según OpenStreetMap, por tipo (alta velocidad, ancho ibérico electrificado o no, ancho métrico), con su longitud y velocidad máxima",
+    "preguntas": [
+      "¿Cuántos kilómetros de alta velocidad hay en España?",
+      "¿Cuántos kilómetros de vía sin electrificar quedan?",
+      "¿Cuánto mide la línea Madrid - Sevilla?",
+      "¿Cuántos kilómetros de ancho métrico hay?"
+    ],
+    "medidas": [
+      { "columna": "longitud_km", "nombre": "kilómetros de corredor ferroviario", "unidad": "km", "tipo": "nivel", "principal": true },
+      { "columna": "velocidad_maxima", "nombre": "velocidad máxima de la línea", "unidad": "km/h", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de vía (alta_velocidad, estandar, iberica_electrificada, iberica_sin_electrificar, metrica)", "total": null },
+      { "columna": "operador", "nombre": "administrador de la infraestructura (Adif, FGC, Euskal Trenbide Sarea...)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "OpenStreetMap: km de corredor (las vías paralelas se funden en una), que no coinciden con los km de líneas de Eurostat (movilidad_ferrocarril_europa) ni con los de Adif. Una fila por línea y tipo; sumar longitud_km para totales. velocidad_maxima no se suma. operador sin normalizar (Adif y ADIF). La columna trazado es texto de coordenadas de varias partes ('|') para el mapa: no usarla en consultas ni gráficos del chat. Por provincia: movilidad_ferrocarril_provincia."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_provincia",
+    "usar": true,
+    "tema": "Kilómetros de vía de tren en cada provincia por tipo (alta velocidad, electrificada, sin electrificar, métrica) y por habitante",
+    "preguntas": [
+      "¿Qué provincia tiene más kilómetros de tren por habitante?",
+      "¿Cuántos kilómetros de alta velocidad tiene Valencia?",
+      "¿Qué provincias tienen más vía sin electrificar?",
+      "¿Qué provincias no tienen tren?"
+    ],
+    "medidas": [
+      { "columna": "km_por_100k_hab", "nombre": "kilómetros de vía de tren por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "km_red", "nombre": "kilómetros de vía de tren", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_alta_velocidad", "nombre": "kilómetros de alta velocidad", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_estandar", "nombre": "kilómetros de ancho estándar convencional", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_iberica_electrificada", "nombre": "kilómetros de ancho ibérico electrificado", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_iberica_sin_electrificar", "nombre": "kilómetros de ancho ibérico sin electrificar", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_metrica", "nombre": "kilómetros de ancho métrico", "unidad": "km", "tipo": "nivel" },
+      { "columna": "sin_electrificar_pct", "nombre": "vía de ancho ibérico sin electrificar", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "poblacion", "nombre": "población", "unidad": "habitantes", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["provincia", "ccaa"],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Km de corredor de OpenStreetMap (vías paralelas fundidas), foto actual sin serie; no comparables con los km de líneas de Eurostat (movilidad_ferrocarril_europa). Las provincias sin tren (Las Palmas, Santa Cruz de Tenerife, Ceuta y Melilla) tienen 0 km y la tasa y el porcentaje NULL. cod_ccaa permite agrupar por comunidad."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_trafico",
+    "usar": true,
+    "tema": "Cuántos trenes de viajeros pasan al día por cada tramo de la red ferroviaria, por clase (cercanías, media distancia, alta velocidad y larga distancia, trenes autonómicos)",
+    "preguntas": [
+      "¿Cuál es el tramo de vía con más trenes al día?",
+      "¿Cuántos trenes pasan al día por la línea Madrid - Barcelona?",
+      "¿Por qué líneas pasan menos de cinco trenes al día?",
+      "¿Cuántos trenes de cercanías circulan por el tramo más cargado?"
+    ],
+    "medidas": [
+      { "columna": "trenes_dia", "nombre": "trenes de viajeros al día por el tramo (los dos sentidos)", "unidad": "trenes al día", "tipo": "nivel", "principal": true },
+      { "columna": "trenes_cercanias", "nombre": "trenes de cercanías al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_media_distancia", "nombre": "trenes de media distancia al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_larga_distancia", "nombre": "trenes de alta velocidad y larga distancia al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_autonomico", "nombre": "trenes de FGC, Euskotren y FGV al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "longitud_km", "nombre": "longitud del tramo", "unidad": "km", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "tipo", "nombre": "tipo de vía (alta_velocidad, estandar, iberica_electrificada, iberica_sin_electrificar, metrica)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Un solo día: trenes programados un miércoles laborable (fecha_horarios) en los horarios GTFS de Renfe, FGC, Euskotren y FGV; no es una media anual ni hay serie. Sin Iryo, Ouigo ni mercancías, así que en alta velocidad y corredores de mercancías se queda corto. No sumar trenes entre tramos (un mismo tren cruza muchos); las clases sí suman trenes_dia. La columna trazado es texto de coordenadas para el mapa: no usarla en consultas ni gráficos del chat."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_estaciones",
+    "usar": true,
+    "tema": "Estaciones de tren de viajeros y cuántos trenes paran en cada una al día, por clase",
+    "preguntas": [
+      "¿Qué estación de tren tiene más trenes al día?",
+      "¿Cuántos trenes paran al día en Madrid-Atocha?",
+      "¿Cuántos trenes de larga distancia paran en Zaragoza Delicias?",
+      "¿Cuántas estaciones de Euskotren hay?"
+    ],
+    "medidas": [
+      { "columna": "trenes_dia", "nombre": "trenes de viajeros que paran al día", "unidad": "trenes al día", "tipo": "nivel", "principal": true },
+      { "columna": "trenes_cercanias", "nombre": "trenes de cercanías que paran al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_media_distancia", "nombre": "trenes de media distancia que paran al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_larga_distancia", "nombre": "trenes de alta velocidad y larga distancia que paran al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_autonomico", "nombre": "trenes de FGC, Euskotren y FGV que paran al día", "unidad": "trenes al día", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "operador", "nombre": "operador de la estación (Renfe, FGC, Euskotren, FGV)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Un solo día (fecha_horarios, miércoles laborable) de los horarios GTFS; sin Iryo, Ouigo ni mercancías, así que las grandes estaciones de alta velocidad salen por debajo. Una fila por estación (contar filas para contar estaciones); buscar por nombre, que puede repetirse entre operadores (Atocha sale como Madrid-Atocha Cercanías y Madrid-Puerta de Atocha-Almudena Grandes). No sumar trenes entre estaciones. latitud/longitud son coordenadas, no cifras; la tabla no trae municipio ni provincia."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_pares",
+    "usar": true,
+    "tema": "Trenes de viajeros al día entre cada par de estaciones consecutivas, por clase y operador",
+    "preguntas": [
+      "¿Cuántos trenes al día hay entre Madrid y Guadalajara?",
+      "¿Entre qué dos estaciones circulan más trenes?",
+      "¿Cuántos trenes al día unen dos estaciones seguidas de FGC?"
+    ],
+    "medidas": [
+      { "columna": "trenes_dia", "nombre": "trenes de viajeros al día entre las dos paradas (los dos sentidos)", "unidad": "trenes al día", "tipo": "nivel", "principal": true },
+      { "columna": "trenes_cercanias", "nombre": "trenes de cercanías al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_media_distancia", "nombre": "trenes de media distancia al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_larga_distancia", "nombre": "trenes de alta velocidad y larga distancia al día", "unidad": "trenes al día", "tipo": "nivel" },
+      { "columna": "trenes_autonomico", "nombre": "trenes de FGC, Euskotren y FGV al día", "unidad": "trenes al día", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": null,
+    "dimensiones": [
+      { "columna": "operadores", "nombre": "operador (Renfe, FGC, Euskotren, FGV)", "total": null }
+    ],
+    "filtros": [],
+    "notas": "Solo paradas consecutivas (estacion_a, estacion_b), no orígenes y destinos: un tren directo Madrid - Barcelona cuenta entre sus dos paradas seguidas. Un solo día (fecha_horarios) de horarios GTFS, sin Iryo, Ouigo ni mercancías. No sumar trenes entre pares. El orden de estacion_a y estacion_b no es un sentido: buscar el par en los dos órdenes."
+  },
+  {
+    "tabla": "movilidad_ferrocarril_europa",
+    "usar": true,
+    "tema": "Red de tren y su uso en España frente a los países de Europa cada año: kilómetros de líneas y de alta velocidad, electrificación, viajeros y mercancías por habitante",
+    "preguntas": [
+      "¿Qué país europeo tiene más kilómetros de alta velocidad?",
+      "¿Tiene España más tren por habitante que la media europea?",
+      "¿Cuántos viajeros-kilómetro hace un español en tren al año frente a un francés?",
+      "¿Cómo ha crecido la alta velocidad en España desde 1992?"
+    ],
+    "medidas": [
+      { "columna": "km_por_100k_hab", "nombre": "kilómetros de líneas por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa", "principal": true },
+      { "columna": "km_lineas", "nombre": "kilómetros de líneas de ferrocarril", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_alta_velocidad", "nombre": "kilómetros de alta velocidad (dedicada y adaptada)", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_alta_velocidad_dedicada", "nombre": "kilómetros de alta velocidad dedicada", "unidad": "km", "tipo": "nivel" },
+      { "columna": "km_alta_velocidad_por_100k_hab", "nombre": "kilómetros de alta velocidad por cada 100.000 habitantes", "unidad": "km por cada 100.000 habitantes", "tipo": "tasa" },
+      { "columna": "electrificadas_pct", "nombre": "líneas electrificadas", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "millones_viajeros_km", "nombre": "viajeros-kilómetro en tren", "unidad": "millones de viajeros-km", "tipo": "flujo" },
+      { "columna": "viajeros_km_hab", "nombre": "viajeros-kilómetro en tren por habitante", "unidad": "viajeros-km por habitante", "tipo": "tasa" },
+      { "columna": "millones_toneladas_km", "nombre": "toneladas-kilómetro de mercancías en tren", "unidad": "millones de toneladas-km", "tipo": "flujo" },
+      { "columna": "toneladas_km_hab", "nombre": "toneladas-kilómetro de mercancías en tren por habitante", "unidad": "toneladas-km por habitante", "tipo": "tasa" }
+    ],
+    "tiempo": { "columna": "anio", "grano": "anual", "parcial": false },
+    "territorio": {
+      "niveles": ["pais", "pais_extranjero", "ue"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat; EU27_2020 es la Unión Europea. Km de líneas de Eurostat, que no se comparan con los km de corredor de OpenStreetMap de movilidad_ferrocarril_red y _provincia. Muchos huecos (NULL) según país y año: la alta velocidad dedicada y los viajeros-km empiezan tarde en varios países, y el último año suele estar incompleto entre países."
+  }
+]

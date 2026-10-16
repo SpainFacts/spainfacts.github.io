@@ -1,0 +1,31 @@
+version: 2
+
+seeds:
+  - name: oleoductos_exolum_cnmc
+    description: >
+      Sistema logístico de Exolum (antes CLH) por año, de los informes anuales de supervisión de
+      la CNMC (IS/DE/009/14 a /25) y, para 2011 y 2012, de la antigua CNE. Copiado a mano de los
+      PDF y comprobado contra el texto. salidas_mm3 = suma de los dos subtotales publicados
+      (gasolinas y gasóleos + aviación, fuelóleos e IFOs; ±0,1 por redondeo); transporte en
+      millones de toneladas, con la tubería; el reparto por modo (oleoducto, buque, camión) es el
+      del transporte primario sin la tubería y se toma la cifra revisada más reciente de cada año
+      (2016 y 2022 se corrigieron al año siguiente). 2013 y 2014 no publican reparto; 2011 solo en
+      volúmenes (en `nota`). Actualizar cada verano con el informe nuevo.
+    config:
+      column_types:
+        anio: integer
+        salidas_mm3: double
+        salidas_carburantes_mm3: double
+        transporte: double
+        unidad_transporte: varchar
+        oleoducto_pct: double
+        buque_pct: double
+        camion_pct: double
+        tuberia_pct: double
+        red_km: double
+        distancia_media_oleoducto_km: double
+        fuente_url: varchar
+        nota: varchar
+    columns:
+      - name: anio
+        tests: [not_null, unique]

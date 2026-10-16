@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
 description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega i viatgers de metro, autobús, tren i avió."
-i18n_origen: 55dddfc9d8f7
+i18n_origen: 18fd367213c4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -140,6 +140,23 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
     <a href="/ca/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transport públic</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viatgers de metro, autobús, Rodalies, AVE i avió cada mes, i el metro de les set ciutats que en tenen.</p>
+    </a>
+</div>
+
+## Infraestructures
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/ca/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Xarxa de ferrocarril</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de totes les vies de tren i de quants trens de viatgers passen cada dia per cada tram i estació, amb la comparació amb Europa.</p>
+    </a>
+    <a href="/ca/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Gasolineres i carburants</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Les 11.500 gasolineres per marca i grup, pobles sense cap, preu del gasoil i la gasolina des del 2007 en euros reals i impostos davant la UE.</p>
+    </a>
+    <a href="/ca/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oleoductes i gasoductes</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La xarxa d'oleoductes d'Exolum, quant combustible va per canonada, vaixell o camió, els gasoductes i les regasificadores i d'on ve el gas.</p>
     </a>
 </div>
 

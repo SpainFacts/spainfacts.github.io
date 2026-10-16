@@ -1,0 +1,76 @@
+version: 2
+
+# Movilidad > Infraestructuras: gasolineras y carburantes, oleoductos y gasoductos, ferrocarril.
+
+models:
+  - name: movilidad_gasolineras
+    description: "Gasolineras de venta al público de la foto actual del geoportal del MITECO, con grupo empresarial (seed carburantes_rotulos_grupos), municipio asignado por coordenadas y precio de cada carburante en €/l (hidrógeno en €/kg) en el momento de la carga."
+    columns:
+      - name: ideess
+        description: "Identificador de la estación en el geoportal."
+        tests: [not_null, unique]
+      - name: rotulo
+        description: "Rótulo limpio (mayúsculas, sin tildes); 'SIN ROTULO' si no tiene o es un número."
+      - name: grupo
+        description: "Grupo empresarial (Repsol incluye Campsa y Petronor; Moeve es la antigua Cepsa; DISA explota la marca Shell)."
+      - name: tipo
+        description: "Petrolera, Bajo coste, Supermercado, Cooperativa, Independiente con marca o Independiente u otra."
+      - name: cod_mun
+        description: "Código INE del municipio (por coordenadas); NULL si cae fuera de los polígonos simplificados."
+      - name: fecha_precios
+        description: "Momento de la foto de precios."
+  - name: movilidad_gasolineras_grupos
+    description: "Gasolineras por grupo empresarial: número, cuota de la red (cuota_pct, 0-100), precio medio simple de gasóleo A y gasolina 95 y diferencia con la media de España (€/l)."
+    columns:
+      - name: grupo
+        tests: [not_null]
+  - name: movilidad_gasolineras_provincia
+    description: "Gasolineras por provincia: total, por 10.000 habitantes, municipios y vecinos sin gasolinera en su municipio, % de bajo coste, supermercado y 24 h, grupo con más estaciones y su cuota, precio medio actual y litros de carburante de automoción por habitante del último año completo de CORES (anio_consumo)."
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+  - name: movilidad_gasolineras_municipio
+    description: "Gasolineras por municipio (todos los municipios vigentes, también los que no tienen ninguna), por 10.000 habitantes y precio medio actual."
+    columns:
+      - name: cod_mun
+        tests: [not_null, unique]
+  - name: movilidad_carburantes_precios
+    description: "Precio medio mensual de venta al público por litro (media de los días 1, 8, 15 y 22 de la media de las estaciones) en España (nivel pais, cod 00) y cada provincia desde 2007, en euros corrientes y constantes (precio_litro_real, euros de anio_base con mother.deflactor; NULL si el año no tiene deflactor)."
+    columns:
+      - name: producto
+        description: "gasoleo_a, gasolina_95 o glp."
+      - name: estaciones
+        description: "Estaciones con precio de ese producto (media de los días del mes)."
+  - name: movilidad_carburantes_ue
+    description: "Weekly Oil Bulletin de la Comisión Europea: precio medio mensual de gasolina 95 y gasóleo de automoción por país de la UE y media de la UE (EU27_2020), con y sin impuestos (€/l), impuestos por litro y en % del precio, y precio en euros constantes con el IPCA de cada país (deflactor_paises)."
+  - name: movilidad_carburantes_consumo
+    description: "Consumo anual de carburantes de CORES por nivel (pais, ccaa, provincia), pasado de toneladas a litros (gasolina 0,745 kg/l; gasóleo 0,835 kg/l), automoción (gasolinas + gasóleo A) total y por habitante. meses < 12 = año en curso incompleto. Las comunidades se omiten los años en que CORES no separa todas sus provincias (Canarias al principio de la serie)."
+  - name: movilidad_oleoductos
+    description: "Oleoductos de OpenStreetMap (ODbL): una fila por vía, con operador normalizado (Exolum, Repsol...), nombre, diámetro, longitud en km y trazado 'lon,lat;lon,lat'."
+    columns:
+      - name: osm_id
+        tests: [not_null, unique]
+  - name: movilidad_gasoductos
+    description: "Gasoductos y terminales de GNL que tocan España del Global Gas Infrastructure Tracker de Global Energy Monitor (CC BY 4.0): estado (estado_fuente en inglés, estado traducido, en_servicio), propietario, año, capacidad (bcm/año los gasoductos, Mt de GNL/año las terminales), longitud del trazado dentro de España y trazado."
+  - name: movilidad_gas_importaciones
+    description: "Importaciones de gas natural de España por país de origen (Eurostat nrg_ti_gas), millones de m3, cuota del total (cuota_pct) y total del año por habitante (total_m3_por_hab). cod_pais NULL = sin especificar."
+  - name: movilidad_oleoductos_exolum
+    description: "Sistema logístico de Exolum (antes CLH) por año según la CNMC: salidas de sus almacenes (millones de m3 y litros por habitante), transporte en millones de toneladas y reparto del transporte primario entre oleoducto, barco y camión (%, sin la tubería)."
+    columns:
+      - name: anio
+        tests: [not_null, unique]
+  - name: movilidad_ferrocarril_red
+    description: "Red ferroviaria de OpenStreetMap por tipo (alta_velocidad, estandar, iberica_electrificada, iberica_sin_electrificar, metrica), línea de Adif, nombre y operador, con km de corredor (vías paralelas fundidas) y trazado de varias partes ('|')."
+  - name: movilidad_ferrocarril_provincia
+    description: "Km de corredor ferroviario por provincia y tipo, por 100.000 habitantes y % de ancho ibérico sin electrificar."
+    columns:
+      - name: cod_prov
+        tests: [not_null, unique]
+  - name: movilidad_ferrocarril_trafico
+    description: "Trenes de viajeros programados en un miércoles laborable (fecha_horarios) por tramo, sumando los dos sentidos, en total y por clase (cercanías, media distancia, alta velocidad y larga distancia, FGC/Euskotren/FGV), calculados trazando cada par de paradas de los horarios GTFS sobre la red. Sin Iryo, Ouigo ni mercancías."
+  - name: movilidad_ferrocarril_estaciones
+    description: "Estaciones con los trenes de viajeros que paran en ellas el día de fecha_horarios, por clase (Renfe larga distancia y Cercanías juntas por código de Adif)."
+  - name: movilidad_ferrocarril_pares
+    description: "Trenes de viajeros al día entre cada par de paradas consecutivas (los dos sentidos), por clase, con los operadores."
+  - name: movilidad_ferrocarril_europa
+    description: "Ferrocarril por país y año (Eurostat): km de líneas y por 100.000 habitantes, km de alta velocidad (dedicada + adaptada, y solo dedicada), % de líneas electrificadas, viajeros-km y toneladas-km totales y por habitante."

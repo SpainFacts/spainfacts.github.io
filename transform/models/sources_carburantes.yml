@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_carburantes
+    description: "Gasolineras y carburantes: geoportal de gasolineras del Ministerio para la Transición Ecológica (foto actual e histórico de precios), consumos por provincia de CORES y Weekly Oil Bulletin de la Comisión Europea (ingestion/carburantes.py)"
+    schema: raw
+    tables:
+      - name: carburantes_estaciones
+        description: "Geoportal de gasolineras (API EstacionesTerrestres): una fila por estación de servicio terrestre con rótulo limpio, provincia (código INE), municipio asignado por coordenadas, horario y precio de cada carburante en €/l (o €/kg el hidrógeno) en el momento de la carga."
+      - name: carburantes_precios_dia
+        description: "Geoportal de gasolineras (API EstacionesTerrestresHist): precio medio y mediano de venta al público (tipo de venta P) por provincia (cod_prov INE; '00' = España) y producto (gasoleo_a, gasolina_95, glp) los días 1, 8, 15 y 22 de cada mes desde enero de 2007, y número de estaciones con precio."
+      - name: carburantes_consumo_provincia
+        description: "CORES, consumos de gasolinas, gasóleos y fuelóleos por provincia y comunidad, mensual desde 1997, en toneladas. `provincia` y `ccaa` con los nombres de CORES; filas 'Total' de comunidad y 'Total Nacional'."
+      - name: carburantes_precios_ue
+        description: "Comisión Europea, Weekly Oil Bulletin (histórico): precio medio semanal de venta al público de gasolina 95 y gasóleo de automoción por país de la UE (código de dos letras de la fuente: EL Grecia, UK Reino Unido hasta 2020, EU y EUR agregados), con y sin impuestos, en €/l."

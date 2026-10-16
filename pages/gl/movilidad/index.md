@@ -1,5 +1,5 @@
 ---
-i18n_origen: 55dddfc9d8f7
+i18n_origen: 18fd367213c4
 title: Mobilidade
 description: "Mobilidade en España: coches que se venden e circulan por tipo de motor, transición ao coche eléctrico, puntos de recarga e viaxeiros de metro, autobús, tren e avión."
 og:
@@ -140,6 +140,23 @@ Como nos movemos en España: os coches que se compran e os que circulan, o avanc
     <a href="/gl/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transporte público</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viaxeiros de metro, autobús, Cercanías, AVE e avión cada mes, e o metro das sete cidades que o teñen.</p>
+    </a>
+</div>
+
+## Infraestruturas
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/gl/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Rede de ferrocarril</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas as vías de tren e de cantos trens de viaxeiros pasan ao día por cada tramo e estación, coa comparación con Europa.</p>
+    </a>
+    <a href="/gl/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Gasolineiras e carburantes</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">As 11.500 gasolineiras por marca e grupo, vilas sen ningunha, prezo do gasóleo e da gasolina desde 2007 en euros reais e impostos fronte á UE.</p>
+    </a>
+    <a href="/gl/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oleodutos e gasodutos</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">A rede de oleodutos de Exolum, canto combustible vai por tubo, barco ou camión, os gasodutos e regasificadoras e de onde vén o gas.</p>
     </a>
 </div>
 

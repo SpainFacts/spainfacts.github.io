@@ -142,4 +142,21 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
     </a>
 </div>
 
+## Infraestructuras
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Red de ferrocarril</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas las vías de tren y de cuántos trenes de viajeros pasan al día por cada tramo y estación, con la comparación con Europa.</p>
+    </a>
+    <a href="/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Gasolineras y carburantes</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Las 11.500 gasolineras por marca y grupo, pueblos sin ninguna, precio del gasóleo y la gasolina desde 2007 en euros reales e impuestos frente a la UE.</p>
+    </a>
+    <a href="/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oleoductos y gasoductos</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La red de oleoductos de Exolum, cuánto combustible va por tubo, barco o camión, los gasoductos y regasificadoras y de dónde viene el gas.</p>
+    </a>
+</div>
+
 <LastRefreshed prefix="Datos actualizados" />

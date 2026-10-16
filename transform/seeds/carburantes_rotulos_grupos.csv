@@ -1,0 +1,37 @@
+patron,grupo,tipo
+REPSOL,Repsol,Petrolera
+CAMPSA,Repsol,Petrolera
+PETRONOR,Repsol,Petrolera
+MOEVE,Moeve (Cepsa),Petrolera
+CEPSA,Moeve (Cepsa),Petrolera
+GALP,Galp,Petrolera
+SHELL,DISA (Shell),Petrolera
+DISA,DISA (Shell),Petrolera
+BP,BP,Petrolera
+Q8,Q8,Petrolera
+ENI,Eni,Petrolera
+AGIP,Eni,Petrolera
+TAMOIL,Tamoil,Petrolera
+AVIA,Avia,Independiente con marca
+GALP ENERGIA,Galp,Petrolera
+BALLENOIL,Ballenoil,Bajo coste
+PLENERGY,Plenergy,Bajo coste
+PETROPRIX,Petroprix,Bajo coste
+GASEXPRESS,Gasexpress,Bajo coste
+EASYGAS,Easygas,Bajo coste
+FAST FUEL,Fast Fuel,Bajo coste
+AUTONETOIL,Autonetoil,Bajo coste
+MEROIL,Meroil,Bajo coste
+BEROIL,Beroil,Bajo coste
+GM OIL,GM Oil,Bajo coste
+GMOIL,GM Oil,Bajo coste
+PETROCAT,Petrocat,Bajo coste
+VALCARCE,Valcarce,Bajo coste
+NIEVES,Nieves,Bajo coste
+CARREFOUR,Carrefour,Supermercado
+SUPECO,Carrefour,Supermercado
+ALCAMPO,Alcampo,Supermercado
+EROSKI,Eroski,Supermercado
+BONAREA,bonÀrea,Supermercado
+ESCLATOIL,Bon Preu (Esclatoil),Supermercado
+AGROPAL,Agropal,Cooperativa

@@ -1,0 +1,33 @@
+version: 2
+
+seeds:
+  - name: carburantes_provincias_cores
+    description: >
+      Nombre de cada provincia en el Excel de consumos de CORES (consumos-pp-ccaa-provincias.xlsx)
+      y su código INE. Las filas «Total» (de comunidad y nacional) y «Canarias» (los primeros
+      años, sin separar Las Palmas y Santa Cruz de Tenerife) no son provincias y no están aquí.
+    config:
+      column_types:
+        provincia_cores: varchar
+        cod_prov: varchar
+    columns:
+      - name: provincia_cores
+        tests: [not_null, unique]
+      - name: cod_prov
+        tests: [not_null, unique]
+  - name: carburantes_rotulos_grupos
+    description: >
+      Rótulo de la gasolinera (limpio, en mayúsculas y sin tildes, como lo deja
+      ingestion/carburantes.py) -> grupo empresarial y tipo. Un rótulo casa con el patrón si es
+      igual o empieza por él seguido de un espacio («REPSOL AUTOGAS»); gana el patrón más largo.
+      Campsa y Petronor son de Repsol; las gasolineras Shell de España las explota DISA con
+      licencia de la marca desde 2010; Cepsa pasó a llamarse Moeve en 2024. Lo que no casa con
+      ningún patrón es «Independiente u otra» con su propio rótulo como grupo.
+    config:
+      column_types:
+        patron: varchar
+        grupo: varchar
+        tipo: varchar
+    columns:
+      - name: patron
+        tests: [not_null, unique]

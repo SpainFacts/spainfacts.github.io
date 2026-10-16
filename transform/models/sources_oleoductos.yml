@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_oleoductos
+    description: "Oleoductos y gasoductos: trazados de OpenStreetMap (Overpass), gasoductos y terminales de GNL del Global Gas Infrastructure Tracker de Global Energy Monitor e importaciones de gas natural por país de origen de Eurostat (ingestion/oleoductos.py)"
+    schema: raw
+    tables:
+      - name: oleoductos_osm
+        description: "OpenStreetMap (© OpenStreetMap contributors, ODbL): una fila por vía man_made=pipeline con substance oil/fuel/crude_oil (sustancia = petroleo) o gas/natural_gas (sustancia = gas) en España. Operador normalizado con operator:wikidata; longitud en km calculada con haversine; trazado simplificado (Douglas-Peucker, ~200 m) como texto 'lon,lat;lon,lat'."
+      - name: oleoductos_gem
+        description: "Global Energy Monitor, Global Gas Infrastructure Tracker (CC BY 4.0): gasoductos (líneas, trazado recortado a España) y terminales de GNL (puntos) que tocan España, con estado (operating, proposed, construction, shelved, cancelled...), propietario, año de entrada en servicio y capacidad (bcm/año los gasoductos; mtpa de GNL las terminales)."
+      - name: oleoductos_gas_importaciones
+        description: "Eurostat nrg_ti_gas: importaciones de gas natural de España por país de origen (partner, código Eurostat; TOTAL y agregados incluidos), millones de m3, anual."

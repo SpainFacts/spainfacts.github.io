@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: raw_ferrocarril
+    description: "Red ferroviaria de OpenStreetMap y trenes programados por tramo calculados con los horarios GTFS de Renfe, FGC, Euskotren y FGV de un día laborable, más indicadores ferroviarios de Eurostat por país (ingestion/ferrocarril.py)"
+    schema: raw
+    tables:
+      - name: ferrocarril_red
+        description: "Red ferroviaria (© OpenStreetMap contributors, ODbL): tramos de corredor con el mismo tipo (alta_velocidad, estandar, iberica_electrificada, iberica_sin_electrificar, metrica), número de línea de Adif (ref), nombre y operador; las vías paralelas se funden en una (rejilla de 0,001º). Longitud del corredor en km y trazado simplificado 'lon,lat;lon,lat'."
+      - name: ferrocarril_red_provincia
+        description: "Km de corredor ferroviario por provincia (cod_prov INE, asignada por coordenadas) y tipo."
+      - name: ferrocarril_trafico
+        description: "Trenes de viajeros programados en un día laborable (fecha_horarios) por tramo: aristas del corredor encadenadas con el mismo número de trenes de cada clase (cercanias, media_distancia, larga_distancia, autonomico = FGC, Euskotren y FGV). Cada par de paradas consecutivas se traza por el camino más corto. Sin Iryo, Ouigo ni mercancías."
+      - name: ferrocarril_estaciones
+        description: "Paradas de los horarios GTFS (estacion_id = 'fuente:stop_id') con los trenes que paran en ellas el día de fecha_horarios, por clase."
+      - name: ferrocarril_pares
+        description: "Trenes del día entre cada par de paradas consecutivas (sin sentido), por clase y operador."
+      - name: ferrocarril_eurostat
+        description: "Eurostat: km de líneas (rail_if_line_sp: total y alta velocidad dedicada/adaptada; rail_if_line_ga: total y electrificadas), millones de viajeros-km (rail_pa_total) y de toneladas-km (rail_go_total) por país (cod_fuente = código Eurostat) y año."

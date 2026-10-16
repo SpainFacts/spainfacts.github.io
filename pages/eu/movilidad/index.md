@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
 description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak eta metro, autobus, tren eta hegazkineko bidaiariak."
-i18n_origen: 55dddfc9d8f7
+i18n_origen: 18fd367213c4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -140,6 +140,23 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
     <a href="/eu/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Garraio publikoa</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Metro, autobus, Cercanías (aldiriko trenak), AVE eta hegazkineko bidaiariak hilero, eta metroa duten zazpi hirietako metroa.</p>
+    </a>
+</div>
+
+## Azpiegiturak
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/eu/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Trenbide-sarea</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Trenbide guztien mapa eta egunero zati eta geltoki bakoitzetik zenbat bidaiari-tren igarotzen diren, Europarekin alderatuta.</p>
+    </a>
+    <a href="/eu/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Gasolindegiak eta erregaiak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">11.500 gasolindegiak markaren eta taldearen arabera, bat ere ez duten herriak, gasolioaren eta gasolinaren prezioa 2007tik euro errealetan eta zergak EBrekin alderatuta.</p>
+    </a>
+    <a href="/eu/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oliobideak eta gasbideak</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Exolumen oliobide-sarea, zenbat erregai doan hodiz, itsasontziz edo kamioiz, gasbideak eta birgasifikazio-plantak, eta gasa nondik datorren.</p>
     </a>
 </div>
 

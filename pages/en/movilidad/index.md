@@ -1,7 +1,7 @@
 ---
 title: Mobility
 description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, and passengers on metro, bus, rail and air."
-i18n_origen: 55dddfc9d8f7
+i18n_origen: 18fd367213c4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -140,6 +140,23 @@ How people get around in Spain: the cars being bought and the ones on the road, 
     <a href="/en/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
         <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Public transport</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Metro, bus, Cercanías commuter rail, AVE high-speed rail and air passengers every month, and the metro in the seven cities that have one.</p>
+    </a>
+</div>
+
+## Infrastructure
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
+    <a href="/en/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Railway network</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Map of every railway line and of how many passenger trains run each day on every section and through every station, compared with Europe.</p>
+    </a>
+    <a href="/en/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Petrol stations and fuel</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">The 11,500 petrol stations by brand and group, towns with none, the price of diesel and petrol since 2007 in real euros, and taxes compared with the EU.</p>
+    </a>
+    <a href="/en/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
+        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oil and gas pipelines</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Exolum's oil pipeline network, how much fuel goes by pipe, ship or lorry, the gas pipelines and regasification plants, and where the gas comes from.</p>
     </a>
 </div>
 

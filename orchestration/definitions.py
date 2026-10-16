@@ -59,6 +59,8 @@ from ingestion.renta import renta
 from ingestion.sanidad import sanidad
 from ingestion.gasto_oculto import gasto_oculto
 from ingestion.sermas import sermas
+from ingestion.carburantes import carburantes
+from ingestion.oleoductos import oleoductos
 from ingestion.educacion_privada import educacion_privada
 from ingestion.sanidad_privada import sanidad_privada
 from ingestion.turismo import turismo
@@ -339,6 +341,21 @@ def sermas_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResour
     yield from dlt_resource.run(context=context)
 
 
+# Gasolineras y carburantes: foto diaria de las estaciones del geoportal del MITECO, precios
+# históricos por provincia (solo baja los días nuevos; caché en data/carburantes_cache),
+# consumo por provincia de CORES y Weekly Oil Bulletin de la Comisión Europea.
+@dlt_assets(dlt_source=carburantes(), dlt_pipeline=_pipeline_motherduck("carburantes"), name="carburantes", group_name="ingesta")
+def carburantes_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
+# Oleoductos (OpenStreetMap), gasoductos y regasificadoras (Global Energy Monitor, ~200 MB) e
+# importaciones de gas por origen (Eurostat): cambian poco, van en el job mensual.
+@dlt_assets(dlt_source=oleoductos(), dlt_pipeline=_pipeline_motherduck("oleoductos"), name="oleoductos", group_name="ingesta_mensual")
+def oleoductos_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
+    yield from dlt_resource.run(context=context)
+
+
 # Educación pública, concertada y privada por comunidad (EDUCAbase, SIIU y RUCT).
 @dlt_assets(dlt_source=educacion_privada(), dlt_pipeline=_pipeline_motherduck("educacion_privada"), name="educacion_privada", group_name="ingesta_mensual")
 def educacion_privada_assets(context: AssetExecutionContext, dlt_resource: DagsterDltResource):
@@ -496,7 +513,7 @@ dbt_project = DbtProject(project_dir=TRANSFORM_DIR)
 dbt_project.prepare_if_dev()  # en dev genera target/manifest.json; en Docker lo hace el entrypoint
 
 
-PIPELINE_POR_TEMA = {"ciudades", "clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa", "medios_sector", "medios_confianza", "medios_libertad", "medios_subvenciones_pv", "sanidad_privada", "educacion_privada", "sermas", "gasto_oculto"}
+PIPELINE_POR_TEMA = {"ciudades", "clima", "demografia", "educacion", "elecciones", "empresas", "internacional", "mercado", "pensiones", "renta", "sanidad", "transparencia_gobierno", "turismo", "vivienda", "transparencia_internacional", "transparencia_publicidad_activa", "vivienda_publica", "medios_publicidad", "medios_subvenciones", "medios_publicidad_territorial", "medios_contratos", "primario", "industria", "construccion", "diputados_inmuebles", "medios_contratos_ccaa", "medios_sector", "medios_confianza", "medios_libertad", "medios_subvenciones_pv", "sanidad_privada", "educacion_privada", "sermas", "gasto_oculto", "carburantes", "oleoductos"}
 
 
 class _Translator(DagsterDbtTranslator):
@@ -567,7 +584,7 @@ schedule_mensual = ScheduleDefinition(
 )
 
 defs = Definitions(
-    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, sanidad_privada_assets, educacion_privada_assets, elecciones_assets, internacional_assets, ciudades_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_subvenciones_pv_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, medios_sector_assets, medios_confianza_assets, medios_libertad_assets, sermas_assets, gasto_oculto_assets, transform_assets, deploy_web],
+    assets=[ine_assets, eurostat_assets, miteco_assets, observatorios_assets, incendios_assets, ree_assets, emisiones_assets, ree_visiona_assets, aemet_assets, bde_assets, dgt_assets, recarga_assets, almacenamiento_assets, hacienda_ccaa_assets, gem_assets, alcaldes_assets, conprel_assets, hacienda_transparencia_assets, empleo_publico_assets, criminalidad_assets, migracion_assets, mercado_assets, vivienda_assets, pensiones_assets, renta_assets, educacion_assets, turismo_assets, demografia_assets, clima_assets, empresas_assets, sanidad_assets, sanidad_privada_assets, educacion_privada_assets, elecciones_assets, internacional_assets, ciudades_assets, transparencia_gobierno_assets, transparencia_internacional_assets, transparencia_publicidad_activa_assets, vivienda_publica_assets, medios_publicidad_assets, medios_subvenciones_assets, medios_subvenciones_pv_assets, medios_publicidad_territorial_assets, medios_contratos_assets, medios_contratos_ccaa_assets, primario_assets, industria_assets, construccion_assets, diputados_inmuebles_assets, medios_sector_assets, medios_confianza_assets, medios_libertad_assets, sermas_assets, gasto_oculto_assets, carburantes_assets, oleoductos_assets, transform_assets, deploy_web],
     jobs=[actualizacion_diaria, actualizacion_mensual],
     schedules=[schedule_diario, schedule_mensual],
     resources={
