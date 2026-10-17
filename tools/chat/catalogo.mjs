@@ -224,17 +224,20 @@ const EMBEDDINGS = {
 	prefijo_documento: 'title: none | text: '
 };
 let embeddings = null;
+const EMBEDDINGS_CACHE_DIR = process.env.SPAINFACTS_MODELOS ?? path.join(os.homedir(), '.cache', 'tjs');
 if (!args.includes('--sin-vectores')) {
 	// El mismo embebedor que usa el navegador en /chat: los vectores de tablas y preguntas deben
 	// salir del mismo fichero de modelo y del mismo cálculo.
 	// Ruta corta (onnxruntime no abre rutas de más de 260 caracteres en Windows); en el deploy
 	// esta carpeta va en la caché de Actions para no descargar el modelo cada vez
-	const { crearEmbebedor } = await import('../../src/lib/chat/locales.js');
-	const extraer = await crearEmbebedor({
+	// Se carga solo si hace falta algún vector que no está en la caché (abajo)
+	let embebedor = null;
+	const extraer = async (texto) => (embebedor ??= await crearEmbebedor())(texto);
+	const crearEmbebedor = async () => (await import('../../src/lib/chat/locales.js')).crearEmbebedor({
 		modelo: EMBEDDINGS.modelo,
 		dtype: EMBEDDINGS.dtype,
 		archivo: EMBEDDINGS.archivo,
-		cacheDir: process.env.SPAINFACTS_MODELOS ?? path.join(os.homedir(), '.cache', 'tjs')
+		cacheDir: EMBEDDINGS_CACHE_DIR
 	});
 	// Con ficha semántica, el tema, las preguntas de ejemplo y las cifras en lenguaje llano dicen
 	// mejor de qué va la tabla que los nombres de columna
@@ -251,15 +254,34 @@ if (!args.includes('--sin-vectores')) {
 		const norma = Math.hypot(...r);
 		return Buffer.from(Int8Array.from(r, (x) => Math.max(-127, Math.min(127, Math.round((x / norma) * 127)))).buffer).toString('base64');
 	};
+	// Caché de vectores por texto: recalcular los ~1.700 textos tarda 5 min en el deploy y casi
+	// nunca cambian. La clave lleva el modelo y las dimensiones, así que cambiarlos la invalida;
+	// en el deploy el fichero va en la caché de Actions (deploy.yml)
+	const RUTA_CACHE = process.env.SPAINFACTS_CACHE_VECTORES ?? path.join(EMBEDDINGS_CACHE_DIR, 'vectores-catalogo.json');
+	const huella = `${EMBEDDINGS.modelo}|${EMBEDDINGS.dtype}|${EMBEDDINGS.archivo}|${EMBEDDINGS.dims}`;
+	let cache = {};
+	try {
+		const leido = JSON.parse(fs.readFileSync(RUTA_CACHE, 'utf8'));
+		if (leido.huella === huella) cache = leido.vectores;
+	} catch {}
+	const usados = {};
+	let calculados = 0;
+	const vector = async (texto) => {
+		usados[texto] = cache[texto] ?? (calculados++, aBase64(await extraer(texto)));
+		return usados[texto];
+	};
 	for (const t of tablas) {
-		t.vec = aBase64(await extraer(textoTabla(t)));
+		t.vec = await vector(textoTabla(t));
 		// Las preguntas de ejemplo de la ficha, cada una con su vector y como consulta: comparar
 		// pregunta con pregunta encuentra la tabla mejor que pregunta con descripción
 		if (t.semantica?.usar && t.semantica.preguntas?.length) {
 			t.vecs_preguntas = [];
-			for (const p of t.semantica.preguntas) t.vecs_preguntas.push(aBase64(await extraer(`${EMBEDDINGS.prefijo_consulta}${p}`)));
+			for (const p of t.semantica.preguntas) t.vecs_preguntas.push(await vector(`${EMBEDDINGS.prefijo_consulta}${p}`));
 		}
 	}
+	fs.mkdirSync(path.dirname(RUTA_CACHE), { recursive: true });
+	fs.writeFileSync(RUTA_CACHE, JSON.stringify({ huella, vectores: usados }));
+	console.log(`Vectores: ${Object.keys(usados).length} (${calculados} calculados, el resto de la caché)`);
 	embeddings = { ...EMBEDDINGS, escala: 127 };
 }
 

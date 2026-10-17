@@ -1,3 +1,68 @@
+diff --git a/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js b/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
+index 9fdf279..51d7fd4 100644
+--- a/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
++++ b/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
+@@ -57,6 +57,27 @@ function hash(buffer) {
+  */
+ const sql_string_cache = new Map();
+ 
++/**
++ * SpainFacts (patch-package): clave de sql_string_cache. Las consultas de los componentes llevan
++ * cosas aleatorias en cada render: una primera línea «---- Data|Length|Columns nombre (id)» y un
++ * alias "inputQuery-xx" (nanoid) en el subselect. Con el texto tal cual la caché casi nunca
++ * acertaba: el prerender ejecutaba ~4 veces más consultas en DuckDB-WASM (que bloquea el proceso)
++ * y serializaba y escribía cada resultado otra vez. En el build los parquets no cambian, así que
++ * dos consultas con el mismo cuerpo dan lo mismo. Cada alias distinto pasa a su número de orden
++ * para no confundir dos subselects de una misma consulta.
++ * @param {string} sql
++ * @returns {string}
++ */
++function cuerpo(sql) {
++	const alias = new Map();
++	return String(sql)
++		.replace(/^---- [^\n]*\n/, '')
++		.replace(/"inputQuery-[A-Za-z0-9_-]+"/g, (a) => {
++			if (!alias.has(a)) alias.set(a, `"inputQuery-${alias.size}"`);
++			return alias.get(a);
++		});
++}
++
+ // while prerendering static sites, sveltekit finds endpoints based on what's used in load functions with
+ // the provided fetch - since the data isn't ready yet, instead we write the data to the place where sveltekit
+ // would have written it
+@@ -75,10 +96,11 @@ export function cache_for_hash(
+ 	{ route_hash, additional_hash, query_name, prerendering }
+ ) {
+ 	// if the it's in the cache then we shouldn't bother
+-	let ipc_table_hash = sql_string_cache.get(sql_string);
++	const clave = cuerpo(sql_string);
++	let ipc_table_hash = sql_string_cache.get(clave);
+ 
+ 	// this can only be false during `prerendering`
+-	if (!sql_string_cache.has(sql_string)) {
++	if (!sql_string_cache.has(clave)) {
+ 		const ipc_table = tableToIPC(data);
+ 		ipc_table_hash = hash(ipc_table);
+ 
+@@ -93,7 +115,7 @@ export function cache_for_hash(
+ 				`${prerender_path}/api/prerendered_queries/${ipc_table_hash}.arrow`,
+ 				ipc_table
+ 			);
+-			sql_string_cache.set(sql_string, ipc_table_hash);
++			sql_string_cache.set(clave, ipc_table_hash);
+ 		}
+ 	}
+ 
+@@ -178,6 +200,7 @@ export function get_all_page_queries(route_hash, additional_hash) {
+  * @returns {import("apache-arrow").Table | null}
+  */
+ export function get_arrow_if_sql_already_run(sql) {
+-	if (!sql_string_cache.has(sql)) return null;
+-	return tableFromIPC(get_cache_for_hash(sql_string_cache.get(sql)));
++	const clave = cuerpo(sql);
++	if (!sql_string_cache.has(clave)) return null;
++	return tableFromIPC(get_cache_for_hash(sql_string_cache.get(clave)));
+ }
 diff --git a/node_modules/@evidence-dev/universal-sql/src/client-duckdb/browser.js b/node_modules/@evidence-dev/universal-sql/src/client-duckdb/browser.js
 index 27c5b43..00d837d 100644
 --- a/node_modules/@evidence-dev/universal-sql/src/client-duckdb/browser.js

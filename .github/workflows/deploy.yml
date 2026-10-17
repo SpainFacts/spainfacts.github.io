@@ -14,6 +14,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Un push nuevo cancela el build que aún está en marcha: solo se publica el último.
+    # Si el cancelado traía [datos], el siguiente lo detecta (ver «Decidir tipo de extracción»)
+    concurrency:
+      group: build-pages
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,8 +28,15 @@ jobs:
           node-version: 20
           cache: npm
 
+      # Hasta 3 intentos: un fallo de red en npm tiraba el deploy entero
       - name: Install dependencies
-        run: npm install
+        run: |
+          for intento in 1 2 3; do
+            npm install && exit 0
+            echo "npm install falló (intento $intento), reintentando en 20 s"
+            sleep 20
+          done
+          exit 1
 
       # Cada consulta a MotherDuck gasta cupo del plan gratuito. En un push de código
       # los datos no han cambiado: se reutilizan los parquets del despliegue anterior y
@@ -32,13 +44,23 @@ jobs:
       # --changed compara un hash del SQL guardado en .evidence/meta/query-cache).
       # Extracción completa: Dagster (data-updated), lanzamiento a mano, la semanal o
       # un push con [datos] en el mensaje del commit.
+      # [datos] se busca en todos los commits desde el último deploy correcto, no solo en el
+      # último: un push con varios commits o un build cancelado por otro push no lo pierden
       - name: Decidir tipo de extracción
         id: modo
         env:
           EVENTO: ${{ github.event_name }}
           MENSAJE: ${{ github.event.head_commit.message }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "$EVENTO" = "push" ] && ! printf '%s' "$MENSAJE" | grep -qiF '[datos]'; then
+          MENSAJES="$MENSAJE"
+          if [ "$EVENTO" = "push" ]; then
+            ULTIMO=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy.yml --status success -L 1 --json headSha --jq '.[0].headSha' || true)
+            if [ -n "$ULTIMO" ]; then
+              MENSAJES=$(gh api "repos/$GITHUB_REPOSITORY/compare/$ULTIMO...$GITHUB_SHA" --jq '.commits[].commit.message' || echo '[datos]')
+            fi
+          fi
+          if [ "$EVENTO" = "push" ] && ! printf '%s' "$MENSAJES" | grep -qiF '[datos]'; then
             echo "completa=false" >> "$GITHUB_OUTPUT"
             echo "Extracción incremental: solo las consultas cambiadas"
           else
@@ -83,15 +105,29 @@ jobs:
           path: ~/.cache/tjs
           key: modelos-chat-embeddinggemma-300m-no-gather-q4
 
+      # Vectores del catálogo por texto: solo se recalculan los de las tablas que cambian
+      - name: Caché de vectores del catálogo
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/catalogo-vectores.json
+          key: vectores-catalogo-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: vectores-catalogo-
+
       - name: build
         env:
           BASE_PATH: '/'
           # 5 idiomas: el empaquetado necesita más memoria que el límite por defecto de Node
           NODE_OPTIONS: '--max-old-space-size=12288'
         run: |
+          export SPAINFACTS_CACHE_VECTORES="$HOME/.cache/catalogo-vectores.json"
+          # Catálogo de tablas para el chat (/chat) y el servidor MCP (tools/mcp): no necesita
+          # el sitio construido, así que se calcula a la vez que el build y se copia al final
+          NODE_OPTIONS= node tools/chat/catalogo.mjs --salida "$RUNNER_TEMP/catalogo.json" > "$RUNNER_TEMP/catalogo.log" 2>&1 &
+          CATALOGO=$!
           npm run build:strict
-          # Catálogo de tablas para el chat (/chat) y el servidor MCP (tools/mcp)
-          node tools/chat/catalogo.mjs
+          if ! wait $CATALOGO; then cat "$RUNNER_TEMP/catalogo.log"; exit 1; fi
+          cat "$RUNNER_TEMP/catalogo.log"
+          mkdir -p build/chat && cp "$RUNNER_TEMP/catalogo.json" build/chat/catalogo.json
           node tools/sitemap.mjs
           node tools/html-lang-es.mjs
 
@@ -117,6 +153,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # La publicación en sí no se corta a medias: espera a la anterior
+    concurrency:
+      group: deploy-pages
+      cancel-in-progress: false
 
     permissions:
       pages: write
