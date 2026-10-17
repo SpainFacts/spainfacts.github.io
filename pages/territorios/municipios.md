@@ -10,7 +10,8 @@ og:
     import BuscadorMunicipio from '../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../src/lib/suelos.js';
+    import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import { idiomaDeRuta } from '../../../../../../src/lib/i18n.js';
     import { page as paginaActual } from '$app/stores';
     $: idioma = idiomaDeRuta($paginaActual.url.pathname);
@@ -776,6 +777,43 @@ El {formatNumber(suelo_toda.pct_agraria, 0)} % del término municipal es superfi
         source="SoilGrids"
     />
 </Grid>
+
+```sql suelo_puntos
+SELECT celda, 1 AS celda_km, lon, lat, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
+    arcilla_pct, ph, materia_organica_pct
+FROM mother.suelos_puntos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+```
+
+{#if suelo_puntos.length > 0}
+
+<MapaEspana
+    data={puntosPorTextura(suelo_puntos, idioma)}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
+    filtroGeo={{cod_mun: suelo_toda.cod_mun}}
+    celdaKm={1}
+    pointName=textura_txt
+    opacity={0.95}
+    height={420}
+    tooltip={[
+        {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'arcilla_pct', title: 'Arcilla (%)', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Tipo de suelo'},
+        {id: 'cultivo_txt', title: 'Cultivo principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num2'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Cada punto es la parte del término municipal de una celda de 1 × 1 km con superficie agraria, coloreada por su textura. Por pH, materia orgánica, tipo de suelo o cultivo, en <a href="/territorios/suelos?m={suelo_toda.cod_mun}">el mapa de suelos agrarios</a>.</p>
+
+{/if}
 
 {#if suelo_mun.length > 1}
 

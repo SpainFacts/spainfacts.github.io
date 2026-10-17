@@ -364,3 +364,15 @@ export function etiquetasSuelo(filas, idioma = 'es') {
         wrb_txt: d.wrb_dominante !== undefined ? etiquetaSuelo('WRB', d.wrb_dominante, idioma) : undefined
     }));
 }
+
+// Filas del mapa de puntos coloreadas por grupo de textura, con las etiquetas del idioma
+export function puntosPorTextura(filas, idioma = 'es') {
+    return etiquetasSuelo(filas, idioma).map((d) => ({
+        ...d,
+        categoria: etiquetaSuelo('GRUPO', d.textura_grupo, idioma),
+        color: COLOR_GRUPO_TEXTURA[d.textura_grupo] ?? '#cbd5e1',
+        textura_txt: etiquetaSuelo('TEXTURA', d.textura, idioma),
+        wrb_txt: etiquetaSuelo('WRB', d.wrb, idioma),
+        cultivo_txt: etiquetaSuelo('CULTIVO', d.cultivo, idioma)
+    })).filter((d) => d.textura_grupo);
+}

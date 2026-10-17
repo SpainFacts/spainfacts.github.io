@@ -381,7 +381,7 @@
   {
     "tabla": "suelos_rejilla",
     "usar": false,
-    "tema": "Celdas de 10 km de España con la textura, el tipo de suelo, el cultivo, el pH y la materia orgánica dominantes, para el mapa",
+    "tema": "Celdas de España (10 km, 5 km por comunidad y 2 km por provincia) con la textura, el tipo de suelo, el cultivo, el pH y la materia orgánica dominantes, para el mapa de puntos",
     "preguntas": [
       "¿Qué suelo hay en cada zona de España?",
       "¿Dónde están las tierras más ácidas?"
@@ -423,8 +423,64 @@
       "nombre": "provincia",
       "espana": null
     },
+    "dimensiones": [
+      {
+        "columna": "escala",
+        "nombre": "escala del mapa (espana 10 km, ccaa 5 km, provincia 2 km)",
+        "total": null,
+        "defecto": "espana"
+      }
+    ],
+    "filtros": [],
+    "notas": "Tabla técnica del mapa de puntos (coordenadas de cada celda) en tres escalas: filtrar siempre una escala. Para preguntas por territorio usar suelos_territorio o suelos_municipio."
+  },
+  {
+    "tabla": "suelos_puntos_municipio",
+    "usar": false,
+    "tema": "Celdas de 1 km dentro de cada municipio con su superficie agraria, cultivo y suelo, para el mapa de puntos de un municipio",
+    "preguntas": [
+      "¿Cómo se reparte el suelo agrario dentro de mi municipio?",
+      "¿Dónde están las tierras más arcillosas de Écija?"
+    ],
+    "medidas": [
+      {
+        "columna": "superficie_agraria_km2",
+        "nombre": "superficie agraria del trozo de celda",
+        "unidad": "km²",
+        "tipo": "nivel",
+        "principal": true
+      },
+      {
+        "columna": "ph",
+        "nombre": "pH de la celda",
+        "unidad": "pH",
+        "tipo": "media"
+      },
+      {
+        "columna": "materia_organica_pct",
+        "nombre": "materia orgánica de la celda",
+        "unidad": "%",
+        "tipo": "media"
+      },
+      {
+        "columna": "arcilla_pct",
+        "nombre": "arcilla de la celda",
+        "unidad": "%",
+        "tipo": "media"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "municipio"
+      ],
+      "nivel": null,
+      "codigo": "cod_mun",
+      "nombre": null,
+      "espana": null
+    },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Tabla técnica del mapa de puntos (coordenadas de cada celda): para preguntas por territorio usar suelos_territorio."
+    "notas": "Tabla técnica del mapa de un municipio: para el suelo de un municipio usar suelos_municipio. Sumar superficie_agraria_km2 por textura, wrb o ph_clase da el reparto del municipio."
   }
 ]

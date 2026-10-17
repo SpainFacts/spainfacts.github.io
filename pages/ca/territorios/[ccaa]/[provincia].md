@@ -1,5 +1,5 @@
 ---
-i18n_origen: 8a38d1bcb1ec
+i18n_origen: c247e40fe937
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -13,7 +13,7 @@ og:
 
     import TituloPagina from '../../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../../src/lib/suelos.js';
     import { idiomaDeRuta } from '../../../../../../../../src/lib/i18n.js';
     $: idioma = idiomaDeRuta($currentPage.url.pathname);
 </script>
@@ -320,6 +320,43 @@ El {formatNumber(suelo[0]?.pct_agraria, 0)} % de la superfície és agrària ({f
         source="SoilGrids"
     />
 </Grid>
+
+```sql suelo_puntos
+SELECT celda, celda_km, lon, lat, provincia AS lugar, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
+    arcilla_pct, ph, materia_organica_pct
+FROM mother.suelos_rejilla
+WHERE escala = 'provincia' AND cod_prov = '${terr[0]?.cod}'
+```
+
+{#if suelo_puntos.length > 0}
+
+<MapaEspana
+    data={puntosPorTextura(suelo_puntos, idioma)}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
+    filtroGeo={{cod_prov: terr[0]?.cod}}
+    celdaKm={2}
+    pointName=lugar
+    opacity={0.95}
+    height={520}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura_txt', title: 'Textura'},
+        {id: 'arcilla_pct', title: 'Argila (%)', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Tipus de sòl'},
+        {id: 'cultivo_txt', title: 'Conreu principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agraris a la cel·la', fmt: 'num1'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Cada punt és un quadrat de 2 × 2 km amb superfície agrària, acolorit segons la seva textura. Per pH, matèria orgànica, tipus de sòl o conreu, al <a href="/ca/territorios/suelos?provincia={terr[0]?.slug}">mapa de sòls agraris</a>.</p>
+
+{/if}
 
 <ButtonGroup name=suelo_medida title="Mapa de municipis">
     <ButtonGroupItem valueLabel="% de terres fortes" value="pct_fuertes" default />

@@ -46,6 +46,12 @@
     export let widthFmt = undefined;
     export let minWidth = 0.7;
     export let maxWidth = 6;
+    // Solo los polígonos cuyas propiedades coinciden con este objeto (p. ej. {cod_prov: '41'} para
+    // dibujar una provincia con el GeoJSON de los municipios de su comunidad); el mapa se ajusta a ellos
+    export let filtroGeo = undefined;
+    // Modo puntos sobre una rejilla: lado de la celda en km; el radio del punto sigue la escala del
+    // mapa (puntos que casi se tocan al acercarse a una provincia o un municipio)
+    export let celdaKm = undefined;
     export let basemap = undefined;
     export let attribution = undefined;
     $: basemap, attribution; // compatibilidad con AreaMap
@@ -109,7 +115,8 @@
     $: piezas = (() => {
         if (!geo?.features) return [];
         const out = [];
-        for (const f of geo.features) for (const p of anillos(f.geometry)) out.push({ id: idDe(f), p, z: zona(p) });
+        const cumple = (f) => !filtroGeo || Object.entries(filtroGeo).every(([k, v]) => String(f.properties?.[k] ?? '') === String(v));
+        for (const f of geo.features.filter(cumple)) for (const p of anillos(f.geometry)) out.push({ id: idDe(f), p, z: zona(p) });
         const hayPrincipal = out.some((o) => o.z === 'principal');
         if (!hayPrincipal) out.forEach((o) => (o.z = 'principal'));
         return out;
@@ -223,7 +230,9 @@
                   const lo = Number(r?.[long]), la = Number(r?.[lat]);
                   if (!r_ok(lo) || !r_ok(la)) return null;
                   const pr = dibujo.proy[zonaPunto(lo, la)] ?? dibujo.proy.principal;
-                  const rad = size ? Math.max(1.5, Math.sqrt((Math.abs(Number(r[size])) || 0) / tamMax) * (maxSize / 2)) : 3;
+                  const rad = size
+                      ? Math.max(1.5, Math.sqrt((Math.abs(Number(r[size])) || 0) / tamMax) * (maxSize / 2))
+                      : celdaKm ? Math.max(1.2, (0.42 * pr.esc * celdaKm) / 111.32) : 3;
                   return { i, x: pr.fx(lo), y: pr.fy(la), r: rad, c: colorFila(r) ?? '#94a3b8' };
               })
               .filter(Boolean)

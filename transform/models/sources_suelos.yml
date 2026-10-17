@@ -10,6 +10,8 @@ sources:
       - name: suelos_clases
         description: "Km² agrarios por ámbito, código, cultivo, dimensión (textura = 12 clases del USDA, textura_grupo = 4 grupos, ph, mo = materia orgánica, wrb = grupo de suelo) y clase; orden = posición de la clase."
       - name: suelos_rejilla
-        description: "Celdas de 10 km de España con al menos 5 km² agrarios: centro (lon, lat), provincia mayoritaria, km² agrarios, textura, grupo de textura, grupo WRB y cultivo dominantes, y medias de arcilla, pH y materia orgánica."
+        description: "Celdas de España con superficie agraria en tres escalas (escala espana = 10 km y 5 km² agrarios o más, ccaa = 5 km, provincia = 2 km; celda_km): centro (lon, lat), provincia y comunidad mayoritarias, km² agrarios, textura, grupo de textura, grupo WRB y cultivo dominantes, y medias de arcilla, pH y materia orgánica."
       - name: suelos_municipio
         description: "Por municipio (cod_mun INE) y cultivo: km² del término y km² agrarios (muestras de 250 m de CORINE dentro del término de static/geo/municipios.geojson), medias de SoilGrids de la celda de 1 km de cada muestra, textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes (franco-arcillosas y arcillosas), arcillosas, arenosas, básicas, ácidas y calcisoles."
+      - name: suelos_puntos_municipio
+        description: "Trozo de cada celda de 1 km de la rejilla que cae dentro de cada municipio (cod_mun): centro de la celda (lon, lat), km² agrarios del trozo (muestras de 250 m de CORINE), cultivo con más muestras y suelo de la celda de SoilGrids (textura, grupo de textura, grupo WRB, clase de pH, arcilla, pH, materia orgánica)."

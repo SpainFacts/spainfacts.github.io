@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 3b79b722db40
+i18n_origen: 2033151d1af8
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,7 +11,8 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../src/lib/suelos.js';
+    import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { page as paginaActual } from '$app/stores';
     $: idioma = idiomaDeRuta($paginaActual.url.pathname);
@@ -789,6 +790,43 @@ Udal-mugartearen {formatNumber(suelo_toda.pct_agraria, 0)} % nekazaritza-azalera
         source="SoilGrids"
     />
 </Grid>
+
+```sql suelo_puntos
+SELECT celda, 1 AS celda_km, lon, lat, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
+    arcilla_pct, ph, materia_organica_pct
+FROM mother.suelos_puntos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+```
+
+{#if suelo_puntos.length > 0}
+
+<MapaEspana
+    data={puntosPorTextura(suelo_puntos, idioma)}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
+    filtroGeo={{cod_mun: suelo_toda.cod_mun}}
+    celdaKm={1}
+    pointName=textura_txt
+    opacity={0.95}
+    height={420}
+    tooltip={[
+        {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'arcilla_pct', title: 'Buztina (%)', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'materia_organica_pct', title: 'Materia organikoa (%)', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Lurzoru mota'},
+        {id: 'cultivo_txt', title: 'Labore nagusia'},
+        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num2'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Puntu bakoitza nekazaritza-azalera duen 1 × 1 km-ko gelaxka baten udal-mugarteko zatia da, bere testuraren arabera koloreztatuta. pHaren, materia organikoaren, lurzoru motaren edo laborearen arabera, ikusi <a href="/eu/territorios/suelos?m={suelo_toda.cod_mun}">nekazaritza-lurzoruen mapa</a>.</p>
+
+{/if}
 
 {#if suelo_mun.length > 1}
 

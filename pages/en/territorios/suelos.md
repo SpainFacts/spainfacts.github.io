@@ -1,7 +1,7 @@
 ---
 title: Farm soils
 description: "What kind of ground lies under Spain's crops: clayey, loamy and sandy soils, soil types (Calcisols, Cambisols, Luvisols, Vertisols...), pH and organic matter by region, province and municipality, a map every 10 km, which soil olive groves, vineyards, irrigated land and dehesa wood-pastures sit on, and the comparison with the rest of Europe."
-i18n_origen: 936db82c6035
+i18n_origen: eeb4e08a6c18
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,6 +9,8 @@ og:
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
+    import FiltroTerritorio from '../../../../../../../src/lib/components/FiltroTerritorio.svelte';
+    import BotonesUrl from '../../../../../../../src/lib/components/BotonesUrl.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 
     // Etiquetas visibles: aquí y no en el SQL, que es idéntico en todas las traducciones.
@@ -83,7 +85,59 @@ og:
             return { ...d, categoria: et(GRUPO, d.textura_grupo), color: COLOR_GRUPO[d.textura_grupo] ?? '#cbd5e1' };
         }).filter((d) => d.categoria);
     }
+
+    // Textos del filtro de territorio y de los botones (se traducen en cada página)
+    const ETIQUETAS_FILTRO = {
+        comunidad: 'Region',
+        todaEspana: 'All of Spain',
+        provincia: 'Province',
+        todaComunidad: 'Whole region',
+        municipio: 'Municipality',
+        todaProvincia: 'Whole province'
+    };
+    const CAPAS = [
+        { value: 'textura', label: 'Texture' },
+        { value: 'wrb', label: 'Soil type' },
+        { value: 'ph', label: 'pH' },
+        { value: 'mo', label: 'Organic matter' },
+        { value: 'cultivo', label: 'Crop' }
+    ];
+    const MEDIDAS = [
+        { value: 'pct_fuertes', label: '% of heavy soils' },
+        { value: 'arcilla_pct', label: 'Average clay (%)' },
+        { value: 'ph', label: 'Average pH' },
+        { value: 'pct_basico', label: '% alkaline or calcareous' },
+        { value: 'materia_organica_pct', label: 'Organic matter (%)' },
+        { value: 'pct_calcisoles', label: '% of Calcisols' },
+        { value: 'pct_agraria', label: '% of farmland' }
+    ];
+    const ORDEN_TEXTURA = Object.keys(TEXTURA);
+    // Reparto de la superficie de cada cultivo en los cuatro grupos de textura a partir de los %
+    function gruposPorCultivo(q) {
+        return filas(q).filter((d) => d.pct_fuertes !== null && d.pct_fuertes !== undefined).flatMap((d) => {
+            const fuertes = d.pct_fuertes ?? 0, arcillosa = d.pct_arcillosa ?? 0, arenosa = d.pct_arenosa ?? 0;
+            const partes = {
+                'Arenosa (ligera)': arenosa,
+                'Franca (media)': Math.max(0, 100 - fuertes - arenosa),
+                'Franco-arcillosa': Math.max(0, fuertes - arcillosa),
+                'Arcillosa (pesada)': arcillosa
+            };
+            return Object.entries(partes).map(([g, pct]) => ({ cultivo_texto: et(CULTIVO, d.cultivo), grupo_texto: et(GRUPO, g), pct }));
+        });
+    }
+    // GeoJSON y filtro de polígonos de los mapas según el territorio elegido
+    const geoDe = (t) => (!t || t.nivel === 'pais' ? undefined : `/geo/municipios/${t.nivel === 'ccaa' ? t.cod : t.cod_ccaa}.geojson`);
+    const filtroDe = (t) => (t?.nivel === 'provincia' ? { cod_prov: t.cod } : t?.nivel === 'municipio' ? { cod_mun: t.cod } : undefined);
 </script>
+
+```sql lista_territorios
+SELECT nivel, cod, nombre, slug, cod_ccaa FROM mother.territorios WHERE nivel IN ('ccaa', 'provincia')
+```
+
+```sql lista_municipios
+SELECT cod_mun, municipio, cod_prov FROM mother.suelos_municipio
+WHERE cultivo = 'Toda la superficie agraria' AND municipio IS NOT NULL
+```
 
 ```sql espana
 SELECT * FROM mother.suelos_territorio
@@ -108,72 +162,122 @@ SELECT
 FROM ${europa}
 ```
 
-```sql clases_espana
-SELECT dimension, clase, orden, superficie_km2, pct
-FROM mother.suelos_clases
-WHERE nivel = 'pais' AND cultivo = 'Toda la superficie agraria'
-ORDER BY dimension, orden
-```
-
 # 🟫 Farm soils
 
-What kind of ground lies under Spain's crops: whether it is **clayey, loamy or sandy**, what **type of soil** it is, whether it is **calcareous or acidic** and how much **organic matter** it holds. Everything is measured over **farmland** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} thousand km², almost half the country) in the layer that gets worked, the top 30 cm, and matched with what is grown on top. You can drill down by region and province to each municipality. The data come from a model (SoilGrids), not from tests of each field: they are good for comparing districts, provinces and countries.
+What kind of ground lies under the crops: whether it is **clayey, loamy or sandy**, what **type of soil** it is, whether it is **calcareous or acidic** and how much **organic matter** it holds. Everything is measured over **farmland** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} thousand km² in Spain, almost half the country) in the layer that gets worked, the top 30 cm, and matched with what is grown on top. Choose a region, a province or a municipality and the whole page, maps included, switches to that area; the page link changes with your choice so you can share it. The data come from a model (SoilGrids), not from tests of each field: they are good for comparing areas.
+
+<FiltroTerritorio territorios={lista_territorios} municipios={lista_municipios} name="territorio" etiquetas={ETIQUETAS_FILTRO} />
+
+```sql sel
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT s.nivel, s.cod, s.nombre, s.cod_ccaa, s.cultivo, s.superficie_agraria_km2, s.pct_agraria, s.pct_de_la_agraria,
+    s.arcilla_pct, s.limo_pct, s.arena_pct, s.ph, s.materia_organica_pct, s.textura_dominante, s.wrb_dominante,
+    s.pct_fuertes, s.pct_arcillosa, s.pct_arenosa, s.pct_basico, s.pct_acido, s.pct_calcisoles
+FROM mother.suelos_territorio s, f
+WHERE s.nivel = f.nivel AND s.cod = f.cod
+UNION ALL
+SELECT 'municipio', m.cod_mun, m.municipio, m.cod_ccaa, m.cultivo, m.superficie_agraria_km2, m.pct_agraria, m.pct_de_la_agraria,
+    m.arcilla_pct, m.limo_pct, m.arena_pct, m.ph, m.materia_organica_pct, m.textura_dominante, m.wrb_dominante,
+    m.pct_fuertes, m.pct_arcillosa, m.pct_arenosa, m.pct_basico, m.pct_acido, m.pct_calcisoles
+FROM mother.suelos_municipio m, f
+WHERE f.nivel = 'municipio' AND m.cod_mun = f.cod
+```
+
+```sql terr
+SELECT * FROM ${sel} WHERE cultivo = 'Toda la superficie agraria'
+```
+
+```sql dist
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT c.dimension, c.clase, c.pct
+FROM mother.suelos_clases c, f
+WHERE c.nivel = f.nivel AND c.cod = f.cod AND c.cultivo = 'Toda la superficie agraria' AND f.nivel <> 'municipio'
+UNION ALL
+SELECT dimension, clase, 100.0 * sum(km2) / sum(sum(km2)) OVER (PARTITION BY dimension) AS pct
+FROM (
+    SELECT 'textura' AS dimension, p.textura AS clase, p.superficie_agraria_km2 AS km2 FROM mother.suelos_puntos_municipio p, f
+    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.textura IS NOT NULL
+    UNION ALL
+    SELECT 'wrb', p.wrb, p.superficie_agraria_km2 FROM mother.suelos_puntos_municipio p, f
+    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.wrb IS NOT NULL
+    UNION ALL
+    SELECT 'ph', p.ph_clase, p.superficie_agraria_km2 FROM mother.suelos_puntos_municipio p, f
+    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.ph_clase IS NOT NULL
+)
+GROUP BY dimension, clase
+```
+
+{#if filas(terr).length > 0}
+
+## {terr[0]?.nivel === 'pais' ? 'Spain' : terr[0]?.nombre}
 
 <Grid cols=4>
     <KpiCard
-        title="Most common texture"
-        value={espana[0]?.pct_arcillosa}
-        formattedValue={et(TEXTURA, espana[0]?.textura_dominante)}
-        period="{formatNumber(clases_espana.filter((d) => d.dimension === 'textura' && d.clase === espana[0]?.textura_dominante)[0]?.pct, 0)} % of farmland · average clay: {formatNumber(espana[0]?.arcilla_pct, 0)} %"
+        title="Farmland"
+        value={terr[0]?.pct_agraria}
+        formattedValue="{formatNumber(terr[0]?.pct_agraria, 0)} %"
+        period="of the area · {formatNumber(terr[0]?.superficie_agraria_km2, 0)} km² · Spain: {formatNumber(espana[0]?.pct_agraria, 0)} %"
+        direction="neutral"
+        source="CORINE Land Cover 2018"
+    />
+    <KpiCard
+        title="Heavy soils (clay loam and clay)"
+        value={terr[0]?.pct_fuertes}
+        formattedValue="{formatNumber(terr[0]?.pct_fuertes, 0)} %"
+        period="most common texture: {et(TEXTURA, terr[0]?.textura_dominante)} · Spain: {formatNumber(espana[0]?.pct_fuertes, 0)} %"
         direction="neutral"
         source="SoilGrids (ISRIC) · CORINE 2018"
     />
     <KpiCard
         title="Average pH of farm soil"
-        value={espana[0]?.ph}
-        formattedValue={formatNumber(espana[0]?.ph, 1)}
-        period="{formatNumber(espana[0]?.pct_basico, 0)} % alkaline or calcareous (EU: {formatNumber(europa_resumen[0]?.basico_ue, 0)} %) · {formatNumber(espana[0]?.pct_acido, 0)} % acidic"
+        value={terr[0]?.ph}
+        formattedValue={formatNumber(terr[0]?.ph, 1)}
+        period="{formatNumber(terr[0]?.pct_basico, 0)} % alkaline or calcareous · {terr[0]?.nivel === 'pais' ? 'EU: ' + formatNumber(europa_resumen[0]?.basico_ue, 0) + ' %' : 'Spain: pH ' + formatNumber(espana[0]?.ph, 1)}"
         direction="neutral"
         source="SoilGrids (ISRIC)"
     />
     <KpiCard
         title="Average organic matter"
-        value={espana[0]?.materia_organica_pct}
-        formattedValue="{formatNumber(espana[0]?.materia_organica_pct, 1)} %"
-        period="EU: {formatNumber(europa_resumen[0]?.mo_ue, 1)} % · Spain: no. {formatNumber(europa_resumen[0]?.puesto_mo, 0)} lowest of {formatNumber(europa_resumen[0]?.paises, 0)} countries"
+        value={terr[0]?.materia_organica_pct}
+        formattedValue="{formatNumber(terr[0]?.materia_organica_pct, 1)} %"
+        period="{terr[0]?.nivel === 'pais' ? 'EU: ' + formatNumber(europa_resumen[0]?.mo_ue, 1) + ' % · Spain: no. ' + formatNumber(europa_resumen[0]?.puesto_mo, 0) + ' lowest of ' + formatNumber(europa_resumen[0]?.paises, 0) + ' countries' : 'Spain: ' + formatNumber(espana[0]?.materia_organica_pct, 1) + ' %'} · soil type: {et(WRB, terr[0]?.wrb_dominante)}"
         direction="neutral"
         source="SoilGrids (ISRIC)"
     />
-    <KpiCard
-        title="Most widespread soil type"
-        value={espana[0]?.pct_calcisoles}
-        formattedValue={et(WRB, espana[0]?.wrb_dominante)}
-        period="{formatNumber(clases_espana.filter((d) => d.dimension === 'wrb' && d.clase === espana[0]?.wrb_dominante)[0]?.pct, 0)} % of farmland · Calcisols: {formatNumber(espana[0]?.pct_calcisoles, 0)} %"
-        direction="neutral"
-        source="SoilGrids (ISRIC, WRB classification)"
-    />
 </Grid>
 
-## The map
+{:else}
 
-<ButtonGroup name=capa title="Colour by">
-    <ButtonGroupItem valueLabel="Texture" value="textura" default />
-    <ButtonGroupItem valueLabel="Soil type" value="wrb" />
-    <ButtonGroupItem valueLabel="pH" value="ph" />
-    <ButtonGroupItem valueLabel="Organic matter" value="mo" />
-    <ButtonGroupItem valueLabel="Crop" value="cultivo" />
-</ButtonGroup>
+<p class="text-sm text-gray-600 dark:text-gray-400">The CORINE 2018 land-use map shows no farmland in this area.</p>
 
-```sql rejilla
-SELECT celda, lon, lat, provincia, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
-    arcilla_pct, ph, materia_organica_pct
-FROM mother.suelos_rejilla
+{/if}
+
+## The dot map
+
+<BotonesUrl name="capa" titulo="Colour by" opciones={CAPAS} defecto="textura" />
+
+```sql puntos
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT r.celda, r.celda_km, r.lon, r.lat, r.provincia AS lugar, r.superficie_agraria_km2, r.textura, r.textura_grupo, r.wrb,
+    r.cultivo, r.arcilla_pct, r.ph, r.materia_organica_pct
+FROM mother.suelos_rejilla r, f
+WHERE (f.nivel = 'pais' AND r.escala = 'espana')
+    OR (f.nivel = 'ccaa' AND r.escala = 'ccaa' AND r.cod_ccaa = f.cod)
+    OR (f.nivel = 'provincia' AND r.escala = 'provincia' AND r.cod_prov = f.cod)
+UNION ALL
+SELECT p.celda, 1, p.lon, p.lat, m.municipio, p.superficie_agraria_km2, p.textura, p.textura_grupo, p.wrb,
+    p.cultivo, p.arcilla_pct, p.ph, p.materia_organica_pct
+FROM mother.suelos_puntos_municipio p
+JOIN mother.suelos_municipio m ON m.cod_mun = p.cod_mun AND m.cultivo = 'Toda la superficie agraria'
+JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 ```
+
+{#if filas(puntos).length > 0}
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
 <MapaEspana
-    data={rejilla}
+    data={puntos}
     lat=lat
     long=lon
     value=ph
@@ -181,15 +285,18 @@ FROM mother.suelos_rejilla
     min={5}
     max={8.3}
     colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
-    pointName=provincia
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    pointName=lugar
     opacity={0.9}
     height={600}
     tooltip={[
-        {id: 'provincia', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'textura', title: 'Texture'},
         {id: 'wrb', title: 'Soil type'},
-        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num0'}
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
     ]}
 />
 
@@ -198,7 +305,7 @@ FROM mother.suelos_rejilla
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
 
 <MapaEspana
-    data={rejilla}
+    data={puntos}
     lat=lat
     long=lon
     value=materia_organica_pct
@@ -206,14 +313,17 @@ FROM mother.suelos_rejilla
     min={1.5}
     max={8}
     colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
-    pointName=provincia
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    pointName=lugar
     opacity={0.9}
     height={600}
     tooltip={[
-        {id: 'provincia', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
         {id: 'cultivo', title: 'Main crop'},
-        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num0'}
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
     ]}
 />
 
@@ -222,37 +332,42 @@ FROM mother.suelos_rejilla
 {:else}
 
 <MapaEspana
-    data={enRejilla(rejilla, String(inputs.capa?.value ?? inputs.capa))}
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
     lat=lat
     long=lon
     value=categoria
     colorCol=color
     legendType=categorical
-    pointName=provincia
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    pointName=lugar
     opacity={0.95}
     height={600}
     tooltip={[
-        {id: 'provincia', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'textura', title: 'Texture'},
         {id: 'arcilla_pct', title: 'Clay (%)', fmt: 'num0'},
         {id: 'wrb', title: 'Soil type'},
         {id: 'cultivo', title: 'Main crop'},
-        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num0'}
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
     ]}
 />
 
-<p class="text-xs text-gray-500">Each dot is a 10 × 10 km square with at least 5 km² of farmland, coloured by the texture, soil type or crop that covers the most farmland in it. Where there is no dot there is woodland or scrub, rock, water or town.</p>
+{/if}
+
+<p class="text-xs text-gray-500">Each dot is a {formatNumber(puntos[0]?.celda_km, 0)} × {formatNumber(puntos[0]?.celda_km, 0)} km square with farmland (10 km for the whole of Spain, 5 km in a region, 2 km in a province and 1 km in a municipality), coloured by the texture, soil type or crop that covers the most farmland in it. Where there is no dot there is woodland or scrub, rock, water or town.</p>
 
 {/if}
 
 ## Clayey, loamy and sandy
 
-**Texture** is the mix of clay, silt and sand in the ground, and it is the first thing a farmer looks at: a **clayey** soil ("heavy") holds water and nutrients but gets waterlogged, cracks and is hard to plough; a **sandy** one ("light") is easy to work and warms up earlier in spring, but water and fertiliser drain away; a **loamy** soil, with the three in balance, is ideal for almost everything. Spain's farm soil averages {formatNumber(espana[0]?.arcilla_pct, 0)} % clay, {formatNumber(espana[0]?.limo_pct, 0)} % silt and {formatNumber(espana[0]?.arena_pct, 0)} % sand.
+**Texture** is the mix of clay, silt and sand in the ground, and it is the first thing a farmer looks at: a **clayey** soil ("heavy") holds water and nutrients but gets waterlogged, cracks and is hard to plough; a **sandy** one ("light") is easy to work and warms up earlier in spring, but water and fertiliser drain away; a **loamy** soil, with the three in balance, is ideal for almost everything. The farm soil of {terr[0]?.nivel === 'pais' ? 'Spain' : (terr[0]?.nombre ?? '-')} averages {formatNumber(terr[0]?.arcilla_pct, 0)} % clay, {formatNumber(terr[0]?.limo_pct, 0)} % silt and {formatNumber(terr[0]?.arena_pct, 0)} % sand.
 
-{#if filas(clases_espana).length > 0}
+{#if filas(dist).filter((d) => d.dimension === 'textura').length > 0}
 
 <BarChart
-    data={etiquetar(clases_espana.filter((d) => d.dimension === 'textura'), 'textura_texto', (d) => et(TEXTURA, d.clase))}
+    data={etiquetar(filas(dist).filter((d) => d.dimension === 'textura').toSorted((a, b) => ORDEN_TEXTURA.indexOf(a.clase) - ORDEN_TEXTURA.indexOf(b.clase)), 'textura_texto', (d) => et(TEXTURA, d.clase))}
     x=textura_texto
     y=pct
     swapXY=true
@@ -270,10 +385,10 @@ FROM mother.suelos_rejilla
 
 Besides texture, soil scientists classify soils by how they formed. In the international classification (WRB, from the FAO), Spain's farmland is mostly **Luvisols** (old soils with clay built up at the bottom, like the red soils of La Mancha and Extremadura), **Cambisols** (young, little-developed soils), **Calcisols** (with a layer of limestone, typical of dry Spain), **Leptosols** (thin soils over rock, on slopes) and **Vertisols** (clays that swell when wet and crack when they dry, the "black soils" of the Andalusian countryside).
 
-{#if filas(clases_espana).length > 0}
+{#if filas(dist).filter((d) => d.dimension === 'wrb').length > 0}
 
 <BarChart
-    data={etiquetar(clases_espana.filter((d) => d.dimension === 'wrb' && d.pct >= 0.1).toSorted((a, b) => b.pct - a.pct), 'wrb_texto', (d) => et(WRB, d.clase))}
+    data={etiquetar(filas(dist).filter((d) => d.dimension === 'wrb' && d.pct >= 0.1).toSorted((a, b) => b.pct - a.pct), 'wrb_texto', (d) => et(WRB, d.clase))}
     x=wrb_texto
     y=pct
     swapXY=true
@@ -287,21 +402,22 @@ Besides texture, soil scientists classify soils by how they formed. In the inter
 
 ## pH and organic matter
 
-```sql ph_ccaa
+{formatNumber(espana[0]?.pct_basico, 0)} % of Spain's farmland is **alkaline or calcareous** (pH 7.5 or higher), against {formatNumber(europa_resumen[0]?.basico_ue, 0)} % in the EU: limestone and gypsum underground and scarce rain, which does not wash the salts away, push the pH up. Only the Cantabrian coast, Galicia and the granite and slate west (Salamanca, Cáceres) have acidic soils.
+
+```sql ph_hijos
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
 SELECT c.nombre, c.clase, c.orden, c.pct, t.ph
 FROM mother.suelos_clases c
 JOIN mother.suelos_territorio t ON t.nivel = c.nivel AND t.cod = c.cod AND t.cultivo = c.cultivo
-WHERE c.nivel = 'ccaa' AND c.cultivo = 'Toda la superficie agraria' AND c.dimension = 'ph'
-    AND t.superficie_agraria_km2 >= 100
+JOIN f ON (f.nivel = 'pais' AND c.nivel = 'ccaa') OR (f.nivel = 'ccaa' AND c.nivel = 'provincia' AND t.cod_ccaa = f.cod)
+WHERE c.cultivo = 'Toda la superficie agraria' AND c.dimension = 'ph' AND t.superficie_agraria_km2 >= 100
 ORDER BY t.ph DESC, c.orden
 ```
 
-{formatNumber(espana[0]?.pct_basico, 0)} % of Spain's farmland is **alkaline or calcareous** (pH 7.5 or higher), against {formatNumber(europa_resumen[0]?.basico_ue, 0)} % in the EU: limestone and gypsum underground and scarce rain, which does not wash the salts away, push the pH up. Only the Cantabrian coast, Galicia and the granite and slate west (Salamanca, Cáceres) have acidic soils.
-
-{#if filas(ph_ccaa).length > 0}
+{#if filas(ph_hijos).length > 0}
 
 <BarChart
-    data={etiquetar(ph_ccaa, 'ph_texto', (d) => et(PH, d.clase))}
+    data={etiquetar(ph_hijos, 'ph_texto', (d) => et(PH, d.clase))}
     x=nombre
     y=pct
     series=ph_texto
@@ -310,165 +426,139 @@ ORDER BY t.ph DESC, c.orden
     sort=false
     seriesOrder={ORDEN_PH.map((k) => PH[k])}
     colorPalette={['#b91c1c', '#f59e0b', '#d6d3d1', '#60a5fa', '#1e3a8a']}
-    title="Farmland by soil pH, by region"
+    title={terr[0]?.nivel === 'pais' ? 'Farmland by soil pH, by region' : 'Farmland by soil pH, by province'}
+/>
+
+{:else if filas(dist).filter((d) => d.dimension === 'ph').length > 0}
+
+<BarChart
+    data={etiquetar(filas(dist).filter((d) => d.dimension === 'ph').toSorted((a, b) => ORDEN_PH.indexOf(a.clase) - ORDEN_PH.indexOf(b.clase)), 'ph_texto', (d) => et(PH, d.clase))}
+    x=ph_texto
+    y=pct
+    swapXY=true
+    sort=false
+    yFmt=num1
+    fillColor="#60a5fa"
+    title="Farmland by soil pH (%)"
 />
 
 {/if}
 
 **Organic matter** (decomposed remains of plants, roots and manure) gives the soil structure, holds water and feeds the crops. With heat, little rain and centuries of ploughing, Spanish farm soil averages {formatNumber(espana[0]?.materia_organica_pct, 1)} %, against {formatNumber(europa_resumen[0]?.mo_ue, 1)} % in the EU. It ranks no. {formatNumber(europa_resumen[0]?.puesto_mo, 0)} poorest of the {formatNumber(europa_resumen[0]?.paises, 0)} European countries compared (the three with the least: {europa_resumen[0]?.menos_mo ?? '-'}).
 
-## By region and province
+## Comparing within the area
 
-<ButtonGroup name=medida title="Measure">
-    <ButtonGroupItem valueLabel="% of clayey or clay loam soils" value="fuertes" default />
-    <ButtonGroupItem valueLabel="Average clay (%)" value="arcilla_pct" />
-    <ButtonGroupItem valueLabel="Average pH" value="ph" />
-    <ButtonGroupItem valueLabel="% of alkaline or calcareous soil" value="pct_basico" />
-    <ButtonGroupItem valueLabel="Average organic matter (%)" value="materia_organica_pct" />
-    <ButtonGroupItem valueLabel="% of Calcisols" value="pct_calcisoles" />
-</ButtonGroup>
+<BotonesUrl name="medida" titulo="Measure" opciones={MEDIDAS} defecto="pct_fuertes" />
 
-```sql fuertes
-SELECT nivel, cod, sum(pct) AS pct_fuertes
-FROM mother.suelos_clases
-WHERE cultivo = 'Toda la superficie agraria' AND dimension = 'textura_grupo'
-    AND clase IN ('Franco-arcillosa', 'Arcillosa (pesada)') AND nivel IN ('ccaa', 'provincia')
-GROUP BY nivel, cod
-```
-
-```sql provincias
-SELECT t.cod AS cod_prov, t.nombre AS provincia, '/en' || t.ruta AS ruta, t.superficie_agraria_km2, t.arcilla_pct, t.limo_pct,
-    t.arena_pct, t.ph, t.materia_organica_pct, t.textura_dominante, t.wrb_dominante,
-    coalesce(t.pct_basico, 0) AS pct_basico, coalesce(t.pct_calcisoles, 0) AS pct_calcisoles,
-    coalesce(f.pct_fuertes, 0) AS fuertes
+```sql mapa_hijos
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT t.cod, t.nombre, '/en/territorios/suelos?provincia=' || tt.slug AS enlace, t.superficie_agraria_km2, t.textura_dominante,
+    t.arcilla_pct, t.ph, t.materia_organica_pct, t.wrb_dominante, coalesce(t.pct_fuertes, 0) AS pct_fuertes,
+    t.${inputs.medida} AS medida
 FROM mother.suelos_territorio t
-LEFT JOIN ${fuertes} f ON f.nivel = t.nivel AND f.cod = t.cod
+JOIN mother.territorios tt ON tt.nivel = t.nivel AND tt.cod = t.cod
+JOIN f ON f.nivel = 'pais'
 WHERE t.nivel = 'provincia' AND t.cultivo = 'Toda la superficie agraria' AND t.cod NOT IN ('51', '52')
-ORDER BY t.superficie_agraria_km2 DESC
+UNION ALL
+SELECT m.cod_mun, m.municipio, '/en/territorios/suelos?m=' || m.cod_mun AS enlace, m.superficie_agraria_km2, m.textura_dominante,
+    m.arcilla_pct, m.ph, m.materia_organica_pct, m.wrb_dominante, m.pct_fuertes,
+    m.${inputs.medida} AS medida
+FROM mother.suelos_municipio m
+JOIN f ON (f.nivel = 'ccaa' AND m.cod_ccaa = f.cod) OR (f.nivel = 'provincia' AND m.cod_prov = f.cod)
+WHERE m.cultivo = 'Toda la superficie agraria'
+ORDER BY superficie_agraria_km2 DESC
 ```
 
-```sql provincias_mapa
-SELECT *, ${inputs.medida} AS medida FROM ${provincias}
-```
+{#if filas(mapa_hijos).length > 0}
+
+{#if terr[0]?.nivel === 'pais'}
 
 <MapaEspana
-    data={provincias_mapa}
+    data={mapa_hijos}
     geoJsonUrl="/geo/provincias.geojson"
     geoId="cod_prov"
-    areaCol="cod_prov"
+    areaCol="cod"
     value="medida"
     valueFmt="num1"
     colorPalette={['#fdf6e3', '#c8955a', '#5b2a17']}
-    link=ruta
+    link=enlace
     height={460}
     tooltip={[
-        {id: 'provincia', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'nombre', showColumnName: false, valueClass: 'text-base font-semibold'},
         {id: 'superficie_agraria_km2', title: 'Farmland km²', fmt: 'num0'},
         {id: 'textura_dominante', title: 'Most common texture'},
-        {id: 'arcilla_pct', title: 'Clay (%)', fmt: 'num0'},
+        {id: 'pct_fuertes', title: '% heavy soils', fmt: 'num0'},
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
         {id: 'wrb_dominante', title: 'Soil type'}
     ]}
 />
 
-```sql ccaa
-SELECT t.nombre AS comunidad, '/en' || t.ruta AS ruta, t.superficie_agraria_km2, t.arcilla_pct, t.arena_pct, t.ph,
-    t.materia_organica_pct, t.textura_dominante, t.wrb_dominante, coalesce(t.pct_basico, 0) AS pct_basico,
-    coalesce(f.pct_fuertes, 0) AS fuertes
-FROM mother.suelos_territorio t
-LEFT JOIN ${fuertes} f ON f.nivel = t.nivel AND f.cod = t.cod
-WHERE t.nivel = 'ccaa' AND t.cultivo = 'Toda la superficie agraria' AND t.superficie_agraria_km2 >= 100
-ORDER BY t.superficie_agraria_km2 DESC
-```
+<p class="text-xs text-gray-500">Provinces of Spain. Click one to see that province's soil here, with the map of its municipalities.</p>
 
-<DataTable data={ccaa} rows=20 link=ruta>
-    <Column id=comunidad title="Region" />
+{:else}
+
+<MapaEspana
+    data={mapa_hijos}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    geoId="cod_mun"
+    areaCol="cod"
+    value="medida"
+    valueFmt="num1"
+    colorPalette={['#fdf6e3', '#c8955a', '#5b2a17']}
+    link=enlace
+    height={520}
+    tooltip={[
+        {id: 'nombre', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'superficie_agraria_km2', title: 'Farmland km²', fmt: 'num1'},
+        {id: 'textura_dominante', title: 'Most common texture'},
+        {id: 'pct_fuertes', title: '% heavy soils', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
+        {id: 'wrb_dominante', title: 'Soil type'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Municipalities. Click one to see its soil here, with the 1 km dot map. In grey, municipalities with no farmland on the CORINE map (woodland, town or plots under 25 ha).</p>
+
+{/if}
+
+<DataTable data={mapa_hijos} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=nombre title={terr[0]?.nivel === 'pais' ? 'Province' : 'Municipality'} />
     <Column id=superficie_agraria_km2 title="Farmland km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
-    <Column id=textura_dominante title="Most common texture" />
-    <Column id=fuertes title="% heavy soils" fmt=num0 />
-    <Column id=arcilla_pct title="Clay (%)" fmt=num0 />
-    <Column id=arena_pct title="Sand (%)" fmt=num0 />
-    <Column id=ph title="pH" fmt=num1 />
-    <Column id=pct_basico title="% alkaline" fmt=num0 />
-    <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
-    <Column id=wrb_dominante title="Soil type" />
-</DataTable>
-
-<DataTable data={provincias} rows=10 search=true link=ruta>
-    <Column id=provincia title="Province" />
-    <Column id=superficie_agraria_km2 title="Farmland km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
-    <Column id=textura_dominante title="Most common texture" />
-    <Column id=fuertes title="% heavy soils" fmt=num0 />
-    <Column id=arcilla_pct title="Clay (%)" fmt=num0 />
-    <Column id=ph title="pH" fmt=num1 />
-    <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
-    <Column id=wrb_dominante title="Soil type" />
-</DataTable>
-
-<p class="text-xs text-gray-500">Heavy soils = the six clay loam and clay textures of the USDA triangle (generally more than a quarter clay). Álava, Navarre, La Rioja, the countryside of Málaga, Cádiz, Jaén and Seville and the Ebro valley have the heaviest soils; Galicia, Cáceres, León and Badajoz the lightest, on granite and slate. Ceuta and Melilla have almost no farmland.</p>
-
-## By municipality
-
-```sql municipios_suelo
-SELECT m.municipio, t.nombre AS provincia, '/en' || m.enlace AS enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
-    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
-FROM mother.suelos_municipio m
-LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
-WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
-ORDER BY m.superficie_agraria_km2 DESC
-```
-
-Look up your municipality: its page shows the soil under each of its crops and the comparison with its province and with Spain. Each region and province page has the map of its municipalities.
-
-<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
-    <Column id=municipio title="Municipality" />
-    <Column id=provincia title="Province" />
-    <Column id=superficie_agraria_km2 title="Farmland km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
-    <Column id=pct_agraria title="% farmland" fmt=num0 />
     <Column id=textura_dominante title="Most common texture" />
     <Column id=pct_fuertes title="% heavy soils" fmt=num0 />
+    <Column id=arcilla_pct title="Clay (%)" fmt=num0 />
     <Column id=ph title="pH" fmt=num1 />
     <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
     <Column id=wrb_dominante title="Soil type" />
 </DataTable>
 
-<p class="text-xs text-gray-500">CORINE farmland within each municipality, sampled every 250 m; the soil is SoilGrids at 1 km, so in small municipalities it comes from very few cells.</p>
+<p class="text-xs text-gray-500">Heavy soils = the six clay loam and clay textures of the USDA triangle (generally more than a quarter clay). For municipalities, farmland comes from CORINE within each municipality, sampled every 250 m, and the soil from SoilGrids at 1 km: in small municipalities it comes from very few cells. Ceuta and Melilla have almost no farmland.</p>
+
+{:else}
+
+<p class="text-sm text-gray-600 dark:text-gray-400">A municipality is the smallest unit: its 1 km dot map is above. Choose "Whole province" in the filter to compare it with the other municipalities.</p>
+
+{/if}
 
 ## Which soil each crop sits on
 
-Farmland is split according to the CORINE 2018 land-use map. Each crop sits on a different kind of ground: dehesa wood-pastures on the sandy, acidic soils of the west; olive groves and irrigated land on the most clayey soils of the valleys; vineyards on the most calcareous and poorest soils.
-
-```sql lista_territorios
-SELECT nivel || '-' || cod AS clave, nombre, CASE WHEN nivel = 'pais' THEN 0 ELSE 1 END AS orden
-FROM mother.suelos_territorio
-WHERE cultivo = 'Toda la superficie agraria' AND nivel IN ('pais', 'ccaa') AND superficie_agraria_km2 >= 100
-```
-
-<Dropdown name=territorio data={lista_territorios} value=clave label=nombre title="Area" order="orden, nombre" defaultValue="pais-00" />
+Farmland is split according to the CORINE 2018 land-use map. Each crop sits on a different kind of ground: in Spain, dehesa wood-pastures are on the sandy, acidic soils of the west; olive groves and irrigated land on the most clayey soils of the valleys; vineyards on the most calcareous and poorest soils.
 
 ```sql cultivos
 SELECT cultivo, superficie_agraria_km2, pct_de_la_agraria, arcilla_pct, arena_pct, ph, materia_organica_pct,
-    textura_dominante, wrb_dominante, coalesce(pct_basico, 0) AS pct_basico, coalesce(pct_arcillosa, 0) AS pct_arcillosa
-FROM mother.suelos_territorio
-WHERE nivel || '-' || cod = '${inputs.territorio.value}' AND cultivo <> 'Toda la superficie agraria'
-    AND superficie_agraria_km2 >= 1
+    textura_dominante, wrb_dominante, coalesce(pct_basico, 0) AS pct_basico, pct_fuertes, pct_arcillosa, pct_arenosa
+FROM ${sel}
+WHERE cultivo <> 'Toda la superficie agraria' AND superficie_agraria_km2 >= 0.0625
 ORDER BY superficie_agraria_km2 DESC
 ```
 
-```sql cultivos_textura
-SELECT c.cultivo, c.clase, c.orden, c.pct, t.superficie_agraria_km2
-FROM mother.suelos_clases c
-JOIN mother.suelos_territorio t ON t.nivel = c.nivel AND t.cod = c.cod AND t.cultivo = c.cultivo
-WHERE c.nivel || '-' || c.cod = '${inputs.territorio.value}' AND c.dimension = 'textura_grupo'
-    AND c.cultivo <> 'Toda la superficie agraria' AND t.superficie_agraria_km2 >= 1
-ORDER BY t.superficie_agraria_km2 DESC, c.orden
-```
-
-{#if filas(cultivos).length > 0 && filas(cultivos_textura).length > 0}
+{#if filas(cultivos).length > 0}
 
 <BarChart
-    data={etiquetar(etiquetar(cultivos_textura, 'grupo_texto', (d) => et(GRUPO, d.clase)), 'cultivo_texto', (d) => et(CULTIVO, d.cultivo))}
+    data={gruposPorCultivo(cultivos)}
     x=cultivo_texto
     y=pct
     series=grupo_texto
@@ -482,7 +572,7 @@ ORDER BY t.superficie_agraria_km2 DESC, c.orden
 
 <DataTable data={etiquetar(cultivos, 'cultivo_texto', (d) => et(CULTIVO, d.cultivo))} rows=10>
     <Column id=cultivo_texto title="Crop" />
-    <Column id=superficie_agraria_km2 title="Km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num1 contentType=bar barColor="#e7d3b5" />
     <Column id=pct_de_la_agraria title="% of farmland" fmt=num1 />
     <Column id=textura_dominante title="Most common texture" />
     <Column id=arcilla_pct title="Clay (%)" fmt=num0 />

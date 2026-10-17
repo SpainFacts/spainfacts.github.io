@@ -27,7 +27,7 @@ models:
       - name: cod_pais
         tests: [not_null, unique]
   - name: suelos_rejilla
-    description: "Celdas de 10 km de España con al menos 5 km² agrarios (CORINE 2018): centro en lon/lat, provincia mayoritaria, textura, grupo de textura, grupo WRB y cultivo dominantes y medias de arcilla (%), pH y materia orgánica (%) de SoilGrids."
+    description: "Celdas de España con superficie agraria (CORINE 2018) para el mapa de puntos en tres escalas: escala espana (celdas de 10 km con 5 km² agrarios o más), ccaa (5 km) y provincia (2 km); celda_km = lado. Centro en lon/lat, provincia y comunidad mayoritarias, textura, grupo de textura, grupo WRB y cultivo dominantes y medias de arcilla (%), pH y materia orgánica (%) de SoilGrids. Filtrar siempre una escala."
     columns:
       - name: celda
         tests: [not_null, unique]
@@ -41,3 +41,8 @@ models:
           - not_null:
               config:
                 severity: warn
+  - name: suelos_puntos_municipio
+    description: "Trozo de cada celda de 1 km dentro de cada municipio: centro de la celda, km² agrarios del trozo, cultivo con más superficie y suelo de la celda de SoilGrids (textura, grupo de textura, grupo WRB, clase de pH, arcilla, pH, materia orgánica). Sumando superficie_agraria_km2 por clase sale el reparto del suelo agrario del municipio; una celda que cruza la linde aparece en los dos municipios."
+    columns:
+      - name: cod_mun
+        tests: [not_null]

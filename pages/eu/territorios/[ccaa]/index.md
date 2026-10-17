@@ -1,5 +1,5 @@
 ---
-i18n_origen: 43259a853f24
+i18n_origen: 76fb3cc56c0f
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -13,7 +13,7 @@ og:
 
     import TituloPagina from '../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../src/lib/suelos.js';
     import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     $: idioma = idiomaDeRuta($currentPage.url.pathname);
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
@@ -364,6 +364,42 @@ Azaleraren {formatNumber(suelo[0]?.pct_agraria, 0)} % nekazaritza-azalera da ({f
         source="SoilGrids"
     />
 </Grid>
+
+```sql suelo_puntos
+SELECT celda, celda_km, lon, lat, provincia AS lugar, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
+    arcilla_pct, ph, materia_organica_pct
+FROM mother.suelos_rejilla
+WHERE escala = 'ccaa' AND cod_ccaa = '${terr[0]?.cod}'
+```
+
+{#if suelo_puntos.length > 0}
+
+<MapaEspana
+    data={puntosPorTextura(suelo_puntos, idioma)}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    celdaKm={5}
+    pointName=lugar
+    opacity={0.95}
+    height={520}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura_txt', title: 'Testura'},
+        {id: 'arcilla_pct', title: 'Buztina (%)', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Lurzoru mota'},
+        {id: 'cultivo_txt', title: 'Labore nagusia'},
+        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num1'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Puntu bakoitza nekazaritza-azalera duen 5 × 5 km-ko karratu bat da, bere testuraren arabera koloreztatuta. pHaren, materia organikoaren, lurzoru motaren edo laborearen arabera, ikusi <a href="/eu/territorios/suelos?ccaa={terr[0]?.slug}">nekazaritza-lurzoruen mapa</a>.</p>
+
+{/if}
 
 <ButtonGroup name=suelo_medida title="Udalerrien mapa">
     <ButtonGroupItem valueLabel="Lur gogorren %" value="pct_fuertes" default />
