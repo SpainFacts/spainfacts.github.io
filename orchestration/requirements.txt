@@ -10,6 +10,8 @@ openpyxl>=3.1  # Excel de Hacienda (CCAA, deuda viva EELL) y diccionario de muni
 xlrd>=2.0  # .xls antiguos de deuda viva de las EELL (Hacienda)
 pdfplumber>=0.11  # listas mensuales de retención de la PIE (PDF de Hacienda)
 access-parser>=0.0.6  # lee el .mdb de embalses del MITECO sin drivers ODBC
+rasterio>=1.4  # suelos: lee SoilGrids (GeoTIFF por HTTP) y rasteriza provincias y países
+pillow>=10  # suelos: imágenes de CORINE del servicio de la EEA
 tzdata
 # grpcio-health-checking >=1.76 se genera con protobuf 7, pero dbt-core y
 # dagster exigen protobuf <7 -> hay que quedarse en la serie compatible

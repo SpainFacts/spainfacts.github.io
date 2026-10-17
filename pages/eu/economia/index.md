@@ -1,7 +1,7 @@
 ---
 title: Ekonomia
 description: "BPG biztanleko, hazkundea, kanpo-merkataritza, sektoreak, enplegua, soldatak, langabezia eta inflazioa Espainian, inflazioa kenduta eta biztanleriaren arabera."
-i18n_origen: 21e2042a9bd3
+i18n_origen: 023a6ec94996
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -249,6 +249,10 @@ Hileko batez besteko soldata gordina, inflazioa kenduta. [Hazkundea, sektoreak e
     <a href="/eu/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🌾</span> Nekazaritza, abeltzaintza eta arrantza</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Europako baratza: oliba-olioa, zitrikoak, frutak eta barazkiak, txerrikiak, ardoa eta arrantza, eta Espainiaren postua EBn</div>
+    </a>
+    <a href="/eu/economia/suelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🟫</span> Nekazaritza-lurzoruak</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Lur buztintsuak, frankoak eta hareatsuak, lurzoru motak, pH-a eta materia organikoa probintziaka eta laboreka, eta Europarekin alderatuta</div>
     </a>
     <a href="/eu/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏭</span> Industria</div>

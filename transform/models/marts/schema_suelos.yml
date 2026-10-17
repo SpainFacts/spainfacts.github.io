@@ -1,0 +1,33 @@
+version: 2
+
+# Economía > Suelos: textura, grupo WRB, pH y materia orgánica de la superficie agraria.
+
+models:
+  - name: suelos_territorio
+    description: "Suelo agrario de España (nivel pais, cod 00), comunidades y provincias por cultivo de CORINE 2018 ('Toda la superficie agraria' o Secano, Regadío, Arrozal, Viñedo, Frutales, Olivar, Prados, Mosaico de cultivos, Dehesa): km² agrarios, % de la superficie agraria, medias de la capa arable 0-30 cm de SoilGrids (arcilla, limo y arena en %, pH en agua, carbono orgánico en g/kg y materia orgánica en %), clases dominantes y % de suelos arcillosos, arenosos, básicos (pH ≥ 7,5), ácidos (pH < 6,5) y calcisoles. SoilGrids es un modelo: compara zonas, no parcelas."
+    columns:
+      - name: nivel
+        tests:
+          - accepted_values:
+              values: ['pais', 'ccaa', 'provincia']
+      - name: nombre
+        tests: [not_null]
+  - name: suelos_clases
+    description: "Km² y % de la superficie agraria por clase de suelo: dimension textura (12 clases del USDA), textura_grupo (Arenosa, Franca, Franco-arcillosa, Arcillosa), ph (5 bandas), mo (materia orgánica, 4 bandas) y wrb (grupo de suelo). nivel pais (España, cod 00), ccaa, provincia o europa (cod = código ISO del país). Por cultivo de CORINE 2018."
+    columns:
+      - name: dimension
+        tests:
+          - accepted_values:
+              values: ['textura', 'textura_grupo', 'ph', 'mo', 'wrb']
+      - name: nombre
+        tests: [not_null]
+  - name: suelos_europa
+    description: "Suelo agrario de cada país europeo con al menos 1.000 km² agrarios, mismo método que España (SoilGrids sobre CORINE 2018): medias de la capa arable, % de suelos arcillosos, arenosos, básicos y ácidos, grupo WRB y textura dominantes, y puestos (1 = menos materia orgánica, pH más alto, más arcilloso)."
+    columns:
+      - name: cod_pais
+        tests: [not_null, unique]
+  - name: suelos_rejilla
+    description: "Celdas de 10 km de España con al menos 5 km² agrarios (CORINE 2018): centro en lon/lat, provincia mayoritaria, textura, grupo de textura, grupo WRB y cultivo dominantes y medias de arcilla (%), pH y materia orgánica (%) de SoilGrids."
+    columns:
+      - name: celda
+        tests: [not_null, unique]

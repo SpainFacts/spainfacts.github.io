@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_suelos
+    description: "Suelos agrarios de España y Europa: textura, grupo WRB, pH y carbono orgánico de la capa arable (0-30 cm) de SoilGrids 2.0 (ISRIC, CC BY 4.0) sobre la superficie agraria de CORINE Land Cover 2018 (Copernicus), en una rejilla de 1 km de igual área (ingestion/suelos.py)"
+    schema: raw
+    tables:
+      - name: suelos_medias
+        description: "Por ámbito (pais = código GISCO/Eurostat, ccaa y provincia = código INE), código y cultivo ('Toda la superficie agraria' o un grupo de CORINE): km² agrarios y medias ponderadas por superficie de arcilla, limo y arena (%), pH en agua, carbono orgánico (g/kg) y materia orgánica (%, carbono x 1,724)."
+      - name: suelos_clases
+        description: "Km² agrarios por ámbito, código, cultivo, dimensión (textura = 12 clases del USDA, textura_grupo = 4 grupos, ph, mo = materia orgánica, wrb = grupo de suelo) y clase; orden = posición de la clase."
+      - name: suelos_rejilla
+        description: "Celdas de 10 km de España con al menos 5 km² agrarios: centro (lon, lat), provincia mayoritaria, km² agrarios, textura, grupo de textura, grupo WRB y cultivo dominantes, y medias de arcilla, pH y materia orgánica."

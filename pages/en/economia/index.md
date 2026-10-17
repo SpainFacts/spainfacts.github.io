@@ -1,7 +1,7 @@
 ---
 title: Economy
 description: "GDP per inhabitant, growth, foreign trade, sectors, employment, wages, unemployment and inflation in Spain, adjusted for inflation and in proportion to population."
-i18n_origen: 21e2042a9bd3
+i18n_origen: 023a6ec94996
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -249,6 +249,10 @@ Average gross monthly wage adjusted for inflation. [Growth, sectors and deciles 
     <a href="/en/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🌾</span> Agriculture, livestock and fishing</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">Europe's market garden: olive oil, citrus, fruit and vegetables, pigs, wine and fishing, and Spain's place in the EU</div>
+    </a>
+    <a href="/en/economia/suelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
+        <div class="font-semibold"><span aria-hidden="true">🟫</span> Agricultural soils</div>
+        <div class="text-sm text-gray-600 dark:text-gray-400">Clay, loam and sandy land, soil types, pH and organic matter by province and crop, and compared with Europe</div>
     </a>
     <a href="/en/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏭</span> Industry</div>

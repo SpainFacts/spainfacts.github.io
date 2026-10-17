@@ -1,0 +1,130 @@
+[
+  {
+    "tabla": "suelos_territorio",
+    "usar": true,
+    "tema": "Cómo es el suelo agrario de España, de cada comunidad y de cada provincia, y debajo de cada cultivo: textura (arcilloso, franco, arenoso), pH, materia orgánica y tipo de suelo",
+    "preguntas": [
+      "¿Qué provincia tiene las tierras más arcillosas?",
+      "¿Son ácidos o calizos los suelos de Galicia?",
+      "¿Cuánta materia orgánica tiene el suelo del olivar en Andalucía?",
+      "¿Qué tipo de suelo predomina en Castilla-La Mancha?"
+    ],
+    "medidas": [
+      { "columna": "materia_organica_pct", "nombre": "materia orgánica media del suelo agrario", "unidad": "%", "tipo": "media", "principal": true },
+      { "columna": "ph", "nombre": "pH medio del suelo agrario", "unidad": "pH", "tipo": "media" },
+      { "columna": "arcilla_pct", "nombre": "arcilla media del suelo agrario", "unidad": "%", "tipo": "media" },
+      { "columna": "limo_pct", "nombre": "limo medio del suelo agrario", "unidad": "%", "tipo": "media" },
+      { "columna": "arena_pct", "nombre": "arena media del suelo agrario", "unidad": "%", "tipo": "media" },
+      { "columna": "carbono_g_kg", "nombre": "carbono orgánico medio del suelo agrario", "unidad": "g/kg", "tipo": "media" },
+      { "columna": "superficie_agraria_km2", "nombre": "superficie agraria", "unidad": "km²", "tipo": "nivel" },
+      { "columna": "pct_de_la_agraria", "nombre": "porcentaje de la superficie agraria que ocupa el cultivo", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_arcillosa", "nombre": "porcentaje de suelo agrario arcilloso (tierra pesada)", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_arenosa", "nombre": "porcentaje de suelo agrario arenoso (tierra ligera)", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_basico", "nombre": "porcentaje de suelo agrario básico o calizo (pH de 7,5 o más)", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_acido", "nombre": "porcentaje de suelo agrario ácido (pH menor de 6,5)", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_calcisoles", "nombre": "porcentaje de suelo agrario que son calcisoles", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["pais", "ccaa", "provincia"],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": { "columna": "nivel", "valor": "pais" }
+    },
+    "dimensiones": [
+      { "columna": "cultivo", "nombre": "cultivo de CORINE 2018 (Secano, Regadío, Arrozal, Viñedo, Frutales, Olivar, Prados, Mosaico de cultivos, Dehesa)", "total": "Toda la superficie agraria" }
+    ],
+    "filtros": [],
+    "notas": "Medias de la capa arable (0-30 cm) del modelo SoilGrids sobre la superficie agraria de CORINE 2018: sirve para comparar zonas, no parcelas; suaviza los extremos (pocas tierras puramente arcillosas o arenosas) y da algo más de materia orgánica que los análisis de campo en los secanos. Sin serie histórica."
+  },
+  {
+    "tabla": "suelos_clases",
+    "usar": true,
+    "tema": "Reparto de la superficie agraria por textura del suelo, pH, materia orgánica y tipo de suelo, en España, sus comunidades y provincias, y en los países de Europa, por cultivo",
+    "preguntas": [
+      "¿Qué porcentaje del suelo agrario de España es franco-arcilloso?",
+      "¿Cuántos km² de vertisoles hay en Andalucía?",
+      "¿Qué parte del viñedo está en suelos calizos?",
+      "¿Qué textura de suelo tiene el regadío en Aragón?"
+    ],
+    "medidas": [
+      { "columna": "pct", "nombre": "porcentaje de la superficie agraria con esa clase de suelo", "unidad": "%", "tipo": "porcentaje", "principal": true },
+      { "columna": "superficie_km2", "nombre": "superficie agraria con esa clase de suelo", "unidad": "km²", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["pais", "ccaa", "provincia", "pais_extranjero"],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": { "columna": "nivel", "valor": "pais" }
+    },
+    "dimensiones": [
+      { "columna": "dimension", "nombre": "qué se clasifica (textura = 12 clases del USDA, textura_grupo = Arenosa/Franca/Franco-arcillosa/Arcillosa, ph, mo = materia orgánica, wrb = tipo de suelo)", "total": null },
+      { "columna": "clase", "nombre": "clase de suelo (Franca, Franco-arcillosa, Arcillosa (pesada), Básico (7,5-8,5), Calcisoles, Vertisoles...)", "total": null },
+      { "columna": "cultivo", "nombre": "cultivo de CORINE 2018", "total": "Toda la superficie agraria" }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre una sola dimension: los porcentajes suman 100 dentro de cada territorio, cultivo y dimensión. nivel europa = países europeos con cod = código ISO (mismo método que España). Modelo SoilGrids sobre CORINE 2018."
+  },
+  {
+    "tabla": "suelos_europa",
+    "usar": true,
+    "tema": "Suelo agrario de España frente al de los demás países de Europa: materia orgánica, pH, arcilla y tipo de suelo, con el mismo método",
+    "preguntas": [
+      "¿Tiene España menos materia orgánica en el suelo que el resto de Europa?",
+      "¿Qué país europeo tiene los suelos agrarios más ácidos?",
+      "¿Son los suelos de Italia más arcillosos que los de España?"
+    ],
+    "medidas": [
+      { "columna": "materia_organica_pct", "nombre": "materia orgánica media del suelo agrario", "unidad": "%", "tipo": "media", "principal": true },
+      { "columna": "ph", "nombre": "pH medio del suelo agrario", "unidad": "pH", "tipo": "media" },
+      { "columna": "arcilla_pct", "nombre": "arcilla media del suelo agrario", "unidad": "%", "tipo": "media" },
+      { "columna": "arena_pct", "nombre": "arena media del suelo agrario", "unidad": "%", "tipo": "media" },
+      { "columna": "carbono_g_kg", "nombre": "carbono orgánico medio del suelo agrario", "unidad": "g/kg", "tipo": "media" },
+      { "columna": "superficie_agraria_km2", "nombre": "superficie agraria", "unidad": "km²", "tipo": "nivel" },
+      { "columna": "pct_basico", "nombre": "porcentaje de suelo agrario básico o calizo", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_acido", "nombre": "porcentaje de suelo agrario ácido", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_arcillosa", "nombre": "porcentaje de suelo agrario arcilloso", "unidad": "%", "tipo": "porcentaje" },
+      { "columna": "pct_arenosa", "nombre": "porcentaje de suelo agrario arenoso", "unidad": "%", "tipo": "porcentaje" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["pais", "pais_extranjero", "ue"],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": { "columna": "cod_pais", "valor": "ES" }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "SoilGrids sobre la superficie agraria de CORINE 2018, países con al menos 1.000 km² agrarios (sin Malta). puesto_mo_menor = 1 es el país con menos materia orgánica. No son las muestras de laboratorio de LUCAS."
+  },
+  {
+    "tabla": "suelos_rejilla",
+    "usar": false,
+    "tema": "Celdas de 10 km de España con la textura, el tipo de suelo, el cultivo, el pH y la materia orgánica dominantes, para el mapa",
+    "preguntas": [
+      "¿Qué suelo hay en cada zona de España?",
+      "¿Dónde están las tierras más ácidas?"
+    ],
+    "medidas": [
+      { "columna": "materia_organica_pct", "nombre": "materia orgánica media", "unidad": "%", "tipo": "media", "principal": true },
+      { "columna": "ph", "nombre": "pH medio", "unidad": "pH", "tipo": "media" },
+      { "columna": "arcilla_pct", "nombre": "arcilla media", "unidad": "%", "tipo": "media" },
+      { "columna": "superficie_agraria_km2", "nombre": "superficie agraria de la celda", "unidad": "km²", "tipo": "nivel" }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": ["provincia"],
+      "nivel": null,
+      "codigo": "cod_prov",
+      "nombre": "provincia",
+      "espana": null
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Tabla técnica del mapa de puntos (coordenadas de cada celda): para preguntas por territorio usar suelos_territorio."
+  }
+]
