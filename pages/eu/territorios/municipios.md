@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 2033151d1af8
+i18n_origen: e5765c8d5cf0
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -800,7 +800,7 @@ WHERE cod_mun = '${inputs.municipio}'
 
 {#if suelo_puntos.length > 0}
 
-<MapaEspana
+<MapaBarrios
     data={puntosPorTextura(suelo_puntos, idioma)}
     lat=lat
     long=lon
@@ -810,8 +810,6 @@ WHERE cod_mun = '${inputs.municipio}'
     geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
     filtroGeo={{cod_mun: suelo_toda.cod_mun}}
     celdaKm={1}
-    pointName=textura_txt
-    opacity={0.95}
     height={420}
     tooltip={[
         {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},

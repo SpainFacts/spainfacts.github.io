@@ -7,6 +7,7 @@ og:
 
 <script>
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../src/lib/components/MapaBarrios.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -275,6 +276,32 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'wrb', title: 'Tipo de suelo'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
+
 <MapaEspana
     data={puntos}
     lat=lat
@@ -299,9 +326,36 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Rojo: suelos ácidos (pH bajo), típicos del noroeste lluvioso y de los granitos y pizarras del oeste. Azul: suelos básicos o calizos (pH alto), los de casi toda la España seca, con caliza o yeso en el subsuelo. El pH decide qué cultivos van bien (el castaño o el arándano quieren tierra ácida; la vid, el almendro o el olivo aguantan la caliza) y cuánta cal o azufre hay que echar.</p>
 
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={8}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Cultivo principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
 
 <MapaEspana
     data={puntos}
@@ -326,7 +380,34 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Más verde, más materia orgánica: los prados del norte, con lluvia, hierba y estiércol todo el año. Los secanos de la meseta, el valle del Ebro y el sureste, con calor, poca lluvia y siglos de labranza, tienen el suelo agrario más pobre en materia orgánica de Europa occidental. SoilGrids suele dar algo más de carbono que los análisis de campo en los secanos mediterráneos: compara zonas, no tomes la cifra como un análisis.</p>
+
+{:else}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'arcilla_pct', title: 'Arcilla (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Tipo de suelo'},
+        {id: 'cultivo', title: 'Cultivo principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+    ]}
+/>
 
 {:else}
 
@@ -352,6 +433,8 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
         {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
     ]}
 />
+
+{/if}
 
 {/if}
 

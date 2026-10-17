@@ -1,13 +1,14 @@
 ---
 title: Nekazaritza-lurzoruak
 description: "Zer lur dagoen Espainiako laboreen azpian: lurzoru buztintsuak, frankoak eta hareatsuak, lurzoru motak (kaltzisolak, kanbisolak, luvisolak, vertisolak...), pHa eta materia organikoa erkidego, probintzia eta udalerrika, 10 km-ko mapa, zer lurzoru duten olibadiak, mahastiak, ureztatuak edo larre-basoak eta Europako gainerakoekin alderaketa."
-i18n_origen: eeb4e08a6c18
+i18n_origen: 17770bb14679
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -276,6 +277,32 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Testura'},
+        {id: 'wrb', title: 'Lurzoru mota'},
+        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
+
 <MapaEspana
     data={puntos}
     lat=lat
@@ -300,9 +327,36 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Gorria: lurzoru azidoak (pH baxua), ipar-mendebalde euritsukoak eta mendebaldeko granito eta arbelezkoak. Urdina: lurzoru basikoak edo kareharritsuak (pH altua), Espainia lehor ia osokoak, lurpean kareharria edo igeltsua dutenak. pHak erabakitzen du zer labore datozen ondo (gaztainondoak edo ahabiak lur azidoa nahi dute; mahatsondoak, almendrondoak edo olibondoak kareharria jasaten dute) eta zenbat kare edo sufre bota behar den.</p>
 
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={8}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Materia organikoa (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Labore nagusia'},
+        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
 
 <MapaEspana
     data={puntos}
@@ -327,7 +381,34 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Zenbat eta berdeago, orduan eta materia organiko gehiago: iparraldeko belardiak, urte osoan euria, belarra eta simaurra dituztenak. Mesetako, Ebro ibarreko eta hego-ekialdeko lehorreko laboreek, beroarekin, euri gutxirekin eta mendeetako lanketarekin, Mendebaldeko Europako nekazaritza-lurzoru pobreena dute materia organikotan. SoilGridsek landa-analisiek baino karbono apur bat gehiago ematen du Mediterraneoko lehorretan: alderatu eremuak, eta ez hartu zifra analisi bat balitz bezala.</p>
+
+{:else}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Testura'},
+        {id: 'arcilla_pct', title: 'Buztina (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Lurzoru mota'},
+        {id: 'cultivo', title: 'Labore nagusia'},
+        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num1'}
+    ]}
+/>
 
 {:else}
 
@@ -353,6 +434,8 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
         {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num1'}
     ]}
 />
+
+{/if}
 
 {/if}
 

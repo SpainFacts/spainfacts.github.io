@@ -1,13 +1,14 @@
 ---
 title: Farm soils
 description: "What kind of ground lies under Spain's crops: clayey, loamy and sandy soils, soil types (Calcisols, Cambisols, Luvisols, Vertisols...), pH and organic matter by region, province and municipality, a map every 10 km, which soil olive groves, vineyards, irrigated land and dehesa wood-pastures sit on, and the comparison with the rest of Europe."
-i18n_origen: eeb4e08a6c18
+i18n_origen: 17770bb14679
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -276,6 +277,32 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Texture'},
+        {id: 'wrb', title: 'Soil type'},
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
+
 <MapaEspana
     data={puntos}
     lat=lat
@@ -300,9 +327,36 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Red: acidic soils (low pH), typical of the rainy north-west and of the granite and slate of the west. Blue: alkaline or calcareous soils (high pH), found across almost all of dry Spain, with limestone or gypsum underneath. pH decides which crops do well (chestnuts and blueberries want acidic ground; vines, almonds and olives tolerate limestone) and how much lime or sulphur has to be added.</p>
 
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={8}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Main crop'},
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
 
 <MapaEspana
     data={puntos}
@@ -327,7 +381,34 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Greener means more organic matter: the meadows of the north, with rain, grass and manure all year round. The rain-fed fields of the central plateau, the Ebro valley and the south-east, with heat, little rain and centuries of ploughing, have the farm soil poorest in organic matter in western Europe. SoilGrids tends to give somewhat more carbon than field tests in Mediterranean rain-fed land: use it to compare areas, not as a soil test.</p>
+
+{:else}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Texture'},
+        {id: 'arcilla_pct', title: 'Clay (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Soil type'},
+        {id: 'cultivo', title: 'Main crop'},
+        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
+    ]}
+/>
 
 {:else}
 
@@ -353,6 +434,8 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
         {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num1'}
     ]}
 />
+
+{/if}
 
 {/if}
 

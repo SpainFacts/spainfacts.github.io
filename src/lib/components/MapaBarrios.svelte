@@ -29,6 +29,13 @@
     export let tooltip = undefined;
     export let height = 520;
     export let title = undefined;
+    // Modo puntos (mapa de puntos de suelos): cada fila es una celda con lat/long, dibujada como un
+    // círculo de su tamaño real (0,45 × celdaKm de radio) sobre el callejero. El GeoJSON solo da el
+    // contorno del municipio (filtroGeo elige sus polígonos, p. ej. {cod_mun: '41039'})
+    export let lat = undefined;
+    export let long = undefined;
+    export let celdaKm = 1;
+    export let filtroGeo = undefined;
 
     $: lang = idiomaDeRuta($page.url.pathname);
     const SIN_DATO = { es: 'Sin datos', en: 'No data', ca: 'Sense dades', gl: 'Sen datos', eu: 'Daturik ez' };
@@ -41,6 +48,7 @@
     };
 
     // ------------------------------------------------------------------ colores (como MapaEspana)
+    $: modoPuntos = !!(lat && long);
     $: filas = Array.from(data ?? []);
     $: porId = new Map(filas.map((r) => [String(r?.[areaCol] ?? ''), r]));
     $: categorico = legendType === 'categorical';
@@ -162,9 +170,11 @@
 
     // Al cambiar de municipio se encuadra de nuevo; al cambiar de capa solo se repinta
     let encuadrado = '';
-    $: if (L && mapa && geo) dibujar(geo, porId, colorFila, opacidadFila, lang);
+    $: if (L && mapa && geo) dibujar(geo, porId, colorFila, opacidadFila, lang, filas, modoPuntos, filtroGeo, celdaKm);
+    const cumple = (f) => !filtroGeo || Object.entries(filtroGeo).every(([k, v]) => String(f.properties?.[k] ?? '') === String(v));
     function dibujar(g) {
         if (capa) capa.remove();
+        if (modoPuntos) return dibujarPuntos(g);
         // con cientos de secciones, bordes finos para que no laven el color
         const grosor = (g?.features?.length ?? 0) > 600 ? 0.3 : (g?.features?.length ?? 0) > 150 ? 0.5 : 0.9;
         capa = L.geoJSON(g, {
@@ -185,6 +195,52 @@
             mapa.fitBounds(capa.getBounds(), { padding: [8, 8] });
         }
     }
+    function dibujarPuntos(g) {
+        const lienzo = L.canvas({ padding: 0.5 });
+        capa = L.featureGroup();
+        const contorno = L.geoJSON({ type: 'FeatureCollection', features: (g?.features ?? []).filter(cumple) }, {
+            style: { color: '#111827', weight: 2, fill: false, opacity: 0.8 },
+            interactive: false
+        });
+        contorno.addTo(capa);
+        const centros = [];
+        for (const r of filas) {
+            const la = Number(r?.[lat]), lo = Number(r?.[long]);
+            if (!ok(la) || !ok(lo)) continue;
+            centros.push([la, lo]);
+            const c = colorFila(r);
+            const p = L.circle([la, lo], {
+                renderer: lienzo,
+                radius: 0.45 * (Number(celdaKm) || 1) * 1000,
+                color: '#ffffff',
+                weight: 0.6,
+                fillColor: c ?? '#9ca3af',
+                fillOpacity: c ? 0.78 : 0.3
+            });
+            p.bindTooltip(() => textoTooltip(r, ''), { sticky: true, direction: 'top', className: 'mapa-barrios-tooltip' });
+            p.on('mouseover', () => p.setStyle({ weight: 2, color: '#111827' }));
+            p.on('mouseout', () => p.setStyle({ weight: 0.6, color: '#ffffff' }));
+            p.addTo(capa);
+        }
+        capa.addTo(mapa);
+        // Se encuadra al cambiar de municipio (contorno nuevo), no al cambiar de capa
+        // (los círculos no tienen límites hasta que el mapa tiene vista: se usa el contorno o los centros)
+        const clave = cargada + JSON.stringify(filtroGeo ?? {});
+        const limites = contorno.getLayers().length ? contorno.getBounds() : L.latLngBounds(centros);
+        if (encuadrado !== clave && limites.isValid()) {
+            encuadrado = clave;
+            encuadrar(limites);
+        }
+    }
+    // Si el contenedor aún no tiene tamaño (se está pintando la página), Leaflet encuadraría con
+    // el zoom máximo: se espera a que lo tenga
+    function encuadrar(limites, intentos = 25) {
+        if (!mapa) return;
+        mapa.invalidateSize();
+        const t = mapa.getSize();
+        if ((!t.x || !t.y) && intentos > 0) return setTimeout(() => encuadrar(limites, intentos - 1), 200);
+        mapa.fitBounds(limites, { padding: [8, 8] });
+    }
 </script>
 
 <figure class="my-6 not-prose">
@@ -203,7 +259,7 @@
             <span class="inline-block h-2.5 w-40 rounded-sm" style="background:linear-gradient(to right, {(paleta.length ? paleta : ['#eff6ff', '#1e3a8a']).join(', ')})"></span>
             <span>{formatear(vMax, valueFmt)}</span>
         {/if}
-        <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-300 dark:bg-gray-600"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>
+        {#if !modoPuntos}<span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-300 dark:bg-gray-600"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>{/if}
         <span class="ml-auto text-gray-400">{PISTA[lang] ?? PISTA.es}</span>
     </div>
 </figure>

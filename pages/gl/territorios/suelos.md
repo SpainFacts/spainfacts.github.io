@@ -1,13 +1,14 @@
 ---
 title: Solos agrarios
 description: "Que terra hai debaixo dos cultivos de España: solos arxilosos, francos e areosos, tipos de solo (calcisolos, cambisolos, luvisolos, vertisolos...), pH e materia orgánica por comunidade, provincia e municipio, mapa cada 10 km, que solo ten o olivar, o viñedo, o regadío ou a devesa e comparación co resto de Europa."
-i18n_origen: eeb4e08a6c18
+i18n_origen: 17770bb14679
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -276,6 +277,32 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'wrb', title: 'Tipo de solo'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios na cela', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
+
 <MapaEspana
     data={puntos}
     lat=lat
@@ -300,9 +327,36 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Vermello: solos ácidos (pH baixo), típicos do noroeste chuvioso e dos granitos e lousas do oeste. Azul: solos básicos ou calcarios (pH alto), os de case toda a España seca, con calcaria ou xeso no subsolo. O pH decide que cultivos van ben (o castiñeiro ou o arando queren terra ácida; a vide, a amendoeira ou a oliveira aguantan a calcaria) e canto cal ou xofre hai que botar.</p>
 
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={8}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Cultivo principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios na cela', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
 
 <MapaEspana
     data={puntos}
@@ -327,7 +381,34 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Máis verde, máis materia orgánica: os prados do norte, con chuvia, herba e esterco todo o ano. Os secaños da meseta, o val do Ebro e o sueste, con calor, pouca chuvia e séculos de labranza, teñen o solo agrario máis pobre en materia orgánica de Europa occidental. SoilGrids adoita dar algo máis de carbono que as análises de campo nos secaños mediterráneos: compara zonas, non tomes a cifra como unha análise.</p>
+
+{:else}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'arcilla_pct', title: 'Arxila (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Tipo de solo'},
+        {id: 'cultivo', title: 'Cultivo principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agrarios na cela', fmt: 'num1'}
+    ]}
+/>
 
 {:else}
 
@@ -353,6 +434,8 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
         {id: 'superficie_agraria_km2', title: 'Km² agrarios na cela', fmt: 'num1'}
     ]}
 />
+
+{/if}
 
 {/if}
 

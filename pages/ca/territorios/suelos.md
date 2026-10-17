@@ -1,13 +1,14 @@
 ---
 title: Sòls agraris
 description: "Quina terra hi ha sota els conreus d'Espanya: sòls argilosos, francs i sorrencs, tipus de sòl (calcisòls, cambisòls, luvisòls, vertisòls...), pH i matèria orgànica per comunitat, província i municipi, mapa cada 10 km, quin sòl té l'oliverar, la vinya, el regadiu o la devesa i comparació amb la resta d'Europa."
-i18n_origen: eeb4e08a6c18
+i18n_origen: 17770bb14679
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
+    import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -276,6 +277,32 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'wrb', title: 'Tipus de sòl'},
+        {id: 'superficie_agraria_km2', title: 'Km² agraris a la cel·la', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
+
 <MapaEspana
     data={puntos}
     lat=lat
@@ -300,9 +327,36 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Vermell: sòls àcids (pH baix), típics del nord-oest plujós i dels granits i les pissarres de l'oest. Blau: sòls bàsics o calcaris (pH alt), els de gairebé tota l'Espanya seca, amb calcària o guix al subsòl. El pH decideix quins conreus hi van bé (el castanyer o el nabiu volen terra àcida; la vinya, l'ametller o l'olivera aguanten la calcària) i quanta calç o sofre cal tirar-hi.</p>
 
 {:else if String(inputs.capa?.value ?? inputs.capa) === 'mo'}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={puntos}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={8}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Matèria orgànica (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Conreu principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agraris a la cel·la', fmt: 'num1'}
+    ]}
+/>
+
+{:else}
 
 <MapaEspana
     data={puntos}
@@ -327,7 +381,34 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     ]}
 />
 
+{/if}
+
 <p class="text-xs text-gray-500">Com més verd, més matèria orgànica: els prats del nord, amb pluja, herba i fems tot l'any. Els secans de la Meseta, la vall de l'Ebre i el sud-est, amb calor, poca pluja i segles de llaurada, tenen el sòl agrari més pobre en matèria orgànica de l'Europa occidental. SoilGrids sol donar una mica més de carboni que les anàlisis de camp als secans mediterranis: compara zones, no prenguis la xifra com una anàlisi.</p>
+
+{:else}
+
+{#if terr[0]?.nivel === 'municipio'}
+
+<MapaBarrios
+    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl={geoDe(terr[0])}
+    filtroGeo={filtroDe(terr[0])}
+    celdaKm={puntos[0]?.celda_km}
+    height={600}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'arcilla_pct', title: 'Argila (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Tipus de sòl'},
+        {id: 'cultivo', title: 'Conreu principal'},
+        {id: 'superficie_agraria_km2', title: 'Km² agraris a la cel·la', fmt: 'num1'}
+    ]}
+/>
 
 {:else}
 
@@ -353,6 +434,8 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
         {id: 'superficie_agraria_km2', title: 'Km² agraris a la cel·la', fmt: 'num1'}
     ]}
 />
+
+{/if}
 
 {/if}
 
