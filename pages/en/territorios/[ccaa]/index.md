@@ -1,5 +1,5 @@
 ---
-i18n_origen: d9577951222c
+i18n_origen: 43259a853f24
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -13,6 +13,9 @@ og:
 
     import TituloPagina from '../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    $: idioma = idiomaDeRuta($currentPage.url.pathname);
 </script>
 
 ```sql terr
@@ -298,6 +301,118 @@ ORDER BY anio
     <Column id=poblacion title="Population" fmt=num0 />
     <Column id=crecimiento title="10-year growth (%)" fmt=num1 contentType=delta />
 </DataTable>
+
+```sql suelo
+SELECT * FROM mother.suelos_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND cultivo = 'Toda la superficie agraria'
+```
+
+```sql suelo_espana
+SELECT * FROM mother.suelos_territorio WHERE nivel = 'pais' AND cultivo = 'Toda la superficie agraria'
+```
+
+```sql suelo_cultivos
+SELECT cultivo, superficie_agraria_km2, pct_de_la_agraria, arcilla_pct, ph, materia_organica_pct,
+    textura_dominante, wrb_dominante, pct_fuertes, pct_basico
+FROM mother.suelos_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND cultivo <> 'Toda la superficie agraria'
+    AND superficie_agraria_km2 >= 1
+ORDER BY superficie_agraria_km2 DESC
+```
+
+{#if suelo.length > 0}
+
+## Farm soil
+
+{formatNumber(suelo[0]?.pct_agraria, 0)} % of the land is farmland ({formatNumber(suelo[0]?.superficie_agraria_km2, 0)} km²; in Spain, {formatNumber(suelo_espana[0]?.pct_agraria, 0)} %). On that land the most common texture is **{etiquetaSuelo('TEXTURA', suelo[0]?.textura_dominante, idioma).toLowerCase()}** and the most widespread soil type is **{etiquetaSuelo('WRB', suelo[0]?.wrb_dominante, idioma).toLowerCase()}**. More detail and the comparison with Europe in [farm soils](/en/territorios/suelos).
+
+<Grid cols=3>
+    <KpiCard
+        title="Heavy soils (clay loam and clay)"
+        value={suelo[0]?.pct_fuertes}
+        formattedValue="{formatNumber(suelo[0]?.pct_fuertes, 0)} %"
+        period="of farmland · Spain: {formatNumber(suelo_espana[0]?.pct_fuertes, 0)} % · average clay: {formatNumber(suelo[0]?.arcilla_pct, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="Average pH of farm soil"
+        value={suelo[0]?.ph}
+        formattedValue={formatNumber(suelo[0]?.ph, 1)}
+        period="{formatNumber(suelo[0]?.pct_basico, 0)} % alkaline or calcareous · Spain: pH {formatNumber(suelo_espana[0]?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Average organic matter"
+        value={suelo[0]?.materia_organica_pct}
+        formattedValue="{formatNumber(suelo[0]?.materia_organica_pct, 1)} %"
+        period="Spain: {formatNumber(suelo_espana[0]?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+<ButtonGroup name=suelo_medida title="Map of municipalities">
+    <ButtonGroupItem valueLabel="% of heavy soils" value="pct_fuertes" default />
+    <ButtonGroupItem valueLabel="pH" value="ph" />
+    <ButtonGroupItem valueLabel="Organic matter (%)" value="materia_organica_pct" />
+    <ButtonGroupItem valueLabel="% of the municipality that is farmland" value="pct_agraria" />
+</ButtonGroup>
+
+```sql suelo_municipios
+SELECT cod_mun, municipio, '/en' || enlace AS enlace, superficie_agraria_km2, pct_agraria, pct_fuertes, ph, materia_organica_pct,
+    textura_dominante, wrb_dominante, ${inputs.suelo_medida} AS medida
+FROM mother.suelos_municipio
+WHERE cod_ccaa = '${terr[0]?.cod}' AND cultivo = 'Toda la superficie agraria'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+{#if suelo_municipios.length > 0}
+
+<MapaEspana
+    data={etiquetasSuelo(suelo_municipios, idioma)}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="medida"
+    valueFmt="num1"
+    colorPalette={['#fdf6e3', '#c8955a', '#5b2a17']}
+    height={460}
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'superficie_agraria_km2', title: 'Farmland km²', fmt: 'num1'},
+        {id: 'textura_txt', title: 'Most common texture'},
+        {id: 'pct_fuertes', title: '% heavy soils', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Soil type'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Click a municipality to see its soil on its page. In grey, municipalities outside this area or with no farmland on the CORINE map (woodland, urban land or fields smaller than 25 ha).</p>
+
+{/if}
+
+{#if suelo_cultivos.length > 0}
+
+<DataTable data={etiquetasSuelo(suelo_cultivos, idioma)} rows=10>
+    <Column id=cultivo_txt title="Crop" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="% of farmland" fmt=num1 />
+    <Column id=textura_txt title="Most common texture" />
+    <Column id=pct_fuertes title="% heavy soils" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
+    <Column id=wrb_txt title="Soil type" />
+</DataTable>
+
+{/if}
+
+<p class="text-xs text-gray-500">Topsoil (0-30 cm) from the SoilGrids model (ISRIC) over the farmland of the CORINE Land Cover 2018 map. It is a model: it is good for comparing areas, but it is no substitute for a soil test of the field.</p>
+
+{/if}
 
 ```sql cuentas
 SELECT

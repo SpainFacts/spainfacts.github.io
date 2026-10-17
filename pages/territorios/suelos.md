@@ -1,6 +1,6 @@
 ---
 title: Suelos agrarios
-description: "Qué tierra hay debajo de los cultivos de España: suelos arcillosos, francos y arenosos, tipos de suelo (calcisoles, cambisoles, luvisoles, vertisoles...), pH y materia orgánica por comunidad y provincia, mapa cada 10 km, qué suelo tiene el olivar, el viñedo, el regadío o la dehesa y comparación con el resto de Europa."
+description: "Qué tierra hay debajo de los cultivos de España: suelos arcillosos, francos y arenosos, tipos de suelo (calcisoles, cambisoles, luvisoles, vertisoles...), pH y materia orgánica por comunidad, provincia y municipio, mapa cada 10 km, qué suelo tiene el olivar, el viñedo, el regadío o la dehesa y comparación con el resto de Europa."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -116,7 +116,7 @@ ORDER BY dimension, orden
 
 # 🟫 Suelos agrarios
 
-Qué tierra hay debajo de los cultivos de España: si es **arcillosa, franca o arenosa**, qué **tipo de suelo** es, si es **caliza o ácida** y cuánta **materia orgánica** tiene. Todo se mide sobre la **superficie agraria** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², casi la mitad del país) en la capa que se trabaja, los primeros 30 cm, y se cruza con lo que se cultiva encima. Los datos salen de un modelo (SoilGrids), no de análisis de cada parcela: sirven para comparar comarcas, provincias y países.
+Qué tierra hay debajo de los cultivos de España: si es **arcillosa, franca o arenosa**, qué **tipo de suelo** es, si es **caliza o ácida** y cuánta **materia orgánica** tiene. Todo se mide sobre la **superficie agraria** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², casi la mitad del país) en la capa que se trabaja, los primeros 30 cm, y se cruza con lo que se cultiva encima. Se puede bajar por comunidad y provincia hasta cada municipio. Los datos salen de un modelo (SoilGrids), no de análisis de cada parcela: sirven para comparar comarcas, provincias y países.
 
 <Grid cols=4>
     <KpiCard
@@ -406,6 +406,33 @@ ORDER BY t.superficie_agraria_km2 DESC
 </DataTable>
 
 <p class="text-xs text-gray-500">Tierras fuertes = las seis texturas franco-arcillosas y arcillosas del triángulo del USDA (en general, más de una cuarta parte de arcilla). Álava, Navarra, La Rioja, las campiñas de Málaga, Cádiz, Jaén y Sevilla y el valle del Ebro tienen las tierras más fuertes; Galicia, Cáceres, León y Badajoz, las más ligeras, sobre granito y pizarra. Ceuta y Melilla casi no tienen superficie agraria.</p>
+
+## Por municipio
+
+```sql municipios_suelo
+SELECT m.municipio, t.nombre AS provincia, m.enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
+    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
+FROM mother.suelos_municipio m
+LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
+WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
+ORDER BY m.superficie_agraria_km2 DESC
+```
+
+Busca tu municipio: en su ficha está el suelo de cada uno de sus cultivos y la comparación con su provincia y con España. Las fichas de cada comunidad y provincia tienen el mapa de sus municipios.
+
+<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipio" />
+    <Column id=provincia title="Provincia" />
+    <Column id=superficie_agraria_km2 title="Km² agrarios" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_agraria title="% agrario" fmt=num0 />
+    <Column id=textura_dominante title="Textura más frecuente" />
+    <Column id=pct_fuertes title="% tierras fuertes" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Materia orgánica (%)" fmt=num1 />
+    <Column id=wrb_dominante title="Tipo de suelo" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Superficie agraria de CORINE dentro de cada término municipal, muestreada cada 250 m; el suelo es el de SoilGrids a 1 km, así que en los municipios pequeños sale de muy pocas celdas.</p>
 
 ## Qué suelo tiene cada cultivo
 

@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 96324d797ed9
+i18n_origen: 3b79b722db40
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,6 +11,13 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    import { page as paginaActual } from '$app/stores';
+    $: idioma = idiomaDeRuta($paginaActual.url.pathname);
+    $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
+    $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
+    $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
     const urte = (n, s) => (n == null || n === '' ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
     // Datuetatik gaztelaniaz datozen datak euskaratzen ditu («mayo de 2024» → «2024ko maiatza»)
@@ -732,6 +739,78 @@ ORDER BY v.periodo
 </Grid>
 
 <p class="text-xs text-gray-500">Plataforma digital handietan ostatu turistiko gisa iragarritako etxebizitzak (INEren neurketa esperimentala, seihilekoa). {#if tur_vut_mun.slice(-1)[0]?.puesto}Etxebizitza turistikoen ehunekoaren arabera, {formatNumber(tur_vut_mun.slice(-1)[0]?.puesto, 0)}. udalerria da, 1.000 biztanle edo gehiago dituzten {formatNumber(tur_vut_mun.slice(-1)[0]?.n_ranking, 0)} udalerrien artean.{/if} Gehiago: <a href="/eu/economia/turismo">Turismoa</a>.</p>
+
+{/if}
+
+```sql suelo_mun
+SELECT * FROM mother.suelos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+```sql suelo_ref
+SELECT nivel, nombre, pct_agraria, pct_fuertes, ph, materia_organica_pct
+FROM mother.suelos_territorio
+WHERE cultivo = 'Toda la superficie agraria'
+    AND ((nivel = 'provincia' AND cod = left('${inputs.municipio}', 2)) OR nivel = 'pais')
+```
+
+{#if suelo_toda}
+
+## Nekazaritza-lurzorua
+
+{#if suelo_toda.superficie_agraria_km2 > 0}
+
+Udal-mugartearen {formatNumber(suelo_toda.pct_agraria, 0)} % nekazaritza-azalera da ({formatNumber(suelo_toda.superficie_agraria_km2, 1)} km²; probintzian, {formatNumber(suelo_prov?.pct_agraria, 0)} %). Lur horretan testura **{etiquetaSuelo('TEXTURA', suelo_toda.textura_dominante, idioma).toLowerCase()}** nagusitzen da, eta lurzoru mota hedatuena **{etiquetaSuelo('WRB', suelo_toda.wrb_dominante, idioma).toLowerCase()}** dira.
+
+<Grid cols=3>
+    <KpiCard
+        title="Lur gogorrak (franko-buztintsuak eta buztintsuak)"
+        value={suelo_toda.pct_fuertes}
+        formattedValue="{formatNumber(suelo_toda.pct_fuertes, 0)} %"
+        period="nekazaritza-azaleraren gainean · probintzia: {formatNumber(suelo_prov?.pct_fuertes, 0)} % · Espainia: {formatNumber(suelo_esp?.pct_fuertes, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="Nekazaritza-lurzoruaren batez besteko pHa"
+        value={suelo_toda.ph}
+        formattedValue={formatNumber(suelo_toda.ph, 1)}
+        period="{formatNumber(suelo_toda.pct_basico, 0)} % basikoa edo kareharritsua · probintzia: {formatNumber(suelo_prov?.ph, 1)} · Espainia: {formatNumber(suelo_esp?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Batez besteko materia organikoa"
+        value={suelo_toda.materia_organica_pct}
+        formattedValue="{formatNumber(suelo_toda.materia_organica_pct, 1)} %"
+        period="probintzia: {formatNumber(suelo_prov?.materia_organica_pct, 1)} % · Espainia: {formatNumber(suelo_esp?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+{#if suelo_mun.length > 1}
+
+<DataTable data={etiquetasSuelo(suelo_mun.filter((d) => d.cultivo !== 'Toda la superficie agraria'), idioma)} rows=10>
+    <Column id=cultivo_txt title="Laborea" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num1 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="Nekazaritza-azaleraren %" fmt=num1 />
+    <Column id=textura_txt title="Testura ohikoena" />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Materia organikoa (%)" fmt=num1 />
+    <Column id=wrb_txt title="Lurzoru mota" />
+</DataTable>
+
+{/if}
+
+{:else}
+
+<p>CORINE 2018 lurzoru-erabileren mapak ez du nekazaritza-azalerarik markatzen udal-mugarte honetan: mendia edo hiria da, edo 25 ha baino gutxiagoko labore-lursailak ditu, eta CORINEk inguruan dutenarekin batzen ditu.</p>
+
+{/if}
+
+<p class="text-xs text-gray-500">SoilGrids ereduaren (ISRIC) goiko geruza landua (0-30 cm), 1 km-ko gelaxkekin, CORINE Land Cover 2018 maparen nekazaritza-azaleraren gainean. Udalerri txikietan zifra gelaxka gutxi batzuetatik ateratzen da: ideia bat egiteko balio du, ez du lursailaren lurzoru-analisirik ordezten. Espainiako gainerakoekin eta Europarekin alderaketa: <a href="/eu/territorios/suelos">nekazaritza-lurzoruak</a>.</p>
 
 {/if}
 

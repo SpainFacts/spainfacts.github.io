@@ -1,5 +1,5 @@
 ---
-i18n_origen: 023a6ec94996
+i18n_origen: 21e2042a9bd3
 title: Economía
 description: "PIB por habitante, crecemento, comercio exterior, sectores, emprego, salarios, paro e inflación en España, descontada a inflación e en proporción á poboación."
 og:
@@ -249,10 +249,6 @@ Salario medio mensual bruto descontada a inflación. [Crecemento, sectores e dec
     <a href="/gl/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🌾</span> Agricultura, gandaría e pesca</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">A horta de Europa: aceite, cítricos, froitas e hortalizas, porcino, viño e pesca, e o posto de España na UE</div>
-    </a>
-    <a href="/gl/economia/suelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold"><span aria-hidden="true">🟫</span> Solos agrarios</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Terras arxilosas, francas e areosas, tipos de solo, pH e materia orgánica por provincia e cultivo, e fronte a Europa</div>
     </a>
     <a href="/gl/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏭</span> Industria</div>

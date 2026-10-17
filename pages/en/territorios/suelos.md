@@ -1,7 +1,7 @@
 ---
 title: Farm soils
-description: "What kind of ground lies under Spain's crops: clayey, loamy and sandy soils, soil types (Calcisols, Cambisols, Luvisols, Vertisols...), pH and organic matter by region and province, a map every 10 km, which soil olive groves, vineyards, irrigated land and dehesa wood-pastures sit on, and the comparison with the rest of Europe."
-i18n_origen: 7a1d0195aa79
+description: "What kind of ground lies under Spain's crops: clayey, loamy and sandy soils, soil types (Calcisols, Cambisols, Luvisols, Vertisols...), pH and organic matter by region, province and municipality, a map every 10 km, which soil olive groves, vineyards, irrigated land and dehesa wood-pastures sit on, and the comparison with the rest of Europe."
+i18n_origen: 936db82c6035
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -117,7 +117,7 @@ ORDER BY dimension, orden
 
 # 🟫 Farm soils
 
-What kind of ground lies under Spain's crops: whether it is **clayey, loamy or sandy**, what **type of soil** it is, whether it is **calcareous or acidic** and how much **organic matter** it holds. Everything is measured over **farmland** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} thousand km², almost half the country) in the layer that gets worked, the top 30 cm, and matched with what is grown on top. The data come from a model (SoilGrids), not from tests of each field: they are good for comparing districts, provinces and countries.
+What kind of ground lies under Spain's crops: whether it is **clayey, loamy or sandy**, what **type of soil** it is, whether it is **calcareous or acidic** and how much **organic matter** it holds. Everything is measured over **farmland** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} thousand km², almost half the country) in the layer that gets worked, the top 30 cm, and matched with what is grown on top. You can drill down by region and province to each municipality. The data come from a model (SoilGrids), not from tests of each field: they are good for comparing districts, provinces and countries.
 
 <Grid cols=4>
     <KpiCard
@@ -407,6 +407,33 @@ ORDER BY t.superficie_agraria_km2 DESC
 </DataTable>
 
 <p class="text-xs text-gray-500">Heavy soils = the six clay loam and clay textures of the USDA triangle (generally more than a quarter clay). Álava, Navarre, La Rioja, the countryside of Málaga, Cádiz, Jaén and Seville and the Ebro valley have the heaviest soils; Galicia, Cáceres, León and Badajoz the lightest, on granite and slate. Ceuta and Melilla have almost no farmland.</p>
+
+## By municipality
+
+```sql municipios_suelo
+SELECT m.municipio, t.nombre AS provincia, '/en' || m.enlace AS enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
+    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
+FROM mother.suelos_municipio m
+LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
+WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
+ORDER BY m.superficie_agraria_km2 DESC
+```
+
+Look up your municipality: its page shows the soil under each of its crops and the comparison with its province and with Spain. Each region and province page has the map of its municipalities.
+
+<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipality" />
+    <Column id=provincia title="Province" />
+    <Column id=superficie_agraria_km2 title="Farmland km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_agraria title="% farmland" fmt=num0 />
+    <Column id=textura_dominante title="Most common texture" />
+    <Column id=pct_fuertes title="% heavy soils" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
+    <Column id=wrb_dominante title="Soil type" />
+</DataTable>
+
+<p class="text-xs text-gray-500">CORINE farmland within each municipality, sampled every 250 m; the soil is SoilGrids at 1 km, so in small municipalities it comes from very few cells.</p>
 
 ## Which soil each crop sits on
 

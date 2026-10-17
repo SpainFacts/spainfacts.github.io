@@ -1,7 +1,7 @@
 ---
 title: Regions
 description: "Spain by autonomous community and province: population, public accounts and debt of each administration."
-i18n_origen: 6facd905aab0
+i18n_origen: 469da43c634a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,8 +82,9 @@ Spain is a decentralised state: the **autonomous communities** run healthcare, e
     />
 </Grid>
 
-<div class="not-prose my-4">
+<div class="not-prose my-4 flex flex-wrap gap-2">
     <a href="/en/territorios/municipios" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white no-underline">🔎 Find your municipality: population, council accounts and who governs</a>
+    <a href="/en/territorios/suelos" class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white no-underline" style="background:#92400e">🟫 Agricultural soils: clay, loam or sandy, pH and organic matter</a>
 </div>
 
 ## Map of autonomous communities

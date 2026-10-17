@@ -1,7 +1,7 @@
 ---
 title: Territorios
 description: "España por comunidades autónomas e provincias: poboación, contas públicas e débeda de cada administración."
-i18n_origen: 6facd905aab0
+i18n_origen: 469da43c634a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,8 +82,9 @@ España é un Estado descentralizado: as **comunidades autónomas** xestionan a 
     />
 </Grid>
 
-<div class="not-prose my-4">
+<div class="not-prose my-4 flex flex-wrap gap-2">
     <a href="/gl/territorios/municipios" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white no-underline">🔎 Busca o teu municipio: poboación, contas do concello e quen goberna</a>
+    <a href="/gl/territorios/suelos" class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white no-underline" style="background:#92400e">🟫 Solos agrarios: arxilosos, francos ou areosos, pH e materia orgánica</a>
 </div>
 
 ## Mapa de comunidades autónomas

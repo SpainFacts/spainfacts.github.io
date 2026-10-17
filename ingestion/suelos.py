@@ -29,6 +29,10 @@ Recursos (replace):
                   clase: km² agrarios
   suelos_rejilla  celdas de 10 km de España con superficie agraria: textura, grupo WRB y
                   cultivo dominantes y medias
+  suelos_municipio  municipio (código INE) y cultivo: km² del término y agrarios, medias, clases
+                  dominantes y % de tierras fuertes, arcillosas, arenosas, básicas, ácidas y
+                  calcisoles. La superficie sale de las muestras de 250 m de CORINE dentro de cada
+                  término (static/geo/municipios.geojson) y el suelo, de su celda de 1 km.
 
 El cálculo (unos 4 minutos y 2 GB de memoria, casi todo descargas) se guarda en data/suelos_cache/: los mapas de
 SoilGrids y CORINE 2018 no cambian, solo se rehace si se borra la caché o si cambia VERSION.
@@ -48,7 +52,7 @@ log = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CACHE = REPO_ROOT / "data" / "suelos_cache"
-VERSION = 1  # súbela si cambia el cálculo para que no se use la caché
+VERSION = 2  # súbela si cambia el cálculo para que no se use la caché
 
 CABECERAS = {"User-Agent": "spainfacts.org (datos abiertos; contacto en github.com/SpainFacts)"}
 SOILGRIDS = "https://files.isric.org/soilgrids/latest/"
@@ -172,8 +176,12 @@ def wrb(nombre: str) -> np.ndarray:
 
 # ------------------------------------------------------------------ CORINE
 
-def corine(nombre: str) -> np.ndarray:
-    """Recuento de muestras de 250 m de cada cultivo por celda de 1 km: (len(CULTIVOS), alto, ancho) uint8."""
+def corine(nombre: str, ventana=None):
+    """Recuento de muestras de 250 m de cada cultivo por celda de 1 km: (len(CULTIVOS), alto, ancho) uint8.
+
+    Con `ventana` = (fila0, fila1, col0, col1) en celdas de 1 km devuelve además las muestras de
+    250 m de esa ventana (índice del cultivo o -1 si no es agraria), para el cálculo por municipio.
+    """
     from PIL import Image
 
     x0, y1, ancho, alto = REJILLAS[nombre]
@@ -182,6 +190,9 @@ def corine(nombre: str) -> np.ndarray:
         if clase in CLC_CULTIVO:
             lut[(r << 16) | (g << 8) | b] = CLC_CULTIVO[clase]
     cuenta = np.zeros((len(CULTIVOS), alto, ancho), dtype=np.uint8)
+    if ventana:
+        f0, f1, c0, c1 = ventana
+        fina = np.full(((f1 - f0) * SUB, (c1 - c0) * SUB), -1, dtype=np.int8)
     paso = 1000  # km por imagen (4.000 px de 250 m: el servicio admite 4.096)
     for ty in range(0, alto, paso):
         for tx in range(0, ancho, paso):
@@ -198,8 +209,14 @@ def corine(nombre: str) -> np.ndarray:
             bloques = cls.reshape(h, SUB, w, SUB).transpose(0, 2, 1, 3).reshape(h, w, SUB * SUB)
             for k in range(len(CULTIVOS)):
                 cuenta[k, ty:ty + h, tx:tx + w] = (bloques == k).sum(axis=2)
+            if ventana:
+                # Parte de la imagen que cae dentro de la ventana (en celdas de 1 km)
+                a0, a1 = max(f0, ty), min(f1, ty + h)
+                b0, b1 = max(c0, tx), min(c1, tx + w)
+                if a0 < a1 and b0 < b1:
+                    fina[(a0 - f0) * SUB:(a1 - f0) * SUB, (b0 - c0) * SUB:(b1 - c0) * SUB] =                         cls[(a0 - ty) * SUB:(a1 - ty) * SUB, (b0 - tx) * SUB:(b1 - tx) * SUB]
             log.info("CORINE %s: imagen %s,%s (%s km x %s km)", nombre, tx, ty, w, h)
-    return cuenta
+    return (cuenta, fina) if ventana else cuenta
 
 
 # ------------------------------------------------------------------ fronteras
@@ -225,6 +242,25 @@ def provincias(nombre: str):
         a_ccaa[f"{cod:02d}"] = p["cod_ccaa"]
         formas.append((transform_geom("EPSG:4326", "EPSG:3035", f["geometry"]), cod))
     return _rasterizar(formas, nombre), a_ccaa
+
+
+def municipios(nombre: str, ventana):
+    """Ráster de 250 m de la ventana con el índice de municipio (0 fuera) y la lista de códigos INE."""
+    from rasterio.features import rasterize
+    from rasterio.transform import from_origin
+    from rasterio.warp import transform_geom
+
+    x0, y1, _, _ = REJILLAS[nombre]
+    f0, f1, c0, c1 = ventana
+    transform = from_origin((x0 + c0) * 1000, (y1 - f0) * 1000, CELDA / SUB, CELDA / SUB)
+    geo = json.loads((REPO_ROOT / "static" / "geo" / "municipios.geojson").read_text(encoding="utf-8"))
+    codigos = [""]
+    formas = []
+    for f in geo["features"]:
+        codigos.append(f["properties"]["cod_mun"])
+        formas.append((transform_geom("EPSG:4326", "EPSG:3035", f["geometry"]), len(codigos) - 1))
+    r = rasterize(formas, out_shape=((f1 - f0) * SUB, (c1 - c0) * SUB), transform=transform, fill=0, dtype="int32")
+    return r, codigos
 
 
 def paises(nombre: str):
@@ -317,7 +353,7 @@ def _agregar(unidad: np.ndarray, n_unidades: int, pesos: np.ndarray, s: dict):
     for k in range(p.shape[0]):
         w = p[k]
         km2 = np.bincount(u, weights=w, minlength=n_unidades)
-        medias[k] = {"km2": km2}
+        medias[k] = {"km2": km2, "total": np.bincount(u, minlength=n_unidades).astype(float)}
         for var in MEDIAS:
             x = s[var][sel].astype(np.float64)
             ok = ~np.isnan(x)
@@ -341,7 +377,8 @@ def _filas(ambito: str, codigos: list, medias: dict, clases: dict, minimo_km2: f
         for i, cod in enumerate(codigos):
             if not cod or m["km2"][i] < minimo_km2:
                 continue
-            fila = {"ambito": ambito, "cod": cod, "cultivo": cultivo, "superficie_km2": round(float(m["km2"][i]), 2)}
+            fila = {"ambito": ambito, "cod": cod, "cultivo": cultivo, "superficie_km2": round(float(m["km2"][i]), 2),
+                    "superficie_total_km2": round(float(m["total"][i]), 2)}
             for var in MEDIAS:
                 val = m[var][i]
                 fila[var] = None if np.isnan(val) else round(float(val), 3)
@@ -412,18 +449,109 @@ def _rejilla_10km(nombre: str, pesos: np.ndarray, s: dict, prov: np.ndarray) -> 
     return filas
 
 
+def _ventana(prov: np.ndarray):
+    """Rectángulo (fila0, fila1, col0, col1) de celdas de 1 km que contiene España en la rejilla."""
+    filas = np.nonzero(prov.any(axis=1))[0]
+    cols = np.nonzero(prov.any(axis=0))[0]
+    return int(filas[0]), int(filas[-1]) + 1, int(cols[0]), int(cols[-1]) + 1
+
+
+def _municipios_filas(fina: np.ndarray, mun: np.ndarray, codigos: list, s: dict, ventana) -> list[dict]:
+    """Suelo agrario de cada municipio y cultivo con las muestras de 250 m de CORINE.
+
+    El suelo de cada muestra es el de su celda de 1 km de SoilGrids; la superficie, la de las
+    muestras agrarias que caen dentro del término municipal (1/16 de km² cada una).
+    """
+    f0, _, c0, _ = ventana
+    n = len(codigos)
+    ancho = mun.shape[1]
+    m = mun.ravel()
+    f = fina.ravel()
+    total = np.bincount(m[m > 0], minlength=n) / (SUB * SUB)
+    idx = np.nonzero((m > 0) & (f >= 0))[0]
+    mm = m[idx].astype(np.int64)
+    ff = f[idx].astype(np.int64)
+    celda_f = f0 + (idx // ancho) // SUB
+    celda_c = c0 + (idx % ancho) // SUB
+    x = {var: s[var][celda_f, celda_c].astype(np.float64) for var in MEDIAS}
+    cl = {campo: s[campo][celda_f, celda_c].astype(np.int64) for campo in ("textura", "textura_grupo", "wrb", "ph_clase")}
+    del idx
+    filas = []
+    for k in [-1] + list(range(len(CULTIVOS))):
+        sel = np.ones_like(mm, dtype=bool) if k < 0 else ff == k
+        u = mm[sel]
+        km2 = np.bincount(u, minlength=n) / (SUB * SUB)
+        med = {}
+        for var in MEDIAS:
+            v = x[var][sel]
+            ok = ~np.isnan(v)
+            num = np.bincount(u[ok], weights=v[ok], minlength=n)
+            den = np.bincount(u[ok], minlength=n)
+            with np.errstate(invalid="ignore", divide="ignore"):
+                med[var] = np.where(den > 0, num / den, np.nan)
+        reparto = {}
+        for campo in cl:
+            c = cl[campo][sel]
+            ok = c >= 0
+            nc = int(cl[campo].max()) + 1 if cl[campo].size else 1
+            nc = max(nc, len(TEXTURAS) if campo == "textura" else len(WRB) if campo == "wrb" else 5)
+            reparto[campo] = np.bincount(u[ok] * nc + c[ok], minlength=n * nc).reshape(n, nc)
+        for i in range(1, n):
+            if k >= 0 and km2[i] < 0.0625:
+                continue
+            if k < 0 and total[i] <= 0:
+                continue
+
+            def pct(campo, cond):
+                r = reparto[campo][i]
+                tot = r.sum()
+                return round(100.0 * r[cond].sum() / tot, 1) if tot else None
+
+            def dominante(campo, nombres):
+                r = reparto[campo][i]
+                return nombres[int(r.argmax())] if r.sum() else None
+
+            def red(v, d):
+                return None if np.isnan(v) else round(float(v), d)
+
+            gr = np.arange(reparto["textura_grupo"].shape[1])
+            ph = np.arange(reparto["ph_clase"].shape[1])
+            filas.append({
+                "cod_mun": codigos[i],
+                "cultivo": "Toda la superficie agraria" if k < 0 else CULTIVOS[k],
+                "superficie_total_km2": round(float(total[i]), 3),
+                "superficie_km2": round(float(km2[i]), 3),
+                "arcilla": red(med["arcilla"][i], 2), "limo": red(med["limo"][i], 2), "arena": red(med["arena"][i], 2),
+                "ph": red(med["ph"][i], 3), "carbono": red(med["carbono"][i], 3), "mo": red(med["mo"][i], 3),
+                "textura_dominante": dominante("textura", TEXTURAS),
+                "grupo_textura_dominante": dominante("textura_grupo", GRUPOS_TEXTURA),
+                "wrb_dominante": dominante("wrb", WRB),
+                "pct_fuertes": pct("textura_grupo", gr >= 2),
+                "pct_arcillosa": pct("textura_grupo", gr == 3),
+                "pct_arenosa": pct("textura_grupo", gr == 0),
+                "pct_basico": pct("ph_clase", ph >= 3),
+                "pct_acido": pct("ph_clase", ph <= 1),
+                "pct_calcisoles": pct("wrb", np.arange(reparto["wrb"].shape[1]) == WRB.index("Calcisoles")),
+            })
+    return filas
+
+
 def calcular() -> dict:
     cache = CACHE / f"resultado_v{VERSION}.json"
     if cache.exists():
         return json.loads(cache.read_text(encoding="utf-8"))
     CACHE.mkdir(parents=True, exist_ok=True)
-    medias, clases, rejilla = [], [], []
+    medias, clases, rejilla, municipales = [], [], [], []
     acumulado_es = None
     for nombre in REJILLAS:
         t = time.time()
         s = suelo(nombre)
-        pesos = corine(nombre)
         prov, a_ccaa = provincias(nombre)
+        ventana = _ventana(prov)
+        pesos, fina = corine(nombre, ventana)
+        mun, cods_mun = municipios(nombre, ventana)
+        municipales += _municipios_filas(fina, mun, cods_mun, s, ventana)
+        del fina, mun
         pais, codigos = paises(nombre)
         # España: Ceuta y Melilla quedan fuera de la rejilla europea; las provincias mandan sobre GISCO
         es = codigos.index("ES")
@@ -456,6 +584,7 @@ def calcular() -> dict:
                     vals = [(a, wt) for a, wt in ((a0, w0), (a1, w1)) if not np.isnan(a) and wt > 0]
                     m0[k][var][es0] = sum(a * wt for a, wt in vals) / sum(wt for _, wt in vals) if vals else np.nan
                 m0[k]["km2"][es0] = tot
+                m0[k]["total"][es0] += m[k]["total"][es]
                 for dim in DIMENSIONES:
                     c0[(k, dim)][es0] += c[(k, dim)][es]
         if nombre == "europa":
@@ -466,7 +595,7 @@ def calcular() -> dict:
     fm, fc = _filas("pais", cods_eu, m_eu, c_eu, minimo_km2=50)
     medias += fm
     clases += fc
-    res = {"suelos_medias": medias, "suelos_clases": clases, "suelos_rejilla": rejilla}
+    res = {"suelos_medias": medias, "suelos_clases": clases, "suelos_rejilla": rejilla, "suelos_municipio": municipales}
     cache.write_text(json.dumps(res, ensure_ascii=False), encoding="utf-8")
     return res
 
@@ -492,7 +621,11 @@ def suelos():
     def r_rejilla():
         yield datos("suelos_rejilla")
 
-    return r_medias, r_clases, r_rejilla
+    @dlt.resource(name="suelos_municipio", write_disposition="replace")
+    def r_municipio():
+        yield datos("suelos_municipio")
+
+    return r_medias, r_clases, r_rejilla, r_municipio
 
 
 if __name__ == "__main__":

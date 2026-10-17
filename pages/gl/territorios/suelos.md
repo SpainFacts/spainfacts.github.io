@@ -1,7 +1,7 @@
 ---
 title: Solos agrarios
-description: "Que terra hai debaixo dos cultivos de España: solos arxilosos, francos e areosos, tipos de solo (calcisolos, cambisolos, luvisolos, vertisolos...), pH e materia orgánica por comunidade e provincia, mapa cada 10 km, que solo ten o olivar, o viñedo, o regadío ou a devesa e comparación co resto de Europa."
-i18n_origen: 7a1d0195aa79
+description: "Que terra hai debaixo dos cultivos de España: solos arxilosos, francos e areosos, tipos de solo (calcisolos, cambisolos, luvisolos, vertisolos...), pH e materia orgánica por comunidade, provincia e municipio, mapa cada 10 km, que solo ten o olivar, o viñedo, o regadío ou a devesa e comparación co resto de Europa."
+i18n_origen: 936db82c6035
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -117,7 +117,7 @@ ORDER BY dimension, orden
 
 # 🟫 Solos agrarios
 
-Que terra hai debaixo dos cultivos de España: se é **arxilosa, franca ou areosa**, que **tipo de solo** é, se é **calcaria ou ácida** e canta **materia orgánica** ten. Todo se mide sobre a **superficie agraria** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², case a metade do país) na capa que se traballa, os primeiros 30 cm, e crúzase co que se cultiva enriba. Os datos saen dun modelo (SoilGrids), non de análises de cada parcela: serven para comparar comarcas, provincias e países.
+Que terra hai debaixo dos cultivos de España: se é **arxilosa, franca ou areosa**, que **tipo de solo** é, se é **calcaria ou ácida** e canta **materia orgánica** ten. Todo se mide sobre a **superficie agraria** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², case a metade do país) na capa que se traballa, os primeiros 30 cm, e crúzase co que se cultiva enriba. Pódese baixar por comunidade e provincia ata cada municipio. Os datos saen dun modelo (SoilGrids), non de análises de cada parcela: serven para comparar comarcas, provincias e países.
 
 <Grid cols=4>
     <KpiCard
@@ -407,6 +407,33 @@ ORDER BY t.superficie_agraria_km2 DESC
 </DataTable>
 
 <p class="text-xs text-gray-500">Terras fortes = as seis texturas franco-arxilosas e arxilosas do triángulo do USDA (en xeral, máis dunha cuarta parte de arxila). Álava, Navarra, A Rioxa, as campiñas de Málaga, Cádiz, Xaén e Sevilla e o val do Ebro teñen as terras máis fortes; Galicia, Cáceres, León e Badaxoz, as máis lixeiras, sobre granito e lousa. Ceuta e Melilla case non teñen superficie agraria.</p>
+
+## Por municipio
+
+```sql municipios_suelo
+SELECT m.municipio, t.nombre AS provincia, '/gl' || m.enlace AS enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
+    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
+FROM mother.suelos_municipio m
+LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
+WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
+ORDER BY m.superficie_agraria_km2 DESC
+```
+
+Busca o teu municipio: na súa ficha está o solo de cada un dos seus cultivos e a comparación coa súa provincia e con España. As fichas de cada comunidade e provincia teñen o mapa dos seus municipios.
+
+<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipio" />
+    <Column id=provincia title="Provincia" />
+    <Column id=superficie_agraria_km2 title="Km² agrarios" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_agraria title="% agrario" fmt=num0 />
+    <Column id=textura_dominante title="Textura máis frecuente" />
+    <Column id=pct_fuertes title="% terras fortes" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Materia orgánica (%)" fmt=num1 />
+    <Column id=wrb_dominante title="Tipo de solo" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Superficie agraria de CORINE dentro de cada termo municipal, mostraxeada cada 250 m; o solo é o de SoilGrids a 1 km, así que nos municipios pequenos sae de moi poucas celas.</p>
 
 ## Que solo ten cada cultivo
 

@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 96324d797ed9
+i18n_origen: 3b79b722db40
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,6 +11,13 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    import { page as paginaActual } from '$app/stores';
+    $: idioma = idiomaDeRuta($paginaActual.url.pathname);
+    $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
+    $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
+    $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
 </script>
 
 ```sql lista_municipios
@@ -720,6 +727,78 @@ ORDER BY v.periodo
 </Grid>
 
 <p class="text-xs text-gray-500">Dwellings advertised as tourist accommodation on the major online platforms (experimental INE measurement, every six months). {#if tur_vut_mun.slice(-1)[0]?.puesto}It ranks {formatNumber(tur_vut_mun.slice(-1)[0]?.puesto, 0)} out of {formatNumber(tur_vut_mun.slice(-1)[0]?.n_ranking, 0)} municipalities with 1,000 or more inhabitants by share of tourist dwellings.{/if} More in <a href="/en/economia/turismo">Tourism</a>.</p>
+
+{/if}
+
+```sql suelo_mun
+SELECT * FROM mother.suelos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+```sql suelo_ref
+SELECT nivel, nombre, pct_agraria, pct_fuertes, ph, materia_organica_pct
+FROM mother.suelos_territorio
+WHERE cultivo = 'Toda la superficie agraria'
+    AND ((nivel = 'provincia' AND cod = left('${inputs.municipio}', 2)) OR nivel = 'pais')
+```
+
+{#if suelo_toda}
+
+## Farm soil
+
+{#if suelo_toda.superficie_agraria_km2 > 0}
+
+{formatNumber(suelo_toda.pct_agraria, 0)} % of the municipality is farmland ({formatNumber(suelo_toda.superficie_agraria_km2, 1)} km²; in the province, {formatNumber(suelo_prov?.pct_agraria, 0)} %). On that land the most common texture is **{etiquetaSuelo('TEXTURA', suelo_toda.textura_dominante, idioma).toLowerCase()}** and the most widespread soil type is **{etiquetaSuelo('WRB', suelo_toda.wrb_dominante, idioma).toLowerCase()}**.
+
+<Grid cols=3>
+    <KpiCard
+        title="Heavy soils (clay loam and clay)"
+        value={suelo_toda.pct_fuertes}
+        formattedValue="{formatNumber(suelo_toda.pct_fuertes, 0)} %"
+        period="of farmland · province: {formatNumber(suelo_prov?.pct_fuertes, 0)} % · Spain: {formatNumber(suelo_esp?.pct_fuertes, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="Average pH of farm soil"
+        value={suelo_toda.ph}
+        formattedValue={formatNumber(suelo_toda.ph, 1)}
+        period="{formatNumber(suelo_toda.pct_basico, 0)} % alkaline or calcareous · province: {formatNumber(suelo_prov?.ph, 1)} · Spain: {formatNumber(suelo_esp?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Average organic matter"
+        value={suelo_toda.materia_organica_pct}
+        formattedValue="{formatNumber(suelo_toda.materia_organica_pct, 1)} %"
+        period="province: {formatNumber(suelo_prov?.materia_organica_pct, 1)} % · Spain: {formatNumber(suelo_esp?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+{#if suelo_mun.length > 1}
+
+<DataTable data={etiquetasSuelo(suelo_mun.filter((d) => d.cultivo !== 'Toda la superficie agraria'), idioma)} rows=10>
+    <Column id=cultivo_txt title="Crop" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num1 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="% of farmland" fmt=num1 />
+    <Column id=textura_txt title="Most common texture" />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Organic matter (%)" fmt=num1 />
+    <Column id=wrb_txt title="Soil type" />
+</DataTable>
+
+{/if}
+
+{:else}
+
+<p>The CORINE 2018 land-use map shows no farmland in this municipality: it is woodland, urban land or has crop fields smaller than 25 ha, which CORINE merges with their surroundings.</p>
+
+{/if}
+
+<p class="text-xs text-gray-500">Topsoil (0-30 cm) from the SoilGrids model (ISRIC), in 1 km cells, over the farmland of the CORINE Land Cover 2018 map. In small municipalities the figure comes from very few cells: it gives a rough idea, but it is no substitute for a soil test of the field. Comparison with the rest of Spain and Europe in <a href="/en/territorios/suelos">farm soils</a>.</p>
 
 {/if}
 

@@ -1,7 +1,7 @@
 ---
 title: Municipis
 description: "Cerca qualsevol municipi d'Espanya: població, comptes de l'ajuntament i comparació amb municipis de la seva mida."
-i18n_origen: 96324d797ed9
+i18n_origen: 3b79b722db40
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,6 +11,13 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    import { page as paginaActual } from '$app/stores';
+    $: idioma = idiomaDeRuta($paginaActual.url.pathname);
+    $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
+    $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
+    $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
 </script>
 
 ```sql lista_municipios
@@ -720,6 +727,78 @@ ORDER BY v.periodo
 </Grid>
 
 <p class="text-xs text-gray-500">Habitatges anunciats com a allotjament turístic a les grans plataformes digitals (mesura experimental de l'INE, semestral). {#if tur_vut_mun.slice(-1)[0]?.puesto}És el municipi número {formatNumber(tur_vut_mun.slice(-1)[0]?.puesto, 0)} de {formatNumber(tur_vut_mun.slice(-1)[0]?.n_ranking, 0)} amb 1.000 habitants o més per percentatge d'habitatges turístics.{/if} Més a <a href="/ca/economia/turismo">Turisme</a>.</p>
+
+{/if}
+
+```sql suelo_mun
+SELECT * FROM mother.suelos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+```sql suelo_ref
+SELECT nivel, nombre, pct_agraria, pct_fuertes, ph, materia_organica_pct
+FROM mother.suelos_territorio
+WHERE cultivo = 'Toda la superficie agraria'
+    AND ((nivel = 'provincia' AND cod = left('${inputs.municipio}', 2)) OR nivel = 'pais')
+```
+
+{#if suelo_toda}
+
+## Sòl agrari
+
+{#if suelo_toda.superficie_agraria_km2 > 0}
+
+El {formatNumber(suelo_toda.pct_agraria, 0)} % del terme municipal és superfície agrària ({formatNumber(suelo_toda.superficie_agraria_km2, 1)} km²; a la província, el {formatNumber(suelo_prov?.pct_agraria, 0)} %). En aquesta terra hi predomina la textura **{etiquetaSuelo('TEXTURA', suelo_toda.textura_dominante, idioma).toLowerCase()}** i el tipus de sòl més estès són els **{etiquetaSuelo('WRB', suelo_toda.wrb_dominante, idioma).toLowerCase()}**.
+
+<Grid cols=3>
+    <KpiCard
+        title="Terres fortes (franques argiloses i argiloses)"
+        value={suelo_toda.pct_fuertes}
+        formattedValue="{formatNumber(suelo_toda.pct_fuertes, 0)} %"
+        period="de la superfície agrària · província: {formatNumber(suelo_prov?.pct_fuertes, 0)} % · Espanya: {formatNumber(suelo_esp?.pct_fuertes, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="pH mitjà del sòl agrari"
+        value={suelo_toda.ph}
+        formattedValue={formatNumber(suelo_toda.ph, 1)}
+        period="{formatNumber(suelo_toda.pct_basico, 0)} % bàsic o calcari · província: {formatNumber(suelo_prov?.ph, 1)} · Espanya: {formatNumber(suelo_esp?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Matèria orgànica mitjana"
+        value={suelo_toda.materia_organica_pct}
+        formattedValue="{formatNumber(suelo_toda.materia_organica_pct, 1)} %"
+        period="província: {formatNumber(suelo_prov?.materia_organica_pct, 1)} % · Espanya: {formatNumber(suelo_esp?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+{#if suelo_mun.length > 1}
+
+<DataTable data={etiquetasSuelo(suelo_mun.filter((d) => d.cultivo !== 'Toda la superficie agraria'), idioma)} rows=10>
+    <Column id=cultivo_txt title="Conreu" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num1 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="% de la superfície agrària" fmt=num1 />
+    <Column id=textura_txt title="Textura més freqüent" />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Matèria orgànica (%)" fmt=num1 />
+    <Column id=wrb_txt title="Tipus de sòl" />
+</DataTable>
+
+{/if}
+
+{:else}
+
+<p>El mapa d'usos del sòl CORINE 2018 no marca superfície agrària en aquest terme municipal: és muntanya, ciutat o té parcel·les de conreu de menys de 25 ha, que CORINE fon amb el que les envolta.</p>
+
+{/if}
+
+<p class="text-xs text-gray-500">Capa arable (0-30 cm) del model SoilGrids (ISRIC), amb cel·les d'1 km, sobre la superfície agrària del mapa CORINE Land Cover 2018. Als municipis petits la xifra surt de molt poques cel·les: serveix per fer-se'n una idea, no substitueix una anàlisi de sòl de la parcel·la. Comparació amb la resta d'Espanya i d'Europa a <a href="/ca/territorios/suelos">sòls agraris</a>.</p>
 
 {/if}
 

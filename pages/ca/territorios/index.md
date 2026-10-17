@@ -1,7 +1,7 @@
 ---
 title: Territoris
 description: "Espanya per comunitats autònomes i províncies: població, comptes públics i deute de cada administració."
-i18n_origen: 6facd905aab0
+i18n_origen: 469da43c634a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,8 +82,9 @@ Espanya és un Estat descentralitzat: les **comunitats autònomes** gestionen la
     />
 </Grid>
 
-<div class="not-prose my-4">
+<div class="not-prose my-4 flex flex-wrap gap-2">
     <a href="/ca/territorios/municipios" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white no-underline">🔎 Cerca el teu municipi: població, comptes de l'ajuntament i qui governa</a>
+    <a href="/ca/territorios/suelos" class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white no-underline" style="background:#92400e">🟫 Sòls agraris: argilosos, francs o sorrencs, pH i matèria orgànica</a>
 </div>
 
 ## Mapa de comunitats autònomes

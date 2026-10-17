@@ -81,8 +81,9 @@ España es un Estado descentralizado: las **comunidades autónomas** gestionan l
     />
 </Grid>
 
-<div class="not-prose my-4">
+<div class="not-prose my-4 flex flex-wrap gap-2">
     <a href="/territorios/municipios" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white no-underline">🔎 Busca tu municipio: población, cuentas del ayuntamiento y quién gobierna</a>
+    <a href="/territorios/suelos" class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white no-underline" style="background:#92400e">🟫 Suelos agrarios: arcillosos, francos o arenosos, pH y materia orgánica</a>
 </div>
 
 ## Mapa de comunidades autónomas

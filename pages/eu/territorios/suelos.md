@@ -1,7 +1,7 @@
 ---
 title: Nekazaritza-lurzoruak
-description: "Zer lur dagoen Espainiako laboreen azpian: lurzoru buztintsuak, frankoak eta hareatsuak, lurzoru motak (kaltzisolak, kanbisolak, luvisolak, vertisolak...), pHa eta materia organikoa erkidego eta probintziaka, 10 km-ko mapa, zer lurzoru duten olibadiak, mahastiak, ureztatuak edo larre-basoak eta Europako gainerakoekin alderaketa."
-i18n_origen: 7a1d0195aa79
+description: "Zer lur dagoen Espainiako laboreen azpian: lurzoru buztintsuak, frankoak eta hareatsuak, lurzoru motak (kaltzisolak, kanbisolak, luvisolak, vertisolak...), pHa eta materia organikoa erkidego, probintzia eta udalerrika, 10 km-ko mapa, zer lurzoru duten olibadiak, mahastiak, ureztatuak edo larre-basoak eta Europako gainerakoekin alderaketa."
+i18n_origen: 936db82c6035
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -117,7 +117,7 @@ ORDER BY dimension, orden
 
 # 🟫 Nekazaritza-lurzoruak
 
-Zer lur dagoen Espainiako laboreen azpian: **buztintsua, frankoa edo hareatsua** den, zer **lurzoru mota** den, **kareharritsua edo azidoa** den eta zenbat **materia organiko** duen. Dena **nekazaritza-azaleraren** gainean neurtzen da ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mila km², herrialdearen ia erdia), lantzen den geruzan, lehen 30 cm-etan, eta gainean landatzen denarekin gurutzatzen da. Datuak eredu batetik datoz (SoilGrids), ez lursail bakoitzaren analisietatik: eskualdeak, probintziak eta herrialdeak alderatzeko balio dute.
+Zer lur dagoen Espainiako laboreen azpian: **buztintsua, frankoa edo hareatsua** den, zer **lurzoru mota** den, **kareharritsua edo azidoa** den eta zenbat **materia organiko** duen. Dena **nekazaritza-azaleraren** gainean neurtzen da ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mila km², herrialdearen ia erdia), lantzen den geruzan, lehen 30 cm-etan, eta gainean landatzen denarekin gurutzatzen da. Erkidegoz eta probintziaz jaitsi daiteke udalerri bakoitzeraino. Datuak eredu batetik datoz (SoilGrids), ez lursail bakoitzaren analisietatik: eskualdeak, probintziak eta herrialdeak alderatzeko balio dute.
 
 <Grid cols=4>
     <KpiCard
@@ -407,6 +407,33 @@ ORDER BY t.superficie_agraria_km2 DESC
 </DataTable>
 
 <p class="text-xs text-gray-500">Lur gogorrak = USDAren triangeluko sei testura franko-buztintsu eta buztintsuak (oro har, laurden bat baino buztin gehiago). Arabak, Nafarroak, Errioxak, Malagako, Cádizko, Jaéngo eta Sevillako kanpiñek eta Ebro ibarrak dituzte lur gogorrenak; Galiziak, Cácereseko, Leongo eta Badajozko probintziek, arinenak, granito eta arbel gainean. Ceutak eta Melillak ia ez dute nekazaritza-azalerarik.</p>
+
+## Udalerrika
+
+```sql municipios_suelo
+SELECT m.municipio, t.nombre AS provincia, '/eu' || m.enlace AS enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
+    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
+FROM mother.suelos_municipio m
+LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
+WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
+ORDER BY m.superficie_agraria_km2 DESC
+```
+
+Bilatu zure udalerria: bere fitxan daude labore bakoitzaren lurzorua eta probintziarekiko eta Espainiarekiko alderaketa. Erkidego eta probintzia bakoitzaren fitxek beren udalerrien mapa dute.
+
+<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=municipio title="Udalerria" />
+    <Column id=provincia title="Probintzia" />
+    <Column id=superficie_agraria_km2 title="Nekazaritza-km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_agraria title="% nekazaritza" fmt=num0 />
+    <Column id=textura_dominante title="Testura ohikoena" />
+    <Column id=pct_fuertes title="% lur gogorrak" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Materia organikoa (%)" fmt=num1 />
+    <Column id=wrb_dominante title="Lurzoru mota" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Udal-mugarte bakoitzaren barruko CORINE nekazaritza-azalera, 250 m-tik behin laginduta; lurzorua SoilGridsena da, 1 km-ko bereizmenekoa, beraz udalerri txikietan gelaxka gutxi batzuetatik ateratzen da.</p>
 
 ## Zer lurzoru duen labore bakoitzak
 

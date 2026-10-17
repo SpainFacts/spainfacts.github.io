@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 96324d797ed9
+i18n_origen: 3b79b722db40
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,6 +11,13 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    import { page as paginaActual } from '$app/stores';
+    $: idioma = idiomaDeRuta($paginaActual.url.pathname);
+    $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
+    $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
+    $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
 </script>
 
 ```sql lista_municipios
@@ -720,6 +727,78 @@ ORDER BY v.periodo
 </Grid>
 
 <p class="text-xs text-gray-500">Vivendas anunciadas como aloxamento turístico nas grandes plataformas dixitais (medición experimental do INE, semestral). {#if tur_vut_mun.slice(-1)[0]?.puesto}É o municipio número {formatNumber(tur_vut_mun.slice(-1)[0]?.puesto, 0)} de {formatNumber(tur_vut_mun.slice(-1)[0]?.n_ranking, 0)} con 1.000 habitantes ou máis por porcentaxe de vivendas turísticas.{/if} Máis en <a href="/gl/economia/turismo">Turismo</a>.</p>
+
+{/if}
+
+```sql suelo_mun
+SELECT * FROM mother.suelos_municipio
+WHERE cod_mun = '${inputs.municipio}'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+```sql suelo_ref
+SELECT nivel, nombre, pct_agraria, pct_fuertes, ph, materia_organica_pct
+FROM mother.suelos_territorio
+WHERE cultivo = 'Toda la superficie agraria'
+    AND ((nivel = 'provincia' AND cod = left('${inputs.municipio}', 2)) OR nivel = 'pais')
+```
+
+{#if suelo_toda}
+
+## Solo agrario
+
+{#if suelo_toda.superficie_agraria_km2 > 0}
+
+O {formatNumber(suelo_toda.pct_agraria, 0)} % do termo municipal é superficie agraria ({formatNumber(suelo_toda.superficie_agraria_km2, 1)} km²; na provincia, o {formatNumber(suelo_prov?.pct_agraria, 0)} %). Nesa terra domina a textura **{etiquetaSuelo('TEXTURA', suelo_toda.textura_dominante, idioma).toLowerCase()}** e o tipo de solo máis estendido son os **{etiquetaSuelo('WRB', suelo_toda.wrb_dominante, idioma).toLowerCase()}**.
+
+<Grid cols=3>
+    <KpiCard
+        title="Terras fortes (franco-arxilosas e arxilosas)"
+        value={suelo_toda.pct_fuertes}
+        formattedValue="{formatNumber(suelo_toda.pct_fuertes, 0)} %"
+        period="da superficie agraria · provincia: {formatNumber(suelo_prov?.pct_fuertes, 0)} % · España: {formatNumber(suelo_esp?.pct_fuertes, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="pH medio do solo agrario"
+        value={suelo_toda.ph}
+        formattedValue={formatNumber(suelo_toda.ph, 1)}
+        period="{formatNumber(suelo_toda.pct_basico, 0)} % básico ou calcario · provincia: {formatNumber(suelo_prov?.ph, 1)} · España: {formatNumber(suelo_esp?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Materia orgánica media"
+        value={suelo_toda.materia_organica_pct}
+        formattedValue="{formatNumber(suelo_toda.materia_organica_pct, 1)} %"
+        period="provincia: {formatNumber(suelo_prov?.materia_organica_pct, 1)} % · España: {formatNumber(suelo_esp?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+{#if suelo_mun.length > 1}
+
+<DataTable data={etiquetasSuelo(suelo_mun.filter((d) => d.cultivo !== 'Toda la superficie agraria'), idioma)} rows=10>
+    <Column id=cultivo_txt title="Cultivo" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num1 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="% da superficie agraria" fmt=num1 />
+    <Column id=textura_txt title="Textura máis frecuente" />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Materia orgánica (%)" fmt=num1 />
+    <Column id=wrb_txt title="Tipo de solo" />
+</DataTable>
+
+{/if}
+
+{:else}
+
+<p>O mapa de usos do solo CORINE 2018 non marca superficie agraria neste termo municipal: é monte, cidade ou ten parcelas de cultivo de menos de 25 ha, que CORINE funde co que as rodea.</p>
+
+{/if}
+
+<p class="text-xs text-gray-500">Capa arable (0-30 cm) do modelo SoilGrids (ISRIC), con celas de 1 km, sobre a superficie agraria do mapa CORINE Land Cover 2018. Nos municipios pequenos a cifra sae de moi poucas celas: serve para facerse unha idea, non substitúe unha análise de solo da parcela. Comparación co resto de España e Europa en <a href="/gl/territorios/suelos">solos agrarios</a>.</p>
 
 {/if}
 

@@ -1,5 +1,5 @@
 ---
-i18n_origen: d9577951222c
+i18n_origen: 43259a853f24
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -13,6 +13,9 @@ og:
 
     import TituloPagina from '../../../../../../../src/lib/components/TituloPagina.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
+    import { etiquetaSuelo, etiquetasSuelo } from '../../../../../../../src/lib/suelos.js';
+    import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
+    $: idioma = idiomaDeRuta($currentPage.url.pathname);
 </script>
 
 ```sql terr
@@ -298,6 +301,118 @@ ORDER BY anio
     <Column id=poblacion title="Població" fmt=num0 />
     <Column id=crecimiento title="Creixement 10 anys (%)" fmt=num1 contentType=delta />
 </DataTable>
+
+```sql suelo
+SELECT * FROM mother.suelos_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND cultivo = 'Toda la superficie agraria'
+```
+
+```sql suelo_espana
+SELECT * FROM mother.suelos_territorio WHERE nivel = 'pais' AND cultivo = 'Toda la superficie agraria'
+```
+
+```sql suelo_cultivos
+SELECT cultivo, superficie_agraria_km2, pct_de_la_agraria, arcilla_pct, ph, materia_organica_pct,
+    textura_dominante, wrb_dominante, pct_fuertes, pct_basico
+FROM mother.suelos_territorio
+WHERE nivel = 'ccaa' AND cod = '${terr[0]?.cod}' AND cultivo <> 'Toda la superficie agraria'
+    AND superficie_agraria_km2 >= 1
+ORDER BY superficie_agraria_km2 DESC
+```
+
+{#if suelo.length > 0}
+
+## Sòl agrari
+
+El {formatNumber(suelo[0]?.pct_agraria, 0)} % de la superfície és agrària ({formatNumber(suelo[0]?.superficie_agraria_km2, 0)} km²; a Espanya, el {formatNumber(suelo_espana[0]?.pct_agraria, 0)} %). En aquesta terra hi predomina la textura **{etiquetaSuelo('TEXTURA', suelo[0]?.textura_dominante, idioma).toLowerCase()}** i el tipus de sòl més estès són els **{etiquetaSuelo('WRB', suelo[0]?.wrb_dominante, idioma).toLowerCase()}**. Més detall i comparació amb Europa a [sòls agraris](/ca/territorios/suelos).
+
+<Grid cols=3>
+    <KpiCard
+        title="Terres fortes (franques argiloses i argiloses)"
+        value={suelo[0]?.pct_fuertes}
+        formattedValue="{formatNumber(suelo[0]?.pct_fuertes, 0)} %"
+        period="de la superfície agrària · Espanya: {formatNumber(suelo_espana[0]?.pct_fuertes, 0)} % · argila mitjana: {formatNumber(suelo[0]?.arcilla_pct, 0)} %"
+        direction="neutral"
+        source="SoilGrids · CORINE 2018"
+    />
+    <KpiCard
+        title="pH mitjà del sòl agrari"
+        value={suelo[0]?.ph}
+        formattedValue={formatNumber(suelo[0]?.ph, 1)}
+        period="{formatNumber(suelo[0]?.pct_basico, 0)} % bàsic o calcari · Espanya: pH {formatNumber(suelo_espana[0]?.ph, 1)}"
+        direction="neutral"
+        source="SoilGrids"
+    />
+    <KpiCard
+        title="Matèria orgànica mitjana"
+        value={suelo[0]?.materia_organica_pct}
+        formattedValue="{formatNumber(suelo[0]?.materia_organica_pct, 1)} %"
+        period="Espanya: {formatNumber(suelo_espana[0]?.materia_organica_pct, 1)} %"
+        direction="neutral"
+        source="SoilGrids"
+    />
+</Grid>
+
+<ButtonGroup name=suelo_medida title="Mapa de municipis">
+    <ButtonGroupItem valueLabel="% de terres fortes" value="pct_fuertes" default />
+    <ButtonGroupItem valueLabel="pH" value="ph" />
+    <ButtonGroupItem valueLabel="Matèria orgànica (%)" value="materia_organica_pct" />
+    <ButtonGroupItem valueLabel="% del terme que és agrari" value="pct_agraria" />
+</ButtonGroup>
+
+```sql suelo_municipios
+SELECT cod_mun, municipio, '/ca' || enlace AS enlace, superficie_agraria_km2, pct_agraria, pct_fuertes, ph, materia_organica_pct,
+    textura_dominante, wrb_dominante, ${inputs.suelo_medida} AS medida
+FROM mother.suelos_municipio
+WHERE cod_ccaa = '${terr[0]?.cod}' AND cultivo = 'Toda la superficie agraria'
+ORDER BY superficie_agraria_km2 DESC
+```
+
+{#if suelo_municipios.length > 0}
+
+<MapaEspana
+    data={etiquetasSuelo(suelo_municipios, idioma)}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="medida"
+    valueFmt="num1"
+    colorPalette={['#fdf6e3', '#c8955a', '#5b2a17']}
+    height={460}
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'superficie_agraria_km2', title: 'Km² agraris', fmt: 'num1'},
+        {id: 'textura_txt', title: 'Textura més freqüent'},
+        {id: 'pct_fuertes', title: '% terres fortes', fmt: 'num0'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'materia_organica_pct', title: 'Matèria orgànica (%)', fmt: 'num1'},
+        {id: 'wrb_txt', title: 'Tipus de sòl'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">Fes clic en un municipi per veure'n el sòl a la seva fitxa. En gris, els municipis de fora d'aquest territori o sense superfície agrària al mapa CORINE (muntanya, ciutat o parcel·les de menys de 25 ha).</p>
+
+{/if}
+
+{#if suelo_cultivos.length > 0}
+
+<DataTable data={etiquetasSuelo(suelo_cultivos, idioma)} rows=10>
+    <Column id=cultivo_txt title="Conreu" />
+    <Column id=superficie_agraria_km2 title="Km²" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_de_la_agraria title="% de la superfície agrària" fmt=num1 />
+    <Column id=textura_txt title="Textura més freqüent" />
+    <Column id=pct_fuertes title="% terres fortes" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Matèria orgànica (%)" fmt=num1 />
+    <Column id=wrb_txt title="Tipus de sòl" />
+</DataTable>
+
+{/if}
+
+<p class="text-xs text-gray-500">Capa arable (0-30 cm) del model SoilGrids (ISRIC) sobre la superfície agrària del mapa CORINE Land Cover 2018. És un model: serveix per comparar zones, no substitueix una anàlisi de sòl de la parcel·la.</p>
+
+{/if}
 
 ```sql cuentas
 SELECT

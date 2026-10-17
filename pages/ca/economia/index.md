@@ -1,7 +1,7 @@
 ---
 title: Economia
 description: "PIB per habitant, creixement, comerç exterior, sectors, ocupació, salaris, atur i inflació a Espanya, descomptada la inflació i en proporció a la població."
-i18n_origen: 023a6ec94996
+i18n_origen: 21e2042a9bd3
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -249,10 +249,6 @@ Salari mitjà mensual brut descomptada la inflació. [Creixement, sectors i deci
     <a href="/ca/economia/sector-primario" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🌾</span> Agricultura, ramaderia i pesca</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">L'horta d'Europa: oli, cítrics, fruites i hortalisses, porcí, vi i pesca, i el lloc d'Espanya a la UE</div>
-    </a>
-    <a href="/ca/economia/suelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
-        <div class="font-semibold"><span aria-hidden="true">🟫</span> Sòls agraris</div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Terres argiloses, franques i sorrenques, tipus de sòl, pH i matèria orgànica per província i conreu, i davant d'Europa</div>
     </a>
     <a href="/ca/economia/industria" class="block rounded-xl border border-gray-200 dark:border-gray-800 p-4 hover:border-blue-400 no-underline">
         <div class="font-semibold"><span aria-hidden="true">🏭</span> Indústria</div>

@@ -1,7 +1,7 @@
 ---
 title: Lurraldeak
 description: "Espainia autonomia-erkidegoka eta probintziaka: biztanleria, kontu publikoak eta administrazio bakoitzaren zorra."
-i18n_origen: 6facd905aab0
+i18n_origen: 469da43c634a
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -84,8 +84,9 @@ Espainia Estatu deszentralizatua da: **autonomia-erkidegoek** osasuna, hezkuntza
     />
 </Grid>
 
-<div class="not-prose my-4">
+<div class="not-prose my-4 flex flex-wrap gap-2">
     <a href="/eu/territorios/municipios" class="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white no-underline">🔎 Bilatu zure udalerria: biztanleria, udalaren kontuak eta nork gobernatzen duen</a>
+    <a href="/eu/territorios/suelos" class="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white no-underline" style="background:#92400e">🟫 Nekazaritza-lurzoruak: buztintsuak, frankoak edo hareatsuak, pH-a eta materia organikoa</a>
 </div>
 
 ## Autonomia-erkidegoen mapa

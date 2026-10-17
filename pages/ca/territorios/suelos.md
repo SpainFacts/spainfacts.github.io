@@ -1,7 +1,7 @@
 ---
 title: Sòls agraris
-description: "Quina terra hi ha sota els conreus d'Espanya: sòls argilosos, francs i sorrencs, tipus de sòl (calcisòls, cambisòls, luvisòls, vertisòls...), pH i matèria orgànica per comunitat i província, mapa cada 10 km, quin sòl té l'oliverar, la vinya, el regadiu o la devesa i comparació amb la resta d'Europa."
-i18n_origen: 7a1d0195aa79
+description: "Quina terra hi ha sota els conreus d'Espanya: sòls argilosos, francs i sorrencs, tipus de sòl (calcisòls, cambisòls, luvisòls, vertisòls...), pH i matèria orgànica per comunitat, província i municipi, mapa cada 10 km, quin sòl té l'oliverar, la vinya, el regadiu o la devesa i comparació amb la resta d'Europa."
+i18n_origen: 936db82c6035
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -117,7 +117,7 @@ ORDER BY dimension, orden
 
 # 🟫 Sòls agraris
 
-Quina terra hi ha sota els conreus d'Espanya: si és **argilosa, franca o sorrenca**, quin **tipus de sòl** és, si és **calcària o àcida** i quanta **matèria orgànica** té. Tot es mesura sobre la **superfície agrària** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², gairebé la meitat del país) a la capa que es treballa, els primers 30 cm, i es creua amb el que s'hi conrea a sobre. Les dades surten d'un model (SoilGrids), no d'anàlisis de cada parcel·la: serveixen per comparar comarques, províncies i països.
+Quina terra hi ha sota els conreus d'Espanya: si és **argilosa, franca o sorrenca**, quin **tipus de sòl** és, si és **calcària o àcida** i quanta **matèria orgànica** té. Tot es mesura sobre la **superfície agrària** ({formatNumber(espana[0]?.superficie_agraria_km2 / 1000, 0)} mil km², gairebé la meitat del país) a la capa que es treballa, els primers 30 cm, i es creua amb el que s'hi conrea a sobre. Es pot baixar per comunitat i província fins a cada municipi. Les dades surten d'un model (SoilGrids), no d'anàlisis de cada parcel·la: serveixen per comparar comarques, províncies i països.
 
 <Grid cols=4>
     <KpiCard
@@ -407,6 +407,33 @@ ORDER BY t.superficie_agraria_km2 DESC
 </DataTable>
 
 <p class="text-xs text-gray-500">Terres fortes = les sis textures franques argiloses i argiloses del triangle de l'USDA (en general, més d'una quarta part d'argila). Àlaba, Navarra, la Rioja, les campinyes de Màlaga, Cadis, Jaén i Sevilla i la vall de l'Ebre tenen les terres més fortes; Galícia, Càceres, Lleó i Badajoz, les més lleugeres, sobre granit i pissarra. Ceuta i Melilla gairebé no tenen superfície agrària.</p>
+
+## Per municipi
+
+```sql municipios_suelo
+SELECT m.municipio, t.nombre AS provincia, '/ca' || m.enlace AS enlace, m.superficie_agraria_km2, m.pct_agraria, m.textura_dominante,
+    m.pct_fuertes, m.ph, m.materia_organica_pct, m.wrb_dominante
+FROM mother.suelos_municipio m
+LEFT JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = m.cod_prov
+WHERE m.cultivo = 'Toda la superficie agraria' AND m.superficie_agraria_km2 > 0
+ORDER BY m.superficie_agraria_km2 DESC
+```
+
+Busca el teu municipi: a la seva fitxa hi ha el sòl de cadascun dels seus conreus i la comparació amb la seva província i amb Espanya. Les fitxes de cada comunitat i província tenen el mapa dels seus municipis.
+
+<DataTable data={municipios_suelo} rows=10 search=true link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipi" />
+    <Column id=provincia title="Província" />
+    <Column id=superficie_agraria_km2 title="Km² agraris" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=pct_agraria title="% agrari" fmt=num0 />
+    <Column id=textura_dominante title="Textura més freqüent" />
+    <Column id=pct_fuertes title="% terres fortes" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=materia_organica_pct title="Matèria orgànica (%)" fmt=num1 />
+    <Column id=wrb_dominante title="Tipus de sòl" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Superfície agrària de CORINE dins de cada terme municipal, mostrejada cada 250 m; el sòl és el de SoilGrids a 1 km, de manera que als municipis petits surt de molt poques cel·les.</p>
 
 ## Quin sòl té cada conreu
 

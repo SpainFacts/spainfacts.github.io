@@ -4,7 +4,7 @@ version: 2
 
 models:
   - name: suelos_territorio
-    description: "Suelo agrario de España (nivel pais, cod 00), comunidades y provincias por cultivo de CORINE 2018 ('Toda la superficie agraria' o Secano, Regadío, Arrozal, Viñedo, Frutales, Olivar, Prados, Mosaico de cultivos, Dehesa): km² agrarios, % de la superficie agraria, medias de la capa arable 0-30 cm de SoilGrids (arcilla, limo y arena en %, pH en agua, carbono orgánico en g/kg y materia orgánica en %), clases dominantes y % de suelos arcillosos, arenosos, básicos (pH ≥ 7,5), ácidos (pH < 6,5) y calcisoles. SoilGrids es un modelo: compara zonas, no parcelas."
+    description: "Suelo agrario de España (nivel pais, cod 00), comunidades y provincias por cultivo de CORINE 2018 ('Toda la superficie agraria' o Secano, Regadío, Arrozal, Viñedo, Frutales, Olivar, Prados, Mosaico de cultivos, Dehesa): km² agrarios, % de la superficie agraria, km² de tierra del territorio y % agrario, medias de la capa arable 0-30 cm de SoilGrids (arcilla, limo y arena en %, pH en agua, carbono orgánico en g/kg y materia orgánica en %), clases dominantes y % de tierras fuertes (franco-arcillosas y arcillosas), de suelos arcillosos, arenosos, básicos (pH ≥ 7,5), ácidos (pH < 6,5) y calcisoles. SoilGrids es un modelo: compara zonas, no parcelas."
     columns:
       - name: nivel
         tests:
@@ -31,3 +31,13 @@ models:
     columns:
       - name: celda
         tests: [not_null, unique]
+  - name: suelos_municipio
+    description: "Suelo agrario de cada municipio por cultivo ('Toda la superficie agraria' o un cultivo de CORINE 2018): km² del término, km² agrarios y % agrario (muestras de 250 m), % de la superficie agraria del municipio, medias de SoilGrids (arcilla, limo, arena, pH, carbono, materia orgánica), textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes, arcillosas, arenosas, básicas, ácidas y calcisoles. enlace = ficha del municipio. Los municipios pequeños dependen de pocas celdas de 1 km de SoilGrids."
+    columns:
+      - name: cod_mun
+        tests: [not_null]
+      - name: municipio
+        tests:
+          - not_null:
+              config:
+                severity: warn
