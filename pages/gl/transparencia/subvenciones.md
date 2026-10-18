@@ -1,7 +1,7 @@
 ---
 title: Subvencións
 description: "Canto diñeiro público se concede en subvencións en España, que porcentaxe se adxudica por concesión directa ou nominativa fronte a concorrencia competitiva e que administración o xestiona (BDNS / IGAE)."
-i18n_origen: 3373354f3424
+i18n_origen: 9dbf4f2110e5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -131,4 +131,4 @@ A Administración Xeral do Estado concentra algo máis da metade do importe rexi
 
 **Fontes e metodoloxía:**
 - [Base de Datos Nacional de Subvencións (BDNS) — Intervención Xeral da Administración do Estado (IGAE)](https://www.infosubvenciones.es/bdnstrans/GE/es/index) e controis de auditoría de subvencións da IGAE / AIReF (*Spending Review* de subvencións públicas).
-- Para consultar as subvencións e publicidade institucional destinadas especificamente a prensa, radio e televisión, visita a sección de [Medios de comunicación](/gl/medios/subvenciones).
+- Para consultar as subvencións e publicidade institucional destinadas especificamente a prensa, radio e televisión, visita a sección de [Medios e diñeiro público](/gl/medios/dinero-publico).

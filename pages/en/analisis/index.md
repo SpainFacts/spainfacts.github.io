@@ -1,7 +1,7 @@
 ---
 title: Data Analysis & Investigative Reports
 description: "Data investigations and deep-dive reports on Spain from official sources: housing and wages, landlord MPs, fleet tax havens, decree-laws, public-private services and the renewable transition."
-i18n_origen: f46b1181e86a
+i18n_origen: 39f9545ba89f
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -173,7 +173,7 @@ While SpainFacts' core topic hubs keep Spain's structural series permanently vis
         <span class="mt-4 text-sm font-semibold text-blue-600 dark:text-blue-400">Read investigation →</span>
     </a>
 
-    <a href="/en/medios/publicidad-institucional" class="group flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+    <a href="/en/medios/dinero-publico" class="group flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <div>
             <span class="inline-block rounded-full bg-rose-50 dark:bg-rose-950/60 px-2.5 py-0.5 text-xs font-semibold text-rose-700 dark:text-rose-300">Media & public money</span>
             <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">📢 Institutional advertising and the media</h3>

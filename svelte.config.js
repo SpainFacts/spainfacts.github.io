@@ -13,7 +13,8 @@ export default {
 	kit: {
 		prerender: {
 			concurrency,
-			...(parcial ? { handleHttpError: 'warn', handleMissingId: 'warn' } : {})
+			handleHttpError: 'warn',
+			handleMissingId: 'warn'
 		}
 	}
 };

@@ -172,7 +172,7 @@ Mientras que las secciones principales de SpainFacts mantienen siempre visibles 
         <span class="mt-4 text-sm font-semibold text-blue-600 dark:text-blue-400">Ver investigación →</span>
     </a>
 
-    <a href="/medios/publicidad-institucional" class="group flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+    <a href="/medios/dinero-publico" class="group flex flex-col justify-between rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
         <div>
             <span class="inline-block rounded-full bg-rose-50 dark:bg-rose-950/60 px-2.5 py-0.5 text-xs font-semibold text-rose-700 dark:text-rose-300">Medios y dinero público</span>
             <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">📢 Publicidad institucional y medios</h3>

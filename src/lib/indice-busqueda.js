@@ -160,7 +160,7 @@ export const ARTICULOS_ANALISIS = [
 		claves: 'decretos ley decretazo boe gobierno congreso leyes sanchez rajoy zapatero aznar gonzalez suarez'
 	},
 	{
-		href: '/medios/publicidad-institucional',
+		href: '/medios/dinero-publico',
 		icono: '📢',
 		fecha: '2026-02',
 		etiqueta: { es: 'Medios y dinero público', en: 'Media & public money', ca: 'Mitjans i diners públics', gl: 'Medios e diñeiro público', eu: 'Hedabideak eta diru publikoa' },

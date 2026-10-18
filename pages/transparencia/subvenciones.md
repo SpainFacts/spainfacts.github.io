@@ -130,4 +130,4 @@ La Administración General del Estado concentra algo más de la mitad del import
 
 **Fuentes y metodología:**
 - [Base de Datos Nacional de Subvenciones (BDNS) — Intervención General de la Administración del Estado (IGAE)](https://www.infosubvenciones.es/bdnstrans/GE/es/index) y controles de auditoría de subvenciones de la IGAE / AIReF (*Spending Review* de subvenciones públicas).
-- Para consultar las subvenciones y publicidad institucional destinadas específicamente a prensa, radio y televisión, visita la sección de [Medios de comunicación](/medios/subvenciones).
+- Para consultar las subvenciones y publicidad institucional destinadas específicamente a prensa, radio y televisión, visita la sección de [Medios y dinero público](/medios/dinero-publico).

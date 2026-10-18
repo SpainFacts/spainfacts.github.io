@@ -1,7 +1,7 @@
 ---
 title: Public subsidies
 description: "How much public money is granted in subsidies in Spain, what percentage is awarded directly or nominatively versus competitive calls, and which administration manages it (BDNS / IGAE)."
-i18n_origen: 3373354f3424
+i18n_origen: 9dbf4f2110e5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -131,4 +131,4 @@ The central government accounts for slightly over half of the volume registered 
 
 **Sources and methodology:**
 - [National Subsidies Database (BDNS) — Office of the Comptroller General of the State Administration (IGAE)](https://www.infosubvenciones.es/bdnstrans/GE/es/index) and IGAE / AIReF subsidy audit reports (*Spending Review* on public subsidies).
-- For subsidies and institutional advertising specifically awarded to press, radio and television, see the [Media section](/en/medios/subvenciones).
+- For subsidies and institutional advertising specifically awarded to press, radio and television, see the [Media & public money section](/en/medios/dinero-publico).

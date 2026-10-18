@@ -1,7 +1,7 @@
 ---
 title: Dirulaguntzak
 description: "Zenbat diru publiko ematen den dirulaguntzetan Espainian, zein ehuneko esleitzen den zuzeneko edo izendun emakidaren bidez norgehiagokaren aldean, eta zein administraziok kudeatzen duen (BDNS / IGAE)."
-i18n_origen: 3373354f3424
+i18n_origen: 9dbf4f2110e5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -131,4 +131,4 @@ Estatuko Administrazio Orokorrak BDNSn erregistratutako zenbatekoaren erdia bain
 
 **Iturriak eta metodologia:**
 - [Dirulaguntzen Datu-base Nazionala (BDNS) — Estatuko Administrazioaren Kontu-hartzailetza Nagusia (IGAE)](https://www.infosubvenciones.es/bdnstrans/GE/es/index) eta IGAE / AIReFen dirulaguntzen ikuskaritza-txostenak (dirulaguntza publikoen *Spending Review*).
-- Prentsa, irrati eta telebistara berariaz bideratutako dirulaguntzak eta publizitate instituzionala kontsultatzeko, bisitatu [Komunikabideak](/eu/medios/subvenciones) atala.
+- Prentsa, irrati eta telebistara berariaz bideratutako dirulaguntzak eta publizitate instituzionala kontsultatzeko, bisitatu [Hedabideak eta diru publikoa](/eu/medios/dinero-publico) atala.
