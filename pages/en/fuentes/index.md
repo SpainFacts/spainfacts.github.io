@@ -1,19 +1,19 @@
 ---
-description: "Catalogue of the official sources used by SpainFacts (INE, Eurostat, ministries, REE...), with their frequency, licence and methodology."
+description: "Catalogue of the official sources used by SpainFacts (INE, Eurostat, ministries, REE...), with their methodology, licence and the code on GitHub to rebuild every figure."
 title: Source Traceability and Audit
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 238721c8a7b0
+i18n_origen: bc32e4e4d483
 ---
 
 <script>
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import CatalogoFuentes from '../../../../../../src/lib/components/CatalogoFuentes.svelte';
 </script>
 
 # Traceability and Audit of Official Sources
 
-At **SpainFacts**, every figure, chart and calculation is **100% verifiable and traceable** back to its original official publication. We do not produce our own estimates or manipulate the series: the data come from public bodies and are extracted through automated, auditable pipelines.
+At **SpainFacts**, every figure, chart and calculation can be traced back to its original official publication. We do not make up numbers: we download the data from public bodies with open code, and anyone can repeat the process on their own. The source labels on cards across the site link here, to the entry for their source.
 
 ```sql fuentes_list
 SELECT
@@ -25,8 +25,7 @@ SELECT
     formato_ingesta,
     tipo_licencia,
     url_oficial,
-    metodologia,
-    estado_pipeline
+    metodologia
 FROM mother.trazabilidad_fuentes
 ORDER BY organismo ASC, nombre_dataset ASC
 ```
@@ -38,69 +37,68 @@ SELECT
 FROM mother.trazabilidad_fuentes
 ```
 
-<Grid cols=4>
+<Grid cols=2>
     <KpiCard
-        title="Official Datasets"
+        title="Datasets"
         value={stats_organismos[0].total_datasets}
         formattedValue="{stats_organismos[0].total_datasets}"
-        unit="active sources"
-        period="Current catalogue"
+        unit="in the catalogue"
+        period="Each with its own entry and code"
         direction="neutral"
-        source="MotherDuck"
     />
 
     <KpiCard
-        title="Connected Bodies"
+        title="Bodies"
         value={stats_organismos[0].total_organismos}
         formattedValue="{stats_organismos[0].total_organismos}"
-        unit="institutions"
-        period="INE, Eurostat, IGAE, BdE"
+        unit="official sources"
+        period="INE, Eurostat, ministries, REE…"
         direction="neutral"
-        source="Official Catalogue"
-    />
-
-    <KpiCard
-        title="Licence Type"
-        value="100%"
-        formattedValue="100%"
-        unit="Open Data"
-        period="Law 37/2007 / CC-BY 4.0"
-        direction="positive-up"
-        source="Public Sector"
-    />
-
-    <KpiCard
-        title="Synchronisation"
-        value="Diaria"
-        formattedValue="Daily"
-        unit="Automatic"
-        period="06:00 Madrid time (Dagster)"
-        direction="positive-up"
-        source="GitHub Actions"
     />
 </Grid>
 
----
+## How to rebuild a figure
 
-## 1. Full Directory of Sources and Datasets
+The whole process is in the [public GitHub repository](https://github.com/SpainFacts/spainfacts.github.io). Every figure goes through five steps, and each step is a file you can read:
 
-Below are all the sources integrated into the SpainFacts database, including the dataset's official code, publication frequency, methodology and a direct link to the publishing portal:
+1. **Download from the body.** The data come from the official portal (the "View at source" link in each entry).
+2. **Ingestion** ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)). Python scripts using [dlt](https://dlthub.com) that call the API or download the file and store it as is in the `raw` schema, without touching the values.
+3. **Transformation** ([`transform/models/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/models)). [dbt](https://www.getdbt.com) SQL models that clean, join and calculate (per person, in constant euros…). Hand-made data, such as this catalogue, live in [`transform/seeds/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/seeds).
+4. **Site queries** ([`sources/mother/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/sources/mother)). What each page reads.
+5. **Page** ([`pages/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/pages)). The text, the SQL behind each chart and the final calculations.
 
-<DataTable data={fuentes_list} search=true rows=10>
-    <Column id=organismo title="Body" />
-    <Column id=nombre_dataset title="Dataset Name" />
-    <Column id=cod_oficial title="Official Code" />
-    <Column id=frecuencia title="Frequency" />
-    <Column id=formato_ingesta title="API Format" />
-    <Column id=tipo_licencia title="Licence" />
-    <Column id=url_oficial title="Official Source" contentType=link linkText="View at source ↗" />
-</DataTable>
+Open any dataset in the catalogue to see its script, its tables, its dbt models and the pages that use it, along with the commands to repeat it.
 
----
+### Repeat it on your computer
 
-## 2. Methodology of the Official Sources
+You don't need any account: everything runs against a local DuckDB file. You need [Python with uv](https://docs.astral.sh/uv/), [Node.js](https://nodejs.org) and git.
 
-Each body uses rigorous statistical frameworks, standardised at national and international level:
+```bash
+git clone https://github.com/SpainFacts/spainfacts.github.io.git
+cd spainfacts.github.io
+uv venv
+uv pip install -r orchestration/requirements.txt
+
+# write to data/spainfacts.duckdb instead of the production database
+export SPAINFACTS_DESTINO=local
+
+# one ingestion script (the one in each entry) and its dbt models
+uv run python -m ingestion.aena
+uv run dbt build --project-dir transform --profiles-dir transform --select movilidad_aeropuertos_mensual+
+
+# or the whole chain at once
+uv run dagster asset materialize -m orchestration.definitions --select "*"
+```
+
+The full guide, including running the site locally, is in [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), and how to add a new source is explained in [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
+
+## Source catalogue
+
+Search by body, name, official code or words in the methodology. Each entry has its own link so you can share it.
+
+<CatalogoFuentes data={fuentes_list} />
+
+## Framework of the main bodies
 
 <Accordion>
   <AccordionItem title="National Statistics Institute (INE)">
@@ -131,14 +129,11 @@ Each body uses rigorous statistical frameworks, standardised at national and int
   </AccordionItem>
 </Accordion>
 
----
+## Quality guarantees
 
-## 3. Quality Assurance and No Manipulation
-
-SpainFacts applies a strict technical integrity protocol:
-
-1. **Idempotent Ingestion:** The Python scripts ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)) download the responses directly from public APIs without altering the numerical values.
-2. **Automatic Validation with dbt (`dbt test`):** Every transformation passes automated tests for non-null values, uniqueness and date consistency. If an external source returns corrupt data, deployment stops automatically.
-3. **100% Open Code:** All the infrastructure, SQL queries and transformation models are publicly available on [GitHub](https://github.com/SpainFacts/spainfacts.github.io).
+1. **Values are not touched when loaded.** The ingestion scripts store the body's response as is; the calculations (per person, adjusted for inflation…) come later, in SQL that anyone can see.
+2. **Tests on every update.** The chain updates itself every day at 06:00 (Madrid time) with [Dagster](https://dagster.io). The dbt models carry tests for non-null values, uniqueness and date consistency; if they fail, the update stops before anything is published.
+3. **Site tests.** Before each release, automated tests open the pages and check that they load and show data.
+4. **Open code.** Ingestion, transformations, queries and pages are on [GitHub](https://github.com/SpainFacts/spainfacts.github.io). If you spot a mistake, you can [open an issue](https://github.com/SpainFacts/spainfacts.github.io/issues).
 
 <LastRefreshed prefix="Source catalogue verified" />

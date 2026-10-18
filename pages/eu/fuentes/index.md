@@ -1,19 +1,19 @@
 ---
-description: "SpainFactsek erabiltzen dituen iturri ofizialen katalogoa (INE, Eurostat, ministerioak, REE...), haien maiztasuna, lizentzia eta metodologiarekin."
+description: "SpainFactsek erabiltzen dituen iturri ofizialen katalogoa (INE, Eurostat, ministerioak, REE...), haien metodologia, lizentzia eta datu bakoitza berreraikitzeko GitHubeko kodearekin."
 title: Iturrien Trazabilitatea eta Auditoria
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 238721c8a7b0
+i18n_origen: bc32e4e4d483
 ---
 
 <script>
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import CatalogoFuentes from '../../../../../../src/lib/components/CatalogoFuentes.svelte';
 </script>
 
 # Iturri Ofizialen Trazabilitatea eta Auditoria
 
-**SpainFacts**en, datu, grafiko eta kalkulu bakoitza **100% egiaztagarria eta trazagarria** da jatorrizko argitalpen ofizialeraino. Ez dugu geure estimaziorik egiten, ezta serieak manipulatzen ere: datuak erakunde publikoetatik datoz eta pipeline automatizatu eta auditagarrien bidez ateratzen dira.
+**SpainFacts**en datu, grafiko eta kalkulu bakoitza jatorrizko argitalpen ofizialeraino jarraitu daiteke. Ez dugu zifrarik asmatzen: erakunde publikoen datuak kode irekiarekin deskargatzen ditugu, eta edonork errepika dezake prozesua bere kabuz. Webgune osoko txarteletako iturri-etiketek hona daramate, beren iturriaren fitxara.
 
 ```sql fuentes_list
 SELECT
@@ -25,8 +25,7 @@ SELECT
     formato_ingesta,
     tipo_licencia,
     url_oficial,
-    metodologia,
-    estado_pipeline
+    metodologia
 FROM mother.trazabilidad_fuentes
 ORDER BY organismo ASC, nombre_dataset ASC
 ```
@@ -38,69 +37,68 @@ SELECT
 FROM mother.trazabilidad_fuentes
 ```
 
-<Grid cols=4>
+<Grid cols=2>
     <KpiCard
-        title="Datu-multzo Ofizialak"
+        title="Datu-multzoak"
         value={stats_organismos[0].total_datasets}
         formattedValue="{stats_organismos[0].total_datasets}"
-        unit="iturri aktibo"
-        period="Egungo katalogoa"
+        unit="katalogoan"
+        period="Bakoitza bere fitxa eta kodearekin"
         direction="neutral"
-        source="MotherDuck"
     />
 
     <KpiCard
-        title="Konektatutako Erakundeak"
+        title="Erakundeak"
         value={stats_organismos[0].total_organismos}
         formattedValue="{stats_organismos[0].total_organismos}"
-        unit="erakunde"
-        period="INE, Eurostat, IGAE, BdE"
+        unit="iturri ofizial"
+        period="INE, Eurostat, ministerioak, REE…"
         direction="neutral"
-        source="Katalogo Ofiziala"
-    />
-
-    <KpiCard
-        title="Lizentzia Mota"
-        value="100%"
-        formattedValue="100%"
-        unit="Datu Irekiak"
-        period="37/2007 Legea / CC-BY 4.0"
-        direction="positive-up"
-        source="Sektore Publikoa"
-    />
-
-    <KpiCard
-        title="Sinkronizazioa"
-        value="Diaria"
-        formattedValue="Egunero"
-        unit="Automatikoa"
-        period="06:00, Madrilgo ordua (Dagster)"
-        direction="positive-up"
-        source="GitHub Actions"
     />
 </Grid>
 
----
+## Nola berreraiki datu bat
 
-## 1. Iturri eta Datu-multzoen Direktorio Osoa
+Prozesu osoa [GitHubeko biltegi publikoan](https://github.com/SpainFacts/spainfacts.github.io) dago. Datu bakoitzak bost urrats igarotzen ditu, eta urrats bakoitza irakur daitekeen fitxategi bat da:
 
-Jarraian zehazten dira SpainFactsen datu-basean integratutako iturri guztiak, datu-multzoaren kode ofiziala, argitalpen-maiztasuna, metodologia eta argitaratzen duen atariko esteka zuzena barne:
+1. **Erakundetik deskargatzea.** Datuak atari ofizialetik datoz (fitxa bakoitzeko «Ikusi jatorrian» esteka).
+2. **Karga** ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)). [dlt](https://dlthub.com) erabiltzen duten Python scriptak, APIari deitzen diotenak edo fitxategia deskargatzen dutenak, eta `raw` eskeman dagoen bezala gordetzen dutenak, balioak ukitu gabe.
+3. **Eraldaketa** ([`transform/models/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/models)). [dbt](https://www.getdbt.com)-ren SQL ereduak, garbitu, elkartu eta kalkulatzen dutenak (biztanleko, euro konstantetan…). Eskuz egindako datuak, katalogo hau adibidez, [`transform/seeds/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/seeds) karpetan daude.
+4. **Webguneko kontsultak** ([`sources/mother/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/sources/mother)). Orri bakoitzak irakurtzen duena.
+5. **Orria** ([`pages/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/pages)). Testua, grafiko bakoitzaren SQLa eta azken kalkuluak.
 
-<DataTable data={fuentes_list} search=true rows=10>
-    <Column id=organismo title="Erakundea" />
-    <Column id=nombre_dataset title="Datu-multzoaren izena" />
-    <Column id=cod_oficial title="Kode Ofiziala" />
-    <Column id=frecuencia title="Maiztasuna" />
-    <Column id=formato_ingesta title="API Formatua" />
-    <Column id=tipo_licencia title="Erabilera-lizentzia" />
-    <Column id=url_oficial title="Iturri Ofiziala" contentType=link linkText="Ikusi jatorrian ↗" />
-</DataTable>
+Ireki katalogoko edozein datu-multzo haren scripta, taulak, dbt ereduak eta erabiltzen duten orriak ikusteko, errepikatzeko aginduekin batera.
 
----
+### Zure ordenagailuan errepikatu
 
-## 2. Iturri Ofizialen Metodologia
+Ez da konturik behar: dena DuckDB fitxategi lokal baten aurka dabil. [Python uv-rekin](https://docs.astral.sh/uv/), [Node.js](https://nodejs.org) eta git behar dituzu.
 
-Erakunde bakoitzak esparru estatistiko zorrotzak eta estandarizatuak erabiltzen ditu, nazio mailan eta nazioartean:
+```bash
+git clone https://github.com/SpainFacts/spainfacts.github.io.git
+cd spainfacts.github.io
+uv venv
+uv pip install -r orchestration/requirements.txt
+
+# data/spainfacts.duckdb fitxategian idatzi, ekoizpeneko datu-basean idatzi beharrean
+export SPAINFACTS_DESTINO=local
+
+# karga-script bat (fitxa bakoitzekoa) eta haren dbt ereduak
+uv run python -m ingestion.aena
+uv run dbt build --project-dir transform --profiles-dir transform --select movilidad_aeropuertos_mensual+
+
+# edo kate osoa batera
+uv run dagster asset materialize -m orchestration.definitions --select "*"
+```
+
+Gida osoa, webgunea lokalean abiarazteko urratsekin, [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md) fitxategian dago, eta iturri berri bat nola gehitzen den, [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md) fitxategian.
+
+## Iturrien katalogoa
+
+Bilatu erakundearen, izenaren, kode ofizialaren edo metodologiako hitzen arabera. Fitxa bakoitzak bere esteka du partekatu ahal izateko.
+
+<CatalogoFuentes data={fuentes_list} />
+
+## Erakunde nagusien esparrua
 
 <Accordion>
   <AccordionItem title="Estatistikako Institutu Nazionala (INE)">
@@ -131,14 +129,11 @@ Erakunde bakoitzak esparru estatistiko zorrotzak eta estandarizatuak erabiltzen 
   </AccordionItem>
 </Accordion>
 
----
+## Kalitate-bermeak
 
-## 3. Kalitatearen Bermea eta Manipulaziorik Eza
-
-SpainFactsek osotasun teknikoko protokolo zorrotz bat aplikatzen du:
-
-1. **Karga Idenpotentea:** Python scriptek ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)) API publikoen erantzun zuzenak deskargatzen dituzte, balio numerikoak aldatu gabe.
-2. **Balidazio Automatikoa dbt-rekin (`dbt test`):** Eraldaketa bakoitzak proba automatikoak gainditzen ditu: balio ez-nuluak, bakartasuna eta daten koherentzia. Kanpoko iturri batek datu hondatuak itzultzen baditu, hedapena automatikoki gelditzen da.
-3. **100% Kode Irekia:** Azpiegitura osoa, SQL kontsultak eta eraldaketa-ereduak publikoki daude eskuragarri [GitHub](https://github.com/SpainFacts/spainfacts.github.io)en.
+1. **Balioak ez dira ukitzen kargatzean.** Karga-scriptek erakundearen erantzuna dagoen bezala gordetzen dute; kalkuluak (biztanleko, inflazioaren arabera doituta…) geroago egiten dira, edonork ikus dezakeen SQLan.
+2. **Probak eguneraketa bakoitzean.** Katea bere kabuz eguneratzen da egunero 06:00etan (Madrilgo ordua), [Dagster](https://dagster.io) bidez. dbt ereduek balio ez-nuluen, bakartasunaren eta daten koherentziaren probak dituzte; huts egiten badute, eguneraketa gelditu egiten da ezer argitaratu aurretik.
+3. **Webgunearen probak.** Argitalpen bakoitzaren aurretik, proba automatikoek orriak ireki eta kargatzen direla eta datuak erakusten dituztela egiaztatzen dute.
+4. **Kode irekia.** Karga, eraldaketak, kontsultak eta orriak [GitHuben](https://github.com/SpainFacts/spainfacts.github.io) daude. Akatsen bat ikusten baduzu, [arazo bat ireki](https://github.com/SpainFacts/spainfacts.github.io/issues) dezakezu.
 
 <LastRefreshed prefix="Iturrien katalogoa egiaztatuta" />

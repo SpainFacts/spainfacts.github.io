@@ -152,6 +152,16 @@ Para fuentes que ofrecen APIs REST directas o descargas en CSV:
    * El Banco de España publica series temporales en CSV/REST en su [portal de estadísticas](https://www.bde.es/wbe/es/estadisticas/).
    * Se procesan igual mediante un recurso de `dlt` que lea el CSV con `csv.DictReader` o `pandas` y lo cargue en MotherDuck.
 
+### Registrar la fuente en el catálogo de `/fuentes`
+
+Toda fuente nueva se registra en dos seeds y se regenera su linaje:
+
+1. `transform/seeds/fuentes_catalogo.csv`: organismo, nombre, código oficial, frecuencia, licencia, URL y metodología (lo que ve la ficha).
+2. `transform/seeds/fuentes_ingesta.csv`: el script que la descarga y sus tablas raw (`raw_x.tabla;seed.nombre`), tal como se declaran en `transform/models/sources*.yml`.
+3. `python tools/fuentes/linaje.py`: recorre los `source()`/`ref()` de dbt, las consultas de `sources/mother/` y las páginas, y escribe `static/fuentes/linaje.json`, que la ficha usa para enlazar el código en GitHub. Súbelo junto al cambio.
+
+Las etiquetas `source="…"` de los KPI enlazan a `/fuentes?fuente=<etiqueta>`; si la etiqueta usa una sigla que no está en el catálogo, añádela al diccionario `ALIAS` de `src/lib/components/CatalogoFuentes.svelte`.
+
 ---
 
 ## 5. Comandos de Terminal para Ejecutar y Probar

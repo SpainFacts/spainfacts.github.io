@@ -1,19 +1,19 @@
 ---
-description: "Catàleg de les fonts oficials que utilitza SpainFacts (INE, Eurostat, ministeris, REE...), amb la freqüència, la llicència i la metodologia."
+description: "Catàleg de les fonts oficials que utilitza SpainFacts (INE, Eurostat, ministeris, REE...), amb la metodologia, la llicència i el codi a GitHub per reconstruir cada dada."
 title: Traçabilitat i auditoria de fonts
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 238721c8a7b0
+i18n_origen: bc32e4e4d483
 ---
 
 <script>
-    import { formatNumber } from '../../../../../../src/lib/utils.js';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
+    import CatalogoFuentes from '../../../../../../src/lib/components/CatalogoFuentes.svelte';
 </script>
 
 # Traçabilitat i auditoria de fonts oficials
 
-A **SpainFacts**, cada dada, gràfic i càlcul és **100% verificable i traçable** fins a la seva publicació oficial original. No generem estimacions pròpies ni manipulem les sèries: les dades provenen d'organismes públics i s'extreuen mitjançant processos automatitzats i auditables.
+A **SpainFacts** cada dada, gràfic i càlcul es pot seguir fins a la seva publicació oficial original. No ens inventem xifres: descarreguem les dades d'organismes públics amb codi obert i qualsevol persona pot repetir el procés pel seu compte. Les etiquetes de font de les targetes de tot el web enllacen aquí, a la fitxa de la seva font.
 
 ```sql fuentes_list
 SELECT
@@ -25,8 +25,7 @@ SELECT
     formato_ingesta,
     tipo_licencia,
     url_oficial,
-    metodologia,
-    estado_pipeline
+    metodologia
 FROM mother.trazabilidad_fuentes
 ORDER BY organismo ASC, nombre_dataset ASC
 ```
@@ -38,69 +37,68 @@ SELECT
 FROM mother.trazabilidad_fuentes
 ```
 
-<Grid cols=4>
+<Grid cols=2>
     <KpiCard
-        title="Conjunts de dades oficials"
+        title="Conjunts de dades"
         value={stats_organismos[0].total_datasets}
         formattedValue="{stats_organismos[0].total_datasets}"
-        unit="fonts actives"
-        period="Catàleg actual"
+        unit="al catàleg"
+        period="Cadascun amb la seva fitxa i el seu codi"
         direction="neutral"
-        source="MotherDuck"
     />
 
     <KpiCard
-        title="Organismes connectats"
+        title="Organismes"
         value={stats_organismos[0].total_organismos}
         formattedValue="{stats_organismos[0].total_organismos}"
-        unit="institucions"
-        period="INE, Eurostat, IGAE, BdE"
+        unit="fonts oficials"
+        period="INE, Eurostat, ministeris, REE…"
         direction="neutral"
-        source="Catàleg oficial"
-    />
-
-    <KpiCard
-        title="Tipus de llicència"
-        value="100%"
-        formattedValue="100%"
-        unit="Dades obertes"
-        period="Llei 37/2007 / CC-BY 4.0"
-        direction="positive-up"
-        source="Sector públic"
-    />
-
-    <KpiCard
-        title="Sincronització"
-        value="Diaria"
-        formattedValue="Diària"
-        unit="Automàtica"
-        period="06:00 hora de Madrid (Dagster)"
-        direction="positive-up"
-        source="GitHub Actions"
     />
 </Grid>
 
----
+## Com es reconstrueix una dada
 
-## 1. Directori complet de fonts i conjunts de dades
+Tot el procés és al [repositori públic de GitHub](https://github.com/SpainFacts/spainfacts.github.io). Cada dada passa per cinc passos i cada pas és un fitxer que es pot llegir:
 
-A continuació es detallen totes les fonts integrades a la base de dades de SpainFacts, incloent-hi el codi oficial del conjunt de dades, la freqüència de publicació, la metodologia i l'enllaç directe al portal emissor:
+1. **Descàrrega de l'organisme.** Les dades surten del portal oficial (l'enllaç «Mostra a l'origen» de cada fitxa).
+2. **Ingesta** ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)). Scripts de Python amb [dlt](https://dlthub.com) que criden l'API o descarreguen el fitxer i el desen tal qual a l'esquema `raw`, sense tocar els valors.
+3. **Transformació** ([`transform/models/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/models)). Models SQL de [dbt](https://www.getdbt.com) que netegen, uneixen i calculen (per habitant, en euros constants…). Les dades fetes a mà, com aquest catàleg, són a [`transform/seeds/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/transform/seeds).
+4. **Consultes del web** ([`sources/mother/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/sources/mother)). El que llegeix cada pàgina.
+5. **Pàgina** ([`pages/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/pages)). El text, l'SQL de cada gràfic i els càlculs finals.
 
-<DataTable data={fuentes_list} search=true rows=10>
-    <Column id=organismo title="Organisme" />
-    <Column id=nombre_dataset title="Nom del conjunt de dades" />
-    <Column id=cod_oficial title="Codi oficial" />
-    <Column id=frecuencia title="Freqüència" />
-    <Column id=formato_ingesta title="Format API" />
-    <Column id=tipo_licencia title="Llicència d'ús" />
-    <Column id=url_oficial title="Font oficial" contentType=link linkText="Mostra a l'origen ↗" />
-</DataTable>
+Obre qualsevol conjunt de dades del catàleg per veure'n l'script, les taules, els models dbt i les pàgines que l'utilitzen, amb les ordres per repetir-ho.
 
----
+### Repetir-ho al teu ordinador
 
-## 2. Metodologia de les fonts oficials
+No cal cap compte: tot funciona contra un fitxer DuckDB local. Necessites [Python amb uv](https://docs.astral.sh/uv/), [Node.js](https://nodejs.org) i git.
 
-Cada organisme utilitza marcs estadístics rigorosos i estandarditzats en l'àmbit nacional i internacional:
+```bash
+git clone https://github.com/SpainFacts/spainfacts.github.io.git
+cd spainfacts.github.io
+uv venv
+uv pip install -r orchestration/requirements.txt
+
+# escriure a data/spainfacts.duckdb en lloc de a la base de producció
+export SPAINFACTS_DESTINO=local
+
+# un script d'ingesta (el de cada fitxa) i els seus models dbt
+uv run python -m ingestion.aena
+uv run dbt build --project-dir transform --profiles-dir transform --select movilidad_aeropuertos_mensual+
+
+# o tota la cadena d'una vegada
+uv run dagster asset materialize -m orchestration.definitions --select "*"
+```
+
+La guia completa, amb el web en local, és a [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), i com s'afegeix una font nova, a [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
+
+## Catàleg de fonts
+
+Cerca per organisme, nom, codi oficial o paraules de la metodologia. Cada fitxa té un enllaç propi per compartir-la.
+
+<CatalogoFuentes data={fuentes_list} />
+
+## Marc dels principals organismes
 
 <Accordion>
   <AccordionItem title="Institut Nacional d'Estadística (INE)">
@@ -131,14 +129,11 @@ Cada organisme utilitza marcs estadístics rigorosos i estandarditzats en l'àmb
   </AccordionItem>
 </Accordion>
 
----
+## Garanties de qualitat
 
-## 3. Garantia de qualitat i no manipulació
-
-SpainFacts aplica un protocol estricte d'integritat tècnica:
-
-1. **Ingesta idempotent:** Els scripts de Python ([`ingestion/`](https://github.com/SpainFacts/spainfacts.github.io/tree/main/ingestion)) descarreguen les respostes directes de les API públiques sense modificar els valors numèrics.
-2. **Validació automàtica amb dbt (`dbt test`):** Cada transformació passa proves automàtiques de valors no nuls, unicitat i coherència de dates. Si una font externa retorna dades corruptes, el desplegament s'atura automàticament.
-3. **Codi 100% obert:** Tota la infraestructura, les consultes SQL i els models de transformació estan disponibles públicament a [GitHub](https://github.com/SpainFacts/spainfacts.github.io).
+1. **Els valors no es toquen en carregar-los.** Els scripts d'ingesta desen la resposta de l'organisme tal qual; els càlculs (per habitant, deflactats…) es fan després, en SQL a la vista.
+2. **Proves a cada actualització.** La cadena s'actualitza sola cada dia a les 06:00 (hora de Madrid) amb [Dagster](https://dagster.io). Els models dbt porten proves de valors no nuls, unicitat i coherència de dates; si fallen, l'actualització s'atura abans de publicar.
+3. **Proves del web.** Abans de cada publicació, unes proves automàtiques obren les pàgines i comproven que carreguen i mostren dades.
+4. **Codi obert.** Ingesta, transformacions, consultes i pàgines són a [GitHub](https://github.com/SpainFacts/spainfacts.github.io). Si hi veus un error, pots [obrir una incidència](https://github.com/SpainFacts/spainfacts.github.io/issues).
 
 <LastRefreshed prefix="Catàleg de fonts verificat" />

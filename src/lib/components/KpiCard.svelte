@@ -3,6 +3,8 @@
     import { page } from "$app/stores";
     import { idiomaDeRuta, enlace, t } from "../i18n.js";
     $: lang = idiomaDeRuta($page.url.pathname);
+    // En la propia página de fuentes la etiqueta no enlaza a sí misma
+    $: enFuentes = /\/fuentes\/?$/.test($page.url.pathname);
 
     import Compartir from "./Compartir.svelte";
     export let title = "";
@@ -294,10 +296,19 @@
             <span class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 {title}
             </span>
-            {#if source}
+            {#if source && enFuentes}
                 <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300">
                     {source}
                 </span>
+            {:else if source}
+                <!-- La fuente lleva a su ficha en /fuentes (metodología, licencia, frecuencia y enlace al origen) -->
+                <a
+                    href={`${enlace('/fuentes/', lang)}?fuente=${encodeURIComponent(source)}`}
+                    title={t('fuente.ver', lang)}
+                    class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-600 underline decoration-gray-300 underline-offset-2 transition-colors hover:bg-blue-50 hover:text-blue-700 hover:decoration-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:decoration-gray-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
+                >
+                    {source}<span class="sr-only">: {t('fuente.ver', lang)}</span>
+                </a>
             {/if}
         </div>
 

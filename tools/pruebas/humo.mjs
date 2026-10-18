@@ -42,7 +42,10 @@ const ESPECIALES = {
 	'/territorios/municipios/?m=08019': { h2: 'Barcelona' },
 	'/en/territorios/municipios/?m=41091': { h2: 'Sevilla' },
 	'/territorios/andalucia/': { h1: 'Andalucía' },
-	'/territorios/andalucia/sevilla/': { texto: 'Sevilla' }
+	'/territorios/andalucia/sevilla/': { texto: 'Sevilla' },
+	// Las etiquetas de fuente de los KPI llevan aquí: debe salir la ficha filtrada con su linaje
+	'/fuentes/?fuente=INE%20%2F%20EPA': { texto: 'Encuesta de Población Activa' },
+	'/fuentes/?id=ine_epa_65219': { texto: 'ingestion/ine.py' }
 };
 
 // Todas las páginas estáticas en castellano (pages/**.md sin corchetes ni redirecciones)
