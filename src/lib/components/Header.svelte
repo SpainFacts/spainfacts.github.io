@@ -34,9 +34,18 @@
         isMenuOpen = !isMenuOpen;
     }
 
+    // «Más» es un <details>: el navegador no lo cierra al navegar (SvelteKit no recarga
+    // la página) ni al pulsar fuera, y se quedaba abierto tapando el contenido
+    let menuMas;
+    $: $page.url.pathname, menuMas && (menuMas.open = false);
+    function clicGlobal(e) {
+        if (menuMas?.open && !menuMas.contains(e.target)) menuMas.open = false;
+    }
+
     // Escape cierra el menú móvil y devuelve el foco al botón que lo abrió
     let botonMenu;
     function teclaGlobal(e) {
+        if (e.key === "Escape" && menuMas?.open) menuMas.open = false;
         if (e.key === "Escape" && isMenuOpen) {
             isMenuOpen = false;
             botonMenu?.focus();
@@ -53,7 +62,7 @@
     }
 </script>
 
-<svelte:window on:keydown={teclaGlobal} />
+<svelte:window on:keydown={teclaGlobal} on:click={clicGlobal} />
 
 <header
     class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-200"
@@ -106,7 +115,7 @@
                             {link.label}
                         </a>
                     {/each}
-                    <details class="relative">
+                    <details class="relative" bind:this={menuMas}>
                         <summary class="cursor-pointer list-none rounded-lg px-2.5 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300 dark:hover:bg-gray-800/60 dark:hover:text-white">
                             {t("menu.otras", lang)}
                         </summary>
@@ -116,6 +125,7 @@
                                 <a
                                     href={link.href}
                                     aria-current={active ? "page" : undefined}
+                                    on:click={() => (menuMas.open = false)}
                                     class="block rounded-lg px-3 py-2 text-sm font-medium {active
                                         ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300'
                                         : 'text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-800'}"

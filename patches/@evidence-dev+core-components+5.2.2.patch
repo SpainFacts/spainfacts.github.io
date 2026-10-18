@@ -93,6 +93,109 @@ index 41263f2..1b40ee5 100644
  					{crumb.title}
  				</a>
  			{/if}
+diff --git a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
+index 3e4156d..aabdd7c 100644
+--- a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
+@@ -1,11 +1,44 @@
+ <script>
+ 	import { onMount, onDestroy } from 'svelte';
++	import { page } from '$app/stores';
++	import { idiomaDeRuta, t } from '../../../unsorted/ui/idioma.js';
+ 
+ 	let headers = [];
+ 	let observer;
++	// SpainFacts: el índice marca la sección que se está leyendo
++	let activo = null;
++	let pendiente = false;
++
++	$: lang = idiomaDeRuta($page?.url?.pathname ?? '/');
+ 
+ 	function updateLinks() {
+ 		headers = Array.from(document.querySelectorAll('h1.markdown, h2.markdown, h3.markdown'));
++		marcarActivo();
++	}
++
++	// La sección activa es el último título que ya ha pasado por debajo de la cabecera fija;
++	// al llegar al final de la página, el último título (aunque no llegue arriba)
++	function marcarActivo() {
++		pendiente = false;
++		if (!headers.length) return;
++		const margen = 120;
++		let actual = headers[0];
++		for (const h of headers) {
++			if (h.getBoundingClientRect().top - margen <= 0) actual = h;
++			else break;
++		}
++		const finPagina = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
++		if (finPagina) {
++			const visibles = headers.filter((h) => h.getBoundingClientRect().top < window.innerHeight);
++			if (visibles.length) actual = visibles[visibles.length - 1];
++		}
++		activo = actual?.id ?? null;
++	}
++
++	function alDesplazar() {
++		if (pendiente) return;
++		pendiente = true;
++		requestAnimationFrame(marcarActivo);
+ 	}
+ 
+ 	function observeDocumentChanges() {
+@@ -23,31 +56,48 @@
+ 	onMount(() => {
+ 		updateLinks();
+ 		observer = observeDocumentChanges();
++		window.addEventListener('scroll', alDesplazar, { passive: true });
++		window.addEventListener('resize', alDesplazar, { passive: true });
+ 	});
+ 
+ 	onDestroy(() => {
+ 		observer?.disconnect();
++		if (typeof window !== 'undefined') {
++			window.removeEventListener('scroll', alDesplazar);
++			window.removeEventListener('resize', alDesplazar);
++		}
+ 	});
+ 
+ 	const classLookup = {
+-		h1: 'mt-3 font-semibold block bg-base-100 shadow shadow-base-100',
+-		h2: 'pl-0 text-base-content-muted',
+-		h3: 'pl-4 text-base-content-muted'
++		h1: 'pl-2 mt-3 font-semibold block bg-base-100 shadow shadow-base-100',
++		h2: 'pl-2 text-base-content-muted',
++		h3: 'pl-6 text-base-content-muted'
+ 	};
+ </script>
+ 
+ {#if headers && headers.length > 1}
+ 	<span class="block text-xs sticky top-0 mb-2 bg-base-100 shadow-base-100 font-medium">
+-		On this page
++		{t('indice', lang)}
+ 	</span>
+ 	{#each headers as header}
+ 		<a
+ 			href="#{header.id}"
++			aria-current={activo === header.id ? 'location' : undefined}
+ 			class="{classLookup[
+ 				header.nodeName.toLowerCase()
+-			]} block text-xs transition-all duration-200 py-1 hover:underline"
++			]} block text-xs transition-all duration-200 py-1 hover:underline border-l-2 -ml-2"
++			class:activo={activo === header.id}
++			class:border-transparent={activo !== header.id}
+ 		>
+ 			{header.innerText}
+ 		</a>
+ 	{/each}
+ {/if}
++
++<style>
++	a.activo {
++		color: var(--primary);
++		border-color: var(--primary);
++		font-weight: 600;
++	}
++</style>
 diff --git a/node_modules/@evidence-dev/core-components/dist/themes/themes.js b/node_modules/@evidence-dev/core-components/dist/themes/themes.js
 index adfa5e0..50bc125 100644
 --- a/node_modules/@evidence-dev/core-components/dist/themes/themes.js
@@ -4926,10 +5029,10 @@ index 0000000..2d23e5a
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
 new file mode 100644
-index 0000000..a01c9ae
+index 0000000..3259348
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/idioma.js
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,96 @@
 +// SpainFacts: textos traducidos de los componentes parcheados (patch-package).
 +// Copia reducida de src/lib/i18n.js: si cambias uno, cambia el otro.
 +
@@ -4955,6 +5058,7 @@ index 0000000..a01c9ae
 +		'grafico.imagen': 'Guardar imagen',
 +		'grafico.datos': 'Descargar datos (CSV)',
 +		'tabla.csv': 'Descargar CSV',
++		'indice': 'En esta página',
 +	},
 +	en: {
 +		'compartir': 'Share',
@@ -4968,6 +5072,7 @@ index 0000000..a01c9ae
 +		'grafico.imagen': 'Save image',
 +		'grafico.datos': 'Download data (CSV)',
 +		'tabla.csv': 'Download CSV',
++		'indice': 'On this page',
 +	},
 +	ca: {
 +		'compartir': 'Comparteix',
@@ -4981,6 +5086,7 @@ index 0000000..a01c9ae
 +		'grafico.imagen': 'Desa la imatge',
 +		'grafico.datos': 'Descarrega les dades (CSV)',
 +		'tabla.csv': 'Descarrega CSV',
++		'indice': 'En aquesta pàgina',
 +	},
 +	gl: {
 +		'compartir': 'Compartir',
@@ -4994,6 +5100,7 @@ index 0000000..a01c9ae
 +		'grafico.imagen': 'Gardar imaxe',
 +		'grafico.datos': 'Descargar datos (CSV)',
 +		'tabla.csv': 'Descargar CSV',
++		'indice': 'Nesta páxina',
 +	},
 +	eu: {
 +		'compartir': 'Partekatu',
@@ -5007,6 +5114,7 @@ index 0000000..a01c9ae
 +		'grafico.imagen': 'Gorde irudia',
 +		'grafico.datos': 'Deskargatu datuak (CSV)',
 +		'tabla.csv': 'Deskargatu CSV',
++		'indice': 'Orrialde honetan',
 +	},
 +};
 +export function t(clave, lang = 'es') {
@@ -5880,6 +5988,67 @@ index b3bfe37..b75693d 100644
 +		min-height: 22px;
  	}
  </style>
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
+index 1c63e0b..b6f4e40 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
+@@ -203,6 +203,28 @@
+ 	let horizAxisTitleConfig;
+ 	let chartConfig;
+ 
++	// SpainFacts: ¿cada categoría tiene valor (distinto de 0) en una sola serie de barras?
++	// Las barras rellenan con 0 las combinaciones que faltan, así que 0 cuenta como «sin dato».
++	function serieUnicaPorCategoria() {
++		const series = ($config?.series ?? []).filter(
++			(s) => s.type === 'bar' && s.name !== 'stackTotal'
++		);
++		if (series.length < 2) return false;
++		const porCategoria = new Map();
++		for (const s of series) {
++			for (const d of s.data ?? []) {
++				const v = Array.isArray(d) ? d : d?.value;
++				if (!Array.isArray(v)) return false;
++				const valor = Number(v[swapXY ? 0 : 1]);
++				if (!valor) continue;
++				const cat = v[swapXY ? 1 : 0];
++				porCategoria.set(cat, (porCategoria.get(cat) ?? 0) + 1);
++				if (porCategoria.get(cat) > 1) return false;
++			}
++		}
++		return porCategoria.size > 0;
++	}
++
+ 	// Chart area sizing:
+ 	let hasTitle;
+ 	let hasSubtitle;
+@@ -965,7 +987,26 @@
+ 						let xVal;
+ 						let yVal;
+ 						let yCol;
+-						if (totalSeriesCount > 1) {
++						// SpainFacts: si la serie solo sirve para colorear (España frente a «Otros
++						// países», 1.º/2.º/resto...), cada categoría tiene valor en una sola serie
++						// y el tooltip mostraba la leyenda con ceros para las demás
++						const unaSeriePorCategoria =
++							totalSeriesCount > 1 && params.length > 1 && serieUnicaPorCategoria();
++						if (unaSeriePorCategoria) {
++							const p =
++								params.find(
++									(q) => q.seriesName !== 'stackTotal' && Number(q.value?.[swapXY ? 0 : 1]) !== 0
++								) ?? params[0];
++							xVal = p.value[swapXY ? 1 : 0];
++							yVal = p.value[swapXY ? 0 : 1];
++							output = `<span id="tooltip" style='font-weight: 600;'>${formatValue(
++								xVal,
++								xFormat
++							)}</span><br/><span>${p.marker} ${formatValue(
++								yVal,
++								getYAxisIndex(p.componentIndex, yCount, y2Count) === 0 ? yFormat : y2Format
++							)}</span>`;
++						} else if (totalSeriesCount > 1) {
+ 							// If multi-series, add series name as title of tooltip
+ 							xVal = params[0].value[swapXY ? 1 : 0];
+ 							output = `<span id="tooltip" style='font-weight: 600;'>${formatValue(
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte
 index 98a7e3a..8f015a1 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/table/TableHeader.svelte

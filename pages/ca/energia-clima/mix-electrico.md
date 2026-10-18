@@ -1,7 +1,7 @@
 ---
 title: Mix de Generació Elèctrica
 description: "El mix elèctric espanyol des del 2007 segons Red Eléctrica: quota renovable, tancament del carbó, emissions per kWh generat i consum elèctric per habitant."
-i18n_origen: 7cce8c387246
+i18n_origen: d283e5c0e445
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -164,8 +163,6 @@ La renovable va superar per primera vegada la meitat de la generació el {hitos_
     yAxisTitle="% de la generació"
     title="Estructura de la generació elèctrica per tecnologia"
 />
-
-<DownloadCsvButton data={mix_completo} filename="spainfacts_mix_electrico_detalle.csv" label="Descarregar les dades completes del mix (CSV)" />
 
 ```sql cuota
 SELECT anio, 'Renovable' AS serie, cuota_renovable_pct AS pct FROM mother.clima_electricidad_anual
@@ -328,10 +325,6 @@ ORDER BY anio ASC, potencia_mw DESC
     yAxisTitle="MW instal·lats"
     title="Potència instal·lada per tecnologia (MW)"
 />
-
-<DownloadCsvButton data={potencia} filename="spainfacts_potencia_instalada.csv" label="Descarregar la potència instal·lada (CSV)" />
-
-<DownloadCsvButton data={elec} filename="spainfacts_electricidad_anual.csv" label="Descarregar quotes, emissions i demanda per any (CSV)" />
 
 ---
 

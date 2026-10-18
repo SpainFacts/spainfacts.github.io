@@ -1,7 +1,7 @@
 ---
 title: Diners públics als mitjans
 description: "Quants diners públics reben els mitjans de comunicació a Espanya: aportació a RTVE i a les televisions autonòmiques, publicitat institucional i comercial de l'Estat per grup mediàtic i subvencions a mitjans privats, per habitant i descomptada la inflació, per comunitat i per partit."
-i18n_origen: 99497b7340e4
+i18n_origen: f1566e72c841
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -494,7 +494,7 @@ Repartiment de la compra d'espais de les campanyes institucionals per tipus de m
     y=pct
     series=medio
     xFmt='0'
-    yFmt='0"%"'
+    yFmt=pct0
     type=stacked100
     title="Publicitat institucional de l'Estat per tipus de mitjà, % de la compra d'espais"
 />

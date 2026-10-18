@@ -1,5 +1,5 @@
 ---
-i18n_origen: b7b5b135c238
+i18n_origen: f9f6f478b771
 title: Centrais eléctricas
 description: "Mapa das centrais eléctricas de España: en operación, en construción, en tramitación e retiradas, por tecnoloxía, potencia e propietario."
 og:
@@ -9,7 +9,6 @@ og:
 <script>
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -395,8 +394,6 @@ ORDER BY potencia_mw DESC NULLS LAST
     <Column id=propietario title="Propietario" />
     <Column id=url_gem title="Ficha" contentType=link linkLabel="GEM ↗" openInNewTab=true />
 </DataTable>
-
-<DownloadCsvButton data={tabla} filename="spainfacts_centrales_electricas.csv" label="Descargar centrais (CSV)" />
 
 ---
 

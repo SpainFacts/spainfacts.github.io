@@ -8,7 +8,6 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -250,8 +249,6 @@ Un español emitía {formatNumber(hitos[0]?.t_hab_1990, 1)} t de CO₂ equivalen
     colorPalette={['#dc2626', '#16a34a', '#2563eb']}
 />
 
-<DownloadCsvButton data={anual} filename="spainfacts_emisiones_gei_anual.csv" label="Descargar serie anual (CSV)" />
-
 ## Lejos del objetivo de 2030
 
 Las emisiones totales tocaron techo en {hitos[0]?.anio_max} ({formatNumber(hitos[0]?.mt_max, 0)} Mt) y en {kpi[0]?.anio} están un {formatNumber(Math.abs(kpi[0]?.var_1990_pct), 1)} % {#if kpi[0]?.var_1990_pct < 0}por debajo{:else}por encima{/if} de 1990. El Plan Nacional Integrado de Energía y Clima (PNIEC 2023-2030) fija una reducción del 32 % respecto a 1990 para 2030, unos {formatNumber(hitos[0]?.objetivo_pniec_mt, 0)} Mt: desde el nivel de {kpi[0]?.anio} faltaría recortar un {formatNumber(Math.abs(hitos[0]?.falta_pniec_pct), 0)} % más.
@@ -310,8 +307,6 @@ Kilos de CO₂ equivalente por habitante y año según el sector que los emite.
     <Column id=var_1990 title="Total vs 1990" fmt="pct0" contentType=delta downIsGood=true />
     <Column id=mt_ult title="Mt último año" fmt="num1" />
 </DataTable>
-
-<DownloadCsvButton data={sectores} filename="spainfacts_emisiones_gei_sectorial.csv" label="Descargar emisiones por sector (CSV)" />
 
 ## El transporte, el sector que no baja
 

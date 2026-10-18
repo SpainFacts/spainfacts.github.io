@@ -493,7 +493,7 @@ Reparto de la compra de espacios de las campañas institucionales por tipo de me
     y=pct
     series=medio
     xFmt='0'
-    yFmt='0"%"'
+    yFmt=pct0
     type=stacked100
     title="Publicidad institucional del Estado por tipo de medio, % de la compra de espacios"
 />

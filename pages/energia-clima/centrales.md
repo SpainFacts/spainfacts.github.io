@@ -8,7 +8,6 @@ og:
 <script>
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -394,8 +393,6 @@ ORDER BY potencia_mw DESC NULLS LAST
     <Column id=propietario title="Propietario" />
     <Column id=url_gem title="Ficha" contentType=link linkLabel="GEM ↗" openInNewTab=true />
 </DataTable>
-
-<DownloadCsvButton data={tabla} filename="spainfacts_centrales_electricas.csv" label="Descargar centrales (CSV)" />
 
 ---
 

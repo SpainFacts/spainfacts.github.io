@@ -8,7 +8,6 @@ og:
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -163,8 +162,6 @@ La renovable superó por primera vez la mitad de la generación en {hitos_renov[
     yAxisTitle="% de la generación"
     title="Estructura de la generación eléctrica por tecnología"
 />
-
-<DownloadCsvButton data={mix_completo} filename="spainfacts_mix_electrico_detalle.csv" label="Descargar datos completos del mix (CSV)" />
 
 ```sql cuota
 SELECT anio, 'Renovable' AS serie, cuota_renovable_pct AS pct FROM mother.clima_electricidad_anual
@@ -327,10 +324,6 @@ ORDER BY anio ASC, potencia_mw DESC
     yAxisTitle="MW instalados"
     title="Potencia instalada por tecnología (MW)"
 />
-
-<DownloadCsvButton data={potencia} filename="spainfacts_potencia_instalada.csv" label="Descargar potencia instalada (CSV)" />
-
-<DownloadCsvButton data={elec} filename="spainfacts_electricidad_anual.csv" label="Descargar cuotas, emisiones y demanda por año (CSV)" />
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Diñeiro público nos medios
 description: "Canto diñeiro público reciben os medios de comunicación en España: achega a RTVE e ás televisións autonómicas, publicidade institucional e comercial do Estado por grupo mediático e subvencións a medios privados, por habitante e descontada a inflación, por comunidade e por partido."
-i18n_origen: 99497b7340e4
+i18n_origen: f1566e72c841
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -494,7 +494,7 @@ Reparto da compra de espazos das campañas institucionais por tipo de medio. O d
     y=pct
     series=medio
     xFmt='0'
-    yFmt='0"%"'
+    yFmt=pct0
     type=stacked100
     title="Publicidade institucional do Estado por tipo de medio, % da compra de espazos"
 />

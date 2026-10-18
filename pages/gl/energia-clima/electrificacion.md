@@ -1,5 +1,5 @@
 ---
-i18n_origen: aaa2f7109662
+i18n_origen: 6ec1f158c024
 title: Electrificación da economía
 description: "Canta da enerxía que consomen a industria, o transporte, os fogares e os servizos en España é electricidade, como se quentan as casas por provincia e cantas bombas de calor hai."
 og:
@@ -135,7 +135,7 @@ ORDER BY e.sector, f.orden
     series=fuente
     swapXY=true
     type=stacked100
-    yFmt='0"%"'
+    yFmt=pct0
     colorPalette={['#1d4ed8', '#f59e0b', '#78716c', '#0f766e', '#cbd5e1']}
     title="Con que enerxía funciona cada sector ({ultimo[0]?.anio})"
 />
@@ -183,7 +183,7 @@ ORDER BY cuota_pct DESC
     y=cuota
     series=combustible
     type=stacked100
-    yFmt='0"%"'
+    yFmt=pct0
     xFmt="####"
     colorPalette={['#1d4ed8', '#f59e0b', '#78716c', '#65a30d', '#fde047', '#0f766e', '#f472b6', '#cbd5e1']}
     title="Enerxía para calefacción nos fogares, por combustible"

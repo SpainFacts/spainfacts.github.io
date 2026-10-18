@@ -1,7 +1,7 @@
 ---
 title: Electrificació de l'economia
 description: "Quina part de l'energia que consumeixen la indústria, el transport, les llars i els serveis a Espanya és electricitat, com s'escalfen les cases per província i quantes bombes de calor hi ha."
-i18n_origen: aaa2f7109662
+i18n_origen: 6ec1f158c024
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -135,7 +135,7 @@ ORDER BY e.sector, f.orden
     series=fuente
     swapXY=true
     type=stacked100
-    yFmt='0"%"'
+    yFmt=pct0
     colorPalette={['#1d4ed8', '#f59e0b', '#78716c', '#0f766e', '#cbd5e1']}
     title="Amb quina energia funciona cada sector ({ultimo[0]?.anio})"
 />
@@ -183,7 +183,7 @@ ORDER BY cuota_pct DESC
     y=cuota
     series=combustible
     type=stacked100
-    yFmt='0"%"'
+    yFmt=pct0
     xFmt="####"
     colorPalette={['#1d4ed8', '#f59e0b', '#78716c', '#65a30d', '#fde047', '#0f766e', '#f472b6', '#cbd5e1']}
     title="Energia per a calefacció a les llars, per combustible"

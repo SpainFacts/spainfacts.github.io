@@ -1,14 +1,13 @@
 ---
 title: Energia eta klima
 description: Trantsizio ekologikoa, sorkuntza elektrikoaren mixa eta berotegi-efektuko gasen isuriak Espainian.
-i18n_origen: 0b1048f4b3b1
+i18n_origen: 22fe637732aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -152,8 +151,6 @@ ORDER BY anio ASC, tecnologia ASC
     colorPalette={['#16a34a', '#facc15', '#3b82f6', '#a855f7', '#f97316', '#6b7280']}
 />
 
-<DownloadCsvButton data={mix_areas} filename="spainfacts_mix_electrico.csv" label="Deskargatu elektrizitate-mixa (CSV)" />
-
 ---
 
 ## Energia berriztagarriaren eta isuririk gabekoaren kuota
@@ -224,8 +221,6 @@ ORDER BY anio ASC, sector ASC
     yAxisTitle="CO₂eq tona biztanleko"
     title="BEG isuriak sektoreka, biztanleko (t CO₂eq biztanleko)"
 />
-
-<DownloadCsvButton data={emisiones_sector} filename="spainfacts_emisiones_gei.csv" label="Deskargatu BEG isuriak (CSV)" />
 
 ---
 

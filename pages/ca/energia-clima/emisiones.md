@@ -1,7 +1,7 @@
 ---
 title: Emissions i Descarbonització
 description: "Emissions oficials de gasos d'efecte d'hivernacle (GEH) d'Espanya des del 1990, per habitant, per euro de PIB real i per sector, davant dels objectius del 2030 i de la mitjana europea."
-i18n_origen: 100c2894f1bf
+i18n_origen: 90135d8689aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -251,8 +250,6 @@ Un espanyol emetia {formatNumber(hitos[0]?.t_hab_1990, 1)} t de CO₂ equivalent
     colorPalette={['#dc2626', '#16a34a', '#2563eb']}
 />
 
-<DownloadCsvButton data={anual} filename="spainfacts_emisiones_gei_anual.csv" label="Descarregar la sèrie anual (CSV)" />
-
 ## Lluny de l'objectiu del 2030
 
 Les emissions totals van tocar sostre el {hitos[0]?.anio_max} ({formatNumber(hitos[0]?.mt_max, 0)} Mt) i el {kpi[0]?.anio} estan un {formatNumber(Math.abs(kpi[0]?.var_1990_pct), 1)} % {#if kpi[0]?.var_1990_pct < 0}per sota{:else}per sobre{/if} del 1990. El Pla Nacional Integrat d'Energia i Clima (PNIEC 2023-2030) fixa una reducció del 32 % respecte al 1990 per al 2030, uns {formatNumber(hitos[0]?.objetivo_pniec_mt, 0)} Mt: des del nivell del {kpi[0]?.anio} caldria retallar un {formatNumber(Math.abs(hitos[0]?.falta_pniec_pct), 0)} % més.
@@ -311,8 +308,6 @@ Quilos de CO₂ equivalent per habitant i any segons el sector que els emet.
     <Column id=var_1990 title="Total vs. 1990" fmt="pct0" contentType=delta downIsGood=true />
     <Column id=mt_ult title="Mt últim any" fmt="num1" />
 </DataTable>
-
-<DownloadCsvButton data={sectores} filename="spainfacts_emisiones_gei_sectorial.csv" label="Descarregar les emissions per sector (CSV)" />
 
 ## El transport, el sector que no baixa
 

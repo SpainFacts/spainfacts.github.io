@@ -1,7 +1,7 @@
 ---
 title: Isuriak eta deskarbonizazioa
 description: "Espainiako berotegi-efektuko gasen (BEG) isuri ofizialak 1990etik, biztanleko, BPG errealaren euro bakoitzeko eta sektoreka, 2030eko helburuekin eta Europako batez bestekoarekin alderatuta."
-i18n_origen: 100c2894f1bf
+i18n_origen: 90135d8689aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -251,8 +250,6 @@ Espainiar batek {formatNumber(hitos[0]?.t_hab_1990, 1)} t CO₂ baliokide isurtz
     colorPalette={['#dc2626', '#16a34a', '#2563eb']}
 />
 
-<DownloadCsvButton data={anual} filename="spainfacts_emisiones_gei_anual.csv" label="Deskargatu urteko seriea (CSV)" />
-
 ## 2030eko helburutik urrun
 
 Isuri guztiek gailurra jo zuten {hitos[0]?.anio_max}. urtean ({formatNumber(hitos[0]?.mt_max, 0)} Mt), eta {kpi[0]?.anio}. urtean {formatNumber(Math.abs(kpi[0]?.var_1990_pct), 1)} % {#if kpi[0]?.var_1990_pct < 0}beherago{:else}gorago{/if} daude 1990ekoen aldean. Energia eta Klimaren Plan Nazional Integratuak (PNIEC 2023-2030) 32 %-ko murrizketa ezartzen du 1990arekiko 2030erako, {formatNumber(hitos[0]?.objetivo_pniec_mt, 0)} Mt inguru: {kpi[0]?.anio}. urteko mailatik, beste {formatNumber(Math.abs(hitos[0]?.falta_pniec_pct), 0)} % murriztu beharko litzateke.
@@ -311,8 +308,6 @@ CO₂ baliokidearen kiloak biztanleko eta urteko, isurtzen dituen sektorearen ar
     <Column id=var_1990 title="Guztira 1990arekiko" fmt="pct0" contentType=delta downIsGood=true />
     <Column id=mt_ult title="Mt azken urtea" fmt="num1" />
 </DataTable>
-
-<DownloadCsvButton data={sectores} filename="spainfacts_emisiones_gei_sectorial.csv" label="Deskargatu isuriak sektoreka (CSV)" />
 
 ## Garraioa, jaisten ez den sektorea
 

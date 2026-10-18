@@ -1,7 +1,7 @@
 ---
 title: Diru publikoa komunikabideetan
 description: "Zenbat diru publiko jasotzen duten Espainiako komunikabideek: RTVEri eta telebista autonomikoei egindako ekarpena, Estatuaren erakunde- eta merkataritza-publizitatea komunikazio-taldeka eta komunikabide pribatuentzako diru-laguntzak, biztanleko eta inflazioa kenduta, erkidegoka eta alderdika."
-i18n_origen: 99497b7340e4
+i18n_origen: f1566e72c841
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -500,7 +500,7 @@ Erakunde-kanpainetako espazio-erosketaren banaketa komunikabide motaren arabera.
     y=pct
     series=medio
     xFmt='0'
-    yFmt='0"%"'
+    yFmt=pct0
     type=stacked100
     title="Estatuaren erakunde-publizitatea komunikabide motaren arabera, espazio-erosketaren %"
 />

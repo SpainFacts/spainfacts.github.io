@@ -1,7 +1,7 @@
 ---
 title: Sorkuntza elektrikoaren mixa
 description: "Espainiako elektrizitate-mixa 2007tik, Red Eléctricaren arabera: berriztagarrien kuota, ikatzaren itxiera, sortutako kWh bakoitzeko isuriak eta biztanleko kontsumo elektrikoa."
-i18n_origen: 7cce8c387246
+i18n_origen: d283e5c0e445
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -164,8 +163,6 @@ Berriztagarriek {hitos_renov[0]?.primer_anio_50}. urtean gainditu zuten lehen al
     yAxisTitle="Sorkuntzaren %"
     title="Sorkuntza elektrikoaren egitura teknologiaka"
 />
-
-<DownloadCsvButton data={mix_completo} filename="spainfacts_mix_electrico_detalle.csv" label="Deskargatu mixaren datu osoak (CSV)" />
 
 ```sql cuota
 SELECT anio, 'Renovable' AS serie, cuota_renovable_pct AS pct FROM mother.clima_electricidad_anual
@@ -328,10 +325,6 @@ ORDER BY anio ASC, potencia_mw DESC
     yAxisTitle="Instalatutako MW"
     title="Instalatutako potentzia teknologiaka (MW)"
 />
-
-<DownloadCsvButton data={potencia} filename="spainfacts_potencia_instalada.csv" label="Deskargatu instalatutako potentzia (CSV)" />
-
-<DownloadCsvButton data={elec} filename="spainfacts_electricidad_anual.csv" label="Deskargatu kuotak, isuriak eta eskaria urteka (CSV)" />
 
 ---
 

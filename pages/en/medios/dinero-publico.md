@@ -1,7 +1,7 @@
 ---
 title: Public money in the media
 description: "How much public money the media in Spain receive: funding for RTVE and the regional broadcasters, central government institutional and commercial advertising by media group and subsidies to private media, per inhabitant and adjusted for inflation, by region and by party."
-i18n_origen: 99497b7340e4
+i18n_origen: f1566e72c841
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -494,7 +494,7 @@ Breakdown of media space purchased for institutional campaigns by type of media.
     y=pct
     series=medio
     xFmt='0'
-    yFmt='0"%"'
+    yFmt=pct0
     type=stacked100
     title="Central government institutional advertising by type of media, % of media space purchased"
 />

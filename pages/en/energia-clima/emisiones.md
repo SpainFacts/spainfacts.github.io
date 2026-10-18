@@ -1,7 +1,7 @@
 ---
 title: Emissions and Decarbonisation
 description: "Spain's official greenhouse gas (GHG) emissions since 1990, per person, per euro of real GDP and by sector, set against the 2030 targets and the EU average."
-i18n_origen: 100c2894f1bf
+i18n_origen: 90135d8689aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -251,8 +250,6 @@ A Spanish resident emitted {formatNumber(hitos[0]?.t_hab_1990, 1)} t of CO₂ eq
     colorPalette={['#dc2626', '#16a34a', '#2563eb']}
 />
 
-<DownloadCsvButton data={anual} filename="spainfacts_emisiones_gei_anual.csv" label="Download annual series (CSV)" />
-
 ## Far from the 2030 target
 
 Total emissions peaked in {hitos[0]?.anio_max} ({formatNumber(hitos[0]?.mt_max, 0)} Mt) and in {kpi[0]?.anio} they stand {formatNumber(Math.abs(kpi[0]?.var_1990_pct), 1)} % {#if kpi[0]?.var_1990_pct < 0}below{:else}above{/if} 1990. The National Integrated Energy and Climate Plan (PNIEC 2023-2030) sets a 32 % reduction on 1990 levels by 2030, some {formatNumber(hitos[0]?.objetivo_pniec_mt, 0)} Mt: from the {kpi[0]?.anio} level, a further {formatNumber(Math.abs(hitos[0]?.falta_pniec_pct), 0)} % cut would be needed.
@@ -311,8 +308,6 @@ Kilograms of CO₂ equivalent per person per year, by emitting sector.
     <Column id=var_1990 title="Total vs 1990" fmt="pct0" contentType=delta downIsGood=true />
     <Column id=mt_ult title="Mt latest year" fmt="num1" />
 </DataTable>
-
-<DownloadCsvButton data={sectores} filename="spainfacts_emisiones_gei_sectorial.csv" label="Download emissions by sector (CSV)" />
 
 ## Transport, the sector that won't come down
 

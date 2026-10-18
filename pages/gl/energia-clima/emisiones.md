@@ -1,5 +1,5 @@
 ---
-i18n_origen: 100c2894f1bf
+i18n_origen: 90135d8689aa
 title: Emisións e descarbonización
 description: "Emisións oficiais de gases de efecto invernadoiro (GEI) de España desde 1990, por habitante, por euro de PIB real e por sector, fronte aos obxectivos de 2030 e á media europea."
 og:
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -251,8 +250,6 @@ Un español emitía {formatNumber(hitos[0]?.t_hab_1990, 1)} t de CO₂ equivalen
     colorPalette={['#dc2626', '#16a34a', '#2563eb']}
 />
 
-<DownloadCsvButton data={anual} filename="spainfacts_emisiones_gei_anual.csv" label="Descargar serie anual (CSV)" />
-
 ## Lonxe do obxectivo de 2030
 
 As emisións totais tocaron teito en {hitos[0]?.anio_max} ({formatNumber(hitos[0]?.mt_max, 0)} Mt) e en {kpi[0]?.anio} están un {formatNumber(Math.abs(kpi[0]?.var_1990_pct), 1)} % {#if kpi[0]?.var_1990_pct < 0}por debaixo{:else}por riba{/if} de 1990. O Plan Nacional Integrado de Enerxía e Clima (PNIEC 2023-2030) fixa unha redución do 32 % respecto a 1990 para 2030, uns {formatNumber(hitos[0]?.objetivo_pniec_mt, 0)} Mt: desde o nivel de {kpi[0]?.anio} faltaría recortar un {formatNumber(Math.abs(hitos[0]?.falta_pniec_pct), 0)} % máis.
@@ -311,8 +308,6 @@ Quilos de CO₂ equivalente por habitante e ano segundo o sector que os emite.
     <Column id=var_1990 title="Total vs. 1990" fmt="pct0" contentType=delta downIsGood=true />
     <Column id=mt_ult title="Mt último ano" fmt="num1" />
 </DataTable>
-
-<DownloadCsvButton data={sectores} filename="spainfacts_emisiones_gei_sectorial.csv" label="Descargar emisións por sector (CSV)" />
 
 ## O transporte, o sector que non baixa
 

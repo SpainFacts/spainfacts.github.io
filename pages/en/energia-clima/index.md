@@ -1,14 +1,13 @@
 ---
 title: Energy and Climate
 description: The ecological transition, the electricity generation mix and greenhouse gas emissions in Spain.
-i18n_origen: 0b1048f4b3b1
+i18n_origen: 22fe637732aa
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
 
 <script>
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
-    import DownloadCsvButton from '../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatDecimal } from '../../../../../../src/lib/utils.js';
 </script>
 
@@ -152,8 +151,6 @@ ORDER BY anio ASC, tecnologia ASC
     colorPalette={['#16a34a', '#facc15', '#3b82f6', '#a855f7', '#f97316', '#6b7280']}
 />
 
-<DownloadCsvButton data={mix_areas} filename="spainfacts_mix_electrico.csv" label="Download electricity mix (CSV)" />
-
 ---
 
 ## Renewable and Emission-Free Share
@@ -224,8 +221,6 @@ ORDER BY anio ASC, sector ASC
     yAxisTitle="Tonnes of CO₂eq per person"
     title="GHG emissions by sector, per person (t CO₂eq per person)"
 />
-
-<DownloadCsvButton data={emisiones_sector} filename="spainfacts_emisiones_gei.csv" label="Download GHG emissions (CSV)" />
 
 ---
 

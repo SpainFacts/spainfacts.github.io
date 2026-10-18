@@ -7,7 +7,6 @@ og:
 
 <script>
     import KpiCard from '../../../../../src/lib/components/KpiCard.svelte';
-    import DownloadCsvButton from '../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatDecimal } from '../../../../../src/lib/utils.js';
 </script>
 
@@ -151,8 +150,6 @@ ORDER BY anio ASC, tecnologia ASC
     colorPalette={['#16a34a', '#facc15', '#3b82f6', '#a855f7', '#f97316', '#6b7280']}
 />
 
-<DownloadCsvButton data={mix_areas} filename="spainfacts_mix_electrico.csv" label="Descargar mix eléctrico (CSV)" />
-
 ---
 
 ## Cuota de Energía Renovable y Libre de Emisiones
@@ -223,8 +220,6 @@ ORDER BY anio ASC, sector ASC
     yAxisTitle="Toneladas de CO₂eq por habitante"
     title="Emisiones GEI por sector, por habitante (t CO₂eq por habitante)"
 />
-
-<DownloadCsvButton data={emisiones_sector} filename="spainfacts_emisiones_gei.csv" label="Descargar emisiones GEI (CSV)" />
 
 ---
 

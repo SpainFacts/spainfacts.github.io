@@ -1,7 +1,7 @@
 ---
 title: Electricity Generation Mix
 description: "Spain's electricity mix since 2007 according to Red Eléctrica: renewable share, the coal phase-out, emissions per kWh generated and electricity consumption per person."
-i18n_origen: 7cce8c387246
+i18n_origen: d283e5c0e445
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -9,7 +9,6 @@ og:
 <script>
     import KpiCard from '../../../../../../../src/lib/components/KpiCard.svelte';
     import Comparativa from '../../../../../../../src/lib/components/Comparativa.svelte';
-    import DownloadCsvButton from '../../../../../../../src/lib/components/DownloadCsvButton.svelte';
     import { formatNumber } from '../../../../../../../src/lib/utils.js';
 </script>
 
@@ -164,8 +163,6 @@ Renewables first exceeded half of generation in {hitos_renov[0]?.primer_anio_50}
     yAxisTitle="% of generation"
     title="Structure of electricity generation by technology"
 />
-
-<DownloadCsvButton data={mix_completo} filename="spainfacts_mix_electrico_detalle.csv" label="Download full mix data (CSV)" />
 
 ```sql cuota
 SELECT anio, 'Renovable' AS serie, cuota_renovable_pct AS pct FROM mother.clima_electricidad_anual
@@ -328,10 +325,6 @@ ORDER BY anio ASC, potencia_mw DESC
     yAxisTitle="MW installed"
     title="Installed capacity by technology (MW)"
 />
-
-<DownloadCsvButton data={potencia} filename="spainfacts_potencia_instalada.csv" label="Download installed capacity (CSV)" />
-
-<DownloadCsvButton data={elec} filename="spainfacts_electricidad_anual.csv" label="Download shares, emissions and demand by year (CSV)" />
 
 ---
 
