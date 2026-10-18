@@ -1,5 +1,5 @@
 ---
-i18n_origen: f730ced4988b
+i18n_origen: f0c00f57bf0b
 title: Transparencia
 description: "Como render contas as administracións españolas: obrigas de información dos concellos, portais de transparencia, decretos lei, indultos, orzamentos prorrogados e a posición de España nos índices internacionais de integridade, por Goberno e por partido."
 og:
@@ -143,28 +143,23 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Índices de percepción da corrupción, gobernanza, Estado de dereito e goberno aberto: onde está España respecto da UE e da OCDE e como cambiou con cada Goberno.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver a comparación →</span>
     </a>
-</Grid>
-
-## En construción
-
-Estas pezas da rendición de contas teñen datos públicos, pero aínda non están feitas porque as súas
-fontes non se publican en formatos doados de reutilizar. Cada páxina explica que mostrará e que falta.
-
-<Grid cols=2>
-    <a href="/gl/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
+    <a href="/gl/transparencia/contratacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📑</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Contratación pública</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Contratos menores, procedementos sen publicidade e contratos cun só licitador, por administración e partido.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Volume adxudicado, licitacións cun único ofertante, procedementos negociados sen publicidade, peso das pemes e repartición por administración (OIReScon).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver a contratación →</span>
     </a>
-    <a href="/gl/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvencións</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Canto se concede sen concorrencia competitiva (concesión directa e nominativas) e quen o concede.</p>
+    <a href="/gl/transparencia/subvenciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">💶</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvencións públicas</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Canto se concede en concorrencia competitiva fronte a concesión directa ou nominativa e que administracións concentran os fondos (BDNS / IGAE).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver as subvencións →</span>
     </a>
-    <a href="/gl/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construción</span>
+    <a href="/gl/transparencia/consejo-transparencia" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📨</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Reclamacións de acceso á información</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cantas reclamacións por información denegada resolve o Consello de Transparencia e a que ministerios afectan.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cantas reclamacións por información denegada resolve o Consello de Transparencia, en cantas lle dá a razón ao cidadán e que ministerios acumulan máis.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver as reclamacións →</span>
     </a>
 </Grid>
 

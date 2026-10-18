@@ -1,5 +1,5 @@
 ---
-i18n_origen: c247e40fe937
+i18n_origen: bb5195fbbe05
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -47,7 +47,7 @@ actual AS (
 antes AS (
     SELECT cod_mun, poblacion AS poblacion_antes
     FROM mother.poblacion_municipios
-    WHERE cod_prov = '${terr[0]?.cod}' AND anio = (SELECT anio - 9 FROM ultimo)
+    WHERE cod_prov = '${terr[0]?.cod}' AND anio = (SELECT min(anio) FROM mother.poblacion_municipios WHERE anio >= (SELECT anio - 10 FROM ultimo))
 )
 SELECT
     a.cod_mun, a.municipio, a.poblacion,

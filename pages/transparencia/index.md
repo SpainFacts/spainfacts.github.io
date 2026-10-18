@@ -142,28 +142,23 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Índices de percepción de la corrupción, gobernanza, Estado de derecho y gobierno abierto: dónde está España respecto a la UE y la OCDE y cómo ha cambiado con cada Gobierno.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver la comparación →</span>
     </a>
-</Grid>
-
-## En construcción
-
-Estas piezas de la rendición de cuentas tienen datos públicos, pero todavía no están hechas porque sus
-fuentes no se publican en formatos fáciles de reutilizar. Cada página explica qué mostrará y qué falta.
-
-<Grid cols=2>
-    <a href="/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcción</span>
+    <a href="/transparencia/contratacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📑</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Contratación pública</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Contratos menores, procedimientos sin publicidad y contratos con un solo licitador, por administración y partido.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Volumen adjudicado, licitaciones con un único ofertante, procedimientos negociados sin publicidad, peso de las pymes y reparto por administración (OIReScon).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver la contratación →</span>
     </a>
-    <a href="/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcción</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvenciones</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cuánto se concede sin concurrencia competitiva (concesión directa y nominativas) y quién lo concede.</p>
+    <a href="/transparencia/subvenciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">💶</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvenciones públicas</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cuánto se concede en concurrencia competitiva frente a concesión directa o nominativa y qué administraciones concentran los fondos (BDNS / IGAE).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver las subvenciones →</span>
     </a>
-    <a href="/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcción</span>
+    <a href="/transparencia/consejo-transparencia" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📨</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Reclamaciones de acceso a la información</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cuántas reclamaciones por información denegada resuelve el Consejo de Transparencia y a qué ministerios afectan.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Cuántas reclamaciones por información denegada resuelve el Consejo de Transparencia, en cuántas da la razón al ciudadano y qué ministerios acumulan más.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ver las reclamaciones →</span>
     </a>
 </Grid>
 

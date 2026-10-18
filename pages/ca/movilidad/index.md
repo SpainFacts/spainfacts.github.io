@@ -1,7 +1,7 @@
 ---
 title: Mobilitat
 description: "Mobilitat a Espanya: cotxes que es venen i circulen per tipus de motor, transició al cotxe elèctric, punts de recàrrega, viatgers de metro, autobús i tren, i passatgers dels aeroports."
-i18n_origen: 64e679ff2046
+i18n_origen: e6e352b921bd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,6 +40,13 @@ SELECT
     any_value((SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1)) AS poblacion
 FROM mother.movilidad_parque_provincia
 GROUP BY mes
+ORDER BY mes DESC
+```
+
+```sql parque_mensual
+SELECT mes, turismos_1000 AS valor
+FROM mother.movilidad_parque_resumen
+ORDER BY mes
 ```
 
 ```sql recarga
@@ -92,6 +99,7 @@ Com ens movem a Espanya: els cotxes que es compren i els que circulen, l'avenç 
         period="{formatCompact(parque[0]?.turismos, 1)} turismes · {formatNumber(parque[0]?.turismos_enchufables / parque[0]?.turismos / 0.01, 1)} % endollables · {parque[0]?.mes_texto}"
         source="DGT"
         href="/ca/movilidad/parque"
+        sparklineData={parque_mensual}
     />
     <KpiCard
         title="Punts de recàrrega públics"

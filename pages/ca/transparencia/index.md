@@ -1,7 +1,7 @@
 ---
 title: Transparència
 description: "Com reten comptes les administracions espanyoles: obligacions d'informació dels ajuntaments, portals de transparència, decrets llei, indults, pressupostos prorrogats i la posició d'Espanya en els índexs internacionals d'integritat, per Govern i per partit."
-i18n_origen: f730ced4988b
+i18n_origen: f0c00f57bf0b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -143,28 +143,23 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Índexs de percepció de la corrupció, governança, estat de dret i govern obert: on és Espanya respecte a la UE i l'OCDE i com ha canviat amb cada Govern.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Mostra la comparació →</span>
     </a>
-</Grid>
-
-## En construcció
-
-Aquestes peces del retiment de comptes tenen dades públiques, però encara no estan fetes perquè les seves
-fonts no es publiquen en formats fàcils de reutilitzar. Cada pàgina explica què mostrarà i què hi falta.
-
-<Grid cols=2>
-    <a href="/ca/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcció</span>
+    <a href="/ca/transparencia/contratacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📑</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Contractació pública</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Contractes menors, procediments sense publicitat i contractes amb un sol licitador, per administració i partit.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Volum adjudicat, licitacions amb un únic ofertant, procediments negociats sense publicitat, pes de les pimes i repartiment per administració (OIReScon).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Mostra la contractació →</span>
     </a>
-    <a href="/ca/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcció</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvencions</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quant es concedeix sense concurrència competitiva (concessió directa i nominatives) i qui ho concedeix.</p>
+    <a href="/ca/transparencia/subvenciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">💶</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Subvencions públiques</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quant es concedeix en concurrència competitiva enfront de concessió directa o nominativa i quines administracions concentren els fons (BDNS / IGAE).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Mostra les subvencions →</span>
     </a>
-    <a href="/ca/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 En construcció</span>
+    <a href="/ca/transparencia/consejo-transparencia" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📨</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Reclamacions d'accés a la informació</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quantes reclamacions per informació denegada resol el Consell de Transparència i a quins ministeris afecten.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Quantes reclamacions per informació denegada resol el Consell de Transparència, en quantes dóna la raó al ciutadà i quins ministeris n'acumulen més.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Mostra les reclamacions →</span>
     </a>
 </Grid>
 

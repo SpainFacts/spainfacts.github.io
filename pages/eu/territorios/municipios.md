@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: b298496c0c63
+i18n_origen: 266d2729eb74
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -85,7 +85,7 @@ WITH actual AS (
 ),
 antes AS (
     SELECT poblacion FROM mother.poblacion_municipios
-    WHERE cod_mun = '${inputs.municipio}' AND anio = (SELECT max(anio) - 9 FROM mother.poblacion_municipios)
+    WHERE cod_mun = '${inputs.municipio}' AND anio = (SELECT min(anio) FROM mother.poblacion_municipios WHERE anio >= (SELECT max(anio) - 10 FROM mother.poblacion_municipios))
 ),
 ranking AS (
     SELECT cod_mun, rank() OVER (ORDER BY poblacion DESC) AS puesto

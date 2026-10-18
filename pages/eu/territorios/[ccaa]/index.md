@@ -1,5 +1,5 @@
 ---
-i18n_origen: 76fb3cc56c0f
+i18n_origen: 87c02f93397e
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -88,7 +88,7 @@ actual AS (
 antes AS (
     SELECT cod_mun, poblacion AS poblacion_antes
     FROM mother.poblacion_municipios
-    WHERE cod_ccaa = '${terr[0]?.cod}' AND anio = (SELECT anio - 9 FROM ultimo)
+    WHERE cod_ccaa = '${terr[0]?.cod}' AND anio = (SELECT min(anio) FROM mother.poblacion_municipios WHERE anio >= (SELECT anio - 10 FROM ultimo))
 )
 SELECT
     a.cod_mun, a.municipio, p.nombre AS provincia, a.poblacion,

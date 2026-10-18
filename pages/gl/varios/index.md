@@ -1,14 +1,14 @@
 ---
-title: Varios
-description: "Contidos complementarios: todos os indicadores, explorador de mapas, observatorios públicos e datos abertos en España e noutros países."
+title: Explorar datos
+description: "Ferramentas e contidos transversais: todos os indicadores, explorador de mapas, comparativa con Europa e o mundo, observatorios públicos e datos abertos."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c9a30af5dadd
+i18n_origen: 50d9c5001d6d
 ---
 
-# Varios
+# 🧭 Explorar datos
 
-Consulta análises e recursos transversais que complementan os grandes temas de SpainFacts.
+Consulta comparativas internacionais, buscadores de series, mapas e recursos transversais que complementan os grandes temas de SpainFacts.
 
 <Grid cols=2>
     <a href="/gl/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">

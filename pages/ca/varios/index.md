@@ -1,14 +1,14 @@
 ---
-title: Altres
-description: "Continguts complementaris: tots els indicadors, explorador de mapes, observatoris públics i dades obertes a Espanya i en altres països."
+title: Explorar dades
+description: "Eines i continguts transversals: tots els indicadors, explorador de mapes, comparativa amb Europa i el món, observatoris públics i dades obertes."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c9a30af5dadd
+i18n_origen: 50d9c5001d6d
 ---
 
-# Altres
+# 🧭 Explorar dades
 
-Consulta anàlisis i recursos transversals que complementen els grans temes de SpainFacts.
+Consulta comparatives internacionals, cercadors de sèries, mapes i recursos transversals que complementen els grans temes de SpainFacts.
 
 <Grid cols=2>
     <a href="/ca/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">

@@ -1,7 +1,7 @@
 ---
 title: Gardentasuna
 description: "Nola ematen dituzten kontuak Espainiako administrazioek: udalen informazio-betebeharrak, gardentasun-atariak, lege-dekretuak, indultuak, luzatutako aurrekontuak eta Espainiak osotasun-indize internazionaletan duen lekua, Gobernuka eta alderdika."
-i18n_origen: f730ced4988b
+i18n_origen: f0c00f57bf0b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -146,30 +146,25 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Ustelkeriaren pertzepzioaren, gobernantzaren, zuzenbide-estatuaren eta gobernu irekiaren indizeak: non dagoen Espainia EBren eta ELGAren aldean eta nola aldatu den Gobernu bakoitzarekin.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ikusi alderaketa →</span>
     </a>
-</Grid>
-
-## Eraikitzen
-
-Kontu-ematearen pieza hauek datu publikoak badituzte, baina oraindik ez daude eginda, haien iturriak
-ez direlako erraz berrerabiltzeko moduko formatuetan argitaratzen. Orri bakoitzak azaltzen du zer
-erakutsiko duen eta zer falta den.
-
-<Grid cols=2>
-    <a href="/eu/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Eraikitzen</span>
+    <a href="/eu/transparencia/contratacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📑</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Kontratazio publikoa</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Kontratu txikiak, publizitaterik gabeko prozedurak eta lizitatzaile bakarreko kontratuak, administrazioka eta alderdika.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Kontratu txikiak, publizitaterik gabeko prozedurak eta lizitatzaile bakarreko kontratuak, administrazioka eta urteka (OIReScon).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ikusi kontratazioa →</span>
     </a>
-    <a href="/eu/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Eraikitzen</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Diru-laguntzak</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Norgehiagoka lehiarik gabe zenbat ematen den (zuzeneko emakida eta izendunak) eta nork ematen duen.</p>
+    <a href="/eu/transparencia/subvenciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">💶</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Diru-laguntza publikoak</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Norgehiagoka lehiarik gabe zenbat ematen den (zuzeneko emakida eta izendunak) eta nork ematen duen Diru-laguntzen Datu-base Nazionalean (BDNS).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ikusi diru-laguntzak →</span>
     </a>
-    <a href="/eu/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Eraikitzen</span>
+    <a href="/eu/transparencia/consejo-transparencia" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">🔍</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Informazioa eskuratzeko erreklamazioak</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Ukatutako informazioagatiko zenbat erreklamazio ebazten dituen Gardentasun Kontseiluak eta zer ministeriori eragiten dieten.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Ukatutako informazioagatiko zenbat erreklamazio ebazten dituen Gardentasun eta Gobernu Onaren Kontseiluak (CTBG) eta zer ministeriori eragiten dieten.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">Ikusi erreklamazioak →</span>
     </a>
 </Grid>
 
 Espainiako datu irekien iturriak [Datu irekiak Espainian](/eu/varios/datos-abiertos) orrian bilduta daude.
+

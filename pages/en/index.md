@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · The State of Spain in Official Data
 description: "Spain in official data: population, economy, public finances, energy, mobility, society and transparency, from the whole country down to each municipality. Independent and politically neutral."
-i18n_origen: d80e2a3839de
+i18n_origen: 8764114a80a4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -106,6 +106,7 @@ ORDER BY anio
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
+            <a href="/en/analisis" class="rounded-lg bg-blue-500/30 border border-blue-400/40 px-3 py-1.5 font-semibold text-white hover:bg-blue-500/40 no-underline"><span aria-hidden="true">📊</span> Data analysis</a>
             <a href="/en/territorios" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🗺️</span> Regions</a>
             <a href="/en/energia-clima/directo" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">⚡</span> Electricity now</a>
             <a href="/en/movilidad/marcas-y-modelos" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🚗</span> Best-selling cars</a>
@@ -136,6 +137,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor, 1)} %"
         period={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="in one year"
+        direction="positive-down"
         source="INE (EPA)"
         href="/en/economia/paro"
         sparklineData={metricas.filter(d => d.metrica_id === 'tasa_paro')}
@@ -145,6 +150,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor, 1)} %"
         period="Annual CPI · {ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.periodo_txt}"
+        change={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2).length === 2 ? (metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="vs prev. mo."
+        direction="positive-down"
         source="INE"
         href="/en/economia/ipc"
         sparklineData={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-60)}
@@ -154,6 +163,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor, 1)} % of GDP"
         period={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="in one year"
+        direction="positive-down"
         source="Eurostat / BdE"
         href="/en/cuentas-publicas"
         sparklineData={metricas.filter(d => d.metrica_id === 'deuda_publica_pib')}
@@ -163,6 +176,10 @@ ORDER BY anio
         value={renovables_30[0]?.cuota}
         formattedValue="{formatNumber(renovables_30[0]?.cuota / 0.01, 0)} %"
         period="of generation in the last 30 days"
+        change={renovables_mes.slice(-13).length === 13 ? (100 * (renovables_mes.slice(-1)[0].valor - renovables_mes.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="year-on-year"
+        direction="positive-up"
         source="REE"
         href="/en/energia-clima/mix-electrico"
         sparklineData={renovables_mes.slice(-36)}
@@ -171,7 +188,11 @@ ORDER BY anio
         title="Reservoir water reserves"
         value={embalses_hoy[0]?.pct_llenado}
         formattedValue="{formatNumber(embalses_hoy[0]?.pct_llenado, 1)} %"
-        period="{embalses_hoy[0]?.fecha_txt} · {embalses_hoy[0]?.dif_vs_media_10_anios > 0 ? '+' : ''}{formatNumber(embalses_hoy[0]?.dif_vs_media_10_anios, 1)} pp vs. 10-year average"
+        period="{embalses_hoy[0]?.fecha_txt}"
+        change={embalses_hoy[0]?.dif_vs_media_10_anios?.toFixed(1)}
+        changeUnit=" p.p."
+        changePeriod="vs 10-yr avg."
+        direction="positive-up"
         source="MITECO"
         href="/en/energia-clima/embalses"
         sparklineData={embalses}
@@ -181,6 +202,10 @@ ORDER BY anio
         value={enchufables.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(enchufables.slice(-1)[0]?.valor / 0.01, 1)} %"
         period="electric + plug-in hybrid · last month"
+        change={enchufables.slice(-13).length === 13 ? (100 * (enchufables.slice(-1)[0].valor - enchufables.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="in one year"
+        direction="positive-up"
         source="DGT"
         href="/en/movilidad/coche-electrico"
         sparklineData={enchufables}
@@ -190,6 +215,10 @@ ORDER BY anio
         value={vida.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(vida.slice(-1)[0]?.valor, 1)} years"
         period="at birth · {vida.slice(-1)[0]?.anio}"
+        change={vida.slice(-2).length === 2 ? (vida.slice(-1)[0].valor - vida.slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" yrs"
+        changePeriod="in one year"
+        direction="positive-up"
         source="INE / Eurostat"
         href="/en/sociedad/salud"
         sparklineData={vida}
@@ -360,6 +389,37 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Sources</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Where each figure comes from: the body, the official table, frequency, licence and methodology.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} documented datasets →</p>
+    </a>
+</div>
+
+## Data analysis and special reports
+
+Alongside our permanent topic hubs, we publish data investigations and cross-referenced reports on topical questions. [View all analysis →](/en/analisis)
+
+<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+    <a href="/en/varios/diputados-caseros" class="group rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-gradient-to-br from-blue-50/70 to-white dark:from-blue-950/30 dark:to-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-blue-100 dark:bg-blue-900/60 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:text-blue-200 mb-2">Parliament & Housing</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🏘️ How many MPs are landlords?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cross-referencing the 350 asset declarations in Congress with income tax statistics: who declares rental income or multiple properties by party.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Read investigation →</p>
+    </a>
+    <a href="/en/analisis/brecha-vivienda-salarios" class="group rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-gradient-to-br from-amber-50/70 to-white dark:from-amber-950/30 dark:to-gray-900 p-5 hover:border-amber-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2.5 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200 mb-2">Housing & Wages</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">🏠 The gap between housing and wages</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How many years of full gross salary it takes to buy a 90 m² flat and what share of pay goes on rent across Spain's autonomous communities.</p>
+        <p class="mt-3 text-sm font-semibold text-amber-700 dark:text-amber-400">Read analysis →</p>
+    </a>
+    <a href="/en/movilidad/flotas-e-impuestos" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-purple-100 dark:bg-purple-900/60 px-2.5 py-0.5 text-xs font-semibold text-purple-800 dark:text-purple-200 mb-2">Mobility & Taxation</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🚗 Who buys new cars and where do they pay tax?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Why four out of ten new passenger cars are registered by companies and why small villages concentrate thousands of fleet vehicles.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Read analysis →</p>
+    </a>
+    <a href="/en/analisis/revolucion-renovable" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-emerald-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-emerald-100 dark:bg-emerald-900/60 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 dark:text-emerald-200 mb-2">Energy & Transition</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">⚡ From coal to over 50 % renewable</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">How wind and solar PV deployment closed Spain's coal plants and cut CO₂ emissions per kilowatt-hour to a third.</p>
+        <p class="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-400">Read analysis →</p>
     </a>
 </div>
 

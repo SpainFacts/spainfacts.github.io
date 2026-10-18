@@ -1,14 +1,14 @@
 ---
-title: Miscellaneous
-description: "Supplementary content: all indicators, a map explorer, public observatories and open data in Spain and other countries."
+title: Explore data
+description: "Cross-cutting tools and content: all indicators, map explorer, European and global comparisons, public observatories and open data."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c9a30af5dadd
+i18n_origen: 50d9c5001d6d
 ---
 
-# Miscellaneous
+# 🧭 Explore data
 
-Cross-cutting analyses and resources that complement SpainFacts' main topics.
+International comparisons, indicator directories, maps and cross-cutting resources that complement SpainFacts' main topics.
 
 <Grid cols=2>
     <a href="/en/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">

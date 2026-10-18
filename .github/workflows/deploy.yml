@@ -113,6 +113,16 @@ jobs:
           key: vectores-catalogo-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: vectores-catalogo-
 
+      # Resultados de las consultas del prerender del deploy anterior (patches/@evidence-dev+universal-sql):
+      # la clave lleva el md5 de los parquets que usa cada consulta, así que solo se reutilizan
+      # los de tablas que no han cambiado
+      - name: Caché de consultas del prerender
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/consultas-prerender
+          key: consultas-prerender-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: consultas-prerender-
+
       - name: build
         env:
           BASE_PATH: '/'
@@ -120,11 +130,18 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=12288'
         run: |
           export SPAINFACTS_CACHE_VECTORES="$HOME/.cache/catalogo-vectores.json"
+          export SPAINFACTS_CACHE_CONSULTAS="$HOME/.cache/consultas-prerender"
+          mkdir -p "$SPAINFACTS_CACHE_CONSULTAS"
+          echo "Consultas en caché: $(find "$SPAINFACTS_CACHE_CONSULTAS" -name '*.arrow' | wc -l)"
+          touch "$RUNNER_TEMP/inicio-build"
           # Catálogo de tablas para el chat (/chat) y el servidor MCP (tools/mcp): no necesita
           # el sitio construido, así que se calcula a la vez que el build y se copia al final
           NODE_OPTIONS= node tools/chat/catalogo.mjs --salida "$RUNNER_TEMP/catalogo.json" > "$RUNNER_TEMP/catalogo.log" 2>&1 &
           CATALOGO=$!
           npm run build:strict
+          # Fuera los resultados que este build no ha usado (cada acierto renueva la fecha del fichero)
+          find "$SPAINFACTS_CACHE_CONSULTAS" -name '*.arrow' ! -newer "$RUNNER_TEMP/inicio-build" -delete
+          echo "Consultas guardadas para el próximo deploy: $(find "$SPAINFACTS_CACHE_CONSULTAS" -name '*.arrow' | wc -l)"
           if ! wait $CATALOGO; then cat "$RUNNER_TEMP/catalogo.log"; exit 1; fi
           cat "$RUNNER_TEMP/catalogo.log"
           mkdir -p build/chat && cp "$RUNNER_TEMP/catalogo.json" build/chat/catalogo.json

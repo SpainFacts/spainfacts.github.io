@@ -1,7 +1,7 @@
 ---
 title: Transparency
 description: "How Spanish public administrations are held to account: councils' reporting obligations, transparency portals, decree-laws, pardons, rolled-over budgets and Spain's position in international integrity indices, by government and by party."
-i18n_origen: f730ced4988b
+i18n_origen: f0c00f57bf0b
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -143,28 +143,23 @@ SELECT * FROM ${liquidaciones} ORDER BY anio DESC LIMIT 1
         <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Corruption perception, governance, rule of law and open government indices: where Spain stands relative to the EU and the OECD and how this has changed under each government.</p>
         <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See the comparison →</span>
     </a>
-</Grid>
-
-## Under construction
-
-These parts of accountability have public data, but are not built yet because their sources are not
-published in easily reusable formats. Each page explains what it will show and what is missing.
-
-<Grid cols=2>
-    <a href="/en/transparencia/contratacion" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
+    <a href="/en/transparencia/contratacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📑</span>
         <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Public procurement</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Minor contracts, procedures without publication and single-bidder contracts, by administration and party.</p>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">Awarded volume, single-bidder tenders, negotiated procedures without publicity, SME share and breakdown by administration (OIReScon).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See public procurement →</span>
     </a>
-    <a href="/en/transparencia/subvenciones" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Grants</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How much is awarded without competitive tendering (direct and nominative grants) and who awards it.</p>
+    <a href="/en/transparencia/subvenciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">💶</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Public subsidies</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How much is awarded through competitive calls versus direct or nominative grants and which administrations manage the funds (BDNS / IGAE).</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See subsidies →</span>
     </a>
-    <a href="/en/transparencia/consejo-transparencia" class="block rounded-xl border border-dashed border-amber-500 dark:border-amber-600 bg-amber-50/50 dark:bg-amber-950/20 p-6 hover:border-amber-600 transition-colors no-underline">
-        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200">🚧 Under construction</span>
-        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Freedom of information complaints</h3>
-        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How many complaints about information refused are resolved by the Council of Transparency and which ministries they concern.</p>
+    <a href="/en/transparencia/consejo-transparencia" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors no-underline">
+        <span class="text-3xl" aria-hidden="true">📨</span>
+        <h3 class="mt-3 text-lg font-bold text-gray-900 dark:text-white">Freedom of information appeals</h3>
+        <p class="mb-0 text-sm text-gray-600 dark:text-gray-400">How many appeals over refused information are resolved by the Transparency Council, how often the citizen wins and which ministries accumulate the most.</p>
+        <span class="mt-4 inline-block text-sm font-semibold text-blue-700 dark:text-blue-400">See the appeals →</span>
     </a>
 </Grid>
 

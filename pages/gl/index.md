@@ -1,7 +1,7 @@
 ---
 title: SpainFacts · O Estado de España en Datos Oficiais
 description: "España en datos oficiais: poboación, economía, contas públicas, enerxía, mobilidade, sociedade e transparencia, de España a cada municipio. Independente e sen nesgo partidista."
-i18n_origen: d80e2a3839de
+i18n_origen: 8764114a80a4
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -106,6 +106,7 @@ ORDER BY anio
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
+            <a href="/gl/analisis" class="rounded-lg bg-blue-500/30 border border-blue-400/40 px-3 py-1.5 font-semibold text-white hover:bg-blue-500/40 no-underline"><span aria-hidden="true">📊</span> Análise en datos</a>
             <a href="/gl/territorios" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🗺️</span> Territorios</a>
             <a href="/gl/energia-clima/directo" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">⚡</span> Electricidade agora</a>
             <a href="/gl/movilidad/marcas-y-modelos" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🚗</span> Coches máis vendidos</a>
@@ -136,6 +137,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor, 1)} %"
         period={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="nun ano"
+        direction="positive-down"
         source="INE (EPA)"
         href="/gl/economia/paro"
         sparklineData={metricas.filter(d => d.metrica_id === 'tasa_paro')}
@@ -145,6 +150,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor, 1)} %"
         period="IPC interanual · {ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.periodo_txt}"
+        change={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2).length === 2 ? (metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="vs mes ant."
+        direction="positive-down"
         source="INE"
         href="/gl/economia/ipc"
         sparklineData={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-60)}
@@ -154,6 +163,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor, 1)} % do PIB"
         period={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="nun ano"
+        direction="positive-down"
         source="Eurostat / BdE"
         href="/gl/cuentas-publicas"
         sparklineData={metricas.filter(d => d.metrica_id === 'deuda_publica_pib')}
@@ -163,6 +176,10 @@ ORDER BY anio
         value={renovables_30[0]?.cuota}
         formattedValue="{formatNumber(renovables_30[0]?.cuota / 0.01, 0)} %"
         period="da xeración dos últimos 30 días"
+        change={renovables_mes.slice(-13).length === 13 ? (100 * (renovables_mes.slice(-1)[0].valor - renovables_mes.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="interanual"
+        direction="positive-up"
         source="REE"
         href="/gl/energia-clima/mix-electrico"
         sparklineData={renovables_mes.slice(-36)}
@@ -171,7 +188,11 @@ ORDER BY anio
         title="Reserva de auga encorada"
         value={embalses_hoy[0]?.pct_llenado}
         formattedValue="{formatNumber(embalses_hoy[0]?.pct_llenado, 1)} %"
-        period="{embalses_hoy[0]?.fecha_txt} · {embalses_hoy[0]?.dif_vs_media_10_anios > 0 ? '+' : ''}{formatNumber(embalses_hoy[0]?.dif_vs_media_10_anios, 1)} pp fronte á media de 10 anos"
+        period="{embalses_hoy[0]?.fecha_txt}"
+        change={embalses_hoy[0]?.dif_vs_media_10_anios?.toFixed(1)}
+        changeUnit=" p.p."
+        changePeriod="vs media 10 anos"
+        direction="positive-up"
         source="MITECO"
         href="/gl/energia-clima/embalses"
         sparklineData={embalses}
@@ -181,6 +202,10 @@ ORDER BY anio
         value={enchufables.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(enchufables.slice(-1)[0]?.valor / 0.01, 1)} %"
         period="eléctricos + híbridos enchufables · último mes"
+        change={enchufables.slice(-13).length === 13 ? (100 * (enchufables.slice(-1)[0].valor - enchufables.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="nun ano"
+        direction="positive-up"
         source="DGT"
         href="/gl/movilidad/coche-electrico"
         sparklineData={enchufables}
@@ -190,6 +215,10 @@ ORDER BY anio
         value={vida.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(vida.slice(-1)[0]?.valor, 1)} anos"
         period="ao nacer · {vida.slice(-1)[0]?.anio}"
+        change={vida.slice(-2).length === 2 ? (vida.slice(-1)[0].valor - vida.slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" anos"
+        changePeriod="nun ano"
+        direction="positive-up"
         source="INE / Eurostat"
         href="/gl/sociedad/salud"
         sparklineData={vida}
@@ -360,6 +389,37 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Fontes</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">De onde sae cada dato: organismo, táboa oficial, frecuencia, licenza e metodoloxía.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} conxuntos de datos documentados →</p>
+    </a>
+</div>
+
+## Análise e reportaxes en datos
+
+Ademais dos grandes paneis permanentes, publicamos investigacións e cruzamentos especiais sobre cuestións de actualidade. [Ver todas as análises →](/gl/analisis)
+
+<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+    <a href="/gl/varios/diputados-caseros" class="group rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-gradient-to-br from-blue-50/70 to-white dark:from-blue-950/30 dark:to-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-blue-100 dark:bg-blue-900/60 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:text-blue-200 mb-2">Parlamento e Vivenda</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🏘️ Cantos deputados son caseiros?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cruzamento das 350 declaracións de bens do Congreso coas estatísticas do IRPF: quen declara rendas de alugueiro ou varias vivendas por partido.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Ler investigación →</p>
+    </a>
+    <a href="/gl/analisis/brecha-vivienda-salarios" class="group rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-gradient-to-br from-amber-50/70 to-white dark:from-amber-950/30 dark:to-gray-900 p-5 hover:border-amber-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2.5 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200 mb-2">Vivenda e Salarios</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">🏠 A fenda entre vivenda e salarios</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cantos anos de soldo íntegro custa mercar un piso de 90 m² e que parte do salario absorbe o alugueiro en cada comunidade autónoma.</p>
+        <p class="mt-3 text-sm font-semibold text-amber-700 dark:text-amber-400">Ler análise →</p>
+    </a>
+    <a href="/gl/movilidad/flotas-e-impuestos" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-purple-100 dark:bg-purple-900/60 px-2.5 py-0.5 text-xs font-semibold text-purple-800 dark:text-purple-200 mb-2">Mobilidade e Fiscalidade</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🚗 Quen merca os coches novos e onde tributan?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Por que catro de cada dez turismos novos os matriculan empresas e por que pequenas aldeas concentran miles de vehículos de frota.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Ler análise →</p>
+    </a>
+    <a href="/gl/analisis/revolucion-renovable" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-emerald-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-emerald-100 dark:bg-emerald-900/60 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 dark:text-emerald-200 mb-2">Enerxía e Transición</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">⚡ Do carbón a superar o 50 % renovable</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Como o despregamento eólico e fotovoltaico pechou as térmicas de carbón e reduciu a un terzo as emisións de CO₂ por cada kWh eléctrico.</p>
+        <p class="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-400">Ler análise →</p>
     </a>
 </div>
 

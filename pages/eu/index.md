@@ -3,7 +3,7 @@ title: SpainFacts · Espainiaren Egoera Datu Ofizialetan
 description: "Espainia datu ofizialetan: biztanleria, ekonomia, kontu publikoak, energia, mugikortasuna, gizartea eta gardentasuna, Espainia osotik udalerri bakoitzera. Independentea eta alderdi-joerarik gabea."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: d80e2a3839de
+i18n_origen: 8764114a80a4
 ---
 
 <script>
@@ -113,6 +113,7 @@ ORDER BY anio
         </p>
         <BuscadorInicio opciones={lista_municipios} />
         <div class="mt-5 flex flex-wrap gap-2 text-sm">
+            <a href="/eu/analisis" class="rounded-lg bg-blue-500/30 border border-blue-400/40 px-3 py-1.5 font-semibold text-white hover:bg-blue-500/40 no-underline"><span aria-hidden="true">📊</span> Datuen analisia</a>
             <a href="/eu/territorios" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🗺️</span> Lurraldeak</a>
             <a href="/eu/energia-clima/directo" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">⚡</span> Elektrizitatea orain</a>
             <a href="/eu/movilidad/marcas-y-modelos" class="rounded-lg bg-white/10 px-3 py-1.5 font-semibold text-white hover:bg-white/20 no-underline"><span aria-hidden="true">🚗</span> Gehien saltzen diren autoak</a>
@@ -143,6 +144,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.valor, 1)} %"
         period={ultimas_metricas.find(d => d.metrica_id === 'tasa_paro')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'tasa_paro').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="urtebetean"
+        direction="positive-down"
         source="INE (EPA)"
         href="/eu/economia/paro"
         sparklineData={metricas.filter(d => d.metrica_id === 'tasa_paro')}
@@ -152,6 +157,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor}
         formattedValue="{formatNumber(ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.valor, 1)} %"
         period="KPI, urte arteko aldaketa · {ultimas_metricas.find(d => d.metrica_id === 'ipc_variacion_anual')?.periodo_txt}"
+        change={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2).length === 2 ? (metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="vs aurreko hil."
+        direction="positive-down"
         source="INE"
         href="/eu/economia/ipc"
         sparklineData={metricas.filter(d => d.metrica_id === 'ipc_variacion_anual').slice(-60)}
@@ -161,6 +170,10 @@ ORDER BY anio
         value={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor}
         formattedValue="BPGaren {formatNumber(ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.valor, 1)} %"
         period={ultimas_metricas.find(d => d.metrica_id === 'deuda_publica_pib')?.periodo_txt}
+        change={metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5).length === 5 ? (metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-1)[0].valor - metricas.filter(d => d.metrica_id === 'deuda_publica_pib').slice(-5)[0].valor).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="urtebetean"
+        direction="positive-down"
         source="Eurostat / BdE"
         href="/eu/cuentas-publicas"
         sparklineData={metricas.filter(d => d.metrica_id === 'deuda_publica_pib')}
@@ -170,6 +183,10 @@ ORDER BY anio
         value={renovables_30[0]?.cuota}
         formattedValue="{formatNumber(renovables_30[0]?.cuota / 0.01, 0)} %"
         period="azken 30 egunetako sorkuntzarena"
+        change={renovables_mes.slice(-13).length === 13 ? (100 * (renovables_mes.slice(-1)[0].valor - renovables_mes.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="urte artean"
+        direction="positive-up"
         source="REE"
         href="/eu/energia-clima/mix-electrico"
         sparklineData={renovables_mes.slice(-36)}
@@ -178,7 +195,11 @@ ORDER BY anio
         title="Urtegietan bildutako ur-erreserba"
         value={embalses_hoy[0]?.pct_llenado}
         formattedValue="{formatNumber(embalses_hoy[0]?.pct_llenado, 1)} %"
-        period="{embalses_hoy[0]?.fecha_txt} · {embalses_hoy[0]?.dif_vs_media_10_anios > 0 ? '+' : ''}{formatNumber(embalses_hoy[0]?.dif_vs_media_10_anios, 1)} pp 10 urteko batez bestekoaren aldean"
+        period="{embalses_hoy[0]?.fecha_txt}"
+        change={embalses_hoy[0]?.dif_vs_media_10_anios?.toFixed(1)}
+        changeUnit=" p.p."
+        changePeriod="vs 10 urteko b.b."
+        direction="positive-up"
         source="MITECO"
         href="/eu/energia-clima/embalses"
         sparklineData={embalses}
@@ -188,6 +209,10 @@ ORDER BY anio
         value={enchufables.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(enchufables.slice(-1)[0]?.valor / 0.01, 1)} %"
         period="elektrikoak + hibrido entxufagarriak · azken hilabetea"
+        change={enchufables.slice(-13).length === 13 ? (100 * (enchufables.slice(-1)[0].valor - enchufables.slice(-13)[0].valor)).toFixed(1) : null}
+        changeUnit=" p.p."
+        changePeriod="urtebetean"
+        direction="positive-up"
         source="DGT"
         href="/eu/movilidad/coche-electrico"
         sparklineData={enchufables}
@@ -197,6 +222,10 @@ ORDER BY anio
         value={vida.slice(-1)[0]?.valor}
         formattedValue="{formatNumber(vida.slice(-1)[0]?.valor, 1)} urte"
         period="jaiotzean · {vida.slice(-1)[0]?.anio}"
+        change={vida.slice(-2).length === 2 ? (vida.slice(-1)[0].valor - vida.slice(-2)[0].valor).toFixed(1) : null}
+        changeUnit=" urte"
+        changePeriod="urtebetean"
+        direction="positive-up"
         source="INE / Eurostat"
         href="/eu/sociedad/salud"
         sparklineData={vida}
@@ -367,6 +396,37 @@ SELECT
         <p class="text-lg font-bold text-gray-900 dark:text-white">Iturriak</p>
         <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Nondik ateratzen den datu bakoitza: erakundea, taula ofiziala, maiztasuna, lizentzia eta metodologia.</p>
         <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">{cabeceras[0]?.fuentes} dokumentatutako datu-multzo →</p>
+    </a>
+</div>
+
+## Datuetan oinarritutako analisiak eta erreportajeak
+
+Panel iraunkor handiez gain, gaurkotasuneko gaiei buruzko ikerketak eta gurutzaketa bereziak argitaratzen ditugu. [Ikusi analisi guztiak →](/eu/analisis)
+
+<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+    <a href="/eu/varios/diputados-caseros" class="group rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-gradient-to-br from-blue-50/70 to-white dark:from-blue-950/30 dark:to-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-blue-100 dark:bg-blue-900/60 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:text-blue-200 mb-2">Parlamentua eta Etxebizitza</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🏘️ Zenbat diputatu dira etxejabe errentatzaileak?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Kongresuko 350 ondasun-aitorpenak PFEZaren estatistikekin gurutzatuta: nork aitortzen dituen alokairu-errentak edo hainbat etxebizitza alderdika.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Irakurri ikerketa →</p>
+    </a>
+    <a href="/eu/analisis/brecha-vivienda-salarios" class="group rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-gradient-to-br from-amber-50/70 to-white dark:from-amber-950/30 dark:to-gray-900 p-5 hover:border-amber-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-amber-100 dark:bg-amber-900/60 px-2.5 py-0.5 text-xs font-semibold text-amber-800 dark:text-amber-200 mb-2">Etxebizitza eta Soldatak</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">🏠 Etxebizitzaren eta soldaten arteko arrakala</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Zenbat urteko soldata osoa behar den 90 m²-ko etxebizitza bat erosteko eta soldataren zein zati xurgatzen duen alokairuak autonomia-erkidego bakoitzean.</p>
+        <p class="mt-3 text-sm font-semibold text-amber-700 dark:text-amber-400">Irakurri analisia →</p>
+    </a>
+    <a href="/eu/movilidad/flotas-e-impuestos" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-purple-100 dark:bg-purple-900/60 px-2.5 py-0.5 text-xs font-semibold text-purple-800 dark:text-purple-200 mb-2">Mugikortasuna eta Fiskalitatea</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">🚗 Nork erosten ditu auto berriak eta non ordaintzen dituzte zergak?</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Zergatik matrikulatzen dituzten enpresek hamar auto berritatik lau eta zergatik biltzen dituzten herri txikiek milaka flota-ibilgailu.</p>
+        <p class="mt-3 text-sm font-semibold text-blue-600 dark:text-blue-400">Irakurri analisia →</p>
+    </a>
+    <a href="/eu/analisis/revolucion-renovable" class="group rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-emerald-400 hover:shadow-md transition no-underline">
+        <span class="inline-block rounded-full bg-emerald-100 dark:bg-emerald-900/60 px-2.5 py-0.5 text-xs font-semibold text-emerald-800 dark:text-emerald-200 mb-2">Energia eta Trantsizioa</span>
+        <p class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">⚡ Ikatzetik % 50 berriztagarria gainditzera</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Nola itxi dituen hedapen eoliko eta fotovoltaikoak ikatz-zentral termikoak eta heren batera murriztu kWh bakoitzeko CO₂ isuriak.</p>
+        <p class="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-400">Irakurri analisia →</p>
     </a>
 </div>
 

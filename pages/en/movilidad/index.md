@@ -1,7 +1,7 @@
 ---
 title: Mobility
 description: "Mobility in Spain: cars sold and on the road by engine type, the shift to electric cars, charging points, passengers on metro, bus and rail, and airport passengers."
-i18n_origen: 64e679ff2046
+i18n_origen: e6e352b921bd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,6 +40,13 @@ SELECT
     any_value((SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1)) AS poblacion
 FROM mother.movilidad_parque_provincia
 GROUP BY mes
+ORDER BY mes DESC
+```
+
+```sql parque_mensual
+SELECT mes, turismos_1000 AS valor
+FROM mother.movilidad_parque_resumen
+ORDER BY mes
 ```
 
 ```sql recarga
@@ -92,6 +99,7 @@ How people get around in Spain: the cars being bought and the ones on the road, 
         period="{formatCompact(parque[0]?.turismos, 1)} cars · {formatNumber(parque[0]?.turismos_enchufables / parque[0]?.turismos / 0.01, 1)}% plug-in · {parque[0]?.mes_texto}"
         source="DGT"
         href="/en/movilidad/parque"
+        sparklineData={parque_mensual}
     />
     <KpiCard
         title="Public charging points"

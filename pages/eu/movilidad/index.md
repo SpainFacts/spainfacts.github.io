@@ -1,7 +1,7 @@
 ---
 title: Mugikortasuna
 description: "Mugikortasuna Espainian: motor motaren arabera saltzen eta zirkulatzen duten autoak, auto elektrikorako trantsizioa, karga-puntuak, metro, autobus eta treneko bidaiariak, eta aireportuetako bidaiariak."
-i18n_origen: 64e679ff2046
+i18n_origen: e6e352b921bd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,6 +40,13 @@ SELECT
     any_value((SELECT poblacion FROM mother.poblacion_territorios WHERE nivel = 'pais' AND sexo = 'Total' ORDER BY anio DESC LIMIT 1)) AS poblacion
 FROM mother.movilidad_parque_provincia
 GROUP BY mes
+ORDER BY mes DESC
+```
+
+```sql parque_mensual
+SELECT mes, turismos_1000 AS valor
+FROM mother.movilidad_parque_resumen
+ORDER BY mes
 ```
 
 ```sql recarga
@@ -92,6 +99,7 @@ Nola mugitzen garen Espainian: erosten diren autoak eta zirkulatzen dutenak, aut
         period="{formatCompact(parque[0]?.turismos, 1)} turismo · {formatNumber(parque[0]?.turismos_enchufables / parque[0]?.turismos / 0.01, 1)} % entxufagarriak · {parque[0]?.mes_texto}"
         source="DGT"
         href="/eu/movilidad/parque"
+        sparklineData={parque_mensual}
     />
     <KpiCard
         title="Karga-puntu publikoak"

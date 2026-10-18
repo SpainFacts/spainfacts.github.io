@@ -26,6 +26,7 @@
     import "../app.css";
     import { EvidenceDefaultLayout } from "@evidence-dev/core-components";
     import Header from "../../../../src/lib/components/Header.svelte";
+    import Footer from "../../../../src/lib/components/Footer.svelte";
     import { page } from "$app/stores";
     import { IDIOMAS, idiomaDeRuta, rutaEnIdioma, t } from "../../../../src/lib/i18n.js";
     import { CLOUDFLARE_ANALITICA_TOKEN } from "../../../../src/lib/config/analitica.js";
@@ -83,3 +84,5 @@
 >
     <slot slot="content" />
 </EvidenceDefaultLayout>
+
+<Footer />

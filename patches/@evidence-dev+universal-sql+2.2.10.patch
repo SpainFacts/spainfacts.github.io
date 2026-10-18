@@ -1,7 +1,14 @@
 diff --git a/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js b/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
-index 9fdf279..51d7fd4 100644
+index 9fdf279..058f263 100644
 --- a/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
 +++ b/node_modules/@evidence-dev/universal-sql/src/cache-duckdb.js
+@@ -1,5 +1,5 @@
+ import { createHash } from 'node:crypto';
+-import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
++import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync, utimesSync } from 'fs';
+ import { createRequire } from 'module';
+ import { dirname } from 'path';
+ 
 @@ -57,6 +57,27 @@ function hash(buffer) {
   */
  const sql_string_cache = new Map();
@@ -44,24 +51,87 @@ index 9fdf279..51d7fd4 100644
  		const ipc_table = tableToIPC(data);
  		ipc_table_hash = hash(ipc_table);
  
-@@ -93,7 +115,7 @@ export function cache_for_hash(
+@@ -93,7 +115,8 @@ export function cache_for_hash(
  				`${prerender_path}/api/prerendered_queries/${ipc_table_hash}.arrow`,
  				ipc_table
  			);
 -			sql_string_cache.set(sql_string, ipc_table_hash);
 +			sql_string_cache.set(clave, ipc_table_hash);
++			guardar_persistente(clave, ipc_table);
  		}
  	}
  
-@@ -178,6 +200,7 @@ export function get_all_page_queries(route_hash, additional_hash) {
+@@ -178,6 +201,69 @@ export function get_all_page_queries(route_hash, additional_hash) {
   * @returns {import("apache-arrow").Table | null}
   */
  export function get_arrow_if_sql_already_run(sql) {
 -	if (!sql_string_cache.has(sql)) return null;
 -	return tableFromIPC(get_cache_for_hash(sql_string_cache.get(sql)));
 +	const clave = cuerpo(sql);
-+	if (!sql_string_cache.has(clave)) return null;
-+	return tableFromIPC(get_cache_for_hash(sql_string_cache.get(clave)));
++	if (sql_string_cache.has(clave)) return tableFromIPC(get_cache_for_hash(sql_string_cache.get(clave)));
++	return leer_persistente(clave);
++}
++
++/*
++	SpainFacts (patch-package): caché de resultados que sobrevive entre builds. En un deploy de solo
++	código los parquets no cambian, así que casi todas las consultas del prerender dan lo mismo que
++	en el anterior. Solo actúa con SPAINFACTS_CACHE_CONSULTAS (carpeta; en el deploy va en la caché
++	de Actions). La clave es el cuerpo normalizado del SQL + el md5 de cada parquet cuyo nombre de
++	tabla aparece como palabra en la consulta + la versión de DuckDB: si cambian los datos de una
++	tabla, sus consultas se recalculan. Las que dependen de la hora o del azar no se guardan. Cada
++	acierto renueva la fecha del fichero, así el deploy borra después los que este build no ha usado.
++*/
++const DIR_PERSISTENTE = process.env.SPAINFACTS_CACHE_CONSULTAS;
++// package.json por ruta: el campo exports de duckdb-wasm no deja pedirlo con require
++const VERSION_PERSISTENTE = `v1|duckdb-wasm ${
++	JSON.parse(readFileSync(`${dirname(require1.resolve('@duckdb/duckdb-wasm'))}/../package.json`, 'utf8')).version
++}`;
++const NO_DETERMINISTA = /\b(now|current_date|current_time|current_timestamp|today|random|uuid|gen_random_uuid|setseed)\b/i;
++
++/** @type {Map<string, string[]> | null} nombre de tabla en minúsculas -> md5 de sus parquets */
++let huellas = null;
++function huella_tablas() {
++	if (huellas) return huellas;
++	huellas = new Map();
++	const base = 'static/data';
++	if (!existsSync(base)) return huellas;
++	for (const fuente of readdirSync(base, { withFileTypes: true })) {
++		if (!fuente.isDirectory()) continue;
++		for (const tabla of readdirSync(`${base}/${fuente.name}`, { withFileTypes: true })) {
++			if (!tabla.isDirectory()) continue;
++			const fichero = `${base}/${fuente.name}/${tabla.name}/${tabla.name}.parquet`;
++			if (!existsSync(fichero)) continue;
++			const nombre = tabla.name.toLowerCase();
++			huellas.set(nombre, [...(huellas.get(nombre) ?? []), `${fuente.name}.${nombre}=${hash(readFileSync(fichero))}`]);
++		}
++	}
++	return huellas;
++}
++
++/** @param {string} clave cuerpo normalizado del SQL @returns {string | null} ruta del resultado */
++function ruta_persistente(clave) {
++	if (!DIR_PERSISTENTE || NO_DETERMINISTA.test(clave)) return null;
++	const tablas = huella_tablas();
++	// Sin parquets a la vista no hay huella de los datos: mejor no usar la caché
++	if (!tablas.size) return null;
++	const usadas = [...new Set(clave.toLowerCase().match(/[a-z_][a-z0-9_]*/g) ?? [])]
++		.filter((p) => tablas.has(p))
++		.sort()
++		.flatMap((p) => tablas.get(p));
++	return `${DIR_PERSISTENTE}/${hash(`${VERSION_PERSISTENTE}\n${usadas.join('\n')}\n${clave}`)}.arrow`;
++}
++
++function leer_persistente(clave) {
++	const ruta = ruta_persistente(clave);
++	if (!ruta || !existsSync(ruta)) return null;
++	const ahora = new Date();
++	utimesSync(ruta, ahora, ahora);
++	return tableFromIPC(readFileSync(ruta));
++}
++
++function guardar_persistente(clave, ipc_table) {
++	const ruta = ruta_persistente(clave);
++	if (ruta && !existsSync(ruta)) writeToPossiblyNonexistentFile(ruta, ipc_table);
  }
 diff --git a/node_modules/@evidence-dev/universal-sql/src/client-duckdb/browser.js b/node_modules/@evidence-dev/universal-sql/src/client-duckdb/browser.js
 index 27c5b43..00d837d 100644

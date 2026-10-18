@@ -1,14 +1,14 @@
 ---
-title: Bestelakoak
-description: "Eduki osagarriak: adierazle guztiak, mapen arakatzailea, behatoki publikoak eta datu irekiak Espainian eta beste herrialdeetan."
+title: Datuak arakatu
+description: "Zeharkako tresnak eta edukiak: adierazle guztiak, mapen arakatzailea, Europarekiko eta munduarekiko konparazioa, behatoki publikoak eta datu irekiak."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: c9a30af5dadd
+i18n_origen: 50d9c5001d6d
 ---
 
-# Bestelakoak
+# 🧭 Datuak arakatu
 
-Kontsultatu SpainFactsen gai handiak osatzen dituzten zeharkako azterketak eta baliabideak.
+Kontsultatu SpainFactsen gai handiak osatzen dituzten nazioarteko konparazioak, adierazleen bilatzaileak, mapak eta zeharkako baliabideak.
 
 <Grid cols=2>
     <a href="/eu/varios/espana-en-europa" class="block rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-950/30 p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors no-underline">
