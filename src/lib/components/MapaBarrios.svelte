@@ -209,17 +209,19 @@
             if (!ok(la) || !ok(lo)) continue;
             centros.push([la, lo]);
             const c = colorFila(r);
+            // Sin borde y casi tocándose: con celdas pequeñas (250 m) el borde tapaba el color
             const p = L.circle([la, lo], {
                 renderer: lienzo,
-                radius: 0.45 * (Number(celdaKm) || 1) * 1000,
-                color: '#ffffff',
-                weight: 0.6,
+                radius: (Number(celdaKm) < 0.5 ? 0.55 : 0.45) * (Number(celdaKm) || 1) * 1000,
+                stroke: false,
+                color: '#111827',
+                weight: 2,
                 fillColor: c ?? '#9ca3af',
-                fillOpacity: c ? 0.78 : 0.3
+                fillOpacity: c ? 0.8 : 0.3
             });
             p.bindTooltip(() => textoTooltip(r, ''), { sticky: true, direction: 'top', className: 'mapa-barrios-tooltip' });
-            p.on('mouseover', () => p.setStyle({ weight: 2, color: '#111827' }));
-            p.on('mouseout', () => p.setStyle({ weight: 0.6, color: '#ffffff' }));
+            p.on('mouseover', () => p.setStyle({ stroke: true }));
+            p.on('mouseout', () => p.setStyle({ stroke: false }));
             p.addTo(capa);
         }
         capa.addTo(mapa);

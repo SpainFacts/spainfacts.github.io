@@ -27,12 +27,12 @@ models:
       - name: cod_pais
         tests: [not_null, unique]
   - name: suelos_rejilla
-    description: "Celdas de España con superficie agraria (CORINE 2018) para el mapa de puntos en tres escalas: escala espana (celdas de 10 km con 5 km² agrarios o más), ccaa (5 km) y provincia (2 km); celda_km = lado. Centro en lon/lat, provincia y comunidad mayoritarias, textura, grupo de textura, grupo WRB y cultivo dominantes y medias de arcilla (%), pH y materia orgánica (%) de SoilGrids. Filtrar siempre una escala."
+    description: "Celdas con superficie agraria (CORINE 2018) para el mapa de puntos en cuatro escalas: escala espana (celdas de 10 km con 5 km² agrarios o más), ccaa (5 km) y provincia (2 km) en España, y europa (25 km, con 25 km² agrarios o más) con su región NUTS 2 (nuts2) y país (cod_pais_eurostat); celda_km = lado. Centro en lon/lat, provincia y comunidad mayoritarias, textura, grupo de textura, grupo WRB y cultivo dominantes y medias de arcilla (%), pH y materia orgánica (%) de SoilGrids. Filtrar siempre una escala."
     columns:
       - name: celda
         tests: [not_null, unique]
   - name: suelos_municipio
-    description: "Suelo agrario de cada municipio por cultivo ('Toda la superficie agraria' o un cultivo de CORINE 2018): km² del término, km² agrarios y % agrario (muestras de 250 m), % de la superficie agraria del municipio, medias de SoilGrids (arcilla, limo, arena, pH, carbono, materia orgánica), textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes, arcillosas, arenosas, básicas, ácidas y calcisoles. enlace = ficha del municipio. Los municipios pequeños dependen de pocas celdas de 1 km de SoilGrids."
+    description: "Suelo agrario de cada municipio por cultivo ('Toda la superficie agraria' o un cultivo de CORINE 2018): km² del término, km² agrarios y % agrario con celdas de 250 m, % de la superficie agraria del municipio, medias de SoilGrids a 250 m (arcilla, limo, arena, pH, carbono, materia orgánica), textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes, arcillosas, arenosas, básicas, ácidas y calcisoles. enlace = ficha del municipio."
     columns:
       - name: cod_mun
         tests: [not_null]
@@ -41,8 +41,30 @@ models:
           - not_null:
               config:
                 severity: warn
-  - name: suelos_puntos_municipio
-    description: "Trozo de cada celda de 1 km dentro de cada municipio: centro de la celda, km² agrarios del trozo, cultivo con más superficie y suelo de la celda de SoilGrids (textura, grupo de textura, grupo WRB, clase de pH, arcilla, pH, materia orgánica). Sumando superficie_agraria_km2 por clase sale el reparto del suelo agrario del municipio; una celda que cruza la linde aparece en los dos municipios."
+  - name: suelos_municipio_clases
+    description: "Reparto de la superficie agraria de cada municipio por textura del USDA (dimension textura), grupo de suelo WRB (wrb) y banda de pH (ph), con las celdas de 250 m: km² y % de la superficie agraria con dato de esa dimensión. El mapa de celdas de 250 m de cada municipio está en /suelos250/<cod_mun>.json (tools/geo/suelos250.py)."
     columns:
       - name: cod_mun
         tests: [not_null]
+      - name: dimension
+        tests:
+          - accepted_values:
+              values: ['textura', 'wrb', 'ph']
+  - name: suelos_lucas
+    description: "Suelo medido en laboratorio (LUCAS 2018 TOPSOIL, JRC/ESDAC, 0-20 cm) por país (nivel pais, cod ISO), comunidad autónoma (nivel ccaa, cod INE) y región europea (nivel nuts2, NUTS 2016) y uso (Cultivos, Prados, Agraria): medianas de materia orgánica (%), carbono orgánico (g/kg), pH, carbonatos, nitrógeno, fósforo y potasio; % de muestras con menos de 1 % y 2 % de materia orgánica, básicas (pH ≥ 7,5), ácidas (pH < 6,5) y calizas (carbonatos ≥ 50 g/kg); puesto del país (1 = menos materia orgánica) y muestras. Contraste del modelo SoilGrids."
+    columns:
+      - name: nombre
+        tests: [not_null]
+  - name: suelos_erosion
+    description: "Erosión del suelo por el agua (JRC, modelo RUSLE, Eurostat aei_pr_soiler) en la superficie agraria con pastos naturales, por año (2000, 2010, 2016, 2023): t/ha y año de media, % de superficie con erosión moderada o grave (5 t/ha o más) y grave (más de 10), superficie y toneladas. nivel pais (cod ISO), nuts2 (Europa), ccaa y provincia (España; las islas se suman en su provincia)."
+    columns:
+      - name: nivel
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pais', 'nuts2', 'ccaa', 'provincia']
+  - name: suelos_regiones
+    description: "Suelo agrario de cada región NUTS 2 (2021) de Europa con el mismo método que España (SoilGrids sobre CORINE 2018): % agrario, arcilla, pH, materia orgánica, % tierras fuertes y básicas, textura y tipo de suelo dominantes; erosión estimada del último año (t/ha y % moderada o grave) y lo medido por LUCAS 2018 en la región con 10 muestras o más (materia orgánica, % < 2 %, pH, % con señales de erosión y con cárcavas)."
+    columns:
+      - name: nuts2
+        tests: [not_null, unique]

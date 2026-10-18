@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: e5765c8d5cf0
+i18n_origen: b298496c0c63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,7 +11,7 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura, celdasMunicipio } from '../../../../../../../src/lib/suelos.js';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { page as paginaActual } from '$app/stores';
@@ -19,6 +19,13 @@ og:
     $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
     $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
     $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
+    // Celdas de 250 m del municipio (fichero estático, ver tools/geo/suelos250.py)
+    let celdas = [];
+    $: cargarCeldas(suelo_toda?.cod_mun);
+    function cargarCeldas(cod) {
+        if (!cod) { celdas = []; return; }
+        celdasMunicipio(cod).then((f) => { if (suelo_toda?.cod_mun === cod) celdas = f; });
+    }
 </script>
 
 ```sql lista_municipios
@@ -779,17 +786,10 @@ WHERE cultivo = 'Toda la superficie agraria'
     />
 </Grid>
 
-```sql suelo_puntos
-SELECT celda, 1 AS celda_km, lon, lat, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
-    arcilla_pct, ph, materia_organica_pct
-FROM mother.suelos_puntos_municipio
-WHERE cod_mun = '${inputs.municipio}'
-```
-
-{#if suelo_puntos.length > 0}
+{#if celdas.length > 0}
 
 <MapaBarrios
-    data={puntosPorTextura(suelo_puntos, idioma)}
+    data={puntosPorTextura(celdas, idioma)}
     lat=lat
     long=lon
     value=categoria
@@ -797,7 +797,7 @@ WHERE cod_mun = '${inputs.municipio}'
     legendType=categorical
     geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
     filtroGeo={{cod_mun: suelo_toda.cod_mun}}
-    celdaKm={1}
+    celdaKm={0.25}
     height={420}
     tooltip={[
         {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},
@@ -805,12 +805,11 @@ WHERE cod_mun = '${inputs.municipio}'
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'materia_organica_pct', title: 'Organic matter (%)', fmt: 'num1'},
         {id: 'wrb_txt', title: 'Soil type'},
-        {id: 'cultivo_txt', title: 'Main crop'},
-        {id: 'superficie_agraria_km2', title: 'Farmland km² in the cell', fmt: 'num2'}
+        {id: 'cultivo_txt', title: 'Main crop'}
     ]}
 />
 
-<p class="text-xs text-gray-500">Each dot is the part of the municipality within a 1 × 1 km cell with farmland, coloured by its texture. For pH, organic matter, soil type or crop, see <a href="/en/territorios/suelos?m={suelo_toda.cod_mun}">the farm soils map</a>.</p>
+<p class="text-xs text-gray-500">Each dot is a 250 × 250 m cell with farmland, coloured by its texture. For pH, organic matter, soil type or crop, see <a href="/en/territorios/suelos?m={suelo_toda.cod_mun}">the farm soils map</a>.</p>
 
 {/if}
 
@@ -834,7 +833,7 @@ WHERE cod_mun = '${inputs.municipio}'
 
 {/if}
 
-<p class="text-xs text-gray-500">Topsoil (0-30 cm) from the SoilGrids model (ISRIC), in 1 km cells, over the farmland of the CORINE Land Cover 2018 map. In small municipalities the figure comes from very few cells: it gives a rough idea, but it is no substitute for a soil test of the field. Comparison with the rest of Spain and Europe in <a href="/en/territorios/suelos">farm soils</a>.</p>
+<p class="text-xs text-gray-500">Topsoil (0-30 cm) from the SoilGrids model (ISRIC), in 250 m cells, over the farmland of the CORINE Land Cover 2018 map. In small municipalities the figure comes from very few cells: it gives a rough idea, but it is no substitute for a soil test of the field. Comparison with the rest of Spain and Europe in <a href="/en/territorios/suelos">farm soils</a>.</p>
 
 {/if}
 

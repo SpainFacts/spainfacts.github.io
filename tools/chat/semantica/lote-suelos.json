@@ -376,7 +376,7 @@
       }
     ],
     "filtros": [],
-    "notas": "Superficie agraria de CORINE 2018 muestreada cada 250 m dentro del término y suelo de SoilGrids a 1 km: en municipios pequeños sale de muy pocas celdas. Un municipio sin superficie agraria tiene superficie_agraria_km2 = 0 y medias NULL."
+    "notas": "Superficie agraria de CORINE 2018 y suelo de SoilGrids en cada celda de 250 m dentro del término (la resolución original del modelo). Un municipio sin superficie agraria tiene superficie_agraria_km2 = 0 y medias NULL."
   },
   {
     "tabla": "suelos_rejilla",
@@ -435,38 +435,27 @@
     "notas": "Tabla técnica del mapa de puntos (coordenadas de cada celda) en tres escalas: filtrar siempre una escala. Para preguntas por territorio usar suelos_territorio o suelos_municipio."
   },
   {
-    "tabla": "suelos_puntos_municipio",
-    "usar": false,
-    "tema": "Celdas de 1 km dentro de cada municipio con su superficie agraria, cultivo y suelo, para el mapa de puntos de un municipio",
+    "tabla": "suelos_municipio_clases",
+    "usar": true,
+    "tema": "Reparto del suelo agrario de cada municipio por textura (arcilloso, franco, arenoso...), tipo de suelo y pH",
     "preguntas": [
-      "¿Cómo se reparte el suelo agrario dentro de mi municipio?",
-      "¿Dónde están las tierras más arcillosas de Écija?"
+      "¿Qué parte del suelo agrario de Écija es franco-arcillosa?",
+      "¿Cuántos km² de vertisoles tiene mi municipio?",
+      "¿Qué porcentaje de la tierra de cultivo de mi pueblo es caliza?"
     ],
     "medidas": [
       {
-        "columna": "superficie_agraria_km2",
-        "nombre": "superficie agraria del trozo de celda",
-        "unidad": "km²",
-        "tipo": "nivel",
+        "columna": "pct",
+        "nombre": "porcentaje de la superficie agraria del municipio con esa clase de suelo",
+        "unidad": "%",
+        "tipo": "porcentaje",
         "principal": true
       },
       {
-        "columna": "ph",
-        "nombre": "pH de la celda",
-        "unidad": "pH",
-        "tipo": "media"
-      },
-      {
-        "columna": "materia_organica_pct",
-        "nombre": "materia orgánica de la celda",
-        "unidad": "%",
-        "tipo": "media"
-      },
-      {
-        "columna": "arcilla_pct",
-        "nombre": "arcilla de la celda",
-        "unidad": "%",
-        "tipo": "media"
+        "columna": "superficie_km2",
+        "nombre": "superficie agraria con esa clase de suelo",
+        "unidad": "km²",
+        "tipo": "nivel"
       }
     ],
     "tiempo": null,
@@ -479,8 +468,267 @@
       "nombre": null,
       "espana": null
     },
+    "dimensiones": [
+      {
+        "columna": "dimension",
+        "nombre": "qué se clasifica (textura = 12 clases del USDA, wrb = tipo de suelo, ph = bandas de pH)",
+        "total": null
+      },
+      {
+        "columna": "clase",
+        "nombre": "clase de suelo (Franca, Franco-arcillosa, Vertisoles, Básico (7,5-8,5)...)",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Filtrar siempre una sola dimension: los porcentajes suman 100 dentro de cada municipio y dimensión. Celdas de 250 m (CORINE 2018 + SoilGrids)."
+  },
+  {
+    "tabla": "suelos_lucas",
+    "usar": true,
+    "tema": "Suelo agrario medido en laboratorio (muestras LUCAS 2018) en cada país europeo y en cada comunidad autónoma: materia orgánica, pH, carbonatos y nutrientes",
+    "preguntas": [
+      "¿Cuánta materia orgánica tienen de verdad las tierras de cultivo de España?",
+      "¿Qué país de Europa tiene menos materia orgánica en sus tierras de cultivo?",
+      "¿Qué porcentaje de las tierras de cultivo de Andalucía tiene menos del 2 % de materia orgánica?",
+      "¿Son calizos los suelos de cultivo de Murcia?"
+    ],
+    "medidas": [
+      {
+        "columna": "materia_organica_pct",
+        "nombre": "materia orgánica medida (mediana de las muestras)",
+        "unidad": "%",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "pct_mo_menos_2",
+        "nombre": "porcentaje de muestras con menos del 2 % de materia orgánica",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_mo_menos_1",
+        "nombre": "porcentaje de muestras con menos del 1 % de materia orgánica",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "ph",
+        "nombre": "pH medido (mediana)",
+        "unidad": "pH",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_basico",
+        "nombre": "porcentaje de muestras básicas (pH de 7,5 o más)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "pct_calizo",
+        "nombre": "porcentaje de muestras calizas (50 g/kg de carbonatos o más)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "carbono_g_kg",
+        "nombre": "carbono orgánico medido (mediana)",
+        "unidad": "g/kg",
+        "tipo": "media"
+      },
+      {
+        "columna": "nitrogeno_g_kg",
+        "nombre": "nitrógeno (mediana)",
+        "unidad": "g/kg",
+        "tipo": "media"
+      },
+      {
+        "columna": "fosforo_mg_kg",
+        "nombre": "fósforo (mediana)",
+        "unidad": "mg/kg",
+        "tipo": "media"
+      },
+      {
+        "columna": "potasio_mg_kg",
+        "nombre": "potasio (mediana)",
+        "unidad": "mg/kg",
+        "tipo": "media"
+      },
+      {
+        "columna": "muestras",
+        "nombre": "número de muestras",
+        "unidad": "muestras",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero",
+        "ue",
+        "ccaa"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "uso",
+        "nombre": "uso del suelo (Cultivos, Prados o Agraria = los dos)",
+        "total": "Agraria",
+        "defecto": "Cultivos"
+      }
+    ],
+    "filtros": [],
+    "notas": "Muestras de laboratorio de 2018 (0-20 cm), no un modelo: más fiable que SoilGrids para la materia orgánica, pero con pocas muestras por comunidad (mira muestras). Sin Canarias. Medianas."
+  },
+  {
+    "tabla": "suelos_erosion",
+    "usar": true,
+    "tema": "Erosión del suelo agrario por la lluvia: toneladas de suelo que se pierden por hectárea y año y parte de la superficie con erosión moderada o grave, por país, región europea, comunidad y provincia, desde 2000",
+    "preguntas": [
+      "¿Cuánta tierra pierde España por erosión?",
+      "¿Qué provincia tiene más erosión del suelo?",
+      "¿Ha aumentado la erosión del suelo en Andalucía desde 2000?",
+      "¿Hay más erosión en España que en Francia?"
+    ],
+    "medidas": [
+      {
+        "columna": "pct_moderada_grave",
+        "nombre": "porcentaje de la superficie agraria con erosión moderada o grave (más de 5 t/ha y año)",
+        "unidad": "%",
+        "tipo": "porcentaje",
+        "principal": true
+      },
+      {
+        "columna": "erosion_t_ha",
+        "nombre": "pérdida media de suelo por erosión",
+        "unidad": "t/ha y año",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_grave",
+        "nombre": "porcentaje de la superficie agraria con erosión grave (más de 10 t/ha y año)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "toneladas",
+        "nombre": "toneladas de suelo perdidas al año",
+        "unidad": "t",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "superficie_km2",
+        "nombre": "superficie agraria y de pastos naturales",
+        "unidad": "km²",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais",
+        "pais_extranjero",
+        "ue",
+        "ccaa",
+        "provincia"
+      ],
+      "nivel": "nivel",
+      "codigo": "cod",
+      "nombre": "nombre",
+      "espana": {
+        "columna": "cod",
+        "valor": "ES"
+      }
+    },
     "dimensiones": [],
     "filtros": [],
-    "notas": "Tabla técnica del mapa de un municipio: para el suelo de un municipio usar suelos_municipio. Sumar superficie_agraria_km2 por textura, wrb o ph_clase da el reparto del municipio."
+    "notas": "Modelo RUSLE del JRC publicado por Eurostat (aei_pr_soiler) solo para 2000, 2010, 2016 y 2023: no es una medida, es una estimación. nivel nuts2 = regiones europeas. Superficie agraria con pastos naturales."
+  },
+  {
+    "tabla": "suelos_regiones",
+    "usar": true,
+    "tema": "Suelo agrario de cada región europea (NUTS 2): materia orgánica, pH, tierras fuertes, erosión y lo medido por LUCAS, para comparar regiones de distintos países",
+    "preguntas": [
+      "¿Qué región de Europa tiene menos materia orgánica en el suelo?",
+      "¿Se parece el suelo de Andalucía al del sur de Italia?",
+      "¿Qué regiones europeas tienen más erosión?"
+    ],
+    "medidas": [
+      {
+        "columna": "materia_organica_pct",
+        "nombre": "materia orgánica media del suelo agrario (modelo SoilGrids)",
+        "unidad": "%",
+        "tipo": "media",
+        "principal": true
+      },
+      {
+        "columna": "lucas_materia_organica_pct",
+        "nombre": "materia orgánica medida en laboratorio (LUCAS 2018, mediana)",
+        "unidad": "%",
+        "tipo": "media"
+      },
+      {
+        "columna": "ph",
+        "nombre": "pH medio del suelo agrario",
+        "unidad": "pH",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_fuertes",
+        "nombre": "porcentaje de tierras fuertes (franco-arcillosas y arcillosas)",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "erosion_t_ha",
+        "nombre": "pérdida media de suelo por erosión (último año)",
+        "unidad": "t/ha y año",
+        "tipo": "media"
+      },
+      {
+        "columna": "pct_erosion_moderada_grave",
+        "nombre": "porcentaje de la superficie agraria con erosión moderada o grave",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "superficie_agraria_km2",
+        "nombre": "superficie agraria",
+        "unidad": "km²",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": null,
+    "territorio": {
+      "niveles": [
+        "region_extranjera"
+      ],
+      "nivel": null,
+      "codigo": "nuts2",
+      "nombre": "nombre",
+      "espana": null
+    },
+    "dimensiones": [
+      {
+        "columna": "pais",
+        "nombre": "país de la región",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Regiones NUTS 2 de 2021; lo de LUCAS solo donde hay 10 muestras o más (NUTS 2016). Mismo método que España para el modelo."
   }
 ]

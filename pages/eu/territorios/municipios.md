@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: e5765c8d5cf0
+i18n_origen: b298496c0c63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,7 +11,7 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura, celdasMunicipio } from '../../../../../../../src/lib/suelos.js';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { page as paginaActual } from '$app/stores';
@@ -19,6 +19,13 @@ og:
     $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
     $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
     $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
+    // Celdas de 250 m del municipio (fichero estático, ver tools/geo/suelos250.py)
+    let celdas = [];
+    $: cargarCeldas(suelo_toda?.cod_mun);
+    function cargarCeldas(cod) {
+        if (!cod) { celdas = []; return; }
+        celdasMunicipio(cod).then((f) => { if (suelo_toda?.cod_mun === cod) celdas = f; });
+    }
     // Urteei euskal atzizkia eransten die (2021eko, 2023ko, 1979tik...)
     const urte = (n, s) => (n == null || n === '' ? '' : n + ([1, 5, 10, 15].includes(Number(n) % 20) ? 'e' : '') + s);
     // Datuetatik gaztelaniaz datozen datak euskaratzen ditu («mayo de 2024» → «2024ko maiatza»)
@@ -791,17 +798,10 @@ Udal-mugartearen {formatNumber(suelo_toda.pct_agraria, 0)} % nekazaritza-azalera
     />
 </Grid>
 
-```sql suelo_puntos
-SELECT celda, 1 AS celda_km, lon, lat, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
-    arcilla_pct, ph, materia_organica_pct
-FROM mother.suelos_puntos_municipio
-WHERE cod_mun = '${inputs.municipio}'
-```
-
-{#if suelo_puntos.length > 0}
+{#if celdas.length > 0}
 
 <MapaBarrios
-    data={puntosPorTextura(suelo_puntos, idioma)}
+    data={puntosPorTextura(celdas, idioma)}
     lat=lat
     long=lon
     value=categoria
@@ -809,7 +809,7 @@ WHERE cod_mun = '${inputs.municipio}'
     legendType=categorical
     geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
     filtroGeo={{cod_mun: suelo_toda.cod_mun}}
-    celdaKm={1}
+    celdaKm={0.25}
     height={420}
     tooltip={[
         {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},
@@ -817,12 +817,11 @@ WHERE cod_mun = '${inputs.municipio}'
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'materia_organica_pct', title: 'Materia organikoa (%)', fmt: 'num1'},
         {id: 'wrb_txt', title: 'Lurzoru mota'},
-        {id: 'cultivo_txt', title: 'Labore nagusia'},
-        {id: 'superficie_agraria_km2', title: 'Nekazaritza-km² gelaxkan', fmt: 'num2'}
+        {id: 'cultivo_txt', title: 'Labore nagusia'}
     ]}
 />
 
-<p class="text-xs text-gray-500">Puntu bakoitza nekazaritza-azalera duen 1 × 1 km-ko gelaxka baten udal-mugarteko zatia da, bere testuraren arabera koloreztatuta. pHaren, materia organikoaren, lurzoru motaren edo laborearen arabera, ikusi <a href="/eu/territorios/suelos?m={suelo_toda.cod_mun}">nekazaritza-lurzoruen mapa</a>.</p>
+<p class="text-xs text-gray-500">Puntu bakoitza nekazaritza-azalera duen 250 × 250 m-ko gelaxka bat da, bere testuraren arabera koloreztatuta. pHaren, materia organikoaren, lurzoru motaren edo laborearen arabera, ikusi <a href="/eu/territorios/suelos?m={suelo_toda.cod_mun}">nekazaritza-lurzoruen mapa</a>.</p>
 
 {/if}
 
@@ -846,7 +845,7 @@ WHERE cod_mun = '${inputs.municipio}'
 
 {/if}
 
-<p class="text-xs text-gray-500">SoilGrids ereduaren (ISRIC) goiko geruza landua (0-30 cm), 1 km-ko gelaxkekin, CORINE Land Cover 2018 maparen nekazaritza-azaleraren gainean. Udalerri txikietan zifra gelaxka gutxi batzuetatik ateratzen da: ideia bat egiteko balio du, ez du lursailaren lurzoru-analisirik ordezten. Espainiako gainerakoekin eta Europarekin alderaketa: <a href="/eu/territorios/suelos">nekazaritza-lurzoruak</a>.</p>
+<p class="text-xs text-gray-500">SoilGrids ereduaren (ISRIC) goiko geruza landua (0-30 cm), 250 m-ko gelaxkekin, CORINE Land Cover 2018 maparen nekazaritza-azaleraren gainean. Udalerri txikietan zifra gelaxka gutxi batzuetatik ateratzen da: ideia bat egiteko balio du, ez du lursailaren lurzoru-analisirik ordezten. Espainiako gainerakoekin eta Europarekin alderaketa: <a href="/eu/territorios/suelos">nekazaritza-lurzoruak</a>.</p>
 
 {/if}
 

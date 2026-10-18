@@ -1,0 +1,18 @@
+version: 2
+
+seeds:
+  - name: nuts_espana
+    description: >
+      Regiones NUTS 2 (comunidades) y NUTS 3 (provincias; en Baleares y Canarias, islas o grupos
+      de islas) de España (versiones 2016 y 2021, iguales en España) con el código INE de su
+      comunidad (nivel ccaa) o provincia (nivel provincia). Varias NUTS 3 insulares van a la
+      misma provincia: hay que sumar, no tomar una fila.
+    config:
+      column_types:
+        nuts: varchar
+        nivel_nuts: varchar
+        nivel: varchar
+        cod: varchar
+    columns:
+      - name: nuts
+        tests: [not_null, unique]

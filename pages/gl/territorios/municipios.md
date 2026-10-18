@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: e5765c8d5cf0
+i18n_origen: b298496c0c63
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -11,7 +11,7 @@ og:
     import BuscadorMunicipio from '../../../../../../../src/lib/components/BuscadorMunicipio.svelte';
     import MapaBarrios from '../../../../../../../src/lib/components/MapaBarrios.svelte';
     import { formatNumber, formatCompact } from '../../../../../../../src/lib/utils.js';
-    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura } from '../../../../../../../src/lib/suelos.js';
+    import { etiquetaSuelo, etiquetasSuelo, puntosPorTextura, celdasMunicipio } from '../../../../../../../src/lib/suelos.js';
     import MapaEspana from '../../../../../../../src/lib/components/MapaEspana.svelte';
     import { idiomaDeRuta } from '../../../../../../../src/lib/i18n.js';
     import { page as paginaActual } from '$app/stores';
@@ -19,6 +19,13 @@ og:
     $: suelo_toda = Array.from(suelo_mun ?? []).find((d) => d.cultivo === 'Toda la superficie agraria');
     $: suelo_prov = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'provincia');
     $: suelo_esp = Array.from(suelo_ref ?? []).find((d) => d.nivel === 'pais');
+    // Celdas de 250 m del municipio (fichero estático, ver tools/geo/suelos250.py)
+    let celdas = [];
+    $: cargarCeldas(suelo_toda?.cod_mun);
+    function cargarCeldas(cod) {
+        if (!cod) { celdas = []; return; }
+        celdasMunicipio(cod).then((f) => { if (suelo_toda?.cod_mun === cod) celdas = f; });
+    }
 </script>
 
 ```sql lista_municipios
@@ -779,17 +786,10 @@ O {formatNumber(suelo_toda.pct_agraria, 0)} % do termo municipal é superficie a
     />
 </Grid>
 
-```sql suelo_puntos
-SELECT celda, 1 AS celda_km, lon, lat, superficie_agraria_km2, textura, textura_grupo, wrb, cultivo,
-    arcilla_pct, ph, materia_organica_pct
-FROM mother.suelos_puntos_municipio
-WHERE cod_mun = '${inputs.municipio}'
-```
-
-{#if suelo_puntos.length > 0}
+{#if celdas.length > 0}
 
 <MapaBarrios
-    data={puntosPorTextura(suelo_puntos, idioma)}
+    data={puntosPorTextura(celdas, idioma)}
     lat=lat
     long=lon
     value=categoria
@@ -797,7 +797,7 @@ WHERE cod_mun = '${inputs.municipio}'
     legendType=categorical
     geoJsonUrl="/geo/municipios/{suelo_toda.cod_ccaa}.geojson"
     filtroGeo={{cod_mun: suelo_toda.cod_mun}}
-    celdaKm={1}
+    celdaKm={0.25}
     height={420}
     tooltip={[
         {id: 'textura_txt', showColumnName: false, valueClass: 'font-semibold'},
@@ -805,12 +805,11 @@ WHERE cod_mun = '${inputs.municipio}'
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
         {id: 'wrb_txt', title: 'Tipo de solo'},
-        {id: 'cultivo_txt', title: 'Cultivo principal'},
-        {id: 'superficie_agraria_km2', title: 'Km² agrarios na cela', fmt: 'num2'}
+        {id: 'cultivo_txt', title: 'Cultivo principal'}
     ]}
 />
 
-<p class="text-xs text-gray-500">Cada punto é a parte do termo municipal dunha cela de 1 × 1 km con superficie agraria, coloreada pola súa textura. Por pH, materia orgánica, tipo de solo ou cultivo, en <a href="/gl/territorios/suelos?m={suelo_toda.cod_mun}">o mapa de solos agrarios</a>.</p>
+<p class="text-xs text-gray-500">Cada punto é unha cela de 250 × 250 m con superficie agraria, coloreada pola súa textura. Por pH, materia orgánica, tipo de solo ou cultivo, en <a href="/gl/territorios/suelos?m={suelo_toda.cod_mun}">o mapa de solos agrarios</a>.</p>
 
 {/if}
 
@@ -834,7 +833,7 @@ WHERE cod_mun = '${inputs.municipio}'
 
 {/if}
 
-<p class="text-xs text-gray-500">Capa arable (0-30 cm) do modelo SoilGrids (ISRIC), con celas de 1 km, sobre a superficie agraria do mapa CORINE Land Cover 2018. Nos municipios pequenos a cifra sae de moi poucas celas: serve para facerse unha idea, non substitúe unha análise de solo da parcela. Comparación co resto de España e Europa en <a href="/gl/territorios/suelos">solos agrarios</a>.</p>
+<p class="text-xs text-gray-500">Capa arable (0-30 cm) do modelo SoilGrids (ISRIC), con celas de 250 m, sobre a superficie agraria do mapa CORINE Land Cover 2018. Nos municipios pequenos a cifra sae de moi poucas celas: serve para facerse unha idea, non substitúe unha análise de solo da parcela. Comparación co resto de España e Europa en <a href="/gl/territorios/suelos">solos agrarios</a>.</p>
 
 {/if}
 

@@ -376,3 +376,55 @@ export function puntosPorTextura(filas, idioma = 'es') {
         cultivo_txt: etiquetaSuelo('CULTIVO', d.cultivo, idioma)
     })).filter((d) => d.textura_grupo);
 }
+
+// ------------------------------------------------------------------ celdas de 250 m de un municipio
+// Mismo orden que TEXTURAS, WRB y CULTIVOS de ingestion/suelos.py (los ficheros guardan índices)
+const TEXTURAS = ['Arenosa', 'Arenoso-franca', 'Franco-arenosa', 'Franca', 'Franco-limosa', 'Limosa',
+    'Franco-arcillo-arenosa', 'Franco-arcillosa', 'Franco-arcillo-limosa', 'Arcillo-arenosa', 'Arcillo-limosa', 'Arcillosa'];
+const GRUPOS = ['Arenosa (ligera)', 'Franca (media)', 'Franco-arcillosa', 'Arcillosa (pesada)'];
+const WRB = ['Acrisoles', 'Albeluvisoles', 'Alisoles', 'Andosoles', 'Arenosoles', 'Calcisoles', 'Cambisoles',
+    'Chernozems', 'Criosoles', 'Durisoles', 'Ferralsoles', 'Fluvisoles', 'Gleysoles', 'Gipsisoles', 'Histosoles',
+    'Kastanozems', 'Leptosoles', 'Lixisoles', 'Luvisoles', 'Nitisoles', 'Phaeozems', 'Planosoles', 'Plintosoles',
+    'Podzoles', 'Regosoles', 'Solonchaks', 'Solonetz', 'Stagnosoles', 'Umbrisoles', 'Vertisoles'];
+const CULTIVOS = ['Secano', 'Regadío', 'Arrozal', 'Viñedo', 'Frutales', 'Olivar', 'Prados', 'Mosaico de cultivos', 'Dehesa'];
+
+const cacheCeldas = new Map();
+
+// Celdas de 250 m con superficie agraria de un municipio (fichero /suelos250/<cod>.json que escribe
+// tools/geo/suelos250.py): filas con lat, lon, celda_km = 0,25 y las mismas columnas que el mapa de
+// puntos (textura, textura_grupo, wrb, cultivo, ph, materia_organica_pct, arcilla_pct). [] si no hay.
+export async function celdasMunicipio(cod) {
+    if (!cod || typeof fetch === 'undefined') return [];
+    if (cacheCeldas.has(cod)) return cacheCeldas.get(cod);
+    let filas = [];
+    try {
+        const r = await fetch(`/suelos250/${cod}.json`);
+        if (r.ok) {
+            const j = await r.json();
+            const bin = Uint8Array.from(atob(j.d), (c) => c.charCodeAt(0));
+            const dv = new DataView(bin.buffer);
+            const [lon0, lonC, lonF, lat0, latC, latF] = j.a;
+            for (let o = 0; o + 10 <= bin.length; o += 10) {
+                const c = dv.getUint16(o, true), f = dv.getUint16(o + 2, true);
+                const t = bin[o + 4], w = bin[o + 5], k = bin[o + 6], ph = bin[o + 7], mo = bin[o + 8], ar = bin[o + 9];
+                filas.push({
+                    lon: lon0 + lonC * c + lonF * f,
+                    lat: lat0 + latC * c + latF * f,
+                    celda_km: j.paso / 1000,
+                    superficie_agraria_km2: (j.paso / 1000) ** 2,
+                    textura: t === 255 ? null : TEXTURAS[t],
+                    textura_grupo: t === 255 ? null : GRUPOS[Math.floor(t / 3)],
+                    wrb: w === 255 ? null : WRB[w],
+                    cultivo: CULTIVOS[k] ?? null,
+                    ph: ph === 0 ? null : ph / 20,
+                    materia_organica_pct: mo === 255 ? null : mo / 10,
+                    arcilla_pct: ar === 255 ? null : ar
+                });
+            }
+        }
+    } catch (e) {
+        filas = [];
+    }
+    cacheCeldas.set(cod, filas);
+    return filas;
+}

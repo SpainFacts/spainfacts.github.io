@@ -12,6 +12,10 @@ sources:
       - name: suelos_rejilla
         description: "Celdas de España con superficie agraria en tres escalas (escala espana = 10 km y 5 km² agrarios o más, ccaa = 5 km, provincia = 2 km; celda_km): centro (lon, lat), provincia y comunidad mayoritarias, km² agrarios, textura, grupo de textura, grupo WRB y cultivo dominantes, y medias de arcilla, pH y materia orgánica."
       - name: suelos_municipio
-        description: "Por municipio (cod_mun INE) y cultivo: km² del término y km² agrarios (muestras de 250 m de CORINE dentro del término de static/geo/municipios.geojson), medias de SoilGrids de la celda de 1 km de cada muestra, textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes (franco-arcillosas y arcillosas), arcillosas, arenosas, básicas, ácidas y calcisoles."
-      - name: suelos_puntos_municipio
-        description: "Trozo de cada celda de 1 km de la rejilla que cae dentro de cada municipio (cod_mun): centro de la celda (lon, lat), km² agrarios del trozo (muestras de 250 m de CORINE), cultivo con más muestras y suelo de la celda de SoilGrids (textura, grupo de textura, grupo WRB, clase de pH, arcilla, pH, materia orgánica)."
+        description: "Por municipio (cod_mun INE) y cultivo: km² del término y km² agrarios y medias de SoilGrids con las celdas de 250 m dentro del término (static/geo/municipios.geojson; CORINE 2018 y SoilGrids a su resolución original), textura, grupo de textura y grupo WRB dominantes y % de tierras fuertes (franco-arcillosas y arcillosas), arcillosas, arenosas, básicas, ácidas y calcisoles."
+      - name: suelos_municipio_clases
+        description: "Km² agrarios de cada municipio (cod_mun) por dimensión (textura = 12 clases del USDA, wrb = grupo de suelo, ph = 5 bandas), clase y orden, con las celdas de 250 m (CORINE 2018 y SoilGrids a su resolución original)."
+      - name: suelos_regiones
+        description: "Regiones NUTS 2 (versión 2021, GISCO) de Europa con datos: código, nombre y país (código Eurostat). Son el ámbito nuts2 de suelos_medias y suelos_clases y la región de las celdas de 25 km (escala europa) de suelos_rejilla."
+      - name: suelos_erosion
+        description: "Erosión del suelo por el agua estimada por el JRC (modelo RUSLE) de Eurostat aei_pr_soiler, en formato largo: geo (país, NUTS 2 o NUTS 3), nivel, año (2000, 2010, 2016, 2023), cubierta (CLC2X23 = zonas agrarias sin pastos, CLC2_321 = agrarias y pastos naturales), grado (TOTAL, MOD, SEV, MOD_SEV), unidad (T, T_HA, HA, KM2, PC) y valor."

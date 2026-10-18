@@ -8,6 +8,7 @@ og:
 <script>
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import MapaBarrios from '../../../../../../src/lib/components/MapaBarrios.svelte';
+    import { celdasMunicipio } from '../../../../../../src/lib/suelos.js';
     import KpiCard from '../../../../../../src/lib/components/KpiCard.svelte';
     import FiltroTerritorio from '../../../../../../src/lib/components/FiltroTerritorio.svelte';
     import BotonesUrl from '../../../../../../src/lib/components/BotonesUrl.svelte';
@@ -112,6 +113,21 @@ og:
         { value: 'pct_agraria', label: '% de superficie agraria' }
     ];
     const ORDEN_TEXTURA = Object.keys(TEXTURA);
+
+    // Mapa de Europa: capa del mapa de puntos y medida del mapa de regiones (con parámetro en la URL)
+    const CAPAS_EU = [
+        { value: 'textura', label: 'Textura' },
+        { value: 'ph', label: 'pH' },
+        { value: 'mo', label: 'Materia orgánica' }
+    ];
+    const MEDIDAS_EU = [
+        { value: 'materia_organica_pct', label: 'Materia orgánica (modelo)' },
+        { value: 'lucas_materia_organica_pct', label: 'Materia orgánica medida (LUCAS)' },
+        { value: 'ph', label: 'pH' },
+        { value: 'pct_fuertes', label: '% de tierras fuertes' },
+        { value: 'erosion_t_ha', label: 'Erosión (t/ha y año)' },
+        { value: 'pct_erosion_moderada_grave', label: '% con erosión moderada o grave' }
+    ];
     // Reparto de la superficie de cada cultivo en los cuatro grupos de textura a partir de los %
     function gruposPorCultivo(q) {
         return filas(q).filter((d) => d.pct_fuertes !== null && d.pct_fuertes !== undefined).flatMap((d) => {
@@ -126,8 +142,18 @@ og:
         });
     }
     // GeoJSON y filtro de polígonos de los mapas según el territorio elegido
-    const geoDe = (t) => (!t || t.nivel === 'pais' ? undefined : `/geo/municipios/${t.nivel === 'ccaa' ? t.cod : t.cod_ccaa}.geojson`);
+    const geoDe = (t) => {
+        const ccaa = t?.nivel === 'ccaa' ? t.cod : t?.cod_ccaa;
+        return !t || t.nivel === 'pais' || !ccaa ? undefined : `/geo/municipios/${ccaa}.geojson`;
+    };
     const filtroDe = (t) => (t?.nivel === 'provincia' ? { cod_prov: t.cod } : t?.nivel === 'municipio' ? { cod_mun: t.cod } : undefined);
+    // Celdas de 250 m del municipio elegido (fichero estático, ver tools/geo/suelos250.py)
+    let celdas = [];
+    $: cargarCeldas(terr?.[0]?.nivel === 'municipio' ? terr[0].cod : null);
+    function cargarCeldas(cod) {
+        if (!cod) { celdas = []; return; }
+        celdasMunicipio(cod).then((f) => { if (terr?.[0]?.cod === cod) celdas = f; });
+    }
 </script>
 
 ```sql lista_territorios
@@ -193,18 +219,9 @@ SELECT c.dimension, c.clase, c.pct
 FROM mother.suelos_clases c, f
 WHERE c.nivel = f.nivel AND c.cod = f.cod AND c.cultivo = 'Toda la superficie agraria' AND f.nivel <> 'municipio'
 UNION ALL
-SELECT dimension, clase, 100.0 * sum(km2) / sum(sum(km2)) OVER (PARTITION BY dimension) AS pct
-FROM (
-    SELECT 'textura' AS dimension, p.textura AS clase, p.superficie_agraria_km2 AS km2 FROM mother.suelos_puntos_municipio p, f
-    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.textura IS NOT NULL
-    UNION ALL
-    SELECT 'wrb', p.wrb, p.superficie_agraria_km2 FROM mother.suelos_puntos_municipio p, f
-    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.wrb IS NOT NULL
-    UNION ALL
-    SELECT 'ph', p.ph_clase, p.superficie_agraria_km2 FROM mother.suelos_puntos_municipio p, f
-    WHERE f.nivel = 'municipio' AND p.cod_mun = f.cod AND p.ph_clase IS NOT NULL
-)
-GROUP BY dimension, clase
+SELECT c.dimension, c.clase, c.pct
+FROM mother.suelos_municipio_clases c, f
+WHERE f.nivel = 'municipio' AND c.cod_mun = f.cod
 ```
 
 {#if filas(terr).length > 0}
@@ -240,7 +257,7 @@ GROUP BY dimension, clase
         title="Materia orgánica media"
         value={terr[0]?.materia_organica_pct}
         formattedValue="{formatNumber(terr[0]?.materia_organica_pct, 1)} %"
-        period="{terr[0]?.nivel === 'pais' ? 'UE: ' + formatNumber(europa_resumen[0]?.mo_ue, 1) + ' % · España, ' + formatNumber(europa_resumen[0]?.puesto_mo, 0) + '.ª con menos de ' + formatNumber(europa_resumen[0]?.paises, 0) + ' países' : 'España: ' + formatNumber(espana[0]?.materia_organica_pct, 1) + ' %'} · tipo de suelo: {et(WRB, terr[0]?.wrb_dominante)}"
+        period="{terr[0]?.nivel === 'pais' ? 'UE: ' + formatNumber(europa_resumen[0]?.mo_ue, 1) + ' % · España, ' + formatNumber(europa_resumen[0]?.puesto_mo, 0) + '.ª con menos de ' + formatNumber(europa_resumen[0]?.paises, 0) + ' países' : 'España: ' + formatNumber(espana[0]?.materia_organica_pct, 1) + ' %'} · tipo de suelo: {et(WRB, terr[0]?.wrb_dominante)}{filas(lucas_terr).length ? ' · LUCAS: ' + formatNumber(lucas_terr[0]?.materia_organica_pct, 1) + ' %' : ''}"
         direction="neutral"
         source="SoilGrids (ISRIC)"
     />
@@ -264,22 +281,16 @@ FROM mother.suelos_rejilla r, f
 WHERE (f.nivel = 'pais' AND r.escala = 'espana')
     OR (f.nivel = 'ccaa' AND r.escala = 'ccaa' AND r.cod_ccaa = f.cod)
     OR (f.nivel = 'provincia' AND r.escala = 'provincia' AND r.cod_prov = f.cod)
-UNION ALL
-SELECT p.celda, 1, p.lon, p.lat, m.municipio, p.superficie_agraria_km2, p.textura, p.textura_grupo, p.wrb,
-    p.cultivo, p.arcilla_pct, p.ph, p.materia_organica_pct
-FROM mother.suelos_puntos_municipio p
-JOIN mother.suelos_municipio m ON m.cod_mun = p.cod_mun AND m.cultivo = 'Toda la superficie agraria'
-JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 ```
 
-{#if filas(puntos).length > 0}
+{#if filas(puntos).length > 0 || celdas.length > 0}
 
 {#if String(inputs.capa?.value ?? inputs.capa) === 'ph'}
 
 {#if terr[0]?.nivel === 'municipio'}
 
 <MapaBarrios
-    data={puntos}
+    data={celdas}
     lat=lat
     long=lon
     value=ph
@@ -289,14 +300,13 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
     geoJsonUrl={geoDe(terr[0])}
     filtroGeo={filtroDe(terr[0])}
-    celdaKm={puntos[0]?.celda_km}
+    celdaKm={0.25}
     height={600}
     tooltip={[
         {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'ph', title: 'pH', fmt: 'num1'},
         {id: 'textura', title: 'Textura'},
-        {id: 'wrb', title: 'Tipo de suelo'},
-        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+        {id: 'wrb', title: 'Tipo de suelo'}
     ]}
 />
 
@@ -335,7 +345,7 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 {#if terr[0]?.nivel === 'municipio'}
 
 <MapaBarrios
-    data={puntos}
+    data={celdas}
     lat=lat
     long=lon
     value=materia_organica_pct
@@ -345,13 +355,12 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
     geoJsonUrl={geoDe(terr[0])}
     filtroGeo={filtroDe(terr[0])}
-    celdaKm={puntos[0]?.celda_km}
+    celdaKm={0.25}
     height={600}
     tooltip={[
         {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
-        {id: 'cultivo', title: 'Cultivo principal'},
-        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+        {id: 'cultivo', title: 'Cultivo principal'}
     ]}
 />
 
@@ -389,7 +398,7 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 {#if terr[0]?.nivel === 'municipio'}
 
 <MapaBarrios
-    data={enRejilla(puntos, String(inputs.capa?.value ?? inputs.capa))}
+    data={enRejilla(celdas, String(inputs.capa?.value ?? inputs.capa))}
     lat=lat
     long=lon
     value=categoria
@@ -397,15 +406,14 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
     legendType=categorical
     geoJsonUrl={geoDe(terr[0])}
     filtroGeo={filtroDe(terr[0])}
-    celdaKm={puntos[0]?.celda_km}
+    celdaKm={0.25}
     height={600}
     tooltip={[
         {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
         {id: 'textura', title: 'Textura'},
         {id: 'arcilla_pct', title: 'Arcilla (%)', fmt: 'num0'},
         {id: 'wrb', title: 'Tipo de suelo'},
-        {id: 'cultivo', title: 'Cultivo principal'},
-        {id: 'superficie_agraria_km2', title: 'Km² agrarios en la celda', fmt: 'num1'}
+        {id: 'cultivo', title: 'Cultivo principal'}
     ]}
 />
 
@@ -438,7 +446,7 @@ JOIN f ON f.nivel = 'municipio' AND p.cod_mun = f.cod
 
 {/if}
 
-<p class="text-xs text-gray-500">Cada punto es un cuadrado de {formatNumber(puntos[0]?.celda_km, 0)} × {formatNumber(puntos[0]?.celda_km, 0)} km con superficie agraria (de 10 km para toda España, de 5 km en una comunidad, de 2 km en una provincia y de 1 km en un municipio), coloreado por la textura, el tipo de suelo o el cultivo que más superficie agraria ocupa en él. Donde no hay punto hay monte, roca, agua o ciudad.</p>
+<p class="text-xs text-gray-500">Cada punto es un cuadrado con superficie agraria (de 10 km de lado para toda España, de 5 km en una comunidad, de 2 km en una provincia y de 250 m en un municipio), coloreado por la textura, el tipo de suelo o el cultivo que más superficie agraria ocupa en él. Donde no hay punto hay monte, roca, agua o ciudad.</p>
 
 {/if}
 
@@ -528,6 +536,113 @@ ORDER BY t.ph DESC, c.orden
 
 La **materia orgánica** (restos de plantas, raíces y estiércol descompuestos) da estructura a la tierra, retiene el agua y alimenta los cultivos. Con calor, poca lluvia y siglos de labranza, el suelo agrario español tiene de media un {formatNumber(espana[0]?.materia_organica_pct, 1)} %, frente al {formatNumber(europa_resumen[0]?.mo_ue, 1)} % de la UE. Es el {formatNumber(europa_resumen[0]?.puesto_mo, 0)}.º más pobre de los {formatNumber(europa_resumen[0]?.paises, 0)} países europeos comparados (los tres con menos: {europa_resumen[0]?.menos_mo ?? '-'}).
 
+```sql lucas_terr
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT l.nombre, l.muestras, l.materia_organica_pct, l.pct_mo_menos_2, l.pct_mo_menos_1, l.ph, l.pct_calizo,
+    l.pct_erosion_visible, l.pct_carcavas
+FROM mother.suelos_lucas l, f
+WHERE l.uso = 'Agraria'
+    AND ((f.nivel = 'pais' AND l.nivel = 'pais' AND l.cod = 'ES')
+        OR (f.nivel <> 'pais' AND l.nivel = 'ccaa' AND l.cod = (SELECT max(cod_ccaa) FROM ${terr})))
+```
+
+```sql lucas_ccaa
+SELECT nombre, muestras, materia_organica_pct, pct_mo_menos_2, ph, pct_calizo
+FROM mother.suelos_lucas
+WHERE nivel = 'ccaa' AND uso = 'Agraria'
+ORDER BY materia_organica_pct
+```
+
+{#if filas(lucas_terr).length > 0}
+
+<p>Las <b>muestras de laboratorio</b> del programa europeo LUCAS (2018) dan menos materia orgánica que el modelo: en la superficie agraria de {lucas_terr[0]?.nombre}, la mediana de sus {formatNumber(lucas_terr[0]?.muestras, 0)} muestras es un {formatNumber(lucas_terr[0]?.materia_organica_pct, 1)} %, y el {formatNumber(lucas_terr[0]?.pct_mo_menos_2, 0)} % no llega al 2 % (el {formatNumber(lucas_terr[0]?.pct_mo_menos_1, 0)} %, ni al 1 %). Para la materia orgánica, fíate más de estos análisis que del mapa: SoilGrids da más carbono del que se mide en los secanos.</p>
+
+{/if}
+
+{#if filas(lucas_ccaa).length > 0}
+
+<BarChart
+    data={lucas_ccaa}
+    x=nombre
+    y=materia_organica_pct
+    swapXY=true
+    sort=false
+    yFmt=num1
+    fillColor="#65a30d"
+    title="Materia orgánica medida en la superficie agraria de cada comunidad: mediana de las muestras LUCAS 2018 (%)"
+/>
+
+{/if}
+
+## Erosión
+
+```sql erosion_terr
+WITH f AS (SELECT split_part('${inputs.territorio}', '-', 1) AS nivel, split_part('${inputs.territorio}', '-', 2) AS cod)
+SELECT e.nombre, e.anio, e.erosion_t_ha, e.pct_moderada_grave, e.pct_grave, e.nivel
+FROM mother.suelos_erosion e, f
+WHERE (f.nivel = 'pais' AND e.nivel = 'pais' AND e.cod = 'ES')
+    OR (f.nivel IN ('ccaa', 'provincia') AND e.nivel = f.nivel AND e.cod = f.cod)
+    OR (f.nivel = 'municipio' AND e.nivel = 'provincia' AND e.cod = left(f.cod, 2))
+ORDER BY e.anio
+```
+
+```sql erosion_espana
+SELECT anio, erosion_t_ha, pct_moderada_grave FROM mother.suelos_erosion
+WHERE nivel = 'pais' AND cod = 'ES' AND anio = (SELECT max(anio) FROM mother.suelos_erosion)
+```
+
+```sql erosion_provincias
+SELECT e.cod, e.nombre, e.erosion_t_ha, e.pct_moderada_grave, e.pct_grave, e.anio,
+    '/territorios/suelos?provincia=' || t.slug AS enlace
+FROM mother.suelos_erosion e
+JOIN mother.territorios t ON t.nivel = 'provincia' AND t.cod = e.cod
+WHERE e.nivel = 'provincia' AND e.anio = (SELECT max(anio) FROM mother.suelos_erosion)
+```
+
+La lluvia arrastra cada año la capa fértil de los campos en pendiente, sobre todo los labrados, sin cubierta vegetal y con tormentas fuertes: un centímetro de suelo tarda siglos en formarse. Según el modelo del Centro Común de Investigación de la Comisión Europea, la superficie agraria de {erosion_terr.slice(-1)[0]?.nombre ?? '-'} pierde de media {formatNumber(erosion_terr.slice(-1)[0]?.erosion_t_ha, 1)} toneladas de suelo por hectárea y año ({erosion_terr.slice(-1)[0]?.anio ?? '-'}; España: {formatNumber(erosion_espana[0]?.erosion_t_ha, 1)}), y el {formatNumber(erosion_terr.slice(-1)[0]?.pct_moderada_grave, 0)} % sufre erosión moderada o grave, más de 5 t/ha, que es más de lo que el suelo se regenera.
+
+{#if filas(erosion_terr).length > 1}
+
+<LineChart
+    data={erosion_terr}
+    x=anio
+    y=pct_moderada_grave
+    xFmt="0"
+    yFmt=num1
+    markers=true
+    title="% de la superficie agraria con erosión moderada o grave (más de 5 t/ha y año)"
+/>
+
+{/if}
+
+{#if filas(erosion_provincias).length > 0}
+
+<MapaEspana
+    data={erosion_provincias}
+    geoJsonUrl="/geo/provincias.geojson"
+    geoId="cod_prov"
+    areaCol="cod"
+    value="pct_moderada_grave"
+    valueFmt="num0"
+    colorPalette={['#fefce8', '#f59e0b', '#7c2d12']}
+    link=enlace
+    height={460}
+    tooltip={[
+        {id: 'nombre', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'pct_moderada_grave', title: '% con erosión moderada o grave', fmt: 'num1'},
+        {id: 'pct_grave', title: '% con erosión grave (más de 10 t/ha)', fmt: 'num1'},
+        {id: 'erosion_t_ha', title: 'Pérdida media (t/ha y año)', fmt: 'num1'}
+    ]}
+/>
+
+{/if}
+
+{#if filas(lucas_terr).length > 0}
+
+<p class="text-xs text-gray-500">Erosión estimada con el modelo RUSLE del JRC (lluvia, pendiente, suelo, cultivo y prácticas de conservación) para la superficie agraria y los pastos naturales, publicada por Eurostat; las islas de Baleares y Canarias se suman en su provincia. Las señales vistas en el campo por los encuestadores de LUCAS en 2018 (a menos de 500 m del punto) apuntan en la misma dirección: aparecen en el {formatNumber(lucas_terr[0]?.pct_erosion_visible, 0)} % de los puntos agrarios de {lucas_terr[0]?.nombre} y hay cárcavas en el {formatNumber(lucas_terr[0]?.pct_carcavas, 1)} %; es un mínimo, porque el cultivo crecido tapa muchas señales.</p>
+
+{/if}
+
 ## Comparar dentro del territorio
 
 <BotonesUrl name="medida" titulo="Medir" opciones={MEDIDAS} defecto="pct_fuertes" />
@@ -602,7 +717,7 @@ ORDER BY superficie_agraria_km2 DESC
     ]}
 />
 
-<p class="text-xs text-gray-500">Municipios. Pulsa uno para ver aquí su suelo, con el mapa de puntos de 1 km. En gris, los municipios sin superficie agraria en el mapa CORINE (monte, ciudad o parcelas de menos de 25 ha).</p>
+<p class="text-xs text-gray-500">Municipios. Pulsa uno para ver aquí su suelo, con su mapa de celdas de 250 m. En gris, los municipios sin superficie agraria en el mapa CORINE (monte, ciudad o parcelas de menos de 25 ha).</p>
 
 {/if}
 
@@ -617,11 +732,11 @@ ORDER BY superficie_agraria_km2 DESC
     <Column id=wrb_dominante title="Tipo de suelo" />
 </DataTable>
 
-<p class="text-xs text-gray-500">Tierras fuertes = las seis texturas franco-arcillosas y arcillosas del triángulo del USDA (en general, más de una cuarta parte de arcilla). En los municipios la superficie agraria sale de CORINE dentro de cada término, muestreada cada 250 m, y el suelo, de SoilGrids a 1 km: en los municipios pequeños sale de muy pocas celdas. Ceuta y Melilla casi no tienen superficie agraria.</p>
+<p class="text-xs text-gray-500">Tierras fuertes = las seis texturas franco-arcillosas y arcillosas del triángulo del USDA (en general, más de una cuarta parte de arcilla). En los municipios, la superficie agraria y el suelo salen de cada celda de 250 m dentro del término (CORINE y SoilGrids a su resolución original). Ceuta y Melilla casi no tienen superficie agraria.</p>
 
 {:else}
 
-<p class="text-sm text-gray-600 dark:text-gray-400">Un municipio es la unidad más pequeña: arriba está su mapa de puntos de 1 km. Elige «Toda la provincia» en el filtro para compararlo con los demás municipios.</p>
+<p class="text-sm text-gray-600 dark:text-gray-400">Un municipio es la unidad más pequeña: arriba está su mapa de celdas de 250 m. Elige «Toda la provincia» en el filtro para compararlo con los demás municipios.</p>
 
 {/if}
 
@@ -720,13 +835,226 @@ Mismo método para todos los países: el modelo SoilGrids sobre la superficie ag
     <Column id=wrb_dominante title="Tipo de suelo" />
 </DataTable>
 
-<p class="text-xs text-gray-500">Chipre, Grecia, España, Italia y Turquía tienen los suelos agrarios más básicos, y {europa_resumen[0]?.menos_mo ?? '-'}, los de menos materia orgánica; el norte (Irlanda, los países nórdicos, Reino Unido, Países Bajos) los más ácidos y orgánicos, con prados húmedos y, en algunos, turba. Países con al menos 1.000 km² agrarios en CORINE (sin Malta). La comparación con las muestras de laboratorio del programa europeo LUCAS (JRC) queda pendiente: sus datos solo se entregan bajo solicitud.</p>
+<p class="text-xs text-gray-500">Chipre, Grecia, España, Italia y Turquía tienen los suelos agrarios más básicos, y {europa_resumen[0]?.menos_mo ?? '-'}, los de menos materia orgánica; el norte (Irlanda, los países nórdicos, Reino Unido, Países Bajos) los más ácidos y orgánicos, con prados húmedos y, en algunos, turba. Países con al menos 1.000 km² agrarios en CORINE (sin Malta). Abajo, las muestras de laboratorio de LUCAS, que confirman el puesto de España.</p>
+
+```sql lucas_europa
+SELECT cod, nombre, es_ue, muestras, materia_organica_pct, pct_mo_menos_2, ph, puesto_mo_menor, territorios
+FROM mother.suelos_lucas
+WHERE nivel = 'pais' AND uso = 'Agraria' AND muestras >= 20
+ORDER BY materia_organica_pct
+```
+
+{#if filas(lucas_europa).length > 0}
+
+<BarChart
+    data={etiquetar(lucas_europa, 'grupo', (d) => (d.cod === 'ES' ? 'España' : d.es_ue ? 'UE' : 'Resto de Europa'))}
+    x=nombre
+    y=materia_organica_pct
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt=num1
+    seriesOrder={['España', 'UE', 'Resto de Europa']}
+    colorPalette={['#65a30d', '#a8a29e', '#d6d3d1']}
+    title="Materia orgánica medida en la superficie agraria: mediana de las muestras LUCAS 2018 (%)"
+/>
+
+<BarChart
+    data={etiquetar(filas(lucas_europa).toSorted((a, b) => b.pct_mo_menos_2 - a.pct_mo_menos_2), 'grupo', (d) => (d.cod === 'ES' ? 'España' : d.es_ue ? 'UE' : 'Resto de Europa'))}
+    x=nombre
+    y=pct_mo_menos_2
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt=num0
+    seriesOrder={['España', 'UE', 'Resto de Europa']}
+    colorPalette={['#a16207', '#a8a29e', '#d6d3d1']}
+    title="% de muestras de la superficie agraria con menos del 2 % de materia orgánica (LUCAS 2018)"
+/>
+
+<p class="text-xs text-gray-500">LUCAS 2018 TOPSOIL (JRC): muestras de 0-20 cm de tierras de cultivo y prados analizadas en laboratorio; países con 20 muestras o más. Al ser análisis y no un modelo, dan menos materia orgánica que SoilGrids en el sur de Europa.</p>
+
+{/if}
+
+### Europa en el mapa
+
+Las mismas capas para toda Europa, con celdas de 25 km y el mismo método que en España.
+
+<BotonesUrl name="capa_eu" titulo="Colorear por" opciones={CAPAS_EU} defecto="textura" />
+
+```sql puntos_europa
+SELECT celda, celda_km, lon, lat, provincia AS lugar, superficie_agraria_km2, textura, textura_grupo, wrb,
+    cultivo, arcilla_pct, ph, materia_organica_pct
+FROM mother.suelos_rejilla
+WHERE escala = 'europa'
+```
+
+{#if filas(puntos_europa).length > 0}
+
+{#if String(inputs.capa_eu?.value ?? inputs.capa_eu) === 'ph'}
+
+<MapaEspana
+    data={puntos_europa}
+    lat=lat
+    long=lon
+    value=ph
+    valueFmt=num1
+    min={5}
+    max={8.3}
+    colorPalette={['#b91c1c', '#fde68a', '#f5f5f4', '#93c5fd', '#1e3a8a']}
+    geoJsonUrl="/geo/nuts2_europa.geojson"
+    celdaKm={25}
+    pointName=lugar
+    opacity={0.9}
+    height={640}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'wrb', title: 'Tipo de suelo'}
+    ]}
+/>
+
+{:else if String(inputs.capa_eu?.value ?? inputs.capa_eu) === 'mo'}
+
+<MapaEspana
+    data={puntos_europa}
+    lat=lat
+    long=lon
+    value=materia_organica_pct
+    valueFmt=num1
+    min={1.5}
+    max={12}
+    colorPalette={['#fef3c7', '#bef264', '#16a34a', '#14532d']}
+    geoJsonUrl="/geo/nuts2_europa.geojson"
+    celdaKm={25}
+    pointName=lugar
+    opacity={0.9}
+    height={640}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'materia_organica_pct', title: 'Materia orgánica (%)', fmt: 'num1'},
+        {id: 'cultivo', title: 'Cultivo principal'}
+    ]}
+/>
+
+{:else}
+
+<MapaEspana
+    data={enRejilla(puntos_europa, 'textura')}
+    lat=lat
+    long=lon
+    value=categoria
+    colorCol=color
+    legendType=categorical
+    geoJsonUrl="/geo/nuts2_europa.geojson"
+    celdaKm={25}
+    pointName=lugar
+    opacity={0.95}
+    height={640}
+    tooltip={[
+        {id: 'lugar', showColumnName: false, valueClass: 'font-semibold'},
+        {id: 'textura', title: 'Textura'},
+        {id: 'arcilla_pct', title: 'Arcilla (%)', fmt: 'num0'},
+        {id: 'wrb', title: 'Tipo de suelo'}
+    ]}
+/>
+
+{/if}
+
+<p class="text-xs text-gray-500">Cada punto es un cuadrado de 25 × 25 km con al menos 25 km² de superficie agraria según CORINE 2018, con el suelo de SoilGrids. Las muestras de laboratorio de LUCAS no se dibujan una a una: la JRC las entrega bajo condiciones de uso que no permiten publicarlas punto a punto; abajo van resumidas por región.</p>
+
+{/if}
+
+### Región a región
+
+Comparar países enteros esconde mucho: el norte de Italia no se parece al sur ni Andalucía a Galicia. Aquí, cada región europea (NUTS 2) con el modelo, lo medido por LUCAS donde hay al menos 10 muestras y la erosión estimada.
+
+<BotonesUrl name="medida_eu" titulo="Medir" opciones={MEDIDAS_EU} defecto="materia_organica_pct" />
+
+```sql regiones_eu
+SELECT nuts2, nombre, pais, cod_pais, superficie_agraria_km2, materia_organica_pct, lucas_materia_organica_pct,
+    lucas_muestras, ph, pct_fuertes, erosion_t_ha, pct_erosion_moderada_grave, textura_dominante, wrb_dominante,
+    ${inputs.medida_eu} AS medida
+FROM mother.suelos_regiones
+ORDER BY medida DESC NULLS LAST
+```
+
+{#if filas(regiones_eu).length > 0}
+
+<MapaEspana
+    data={regiones_eu}
+    geoJsonUrl="/geo/nuts2_europa.geojson"
+    geoId="nuts2"
+    areaCol="nuts2"
+    value="medida"
+    valueFmt="num1"
+    colorPalette={['#fdf6e3', '#c8955a', '#5b2a17']}
+    height={640}
+    tooltip={[
+        {id: 'nombre', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'pais', title: 'País'},
+        {id: 'materia_organica_pct', title: 'Materia orgánica, modelo (%)', fmt: 'num1'},
+        {id: 'lucas_materia_organica_pct', title: 'Materia orgánica medida, LUCAS (%)', fmt: 'num1'},
+        {id: 'ph', title: 'pH', fmt: 'num1'},
+        {id: 'pct_fuertes', title: '% tierras fuertes', fmt: 'num0'},
+        {id: 'erosion_t_ha', title: 'Erosión (t/ha y año)', fmt: 'num1'},
+        {id: 'pct_erosion_moderada_grave', title: '% con erosión moderada o grave', fmt: 'num0'}
+    ]}
+/>
+
+<DataTable data={regiones_eu} rows=10 search=true>
+    <Column id=nombre title="Región" />
+    <Column id=pais title="País" />
+    <Column id=superficie_agraria_km2 title="Km² agrarios" fmt=num0 contentType=bar barColor="#e7d3b5" />
+    <Column id=materia_organica_pct title="Materia orgánica, modelo (%)" fmt=num1 />
+    <Column id=lucas_materia_organica_pct title="Materia orgánica, LUCAS (%)" fmt=num1 />
+    <Column id=lucas_muestras title="Muestras LUCAS" fmt=num0 />
+    <Column id=ph title="pH" fmt=num1 />
+    <Column id=pct_fuertes title="% tierras fuertes" fmt=num0 />
+    <Column id=erosion_t_ha title="Erosión (t/ha)" fmt=num1 />
+    <Column id=pct_erosion_moderada_grave title="% erosión moderada o grave" fmt=num0 />
+</DataTable>
+
+<p class="text-xs text-gray-500">Regiones NUTS 2 de 2021 (límites © EuroGeographics). LUCAS usa las de 2016: las pocas regiones que cambiaron entre una y otra versión salen sin dato medido. Erosión: último año publicado por Eurostat.</p>
+
+{/if}
+
+```sql erosion_europa
+SELECT e.cod, e.nombre, e.erosion_t_ha, e.pct_moderada_grave, p.es_ue
+FROM mother.suelos_erosion e
+LEFT JOIN mother.suelos_europa p ON p.cod_pais = e.cod
+WHERE e.nivel = 'pais' AND e.anio = (SELECT max(anio) FROM mother.suelos_erosion)
+ORDER BY e.pct_moderada_grave DESC
+```
+
+{#if filas(erosion_europa).length > 0}
+
+<BarChart
+    data={etiquetar(erosion_europa, 'grupo', (d) => (d.cod === 'ES' ? 'España' : d.es_ue ? 'UE' : 'Resto de Europa'))}
+    x=nombre
+    y=pct_moderada_grave
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt=num0
+    seriesOrder={['España', 'UE', 'Resto de Europa']}
+    colorPalette={['#b45309', '#a8a29e', '#d6d3d1']}
+    title="% de la superficie agraria con erosión moderada o grave, por país (modelo RUSLE del JRC)"
+/>
+
+<p class="text-xs text-gray-500">Encabezan la lista los países con montaña y lluvia abundante (Eslovenia, Italia, Austria). España está en la mitad alta: en sus campos pesan las lluvias de tormenta, las pendientes y los olivares y viñedos con el suelo desnudo entre las filas. En 2000 tenía erosión moderada o grave el 31 % de su superficie agraria y en 2016, el 27 %.</p>
+
+{/if}
 
 ## Fuentes y notas
 
-- **Suelo: [SoilGrids 2.0](https://soilgrids.org)** (ISRIC - World Soil Information, licencia CC BY 4.0). Arcilla, limo y arena, pH en agua y carbono orgánico de las capas de 0-5, 5-15 y 15-30 cm (medias a 1 km), promediadas por espesor; grupo de suelo WRB más probable. Es un modelo de aprendizaje automático entrenado con miles de perfiles de suelo y mapas de satélite, clima y relieve: suaviza los extremos y puede fallar en una comarca concreta. Materia orgánica = carbono orgánico × 1,724.
+- **Suelo: [SoilGrids 2.0](https://soilgrids.org)** (ISRIC - World Soil Information, licencia CC BY 4.0). Arcilla, limo y arena, pH en agua y carbono orgánico de las capas de 0-5, 5-15 y 15-30 cm (medias a 1 km para España, comunidades, provincias y Europa, y la resolución original de 250 m para los municipios), promediadas por espesor; grupo de suelo WRB más probable. Es un modelo de aprendizaje automático entrenado con miles de perfiles de suelo y mapas de satélite, clima y relieve: suaviza los extremos y puede fallar en una comarca concreta. Materia orgánica = carbono orgánico × 1,724.
 - **Superficie agraria y cultivos: [CORINE Land Cover 2018](https://land.copernicus.eu/en/products/corine-land-cover/clc2018)** (Copernicus, Agencia Europea de Medio Ambiente), clases agrícolas (2xx), muestreadas cada 250 m.
 - **Fronteras: [GISCO](https://ec.europa.eu/eurostat/web/gisco)** (Eurostat) para los países y el IGN para provincias.
-- Todo se calcula sobre una rejilla de 1 × 1 km en una proyección de igual área (ETRS89-LAEA), así que cada km² pesa lo mismo. Los mapas de suelo no tienen serie histórica: son una foto del suelo actual.
+- **Muestras de laboratorio: [LUCAS 2018 TOPSOIL](https://esdac.jrc.ec.europa.eu/content/lucas-2018-topsoil-data)** (European Soil Data Centre, ESDAC, esdac.jrc.ec.europa.eu, Comisión Europea, Centro Común de Investigación). Unas 19.000 muestras de 0-20 cm de toda la UE analizadas en laboratorio; aquí, medianas y porcentajes de las de tierras de cultivo y prados por país y por comunidad con 10 muestras o más (sin Canarias). Panagos, P. et al. (2022), «European Soil Data Centre 2.0», European Journal of Soil Science 73(6), e13315.
+- **Erosión: [Eurostat, aei_pr_soiler](https://ec.europa.eu/eurostat/databrowser/view/aei_pr_soiler/default/table)**, pérdida de suelo por el agua estimada por el Centro Común de Investigación con el modelo RUSLE (lluvia, pendiente, suelo, cubierta y prácticas de conservación) en 2000, 2010, 2016 y 2023, para la superficie agraria y los pastos naturales, por país, región y provincia (Panagos, P. et al. (2015), «The new assessment of soil loss by water erosion in Europe», Environmental Science & Policy 54).
+- **Regiones de Europa: [GISCO](https://ec.europa.eu/eurostat/web/gisco)** (Eurostat), regiones NUTS 2 de 2021 (límites © EuroGeographics).
+- Todo se calcula sobre una rejilla de 1 × 1 km (de 250 × 250 m en los municipios) en una proyección de igual área (ETRS89-LAEA), así que cada km² pesa lo mismo. Los mapas de suelo no tienen serie histórica: son una foto del suelo actual.
 
 <LastRefreshed prefix="Datos actualizados" />

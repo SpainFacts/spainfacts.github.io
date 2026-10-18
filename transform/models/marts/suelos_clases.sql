@@ -7,6 +7,8 @@ with c as (
         case when ambito = 'pais' and cod = 'ES' then '00' else cod end as cod,
         cultivo, dimension, clase, orden, superficie_km2
     from {{ source('raw_suelos', 'suelos_clases') }}
+    -- las regiones NUTS 2 de Europa van en suelos_regiones
+    where ambito <> 'nuts2'
 )
 
 select

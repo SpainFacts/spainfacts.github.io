@@ -1,0 +1,50 @@
+version: 2
+
+seeds:
+  - name: suelos_lucas_2018
+    description: >
+      Resumen de LUCAS 2018 TOPSOIL (muestras de la capa de 0-20 cm analizadas en laboratorio,
+      JRC/ESDAC) por país (nivel pais, cod = código Eurostat: EL Grecia, UK Reino Unido) y por
+      comunidad autónoma (nivel ccaa, cod INE desde el NUTS 2) y por región europea (nivel nuts2,
+      versión 2016 del NUTS), para tierras de cultivo
+      (Cultivos = LC0 Cropland), prados (Grassland) y las dos juntas (Agraria). Medianas de
+      carbono orgánico (g/kg), materia orgánica (%, carbono × 1,724), pH en agua, carbonatos
+      (g/kg), nitrógeno (g/kg), fósforo y potasio (mg/kg), y % de muestras con menos de 1 % y 2 %
+      de materia orgánica, pH ≥ 7,5 (básico), pH < 6,5 (ácido) y carbonatos ≥ 50 g/kg (calizo), y
+      % de puntos con señales de erosión a menos de 500 m y con cárcavas (lo único que el JRC pudo
+      validar; con el cultivo crecido las señales se ven peor: es un mínimo).
+      Solo territorios con 10 muestras o más. Lo escribe tools/lucas/lucas2018.py desde el
+      fichero de ESDAC (se pide con formulario; no se redistribuyen los puntos). Cita: European
+      Soil Data Centre (ESDAC), esdac.jrc.ec.europa.eu, European Commission, Joint Research Centre.
+    config:
+      column_types:
+        nivel: varchar
+        cod: varchar
+        uso: varchar
+        muestras: integer
+        carbono_g_kg: double
+        materia_organica_pct: double
+        carbono_medio_g_kg: double
+        pct_mo_menos_1: double
+        pct_mo_menos_2: double
+        ph: double
+        pct_basico: double
+        pct_acido: double
+        carbonatos_g_kg: double
+        pct_calizo: double
+        nitrogeno_g_kg: double
+        fosforo_mg_kg: double
+        potasio_mg_kg: double
+        pct_erosion_visible: double
+        pct_carcavas: double
+    columns:
+      - name: nivel
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pais', 'ccaa', 'nuts2']
+      - name: uso
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Cultivos', 'Prados', 'Agraria']
