@@ -271,7 +271,11 @@ def cuenta_general(cache, desde=2016, hasta=None):
                     ("liquidacion", f"pdfs/{eo}_E.1.Liq_Ppto_Gastos_1.pdf", COLS_LIQ, liq),
                     ("modificaciones", f"pdfs/{eo}_F.23.1.1.a.PptoCorr_Gtos_Modificaciones_1.pdf", COLS_MOD, mod)):
                 url = base + fichero
-                raw = cache.bytes("cg_pdf", url)
+                try:
+                    raw = cache.bytes("cg_pdf", url)
+                except RuntimeError as e:  # servidor caído: se salta y se reintenta en la próxima carga
+                    log.warning("Cuenta General %s %s %s: %s", anio, eo, estado, e)
+                    continue
                 if not raw:
                     continue
                 try:
@@ -560,7 +564,11 @@ def consejo_gobierno(cache, refrescar_indice=True):
     indice = cg_indice(cache, refrescar=refrescar_indice)
     sesiones, acuerdos = [], []
     for i, (url, fecha_indice) in enumerate(sorted(indice.items())):
-        raw = cache.bytes("cg_acuerdos", url)
+        try:
+            raw = cache.bytes("cg_acuerdos", url)
+        except RuntimeError as e:  # servidor caído: se salta y se reintenta en la próxima carga
+            log.warning("Consejo de Gobierno %s: %s", url, e)
+            raw = None
         if not raw:
             sesiones.append(dict(url=url, fecha=fecha_indice, n_acuerdos=None, descargado=False))
             continue
@@ -803,31 +811,47 @@ def menores_cataluna(cache, desde=2018):
 @dlt.source(name="gasto_oculto")
 def gasto_oculto(cache_dir: str | None = None, desde_cuenta: int = 2016, desde_menores: int = 2018,
                  partes: tuple = ("cuenta_general", "cataluna", "consejo_gobierno", "menores")):
+    # Las descargas se hacen al ejecutar cada recurso, no al crear la fuente: Dagster crea la
+    # fuente al importar orchestration/definitions.py y una web caída tumbaba toda la importación.
     cache = _Cache(cache_dir)
+    hecho = {}
+
+    def una_vez(clave, funcion):
+        if clave not in hecho:
+            hecho[clave] = funcion()
+        return hecho[clave]
+
+    def recurso(nombre, clave, funcion, i=None, **kw):
+        def filas():
+            r = una_vez(clave, funcion)
+            yield r if i is None else r[i]
+        return dlt.resource(filas, name=nombre, write_disposition="replace", **kw)
+
     recursos = []
     if "cuenta_general" in partes:
-        liq, mod, cuadre = cuenta_general(cache, desde=desde_cuenta)
+        cg = lambda: cuenta_general(cache, desde=desde_cuenta)  # noqa: E731
         recursos += [
-            dlt.resource(liq, name="gasto_oculto_cm_liquidacion", write_disposition="replace"),
-            dlt.resource(mod, name="gasto_oculto_cm_modificaciones", write_disposition="replace"),
-            dlt.resource(cuadre, name="gasto_oculto_cm_cuadre", write_disposition="replace"),
+            recurso("gasto_oculto_cm_liquidacion", "cg", cg, 0),
+            recurso("gasto_oculto_cm_modificaciones", "cg", cg, 1),
+            recurso("gasto_oculto_cm_cuadre", "cg", cg, 2),
         ]
     if "cataluna" in partes:
-        recursos.append(dlt.resource(execucio_cataluna(cache), name="gasto_oculto_cat_execucio",
-                                     write_disposition="replace"))
+        recursos.append(recurso("gasto_oculto_cat_execucio", "cataluna", lambda: execucio_cataluna(cache)))
     if "consejo_gobierno" in partes:
-        sesiones, acuerdos = consejo_gobierno(cache)
+        cons = lambda: consejo_gobierno(cache)  # noqa: E731
         recursos += [
-            dlt.resource(sesiones, name="gasto_oculto_cm_sesiones", write_disposition="replace"),
-            dlt.resource(acuerdos, name="gasto_oculto_cm_acuerdos", write_disposition="replace"),
+            recurso("gasto_oculto_cm_sesiones", "consejo", cons, 0),
+            recurso("gasto_oculto_cm_acuerdos", "consejo", cons, 1),
         ]
     if "menores" in partes:
-        fa, ca = menores_andalucia(cache, desde=desde_menores)
-        fc, cc = menores_cataluna(cache, desde=desde_menores)
+        def menores():
+            fa, ca = menores_andalucia(cache, desde=desde_menores)
+            fc, cc = menores_cataluna(cache, desde=desde_menores)
+            return fa + fc, ca + cc
         recursos += [
-            dlt.resource(fa + fc, name="gasto_oculto_menores_grupos", write_disposition="replace",
-                         columns={"clave_objeto": {"data_type": "text"}, "nombre_adjudicatario": {"data_type": "text"}}),
-            dlt.resource(ca + cc, name="gasto_oculto_menores_cobertura", write_disposition="replace",
-                         columns={"anio": {"data_type": "bigint"}}),
+            recurso("gasto_oculto_menores_grupos", "menores", menores, 0,
+                    columns={"clave_objeto": {"data_type": "text"}, "nombre_adjudicatario": {"data_type": "text"}}),
+            recurso("gasto_oculto_menores_cobertura", "menores", menores, 1,
+                    columns={"anio": {"data_type": "bigint"}}),
         ]
     return recursos
