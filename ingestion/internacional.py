@@ -217,10 +217,18 @@ EUROSTAT_CONSULTAS = {
     # el cociente (electrificacion) se calcula en dbt
     "consumo_final_energia": "nrg_bal_c?nrg_bal=FC_E&siec=TOTAL&unit=KTOE",
     "consumo_final_electricidad": "nrg_bal_c?nrg_bal=FC_E&siec=E7000&unit=KTOE",
+    # lo mismo solo en el transporte (electrificacion_transporte en dbt)
+    "consumo_transporte_energia_aux": "nrg_bal_c?nrg_bal=FC_TRA_E&siec=TOTAL&unit=KTOE",
+    "consumo_transporte_electricidad_aux": "nrg_bal_c?nrg_bal=FC_TRA_E&siec=E7000&unit=KTOE",
     "residuos_hab": "env_wasmun?wst_oper=GEN&unit=KG_HAB",
     "reciclaje": "cei_wm011?wst_oper=RCY&unit=PC",
     # Movilidad y seguridad
     "coches_1000": "road_eqs_carhab",
+    # reparto modal del transporte terrestre: % de viajeros-km en tren (frente a coche y
+    # autobús; sin metro ni tranvía) y % de toneladas-km en tren (frente a carretera y
+    # vías navegables)
+    "tren_viajeros_pct": "tran_hv_psmod?vehicle=TRN&unit=PC",
+    "tren_mercancias_pct": "tran_hv_frmod?tra_mode=RAIL&unit=PC",
     # pasajeros de avión del país (llegadas + salidas); por habitante en dbt
     "pasajeros_avion_aux": "ttr00012?unit=PAS&tra_meas=PAS_CRD&tra_cov=TOTAL&schedule=TOTAL",
     # km de autopistas del país; por 100.000 habitantes en dbt

@@ -678,17 +678,27 @@ index 0000000..831135e
 +}
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
 new file mode 100644
-index 0000000..548c042
+index 0000000..3be052d
 --- /dev/null
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/ui/etiquetas_diccionario.js
-@@ -0,0 +1,4089 @@
+@@ -0,0 +1,4137 @@
 +// SpainFacts: diccionario de etiquetas de datos (castellano -> idioma) para etiquetas.js.
 +// Claves: el texto exacto que devuelven las consultas. Añade aquí las que falten.
 +// Generado a partir de los literales SQL de las páginas y de los valores de las columnas que alimentan gráficas.
 +export const DICCIONARIO = {
 +	en: {
 +		// Público y privado (sociedad/publico-privado)
++		'Autobús escolar, de empresa y discrecional': 'School, company and charter buses',
++		'Autobús interurbano': 'Intercity bus',
++		'Autobús urbano': 'City bus',
++		'Avión y barco (interior)': 'Air and sea (domestic)',
++		'Avión, barco y otros': 'Air, water and other',
++		'Carretera': 'Road',
++		'Ferrocarril (tren, metro y tranvía)': 'Rail (train, metro and tram)',
++		'Gasóleo, gasolina y otras': 'Diesel, petrol and other',
++		'Metro': 'Metro',
 +		"Otras empresas (sin desglose)": "Other companies (no breakdown)",
++		'Por carretera, aire o mar': 'By road, air or sea',
 +		"Sanitas y Asisa": "Sanitas and Asisa",
 +		"Quirónsalud": "Quirónsalud",
 +		"Ribera Salud": "Ribera Salud",
@@ -699,6 +709,7 @@ index 0000000..548c042
 +		"Presupuestado": "Budgeted",
 +		"Gestión pública": "Public management",
 +		"Gestión privada": "Private management",
++		'Sobre raíles': 'On rails',
 +		"Total comunidades": "All regions",
 +		"Total comunidades autónomas": "All regions",
 +		"Medio": "Intermediate",
@@ -742,6 +753,7 @@ index 0000000..548c042
 +		"Servicios socioculturales y a la comunidad": "Sociocultural and community services",
 +		"Textil, confección y piel": "Textiles, clothing and leather",
 +		"Transporte y mantenimiento de vehículos": "Transport and vehicle maintenance",
++		'Tren (Cercanías, media y larga distancia)': 'Train (commuter, regional and long-distance)',
 +		"Vidrio y cerámica": "Glass and ceramics",
 +		"Cantabria": "Cantabria",
 +		"Castilla-La Mancha": "Castilla-La Mancha",
@@ -1793,7 +1805,17 @@ index 0000000..548c042
 +	},
 +	ca: {
 +		// Público y privado (sociedad/publico-privado)
++		'Autobús escolar, de empresa y discrecional': "Autobús escolar, d'empresa i discrecional",
++		'Autobús interurbano': 'Autobús interurbà',
++		'Autobús urbano': 'Autobús urbà',
++		'Avión y barco (interior)': 'Avió i vaixell (interior)',
++		'Avión, barco y otros': 'Avió, vaixell i altres',
++		'Carretera': 'Carretera',
++		'Ferrocarril (tren, metro y tranvía)': 'Ferrocarril (tren, metro i tramvia)',
++		'Gasóleo, gasolina y otras': 'Gasoil, gasolina i altres',
++		'Metro': 'Metro',
 +		"Otras empresas (sin desglose)": "Altres empreses (sense desglossament)",
++		'Por carretera, aire o mar': 'Per carretera, aire o mar',
 +		"Sanitas y Asisa": "Sanitas i Asisa",
 +		"Quirónsalud": "Quirónsalud",
 +		"Ribera Salud": "Ribera Salud",
@@ -1805,6 +1827,7 @@ index 0000000..548c042
 +		"Presupuestado": "Pressupostat",
 +		"Gestión pública": "Gestió pública",
 +		"Gestión privada": "Gestió privada",
++		'Sobre raíles': 'Sobre rails',
 +		"Total comunidades": "Total comunitats",
 +		"Total comunidades autónomas": "Total comunitats autònomes",
 +		"Medio": "Mitjà",
@@ -1850,6 +1873,7 @@ index 0000000..548c042
 +		"Servicios socioculturales y a la comunidad": "Serveis socioculturals i a la comunitat",
 +		"Textil, confección y piel": "Tèxtil, confecció i pell",
 +		"Transporte y mantenimiento de vehículos": "Transport i manteniment de vehicles",
++		'Tren (Cercanías, media y larga distancia)': 'Tren (Rodalies, mitjana i llarga distància)',
 +		"Vidrio y cerámica": "Vidre i ceràmica",
 +		"Extremadura": "Extremadura",
 +		"Illes Balears": "Illes Balears",
@@ -2864,7 +2888,17 @@ index 0000000..548c042
 +	},
 +	gl: {
 +		// Público y privado (sociedad/publico-privado)
++		'Autobús escolar, de empresa y discrecional': 'Autobús escolar, de empresa e discrecional',
++		'Autobús interurbano': 'Autobús interurbano',
++		'Autobús urbano': 'Autobús urbano',
++		'Avión y barco (interior)': 'Avión e barco (interior)',
++		'Avión, barco y otros': 'Avión, barco e outros',
++		'Carretera': 'Estrada',
++		'Ferrocarril (tren, metro y tranvía)': 'Ferrocarril (tren, metro e tranvía)',
++		'Gasóleo, gasolina y otras': 'Gasóleo, gasolina e outras',
++		'Metro': 'Metro',
 +		"Otras empresas (sin desglose)": "Outras empresas (sen desagregar)",
++		'Por carretera, aire o mar': 'Por estrada, aire ou mar',
 +		"Sanitas y Asisa": "Sanitas e Asisa",
 +		"Quirónsalud": "Quirónsalud",
 +		"Ribera Salud": "Ribera Salud",
@@ -2877,6 +2911,7 @@ index 0000000..548c042
 +		"Gastado": "Gastado",
 +		"Gestión pública": "Xestión pública",
 +		"Gestión privada": "Xestión privada",
++		'Sobre raíles': 'Sobre carrís',
 +		"Total comunidades": "Total comunidades",
 +		"Total comunidades autónomas": "Total comunidades autónomas",
 +		"Medio": "Medio",
@@ -2924,6 +2959,7 @@ index 0000000..548c042
 +		"Servicios socioculturales y a la comunidad": "Servizos socioculturais e á comunidade",
 +		"Textil, confección y piel": "Téxtil, confección e pel",
 +		"Transporte y mantenimiento de vehículos": "Transporte e mantemento de vehículos",
++		'Tren (Cercanías, media y larga distancia)': 'Tren (Cercanías, media e longa distancia)',
 +		"Vidrio y cerámica": "Vidro e cerámica",
 +		"Andalucía": "Andalucía",
 +		"Aragón": "Aragón",
@@ -3662,7 +3698,17 @@ index 0000000..548c042
 +	},
 +	eu: {
 +		// Público y privado (sociedad/publico-privado)
++		'Autobús escolar, de empresa y discrecional': 'Eskola-, enpresa- eta aukerako autobusa',
++		'Autobús interurbano': 'Hiriarteko autobusa',
++		'Autobús urbano': 'Hiri-autobusa',
++		'Avión y barco (interior)': 'Hegazkina eta itsasontzia (barnekoa)',
++		'Avión, barco y otros': 'Hegazkina, itsasontzia eta beste batzuk',
++		'Carretera': 'Errepidea',
++		'Ferrocarril (tren, metro y tranvía)': 'Trenbidea (trena, metroa eta tranbia)',
++		'Gasóleo, gasolina y otras': 'Gasolioa, gasolina eta beste batzuk',
++		'Metro': 'Metroa',
 +		"Otras empresas (sin desglose)": "Beste enpresa batzuk (xehetasunik gabe)",
++		'Por carretera, aire o mar': 'Errepidez, airez edo itsasoz',
 +		"Sanitas y Asisa": "Sanitas eta Asisa",
 +		"Quirónsalud": "Quirónsalud",
 +		"Ribera Salud": "Ribera Salud",
@@ -3673,6 +3719,7 @@ index 0000000..548c042
 +		"Presupuestado": "Aurrekontuan",
 +		"Gestión pública": "Kudeaketa publikoa",
 +		"Gestión privada": "Kudeaketa pribatua",
++		'Sobre raíles': 'Erraletan',
 +		"Total comunidades": "Erkidego guztiak",
 +		"Total comunidades autónomas": "Autonomia erkidego guztiak",
 +		"Medio": "Erdi-maila",
@@ -3715,6 +3762,7 @@ index 0000000..548c042
 +		"Servicios socioculturales y a la comunidad": "Gizarte eta kultura zerbitzuak",
 +		"Textil, confección y piel": "Ehungintza, jantzigintza eta larrugintza",
 +		"Transporte y mantenimiento de vehículos": "Garraioa eta ibilgailuen mantentzea",
++		'Tren (Cercanías, media y larga distancia)': 'Trena (aldirikoa, distantzia ertaina eta luzea)',
 +		"Vidrio y cerámica": "Beira eta zeramika",
 +		"Extremadura": "Extremadura",
 +		"Ceuta": "Ceuta",

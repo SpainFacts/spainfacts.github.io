@@ -15,6 +15,8 @@ export const PAISES_REFERENCIA = {
     // Movilidad y energía
     coche_electrico_cuota: ['NO', 'DK'], // Noruega: casi todo lo que se vende es eléctrico; Dinamarca, segundo de Europa (China ya está)
     electrificacion: ['NO', 'SE'], // Noruega y Suecia: las economías más electrificadas de Europa (hidráulica, bombas de calor, coche eléctrico)
+    electrificacion_transporte: ['NO', 'SE'], // Noruega: coche eléctrico; Suecia: tren y mercancías por ferrocarril
+    tren_mercancias_pct: ['SE'], // Suecia: un tercio de las mercancías por tren
     electricidad_renovable: ['DK', 'NO'], // Dinamarca: referente eólico; Noruega: casi toda su electricidad es hidráulica
     consumo_electrico_pc: ['NO'], // Noruega: el mayor consumo eléctrico por habitante de Europa (calefacción y coche eléctricos)
     pasajeros_avion_hab: ['GR', 'NO'], // Grecia: destino turístico de islas, como España; Noruega: el avión para moverse por dentro del país

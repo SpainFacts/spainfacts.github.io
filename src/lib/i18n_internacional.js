@@ -141,6 +141,9 @@ export const INDICADORES_INT = {
         'europa:coches_1000': ['Passenger cars', 'per 1,000 inhabitants'],
         pasajeros_avion_hab: ['Air passengers (arrivals and departures) per inhabitant', 'passengers per inhabitant'],
         autopistas_100k: ['Motorways', 'km per 100,000 inhabitants'],
+        electrificacion_transporte: ['Electricity in transport final energy consumption', '% of transport energy'],
+        tren_viajeros_pct: ['Rail in inland passenger transport', '% of passenger-km by car, bus and train (excl. metro and tram)'],
+        tren_mercancias_pct: ['Rail in inland freight transport', '% of tonne-km by road, rail and inland waterways'],
         'europa:muertes_trafico': ['Road traffic deaths', 'per 100,000 inhabitants'],
         'europa:homicidios': ['Intentional homicides recorded by the police', 'per 100,000 inhabitants'],
         'europa:mujeres_parlamento': ['Women in national parliament', '% of seats']
@@ -263,6 +266,9 @@ export const INDICADORES_INT = {
         'europa:coches_1000': ["Turismes", "per 1.000 habitants"],
         pasajeros_avion_hab: ["Passatgers d'avió (arribades i sortides) per habitant", "passatgers per habitant"],
         autopistas_100k: ['Autopistes i autovies', 'km per 100.000 habitants'],
+        electrificacion_transporte: ["Electricitat en el consum final d'energia del transport", "% de l'energia del transport"],
+        tren_viajeros_pct: ['Tren en el transport terrestre de viatgers', '% dels viatgers-km en cotxe, autobús i tren (sense metro ni tramvia)'],
+        tren_mercancias_pct: ['Tren en el transport terrestre de mercaderies', '% de les tones-km per carretera, tren i vies navegables'],
         'europa:muertes_trafico': ["Morts en accidents de trànsit", "per 100.000 habitants"],
         'europa:homicidios': ["Homicidis intencionats registrats per la policia", "per 100.000 habitants"],
         'europa:mujeres_parlamento': ["Dones al parlament nacional", "% dels escons"]
@@ -385,6 +391,9 @@ export const INDICADORES_INT = {
         'europa:coches_1000': ['Turismos', 'por 1.000 habitantes'],
         pasajeros_avion_hab: ['Pasaxeiros de avión (chegadas e saídas) por habitante', 'pasaxeiros por habitante'],
         autopistas_100k: ['Autoestradas e autovías', 'km por 100.000 habitantes'],
+        electrificacion_transporte: ['Electricidade no consumo final de enerxía do transporte', '% da enerxía do transporte'],
+        tren_viajeros_pct: ['Tren no transporte terrestre de viaxeiros', '% dos viaxeiros-km en coche, autobús e tren (sen metro nin tranvía)'],
+        tren_mercancias_pct: ['Tren no transporte terrestre de mercadorías', '% das toneladas-km por estrada, tren e vías navegables'],
         'europa:muertes_trafico': ['Mortes en accidentes de tráfico', 'por 100.000 habitantes'],
         'europa:homicidios': ['Homicidios intencionados rexistrados pola policía', 'por 100.000 habitantes'],
         'europa:mujeres_parlamento': ['Mulleres no parlamento nacional', '% dos escanos']
@@ -507,6 +516,9 @@ export const INDICADORES_INT = {
         'europa:coches_1000': ['Turismoak', '1.000 biztanleko'],
         pasajeros_avion_hab: ['Hegazkin-bidaiariak (iritsierak eta irteerak) biztanleko', 'bidaiari biztanleko'],
         autopistas_100k: ['Autobideak eta autobiak', 'km 100.000 biztanleko'],
+        electrificacion_transporte: ['Elektrizitatea garraioaren azken energia-kontsumoan', 'garraioaren energiaren %'],
+        tren_viajeros_pct: ['Trena bidaiarien lurreko garraioan', 'autoz, autobusez eta trenez egindako bidaiari-km-en % (metroa eta tranbia kanpo)'],
+        tren_mercancias_pct: ['Trena salgaien lurreko garraioan', 'errepidez, trenez eta ibai-bideetatik egindako tona-km-en %'],
         'europa:muertes_trafico': ['Trafiko-istripuetako heriotzak', '100.000 biztanleko'],
         'europa:homicidios': ['Poliziak erregistratutako nahitako hilketak', '100.000 biztanleko'],
         'europa:mujeres_parlamento': ['Emakumeak parlamentu nazionalean', 'eserlekuen %']

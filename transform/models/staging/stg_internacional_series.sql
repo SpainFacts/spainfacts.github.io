@@ -54,6 +54,15 @@ electrificacion as (
     where e.indicador_id = 'consumo_final_electricidad' and t.valor > 0
 ),
 
+-- lo mismo solo en el transporte
+electrificacion_transporte as (
+    select 'electrificacion_transporte' as indicador_id, 'nrg_bal_c (FC_TRA_E, E7000 / TOTAL)' as cod_indicador,
+           e.cod_pais, e.anio, 100 * e.valor / t.valor as valor, 'eurostat' as origen
+    from eurostat e
+    join eurostat t on t.indicador_id = 'consumo_transporte_energia_aux' and t.cod_pais = e.cod_pais and t.anio = e.anio
+    where e.indicador_id = 'consumo_transporte_electricidad_aux' and t.valor > 0
+),
+
 pernoctaciones as (
     select 'pernoctaciones_hab' as indicador_id, 'tin00175 / demo_gind (AVG)' as cod_indicador,
            n.cod_pais, n.anio, n.valor / p.valor as valor, 'eurostat' as origen
@@ -104,6 +113,7 @@ todas as (
     where indicador_id not in ('consumo_final_energia', 'consumo_final_electricidad')
       and not ends_with(indicador_id, '_aux')
     union all select * from electrificacion
+    union all select * from electrificacion_transporte
     union all select * from pernoctaciones
     union all select * from pasajeros_avion
     union all select * from autopistas
