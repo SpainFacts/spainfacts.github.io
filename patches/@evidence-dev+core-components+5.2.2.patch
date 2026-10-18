@@ -5857,6 +5857,40 @@ index 0000000..281f373
 +		}
 +	]
 +};
+diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
+index 9eac817..4540147 100644
+--- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
++++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
+@@ -95,6 +95,18 @@
+ 	$: series = seriesSet ? series : $props.series;
+ 
+ 	let stackedData;
++
++	// SpainFacts: si la x son años (2019, '2019', '2024/25'...), el orden es el cronológico,
++	// nunca por el valor de las barras
++	function esAnio(v) {
++		return /^(1[89]|2[01])\d{2}([/-]\d{2,4})?$/.test(String(v ?? '').trim());
++	}
++	function xSonAnios(filas, col) {
++		return filas.length > 0 && filas.every((f) => f[col] == null || esAnio(f[col]));
++	}
++	function ordenarPorAnio(filas, col) {
++		return [...filas].sort((a, b) => String(a[col]).localeCompare(String(b[col]), 'es', { numeric: true }));
++	}
+ 	let sortOrder;
+ 	let defaultLabelPosition;
+ 
+@@ -113,7 +125,9 @@
+ 	} else {
+ 		// Multi Series
+ 		// Sort by stack total for category axis
+-		if (sort === true && xType === 'category') {
++		if (sort === true && xType === 'category' && xSonAnios(data, x)) {
++			data = ordenarPorAnio(data, x);
++		} else if (sort === true && xType === 'category') {
+ 			stackedData = getStackedData(data, x, y);
+ 
+ 			if (typeof y === 'object') {
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
 index b3bfe37..b75693d 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/ECharts.svelte
@@ -5989,13 +6023,25 @@ index b3bfe37..b75693d 100644
  	}
  </style>
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
-index 1c63e0b..b6f4e40 100644
+index 1c63e0b..4ad7163 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
-@@ -203,6 +203,28 @@
+@@ -203,6 +203,40 @@
  	let horizAxisTitleConfig;
  	let chartConfig;
  
++	// SpainFacts: si la x son años (2019, '2019', '2024/25'...), el orden es el cronológico,
++	// nunca por el valor de las barras
++	function esAnio(v) {
++		return /^(1[89]|2[01])\d{2}([/-]\d{2,4})?$/.test(String(v ?? '').trim());
++	}
++	function xSonAnios(filas, col) {
++		return filas.length > 0 && filas.every((f) => f[col] == null || esAnio(f[col]));
++	}
++	function ordenarPorAnio(filas, col) {
++		return [...filas].sort((a, b) => String(a[col]).localeCompare(String(b[col]), 'es', { numeric: true }));
++	}
++
 +	// SpainFacts: ¿cada categoría tiene valor (distinto de 0) en una sola serie de barras?
 +	// Las barras rellenan con 0 las combinaciones que faltan, así que 0 cuenta como «sin dato».
 +	function serieUnicaPorCategoria() {
@@ -6021,7 +6067,18 @@ index 1c63e0b..b6f4e40 100644
  	// Chart area sizing:
  	let hasTitle;
  	let hasSubtitle;
-@@ -965,7 +987,26 @@
+@@ -458,7 +492,9 @@
+ 			// ---------------------------------------------------------------------------------------
+ 			data = sort
+ 				? xDataType === 'category'
+-					? getSortedData(data, y, false)
++					? xSonAnios(data, x)
++						? ordenarPorAnio(data, x)
++						: getSortedData(data, y, false)
+ 					: getSortedData(data, x, true)
+ 				: data;
+ 
+@@ -965,7 +1001,26 @@
  						let xVal;
  						let yVal;
  						let yCol;
