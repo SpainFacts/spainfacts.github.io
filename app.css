@@ -739,3 +739,13 @@ h2.markdown {
 	margin-top: 2rem;
 }
 
+/* Índice lateral de contenidos (Table of Contents): no bloquea el footer ni enlaces */
+aside.hidden.lg\:block.w-48 > div.fixed {
+	z-index: 10 !important;
+	pointer-events: none !important;
+}
+
+aside.hidden.lg\:block.w-48 > div.fixed > * {
+	pointer-events: auto !important;
+}
+

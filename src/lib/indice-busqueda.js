@@ -220,6 +220,13 @@ export const TEMAS_Y_SECCIONES = [
 		claves: 'municipio ayuntamiento pueblo alcalde deuda municipal presupuesto padron habitantes barrios'
 	},
 	{
+		href: '/varios/ciudades',
+		icono: '🏙️',
+		titulo: { es: 'Ciudades de España y Europa', en: 'Spanish & European cities', ca: 'Ciutats d’Espanya i d’Europa', gl: 'Cidades de España e de Europa', eu: 'Espainiako eta Europako hiriak' },
+		desc: { es: 'Comparativa de grandes ciudades españolas y europeas en renta, vivienda, población y empleo', en: 'Comparative data on large Spanish and European cities: income, housing, population and jobs', ca: 'Comparativa de grans ciutats en renda, habitatge i ocupació', gl: 'Comparativa de grandes cidades en renda, vivenda e emprego', eu: 'Hiri handien alderaketa errentan, etxebizitzan eta enpleguan' },
+		claves: 'ciudades grandes ciudades urbes comparativa municipios metropolis madrid barcelona valencia sevilla europa'
+	},
+	{
 		href: '/demografia',
 		icono: '👪',
 		titulo: { es: 'Demografía y población', en: 'Demographics & Population', ca: 'Demografia i població', gl: 'Demografía e poboación', eu: 'Demografia eta biztanleria' },
@@ -498,60 +505,70 @@ export const INDICADORES_CLAVE = [
 	{ href: '/transparencia/comparacion-internacional', icono: '🔎', nombre: { es: 'Índice de Percepción de la Corrupción (IPC / CPI)', en: 'Corruption Perceptions Index (CPI)', ca: 'Índex de Percepció de la Corrupció', gl: 'Índice de Percepción da Corrupción', eu: 'Ustelkeriaren Pertzepzio Indizea' }, fuente: 'Transparency International', claves: 'corrupcion transparencia indice cpi' }
 ];
 
-// Las 19 comunidades y 52 provincias para que el buscador global funcione desde cualquier página
+// Las 19 comunidades autónomas y ciudades con estatuto de autonomía
 const CCAA_BASE = [
-	['Andalucía', 'andalucia'],
-	['Aragón', 'aragon'],
-	['Principado de Asturias', 'asturias'],
-	['Illes Balears', 'illes-balears'],
-	['Canarias', 'canarias'],
-	['Cantabria', 'cantabria'],
-	['Castilla y León', 'castilla-y-leon'],
-	['Castilla-La Mancha', 'castilla-la-mancha'],
-	['Cataluña', 'cataluna'],
-	['Comunidad Valenciana', 'comunidad-valenciana'],
-	['Extremadura', 'extremadura'],
-	['Galicia', 'galicia'],
-	['Comunidad de Madrid', 'madrid'],
-	['Región de Murcia', 'murcia'],
-	['Comunidad Foral de Navarra', 'navarra'],
-	['País Vasco', 'pais-vasco'],
-	['La Rioja', 'la-rioja'],
-	['Ceuta', 'ceuta'],
-	['Melilla', 'melilla']
+	['Andalucía', 'andalucia', 'andalucia andaluz andaluza junta de andalucia sur'],
+	['Aragón', 'aragon', 'aragon aragones aragonesa'],
+	['Principado de Asturias', 'asturias', 'asturias asturiano asturiana principado oviedo gijon aviles'],
+	['Illes Balears', 'illes-balears', 'illes balears islas baleares baleares balear mallorca menorca ibiza formentera palma'],
+	['Canarias', 'canarias', 'canarias islas canarias canario canaria tenerife gran canaria las palmas'],
+	['Cantabria', 'cantabria', 'cantabria cantabro santander torrelavega'],
+	['Castilla y León', 'castilla-y-leon', 'castilla y leon cyl valladolid burgos leon salamanca palencia zamora avila segovia soria'],
+	['Castilla-La Mancha', 'castilla-la-mancha', 'castilla la mancha clm toledo albacete ciudad real cuenca guadalajara'],
+	['Cataluña', 'cataluna', 'cataluna catalunya catalan catalana generalitat barcelona girona lleida tarragona'],
+	['Comunidad Valenciana', 'comunidad-valenciana', 'comunidad valenciana comunitat valenciana valencia valenciano alicante castellon generalitat'],
+	['Extremadura', 'extremadura', 'extremadura extremeno badajoz caceres merida'],
+	['Galicia', 'galicia', 'galicia galiza gallego galega xunta coruna vigo santiago lugo ourense pontevedra'],
+	['Comunidad de Madrid', 'madrid', 'comunidad de madrid madrid cam region capital madrileno ciudad'],
+	['Región de Murcia', 'murcia', 'region de murcia murcia murciano cartagena lorca'],
+	['Comunidad Foral de Navarra', 'navarra', 'comunidad foral de navarra navarra nafarroa pamplona iruna navarro'],
+	['País Vasco', 'pais-vasco', 'pais vasco euskadi euskal herria vasco bilbao donostia san sebastian vitoria gasteiz bizkaia gipuzkoa alava'],
+	['La Rioja', 'la-rioja', 'la rioja rioja riojano logrono'],
+	['Ceuta', 'ceuta', 'ceuta ciudad autonoma norte de africa'],
+	['Melilla', 'melilla', 'melilla ciudad autonoma norte de africa']
 ];
 
+// Las 52 provincias españolas con sus rutas exactas
 const PROVINCIAS_BASE = [
 	['Álava / Araba', 'pais-vasco', 'alava'],
 	['Albacete', 'castilla-la-mancha', 'albacete'],
 	['Alicante / Alacant', 'comunidad-valenciana', 'alicante'],
 	['Almería', 'andalucia', 'almeria'],
+	['Asturias', 'asturias', 'asturias'],
 	['Ávila', 'castilla-y-leon', 'avila'],
 	['Badajoz', 'extremadura', 'badajoz'],
 	['Barcelona', 'cataluna', 'barcelona'],
 	['Burgos', 'castilla-y-leon', 'burgos'],
 	['Cáceres', 'extremadura', 'caceres'],
 	['Cádiz', 'andalucia', 'cadiz'],
+	['Cantabria', 'cantabria', 'cantabria'],
 	['Castellón / Castelló', 'comunidad-valenciana', 'castellon'],
+	['Ceuta', 'ceuta', 'ceuta'],
 	['Ciudad Real', 'castilla-la-mancha', 'ciudad-real'],
 	['Córdoba', 'andalucia', 'cordoba'],
 	['A Coruña', 'galicia', 'a-coruna'],
 	['Cuenca', 'castilla-la-mancha', 'cuenca'],
+	['Gipuzkoa', 'pais-vasco', 'gipuzkoa'],
 	['Girona', 'cataluna', 'girona'],
 	['Granada', 'andalucia', 'granada'],
 	['Guadalajara', 'castilla-la-mancha', 'guadalajara'],
-	['Gipuzkoa', 'pais-vasco', 'gipuzkoa'],
 	['Huelva', 'andalucia', 'huelva'],
 	['Huesca', 'aragon', 'huesca'],
+	['Illes Balears', 'illes-balears', 'illes-balears'],
 	['Jaén', 'andalucia', 'jaen'],
 	['León', 'castilla-y-leon', 'leon'],
 	['Lleida', 'cataluna', 'lleida'],
 	['Lugo', 'galicia', 'lugo'],
+	['Madrid', 'madrid', 'madrid'],
 	['Málaga', 'andalucia', 'malaga'],
+	['Melilla', 'melilla', 'melilla'],
+	['Murcia', 'murcia', 'murcia'],
+	['Navarra', 'navarra', 'navarra'],
 	['Ourense', 'galicia', 'ourense'],
 	['Palencia', 'castilla-y-leon', 'palencia'],
 	['Las Palmas', 'canarias', 'las-palmas'],
 	['Pontevedra', 'galicia', 'pontevedra'],
+	['La Rioja', 'la-rioja', 'la-rioja'],
 	['Salamanca', 'castilla-y-leon', 'salamanca'],
 	['Santa Cruz de Tenerife', 'canarias', 'santa-cruz-de-tenerife'],
 	['Segovia', 'castilla-y-leon', 'segovia'],
@@ -567,7 +584,7 @@ const PROVINCIAS_BASE = [
 	['Zaragoza', 'aragon', 'zaragoza']
 ];
 
-// Principales municipios por población para que el modal ⌘K responda al instante en cualquier página
+// Principales municipios y todas las capitales de provincia (+ciudades >40.000 hab.)
 export const MUNICIPIOS_DESTACADOS = [
 	{ cod_mun: '28079', municipio: 'Madrid', provincia: 'Madrid', poblacion: 3416771 },
 	{ cod_mun: '08019', municipio: 'Barcelona', provincia: 'Barcelona', poblacion: 1702547 },
@@ -589,47 +606,101 @@ export const MUNICIPIOS_DESTACADOS = [
 	{ cod_mun: '15030', municipio: 'A Coruña', provincia: 'A Coruña', poblacion: 249261 },
 	{ cod_mun: '03065', municipio: 'Elche / Elx', provincia: 'Alicante', poblacion: 243128 },
 	{ cod_mun: '18087', municipio: 'Granada', provincia: 'Granada', poblacion: 232717 },
+	{ cod_mun: '08279', municipio: 'Terrassa', provincia: 'Barcelona', poblacion: 225277 },
+	{ cod_mun: '08015', municipio: 'Badalona', provincia: 'Barcelona', poblacion: 223506 },
 	{ cod_mun: '33044', municipio: 'Oviedo', provincia: 'Asturias', poblacion: 220543 },
+	{ cod_mun: '08187', municipio: 'Sabadell', provincia: 'Barcelona', poblacion: 216520 },
+	{ cod_mun: '30016', municipio: 'Cartagena', provincia: 'Murcia', poblacion: 216961 },
+	{ cod_mun: '11020', municipio: 'Jerez de la Frontera', provincia: 'Cádiz', poblacion: 213231 },
+	{ cod_mun: '28092', municipio: 'Móstoles', provincia: 'Madrid', poblacion: 211265 },
 	{ cod_mun: '38038', municipio: 'Santa Cruz de Tenerife', provincia: 'Santa Cruz de Tenerife', poblacion: 211359 },
 	{ cod_mun: '31201', municipio: 'Pamplona / Iruña', provincia: 'Navarra', poblacion: 208243 },
 	{ cod_mun: '04013', municipio: 'Almería', provincia: 'Almería', poblacion: 202675 },
+	{ cod_mun: '28005', municipio: 'Alcalá de Henares', provincia: 'Madrid', poblacion: 199184 },
+	{ cod_mun: '28058', municipio: 'Fuenlabrada', provincia: 'Madrid', poblacion: 190470 },
+	{ cod_mun: '28074', municipio: 'Leganés', provincia: 'Madrid', poblacion: 190665 },
 	{ cod_mun: '20069', municipio: 'Donostia / San Sebastián', provincia: 'Gipuzkoa', poblacion: 189093 },
-	{ cod_mun: '39075', municipio: 'Santander', provincia: 'Cantabria', poblacion: 173635 },
+	{ cod_mun: '28065', municipio: 'Getafe', provincia: 'Madrid', poblacion: 185810 },
 	{ cod_mun: '09059', municipio: 'Burgos', provincia: 'Burgos', poblacion: 175821 },
 	{ cod_mun: '02003', municipio: 'Albacete', provincia: 'Albacete', poblacion: 174137 },
+	{ cod_mun: '39075', municipio: 'Santander', provincia: 'Cantabria', poblacion: 173635 },
 	{ cod_mun: '12040', municipio: 'Castelló de la Plana', provincia: 'Castellón', poblacion: 180379 },
+	{ cod_mun: '28007', municipio: 'Alcorcón', provincia: 'Madrid', poblacion: 171772 },
+	{ cod_mun: '38023', municipio: 'San Cristóbal de La Laguna', provincia: 'Santa Cruz de Tenerife', poblacion: 159034 },
 	{ cod_mun: '26089', municipio: 'Logroño', provincia: 'La Rioja', poblacion: 151164 },
 	{ cod_mun: '06015', municipio: 'Badajoz', provincia: 'Badajoz', poblacion: 150190 },
+	{ cod_mun: '29069', municipio: 'Marbella', provincia: 'Málaga', poblacion: 150725 },
 	{ cod_mun: '37274', municipio: 'Salamanca', provincia: 'Salamanca', poblacion: 144866 },
 	{ cod_mun: '21041', municipio: 'Huelva', provincia: 'Huelva', poblacion: 143290 },
 	{ cod_mun: '25120', municipio: 'Lleida', provincia: 'Lleida', poblacion: 144739 },
 	{ cod_mun: '43148', municipio: 'Tarragona', provincia: 'Tarragona', poblacion: 141151 },
+	{ cod_mun: '41038', municipio: 'Dos Hermanas', provincia: 'Sevilla', poblacion: 138981 },
+	{ cod_mun: '28106', municipio: 'Parla', provincia: 'Madrid', poblacion: 133004 },
+	{ cod_mun: '28148', municipio: 'Torrejón de Ardoz', provincia: 'Madrid', poblacion: 137042 },
+	{ cod_mun: '08121', municipio: 'Mataró', provincia: 'Barcelona', poblacion: 129870 },
 	{ cod_mun: '24089', municipio: 'León', provincia: 'León', poblacion: 122243 },
+	{ cod_mun: '11004', municipio: 'Algeciras', provincia: 'Cádiz', poblacion: 123639 },
+	{ cod_mun: '08245', municipio: 'Santa Coloma de Gramenet', provincia: 'Barcelona', poblacion: 119862 },
+	{ cod_mun: '28006', municipio: 'Alcobendas', provincia: 'Madrid', poblacion: 119416 },
 	{ cod_mun: '11012', municipio: 'Cádiz', provincia: 'Cádiz', poblacion: 110914 },
 	{ cod_mun: '23050', municipio: 'Jaén', provincia: 'Jaén', poblacion: 111888 },
 	{ cod_mun: '32054', municipio: 'Ourense', provincia: 'Ourense', poblacion: 104891 },
-	{ cod_mun: '17079', municipio: 'Girona', provincia: 'Girona', poblacion: 107032 },
+	{ cod_mun: '43123', municipio: 'Reus', provincia: 'Tarragona', poblacion: 108479 },
+	{ cod_mun: '35026', municipio: 'Telde', provincia: 'Las Palmas', poblacion: 103240 },
+	{ cod_mun: '48013', municipio: 'Barakaldo', provincia: 'Bizkaia', poblacion: 100871 },
 	{ cod_mun: '27028', municipio: 'Lugo', provincia: 'Lugo', poblacion: 99421 },
+	{ cod_mun: '17079', municipio: 'Girona', provincia: 'Girona', poblacion: 107032 },
 	{ cod_mun: '15078', municipio: 'Santiago de Compostela', provincia: 'A Coruña', poblacion: 99536 },
 	{ cod_mun: '10037', municipio: 'Cáceres', provincia: 'Cáceres', poblacion: 96441 },
+	{ cod_mun: '28127', municipio: 'Las Rozas de Madrid', provincia: 'Madrid', poblacion: 98086 },
+	{ cod_mun: '30024', municipio: 'Lorca', provincia: 'Murcia', poblacion: 98447 },
+	{ cod_mun: '11031', municipio: 'San Fernando', provincia: 'Cádiz', poblacion: 94867 },
+	{ cod_mun: '08205', municipio: 'Sant Cugat del Vallès', provincia: 'Barcelona', poblacion: 97530 },
+	{ cod_mun: '28134', municipio: 'San Sebastián de los Reyes', provincia: 'Madrid', poblacion: 94069 },
+	{ cod_mun: '28123', municipio: 'Rivas-Vaciamadrid', provincia: 'Madrid', poblacion: 100275 },
+	{ cod_mun: '08073', municipio: 'Cornellà de Llobregat', provincia: 'Barcelona', poblacion: 90303 },
+	{ cod_mun: '11027', municipio: 'El Puerto de Santa María', provincia: 'Cádiz', poblacion: 89813 },
+	{ cod_mun: '28115', municipio: 'Pozuelo de Alarcón', provincia: 'Madrid', poblacion: 88784 },
+	{ cod_mun: '19130', municipio: 'Guadalajara', provincia: 'Guadalajara', poblacion: 89010 },
 	{ cod_mun: '45168', municipio: 'Toledo', provincia: 'Toledo', poblacion: 86526 },
-	{ cod_mun: '36038', municipio: 'Pontevedra', provincia: 'Pontevedra', poblacion: 83077 }
+	{ cod_mun: '52001', municipio: 'Melilla', provincia: 'Melilla', poblacion: 85491 },
+	{ cod_mun: '51001', municipio: 'Ceuta', provincia: 'Ceuta', poblacion: 83052 },
+	{ cod_mun: '46244', municipio: 'Torrent', provincia: 'Valencia', poblacion: 87295 },
+	{ cod_mun: '36038', municipio: 'Pontevedra', provincia: 'Pontevedra', poblacion: 83077 },
+	{ cod_mun: '33004', municipio: 'Avilés', provincia: 'Asturias', poblacion: 75518 },
+	{ cod_mun: '34120', municipio: 'Palencia', provincia: 'Palencia', poblacion: 76331 },
+	{ cod_mun: '46131', municipio: 'Gandia', provincia: 'Valencia', poblacion: 78108 },
+	{ cod_mun: '13034', municipio: 'Ciudad Real', provincia: 'Ciudad Real', poblacion: 75303 },
+	{ cod_mun: '03031', municipio: 'Benidorm', provincia: 'Alicante', poblacion: 72342 },
+	{ cod_mun: '49275', municipio: 'Zamora', provincia: 'Zamora', poblacion: 59259 },
+	{ cod_mun: '40194', municipio: 'Segovia', provincia: 'Segovia', poblacion: 51011 },
+	{ cod_mun: '22125', municipio: 'Huesca', provincia: 'Huesca', poblacion: 54136 },
+	{ cod_mun: '16078', municipio: 'Cuenca', provincia: 'Cuenca', poblacion: 53512 },
+	{ cod_mun: '42173', municipio: 'Soria', provincia: 'Soria', poblacion: 40096 },
+	{ cod_mun: '44216', municipio: 'Teruel', provincia: 'Teruel', poblacion: 36267 },
+	{ cod_mun: '05019', municipio: 'Ávila', provincia: 'Ávila', poblacion: 58083 }
 ];
 
 export const TERRITORIOS_ESTATICOS = [
-	...CCAA_BASE.map(([nombre, slug]) => ({
+	...CCAA_BASE.map(([nombre, slug, alias = '']) => ({
 		href: `/territorios/${slug}`,
 		icono: '🗺️',
 		nombre,
 		tipo: { es: 'Comunidad autónoma', en: 'Autonomous community', ca: 'Comunitat autònoma', gl: 'Comunidade autónoma', eu: 'Autonomia-erkidegoa' },
-		claves: `${nombre} ${slug.replace(/-/g, ' ')} comunidad autonoma ccaa`
+		claves: `${nombre} ${slug.replace(/-/g, ' ')} ${alias} comunidad autonoma ccaa region territorio`
 	})),
 	...PROVINCIAS_BASE.map(([nombre, ccaaSlug, slug]) => ({
-		href: `/territorios/${ccaaSlug}/${slug}`,
+		href: ccaaSlug === slug ? `/territorios/${slug}` : `/territorios/${ccaaSlug}/${slug}`,
 		icono: '📍',
 		nombre,
-		tipo: { es: 'Provincia', en: 'Province', ca: 'Província', gl: 'Provincia', eu: 'Probintzia' },
-		claves: `${nombre} ${slug.replace(/-/g, ' ')} provincia`
+		tipo: {
+			es: ['ceuta', 'melilla'].includes(slug) ? 'Ciudad autónoma' : 'Provincia',
+			en: ['ceuta', 'melilla'].includes(slug) ? 'Autonomous city' : 'Province',
+			ca: ['ceuta', 'melilla'].includes(slug) ? 'Ciutat autònoma' : 'Província',
+			gl: ['ceuta', 'melilla'].includes(slug) ? 'Cidade autónoma' : 'Provincia',
+			eu: ['ceuta', 'melilla'].includes(slug) ? 'Hiri autonomoa' : 'Probintzia'
+		},
+		claves: `${nombre} ${slug.replace(/-/g, ' ')} ${ccaaSlug.replace(/-/g, ' ')} provincia territorio diputacion`
 	}))
 ];
 
@@ -736,12 +807,12 @@ export function buscarGlobal(consulta, { lang = 'es', municipios = [] } = {}) {
 	})
 		.filter((x) => x.puntos > 0)
 		.sort((a, b) => b.puntos - a.puntos)
-		.slice(0, 4);
+		.slice(0, 5);
 
 	const listaMun = Array.from(municipios ?? []).length ? Array.from(municipios) : MUNICIPIOS_DESTACADOS;
 	const resMunicipios = listaMun
 		.map((m) => {
-			const puntos = puntuarTexto(tokens, m.municipio, m.provincia);
+			const puntos = puntuarTexto(tokens, m.municipio, `${m.provincia} ciudad municipio ayuntamiento`);
 			return {
 				categoria: 'municipios',
 				href: `${enlace('/territorios/municipios', lang)}?m=${m.cod_mun}`,

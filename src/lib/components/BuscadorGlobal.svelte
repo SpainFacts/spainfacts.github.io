@@ -34,12 +34,26 @@
               ]
             : [];
 
+    $: esBusquedaTerritorial =
+        (busqueda.territorios[0]?.puntos ?? 0) >= 60 ||
+        (busqueda.municipios[0]?.puntos ?? 0) >= 60;
+
     $: grupos = [
-        { id: "analisis", titulo: t("buscador.global.cat.analisis", lang), items: busqueda.analisis },
-        { id: "temas", titulo: t("buscador.global.cat.temas", lang), items: busqueda.temas },
-        { id: "indicadores", titulo: t("buscador.global.cat.indicadores", lang), items: busqueda.indicadores },
-        { id: "territorios", titulo: t("buscador.global.cat.territorios", lang), items: busqueda.territorios },
-        { id: "municipios", titulo: t("buscador.global.cat.municipios", lang), items: busqueda.municipios },
+        ...(esBusquedaTerritorial
+            ? [
+                  { id: "territorios", titulo: t("buscador.global.cat.territorios", lang), items: busqueda.territorios },
+                  { id: "municipios", titulo: t("buscador.global.cat.municipios", lang), items: busqueda.municipios },
+                  { id: "temas", titulo: t("buscador.global.cat.temas", lang), items: busqueda.temas },
+                  { id: "analisis", titulo: t("buscador.global.cat.analisis", lang), items: busqueda.analisis },
+                  { id: "indicadores", titulo: t("buscador.global.cat.indicadores", lang), items: busqueda.indicadores }
+              ]
+            : [
+                  { id: "temas", titulo: t("buscador.global.cat.temas", lang), items: busqueda.temas },
+                  { id: "analisis", titulo: t("buscador.global.cat.analisis", lang), items: busqueda.analisis },
+                  { id: "indicadores", titulo: t("buscador.global.cat.indicadores", lang), items: busqueda.indicadores },
+                  { id: "territorios", titulo: t("buscador.global.cat.territorios", lang), items: busqueda.territorios },
+                  { id: "municipios", titulo: t("buscador.global.cat.municipios", lang), items: busqueda.municipios }
+              ]),
         { id: "chat", titulo: t("buscador.global.chat", lang), items: chatItem }
     ].filter((g) => g.items.length > 0);
 
@@ -142,6 +156,10 @@
                                 {#if op.categoria === "municipios"}
                                     <span class="shrink-0 text-xs text-gray-500 dark:text-gray-400">
                                         {op.subtitulo} · {Number(op.poblacion ?? 0).toLocaleString(localeActual())} {t("hab", lang)}
+                                    </span>
+                                {:else if op.categoria === "territorios"}
+                                    <span class="shrink-0 text-xs rounded-md px-2 py-0.5 bg-blue-50 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 font-medium">
+                                        {op.subtitulo}
                                     </span>
                                 {:else}
                                     <span class="shrink-0 text-xs text-gray-500 dark:text-gray-400 max-w-[42%] truncate">

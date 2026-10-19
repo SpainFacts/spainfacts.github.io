@@ -56,7 +56,7 @@
     ];
 </script>
 
-<footer class="mt-20 border-t border-[var(--sf-border)] bg-[var(--sf-bg-subtle)] text-gray-600 dark:text-gray-400 print:hidden">
+<footer class="relative z-30 mt-20 border-t border-[var(--sf-border)] bg-[var(--sf-bg-subtle)] text-gray-600 dark:text-gray-400 print:hidden">
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <!-- Bloque superior: Identidad y Selector de idioma -->
         <div class="mb-10 pb-8 border-b border-[var(--sf-border)] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
