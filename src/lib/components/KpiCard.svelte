@@ -250,8 +250,10 @@
             x: (i / (valoresGrafica.length - 1)) * width,
             y: y(v),
         }));
+        const pointsStr = points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
         return {
-            points: points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" "),
+            points: pointsStr,
+            areaPoints: `0,${height} ${pointsStr} ${width},${height}`,
             last: points.at(-1),
             zeroY: min < 0 && max > 0 ? y(0) : null,
             minY: y(min),
@@ -289,15 +291,15 @@
     })();
 </script>
 
-<div class="kpi-card group relative flex min-w-0 flex-col rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300 sm:p-5 dark:border-gray-800 dark:bg-gray-900">
+<div class="kpi-card group relative flex min-w-0 flex-col rounded-xl border border-[var(--sf-border)] border-t-[3px] border-t-[var(--sf-topic-color,var(--sf-accent))] bg-[var(--sf-bg-card)] p-4 shadow-xs transition-all duration-200 hover:shadow-md sm:p-5">
     <div>
         <!-- Card Header: Title & Source -->
         <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 {title}
             </span>
             {#if source && enFuentes}
-                <span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                <span class="inline-flex items-center rounded border border-[var(--sf-border)] px-1.5 py-0.5 text-[10px] font-medium bg-[var(--sf-bg-subtle)] text-gray-600 dark:text-gray-300">
                     {source}
                 </span>
             {:else if source}
@@ -305,7 +307,7 @@
                 <a
                     href={`${enlace('/fuentes/', lang)}?fuente=${encodeURIComponent(source)}`}
                     title={t('fuente.ver', lang)}
-                    class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium bg-gray-100 text-gray-600 underline decoration-gray-300 underline-offset-2 transition-colors hover:bg-blue-50 hover:text-blue-700 hover:decoration-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:decoration-gray-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-300"
+                    class="inline-flex items-center rounded border border-[var(--sf-border)] px-1.5 py-0.5 text-[10px] font-medium bg-[var(--sf-bg-subtle)] text-gray-600 underline decoration-gray-300 underline-offset-2 transition-colors hover:border-[var(--sf-accent)] hover:text-[var(--sf-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300 dark:decoration-gray-600"
                 >
                     {source}<span class="sr-only">: {t('fuente.ver', lang)}</span>
                 </a>
@@ -313,7 +315,7 @@
         </div>
 
         <!-- Main Metric Value & Unit -->
-        <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5 my-1">
+        <div class="flex min-w-0 flex-wrap items-baseline gap-x-1.5 my-1 tabular-nums">
             <span class="min-w-0 break-words text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
                 {displayValue}
             </span>
@@ -325,7 +327,7 @@
         </div>
 
         <!-- Variation / Change Badge & Comparison Text -->
-        <div class="mt-2 flex min-w-0 items-center gap-2">
+        <div class="mt-2 flex min-w-0 items-center gap-2 tabular-nums">
             {#if isChangeValid}
                 <span class="inline-flex shrink-0 items-center gap-0.5 rounded-md px-2 py-0.5 text-xs font-semibold {changeColorClass}">
                     <span class="sr-only">{t('kpi.variacion', lang)}:</span>
@@ -350,9 +352,9 @@
     </div>
 
     {#if sparklineDisponible}
-        <div class="mt-3 border-t border-gray-100 pt-3 dark:border-gray-800/80">
+        <div class="mt-3 border-t border-[var(--sf-border)] pt-3">
             <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">{tituloGrafica}</p>
-            <div class="grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)] items-stretch gap-2">
+            <div class="grid w-full min-w-0 grid-cols-[max-content_minmax(0,1fr)] items-stretch gap-2 tabular-nums">
                 <div class="flex shrink-0 flex-col justify-between py-0.5 text-right text-[10px] leading-tight text-gray-500 dark:text-gray-400">
                     <span class="whitespace-nowrap" title="{t('kpi.maximo', lang)}: {maximoCompleto}">{maximoTexto}</span>
                     <span class="whitespace-nowrap" title="{t('kpi.minimo', lang)}: {minimoCompleto}">{minimoTexto}</span>
@@ -365,22 +367,26 @@
                         on:pointerdown={moverPuntero}
                         on:pointerleave={() => (indiceActivo = null)}
                     >
-                    <svg class="block h-20 w-full overflow-visible" viewBox="0 0 320 80" preserveAspectRatio="none" role="img" aria-label={descripcionSparkline}>
+                    <svg class="block h-20 w-full overflow-visible" viewBox="0 0 320 80" preserveAspectRatio="none" role="img" aria-label={descripcionSparkline} style="color: var(--sf-topic-color, var(--sf-accent));">
                         <line x1="0" x2="320" y1={sparklineGeometry.maxY} y2={sparklineGeometry.maxY} class="stroke-gray-200 dark:stroke-gray-700" stroke-width="1" stroke-dasharray="2 4" />
                         <line x1="0" x2="320" y1={sparklineGeometry.minY} y2={sparklineGeometry.minY} class="stroke-gray-200 dark:stroke-gray-700" stroke-width="1" stroke-dasharray="2 4" />
                         {#if sparklineGeometry.zeroY !== null}
                             <line x1="0" x2="320" y1={sparklineGeometry.zeroY} y2={sparklineGeometry.zeroY} class="stroke-gray-400 dark:stroke-gray-500" stroke-width="1" stroke-dasharray="3 3" />
                         {/if}
+                        <polygon
+                            points={sparklineGeometry.areaPoints}
+                            fill="currentColor"
+                            fill-opacity="0.08"
+                        />
                         <polyline
                             fill="none"
                             stroke="currentColor"
                             stroke-width="2.5"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="text-blue-600 dark:text-blue-400"
                             points={sparklineGeometry.points}
                         />
-                        <circle cx={sparklineGeometry.last.x} cy={sparklineGeometry.last.y} r="3.5" class="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-gray-900" stroke-width="2" />
+                        <circle cx={sparklineGeometry.last.x} cy={sparklineGeometry.last.y} r="3.5" fill="currentColor" class="stroke-white dark:stroke-gray-900" stroke-width="2" />
                         {#if puntoActivo}
                             <line x1={puntoActivo.x} x2={puntoActivo.x} y1="0" y2="80" class="stroke-gray-400 dark:stroke-gray-500" stroke-width="1" vector-effect="non-scaling-stroke" />
                         {/if}
@@ -388,12 +394,12 @@
                     {#if puntoActivo}
                         <!-- Punto y etiqueta en HTML: el SVG se estira (preserveAspectRatio="none") y deformaría un círculo -->
                         <span
-                            class="pointer-events-none absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-blue-600 dark:border-gray-900 dark:bg-blue-400"
-                            style="left: {puntoActivo.izquierda}%; top: {puntoActivo.arriba}%;"
+                            class="pointer-events-none absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white dark:border-gray-900"
+                            style="left: {puntoActivo.izquierda}%; top: {puntoActivo.arriba}%; background-color: var(--sf-topic-color, var(--sf-accent));"
                             aria-hidden="true"
                         ></span>
                         <div
-                            class="pointer-events-none absolute bottom-full z-10 mb-1 whitespace-nowrap rounded-md border border-gray-200 bg-white px-2 py-1 text-xs shadow-md dark:border-gray-700 dark:bg-gray-800"
+                            class="pointer-events-none absolute bottom-full z-10 mb-1 whitespace-nowrap rounded-md border border-[var(--sf-border)] bg-[var(--sf-bg-card)] px-2 py-1 text-xs shadow-md"
                             style="left: {puntoActivo.izquierda}%; transform: translateX(-{puntoActivo.izquierda}%);"
                             aria-hidden="true"
                         >
@@ -411,7 +417,7 @@
         </div>
     {/if}
 
-    <div class="mt-auto flex items-center justify-between gap-2 border-t border-gray-100 pt-3 dark:border-gray-800/80">
+    <div class="mt-auto flex items-center justify-between gap-2 border-t border-[var(--sf-border)] pt-3">
         <div class="flex items-center gap-1.5">
         {#if sparklineDisponible}
             <button
@@ -419,7 +425,7 @@
                 on:click|stopPropagation={descargarCsv}
                 title={t('kpi.csv', lang)}
                 aria-label={`${t('kpi.csv', lang)}: ${title}`}
-                class="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md border border-gray-200 p-1 text-gray-500 transition-colors hover:border-blue-500 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
+                class="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md border border-[var(--sf-border)] p-1 text-gray-500 transition-colors hover:border-[var(--sf-accent)] hover:text-[var(--sf-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-400"
             >
                 <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5" /></svg>
             </button>
@@ -429,7 +435,8 @@
         {#if href}
             <a
                 href={enlace(href, lang)}
-                class="inline-flex min-h-8 items-center text-sm font-semibold text-blue-600 transition-colors hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+                class="inline-flex min-h-8 items-center text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                style="color: var(--sf-topic-color, var(--sf-accent));"
             >
                 {t('kpi.detalle', lang)}<span class="sr-only">: {title}</span>
                 <svg class="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">

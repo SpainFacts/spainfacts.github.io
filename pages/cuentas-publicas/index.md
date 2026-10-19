@@ -12,9 +12,29 @@ og:
     import SankeyPresupuesto from '../../../../../src/lib/components/SankeyPresupuesto.svelte';
 </script>
 
-# Cuentas públicas de España: el informe anual
-
-Como la memoria anual de una empresa, pero para el conjunto de las administraciones públicas (Estado, comunidades autónomas, ayuntamientos y Seguridad Social): *¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?*
+<div class="sf-topic-banner not-prose">
+    <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <a href="/" class="hover:underline text-slate-500 dark:text-slate-400 no-underline">Inicio</a>
+        <span>/</span>
+        <span class="font-semibold" style="color: var(--sf-topic-color)">Cuentas públicas</span>
+    </div>
+    <div class="flex items-start gap-3.5">
+        <div class="sf-icon-box mt-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        </div>
+        <div>
+            <h1 class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Cuentas públicas de España: el informe anual</h1>
+            <p class="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed m-0">
+                Como la memoria anual de una empresa, pero para el conjunto de las administraciones públicas (Estado, comunidades autónomas, ayuntamientos y Seguridad Social): <em>¿cuánto ingresa el Estado? ¿en qué se gasta el dinero de los contribuyentes? ¿cuál es el déficit anual y cómo evoluciona la deuda pública?</em>
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Por habitante</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Euros constantes y % PIB</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">IGAE · Banco de España · Eurostat</span>
+    </div>
+</div>
 
 ```sql base_deflactor
 -- Año cuyos euros se usan como referencia (último año completo con IPC)
@@ -207,40 +227,6 @@ Este diagrama de flujo visualiza de dónde provienen los ingresos de las Adminis
     height="540px"
 />
 
-<Grid cols=2>
-    <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
-        <h3 class="font-bold text-blue-900 dark:text-blue-300 mb-1"><span aria-hidden="true">📥</span> ¿Quieres profundizar en los ingresos?</h3>
-        <p class="text-xs text-blue-700 dark:text-blue-400 mb-2">Consulta la recaudación por IRPF, IVA, Sociedades, Cotizaciones y tasas públicas.</p>
-        <a href="/cuentas-publicas/ingresos" class="text-xs font-bold text-blue-600 dark:text-blue-300 hover:underline">
-            Ver informe completo de Ingresos Públicos →
-        </a>
-    </div>
-
-    <div class="p-4 rounded-lg bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
-        <h3 class="font-bold text-purple-900 dark:text-purple-300 mb-1"><span aria-hidden="true">📤</span> ¿Quieres ver el detalle de los gastos?</h3>
-        <p class="text-xs text-purple-700 dark:text-purple-400 mb-2">Descubre cuánto gasta el Estado por habitante en Sanidad, Pensiones, Educación y Defensa.</p>
-        <a href="/cuentas-publicas/gastos" class="text-xs font-bold text-purple-600 dark:text-purple-300 hover:underline">
-            Ver informe completo de Gastos y Coste por Habitante →
-        </a>
-    </div>
-
-    <div class="p-4 rounded-lg bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800">
-        <h3 class="font-bold text-teal-900 dark:text-teal-300 mb-1"><span aria-hidden="true">🏛️</span> ¿Cuántos empleados públicos hay?</h3>
-        <p class="text-xs text-teal-700 dark:text-teal-400 mb-2">Cuántos son en cada administración y territorio, cómo han evolucionado, cuánto cobran frente al sector privado y cuánto cuestan.</p>
-        <a href="/cuentas-publicas/empleo-publico" class="text-xs font-bold text-teal-700 dark:text-teal-300 hover:underline">
-            Ver informe de Empleo Público →
-        </a>
-    </div>
-
-    <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
-        <h3 class="font-bold text-amber-900 dark:text-amber-300 mb-1"><span aria-hidden="true">👵</span> ¿Cuánto cuestan las pensiones?</h3>
-        <p class="text-xs text-amber-700 dark:text-amber-400 mb-2">Pensión media descontada la inflación, afiliados por pensión, gasto en % del PIB frente a la UE y diferencias entre comunidades.</p>
-        <a href="/cuentas-publicas/pensiones" class="text-xs font-bold text-amber-700 dark:text-amber-300 hover:underline">
-            Ver informe de Pensiones →
-        </a>
-    </div>
-</Grid>
-
 ---
 
 ## 2. El Balance Histórico: Ingresos vs Gastos ({rango_historico[0].desde} - {rango_historico[0].hasta})
@@ -317,7 +303,51 @@ El déficit acumulado a lo largo de los años se financia mediante la emisión d
 
 ---
 
+## Explora en detalle
+
+<Grid cols=2>
+    <a href="/cuentas-publicas/ingresos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Ingresos públicos</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 m-0">Recaudación por IRPF, IVA, Impuesto de Sociedades, cotizaciones sociales y tasas públicas en euros constantes por habitante.</p>
+        <span class="sf-card-cta">Ver informe de Ingresos Públicos →</span>
+    </a>
+
+    <a href="/cuentas-publicas/gastos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/><path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Gastos por función (COFOG)</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 m-0">Cuánto gasta el Estado por habitante en Sanidad, Pensiones, Educación, Defensa e intereses de la deuda.</p>
+        <span class="sf-card-cta">Ver informe de Gastos Públicos →</span>
+    </a>
+
+    <a href="/cuentas-publicas/empleo-publico" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Empleo público</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 m-0">Cuántos empleados públicos hay en cada administración y territorio, cómo han evolucionado y cuánto cobran frente al sector privado.</p>
+        <span class="sf-card-cta">Ver informe de Empleo Público →</span>
+    </a>
+
+    <a href="/cuentas-publicas/pensiones" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Pensiones</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 m-0">Pensión media descontada la inflación, afiliados por pensión, gasto en % del PIB frente a la UE y diferencias entre comunidades.</p>
+        <span class="sf-card-cta">Ver informe de Pensiones →</span>
+    </a>
+</Grid>
+
+<div class="sf-sources-footer">
+
 ## Fuentes Oficiales y Trazabilidad
 - **[Intervención General de la Administración del Estado (IGAE)](https://www.igae.pap.hacienda.gob.es/):** Contabilidad Nacional del Sector Público de España.
 - **[Banco de España - Boletín Estadístico](https://www.bde.es/):** Series históricas de deuda pública y pasivos financieros de las AAPP.
 - **[Eurostat - Government Finance Statistics (gov_10a_main)](https://ec.europa.eu/eurostat/web/government-finance-statistics):** Cuentas consolidadas armonizadas según el Sistema Europeo de Cuentas (SEC 2010).
+
+</div>

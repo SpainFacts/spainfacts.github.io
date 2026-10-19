@@ -459,3 +459,283 @@ html {
 .table-container .scrollbox {
 	position: relative;
 }
+
+/* ─── Sistema de Diseño «Rigor Editorial» y Paletas Intercambiables ───────── */
+
+:root,
+:root[data-paleta='azul'] {
+	--sf-font-editorial: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', Times, serif;
+	--sf-accent: #2563eb;
+	--sf-accent-hover: #1d4ed8;
+	--sf-accent-soft: rgba(37, 99, 235, 0.1);
+	--sf-accent-border: rgba(37, 99, 235, 0.3);
+	--sf-hero-from: #0f2537;
+	--sf-hero-via: #172554;
+	--sf-hero-to: #0f172a;
+	--sf-bg-page: #faf9f6;
+	--sf-bg-card: #ffffff;
+	--sf-bg-subtle: #f3f1ec;
+	--sf-border: #e5e2d9;
+	--sf-topic-color: var(--sf-accent);
+	--sf-topic-soft: var(--sf-accent-soft);
+}
+
+:root[data-paleta='clasica'] {
+	--sf-accent: #2563eb;
+	--sf-accent-hover: #1d4ed8;
+	--sf-accent-soft: rgba(37, 99, 235, 0.08);
+	--sf-accent-border: rgba(37, 99, 235, 0.28);
+	--sf-hero-from: #0f172a;
+	--sf-hero-via: #1e3a8a;
+	--sf-hero-to: #0f172a;
+	--sf-bg-page: #ffffff;
+	--sf-bg-card: #ffffff;
+	--sf-bg-subtle: #f8fafc;
+	--sf-border: #e2e8f0;
+}
+
+:root[data-paleta='cobalto'] {
+	--sf-accent: #0f4c81;
+	--sf-accent-hover: #0a355c;
+	--sf-accent-soft: rgba(15, 76, 129, 0.1);
+	--sf-accent-border: rgba(15, 76, 129, 0.3);
+	--sf-hero-from: #0a1929;
+	--sf-hero-via: #0f3156;
+	--sf-hero-to: #091524;
+	--sf-bg-page: #f8fafc;
+	--sf-bg-card: #ffffff;
+	--sf-bg-subtle: #eef2f6;
+	--sf-border: #dce3ec;
+}
+
+:root[data-paleta='esmeralda'] {
+	--sf-accent: #0d9488;
+	--sf-accent-hover: #0f766e;
+	--sf-accent-soft: rgba(13, 148, 136, 0.1);
+	--sf-accent-border: rgba(13, 148, 136, 0.3);
+	--sf-hero-from: #0f292e;
+	--sf-hero-via: #115e59;
+	--sf-hero-to: #091d22;
+	--sf-bg-page: #f8faf9;
+	--sf-bg-card: #ffffff;
+	--sf-bg-subtle: #eef3f1;
+	--sf-border: #d8e3df;
+}
+
+:root[data-paleta='terracota'] {
+	--sf-accent: #c84b31;
+	--sf-accent-hover: #a83820;
+	--sf-accent-soft: rgba(200, 75, 49, 0.1);
+	--sf-accent-border: rgba(200, 75, 49, 0.3);
+	--sf-hero-from: #0f2537;
+	--sf-hero-via: #1e293b;
+	--sf-hero-to: #0f172a;
+	--sf-bg-page: #faf9f6;
+	--sf-bg-card: #ffffff;
+	--sf-bg-subtle: #f3f1ec;
+	--sf-border: #e6e2d8;
+}
+
+/* Ajustes para Modo Oscuro de las paletas */
+.theme-dark,
+.theme-dark[data-paleta='azul'],
+.theme-dark[data-paleta='clasica'] {
+	--sf-accent: #60a5fa;
+	--sf-accent-hover: #93c5fd;
+	--sf-accent-soft: rgba(96, 165, 250, 0.14);
+	--sf-accent-border: rgba(96, 165, 250, 0.35);
+	--sf-bg-page: #0b1118;
+	--sf-bg-card: #111827;
+	--sf-bg-subtle: #182232;
+	--sf-border: #1f2937;
+}
+
+.theme-dark[data-paleta='cobalto'] {
+	--sf-accent: #38bdf8;
+	--sf-accent-hover: #7dd3fc;
+	--sf-accent-soft: rgba(56, 189, 248, 0.14);
+	--sf-accent-border: rgba(56, 189, 248, 0.35);
+	--sf-bg-page: #090f17;
+	--sf-bg-card: #101926;
+	--sf-bg-subtle: #162233;
+	--sf-border: #1e2d40;
+}
+
+.theme-dark[data-paleta='esmeralda'] {
+	--sf-accent: #2dd4bf;
+	--sf-accent-hover: #5eead4;
+	--sf-accent-soft: rgba(45, 212, 191, 0.14);
+	--sf-accent-border: rgba(45, 212, 191, 0.35);
+	--sf-bg-page: #091315;
+	--sf-bg-card: #0f1e22;
+	--sf-bg-subtle: #15282d;
+	--sf-border: #1d353b;
+}
+
+.theme-dark[data-paleta='terracota'] {
+	--sf-accent: #f87171;
+	--sf-accent-hover: #fca5a5;
+	--sf-accent-soft: rgba(248, 113, 113, 0.14);
+	--sf-accent-border: rgba(248, 113, 113, 0.35);
+	--sf-bg-page: #0b1118;
+	--sf-bg-card: #111827;
+	--sf-bg-subtle: #182230;
+	--sf-border: #243040;
+}
+
+/* Colores semánticos por tema (armonizados) */
+[data-tema='territorios'] {
+	--sf-topic-color: #1e3a8a;
+	--sf-topic-soft: rgba(30, 58, 138, 0.1);
+}
+[data-tema='demografia'] {
+	--sf-topic-color: #4338ca;
+	--sf-topic-soft: rgba(67, 56, 202, 0.1);
+}
+[data-tema='economia'] {
+	--sf-topic-color: #0f4c81;
+	--sf-topic-soft: rgba(15, 76, 129, 0.1);
+}
+[data-tema='vivienda'] {
+	--sf-topic-color: #b45309;
+	--sf-topic-soft: rgba(180, 83, 9, 0.1);
+}
+[data-tema='cuentas'] {
+	--sf-topic-color: #5b21b6;
+	--sf-topic-soft: rgba(91, 33, 182, 0.1);
+}
+[data-tema='energia'] {
+	--sf-topic-color: #047857;
+	--sf-topic-soft: rgba(4, 120, 87, 0.1);
+}
+[data-tema='movilidad'] {
+	--sf-topic-color: #0f766e;
+	--sf-topic-soft: rgba(15, 118, 110, 0.1);
+}
+[data-tema='sociedad'] {
+	--sf-topic-color: #9d174d;
+	--sf-topic-soft: rgba(157, 23, 77, 0.1);
+}
+[data-tema='transparencia'],
+[data-tema='medios'],
+[data-tema='analisis'] {
+	--sf-topic-color: var(--sf-accent);
+	--sf-topic-soft: var(--sf-accent-soft);
+}
+
+.theme-dark [data-tema='territorios'] { --sf-topic-color: #60a5fa; --sf-topic-soft: rgba(96, 165, 250, 0.15); }
+.theme-dark [data-tema='demografia'] { --sf-topic-color: #818cf8; --sf-topic-soft: rgba(129, 140, 248, 0.15); }
+.theme-dark [data-tema='economia'] { --sf-topic-color: #38bdf8; --sf-topic-soft: rgba(56, 189, 248, 0.15); }
+.theme-dark [data-tema='vivienda'] { --sf-topic-color: #fbbf24; --sf-topic-soft: rgba(251, 191, 36, 0.15); }
+.theme-dark [data-tema='cuentas'] { --sf-topic-color: #a78bfa; --sf-topic-soft: rgba(167, 139, 250, 0.15); }
+.theme-dark [data-tema='energia'] { --sf-topic-color: #34d399; --sf-topic-soft: rgba(52, 211, 153, 0.15); }
+.theme-dark [data-tema='movilidad'] { --sf-topic-color: #2dd4bf; --sf-topic-soft: rgba(45, 212, 191, 0.15); }
+.theme-dark [data-tema='sociedad'] { --sf-topic-color: #f472b6; --sf-topic-soft: rgba(244, 114, 182, 0.15); }
+
+/* Superficie general editorial */
+body {
+	background-color: var(--sf-bg-page);
+	transition: background-color 0.2s ease;
+}
+
+/* Tipografía editorial en titulares principales */
+.font-editorial,
+h1.markdown,
+h2.markdown {
+	font-family: var(--sf-font-editorial);
+	letter-spacing: -0.015em;
+}
+
+h1.markdown {
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+h2.markdown {
+	font-size: 1.5rem;
+	line-height: 1.3;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--sf-border);
+	margin-top: 2.25rem;
+	margin-bottom: 0.85rem;
+}
+
+.tabular-nums {
+	font-variant-numeric: tabular-nums;
+}
+
+/* Acento dinámico de marca (SpainFacts) */
+.sf-brand-accent {
+	color: var(--sf-accent);
+}
+
+/* Hero editorial de portada */
+.sf-hero {
+	background-image:
+		radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+		linear-gradient(135deg, var(--sf-hero-from) 0%, var(--sf-hero-via) 55%, var(--sf-hero-to) 100%);
+	background-size: 20px 20px, 100% 100%;
+	border-top: 4px solid var(--sf-accent);
+}
+
+/* Cabecera homogénea de Tema */
+.sf-topic-banner {
+	background-color: var(--sf-bg-card);
+	border: 1px solid var(--sf-border);
+	border-top: 4px solid var(--sf-topic-color, var(--sf-accent));
+	border-radius: 1rem;
+	padding: 1.5rem 1.75rem;
+	margin-bottom: 1.75rem;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Pastilla de icono vectorial SVG */
+.sf-icon-box {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 0.625rem;
+	background-color: var(--sf-topic-soft, var(--sf-accent-soft));
+	color: var(--sf-topic-color, var(--sf-accent));
+	flex-shrink: 0;
+}
+
+/* Tarjeta homogénea de Subtema / Exploración */
+.sf-subtopic-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: var(--sf-bg-card);
+	border: 1px solid var(--sf-border);
+	border-left: 4px solid var(--sf-card-accent, var(--sf-topic-color, var(--sf-accent)));
+	border-radius: 0.875rem;
+	padding: 1.25rem;
+	text-decoration: none !important;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.sf-subtopic-card:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 16px -4px rgba(15, 37, 55, 0.08);
+	border-color: var(--sf-card-accent, var(--sf-topic-color, var(--sf-accent)));
+}
+
+/* Contenedor de Análisis / Revista de datos */
+.sf-analysis-section {
+	background-color: var(--sf-bg-subtle);
+	border: 1px solid var(--sf-border);
+	border-radius: 1.25rem;
+	padding: 1.5rem;
+}
+
+/* Pie homogéneo de Fuentes y Metodología */
+.sf-sources-footer {
+	background-color: var(--sf-bg-subtle);
+	border: 1px solid var(--sf-border);
+	border-radius: 0.875rem;
+	padding: 1.25rem 1.5rem;
+	margin-top: 2rem;
+}
+

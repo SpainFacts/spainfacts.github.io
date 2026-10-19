@@ -72,9 +72,29 @@ WHERE t.clave = 'total'
 ORDER BY t.mes
 ```
 
-# 🚦 Movilidad
-
-Cómo nos movemos en España: los coches que se compran y los que circulan, el avance del coche eléctrico, dónde se puede recargar, cuántos viajeros usan el transporte público y cuántos pasajeros pasan por los aeropuertos.
+<div class="sf-topic-banner not-prose">
+    <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <a href="/" class="hover:underline text-slate-500 dark:text-slate-400 no-underline">Inicio</a>
+        <span>/</span>
+        <span class="font-semibold" style="color: var(--sf-topic-color)">Movilidad</span>
+    </div>
+    <div class="flex items-start gap-3.5">
+        <div class="sf-icon-box mt-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M8 15h0"/><path d="M16 15h0"/></svg>
+        </div>
+        <div>
+            <h1 class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Movilidad</h1>
+            <p class="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed m-0">
+                Cómo nos movemos en España: los coches que se compran y los que circulan, el avance del coche eléctrico, dónde se puede recargar, cuántos viajeros usan el transporte público y cuántos pasajeros pasan por los aeropuertos.
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Por 1.000 habitantes</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Provincias y municipios</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">DGT · INE · AENA · MITECO</span>
+    </div>
+</div>
 
 <Grid cols=4>
     <KpiCard
@@ -119,60 +139,112 @@ Cómo nos movemos en España: los coches que se compran y los que circulan, el a
     />
 </Grid>
 
+## Vehículos y modos de transporte
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose my-6">
-    <a href="/movilidad/coche-electrico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⚡</span> Coche eléctrico</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Turismos nuevos por tipo de motor cada mes desde 2015, cuota de eléctricos por provincia y emisiones de CO2.</p>
+    <a href="/movilidad/coche-electrico" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Coche eléctrico</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Turismos nuevos por tipo de motor cada mes desde 2015, cuota de eléctricos por provincia y emisiones de CO2.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/marcas-y-modelos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚗</span> Marcas y modelos más vendidos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ranking mensual de coches, motos, furgonetas, camiones y autobuses por marca, modelo y grupo, filtrable por motor y por canal (particulares o flotas).</p>
+    <a href="/movilidad/marcas-y-modelos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Marcas y modelos más vendidos</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Ranking mensual de coches, motos, furgonetas, camiones y autobuses por marca, modelo y grupo, filtrable por motor y por canal (particulares o flotas).</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/parque" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white">🅿️ Parque de vehículos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Los vehículos que circulan hoy: motor, etiqueta ambiental, antigüedad y modelos más comunes, por provincia y municipio.</p>
+    <a href="/movilidad/parque" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Parque de vehículos</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Los vehículos que circulan hoy: motor, etiqueta ambiental, antigüedad y modelos más comunes, por provincia y municipio.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/camiones-y-autobuses" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚚</span> Camiones y autobuses</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Matriculaciones por tipo de motor, avance del autobús eléctrico, grupos más vendidos y antigüedad de los que circulan.</p>
+    <a href="/movilidad/camiones-y-autobuses" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Camiones y autobuses</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Matriculaciones por tipo de motor, avance del autobús eléctrico, grupos más vendidos y antigüedad de los que circulan.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/flotas-e-impuestos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏝️</span> Los paraísos fiscales de las flotas</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pueblos de unas decenas de vecinos con miles de coches de empresa: dónde se matriculan las flotas para pagar menos impuesto de circulación.</p>
+    <a href="/movilidad/flotas-e-impuestos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Los paraísos fiscales de las flotas</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Pueblos de unas decenas de vecinos con miles de coches de empresa: dónde se matriculan las flotas para pagar menos impuesto de circulación.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/recarga" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🔌</span> Puntos de recarga</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de los puntos públicos por potencia y operador, y coches enchufables por punto en cada provincia.</p>
+    <a href="/movilidad/recarga" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Puntos de recarga</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Mapa de los puntos públicos por potencia y operador, y coches enchufables por punto en cada provincia.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/transporte-publico" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚇</span> Transporte público</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Viajeros de metro, autobús, Cercanías, AVE y avión cada mes, y el metro de las siete ciudades que lo tienen.</p>
+    <a href="/movilidad/transporte-publico" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Transporte público</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Viajeros de metro, autobús, Cercanías, AVE y avión cada mes, y el metro de las siete ciudades que lo tienen.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/aeropuertos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">✈️</span> Aeropuertos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Pasajeros, vuelos y mercancía de cada aeropuerto de AENA desde 2004, cuánto tráfico es nacional o internacional y cómo se comparan con los grandes aeropuertos europeos.</p>
+    <a href="/movilidad/aeropuertos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Aeropuertos</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Pasajeros, vuelos y mercancía de cada aeropuerto de AENA desde 2004, cuánto tráfico es nacional o internacional y cómo se comparan con los grandes aeropuertos europeos.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
 </div>
 
 ## Infraestructuras
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
-    <a href="/movilidad/carreteras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛣️</span> Carreteras</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas las carreteras según las gestione el Estado, la comunidad o la diputación, cuáles son de peaje, cuántos vehículos pasan por cada tramo y la comparación con Europa.</p>
+    <a href="/movilidad/carreteras" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19 8 5"/><path d="m16 5 4 14"/><path d="M12 6v2"/><path d="M12 11v2"/><path d="M12 16v2"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Carreteras</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Mapa de todas las carreteras según las gestione el Estado, la comunidad o la diputación, cuáles son de peaje, cuántos vehículos pasan por cada tramo y la comparación con Europa.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/ferrocarril" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚆</span> Red de ferrocarril</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Mapa de todas las vías de tren y de cuántos trenes de viajeros pasan al día por cada tramo y estación, con la comparación con Europa.</p>
+    <a href="/movilidad/ferrocarril" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Red de ferrocarril</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Mapa de todas las vías de tren y de cuántos trenes de viajeros pasan al día por cada tramo y estación, con la comparación con Europa.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/gasolineras" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">⛽</span> Gasolineras y carburantes</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Las 11.500 gasolineras por marca y grupo, pueblos sin ninguna, precio del gasóleo y la gasolina desde 2007 en euros reales e impuestos frente a la UE.</p>
+    <a href="/movilidad/gasolineras" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="15" y2="22"/><line x1="4" y1="9" x2="14" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Gasolineras y carburantes</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Las 11.500 gasolineras por marca y grupo, pueblos sin ninguna, precio del gasóleo y la gasolina desde 2007 en euros reales e impuestos frente a la UE.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/movilidad/oleoductos" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🛢️</span> Oleoductos y gasoductos</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">La red de oleoductos de Exolum, cuánto combustible va por tubo, barco o camión, los gasoductos y regasificadoras y de dónde viene el gas.</p>
+    <a href="/movilidad/oleoductos" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M6 8v8"/><path d="M18 8v8"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Oleoductos y gasoductos</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">La red de oleoductos de Exolum, cuánto combustible va por tubo, barco o camión, los gasoductos y regasificadoras y de dónde viene el gas.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
 </div>
 
+<div class="sf-sources-footer">
 <LastRefreshed prefix="Datos actualizados" />
+</div>

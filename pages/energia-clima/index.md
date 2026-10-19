@@ -10,9 +10,29 @@ og:
     import { formatDecimal } from '../../../../../src/lib/utils.js';
 </script>
 
-# 🌱 Energía, Clima y Transición Ecológica
-
-En {resumen_ultimo[0]?.anio}, las renovables generaron el {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % de la electricidad en España, según Red Eléctrica. Esta sección presenta las cifras oficiales del sistema eléctrico, las emisiones de gases de efecto invernadero y la evolución de la potencia instalada renovable.
+<div class="sf-topic-banner not-prose">
+    <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <a href="/" class="hover:underline text-slate-500 dark:text-slate-400 no-underline">Inicio</a>
+        <span>/</span>
+        <span class="font-semibold" style="color: var(--sf-topic-color)">Energía y Clima</span>
+    </div>
+    <div class="flex items-start gap-3.5">
+        <div class="sf-icon-box mt-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+            <h1 class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Energía, Clima y Transición Ecológica</h1>
+            <p class="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed m-0">
+                En {resumen_ultimo[0]?.anio}, las renovables generaron el {formatDecimal(resumen_ultimo[0]?.cuota_renovable_pct)} % de la electricidad en España, según Red Eléctrica. Esta sección presenta las cifras oficiales del sistema eléctrico, las emisiones de gases de efecto invernadero y la evolución de la potencia instalada renovable.
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Por habitante y %</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Tiempo real (REE 5 min)</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">REE · MITECO · AEMET · Eurostat</span>
+    </div>
+</div>
 
 ```sql resumen_ultimo
 SELECT * FROM mother.energia_resumen_anual_mix
@@ -227,159 +247,119 @@ ORDER BY anio ASC, sector ASC
 
 <Grid cols=2>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-green-300 dark:hover:border-green-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-950/60 text-green-600 dark:text-green-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            ⚡
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Mix de Generación Eléctrica</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Análisis profundo del mix eléctrico: el auge de la eólica y solar FV, el cierre del carbón, la dependencia del gas natural y el papel de la nuclear.
-        </p>
+<a href="/energia-clima/mix-electrico" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
     </div>
-    <a href="/energia-clima/mix-electrico" class="text-sm font-semibold text-green-700 dark:text-green-400 hover:underline inline-flex items-center">
-        Ver informe del mix eléctrico →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Mix de Generación Eléctrica</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Análisis profundo del mix eléctrico: el auge de la eólica y solar FV, el cierre del carbón, la dependencia del gas natural y el papel de la nuclear.
+    </p>
+    <span class="sf-card-cta">Ver informe del mix eléctrico →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-amber-300 dark:hover:border-amber-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🏭
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Emisiones y Descarbonización</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Desglose sectorial de los gases de efecto invernadero: por qué el transporte es el gran reto pendiente y cómo la electricidad ya se está descarbonizando.
-        </p>
+<a href="/energia-clima/emisiones" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
     </div>
-    <a href="/energia-clima/emisiones" class="text-sm font-semibold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center">
-        Ver informe de emisiones →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Emisiones y Descarbonización</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Desglose sectorial de los gases de efecto invernadero: por qué el transporte es el gran reto pendiente y cómo la electricidad ya se está descarbonizando.
+    </p>
+    <span class="sf-card-cta">Ver informe de emisiones →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-sky-300 dark:hover:border-sky-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            💧
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Reservas de Agua y Embalses</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Estado semanal de los embalses por cuenca: cuánta agua hay, cómo está frente al año pasado y frente a la media de la última década.
-        </p>
+<a href="/energia-clima/embalses" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
     </div>
-    <a href="/energia-clima/embalses" class="text-sm font-semibold text-sky-700 dark:text-sky-400 hover:underline inline-flex items-center">
-        Ver el estado de los embalses →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Reservas de Agua y Embalses</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Estado semanal de los embalses por cuenca: cuánta agua hay, cómo está frente al año pasado y frente a la media de la última década.
+    </p>
+    <span class="sf-card-cta">Ver el estado de los embalses →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-orange-300 dark:hover:border-orange-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🌡️
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Calor y Temperaturas</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            El mapa diario del calor por provincia: cuánto se aleja la temperatura máxima de la media histórica de cada día, los récords y la tendencia desde 1991.
-        </p>
+<a href="/energia-clima/calor" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
     </div>
-    <a href="/energia-clima/calor" class="text-sm font-semibold text-red-600 dark:text-red-400 hover:underline inline-flex items-center">
-        Ver el mapa del calor →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Calor y Temperaturas</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        El mapa diario del calor por provincia: cuánto se aleja la temperatura máxima de la media histórica de cada día, los récords y la tendencia desde 1991.
+    </p>
+    <span class="sf-card-cta">Ver el mapa del calor →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-red-300 dark:hover:border-red-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🔥
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Incendios Forestales</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Hectáreas quemadas cada año desde 2000, cuánto arde dentro de la Red Natura 2000, el mapa de los incendios de este año y los focos activos detectados por satélite.
-        </p>
+<a href="/energia-clima/incendios" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
     </div>
-    <a href="/energia-clima/incendios" class="text-sm font-semibold text-red-600 dark:text-red-400 hover:underline inline-flex items-center">
-        Ver el mapa de incendios →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Incendios Forestales</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Hectáreas quemadas cada año desde 2000, cuánto arde dentro de la Red Natura 2000, el mapa de los incendios de este año y los focos activos detectados por satélite.
+    </p>
+    <span class="sf-card-cta">Ver el mapa de incendios →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-teal-300 dark:hover:border-teal-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            📡
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">El Sistema Eléctrico, Ahora</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de España, la Península, Baleares, Canarias, Ceuta y Melilla, intercambios con los países vecinos y el precio de la luz.
-        </p>
+<a href="/energia-clima/directo" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
     </div>
-    <a href="/energia-clima/directo" class="text-sm font-semibold text-teal-700 dark:text-teal-400 hover:underline inline-flex items-center">
-        Ver el sistema en directo →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">El Sistema Eléctrico, Ahora</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        En directo cada 5 minutos: demanda, % renovable e intensidad de CO₂ de España, la Península, Baleares, Canarias, Ceuta y Melilla, intercambios con los países vecinos y el precio de la luz.
+    </p>
+    <span class="sf-card-cta">Ver el sistema en directo →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-yellow-300 dark:hover:border-yellow-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-950/60 text-yellow-600 dark:text-yellow-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🏆
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Récords del Sistema Eléctrico</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Máximos y mínimos históricos desde 2015 con datos de REE cada 5 minutos: demanda, solar, eólica, cuota renovable, emisiones, precios e intercambios, y cuándo se batió cada récord.
-        </p>
+<a href="/energia-clima/records" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
     </div>
-    <a href="/energia-clima/records" class="text-sm font-semibold text-yellow-700 dark:text-yellow-400 hover:underline inline-flex items-center">
-        Ver los récords →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Récords del Sistema Eléctrico</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Máximos y mínimos históricos desde 2015 con datos de REE cada 5 minutos: demanda, solar, eólica, cuota renovable, emisiones, precios e intercambios, y cuándo se batió cada récord.
+    </p>
+    <span class="sf-card-cta">Ver los récords →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-indigo-300 dark:hover:border-indigo-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🗺️
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Centrales Eléctricas</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            El mapa de todas las centrales de España por tecnología y potencia: las que funcionan, las que están en obras o en tramitación y las que ya cerraron, con su propietario y sus fechas.
-        </p>
+<a href="/energia-clima/centrales" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
     </div>
-    <a href="/energia-clima/centrales" class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center">
-        Ver el mapa de centrales →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Centrales Eléctricas</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        El mapa de todas las centrales de España por tecnología y potencia: las que funcionan, las que están en obras o en tramitación y las que ya cerraron, con su propietario y sus fechas.
+    </p>
+    <span class="sf-card-cta">Ver el mapa de centrales →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-violet-300 dark:hover:border-violet-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🔋
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Almacenamiento</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Bombeo hidráulico y baterías: cuánta energía guardan y devuelven, dónde están y los proyectos con permiso de conexión frente al objetivo de 2030.
-        </p>
+<a href="/energia-clima/almacenamiento" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
     </div>
-    <a href="/energia-clima/almacenamiento" class="text-sm font-semibold text-violet-600 dark:text-violet-400 hover:underline inline-flex items-center">
-        Ver el almacenamiento →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Almacenamiento</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Bombeo hidráulico y baterías: cuánta energía guardan y devuelven, dónde están y los proyectos con permiso de conexión frente al objetivo de 2030.
+    </p>
+    <span class="sf-card-cta">Ver el almacenamiento →</span>
+</a>
 
-<div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 shadow-sm flex flex-col justify-between hover:border-blue-300 dark:hover:border-blue-700 transition-all">
-    <div>
-        <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xl mb-4" aria-hidden="true">
-            🔌
-        </div>
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Electrificación</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Cuánta energía de la industria, el transporte, los hogares y los servicios es ya electricidad, cómo se calientan las casas en cada provincia y cuántas bombas de calor hay.
-        </p>
+<a href="/energia-clima/electrificacion" class="sf-subtopic-card no-underline">
+    <div class="sf-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
     </div>
-    <a href="/energia-clima/electrificacion" class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
-        Ver la electrificación →
-    </a>
-</div>
+    <h3 class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-1">Electrificación</h3>
+    <p class="text-sm text-slate-600 dark:text-slate-400 m-0 leading-relaxed">
+        Cuánta energía de la industria, el transporte, los hogares y los servicios es ya electricidad, cómo se calientan las casas en cada provincia y cuántas bombas de calor hay.
+    </p>
+    <span class="sf-card-cta">Ver la electrificación →</span>
+</a>
 
 </Grid>
 
----
+<div class="sf-sources-footer">
 
 ## Metodología y Fuentes Primarias
 
@@ -392,3 +372,5 @@ ORDER BY anio ASC, sector ASC
 > Los datos de generación eléctrica proceden del balance nacional medido en barras de central por REE como Operador del Sistema (solo años completos). Las emisiones son las del inventario oficial de España (sin LULUCF), calculadas según las directrices del IPCC y reportadas a la Convención Marco de Naciones Unidas sobre el Cambio Climático (CMNUCC); Eurostat las publica desglosadas por categoría CRF, que aquí se agrupan en sectores.
 
 <LastRefreshed prefix="Última sincronización de datos con fuentes oficiales" />
+
+</div>

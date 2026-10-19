@@ -72,9 +72,29 @@ WHERE nivel = 'pais' AND tipo = '02'
 ORDER BY fecha
 ```
 
-# 👥 Sociedad
-
-Cómo vivimos en España: la seguridad, la salud, la población que llega de fuera, la renta, la educación y el voto, con las cifras oficiales y el contexto necesario para leerlas bien.
+<div class="sf-topic-banner not-prose">
+    <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <a href="/" class="hover:underline text-slate-500 dark:text-slate-400 no-underline">Inicio</a>
+        <span>/</span>
+        <span class="font-semibold" style="color: var(--sf-topic-color)">Sociedad</span>
+    </div>
+    <div class="flex items-start gap-3.5">
+        <div class="sf-icon-box mt-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+            <h1 class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Sociedad</h1>
+            <p class="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed m-0">
+                Cómo vivimos en España: la seguridad, la salud, la población que llega de fuera, la renta, la educación y el voto, con las cifras oficiales y el contexto necesario para leerlas bien.
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Por habitante</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">Comparativa UE</span>
+        <span class="inline-flex items-center gap-1 rounded-md bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 font-medium text-slate-700 dark:text-slate-300">INE · Interior · Sanidad · Eurostat</span>
+    </div>
+</div>
 
 <Grid cols=3>
     <KpiCard
@@ -143,35 +163,67 @@ Cómo vivimos en España: la seguridad, la salud, la población que llega de fue
     />
 </Grid>
 
+## Explora en detalle
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose my-6">
-    <a href="/sociedad/criminalidad" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-red-400 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🚨</span> Criminalidad</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Delitos conocidos por tipo, comunidad, provincia y municipio desde 2010, cibercriminalidad y condenados por nacionalidad con su contexto.</p>
+    <a href="/sociedad/criminalidad" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Criminalidad</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Delitos conocidos por tipo, comunidad, provincia y municipio desde 2010, cibercriminalidad y condenados por nacionalidad con su contexto.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/salud" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🩺</span> Salud</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Esperanza de vida, causas de muerte y exceso de mortalidad, y el sistema sanitario: listas de espera, médicos, camas y gasto.</p>
+    <a href="/sociedad/salud" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Salud</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Esperanza de vida, causas de muerte y exceso de mortalidad, y el sistema sanitario: listas de espera, médicos, camas y gasto.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/inmigracion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-teal-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🌍</span> Inmigración</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Población extranjera por comunidad y origen, saldo migratorio, llegadas irregulares, asilo y nacionalizaciones.</p>
+    <a href="/sociedad/inmigracion" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Inmigración</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Población extranjera por comunidad y origen, saldo migratorio, llegadas irregulares, asilo y nacionalizaciones.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/desigualdad" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">💶</span> Renta, pobreza y desigualdad</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Renta de los hogares descontada la inflación, riesgo de pobreza, AROPE, Gini y S80/S20 por comunidad, edad y municipio, y comparación con la UE.</p>
+    <a href="/sociedad/desigualdad" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Renta, pobreza y desigualdad</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Renta de los hogares descontada la inflación, riesgo de pobreza, AROPE, Gini y S80/S20 por comunidad, edad y municipio, y comparación con la UE.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/educacion" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-indigo-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🎓</span> Educación</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Abandono escolar temprano, nivel de estudios de los adultos, jóvenes que ni estudian ni trabajan, gasto por habitante y por alumno, FP y PISA, frente a la UE y por comunidad.</p>
+    <a href="/sociedad/educacion" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Educación</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Abandono escolar temprano, nivel de estudios de los adultos, jóvenes que ni estudian ni trabajan, gasto por habitante y por alumno, FP y PISA, frente a la UE y por comunidad.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/publico-privado" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-orange-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🏥</span> Público y privado</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Cuánto de la sanidad y la educación públicas se presta a través de empresas y centros privados: conciertos, hospitales de concesión, seguros, concertada, FP y universidades privadas.</p>
+    <a href="/sociedad/publico-privado" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M12 6v4"/><path d="M10 8h4"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Público y privado</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Cuánto de la sanidad y la educación públicas se presta a través de empresas y centros privados: conciertos, hospitales de concesión, seguros, concertada, FP y universidades privadas.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
-    <a href="/sociedad/elecciones" class="block rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 hover:border-blue-500 no-underline">
-        <p class="text-lg font-bold text-gray-900 dark:text-white"><span aria-hidden="true">🗳️</span> Elecciones</p>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Generales desde 1977, europeas y municipales: participación, voto por partido y bloque, fragmentación, votos por escaño y ganador en cada provincia y municipio.</p>
+    <a href="/sociedad/elecciones" class="sf-subtopic-card no-underline">
+        <div class="sf-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><path d="M5 7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v12H5V7Z"/><path d="M22 19H2"/></svg>
+        </div>
+        <p class="text-base font-bold text-slate-900 dark:text-white mt-3 mb-0">Elecciones</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 mb-0">Generales desde 1977, europeas y municipales: participación, voto por partido y bloque, fragmentación, votos por escaño y ganador en cada provincia y municipio.</p>
+        <span class="sf-card-cta">Explorar datos →</span>
     </a>
 </div>
 
+<div class="sf-sources-footer">
 <LastRefreshed prefix="Datos actualizados" />
+</div>

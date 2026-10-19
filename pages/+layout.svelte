@@ -30,16 +30,21 @@
     import { page } from "$app/stores";
     import { IDIOMAS, idiomaDeRuta, rutaEnIdioma, t } from "../../../../src/lib/i18n.js";
     import { CLOUDFLARE_ANALITICA_TOKEN } from "../../../../src/lib/config/analitica.js";
+    import { inicializarPaleta, temaDeRuta } from "../../../../src/lib/config/paleta.js";
     import { onMount } from "svelte";
     export let data;
 
     // Las estadísticas solo en la web publicada: en local o en las pruebas, Cloudflare rechaza
     // el envío (CORS), ensucia la consola y contaría visitas que no son
     let enProduccion = false;
-    onMount(() => (enProduccion = /(^|\.)spainfacts\.org$/.test(location.hostname)));
+    onMount(() => {
+        enProduccion = /(^|\.)spainfacts\.org$/.test(location.hostname);
+        inicializarPaleta();
+    });
 
     // Idioma según la ruta (/en/..., /ca/..., /gl/..., /eu/...; sin prefijo, castellano)
     $: lang = idiomaDeRuta($page.url.pathname);
+    $: temaActual = temaDeRuta($page.url.pathname);
     // Números y fechas de Evidence con el formato del idioma (1.234,5 / 1,234.5)
     $: setFormatLocale(IDIOMAS[lang].locale);
     $: fijarLocale(IDIOMAS[lang].locale);
@@ -75,14 +80,16 @@
 
 <Header {data} />
 
-<EvidenceDefaultLayout
-    {data}
-    logo="/logo16.svg"
-    builtWithEvidence={false}
-    hideSidebar={true}
-    hideHeader={true}
->
-    <slot slot="content" />
-</EvidenceDefaultLayout>
+<div data-tema={temaActual}>
+    <EvidenceDefaultLayout
+        {data}
+        logo="/logo16.svg"
+        builtWithEvidence={false}
+        hideSidebar={true}
+        hideHeader={true}
+    >
+        <slot slot="content" />
+    </EvidenceDefaultLayout>
+</div>
 
 <Footer />

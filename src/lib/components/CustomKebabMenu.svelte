@@ -21,6 +21,7 @@
     } from "@steeze-ui/tabler-icons";
     import { showQueries } from "@evidence-dev/component-utilities/stores";
     import { getThemeStores } from "../themes/themes.js";
+    import { PALETAS, paletaActiva, cambiarPaleta } from "../config/paleta.js";
     import { dev } from "$app/environment";
 
     const beforeprint = new Event("export-beforeprint");
@@ -67,7 +68,7 @@
             <Icon src={Dots} class="h-6 w-6" aria-hidden="true" />
         </Button>
     </DropdownMenu.Trigger>
-    <DropdownMenu.Content class="w-52 text-xs">
+    <DropdownMenu.Content class="w-56 text-xs">
         <DropdownMenu.Group>
             <DropdownMenu.Item on:click={print}>
                 {t("opc.imprimir", lang)}
@@ -100,6 +101,19 @@
                     </DropdownMenu.Shortcut>
                 </DropdownMenu.Item>
             {/if}
+        </DropdownMenu.Group>
+        <DropdownMenu.Separator />
+        <DropdownMenu.Group>
+            <DropdownMenu.Label class="text-xs font-medium bg-transparent text-gray-500 dark:text-gray-400">Paleta de color</DropdownMenu.Label>
+            {#each Object.values(PALETAS) as p}
+                <DropdownMenu.Item on:click={() => cambiarPaleta(p.id)}>
+                    <span class="inline-flex items-center gap-2 {p.id === $paletaActiva ? 'font-semibold' : ''}">
+                        <span class="h-2.5 w-2.5 rounded-full shrink-0" style="background-color: {p.muestra}"></span>
+                        <span>{p.nombre[lang] ?? p.nombre.es}</span>
+                    </span>
+                    <DropdownMenu.Shortcut>{p.id === $paletaActiva ? "✓" : ""}</DropdownMenu.Shortcut>
+                </DropdownMenu.Item>
+            {/each}
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.Group>

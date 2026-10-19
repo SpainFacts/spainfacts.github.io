@@ -99,7 +99,7 @@
                 <!-- Brand Logo & Name -->
                 <a href={enlace("/", lang)} class="flex-shrink-0 flex items-center gap-2 group rounded-md" aria-label={t("menu.inicio", lang)}>
                     <span class="font-extrabold text-lg tracking-tight text-gray-900 dark:text-white flex items-center gap-1">
-                        Spain<span class="text-blue-600 dark:text-blue-400">Facts</span>
+                        Spain<span class="sf-brand-accent">Facts</span>
                     </span>
                 </a>
 
