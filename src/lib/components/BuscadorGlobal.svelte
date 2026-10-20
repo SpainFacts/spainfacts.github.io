@@ -2,7 +2,7 @@
     import { tick } from "svelte";
     import { page } from "$app/stores";
     import { idiomaDeRuta, enlace, t } from "../i18n.js";
-    import { buscarGlobal } from "../indice-busqueda.js";
+    import { buscarGlobal, cargarTodosMunicipios } from "../indice-busqueda.js";
     import { localeActual } from "../utils.js";
 
     export let abierto = false;
@@ -12,15 +12,22 @@
     let texto = "";
     let activo = 0;
     let inputEl;
+    let municipiosCargados = [];
 
+    // Al abrir el modal, asegurar la carga de todos los municipios (+8.100) en segundo plano
     $: if (abierto) {
         tick().then(() => inputEl?.focus());
+        if (!municipiosCargados.length) {
+            cargarTodosMunicipios().then((res) => {
+                if (res && res.length) municipiosCargados = res;
+            });
+        }
     } else {
         texto = "";
         activo = 0;
     }
 
-    $: busqueda = buscarGlobal(texto, { lang });
+    $: busqueda = buscarGlobal(texto, { lang, municipios: municipiosCargados });
     $: chatItem =
         texto.trim().length >= 3
             ? [

@@ -704,6 +704,45 @@ export const TERRITORIOS_ESTATICOS = [
 	}))
 ];
 
+let cacheTodosMunicipios = null;
+let cargandoMunicipios = null;
+
+/**
+ * Carga bajo demanda en segundo plano el índice estático con los +8.100 municipios de España
+ * (~100 KB gzipped). Se descarga una sola vez y queda en memoria/caché.
+ */
+export async function cargarTodosMunicipios() {
+	if (cacheTodosMunicipios) return cacheTodosMunicipios;
+	if (cargandoMunicipios) return cargandoMunicipios;
+	if (typeof window === 'undefined') return [];
+
+	cargandoMunicipios = (async () => {
+		try {
+			const res = await fetch('/geo/municipios-busqueda.json');
+			if (!res.ok) return [];
+			const tuplas = await res.json();
+			cacheTodosMunicipios = tuplas.map(([cod_mun, municipio, provincia, poblacion]) => ({
+				cod_mun,
+				municipio,
+				provincia,
+				poblacion
+			}));
+			return cacheTodosMunicipios;
+		} catch (e) {
+			console.warn('No se pudo cargar el índice de municipios:', e);
+			return [];
+		} finally {
+			cargandoMunicipios = null;
+		}
+	})();
+
+	return cargandoMunicipios;
+}
+
+export function obtenerMunicipiosCargados() {
+	return cacheTodosMunicipios;
+}
+
 function puntuarTexto(tokens, principal, secundario = '') {
 	const p = normalizarTexto(principal);
 	const s = normalizarTexto(`${principal} ${secundario}`);
@@ -809,11 +848,19 @@ export function buscarGlobal(consulta, { lang = 'es', municipios = [] } = {}) {
 		.sort((a, b) => b.puntos - a.puntos)
 		.slice(0, 5);
 
-	const listaMun = Array.from(municipios ?? []).length ? Array.from(municipios) : MUNICIPIOS_DESTACADOS;
-	const resMunicipios = listaMun
-		.map((m) => {
-			const puntos = puntuarTexto(tokens, m.municipio, `${m.provincia} ciudad municipio ayuntamiento`);
-			return {
+	const listaMun =
+		Array.from(municipios ?? []).length
+			? Array.from(municipios)
+			: cacheTodosMunicipios && cacheTodosMunicipios.length
+			  ? cacheTodosMunicipios
+			  : MUNICIPIOS_DESTACADOS;
+
+	const resMunicipios = [];
+	for (let i = 0; i < listaMun.length; i++) {
+		const m = listaMun[i];
+		const puntos = puntuarTexto(tokens, m.municipio, `${m.provincia} ciudad municipio ayuntamiento`);
+		if (puntos > 0) {
+			resMunicipios.push({
 				categoria: 'municipios',
 				href: `${enlace('/territorios/municipios', lang)}?m=${m.cod_mun}`,
 				icono: '🏘️',
@@ -821,11 +868,11 @@ export function buscarGlobal(consulta, { lang = 'es', municipios = [] } = {}) {
 				subtitulo: m.provincia,
 				poblacion: Number(m.poblacion) || 0,
 				puntos
-			};
-		})
-		.filter((x) => x.puntos > 0)
-		.sort((a, b) => b.puntos - a.puntos || b.poblacion - a.poblacion)
-		.slice(0, 6);
+			});
+		}
+	}
+	resMunicipios.sort((a, b) => b.puntos - a.puntos || b.poblacion - a.poblacion);
+	const resMunicipiosSlice = resMunicipios.slice(0, 6);
 
 	return {
 		vacio: false,
@@ -833,6 +880,6 @@ export function buscarGlobal(consulta, { lang = 'es', municipios = [] } = {}) {
 		temas,
 		indicadores,
 		territorios,
-		municipios: resMunicipios
+		municipios: resMunicipiosSlice
 	};
 }

@@ -2,17 +2,29 @@
     import { localeActual } from "../utils.js";
     import { page } from "$app/stores";
     import { idiomaDeRuta, enlace, t, tf } from "../i18n.js";
-    import { buscarGlobal } from "../indice-busqueda.js";
+    import { onMount } from "svelte";
+    import { buscarGlobal, cargarTodosMunicipios } from "../indice-busqueda.js";
 
     $: lang = idiomaDeRuta($page.url.pathname);
     /** Filas con cod_mun, municipio, provincia, poblacion */
     export let opciones = [];
+    let municipiosExtra = [];
+
+    onMount(() => {
+        if (!opciones || !opciones.length) {
+            cargarTodosMunicipios().then((res) => {
+                if (res && res.length) municipiosExtra = res;
+            });
+        }
+    });
+
+    $: listaMunicipiosEfectiva = (opciones && opciones.length) ? opciones : municipiosExtra;
 
     let texto = "";
     let abierto = false;
     let activo = 0;
 
-    $: busqueda = buscarGlobal(texto, { lang, municipios: opciones });
+    $: busqueda = buscarGlobal(texto, { lang, municipios: listaMunicipiosEfectiva });
     $: chatItem =
         texto.trim().length >= 3
             ? [

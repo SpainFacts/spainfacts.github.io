@@ -2,6 +2,7 @@
     import { Logo } from "@evidence-dev/core-components";
     import CustomKebabMenu from "./CustomKebabMenu.svelte";
     import BuscadorGlobal from "./BuscadorGlobal.svelte";
+    import { cargarTodosMunicipios } from "../indice-busqueda.js";
     import { page } from "$app/stores";
     import { idiomaDeRuta, rutaBase, enlace, t } from "../i18n.js";
 
@@ -150,6 +151,8 @@
                 <button
                     type="button"
                     on:click={() => (buscadorAbierto = true)}
+                    on:mouseenter={() => cargarTodosMunicipios()}
+                    on:focus={() => cargarTodosMunicipios()}
                     aria-label={t("menu.buscar", lang)}
                     class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50/90 px-2.5 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:border-blue-400 hover:bg-white hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-300 dark:hover:border-blue-500 dark:hover:text-white"
                 >
