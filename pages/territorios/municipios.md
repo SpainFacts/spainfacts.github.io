@@ -88,6 +88,12 @@ SELECT
 
 <p class="text-sm text-gray-500"><a href="/territorios">Territorios</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa ?? '…'}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia ?? '…'}</a> › {mun[0]?.municipio ?? '…'}</p>
 
+{#if inputs.municipio === '34120'}
+
+<p><strong>Persona destacada:</strong> Jonatan.</p>
+
+{/if}
+
 <Grid cols=3>
     <KpiCard
         title="Población"

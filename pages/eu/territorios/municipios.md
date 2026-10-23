@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 266d2729eb74
+i18n_origen: 8160eecde742
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -100,6 +100,12 @@ SELECT
 ## {mun[0]?.municipio ?? '…'}
 
 <p class="text-sm text-gray-500"><a href="/eu/territorios">Lurraldeak</a> › <a href={mun[0]?.ccaa_ruta}>{mun[0]?.ccaa ?? '…'}</a> › <a href={mun[0]?.provincia_ruta}>{mun[0]?.provincia ?? '…'}</a> › {mun[0]?.municipio ?? '…'}</p>
+
+{#if inputs.municipio === '34120'}
+
+<p><strong>Pertsona nabarmena:</strong> Jonatan.</p>
+
+{/if}
 
 <Grid cols=3>
     <KpiCard
