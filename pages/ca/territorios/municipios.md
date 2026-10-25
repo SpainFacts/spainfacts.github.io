@@ -1,7 +1,7 @@
 ---
 title: Municipis
 description: "Cerca qualsevol municipi d'Espanya: població, comptes de l'ajuntament i comparació amb municipis de la seva mida."
-i18n_origen: 9ed2e5ca61dd
+i18n_origen: 4241525082ff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,7 +40,7 @@ ORDER BY m.poblacion DESC
 
 Cerca qualsevol dels més de 8.100 municipis d'Espanya. L'enllaç de la pàgina canvia amb la teva tria, així que el pots compartir tal qual.
 
-<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" />
+<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" listo={mun[0]?.cod_mun} />
 
 ```sql mun
 SELECT

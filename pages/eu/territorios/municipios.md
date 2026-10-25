@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 9ed2e5ca61dd
+i18n_origen: 4241525082ff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -52,7 +52,7 @@ ORDER BY m.poblacion DESC
 
 Bilatu Espainiako 8.100 udalerri baino gehiagoetako edozein. Orriaren esteka zure aukeraren arabera aldatzen da, beraz, bere horretan parteka dezakezu.
 
-<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" />
+<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" listo={mun[0]?.cod_mun} />
 
 ```sql mun
 SELECT

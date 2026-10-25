@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 9ed2e5ca61dd
+i18n_origen: 4241525082ff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,7 +40,7 @@ ORDER BY m.poblacion DESC
 
 Busca calquera dos máis de 8.100 municipios de España. A ligazón da páxina cambia coa túa elección, así que podes compartila tal cal.
 
-<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" />
+<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" listo={mun[0]?.cod_mun} />
 
 ```sql mun
 SELECT

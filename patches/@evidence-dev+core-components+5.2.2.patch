@@ -94,10 +94,10 @@ index 41263f2..1b40ee5 100644
  				</a>
  			{/if}
 diff --git a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
-index 3e4156d..aabdd7c 100644
+index 3e4156d..9ef5b6f 100644
 --- a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
-@@ -1,11 +1,44 @@
+@@ -1,53 +1,116 @@
  <script>
  	import { onMount, onDestroy } from 'svelte';
 +	import { page } from '$app/stores';
@@ -114,14 +114,18 @@ index 3e4156d..aabdd7c 100644
  	function updateLinks() {
  		headers = Array.from(document.querySelectorAll('h1.markdown, h2.markdown, h3.markdown'));
 +		marcarActivo();
-+	}
-+
+ 	}
+ 
+-	function observeDocumentChanges() {
+-		observer = new MutationObserver(() => {
+-			updateLinks();
+-		});
 +	// La sección activa es el último título que ya ha pasado por debajo de la cabecera fija;
 +	// al llegar al final de la página, el último título (aunque no llegue arriba)
 +	function marcarActivo() {
 +		pendiente = false;
 +		if (!headers.length) return;
-+		const margen = 120;
++		const margen = 160;
 +		let actual = headers[0];
 +		for (const h of headers) {
 +			if (h.getBoundingClientRect().top - margen <= 0) actual = h;
@@ -139,10 +143,35 @@ index 3e4156d..aabdd7c 100644
 +		if (pendiente) return;
 +		pendiente = true;
 +		requestAnimationFrame(marcarActivo);
++	}
+ 
+-		headers.forEach((header) => {
+-			observer.observe(header, { subtree: true, characterData: true, childList: true });
++	// SpainFacts: las secciones que dependen de datos ({#if ...}) aparecen después de montar;
++	// se vigila todo el artículo y se rehace el índice cuando cambian los títulos
++	let programado = false;
++	function alCambiar() {
++		if (programado) return;
++		programado = true;
++		requestAnimationFrame(() => {
++			programado = false;
++			const nuevos = Array.from(document.querySelectorAll('h1.markdown, h2.markdown, h3.markdown'));
++			const iguales =
++				nuevos.length === headers.length &&
++				nuevos.every((h, i) => h === headers[i] && h.id === textos[i]?.id && h.textContent === textos[i]?.texto);
++			if (!iguales) updateLinks();
+ 		});
++	}
++	let textos = [];
++	$: textos = headers.map((h) => ({ id: h.id, texto: h.textContent }));
+ 
++	function observeDocumentChanges() {
++		observer = new MutationObserver(alCambiar);
++		const raiz = document.getElementById('evidence-main-article') ?? document.body;
++		observer.observe(raiz, { subtree: true, characterData: true, childList: true });
+ 		return observer;
  	}
  
- 	function observeDocumentChanges() {
-@@ -23,31 +56,48 @@
  	onMount(() => {
  		updateLinks();
  		observer = observeDocumentChanges();
@@ -184,7 +213,8 @@ index 3e4156d..aabdd7c 100644
 +			class:activo={activo === header.id}
 +			class:border-transparent={activo !== header.id}
  		>
- 			{header.innerText}
+-			{header.innerText}
++			{header.textContent.trim()}
  		</a>
  	{/each}
  {/if}

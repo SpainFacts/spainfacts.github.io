@@ -39,7 +39,7 @@ ORDER BY m.poblacion DESC
 
 Busca cualquiera de los más de 8.100 municipios de España. El enlace de la página cambia con tu elección, así que puedes compartirlo tal cual.
 
-<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" />
+<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" listo={mun[0]?.cod_mun} />
 
 ```sql mun
 SELECT

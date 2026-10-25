@@ -16,6 +16,7 @@
     import { calcularEscala, colorEn, RAYADO } from '../escalaMapa.js';
     import LeyendaMapa from './LeyendaMapa.svelte';
     import RayadoMapa from './RayadoMapa.svelte';
+    import { esDelMunicipioPorDefecto } from '../municipioPendiente.js';
     import { page } from '$app/stores';
     import { fmt } from '@evidence-dev/component-utilities/formatting';
     import { idiomaDeRuta, t } from '../i18n.js';
@@ -130,14 +131,19 @@
     async function cargar(url) {
         // mientras cargan los datos la URL lleva «undefined»: se espera
         if (!url || url === cargada || url.includes('undefined')) return;
+        // En la ficha de municipio, no bajar el mapa del municipio por defecto si la URL pide otro
+        if (esDelMunicipioPorDefecto(url)) return;
         cargada = url;
         try {
             const r = await fetch(url);
             if (!r.ok) throw new Error(r.status);
-            geo = await r.json();
+            const json = await r.json();
+            // si mientras tanto se pidió otro mapa, esta respuesta ya no vale
+            if (cargada !== url) return;
+            geo = json;
             error = false;
         } catch (e) {
-            error = true;
+            if (cargada === url) error = true;
         }
     }
     $: if (typeof window !== 'undefined') cargar(geoJsonUrl);

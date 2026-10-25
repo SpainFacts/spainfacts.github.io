@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 9ed2e5ca61dd
+i18n_origen: 4241525082ff
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -40,7 +40,7 @@ ORDER BY m.poblacion DESC
 
 Search for any of Spain's more than 8,100 municipalities. The page link changes with your choice, so you can share it as it is.
 
-<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" />
+<BuscadorMunicipio opciones={lista_municipios} name="municipio" defecto="28079" listo={mun[0]?.cod_mun} />
 
 ```sql mun
 SELECT

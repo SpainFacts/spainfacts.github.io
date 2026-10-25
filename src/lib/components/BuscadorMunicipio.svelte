@@ -44,21 +44,48 @@
         }
     }
 
-    // Antes de montar (y durante el prerender) la página usa el municipio por defecto
+    /** Código del municipio que ya muestran los datos de la página (p. ej. mun[0]?.cod_mun):
+     *  mientras no coincida con el pedido en la URL, se ocultan los datos del municipio por defecto */
+    export let listo = undefined;
+
+    const enNavegador = typeof window !== 'undefined';
+    const valido = (c) => /^[0-9]{5}$/.test(c ?? '');
+    // El código de la URL se aplica YA, sin esperar a la lista de 8.100 municipios
+    // (antes se pintaba y consultaba el municipio por defecto hasta que llegaba la lista)
+    let codUrl = enNavegador ? new URL(window.location.href).searchParams.get(parametro) : null;
+    if (!valido(codUrl)) codUrl = null;
+    const pedido = codUrl ?? defecto;
+    // Al iniciar, siempre el municipio por defecto: es el que trae el HTML prerenderizado.
+    // Si se publicara aquí el de la URL, Evidence asociaría los datos prerenderizados del
+    // municipio por defecto a la consulta del otro (se quedaba Madrid). Se cambia al montar.
     publicar(defecto);
 
-    // El código de la URL se lee al montar, pero la lista de municipios puede
-    // llegar después (la consulta es asíncrona): se aplica cuando haya ambas cosas.
+    // El HTML prerenderizado trae el municipio por defecto: si la URL pide otro, se tapa
+    // hasta que lleguen sus datos (el script de <svelte:head> lo hace antes de pintar)
+    const ATRIBUTO = 'data-municipio-pendiente';
+    const tapar = (si) => {
+        if (!enNavegador) return;
+        if (si) document.documentElement.setAttribute(ATRIBUTO, defecto);
+        else document.documentElement.removeAttribute(ATRIBUTO);
+    };
+    if (pedido !== defecto) tapar(true);
+    $: if (enNavegador && listo && listo === (seleccion?.cod_mun ?? pedido)) tapar(false);
+    const scriptPrevio = `<script>try{var c=new URLSearchParams(location.search).get(${JSON.stringify(parametro)});if(/^[0-9]{5}$/.test(c||'')&&c!==${JSON.stringify(defecto)})document.documentElement.setAttribute('${ATRIBUTO}',${JSON.stringify(defecto)})}catch(e){}<\/script>`;
+
     let montado = false;
-    let codUrl = null;
     onMount(() => {
-        codUrl = new URL(window.location.href).searchParams.get(parametro);
         montado = true;
+        if (!seleccion) publicar(pedido);
+        // Si la rehidratación de la página pisa el input, se vuelve a publicar
+        setTimeout(() => { if (!seleccion && $inputs[name] !== pedido) publicar(pedido); }, 300);
+        // Por si algo falla, no dejar la página tapada para siempre
+        const t = setTimeout(() => tapar(false), 20000);
+        return () => { clearTimeout(t); tapar(false); };
     });
 
+    // Cuando llega la lista se rellena el texto del buscador (y se corrige un código que no exista)
     $: if (montado && !seleccion && opciones.length) {
-        elegir(opciones.find((o) => o.cod_mun === codUrl) ?? opciones.find((o) => o.cod_mun === defecto), false);
-        // Si la rehidratación de la página pisa el input justo después, se vuelve a publicar
+        elegir(opciones.find((o) => o.cod_mun === pedido) ?? opciones.find((o) => o.cod_mun === defecto), false);
         const cod = seleccion?.cod_mun;
         if (cod) setTimeout(() => { if (seleccion?.cod_mun === cod && $inputs[name] !== cod) publicar(cod); }, 300);
     }
@@ -84,7 +111,9 @@
     const miles = (n) => new Intl.NumberFormat(localeActual()).format(n ?? 0);
 </script>
 
-<div class="not-prose relative max-w-xl my-4">
+<svelte:head>{@html scriptPrevio}</svelte:head>
+
+<div class="buscador-municipio not-prose relative max-w-xl my-4">
     <label for="buscador-municipio" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('buscador.label', lang)}</label>
     <input
         id="buscador-municipio"
@@ -122,3 +151,22 @@
         </ul>
     {/if}
 </div>
+
+<style>
+    /* Mientras llegan los datos del municipio de la URL, no enseñar los del municipio por defecto */
+    :global(html[data-municipio-pendiente] .buscador-municipio ~ *) {
+        visibility: hidden;
+    }
+    :global(html[data-municipio-pendiente] .buscador-municipio)::after {
+        content: '…';
+        display: block;
+        margin-top: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: 0.2em;
+        color: var(--base-content-muted, #888);
+        animation: latido 1.2s ease-in-out infinite;
+    }
+    @keyframes latido {
+        50% { opacity: 0.3; }
+    }
+</style>
