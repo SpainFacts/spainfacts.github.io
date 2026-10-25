@@ -1,7 +1,7 @@
 ---
 title: Proactive disclosure
 description: "Do public administrations publish on their transparency portals what the law requires of them? Official assessments by entity (Council of Transparency and Good Governance and Canary Islands Transparency Commissioner), their evolution, the comparison by party and what cannot yet be measured."
-i18n_origen: ade15fac60e0
+i18n_origen: e97ef389c875
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -13,7 +13,7 @@ og:
 </script>
 
 ```sql age
-SELECT CAST(anio AS VARCHAR) AS anio, puntuacion AS icio, gobernante, familia, url_fuente
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, puntuacion AS icio, gobernante, familia, url_fuente
 FROM mother.transparencia_publicidad_activa
 WHERE tipo_administracion = 'Administración General del Estado'
 ORDER BY anio
@@ -31,7 +31,7 @@ ORDER BY icio_2021 DESC
 ```
 
 ```sql ctbg_ccaa_largo
-SELECT entidad, CAST(anio AS VARCHAR) AS evaluacion, puntuacion AS icio
+SELECT entidad, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS evaluacion, puntuacion AS icio
 FROM mother.transparencia_publicidad_activa
 WHERE evaluador = 'Consejo de Transparencia y Buen Gobierno' AND tipo_administracion = 'Comunidad autónoma'
 ORDER BY entidad, anio

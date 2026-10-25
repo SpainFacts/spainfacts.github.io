@@ -1,5 +1,5 @@
 ---
-i18n_origen: 868173fde4bb
+i18n_origen: 061ae2db12a5
 title: Reservas de auga e encoros
 description: Estado semanal dos encoros españois por conca, comparado co ano anterior e coa media dos últimos dez anos.
 og:
@@ -183,7 +183,7 @@ ORDER BY orden, nombre
 ```sql evolucion
 SELECT
     semana,
-    anio::VARCHAR AS año,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año,
     pct_llenado / 100 AS llenado
 FROM mother.embalses_semanal
 WHERE nombre = '${inputs.cuenca.value}'

@@ -1,7 +1,7 @@
 ---
 title: Evolución da poboación
 description: "Poboación de España desde 1971 e o seu crecemento anual por 1.000 habitantes, separado en nacementos menos defuncións e migración, por comunidade e provincia (INE)."
-i18n_origen: d6ea5d77f690
+i18n_origen: a5b670005e50
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,7 +114,7 @@ ORDER BY anio
 ```
 
 ```sql anios_baja
-SELECT count(*) AS n, string_agg(CAST(anio AS VARCHAR), ', ' ORDER BY anio) AS lista,
+SELECT count(*) AS n, string_agg(CAST(CAST(anio AS INTEGER) AS VARCHAR), ', ' ORDER BY anio) AS lista,
     count(*) FILTER (WHERE resto_1000 < 0) AS con_migracion_negativa
 FROM ${anual}
 WHERE crecimiento_1000 < 0

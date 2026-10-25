@@ -81,7 +81,7 @@ En España nacen algo más de niños que de niñas, pero las mujeres viven más:
 ## Según la edad
 
 ```sql por_edad
-SELECT grupo, edad_desde, CAST(anio AS VARCHAR) AS anio, ratio
+SELECT grupo, edad_desde, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, ratio
 FROM ${grupos}
 WHERE anio IN (1975, (SELECT max(anio) FROM ${grupos}))
 ORDER BY edad_desde, anio

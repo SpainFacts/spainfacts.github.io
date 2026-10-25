@@ -1,7 +1,7 @@
 ---
 title: Gizonak eta emakumeak
 description: "Zenbat gizon dauden 100 emakumeko Espainian adinaren arabera, 1971tik, eta erkidego eta probintzia bakoitzean (INE)."
-i18n_origen: ff0532a716ba
+i18n_origen: d3eb2d383cd2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,7 +82,7 @@ Espainian neska baino mutil apur bat gehiago jaiotzen dira, baina emakumeak gehi
 ## Adinaren arabera
 
 ```sql por_edad
-SELECT grupo, edad_desde, CAST(anio AS VARCHAR) AS anio, ratio
+SELECT grupo, edad_desde, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, ratio
 FROM ${grupos}
 WHERE anio IN (1975, (SELECT max(anio) FROM ${grupos}))
 ORDER BY edad_desde, anio

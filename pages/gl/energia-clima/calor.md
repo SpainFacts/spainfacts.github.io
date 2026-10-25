@@ -1,5 +1,5 @@
 ---
-i18n_origen: b2c2b4a53fb2
+i18n_origen: 01a29ff1c709
 title: Calor e temperaturas
 description: Mapa diario da calor en España por provincia, comparado coa temperatura máxima habitual de cada día en 1991-2020, e os récords de cada provincia. Datos de AEMET.
 og:
@@ -230,7 +230,7 @@ Media das provincias da diferenza entre a máxima diaria e o seu normal. O últi
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS anio,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) || CASE WHEN anio_completo THEN '' ELSE ' (incompleto)' END AS anio,
     anomalia_tmax,
     anomalia_tmax_verano,
     dias_p90,

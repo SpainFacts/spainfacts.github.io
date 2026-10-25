@@ -1,7 +1,7 @@
 ---
 title: Calor i temperatures
 description: Mapa diari de la calor a Espanya per província, comparat amb la temperatura màxima habitual de cada dia el 1991-2020, i els rècords de cada província. Dades d'AEMET.
-i18n_origen: b2c2b4a53fb2
+i18n_origen: 01a29ff1c709
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -230,7 +230,7 @@ Mitjana de les províncies de la diferència entre la màxima diària i la seva 
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS anio,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) || CASE WHEN anio_completo THEN '' ELSE ' (incomplet)' END AS anio,
     anomalia_tmax,
     anomalia_tmax_verano,
     dias_p90,

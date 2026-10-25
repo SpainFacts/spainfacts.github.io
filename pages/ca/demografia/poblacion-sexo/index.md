@@ -1,7 +1,7 @@
 ---
 title: Homes i dones
 description: "Quants homes hi ha per cada 100 dones a Espanya segons l'edat, des de 1971, i a cada comunitat i província (INE)."
-i18n_origen: ff0532a716ba
+i18n_origen: d3eb2d383cd2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,7 +82,7 @@ A Espanya neixen una mica més de nens que de nenes, però les dones viuen més:
 ## Segons l'edat
 
 ```sql por_edad
-SELECT grupo, edad_desde, CAST(anio AS VARCHAR) AS anio, ratio
+SELECT grupo, edad_desde, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, ratio
 FROM ${grupos}
 WHERE anio IN (1975, (SELECT max(anio) FROM ${grupos}))
 ORDER BY edad_desde, anio

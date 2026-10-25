@@ -113,7 +113,7 @@ ORDER BY anio
 ```
 
 ```sql anios_baja
-SELECT count(*) AS n, string_agg(CAST(anio AS VARCHAR), ', ' ORDER BY anio) AS lista,
+SELECT count(*) AS n, string_agg(CAST(CAST(anio AS INTEGER) AS VARCHAR), ', ' ORDER BY anio) AS lista,
     count(*) FILTER (WHERE resto_1000 < 0) AS con_migracion_negativa
 FROM ${anual}
 WHERE crecimiento_1000 < 0

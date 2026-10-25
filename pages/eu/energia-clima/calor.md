@@ -1,7 +1,7 @@
 ---
 title: Beroa eta tenperaturak
 description: Espainiako beroaren eguneko mapa probintziaka, egun bakoitzeko ohiko tenperatura maximoarekin (1991-2020) alderatuta, eta probintzia bakoitzeko errekorrak. AEMETen datuak.
-i18n_origen: b2c2b4a53fb2
+i18n_origen: 01a29ff1c709
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -230,7 +230,7 @@ Eguneko maximoaren eta haren balio normalaren arteko aldearen probintzien batez 
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS anio,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) || CASE WHEN anio_completo THEN '' ELSE ' (osatu gabea)' END AS anio,
     anomalia_tmax,
     anomalia_tmax_verano,
     dias_p90,

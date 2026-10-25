@@ -1,7 +1,7 @@
 ---
 title: Wildfires
 description: Area burnt in Spain each year, fires within the Natura 2000 network, a map of burnt areas and active fires detected by satellite.
-i18n_origen: 31d2856b157a
+i18n_origen: eb0771f3c667
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -226,7 +226,7 @@ WHERE anio = ${inputs.anio_prov.value}
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS año,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año,
     ha_quemadas - ha_natura2000 AS "Fuera de Natura 2000",
     ha_natura2000 AS "Dentro de Natura 2000"
 FROM mother.incendios_anual
@@ -244,7 +244,7 @@ ORDER BY anio
 />
 
 ```sql natura_anual
-SELECT anio::VARCHAR AS año, pct_natura2000 / 100 AS natura2000, n_incendios
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año, pct_natura2000 / 100 AS natura2000, n_incendios
 FROM mother.incendios_anual
 ORDER BY anio
 ```
@@ -264,11 +264,11 @@ ORDER BY anio
 EFFIS overlays each perimeter on the CORINE land cover map, which shows whether the burnt land was forest, scrub, grassland or cropland.
 
 ```sql cubiertas
-SELECT anio::VARCHAR AS año, 'Arbolado' AS cubierta, ha_arbolado AS ha FROM mother.incendios_anual
-UNION ALL SELECT anio::VARCHAR, 'Matorral', ha_matorral FROM mother.incendios_anual
-UNION ALL SELECT anio::VARCHAR, 'Pastos y otra vegetación natural', ha_otra_natural FROM mother.incendios_anual
-UNION ALL SELECT anio::VARCHAR, 'Agrícola', ha_agricola FROM mother.incendios_anual
-UNION ALL SELECT anio::VARCHAR, 'Otras', ha_otras FROM mother.incendios_anual
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año, 'Arbolado' AS cubierta, ha_arbolado AS ha FROM mother.incendios_anual
+UNION ALL SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR), 'Matorral', ha_matorral FROM mother.incendios_anual
+UNION ALL SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR), 'Pastos y otra vegetación natural', ha_otra_natural FROM mother.incendios_anual
+UNION ALL SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR), 'Agrícola', ha_agricola FROM mother.incendios_anual
+UNION ALL SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR), 'Otras', ha_otras FROM mother.incendios_anual
 ORDER BY año
 ```
 

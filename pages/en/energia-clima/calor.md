@@ -1,7 +1,7 @@
 ---
 title: Heat and temperatures
 description: Daily map of heat in Spain by province, compared with the usual maximum temperature for each day in 1991-2020, and each province's records. AEMET data.
-i18n_origen: b2c2b4a53fb2
+i18n_origen: 01a29ff1c709
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -230,7 +230,7 @@ Provincial average of the difference between the daily maximum and its normal. T
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS anio,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) || CASE WHEN anio_completo THEN '' ELSE ' (incomplete)' END AS anio,
     anomalia_tmax,
     anomalia_tmax_verano,
     dias_p90,

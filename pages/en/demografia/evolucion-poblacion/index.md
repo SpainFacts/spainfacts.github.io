@@ -1,7 +1,7 @@
 ---
 title: Population trends
 description: "Spain's population since 1971 and its annual growth per 1,000 inhabitants, split into births minus deaths and migration, by region and province (INE)."
-i18n_origen: d6ea5d77f690
+i18n_origen: a5b670005e50
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -114,7 +114,7 @@ ORDER BY anio
 ```
 
 ```sql anios_baja
-SELECT count(*) AS n, string_agg(CAST(anio AS VARCHAR), ', ' ORDER BY anio) AS lista,
+SELECT count(*) AS n, string_agg(CAST(CAST(anio AS INTEGER) AS VARCHAR), ', ' ORDER BY anio) AS lista,
     count(*) FILTER (WHERE resto_1000 < 0) AS con_migracion_negativa
 FROM ${anual}
 WHERE crecimiento_1000 < 0

@@ -1,7 +1,7 @@
 ---
 title: Water reserves and reservoirs
 description: Weekly status of Spain's reservoirs by river basin, compared with the previous year and with the average of the last ten years.
-i18n_origen: 868173fde4bb
+i18n_origen: 061ae2db12a5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -183,7 +183,7 @@ ORDER BY orden, nombre
 ```sql evolucion
 SELECT
     semana,
-    anio::VARCHAR AS año,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año,
     pct_llenado / 100 AS llenado
 FROM mother.embalses_semanal
 WHERE nombre = '${inputs.cuenca.value}'

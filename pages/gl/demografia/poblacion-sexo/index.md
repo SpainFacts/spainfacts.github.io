@@ -1,7 +1,7 @@
 ---
 title: Homes e mulleres
 description: "Cantos homes hai por cada 100 mulleres en España segundo a idade, desde 1971, e en cada comunidade e provincia (INE)."
-i18n_origen: ff0532a716ba
+i18n_origen: d3eb2d383cd2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,7 +82,7 @@ En España nacen algo máis nenos ca nenas, pero as mulleres viven máis: por is
 ## Segundo a idade
 
 ```sql por_edad
-SELECT grupo, edad_desde, CAST(anio AS VARCHAR) AS anio, ratio
+SELECT grupo, edad_desde, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, ratio
 FROM ${grupos}
 WHERE anio IN (1975, (SELECT max(anio) FROM ${grupos}))
 ORDER BY edad_desde, anio

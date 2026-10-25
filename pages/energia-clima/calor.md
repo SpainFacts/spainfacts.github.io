@@ -229,7 +229,7 @@ Media de las provincias de la diferencia entre la máxima diaria y su normal. El
 
 ```sql anual
 SELECT
-    anio::VARCHAR AS anio,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) || CASE WHEN anio_completo THEN '' ELSE ' (incompleto)' END AS anio,
     anomalia_tmax,
     anomalia_tmax_verano,
     dias_p90,

@@ -5938,7 +5938,7 @@ index 0000000..281f373
 +	]
 +};
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
-index 9eac817..4540147 100644
+index 9eac817..d7c3e52 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/bar/Bar.svelte
 @@ -95,6 +95,18 @@
@@ -5946,10 +5946,10 @@ index 9eac817..4540147 100644
  
  	let stackedData;
 +
-+	// SpainFacts: si la x son años (2019, '2019', '2024/25'...), el orden es el cronológico,
++	// SpainFacts: si la x son años (2019, '2019', '2019.0', '2024/25', '2026 (incompleto)'...), el orden es el cronológico,
 +	// nunca por el valor de las barras
 +	function esAnio(v) {
-+		return /^(1[89]|2[01])\d{2}([/-]\d{2,4})?$/.test(String(v ?? '').trim());
++		return /^(1[89]|2[01])\d{2}(\.0+)?([/-]\d{2,4})?(\s*\(.*\))?$/.test(String(v ?? '').trim());
 +	}
 +	function xSonAnios(filas, col) {
 +		return filas.length > 0 && filas.every((f) => f[col] == null || esAnio(f[col]));
@@ -6103,17 +6103,17 @@ index b3bfe37..b75693d 100644
  	}
  </style>
 diff --git a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
-index 1c63e0b..4ad7163 100644
+index 1c63e0b..75a8e74 100644
 --- a/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/unsorted/viz/core/_Chart.svelte
 @@ -203,6 +203,40 @@
  	let horizAxisTitleConfig;
  	let chartConfig;
  
-+	// SpainFacts: si la x son años (2019, '2019', '2024/25'...), el orden es el cronológico,
++	// SpainFacts: si la x son años (2019, '2019', '2019.0', '2024/25', '2026 (incompleto)'...), el orden es el cronológico,
 +	// nunca por el valor de las barras
 +	function esAnio(v) {
-+		return /^(1[89]|2[01])\d{2}([/-]\d{2,4})?$/.test(String(v ?? '').trim());
++		return /^(1[89]|2[01])\d{2}(\.0+)?([/-]\d{2,4})?(\s*\(.*\))?$/.test(String(v ?? '').trim());
 +	}
 +	function xSonAnios(filas, col) {
 +		return filas.length > 0 && filas.every((f) => f[col] == null || esAnio(f[col]));
@@ -6147,7 +6147,18 @@ index 1c63e0b..4ad7163 100644
  	// Chart area sizing:
  	let hasTitle;
  	let hasSubtitle;
-@@ -458,7 +492,9 @@
+@@ -425,7 +459,9 @@
+ 			// Set xAxisLabel overflow behaviour based on column type
+ 			if (!showAllXAxisLabels) {
+ 				// if user has not set showXAxisLabels
+-				showAllXAxisLabels = xType === 'category';
++				// SpainFacts: con años en la x, que ECharts elija cuántas etiquetas caben
++				// (1991, 1994...) en vez de enseñarlas todas recortadas a «1...»
++				showAllXAxisLabels = xType === 'category' && !xSonAnios(data, x);
+ 			} else {
+ 				// if user has set showXAxisLabels, convert to boolean
+ 				showAllXAxisLabels = showAllXAxisLabels === 'true' || showAllXAxisLabels === true;
+@@ -458,7 +494,9 @@
  			// ---------------------------------------------------------------------------------------
  			data = sort
  				? xDataType === 'category'
@@ -6158,7 +6169,7 @@ index 1c63e0b..4ad7163 100644
  					: getSortedData(data, x, true)
  				: data;
  
-@@ -965,7 +1001,26 @@
+@@ -965,7 +1003,26 @@
  						let xVal;
  						let yVal;
  						let yCol;

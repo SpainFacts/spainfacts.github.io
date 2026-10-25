@@ -1,7 +1,7 @@
 ---
 title: Men and women
 description: "How many men there are per 100 women in Spain by age, since 1971, and in each region and province (INE)."
-i18n_origen: ff0532a716ba
+i18n_origen: d3eb2d383cd2
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -82,7 +82,7 @@ Slightly more boys than girls are born in Spain, but women live longer: that is 
 ## By age
 
 ```sql por_edad
-SELECT grupo, edad_desde, CAST(anio AS VARCHAR) AS anio, ratio
+SELECT grupo, edad_desde, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, ratio
 FROM ${grupos}
 WHERE anio IN (1975, (SELECT max(anio) FROM ${grupos}))
 ORDER BY edad_desde, anio

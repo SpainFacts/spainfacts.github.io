@@ -182,7 +182,7 @@ ORDER BY orden, nombre
 ```sql evolucion
 SELECT
     semana,
-    anio::VARCHAR AS año,
+    CAST(CAST(anio AS INTEGER) AS VARCHAR) AS año,
     pct_llenado / 100 AS llenado
 FROM mother.embalses_semanal
 WHERE nombre = '${inputs.cuenca.value}'
