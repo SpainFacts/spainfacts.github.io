@@ -15,11 +15,11 @@
     export let modo = undefined;
 
     const TXT = {
-        es: { escala: 'Escala', mediana: 'mediana', bajo: '‹ bajo la mediana', encima: 'por encima ›', sin: 'Sin datos', municipio: 'Municipio', mapa: 'Este mapa', espana: 'España', comunidad: 'Comunidad' },
-        en: { escala: 'Scale', mediana: 'median', bajo: '‹ below the median', encima: 'above ›', sin: 'No data', municipio: 'Municipality', mapa: 'This map', espana: 'Spain', comunidad: 'Region' },
-        ca: { escala: 'Escala', mediana: 'mediana', bajo: '‹ sota la mediana', encima: 'per sobre ›', sin: 'Sense dades', municipio: 'Municipi', mapa: 'Aquest mapa', espana: 'Espanya', comunidad: 'Comunitat' },
-        gl: { escala: 'Escala', mediana: 'mediana', bajo: '‹ por baixo da mediana', encima: 'por riba ›', sin: 'Sen datos', municipio: 'Concello', mapa: 'Este mapa', espana: 'España', comunidad: 'Comunidade' },
-        eu: { escala: 'Eskala', mediana: 'mediana', bajo: '‹ medianaren azpitik', encima: 'gainetik ›', sin: 'Daturik ez', municipio: 'Udalerria', mapa: 'Mapa hau', espana: 'Espainia', comunidad: 'Erkidegoa' }
+        es: { escala: 'Escala', mediana: 'mediana', bajo: '‹ bajo la mediana', encima: 'por encima ›', sin: 'Sin datos', municipio: 'Municipio', mapa: 'Este mapa', espana: 'España', comunidad: 'Comunidad', vista: 'Lo que se ve' },
+        en: { escala: 'Scale', mediana: 'median', bajo: '‹ below the median', encima: 'above ›', sin: 'No data', municipio: 'Municipality', mapa: 'This map', espana: 'Spain', comunidad: 'Region', vista: 'Current view' },
+        ca: { escala: 'Escala', mediana: 'mediana', bajo: '‹ sota la mediana', encima: 'per sobre ›', sin: 'Sense dades', municipio: 'Municipi', mapa: 'Aquest mapa', espana: 'Espanya', comunidad: 'Comunitat', vista: 'El que es veu' },
+        gl: { escala: 'Escala', mediana: 'mediana', bajo: '‹ por baixo da mediana', encima: 'por riba ›', sin: 'Sen datos', municipio: 'Concello', mapa: 'Este mapa', espana: 'España', comunidad: 'Comunidade', vista: 'O que se ve' },
+        eu: { escala: 'Eskala', mediana: 'mediana', bajo: '‹ medianaren azpitik', encima: 'gainetik ›', sin: 'Daturik ez', municipio: 'Udalerria', mapa: 'Mapa hau', espana: 'Espainia', comunidad: 'Erkidegoa', vista: 'Ikusten dena' }
     };
     $: tx = TXT[lang] ?? TXT.es;
     $: degradado = Array.from({ length: 11 }, (_, i) => colorEn(paleta, i / 10)).join(', ');

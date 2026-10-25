@@ -1,6 +1,6 @@
 ---
 title: Explorador de mapas
-description: "Todos los datos de SpainFacts que tienen reparto geográfico, por comunidad autónoma o por provincia. Elige un indicador en la tabla y se dibuja en el mapa."
+description: "Todos los datos de SpainFacts que tienen reparto geográfico, por comunidad autónoma, provincia, municipio o barrio (sección censal). Elige un indicador en la tabla y se dibuja en el mapa."
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -8,6 +8,7 @@ og:
 <script>
     import MapaEspana from '../../../../../../src/lib/components/MapaEspana.svelte';
     import TablaSeleccion from '../../../../../../src/lib/components/TablaSeleccion.svelte';
+    import MapaExplorador from '../../../../../../src/lib/components/MapaExplorador.svelte';
 
     const numero = (v) =>
         v == null ? String() : Number(v).toLocaleString('es-ES', { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 1 });
@@ -28,13 +29,18 @@ og:
         negativo: ['#15803d', '#fef3c7', '#b91c1c'],
         neutro: ['#dbeafe', '#60a5fa', '#1e3a8a']
     };
+    // Municipios y barrios: enteros para habitantes y euros, un decimal para el resto
+    const formato = (unidad) => (/^(€|habitantes)/.test(unidad ?? '') ? '#,##0' : '#,##0.0');
+    const NIVEL_TEXTO = { Provincia: 'por provincia', Comunidad: 'por comunidad autónoma', Municipio: 'por municipio', 'Sección censal': 'por sección censal (barrio)' };
 </script>
 
 # 🧭 Explorador de mapas
 
 Aquí están todos los datos de la web que tienen reparto geográfico. Busca o filtra un indicador,
-pulsa su fila y se dibuja en el mapa, por comunidad autónoma o por provincia. Los importes van por
-habitante y en euros reales, como en el resto de SpainFacts.
+pulsa su fila y se dibuja en el mapa: por comunidad autónoma, por provincia, por municipio o por
+barrio (sección censal). Los importes van por habitante y en euros reales, como en el resto de
+SpainFacts. El enlace de la página guarda el indicador, el año y la vista del mapa, así que puedes
+compartirlo tal cual.
 
 ```sql catalogo_todo
 SELECT
@@ -50,7 +56,13 @@ SELECT
     any_value(nota) AS nota,
     min(anio) AS primer_anio,
     max(anio) AS ultimo_anio
-FROM mother.mapas_indicadores
+FROM (
+    SELECT indicador_id, nombre, tema, nivel, unidad, sentido, fuente, url_fuente, pagina, nota, anio FROM mother.mapas_indicadores
+    UNION ALL
+    SELECT indicador_id, nombre, tema, nivel, unidad, sentido, fuente, url_fuente, pagina, nota, anio FROM mother.mapas_municipios
+    UNION ALL
+    SELECT indicador_id, nombre, tema, nivel, unidad, sentido, fuente, url_fuente, pagina, nota, anio FROM mother.mapas_secciones
+)
 GROUP BY indicador_id
 ```
 
@@ -66,6 +78,8 @@ SELECT tema, count(*) AS n FROM ${catalogo_todo} GROUP BY tema ORDER BY n DESC
     <ButtonGroupItem valueLabel="Todos" value="Todos" default />
     <ButtonGroupItem valueLabel="Comunidades" value="Comunidad" />
     <ButtonGroupItem valueLabel="Provincias" value="Provincia" />
+    <ButtonGroupItem valueLabel="Municipios" value="Municipio" />
+    <ButtonGroupItem valueLabel="Barrios" value="Sección censal" />
 </ButtonGroup>
 
 ```sql catalogo
@@ -76,7 +90,7 @@ WHERE ('${inputs.tema}' = 'Todos' OR tema = '${inputs.tema}')
 ORDER BY tema, nombre, nivel
 ```
 
-<TablaSeleccion data={catalogo} name=indicador value=indicador_id columnas={columnasTabla} placeholder="Buscar un indicador (paro, renta, vivienda…)" etiqueta="Indicadores con mapa" alto={300} />
+<TablaSeleccion data={catalogo} name=indicador value=indicador_id columnas={columnasTabla} placeholder="Buscar un indicador (paro, renta, vivienda…)" etiqueta="Indicadores con mapa" alto={300} parametro="i" />
 
 ```sql elegido
 SELECT * FROM ${catalogo_todo} WHERE indicador_id = '${inputs.indicador}'
@@ -88,9 +102,66 @@ WHERE indicador_id = '${inputs.indicador}'
 ORDER BY anio DESC
 ```
 
+```sql datos_municipios
+SELECT indicador_id, cod, territorio, anio, valor
+FROM mother.mapas_municipios
+WHERE indicador_id = '${inputs.indicador}'
+```
+
+```sql datos_secciones
+SELECT indicador_id, cod, territorio, anio, valor, geo_anio
+FROM mother.mapas_secciones
+WHERE indicador_id = '${inputs.indicador}'
+```
+
+```sql datos_secciones_municipio
+-- al alejarse del mapa de barrios: el mismo dato por municipio (si existe) y del mismo año
+SELECT cod, territorio, anio, valor
+FROM mother.mapas_municipios
+WHERE indicador_id = (SELECT any_value(indicador_municipio) FROM mother.mapas_secciones WHERE indicador_id = '${inputs.indicador}')
+  AND anio = (SELECT max(anio) FROM mother.mapas_secciones WHERE indicador_id = '${inputs.indicador}')
+```
+
 {#if elegido.length}
 
 ## {elegido[0].nombre}
+
+{#if elegido[0].nivel === 'Municipio' || elegido[0].nivel === 'Sección censal'}
+
+<p class="text-sm text-gray-600 dark:text-gray-400">
+{elegido[0].unidad} · {elegido[0].primer_anio === elegido[0].ultimo_anio ? elegido[0].ultimo_anio : elegido[0].primer_anio + '-' + elegido[0].ultimo_anio} · {NIVEL_TEXTO[elegido[0].nivel]} · Fuente: <a href={elegido[0].url_fuente} target="_blank" rel="noopener noreferrer">{elegido[0].fuente}<span class="sr-only"> (se abre en una pestaña nueva)</span></a> · <a href={elegido[0].pagina}>Ver en {elegido[0].tema}</a>{#if elegido[0].nota}&nbsp;· {elegido[0].nota}{/if}
+</p>
+
+{#if elegido[0].nivel === 'Municipio' && datos_municipios[0]?.indicador_id === elegido[0].indicador_id}
+{#key elegido[0].nivel}
+<MapaExplorador
+    data={datos_municipios}
+    nivel="municipio"
+    valueFmt={formato(elegido[0].unidad)}
+    unidad={elegido[0].unidad}
+    sentido={elegido[0].sentido}
+    colorPalette={paletas[elegido[0].sentido] ?? paletas.neutro}
+/>
+{/key}
+{:else if elegido[0].nivel === 'Sección censal' && datos_secciones[0]?.indicador_id === elegido[0].indicador_id}
+{#key elegido[0].nivel}
+<MapaExplorador
+    data={datos_secciones}
+    nivel="seccion"
+    datosMunicipio={datos_secciones_municipio}
+    valueFmt={formato(elegido[0].unidad)}
+    unidad={elegido[0].unidad}
+    sentido={elegido[0].sentido}
+    colorPalette={paletas[elegido[0].sentido] ?? paletas.neutro}
+/>
+{/key}
+{:else}
+<p role="status" class="my-6 text-sm text-gray-600 dark:text-gray-400">Actualizando el mapa…</p>
+{/if}
+
+<p class="text-xs text-gray-500 dark:text-gray-400">Pasa el ratón por un territorio para ver su dato y su puesto. Con «Lo que se ve», la escala de colores se ajusta a la zona del mapa que estás mirando. La búsqueda de direcciones usa Nominatim, de OpenStreetMap: lo que escribas se envía a su servidor.</p>
+
+{:else}
 
 <Dropdown data={anios} name=anio value=anio order="anio desc" title="Año" defaultValue="ultimo">
     <DropdownOption value="ultimo" valueLabel="Último disponible" />
@@ -125,7 +196,7 @@ ORDER BY posicion
 
 {#if anios[0]?.indicador_id === elegido[0].indicador_id && datos.length && datos[0]?.indicador_id === elegido[0].indicador_id && datos[0]?.anio === (inputs.anio.value && anios.some(a => String(a.anio) === String(inputs.anio.value)) ? Number(inputs.anio.value) : anios[0]?.anio)}
 <p class="text-sm text-gray-600 dark:text-gray-400">
-{elegido[0].unidad} · {datos[0]?.anio} · {elegido[0].nivel === 'Provincia' ? 'por provincia' : 'por comunidad autónoma'} · Fuente: <a href={elegido[0].url_fuente} target="_blank" rel="noopener noreferrer">{elegido[0].fuente}<span class="sr-only"> (se abre en una pestaña nueva)</span></a> · <a href={elegido[0].pagina}>Ver en {elegido[0].tema}</a>{#if elegido[0].nota}&nbsp;· {elegido[0].nota}{/if}
+{elegido[0].unidad} · {datos[0]?.anio} · {NIVEL_TEXTO[elegido[0].nivel]} · Fuente: <a href={elegido[0].url_fuente} target="_blank" rel="noopener noreferrer">{elegido[0].fuente}<span class="sr-only"> (se abre en una pestaña nueva)</span></a> · <a href={elegido[0].pagina}>Ver en {elegido[0].tema}</a>{#if elegido[0].nota}&nbsp;· {elegido[0].nota}{/if}
 </p>
 
 <Grid cols=3>
@@ -178,6 +249,8 @@ ORDER BY posicion
 
 {:else}
 <p role="status" class="my-6 text-sm text-gray-600 dark:text-gray-400">Actualizando el mapa…</p>
+{/if}
+
 {/if}
 
 {/if}

@@ -8,6 +8,7 @@
     // así que las consultas de la página pueden usar ${inputs.<name>}.
     import { getInputContext } from "@evidence-dev/sdk/utils/svelte";
     import { get } from "svelte/store";
+    import { onMount, tick } from "svelte";
 
     export let data = [];
     export let name;
@@ -16,6 +17,9 @@
     export let placeholder = undefined;
     export let alto = 420; // px de la zona con scroll
     export let etiqueta = "Tabla seleccionable"; // nombre accesible de la tabla y del buscador
+    // Si se indica, la fila elegida se guarda en el enlace (?<parametro>=valor) y se recupera
+    // al abrirlo, para poder compartir la selección
+    export let parametro = undefined;
 
     const inputs = getInputContext();
     let busqueda = "";
@@ -47,8 +51,38 @@
         }
     }
 
+    // El HTML prerenderizado trae la primera fila y Evidence la vuelve a poner al arrancar: el valor
+    // del enlace se impone mientras esté en los datos, hasta que se elija otra fila a mano
+    let pedidoUrl = null;
+    let tocado = false;
+    onMount(() => {
+        if (parametro) pedidoUrl = new URL(window.location.href).searchParams.get(parametro);
+    });
+    $: if (pedidoUrl && !tocado && $inputs[name] !== pedidoUrl) {
+        const fila = filas.find((f) => String(f[value]) === pedidoUrl);
+        if (fila) {
+            inputs.update((i) => ({ ...i, [name]: fila[value] }));
+            // la fila del enlace puede estar muy abajo: se lleva a la vista (solo dentro de la tabla)
+            tick().then(() => {
+                const tr = zona?.querySelector("tr.activa");
+                if (tr) zona.scrollTop = Math.max(0, tr.offsetTop - 40);
+            });
+        }
+    }
+    let zona;
+
     function elegir(fila) {
+        tocado = true;
         $inputs[name] = fila[value];
+        if (parametro && typeof window !== "undefined") {
+            const url = new URL(window.location.href);
+            url.searchParams.set(parametro, fila[value]);
+            // el año del indicador anterior ya no vale (la vista del mapa sí se conserva)
+            const h = new URLSearchParams(url.hash.replace(/^#/, ""));
+            h.delete("a");
+            url.hash = h.toString();
+            window.history.replaceState(window.history.state, "", url);
+        }
     }
 
     function teclado(e, fila) {
@@ -68,7 +102,7 @@
         <input id="buscar-{name}" type="search" bind:value={busqueda} placeholder={placeholder ?? t("buscar", lang)} />
         <span class="contador" role="status">{visibles.length} {t("de", lang)} {filas.length}</span>
     </div>
-    <div class="zona" style="max-height: {alto}px">
+    <div class="zona" style="max-height: {alto}px" bind:this={zona}>
         <table role="grid" aria-label={etiqueta}>
             <thead>
                 <tr>

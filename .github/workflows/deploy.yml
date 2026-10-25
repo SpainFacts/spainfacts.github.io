@@ -123,6 +123,22 @@ jobs:
           key: consultas-prerender-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: consultas-prerender-
 
+      # Teselas vectoriales del explorador de mapas (municipios y secciones censales): no van en git;
+      # se rehacen con tippecanoe solo cuando cambian las geometrías o el script
+      - name: Caché de las teselas del explorador de mapas
+        id: teselas
+        uses: actions/cache@v4
+        with:
+          path: static-extra/geo/espana.pmtiles
+          key: teselas-${{ hashFiles('static/geo/municipios.geojson', 'static-extra/geo/secciones/**', 'tools/geo/teselas_mapas.py', 'tools/geo/teselas_mapas.sh') }}
+
+      - name: Teselas del explorador de mapas
+        if: steps.teselas.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tippecanoe
+          bash tools/geo/teselas_mapas.sh
+
       - name: build
         env:
           BASE_PATH: '/'

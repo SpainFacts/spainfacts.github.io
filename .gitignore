@@ -78,3 +78,6 @@ data/secciones_codigos/
 
 # Cachés, copias y bases locales (nunca van al repo)
 data/
+
+# Teselas del explorador de mapas: las genera tools/geo/teselas_mapas.sh (también en el despliegue)
+static-extra/geo/espana.pmtiles*
