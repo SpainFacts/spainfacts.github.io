@@ -25,3 +25,13 @@ sources:
         description: "INE tabla 69758 (EMCR): saldos migratorios por nacionalidad, sexo y tipo (total, exterior, interior), España."
       - name: ine_saldos_migratorios_ccaa
         description: "INE tabla 69762 (EMCR): saldos por comunidad, edad, nacionalidad (española/extranjera), sexo y tipo."
+      - name: eurostat_condenados_nacionalidad
+        description: "Eurostat crim_just_ctz: personas condenadas por país y nacionalidad (citizen NAT del país, FOR extranjera, TOTAL), anual desde 2008."
+      - name: eurostat_presos_nacionalidad
+        description: "Eurostat crim_pris_ctz: presos por país y nacionalidad (NAT, FOR, TOTAL), anual."
+      - name: eurostat_poblacion_nacionalidad
+        description: "Eurostat migr_pop1ctz: población a 1 de enero por país, nacionalidad (NAT/FOR), sexo (T/M/F) y edad (TOTAL y grupos de cinco años desde 15), desde 2008."
+      - name: eurostat_integracion
+        description: "Eurostat, indicadores de integración por nacionalidad (NAT, FOR, EU27_2020_FOR, NEU27_2020_FOR), en %: empleo 20-64 (lfsa_ergan), paro 15-74 (lfsa_urgan), riesgo de pobreza o exclusión 18+ (ilc_peps05n), abandono escolar 18-24 (edat_lfse_01), sobrecualificación 20-64 (lfsa_eoqgan), hacinamiento 18+ (ilc_lvho15)."
+      - name: eurostat_nacionalizaciones
+        description: "Eurostat migr_acq: adquisiciones de nacionalidad por país y año (todas las edades y nacionalidades previas)."

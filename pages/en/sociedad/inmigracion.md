@@ -1,7 +1,7 @@
 ---
 title: Immigration
 description: "Foreign population in Spain by region and nationality, net migration, irregular arrivals by route, asylum applications and naturalisations, with official data."
-i18n_origen: 23fdd4374850
+i18n_origen: a376df7e1201
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -332,6 +332,103 @@ LIMIT 12
 
 ---
 
+## Integration: Spain in Europe
+
+```sql integracion_ultimo
+SELECT i.*
+FROM mother.inmigracion_integracion_europa i
+WHERE i.anio = (SELECT max(anio) FROM mother.inmigracion_integracion_europa x WHERE x.indicador = i.indicador AND x.cod_pais = 'ES')
+```
+
+```sql integracion_espana
+WITH ranking AS (
+    SELECT indicador, cod_pais,
+           rank() OVER (PARTITION BY indicador ORDER BY coalesce(brecha, extranjeros) * sentido DESC) AS puesto,
+           count(*) OVER (PARTITION BY indicador) AS paises
+    FROM ${integracion_ultimo}
+    WHERE cod_pais <> 'EU27_2020'
+)
+SELECT e.nombre, e.anio, e.nacionales, e.extranjeros, e.extranjeros_no_ue, e.brecha,
+       ue.extranjeros AS ue_extranjeros, ue.brecha AS ue_brecha,
+       r.puesto || ' de ' || r.paises AS puesto
+FROM ${integracion_ultimo} e
+LEFT JOIN ${integracion_ultimo} ue ON ue.indicador = e.indicador AND ue.cod_pais = 'EU27_2020'
+LEFT JOIN ranking r ON r.indicador = e.indicador AND r.cod_pais = e.cod_pais
+WHERE e.cod_pais = 'ES'
+ORDER BY e.orden
+```
+
+```sql integracion_resumen
+SELECT
+    max(anio) AS anio,
+    max(extranjeros) FILTER (WHERE indicador = 'empleo') AS empleo_ext,
+    max(nacionales) FILTER (WHERE indicador = 'empleo') AS empleo_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'arope') AS arope_ext,
+    max(nacionales) FILTER (WHERE indicador = 'arope') AS arope_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_ext,
+    max(nacionales) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'nacionalizaciones') AS nacionalizaciones
+FROM ${integracion_ultimo}
+WHERE cod_pais = 'ES'
+```
+
+```sql integracion_arope
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'arope' AND brecha IS NOT NULL
+ORDER BY brecha DESC
+```
+
+```sql integracion_empleo
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'empleo' AND brecha IS NOT NULL
+ORDER BY brecha
+```
+
+Eurostat compares nationals and foreign nationals on employment, poverty, education and housing in all European countries. In Spain, in {integracion_resumen[0]?.anio}, {formatNumber(integracion_resumen[0]?.empleo_ext, 0)} % of foreign nationals aged 20 to 64 were in work, compared with {formatNumber(integracion_resumen[0]?.empleo_nac, 0)} % of Spanish nationals. The gap is much wider in living conditions: {formatNumber(integracion_resumen[0]?.arope_ext, 0)} % of foreign adults were at risk of poverty or social exclusion ({formatNumber(integracion_resumen[0]?.arope_nac, 0)} % of Spanish nationals), and {formatNumber(integracion_resumen[0]?.abandono_ext, 0)} % of young foreign nationals left school early ({formatNumber(integracion_resumen[0]?.abandono_nac, 0)} % of Spanish nationals). Each year about {formatNumber(integracion_resumen[0]?.nacionalizaciones, 1)} in every 100 resident foreign nationals become Spanish citizens, and from then on they count as Spanish in all statistics.
+
+<DataTable data={integracion_espana} rows=all>
+    <Column id=nombre title="Indicator" />
+    <Column id=anio title="Year" fmt="####" />
+    <Column id=nacionales title="Spanish nationals" fmt='0.0"%"' />
+    <Column id=extranjeros title="Foreign nationals" fmt='0.0"%"' />
+    <Column id=extranjeros_no_ue title="From outside the EU" fmt='0.0"%"' />
+    <Column id=brecha title="Gap (points)" fmt='+0.0;-0.0' />
+    <Column id=ue_brecha title="Average gap in the EU" fmt='+0.0;-0.0' />
+    <Column id=puesto title="Spain's rank" />
+</DataTable>
+
+<p class="text-xs text-gray-500">"Spain's rank": position among the European countries with data, from the smallest gap between foreign nationals and nationals (1) to the largest; for naturalisations, from the highest rate to the lowest. Eurostat, latest year with data for Spain.</p>
+
+<BarChart
+    data={integracion_arope}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="points of difference, foreign nationals - nationals"
+    title="Risk of poverty or social exclusion: gap between foreign nationals and nationals ({integracion_resumen[0]?.anio})"
+/>
+
+<BarChart
+    data={integracion_empleo}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="points of difference, foreign nationals - nationals"
+    title="Employment rate (ages 20-64): gap between foreign nationals and nationals ({integracion_resumen[0]?.anio})"
+/>
+
+<p class="text-xs text-gray-500">Eurostat integration indicators by nationality (each country's Labour Force Survey and Survey on Income and Living Conditions). They compare nationality, not country of birth: immigrants who have already become citizens count as nationals, and that weighs more in the countries where more people are naturalised. Eurostat's statistics only separate foreign nationals from the EU and from outside it; crime by origin is in <a class="underline" href="/en/sociedad/criminalidad/#by-origin">Crime</a>.</p>
+
 ## Sources and notes
 
 - **[INE – Continuous Population Statistics](https://www.ine.es/jaxiT3/Tabla.htm?t=56942)** (table 56942): population by nationality at 1 January.
@@ -339,6 +436,7 @@ LIMIT 12
 - **Ministry of the Interior**, fortnightly report on irregular immigration, via the **[UNHCR data portal](https://data.unhcr.org/en/situations/europe-sea-arrivals/location/24522)**.
 - **[Eurostat – migr_asyappctzm and migr_asyappctza](https://ec.europa.eu/eurostat/databrowser/view/migr_asyappctzm/default/table)**: first-time asylum applications.
 - **[INE – Acquisitions of Spanish nationality by residents](https://www.ine.es/jaxiT3/Tabla.htm?t=70012)** (table 70012).
+- **[Eurostat – Migrant integration](https://ec.europa.eu/eurostat/web/migrant-integration)**: employment (lfsa_ergan), unemployment (lfsa_urgan), risk of poverty or social exclusion (ilc_peps05n), early school leaving (edat_lfse_01), overqualification (lfsa_eoqgan) and overcrowding (ilc_lvho15) by nationality, and acquisitions of citizenship (migr_acq) among the foreign population (migr_pop1ctz).
 - Crime data by nationality can be found in [Crime](/en/sociedad/criminalidad), with context.
 
 <LastRefreshed prefix="Data updated" />

@@ -17,3 +17,13 @@ models:
     description: "Saldo migratorio exterior por año: España por nacionalidad (grupos y países) y comunidades por nacionalidad española/extranjera, con tasa por 1.000 hab. (INE EMCR)."
   - name: inmigracion_flujos_anuales
     description: "Inmigraciones, emigraciones y saldo exterior de España por año, con tasas por 1.000 hab. (INE EMCR, desde 2021)."
+  - name: inmigracion_integracion_europa
+    description: "Integración de los extranjeros en los países europeos (Eurostat): por indicador (empleo, paro, riesgo de pobreza o exclusión, abandono escolar, sobrecualificación, hacinamiento, nacionalizaciones), valor de los nacionales, de los extranjeros (todos, UE y no UE) y brecha extranjeros - nacionales en puntos. sentido 1 = más es mejor."
+    columns:
+      - name: cod_pais
+        tests: [not_null]
+      - name: indicador
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['empleo', 'paro', 'arope', 'abandono_escolar', 'sobrecualificacion', 'hacinamiento', 'nacionalizaciones']

@@ -13,5 +13,21 @@ sources:
         description: "INE tabla 25704: condenados adultos por comunidad, sexo y nacionalidad (española/extranjera), anual desde 2013."
       - name: ine_condenados_delitos_nacionalidad
         description: "INE tabla 49050: delitos por los que se condena, por tipo de delito y nacionalidad del condenado (España)."
+      - name: ine_condenados_edad_nacionalidad
+        description: "INE tabla 25645: condenados adultos por sexo, tramo de edad (18-20, 21-25... 71+) y nacionalidad (española y grupos de países), España, anual desde 2013."
+      - name: ine_frontur_duracion
+        description: "INE Frontur tabla 23987: visitantes no residentes por duración de la estancia (ninguna noche, 1, 2-3, 4-7, 8-15, más de 15), anual desde 2016."
+      - name: ine_frontur_pais_anual
+        description: "INE Frontur tabla 23984: turistas no residentes por país de residencia, anual desde 2016."
+      - name: ine_poblacion_pais
+        description: "INE tabla 56936: población residente en España a 1 de enero por país de nacionalidad (unos 50 países y grupos), grupo quinquenal de edad y sexo."
+      - name: ses_detenidos_nacionalidad
+        description: "Interior, Portal Estadístico de Criminalidad, tabla 03007: detenciones e investigados extranjeros por nacionalidad (continentes y países) y sexo, total nacional, anual desde 2010."
+      - name: ses_detenidos_total
+        description: "Interior, Portal Estadístico de Criminalidad, tabla 03001: total de detenciones e investigados (españoles y extranjeros), total nacional, anual desde 2010."
+      - name: unodc_delitos
+        description: "UNODC (Naciones Unidas, UN-CTS): delitos registrados por la policía por país (ISO3), año y tipo de delito (categoria en inglés), número y tasa por 100.000 habitantes."
+      - name: unodc_presos
+        description: "UNODC (UN-CTS): presos por país (ISO3) y año, total y sin condena firme, número y tasa por 100.000 habitantes."
       - name: ine_poblacion_nacionalidad
         description: "INE tabla 56942: población a 1 de enero por comunidad, grupo quinquenal de edad, nacionalidad y sexo."

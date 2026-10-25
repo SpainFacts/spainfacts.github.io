@@ -3,7 +3,7 @@ title: Immigrazioa
 description: "Espainiako atzerritar biztanleria erkidegoaren eta nazionalitatearen arabera, migrazio-saldoa, etorrera irregularrak bidearen arabera, asilo-eskaerak eta naturalizazioak, datu ofizialekin."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 23fdd4374850
+i18n_origen: a376df7e1201
 ---
 
 <script>
@@ -339,6 +339,103 @@ LIMIT 12
 
 ---
 
+## Integrazioa: Espainia Europan
+
+```sql integracion_ultimo
+SELECT i.*
+FROM mother.inmigracion_integracion_europa i
+WHERE i.anio = (SELECT max(anio) FROM mother.inmigracion_integracion_europa x WHERE x.indicador = i.indicador AND x.cod_pais = 'ES')
+```
+
+```sql integracion_espana
+WITH ranking AS (
+    SELECT indicador, cod_pais,
+           rank() OVER (PARTITION BY indicador ORDER BY coalesce(brecha, extranjeros) * sentido DESC) AS puesto,
+           count(*) OVER (PARTITION BY indicador) AS paises
+    FROM ${integracion_ultimo}
+    WHERE cod_pais <> 'EU27_2020'
+)
+SELECT e.nombre, e.anio, e.nacionales, e.extranjeros, e.extranjeros_no_ue, e.brecha,
+       ue.extranjeros AS ue_extranjeros, ue.brecha AS ue_brecha,
+       r.puesto || ' de ' || r.paises AS puesto
+FROM ${integracion_ultimo} e
+LEFT JOIN ${integracion_ultimo} ue ON ue.indicador = e.indicador AND ue.cod_pais = 'EU27_2020'
+LEFT JOIN ranking r ON r.indicador = e.indicador AND r.cod_pais = e.cod_pais
+WHERE e.cod_pais = 'ES'
+ORDER BY e.orden
+```
+
+```sql integracion_resumen
+SELECT
+    max(anio) AS anio,
+    max(extranjeros) FILTER (WHERE indicador = 'empleo') AS empleo_ext,
+    max(nacionales) FILTER (WHERE indicador = 'empleo') AS empleo_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'arope') AS arope_ext,
+    max(nacionales) FILTER (WHERE indicador = 'arope') AS arope_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_ext,
+    max(nacionales) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'nacionalizaciones') AS nacionalizaciones
+FROM ${integracion_ultimo}
+WHERE cod_pais = 'ES'
+```
+
+```sql integracion_arope
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'arope' AND brecha IS NOT NULL
+ORDER BY brecha DESC
+```
+
+```sql integracion_empleo
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'empleo' AND brecha IS NOT NULL
+ORDER BY brecha
+```
+
+Eurostat-ek nazionalak eta atzerritarrak alderatzen ditu enpleguan, pobrezian, ikasketetan eta etxebizitzan Europako herrialde guztietan. Espainian, {urtean(integracion_resumen[0]?.anio)} 20 eta 64 urte arteko atzerritarren % {formatNumber(integracion_resumen[0]?.empleo_ext, 0)} ari zen lanean, espainiarren % {formatNumber(integracion_resumen[0]?.empleo_nac, 0)}ren aldean. Aldea askoz handiagoa da bizi-baldintzetan: atzerritar helduen % {formatNumber(integracion_resumen[0]?.arope_ext, 0)} pobrezia- edo bazterketa-arriskuan zegoen (espainiarren % {formatNumber(integracion_resumen[0]?.arope_nac, 0)}), eta gazte atzerritarren % {formatNumber(integracion_resumen[0]?.abandono_ext, 0)}k goiz utzi zituen ikasketak (espainiarren % {formatNumber(integracion_resumen[0]?.abandono_nac, 0)}). Urtero, bertako 100 atzerritar egoiliarretik {formatNumber(integracion_resumen[0]?.nacionalizaciones, 1)} inguruk hartzen dute nazionalitatea, eta ordutik espainiartzat zenbatzen dira estatistika guztietan.
+
+<DataTable data={integracion_espana} rows=all>
+    <Column id=nombre title="Adierazlea" />
+    <Column id=anio title="Urtea" fmt="####" />
+    <Column id=nacionales title="Espainiarrak" fmt='0.0"%"' />
+    <Column id=extranjeros title="Atzerritarrak" fmt='0.0"%"' />
+    <Column id=extranjeros_no_ue title="EBtik kanpokoak" fmt='0.0"%"' />
+    <Column id=brecha title="Aldea (puntuak)" fmt='+0.0;-0.0' />
+    <Column id=ue_brecha title="EBko batez besteko aldea" fmt='+0.0;-0.0' />
+    <Column id=puesto title="Espainiaren postua" />
+</DataTable>
+
+<p class="text-xs text-gray-500">«Espainiaren postua»: datua duten Europako herrialdeen artean duen tokia, atzerritarren eta nazionalen arteko alderik txikienetik (1) handienera; nazionalizazioetan, tasa altuenetik baxuenera. Eurostat, Espainiak datua duen azken urtea.</p>
+
+<BarChart
+    data={integracion_arope}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="alde-puntuak, atzerritarrak - nazionalak"
+    title="Pobrezia- edo bazterketa-arriskua: atzerritarren eta nazionalen arteko aldea ({integracion_resumen[0]?.anio})"
+/>
+
+<BarChart
+    data={integracion_empleo}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="alde-puntuak, atzerritarrak - nazionalak"
+    title="Enplegu-tasa (20-64 urte): atzerritarren eta nazionalen arteko aldea ({integracion_resumen[0]?.anio})"
+/>
+
+<p class="text-xs text-gray-500">Eurostat-en integrazio-adierazleak nazionalitatearen arabera (herrialde bakoitzeko Biztanleria Aktiboaren Inkesta eta Bizi-baldintzen Inkesta). Nazionalitatea alderatzen dute, ez jaiotza-herrialdea: nazionalitatea hartu duten etorkinak nazionaltzat zenbatzen dira, eta horrek pisu handiagoa du jende gehiagok nazionalitatea hartzen duen herrialdeetan. Eurostat-en estatistikak EBko atzerritarrak eta EBtik kanpokoak baino ez ditu bereizten; jatorriaren araberako delinkuentzia <a class="underline" href="/eu/sociedad/criminalidad/#jatorriaren-arabera">Kriminalitatea</a> orrian dago.</p>
+
 ## Iturriak eta oharrak
 
 - **[INE – Biztanleriaren Estatistika Jarraitua](https://www.ine.es/jaxiT3/Tabla.htm?t=56942)** (56942 taula): biztanleria nazionalitatearen arabera, urtarrilaren 1ean.
@@ -346,6 +443,7 @@ LIMIT 12
 - **Barne Ministerioa**, immigrazio irregularrari buruzko hamabosteroko txostena, **[ACNURen datu-atariaren](https://data.unhcr.org/en/situations/europe-sea-arrivals/location/24522)** bidez.
 - **[Eurostat – migr_asyappctzm eta migr_asyappctza](https://ec.europa.eu/eurostat/databrowser/view/migr_asyappctzm/default/table)**: lehen asilo-eskaerak.
 - **[INE – Egoiliarrek Espainiako nazionalitatea eskuratzea](https://www.ine.es/jaxiT3/Tabla.htm?t=70012)** (70012 taula).
+- **[Eurostat – Migratzaileen integrazioa](https://ec.europa.eu/eurostat/web/migrant-integration)**: enplegua (lfsa_ergan), langabezia (lfsa_urgan), pobrezia- edo bazterketa-arriskua (ilc_peps05n), eskola-uztea (edat_lfse_01), gaikualifikazioa (lfsa_eoqgan) eta pilaketa (ilc_lvho15) nazionalitatearen arabera, eta nazionalitate-eskurapenak (migr_acq) atzerritar biztanleriaren artean (migr_pop1ctz).
 - Kriminalitateari buruzko datuak nazionalitatearen arabera hemen daude: [Kriminalitatea](/eu/sociedad/criminalidad), haien testuinguruarekin.
 
 <LastRefreshed prefix="Datuak eguneratuta" />

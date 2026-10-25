@@ -331,6 +331,103 @@ LIMIT 12
 
 ---
 
+## Integración: España en Europa
+
+```sql integracion_ultimo
+SELECT i.*
+FROM mother.inmigracion_integracion_europa i
+WHERE i.anio = (SELECT max(anio) FROM mother.inmigracion_integracion_europa x WHERE x.indicador = i.indicador AND x.cod_pais = 'ES')
+```
+
+```sql integracion_espana
+WITH ranking AS (
+    SELECT indicador, cod_pais,
+           rank() OVER (PARTITION BY indicador ORDER BY coalesce(brecha, extranjeros) * sentido DESC) AS puesto,
+           count(*) OVER (PARTITION BY indicador) AS paises
+    FROM ${integracion_ultimo}
+    WHERE cod_pais <> 'EU27_2020'
+)
+SELECT e.nombre, e.anio, e.nacionales, e.extranjeros, e.extranjeros_no_ue, e.brecha,
+       ue.extranjeros AS ue_extranjeros, ue.brecha AS ue_brecha,
+       r.puesto || ' de ' || r.paises AS puesto
+FROM ${integracion_ultimo} e
+LEFT JOIN ${integracion_ultimo} ue ON ue.indicador = e.indicador AND ue.cod_pais = 'EU27_2020'
+LEFT JOIN ranking r ON r.indicador = e.indicador AND r.cod_pais = e.cod_pais
+WHERE e.cod_pais = 'ES'
+ORDER BY e.orden
+```
+
+```sql integracion_resumen
+SELECT
+    max(anio) AS anio,
+    max(extranjeros) FILTER (WHERE indicador = 'empleo') AS empleo_ext,
+    max(nacionales) FILTER (WHERE indicador = 'empleo') AS empleo_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'arope') AS arope_ext,
+    max(nacionales) FILTER (WHERE indicador = 'arope') AS arope_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_ext,
+    max(nacionales) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'nacionalizaciones') AS nacionalizaciones
+FROM ${integracion_ultimo}
+WHERE cod_pais = 'ES'
+```
+
+```sql integracion_arope
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'arope' AND brecha IS NOT NULL
+ORDER BY brecha DESC
+```
+
+```sql integracion_empleo
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'empleo' AND brecha IS NOT NULL
+ORDER BY brecha
+```
+
+Eurostat compara a nacionales y extranjeros en empleo, pobreza, estudios y vivienda en todos los países europeos. En España, en {integracion_resumen[0]?.anio} trabajaba el {formatNumber(integracion_resumen[0]?.empleo_ext, 0)} % de los extranjeros de 20 a 64 años, frente al {formatNumber(integracion_resumen[0]?.empleo_nac, 0)} % de los españoles. La distancia es mucho mayor en las condiciones de vida: el {formatNumber(integracion_resumen[0]?.arope_ext, 0)} % de los extranjeros adultos estaba en riesgo de pobreza o exclusión (el {formatNumber(integracion_resumen[0]?.arope_nac, 0)} % de los españoles), y el {formatNumber(integracion_resumen[0]?.abandono_ext, 0)} % de los jóvenes extranjeros dejó los estudios pronto (el {formatNumber(integracion_resumen[0]?.abandono_nac, 0)} % de los españoles). Cada año se nacionalizan unos {formatNumber(integracion_resumen[0]?.nacionalizaciones, 1)} de cada 100 extranjeros residentes, y desde entonces cuentan como españoles en todas las estadísticas.
+
+<DataTable data={integracion_espana} rows=all>
+    <Column id=nombre title="Indicador" />
+    <Column id=anio title="Año" fmt="####" />
+    <Column id=nacionales title="Españoles" fmt='0.0"%"' />
+    <Column id=extranjeros title="Extranjeros" fmt='0.0"%"' />
+    <Column id=extranjeros_no_ue title="De fuera de la UE" fmt='0.0"%"' />
+    <Column id=brecha title="Diferencia (puntos)" fmt='+0.0;-0.0' />
+    <Column id=ue_brecha title="Diferencia media en la UE" fmt='+0.0;-0.0' />
+    <Column id=puesto title="Puesto de España" />
+</DataTable>
+
+<p class="text-xs text-gray-500">«Puesto de España»: lugar entre los países europeos con dato, de la menor diferencia entre extranjeros y nacionales (1) a la mayor; en nacionalizaciones, de la tasa más alta a la más baja. Eurostat, último año con dato de España.</p>
+
+<BarChart
+    data={integracion_arope}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="puntos de diferencia, extranjeros - nacionales"
+    title="Riesgo de pobreza o exclusión: diferencia entre extranjeros y nacionales ({integracion_resumen[0]?.anio})"
+/>
+
+<BarChart
+    data={integracion_empleo}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="puntos de diferencia, extranjeros - nacionales"
+    title="Tasa de empleo (20-64 años): diferencia entre extranjeros y nacionales ({integracion_resumen[0]?.anio})"
+/>
+
+<p class="text-xs text-gray-500">Indicadores de integración de Eurostat por nacionalidad (Encuesta de Población Activa y Encuesta de Condiciones de Vida de cada país). Comparan nacionalidad, no país de nacimiento: los inmigrantes que ya se han nacionalizado cuentan como nacionales, y eso pesa más en los países donde se nacionaliza más gente. La estadística de Eurostat solo separa a los extranjeros de la UE y de fuera de ella; la delincuencia por procedencia está en <a class="underline" href="/sociedad/criminalidad/#por-procedencia">Criminalidad</a>.</p>
+
 ## Fuentes y notas
 
 - **[INE – Estadística Continua de Población](https://www.ine.es/jaxiT3/Tabla.htm?t=56942)** (tabla 56942): población por nacionalidad a 1 de enero.
@@ -338,6 +435,7 @@ LIMIT 12
 - **Ministerio del Interior**, informe quincenal de inmigración irregular, a través del **[portal de datos de ACNUR](https://data.unhcr.org/en/situations/europe-sea-arrivals/location/24522)**.
 - **[Eurostat – migr_asyappctzm y migr_asyappctza](https://ec.europa.eu/eurostat/databrowser/view/migr_asyappctzm/default/table)**: primeras solicitudes de asilo.
 - **[INE – Adquisiciones de nacionalidad española de residentes](https://www.ine.es/jaxiT3/Tabla.htm?t=70012)** (tabla 70012).
+- **[Eurostat – Integración de los migrantes](https://ec.europa.eu/eurostat/web/migrant-integration)**: empleo (lfsa_ergan), paro (lfsa_urgan), riesgo de pobreza o exclusión (ilc_peps05n), abandono escolar (edat_lfse_01), sobrecualificación (lfsa_eoqgan) y hacinamiento (ilc_lvho15) por nacionalidad, y adquisiciones de nacionalidad (migr_acq) entre la población extranjera (migr_pop1ctz).
 - Los datos de criminalidad por nacionalidad están en [Criminalidad](/sociedad/criminalidad), con su contexto.
 
 <LastRefreshed prefix="Datos actualizados" />

@@ -41,6 +41,11 @@ TABLAS = {
     # Criminalidad (Estadística de Condenados, adultos, anual desde 2013):
     "ine_condenados_ccaa": "25704",  # condenados por comunidad, sexo y nacionalidad (española/extranjera)
     "ine_condenados_delitos_nacionalidad": "49050",  # delitos e infracciones por nacionalidad del condenado
+    "ine_condenados_edad_nacionalidad": "25645",  # condenados por sexo, tramo de edad y nacionalidad (continente), España
+    # Frontur: visitantes no residentes por duración de la estancia (anual desde 2016),
+    # para estimar cuántos extranjeros no empadronados hay en España en un día medio:
+    "ine_frontur_duracion": "23987",
+    "ine_frontur_pais_anual": "23984",  # turistas por país de residencia (anual), para repartirlos por procedencia
     # Salud:
     "ine_esperanza_vida_ccaa": "1448",  # esperanza de vida al nacer por comunidad y sexo, anual desde 1975
     "ine_esperanza_vida_provincia": "1485",  # ídem por provincia
@@ -233,6 +238,35 @@ def ecepov_calefaccion():
 POBLACION_NACIONALIDAD_CSV = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/56942.csv"
 
 
+POBLACION_PAIS_CSV = "https://www.ine.es/jaxiT3/files/t/es/csv_bdsc/56936.csv"
+
+
+@dlt.resource(name="ine_poblacion_pais", write_disposition="replace")
+def poblacion_pais():
+    """Población residente en España por país de nacionalidad (unos 50 países y grupos),
+    grupo quinquenal de edad y sexo (INE 56936, Estadística Continua de Población), solo
+    a 1 de enero. Denominador de las detenciones por nacionalidad de Interior."""
+    with requests.get(POBLACION_PAIS_CSV, stream=True, timeout=600) as r:
+        r.raise_for_status()
+        r.encoding = "utf-8-sig"
+        lector = csv.reader(r.iter_lines(decode_unicode=True), delimiter=";")
+        next(lector)
+        for fila in lector:
+            if len(fila) != 5:
+                continue
+            nacionalidad, edad, sexo, periodo, total = (x.strip() for x in fila)
+            m = _ANIO_ENERO.match(periodo)
+            if not m or "UE28" in nacionalidad:
+                continue
+            yield {
+                "nacionalidad": nacionalidad,
+                "edad": edad,
+                "sexo": sexo,
+                "anio": int(m.group(1)),
+                "poblacion": int(total.replace(".", "")) if total not in ("", "..", ".") else None,
+            }
+
+
 @dlt.resource(name="ine_poblacion_nacionalidad", write_disposition="replace")
 def poblacion_nacionalidad():
     """Población residente por comunidad, grupo quinquenal de edad, nacionalidad
@@ -310,5 +344,6 @@ def ine():
         municipios,
         ecepov_calefaccion,
         poblacion_nacionalidad,
+        poblacion_pais,
         defunciones_causas,
     ]

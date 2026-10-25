@@ -794,6 +794,364 @@
     "notas": "Estadística de condenados del INE: el total de España es nivel = pais. La tasa compara con la población de la misma nacionalidad y sexo, por eso las tasas por nacionalidad no se pueden promediar para obtener la total."
   },
   {
+    "tabla": "crimen_condenados_edad",
+    "usar": true,
+    "tema": "Condenados adultos en España por sexo, edad y procedencia (españoles, todos los extranjeros o cada continente), con su tasa por habitante de su mismo grupo",
+    "preguntas": [
+      "¿Cuántos jóvenes extranjeros de 18 a 20 años son condenados por cada 1.000?",
+      "¿En qué edad hay más condenados por habitante?",
+      "¿Comparando a la misma edad, cuántas veces más condenas tienen los extranjeros?"
+    ],
+    "medidas": [
+      {
+        "columna": "condenados_por_1000_hab",
+        "nombre": "condenados por cada 1.000 residentes de su mismo sexo, edad y nacionalidad",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "condenados",
+        "nombre": "adultos condenados",
+        "unidad": "personas",
+        "tipo": "flujo"
+      },
+      {
+        "columna": "poblacion",
+        "nombre": "residentes del grupo a mitad de año",
+        "unidad": "habitantes",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "sexo",
+        "nombre": "sexo",
+        "total": null
+      },
+      {
+        "columna": "tramo_edad",
+        "nombre": "tramo de edad",
+        "total": null
+      },
+      {
+        "columna": "procedencia",
+        "nombre": "procedencia",
+        "total": null,
+        "defecto": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España. procedencia 'España' son los españoles y 'Total' todos los extranjeros; no sumar 'Total' con los continentes. Unión Europea y Resto de Europa desde 2020. Población por tramo aproximada desde grupos de cinco años, a mitad de año."
+  },
+  {
+    "tabla": "crimen_condenados_ajuste",
+    "usar": true,
+    "tema": "Cuántas veces más condenados por habitante hay entre los extranjeros que entre los españoles, sin ajustar y ajustando por edad, sexo y visitantes no residentes",
+    "preguntas": [
+      "¿Los extranjeros delinquen más que los españoles si se ajusta por edad?",
+      "¿Cuántas veces más condenados hay entre los extranjeros teniendo en cuenta a los turistas?",
+      "¿Qué inmigrantes tienen más condenas por habitante, los africanos o los americanos?",
+      "¿Cómo ha cambiado la diferencia de condenados entre extranjeros y españoles?"
+    ],
+    "medidas": [
+      {
+        "columna": "veces",
+        "nombre": "veces que la tasa de condenados de los extranjeros supera la de los españoles",
+        "unidad": "veces",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "extranjeros_por_1000_hab",
+        "nombre": "condenados extranjeros por cada 1.000 extranjeros adultos",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "espanoles_por_1000_hab",
+        "nombre": "condenados españoles por cada 1.000 españoles adultos",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "no_residentes_presentes",
+        "nombre": "visitantes no residentes adultos presentes en un día medio",
+        "unidad": "personas",
+        "tipo": "nivel"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "ajuste",
+        "nombre": "grado de ajuste",
+        "total": null,
+        "defecto": "Edad, sexo y visitantes"
+      },
+      {
+        "columna": "procedencia",
+        "nombre": "procedencia de los extranjeros",
+        "total": null,
+        "defecto": "Total"
+      }
+    ],
+    "filtros": [],
+    "notas": "Solo España. procedencia 'Total' = todos los extranjeros; los continentes (Unión Europea y Resto de Europa desde 2020). El ajuste con visitantes (Frontur) existe desde 2016. Supuestos explicados en /sociedad/criminalidad."
+  },
+  {
+    "tabla": "crimen_detenidos_procedencia",
+    "usar": true,
+    "tema": "Detenciones e investigados en España por nacionalidad (países y regiones como el norte de África o Hispanoamérica) por habitante, comparadas con las de los españoles",
+    "preguntas": [
+      "¿Cuántas detenciones hay por cada 1.000 marroquíes residentes?",
+      "¿Qué nacionalidades tienen más detenciones por habitante?",
+      "¿Cuántas veces más detenidos hay entre los hispanoamericanos que entre los españoles ajustando por edad?"
+    ],
+    "medidas": [
+      {
+        "columna": "veces_edad_sexo",
+        "nombre": "veces que su tasa de detenciones supera la de los españoles, corregida por edad y sexo",
+        "unidad": "veces",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "detenidos_por_1000_hab",
+        "nombre": "detenciones e investigados por cada 1.000 residentes de 15 o más años",
+        "unidad": "por cada 1.000 habitantes",
+        "tipo": "tasa"
+      },
+      {
+        "columna": "veces",
+        "nombre": "veces que su tasa supera la de los españoles, sin ajustar",
+        "unidad": "veces",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "veces_visitantes",
+        "nombre": "veces corregida por edad, sexo y turistas presentes",
+        "unidad": "veces",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "detenidos",
+        "nombre": "detenciones e investigados",
+        "unidad": "detenciones",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": null,
+    "dimensiones": [
+      {
+        "columna": "tipo",
+        "nombre": "tipo de procedencia (total, región o país)",
+        "total": null
+      },
+      {
+        "columna": "procedencia",
+        "nombre": "nacionalidad o región",
+        "total": "Todos los extranjeros"
+      }
+    ],
+    "filtros": [],
+    "notas": "Interior cuenta detenciones e investigaciones, no personas ni condenas, e incluye a no residentes. No sumar regiones y países. Europa desde 2020."
+  },
+  {
+    "tabla": "crimen_europa_nacionalidad",
+    "usar": true,
+    "tema": "Condenados extranjeros frente a nacionales en los países europeos: cuántas veces es mayor su tasa en cada país, también corregida por edad y sexo",
+    "preguntas": [
+      "¿En qué países de Europa están más sobrerrepresentados los extranjeros entre los condenados?",
+      "¿Cómo está España frente a Alemania en condenados extranjeros?",
+      "¿Qué porcentaje de los condenados son extranjeros en Suiza?"
+    ],
+    "medidas": [
+      {
+        "columna": "veces_edad_sexo",
+        "nombre": "veces que la tasa de condenados de los extranjeros supera la de los nacionales, corregida por edad y sexo",
+        "unidad": "veces",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "veces",
+        "nombre": "veces que la tasa de condenados de los extranjeros supera la de los nacionales",
+        "unidad": "veces",
+        "tipo": "ratio"
+      },
+      {
+        "columna": "extranjeros_condenados_pct",
+        "nombre": "porcentaje de extranjeros entre los condenados",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "extranjeros_poblacion_pct",
+        "nombre": "porcentaje de extranjeros en la población de 15 o más años",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "veces_presos",
+        "nombre": "veces que la tasa de presos de los extranjeros supera la de los nacionales",
+        "unidad": "veces",
+        "tipo": "ratio"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [],
+    "filtros": [],
+    "notas": "Eurostat (crim_just_ctz): cada país cuenta las condenas a su manera; comparar mejor 'veces'. El último año cambia según el país."
+  },
+  {
+    "tabla": "crimen_mundo_delitos",
+    "usar": true,
+    "tema": "Delitos por tipo en España comparados con el resto del mundo y de Europa: homicidios, agresiones, violencia sexual, robos, hurtos, estafas, corrupción y presos por habitante",
+    "preguntas": [
+      "¿España tiene más o menos homicidios que el resto de Europa?",
+      "¿Qué país europeo tiene más robos por habitante?",
+      "¿Cuántos presos tiene España por habitante comparado con Estados Unidos?",
+      "¿Cómo ha evolucionado la violencia sexual registrada en Suecia y en España?"
+    ],
+    "medidas": [
+      {
+        "columna": "por_100k_hab",
+        "nombre": "casos por cada 100.000 habitantes",
+        "unidad": "por cada 100.000 habitantes",
+        "tipo": "tasa",
+        "principal": true
+      },
+      {
+        "columna": "casos",
+        "nombre": "casos registrados",
+        "unidad": "casos",
+        "tipo": "flujo"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "delito",
+        "nombre": "delito",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Siempre filtrar por delito. Salvo homicidios, son delitos registrados por la policía (dependen de la denuncia y de las definiciones de cada país). El último año cambia según el país."
+  },
+  {
+    "tabla": "inmigracion_integracion_europa",
+    "usar": true,
+    "tema": "Integración de los inmigrantes en España y en Europa: empleo, paro, pobreza, abandono escolar, sobrecualificación, hacinamiento y nacionalizaciones de extranjeros frente a nacionales",
+    "preguntas": [
+      "¿Cuál es la tasa de paro de los extranjeros en España comparada con Europa?",
+      "¿En qué país europeo hay más diferencia de pobreza entre extranjeros y nacionales?",
+      "¿Cuántos extranjeros se nacionalizan cada año por cada 100 residentes?"
+    ],
+    "medidas": [
+      {
+        "columna": "brecha",
+        "nombre": "diferencia entre extranjeros y nacionales",
+        "unidad": "puntos",
+        "tipo": "ratio",
+        "principal": true
+      },
+      {
+        "columna": "extranjeros",
+        "nombre": "valor de los extranjeros",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "nacionales",
+        "nombre": "valor de los nacionales",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      },
+      {
+        "columna": "extranjeros_no_ue",
+        "nombre": "valor de los extranjeros de fuera de la UE",
+        "unidad": "%",
+        "tipo": "porcentaje"
+      }
+    ],
+    "tiempo": {
+      "columna": "anio",
+      "grano": "anual",
+      "parcial": false
+    },
+    "territorio": {
+      "niveles": [
+        "pais_extranjero"
+      ],
+      "nivel": null,
+      "codigo": "cod_pais",
+      "nombre": "pais",
+      "espana": {
+        "columna": "cod_pais",
+        "valor": "ES"
+      }
+    },
+    "dimensiones": [
+      {
+        "columna": "nombre",
+        "nombre": "indicador",
+        "total": null
+      }
+    ],
+    "filtros": [],
+    "notas": "Siempre filtrar por indicador (no se suman). sentido 1 = más es mejor. nacionalizaciones solo tiene valor en la columna extranjeros (por 100 residentes extranjeros)."
+  },
+  {
     "tabla": "crimen_condenas_delito",
     "usar": true,
     "tema": "Por qué delitos se condena en España y a qué nacionalidades pertenecen los condenados",

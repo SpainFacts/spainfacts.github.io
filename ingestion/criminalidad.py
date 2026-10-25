@@ -22,9 +22,29 @@ sirve cada tabla como CSV plano (UTF-8, ";", miles con "." y decimales con ","):
 Son hechos CONOCIDOS por las fuerzas de seguridad (denunciados o descubiertos),
 no delitos cometidos: dependen también de la propensión a denunciar.
 
+3) Detenciones e investigados (total nacional, 2010-último año):
+   - Datos3/l0/03007: extranjeros por nacionalidad (continentes y unos 50 países) y sexo;
+   - Datos3/l0/03001: todos (españoles y extranjeros) por tipología; se guarda el total.
+   Cuentan detenciones e investigaciones, no personas distintas, e incluyen a no
+   residentes. Rupturas de serie: entran los Mossos en 2020 y los investigados de la
+   Ertzaintza en 2025 (afectan a todas las nacionalidades a la vez).
+
+4) UNODC (Naciones Unidas), estadísticas de delincuencia y justicia penal de todos los
+   países (UN-CTS, recogidas junto con Eurostat en Europa), ficheros XLSX de
+   https://data.unodc.org/sites/dataportal.unodc.org/files/<AAAA-MM>/<fichero>.xlsx
+   (la carpeta cambia con cada actualización: se prueban los últimos meses):
+   - data_cts_violent_and_sexual_crime y data_cts_corruption_and_economic_crime: delitos
+     registrados por la policía por tipo (agresiones graves, violencia sexual, robos,
+     hurtos, fraude, corrupción...), número y tasa por 100.000 habitantes;
+   - data_cts_prisons_and_prisoners: presos (total y sin condena firme).
+
 Recursos (replace):
   ses_criminalidad_anual   año x comunidad/provincia x tipología
   ses_balance_municipios   periodo x territorio (con código INE si es municipio) x tipología
+  ses_detenidos_nacionalidad  año x nacionalidad (continente o país) x sexo, extranjeros
+  ses_detenidos_total      año, todas las detenciones e investigados
+  unodc_delitos            país (ISO3) x año x tipo de delito x unidad (número / tasa)
+  unodc_presos             país (ISO3) x año x situación (total / sin condena) x unidad
 """
 
 import csv
@@ -162,7 +182,78 @@ def criminalidad():
             if sin_codigo:
                 log.warning("%s: %d municipios sin código INE: %s", ruta, len(sin_codigo), sorted(sin_codigo)[:10])
 
-    return anual, balance
+    @dlt.resource(name="ses_detenidos_nacionalidad", write_disposition="replace")
+    def detenidos_nacionalidad():
+        for territorio, nacionalidad, sexo, periodo, total in _filas("Datos3/l0/03007"):
+            if territorio.strip() != "TOTAL NACIONAL":
+                continue
+            # "1.01.-Marruecos" -> codigo "1.01", nacionalidad "Marruecos"; "TOTAL" -> "TOTAL"
+            m = re.match(r"^\s*([\d.]+?)\.?-\s*(.+)$", nacionalidad)
+            yield {"codigo": m.group(1) if m else None, "nacionalidad": (m.group(2) if m else nacionalidad).strip(),
+                   "sexo": sexo.strip(), "anio": int(periodo), "detenidos": _numero(total)}
+
+    @dlt.resource(name="ses_detenidos_total", write_disposition="replace")
+    def detenidos_total():
+        for territorio, tipologia, periodo, total in _filas("Datos3/l0/03001"):
+            if territorio.strip() == "TOTAL NACIONAL" and tipologia.strip() == "TOTAL INFRACCIONES PENALES":
+                yield {"anio": int(periodo), "detenidos": _numero(total)}
+
+    @dlt.resource(name="unodc_delitos", write_disposition="replace")
+    def unodc_delitos():
+        for fichero in ("data_cts_violent_and_sexual_crime", "data_cts_corruption_and_economic_crime"):
+            for f in _unodc_filas(fichero):
+                if f["Dimension"] == "by type of offence" and f["Sex"] in ("Total", None) and f["Age"] in ("Total", None):
+                    yield {"iso3": f["Iso3_code"], "anio": int(f["Year"]), "categoria": f["Category"],
+                           "unidad": f["Unit of measurement"], "valor": _decimal(f["VALUE"])}
+
+    @dlt.resource(name="unodc_presos", write_disposition="replace")
+    def unodc_presos():
+        for f in _unodc_filas("data_cts_prisons_and_prisoners"):
+            if f["Indicator"] == "Persons held" and f["Sex"] in ("Total", None) and f["Age"] in ("Total", None) and (
+                    f["Dimension"] == "Total" or (f["Dimension"] == "by status" and f["Category"] == "Unsentenced")):
+                yield {"iso3": f["Iso3_code"], "anio": int(f["Year"]),
+                       "situacion": "Sin condena firme" if f["Dimension"] == "by status" else "Total",
+                       "unidad": f["Unit of measurement"], "valor": _decimal(f["VALUE"])}
+
+    return anual, balance, detenidos_nacionalidad, detenidos_total, unodc_delitos, unodc_presos
+
+
+def _decimal(valor) -> float | None:
+    """Siempre float: si el primer valor es entero, dlt crearía otra columna para los decimales."""
+    try:
+        return float(valor)
+    except (TypeError, ValueError):
+        return None
+
+
+UNODC = "https://data.unodc.org/sites/dataportal.unodc.org/files/{mes}/{fichero}.xlsx"
+
+
+def _unodc_filas(fichero: str):
+    """Filas (dict por cabecera) de la primera hoja de un XLSX de UNODC. La carpeta del mes
+    cambia con cada actualización: se prueba desde el mes actual hacia atrás."""
+    import datetime
+
+    import openpyxl
+
+    hoy = datetime.date.today()
+    for atras in range(0, 24):
+        a, m = divmod(hoy.year * 12 + hoy.month - 1 - atras, 12)
+        url = UNODC.format(mes=f"{a}-{m + 1:02d}", fichero=fichero)
+        r = requests.get(url, headers=CABECERAS, timeout=300)
+        if r.status_code == 200 and r.content[:2] == b"PK":
+            log.info("UNODC %s: %s", fichero, url)
+            break
+    else:
+        raise ValueError(f"UNODC: no se encuentra {fichero} en los últimos 24 meses")
+    hoja = openpyxl.load_workbook(io.BytesIO(r.content), read_only=True).worksheets[0]
+    filas = hoja.iter_rows(values_only=True)
+    for cabecera in filas:
+        if cabecera and cabecera[0] == "Iso3_code":
+            break
+    for fila in filas:
+        if fila and fila[0]:
+            yield dict(zip(cabecera, fila))
 
 
 if __name__ == "__main__":

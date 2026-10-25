@@ -31,6 +31,84 @@ models:
                 values: ['pais', 'ccaa']
       - name: nombre
         tests: [not_null]
+  - name: crimen_condenados_edad
+    description: "Condenados adultos en España por sexo, tramo de edad (18-20... 71+) y nacionalidad (española/extranjera), con la población residente del mismo grupo a mitad de año y la tasa por 1.000 (INE 25645 y 56942)."
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: sexo
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Hombres', 'Mujeres']
+      - name: nacionalidad
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Española', 'Extranjera']
+      - name: procedencia
+        description: "'España' para los españoles, 'Total' para todos los extranjeros y Unión Europea, Resto de Europa, África, América o Asia y Oceanía (no sumar 'Total' con los grupos)."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['España', 'Total', 'Unión Europea', 'Resto de Europa', 'África', 'América', 'Asia y Oceanía']
+      - name: poblacion
+        tests: [not_null]
+  - name: crimen_condenados_ajuste
+    description: "Condenados adultos por 1.000 habitantes, españoles frente a extranjeros (procedencia 'Total' o cada grupo), con tres grados de ajuste (orden 1 sin ajustar, 2 por edad y sexo, 3 además con los visitantes no residentes presentes según Frontur, desde 2016) y cuántas veces es mayor la tasa de los extranjeros (veces)."
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: procedencia
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Total', 'Unión Europea', 'Resto de Europa', 'África', 'América', 'Asia y Oceanía']
+      - name: orden
+        tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+      - name: veces
+        tests: [not_null]
+  - name: crimen_curva_edad_referencia
+    description: "Condenados por habitante en España por sexo y grupo quinquenal de edad (15-19 ... 85+), último año: curva de referencia para corregir por edad y sexo donde no se conoce la edad de los casos."
+    columns:
+      - name: tasa
+        tests: [not_null]
+  - name: crimen_visitantes_presentes
+    description: "Visitantes no residentes adultos presentes en España en un día medio de cada año (Frontur), desde 2016."
+    columns:
+      - name: presentes
+        tests: [not_null]
+  - name: crimen_detenidos_procedencia
+    description: "Detenciones e investigados por procedencia (Interior 03007/03001) por 1.000 residentes de 15+ de esa nacionalidad (INE 56936), y cuántas veces es mayor que la de los españoles: sin ajustar, corregida por edad y sexo y con visitantes. tipo total/region/pais."
+    columns:
+      - name: anio
+        tests: [not_null]
+      - name: tipo
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['total', 'region', 'pais']
+      - name: veces
+        tests: [not_null]
+  - name: crimen_europa_nacionalidad
+    description: "Condenados y presos por nacionalidad en los países europeos que lo publican en Eurostat, tasas por 1.000 habitantes de 15+ de la misma nacionalidad, cuántas veces es mayor la de los extranjeros (veces) y corregida por edad y sexo (veces_edad_sexo)."
+    columns:
+      - name: cod_pais
+        tests: [not_null]
+      - name: veces
+        tests: [not_null]
+  - name: crimen_mundo_delitos
+    description: "Delitos registrados por la policía por tipo en todos los países que informan a UNODC, homicidios intencionados (Banco Mundial/UNODC) y presos, en tasa por 100.000 habitantes. Salvo los homicidios, depende de cuánto se denuncia y de las definiciones de cada país."
+    columns:
+      - name: delito_id
+        tests: [not_null]
+      - name: cod_pais
+        tests: [not_null]
+      - name: por_100k_hab
+        tests: [not_null]
   - name: crimen_condenas_delito
     description: "Delitos por los que se condena en España por tipo y nacionalidad del condenado, con su nivel en el árbol de delitos (nivel_delito, delito_padre) y tasas por 100.000 habitantes."
     columns:

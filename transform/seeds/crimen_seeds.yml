@@ -10,3 +10,25 @@ seeds:
       3 subdelito; delito_padre: el nivel inmediatamente superior.
     config:
       column_types: {delito: varchar, delito_padre: varchar, nivel_delito: integer}
+  - name: crimen_frontur_procedencia
+    description: >
+      Reparto de los turistas de Frontur (tabla 23984, por país de residencia) entre las
+      procedencias de la Estadística de Condenados del INE, para estimar cuántos visitantes no
+      residentes de cada procedencia hay en España en un día medio (crimen_condenados_ajuste).
+      Los grupos mezclados de Frontur se reparten con cuotas supuestas: Países Nórdicos 75 % UE
+      y 25 % Noruega e Islandia; Resto de Europa mitad UE, mitad fuera; Resto del Mundo mitad
+      África, mitad Asia y Oceanía. Las cuotas de cada país suman 1.
+    config:
+      column_types: {pais_residencia: varchar, procedencia: varchar, cuota: double}
+  - name: crimen_procedencias
+    description: >
+      Qué suma cada procedencia (un país, una región o todos los extranjeros) en cada fuente:
+      'mir' = etiqueta de nacionalidad de las detenciones e investigados de Interior (03007),
+      'ine' = nacionalidad de la población del INE (56936), 'frontur' = país de residencia de
+      los turistas (Frontur 23984). valor(procedencia) = suma de cuota × valor(etiqueta); las
+      cuotas -1 restan (África subsahariana = África - Marruecos - Argelia; Hispanoamérica =
+      América - Brasil, y en la población también - EE. UU. - Canadá, que Interior no separa).
+      Sin filas 'frontur' no se estima la presencia de visitantes (norte de África y África
+      subsahariana van en el «Resto del mundo» de Frontur).
+    config:
+      column_types: {procedencia: varchar, tipo: varchar, fuente: varchar, etiqueta: varchar, cuota: double}

@@ -6,11 +6,11 @@
 -- Cautelas (se explican en la web):
 --   - la comunidad es la del juzgado que condena, no la de residencia;
 --   - entre los condenados extranjeros hay personas que no residen en España
---     (turistas, personas en tránsito o en situación irregular) y que no están
---     en el denominador: eso eleva la tasa de extranjeros;
+--     (turistas, personas de paso) y que no están en el denominador: eso eleva la
+--     tasa de extranjeros (los irregulares suelen estar empadronados);
 --   - la población extranjera es más joven y con más hombres, los grupos que más
---     delinquen en cualquier país; por eso se dan tasas por sexo, pero no se puede
---     ajustar por edad porque el INE no cruza edad y nacionalidad de los condenados.
+--     delinquen en cualquier país; aquí se dan tasas por sexo, y el ajuste por edad
+--     y por visitantes no residentes está en crimen_condenados_ajuste (INE 25645).
 -- Población de 18 o más años aproximada con los grupos quinquenales: 20 y más
 -- años + 2/5 del grupo de 15 a 19.
 with condenados as (

@@ -14,10 +14,26 @@
    - migr_asyappctzm: primeras solicitudes al mes (total, España);
    - migr_asyappctza: primeras solicitudes al año por nacionalidad.
 
+3) Extranjeros en Europa (Eurostat, todos los países que publican), para comparar a
+   España con otros países:
+   - crim_just_ctz: condenados por nacionalidad (del país / extranjera / total);
+   - crim_pris_ctz: presos por nacionalidad;
+   - migr_pop1ctz: población a 1 de enero por nacionalidad (del país / extranjera y apátrida), sexo
+     y edad en grupos de cinco años (para las tasas y la corrección por edad);
+   - indicadores de integración por nacionalidad: empleo (lfsa_ergan), paro (lfsa_urgan),
+     riesgo de pobreza o exclusión (ilc_peps05n), abandono escolar temprano
+     (edat_lfse_01), sobrecualificación (lfsa_eoqgan) y hacinamiento (ilc_lvho15);
+   - migr_acq: adquisiciones de nacionalidad (para la tasa de nacionalización).
+
 Recursos (replace):
   acnur_llegadas             mes x vía, personas
   eurostat_asilo_mensual     mes, primeras solicitudes
   eurostat_asilo_nacionalidad año x nacionalidad, primeras solicitudes
+  eurostat_condenados_nacionalidad  país x año x nacionalidad, condenados
+  eurostat_presos_nacionalidad      país x año x nacionalidad, presos
+  eurostat_poblacion_nacionalidad   país x año x nacionalidad x sexo x edad, habitantes
+  eurostat_integracion              indicador x país x año x nacionalidad, %
+  eurostat_nacionalizaciones        país x año, adquisiciones de nacionalidad
 """
 
 import logging
@@ -68,7 +84,64 @@ def migracion():
             yield {"anio": coords.get("time"), "cod_nacionalidad": coords.get("citizen"),
                    "nacionalidad": etiquetas.get(coords.get("citizen")), "solicitudes": valor}
 
-    return llegadas, asilo_mensual, asilo_nacionalidad
+    def _eurostat(dataset: str, params: dict) -> dict:
+        r = requests.get(EUROSTAT + dataset, timeout=300, headers=CABECERAS,
+                         params={**params, "format": "JSON", "lang": "EN"})
+        r.raise_for_status()
+        return r.json()
+
+    @dlt.resource(name="eurostat_condenados_nacionalidad", write_disposition="replace")
+    def condenados_nacionalidad():
+        datos = _eurostat("crim_just_ctz", {"leg_stat": "PER_CNV", "unit": "NR"})
+        for c, valor in parse_json_stat_series(datos):
+            yield {"geo": c["geo"], "anio": int(c["time"]), "citizen": c["citizen"], "condenados": valor}
+
+    @dlt.resource(name="eurostat_presos_nacionalidad", write_disposition="replace")
+    def presos_nacionalidad():
+        datos = _eurostat("crim_pris_ctz", {"unit": "NR"})
+        for c, valor in parse_json_stat_series(datos):
+            yield {"geo": c["geo"], "anio": int(c["time"]), "citizen": c["citizen"], "presos": valor}
+
+    EDADES = ["TOTAL", "Y15-19", "Y20-24", "Y25-29", "Y30-34", "Y35-39", "Y40-44", "Y45-49", "Y50-54",
+              "Y55-59", "Y60-64", "Y65-69", "Y70-74", "Y75-79", "Y80-84", "Y_GE85"]
+
+    @dlt.resource(name="eurostat_poblacion_nacionalidad", write_disposition="replace")
+    def poblacion_nacionalidad():
+        # en migr_pop1ctz los extranjeros son FOR_STLS (extranjeros y apátridas): se guardan como FOR
+        datos = _eurostat("migr_pop1ctz", {"unit": "NR", "citizen": ["FOR_STLS", "NAT"], "sex": ["T", "M", "F"],
+                                           "age": EDADES, "sinceTimePeriod": "2008"})
+        for c, valor in parse_json_stat_series(datos):
+            yield {"geo": c["geo"], "anio": int(c["time"]), "citizen": "FOR" if c["citizen"] == "FOR_STLS" else c["citizen"],
+                   "sexo": c["sex"],
+                   "edad": c["age"], "poblacion": valor}
+
+    # indicador -> (dataset, filtros fijos); todos en % y por nacionalidad
+    INTEGRACION = {
+        "empleo": ("lfsa_ergan", {"age": "Y20-64", "sex": "T", "unit": "PC"}),
+        "paro": ("lfsa_urgan", {"age": "Y15-74", "sex": "T", "unit": "PC"}),
+        "arope": ("ilc_peps05n", {"age": "Y_GE18", "sex": "T", "unit": "PC"}),
+        "abandono_escolar": ("edat_lfse_01", {"age": "Y18-24", "sex": "T", "unit": "PC", "wstatus": "POP"}),
+        "sobrecualificacion": ("lfsa_eoqgan", {"age": "Y20-64", "sex": "T", "unit": "PC"}),
+        "hacinamiento": ("ilc_lvho15", {"age": "Y_GE18", "sex": "T", "unit": "PC"}),
+    }
+
+    @dlt.resource(name="eurostat_integracion", write_disposition="replace")
+    def integracion():
+        for indicador, (dataset, filtros) in INTEGRACION.items():
+            datos = _eurostat(dataset, {**filtros, "citizen": ["NAT", "FOR", "EU27_2020_FOR", "NEU27_2020_FOR"]})
+            for c, valor in parse_json_stat_series(datos):
+                yield {"indicador": indicador, "geo": c["geo"], "anio": int(c["time"]),
+                       "citizen": c["citizen"], "valor": valor}
+
+    @dlt.resource(name="eurostat_nacionalizaciones", write_disposition="replace")
+    def nacionalizaciones():
+        datos = _eurostat("migr_acq", {"agedef": "COMPLET", "age": "TOTAL", "sex": "T", "unit": "NR",
+                                       "citizen": "TOTAL"})
+        for c, valor in parse_json_stat_series(datos):
+            yield {"geo": c["geo"], "anio": int(c["time"]), "nacionalizaciones": valor}
+
+    return (llegadas, asilo_mensual, asilo_nacionalidad, condenados_nacionalidad, presos_nacionalidad,
+            poblacion_nacionalidad, integracion, nacionalizaciones)
 
 
 if __name__ == "__main__":

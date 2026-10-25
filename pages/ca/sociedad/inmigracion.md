@@ -3,7 +3,7 @@ title: Immigració
 description: "Població estrangera a Espanya per comunitat i nacionalitat, saldo migratori, arribades irregulars per via, sol·licituds d'asil i nacionalitzacions, amb dades oficials."
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: 23fdd4374850
+i18n_origen: a376df7e1201
 ---
 
 <script>
@@ -332,6 +332,103 @@ LIMIT 12
 
 ---
 
+## Integració: Espanya a Europa
+
+```sql integracion_ultimo
+SELECT i.*
+FROM mother.inmigracion_integracion_europa i
+WHERE i.anio = (SELECT max(anio) FROM mother.inmigracion_integracion_europa x WHERE x.indicador = i.indicador AND x.cod_pais = 'ES')
+```
+
+```sql integracion_espana
+WITH ranking AS (
+    SELECT indicador, cod_pais,
+           rank() OVER (PARTITION BY indicador ORDER BY coalesce(brecha, extranjeros) * sentido DESC) AS puesto,
+           count(*) OVER (PARTITION BY indicador) AS paises
+    FROM ${integracion_ultimo}
+    WHERE cod_pais <> 'EU27_2020'
+)
+SELECT e.nombre, e.anio, e.nacionales, e.extranjeros, e.extranjeros_no_ue, e.brecha,
+       ue.extranjeros AS ue_extranjeros, ue.brecha AS ue_brecha,
+       r.puesto || ' de ' || r.paises AS puesto
+FROM ${integracion_ultimo} e
+LEFT JOIN ${integracion_ultimo} ue ON ue.indicador = e.indicador AND ue.cod_pais = 'EU27_2020'
+LEFT JOIN ranking r ON r.indicador = e.indicador AND r.cod_pais = e.cod_pais
+WHERE e.cod_pais = 'ES'
+ORDER BY e.orden
+```
+
+```sql integracion_resumen
+SELECT
+    max(anio) AS anio,
+    max(extranjeros) FILTER (WHERE indicador = 'empleo') AS empleo_ext,
+    max(nacionales) FILTER (WHERE indicador = 'empleo') AS empleo_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'arope') AS arope_ext,
+    max(nacionales) FILTER (WHERE indicador = 'arope') AS arope_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_ext,
+    max(nacionales) FILTER (WHERE indicador = 'abandono_escolar') AS abandono_nac,
+    max(extranjeros) FILTER (WHERE indicador = 'nacionalizaciones') AS nacionalizaciones
+FROM ${integracion_ultimo}
+WHERE cod_pais = 'ES'
+```
+
+```sql integracion_arope
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'arope' AND brecha IS NOT NULL
+ORDER BY brecha DESC
+```
+
+```sql integracion_empleo
+SELECT pais, brecha, CASE WHEN cod_pais = 'ES' THEN 'España' WHEN cod_pais = 'EU27_2020' THEN 'Media de la UE' ELSE 'Otros países' END AS grupo
+FROM ${integracion_ultimo}
+WHERE indicador = 'empleo' AND brecha IS NOT NULL
+ORDER BY brecha
+```
+
+Eurostat compara nacionals i estrangers en ocupació, pobresa, estudis i habitatge a tots els països europeus. A Espanya, el {integracion_resumen[0]?.anio} treballava el {formatNumber(integracion_resumen[0]?.empleo_ext, 0)} % dels estrangers de 20 a 64 anys, davant del {formatNumber(integracion_resumen[0]?.empleo_nac, 0)} % dels espanyols. La distància és molt més gran en les condicions de vida: el {formatNumber(integracion_resumen[0]?.arope_ext, 0)} % dels estrangers adults estava en risc de pobresa o exclusió (el {formatNumber(integracion_resumen[0]?.arope_nac, 0)} % dels espanyols), i el {formatNumber(integracion_resumen[0]?.abandono_ext, 0)} % dels joves estrangers va deixar els estudis aviat (el {formatNumber(integracion_resumen[0]?.abandono_nac, 0)} % dels espanyols). Cada any es nacionalitzen uns {formatNumber(integracion_resumen[0]?.nacionalizaciones, 1)} de cada 100 estrangers residents, i des d'aleshores compten com a espanyols en totes les estadístiques.
+
+<DataTable data={integracion_espana} rows=all>
+    <Column id=nombre title="Indicador" />
+    <Column id=anio title="Any" fmt="####" />
+    <Column id=nacionales title="Espanyols" fmt='0.0"%"' />
+    <Column id=extranjeros title="Estrangers" fmt='0.0"%"' />
+    <Column id=extranjeros_no_ue title="De fora de la UE" fmt='0.0"%"' />
+    <Column id=brecha title="Diferència (punts)" fmt='+0.0;-0.0' />
+    <Column id=ue_brecha title="Diferència mitjana a la UE" fmt='+0.0;-0.0' />
+    <Column id=puesto title="Lloc d'Espanya" />
+</DataTable>
+
+<p class="text-xs text-gray-500">«Lloc d'Espanya»: lloc entre els països europeus amb dada, de la menor diferència entre estrangers i nacionals (1) a la major; en nacionalitzacions, de la taxa més alta a la més baixa. Eurostat, últim any amb dada d'Espanya.</p>
+
+<BarChart
+    data={integracion_arope}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="punts de diferència, estrangers - nacionals"
+    title="Risc de pobresa o exclusió: diferència entre estrangers i nacionals ({integracion_resumen[0]?.anio})"
+/>
+
+<BarChart
+    data={integracion_empleo}
+    x=pais
+    y=brecha
+    series=grupo
+    swapXY=true
+    sort=false
+    yFmt='+0.0;-0.0'
+    seriesColors={{'España': '#b91c1c', 'Media de la UE': '#f59e0b', 'Otros países': '#9ca3af'}}
+    yAxisTitle="punts de diferència, estrangers - nacionals"
+    title="Taxa d'ocupació (20-64 anys): diferència entre estrangers i nacionals ({integracion_resumen[0]?.anio})"
+/>
+
+<p class="text-xs text-gray-500">Indicadors d'integració d'Eurostat per nacionalitat (Enquesta de Població Activa i Enquesta de Condicions de Vida de cada país). Comparen nacionalitat, no país de naixement: els immigrants que ja s'han nacionalitzat compten com a nacionals, i això pesa més als països on es nacionalitza més gent. L'estadística d'Eurostat només separa els estrangers de la UE i de fora d'aquesta; la delinqüència per procedència és a <a class="underline" href="/ca/sociedad/criminalidad/#per-procedencia">Criminalitat</a>.</p>
+
 ## Fonts i notes
 
 - **[INE – Estadística Contínua de Població](https://www.ine.es/jaxiT3/Tabla.htm?t=56942)** (taula 56942): població per nacionalitat a 1 de gener.
@@ -339,6 +436,7 @@ LIMIT 12
 - **Ministeri de l'Interior**, informe quinzenal d'immigració irregular, a través del **[portal de dades de l'ACNUR](https://data.unhcr.org/en/situations/europe-sea-arrivals/location/24522)**.
 - **[Eurostat – migr_asyappctzm i migr_asyappctza](https://ec.europa.eu/eurostat/databrowser/view/migr_asyappctzm/default/table)**: primeres sol·licituds d'asil.
 - **[INE – Adquisicions de nacionalitat espanyola de residents](https://www.ine.es/jaxiT3/Tabla.htm?t=70012)** (taula 70012).
+- **[Eurostat – Integració dels migrants](https://ec.europa.eu/eurostat/web/migrant-integration)**: ocupació (lfsa_ergan), atur (lfsa_urgan), risc de pobresa o exclusió (ilc_peps05n), abandonament escolar (edat_lfse_01), sobrequalificació (lfsa_eoqgan) i sobreocupació de l'habitatge (ilc_lvho15) per nacionalitat, i adquisicions de nacionalitat (migr_acq) entre la població estrangera (migr_pop1ctz).
 - Les dades de criminalitat per nacionalitat són a [Criminalitat](/ca/sociedad/criminalidad), amb el seu context.
 
 <LastRefreshed prefix="Dades actualitzades" />

@@ -1,0 +1,144 @@
+procedencia,tipo,fuente,etiqueta,cuota
+Marruecos,pais,mir,Marruecos,1
+Marruecos,pais,ine,Marruecos,1
+Argelia,pais,mir,Argelia,1
+Argelia,pais,ine,Argelia,1
+Senegal,pais,mir,Senegal,1
+Senegal,pais,ine,Senegal,1
+Nigeria,pais,mir,Nigeria,1
+Nigeria,pais,ine,Nigeria,1
+Guinea Ecuatorial,pais,mir,Guinea Ecuatorial,1
+Guinea Ecuatorial,pais,ine,Guinea Ecuatorial,1
+Ghana,pais,mir,Ghana,1
+Ghana,pais,ine,Ghana,1
+Malí,pais,mir,Mali,1
+Malí,pais,ine,Mali,1
+Gambia,pais,mir,Gambia,1
+Gambia,pais,ine,Gambia,1
+Ecuador,pais,mir,Ecuador,1
+Ecuador,pais,ine,Ecuador,1
+Colombia,pais,mir,Colombia,1
+Colombia,pais,ine,Colombia,1
+República Dominicana,pais,mir,Rep. Dominicana,1
+República Dominicana,pais,ine,República Dominicana,1
+Bolivia,pais,mir,Bolivia,1
+Bolivia,pais,ine,Bolivia,1
+Perú,pais,mir,Perú,1
+Perú,pais,ine,Perú,1
+Argentina,pais,mir,Argentina,1
+Argentina,pais,ine,Argentina,1
+Argentina,pais,frontur,Argentina,1
+Brasil,pais,mir,Brasil,1
+Brasil,pais,ine,Brasil,1
+Brasil,pais,frontur,Brasil,1
+Cuba,pais,mir,Cuba,1
+Cuba,pais,ine,Cuba,1
+Venezuela,pais,mir,Venezuela,1
+Venezuela,pais,ine,Venezuela,1
+Venezuela,pais,frontur,Venezuela,1
+Paraguay,pais,mir,Paraguay,1
+Paraguay,pais,ine,Paraguay,1
+Chile,pais,mir,Chile,1
+Chile,pais,ine,Chile,1
+Chile,pais,frontur,Chile,1
+Uruguay,pais,mir,Uruguay,1
+Uruguay,pais,ine,Uruguay,1
+China,pais,mir,China,1
+China,pais,ine,China,1
+China,pais,frontur,China,1
+Pakistán,pais,mir,Paquistán,1
+Pakistán,pais,ine,Pakistán,1
+India,pais,mir,India,1
+India,pais,ine,India,1
+India,pais,frontur,India,1
+Bangladés,pais,mir,Bangladesh,1
+Bangladés,pais,ine,Bangladesh,1
+Filipinas,pais,mir,Filipinas,1
+Filipinas,pais,ine,Filipinas,1
+Filipinas,pais,frontur,Filipinas,1
+Rumanía,pais,mir,Rumanía,1
+Rumanía,pais,ine,Rumanía,1
+Bulgaria,pais,mir,Bulgaría,1
+Bulgaria,pais,ine,Bulgaria,1
+Reino Unido,pais,mir,Reino Unido,1
+Reino Unido,pais,ine,Reino Unido,1
+Reino Unido,pais,frontur,Reino Unido,1
+Portugal,pais,mir,Portugal,1
+Portugal,pais,ine,Portugal,1
+Portugal,pais,frontur,Portugal,1
+Francia,pais,mir,Francia,1
+Francia,pais,ine,Francia,1
+Francia,pais,frontur,Francia,1
+Italia,pais,mir,Italia,1
+Italia,pais,ine,Italia,1
+Italia,pais,frontur,Italia,1
+Alemania,pais,mir,Alemania,1
+Alemania,pais,ine,Alemania,1
+Alemania,pais,frontur,Alemania,1
+Polonia,pais,mir,Polonia,1
+Polonia,pais,ine,Polonia,1
+Ucrania,pais,mir,Ucrania,1
+Ucrania,pais,ine,Ucrania,1
+Rusia,pais,mir,Rusia,1
+Rusia,pais,ine,Rusia,1
+Rusia,pais,frontur,Rusia,1
+Lituania,pais,mir,Lituania,1
+Lituania,pais,ine,Lituania,1
+Países Bajos,pais,mir,Holanda,1
+Países Bajos,pais,ine,Países Bajos,1
+Países Bajos,pais,frontur,Países Bajos,1
+Bélgica,pais,mir,Bélgica,1
+Bélgica,pais,ine,Bélgica,1
+Bélgica,pais,frontur,Bélgica,1
+Norte de África,region,mir,Marruecos,1
+Norte de África,region,mir,Argelia,1
+Norte de África,region,ine,Marruecos,1
+Norte de África,region,ine,Argelia,1
+África subsahariana,region,mir,CONTINENTE AFRICANO,1
+África subsahariana,region,mir,Marruecos,-1
+África subsahariana,region,mir,Argelia,-1
+África subsahariana,region,ine,De Africa,1
+África subsahariana,region,ine,Marruecos,-1
+África subsahariana,region,ine,Argelia,-1
+Hispanoamérica,region,mir,CONTINENTE AMERICANO,1
+Hispanoamérica,region,mir,Brasil,-1
+Hispanoamérica,region,ine,De América del Norte,1
+Hispanoamérica,region,ine,De Centro América y Caribe,1
+Hispanoamérica,region,ine,De Sudamérica,1
+Hispanoamérica,region,ine,Brasil,-1
+Hispanoamérica,region,ine,Estados Unidos de América,-1
+Hispanoamérica,region,ine,Canadá,-1
+Hispanoamérica,region,frontur,Argentina,1
+Hispanoamérica,region,frontur,Chile,1
+Hispanoamérica,region,frontur,México,1
+Hispanoamérica,region,frontur,Venezuela,1
+Hispanoamérica,region,frontur,Resto América,1
+Asia,region,mir,CONTINENTE ASIÁTICO,1
+Asia,region,ine,De Asia,1
+Asia,region,frontur,Japón,1
+Asia,region,frontur,China,1
+Asia,region,frontur,Corea,1
+Asia,region,frontur,India,1
+Asia,region,frontur,Filipinas,1
+Asia,region,frontur,Arabia Saudí,1
+Asia,region,frontur,Emiratos Árabes Unidos,1
+Asia,region,frontur,Israel,1
+Europa,region,mir,CONTINENTE EUROPEO,1
+Europa,region,ine,País de la UE27_2020 sin España,1
+Europa,region,ine,País de Europa menos UE27_2020,1
+Europa,region,frontur,Alemania,1
+Europa,region,frontur,Bélgica,1
+Europa,region,frontur,Francia,1
+Europa,region,frontur,Irlanda,1
+Europa,region,frontur,Italia,1
+Europa,region,frontur,Países Bajos,1
+Europa,region,frontur,Portugal,1
+Europa,region,frontur,Países Nórdicos,1
+Europa,region,frontur,Reino Unido,1
+Europa,region,frontur,Suiza,1
+Europa,region,frontur,Rusia,1
+Europa,region,frontur,Turquía,1
+Europa,region,frontur,Resto de Europa,1
+Todos los extranjeros,total,mir,TOTAL,1
+Todos los extranjeros,total,ine,Extranjera,1
+Todos los extranjeros,total,frontur,Total,1

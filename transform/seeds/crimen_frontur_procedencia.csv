@@ -1,0 +1,34 @@
+pais_residencia,procedencia,cuota
+Alemania,Unión Europea,1
+Bélgica,Unión Europea,1
+Francia,Unión Europea,1
+Irlanda,Unión Europea,1
+Italia,Unión Europea,1
+Países Bajos,Unión Europea,1
+Portugal,Unión Europea,1
+Países Nórdicos,Unión Europea,0.75
+Países Nórdicos,Resto de Europa,0.25
+Resto de Europa,Unión Europea,0.5
+Resto de Europa,Resto de Europa,0.5
+Reino Unido,Resto de Europa,1
+Suiza,Resto de Europa,1
+Rusia,Resto de Europa,1
+Turquía,Resto de Europa,1
+Estados Unidos de América,América,1
+Canadá,América,1
+México,América,1
+Argentina,América,1
+Brasil,América,1
+Chile,América,1
+Venezuela,América,1
+Resto América,América,1
+Japón,Asia y Oceanía,1
+China,Asia y Oceanía,1
+Corea,Asia y Oceanía,1
+Israel,Asia y Oceanía,1
+India,Asia y Oceanía,1
+Arabia Saudí,Asia y Oceanía,1
+Filipinas,Asia y Oceanía,1
+Emiratos Árabes Unidos,Asia y Oceanía,1
+Resto del Mundo,África,0.5
+Resto del Mundo,Asia y Oceanía,0.5
