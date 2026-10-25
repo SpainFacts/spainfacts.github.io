@@ -427,7 +427,7 @@ Eurostat compara nacionals i estrangers en ocupació, pobresa, estudis i habitat
     title="Taxa d'ocupació (20-64 anys): diferència entre estrangers i nacionals ({integracion_resumen[0]?.anio})"
 />
 
-<p class="text-xs text-gray-500">Indicadors d'integració d'Eurostat per nacionalitat (Enquesta de Població Activa i Enquesta de Condicions de Vida de cada país). Comparen nacionalitat, no país de naixement: els immigrants que ja s'han nacionalitzat compten com a nacionals, i això pesa més als països on es nacionalitza més gent. L'estadística d'Eurostat només separa els estrangers de la UE i de fora d'aquesta; la delinqüència per procedència és a <a class="underline" href="/ca/sociedad/criminalidad/#per-procedencia">Criminalitat</a>.</p>
+<p class="text-xs text-gray-500">Indicadors d'integració d'Eurostat per nacionalitat (Enquesta de Població Activa i Enquesta de Condicions de Vida de cada país). Comparen nacionalitat, no país de naixement: els immigrants que ja s'han nacionalitzat compten com a nacionals, i això pesa més als països on es nacionalitza més gent. L'estadística d'Eurostat només separa els estrangers de la UE i de fora d'aquesta; la delinqüència per procedència és a <a class="underline" href="/ca/sociedad/criminalidad/#per-procedència">Criminalitat</a>.</p>
 
 ## Fonts i notes
 
