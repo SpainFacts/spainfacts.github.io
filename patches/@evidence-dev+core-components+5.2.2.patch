@@ -94,10 +94,10 @@ index 41263f2..1b40ee5 100644
  				</a>
  			{/if}
 diff --git a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
-index 3e4156d..9ef5b6f 100644
+index 3e4156d..1e29cce 100644
 --- a/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
 +++ b/node_modules/@evidence-dev/core-components/dist/organisms/layout/tableofcontents/ContentsList.svelte
-@@ -1,53 +1,116 @@
+@@ -1,53 +1,117 @@
  <script>
  	import { onMount, onDestroy } from 'svelte';
 +	import { page } from '$app/stores';
@@ -138,37 +138,39 @@ index 3e4156d..9ef5b6f 100644
 +		}
 +		activo = actual?.id ?? null;
 +	}
-+
+ 
+-		headers.forEach((header) => {
+-			observer.observe(header, { subtree: true, characterData: true, childList: true });
+-		});
 +	function alDesplazar() {
 +		if (pendiente) return;
 +		pendiente = true;
 +		requestAnimationFrame(marcarActivo);
 +	}
  
--		headers.forEach((header) => {
--			observer.observe(header, { subtree: true, characterData: true, childList: true });
 +	// SpainFacts: las secciones que dependen de datos ({#if ...}) aparecen después de montar;
 +	// se vigila todo el artículo y se rehace el índice cuando cambian los títulos
 +	let programado = false;
 +	function alCambiar() {
 +		if (programado) return;
 +		programado = true;
-+		requestAnimationFrame(() => {
++		// setTimeout y no requestAnimationFrame: este último no corre en pestañas en segundo plano
++		setTimeout(() => {
 +			programado = false;
 +			const nuevos = Array.from(document.querySelectorAll('h1.markdown, h2.markdown, h3.markdown'));
 +			const iguales =
 +				nuevos.length === headers.length &&
 +				nuevos.every((h, i) => h === headers[i] && h.id === textos[i]?.id && h.textContent === textos[i]?.texto);
 +			if (!iguales) updateLinks();
- 		});
++		}, 100);
 +	}
 +	let textos = [];
 +	$: textos = headers.map((h) => ({ id: h.id, texto: h.textContent }));
- 
++
 +	function observeDocumentChanges() {
 +		observer = new MutationObserver(alCambiar);
-+		const raiz = document.getElementById('evidence-main-article') ?? document.body;
-+		observer.observe(raiz, { subtree: true, characterData: true, childList: true });
++		// todo el body: el artículo puede sustituirse después de montar el índice
++		observer.observe(document.body, { subtree: true, characterData: true, childList: true });
  		return observer;
  	}
  
