@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 8160eecde742
+i18n_origen: 9ed2e5ca61dd
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -558,12 +558,20 @@ FROM mother.renta_secciones
 WHERE cod_mun = '${inputs.municipio}' AND renta_persona_real IS NOT NULL
 ```
 
+```sql barrios_renta_espana
+-- Escala de toda España para el mapa de renta por barrio: percentiles 5, 50 y 95 de todas las secciones
+SELECT quantile_cont(renta_persona_real, 0.05) AS p05, quantile_cont(renta_persona_real, 0.5) AS p50,
+    quantile_cont(renta_persona_real, 0.95) AS p95
+FROM mother.renta_secciones
+WHERE renta_persona_real IS NOT NULL
+```
+
 ```sql barrios_elecciones
 SELECT tipo, max(anio) AS anio FROM mother.elecciones_secciones WHERE cod_mun = '${inputs.municipio}' GROUP BY tipo
 ```
 
 ```sql barrios_voto
-SELECT cod_mun, cod_seccion, seccion, eleccion, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
+SELECT cod_mun, cod_seccion, seccion, eleccion, proceso, cobertura, CAST(geo_anio AS INTEGER) AS geo_anio,
     participacion, ganador_siglas, ganador_familia, ganador_color, ganador_pct, votantes,
     pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar,
     CASE '${inputs.barrio_capa}'
@@ -577,6 +585,20 @@ WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}'
   -- autonómicas: la última de la comunidad (Cáceres tiene dos)
   AND proceso = (SELECT max(proceso) FROM mother.elecciones_secciones
                  WHERE cod_mun = '${inputs.municipio}' AND tipo = '${inputs.barrio_eleccion}')
+```
+
+```sql barrios_voto_espana
+-- Escala de referencia de los mapas de voto por barrio: percentiles 5, 50 y 95 de todas las secciones
+-- de cada elección (de España; en las autonómicas, de la comunidad) y capa
+SELECT proceso, capa, quantile_cont(v, 0.05) AS p05, quantile_cont(v, 0.5) AS p50, quantile_cont(v, 0.95) AS p95
+FROM (
+    SELECT proceso,
+        unnest(['izquierda', 'derecha', 'centro', 'nacionalistas', 'psoe', 'pp', 'vox', 'ips', 'participacion']) AS capa,
+        unnest([pct_izquierda, pct_derecha, pct_centro, pct_nacionalistas, pct_psoe, pct_pp, pct_vox, pct_iu_podemos_sumar, participacion]) AS v
+    FROM mother.elecciones_secciones
+)
+WHERE v IS NOT NULL
+GROUP BY ALL
 ```
 
 ```sql barrios_quintiles
@@ -613,6 +635,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     geoId=id
     areaCol=cod_seccion
     value=renta_persona_real
+    referencia={barrios_renta_espana[0]}
     valueFmt='#,##0" €"'
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Errenta pertsonako', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Etxeko', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
@@ -678,6 +701,8 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     geoId=id
     areaCol=cod_seccion
     value=valor
+    referencia={barrios_voto_espana.find(e => e.proceso === barrios_voto[0]?.proceso && e.capa === inputs.barrio_capa)}
+    referenciaNombre={inputs.barrio_eleccion === '05' ? 'comunidad' : 'espana'}
     valueFmt='0.0"%"'
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Bozkatuena'}]}

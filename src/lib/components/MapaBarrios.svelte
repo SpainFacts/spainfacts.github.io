@@ -7,7 +7,15 @@
     // Mismas props que MapaEspana para estos mapas: data, geoJsonUrl, geoId, areaCol, value,
     // valueFmt, colorPalette, min, max, legendType ('categorical'), colorCol, intensidad,
     // intensidadRango, tooltip (con prefixCol), height y title.
+    //
+    // Escala de color (escalaMapa.js): percentiles 5-95 con la mediana en el centro de la paleta.
+    // Con `referencia` ({p05, p50, p95}, p. ej. de todas las secciones de España) aparecen botones
+    // para colorear con la escala del municipio o con la de referencia (`referenciaNombre`:
+    // 'espana' o 'comunidad', o un texto). `centro` fija el valor del color central.
     import { onMount, onDestroy } from 'svelte';
+    import { calcularEscala, colorEn, RAYADO } from '../escalaMapa.js';
+    import LeyendaMapa from './LeyendaMapa.svelte';
+    import RayadoMapa from './RayadoMapa.svelte';
     import { page } from '$app/stores';
     import { fmt } from '@evidence-dev/component-utilities/formatting';
     import { idiomaDeRuta, t } from '../i18n.js';
@@ -36,6 +44,9 @@
     export let long = undefined;
     export let celdaKm = 1;
     export let filtroGeo = undefined;
+    export let centro = undefined;
+    export let referencia = undefined;
+    export let referenciaNombre = 'espana';
 
     $: lang = idiomaDeRuta($page.url.pathname);
     const SIN_DATO = { es: 'Sin datos', en: 'No data', ca: 'Sense dades', gl: 'Sen datos', eu: 'Daturik ez' };
@@ -55,24 +66,14 @@
     $: categorias = categorico ? [...new Set(filas.map((r) => r?.[value]).filter((v) => v !== null && v !== undefined))] : [];
     const ok = (v) => v !== null && v !== undefined && Number.isFinite(v);
     $: numeros = categorico ? [] : filas.map((r) => Number(r?.[value])).filter(ok);
-    $: vMin = min ?? (numeros.length ? Math.min(...numeros) : 0);
-    $: vMax = max ?? (numeros.length ? Math.max(...numeros) : 1);
     $: paleta = (colorPalette ?? []).filter(Boolean);
-    function hex(c) {
-        const m = String(c).trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
-        if (!m) return [148, 163, 184];
-        let h = m[1];
-        if (h.length === 3) h = h.split('').map((x) => x + x).join('');
-        return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
-    }
-    function interp(tt) {
-        if (paleta.length === 0) return '#3b82f6';
-        if (paleta.length === 1) return paleta[0];
-        const x = Math.min(1, Math.max(0, tt)) * (paleta.length - 1);
-        const i = Math.min(paleta.length - 2, Math.floor(x));
-        const a = hex(paleta[i]), b = hex(paleta[i + 1]), f = x - i;
-        return '#' + a.map((v, j) => Math.round(v + (b[j] - v) * f).toString(16).padStart(2, '0')).join('');
-    }
+    // Escala del municipio ('local') o de referencia ('ref'); la elección se mantiene al cambiar de capa
+    let modoEscala = 'local';
+    $: hayReferencia = !categorico && !modoPuntos && referencia && Number.isFinite(Number(referencia.p05)) && Number.isFinite(Number(referencia.p95)) && Number(referencia.p95) > Number(referencia.p05);
+    $: escala = categorico ? null : calcularEscala({ numeros, min, max, centro, paleta, referencia: hayReferencia && modoEscala === 'ref' ? referencia : null });
+    $: modosEscala = hayReferencia ? [{ id: 'local', nombre: 'municipio' }, { id: 'ref', nombre: referenciaNombre }] : [];
+    // valor de la sección bajo el ratón (marca en la leyenda)
+    let marca = null;
     $: colorCategoria = (c, i) => (colorCol && filas.find((r) => r?.[value] === c)?.[colorCol]) || (paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8');
     $: colorFila = (r) => {
         if (!r) return null;
@@ -84,7 +85,7 @@
         }
         const n = Number(v);
         if (v === null || v === undefined || !ok(n)) return null;
-        return interp(vMax === vMin ? 0.5 : (n - vMin) / (vMax - vMin));
+        return colorEn(paleta, escala.t(n));
     };
     // Opacidad del relleno: fija, o graduada por `intensidad` (siempre algo transparente
     // para que se vea el callejero)
@@ -181,13 +182,25 @@
             style: (f) => {
                 const r = porId.get(String(f.properties?.[geoId] ?? ''));
                 const c = colorFila(r);
-                return { color: '#ffffff', weight: grosor, fillColor: c ?? '#9ca3af', fillOpacity: c ? opacidadFila(r) : 0.15 };
+                // sin dato: rayado (el gris se confundía con un valor de la escala)
+                return { color: '#ffffff', weight: grosor, fillColor: c ?? `url(#${RAYADO})`, fillOpacity: c ? opacidadFila(r) : 0.7 };
             },
             onEachFeature: (f, l) => {
                 const id = String(f.properties?.[geoId] ?? '');
                 l.bindTooltip(() => textoTooltip(porId.get(id), id), { sticky: true, direction: 'top', className: 'mapa-barrios-tooltip' });
-                l.on('mouseover', () => l.setStyle({ weight: 2.5, color: '#111827' }));
-                l.on('mouseout', () => capa.resetStyle(l));
+                // al pasar: contorno blanco con halo oscuro (clase mapa-barrios-activa) y marca en la leyenda
+                l.on('mouseover', () => {
+                    l.setStyle({ weight: 3, color: '#ffffff', opacity: 1 });
+                    l.bringToFront();
+                    l.getElement?.()?.classList.add('mapa-barrios-activa');
+                    const v = Number(porId.get(id)?.[value]);
+                    marca = !categorico && ok(v) ? v : null;
+                });
+                l.on('mouseout', () => {
+                    capa.resetStyle(l);
+                    l.getElement?.()?.classList.remove('mapa-barrios-activa');
+                    marca = null;
+                });
             }
         }).addTo(mapa);
         if (encuadrado !== cargada) {
@@ -251,19 +264,15 @@
         <p class="text-sm text-gray-500">{t('mapa.error', lang)}</p>
     {/if}
     <div bind:this={caja} class="mapa-barrios rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800" style="height:{height}px" role="group" aria-label={title ?? t('mapa.aria', lang)}></div>
-    <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
+    <RayadoMapa />
+    <LeyendaMapa escala={numeros.length ? escala : null} {paleta} {lang} {marca} modos={modosEscala} bind:modo={modoEscala} sinDatos={!modoPuntos} formatear={(v) => formatear(v, valueFmt)}>
         {#if categorico}
             {#each categorias as c, i}
                 <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{colorCategoria(c, i)}"></span>{c}</span>
             {/each}
-        {:else if numeros.length}
-            <span>{formatear(vMin, valueFmt)}</span>
-            <span class="inline-block h-2.5 w-40 rounded-sm" style="background:linear-gradient(to right, {(paleta.length ? paleta : ['#eff6ff', '#1e3a8a']).join(', ')})"></span>
-            <span>{formatear(vMax, valueFmt)}</span>
         {/if}
-        {#if !modoPuntos}<span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-300 dark:bg-gray-600"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>{/if}
-        <span class="ml-auto text-gray-400">{PISTA[lang] ?? PISTA.es}</span>
-    </div>
+    </LeyendaMapa>
+    <p class="mt-1 text-right text-xs text-gray-400">{PISTA[lang] ?? PISTA.es}</p>
 </figure>
 
 <style>
@@ -277,6 +286,9 @@
     }
     :global(html.theme-dark .mapa-barrios) {
         background: #111827;
+    }
+    :global(.mapa-barrios .mapa-barrios-activa) {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.75));
     }
     :global(.mapa-barrios-tooltip) {
         font-size: 12px;

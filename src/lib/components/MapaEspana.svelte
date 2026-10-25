@@ -12,6 +12,9 @@
     import { page } from '$app/stores';
     import { fmt } from '@evidence-dev/component-utilities/formatting';
     import { idiomaDeRuta, enlace, t } from '../i18n.js';
+    import { calcularEscala, colorEn, RAYADO } from '../escalaMapa.js';
+    import LeyendaMapa from './LeyendaMapa.svelte';
+    import RayadoMapa from './RayadoMapa.svelte';
 
     export let data = [];
     export let geoJsonUrl;
@@ -52,6 +55,13 @@
     // Modo puntos sobre una rejilla: lado de la celda en km; el radio del punto sigue la escala del
     // mapa (puntos que casi se tocan al acercarse a una provincia o un municipio)
     export let celdaKm = undefined;
+    // Escala de color (escalaMapa.js): percentiles 5-95 con la mediana en el centro de la paleta
+    // (con paleta divergente y datos a los dos lados del 0, el centro es el 0; `centro` lo fija).
+    // `referencia` ({p05, p50, p95}) añade botones para colorear con la escala de este mapa o con
+    // la de referencia (`referenciaNombre`: 'espana', 'comunidad' o un texto)
+    export let centro = undefined;
+    export let referencia = undefined;
+    export let referenciaNombre = 'espana';
     export let basemap = undefined;
     export let attribution = undefined;
     $: basemap, attribution; // compatibilidad con AreaMap
@@ -183,26 +193,14 @@
     $: categorias = categorico ? [...new Set(filas.map((r) => r?.[value]).filter((v) => v !== null && v !== undefined))] : [];
     $: numeros = categorico ? [] : filas.map((r) => Number(r?.[value])).filter((v) => r_ok(v));
     function r_ok(v) { return v !== null && v !== undefined && !Number.isNaN(v) && Number.isFinite(v); }
-    $: vMin = min ?? (numeros.length ? Math.min(...numeros) : 0);
-    $: vMax = max ?? (numeros.length ? Math.max(...numeros) : 1);
     $: paleta = (colorPalette ?? []).filter(Boolean);
     $: colorCategoria = (c, i) => (colorCol && filas.find((r) => r?.[value] === c)?.[colorCol]) || (paleta[i % Math.max(1, paleta.length)] ?? '#94a3b8');
-
-    function hex(c) {
-        const m = String(c).trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
-        if (!m) return [148, 163, 184];
-        let h = m[1];
-        if (h.length === 3) h = h.split('').map((x) => x + x).join('');
-        return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
-    }
-    function interp(t) {
-        if (paleta.length === 0) return '#3b82f6';
-        if (paleta.length === 1) return paleta[0];
-        const x = Math.min(1, Math.max(0, t)) * (paleta.length - 1);
-        const i = Math.min(paleta.length - 2, Math.floor(x));
-        const a = hex(paleta[i]), b = hex(paleta[i + 1]), f = x - i;
-        return '#' + a.map((v, j) => Math.round(v + (b[j] - v) * f).toString(16).padStart(2, '0')).join('');
-    }
+    let modoEscala = 'local';
+    $: hayReferencia = !categorico && referencia && Number.isFinite(Number(referencia.p05)) && Number.isFinite(Number(referencia.p95)) && Number(referencia.p95) > Number(referencia.p05);
+    $: escala = categorico ? null : calcularEscala({ numeros, min, max, centro, paleta, referencia: hayReferencia && modoEscala === 'ref' ? referencia : null });
+    $: modosEscala = hayReferencia ? [{ id: 'local', nombre: 'mapa' }, { id: 'ref', nombre: referenciaNombre }] : [];
+    // territorios sin dato: rayados (no en los modos de puntos o líneas, donde el fondo no lleva datos)
+    $: rayarSinDato = !modoPuntos && !modoLineas && !!value;
     function colorDe(id) {
         return colorFila(porId.get(id));
     }
@@ -217,10 +215,10 @@
         }
         const n = Number(v);
         if (v === null || v === undefined || !r_ok(n)) return null;
-        return interp(vMax === vMin ? 0.5 : (n - vMin) / (vMax - vMin));
+        return colorEn(paleta, escala.t(n));
     }
     let colores = new Map();
-    $: { porId, vMin, vMax, paleta, categorias; colores = dibujo ? new Map([...dibujo.formas, ...dibujo.recuadros.flatMap((r) => r.formas)].map((f) => [f.id, colorDe(f.id)])) : new Map(); }
+    $: { porId, escala, paleta, categorias; colores = dibujo ? new Map([...dibujo.formas, ...dibujo.recuadros.flatMap((r) => r.formas)].map((f) => [f.id, colorDe(f.id)])) : new Map(); }
 
     // Puntos proyectados en la zona (Península, Canarias, Ceuta o Melilla) en la que caen
     $: tamMax = size ? Math.max(1e-9, ...filas.map((r) => Math.abs(Number(r?.[size])) || 0)) : 1;
@@ -308,6 +306,9 @@
         posicionar(ev);
     }
     $: filaActiva = puntoActivo !== null ? filas[puntoActivo] : activo !== null ? porId.get(activo) : null;
+    $: formasActivas = activo !== null && dibujo ? [...dibujo.formas, ...dibujo.recuadros.flatMap((r) => r.formas)].filter((f) => f.id === activo) : [];
+    // valor bajo el ratón, marcado en la leyenda
+    $: marca = !categorico && filaActiva && value && r_ok(Number(filaActiva[value])) ? Number(filaActiva[value]) : null;
     $: lineas = filaActiva
         ? (tooltip ?? [{ id: modoPuntos || modoLineas ? pointName : areaCol, showColumnName: false, valueClass: 'font-semibold' }, { id: value, fmt: valueFmt }, ...(size ? [{ id: size, fmt: sizeFmt }] : []), ...(width && modoLineas ? [{ id: width, fmt: widthFmt }] : [])]).filter((t) => t.id).map((t) => ({
               titulo: t.showColumnName === false ? null : t.title ?? t.id,
@@ -325,6 +326,7 @@
 
 <figure class="my-6 not-prose">
     {#if title}<figcaption class="mb-2 text-sm font-semibold text-gray-800 dark:text-gray-200">{title}</figcaption>{/if}
+    <RayadoMapa />
     <div class="relative" bind:this={caja_el} data-mapa-espana>
         {#if error}
             <p class="text-sm text-gray-500">{t('mapa.error', lang)}</p>
@@ -335,8 +337,8 @@
                 {#each dibujo.formas as f, i (`${f.id}:${i}`)}
                     <path
                         d={f.d}
-                        fill={colores.get(f.id) ?? 'currentColor'}
-                        class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
+                        fill={colores.get(f.id) ?? (rayarSinDato ? `url(#${RAYADO})` : 'currentColor')}
+                        class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900"
                         stroke-width="0.6"
                         style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
                         role="button"
@@ -356,8 +358,8 @@
                     {#each r.formas as f}
                         <path
                             d={f.d}
-                            fill={colores.get(f.id) ?? 'currentColor'}
-                            class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900 {activo === f.id ? 'opacity-80' : ''}"
+                            fill={colores.get(f.id) ?? (rayarSinDato ? `url(#${RAYADO})` : 'currentColor')}
+                            class="{colores.get(f.id) ? '' : 'text-gray-200 dark:text-gray-700'} stroke-white dark:stroke-gray-900"
                             stroke-width="0.6"
                             style={link && porId.get(f.id)?.[link] ? 'cursor:pointer' : ''}
                             role="button"
@@ -372,6 +374,12 @@
                         />
                     {/each}
                 {/each}
+                {#if activo !== null}
+                    <!-- Territorio bajo el ratón: contorno blanco con halo oscuro, por encima de los vecinos -->
+                    {#each formasActivas as f}
+                        <path d={f.d} fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" pointer-events="none" style="filter:drop-shadow(0 0 1.5px rgba(0,0,0,.8))" />
+                    {/each}
+                {/if}
                 {#each trazos as tr (tr.i)}
                     <path d={tr.d} fill="none" stroke={tr.c} stroke-width={puntoActivo === tr.i ? tr.w + 1.5 : tr.w} stroke-linecap="round" stroke-linejoin="round" stroke-opacity={opacity} pointer-events="none" />
                 {/each}
@@ -427,18 +435,13 @@
                     {/each}
                 </div>
             {/if}
-            <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600 dark:text-gray-400">
+            <LeyendaMapa escala={numeros.length ? escala : null} {paleta} {lang} {marca} modos={modosEscala} bind:modo={modoEscala} sinDatos={rayarSinDato} formatear={(v) => formatear(v, valueFmt)}>
                 {#if categorico}
                     {#each categorias as c, i}
                         <span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm" style="background:{colorCategoria(c, i)}"></span>{c}</span>
                     {/each}
-                {:else if numeros.length}
-                    <span>{formatear(vMin, valueFmt)}</span>
-                    <span class="inline-block h-2.5 w-40 rounded-sm" style="background:linear-gradient(to right, {(paleta.length ? paleta : ['#eff6ff', '#1e3a8a']).join(', ')})"></span>
-                    <span>{formatear(vMax, valueFmt)}</span>
                 {/if}
-                {#if !modoPuntos && !modoLineas}<span class="inline-flex items-center gap-1"><span class="inline-block h-3 w-3 rounded-sm bg-gray-200 dark:bg-gray-700"></span>{SIN_DATO[lang] ?? SIN_DATO.es}</span>{/if}
-            </div>
+            </LeyendaMapa>
         {/if}
     </div>
 </figure>
