@@ -158,7 +158,10 @@ async function probar(navegador, base, ruta) {
 		// justo después de la primera carga, y entonces vuelve a aparecer
 		let quieto = 0;
 		while (Date.now() - inicio < ESPERA_MAX && quieto < 3) {
-			const cargando = await pagina.evaluate(() => /Loading\.\.\./.test(document.querySelector('main')?.innerText ?? ''));
+			// data-municipio-pendiente: la ficha de municipio tapa los datos (y sus «Loading...») hasta tener los de la URL
+			const cargando = await pagina.evaluate(
+				() => document.documentElement.hasAttribute('data-municipio-pendiente') || /Loading\.\.\./.test(document.querySelector('main')?.innerText ?? '')
+			);
 			quieto = cargando ? 0 : quieto + 1;
 			await pagina.waitForTimeout(1000);
 		}
