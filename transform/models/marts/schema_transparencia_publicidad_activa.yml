@@ -12,6 +12,10 @@ models:
       con convenio, 2020-2021; 0-100). puntuacion lleva ambas a 0-100, pero los métodos no
       son comparables entre evaluadores. familia y gobernante: partido del alcalde, del
       presidente autonómico o del presidente del Gobierno en fecha_referencia.
+      Desde 2026-10 también: informes agregados del CTBG (sector público estatal, entidades
+      privadas, corporaciones de derecho público, órganos constitucionales; 2022-2026), el
+      IDPAC del Síndic de Greuges de Catalunya (edición 2026, 0-100) y el ICPA del Consejo
+      de la Transparencia de la Región de Murcia (2020-2023, 0-10).
     columns:
       - name: clave
         tests: [unique, not_null]
@@ -20,7 +24,7 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Comisionado de Transparencia de Canarias', 'Consejo de Transparencia y Buen Gobierno']
+                values: ['Comisionado de Transparencia de Canarias', 'Consejo de Transparencia y Buen Gobierno', 'Síndic de Greuges de Catalunya', 'Consejo de la Transparencia de la Región de Murcia']
       - name: entidad
         tests: [not_null]
       - name: tipo_administracion
@@ -28,13 +32,13 @@ models:
           - not_null
           - accepted_values:
               arguments:
-                values: ['Administración General del Estado', 'Comunidad autónoma', 'Cabildo insular', 'Ayuntamiento', 'Entes dependientes y otros']
+                values: ['Administración General del Estado', 'Comunidad autónoma', 'Cabildo insular', 'Ayuntamiento', 'Entes dependientes y otros', 'Diputación provincial', 'Sector público estatal', 'Entidades privadas', 'Corporaciones de derecho público']
       - name: anio
         tests: [not_null]
       - name: estado
         tests:
           - accepted_values:
               arguments:
-                values: ['evaluada', 'incumplidora']
+                values: ['evaluada', 'incumplidora', 'no_participo']
       - name: cod_ccaa
         tests: [not_null]

@@ -1825,6 +1825,115 @@ ORDER BY f.fecha, f.orden_familia
 SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY orden_familia
 ```
 
+```sql tr_com
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}'
+```
+
+```sql tr_com_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo' WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo' WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo' ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros' ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_com_eval
+-- Evaluaciones oficiales del portal de la comunidad (última de cada evaluador)
+SELECT evaluador, indice, periodo, round(avg(puntuacion), 1) AS puntuacion, count(*) AS entidades, any_value(url_pagina) AS url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE tipo_administracion = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}'
+GROUP BY evaluador, indice, periodo, orden_periodo
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+```sql tr_ccaa_prov
+SELECT cod_prov, any_value(provincia) AS provincia, count(*) AS ayuntamientos,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct,
+    avg(indice) AS indice_medio, avg(media_tramo_espana) AS indice_esperable
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_ccaa = '${terr[0]?.cod}'
+GROUP BY cod_prov ORDER BY provincia
+```
+
+```sql tr_ccaa_grandes
+SELECT nombre_entidad AS municipio, provincia, poblacion, indice, incumplimientos, '/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_ccaa = '${terr[0]?.cod}' AND n_incumplimientos_destacados > 0
+ORDER BY poblacion DESC
+```
+
+{#if tr_ccaa_prov.length > 0 || tr_com_obl.length > 0}
+
+## Transparencia
+
+{#each tr_com.filter(d => d.n_incumplimientos_destacados > 0) as d}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ {terr[0]?.nombre}: no consta en el registro oficial</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{d.incumplimientos}</p>
+</div>
+{/each}
+
+¿Remiten a tiempo la comunidad y sus ayuntamientos lo que les obliga la ley? Es una **medición propia** de SpainFacts con registros oficiales que traen fecha ([criterios y código](/fuentes#datos-de-elaboración-propia)). La responsabilidad se atribuye al gobierno que había el día del plazo.
+
+{#if tr_com_obl.length > 0}
+<DataTable data={tr_com_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Obligación de la comunidad" />
+    <Column id=periodo title="Periodo" />
+    <Column id=plazo title="Plazo" />
+    <Column id=situacion title="Situación" />
+    <Column id=dias_retraso title="Días de retraso" fmt=num0 />
+    <Column id=mediana_dias title="Días que tarda (mediana)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="Presidente el día del plazo" />
+    <Column id=familia_en_plazo title="Partido" />
+</DataTable>
+{/if}
+
+{#if tr_com_eval.length > 0}
+
+El portal de la comunidad tiene además una **evaluación oficial** (otro método, no comparable con la medición propia):
+
+<DataTable data={tr_com_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Evaluador" />
+    <Column id=indice title="Índice" />
+    <Column id=periodo title="Evaluación" />
+    <Column id=puntuacion title="Nota media (sobre 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+    <Column id=entidades title="Órganos evaluados" fmt=num0 />
+</DataTable>
+{/if}
+
+{#if tr_ccaa_prov.length > 0}
+<DataTable data={tr_ccaa_prov} rows=all>
+    <Column id=provincia title="Provincia" />
+    <Column id=ayuntamientos title="Ayuntamientos" fmt=num0 />
+    <Column id=pct title="Con algo vencido que no consta (%)" fmt=num1 />
+    <Column id=indice_medio title="Índice medio" fmt=num1 contentType=colorscale colorMin=70 colorMax=100 />
+    <Column id=indice_esperable title="Esperable por su tamaño" fmt=num1 />
+</DataTable>
+{/if}
+
+{#if tr_ccaa_grandes.length > 0}
+<details>
+<summary>Ayuntamientos con alguna obligación vencida que no consta ({formatNumber(tr_ccaa_grandes.length, 0)})</summary>
+
+<DataTable data={tr_ccaa_grandes} search=true rows=15 link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipio" />
+    <Column id=provincia title="Provincia" />
+    <Column id=poblacion title="Habitantes" fmt=num0 />
+    <Column id=indice title="Índice (0-100)" fmt=num1 />
+    <Column id=incumplimientos title="Qué no consta" />
+</DataTable>
+
+</details>
+{/if}
+
+{/if}
+
 {#if elec.length > 0}
 
 ## Elecciones

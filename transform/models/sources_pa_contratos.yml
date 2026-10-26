@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: raw_pa_contratos
+    description: >
+      Índice propio de publicidad activa, bloque de contratación (ingestion/pa_contratos.py):
+      sindicación de la Plataforma de Contratación del Sector Público (PLACSP, perfiles,
+      plataformas agregadas y menores) y, para Cataluña, la Plataforma de serveis de
+      contractació pública (PSCP, Socrata ybgg-dgi6). Ver docs/elaboracion-propia/contratos.md.
+    schema: raw
+    tables:
+      - name: pa_contratos_organos
+        description: >
+          Una fila por fuente (placsp | pscp), obligación (contratos_adjudicacion,
+          contratos_formalizacion, contratos_menores), órgano de contratación, entidad
+          territorial a la que se atribuye (cod_entidad: INE del ayuntamiento, D+provincia,
+          I+DIR3 L03, C+comunidad) y año del hecho (adjudicación, formalización). n_total:
+          elementos cuyo plazo ya venció en fecha_corte; n_fuera_plazo: de ellos, publicados
+          tarde o sin anuncio en el perfil (n_sin_anuncio); n_negativos: anuncio con fecha
+          anterior al hecho (retraso recortado a 0); n_pendientes: plazo aún no vencido;
+          n_sin_fecha: menores publicados sin fecha de anuncio (no cuentan). dias_hist:
+          histograma «dias:n,dias:n» (tope 999) para la mediana por entidad.
+      - name: pa_contratos_control
+        description: "Control de la carga: MB, entradas y segundos por fichero de PLACSP; filas por consulta a la PSCP; entradas por método de atribución de órgano a entidad (periodo «atribucion|tipo|metodo»)."

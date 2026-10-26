@@ -467,6 +467,137 @@ FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
 
+```sql tr_ent
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}'
+```
+
+```sql tr_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo, estado,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo'
+        WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo'
+        WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo'
+            ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros'
+        ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente,
+    100 * puntuacion AS nota
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_serie
+-- Nota media por año del ayuntamiento frente a la de los de su tramo de población
+WITH t AS (
+    SELECT cod_mun, anio, tramo_poblacion, puntuacion
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND vencido IS DISTINCT FROM false
+),
+propio AS (
+    SELECT anio, avg(puntuacion) AS nota, any_value(tramo_poblacion) AS tramo FROM t WHERE cod_mun = '${inputs.municipio}' GROUP BY anio
+)
+SELECT CAST(CAST(p.anio AS INTEGER) AS VARCHAR) AS anio, 'Este ayuntamiento' AS serie, 100 * p.nota AS nota FROM propio p
+UNION ALL
+SELECT CAST(CAST(t.anio AS INTEGER) AS VARCHAR), 'Media de su tamaño', 100 * avg(t.puntuacion)
+FROM t JOIN propio p ON p.anio = t.anio AND p.tramo = t.tramo_poblacion
+GROUP BY t.anio
+ORDER BY 1, 2
+```
+
+```sql tr_eval
+SELECT evaluador, indice, periodo, puntuacion, escala_original, puntuacion_original, estado, url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE cod_mun = '${inputs.municipio}' AND tipo_administracion = 'Ayuntamiento'
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+{#if tr_obl.length > 0}
+
+## Transparencia
+
+{#if tr_ent[0]?.n_incumplimientos_destacados > 0}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ No consta en el registro oficial</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-sm text-red-900 dark:text-red-100">El plazo legal venció hace más de tres meses y no figura en la fuente oficial a la fecha de la última descarga. Puede haberse remitido por otro cauce: cada fila de la tabla enlaza a su fuente.</p>
+</div>
+{/if}
+
+¿Remite este ayuntamiento a tiempo lo que le obliga la ley? Es una **medición propia** de SpainFacts con registros oficiales que traen fecha. Hacienda, el Tribunal de Cuentas, la Base de Datos Nacional de Subvenciones y la Plataforma de Contratación dicen si cada obligación consta y cuándo llegó frente a su plazo ([criterios y código](/fuentes#datos-de-elaboración-propia)). Se compara con los ayuntamientos de su tamaño ({tr_ent[0]?.tramo_poblacion} habitantes).
+
+<Grid cols=3>
+    <KpiCard
+        title="Índice de cumplimiento"
+        value={tr_ent[0]?.indice}
+        formattedValue={tr_ent[0]?.indice == null ? 'Sin índice' : formatNumber(tr_ent[0]?.indice, 1) + ' de 100'}
+        period="Media de su tamaño en España: {formatNumber(tr_ent[0]?.media_tramo_espana, 1)} · en su provincia: {formatNumber(tr_ent[0]?.media_tramo_provincia, 1)}"
+        source="SpainFacts (elaboración propia)"
+        sparklineData={tr_serie.filter(d => d.serie === 'Este ayuntamiento').map(d => ({...d, y: d.nota}))}
+    />
+    <KpiCard
+        title="Obligaciones vencidas que no constan"
+        value={tr_ent[0]?.n_incumplimientos_destacados}
+        formattedValue={formatNumber(tr_ent[0]?.n_incumplimientos_destacados ?? 0, 0)}
+        period="de {formatNumber(tr_ent[0]?.obligaciones_medidas, 0)} medidas, más de 3 meses después del plazo"
+        source="SpainFacts (elaboración propia)"
+    />
+    <KpiCard
+        title="Puesto entre los ayuntamientos"
+        value={tr_ent[0]?.puesto}
+        formattedValue={tr_ent[0]?.puesto == null ? '—' : formatNumber(tr_ent[0]?.puesto, 0) + '.º'}
+        period="de {formatNumber(tr_ent[0]?.total_tipo, 0)} con índice (1.º = el que mejor cumple; empatan muchos)"
+        source="SpainFacts (elaboración propia)"
+    />
+</Grid>
+
+<DataTable data={tr_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Obligación" />
+    <Column id=periodo title="Periodo" />
+    <Column id=plazo title="Plazo" />
+    <Column id=situacion title="Situación" />
+    <Column id=dias_retraso title="Días de retraso" fmt=num0 />
+    <Column id=mediana_dias title="Días que tarda (mediana)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="Alcalde el día del plazo" />
+    <Column id=familia_en_plazo title="Partido" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Se muestra el último periodo con plazo vencido de cada obligación. «Sin registros» no es un incumplimiento: puede que no conceda subvenciones o que contrate por él la diputación. Haz clic en una fila para ir a la fuente oficial.</p>
+
+{#if tr_serie.length > 2}
+<LineChart
+    data={tr_serie}
+    x=anio
+    y=nota
+    series=serie
+    yFmt=num0
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="Cumplimiento por año (0-100)"
+/>
+{/if}
+
+{#if tr_eval.length > 0}
+
+Además, este ayuntamiento tiene una **evaluación oficial** de su portal de transparencia (con otro método, no comparable con la medición propia):
+
+<DataTable data={tr_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Evaluador" />
+    <Column id=indice title="Índice" />
+    <Column id=periodo title="Evaluación" />
+    <Column id=puntuacion title="Nota (sobre 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+{/if}
+
+Todos los ayuntamientos, el método y la comparación por partido están en [Publicidad activa](/transparencia/publicidad-activa#medición-propia-todas-las-administraciones).
+
+{/if}
+
 {#if renta_mun.length > 0 || paro_mun.length > 0}
 
 ## Renta y paro

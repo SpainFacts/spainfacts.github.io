@@ -3,7 +3,7 @@ description: "Catàleg de les fonts oficials que utilitza SpainFacts (INE, Euros
 title: Traçabilitat i auditoria de fonts
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: bc32e4e4d483
+i18n_origen: a1d2b13b67a4
 ---
 
 <script>
@@ -91,6 +91,47 @@ uv run dagster asset materialize -m orchestration.definitions --select "*"
 ```
 
 La guia completa, amb el web en local, és a [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), i com s'afegeix una font nova, a [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
+
+```sql propia
+SELECT *,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || codigo_ingesta AS url_ingesta,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || modelo AS url_modelo,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || criterios AS url_criterios
+FROM mother.elaboracion_propia_indicadores
+ORDER BY bloque, nombre
+```
+
+## Dades d'elaboració pròpia
+
+Algunes dades no les publica ningú, així que **les mesurem nosaltres**. La principal és l'[índex de publicitat activa](/ca/transparencia/publicidad-activa#mesura-pròpia-totes-les-administracions). Gairebé cap òrgan de control no diu, entitat per entitat, si cada ajuntament, diputació o comunitat publica i tramet a temps el que li obliga la llei. Així que ho comprovem als registres oficials que porten data: Hisenda, Tribunal de Comptes, Base de Dades Nacional de Subvencions, Plataforma de Contractació…
+
+Una mesura pròpia ha de poder auditar-se encara més que una dada oficial. Per això cada indicador publica la seva base legal, el seu termini, com es calcula, què s'exclou i per què, i enllaça al seu codi:
+
+- **Només registres oficials.** Si alguna cosa no consta al registre, es diu «no consta a [font]», mai «no ho ha fet»: pot haver-se tramès per una altra via.
+- **Totes les entitats.** Qui no apareix a la font compta com a «no consta», llevat que la font no el mesuri. Per exemple, els territoris forals que trameten per la seva pròpia via no compten com a incomplidors.
+- **Atribució al govern del dia del termini**, no a l'actual.
+- **Comparació amb les de la seva mida**, a Espanya i a la seva província.
+- **Errors**: si en veus un, [obre una incidència](https://github.com/SpainFacts/spainfacts.github.io/issues) amb l'enllaç a la font. El corregim i el deixem anotat.
+
+El mètode complet és a [docs/elaboracion-propia](https://github.com/SpainFacts/spainfacts.github.io/tree/main/docs/elaboracion-propia).
+
+{#each [...new Set(propia.map(d => d.bloque))] as bloque}
+<h3 class="mt-6 mb-2 text-lg font-semibold">{bloque}</h3>
+{#each propia.filter(d => d.bloque === bloque) as d}
+<details class="my-2 rounded-lg border border-gray-200 dark:border-gray-800 p-3 text-sm">
+<summary class="cursor-pointer font-semibold">{d.nombre} <span class="font-normal text-gray-500">· {d.tipos_entidad}{d.en_indice ? '' : ' · informatiu, fora de l’índex'}</span></summary>
+<dl class="mt-2 grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-3 gap-y-1">
+<dt class="text-gray-500">Què mesura</dt><dd>{d.que_mide}</dd>
+<dt class="text-gray-500">Base legal</dt><dd>{d.base_legal}</dd>
+<dt class="text-gray-500">Termini</dt><dd>{d.plazo}</dd>
+<dt class="text-gray-500">Càlcul</dt><dd>{d.calculo}</dd>
+<dt class="text-gray-500">Exclusions</dt><dd>{d.exclusiones}</dd>
+<dt class="text-gray-500">Font oficial</dt><dd><a href={d.url_fuente} target="_blank" rel="noopener">{d.fuente_oficial} ↗</a></dd>
+<dt class="text-gray-500">Codi</dt><dd><a href={d.url_ingesta} target="_blank" rel="noopener">ingesta</a> · <a href={d.url_modelo} target="_blank" rel="noopener">càlcul</a> · <a href={d.url_criterios} target="_blank" rel="noopener">criteris</a></dd>
+</dl>
+</details>
+{/each}
+{/each}
 
 ## Catàleg de fonts
 

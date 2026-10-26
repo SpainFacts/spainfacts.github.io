@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw_pa_bdns
+    description: "Base de Datos Nacional de Subvenciones (BDNS/SNPSAP, IGAE), API REST pública: plazos de registro de las concesiones de las entidades locales (L) y las comunidades autónomas (A), agregados por órgano concedente y mes de concesión, sin filas individuales ni beneficiarios (ingestion/pa_bdns.py). Merge: la API solo enseña los 4 últimos años naturales."
+    schema: raw
+    tables:
+      - name: pa_bdns_organos
+        description: "Árbol de órganos concedentes de la BDNS (/organos y /organos/agrupacion). tipo_admon L: grupo = provincia, nodo = municipio, diputación, cabildo, mancomunidad…, cod_agrupacion = código INE de 6 cifras (municipio + dígito de control; diputaciones PP0000). tipo_admon A: nodo = comunidad, cod_agrupacion = código INE de la comunidad (01..19). visto = última descarga en que aparecía."
+      - name: pa_bdns_concesiones_mes
+        description: "Una fila por órgano (nivel1/nivel2/nivel3 como los da la API; id_organo > 0 solo para los órganos de nombre repetido pedidos con el filtro organos), mes de concesión y año de medición. n = concesiones; n_fuera_plazo = fechaAlta posterior al último día del mes siguiente a fechaConcesion (art. 5.2.b RD 130/2019); n_persona_fisica = NIF enmascarado; dias_hist = histograma «días:n;…» de fechaAlta − fechaConcesion. fecha_medicion = cuándo se descargó ese mes."
+      - name: pa_bdns_control
+        description: "Control por tipo de administración, mes de concesión y año de medición: totalElements que declara la API, concesiones descargadas (únicas por codConcesion), duplicadas y segundos."
+      - name: pa_bdns_convocatorias_mes
+        description: "Nº de convocatorias por órgano (nivel1/2/3, id_organo como en concesiones_mes) y mes de recepción en la BDNS (/convocatorias/busqueda). Sin ventana de 4 años."

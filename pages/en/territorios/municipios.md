@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 4241525082ff
+i18n_origen: 7ba463802b8c
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -467,6 +467,137 @@ SELECT
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
+
+```sql tr_ent
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}'
+```
+
+```sql tr_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo, estado,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo'
+        WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo'
+        WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo'
+            ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros'
+        ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente,
+    100 * puntuacion AS nota
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_serie
+-- Nota media por año del ayuntamiento frente a la de los de su tramo de población
+WITH t AS (
+    SELECT cod_mun, anio, tramo_poblacion, puntuacion
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND vencido IS DISTINCT FROM false
+),
+propio AS (
+    SELECT anio, avg(puntuacion) AS nota, any_value(tramo_poblacion) AS tramo FROM t WHERE cod_mun = '${inputs.municipio}' GROUP BY anio
+)
+SELECT CAST(CAST(p.anio AS INTEGER) AS VARCHAR) AS anio, 'Este ayuntamiento' AS serie, 100 * p.nota AS nota FROM propio p
+UNION ALL
+SELECT CAST(CAST(t.anio AS INTEGER) AS VARCHAR), 'Media de su tamaño', 100 * avg(t.puntuacion)
+FROM t JOIN propio p ON p.anio = t.anio AND p.tramo = t.tramo_poblacion
+GROUP BY t.anio
+ORDER BY 1, 2
+```
+
+```sql tr_eval
+SELECT evaluador, indice, periodo, puntuacion, escala_original, puntuacion_original, estado, url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE cod_mun = '${inputs.municipio}' AND tipo_administracion = 'Ayuntamiento'
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+{#if tr_obl.length > 0}
+
+## Transparency
+
+{#if tr_ent[0]?.n_incumplimientos_destacados > 0}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Not on record in the official register</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-sm text-red-900 dark:text-red-100">The legal deadline passed more than three months ago and it does not appear in the official source as of the date of the latest download. It may have been submitted through another channel: each row of the table links to its source.</p>
+</div>
+{/if}
+
+Does this municipal council submit on time what the law requires of it? This is **SpainFacts' own measurement**, based on official registers that carry a date. The Ministry of Finance, the Court of Audit (Tribunal de Cuentas), the National Grants Database (BDNS) and the Public Sector Procurement Platform show whether each obligation is on record and when it arrived relative to its deadline ([criteria and code](/en/fuentes#data-from-spainfacts-own-measurement)). It is compared with municipal councils of its size ({tr_ent[0]?.tramo_poblacion} inhabitants).
+
+<Grid cols=3>
+    <KpiCard
+        title="Compliance index"
+        value={tr_ent[0]?.indice}
+        formattedValue={tr_ent[0]?.indice == null ? 'No index' : formatNumber(tr_ent[0]?.indice, 1) + ' out of 100'}
+        period="Average for its size in Spain: {formatNumber(tr_ent[0]?.media_tramo_espana, 1)} · in its province: {formatNumber(tr_ent[0]?.media_tramo_provincia, 1)}"
+        source="SpainFacts (own measurement)"
+        sparklineData={tr_serie.filter(d => d.serie === 'Este ayuntamiento').map(d => ({...d, y: d.nota}))}
+    />
+    <KpiCard
+        title="Overdue obligations not on record"
+        value={tr_ent[0]?.n_incumplimientos_destacados}
+        formattedValue={formatNumber(tr_ent[0]?.n_incumplimientos_destacados ?? 0, 0)}
+        period="out of {formatNumber(tr_ent[0]?.obligaciones_medidas, 0)} measured, more than 3 months after the deadline"
+        source="SpainFacts (own measurement)"
+    />
+    <KpiCard
+        title="Rank among municipal councils"
+        value={tr_ent[0]?.puesto}
+        formattedValue={tr_ent[0]?.puesto == null ? '—' : '#' + formatNumber(tr_ent[0]?.puesto, 0)}
+        period="out of {formatNumber(tr_ent[0]?.total_tipo, 0)} with an index (#1 = best compliance; many are tied)"
+        source="SpainFacts (own measurement)"
+    />
+</Grid>
+
+<DataTable data={tr_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Obligation" />
+    <Column id=periodo title="Period" />
+    <Column id=plazo title="Deadline" />
+    <Column id=situacion title="Status" />
+    <Column id=dias_retraso title="Days late" fmt=num0 />
+    <Column id=mediana_dias title="Days taken (median)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="Mayor on the day of the deadline" />
+    <Column id=familia_en_plazo title="Party" />
+</DataTable>
+
+<p class="text-xs text-gray-500">The latest period with the deadline passed is shown for each obligation. «Sin registros» (no records) is not non-compliance: the council may not award grants, or the provincial council may handle its procurement. Click on a row to go to the official source.</p>
+
+{#if tr_serie.length > 2}
+<LineChart
+    data={tr_serie}
+    x=anio
+    y=nota
+    series=serie
+    yFmt=num0
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="Compliance by year (0-100)"
+/>
+{/if}
+
+{#if tr_eval.length > 0}
+
+In addition, this municipal council has an **official assessment** of its transparency portal (with a different method, not comparable with SpainFacts' own measurement):
+
+<DataTable data={tr_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Assessor" />
+    <Column id=indice title="Index" />
+    <Column id=periodo title="Assessment" />
+    <Column id=puntuacion title="Score (out of 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+{/if}
+
+All municipal councils, the method and the comparison by party are in [Proactive disclosure](/en/transparencia/publicidad-activa#own-measurement-all-administrations).
+
+{/if}
 
 {#if renta_mun.length > 0 || paro_mun.length > 0}
 

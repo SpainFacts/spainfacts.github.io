@@ -3,7 +3,7 @@ description: "Catálogo das fontes oficiais que usa SpainFacts (INE, Eurostat, m
 title: Trazabilidade e Auditoría de Fontes
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: bc32e4e4d483
+i18n_origen: a1d2b13b67a4
 ---
 
 <script>
@@ -91,6 +91,47 @@ uv run dagster asset materialize -m orchestration.definitions --select "*"
 ```
 
 A guía completa, coa web en local, está en [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), e como se engade unha fonte nova en [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
+
+```sql propia
+SELECT *,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || codigo_ingesta AS url_ingesta,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || modelo AS url_modelo,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || criterios AS url_criterios
+FROM mother.elaboracion_propia_indicadores
+ORDER BY bloque, nombre
+```
+
+## Datos de elaboración propia
+
+Algúns datos non os publica ninguén, así que **medímolos nós**. O principal é o [índice de publicidade activa](/gl/transparencia/publicidad-activa#medición-propia-todas-as-administracións). Case ningún órgano de control di, entidade por entidade, se cada concello, deputación ou comunidade publica e remite a tempo o que lle obriga a lei. Así que o comprobamos nos rexistros oficiais que levan data: Facenda, Tribunal de Contas, Base de Datos Nacional de Subvencións, Plataforma de Contratación…
+
+Unha medición propia ten que poder auditarse aínda máis ca un dato oficial. Por iso cada indicador publica a súa base legal, o seu prazo, como se calcula, que se exclúe e por que, e enlaza ao seu código:
+
+- **Só rexistros oficiais.** Se algo non consta no rexistro, dise «non consta en [fonte]», nunca «non o fixo»: pode terse remitido por outra canle.
+- **Todas as entidades.** Quen non aparece na fonte conta como «non consta», agás que a fonte non o mida. Por exemplo, os territorios forais que remiten pola súa propia canle non contan como incumpridores.
+- **Atribución ao goberno do día do prazo**, non ao actual.
+- **Comparación coas do seu tamaño**, en España e na súa provincia.
+- **Erros**: se ves un, [abre unha incidencia](https://github.com/SpainFacts/spainfacts.github.io/issues) coa ligazón á fonte. Corrixímolo e deixámolo anotado.
+
+O método completo está en [docs/elaboracion-propia](https://github.com/SpainFacts/spainfacts.github.io/tree/main/docs/elaboracion-propia).
+
+{#each [...new Set(propia.map(d => d.bloque))] as bloque}
+<h3 class="mt-6 mb-2 text-lg font-semibold">{bloque}</h3>
+{#each propia.filter(d => d.bloque === bloque) as d}
+<details class="my-2 rounded-lg border border-gray-200 dark:border-gray-800 p-3 text-sm">
+<summary class="cursor-pointer font-semibold">{d.nombre} <span class="font-normal text-gray-500">· {d.tipos_entidad}{d.en_indice ? '' : ' · informativo, fóra do índice'}</span></summary>
+<dl class="mt-2 grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-3 gap-y-1">
+<dt class="text-gray-500">Que mide</dt><dd>{d.que_mide}</dd>
+<dt class="text-gray-500">Base legal</dt><dd>{d.base_legal}</dd>
+<dt class="text-gray-500">Prazo</dt><dd>{d.plazo}</dd>
+<dt class="text-gray-500">Cálculo</dt><dd>{d.calculo}</dd>
+<dt class="text-gray-500">Exclusións</dt><dd>{d.exclusiones}</dd>
+<dt class="text-gray-500">Fonte oficial</dt><dd><a href={d.url_fuente} target="_blank" rel="noopener">{d.fuente_oficial} ↗</a></dd>
+<dt class="text-gray-500">Código</dt><dd><a href={d.url_ingesta} target="_blank" rel="noopener">inxestión</a> · <a href={d.url_modelo} target="_blank" rel="noopener">cálculo</a> · <a href={d.url_criterios} target="_blank" rel="noopener">criterios</a></dd>
+</dl>
+</details>
+{/each}
+{/each}
 
 ## Catálogo de fontes
 

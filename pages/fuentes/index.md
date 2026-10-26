@@ -91,6 +91,47 @@ uv run dagster asset materialize -m orchestration.definitions --select "*"
 
 La guía completa, con la web en local, está en [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), y cómo se añade una fuente nueva en [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
 
+```sql propia
+SELECT *,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || codigo_ingesta AS url_ingesta,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || modelo AS url_modelo,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || criterios AS url_criterios
+FROM mother.elaboracion_propia_indicadores
+ORDER BY bloque, nombre
+```
+
+## Datos de elaboración propia
+
+Algunos datos no los publica nadie, así que **los medimos nosotros**. El principal es el [índice de publicidad activa](/transparencia/publicidad-activa#medición-propia-todas-las-administraciones). Casi ningún órgano de control dice, entidad por entidad, si cada ayuntamiento, diputación o comunidad publica y remite a tiempo lo que le obliga la ley. Así que lo comprobamos en los registros oficiales que traen fecha: Hacienda, Tribunal de Cuentas, Base de Datos Nacional de Subvenciones, Plataforma de Contratación…
+
+Una medición propia tiene que poder auditarse aún más que un dato oficial. Por eso cada indicador publica su base legal, su plazo, cómo se calcula, qué se excluye y por qué, y enlaza a su código:
+
+- **Solo registros oficiales.** Si algo no consta en el registro, se dice «no consta en [fuente]», nunca «no lo ha hecho»: puede haberse remitido por otro cauce.
+- **Todas las entidades.** Quien no aparece en la fuente cuenta como «no consta», salvo que la fuente no lo mida. Por ejemplo, los territorios forales que remiten por su propio cauce no cuentan como incumplidores.
+- **Atribución al gobierno del día del plazo**, no al actual.
+- **Comparación con las de su tamaño**, en España y en su provincia.
+- **Errores**: si ves uno, [abre una incidencia](https://github.com/SpainFacts/spainfacts.github.io/issues) con el enlace a la fuente. Lo corregimos y lo dejamos anotado.
+
+El método completo está en [docs/elaboracion-propia](https://github.com/SpainFacts/spainfacts.github.io/tree/main/docs/elaboracion-propia).
+
+{#each [...new Set(propia.map(d => d.bloque))] as bloque}
+<h3 class="mt-6 mb-2 text-lg font-semibold">{bloque}</h3>
+{#each propia.filter(d => d.bloque === bloque) as d}
+<details class="my-2 rounded-lg border border-gray-200 dark:border-gray-800 p-3 text-sm">
+<summary class="cursor-pointer font-semibold">{d.nombre} <span class="font-normal text-gray-500">· {d.tipos_entidad}{d.en_indice ? '' : ' · informativo, fuera del índice'}</span></summary>
+<dl class="mt-2 grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-3 gap-y-1">
+<dt class="text-gray-500">Qué mide</dt><dd>{d.que_mide}</dd>
+<dt class="text-gray-500">Base legal</dt><dd>{d.base_legal}</dd>
+<dt class="text-gray-500">Plazo</dt><dd>{d.plazo}</dd>
+<dt class="text-gray-500">Cálculo</dt><dd>{d.calculo}</dd>
+<dt class="text-gray-500">Exclusiones</dt><dd>{d.exclusiones}</dd>
+<dt class="text-gray-500">Fuente oficial</dt><dd><a href={d.url_fuente} target="_blank" rel="noopener">{d.fuente_oficial} ↗</a></dd>
+<dt class="text-gray-500">Código</dt><dd><a href={d.url_ingesta} target="_blank" rel="noopener">ingesta</a> · <a href={d.url_modelo} target="_blank" rel="noopener">cálculo</a> · <a href={d.url_criterios} target="_blank" rel="noopener">criterios</a></dd>
+</dl>
+</details>
+{/each}
+{/each}
+
 ## Catálogo de fuentes
 
 Busca por organismo, nombre, código oficial o palabras de la metodología. Cada ficha tiene enlace propio para compartirla.

@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: pa_ind_bdns
+    description: >
+      Índice propio de publicidad activa (elaboración propia): concesiones de subvenciones
+      registradas en la Base de Datos Nacional de Subvenciones antes de que acabe el mes
+      siguiente a la concesión (art. 5.2.b RD 130/2019; art. 20 LGS). Una fila por entidad
+      (todos los ayuntamientos, 41 diputaciones, 11 cabildos y consells insulares, 19
+      comunidades y ciudades autónomas) y año natural de concesión. con_registros: n_total,
+      n_fuera_plazo y mediana_dias (días de fechaConcesion a fechaAlta) la miden;
+      sin_registros: ninguna concesión registrada ese año (no es por sí mismo un
+      incumplimiento). Criterios en docs/elaboracion-propia/bdns.md.
+    columns:
+      - name: clave
+        description: "obligacion|cod_entidad|periodo"
+        tests: [unique, not_null]
+      - name: obligacion
+        tests: [not_null]
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['con_registros', 'sin_registros', 'no_vencido', 'no_aplica']
+      - name: n_total
+        description: "Concesiones con fecha de concesión en el año, de todos los órganos de la entidad"
+      - name: n_fuera_plazo
+        description: "Concesiones con fechaAlta posterior al último día del mes siguiente a la fecha de concesión"
+      - name: mediana_dias
+        description: "Mediana de fechaAlta − fechaConcesion, en días"
+      - name: x_pct_fuera_plazo
+        description: "100 × n_fuera_plazo / n_total"
+      - name: x_p90_dias
+        description: "Percentil 90 de los días entre concesión y registro"
+      - name: x_n_persona_fisica
+        description: "Concesiones a personas físicas (NIF enmascarado): desaparecen de la BDNS al acabar el año siguiente"
+      - name: x_importe
+        description: "Importe concedido en euros corrientes (sin deflactar), solo de contexto"
+      - name: x_importe_por_habitante
+        description: "x_importe / poblacion"
+      - name: x_n_organos
+        description: "Órganos concedentes distintos de la entidad con concesiones ese año"
+      - name: x_n_convocatorias
+        description: "Convocatorias registradas en la BDNS por la entidad ese año (fecha de recepción). Una entidad sin concesiones pero con convocatorias sí subvenciona: el hueco no se explica por no conceder"
+      - name: x_anio_medicion
+        description: "Año en que se descargó la medición usada"
+      - name: x_fecha_medicion
+        description: "Día de la última descarga usada"
+      - name: x_medicion_tardia
+        description: "true si el año se midió después del año siguiente: faltan las concesiones a personas físicas y no es comparable con los años bien medidos"

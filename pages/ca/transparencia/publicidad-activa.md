@@ -1,7 +1,7 @@
 ---
 title: Publicitat activa
-description: "Publiquen les administracions als seus portals de transparència el que els obliga la llei? Avaluacions oficials per entitat (Consell de Transparència i Bon Govern i Comissionat de Transparència de Canàries), la seva evolució, la comparació per partit i el que encara no es pot mesurar."
-i18n_origen: e97ef389c875
+description: "Publiquen i trameten a temps les administracions el que els obliga la llei? Avaluacions oficials per entitat (Consell de Transparència, Canàries, Catalunya i Múrcia) i una mesura pròpia dels més de 8.100 ajuntaments, les diputacions i les comunitats, amb els incompliments assenyalats i la comparació per partit."
+i18n_origen: e3ab0f3b8a10
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -188,14 +188,148 @@ WHERE estado = 'incumplidora' AND orden_periodo >= (SELECT orden FROM ${itc_ulti
 ORDER BY orden_periodo DESC, tipo_entidad, entidad
 ```
 
+```sql mp_entidades
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+```
+
+```sql mp_resumen
+SELECT
+    count(*) FILTER (WHERE indice IS NOT NULL) AS entidades,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND indice IS NOT NULL) AS ayuntamientos,
+    count(*) FILTER (WHERE n_incumplimientos_destacados > 0) AS con_incumplimientos,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND n_incumplimientos_destacados > 0) AS aytos_con_incumplimientos,
+    100.0 * count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND n_incumplimientos_destacados > 0)
+        / nullif(count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento'), 0) AS pct_aytos_incumplimientos,
+    median(indice) FILTER (WHERE tipo_entidad = 'Ayuntamiento') AS mediana_aytos,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND poblacion >= 20000 AND n_incumplimientos_destacados > 0) AS grandes_con_incumplimientos
+FROM ${mp_entidades}
+```
+
+```sql mp_destacados
+-- Lo que se señala arriba: comunidades, diputaciones y ayuntamientos de 20.000 habitantes o más
+SELECT tipo_entidad, nombre_entidad, provincia, ccaa, poblacion, incumplimientos, n_incumplimientos_destacados,
+    gobernante_actual, familia_actual, cod_mun
+FROM ${mp_entidades}
+WHERE n_incumplimientos_destacados > 0
+  AND (tipo_entidad <> 'Ayuntamiento' OR poblacion >= 20000)
+ORDER BY CASE tipo_entidad WHEN 'Comunidad autónoma' THEN 1 WHEN 'Diputación provincial' THEN 2 WHEN 'Cabildo o consell insular' THEN 3 ELSE 4 END,
+    n_incumplimientos_destacados DESC, poblacion DESC
+```
+
+```sql mp_obligaciones
+SELECT
+    c.obligacion_nombre AS obligacion,
+    c.tipo_entidad,
+    max(c.periodo) AS ultimo_periodo,
+    count(*) AS entidades,
+    100.0 * avg(c.puntuacion) AS cumplimiento,
+    count(*) FILTER (WHERE c.estado IN ('en_plazo', 'consta')) AS en_plazo,
+    count(*) FILTER (WHERE c.estado = 'fuera_plazo' OR (c.estado = 'con_registros' AND c.n_fuera_plazo > 0)) AS con_retraso,
+    count(*) FILTER (WHERE c.estado = 'no_consta') AS no_consta,
+    coalesce(median(c.dias_retraso) FILTER (WHERE c.estado = 'fuera_plazo'), median(c.mediana_dias)) AS mediana_retraso,
+    100.0 * count(*) / any_value(t.n) AS cobertura,
+    CASE WHEN any_value(c.bloque) = 'pago' THEN 'No: mide si paga a tiempo, no si publica'
+         WHEN count(*) >= 0.8 * any_value(t.n) THEN 'Sí'
+         ELSE 'Todavía no (' || CAST(round(100.0 * count(*) / any_value(t.n)) AS INTEGER) || ' % medidas)' END AS en_indice
+FROM mother.transparencia_cumplimiento c
+JOIN (SELECT tipo_entidad, count(DISTINCT cod_entidad) AS n FROM mother.transparencia_cumplimiento GROUP BY 1) t USING (tipo_entidad)
+WHERE c.es_ultimo
+GROUP BY ALL
+ORDER BY c.tipo_entidad, en_indice DESC, cumplimiento
+```
+
+```sql mp_tramos
+SELECT tramo_poblacion, min(tramo_orden) AS orden,
+    count(*) FILTER (WHERE indice IS NOT NULL) AS ayuntamientos,
+    avg(indice) AS indice_medio,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct_incumplimientos
+FROM (
+    SELECT *, CASE tramo_poblacion WHEN '<1.000' THEN 1 WHEN '1.000-5.000' THEN 2 WHEN '5.000-20.000' THEN 3
+        WHEN '20.000-100.000' THEN 4 ELSE 5 END AS tramo_orden
+    FROM ${mp_entidades} WHERE tipo_entidad = 'Ayuntamiento'
+)
+GROUP BY ALL
+ORDER BY orden
+```
+
+```sql mp_provincias
+SELECT cod_prov, any_value(provincia) AS provincia,
+    count(*) AS ayuntamientos,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct_incumplimientos,
+    avg(indice) AS indice_medio
+FROM ${mp_entidades}
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_prov IS NOT NULL
+GROUP BY cod_prov
+```
+
+```sql mp_ranking
+SELECT nombre_entidad AS municipio, provincia, poblacion, indice, obligaciones_medidas, n_incumplimientos_destacados,
+    incumplimientos, familia_actual, media_tramo_espana,
+    '/ca/territorios/municipios?m=' || cod_mun AS enlace
+FROM ${mp_entidades}
+WHERE tipo_entidad = 'Ayuntamiento' AND indice IS NOT NULL
+ORDER BY indice, poblacion DESC
+```
+
+```sql mp_familia
+-- Observado frente a esperado: lo esperado de cada obligación es la media de los
+-- ayuntamientos de su mismo tramo de población y comunidad en ese mismo periodo.
+-- IC con el número de municipios distintos (un mismo ayuntamiento aporta varias obligaciones).
+WITH base AS (
+    SELECT *, avg(puntuacion) OVER (PARTITION BY obligacion, periodo, tramo_poblacion, cod_ccaa) AS esperada
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND anio >= year(current_date) - 4
+),
+por_mun AS (
+    SELECT coalesce(familia_en_plazo, 'Sin atribuir') AS familia, cod_mun,
+        avg(puntuacion - esperada) AS dif, avg(puntuacion) AS obs, avg(esperada) AS esp, count(*) AS n
+    FROM base GROUP BY ALL
+)
+SELECT familia,
+    count(*) AS municipios,
+    sum(n) AS mediciones,
+    100 * avg(obs) AS observada,
+    100 * avg(esp) AS esperada,
+    100 * avg(dif) AS diferencia,
+    100 * (avg(dif) - 1.96 * stddev_samp(dif) / sqrt(count(*))) AS ic_bajo,
+    100 * (avg(dif) + 1.96 * stddev_samp(dif) / sqrt(count(*))) AS ic_alto,
+    CASE
+        WHEN count(*) < 30 THEN 'Muestra pequeña: no concluyente'
+        WHEN avg(dif) + 1.96 * stddev_samp(dif) / sqrt(count(*)) < 0 THEN 'Por debajo de lo esperable'
+        WHEN avg(dif) - 1.96 * stddev_samp(dif) / sqrt(count(*)) > 0 THEN 'Por encima de lo esperable'
+        ELSE 'Dentro de lo esperable'
+    END AS lectura
+FROM por_mun
+GROUP BY familia
+HAVING count(*) >= 30
+ORDER BY diferencia DESC
+```
+
 # 📋 Publicitat activa: publiquen les administracions el que els obliga la llei?
 
-Des del 2014, la [Llei 19/2013 de transparència](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887) obliga totes les administracions a **publicar pel seu compte**, sense que ningú ho demani, una llista d'informacions al seu portal de transparència: qui mana i quant cobra, quines normes prepara, quins contractes i subvencions concedeix, els seus pressupostos i comptes, el seu patrimoni. És el que s'anomena **publicitat activa**. Aquesta pàgina reuneix les **avaluacions oficials** que diuen, entitat per entitat, en quina mesura es compleix.
+{#if mp_destacados.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Administracions que no consten al dia en el que han de trametre</p>
+    <p class="mt-2 text-red-900 dark:text-red-100">Comunitats, diputacions i ajuntaments de 20.000 habitants o més amb alguna obligació el termini de la qual va vèncer fa més de tres mesos i de la qual <b>no consta res</b> al registre oficial. En total, {formatNumber(mp_resumen[0]?.con_incumplimientos, 0)} administracions de totes les mides es troben en aquesta situació.</p>
+    {#each mp_destacados.slice(0, 12) as d}
+    <div class="mt-4">
+        <p class="text-xl font-extrabold leading-tight text-red-700 dark:text-red-300">{#if d.cod_mun}<a class="underline" href="/ca/territorios/municipios?m={d.cod_mun}">{d.nombre_entidad}</a>{:else}{d.nombre_entidad}{/if} <span class="whitespace-nowrap text-base font-semibold">({d.tipo_entidad}{d.provincia ? ', ' + d.provincia : ''}{d.poblacion ? ', ' + formatNumber(d.poblacion, 0) + ' hab.' : ''})</span></p>
+        <p class="mt-1 text-red-900 dark:text-red-100">No consta: {d.incumplimientos}.</p>
+    </div>
+    {/each}
+    {#if mp_destacados.length > 12}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">I {mp_destacados.length - 12} més d'aquesta mida. Són totes a la <a class="font-semibold underline" href="#mesura-pròpia-totes-les-administracions">taula de la mesura pròpia</a>.</p>
+    {/if}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">«No consta» vol dir que no figura a la font oficial en la data de l'última descàrrega, no que s'hagi provat que no es va fer. Cada cas enllaça a la seva fitxa amb la font.</p>
+</div>
+{/if}
+
+Des del 2014, la [Llei 19/2013 de transparència](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887) obliga totes les administracions a **publicar pel seu compte**, sense que ningú ho demani, una llista d'informacions al seu portal de transparència: qui mana i quant cobra, quines normes prepara, quins contractes i subvencions concedeix, els seus pressupostos i comptes, el seu patrimoni. És el que s'anomena **publicitat activa**. A més, han de **trametre** els seus comptes, pressupostos, contractes i subvencions a registres oficials en terminis fixats per llei. Aquesta pàgina reuneix les **avaluacions oficials** que hi ha i una **mesura pròpia** de totes les administracions.
 
 <div class="not-prose rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4 my-4 text-sm text-gray-700 dark:text-gray-300">
 <p class="font-semibold mb-1">La resposta curta</p>
-<p class="mb-1">No hi ha una avaluació <b>única i homogènia</b> per a totes les administracions d'Espanya. Cada òrgan de control (el Consell de Transparència i Bon Govern i els consells o comissionats autonòmics) avalua el <b>seu àmbit</b>, amb el seu propi mètode i calendari, i gairebé tots publiquen els resultats en informes en PDF o Word, no en dades.</p>
-<p class="mb-0">Amb dades oficials reutilitzables avui es pot veure: el <b>Portal de Transparència de l'Administració General de l'Estat</b> (2021-2025), <b>vuit comunitats i ciutats autònomes</b> i <b>onze ajuntaments</b> avaluats pel Consell de Transparència (2020-2021), i <b>tot el sector públic de Canàries</b>, inclosos els seus 88 ajuntaments, des del 2016. Les puntuacions d'avaluadors diferents <b>no són comparables entre si</b>.</p>
+<p class="mb-1">No hi ha una avaluació oficial <b>única i homogènia</b> per a totes les administracions. Cada òrgan de control avalua el <b>seu àmbit</b>, amb el seu propi mètode. Només en publiquen notes per entitat quatre: el Consell de Transparència i Bon Govern (l'Estat i el seu sector públic), el Comissionat de Canàries, el Síndic de Greuges de Catalunya i el Consell de Múrcia. Així queden coberts els <b>ajuntaments de Canàries, Catalunya i Múrcia</b> i gairebé ningú més.</p>
+<p class="mb-0">Per arribar a la resta, SpainFacts <b>mesura pel seu compte</b> els més de 8.100 ajuntaments, les diputacions i les comunitats. Comprova als registres oficials si cada obligació consta i si va arribar dins del termini. Avui {formatNumber(mp_resumen[0]?.aytos_con_incumplimientos, 0)} ajuntaments ({formatNumber(mp_resumen[0]?.pct_aytos_incumplimientos, 1)} %) tenen alguna obligació vençuda fa més de tres mesos de la qual no consta res. Les notes d'avaluadors diferents <b>no són comparables entre si</b>, ni amb la mesura pròpia.</p>
 </div>
 
 <Grid cols=4>
@@ -245,11 +379,11 @@ La informació ha de ser **clara, estructurada, actualitzada i reutilitzable** (
 
 | Òrgan de control | A qui avalua | Què publica per entitat | S'utilitza aquí? |
 |---|---|---|---|
-| [Consell de Transparència i Bon Govern](https://consejodetransparencia.es/evaluacion) (CTBG) | AGE i sector públic estatal, òrgans constitucionals, partits, sindicats, entitats subvencionades; i les comunitats i ciutats autònomes amb conveni (Astúries, Cantàbria, Castella - la Manxa, Extremadura, La Rioja, Ceuta i Melilla; Madrid el 2020-2021) i alguns dels seus ajuntaments | Índex de Compliment de la Informació Obligatòria (ICIO, 0-100 %, metodologia MESTA) en un informe Word per entitat; sense taula de dades | Sí: Portal de l'AGE, 8 comunitats i 11 ajuntaments |
+| [Consell de Transparència i Bon Govern](https://consejodetransparencia.es/evaluacion) (CTBG) | AGE i sector públic estatal, òrgans constitucionals, partits, sindicats, entitats subvencionades; i les comunitats i ciutats autònomes amb conveni (Astúries, Cantàbria, Castella - la Manxa, Extremadura, La Rioja, Ceuta i Melilla; Madrid el 2020-2021) i alguns dels seus ajuntaments | Índex de Compliment de la Informació Obligatòria (ICIO, 0-100 %, metodologia MESTA) en un informe Word per entitat; sense taula de dades | Sí: Portal de l'AGE, 8 comunitats, 11 ajuntaments i, des del 2022, la taula dels informes agregats (sector públic estatal, entitats privades, corporacions) |
 | [Comissionat de Transparència de Canàries](https://transparenciacanarias.org/evaluacion/puntuaciones/) | Tot el sector públic canari (Govern, cabildos, ajuntaments, universitats i els seus ens) i entitats privades subvencionades | Índex de Transparència de Canàries (ITCanarias, 0-10) en una taula Excel amb totes les entitats des del 2016 (CC BY 4.0) | Sí: sector públic |
-| [Consell de la Transparència de la Regió de Múrcia](https://comisionadotransparencia.carm.es/) | Administració regional, ajuntaments i el seu sector públic (autoavaluació verificada, basada en MESTA) | Informe executiu en PDF amb resultats agregats per tipus d'entitat; les notes per ajuntament només apareixen en gràfics | No: no hi ha dades per entitat reutilitzables |
-| [Síndic de Greuges de Catalunya](https://www.sindic.cat/) | Administracions catalanes (Llei 19/2014) | Informe anual i informes individuals en PDF; índex de desenvolupament de la publicitat activa (IDPAC) en fase pilot des del 2024 | No: informes en PDF per entitat, sense taula |
-| Consells i comissionats d'Andalusia, Aragó, Castella i Lleó, Comunitat Valenciana, Galícia, Navarra, País Basc i altres | La seva comunitat i les seves entitats locals | Memòries anuals, plans de control i inspecció i resolucions, en PDF; no hem trobat cap índex de compliment publicat per entitat | No |
+| [Consell de la Transparència de la Regió de Múrcia](https://comisionadotransparencia.carm.es/informes-de-evaluacion) | Administració regional, els seus 45 ajuntaments i el seu sector públic, partits, sindicats, federacions… | Índex de compliment de la publicitat activa (ICPA, 0-10) del 2020 al 2023, en una taula de l'annex de l'informe del 2023 (PDF). És una autoavaluació voluntària que el Consell verifica | Sí: taula de l'annex |
+| [Síndic de Greuges de Catalunya](https://www.sindic.cat/ca/page.asp?id=904) | Els 947 ajuntaments catalans, diputacions, consells comarcals, departaments de la Generalitat, universitats i òrgans de control | Índex de desenvolupament de la publicitat activa (IDPAC, 0-100), revisat pel mateix Síndic, en dades obertes (CSV, CC0) des de l'edició del 2026 | Sí |
+| Consells i comissionats d'Andalusia, Aragó, Castella i Lleó, Comunitat Valenciana, Galícia, Madrid, Navarra, País Basc i altres | La seva comunitat i les seves entitats locals | Memòries anuals, plans de control i resolucions, en PDF. No hem trobat cap índex publicat per entitat. Madrid ha començat a avaluar tots els seus ajuntaments (resultats previstos a la seva memòria del 2026) | No |
 
 També hi ha rànquings de la societat civil (Dyntra, el Mapa Infoparticipa de la Universitat Autònoma de Barcelona, els antics índexs de Transparència Internacional Espanya). **No s'utilitzen aquí**: no són fonts oficials i no hem comprovat que la seva llicència permeti reutilitzar les dades.
 
@@ -398,9 +532,157 @@ On més s'incompleix no és a les administracions, sinó als seus **ens dependen
 
 </details>
 
-## Per partit
+```sql sindic_aytos
+SELECT cod_mun, municipio, provincia, poblacion, puntuacion, familia, gobernante,
+    '/ca/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Síndic de Greuges de Catalunya' AND tipo_administracion = 'Ayuntamiento'
+ORDER BY puntuacion DESC
+```
 
-La comparació només és possible amb els **ajuntaments canaris**: són 88, s'avaluen tots, amb el mateix mètode, des del 2016. Per a cada ajuntament i avaluació es calcula la nota **esperable**: la mitjana dels ajuntaments canaris de la mateixa mida (menys de 5.000, de 5.000 a 20.000 i més de 20.000 habitants) en aquella mateixa avaluació. Després es compara la nota mitjana dels governats per cada partit amb la seva esperable.
+```sql sindic_tramos
+SELECT CASE WHEN poblacion < 1000 THEN '<1.000' WHEN poblacion < 5000 THEN '1.000-5.000'
+            WHEN poblacion < 20000 THEN '5.000-20.000' WHEN poblacion < 100000 THEN '20.000-100.000' ELSE '>100.000' END AS tramo,
+    min(poblacion) AS orden, count(*) AS ayuntamientos, avg(puntuacion) AS media,
+    count(*) FILTER (WHERE puntuacion < 50) AS menos_50
+FROM ${sindic_aytos}
+GROUP BY 1 ORDER BY orden
+```
+
+```sql sindic_otros
+SELECT entidad, tipo_administracion, tipo_entidad, puntuacion
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Síndic de Greuges de Catalunya' AND tipo_administracion <> 'Ayuntamiento'
+ORDER BY tipo_administracion, puntuacion
+```
+
+```sql murcia_aytos
+SELECT cod_mun, municipio, poblacion,
+    max(puntuacion) FILTER (WHERE anio = 2020) AS n2020,
+    max(puntuacion) FILTER (WHERE anio = 2021) AS n2021,
+    max(puntuacion) FILTER (WHERE anio = 2022) AS n2022,
+    max(puntuacion) FILTER (WHERE anio = 2023) AS n2023,
+    count(*) FILTER (WHERE estado = 'no_participo') AS no_participo,
+    max(familia) FILTER (WHERE anio = 2023) AS familia
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de la Transparencia de la Región de Murcia' AND tipo_administracion = 'Ayuntamiento'
+GROUP BY ALL
+ORDER BY n2023 DESC NULLS LAST
+```
+
+```sql murcia_serie
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio,
+    count(*) FILTER (WHERE estado = 'evaluada') AS evaluados,
+    count(*) FILTER (WHERE estado = 'no_participo') AS no_participaron,
+    avg(puntuacion) AS media
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de la Transparencia de la Región de Murcia' AND tipo_administracion = 'Ayuntamiento'
+GROUP BY ALL ORDER BY anio
+```
+
+```sql spe_serie
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, tipo_entidad AS grupo, avg(puntuacion) AS media, count(*) AS entidades
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de Transparencia y Buen Gobierno'
+  AND tipo_administracion IN ('Sector público estatal', 'Entidades privadas')
+  AND periodo NOT LIKE '%evaluación)'
+GROUP BY ALL ORDER BY anio, grupo
+```
+
+```sql spe_ultimo
+SELECT entidad, tipo_entidad AS grupo, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, puntuacion AS icio
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de Transparencia y Buen Gobierno'
+  AND tipo_administracion IN ('Sector público estatal', 'Entidades privadas', 'Corporaciones de derecho público')
+QUALIFY row_number() OVER (PARTITION BY entidad ORDER BY anio DESC, periodo DESC) = 1
+ORDER BY icio
+```
+
+## Catalunya: els 947 ajuntaments, revisats pel Síndic
+
+El Síndic de Greuges revisa **ell mateix** el portal de cada ajuntament català i publica el resultat en dades obertes: és l'única avaluació externa de tots els ajuntaments d'una comunitat. L'índex de desenvolupament de la publicitat activa (IDPAC, 0-100) combina el contingut obligatori (70 %) i la qualitat de l'espai web (30 %). L'edició del 2026 es va fer entre gener i maig.
+
+<DataTable data={sindic_tramos} rows=all>
+    <Column id=tramo title="Habitants" />
+    <Column id=ayuntamientos title="Ajuntaments" fmt=num0 />
+    <Column id=media title="IDPAC mitjà" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+    <Column id=menos_50 title="Per sota de 50" fmt=num0 />
+</DataTable>
+
+<DataTable data={sindic_aytos} search=true rows=15 link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipi" />
+    <Column id=provincia title="Província" />
+    <Column id=poblacion title="Habitants" fmt=num0 />
+    <Column id=puntuacion title="IDPAC (0-100)" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+    <Column id=familia title="Partit de l'alcalde" />
+</DataTable>
+
+<details>
+<summary>Generalitat, diputacions, consells comarcals i altres</summary>
+
+<DataTable data={sindic_otros} search=true rows=15>
+    <Column id=entidad title="Entitat" />
+    <Column id=tipo_entidad title="Tipus" />
+    <Column id=puntuacion title="IDPAC (0-100)" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+</DataTable>
+
+</details>
+
+## Regió de Múrcia
+
+El Consell de la Transparència de la Regió de Múrcia publica l'índex de compliment de la publicitat activa (ICPA) de cada entitat que es presta a ser avaluada. L'entitat emplena l'avaluació en una plataforma i el Consell la verifica. **És voluntari**: un ajuntament que no hi va participar figura com a «no hi va participar», mai amb un zero.
+
+<BarChart
+    data={murcia_serie}
+    x=anio
+    y={['evaluados', 'no_participaron']}
+    type=stacked
+    title="Ajuntaments murcians avaluats i que no hi van participar"
+    sort=false
+/>
+
+<DataTable data={murcia_aytos} search=true rows=15>
+    <Column id=municipio title="Municipi" />
+    <Column id=poblacion title="Habitants" fmt=num0 />
+    <Column id=n2020 title="2020" fmt=num1 />
+    <Column id=n2021 title="2021" fmt=num1 />
+    <Column id=n2022 title="2022" fmt=num1 />
+    <Column id=n2023 title="2023 (sobre 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+    <Column id=no_participo title="Anys sense participar" fmt=num0 />
+    <Column id=familia title="Partit de l'alcalde (2023)" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Nota original 0-10, mostrada sobre 100. Cel·la buida: no hi va participar o no havia estat convocat.</p>
+
+## Sector públic estatal
+
+Cada any el Consell de Transparència avalua organismes, empreses i fundacions estatals, entitats privades que reben subvencions i corporacions com els col·legis professionals. Els seus informes agregats inclouen una taula amb l'índex de compliment (ICIO) de cadascuna.
+
+<LineChart
+    data={spe_serie}
+    x=anio
+    y=media
+    series=grupo
+    yFmt=num1
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="ICIO mitjà de les entitats avaluades (%)"
+/>
+
+<p class="text-xs text-gray-500">Cada any s'avaluen entitats diferents (225 del sector públic el 2025, davant de 74 el 2022), de manera que la mitjana no segueix sempre les mateixes.</p>
+
+<DataTable data={spe_ultimo} search=true rows=15>
+    <Column id=entidad title="Entitat" />
+    <Column id=grupo title="Grup" />
+    <Column id=anio title="Última avaluació" />
+    <Column id=icio title="ICIO (%)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+
+## Per partit a Canàries
+
+Amb les avaluacions oficials, la comparació només és possible amb els **ajuntaments canaris**: són 88, s'avaluen tots, amb el mateix mètode, des del 2016. Per a cada ajuntament i avaluació es calcula la nota **esperable**: la mitjana dels ajuntaments canaris de la mateixa mida (menys de 5.000, de 5.000 a 20.000 i més de 20.000 habitants) en aquella mateixa avaluació. Després es compara la nota mitjana dels governats per cada partit amb la seva esperable.
 
 ```sql itc_familia_grafico
 SELECT familia, diferencia FROM ${itc_familia}
@@ -433,13 +715,124 @@ SELECT familia, diferencia FROM ${itc_familia}
 
 Per a les comunitats autònomes i el Govern central **no hi ha prou mostra**: una sola avaluació per comunitat i any, i en el cas de l'Estat un únic Govern en tot el període avaluat.
 
+## Mesura pròpia: totes les administracions
+
+Com que gairebé ningú no avalua la majoria d'administracions, **ho mesurem nosaltres** amb el mateix mètode per a totes. No puntuem el portal web a ull. Comprovem als **registres oficials que porten data** si cada obligació legal consta i si va arribar dins del termini. Els registres són la Base de Dades Nacional de Subvencions, la Plataforma de Contractació, el Tribunal de Comptes i Hisenda. Cada obligació puntua 1 si consta a temps, 0,5 si consta tard i 0 si no consta amb el termini vençut. L'índex de cada administració (0-100) és la mitjana del seu últim període mesurat. Els criteris, la base legal i el codi de cada indicador són a [Fonts › Dades d'elaboració pròpia](/ca/fuentes#dades-delaboració-pròpia).
+
+<Grid cols=4>
+    <KpiCard
+        title="Administracions mesurades"
+        value={mp_resumen[0]?.entidades}
+        formattedValue={formatNumber(mp_resumen[0]?.entidades, 0)}
+        period="{formatNumber(mp_resumen[0]?.ayuntamientos, 0)} ajuntaments i {formatNumber(mp_resumen[0]?.entidades - mp_resumen[0]?.ayuntamientos, 0)} diputacions, cabildos i comunitats"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    <KpiCard
+        title="Ajuntaments amb alguna cosa vençuda que no consta"
+        value={mp_resumen[0]?.pct_aytos_incumplimientos}
+        formattedValue="{formatNumber(mp_resumen[0]?.pct_aytos_incumplimientos, 1)} %"
+        period="{formatNumber(mp_resumen[0]?.aytos_con_incumplimientos, 0)} ajuntaments, més de 3 mesos després del termini"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    <KpiCard
+        title="De 20.000 habitants o més"
+        value={mp_resumen[0]?.grandes_con_incumplimientos}
+        formattedValue={formatNumber(mp_resumen[0]?.grandes_con_incumplimientos, 0)}
+        period="ajuntaments grans amb alguna obligació vençuda que no consta"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    <KpiCard
+        title="Índex medià dels ajuntaments"
+        value={mp_resumen[0]?.mediana_aytos}
+        formattedValue="{formatNumber(mp_resumen[0]?.mediana_aytos, 1)} de 100"
+        period="mitjana de l'últim període de cada obligació"
+        source="SpainFacts (elaboració pròpia)"
+    />
+</Grid>
+
+### Obligació per obligació
+
+<DataTable data={mp_obligaciones} rows=all groupBy=tipo_entidad>
+    <Column id=tipo_entidad title="Administració" />
+    <Column id=obligacion title="Obligació" />
+    <Column id=ultimo_periodo title="Últim període" />
+    <Column id=entidades title="Mesurades" fmt=num0 />
+    <Column id=cumplimiento title="Compliment (0-100)" fmt=num1 contentType=colorscale colorMin=50 colorMax=100 />
+    <Column id=con_retraso title="Amb retard" fmt=num0 />
+    <Column id=no_consta title="No consta" fmt=num0 />
+    <Column id=mediana_retraso title="Dies (mediana)" fmt=num0 />
+    <Column id=en_indice title="A l'índex" />
+</DataTable>
+
+<p class="text-xs text-gray-500">«Dies (mediana)»: en les obligacions úniques, el retard de les que van arribar tard; en contractes i subvencions, el que triga a publicar-se o registrar-se l'administració típica. Es compta l'últim període de cada administració amb el termini vençut. Les administracions que la font no mesura (per exemple, les que trameten per la via foral) no es compten. Una obligació entra a l'índex i a la llista d'incompliments quan mesura almenys el 80 % de les administracions del seu tipus; fins aleshores, com el rastreig del Tribunal de Comptes que va província a província, només es veu aquí i a cada fitxa.</p>
+
+### Per mida i província
+
+Els ajuntaments petits són els que fallen més: molts no tenen ni secretari a temps complet. Per això cada ajuntament es compara sempre amb els de la seva mida.
+
+<DataTable data={mp_tramos} rows=all>
+    <Column id=tramo_poblacion title="Habitants" />
+    <Column id=ayuntamientos title="Ajuntaments" fmt=num0 />
+    <Column id=indice_medio title="Índex mitjà" fmt=num1 contentType=colorscale colorMin=70 colorMax=100 />
+    <Column id=pct_incumplimientos title="Amb alguna cosa vençuda que no consta (%)" fmt=num1 />
+</DataTable>
+
+<MapaEspana
+    data={mp_provincias}
+    geoJsonUrl="/geo/provincias.geojson"
+    geoId="cod_prov"
+    areaCol="cod_prov"
+    value="pct_incumplimientos"
+    valueFmt="num1"
+    colorPalette={['#f0fdf4', '#fde68a', '#b91c1c']}
+    height={420}
+    tooltip={[
+        {id: 'provincia', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'pct_incumplimientos', title: 'Ajuntaments amb alguna cosa vençuda que no consta (%)', fmt: 'num1'},
+        {id: 'indice_medio', title: 'Índex mitjà', fmt: 'num1'},
+        {id: 'ayuntamientos', title: 'Ajuntaments', fmt: 'num0'}
+    ]}
+/>
+
+### Tots els ajuntaments
+
+Ordenats de menor a major índex. Cerca el teu o obre'n la fitxa per veure cada obligació, amb el seu termini, la data i qui governava aleshores.
+
+<DataTable data={mp_ranking} search=true rows=20 link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipi" />
+    <Column id=provincia title="Província" />
+    <Column id=poblacion title="Habitants" fmt=num0 />
+    <Column id=indice title="Índex (0-100)" fmt=num1 contentType=colorscale colorMin=50 colorMax=100 />
+    <Column id=media_tramo_espana title="Mitjana de la seva mida" fmt=num1 />
+    <Column id=n_incumplimientos_destacados title="Vençudes sense constar" fmt=num0 />
+    <Column id=incumplimientos title="Què no consta" />
+    <Column id=familia_actual title="Partit de l'alcalde avui" />
+</DataTable>
+
+### Per partit
+
+Per a cada ajuntament, obligació i període es calcula el que és **esperable**: la mitjana dels ajuntaments de la mateixa mida i comunitat en aquell període. Després es compara la nota dels governats per cada partit **el dia del termini** amb el que és esperable. S'utilitzen els últims cinc anys.
+
+<DataTable data={mp_familia} rows=all>
+    <Column id=familia title="Partit de l'alcalde el dia del termini" />
+    <Column id=municipios title="Municipis" fmt=num0 />
+    <Column id=observada title="Nota mitjana" fmt=num1 />
+    <Column id=esperada title="Esperable" fmt=num1 />
+    <Column id=diferencia title="Diferència" fmt=num2 contentType=delta />
+    <Column id=ic_bajo title="IC 95 % (mín.)" fmt=num2 />
+    <Column id=ic_alto title="IC 95 % (màx.)" fmt=num2 />
+    <Column id=lectura title="Lectura" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Només partits amb almenys 30 municipis. Un municipi compta una vegada per partit encara que aporti diverses obligacions, i l'interval es calcula amb el nombre de municipis. Que hi hagi diferència entre partits no prova que la causi el partit: hi influeixen la plantilla, el secretari-interventor, els mitjans de la diputació i la persona que governa.</p>
+
 ## Què hi falta
 
-- **No hi ha una avaluació homogènia per a tota Espanya.** Cada òrgan de control avalua el seu àmbit amb el seu mètode: la nota d'un ajuntament canari (ITCanarias) i la d'un de càntabre (ICIO del CTBG) no es poden comparar.
-- **La majoria dels òrgans autonòmics no publica notes per entitat en dades obertes.** Múrcia, Catalunya, Andalusia, Castella i Lleó i altres publiquen memòries i informes en PDF, de vegades amb les notes només en gràfics. Si algun publica els seus resultats per entitat en un format reutilitzable, s'hi incorporarà.
-- **Els més de 8.100 ajuntaments d'Espanya no s'avaluen de manera sistemàtica**, llevat de Canàries. El CTBG en va avaluar 11 el 2020-2021.
-- **El sector públic estatal** (organismes, empreses i fundacions) sí que té nota per entitat als informes del CTBG, però en documents individuals. El 2025 el CTBG va avaluar 225 d'aquestes entitats, amb un ICIO mitjà de només el 38,9 % ([nota del CTBG](https://consejodetransparencia.es/comunicacion/noticias/hemeroteca/2025/20251114)). És la pròxima ampliació viable.
-- Les avaluacions mesuren **si la informació està publicada i com**, no si és veraç ni completa en el seu contingut.
+- **No hi ha una avaluació oficial homogènia per a tota Espanya.** Cada òrgan de control avalua el seu àmbit amb el seu mètode: la nota d'un ajuntament canari (ITCanarias), la d'un de català (IDPAC) i la d'un de murcià (ICPA) no es poden comparar entre si.
+- **La mesura pròpia mesura el que es tramet a registres oficials, no el portal de transparència en si.** Que hi consti el compte general o els contractes no garanteix que el portal publiqui l'organigrama o les retribucions. Per a això preparem un robot que revisa els portals, amb una mostra revisada a mà per mesurar-ne l'error. Els seus resultats es publicaran quan aquest error estigui mesurat.
+- **Contractació a Catalunya, el País Basc i Navarra.** Les seves administracions publiquen a la seva pròpia plataforma, no a la de l'Estat; quan no està coberta, no compten en aquest indicador.
+- **Andalusia, Castella i Lleó, Aragó, la Comunitat Valenciana, Galícia, Navarra o el País Basc** no publiquen notes per entitat. Madrid ha començat a avaluar tots els seus ajuntaments. S'hi incorporaran tan bon punt hi hagi dades.
+- Ni les avaluacions ni la mesura pròpia diuen **si la informació és veraç ni completa**: només si està publicada o tramesa, i quan.
 
 ---
 
@@ -447,6 +840,10 @@ Per a les comunitats autònomes i el Govern central **no hi ha prou mostra**: un
 
 - **[Consell de Transparència i Bon Govern – Avaluació](https://consejodetransparencia.es/evaluacion)**: Índex de Compliment de la Informació Obligatòria (ICIO) de la [metodologia MESTA](https://consejodetransparencia.es/content/dam/ctransparencia/portal-ctbg/publicaciones/documentacion/metodologia/MESTA-informefinal.pdf), llegit del text de cada **informe definitiu** (.docx): Portal de la Transparència de l'AGE (2021-2025), comunitats i ciutats autònomes amb conveni (avaluació del 2020 i revisió del 2021) i els seus ajuntaments avaluats. El CTBG revisa directament cada portal i puntua, per a cada obligació, si se'n publica el contingut i els seus atributs de qualitat (forma, actualització, accessibilitat, reutilització). Origen de les dades: Consell de Transparència i Bon Govern (reutilització segons la Llei 37/2007).
 - **[Comissionat de Transparència de Canàries – Puntuacions](https://transparenciacanarias.org/evaluacion/puntuaciones/)**: taula mestra de puntuacions del sector públic de l'Índex de Transparència de Canàries (XLSX, [CC BY 4.0](https://transparenciacanarias.org/datos/)), des de l'avaluació del 2016. Combina el compliment de la informació obligatòria, la qualitat del suport web i la transparència voluntària ([metodologia](https://transparenciacanarias.org/evaluacion/sector-publico/metodologia/)). L'entitat emplena un qüestionari i el Comissionat el verifica. Es mostra sobre 100 (nota per 10) només per dibuixar-la al costat de l'ICIO; **les dues escales no són equivalents**.
+- **[Síndic de Greuges de Catalunya – IDPAC](https://www.sindic.cat/ca/page.asp?id=904)**: [CSV en dades obertes](https://dadesobertes.seu-e.cat/dataset/5f8e4974-9cb0-4483-b7e7-ec844500b6c3) (CC0), edició 2026. El Síndic revisa cada portal; l'IDPAC (0-100) pondera el contingut obligatori (70 %) i l'espai web (30 %) ([guia metodològica](https://www.sindic.cat/site/files/informe_transparencia/guia_metodologica_municipis_no_rurals_2026.pdf)). Els municipis s'aparellen amb l'INE pel nom i la província.
+- **[Consell de la Transparència de la Regió de Múrcia – Informes d'avaluació](https://comisionadotransparencia.carm.es/informes-de-evaluacion)**: Annex I de l'informe del 2023 (PDF), ICPA 0-10 del 2020 al 2023 = 70 % ICIO (MESTA) + 30 % suport web. Autoavaluació voluntària verificada pel Consell; «no hi va participar» no es compta com a zero. Es mostra sobre 100.
+- **[CTBG – Informes agregats d'avaluació](https://consejodetransparencia.es/evaluacion)** (2022-2026): taula de l'annex amb l'ICIO de cada entitat del sector públic institucional estatal, entitats privades subvencionades, corporacions de dret públic i òrgans constitucionals. L'agregat arrodoneix a una dècima.
+- **Mesura pròpia (SpainFacts)**: obligacions de tramesa amb termini legal comprovades en registres oficials; criteris, base legal i codi de cada indicador a [Fonts › Dades d'elaboració pròpia](/ca/fuentes#dades-delaboració-pròpia). S'atribueix al govern en funcions el dia del termini.
 - **Municipis**: els noms del Comissionat s'aparellen amb el codi INE pel nom (sis amb una forma diferent, a mà). Població del padró de l'INE de l'any avaluat.
 - **Atribució a partits**: ajuntaments, alcalde en funcions al final del període avaluat segons el [registre d'alcaldes del Ministeri de Política Territorial](https://concejales.redsara.es/consulta/) (per a l'avaluació «2022/23», l'1 de juny de 2023, abans de les corporacions sorgides de les eleccions de maig); comunitats i Estat, president en funcions el 31 de desembre de l'any avaluat (ITCanarias) o el 30 de juny de l'any de l'avaluació (CTBG). Els partits s'agrupen en famílies polítiques.
 - **Obligacions legals**: arts. 5 a 9 de la [Llei 19/2013, de transparència, accés a la informació pública i bon govern](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887); a Canàries, la [Llei 12/2014, de transparència i d'accés a la informació pública](https://www.boe.es/buscar/act.php?id=BOE-A-2015-1114).

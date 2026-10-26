@@ -1,5 +1,5 @@
 ---
-i18n_origen: 87c02f93397e
+i18n_origen: aabc1e5ec37f
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'ccaa' AND slug = '${params.ccaa}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -1825,6 +1825,115 @@ ORDER BY f.fecha, f.orden_familia
 ```sql elec_colores
 SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY orden_familia
 ```
+
+```sql tr_com
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}'
+```
+
+```sql tr_com_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo' WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo' WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo' ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros' ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_com_eval
+-- Evaluaciones oficiales del portal de la comunidad (última de cada evaluador)
+SELECT evaluador, indice, periodo, round(avg(puntuacion), 1) AS puntuacion, count(*) AS entidades, any_value(url_pagina) AS url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE tipo_administracion = 'Comunidad autónoma' AND cod_ccaa = '${terr[0]?.cod}'
+GROUP BY evaluador, indice, periodo, orden_periodo
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+```sql tr_ccaa_prov
+SELECT cod_prov, any_value(provincia) AS provincia, count(*) AS ayuntamientos,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct,
+    avg(indice) AS indice_medio, avg(media_tramo_espana) AS indice_esperable
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_ccaa = '${terr[0]?.cod}'
+GROUP BY cod_prov ORDER BY provincia
+```
+
+```sql tr_ccaa_grandes
+SELECT nombre_entidad AS municipio, provincia, poblacion, indice, incumplimientos, '/ca/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_ccaa = '${terr[0]?.cod}' AND n_incumplimientos_destacados > 0
+ORDER BY poblacion DESC
+```
+
+{#if tr_ccaa_prov.length > 0 || tr_com_obl.length > 0}
+
+## Transparència
+
+{#each tr_com.filter(d => d.n_incumplimientos_destacados > 0) as d}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ {terr[0]?.nombre}: no consta al registre oficial</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{d.incumplimientos}</p>
+</div>
+{/each}
+
+Trameten a temps la comunitat i els seus ajuntaments el que els obliga la llei? És una **mesura pròpia** de SpainFacts amb registres oficials que porten data ([criteris i codi](/ca/fuentes#dades-delaboració-pròpia)). La responsabilitat s'atribueix al govern que hi havia el dia del termini.
+
+{#if tr_com_obl.length > 0}
+<DataTable data={tr_com_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Obligació de la comunitat" />
+    <Column id=periodo title="Període" />
+    <Column id=plazo title="Termini" />
+    <Column id=situacion title="Situació" />
+    <Column id=dias_retraso title="Dies de retard" fmt=num0 />
+    <Column id=mediana_dias title="Dies que triga (mediana)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="President el dia del termini" />
+    <Column id=familia_en_plazo title="Partit" />
+</DataTable>
+{/if}
+
+{#if tr_com_eval.length > 0}
+
+El portal de la comunitat té, a més, una **avaluació oficial** (un altre mètode, no comparable amb la mesura pròpia):
+
+<DataTable data={tr_com_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Avaluador" />
+    <Column id=indice title="Índex" />
+    <Column id=periodo title="Avaluació" />
+    <Column id=puntuacion title="Nota mitjana (sobre 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+    <Column id=entidades title="Òrgans avaluats" fmt=num0 />
+</DataTable>
+{/if}
+
+{#if tr_ccaa_prov.length > 0}
+<DataTable data={tr_ccaa_prov} rows=all>
+    <Column id=provincia title="Província" />
+    <Column id=ayuntamientos title="Ajuntaments" fmt=num0 />
+    <Column id=pct title="Amb alguna cosa vençuda que no consta (%)" fmt=num1 />
+    <Column id=indice_medio title="Índex mitjà" fmt=num1 contentType=colorscale colorMin=70 colorMax=100 />
+    <Column id=indice_esperable title="Esperable per la seva mida" fmt=num1 />
+</DataTable>
+{/if}
+
+{#if tr_ccaa_grandes.length > 0}
+<details>
+<summary>Ajuntaments amb alguna obligació vençuda que no consta ({formatNumber(tr_ccaa_grandes.length, 0)})</summary>
+
+<DataTable data={tr_ccaa_grandes} search=true rows=15 link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipi" />
+    <Column id=provincia title="Província" />
+    <Column id=poblacion title="Habitants" fmt=num0 />
+    <Column id=indice title="Índex (0-100)" fmt=num1 />
+    <Column id=incumplimientos title="Què no consta" />
+</DataTable>
+
+</details>
+{/if}
+
+{/if}
 
 {#if elec.length > 0}
 

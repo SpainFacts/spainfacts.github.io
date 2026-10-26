@@ -1,0 +1,46 @@
+version: 2
+
+# Indicadores del índice propio de publicidad activa a partir de registros
+# oficiales (ingestion/pa_registros.py). Contrato común de columnas pa_ind_*:
+# docs/elaboracion-propia/. clave = obligacion-cod_entidad-periodo (única).
+
+models:
+  - name: pa_ind_ispa
+    description: "Retribuciones de los cargos electos facilitadas al ISPA: una fila por ayuntamiento (y Ceuta/Melilla) y año de las retribuciones. no_consta = figura en el listado «ayuntamientos_sin_remitir» de la edición siguiente (última foto). Navarra no aplica (ISPA Navarra). Ver docs/elaboracion-propia/ispa_retribuciones.md"
+    columns: &columnas_pa
+      - name: clave
+        tests: [not_null, unique]
+      - name: obligacion
+        tests: [not_null]
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['en_plazo', 'fuera_plazo', 'consta', 'no_consta', 'no_vencido', 'no_aplica']
+      - name: aplica_indicador
+        tests: [not_null]
+
+  - name: pa_ind_presupuesto
+    description: "Presupuesto prorrogado (CONPREL, avance del año en curso, «Estado Inf.» = CP) de ayuntamientos, diputaciones, cabildos/consells y Ceuta/Melilla, con la última foto guardada de cada ejercicio. Foral no aplica. Ver docs/elaboracion-propia/presupuesto_prorrogado.md"
+    columns: *columnas_pa
+
+  - name: pa_ind_pmp_ccaa
+    description: "Periodo medio de pago mensual de las comunidades autónomas (bloque «pagar a tiempo», aparte del índice de remisión): fuera_plazo si supera 30 días. Desde abril de 2018. Ver docs/elaboracion-propia/pmp_ccaa.md"
+    columns: *columnas_pa
+
+  - name: pa_ind_pmp_entidades_locales
+    description: "Periodo medio de pago trimestral de diputaciones (provinciales y forales) y cabildos/consells (PMP_NET, tipo DD), mismo criterio que pa_ind_pmp_ccaa; los ayuntamientos están en transparencia_pmp. Desde 2018T2."
+    columns: *columnas_pa
+
+  - name: pa_ind_presupuestos_ccaa
+    description: "Ley de presupuestos de cada comunidad autónoma y ejercicio a partir de los sumarios del BOE (sección I): días de retraso = fecha de la ley − 1 de enero del ejercicio; sin ley = prorrogado. Ver docs/elaboracion-propia/ley_presupuestos_ccaa.md"
+    columns: *columnas_pa

@@ -9,3 +9,9 @@ sources:
         description: "Comisionado de Transparencia de Canarias, Índice de Transparencia de Canarias (ITCanarias), tabla maestra del sector público (XLSX, CC BY 4.0): una fila por entidad y evaluación, 2016-2025. puntuacion 0-10; estado evaluada o incumplidora (no rindió la evaluación). periodo es la etiqueta original de la columna; anio, el último año que cubre."
       - name: pa_ctbg
         description: "Consejo de Transparencia y Buen Gobierno, metodología MESTA: Índice de Cumplimiento de la Información Obligatoria (ICIO, 0-100 %) leído del informe definitivo (.docx) de cada evaluación: Portal de la Transparencia de la AGE (2021-2025) y comunidades, ciudades autónomas y ayuntamientos con convenio con el CTBG (2020 y revisión de 2021). cod = '00' (AGE), cod_ccaa INE o cod_mun INE."
+      - name: pa_ctbg_agregados
+        description: "CTBG, tabla del anexo de los informes agregados de evaluación (2022-2026): ICIO (0-100 %) por entidad del sector público institucional estatal, entidades privadas subvencionadas, corporaciones de derecho público, órganos constitucionales y reguladores, y terceras/cuartas evaluaciones de seguimiento (ronda 3/4). Valores redondeados a una décima por el agregado."
+      - name: pa_sindic
+        description: "Síndic de Greuges de Catalunya, edición 2026: IDPAC (publicidad activa, 0-100), IADAIP (acceso a la información, solicitante oculto) e ITC por entidad. CSV CC0 de dadesobertes.seu-e.cat. Sin código INE (municipio + provincia en texto)."
+      - name: pa_murcia
+        description: "Consejo de la Transparencia de la Región de Murcia, ICPA (0-10) 2020-2023 del Anexo I del informe de evaluación de 2023 (PDF). Autoevaluación voluntaria verificada; estado no_participo = «NP» en el informe."

@@ -1,5 +1,5 @@
 ---
-i18n_origen: bb5195fbbe05
+i18n_origen: 726634a18874
 breadcrumb: "SELECT nombre AS breadcrumb FROM mother.territorios WHERE nivel = 'provincia' AND slug = '${params.provincia}'"
 og:
   image: https://spainfacts.org/og-spainfacts.png
@@ -963,6 +963,134 @@ SELECT DISTINCT familia, color, orden_familia FROM ${elec_familias} ORDER BY ord
 ```
 
 {#if elec.length > 0}
+
+```sql tr_dip
+-- La diputación (o cabildos y consells insulares) de la provincia
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad IN ('Diputación provincial', 'Cabildo o consell insular') AND cod_prov = '${terr[0]?.cod}'
+ORDER BY nombre_entidad
+```
+
+```sql tr_dip_obl
+SELECT nombre_entidad, obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo' WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo' WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo' ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros' ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, url_fuente
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad IN ('Diputación provincial', 'Cabildo o consell insular') AND cod_prov = '${terr[0]?.cod}' AND es_ultimo
+ORDER BY nombre_entidad, puntuacion
+```
+
+```sql tr_aytos
+SELECT cod_mun, nombre_entidad AS municipio, poblacion, indice, media_tramo_espana, n_incumplimientos_destacados,
+    incumplimientos, familia_actual, '/ca/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_prov = '${terr[0]?.cod}'
+ORDER BY indice NULLS LAST, poblacion DESC
+```
+
+```sql tr_resumen
+SELECT
+    count(*) AS ayuntamientos,
+    count(*) FILTER (WHERE n_incumplimientos_destacados > 0) AS con_incumplimientos,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / nullif(count(*), 0) AS pct,
+    (SELECT 100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*)
+     FROM mother.transparencia_cumplimiento_entidad WHERE tipo_entidad = 'Ayuntamiento') AS pct_espana,
+    avg(indice) AS indice_medio,
+    -- media esperable con la misma mezcla de tamaños: media de España de cada tramo
+    avg(media_tramo_espana) AS indice_esperable
+FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_prov = '${terr[0]?.cod}'
+```
+
+{#if tr_aytos.length > 0}
+
+## Transparència
+
+{#each tr_dip.filter(d => d.n_incumplimientos_destacados > 0) as d}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ {d.nombre_entidad}: no consta al registre oficial</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{d.incumplimientos}</p>
+</div>
+{/each}
+
+Trameten a temps les administracions locals de {terr[0]?.nombre} el que els obliga la llei? És una **mesura pròpia** de SpainFacts amb registres oficials que porten data ([criteris i codi](/ca/fuentes#dades-delaboració-pròpia)). Per comparar amb justícia s'utilitza el que és **esperable**: la mitjana d'Espanya de cada mida de municipi, amb la mateixa barreja de mides que té la província.
+
+<Grid cols=3>
+    <KpiCard
+        title="Ajuntaments amb alguna cosa vençuda que no consta"
+        value={tr_resumen[0]?.pct}
+        formattedValue="{formatNumber(tr_resumen[0]?.pct, 1)} %"
+        period="{formatNumber(tr_resumen[0]?.con_incumplimientos, 0)} de {formatNumber(tr_resumen[0]?.ayuntamientos, 0)} · Espanya: {formatNumber(tr_resumen[0]?.pct_espana, 1)} %"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    <KpiCard
+        title="Índex mitjà dels seus ajuntaments"
+        value={tr_resumen[0]?.indice_medio}
+        formattedValue="{formatNumber(tr_resumen[0]?.indice_medio, 1)} de 100"
+        period="Esperable per la seva mida: {formatNumber(tr_resumen[0]?.indice_esperable, 1)}"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    {#each tr_dip.slice(0, 1) as d}
+    <KpiCard
+        title={d.nombre_entidad}
+        value={d.indice}
+        formattedValue={d.indice == null ? 'Sense índex' : formatNumber(d.indice, 1) + ' de 100'}
+        period="{formatNumber(d.obligaciones_medidas, 0)} obligacions mesurades"
+        source="SpainFacts (elaboració pròpia)"
+    />
+    {/each}
+</Grid>
+
+{#if tr_dip_obl.length > 0}
+<DataTable data={tr_dip_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=nombre_entidad title="Entitat" />
+    <Column id=obligacion title="Obligació" />
+    <Column id=periodo title="Període" />
+    <Column id=plazo title="Termini" />
+    <Column id=situacion title="Situació" />
+    <Column id=dias_retraso title="Dies de retard" fmt=num0 />
+    <Column id=mediana_dias title="Dies que triga (mediana)" fmt=num0 />
+</DataTable>
+{/if}
+
+<MapaEspana
+    data={tr_aytos}
+    link="enlace"
+    geoJsonUrl="/geo/municipios/{terr[0]?.cod_ccaa}.geojson"
+    geoId="cod_mun"
+    areaCol="cod_mun"
+    value="indice"
+    valueFmt="num1"
+    min={50}
+    max={100}
+    colorPalette={['#b91c1c', '#fde68a', '#15803d']}
+    height={440}
+    basemap="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{'{z}'}/{'{y}'}/{'{x}'}"
+    attribution="Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors · Límits © Institut Geogràfic Nacional"
+    tooltip={[
+        {id: 'municipio', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'indice', title: 'Índex (0-100)', fmt: 'num1'},
+        {id: 'media_tramo_espana', title: 'Mitjana de la seva mida', fmt: 'num1'},
+        {id: 'incumplimientos', title: 'No consta'}
+    ]}
+/>
+
+<p class="text-xs text-gray-500">L'escala comença en 50: per sota, tots en vermell. En gris, sense índex (menys de tres obligacions mesurades). Prem un municipi per veure'n la fitxa.</p>
+
+<DataTable data={tr_aytos} search=true rows=15 link=enlace showLinkCol=false>
+    <Column id=municipio title="Municipi" />
+    <Column id=poblacion title="Habitants" fmt=num0 />
+    <Column id=indice title="Índex (0-100)" fmt=num1 contentType=colorscale colorMin=50 colorMax=100 />
+    <Column id=media_tramo_espana title="Mitjana de la seva mida" fmt=num1 />
+    <Column id=incumplimientos title="Què no consta" />
+    <Column id=familia_actual title="Partit de l'alcalde avui" />
+</DataTable>
+
+{/if}
 
 ## Eleccions
 

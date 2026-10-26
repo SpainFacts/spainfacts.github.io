@@ -3,7 +3,7 @@ description: "SpainFactsek erabiltzen dituen iturri ofizialen katalogoa (INE, Eu
 title: Iturrien Trazabilitatea eta Auditoria
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: bc32e4e4d483
+i18n_origen: a1d2b13b67a4
 ---
 
 <script>
@@ -91,6 +91,47 @@ uv run dagster asset materialize -m orchestration.definitions --select "*"
 ```
 
 Gida osoa, webgunea lokalean abiarazteko urratsekin, [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md) fitxategian dago, eta iturri berri bat nola gehitzen den, [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md) fitxategian.
+
+```sql propia
+SELECT *,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || codigo_ingesta AS url_ingesta,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || modelo AS url_modelo,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || criterios AS url_criterios
+FROM mother.elaboracion_propia_indicadores
+ORDER BY bloque, nombre
+```
+
+## SpainFactsen neurketa propioko datuak
+
+Datu batzuk inork ez ditu argitaratzen; beraz, **guk neurtzen ditugu**. Nagusia [publizitate aktiboaren indizea](/eu/transparencia/publicidad-activa#neurketa-propioa-administrazio-guztiak) da. Kontrol-organo ia batek ere ez du esaten, erakundez erakunde, udal, diputazio edo erkidego bakoitzak legeak eskatzen diona garaiz argitaratzen eta bidaltzen duen. Horregatik, data duten erregistro ofizialetan egiaztatzen dugu: Ogasuna, Kontuen Auzitegia, Diru-laguntzen Datu-base Nazionala, Kontratazio Plataforma…
+
+Neurketa propio bat datu ofizial bat baino are gehiago ikuskatu ahal izan behar da. Horregatik, adierazle bakoitzak bere lege-oinarria, epea, nola kalkulatzen den, zer kanpoan uzten den eta zergatik argitaratzen ditu, eta bere kodera lotzen du:
+
+- **Erregistro ofizialak soilik.** Zerbait erregistroan ageri ez bada, «ez da ageri [iturrian]» esaten da, inoiz ez «ez du egin»: beste bide batetik bidali izan liteke.
+- **Erakunde guztiak.** Iturrian agertzen ez dena «ez da ageri» gisa zenbatzen da, iturriak neurtzen ez badu izan ezik. Adibidez, beren bidetik bidaltzen duten foru-lurraldeak ez dira ez-betetzaile gisa zenbatzen.
+- **Epearen eguneko gobernuari egoztea**, ez egungoari.
+- **Bere tamainakoekin alderatzea**, Espainian eta bere probintzian.
+- **Akatsak**: bat ikusten baduzu, [ireki intzidentzia bat](https://github.com/SpainFacts/spainfacts.github.io/issues) iturriaren estekarekin. Zuzendu eta oharra uzten dugu.
+
+Metodo osoa [docs/elaboracion-propia](https://github.com/SpainFacts/spainfacts.github.io/tree/main/docs/elaboracion-propia) karpetan dago.
+
+{#each [...new Set(propia.map(d => d.bloque))] as bloque}
+<h3 class="mt-6 mb-2 text-lg font-semibold">{bloque}</h3>
+{#each propia.filter(d => d.bloque === bloque) as d}
+<details class="my-2 rounded-lg border border-gray-200 dark:border-gray-800 p-3 text-sm">
+<summary class="cursor-pointer font-semibold">{d.nombre} <span class="font-normal text-gray-500">· {d.tipos_entidad}{d.en_indice ? '' : ' · informatiboa, indizetik kanpo'}</span></summary>
+<dl class="mt-2 grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-3 gap-y-1">
+<dt class="text-gray-500">Zer neurtzen duen</dt><dd>{d.que_mide}</dd>
+<dt class="text-gray-500">Lege-oinarria</dt><dd>{d.base_legal}</dd>
+<dt class="text-gray-500">Epea</dt><dd>{d.plazo}</dd>
+<dt class="text-gray-500">Kalkulua</dt><dd>{d.calculo}</dd>
+<dt class="text-gray-500">Salbuespenak</dt><dd>{d.exclusiones}</dd>
+<dt class="text-gray-500">Iturri ofiziala</dt><dd><a href={d.url_fuente} target="_blank" rel="noopener">{d.fuente_oficial} ↗</a></dd>
+<dt class="text-gray-500">Kodea</dt><dd><a href={d.url_ingesta} target="_blank" rel="noopener">karga</a> · <a href={d.url_modelo} target="_blank" rel="noopener">kalkulua</a> · <a href={d.url_criterios} target="_blank" rel="noopener">irizpideak</a></dd>
+</dl>
+</details>
+{/each}
+{/each}
 
 ## Iturrien katalogoa
 

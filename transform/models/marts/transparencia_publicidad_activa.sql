@@ -13,6 +13,15 @@
 -- presidente del Gobierno (seed gobiernos_presidentes). Cabildos y entes
 -- dependientes quedan sin atribuir.
 
+{% set articulos = "el|la|los|las|l''|els|les|lo|o|a|os|as|sa|ses|es|s''" %}
+{% set normaliza -%}
+regexp_replace(
+    regexp_replace(
+        regexp_replace(lower(strip_accents(trim(__E__))), '^(.*), ({{ articulos }})$', '\2 \1'),
+        '^(.*) \(({{ articulos }})\)$', '\2 \1'),
+    '[^a-z0-9]', '', 'g')
+{%- endset %}
+
 with itc as (
     select * from {{ source('raw_transparencia_publicidad_activa', 'pa_itcanarias') }}
 ),
@@ -150,16 +159,140 @@ ctbg_territorio as (
     ) p on p.cod_mun = b.cod
 ),
 
+-- Nombres de municipio normalizados (Cataluña y Murcia): sin tildes ni signos, con
+-- el artículo pospuesto del INE delante («Bisbal d'Empordà, La» = «La Bisbal d'Empordà»)
+-- y cada parte de los nombres bilingües «A/B».
+nombres_mun as (
+    select distinct cod_mun, cod_prov, cod_ccaa, {{ normaliza | replace('__E__', 'parte') }} as nombre_norm
+    from (
+        select cod_mun, cod_prov, cod_ccaa, municipio as parte
+        from {{ ref('poblacion_municipios') }} where vigente and cod_ccaa in ('09', '14')
+        union all
+        select cod_mun, cod_prov, cod_ccaa, unnest(string_split(municipio, '/'))
+        from {{ ref('poblacion_municipios') }} where vigente and cod_ccaa in ('09', '14') and municipio like '%/%'
+    )
+),
+
+-- Nombres del Consejo de Murcia que no coinciden con el nomenclátor
+alias_murcia(nombre, cod_mun) as (
+    values ('caravaca', '30015'), ('fuentealamo', '30021'), ('villanuevadelsegura', '30042')
+),
+
+provincias_cat(nombre, cod_prov) as (
+    values ('Barcelona', '08'), ('Girona', '17'), ('Lleida', '25'), ('Tarragona', '43')
+),
+
+-- Síndic de Greuges de Catalunya (IDPAC, edición 2026)
+sindic_base as (
+    select
+        'Síndic de Greuges de Catalunya' as evaluador,
+        'IDPAC' as indice,
+        s.entidad,
+        s.categoria_n3 as tipo_entidad,
+        case
+            when s.categoria_n2 = 'Ajuntaments' then 'Ayuntamiento'
+            when s.categoria_n3 = 'Diputacions' then 'Diputación provincial'
+            when s.categoria_n2 = 'Departaments' then 'Comunidad autónoma'
+            else 'Entes dependientes y otros'
+        end as tipo_administracion,
+        case when s.categoria_n2 = 'Departaments' then 'Generalitat de Catalunya' else s.entidad end as entidad_principal,
+        cast(s.edicion as varchar) as periodo,
+        1 as orden_periodo,
+        cast(s.edicion as integer) as anio,
+        make_date(cast(s.edicion as integer), 5, 31) as fecha_referencia,  -- fin del trabajo de campo
+        case when s.idpac is null then 'sin_dato' else 'evaluada' end as estado,
+        s.idpac as puntuacion_original,
+        '0-100' as escala_original,
+        s.idpac as puntuacion,
+        '09' as cod_ccaa,
+        case when s.categoria_n2 = 'Ajuntaments' then n.cod_prov
+             when s.categoria_n3 = 'Diputacions' then pc.cod_prov end as cod_prov,
+        case when s.categoria_n2 = 'Ajuntaments' then n.cod_mun end as cod_mun,
+        s.url_fuente,
+        s.url_pagina
+    from {{ source('raw_transparencia_publicidad_activa', 'pa_sindic') }} s
+    left join provincias_cat pc on pc.nombre = s.provincia
+    left join nombres_mun n
+        on s.categoria_n2 = 'Ajuntaments'
+        and n.cod_prov = pc.cod_prov
+        and n.nombre_norm = {{ normaliza | replace('__E__', "case s.municipio when 'Les Piles de Gaià' then 'Les Piles' else s.municipio end") }}
+    where s.idpac is not null
+    qualify row_number() over (partition by s.entidad order by n.cod_mun) = 1
+),
+
+-- Consejo de la Transparencia de la Región de Murcia (ICPA 2020-2023)
+murcia_base as (
+    select
+        'Consejo de la Transparencia de la Región de Murcia' as evaluador,
+        'ICPA' as indice,
+        m.entidad,
+        m.tipo_entidad,
+        case
+            when m.tipo_entidad = 'Ayuntamientos' then 'Ayuntamiento'
+            when m.tipo_entidad = 'Comunidad Autónoma' then 'Comunidad autónoma'
+            else 'Entes dependientes y otros'
+        end as tipo_administracion,
+        m.entidad as entidad_principal,
+        cast(m.anio as varchar) as periodo,
+        cast(m.anio as integer) - 2019 as orden_periodo,
+        cast(m.anio as integer) as anio,
+        make_date(cast(m.anio as integer), 12, 31) as fecha_referencia,
+        case m.estado when 'no_participo' then 'no_participo' when 'evaluada' then 'evaluada' else 'sin_dato' end as estado,
+        m.icpa as puntuacion_original,
+        '0-10' as escala_original,
+        m.icpa * 10 as puntuacion,
+        '14' as cod_ccaa,
+        case when m.tipo_entidad = 'Ayuntamientos' then '30' end as cod_prov,
+        case when m.tipo_entidad = 'Ayuntamientos' then coalesce(a.cod_mun, n.cod_mun) end as cod_mun,
+        m.url_fuente,
+        m.url_pagina
+    from {{ source('raw_transparencia_publicidad_activa', 'pa_murcia') }} m
+    left join alias_murcia a
+        on m.tipo_entidad = 'Ayuntamientos'
+        and a.nombre = {{ normaliza | replace('__E__', "regexp_replace(m.entidad, '^AYUNTAMIENTO DE ', '')") }}
+    left join nombres_mun n
+        on m.tipo_entidad = 'Ayuntamientos'
+        and n.cod_prov = '30'
+        and n.nombre_norm = {{ normaliza | replace('__E__', "regexp_replace(m.entidad, '^AYUNTAMIENTO DE ', '')") }}
+    where m.estado <> 'sin_dato'
+    qualify row_number() over (partition by m.entidad, m.anio order by n.cod_mun) = 1
+),
+
+-- CTBG, informes agregados (sector público estatal y otros sujetos de su ámbito)
+ctbg_agr_base as (
+    select
+        'Consejo de Transparencia y Buen Gobierno' as evaluador,
+        'ICIO (MESTA)' as indice,
+        entidad,
+        grupo as tipo_entidad,
+        case when grupo = 'Entidades privadas subvencionadas' then 'Entidades privadas'
+             when grupo = 'Corporaciones de derecho público' then 'Corporaciones de derecho público'
+             else 'Sector público estatal' end as tipo_administracion,
+        entidad as entidad_principal,
+        cast(anio as varchar) || case when ronda > 1 then ' (' || ronda || 'ª evaluación)' else '' end as periodo,
+        cast(anio as integer) - 2015 as orden_periodo,
+        cast(anio as integer) as anio,
+        make_date(cast(anio as integer), 6, 30) as fecha_referencia,
+        'evaluada' as estado,
+        icio as puntuacion_original,
+        '0-100 %' as escala_original,
+        icio as puntuacion,
+        '00' as cod_ccaa,
+        cast(null as varchar) as cod_prov,
+        cast(null as varchar) as cod_mun,
+        url_fuente,
+        'https://consejodetransparencia.es/evaluacion' as url_pagina
+    from {{ source('raw_transparencia_publicidad_activa', 'pa_ctbg_agregados') }}
+),
+
 unido as (
+    {% for cte in ['itc_territorio', 'ctbg_territorio', 'sindic_base', 'murcia_base', 'ctbg_agr_base'] %}
     select evaluador, indice, entidad, tipo_entidad, tipo_administracion, entidad_principal,
         periodo, orden_periodo, anio, fecha_referencia, estado, puntuacion_original, escala_original,
         puntuacion, cod_ccaa, cod_prov, cod_mun, url_fuente, url_pagina
-    from itc_territorio
-    union all
-    select evaluador, indice, entidad, tipo_entidad, tipo_administracion, entidad_principal,
-        periodo, orden_periodo, anio, fecha_referencia, estado, puntuacion_original, escala_original,
-        puntuacion, cod_ccaa, cod_prov, cod_mun, url_fuente, url_pagina
-    from ctbg_territorio
+    from {{ cte }}
+    {% if not loop.last %}union all{% endif %}
+    {% endfor %}
 ),
 
 alcaldes as (

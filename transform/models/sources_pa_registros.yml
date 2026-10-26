@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: raw_pa_registros
+    description: >
+      Registros oficiales con fecha o marca de cumplimiento para el índice propio de
+      publicidad activa y remisión de información (ingestion/pa_registros.py, source dlt
+      «pa_registros»). Criterios en docs/elaboracion-propia/.
+    schema: raw
+    tables:
+      - name: boe_leyes_ccaa
+        description: >
+          Leyes autonómicas (título «Ley…» o «Ley Foral…») de la sección I del BOE, de los
+          sumarios diarios desde el 1-sep-1999. cod_ccaa = INE según el departamento del
+          sumario. Para las que llevan «presupuest» en el título, metadatos del documento:
+          fecha_disposicion (fecha de la ley), fecha_vigencia, numero_oficial y la
+          publicación en el diario autonómico (diario_autonomico, fecha_publicacion_diario)
+          leída de la nota «Publicada en…» del texto. Merge por identificador (BOE-A-…).
+      - name: conprel_presupuestos_avance
+        description: >
+          Fotos del avance de presupuestos del año en curso de CONPREL (EP{AAAA}CT.xlsx),
+          una fila por entidad (Pr + Cor + Tip), ejercicio y fecha_foto (día de descarga).
+          estado_inf = columna «Estado Inf. (*)»: C, CP (presupuesto prorrogado), E, N.
+          El avance solo existe para el ejercicio en curso y se publica de junio a
+          noviembre: el histórico se construye guardando fotos.
+      - name: ispa_sin_remitir
+        description: >
+          Ayuntamientos que «no han facilitado información sobre las cantidades percibidas»
+          por sus cargos electos (ISPA, Secretaría de Estado de Función Pública), una fila
+          por edición, fecha_foto (Last-Modified del Excel), provincia y municipio tal como
+          vienen (sin código INE). marca: remitida_sin_firma «(*)», informacion_dudosa
+          «(**)». anio_retribuciones = edicion − 1.
+      - name: pmp_ccaa
+        description: >
+          Periodo medio de pago a proveedores mensual de cada comunidad autónoma (17) desde
+          abril de 2018, de las series de la Central de Información de Hacienda
+          (pmp-series-rd-1040-2017.xlsx, tablas 4.1-4.5). cod_ccaa = INE (casado por
+          nombre; codigo_hacienda usa la numeración de Hacienda). Importes tal cual del
+          fichero (la cabecera dice miles de euros pero las magnitudes son euros).

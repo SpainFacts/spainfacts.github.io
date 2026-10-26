@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 4241525082ff
+i18n_origen: 7ba463802b8c
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -479,6 +479,136 @@ SELECT
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
+
+```sql tr_ent
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}'
+```
+
+```sql tr_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo, estado,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo'
+        WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo'
+        WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo'
+            ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros'
+        ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente,
+    100 * puntuacion AS nota
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_serie
+-- Nota media por año del ayuntamiento frente a la de los de su tramo de población
+WITH t AS (
+    SELECT cod_mun, anio, tramo_poblacion, puntuacion
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND vencido IS DISTINCT FROM false
+),
+propio AS (
+    SELECT anio, avg(puntuacion) AS nota, any_value(tramo_poblacion) AS tramo FROM t WHERE cod_mun = '${inputs.municipio}' GROUP BY anio
+)
+SELECT CAST(CAST(p.anio AS INTEGER) AS VARCHAR) AS anio, 'Este ayuntamiento' AS serie, 100 * p.nota AS nota FROM propio p
+UNION ALL
+SELECT CAST(CAST(t.anio AS INTEGER) AS VARCHAR), 'Media de su tamaño', 100 * avg(t.puntuacion)
+FROM t JOIN propio p ON p.anio = t.anio AND p.tramo = t.tramo_poblacion
+GROUP BY t.anio
+ORDER BY 1, 2
+```
+
+```sql tr_eval
+SELECT evaluador, indice, periodo, puntuacion, escala_original, puntuacion_original, estado, url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE cod_mun = '${inputs.municipio}' AND tipo_administracion = 'Ayuntamiento'
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+{#if tr_obl.length > 0}
+
+## Gardentasuna
+
+{#if tr_ent[0]?.n_incumplimientos_destacados > 0}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Ez da ageri erregistro ofizialean</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-sm text-red-900 dark:text-red-100">Legezko epea duela hiru hilabete baino gehiago amaitu zen, eta ez da iturri ofizialean ageri azken deskargaren datan. Beste bide batetik bidali izan liteke: taulako errenkada bakoitzak bere iturrira eramaten du.</p>
+</div>
+{/if}
+
+Bidaltzen al du udal honek garaiz legeak eskatzen diona? SpainFactsen **neurketa propioa** da, data duten erregistro ofizialekin egina. Ogasunak, Kontuen Auzitegiak, Diru-laguntzen Datu-base Nazionalak eta Kontratazio Plataformak adierazten dute betebehar bakoitza ageri den eta noiz iritsi zen bere epearekin alderatuta ([irizpideak eta kodea](/eu/fuentes#spainfactsen-neurketa-propioko-datuak)). Bere tamainako udalekin alderatzen da ({tr_ent[0]?.tramo_poblacion} biztanle).
+
+<Grid cols=3>
+    <KpiCard
+        title="Betetze-indizea"
+        value={tr_ent[0]?.indice}
+        formattedValue={tr_ent[0]?.indice == null ? 'Indizerik gabe' : '100etik ' + formatNumber(tr_ent[0]?.indice, 1)}
+        period="Bere tamainakoen batez bestekoa Espainian: {formatNumber(tr_ent[0]?.media_tramo_espana, 1)} · bere probintzian: {formatNumber(tr_ent[0]?.media_tramo_provincia, 1)}"
+        source="SpainFacts (neurketa propioa)"
+        sparklineData={tr_serie.filter(d => d.serie === 'Este ayuntamiento').map(d => ({...d, y: d.nota}))}
+    />
+    <KpiCard
+        title="Epea amaituta ageri ez diren betebeharrak"
+        value={tr_ent[0]?.n_incumplimientos_destacados}
+        formattedValue={formatNumber(tr_ent[0]?.n_incumplimientos_destacados ?? 0, 0)}
+        period="neurtutako {formatNumber(tr_ent[0]?.obligaciones_medidas, 0)} betebeharretatik, epea amaitu eta 3 hilabete baino gehiagora"
+        source="SpainFacts (neurketa propioa)"
+    />
+    <KpiCard
+        title="Postua udalen artean"
+        value={tr_ent[0]?.puesto}
+        formattedValue={tr_ent[0]?.puesto == null ? '—' : formatNumber(tr_ent[0]?.puesto, 0) + '.'}
+        period="indizea duten {formatNumber(tr_ent[0]?.total_tipo, 0)} udaletatik (1.a = hobekien betetzen duena; asko berdinduta daude)"
+        source="SpainFacts (neurketa propioa)"
+    />
+</Grid>
+
+<DataTable data={tr_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Betebeharra" />
+    <Column id=periodo title="Aldia" />
+    <Column id=plazo title="Epea" />
+    <Column id=situacion title="Egoera" />
+    <Column id=dias_retraso title="Atzerapen-egunak" fmt=num0 />
+    <Column id=mediana_dias title="Behar dituen egunak (mediana)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="Alkatea epearen egunean" />
+    <Column id=familia_en_plazo title="Alderdia" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Betebehar bakoitzaren epea amaituta duen azken aldia erakusten da. «Sin registros» ez da ez-betetzea: baliteke diru-laguntzarik ez ematea edo diputazioak kontratatzea haren ordez. Egin klik errenkada batean iturri ofizialera joateko.</p>
+
+{#if tr_serie.length > 2}
+<LineChart
+    data={tr_serie}
+    x=anio
+    y=nota
+    series=serie
+    yFmt=num0
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="Betetzea urtez urte (0-100)"
+/>
+{/if}
+
+{#if tr_eval.length > 0}
+Gainera, udal honek bere gardentasun-atariaren **ebaluazio ofizial** bat du (beste metodo batekin; ez da neurketa propioarekin alderagarria):
+
+<DataTable data={tr_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Ebaluatzailea" />
+    <Column id=indice title="Indizea" />
+    <Column id=periodo title="Ebaluazioa" />
+    <Column id=puntuacion title="Nota (100etik)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+{/if}
+
+Udal guztiak, metodoa eta alderdien araberako alderaketa [Publizitate aktiboa](/eu/transparencia/publicidad-activa#neurketa-propioa-administrazio-guztiak) orrian daude.
+
+{/if}
 
 {#if renta_mun.length > 0 || paro_mun.length > 0}
 

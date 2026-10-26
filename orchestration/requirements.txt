@@ -16,3 +16,10 @@ tzdata
 # grpcio-health-checking >=1.76 se genera con protobuf 7, pero dbt-core y
 # dagster exigen protobuf <7 -> hay que quedarse en la serie compatible
 grpcio-health-checking<1.76
+# Robot de portales de transparencia (ingestion/transparencia_robot, se lanza a mano como ingestion.tcu)
+warcio>=1.7  # capturas WARC auditables de lo que vio el robot
+protego>=0.3  # robots.txt (RFC 9309)
+pypdf>=4  # fechas internas de los PDF
+beautifulsoup4>=4.12
+lxml>=5
+playwright>=1.40  # portales SPA sin API (ANIMSA)

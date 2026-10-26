@@ -1,7 +1,7 @@
 ---
 title: Publizitate aktiboa
-description: "Argitaratzen al dute administrazioek beren gardentasun-atarietan legeak eskatzen diena? Erakundez erakundeko ebaluazio ofizialak (Gardentasun eta Gobernu Oneko Kontseilua eta Kanarietako Gardentasun Komisionatua), haien bilakaera, alderdien araberako alderaketa eta oraindik neurtu ezin dena."
-i18n_origen: e97ef389c875
+description: "Argitaratzen eta garaiz bidaltzen al dute administrazioek legeak eskatzen diena? Erakundez erakundeko ebaluazio ofizialak (Gardentasun Kontseilua, Kanariak, Katalunia eta Murtzia) eta 8.100 udal baino gehiagoren, diputazioen eta erkidegoen neurketa propioa, ez-betetzeak adierazita eta alderdien araberako alderaketarekin."
+i18n_origen: e3ab0f3b8a10
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -188,14 +188,148 @@ WHERE estado = 'incumplidora' AND orden_periodo >= (SELECT orden FROM ${itc_ulti
 ORDER BY orden_periodo DESC, tipo_entidad, entidad
 ```
 
+```sql mp_entidades
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+```
+
+```sql mp_resumen
+SELECT
+    count(*) FILTER (WHERE indice IS NOT NULL) AS entidades,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND indice IS NOT NULL) AS ayuntamientos,
+    count(*) FILTER (WHERE n_incumplimientos_destacados > 0) AS con_incumplimientos,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND n_incumplimientos_destacados > 0) AS aytos_con_incumplimientos,
+    100.0 * count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND n_incumplimientos_destacados > 0)
+        / nullif(count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento'), 0) AS pct_aytos_incumplimientos,
+    median(indice) FILTER (WHERE tipo_entidad = 'Ayuntamiento') AS mediana_aytos,
+    count(*) FILTER (WHERE tipo_entidad = 'Ayuntamiento' AND poblacion >= 20000 AND n_incumplimientos_destacados > 0) AS grandes_con_incumplimientos
+FROM ${mp_entidades}
+```
+
+```sql mp_destacados
+-- Lo que se señala arriba: comunidades, diputaciones y ayuntamientos de 20.000 habitantes o más
+SELECT tipo_entidad, nombre_entidad, provincia, ccaa, poblacion, incumplimientos, n_incumplimientos_destacados,
+    gobernante_actual, familia_actual, cod_mun
+FROM ${mp_entidades}
+WHERE n_incumplimientos_destacados > 0
+  AND (tipo_entidad <> 'Ayuntamiento' OR poblacion >= 20000)
+ORDER BY CASE tipo_entidad WHEN 'Comunidad autónoma' THEN 1 WHEN 'Diputación provincial' THEN 2 WHEN 'Cabildo o consell insular' THEN 3 ELSE 4 END,
+    n_incumplimientos_destacados DESC, poblacion DESC
+```
+
+```sql mp_obligaciones
+SELECT
+    c.obligacion_nombre AS obligacion,
+    c.tipo_entidad,
+    max(c.periodo) AS ultimo_periodo,
+    count(*) AS entidades,
+    100.0 * avg(c.puntuacion) AS cumplimiento,
+    count(*) FILTER (WHERE c.estado IN ('en_plazo', 'consta')) AS en_plazo,
+    count(*) FILTER (WHERE c.estado = 'fuera_plazo' OR (c.estado = 'con_registros' AND c.n_fuera_plazo > 0)) AS con_retraso,
+    count(*) FILTER (WHERE c.estado = 'no_consta') AS no_consta,
+    coalesce(median(c.dias_retraso) FILTER (WHERE c.estado = 'fuera_plazo'), median(c.mediana_dias)) AS mediana_retraso,
+    100.0 * count(*) / any_value(t.n) AS cobertura,
+    CASE WHEN any_value(c.bloque) = 'pago' THEN 'No: mide si paga a tiempo, no si publica'
+         WHEN count(*) >= 0.8 * any_value(t.n) THEN 'Sí'
+         ELSE 'Todavía no (' || CAST(round(100.0 * count(*) / any_value(t.n)) AS INTEGER) || ' % medidas)' END AS en_indice
+FROM mother.transparencia_cumplimiento c
+JOIN (SELECT tipo_entidad, count(DISTINCT cod_entidad) AS n FROM mother.transparencia_cumplimiento GROUP BY 1) t USING (tipo_entidad)
+WHERE c.es_ultimo
+GROUP BY ALL
+ORDER BY c.tipo_entidad, en_indice DESC, cumplimiento
+```
+
+```sql mp_tramos
+SELECT tramo_poblacion, min(tramo_orden) AS orden,
+    count(*) FILTER (WHERE indice IS NOT NULL) AS ayuntamientos,
+    avg(indice) AS indice_medio,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct_incumplimientos
+FROM (
+    SELECT *, CASE tramo_poblacion WHEN '<1.000' THEN 1 WHEN '1.000-5.000' THEN 2 WHEN '5.000-20.000' THEN 3
+        WHEN '20.000-100.000' THEN 4 ELSE 5 END AS tramo_orden
+    FROM ${mp_entidades} WHERE tipo_entidad = 'Ayuntamiento'
+)
+GROUP BY ALL
+ORDER BY orden
+```
+
+```sql mp_provincias
+SELECT cod_prov, any_value(provincia) AS provincia,
+    count(*) AS ayuntamientos,
+    100.0 * count(*) FILTER (WHERE n_incumplimientos_destacados > 0) / count(*) AS pct_incumplimientos,
+    avg(indice) AS indice_medio
+FROM ${mp_entidades}
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_prov IS NOT NULL
+GROUP BY cod_prov
+```
+
+```sql mp_ranking
+SELECT nombre_entidad AS municipio, provincia, poblacion, indice, obligaciones_medidas, n_incumplimientos_destacados,
+    incumplimientos, familia_actual, media_tramo_espana,
+    '/eu/territorios/municipios?m=' || cod_mun AS enlace
+FROM ${mp_entidades}
+WHERE tipo_entidad = 'Ayuntamiento' AND indice IS NOT NULL
+ORDER BY indice, poblacion DESC
+```
+
+```sql mp_familia
+-- Observado frente a esperado: lo esperado de cada obligación es la media de los
+-- ayuntamientos de su mismo tramo de población y comunidad en ese mismo periodo.
+-- IC con el número de municipios distintos (un mismo ayuntamiento aporta varias obligaciones).
+WITH base AS (
+    SELECT *, avg(puntuacion) OVER (PARTITION BY obligacion, periodo, tramo_poblacion, cod_ccaa) AS esperada
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND anio >= year(current_date) - 4
+),
+por_mun AS (
+    SELECT coalesce(familia_en_plazo, 'Sin atribuir') AS familia, cod_mun,
+        avg(puntuacion - esperada) AS dif, avg(puntuacion) AS obs, avg(esperada) AS esp, count(*) AS n
+    FROM base GROUP BY ALL
+)
+SELECT familia,
+    count(*) AS municipios,
+    sum(n) AS mediciones,
+    100 * avg(obs) AS observada,
+    100 * avg(esp) AS esperada,
+    100 * avg(dif) AS diferencia,
+    100 * (avg(dif) - 1.96 * stddev_samp(dif) / sqrt(count(*))) AS ic_bajo,
+    100 * (avg(dif) + 1.96 * stddev_samp(dif) / sqrt(count(*))) AS ic_alto,
+    CASE
+        WHEN count(*) < 30 THEN 'Muestra pequeña: no concluyente'
+        WHEN avg(dif) + 1.96 * stddev_samp(dif) / sqrt(count(*)) < 0 THEN 'Por debajo de lo esperable'
+        WHEN avg(dif) - 1.96 * stddev_samp(dif) / sqrt(count(*)) > 0 THEN 'Por encima de lo esperable'
+        ELSE 'Dentro de lo esperable'
+    END AS lectura
+FROM por_mun
+GROUP BY familia
+HAVING count(*) >= 30
+ORDER BY diferencia DESC
+```
+
 # 📋 Publizitate aktiboa: argitaratzen al dute administrazioek legeak eskatzen diena?
 
-2014tik, [gardentasunari buruzko 19/2013 Legeak](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887) administrazio guztiak behartzen ditu **beren kabuz argitaratzera**, inork eskatu gabe, informazio-zerrenda bat beren gardentasun-atarian: nork agintzen duen eta zenbat kobratzen duen, zer arau prestatzen dituen, zer kontratu eta diru-laguntza ematen dituen, haren aurrekontuak eta kontuak, haren ondarea. Horri **publizitate aktiboa** deritzo. Orri honek **ebaluazio ofizialak** biltzen ditu, erakundez erakunde betetze-maila zein den adierazten dutenak.
+{#if mp_destacados.length}
+<div role="alert" class="my-6 rounded-xl border-2 border-red-600 bg-red-50 p-5 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Bidali beharrekoa egunean ageri ez duten administrazioak</p>
+    <p class="mt-2 text-red-900 dark:text-red-100">Erkidegoak, diputazioak eta 20.000 biztanle edo gehiagoko udalak, duela hiru hilabete baino gehiago epea amaitu zitzaien betebeharren bat dutenak, eta horri buruz erregistro ofizialean <b>ezer ez da ageri</b>. Guztira, tamaina guztietako {formatNumber(mp_resumen[0]?.con_incumplimientos, 0)} administrazio daude egoera horretan.</p>
+    {#each mp_destacados.slice(0, 12) as d}
+    <div class="mt-4">
+        <p class="text-xl font-extrabold leading-tight text-red-700 dark:text-red-300">{#if d.cod_mun}<a class="underline" href="/eu/territorios/municipios?m={d.cod_mun}">{d.nombre_entidad}</a>{:else}{d.nombre_entidad}{/if} <span class="whitespace-nowrap text-base font-semibold">({d.tipo_entidad}{d.provincia ? ', ' + d.provincia : ''}{d.poblacion ? ', ' + formatNumber(d.poblacion, 0) + ' bizt.' : ''})</span></p>
+        <p class="mt-1 text-red-900 dark:text-red-100">Ez da ageri: {d.incumplimientos}.</p>
+    </div>
+    {/each}
+    {#if mp_destacados.length > 12}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">Eta tamaina horretako beste {mp_destacados.length - 12}. Guztiak <a class="font-semibold underline" href="#neurketa-propioa-administrazio-guztiak">neurketa propioaren taulan</a> daude.</p>
+    {/if}
+    <p class="mt-4 text-sm text-red-800 dark:text-red-200">«Ez da ageri» esan nahi du ez dagoela iturri ofizialean azken deskargaren datan, ez dela frogatu egin ez denik. Kasu bakoitzak bere fitxara eramaten du, iturriarekin.</p>
+</div>
+{/if}
+
+2014tik, [gardentasunari buruzko 19/2013 Legeak](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887) administrazio guztiak behartzen ditu **beren kabuz argitaratzera**, inork eskatu gabe, informazio-zerrenda bat beren gardentasun-atarian: nork agintzen duen eta zenbat kobratzen duen, zer arau prestatzen dituen, zer kontratu eta diru-laguntza ematen dituen, haren aurrekontuak eta kontuak, haren ondarea. Horri **publizitate aktiboa** deritzo. Gainera, beren kontuak, aurrekontuak, kontratuak eta diru-laguntzak erregistro ofizialetara **bidali** behar dituzte, legeak finkatutako epeetan. Orri honek dauden **ebaluazio ofizialak** eta administrazio guztien **neurketa propio** bat biltzen ditu.
 
 <div class="not-prose rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4 my-4 text-sm text-gray-700 dark:text-gray-300">
 <p class="font-semibold mb-1">Erantzun laburra</p>
-<p class="mb-1">Ez dago Espainiako administrazio guztientzako ebaluazio <b>bakar eta homogeneorik</b>. Kontrol-organo bakoitzak (Gardentasun eta Gobernu Oneko Kontseiluak eta autonomia-erkidegoetako kontseiluek edo komisionatuek) <b>bere eremua</b> ebaluatzen du, bere metodo eta egutegiarekin, eta ia guztiek PDF edo Word txostenetan argitaratzen dituzte emaitzak, ez datu gisa.</p>
-<p class="mb-0">Datu ofizial berrerabilgarriekin gaur egun ikus daitezkeenak: <b>Estatuko Administrazio Orokorraren Gardentasun Ataria</b> (2021-2025), Gardentasun Kontseiluak ebaluatutako <b>zortzi autonomia-erkidego eta -hiri</b> eta <b>hamaika udal</b> (2020-2021), eta <b>Kanarietako sektore publiko osoa</b>, haren 88 udalak barne, 2016tik. Ebaluatzaile desberdinen puntuazioak <b>ez dira elkarren artean alderagarriak</b>.</p>
+<p class="mb-1">Ez dago administrazio guztientzako ebaluazio ofizial <b>bakar eta homogeneorik</b>. Kontrol-organo bakoitzak <b>bere eremua</b> ebaluatzen du, bere metodoarekin. Lauk baino ez dituzte argitaratzen erakunde bakoitzeko notak: Gardentasun eta Gobernu Oneko Kontseiluak (Estatua eta haren sektore publikoa), Kanarietako Komisionatuak, Kataluniako Síndic de Greugesek eta Murtziako Kontseiluak. Horrela, <b>Kanarietako, Kataluniako eta Murtziako udalak</b> daude estalita, eta ia beste inor ez.</p>
+<p class="mb-0">Gainerakoetara iristeko, SpainFactsek <b>bere kabuz neurtzen ditu</b> 8.100 udal baino gehiago, diputazioak eta erkidegoak. Erregistro ofizialetan egiaztatzen du betebehar bakoitza ageri den eta epean iritsi zen. Gaur, {formatNumber(mp_resumen[0]?.aytos_con_incumplimientos, 0)} udalek ({formatNumber(mp_resumen[0]?.pct_aytos_incumplimientos, 1)} %) dute duela hiru hilabete baino gehiago epea amaitu zitzaien betebeharren bat, eta horri buruz ezer ez da ageri. Ebaluatzaile desberdinen notak <b>ez dira elkarren artean alderagarriak</b>, ezta neurketa propioarekin ere.</p>
 </div>
 
 <Grid cols=4>
@@ -245,11 +379,11 @@ Informazioak **argia, egituratua, eguneratua eta berrerabilgarria** izan behar d
 
 | Kontrol-organoa | Nor ebaluatzen duen | Zer argitaratzen duen erakunde bakoitzeko | Hemen erabiltzen al da? |
 |---|---|---|---|
-| [Gardentasun eta Gobernu Oneko Kontseilua](https://consejodetransparencia.es/evaluacion) (CTBG) | EAO eta estatuko sektore publikoa, konstituzio-organoak, alderdiak, sindikatuak, diruz lagundutako erakundeak; eta hitzarmena duten autonomia-erkidego eta -hiriak (Asturias, Kantabria, Gaztela-Mantxa, Extremadura, Errioxa, Ceuta eta Melilla; Madril 2020-2021ean) eta haien udal batzuk | Derrigorrezko Informazioa Betetzeko Indizea (ICIO, 0-100 %, MESTA metodologia) erakunde bakoitzeko Word txosten batean; datu-taularik gabe | Bai: EAOren ataria, 8 erkidego eta 11 udal |
+| [Gardentasun eta Gobernu Oneko Kontseilua](https://consejodetransparencia.es/evaluacion) (CTBG) | EAO eta estatuko sektore publikoa, konstituzio-organoak, alderdiak, sindikatuak, diruz lagundutako erakundeak; eta hitzarmena duten autonomia-erkidego eta -hiriak (Asturias, Kantabria, Gaztela-Mantxa, Extremadura, Errioxa, Ceuta eta Melilla; Madril 2020-2021ean) eta haien udal batzuk | Derrigorrezko Informazioa Betetzeko Indizea (ICIO, 0-100 %, MESTA metodologia) erakunde bakoitzeko Word txosten batean; datu-taularik gabe | Bai: EAOren ataria, 8 erkidego, 11 udal eta, 2022tik, txosten bateratuetako taula (estatuko sektore publikoa, erakunde pribatuak, korporazioak) |
 | [Kanarietako Gardentasun Komisionatua](https://transparenciacanarias.org/evaluacion/puntuaciones/) | Kanarietako sektore publiko osoa (Gobernua, kabildoak, udalak, unibertsitateak eta haien erakundeak) eta diruz lagundutako erakunde pribatuak | Kanarietako Gardentasun Indizea (ITCanarias, 0-10) Excel taula batean, erakunde guztiekin 2016tik (CC BY 4.0) | Bai: sektore publikoa |
-| [Murtziako Eskualdeko Gardentasun Kontseilua](https://comisionadotransparencia.carm.es/) | Eskualdeko administrazioa, udalak eta haien sektore publikoa (egiaztatutako autoebaluazioa, MESTAn oinarritua) | PDF txosten exekutiboa, erakunde motaren araberako emaitza bateratuekin; udal bakoitzaren notak grafikoetan baino ez dira agertzen | Ez: ez dago erakundez erakundeko datu berrerabilgarririk |
-| [Kataluniako Síndic de Greuges](https://www.sindic.cat/) | Kataluniako administrazioak (19/2014 Legea) | Urteko txostena eta banakako txostenak PDFan; publizitate aktiboaren garapen-indizea (IDPAC) proba-fasean 2024tik | Ez: erakunde bakoitzeko PDF txostenak, taularik gabe |
-| Andaluzia, Aragoi, Gaztela eta Leon, Valentziako Erkidegoa, Galizia, Nafarroa, Euskadi eta beste batzuetako kontseiluak eta komisionatuak | Beren erkidegoa eta haren toki-erakundeak | Urteko memoriak, kontrol- eta ikuskapen-planak eta ebazpenak, PDFan; ez dugu aurkitu erakunde bakoitzeko argitaratutako betetze-indizerik | Ez |
+| [Murtziako Eskualdeko Gardentasun Kontseilua](https://comisionadotransparencia.carm.es/informes-de-evaluacion) | Eskualdeko administrazioa, haren 45 udalak eta haren sektore publikoa, alderdiak, sindikatuak, federazioak… | Publizitate aktiboa betetzeko indizea (ICPA, 0-10) 2020tik 2023ra, 2023ko txostenaren eranskineko taula batean (PDF). Borondatezko autoebaluazioa da, Kontseiluak egiaztatzen duena | Bai: eranskineko taula |
+| [Kataluniako Síndic de Greuges](https://www.sindic.cat/ca/page.asp?id=904) | Kataluniako 947 udalak, diputazioak, eskualde-kontseiluak, Generalitateko sailak, unibertsitateak eta kontrol-organoak | Publizitate aktiboaren garapen-indizea (IDPAC, 0-100), Síndicek berak berrikusia, datu irekietan (CSV, CC0) 2026ko ediziotik | Bai |
+| Andaluzia, Aragoi, Gaztela eta Leon, Valentziako Erkidegoa, Galizia, Madril, Nafarroa, Euskadi eta beste batzuetako kontseiluak eta komisionatuak | Beren erkidegoa eta haren toki-erakundeak | Urteko memoriak, kontrol-planak eta ebazpenak, PDFan. Ez dugu aurkitu erakunde bakoitzeko argitaratutako indizerik. Madril bere udal guztiak ebaluatzen hasi da (emaitzak 2026ko memorian aurreikusita) | Ez |
 
 Gizarte zibilaren rankingak ere badaude (Dyntra, Bartzelonako Unibertsitate Autonomoaren Infoparticipa Mapa, Transparency International Espainiaren antzinako indizeak). **Ez dira hemen erabiltzen**: ez dira iturri ofizialak, eta ez dugu egiaztatu haien lizentziak datuak berrerabiltzea ahalbidetzen duenik.
 
@@ -398,9 +532,157 @@ Gehien betetzen ez dena ez da administrazioetan, haien **menpeko erakundeetan** 
 
 </details>
 
-## Alderdika
+```sql sindic_aytos
+SELECT cod_mun, municipio, provincia, poblacion, puntuacion, familia, gobernante,
+    '/eu/territorios/municipios?m=' || cod_mun AS enlace
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Síndic de Greuges de Catalunya' AND tipo_administracion = 'Ayuntamiento'
+ORDER BY puntuacion DESC
+```
 
-Alderaketa **Kanarietako udalekin** baino ez da posible: 88 dira, guztiak ebaluatzen dira, metodo berarekin, 2016tik. Udal eta ebaluazio bakoitzerako nota **aurreikusgarria** kalkulatzen da: tamaina bereko Kanarietako udalen batez bestekoa (5.000 biztanletik behera, 5.000tik 20.000ra eta 20.000tik gora) ebaluazio berean. Ondoren, alderdi bakoitzak gobernatutakoen batez besteko nota haien nota aurreikusgarriarekin alderatzen da.
+```sql sindic_tramos
+SELECT CASE WHEN poblacion < 1000 THEN '<1.000' WHEN poblacion < 5000 THEN '1.000-5.000'
+            WHEN poblacion < 20000 THEN '5.000-20.000' WHEN poblacion < 100000 THEN '20.000-100.000' ELSE '>100.000' END AS tramo,
+    min(poblacion) AS orden, count(*) AS ayuntamientos, avg(puntuacion) AS media,
+    count(*) FILTER (WHERE puntuacion < 50) AS menos_50
+FROM ${sindic_aytos}
+GROUP BY 1 ORDER BY orden
+```
+
+```sql sindic_otros
+SELECT entidad, tipo_administracion, tipo_entidad, puntuacion
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Síndic de Greuges de Catalunya' AND tipo_administracion <> 'Ayuntamiento'
+ORDER BY tipo_administracion, puntuacion
+```
+
+```sql murcia_aytos
+SELECT cod_mun, municipio, poblacion,
+    max(puntuacion) FILTER (WHERE anio = 2020) AS n2020,
+    max(puntuacion) FILTER (WHERE anio = 2021) AS n2021,
+    max(puntuacion) FILTER (WHERE anio = 2022) AS n2022,
+    max(puntuacion) FILTER (WHERE anio = 2023) AS n2023,
+    count(*) FILTER (WHERE estado = 'no_participo') AS no_participo,
+    max(familia) FILTER (WHERE anio = 2023) AS familia
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de la Transparencia de la Región de Murcia' AND tipo_administracion = 'Ayuntamiento'
+GROUP BY ALL
+ORDER BY n2023 DESC NULLS LAST
+```
+
+```sql murcia_serie
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio,
+    count(*) FILTER (WHERE estado = 'evaluada') AS evaluados,
+    count(*) FILTER (WHERE estado = 'no_participo') AS no_participaron,
+    avg(puntuacion) AS media
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de la Transparencia de la Región de Murcia' AND tipo_administracion = 'Ayuntamiento'
+GROUP BY ALL ORDER BY anio
+```
+
+```sql spe_serie
+SELECT CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, tipo_entidad AS grupo, avg(puntuacion) AS media, count(*) AS entidades
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de Transparencia y Buen Gobierno'
+  AND tipo_administracion IN ('Sector público estatal', 'Entidades privadas')
+  AND periodo NOT LIKE '%evaluación)'
+GROUP BY ALL ORDER BY anio, grupo
+```
+
+```sql spe_ultimo
+SELECT entidad, tipo_entidad AS grupo, CAST(CAST(anio AS INTEGER) AS VARCHAR) AS anio, puntuacion AS icio
+FROM mother.transparencia_publicidad_activa
+WHERE evaluador = 'Consejo de Transparencia y Buen Gobierno'
+  AND tipo_administracion IN ('Sector público estatal', 'Entidades privadas', 'Corporaciones de derecho público')
+QUALIFY row_number() OVER (PARTITION BY entidad ORDER BY anio DESC, periodo DESC) = 1
+ORDER BY icio
+```
+
+## Katalunia: 947 udalak, Síndicek berrikusiak
+
+Síndic de Greugesek **berak** berrikusten du Kataluniako udal bakoitzaren ataria, eta emaitza datu irekietan argitaratzen du: erkidego bateko udal guztien kanpoko ebaluazio bakarra da. Publizitate aktiboaren garapen-indizeak (IDPAC, 0-100) derrigorrezko edukia (70 %) eta web-guneko kalitatea (30 %) konbinatzen ditu. 2026ko edizioa urtarriletik maiatzera egin zen.
+
+<DataTable data={sindic_tramos} rows=all>
+    <Column id=tramo title="Biztanleak" />
+    <Column id=ayuntamientos title="Udalak" fmt=num0 />
+    <Column id=media title="Batez besteko IDPAC" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+    <Column id=menos_50 title="50etik behera" fmt=num0 />
+</DataTable>
+
+<DataTable data={sindic_aytos} search=true rows=15 link=enlace showLinkCol=false>
+    <Column id=municipio title="Udalerria" />
+    <Column id=provincia title="Probintzia" />
+    <Column id=poblacion title="Biztanleak" fmt=num0 />
+    <Column id=puntuacion title="IDPAC (0-100)" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+    <Column id=familia title="Alkatearen alderdia" />
+</DataTable>
+
+<details>
+<summary>Generalitatea, diputazioak, eskualde-kontseiluak eta beste batzuk</summary>
+
+<DataTable data={sindic_otros} search=true rows=15>
+    <Column id=entidad title="Erakundea" />
+    <Column id=tipo_entidad title="Mota" />
+    <Column id=puntuacion title="IDPAC (0-100)" fmt=num1 contentType=colorscale colorMin=40 colorMax=100 />
+</DataTable>
+
+</details>
+
+## Murtziako Eskualdea
+
+Murtziako Eskualdeko Gardentasun Kontseiluak ebaluatzeko prest dagoen erakunde bakoitzaren publizitate aktiboa betetzeko indizea (ICPA) argitaratzen du. Erakundeak plataforma batean betetzen du ebaluazioa, eta Kontseiluak egiaztatzen du. **Borondatezkoa da**: parte hartu ez zuen udal bat «ez zuen parte hartu» gisa agertzen da, inoiz ez zero batekin.
+
+<BarChart
+    data={murcia_serie}
+    x=anio
+    y={['evaluados', 'no_participaron']}
+    type=stacked
+    title="Ebaluatutako eta parte hartu ez zuten Murtziako udalak"
+    sort=false
+/>
+
+<DataTable data={murcia_aytos} search=true rows=15>
+    <Column id=municipio title="Udalerria" />
+    <Column id=poblacion title="Biztanleak" fmt=num0 />
+    <Column id=n2020 title="2020" fmt=num1 />
+    <Column id=n2021 title="2021" fmt=num1 />
+    <Column id=n2022 title="2022" fmt=num1 />
+    <Column id=n2023 title="2023 (100etik)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+    <Column id=no_participo title="Parte hartu gabeko urteak" fmt=num0 />
+    <Column id=familia title="Alkatearen alderdia (2023)" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Jatorrizko nota 0-10 da, 100etik erakutsia. Gelaxka hutsa: ez zuen parte hartu edo ez zuten deitu.</p>
+
+## Estatuko sektore publikoa
+
+Urtero, Gardentasun Kontseiluak estatuko erakundeak, enpresak eta fundazioak ebaluatzen ditu, baita diru-laguntzak jasotzen dituzten erakunde pribatuak eta elkargo profesionalak bezalako korporazioak ere. Haren txosten bateratuek taula bat dakarte, bakoitzaren betetze-indizearekin (ICIO).
+
+<LineChart
+    data={spe_serie}
+    x=anio
+    y=media
+    series=grupo
+    yFmt=num1
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="Ebaluatutako erakundeen batez besteko ICIOa (%)"
+/>
+
+<p class="text-xs text-gray-500">Urtero erakunde desberdinak ebaluatzen dira (sektore publikoko 225 2025ean, 2022ko 74en aldean); beraz, batez bestekoak ez ditu beti erakunde berberak jarraitzen.</p>
+
+<DataTable data={spe_ultimo} search=true rows=15>
+    <Column id=entidad title="Erakundea" />
+    <Column id=grupo title="Taldea" />
+    <Column id=anio title="Azken ebaluazioa" />
+    <Column id=icio title="ICIO (%)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+
+## Alderdika Kanarietan
+
+Ebaluazio ofizialekin, alderaketa **Kanarietako udalekin** baino ez da posible: 88 dira, guztiak ebaluatzen dira, metodo berarekin, 2016tik. Udal eta ebaluazio bakoitzerako nota **aurreikusgarria** kalkulatzen da: tamaina bereko Kanarietako udalen batez bestekoa (5.000 biztanletik behera, 5.000tik 20.000ra eta 20.000tik gora) ebaluazio berean. Ondoren, alderdi bakoitzak gobernatutakoen batez besteko nota haien nota aurreikusgarriarekin alderatzen da.
 
 ```sql itc_familia_grafico
 SELECT familia, diferencia FROM ${itc_familia}
@@ -433,13 +715,124 @@ SELECT familia, diferencia FROM ${itc_familia}
 
 Autonomia-erkidegoetarako eta gobernu zentralerako **ez dago lagin nahikorik**: ebaluazio bakarra erkidego eta urte bakoitzeko, eta Estatuaren kasuan Gobernu bakarra ebaluatutako aldi osoan.
 
+## Neurketa propioa: administrazio guztiak
+
+Administrazio gehienak ia inork ez dituenez ebaluatzen, **guk neurtzen dugu**, metodo berarekin guztientzat. Ez dugu web-ataria begiz puntuatzen. **Data duten erregistro ofizialetan** egiaztatzen dugu legezko betebehar bakoitza ageri den eta bere epearen barruan iritsi zen. Erregistroak hauek dira: Diru-laguntzen Datu-base Nazionala, Kontratazio Plataforma, Kontuen Auzitegia eta Ogasuna. Betebehar bakoitzak 1 puntu jasotzen du garaiz ageri bada, 0,5 berandu ageri bada eta 0 epea amaituta ageri ez bada. Administrazio bakoitzaren indizea (0-100) neurtutako azken aldiaren batez bestekoa da. Adierazle bakoitzaren irizpideak, lege-oinarria eta kodea [Iturriak › SpainFactsen neurketa propioko datuak](/eu/fuentes#spainfactsen-neurketa-propioko-datuak) atalean daude.
+
+<Grid cols=4>
+    <KpiCard
+        title="Neurtutako administrazioak"
+        value={mp_resumen[0]?.entidades}
+        formattedValue={formatNumber(mp_resumen[0]?.entidades, 0)}
+        period="{formatNumber(mp_resumen[0]?.ayuntamientos, 0)} udal eta {formatNumber(mp_resumen[0]?.entidades - mp_resumen[0]?.ayuntamientos, 0)} diputazio, kabildo eta erkidego"
+        source="SpainFacts (neurketa propioa)"
+    />
+    <KpiCard
+        title="Epea amaituta zerbait ageri ez zaien udalak"
+        value={mp_resumen[0]?.pct_aytos_incumplimientos}
+        formattedValue="{formatNumber(mp_resumen[0]?.pct_aytos_incumplimientos, 1)} %"
+        period="{formatNumber(mp_resumen[0]?.aytos_con_incumplimientos, 0)} udal, epea amaitu eta 3 hilabete baino gehiagora"
+        source="SpainFacts (neurketa propioa)"
+    />
+    <KpiCard
+        title="20.000 biztanle edo gehiagokoak"
+        value={mp_resumen[0]?.grandes_con_incumplimientos}
+        formattedValue={formatNumber(mp_resumen[0]?.grandes_con_incumplimientos, 0)}
+        period="epea amaituta betebeharren bat ageri ez zaien udal handiak"
+        source="SpainFacts (neurketa propioa)"
+    />
+    <KpiCard
+        title="Udalen indize mediana"
+        value={mp_resumen[0]?.mediana_aytos}
+        formattedValue="100etik {formatNumber(mp_resumen[0]?.mediana_aytos, 1)}"
+        period="betebehar bakoitzaren azken aldiaren batez bestekoa"
+        source="SpainFacts (neurketa propioa)"
+    />
+</Grid>
+
+### Betebeharrez betebehar
+
+<DataTable data={mp_obligaciones} rows=all groupBy=tipo_entidad>
+    <Column id=tipo_entidad title="Administrazioa" />
+    <Column id=obligacion title="Betebeharra" />
+    <Column id=ultimo_periodo title="Azken aldia" />
+    <Column id=entidades title="Neurtuak" fmt=num0 />
+    <Column id=cumplimiento title="Betetzea (0-100)" fmt=num1 contentType=colorscale colorMin=50 colorMax=100 />
+    <Column id=con_retraso title="Atzerapenarekin" fmt=num0 />
+    <Column id=no_consta title="Ez da ageri" fmt=num0 />
+    <Column id=mediana_retraso title="Egunak (mediana)" fmt=num0 />
+    <Column id=en_indice title="Indizean" />
+</DataTable>
+
+<p class="text-xs text-gray-500">«Egunak (mediana)»: behin bakarrik egin beharreko betebeharretan, berandu iritsi zirenen atzerapena; kontratuetan eta diru-laguntzetan, administrazio tipikoak argitaratzeko edo erregistratzeko behar duena. Administrazio bakoitzaren epea amaituta duen azken aldia zenbatzen da. Iturriak neurtzen ez dituen administrazioak (adibidez, foru-bidetik bidaltzen dutenak) ez dira zenbatzen. Betebehar bat indizean eta ez-betetzeen zerrendan sartzen da bere motako administrazioen 80 % gutxienez neurtzen duenean; ordura arte, Kontuen Auzitegiaren probintziaz probintziako arakatzea bezala, hemen eta fitxa bakoitzean baino ez da ikusten.</p>
+
+### Tamainaren eta probintziaren arabera
+
+Udal txikiek huts egiten dute gehien: askok ez dute idazkaririk ere lanaldi osoan. Horregatik, udal bakoitza bere tamainakoekin alderatzen da beti.
+
+<DataTable data={mp_tramos} rows=all>
+    <Column id=tramo_poblacion title="Biztanleak" />
+    <Column id=ayuntamientos title="Udalak" fmt=num0 />
+    <Column id=indice_medio title="Batez besteko indizea" fmt=num1 contentType=colorscale colorMin=70 colorMax=100 />
+    <Column id=pct_incumplimientos title="Epea amaituta zerbait ageri ez zaienak (%)" fmt=num1 />
+</DataTable>
+
+<MapaEspana
+    data={mp_provincias}
+    geoJsonUrl="/geo/provincias.geojson"
+    geoId="cod_prov"
+    areaCol="cod_prov"
+    value="pct_incumplimientos"
+    valueFmt="num1"
+    colorPalette={['#f0fdf4', '#fde68a', '#b91c1c']}
+    height={420}
+    tooltip={[
+        {id: 'provincia', showColumnName: false, valueClass: 'text-base font-semibold'},
+        {id: 'pct_incumplimientos', title: 'Epea amaituta zerbait ageri ez zaien udalak (%)', fmt: 'num1'},
+        {id: 'indice_medio', title: 'Batez besteko indizea', fmt: 'num1'},
+        {id: 'ayuntamientos', title: 'Udalak', fmt: 'num0'}
+    ]}
+/>
+
+### Udal guztiak
+
+Indize txikienetik handienera ordenatuta. Bilatu zurea edo ireki haren fitxa betebehar bakoitza ikusteko, bere epea, data eta orduan nork gobernatzen zuen.
+
+<DataTable data={mp_ranking} search=true rows=20 link=enlace showLinkCol=false>
+    <Column id=municipio title="Udalerria" />
+    <Column id=provincia title="Probintzia" />
+    <Column id=poblacion title="Biztanleak" fmt=num0 />
+    <Column id=indice title="Indizea (0-100)" fmt=num1 contentType=colorscale colorMin=50 colorMax=100 />
+    <Column id=media_tramo_espana title="Bere tamainakoen batez bestekoa" fmt=num1 />
+    <Column id=n_incumplimientos_destacados title="Epea amaituta, ageri ez" fmt=num0 />
+    <Column id=incumplimientos title="Zer ez den ageri" />
+    <Column id=familia_actual title="Alkatearen alderdia gaur" />
+</DataTable>
+
+### Alderdika
+
+Udal, betebehar eta aldi bakoitzerako **aurreikusgarria** kalkulatzen da: tamaina eta erkidego bereko udalen batez bestekoa aldi horretan. Ondoren, alderdi bakoitzak **epearen egunean** gobernatutakoen nota aurreikusgarriarekin alderatzen da. Azken bost urteak erabiltzen dira.
+
+<DataTable data={mp_familia} rows=all>
+    <Column id=familia title="Alkatearen alderdia epearen egunean" />
+    <Column id=municipios title="Udalerriak" fmt=num0 />
+    <Column id=observada title="Batez besteko nota" fmt=num1 />
+    <Column id=esperada title="Aurreikusgarria" fmt=num1 />
+    <Column id=diferencia title="Aldea" fmt=num2 contentType=delta />
+    <Column id=ic_bajo title="KT 95 % (min.)" fmt=num2 />
+    <Column id=ic_alto title="KT 95 % (max.)" fmt=num2 />
+    <Column id=lectura title="Irakurketa" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Gutxienez 30 udalerri dituzten alderdiak baino ez. Udalerri bat behin zenbatzen da alderdi bakoitzeko, nahiz eta zenbait betebehar eman, eta tartea udalerrien kopuruarekin kalkulatzen da. Alderdien arteko alde batek ez du frogatzen alderdiaren ondorio denik: plantillak, idazkari-kontu-hartzaileak, diputazioaren baliabideek eta gobernatzen duen pertsonak ere eragiten dute.</p>
+
 ## Zer falta den
 
-- **Ez dago Espainia osorako ebaluazio homogeneorik.** Kontrol-organo bakoitzak bere eremua ebaluatzen du bere metodoarekin: Kanarietako udal baten nota (ITCanarias) eta Kantabriako batena (CTBGren ICIO) ezin dira alderatu.
-- **Autonomia-erkidegoetako organo gehienek ez dute erakunde bakoitzeko notarik argitaratzen datu irekietan.** Murtziak, Kataluniak, Andaluziak, Gaztela eta Leonek eta beste batzuek memoriak eta txostenak argitaratzen dituzte PDFan, batzuetan notak grafikoetan soilik. Horietakoren batek erakunde bakoitzeko emaitzak formatu berrerabilgarrian argitaratzen baditu, hona ekarriko dira.
-- **Espainiako 8.100 udal baino gehiago ez dira sistematikoki ebaluatzen**, Kanarietan izan ezik. CTBGk 11 ebaluatu zituen 2020-2021ean.
-- **Estatuko sektore publikoak** (erakundeak, enpresak eta fundazioak) badu erakunde bakoitzeko nota CTBGren txostenetan, baina banakako dokumentuetan. 2025ean CTBGk horietako 225 erakunde ebaluatu zituen, eta batez besteko ICIOa 38,9 % baino ez zen izan ([CTBGren oharra](https://consejodetransparencia.es/comunicacion/noticias/hemeroteca/2025/20251114)). Hori da hurrengo zabalkuntza bideragarria.
-- Ebaluazioek neurtzen dute **informazioa argitaratuta dagoen eta nola**, ez ea egiazkoa edo edukiz osoa den.
+- **Ez dago Espainia osorako ebaluazio ofizial homogeneorik.** Kontrol-organo bakoitzak bere eremua ebaluatzen du bere metodoarekin: Kanarietako udal baten nota (ITCanarias), Kataluniako batena (IDPAC) eta Murtziako batena (ICPA) ezin dira elkarren artean alderatu.
+- **Neurketa propioak erregistro ofizialetara bidaltzen dena neurtzen du, ez gardentasun-ataria bera.** Kontu orokorra edo kontratuak ageri izateak ez du bermatzen atariak organigrama edo ordainsariak argitaratzen dituenik. Horretarako, atariak berrikusten dituen robot bat prestatzen ari gara, eskuz berrikusitako lagin batekin haren errorea neurtzeko. Haren emaitzak errore hori neurtuta dagoenean argitaratuko dira.
+- **Kontratazioa Katalunian, Euskadin eta Nafarroan.** Haien administrazioek beren plataforman argitaratzen dute, ez Estatukoan; estalita ez dagoenean, ez dira adierazle horretan zenbatzen.
+- **Andaluziak, Gaztela eta Leonek, Aragoik, Valentziako Erkidegoak, Galiziak, Nafarroak edo Euskadik** ez dute erakunde bakoitzeko notarik argitaratzen. Madril bere udal guztiak ebaluatzen hasi da. Datuak daudenean bertan sartuko dira.
+- Ez ebaluazioek ez neurketa propioak ez dute esaten **informazioa egiazkoa edo osoa den**: argitaratuta edo bidalita dagoen eta noiz, besterik ez.
 
 ---
 
@@ -447,6 +840,10 @@ Autonomia-erkidegoetarako eta gobernu zentralerako **ez dago lagin nahikorik**: 
 
 - **[Gardentasun eta Gobernu Oneko Kontseilua – Ebaluazioa](https://consejodetransparencia.es/evaluacion)**: [MESTA metodologiaren](https://consejodetransparencia.es/content/dam/ctransparencia/portal-ctbg/publicaciones/documentacion/metodologia/MESTA-informefinal.pdf) Derrigorrezko Informazioa Betetzeko Indizea (ICIO), **behin betiko txosten** bakoitzaren testutik irakurria (.docx): EAOren Gardentasun Ataria (2021-2025), hitzarmena duten autonomia-erkidego eta -hiriak (2020ko ebaluazioa eta 2021eko berrikuspena) eta haien ebaluatutako udalak. CTBGk zuzenean berrikusten du atari bakoitza, eta betebehar bakoitzerako puntuatzen du edukia argitaratzen den eta haren kalitate-atributuak (forma, eguneratzea, irisgarritasuna, berrerabilpena). Datuen jatorria: Gardentasun eta Gobernu Oneko Kontseilua (37/2007 Legearen araberako berrerabilpena).
 - **[Kanarietako Gardentasun Komisionatua – Puntuazioak](https://transparenciacanarias.org/evaluacion/puntuaciones/)**: Kanarietako Gardentasun Indizeko sektore publikoaren puntuazioen taula nagusia (XLSX, [CC BY 4.0](https://transparenciacanarias.org/datos/)), 2016ko ebaluaziotik. Derrigorrezko informazioaren betetzea, web-euskarriaren kalitatea eta borondatezko gardentasuna konbinatzen ditu ([metodologia](https://transparenciacanarias.org/evaluacion/sector-publico/metodologia/)). Erakundeak galdetegi bat betetzen du, eta Komisionatuak egiaztatzen du. 100etik erakusten da (nota bider 10) ICIOaren ondoan marrazteko soilik; **bi eskalak ez dira baliokideak**.
+- **[Kataluniako Síndic de Greuges – IDPAC](https://www.sindic.cat/ca/page.asp?id=904)**: [CSVa datu irekietan](https://dadesobertes.seu-e.cat/dataset/5f8e4974-9cb0-4483-b7e7-ec844500b6c3) (CC0), 2026ko edizioa. Síndicek atari bakoitza berrikusten du; IDPACek (0-100) derrigorrezko edukia (70 %) eta web-gunea (30 %) haztatzen ditu ([gida metodologikoa](https://www.sindic.cat/site/files/informe_transparencia/guia_metodologica_municipis_no_rurals_2026.pdf)). Udalerriak INErekin lotzen dira izenaren eta probintziaren bidez.
+- **[Murtziako Eskualdeko Gardentasun Kontseilua – Ebaluazio-txostenak](https://comisionadotransparencia.carm.es/informes-de-evaluacion)**: 2023ko txostenaren I. eranskina (PDF), ICPA 0-10 2020tik 2023ra = 70 % ICIO (MESTA) + 30 % web-euskarria. Kontseiluak egiaztatutako borondatezko autoebaluazioa; «ez zuen parte hartu» ez da zero gisa zenbatzen. 100etik erakusten da.
+- **[CTBG – Ebaluazio-txosten bateratuak](https://consejodetransparencia.es/evaluacion)** (2022-2026): eranskineko taula, estatuko sektore publiko instituzionaleko erakunde bakoitzaren, diruz lagundutako erakunde pribatuen, zuzenbide publikoko korporazioen eta konstituzio-organoen ICIOarekin. Txosten bateratuak hamarrenera biribiltzen du.
+- **Neurketa propioa (SpainFacts)**: legezko epea duten bidalketa-betebeharrak, erregistro ofizialetan egiaztatuak; adierazle bakoitzaren irizpideak, lege-oinarria eta kodea [Iturriak › SpainFactsen neurketa propioko datuak](/eu/fuentes#spainfactsen-neurketa-propioko-datuak) atalean. Epearen egunean kargudun zegoen gobernuari egozten zaio.
 - **Udalerriak**: Komisionatuaren izenak INEren kodearekin lotzen dira izenaren bidez (sei, forma desberdina dutenak, eskuz). Ebaluatutako urteko INEren erroldako biztanleria.
 - **Alderdiei egoztea**: udaletan, ebaluatutako aldiaren amaieran kargudun zegoen alkatea, [Lurralde Politikako Ministerioaren alkateen erregistroaren](https://concejales.redsara.es/consulta/) arabera («2022/23» ebaluaziorako, 2023ko ekainaren 1a, maiatzeko hauteskundeetatik sortutako korporazioen aurretik); erkidegoetan eta Estatuan, ebaluatutako urteko abenduaren 31n (ITCanarias) edo ebaluazio-urteko ekainaren 30ean (CTBG) kargudun zegoen presidentea. Alderdiak familia politikotan biltzen dira.
 - **Lege-betebeharrak**: [gardentasunari, informazio publikoa eskuratzeari eta gobernu onari buruzko 19/2013 Legearen](https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887) 5.etik 9.era bitarteko artikuluak; Kanarietan, [gardentasunari eta informazio publikoa eskuratzeari buruzko 12/2014 Legea](https://www.boe.es/buscar/act.php?id=BOE-A-2015-1114).

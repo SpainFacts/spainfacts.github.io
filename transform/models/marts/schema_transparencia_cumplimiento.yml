@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: pa_ind_existentes
+    description: >
+      Indicadores de remisión que ya medía SpainFacts (liquidación en CONPREL, presupuesto y
+      líneas fundamentales por la retención de la PIE, comunicación trimestral del PMP y
+      obligaciones ante el Tribunal de Cuentas) en el formato común pa_ind_* del índice
+      propio de publicidad activa. Solo ayuntamientos.
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: obligacion
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['en_plazo', 'fuera_plazo', 'consta', 'no_consta', 'no_vencido', 'no_aplica', 'con_registros', 'sin_registros']
+
+  - name: transparencia_cumplimiento
+    description: >
+      Índice propio de publicidad activa y remisión de información (elaboración propia de
+      SpainFacts): una fila por entidad (ayuntamiento, diputación, cabildo o consell,
+      comunidad autónoma), obligación y periodo, con su estado frente al plazo legal, la
+      puntuación 0-1 y el gobierno en funciones el día del plazo. Criterios en
+      docs/elaboracion-propia/.
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['en_plazo', 'fuera_plazo', 'consta', 'no_consta', 'no_vencido', 'no_aplica', 'con_registros', 'sin_registros']
+
+  - name: transparencia_cumplimiento_entidad
+    description: >
+      Resumen por entidad del índice propio de publicidad activa: índice 0-100 (media del
+      último periodo medido de cada obligación; solo con 3 o más obligaciones), número de
+      incumplimientos destacados (no consta nada más de 3 meses después del plazo), su lista,
+      y la comparación con las entidades del mismo tipo y tramo de población.
+    columns:
+      - name: clave
+        tests: [unique, not_null]

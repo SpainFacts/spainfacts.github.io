@@ -3,7 +3,7 @@ description: "Catalogue of the official sources used by SpainFacts (INE, Eurosta
 title: Source Traceability and Audit
 og:
   image: https://spainfacts.org/og-spainfacts.png
-i18n_origen: bc32e4e4d483
+i18n_origen: a1d2b13b67a4
 ---
 
 <script>
@@ -91,6 +91,48 @@ uv run dagster asset materialize -m orchestration.definitions --select "*"
 ```
 
 The full guide, including running the site locally, is in [docs/desarrollo-local.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/desarrollo-local.md), and how to add a new source is explained in [docs/GUIA_INGESTA_Y_METRICAS.md](https://github.com/SpainFacts/spainfacts.github.io/blob/main/docs/GUIA_INGESTA_Y_METRICAS.md).
+
+```sql propia
+SELECT *,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || codigo_ingesta AS url_ingesta,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || modelo AS url_modelo,
+    'https://github.com/SpainFacts/spainfacts.github.io/blob/main/' || criterios AS url_criterios
+FROM mother.elaboracion_propia_indicadores
+ORDER BY bloque, nombre
+```
+
+## Data from SpainFacts' own measurement
+
+Some data are not published by anyone, so **we measure them ourselves**. The main one is the [proactive disclosure index](/en/transparencia/publicidad-activa#own-measurement-all-administrations). Almost no oversight body says, entity by entity, whether each municipal council, provincial council or autonomous community publishes and submits on time what the law requires of it. So we check it in the official registers that carry a date: Ministry of Finance, Court of Audit (Tribunal de Cuentas), National Grants Database (BDNS), Public Sector Procurement Platform…
+
+A measurement of our own has to be even more auditable than an official figure. That is why each indicator publishes its legal basis, its deadline, how it is calculated, what is excluded and why, and links to its code:
+
+- **Official registers only.** If something is not on record in the register, we say «not on record in [source]», never «has not done it»: it may have been submitted through another channel.
+- **All entities.** Anyone who does not appear in the source counts as «not on record», unless the source does not measure them. For example, the foral territories that submit through their own channel do not count as non-compliant.
+- **Attribution to the government in office on the day of the deadline**, not the current one.
+- **Comparison with those of the same size**, in Spain and in their province.
+- **Errors**: if you see one, [open an issue](https://github.com/SpainFacts/spainfacts.github.io/issues) with the link to the source. We correct it and record the change.
+
+The full method is in [docs/elaboracion-propia](https://github.com/SpainFacts/spainfacts.github.io/tree/main/docs/elaboracion-propia).
+
+{#each [...new Set(propia.map(d => d.bloque))] as bloque}
+<h3 class="mt-6 mb-2 text-lg font-semibold">{bloque}</h3>
+{#each propia.filter(d => d.bloque === bloque) as d}
+<details class="my-2 rounded-lg border border-gray-200 dark:border-gray-800 p-3 text-sm">
+<summary class="cursor-pointer font-semibold">{d.nombre} <span class="font-normal text-gray-500">· {d.tipos_entidad}{d.en_indice ? '' : ' · for information only, not in the index'}</span></summary>
+<dl class="mt-2 grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-3 gap-y-1">
+<dt class="text-gray-500">What it measures</dt><dd>{d.que_mide}</dd>
+<dt class="text-gray-500">Legal basis</dt><dd>{d.base_legal}</dd>
+<dt class="text-gray-500">Deadline</dt><dd>{d.plazo}</dd>
+<dt class="text-gray-500">Calculation</dt><dd>{d.calculo}</dd>
+<dt class="text-gray-500">Exclusions</dt><dd>{d.exclusiones}</dd>
+<dt class="text-gray-500">Official source</dt><dd><a href={d.url_fuente} target="_blank" rel="noopener">{d.fuente_oficial} ↗</a></dd>
+<dt class="text-gray-500">Code</dt><dd><a href={d.url_ingesta} target="_blank" rel="noopener">ingestion</a> · <a href={d.url_modelo} target="_blank" rel="noopener">calculation</a> · <a href={d.url_criterios} target="_blank" rel="noopener">criteria</a></dd>
+</dl>
+</details>
+{/each}
+{/each}
+
 
 ## Source catalogue
 

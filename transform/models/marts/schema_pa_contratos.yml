@@ -1,0 +1,92 @@
+version: 2
+
+# Índice propio de publicidad activa, bloque de contratación (ingestion/pa_contratos.py).
+# Contrato común de columnas pa_ind_*; criterios en docs/elaboracion-propia/contratos.md.
+models:
+  - name: pa_ind_contratos_adjudicacion
+    description: "Anuncios de adjudicación publicados en el perfil del contratante en 15 días (art. 151.1 LCSP), por entidad y año de adjudicación. PLACSP (perfiles; la agregación no trae fecha de adjudicación) y PSCP en Cataluña."
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: obligacion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['contratos_adjudicacion']
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['con_registros', 'sin_registros', 'no_vencido', 'no_aplica']
+      - name: aplica_indicador
+        tests: [not_null]
+  - name: pa_ind_contratos_formalizacion
+    description: "Anuncios de formalización publicados en el perfil del contratante en 15 días (art. 154.1 LCSP), por entidad y año de formalización. PLACSP (perfiles y plataformas agregadas) y PSCP en Cataluña."
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: obligacion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['contratos_formalizacion']
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['con_registros', 'sin_registros', 'no_vencido', 'no_aplica']
+      - name: aplica_indicador
+        tests: [not_null]
+  - name: pa_ind_contratos_menores
+    description: "Contratos menores publicados a más tardar el último día del mes siguiente al trimestre de adjudicación (art. 63.4 LCSP, plazo por analogía con el art. 154.4), por entidad y año. PLACSP (menores de los perfiles alojados) y PSCP en Cataluña. sin_registros no es por sí incumplimiento."
+    columns:
+      - name: clave
+        tests: [unique, not_null]
+      - name: obligacion
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['contratos_menores']
+      - name: tipo_entidad
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ayuntamiento', 'Diputación provincial', 'Cabildo o consell insular', 'Comunidad autónoma']
+      - name: cod_entidad
+        tests: [not_null]
+      - name: periodo
+        tests: [not_null]
+      - name: estado
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['con_registros', 'sin_registros', 'no_vencido', 'no_aplica']
+      - name: aplica_indicador
+        tests: [not_null]

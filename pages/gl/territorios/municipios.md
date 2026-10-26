@@ -1,7 +1,7 @@
 ---
 title: Municipios
 description: "Busca calquera municipio de España: poboación, contas do concello e comparación con municipios do seu tamaño."
-i18n_origen: 4241525082ff
+i18n_origen: 7ba463802b8c
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -467,6 +467,137 @@ SELECT
 FROM mother.mercado_paro_municipios
 WHERE cod_municipio = '${inputs.municipio}'
 ```
+
+```sql tr_ent
+SELECT * FROM mother.transparencia_cumplimiento_entidad
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}'
+```
+
+```sql tr_obl
+SELECT obligacion_nombre AS obligacion, periodo, strftime(fecha_plazo, '%d/%m/%Y') AS plazo, estado,
+    CASE estado
+        WHEN 'en_plazo' THEN '✅ En plazo'
+        WHEN 'consta' THEN '✅ Consta'
+        WHEN 'fuera_plazo' THEN '🟠 Fuera de plazo'
+        WHEN 'no_consta' THEN '🔴 No consta'
+        WHEN 'con_registros' THEN CASE WHEN n_fuera_plazo = 0 THEN '✅ Todo en plazo'
+            ELSE '🟠 ' || n_fuera_plazo || ' de ' || n_total || ' fuera de plazo' END
+        WHEN 'sin_registros' THEN '⚪ Sin registros'
+        ELSE estado END AS situacion,
+    dias_retraso, mediana_dias, gobernante_en_plazo, familia_en_plazo, url_fuente,
+    100 * puntuacion AS nota
+FROM mother.transparencia_cumplimiento
+WHERE tipo_entidad = 'Ayuntamiento' AND cod_mun = '${inputs.municipio}' AND es_ultimo
+ORDER BY puntuacion, fecha_plazo DESC
+```
+
+```sql tr_serie
+-- Nota media por año del ayuntamiento frente a la de los de su tramo de población
+WITH t AS (
+    SELECT cod_mun, anio, tramo_poblacion, puntuacion
+    FROM mother.transparencia_cumplimiento
+    WHERE tipo_entidad = 'Ayuntamiento' AND puntuacion IS NOT NULL AND vencido IS DISTINCT FROM false
+),
+propio AS (
+    SELECT anio, avg(puntuacion) AS nota, any_value(tramo_poblacion) AS tramo FROM t WHERE cod_mun = '${inputs.municipio}' GROUP BY anio
+)
+SELECT CAST(CAST(p.anio AS INTEGER) AS VARCHAR) AS anio, 'Este ayuntamiento' AS serie, 100 * p.nota AS nota FROM propio p
+UNION ALL
+SELECT CAST(CAST(t.anio AS INTEGER) AS VARCHAR), 'Media de su tamaño', 100 * avg(t.puntuacion)
+FROM t JOIN propio p ON p.anio = t.anio AND p.tramo = t.tramo_poblacion
+GROUP BY t.anio
+ORDER BY 1, 2
+```
+
+```sql tr_eval
+SELECT evaluador, indice, periodo, puntuacion, escala_original, puntuacion_original, estado, url_pagina
+FROM mother.transparencia_publicidad_activa
+WHERE cod_mun = '${inputs.municipio}' AND tipo_administracion = 'Ayuntamiento'
+QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) = 1
+```
+
+{#if tr_obl.length > 0}
+
+## Transparencia
+
+{#if tr_ent[0]?.n_incumplimientos_destacados > 0}
+<div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
+    <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Non consta no rexistro oficial</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-sm text-red-900 dark:text-red-100">O prazo legal venceu hai máis de tres meses e non figura na fonte oficial á data da última descarga. Pode terse remitido por outra canle: cada fila da táboa enlaza á súa fonte.</p>
+</div>
+{/if}
+
+Remite este concello a tempo o que lle obriga a lei? É unha **medición propia** de SpainFacts con rexistros oficiais que levan data. Facenda, o Tribunal de Contas, a Base de Datos Nacional de Subvencións e a Plataforma de Contratación din se cada obriga consta e cando chegou fronte ao seu prazo ([criterios e código](/gl/fuentes#datos-de-elaboración-propia)). Compárase cos concellos do seu tamaño ({tr_ent[0]?.tramo_poblacion} habitantes).
+
+<Grid cols=3>
+    <KpiCard
+        title="Índice de cumprimento"
+        value={tr_ent[0]?.indice}
+        formattedValue={tr_ent[0]?.indice == null ? 'Sen índice' : formatNumber(tr_ent[0]?.indice, 1) + ' de 100'}
+        period="Media do seu tamaño en España: {formatNumber(tr_ent[0]?.media_tramo_espana, 1)} · na súa provincia: {formatNumber(tr_ent[0]?.media_tramo_provincia, 1)}"
+        source="SpainFacts (elaboración propia)"
+        sparklineData={tr_serie.filter(d => d.serie === 'Este ayuntamiento').map(d => ({...d, y: d.nota}))}
+    />
+    <KpiCard
+        title="Obrigas vencidas que non constan"
+        value={tr_ent[0]?.n_incumplimientos_destacados}
+        formattedValue={formatNumber(tr_ent[0]?.n_incumplimientos_destacados ?? 0, 0)}
+        period="de {formatNumber(tr_ent[0]?.obligaciones_medidas, 0)} medidas, máis de 3 meses despois do prazo"
+        source="SpainFacts (elaboración propia)"
+    />
+    <KpiCard
+        title="Posto entre os concellos"
+        value={tr_ent[0]?.puesto}
+        formattedValue={tr_ent[0]?.puesto == null ? '—' : formatNumber(tr_ent[0]?.puesto, 0) + '.º'}
+        period="de {formatNumber(tr_ent[0]?.total_tipo, 0)} con índice (1.º = o que mellor cumpre; empatan moitos)"
+        source="SpainFacts (elaboración propia)"
+    />
+</Grid>
+
+<DataTable data={tr_obl} rows=all link=url_fuente showLinkCol=false>
+    <Column id=obligacion title="Obriga" />
+    <Column id=periodo title="Período" />
+    <Column id=plazo title="Prazo" />
+    <Column id=situacion title="Situación" />
+    <Column id=dias_retraso title="Días de atraso" fmt=num0 />
+    <Column id=mediana_dias title="Días que tarda (mediana)" fmt=num0 />
+    <Column id=gobernante_en_plazo title="Alcalde o día do prazo" />
+    <Column id=familia_en_plazo title="Partido" />
+</DataTable>
+
+<p class="text-xs text-gray-500">Móstrase o último período con prazo vencido de cada obriga. «Sen rexistros» non é un incumprimento: pode que non conceda subvencións ou que contrate por el a deputación. Fai clic nunha fila para ir á fonte oficial.</p>
+
+{#if tr_serie.length > 2}
+<LineChart
+    data={tr_serie}
+    x=anio
+    y=nota
+    series=serie
+    yFmt=num0
+    yMin=0
+    yMax=100
+    markers=true
+    sort=false
+    title="Cumprimento por ano (0-100)"
+/>
+{/if}
+
+{#if tr_eval.length > 0}
+
+Ademais, este concello ten unha **avaliación oficial** do seu portal de transparencia (con outro método, non comparable coa medición propia):
+
+<DataTable data={tr_eval} rows=all link=url_pagina showLinkCol=false>
+    <Column id=evaluador title="Avaliador" />
+    <Column id=indice title="Índice" />
+    <Column id=periodo title="Avaliación" />
+    <Column id=puntuacion title="Nota (sobre 100)" fmt=num1 contentType=colorscale colorMin=0 colorMax=100 />
+</DataTable>
+{/if}
+
+Todos os concellos, o método e a comparación por partido están en [Publicidade activa](/gl/transparencia/publicidad-activa#medición-propia-todas-as-administracións).
+
+{/if}
 
 {#if renta_mun.length > 0 || paro_mun.length > 0}
 
