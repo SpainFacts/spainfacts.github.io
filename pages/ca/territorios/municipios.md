@@ -1,7 +1,7 @@
 ---
 title: Municipis
 description: "Cerca qualsevol municipi d'Espanya: població, comptes de l'ajuntament i comparació amb municipis de la seva mida."
-i18n_origen: 7ba463802b8c
+i18n_origen: 7105d542a4b5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -281,12 +281,12 @@ ORDER BY fecha
 {#if cuentas_ultimo[0].anio < cuentas_serie.filter(r => !r.provisional).slice(-1)[0]?.anio}
 
 <div class="not-prose rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-700 p-3 my-3 text-sm text-amber-900 dark:text-amber-200">
-L'última dada disponible és del <b>{cuentas_ultimo[0].anio}</b>: des d'aleshores aquest ajuntament no ha tramès a Hisenda la liquidació dels seus pressupostos, de manera que les xifres poden estar molt desactualitzades.
+L'última dada disponible és del <b>{cuentas_ultimo[0]?.anio ?? '…'}</b>: des d'aleshores aquest ajuntament no ha tramès a Hisenda la liquidació dels seus pressupostos, de manera que les xifres poden estar molt desactualitzades.
 </div>
 
 {/if}
 
-Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gastat, no el que s'havia pressupostat). Perquè la comparació sigui justa, es compara amb la **mediana dels municipis del mateix tram de població** ({cuentas_ultimo[0].tramo} habitants). Els imports són **per habitant** i **descomptada la inflació**, en euros de {base[0]?.anio_base}.
+Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gastat, no el que s'havia pressupostat). Perquè la comparació sigui justa, es compara amb la **mediana dels municipis del mateix tram de població** ({cuentas_ultimo[0]?.tramo ?? '…'} habitants). Els imports són **per habitant** i **descomptada la inflació**, en euros de {base[0]?.anio_base ?? '…'}.
 
 <Grid cols=3>
     <KpiCard
@@ -294,7 +294,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
         value={cuentas_ultimo[0]?.gasto_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab_real, 0)}
         unit="€"
-        period="Mediana del seu tram: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} € · {cuentas_ultimo[0]?.anio}{cuentas_ultimo[0]?.provisional ? ' (avançament)' : ''}, en euros de {base[0]?.anio_base}"
+        period="Mediana del seu tram: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} € · {cuentas_ultimo[0]?.anio ?? '…'}{cuentas_ultimo[0]?.provisional ? ' (avançament)' : ''}, en euros de {base[0]?.anio_base ?? '…'}"
         source="Ministeri d'Hisenda"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.gasto_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.gasto_hab_real}))}
     />
@@ -303,7 +303,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
         value={cuentas_ultimo[0]?.ingreso_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.ingreso_hab_real, 0)}
         unit="€"
-        period="Mediana del seu tram: {formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo_real, 0)} € · en euros de {base[0]?.anio_base}"
+        period="Mediana del seu tram: {formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo_real, 0)} € · en euros de {base[0]?.anio_base ?? '…'}"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.ingreso_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.ingreso_hab_real}))}
     />
     <KpiCard
@@ -311,7 +311,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
         value={cuentas_ultimo[0]?.saldo_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.saldo_hab_real, 0)}
         unit="€"
-        period="Ingressos − despeses dels capítols 1 a 7, en euros de {base[0]?.anio_base} · total: {formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)} € corrents"
+        period="Ingressos − despeses dels capítols 1 a 7, en euros de {base[0]?.anio_base ?? '…'} · total: {formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)} € corrents"
         direction="positive-up"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.saldo_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.saldo_hab_real}))}
     />
@@ -325,7 +325,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
         value={personal_ayto[0]?.por_habitante}
         formattedValue={formatNumber(personal_ayto[0]?.por_habitante, 0)}
         unit="€"
-        period="Mediana del seu tram: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio}, en euros de {base[0]?.anio_base}"
+        period="Mediana del seu tram: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio ?? '…'}, en euros de {base[0]?.anio_base ?? '…'}"
         source="Ministeri d'Hisenda (capítol 1)"
         href="/ca/cuentas-publicas/empleo-publico"
     />
@@ -346,7 +346,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
     series=serie
     yFmt=num0
     yAxisTitle="€ per habitant"
-    title="Despesa per habitant (euros de {base[0]?.anio_base}, descomptada la inflació)"
+    title="Despesa per habitant (euros de {base[0]?.anio_base ?? '…'}, descomptada la inflació)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -360,7 +360,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
     type=grouped
     swapXY=true
     yFmt=num0
-    title="Despesa per habitant segons l'àrea, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio} (euros de {base[0]?.anio_base})"
+    title="Despesa per habitant segons l'àrea, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio ?? '…'} (euros de {base[0]?.anio_base ?? '…'})"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -368,11 +368,11 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
 
 {#if politicas_mun.length > 0}
 
-<Details title="Despesa per polítiques ({politicas_mun[0].anio})">
+<Details title="Despesa per polítiques ({politicas_mun[0]?.anio ?? '…'})">
 
 <DataTable data={politicas_mun} rows=all>
     <Column id=politica title="Política de despesa" />
-    <Column id=por_habitante title="€/habitant (euros de {base[0]?.anio_base})" fmt=num0 />
+    <Column id=por_habitante title="€/habitant (euros de {base[0]?.anio_base ?? '…'})" fmt=num0 />
     <Column id=mediana_tramo title="Mediana del tram (€/hab.)" fmt=num0 />
     <Column id=dif_pct title="Diferència (%)" fmt=num0 contentType=delta />
     <Column id=peso title="Pes" fmt=pct1 contentType=bar barColor="#99f6e4" />
@@ -391,7 +391,7 @@ Liquidació del pressupost de l'ajuntament (el que realment s'ha ingressat i gas
     y=deuda_eur_hab_real
     yFmt=num0
     yAxisTitle="€ per habitant"
-    title="Deute de l'ajuntament per habitant (euros de {base[0]?.anio_base}, Banc d'Espanya)"
+    title="Deute de l'ajuntament per habitant (euros de {base[0]?.anio_base ?? '…'}, Banc d'Espanya)"
     lineColor="#b45309"
 />
 
@@ -523,12 +523,12 @@ QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) =
 {#if tr_ent[0]?.n_incumplimientos_destacados > 0}
 <div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
     <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ No consta al registre oficial</p>
-    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0]?.incumplimientos ?? '…'}</p>
     <p class="mt-1 text-sm text-red-900 dark:text-red-100">El termini legal va vèncer fa més de tres mesos i no figura a la font oficial en la data de l'última descàrrega. Pot haver-se tramès per una altra via: cada fila de la taula enllaça a la seva font.</p>
 </div>
 {/if}
 
-Tramet aquest ajuntament a temps el que li obliga la llei? És una **mesura pròpia** de SpainFacts amb registres oficials que porten data. Hisenda, el Tribunal de Comptes, la Base de Dades Nacional de Subvencions i la Plataforma de Contractació diuen si cada obligació consta i quan va arribar respecte al seu termini ([criteris i codi](/ca/fuentes#dades-delaboració-pròpia)). Es compara amb els ajuntaments de la seva mida ({tr_ent[0]?.tramo_poblacion} habitants).
+Tramet aquest ajuntament a temps el que li obliga la llei? És una **mesura pròpia** de SpainFacts amb registres oficials que porten data. Hisenda, el Tribunal de Comptes, la Base de Dades Nacional de Subvencions i la Plataforma de Contractació diuen si cada obligació consta i quan va arribar respecte al seu termini ([criteris i codi](/ca/fuentes#dades-delaboració-pròpia)). Es compara amb els ajuntaments de la seva mida ({tr_ent[0]?.tramo_poblacion ?? '…'} habitants).
 
 <Grid cols=3>
     <KpiCard
@@ -609,7 +609,7 @@ Tots els ajuntaments, el mètode i la comparació per partit són a [Publicitat 
         title="Renda neta per persona"
         value={renta_mun.slice(-1)[0]?.renta_persona_real}
         formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_real, 0)} €"
-        period="l'any {renta_mun.slice(-1)[0]?.anio}, euros de 2025 · posició {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)} de {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} municipis · província {formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)} €"
+        period="l'any {renta_mun.slice(-1)[0]?.anio ?? '…'}, euros de 2025 · posició {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)} de {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} municipis · província {formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)} €"
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
@@ -619,7 +619,7 @@ Tots els ajuntaments, el mètode i la comparació per partit són a [Publicitat 
         title="Renda neta per llar"
         value={renta_mun.slice(-1)[0]?.renta_hogar_real}
         formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_hogar_real, 0)} €"
-        period="l'any {renta_mun.slice(-1)[0]?.anio}, euros de 2025"
+        period="l'any {renta_mun.slice(-1)[0]?.anio ?? '…'}, euros de 2025"
         direction="positive-up"
         source="INE / Atles de Renda"
         href="/ca/sociedad/desigualdad"
@@ -631,7 +631,7 @@ Tots els ajuntaments, el mètode i la comparació per partit són a [Publicitat 
         title="Atur registrat"
         value={paro_mun[0]?.por_100_hab}
         formattedValue="{formatNumber(paro_mun[0]?.por_100_hab, 1)} per 100 hab."
-        period="{paro_mun[0]?.mes_txt} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} persones ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)} % en un any)"
+        period="{paro_mun[0]?.mes_txt ?? '…'} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} persones ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)} % en un any)"
         direction="positive-down"
         source="SEPE"
         href="/ca/economia/paro"
@@ -660,7 +660,7 @@ Tots els ajuntaments, el mètode i la comparació per partit són a [Publicitat 
     x=distrito
     y=renta_persona_real
     yFmt='#,##0" €"'
-    title="Renda per persona a cada districte ({renta_mun_distritos[0]?.anio}, euros de 2025)"
+    title="Renda per persona a cada districte ({renta_mun_distritos[0]?.anio ?? '…'}, euros de 2025)"
 />
 {/if}
 
@@ -759,7 +759,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Renda per persona', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Per llar', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
     height=520
-    title="Renda neta mitjana per persona el {barrios_renta[0]?.anio} (euros de {barrios_renta[0]?.anio_base})"
+    title="Renda neta mitjana per persona el {barrios_renta[0]?.anio ?? '…'} (euros de {barrios_renta[0]?.anio_base ?? '…'})"
 />
 
 {/if}
@@ -788,7 +788,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
 
 {#if barrios_voto[0]?.cobertura}
 
-<p class="text-sm text-amber-700 dark:text-amber-400">Avís de la font: {barrios_voto[0].cobertura}.</p>
+<p class="text-sm text-amber-700 dark:text-amber-400">Avís de la font: {barrios_voto[0]?.cobertura ?? '…'}.</p>
 
 {/if}
 
@@ -806,7 +806,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     legendType=categorical
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Més votada'}, {id: 'ganador_pct', title: '% dels vàlids', fmt: '0.0"%"'}, {id: 'participacion', title: 'Participació', fmt: '0.0"%"'}]}
     height=520
-    title="Candidatura més votada a cada secció · {barrios_voto[0]?.eleccion}"
+    title="Candidatura més votada a cada secció · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 
@@ -826,7 +826,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Més votada'}]}
     height=520
-    title="{inputs.barrio_capa === 'participacion' ? 'Participació' : ({izquierda: 'Esquerra', derecha: 'Dreta', centro: 'Centre', nacionalistas: 'Nacionalistes i regionalistes', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos i Sumar'})[inputs.barrio_capa] + ', % dels vàlids'} a cada secció · {barrios_voto[0]?.eleccion}"
+    title="{inputs.barrio_capa === 'participacion' ? 'Participació' : ({izquierda: 'Esquerra', derecha: 'Dreta', centro: 'Centre', nacionalistas: 'Nacionalistes i regionalistes', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos i Sumar'})[inputs.barrio_capa] + ', % dels vàlids'} a cada secció · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 {/if}
@@ -847,7 +847,7 @@ Cada taca és una **secció censal**, la unitat més petita de l'estadística of
     sort=false
     yFmt='0"%"'
     seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
-    title="Voten diferent els barris rics i els pobres? Vot per bloc segons la renda de la secció · {barrios_voto[0]?.eleccion}"
+    title="Voten diferent els barris rics i els pobres? Vot per bloc segons la renda de la secció · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 <p class="text-xs text-gray-500">Les seccions del municipi s'ordenen per renda per persona i es parteixen en cinc grups amb el mateix nombre de seccions; el vot de cada grup és la mitjana de les seves seccions ponderada per votants.</p>
@@ -1006,7 +1006,7 @@ El {formatNumber(suelo_toda.pct_agraria, 0)} % del terme municipal és superfíc
         title="Infraccions penals conegudes"
         value={crimen_mun[0]?.tasa}
         formattedValue={formatNumber(crimen_mun[0]?.tasa, 1)}
-        period="per 1.000 habitants el {crimen_mun[0]?.anio} · Espanya: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
+        period="per 1.000 habitants el {crimen_mun[0]?.anio ?? '…'} · Espanya: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
         source="Ministeri de l'Interior"
         href="/ca/sociedad/criminalidad"
         sparklineData={crimen_mun_serie.filter(d => d.tasa != null).map(d => ({anio: d.anio, valor: d.tasa}))}
@@ -1101,11 +1101,11 @@ ORDER BY fecha
 <Grid cols=2>
     <KpiCard title="Participació a les generals" value={elec_mun_gen.slice(-1)[0]?.participacion}
         formattedValue="{formatNumber(elec_mun_gen.slice(-1)[0]?.participacion, 1)} %"
-        period="{elec_mun_gen.slice(-1)[0]?.anio} · sense el vot dels residents a l'estranger"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'} · sense el vot dels residents a l'estranger"
         source="Ministeri de l'Interior" href="/ca/sociedad/elecciones" sparklineData={elec_mun_gen} />
     <KpiCard title="Més votada a les generals" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
-        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
-        period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Ministeri de l'Interior"
+        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas ?? '…'} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'}" source="Ministeri de l'Interior"
         sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
@@ -1126,9 +1126,9 @@ ORDER BY fecha
 ## Qui governa?
 
 <div class="not-prose rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 my-4" style="border-left: 6px solid {alcalde[0].color}">
-    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0].cargo} des del {alcalde[0].desde}</p>
-    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0].alcalde}</p>
-    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">Llista: <b>{alcalde[0].partido_original}</b> · Família política: <b>{alcalde[0].familia}</b></p>
+    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0]?.cargo ?? '…'} des del {alcalde[0]?.desde ?? '…'}</p>
+    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0]?.alcalde ?? '…'}</p>
+    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">Llista: <b>{alcalde[0]?.partido_original ?? '…'}</b> · Família política: <b>{alcalde[0]?.familia ?? '…'}</b></p>
 </div>
 
 <Grid cols=2>
@@ -1140,11 +1140,11 @@ ORDER BY fecha
         period="de manera continuada, inclosos mandats anteriors"
     />
     <KpiCard
-        title="Anys de {alcalde[0]?.familia} a l'alcaldia"
+        title="Anys de {alcalde[0]?.familia ?? '…'} a l'alcaldia"
         value={alcalde[0]?.anios_partido}
         formattedValue={formatNumber(alcalde[0]?.anios_partido, 1)}
         unit="anys"
-        period="governa sense interrupció des del {alcalde[0]?.primer_anio_familia}"
+        period="governa sense interrupció des del {alcalde[0]?.primer_anio_familia ?? '…'}"
     />
 </Grid>
 

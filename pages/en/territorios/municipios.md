@@ -1,7 +1,7 @@
 ---
 title: Municipalities
 description: "Look up any municipality in Spain: population, town council accounts and comparison with municipalities of a similar size."
-i18n_origen: 7ba463802b8c
+i18n_origen: 7105d542a4b5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -281,12 +281,12 @@ ORDER BY fecha
 {#if cuentas_ultimo[0].anio < cuentas_serie.filter(r => !r.provisional).slice(-1)[0]?.anio}
 
 <div class="not-prose rounded-lg border border-amber-300 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-700 p-3 my-3 text-sm text-amber-900 dark:text-amber-200">
-The latest available data is from <b>{cuentas_ultimo[0].anio}</b>: since then this town council has not submitted its budget outturn to the Ministry of Finance, so the figures may be well out of date.
+The latest available data is from <b>{cuentas_ultimo[0]?.anio ?? '…'}</b>: since then this town council has not submitted its budget outturn to the Ministry of Finance, so the figures may be well out of date.
 </div>
 
 {/if}
 
-Outturn of the town council budget (what was actually collected and spent, not what was budgeted). To make the comparison fair, it is set against the **median of municipalities in the same population band** ({cuentas_ultimo[0].tramo} inhabitants). Amounts are **per person** and **adjusted for inflation**, in {base[0]?.anio_base} euros.
+Outturn of the town council budget (what was actually collected and spent, not what was budgeted). To make the comparison fair, it is set against the **median of municipalities in the same population band** ({cuentas_ultimo[0]?.tramo ?? '…'} inhabitants). Amounts are **per person** and **adjusted for inflation**, in {base[0]?.anio_base ?? '…'} euros.
 
 <Grid cols=3>
     <KpiCard
@@ -294,7 +294,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
         value={cuentas_ultimo[0]?.gasto_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab_real, 0)}
         unit="€"
-        period="Median for its band: €{formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} · {cuentas_ultimo[0]?.anio}{cuentas_ultimo[0]?.provisional ? ' (provisional)' : ''}, in {base[0]?.anio_base} euros"
+        period="Median for its band: €{formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} · {cuentas_ultimo[0]?.anio ?? '…'}{cuentas_ultimo[0]?.provisional ? ' (provisional)' : ''}, in {base[0]?.anio_base ?? '…'} euros"
         source="Ministry of Finance"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.gasto_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.gasto_hab_real}))}
     />
@@ -303,7 +303,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
         value={cuentas_ultimo[0]?.ingreso_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.ingreso_hab_real, 0)}
         unit="€"
-        period="Median for its band: €{formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo_real, 0)} · in {base[0]?.anio_base} euros"
+        period="Median for its band: €{formatNumber(cuentas_ultimo[0]?.ingreso_hab_tramo_real, 0)} · in {base[0]?.anio_base ?? '…'} euros"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.ingreso_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.ingreso_hab_real}))}
     />
     <KpiCard
@@ -311,7 +311,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
         value={cuentas_ultimo[0]?.saldo_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.saldo_hab_real, 0)}
         unit="€"
-        period="Revenue − spending in chapters 1 to 7, in {base[0]?.anio_base} euros · total: €{formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)} in current euros"
+        period="Revenue − spending in chapters 1 to 7, in {base[0]?.anio_base ?? '…'} euros · total: €{formatCompact(cuentas_ultimo[0]?.saldo_no_financiero, 1)} in current euros"
         direction="positive-up"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.saldo_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.saldo_hab_real}))}
     />
@@ -325,7 +325,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
         value={personal_ayto[0]?.por_habitante}
         formattedValue={formatNumber(personal_ayto[0]?.por_habitante, 0)}
         unit="€"
-        period="Median for its band: €{formatNumber(personal_ayto[0]?.mediana_tramo, 0)} · {personal_ayto[0]?.anio}, in {base[0]?.anio_base} euros"
+        period="Median for its band: €{formatNumber(personal_ayto[0]?.mediana_tramo, 0)} · {personal_ayto[0]?.anio ?? '…'}, in {base[0]?.anio_base ?? '…'} euros"
         source="Ministry of Finance (chapter 1)"
         href="/en/cuentas-publicas/empleo-publico"
     />
@@ -346,7 +346,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
     series=serie
     yFmt=num0
     yAxisTitle="€ per person"
-    title="Spending per person ({base[0]?.anio_base} euros, adjusted for inflation)"
+    title="Spending per person ({base[0]?.anio_base ?? '…'} euros, adjusted for inflation)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -360,7 +360,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
     type=grouped
     swapXY=true
     yFmt=num0
-    title="Spending per person by area, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio} ({base[0]?.anio_base} euros)"
+    title="Spending per person by area, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio ?? '…'} ({base[0]?.anio_base ?? '…'} euros)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -368,11 +368,11 @@ Outturn of the town council budget (what was actually collected and spent, not w
 
 {#if politicas_mun.length > 0}
 
-<Details title="Spending by policy ({politicas_mun[0].anio})">
+<Details title="Spending by policy ({politicas_mun[0]?.anio ?? '…'})">
 
 <DataTable data={politicas_mun} rows=all>
     <Column id=politica title="Spending policy" />
-    <Column id=por_habitante title="€ per person ({base[0]?.anio_base} euros)" fmt=num0 />
+    <Column id=por_habitante title="€ per person ({base[0]?.anio_base ?? '…'} euros)" fmt=num0 />
     <Column id=mediana_tramo title="Band median (€ per person)" fmt=num0 />
     <Column id=dif_pct title="Difference (%)" fmt=num0 contentType=delta />
     <Column id=peso title="Share" fmt=pct1 contentType=bar barColor="#99f6e4" />
@@ -391,7 +391,7 @@ Outturn of the town council budget (what was actually collected and spent, not w
     y=deuda_eur_hab_real
     yFmt=num0
     yAxisTitle="€ per person"
-    title="Town council debt per person ({base[0]?.anio_base} euros, Banco de España)"
+    title="Town council debt per person ({base[0]?.anio_base ?? '…'} euros, Banco de España)"
     lineColor="#b45309"
 />
 
@@ -523,12 +523,12 @@ QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) =
 {#if tr_ent[0]?.n_incumplimientos_destacados > 0}
 <div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
     <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Not on record in the official register</p>
-    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0]?.incumplimientos ?? '…'}</p>
     <p class="mt-1 text-sm text-red-900 dark:text-red-100">The legal deadline passed more than three months ago and it does not appear in the official source as of the date of the latest download. It may have been submitted through another channel: each row of the table links to its source.</p>
 </div>
 {/if}
 
-Does this municipal council submit on time what the law requires of it? This is **SpainFacts' own measurement**, based on official registers that carry a date. The Ministry of Finance, the Court of Audit (Tribunal de Cuentas), the National Grants Database (BDNS) and the Public Sector Procurement Platform show whether each obligation is on record and when it arrived relative to its deadline ([criteria and code](/en/fuentes#data-from-spainfacts-own-measurement)). It is compared with municipal councils of its size ({tr_ent[0]?.tramo_poblacion} inhabitants).
+Does this municipal council submit on time what the law requires of it? This is **SpainFacts' own measurement**, based on official registers that carry a date. The Ministry of Finance, the Court of Audit (Tribunal de Cuentas), the National Grants Database (BDNS) and the Public Sector Procurement Platform show whether each obligation is on record and when it arrived relative to its deadline ([criteria and code](/en/fuentes#data-from-spainfacts-own-measurement)). It is compared with municipal councils of its size ({tr_ent[0]?.tramo_poblacion ?? '…'} inhabitants).
 
 <Grid cols=3>
     <KpiCard
@@ -609,7 +609,7 @@ All municipal councils, the method and the comparison by party are in [Proactive
         title="Net income per person"
         value={renta_mun.slice(-1)[0]?.renta_persona_real}
         formattedValue="€{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_real, 0)}"
-        period="per year in {renta_mun.slice(-1)[0]?.anio}, 2025 euros · ranked {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)} of {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} municipalities · province €{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)}"
+        period="per year in {renta_mun.slice(-1)[0]?.anio ?? '…'}, 2025 euros · ranked {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)} of {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} municipalities · province €{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)}"
         direction="positive-up"
         source="INE / Household Income Atlas"
         href="/en/sociedad/desigualdad"
@@ -619,7 +619,7 @@ All municipal councils, the method and the comparison by party are in [Proactive
         title="Net income per household"
         value={renta_mun.slice(-1)[0]?.renta_hogar_real}
         formattedValue="€{formatNumber(renta_mun.slice(-1)[0]?.renta_hogar_real, 0)}"
-        period="per year in {renta_mun.slice(-1)[0]?.anio}, 2025 euros"
+        period="per year in {renta_mun.slice(-1)[0]?.anio ?? '…'}, 2025 euros"
         direction="positive-up"
         source="INE / Household Income Atlas"
         href="/en/sociedad/desigualdad"
@@ -631,7 +631,7 @@ All municipal councils, the method and the comparison by party are in [Proactive
         title="Registered unemployment"
         value={paro_mun[0]?.por_100_hab}
         formattedValue="{formatNumber(paro_mun[0]?.por_100_hab, 1)} per 100 inhabitants"
-        period="{paro_mun[0]?.mes_txt} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} people ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)}% year on year)"
+        period="{paro_mun[0]?.mes_txt ?? '…'} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} people ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)}% year on year)"
         direction="positive-down"
         source="SEPE"
         href="/en/economia/paro"
@@ -660,7 +660,7 @@ All municipal councils, the method and the comparison by party are in [Proactive
     x=distrito
     y=renta_persona_real
     yFmt='#,##0" €"'
-    title="Income per person in each district ({renta_mun_distritos[0]?.anio}, 2025 euros)"
+    title="Income per person in each district ({renta_mun_distritos[0]?.anio ?? '…'}, 2025 euros)"
 />
 {/if}
 
@@ -759,7 +759,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Income per person', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Per household', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
     height=520
-    title="Average net income per person in {barrios_renta[0]?.anio} ({barrios_renta[0]?.anio_base} euros)"
+    title="Average net income per person in {barrios_renta[0]?.anio ?? '…'} ({barrios_renta[0]?.anio_base ?? '…'} euros)"
 />
 
 {/if}
@@ -788,7 +788,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
 
 {#if barrios_voto[0]?.cobertura}
 
-<p class="text-sm text-amber-700 dark:text-amber-400">Source note: {barrios_voto[0].cobertura}.</p>
+<p class="text-sm text-amber-700 dark:text-amber-400">Source note: {barrios_voto[0]?.cobertura ?? '…'}.</p>
 
 {/if}
 
@@ -806,7 +806,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     legendType=categorical
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Winner'}, {id: 'ganador_pct', title: '% of valid votes', fmt: '0.0"%"'}, {id: 'participacion', title: 'Turnout', fmt: '0.0"%"'}]}
     height=520
-    title="Most voted list in each section · {barrios_voto[0]?.eleccion}"
+    title="Most voted list in each section · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 
@@ -826,7 +826,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Winner'}]}
     height=520
-    title="{inputs.barrio_capa === 'participacion' ? 'Turnout' : ({izquierda: 'Left', derecha: 'Right', centro: 'Centre', nacionalistas: 'Nationalists and regionalists', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos and Sumar'})[inputs.barrio_capa] + ', % of valid votes'} in each section · {barrios_voto[0]?.eleccion}"
+    title="{inputs.barrio_capa === 'participacion' ? 'Turnout' : ({izquierda: 'Left', derecha: 'Right', centro: 'Centre', nacionalistas: 'Nationalists and regionalists', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos and Sumar'})[inputs.barrio_capa] + ', % of valid votes'} in each section · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 {/if}
@@ -847,7 +847,7 @@ Each patch is a **census section**, the smallest unit of official statistics: so
     sort=false
     yFmt='0"%"'
     seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
-    title="Do rich and poor neighbourhoods vote differently? Vote by bloc according to the income of the section · {barrios_voto[0]?.eleccion}"
+    title="Do rich and poor neighbourhoods vote differently? Vote by bloc according to the income of the section · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 <p class="text-xs text-gray-500">The municipality's sections are ranked by income per person and split into five groups with the same number of sections; each group's vote is the average of its sections weighted by voters.</p>
@@ -1006,7 +1006,7 @@ WHERE cultivo = 'Toda la superficie agraria'
         title="Recorded criminal offences"
         value={crimen_mun[0]?.tasa}
         formattedValue={formatNumber(crimen_mun[0]?.tasa, 1)}
-        period="per 1,000 inhabitants in {crimen_mun[0]?.anio} · Spain: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
+        period="per 1,000 inhabitants in {crimen_mun[0]?.anio ?? '…'} · Spain: {formatNumber(crimen_mun[0]?.tasa_espana, 1)}"
         source="Ministry of the Interior"
         href="/en/sociedad/criminalidad"
         sparklineData={crimen_mun_serie.filter(d => d.tasa != null).map(d => ({anio: d.anio, valor: d.tasa}))}
@@ -1101,11 +1101,11 @@ ORDER BY fecha
 <Grid cols=2>
     <KpiCard title="Turnout in general elections" value={elec_mun_gen.slice(-1)[0]?.participacion}
         formattedValue="{formatNumber(elec_mun_gen.slice(-1)[0]?.participacion, 1)}%"
-        period="{elec_mun_gen.slice(-1)[0]?.anio} · excluding votes from residents abroad"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'} · excluding votes from residents abroad"
         source="Ministry of the Interior" href="/en/sociedad/elecciones" sparklineData={elec_mun_gen} />
     <KpiCard title="Most voted in general elections" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
-        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)}%"
-        period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Ministry of the Interior"
+        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas ?? '…'} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)}%"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'}" source="Ministry of the Interior"
         sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
@@ -1126,9 +1126,9 @@ ORDER BY fecha
 ## Who governs?
 
 <div class="not-prose rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 my-4" style="border-left: 6px solid {alcalde[0].color}">
-    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0].cargo} since {alcalde[0].desde}</p>
-    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0].alcalde}</p>
-    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">List: <b>{alcalde[0].partido_original}</b> · Political family: <b>{alcalde[0].familia}</b></p>
+    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0]?.cargo ?? '…'} since {alcalde[0]?.desde ?? '…'}</p>
+    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0]?.alcalde ?? '…'}</p>
+    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">List: <b>{alcalde[0]?.partido_original ?? '…'}</b> · Political family: <b>{alcalde[0]?.familia ?? '…'}</b></p>
 </div>
 
 <Grid cols=2>
@@ -1140,11 +1140,11 @@ ORDER BY fecha
         period="continuously, including previous terms"
     />
     <KpiCard
-        title="Years of {alcalde[0]?.familia} holding the mayoralty"
+        title="Years of {alcalde[0]?.familia ?? '…'} holding the mayoralty"
         value={alcalde[0]?.anios_partido}
         formattedValue={formatNumber(alcalde[0]?.anios_partido, 1)}
         unit="years"
-        period="governing without interruption since {alcalde[0]?.primer_anio_familia}"
+        period="governing without interruption since {alcalde[0]?.primer_anio_familia ?? '…'}"
     />
 </Grid>
 

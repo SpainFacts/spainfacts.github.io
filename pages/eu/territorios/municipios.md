@@ -1,7 +1,7 @@
 ---
 title: Udalerriak
 description: "Bilatu Espainiako edozein udalerri: biztanleria, udalaren kontuak eta tamaina bereko udalerriekiko alderaketa."
-i18n_origen: 7ba463802b8c
+i18n_origen: 7105d542a4b5
 og:
   image: https://spainfacts.org/og-spainfacts.png
 ---
@@ -298,7 +298,7 @@ Eskuragarri dagoen azken datua <b>{urte(cuentas_ultimo[0].anio, 'koa')}</b> da: 
 
 {/if}
 
-Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurrekontuan jasotakoa). Alderaketa bidezkoa izan dadin, **biztanleria-tarte bereko udalerrien medianarekin** alderatzen da ({cuentas_ultimo[0].tramo} biztanle). Zenbatekoak **biztanleko** eta **inflazioa kenduta** daude, {urte(base[0]?.anio_base, 'ko')} eurotan.
+Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurrekontuan jasotakoa). Alderaketa bidezkoa izan dadin, **biztanleria-tarte bereko udalerrien medianarekin** alderatzen da ({cuentas_ultimo[0]?.tramo ?? '…'} biztanle). Zenbatekoak **biztanleko** eta **inflazioa kenduta** daude, {urte(base[0]?.anio_base, 'ko')} eurotan.
 
 <Grid cols=3>
     <KpiCard
@@ -306,7 +306,7 @@ Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurr
         value={cuentas_ultimo[0]?.gasto_hab_real}
         formattedValue={formatNumber(cuentas_ultimo[0]?.gasto_hab_real, 0)}
         unit="€"
-        period="Bere tartearen mediana: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} € · {cuentas_ultimo[0]?.anio}{cuentas_ultimo[0]?.provisional ? ' (aurrerapena)' : ''}, {urte(base[0]?.anio_base, 'ko')} eurotan"
+        period="Bere tartearen mediana: {formatNumber(cuentas_ultimo[0]?.gasto_hab_tramo_real, 0)} € · {cuentas_ultimo[0]?.anio ?? '…'}{cuentas_ultimo[0]?.provisional ? ' (aurrerapena)' : ''}, {urte(base[0]?.anio_base, 'ko')} eurotan"
         source="Ogasun Ministerioa"
         sparklineData={cuentas_serie.filter(r => r.tiene_datos && r.gasto_hab_real != null && r.anio <= cuentas_ultimo[0]?.anio).map(r => ({anio: r.anio, valor: r.gasto_hab_real}))}
     />
@@ -337,7 +337,7 @@ Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurr
         value={personal_ayto[0]?.por_habitante}
         formattedValue={formatNumber(personal_ayto[0]?.por_habitante, 0)}
         unit="€"
-        period="Bere tartearen mediana: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio}, {urte(base[0]?.anio_base, 'ko')} eurotan"
+        period="Bere tartearen mediana: {formatNumber(personal_ayto[0]?.mediana_tramo, 0)} € · {personal_ayto[0]?.anio ?? '…'}, {urte(base[0]?.anio_base, 'ko')} eurotan"
         source="Ogasun Ministerioa (1. kapitulua)"
         href="/eu/cuentas-publicas/empleo-publico"
     />
@@ -372,7 +372,7 @@ Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurr
     type=grouped
     swapXY=true
     yFmt=num0
-    title="Gastua biztanleko arloaren arabera, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio} ({urte(base[0]?.anio_base, 'ko')} eurotan)"
+    title="Gastua biztanleko arloaren arabera, {cuentas_serie.filter(r => r.tiene_datos && !r.provisional).slice(-1)[0]?.anio ?? '…'} ({urte(base[0]?.anio_base, 'ko')} eurotan)"
     colorPalette={['#0f766e', '#94a3b8']}
 />
 
@@ -380,7 +380,7 @@ Udalaren aurrekontuaren likidazioa (benetan diru-sartu eta gastatu dena, ez aurr
 
 {#if politicas_mun.length > 0}
 
-<Details title="Gastua politiken arabera ({politicas_mun[0].anio})">
+<Details title="Gastua politiken arabera ({politicas_mun[0]?.anio ?? '…'})">
 
 <DataTable data={politicas_mun} rows=all>
     <Column id=politica title="Gastu-politika" />
@@ -535,12 +535,12 @@ QUALIFY row_number() OVER (PARTITION BY evaluador ORDER BY orden_periodo DESC) =
 {#if tr_ent[0]?.n_incumplimientos_destacados > 0}
 <div role="alert" class="not-prose my-4 rounded-xl border-2 border-red-600 bg-red-50 p-4 dark:border-red-500 dark:bg-red-950/50">
     <p class="text-sm font-bold uppercase tracking-wider text-red-700 dark:text-red-300">⚠ Ez da ageri erregistro ofizialean</p>
-    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0].incumplimientos}</p>
+    <p class="mt-1 text-lg font-extrabold leading-snug text-red-700 dark:text-red-300">{tr_ent[0]?.incumplimientos ?? '…'}</p>
     <p class="mt-1 text-sm text-red-900 dark:text-red-100">Legezko epea duela hiru hilabete baino gehiago amaitu zen, eta ez da iturri ofizialean ageri azken deskargaren datan. Beste bide batetik bidali izan liteke: taulako errenkada bakoitzak bere iturrira eramaten du.</p>
 </div>
 {/if}
 
-Bidaltzen al du udal honek garaiz legeak eskatzen diona? SpainFactsen **neurketa propioa** da, data duten erregistro ofizialekin egina. Ogasunak, Kontuen Auzitegiak, Diru-laguntzen Datu-base Nazionalak eta Kontratazio Plataformak adierazten dute betebehar bakoitza ageri den eta noiz iritsi zen bere epearekin alderatuta ([irizpideak eta kodea](/eu/fuentes#spainfactsen-neurketa-propioko-datuak)). Bere tamainako udalekin alderatzen da ({tr_ent[0]?.tramo_poblacion} biztanle).
+Bidaltzen al du udal honek garaiz legeak eskatzen diona? SpainFactsen **neurketa propioa** da, data duten erregistro ofizialekin egina. Ogasunak, Kontuen Auzitegiak, Diru-laguntzen Datu-base Nazionalak eta Kontratazio Plataformak adierazten dute betebehar bakoitza ageri den eta noiz iritsi zen bere epearekin alderatuta ([irizpideak eta kodea](/eu/fuentes#spainfactsen-neurketa-propioko-datuak)). Bere tamainako udalekin alderatzen da ({tr_ent[0]?.tramo_poblacion ?? '…'} biztanle).
 
 <Grid cols=3>
     <KpiCard
@@ -620,7 +620,7 @@ Udal guztiak, metodoa eta alderdien araberako alderaketa [Publizitate aktiboa](/
         title="Pertsonako errenta garbia"
         value={renta_mun.slice(-1)[0]?.renta_persona_real}
         formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_persona_real, 0)} €"
-        period="urtean, {renta_mun.slice(-1)[0]?.anio}, 2025eko eurotan · {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)}. postua {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} udaleritik · probintzia: {formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)} €"
+        period="urtean, {renta_mun.slice(-1)[0]?.anio ?? '…'}, 2025eko eurotan · {formatNumber(renta_mun.slice(-1)[0]?.puesto_espana, 0)}. postua {formatNumber(renta_mun.slice(-1)[0]?.municipios_con_dato, 0)} udaleritik · probintzia: {formatNumber(renta_mun.slice(-1)[0]?.renta_persona_provincia, 0)} €"
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
@@ -630,7 +630,7 @@ Udal guztiak, metodoa eta alderdien araberako alderaketa [Publizitate aktiboa](/
         title="Etxeko errenta garbia"
         value={renta_mun.slice(-1)[0]?.renta_hogar_real}
         formattedValue="{formatNumber(renta_mun.slice(-1)[0]?.renta_hogar_real, 0)} €"
-        period="urtean, {renta_mun.slice(-1)[0]?.anio}, 2025eko eurotan"
+        period="urtean, {renta_mun.slice(-1)[0]?.anio ?? '…'}, 2025eko eurotan"
         direction="positive-up"
         source="INE / Errentaren Atlasa"
         href="/eu/sociedad/desigualdad"
@@ -642,7 +642,7 @@ Udal guztiak, metodoa eta alderdien araberako alderaketa [Publizitate aktiboa](/
         title="Erregistratutako langabezia"
         value={paro_mun[0]?.por_100_hab}
         formattedValue="{formatNumber(paro_mun[0]?.por_100_hab, 1)} 100 biz. bakoitzeko"
-        period="{paro_mun[0]?.mes_txt} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} pertsona ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)} % urtebetean)"
+        period="{paro_mun[0]?.mes_txt ?? '…'} · {formatNumber(paro_mun[0]?.paro_registrado, 0)} pertsona ({formatNumber(paro_mun[0]?.variacion_anual_pct, 1)} % urtebetean)"
         direction="positive-down"
         source="SEPE"
         href="/eu/economia/paro"
@@ -671,7 +671,7 @@ Udal guztiak, metodoa eta alderdien araberako alderaketa [Publizitate aktiboa](/
     x=distrito
     y=renta_persona_real
     yFmt='#,##0" €"'
-    title="Pertsonako errenta barruti bakoitzean ({renta_mun_distritos[0]?.anio}, 2025eko eurotan)"
+    title="Pertsonako errenta barruti bakoitzean ({renta_mun_distritos[0]?.anio ?? '…'}, 2025eko eurotan)"
 />
 {/if}
 
@@ -770,7 +770,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     colorPalette={['#fef3c7', '#f59e0b', '#78350f']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'renta_persona_real', title: 'Errenta pertsonako', prefixCol: 'renta_persona_marca', fmt: '#,##0" €"'}, {id: 'renta_hogar_real', title: 'Etxeko', prefixCol: 'renta_hogar_marca', fmt: '#,##0" €"'}]}
     height=520
-    title="Pertsonako batez besteko errenta garbia, {barrios_renta[0]?.anio} ({barrios_renta[0]?.anio_base}ko eurotan)"
+    title="Pertsonako batez besteko errenta garbia, {barrios_renta[0]?.anio ?? '…'} ({barrios_renta[0]?.anio_base ?? '…'}ko eurotan)"
 />
 
 {/if}
@@ -799,7 +799,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
 
 {#if barrios_voto[0]?.cobertura}
 
-<p class="text-sm text-amber-700 dark:text-amber-400">Iturriaren oharra: {barrios_voto[0].cobertura}.</p>
+<p class="text-sm text-amber-700 dark:text-amber-400">Iturriaren oharra: {barrios_voto[0]?.cobertura ?? '…'}.</p>
 
 {/if}
 
@@ -817,7 +817,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     legendType=categorical
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'ganador_siglas', title: 'Bozkatuena'}, {id: 'ganador_pct', title: 'Baliozkoen %', fmt: '0.0"%"'}, {id: 'participacion', title: 'Parte-hartzea', fmt: '0.0"%"'}]}
     height=520
-    title="Sekzio bakoitzean bozkatuena · {barrios_voto[0]?.eleccion}"
+    title="Sekzio bakoitzean bozkatuena · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 
@@ -837,7 +837,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     colorPalette={({izquierda: ['#fef2f2', '#dc2626', '#7f1d1d'], derecha: ['#eff6ff', '#2563eb', '#1e3a8a'], centro: ['#fff7ed', '#f97316', '#7c2d12'], nacionalistas: ['#fefce8', '#ca8a04', '#713f12'], psoe: ['#fef2f2', '#e30613', '#7f1d1d'], pp: ['#eff6ff', '#1d84ce', '#1e3a8a'], vox: ['#f0fdf4', '#5ac035', '#14532d'], ips: ['#faf5ff', '#7b2d8e', '#3b0764'], participacion: ['#f0fdfa', '#0d9488', '#134e4a']})[inputs.barrio_capa] ?? ['#eff6ff', '#3b82f6', '#1e3a8a']}
     tooltip={[{id: 'seccion', showColumnName: false, valueClass: 'font-semibold'}, {id: 'valor', title: '%', fmt: '0.0"%"'}, {id: 'ganador_siglas', title: 'Bozkatuena'}]}
     height=520
-    title="{inputs.barrio_capa === 'participacion' ? 'Parte-hartzea' : ({izquierda: 'Ezkerra', derecha: 'Eskuina', centro: 'Erdigunea', nacionalistas: 'Abertzaleak eta erregionalistak', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos eta Sumar'})[inputs.barrio_capa] + ', baliozkoen %'} sekzio bakoitzean · {barrios_voto[0]?.eleccion}"
+    title="{inputs.barrio_capa === 'participacion' ? 'Parte-hartzea' : ({izquierda: 'Ezkerra', derecha: 'Eskuina', centro: 'Erdigunea', nacionalistas: 'Abertzaleak eta erregionalistak', psoe: 'PSOE', pp: 'PP', vox: 'Vox', ips: 'IU, Podemos eta Sumar'})[inputs.barrio_capa] + ', baliozkoen %'} sekzio bakoitzean · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 {/if}
@@ -858,7 +858,7 @@ Orban bakoitza **errolda-sekzio** bat da, estatistika ofizialeko unitaterik txik
     sort=false
     yFmt='0"%"'
     seriesColors={{'Izquierda': '#dc2626', 'Derecha': '#2563eb', 'Centro': '#f97316', 'Nacionalistas y regionalistas': '#ca8a04'}}
-    title="Auzo aberatsek eta pobreek bestela bozkatzen dute? Botoa blokeka, sekzioaren errentaren arabera · {barrios_voto[0]?.eleccion}"
+    title="Auzo aberatsek eta pobreek bestela bozkatzen dute? Botoa blokeka, sekzioaren errentaren arabera · {barrios_voto[0]?.eleccion ?? '…'}"
 />
 
 <p class="text-xs text-gray-500">Udalerriko sekzioak pertsonako errentaren arabera ordenatzen dira eta sekzio kopuru bereko bost taldetan banatzen dira; talde bakoitzaren botoa bere sekzioen batez bestekoa da, bozkatzaileen arabera haztatua.</p>
@@ -1112,11 +1112,11 @@ ORDER BY fecha
 <Grid cols=2>
     <KpiCard title="Parte-hartzea hauteskunde orokorretan" value={elec_mun_gen.slice(-1)[0]?.participacion}
         formattedValue="{formatNumber(elec_mun_gen.slice(-1)[0]?.participacion, 1)} %"
-        period="{elec_mun_gen.slice(-1)[0]?.anio} · atzerrian bizi direnen botorik gabe"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'} · atzerrian bizi direnen botorik gabe"
         source="Barne Ministerioa" href="/eu/sociedad/elecciones" sparklineData={elec_mun_gen} />
     <KpiCard title="Boto gehien hauteskunde orokorretan" value={elec_mun_gen.slice(-1)[0]?.ganador_pct}
-        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
-        period="{elec_mun_gen.slice(-1)[0]?.anio}" source="Barne Ministerioa"
+        formattedValue="{elec_mun_gen.slice(-1)[0]?.ganador_siglas ?? '…'} · {formatNumber(elec_mun_gen.slice(-1)[0]?.ganador_pct, 1)} %"
+        period="{elec_mun_gen.slice(-1)[0]?.anio ?? '…'}" source="Barne Ministerioa"
         sparklineData={elec_mun_gen.map(d => ({...d, valor: d.ganador_pct}))} />
 </Grid>
 
@@ -1137,9 +1137,9 @@ ORDER BY fecha
 ## Nork gobernatzen du?
 
 <div class="not-prose rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 my-4" style="border-left: 6px solid {alcalde[0].color}">
-    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0].cargo} · {alcalde[0].desde} datatik</p>
-    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0].alcalde}</p>
-    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">Zerrenda: <b>{alcalde[0].partido_original}</b> · Familia politikoa: <b>{alcalde[0].familia}</b></p>
+    <p class="text-xs uppercase tracking-wide text-gray-500 mb-1">{alcalde[0]?.cargo ?? '…'} · {alcalde[0]?.desde ?? '…'} datatik</p>
+    <p class="text-2xl font-bold text-gray-900 dark:text-white capitalize mb-1">{alcalde[0]?.alcalde ?? '…'}</p>
+    <p class="text-sm text-gray-700 dark:text-gray-300 mb-0">Zerrenda: <b>{alcalde[0]?.partido_original ?? '…'}</b> · Familia politikoa: <b>{alcalde[0]?.familia ?? '…'}</b></p>
 </div>
 
 <Grid cols=2>
@@ -1151,7 +1151,7 @@ ORDER BY fecha
         period="etenik gabe, aurreko agintaldiak barne"
     />
     <KpiCard
-        title="{alcalde[0]?.familia} alkatetzan daramatzan urteak"
+        title="{alcalde[0]?.familia ?? '…'} alkatetzan daramatzan urteak"
         value={alcalde[0]?.anios_partido}
         formattedValue={formatNumber(alcalde[0]?.anios_partido, 1)}
         unit="urte"
