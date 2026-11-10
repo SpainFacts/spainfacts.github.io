@@ -28,3 +28,5 @@ SELECT
     round(saldo_hab_real)::INTEGER AS saldo_hab_real,
     anio_base
 FROM municipios_cuentas
+-- Ordenado por municipio: la ficha de municipio lee solo los grupos de filas del suyo
+ORDER BY cod_mun, anio

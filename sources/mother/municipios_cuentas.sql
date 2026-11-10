@@ -29,3 +29,5 @@ SELECT
     anio_base
 FROM municipios_cuentas
 WHERE anio >= (SELECT max(anio) FROM municipios_cuentas WHERE NOT provisional) - 2
+-- Ordenado por municipio: la ficha de municipio lee solo los grupos de filas del suyo
+ORDER BY cod_mun, anio

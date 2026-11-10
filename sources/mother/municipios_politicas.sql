@@ -5,3 +5,5 @@ SELECT cod_mun, municipio, anio, cod_area, area_nombre, cod_politica, politica_n
     importe, importe_hab, importe_real, importe_hab_real, anio_base
 FROM municipios_politicas
 WHERE anio = (SELECT max(anio) FROM municipios_politicas)
+-- Ordenado por municipio: la ficha de municipio lee solo los grupos de filas del suyo
+ORDER BY cod_mun, cod_politica
